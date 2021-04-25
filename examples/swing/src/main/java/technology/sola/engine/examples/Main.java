@@ -1,7 +1,10 @@
 package technology.sola.engine.examples;
 
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.platform.SolaImageAssetMapper;
 import technology.sola.engine.platform.SwingContainer;
 
 public class Main {
@@ -25,6 +28,12 @@ public class Main {
     renderer.drawRect(300, 150, 5, 5, Color.GREEN);
     renderer.fillCircle(300, 150, 100.5f, Color.BLUE);
     renderer.drawCircle(300, 150, 100.5f, Color.RED);
+
+    AssetLoader assetLoader = new AssetLoader();
+    assetLoader.addAssetMapper(new SolaImageAssetMapper());
+    assetLoader.addAsset("test_tiles", "test_tiles.png");
+    SolaImage solaImage = assetLoader.getAsset("test_tiles", SolaImage.class);
+    renderer.drawImage(400, 400, solaImage);
 
     swingContainer.show();
   }

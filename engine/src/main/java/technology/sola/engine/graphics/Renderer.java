@@ -28,11 +28,15 @@ public class Renderer {
   }
 
   public void setPixel(int x, int y, Color color) {
+    setPixel(x, y, color.hexInt());
+  }
+
+  public void setPixel(int x, int y, int color) {
     if (x < 0 || x >= width || y < 0 || y >= height) return;
 
     switch (renderMode) {
       case NORMAL:
-        pixels[x + y * width] = color.hexInt();
+        pixels[x + y * width] = color;
         break;
       default:
         throw new RuntimeException("Not yet implemented");
@@ -148,7 +152,26 @@ public class Renderer {
   }
 
   public void drawImage(float x, float y, SolaImage solaImage) {
-    throw new RuntimeException("Not yet implemented");
+    int[] imagePixels = solaImage.getPixels();
+    int xInt = (int)(x + 0.5f);
+    int yInt = (int)(y + 0.5f);
+
+    int index = 0;
+    int xImagePos = 0;
+    int yImagePos = 0;
+
+    while (index < imagePixels.length) {
+      int color = imagePixels[index];
+
+      setPixel(xInt + xImagePos, yInt + yImagePos, color);
+
+      xImagePos++;
+      if (xImagePos >= solaImage.getWidth()) {
+        xImagePos = 0;
+        yImagePos++;
+      }
+      index++;
+    }
   }
 
   private void drawEightWaySymmetry(int centerX, int centerY, int x, int y, Color color) {
