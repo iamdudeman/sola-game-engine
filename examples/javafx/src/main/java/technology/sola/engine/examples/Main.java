@@ -20,7 +20,12 @@ public class Main  {
     renderer.drawLine(20, 50, 20, 100, Color.WHITE);
     renderer.drawLine(50, 20, 100, 20, Color.WHITE);
 
-    renderer.drawRect(100, 100, 60, 80, Color.GREEN);
+    renderer.fillRect(100, 100, 60, 80, Color.GREEN);
+    renderer.drawRect(100, 100, 60, 80, Color.RED);
+
+    renderer.drawRect(300, 150, 5, 5, Color.GREEN);
+    renderer.fillCircle(300, 150, 100.5f, Color.BLUE);
+    renderer.drawCircle(300, 150, 100.5f, Color.RED);
 
     JavaFxApplication.start(javaFxContainer, args);
   }

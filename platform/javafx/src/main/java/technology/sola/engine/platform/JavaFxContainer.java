@@ -36,7 +36,6 @@ public class JavaFxContainer {
 
     root.getChildren().add(canvas);
 
-
     render(canvas.getGraphicsContext2D());
 
     stage.setTitle(title);
@@ -56,6 +55,5 @@ public class JavaFxContainer {
       pixelBuffer.updateBuffer(b -> null);
       graphicsContext.drawImage(writableImage, 0, 0, width, height);
     });
-
   }
 }

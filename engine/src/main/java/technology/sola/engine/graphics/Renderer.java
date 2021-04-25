@@ -64,6 +64,14 @@ public class Renderer {
     }
   }
 
+  /**
+   * todo
+   * @param x  top left coordinate x
+   * @param y  top left coordinate y
+   * @param width
+   * @param height
+   * @param color
+   */
   public void drawRect(float x, float y, float width, float height, Color color) {
     drawLine(x, y, x + width, y, color);
     drawLine(x, y + height, x + width, y + height, color);
@@ -71,19 +79,86 @@ public class Renderer {
     drawLine(x + width, y, x + width, y + height, color);
   }
 
+  /**
+   * todo
+   * @param x  top left coordinate x
+   * @param y  top left coordinate y
+   * @param width
+   * @param height
+   * @param color
+   */
   public void fillRect(float x, float y, float width, float height, Color color) {
-    throw new RuntimeException("Not yet implemented");
+    int xInt = (int)(x + 0.5f);
+    int yInt = (int)(y + 0.5f);
+    int xPlusWidth = (int)(x + width + 0.5f);
+    int yPlusHeight = (int)(y + height + 0.5f);
+
+    for (int i = xInt; i < xPlusWidth; i++) {
+      drawLine(i, yInt, i, yPlusHeight, color);
+    }
   }
 
+  /**
+   * Uses Bresenham's circle drawing algorithm
+   * @param x  top left coordinate x
+   * @param y  top left coordinate y
+   * @param radius
+   * @param color
+   */
   public void drawCircle(float x, float y, float radius, Color color) {
-    throw new RuntimeException("Not yet implemented");
+    int xCenter = (int)(x + radius + 0.5f);
+    int yCenter = (int)(y + radius + 0.5f);
+    int radiusInt = (int)(radius + 0.5f);
+
+    int d = 3 - 2 * radiusInt;
+    int plotX = 0;
+    int plotY = radiusInt;
+
+    while (plotY >= plotX) {
+      drawEightWaySymmetry(xCenter, yCenter, plotX, plotY, color);
+
+      if (d < 0) {
+        d = d + 4 * plotX + 6;
+        plotX++;
+      } else {
+        d = d + 4 * (plotX - plotY) + 10;
+        plotX++;
+        plotY--;
+      }
+    }
   }
 
+  /**
+   * todo
+   * @param x  top left coordinate x
+   * @param y  top left coordinate y
+   * @param radius
+   * @param color
+   */
   public void fillCircle(float x, float y, float radius, Color color) {
-    throw new RuntimeException("Not yet implemented");
+    int xInt = (int)(x + radius + 0.5f);
+    int yInt = (int)(y + radius + 0.5f);
+    int radiusInt = (int)(radius + 0.5f);
+    int radiusSquaredInt = (int)(radius * radius + 0.5f);
+
+    for (int i = -radiusInt; i <= radius; i++)
+      for (int j = -radiusInt; j <= radius; j++)
+        if (j * j + i * i <= radiusSquaredInt)
+          setPixel(xInt + j, yInt + i, color);
   }
 
   public void drawImage(float x, float y, SolaImage solaImage) {
     throw new RuntimeException("Not yet implemented");
+  }
+
+  private void drawEightWaySymmetry(int centerX, int centerY, int x, int y, Color color) {
+    setPixel(centerX + x, centerY + y, color);
+    setPixel(centerX - x, centerY + y, color);
+    setPixel(centerX + x, centerY - y, color);
+    setPixel(centerX - x, centerY - y, color);
+    setPixel(centerX + y, centerY + x, color);
+    setPixel(centerX - y, centerY + x, color);
+    setPixel(centerX + y, centerY - x, color);
+    setPixel(centerX - y, centerY - x, color);
   }
 }
