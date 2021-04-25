@@ -9,21 +9,21 @@ public class Color {
   public static final Color WHITE = new Color(255, 255, 255, 255);
 
   private final int alpha;
-  private final int red;
-  private final int green;
-  private final int blue;
+  private final int r;
+  private final int g;
+  private final int b;
   private final int hexInt;
 
-  public Color(int red, int green, int blue) {
-    this(255, red, green, blue);
+  public Color(int r, int g, int b) {
+    this(255, r, g, b);
   }
 
-  public Color(int alpha, int red, int green, int blue) {
+  public Color(int alpha, int r, int g, int b) {
     this.alpha = alpha;
-    this.red = red;
-    this.green = green;
-    this.blue = blue;
-    this.hexInt = ((0xff & alpha) << 24) | ((0xff & red) << 16) | ((0xff & green) << 8) | (0xff & blue);
+    this.r = r;
+    this.g = g;
+    this.b = b;
+    this.hexInt = ((0xff & alpha) << 24) | ((0xff & r) << 16) | ((0xff & g) << 8) | (0xff & b);
   }
 
   public int hexInt() {
@@ -35,14 +35,14 @@ public class Color {
   }
 
   public int getRed() {
-    return red;
+    return r;
   }
 
   public int getGreen() {
-    return green;
+    return g;
   }
 
   public int getBlue() {
-    return blue;
+    return b;
   }
 }

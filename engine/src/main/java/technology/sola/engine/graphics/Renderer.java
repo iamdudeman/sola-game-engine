@@ -40,11 +40,35 @@ public class Renderer {
   }
 
   public void drawLine(float x, float y, float x2, float y2, Color color) {
-    throw new RuntimeException("Not yet implemented");
+    int xInt = (int)(x + 0.5f);
+    int yInt = (int)(y + 0.5f);
+    int x2Int = (int)(x2 + 0.5f);
+    int y2Int = (int)(y2 + 0.5f);
+
+    if (xInt - x2Int == 0) {
+      int start = Math.min(yInt, y2Int);
+      int end = Math.max(yInt, y2Int);
+
+      for (int i = start; i < end; i++) {
+        setPixel(xInt, i, color);
+      }
+    } else if (y - y2 == 0) {
+      int start = Math.min(xInt, x2Int);
+      int end = Math.max(xInt, x2Int);
+
+      for (int i = start; i < end; i++) {
+        setPixel(i, yInt, color);
+      }
+    } else {
+      throw new RuntimeException("Not yet implemented");
+    }
   }
 
   public void drawRect(float x, float y, float width, float height, Color color) {
-    throw new RuntimeException("Not yet implemented");
+    drawLine(x, y, x + width, y, color);
+    drawLine(x, y + height, x + width, y + height, color);
+    drawLine(x, y, x, y + height, color);
+    drawLine(x + width, y, x + width, y + height, color);
   }
 
   public void fillRect(float x, float y, float width, float height, Color color) {
