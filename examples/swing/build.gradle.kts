@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-  api(project(":platform:javafx"))
+  api(project(":platform:swing"))
 }
 
 tasks.withType<Jar>() {

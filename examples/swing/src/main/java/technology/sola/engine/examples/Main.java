@@ -2,14 +2,13 @@ package technology.sola.engine.examples;
 
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.platform.JavaFxApplication;
-import technology.sola.engine.platform.JavaFxContainer;
+import technology.sola.engine.platform.SwingContainer;
 
-public class Main  {
+public class Main {
   public static void main(String[] args) {
-    JavaFxContainer javaFxContainer = new JavaFxContainer("JavaFX Test" ,800, 600);
+    SwingContainer swingContainer = new SwingContainer("Swing Test" ,800, 600);
 
-    Renderer renderer = javaFxContainer.getRenderer();
+    Renderer renderer = swingContainer.getRenderer();
 
     renderer.clear();
     renderer.setPixel(5, 5, Color.WHITE);
@@ -27,6 +26,6 @@ public class Main  {
     renderer.fillCircle(300, 150, 100.5f, Color.BLUE);
     renderer.drawCircle(300, 150, 100.5f, Color.RED);
 
-    JavaFxApplication.start(javaFxContainer, args);
+    swingContainer.show();
   }
 }
