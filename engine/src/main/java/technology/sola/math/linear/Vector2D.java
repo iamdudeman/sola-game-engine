@@ -1,0 +1,159 @@
+package technology.sola.math.linear;
+
+import technology.sola.engine.annotation.NotNull;
+
+import java.util.Objects;
+
+/**
+ * The Vector2D class is an implementation of a linear algebra vector.
+ */
+public class Vector2D {
+  public static final Vector2D ZERO_VECTOR = new Vector2D(0, 0);
+
+  /** The x value of the vector. */
+  public final float x;
+  /** The y value of the vector. */
+  public final float y;
+
+  /**
+   * Creates a vector from a heading angle.
+   *
+   * @param angle  angle in radians
+   * @return the heading vector
+   */
+  public static Vector2D headingVectorFromAngle(double angle) {
+    return new Vector2D((float)Math.cos(angle), (float)Math.sin(angle));
+  }
+
+
+  /**
+   * Create a Vector2D instance with x and y set.
+   *
+   * @param x  the x coordinate
+   * @param y  the y coordinate
+   */
+  public Vector2D(float x, float y) {
+    this.x = isNegativeZero(x) ? 0.0f : x;
+    this.y = isNegativeZero(y) ? 0.0f : y;
+  }
+
+  /**
+   * Calculates the sum of two vectors and returns the sum as a new vector object.
+   *
+   * @param vector2D  the vector to add to this vector, not null
+   * @return a new vector with the result of this + vector2D
+   */
+  public Vector2D add(@NotNull Vector2D vector2D) {
+    return new Vector2D(this.x + vector2D.x, this.y + vector2D.y);
+  }
+
+  /**
+   * Calculates the difference of two vectors and returns the sum as a new vector object.
+   *
+   * @param vector2D  the vector to subtract the value of, not null
+   * @return a new vector with the result of this - vector2D
+   */
+  public Vector2D subtract(@NotNull Vector2D vector2D) {
+    return new Vector2D(this.x - vector2D.x, this.y - vector2D.y);
+  }
+
+  /**
+   * Calculates the scalar of this vector and returns the result as a new vector object.
+   *
+   * @param scalar  the scalar
+   * @return a new vector with the result of scalar applied to this
+   */
+  public Vector2D scalar(float scalar) {
+    return new Vector2D(this.x * scalar, this.y * scalar);
+  }
+
+  /**
+   * Calculates the magnitude of this vector (the distance from origin).
+   *
+   * @return the magnitude of the vector
+   */
+  public float magnitude() {
+    return (float)Math.sqrt(this.x * this.x + this.y * this.y);
+  }
+
+  /**
+   * Calculates the magnitude squared of this vector.
+   *
+   * @return the magnitude squared of this vector
+   */
+  public float magnitudeSq() {
+    return this.x * this.x + this.y * this.y;
+  }
+
+  /**
+   * Calculates the distance between two vectors.
+   *
+   * @param vector2D  the vector to get the distance between
+   * @return the distance between the vectors
+   */
+  public float distance(@NotNull Vector2D vector2D) {
+    return this.subtract(vector2D).magnitude();
+  }
+
+  /**
+   * Calculates the normalized vector (where the vector has a length of one).
+   *
+   * @return the normalized vector as a new object
+   */
+  public Vector2D normalize() {
+    if (this.equals(ZERO_VECTOR)) {
+      return ZERO_VECTOR;
+    }
+
+    return this.scalar(1 / this.magnitude());
+  }
+
+  /**
+   * Calculates the dot product of two vectors.
+   *
+   * @param vector2D  the vector to calculate the dot product with
+   * @return the calculated dot product as a new vector object
+   */
+  public float dot(@NotNull Vector2D vector2D) {
+    return this.x * vector2D.x + this.y * vector2D.y;
+  }
+
+  /**
+   * Calculates the rotation for a vector about the origin.
+   *
+   * @param angle  the angle to rotate the vector in radians
+   * @return the calculated rotation vector as a new vector object
+   */
+  public Vector2D rotate(double angle) {
+    float rotX = (float)(this.x * Math.cos(angle) - this.y * Math.sin(angle));
+    float rotY = (float)(this.x * Math.sin(angle) + this.y * Math.cos(angle));
+
+    return new Vector2D(rotX, rotY);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof Vector2D) {
+      Vector2D vector2D = (Vector2D) obj;
+
+      return Float.valueOf(this.x).equals(vector2D.x) && Float.valueOf(this.y).equals(vector2D.y);
+    }
+
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(x, y);
+  }
+
+  @Override
+  public String toString() {
+    return "V(" + this.x + ", " + this.y + ")";
+  }
+
+  private boolean isNegativeZero(Float n) {
+    return n.equals(-0.0f);
+  }
+}
+

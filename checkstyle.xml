@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+  "https://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+<!-- Configuration options https://checkstyle.sourceforge.io/config.html -->
+<module name="Checker">
+  <property name="localeLanguage" value="en"/>
+
+  <!-- See http://checkstyle.sf.net/config_misc.html#NewlineAtEndOfFile -->
+  <module name="NewlineAtEndOfFile">
+    <property name="lineSeparator" value="lf"/>
+  </module>
+
+  <module name="TreeWalker">
+    <!-- Block Checks: https://checkstyle.sourceforge.io/config_blocks.html -->
+    <module name="LeftCurly"/>
+    <module name="RightCurly"/>
+
+    <!-- Coding: https://checkstyle.sourceforge.io/config_coding.html -->
+    <module name="ArrayTrailingComma"/>
+    <module name="DeclarationOrder">
+      <property name="ignoreConstructors" value="true"/>
+    </module>
+    <module name="EmptyStatement"/>
+    <module name="IllegalCatch">
+      <property name="illegalClassNames"
+                value="java.lang.Exception,
+                         java.lang.Throwable,
+                         java.lang.RuntimeException,
+                         java.lang.NullPointerException"/>
+    </module>
+    <module name="IllegalType">
+      <property name="illegalClassNames"
+                value="java.util.HashSet, HashSet, java.util.LinkedHashMap, LinkedHashMap,
+                       java.util.TreeMap, TreeMap, java.util.HashMap, HashMap,
+                       java.util.LinkedHashSet, LinkedHashSet, java.util.TreeSet, TreeSet,
+                       java.lang.StringBuffer, StringBuffer"/>
+    </module>
+    <module name="ModifiedControlVariable"/>
+    <module name="MultipleVariableDeclarations"/>
+    <module name="NestedForDepth">
+      <property name="max" value="3"/>
+    </module>
+    <module name="NestedIfDepth">
+      <property name="max" value="3"/>
+    </module>
+    <module name="NestedTryDepth">
+      <property name="max" value="3"/>
+    </module>
+    <module name="OneStatementPerLine"/>
+    <module name="OverloadMethodsDeclarationOrder"/>
+    <module name="PackageDeclaration"/>
+    <module name="ParameterAssignment"/>
+    <module name="RequireThis">
+      <property name="validateOnlyOverlapping" value="true"/>
+    </module>
+    <module name="SimplifyBooleanExpression"/>
+    <module name="SimplifyBooleanReturn"/>
+    <module name="StringLiteralEquality"/>
+    <module name="UnnecessaryParentheses"/>
+    <module name="UnnecessarySemicolonAfterTypeMemberDeclaration"/>
+    <module name="UnnecessarySemicolonInEnumeration"/>
+    <module name="UnnecessarySemicolonInTryWithResources"/>
+    <module name="VariableDeclarationUsageDistance"/>
+
+    <!-- Miscellaneous: https://checkstyle.sourceforge.io/config_misc.html -->
+    <module name="ArrayTypeStyle"/>
+    <module name="CommentsIndentation"/>
+    <module name="DescendantToken"/>
+
+    <!-- Modifiers: https://checkstyle.sourceforge.io/config_modifier.html -->
+    <module name="ModifierOrder"/>
+
+    <!-- Naming Conventions: https://checkstyle.sourceforge.io/config_naming.html -->
+    <module name="AbstractClassName">
+      <property name="format" value="^Abstract((?!Test).)*$"/>
+    </module>
+    <module name="CatchParameterName">
+      <property name="format" value="^(ex|[a-z][a-z][a-zA-Z]+)$"/>
+    </module>
+    <module name="ClassTypeParameterName">
+      <property name="format" value="^[a-zA-Z]$"/>
+    </module>
+    <module name="ConstantName">
+      <property name="format" value="^log(ger)?$|^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"/>
+    </module>
+    <module name="LambdaParameterName"/>
+    <module name="LocalFinalVariableName">
+      <property name="format" value="^[a-z][_a-zA-Z0-9]+$|^[xy]$"/>
+    </module>
+    <module name="LocalVariableName">
+      <property name="format" value="^[a-z][_a-zA-Z0-9]+$|^[xy]$"/>
+      <property name="allowOneCharVarInForLoop" value="true"/>
+    </module>
+
+    <!-- White Space: https://checkstyle.sourceforge.io/config_whitespace.html -->
+    <module name="NoWhitespaceAfter"/>
+    <module name="MethodParamPad"/>
+    <module name="SingleSpaceSeparator"/>
+    <module name="TypecastParenPad"/>
+    <module name="WhitespaceAround"/>
+  </module>
+</module>
