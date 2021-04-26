@@ -42,7 +42,18 @@ public class Renderer {
         }
         break;
       case ALPHA:
-        throw new RuntimeException("Not yet implemented");
+        Color currentColor = new Color(pixels[x + y * width]);
+        float alphaMod = color.getAlpha() / 255f;
+        float oneMinusAlpha = 1 - alphaMod;
+
+        float r = currentColor.getRed() * oneMinusAlpha + color.getRed() * alphaMod;
+        float g = currentColor.getGreen() * oneMinusAlpha + color.getGreen() * alphaMod;
+        float b = currentColor.getBlue() * oneMinusAlpha + color.getBlue() * alphaMod;
+
+        int newArgb = new Color(color.getAlpha(), (int)r, (int)g, (int)b).hexInt();
+
+        pixels[x + y * width] = newArgb;
+        break;
       default:
         throw new RuntimeException("Unknown render mode");
     }

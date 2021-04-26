@@ -2,6 +2,7 @@ package technology.sola.engine.examples.swing;
 
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.platform.swing.SolaImageAssetMapper;
@@ -37,7 +38,9 @@ public class Main {
     renderer.drawImage(400, 530, solaImage.getSubImage(1, 1, 16, 16));
 
     renderer.fillRect(180, 530, 50, 50, new Color(255, 0, 0, 255));
+    renderer.setRenderMode(RenderMode.ALPHA);
     renderer.fillRect(210, 530, 50, 50, new Color(150, 255, 0, 0));
+    renderer.setRenderMode(RenderMode.NORMAL);
 
     swingContainer.show();
   }
