@@ -1,4 +1,4 @@
-package technology.sola.engine.platform;
+package technology.sola.engine.platform.javafx;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

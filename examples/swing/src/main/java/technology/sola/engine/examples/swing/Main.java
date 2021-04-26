@@ -1,11 +1,11 @@
-package technology.sola.engine.examples;
+package technology.sola.engine.examples.swing;
 
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaImage;
-import technology.sola.engine.platform.SolaImageAssetMapper;
-import technology.sola.engine.platform.SwingContainer;
+import technology.sola.engine.platform.swing.SolaImageAssetMapper;
+import technology.sola.engine.platform.swing.SwingContainer;
 
 public class Main {
   public static void main(String[] args) {
@@ -34,6 +34,7 @@ public class Main {
     assetLoader.addAsset("test_tiles", "test_tiles.png");
     SolaImage solaImage = assetLoader.getAsset("test_tiles", SolaImage.class);
     renderer.drawImage(400, 400, solaImage);
+    renderer.drawImage(400, 530, solaImage.getSubImage(1, 1, 16, 16));
 
     swingContainer.show();
   }
