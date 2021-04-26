@@ -39,18 +39,18 @@ public class SolaImage {
 
   public SolaImage getSubImage(int x, int y, int width, int height) {
     int[] subPixels = new int[width * height];
-
     int startingIndex = x + y * this.width;
-    int xAccumulator = 0;
-    int yAccumulator = 0;
+    int parentHorizontalOffset = 0;
+    int parentVerticalOffset = 0;
 
     for (int i = 0; i < subPixels.length; i++) {
-      subPixels[i] = this.pixels[startingIndex + xAccumulator + yAccumulator * this.width];
+      subPixels[i] = this.pixels[startingIndex + parentHorizontalOffset + parentVerticalOffset];
 
-      xAccumulator++;
-      if (xAccumulator >= width) {
-        xAccumulator = 0;
-        yAccumulator++;
+      parentHorizontalOffset++;
+
+      if (parentHorizontalOffset >= width) {
+        parentHorizontalOffset = 0;
+        parentVerticalOffset += this.width;
       }
     }
 
