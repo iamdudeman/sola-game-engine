@@ -28,19 +28,28 @@ public class Renderer {
   }
 
   public void setPixel(int x, int y, Color color) {
-    setPixel(x, y, color.hexInt());
-  }
+    int hexInt = color.hexInt();
 
-  public void setPixel(int x, int y, int color) {
     if (x < 0 || x >= width || y < 0 || y >= height) return;
 
     switch (renderMode) {
       case NORMAL:
-        pixels[x + y * width] = color;
+        pixels[x + y * width] = hexInt;
         break;
-      default:
+      case MASK:
+        if (color.getAlpha() == 255) {
+          pixels[x + y * width] = hexInt;
+        }
+        break;
+      case ALPHA:
         throw new RuntimeException("Not yet implemented");
+      default:
+        throw new RuntimeException("Unknown render mode");
     }
+  }
+
+  public void setPixel(int x, int y, int color) {
+    setPixel(x, y, new Color(color));
   }
 
   public void drawLine(float x, float y, float x2, float y2, Color color) {

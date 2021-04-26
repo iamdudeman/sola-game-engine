@@ -32,6 +32,9 @@ public class Main  {
       SolaImage solaImage = assetLoader.getAsset("test_tiles", SolaImage.class);
       renderer.drawImage(400, 400, solaImage);
       renderer.drawImage(400, 530, solaImage.getSubImage(1, 1, 16, 16));
+
+      renderer.fillRect(180, 530, 50, 50, new Color(255, 0, 0, 255));
+      renderer.fillRect(210, 530, 50, 50, new Color(150, 255, 0, 0));
     });
 
     JavaFxApplication.start(javaFxContainer, args);

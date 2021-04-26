@@ -26,6 +26,14 @@ public class Color {
     this.hexInt = ((0xff & alpha) << 24) | ((0xff & r) << 16) | ((0xff & g) << 8) | (0xff & b);
   }
 
+  public Color(int argb) {
+    alpha = (argb >> 24) & 0xFF;
+    r = (argb >> 16) & 0xFF;
+    g = (argb >> 8) & 0xFF;
+    b = argb & 0xFF;
+    this.hexInt = argb;
+  }
+
   public int hexInt() {
     return hexInt;
   }
