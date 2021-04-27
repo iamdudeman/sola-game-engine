@@ -1,0 +1,30 @@
+<html>
+<head>
+    <script type="text/javascript" charset="utf-8" src="sola.js"></script>
+    <script>
+        window.start = function () {
+            main();
+            var renderer = window.rendererProvider.get(200, 200);
+
+            renderer.fillRect(0, 0, 40, 50, 0xff00ff00);
+            renderer.fillRect(30, 0, 40, 50, 0xff0000ff);
+
+            var data = renderer.render();
+
+            var canvas = document.getElementById('test');
+            var context = canvas.getContext('2d');
+            var imageData = context.createImageData(200, 200);
+
+            for (var i = 0; i < imageData.data.length; i++) {
+              imageData.data[i] = data[i];
+            }
+
+            context.putImageData(imageData, 0, 0);
+        };
+
+    </script>
+</head>
+<body onload="start()">
+<canvas id="test" width="200" height="200"></canvas>
+</body>
+</html>
