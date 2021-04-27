@@ -3,6 +3,7 @@ package technology.sola.engine.platform.js;
 import org.teavm.jso.JSBody;
 import org.teavm.jso.JSObject;
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.Renderer;
 
 public class Main {
@@ -26,11 +27,23 @@ public class Main {
   }
 
   private interface JsRenderer extends JSObject {
+    void clear();
+
     int[] render();
+
+    void setRenderMode(int renderMode);
 
     void setPixel(int x, int y, int color);
 
+    void drawLine(float x, float y, float x2, float y2, int color);
+
+    void drawRect(float x, float y, float width, float height, int color);
+
     void fillRect(float x, float y, float width, float height, int color);
+
+    void drawCircle(float x, float y, float radius, int color);
+
+    void fillCircle(float x, float y, float radius, int color);
   }
 
   public static class JsRendererImpl extends Renderer implements JsRenderer {
@@ -59,8 +72,37 @@ public class Main {
     }
 
     @Override
+    public void setRenderMode(int renderMode) {
+      if (renderMode == 1) {
+        setRenderMode(RenderMode.ALPHA);
+      } else {
+        setRenderMode(RenderMode.NORMAL);
+      }
+    }
+
+    @Override
+    public void drawLine(float x, float y, float x2, float y2, int color) {
+      drawLine(x, y, x2, y2, new Color(color));
+    }
+
+    @Override
+    public void drawRect(float x, float y, float width, float height, int color) {
+      drawRect(x, y, width, height, new Color(color));
+    }
+
+    @Override
     public void fillRect(float x, float y, float width, float height, int color) {
       fillRect(x, y, width, height, new Color(color));
+    }
+
+    @Override
+    public void drawCircle(float x, float y, float radius, int color) {
+      drawCircle(x, y, radius, new Color(color));
+    }
+
+    @Override
+    public void fillCircle(float x, float y, float radius, int color) {
+      fillCircle(x, y, radius, new Color(color));
     }
   }
 }
