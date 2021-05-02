@@ -5,46 +5,46 @@ import org.slf4j.LoggerFactory;
 
 import java.util.function.Consumer;
 
-public class GameLoop {
+public class GameLoop implements Runnable {
   private static final Logger logger = LoggerFactory.getLogger(GameLoop.class);
-  private long lastUpdate = System.nanoTime();
-  private boolean isRunning = false;
-  private float accumulator = 0;
-  private final float deltaTime;
-
-  private long fpsSecondTracker = System.currentTimeMillis();
-  private int updatesThisSecond = 0;
-  private int framesThisSecond = 0;
-
-
   private final Consumer<Float> updateMethod;
   private final Runnable renderMethod;
-  private final boolean isRestAllowed;
+  private final boolean isRestingAllowed;
+  private final float deltaTime;
+
+  private long previousLoopStartTime = System.nanoTime();
+  private boolean isRunning = false;
+  private float updateCatchUpAccumulator = 0;
+
+  private long fpsSecondTracker = System.nanoTime();
+  private int updatesThisSecond = 0;
+  private int framesThisSecond = 0;
 
   public GameLoop(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond) {
     this(updateMethod, renderMethod, targetUpdatesPerSecond, false);
   }
 
-  public GameLoop(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestAllowed) {
+  public GameLoop(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
     this.updateMethod = updateMethod;
     this.renderMethod = renderMethod;
     this.deltaTime = 1f / targetUpdatesPerSecond;
-    this.isRestAllowed = isRestAllowed;
+    this.isRestingAllowed = isRestingAllowed;
   }
 
-  public void start() {
+  @Override
+  public void run() {
     isRunning = true;
 
     while (isRunning) {
-      long loopStart = System.currentTimeMillis();
-      float delta = (loopStart - lastUpdate) / 1e9f;
+      long loopStart = System.nanoTime();
+      float delta = (loopStart - previousLoopStartTime) / 1e9f;
 
-      lastUpdate = loopStart;
-      accumulator += delta;
+      previousLoopStartTime = loopStart;
+      updateCatchUpAccumulator += delta;
 
-      while (accumulator >= deltaTime) {
+      while (updateCatchUpAccumulator >= deltaTime) {
         updateMethod.accept(deltaTime);
-        accumulator -= deltaTime;
+        updateCatchUpAccumulator -= deltaTime;
 
         updatesThisSecond++;
       }
@@ -54,8 +54,8 @@ public class GameLoop {
 
       trackFramesAndUpdates();
 
-      if (isRestAllowed) {
-        rest(loopStart);
+      if (isRestingAllowed) {
+        shortRest(loopStart);
       }
     }
   }
@@ -64,23 +64,24 @@ public class GameLoop {
     isRunning = false;
   }
 
-  private void rest(long loopStartTime) {
+  private void shortRest(long loopStartTime) {
     double endTime = loopStartTime + deltaTime;
 
-    while (System.currentTimeMillis() < endTime) {
+    while (System.nanoTime() < endTime) {
       try {
         Thread.sleep(1);
       } catch (InterruptedException ex) {
         logger.error("rest was interrupted", ex);
+        break;
       }
     }
   }
 
   private void trackFramesAndUpdates() {
-    long now = System.currentTimeMillis();
+    long now = System.nanoTime();
 
-    if (now - fpsSecondTracker >= 1000) {
-      logger.info("fps: {} ups: {}", framesThisSecond, updatesThisSecond);
+    if (now - fpsSecondTracker >= 1e9) {
+      logger.info("ups: {} fps: {}", framesThisSecond, updatesThisSecond);
       updatesThisSecond = 0;
       framesThisSecond = 0;
       fpsSecondTracker = now;

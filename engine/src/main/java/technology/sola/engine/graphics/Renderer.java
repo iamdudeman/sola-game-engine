@@ -46,11 +46,11 @@ public class Renderer {
         float alphaMod = color.getAlpha() / 255f;
         float oneMinusAlpha = 1 - alphaMod;
 
-        float r = currentColor.getRed() * oneMinusAlpha + color.getRed() * alphaMod;
-        float g = currentColor.getGreen() * oneMinusAlpha + color.getGreen() * alphaMod;
-        float b = currentColor.getBlue() * oneMinusAlpha + color.getBlue() * alphaMod;
+        float red = currentColor.getRed() * oneMinusAlpha + color.getRed() * alphaMod;
+        float green = currentColor.getGreen() * oneMinusAlpha + color.getGreen() * alphaMod;
+        float blue = currentColor.getBlue() * oneMinusAlpha + color.getBlue() * alphaMod;
 
-        int newArgb = new Color(color.getAlpha(), (int)r, (int)g, (int)b).hexInt();
+        int newArgb = new Color(color.getAlpha(), (int)red, (int)green, (int)blue).hexInt();
 
         pixels[x + y * width] = newArgb;
         break;
@@ -134,18 +134,18 @@ public class Renderer {
     int yCenter = (int)(y + radius + 0.5f);
     int radiusInt = (int)(radius + 0.5f);
 
-    int d = 3 - 2 * radiusInt;
+    int dVar = 3 - 2 * radiusInt;
     int plotX = 0;
     int plotY = radiusInt;
 
     while (plotY >= plotX) {
       drawEightWaySymmetry(xCenter, yCenter, plotX, plotY, color);
 
-      if (d < 0) {
-        d = d + 4 * plotX + 6;
+      if (dVar < 0) {
+        dVar = dVar + 4 * plotX + 6;
         plotX++;
       } else {
-        d = d + 4 * (plotX - plotY) + 10;
+        dVar = dVar + 4 * (plotX - plotY) + 10;
         plotX++;
         plotY--;
       }
