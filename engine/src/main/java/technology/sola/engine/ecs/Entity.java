@@ -102,5 +102,4 @@ public class Entity {
     this.world = world;
     this.entityIndex = entityIndex;
   }
-
 }
