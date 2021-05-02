@@ -36,7 +36,7 @@ public class EcsSystemContainer {
       .orElse(null);
   }
 
-  void updateSystems(World world, float deltaTime) {
+  public void update(float deltaTime) {
     ecsSystems.stream()
       .filter(AbstractEcsSystem::isActive)
       .iterator()

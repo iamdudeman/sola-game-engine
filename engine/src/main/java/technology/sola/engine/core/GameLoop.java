@@ -81,7 +81,7 @@ public class GameLoop implements Runnable {
     long now = System.nanoTime();
 
     if (now - fpsSecondTracker >= 1e9) {
-      logger.info("ups: {} fps: {}", framesThisSecond, updatesThisSecond);
+      logger.info("ups: {} fps: {}", updatesThisSecond, framesThisSecond);
       updatesThisSecond = 0;
       framesThisSecond = 0;
       fpsSecondTracker = now;

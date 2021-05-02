@@ -1,16 +1,49 @@
 package technology.sola.engine.examples.javafx;
 
 import technology.sola.engine.assets.AssetLoader;
+import technology.sola.engine.ecs.AbstractEcsSystem;
+import technology.sola.engine.ecs.Component;
+import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.RenderMode;
+import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.platform.javafx.JavaFxApplication;
-import technology.sola.engine.platform.javafx.JavaFxContainer;
 import technology.sola.engine.platform.javafx.SolaImageAssetMapper;
+import technology.sola.engine.platform.javafx.SolaJavaFx;
 
 public class Main  {
   public static void main(String[] args) {
-    JavaFxContainer javaFxContainer = new JavaFxContainer("JavaFX Test" ,800, 600, renderer -> {
+    ExampleGame exampleGame = new ExampleGame("JavaFX Test", 800, 600, 30);
+
+    JavaFxApplication.start(exampleGame, args);
+  }
+
+  public static class ExampleGame extends SolaJavaFx {
+    private SolaImage testImage;
+
+    public ExampleGame(String title, int width, int height, int updatesPerSecond) {
+      super(title, width, height, updatesPerSecond);
+    }
+
+    @Override
+    protected void onInit() {
+      AssetLoader assetLoader = new AssetLoader();
+      assetLoader.addAssetMapper(new SolaImageAssetMapper());
+      assetLoader.addAsset("test_tiles", "test_tiles.png");
+
+      testImage = assetLoader.getAsset("test_tiles", SolaImage.class);
+
+      World world = new World(1);
+
+      world.createEntity().addComponent(new Position());
+
+      ecsSystemContainer.setWorld(world);
+      ecsSystemContainer.add(new TestSystem());
+    }
+
+    @Override
+    protected void onRender(Renderer renderer) {
       renderer.clear();
       renderer.setPixel(5, 5, Color.WHITE);
       renderer.setPixel(6, 5, Color.BLUE);
@@ -27,19 +60,45 @@ public class Main  {
       renderer.fillCircle(300, 150, 100.5f, Color.BLUE);
       renderer.drawCircle(300, 150, 100.5f, Color.RED);
 
-      AssetLoader assetLoader = new AssetLoader();
-      assetLoader.addAssetMapper(new SolaImageAssetMapper());
-      assetLoader.addAsset("test_tiles", "test_tiles.png");
-      SolaImage solaImage = assetLoader.getAsset("test_tiles", SolaImage.class);
-      renderer.drawImage(400, 400, solaImage);
-      renderer.drawImage(400, 530, solaImage.getSubImage(1, 1, 16, 16));
+      renderer.drawImage(400, 400, testImage);
+      renderer.drawImage(400, 530, testImage.getSubImage(1, 1, 16, 16));
 
       renderer.fillRect(180, 530, 50, 50, new Color(255, 0, 0, 255));
       renderer.setRenderMode(RenderMode.ALPHA);
       renderer.fillRect(210, 530, 50, 50, new Color(150, 255, 0, 0));
       renderer.setRenderMode(RenderMode.NORMAL);
-    });
 
-    JavaFxApplication.start(javaFxContainer, args);
+      ecsSystemContainer.getWorld().getEntitiesWithComponents(Position.class)
+        .forEach(entity -> {
+          Position position = entity.getComponent(Position.class);
+
+          renderer.fillRect(position.x, position.y, 50, 50, Color.RED);
+        });
+
+
+      super.onRender(renderer);
+    }
+  }
+
+  private static class Position implements Component {
+    private int x = 50;
+    private int y = 50;
+  }
+
+  private static class TestSystem extends AbstractEcsSystem {
+    @Override
+    public void update(World world, float deltaTime) {
+      world.getEntitiesWithComponents(Position.class)
+        .forEach(entity -> {
+          Position position = entity.getComponent(Position.class);
+
+          position.x++;
+        });
+    }
+
+    @Override
+    public int getOrder() {
+      return 0;
+    }
   }
 }
