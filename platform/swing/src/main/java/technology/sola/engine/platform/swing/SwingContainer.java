@@ -26,8 +26,6 @@ public class SwingContainer {
   public void show() {
     JFrame jFrame = new JFrame();
 
-//    jFrame.setPreferredSize(new Dimension(width, height));
-
     RenderComponent renderComponent = new RenderComponent(renderer);
 
     renderComponent.setPreferredSize(new Dimension(width, height));
