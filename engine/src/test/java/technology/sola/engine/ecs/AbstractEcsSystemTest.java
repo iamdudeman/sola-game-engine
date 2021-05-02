@@ -6,17 +6,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class AbstractSystemTest {
+class AbstractEcsSystemTest {
   @Test
   void whenCreated_shouldBeActive() {
-    assertTrue(new TestUpdateSystem().isActive());
+    assertTrue(new TestUpdateEcsSystem().isActive());
   }
 
   @Nested
   class setActive {
     @Test
     void whenCalled_withFalse_shouldBeFalse() {
-      AbstractSystem updateSystem = new TestUpdateSystem();
+      AbstractEcsSystem updateSystem = new TestUpdateEcsSystem();
 
       updateSystem.setActive(false);
 
@@ -24,7 +24,7 @@ class AbstractSystemTest {
     }
   }
 
-  private static class TestUpdateSystem extends AbstractSystem {
+  private static class TestUpdateEcsSystem extends AbstractEcsSystem {
     @Override
     public void update(World world, float deltaTime) {
     }

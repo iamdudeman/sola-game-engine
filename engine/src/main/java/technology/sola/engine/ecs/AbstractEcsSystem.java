@@ -2,7 +2,7 @@ package technology.sola.engine.ecs;
 
 import technology.sola.engine.annotation.NotNull;
 
-public abstract class AbstractSystem {
+public abstract class AbstractEcsSystem {
   private boolean isActive = true;
 
   /**
