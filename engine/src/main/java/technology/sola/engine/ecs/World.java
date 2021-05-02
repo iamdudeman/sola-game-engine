@@ -168,7 +168,7 @@ public class World {
       currentEntityIndex = (currentEntityIndex + 1) % maxEntityCount;
       totalEntityCounter++;
       if (totalEntityCounter > maxEntityCount) {
-        throw new RuntimeException("Entity array is filled. No more entities can be created!");
+        throw new ECSException("Entity array is filled. No more entities can be created!");
       }
     }
 

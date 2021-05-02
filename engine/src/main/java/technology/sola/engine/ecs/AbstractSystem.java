@@ -16,10 +16,27 @@ public abstract class AbstractSystem {
    */
   public abstract void update(@NotNull World world, float deltaTime);
 
+  /**
+   * Gets the order of this System. A higher value means it will be run later in the queue.
+   *
+   * @return the order of this system
+   */
+  public abstract int getOrder();
+
+  /**
+   * Gets whether or not this System is active.
+   *
+   * @return the active state of this system
+   */
   public final boolean isActive() {
     return isActive;
   }
 
+  /**
+   * Sets the active state of this System.
+   *
+   * @param isActive  the new active state
+   */
   public final void setActive(boolean isActive) {
     this.isActive = isActive;
   }

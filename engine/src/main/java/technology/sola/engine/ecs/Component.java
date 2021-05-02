@@ -1,4 +1,4 @@
 package technology.sola.engine.ecs;
 
-public class Component {
+public interface Component {
 }
