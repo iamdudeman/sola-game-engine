@@ -2,18 +2,26 @@ package technology.sola.engine.examples.swing;
 
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.examples.common.components.Position;
+import technology.sola.engine.examples.common.game.TestGame;
 import technology.sola.engine.examples.common.systems.TestSystem;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.platform.swing.SolaImageAssetMapper;
 import technology.sola.engine.platform.swing.SolaSwing;
+import technology.sola.engine.platform.swing.SolaSwingPlatform;
 
 public class Main {
   public static void main(String[] args) {
-    ExampleGame exampleGame = new ExampleGame("Swing Test", 800, 600, 30);
+//    ExampleGame exampleGame = new ExampleGame("Swing Test", 800, 600, 30);
 
-    exampleGame.show();
+//    exampleGame.show();
+
+    TestGame testGame = new TestGame();
+    SolaSwingPlatform solaSwingPlatform = new SolaSwingPlatform("Swing Test", 800, 600);
+
+    testGame.setSolaPlatform(solaSwingPlatform);
+    testGame.start();
   }
 
   private static class ExampleGame extends SolaSwing {

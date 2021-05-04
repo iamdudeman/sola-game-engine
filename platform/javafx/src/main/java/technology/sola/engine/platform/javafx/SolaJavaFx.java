@@ -28,14 +28,14 @@ public abstract class SolaJavaFx extends AbstractSola {
 
     graphicsContext = canvas.getGraphicsContext2D();
 
-    stage.setOnCloseRequest(event -> stopGameLoop());
+    stage.setOnCloseRequest(event -> stop());
     stage.setTitle(title);
     stage.setScene(scene);
     stage.show();
 
     writableImage = new WritableImage(rendererWidth, rendererHeight);
 
-    beginGameLoop();
+    start();
   }
 
   @Override

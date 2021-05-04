@@ -1,6 +1,8 @@
 package technology.sola.engine.platform.swing;
 
-import technology.sola.engine.core.AbstractSola;
+import technology.sola.engine.assets.AssetLoader;
+import technology.sola.engine.core.SolaPlatform;
+import technology.sola.engine.graphics.Renderer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,19 +10,23 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
-// TODO figure out insets rendering issue
-
-public abstract class SolaSwing extends AbstractSola {
+public class SolaSwingPlatform implements SolaPlatform {
   private String title;
   private BufferedImage bufferedImage;
   private JFrame jFrame;
+  private int rendererWidth;
+  private int rendererHeight;
 
-  protected SolaSwing(String title, int width, int height, int updatesPerSecond) {
+  public SolaSwingPlatform(String title, int rendererWidth, int rendererHeight) {
     this.title = title;
-    config(width, height, updatesPerSecond, true);
+    this.rendererWidth = rendererWidth;
+    this.rendererHeight = rendererHeight;
   }
 
-  public void show() {
+  @Override
+  public void init(AssetLoader assetLoader) {
+    assetLoader.addAssetMapper(new SolaImageAssetMapper());
+
     jFrame = new JFrame();
 
     bufferedImage = new BufferedImage(rendererWidth, rendererHeight, BufferedImage.TYPE_INT_ARGB);
@@ -35,17 +41,19 @@ public abstract class SolaSwing extends AbstractSola {
       @Override
       public void windowClosing(WindowEvent e) {
         super.windowClosing(e);
-        stop();
+//        stop();
       }
     });
     jFrame.setTitle(title);
-    jFrame.setVisible(true);
-
-    start();
   }
 
   @Override
-  protected void onRender() {
+  public void start() {
+    jFrame.setVisible(true);
+  }
+
+  @Override
+  public void render(Renderer renderer) {
     renderer.render(pixels -> {
       Graphics graphics = jFrame.getBufferStrategy().getDrawGraphics();
 

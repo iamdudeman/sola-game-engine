@@ -12,15 +12,34 @@ public abstract class AbstractSola {
 
   protected int rendererWidth;
   protected int rendererHeight;
+  private SolaPlatform solaPlatform = new SolaPlatform() {
+    @Override
+    public void init(AssetLoader assetLoader) {
 
-  public void beginGameLoop() {
-    onInit();
+    }
 
+    @Override
+    public void start() {
+    }
+
+    @Override
+    public void render(Renderer renderer) {
+    }
+  };
+
+  public void start() {
+    init();
+
+    solaPlatform.start();
     new Thread(gameLoop).start();
   }
 
-  public void stopGameLoop() {
+  public void stop() {
     gameLoop.stop();
+  }
+
+  public void setSolaPlatform(SolaPlatform solaPlatform) {
+    this.solaPlatform = solaPlatform;
   }
 
   protected abstract void onInit();
@@ -38,6 +57,16 @@ public abstract class AbstractSola {
     assetLoader = new AssetLoader();
     ecsSystemContainer = new EcsSystemContainer();
     renderer = new Renderer(rendererWidth, rendererHeight);
-    gameLoop = new GameLoop(this::onUpdate, this::onRender, targetUpdatePerSecond, isRestingAllowed);
+    gameLoop = new GameLoop(this::onUpdate, this::render, targetUpdatePerSecond, isRestingAllowed);
+  }
+
+  private void init() {
+    solaPlatform.init(assetLoader);
+    onInit();
+  }
+
+  private void render() {
+    onRender();
+    solaPlatform.render(renderer);
   }
 }
