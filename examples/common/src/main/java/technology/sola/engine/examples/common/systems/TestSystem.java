@@ -12,6 +12,7 @@ public class TestSystem extends AbstractEcsSystem {
         Position position = entity.getComponent(Position.class);
 
         position.x++;
+        position.y++;
       });
   }
 

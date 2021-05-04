@@ -1,5 +1,6 @@
 package technology.sola.engine.core;
 
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.ecs.EcsSystemContainer;
 import technology.sola.engine.graphics.Renderer;
 
@@ -7,6 +8,7 @@ public abstract class AbstractSola {
   protected GameLoop gameLoop;
   protected Renderer renderer;
   protected EcsSystemContainer ecsSystemContainer;
+  protected AssetLoader assetLoader;
 
   protected int rendererWidth;
   protected int rendererHeight;
@@ -33,6 +35,7 @@ public abstract class AbstractSola {
     this.rendererWidth = rendererWidth;
     this.rendererHeight = rendererHeight;
 
+    assetLoader = new AssetLoader();
     ecsSystemContainer = new EcsSystemContainer();
     renderer = new Renderer(rendererWidth, rendererHeight);
     gameLoop = new GameLoop(this::onUpdate, this::onRender, targetUpdatePerSecond, isRestingAllowed);

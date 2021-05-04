@@ -1,9 +1,8 @@
 package technology.sola.engine.examples.javafx;
 
-import technology.sola.engine.assets.AssetLoader;
-import technology.sola.engine.ecs.AbstractEcsSystem;
-import technology.sola.engine.ecs.Component;
 import technology.sola.engine.ecs.World;
+import technology.sola.engine.examples.common.components.Position;
+import technology.sola.engine.examples.common.systems.TestSystem;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.SolaImage;
@@ -27,7 +26,6 @@ public class Main  {
 
     @Override
     protected void onInit() {
-      AssetLoader assetLoader = new AssetLoader();
       assetLoader.addAssetMapper(new SolaImageAssetMapper());
       assetLoader.addAsset("test_tiles", "test_tiles.png");
 
@@ -76,28 +74,6 @@ public class Main  {
 
 
       super.onRender();
-    }
-  }
-
-  private static class Position implements Component {
-    private int x = 50;
-    private int y = 50;
-  }
-
-  private static class TestSystem extends AbstractEcsSystem {
-    @Override
-    public void update(World world, float deltaTime) {
-      world.getEntitiesWithComponents(Position.class)
-        .forEach(entity -> {
-          Position position = entity.getComponent(Position.class);
-
-          position.x++;
-        });
-    }
-
-    @Override
-    public int getOrder() {
-      return 0;
     }
   }
 }
