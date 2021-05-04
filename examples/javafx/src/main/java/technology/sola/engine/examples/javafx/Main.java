@@ -6,7 +6,6 @@ import technology.sola.engine.ecs.Component;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.RenderMode;
-import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.platform.javafx.JavaFxApplication;
 import technology.sola.engine.platform.javafx.SolaImageAssetMapper;
@@ -43,7 +42,7 @@ public class Main  {
     }
 
     @Override
-    protected void onRender(Renderer renderer) {
+    protected void onRender() {
       renderer.clear();
       renderer.setPixel(5, 5, Color.WHITE);
       renderer.setPixel(6, 5, Color.BLUE);
@@ -76,7 +75,7 @@ public class Main  {
         });
 
 
-      super.onRender(renderer);
+      super.onRender();
     }
   }
 

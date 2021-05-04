@@ -1,13 +1,14 @@
 package technology.sola.engine.platform.swing;
 
 import technology.sola.engine.core.AbstractSola;
-import technology.sola.engine.graphics.Renderer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+
+// TODO figure out insets rendering issue
 
 public abstract class SolaSwing extends AbstractSola {
   private String title;
@@ -16,7 +17,7 @@ public abstract class SolaSwing extends AbstractSola {
 
   protected SolaSwing(String title, int width, int height, int updatesPerSecond) {
     this.title = title;
-    config(width, height, updatesPerSecond);
+    config(width, height, updatesPerSecond, true);
   }
 
   public void show() {
@@ -34,17 +35,17 @@ public abstract class SolaSwing extends AbstractSola {
       @Override
       public void windowClosing(WindowEvent e) {
         super.windowClosing(e);
-        stop();
+        stopGameLoop();
       }
     });
     jFrame.setTitle(title);
     jFrame.setVisible(true);
 
-    start();
+    beginGameLoop();
   }
 
   @Override
-  protected void onRender(Renderer renderer) {
+  protected void onRender() {
     renderer.render(pixels -> {
       Graphics graphics = jFrame.getBufferStrategy().getDrawGraphics();
 

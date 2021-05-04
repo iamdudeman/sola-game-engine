@@ -8,36 +8,33 @@ public abstract class AbstractSola {
   protected Renderer renderer;
   protected EcsSystemContainer ecsSystemContainer;
 
-  protected int targetUpdatePerSecond = 30;
-  protected boolean isRestingAllowed = false;
   protected int rendererWidth;
   protected int rendererHeight;
 
-  public void start() {
-    ecsSystemContainer = new EcsSystemContainer();
+  public void beginGameLoop() {
     onInit();
-    renderer = new Renderer(rendererWidth, rendererHeight);
-
-    gameLoop = new GameLoop(
-      ecsSystemContainer::update,
-      () -> onRender(renderer),
-      targetUpdatePerSecond, isRestingAllowed
-    );
 
     new Thread(gameLoop).start();
   }
 
-  public void stop() {
+  public void stopGameLoop() {
     gameLoop.stop();
   }
 
   protected abstract void onInit();
 
-  protected abstract void onRender(Renderer renderer);
+  protected void onUpdate(float deltaTime) {
+    ecsSystemContainer.update(deltaTime);
+  }
 
-  protected void config(int rendererWidth, int rendererHeight, int targetUpdatePerSecond) {
+  protected abstract void onRender();
+
+  protected void config(int rendererWidth, int rendererHeight, int targetUpdatePerSecond, boolean isRestingAllowed) {
     this.rendererWidth = rendererWidth;
     this.rendererHeight = rendererHeight;
-    this.targetUpdatePerSecond = targetUpdatePerSecond;
+
+    ecsSystemContainer = new EcsSystemContainer();
+    renderer = new Renderer(rendererWidth, rendererHeight);
+    gameLoop = new GameLoop(this::onUpdate, this::onRender, targetUpdatePerSecond, isRestingAllowed);
   }
 }
