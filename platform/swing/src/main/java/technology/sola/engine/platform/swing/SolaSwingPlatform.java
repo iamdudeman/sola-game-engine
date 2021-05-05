@@ -14,8 +14,8 @@ public class SolaSwingPlatform implements SolaPlatform {
   private String title;
   private BufferedImage bufferedImage;
   private JFrame jFrame;
-  private int rendererWidth;
-  private int rendererHeight;
+  private final int rendererWidth;
+  private final int rendererHeight;
 
   public SolaSwingPlatform(String title, int rendererWidth, int rendererHeight) {
     this.title = title;
@@ -41,7 +41,8 @@ public class SolaSwingPlatform implements SolaPlatform {
       @Override
       public void windowClosing(WindowEvent e) {
         super.windowClosing(e);
-//        stop();
+        // TODO somehow call AbstractSola#stop instead
+        System.exit(0);
       }
     });
     jFrame.setTitle(title);

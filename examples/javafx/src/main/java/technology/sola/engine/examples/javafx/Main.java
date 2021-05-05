@@ -1,20 +1,29 @@
 package technology.sola.engine.examples.javafx;
 
+import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.examples.common.components.Position;
+import technology.sola.engine.examples.common.game.TestGame;
 import technology.sola.engine.examples.common.systems.TestSystem;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.SolaImage;
-import technology.sola.engine.platform.javafx.JavaFxApplication;
 import technology.sola.engine.platform.javafx.SolaImageAssetMapper;
 import technology.sola.engine.platform.javafx.SolaJavaFx;
+import technology.sola.engine.platform.javafx.SolaJavaFxPlatform;
 
 public class Main  {
   public static void main(String[] args) {
-    ExampleGame exampleGame = new ExampleGame("JavaFX Test", 800, 600, 30);
+    TestGame testGame = new TestGame();
+    SolaPlatform solaPlatform = new SolaJavaFxPlatform("JavaFX Test", 800, 600);
 
-    JavaFxApplication.start(exampleGame, args);
+    testGame.setSolaPlatform(solaPlatform);
+    testGame.start();
+
+
+//    ExampleGame exampleGame = new ExampleGame("JavaFX Test", 800, 600, 30);
+
+//    JavaFxApplication.start(exampleGame, args);
   }
 
   public static class ExampleGame extends SolaJavaFx {

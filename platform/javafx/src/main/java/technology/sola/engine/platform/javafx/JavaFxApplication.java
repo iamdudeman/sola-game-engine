@@ -3,6 +3,7 @@ package technology.sola.engine.platform.javafx;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+@Deprecated
 public class JavaFxApplication extends Application {
   private static SolaJavaFx solaJavaFx;
 

@@ -15,7 +15,6 @@ public abstract class AbstractSola {
   private SolaPlatform solaPlatform = new SolaPlatform() {
     @Override
     public void init(AssetLoader assetLoader) {
-
     }
 
     @Override
