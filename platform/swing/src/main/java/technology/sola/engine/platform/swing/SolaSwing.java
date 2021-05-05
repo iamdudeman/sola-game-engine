@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 
 // TODO figure out insets rendering issue
 
+@Deprecated
 public abstract class SolaSwing extends AbstractSola {
   private String title;
   private BufferedImage bufferedImage;

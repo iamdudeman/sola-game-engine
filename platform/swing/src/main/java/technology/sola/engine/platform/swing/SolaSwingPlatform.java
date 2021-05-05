@@ -10,6 +10,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
+// TODO figure out insets rendering issue
+
 public class SolaSwingPlatform extends AbstractSolaPlatform {
   private String title;
   private BufferedImage bufferedImage;

@@ -12,19 +12,7 @@ public abstract class AbstractSola {
 
   protected int rendererWidth;
   protected int rendererHeight;
-  private AbstractSolaPlatform solaPlatform = new AbstractSolaPlatform() {
-    @Override
-    public void init(AssetLoader assetLoader) {
-    }
-
-    @Override
-    public void start() {
-    }
-
-    @Override
-    public void render(Renderer renderer) {
-    }
-  };
+  private AbstractSolaPlatform solaPlatform = new NoSolaPlatform();
 
   void start() {
     init();

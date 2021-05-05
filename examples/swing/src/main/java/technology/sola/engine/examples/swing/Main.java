@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.swing;
 
+import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.examples.common.components.Position;
 import technology.sola.engine.examples.common.game.TestGame;
@@ -18,9 +19,9 @@ public class Main {
 //    exampleGame.show();
 
     TestGame testGame = new TestGame();
-    SolaSwingPlatform solaSwingPlatform = new SolaSwingPlatform("Swing Test", 800, 600);
+    AbstractSolaPlatform solaPlatform = new SolaSwingPlatform("Swing Test", 800, 600);
 
-    solaSwingPlatform.launch(testGame);
+    solaPlatform.launch(testGame);
 //    testGame.setSolaPlatform(solaSwingPlatform);
 //    testGame.start();
   }

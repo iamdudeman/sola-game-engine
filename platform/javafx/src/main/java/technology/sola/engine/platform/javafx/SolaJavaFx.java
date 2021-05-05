@@ -9,6 +9,7 @@ import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 import technology.sola.engine.core.AbstractSola;
 
+@Deprecated
 public abstract class SolaJavaFx extends AbstractSola {
   private String title;
   private GraphicsContext graphicsContext;
