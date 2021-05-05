@@ -41,7 +41,7 @@ public abstract class SolaSwing extends AbstractSola {
     jFrame.setTitle(title);
     jFrame.setVisible(true);
 
-    start();
+//    start();
   }
 
   @Override

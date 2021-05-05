@@ -35,7 +35,7 @@ public abstract class SolaJavaFx extends AbstractSola {
 
     writableImage = new WritableImage(rendererWidth, rendererHeight);
 
-    start();
+//    start();
   }
 
   @Override

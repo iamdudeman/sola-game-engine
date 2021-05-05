@@ -12,7 +12,7 @@ public abstract class AbstractSola {
 
   protected int rendererWidth;
   protected int rendererHeight;
-  private SolaPlatform solaPlatform = new SolaPlatform() {
+  private AbstractSolaPlatform solaPlatform = new AbstractSolaPlatform() {
     @Override
     public void init(AssetLoader assetLoader) {
     }
@@ -26,7 +26,7 @@ public abstract class AbstractSola {
     }
   };
 
-  public void start() {
+  void start() {
     init();
 
     solaPlatform.start();
@@ -37,7 +37,7 @@ public abstract class AbstractSola {
     gameLoop.stop();
   }
 
-  public void setSolaPlatform(SolaPlatform solaPlatform) {
+  void setSolaPlatform(AbstractSolaPlatform solaPlatform) {
     this.solaPlatform = solaPlatform;
   }
 

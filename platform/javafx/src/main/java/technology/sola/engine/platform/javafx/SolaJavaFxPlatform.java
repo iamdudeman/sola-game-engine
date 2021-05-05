@@ -9,12 +9,12 @@ import javafx.scene.image.PixelFormat;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 import technology.sola.engine.assets.AssetLoader;
-import technology.sola.engine.core.SolaPlatform;
+import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.graphics.Renderer;
 
 import java.util.function.Consumer;
 
-public class SolaJavaFxPlatform implements SolaPlatform {
+public class SolaJavaFxPlatform extends AbstractSolaPlatform {
   private String title;
   private final int rendererWidth;
   private final int rendererHeight;

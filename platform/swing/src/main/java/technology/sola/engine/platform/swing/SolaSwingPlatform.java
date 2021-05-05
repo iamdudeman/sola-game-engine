@@ -1,7 +1,7 @@
 package technology.sola.engine.platform.swing;
 
 import technology.sola.engine.assets.AssetLoader;
-import technology.sola.engine.core.SolaPlatform;
+import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.graphics.Renderer;
 
 import javax.swing.*;
@@ -10,7 +10,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
-public class SolaSwingPlatform implements SolaPlatform {
+public class SolaSwingPlatform extends AbstractSolaPlatform {
   private String title;
   private BufferedImage bufferedImage;
   private JFrame jFrame;

@@ -20,8 +20,9 @@ public class Main {
     TestGame testGame = new TestGame();
     SolaSwingPlatform solaSwingPlatform = new SolaSwingPlatform("Swing Test", 800, 600);
 
-    testGame.setSolaPlatform(solaSwingPlatform);
-    testGame.start();
+    solaSwingPlatform.launch(testGame);
+//    testGame.setSolaPlatform(solaSwingPlatform);
+//    testGame.start();
   }
 
   private static class ExampleGame extends SolaSwing {
