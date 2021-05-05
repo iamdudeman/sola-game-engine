@@ -18,8 +18,6 @@ public class SolaJavaFxPlatform extends AbstractSolaPlatform {
   private String title;
   private final int rendererWidth;
   private final int rendererHeight;
-  private GraphicsContext graphicsContext;
-  private WritableImage writableImage;
   private Consumer<int[]> pixelArrayConsumer = pixels -> {};
 
   public SolaJavaFxPlatform(String title, int rendererWidth, int rendererHeight) {
@@ -45,11 +43,13 @@ public class SolaJavaFxPlatform extends AbstractSolaPlatform {
 
       root.getChildren().add(canvas);
 
-      graphicsContext = canvas.getGraphicsContext2D();
-      writableImage = new WritableImage(rendererWidth, rendererHeight);
+      GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
+      WritableImage writableImage = new WritableImage(rendererWidth, rendererHeight);
       pixelArrayConsumer = pixels -> {
-        writableImage.getPixelWriter().setPixels(0, 0, rendererWidth, rendererHeight, PixelFormat.getIntArgbInstance(), pixels, 0, rendererWidth);
-
+        writableImage.getPixelWriter().setPixels(
+          0, 0, rendererWidth, rendererHeight,
+          PixelFormat.getIntArgbInstance(), pixels, 0, rendererWidth
+        );
         graphicsContext.drawImage(writableImage, 0, 0, rendererWidth, rendererHeight);
       };
 
