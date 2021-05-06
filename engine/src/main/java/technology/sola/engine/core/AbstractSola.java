@@ -1,10 +1,13 @@
 package technology.sola.engine.core;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.ecs.EcsSystemContainer;
 import technology.sola.engine.graphics.Renderer;
 
 public abstract class AbstractSola {
+  private static final Logger logger = LoggerFactory.getLogger(AbstractSola.class);
   protected GameLoop gameLoop;
   protected Renderer renderer;
   protected EcsSystemContainer ecsSystemContainer;
@@ -15,6 +18,8 @@ public abstract class AbstractSola {
   private AbstractSolaPlatform solaPlatform = new NoSolaPlatform();
 
   void start() {
+    logger.info("----------Sola is starting----------");
+    logger.info("Using platform [{}]", solaPlatform.getClass().getName());
     init();
 
     solaPlatform.start();

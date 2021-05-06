@@ -18,7 +18,7 @@ public class SolaJavaFxPlatform extends AbstractSolaPlatform {
   private String title;
   private final int rendererWidth;
   private final int rendererHeight;
-  private Consumer<int[]> pixelArrayConsumer = pixels -> {};
+  private Consumer<int[]> pixelArrayConsumer = pixels -> { };
 
   public SolaJavaFxPlatform(String title, int rendererWidth, int rendererHeight) {
     this.title = title;
@@ -28,7 +28,7 @@ public class SolaJavaFxPlatform extends AbstractSolaPlatform {
 
   @Override
   public void init(AssetLoader assetLoader) {
-    Platform.startup(() -> {});
+    Platform.startup(() -> { });
 
     assetLoader.addAssetMapper(new SolaImageAssetMapper());
   }
