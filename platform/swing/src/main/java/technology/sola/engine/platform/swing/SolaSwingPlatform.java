@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 
 // TODO figure out insets rendering issue
 
@@ -58,9 +59,11 @@ public class SolaSwingPlatform extends AbstractSolaPlatform {
   @Override
   public void render(Renderer renderer) {
     renderer.render(pixels -> {
+      int[] bufferedImageDataBuffer = ((DataBufferInt) bufferedImage.getRaster().getDataBuffer()).getData();
+      System.arraycopy(pixels, 0, bufferedImageDataBuffer, 0, pixels.length);
+
       Graphics graphics = jFrame.getBufferStrategy().getDrawGraphics();
 
-      bufferedImage.setRGB(0, 0, rendererWidth, rendererHeight, pixels, 0, rendererWidth);
       graphics.drawImage(bufferedImage, 0, 0, null);
       graphics.dispose();
 
