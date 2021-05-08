@@ -1,10 +1,5 @@
 plugins {
-  id("application")
   id("java-library")
-}
-
-application {
-  mainClass.set("technology.sola.engine.examples.Main")
 }
 
 repositories {
@@ -12,15 +7,10 @@ repositories {
 }
 
 dependencies {
-  api(project(":platform:swing"))
-  api(project(":examples:common"))
+  implementation(project(":engine"))
 }
 
 tasks.withType<Jar>() {
-  manifest {
-    attributes["Main-Class"] = "technology.sola.engine.examples.Main"
-  }
-
   dependsOn(configurations.runtimeClasspath)
 
   from({

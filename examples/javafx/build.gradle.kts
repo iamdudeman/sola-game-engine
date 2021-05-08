@@ -13,6 +13,7 @@ repositories {
 
 dependencies {
   api(project(":platform:javafx"))
+  api(project(":examples:common"))
 }
 
 tasks.withType<Jar>() {
