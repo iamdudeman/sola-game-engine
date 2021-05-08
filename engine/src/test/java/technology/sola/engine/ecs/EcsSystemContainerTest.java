@@ -57,7 +57,8 @@ class EcsSystemContainerTest {
     ecsService.add(mockThirdUpdateSystem);
 
     World mockWorld = Mockito.mock(World.class);
-    ecsService.updateSystems(mockWorld, 0.16f);
+    ecsService.setWorld(mockWorld);
+    ecsService.update(0.16f);
 
     InOrder inOrder = Mockito.inOrder(mockFirstUpdateSystem, mockSecondUpdateSystem);
     inOrder.verify(mockFirstUpdateSystem).update(mockWorld, 0.16f);

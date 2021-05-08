@@ -3,5 +3,5 @@ rootProject.name = "sola-game-engine"
 include(
   "engine",
   "platform:javafx", "platform:swing",
-  "examples:javafx", "examples:swing"
+  "examples:common", "examples:javafx", "examples:swing"
 )
