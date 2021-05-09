@@ -1,7 +1,7 @@
 package technology.sola.engine.event;
 
-public interface EventListener<T> {
-  Class<T> getMessageClass();
+public interface EventListener<T extends Event<?>> {
+  Class<T> getEventClass();
 
-  void onMessage(Event<T> event);
+  void onEvent(T event);
 }
