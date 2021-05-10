@@ -10,6 +10,7 @@ import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.core.AbstractSolaPlatform;
+import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
 
 import java.util.function.Consumer;
@@ -53,7 +54,7 @@ public class SolaJavaFxPlatform extends AbstractSolaPlatform {
         graphicsContext.drawImage(writableImage, 0, 0, rendererWidth, rendererHeight);
       };
 
-      stage.setOnCloseRequest(event -> System.exit(0)); // TODO somehow call AbstractSola#stop instead
+      stage.setOnCloseRequest(event -> eventHub.emit(GameLoopEvent.STOP));
       stage.setTitle(title);
       stage.setScene(scene);
       stage.show();

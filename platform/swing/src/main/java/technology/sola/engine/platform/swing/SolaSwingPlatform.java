@@ -2,6 +2,7 @@ package technology.sola.engine.platform.swing;
 
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.core.AbstractSolaPlatform;
+import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
 
 import javax.swing.*;
@@ -44,8 +45,7 @@ public class SolaSwingPlatform extends AbstractSolaPlatform {
       @Override
       public void windowClosing(WindowEvent e) {
         super.windowClosing(e);
-        // TODO somehow call AbstractSola#stop instead
-        System.exit(0);
+        eventHub.emit(GameLoopEvent.STOP);
       }
     });
     jFrame.setTitle(title);
