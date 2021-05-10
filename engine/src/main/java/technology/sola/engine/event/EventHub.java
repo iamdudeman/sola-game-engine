@@ -3,25 +3,25 @@ package technology.sola.engine.event;
 import java.util.*;
 
 public class EventHub {
-  private final Map<Class<? extends Event>, List<EventListener>> messageListenersMap;
+  private final Map<Class<? extends Event>, List<EventListener>> eventListenersMap;
 
   public EventHub() {
-    messageListenersMap = new HashMap<>();
+    eventListenersMap = new HashMap<>();
   }
 
-  public void subscribe(EventListener<?> eventListener) {
-    messageListenersMap.computeIfAbsent(eventListener.getEventClass(), key -> new LinkedList<>()).add(eventListener);
+  public void add(EventListener<?> eventListener) {
+    eventListenersMap.computeIfAbsent(eventListener.getEventClass(), key -> new LinkedList<>()).add(eventListener);
   }
 
-  public void unsubscribe(EventListener<?> eventListener) {
-    messageListenersMap.computeIfPresent(eventListener.getEventClass(), (key, value) -> {
+  public void remove(EventListener<?> eventListener) {
+    eventListenersMap.computeIfPresent(eventListener.getEventClass(), (key, value) -> {
       value.remove(eventListener);
       return value;
     });
   }
 
   public void emit(Event<?> event) {
-    messageListenersMap.computeIfPresent(event.getClass(), (key, value) -> {
+    eventListenersMap.computeIfPresent(event.getClass(), (key, value) -> {
       value.forEach(eventListener -> eventListener.onEvent(event));
       return value;
     });

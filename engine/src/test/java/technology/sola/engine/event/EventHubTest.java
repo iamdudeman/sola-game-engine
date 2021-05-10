@@ -12,15 +12,15 @@ class EventHubTest {
     TestEventListener testEventListenerThree = new TestEventListener();
     EventHub eventHub = new EventHub();
 
-    eventHub.subscribe(testEventListener);
-    eventHub.subscribe(testEventListenerTwo);
-    eventHub.subscribe(testEventListenerThree);
-    eventHub.unsubscribe(testEventListenerTwo);
-    eventHub.emit(new TestEvent("Hello"));
+    eventHub.add(testEventListener);
+    eventHub.add(testEventListenerTwo);
+    eventHub.add(testEventListenerThree);
+    eventHub.remove(testEventListenerTwo);
+    eventHub.emit(new TestEvent("test_message"));
 
-    assertTestListener(testEventListener, "Hello");
+    assertTestListener(testEventListener, "test_message");
     assertTestListener(testEventListenerTwo, null);
-    assertTestListener(testEventListenerThree, "Hello");
+    assertTestListener(testEventListenerThree, "test_message");
   }
 
   private static void assertTestListener(TestEventListener testEventListener, String expected) {

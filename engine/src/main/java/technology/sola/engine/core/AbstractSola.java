@@ -55,7 +55,7 @@ public abstract class AbstractSola {
     renderer = new Renderer(rendererWidth, rendererHeight);
     gameLoop = new GameLoop(this::onUpdate, this::render, targetUpdatePerSecond, isRestingAllowed);
 
-    eventHub.subscribe(new GameLoopEventSubscriber(gameLoop));
+    eventHub.add(new GameLoopEventSubscriber(gameLoop));
   }
 
   private void init() {
