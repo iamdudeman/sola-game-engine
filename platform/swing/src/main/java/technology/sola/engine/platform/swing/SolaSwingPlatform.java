@@ -2,7 +2,7 @@ package technology.sola.engine.platform.swing;
 
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.core.AbstractSolaPlatform;
-import technology.sola.engine.core.event.GameLoopEvent;
+import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
 
 import javax.swing.*;

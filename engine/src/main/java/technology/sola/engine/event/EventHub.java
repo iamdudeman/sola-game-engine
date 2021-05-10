@@ -20,6 +20,10 @@ public class EventHub {
     });
   }
 
+  public void off(Class<? extends Event> eventClass) {
+    eventListenersMap.put(eventClass, new LinkedList<>());
+  }
+
   public void emit(Event<?> event) {
     eventListenersMap.computeIfPresent(event.getClass(), (key, value) -> {
       value.forEach(eventListener -> eventListener.onEvent(event));

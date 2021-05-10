@@ -23,6 +23,25 @@ class EventHubTest {
     assertTestListener(testEventListenerThree, "test_message");
   }
 
+  @Test
+  void whenOffCalledForEvent_shouldNotNotifyAnySubscribers() {
+    TestEventListener testEventListener = new TestEventListener();
+    TestEventListener testEventListenerTwo = new TestEventListener();
+    TestEventListener testEventListenerThree = new TestEventListener();
+    EventHub eventHub = new EventHub();
+
+    eventHub.add(testEventListener);
+    eventHub.add(testEventListenerTwo);
+    eventHub.add(testEventListenerThree);
+    eventHub.off(TestEvent.class);
+    eventHub.emit(new TestEvent("test_message"));
+
+    assertTestListener(testEventListener, null);
+    assertTestListener(testEventListenerTwo, null);
+    assertTestListener(testEventListenerThree, null);
+
+  }
+
   private static void assertTestListener(TestEventListener testEventListener, String expected) {
     assertEquals(expected, testEventListener.result);
   }

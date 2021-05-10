@@ -10,7 +10,7 @@ import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.core.AbstractSolaPlatform;
-import technology.sola.engine.core.event.GameLoopEvent;
+import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
 
 import java.util.function.Consumer;

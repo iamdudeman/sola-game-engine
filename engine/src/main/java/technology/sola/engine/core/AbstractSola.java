@@ -3,7 +3,7 @@ package technology.sola.engine.core;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import technology.sola.engine.assets.AssetLoader;
-import technology.sola.engine.core.event.GameLoopEventSubscriber;
+import technology.sola.engine.event.gameloop.GameLoopEventSubscriber;
 import technology.sola.engine.ecs.EcsSystemContainer;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Renderer;
