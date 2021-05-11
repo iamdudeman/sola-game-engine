@@ -29,10 +29,6 @@ public abstract class AbstractSola {
     new Thread(gameLoop).start();
   }
 
-  public void stop() {
-    gameLoop.stop();
-  }
-
   void setSolaPlatform(AbstractSolaPlatform solaPlatform) {
     this.solaPlatform = solaPlatform;
   }
@@ -59,7 +55,7 @@ public abstract class AbstractSola {
   }
 
   private void init() {
-    solaPlatform.init(assetLoader);
+    solaPlatform.init();
     onInit();
   }
 

@@ -1,6 +1,5 @@
 package technology.sola.engine.platform.swing;
 
-import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
@@ -28,7 +27,7 @@ public class SolaSwingPlatform extends AbstractSolaPlatform {
   }
 
   @Override
-  public void init(AssetLoader assetLoader) {
+  public void init() {
     assetLoader.addAssetMapper(new SolaImageAssetMapper());
 
     jFrame = new JFrame();

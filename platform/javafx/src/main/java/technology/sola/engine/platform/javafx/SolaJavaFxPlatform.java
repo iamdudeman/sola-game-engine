@@ -8,7 +8,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.PixelFormat;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
-import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
@@ -28,7 +27,7 @@ public class SolaJavaFxPlatform extends AbstractSolaPlatform {
   }
 
   @Override
-  public void init(AssetLoader assetLoader) {
+  public void init() {
     Platform.startup(() -> { });
 
     assetLoader.addAssetMapper(new SolaImageAssetMapper());

@@ -1,11 +1,10 @@
 package technology.sola.engine.core;
 
-import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.graphics.Renderer;
 
 class NoSolaPlatform extends AbstractSolaPlatform {
   @Override
-  protected void init(AssetLoader assetLoader) {
+  protected void init() {
     // Not needed
   }
 
