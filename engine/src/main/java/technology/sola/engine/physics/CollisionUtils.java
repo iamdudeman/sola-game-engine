@@ -8,8 +8,8 @@ import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
-final class CollisionUtils {
-  static CollisionManifold calculateCollisionManifold(
+public final class CollisionUtils {
+  public static CollisionManifold calculateCollisionManifold(
     Entity entityA, Entity entityB,
     PositionComponent positionA, PositionComponent positionB,
     ColliderComponent colliderA, ColliderComponent colliderB

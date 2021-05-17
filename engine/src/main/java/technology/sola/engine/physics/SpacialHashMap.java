@@ -17,7 +17,7 @@ public class SpacialHashMap {
    *
    * @param entities  the list of entities being tracked by the SpacialHashMap
    */
-  SpacialHashMap(List<Entity> entities) {
+  public SpacialHashMap(List<Entity> entities) {
     this.cellSize = calculateAppropriateCellSizeForEntities(entities);
 
     entities.forEach(this::registerEntity);
@@ -29,7 +29,7 @@ public class SpacialHashMap {
    * @param entities  the list of entities being tracked by the SpacialHashMap
    * @param cellSize  the cell size of the SpacialHashMap
    */
-  SpacialHashMap(List<Entity> entities, int cellSize) {
+  public SpacialHashMap(List<Entity> entities, int cellSize) {
     int minimumCellSize = calculateMinSizeForEntities(entities);
 
     if (cellSize < minimumCellSize) throw new IllegalArgumentException("Cell size must be greater than largest object [" + minimumCellSize + "]");
@@ -38,7 +38,7 @@ public class SpacialHashMap {
     entities.forEach(this::registerEntity);
   }
 
-  List<Entity> getNearbyEntities(Entity entity) {
+  public List<Entity> getNearbyEntities(Entity entity) {
     return getBucketIdsForEntity(entity).stream()
       .map(this::getOrCreateBucket)
       .reduce(new ArrayList<>(), (nearbyEntities, entityBucket) -> {
