@@ -16,7 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-// TODO subscribe logic needed for EventHub?
+// TODO subscribe logic needed to add to EventHub?
 public class ImpulseCollisionResolutionSystem extends AbstractEcsSystem implements EventListener<CollisionManifoldEvent> {
   public static final int ORDER = CollisionDetectionSystem.ORDER + 1;
 
@@ -75,12 +75,6 @@ public class ImpulseCollisionResolutionSystem extends AbstractEcsSystem implemen
   @Override
   public void onEvent(CollisionManifoldEvent eventObject) {
     events.add(eventObject.getMessage());
-  }
-
-  // TODO this seems a bit weird
-  @Override
-  public Class<CollisionManifoldEvent> getEventClass() {
-    return CollisionManifoldEvent.class;
   }
 
   private void applyImpulse() {
