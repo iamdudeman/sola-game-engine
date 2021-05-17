@@ -1,7 +1,5 @@
 package technology.sola.engine.ecs;
 
-import technology.sola.engine.annotation.NotNull;
-
 public abstract class AbstractEcsSystem {
   private boolean isActive = true;
 
@@ -14,7 +12,7 @@ public abstract class AbstractEcsSystem {
    * @param world  the {@code World}
    * @param deltaTime  the delta time between the last frame and the current frame
    */
-  public abstract void update(@NotNull World world, float deltaTime);
+  public abstract void update(World world, float deltaTime);
 
   /**
    * Gets the order of this System. A higher value means it will be run later in the queue.

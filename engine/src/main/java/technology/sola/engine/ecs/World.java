@@ -1,8 +1,5 @@
 package technology.sola.engine.ecs;
 
-import technology.sola.engine.annotation.NotNull;
-import technology.sola.engine.annotation.Nullable;
-
 import java.util.*;
 
 public class World {
@@ -87,7 +84,7 @@ public class World {
    * @param name  the name of the {@code Entity}
    * @return the {@code Entity} with desired name
    */
-  @Nullable public Entity getEntityByName(@NotNull String name) {
+  public Entity getEntityByName(String name) {
     for (Entity entity : entities) {
       if (entity == null) continue;
 
