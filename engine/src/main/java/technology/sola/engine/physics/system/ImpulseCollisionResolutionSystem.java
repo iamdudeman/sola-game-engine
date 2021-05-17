@@ -8,15 +8,16 @@ import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.PositionComponent;
 import technology.sola.engine.physics.component.VelocityComponent;
+import technology.sola.engine.physics.event.CollisionManifoldEvent;
 import technology.sola.math.SolKanaMath;
 import technology.sola.math.linear.Vector2D;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 // TODO subscribe logic needed for EventHub?
-public class ImpulseCollisionResolutionSystem extends AbstractEcsSystem implements EventListener<CollisionManifold> {
+public class ImpulseCollisionResolutionSystem extends AbstractEcsSystem implements EventListener<CollisionManifoldEvent> {
   public static final int ORDER = CollisionDetectionSystem.ORDER + 1;
 
   /** Smaller number is more accurate */
@@ -24,7 +25,7 @@ public class ImpulseCollisionResolutionSystem extends AbstractEcsSystem implemen
   /** Lower numbers cause less jittering but allow for deeper penetration */
   private final float linearProjectionPercentage;
   private final int iterations;
-  private List<CollisionManifold> events = new ArrayList<>();
+  private List<CollisionManifold> events = new LinkedList<>();
 
   /**
    * Creates an instance with recommended settings.
@@ -63,7 +64,7 @@ public class ImpulseCollisionResolutionSystem extends AbstractEcsSystem implemen
 
     adjustForSinking();
 
-    events = new ArrayList<>();
+    events = new LinkedList<>();
   }
 
   @Override
@@ -72,14 +73,14 @@ public class ImpulseCollisionResolutionSystem extends AbstractEcsSystem implemen
   }
 
   @Override
-  public void onEvent(CollisionManifold eventObject) {
-    events.add(eventObject);
+  public void onEvent(CollisionManifoldEvent eventObject) {
+    events.add(eventObject.getMessage());
   }
 
   // TODO this seems a bit weird
   @Override
-  public Class<CollisionManifold> getEventClass() {
-    return CollisionManifold.class;
+  public Class<CollisionManifoldEvent> getEventClass() {
+    return CollisionManifoldEvent.class;
   }
 
   private void applyImpulse() {

@@ -1,22 +1,15 @@
 package technology.sola.engine.physics;
 
 import technology.sola.engine.ecs.Entity;
-import technology.sola.engine.event.Event;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.Objects;
 
-// TODO this is weird... maybe refactor this?
-public class CollisionManifold implements Event<CollisionManifold> {
+public class CollisionManifold {
   private final Entity entityA;
   private final Entity entityB;
   private final Vector2D normal;
   private final float penetration;
-
-  @Override
-  public CollisionManifold getMessage() {
-    return this;
-  }
 
   /**
    * Creates a CollisionManifoldEventMessage for two entities.

@@ -3,10 +3,10 @@ package technology.sola.engine.event.gameloop;
 import technology.sola.engine.core.GameLoop;
 import technology.sola.engine.event.EventListener;
 
-public class GameLoopEventSubscriber implements EventListener<GameLoopEvent> {
+public class GameLoopEventListener implements EventListener<GameLoopEvent> {
   private final GameLoop gameLoop;
 
-  public GameLoopEventSubscriber(GameLoop gameLoop) {
+  public GameLoopEventListener(GameLoop gameLoop) {
     this.gameLoop = gameLoop;
   }
 
