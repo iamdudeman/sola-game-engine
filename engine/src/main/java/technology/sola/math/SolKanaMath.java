@@ -1,6 +1,5 @@
 package technology.sola.math;
 
-import technology.sola.engine.annotation.NotNull;
 import technology.sola.math.linear.Vector2D;
 
 /**
@@ -29,7 +28,7 @@ public final class SolKanaMath {
    * @param value  the value to clamp
    * @return the clamped {@code Vector2D}
    */
-  public static Vector2D clamp(@NotNull Vector2D min, @NotNull Vector2D max, @NotNull Vector2D value) {
+  public static Vector2D clamp(Vector2D min, Vector2D max, Vector2D value) {
     float closestX = SolKanaMath.clamp(min.x, max.x, value.x);
     float closestY = SolKanaMath.clamp(min.y, max.y, value.y);
 

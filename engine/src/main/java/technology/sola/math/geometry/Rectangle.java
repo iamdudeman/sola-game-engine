@@ -1,6 +1,5 @@
 package technology.sola.math.geometry;
 
-import technology.sola.engine.annotation.NotNull;
 import technology.sola.math.linear.Vector2D;
 
 /**
@@ -18,7 +17,7 @@ public class Rectangle {
    * @param min  the top, left point of the rectangle
    * @param max  the bottom, right point of the rectangle
    */
-  public Rectangle(@NotNull Vector2D min, @NotNull Vector2D max) {
+  public Rectangle(Vector2D min, Vector2D max) {
     if (max.x <= min.x) {
       throw new IllegalArgumentException("max.x cannot be less than min.x");
     }

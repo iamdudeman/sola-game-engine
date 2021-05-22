@@ -12,10 +12,10 @@ class EventHubTest {
     TestEventListener testEventListenerThree = new TestEventListener();
     EventHub eventHub = new EventHub();
 
-    eventHub.add(testEventListener);
-    eventHub.add(testEventListenerTwo);
-    eventHub.add(testEventListenerThree);
-    eventHub.remove(testEventListenerTwo);
+    eventHub.add(testEventListener, TestEvent.class);
+    eventHub.add(testEventListenerTwo, TestEvent.class);
+    eventHub.add(testEventListenerThree, TestEvent.class);
+    eventHub.remove(testEventListenerTwo, TestEvent.class);
     eventHub.emit(new TestEvent("test_message"));
 
     assertTestListener(testEventListener, "test_message");
@@ -30,9 +30,9 @@ class EventHubTest {
     TestEventListener testEventListenerThree = new TestEventListener();
     EventHub eventHub = new EventHub();
 
-    eventHub.add(testEventListener);
-    eventHub.add(testEventListenerTwo);
-    eventHub.add(testEventListenerThree);
+    eventHub.add(testEventListener, TestEvent.class);
+    eventHub.add(testEventListenerTwo, TestEvent.class);
+    eventHub.add(testEventListenerThree, TestEvent.class);
     eventHub.off(TestEvent.class);
     eventHub.emit(new TestEvent("test_message"));
 
@@ -48,11 +48,6 @@ class EventHubTest {
 
   private static class TestEventListener implements EventListener<TestEvent> {
     private String result = null;
-
-    @Override
-    public Class<TestEvent> getEventClass() {
-      return TestEvent.class;
-    }
 
     @Override
     public void onEvent(TestEvent event) {
