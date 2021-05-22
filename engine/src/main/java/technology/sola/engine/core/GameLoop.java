@@ -47,12 +47,11 @@ public class GameLoop implements Runnable {
         updateCatchUpAccumulator -= deltaTime;
 
         updatesThisSecond++;
+        trackFramesAndUpdates();
       }
 
       renderMethod.run();
       framesThisSecond++;
-
-      trackFramesAndUpdates();
 
       if (isRestingAllowed) {
         shortRest(loopStart);
