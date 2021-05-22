@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.input.KeyEvent;
 
 import java.util.function.Consumer;
 
@@ -43,6 +44,9 @@ public class SolaJavaFxPlatform extends AbstractSolaPlatform {
 
       root.getChildren().add(canvas);
 
+      canvas.setOnKeyPressed(keyEvent -> onKeyPressed(new KeyEvent(keyEvent.getCode().getCode())));
+      canvas.setOnKeyReleased(keyEvent -> onKeyReleased(new KeyEvent(keyEvent.getCode().getCode())));
+
       GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
       WritableImage writableImage = new WritableImage(rendererWidth, rendererHeight);
       pixelArrayConsumer = pixels -> {
@@ -53,6 +57,7 @@ public class SolaJavaFxPlatform extends AbstractSolaPlatform {
         graphicsContext.drawImage(writableImage, 0, 0, rendererWidth, rendererHeight);
       };
 
+      stage.setOnShown(event -> canvas.requestFocus());
       stage.setOnCloseRequest(event -> eventHub.emit(GameLoopEvent.STOP));
       stage.setTitle(title);
       stage.setScene(scene);

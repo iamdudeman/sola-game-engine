@@ -6,6 +6,8 @@ import technology.sola.engine.graphics.Renderer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -34,6 +36,17 @@ public class SolaSwingPlatform extends AbstractSolaPlatform {
 
     bufferedImage = new BufferedImage(rendererWidth, rendererHeight, BufferedImage.TYPE_INT_ARGB);
 
+    jFrame.addKeyListener(new KeyAdapter() {
+      @Override
+      public void keyPressed(KeyEvent e) {
+        onKeyPressed(new technology.sola.engine.input.KeyEvent(e.getKeyCode()));
+      }
+
+      @Override
+      public void keyReleased(KeyEvent e) {
+        onKeyReleased(new technology.sola.engine.input.KeyEvent(e.getKeyCode()));
+      }
+    });
     jFrame.setPreferredSize(new Dimension(rendererWidth, rendererHeight));
 
     jFrame.pack();

@@ -1,13 +1,13 @@
 package technology.sola.engine.input;
 
 public class KeyEvent {
-  private final Key key;
+  private final int keyCode;
 
-  public KeyEvent(Key key) {
-    this.key = key;
+  public KeyEvent(int keyCode) {
+    this.keyCode = keyCode;
   }
 
-  public Key getKey() {
-    return key;
+  public int getKeyCode() {
+    return keyCode;
   }
 }

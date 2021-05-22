@@ -30,8 +30,8 @@ class KeyboardInputTest {
     solKanaKeyboardInputService.keyPressed(createMockKeyEvent(Key.A));
     solKanaKeyboardInputService.updateStatusOfKeys();
 
-    assertTrue(solKanaKeyboardInputService.isKeyPressed(Key.A.getCode()));
-    assertFalse(solKanaKeyboardInputService.isKeyHeld(Key.A.getCode()));
+    assertTrue(solKanaKeyboardInputService.isKeyPressed(Key.A));
+    assertFalse(solKanaKeyboardInputService.isKeyHeld(Key.A));
   }
 
   @Test
@@ -46,13 +46,13 @@ class KeyboardInputTest {
 
   @Test
   void whenKeyPressedThenReleased_shouldShowKeyNotHeldOrPressed() {
-    solKanaKeyboardInputService.keyPressed(createMockKeyEvent(Key.A));
+    solKanaKeyboardInputService.keyPressed(createMockKeyEvent(Key.B));
     solKanaKeyboardInputService.updateStatusOfKeys();
-    solKanaKeyboardInputService.keyReleased(createMockKeyEvent(Key.A));
+    solKanaKeyboardInputService.keyReleased(createMockKeyEvent(Key.B));
     solKanaKeyboardInputService.updateStatusOfKeys();
 
-    assertFalse(solKanaKeyboardInputService.isKeyPressed(Key.A.getCode()));
-    assertFalse(solKanaKeyboardInputService.isKeyHeld(Key.A.getCode()));
+    assertFalse(solKanaKeyboardInputService.isKeyPressed(Key.B.getCode()));
+    assertFalse(solKanaKeyboardInputService.isKeyHeld(Key.B.getCode()));
   }
 
   private KeyEvent createMockKeyEvent(Key key) {
@@ -60,11 +60,9 @@ class KeyboardInputTest {
   }
 
   private KeyEvent createMockKeyEvent(int keyCode) {
-    Key mockKey = Mockito.mock(Key.class);
     KeyEvent mockKeyEvent = Mockito.mock(KeyEvent.class);
 
-    Mockito.when(mockKey.getCode()).thenReturn(keyCode);
-    Mockito.when(mockKeyEvent.getKey()).thenReturn(mockKey);
+    Mockito.when(mockKeyEvent.getKeyCode()).thenReturn(keyCode);
 
     return mockKeyEvent;
   }

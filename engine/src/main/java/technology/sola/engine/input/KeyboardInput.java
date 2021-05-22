@@ -28,7 +28,7 @@ public class KeyboardInput {
     return isKeyHeld(key.getCode());
   }
 
-  void updateStatusOfKeys() {
+  public void updateStatusOfKeys() {
     for (int i = 0; i < KEY_COUNT; i++) {
       if (keysDown[i]) {
         if (keyStates[i] == KeyState.RELEASED) {
@@ -43,7 +43,7 @@ public class KeyboardInput {
   }
 
   public void keyPressed(KeyEvent keyEvent) {
-    int keyCode = keyEvent.getKey().getCode();
+    int keyCode = keyEvent.getKeyCode();
 
     if (keyCode >= 0 && keyCode < KEY_COUNT) {
       keysDown[keyCode] = true;
@@ -53,7 +53,7 @@ public class KeyboardInput {
   }
 
   public void keyReleased(KeyEvent keyEvent) {
-    int keyCode = keyEvent.getKey().getCode();
+    int keyCode = keyEvent.getKeyCode();
 
     if (keyCode >= 0 && keyCode < KEY_COUNT) {
       keysDown[keyCode] = false;
