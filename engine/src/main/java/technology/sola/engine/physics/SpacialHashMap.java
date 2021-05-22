@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class SpacialHashMap {
-  final int cellSize;
+  private final int cellSize;
   private final Map<Vector2D, List<Entity>> entityBuckets = new HashMap<>();
 
   /**
@@ -38,6 +38,10 @@ public class SpacialHashMap {
     entities.forEach(this::registerEntity);
   }
 
+  public int getCellSize() {
+    return cellSize;
+  }
+
   public List<Entity> getNearbyEntities(Entity entity) {
     return getBucketIdsForEntity(entity).stream()
       .map(this::getOrCreateBucket)
@@ -52,7 +56,7 @@ public class SpacialHashMap {
       });
   }
 
-  Iterator<Vector2D> entityBucketIterator() {
+  public Iterator<Vector2D> entityBucketIterator() {
     return entityBuckets.keySet().iterator();
   }
 

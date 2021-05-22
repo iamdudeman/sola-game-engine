@@ -44,6 +44,7 @@ public final class CollisionUtils {
             return calculateCircleVsCircle(entityA, entityB, circleA, circleB);
           default:
         }
+        break;
       default:
     }
 

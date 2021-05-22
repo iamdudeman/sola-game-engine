@@ -90,5 +90,4 @@ public class CollisionManifold {
 
     return Objects.hash(min, max);
   }
-
 }

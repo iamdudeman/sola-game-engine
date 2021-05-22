@@ -42,7 +42,7 @@ class SpacialHashMapTest {
     World world = createTestWorld();
     SpacialHashMap spacialHashMap = new SpacialHashMap(world.getEntitiesWithComponents(), 45);
 
-    assertEquals(45, spacialHashMap.cellSize);
+    assertEquals(45, spacialHashMap.getCellSize());
   }
 
   @Test
@@ -57,7 +57,7 @@ class SpacialHashMapTest {
     World world = createTestWorld();
     SpacialHashMap spacialHashMap = new SpacialHashMap(world.getEntitiesWithComponents());
 
-    assertEquals(40, spacialHashMap.cellSize);
+    assertEquals(40, spacialHashMap.getCellSize());
   }
 
   @Test

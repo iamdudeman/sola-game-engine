@@ -11,11 +11,6 @@ public class GameLoopEventListener implements EventListener<GameLoopEvent> {
   }
 
   @Override
-  public Class<GameLoopEvent> getEventClass() {
-    return GameLoopEvent.class;
-  }
-
-  @Override
   public void onEvent(GameLoopEvent event) {
     if (GameLoopEventType.STOP.equals(event.getMessage())) {
       gameLoop.stop();

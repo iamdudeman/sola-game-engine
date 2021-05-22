@@ -7,7 +7,6 @@ import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.event.CollisionManifoldEvent;
 
-// TODO subscribe logic needed to add to EventHub?
 public class GravitySystem extends AbstractEcsSystem implements EventListener<CollisionManifoldEvent> {
   public static final int ORDER = PhysicsSystem.ORDER - 1;
 
