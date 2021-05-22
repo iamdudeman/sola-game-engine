@@ -4,11 +4,11 @@ import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.physics.Material;
+import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.PositionComponent;
 import technology.sola.engine.physics.component.VelocityComponent;
-import technology.sola.engine.physics.system.*;
 
 import java.util.Random;
 
