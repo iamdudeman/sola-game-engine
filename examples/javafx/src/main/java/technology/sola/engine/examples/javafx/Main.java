@@ -1,7 +1,6 @@
 package technology.sola.engine.examples.javafx;
 
-import technology.sola.engine.examples.common.game.StressTestExample;
-import technology.sola.engine.examples.common.game.TestGame;
+import technology.sola.engine.examples.common.singlefile.StressTestExample;
 import technology.sola.engine.platform.javafx.SolaJavaFxPlatform;
 
 public class Main {

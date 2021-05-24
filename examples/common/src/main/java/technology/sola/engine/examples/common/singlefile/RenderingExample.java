@@ -1,17 +1,17 @@
-package technology.sola.engine.examples.common.game;
+package technology.sola.engine.examples.common.singlefile;
 
 import technology.sola.engine.core.AbstractSola;
+import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.World;
-import technology.sola.engine.examples.common.components.Position;
-import technology.sola.engine.examples.common.systems.TestSystem;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.physics.component.PositionComponent;
 
-public class TestGame extends AbstractSola {
+public class RenderingExample extends AbstractSola {
   private SolaImage solaImage;
 
-  public TestGame() {
+  public RenderingExample() {
     config(800, 600, 30, true);
   }
 
@@ -23,7 +23,8 @@ public class TestGame extends AbstractSola {
 
     World world = new World(1);
 
-    world.createEntity().addComponent(new Position());
+    world.createEntity()
+      .addComponent(new PositionComponent());
 
     ecsSystemContainer.setWorld(world);
     ecsSystemContainer.add(new TestSystem());
@@ -55,11 +56,29 @@ public class TestGame extends AbstractSola {
     renderer.fillRect(210, 530, 50, 50, new Color(150, 255, 0, 0));
     renderer.setRenderMode(RenderMode.NORMAL);
 
-    ecsSystemContainer.getWorld().getEntitiesWithComponents(Position.class)
+    ecsSystemContainer.getWorld().getEntitiesWithComponents(PositionComponent.class)
       .forEach(entity -> {
-        Position position = entity.getComponent(Position.class);
+        PositionComponent position = entity.getComponent(PositionComponent.class);
 
-        renderer.fillRect(position.x, position.y, 50, 50, Color.RED);
+        renderer.fillRect(position.getX(), position.getY(), 50, 50, Color.RED);
       });
+  }
+
+  private class TestSystem extends AbstractEcsSystem {
+    @Override
+    public void update(World world, float deltaTime) {
+      world.getEntitiesWithComponents(PositionComponent.class)
+        .forEach(entity -> {
+          PositionComponent position = entity.getComponent(PositionComponent.class);
+
+          position.setX(position.getX() + 1);
+          position.setY(position.getY() + 1);
+        });
+    }
+
+    @Override
+    public int getOrder() {
+      return 0;
+    }
   }
 }

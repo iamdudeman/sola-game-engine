@@ -1,4 +1,4 @@
-package technology.sola.engine.examples.common.game;
+package technology.sola.engine.examples.common.singlefile;
 
 import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.ecs.World;
@@ -13,7 +13,7 @@ import technology.sola.engine.physics.component.VelocityComponent;
 import java.util.Random;
 
 public class StressTestExample extends AbstractSola {
-  private static final int OBJECT_COUNT = 1337;
+  private static final int OBJECT_COUNT = 1600;
   private static final float CAMERA_SCALE = 1f;
   private static final float CIRCLE_RADIUS = 5f;
   private final Random random = new Random();
