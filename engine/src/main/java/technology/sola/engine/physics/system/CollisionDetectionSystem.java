@@ -52,6 +52,7 @@ public class CollisionDetectionSystem extends AbstractEcsSystem {
     Set<CollisionManifold> collisionEventsThisIteration = new HashSet<>();
     List<Entity> entities = world.getEntitiesWithComponents(ColliderComponent.class, PositionComponent.class);
 
+    // TODO consider some sort of clear method for SpacialHashMap
     spacialHashMap = spacialHashMapCellSize == null ? new SpacialHashMap(entities) : new SpacialHashMap(entities, spacialHashMapCellSize);
 
     for (Entity entityA : entities) {
