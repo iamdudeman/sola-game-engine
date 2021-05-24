@@ -1,7 +1,7 @@
 package technology.sola.engine.input;
 
 public enum Key {
-  SPACE_BAR(0x20, "Space"),
+  SPACE(0x20, "Space"),
 
   A(0x41, "A"),
   B(0x42, "B"),
