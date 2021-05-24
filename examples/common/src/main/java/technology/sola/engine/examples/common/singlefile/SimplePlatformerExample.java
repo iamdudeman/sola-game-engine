@@ -61,7 +61,7 @@ public class SimplePlatformerExample extends AbstractSola {
       .addComponent(ColliderComponent.rectangle(200, 75));
 
     world.createEntity()
-      .addComponent(new PositionComponent(400, 400))
+      .addComponent(new PositionComponent(400, 430))
       .addComponent(new VelocityComponent())
       .addComponent(new MovingPlatformComponent())
       .addComponent(ColliderComponent.rectangle(100, 35));
@@ -93,7 +93,7 @@ public class SimplePlatformerExample extends AbstractSola {
 
          movingPlatformComponent.counter += deltaTime;
 
-         if (movingPlatformComponent.counter >= 8) {
+         if (movingPlatformComponent.counter >= 10) {
            movingPlatformComponent.counter = 0;
            movingPlatformComponent.isGoingUp = !movingPlatformComponent.isGoingUp;
          }
