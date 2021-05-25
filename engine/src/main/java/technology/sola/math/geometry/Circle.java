@@ -1,6 +1,5 @@
 package technology.sola.math.geometry;
 
-import technology.sola.engine.annotation.NotNull;
 import technology.sola.math.linear.Vector2D;
 
 /**
@@ -16,7 +15,7 @@ public class Circle {
    * @param radius  the radius of the circle, greater than 0
    * @param center  the center point of the circle
    */
-  public Circle(float radius, @NotNull Vector2D center) {
+  public Circle(float radius, Vector2D center) {
     if (radius <= 0) {
       throw new IllegalArgumentException("radius must be a positive number");
     }

@@ -1,7 +1,5 @@
 package technology.sola.math.linear;
 
-import technology.sola.engine.annotation.NotNull;
-
 import java.util.Objects;
 
 /**
@@ -43,7 +41,7 @@ public class Vector2D {
    * @param vector2D  the vector to add to this vector, not null
    * @return a new vector with the result of this + vector2D
    */
-  public Vector2D add(@NotNull Vector2D vector2D) {
+  public Vector2D add(Vector2D vector2D) {
     return new Vector2D(this.x + vector2D.x, this.y + vector2D.y);
   }
 
@@ -53,7 +51,7 @@ public class Vector2D {
    * @param vector2D  the vector to subtract the value of, not null
    * @return a new vector with the result of this - vector2D
    */
-  public Vector2D subtract(@NotNull Vector2D vector2D) {
+  public Vector2D subtract(Vector2D vector2D) {
     return new Vector2D(this.x - vector2D.x, this.y - vector2D.y);
   }
 
@@ -91,7 +89,7 @@ public class Vector2D {
    * @param vector2D  the vector to get the distance between
    * @return the distance between the vectors
    */
-  public float distance(@NotNull Vector2D vector2D) {
+  public float distance(Vector2D vector2D) {
     return this.subtract(vector2D).magnitude();
   }
 
@@ -114,7 +112,7 @@ public class Vector2D {
    * @param vector2D  the vector to calculate the dot product with
    * @return the calculated dot product as a new vector object
    */
-  public float dot(@NotNull Vector2D vector2D) {
+  public float dot(Vector2D vector2D) {
     return this.x * vector2D.x + this.y * vector2D.y;
   }
 

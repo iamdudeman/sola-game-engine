@@ -1,7 +1,5 @@
 package technology.sola.math.linear;
 
-import technology.sola.engine.annotation.NotNull;
-
 /**
  * The Matrix2D class is an implementation of the linear algebra matrix.
  */
@@ -102,11 +100,11 @@ public class Matrix2D {
    * @param vector2D  the {@code Vector2D} to apply this matrix to
    * @return a new {@code Vector2D} with the matrix transformation applied
    */
-  public Vector2D multiply(@NotNull Vector2D vector2D) {
+  public Vector2D multiply(Vector2D vector2D) {
     return new Vector2D(horizontalVector.dot(vector2D), verticalVector.dot(vector2D));
   }
 
-  private Matrix2D(@NotNull Vector2D horizontalAxis, @NotNull Vector2D verticalAxis) {
+  private Matrix2D(Vector2D horizontalAxis, Vector2D verticalAxis) {
     this.horizontalVector = horizontalAxis;
     this.verticalVector = verticalAxis;
   }

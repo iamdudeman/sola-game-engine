@@ -13,6 +13,7 @@ repositories {
 
 dependencies {
   api(project(":platform:swing"))
+  api(project(":examples:common"))
 }
 
 tasks.withType<Jar>() {
