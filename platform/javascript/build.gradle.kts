@@ -12,7 +12,7 @@ java {
 }
 
 checkstyle {
-  configFile = file("../checkstyle.xml")
+  configFile = file("../../checkstyle.xml")
 }
 
 repositories {

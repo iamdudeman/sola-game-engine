@@ -4,19 +4,24 @@ import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.input.KeyEvent;
-import technology.sola.engine.input.KeyboardInput;
 
 public abstract class AbstractSolaPlatform {
   protected AssetLoader assetLoader;
   protected EventHub eventHub;
-  private KeyboardInput keyboardInput;
+  protected int rendererWidth;
+  protected int rendererHeight;
+  private AbstractSola abstractSola;
 
   public void launch(AbstractSola abstractSola) {
+    this.abstractSola = abstractSola;
     this.assetLoader = abstractSola.assetLoader;
     this.eventHub = abstractSola.eventHub;
-    this.keyboardInput = abstractSola.keyboardInput;
     abstractSola.setSolaPlatform(this);
     abstractSola.start();
+
+    // TODO maybe a protected getter instead
+    this.rendererWidth = abstractSola.rendererWidth;
+    this.rendererHeight = abstractSola.rendererHeight;
   }
 
   protected abstract void init();
@@ -26,10 +31,10 @@ public abstract class AbstractSolaPlatform {
   protected abstract void render(Renderer renderer);
 
   protected void onKeyPressed(KeyEvent keyEvent) {
-    keyboardInput.keyPressed(keyEvent);
+    abstractSola.keyboardInput.keyPressed(keyEvent);
   }
 
   protected void onKeyReleased(KeyEvent keyEvent) {
-    keyboardInput.keyReleased(keyEvent);
+    abstractSola.keyboardInput.keyReleased(keyEvent);
   }
 }
