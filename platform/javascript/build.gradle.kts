@@ -40,7 +40,7 @@ buildscript {
 
 
 teavm {
-  mainClass = "technology.sola.engine.platform.js.Main"
+  mainClass = "technology.sola.engine.platform.js.TestMain"
   sourceDirectory = file("src")
   targetDirectory = file("build")
   targetFileName = "sola.js"
