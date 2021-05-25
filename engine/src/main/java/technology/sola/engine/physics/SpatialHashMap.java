@@ -8,17 +8,17 @@ import technology.sola.math.linear.Vector2D;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class SpacialHashMap {
+public class SpatialHashMap {
   private final int cellSize;
   private final float inverseCellSize;
   private final Map<Vector2D, List<Entity>> entityBuckets = new HashMap<>();
 
   /**
-   * Creates a SpacialHashMap with cellSize set to twice the max width/height of the largest {@link Entity}.
+   * Creates a SpatialHashMap with cellSize set to twice the max width/height of the largest {@link Entity}.
    *
-   * @param entities  the list of entities being tracked by the SpacialHashMap
+   * @param entities  the list of entities being tracked by the SpatialHashMap
    */
-  public SpacialHashMap(List<Entity> entities) {
+  public SpatialHashMap(List<Entity> entities) {
     this.cellSize = calculateAppropriateCellSizeForEntities(entities);
     this.inverseCellSize = 1f / this.cellSize;
 
@@ -26,12 +26,12 @@ public class SpacialHashMap {
   }
 
   /**
-   * Creates a SpacialHashMap with desired cell size. Ensure that the cellSize is greater than the max width or height of the largest {@link Entity}.
+   * Creates a SpatialHashMap with desired cell size. Ensure that the cellSize is greater than the max width or height of the largest {@link Entity}.
    *
-   * @param entities  the list of entities being tracked by the SpacialHashMap
-   * @param cellSize  the cell size of the SpacialHashMap
+   * @param entities  the list of entities being tracked by the SpatialHashMap
+   * @param cellSize  the cell size of the SpatialHashMap
    */
-  public SpacialHashMap(List<Entity> entities, int cellSize) {
+  public SpatialHashMap(List<Entity> entities, int cellSize) {
     int minimumCellSize = calculateMinSizeForEntities(entities);
 
     if (cellSize < minimumCellSize) throw new IllegalArgumentException("Cell size must be greater than largest object [" + minimumCellSize + "]");

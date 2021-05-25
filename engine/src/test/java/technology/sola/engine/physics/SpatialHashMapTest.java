@@ -13,10 +13,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class SpacialHashMapTest {
+class SpatialHashMapTest {
   @Test
   void whenNoEntitiesWithCollider_withCellSizeSpecified_shouldNotThrowException() {
-    assertDoesNotThrow(() -> new SpacialHashMap(Collections.emptyList(), 500));
+    assertDoesNotThrow(() -> new SpatialHashMap(Collections.emptyList(), 500));
   }
 
   @Test
@@ -25,7 +25,7 @@ class SpacialHashMapTest {
     world.createEntity().addComponent(new PositionComponent());
     world.createEntity().addComponent(new PositionComponent());
 
-    assertDoesNotThrow(() -> new SpacialHashMap(world.getEntitiesWithComponents()));
+    assertDoesNotThrow(() -> new SpatialHashMap(world.getEntitiesWithComponents()));
   }
 
   @Test
@@ -34,63 +34,63 @@ class SpacialHashMapTest {
     world.createEntity().addComponent(ColliderComponent.rectangle(10, 10));
     world.createEntity().addComponent(ColliderComponent.rectangle(10, 10));
 
-    assertDoesNotThrow(() -> new SpacialHashMap(world.getEntitiesWithComponents()));
+    assertDoesNotThrow(() -> new SpatialHashMap(world.getEntitiesWithComponents()));
   }
 
   @Test
   void whenCreatedWithCellSize_shouldUsePassedValue() {
     World world = createTestWorld();
-    SpacialHashMap spacialHashMap = new SpacialHashMap(world.getEntitiesWithComponents(), 45);
+    SpatialHashMap spatialHashMap = new SpatialHashMap(world.getEntitiesWithComponents(), 45);
 
-    assertEquals(45, spacialHashMap.getCellSize());
+    assertEquals(45, spatialHashMap.getCellSize());
   }
 
   @Test
   void whenCreatedWithCellSize_shouldNowAllowSmallerThanLargestEntity() {
     World world = createTestWorld();
 
-    assertThrows(IllegalArgumentException.class, () -> new SpacialHashMap(world.getEntitiesWithComponents(), 19));
+    assertThrows(IllegalArgumentException.class, () -> new SpatialHashMap(world.getEntitiesWithComponents(), 19));
   }
 
   @Test
   void whenCreatedWithoutCellSize_shouldUseLargestEntityWidthOrHeight() {
     World world = createTestWorld();
-    SpacialHashMap spacialHashMap = new SpacialHashMap(world.getEntitiesWithComponents());
+    SpatialHashMap spatialHashMap = new SpatialHashMap(world.getEntitiesWithComponents());
 
-    assertEquals(40, spacialHashMap.getCellSize());
+    assertEquals(40, spatialHashMap.getCellSize());
   }
 
   @Test
   void whenEntitiesRegistered_shouldProperlyPlaceInBuckets() {
     World world = createTestWorld();
     List<Entity> entities = world.getEntitiesWithComponents();
-    SpacialHashMap spacialHashMap = new SpacialHashMap(entities);
+    SpatialHashMap spatialHashMap = new SpatialHashMap(entities);
 
-    List<Vector2D> points = spacialHashMap.getBucketIdsForEntity(entities.get(0));
+    List<Vector2D> points = spatialHashMap.getBucketIdsForEntity(entities.get(0));
     assertEquals(new Vector2D(0, 0), points.get(0));
     assertEquals(new Vector2D(0, 0), points.get(1));
     assertEquals(new Vector2D(0, 0), points.get(2));
     assertEquals(new Vector2D(0, 0), points.get(3));
 
-    points = spacialHashMap.getBucketIdsForEntity(entities.get(1));
+    points = spatialHashMap.getBucketIdsForEntity(entities.get(1));
     assertEquals(new Vector2D(0, 0), points.get(0));
     assertEquals(new Vector2D(1, 0), points.get(1));
     assertEquals(new Vector2D(0, 1), points.get(2));
     assertEquals(new Vector2D(1, 1), points.get(3));
 
-    points = spacialHashMap.getBucketIdsForEntity(entities.get(2));
+    points = spatialHashMap.getBucketIdsForEntity(entities.get(2));
     assertEquals(new Vector2D(1, 1), points.get(0));
     assertEquals(new Vector2D(1, 1), points.get(1));
     assertEquals(new Vector2D(1, 1), points.get(2));
     assertEquals(new Vector2D(1, 1), points.get(3));
 
-    points = spacialHashMap.getBucketIdsForEntity(entities.get(3));
+    points = spatialHashMap.getBucketIdsForEntity(entities.get(3));
     assertEquals(new Vector2D(0, 0), points.get(0));
     assertEquals(new Vector2D(0, 0), points.get(1));
     assertEquals(new Vector2D(0, 1), points.get(2));
     assertEquals(new Vector2D(0, 1), points.get(3));
 
-    points = spacialHashMap.getBucketIdsForEntity(entities.get(4));
+    points = spatialHashMap.getBucketIdsForEntity(entities.get(4));
     assertEquals(new Vector2D(1, 0), points.get(0));
     assertEquals(new Vector2D(1, 0), points.get(1));
     assertEquals(new Vector2D(1, 1), points.get(2));
@@ -101,27 +101,27 @@ class SpacialHashMapTest {
   void whenEntitiesRegistered_shouldHaveProperNearbyEntities() {
     World world = createTestWorld();
     List<Entity> entities = world.getEntitiesWithComponents();
-    SpacialHashMap spacialHashMap = new SpacialHashMap(entities);
+    SpatialHashMap spatialHashMap = new SpatialHashMap(entities);
 
-    List<Entity> nearbyEntities = spacialHashMap.getNearbyEntities(entities.get(0));
+    List<Entity> nearbyEntities = spatialHashMap.getNearbyEntities(entities.get(0));
     assertTrue(nearbyEntities.contains(entities.get(1)));
     assertTrue(nearbyEntities.contains(entities.get(3)));
 
-    nearbyEntities = spacialHashMap.getNearbyEntities(entities.get(1));
+    nearbyEntities = spatialHashMap.getNearbyEntities(entities.get(1));
     assertTrue(nearbyEntities.contains(entities.get(0)));
     assertTrue(nearbyEntities.contains(entities.get(3)));
     assertTrue(nearbyEntities.contains(entities.get(4)));
 
-    nearbyEntities = spacialHashMap.getNearbyEntities(entities.get(2));
+    nearbyEntities = spatialHashMap.getNearbyEntities(entities.get(2));
     assertTrue(nearbyEntities.contains(entities.get(1)));
     assertTrue(nearbyEntities.contains(entities.get(4)));
 
 
-    nearbyEntities = spacialHashMap.getNearbyEntities(entities.get(3));
+    nearbyEntities = spatialHashMap.getNearbyEntities(entities.get(3));
     assertTrue(nearbyEntities.contains(entities.get(0)));
     assertTrue(nearbyEntities.contains(entities.get(1)));
 
-    nearbyEntities = spacialHashMap.getNearbyEntities(entities.get(4));
+    nearbyEntities = spatialHashMap.getNearbyEntities(entities.get(4));
     assertTrue(nearbyEntities.contains(entities.get(1)));
     assertTrue(nearbyEntities.contains(entities.get(2)));
   }

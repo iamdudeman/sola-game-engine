@@ -7,7 +7,7 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.CollisionUtils;
-import technology.sola.engine.physics.SpacialHashMap;
+import technology.sola.engine.physics.SpatialHashMap;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.PositionComponent;
 import technology.sola.engine.physics.event.CollisionManifoldEvent;
@@ -20,8 +20,8 @@ import java.util.function.Consumer;
 
 public class CollisionDetectionSystem extends AbstractEcsSystem {
   public static final int ORDER = PhysicsSystem.ORDER + 1;
-  private SpacialHashMap spacialHashMap;
-  private final Integer spacialHashMapCellSize;
+  private SpatialHashMap spatialHashMap;
+  private final Integer spatialHashMapCellSize;
   private Consumer<CollisionManifoldEvent> emitCollisionEvent = event -> { };
 
   /**
@@ -35,11 +35,11 @@ public class CollisionDetectionSystem extends AbstractEcsSystem {
   /**
    * Creates a CollisionDetectionSystem with custom spacial hash map cell sizing.
    *
-   * @param spacialHashMapCellSize  the cell size of the internal spacial hash map
+   * @param spatialHashMapCellSize  the cell size of the internal spacial hash map
    */
-  public CollisionDetectionSystem(Integer spacialHashMapCellSize) {
+  public CollisionDetectionSystem(Integer spatialHashMapCellSize) {
     // We want collision checks to happen after physics updates
-    this.spacialHashMapCellSize = spacialHashMapCellSize;
+    this.spatialHashMapCellSize = spatialHashMapCellSize;
   }
 
   @Override
@@ -52,14 +52,14 @@ public class CollisionDetectionSystem extends AbstractEcsSystem {
     Set<CollisionManifold> collisionEventsThisIteration = new HashSet<>();
     List<Entity> entities = world.getEntitiesWithComponents(ColliderComponent.class, PositionComponent.class);
 
-    // TODO consider some sort of clear method for SpacialHashMap
-    spacialHashMap = spacialHashMapCellSize == null ? new SpacialHashMap(entities) : new SpacialHashMap(entities, spacialHashMapCellSize);
+    // TODO consider some sort of clear method for SpatialHashMap
+    spatialHashMap = spatialHashMapCellSize == null ? new SpatialHashMap(entities) : new SpatialHashMap(entities, spatialHashMapCellSize);
 
     for (Entity entityA : entities) {
       PositionComponent positionA = entityA.getComponent(PositionComponent.class);
       ColliderComponent colliderA = entityA.getComponent(ColliderComponent.class);
 
-      for (Entity entityB : spacialHashMap.getNearbyEntities(entityA)) {
+      for (Entity entityB : spatialHashMap.getNearbyEntities(entityA)) {
         PositionComponent positionB = entityB.getComponent(PositionComponent.class);
         ColliderComponent colliderB = entityB.getComponent(ColliderComponent.class);
         CollisionManifold collisionManifoldEvent = CollisionUtils.calculateCollisionManifold(
@@ -82,13 +82,13 @@ public class CollisionDetectionSystem extends AbstractEcsSystem {
     this.emitCollisionEvent = emitCollisionEvent;
   }
 
-  public void debugRender(Renderer renderer, World world, Color colliderOutlineColor, Color spacialHashMapCellColor) {
-    int cellSize = spacialHashMap.getCellSize();
+  public void debugRender(Renderer renderer, World world, Color colliderOutlineColor, Color spatialHashMapCellColor) {
+    int cellSize = spatialHashMap.getCellSize();
 
-    spacialHashMap.entityBucketIterator().forEachRemaining(bucketVector -> {
+    spatialHashMap.entityBucketIterator().forEachRemaining(bucketVector -> {
       Vector2D topLeftPoint = bucketVector.scalar(cellSize);
 
-      renderer.drawRect(topLeftPoint.x, topLeftPoint.y, cellSize, cellSize, spacialHashMapCellColor);
+      renderer.drawRect(topLeftPoint.x, topLeftPoint.y, cellSize, cellSize, spatialHashMapCellColor);
     });
 
     world.getEntitiesWithComponents(ColliderComponent.class, PositionComponent.class)
