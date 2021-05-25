@@ -12,11 +12,10 @@ import technology.sola.engine.physics.event.CollisionManifoldEvent;
 import technology.sola.math.SolKanaMath;
 import technology.sola.math.linear.Vector2D;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-// TODO subscribe logic needed to add to EventHub?
 public class ImpulseCollisionResolutionSystem extends AbstractEcsSystem implements EventListener<CollisionManifoldEvent> {
   public static final int ORDER = CollisionDetectionSystem.ORDER + 1;
 
@@ -25,7 +24,7 @@ public class ImpulseCollisionResolutionSystem extends AbstractEcsSystem implemen
   /** Lower numbers cause less jittering but allow for deeper penetration */
   private final float linearProjectionPercentage;
   private final int iterations;
-  private List<CollisionManifold> events = new LinkedList<>();
+  private List<CollisionManifold> events = new ArrayList<>();
 
   /**
    * Creates an instance with recommended settings.
@@ -64,7 +63,7 @@ public class ImpulseCollisionResolutionSystem extends AbstractEcsSystem implemen
 
     adjustForSinking();
 
-    events = new LinkedList<>();
+    events = new ArrayList<>(events.size());
   }
 
   @Override

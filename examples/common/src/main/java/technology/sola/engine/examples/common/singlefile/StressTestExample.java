@@ -1,4 +1,4 @@
-package technology.sola.engine.examples.common.game;
+package technology.sola.engine.examples.common.singlefile;
 
 import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.ecs.World;

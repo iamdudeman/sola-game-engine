@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 public class SpacialHashMap {
   private final int cellSize;
+  private final float inverseCellSize;
   private final Map<Vector2D, List<Entity>> entityBuckets = new HashMap<>();
 
   /**
@@ -19,6 +20,7 @@ public class SpacialHashMap {
    */
   public SpacialHashMap(List<Entity> entities) {
     this.cellSize = calculateAppropriateCellSizeForEntities(entities);
+    this.inverseCellSize = 1f / this.cellSize;
 
     entities.forEach(this::registerEntity);
   }
@@ -35,6 +37,7 @@ public class SpacialHashMap {
     if (cellSize < minimumCellSize) throw new IllegalArgumentException("Cell size must be greater than largest object [" + minimumCellSize + "]");
 
     this.cellSize = cellSize;
+    this.inverseCellSize = 1f / this.cellSize;
     entities.forEach(this::registerEntity);
   }
 
@@ -89,7 +92,7 @@ public class SpacialHashMap {
   }
 
   private Vector2D getIdForPoint(float x, float y) {
-    return new Vector2D((float)Math.floor(x / cellSize), (float)Math.floor(y / cellSize));
+    return new Vector2D((float)Math.floor(x * inverseCellSize), (float)Math.floor(y * inverseCellSize));
   }
 
   private List<Entity> getOrCreateBucket(Vector2D bucketId) {

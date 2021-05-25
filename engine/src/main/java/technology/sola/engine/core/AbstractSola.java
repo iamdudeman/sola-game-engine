@@ -8,6 +8,7 @@ import technology.sola.engine.event.gameloop.GameLoopEventListener;
 import technology.sola.engine.ecs.EcsSystemContainer;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.input.KeyboardInput;
 
 public abstract class AbstractSola {
   private static final Logger logger = LoggerFactory.getLogger(AbstractSola.class);
@@ -16,27 +17,16 @@ public abstract class AbstractSola {
   protected EcsSystemContainer ecsSystemContainer;
   protected AssetLoader assetLoader;
   protected EventHub eventHub;
+  protected KeyboardInput keyboardInput;
 
   protected int rendererWidth;
   protected int rendererHeight;
   private AbstractSolaPlatform solaPlatform = new NoSolaPlatform();
 
-  void start() {
-    logger.info("----------Sola is starting----------");
-    logger.info("Using platform [{}]", solaPlatform.getClass().getName());
-    init();
-
-    solaPlatform.start();
-    new Thread(gameLoop).start();
-  }
-
-  void setSolaPlatform(AbstractSolaPlatform solaPlatform) {
-    this.solaPlatform = solaPlatform;
-  }
-
   protected abstract void onInit();
 
   protected void onUpdate(float deltaTime) {
+    keyboardInput.updateStatusOfKeys();
     ecsSystemContainer.update(deltaTime);
   }
 
@@ -49,10 +39,24 @@ public abstract class AbstractSola {
     assetLoader = new AssetLoader();
     ecsSystemContainer = new EcsSystemContainer();
     eventHub = new EventHub();
+    keyboardInput = new KeyboardInput();
     renderer = new Renderer(rendererWidth, rendererHeight);
     gameLoop = new GameLoop(this::onUpdate, this::render, targetUpdatePerSecond, isRestingAllowed);
 
     eventHub.add(new GameLoopEventListener(gameLoop), GameLoopEvent.class);
+  }
+
+  void start() {
+    logger.info("----------Sola is starting----------");
+    logger.info("Using platform [{}]", solaPlatform.getClass().getName());
+    init();
+
+    solaPlatform.start();
+    new Thread(gameLoop).start();
+  }
+
+  void setSolaPlatform(AbstractSolaPlatform solaPlatform) {
+    this.solaPlatform = solaPlatform;
   }
 
   private void init() {
