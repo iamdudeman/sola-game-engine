@@ -53,7 +53,9 @@ dependencies {
   implementation("org.teavm:teavm-jso-apis:0.6.1")
 
   // Logging
-  implementation("org.slf4j:slf4j-log4j12:1.7.30")
+//  implementation("org.slf4j:slf4j-log4j12:1.7.30")
+  implementation("org.teavm:teavm-extras-slf4j:0.6.1")
+
 
   // Test
   testImplementation("org.mockito:mockito-inline:3.0.0")

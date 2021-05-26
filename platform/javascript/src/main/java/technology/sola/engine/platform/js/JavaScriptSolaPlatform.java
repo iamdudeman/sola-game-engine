@@ -8,6 +8,8 @@ import technology.sola.engine.graphics.Renderer;
 // TODO keyboard input
 // TODO ability to load images
 // TODO figure out weird issue with slf4j Logger stuff
+// TODO kill game loop event somehow
+// TODO might need a custom game loop or something that uses request animation frame
 
 public class JavaScriptSolaPlatform extends AbstractSolaPlatform {
   public static final String ID_SOLA_ANCHOR = "sola-anchor";
@@ -28,23 +30,25 @@ public class JavaScriptSolaPlatform extends AbstractSolaPlatform {
       "}" +
       "context.putImageData(imageData, 0, 0);";
 
-  public void tempStart() {
-    rendererWidth = 800;
-    rendererHeight = 600;
-
-    Renderer renderer = new Renderer(rendererWidth, rendererHeight);
-
-    renderer.clear();
-    renderer.fillRect(50, 50, 100, 100, Color.BLUE);
-
-    init();
-
-    render(renderer);
-  }
+//  public void tempStart() {
+//    rendererWidth = 800;
+//    rendererHeight = 600;
+//
+//    Renderer renderer = new Renderer(rendererWidth, rendererHeight);
+//
+//    renderer.clear();
+//    renderer.fillRect(50, 50, 100, 100, Color.BLUE);
+//
+//    init();
+//
+//    render(renderer);
+//  }
 
   @Override
   protected void init() {
-    canvasInit(rendererWidth, rendererHeight);
+    // TODO figure out why this is always 0
+    consoleLog(this.rendererWidth + " " + this.rendererHeight);
+    canvasInit(this.rendererWidth, this.rendererHeight);
   }
 
   @Override
