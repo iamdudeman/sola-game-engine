@@ -1,6 +1,7 @@
 package technology.sola.engine.platform.js;
 
 import org.teavm.jso.JSBody;
+import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
@@ -31,12 +32,15 @@ public class JavaScriptSolaPlatform extends AbstractSolaPlatform {
       "}" +
       "context.putImageData(imageData, 0, 0);";
 
+  @Override
+  public void launch(AbstractSola abstractSola) {
+    canvasInit(abstractSola.getRendererWidth(), abstractSola.getRendererHeight());
+    super.launch(abstractSola);
+  }
 
   @Override
   protected void init() {
-    consoleLog("test");
-    // TODO figure out how to get Renderer width and height
-    canvasInit(800, 600);
+
   }
 
   @Override
@@ -61,7 +65,7 @@ public class JavaScriptSolaPlatform extends AbstractSolaPlatform {
       renderToCanvas(pixelDataForCanvas);
     });
 
-    // TODO delete this soon
+    // TODO delete this once GameLoop is properly implemented for browser (request animation frame)
     eventHub.emit(GameLoopEvent.STOP);
   }
 

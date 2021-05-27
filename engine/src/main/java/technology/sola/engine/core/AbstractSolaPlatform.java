@@ -8,8 +8,6 @@ import technology.sola.engine.input.KeyEvent;
 public abstract class AbstractSolaPlatform {
   protected AssetLoader assetLoader;
   protected EventHub eventHub;
-  protected int rendererWidth;
-  protected int rendererHeight;
   private AbstractSola abstractSola;
 
   public void launch(AbstractSola abstractSola) {
@@ -18,10 +16,6 @@ public abstract class AbstractSolaPlatform {
     this.eventHub = abstractSola.eventHub;
     abstractSola.setSolaPlatform(this);
     abstractSola.start();
-
-    // TODO maybe a protected getter instead
-    this.rendererWidth = abstractSola.rendererWidth;
-    this.rendererHeight = abstractSola.rendererHeight;
   }
 
   protected abstract void init();

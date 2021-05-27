@@ -23,6 +23,14 @@ public abstract class AbstractSola {
   protected int rendererHeight;
   private AbstractSolaPlatform solaPlatform = new NoSolaPlatform();
 
+  public int getRendererWidth() {
+    return rendererWidth;
+  }
+
+  public int getRendererHeight() {
+    return rendererHeight;
+  }
+
   protected abstract void onInit();
 
   protected void onUpdate(float deltaTime) {
