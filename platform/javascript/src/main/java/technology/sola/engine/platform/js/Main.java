@@ -1,108 +1,118 @@
 package technology.sola.engine.platform.js;
 
-import org.teavm.jso.JSBody;
-import org.teavm.jso.JSObject;
+import technology.sola.engine.core.AbstractSola;
+import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.RenderMode;
-import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.physics.Material;
+import technology.sola.engine.physics.SolaPhysics;
+import technology.sola.engine.physics.component.ColliderComponent;
+import technology.sola.engine.physics.component.DynamicBodyComponent;
+import technology.sola.engine.physics.component.PositionComponent;
+import technology.sola.engine.physics.component.VelocityComponent;
+
+import java.util.Random;
 
 public class Main {
   public static void main(String[] args) {
-    exportObject("rendererProvider", new RendererProviderImpl());
-    System.out.println("Sola loaded");
+    var sola = new StressTestExample();
+    var solaPlatform = new JavaScriptSolaPlatform();
+
+    solaPlatform.launch(sola);
   }
 
-  @JSBody(params = { "name", "jsObject" }, script = "window[name] = jsObject;")
-  private static native void exportObject(String name, JSObject jsObject);
-
-  private interface RendererProvider extends JSObject {
-    JsRenderer get(int width, int height);
-  }
-
-  public static class RendererProviderImpl implements RendererProvider {
-    @Override
-    public JsRenderer get(int width, int height) {
-      return new JsRendererImpl(width, height);
-    }
-  }
-
-  private interface JsRenderer extends JSObject {
-    void clear();
-
-    int[] render();
-
-    void setRenderMode(int renderMode);
-
-    void setPixel(int x, int y, int color);
-
-    void drawLine(float x, float y, float x2, float y2, int color);
-
-    void drawRect(float x, float y, float width, float height, int color);
-
-    void fillRect(float x, float y, float width, float height, int color);
-
-    void drawCircle(float x, float y, float radius, int color);
-
-    void fillCircle(float x, float y, float radius, int color);
-  }
-
-  public static class JsRendererImpl extends Renderer implements JsRenderer {
-    private int[] renderData;
-
-    public JsRendererImpl(int width, int height) {
-      super(width, height);
+  private static class TestGame extends AbstractSola {
+    public TestGame() {
+      // TODO figure out how to get this in platform
+      gameLoopProvider = BrowserGameLoopImpl::new;
+      config(600, 400, 30, false);
     }
 
     @Override
-    public int[] render() {
-      render(data -> this.renderData = data);
+    protected void onInit() {
 
-      int[] mod = new int[renderData.length * 4];
-      int index = 0;
-      for (int current : renderData) {
-        Color color = new Color(current);
+    }
 
-        mod[index++] = color.getRed();
-        mod[index++] = color.getGreen();
-        mod[index++] = color.getBlue();
-        mod[index++] = color.getAlpha();
+    @Override
+    protected void onRender() {
+      renderer.clear();
+      renderer.fillRect(50, 50, 100, 100, Color.BLUE);
+    }
+  }
+
+  // TODO temp copy of StressTestExample for testing in platform code
+  public static class StressTestExample extends AbstractSola {
+    private static final int OBJECT_COUNT = 100;
+    private static final float CAMERA_SCALE = 1f;
+    private static final float CIRCLE_RADIUS = 5f;
+    private final Random random = new Random();
+    private SolaPhysics solaPhysics;
+
+    public StressTestExample() {
+      // TODO figure out how to get this in platform
+      gameLoopProvider = BrowserGameLoopImpl::new;
+      config(800, 600, 30, false);
+    }
+
+    @Override
+    protected void onInit() {
+      solaPhysics = new SolaPhysics(eventHub);
+
+      solaPhysics.applyTo(ecsSystemContainer);
+
+      ecsSystemContainer.setWorld(buildWorld());
+    }
+
+    @Override
+    protected void onRender() {
+      renderer.clear();
+
+      solaPhysics.debugRender(renderer, ecsSystemContainer.getWorld(), Color.GREEN, Color.WHITE);
+    }
+
+    private World buildWorld() {
+      Material platformMaterial = new Material(0, 0.8f);
+      Material circleMaterial = new Material(1, 0.8f);
+      float zoomedWidth = rendererWidth / CAMERA_SCALE;
+      float zoomedHeight = rendererHeight / CAMERA_SCALE;
+      int bottomPlatformEntityCount = Math.round(zoomedWidth / CIRCLE_RADIUS) + 1;
+      int sidePlatformEntityCount = Math.round(zoomedHeight / CIRCLE_RADIUS) * 2 + 2;
+
+      World world = new World(OBJECT_COUNT + bottomPlatformEntityCount + sidePlatformEntityCount);
+
+      for (int i = 0; i < zoomedHeight; i += CIRCLE_RADIUS) {
+        world.createEntity()
+          .addComponent(new PositionComponent(0, i))
+          .addComponent(new DynamicBodyComponent(platformMaterial))
+          .addComponent(ColliderComponent.rectangle(CIRCLE_RADIUS, CIRCLE_RADIUS));
       }
 
-      return mod;
-    }
-
-    @Override
-    public void setRenderMode(int renderMode) {
-      if (renderMode == 1) {
-        setRenderMode(RenderMode.ALPHA);
-      } else {
-        setRenderMode(RenderMode.NORMAL);
+      for (int i = 0; i < zoomedHeight; i += CIRCLE_RADIUS) {
+        world.createEntity()
+          .addComponent(new PositionComponent(zoomedWidth - CIRCLE_RADIUS, i))
+          .addComponent(new DynamicBodyComponent(platformMaterial))
+          .addComponent(ColliderComponent.rectangle(CIRCLE_RADIUS, CIRCLE_RADIUS));
       }
-    }
 
-    @Override
-    public void drawLine(float x, float y, float x2, float y2, int color) {
-      drawLine(x, y, x2, y2, new Color(color));
-    }
+      for (int i = 0; i < zoomedWidth; i += CIRCLE_RADIUS) {
+        world.createEntity()
+          .addComponent(new PositionComponent(i, zoomedHeight - CIRCLE_RADIUS))
+          .addComponent(new DynamicBodyComponent(platformMaterial))
+          .addComponent(ColliderComponent.rectangle(CIRCLE_RADIUS, CIRCLE_RADIUS));
+      }
 
-    @Override
-    public void drawRect(float x, float y, float width, float height, int color) {
-      drawRect(x, y, width, height, new Color(color));
-    }
+      for (int i = 0; i < OBJECT_COUNT; i++) {
+        float x = random.nextFloat() * (zoomedWidth - CIRCLE_RADIUS) + CIRCLE_RADIUS;
+        float y = random.nextFloat() * (zoomedHeight - CIRCLE_RADIUS) + CIRCLE_RADIUS;
 
-    @Override
-    public void fillRect(float x, float y, float width, float height, int color) {
-      fillRect(x, y, width, height, new Color(color));
-    }
+        world.createEntity()
+          .addComponent(new PositionComponent(x, y))
+          .addComponent(new VelocityComponent())
+          .addComponent(new DynamicBodyComponent(circleMaterial))
+          .addComponent(ColliderComponent.circle(CIRCLE_RADIUS));
+      }
 
-    @Override
-    public void drawCircle(float x, float y, float radius, int color) {
-      drawCircle(x, y, radius, new Color(color));
-    }
-
-    @Override
-    public void fillCircle(float x, float y, float radius, int color) {
-      fillCircle(x, y, radius, new Color(color));
+      return world;
     }
   }
+
 }

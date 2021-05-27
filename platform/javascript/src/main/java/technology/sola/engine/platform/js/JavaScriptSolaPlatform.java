@@ -40,7 +40,8 @@ public class JavaScriptSolaPlatform extends AbstractSolaPlatform {
 
   @Override
   protected void init() {
-
+    // TODO something better than this
+    JsUtils.exportObject("solaStop", (JsRunnable) () -> eventHub.emit(GameLoopEvent.STOP));
   }
 
   @Override
@@ -64,9 +65,6 @@ public class JavaScriptSolaPlatform extends AbstractSolaPlatform {
 
       renderToCanvas(pixelDataForCanvas);
     });
-
-    // TODO delete this once GameLoop is properly implemented for browser (request animation frame)
-    eventHub.emit(GameLoopEvent.STOP);
   }
 
   @JSBody(params = { "width", "height" }, script = INIT_SCRIPT)
@@ -74,7 +72,4 @@ public class JavaScriptSolaPlatform extends AbstractSolaPlatform {
 
   @JSBody(params = { "rendererData" }, script = RENDER_SCRIPT)
   private static native void renderToCanvas(int[] rendererData);
-
-  @JSBody(params = { "message" }, script = "console.log(message);")
-  private static native void consoleLog(String message);
 }

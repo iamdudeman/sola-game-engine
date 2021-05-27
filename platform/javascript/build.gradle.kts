@@ -29,22 +29,13 @@ buildscript {
   }
 }
 
-//tasks.withType<teavm> {
-//  mainClass = "temp.Main"
-//  sourceDirectory = file("src")
-//  targetDirectory = file("build/teavm")
-//  targetFileName = "java_lib.js"
-//
-//  targetType = "JAVASCRIPT"
-//}
-
-
 teavm {
-  mainClass = "technology.sola.engine.platform.js.TestMain"
+  mainClass = "technology.sola.engine.platform.js.Main"
   sourceDirectory = file("src")
   targetDirectory = file("build")
   targetFileName = "sola.js"
 
+  isMinifying = false
   targetType = org.teavm.tooling.TeaVMTargetType.JAVASCRIPT
 }
 

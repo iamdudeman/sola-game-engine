@@ -18,6 +18,7 @@ public abstract class AbstractSola {
   protected AssetLoader assetLoader;
   protected EventHub eventHub;
   protected KeyboardInput keyboardInput;
+  protected GameLoopProvider gameLoopProvider = GameLoopImpl::new;
 
   protected int rendererWidth;
   protected int rendererHeight;
@@ -49,7 +50,7 @@ public abstract class AbstractSola {
     eventHub = new EventHub();
     keyboardInput = new KeyboardInput();
     renderer = new Renderer(rendererWidth, rendererHeight);
-    gameLoop = new GameLoop(this::onUpdate, this::render, targetUpdatePerSecond, isRestingAllowed);
+    gameLoop = gameLoopProvider.get(this::onUpdate, this::render, targetUpdatePerSecond, isRestingAllowed);
 
     eventHub.add(new GameLoopEventListener(gameLoop), GameLoopEvent.class);
   }
