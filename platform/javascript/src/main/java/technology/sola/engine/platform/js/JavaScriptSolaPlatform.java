@@ -1,8 +1,8 @@
 package technology.sola.engine.platform.js;
 
 import org.teavm.jso.JSBody;
-import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.core.AbstractSolaPlatform;
+import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 
@@ -34,10 +34,9 @@ public class JavaScriptSolaPlatform extends AbstractSolaPlatform {
 
   @Override
   protected void init() {
-    // TODO figure out why this is always 0
-    consoleLog(this.rendererWidth + " " + this.rendererHeight);
     consoleLog("test");
-//    canvasInit(this.rendererWidth, this.rendererHeight);
+    // TODO figure out how to get Renderer width and height
+    canvasInit(800, 600);
   }
 
   @Override
@@ -59,12 +58,11 @@ public class JavaScriptSolaPlatform extends AbstractSolaPlatform {
         pixelDataForCanvas[index++] = color.getAlpha();
       }
 
-      // TODO reenable this later
-      // renderToCanvas(pixelDataForCanvas);
+      renderToCanvas(pixelDataForCanvas);
     });
 
-    // TODO delete this
-    throw new RuntimeException("hard exit of loop XD");
+    // TODO delete this soon
+    eventHub.emit(GameLoopEvent.STOP);
   }
 
   @JSBody(params = { "width", "height" }, script = INIT_SCRIPT)
