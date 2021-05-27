@@ -1,17 +1,14 @@
 package technology.sola.engine.platform.js;
 
 import technology.sola.engine.core.AbstractSola;
-import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.graphics.Color;
 
 public class TestMain {
   public static void main(String[] args) {
-    AbstractSola abstractSola = new TestGame();
-    AbstractSolaPlatform abstractSolaPlatform = new JavaScriptSolaPlatform();
+    var sola = new TestGame();
+    var solaPlatform = new JavaScriptSolaPlatform();
 
-    //  javaScriptSolaPlatform.tempStart();
-
-    abstractSolaPlatform.launch(abstractSola);
+    solaPlatform.launch(sola);
   }
 
   private static class TestGame extends AbstractSola {

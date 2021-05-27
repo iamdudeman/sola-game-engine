@@ -1,6 +1,7 @@
 package technology.sola.engine.platform.js;
 
 import org.teavm.jso.JSBody;
+import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
@@ -30,25 +31,13 @@ public class JavaScriptSolaPlatform extends AbstractSolaPlatform {
       "}" +
       "context.putImageData(imageData, 0, 0);";
 
-//  public void tempStart() {
-//    rendererWidth = 800;
-//    rendererHeight = 600;
-//
-//    Renderer renderer = new Renderer(rendererWidth, rendererHeight);
-//
-//    renderer.clear();
-//    renderer.fillRect(50, 50, 100, 100, Color.BLUE);
-//
-//    init();
-//
-//    render(renderer);
-//  }
 
   @Override
   protected void init() {
     // TODO figure out why this is always 0
     consoleLog(this.rendererWidth + " " + this.rendererHeight);
-    canvasInit(this.rendererWidth, this.rendererHeight);
+    consoleLog("test");
+//    canvasInit(this.rendererWidth, this.rendererHeight);
   }
 
   @Override
@@ -70,8 +59,12 @@ public class JavaScriptSolaPlatform extends AbstractSolaPlatform {
         pixelDataForCanvas[index++] = color.getAlpha();
       }
 
-      renderToCanvas(pixelDataForCanvas);
+      // TODO reenable this later
+      // renderToCanvas(pixelDataForCanvas);
     });
+
+    // TODO delete this
+    throw new RuntimeException("hard exit of loop XD");
   }
 
   @JSBody(params = { "width", "height" }, script = INIT_SCRIPT)

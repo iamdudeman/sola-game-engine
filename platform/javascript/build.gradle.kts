@@ -96,3 +96,7 @@ tasks.withType<Jar> {
     configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
   })
 }
+
+tasks.withType<io.github.zebalu.gradle.teavm.TeavmCompileTask> {
+  dependsOn(":platform:javascript:assemble")
+}
