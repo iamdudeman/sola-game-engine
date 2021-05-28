@@ -5,7 +5,7 @@ import technology.sola.engine.platform.javafx.JavaFxSolaPlatform;
 
 public class Main {
   public static void main(String[] args) {
-    var sola = new StressTestExample();
+    var sola = new StressTestExample(1600);
     var solaPlatform = new JavaFxSolaPlatform("JavaFX Test");
 
     solaPlatform.launch(sola);
