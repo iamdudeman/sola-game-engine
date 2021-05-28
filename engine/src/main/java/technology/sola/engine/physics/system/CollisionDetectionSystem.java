@@ -83,7 +83,9 @@ public class CollisionDetectionSystem extends AbstractEcsSystem {
   }
 
   public void debugRender(Renderer renderer, World world, Color colliderOutlineColor, Color spatialHashMapCellColor) {
-    if (spatialHashMap == null) return;
+    if (spatialHashMap == null) {
+      return;
+    }
 
     int cellSize = spatialHashMap.getCellSize();
 

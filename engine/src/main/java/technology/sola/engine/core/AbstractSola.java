@@ -18,11 +18,12 @@ public abstract class AbstractSola {
   protected AssetLoader assetLoader;
   protected EventHub eventHub;
   protected KeyboardInput keyboardInput;
-  protected GameLoopProvider gameLoopProvider = GameLoopImpl::new;
 
   protected int rendererWidth;
   protected int rendererHeight;
   private AbstractSolaPlatform solaPlatform = new NoSolaPlatform();
+  private int targetUpdatePerSecond;
+  private boolean isRestingAllowed;
 
   public int getRendererWidth() {
     return rendererWidth;
@@ -44,15 +45,14 @@ public abstract class AbstractSola {
   protected void config(int rendererWidth, int rendererHeight, int targetUpdatePerSecond, boolean isRestingAllowed) {
     this.rendererWidth = rendererWidth;
     this.rendererHeight = rendererHeight;
+    this.targetUpdatePerSecond = targetUpdatePerSecond;
+    this.isRestingAllowed = isRestingAllowed;
 
     assetLoader = new AssetLoader();
     ecsSystemContainer = new EcsSystemContainer();
     eventHub = new EventHub();
     keyboardInput = new KeyboardInput();
     renderer = new Renderer(rendererWidth, rendererHeight);
-    gameLoop = gameLoopProvider.get(this::onUpdate, this::render, targetUpdatePerSecond, isRestingAllowed);
-
-    eventHub.add(new GameLoopEventListener(gameLoop), GameLoopEvent.class);
   }
 
   void start() {
@@ -69,6 +69,10 @@ public abstract class AbstractSola {
   }
 
   private void init() {
+    gameLoop = solaPlatform.getGameLoopProvider().get(this::onUpdate, this::render, targetUpdatePerSecond, isRestingAllowed);
+
+    eventHub.add(new GameLoopEventListener(gameLoop), GameLoopEvent.class);
+
     solaPlatform.init();
     onInit();
   }

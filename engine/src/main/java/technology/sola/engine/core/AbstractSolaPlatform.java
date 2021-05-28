@@ -24,6 +24,10 @@ public abstract class AbstractSolaPlatform {
 
   protected abstract void render(Renderer renderer);
 
+  protected GameLoopProvider getGameLoopProvider() {
+    return GameLoopImpl::new;
+  }
+
   protected void onKeyPressed(KeyEvent keyEvent) {
     abstractSola.keyboardInput.keyPressed(keyEvent);
   }

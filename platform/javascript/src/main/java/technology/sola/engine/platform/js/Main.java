@@ -22,8 +22,6 @@ public class Main {
 
   private static class TestGame extends AbstractSola {
     public TestGame() {
-      // TODO figure out how to get this in platform
-      gameLoopProvider = BrowserGameLoopImpl::new;
       config(600, 400, 30, false);
     }
 
@@ -48,8 +46,6 @@ public class Main {
     private SolaPhysics solaPhysics;
 
     public StressTestExample() {
-      // TODO figure out how to get this in platform
-      gameLoopProvider = BrowserGameLoopImpl::new;
       config(800, 600, 30, false);
     }
 
@@ -74,30 +70,31 @@ public class Main {
       Material circleMaterial = new Material(1, 0.8f);
       float zoomedWidth = rendererWidth / CAMERA_SCALE;
       float zoomedHeight = rendererHeight / CAMERA_SCALE;
-      int bottomPlatformEntityCount = Math.round(zoomedWidth / CIRCLE_RADIUS) + 1;
-      int sidePlatformEntityCount = Math.round(zoomedHeight / CIRCLE_RADIUS) * 2 + 2;
+      float squareSide = CIRCLE_RADIUS * 2;
+      int bottomPlatformEntityCount = Math.round(zoomedWidth / squareSide) + 1;
+      int sidePlatformEntityCount = Math.round(zoomedHeight / squareSide) * 2 + 2;
 
       World world = new World(OBJECT_COUNT + bottomPlatformEntityCount + sidePlatformEntityCount);
 
-      for (int i = 0; i < zoomedHeight; i += CIRCLE_RADIUS) {
+      for (int i = 0; i < zoomedHeight; i += squareSide) {
         world.createEntity()
           .addComponent(new PositionComponent(0, i))
           .addComponent(new DynamicBodyComponent(platformMaterial))
-          .addComponent(ColliderComponent.rectangle(CIRCLE_RADIUS, CIRCLE_RADIUS));
+          .addComponent(ColliderComponent.rectangle(squareSide, squareSide));
       }
 
-      for (int i = 0; i < zoomedHeight; i += CIRCLE_RADIUS) {
+      for (int i = 0; i < zoomedHeight; i += squareSide) {
         world.createEntity()
-          .addComponent(new PositionComponent(zoomedWidth - CIRCLE_RADIUS, i))
+          .addComponent(new PositionComponent(zoomedWidth - squareSide, i))
           .addComponent(new DynamicBodyComponent(platformMaterial))
-          .addComponent(ColliderComponent.rectangle(CIRCLE_RADIUS, CIRCLE_RADIUS));
+          .addComponent(ColliderComponent.rectangle(squareSide, squareSide));
       }
 
-      for (int i = 0; i < zoomedWidth; i += CIRCLE_RADIUS) {
+      for (int i = 0; i < zoomedWidth; i += squareSide) {
         world.createEntity()
-          .addComponent(new PositionComponent(i, zoomedHeight - CIRCLE_RADIUS))
+          .addComponent(new PositionComponent(i, zoomedHeight - squareSide))
           .addComponent(new DynamicBodyComponent(platformMaterial))
-          .addComponent(ColliderComponent.rectangle(CIRCLE_RADIUS, CIRCLE_RADIUS));
+          .addComponent(ColliderComponent.rectangle(squareSide, squareSide));
       }
 
       for (int i = 0; i < OBJECT_COUNT; i++) {
@@ -114,5 +111,4 @@ public class Main {
       return world;
     }
   }
-
 }

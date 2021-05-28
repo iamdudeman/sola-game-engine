@@ -3,6 +3,7 @@ package technology.sola.engine.platform.js;
 import org.teavm.jso.JSBody;
 import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.core.AbstractSolaPlatform;
+import technology.sola.engine.core.GameLoopProvider;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
@@ -65,6 +66,11 @@ public class JavaScriptSolaPlatform extends AbstractSolaPlatform {
 
       renderToCanvas(pixelDataForCanvas);
     });
+  }
+
+  @Override
+  protected GameLoopProvider getGameLoopProvider() {
+    return BrowserGameLoopImpl::new;
   }
 
   @JSBody(params = { "width", "height" }, script = INIT_SCRIPT)
