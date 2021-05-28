@@ -18,8 +18,8 @@ import java.util.Random;
 
 public class Main {
   public static void main(String[] args) {
-    var sola = new TestGame();
-//    var sola = new StressTestExample();
+//    var sola = new TestGame();
+    var sola = new StressTestExample();
 //    var sola = new SimplePlatformerExample();
     var solaPlatform = new BrowserSolaPlatform();
 
@@ -45,7 +45,7 @@ public class Main {
 
   // TODO temp copy for quick testing in platform code
   public static class StressTestExample extends AbstractSola {
-    private static final int OBJECT_COUNT = 100;
+    private static final int OBJECT_COUNT = 500;
     private static final float CAMERA_SCALE = 1f;
     private static final float CIRCLE_RADIUS = 5f;
     private final Random random = new Random();

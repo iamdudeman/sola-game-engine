@@ -13,12 +13,9 @@ public class JsCanvasUtils {
       "document.getElementById('" + ID_SOLA_ANCHOR + "').appendChild(canvasEle);";
 
   private static final String RENDER_SCRIPT =
-    "var canvas = document.getElementById('" + ID_SOLA_CANVAS + "');" +
-      "var context = canvas.getContext('2d');" +
-      "var imageData = context.createImageData(canvas.width, canvas.height);" +
-      "for (var i = 0; i < imageData.data.length; i++) {" +
-      "  imageData.data[i] = rendererData[i];" +
-      "}" +
+    "window.solaCanvas = window.solaCanvas || document.getElementById('" + ID_SOLA_CANVAS + "');" +
+      "var context = window.solaCanvas.getContext('2d');" +
+      "var imageData = new ImageData(Uint8ClampedArray.from(rendererData), window.solaCanvas.width, window.solaCanvas.height);" +
       "context.putImageData(imageData, 0, 0);";
 
   @JSBody(params = { "width", "height" }, script = INIT_SCRIPT)
