@@ -1,18 +1,18 @@
 package technology.sola.engine.platform.browser;
 
 import org.teavm.jso.JSBody;
+import org.teavm.jso.JSFunctor;
+import org.teavm.jso.JSObject;
 import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.core.GameLoopProvider;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.input.KeyEvent;
 
-// TODO keyboard input
 // TODO ability to load images
-// TODO figure out weird issue with slf4j Logger stuff
-// TODO kill game loop event somehow
-// TODO might need a custom game loop or something that uses request animation frame
+// TODO figure how how to render pixel array faster
 
 public class BrowserSolaPlatform extends AbstractSolaPlatform {
   public static final String ID_SOLA_ANCHOR = "sola-anchor";
@@ -33,9 +33,14 @@ public class BrowserSolaPlatform extends AbstractSolaPlatform {
       "}" +
       "context.putImageData(imageData, 0, 0);";
 
+  private static final String KEY_EVENT_SCRIPT =
+    "window.addEventListener(eventName, function(event) { callback(event.keyCode); }, false);";
+
   @Override
   public void launch(AbstractSola abstractSola) {
     canvasInit(abstractSola.getRendererWidth(), abstractSola.getRendererHeight());
+    keyEventListener("keydown", new KeyPressEventCallback());
+    keyEventListener("keyup", new KeyReleaseEventCallback());
     super.launch(abstractSola);
   }
 
@@ -78,4 +83,28 @@ public class BrowserSolaPlatform extends AbstractSolaPlatform {
 
   @JSBody(params = { "rendererData" }, script = RENDER_SCRIPT)
   private static native void renderToCanvas(int[] rendererData);
+
+  @JSBody(params = { "eventName", "callback" }, script = KEY_EVENT_SCRIPT)
+  private static native void keyEventListener(String eventName, JsKeyEventCallback callback);
+
+  @JSFunctor
+  private interface JsKeyEventCallback extends JSObject {
+    void call(int keyCode);
+  }
+
+  private class KeyPressEventCallback implements JsKeyEventCallback {
+    @Override
+    public void call(int keyCode) {
+      JsUtils.consoleLog("test " + keyCode);
+      onKeyPressed(new KeyEvent(keyCode));
+    }
+  }
+
+  private class KeyReleaseEventCallback implements JsKeyEventCallback {
+    @Override
+    public void call(int keyCode) {
+      JsUtils.consoleLog("test " + keyCode);
+      onKeyReleased(new KeyEvent(keyCode));
+    }
+  }
 }
