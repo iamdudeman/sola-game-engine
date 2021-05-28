@@ -1,6 +1,5 @@
 plugins {
   id("java-library")
-  id("io.github.zebalu.teavm-gradle-plugin") version "1.0.0"
   checkstyle
   jacoco
 }
@@ -19,34 +18,12 @@ repositories {
   mavenCentral()
 }
 
-buildscript {
-  repositories {
-    jcenter()
-  }
-
-  dependencies {
-    classpath("io.github.zebalu:teavm-gradle-plugin:+")
-  }
-}
-
-teavm {
-  mainClass = "technology.sola.engine.platform.browser.Main"
-  sourceDirectory = file("src")
-  targetDirectory = file("build")
-  targetFileName = "sola.js"
-
-  isMinifying = false
-  targetType = org.teavm.tooling.TeaVMTargetType.JAVASCRIPT
-}
-
 dependencies {
   api(project(":engine"))
   implementation("org.teavm:teavm-jso-apis:0.6.1")
 
   // Logging
-//  implementation("org.slf4j:slf4j-log4j12:1.7.30")
   implementation("org.teavm:teavm-extras-slf4j:0.6.1")
-
 
   // Test
   testImplementation("org.mockito:mockito-inline:3.0.0")
@@ -86,8 +63,4 @@ tasks.withType<Jar> {
   from({
     configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
   })
-}
-
-tasks.withType<io.github.zebalu.gradle.teavm.TeavmCompileTask> {
-  dependsOn(":platform:browser:assemble")
 }
