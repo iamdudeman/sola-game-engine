@@ -1,13 +1,13 @@
 package technology.sola.engine.examples.swing;
 
 import technology.sola.engine.examples.common.singlefile.RenderingExample;
-import technology.sola.engine.platform.swing.SolaSwingPlatform;
+import technology.sola.engine.platform.swing.SwingSolaPlatform;
 
 public class Main {
   public static void main(String[] args) {
-    var testGame = new RenderingExample();
-    var solaPlatform = new SolaSwingPlatform("Swing Test", 800, 600);
+    var sola = new RenderingExample();
+    var solaPlatform = new SwingSolaPlatform("Swing Test");
 
-    solaPlatform.launch(testGame);
+    solaPlatform.launch(sola);
   }
 }

@@ -8,7 +8,7 @@ import technology.sola.engine.input.KeyEvent;
 public abstract class AbstractSolaPlatform {
   protected AssetLoader assetLoader;
   protected EventHub eventHub;
-  private AbstractSola abstractSola;
+  protected AbstractSola abstractSola;
 
   public void launch(AbstractSola abstractSola) {
     this.abstractSola = abstractSola;

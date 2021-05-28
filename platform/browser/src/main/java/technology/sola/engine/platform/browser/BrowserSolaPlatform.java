@@ -16,15 +16,10 @@ import technology.sola.engine.platform.browser.javascript.JsUtils;
 
 public class BrowserSolaPlatform extends AbstractSolaPlatform {
   @Override
-  public void launch(AbstractSola abstractSola) {
+  protected void init() {
     JsCanvasUtils.canvasInit(abstractSola.getRendererWidth(), abstractSola.getRendererHeight());
     JsKeyboardUtils.keyEventListener("keydown", new KeyPressEventCallback());
     JsKeyboardUtils.keyEventListener("keyup", new KeyReleaseEventCallback());
-    super.launch(abstractSola);
-  }
-
-  @Override
-  protected void init() {
     // TODO something better than this
     JsUtils.exportObject("solaStop", (JsUtils.Function) () -> eventHub.emit(GameLoopEvent.STOP));
   }
