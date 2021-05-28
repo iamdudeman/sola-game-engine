@@ -19,6 +19,8 @@ import java.util.Random;
 public class Main {
   public static void main(String[] args) {
     var sola = new TestGame();
+//    var sola = new StressTestExample();
+//    var sola = new SimplePlatformerExample();
     var solaPlatform = new BrowserSolaPlatform();
 
     solaPlatform.launch(sola);

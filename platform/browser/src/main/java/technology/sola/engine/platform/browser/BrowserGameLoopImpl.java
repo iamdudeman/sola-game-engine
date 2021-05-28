@@ -1,10 +1,11 @@
 package technology.sola.engine.platform.browser;
 
 import technology.sola.engine.core.GameLoop;
+import technology.sola.engine.platform.browser.javascript.JsUtils;
 
 import java.util.function.Consumer;
 
-public class BrowserGameLoopImpl implements GameLoop, JsRunnable {
+public class BrowserGameLoopImpl implements GameLoop, JsUtils.Function {
   private final Consumer<Float> updateMethod;
   private final Runnable renderMethod;
   private final float deltaTime;
