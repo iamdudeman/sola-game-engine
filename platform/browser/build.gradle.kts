@@ -30,7 +30,7 @@ buildscript {
 }
 
 teavm {
-  mainClass = "technology.sola.engine.platform.js.Main"
+  mainClass = "technology.sola.engine.platform.browser.Main"
   sourceDirectory = file("src")
   targetDirectory = file("build")
   targetFileName = "sola.js"
@@ -89,5 +89,5 @@ tasks.withType<Jar> {
 }
 
 tasks.withType<io.github.zebalu.gradle.teavm.TeavmCompileTask> {
-  dependsOn(":platform:javascript:assemble")
+  dependsOn(":platform:browser:assemble")
 }

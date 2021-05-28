@@ -1,6 +1,5 @@
-package technology.sola.engine.platform.js;
+package technology.sola.engine.platform.browser;
 
-import org.teavm.jso.JSBody;
 import technology.sola.engine.core.GameLoop;
 
 import java.util.function.Consumer;

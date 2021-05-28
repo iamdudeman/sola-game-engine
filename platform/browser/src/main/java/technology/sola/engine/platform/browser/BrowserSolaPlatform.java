@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.js;
+package technology.sola.engine.platform.browser;
 
 import org.teavm.jso.JSBody;
 import technology.sola.engine.core.AbstractSola;
@@ -14,7 +14,7 @@ import technology.sola.engine.graphics.Renderer;
 // TODO kill game loop event somehow
 // TODO might need a custom game loop or something that uses request animation frame
 
-public class JavaScriptSolaPlatform extends AbstractSolaPlatform {
+public class BrowserSolaPlatform extends AbstractSolaPlatform {
   public static final String ID_SOLA_ANCHOR = "sola-anchor";
   public static final String ID_SOLA_CANVAS = "sola-canvas";
   private static final String INIT_SCRIPT =

@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.js;
+package technology.sola.engine.platform.browser;
 
 import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;

@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.js;
+package technology.sola.engine.platform.browser;
 
 import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.ecs.World;
@@ -15,7 +15,7 @@ import java.util.Random;
 public class Main {
   public static void main(String[] args) {
     var sola = new StressTestExample();
-    var solaPlatform = new JavaScriptSolaPlatform();
+    var solaPlatform = new BrowserSolaPlatform();
 
     solaPlatform.launch(sola);
   }
