@@ -4,12 +4,15 @@
   * Remove File IO calls from AssetLoader
 * Browser Platform
   * Write program to export Main into a JS file instead of gradle plugin
+  * Improve performance (StressTestExample can't handle a lot of objects)
 * Input
   * Mouse input handling
 * Camera
   * Figure out how to implement
     * Translate
     * Scale / zoom
+* Scene
+  * Implement a good abstraction for this (maybe use the one SolKana had)
 * Audio
   * Interface for type
   * Implement loader per platform (Swing and JavaFX can probably share though)
@@ -19,6 +22,9 @@
 * Automated build pipeline
 * Scripting language of some sort
   * How will that work with browser implementation?
+  * Maybe a custom Domain Specific Language?
+    * Perhaps JSON that describes what Systems to load with what settings
+    * Describe Scenes and Entities / components
 * Physics
   * Rotation
   * Collision Detection
