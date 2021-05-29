@@ -11,16 +11,22 @@
   * Figure out how to implement
     * Translate
     * Scale / zoom
+* Renderer
+  * DrawString method(s)
 * Scene
   * Implement a good abstraction for this (maybe use the one SolKana had)
 * Audio
   * Interface for type
   * Implement loader per platform (Swing and JavaFX can probably share though)
 * GUI
-  * Text?
-  * Button
-* Automated build pipeline
-* Scripting language of some sort
+  * Elements
+    * Text
+    * Button
+  * Layout
+* Build pipeline
+  * Run full build for testing and code quality
+  * Generate engine and platform artifacts
+* Scripting language
   * How will that work with browser implementation?
   * Maybe a custom Domain Specific Language?
     * Perhaps JSON that describes what Systems to load with what settings
@@ -32,36 +38,29 @@
     * Polygon x AABB
     * Polygon x Circle
     * Polygon x Polygon
-* Particle System?
+* Particle System
   * position
   * velocity
   * time left alive
   * color?
   * size?
-* Engine GUI Editor (SolKana Editor)
-  * Pass in instance of SolKana to start it up
-    * Each game can have its own editor
-    * This code could be a separate jar file with simple startup
+* Engine GUI Editor (Sola Editor)
   * Way to view all Systems and Components available
-    * Components could use annotations for specifying editable field UIs
-  * Way to view all Services available
-  * Way to view various EventSubscribers
-  * GameObject editor?
+  * Way to view various EventListeners?
+  * Entity editor?
     * primitive types could generate a dialog of some sort
     * saves to json file
   * could load in multiple files
     * edit configurations go to appropriate files
   * play mode for quick testing
   * export stuff somehow maybe?
-  * GUI Asset manager
+  * GUI asset manager
     * Allows adding images and via file selector
     * Game has a project folder structure to add/remove files
-  * Reads all registered Sols and allows adding to gameobjects
-  * Uses all registered Kanas
-  * Develop run mode that watches files and reloads on change
-* Research any Steam integrations that can be done?
-  * include JRE in the output file
-    * might vary per platform
+* Integrations
+  * Steam?
+    * include JRE in the output file
+      * might vary per platform
 * Matrix2D
   * Implement inverse
   * Implement reflection
