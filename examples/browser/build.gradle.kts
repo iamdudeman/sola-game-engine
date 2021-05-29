@@ -28,8 +28,11 @@ teavm {
   targetDirectory = file("build")
   targetFileName = "sola.js"
 
-  isMinifying = false
+  isMinifying = true
+  isSourceMapsGenerated = false
+  isSourceFilesCopied = false
   targetType = org.teavm.tooling.TeaVMTargetType.JAVASCRIPT
+  optimizationLevel = org.teavm.vm.TeaVMOptimizationLevel.ADVANCED
 }
 
 tasks.withType<io.github.zebalu.gradle.teavm.TeavmCompileTask> {
