@@ -6,7 +6,7 @@ import technology.sola.engine.platform.browser.BrowserSolaPlatform;
 public class Main {
   public static void main(String[] args) {
     var sola = new SimplePlatformerExample();
-    var solaPlatform = new BrowserSolaPlatform();
+    var solaPlatform = new BrowserSolaPlatform("Sola Browser Test");
 
     solaPlatform.launch(sola);
   }

@@ -15,6 +15,10 @@ import technology.sola.engine.platform.browser.javascript.JsUtils;
 // TODO figure how how to render pixel array faster
 
 public class BrowserSolaPlatform extends AbstractSolaPlatform {
+  public BrowserSolaPlatform(String title) {
+    JsUtils.setTitle(title);
+  }
+
   @Override
   protected void init() {
     JsCanvasUtils.canvasInit(abstractSola.getRendererWidth(), abstractSola.getRendererHeight());
