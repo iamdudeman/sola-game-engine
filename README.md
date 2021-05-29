@@ -13,6 +13,8 @@
     * Scale / zoom
 * Renderer
   * DrawString method(s)
+    * Might need a tool to rasterize fonts into a bitmap + font information files
+    * DrawString could use this bitmap to actually draw the pixels with the desired color
 * Scene
   * Implement a good abstraction for this (maybe use the one SolKana had)
 * Audio
