@@ -1,5 +1,7 @@
 package technology.sola.engine.assets;
 
+import technology.sola.engine.exception.asset.MissingAssetPoolException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,11 +12,14 @@ public class AssetPoolProvider {
     assetPoolMap.put(assetPool.getAssetClass(), assetPool);
   }
 
+  @SuppressWarnings("unchecked")
   public <T> AssetPool<T> getAssetPool(Class<T> assetClass) {
-    // TODO specific exception
-    return (AssetPool<T>) assetPoolMap.computeIfAbsent(
-      assetClass,
-      key -> { throw new RuntimeException("AssetPool for class [" + assetClass + "] does not exist"); }
-    );
+    AssetPool<?> assetPool = assetPoolMap.get(assetClass);
+
+    if (assetPool == null) {
+      throw new MissingAssetPoolException(assetClass);
+    }
+
+    return (AssetPool<T>) assetPool;
   }
 }

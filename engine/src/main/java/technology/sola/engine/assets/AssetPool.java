@@ -1,5 +1,7 @@
 package technology.sola.engine.assets;
 
+import technology.sola.engine.exception.asset.MissingAssetException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,12 +20,13 @@ public abstract class AssetPool<T> {
   }
 
   public T getAsset(String id) {
-    if (!assetIdToPathMap.containsKey(id)) {
-      // TODO specific exception
-      throw new RuntimeException("id [" + id + "]does not exist");
+    String assetPath = assetIdToPathMap.get(id);
+
+    if (assetPath == null) {
+      throw new MissingAssetException(id);
     }
 
-    return cachedAssets.computeIfAbsent(id, key -> loadAsset(assetIdToPathMap.get(key)));
+    return cachedAssets.computeIfAbsent(id, key -> loadAsset(assetPath));
   }
 
   public abstract Class<T> getAssetClass();

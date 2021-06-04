@@ -25,7 +25,6 @@ public class SwingSolaPlatform extends AbstractSolaPlatform {
 
   @Override
   public void init() {
-    assetLoader.addAssetMapper(new SolaImageAssetMapper());
     assetPoolProvider.addAssetPool(new SolaImageAssetPool());
 
     jFrame = new JFrame();

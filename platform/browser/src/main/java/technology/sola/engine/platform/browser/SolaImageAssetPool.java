@@ -6,7 +6,6 @@ import org.teavm.jso.JSObject;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.SolaImage;
-import technology.sola.engine.platform.browser.javascript.JsUtils;
 
 public class SolaImageAssetPool extends AssetPool<SolaImage> {
   @Override
@@ -17,7 +16,7 @@ public class SolaImageAssetPool extends AssetPool<SolaImage> {
   @Override
   protected SolaImage loadAsset(String path) {
     SolaImage solaImage = new SolaImage(1, 1);
-    // TODO make async call to JS
+
     loadImage(path, new ImageLoadCallbackImpl(solaImage));
 
     return solaImage;
@@ -28,7 +27,7 @@ public class SolaImageAssetPool extends AssetPool<SolaImage> {
     void call(int width, int height, int[] pixels);
   }
 
-  public class ImageLoadCallbackImpl implements ImageLoadCallback {
+  public static class ImageLoadCallbackImpl implements ImageLoadCallback {
     private SolaImage solaImage;
 
     public ImageLoadCallbackImpl(SolaImage solaImage) {
