@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.singlefile;
 
+import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.World;
@@ -17,9 +18,13 @@ public class RenderingExample extends AbstractSola {
 
   @Override
   protected void onInit() {
-    assetLoader.addAsset("test_tiles", "test_tiles.png");
+    AssetPool<SolaImage> solaImageAssetPool = assetPoolProvider.getAssetPool(SolaImage.class);
 
-    solaImage = assetLoader.getAsset("test_tiles", SolaImage.class);
+    solaImage = solaImageAssetPool.addAndGetAsset("test_tiles", "assets/test_tiles.png");
+
+//    assetLoader.addAsset("test_tiles", "test_tiles.png");
+
+//    solaImage = assetLoader.getAsset("test_tiles", SolaImage.class);
 
     World world = new World(1);
 

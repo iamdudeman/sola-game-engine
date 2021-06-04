@@ -3,6 +3,7 @@ package technology.sola.engine.core;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import technology.sola.engine.assets.AssetLoader;
+import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.event.gameloop.GameLoopEventListener;
 import technology.sola.engine.ecs.EcsSystemContainer;
@@ -16,6 +17,7 @@ public abstract class AbstractSola {
   protected Renderer renderer;
   protected EcsSystemContainer ecsSystemContainer;
   protected AssetLoader assetLoader;
+  protected AssetPoolProvider assetPoolProvider;
   protected EventHub eventHub;
   protected KeyboardInput keyboardInput;
 
@@ -49,6 +51,7 @@ public abstract class AbstractSola {
     this.isRestingAllowed = isRestingAllowed;
 
     assetLoader = new AssetLoader();
+    assetPoolProvider = new AssetPoolProvider();
     ecsSystemContainer = new EcsSystemContainer();
     eventHub = new EventHub();
     keyboardInput = new KeyboardInput();

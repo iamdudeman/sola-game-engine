@@ -21,6 +21,8 @@ public class BrowserSolaPlatform extends AbstractSolaPlatform {
 
   @Override
   protected void init() {
+    assetPoolProvider.addAssetPool(new SolaImageAssetPool());
+
     JsCanvasUtils.canvasInit(abstractSola.getRendererWidth(), abstractSola.getRendererHeight());
     JsKeyboardUtils.keyEventListener("keydown", new KeyPressEventCallback());
     JsKeyboardUtils.keyEventListener("keyup", new KeyReleaseEventCallback());

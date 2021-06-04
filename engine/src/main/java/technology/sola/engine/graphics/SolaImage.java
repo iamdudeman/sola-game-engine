@@ -3,9 +3,9 @@ package technology.sola.engine.graphics;
 import java.util.Arrays;
 
 public class SolaImage {
-  private final int width;
-  private final int height;
-  private final int[] pixels;
+  private int width;
+  private int height;
+  private int[] pixels;
 
   public SolaImage(int width, int height) {
     this.width = width;
@@ -19,6 +19,12 @@ public class SolaImage {
     this.width = width;
     this.height = height;
     this.pixels = pixels;
+  }
+
+  public void copy(SolaImage solaImage) {
+    this.width = solaImage.width;
+    this.height = solaImage.height;
+    this.pixels = solaImage.pixels;
   }
 
   public int[] getPixels() {
