@@ -21,12 +21,6 @@ public class SolaImage {
     this.pixels = pixels;
   }
 
-  public void updateContent(int width, int height, int[] pixels) {
-    this.width = width;
-    this.height = height;
-    this.pixels = pixels;
-  }
-
   public int[] getPixels() {
     return pixels;
   }
@@ -41,6 +35,12 @@ public class SolaImage {
 
   public void setPixel(int x, int y, int argb) {
     this.pixels[x + y * width] = argb;
+  }
+
+  public void setPixels(int width, int height, int[] pixels) {
+    this.width = width;
+    this.height = height;
+    this.pixels = pixels;
   }
 
   public SolaImage getSubImage(int x, int y, int width, int height) {

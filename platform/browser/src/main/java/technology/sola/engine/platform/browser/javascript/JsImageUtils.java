@@ -13,8 +13,8 @@ public class JsImageUtils {
     "  canvas.width = img.width;" +
     "  canvas.height = img.height;" +
     "  context.drawImage(img, 0, 0 );" +
-    "  var myData = context.getImageData(0, 0, img.width, img.height);" +
-    "  callback(img.width, img.height, Array.from(myData.data));" +
+    "  var imageData = context.getImageData(0, 0, img.width, img.height);" +
+    "  callback(img.width, img.height, Array.from(imageData.data));" +
     "};" +
     "img.src = path;";
 

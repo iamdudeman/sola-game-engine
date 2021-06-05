@@ -39,7 +39,7 @@ public class SolaImageAssetPool extends AbstractAssetPool<SolaImage> {
         index++;
       }
 
-      solaImage.updateContent(width, height, pixels);
+      solaImage.setPixels(width, height, pixels);
     }
   }
 }
