@@ -2,6 +2,7 @@ package technology.sola.engine.platform.swing;
 
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.platform.swing.exception.FailedSolaImageLoadException;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -19,16 +20,13 @@ public class SolaImageAssetPool extends AssetPool<SolaImage> {
     try {
       File file = new File(path);
       BufferedImage bufferedImage = ImageIO.read(file);
-
       SolaImage solaImage = new SolaImage(bufferedImage.getWidth(), bufferedImage.getHeight());
+
       bufferedImage.getRGB(0, 0, solaImage.getWidth(), solaImage.getHeight(), solaImage.getPixels(), 0, solaImage.getWidth());
 
       return solaImage;
     } catch (IOException ex) {
-      // todo
-      ex.printStackTrace();
+      throw new FailedSolaImageLoadException(path);
     }
-
-    return null;
   }
 }
