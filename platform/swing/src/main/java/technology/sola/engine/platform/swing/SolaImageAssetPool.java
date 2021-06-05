@@ -1,6 +1,6 @@
 package technology.sola.engine.platform.swing;
 
-import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.AbstractAssetPool;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.platform.swing.exception.FailedSolaImageLoadException;
 
@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class SolaImageAssetPool extends AssetPool<SolaImage> {
+public class SolaImageAssetPool extends AbstractAssetPool<SolaImage> {
   @Override
   public Class<SolaImage> getAssetClass() {
     return SolaImage.class;

@@ -21,10 +21,10 @@ public class SolaImage {
     this.pixels = pixels;
   }
 
-  public void copy(SolaImage solaImage) {
-    this.width = solaImage.width;
-    this.height = solaImage.height;
-    this.pixels = solaImage.pixels;
+  public void updateContent(int width, int height, int[] pixels) {
+    this.width = width;
+    this.height = height;
+    this.pixels = pixels;
   }
 
   public int[] getPixels() {
