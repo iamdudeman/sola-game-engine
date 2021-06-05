@@ -22,10 +22,6 @@ public class RenderingExample extends AbstractSola {
 
     solaImage = solaImageAssetPool.addAndGetAsset("test_tiles", "assets/test_tiles.png");
 
-//    assetLoader.addAsset("test_tiles", "test_tiles.png");
-
-//    solaImage = assetLoader.getAsset("test_tiles", SolaImage.class);
-
     World world = new World(1);
 
     world.createEntity()
