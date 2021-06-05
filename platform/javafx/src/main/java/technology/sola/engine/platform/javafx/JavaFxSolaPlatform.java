@@ -27,7 +27,7 @@ public class JavaFxSolaPlatform extends AbstractSolaPlatform {
   public void init() {
     Platform.startup(() -> { });
 
-    assetLoader.addAssetMapper(new SolaImageAssetMapper());
+    assetPoolProvider.addAssetPool(new SolaImageAssetPool());
   }
 
   @Override

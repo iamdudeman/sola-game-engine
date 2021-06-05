@@ -1,11 +1,7 @@
 # TODO List
-* AssetLoader
-  * Rename to AssetPool or something like that
-  * Remove File IO calls from AssetLoader
 * Browser Platform
   * Write tool to export Main into a JS file instead of gradle plugin
   * Improve performance (StressTestExample can't handle a lot of objects)
-  * Image asset loader implementation
 * Android Platform
   * Implement
 * Input

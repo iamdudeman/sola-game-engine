@@ -1,6 +1,5 @@
 package technology.sola.engine.platform.browser;
 
-import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.core.GameLoopProvider;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
@@ -11,7 +10,6 @@ import technology.sola.engine.platform.browser.javascript.JsCanvasUtils;
 import technology.sola.engine.platform.browser.javascript.JsKeyboardUtils;
 import technology.sola.engine.platform.browser.javascript.JsUtils;
 
-// TODO ability to load images
 // TODO figure how how to render pixel array faster
 
 public class BrowserSolaPlatform extends AbstractSolaPlatform {
@@ -21,16 +19,18 @@ public class BrowserSolaPlatform extends AbstractSolaPlatform {
 
   @Override
   protected void init() {
+    assetPoolProvider.addAssetPool(new SolaImageAssetPool());
+
     JsCanvasUtils.canvasInit(abstractSola.getRendererWidth(), abstractSola.getRendererHeight());
     JsKeyboardUtils.keyEventListener("keydown", new KeyPressEventCallback());
     JsKeyboardUtils.keyEventListener("keyup", new KeyReleaseEventCallback());
+
     // TODO something better than this
     JsUtils.exportObject("solaStop", (JsUtils.Function) () -> eventHub.emit(GameLoopEvent.STOP));
   }
 
   @Override
   protected void start() {
-
   }
 
   @Override
@@ -38,6 +38,7 @@ public class BrowserSolaPlatform extends AbstractSolaPlatform {
     renderer.render(pixels -> {
       int[] pixelDataForCanvas = new int[pixels.length * 4];
       int index = 0;
+
       for (int current : pixels) {
         Color color = new Color(current);
 

@@ -2,19 +2,20 @@ package technology.sola.engine.platform.javafx;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelFormat;
-import technology.sola.engine.assets.AssetMapper;
+import technology.sola.engine.assets.AbstractAssetPool;
 import technology.sola.engine.graphics.SolaImage;
 
 import java.io.File;
 
-public class SolaImageAssetMapper implements AssetMapper<SolaImage> {
+public class SolaImageAssetPool extends AbstractAssetPool<SolaImage> {
   @Override
-  public Class<SolaImage> getAssetType() {
+  public Class<SolaImage> getAssetClass() {
     return SolaImage.class;
   }
 
   @Override
-  public SolaImage mapToAssetType(File file) {
+  protected SolaImage loadAsset(String path) {
+    File file = new File(path);
     Image image = new Image(file.toURI().toString());
     int width = (int)image.getWidth();
     int height = (int)image.getHeight();
