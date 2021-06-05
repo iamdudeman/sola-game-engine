@@ -74,12 +74,14 @@ public class SpatialHashMap {
     float width = colliderComponent.getBoundingWidth();
     float height = colliderComponent.getBoundingHeight();
 
-    return List.of(
-      getIdForPoint(x , y),
-      getIdForPoint(x + width, y),
-      getIdForPoint(x, y + height),
-      getIdForPoint(x + width, y + height)
-    );
+    List<Vector2D> ids = new ArrayList<>();
+
+    ids.add(getIdForPoint(x , y));
+    ids.add(getIdForPoint(x + width, y));
+    ids.add(getIdForPoint(x, y + height));
+    ids.add(getIdForPoint(x + width, y + height));
+
+    return ids;
   }
 
   private void registerEntity(Entity entity) {

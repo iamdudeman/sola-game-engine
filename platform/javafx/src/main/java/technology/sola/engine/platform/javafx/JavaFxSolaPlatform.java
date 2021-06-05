@@ -15,23 +15,19 @@ import technology.sola.engine.input.KeyEvent;
 
 import java.util.function.Consumer;
 
-public class SolaJavaFxPlatform extends AbstractSolaPlatform {
+public class JavaFxSolaPlatform extends AbstractSolaPlatform {
   private String title;
-  private final int rendererWidth;
-  private final int rendererHeight;
   private Consumer<int[]> pixelArrayConsumer = pixels -> { };
 
-  public SolaJavaFxPlatform(String title, int rendererWidth, int rendererHeight) {
+  public JavaFxSolaPlatform(String title) {
     this.title = title;
-    this.rendererWidth = rendererWidth;
-    this.rendererHeight = rendererHeight;
   }
 
   @Override
   public void init() {
     Platform.startup(() -> { });
 
-    assetLoader.addAssetMapper(new SolaImageAssetMapper());
+    assetPoolProvider.addAssetPool(new SolaImageAssetPool());
   }
 
   @Override
@@ -40,6 +36,8 @@ public class SolaJavaFxPlatform extends AbstractSolaPlatform {
       final Stage stage = new Stage();
       final Group root = new Group();
       final Scene scene = new Scene(root);
+      int rendererWidth = abstractSola.getRendererWidth();
+      int rendererHeight = abstractSola.getRendererHeight();
       Canvas canvas = new Canvas(rendererWidth, rendererHeight);
 
       root.getChildren().add(canvas);

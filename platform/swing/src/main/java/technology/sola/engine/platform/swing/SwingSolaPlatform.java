@@ -13,28 +13,24 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
-public class SolaSwingPlatform extends AbstractSolaPlatform {
-  private final int rendererWidth;
-  private final int rendererHeight;
+public class SwingSolaPlatform extends AbstractSolaPlatform {
   private String title;
   private BufferedImage bufferedImage;
   private JFrame jFrame;
   private Canvas canvas;
 
-  public SolaSwingPlatform(String title, int rendererWidth, int rendererHeight) {
+  public SwingSolaPlatform(String title) {
     this.title = title;
-    this.rendererWidth = rendererWidth;
-    this.rendererHeight = rendererHeight;
   }
 
   @Override
   public void init() {
-    assetLoader.addAssetMapper(new SolaImageAssetMapper());
+    assetPoolProvider.addAssetPool(new SolaImageAssetPool());
 
     jFrame = new JFrame();
     canvas = new Canvas();
 
-    bufferedImage = new BufferedImage(rendererWidth, rendererHeight, BufferedImage.TYPE_INT_ARGB);
+    bufferedImage = new BufferedImage(abstractSola.getRendererWidth(), abstractSola.getRendererHeight(), BufferedImage.TYPE_INT_ARGB);
 
     canvas.addKeyListener(new KeyAdapter() {
       @Override
@@ -47,7 +43,7 @@ public class SolaSwingPlatform extends AbstractSolaPlatform {
         onKeyReleased(new technology.sola.engine.input.KeyEvent(e.getKeyCode()));
       }
     });
-    canvas.setPreferredSize(new Dimension(rendererWidth, rendererHeight));
+    canvas.setPreferredSize(new Dimension(abstractSola.getRendererWidth(), abstractSola.getRendererHeight()));
 
     jFrame.getContentPane().add(canvas);
 

@@ -1,20 +1,19 @@
 package technology.sola.engine.core;
 
-import technology.sola.engine.assets.AssetLoader;
+import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.input.KeyEvent;
-import technology.sola.engine.input.KeyboardInput;
 
 public abstract class AbstractSolaPlatform {
-  protected AssetLoader assetLoader;
+  protected AssetPoolProvider assetPoolProvider;
   protected EventHub eventHub;
-  private KeyboardInput keyboardInput;
+  protected AbstractSola abstractSola;
 
   public void launch(AbstractSola abstractSola) {
-    this.assetLoader = abstractSola.assetLoader;
+    this.abstractSola = abstractSola;
+    this.assetPoolProvider = abstractSola.assetPoolProvider;
     this.eventHub = abstractSola.eventHub;
-    this.keyboardInput = abstractSola.keyboardInput;
     abstractSola.setSolaPlatform(this);
     abstractSola.start();
   }
@@ -25,11 +24,15 @@ public abstract class AbstractSolaPlatform {
 
   protected abstract void render(Renderer renderer);
 
+  protected GameLoopProvider getGameLoopProvider() {
+    return GameLoopImpl::new;
+  }
+
   protected void onKeyPressed(KeyEvent keyEvent) {
-    keyboardInput.keyPressed(keyEvent);
+    abstractSola.keyboardInput.keyPressed(keyEvent);
   }
 
   protected void onKeyReleased(KeyEvent keyEvent) {
-    keyboardInput.keyReleased(keyEvent);
+    abstractSola.keyboardInput.keyReleased(keyEvent);
   }
 }
