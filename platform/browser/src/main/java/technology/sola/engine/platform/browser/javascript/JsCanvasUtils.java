@@ -3,8 +3,8 @@ package technology.sola.engine.platform.browser.javascript;
 import org.teavm.jso.JSBody;
 
 public class JsCanvasUtils {
+  static final String ID_SOLA_CANVAS = "sola-canvas";
   private static final String ID_SOLA_ANCHOR = "sola-anchor";
-  private static final String ID_SOLA_CANVAS = "sola-canvas";
   private static final String INIT_SCRIPT =
     "var canvasEle = document.createElement('canvas');" +
       "canvasEle.id = '" + ID_SOLA_CANVAS + "';" +

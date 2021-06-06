@@ -9,6 +9,7 @@ import technology.sola.engine.ecs.EcsSystemContainer;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.input.KeyboardInput;
+import technology.sola.engine.input.MouseInput;
 
 public abstract class AbstractSola {
   private static final Logger logger = LoggerFactory.getLogger(AbstractSola.class);
@@ -18,6 +19,7 @@ public abstract class AbstractSola {
   protected AssetPoolProvider assetPoolProvider;
   protected EventHub eventHub;
   protected KeyboardInput keyboardInput;
+  protected MouseInput mouseInput;
 
   protected int rendererWidth;
   protected int rendererHeight;
@@ -52,6 +54,7 @@ public abstract class AbstractSola {
     ecsSystemContainer = new EcsSystemContainer();
     eventHub = new EventHub();
     keyboardInput = new KeyboardInput();
+    mouseInput = new MouseInput();
     renderer = new Renderer(rendererWidth, rendererHeight);
   }
 

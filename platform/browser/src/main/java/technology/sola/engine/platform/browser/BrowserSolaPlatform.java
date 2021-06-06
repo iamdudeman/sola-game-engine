@@ -6,8 +6,10 @@ import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.input.KeyEvent;
+import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.platform.browser.javascript.JsCanvasUtils;
 import technology.sola.engine.platform.browser.javascript.JsKeyboardUtils;
+import technology.sola.engine.platform.browser.javascript.JsMouseUtils;
 import technology.sola.engine.platform.browser.javascript.JsUtils;
 
 // TODO figure how how to render pixel array faster
@@ -24,6 +26,9 @@ public class BrowserSolaPlatform extends AbstractSolaPlatform {
     JsCanvasUtils.canvasInit(abstractSola.getRendererWidth(), abstractSola.getRendererHeight());
     JsKeyboardUtils.keyEventListener("keydown", new KeyPressEventCallback());
     JsKeyboardUtils.keyEventListener("keyup", new KeyReleaseEventCallback());
+    JsMouseUtils.mouseEventListener("mousedown", new MousePressedEventCallback());
+    JsMouseUtils.mouseEventListener("mouseup", new MouseReleaseEventCallback());
+    JsMouseUtils.mouseEventListener("mousemove", new MouseMovedEventCallback());
 
     // TODO something better than this
     JsUtils.exportObject("solaStop", (JsUtils.Function) () -> eventHub.emit(GameLoopEvent.STOP));
@@ -68,6 +73,27 @@ public class BrowserSolaPlatform extends AbstractSolaPlatform {
     @Override
     public void call(int keyCode) {
       onKeyReleased(new KeyEvent(keyCode));
+    }
+  }
+
+  private class MouseMovedEventCallback implements JsMouseUtils.MouseEventCallback {
+    @Override
+    public void call(int which, int x, int y) {
+      onMouseMoved(new MouseEvent(which, x, y));
+    }
+  }
+
+  private class MouseReleaseEventCallback implements JsMouseUtils.MouseEventCallback {
+    @Override
+    public void call(int which, int x, int y) {
+      onMouseReleased(new MouseEvent(which, x, y));
+    }
+  }
+
+  private class MousePressedEventCallback implements JsMouseUtils.MouseEventCallback {
+    @Override
+    public void call(int which, int x, int y) {
+      onMousePressed(new MouseEvent(which, x, y));
     }
   }
 }
