@@ -38,17 +38,14 @@ public abstract class AbstractSolaPlatform {
   }
 
   protected void onMouseMoved(MouseEvent mouseEvent) {
-    System.out.println("move " + mouseEvent.getButton() + " " + mouseEvent.getX() + " " + mouseEvent.getY());
     abstractSola.mouseInput.onMouseMoved(mouseEvent);
   }
 
   protected void onMousePressed(MouseEvent mouseEvent) {
-    System.out.println("pressed " + mouseEvent.getButton() + " " + mouseEvent.getX() + " " + mouseEvent.getY());
     abstractSola.mouseInput.onMousePressed(mouseEvent);
   }
 
   protected void onMouseReleased(MouseEvent mouseEvent) {
-    System.out.println("released " + mouseEvent.getButton() + " " + mouseEvent.getX() + " " + mouseEvent.getY());
     abstractSola.mouseInput.onMouseReleased(mouseEvent);
   }
 }
