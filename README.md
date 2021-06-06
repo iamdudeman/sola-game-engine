@@ -3,8 +3,6 @@
   * Improve performance (StressTestExample can't handle a lot of objects)
 * Android Platform
   * Implement
-* Input
-  * Mouse input handling
 * Camera
   * Figure out how to implement
     * Translate
