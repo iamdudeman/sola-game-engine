@@ -6,10 +6,7 @@ import technology.sola.engine.graphics.Renderer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
@@ -41,6 +38,23 @@ public class SwingSolaPlatform extends AbstractSolaPlatform {
       @Override
       public void keyReleased(KeyEvent e) {
         onKeyReleased(new technology.sola.engine.input.KeyEvent(e.getKeyCode()));
+      }
+    });
+    canvas.addMouseMotionListener(new MouseMotionAdapter() {
+      @Override
+      public void mouseMoved(MouseEvent e) {
+        onMouseMoved(new technology.sola.engine.input.MouseEvent(e.getButton(), e.getX(), e.getY()));
+      }
+    });
+    canvas.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mousePressed(MouseEvent e) {
+        onMousePressed(new technology.sola.engine.input.MouseEvent(e.getButton(), e.getX(), e.getY()));
+      }
+
+      @Override
+      public void mouseReleased(MouseEvent e) {
+        onMouseReleased(new technology.sola.engine.input.MouseEvent(e.getButton(), e.getX(), e.getY()));
       }
     });
     canvas.setPreferredSize(new Dimension(abstractSola.getRendererWidth(), abstractSola.getRendererHeight()));
