@@ -14,6 +14,8 @@
   * DrawString method(s)
     * Might need a tool to rasterize fonts into a bitmap + font information files
     * DrawString could use this bitmap to actually draw the pixels with the desired color
+* Animation
+  * Component and System
 * Scene
   * Implement a good abstraction for this (maybe use the one SolKana had)
 * Audio
