@@ -1,6 +1,5 @@
 # TODO List
 * Browser Platform
-  * Write tool to export Main into a JS file instead of gradle plugin
   * Improve performance (StressTestExample can't handle a lot of objects)
 * Android Platform
   * Implement
@@ -12,8 +11,10 @@
     * Scale / zoom
 * Renderer
   * DrawString method(s)
-    * Might need a tool to rasterize fonts into a bitmap + font information files
     * DrawString could use this bitmap to actually draw the pixels with the desired color
+* Tools
+  * Tool to rasterize fonts into a bitmap + font information files
+  * Tool to export browser platform Main java method instead of using gradle plugin
 * Animation
   * Component and System
 * Scene

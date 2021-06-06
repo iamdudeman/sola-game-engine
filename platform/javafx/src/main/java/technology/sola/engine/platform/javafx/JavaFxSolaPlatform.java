@@ -12,6 +12,7 @@ import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.input.KeyEvent;
+import technology.sola.engine.input.MouseEvent;
 
 import java.util.function.Consumer;
 
@@ -44,6 +45,15 @@ public class JavaFxSolaPlatform extends AbstractSolaPlatform {
 
       canvas.setOnKeyPressed(keyEvent -> onKeyPressed(new KeyEvent(keyEvent.getCode().getCode())));
       canvas.setOnKeyReleased(keyEvent -> onKeyReleased(new KeyEvent(keyEvent.getCode().getCode())));
+      canvas.setOnMouseMoved(mouseEvent -> onMouseMoved(
+        new MouseEvent(mouseEvent.getButton().ordinal(), (int)mouseEvent.getX(), (int)mouseEvent.getY()))
+      );
+      canvas.setOnMousePressed(mouseEvent -> onMousePressed(
+        new MouseEvent(mouseEvent.getButton().ordinal(), (int)mouseEvent.getX(), (int)mouseEvent.getY()))
+      );
+      canvas.setOnMouseReleased(mouseEvent -> onMouseReleased(
+        new MouseEvent(mouseEvent.getButton().ordinal(), (int)mouseEvent.getX(), (int)mouseEvent.getY()))
+      );
 
       GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
       WritableImage writableImage = new WritableImage(rendererWidth, rendererHeight);

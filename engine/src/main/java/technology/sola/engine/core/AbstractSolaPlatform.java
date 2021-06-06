@@ -4,6 +4,7 @@ import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.input.KeyEvent;
+import technology.sola.engine.input.MouseEvent;
 
 public abstract class AbstractSolaPlatform {
   protected AssetPoolProvider assetPoolProvider;
@@ -34,5 +35,20 @@ public abstract class AbstractSolaPlatform {
 
   protected void onKeyReleased(KeyEvent keyEvent) {
     abstractSola.keyboardInput.keyReleased(keyEvent);
+  }
+
+  protected void onMouseMoved(MouseEvent mouseEvent) {
+    System.out.println("move " + mouseEvent.getButton() + " " + mouseEvent.getX() + " " + mouseEvent.getY());
+    abstractSola.mouseInput.onMouseMoved(mouseEvent);
+  }
+
+  protected void onMousePressed(MouseEvent mouseEvent) {
+    System.out.println("pressed " + mouseEvent.getButton() + " " + mouseEvent.getX() + " " + mouseEvent.getY());
+    abstractSola.mouseInput.onMousePressed(mouseEvent);
+  }
+
+  protected void onMouseReleased(MouseEvent mouseEvent) {
+    System.out.println("released " + mouseEvent.getButton() + " " + mouseEvent.getX() + " " + mouseEvent.getY());
+    abstractSola.mouseInput.onMouseReleased(mouseEvent);
   }
 }

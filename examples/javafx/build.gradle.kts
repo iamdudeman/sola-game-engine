@@ -4,7 +4,7 @@ plugins {
 }
 
 application {
-  mainClass.set("technology.sola.engine.examples.Main")
+  mainClass.set("technology.sola.engine.examples.javafx.JavaFxMain")
 }
 
 repositories {
@@ -18,7 +18,7 @@ dependencies {
 
 tasks.withType<Jar>() {
   manifest {
-    attributes["Main-Class"] = "technology.sola.engine.examples.Main"
+    attributes["Main-Class"] = "technology.sola.engine.examples.javafx.JavaFxMain"
   }
 
   dependsOn(configurations.runtimeClasspath)
