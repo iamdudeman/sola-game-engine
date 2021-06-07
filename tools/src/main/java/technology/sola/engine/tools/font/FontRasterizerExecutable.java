@@ -32,18 +32,19 @@ public class FontRasterizerExecutable implements ToolExecutable {
     int imageWidth = fontSize * 10;
     int imageHeight = fontSize * CHARACTERS.length() / 10;
 
-    BufferedImage bufferedImage = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB);
-    Graphics2D graphics = (Graphics2D) bufferedImage.getGraphics();
-    Font font = new Font(fontName, fontStyle.getCode(), fontSize);
+    var bufferedImage = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB);
+    var graphics = (Graphics2D) bufferedImage.getGraphics();
+    var font = new Font(fontName, fontStyle.getCode(), fontSize);
 
-    FontMetrics fontMetrics = graphics.getFontMetrics(font);
     graphics.setColor(Color.BLACK);
     graphics.setFont(font);
+
+    var fontMetrics = graphics.getFontMetrics();
+
 
     int x = 0;
     int y = fontMetrics.getMaxAscent();
 
-    JsonObject jsonFontInfo = new JsonObject();
     JsonArray jsonGlyphInfo = new JsonArray();
 
     for (String character : CHARACTERS.split("")) {
@@ -57,13 +58,11 @@ public class FontRasterizerExecutable implements ToolExecutable {
       }
 
       JsonObject jsonGlyph = new JsonObject();
-
       jsonGlyph.addProperty("glyph", character);
       jsonGlyph.addProperty("x", x);
       jsonGlyph.addProperty("y", y);
       jsonGlyph.addProperty("width", characterWidth);
       jsonGlyph.addProperty("height", characterHeight);
-
       jsonGlyphInfo.add(jsonGlyph);
 
       graphics.drawString(character, x, y);
@@ -76,6 +75,8 @@ public class FontRasterizerExecutable implements ToolExecutable {
     String baseFontName = fontName + "_" + fontStyle.name() + "_" + fontSize;
     String fontInfoFileName = baseFontName + ".json";
     String fontFileName = baseFontName + ".png";
+
+    JsonObject jsonFontInfo = new JsonObject();
     jsonFontInfo.addProperty("file", fontFileName);
     jsonFontInfo.addProperty("font", fontName);
     jsonFontInfo.addProperty("fontStyle", fontStyle.name());

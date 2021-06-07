@@ -1,9 +1,11 @@
 package technology.sola.engine.tools.font;
 
+import java.awt.*;
+
 public enum FontStyle {
-  NORMAL(0),
-  BOLD(1),
-  ITALIC(2),
+  NORMAL(Font.PLAIN),
+  BOLD(Font.BOLD),
+  ITALIC(Font.ITALIC),
   ;
 
   private final int code;
