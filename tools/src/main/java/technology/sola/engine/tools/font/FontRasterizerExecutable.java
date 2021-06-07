@@ -1,7 +1,8 @@
-package technology.sola.engine.tools.executable;
+package technology.sola.engine.tools.font;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import technology.sola.engine.tools.ToolExecutable;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -14,47 +15,22 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FontRasterizerExecutable implements ToolExecutable {
-  private enum FontStyle {
-    NORMAL(0),
-    BOLD(1),
-    ITALIC(2),
-    ;
-
-    public static FontStyle valueOf(int code) {
-      for (FontStyle fontStyle : values()) {
-        if (fontStyle.code == code) {
-          return fontStyle;
-        }
-      }
-
-      throw new IllegalArgumentException("FontStyle code [" + code + "] is invalid");
-    }
-
-    private final int code;
-
-    FontStyle(int code) {
-      this.code = code;
-    }
-
-    public int getCode() {
-      return code;
-    }
-  }
+  private static final String CHARACTERS = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+  private static final int CHARACTER_MARGIN = 1;
 
   @Override
   public void execute(String[] toolArgs) {
+    // TODO read some stuff form toolArgs instead
     String fontName = "monospaced";
     FontStyle fontStyle = FontStyle.NORMAL;
     int fontSize = 16;
 
-    String characters = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
 
     // logic below here
 
     int imageWidth = fontSize * 10;
-    int imageHeight = fontSize * characters.length() / 10;
-    final int margin = 1;
+    int imageHeight = fontSize * CHARACTERS.length() / 10;
 
     BufferedImage bufferedImage = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB);
     Graphics2D graphics = (Graphics2D) bufferedImage.getGraphics();
@@ -70,15 +46,14 @@ public class FontRasterizerExecutable implements ToolExecutable {
     JsonObject jsonFontInfo = new JsonObject();
     JsonArray jsonGlyphInfo = new JsonArray();
 
-
-    for (String character : characters.split("")) {
+    for (String character : CHARACTERS.split("")) {
       Rectangle2D rectangle = fontMetrics.getStringBounds(character, graphics);
       int characterWidth = (int) rectangle.getWidth();
       int characterHeight = fontMetrics.getAscent();
 
       if (x + characterWidth >= imageWidth) {
         x = 0;
-        y += fontSize + margin;
+        y += fontSize + CHARACTER_MARGIN;
       }
 
       JsonObject jsonGlyph = new JsonObject();
@@ -93,13 +68,14 @@ public class FontRasterizerExecutable implements ToolExecutable {
 
       graphics.drawString(character, x, y);
 
-      x += characterWidth + margin;
+      x += characterWidth + CHARACTER_MARGIN;
     }
 
     graphics.dispose();
 
-    String fontInfoFileName = fontName + "_" + fontStyle.name() + "_" + fontSize + ".json";
-    String fontFileName = fontName + "_" + fontStyle.name() + "_" + fontSize + ".png";
+    String baseFontName = fontName + "_" + fontStyle.name() + "_" + fontSize;
+    String fontInfoFileName = baseFontName + ".json";
+    String fontFileName = baseFontName + ".png";
     jsonFontInfo.addProperty("file", fontFileName);
     jsonFontInfo.addProperty("font", fontName);
     jsonFontInfo.addProperty("fontStyle", fontStyle.name());

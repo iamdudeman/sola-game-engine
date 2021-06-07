@@ -1,7 +1,6 @@
 package technology.sola.engine.tools;
 
-import technology.sola.engine.tools.executable.FontRasterizerExecutable;
-import technology.sola.engine.tools.executable.ToolExecutable;
+import technology.sola.engine.tools.font.FontRasterizerExecutable;
 
 public enum Tool {
   FONT("font", new FontRasterizerExecutable()),
