@@ -1,7 +1,7 @@
 package technology.sola.engine.tools;
 
 
-public class Main {
+public class ToolsMain {
   public static void main(String[] args) {
     String[] manualTestArgs = new String[] {
       "font",

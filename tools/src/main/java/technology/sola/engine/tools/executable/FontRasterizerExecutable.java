@@ -1,11 +1,17 @@
 package technology.sola.engine.tools.executable;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class FontRasterizerExecutable implements ToolExecutable {
   private enum FontStyle {
@@ -38,7 +44,6 @@ public class FontRasterizerExecutable implements ToolExecutable {
   @Override
   public void execute(String[] toolArgs) {
     String fontName = "monospaced";
-//    String fontName = "times";
     FontStyle fontStyle = FontStyle.NORMAL;
     int fontSize = 16;
 
@@ -62,6 +67,10 @@ public class FontRasterizerExecutable implements ToolExecutable {
     int x = 0;
     int y = fontMetrics.getMaxAscent();
 
+    JsonObject jsonFontInfo = new JsonObject();
+    JsonArray jsonGlyphInfo = new JsonArray();
+
+
     for (String character : characters.split("")) {
       Rectangle2D rectangle = fontMetrics.getStringBounds(character, graphics);
       int characterWidth = (int) rectangle.getWidth();
@@ -72,7 +81,16 @@ public class FontRasterizerExecutable implements ToolExecutable {
         y += fontSize + margin;
       }
 
-      System.out.println(character + " at " + x + " " + y + " width " + characterWidth + " height " + characterHeight);
+      JsonObject jsonGlyph = new JsonObject();
+
+      jsonGlyph.addProperty("glyph", character);
+      jsonGlyph.addProperty("x", x);
+      jsonGlyph.addProperty("y", y);
+      jsonGlyph.addProperty("width", characterWidth);
+      jsonGlyph.addProperty("height", characterHeight);
+
+      jsonGlyphInfo.add(jsonGlyph);
+
       graphics.drawString(character, x, y);
 
       x += characterWidth + margin;
@@ -80,10 +98,19 @@ public class FontRasterizerExecutable implements ToolExecutable {
 
     graphics.dispose();
 
-    File file = new File(fontName + "_" + fontStyle.name() + "_" + fontSize + ".png");
+    String fontInfoFileName = fontName + "_" + fontStyle.name() + "_" + fontSize + ".json";
+    String fontFileName = fontName + "_" + fontStyle.name() + "_" + fontSize + ".png";
+    jsonFontInfo.addProperty("file", fontFileName);
+    jsonFontInfo.addProperty("font", fontName);
+    jsonFontInfo.addProperty("fontStyle", fontStyle.name());
+    jsonFontInfo.addProperty("fontSize", fontSize);
+    jsonFontInfo.add("glyphs", jsonGlyphInfo);
+
+    File file = new File(fontFileName);
 
     try {
       ImageIO.write(bufferedImage, "png", file);
+      Files.write(Path.of(fontInfoFileName), jsonFontInfo.toString().getBytes(StandardCharsets.UTF_8));
     } catch (IOException ex) {
       ex.printStackTrace();
     }

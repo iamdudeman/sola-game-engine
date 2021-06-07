@@ -4,7 +4,7 @@ plugins {
 }
 
 application {
-  mainClass.set("technology.sola.engine.tools.Main")
+  mainClass.set("technology.sola.engine.tools.ToolsMain")
 }
 
 repositories {
@@ -12,12 +12,12 @@ repositories {
 }
 
 dependencies {
-
+  implementation("com.google.code.gson:gson:2.8.7")
 }
 
 tasks.withType<Jar>() {
   manifest {
-    attributes["Main-Class"] = "technology.sola.engine.tools.Main"
+    attributes["Main-Class"] = "technology.sola.engine.tools.ToolsMain"
   }
 
   dependsOn(configurations.runtimeClasspath)
