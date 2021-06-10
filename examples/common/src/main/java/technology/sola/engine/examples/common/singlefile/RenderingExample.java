@@ -63,6 +63,15 @@ public class RenderingExample extends AbstractSola {
 
         renderer.fillRect(position.getX(), position.getY(), 50, 50, Color.RED);
       });
+
+    renderer.fillRect(0, 10, 600, 100, Color.WHITE);
+
+    final String characters1 = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMN";
+    final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+
+    renderer.drawString(characters1, 5, 5, Color.BLUE);
+    renderer.drawString(characters2, 5, 35, Color.BLUE);
+    renderer.drawString("Hello World!", 5, 65, Color.BLUE);
   }
 
   private class TestSystem extends AbstractEcsSystem {

@@ -2,12 +2,15 @@ package technology.sola.engine.core;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import technology.sola.engine.assets.AbstractAssetPool;
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.event.gameloop.GameLoopEventListener;
 import technology.sola.engine.ecs.EcsSystemContainer;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.graphics.font.DefaultFont;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
 
@@ -78,6 +81,9 @@ public abstract class AbstractSola {
 
     solaPlatform.init();
     onInit();
+
+    AbstractAssetPool<SolaImage> solaImageAssetPool = assetPoolProvider.getAssetPool(SolaImage.class);
+    renderer.setFont(DefaultFont.createDefaultFont(solaImageAssetPool.addAndGetAsset("default_font", "assets/monospaced_NORMAL_18.png")));
   }
 
   private void render() {
