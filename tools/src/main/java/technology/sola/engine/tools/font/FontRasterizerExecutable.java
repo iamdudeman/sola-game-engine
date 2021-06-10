@@ -23,7 +23,7 @@ public class FontRasterizerExecutable implements ToolExecutable {
     // TODO read some stuff form toolArgs instead
     String fontName = "monospaced";
     FontStyle fontStyle = FontStyle.NORMAL;
-    int fontSize = 16;
+    int fontSize = 18;
 
 
 
