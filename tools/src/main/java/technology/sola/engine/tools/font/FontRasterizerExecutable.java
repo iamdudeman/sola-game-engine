@@ -50,7 +50,7 @@ public class FontRasterizerExecutable implements ToolExecutable {
     for (String character : CHARACTERS.split("")) {
       Rectangle2D rectangle = fontMetrics.getStringBounds(character, graphics);
       int characterWidth = (int) rectangle.getWidth();
-      int characterHeight = fontMetrics.getAscent();
+      int characterHeight = (int) rectangle.getHeight();
 
       if (x + characterWidth >= imageWidth) {
         x = 0;
