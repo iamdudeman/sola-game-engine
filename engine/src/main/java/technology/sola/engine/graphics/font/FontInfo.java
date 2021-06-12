@@ -3,20 +3,20 @@ package technology.sola.engine.graphics.font;
 import java.util.List;
 
 public class FontInfo {
-  private final String name;
-  private final int fontSize;
-  private final FontStyle fontStyle;
-  private final List<FontGlyph> fontGlyphList;
+  private String file;
+  private String name;
+  private int fontSize;
+  private FontStyle fontStyle;
+  private int maxAscent;
+  private int leading;
+  private List<FontGlyph> glyphs;
 
-  public FontInfo(String name, int fontSize, FontStyle fontStyle, List<FontGlyph> fontGlyphList) {
-    this.name = name;
-    this.fontSize = fontSize;
-    this.fontStyle = fontStyle;
-    this.fontGlyphList = fontGlyphList;
+  public FontGlyph getFontGlyph(char character) {
+    return glyphs.stream().filter(fontGlyph -> fontGlyph.getGlyph() == character).findFirst().orElse(null);
   }
 
-  public FontGlyph getFontGlyph(Character character) {
-    return fontGlyphList.stream().filter(fontGlyph -> fontGlyph.getGlyph().equals(character)).findFirst().orElse(null);
+  public String getFile() {
+    return file;
   }
 
   public String getName() {
@@ -31,7 +31,15 @@ public class FontInfo {
     return fontStyle;
   }
 
-  public List<FontGlyph> getFontGlyphList() {
-    return fontGlyphList;
+  public int getMaxAscent() {
+    return maxAscent;
+  }
+
+  public int getLeading() {
+    return leading;
+  }
+
+  public List<FontGlyph> getGlyphs() {
+    return glyphs;
   }
 }

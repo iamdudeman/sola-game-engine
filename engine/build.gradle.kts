@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-  implementation("com.google.code.gson:gson:2.8.5")
+  api("com.google.code.gson:gson:2.8.7")
 
   // Logging
   implementation("org.slf4j:slf4j-log4j12:1.7.30")

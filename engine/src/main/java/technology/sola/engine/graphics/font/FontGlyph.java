@@ -1,13 +1,13 @@
 package technology.sola.engine.graphics.font;
 
 public class FontGlyph {
-  private final Character glyph;
+  private final char glyph;
   private final int x;
   private final int y;
   private final int width;
   private final int height;
 
-  public FontGlyph(Character glyph, int x, int y, int width, int height) {
+  public FontGlyph(char glyph, int x, int y, int width, int height) {
     this.glyph = glyph;
     this.x = x;
     this.y = y;
@@ -15,7 +15,7 @@ public class FontGlyph {
     this.height = height;
   }
 
-  public Character getGlyph() {
+  public char getGlyph() {
     return glyph;
   }
 

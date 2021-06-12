@@ -207,10 +207,11 @@ public class Renderer {
     int xOffset = 0;
 
     for (char character : text.toCharArray()) {
-      SolaImage glyphImage = font.getCharacterToGlyphMap().get(character);
+      System.out.println("char: " + character);
+      SolaImage glyphImage = font.getGlyph(character);
 
       drawImage(x + xOffset, y, glyphImage);
-      xOffset += glyphImage.getWidth();
+      xOffset += glyphImage.getWidth() + font.getFontInfo().getLeading();
     }
   }
 

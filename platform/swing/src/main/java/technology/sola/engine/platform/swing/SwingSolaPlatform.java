@@ -22,7 +22,9 @@ public class SwingSolaPlatform extends AbstractSolaPlatform {
 
   @Override
   public void init() {
-    assetPoolProvider.addAssetPool(new SolaImageAssetPool());
+    SolaImageAssetPool solaImageAssetPool = new SolaImageAssetPool();
+    assetPoolProvider.addAssetPool(solaImageAssetPool);
+    assetPoolProvider.addAssetPool(new FontAssetPool(solaImageAssetPool));
 
     jFrame = new JFrame();
     canvas = new Canvas();

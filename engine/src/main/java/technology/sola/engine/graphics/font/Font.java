@@ -14,9 +14,10 @@ public class Font {
 
     font.fontInfo = fontInfo;
 
-    fontInfo.getFontGlyphList().forEach(fontGlyph -> {
+    fontInfo.getGlyphs().forEach(fontGlyph -> {
+      System.out.printf("%s: %s, %s, %s, %s%n", fontGlyph.getGlyph(), fontGlyph.getX(), fontGlyph.getY(), fontGlyph.getWidth(), fontGlyph.getHeight());
       SolaImage glyphImage = fontImage.getSubImage(
-        fontGlyph.getX(), fontGlyph.getY() - fontGlyph.getHeight(),
+        fontGlyph.getX(), fontGlyph.getY(),
         fontGlyph.getWidth(), fontGlyph.getHeight()
       );
 
@@ -24,6 +25,10 @@ public class Font {
     });
 
     return font;
+  }
+
+  public SolaImage getGlyph(char character) {
+    return characterToGlyphMap.get(Character.valueOf(character));
   }
 
   public FontInfo getFontInfo() {

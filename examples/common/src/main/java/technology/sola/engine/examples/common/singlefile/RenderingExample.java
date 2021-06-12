@@ -7,6 +7,7 @@ import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.physics.component.PositionComponent;
 
 public class RenderingExample extends AbstractSola {
@@ -19,7 +20,10 @@ public class RenderingExample extends AbstractSola {
   @Override
   protected void onInit() {
     AbstractAssetPool<SolaImage> solaImageAssetPool = assetPoolProvider.getAssetPool(SolaImage.class);
+    AbstractAssetPool<Font> fontAssetPool = assetPoolProvider.getAssetPool(Font.class);
 
+    Font font = fontAssetPool.addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
+    renderer.setFont(font);
     solaImage = solaImageAssetPool.addAndGetAsset("test_tiles", "assets/test_tiles.png");
 
     World world = new World(1);
