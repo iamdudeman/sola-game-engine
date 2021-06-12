@@ -81,6 +81,7 @@ public class FontRasterizerExecutable implements ToolExecutable {
     jsonFontInfo.addProperty("font", fontName);
     jsonFontInfo.addProperty("fontStyle", fontStyle.name());
     jsonFontInfo.addProperty("fontSize", fontSize);
+    jsonFontInfo.addProperty("maxAscent", fontMetrics.getMaxAscent());
     jsonFontInfo.add("glyphs", jsonGlyphInfo);
 
     File file = new File(fontFileName);
