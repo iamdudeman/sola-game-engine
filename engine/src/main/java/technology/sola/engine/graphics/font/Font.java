@@ -5,6 +5,9 @@ import technology.sola.engine.graphics.SolaImage;
 import java.util.HashMap;
 import java.util.Map;
 
+// TODO implement font loading for other platforms than swing
+// TODO Font should probably keep a cached copy of the colored glyph image for performance / memory
+
 public class Font {
   private FontInfo fontInfo;
   private Map<Character, SolaImage> characterToGlyphMap = new HashMap<>();
@@ -15,7 +18,6 @@ public class Font {
     font.fontInfo = fontInfo;
 
     fontInfo.getGlyphs().forEach(fontGlyph -> {
-      System.out.printf("%s: %s, %s, %s, %s%n", fontGlyph.getGlyph(), fontGlyph.getX(), fontGlyph.getY(), fontGlyph.getWidth(), fontGlyph.getHeight());
       SolaImage glyphImage = fontImage.getSubImage(
         fontGlyph.getX(), fontGlyph.getY(),
         fontGlyph.getWidth(), fontGlyph.getHeight()
@@ -28,7 +30,7 @@ public class Font {
   }
 
   public SolaImage getGlyph(char character) {
-    return characterToGlyphMap.get(Character.valueOf(character));
+    return characterToGlyphMap.get(character);
   }
 
   public FontInfo getFontInfo() {

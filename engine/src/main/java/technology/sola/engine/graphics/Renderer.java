@@ -202,13 +202,29 @@ public class Renderer {
   }
 
   public void drawString(String text, float x, float y, Color color) {
-    // TODO what about wrapping text
-    // TODO what about color
     int xOffset = 0;
 
     for (char character : text.toCharArray()) {
-      System.out.println("char: " + character);
+      // TODO consider font.getGlyph(character, color) method
       SolaImage glyphImage = font.getGlyph(character);
+
+      if (!color.equals(Color.BLACK)) {
+        int newTextColor = color.hexInt();
+        int[] originalPixels = glyphImage.getPixels();
+        int[] coloredTextPixels = new int[originalPixels.length];
+
+        for (int i = 0; i < pixels.length; i++) {
+          int pixel = originalPixels[i];
+
+          if (pixel == Color.BLACK.hexInt()) {
+            pixel = newTextColor;
+          }
+
+          coloredTextPixels[i] = pixel;
+        }
+
+        glyphImage = new SolaImage(glyphImage.getWidth(), glyphImage.getHeight(), coloredTextPixels);
+      }
 
       drawImage(x + xOffset, y, glyphImage);
       xOffset += glyphImage.getWidth() + font.getFontInfo().getLeading();
