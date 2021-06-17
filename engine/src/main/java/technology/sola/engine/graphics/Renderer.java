@@ -213,7 +213,7 @@ public class Renderer {
         int[] originalPixels = glyphImage.getPixels();
         int[] coloredTextPixels = new int[originalPixels.length];
 
-        for (int i = 0; i < pixels.length; i++) {
+        for (int i = 0; i < originalPixels.length; i++) {
           int pixel = originalPixels[i];
 
           if (pixel == Color.BLACK.hexInt()) {
