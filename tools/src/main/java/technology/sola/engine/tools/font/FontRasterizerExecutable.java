@@ -1,7 +1,6 @@
 package technology.sola.engine.tools.font;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.google.gson.Gson;
 import technology.sola.engine.tools.ToolExecutable;
 
 import java.awt.*;
@@ -11,15 +10,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-// todo for cleanup
-// identify font
-// build font glyph info for characters
-// build canvas for size
-// render font glyphs to image
-// save font info to json
-// save glyph image
-// done
+import java.util.List;
 
 public class FontRasterizerExecutable implements ToolExecutable {
   private static final String CHARACTERS = "abcdefghijklmnopqrstuvwxyz{|}~ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`";
@@ -36,63 +27,29 @@ public class FontRasterizerExecutable implements ToolExecutable {
     FontStyle fontStyle = FontStyle.NORMAL;
     int fontSize = 18;
 
-
-
-    // logic below here
-
     var font = new Font(fontName, fontStyle.getCode(), fontSize);
-    int imageWidth = fontSize * CHARACTERS.length() / 5;
-    int imageHeight = fontSize * CHARACTERS.length() / 10;
+    FontInformation fontInformation = new FontInformation(font);
+
+    List<FontGlyphModel> fontGlyphModelList = fontInformation.getFontGlyphs(CHARACTERS);
+    Rectangle2D fullBounds = fontInformation.getStringBounds(CHARACTERS);
+    int imageWidth = (int)fullBounds.getWidth() / 2;
+    int imageHeight = (int)fullBounds.getHeight() * 5;
 
     FontCanvas fontCanvas = new FontCanvas(font, imageWidth, imageHeight);
+    FontModel fontModel = new FontModel(
+      fontName, fontStyle.name(), fontSize,
+      fontInformation.getMaxAscent(), fontInformation.getLeading(),
+      fontGlyphModelList
+    );
 
-    int x = 0;
-    int y = fontCanvas.getMaxAscent();
+    // TODO drawFontGlyphs currently mutates font glyph models
+    fontCanvas.drawFontGlyphs(fontGlyphModelList, fontInformation.getMaxCharacterHeight());
 
-    JsonArray jsonGlyphInfo = new JsonArray();
 
-    for (String character : CHARACTERS.split("")) {
-      Rectangle2D rectangle = fontCanvas.getStringBounds(character);
-      int characterWidth = (int) rectangle.getWidth();
-      int characterHeight = (int) rectangle.getHeight();
-
-      if (x + characterWidth >= imageWidth) {
-        x = 0;
-        y += fontCanvas.getMaxCharacterHeight();
-      }
-
-      JsonObject jsonGlyph = new JsonObject();
-      jsonGlyph.addProperty("glyph", character);
-      jsonGlyph.addProperty("x", x);
-      jsonGlyph.addProperty("y", y - fontCanvas.getMaxAscent());
-      jsonGlyph.addProperty("width", characterWidth);
-      jsonGlyph.addProperty("height", characterHeight);
-      jsonGlyphInfo.add(jsonGlyph);
-
-      fontCanvas.drawString(character, x, y);
-
-      x += characterWidth;
-    }
-
-    String baseFontName = fontName + "_" + fontStyle.name() + "_" + fontSize;
-    String fontInfoFileName = baseFontName + ".json";
-    String fontFileName = baseFontName + ".png";
-
-    JsonObject jsonFontInfo = new JsonObject();
-    jsonFontInfo.addProperty("file", fontFileName);
-    jsonFontInfo.addProperty("font", fontName);
-    jsonFontInfo.addProperty("fontStyle", fontStyle.name());
-    jsonFontInfo.addProperty("fontSize", fontSize);
-    jsonFontInfo.addProperty("maxAscent", fontCanvas.getMaxAscent());
-    jsonFontInfo.addProperty("leading", fontCanvas.getLeading());
-    jsonFontInfo.add("glyphs", jsonGlyphInfo);
-
-    File file = new File(fontFileName);
-
-    fontCanvas.saveToFile(file);
-
+    // TODO better way to handle this file io below here
+    fontCanvas.saveToFile(new File(fontModel.getFile()));
     try {
-      Files.write(Path.of(fontInfoFileName), jsonFontInfo.toString().getBytes(StandardCharsets.UTF_8));
+      Files.write(Path.of(fontModel.getFile().replaceFirst(".png", ".json")), new Gson().toJson(fontModel).getBytes(StandardCharsets.UTF_8));
     } catch (IOException ex) {
       ex.printStackTrace();
     }

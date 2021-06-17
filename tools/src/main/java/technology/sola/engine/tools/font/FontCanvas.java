@@ -2,15 +2,15 @@ package technology.sola.engine.tools.font;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class FontCanvas {
-  private final BufferedImage bufferedImage;
-  private final Graphics2D graphics2D;
-  private final FontMetrics fontMetrics;
+  private BufferedImage bufferedImage;
+  private Graphics2D graphics2D;
+  private FontMetrics fontMetrics;
 
   public FontCanvas(Font font, int width, int height) {
     bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -22,24 +22,29 @@ public class FontCanvas {
     fontMetrics = graphics2D.getFontMetrics();
   }
 
+  public void drawFontGlyphs(List<FontGlyphModel> fontGlyphModelList, int maxCharacterHeight) {
+    int x = 0;
+    int y = 0;
+
+    for (FontGlyphModel character : fontGlyphModelList) {
+      int characterWidth = character.getWidth();
+
+      if (x + characterWidth >= bufferedImage.getWidth()) {
+        x = 0;
+        y += maxCharacterHeight;
+      }
+
+      character.setX(x);
+      character.setY(y);
+
+      drawString(character.getGlyph(), x, y);
+
+      x += characterWidth;
+    }
+  }
+
   public void drawString(String text, int x, int y) {
-    graphics2D.drawString(text, x, y);
-  }
-
-  public int getMaxAscent() {
-    return fontMetrics.getMaxAscent();
-  }
-
-  public int getLeading() {
-    return fontMetrics.getLeading();
-  }
-
-  public int getMaxCharacterHeight() {
-    return fontMetrics.getMaxAscent() + fontMetrics.getMaxDescent();
-  }
-
-  public Rectangle2D getStringBounds(String string) {
-    return fontMetrics.getStringBounds(string, graphics2D);
+    graphics2D.drawString(text, x, y + fontMetrics.getMaxAscent());
   }
 
   public void saveToFile(File file) {
