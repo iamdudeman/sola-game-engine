@@ -3,8 +3,8 @@ package technology.sola.engine.graphics.font;
 import java.util.List;
 
 public class FontInfo {
-  private String file;
-  private String name;
+  private String fontGlyphFile;
+  private String fontName;
   private int fontSize;
   private FontStyle fontStyle;
   private int maxAscent;
@@ -15,12 +15,12 @@ public class FontInfo {
     return glyphs.stream().filter(fontGlyph -> fontGlyph.getGlyph() == character).findFirst().orElse(null);
   }
 
-  public String getFile() {
-    return file;
+  public String getFontGlyphFile() {
+    return fontGlyphFile;
   }
 
-  public String getName() {
-    return name;
+  public String getFontName() {
+    return fontName;
   }
 
   public int getFontSize() {

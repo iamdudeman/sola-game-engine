@@ -31,7 +31,7 @@ public class FontAssetPool extends AbstractAssetPool<Font> {
       File file = new File(path);
       JsonReader reader = new JsonReader(new FileReader(file));
       FontInfo fontInfo = gson.fromJson(reader, FontInfo.class);
-      SolaImage fontImage = solaImageAssetPool.addAndGetAsset(fontInfo.getFile(), file.getPath().replace(file.getName(), "") + fontInfo.getFile());
+      SolaImage fontImage = solaImageAssetPool.addAndGetAsset(fontInfo.getFontGlyphFile(), file.getPath().replace(file.getName(), "") + fontInfo.getFontGlyphFile());
 
       Font font = Font.createFont(fontImage, fontInfo);
 

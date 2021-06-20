@@ -14,13 +14,14 @@ public class FontRasterizerExecutable implements ToolExecutable {
   private static final String CHARACTERS = "abcdefghijklmnopqrstuvwxyz{|}~ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`";
 
   public static void main(String[] args) {
-    var manualArgs = new String[] {
-      "monospaced",
-      FontStyle.NORMAL.name(),
-      "18"
-    };
+    var fontsToCreate = List.of(
+      new String[] {"monospaced", FontStyle.NORMAL.name(), "18" },
+      new String[] {"times", FontStyle.NORMAL.name(), "18" },
+      new String[] {"monospaced", FontStyle.NORMAL.name(), "12" }
+    );
+    var fontRasterizerExecutable = new FontRasterizerExecutable();
 
-    new FontRasterizerExecutable().execute(manualArgs);
+    fontsToCreate.forEach(fontRasterizerExecutable::execute);
   }
 
   @Override

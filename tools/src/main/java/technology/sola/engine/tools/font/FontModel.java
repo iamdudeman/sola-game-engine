@@ -3,8 +3,8 @@ package technology.sola.engine.tools.font;
 import java.util.List;
 
 public class FontModel {
-  private String file;
-  private final String font;
+  private String fontGlyphFile;
+  private final String fontName;
   private final String fontStyle;
   private final int fontSize;
   private final int maxAscent;
@@ -12,8 +12,8 @@ public class FontModel {
   private final List<FontGlyphModel> glyphs;
 
   public FontModel(FontInformation fontInformation, List<FontGlyphModel> glyphs) {
-    this.file = fontInformation.getFontFileName();
-    this.font = fontInformation.getFontName();
+    this.fontGlyphFile = fontInformation.getFontFileName();
+    this.fontName = fontInformation.getFontName();
     this.fontStyle = fontInformation.getFontStyle();
     this.fontSize = fontInformation.getFontSize();
     this.maxAscent = fontInformation.getMaxAscent();
