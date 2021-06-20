@@ -1,21 +1,22 @@
 package technology.sola.engine.graphics.font;
 
+import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.SolaImage;
 
 import java.util.HashMap;
 import java.util.Map;
 
 // TODO implement font loading for other platforms than swing
-// TODO Font should probably keep a cached copy of the colored glyph image for performance / memory
 
 public class Font {
-  private FontInfo fontInfo;
-  private Map<Character, SolaImage> characterToGlyphMap = new HashMap<>();
+  private final FontInfo fontInfo;
+  private final Map<Color, Map<Character, SolaImage>> colorToGlyphsMap = new HashMap<>();
+  private final Map<Character, SolaImage> blackCharacterToGlyphMap = new HashMap<>();
+  private Map<Character, SolaImage> cachedCharacterToGlyphMap;
+  private Color cachedColor;
 
-  public static Font createFont(SolaImage fontImage, FontInfo fontInfo) {
-    Font font = new Font();
-
-    font.fontInfo = fontInfo;
+  public Font(SolaImage fontImage, FontInfo fontInfo) {
+    this.fontInfo = fontInfo;
 
     fontInfo.getGlyphs().forEach(fontGlyph -> {
       SolaImage glyphImage = fontImage.getSubImage(
@@ -23,24 +24,47 @@ public class Font {
         fontGlyph.getWidth(), fontGlyph.getHeight()
       );
 
-      font.characterToGlyphMap.put(fontGlyph.getGlyph(), glyphImage);
+      this.blackCharacterToGlyphMap.put(fontGlyph.getGlyph(), glyphImage);
     });
 
-    return font;
+    this.colorToGlyphsMap.put(Color.BLACK, this.blackCharacterToGlyphMap);
+    this.cachedCharacterToGlyphMap = this.blackCharacterToGlyphMap;
+    this.cachedColor = Color.BLACK;
   }
 
-  public SolaImage getGlyph(char character) {
-    return characterToGlyphMap.get(character);
+  public SolaImage getGlyph(char character, Color color) {
+    Map<Character, SolaImage> mapToUse = cachedCharacterToGlyphMap;
+
+    if (color.equals(Color.BLACK)) {
+      mapToUse = blackCharacterToGlyphMap;
+    } else if (!color.equals(cachedColor)) {
+      cachedColor = color;
+      cachedCharacterToGlyphMap = colorToGlyphsMap.computeIfAbsent(color, key -> new HashMap<>());
+      mapToUse = cachedCharacterToGlyphMap;
+    }
+
+    return mapToUse.computeIfAbsent(character, key -> {
+      SolaImage blackGlyph = getGlyph(key, Color.BLACK);
+
+      int newTextColor = color.hexInt();
+      int[] originalPixels = blackGlyph.getPixels();
+      int[] coloredTextPixels = new int[originalPixels.length];
+
+      for (int i = 0; i < originalPixels.length; i++) {
+        int pixel = originalPixels[i];
+
+        if (pixel == Color.BLACK.hexInt()) {
+          pixel = newTextColor;
+        }
+
+        coloredTextPixels[i] = pixel;
+      }
+
+      return new SolaImage(blackGlyph.getWidth(), blackGlyph.getHeight(), coloredTextPixels);
+    });
   }
 
   public FontInfo getFontInfo() {
     return fontInfo;
-  }
-
-  public Map<Character, SolaImage> getCharacterToGlyphMap() {
-    return characterToGlyphMap;
-  }
-
-  private Font() {
   }
 }

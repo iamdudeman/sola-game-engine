@@ -205,26 +205,7 @@ public class Renderer {
     int xOffset = 0;
 
     for (char character : text.toCharArray()) {
-      // TODO consider font.getGlyph(character, color) method
-      SolaImage glyphImage = font.getGlyph(character);
-
-      if (!color.equals(Color.BLACK)) {
-        int newTextColor = color.hexInt();
-        int[] originalPixels = glyphImage.getPixels();
-        int[] coloredTextPixels = new int[originalPixels.length];
-
-        for (int i = 0; i < originalPixels.length; i++) {
-          int pixel = originalPixels[i];
-
-          if (pixel == Color.BLACK.hexInt()) {
-            pixel = newTextColor;
-          }
-
-          coloredTextPixels[i] = pixel;
-        }
-
-        glyphImage = new SolaImage(glyphImage.getWidth(), glyphImage.getHeight(), coloredTextPixels);
-      }
+      SolaImage glyphImage = font.getGlyph(character, color);
 
       drawImage(x + xOffset, y, glyphImage);
       xOffset += glyphImage.getWidth() + font.getFontInfo().getLeading();

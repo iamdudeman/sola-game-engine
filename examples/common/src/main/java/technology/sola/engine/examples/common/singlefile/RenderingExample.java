@@ -74,8 +74,8 @@ public class RenderingExample extends AbstractSola {
     final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
     renderer.setRenderMode(RenderMode.MASK);
-    renderer.drawString(characters1, 5, 5, Color.BLUE);
-    renderer.drawString(characters2, 5, 35, Color.BLUE);
+    renderer.drawString(characters1, 5, 5, Color.RED);
+    renderer.drawString(characters2, 5, 35, Color.BLACK);
     renderer.drawString("Hello World!", 5, 65, Color.BLUE);
     renderer.setRenderMode(RenderMode.NORMAL);
   }
