@@ -5,9 +5,8 @@ import java.util.List;
 public class FontInfo {
   private String fontGlyphFile;
   private String fontName;
-  private int fontSize;
   private FontStyle fontStyle;
-  private int maxAscent;
+  private int fontSize;
   private int leading;
   private List<FontGlyph> glyphs;
 
@@ -23,16 +22,12 @@ public class FontInfo {
     return fontName;
   }
 
-  public int getFontSize() {
-    return fontSize;
-  }
-
   public FontStyle getFontStyle() {
     return fontStyle;
   }
 
-  public int getMaxAscent() {
-    return maxAscent;
+  public int getFontSize() {
+    return fontSize;
   }
 
   public int getLeading() {

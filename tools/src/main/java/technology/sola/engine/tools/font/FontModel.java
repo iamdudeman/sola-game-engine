@@ -7,7 +7,6 @@ public class FontModel {
   private final String fontName;
   private final String fontStyle;
   private final int fontSize;
-  private final int maxAscent;
   private final int leading;
   private final List<FontGlyphModel> glyphs;
 
@@ -16,7 +15,6 @@ public class FontModel {
     this.fontName = fontInformation.getFontName();
     this.fontStyle = fontInformation.getFontStyle();
     this.fontSize = fontInformation.getFontSize();
-    this.maxAscent = fontInformation.getMaxAscent();
     this.glyphs = glyphs;
     this.leading = fontInformation.getLeading();
   }
