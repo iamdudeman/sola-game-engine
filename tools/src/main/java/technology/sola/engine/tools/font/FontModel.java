@@ -4,49 +4,20 @@ import java.util.List;
 
 public class FontModel {
   private String file;
-  private String font;
-  private String fontStyle;
-  private int fontSize;
-  private int maxAscent;
-  private int leading;
-  private List<FontGlyphModel> glyphs;
+  private final String font;
+  private final String fontStyle;
+  private final int fontSize;
+  private final int maxAscent;
+  private final int leading;
+  private final List<FontGlyphModel> glyphs;
 
-  public FontModel(String font, String fontStyle, int fontSize, int maxAscent, int leading, List<FontGlyphModel> glyphs) {
-    this.font = font;
-    this.fontStyle = fontStyle;
-    this.fontSize = fontSize;
-    this.maxAscent = maxAscent;
-    this.leading = leading;
+  public FontModel(FontInformation fontInformation, List<FontGlyphModel> glyphs) {
+    this.file = fontInformation.getFontFileName();
+    this.font = fontInformation.getFontName();
+    this.fontStyle = fontInformation.getFontStyle();
+    this.fontSize = fontInformation.getFontSize();
+    this.maxAscent = fontInformation.getMaxAscent();
     this.glyphs = glyphs;
-    // TODO clean this up
-    this.file = font + "_" + fontStyle + "_" + fontSize + ".png";
-  }
-
-  public String getFile() {
-    return file;
-  }
-
-  public String getFont() {
-    return font;
-  }
-
-  public String getFontStyle() {
-    return fontStyle;
-  }
-
-  public int getFontSize() {
-    return fontSize;
-  }
-
-  public int getMaxAscent() {
-    return maxAscent;
-  }
-
-  public int getLeading() {
-    return leading;
-  }
-
-  public List<FontGlyphModel> getGlyphs() {
-    return glyphs;
+    this.leading = fontInformation.getLeading();
   }
 }

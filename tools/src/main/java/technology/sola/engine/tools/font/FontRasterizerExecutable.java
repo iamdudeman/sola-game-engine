@@ -3,9 +3,7 @@ package technology.sola.engine.tools.font;
 import com.google.gson.Gson;
 import technology.sola.engine.tools.ToolExecutable;
 
-import java.awt.*;
 import java.awt.geom.Rectangle2D;
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -16,42 +14,53 @@ public class FontRasterizerExecutable implements ToolExecutable {
   private static final String CHARACTERS = "abcdefghijklmnopqrstuvwxyz{|}~ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`";
 
   public static void main(String[] args) {
-    // TODO only for testing
-    new FontRasterizerExecutable().execute();
+    var manualArgs = new String[] {
+      "monospaced",
+      FontStyle.NORMAL.name(),
+      "18"
+    };
+
+    new FontRasterizerExecutable().execute(manualArgs);
   }
 
   @Override
   public void execute(String... toolArgs) {
-    // TODO read some stuff form toolArgs instead
-    String fontName = "monospaced";
-    FontStyle fontStyle = FontStyle.NORMAL;
-    int fontSize = 18;
+    var fontInformation = prepareFontInformation(toolArgs);
 
-    var font = new Font(fontName, fontStyle.getCode(), fontSize);
-    FontInformation fontInformation = new FontInformation(font);
+    try (var fontCanvas = prepareFontCanvas(fontInformation)) {
+      var fontModel = prepareFontModel(fontInformation, fontCanvas);
 
-    List<FontGlyphModel> fontGlyphModelList = fontInformation.getFontGlyphs(CHARACTERS);
+      fontCanvas.saveToFile(fontInformation.getFontFileName());
+      Files.write(Path.of(fontInformation.getFontInfoFileName()), serializeFontModel(fontModel));
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  private FontInformation prepareFontInformation(String... toolArgs) {
+    var fontName = toolArgs[0];
+    var fontStyle = FontStyle.valueOf(toolArgs[1]);
+    var fontSize = Integer.parseInt(toolArgs[2]);
+
+    return new FontInformation(fontName, fontStyle, fontSize);
+  }
+
+  private FontCanvas prepareFontCanvas(FontInformation fontInformation) {
     Rectangle2D fullBounds = fontInformation.getStringBounds(CHARACTERS);
     int imageWidth = (int)fullBounds.getWidth() / 2;
     int imageHeight = (int)fullBounds.getHeight() * 5;
 
-    FontCanvas fontCanvas = new FontCanvas(font, imageWidth, imageHeight);
-    FontModel fontModel = new FontModel(
-      fontName, fontStyle.name(), fontSize,
-      fontInformation.getMaxAscent(), fontInformation.getLeading(),
-      fontGlyphModelList
-    );
+    return new FontCanvas(fontInformation, imageWidth, imageHeight);
+  }
 
-    // TODO drawFontGlyphs currently mutates font glyph models
-    fontCanvas.drawFontGlyphs(fontGlyphModelList, fontInformation.getMaxCharacterHeight());
+  private FontModel prepareFontModel(FontInformation fontInformation, FontCanvas fontCanvas) {
+    List<FontGlyphModel> fontGlyphModelList = fontInformation.getFontGlyphs(CHARACTERS);
+    List<FontGlyphModel> fontGlyphModelsWithPositions = fontCanvas.drawFontGlyphs(fontGlyphModelList, fontInformation.getMaxCharacterHeight());
 
+    return new FontModel(fontInformation, fontGlyphModelsWithPositions);
+  }
 
-    // TODO better way to handle this file io below here
-    fontCanvas.saveToFile(new File(fontModel.getFile()));
-    try {
-      Files.write(Path.of(fontModel.getFile().replaceFirst(".png", ".json")), new Gson().toJson(fontModel).getBytes(StandardCharsets.UTF_8));
-    } catch (IOException ex) {
-      ex.printStackTrace();
-    }
+  private byte[] serializeFontModel(FontModel fontModel) {
+    return new Gson().toJson(fontModel).getBytes(StandardCharsets.UTF_8);
   }
 }
