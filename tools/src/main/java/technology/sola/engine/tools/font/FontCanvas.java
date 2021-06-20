@@ -12,10 +12,10 @@ import java.util.List;
 public class FontCanvas implements AutoCloseable {
   private final BufferedImage bufferedImage;
   private final Graphics2D graphics2D;
-  private final int maxAscent;
+  private final FontInformation fontInformation;
 
   public FontCanvas(FontInformation fontInformation, int width, int height) {
-    maxAscent = fontInformation.getMaxAscent();
+    this.fontInformation = fontInformation;
     bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
     graphics2D = (Graphics2D) bufferedImage.getGraphics();
@@ -23,10 +23,11 @@ public class FontCanvas implements AutoCloseable {
     graphics2D.setFont(fontInformation.getFont());
   }
 
-  public List<FontGlyphModel> drawFontGlyphs(List<FontGlyphModel> fontGlyphModelList, int maxCharacterHeight) {
+  public List<FontGlyphModel> drawFontGlyphs(String characters) {
     var x = 0;
     var y = 0;
 
+    List<FontGlyphModel> fontGlyphModelList = fontInformation.getFontGlyphs(characters);
     List<FontGlyphModel> fontGlyphModelsWithPosition = new ArrayList<>();
 
     for (FontGlyphModel character : fontGlyphModelList) {
@@ -34,7 +35,7 @@ public class FontCanvas implements AutoCloseable {
 
       if (x + characterWidth >= bufferedImage.getWidth()) {
         x = 0;
-        y += maxCharacterHeight;
+        y += fontInformation.getMaxCharacterHeight();
       }
 
       fontGlyphModelsWithPosition.add(new FontGlyphModel(character, x, y));
@@ -56,6 +57,6 @@ public class FontCanvas implements AutoCloseable {
   }
 
   private void drawString(String text, int x, int y) {
-    graphics2D.drawString(text, x, y + maxAscent);
+    graphics2D.drawString(text, x, y + fontInformation.getMaxAscent());
   }
 }

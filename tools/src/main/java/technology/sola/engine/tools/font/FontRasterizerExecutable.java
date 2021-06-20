@@ -55,8 +55,7 @@ public class FontRasterizerExecutable implements ToolExecutable {
   }
 
   private FontModel prepareFontModel(FontInformation fontInformation, FontCanvas fontCanvas) {
-    List<FontGlyphModel> fontGlyphModelList = fontInformation.getFontGlyphs(CHARACTERS);
-    List<FontGlyphModel> fontGlyphModelsWithPositions = fontCanvas.drawFontGlyphs(fontGlyphModelList, fontInformation.getMaxCharacterHeight());
+    List<FontGlyphModel> fontGlyphModelsWithPositions = fontCanvas.drawFontGlyphs(CHARACTERS);
 
     return new FontModel(fontInformation, fontGlyphModelsWithPositions);
   }
