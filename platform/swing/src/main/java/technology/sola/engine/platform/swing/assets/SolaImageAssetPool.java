@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.swing;
+package technology.sola.engine.platform.swing.assets;
 
 import technology.sola.engine.assets.AbstractAssetPool;
 import technology.sola.engine.graphics.SolaImage;

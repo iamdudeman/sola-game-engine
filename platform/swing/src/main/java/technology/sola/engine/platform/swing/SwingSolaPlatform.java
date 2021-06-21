@@ -3,6 +3,8 @@ package technology.sola.engine.platform.swing;
 import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.platform.swing.assets.FontAssetPool;
+import technology.sola.engine.platform.swing.assets.SolaImageAssetPool;
 
 import javax.swing.*;
 import java.awt.*;

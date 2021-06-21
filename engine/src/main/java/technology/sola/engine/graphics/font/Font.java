@@ -6,8 +6,6 @@ import technology.sola.engine.graphics.SolaImage;
 import java.util.HashMap;
 import java.util.Map;
 
-// TODO implement font loading for other platforms than swing
-
 public class Font {
   private final FontInfo fontInfo;
   private final Map<Color, Map<Character, SolaImage>> colorToGlyphsMap = new HashMap<>();
@@ -43,28 +41,30 @@ public class Font {
       mapToUse = cachedCharacterToGlyphMap;
     }
 
-    return mapToUse.computeIfAbsent(character, key -> {
-      SolaImage blackGlyph = getGlyph(key, Color.BLACK);
-
-      int newTextColor = color.hexInt();
-      int[] originalPixels = blackGlyph.getPixels();
-      int[] coloredTextPixels = new int[originalPixels.length];
-
-      for (int i = 0; i < originalPixels.length; i++) {
-        int pixel = originalPixels[i];
-
-        if (pixel == Color.BLACK.hexInt()) {
-          pixel = newTextColor;
-        }
-
-        coloredTextPixels[i] = pixel;
-      }
-
-      return new SolaImage(blackGlyph.getWidth(), blackGlyph.getHeight(), coloredTextPixels);
-    });
+    return mapToUse.computeIfAbsent(character, key -> getGlyphAsColor(key, color));
   }
 
   public FontInfo getFontInfo() {
     return fontInfo;
+  }
+
+  private SolaImage getGlyphAsColor(char character, Color color) {
+    SolaImage blackGlyph = getGlyph(character, Color.BLACK);
+
+    int newGlyphColor = color.hexInt();
+    int[] originalPixels = blackGlyph.getPixels();
+    int[] coloredGlyphPixels = new int[originalPixels.length];
+
+    for (int i = 0; i < originalPixels.length; i++) {
+      int pixel = originalPixels[i];
+
+      if (pixel == Color.BLACK.hexInt()) {
+        pixel = newGlyphColor;
+      }
+
+      coloredGlyphPixels[i] = pixel;
+    }
+
+    return new SolaImage(blackGlyph.getWidth(), blackGlyph.getHeight(), coloredGlyphPixels);
   }
 }
