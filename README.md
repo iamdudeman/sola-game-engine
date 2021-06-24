@@ -1,9 +1,4 @@
 # Branch WIP
-* Renderer
-  * DrawString method(s)
-    * DrawString could use this bitmap to actually draw the pixels with the desired color
-* Tools
-  * Tool to rasterize fonts into a bitmap + font information files
 
 
 # TODO List

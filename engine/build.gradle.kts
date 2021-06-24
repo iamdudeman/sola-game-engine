@@ -19,6 +19,7 @@ repositories {
 }
 
 dependencies {
+  // TODO possibly switch this back to implementation (need a JSON abstraction layer in place instead)
   api("com.google.code.gson:gson:2.8.7")
 
   // Logging
