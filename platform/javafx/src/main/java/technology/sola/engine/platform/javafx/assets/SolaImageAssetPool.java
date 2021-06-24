@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.javafx;
+package technology.sola.engine.platform.javafx.assets;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelFormat;

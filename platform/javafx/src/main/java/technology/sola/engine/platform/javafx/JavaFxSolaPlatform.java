@@ -8,11 +8,15 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.PixelFormat;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
+import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.platform.javafx.assets.FontAssetPool;
+import technology.sola.engine.platform.javafx.assets.SolaImageAssetPool;
 
 import java.util.function.Consumer;
 
@@ -28,7 +32,9 @@ public class JavaFxSolaPlatform extends AbstractSolaPlatform {
   public void init() {
     Platform.startup(() -> { });
 
-    assetPoolProvider.addAssetPool(new SolaImageAssetPool());
+    AssetPool<SolaImage> solaImageAssetPool = new SolaImageAssetPool();
+    assetPoolProvider.addAssetPool(solaImageAssetPool);
+    assetPoolProvider.addAssetPool(new FontAssetPool(solaImageAssetPool));
   }
 
   @Override

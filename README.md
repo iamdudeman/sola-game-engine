@@ -7,6 +7,7 @@
 
 
 # TODO List
+* Research Virtual File System
 * Browser Platform
   * Improve performance (StressTestExample can't handle a lot of objects)
   * Implement Font loading
