@@ -31,8 +31,6 @@ public class Font {
   }
 
   public SolaImage getGlyph(char character, Color color) {
-    Map<Character, SolaImage> mapToUse = cachedCharacterToGlyphMap;
-
     if (color.equals(Color.BLACK)) {
       return getBaseGlyph(character);
     }
@@ -42,7 +40,7 @@ public class Font {
       cachedCharacterToGlyphMap = colorToGlyphsMap.computeIfAbsent(color, key -> new HashMap<>());
     }
 
-    return mapToUse.computeIfAbsent(character, key -> getGlyphAsColor(key, color));
+    return cachedCharacterToGlyphMap.computeIfAbsent(character, key -> getGlyphAsColor(key, color));
   }
 
   public FontInfo getFontInfo() {
