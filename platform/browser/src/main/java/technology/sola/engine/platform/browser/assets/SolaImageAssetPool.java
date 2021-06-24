@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.browser;
+package technology.sola.engine.platform.browser.assets;
 
 import technology.sola.engine.assets.AbstractAssetPool;
 import technology.sola.engine.graphics.Color;
@@ -15,6 +15,7 @@ public class SolaImageAssetPool extends AbstractAssetPool<SolaImage> {
   protected SolaImage loadAsset(String path) {
     SolaImage solaImage = new SolaImage(0, 0);
 
+    // TODO figure out a way to do this not async maybe
     JsImageUtils.loadImage(path, new ImageLoadCallbackImpl(solaImage));
 
     return solaImage;

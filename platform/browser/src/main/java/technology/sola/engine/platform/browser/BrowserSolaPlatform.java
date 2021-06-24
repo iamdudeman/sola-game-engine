@@ -7,6 +7,8 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.platform.browser.assets.FontAssetPool;
+import technology.sola.engine.platform.browser.assets.SolaImageAssetPool;
 import technology.sola.engine.platform.browser.javascript.JsCanvasUtils;
 import technology.sola.engine.platform.browser.javascript.JsKeyboardUtils;
 import technology.sola.engine.platform.browser.javascript.JsMouseUtils;
@@ -22,6 +24,7 @@ public class BrowserSolaPlatform extends AbstractSolaPlatform {
   @Override
   protected void init() {
     assetPoolProvider.addAssetPool(new SolaImageAssetPool());
+    assetPoolProvider.addAssetPool(new FontAssetPool());
 
     JsCanvasUtils.canvasInit(abstractSola.getRendererWidth(), abstractSola.getRendererHeight());
     JsKeyboardUtils.keyEventListener("keydown", new KeyPressEventCallback());
