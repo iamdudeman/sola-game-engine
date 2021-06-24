@@ -1,9 +1,9 @@
 package technology.sola.engine.platform.browser.assets;
 
-import technology.sola.engine.assets.AbstractAssetPool;
+import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.graphics.font.Font;
 
-public class FontAssetPool extends AbstractAssetPool<Font> {
+public class FontAssetPool extends AssetPool<Font> {
   @Override
   public Class<Font> getAssetClass() {
     return Font.class;

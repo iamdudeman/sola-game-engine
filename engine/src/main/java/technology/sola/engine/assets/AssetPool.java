@@ -5,7 +5,7 @@ import technology.sola.engine.exception.asset.MissingAssetException;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AbstractAssetPool<T> {
+public abstract class AssetPool<T> {
   protected Map<String, T> cachedAssets = new HashMap<>();
   protected Map<String, String> assetIdToPathMap = new HashMap<>();
 

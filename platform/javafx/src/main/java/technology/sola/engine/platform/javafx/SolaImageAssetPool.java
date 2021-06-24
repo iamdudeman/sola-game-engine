@@ -2,12 +2,12 @@ package technology.sola.engine.platform.javafx;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelFormat;
-import technology.sola.engine.assets.AbstractAssetPool;
+import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.graphics.SolaImage;
 
 import java.io.File;
 
-public class SolaImageAssetPool extends AbstractAssetPool<SolaImage> {
+public class SolaImageAssetPool extends AssetPool<SolaImage> {
   @Override
   public Class<SolaImage> getAssetClass() {
     return SolaImage.class;

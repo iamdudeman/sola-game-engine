@@ -1,6 +1,6 @@
 package technology.sola.engine.examples.common.singlefile;
 
-import technology.sola.engine.assets.AbstractAssetPool;
+import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.World;
@@ -19,8 +19,8 @@ public class RenderingExample extends AbstractSola {
 
   @Override
   protected void onInit() {
-    AbstractAssetPool<SolaImage> solaImageAssetPool = assetPoolProvider.getAssetPool(SolaImage.class);
-    AbstractAssetPool<Font> fontAssetPool = assetPoolProvider.getAssetPool(Font.class);
+    AssetPool<SolaImage> solaImageAssetPool = assetPoolProvider.getAssetPool(SolaImage.class);
+    AssetPool<Font> fontAssetPool = assetPoolProvider.getAssetPool(Font.class);
 
     Font font = fontAssetPool.addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
     renderer.setFont(font);

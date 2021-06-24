@@ -34,11 +34,12 @@ public class Font {
     Map<Character, SolaImage> mapToUse = cachedCharacterToGlyphMap;
 
     if (color.equals(Color.BLACK)) {
-      mapToUse = blackCharacterToGlyphMap;
-    } else if (!color.equals(cachedColor)) {
+      return getBaseGlyph(character);
+    }
+
+    if (!color.equals(cachedColor)) {
       cachedColor = color;
       cachedCharacterToGlyphMap = colorToGlyphsMap.computeIfAbsent(color, key -> new HashMap<>());
-      mapToUse = cachedCharacterToGlyphMap;
     }
 
     return mapToUse.computeIfAbsent(character, key -> getGlyphAsColor(key, color));
@@ -49,7 +50,7 @@ public class Font {
   }
 
   private SolaImage getGlyphAsColor(char character, Color color) {
-    SolaImage blackGlyph = getGlyph(character, Color.BLACK);
+    SolaImage blackGlyph = getBaseGlyph(character);
 
     int newGlyphColor = color.hexInt();
     int[] originalPixels = blackGlyph.getPixels();
@@ -66,5 +67,16 @@ public class Font {
     }
 
     return new SolaImage(blackGlyph.getWidth(), blackGlyph.getHeight(), coloredGlyphPixels);
+  }
+
+  private SolaImage getBaseGlyph(char character) {
+    SolaImage glyph = blackCharacterToGlyphMap.get(character);
+
+    if (glyph == null) {
+      // TODO custom exception
+      throw new RuntimeException("glyph for character " + character + " is not in Font " + fontInfo.getFontName());
+    }
+
+    return glyph;
   }
 }

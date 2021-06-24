@@ -6,20 +6,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AssetPoolProvider {
-  private final Map<Class<?>, AbstractAssetPool<?>> assetPoolMap = new HashMap<>();
+  private final Map<Class<?>, AssetPool<?>> assetPoolMap = new HashMap<>();
 
-  public void addAssetPool(AbstractAssetPool<?> assetPool) {
+  public void addAssetPool(AssetPool<?> assetPool) {
     assetPoolMap.put(assetPool.getAssetClass(), assetPool);
   }
 
   @SuppressWarnings("unchecked")
-  public <T> AbstractAssetPool<T> getAssetPool(Class<T> assetClass) {
-    AbstractAssetPool<?> assetPool = assetPoolMap.get(assetClass);
+  public <T> AssetPool<T> getAssetPool(Class<T> assetClass) {
+    AssetPool<?> assetPool = assetPoolMap.get(assetClass);
 
     if (assetPool == null) {
       throw new MissingAssetPoolException(assetClass);
     }
 
-    return (AbstractAssetPool<T>) assetPool;
+    return (AssetPool<T>) assetPool;
   }
 }

@@ -2,7 +2,7 @@ package technology.sola.engine.platform.swing.assets;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import technology.sola.engine.assets.AbstractAssetPool;
+import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.graphics.font.FontInfo;
@@ -12,10 +12,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class FontAssetPool extends AbstractAssetPool<Font> {
-  private final AbstractAssetPool<SolaImage> solaImageAssetPool;
+public class FontAssetPool extends AssetPool<Font> {
+  private final AssetPool<SolaImage> solaImageAssetPool;
 
-  public FontAssetPool(AbstractAssetPool<SolaImage> solaImageAssetPool) {
+  public FontAssetPool(AssetPool<SolaImage> solaImageAssetPool) {
     this.solaImageAssetPool = solaImageAssetPool;
   }
 
