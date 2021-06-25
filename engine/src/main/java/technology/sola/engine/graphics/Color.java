@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics;
 
+import java.util.Objects;
+
 public class Color {
   public static final Color BLACK = new Color(255, 0, 0, 0);
   public static final Color BLANK = new Color(0, 0, 0, 0);
@@ -52,5 +54,18 @@ public class Color {
 
   public int getBlue() {
     return b;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Color color = (Color) o;
+    return hexInt == color.hexInt;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(hexInt);
   }
 }

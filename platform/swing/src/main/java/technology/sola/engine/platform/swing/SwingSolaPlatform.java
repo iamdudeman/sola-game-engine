@@ -1,8 +1,12 @@
 package technology.sola.engine.platform.swing;
 
+import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.platform.swing.assets.FontAssetPool;
+import technology.sola.engine.platform.swing.assets.SolaImageAssetPool;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +26,9 @@ public class SwingSolaPlatform extends AbstractSolaPlatform {
 
   @Override
   public void init() {
-    assetPoolProvider.addAssetPool(new SolaImageAssetPool());
+    AssetPool<SolaImage> solaImageAssetPool = new SolaImageAssetPool();
+    assetPoolProvider.addAssetPool(solaImageAssetPool);
+    assetPoolProvider.addAssetPool(new FontAssetPool(solaImageAssetPool));
 
     jFrame = new JFrame();
     canvas = new Canvas();

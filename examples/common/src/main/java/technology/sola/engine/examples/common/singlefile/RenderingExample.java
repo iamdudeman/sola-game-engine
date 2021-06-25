@@ -1,12 +1,13 @@
 package technology.sola.engine.examples.common.singlefile;
 
-import technology.sola.engine.assets.AbstractAssetPool;
+import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.physics.component.PositionComponent;
 
 public class RenderingExample extends AbstractSola {
@@ -18,8 +19,11 @@ public class RenderingExample extends AbstractSola {
 
   @Override
   protected void onInit() {
-    AbstractAssetPool<SolaImage> solaImageAssetPool = assetPoolProvider.getAssetPool(SolaImage.class);
+    AssetPool<SolaImage> solaImageAssetPool = assetPoolProvider.getAssetPool(SolaImage.class);
+    AssetPool<Font> fontAssetPool = assetPoolProvider.getAssetPool(Font.class);
 
+    Font font = fontAssetPool.addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
+    renderer.setFont(font);
     solaImage = solaImageAssetPool.addAndGetAsset("test_tiles", "assets/test_tiles.png");
 
     World world = new World(1);
@@ -63,6 +67,17 @@ public class RenderingExample extends AbstractSola {
 
         renderer.fillRect(position.getX(), position.getY(), 50, 50, Color.RED);
       });
+
+    renderer.fillRect(0, 10, 600, 100, Color.WHITE);
+
+    final String characters1 = "!\"#$%&'()*+,-./0123456789:; <=>?@ABCDEFGHIJKLMN";
+    final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+
+    renderer.setRenderMode(RenderMode.MASK);
+    renderer.drawString(characters1, 5, 5, Color.RED);
+    renderer.drawString(characters2, 5, 35, Color.BLACK);
+    renderer.drawString("Hello World!", 5, 65, Color.BLUE);
+    renderer.setRenderMode(RenderMode.NORMAL);
   }
 
   private class TestSystem extends AbstractEcsSystem {

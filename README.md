@@ -1,17 +1,18 @@
+# Branch WIP
+
+
 # TODO List
+* Research Virtual File System
 * Browser Platform
   * Improve performance (StressTestExample can't handle a lot of objects)
+  * Implement Font loading
 * Android Platform
   * Implement
 * Camera
   * Figure out how to implement
     * Translate
     * Scale / zoom
-* Renderer
-  * DrawString method(s)
-    * DrawString could use this bitmap to actually draw the pixels with the desired color
 * Tools
-  * Tool to rasterize fonts into a bitmap + font information files
   * Tool to export browser platform Main java method instead of using gradle plugin
 * Animation
   * Component and System

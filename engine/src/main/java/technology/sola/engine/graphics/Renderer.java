@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics;
 
+import technology.sola.engine.graphics.font.Font;
+
 import java.util.Arrays;
 import java.util.function.Consumer;
 
@@ -8,6 +10,7 @@ public class Renderer {
   private final int height;
   private final int[] pixels;
   private RenderMode renderMode = RenderMode.NORMAL;
+  private Font font;
 
   public Renderer(int width, int height) {
     this.width = width;
@@ -17,6 +20,10 @@ public class Renderer {
 
   public void setRenderMode(RenderMode renderMode) {
     this.renderMode = renderMode;
+  }
+
+  public void setFont(Font font) {
+    this.font = font;
   }
 
   public void clear() {
@@ -191,6 +198,17 @@ public class Renderer {
         yImagePos++;
       }
       index++;
+    }
+  }
+
+  public void drawString(String text, float x, float y, Color color) {
+    int xOffset = 0;
+
+    for (char character : text.toCharArray()) {
+      SolaImage glyphImage = font.getGlyph(character, color);
+
+      drawImage(x + xOffset, y, glyphImage);
+      xOffset += glyphImage.getWidth() + font.getFontInfo().getLeading();
     }
   }
 

@@ -71,9 +71,6 @@
     <module name="ModifierOrder"/>
 
     <!-- Naming Conventions: https://checkstyle.sourceforge.io/config_naming.html -->
-    <module name="AbstractClassName">
-      <property name="format" value="^Abstract((?!Test).)*$"/>
-    </module>
     <module name="CatchParameterName">
       <property name="format" value="^(ex|[a-z][a-z][a-zA-Z]+)$"/>
     </module>
