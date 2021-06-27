@@ -2,30 +2,32 @@
 
 
 # TODO List
+* Camera
+  * Figure out how to implement
+    * Translate
+    * Scale / zoom
+* GUI
+  * Elements
+    * Text
+    * Button
+  * Layout
+* Animation
+  * Component and System
+* Scene
+  * Implement a good abstraction for this (maybe use the one SolKana had)
 * Research Virtual File System
 * Browser Platform
   * Improve performance (StressTestExample can't handle a lot of objects)
   * Implement Font loading
 * Android Platform
   * Implement
-* Camera
-  * Figure out how to implement
-    * Translate
-    * Scale / zoom
 * Tools
+  * Export from Engine UI to installer of some sort
+    * Include JRE and assets
   * Tool to export browser platform Main java method instead of using gradle plugin
-* Animation
-  * Component and System
-* Scene
-  * Implement a good abstraction for this (maybe use the one SolKana had)
 * Audio
   * Interface for type
   * Implement loader per platform (Swing and JavaFX can probably share though)
-* GUI
-  * Elements
-    * Text
-    * Button
-  * Layout
 * Build pipeline
   * Run full build for testing and code quality
   * Generate engine and platform artifacts
