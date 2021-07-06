@@ -19,4 +19,4 @@ dependency-reduced-pom.xml
 
 # Engine
 temp.mp3
-*.log
+*.log*

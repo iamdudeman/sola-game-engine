@@ -1,7 +1,7 @@
 package technology.sola.engine.physics.component;
 
 import technology.sola.engine.ecs.Component;
-import technology.sola.math.SolKanaMath;
+import technology.sola.math.SolaMath;
 import technology.sola.math.linear.Vector2D;
 
 public class VelocityComponent implements Component {
@@ -53,7 +53,7 @@ public class VelocityComponent implements Component {
     float velocityY = vector2D.y;
 
     if (maxVelocityX != null) {
-      velocityX = SolKanaMath.clamp(-maxVelocityX, maxVelocityX, vector2D.x);
+      velocityX = SolaMath.clamp(-maxVelocityX, maxVelocityX, vector2D.x);
     }
 
     velocity = new Vector2D(velocityX, velocityY);

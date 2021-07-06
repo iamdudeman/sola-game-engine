@@ -9,7 +9,7 @@ import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.PositionComponent;
 import technology.sola.engine.physics.component.VelocityComponent;
 import technology.sola.engine.physics.event.CollisionManifoldEvent;
-import technology.sola.math.SolKanaMath;
+import technology.sola.math.SolaMath;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.ArrayList;
@@ -115,7 +115,7 @@ public class ImpulseCollisionResolutionSystem extends AbstractEcsSystem implemen
         float friction = (float)Math.sqrt(entityA.friction * entityB.friction);
         float impulseScalarTimesFriction = impulseScalar * friction;
 
-        tangentImpulseScalar = SolKanaMath.clamp(-impulseScalarTimesFriction, impulseScalarTimesFriction, tangentImpulseScalar);
+        tangentImpulseScalar = SolaMath.clamp(-impulseScalarTimesFriction, impulseScalarTimesFriction, tangentImpulseScalar);
 
         Vector2D tangentImpulse = tangentNormal.scalar(tangentImpulseScalar);
 

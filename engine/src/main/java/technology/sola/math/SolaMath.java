@@ -3,9 +3,9 @@ package technology.sola.math;
 import technology.sola.math.linear.Vector2D;
 
 /**
- * SolKanaMath is a collection of static math functions.
+ * SolaMath is a collection of static math functions.
  */
-public final class SolKanaMath {
+public final class SolaMath {
   /**
    * Clamps a float value between a min and max.
    *
@@ -29,12 +29,12 @@ public final class SolKanaMath {
    * @return the clamped {@code Vector2D}
    */
   public static Vector2D clamp(Vector2D min, Vector2D max, Vector2D value) {
-    float closestX = SolKanaMath.clamp(min.x, max.x, value.x);
-    float closestY = SolKanaMath.clamp(min.y, max.y, value.y);
+    float closestX = SolaMath.clamp(min.x, max.x, value.x);
+    float closestY = SolaMath.clamp(min.y, max.y, value.y);
 
     return new Vector2D(closestX, closestY);
   }
 
-  private SolKanaMath() {
+  private SolaMath() {
   }
 }

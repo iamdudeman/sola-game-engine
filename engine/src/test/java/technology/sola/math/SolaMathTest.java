@@ -6,28 +6,28 @@ import technology.sola.math.linear.Vector2D;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SolKanaMathTest {
+public class SolaMathTest {
   @Nested
   class clamp {
     @Nested
     class floats {
       @Test
       void whenSmaller_shouldUseMin() {
-        float result = SolKanaMath.clamp(0, 10, -5);
+        float result = SolaMath.clamp(0, 10, -5);
 
         assertEquals(0, result);
       }
 
       @Test
       void whenLarger_shouldUseMax() {
-        float result = SolKanaMath.clamp(0, 10, 12);
+        float result = SolaMath.clamp(0, 10, 12);
 
         assertEquals(10, result);
       }
 
       @Test
       void whenBetween_shouldUseValue() {
-        float result = SolKanaMath.clamp(0, 10, 6);
+        float result = SolaMath.clamp(0, 10, 6);
 
         assertEquals(6, result);
       }
@@ -40,21 +40,21 @@ public class SolKanaMathTest {
 
       @Test
       void whenSmaller_shouldUseMin() {
-        Vector2D result = SolKanaMath.clamp(min, max, new Vector2D(-5, -4));
+        Vector2D result = SolaMath.clamp(min, max, new Vector2D(-5, -4));
 
         assertEquals(min, result);
       }
 
       @Test
       void whenLarger_shouldUseMax() {
-        Vector2D result = SolKanaMath.clamp(min, max, new Vector2D(11, 12));
+        Vector2D result = SolaMath.clamp(min, max, new Vector2D(11, 12));
 
         assertEquals(max, result);
       }
 
       @Test
       void whenBetween_shouldUseValue() {
-        Vector2D result = SolKanaMath.clamp(min, max, new Vector2D(5, 4));
+        Vector2D result = SolaMath.clamp(min, max, new Vector2D(5, 4));
 
         assertEquals(new Vector2D(5, 4), result);
       }

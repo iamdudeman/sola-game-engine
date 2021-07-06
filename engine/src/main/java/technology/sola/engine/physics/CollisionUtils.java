@@ -3,7 +3,7 @@ package technology.sola.engine.physics;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.PositionComponent;
-import technology.sola.math.SolKanaMath;
+import technology.sola.math.SolaMath;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
@@ -56,7 +56,7 @@ public final class CollisionUtils {
     Rectangle rectangle, Circle circle
   ) {
     Vector2D circleCenter = circle.getCenter();
-    Vector2D closestPointOnRectangle = SolKanaMath.clamp(rectangle.getMin(), rectangle.getMax(), circleCenter);
+    Vector2D closestPointOnRectangle = SolaMath.clamp(rectangle.getMin(), rectangle.getMax(), circleCenter);
     boolean isCircleCenterInsideRectangle = circleCenter.equals(closestPointOnRectangle);
 
     if (isCircleCenterInsideRectangle) {

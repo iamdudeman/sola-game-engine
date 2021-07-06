@@ -6,6 +6,15 @@
   * Figure out how to implement
     * Translate
     * Scale / zoom
+  * Screen units vs world units?
+* Window resizing
+  * scaling algorithms
+    * nearest neighbor
+    * bilinear interpolation
+  * aspect ratio options
+    * stretch
+    * maintain
+    * ignore resizing
 * GUI
   * Elements
     * Text
