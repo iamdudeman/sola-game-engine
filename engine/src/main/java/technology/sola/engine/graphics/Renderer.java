@@ -1,6 +1,8 @@
 package technology.sola.engine.graphics;
 
 import technology.sola.engine.graphics.font.Font;
+import technology.sola.math.geometry.Rectangle;
+import technology.sola.math.linear.Vector2D;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
@@ -215,6 +217,43 @@ public class Renderer {
       }
       index++;
     }
+  }
+
+  public void drawImage(float x, float y, SolaImage solaImage, AffineTransform affineTransform) {
+    int[] imagePixels = solaImage.getPixels();
+    int xInt = (int)(x + 0.5f);
+    int yInt = (int)(y + 0.5f);
+
+    int index = 0;
+    int xImagePos = 0;
+    int yImagePos = 0;
+
+    affineTransform.invert();
+
+    Rectangle rectangle = affineTransform.getTransformBoundingBox(solaImage.getWidth(), solaImage.getHeight());
+
+    for (int x2 = (int)rectangle.getMin().x; x2 < rectangle.getMax().x; x2++) {
+      for (int y2 = (int)rectangle.getMin().y; y2 < rectangle.getMax().y; y2++) {
+        Vector2D newPosition = affineTransform.forward(x2, y2);
+        int pixel = solaImage.getPixel(newPosition.x, newPosition.y);
+
+        // TODO draw new pixel
+        setPixel(x2 + xInt, y2 + yInt, pixel);
+      }
+    }
+
+//    while (index < imagePixels.length) {
+//      int color = imagePixels[index];
+//
+//      setPixel(xInt + xImagePos, yInt + yImagePos, color);
+//
+//      xImagePos++;
+//      if (xImagePos >= solaImage.getWidth()) {
+//        xImagePos = 0;
+//        yImagePos++;
+//      }
+//      index++;
+//    }
   }
 
   public void drawString(String text, float x, float y, Color color) {

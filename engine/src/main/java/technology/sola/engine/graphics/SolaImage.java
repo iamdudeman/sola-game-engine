@@ -21,6 +21,18 @@ public class SolaImage {
     this.pixels = pixels;
   }
 
+  public int getPixel(int x, int y) {
+    if (x >= 0 && x < width && y >= 0 && y < height) {
+      return pixels[x + y * width];
+    } else {
+      return 0;
+    }
+  }
+
+  public int getPixel(float x, float y) {
+    return getPixel((int)(x + 0.5f), (int)(y + 0.5f));
+  }
+
   public int[] getPixels() {
     return pixels;
   }

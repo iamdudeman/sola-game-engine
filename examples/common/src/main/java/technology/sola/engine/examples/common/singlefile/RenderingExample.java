@@ -4,6 +4,7 @@ import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.World;
+import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.SolaImage;
@@ -54,6 +55,11 @@ public class RenderingExample extends AbstractSola {
     renderer.drawCircle(300, 150, 100.5f, Color.RED);
 
     renderer.drawImage(400, 400, solaImage);
+    AffineTransform affineTransform = new AffineTransform();
+    affineTransform.translate(50, 100);
+    affineTransform.rotate(0.2f);
+    affineTransform.scale(.5f, 2f);
+    renderer.drawImage(400, 400, solaImage, affineTransform);
     renderer.drawImage(400, 530, solaImage.getSubImage(1, 1, 16, 16));
 
     renderer.fillRect(180, 530, 50, 50, new Color(255, 0, 0, 255));
