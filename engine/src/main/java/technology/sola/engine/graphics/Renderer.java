@@ -46,6 +46,10 @@ public class Renderer {
     return pixels[x + y * width];
   }
 
+  public int getPixel(float x, float y) {
+    return getPixel((int)(x + 0.5f), (int)(y + 0.5f));
+  }
+
   public void setPixel(int x, int y, Color color) {
     int hexInt = color.hexInt();
 
