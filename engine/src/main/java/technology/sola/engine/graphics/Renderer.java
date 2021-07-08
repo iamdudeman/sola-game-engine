@@ -18,6 +18,14 @@ public class Renderer {
     this.pixels = new int[width * height];
   }
 
+  public int getWidth() {
+    return width;
+  }
+
+  public int getHeight() {
+    return height;
+  }
+
   public void setRenderMode(RenderMode renderMode) {
     this.renderMode = renderMode;
   }
@@ -32,6 +40,10 @@ public class Renderer {
 
   public void render(Consumer<int[]> pixelConsumer) {
     pixelConsumer.accept(pixels);
+  }
+
+  public int getPixel(int x, int y) {
+    return pixels[x + y * width];
   }
 
   public void setPixel(int x, int y, Color color) {
