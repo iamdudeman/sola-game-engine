@@ -1,6 +1,5 @@
 package technology.sola.math.linear;
 
-import technology.sola.engine.graphics.Renderer;
 import technology.sola.math.geometry.Rectangle;
 
 /**
@@ -104,21 +103,6 @@ public class Matrix3D {
       x * matrix[0][1] + y * matrix[1][1] + matrix[2][1]
     );
   }
-  /*
-  void olc::GFX2D::Transform2D::Backward(float in_x, float in_y, float &out_x, float &out_y)
-	{
-		out_x = in_x * matrix[3][0][0] + in_y * matrix[3][1][0] + matrix[3][2][0];
-		out_y = in_x * matrix[3][0][1] + in_y * matrix[3][1][1] + matrix[3][2][1];
-		float out_z = in_x * matrix[3][0][2] + in_y * matrix[3][1][2] + matrix[3][2][2];
-		if (out_z != 0)
-		{
-			out_x /= out_z;
-			out_y /= out_z;
-		}
-	}
-   */
-
-  // TODO to render must call "invert" first then "applyGood"
 
   public Rectangle getTransformedBoundingBox(int width, int height) {
     // top left
@@ -151,60 +135,5 @@ public class Matrix3D {
     ey = Math.max(ey, point.y);
 
     return new Rectangle(new Vector2D(sx, sy), new Vector2D(ex, ey));
-  }
-
-  public void applyGood(Renderer renderer) {
-    // top left
-    Vector2D point = forward(0, 0);
-
-    float sx = point.x;
-    float ex = point.x;
-    float sy = point.y;
-    float ey = point.y;
-
-    // bottom right
-    point = forward(renderer.getWidth(), renderer.getHeight());
-    sx = Math.min(sx, point.x);
-    sy = Math.min(sy, point.y);
-    ex = Math.max(ex, point.x);
-    ey = Math.max(ey, point.x);
-
-    // top right
-    point = forward(renderer.getWidth(), 0);
-    sx = Math.min(sx, point.x);
-    sy = Math.min(sy, point.y);
-    ex = Math.max(ex, point.x);
-    ey = Math.max(ey, point.x);
-
-    // bottom left
-    point = forward(0, renderer.getHeight());
-    sx = Math.min(sx, point.x);
-    sy = Math.min(sy, point.y);
-    ex = Math.max(ex, point.x);
-    ey = Math.max(ey, point.x);
-
-    for (int x = (int)sx; x < ex; x++) {
-      for (int y = (int)sy; y < ey; y++) {
-        Vector2D newPosition = forward(x, y);
-        int pixel = renderer.getPixel(newPosition.x, newPosition.y);
-
-        // TODO draw new pixel
-      }
-    }
-  }
-
-  @Deprecated
-  public int[] applyForward(Renderer renderer) {
-    for (int x = 0; x < renderer.getWidth(); x++) {
-      for (int y = 0; y < renderer.getHeight(); y++) {
-        int pixel = renderer.getPixel(x, y);
-
-        Vector2D newPosition = forward(x, y);
-
-//        renderer.setPixel(newPosition.);
-      }
-    }
-
-    return null;
   }
 }

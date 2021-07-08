@@ -25,7 +25,7 @@ public class SolaImage {
     if (x >= 0 && x < width && y >= 0 && y < height) {
       return pixels[x + y * width];
     } else {
-      return 0;
+      return Color.BLANK.hexInt();
     }
   }
 
