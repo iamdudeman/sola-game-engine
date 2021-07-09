@@ -216,6 +216,17 @@ public class Renderer {
     }
   }
 
+  public void drawImage(SolaImage solaImage, float x, float y, float width, float height) {
+    float scaleX = solaImage.getWidth() / width;
+    float scaleY = solaImage.getHeight() / height;
+
+    AffineTransform affineTransform = new AffineTransform()
+      .scale(scaleX, scaleY)
+      .translate(x, y);
+
+    drawImage(solaImage, affineTransform);
+  }
+
   public void drawString(String text, float x, float y, Color color) {
     int xOffset = 0;
 

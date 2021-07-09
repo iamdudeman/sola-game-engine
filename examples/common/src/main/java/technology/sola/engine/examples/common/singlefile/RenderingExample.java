@@ -62,6 +62,7 @@ public class RenderingExample extends AbstractSola {
       .rotate(0.2f);
     renderer.setRenderMode(RenderMode.MASK);
     renderer.drawImage(solaImage, affineTransform);
+
     renderer.setRenderMode(RenderMode.NORMAL);
     renderer.drawImage(400, 530, solaImage.getSubImage(1, 1, 16, 16));
 
