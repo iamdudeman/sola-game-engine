@@ -1,12 +1,14 @@
 # Branch WIP
-
-
-# TODO List
+* AffineTransform
+  * Matrix3D operations
 * Camera
   * Figure out how to implement
     * Translate
     * Scale / zoom
   * Screen units vs world units?
+
+
+# TODO List
 * Window resizing
   * scaling algorithms
     * nearest neighbor
