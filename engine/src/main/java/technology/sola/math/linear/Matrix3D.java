@@ -23,8 +23,8 @@ public class Matrix3D {
   public static Matrix3D translate(float tx, float ty) {
     Matrix3D result = new Matrix3D();
 
-    result.matrix[0][0] = 1f; result.matrix[1][0] = 0f; result.matrix[2][0] = tx;
-    result.matrix[0][1] = 0f; result.matrix[1][1] = 1f; result.matrix[2][1] = ty;
+    result.matrix[0][0] = 1f; result.matrix[1][0] = 0f; result.matrix[2][0] = -tx;
+    result.matrix[0][1] = 0f; result.matrix[1][1] = 1f; result.matrix[2][1] = -ty;
     result.matrix[0][2] = 0f; result.matrix[1][2] = 0f; result.matrix[2][2] = 1f;
 
     return result;
@@ -104,7 +104,7 @@ public class Matrix3D {
     );
   }
 
-  public Rectangle getTransformedBoundingBox(int width, int height) {
+  public Rectangle getBoundingBoxForTransform(int width, int height) {
     // top left
     Vector2D point = forward(0, 0);
 

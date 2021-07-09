@@ -15,42 +15,41 @@ public class AffineTransform {
     isDirty = false;
   }
 
-  public void translate(float tx, float ty) {
-    matrix3D = matrix3D.multiply(Matrix3D.translate(tx, ty));
-    isDirty = true;
+  public AffineTransform translate(float tx, float ty) {
+    return applyTransform(Matrix3D.translate(tx, ty));
   }
 
-  public void scale(float sx, float sy) {
-    matrix3D = matrix3D.multiply(Matrix3D.scale(sx, sy));
-    isDirty = true;
+  public AffineTransform scale(float sx, float sy) {
+    return applyTransform(Matrix3D.scale(sx, sy));
   }
 
-  public void rotate(float radians) {
-    matrix3D = matrix3D.multiply(Matrix3D.rotate(radians));
-    isDirty = true;
+  public AffineTransform rotate(float radians) {
+    return applyTransform(Matrix3D.rotate(radians));
   }
 
-  public void sheer(float sx, float sy) {
-    matrix3D = matrix3D.multiply(Matrix3D.sheer(sx, sy));
-    isDirty = true;
-  }
-
-  public void invert() {
-    if (!isDirty) return;
-
-    invertedMatrix3D = matrix3D.invert();
-    isDirty = false;
+  public AffineTransform sheer(float sx, float sy) {
+    return applyTransform(Matrix3D.sheer(sx, sy));
   }
 
   public Vector2D forward(float x, float y) {
     return matrix3D.forward(x, y);
   }
 
-  public Vector2D backward(float x, float y) {
-    return invertedMatrix3D.forward(x, y);
+  public Rectangle getBoundingBoxForTransform(int width, int height) {
+    invert();
+    return invertedMatrix3D.getBoundingBoxForTransform(width, height);
   }
 
-  public Rectangle getTransformBoundingBox(int width, int height) {
-    return invertedMatrix3D.getTransformedBoundingBox(width, height);
+  private void invert() {
+    if (isDirty) {
+      invertedMatrix3D = matrix3D.invert();
+      isDirty = false;
+    }
+  }
+
+  private AffineTransform applyTransform(Matrix3D matrix3D) {
+    this.matrix3D = this.matrix3D.multiply(matrix3D);
+    isDirty = true;
+    return this;
   }
 }

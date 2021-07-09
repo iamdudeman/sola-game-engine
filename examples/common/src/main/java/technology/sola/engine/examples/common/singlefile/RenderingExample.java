@@ -55,12 +55,13 @@ public class RenderingExample extends AbstractSola {
     renderer.drawCircle(300, 150, 100.5f, Color.RED);
 
     renderer.drawImage(400, 400, solaImage);
-    AffineTransform affineTransform = new AffineTransform();
-    affineTransform.translate(50, 100);
-    affineTransform.rotate(0.2f);
-    affineTransform.scale(.5f, .5f);
+    AffineTransform affineTransform = new AffineTransform()
+      .scale(.5f, .5f)
+      .translate(400, 400)
+      .translate(-100, -100)
+      .rotate(0.2f);
     renderer.setRenderMode(RenderMode.MASK);
-    renderer.drawImage(400, 400, solaImage, affineTransform);
+    renderer.drawImage(solaImage, affineTransform);
     renderer.setRenderMode(RenderMode.NORMAL);
     renderer.drawImage(400, 530, solaImage.getSubImage(1, 1, 16, 16));
 
