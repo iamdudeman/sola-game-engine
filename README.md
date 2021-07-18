@@ -1,14 +1,13 @@
 # Branch WIP
-* AffineTransform
-  * Matrix3D operations
+
+# TODO List
 * Camera
   * Figure out how to implement
     * Translate
     * Scale / zoom
+  * Possibly multiple cameras?
+    * Camera output to section of a screen (allows split screen then)?
   * Screen units vs world units?
-
-
-# TODO List
 * Window resizing
   * scaling algorithms
     * nearest neighbor

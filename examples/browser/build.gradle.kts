@@ -28,7 +28,7 @@ teavm {
   targetDirectory = file("build")
   targetFileName = "sola.js"
 
-  isMinifying = true
+  isMinifying = false
   isSourceMapsGenerated = false
   isSourceFilesCopied = false
   targetType = org.teavm.tooling.TeaVMTargetType.JAVASCRIPT
