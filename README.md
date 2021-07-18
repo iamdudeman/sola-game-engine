@@ -1,11 +1,12 @@
 # Branch WIP
 
-
 # TODO List
 * Camera
   * Figure out how to implement
     * Translate
     * Scale / zoom
+  * Possibly multiple cameras?
+    * Camera output to section of a screen (allows split screen then)?
   * Screen units vs world units?
 * Window resizing
   * scaling algorithms

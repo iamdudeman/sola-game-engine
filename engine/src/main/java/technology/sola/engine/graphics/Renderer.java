@@ -1,6 +1,8 @@
 package technology.sola.engine.graphics;
 
 import technology.sola.engine.graphics.font.Font;
+import technology.sola.math.geometry.Rectangle;
+import technology.sola.math.linear.Vector2D;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
@@ -62,6 +64,7 @@ public class Renderer {
         pixels[x + y * width] = newArgb;
         break;
       default:
+        // TODO specific exception
         throw new RuntimeException("Unknown render mode");
     }
   }
@@ -91,7 +94,8 @@ public class Renderer {
         setPixel(i, yInt, color);
       }
     } else {
-      throw new RuntimeException("Not yet implemented");
+      // TODO implement
+      throw new RuntimeException("Diagonal lines not yet implemented");
     }
   }
 
@@ -199,6 +203,30 @@ public class Renderer {
       }
       index++;
     }
+  }
+
+  public void drawImage(SolaImage solaImage, AffineTransform affineTransform) {
+    Rectangle transformBoundingBox = affineTransform.getBoundingBoxForTransform(solaImage.getWidth(), solaImage.getHeight());
+
+    for (int x = (int)transformBoundingBox.getMin().x; x < transformBoundingBox.getMax().x; x++) {
+      for (int y = (int)transformBoundingBox.getMin().y; y < transformBoundingBox.getMax().y; y++) {
+        Vector2D newPosition = affineTransform.forward(x, y);
+        int pixel = solaImage.getPixel(newPosition.x, newPosition.y);
+
+        setPixel(x, y , pixel);
+      }
+    }
+  }
+
+  public void drawImage(SolaImage solaImage, float x, float y, float width, float height) {
+    float scaleX = solaImage.getWidth() / width;
+    float scaleY = solaImage.getHeight() / height;
+
+    AffineTransform affineTransform = new AffineTransform()
+      .scale(scaleX, scaleY)
+      .translate(x, y);
+
+    drawImage(solaImage, affineTransform);
   }
 
   public void drawString(String text, float x, float y, Color color) {
