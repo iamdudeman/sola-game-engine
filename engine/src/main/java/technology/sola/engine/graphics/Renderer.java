@@ -64,6 +64,7 @@ public class Renderer {
         pixels[x + y * width] = newArgb;
         break;
       default:
+        // TODO specific exception
         throw new RuntimeException("Unknown render mode");
     }
   }
@@ -93,7 +94,8 @@ public class Renderer {
         setPixel(i, yInt, color);
       }
     } else {
-      throw new RuntimeException("Not yet implemented");
+      // TODO implement
+      throw new RuntimeException("Diagonal lines not yet implemented");
     }
   }
 
