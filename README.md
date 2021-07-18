@@ -1,6 +1,4 @@
 # Branch WIP
-
-# TODO List
 * Camera
   * Figure out how to implement
     * Translate
@@ -16,6 +14,8 @@
     * stretch
     * maintain
     * ignore resizing
+
+# TODO List
 * GUI
   * Elements
     * Text
