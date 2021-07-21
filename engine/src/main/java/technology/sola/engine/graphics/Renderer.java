@@ -7,17 +7,12 @@ import technology.sola.math.linear.Vector2D;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
-public class Renderer {
-  private final int width;
-  private final int height;
-  private final int[] pixels;
+public class Renderer extends Canvas {
   private RenderMode renderMode = RenderMode.NORMAL;
   private Font font;
 
   public Renderer(int width, int height) {
-    this.width = width;
-    this.height = height;
-    this.pixels = new int[width * height];
+    super(width, height);
   }
 
   public void setRenderMode(RenderMode renderMode) {
