@@ -7,13 +7,21 @@
     * Camera output to section of a screen (allows split screen then)?
   * Screen units vs world units?
 * Window resizing
-  * scaling algorithms
+  * scaling algorithms (or does affine transforms work for this instead?)
     * nearest neighbor
     * bilinear interpolation
   * aspect ratio options
     * stretch
     * maintain
     * ignore resizing
+
+(rough possible outline)
+Renderer ->
+  drawRectangle ->
+    cameras.each apply affine ->
+      drawRectangle logic to fixed width+height Canvas ->
+        screen canvas draw scaled image of fixed width+height Canvas
+Should Layers also be implemented now and be incorporated in flow above?
 
 # TODO List
 * GUI
