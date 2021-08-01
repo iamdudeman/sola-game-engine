@@ -1,4 +1,7 @@
 # Branch WIP
+
+# TODO List
+* Layers
 * Camera
   * Figure out how to implement
     * Translate
@@ -6,24 +9,6 @@
   * Possibly multiple cameras?
     * Camera output to section of a screen (allows split screen then)?
   * Screen units vs world units?
-* Window resizing
-  * scaling algorithms (or does affine transforms work for this instead?)
-    * nearest neighbor
-    * bilinear interpolation
-  * aspect ratio options
-    * stretch
-    * maintain
-    * ignore resizing
-
-(rough possible outline)
-Renderer ->
-  drawRectangle ->
-    cameras.each apply affine ->
-      drawRectangle logic to fixed width+height Canvas ->
-        screen canvas draw scaled image of fixed width+height Canvas
-Should Layers also be implemented now and be incorporated in flow above?
-
-# TODO List
 * GUI
   * Elements
     * Text
@@ -37,6 +22,7 @@ Should Layers also be implemented now and be incorporated in flow above?
 * Browser Platform
   * Improve performance (StressTestExample can't handle a lot of objects)
   * Implement Font loading
+  * Implement window resizing using Viewport
 * Android Platform
   * Implement
 * Tools

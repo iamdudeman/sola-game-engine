@@ -27,6 +27,7 @@ public class Renderer extends Canvas {
     Arrays.fill(this.pixels, Color.BLACK.hexInt());
   }
 
+  @Deprecated
   public void render(Consumer<int[]> pixelConsumer) {
     pixelConsumer.accept(pixels);
   }

@@ -3,6 +3,10 @@ package technology.sola.engine.input;
 public enum Key {
   SPACE(0x20, "Space"),
 
+  ONE(0x31, "1"),
+  TWO(0x32, "2"),
+  THREE(0x33, "3"),
+
   A(0x41, "A"),
   B(0x42, "B"),
   C(0x43, "C"),

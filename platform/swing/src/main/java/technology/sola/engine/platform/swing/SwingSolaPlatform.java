@@ -5,6 +5,7 @@ import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.platform.swing.assets.FontAssetPool;
 import technology.sola.engine.platform.swing.assets.SolaImageAssetPool;
 
@@ -71,6 +72,12 @@ public class SwingSolaPlatform extends AbstractSolaPlatform {
 
     canvas.createBufferStrategy(2);
     jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    jFrame.addComponentListener(new ComponentAdapter() {
+      @Override
+      public void componentResized(ComponentEvent e) {
+        viewport.resize(e.getComponent().getWidth(), e.getComponent().getHeight());
+      }
+    });
     jFrame.addWindowListener(new WindowAdapter() {
       @Override
       public void windowClosing(WindowEvent e) {
@@ -90,16 +97,16 @@ public class SwingSolaPlatform extends AbstractSolaPlatform {
 
   @Override
   public void render(Renderer renderer) {
-    renderer.render(pixels -> {
-      int[] bufferedImageDataBuffer = ((DataBufferInt) bufferedImage.getRaster().getDataBuffer()).getData();
-      System.arraycopy(pixels, 0, bufferedImageDataBuffer, 0, pixels.length);
+    int[] bufferedImageDataBuffer = ((DataBufferInt) bufferedImage.getRaster().getDataBuffer()).getData();
+    System.arraycopy(renderer.getPixels(), 0, bufferedImageDataBuffer, 0, renderer.getPixels().length);
 
-      Graphics graphics = canvas.getBufferStrategy().getDrawGraphics();
+    Graphics graphics = canvas.getBufferStrategy().getDrawGraphics();
 
-      graphics.drawImage(bufferedImage, 0, 0, null);
-      graphics.dispose();
+    AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
 
-      canvas.getBufferStrategy().show();
-    });
+    graphics.drawImage(bufferedImage, aspectRatioSizing.getX(), aspectRatioSizing.getY(), aspectRatioSizing.getWidth(), aspectRatioSizing.getHeight(), null);
+    graphics.dispose();
+
+    canvas.getBufferStrategy().show();
   }
 }

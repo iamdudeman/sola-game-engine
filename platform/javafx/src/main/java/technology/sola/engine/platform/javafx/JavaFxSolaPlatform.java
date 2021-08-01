@@ -13,6 +13,7 @@ import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.platform.javafx.assets.FontAssetPool;
@@ -42,9 +43,9 @@ public class JavaFxSolaPlatform extends AbstractSolaPlatform {
     Platform.runLater(() -> {
       final Stage stage = new Stage();
       final Group root = new Group();
-      final Scene scene = new Scene(root);
       int rendererWidth = abstractSola.getRendererWidth();
       int rendererHeight = abstractSola.getRendererHeight();
+      final Scene scene = new Scene(root, rendererWidth, rendererHeight);
       Canvas canvas = new Canvas(rendererWidth, rendererHeight);
 
       root.getChildren().add(canvas);
@@ -60,6 +61,14 @@ public class JavaFxSolaPlatform extends AbstractSolaPlatform {
       canvas.setOnMouseReleased(mouseEvent -> onMouseReleased(
         new MouseEvent(mouseEvent.getButton().ordinal(), (int)mouseEvent.getX(), (int)mouseEvent.getY()))
       );
+      canvas.widthProperty().bind(scene.widthProperty());
+      canvas.heightProperty().bind(scene.heightProperty());
+      canvas.widthProperty().addListener((obs, oldVal, newVal) -> {
+        viewport.resize(newVal.intValue(), (int) canvas.getHeight());
+      });
+      canvas.heightProperty().addListener((obs, oldVal, newVal) -> {
+        viewport.resize((int) canvas.getWidth(), newVal.intValue());
+      });
 
       GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
       WritableImage writableImage = new WritableImage(rendererWidth, rendererHeight);
@@ -68,7 +77,10 @@ public class JavaFxSolaPlatform extends AbstractSolaPlatform {
           0, 0, rendererWidth, rendererHeight,
           PixelFormat.getIntArgbInstance(), pixels, 0, rendererWidth
         );
-        graphicsContext.drawImage(writableImage, 0, 0, rendererWidth, rendererHeight);
+
+        AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+        graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        graphicsContext.drawImage(writableImage, aspectRatioSizing.getX(), aspectRatioSizing.getY(), aspectRatioSizing.getWidth(), aspectRatioSizing.getHeight());
       };
 
       stage.setOnShown(event -> canvas.requestFocus());
@@ -81,6 +93,6 @@ public class JavaFxSolaPlatform extends AbstractSolaPlatform {
 
   @Override
   public void render(Renderer renderer) {
-    renderer.render(pixelArrayConsumer);
+    pixelArrayConsumer.accept(renderer.getPixels());
   }
 }
