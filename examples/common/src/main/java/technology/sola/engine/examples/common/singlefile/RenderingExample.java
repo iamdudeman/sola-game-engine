@@ -5,10 +5,12 @@ import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.AffineTransform;
+import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.font.Font;
+import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.component.PositionComponent;
 
 public class RenderingExample extends AbstractSola {
@@ -100,6 +102,14 @@ public class RenderingExample extends AbstractSola {
           position.setX(position.getX() + 1);
           position.setY(position.getY() + 1);
         });
+
+      if (keyboardInput.isKeyPressed(Key.ONE)) {
+        viewport.setAspectMode(AspectMode.IGNORE_RESIZING);
+      } else if (keyboardInput.isKeyPressed(Key.TWO)) {
+        viewport.setAspectMode(AspectMode.MAINTAIN);
+      } else if (keyboardInput.isKeyPressed(Key.THREE)) {
+        viewport.setAspectMode(AspectMode.STRETCH);
+      }
     }
 
     @Override

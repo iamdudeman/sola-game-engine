@@ -1,52 +1,12 @@
 package technology.sola.engine.graphics;
 
-import java.util.Arrays;
-
-public class SolaImage {
-  private int width;
-  private int height;
-  private int[] pixels;
-
+public class SolaImage extends Canvas {
   public SolaImage(int width, int height) {
-    this.width = width;
-    this.height = height;
-    this.pixels = new int[width * height];
-
-    Arrays.fill(pixels, Color.BLANK.hexInt());
+    super(width, height);
   }
 
   public SolaImage(int width, int height, int[] pixels) {
-    this.width = width;
-    this.height = height;
-    this.pixels = pixels;
-  }
-
-  public int getPixel(int x, int y) {
-    if (x >= 0 && x < width && y >= 0 && y < height) {
-      return pixels[x + y * width];
-    } else {
-      return Color.BLANK.hexInt();
-    }
-  }
-
-  public int getPixel(float x, float y) {
-    return getPixel((int)(x + 0.5f), (int)(y + 0.5f));
-  }
-
-  public int[] getPixels() {
-    return pixels;
-  }
-
-  public int getWidth() {
-    return width;
-  }
-
-  public int getHeight() {
-    return height;
-  }
-
-  public void setPixel(int x, int y, int argb) {
-    this.pixels[x + y * width] = argb;
+    super(width, height, pixels);
   }
 
   public void setPixels(int width, int height, int[] pixels) {

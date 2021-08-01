@@ -8,6 +8,7 @@ import technology.sola.engine.event.gameloop.GameLoopEventListener;
 import technology.sola.engine.ecs.EcsSystemContainer;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.screen.Viewport;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
 
@@ -20,6 +21,7 @@ public abstract class AbstractSola {
   protected EventHub eventHub;
   protected KeyboardInput keyboardInput;
   protected MouseInput mouseInput;
+  protected Viewport viewport;
 
   protected int rendererWidth;
   protected int rendererHeight;
@@ -56,6 +58,7 @@ public abstract class AbstractSola {
     keyboardInput = new KeyboardInput();
     mouseInput = new MouseInput();
     renderer = new Renderer(rendererWidth, rendererHeight);
+    viewport = new Viewport(rendererWidth, rendererHeight);
   }
 
   void start() {

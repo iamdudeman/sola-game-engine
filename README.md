@@ -1,6 +1,7 @@
 # Branch WIP
 
 # TODO List
+* Layers
 * Camera
   * Figure out how to implement
     * Translate
@@ -8,14 +9,6 @@
   * Possibly multiple cameras?
     * Camera output to section of a screen (allows split screen then)?
   * Screen units vs world units?
-* Window resizing
-  * scaling algorithms
-    * nearest neighbor
-    * bilinear interpolation
-  * aspect ratio options
-    * stretch
-    * maintain
-    * ignore resizing
 * GUI
   * Elements
     * Text
@@ -29,6 +22,7 @@
 * Browser Platform
   * Improve performance (StressTestExample can't handle a lot of objects)
   * Implement Font loading
+  * Implement window resizing using Viewport
 * Android Platform
   * Implement
 * Tools
