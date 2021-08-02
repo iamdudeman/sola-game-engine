@@ -104,6 +104,7 @@ public class SwingSolaPlatform extends AbstractSolaPlatform {
 
     AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
 
+    graphics.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     graphics.drawImage(bufferedImage, aspectRatioSizing.getX(), aspectRatioSizing.getY(), aspectRatioSizing.getWidth(), aspectRatioSizing.getHeight(), null);
     graphics.dispose();
 

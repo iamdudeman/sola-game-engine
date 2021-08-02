@@ -1,10 +1,10 @@
 package technology.sola.engine.graphics.screen;
 
 public class AspectRatioSizing {
-  private int x;
-  private int y;
-  private int width;
-  private int height;
+  private final int x;
+  private final int y;
+  private final int width;
+  private final int height;
 
   public AspectRatioSizing(int x, int y, int width, int height) {
     this.x = x;
