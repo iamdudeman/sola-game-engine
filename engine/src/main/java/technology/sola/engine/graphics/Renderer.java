@@ -4,15 +4,39 @@ import technology.sola.engine.graphics.font.Font;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class Renderer extends Canvas {
   private RenderMode renderMode = RenderMode.NORMAL;
   private Font font;
+  private List<RenderGroup> renderGroups = new ArrayList<>();
 
   public Renderer(int width, int height) {
     super(width, height);
+    renderGroups.add(new RenderGroup(0, "root"));
+  }
+
+  public RenderGroup createRenderGroup(String name) {
+    int order = renderGroups.get(renderGroups.size() - 1).getOrder() + 1;
+    RenderGroup renderGroup = new RenderGroup(order, name);
+
+    renderGroups.add(renderGroup);
+
+    return renderGroup;
+  }
+
+  public RenderGroup getRenderGroup(String name) {
+    return  renderGroups.stream()
+      .filter(renderGroup -> renderGroup.getName().equals(name))
+      .findFirst()
+      .orElseThrow();
+  }
+
+  public void renderLayers() {
+    renderGroups.forEach(renderGroup -> renderGroup.draw(this));
   }
 
   public void setRenderMode(RenderMode renderMode) {

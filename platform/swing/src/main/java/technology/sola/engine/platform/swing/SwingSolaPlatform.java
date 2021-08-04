@@ -97,6 +97,7 @@ public class SwingSolaPlatform extends AbstractSolaPlatform {
 
   @Override
   public void render(Renderer renderer) {
+    renderer.renderLayers();
     int[] bufferedImageDataBuffer = ((DataBufferInt) bufferedImage.getRaster().getDataBuffer()).getData();
     System.arraycopy(renderer.getPixels(), 0, bufferedImageDataBuffer, 0, renderer.getPixels().length);
 
