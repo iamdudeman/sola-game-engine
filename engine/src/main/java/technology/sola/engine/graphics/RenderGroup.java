@@ -9,11 +9,20 @@ public class RenderGroup {
   private final PriorityQueue<PrioritizedRenderItem> renderQueue;
   private final int order;
   private final String name;
+  private boolean isEnabled = true;
 
   RenderGroup(int order, String name) {
     this.order = order;
     this.name = name;
     renderQueue = new PriorityQueue<>(Comparator.comparingInt(item -> item.priority));
+  }
+
+  public boolean isEnabled() {
+    return isEnabled;
+  }
+
+  public void setEnabled(boolean isEnabled) {
+    this.isEnabled = isEnabled;
   }
 
   public int getOrder() {
@@ -24,11 +33,11 @@ public class RenderGroup {
     return name;
   }
 
-  public void render(Consumer<Renderer> renderItem) {
-    render(renderItem, DEFAULT_PRIORITY);
+  public void draw(Consumer<Renderer> renderItem) {
+    draw(renderItem, DEFAULT_PRIORITY);
   }
 
-  public void render(Consumer<Renderer> renderItem, int priority) {
+  public void draw(Consumer<Renderer> renderItem, int priority) {
     renderQueue.add(new PrioritizedRenderItem(renderItem, priority));
   }
 

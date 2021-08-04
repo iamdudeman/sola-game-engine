@@ -4,38 +4,16 @@ import technology.sola.engine.graphics.font.Font;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Consumer;
 
 public class Renderer extends Canvas {
+  private final RenderGroups renderGroups = new RenderGroups();
   private RenderMode renderMode = RenderMode.NORMAL;
   private Font font;
-  private List<RenderGroup> renderGroups = new ArrayList<>();
 
   public Renderer(int width, int height) {
     super(width, height);
-  }
-
-  public RenderGroup createRenderGroup(String name) {
-    int order = renderGroups.size();
-    RenderGroup renderGroup = new RenderGroup(order, name);
-
-    renderGroups.add(renderGroup);
-
-    return renderGroup;
-  }
-
-  public RenderGroup getRenderGroup(String name) {
-    return  renderGroups.stream()
-      .filter(renderGroup -> renderGroup.getName().equals(name))
-      .findFirst()
-      .orElseThrow();
-  }
-
-  public void renderLayers() {
-    renderGroups.forEach(renderGroup -> renderGroup.draw(this));
   }
 
   public void setRenderMode(RenderMode renderMode) {
@@ -46,13 +24,17 @@ public class Renderer extends Canvas {
     this.font = font;
   }
 
-  public void clear() {
-    Arrays.fill(this.pixels, Color.BLACK.hexInt());
+  public RenderGroups groups() {
+    return renderGroups;
   }
 
-  @Deprecated
   public void render(Consumer<int[]> pixelConsumer) {
+    renderGroups.draw(this);
     pixelConsumer.accept(pixels);
+  }
+
+  public void clear() {
+    Arrays.fill(this.pixels, Color.BLACK.hexInt());
   }
 
   public void setPixel(int x, int y, Color color) {

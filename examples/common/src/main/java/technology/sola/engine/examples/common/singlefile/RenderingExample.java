@@ -36,24 +36,24 @@ public class RenderingExample extends AbstractSola {
     world.createEntity()
       .addComponent(new PositionComponent());
     world.createEntity().addComponent(new PositionComponent(50, 20));
-    world.createEntity().addComponent(new PositionComponent(50, 20));
-    world.createEntity().addComponent(new PositionComponent(50, 20));
-    world.createEntity().addComponent(new PositionComponent(50, 20));
+    world.createEntity().addComponent(new PositionComponent(100, 20));
+    world.createEntity().addComponent(new PositionComponent(150, 20));
+    world.createEntity().addComponent(new PositionComponent(200, 20));
 
     ecsSystemContainer.setWorld(world);
     ecsSystemContainer.add(new TestSystem());
 
-    renderer.createRenderGroup("background");
-    renderer.createRenderGroup("moving_stuff");
-    renderer.createRenderGroup("blocks");
-    renderer.createRenderGroup("ui");
+    renderer.groups().create("background");
+    renderer.groups().create("moving_stuff");
+    renderer.groups().create("blocks");
+    renderer.groups().create("ui");
   }
 
   @Override
   protected void onRender() {
     renderer.clear();
 
-    renderer.getRenderGroup("ui").render(renderer -> {
+    renderer.groups().drawOn("ui", renderer -> {
       renderer.setRenderMode(RenderMode.ALPHA);
       renderer.fillRect(0, 10, 600, 100, new Color(120, 255, 255, 255));
       renderer.setRenderMode(RenderMode.NORMAL);
@@ -68,7 +68,7 @@ public class RenderingExample extends AbstractSola {
       renderer.setRenderMode(RenderMode.NORMAL);
     });
 
-    renderer.getRenderGroup("moving_stuff").render(renderer -> {
+    renderer.groups().drawOn("moving_stuff", renderer -> {
       renderer.drawImage(400, 400, solaImage);
       AffineTransform affineTransform = new AffineTransform()
         .rotate(rotation)
@@ -81,7 +81,7 @@ public class RenderingExample extends AbstractSola {
       renderer.setRenderMode(RenderMode.NORMAL);
     });
 
-    renderer.getRenderGroup("moving_stuff").render(renderer -> {
+    renderer.groups().drawOn("moving_stuff", renderer -> {
       ecsSystemContainer.getWorld().getEntitiesWithComponents(PositionComponent.class)
         .forEach(entity -> {
           PositionComponent position = entity.getComponent(PositionComponent.class);
@@ -90,12 +90,12 @@ public class RenderingExample extends AbstractSola {
         });
     }, RenderGroup.DEFAULT_PRIORITY - 10);
 
-    renderer.getRenderGroup("blocks").render(renderer -> {
+    renderer.groups().drawOn("blocks", renderer -> {
       renderer.fillRect(200, 300, 50, 50, Color.BLUE);
       renderer.fillRect(200, 350, 100, 50, Color.BLUE);
     });
 
-    renderer.getRenderGroup("background").render(renderer -> {
+    renderer.groups().drawOn("background", renderer -> {
       renderer.setPixel(5, 5, Color.WHITE);
       renderer.setPixel(6, 5, Color.BLUE);
       renderer.setPixel(6, 6, Color.RED);
