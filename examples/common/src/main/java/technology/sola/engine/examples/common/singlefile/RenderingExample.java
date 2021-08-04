@@ -43,6 +43,7 @@ public class RenderingExample extends AbstractSola {
     ecsSystemContainer.setWorld(world);
     ecsSystemContainer.add(new TestSystem());
 
+    renderer.createRenderGroup("background");
     renderer.createRenderGroup("moving_stuff");
     renderer.createRenderGroup("blocks");
     renderer.createRenderGroup("ui");
@@ -94,7 +95,7 @@ public class RenderingExample extends AbstractSola {
       renderer.fillRect(200, 350, 100, 50, Color.BLUE);
     });
 
-    renderer.getRenderGroup("root").render(renderer -> {
+    renderer.getRenderGroup("background").render(renderer -> {
       renderer.setPixel(5, 5, Color.WHITE);
       renderer.setPixel(6, 5, Color.BLUE);
       renderer.setPixel(6, 6, Color.RED);

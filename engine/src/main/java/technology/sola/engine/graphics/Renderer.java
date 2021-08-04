@@ -16,11 +16,10 @@ public class Renderer extends Canvas {
 
   public Renderer(int width, int height) {
     super(width, height);
-    renderGroups.add(new RenderGroup(0, "root"));
   }
 
   public RenderGroup createRenderGroup(String name) {
-    int order = renderGroups.get(renderGroups.size() - 1).getOrder() + 1;
+    int order = renderGroups.size();
     RenderGroup renderGroup = new RenderGroup(order, name);
 
     renderGroups.add(renderGroup);
