@@ -5,6 +5,7 @@ import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.AffineTransform;
+import technology.sola.engine.graphics.RenderGroup;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.RenderMode;
@@ -77,14 +78,16 @@ public class RenderingExample extends AbstractSola {
       renderer.setRenderMode(RenderMode.MASK);
       renderer.drawImage(solaImage, affineTransform);
       renderer.setRenderMode(RenderMode.NORMAL);
+    });
 
+    renderer.getRenderGroup("moving_stuff").render(renderer -> {
       ecsSystemContainer.getWorld().getEntitiesWithComponents(PositionComponent.class)
         .forEach(entity -> {
           PositionComponent position = entity.getComponent(PositionComponent.class);
 
           renderer.fillRect(position.getX(), position.getY(), 50, 50, Color.RED);
         });
-    });
+    }, RenderGroup.DEFAULT_PRIORITY - 10);
 
     renderer.getRenderGroup("blocks").render(renderer -> {
       renderer.fillRect(200, 300, 50, 50, Color.BLUE);
