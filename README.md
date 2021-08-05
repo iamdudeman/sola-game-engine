@@ -1,7 +1,7 @@
 # Branch WIP
+* Layers / Render Groups
 
 # TODO List
-* Layers
 * Camera
   * Figure out how to implement
     * Translate
