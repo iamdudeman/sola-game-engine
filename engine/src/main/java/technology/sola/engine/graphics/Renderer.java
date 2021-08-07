@@ -32,7 +32,11 @@ public class Renderer extends Canvas {
   }
 
   public void clear() {
-    Arrays.fill(this.pixels, Color.BLACK.hexInt());
+    clear(Color.BLACK);
+  }
+
+  public void clear(Color color) {
+    Arrays.fill(this.pixels, color.hexInt());
   }
 
   public void setPixel(int x, int y, Color color) {
