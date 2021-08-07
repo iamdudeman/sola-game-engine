@@ -5,7 +5,7 @@ import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.AffineTransform;
-import technology.sola.engine.graphics.RenderGroup;
+import technology.sola.engine.graphics.layer.Layer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.RenderMode;
@@ -88,7 +88,7 @@ public class RenderingExample extends AbstractSola {
 
           renderer.fillRect(position.getX(), position.getY(), 50, 50, Color.RED);
         });
-    }, RenderGroup.DEFAULT_PRIORITY - 10);
+    }, Layer.DEFAULT_PRIORITY - 10);
 
     renderer.groups().drawOn("blocks", renderer -> {
       renderer.fillRect(200, 300, 50, 50, Color.BLUE);
