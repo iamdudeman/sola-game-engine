@@ -1,8 +1,9 @@
 package technology.sola.engine.graphics;
 
+import technology.sola.engine.graphics.layer.DrawItem;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class RenderGroups {
   private final List<RenderGroup> renderGroupList = new ArrayList<>();
@@ -10,17 +11,17 @@ public class RenderGroups {
   RenderGroups() {
   }
 
-  public RenderGroup drawOn(String name, Consumer<Renderer> renderItem) {
-    return drawOn(name, renderItem, RenderGroup.DEFAULT_PRIORITY);
+  public RenderGroup drawOn(String name, DrawItem drawItem) {
+    return drawOn(name, drawItem, RenderGroup.DEFAULT_PRIORITY);
   }
 
-  public RenderGroup drawOn(String name, Consumer<Renderer> renderItem, int priority) {
+  public RenderGroup drawOn(String name, DrawItem drawItem, int priority) {
     RenderGroup renderGroup = renderGroupList.stream()
       .filter(rg -> rg.getName().equals(name))
       .findFirst()
       .orElse(new RenderGroup(renderGroupList.size(), name));
 
-    renderGroup.draw(renderItem, priority);
+    renderGroup.draw(drawItem, priority);
 
     return renderGroup;
   }

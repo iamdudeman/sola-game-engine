@@ -1,12 +1,13 @@
 package technology.sola.engine.graphics;
 
+import technology.sola.engine.graphics.layer.DrawItem;
+
 import java.util.Comparator;
 import java.util.PriorityQueue;
-import java.util.function.Consumer;
 
 public class RenderGroup {
   public static final int DEFAULT_PRIORITY = 0;
-  private final PriorityQueue<PrioritizedRenderItem> renderQueue;
+  private final PriorityQueue<PrioritizedDrawItem> renderQueue;
   private final int order;
   private final String name;
   private boolean isEnabled = true;
@@ -14,7 +15,7 @@ public class RenderGroup {
   RenderGroup(int order, String name) {
     this.order = order;
     this.name = name;
-    renderQueue = new PriorityQueue<>(Comparator.comparingInt(item -> item.priority));
+    renderQueue = new PriorityQueue<>(Comparator.comparingInt(drawItem -> drawItem.priority));
   }
 
   public boolean isEnabled() {
@@ -33,25 +34,25 @@ public class RenderGroup {
     return name;
   }
 
-  public void draw(Consumer<Renderer> renderItem) {
-    draw(renderItem, DEFAULT_PRIORITY);
+  public void draw(DrawItem drawItem) {
+    draw(drawItem, DEFAULT_PRIORITY);
   }
 
-  public void draw(Consumer<Renderer> renderItem, int priority) {
-    renderQueue.add(new PrioritizedRenderItem(renderItem, priority));
+  public void draw(DrawItem drawItem, int priority) {
+    renderQueue.add(new PrioritizedDrawItem(drawItem, priority));
   }
 
   void draw(Renderer renderer) {
-    renderQueue.forEach(prioritizedRenderItem -> prioritizedRenderItem.item.accept(renderer));
+    renderQueue.forEach(prioritizedDrawItem -> prioritizedDrawItem.drawItem.draw(renderer));
     renderQueue.clear();
   }
 
-  private static class PrioritizedRenderItem {
-    private final Consumer<Renderer> item;
+  private static class PrioritizedDrawItem {
+    private final DrawItem drawItem;
     private final int priority;
 
-    private PrioritizedRenderItem(Consumer<Renderer> item, int priority) {
-      this.item = item;
+    private PrioritizedDrawItem(DrawItem drawItem, int priority) {
+      this.drawItem = drawItem;
       this.priority = priority;
     }
   }
