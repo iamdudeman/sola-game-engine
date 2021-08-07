@@ -1,9 +1,6 @@
-package technology.sola.engine.graphics.layer;
-
-import technology.sola.engine.graphics.Renderer;
+package technology.sola.engine.graphics;
 
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.PriorityQueue;
 
 public class Layer {
@@ -26,7 +23,9 @@ public class Layer {
   }
 
   public void draw(Renderer renderer) {
-    drawQueue.forEach(drawItem -> drawItem.draw(renderer));
+    if (isEnabled) {
+      drawQueue.forEach(drawItem -> drawItem.draw(renderer));
+    }
     drawQueue.clear();
   }
 
@@ -42,7 +41,7 @@ public class Layer {
     return name;
   }
 
-  public static class PrioritizedDrawItem implements DrawItem {
+  private static class PrioritizedDrawItem implements DrawItem {
     private final DrawItem drawItem;
     private final int priority;
 

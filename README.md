@@ -1,5 +1,4 @@
 # Branch WIP
-* Layers / Render Groups
 
 # TODO List
 * Camera
