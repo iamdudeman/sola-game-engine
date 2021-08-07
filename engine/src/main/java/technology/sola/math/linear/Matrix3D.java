@@ -7,6 +7,7 @@ import technology.sola.math.geometry.Rectangle;
  * https://github.com/OneLoneCoder/olcPixelGameEngine/blob/master/Videos/OneLoneCoder_PGE_SpriteTransforms.cpp
  * https://www.youtube.com/watch?v=zxwLN2blwbQ&ab_channel=javidx9
  */
+@SuppressWarnings("checkstyle:OneStatementPerLine")
 public class Matrix3D {
   private float[][] matrix = new float[3][3];
 

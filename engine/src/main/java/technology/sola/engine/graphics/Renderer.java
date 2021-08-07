@@ -4,10 +4,13 @@ import technology.sola.engine.graphics.font.Font;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class Renderer extends Canvas {
+  private final List<Layer> layers = new ArrayList<>();
   private RenderMode renderMode = RenderMode.NORMAL;
   private Font font;
 
@@ -23,13 +26,17 @@ public class Renderer extends Canvas {
     this.font = font;
   }
 
-  public void clear() {
-    Arrays.fill(this.pixels, Color.BLACK.hexInt());
+  public void render(Consumer<int[]> pixelConsumer) {
+    layers.forEach(layer -> layer.draw(this));
+    pixelConsumer.accept(pixels);
   }
 
-  @Deprecated
-  public void render(Consumer<int[]> pixelConsumer) {
-    pixelConsumer.accept(pixels);
+  public void clear() {
+    clear(Color.BLACK);
+  }
+
+  public void clear(Color color) {
+    Arrays.fill(this.pixels, color.hexInt());
   }
 
   public void setPixel(int x, int y, Color color) {
@@ -234,6 +241,24 @@ public class Renderer extends Canvas {
       drawImage(x + xOffset, y, glyphImage);
       xOffset += glyphImage.getWidth() + font.getFontInfo().getLeading();
     }
+  }
+
+  public void createLayers(String... layerIds) {
+    for (String layerName : layerIds) {
+      layers.add(new Layer(layerName));
+    }
+  }
+
+  public Layer getLayer(String name) {
+    return layers.stream().filter(layer -> layer.getName().equals(name)).findFirst().orElseThrow();
+  }
+
+  public void drawToLayer(String layerId, DrawItem drawItem) {
+    drawToLayer(layerId, Layer.DEFAULT_PRIORITY, drawItem);
+  }
+
+  public void drawToLayer(String layerId, int priority, DrawItem drawItem) {
+    getLayer(layerId).add(drawItem, priority);
   }
 
   private void drawEightWaySymmetry(int centerX, int centerY, int x, int y, Color color) {

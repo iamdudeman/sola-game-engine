@@ -1,7 +1,6 @@
 # Branch WIP
 
 # TODO List
-* Layers
 * Camera
   * Figure out how to implement
     * Translate

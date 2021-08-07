@@ -93,6 +93,6 @@ public class JavaFxSolaPlatform extends AbstractSolaPlatform {
 
   @Override
   public void render(Renderer renderer) {
-    pixelArrayConsumer.accept(renderer.getPixels());
+    renderer.render(pixelArrayConsumer);
   }
 }
