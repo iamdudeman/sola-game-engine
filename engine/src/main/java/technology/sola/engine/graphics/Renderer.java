@@ -62,7 +62,7 @@ public class Renderer extends Canvas {
         float green = currentColor.getGreen() * oneMinusAlpha + color.getGreen() * alphaMod;
         float blue = currentColor.getBlue() * oneMinusAlpha + color.getBlue() * alphaMod;
 
-        int newArgb = new Color(color.getAlpha(), (int)red, (int)green, (int)blue).hexInt();
+        int newArgb = new Color(color.getAlpha(), (int) red, (int) green, (int) blue).hexInt();
 
         pixels[x + y * width] = newArgb;
         break;
@@ -77,10 +77,10 @@ public class Renderer extends Canvas {
   }
 
   public void drawLine(float x, float y, float x2, float y2, Color color) {
-    int xInt = (int)(x + 0.5f);
-    int yInt = (int)(y + 0.5f);
-    int x2Int = (int)(x2 + 0.5f);
-    int y2Int = (int)(y2 + 0.5f);
+    int xInt = (int) (x + 0.5f);
+    int yInt = (int) (y + 0.5f);
+    int x2Int = (int) (x2 + 0.5f);
+    int y2Int = (int) (y2 + 0.5f);
 
     if (xInt - x2Int == 0) {
       int start = Math.min(yInt, y2Int);
@@ -97,15 +97,38 @@ public class Renderer extends Canvas {
         setPixel(i, yInt, color);
       }
     } else {
-      // TODO implement
-      throw new RuntimeException("Diagonal lines not yet implemented");
+      float dx = Math.abs(x2 - x);
+      float sx = x < x2 ? 1 : -1;
+      float dy = -Math.abs(y2 - y);
+      float sy = y < y2 ? 1 : -1;
+      float err = dx + dy;
+      float currentX = x;
+      float currentY = y;
+
+      while (true) {
+        setPixel((int) currentX, (int) currentY, color);
+
+        if (currentX == x2 && currentY == y2) break;
+
+        float e2 = 2 * err;
+
+        if (e2 >= dy) {
+          err += dy;
+          currentX += sx;
+        }
+        if (e2 <= dx) {
+          err += dx;
+          currentY += sy;
+        }
+      }
     }
   }
 
   /**
    * todo
-   * @param x  top left coordinate x
-   * @param y  top left coordinate y
+   *
+   * @param x      top left coordinate x
+   * @param y      top left coordinate y
    * @param width
    * @param height
    * @param color
@@ -119,17 +142,18 @@ public class Renderer extends Canvas {
 
   /**
    * todo
-   * @param x  top left coordinate x
-   * @param y  top left coordinate y
+   *
+   * @param x      top left coordinate x
+   * @param y      top left coordinate y
    * @param width
    * @param height
    * @param color
    */
   public void fillRect(float x, float y, float width, float height, Color color) {
-    int xInt = (int)(x + 0.5f);
-    int yInt = (int)(y + 0.5f);
-    int xPlusWidth = (int)(x + width + 0.5f);
-    int yPlusHeight = (int)(y + height + 0.5f);
+    int xInt = (int) (x + 0.5f);
+    int yInt = (int) (y + 0.5f);
+    int xPlusWidth = (int) (x + width + 0.5f);
+    int yPlusHeight = (int) (y + height + 0.5f);
 
     for (int i = xInt; i < xPlusWidth; i++) {
       drawLine(i, yInt, i, yPlusHeight, color);
@@ -138,15 +162,16 @@ public class Renderer extends Canvas {
 
   /**
    * Uses Bresenham's circle drawing algorithm
-   * @param x  top left coordinate x
-   * @param y  top left coordinate y
+   *
+   * @param x      top left coordinate x
+   * @param y      top left coordinate y
    * @param radius
    * @param color
    */
   public void drawCircle(float x, float y, float radius, Color color) {
-    int xCenter = (int)(x + radius + 0.5f);
-    int yCenter = (int)(y + radius + 0.5f);
-    int radiusInt = (int)(radius + 0.5f);
+    int xCenter = (int) (x + radius + 0.5f);
+    int yCenter = (int) (y + radius + 0.5f);
+    int radiusInt = (int) (radius + 0.5f);
 
     int dVar = 3 - 2 * radiusInt;
     int plotX = 0;
@@ -168,16 +193,17 @@ public class Renderer extends Canvas {
 
   /**
    * todo
-   * @param x  top left coordinate x
-   * @param y  top left coordinate y
+   *
+   * @param x      top left coordinate x
+   * @param y      top left coordinate y
    * @param radius
    * @param color
    */
   public void fillCircle(float x, float y, float radius, Color color) {
-    int xInt = (int)(x + radius + 0.5f);
-    int yInt = (int)(y + radius + 0.5f);
-    int radiusInt = (int)(radius + 0.5f);
-    int radiusSquaredInt = (int)(radius * radius + 0.5f);
+    int xInt = (int) (x + radius + 0.5f);
+    int yInt = (int) (y + radius + 0.5f);
+    int radiusInt = (int) (radius + 0.5f);
+    int radiusSquaredInt = (int) (radius * radius + 0.5f);
 
     for (int i = -radiusInt; i <= radius; i++)
       for (int j = -radiusInt; j <= radius; j++)
@@ -185,10 +211,18 @@ public class Renderer extends Canvas {
           setPixel(xInt + j, yInt + i, color);
   }
 
+  public void drawEllipse(float x, float y, float width, float height, Color color) {
+    throw new RuntimeException("Not yet implemented");
+  }
+
+  public void fillEllipse(float centerX, float centerY, float width, float height, Color color) {
+    throw new RuntimeException("Not yet implemented");
+  }
+
   public void drawImage(float x, float y, SolaImage solaImage) {
     int[] imagePixels = solaImage.getPixels();
-    int xInt = (int)(x + 0.5f);
-    int yInt = (int)(y + 0.5f);
+    int xInt = (int) (x + 0.5f);
+    int yInt = (int) (y + 0.5f);
 
     int index = 0;
     int xImagePos = 0;
@@ -211,12 +245,12 @@ public class Renderer extends Canvas {
   public void drawImage(SolaImage solaImage, AffineTransform affineTransform) {
     Rectangle transformBoundingBox = affineTransform.getBoundingBoxForTransform(solaImage.getWidth(), solaImage.getHeight());
 
-    for (int x = (int)transformBoundingBox.getMin().x; x < transformBoundingBox.getMax().x; x++) {
-      for (int y = (int)transformBoundingBox.getMin().y; y < transformBoundingBox.getMax().y; y++) {
+    for (int x = (int) transformBoundingBox.getMin().x; x < transformBoundingBox.getMax().x; x++) {
+      for (int y = (int) transformBoundingBox.getMin().y; y < transformBoundingBox.getMax().y; y++) {
         Vector2D newPosition = affineTransform.forward(x, y);
         int pixel = solaImage.getPixel(newPosition.x, newPosition.y);
 
-        setPixel(x, y , pixel);
+        setPixel(x, y, pixel);
       }
     }
   }

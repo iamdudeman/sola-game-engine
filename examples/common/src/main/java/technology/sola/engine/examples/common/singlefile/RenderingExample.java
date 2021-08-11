@@ -114,6 +114,9 @@ public class RenderingExample extends AbstractSola {
       renderer.setRenderMode(RenderMode.ALPHA);
       renderer.fillRect(210, 530, 50, 50, new Color(150, 255, 0, 0));
       renderer.setRenderMode(RenderMode.NORMAL);
+
+      renderer.drawLine(0, 0, 800, 600, Color.BLUE);
+      renderer.drawLine(750, 0, 20, 500, Color.BLUE);
     });
   }
 
