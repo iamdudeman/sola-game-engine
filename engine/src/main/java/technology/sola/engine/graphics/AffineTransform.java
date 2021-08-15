@@ -35,9 +35,13 @@ public class AffineTransform {
     return matrix3D.forward(x, y);
   }
 
-  public Rectangle getBoundingBoxForTransform(int width, int height) {
+  public Vector2D backward(float x, float y) {
     invert();
-    return invertedMatrix3D.getBoundingBoxForTransform(width, height);
+    return invertedMatrix3D.forward(x, y);
+  }
+
+  public Rectangle getBoundingBoxForTransform(int width, int height) {
+    return matrix3D.getBoundingBoxForTransform(width, height);
   }
 
   private void invert() {
