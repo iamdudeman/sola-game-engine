@@ -68,10 +68,10 @@ public class RenderingExample extends AbstractSola {
     renderer.drawToLayer("moving_stuff", renderer -> {
       renderer.drawImage(400, 400, solaImage);
       AffineTransform affineTransform = new AffineTransform()
-        .rotate(rotation)
-        .scale(.5f, .5f)
         .translate(400, 400)
         .translate(-100, -100)
+        .rotate(rotation)
+        .scale(1.5f, 2f)
         ;
       renderer.setRenderMode(RenderMode.MASK);
       renderer.drawImage(solaImage, affineTransform);
@@ -117,6 +117,14 @@ public class RenderingExample extends AbstractSola {
 
       renderer.drawLine(0, 0, 800, 600, Color.BLUE);
       renderer.drawLine(750, 0, 20, 500, Color.BLUE);
+
+      AffineTransform affineTransform = new AffineTransform()
+//        .rotate((float)Math.PI * 2)
+        .translate(-100, -100)
+//        .scale(1.75f, 1.25f)
+        ;
+      // TODO test this more
+      renderer.drawRect(400, 400, 50, 50, Color.WHITE, affineTransform);
     });
   }
 

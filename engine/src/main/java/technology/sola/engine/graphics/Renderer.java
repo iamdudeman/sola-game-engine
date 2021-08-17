@@ -140,6 +140,25 @@ public class Renderer extends Canvas {
     drawLine(x + width, y, x + width, y + height, color);
   }
 
+  // TODO test this more
+  public void drawRect(float x, float y, float width, float height, Color color, AffineTransform affineTransform) {
+
+    Vector2D topLeft = affineTransform.forward(x, y);
+    Vector2D topRight = affineTransform.forward(x + width, y);
+    Vector2D bottomLeft = affineTransform.forward(x, y + height);
+    Vector2D bottomRight = affineTransform.forward(x + width, y + height);
+
+    drawLine(topLeft.x, topLeft.y, topRight.x, topRight.y, color);
+    drawLine(topLeft.x, topLeft.y, bottomLeft.x, bottomLeft.y, color);
+    drawLine(bottomLeft.x, bottomLeft.y, bottomRight.x, bottomRight.y, color);
+    drawLine(topRight.x, topRight.y, bottomRight.x, bottomRight.y, color);
+
+//    drawLine(x, y, x + width, y, color);
+//    drawLine(x, y + height, x + width, y + height, color);
+//    drawLine(x, y, x, y + height, color);
+//    drawLine(x + width, y, x + width, y + height, color);
+  }
+
   /**
    * todo
    *
