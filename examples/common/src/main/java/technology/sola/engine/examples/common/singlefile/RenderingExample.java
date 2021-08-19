@@ -4,12 +4,8 @@ import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.World;
-import technology.sola.engine.graphics.AffineTransform;
-import technology.sola.engine.graphics.Layer;
+import technology.sola.engine.graphics.*;
 import technology.sola.engine.graphics.screen.AspectMode;
-import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.RenderMode;
-import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.component.PositionComponent;
@@ -117,14 +113,22 @@ public class RenderingExample extends AbstractSola {
 
       renderer.drawLine(0, 0, 800, 600, Color.BLUE);
       renderer.drawLine(750, 0, 20, 500, Color.BLUE);
+    });
 
+    renderer.drawToLayer("moving_stuff", renderer -> {
       AffineTransform affineTransform = new AffineTransform()
-//        .rotate((float)Math.PI * 2)
-        .translate(-100, -100)
-//        .scale(1.75f, 1.25f)
+//        .translate(-400, -400)
+//        .translate(400, 400)
+//        .translate(-100, -100)
+//        .rotate(rotation)
+        .scale(1.25f, 1.5f)
+//        .sheer(1.5f, 1)
         ;
+
       // TODO test this more
-      renderer.drawRect(400, 400, 50, 50, Color.WHITE, affineTransform);
+      renderer.drawRect(400, 400, 50, 50, Color.GREEN);
+//      new AffineTransformRenderer(renderer).drawRect(0, 0, 50, 50, Color.GREEN, affineTransform);
+      new AffineTransformRenderer(renderer).drawRect(400, 400, 50, 50, Color.GREEN, affineTransform);
     });
   }
 
