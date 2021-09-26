@@ -1,16 +1,19 @@
-package technology.sola.engine.graphics;
+package technology.sola.engine.graphics.impl;
 
+import technology.sola.engine.graphics.AffineTransform;
+import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.SolaImage;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
 // TODO maybe move back to only Renderer if logic isn't too complex?
 
-public class AffineTransformRenderer extends Renderer {
-  public AffineTransformRenderer(int width, int height) {
+public class AffineTransformSoftwareRenderer extends SoftwareRenderer {
+  public AffineTransformSoftwareRenderer(int width, int height) {
     super(width, height);
   }
 
-  public AffineTransformRenderer(Renderer renderer) {
+  public AffineTransformSoftwareRenderer(SoftwareRenderer renderer) {
     super(renderer.width, renderer.height);
     this.pixels = renderer.pixels;
   }

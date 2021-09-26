@@ -4,7 +4,7 @@ import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.core.GameLoopProvider;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.impl.SoftwareRenderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.platform.browser.assets.FontAssetPool;
@@ -42,7 +42,7 @@ public class BrowserSolaPlatform extends AbstractSolaPlatform {
   }
 
   @Override
-  protected void render(Renderer renderer) {
+  protected void render(SoftwareRenderer renderer) {
     renderer.render(pixels -> {
       int[] pixelDataForCanvas = new int[pixels.length * 4];
       int index = 0;

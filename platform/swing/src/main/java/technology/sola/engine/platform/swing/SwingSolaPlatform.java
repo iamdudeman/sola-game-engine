@@ -3,7 +3,7 @@ package technology.sola.engine.platform.swing;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
-import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.impl.SoftwareRenderer;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.platform.swing.assets.FontAssetPool;
@@ -96,7 +96,7 @@ public class SwingSolaPlatform extends AbstractSolaPlatform {
   }
 
   @Override
-  public void render(Renderer renderer) {
+  public void render(SoftwareRenderer renderer) {
     renderer.render(pixels -> {
       int[] bufferedImageDataBuffer = ((DataBufferInt) bufferedImage.getRaster().getDataBuffer()).getData();
       System.arraycopy(pixels, 0, bufferedImageDataBuffer, 0, pixels.length);

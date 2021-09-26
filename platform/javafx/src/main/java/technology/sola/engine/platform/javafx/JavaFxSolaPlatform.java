@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
-import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.impl.SoftwareRenderer;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
@@ -92,7 +92,7 @@ public class JavaFxSolaPlatform extends AbstractSolaPlatform {
   }
 
   @Override
-  public void render(Renderer renderer) {
+  public void render(SoftwareRenderer renderer) {
     renderer.render(pixelArrayConsumer);
   }
 }

@@ -7,7 +7,7 @@ import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.event.gameloop.GameLoopEventListener;
 import technology.sola.engine.ecs.EcsSystemContainer;
 import technology.sola.engine.event.EventHub;
-import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.impl.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.Viewport;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
@@ -15,7 +15,7 @@ import technology.sola.engine.input.MouseInput;
 public abstract class AbstractSola {
   private static final Logger logger = LoggerFactory.getLogger(AbstractSola.class);
   protected GameLoop gameLoop;
-  protected Renderer renderer;
+  protected SoftwareRenderer renderer;
   protected EcsSystemContainer ecsSystemContainer;
   protected AssetPoolProvider assetPoolProvider;
   protected EventHub eventHub;
@@ -57,7 +57,7 @@ public abstract class AbstractSola {
     eventHub = new EventHub();
     keyboardInput = new KeyboardInput();
     mouseInput = new MouseInput();
-    renderer = new Renderer(rendererWidth, rendererHeight);
+    renderer = new SoftwareRenderer(rendererWidth, rendererHeight);
     viewport = new Viewport(rendererWidth, rendererHeight);
   }
 

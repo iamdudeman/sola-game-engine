@@ -1,6 +1,6 @@
 package technology.sola.engine.core;
 
-import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.impl.SoftwareRenderer;
 
 class NoSolaPlatform extends AbstractSolaPlatform {
   @Override
@@ -14,7 +14,7 @@ class NoSolaPlatform extends AbstractSolaPlatform {
   }
 
   @Override
-  protected void render(Renderer renderer) {
+  protected void render(SoftwareRenderer renderer) {
     // Not needed
   }
 

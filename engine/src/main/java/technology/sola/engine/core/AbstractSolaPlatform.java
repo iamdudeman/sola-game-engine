@@ -2,7 +2,7 @@ package technology.sola.engine.core;
 
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.event.EventHub;
-import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.impl.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.Viewport;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
@@ -26,7 +26,7 @@ public abstract class AbstractSolaPlatform {
 
   protected abstract void start();
 
-  protected abstract void render(Renderer renderer);
+  protected abstract void render(SoftwareRenderer renderer);
 
   protected GameLoopProvider getGameLoopProvider() {
     return GameLoopImpl::new;

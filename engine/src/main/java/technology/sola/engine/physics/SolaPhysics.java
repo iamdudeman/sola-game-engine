@@ -4,7 +4,7 @@ import technology.sola.engine.ecs.EcsSystemContainer;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.impl.SoftwareRenderer;
 import technology.sola.engine.physics.event.CollisionManifoldEvent;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
 import technology.sola.engine.physics.system.GravitySystem;
@@ -36,7 +36,7 @@ public class SolaPhysics {
     ecsSystemContainer.add(impulseCollisionResolutionSystem);
   }
 
-  public void debugRender(Renderer renderer, World world, Color colliderOutlineColor, Color spatialHashMapCellColor) {
+  public void debugRender(SoftwareRenderer renderer, World world, Color colliderOutlineColor, Color spatialHashMapCellColor) {
     collisionDetectionSystem.debugRender(renderer, world, colliderOutlineColor, spatialHashMapCellColor);
   }
 

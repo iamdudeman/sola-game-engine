@@ -5,6 +5,7 @@ import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.*;
+import technology.sola.engine.graphics.impl.AffineTransformSoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.input.Key;
@@ -128,7 +129,7 @@ public class RenderingExample extends AbstractSola {
       // TODO test this more
       renderer.drawRect(400, 400, 50, 50, Color.GREEN);
 //      new AffineTransformRenderer(renderer).drawRect(0, 0, 50, 50, Color.GREEN, affineTransform);
-      new AffineTransformRenderer(renderer).drawRect(400, 400, 50, 50, Color.GREEN, affineTransform);
+      new AffineTransformSoftwareRenderer(renderer).drawRect(400, 400, 50, 50, Color.GREEN, affineTransform);
     });
   }
 
