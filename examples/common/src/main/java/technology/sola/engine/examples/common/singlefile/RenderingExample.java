@@ -129,7 +129,7 @@ public class RenderingExample extends AbstractSola {
       // TODO test this more
       renderer.drawRect(400, 400, 50, 50, Color.GREEN);
 //      new AffineTransformRenderer(renderer).drawRect(0, 0, 50, 50, Color.GREEN, affineTransform);
-      new AffineTransformSoftwareRenderer(renderer).drawRect(400, 400, 50, 50, Color.GREEN, affineTransform);
+//      new AffineTransformSoftwareRenderer(renderer).drawRect(400, 400, 50, 50, Color.GREEN, affineTransform);
     });
   }
 

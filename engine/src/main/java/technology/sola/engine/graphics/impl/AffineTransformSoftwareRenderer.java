@@ -14,8 +14,9 @@ public class AffineTransformSoftwareRenderer extends SoftwareRenderer {
   }
 
   public AffineTransformSoftwareRenderer(SoftwareRenderer renderer) {
-    super(renderer.width, renderer.height);
-    this.pixels = renderer.pixels;
+    super(10, 10); // todo temp
+    // super(renderer.width, renderer.height);
+    // this.pixels = renderer.pixels;
   }
 
   // TODO test this more

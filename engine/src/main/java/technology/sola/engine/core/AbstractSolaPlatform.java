@@ -32,6 +32,8 @@ public abstract class AbstractSolaPlatform {
     return GameLoopImpl::new;
   }
 
+
+  // TODO maybe make the platform implement how it wraps its native events into Sola KeyEvents
   protected void onKeyPressed(KeyEvent keyEvent) {
     abstractSola.keyboardInput.keyPressed(keyEvent);
   }
@@ -40,6 +42,7 @@ public abstract class AbstractSolaPlatform {
     abstractSola.keyboardInput.keyReleased(keyEvent);
   }
 
+  // TODO maybe make the platform implement how it wraps its native events into Sola MouseEvents
   protected void onMouseMoved(MouseEvent mouseEvent) {
     abstractSola.mouseInput.onMouseMoved(mouseEvent);
   }
