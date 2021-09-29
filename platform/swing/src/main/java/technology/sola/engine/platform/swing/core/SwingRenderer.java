@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.swing;
+package technology.sola.engine.platform.swing.core;
 
 import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Color;

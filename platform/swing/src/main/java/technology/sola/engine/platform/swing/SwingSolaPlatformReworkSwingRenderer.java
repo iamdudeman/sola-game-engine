@@ -8,6 +8,7 @@ import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.platform.swing.core.SwingRenderer;
 
 import javax.swing.*;
 import java.awt.*;

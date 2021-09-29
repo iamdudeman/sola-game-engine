@@ -8,6 +8,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.PixelFormat;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
+import technology.sola.engine.core.rework.AbstractGameLoop;
 import technology.sola.engine.core.rework.AbstractSolaPlatformRework;
 import technology.sola.engine.core.rework.AbstractSolaRework;
 import technology.sola.engine.core.rework.SolaConfiguration;
@@ -16,6 +17,7 @@ import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
 
 import java.util.function.Consumer;
 
@@ -112,5 +114,14 @@ public class JavaFxSolaPlatformRework extends AbstractSolaPlatformRework {
   @Override
   protected void onRender(Renderer renderer) {
     renderer.render(pixelArrayConsumer);
+  }
+
+  @Override
+  protected AbstractGameLoop buildGameLoop(Renderer renderer, AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration) {
+//    return super.buildGameLoop(renderer, abstractSolaRework, solaConfiguration);
+    return new JavaFxGameLoop(
+      deltaTime -> update(abstractSolaRework, deltaTime), () -> render(renderer, abstractSolaRework),
+      solaConfiguration.getGameLoopTargetUpdatesPerSecond()
+    );
   }
 }

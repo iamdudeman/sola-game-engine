@@ -22,8 +22,6 @@ public abstract class AbstractSolaPlatformRework {
 
     this.viewport = buildViewport(solaConfiguration);
 
-    viewport.setAspectMode(AspectMode.MAINTAIN); // TODO temp
-
     onInit(abstractSolaRework, solaConfiguration, () -> onInitComplete(abstractSolaRework, solaConfiguration));
   }
 
@@ -67,12 +65,16 @@ public abstract class AbstractSolaPlatformRework {
 
   protected AbstractGameLoop buildGameLoop(Renderer renderer, AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration) {
     return new FixedUpdateGameLoop(
-      abstractSolaRework::onUpdate, () -> render(renderer, abstractSolaRework),
+      deltaTime -> update(abstractSolaRework, deltaTime), () -> render(renderer, abstractSolaRework),
       solaConfiguration.getGameLoopTargetUpdatesPerSecond(), solaConfiguration.isGameLoopRestingAllowed()
     );
   }
 
-  private void render(Renderer renderer, AbstractSolaRework abstractSolaRework) {
+  protected void update(AbstractSolaRework abstractSolaRework, float deltaTime) {
+    abstractSolaRework.onUpdate(deltaTime);
+  }
+
+  protected void render(Renderer renderer, AbstractSolaRework abstractSolaRework) {
     beforeRender(renderer);
     abstractSolaRework.onRender(renderer);
     onRender(renderer);
