@@ -7,8 +7,9 @@ import technology.sola.engine.platform.swing.SwingSolaPlatformRework;
 
 public class SwingReworkMain {
   public static void main(String[] args) {
+    AbstractSolaRework abstractSolaRework = new SimplePlatformerExample();
     AbstractSolaPlatformRework abstractSolaPlatformRework = new SwingSolaPlatformRework();
 
-    abstractSolaPlatformRework.play(SimplePlatformerExample::new);
+    abstractSolaPlatformRework.play(abstractSolaRework);
   }
 }

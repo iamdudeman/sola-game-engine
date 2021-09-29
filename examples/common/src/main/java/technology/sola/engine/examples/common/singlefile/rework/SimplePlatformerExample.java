@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.singlefile.rework;
 
+import technology.sola.engine.core.AbstractSolaPlatform;
 import technology.sola.engine.core.rework.AbstractSolaPlatformRework;
 import technology.sola.engine.core.rework.AbstractSolaRework;
 import technology.sola.engine.core.rework.SolaConfiguration;
@@ -18,10 +19,6 @@ import technology.sola.engine.physics.component.PositionComponent;
 import technology.sola.engine.physics.component.VelocityComponent;
 
 public class SimplePlatformerExample extends AbstractSolaRework {
-  public SimplePlatformerExample(AbstractSolaPlatformRework platform) {
-    super(platform);
-  }
-
   @Override
   protected SolaConfiguration buildConfiguration() {
     return new SolaConfiguration("Simple Platformer",800, 600, 30, true);

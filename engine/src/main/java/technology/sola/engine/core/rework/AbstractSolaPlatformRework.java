@@ -7,16 +7,13 @@ import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 public abstract class AbstractSolaPlatformRework {
   protected Renderer renderer;
   protected AbstractGameLoop gameLoop;
   protected Viewport viewport;
 
-  public void play(Function<AbstractSolaPlatformRework, AbstractSolaRework> abstractSolaReworkSupplier) {
-    // TODO what happens here
-    AbstractSolaRework abstractSolaRework = abstractSolaReworkSupplier.apply(this);
+  public void play(AbstractSolaRework abstractSolaRework) {
     SolaConfiguration solaConfiguration = abstractSolaRework.buildConfiguration();
 
     this.viewport = buildViewport(solaConfiguration);
@@ -24,8 +21,6 @@ public abstract class AbstractSolaPlatformRework {
 
     onInit(abstractSolaRework, solaConfiguration, () -> onInitComplete(abstractSolaRework, solaConfiguration));
   }
-
-  // TODO create and implement a getFileSystem
 
   public abstract void onKeyPressed(Consumer<KeyEvent> keyEventConsumer);
 
@@ -42,7 +37,7 @@ public abstract class AbstractSolaPlatformRework {
   protected void onInitComplete(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration) {
     this.gameLoop = buildGameLoop(renderer, abstractSolaRework, solaConfiguration);
 
-    abstractSolaRework.init();
+    abstractSolaRework.initializeForPlatform(this);
     new Thread(gameLoop).start();
   }
 
@@ -57,6 +52,8 @@ public abstract class AbstractSolaPlatformRework {
   protected Renderer buildRenderer(SolaConfiguration solaConfiguration) {
     return new SoftwareRenderer(solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight());
   }
+
+  // TODO create and implement a buildFileSystem
 
   protected AbstractGameLoop buildGameLoop(Renderer renderer, AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration) {
     return new FixedUpdateGameLoop(
