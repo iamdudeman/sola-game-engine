@@ -1,5 +1,6 @@
 package technology.sola.engine.core.rework;
 
+import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.impl.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.Viewport;
@@ -12,14 +13,20 @@ public abstract class AbstractSolaPlatformRework {
   protected Renderer renderer;
   protected AbstractGameLoop gameLoop;
   protected Viewport viewport;
+  protected EventHub solaEventHub;
 
   public void play(AbstractSolaRework abstractSolaRework) {
+    this.solaEventHub = abstractSolaRework.eventHub;
     SolaConfiguration solaConfiguration = abstractSolaRework.buildConfiguration();
 
     this.viewport = buildViewport(solaConfiguration);
     this.renderer = buildRenderer(solaConfiguration);
 
     onInit(abstractSolaRework, solaConfiguration, () -> onInitComplete(abstractSolaRework, solaConfiguration));
+  }
+
+  public Viewport getViewport() {
+    return viewport;
   }
 
   public abstract void onKeyPressed(Consumer<KeyEvent> keyEventConsumer);

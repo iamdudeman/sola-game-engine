@@ -103,8 +103,7 @@ public class SwingSolaPlatformRework extends AbstractSolaPlatformRework {
       @Override
       public void windowClosing(WindowEvent e) {
         super.windowClosing(e);
-        // todo
-//        abstractSolaRework.eventHub.emit(GameLoopEvent.STOP);
+        solaEventHub.emit(GameLoopEvent.STOP);
       }
     });
     jFrame.setTitle(solaConfiguration.getSolaTitle());
