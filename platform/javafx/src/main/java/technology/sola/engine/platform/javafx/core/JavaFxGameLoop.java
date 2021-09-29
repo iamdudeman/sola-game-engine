@@ -12,6 +12,7 @@ public class JavaFxGameLoop extends AbstractGameLoop {
 
   @Override
   public void run() {
+    isRunning = true;
     new JavaFxGameLoopTimer().start();
   }
 
@@ -28,6 +29,11 @@ public class JavaFxGameLoop extends AbstractGameLoop {
 
     @Override
     public void handle(long newNanoTime) {
+      if (!isRunning) {
+        stop();
+        return;
+      }
+
       float delta = (newNanoTime - currentNanoTime) / 1e9f;
 
       currentNanoTime = newNanoTime;
