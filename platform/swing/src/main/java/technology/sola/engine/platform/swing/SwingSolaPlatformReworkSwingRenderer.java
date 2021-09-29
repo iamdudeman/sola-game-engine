@@ -18,14 +18,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
 import java.util.function.Consumer;
 
-public class SwingSolaPlatformRework extends AbstractSolaPlatformRework {
-  private BufferedImage bufferedImage;
+public class SwingSolaPlatformReworkSwingRenderer extends AbstractSolaPlatformRework {
   private JFrame jFrame;
   private Canvas canvas;
+  private Graphics2D graphics2D;
 
   @Override
   public void onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
@@ -84,7 +82,6 @@ public class SwingSolaPlatformRework extends AbstractSolaPlatformRework {
     jFrame = new JFrame();
     canvas = new Canvas();
 
-    bufferedImage = new BufferedImage(solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight(), BufferedImage.TYPE_INT_ARGB);
     canvas.setPreferredSize(new Dimension(solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight()));
 
     jFrame.getContentPane().add(canvas);
@@ -92,6 +89,7 @@ public class SwingSolaPlatformRework extends AbstractSolaPlatformRework {
     jFrame.pack();
 
     canvas.createBufferStrategy(2);
+    graphics2D = (Graphics2D) canvas.getGraphics();
     jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     jFrame.addComponentListener(new ComponentAdapter() {
       @Override
@@ -114,25 +112,27 @@ public class SwingSolaPlatformRework extends AbstractSolaPlatformRework {
   }
 
   @Override
+  protected Renderer buildRenderer(SolaConfiguration solaConfiguration) {
+    return new SwingRenderer(graphics2D, solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight());
+  }
+
+  @Override
   protected void beforeRender(Renderer renderer) {
-    // Nothing to do here
+    graphics2D = (Graphics2D) canvas.getBufferStrategy().getDrawGraphics();
+    ((SwingRenderer) renderer).updateGraphics2D(graphics2D);
+    graphics2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+    AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+    graphics2D.translate(aspectRatioSizing.getX(), aspectRatioSizing.getY());
+    graphics2D.scale(aspectRatioSizing.getWidth() / (double)renderer.getWidth(), aspectRatioSizing.getHeight() / (double)renderer.getHeight());
+
+    // todo is this the right place for this?
+    renderer.getLayers().forEach(layer -> layer.draw(renderer));
   }
 
   @Override
   protected void onRender(Renderer renderer) {
-    renderer.render(pixels -> {
-      int[] bufferedImageDataBuffer = ((DataBufferInt) bufferedImage.getRaster().getDataBuffer()).getData();
-      System.arraycopy(pixels, 0, bufferedImageDataBuffer, 0, pixels.length);
-
-      Graphics graphics = canvas.getBufferStrategy().getDrawGraphics();
-
-      AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
-
-      graphics.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-      graphics.drawImage(bufferedImage, aspectRatioSizing.getX(), aspectRatioSizing.getY(), aspectRatioSizing.getWidth(), aspectRatioSizing.getHeight(), null);
-      graphics.dispose();
-
-      canvas.getBufferStrategy().show();
-    });
+    canvas.getBufferStrategy().show();
+    graphics2D.dispose();
   }
 }

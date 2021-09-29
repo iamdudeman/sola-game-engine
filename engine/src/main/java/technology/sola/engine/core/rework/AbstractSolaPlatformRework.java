@@ -3,6 +3,7 @@ package technology.sola.engine.core.rework;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.impl.SoftwareRenderer;
+import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.graphics.screen.Viewport;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
@@ -20,7 +21,8 @@ public abstract class AbstractSolaPlatformRework {
     SolaConfiguration solaConfiguration = abstractSolaRework.buildConfiguration();
 
     this.viewport = buildViewport(solaConfiguration);
-    this.renderer = buildRenderer(solaConfiguration);
+
+    viewport.setAspectMode(AspectMode.MAINTAIN); // TODO temp
 
     onInit(abstractSolaRework, solaConfiguration, () -> onInitComplete(abstractSolaRework, solaConfiguration));
   }
@@ -42,6 +44,7 @@ public abstract class AbstractSolaPlatformRework {
   protected abstract void onInit(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration, Runnable initCompleteCallback);
 
   protected void onInitComplete(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration) {
+    this.renderer = buildRenderer(solaConfiguration);
     this.gameLoop = buildGameLoop(renderer, abstractSolaRework, solaConfiguration);
 
     abstractSolaRework.initializeForPlatform(this);

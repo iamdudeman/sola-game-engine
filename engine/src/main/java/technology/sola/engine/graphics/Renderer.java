@@ -10,6 +10,10 @@ public interface Renderer {
 
   void setFont(Font font);
 
+  int getWidth();
+
+  int getHeight();
+
   // TODO is this needed or desired?
   default void render(Consumer<int[]> pixelConsumer) {
     getLayers().forEach(layer -> layer.draw(this));

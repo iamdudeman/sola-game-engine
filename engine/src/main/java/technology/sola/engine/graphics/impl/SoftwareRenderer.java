@@ -35,6 +35,8 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     this.font = font;
   }
 
+
+
   @Override
   public void render(Consumer<int[]> pixelConsumer) {
     layers.forEach(layer -> layer.draw(this));
