@@ -1,6 +1,8 @@
 package technology.sola.engine.core.rework;
 
 import technology.sola.engine.event.EventHub;
+import technology.sola.engine.event.gameloop.GameLoopEvent;
+import technology.sola.engine.event.gameloop.GameLoopEventListener;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.impl.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectMode;
@@ -44,6 +46,8 @@ public abstract class AbstractSolaPlatformRework {
   protected void onInitComplete(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration) {
     this.renderer = buildRenderer(solaConfiguration);
     this.gameLoop = buildGameLoop(renderer, abstractSolaRework, solaConfiguration);
+
+    solaEventHub.add(new GameLoopEventListener(gameLoop), GameLoopEvent.class);
 
     abstractSolaRework.initializeForPlatform(this);
     new Thread(gameLoop).start();

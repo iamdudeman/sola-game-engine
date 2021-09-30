@@ -11,30 +11,38 @@ public class BrowserGameLoop extends AbstractGameLoop implements JsUtils.Functio
 
   public BrowserGameLoop(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond) {
     super(updateMethod, renderMethod, targetUpdatesPerSecond, false);
-    isRunning = true;
   }
 
   @Override
   public void run() {
-    if (!isRunning()) return;
+    isRunning = true;
+    previousLoopStartTime = System.nanoTime();
+    new JsAnimationFrame().run();
+  }
 
-    long loopStart = System.nanoTime();
-    float delta = (loopStart - previousLoopStartTime) / 1e9f;
+  private class JsAnimationFrame implements JsUtils.Function {
+    @Override
+    public void run() {
+      if (!isRunning()) return;
 
-    previousLoopStartTime = loopStart;
-    updateCatchUpAccumulator += delta;
+      long loopStart = System.nanoTime();
+      float delta = (loopStart - previousLoopStartTime) / 1e9f;
 
-    while (updateCatchUpAccumulator >= deltaTime) {
-      updateMethod.accept(deltaTime);
-      updateCatchUpAccumulator -= deltaTime;
+      previousLoopStartTime = loopStart;
+      updateCatchUpAccumulator += delta;
 
-      fpsTracker.tickUpdate();
-      fpsTracker.logStats();
+      while (updateCatchUpAccumulator >= deltaTime) {
+        updateMethod.accept(deltaTime);
+        updateCatchUpAccumulator -= deltaTime;
+
+        fpsTracker.tickUpdate();
+        fpsTracker.logStats();
+      }
+
+      renderMethod.run();
+      fpsTracker.tickFrames();
+
+      JsUtils.requestAnimationFrame(this);
     }
-
-    renderMethod.run();
-    fpsTracker.tickFrames();
-
-    JsUtils.requestAnimationFrame(this);
   }
 }
