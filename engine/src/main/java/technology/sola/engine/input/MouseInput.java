@@ -26,18 +26,21 @@ public class MouseInput {
   public void updateStatusOfMouse() {
     currentMousePosition = lastEventPosition;
 
-    mouseDownMap
-      .forEach((buttonName, isDown) -> {
-        if (isDown) {
-          if (mouseStatusMap.get(buttonName) == ButtonState.CLICKED) {
-            mouseStatusMap.put(buttonName, ButtonState.DRAGGED);
-          } else if (mouseStatusMap.get(buttonName) == ButtonState.RELEASED) {
-            mouseStatusMap.put(buttonName, ButtonState.CLICKED);
+    // TODO browser doesn't work with just forEach for some reason :|
+    mouseDownMap.keySet()
+        .forEach(mouseButton -> {
+          boolean isDown = mouseDownMap.getOrDefault(mouseButton, false);
+
+          if (isDown) {
+            if (mouseStatusMap.get(mouseButton) == ButtonState.CLICKED) {
+              mouseStatusMap.put(mouseButton, ButtonState.DRAGGED);
+            } else if (mouseStatusMap.get(mouseButton) == ButtonState.RELEASED) {
+              mouseStatusMap.put(mouseButton, ButtonState.CLICKED);
+            }
+          } else {
+            mouseStatusMap.put(mouseButton, ButtonState.RELEASED);
           }
-        } else {
-          mouseStatusMap.put(buttonName, ButtonState.RELEASED);
-        }
-      });
+        });
   }
 
   public void onMouseMoved(MouseEvent mouseEvent) {

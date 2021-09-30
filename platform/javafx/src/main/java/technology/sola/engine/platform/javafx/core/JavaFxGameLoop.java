@@ -29,7 +29,7 @@ public class JavaFxGameLoop extends AbstractGameLoop {
 
     @Override
     public void handle(long newNanoTime) {
-      if (!isRunning) {
+      if (!isRunning()) {
         stop();
         return;
       }

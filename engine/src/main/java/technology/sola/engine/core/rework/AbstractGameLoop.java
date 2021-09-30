@@ -12,7 +12,7 @@ public abstract class AbstractGameLoop implements Runnable {
   protected final Runnable renderMethod;
   protected final boolean isRestingAllowed;
   protected final float deltaTime;
-  protected boolean isRunning = false;
+  protected boolean isRunning = false; // TODO should this be protected or private?
 
   protected AbstractGameLoop(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond) {
     this(updateMethod, renderMethod, targetUpdatesPerSecond, false);
@@ -24,8 +24,6 @@ public abstract class AbstractGameLoop implements Runnable {
     this.deltaTime = 1f / targetUpdatesPerSecond;
     this.isRestingAllowed = isRestingAllowed;
   }
-
-  public abstract void run();
 
   public boolean isRunning() {
     return isRunning;

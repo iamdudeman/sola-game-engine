@@ -14,7 +14,7 @@ public class FixedUpdateGameLoop extends AbstractGameLoop {
   public void run() {
     isRunning = true;
 
-    while (isRunning) {
+    while (isRunning()) {
       long loopStart = System.nanoTime();
       float delta = (loopStart - previousLoopStartTime) / 1e9f;
 

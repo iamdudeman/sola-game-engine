@@ -23,7 +23,7 @@ dependencies {
 }
 
 teavm {
-  mainClass = "technology.sola.engine.examples.browser.BrowserMain"
+  mainClass = "technology.sola.engine.examples.browser.BrowserMainRework"
   sourceDirectory = file("src")
   targetDirectory = file("build")
   targetFileName = "sola.js"

@@ -64,6 +64,7 @@ public abstract class AbstractSolaPlatformRework {
   // TODO create and implement a buildFileSystem
 
   protected AbstractGameLoop buildGameLoop(Renderer renderer, AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration) {
+    // TODO refactor this to just do just need AbstractGameLoop::new maybe?
     return new FixedUpdateGameLoop(
       deltaTime -> update(abstractSolaRework, deltaTime), () -> render(renderer, abstractSolaRework),
       solaConfiguration.getGameLoopTargetUpdatesPerSecond(), solaConfiguration.isGameLoopRestingAllowed()
