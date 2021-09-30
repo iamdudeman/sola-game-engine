@@ -1,5 +1,7 @@
 package technology.sola.engine.core.rework;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.event.gameloop.GameLoopEventListener;
@@ -13,6 +15,7 @@ import technology.sola.engine.input.MouseEvent;
 import java.util.function.Consumer;
 
 public abstract class AbstractSolaPlatformRework {
+  private static final Logger LOGGER = LoggerFactory.getLogger(AbstractSolaPlatformRework.class);
   protected Renderer renderer;
   protected AbstractGameLoop gameLoop;
   protected Viewport viewport;
@@ -49,6 +52,7 @@ public abstract class AbstractSolaPlatformRework {
 
     solaEventHub.add(new GameLoopEventListener(gameLoop), GameLoopEvent.class);
 
+    LOGGER.info("Using platform [{}]", this.getClass().getName());
     abstractSolaRework.initializeForPlatform(this);
     new Thread(gameLoop).start();
   }

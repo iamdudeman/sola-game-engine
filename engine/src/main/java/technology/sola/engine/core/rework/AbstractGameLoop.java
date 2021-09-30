@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.util.function.Consumer;
 
 public abstract class AbstractGameLoop implements Runnable {
-  private static final Logger logger = LoggerFactory.getLogger(AbstractGameLoop.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(AbstractGameLoop.class);
   protected final FpsTracker fpsTracker = new FpsTracker();
   protected final Consumer<Float> updateMethod;
   protected final Runnable renderMethod;
@@ -31,6 +31,7 @@ public abstract class AbstractGameLoop implements Runnable {
 
   public void stop() {
     isRunning = false;
+    LOGGER.info("Sola GameLoop is stopping");
   }
 
   protected void shortRest(long loopStartTime) {
@@ -40,7 +41,7 @@ public abstract class AbstractGameLoop implements Runnable {
       try {
         Thread.sleep(1);
       } catch (InterruptedException ex) {
-        logger.error("rest was interrupted", ex);
+        LOGGER.error("rest was interrupted", ex);
         break;
       }
     }
