@@ -29,6 +29,14 @@ public abstract class AbstractSolaPlatformRework {
     initializePlatform(abstractSolaRework, solaConfiguration, () -> onInitComplete(abstractSolaRework, solaConfiguration));
   }
 
+  public Renderer getRenderer() {
+    return renderer;
+  }
+
+  public Viewport getViewport() {
+    return viewport;
+  }
+
   public abstract void onKeyPressed(Consumer<KeyEvent> keyEventConsumer);
 
   public abstract void onKeyReleased(Consumer<KeyEvent> keyEventConsumer);
