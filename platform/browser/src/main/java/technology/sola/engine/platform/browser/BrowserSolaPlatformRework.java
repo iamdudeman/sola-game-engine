@@ -1,5 +1,7 @@
 package technology.sola.engine.platform.browser;
 
+import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.core.rework.AbstractGameLoop;
 import technology.sola.engine.core.rework.AbstractSolaPlatformRework;
 import technology.sola.engine.core.rework.AbstractSolaRework;
@@ -7,8 +9,11 @@ import technology.sola.engine.core.rework.SolaConfiguration;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.platform.browser.assets.FontAssetPool;
+import technology.sola.engine.platform.browser.assets.SolaImageAssetPool;
 import technology.sola.engine.platform.browser.core.BrowserGameLoop;
 import technology.sola.engine.platform.browser.javascript.JsCanvasUtils;
 import technology.sola.engine.platform.browser.javascript.JsKeyboardUtils;
@@ -45,13 +50,13 @@ public class BrowserSolaPlatformRework extends AbstractSolaPlatformRework {
 
   @Override
   protected void initializePlatform(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
-    // TODO AssetPool stuff (probably will need new file system work)
-
     JsUtils.setTitle(solaConfiguration.getSolaTitle());
     JsCanvasUtils.canvasInit(solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight());
 
     // TODO something better than this
     JsUtils.exportObject("solaStop", (JsUtils.Function) () -> solaEventHub.emit(GameLoopEvent.STOP));
+
+    // Note: Always run last
     initCompleteCallback.run();
   }
 
@@ -77,6 +82,13 @@ public class BrowserSolaPlatformRework extends AbstractSolaPlatformRework {
 
       JsCanvasUtils.renderToCanvas(pixelDataForCanvas);
     });
+  }
+
+  @Override
+  protected void populateAssetPoolProvider(AssetPoolProvider assetPoolProvider) {
+    AssetPool<SolaImage> solaImageAssetPool = new SolaImageAssetPool();
+    assetPoolProvider.addAssetPool(solaImageAssetPool);
+    assetPoolProvider.addAssetPool(new FontAssetPool());
   }
 
   @Override

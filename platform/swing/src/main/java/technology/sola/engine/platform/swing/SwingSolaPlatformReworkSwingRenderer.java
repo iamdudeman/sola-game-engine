@@ -1,13 +1,18 @@
 package technology.sola.engine.platform.swing;
 
+import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.core.rework.AbstractSolaPlatformRework;
 import technology.sola.engine.core.rework.AbstractSolaRework;
 import technology.sola.engine.core.rework.SolaConfiguration;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.platform.swing.assets.FontAssetPool;
+import technology.sola.engine.platform.swing.assets.SolaImageAssetPool;
 import technology.sola.engine.platform.swing.core.SwingRenderer;
 
 import javax.swing.*;
@@ -78,8 +83,6 @@ public class SwingSolaPlatformReworkSwingRenderer extends AbstractSolaPlatformRe
 
   @Override
   protected void initializePlatform(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
-    // TODO AssetPool stuff (probably will need new file system work)
-
     jFrame = new JFrame();
     canvas = new Canvas();
 
@@ -109,12 +112,9 @@ public class SwingSolaPlatformReworkSwingRenderer extends AbstractSolaPlatformRe
 
     canvas.requestFocus();
     jFrame.setVisible(true);
-    initCompleteCallback.run();
-  }
 
-  @Override
-  protected Renderer buildRenderer(SolaConfiguration solaConfiguration) {
-    return new SwingRenderer(graphics2D, solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight());
+    // Note: Always run last
+    initCompleteCallback.run();
   }
 
   @Override
@@ -135,5 +135,17 @@ public class SwingSolaPlatformReworkSwingRenderer extends AbstractSolaPlatformRe
   protected void onRender(Renderer renderer) {
     canvas.getBufferStrategy().show();
     graphics2D.dispose();
+  }
+
+  @Override
+  protected void populateAssetPoolProvider(AssetPoolProvider assetPoolProvider) {
+    AssetPool<SolaImage> solaImageAssetPool = new SolaImageAssetPool();
+    assetPoolProvider.addAssetPool(solaImageAssetPool);
+    assetPoolProvider.addAssetPool(new FontAssetPool(solaImageAssetPool));
+  }
+
+  @Override
+  protected Renderer buildRenderer(SolaConfiguration solaConfiguration) {
+    return new SwingRenderer(graphics2D, solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight());
   }
 }

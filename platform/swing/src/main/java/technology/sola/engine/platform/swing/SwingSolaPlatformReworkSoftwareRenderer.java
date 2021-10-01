@@ -1,13 +1,18 @@
 package technology.sola.engine.platform.swing;
 
+import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.core.rework.AbstractSolaPlatformRework;
 import technology.sola.engine.core.rework.AbstractSolaRework;
 import technology.sola.engine.core.rework.SolaConfiguration;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.platform.swing.assets.FontAssetPool;
+import technology.sola.engine.platform.swing.assets.SolaImageAssetPool;
 
 import javax.swing.*;
 import java.awt.*;
@@ -79,8 +84,6 @@ public class SwingSolaPlatformReworkSoftwareRenderer extends AbstractSolaPlatfor
 
   @Override
   protected void initializePlatform(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
-    // TODO AssetPool stuff (probably will need new file system work)
-
     jFrame = new JFrame();
     canvas = new Canvas();
 
@@ -110,6 +113,8 @@ public class SwingSolaPlatformReworkSoftwareRenderer extends AbstractSolaPlatfor
 
     canvas.requestFocus();
     jFrame.setVisible(true);
+
+    // Note: Always run last
     initCompleteCallback.run();
   }
 
@@ -134,5 +139,12 @@ public class SwingSolaPlatformReworkSoftwareRenderer extends AbstractSolaPlatfor
 
       canvas.getBufferStrategy().show();
     });
+  }
+
+  @Override
+  protected void populateAssetPoolProvider(AssetPoolProvider assetPoolProvider) {
+    AssetPool<SolaImage> solaImageAssetPool = new SolaImageAssetPool();
+    assetPoolProvider.addAssetPool(solaImageAssetPool);
+    assetPoolProvider.addAssetPool(new FontAssetPool(solaImageAssetPool));
   }
 }

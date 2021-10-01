@@ -16,11 +16,8 @@ import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.component.PositionComponent;
 
-// TODO add back SolaImage stuff when implemented
-// TODO add back drawString stuff when implemented
-
 public class RenderingExample extends AbstractSolaRework {
-//  private SolaImage solaImage;
+  private SolaImage solaImage;
   private float rotation = 0.1f;
 
   @Override
@@ -30,12 +27,12 @@ public class RenderingExample extends AbstractSolaRework {
 
   @Override
   protected void onInit() {
-//    AssetPool<SolaImage> solaImageAssetPool = assetPoolProvider.getAssetPool(SolaImage.class);
-//    AssetPool<Font> fontAssetPool = assetPoolProvider.getAssetPool(Font.class);
+    AssetPool<SolaImage> solaImageAssetPool = assetPoolProvider.getAssetPool(SolaImage.class);
+    AssetPool<Font> fontAssetPool = assetPoolProvider.getAssetPool(Font.class);
 
-//    Font font = fontAssetPool.addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
-//    renderer.setFont(font);
-//    solaImage = solaImageAssetPool.addAndGetAsset("test_tiles", "assets/test_tiles.png");
+    Font font = fontAssetPool.addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
+    platform.getRenderer().setFont(font);
+    solaImage = solaImageAssetPool.addAndGetAsset("test_tiles", "assets/test_tiles.png");
 
     World world = new World(5);
 
@@ -61,27 +58,27 @@ public class RenderingExample extends AbstractSolaRework {
       renderer.fillRect(0, 10, 600, 100, new Color(120, 255, 255, 255));
       renderer.setRenderMode(RenderMode.NORMAL);
 
-//      final String characters1 = "!\"#$%&'()*+,-./0123456789:; <=>?@ABCDEFGHIJKLMN";
-//      final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+      final String characters1 = "!\"#$%&'()*+,-./0123456789:; <=>?@ABCDEFGHIJKLMN";
+      final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
-//      renderer.setRenderMode(RenderMode.MASK);
-//      renderer.drawString(characters1, 5, 5, Color.RED);
-//      renderer.drawString(characters2, 5, 35, Color.BLACK);
-//      renderer.drawString("Hello World!", 5, 65, Color.BLUE);
-//      renderer.setRenderMode(RenderMode.NORMAL);
+      renderer.setRenderMode(RenderMode.MASK);
+      renderer.drawString(characters1, 5, 5, Color.RED);
+      renderer.drawString(characters2, 5, 35, Color.BLACK);
+      renderer.drawString("Hello World!", 5, 65, Color.BLUE);
+      renderer.setRenderMode(RenderMode.NORMAL);
     });
 
     renderer.drawToLayer("moving_stuff", r -> {
-//      renderer.drawImage(400, 400, solaImage);
-//      AffineTransform affineTransform = new AffineTransform()
-//        .translate(400, 400)
-//        .translate(-100, -100)
-//        .rotate(rotation)
-//        .scale(1.5f, 2f)
-//        ;
-//      renderer.setRenderMode(RenderMode.MASK);
-//      renderer.drawImage(solaImage, affineTransform);
-//      renderer.setRenderMode(RenderMode.NORMAL);
+      renderer.drawImage(400, 400, solaImage);
+      AffineTransform affineTransform = new AffineTransform()
+        .translate(400, 400)
+        .translate(-100, -100)
+        .rotate(rotation)
+        .scale(1.5f, 2f)
+        ;
+      renderer.setRenderMode(RenderMode.MASK);
+      renderer.drawImage(solaImage, affineTransform);
+      renderer.setRenderMode(RenderMode.NORMAL);
     });
 
     renderer.drawToLayer("moving_stuff", Layer.DEFAULT_PRIORITY - 10, r -> {
@@ -114,7 +111,7 @@ public class RenderingExample extends AbstractSolaRework {
       renderer.fillCircle(300, 150, 100.5f, Color.BLUE);
       renderer.drawCircle(300, 150, 100.5f, Color.RED);
 
-//      renderer.drawImage(400, 530, solaImage.getSubImage(1, 1, 16, 16));
+      renderer.drawImage(400, 530, solaImage.getSubImage(1, 1, 16, 16));
 
       renderer.fillRect(180, 530, 50, 50, new Color(255, 0, 0, 255));
       renderer.setRenderMode(RenderMode.ALPHA);
@@ -123,17 +120,6 @@ public class RenderingExample extends AbstractSolaRework {
 
       renderer.drawLine(0, 0, 800, 600, Color.BLUE);
       renderer.drawLine(750, 0, 20, 500, Color.BLUE);
-    });
-
-    renderer.drawToLayer("moving_stuff", r -> {
-      AffineTransform affineTransform = new AffineTransform()
-//        .translate(-400, -400)
-//        .translate(400, 400)
-//        .translate(-100, -100)
-//        .rotate(rotation)
-        .scale(1.25f, 1.5f)
-//        .sheer(1.5f, 1)
-        ;
     });
   }
 

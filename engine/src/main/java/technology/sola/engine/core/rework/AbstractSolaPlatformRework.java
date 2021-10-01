@@ -2,6 +2,7 @@ package technology.sola.engine.core.rework;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.event.gameloop.GameLoopEventListener;
@@ -26,6 +27,7 @@ public abstract class AbstractSolaPlatformRework {
     this.solaEventHub = abstractSolaRework.eventHub;
     this.viewport = buildViewport(solaConfiguration);
 
+    populateAssetPoolProvider(abstractSolaRework.assetPoolProvider);
     initializePlatform(abstractSolaRework, solaConfiguration, () -> onInitComplete(abstractSolaRework, solaConfiguration));
   }
 
@@ -73,6 +75,8 @@ public abstract class AbstractSolaPlatformRework {
 
   protected abstract void onRender(Renderer renderer);
 
+  protected abstract void populateAssetPoolProvider(AssetPoolProvider assetPoolProvider);
+
   protected Viewport buildViewport(SolaConfiguration solaConfiguration) {
     return new Viewport(solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight());
   }
@@ -80,8 +84,6 @@ public abstract class AbstractSolaPlatformRework {
   protected Renderer buildRenderer(SolaConfiguration solaConfiguration) {
     return new SoftwareRenderer(solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight());
   }
-
-  // TODO create and implement a buildFileSystem
 
   protected GameLoopProvider buildGameLoop() {
     return FixedUpdateGameLoop::new;
