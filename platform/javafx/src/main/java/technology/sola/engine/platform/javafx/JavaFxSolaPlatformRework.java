@@ -20,8 +20,6 @@ import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
 
 import java.util.function.Consumer;
 
-// TODO probably needs a custom GameLoop using timer to prevent weird render thread issues
-
 public class JavaFxSolaPlatformRework extends AbstractSolaPlatformRework {
   private Canvas canvas;
   private Consumer<int[]> pixelArrayConsumer = pixels -> { };

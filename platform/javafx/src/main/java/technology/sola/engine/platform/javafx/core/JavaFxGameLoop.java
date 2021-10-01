@@ -18,11 +18,6 @@ public class JavaFxGameLoop extends AbstractGameLoop {
 
   private class JavaFxGameLoopTimer extends AnimationTimer {
     @Override
-    public void start() {
-      super.start();
-    }
-
-    @Override
     public void handle(long newNanoTime) {
       if (!isRunning()) {
         stop();

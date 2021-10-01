@@ -12,11 +12,13 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO finish implementing this
+
 public class SwingRenderer implements Renderer {
-  private List<Layer> layers = new ArrayList<>();
+  private final List<Layer> layers = new ArrayList<>();
+  private final int width;
+  private final int height;
   private Graphics2D graphics2D;
-  private int width;
-  private int height;
 
   public SwingRenderer(Graphics2D graphics2D, int width, int height) {
     this.graphics2D = graphics2D;
@@ -40,12 +42,12 @@ public class SwingRenderer implements Renderer {
 
   @Override
   public void setRenderMode(RenderMode renderMode) {
-
+    throw new UnsupportedOperationException("not yet implemented");
   }
 
   @Override
   public void setFont(Font font) {
-
+    throw new UnsupportedOperationException("not yet implemented");
   }
 
   @Override
@@ -61,22 +63,22 @@ public class SwingRenderer implements Renderer {
 
   @Override
   public void setPixel(int x, int y, Color color) {
-
+    throw new UnsupportedOperationException("not yet implemented");
   }
 
   @Override
   public void drawString(String text, float x, float y, Color color) {
-
+    throw new UnsupportedOperationException("not yet implemented");
   }
 
   @Override
   public void drawLine(float x, float y, float x2, float y2, Color color) {
-
+    throw new UnsupportedOperationException("not yet implemented");
   }
 
   @Override
   public void drawRect(float x, float y, float width, float height, Color color) {
-
+    throw new UnsupportedOperationException("not yet implemented");
   }
 
   @Override
@@ -87,36 +89,36 @@ public class SwingRenderer implements Renderer {
 
   @Override
   public void drawCircle(float x, float y, float radius, Color color) {
-
+    throw new UnsupportedOperationException("not yet implemented");
   }
 
   @Override
   public void fillCircle(float x, float y, float radius, Color color) {
-
+    throw new UnsupportedOperationException("not yet implemented");
   }
 
   @Override
   public void drawEllipse(float x, float y, float width, float height, Color color) {
-
+    throw new UnsupportedOperationException("not yet implemented");
   }
 
   @Override
   public void fillEllipse(float centerX, float centerY, float width, float height, Color color) {
-
+    throw new UnsupportedOperationException("not yet implemented");
   }
 
   @Override
   public void drawImage(float x, float y, SolaImage solaImage) {
-
+    throw new UnsupportedOperationException("not yet implemented");
   }
 
   @Override
   public void drawImage(SolaImage solaImage, AffineTransform affineTransform) {
-
+    throw new UnsupportedOperationException("not yet implemented");
   }
 
   @Override
   public void drawImage(SolaImage solaImage, float x, float y, float width, float height) {
-
+    throw new UnsupportedOperationException("not yet implemented");
   }
 }

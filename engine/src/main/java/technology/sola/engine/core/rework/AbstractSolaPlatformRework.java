@@ -21,16 +21,12 @@ public abstract class AbstractSolaPlatformRework {
   protected EventHub solaEventHub;
 
   public void play(AbstractSolaRework abstractSolaRework) {
-    this.solaEventHub = abstractSolaRework.eventHub;
     SolaConfiguration solaConfiguration = abstractSolaRework.buildConfiguration();
 
+    this.solaEventHub = abstractSolaRework.eventHub;
     this.viewport = buildViewport(solaConfiguration);
 
     initializePlatform(abstractSolaRework, solaConfiguration, () -> onInitComplete(abstractSolaRework, solaConfiguration));
-  }
-
-  public Viewport getViewport() {
-    return viewport;
   }
 
   public abstract void onKeyPressed(Consumer<KeyEvent> keyEventConsumer);
