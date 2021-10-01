@@ -12,11 +12,9 @@ public abstract class AbstractGameLoop implements Runnable {
   protected final Runnable renderMethod;
   protected final boolean isRestingAllowed;
   protected final float deltaTime;
-  protected boolean isRunning = false; // TODO should this be protected or private?
-
-  protected AbstractGameLoop(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond) {
-    this(updateMethod, renderMethod, targetUpdatesPerSecond, false);
-  }
+  protected long previousLoopStartNanos;
+  protected float updateCatchUpAccumulator;
+  private boolean isRunning = false;
 
   protected AbstractGameLoop(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
     this.updateMethod = updateMethod;
@@ -25,13 +23,20 @@ public abstract class AbstractGameLoop implements Runnable {
     this.isRestingAllowed = isRestingAllowed;
   }
 
+  @Override
+  public void run() {
+    isRunning = true;
+    updateCatchUpAccumulator = 0f;
+    previousLoopStartNanos = System.nanoTime();
+  }
+
   public boolean isRunning() {
     return isRunning;
   }
 
   public void stop() {
     isRunning = false;
-    LOGGER.info("Sola GameLoop is stopping");
+    LOGGER.info("----------Sola is stopping----------");
   }
 
   protected void shortRest(long loopStartTime) {

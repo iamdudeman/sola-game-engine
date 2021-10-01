@@ -45,7 +45,7 @@ public class BrowserSolaPlatformReworkBrowserRenderer extends AbstractSolaPlatfo
   }
 
   @Override
-  protected void onInit(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
+  protected void initializePlatform(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
     // TODO AssetPool stuff (probably will need new file system work)
 
     JsUtils.setTitle(solaConfiguration.getSolaTitle());
@@ -72,11 +72,8 @@ public class BrowserSolaPlatformReworkBrowserRenderer extends AbstractSolaPlatfo
   }
 
   @Override
-  protected AbstractGameLoop buildGameLoop(Renderer renderer, AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration) {
-    return new BrowserGameLoop(
-      deltaTime -> update(abstractSolaRework, deltaTime), () -> render(renderer, abstractSolaRework),
-      solaConfiguration.getGameLoopTargetUpdatesPerSecond()
-    );
+  protected GameLoopProvider buildGameLoop() {
+    return BrowserGameLoop::new;
   }
 
   @Override

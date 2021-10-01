@@ -6,24 +6,19 @@ import technology.sola.engine.core.rework.AbstractGameLoop;
 import java.util.function.Consumer;
 
 public class JavaFxGameLoop extends AbstractGameLoop {
-  public JavaFxGameLoop(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond) {
-    super(updateMethod, renderMethod, targetUpdatesPerSecond, false);
+  public JavaFxGameLoop(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
+    super(updateMethod, renderMethod, targetUpdatesPerSecond, isRestingAllowed);
   }
 
   @Override
   public void run() {
+    super.run();
     new JavaFxGameLoopTimer().start();
   }
 
   private class JavaFxGameLoopTimer extends AnimationTimer {
-    private long currentNanoTime = System.nanoTime();
-    private float accumulator = 0f;
-
-
     @Override
     public void start() {
-      isRunning = true;
-      currentNanoTime = System.nanoTime();
       super.start();
     }
 
@@ -34,16 +29,16 @@ public class JavaFxGameLoop extends AbstractGameLoop {
         return;
       }
 
-      float delta = (newNanoTime - currentNanoTime) / 1e9f;
+      float delta = (newNanoTime - previousLoopStartNanos) / 1e9f;
 
-      currentNanoTime = newNanoTime;
-      accumulator += delta;
+      previousLoopStartNanos = newNanoTime;
+      updateCatchUpAccumulator += delta;
 
-      while (accumulator >= deltaTime) {
+      while (updateCatchUpAccumulator >= deltaTime) {
         updateMethod.accept(deltaTime);
         fpsTracker.tickUpdate();
 
-        accumulator -= deltaTime;
+        updateCatchUpAccumulator -= deltaTime;
 
         renderMethod.run();
         fpsTracker.tickFrames();

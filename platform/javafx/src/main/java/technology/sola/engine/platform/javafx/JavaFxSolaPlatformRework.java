@@ -8,7 +8,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.PixelFormat;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
-import technology.sola.engine.core.rework.AbstractGameLoop;
 import technology.sola.engine.core.rework.AbstractSolaPlatformRework;
 import technology.sola.engine.core.rework.AbstractSolaRework;
 import technology.sola.engine.core.rework.SolaConfiguration;
@@ -60,7 +59,7 @@ public class JavaFxSolaPlatformRework extends AbstractSolaPlatformRework {
   }
 
   @Override
-  protected void onInit(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
+  protected void initializePlatform(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
     // TODO AssetPool stuff (probably will need new file system work)
 
     Platform.startup(() -> {
@@ -117,11 +116,7 @@ public class JavaFxSolaPlatformRework extends AbstractSolaPlatformRework {
   }
 
   @Override
-  protected AbstractGameLoop buildGameLoop(Renderer renderer, AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration) {
-//    return super.buildGameLoop(renderer, abstractSolaRework, solaConfiguration);
-    return new JavaFxGameLoop(
-      deltaTime -> update(abstractSolaRework, deltaTime), () -> render(renderer, abstractSolaRework),
-      solaConfiguration.getGameLoopTargetUpdatesPerSecond()
-    );
+  protected GameLoopProvider buildGameLoop() {
+    return JavaFxGameLoop::new;
   }
 }

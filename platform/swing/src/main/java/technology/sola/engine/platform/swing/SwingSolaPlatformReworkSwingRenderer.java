@@ -77,7 +77,7 @@ public class SwingSolaPlatformReworkSwingRenderer extends AbstractSolaPlatformRe
   }
 
   @Override
-  protected void onInit(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
+  protected void initializePlatform(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
     // TODO AssetPool stuff (probably will need new file system work)
 
     jFrame = new JFrame();

@@ -7,7 +7,6 @@ import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.event.gameloop.GameLoopEventListener;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.impl.SoftwareRenderer;
-import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.graphics.screen.Viewport;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
@@ -27,7 +26,7 @@ public abstract class AbstractSolaPlatformRework {
 
     this.viewport = buildViewport(solaConfiguration);
 
-    onInit(abstractSolaRework, solaConfiguration, () -> onInitComplete(abstractSolaRework, solaConfiguration));
+    initializePlatform(abstractSolaRework, solaConfiguration, () -> onInitComplete(abstractSolaRework, solaConfiguration));
   }
 
   public Viewport getViewport() {
@@ -44,11 +43,20 @@ public abstract class AbstractSolaPlatformRework {
 
   public abstract void onMouseReleased(Consumer<MouseEvent> mouseEventConsumer);
 
-  protected abstract void onInit(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration, Runnable initCompleteCallback);
+  /**
+   *
+   * @param abstractSolaRework
+   * @param solaConfiguration
+   * @param initCompleteCallback - Must be called when platform initialization is complete
+   */
+  protected abstract void initializePlatform(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration, Runnable initCompleteCallback);
 
   protected void onInitComplete(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration) {
     this.renderer = buildRenderer(solaConfiguration);
-    this.gameLoop = buildGameLoop(renderer, abstractSolaRework, solaConfiguration);
+    this.gameLoop = buildGameLoop().create(
+      deltaTime -> update(abstractSolaRework, deltaTime), () -> render(renderer, abstractSolaRework),
+      solaConfiguration.getGameLoopTargetUpdatesPerSecond(), solaConfiguration.isGameLoopRestingAllowed()
+    );
 
     solaEventHub.add(new GameLoopEventListener(gameLoop), GameLoopEvent.class);
 
@@ -71,21 +79,22 @@ public abstract class AbstractSolaPlatformRework {
 
   // TODO create and implement a buildFileSystem
 
-  protected AbstractGameLoop buildGameLoop(Renderer renderer, AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration) {
-    // TODO refactor this to just do just need AbstractGameLoop::new maybe?
-    return new FixedUpdateGameLoop(
-      deltaTime -> update(abstractSolaRework, deltaTime), () -> render(renderer, abstractSolaRework),
-      solaConfiguration.getGameLoopTargetUpdatesPerSecond(), solaConfiguration.isGameLoopRestingAllowed()
-    );
+  protected GameLoopProvider buildGameLoop() {
+    return FixedUpdateGameLoop::new;
   }
 
-  protected void update(AbstractSolaRework abstractSolaRework, float deltaTime) {
+  private void update(AbstractSolaRework abstractSolaRework, float deltaTime) {
     abstractSolaRework.onUpdate(deltaTime);
   }
 
-  protected void render(Renderer renderer, AbstractSolaRework abstractSolaRework) {
+  private void render(Renderer renderer, AbstractSolaRework abstractSolaRework) {
     beforeRender(renderer);
     abstractSolaRework.onRender(renderer);
     onRender(renderer);
+  }
+
+  @FunctionalInterface
+  protected interface GameLoopProvider {
+    AbstractGameLoop create(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed);
   }
 }
