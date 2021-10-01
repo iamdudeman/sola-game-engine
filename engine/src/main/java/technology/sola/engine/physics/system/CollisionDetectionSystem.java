@@ -4,7 +4,7 @@ import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.impl.SoftwareRenderer;
+import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.CollisionUtils;
 import technology.sola.engine.physics.SpatialHashMap;
@@ -82,7 +82,7 @@ public class CollisionDetectionSystem extends AbstractEcsSystem {
     this.emitCollisionEvent = emitCollisionEvent;
   }
 
-  public void debugRender(SoftwareRenderer renderer, World world, Color colliderOutlineColor, Color spatialHashMapCellColor) {
+  public void debugRender(Renderer renderer, World world, Color colliderOutlineColor, Color spatialHashMapCellColor) {
     if (spatialHashMap == null) {
       return;
     }

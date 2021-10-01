@@ -78,7 +78,8 @@ public class SwingRenderer implements Renderer {
 
   @Override
   public void drawRect(float x, float y, float width, float height, Color color) {
-    throw new UnsupportedOperationException("not yet implemented");
+    graphics2D.setColor(new java.awt.Color(color.hexInt(), true));
+    graphics2D.drawRect((int) (x + .5), (int) (y + .5), (int) (width + .5), (int) (height + .5));
   }
 
   @Override
@@ -89,7 +90,9 @@ public class SwingRenderer implements Renderer {
 
   @Override
   public void drawCircle(float x, float y, float radius, Color color) {
-    throw new UnsupportedOperationException("not yet implemented");
+    int diameter = (int) (radius * 2 + .5);
+    graphics2D.setColor(new java.awt.Color(color.hexInt(), true));
+    graphics2D.drawOval((int) (x + .5), (int) (y + .5), diameter, diameter);
   }
 
   @Override
