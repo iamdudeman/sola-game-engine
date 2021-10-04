@@ -6,14 +6,13 @@ import technology.sola.engine.core.rework.AbstractSolaPlatformRework;
 import technology.sola.engine.core.rework.AbstractSolaRework;
 import technology.sola.engine.core.rework.SolaConfiguration;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaImage;
-import technology.sola.engine.graphics.impl.SoftwareRenderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.platform.browser.assets.FontAssetPool;
 import technology.sola.engine.platform.browser.assets.SolaImageAssetPool;
+import technology.sola.engine.platform.browser.core.BrowserCanvasRenderer;
 import technology.sola.engine.platform.browser.core.BrowserGameLoop;
 import technology.sola.engine.platform.browser.javascript.JsCanvasUtils;
 import technology.sola.engine.platform.browser.javascript.JsKeyboardUtils;
@@ -22,7 +21,7 @@ import technology.sola.engine.platform.browser.javascript.JsUtils;
 
 import java.util.function.Consumer;
 
-public class BrowserSolaPlatformRework extends AbstractSolaPlatformRework {
+public class CanvasRendererBrowserSolaPlatform extends AbstractSolaPlatformRework {
   @Override
   public void onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
     JsKeyboardUtils.keyEventListener("keydown", keyCode -> keyEventConsumer.accept(new KeyEvent(keyCode)));
@@ -55,32 +54,22 @@ public class BrowserSolaPlatformRework extends AbstractSolaPlatformRework {
 
     // TODO something better than this
     JsUtils.exportObject("solaStop", (JsUtils.Function) () -> solaEventHub.emit(GameLoopEvent.STOP));
-
-    // Note: Always run last
     initCompleteCallback.run();
   }
 
   @Override
   protected void beforeRender(Renderer renderer) {
+    JsCanvasUtils.clearRect(renderer.getWidth(), renderer.getHeight());
 
+    // TODO need AspectRatio stuff
+
+    // todo is this the right place for this?
+    renderer.getLayers().forEach(layer -> layer.draw(renderer));
   }
 
   @Override
   protected void onRender(Renderer renderer) {
-    int[] pixels = ((SoftwareRenderer) renderer).getPixels();
-    int[] pixelDataForCanvas = new int[pixels.length * 4];
-    int index = 0;
 
-    for (int current : pixels) {
-      Color color = new Color(current);
-
-      pixelDataForCanvas[index++] = color.getRed();
-      pixelDataForCanvas[index++] = color.getGreen();
-      pixelDataForCanvas[index++] = color.getBlue();
-      pixelDataForCanvas[index++] = color.getAlpha();
-    }
-
-    JsCanvasUtils.renderToCanvas(pixelDataForCanvas);
   }
 
   @Override
@@ -93,5 +82,10 @@ public class BrowserSolaPlatformRework extends AbstractSolaPlatformRework {
   @Override
   protected GameLoopProvider buildGameLoop() {
     return BrowserGameLoop::new;
+  }
+
+  @Override
+  protected Renderer buildRenderer(SolaConfiguration solaConfiguration) {
+    return new BrowserCanvasRenderer(solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight());
   }
 }
