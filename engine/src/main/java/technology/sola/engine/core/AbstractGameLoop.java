@@ -28,6 +28,7 @@ public abstract class AbstractGameLoop implements Runnable {
     isRunning = true;
     updateCatchUpAccumulator = 0f;
     previousLoopStartNanos = System.nanoTime();
+    startFpsTrackerThread();
   }
 
   public boolean isRunning() {
@@ -50,5 +51,13 @@ public abstract class AbstractGameLoop implements Runnable {
         break;
       }
     }
+  }
+
+  private void startFpsTrackerThread() {
+    new Thread(() -> {
+      while (isRunning) {
+        fpsTracker.logStats();
+      }
+    }).start();
   }
 }

@@ -15,8 +15,6 @@ import technology.sola.engine.physics.component.VelocityComponent;
 import java.util.Random;
 
 public class StressTestExample extends AbstractSola {
-  private static final int CANVAS_WIDTH = 800;
-  private static final int CANVAS_HEIGHT = 600;
   private static final float CAMERA_SCALE = 1f;
   private static final float CIRCLE_RADIUS = 5f;
   private final Random random = new Random();
@@ -29,7 +27,7 @@ public class StressTestExample extends AbstractSola {
 
   @Override
   protected SolaConfiguration buildConfiguration() {
-    return new SolaConfiguration("Stress Test", CANVAS_WIDTH, CANVAS_HEIGHT, 60, false);
+    return new SolaConfiguration("Stress Test", 800, 600, 60, false);
   }
 
   @Override
@@ -51,8 +49,8 @@ public class StressTestExample extends AbstractSola {
   private World buildWorld() {
     Material platformMaterial = new Material(0, 0.8f);
     Material circleMaterial = new Material(1, 0.8f);
-    float zoomedWidth = CANVAS_WIDTH / CAMERA_SCALE;
-    float zoomedHeight = CANVAS_HEIGHT / CAMERA_SCALE;
+    float zoomedWidth = configuration.getCanvasWidth() / CAMERA_SCALE;
+    float zoomedHeight = configuration.getCanvasHeight() / CAMERA_SCALE;
     float squareSide = CIRCLE_RADIUS * 2;
     int bottomPlatformEntityCount = Math.round(zoomedWidth / squareSide) + 1;
     int sidePlatformEntityCount = Math.round(zoomedHeight / squareSide) * 2 + 2;

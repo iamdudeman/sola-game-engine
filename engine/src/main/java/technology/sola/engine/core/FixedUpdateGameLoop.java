@@ -20,10 +20,9 @@ class FixedUpdateGameLoop extends AbstractGameLoop {
 
       while (updateCatchUpAccumulator >= deltaTime) {
         updateMethod.accept(deltaTime);
-        updateCatchUpAccumulator -= deltaTime;
-
         fpsTracker.tickUpdate();
-        fpsTracker.logStats();
+
+        updateCatchUpAccumulator -= deltaTime;
       }
 
       renderMethod.run();

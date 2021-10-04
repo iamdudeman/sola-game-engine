@@ -24,13 +24,11 @@ public abstract class AbstractSolaPlatform {
   public void play(AbstractSola abstractSola) {
     LOGGER.info("Using platform [{}]", this.getClass().getName());
 
-    SolaConfiguration solaConfiguration = abstractSola.buildConfiguration();
-
     this.solaEventHub = abstractSola.eventHub;
-    this.viewport = buildViewport(solaConfiguration);
+    this.viewport = buildViewport(abstractSola.configuration);
 
     populateAssetPoolProvider(abstractSola.assetPoolProvider);
-    initializePlatform(solaConfiguration, () -> initComplete(abstractSola, solaConfiguration));
+    initializePlatform(abstractSola.configuration, () -> initComplete(abstractSola, abstractSola.configuration));
   }
 
   public Renderer getRenderer() {

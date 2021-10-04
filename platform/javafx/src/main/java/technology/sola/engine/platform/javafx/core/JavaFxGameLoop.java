@@ -38,8 +38,6 @@ public class JavaFxGameLoop extends AbstractGameLoop {
         renderMethod.run();
         fpsTracker.tickFrames();
       }
-
-      fpsTracker.logStats();
     }
   }
 }
