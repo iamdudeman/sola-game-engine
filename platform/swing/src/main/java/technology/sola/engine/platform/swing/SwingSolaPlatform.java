@@ -98,56 +98,15 @@ public class SwingSolaPlatform extends AbstractSolaPlatform {
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     JFrame jFrame = new JFrame();
     canvas = new Canvas();
-
     canvas.setPreferredSize(new Dimension(solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight()));
-
     jFrame.getContentPane().add(canvas);
-
     jFrame.pack();
 
     canvas.createBufferStrategy(2);
-
     if (useSoftwareRendering) {
-      BufferedImage bufferedImage = new BufferedImage(
-        solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight(), BufferedImage.TYPE_INT_ARGB
-      );
-
-      beforeRender = renderer -> {
-      };
-
-      onRender = renderer -> {
-        // For software rendering
-        int[] pixels = ((SoftwareRenderer) renderer).getPixels();
-        int[] bufferedImageDataBuffer = ((DataBufferInt) bufferedImage.getRaster().getDataBuffer()).getData();
-        System.arraycopy(pixels, 0, bufferedImageDataBuffer, 0, pixels.length);
-
-        Graphics graphics = canvas.getBufferStrategy().getDrawGraphics();
-
-        AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
-
-        graphics.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        graphics.drawImage(bufferedImage, aspectRatioSizing.getX(), aspectRatioSizing.getY(), aspectRatioSizing.getWidth(), aspectRatioSizing.getHeight(), null);
-        graphics.dispose();
-
-        canvas.getBufferStrategy().show();
-      };
+      setupSoftwareRendering(solaConfiguration);
     } else {
-      graphics2D = (Graphics2D) canvas.getGraphics();
-
-      beforeRender = renderer -> {
-        graphics2D = (Graphics2D) canvas.getBufferStrategy().getDrawGraphics();
-        ((Graphics2dRenderer) renderer).updateGraphics2D(graphics2D);
-        graphics2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
-        AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
-        graphics2D.translate(aspectRatioSizing.getX(), aspectRatioSizing.getY());
-        graphics2D.scale(aspectRatioSizing.getWidth() / (double) renderer.getWidth(), aspectRatioSizing.getHeight() / (double) renderer.getHeight());
-      };
-
-      onRender = renderer -> {
-        canvas.getBufferStrategy().show();
-        graphics2D.dispose();
-      };
+      setupGraphics2dRendering();
     }
 
     jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -196,5 +155,50 @@ public class SwingSolaPlatform extends AbstractSolaPlatform {
     return useSoftwareRendering
       ? super.buildRenderer(solaConfiguration)
       : new Graphics2dRenderer(graphics2D, solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight());
+  }
+
+  private void setupSoftwareRendering(SolaConfiguration solaConfiguration) {
+    BufferedImage bufferedImage = new BufferedImage(
+      solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight(), BufferedImage.TYPE_INT_ARGB
+    );
+
+    beforeRender = renderer -> {
+    };
+
+    onRender = renderer -> {
+      // For software rendering
+      int[] pixels = ((SoftwareRenderer) renderer).getPixels();
+      int[] bufferedImageDataBuffer = ((DataBufferInt) bufferedImage.getRaster().getDataBuffer()).getData();
+      System.arraycopy(pixels, 0, bufferedImageDataBuffer, 0, pixels.length);
+
+      Graphics graphics = canvas.getBufferStrategy().getDrawGraphics();
+
+      AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+
+      graphics.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+      graphics.drawImage(bufferedImage, aspectRatioSizing.getX(), aspectRatioSizing.getY(), aspectRatioSizing.getWidth(), aspectRatioSizing.getHeight(), null);
+      graphics.dispose();
+
+      canvas.getBufferStrategy().show();
+    };
+  }
+
+  private void setupGraphics2dRendering() {
+    graphics2D = (Graphics2D) canvas.getGraphics();
+
+    beforeRender = renderer -> {
+      graphics2D = (Graphics2D) canvas.getBufferStrategy().getDrawGraphics();
+      ((Graphics2dRenderer) renderer).updateGraphics2D(graphics2D);
+      graphics2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+      AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+      graphics2D.translate(aspectRatioSizing.getX(), aspectRatioSizing.getY());
+      graphics2D.scale(aspectRatioSizing.getWidth() / (double) renderer.getWidth(), aspectRatioSizing.getHeight() / (double) renderer.getHeight());
+    };
+
+    onRender = renderer -> {
+      canvas.getBufferStrategy().show();
+      graphics2D.dispose();
+    };
   }
 }

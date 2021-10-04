@@ -72,7 +72,6 @@ public class JavaFxSolaPlatform extends AbstractSolaPlatform {
       final Scene scene = new Scene(root, rendererWidth, rendererHeight);
 
       this.canvas = new Canvas(rendererWidth, rendererHeight);
-
       root.getChildren().add(canvas);
 
       canvas.widthProperty().bind(scene.widthProperty());
