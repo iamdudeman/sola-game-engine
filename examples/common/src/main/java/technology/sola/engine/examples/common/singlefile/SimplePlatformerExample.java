@@ -1,10 +1,14 @@
 package technology.sola.engine.examples.common.singlefile;
 
-import technology.sola.engine.core.AbstractSola;
+import technology.sola.engine.core.AbstractSolaPlatform;
+import technology.sola.engine.core.rework.AbstractSolaPlatformRework;
+import technology.sola.engine.core.rework.AbstractSolaRework;
+import technology.sola.engine.core.rework.SolaConfiguration;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.Component;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.physics.Material;
@@ -14,9 +18,10 @@ import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.PositionComponent;
 import technology.sola.engine.physics.component.VelocityComponent;
 
-public class SimplePlatformerExample extends AbstractSola {
-  public SimplePlatformerExample() {
-    config(800, 600, 30, true);
+public class SimplePlatformerExample extends AbstractSolaRework {
+  @Override
+  protected SolaConfiguration buildConfiguration() {
+    return new SolaConfiguration("Simple Platformer",800, 600, 30, true);
   }
 
   @Override
@@ -28,10 +33,11 @@ public class SimplePlatformerExample extends AbstractSola {
     ecsSystemContainer.add(new PlayerSystem(keyboardInput));
 
     ecsSystemContainer.setWorld(buildWorld());
+
   }
 
   @Override
-  protected void onRender() {
+  protected void onRender(Renderer renderer) {
     renderer.clear();
 
     ecsSystemContainer.getWorld().getEntitiesWithComponents(ColliderComponent.class, PositionComponent.class)
@@ -91,14 +97,14 @@ public class SimplePlatformerExample extends AbstractSola {
           MovingPlatformComponent movingPlatformComponent = entity.getComponent(MovingPlatformComponent.class);
           VelocityComponent velocityComponent = entity.getComponent(VelocityComponent.class);
 
-         movingPlatformComponent.counter += deltaTime;
+          movingPlatformComponent.counter += deltaTime;
 
-         if (movingPlatformComponent.counter >= 10) {
-           movingPlatformComponent.counter = 0;
-           movingPlatformComponent.isGoingUp = !movingPlatformComponent.isGoingUp;
-         }
+          if (movingPlatformComponent.counter >= 10) {
+            movingPlatformComponent.counter = 0;
+            movingPlatformComponent.isGoingUp = !movingPlatformComponent.isGoingUp;
+          }
 
-         velocityComponent.setY(movingPlatformComponent.isGoingUp ? -25 : 25);
+          velocityComponent.setY(movingPlatformComponent.isGoingUp ? -25 : 25);
         });
     }
 

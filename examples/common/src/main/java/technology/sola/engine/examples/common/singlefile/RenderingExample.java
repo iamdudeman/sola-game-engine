@@ -1,22 +1,28 @@
 package technology.sola.engine.examples.common.singlefile;
 
 import technology.sola.engine.assets.AssetPool;
-import technology.sola.engine.core.AbstractSola;
+import technology.sola.engine.core.rework.AbstractSolaRework;
+import technology.sola.engine.core.rework.SolaConfiguration;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.World;
-import technology.sola.engine.graphics.*;
-import technology.sola.engine.graphics.impl.AffineTransformSoftwareRenderer;
-import technology.sola.engine.graphics.screen.AspectMode;
+import technology.sola.engine.graphics.AffineTransform;
+import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.Layer;
+import technology.sola.engine.graphics.RenderMode;
+import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.font.Font;
+import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.component.PositionComponent;
 
-public class RenderingExample extends AbstractSola {
+public class RenderingExample extends AbstractSolaRework {
   private SolaImage solaImage;
   private float rotation = 0.1f;
 
-  public RenderingExample() {
-    config(800, 600, 30, true);
+  @Override
+  protected SolaConfiguration buildConfiguration() {
+    return new SolaConfiguration("Rendering Example", 800, 600, 30, true);
   }
 
   @Override
@@ -25,7 +31,7 @@ public class RenderingExample extends AbstractSola {
     AssetPool<Font> fontAssetPool = assetPoolProvider.getAssetPool(Font.class);
 
     Font font = fontAssetPool.addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
-    renderer.setFont(font);
+    platform.getRenderer().setFont(font);
     solaImage = solaImageAssetPool.addAndGetAsset("test_tiles", "assets/test_tiles.png");
 
     World world = new World(5);
@@ -40,14 +46,14 @@ public class RenderingExample extends AbstractSola {
     ecsSystemContainer.setWorld(world);
     ecsSystemContainer.add(new TestSystem());
 
-    renderer.createLayers("background", "moving_stuff", "blocks", "ui");
+    platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
   }
 
   @Override
-  protected void onRender() {
+  protected void onRender(Renderer renderer) {
     renderer.clear();
 
-    renderer.drawToLayer("ui", renderer -> {
+    renderer.drawToLayer("ui", r -> {
       renderer.setRenderMode(RenderMode.ALPHA);
       renderer.fillRect(0, 10, 600, 100, new Color(120, 255, 255, 255));
       renderer.setRenderMode(RenderMode.NORMAL);
@@ -62,7 +68,7 @@ public class RenderingExample extends AbstractSola {
       renderer.setRenderMode(RenderMode.NORMAL);
     });
 
-    renderer.drawToLayer("moving_stuff", renderer -> {
+    renderer.drawToLayer("moving_stuff", r -> {
       renderer.drawImage(400, 400, solaImage);
       AffineTransform affineTransform = new AffineTransform()
         .translate(400, 400)
@@ -75,7 +81,7 @@ public class RenderingExample extends AbstractSola {
       renderer.setRenderMode(RenderMode.NORMAL);
     });
 
-    renderer.drawToLayer("moving_stuff", Layer.DEFAULT_PRIORITY - 10, renderer -> {
+    renderer.drawToLayer("moving_stuff", Layer.DEFAULT_PRIORITY - 10, r -> {
       ecsSystemContainer.getWorld().getEntitiesWithComponents(PositionComponent.class)
         .forEach(entity -> {
           PositionComponent position = entity.getComponent(PositionComponent.class);
@@ -84,12 +90,12 @@ public class RenderingExample extends AbstractSola {
         });
     });
 
-    renderer.drawToLayer("blocks", renderer -> {
+    renderer.drawToLayer("blocks", r -> {
       renderer.fillRect(200, 300, 50, 50, Color.BLUE);
       renderer.fillRect(200, 350, 100, 50, Color.BLUE);
     });
 
-    renderer.drawToLayer("background", renderer -> {
+    renderer.drawToLayer("background", r -> {
       renderer.setPixel(5, 5, Color.WHITE);
       renderer.setPixel(6, 5, Color.BLUE);
       renderer.setPixel(6, 6, Color.RED);
@@ -115,22 +121,6 @@ public class RenderingExample extends AbstractSola {
       renderer.drawLine(0, 0, 800, 600, Color.BLUE);
       renderer.drawLine(750, 0, 20, 500, Color.BLUE);
     });
-
-    renderer.drawToLayer("moving_stuff", renderer -> {
-      AffineTransform affineTransform = new AffineTransform()
-//        .translate(-400, -400)
-//        .translate(400, 400)
-//        .translate(-100, -100)
-//        .rotate(rotation)
-        .scale(1.25f, 1.5f)
-//        .sheer(1.5f, 1)
-        ;
-
-      // TODO test this more
-      renderer.drawRect(400, 400, 50, 50, Color.GREEN);
-//      new AffineTransformRenderer(renderer).drawRect(0, 0, 50, 50, Color.GREEN, affineTransform);
-//      new AffineTransformSoftwareRenderer(renderer).drawRect(400, 400, 50, 50, Color.GREEN, affineTransform);
-    });
   }
 
   private class TestSystem extends AbstractEcsSystem {
@@ -145,11 +135,11 @@ public class RenderingExample extends AbstractSola {
         });
 
       if (keyboardInput.isKeyPressed(Key.ONE)) {
-        viewport.setAspectMode(AspectMode.IGNORE_RESIZING);
+        platform.getViewport().setAspectMode(AspectMode.IGNORE_RESIZING);
       } else if (keyboardInput.isKeyPressed(Key.TWO)) {
-        viewport.setAspectMode(AspectMode.MAINTAIN);
+        platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
       } else if (keyboardInput.isKeyPressed(Key.THREE)) {
-        viewport.setAspectMode(AspectMode.STRETCH);
+        platform.getViewport().setAspectMode(AspectMode.STRETCH);
       }
 
       if (keyboardInput.isKeyHeld(Key.SPACE)) {
@@ -157,7 +147,7 @@ public class RenderingExample extends AbstractSola {
       }
 
       if (keyboardInput.isKeyPressed(Key.A)) {
-        Layer blockLayer = renderer.getLayer("blocks");
+        Layer blockLayer = platform.getRenderer().getLayer("blocks");
         blockLayer.setEnabled(!blockLayer.isEnabled());
       }
     }

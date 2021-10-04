@@ -2,7 +2,7 @@ package technology.sola.engine.examples.swing;
 
 import technology.sola.engine.core.rework.AbstractSolaPlatformRework;
 import technology.sola.engine.core.rework.AbstractSolaRework;
-import technology.sola.engine.examples.common.singlefile.rework.SimplePlatformerExample;
+import technology.sola.engine.examples.common.singlefile.SimplePlatformerExample;
 import technology.sola.engine.platform.swing.SwingSolaPlatform;
 
 public class SwingMain {

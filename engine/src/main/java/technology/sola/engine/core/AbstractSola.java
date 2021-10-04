@@ -25,7 +25,7 @@ public abstract class AbstractSola {
 
   protected int rendererWidth;
   protected int rendererHeight;
-  private AbstractSolaPlatform solaPlatform = new NoSolaPlatform();
+  private AbstractSolaPlatform solaPlatform;
   private int targetUpdatePerSecond;
   private boolean isRestingAllowed;
 

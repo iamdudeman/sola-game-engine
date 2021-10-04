@@ -3,7 +3,6 @@ package technology.sola.engine.graphics;
 import technology.sola.engine.graphics.font.Font;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public interface Renderer {
   void setRenderMode(RenderMode renderMode);
@@ -13,12 +12,6 @@ public interface Renderer {
   int getWidth();
 
   int getHeight();
-
-  // TODO is this needed or desired?
-  @Deprecated
-  default void render(Consumer<int[]> pixelConsumer) {
-    getLayers().forEach(layer -> layer.draw(this));
-  }
 
   default void createLayers(String... layerIds) {
     List<Layer> layers = getLayers();
