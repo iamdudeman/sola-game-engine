@@ -3,7 +3,6 @@ package technology.sola.engine.platform.browser;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.core.AbstractSolaPlatform;
-import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
@@ -60,7 +59,7 @@ public class BrowserSolaPlatform extends AbstractSolaPlatform {
   }
 
   @Override
-  protected void initializePlatform(AbstractSola abstractSola, SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
+  protected void initializePlatform(SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
     JsUtils.setTitle(solaConfiguration.getSolaTitle());
     JsCanvasUtils.canvasInit(solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight());
 

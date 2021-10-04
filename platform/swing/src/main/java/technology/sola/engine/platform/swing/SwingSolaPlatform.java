@@ -3,7 +3,6 @@ package technology.sola.engine.platform.swing;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.core.AbstractSolaPlatform;
-import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.SolaImage;
@@ -31,33 +30,11 @@ import java.util.function.Consumer;
 public class SwingSolaPlatform extends AbstractSolaPlatform {
   private final boolean useSoftwareRendering;
   private Canvas canvas;
-
-  // For software rendering
-  private BufferedImage bufferedImage;
+  private Consumer<technology.sola.engine.graphics.Renderer> beforeRender;
+  private Consumer<technology.sola.engine.graphics.Renderer> onRender;
 
   // For graphics2d rendering
   private Graphics2D graphics2D;
-
-  private Consumer<technology.sola.engine.graphics.Renderer> beforeRender = renderer -> {
-    // Software rendering doesn't use this
-  };
-
-  private Consumer<technology.sola.engine.graphics.Renderer> onRender = renderer -> {
-    // For software rendering
-    int[] pixels = ((SoftwareRenderer) renderer).getPixels();
-    int[] bufferedImageDataBuffer = ((DataBufferInt) bufferedImage.getRaster().getDataBuffer()).getData();
-    System.arraycopy(pixels, 0, bufferedImageDataBuffer, 0, pixels.length);
-
-    Graphics graphics = canvas.getBufferStrategy().getDrawGraphics();
-
-    AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
-
-    graphics.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-    graphics.drawImage(bufferedImage, aspectRatioSizing.getX(), aspectRatioSizing.getY(), aspectRatioSizing.getWidth(), aspectRatioSizing.getHeight(), null);
-    graphics.dispose();
-
-    canvas.getBufferStrategy().show();
-  };
 
   public SwingSolaPlatform() {
     this(true);
@@ -65,23 +42,6 @@ public class SwingSolaPlatform extends AbstractSolaPlatform {
 
   public SwingSolaPlatform(boolean useSoftwareRendering) {
     this.useSoftwareRendering = useSoftwareRendering;
-
-    if (!useSoftwareRendering) {
-      beforeRender = renderer -> {
-        graphics2D = (Graphics2D) canvas.getBufferStrategy().getDrawGraphics();
-        ((Graphics2dRenderer) renderer).updateGraphics2D(graphics2D);
-        graphics2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
-        AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
-        graphics2D.translate(aspectRatioSizing.getX(), aspectRatioSizing.getY());
-        graphics2D.scale(aspectRatioSizing.getWidth() / (double) renderer.getWidth(), aspectRatioSizing.getHeight() / (double) renderer.getHeight());
-      };
-
-      onRender = renderer -> {
-        canvas.getBufferStrategy().show();
-        graphics2D.dispose();
-      };
-    }
   }
 
   @Override
@@ -135,7 +95,7 @@ public class SwingSolaPlatform extends AbstractSolaPlatform {
   }
 
   @Override
-  protected void initializePlatform(AbstractSola abstractSola, SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
+  protected void initializePlatform(SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
     JFrame jFrame = new JFrame();
     canvas = new Canvas();
 
@@ -148,9 +108,46 @@ public class SwingSolaPlatform extends AbstractSolaPlatform {
     canvas.createBufferStrategy(2);
 
     if (useSoftwareRendering) {
-      bufferedImage = new BufferedImage(solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight(), BufferedImage.TYPE_INT_ARGB);
+      BufferedImage bufferedImage = new BufferedImage(
+        solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight(), BufferedImage.TYPE_INT_ARGB
+      );
+
+      beforeRender = renderer -> {
+      };
+
+      onRender = renderer -> {
+        // For software rendering
+        int[] pixels = ((SoftwareRenderer) renderer).getPixels();
+        int[] bufferedImageDataBuffer = ((DataBufferInt) bufferedImage.getRaster().getDataBuffer()).getData();
+        System.arraycopy(pixels, 0, bufferedImageDataBuffer, 0, pixels.length);
+
+        Graphics graphics = canvas.getBufferStrategy().getDrawGraphics();
+
+        AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+
+        graphics.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        graphics.drawImage(bufferedImage, aspectRatioSizing.getX(), aspectRatioSizing.getY(), aspectRatioSizing.getWidth(), aspectRatioSizing.getHeight(), null);
+        graphics.dispose();
+
+        canvas.getBufferStrategy().show();
+      };
     } else {
       graphics2D = (Graphics2D) canvas.getGraphics();
+
+      beforeRender = renderer -> {
+        graphics2D = (Graphics2D) canvas.getBufferStrategy().getDrawGraphics();
+        ((Graphics2dRenderer) renderer).updateGraphics2D(graphics2D);
+        graphics2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+        AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+        graphics2D.translate(aspectRatioSizing.getX(), aspectRatioSizing.getY());
+        graphics2D.scale(aspectRatioSizing.getWidth() / (double) renderer.getWidth(), aspectRatioSizing.getHeight() / (double) renderer.getHeight());
+      };
+
+      onRender = renderer -> {
+        canvas.getBufferStrategy().show();
+        graphics2D.dispose();
+      };
     }
 
     jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

@@ -30,7 +30,7 @@ public abstract class AbstractSolaPlatform {
     this.viewport = buildViewport(solaConfiguration);
 
     populateAssetPoolProvider(abstractSola.assetPoolProvider);
-    initializePlatform(abstractSola, solaConfiguration, () -> onInitComplete(abstractSola, solaConfiguration));
+    initializePlatform(solaConfiguration, () -> onInitComplete(abstractSola, solaConfiguration));
   }
 
   public Renderer getRenderer() {
@@ -53,11 +53,10 @@ public abstract class AbstractSolaPlatform {
 
   /**
    *
-   * @param abstractSola
    * @param solaConfiguration
    * @param initCompleteCallback - Must be called when platform initialization is complete
    */
-  protected abstract void initializePlatform(AbstractSola abstractSola, SolaConfiguration solaConfiguration, Runnable initCompleteCallback);
+  protected abstract void initializePlatform(SolaConfiguration solaConfiguration, Runnable initCompleteCallback);
 
   protected void onInitComplete(AbstractSola abstractSola, SolaConfiguration solaConfiguration) {
     this.renderer = buildRenderer(solaConfiguration);

@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.core.AbstractSolaPlatform;
-import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
@@ -64,7 +63,7 @@ public class JavaFxSolaPlatform extends AbstractSolaPlatform {
   }
 
   @Override
-  protected void initializePlatform(AbstractSola abstractSola, SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
+  protected void initializePlatform(SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
     Platform.startup(() -> {
       final Stage stage = new Stage();
       final Group root = new Group();
