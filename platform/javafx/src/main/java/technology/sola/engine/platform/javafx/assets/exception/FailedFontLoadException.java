@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.javafx.exception;
+package technology.sola.engine.platform.javafx.assets.exception;
 
 public class FailedFontLoadException extends RuntimeException {
   public FailedFontLoadException(String path) {
