@@ -15,6 +15,7 @@ public interface Renderer {
   int getHeight();
 
   // TODO is this needed or desired?
+  @Deprecated
   default void render(Consumer<int[]> pixelConsumer) {
     getLayers().forEach(layer -> layer.draw(this));
   }

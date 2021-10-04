@@ -2,7 +2,6 @@ package technology.sola.engine.platform.browser;
 
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.AssetPoolProvider;
-import technology.sola.engine.core.rework.AbstractGameLoop;
 import technology.sola.engine.core.rework.AbstractSolaPlatformRework;
 import technology.sola.engine.core.rework.AbstractSolaRework;
 import technology.sola.engine.core.rework.SolaConfiguration;
@@ -10,6 +9,7 @@ import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.graphics.impl.SoftwareRenderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.platform.browser.assets.FontAssetPool;
@@ -67,21 +67,20 @@ public class BrowserSolaPlatformRework extends AbstractSolaPlatformRework {
 
   @Override
   protected void onRender(Renderer renderer) {
-    renderer.render(pixels -> {
-      int[] pixelDataForCanvas = new int[pixels.length * 4];
-      int index = 0;
+    int[] pixels = ((SoftwareRenderer) renderer).getPixels();
+    int[] pixelDataForCanvas = new int[pixels.length * 4];
+    int index = 0;
 
-      for (int current : pixels) {
-        Color color = new Color(current);
+    for (int current : pixels) {
+      Color color = new Color(current);
 
-        pixelDataForCanvas[index++] = color.getRed();
-        pixelDataForCanvas[index++] = color.getGreen();
-        pixelDataForCanvas[index++] = color.getBlue();
-        pixelDataForCanvas[index++] = color.getAlpha();
-      }
+      pixelDataForCanvas[index++] = color.getRed();
+      pixelDataForCanvas[index++] = color.getGreen();
+      pixelDataForCanvas[index++] = color.getBlue();
+      pixelDataForCanvas[index++] = color.getAlpha();
+    }
 
-      JsCanvasUtils.renderToCanvas(pixelDataForCanvas);
-    });
+    JsCanvasUtils.renderToCanvas(pixelDataForCanvas);
   }
 
   @Override

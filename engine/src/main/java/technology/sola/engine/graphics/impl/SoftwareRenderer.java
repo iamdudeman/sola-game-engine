@@ -39,14 +39,6 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     this.font = font;
   }
 
-
-
-  @Override
-  public void render(Consumer<int[]> pixelConsumer) {
-    layers.forEach(layer -> layer.draw(this));
-    pixelConsumer.accept(pixels);
-  }
-
   @Override
   public void clear(Color color) {
     Arrays.fill(this.pixels, color.hexInt());

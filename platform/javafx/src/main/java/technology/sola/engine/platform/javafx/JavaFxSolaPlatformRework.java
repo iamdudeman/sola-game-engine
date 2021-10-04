@@ -16,6 +16,7 @@ import technology.sola.engine.core.rework.SolaConfiguration;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.graphics.impl.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
@@ -27,7 +28,8 @@ import java.util.function.Consumer;
 
 public class JavaFxSolaPlatformRework extends AbstractSolaPlatformRework {
   private Canvas canvas;
-  private Consumer<int[]> pixelArrayConsumer = pixels -> { };
+  private GraphicsContext graphicsContext;
+  private WritableImage writableImage;
 
   @Override
   public void onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
@@ -83,18 +85,8 @@ public class JavaFxSolaPlatformRework extends AbstractSolaPlatformRework {
         viewport.resize((int) canvas.getWidth(), newVal.intValue());
       });
 
-      GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
-      WritableImage writableImage = new WritableImage(rendererWidth, rendererHeight);
-      pixelArrayConsumer = pixels -> {
-        writableImage.getPixelWriter().setPixels(
-          0, 0, rendererWidth, rendererHeight,
-          PixelFormat.getIntArgbInstance(), pixels, 0, rendererWidth
-        );
-
-        AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
-        graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        graphicsContext.drawImage(writableImage, aspectRatioSizing.getX(), aspectRatioSizing.getY(), aspectRatioSizing.getWidth(), aspectRatioSizing.getHeight());
-      };
+      graphicsContext = canvas.getGraphicsContext2D();
+      writableImage = new WritableImage(rendererWidth, rendererHeight);
 
       stage.setOnShown(event -> canvas.requestFocus());
       stage.setOnCloseRequest(event -> solaEventHub.emit(GameLoopEvent.STOP));
@@ -114,7 +106,15 @@ public class JavaFxSolaPlatformRework extends AbstractSolaPlatformRework {
 
   @Override
   protected void onRender(Renderer renderer) {
-    renderer.render(pixelArrayConsumer);
+    int[] pixels = ((SoftwareRenderer) renderer).getPixels();
+    writableImage.getPixelWriter().setPixels(
+      0, 0, renderer.getWidth(), renderer.getHeight(),
+      PixelFormat.getIntArgbInstance(), pixels, 0, renderer.getWidth()
+    );
+
+    AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+    graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    graphicsContext.drawImage(writableImage, aspectRatioSizing.getX(), aspectRatioSizing.getY(), aspectRatioSizing.getWidth(), aspectRatioSizing.getHeight());
   }
 
   @Override

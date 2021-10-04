@@ -44,21 +44,19 @@ public class SwingSolaPlatform extends AbstractSolaPlatformRework {
 
   private Consumer<technology.sola.engine.graphics.Renderer> onRender = renderer -> {
     // For software rendering
-//    int[] pixels = ((SoftwareRenderer) renderer).getPixels();
-    renderer.render(pixels -> {
-      int[] bufferedImageDataBuffer = ((DataBufferInt) bufferedImage.getRaster().getDataBuffer()).getData();
-      System.arraycopy(pixels, 0, bufferedImageDataBuffer, 0, pixels.length);
+    int[] pixels = ((SoftwareRenderer) renderer).getPixels();
+    int[] bufferedImageDataBuffer = ((DataBufferInt) bufferedImage.getRaster().getDataBuffer()).getData();
+    System.arraycopy(pixels, 0, bufferedImageDataBuffer, 0, pixels.length);
 
-      Graphics graphics = canvas.getBufferStrategy().getDrawGraphics();
+    Graphics graphics = canvas.getBufferStrategy().getDrawGraphics();
 
-      AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+    AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
 
-      graphics.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-      graphics.drawImage(bufferedImage, aspectRatioSizing.getX(), aspectRatioSizing.getY(), aspectRatioSizing.getWidth(), aspectRatioSizing.getHeight(), null);
-      graphics.dispose();
+    graphics.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    graphics.drawImage(bufferedImage, aspectRatioSizing.getX(), aspectRatioSizing.getY(), aspectRatioSizing.getWidth(), aspectRatioSizing.getHeight(), null);
+    graphics.dispose();
 
-      canvas.getBufferStrategy().show();
-    });
+    canvas.getBufferStrategy().show();
   };
 
   public SwingSolaPlatform() {
