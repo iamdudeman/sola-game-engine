@@ -1,4 +1,4 @@
-package technology.sola.engine.exception.asset;
+package technology.sola.engine.assets.exception;
 
 public class MissingAssetException extends RuntimeException {
   public MissingAssetException(String assetId) {

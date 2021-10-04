@@ -14,7 +14,6 @@ import technology.sola.math.linear.Vector2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class SoftwareRenderer extends Canvas implements Renderer {
   private final List<Layer> layers = new ArrayList<>();
@@ -23,10 +22,6 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
   public SoftwareRenderer(int width, int height) {
     super(width, height);
-  }
-
-  public int[] getPixels() {
-    return pixels;
   }
 
   @Override

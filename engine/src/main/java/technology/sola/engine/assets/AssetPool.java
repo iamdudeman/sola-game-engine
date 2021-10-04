@@ -1,6 +1,6 @@
 package technology.sola.engine.assets;
 
-import technology.sola.engine.exception.asset.MissingAssetException;
+import technology.sola.engine.assets.exception.MissingAssetException;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package technology.sola.engine.exception.asset;
+package technology.sola.engine.assets.exception;
 
 public class MissingAssetPoolException extends RuntimeException {
   public MissingAssetPoolException(Class<?> assetClass) {
