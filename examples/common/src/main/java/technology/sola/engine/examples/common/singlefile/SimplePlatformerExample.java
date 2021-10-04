@@ -1,7 +1,5 @@
 package technology.sola.engine.examples.common.singlefile;
 
-import technology.sola.engine.core.AbstractSolaPlatform;
-import technology.sola.engine.core.rework.AbstractSolaPlatformRework;
 import technology.sola.engine.core.rework.AbstractSolaRework;
 import technology.sola.engine.core.rework.SolaConfiguration;
 import technology.sola.engine.ecs.AbstractEcsSystem;
