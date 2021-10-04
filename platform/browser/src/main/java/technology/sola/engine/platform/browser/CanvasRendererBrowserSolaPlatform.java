@@ -62,9 +62,6 @@ public class CanvasRendererBrowserSolaPlatform extends AbstractSolaPlatformRewor
     JsCanvasUtils.clearRect(renderer.getWidth(), renderer.getHeight());
 
     // TODO need AspectRatio stuff
-
-    // todo is this the right place for this?
-    renderer.getLayers().forEach(layer -> layer.draw(renderer));
   }
 
   @Override

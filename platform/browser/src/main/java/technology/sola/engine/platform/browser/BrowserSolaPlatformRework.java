@@ -22,7 +22,7 @@ import technology.sola.engine.platform.browser.javascript.JsUtils;
 
 import java.util.function.Consumer;
 
-public class BrowserSolaPlatform extends AbstractSolaPlatformRework {
+public class BrowserSolaPlatformRework extends AbstractSolaPlatformRework {
   @Override
   public void onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
     JsKeyboardUtils.keyEventListener("keydown", keyCode -> keyEventConsumer.accept(new KeyEvent(keyCode)));

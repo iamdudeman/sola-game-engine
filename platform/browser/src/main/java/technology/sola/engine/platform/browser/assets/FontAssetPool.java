@@ -12,6 +12,6 @@ public class FontAssetPool extends AssetPool<Font> {
   @Override
   protected Font loadAsset(String path) {
     // TODO implement this
-    throw new RuntimeException("not yet implemented");
+    throw new UnsupportedOperationException("not yet implemented");
   }
 }

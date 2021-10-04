@@ -26,12 +26,12 @@ public class BrowserCanvasRenderer implements Renderer {
 
   @Override
   public void setRenderMode(RenderMode renderMode) {
-    throw new UnsupportedOperationException("not yet implemented");
+    throw new NotYetImplementedException();
   }
 
   @Override
   public void setFont(Font font) {
-    throw new UnsupportedOperationException("not yet implemented");
+    throw new NotYetImplementedException();
   }
 
   @Override
@@ -57,22 +57,22 @@ public class BrowserCanvasRenderer implements Renderer {
 
   @Override
   public void setPixel(int x, int y, Color color) {
-    throw new UnsupportedOperationException("not yet implemented");
+    throw new NotYetImplementedException();
   }
 
   @Override
   public void drawString(String text, float x, float y, Color color) {
-    throw new UnsupportedOperationException("not yet implemented");
+    throw new NotYetImplementedException();
   }
 
   @Override
   public void drawLine(float x, float y, float x2, float y2, Color color) {
-    throw new UnsupportedOperationException("not yet implemented");
+    throw new NotYetImplementedException();
   }
 
   @Override
   public void drawRect(float x, float y, float width, float height, Color color) {
-    throw new UnsupportedOperationException("not yet implemented");
+    throw new NotYetImplementedException();
   }
 
   @Override
@@ -83,37 +83,37 @@ public class BrowserCanvasRenderer implements Renderer {
 
   @Override
   public void drawCircle(float x, float y, float radius, Color color) {
-    throw new UnsupportedOperationException("not yet implemented");
+    throw new NotYetImplementedException();
   }
 
   @Override
   public void fillCircle(float x, float y, float radius, Color color) {
-    throw new UnsupportedOperationException("not yet implemented");
+    throw new NotYetImplementedException();
   }
 
   @Override
   public void drawEllipse(float x, float y, float width, float height, Color color) {
-    throw new UnsupportedOperationException("not yet implemented");
+    throw new NotYetImplementedException();
   }
 
   @Override
   public void fillEllipse(float centerX, float centerY, float width, float height, Color color) {
-    throw new UnsupportedOperationException("not yet implemented");
+    throw new NotYetImplementedException();
   }
 
   @Override
   public void drawImage(float x, float y, SolaImage solaImage) {
-    throw new UnsupportedOperationException("not yet implemented");
+    throw new NotYetImplementedException();
   }
 
   @Override
   public void drawImage(SolaImage solaImage, AffineTransform affineTransform) {
-    throw new UnsupportedOperationException("not yet implemented");
+    throw new NotYetImplementedException();
   }
 
   @Override
   public void drawImage(SolaImage solaImage, float x, float y, float width, float height) {
-    throw new UnsupportedOperationException("not yet implemented");
+    throw new NotYetImplementedException();
   }
 
   private void setColor(Color color) {
@@ -144,6 +144,11 @@ public class BrowserCanvasRenderer implements Renderer {
 
     @JSBody(params = { "x", "y", "w", "h" }, script = FILL_RECT_SCRIPT)
     public static native void fillRect(float x, float y, float w, float h);
+  }
 
+  private static class NotYetImplementedException extends RuntimeException {
+    public NotYetImplementedException() {
+      super("Not yet implemented");
+    }
   }
 }
