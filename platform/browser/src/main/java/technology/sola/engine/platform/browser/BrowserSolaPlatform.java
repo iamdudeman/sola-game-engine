@@ -2,9 +2,9 @@ package technology.sola.engine.platform.browser;
 
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.AssetPoolProvider;
-import technology.sola.engine.core.rework.AbstractSolaPlatformRework;
-import technology.sola.engine.core.rework.AbstractSolaRework;
-import technology.sola.engine.core.rework.SolaConfiguration;
+import technology.sola.engine.core.AbstractSolaPlatform;
+import technology.sola.engine.core.AbstractSola;
+import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
@@ -23,7 +23,7 @@ import technology.sola.engine.platform.browser.javascript.JsUtils;
 
 import java.util.function.Consumer;
 
-public class BrowserSolaPlatform extends AbstractSolaPlatformRework {
+public class BrowserSolaPlatform extends AbstractSolaPlatform {
   private final boolean useSoftwareRendering;
 
   public BrowserSolaPlatform() {
@@ -60,7 +60,7 @@ public class BrowserSolaPlatform extends AbstractSolaPlatformRework {
   }
 
   @Override
-  protected void initializePlatform(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
+  protected void initializePlatform(AbstractSola abstractSola, SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
     JsUtils.setTitle(solaConfiguration.getSolaTitle());
     JsCanvasUtils.canvasInit(solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight());
 

@@ -1,7 +1,7 @@
 package technology.sola.engine.examples.common.singlefile;
 
-import technology.sola.engine.core.rework.AbstractSolaRework;
-import technology.sola.engine.core.rework.SolaConfiguration;
+import technology.sola.engine.core.AbstractSola;
+import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
@@ -14,7 +14,7 @@ import technology.sola.engine.physics.component.VelocityComponent;
 
 import java.util.Random;
 
-public class StressTestExample extends AbstractSolaRework {
+public class StressTestExample extends AbstractSola {
   private static final int CANVAS_WIDTH = 800;
   private static final int CANVAS_HEIGHT = 600;
   private static final float CAMERA_SCALE = 1f;

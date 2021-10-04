@@ -1,6 +1,6 @@
 package technology.sola.engine.platform.browser.core;
 
-import technology.sola.engine.core.rework.AbstractGameLoop;
+import technology.sola.engine.core.AbstractGameLoop;
 import technology.sola.engine.platform.browser.javascript.JsUtils;
 
 import java.util.function.Consumer;

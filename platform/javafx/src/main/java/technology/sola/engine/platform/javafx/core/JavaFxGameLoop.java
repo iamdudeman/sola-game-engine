@@ -1,7 +1,7 @@
 package technology.sola.engine.platform.javafx.core;
 
 import javafx.animation.AnimationTimer;
-import technology.sola.engine.core.rework.AbstractGameLoop;
+import technology.sola.engine.core.AbstractGameLoop;
 
 import java.util.function.Consumer;
 

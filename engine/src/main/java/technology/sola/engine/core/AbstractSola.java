@@ -1,4 +1,4 @@
-package technology.sola.engine.core.rework;
+package technology.sola.engine.core;
 
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.ecs.EcsSystemContainer;
@@ -7,15 +7,15 @@ import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
 
-public abstract class AbstractSolaRework {
-  protected AbstractSolaPlatformRework platform;
+public abstract class AbstractSola {
+  protected AbstractSolaPlatform platform;
   protected EcsSystemContainer ecsSystemContainer;
   protected EventHub eventHub;
   protected KeyboardInput keyboardInput;
   protected MouseInput mouseInput;
   protected AssetPoolProvider assetPoolProvider;
 
-  protected AbstractSolaRework() {
+  protected AbstractSola() {
     ecsSystemContainer = new EcsSystemContainer();
     eventHub = new EventHub();
     keyboardInput = new KeyboardInput();
@@ -35,7 +35,7 @@ public abstract class AbstractSolaRework {
 
   protected abstract void onRender(Renderer renderer);
 
-  void initializeForPlatform(AbstractSolaPlatformRework platform) {
+  void initializeForPlatform(AbstractSolaPlatform platform) {
     this.platform = platform;
     platform.onKeyPressed(keyboardInput::keyPressed);
     platform.onKeyReleased(keyboardInput::keyReleased);

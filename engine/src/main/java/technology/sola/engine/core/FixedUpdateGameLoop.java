@@ -1,9 +1,9 @@
-package technology.sola.engine.core.rework;
+package technology.sola.engine.core;
 
 import java.util.function.Consumer;
 
-public class FixedUpdateGameLoop extends AbstractGameLoop {
-  public FixedUpdateGameLoop(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
+class FixedUpdateGameLoop extends AbstractGameLoop {
+  FixedUpdateGameLoop(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
     super(updateMethod, renderMethod, targetUpdatesPerSecond, isRestingAllowed);
   }
 

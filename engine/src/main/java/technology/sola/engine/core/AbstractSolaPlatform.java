@@ -1,4 +1,4 @@
-package technology.sola.engine.core.rework;
+package technology.sola.engine.core;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,23 +14,23 @@ import technology.sola.engine.input.MouseEvent;
 
 import java.util.function.Consumer;
 
-public abstract class AbstractSolaPlatformRework {
-  protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractSolaPlatformRework.class);
+public abstract class AbstractSolaPlatform {
+  protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractSolaPlatform.class);
   protected Renderer renderer;
   protected AbstractGameLoop gameLoop;
   protected Viewport viewport;
   protected EventHub solaEventHub;
 
-  public void play(AbstractSolaRework abstractSolaRework) {
+  public void play(AbstractSola abstractSola) {
     LOGGER.info("Using platform [{}]", this.getClass().getName());
 
-    SolaConfiguration solaConfiguration = abstractSolaRework.buildConfiguration();
+    SolaConfiguration solaConfiguration = abstractSola.buildConfiguration();
 
-    this.solaEventHub = abstractSolaRework.eventHub;
+    this.solaEventHub = abstractSola.eventHub;
     this.viewport = buildViewport(solaConfiguration);
 
-    populateAssetPoolProvider(abstractSolaRework.assetPoolProvider);
-    initializePlatform(abstractSolaRework, solaConfiguration, () -> onInitComplete(abstractSolaRework, solaConfiguration));
+    populateAssetPoolProvider(abstractSola.assetPoolProvider);
+    initializePlatform(abstractSola, solaConfiguration, () -> onInitComplete(abstractSola, solaConfiguration));
   }
 
   public Renderer getRenderer() {
@@ -53,22 +53,22 @@ public abstract class AbstractSolaPlatformRework {
 
   /**
    *
-   * @param abstractSolaRework
+   * @param abstractSola
    * @param solaConfiguration
    * @param initCompleteCallback - Must be called when platform initialization is complete
    */
-  protected abstract void initializePlatform(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration, Runnable initCompleteCallback);
+  protected abstract void initializePlatform(AbstractSola abstractSola, SolaConfiguration solaConfiguration, Runnable initCompleteCallback);
 
-  protected void onInitComplete(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration) {
+  protected void onInitComplete(AbstractSola abstractSola, SolaConfiguration solaConfiguration) {
     this.renderer = buildRenderer(solaConfiguration);
     this.gameLoop = buildGameLoop().create(
-      deltaTime -> update(abstractSolaRework, deltaTime), () -> render(renderer, abstractSolaRework),
+      deltaTime -> update(abstractSola, deltaTime), () -> render(renderer, abstractSola),
       solaConfiguration.getGameLoopTargetUpdatesPerSecond(), solaConfiguration.isGameLoopRestingAllowed()
     );
 
     solaEventHub.add(new GameLoopEventListener(gameLoop), GameLoopEvent.class);
 
-    abstractSolaRework.initializeForPlatform(this);
+    abstractSola.initializeForPlatform(this);
     new Thread(gameLoop).start();
   }
 
@@ -90,13 +90,13 @@ public abstract class AbstractSolaPlatformRework {
     return FixedUpdateGameLoop::new;
   }
 
-  private void update(AbstractSolaRework abstractSolaRework, float deltaTime) {
-    abstractSolaRework.onUpdate(deltaTime);
+  private void update(AbstractSola abstractSola, float deltaTime) {
+    abstractSola.onUpdate(deltaTime);
   }
 
-  private void render(Renderer renderer, AbstractSolaRework abstractSolaRework) {
+  private void render(Renderer renderer, AbstractSola abstractSola) {
     beforeRender(renderer);
-    abstractSolaRework.onRender(renderer);
+    abstractSola.onRender(renderer);
     renderer.getLayers().forEach(layer -> layer.draw(renderer));
     onRender(renderer);
   }

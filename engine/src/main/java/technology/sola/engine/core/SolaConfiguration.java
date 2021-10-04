@@ -1,4 +1,4 @@
-package technology.sola.engine.core.rework;
+package technology.sola.engine.core;
 
 public class SolaConfiguration {
   private final String solaTitle;

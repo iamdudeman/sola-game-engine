@@ -10,9 +10,9 @@ import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.AssetPoolProvider;
-import technology.sola.engine.core.rework.AbstractSolaPlatformRework;
-import technology.sola.engine.core.rework.AbstractSolaRework;
-import technology.sola.engine.core.rework.SolaConfiguration;
+import technology.sola.engine.core.AbstractSolaPlatform;
+import technology.sola.engine.core.AbstractSola;
+import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaImage;
@@ -26,7 +26,7 @@ import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
 
 import java.util.function.Consumer;
 
-public class JavaFxSolaPlatform extends AbstractSolaPlatformRework {
+public class JavaFxSolaPlatform extends AbstractSolaPlatform {
   private Canvas canvas;
   private GraphicsContext graphicsContext;
   private WritableImage writableImage;
@@ -64,7 +64,7 @@ public class JavaFxSolaPlatform extends AbstractSolaPlatformRework {
   }
 
   @Override
-  protected void initializePlatform(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
+  protected void initializePlatform(AbstractSola abstractSola, SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
     Platform.startup(() -> {
       final Stage stage = new Stage();
       final Group root = new Group();

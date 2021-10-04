@@ -1,8 +1,8 @@
 package technology.sola.engine.examples.common.singlefile;
 
 import technology.sola.engine.assets.AssetPool;
-import technology.sola.engine.core.rework.AbstractSolaRework;
-import technology.sola.engine.core.rework.SolaConfiguration;
+import technology.sola.engine.core.AbstractSola;
+import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.AffineTransform;
@@ -16,7 +16,7 @@ import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.component.PositionComponent;
 
-public class RenderingExample extends AbstractSolaRework {
+public class RenderingExample extends AbstractSola {
   private SolaImage solaImage;
   private float rotation = 0.1f;
 

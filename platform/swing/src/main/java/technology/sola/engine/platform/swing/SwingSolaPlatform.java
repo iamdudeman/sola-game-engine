@@ -2,9 +2,9 @@ package technology.sola.engine.platform.swing;
 
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.AssetPoolProvider;
-import technology.sola.engine.core.rework.AbstractSolaPlatformRework;
-import technology.sola.engine.core.rework.AbstractSolaRework;
-import technology.sola.engine.core.rework.SolaConfiguration;
+import technology.sola.engine.core.AbstractSolaPlatform;
+import technology.sola.engine.core.AbstractSola;
+import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.impl.SoftwareRenderer;
@@ -28,7 +28,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.util.function.Consumer;
 
-public class SwingSolaPlatform extends AbstractSolaPlatformRework {
+public class SwingSolaPlatform extends AbstractSolaPlatform {
   private final boolean useSoftwareRendering;
   private Canvas canvas;
 
@@ -135,7 +135,7 @@ public class SwingSolaPlatform extends AbstractSolaPlatformRework {
   }
 
   @Override
-  protected void initializePlatform(AbstractSolaRework abstractSolaRework, SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
+  protected void initializePlatform(AbstractSola abstractSola, SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
     JFrame jFrame = new JFrame();
     canvas = new Canvas();
 

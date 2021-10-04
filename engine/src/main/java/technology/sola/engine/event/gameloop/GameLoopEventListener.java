@@ -1,6 +1,6 @@
 package technology.sola.engine.event.gameloop;
 
-import technology.sola.engine.core.rework.AbstractGameLoop;
+import technology.sola.engine.core.AbstractGameLoop;
 import technology.sola.engine.event.EventListener;
 
 public class GameLoopEventListener implements EventListener<GameLoopEvent> {
