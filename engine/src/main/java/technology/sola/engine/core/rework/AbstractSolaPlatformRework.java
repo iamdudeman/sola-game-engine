@@ -15,13 +15,15 @@ import technology.sola.engine.input.MouseEvent;
 import java.util.function.Consumer;
 
 public abstract class AbstractSolaPlatformRework {
-  private static final Logger LOGGER = LoggerFactory.getLogger(AbstractSolaPlatformRework.class);
+  protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractSolaPlatformRework.class);
   protected Renderer renderer;
   protected AbstractGameLoop gameLoop;
   protected Viewport viewport;
   protected EventHub solaEventHub;
 
   public void play(AbstractSolaRework abstractSolaRework) {
+    LOGGER.info("Using platform [{}]", this.getClass().getName());
+
     SolaConfiguration solaConfiguration = abstractSolaRework.buildConfiguration();
 
     this.solaEventHub = abstractSolaRework.eventHub;
@@ -66,7 +68,6 @@ public abstract class AbstractSolaPlatformRework {
 
     solaEventHub.add(new GameLoopEventListener(gameLoop), GameLoopEvent.class);
 
-    LOGGER.info("Using platform [{}]", this.getClass().getName());
     abstractSolaRework.initializeForPlatform(this);
     new Thread(gameLoop).start();
   }

@@ -195,6 +195,8 @@ public class SwingSolaPlatform extends AbstractSolaPlatformRework {
 
   @Override
   protected technology.sola.engine.graphics.Renderer buildRenderer(SolaConfiguration solaConfiguration) {
+    LOGGER.info("Using {} rendering", useSoftwareRendering ? "Software" : "Graphics2D");
+
     return useSoftwareRendering
       ? super.buildRenderer(solaConfiguration)
       : new Graphics2dRenderer(graphics2D, solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight());

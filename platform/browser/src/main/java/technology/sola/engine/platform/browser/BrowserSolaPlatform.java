@@ -14,6 +14,7 @@ import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.platform.browser.assets.FontAssetPool;
 import technology.sola.engine.platform.browser.assets.SolaImageAssetPool;
+import technology.sola.engine.platform.browser.core.BrowserCanvasRenderer;
 import technology.sola.engine.platform.browser.core.BrowserGameLoop;
 import technology.sola.engine.platform.browser.javascript.JsCanvasUtils;
 import technology.sola.engine.platform.browser.javascript.JsKeyboardUtils;
@@ -22,7 +23,17 @@ import technology.sola.engine.platform.browser.javascript.JsUtils;
 
 import java.util.function.Consumer;
 
-public class BrowserSolaPlatformRework extends AbstractSolaPlatformRework {
+public class BrowserSolaPlatform extends AbstractSolaPlatformRework {
+  private final boolean useSoftwareRendering;
+
+  public BrowserSolaPlatform() {
+    this(true);
+  }
+
+  public BrowserSolaPlatform(boolean useSoftwareRendering) {
+    this.useSoftwareRendering = useSoftwareRendering;
+  }
+
   @Override
   public void onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
     JsKeyboardUtils.keyEventListener("keydown", keyCode -> keyEventConsumer.accept(new KeyEvent(keyCode)));
@@ -62,7 +73,9 @@ public class BrowserSolaPlatformRework extends AbstractSolaPlatformRework {
 
   @Override
   protected void beforeRender(Renderer renderer) {
-
+    if (!useSoftwareRendering) {
+      JsCanvasUtils.clearRect(renderer.getWidth(), renderer.getHeight());
+    }
   }
 
   @Override
@@ -93,5 +106,14 @@ public class BrowserSolaPlatformRework extends AbstractSolaPlatformRework {
   @Override
   protected GameLoopProvider buildGameLoop() {
     return BrowserGameLoop::new;
+  }
+
+  @Override
+  protected Renderer buildRenderer(SolaConfiguration solaConfiguration) {
+    LOGGER.info("Using {} rendering", useSoftwareRendering ? "Software" : "Canvas");
+
+    return useSoftwareRendering
+      ? super.buildRenderer(solaConfiguration)
+      : new BrowserCanvasRenderer(solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight());
   }
 }
