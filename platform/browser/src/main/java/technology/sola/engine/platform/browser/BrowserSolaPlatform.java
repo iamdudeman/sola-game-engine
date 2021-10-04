@@ -59,15 +59,14 @@ public class BrowserSolaPlatform extends AbstractSolaPlatform {
   }
 
   @Override
-  protected void initializePlatform(SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
+  protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     JsUtils.setTitle(solaConfiguration.getSolaTitle());
     JsCanvasUtils.canvasInit(solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight());
 
     // TODO something better than this
     JsUtils.exportObject("solaStop", (JsUtils.Function) () -> solaEventHub.emit(GameLoopEvent.STOP));
 
-    // Note: Always run last
-    initCompleteCallback.run();
+    solaPlatformInitialization.finish();
   }
 
   @Override

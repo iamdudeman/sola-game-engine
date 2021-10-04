@@ -63,7 +63,7 @@ public class JavaFxSolaPlatform extends AbstractSolaPlatform {
   }
 
   @Override
-  protected void initializePlatform(SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
+  protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     Platform.startup(() -> {
       final Stage stage = new Stage();
       final Group root = new Group();
@@ -89,8 +89,7 @@ public class JavaFxSolaPlatform extends AbstractSolaPlatform {
       stage.setScene(scene);
       stage.show();
 
-      // Note: Always run last
-      initCompleteCallback.run();
+      solaPlatformInitialization.finish();
     });
   }
 

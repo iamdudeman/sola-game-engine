@@ -95,7 +95,7 @@ public class SwingSolaPlatform extends AbstractSolaPlatform {
   }
 
   @Override
-  protected void initializePlatform(SolaConfiguration solaConfiguration, Runnable initCompleteCallback) {
+  protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     JFrame jFrame = new JFrame();
     canvas = new Canvas();
 
@@ -169,8 +169,7 @@ public class SwingSolaPlatform extends AbstractSolaPlatform {
     canvas.requestFocus();
     jFrame.setVisible(true);
 
-    // Note: Always run last
-    initCompleteCallback.run();
+    solaPlatformInitialization.finish();
   }
 
   @Override

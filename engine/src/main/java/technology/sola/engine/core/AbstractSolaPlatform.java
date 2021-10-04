@@ -30,7 +30,7 @@ public abstract class AbstractSolaPlatform {
     this.viewport = buildViewport(solaConfiguration);
 
     populateAssetPoolProvider(abstractSola.assetPoolProvider);
-    initializePlatform(solaConfiguration, () -> onInitComplete(abstractSola, solaConfiguration));
+    initializePlatform(solaConfiguration, () -> initComplete(abstractSola, solaConfiguration));
   }
 
   public Renderer getRenderer() {
@@ -52,24 +52,13 @@ public abstract class AbstractSolaPlatform {
   public abstract void onMouseReleased(Consumer<MouseEvent> mouseEventConsumer);
 
   /**
+   * Method to initialize a {@link AbstractSolaPlatform}. This operation can be async. It will provide the configuration
+   * from the {@link AbstractSola#buildConfiguration()} method.
    *
-   * @param solaConfiguration
-   * @param initCompleteCallback - Must be called when platform initialization is complete
+   * @param solaConfiguration  the Sola configuration
+   * @param solaPlatformInitialization  call {@link SolaPlatformInitialization#finish()} when platform initialization is finished
    */
-  protected abstract void initializePlatform(SolaConfiguration solaConfiguration, Runnable initCompleteCallback);
-
-  protected void onInitComplete(AbstractSola abstractSola, SolaConfiguration solaConfiguration) {
-    this.renderer = buildRenderer(solaConfiguration);
-    this.gameLoop = buildGameLoop().create(
-      deltaTime -> update(abstractSola, deltaTime), () -> render(renderer, abstractSola),
-      solaConfiguration.getGameLoopTargetUpdatesPerSecond(), solaConfiguration.isGameLoopRestingAllowed()
-    );
-
-    solaEventHub.add(new GameLoopEventListener(gameLoop), GameLoopEvent.class);
-
-    abstractSola.initializeForPlatform(this);
-    new Thread(gameLoop).start();
-  }
+  protected abstract void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization);
 
   protected abstract void beforeRender(Renderer renderer);
 
@@ -89,6 +78,19 @@ public abstract class AbstractSolaPlatform {
     return FixedUpdateGameLoop::new;
   }
 
+  private void initComplete(AbstractSola abstractSola, SolaConfiguration solaConfiguration) {
+    this.renderer = buildRenderer(solaConfiguration);
+    this.gameLoop = buildGameLoop().create(
+      deltaTime -> update(abstractSola, deltaTime), () -> render(renderer, abstractSola),
+      solaConfiguration.getGameLoopTargetUpdatesPerSecond(), solaConfiguration.isGameLoopRestingAllowed()
+    );
+
+    solaEventHub.add(new GameLoopEventListener(gameLoop), GameLoopEvent.class);
+
+    abstractSola.initializeForPlatform(this);
+    new Thread(gameLoop).start();
+  }
+
   private void update(AbstractSola abstractSola, float deltaTime) {
     abstractSola.onUpdate(deltaTime);
   }
@@ -103,5 +105,13 @@ public abstract class AbstractSolaPlatform {
   @FunctionalInterface
   protected interface GameLoopProvider {
     AbstractGameLoop create(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed);
+  }
+
+  @FunctionalInterface
+  protected interface SolaPlatformInitialization {
+    /**
+     * Call to finalize {@link AbstractSolaPlatform} initialization and begin running the {@link AbstractSola}.
+     */
+    void finish();
   }
 }
