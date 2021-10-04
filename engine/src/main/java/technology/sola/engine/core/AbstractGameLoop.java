@@ -60,4 +60,29 @@ public abstract class AbstractGameLoop implements Runnable {
       }
     }).start();
   }
+
+  protected static class FpsTracker {
+    private long fpsSecondTracker = System.nanoTime();
+    private int updatesThisSecond = 0;
+    private int framesThisSecond = 0;
+
+    public void tickUpdate() {
+      updatesThisSecond++;
+    }
+
+    public void tickFrames() {
+      framesThisSecond++;
+    }
+
+    private void logStats() {
+      long now = System.nanoTime();
+
+      if (now - fpsSecondTracker >= 1e9) {
+        LOGGER.info("ups: {} fps: {}", updatesThisSecond, framesThisSecond);
+        updatesThisSecond = 0;
+        framesThisSecond = 0;
+        fpsSecondTracker = now;
+      }
+    }
+  }
 }

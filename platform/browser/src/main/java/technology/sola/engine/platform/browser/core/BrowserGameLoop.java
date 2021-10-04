@@ -29,10 +29,9 @@ public class BrowserGameLoop extends AbstractGameLoop implements JsUtils.Functio
 
       while (updateCatchUpAccumulator >= deltaTime) {
         updateMethod.accept(deltaTime);
-        updateCatchUpAccumulator -= deltaTime;
-
         fpsTracker.tickUpdate();
-        fpsTracker.logStats();
+
+        updateCatchUpAccumulator -= deltaTime;
       }
 
       renderMethod.run();
