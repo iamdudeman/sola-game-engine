@@ -13,7 +13,6 @@ import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.platform.swing.assets.FontAssetPool;
 import technology.sola.engine.platform.swing.assets.SolaImageAssetPool;
-import technology.sola.engine.platform.swing.core.SwingRenderer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,12 +23,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 import java.util.function.Consumer;
 
-public class SwingSolaPlatformReworkSwingRenderer extends AbstractSolaPlatformRework {
+public class SwingSoftwareRendererSolaPlatform extends AbstractSolaPlatformRework {
+  private BufferedImage bufferedImage;
   private JFrame jFrame;
   private Canvas canvas;
-  private Graphics2D graphics2D;
 
   @Override
   public void onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
@@ -86,6 +87,7 @@ public class SwingSolaPlatformReworkSwingRenderer extends AbstractSolaPlatformRe
     jFrame = new JFrame();
     canvas = new Canvas();
 
+    bufferedImage = new BufferedImage(solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight(), BufferedImage.TYPE_INT_ARGB);
     canvas.setPreferredSize(new Dimension(solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight()));
 
     jFrame.getContentPane().add(canvas);
@@ -93,7 +95,6 @@ public class SwingSolaPlatformReworkSwingRenderer extends AbstractSolaPlatformRe
     jFrame.pack();
 
     canvas.createBufferStrategy(2);
-    graphics2D = (Graphics2D) canvas.getGraphics();
     jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     jFrame.addComponentListener(new ComponentAdapter() {
       @Override
@@ -119,22 +120,25 @@ public class SwingSolaPlatformReworkSwingRenderer extends AbstractSolaPlatformRe
 
   @Override
   protected void beforeRender(Renderer renderer) {
-    graphics2D = (Graphics2D) canvas.getBufferStrategy().getDrawGraphics();
-    ((SwingRenderer) renderer).updateGraphics2D(graphics2D);
-    graphics2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
-    AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
-    graphics2D.translate(aspectRatioSizing.getX(), aspectRatioSizing.getY());
-    graphics2D.scale(aspectRatioSizing.getWidth() / (double)renderer.getWidth(), aspectRatioSizing.getHeight() / (double)renderer.getHeight());
-
-    // todo is this the right place for this?
-    renderer.getLayers().forEach(layer -> layer.draw(renderer));
+    // Nothing to do here
   }
 
   @Override
   protected void onRender(Renderer renderer) {
-    canvas.getBufferStrategy().show();
-    graphics2D.dispose();
+    renderer.render(pixels -> {
+      int[] bufferedImageDataBuffer = ((DataBufferInt) bufferedImage.getRaster().getDataBuffer()).getData();
+      System.arraycopy(pixels, 0, bufferedImageDataBuffer, 0, pixels.length);
+
+      Graphics graphics = canvas.getBufferStrategy().getDrawGraphics();
+
+      AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+
+      graphics.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+      graphics.drawImage(bufferedImage, aspectRatioSizing.getX(), aspectRatioSizing.getY(), aspectRatioSizing.getWidth(), aspectRatioSizing.getHeight(), null);
+      graphics.dispose();
+
+      canvas.getBufferStrategy().show();
+    });
   }
 
   @Override
@@ -142,10 +146,5 @@ public class SwingSolaPlatformReworkSwingRenderer extends AbstractSolaPlatformRe
     AssetPool<SolaImage> solaImageAssetPool = new SolaImageAssetPool();
     assetPoolProvider.addAssetPool(solaImageAssetPool);
     assetPoolProvider.addAssetPool(new FontAssetPool(solaImageAssetPool));
-  }
-
-  @Override
-  protected Renderer buildRenderer(SolaConfiguration solaConfiguration) {
-    return new SwingRenderer(graphics2D, solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight());
   }
 }

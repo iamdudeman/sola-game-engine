@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.swing.exception;
+package technology.sola.engine.platform.swing.assets.exception;
 
 public class FailedSolaImageLoadException extends RuntimeException {
   public FailedSolaImageLoadException(String path) {

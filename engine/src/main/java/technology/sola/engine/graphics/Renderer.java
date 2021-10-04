@@ -19,8 +19,6 @@ public interface Renderer {
     getLayers().forEach(layer -> layer.draw(this));
   }
 
-  // TODO maybe create a drawLayers() method?
-
   default void createLayers(String... layerIds) {
     List<Layer> layers = getLayers();
 

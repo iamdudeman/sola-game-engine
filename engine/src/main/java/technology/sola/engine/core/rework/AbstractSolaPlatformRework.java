@@ -95,6 +95,7 @@ public abstract class AbstractSolaPlatformRework {
 
   private void render(Renderer renderer, AbstractSolaRework abstractSolaRework) {
     beforeRender(renderer);
+//    renderer.getLayers().forEach(layer -> layer.draw(renderer));
     abstractSolaRework.onRender(renderer);
     onRender(renderer);
   }

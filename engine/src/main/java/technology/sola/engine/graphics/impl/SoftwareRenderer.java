@@ -25,6 +25,10 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     super(width, height);
   }
 
+  public int[] getPixels() {
+    return pixels;
+  }
+
   @Override
   public void setRenderMode(RenderMode renderMode) {
     this.renderMode = renderMode;
