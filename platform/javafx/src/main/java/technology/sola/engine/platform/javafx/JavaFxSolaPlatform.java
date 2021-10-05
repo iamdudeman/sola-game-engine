@@ -21,6 +21,7 @@ import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.platform.javafx.assets.FontAssetPool;
 import technology.sola.engine.platform.javafx.assets.SolaImageAssetPool;
+import technology.sola.engine.platform.javafx.assets.SpriteSheetAssetPool;
 import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
 
 import java.util.function.Consumer;
@@ -115,6 +116,7 @@ public class JavaFxSolaPlatform extends AbstractSolaPlatform {
     AssetPool<SolaImage> solaImageAssetPool = new SolaImageAssetPool();
     assetPoolProvider.addAssetPool(solaImageAssetPool);
     assetPoolProvider.addAssetPool(new FontAssetPool(solaImageAssetPool));
+    assetPoolProvider.addAssetPool(new SpriteSheetAssetPool(solaImageAssetPool));
   }
 
   @Override

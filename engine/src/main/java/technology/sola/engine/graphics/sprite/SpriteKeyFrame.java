@@ -2,6 +2,7 @@ package technology.sola.engine.graphics.sprite;
 
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.graphics.sprite.exception.SpriteNotFoundException;
 
 public class SpriteKeyFrame {
   private final String spriteSheetId;
@@ -31,6 +32,10 @@ public class SpriteKeyFrame {
     if (cachedSprite == null) {
       SpriteSheet spriteSheet = spriteSheetAssetPool.getAsset(spriteSheetId);
       cachedSprite = spriteSheet.getSprite(spriteId);
+    }
+
+    if (cachedSprite == null) {
+      throw new SpriteNotFoundException(spriteId);
     }
 
     return cachedSprite;

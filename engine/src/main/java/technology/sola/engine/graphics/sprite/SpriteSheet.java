@@ -13,7 +13,7 @@ public class SpriteSheet {
     this.solaImage = solaImage;
   }
 
-  public SolaImage addSprite(String id, int x, int y, int width, int height) {
+  public SolaImage addSpriteDefinition(String id, int x, int y, int width, int height) {
     SolaImage sprite = solaImage.getSubImage(x, y, width, height);
 
     spriteIdMap.put(id, solaImage.getSubImage(x, y, width, height));
