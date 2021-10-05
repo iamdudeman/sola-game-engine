@@ -1,0 +1,27 @@
+package technology.sola.engine.graphics.sprite;
+
+import technology.sola.engine.graphics.SolaImage;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class SpriteSheet {
+  private final SolaImage solaImage;
+  private final Map<String, SolaImage> spriteIdMap = new HashMap<>();
+
+  public SpriteSheet(SolaImage solaImage) {
+    this.solaImage = solaImage;
+  }
+
+  public SolaImage addSprite(String id, int x, int y, int width, int height) {
+    SolaImage sprite = solaImage.getSubImage(x, y, width, height);
+
+    spriteIdMap.put(id, solaImage.getSubImage(x, y, width, height));
+
+    return sprite;
+  }
+
+  public SolaImage getSprite(String id) {
+    return spriteIdMap.get(id);
+  }
+}
