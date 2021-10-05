@@ -13,14 +13,13 @@
     * Text
     * Button
   * Layout
-* Animation
-  * Component and System
 * Scene
   * Implement a good abstraction for this (maybe use the one SolKana had)
 * Research Virtual File System
 * Browser Platform
   * Improve performance (StressTestExample can't handle a lot of objects)
   * Implement Font loading
+  * Implement SpriteSheet loading
   * Implement window resizing using Viewport
 * Android Platform
   * Implement

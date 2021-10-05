@@ -12,6 +12,7 @@ import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.platform.swing.assets.FontAssetPool;
 import technology.sola.engine.platform.swing.assets.SolaImageAssetPool;
+import technology.sola.engine.platform.swing.assets.SpriteSheetAssetPool;
 import technology.sola.engine.platform.swing.core.Graphics2dRenderer;
 
 import javax.swing.*;
@@ -146,6 +147,7 @@ public class SwingSolaPlatform extends AbstractSolaPlatform {
     AssetPool<SolaImage> solaImageAssetPool = new SolaImageAssetPool();
     assetPoolProvider.addAssetPool(solaImageAssetPool);
     assetPoolProvider.addAssetPool(new FontAssetPool(solaImageAssetPool));
+    assetPoolProvider.addAssetPool(new SpriteSheetAssetPool(solaImageAssetPool));
   }
 
   @Override
