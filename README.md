@@ -8,6 +8,7 @@
   * Possibly multiple cameras?
     * Camera output to section of a screen (allows split screen then)?
   * Screen units vs world units?
+* Once Camera is figured out need a way to translate screen coordinates to world coordinates easily
 * GUI
   * Elements
     * Text
@@ -15,6 +16,7 @@
   * Layout
 * Scene
   * Implement a good abstraction for this (maybe use the one SolKana had)
+  * Save / load methods would be good (or a serializer / deserializer)
 * Research Virtual File System
 * Browser Platform
   * Improve performance (StressTestExample can't handle a lot of objects)
@@ -68,7 +70,3 @@
   * Steam?
     * include JRE in the output file
       * might vary per platform
-* Matrix2D
-  * Implement inverse
-  * Implement reflection
-  * Implement orthogonal projection
