@@ -1,6 +1,15 @@
 # Branch WIP
 
 # TODO List
+* Consider TransformComponent
+  * replaces PositionComponent
+  * has translation x+y, scale x+y, and rotation
+* Consider components for various renderable things
+  * CircleComponent with a radius (or maybe Ellipse with width + height)
+  * RectangleComponent with width + height
+  * SpriteComponent (might already exist)
+  * Consider EcsSystems for handling rendering of above components
+  * Consider CameraSystem that nests these other Renderer systems maybe to handle ability to have multiple cameras???
 * Camera
   * Figure out how to implement
     * Translate
@@ -17,14 +26,14 @@
 * Scene
   * Implement a good abstraction for this (maybe use the one SolKana had)
   * Save / load methods would be good (or a serializer / deserializer)
+  * World is essentially the scene so maybe this concept isn't needed...just a serializer / deserializer
 * Research Virtual File System
 * Browser Platform
+  * Implement better tool for compiling Java to JavaScript code (TeaVM plugin has some file locking issues)
   * Improve performance (StressTestExample can't handle a lot of objects)
   * Implement Font loading
   * Implement SpriteSheet loading
   * Implement window resizing using Viewport
-* Android Platform
-  * Implement
 * Tools
   * Export from Engine UI to installer of some sort
     * Include JRE and assets
@@ -35,7 +44,28 @@
 * Build pipeline
   * Run full build for testing and code quality
   * Generate engine and platform artifacts
+* Particle System
+  * position
+  * velocity
+  * time left alive
+  * color?
+  * size?
+* Engine GUI Editor (Sola Editor)
+  * Way to view all Systems and Components available
+  * Way to view various EventListeners?
+  * Create child + parent relationships for the entities?
+  * Entity editor?
+    * primitive types could generate a dialog of some sort
+    * saves to json file
+  * could load in multiple files
+    * edit configurations go to appropriate files
+  * play mode for quick testing
+  * export stuff somehow maybe?
+  * GUI asset manager
+    * Allows adding images and via file selector
+    * Game has a project folder structure to add/remove files
 * Scripting language
+  * Consider scrapping this features
   * How will that work with browser implementation?
   * Maybe a custom Domain Specific Language?
     * Perhaps JSON that describes what Systems to load with what settings
@@ -47,26 +77,9 @@
     * Polygon x AABB
     * Polygon x Circle
     * Polygon x Polygon
-* Particle System
-  * position
-  * velocity
-  * time left alive
-  * color?
-  * size?
-* Engine GUI Editor (Sola Editor)
-  * Way to view all Systems and Components available
-  * Way to view various EventListeners?
-  * Entity editor?
-    * primitive types could generate a dialog of some sort
-    * saves to json file
-  * could load in multiple files
-    * edit configurations go to appropriate files
-  * play mode for quick testing
-  * export stuff somehow maybe?
-  * GUI asset manager
-    * Allows adding images and via file selector
-    * Game has a project folder structure to add/remove files
 * Integrations
   * Steam?
     * include JRE in the output file
       * might vary per platform
+* Android Platform
+  * Implement

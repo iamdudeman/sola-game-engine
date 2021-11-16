@@ -27,11 +27,10 @@ public class SimplePlatformerExample extends AbstractSola {
     SolaPhysics solaPhysics = new SolaPhysics(eventHub);
 
     solaPhysics.applyTo(ecsSystemContainer);
-    ecsSystemContainer.add(new MovingPlatformSystem());
-    ecsSystemContainer.add(new PlayerSystem(keyboardInput));
+
+    ecsSystemContainer.add(new MovingPlatformSystem(), new PlayerSystem());
 
     ecsSystemContainer.setWorld(buildWorld());
-
   }
 
   @Override
@@ -112,13 +111,7 @@ public class SimplePlatformerExample extends AbstractSola {
     }
   }
 
-  private static class PlayerSystem extends AbstractEcsSystem {
-    private final KeyboardInput keyboardInput;
-
-    public PlayerSystem(KeyboardInput keyboardInput) {
-      this.keyboardInput = keyboardInput;
-    }
-
+  private class PlayerSystem extends AbstractEcsSystem {
     @Override
     public void update(World world, float deltaTime) {
       world.getEntitiesWithComponents(PlayerComponent.class)
