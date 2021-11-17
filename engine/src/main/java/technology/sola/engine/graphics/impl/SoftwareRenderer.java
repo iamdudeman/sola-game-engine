@@ -9,6 +9,7 @@ import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.font.Font;
 import technology.sola.math.geometry.Rectangle;
+import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.ArrayList;
@@ -73,6 +74,95 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     }
   }
 
+  // todo test this more and possibly clean up
+  private void drawLine(int x1, int y1, int x2, int y2, Color p) {
+    int x, y, dx, dy, dx1, dy1, px, py, xe, ye, i;
+    dx = x2 - x1; dy = y2 - y1;
+
+    // straight lines idea by gurkanctn
+    if (dx == 0) // Line is vertical
+    {
+      if (y2 < y1) {
+        int temp = y1;
+        y1 = y2;
+        y2 = temp;
+//        swap(y1, y2);
+      }
+      for (y = y1; y <= y2; y++)
+        setPixel(x1, y, p);
+      return;
+    }
+
+    if (dy == 0) // Line is horizontal
+    {
+      if (x2 < x1) {
+//        swap(x1, x2);
+        int temp = x1;
+        x1 = x2;
+        x2 = temp;
+      }
+      for (x = x1; x <= x2; x++)
+        setPixel(x, y1, p);
+      return;
+    }
+
+    // Line is Funk-aye
+    dx1 = Math.abs(dx); dy1 = Math.abs(dy);
+    px = 2 * dy1 - dx1;	py = 2 * dx1 - dy1;
+    if (dy1 <= dx1)
+    {
+      if (dx >= 0)
+      {
+        x = x1; y = y1; xe = x2;
+      }
+      else
+      {
+        x = x2; y = y2; xe = x1;
+      }
+
+      setPixel(x, y, p);
+
+      for (i = 0; x<xe; i++)
+      {
+        x = x + 1;
+        if (px<0)
+          px = px + 2 * dy1;
+        else
+        {
+          if ((dx<0 && dy<0) || (dx>0 && dy>0)) y = y + 1; else y = y - 1;
+          px = px + 2 * (dy1 - dx1);
+        }
+        setPixel(x, y, p);
+      }
+    }
+    else
+    {
+      if (dy >= 0)
+      {
+        x = x1; y = y1; ye = y2;
+      }
+      else
+      {
+        x = x2; y = y2; ye = y1;
+      }
+
+      setPixel(x, y, p);
+
+      for (i = 0; y<ye; i++)
+      {
+        y = y + 1;
+        if (py <= 0)
+          py = py + 2 * dx1;
+        else
+        {
+          if ((dx<0 && dy<0) || (dx>0 && dy>0)) x = x + 1; else x = x - 1;
+          py = py + 2 * (dx1 - dy1);
+        }
+        setPixel(x, y, p);
+      }
+    }
+  }
+
   @Override
   public void drawLine(float x, float y, float x2, float y2, Color color) {
     int xInt = (int) (x + 0.5f);
@@ -80,46 +170,51 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     int x2Int = (int) (x2 + 0.5f);
     int y2Int = (int) (y2 + 0.5f);
 
-    if (xInt - x2Int == 0) {
-      int start = Math.min(yInt, y2Int);
-      int end = Math.max(yInt, y2Int);
+    drawLine(xInt, yInt, x2Int, y2Int, color);
 
-      for (int i = start; i < end; i++) {
-        setPixel(xInt, i, color);
-      }
-    } else if (y - y2 == 0) {
-      int start = Math.min(xInt, x2Int);
-      int end = Math.max(xInt, x2Int);
-
-      for (int i = start; i < end; i++) {
-        setPixel(i, yInt, color);
-      }
-    } else {
-      float dx = Math.abs(x2 - x);
-      float sx = x < x2 ? 1 : -1;
-      float dy = -Math.abs(y2 - y);
-      float sy = y < y2 ? 1 : -1;
-      float err = dx + dy;
-      float currentX = x;
-      float currentY = y;
-
-      while (true) {
-        setPixel((int) currentX, (int) currentY, color);
-
-        if (currentX == x2 && currentY == y2) break;
-
-        float e2 = 2 * err;
-
-        if (e2 >= dy) {
-          err += dy;
-          currentX += sx;
-        }
-        if (e2 <= dx) {
-          err += dx;
-          currentY += sy;
-        }
-      }
-    }
+//    if (xInt - x2Int == 0) {
+//      int start = Math.min(yInt, y2Int);
+//      int end = Math.max(yInt, y2Int);
+//
+//      for (int i = start; i < end; i++) {
+//        setPixel(xInt, i, color);
+//      }
+//    } else if (yInt - y2Int == 0) {
+//      int start = Math.min(xInt, x2Int);
+//      int end = Math.max(xInt, x2Int);
+//
+//      for (int i = start; i < end; i++) {
+//        setPixel(i, yInt, color);
+//      }
+//    } else {
+//    // todo maybe figure out why this is an infinite loop if other algorithm is no good
+//      float dx = Math.abs(x2 - x);
+//      float sx = x < x2 ? 1 : -1;
+//      float dy = -Math.abs(y2 - y);
+//      float sy = y < y2 ? 1 : -1;
+//      float err = dx + dy;
+//      float currentX = x;
+//      float currentY = y;
+//
+//      while (true) {
+//        setPixel((int) currentX, (int) currentY, color);
+//
+//        if (currentX == x2 && currentY == y2) break;
+//
+//        float e2 = 2 * err;
+//
+//        if (e2 >= dy) {
+//          err += dy;
+//          currentX += sx;
+//        }
+//        if (e2 <= dx) {
+//          err += dx;
+//          currentY += sy;
+//        }
+//
+//        System.out.println(currentX + " " + currentY + " " + err);
+//      }
+//    }
   }
 
   /**
@@ -137,6 +232,21 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     drawLine(x, y + height, x + width, y + height, color);
     drawLine(x, y, x, y + height, color);
     drawLine(x + width, y, x + width, y + height, color);
+  }
+
+  // todo might need to add this to interface
+  public void drawRect(Matrix3D transform, Color color) {
+    final float SIZE = 1;
+
+    Vector2D topLeft = transform.forward(0, 0);
+    Vector2D topRight = transform.forward(SIZE, 0);
+    Vector2D bottomRight = transform.forward(SIZE, SIZE);
+    Vector2D bottomLeft = transform.forward(0, SIZE);
+
+    drawLine(topLeft.x, topLeft.y, topRight.x, topRight.y, color);
+    drawLine(topRight.x, topRight.y, bottomRight.x, bottomRight.y, color);
+    drawLine(bottomRight.x, bottomRight.y, bottomLeft.x, bottomLeft.y, color);
+    drawLine(topLeft.x, topLeft.y, bottomLeft.x, bottomLeft.y, color);
   }
 
   /**

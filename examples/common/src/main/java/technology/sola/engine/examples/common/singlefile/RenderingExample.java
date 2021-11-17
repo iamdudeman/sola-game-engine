@@ -103,6 +103,7 @@ public class RenderingExample extends AbstractSola {
 
       renderer.drawLine(20, 50, 20, 100, Color.WHITE);
       renderer.drawLine(50, 20, 100, 20, Color.WHITE);
+      renderer.drawLine(0, 220, 100, 400, Color.WHITE);
 
       renderer.fillRect(100, 100, 60, 80, Color.GREEN);
       renderer.drawRect(100, 100, 60, 80, Color.RED);
