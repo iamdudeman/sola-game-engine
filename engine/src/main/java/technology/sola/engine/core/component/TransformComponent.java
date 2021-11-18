@@ -8,27 +8,20 @@ public class TransformComponent implements Component {
   private float y;
   private float scaleX;
   private float scaleY;
-  private float rotation;
-  private transient Matrix3D transform;
 
   public TransformComponent() {
     this(0, 0);
   }
 
   public TransformComponent(float x, float y) {
-    this(x, y, 1, 1, 0);
+    this(x, y, 1, 1);
   }
 
-  public TransformComponent(float x, float y, float scaleX, float scaleY, float rotation) {
+  public TransformComponent(float x, float y, float scaleX, float scaleY) {
     this.x = x;
     this.y = y;
     this.scaleX = scaleX;
     this.scaleY = scaleY;
-    this.rotation = rotation;
-
-    transform = Matrix3D.translate(x, y)
-      .multiply(Matrix3D.rotate(rotation)) // TODO consider removing rotation
-      .multiply(Matrix3D.scale(scaleX, scaleY));
   }
 
   /**
@@ -53,11 +46,19 @@ public class TransformComponent implements Component {
     return scaleY;
   }
 
-  public float getRotation() {
-    return rotation;
+  public void setX(float x) {
+    this.x = x;
   }
 
-  public Matrix3D getTransform() {
-    return transform;
+  public void setY(float y) {
+    this.y = y;
+  }
+
+  public void setScaleX(float scaleX) {
+    this.scaleX = scaleX;
+  }
+
+  public void setScaleY(float scaleY) {
+    this.scaleY = scaleY;
   }
 }

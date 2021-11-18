@@ -3,21 +3,29 @@ package technology.sola.engine.examples.common.singlefile;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.AbstractEcsSystem;
+import technology.sola.engine.ecs.Component;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Layer;
 import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.graphics.components.LayerComponent;
+import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
-import technology.sola.engine.physics.component.PositionComponent;
+import technology.sola.math.linear.Vector2D;
+
+import java.util.List;
 
 public class RenderingExample extends AbstractSola {
   private SolaImage solaImage;
+  private SolaGraphics solaGraphics;
   private float rotation = 0.1f;
 
   @Override
@@ -34,19 +42,11 @@ public class RenderingExample extends AbstractSola {
     platform.getRenderer().setFont(font);
     solaImage = solaImageAssetPool.addAndGetAsset("test_tiles", "assets/test_tiles.png");
 
-    World world = new World(5);
-
-    world.createEntity()
-      .addComponent(new PositionComponent());
-    world.createEntity().addComponent(new PositionComponent(50, 20));
-    world.createEntity().addComponent(new PositionComponent(100, 20));
-    world.createEntity().addComponent(new PositionComponent(150, 20));
-    world.createEntity().addComponent(new PositionComponent(200, 20));
-
-    ecsSystemContainer.setWorld(world);
+    ecsSystemContainer.setWorld(createWorld());
     ecsSystemContainer.add(new TestSystem());
 
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
+    solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer());
   }
 
   @Override
@@ -81,20 +81,6 @@ public class RenderingExample extends AbstractSola {
       renderer.setRenderMode(RenderMode.NORMAL);
     });
 
-    renderer.drawToLayer("moving_stuff", Layer.DEFAULT_PRIORITY - 10, r -> {
-      ecsSystemContainer.getWorld().getEntitiesWithComponents(PositionComponent.class)
-        .forEach(entity -> {
-          PositionComponent position = entity.getComponent(PositionComponent.class);
-
-          renderer.fillRect(position.getX(), position.getY(), 50, 50, Color.RED);
-        });
-    });
-
-    renderer.drawToLayer("blocks", r -> {
-      renderer.fillRect(200, 300, 50, 50, Color.BLUE);
-      renderer.fillRect(200, 350, 100, 50, Color.BLUE);
-    });
-
     renderer.drawToLayer("background", r -> {
       renderer.setPixel(5, 5, Color.WHITE);
       renderer.setPixel(6, 5, Color.BLUE);
@@ -122,17 +108,22 @@ public class RenderingExample extends AbstractSola {
       renderer.drawLine(0, 0, 800, 600, Color.BLUE);
       renderer.drawLine(750, 0, 20, 500, Color.BLUE);
     });
+
+    solaGraphics.render();
+  }
+
+  private static class MovingComponent implements Component {
   }
 
   private class TestSystem extends AbstractEcsSystem {
     @Override
     public void update(World world, float deltaTime) {
-      world.getEntitiesWithComponents(PositionComponent.class)
+      world.getEntitiesWithComponents(TransformComponent.class, MovingComponent.class)
         .forEach(entity -> {
-          PositionComponent position = entity.getComponent(PositionComponent.class);
+          TransformComponent transform = entity.getComponent(TransformComponent.class);
 
-          position.setX(position.getX() + 1);
-          position.setY(position.getY() + 1);
+          transform.setX(transform.getX() + 1);
+          transform.setY(transform.getY() + 1);
         });
 
       if (keyboardInput.isKeyPressed(Key.ONE)) {
@@ -157,5 +148,34 @@ public class RenderingExample extends AbstractSola {
     public int getOrder() {
       return 0;
     }
+  }
+
+  private World createWorld() {
+    World world = new World(100);
+
+    List.of(
+      new Vector2D(0, 0),
+      new Vector2D(50, 20),
+      new Vector2D(100, 20),
+      new Vector2D(150, 20),
+      new Vector2D(200, 20)
+    ).forEach(vector2D -> {
+      world.createEntity()
+        .addComponent(new MovingComponent())
+        .addComponent(new LayerComponent("moving_stuff"))
+        .addComponent(new TransformComponent(vector2D.x, vector2D.y, 5, 5))
+        .addComponent(new RectangleRendererComponent(Color.RED));
+    });
+
+    world.createEntity()
+      .addComponent(new LayerComponent("blocks"))
+      .addComponent(new TransformComponent(200, 300, 5, 5))
+      .addComponent(new RectangleRendererComponent(Color.BLUE));
+    world.createEntity()
+      .addComponent(new LayerComponent("blocks"))
+      .addComponent(new TransformComponent(200, 350, 10, 5))
+      .addComponent(new RectangleRendererComponent(Color.BLUE));
+
+    return world;
   }
 }
