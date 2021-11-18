@@ -1,4 +1,5 @@
 # Branch WIP
+* Consider empty Asset interface for getAssetPool method
 * Consider TransformComponent
   * replaces PositionComponent
   * has translation x+y, scale x+y, and rotation

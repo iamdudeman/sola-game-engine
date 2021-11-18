@@ -1,7 +1,8 @@
-package technology.sola.engine.graphics.sprite;
+package technology.sola.engine.graphics.components;
 
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.graphics.sprite.SpriteSheet;
 import technology.sola.engine.graphics.sprite.exception.SpriteNotFoundException;
 
 public class SpriteKeyFrame {

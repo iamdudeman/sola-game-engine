@@ -1,8 +1,9 @@
-package technology.sola.engine.graphics.sprite;
+package technology.sola.engine.graphics.components;
 
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.ecs.Component;
 import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.graphics.sprite.SpriteSheet;
 
 public class SpriteComponent implements Component {
   private SpriteKeyFrame spriteKeyFrame;

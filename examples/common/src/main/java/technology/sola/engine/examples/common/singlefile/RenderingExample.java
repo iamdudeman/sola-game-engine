@@ -14,10 +14,13 @@ import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
+import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.graphics.screen.AspectMode;
+import technology.sola.engine.graphics.sprite.SpriteSheet;
 import technology.sola.engine.input.Key;
 import technology.sola.math.linear.Vector2D;
 
@@ -38,6 +41,9 @@ public class RenderingExample extends AbstractSola {
     AssetPool<SolaImage> solaImageAssetPool = assetPoolProvider.getAssetPool(SolaImage.class);
     AssetPool<Font> fontAssetPool = assetPoolProvider.getAssetPool(Font.class);
 
+    AssetPool<SpriteSheet> spriteSheetAssetPool = assetPoolProvider.getAssetPool(SpriteSheet.class);
+    spriteSheetAssetPool.addAssetId("test", "assets/test_tiles_spritesheet.json");
+
     Font font = fontAssetPool.addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
     platform.getRenderer().setFont(font);
     solaImage = solaImageAssetPool.addAndGetAsset("test_tiles", "assets/test_tiles.png");
@@ -46,7 +52,7 @@ public class RenderingExample extends AbstractSola {
     ecsSystemContainer.add(new TestSystem());
 
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
-    solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer());
+    solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer(), spriteSheetAssetPool);
   }
 
   @Override
@@ -90,15 +96,6 @@ public class RenderingExample extends AbstractSola {
       renderer.drawLine(20, 50, 20, 100, Color.WHITE);
       renderer.drawLine(50, 20, 100, 20, Color.WHITE);
       renderer.drawLine(0, 220, 100, 400, Color.WHITE);
-
-      renderer.fillRect(100, 100, 60, 80, Color.GREEN);
-      renderer.drawRect(100, 100, 60, 80, Color.RED);
-
-      renderer.drawRect(300, 150, 5, 5, Color.GREEN);
-      renderer.fillCircle(300, 150, 100.5f, Color.BLUE);
-      renderer.drawCircle(300, 150, 100.5f, Color.RED);
-
-      renderer.drawImage(400, 530, solaImage.getSubImage(1, 1, 16, 16));
 
       renderer.fillRect(180, 530, 50, 50, new Color(255, 0, 0, 255));
       renderer.setRenderMode(RenderMode.ALPHA);
@@ -159,13 +156,12 @@ public class RenderingExample extends AbstractSola {
       new Vector2D(100, 20),
       new Vector2D(150, 20),
       new Vector2D(200, 20)
-    ).forEach(vector2D -> {
-      world.createEntity()
-        .addComponent(new MovingComponent())
-        .addComponent(new LayerComponent("moving_stuff"))
-        .addComponent(new TransformComponent(vector2D.x, vector2D.y, 5, 5))
-        .addComponent(new RectangleRendererComponent(Color.RED));
-    });
+    ).forEach(vector2D -> world.createEntity()
+      .addComponent(new MovingComponent())
+      .addComponent(new LayerComponent("moving_stuff"))
+      .addComponent(new TransformComponent(vector2D.x, vector2D.y, 5, 5))
+      .addComponent(new RectangleRendererComponent(Color.RED))
+    );
 
     world.createEntity()
       .addComponent(new LayerComponent("blocks"))
@@ -175,6 +171,35 @@ public class RenderingExample extends AbstractSola {
       .addComponent(new LayerComponent("blocks"))
       .addComponent(new TransformComponent(200, 350, 10, 5))
       .addComponent(new RectangleRendererComponent(Color.BLUE));
+
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(400, 530, 1, 1))
+      .addComponent(new SpriteComponent("test", "blue"));
+
+
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(100, 100, 6, 8))
+      .addComponent(new RectangleRendererComponent(Color.GREEN));
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(100, 100, 6, 8))
+      .addComponent(new RectangleRendererComponent(Color.RED, false));
+
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(300, 150, 0.5f, 0.5f))
+      .addComponent(new RectangleRendererComponent(Color.GREEN, false));
+
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(300, 150, 10.5f, 10.5f))
+      .addComponent(new CircleRendererComponent(Color.BLUE));
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(300, 150, 10.5f, 10.5f))
+      .addComponent(new CircleRendererComponent(Color.RED, false));
 
     return world;
   }
