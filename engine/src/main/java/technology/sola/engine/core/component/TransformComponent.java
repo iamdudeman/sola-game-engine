@@ -4,11 +4,11 @@ import technology.sola.engine.ecs.Component;
 import technology.sola.math.linear.Matrix3D;
 
 public class TransformComponent implements Component {
-  private float x = 0;
-  private float y = 0;
-  private float scaleX = 1;
-  private float scaleY = 1;
-  private float rotation = 0;
+  private float x;
+  private float y;
+  private float scaleX;
+  private float scaleY;
+  private float rotation;
   private transient Matrix3D transform;
 
   public TransformComponent() {

@@ -3,7 +3,7 @@ package technology.sola.math.geometry;
 import technology.sola.math.linear.Vector2D;
 
 /**
- * The Rectangle class represents a geometric rectangle.
+ * The Rectangle class represents an axis aligned geometric rectangle.
  */
 public class Rectangle {
   private final Vector2D min;
