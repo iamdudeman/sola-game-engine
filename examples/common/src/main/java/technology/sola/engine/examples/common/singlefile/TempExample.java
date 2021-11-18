@@ -20,33 +20,33 @@ public class TempExample extends AbstractSola {
 
   @Override
   protected void onInit() {
-//    ecsSystemContainer.add(new RectangleRendererSystem(platform.getRenderer()));
-
     World world = new World(50);
 
     world.createEntity()
       .addComponent(new TransformComponent())
-      .addComponent(new RectangleRendererComponent(Color.WHITE));
+      .addComponent(new RectangleRendererComponent(Color.GREEN, false));
+
+    for (int i = 0; i < 40; i++) {
+      world.createEntity()
+        .addComponent(new TransformComponent(50 + i, 50 + i, 1.5f, 1, 0))
+        .addComponent(new RectangleRendererComponent(Color.WHITE));
+    }
 
     world.createEntity()
-      .addComponent(new TransformComponent(50, 50, 10, 10, 0))
-      .addComponent(new RectangleRendererComponent(Color.WHITE));
-
-    world.createEntity()
-      .addComponent(new TransformComponent(60, 50, 50, 50, 0.5f))
-      .addComponent(new RectangleRendererComponent(Color.WHITE));
+      .addComponent(new TransformComponent(20, 100, 5, 8, 0.5f))
+      .addComponent(new RectangleRendererComponent(Color.BLUE));
 
     ecsSystemContainer.setWorld(world);
 
     platform.getViewport().setAspectMode(AspectMode.STRETCH);
 
-    solaGraphics = new SolaGraphics(ecsSystemContainer);
+    solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer());
   }
 
   @Override
   protected void onRender(Renderer renderer) {
     renderer.clear();
 
-    solaGraphics.render(renderer);
+    solaGraphics.render();
   }
 }
