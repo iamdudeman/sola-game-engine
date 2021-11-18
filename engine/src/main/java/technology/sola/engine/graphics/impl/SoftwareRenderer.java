@@ -15,6 +15,7 @@ import technology.sola.math.linear.Vector2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 
 public class SoftwareRenderer extends Canvas implements Renderer {
   private final List<Layer> layers = new ArrayList<>();
@@ -77,7 +78,8 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   // todo test this more and possibly clean up
   private void drawLine(int x1, int y1, int x2, int y2, Color p) {
     int x, y, dx, dy, dx1, dy1, px, py, xe, ye, i;
-    dx = x2 - x1; dy = y2 - y1;
+    dx = x2 - x1;
+    dy = y2 - y1;
 
     // straight lines idea by gurkanctn
     if (dx == 0) // Line is vertical
@@ -107,55 +109,54 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     }
 
     // Line is Funk-aye
-    dx1 = Math.abs(dx); dy1 = Math.abs(dy);
-    px = 2 * dy1 - dx1;	py = 2 * dx1 - dy1;
-    if (dy1 <= dx1)
-    {
-      if (dx >= 0)
-      {
-        x = x1; y = y1; xe = x2;
-      }
-      else
-      {
-        x = x2; y = y2; xe = x1;
+    dx1 = Math.abs(dx);
+    dy1 = Math.abs(dy);
+    px = 2 * dy1 - dx1;
+    py = 2 * dx1 - dy1;
+    if (dy1 <= dx1) {
+      if (dx >= 0) {
+        x = x1;
+        y = y1;
+        xe = x2;
+      } else {
+        x = x2;
+        y = y2;
+        xe = x1;
       }
 
       setPixel(x, y, p);
 
-      for (i = 0; x<xe; i++)
-      {
+      for (i = 0; x < xe; i++) {
         x = x + 1;
-        if (px<0)
+        if (px < 0)
           px = px + 2 * dy1;
-        else
-        {
-          if ((dx<0 && dy<0) || (dx>0 && dy>0)) y = y + 1; else y = y - 1;
+        else {
+          if ((dx < 0 && dy < 0) || (dx > 0 && dy > 0)) y = y + 1;
+          else y = y - 1;
           px = px + 2 * (dy1 - dx1);
         }
         setPixel(x, y, p);
       }
-    }
-    else
-    {
-      if (dy >= 0)
-      {
-        x = x1; y = y1; ye = y2;
-      }
-      else
-      {
-        x = x2; y = y2; ye = y1;
+    } else {
+      if (dy >= 0) {
+        x = x1;
+        y = y1;
+        ye = y2;
+      } else {
+        x = x2;
+        y = y2;
+        ye = y1;
       }
 
       setPixel(x, y, p);
 
-      for (i = 0; y<ye; i++)
-      {
+      for (i = 0; y < ye; i++) {
         y = y + 1;
         if (py <= 0)
           py = py + 2 * dx1;
-        else
-        {
-          if ((dx<0 && dy<0) || (dx>0 && dy>0)) x = x + 1; else x = x - 1;
+        else {
+          if ((dx < 0 && dy < 0) || (dx > 0 && dy > 0)) x = x + 1;
+          else x = x - 1;
           py = py + 2 * (dx1 - dy1);
         }
         setPixel(x, y, p);
@@ -248,6 +249,103 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     drawLine(bottomRight.x, bottomRight.y, bottomLeft.x, bottomLeft.y, color);
     drawLine(topLeft.x, topLeft.y, bottomLeft.x, bottomLeft.y, color);
   }
+
+  private float areaTriangle(Vector2D one, Vector2D two, Vector2D three) {
+    return Math.abs(
+      (two.x * one.y - one.x * two.y)
+        + (three.x * two.y - two.x * three.y)
+        + (one.x * three.y - three.x * one.y)
+    ) / 2;
+  }
+
+  public void fillRect(Matrix3D transform, Color color) {
+    final float SIZE = 1;
+
+    Vector2D topLeft = transform.forward(0, 0);
+    Vector2D topRight = transform.forward(SIZE, 0);
+    Vector2D bottomRight = transform.forward(SIZE, SIZE);
+    Vector2D bottomLeft = transform.forward(0, SIZE);
+
+    float areaOfRect = topLeft.distance(topRight) * topRight.distance(bottomRight);
+
+    float minY = min(topLeft.y, topRight.y, bottomRight.y, bottomLeft.y);
+    float maxY = max(topLeft.y, topRight.y, bottomRight.y, bottomLeft.y);
+    float minX = min(topLeft.x, topRight.x, bottomRight.x, bottomLeft.x);
+    float maxX = max(topLeft.x, topRight.x, bottomRight.x, bottomLeft.x);
+
+    for (float xt = minX; xt <= maxX; xt++) {
+      for (float yt = minY; yt <= maxY; yt++) {
+        Vector2D point = new Vector2D(xt, yt);
+
+        float sumOfArea = areaTriangle(topLeft, point, bottomLeft)
+          + areaTriangle(bottomLeft, point, bottomRight)
+          + areaTriangle(bottomRight, point, topRight)
+          + areaTriangle(point, topRight, topLeft);
+
+//        System.out.println(sumOfArea + " " + areaOfRect);
+
+        if (sumOfArea <= areaOfRect + 0.001f) {
+          setPixel((int)(xt + .5f), (int)(yt + .5f), color);
+        }
+      }
+    }
+
+//    List<List<Vector2D>> edges = List.of(
+//      List.of(topLeft, topRight),
+//      List.of(topRight, bottomRight),
+//      List.of(bottomRight, bottomLeft),
+//      List.of(bottomLeft, topLeft)
+//    );
+//
+//    System.out.println(minY + " " + maxY);
+//
+//    for (float yt = minY; yt <= maxY; yt++) {
+//      for (int i = 0; i < edges.size(); i++) {
+//        int firstEdgeIndex = i;
+//        int secondEdgeIndex = i == edges.size() - 1 ? 0 : i + 1;
+//        List<Vector2D> edgeOne = edges.get(firstEdgeIndex);
+//        List<Vector2D> edgeTwo = edges.get(secondEdgeIndex);
+//
+//        float x1 = findXForY(edgeOne.get(0), edgeOne.get(1), yt);
+//        float x2 = findXForY(edgeTwo.get(0), edgeTwo.get(1), yt);
+//
+//        System.out.println(yt + ": " + x1 + " " + x2);
+//
+//        drawLine(x1, yt, x2, yt, color);
+//      }
+//    }
+  }
+
+  private float findXForY(Vector2D p, Vector2D p2, float y) {
+    float m = (p2.y - p.y) / (p2.x - p.x);
+
+    return y - (p2.y - (m * p2.x));
+  }
+
+  private float min(float ...values) {
+    float min = Float.MAX_VALUE;
+
+    for (float value : values) {
+      if (value < min) {
+        min = value;
+      }
+    }
+
+    return min;
+  }
+
+  private float max(float ...values) {
+    float max = Float.MIN_VALUE;
+
+    for (float value : values) {
+      if (value > max) {
+        max = value;
+      }
+    }
+
+    return max;
+  }
+
 
   /**
    * todo

@@ -33,7 +33,7 @@ public class TempExample extends AbstractSola {
       .addComponent(new RectangleRendererComponent(Color.WHITE));
 
     world.createEntity()
-      .addComponent(new TransformComponent(50, 50, 10, 10, 0.5f))
+      .addComponent(new TransformComponent(60, 50, 50, 50, 0.5f))
       .addComponent(new RectangleRendererComponent(Color.WHITE));
 
     ecsSystemContainer.setWorld(world);

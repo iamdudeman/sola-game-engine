@@ -21,7 +21,8 @@ public class SolaGraphics {
         var rectangleRenderer = entity.getComponent(RectangleRendererComponent.class);
 
         // todo temporarily using a method only on SoftwareRenderer
-        ((SoftwareRenderer)renderer).drawRect(transform.getTransform(), rectangleRenderer.getColor());
+        ((SoftwareRenderer)renderer).fillRect(transform.getTransform(), rectangleRenderer.getColor());
+        ((SoftwareRenderer)renderer).drawRect(transform.getTransform(), Color.RED);
       });
 
     // todo draw circles/ellipses?
