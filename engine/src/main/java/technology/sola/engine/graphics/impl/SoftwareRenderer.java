@@ -263,6 +263,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   }
 
   // todo test this more and possibly clean up
+  // credit to https://github.com/OneLoneCoder/olcPixelGameEngine/blob/master/olcPixelGameEngine.h
   private void drawLine(int x1, int y1, int x2, int y2, Color p) {
     int x, y, dx, dy, dx1, dy1, px, py, xe, ye;
     dx = x2 - x1;
@@ -311,7 +312,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
       setPixel(x, y, p);
 
-      for (; x < xe; ) {
+      while (x < xe) {
         x = x + 1;
         if (px < 0)
           px = px + 2 * dy1;
@@ -335,7 +336,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
       setPixel(x, y, p);
 
-      for (; y < ye; ) {
+      while (y < ye) {
         y = y + 1;
         if (py <= 0)
           py = py + 2 * dx1;

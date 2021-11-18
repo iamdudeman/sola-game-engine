@@ -26,8 +26,8 @@ public class TransformComponent implements Component {
     this.scaleY = scaleY;
     this.rotation = rotation;
 
-    transform = (Matrix3D.translate(x, y)
-      .multiply(Matrix3D.rotate(rotation)))
+    transform = Matrix3D.translate(x, y)
+      .multiply(Matrix3D.rotate(rotation)) // TODO consider removing rotation
       .multiply(Matrix3D.scale(scaleX, scaleY));
   }
 

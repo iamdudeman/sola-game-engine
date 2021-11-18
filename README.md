@@ -1,6 +1,4 @@
 # Branch WIP
-
-# TODO List
 * Consider TransformComponent
   * replaces PositionComponent
   * has translation x+y, scale x+y, and rotation
@@ -10,6 +8,9 @@
   * SpriteComponent (might already exist)
   * Consider EcsSystems for handling rendering of above components
   * Consider CameraSystem that nests these other Renderer systems maybe to handle ability to have multiple cameras???
+* Consider removing rotation from game engine spec
+
+# TODO List
 * Camera
   * Figure out how to implement
     * Translate

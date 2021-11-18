@@ -15,7 +15,6 @@ public class TransformRenderer {
     this.renderer = renderer;
   }
 
-  // todo might need to add this to interface
   public void drawRect(Matrix3D transform, Color color) {
     Vector2D topLeft = transform.forward(0, 0);
     Vector2D topRight = transform.forward(UNIT_SIZE, 0);

@@ -7,10 +7,12 @@ import technology.sola.engine.graphics.impl.TransformRenderer;
 
 public class SolaGraphics {
   private final EcsSystemContainer ecsSystemContainer;
+  private final Renderer renderer;
   private final TransformRenderer transformRenderer;
 
   public SolaGraphics(EcsSystemContainer ecsSystemContainer, Renderer renderer) {
     this.ecsSystemContainer = ecsSystemContainer;
+    this.renderer = renderer;
     this.transformRenderer = new TransformRenderer(renderer);
   }
 
