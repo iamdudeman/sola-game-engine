@@ -2,6 +2,7 @@ package technology.sola.engine.examples.common.singlefile;
 
 import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.Component;
 import technology.sola.engine.ecs.World;
@@ -12,7 +13,6 @@ import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
-import technology.sola.engine.physics.component.PositionComponent;
 import technology.sola.engine.physics.component.VelocityComponent;
 
 public class SimplePlatformerExample extends AbstractSola {
@@ -36,14 +36,14 @@ public class SimplePlatformerExample extends AbstractSola {
   protected void onRender(Renderer renderer) {
     renderer.clear();
 
-    ecsSystemContainer.getWorld().getEntitiesWithComponents(ColliderComponent.class, PositionComponent.class)
+    ecsSystemContainer.getWorld().getEntitiesWithComponents(ColliderComponent.class, TransformComponent.class)
       .forEach(entity -> {
-        PositionComponent positionComponent = entity.getComponent(PositionComponent.class);
+        TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
         ColliderComponent colliderComponent = entity.getComponent(ColliderComponent.class);
         boolean isPlayer = entity.getComponent(PlayerComponent.class) != null;
         Color color = isPlayer ? Color.BLUE : Color.WHITE;
 
-        renderer.fillRect(positionComponent.getX(), positionComponent.getY(), colliderComponent.getBoundingWidth(), colliderComponent.getBoundingHeight(), color);
+        renderer.fillRect(transformComponent.getX(), transformComponent.getY(), colliderComponent.getBoundingWidth(), colliderComponent.getBoundingHeight(), color);
       });
   }
 
@@ -52,24 +52,24 @@ public class SimplePlatformerExample extends AbstractSola {
 
     world.createEntity()
       .addComponent(new PlayerComponent())
-      .addComponent(new PositionComponent(200, 250))
+      .addComponent(new TransformComponent(200, 250))
       .addComponent(new VelocityComponent())
       .addComponent(ColliderComponent.rectangle(50, 50))
       .addComponent(new DynamicBodyComponent(new Material(1)));
 
     world.createEntity()
-      .addComponent(new PositionComponent(150, 400))
+      .addComponent(new TransformComponent(150, 400))
       .addComponent(new VelocityComponent())
       .addComponent(ColliderComponent.rectangle(200, 75));
 
     world.createEntity()
-      .addComponent(new PositionComponent(400, 430))
+      .addComponent(new TransformComponent(400, 430))
       .addComponent(new VelocityComponent())
       .addComponent(new MovingPlatformComponent())
       .addComponent(ColliderComponent.rectangle(100, 35));
 
     world.createEntity()
-      .addComponent(new PositionComponent(550, 200))
+      .addComponent(new TransformComponent(550, 200))
       .addComponent(new VelocityComponent())
       .addComponent(ColliderComponent.rectangle(200, 75));
 

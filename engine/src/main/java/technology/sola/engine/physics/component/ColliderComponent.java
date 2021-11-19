@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.component;
 
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.Component;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
@@ -77,25 +78,25 @@ public class ColliderComponent implements Component {
   /**
    * Calculates the {@link Circle} representation of this collider based on the position.
    *
-   * @param positionComponent  the position of the {@link technology.sola.engine.ecs.Entity}
+   * @param transformComponent  the transform of the {@link technology.sola.engine.ecs.Entity}
    * @return the {@code Circle} representation of this collider
    */
-  public Circle asCircle(PositionComponent positionComponent) {
+  public Circle asCircle(TransformComponent transformComponent) {
     if (!ColliderType.CIRCLE.equals(colliderType)) {
       throw new ColliderComponentException(colliderType, ColliderType.CIRCLE);
     }
 
-    return new Circle(radius, positionComponent.get().add(new Vector2D(radius, radius)));
+    return new Circle(radius, transformComponent.getTranslate().add(new Vector2D(radius, radius)));
   }
 
   /**
    * Calculates the {@link Rectangle} representation of this collider based on the position.
    *
-   * @param positionComponent  the position of the {@link technology.sola.engine.ecs.Entity}
+   * @param transformComponent  the transform of the {@link technology.sola.engine.ecs.Entity}
    * @return the {@code Rectangle} representation of  this collider
    */
-  public Rectangle asRectangle(PositionComponent positionComponent) {
-    return new Rectangle(positionComponent.get(), positionComponent.get().add(new Vector2D(width, height)));
+  public Rectangle asRectangle(TransformComponent transformComponent) {
+    return new Rectangle(transformComponent.getTranslate(), transformComponent.getTranslate().add(new Vector2D(width, height)));
   }
 
   /**

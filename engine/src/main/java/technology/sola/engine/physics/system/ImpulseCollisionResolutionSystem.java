@@ -1,12 +1,12 @@
 package technology.sola.engine.physics.system;
 
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.event.EventListener;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
-import technology.sola.engine.physics.component.PositionComponent;
 import technology.sola.engine.physics.component.VelocityComponent;
 import technology.sola.engine.physics.event.CollisionManifoldEvent;
 import technology.sola.math.SolaMath;
@@ -155,28 +155,28 @@ public class ImpulseCollisionResolutionSystem extends AbstractEcsSystem implemen
       float scalar = depth / inverseMassSum;
       Vector2D correction = event.getNormal().scalar(scalar * linearProjectionPercentage);
 
-      Vector2D aPosition = new Vector2D(entityA.positionComponent.getX(), entityA.positionComponent.getY())
+      Vector2D aPosition = new Vector2D(entityA.transformComponent.getX(), entityA.transformComponent.getY())
         .subtract(correction.scalar(inverseMassA));
-      entityA.positionComponent.setX(aPosition.x);
-      entityA.positionComponent.setY(aPosition.y);
+      entityA.transformComponent.setX(aPosition.x);
+      entityA.transformComponent.setY(aPosition.y);
 
-      Vector2D bPosition = new Vector2D(entityB.positionComponent.getX(), entityB.positionComponent.getY())
+      Vector2D bPosition = new Vector2D(entityB.transformComponent.getX(), entityB.transformComponent.getY())
         .add(correction.scalar(inverseMassB));
-      entityB.positionComponent.setX(bPosition.x);
-      entityB.positionComponent.setY(bPosition.y);
+      entityB.transformComponent.setX(bPosition.x);
+      entityB.transformComponent.setY(bPosition.y);
     });
   }
 
   private static class CollisionResolutionEntityData {
     private final Vector2D velocity;
-    private final PositionComponent positionComponent;
+    private final TransformComponent transformComponent;
     private final VelocityComponent velocityComponent;
     private final float inverseMass;
     private final float restitution;
     private final float friction;
 
     CollisionResolutionEntityData(Entity entity) {
-      positionComponent = entity.getComponent(PositionComponent.class);
+      transformComponent = entity.getComponent(TransformComponent.class);
 
       velocityComponent = entity.getComponent(VelocityComponent.class);
 

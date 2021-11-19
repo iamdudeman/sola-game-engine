@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.system;
 
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.ecs.World;
@@ -9,7 +10,6 @@ import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.CollisionUtils;
 import technology.sola.engine.physics.SpatialHashMap;
 import technology.sola.engine.physics.component.ColliderComponent;
-import technology.sola.engine.physics.component.PositionComponent;
 import technology.sola.engine.physics.event.CollisionManifoldEvent;
 import technology.sola.math.linear.Vector2D;
 
@@ -50,21 +50,21 @@ public class CollisionDetectionSystem extends AbstractEcsSystem {
   @Override
   public void update(World world, float deltaTime) {
     Set<CollisionManifold> collisionEventsThisIteration = new HashSet<>();
-    List<Entity> entities = world.getEntitiesWithComponents(ColliderComponent.class, PositionComponent.class);
+    List<Entity> entities = world.getEntitiesWithComponents(ColliderComponent.class, TransformComponent.class);
 
     // TODO consider some sort of clear method for SpatialHashMap
     spatialHashMap = spatialHashMapCellSize == null ? new SpatialHashMap(entities) : new SpatialHashMap(entities, spatialHashMapCellSize);
 
     for (Entity entityA : entities) {
-      PositionComponent positionA = entityA.getComponent(PositionComponent.class);
+      TransformComponent transformA = entityA.getComponent(TransformComponent.class);
       ColliderComponent colliderA = entityA.getComponent(ColliderComponent.class);
 
       for (Entity entityB : spatialHashMap.getNearbyEntities(entityA)) {
-        PositionComponent positionB = entityB.getComponent(PositionComponent.class);
+        TransformComponent transformB = entityB.getComponent(TransformComponent.class);
         ColliderComponent colliderB = entityB.getComponent(ColliderComponent.class);
         CollisionManifold collisionManifoldEvent = CollisionUtils.calculateCollisionManifold(
           entityA, entityB,
-          positionA, positionB,
+          transformA, transformB,
           colliderA, colliderB
         );
 
@@ -95,18 +95,18 @@ public class CollisionDetectionSystem extends AbstractEcsSystem {
       renderer.drawRect(topLeftPoint.x, topLeftPoint.y, cellSize, cellSize, spatialHashMapCellColor);
     });
 
-    world.getEntitiesWithComponents(ColliderComponent.class, PositionComponent.class)
+    world.getEntitiesWithComponents(ColliderComponent.class, TransformComponent.class)
       .forEach(entity -> {
-        Vector2D position = entity.getComponent(PositionComponent.class).get();
+        Vector2D transform = entity.getComponent(TransformComponent.class).getTranslate();
         ColliderComponent colliderComponent = entity.getComponent(ColliderComponent.class);
 
         float width = colliderComponent.getBoundingWidth();
         float height = colliderComponent.getBoundingHeight();
 
         if (ColliderComponent.ColliderType.CIRCLE.equals(colliderComponent.getColliderType())) {
-          renderer.drawCircle(position.x, position.y, width / 2, colliderOutlineColor);
+          renderer.drawCircle(transform.x, transform.y, width / 2, colliderOutlineColor);
         } else {
-          renderer.drawRect(position.x, position.y, width, height, colliderOutlineColor);
+          renderer.drawRect(transform.x, transform.y, width, height, colliderOutlineColor);
         }
       });
   }

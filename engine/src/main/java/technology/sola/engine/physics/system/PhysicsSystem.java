@@ -1,9 +1,9 @@
 package technology.sola.engine.physics.system;
 
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
-import technology.sola.engine.physics.component.PositionComponent;
 import technology.sola.engine.physics.component.VelocityComponent;
 import technology.sola.math.linear.Vector2D;
 
@@ -17,9 +17,9 @@ public class PhysicsSystem extends AbstractEcsSystem {
 
   @Override
   public void update(World world, float deltaTime) {
-    world.getEntitiesWithComponents(PositionComponent.class, VelocityComponent.class)
+    world.getEntitiesWithComponents(TransformComponent.class, VelocityComponent.class)
       .forEach(entity -> {
-        PositionComponent positionComponent = entity.getComponent(PositionComponent.class);
+        TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
         VelocityComponent velocityComponent = entity.getComponent(VelocityComponent.class);
         DynamicBodyComponent dynamicBodyComponent = entity.getComponent(DynamicBodyComponent.class);
 
@@ -32,7 +32,7 @@ public class PhysicsSystem extends AbstractEcsSystem {
           velocityComponent.set(velocityComponent.get().add(acceleration.scalar(deltaTime)));
         }
 
-        positionComponent.set(positionComponent.get().add(velocityComponent.get().scalar(deltaTime)));
+        transformComponent.setTranslate(transformComponent.getTranslate().add(velocityComponent.get().scalar(deltaTime)));
       });
   }
 }

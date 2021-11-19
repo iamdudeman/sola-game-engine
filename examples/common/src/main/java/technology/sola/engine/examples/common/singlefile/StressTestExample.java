@@ -2,6 +2,7 @@ package technology.sola.engine.examples.common.singlefile;
 
 import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
@@ -9,7 +10,6 @@ import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
-import technology.sola.engine.physics.component.PositionComponent;
 import technology.sola.engine.physics.component.VelocityComponent;
 
 import java.util.Random;
@@ -59,21 +59,21 @@ public class StressTestExample extends AbstractSola {
 
     for (int i = 0; i < zoomedHeight; i += squareSide) {
       world.createEntity()
-        .addComponent(new PositionComponent(0, i))
+        .addComponent(new TransformComponent(0, i))
         .addComponent(new DynamicBodyComponent(platformMaterial))
         .addComponent(ColliderComponent.rectangle(squareSide, squareSide));
     }
 
     for (int i = 0; i < zoomedHeight; i += squareSide) {
       world.createEntity()
-        .addComponent(new PositionComponent(zoomedWidth - squareSide, i))
+        .addComponent(new TransformComponent(zoomedWidth - squareSide, i))
         .addComponent(new DynamicBodyComponent(platformMaterial))
         .addComponent(ColliderComponent.rectangle(squareSide, squareSide));
     }
 
     for (int i = 0; i < zoomedWidth; i += squareSide) {
       world.createEntity()
-        .addComponent(new PositionComponent(i, zoomedHeight - squareSide))
+        .addComponent(new TransformComponent(i, zoomedHeight - squareSide))
         .addComponent(new DynamicBodyComponent(platformMaterial))
         .addComponent(ColliderComponent.rectangle(squareSide, squareSide));
     }
@@ -83,7 +83,7 @@ public class StressTestExample extends AbstractSola {
       float y = random.nextFloat() * (zoomedHeight - CIRCLE_RADIUS) + CIRCLE_RADIUS;
 
       world.createEntity()
-        .addComponent(new PositionComponent(x, y))
+        .addComponent(new TransformComponent(x, y))
         .addComponent(new VelocityComponent())
         .addComponent(new DynamicBodyComponent(circleMaterial))
         .addComponent(ColliderComponent.circle(CIRCLE_RADIUS));

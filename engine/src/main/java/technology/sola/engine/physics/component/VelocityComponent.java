@@ -4,6 +4,8 @@ import technology.sola.engine.ecs.Component;
 import technology.sola.math.SolaMath;
 import technology.sola.math.linear.Vector2D;
 
+// TODO consider merging VelocityComponent into DynamicBodyComponent
+
 public class VelocityComponent implements Component {
   private Vector2D velocity;
   private Float maxVelocityX = null;

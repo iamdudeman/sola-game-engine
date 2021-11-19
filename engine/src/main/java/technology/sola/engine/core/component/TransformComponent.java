@@ -1,6 +1,7 @@
 package technology.sola.engine.core.component;
 
 import technology.sola.engine.ecs.Component;
+import technology.sola.math.linear.Vector2D;
 
 public class TransformComponent implements Component {
   private float x;
@@ -35,6 +36,15 @@ public class TransformComponent implements Component {
    */
   public float getY() {
     return y;
+  }
+
+  public Vector2D getTranslate() {
+    return new Vector2D(x, y);
+  }
+
+  public void setTranslate(Vector2D translate) {
+    this.x = translate.x;
+    this.y = translate.y;
   }
 
   public float getScaleX() {

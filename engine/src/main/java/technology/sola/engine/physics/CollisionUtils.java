@@ -1,8 +1,8 @@
 package technology.sola.engine.physics;
 
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.physics.component.ColliderComponent;
-import technology.sola.engine.physics.component.PositionComponent;
 import technology.sola.math.SolaMath;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
@@ -11,7 +11,7 @@ import technology.sola.math.linear.Vector2D;
 public final class CollisionUtils {
   public static CollisionManifold calculateCollisionManifold(
     Entity entityA, Entity entityB,
-    PositionComponent positionA, PositionComponent positionB,
+    TransformComponent positionA, TransformComponent positionB,
     ColliderComponent colliderA, ColliderComponent colliderB
   ) {
     switch (colliderA.getColliderType()) {
