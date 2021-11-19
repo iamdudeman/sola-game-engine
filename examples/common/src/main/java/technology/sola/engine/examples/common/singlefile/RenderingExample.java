@@ -79,12 +79,6 @@ public class RenderingExample extends AbstractSola {
       renderer.drawLine(50, 20, 100, 20, Color.WHITE);
       renderer.drawLine(0, 220, 100, 400, Color.WHITE);
 
-      // todo figure out alpha in RendererComponents / SolaGraphics
-      renderer.fillRect(180, 530, 50, 50, new Color(255, 0, 0, 255));
-      renderer.setRenderMode(RenderMode.ALPHA);
-      renderer.fillRect(210, 530, 50, 50, new Color(150, 255, 0, 0));
-      renderer.setRenderMode(RenderMode.NORMAL);
-
       renderer.drawLine(0, 0, 800, 600, Color.BLUE);
       renderer.drawLine(750, 0, 20, 500, Color.BLUE);
     });
@@ -203,6 +197,24 @@ public class RenderingExample extends AbstractSola {
       .addComponent(new LayerComponent("background"))
       .addComponent(new TransformComponent(300, 150, 0.5f, 0.5f))
       .addComponent(new RectangleRendererComponent(Color.GREEN, false));
+
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(180, 430, 5, 5))
+      .addComponent(new CircleRendererComponent(Color.BLUE));
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(210, 430, 5, 5))
+      .addComponent(new CircleRendererComponent(new Color(150, 255, 0, 0)));
+
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(180, 530, 5, 5))
+      .addComponent(new RectangleRendererComponent(Color.BLUE));
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(210, 530, 5, 5))
+      .addComponent(new RectangleRendererComponent(new Color(150, 255, 0, 0)));
 
     world.createEntity()
       .addComponent(new LayerComponent("background"))

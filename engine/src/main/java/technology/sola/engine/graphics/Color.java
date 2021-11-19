@@ -56,6 +56,10 @@ public class Color {
     return b;
   }
 
+  public boolean hasAlpha() {
+    return alpha != 255;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

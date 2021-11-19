@@ -7,6 +7,18 @@ import java.util.List;
 public interface Renderer {
   void setRenderMode(RenderMode renderMode);
 
+  default void drawWithRenderModeMask(DrawItem drawItem) {
+    setRenderMode(RenderMode.MASK);
+    drawItem.draw(this);
+    setRenderMode(RenderMode.NORMAL);
+  }
+
+  default void drawWithRenderModeAlpha(DrawItem drawItem) {
+    setRenderMode(RenderMode.ALPHA);
+    drawItem.draw(this);
+    setRenderMode(RenderMode.NORMAL);
+  }
+
   void setFont(Font font);
 
   int getWidth();
