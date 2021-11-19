@@ -9,7 +9,6 @@ import technology.sola.engine.ecs.Component;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Layer;
-import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
@@ -55,18 +54,18 @@ public class RenderingExample extends AbstractSola {
     renderer.clear();
 
     renderer.drawToLayer("ui", r -> {
-      renderer.setRenderMode(RenderMode.ALPHA);
-      renderer.fillRect(0, 10, 600, 100, new Color(120, 255, 255, 255));
-      renderer.setRenderMode(RenderMode.NORMAL);
+      renderer.drawWithRenderModeAlpha(r2 ->
+        renderer.fillRect(0, 10, 600, 100, new Color(120, 255, 255, 255))
+      );
 
-      final String characters1 = "!\"#$%&'()*+,-./0123456789:; <=>?@ABCDEFGHIJKLMN";
-      final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+      renderer.drawWithRenderModeMask(r2 -> {
+        final String characters1 = "!\"#$%&'()*+,-./0123456789:; <=>?@ABCDEFGHIJKLMN";
+        final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
-      renderer.setRenderMode(RenderMode.MASK);
-      renderer.drawString(characters1, 5, 5, Color.RED);
-      renderer.drawString(characters2, 5, 35, Color.BLACK);
-      renderer.drawString("Hello World!", 5, 65, Color.BLUE);
-      renderer.setRenderMode(RenderMode.NORMAL);
+        renderer.drawString(characters1, 5, 5, Color.RED);
+        renderer.drawString(characters2, 5, 35, Color.BLACK);
+        renderer.drawString("Hello World!", 5, 65, Color.BLUE);
+      });
     });
 
     renderer.drawToLayer("background", r -> {
