@@ -87,12 +87,21 @@ public class SolaGraphics {
   }
 
   private void renderSprite(Entity entity) {
-    // TODO handle scale
-    // TODO consider handling rotation
-
     TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
     SpriteComponent spriteComponent = entity.getComponent(SpriteComponent.class);
 
-    renderer.drawImage(transformComponent.getX(), transformComponent.getY(), spriteComponent.getSprite(spriteSheetAssetPool));
+    SolaImage sprite = spriteComponent.getSprite(spriteSheetAssetPool);
+
+    if (transformComponent.getScaleX() != 1 || transformComponent.getScaleY() != 1) {
+      AffineTransform affineTransform = new AffineTransform()
+        .translate(transformComponent.getX(), transformComponent.getY())
+        .scale(transformComponent.getScaleX(), transformComponent.getScaleY());
+
+      renderer.setRenderMode(RenderMode.MASK);
+      renderer.drawImage(sprite, affineTransform);
+      renderer.setRenderMode(RenderMode.NORMAL);
+    } else {
+      renderer.drawImage(transformComponent.getX(), transformComponent.getY(), sprite);
+    }
   }
 }

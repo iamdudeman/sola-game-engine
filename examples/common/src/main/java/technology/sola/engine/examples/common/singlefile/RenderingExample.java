@@ -7,13 +7,11 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.Component;
 import technology.sola.engine.ecs.World;
-import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Layer;
 import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaGraphics;
-import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
@@ -27,9 +25,8 @@ import technology.sola.math.linear.Vector2D;
 import java.util.List;
 
 public class RenderingExample extends AbstractSola {
-  private SolaImage solaImage;
   private SolaGraphics solaGraphics;
-  private float rotation = 0.1f;
+  private TransformComponent dynamicScalingEntityTransformComponent;
 
   @Override
   protected SolaConfiguration buildConfiguration() {
@@ -38,7 +35,6 @@ public class RenderingExample extends AbstractSola {
 
   @Override
   protected void onInit() {
-    AssetPool<SolaImage> solaImageAssetPool = assetPoolProvider.getAssetPool(SolaImage.class);
     AssetPool<Font> fontAssetPool = assetPoolProvider.getAssetPool(Font.class);
 
     AssetPool<SpriteSheet> spriteSheetAssetPool = assetPoolProvider.getAssetPool(SpriteSheet.class);
@@ -46,7 +42,6 @@ public class RenderingExample extends AbstractSola {
 
     Font font = fontAssetPool.addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
     platform.getRenderer().setFont(font);
-    solaImage = solaImageAssetPool.addAndGetAsset("test_tiles", "assets/test_tiles.png");
 
     ecsSystemContainer.setWorld(createWorld());
     ecsSystemContainer.add(new TestSystem());
@@ -74,19 +69,6 @@ public class RenderingExample extends AbstractSola {
       renderer.setRenderMode(RenderMode.NORMAL);
     });
 
-    renderer.drawToLayer("moving_stuff", r -> {
-      renderer.drawImage(400, 400, solaImage);
-      AffineTransform affineTransform = new AffineTransform()
-        .translate(400, 400)
-        .translate(-100, -100)
-        .rotate(rotation)
-        .scale(1.5f, 2f)
-        ;
-      renderer.setRenderMode(RenderMode.MASK);
-      renderer.drawImage(solaImage, affineTransform);
-      renderer.setRenderMode(RenderMode.NORMAL);
-    });
-
     renderer.drawToLayer("background", r -> {
       renderer.setPixel(5, 5, Color.WHITE);
       renderer.setPixel(6, 5, Color.BLUE);
@@ -97,6 +79,7 @@ public class RenderingExample extends AbstractSola {
       renderer.drawLine(50, 20, 100, 20, Color.WHITE);
       renderer.drawLine(0, 220, 100, 400, Color.WHITE);
 
+      // todo figure out alpha in RendererComponents / SolaGraphics
       renderer.fillRect(180, 530, 50, 50, new Color(255, 0, 0, 255));
       renderer.setRenderMode(RenderMode.ALPHA);
       renderer.fillRect(210, 530, 50, 50, new Color(150, 255, 0, 0));
@@ -131,13 +114,37 @@ public class RenderingExample extends AbstractSola {
         platform.getViewport().setAspectMode(AspectMode.STRETCH);
       }
 
-      if (keyboardInput.isKeyHeld(Key.SPACE)) {
-        rotation = rotation + 0.1f;
+      final float scalingSpeed = 1f;
+      final float minSize = 0.1f;
+      final float maxSize = 50;
+
+      if (keyboardInput.isKeyHeld(Key.A)) {
+        float dynamicScale = dynamicScalingEntityTransformComponent.getScaleX() - scalingSpeed;
+        if (dynamicScale < minSize) dynamicScale = minSize;
+        dynamicScalingEntityTransformComponent.setScaleX(dynamicScale);
+      }
+      if (keyboardInput.isKeyHeld(Key.D)) {
+        float dynamicScale = dynamicScalingEntityTransformComponent.getScaleX() + scalingSpeed;
+        if (dynamicScale > maxSize) dynamicScale = maxSize;
+        dynamicScalingEntityTransformComponent.setScaleX(dynamicScale);
+      }
+      if (keyboardInput.isKeyHeld(Key.W)) {
+        float dynamicScale = dynamicScalingEntityTransformComponent.getScaleY() - scalingSpeed;
+        if (dynamicScale < minSize) dynamicScale = minSize;
+        dynamicScalingEntityTransformComponent.setScaleY(dynamicScale);
+      }
+      if (keyboardInput.isKeyHeld(Key.S)) {
+        float dynamicScale = dynamicScalingEntityTransformComponent.getScaleY() + scalingSpeed;
+        if (dynamicScale > maxSize) dynamicScale = maxSize;
+        dynamicScalingEntityTransformComponent.setScaleY(dynamicScale);
       }
 
-      if (keyboardInput.isKeyPressed(Key.A)) {
+      if (keyboardInput.isKeyPressed(Key.H)) {
         Layer blockLayer = platform.getRenderer().getLayer("blocks");
         blockLayer.setEnabled(!blockLayer.isEnabled());
+
+        Layer backgroundLayer = platform.getRenderer().getLayer("background");
+        backgroundLayer.setEnabled(!backgroundLayer.isEnabled());
       }
     }
 
@@ -173,8 +180,13 @@ public class RenderingExample extends AbstractSola {
       .addComponent(new RectangleRendererComponent(Color.BLUE));
 
     world.createEntity()
-      .addComponent(new LayerComponent("background"))
-      .addComponent(new TransformComponent(400, 530, 1, 1))
+      .addComponent(new LayerComponent("moving_stuff"))
+      .addComponent(new TransformComponent(400, 530))
+      .addComponent(new SpriteComponent("test", "blue"));
+    dynamicScalingEntityTransformComponent = new TransformComponent(5, 5, 1, 2);
+    world.createEntity()
+      .addComponent(new LayerComponent("moving_stuff"))
+      .addComponent(dynamicScalingEntityTransformComponent)
       .addComponent(new SpriteComponent("test", "blue"));
 
 
