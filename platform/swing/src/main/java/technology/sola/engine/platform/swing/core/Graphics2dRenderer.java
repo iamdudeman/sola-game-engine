@@ -101,16 +101,6 @@ public class Graphics2dRenderer implements Renderer {
   }
 
   @Override
-  public void drawEllipse(float x, float y, float width, float height, Color color) {
-    throw new NotYetImplementedException();
-  }
-
-  @Override
-  public void fillEllipse(float centerX, float centerY, float width, float height, Color color) {
-    throw new NotYetImplementedException();
-  }
-
-  @Override
   public void drawImage(float x, float y, SolaImage solaImage) {
     throw new NotYetImplementedException();
   }

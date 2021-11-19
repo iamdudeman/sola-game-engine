@@ -175,16 +175,6 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   }
 
   @Override
-  public void drawEllipse(float x, float y, float width, float height, Color color) {
-    throw new RuntimeException("Not yet implemented");
-  }
-
-  @Override
-  public void fillEllipse(float centerX, float centerY, float width, float height, Color color) {
-    throw new RuntimeException("Not yet implemented");
-  }
-
-  @Override
   public void drawImage(float x, float y, SolaImage solaImage) {
     int[] imagePixels = solaImage.getPixels();
     int xInt = (int) (x + 0.5f);
@@ -349,5 +339,4 @@ public class SoftwareRenderer extends Canvas implements Renderer {
       }
     }
   }
-
 }

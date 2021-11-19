@@ -7,6 +7,9 @@ import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
+/**
+ * This is a WIP POC for now.
+ */
 public class TransformRenderer {
   public static final float UNIT_SIZE = 10f;
   private final Renderer renderer;
@@ -51,7 +54,7 @@ public class TransformRenderer {
           + new Triangle(point, topRight, topLeft).getArea();
 
         if (sumOfArea <= areaOfRect + 0.1f) {
-          renderer.setPixel((int)(xt + .5f), (int)(yt + .5f), color);
+          renderer.setPixel((int) (xt + .5f), (int) (yt + .5f), color);
         }
       }
     }

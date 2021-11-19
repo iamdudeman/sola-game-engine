@@ -104,16 +104,11 @@ public interface Renderer {
    */
   void fillCircle(float x, float y, float radius, Color color);
 
-  void drawEllipse(float x, float y, float width, float height, Color color);
-
-  void fillEllipse(float centerX, float centerY, float width, float height, Color color);
-
-  // TODO should SolaImage be here?
+  // TODO should this be SolaImage, x, y?
   void drawImage(float x, float y, SolaImage solaImage);
 
-  // TODO should this method be here?
   void drawImage(SolaImage solaImage, AffineTransform affineTransform);
 
-  // TODO should SolaImage be here?
+  // TODO is this method needed?
   void drawImage(SolaImage solaImage, float x, float y, float width, float height);
 }
