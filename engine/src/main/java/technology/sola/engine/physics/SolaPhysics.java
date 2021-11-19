@@ -29,7 +29,7 @@ public class SolaPhysics {
     collisionDetectionSystem.setEmitCollisionEvent(eventHub::emit);
   }
 
-  public void applyTo(EcsSystemContainer ecsSystemContainer) {
+  public void addEcsSystems(EcsSystemContainer ecsSystemContainer) {
     ecsSystemContainer.add(gravitySystem);
     ecsSystemContainer.add(physicsSystem);
     ecsSystemContainer.add(collisionDetectionSystem);

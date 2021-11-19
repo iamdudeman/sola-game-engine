@@ -34,7 +34,7 @@ public class StressTestExample extends AbstractSola {
   protected void onInit() {
     solaPhysics = new SolaPhysics(eventHub);
 
-    solaPhysics.applyTo(ecsSystemContainer);
+    solaPhysics.addEcsSystems(ecsSystemContainer);
 
     ecsSystemContainer.setWorld(buildWorld());
   }

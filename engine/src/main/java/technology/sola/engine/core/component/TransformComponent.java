@@ -1,7 +1,6 @@
 package technology.sola.engine.core.component;
 
 import technology.sola.engine.ecs.Component;
-import technology.sola.math.linear.Matrix3D;
 
 public class TransformComponent implements Component {
   private float x;

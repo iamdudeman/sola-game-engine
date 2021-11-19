@@ -8,7 +8,6 @@ import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.input.Key;
-import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
@@ -26,7 +25,7 @@ public class SimplePlatformerExample extends AbstractSola {
   protected void onInit() {
     SolaPhysics solaPhysics = new SolaPhysics(eventHub);
 
-    solaPhysics.applyTo(ecsSystemContainer);
+    solaPhysics.addEcsSystems(ecsSystemContainer);
 
     ecsSystemContainer.add(new MovingPlatformSystem(), new PlayerSystem());
 

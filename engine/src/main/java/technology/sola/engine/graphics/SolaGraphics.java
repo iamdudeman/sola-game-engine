@@ -8,9 +8,11 @@ import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
+import technology.sola.engine.graphics.sprite.SpriteAnimatorSystem;
 import technology.sola.engine.graphics.sprite.SpriteSheet;
 
 // TODO probably need to handle transparency
+// TODO consider having "apply" method that adds SpriteAnimatorSystem
 
 public class SolaGraphics {
   public static final int UNIT_SIZE = 10;
@@ -22,6 +24,10 @@ public class SolaGraphics {
     this.ecsSystemContainer = ecsSystemContainer;
     this.renderer = renderer;
     this.spriteSheetAssetPool = spriteSheetAssetPool;
+  }
+
+  public void addEcsSystems() {
+    ecsSystemContainer.add(new SpriteAnimatorSystem());
   }
 
   public void render() {
