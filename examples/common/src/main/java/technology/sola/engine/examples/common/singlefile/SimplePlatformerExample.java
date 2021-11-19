@@ -8,6 +8,8 @@ import technology.sola.engine.ecs.Component;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.SolaGraphics;
+import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.SolaPhysics;
@@ -16,6 +18,9 @@ import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.VelocityComponent;
 
 public class SimplePlatformerExample extends AbstractSola {
+  private SolaGraphics solaGraphics;
+  private SolaPhysics solaPhysics;
+
   @Override
   protected SolaConfiguration buildConfiguration() {
     return new SolaConfiguration("Simple Platformer",800, 600, 30, true);
@@ -23,28 +28,23 @@ public class SimplePlatformerExample extends AbstractSola {
 
   @Override
   protected void onInit() {
-    SolaPhysics solaPhysics = new SolaPhysics(eventHub);
+    solaPhysics = new SolaPhysics(eventHub);
 
     solaPhysics.addEcsSystems(ecsSystemContainer);
 
     ecsSystemContainer.add(new MovingPlatformSystem(), new PlayerSystem());
 
     ecsSystemContainer.setWorld(buildWorld());
+
+    solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer(), null);
   }
 
   @Override
   protected void onRender(Renderer renderer) {
     renderer.clear();
 
-    ecsSystemContainer.getWorld().getEntitiesWithComponents(ColliderComponent.class, TransformComponent.class)
-      .forEach(entity -> {
-        TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
-        ColliderComponent colliderComponent = entity.getComponent(ColliderComponent.class);
-        boolean isPlayer = entity.getComponent(PlayerComponent.class) != null;
-        Color color = isPlayer ? Color.BLUE : Color.WHITE;
-
-        renderer.fillRect(transformComponent.getX(), transformComponent.getY(), colliderComponent.getBoundingWidth(), colliderComponent.getBoundingHeight(), color);
-      });
+    solaGraphics.render();
+    solaPhysics.debugRender(renderer, ecsSystemContainer.getWorld(), Color.RED, Color.GREEN);
   }
 
   private World buildWorld() {
@@ -52,27 +52,30 @@ public class SimplePlatformerExample extends AbstractSola {
 
     world.createEntity()
       .addComponent(new PlayerComponent())
-      .addComponent(new TransformComponent(200, 250))
+      .addComponent(new TransformComponent(200, 250, 5, 5))
+      .addComponent(new RectangleRendererComponent(Color.BLUE))
       .addComponent(new VelocityComponent())
       .addComponent(ColliderComponent.rectangle(50, 50))
       .addComponent(new DynamicBodyComponent(new Material(1)));
 
     world.createEntity()
-      .addComponent(new TransformComponent(150, 400))
+      .addComponent(new TransformComponent(150, 400, 20, 7.5f))
       .addComponent(new VelocityComponent())
+      .addComponent(new RectangleRendererComponent(Color.WHITE))
       .addComponent(ColliderComponent.rectangle(200, 75));
 
     world.createEntity()
-      .addComponent(new TransformComponent(400, 430))
+      .addComponent(new TransformComponent(400, 430, 10, 3.5f))
       .addComponent(new VelocityComponent())
       .addComponent(new MovingPlatformComponent())
+      .addComponent(new RectangleRendererComponent(Color.WHITE))
       .addComponent(ColliderComponent.rectangle(100, 35));
 
     world.createEntity()
-      .addComponent(new TransformComponent(550, 200))
+      .addComponent(new TransformComponent(550, 200, 20, 7.5f))
+      .addComponent(new RectangleRendererComponent(Color.WHITE))
       .addComponent(new VelocityComponent())
       .addComponent(ColliderComponent.rectangle(200, 75));
-
 
     return world;
   }
