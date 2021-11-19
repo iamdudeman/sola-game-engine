@@ -3,6 +3,8 @@
 * Consider TransformComponent
   * replaces PositionComponent
   * has translation x+y, scale x+y, and rotation
+* Use TransformComponent in physics stuff
+  * For colliders the radius / width+height of the collider should scale with scale of transform
 * Consider components for various renderable things
   * CircleComponent with a radius (or maybe Ellipse with width + height)
   * RectangleComponent with width + height
