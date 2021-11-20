@@ -36,7 +36,7 @@ public class SolaPhysics {
     ecsSystemContainer.add(impulseCollisionResolutionSystem);
   }
 
-  public void debugRender(Renderer renderer, World world, Color colliderOutlineColor, Color spatialHashMapCellColor) {
+  public void renderDebug(Renderer renderer, World world, Color colliderOutlineColor, Color spatialHashMapCellColor) {
     collisionDetectionSystem.debugRender(renderer, world, colliderOutlineColor, spatialHashMapCellColor);
   }
 

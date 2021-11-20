@@ -47,7 +47,7 @@ public class StressTestExample extends AbstractSola {
     renderer.clear();
 
     solaGraphics.render();
-    solaPhysics.debugRender(renderer, ecsSystemContainer.getWorld(), Color.RED, Color.GREEN);
+    solaPhysics.renderDebug(renderer, ecsSystemContainer.getWorld(), Color.RED, Color.GREEN);
   }
 
   private World buildWorld() {

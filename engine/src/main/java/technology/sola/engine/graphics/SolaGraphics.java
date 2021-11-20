@@ -11,12 +11,10 @@ import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.sprite.SpriteAnimatorSystem;
 import technology.sola.engine.graphics.sprite.SpriteSheet;
 
-// TODO probably need to handle transparency
-// TODO consider having "apply" method that adds SpriteAnimatorSystem
-
 public class SolaGraphics {
   // TODO should unit size be located here or somewhere else so physics can also use it?
     // todo maybe World? Also, should Sprites be affected by unit size?
+  // TODO probably shouldn't even have a unit size for this type of engine
   public static final int UNIT_SIZE = 10;
   private final EcsSystemContainer ecsSystemContainer;
   private final Renderer renderer;
