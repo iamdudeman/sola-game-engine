@@ -8,7 +8,7 @@ import technology.sola.engine.platform.swing.SwingSolaPlatform;
 
 public class SwingMain {
   public static void main(String[] args) {
-    AbstractSola sola = new StressTestExample(500);
+    AbstractSola sola = new RenderingExample();
     AbstractSolaPlatform solaPlatform = new SwingSolaPlatform();
 
     solaPlatform.play(sola);

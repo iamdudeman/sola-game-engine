@@ -1,5 +1,4 @@
 # Branch WIP
-* Consider empty Asset interface for getAssetPool method
 * Update physics stuff to properly use TransformComponent
   * For colliders the radius / width+height of the collider should scale with scale of transform
     * default AABB to 1x1 and Circle to 0.5 (radius)

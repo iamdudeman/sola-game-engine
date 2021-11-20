@@ -1,12 +1,13 @@
 package technology.sola.engine.graphics.font;
 
+import technology.sola.engine.assets.Asset;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.SolaImage;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Font {
+public class Font implements Asset {
   private final FontInfo fontInfo;
   private final Map<Color, Map<Character, SolaImage>> colorToGlyphsMap = new HashMap<>();
   private final Map<Character, SolaImage> blackCharacterToGlyphMap = new HashMap<>();

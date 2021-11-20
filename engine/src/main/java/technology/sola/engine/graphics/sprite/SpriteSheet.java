@@ -1,11 +1,12 @@
 package technology.sola.engine.graphics.sprite;
 
+import technology.sola.engine.assets.Asset;
 import technology.sola.engine.graphics.SolaImage;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class SpriteSheet {
+public class SpriteSheet implements Asset {
   private final SolaImage solaImage;
   private final Map<String, SolaImage> spriteIdMap = new HashMap<>();
 
