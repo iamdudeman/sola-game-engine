@@ -1,17 +1,10 @@
 # Branch WIP
 * Consider empty Asset interface for getAssetPool method
-* Consider TransformComponent
-  * replaces PositionComponent
-  * has translation x+y, scale x+y, and rotation
-* Use TransformComponent in physics stuff
+* Update physics stuff to properly use TransformComponent
   * For colliders the radius / width+height of the collider should scale with scale of transform
-* Consider components for various renderable things
-  * CircleComponent with a radius (or maybe Ellipse with width + height)
-  * RectangleComponent with width + height
-  * SpriteComponent (might already exist)
-  * Consider EcsSystems for handling rendering of above components
-  * Consider CameraSystem that nests these other Renderer systems maybe to handle ability to have multiple cameras???
-* Consider removing rotation from game engine spec
+    * default AABB to 1x1 and Circle to 0.5 (radius)
+  * Consider two collider components (CircleColliderComponent + RectangleColliderComponent)
+* Consider CameraSystem that nests these other Renderer systems maybe to handle ability to have multiple cameras???
 
 # TODO List
 * Camera
@@ -75,7 +68,6 @@
     * Perhaps JSON that describes what Systems to load with what settings
     * Describe Scenes and Entities / components
 * Physics
-  * Rotation
   * Collision Detection
     * Collision layers / tags for ignoring specific collisions
     * Polygon x AABB

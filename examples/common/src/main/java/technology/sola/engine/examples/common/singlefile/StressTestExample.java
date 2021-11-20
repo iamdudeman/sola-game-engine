@@ -6,6 +6,8 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.SolaGraphics;
+import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
@@ -19,6 +21,7 @@ public class StressTestExample extends AbstractSola {
   private final Random random = new Random();
   private final int objectCount;
   private SolaPhysics solaPhysics;
+  private SolaGraphics solaGraphics;
 
   public StressTestExample(int objectCount) {
     this.objectCount = objectCount;
@@ -32,6 +35,7 @@ public class StressTestExample extends AbstractSola {
   @Override
   protected void onInit() {
     solaPhysics = new SolaPhysics(eventHub);
+    solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer(), null);
 
     solaPhysics.addEcsSystems(ecsSystemContainer);
 
@@ -42,7 +46,8 @@ public class StressTestExample extends AbstractSola {
   protected void onRender(Renderer renderer) {
     renderer.clear();
 
-    solaPhysics.debugRender(renderer, ecsSystemContainer.getWorld(), Color.GREEN, Color.WHITE);
+    solaGraphics.render();
+    solaPhysics.debugRender(renderer, ecsSystemContainer.getWorld(), Color.RED, Color.GREEN);
   }
 
   private World buildWorld() {
@@ -81,6 +86,7 @@ public class StressTestExample extends AbstractSola {
       world.createEntity()
         .addComponent(new TransformComponent(x, y))
         .addComponent(new DynamicBodyComponent(circleMaterial, isKinematic))
+        .addComponent(new CircleRendererComponent(isKinematic ? Color.WHITE : Color.BLUE, true))
         .addComponent(ColliderComponent.circle(CIRCLE_RADIUS));
     }
 
