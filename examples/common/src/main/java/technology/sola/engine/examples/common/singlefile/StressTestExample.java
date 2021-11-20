@@ -84,7 +84,7 @@ public class StressTestExample extends AbstractSola {
       boolean isKinematic = random.nextFloat() > 0.9f;
 
       world.createEntity()
-        .addComponent(new TransformComponent(x, y))
+        .addComponent(new TransformComponent(x, y, 10, 10))
         .addComponent(new DynamicBodyComponent(circleMaterial, isKinematic))
         .addComponent(new CircleRendererComponent(isKinematic ? Color.WHITE : Color.BLUE, true))
         .addComponent(ColliderComponent.circle(CIRCLE_RADIUS));

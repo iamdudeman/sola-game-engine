@@ -12,6 +12,10 @@ public class GravitySystem extends AbstractEcsSystem implements EventListener<Co
 
   private float gravityConstant;
 
+  public GravitySystem() {
+    this(98f);
+  }
+
   public GravitySystem(float gravityConstant) {
     setGravityConstant(gravityConstant);
   }

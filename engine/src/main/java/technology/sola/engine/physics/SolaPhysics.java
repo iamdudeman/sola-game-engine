@@ -18,7 +18,7 @@ public class SolaPhysics {
   private final ImpulseCollisionResolutionSystem impulseCollisionResolutionSystem;
 
   public SolaPhysics(EventHub eventHub) {
-    gravitySystem = new GravitySystem(98f);
+    gravitySystem = new GravitySystem();
     physicsSystem = new PhysicsSystem();
     collisionDetectionSystem = new CollisionDetectionSystem();
     impulseCollisionResolutionSystem = new ImpulseCollisionResolutionSystem();

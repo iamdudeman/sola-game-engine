@@ -159,22 +159,22 @@ public class RenderingExample extends AbstractSola {
     ).forEach(vector2D -> world.createEntity()
       .addComponent(new MovingComponent())
       .addComponent(new LayerComponent("moving_stuff"))
-      .addComponent(new TransformComponent(vector2D.x, vector2D.y, 5, 5))
+      .addComponent(new TransformComponent(vector2D.x, vector2D.y, 50, 50))
       .addComponent(new RectangleRendererComponent(Color.RED))
     );
 
     world.createEntity()
       .addComponent(new LayerComponent("blocks"))
-      .addComponent(new TransformComponent(200, 300, 5, 5))
+      .addComponent(new TransformComponent(200, 300, 50, 50))
       .addComponent(new RectangleRendererComponent(Color.BLUE));
     world.createEntity()
       .addComponent(new LayerComponent("blocks"))
-      .addComponent(new TransformComponent(200, 350, 10, 5))
+      .addComponent(new TransformComponent(200, 350, 100, 50))
       .addComponent(new RectangleRendererComponent(Color.BLUE));
 
     world.createEntity()
       .addComponent(new LayerComponent("moving_stuff"))
-      .addComponent(new TransformComponent(400, 530))
+      .addComponent(new TransformComponent(400, 530, 1, 1))
       .addComponent(new SpriteComponent("test", "blue"));
     dynamicScalingEntityTransformComponent = new TransformComponent(5, 5, 1, 2);
     world.createEntity()
@@ -185,43 +185,43 @@ public class RenderingExample extends AbstractSola {
 
     world.createEntity()
       .addComponent(new LayerComponent("background"))
-      .addComponent(new TransformComponent(100, 100, 6, 8))
+      .addComponent(new TransformComponent(100, 100, 60, 80))
       .addComponent(new RectangleRendererComponent(Color.GREEN));
     world.createEntity()
       .addComponent(new LayerComponent("background"))
-      .addComponent(new TransformComponent(100, 100, 6, 8))
+      .addComponent(new TransformComponent(100, 100, 60, 80))
       .addComponent(new RectangleRendererComponent(Color.RED, false));
 
     world.createEntity()
       .addComponent(new LayerComponent("background"))
-      .addComponent(new TransformComponent(300, 150, 0.5f, 0.5f))
+      .addComponent(new TransformComponent(300, 150, 5f, 5f))
       .addComponent(new RectangleRendererComponent(Color.GREEN, false));
 
     world.createEntity()
       .addComponent(new LayerComponent("background"))
-      .addComponent(new TransformComponent(180, 430, 5, 5))
+      .addComponent(new TransformComponent(180, 430, 50, 50))
       .addComponent(new CircleRendererComponent(Color.BLUE));
     world.createEntity()
       .addComponent(new LayerComponent("background"))
-      .addComponent(new TransformComponent(210, 430, 5, 5))
+      .addComponent(new TransformComponent(210, 430, 50, 50))
       .addComponent(new CircleRendererComponent(new Color(150, 255, 0, 0)));
 
     world.createEntity()
       .addComponent(new LayerComponent("background"))
-      .addComponent(new TransformComponent(180, 530, 5, 5))
+      .addComponent(new TransformComponent(180, 530, 50, 50))
       .addComponent(new RectangleRendererComponent(Color.BLUE));
     world.createEntity()
       .addComponent(new LayerComponent("background"))
-      .addComponent(new TransformComponent(210, 530, 5, 5))
+      .addComponent(new TransformComponent(210, 530, 50, 50))
       .addComponent(new RectangleRendererComponent(new Color(150, 255, 0, 0)));
 
     world.createEntity()
       .addComponent(new LayerComponent("background"))
-      .addComponent(new TransformComponent(300, 150, 10.5f, 10.5f))
+      .addComponent(new TransformComponent(300, 150, 105f, 105f))
       .addComponent(new CircleRendererComponent(Color.BLUE));
     world.createEntity()
       .addComponent(new LayerComponent("background"))
-      .addComponent(new TransformComponent(300, 150, 10.5f, 10.5f))
+      .addComponent(new TransformComponent(300, 150, 105f, 105f))
       .addComponent(new CircleRendererComponent(Color.RED, false));
 
     return world;

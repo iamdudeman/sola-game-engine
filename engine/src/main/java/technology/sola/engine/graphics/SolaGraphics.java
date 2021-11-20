@@ -12,10 +12,6 @@ import technology.sola.engine.graphics.sprite.SpriteAnimatorSystem;
 import technology.sola.engine.graphics.sprite.SpriteSheet;
 
 public class SolaGraphics {
-  // TODO should unit size be located here or somewhere else so physics can also use it?
-    // todo maybe World? Also, should Sprites be affected by unit size?
-  // TODO probably shouldn't even have a unit size for this type of engine
-  public static final int UNIT_SIZE = 10;
   private final EcsSystemContainer ecsSystemContainer;
   private final Renderer renderer;
   private final AssetPool<SpriteSheet> spriteSheetAssetPool;
@@ -77,9 +73,9 @@ public class SolaGraphics {
     }
 
     if (rectangleRenderer.isFilled()) {
-      renderer.fillRect(transform.getX(), transform.getY(), transform.getScaleX() * UNIT_SIZE, transform.getScaleY() * UNIT_SIZE, rectangleRenderer.getColor());
+      renderer.fillRect(transform.getX(), transform.getY(), transform.getScaleX(), transform.getScaleY(), rectangleRenderer.getColor());
     } else {
-      renderer.drawRect(transform.getX(), transform.getY(), transform.getScaleX() * UNIT_SIZE, transform.getScaleY() * UNIT_SIZE, rectangleRenderer.getColor());
+      renderer.drawRect(transform.getX(), transform.getY(), transform.getScaleX(), transform.getScaleY(), rectangleRenderer.getColor());
     }
 
     renderer.setRenderMode(RenderMode.NORMAL);
@@ -95,9 +91,9 @@ public class SolaGraphics {
     }
 
     if (rectangleRenderer.isFilled()) {
-      renderer.fillCircle(transform.getX(), transform.getY(), radius * UNIT_SIZE, rectangleRenderer.getColor());
+      renderer.fillCircle(transform.getX(), transform.getY(), radius, rectangleRenderer.getColor());
     } else {
-      renderer.drawCircle(transform.getX(), transform.getY(), radius * UNIT_SIZE, rectangleRenderer.getColor());
+      renderer.drawCircle(transform.getX(), transform.getY(), radius, rectangleRenderer.getColor());
     }
 
     renderer.setRenderMode(RenderMode.NORMAL);
