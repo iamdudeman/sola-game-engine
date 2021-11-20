@@ -8,13 +8,14 @@ public class DynamicBodyComponent implements Component {
   private float forceX = 0.0f;
   private float forceY = 0.0f;
   private boolean isGrounded = false;
-  private Material material = null;
+  private Material material = Material.UNIT_MASS_MATERIAL;
+  private Vector2D velocity = new Vector2D(0, 0);
+  private boolean isKinematic = false;
 
   /**
    * Creates a DynamicBodyComponent with a {@link Material#UNIT_MASS_MATERIAL} {@link Material}.
    */
   public DynamicBodyComponent() {
-    this(Material.UNIT_MASS_MATERIAL);
   }
 
   /**
@@ -24,6 +25,15 @@ public class DynamicBodyComponent implements Component {
    */
   public DynamicBodyComponent(Material material) {
     setMaterial(material);
+  }
+
+  public DynamicBodyComponent(boolean isKinematic) {
+    this.isKinematic = isKinematic;
+  }
+
+  public DynamicBodyComponent(Material material, boolean isKinematic) {
+    setMaterial(material);
+    this.isKinematic = isKinematic;
   }
 
   /**
@@ -81,6 +91,22 @@ public class DynamicBodyComponent implements Component {
    */
   public void setForceY(float forceY) {
     this.forceY = forceY;
+  }
+
+  public Vector2D getVelocity() {
+    return velocity;
+  }
+
+  public void setVelocity(Vector2D velocity) {
+    this.velocity = velocity;
+  }
+
+  public boolean isKinematic() {
+    return isKinematic;
+  }
+
+  public void setKinematic(boolean kinematic) {
+    isKinematic = kinematic;
   }
 
   /**

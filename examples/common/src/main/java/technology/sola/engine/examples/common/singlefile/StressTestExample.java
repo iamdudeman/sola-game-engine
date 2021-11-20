@@ -10,7 +10,6 @@ import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
-import technology.sola.engine.physics.component.VelocityComponent;
 
 import java.util.Random;
 
@@ -47,7 +46,6 @@ public class StressTestExample extends AbstractSola {
   }
 
   private World buildWorld() {
-    Material platformMaterial = new Material(0, 0.8f);
     Material circleMaterial = new Material(1, 0.8f);
     float zoomedWidth = configuration.getCanvasWidth() / CAMERA_SCALE;
     float zoomedHeight = configuration.getCanvasHeight() / CAMERA_SCALE;
@@ -60,32 +58,29 @@ public class StressTestExample extends AbstractSola {
     for (int i = 0; i < zoomedHeight; i += squareSide) {
       world.createEntity()
         .addComponent(new TransformComponent(0, i))
-        .addComponent(new DynamicBodyComponent(platformMaterial))
         .addComponent(ColliderComponent.rectangle(squareSide, squareSide));
     }
 
     for (int i = 0; i < zoomedHeight; i += squareSide) {
       world.createEntity()
         .addComponent(new TransformComponent(zoomedWidth - squareSide, i))
-        .addComponent(new DynamicBodyComponent(platformMaterial))
         .addComponent(ColliderComponent.rectangle(squareSide, squareSide));
     }
 
     for (int i = 0; i < zoomedWidth; i += squareSide) {
       world.createEntity()
         .addComponent(new TransformComponent(i, zoomedHeight - squareSide))
-        .addComponent(new DynamicBodyComponent(platformMaterial))
         .addComponent(ColliderComponent.rectangle(squareSide, squareSide));
     }
 
     for (int i = 0; i < objectCount; i++) {
       float x = random.nextFloat() * (zoomedWidth - CIRCLE_RADIUS) + CIRCLE_RADIUS;
       float y = random.nextFloat() * (zoomedHeight - CIRCLE_RADIUS) + CIRCLE_RADIUS;
+      boolean isKinematic = random.nextFloat() > 0.9f;
 
       world.createEntity()
         .addComponent(new TransformComponent(x, y))
-        .addComponent(new VelocityComponent())
-        .addComponent(new DynamicBodyComponent(circleMaterial))
+        .addComponent(new DynamicBodyComponent(circleMaterial, isKinematic))
         .addComponent(ColliderComponent.circle(CIRCLE_RADIUS));
     }
 

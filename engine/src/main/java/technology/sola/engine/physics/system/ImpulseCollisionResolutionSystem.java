@@ -7,7 +7,6 @@ import technology.sola.engine.ecs.World;
 import technology.sola.engine.event.EventListener;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
-import technology.sola.engine.physics.component.VelocityComponent;
 import technology.sola.engine.physics.event.CollisionManifoldEvent;
 import technology.sola.math.SolaMath;
 import technology.sola.math.linear.Vector2D;
@@ -125,18 +124,22 @@ public class ImpulseCollisionResolutionSystem extends AbstractEcsSystem implemen
   }
 
   private void applyImpulseToCollisionEntities(CollisionResolutionEntityData entityA, CollisionResolutionEntityData entityB, Vector2D impulse) {
-    entityA.getVelocityComponent().ifPresent(velocityComponent -> {
-      Vector2D currentVelocity = velocityComponent.get();
-      Vector2D newVelocity = currentVelocity.subtract(impulse.scalar(entityA.inverseMass));
+    entityA.getDynamicBodyComponent().ifPresent(dynamicBodyComponent -> {
+      if (!dynamicBodyComponent.isKinematic()) {
+        Vector2D currentVelocity = dynamicBodyComponent.getVelocity();
+        Vector2D newVelocity = currentVelocity.subtract(impulse.scalar(entityA.inverseMass));
 
-      velocityComponent.set(newVelocity);
+        dynamicBodyComponent.setVelocity(newVelocity);
+      }
     });
 
-    entityB.getVelocityComponent().ifPresent(velocityComponent -> {
-      Vector2D currentVelocity = velocityComponent.get();
-      Vector2D newVelocity = currentVelocity.add(impulse.scalar(entityB.inverseMass));
+    entityB.getDynamicBodyComponent().ifPresent(dynamicBodyComponent -> {
+      if (!dynamicBodyComponent.isKinematic()) {
+        Vector2D currentVelocity = dynamicBodyComponent.getVelocity();
+        Vector2D newVelocity = currentVelocity.add(impulse.scalar(entityB.inverseMass));
 
-      velocityComponent.set(newVelocity);
+        dynamicBodyComponent.setVelocity(newVelocity);
+      }
     });
   }
 
@@ -170,19 +173,16 @@ public class ImpulseCollisionResolutionSystem extends AbstractEcsSystem implemen
   private static class CollisionResolutionEntityData {
     private final Vector2D velocity;
     private final TransformComponent transformComponent;
-    private final VelocityComponent velocityComponent;
+    private final DynamicBodyComponent dynamicBodyComponent;
     private final float inverseMass;
     private final float restitution;
     private final float friction;
 
     CollisionResolutionEntityData(Entity entity) {
       transformComponent = entity.getComponent(TransformComponent.class);
+      dynamicBodyComponent = entity.getComponent(DynamicBodyComponent.class);
 
-      velocityComponent = entity.getComponent(VelocityComponent.class);
-
-      velocity = velocityComponent == null ? new Vector2D(0, 0) : velocityComponent.get();
-
-      DynamicBodyComponent dynamicBodyComponent = entity.getComponent(DynamicBodyComponent.class);
+      velocity = dynamicBodyComponent == null ? new Vector2D(0, 0) : dynamicBodyComponent.getVelocity();
 
       if (dynamicBodyComponent == null) {
         inverseMass = 0;
@@ -195,8 +195,8 @@ public class ImpulseCollisionResolutionSystem extends AbstractEcsSystem implemen
       }
     }
 
-    Optional<VelocityComponent> getVelocityComponent() {
-      return Optional.ofNullable(velocityComponent);
+    Optional<DynamicBodyComponent> getDynamicBodyComponent() {
+      return Optional.ofNullable(dynamicBodyComponent);
     }
   }
 }

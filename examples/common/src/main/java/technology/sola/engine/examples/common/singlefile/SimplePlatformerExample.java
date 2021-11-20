@@ -15,7 +15,7 @@ import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
-import technology.sola.engine.physics.component.VelocityComponent;
+import technology.sola.math.linear.Vector2D;
 
 public class SimplePlatformerExample extends AbstractSola {
   private SolaGraphics solaGraphics;
@@ -54,27 +54,24 @@ public class SimplePlatformerExample extends AbstractSola {
       .addComponent(new PlayerComponent())
       .addComponent(new TransformComponent(200, 250, 5, 5))
       .addComponent(new RectangleRendererComponent(Color.BLUE))
-      .addComponent(new VelocityComponent())
       .addComponent(ColliderComponent.rectangle(50, 50))
       .addComponent(new DynamicBodyComponent(new Material(1)));
 
     world.createEntity()
       .addComponent(new TransformComponent(150, 400, 20, 7.5f))
-      .addComponent(new VelocityComponent())
       .addComponent(new RectangleRendererComponent(Color.WHITE))
       .addComponent(ColliderComponent.rectangle(200, 75));
 
     world.createEntity()
       .addComponent(new TransformComponent(400, 430, 10, 3.5f))
-      .addComponent(new VelocityComponent())
       .addComponent(new MovingPlatformComponent())
+      .addComponent(new DynamicBodyComponent(true))
       .addComponent(new RectangleRendererComponent(Color.WHITE))
       .addComponent(ColliderComponent.rectangle(100, 35));
 
     world.createEntity()
       .addComponent(new TransformComponent(550, 200, 20, 7.5f))
       .addComponent(new RectangleRendererComponent(Color.WHITE))
-      .addComponent(new VelocityComponent())
       .addComponent(ColliderComponent.rectangle(200, 75));
 
     return world;
@@ -91,10 +88,10 @@ public class SimplePlatformerExample extends AbstractSola {
   private static class MovingPlatformSystem extends AbstractEcsSystem {
     @Override
     public void update(World world, float deltaTime) {
-      world.getEntitiesWithComponents(MovingPlatformComponent.class, VelocityComponent.class)
+      world.getEntitiesWithComponents(MovingPlatformComponent.class, DynamicBodyComponent.class)
         .forEach(entity -> {
           MovingPlatformComponent movingPlatformComponent = entity.getComponent(MovingPlatformComponent.class);
-          VelocityComponent velocityComponent = entity.getComponent(VelocityComponent.class);
+          DynamicBodyComponent velocityComponent = entity.getComponent(DynamicBodyComponent.class);
 
           movingPlatformComponent.counter += deltaTime;
 
@@ -103,7 +100,7 @@ public class SimplePlatformerExample extends AbstractSola {
             movingPlatformComponent.isGoingUp = !movingPlatformComponent.isGoingUp;
           }
 
-          velocityComponent.setY(movingPlatformComponent.isGoingUp ? -25 : 25);
+          velocityComponent.setVelocity(new Vector2D(0, movingPlatformComponent.isGoingUp ? -25 : 25));
         });
     }
 

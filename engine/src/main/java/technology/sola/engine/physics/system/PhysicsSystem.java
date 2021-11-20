@@ -4,7 +4,6 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
-import technology.sola.engine.physics.component.VelocityComponent;
 import technology.sola.math.linear.Vector2D;
 
 public class PhysicsSystem extends AbstractEcsSystem {
@@ -17,22 +16,21 @@ public class PhysicsSystem extends AbstractEcsSystem {
 
   @Override
   public void update(World world, float deltaTime) {
-    world.getEntitiesWithComponents(TransformComponent.class, VelocityComponent.class)
+    world.getEntitiesWithComponents(TransformComponent.class, DynamicBodyComponent.class)
       .forEach(entity -> {
         TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
-        VelocityComponent velocityComponent = entity.getComponent(VelocityComponent.class);
         DynamicBodyComponent dynamicBodyComponent = entity.getComponent(DynamicBodyComponent.class);
 
-        if (dynamicBodyComponent != null) {
+        if (!dynamicBodyComponent.isKinematic()) {
           Vector2D acceleration = new Vector2D(dynamicBodyComponent.getForceX(), dynamicBodyComponent.getForceY())
             .scalar(dynamicBodyComponent.getMaterial().getInverseMass());
 
           dynamicBodyComponent.setForceX(0);
           dynamicBodyComponent.setForceY(0);
-          velocityComponent.set(velocityComponent.get().add(acceleration.scalar(deltaTime)));
+          dynamicBodyComponent.setVelocity(dynamicBodyComponent.getVelocity().add(acceleration.scalar(deltaTime)));
         }
 
-        transformComponent.setTranslate(transformComponent.getTranslate().add(velocityComponent.get().scalar(deltaTime)));
+        transformComponent.setTranslate(transformComponent.getTranslate().add(dynamicBodyComponent.getVelocity().scalar(deltaTime)));
       });
   }
 }

@@ -6,7 +6,7 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
-import technology.sola.engine.physics.component.VelocityComponent;
+import technology.sola.math.linear.Vector2D;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,8 +22,7 @@ class PhysicsSystemTest {
       dynamicBodyComponent.applyForce(100, 200);
       world.createEntity()
         .addComponent(transformComponent)
-        .addComponent(dynamicBodyComponent)
-        .addComponent(new VelocityComponent());
+        .addComponent(dynamicBodyComponent);
 
       PhysicsSystem physicsSystem = new PhysicsSystem();
 
@@ -43,9 +42,14 @@ class PhysicsSystemTest {
       World world = new World(1);
 
       TransformComponent transformComponent = new TransformComponent();
+      DynamicBodyComponent dynamicBodyComponent = new DynamicBodyComponent();
+      dynamicBodyComponent.setVelocity(new Vector2D(100, 200));
+      dynamicBodyComponent.applyForce(100, 200);
+      dynamicBodyComponent.setKinematic(true);
+
       world.createEntity()
         .addComponent(transformComponent)
-        .addComponent(new VelocityComponent(100, 200));
+        .addComponent(dynamicBodyComponent);
 
       PhysicsSystem physicsSystem = new PhysicsSystem();
 
