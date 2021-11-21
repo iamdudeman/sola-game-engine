@@ -63,19 +63,19 @@ public class StressTestExample extends AbstractSola {
     for (int i = 0; i < zoomedHeight; i += squareSide) {
       world.createEntity()
         .addComponent(new TransformComponent(0, i, squareSide, squareSide))
-        .addComponent(ColliderComponent.rectangle());
+        .addComponent(ColliderComponent.aabb());
     }
 
     for (int i = 0; i < zoomedHeight; i += squareSide) {
       world.createEntity()
         .addComponent(new TransformComponent(zoomedWidth - squareSide, i, squareSide, squareSide))
-        .addComponent(ColliderComponent.rectangle());
+        .addComponent(ColliderComponent.aabb());
     }
 
     for (int i = 0; i < zoomedWidth; i += squareSide) {
       world.createEntity()
         .addComponent(new TransformComponent(i, zoomedHeight - squareSide, squareSide, squareSide))
-        .addComponent(ColliderComponent.rectangle());
+        .addComponent(ColliderComponent.aabb());
     }
 
     for (int i = 0; i < objectCount; i++) {

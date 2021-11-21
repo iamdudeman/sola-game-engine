@@ -11,20 +11,20 @@ import technology.sola.math.linear.Vector2D;
 public final class CollisionUtils {
   public static CollisionManifold calculateCollisionManifold(
     Entity entityA, Entity entityB,
-    TransformComponent positionA, TransformComponent positionB,
+    TransformComponent transformA, TransformComponent transformB,
     ColliderComponent colliderA, ColliderComponent colliderB
   ) {
     switch (colliderA.getColliderType()) {
       case AABB:
         switch (colliderB.getColliderType()) {
           case AABB:
-            Rectangle rectangleA = colliderA.asRectangle(positionA);
-            Rectangle rectangleB = colliderB.asRectangle(positionB);
+            Rectangle rectangleA = colliderA.asRectangle(transformA);
+            Rectangle rectangleB = colliderB.asRectangle(transformB);
 
             return calculateAABBVsAABB(entityA, entityB, rectangleA, rectangleB);
           case CIRCLE:
-            Rectangle rectangle = colliderA.asRectangle(positionA);
-            Circle circle = colliderB.asCircle(positionB);
+            Rectangle rectangle = colliderA.asRectangle(transformA);
+            Circle circle = colliderB.asCircle(transformB);
 
             return calculateAABBVsCircle(entityA, entityB, rectangle, circle);
           default:
@@ -33,13 +33,13 @@ public final class CollisionUtils {
       case CIRCLE:
         switch (colliderB.getColliderType()) {
           case AABB:
-            Rectangle rectangle = colliderB.asRectangle(positionB);
-            Circle circle = colliderA.asCircle(positionA);
+            Rectangle rectangle = colliderB.asRectangle(transformB);
+            Circle circle = colliderA.asCircle(transformA);
 
             return calculateAABBVsCircle(entityB, entityA, rectangle, circle);
           case CIRCLE:
-            Circle circleA = colliderA.asCircle(positionA);
-            Circle circleB = colliderB.asCircle(positionB);
+            Circle circleA = colliderA.asCircle(transformA);
+            Circle circleB = colliderB.asCircle(transformB);
 
             return calculateCircleVsCircle(entityA, entityB, circleA, circleB);
           default:

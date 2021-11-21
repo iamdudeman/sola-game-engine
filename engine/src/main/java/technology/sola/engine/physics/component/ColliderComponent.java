@@ -17,8 +17,8 @@ public class ColliderComponent implements Component {
   private Float width = null;
   private Float height = null;
 
-  public static ColliderComponent rectangle() {
-    return rectangle(1, 1);
+  public static ColliderComponent aabb() {
+    return aabb(1, 1);
   }
 
   /**
@@ -28,7 +28,7 @@ public class ColliderComponent implements Component {
    * @param height  the height of the collision box
    * @return a rectangle {@code ColliderComponent}
    */
-  public static ColliderComponent rectangle(float width, float height) {
+  public static ColliderComponent aabb(float width, float height) {
     ColliderComponent colliderComponent = new ColliderComponent();
 
     colliderComponent.colliderType = ColliderType.AABB;

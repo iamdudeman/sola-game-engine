@@ -31,8 +31,8 @@ class SpatialHashMapTest {
   @Test
   void whenEntitiesHaveNoPositionComponent_shouldNotThrowException() {
     World world = new World(2);
-    world.createEntity().addComponent(ColliderComponent.rectangle(10, 10));
-    world.createEntity().addComponent(ColliderComponent.rectangle(10, 10));
+    world.createEntity().addComponent(ColliderComponent.aabb(10, 10));
+    world.createEntity().addComponent(ColliderComponent.aabb(10, 10));
 
     assertDoesNotThrow(() -> new SpatialHashMap(world.getEntitiesWithComponents()));
   }
@@ -131,23 +131,23 @@ class SpatialHashMapTest {
 
     world.createEntity()
       .addComponent(new TransformComponent(0, 0))
-      .addComponent(ColliderComponent.rectangle(10, 10));
+      .addComponent(ColliderComponent.aabb(10, 10));
 
     world.createEntity()
       .addComponent(new TransformComponent(25, 25))
-      .addComponent(ColliderComponent.rectangle(20, 20));
+      .addComponent(ColliderComponent.aabb(20, 20));
 
     world.createEntity()
       .addComponent(new TransformComponent(55, 55))
-      .addComponent(ColliderComponent.rectangle(15, 15));
+      .addComponent(ColliderComponent.aabb(15, 15));
 
     world.createEntity()
       .addComponent(new TransformComponent(25, 35))
-      .addComponent(ColliderComponent.rectangle(10, 10));
+      .addComponent(ColliderComponent.aabb(10, 10));
 
     world.createEntity()
       .addComponent(new TransformComponent(45, 35))
-      .addComponent(ColliderComponent.rectangle(10, 10));
+      .addComponent(ColliderComponent.aabb(10, 10));
 
     return world;
   }

@@ -1,8 +1,7 @@
 # Branch WIP
-* Consider two collider components (CircleColliderComponent + RectangleColliderComponent)
-* Consider CameraSystem that nests these other Renderer systems maybe to handle ability to have multiple cameras???
 
 # TODO List
+* Consider CameraSystem that nests these other Renderer systems maybe to handle ability to have multiple cameras???
 * Camera
   * Figure out how to implement
     * Translate
