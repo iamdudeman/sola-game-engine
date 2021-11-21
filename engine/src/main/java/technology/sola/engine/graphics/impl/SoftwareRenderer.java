@@ -74,13 +74,13 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   }
 
   @Override
-  public void drawLine(float x, float y, float x2, float y2, Color color) {
-    int xInt = (int) (x + 0.5f);
-    int yInt = (int) (y + 0.5f);
+  public void drawLine(float x1, float y1, float x2, float y2, Color color) {
+    int xInt = (int) (x1 + 0.5f);
+    int yInt = (int) (y1 + 0.5f);
     int x2Int = (int) (x2 + 0.5f);
     int y2Int = (int) (y2 + 0.5f);
 
-    drawLine(xInt, yInt, x2Int, y2Int, color);
+    drawLineInt(xInt, yInt, x2Int, y2Int, color);
   }
 
   /**
@@ -252,44 +252,57 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     setPixel(centerX - y, centerY - x, color);
   }
 
-  // todo test this more and possibly clean up
-  // credit to https://github.com/OneLoneCoder/olcPixelGameEngine/blob/master/olcPixelGameEngine.h
-  private void drawLine(int x1, int y1, int x2, int y2, Color p) {
-    int x, y, dx, dy, dx1, dy1, px, py, xe, ye;
-    dx = x2 - x1;
-    dy = y2 - y1;
+  private void drawLineInt(int x1, int y1, int x2, int y2, Color color) {
+    int dx = x2 - x1;
+    int dy = y2 - y1;
 
-    // straight lines idea by gurkanctn
-    // Line is vertical
+    // Vertical
     if (dx == 0) {
+      int start = y1;
+      int end = y2;
+
       if (y2 < y1) {
-        int temp = y1;
-        y1 = y2;
-        y2 = temp;
+        start = y2;
+        end = y1;
       }
-      for (y = y1; y <= y2; y++)
-        setPixel(x1, y, p);
+
+      for (int i = start; i < end; i++) {
+        setPixel(x1, i, color);
+      }
+
       return;
     }
 
-    // Line is horizontal
+    // Horizontal
     if (dy == 0) {
+      int start = x1;
+      int end = x2;
+
       if (x2 < x1) {
-        int temp = x1;
-        x1 = x2;
-        x2 = temp;
+        start = x2;
+        end = x1;
       }
-      for (x = x1; x <= x2; x++)
-        setPixel(x, y1, p);
+
+      for (int i = start; i < end; i++) {
+        setPixel(i, y1, color);
+      }
+
       return;
     }
 
-    // Line is Funk-aye
-    dx1 = Math.abs(dx);
-    dy1 = Math.abs(dy);
-    px = 2 * dy1 - dx1;
-    py = 2 * dx1 - dy1;
-    if (dy1 <= dx1) {
+
+    // "Line is Funk-aye" algorithm credit to OneLoneCoder
+    // https://github.com/OneLoneCoder/olcPixelGameEngine/blob/master/olcPixelGameEngine.h
+    int x;
+    int y;
+    int xe;
+    int ye;
+    int dxAbs = Math.abs(dx);
+    int dyAbs = Math.abs(dy);
+    int px = 2 * dyAbs - dxAbs;
+    int py = 2 * dxAbs - dyAbs;
+
+    if (dyAbs <= dxAbs) {
       if (dx >= 0) {
         x = x1;
         y = y1;
@@ -300,18 +313,18 @@ public class SoftwareRenderer extends Canvas implements Renderer {
         xe = x1;
       }
 
-      setPixel(x, y, p);
+      setPixel(x, y, color);
 
       while (x < xe) {
         x = x + 1;
         if (px < 0)
-          px = px + 2 * dy1;
+          px = px + 2 * dyAbs;
         else {
           if ((dx < 0 && dy < 0) || (dx > 0 && dy > 0)) y = y + 1;
           else y = y - 1;
-          px = px + 2 * (dy1 - dx1);
+          px = px + 2 * (dyAbs - dxAbs);
         }
-        setPixel(x, y, p);
+        setPixel(x, y, color);
       }
     } else {
       if (dy >= 0) {
@@ -324,18 +337,18 @@ public class SoftwareRenderer extends Canvas implements Renderer {
         ye = y1;
       }
 
-      setPixel(x, y, p);
+      setPixel(x, y, color);
 
       while (y < ye) {
         y = y + 1;
         if (py <= 0)
-          py = py + 2 * dx1;
+          py = py + 2 * dxAbs;
         else {
           if ((dx < 0 && dy < 0) || (dx > 0 && dy > 0)) x = x + 1;
           else x = x - 1;
-          py = py + 2 * (dx1 - dy1);
+          py = py + 2 * (dxAbs - dyAbs);
         }
-        setPixel(x, y, p);
+        setPixel(x, y, color);
       }
     }
   }
