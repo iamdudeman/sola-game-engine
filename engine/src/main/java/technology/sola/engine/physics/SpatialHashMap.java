@@ -8,6 +8,17 @@ import technology.sola.math.linear.Vector2D;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
+/*
+TODO
+consider mapping entities to container class of TransformComponent and ColliderComponent
+then filter on those that have those components present and add them
+then getBucketIdsForEntity wouldn't need to check for components being present
+could also possibly have multiple ColliderComponents then instead of just one
+all would still implement the same base class most likely
+ */
+
+
 public class SpatialHashMap {
   private final int cellSize;
   private final float inverseCellSize;
@@ -71,8 +82,8 @@ public class SpatialHashMap {
 
     float x = transformComponent.getX();
     float y = transformComponent.getY();
-    float width = colliderComponent.getBoundingWidth();
-    float height = colliderComponent.getBoundingHeight();
+    float width = colliderComponent.getBoundingWidth() * transformComponent.getScaleX();
+    float height = colliderComponent.getBoundingHeight() * transformComponent.getScaleY();
 
     List<Vector2D> ids = new ArrayList<>();
 
@@ -106,10 +117,11 @@ public class SpatialHashMap {
       entities.stream()
         .map(entity -> {
           ColliderComponent colliderComponent = entity.getComponent(ColliderComponent.class);
+          TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
 
-          if (colliderComponent == null) return 0f;
+          if (colliderComponent == null || transformComponent == null) return 0f;
 
-          return Math.max(colliderComponent.getBoundingWidth(), colliderComponent.getBoundingHeight());
+          return Math.max(colliderComponent.getBoundingWidth() * transformComponent.getScaleX(), colliderComponent.getBoundingHeight() * transformComponent.getScaleY());
         })
         .max(Comparator.naturalOrder())
         .orElse(0.0f)

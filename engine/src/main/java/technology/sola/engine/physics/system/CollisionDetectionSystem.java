@@ -11,6 +11,8 @@ import technology.sola.engine.physics.CollisionUtils;
 import technology.sola.engine.physics.SpatialHashMap;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.event.CollisionManifoldEvent;
+import technology.sola.math.geometry.Circle;
+import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.HashSet;
@@ -97,16 +99,18 @@ public class CollisionDetectionSystem extends AbstractEcsSystem {
 
     world.getEntitiesWithComponents(ColliderComponent.class, TransformComponent.class)
       .forEach(entity -> {
-        Vector2D transform = entity.getComponent(TransformComponent.class).getTranslate();
+        TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
+        Vector2D transform = transformComponent.getTranslate();
         ColliderComponent colliderComponent = entity.getComponent(ColliderComponent.class);
 
-        float width = colliderComponent.getBoundingWidth();
-        float height = colliderComponent.getBoundingHeight();
-
         if (ColliderComponent.ColliderType.CIRCLE.equals(colliderComponent.getColliderType())) {
-          renderer.drawCircle(transform.x, transform.y, width / 2, colliderOutlineColor);
+          Circle circle = colliderComponent.asCircle(transformComponent);
+
+          renderer.drawCircle(transform.x, transform.y, circle.getRadius(), colliderOutlineColor);
         } else {
-          renderer.drawRect(transform.x, transform.y, width, height, colliderOutlineColor);
+          Rectangle rectangle = colliderComponent.asRectangle(transformComponent);
+
+          renderer.drawRect(transform.x, transform.y, rectangle.getWidth(), rectangle.getHeight(), colliderOutlineColor);
         }
       });
   }
