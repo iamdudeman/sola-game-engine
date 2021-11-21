@@ -8,17 +8,6 @@ import technology.sola.math.linear.Vector2D;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
-/*
-TODO
-consider mapping entities to container class of TransformComponent and ColliderComponent
-then filter on those that have those components present and add them
-then getBucketIdsForEntity wouldn't need to check for components being present
-could also possibly have multiple ColliderComponents then instead of just one
-all would still implement the same base class most likely
- */
-
-
 public class SpatialHashMap {
   private final int cellSize;
   private final float inverseCellSize;
