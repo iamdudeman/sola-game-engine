@@ -35,6 +35,30 @@ public final class SolaMath {
     return new Vector2D(closestX, closestY);
   }
 
+  public static float min(float ...values) {
+    float min = values[0];
+
+    for (float value : values) {
+      if (value < min) {
+        min = value;
+      }
+    }
+
+    return min;
+  }
+
+  public static float max(float ...values) {
+    float max = values[0];
+
+    for (float value : values) {
+      if (value > max) {
+        max = value;
+      }
+    }
+
+    return max;
+  }
+
   private SolaMath() {
   }
 }

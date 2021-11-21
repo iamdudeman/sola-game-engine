@@ -12,6 +12,10 @@ public class GravitySystem extends AbstractEcsSystem implements EventListener<Co
 
   private float gravityConstant;
 
+  public GravitySystem() {
+    this(98f);
+  }
+
   public GravitySystem(float gravityConstant) {
     setGravityConstant(gravityConstant);
   }
@@ -22,11 +26,11 @@ public class GravitySystem extends AbstractEcsSystem implements EventListener<Co
       .forEach(entity -> {
         DynamicBodyComponent dynamicBodyComponent = entity.getComponent(DynamicBodyComponent.class);
 
-        if (!dynamicBodyComponent.isGrounded()) {
+        if (!dynamicBodyComponent.isGrounded() && !dynamicBodyComponent.isKinematic()) {
           dynamicBodyComponent.applyForce(0, gravityConstant * dynamicBodyComponent.getMaterial().getMass());
         }
-        dynamicBodyComponent.setGrounded(false);
 
+        dynamicBodyComponent.setGrounded(false);
       });
   }
 

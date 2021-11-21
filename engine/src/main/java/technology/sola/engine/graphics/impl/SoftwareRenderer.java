@@ -74,52 +74,13 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   }
 
   @Override
-  public void drawLine(float x, float y, float x2, float y2, Color color) {
-    int xInt = (int) (x + 0.5f);
-    int yInt = (int) (y + 0.5f);
+  public void drawLine(float x1, float y1, float x2, float y2, Color color) {
+    int xInt = (int) (x1 + 0.5f);
+    int yInt = (int) (y1 + 0.5f);
     int x2Int = (int) (x2 + 0.5f);
     int y2Int = (int) (y2 + 0.5f);
 
-    if (xInt - x2Int == 0) {
-      int start = Math.min(yInt, y2Int);
-      int end = Math.max(yInt, y2Int);
-
-      for (int i = start; i < end; i++) {
-        setPixel(xInt, i, color);
-      }
-    } else if (y - y2 == 0) {
-      int start = Math.min(xInt, x2Int);
-      int end = Math.max(xInt, x2Int);
-
-      for (int i = start; i < end; i++) {
-        setPixel(i, yInt, color);
-      }
-    } else {
-      float dx = Math.abs(x2 - x);
-      float sx = x < x2 ? 1 : -1;
-      float dy = -Math.abs(y2 - y);
-      float sy = y < y2 ? 1 : -1;
-      float err = dx + dy;
-      float currentX = x;
-      float currentY = y;
-
-      while (true) {
-        setPixel((int) currentX, (int) currentY, color);
-
-        if (currentX == x2 && currentY == y2) break;
-
-        float e2 = 2 * err;
-
-        if (e2 >= dy) {
-          err += dy;
-          currentX += sx;
-        }
-        if (e2 <= dx) {
-          err += dx;
-          currentY += sy;
-        }
-      }
-    }
+    drawLineInt(xInt, yInt, x2Int, y2Int, color);
   }
 
   /**
@@ -214,16 +175,6 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   }
 
   @Override
-  public void drawEllipse(float x, float y, float width, float height, Color color) {
-    throw new RuntimeException("Not yet implemented");
-  }
-
-  @Override
-  public void fillEllipse(float centerX, float centerY, float width, float height, Color color) {
-    throw new RuntimeException("Not yet implemented");
-  }
-
-  @Override
   public void drawImage(float x, float y, SolaImage solaImage) {
     int[] imagePixels = solaImage.getPixels();
     int xInt = (int) (x + 0.5f);
@@ -299,5 +250,106 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     setPixel(centerX - y, centerY + x, color);
     setPixel(centerX + y, centerY - x, color);
     setPixel(centerX - y, centerY - x, color);
+  }
+
+  private void drawLineInt(int x1, int y1, int x2, int y2, Color color) {
+    int dx = x2 - x1;
+    int dy = y2 - y1;
+
+    // Vertical
+    if (dx == 0) {
+      int start = y1;
+      int end = y2;
+
+      if (y2 < y1) {
+        start = y2;
+        end = y1;
+      }
+
+      for (int i = start; i < end; i++) {
+        setPixel(x1, i, color);
+      }
+
+      return;
+    }
+
+    // Horizontal
+    if (dy == 0) {
+      int start = x1;
+      int end = x2;
+
+      if (x2 < x1) {
+        start = x2;
+        end = x1;
+      }
+
+      for (int i = start; i < end; i++) {
+        setPixel(i, y1, color);
+      }
+
+      return;
+    }
+
+
+    // "Line is Funk-aye" algorithm credit to OneLoneCoder
+    // https://github.com/OneLoneCoder/olcPixelGameEngine/blob/master/olcPixelGameEngine.h
+    int x;
+    int y;
+    int xe;
+    int ye;
+    int dxAbs = Math.abs(dx);
+    int dyAbs = Math.abs(dy);
+    int px = 2 * dyAbs - dxAbs;
+    int py = 2 * dxAbs - dyAbs;
+
+    if (dyAbs <= dxAbs) {
+      if (dx >= 0) {
+        x = x1;
+        y = y1;
+        xe = x2;
+      } else {
+        x = x2;
+        y = y2;
+        xe = x1;
+      }
+
+      setPixel(x, y, color);
+
+      while (x < xe) {
+        x = x + 1;
+        if (px < 0)
+          px = px + 2 * dyAbs;
+        else {
+          if ((dx < 0 && dy < 0) || (dx > 0 && dy > 0)) y = y + 1;
+          else y = y - 1;
+          px = px + 2 * (dyAbs - dxAbs);
+        }
+        setPixel(x, y, color);
+      }
+    } else {
+      if (dy >= 0) {
+        x = x1;
+        y = y1;
+        ye = y2;
+      } else {
+        x = x2;
+        y = y2;
+        ye = y1;
+      }
+
+      setPixel(x, y, color);
+
+      while (y < ye) {
+        y = y + 1;
+        if (py <= 0)
+          py = py + 2 * dxAbs;
+        else {
+          if ((dx < 0 && dy < 0) || (dx > 0 && dy > 0)) x = x + 1;
+          else x = x - 1;
+          py = py + 2 * (dxAbs - dyAbs);
+        }
+        setPixel(x, y, color);
+      }
+    }
   }
 }

@@ -18,7 +18,7 @@ public class SolaPhysics {
   private final ImpulseCollisionResolutionSystem impulseCollisionResolutionSystem;
 
   public SolaPhysics(EventHub eventHub) {
-    gravitySystem = new GravitySystem(98f);
+    gravitySystem = new GravitySystem();
     physicsSystem = new PhysicsSystem();
     collisionDetectionSystem = new CollisionDetectionSystem();
     impulseCollisionResolutionSystem = new ImpulseCollisionResolutionSystem();
@@ -29,14 +29,14 @@ public class SolaPhysics {
     collisionDetectionSystem.setEmitCollisionEvent(eventHub::emit);
   }
 
-  public void applyTo(EcsSystemContainer ecsSystemContainer) {
+  public void addEcsSystems(EcsSystemContainer ecsSystemContainer) {
     ecsSystemContainer.add(gravitySystem);
     ecsSystemContainer.add(physicsSystem);
     ecsSystemContainer.add(collisionDetectionSystem);
     ecsSystemContainer.add(impulseCollisionResolutionSystem);
   }
 
-  public void debugRender(Renderer renderer, World world, Color colliderOutlineColor, Color spatialHashMapCellColor) {
+  public void renderDebug(Renderer renderer, World world, Color colliderOutlineColor, Color spatialHashMapCellColor) {
     collisionDetectionSystem.debugRender(renderer, world, colliderOutlineColor, spatialHashMapCellColor);
   }
 

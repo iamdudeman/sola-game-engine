@@ -13,7 +13,7 @@ public class AssetPoolProvider {
   }
 
   @SuppressWarnings("unchecked")
-  public <T> AssetPool<T> getAssetPool(Class<T> assetClass) {
+  public <T extends Asset> AssetPool<T> getAssetPool(Class<T> assetClass) {
     AssetPool<?> assetPool = assetPoolMap.get(assetClass);
 
     if (assetPool == null) {

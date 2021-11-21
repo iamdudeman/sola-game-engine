@@ -3,22 +3,29 @@ package technology.sola.engine.examples.common.singlefile;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.AbstractEcsSystem;
+import technology.sola.engine.ecs.Component;
 import technology.sola.engine.ecs.World;
-import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Layer;
-import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.graphics.SolaGraphics;
+import technology.sola.engine.graphics.components.CircleRendererComponent;
+import technology.sola.engine.graphics.components.LayerComponent;
+import technology.sola.engine.graphics.components.RectangleRendererComponent;
+import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.graphics.screen.AspectMode;
+import technology.sola.engine.graphics.sprite.SpriteSheet;
 import technology.sola.engine.input.Key;
-import technology.sola.engine.physics.component.PositionComponent;
+import technology.sola.math.linear.Vector2D;
+
+import java.util.List;
 
 public class RenderingExample extends AbstractSola {
-  private SolaImage solaImage;
-  private float rotation = 0.1f;
+  private SolaGraphics solaGraphics;
+  private TransformComponent dynamicScalingEntityTransformComponent;
 
   @Override
   protected SolaConfiguration buildConfiguration() {
@@ -27,26 +34,19 @@ public class RenderingExample extends AbstractSola {
 
   @Override
   protected void onInit() {
-    AssetPool<SolaImage> solaImageAssetPool = assetPoolProvider.getAssetPool(SolaImage.class);
     AssetPool<Font> fontAssetPool = assetPoolProvider.getAssetPool(Font.class);
+
+    AssetPool<SpriteSheet> spriteSheetAssetPool = assetPoolProvider.getAssetPool(SpriteSheet.class);
+    spriteSheetAssetPool.addAssetId("test", "assets/test_tiles_spritesheet.json");
 
     Font font = fontAssetPool.addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
     platform.getRenderer().setFont(font);
-    solaImage = solaImageAssetPool.addAndGetAsset("test_tiles", "assets/test_tiles.png");
 
-    World world = new World(5);
-
-    world.createEntity()
-      .addComponent(new PositionComponent());
-    world.createEntity().addComponent(new PositionComponent(50, 20));
-    world.createEntity().addComponent(new PositionComponent(100, 20));
-    world.createEntity().addComponent(new PositionComponent(150, 20));
-    world.createEntity().addComponent(new PositionComponent(200, 20));
-
-    ecsSystemContainer.setWorld(world);
+    ecsSystemContainer.setWorld(createWorld());
     ecsSystemContainer.add(new TestSystem());
 
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
+    solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer(), spriteSheetAssetPool);
   }
 
   @Override
@@ -54,45 +54,18 @@ public class RenderingExample extends AbstractSola {
     renderer.clear();
 
     renderer.drawToLayer("ui", r -> {
-      renderer.setRenderMode(RenderMode.ALPHA);
-      renderer.fillRect(0, 10, 600, 100, new Color(120, 255, 255, 255));
-      renderer.setRenderMode(RenderMode.NORMAL);
+      renderer.drawWithRenderModeAlpha(r2 ->
+        renderer.fillRect(0, 10, 600, 100, new Color(120, 255, 255, 255))
+      );
 
-      final String characters1 = "!\"#$%&'()*+,-./0123456789:; <=>?@ABCDEFGHIJKLMN";
-      final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+      renderer.drawWithRenderModeMask(r2 -> {
+        final String characters1 = "!\"#$%&'()*+,-./0123456789:; <=>?@ABCDEFGHIJKLMN";
+        final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
-      renderer.setRenderMode(RenderMode.MASK);
-      renderer.drawString(characters1, 5, 5, Color.RED);
-      renderer.drawString(characters2, 5, 35, Color.BLACK);
-      renderer.drawString("Hello World!", 5, 65, Color.BLUE);
-      renderer.setRenderMode(RenderMode.NORMAL);
-    });
-
-    renderer.drawToLayer("moving_stuff", r -> {
-      renderer.drawImage(400, 400, solaImage);
-      AffineTransform affineTransform = new AffineTransform()
-        .translate(400, 400)
-        .translate(-100, -100)
-        .rotate(rotation)
-        .scale(1.5f, 2f)
-        ;
-      renderer.setRenderMode(RenderMode.MASK);
-      renderer.drawImage(solaImage, affineTransform);
-      renderer.setRenderMode(RenderMode.NORMAL);
-    });
-
-    renderer.drawToLayer("moving_stuff", Layer.DEFAULT_PRIORITY - 10, r -> {
-      ecsSystemContainer.getWorld().getEntitiesWithComponents(PositionComponent.class)
-        .forEach(entity -> {
-          PositionComponent position = entity.getComponent(PositionComponent.class);
-
-          renderer.fillRect(position.getX(), position.getY(), 50, 50, Color.RED);
-        });
-    });
-
-    renderer.drawToLayer("blocks", r -> {
-      renderer.fillRect(200, 300, 50, 50, Color.BLUE);
-      renderer.fillRect(200, 350, 100, 50, Color.BLUE);
+        renderer.drawString(characters1, 5, 5, Color.RED);
+        renderer.drawString(characters2, 5, 35, Color.BLACK);
+        renderer.drawString("Hello World!", 5, 65, Color.BLUE);
+      });
     });
 
     renderer.drawToLayer("background", r -> {
@@ -103,35 +76,27 @@ public class RenderingExample extends AbstractSola {
 
       renderer.drawLine(20, 50, 20, 100, Color.WHITE);
       renderer.drawLine(50, 20, 100, 20, Color.WHITE);
-
-      renderer.fillRect(100, 100, 60, 80, Color.GREEN);
-      renderer.drawRect(100, 100, 60, 80, Color.RED);
-
-      renderer.drawRect(300, 150, 5, 5, Color.GREEN);
-      renderer.fillCircle(300, 150, 100.5f, Color.BLUE);
-      renderer.drawCircle(300, 150, 100.5f, Color.RED);
-
-      renderer.drawImage(400, 530, solaImage.getSubImage(1, 1, 16, 16));
-
-      renderer.fillRect(180, 530, 50, 50, new Color(255, 0, 0, 255));
-      renderer.setRenderMode(RenderMode.ALPHA);
-      renderer.fillRect(210, 530, 50, 50, new Color(150, 255, 0, 0));
-      renderer.setRenderMode(RenderMode.NORMAL);
+      renderer.drawLine(0, 220, 100, 400, Color.WHITE);
 
       renderer.drawLine(0, 0, 800, 600, Color.BLUE);
       renderer.drawLine(750, 0, 20, 500, Color.BLUE);
     });
+
+    solaGraphics.render();
+  }
+
+  private static class MovingComponent implements Component {
   }
 
   private class TestSystem extends AbstractEcsSystem {
     @Override
     public void update(World world, float deltaTime) {
-      world.getEntitiesWithComponents(PositionComponent.class)
+      world.getEntitiesWithComponents(TransformComponent.class, MovingComponent.class)
         .forEach(entity -> {
-          PositionComponent position = entity.getComponent(PositionComponent.class);
+          TransformComponent transform = entity.getComponent(TransformComponent.class);
 
-          position.setX(position.getX() + 1);
-          position.setY(position.getY() + 1);
+          transform.setX(transform.getX() + 1);
+          transform.setY(transform.getY() + 1);
         });
 
       if (keyboardInput.isKeyPressed(Key.ONE)) {
@@ -142,13 +107,37 @@ public class RenderingExample extends AbstractSola {
         platform.getViewport().setAspectMode(AspectMode.STRETCH);
       }
 
-      if (keyboardInput.isKeyHeld(Key.SPACE)) {
-        rotation = rotation + 0.1f;
+      final float scalingSpeed = 1f;
+      final float minSize = 0.1f;
+      final float maxSize = 50;
+
+      if (keyboardInput.isKeyHeld(Key.A)) {
+        float dynamicScale = dynamicScalingEntityTransformComponent.getScaleX() - scalingSpeed;
+        if (dynamicScale < minSize) dynamicScale = minSize;
+        dynamicScalingEntityTransformComponent.setScaleX(dynamicScale);
+      }
+      if (keyboardInput.isKeyHeld(Key.D)) {
+        float dynamicScale = dynamicScalingEntityTransformComponent.getScaleX() + scalingSpeed;
+        if (dynamicScale > maxSize) dynamicScale = maxSize;
+        dynamicScalingEntityTransformComponent.setScaleX(dynamicScale);
+      }
+      if (keyboardInput.isKeyHeld(Key.W)) {
+        float dynamicScale = dynamicScalingEntityTransformComponent.getScaleY() - scalingSpeed;
+        if (dynamicScale < minSize) dynamicScale = minSize;
+        dynamicScalingEntityTransformComponent.setScaleY(dynamicScale);
+      }
+      if (keyboardInput.isKeyHeld(Key.S)) {
+        float dynamicScale = dynamicScalingEntityTransformComponent.getScaleY() + scalingSpeed;
+        if (dynamicScale > maxSize) dynamicScale = maxSize;
+        dynamicScalingEntityTransformComponent.setScaleY(dynamicScale);
       }
 
-      if (keyboardInput.isKeyPressed(Key.A)) {
+      if (keyboardInput.isKeyPressed(Key.H)) {
         Layer blockLayer = platform.getRenderer().getLayer("blocks");
         blockLayer.setEnabled(!blockLayer.isEnabled());
+
+        Layer backgroundLayer = platform.getRenderer().getLayer("background");
+        backgroundLayer.setEnabled(!backgroundLayer.isEnabled());
       }
     }
 
@@ -156,5 +145,85 @@ public class RenderingExample extends AbstractSola {
     public int getOrder() {
       return 0;
     }
+  }
+
+  private World createWorld() {
+    World world = new World(100);
+
+    List.of(
+      new Vector2D(0, 0),
+      new Vector2D(50, 20),
+      new Vector2D(100, 20),
+      new Vector2D(150, 20),
+      new Vector2D(200, 20)
+    ).forEach(vector2D -> world.createEntity()
+      .addComponent(new MovingComponent())
+      .addComponent(new LayerComponent("moving_stuff"))
+      .addComponent(new TransformComponent(vector2D.x, vector2D.y, 50, 50))
+      .addComponent(new RectangleRendererComponent(Color.RED))
+    );
+
+    world.createEntity()
+      .addComponent(new LayerComponent("blocks"))
+      .addComponent(new TransformComponent(200, 300, 50, 50))
+      .addComponent(new RectangleRendererComponent(Color.BLUE));
+    world.createEntity()
+      .addComponent(new LayerComponent("blocks"))
+      .addComponent(new TransformComponent(200, 350, 100, 50))
+      .addComponent(new RectangleRendererComponent(Color.BLUE));
+
+    world.createEntity()
+      .addComponent(new LayerComponent("moving_stuff"))
+      .addComponent(new TransformComponent(400, 530, 1, 1))
+      .addComponent(new SpriteComponent("test", "blue"));
+    dynamicScalingEntityTransformComponent = new TransformComponent(5, 5, 1, 2);
+    world.createEntity()
+      .addComponent(new LayerComponent("moving_stuff"))
+      .addComponent(dynamicScalingEntityTransformComponent)
+      .addComponent(new SpriteComponent("test", "blue"));
+
+
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(100, 100, 60, 80))
+      .addComponent(new RectangleRendererComponent(Color.GREEN));
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(100, 100, 60, 80))
+      .addComponent(new RectangleRendererComponent(Color.RED, false));
+
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(300, 150, 5f, 5f))
+      .addComponent(new RectangleRendererComponent(Color.GREEN, false));
+
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(180, 430, 50, 50))
+      .addComponent(new CircleRendererComponent(Color.BLUE));
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(210, 430, 50, 50))
+      .addComponent(new CircleRendererComponent(new Color(150, 255, 0, 0)));
+
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(180, 530, 50, 50))
+      .addComponent(new RectangleRendererComponent(Color.BLUE));
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(210, 530, 50, 50))
+      .addComponent(new RectangleRendererComponent(new Color(150, 255, 0, 0)));
+
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(300, 150, 105f, 105f))
+      .addComponent(new CircleRendererComponent(Color.BLUE));
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(300, 150, 105f, 105f))
+      .addComponent(new CircleRendererComponent(Color.RED, false));
+
+    return world;
   }
 }

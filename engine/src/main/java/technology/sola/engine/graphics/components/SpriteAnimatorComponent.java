@@ -1,4 +1,4 @@
-package technology.sola.engine.graphics.sprite;
+package technology.sola.engine.graphics.components;
 
 import technology.sola.engine.ecs.Component;
 

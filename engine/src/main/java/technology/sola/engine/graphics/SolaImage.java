@@ -1,6 +1,8 @@
 package technology.sola.engine.graphics;
 
-public class SolaImage extends Canvas {
+import technology.sola.engine.assets.Asset;
+
+public class SolaImage extends Canvas implements Asset {
   public SolaImage(int width, int height) {
     super(width, height);
   }

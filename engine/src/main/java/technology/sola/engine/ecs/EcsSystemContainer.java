@@ -15,6 +15,12 @@ public class EcsSystemContainer {
     this.world = world;
   }
 
+  public void add(AbstractEcsSystem ...ecsSystems) {
+    for (AbstractEcsSystem ecsSystem : ecsSystems) {
+      add(ecsSystem);
+    }
+  }
+
   public void add(AbstractEcsSystem ecsSystem) {
     int insertIndex = 0;
 

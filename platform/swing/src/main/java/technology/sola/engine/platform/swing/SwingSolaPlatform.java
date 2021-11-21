@@ -28,6 +28,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.util.function.Consumer;
 
+// TODO fix insets issue
+
 public class SwingSolaPlatform extends AbstractSolaPlatform {
   private final boolean useSoftwareRendering;
   private Canvas canvas;
