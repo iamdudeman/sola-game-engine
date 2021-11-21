@@ -1,6 +1,7 @@
 package technology.sola.engine.core.component;
 
 import technology.sola.engine.ecs.Component;
+import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
 public class TransformComponent implements Component {
@@ -26,6 +27,26 @@ public class TransformComponent implements Component {
     this.y = y;
     this.scaleX = scaleX;
     this.scaleY = scaleY;
+  }
+
+  // TODO this isn't a very good method name nor good to have on TransformComponent
+  // TODO test and cleanup more
+  public TransformComponent apply(TransformComponent transformComponent) {
+    var cameraScaleTransform = Matrix3D.scale(transformComponent.scaleX, transformComponent.scaleY);
+    Vector2D scale = cameraScaleTransform.forward(scaleX, scaleY);
+    var thisTranslation = cameraScaleTransform.forward(x, y);
+    var otherTranslation = cameraScaleTransform.forward(transformComponent.x, transformComponent.y);
+
+    var test = Matrix3D.translate(transformComponent.x, transformComponent.y)
+      .multiply(cameraScaleTransform);
+
+    thisTranslation = test.forward(x, y);
+
+    return new TransformComponent(
+      thisTranslation.x, thisTranslation.y,
+//      thisTranslation.x - otherTranslation.x, thisTranslation.y - otherTranslation.y,
+      scale.x, scale.y
+    );
   }
 
   /**

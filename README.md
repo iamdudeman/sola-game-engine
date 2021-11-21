@@ -1,6 +1,4 @@
 # Branch WIP
-
-# TODO List
 * Consider CameraSystem that nests these other Renderer systems maybe to handle ability to have multiple cameras???
 * Camera
   * Figure out how to implement
@@ -10,6 +8,8 @@
     * Camera output to section of a screen (allows split screen then)?
   * Screen units vs world units?
 * Once Camera is figured out need a way to translate screen coordinates to world coordinates easily
+
+# TODO List
 * GUI
   * Elements
     * Text

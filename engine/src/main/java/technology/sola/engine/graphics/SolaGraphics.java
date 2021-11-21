@@ -4,6 +4,7 @@ import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.EcsSystemContainer;
 import technology.sola.engine.ecs.Entity;
+import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
@@ -12,6 +13,7 @@ import technology.sola.engine.graphics.sprite.SpriteAnimatorSystem;
 import technology.sola.engine.graphics.sprite.SpriteSheet;
 
 public class SolaGraphics {
+  private static final TransformComponent DEFAULT_CAMERA_TRANSFORM = new TransformComponent();
   private final EcsSystemContainer ecsSystemContainer;
   private final Renderer renderer;
   private final AssetPool<SpriteSheet> spriteSheetAssetPool;
@@ -27,15 +29,21 @@ public class SolaGraphics {
   }
 
   public void render() {
+    var cameraEntities = ecsSystemContainer.getWorld().getEntitiesWithComponents(TransformComponent.class, CameraComponent.class);
+
+    TransformComponent cameraTransform = cameraEntities.isEmpty()
+      ? DEFAULT_CAMERA_TRANSFORM
+      : cameraEntities.get(0).getComponent(TransformComponent.class);
+
     // Draw rectangles
     ecsSystemContainer.getWorld().getEntitiesWithComponents(TransformComponent.class, RectangleRendererComponent.class)
       .forEach(entity -> {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
 
         if (layerComponent == null) {
-          renderRectangle(entity);
+          renderRectangle(entity, cameraTransform);
         } else {
-          renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r -> renderRectangle(entity));
+          renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r -> renderRectangle(entity, cameraTransform));
         }
       });
 
@@ -45,9 +53,9 @@ public class SolaGraphics {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
 
         if (layerComponent == null) {
-          renderCircle(entity);
+          renderCircle(entity, cameraTransform);
         } else {
-          renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r -> renderCircle(entity));
+          renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r -> renderCircle(entity, cameraTransform));
         }
       });
 
@@ -57,15 +65,15 @@ public class SolaGraphics {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
 
         if (layerComponent == null) {
-          renderSprite(entity);
+          renderSprite(entity, cameraTransform);
         } else {
-          renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r -> renderSprite(entity));
+          renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r -> renderSprite(entity, cameraTransform));
         }
       });
   }
 
-  private void renderRectangle(Entity entity) {
-    var transform = entity.getComponent(TransformComponent.class);
+  private void renderRectangle(Entity entity, TransformComponent cameraTransform) {
+    var transform = entity.getComponent(TransformComponent.class).apply(cameraTransform);
     var rectangleRenderer = entity.getComponent(RectangleRendererComponent.class);
 
     if (rectangleRenderer.getColor().hasAlpha()) {
@@ -81,8 +89,8 @@ public class SolaGraphics {
     renderer.setRenderMode(RenderMode.NORMAL);
   }
 
-  private void renderCircle(Entity entity) {
-    var transform = entity.getComponent(TransformComponent.class);
+  private void renderCircle(Entity entity, TransformComponent cameraTransform) {
+    var transform = entity.getComponent(TransformComponent.class).apply(cameraTransform);
     var rectangleRenderer = entity.getComponent(CircleRendererComponent.class);
     float radius = Math.max(transform.getScaleX(), transform.getScaleY()) * 0.5f;
 
@@ -99,8 +107,8 @@ public class SolaGraphics {
     renderer.setRenderMode(RenderMode.NORMAL);
   }
 
-  private void renderSprite(Entity entity) {
-    TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
+  private void renderSprite(Entity entity, TransformComponent cameraTransform) {
+    TransformComponent transformComponent = entity.getComponent(TransformComponent.class).apply(cameraTransform);
     SpriteComponent spriteComponent = entity.getComponent(SpriteComponent.class);
 
     SolaImage sprite = spriteComponent.getSprite(spriteSheetAssetPool);

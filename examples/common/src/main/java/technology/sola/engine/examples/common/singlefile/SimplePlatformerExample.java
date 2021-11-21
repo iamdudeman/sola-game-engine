@@ -9,6 +9,7 @@ import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaGraphics;
+import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.Material;
@@ -49,6 +50,17 @@ public class SimplePlatformerExample extends AbstractSola {
 
   private World buildWorld() {
     World world = new World(10);
+
+    world.createEntity()
+        .addComponent(new TransformComponent(0, 0, 10, 10))
+        .addComponent(new RectangleRendererComponent(Color.GREEN));
+
+    world.createEntity()
+      .addComponent(new CameraComponent())
+      .addComponent(new TransformComponent(100, 0))
+//      .addComponent(new TransformComponent(0, 0, 0.5f, 0.5f))
+//      .addComponent(new TransformComponent(100, 0, 0.5f, .25f))
+    ;
 
     world.createEntity()
       .addComponent(new PlayerComponent())
