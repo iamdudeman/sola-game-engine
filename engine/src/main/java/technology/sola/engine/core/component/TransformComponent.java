@@ -14,7 +14,11 @@ public class TransformComponent implements Component {
   }
 
   public TransformComponent(float x, float y) {
-    this(x, y, 1, 1);
+    this(x, y, 1);
+  }
+
+  public TransformComponent(float x, float y, float scale) {
+    this(x, y, scale, scale);
   }
 
   public TransformComponent(float x, float y, float scaleX, float scaleY) {

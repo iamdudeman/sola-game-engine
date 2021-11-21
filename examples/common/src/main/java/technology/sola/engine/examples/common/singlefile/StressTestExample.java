@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class StressTestExample extends AbstractSola {
   private static final float CAMERA_SCALE = 1f;
-  private static final float CIRCLE_RADIUS = 5f;
+  private static final float CIRCLE_RADIUS = 10f;
   private final Random random = new Random();
   private final int objectCount;
   private SolaPhysics solaPhysics;
@@ -54,7 +54,7 @@ public class StressTestExample extends AbstractSola {
     Material circleMaterial = new Material(1, 0.8f);
     float zoomedWidth = configuration.getCanvasWidth() / CAMERA_SCALE;
     float zoomedHeight = configuration.getCanvasHeight() / CAMERA_SCALE;
-    float squareSide = CIRCLE_RADIUS * 2;
+    float squareSide = CIRCLE_RADIUS;
     int bottomPlatformEntityCount = Math.round(zoomedWidth / squareSide) + 1;
     int sidePlatformEntityCount = Math.round(zoomedHeight / squareSide) * 2 + 2;
 
@@ -62,20 +62,20 @@ public class StressTestExample extends AbstractSola {
 
     for (int i = 0; i < zoomedHeight; i += squareSide) {
       world.createEntity()
-        .addComponent(new TransformComponent(0, i))
-        .addComponent(ColliderComponent.rectangle(squareSide, squareSide));
+        .addComponent(new TransformComponent(0, i, squareSide, squareSide))
+        .addComponent(ColliderComponent.aabb());
     }
 
     for (int i = 0; i < zoomedHeight; i += squareSide) {
       world.createEntity()
-        .addComponent(new TransformComponent(zoomedWidth - squareSide, i))
-        .addComponent(ColliderComponent.rectangle(squareSide, squareSide));
+        .addComponent(new TransformComponent(zoomedWidth - squareSide, i, squareSide, squareSide))
+        .addComponent(ColliderComponent.aabb());
     }
 
     for (int i = 0; i < zoomedWidth; i += squareSide) {
       world.createEntity()
-        .addComponent(new TransformComponent(i, zoomedHeight - squareSide))
-        .addComponent(ColliderComponent.rectangle(squareSide, squareSide));
+        .addComponent(new TransformComponent(i, zoomedHeight - squareSide, squareSide, squareSide))
+        .addComponent(ColliderComponent.aabb());
     }
 
     for (int i = 0; i < objectCount; i++) {
@@ -84,10 +84,10 @@ public class StressTestExample extends AbstractSola {
       boolean isKinematic = random.nextFloat() > 0.9f;
 
       world.createEntity()
-        .addComponent(new TransformComponent(x, y, 10, 10))
+        .addComponent(new TransformComponent(x, y, CIRCLE_RADIUS))
         .addComponent(new DynamicBodyComponent(circleMaterial, isKinematic))
         .addComponent(new CircleRendererComponent(isKinematic ? Color.WHITE : Color.BLUE, true))
-        .addComponent(ColliderComponent.circle(CIRCLE_RADIUS));
+        .addComponent(ColliderComponent.circle());
     }
 
     return world;

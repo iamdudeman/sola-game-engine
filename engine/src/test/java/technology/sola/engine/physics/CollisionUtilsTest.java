@@ -17,7 +17,7 @@ class CollisionUtilsTest {
 
   @Nested
   class calculateAABBVsAABB {
-    private final ColliderComponent aabbColliderComponent = ColliderComponent.rectangle(5, 5);
+    private final ColliderComponent aabbColliderComponent = ColliderComponent.aabb(5, 5);
 
     @Test
     void whenNotOverlappingX_shouldReturnNull() {
@@ -99,7 +99,7 @@ class CollisionUtilsTest {
       TransformComponent transformB = new TransformComponent(1, -4);
 
       CollisionManifold collisionManifold =
-        CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, transformA, transformB, aabbColliderComponent, ColliderComponent.rectangle(10, 10));
+        CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, transformA, transformB, aabbColliderComponent, ColliderComponent.aabb(10, 10));
 
       assertNotNull(collisionManifold);
       assertEquals(new Vector2D(1, 0), collisionManifold.getNormal());
@@ -113,7 +113,7 @@ class CollisionUtilsTest {
     void whenCircleCenterOutsideRectangle_shouldHaveCorrectNormal() {
       TransformComponent positionA = new TransformComponent(0, 0);
       TransformComponent positionB = new TransformComponent(-4, -4);
-      ColliderComponent colliderA = ColliderComponent.rectangle(5, 3);
+      ColliderComponent colliderA = ColliderComponent.aabb(5, 3);
       ColliderComponent colliderB = ColliderComponent.circle(3);
 
       CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, positionA, positionB, colliderA, colliderB);
@@ -126,7 +126,7 @@ class CollisionUtilsTest {
     void whenCircleCenterInsideRectangle_shouldHaveCorrectNormal() {
       TransformComponent positionA = new TransformComponent(0, 0);
       TransformComponent positionB = new TransformComponent(-2, -1);
-      ColliderComponent colliderA = ColliderComponent.rectangle(5, 3);
+      ColliderComponent colliderA = ColliderComponent.aabb(5, 3);
       ColliderComponent colliderB = ColliderComponent.circle(3);
 
       CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, positionA, positionB, colliderA, colliderB);

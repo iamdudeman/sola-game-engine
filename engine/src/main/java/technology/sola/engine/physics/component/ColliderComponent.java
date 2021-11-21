@@ -17,6 +17,10 @@ public class ColliderComponent implements Component {
   private Float width = null;
   private Float height = null;
 
+  public static ColliderComponent aabb() {
+    return aabb(1, 1);
+  }
+
   /**
    * Creates a rectangle {@link ColliderComponent} with defined width and height.
    *
@@ -24,7 +28,7 @@ public class ColliderComponent implements Component {
    * @param height  the height of the collision box
    * @return a rectangle {@code ColliderComponent}
    */
-  public static ColliderComponent rectangle(float width, float height) {
+  public static ColliderComponent aabb(float width, float height) {
     ColliderComponent colliderComponent = new ColliderComponent();
 
     colliderComponent.colliderType = ColliderType.AABB;
@@ -32,6 +36,10 @@ public class ColliderComponent implements Component {
     colliderComponent.height = height;
 
     return colliderComponent;
+  }
+
+  public static ColliderComponent circle() {
+    return circle(0.5f);
   }
 
   /**
@@ -86,7 +94,10 @@ public class ColliderComponent implements Component {
       throw new ColliderComponentException(colliderType, ColliderType.CIRCLE);
     }
 
-    return new Circle(radius, transformComponent.getTranslate().add(new Vector2D(radius, radius)));
+    float transformScale = Math.max(transformComponent.getScaleX(), transformComponent.getScaleY());
+    float radiusWithTransform = radius * transformScale;
+
+    return new Circle(radiusWithTransform, transformComponent.getTranslate().add(new Vector2D(radiusWithTransform, radiusWithTransform)));
   }
 
   /**
@@ -96,7 +107,10 @@ public class ColliderComponent implements Component {
    * @return the {@code Rectangle} representation of  this collider
    */
   public Rectangle asRectangle(TransformComponent transformComponent) {
-    return new Rectangle(transformComponent.getTranslate(), transformComponent.getTranslate().add(new Vector2D(width, height)));
+    return new Rectangle(
+      transformComponent.getTranslate(),
+      transformComponent.getTranslate().add(new Vector2D(transformComponent.getScaleX() * width, transformComponent.getScaleY() * height))
+    );
   }
 
   /**

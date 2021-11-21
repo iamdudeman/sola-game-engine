@@ -54,25 +54,25 @@ public class SimplePlatformerExample extends AbstractSola {
       .addComponent(new PlayerComponent())
       .addComponent(new TransformComponent(200, 250, 50, 50))
       .addComponent(new RectangleRendererComponent(Color.BLUE))
-      .addComponent(ColliderComponent.rectangle(50, 50))
+      .addComponent(ColliderComponent.aabb())
       .addComponent(new DynamicBodyComponent(new Material(1)));
 
     world.createEntity()
       .addComponent(new TransformComponent(150, 400, 200, 75f))
       .addComponent(new RectangleRendererComponent(Color.WHITE))
-      .addComponent(ColliderComponent.rectangle(200, 75));
+      .addComponent(ColliderComponent.aabb());
 
     world.createEntity()
       .addComponent(new TransformComponent(400, 430, 100, 35f))
       .addComponent(new MovingPlatformComponent())
       .addComponent(new DynamicBodyComponent(true))
       .addComponent(new RectangleRendererComponent(Color.WHITE))
-      .addComponent(ColliderComponent.rectangle(100, 35));
+      .addComponent(ColliderComponent.aabb());
 
     world.createEntity()
       .addComponent(new TransformComponent(550, 200, 200, 75f))
       .addComponent(new RectangleRendererComponent(Color.WHITE))
-      .addComponent(ColliderComponent.rectangle(200, 75));
+      .addComponent(ColliderComponent.aabb());
 
     return world;
   }
