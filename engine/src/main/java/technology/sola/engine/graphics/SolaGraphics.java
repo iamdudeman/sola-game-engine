@@ -11,6 +11,8 @@ import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.sprite.SpriteAnimatorSystem;
 import technology.sola.engine.graphics.sprite.SpriteSheet;
+import technology.sola.math.linear.Matrix3D;
+import technology.sola.math.linear.Vector2D;
 
 public class SolaGraphics {
   private static final TransformComponent DEFAULT_CAMERA_TRANSFORM = new TransformComponent();
@@ -73,7 +75,7 @@ public class SolaGraphics {
   }
 
   private void renderRectangle(Entity entity, TransformComponent cameraTransform) {
-    var transform = entity.getComponent(TransformComponent.class).apply(cameraTransform);
+    var transform = getTransformForAppliedCamera(entity.getComponent(TransformComponent.class), cameraTransform);
     var rectangleRenderer = entity.getComponent(RectangleRendererComponent.class);
 
     if (rectangleRenderer.getColor().hasAlpha()) {
@@ -90,7 +92,7 @@ public class SolaGraphics {
   }
 
   private void renderCircle(Entity entity, TransformComponent cameraTransform) {
-    var transform = entity.getComponent(TransformComponent.class).apply(cameraTransform);
+    var transform = getTransformForAppliedCamera(entity.getComponent(TransformComponent.class), cameraTransform);
     var rectangleRenderer = entity.getComponent(CircleRendererComponent.class);
     float radius = Math.max(transform.getScaleX(), transform.getScaleY()) * 0.5f;
 
@@ -108,7 +110,7 @@ public class SolaGraphics {
   }
 
   private void renderSprite(Entity entity, TransformComponent cameraTransform) {
-    TransformComponent transformComponent = entity.getComponent(TransformComponent.class).apply(cameraTransform);
+    TransformComponent transformComponent = getTransformForAppliedCamera(entity.getComponent(TransformComponent.class), cameraTransform);
     SpriteComponent spriteComponent = entity.getComponent(SpriteComponent.class);
 
     SolaImage sprite = spriteComponent.getSprite(spriteSheetAssetPool);
@@ -122,5 +124,19 @@ public class SolaGraphics {
     } else {
       renderer.drawImage(transformComponent.getX(), transformComponent.getY(), sprite);
     }
+  }
+
+  // TODO this needs to be applied to CollisionSystem debug render as well
+  private TransformComponent getTransformForAppliedCamera(TransformComponent entityTransform, TransformComponent cameraTransform) {
+    Matrix3D cameraScaleTransform = Matrix3D.scale(cameraTransform.getScaleX(), cameraTransform.getScaleY());
+    Vector2D entityScale = cameraScaleTransform.forward(entityTransform.getScaleX(), entityTransform.getScaleY());
+
+    Matrix3D cameraTranslationTransform = Matrix3D.translate(cameraTransform.getX(), cameraTransform.getY())
+      .multiply(cameraScaleTransform);
+    Vector2D entityTranslation = cameraTranslationTransform.forward(entityTransform.getX(), entityTransform.getY());
+
+    return new TransformComponent(
+      entityTranslation.x, entityTranslation.y, entityScale.x, entityScale.y
+    );
   }
 }

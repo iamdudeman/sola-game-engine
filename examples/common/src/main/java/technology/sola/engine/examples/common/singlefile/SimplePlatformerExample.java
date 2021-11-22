@@ -57,9 +57,9 @@ public class SimplePlatformerExample extends AbstractSola {
 
     world.createEntity()
       .addComponent(new CameraComponent())
-      .addComponent(new TransformComponent(100, 0))
+//      .addComponent(new TransformComponent(100, 0))
 //      .addComponent(new TransformComponent(0, 0, 0.5f, 0.5f))
-//      .addComponent(new TransformComponent(100, 0, 0.5f, .25f))
+      .addComponent(new TransformComponent(100, 0, 0.5f, .25f))
     ;
 
     world.createEntity()
