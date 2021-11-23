@@ -107,6 +107,10 @@ public class ColliderComponent implements Component {
    * @return the {@code Rectangle} representation of  this collider
    */
   public Rectangle asRectangle(TransformComponent transformComponent) {
+    if (!ColliderType.AABB.equals(colliderType)) {
+      throw new ColliderComponentException(colliderType, ColliderType.AABB);
+    }
+
     return new Rectangle(
       transformComponent.getTranslate(),
       transformComponent.getTranslate().add(new Vector2D(transformComponent.getScaleX() * width, transformComponent.getScaleY() * height))

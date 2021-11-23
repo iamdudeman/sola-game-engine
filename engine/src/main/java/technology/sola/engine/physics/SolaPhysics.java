@@ -1,10 +1,8 @@
 package technology.sola.engine.physics;
 
+import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.EcsSystemContainer;
-import technology.sola.engine.ecs.World;
 import technology.sola.engine.event.EventHub;
-import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.physics.event.CollisionManifoldEvent;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
 import technology.sola.engine.physics.system.GravitySystem;
@@ -17,27 +15,19 @@ public class SolaPhysics {
   private final CollisionDetectionSystem collisionDetectionSystem;
   private final ImpulseCollisionResolutionSystem impulseCollisionResolutionSystem;
 
-  public SolaPhysics(EventHub eventHub) {
-    gravitySystem = new GravitySystem();
-    physicsSystem = new PhysicsSystem();
-    collisionDetectionSystem = new CollisionDetectionSystem();
-    impulseCollisionResolutionSystem = new ImpulseCollisionResolutionSystem();
+  public static SolaPhysics use(EventHub eventHub, EcsSystemContainer ecsSystemContainer) {
+    SolaPhysics solaPhysics = new SolaPhysics();
 
-    eventHub.add(gravitySystem, CollisionManifoldEvent.class);
-    eventHub.add(impulseCollisionResolutionSystem, CollisionManifoldEvent.class);
+    eventHub.add(solaPhysics.gravitySystem, CollisionManifoldEvent.class);
+    eventHub.add(solaPhysics.impulseCollisionResolutionSystem, CollisionManifoldEvent.class);
 
-    collisionDetectionSystem.setEmitCollisionEvent(eventHub::emit);
-  }
+    solaPhysics.collisionDetectionSystem.setEmitCollisionEvent(eventHub::emit);
 
-  public void addEcsSystems(EcsSystemContainer ecsSystemContainer) {
-    ecsSystemContainer.add(gravitySystem);
-    ecsSystemContainer.add(physicsSystem);
-    ecsSystemContainer.add(collisionDetectionSystem);
-    ecsSystemContainer.add(impulseCollisionResolutionSystem);
-  }
+    ecsSystemContainer.add(
+      solaPhysics.gravitySystem, solaPhysics.physicsSystem, solaPhysics.collisionDetectionSystem, solaPhysics.impulseCollisionResolutionSystem
+    );
 
-  public void renderDebug(Renderer renderer, World world, Color colliderOutlineColor, Color spatialHashMapCellColor) {
-    collisionDetectionSystem.debugRender(renderer, world, colliderOutlineColor, spatialHashMapCellColor);
+    return solaPhysics;
   }
 
   public GravitySystem getGravitySystem() {
@@ -54,5 +44,12 @@ public class SolaPhysics {
 
   public ImpulseCollisionResolutionSystem getImpulseCollisionResolutionSystem() {
     return impulseCollisionResolutionSystem;
+  }
+
+  private SolaPhysics() {
+    gravitySystem = new GravitySystem();
+    physicsSystem = new PhysicsSystem();
+    collisionDetectionSystem = new CollisionDetectionSystem();
+    impulseCollisionResolutionSystem = new ImpulseCollisionResolutionSystem();
   }
 }

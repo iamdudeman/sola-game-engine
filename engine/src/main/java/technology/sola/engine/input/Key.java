@@ -19,7 +19,11 @@ public enum Key {
   H(0x48, "H"),
   //
   S(0x53, "S"),
+  //
   W(0x57, "W"),
+  X(0x58, "X"),
+  Y(0x59, "Y"),
+  Z(0x5A, "Z")
   ;
 
   private final int code;

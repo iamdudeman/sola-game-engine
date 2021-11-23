@@ -7,6 +7,7 @@ import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaGraphics;
+import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.SolaPhysics;
@@ -16,11 +17,10 @@ import technology.sola.engine.physics.component.DynamicBodyComponent;
 import java.util.Random;
 
 public class StressTestExample extends AbstractSola {
-  private static final float CAMERA_SCALE = 1f;
+  private static final float CAMERA_SCALE = 1.5f;
   private static final float CIRCLE_RADIUS = 10f;
   private final Random random = new Random();
   private final int objectCount;
-  private SolaPhysics solaPhysics;
   private SolaGraphics solaGraphics;
 
   public StressTestExample(int objectCount) {
@@ -29,15 +29,15 @@ public class StressTestExample extends AbstractSola {
 
   @Override
   protected SolaConfiguration buildConfiguration() {
-    return new SolaConfiguration("Stress Test", 800, 600, 60, false);
+    return new SolaConfiguration("Stress Test", 1200, 800, 60, false);
   }
 
   @Override
   protected void onInit() {
-    solaPhysics = new SolaPhysics(eventHub);
-    solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer(), null);
+    SolaPhysics.use(eventHub, ecsSystemContainer);
+    solaGraphics = SolaGraphics.use(ecsSystemContainer, platform.getRenderer(), assetPoolProvider);
 
-    solaPhysics.addEcsSystems(ecsSystemContainer);
+    solaGraphics.setRenderDebug(true);
 
     ecsSystemContainer.setWorld(buildWorld());
   }
@@ -47,7 +47,6 @@ public class StressTestExample extends AbstractSola {
     renderer.clear();
 
     solaGraphics.render();
-    solaPhysics.renderDebug(renderer, ecsSystemContainer.getWorld(), Color.RED, Color.GREEN);
   }
 
   private World buildWorld() {
@@ -58,7 +57,11 @@ public class StressTestExample extends AbstractSola {
     int bottomPlatformEntityCount = Math.round(zoomedWidth / squareSide) + 1;
     int sidePlatformEntityCount = Math.round(zoomedHeight / squareSide) * 2 + 2;
 
-    World world = new World(objectCount + bottomPlatformEntityCount + sidePlatformEntityCount);
+    World world = new World(objectCount + bottomPlatformEntityCount + sidePlatformEntityCount + 1);
+
+    world.createEntity()
+      .addComponent(new TransformComponent(0, 0, CAMERA_SCALE, CAMERA_SCALE))
+      .addComponent(new CameraComponent());
 
     for (int i = 0; i < zoomedHeight; i += squareSide) {
       world.createEntity()

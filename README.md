@@ -1,15 +1,6 @@
 # Branch WIP
 
 # TODO List
-* Consider CameraSystem that nests these other Renderer systems maybe to handle ability to have multiple cameras???
-* Camera
-  * Figure out how to implement
-    * Translate
-    * Scale / zoom
-  * Possibly multiple cameras?
-    * Camera output to section of a screen (allows split screen then)?
-  * Screen units vs world units?
-* Once Camera is figured out need a way to translate screen coordinates to world coordinates easily
 * GUI
   * Elements
     * Text
@@ -68,6 +59,8 @@
     * Polygon x AABB
     * Polygon x Circle
     * Polygon x Polygon
+* Camera
+  * Possibly allow multiple cameras (think split screen games)
 * Integrations
   * Steam?
     * include JRE in the output file
