@@ -1,6 +1,5 @@
 package technology.sola.engine.examples.common.singlefile;
 
-import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
@@ -34,16 +33,15 @@ public class RenderingExample extends AbstractSola {
 
   @Override
   protected void onInit() {
-    AssetPool<Font> fontAssetPool = assetPoolProvider.getAssetPool(Font.class);
-    AssetPool<SpriteSheet> spriteSheetAssetPool = assetPoolProvider.getAssetPool(SpriteSheet.class);
-    spriteSheetAssetPool.addAssetId("test", "assets/test_tiles_spritesheet.json");
+    solaGraphics = SolaGraphics.use(ecsSystemContainer, platform.getRenderer(), assetPoolProvider);
 
-    solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer(), spriteSheetAssetPool);
+    assetPoolProvider.getAssetPool(SpriteSheet.class)
+      .addAssetId("test", "assets/test_tiles_spritesheet.json");
+    Font font = assetPoolProvider.getAssetPool(Font.class)
+      .addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
 
-    Font font = fontAssetPool.addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
-
-    ecsSystemContainer.setWorld(createWorld());
     ecsSystemContainer.add(new TestSystem());
+    ecsSystemContainer.setWorld(createWorld());
 
     platform.getRenderer().setFont(font);
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");

@@ -25,7 +25,7 @@ public class MouseAndCameraExample extends AbstractSola {
 
   @Override
   protected void onInit() {
-    solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer(), null);
+    solaGraphics = SolaGraphics.use(ecsSystemContainer, platform.getRenderer(), assetPoolProvider);
 
     clickCreateEntitySystem = new ClickCreateEntitySystem();
     ecsSystemContainer.add(clickCreateEntitySystem);

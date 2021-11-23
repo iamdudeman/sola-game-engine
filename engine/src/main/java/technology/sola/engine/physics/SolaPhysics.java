@@ -1,6 +1,7 @@
 package technology.sola.engine.physics;
 
 import technology.sola.engine.ecs.AbstractEcsSystem;
+import technology.sola.engine.ecs.EcsSystemContainer;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.physics.event.CollisionManifoldEvent;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
@@ -14,24 +15,19 @@ public class SolaPhysics {
   private final CollisionDetectionSystem collisionDetectionSystem;
   private final ImpulseCollisionResolutionSystem impulseCollisionResolutionSystem;
 
-  public SolaPhysics(EventHub eventHub) {
-    gravitySystem = new GravitySystem();
-    physicsSystem = new PhysicsSystem();
-    collisionDetectionSystem = new CollisionDetectionSystem();
-    impulseCollisionResolutionSystem = new ImpulseCollisionResolutionSystem();
+  public static SolaPhysics use(EventHub eventHub, EcsSystemContainer ecsSystemContainer) {
+    SolaPhysics solaPhysics = new SolaPhysics();
 
-    // TODO possibly clean this up so events aren't registered during constructor
-    // TODO maybe some init method that also adds ecs systems???
-    eventHub.add(gravitySystem, CollisionManifoldEvent.class);
-    eventHub.add(impulseCollisionResolutionSystem, CollisionManifoldEvent.class);
+    eventHub.add(solaPhysics.gravitySystem, CollisionManifoldEvent.class);
+    eventHub.add(solaPhysics.impulseCollisionResolutionSystem, CollisionManifoldEvent.class);
 
-    collisionDetectionSystem.setEmitCollisionEvent(eventHub::emit);
-  }
+    solaPhysics.collisionDetectionSystem.setEmitCollisionEvent(eventHub::emit);
 
-  public AbstractEcsSystem[] getAllPhysicsEcsSystems() {
-    return new AbstractEcsSystem[] {
-      gravitySystem, physicsSystem, collisionDetectionSystem, impulseCollisionResolutionSystem,
-    };
+    ecsSystemContainer.add(
+      solaPhysics.gravitySystem, solaPhysics.physicsSystem, solaPhysics.collisionDetectionSystem, solaPhysics.impulseCollisionResolutionSystem
+    );
+
+    return solaPhysics;
   }
 
   public GravitySystem getGravitySystem() {
@@ -48,5 +44,12 @@ public class SolaPhysics {
 
   public ImpulseCollisionResolutionSystem getImpulseCollisionResolutionSystem() {
     return impulseCollisionResolutionSystem;
+  }
+
+  private SolaPhysics() {
+    gravitySystem = new GravitySystem();
+    physicsSystem = new PhysicsSystem();
+    collisionDetectionSystem = new CollisionDetectionSystem();
+    impulseCollisionResolutionSystem = new ImpulseCollisionResolutionSystem();
   }
 }

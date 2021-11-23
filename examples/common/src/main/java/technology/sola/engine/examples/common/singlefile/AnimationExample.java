@@ -1,6 +1,5 @@
 package technology.sola.engine.examples.common.singlefile;
 
-import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.AbstractSola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
@@ -25,11 +24,11 @@ public class AnimationExample extends AbstractSola {
 
   @Override
   protected void onInit() {
-    AssetPool<SpriteSheet> spriteSheetAssetPool = assetPoolProvider.getAssetPool(SpriteSheet.class);
-    spriteSheetAssetPool.addAssetId("test", "assets/test_tiles_spritesheet.json");
-    solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer(), spriteSheetAssetPool);
+    solaGraphics = SolaGraphics.use(ecsSystemContainer, platform.getRenderer(), assetPoolProvider);
 
-    ecsSystemContainer.add(solaGraphics.getAllGraphicsEcsSystems());
+    assetPoolProvider.getAssetPool(SpriteSheet.class)
+      .addAssetId("test", "assets/test_tiles_spritesheet.json");
+
     ecsSystemContainer.setWorld(buildWorld());
 
     platform.getViewport().setAspectMode(AspectMode.STRETCH);

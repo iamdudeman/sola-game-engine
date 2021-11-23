@@ -1,8 +1,8 @@
 package technology.sola.engine.graphics;
 
 import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.EcsSystemContainer;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.graphics.components.CameraComponent;
@@ -27,14 +27,14 @@ public class SolaGraphics {
   private boolean isRenderDebug = false;
   private final SpriteAnimatorSystem spriteAnimatorSystem;
 
-  // TODO if possible clean up the objects needed here
-  // TODO what about if sprites aren't needed, is null okay for AssetPool?
-  public SolaGraphics(EcsSystemContainer ecsSystemContainer, Renderer renderer, AssetPool<SpriteSheet> spriteSheetAssetPool) {
-    this.ecsSystemContainer = ecsSystemContainer;
-    this.renderer = renderer;
-    this.spriteSheetAssetPool = spriteSheetAssetPool;
+  public static SolaGraphics use(EcsSystemContainer ecsSystemContainer, Renderer renderer, AssetPoolProvider assetPoolProvider) {
+    SolaGraphics solaGraphics = new SolaGraphics(
+      ecsSystemContainer, renderer, assetPoolProvider.getAssetPool(SpriteSheet.class)
+    );
 
-    spriteAnimatorSystem = new SpriteAnimatorSystem();
+    ecsSystemContainer.add(solaGraphics.spriteAnimatorSystem);
+
+    return solaGraphics;
   }
 
   public void setRenderDebug(boolean renderDebug) {
@@ -52,13 +52,6 @@ public class SolaGraphics {
       .invert(); // TODO this invert is costly so clean this up later
 
     return transform.forward(screenCoordinate.x, screenCoordinate.y);
-  }
-
-  // TODO consider some init method that adds this??? (should do whatever SolaPhysics ends up doing)
-  public AbstractEcsSystem[] getAllGraphicsEcsSystems() {
-    return new AbstractEcsSystem[] {
-      spriteAnimatorSystem,
-    };
   }
 
   public void render() {
@@ -107,6 +100,14 @@ public class SolaGraphics {
     if (isRenderDebug) {
       renderDebugPhysics(cameraTransform);
     }
+  }
+
+  private SolaGraphics(EcsSystemContainer ecsSystemContainer, Renderer renderer, AssetPool<SpriteSheet> spriteSheetAssetPool) {
+    this.ecsSystemContainer = ecsSystemContainer;
+    this.renderer = renderer;
+    this.spriteSheetAssetPool = spriteSheetAssetPool;
+
+    spriteAnimatorSystem = new SpriteAnimatorSystem();
   }
 
   private void renderRectangle(Entity entity, TransformComponent cameraTransform) {
