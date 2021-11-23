@@ -35,12 +35,12 @@ public class StressTestExample extends AbstractSola {
   @Override
   protected void onInit() {
     SolaPhysics solaPhysics = new SolaPhysics(eventHub);
-    solaPhysics.addEcsSystems(ecsSystemContainer);
-
-    ecsSystemContainer.setWorld(buildWorld());
-
     solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer(), null);
+
     solaGraphics.setRenderDebug(true);
+
+    ecsSystemContainer.add(solaPhysics.getAllPhysicsEcsSystems());
+    ecsSystemContainer.setWorld(buildWorld());
   }
 
   @Override

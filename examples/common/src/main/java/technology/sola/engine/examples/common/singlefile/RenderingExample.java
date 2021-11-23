@@ -35,18 +35,18 @@ public class RenderingExample extends AbstractSola {
   @Override
   protected void onInit() {
     AssetPool<Font> fontAssetPool = assetPoolProvider.getAssetPool(Font.class);
-
     AssetPool<SpriteSheet> spriteSheetAssetPool = assetPoolProvider.getAssetPool(SpriteSheet.class);
     spriteSheetAssetPool.addAssetId("test", "assets/test_tiles_spritesheet.json");
 
+    solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer(), spriteSheetAssetPool);
+
     Font font = fontAssetPool.addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
-    platform.getRenderer().setFont(font);
 
     ecsSystemContainer.setWorld(createWorld());
     ecsSystemContainer.add(new TestSystem());
 
+    platform.getRenderer().setFont(font);
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
-    solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer(), spriteSheetAssetPool);
   }
 
   @Override

@@ -27,12 +27,12 @@ public class AnimationExample extends AbstractSola {
   protected void onInit() {
     AssetPool<SpriteSheet> spriteSheetAssetPool = assetPoolProvider.getAssetPool(SpriteSheet.class);
     spriteSheetAssetPool.addAssetId("test", "assets/test_tiles_spritesheet.json");
+    solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer(), spriteSheetAssetPool);
 
+    ecsSystemContainer.add(solaGraphics.getAllGraphicsEcsSystems());
     ecsSystemContainer.setWorld(buildWorld());
 
     platform.getViewport().setAspectMode(AspectMode.STRETCH);
-    solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer(), spriteSheetAssetPool);
-    solaGraphics.addEcsSystems();
   }
 
   @Override

@@ -16,7 +16,7 @@ import technology.sola.math.linear.Vector2D;
 
 public class MouseAndCameraExample extends AbstractSola {
   private SolaGraphics solaGraphics;
-  private SpawnSystem spawnSystem;
+  private ClickCreateEntitySystem clickCreateEntitySystem;
 
   @Override
   protected SolaConfiguration buildConfiguration() {
@@ -27,8 +27,8 @@ public class MouseAndCameraExample extends AbstractSola {
   protected void onInit() {
     solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer(), null);
 
-    spawnSystem = new SpawnSystem();
-    ecsSystemContainer.add(spawnSystem);
+    clickCreateEntitySystem = new ClickCreateEntitySystem();
+    ecsSystemContainer.add(clickCreateEntitySystem);
     ecsSystemContainer.setWorld(createWorld());
   }
 
@@ -38,7 +38,7 @@ public class MouseAndCameraExample extends AbstractSola {
 
     solaGraphics.render();
 
-    renderer.fillRect(0, 0, 800, 10, spawnSystem.colors[spawnSystem.colorIndex]);
+    renderer.fillRect(0, 0, 800, 10, clickCreateEntitySystem.colors[clickCreateEntitySystem.colorIndex]);
   }
 
   private World createWorld() {
@@ -52,7 +52,7 @@ public class MouseAndCameraExample extends AbstractSola {
     return world;
   }
 
-  private final class SpawnSystem extends AbstractEcsSystem {
+  private final class ClickCreateEntitySystem extends AbstractEcsSystem {
     private int colorIndex = 0;
     private final Color[] colors = {
       Color.RED, Color.GREEN, Color.BLUE

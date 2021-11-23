@@ -2,6 +2,7 @@ package technology.sola.engine.graphics;
 
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.EcsSystemContainer;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.graphics.components.CameraComponent;
@@ -24,11 +25,16 @@ public class SolaGraphics {
   private final Renderer renderer;
   private final AssetPool<SpriteSheet> spriteSheetAssetPool;
   private boolean isRenderDebug = false;
+  private final SpriteAnimatorSystem spriteAnimatorSystem;
 
+  // TODO if possible clean up the objects needed here
+  // TODO what about if sprites aren't needed, is null okay for AssetPool?
   public SolaGraphics(EcsSystemContainer ecsSystemContainer, Renderer renderer, AssetPool<SpriteSheet> spriteSheetAssetPool) {
     this.ecsSystemContainer = ecsSystemContainer;
     this.renderer = renderer;
     this.spriteSheetAssetPool = spriteSheetAssetPool;
+
+    spriteAnimatorSystem = new SpriteAnimatorSystem();
   }
 
   public void setRenderDebug(boolean renderDebug) {
@@ -38,18 +44,21 @@ public class SolaGraphics {
   // TODO improve performance of this method
   public Vector2D screenToWorldCoordinate(Vector2D screenCoordinate) {
     var cameraEntities = ecsSystemContainer.getWorld().getEntitiesWithComponents(TransformComponent.class, CameraComponent.class);
-    TransformComponent cameraTransform = cameraEntities.isEmpty()
+    var cameraTransform = cameraEntities.isEmpty()
       ? DEFAULT_CAMERA_TRANSFORM
       : cameraEntities.get(0).getComponent(TransformComponent.class);
-    Matrix3D transform = Matrix3D.translate(-cameraTransform.getX(), -cameraTransform.getY())
+    var transform = Matrix3D.translate(-cameraTransform.getX(), -cameraTransform.getY())
       .multiply(Matrix3D.scale(cameraTransform.getScaleX(), cameraTransform.getScaleY()))
-      .invert(); // TODO this invert is costly
+      .invert(); // TODO this invert is costly so clean this up later
 
     return transform.forward(screenCoordinate.x, screenCoordinate.y);
   }
 
-  public void addEcsSystems() {
-    ecsSystemContainer.add(new SpriteAnimatorSystem());
+  // TODO consider some init method that adds this??? (should do whatever SolaPhysics ends up doing)
+  public AbstractEcsSystem[] getAllGraphicsEcsSystems() {
+    return new AbstractEcsSystem[] {
+      spriteAnimatorSystem,
+    };
   }
 
   public void render() {
@@ -190,7 +199,6 @@ public class SolaGraphics {
       });
   }
 
-  // TODO this needs to be applied to CollisionSystem debug render as well
   private TransformComponent getTransformForAppliedCamera(TransformComponent entityTransform, TransformComponent cameraTransform) {
     Matrix3D cameraScaleTransform = Matrix3D.scale(cameraTransform.getScaleX(), cameraTransform.getScaleY());
     Vector2D entityScale = cameraScaleTransform.forward(entityTransform.getScaleX(), entityTransform.getScaleY());

@@ -29,12 +29,12 @@ public class SimplePlatformerExample extends AbstractSola {
   @Override
   protected void onInit() {
     SolaPhysics solaPhysics = new SolaPhysics(eventHub);
-    solaPhysics.addEcsSystems(ecsSystemContainer);
+    solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer(), null);
 
     ecsSystemContainer.add(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem());
+    ecsSystemContainer.add(solaPhysics.getAllPhysicsEcsSystems());
     ecsSystemContainer.setWorld(buildWorld());
 
-    solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer(), null);
     solaGraphics.setRenderDebug(true);
   }
 
