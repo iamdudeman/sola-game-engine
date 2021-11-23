@@ -35,6 +35,19 @@ public class SolaGraphics {
     isRenderDebug = renderDebug;
   }
 
+  // TODO improve performance of this method
+  public Vector2D screenToWorldCoordinate(Vector2D screenCoordinate) {
+    var cameraEntities = ecsSystemContainer.getWorld().getEntitiesWithComponents(TransformComponent.class, CameraComponent.class);
+    TransformComponent cameraTransform = cameraEntities.isEmpty()
+      ? DEFAULT_CAMERA_TRANSFORM
+      : cameraEntities.get(0).getComponent(TransformComponent.class);
+    Matrix3D transform = Matrix3D.translate(-cameraTransform.getX(), -cameraTransform.getY())
+      .multiply(Matrix3D.scale(cameraTransform.getScaleX(), cameraTransform.getScaleY()))
+      .invert(); // TODO this invert is costly
+
+    return transform.forward(screenCoordinate.x, screenCoordinate.y);
+  }
+
   public void addEcsSystems() {
     ecsSystemContainer.add(new SpriteAnimatorSystem());
   }
