@@ -4,18 +4,15 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.ecs.World;
-import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.CollisionUtils;
 import technology.sola.engine.physics.SpatialHashMap;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.event.CollisionManifoldEvent;
-import technology.sola.math.geometry.Circle;
-import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -40,8 +37,18 @@ public class CollisionDetectionSystem extends AbstractEcsSystem {
    * @param spatialHashMapCellSize  the cell size of the internal spacial hash map
    */
   public CollisionDetectionSystem(Integer spatialHashMapCellSize) {
-    // We want collision checks to happen after physics updates
     this.spatialHashMapCellSize = spatialHashMapCellSize;
+    this.spatialHashMap = spatialHashMapCellSize == null
+      ? new SpatialHashMap(List.of())
+      : new SpatialHashMap(List.of(), spatialHashMapCellSize);
+  }
+
+  public int getSpacialHashMapCellSize() {
+    return spatialHashMap.getCellSize();
+  }
+
+  public Iterator<Vector2D> getSpacialHashMapEntityBucketIterator() {
+    return spatialHashMap.entityBucketIterator();
   }
 
   @Override
@@ -82,36 +89,5 @@ public class CollisionDetectionSystem extends AbstractEcsSystem {
 
   public void setEmitCollisionEvent(Consumer<CollisionManifoldEvent> emitCollisionEvent) {
     this.emitCollisionEvent = emitCollisionEvent;
-  }
-
-  public void debugRender(Renderer renderer, World world, Color colliderOutlineColor, Color spatialHashMapCellColor) {
-    if (spatialHashMap == null) {
-      return;
-    }
-
-    int cellSize = spatialHashMap.getCellSize();
-
-    spatialHashMap.entityBucketIterator().forEachRemaining(bucketVector -> {
-      Vector2D topLeftPoint = bucketVector.scalar(cellSize);
-
-      renderer.drawRect(topLeftPoint.x, topLeftPoint.y, cellSize, cellSize, spatialHashMapCellColor);
-    });
-
-    world.getEntitiesWithComponents(ColliderComponent.class, TransformComponent.class)
-      .forEach(entity -> {
-        TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
-        Vector2D transform = transformComponent.getTranslate();
-        ColliderComponent colliderComponent = entity.getComponent(ColliderComponent.class);
-
-        if (ColliderComponent.ColliderType.CIRCLE.equals(colliderComponent.getColliderType())) {
-          Circle circle = colliderComponent.asCircle(transformComponent);
-
-          renderer.drawCircle(transform.x, transform.y, circle.getRadius(), colliderOutlineColor);
-        } else {
-          Rectangle rectangle = colliderComponent.asRectangle(transformComponent);
-
-          renderer.drawRect(transform.x, transform.y, rectangle.getWidth(), rectangle.getHeight(), colliderOutlineColor);
-        }
-      });
   }
 }

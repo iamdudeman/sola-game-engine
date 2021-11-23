@@ -11,6 +11,10 @@ import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.sprite.SpriteAnimatorSystem;
 import technology.sola.engine.graphics.sprite.SpriteSheet;
+import technology.sola.engine.physics.component.ColliderComponent;
+import technology.sola.engine.physics.system.CollisionDetectionSystem;
+import technology.sola.math.geometry.Circle;
+import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
@@ -19,11 +23,16 @@ public class SolaGraphics {
   private final EcsSystemContainer ecsSystemContainer;
   private final Renderer renderer;
   private final AssetPool<SpriteSheet> spriteSheetAssetPool;
+  private boolean isRenderDebug = false;
 
   public SolaGraphics(EcsSystemContainer ecsSystemContainer, Renderer renderer, AssetPool<SpriteSheet> spriteSheetAssetPool) {
     this.ecsSystemContainer = ecsSystemContainer;
     this.renderer = renderer;
     this.spriteSheetAssetPool = spriteSheetAssetPool;
+  }
+
+  public void setRenderDebug(boolean renderDebug) {
+    isRenderDebug = renderDebug;
   }
 
   public void addEcsSystems() {
@@ -72,6 +81,10 @@ public class SolaGraphics {
           renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r -> renderSprite(entity, cameraTransform));
         }
       });
+
+    if (isRenderDebug) {
+      renderDebugPhysics(cameraTransform);
+    }
   }
 
   private void renderRectangle(Entity entity, TransformComponent cameraTransform) {
@@ -126,12 +139,50 @@ public class SolaGraphics {
     }
   }
 
+  private void renderDebugPhysics(TransformComponent cameraTransform) {
+    CollisionDetectionSystem collisionDetectionSystem = ecsSystemContainer.get(CollisionDetectionSystem.class);
+
+    int cellSize = collisionDetectionSystem.getSpacialHashMapCellSize();
+
+    collisionDetectionSystem.getSpacialHashMapEntityBucketIterator()
+        .forEachRemaining(bucketVector -> {
+          Vector2D topLeftPoint = bucketVector.scalar(cellSize);
+
+          TransformComponent useThis = getTransformForAppliedCamera(
+            new TransformComponent(topLeftPoint.x, topLeftPoint.y, cellSize, cellSize),
+            cameraTransform
+          );
+
+          renderer.drawRect(useThis.getX(), useThis.getY(), useThis.getScaleX(), useThis.getScaleY(), Color.GREEN);
+        });
+
+    ecsSystemContainer.getWorld().getEntitiesWithComponents(ColliderComponent.class, TransformComponent.class)
+      .forEach(entity -> {
+        TransformComponent transformComponent = getTransformForAppliedCamera(
+          entity.getComponent(TransformComponent.class),
+          cameraTransform
+        );
+        Vector2D transform = transformComponent.getTranslate();
+        ColliderComponent colliderComponent = entity.getComponent(ColliderComponent.class);
+
+        if (ColliderComponent.ColliderType.CIRCLE.equals(colliderComponent.getColliderType())) {
+          Circle circle = colliderComponent.asCircle(transformComponent);
+
+          renderer.drawCircle(transform.x, transform.y, circle.getRadius(), Color.RED);
+        } else {
+          Rectangle rectangle = colliderComponent.asRectangle(transformComponent);
+
+          renderer.drawRect(transform.x, transform.y, rectangle.getWidth(), rectangle.getHeight(), Color.RED);
+        }
+      });
+  }
+
   // TODO this needs to be applied to CollisionSystem debug render as well
   private TransformComponent getTransformForAppliedCamera(TransformComponent entityTransform, TransformComponent cameraTransform) {
     Matrix3D cameraScaleTransform = Matrix3D.scale(cameraTransform.getScaleX(), cameraTransform.getScaleY());
     Vector2D entityScale = cameraScaleTransform.forward(entityTransform.getScaleX(), entityTransform.getScaleY());
 
-    Matrix3D cameraTranslationTransform = Matrix3D.translate(cameraTransform.getX(), cameraTransform.getY())
+    Matrix3D cameraTranslationTransform = Matrix3D.translate(-cameraTransform.getX(), -cameraTransform.getY())
       .multiply(cameraScaleTransform);
     Vector2D entityTranslation = cameraTranslationTransform.forward(entityTransform.getX(), entityTransform.getY());
 

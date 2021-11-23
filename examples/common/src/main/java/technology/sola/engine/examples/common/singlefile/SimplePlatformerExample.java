@@ -20,7 +20,6 @@ import technology.sola.math.linear.Vector2D;
 
 public class SimplePlatformerExample extends AbstractSola {
   private SolaGraphics solaGraphics;
-  private SolaPhysics solaPhysics;
 
   @Override
   protected SolaConfiguration buildConfiguration() {
@@ -29,15 +28,14 @@ public class SimplePlatformerExample extends AbstractSola {
 
   @Override
   protected void onInit() {
-    solaPhysics = new SolaPhysics(eventHub);
-
+    SolaPhysics solaPhysics = new SolaPhysics(eventHub);
     solaPhysics.addEcsSystems(ecsSystemContainer);
 
-    ecsSystemContainer.add(new MovingPlatformSystem(), new PlayerSystem());
-
+    ecsSystemContainer.add(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem());
     ecsSystemContainer.setWorld(buildWorld());
 
     solaGraphics = new SolaGraphics(ecsSystemContainer, platform.getRenderer(), null);
+    solaGraphics.setRenderDebug(true);
   }
 
   @Override
@@ -45,26 +43,18 @@ public class SimplePlatformerExample extends AbstractSola {
     renderer.clear();
 
     solaGraphics.render();
-    solaPhysics.renderDebug(renderer, ecsSystemContainer.getWorld(), Color.RED, Color.GREEN);
   }
 
   private World buildWorld() {
     World world = new World(10);
 
     world.createEntity()
-        .addComponent(new TransformComponent(0, 0, 10, 10))
-        .addComponent(new RectangleRendererComponent(Color.GREEN));
-
-    world.createEntity()
       .addComponent(new CameraComponent())
-//      .addComponent(new TransformComponent(100, 0))
-//      .addComponent(new TransformComponent(0, 0, 0.5f, 0.5f))
-      .addComponent(new TransformComponent(100, 0, 0.5f, .25f))
-    ;
+      .addComponent(new TransformComponent(0, 0, 1, 1));
 
     world.createEntity()
       .addComponent(new PlayerComponent())
-      .addComponent(new TransformComponent(200, 250, 50, 50))
+      .addComponent(new TransformComponent(200, 300, 50, 50))
       .addComponent(new RectangleRendererComponent(Color.BLUE))
       .addComponent(ColliderComponent.aabb())
       .addComponent(new DynamicBodyComponent(new Material(1)));
@@ -84,6 +74,21 @@ public class SimplePlatformerExample extends AbstractSola {
     world.createEntity()
       .addComponent(new TransformComponent(550, 200, 200, 75f))
       .addComponent(new RectangleRendererComponent(Color.WHITE))
+      .addComponent(ColliderComponent.aabb());
+
+    world.createEntity()
+      .addComponent(new TransformComponent(1050, 190, 200, 75f))
+      .addComponent(new RectangleRendererComponent(Color.WHITE))
+      .addComponent(ColliderComponent.aabb());
+
+    world.createEntity()
+      .addComponent(new TransformComponent(1575, 180, 100, 50f))
+      .addComponent(new RectangleRendererComponent(Color.WHITE))
+      .addComponent(ColliderComponent.aabb());
+
+    world.createEntity()
+      .addComponent(new TransformComponent(1800, 170, 50, 50f))
+      .addComponent(new RectangleRendererComponent(Color.YELLOW))
       .addComponent(ColliderComponent.aabb());
 
     return world;
@@ -144,6 +149,38 @@ public class SimplePlatformerExample extends AbstractSola {
     @Override
     public int getOrder() {
       return 0;
+    }
+  }
+
+  private static class CameraProgressSystem extends AbstractEcsSystem {
+    @Override
+    public void update(World world, float deltaTime) {
+      var cameras = world.getEntitiesWithComponents(CameraComponent.class, TransformComponent.class);
+      var players = world.getEntitiesWithComponents(PlayerComponent.class, TransformComponent.class);
+
+      if (!cameras.isEmpty() && !players.isEmpty()) {
+        var camera = cameras.get(0);
+        var player = players.get(0);
+        var cameraTransform = camera.getComponent(TransformComponent.class);
+        var playerTransform = player.getComponent(TransformComponent.class);
+
+        float dx = playerTransform.getX() - cameraTransform.getX();
+
+        if (dx > 200) {
+          cameraTransform.setX(cameraTransform.getX() + (dx / 150));
+        }
+
+        float dy = playerTransform.getY() - cameraTransform.getY();
+
+        if (dy < 250) {
+          cameraTransform.setY(cameraTransform.getY() - 0.05f);
+        }
+      }
+    }
+
+    @Override
+    public int getOrder() {
+      return 50;
     }
   }
 }
