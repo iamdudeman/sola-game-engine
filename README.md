@@ -1,8 +1,4 @@
 # Branch WIP
-* Scene
-  * Implement a good abstraction for this (maybe use the one SolKana had)
-  * Save / load methods would be good (or a serializer / deserializer)
-  * World is essentially the scene so maybe this concept isn't needed...just a serializer / deserializer
 
 # TODO List
 * GUI
