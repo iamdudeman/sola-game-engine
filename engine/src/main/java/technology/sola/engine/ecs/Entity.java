@@ -1,11 +1,12 @@
 package technology.sola.engine.ecs;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class Entity {
+public class Entity implements Serializable {
   final int entityIndex;
   private final World world;
   private List<Class<? extends Component>> currentComponents = new ArrayList<>();

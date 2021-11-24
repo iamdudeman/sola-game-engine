@@ -1,4 +1,6 @@
 package technology.sola.engine.ecs;
 
-public interface Component {
+import java.io.Serializable;
+
+public interface Component extends Serializable {
 }

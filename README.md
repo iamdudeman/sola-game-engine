@@ -1,4 +1,8 @@
 # Branch WIP
+* Scene
+  * Implement a good abstraction for this (maybe use the one SolKana had)
+  * Save / load methods would be good (or a serializer / deserializer)
+  * World is essentially the scene so maybe this concept isn't needed...just a serializer / deserializer
 
 # TODO List
 * GUI
@@ -6,13 +10,10 @@
     * Text
     * Button
   * Layout
-* Scene
-  * Implement a good abstraction for this (maybe use the one SolKana had)
-  * Save / load methods would be good (or a serializer / deserializer)
-  * World is essentially the scene so maybe this concept isn't needed...just a serializer / deserializer
+* Consider removing "Abstract" from various class names
 * Research Virtual File System
 * Browser Platform
-  * Implement better tool for compiling Java to JavaScript code (TeaVM plugin has some file locking issues)
+  * Implement better tool for compiling Java to JavaScript code (TeaVM gradle plugin has some file locking issues)
   * Improve performance (StressTestExample can't handle a lot of objects)
   * Implement Font loading
   * Implement SpriteSheet loading
@@ -20,7 +21,6 @@
 * Tools
   * Export from Engine UI to installer of some sort
     * Include JRE and assets
-  * Tool to export browser platform Main java method instead of using gradle plugin
 * Audio
   * Interface for type
   * Implement loader per platform (Swing and JavaFX can probably share though)

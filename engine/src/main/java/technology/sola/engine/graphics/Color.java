@@ -1,8 +1,9 @@
 package technology.sola.engine.graphics;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Color {
+public class Color implements Serializable {
   public static final Color BLACK = new Color(255, 0, 0, 0);
   public static final Color BLANK = new Color(0, 0, 0, 0);
   public static final Color BLUE = new Color(255, 0, 0, 255);

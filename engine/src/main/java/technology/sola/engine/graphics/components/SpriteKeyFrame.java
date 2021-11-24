@@ -5,11 +5,13 @@ import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.sprite.SpriteSheet;
 import technology.sola.engine.graphics.sprite.exception.SpriteNotFoundException;
 
-public class SpriteKeyFrame {
+import java.io.Serializable;
+
+public class SpriteKeyFrame implements Serializable {
   private final String spriteSheetId;
   private final String spriteId;
   private final long duration;
-  private SolaImage cachedSprite;
+  private transient SolaImage cachedSprite;
 
   public SpriteKeyFrame(String spriteSheetId, String spriteId, long duration) {
     this.spriteSheetId = spriteSheetId;
