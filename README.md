@@ -7,6 +7,9 @@
     * Button
   * Layout
 * Consider removing "Abstract" from various class names
+* Unit Testing
+  * Add easy way to test the ability of ECS components to be serializable
+  * Add lots of missing tests :)
 * Research Virtual File System
 * Browser Platform
   * Implement better tool for compiling Java to JavaScript code (TeaVM gradle plugin has some file locking issues)
