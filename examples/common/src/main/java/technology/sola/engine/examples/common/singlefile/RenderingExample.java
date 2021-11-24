@@ -9,12 +9,14 @@ import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Layer;
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.SolaGraphics;
+import technology.sola.engine.core.graphics.SolaGraphics;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.font.Font;
+import technology.sola.engine.graphics.gui.components.GuiPanelComponent;
+import technology.sola.engine.graphics.gui.components.GuiTextComponent;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.graphics.sprite.SpriteSheet;
 import technology.sola.engine.input.Key;
@@ -24,7 +26,6 @@ import java.util.List;
 
 public class RenderingExample extends AbstractSola {
   private SolaGraphics solaGraphics;
-  private TransformComponent dynamicScalingEntityTransformComponent;
 
   @Override
   protected SolaConfiguration buildConfiguration() {
@@ -37,34 +38,18 @@ public class RenderingExample extends AbstractSola {
 
     assetPoolProvider.getAssetPool(SpriteSheet.class)
       .addAssetId("test", "assets/test_tiles_spritesheet.json");
-    Font font = assetPoolProvider.getAssetPool(Font.class)
-      .addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
+    assetPoolProvider.getAssetPool(Font.class)
+      .addAssetId("default", "assets/monospaced_NORMAL_18.json");
 
     ecsSystemContainer.add(new TestSystem());
     ecsSystemContainer.setWorld(createWorld());
 
-    platform.getRenderer().setFont(font);
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
   }
 
   @Override
   protected void onRender(Renderer renderer) {
     renderer.clear();
-
-    renderer.drawToLayer("ui", r -> {
-      renderer.drawWithRenderModeAlpha(r2 ->
-        renderer.fillRect(0, 10, 600, 100, new Color(120, 255, 255, 255))
-      );
-
-      renderer.drawWithRenderModeMask(r2 -> {
-        final String characters1 = "!\"#$%&'()*+,-./0123456789:; <=>?@ABCDEFGHIJKLMN";
-        final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
-
-        renderer.drawString(characters1, 5, 5, Color.RED);
-        renderer.drawString(characters2, 5, 35, Color.BLACK);
-        renderer.drawString("Hello World!", 5, 65, Color.BLUE);
-      });
-    });
 
     renderer.drawToLayer("background", r -> {
       renderer.setPixel(5, 5, Color.WHITE);
@@ -109,6 +94,8 @@ public class RenderingExample extends AbstractSola {
       final float minSize = 0.1f;
       final float maxSize = 50;
 
+      TransformComponent dynamicScalingEntityTransformComponent = world.getEntityByName("dynamicScaling").getComponent(TransformComponent.class);
+
       if (keyboardInput.isKeyHeld(Key.A)) {
         float dynamicScale = dynamicScalingEntityTransformComponent.getScaleX() - scalingSpeed;
         if (dynamicScale < minSize) dynamicScale = minSize;
@@ -148,6 +135,7 @@ public class RenderingExample extends AbstractSola {
   private World createWorld() {
     World world = new World(100);
 
+    // moving stuff
     List.of(
       new Vector2D(0, 0),
       new Vector2D(50, 20),
@@ -160,7 +148,18 @@ public class RenderingExample extends AbstractSola {
       .addComponent(new TransformComponent(vector2D.x, vector2D.y, 50, 50))
       .addComponent(new RectangleRendererComponent(Color.RED))
     );
+    world.createEntity()
+      .addComponent(new LayerComponent("moving_stuff"))
+      .addComponent(new TransformComponent(400, 530, 1, 1))
+      .addComponent(new SpriteComponent("test", "blue"));
+    world.createEntity()
+      .addComponent(new LayerComponent("moving_stuff"))
+      .addComponent(new TransformComponent(5, 5, 1, 2))
+      .addComponent(new SpriteComponent("test", "blue"))
+      .setName("dynamicScaling");
 
+
+    // static blocks
     world.createEntity()
       .addComponent(new LayerComponent("blocks"))
       .addComponent(new TransformComponent(200, 300, 50, 50))
@@ -170,17 +169,7 @@ public class RenderingExample extends AbstractSola {
       .addComponent(new TransformComponent(200, 350, 100, 50))
       .addComponent(new RectangleRendererComponent(Color.BLUE));
 
-    world.createEntity()
-      .addComponent(new LayerComponent("moving_stuff"))
-      .addComponent(new TransformComponent(400, 530, 1, 1))
-      .addComponent(new SpriteComponent("test", "blue"));
-    dynamicScalingEntityTransformComponent = new TransformComponent(5, 5, 1, 2);
-    world.createEntity()
-      .addComponent(new LayerComponent("moving_stuff"))
-      .addComponent(dynamicScalingEntityTransformComponent)
-      .addComponent(new SpriteComponent("test", "blue"));
-
-
+    // background elements
     world.createEntity()
       .addComponent(new LayerComponent("background"))
       .addComponent(new TransformComponent(100, 100, 60, 80))
@@ -221,6 +210,30 @@ public class RenderingExample extends AbstractSola {
       .addComponent(new LayerComponent("background"))
       .addComponent(new TransformComponent(300, 150, 105f, 105f))
       .addComponent(new CircleRendererComponent(Color.RED, false));
+
+    // ui
+    world.createEntity()
+      .addComponent(new LayerComponent("ui"))
+      .addComponent(new TransformComponent(0, 10, 600, 100))
+      .addComponent(new GuiPanelComponent(new Color(120, 255, 255, 255), Color.YELLOW));
+
+    final String characters1 = "!\"#$%&'()*+,-./0123456789:; <=>?@ABCDEFGHIJKLMN";
+    final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+
+    world.createEntity()
+      .addComponent(new LayerComponent("ui"))
+      .addComponent(new TransformComponent(5, 5))
+      .addComponent(new GuiTextComponent("default", characters1, Color.RED));
+
+    world.createEntity()
+      .addComponent(new LayerComponent("ui"))
+      .addComponent(new TransformComponent(5, 35))
+      .addComponent(new GuiTextComponent("default", characters2, Color.BLACK));
+
+    world.createEntity()
+      .addComponent(new LayerComponent("ui"))
+      .addComponent(new TransformComponent(5, 65))
+      .addComponent(new GuiTextComponent("default", "Hello world!", Color.BLUE));
 
     return world;
   }

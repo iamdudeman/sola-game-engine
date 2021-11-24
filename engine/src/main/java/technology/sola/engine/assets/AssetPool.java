@@ -9,8 +9,10 @@ public abstract class AssetPool<T extends Asset> {
   protected Map<String, T> cachedAssets = new HashMap<>();
   protected Map<String, String> assetIdToPathMap = new HashMap<>();
 
-  public void addAssetId(String id, String path) {
+  public AssetPool<T> addAssetId(String id, String path) {
     assetIdToPathMap.put(id, path);
+
+    return this;
   }
 
   public T addAndGetAsset(String id, String path) {
