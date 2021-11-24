@@ -16,6 +16,7 @@ import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.graphics.gui.components.GuiPanelComponent;
+import technology.sola.engine.graphics.gui.components.GuiTextComponent;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.graphics.sprite.SpriteSheet;
 import technology.sola.engine.input.Key;
@@ -50,21 +51,6 @@ public class RenderingExample extends AbstractSola {
   @Override
   protected void onRender(Renderer renderer) {
     renderer.clear();
-
-    renderer.drawToLayer("ui", r -> {
-//      renderer.drawWithRenderModeAlpha(r2 ->
-//        renderer.fillRect(0, 10, 600, 100, new Color(120, 255, 255, 255))
-//      );
-
-      renderer.drawWithRenderModeMask(r2 -> {
-        final String characters1 = "!\"#$%&'()*+,-./0123456789:; <=>?@ABCDEFGHIJKLMN";
-        final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
-
-        renderer.drawString(characters1, 5, 5, Color.RED);
-        renderer.drawString(characters2, 5, 35, Color.BLACK);
-        renderer.drawString("Hello World!", 5, 65, Color.BLUE);
-      });
-    });
 
     renderer.drawToLayer("background", r -> {
       renderer.setPixel(5, 5, Color.WHITE);
@@ -228,27 +214,27 @@ public class RenderingExample extends AbstractSola {
 
     // ui
     world.createEntity()
-      .addComponent(new LayerComponent("ui", -5))
+      .addComponent(new LayerComponent("ui"))
       .addComponent(new TransformComponent(0, 10, 600, 100))
-      .addComponent(new GuiPanelComponent(new Color(120, 255, 255, 255)));
+      .addComponent(new GuiPanelComponent(new Color(120, 255, 255, 255), Color.YELLOW));
 
+    final String characters1 = "!\"#$%&'()*+,-./0123456789:; <=>?@ABCDEFGHIJKLMN";
+    final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
-    /*
-    renderer.drawToLayer("ui", r -> {
-      renderer.drawWithRenderModeAlpha(r2 ->
-        renderer.fillRect(0, 10, 600, 100, new Color(120, 255, 255, 255))
-      );
+    world.createEntity()
+      .addComponent(new LayerComponent("ui"))
+      .addComponent(new TransformComponent(5, 5))
+      .addComponent(new GuiTextComponent(characters1, Color.RED));
 
-      renderer.drawWithRenderModeMask(r2 -> {
-        final String characters1 = "!\"#$%&'()*+,-./0123456789:; <=>?@ABCDEFGHIJKLMN";
-        final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+    world.createEntity()
+      .addComponent(new LayerComponent("ui"))
+      .addComponent(new TransformComponent(5, 35))
+      .addComponent(new GuiTextComponent(characters2, Color.BLACK));
 
-        renderer.drawString(characters1, 5, 5, Color.RED);
-        renderer.drawString(characters2, 5, 35, Color.BLACK);
-        renderer.drawString("Hello World!", 5, 65, Color.BLUE);
-      });
-    });
-     */
+    world.createEntity()
+      .addComponent(new LayerComponent("ui"))
+      .addComponent(new TransformComponent(5, 65))
+      .addComponent(new GuiTextComponent("Hello world!", Color.BLUE));
 
     return world;
   }
