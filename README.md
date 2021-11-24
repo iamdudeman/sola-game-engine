@@ -16,6 +16,8 @@
   * GUI asset manager
     * Allows adding images and via file selector
     * Game has a project folder structure to add/remove files
+* Rendering
+  * SolaGraphics could cull entities that are outside the camera viewport
 * Consider removing "Abstract" from various class names
 * Unit Testing
   * Add easy way to test the ability of ECS components to be serializable
