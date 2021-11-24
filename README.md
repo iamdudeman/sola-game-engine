@@ -3,9 +3,15 @@
 # TODO List
 * GUI
   * Elements
+    * Panel / Container
+      * width / height (transform)
+      * background color
+      * padding
+      * "child" elements should be relative to this
     * Text
+      * should handle new lines probably?
+      * font choice
     * Button
-  * Layout
 * Consider removing "Abstract" from various class names
 * Unit Testing
   * Add easy way to test the ability of ECS components to be serializable
