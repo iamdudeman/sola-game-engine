@@ -1,6 +1,4 @@
 # Branch WIP
-
-# TODO List
 * GUI
   * Elements
     * Panel / Container
@@ -12,6 +10,8 @@
       * should handle new lines probably?
       * font choice
     * Button
+
+# TODO List
 * Consider removing "Abstract" from various class names
 * Unit Testing
   * Add easy way to test the ability of ECS components to be serializable
@@ -33,8 +33,8 @@
   * Run full build for testing and code quality
   * Generate engine and platform artifacts
 * Particle System
-  * position
-  * velocity
+  * transform
+  * speed
   * time left alive
   * color?
   * size?
