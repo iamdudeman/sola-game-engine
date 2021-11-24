@@ -16,22 +16,22 @@ import technology.sola.engine.input.MouseEvent;
 
 import java.util.function.Consumer;
 
-public abstract class AbstractSolaPlatform {
-  protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractSolaPlatform.class);
+public abstract class SolaPlatform {
+  protected static final Logger LOGGER = LoggerFactory.getLogger(SolaPlatform.class);
   protected Renderer renderer;
-  protected AbstractGameLoop gameLoop;
+  protected GameLoop gameLoop;
   protected Viewport viewport;
   protected EventHub solaEventHub;
   protected WorldSerializer worldSerializer;
 
-  public void play(AbstractSola abstractSola) {
+  public void play(Sola sola) {
     LOGGER.info("Using platform [{}]", this.getClass().getName());
 
-    this.solaEventHub = abstractSola.eventHub;
-    this.viewport = buildViewport(abstractSola.configuration);
+    this.solaEventHub = sola.eventHub;
+    this.viewport = buildViewport(sola.configuration);
 
-    populateAssetPoolProvider(abstractSola.assetPoolProvider);
-    initializePlatform(abstractSola.configuration, () -> initComplete(abstractSola, abstractSola.configuration));
+    populateAssetPoolProvider(sola.assetPoolProvider);
+    initializePlatform(sola.configuration, () -> initComplete(sola, sola.configuration));
   }
 
   public Renderer getRenderer() {
@@ -57,8 +57,8 @@ public abstract class AbstractSolaPlatform {
   public abstract void onMouseReleased(Consumer<MouseEvent> mouseEventConsumer);
 
   /**
-   * Method to initialize a {@link AbstractSolaPlatform}. This operation can be async. It will provide the configuration
-   * from the {@link AbstractSola#buildConfiguration()} method.
+   * Method to initialize a {@link SolaPlatform}. This operation can be async. It will provide the configuration
+   * from the {@link Sola#buildConfiguration()} method.
    *
    * @param solaConfiguration  the Sola configuration
    * @param solaPlatformInitialization  call {@link SolaPlatformInitialization#finish()} when platform initialization is finished
@@ -87,40 +87,40 @@ public abstract class AbstractSolaPlatform {
     return new Base64WorldSerializer();
   }
 
-  private void initComplete(AbstractSola abstractSola, SolaConfiguration solaConfiguration) {
+  private void initComplete(Sola sola, SolaConfiguration solaConfiguration) {
     this.worldSerializer = buildWorldSerializer();
     this.renderer = buildRenderer(solaConfiguration);
     this.gameLoop = buildGameLoop().create(
-      deltaTime -> update(abstractSola, deltaTime), () -> render(renderer, abstractSola),
+      deltaTime -> update(sola, deltaTime), () -> render(renderer, sola),
       solaConfiguration.getGameLoopTargetUpdatesPerSecond(), solaConfiguration.isGameLoopRestingAllowed()
     );
 
     solaEventHub.add(new GameLoopEventListener(gameLoop), GameLoopEvent.class);
 
-    abstractSola.initializeForPlatform(this);
+    sola.initializeForPlatform(this);
     new Thread(gameLoop).start();
   }
 
-  private void update(AbstractSola abstractSola, float deltaTime) {
-    abstractSola.onUpdate(deltaTime);
+  private void update(Sola sola, float deltaTime) {
+    sola.onUpdate(deltaTime);
   }
 
-  private void render(Renderer renderer, AbstractSola abstractSola) {
+  private void render(Renderer renderer, Sola sola) {
     beforeRender(renderer);
-    abstractSola.onRender(renderer);
+    sola.onRender(renderer);
     renderer.getLayers().forEach(layer -> layer.draw(renderer));
     onRender(renderer);
   }
 
   @FunctionalInterface
   protected interface GameLoopProvider {
-    AbstractGameLoop create(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed);
+    GameLoop create(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed);
   }
 
   @FunctionalInterface
   protected interface SolaPlatformInitialization {
     /**
-     * Call to finalize {@link AbstractSolaPlatform} initialization and begin running the {@link AbstractSola}.
+     * Call to finalize {@link SolaPlatform} initialization and begin running the {@link Sola}.
      */
     void finish();
   }

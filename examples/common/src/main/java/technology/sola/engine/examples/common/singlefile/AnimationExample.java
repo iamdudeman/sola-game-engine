@@ -1,6 +1,6 @@
 package technology.sola.engine.examples.common.singlefile;
 
-import technology.sola.engine.core.AbstractSola;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.World;
@@ -12,7 +12,7 @@ import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.components.SpriteKeyFrame;
 import technology.sola.engine.graphics.sprite.SpriteSheet;
 
-public class AnimationExample extends AbstractSola {
+public class AnimationExample extends Sola {
   private SolaGraphics solaGraphics;
 
   @Override

@@ -1,7 +1,7 @@
 package technology.sola.engine.physics.system;
 
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.AbstractEcsSystem;
+import technology.sola.engine.ecs.EcsSystem;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.physics.CollisionManifold;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class CollisionDetectionSystem extends AbstractEcsSystem {
+public class CollisionDetectionSystem extends EcsSystem {
   public static final int ORDER = PhysicsSystem.ORDER + 1;
   private SpatialHashMap spatialHashMap;
   private final Integer spatialHashMapCellSize;

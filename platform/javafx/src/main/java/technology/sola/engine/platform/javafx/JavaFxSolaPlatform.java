@@ -10,7 +10,7 @@ import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.AssetPoolProvider;
-import technology.sola.engine.core.AbstractSolaPlatform;
+import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
@@ -26,7 +26,7 @@ import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
 
 import java.util.function.Consumer;
 
-public class JavaFxSolaPlatform extends AbstractSolaPlatform {
+public class JavaFxSolaPlatform extends SolaPlatform {
   private Canvas canvas;
   private GraphicsContext graphicsContext;
   private WritableImage writableImage;

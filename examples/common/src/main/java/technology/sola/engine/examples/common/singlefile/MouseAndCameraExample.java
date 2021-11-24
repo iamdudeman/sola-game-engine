@@ -1,9 +1,9 @@
 package technology.sola.engine.examples.common.singlefile;
 
-import technology.sola.engine.core.AbstractSola;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.AbstractEcsSystem;
+import technology.sola.engine.ecs.EcsSystem;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
@@ -14,7 +14,7 @@ import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.math.linear.Vector2D;
 
-public class MouseAndCameraExample extends AbstractSola {
+public class MouseAndCameraExample extends Sola {
   private SolaGraphics solaGraphics;
   private ClickCreateEntitySystem clickCreateEntitySystem;
 
@@ -52,7 +52,7 @@ public class MouseAndCameraExample extends AbstractSola {
     return world;
   }
 
-  private final class ClickCreateEntitySystem extends AbstractEcsSystem {
+  private final class ClickCreateEntitySystem extends EcsSystem {
     private int colorIndex = 0;
     private final Color[] colors = {
       Color.RED, Color.GREEN, Color.BLUE

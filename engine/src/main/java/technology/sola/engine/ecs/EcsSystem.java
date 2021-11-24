@@ -1,6 +1,6 @@
 package technology.sola.engine.ecs;
 
-public abstract class AbstractEcsSystem {
+public abstract class EcsSystem {
   private boolean isActive = true;
 
   /**

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EcsSystemContainer {
-  private final List<AbstractEcsSystem> ecsSystems = new ArrayList<>();
+  private final List<EcsSystem> ecsSystems = new ArrayList<>();
   private World world = new World(1);
 
   public World getWorld() {
@@ -15,16 +15,16 @@ public class EcsSystemContainer {
     this.world = world;
   }
 
-  public void add(AbstractEcsSystem ...ecsSystems) {
-    for (AbstractEcsSystem ecsSystem : ecsSystems) {
+  public void add(EcsSystem...ecsSystems) {
+    for (EcsSystem ecsSystem : ecsSystems) {
       add(ecsSystem);
     }
   }
 
-  public void add(AbstractEcsSystem ecsSystem) {
+  public void add(EcsSystem ecsSystem) {
     int insertIndex = 0;
 
-    for (AbstractEcsSystem orderedUpdateSystem : ecsSystems) {
+    for (EcsSystem orderedUpdateSystem : ecsSystems) {
       if (ecsSystem.getOrder() <= orderedUpdateSystem.getOrder()) {
         break;
       }
@@ -34,7 +34,7 @@ public class EcsSystemContainer {
     ecsSystems.add(insertIndex, ecsSystem);
   }
 
-  public <T extends AbstractEcsSystem> T get(Class<T> updateSystemClass) {
+  public <T extends EcsSystem> T get(Class<T> updateSystemClass) {
     return ecsSystems.stream()
       .filter(updateSystemClass::isInstance)
       .map(updateSystemClass::cast)
@@ -44,7 +44,7 @@ public class EcsSystemContainer {
 
   public void update(float deltaTime) {
     ecsSystems.stream()
-      .filter(AbstractEcsSystem::isActive)
+      .filter(EcsSystem::isActive)
       .iterator()
       .forEachRemaining(updateSystem -> updateSystem.update(world, deltaTime));
   }

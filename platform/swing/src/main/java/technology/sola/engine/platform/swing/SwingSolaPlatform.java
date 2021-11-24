@@ -2,7 +2,7 @@ package technology.sola.engine.platform.swing;
 
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.AssetPoolProvider;
-import technology.sola.engine.core.AbstractSolaPlatform;
+import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.SolaImage;
@@ -30,7 +30,7 @@ import java.util.function.Consumer;
 
 // TODO fix insets issue
 
-public class SwingSolaPlatform extends AbstractSolaPlatform {
+public class SwingSolaPlatform extends SolaPlatform {
   private final boolean useSoftwareRendering;
   private Canvas canvas;
   private Consumer<technology.sola.engine.graphics.Renderer> beforeRender;
