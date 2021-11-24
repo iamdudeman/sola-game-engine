@@ -6,6 +6,7 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.EcsSystemContainer;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.components.CameraComponent;
+import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.graphics.sprite.SpriteAnimatorSystem;
 import technology.sola.engine.graphics.sprite.SpriteSheet;
 import technology.sola.math.linear.Matrix3D;
@@ -16,12 +17,14 @@ public class SolaGraphics {
   private final EcsSystemContainer ecsSystemContainer;
   private final Renderer renderer;
   private final AssetPool<SpriteSheet> spriteSheetAssetPool;
+  private final AssetPool<Font> fontAssetPool;
   private boolean isRenderDebug = false;
   private final SpriteAnimatorSystem spriteAnimatorSystem;
 
   public static SolaGraphics use(EcsSystemContainer ecsSystemContainer, Renderer renderer, AssetPoolProvider assetPoolProvider) {
     SolaGraphics solaGraphics = new SolaGraphics(
-      ecsSystemContainer, renderer, assetPoolProvider.getAssetPool(SpriteSheet.class)
+      ecsSystemContainer, renderer,
+      assetPoolProvider.getAssetPool(SpriteSheet.class), assetPoolProvider.getAssetPool(Font.class)
     );
 
     ecsSystemContainer.add(solaGraphics.spriteAnimatorSystem);
@@ -53,7 +56,7 @@ public class SolaGraphics {
 
     SpriteGraphics.render(renderer, ecsSystemContainer, cameraTransform, spriteSheetAssetPool);
 
-    GuiGraphics.render(renderer, ecsSystemContainer);
+    GuiGraphics.render(renderer, ecsSystemContainer, fontAssetPool);
 
     // TODO need to render this to back most layer at some point
     if (isRenderDebug) {
@@ -69,10 +72,12 @@ public class SolaGraphics {
     isRenderDebug = renderDebug;
   }
 
-  private SolaGraphics(EcsSystemContainer ecsSystemContainer, Renderer renderer, AssetPool<SpriteSheet> spriteSheetAssetPool) {
+  private SolaGraphics(EcsSystemContainer ecsSystemContainer, Renderer renderer,
+                       AssetPool<SpriteSheet> spriteSheetAssetPool, AssetPool<Font> fontAssetPool) {
     this.ecsSystemContainer = ecsSystemContainer;
     this.renderer = renderer;
     this.spriteSheetAssetPool = spriteSheetAssetPool;
+    this.fontAssetPool = fontAssetPool;
 
     spriteAnimatorSystem = new SpriteAnimatorSystem();
   }

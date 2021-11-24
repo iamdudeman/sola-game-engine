@@ -1,16 +1,18 @@
 package technology.sola.engine.core.graphics;
 
+import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.EcsSystemContainer;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.components.LayerComponent;
+import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.graphics.gui.components.GuiPanelComponent;
 import technology.sola.engine.graphics.gui.components.GuiTextComponent;
 
 class GuiGraphics {
-  static void render(Renderer renderer, EcsSystemContainer ecsSystemContainer) {
+  static void render(Renderer renderer, EcsSystemContainer ecsSystemContainer, AssetPool<Font> fontAssetPool) {
     // Gui panels
     ecsSystemContainer.getWorld().getEntitiesWithComponents(TransformComponent.class, GuiPanelComponent.class)
       .forEach(entity -> {
@@ -29,9 +31,9 @@ class GuiGraphics {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
 
         if (layerComponent == null) {
-          renderGuiText(renderer, entity);
+          renderGuiText(renderer, entity, fontAssetPool);
         } else {
-          renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r -> renderGuiText(renderer, entity));
+          renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r -> renderGuiText(renderer, entity, fontAssetPool));
         }
       });
   }
@@ -60,12 +62,13 @@ class GuiGraphics {
     }
   }
 
-  private static void renderGuiText(Renderer renderer, Entity entity) {
+  private static void renderGuiText(Renderer renderer, Entity entity, AssetPool<Font> fontAssetPool) {
     TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
     GuiTextComponent guiTextComponent = entity.getComponent(GuiTextComponent.class);
 
+    renderer.setFont(guiTextComponent.getFont(fontAssetPool));
+
     renderer.drawWithRenderModeMask(r -> {
-      // TODO set font used
       // TODO vary position based on parent (if it is a container)
       renderer.drawString(guiTextComponent.getText(), transformComponent.getX(), transformComponent.getY(), guiTextComponent.getColor());
     });

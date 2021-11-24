@@ -38,13 +38,12 @@ public class RenderingExample extends AbstractSola {
 
     assetPoolProvider.getAssetPool(SpriteSheet.class)
       .addAssetId("test", "assets/test_tiles_spritesheet.json");
-    Font font = assetPoolProvider.getAssetPool(Font.class)
-      .addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
+    assetPoolProvider.getAssetPool(Font.class)
+      .addAssetId("default", "assets/monospaced_NORMAL_18.json");
 
     ecsSystemContainer.add(new TestSystem());
     ecsSystemContainer.setWorld(createWorld());
 
-    platform.getRenderer().setFont(font);
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
   }
 
@@ -224,17 +223,17 @@ public class RenderingExample extends AbstractSola {
     world.createEntity()
       .addComponent(new LayerComponent("ui"))
       .addComponent(new TransformComponent(5, 5))
-      .addComponent(new GuiTextComponent(characters1, Color.RED));
+      .addComponent(new GuiTextComponent("default", characters1, Color.RED));
 
     world.createEntity()
       .addComponent(new LayerComponent("ui"))
       .addComponent(new TransformComponent(5, 35))
-      .addComponent(new GuiTextComponent(characters2, Color.BLACK));
+      .addComponent(new GuiTextComponent("default", characters2, Color.BLACK));
 
     world.createEntity()
       .addComponent(new LayerComponent("ui"))
       .addComponent(new TransformComponent(5, 65))
-      .addComponent(new GuiTextComponent("Hello world!", Color.BLUE));
+      .addComponent(new GuiTextComponent("default", "Hello world!", Color.BLUE));
 
     return world;
   }

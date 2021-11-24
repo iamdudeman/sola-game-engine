@@ -2,8 +2,6 @@
 * GUI
   * Elements
     * Panel / Container
-      * width / height (transform)
-      * background color
       * padding
       * "child" elements should be relative to this
     * Text
@@ -52,6 +50,8 @@
   * GUI asset manager
     * Allows adding images and via file selector
     * Game has a project folder structure to add/remove files
+* Gui Components
+  * Button
 * Scripting language
   * Consider scrapping this features
   * How will that work with browser implementation?
