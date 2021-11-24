@@ -1,13 +1,16 @@
 package technology.sola.engine.ecs;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class Entity {
+public class Entity implements Serializable {
   final int entityIndex;
   private final World world;
+  private final String uniqueId;
   private List<Class<? extends Component>> currentComponents = new ArrayList<>();
   private String name = null;
 
@@ -18,6 +21,10 @@ public class Entity {
    */
   public int getId() {
     return entityIndex;
+  }
+
+  public String getUniqueId() {
+    return uniqueId;
   }
 
   /**
@@ -98,5 +105,6 @@ public class Entity {
   Entity(World world, int entityIndex) {
     this.world = world;
     this.entityIndex = entityIndex;
+    this.uniqueId = UUID.randomUUID().toString();
   }
 }

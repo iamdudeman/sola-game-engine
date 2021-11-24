@@ -2,7 +2,7 @@ package technology.sola.engine.platform.swing.assets;
 
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.graphics.SolaImage;
-import technology.sola.engine.platform.swing.exception.FailedSolaImageLoadException;
+import technology.sola.engine.platform.swing.assets.exception.FailedSolaImageLoadException;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

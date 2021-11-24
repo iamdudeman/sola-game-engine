@@ -41,14 +41,14 @@ class EcsSystemContainerTest {
 
   @Test
   void whenAddingSystem_shouldSortByOrderAndIgnoreInactive() {
-    AbstractEcsSystem mockFirstUpdateSystem = Mockito.mock(AbstractEcsSystem.class);
+    EcsSystem mockFirstUpdateSystem = Mockito.mock(EcsSystem.class);
     Mockito.when(mockFirstUpdateSystem.getOrder()).thenReturn(0);
     Mockito.when(mockFirstUpdateSystem.isActive()).thenReturn(true);
 
-    AbstractEcsSystem mockSecondUpdateSystem = Mockito.mock(AbstractEcsSystem.class);
+    EcsSystem mockSecondUpdateSystem = Mockito.mock(EcsSystem.class);
     Mockito.when(mockSecondUpdateSystem.isActive()).thenReturn(true);
 
-    AbstractEcsSystem mockThirdUpdateSystem = Mockito.mock(AbstractEcsSystem.class);
+    EcsSystem mockThirdUpdateSystem = Mockito.mock(EcsSystem.class);
     Mockito.when(mockThirdUpdateSystem.getOrder()).thenReturn(2);
     Mockito.when(mockThirdUpdateSystem.isActive()).thenReturn(false);
 
@@ -66,7 +66,7 @@ class EcsSystemContainerTest {
     Mockito.verify(mockThirdUpdateSystem, Mockito.never()).update(mockWorld, 0.16f);
   }
 
-  static class TestUpdateEcsSystem extends AbstractEcsSystem {
+  static class TestUpdateEcsSystem extends EcsSystem {
     @Override
     public int getOrder() {
       return 0;

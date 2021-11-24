@@ -1,60 +1,11 @@
 # Branch WIP
 
+
 # TODO List
-* Camera
-  * Figure out how to implement
-    * Translate
-    * Scale / zoom
-  * Possibly multiple cameras?
-    * Camera output to section of a screen (allows split screen then)?
-  * Screen units vs world units?
-* GUI
-  * Elements
-    * Text
-    * Button
-  * Layout
-* Animation
-  * Component and System
-* Scene
-  * Implement a good abstraction for this (maybe use the one SolKana had)
-* Research Virtual File System
-* Browser Platform
-  * Improve performance (StressTestExample can't handle a lot of objects)
-  * Implement Font loading
-  * Implement window resizing using Viewport
-* Android Platform
-  * Implement
-* Tools
-  * Export from Engine UI to installer of some sort
-    * Include JRE and assets
-  * Tool to export browser platform Main java method instead of using gradle plugin
-* Audio
-  * Interface for type
-  * Implement loader per platform (Swing and JavaFX can probably share though)
-* Build pipeline
-  * Run full build for testing and code quality
-  * Generate engine and platform artifacts
-* Scripting language
-  * How will that work with browser implementation?
-  * Maybe a custom Domain Specific Language?
-    * Perhaps JSON that describes what Systems to load with what settings
-    * Describe Scenes and Entities / components
-* Physics
-  * Rotation
-  * Collision Detection
-    * Collision layers / tags for ignoring specific collisions
-    * Polygon x AABB
-    * Polygon x Circle
-    * Polygon x Polygon
-* Particle System
-  * position
-  * velocity
-  * time left alive
-  * color?
-  * size?
 * Engine GUI Editor (Sola Editor)
   * Way to view all Systems and Components available
   * Way to view various EventListeners?
+  * Create child + parent relationships for the entities?
   * Entity editor?
     * primitive types could generate a dialog of some sort
     * saves to json file
@@ -65,11 +16,57 @@
   * GUI asset manager
     * Allows adding images and via file selector
     * Game has a project folder structure to add/remove files
+* Rendering
+  * SolaGraphics could cull entities that are outside the camera viewport
+* Unit Testing
+  * Add easy way to test the ability of ECS components to be serializable
+  * Add lots of missing tests :)
+* Research Virtual File System
+* Browser Platform
+  * Implement better tool for compiling Java to JavaScript code (TeaVM gradle plugin has some file locking issues)
+  * Improve performance (StressTestExample can't handle a lot of objects)
+  * Implement Font loading
+  * Implement SpriteSheet loading
+  * Implement window resizing using Viewport
+* Tools
+  * Export from Engine UI to installer of some sort
+    * Include JRE and assets
+* Audio
+  * Interface for type
+  * Implement loader per platform (Swing and JavaFX can probably share though)
+* Build pipeline
+  * Run full build for testing and code quality
+  * Generate engine and platform artifacts
+* Particle System
+  * transform
+  * speed
+  * time left alive
+  * color?
+  * size?
+* Gui Components
+  * Panel
+    * padding
+    * parent Panel option for nesting panels
+  * Text
+    * should handle wrapping based on parent Panel?
+  * Button
+* Scripting language
+  * Consider scrapping this features
+  * How will that work with browser implementation?
+  * Maybe a custom Domain Specific Language?
+    * Perhaps JSON that describes what Systems to load with what settings
+    * Describe Scenes and Entities / components
+* Physics
+  * Collision Detection
+    * Collision layers / tags for ignoring specific collisions
+    * Polygon x AABB
+    * Polygon x Circle
+    * Polygon x Polygon
+* Camera
+  * Possibly allow multiple cameras (think split screen games)
 * Integrations
   * Steam?
     * include JRE in the output file
       * might vary per platform
-* Matrix2D
-  * Implement inverse
-  * Implement reflection
-  * Implement orthogonal projection
+* Android Platform
+  * Implement

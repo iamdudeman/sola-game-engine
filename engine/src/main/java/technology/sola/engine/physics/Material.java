@@ -1,8 +1,9 @@
 package technology.sola.engine.physics;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Material {
+public class Material implements Serializable {
   /** Material with mass set to 1, restitution set to 0.01 and friction set to 0. */
   public static final Material UNIT_MASS_MATERIAL = new Material(1);
 

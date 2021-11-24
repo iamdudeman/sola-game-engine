@@ -5,13 +5,13 @@ public class Canvas {
   protected int height;
   protected int[] pixels;
 
-  Canvas(int width, int height) {
+  public Canvas(int width, int height) {
     this.width = width;
     this.height = height;
     this.pixels = new int[width * height];
   }
 
-  Canvas(int width, int height, int[] pixels) {
+  public Canvas(int width, int height, int[] pixels) {
     this.width = width;
     this.height = height;
     this.pixels = pixels;

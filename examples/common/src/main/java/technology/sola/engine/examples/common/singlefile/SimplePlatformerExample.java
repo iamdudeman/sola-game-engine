@@ -1,76 +1,94 @@
 package technology.sola.engine.examples.common.singlefile;
 
-import technology.sola.engine.core.AbstractSola;
-import technology.sola.engine.ecs.AbstractEcsSystem;
+import technology.sola.engine.core.Sola;
+import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.ecs.EcsSystem;
 import technology.sola.engine.ecs.Component;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.core.graphics.SolaGraphics;
+import technology.sola.engine.graphics.components.CameraComponent;
+import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.input.Key;
-import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.physics.Material;
-import technology.sola.engine.physics.SolaPhysics;
+import technology.sola.engine.core.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
-import technology.sola.engine.physics.component.PositionComponent;
-import technology.sola.engine.physics.component.VelocityComponent;
+import technology.sola.math.linear.Vector2D;
 
-public class SimplePlatformerExample extends AbstractSola {
-  public SimplePlatformerExample() {
-    config(800, 600, 30, true);
+public class SimplePlatformerExample extends Sola {
+  private SolaGraphics solaGraphics;
+
+  @Override
+  protected SolaConfiguration buildConfiguration() {
+    return new SolaConfiguration("Simple Platformer",800, 600, 30, true);
   }
 
   @Override
   protected void onInit() {
-    SolaPhysics solaPhysics = new SolaPhysics(eventHub);
+    SolaPhysics.use(eventHub, ecsSystemContainer);
+    solaGraphics = SolaGraphics.use(ecsSystemContainer, platform.getRenderer(), assetPoolProvider);
 
-    solaPhysics.applyTo(ecsSystemContainer);
-    ecsSystemContainer.add(new MovingPlatformSystem());
-    ecsSystemContainer.add(new PlayerSystem(keyboardInput));
-
+    ecsSystemContainer.add(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem());
     ecsSystemContainer.setWorld(buildWorld());
+
+    solaGraphics.setRenderDebug(true);
   }
 
   @Override
-  protected void onRender() {
+  protected void onRender(Renderer renderer) {
     renderer.clear();
 
-    ecsSystemContainer.getWorld().getEntitiesWithComponents(ColliderComponent.class, PositionComponent.class)
-      .forEach(entity -> {
-        PositionComponent positionComponent = entity.getComponent(PositionComponent.class);
-        ColliderComponent colliderComponent = entity.getComponent(ColliderComponent.class);
-        boolean isPlayer = entity.getComponent(PlayerComponent.class) != null;
-        Color color = isPlayer ? Color.BLUE : Color.WHITE;
-
-        renderer.fillRect(positionComponent.getX(), positionComponent.getY(), colliderComponent.getBoundingWidth(), colliderComponent.getBoundingHeight(), color);
-      });
+    solaGraphics.render();
   }
 
   private World buildWorld() {
     World world = new World(10);
 
     world.createEntity()
+      .addComponent(new CameraComponent())
+      .addComponent(new TransformComponent(0, 0, 1, 1));
+
+    world.createEntity()
       .addComponent(new PlayerComponent())
-      .addComponent(new PositionComponent(200, 250))
-      .addComponent(new VelocityComponent())
-      .addComponent(ColliderComponent.rectangle(50, 50))
+      .addComponent(new TransformComponent(200, 300, 50, 50))
+      .addComponent(new RectangleRendererComponent(Color.BLUE))
+      .addComponent(ColliderComponent.aabb())
       .addComponent(new DynamicBodyComponent(new Material(1)));
 
     world.createEntity()
-      .addComponent(new PositionComponent(150, 400))
-      .addComponent(new VelocityComponent())
-      .addComponent(ColliderComponent.rectangle(200, 75));
+      .addComponent(new TransformComponent(150, 400, 200, 75f))
+      .addComponent(new RectangleRendererComponent(Color.WHITE))
+      .addComponent(ColliderComponent.aabb());
 
     world.createEntity()
-      .addComponent(new PositionComponent(400, 430))
-      .addComponent(new VelocityComponent())
+      .addComponent(new TransformComponent(400, 430, 100, 35f))
       .addComponent(new MovingPlatformComponent())
-      .addComponent(ColliderComponent.rectangle(100, 35));
+      .addComponent(new DynamicBodyComponent(true))
+      .addComponent(new RectangleRendererComponent(Color.WHITE))
+      .addComponent(ColliderComponent.aabb());
 
     world.createEntity()
-      .addComponent(new PositionComponent(550, 200))
-      .addComponent(new VelocityComponent())
-      .addComponent(ColliderComponent.rectangle(200, 75));
+      .addComponent(new TransformComponent(550, 200, 200, 75f))
+      .addComponent(new RectangleRendererComponent(Color.WHITE))
+      .addComponent(ColliderComponent.aabb());
 
+    world.createEntity()
+      .addComponent(new TransformComponent(1050, 190, 200, 75f))
+      .addComponent(new RectangleRendererComponent(Color.WHITE))
+      .addComponent(ColliderComponent.aabb());
+
+    world.createEntity()
+      .addComponent(new TransformComponent(1575, 180, 100, 50f))
+      .addComponent(new RectangleRendererComponent(Color.WHITE))
+      .addComponent(ColliderComponent.aabb());
+
+    world.createEntity()
+      .addComponent(new TransformComponent(1800, 170, 50, 50f))
+      .addComponent(new RectangleRendererComponent(Color.YELLOW))
+      .addComponent(ColliderComponent.aabb());
 
     return world;
   }
@@ -83,22 +101,22 @@ public class SimplePlatformerExample extends AbstractSola {
     private boolean isGoingUp = true;
   }
 
-  private static class MovingPlatformSystem extends AbstractEcsSystem {
+  private static class MovingPlatformSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
-      world.getEntitiesWithComponents(MovingPlatformComponent.class, VelocityComponent.class)
+      world.getEntitiesWithComponents(MovingPlatformComponent.class, DynamicBodyComponent.class)
         .forEach(entity -> {
           MovingPlatformComponent movingPlatformComponent = entity.getComponent(MovingPlatformComponent.class);
-          VelocityComponent velocityComponent = entity.getComponent(VelocityComponent.class);
+          DynamicBodyComponent velocityComponent = entity.getComponent(DynamicBodyComponent.class);
 
-         movingPlatformComponent.counter += deltaTime;
+          movingPlatformComponent.counter += deltaTime;
 
-         if (movingPlatformComponent.counter >= 10) {
-           movingPlatformComponent.counter = 0;
-           movingPlatformComponent.isGoingUp = !movingPlatformComponent.isGoingUp;
-         }
+          if (movingPlatformComponent.counter >= 10) {
+            movingPlatformComponent.counter = 0;
+            movingPlatformComponent.isGoingUp = !movingPlatformComponent.isGoingUp;
+          }
 
-         velocityComponent.setY(movingPlatformComponent.isGoingUp ? -25 : 25);
+          velocityComponent.setVelocity(new Vector2D(0, movingPlatformComponent.isGoingUp ? -25 : 25));
         });
     }
 
@@ -108,13 +126,7 @@ public class SimplePlatformerExample extends AbstractSola {
     }
   }
 
-  private static class PlayerSystem extends AbstractEcsSystem {
-    private final KeyboardInput keyboardInput;
-
-    public PlayerSystem(KeyboardInput keyboardInput) {
-      this.keyboardInput = keyboardInput;
-    }
-
+  private class PlayerSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
       world.getEntitiesWithComponents(PlayerComponent.class)
@@ -136,6 +148,38 @@ public class SimplePlatformerExample extends AbstractSola {
     @Override
     public int getOrder() {
       return 0;
+    }
+  }
+
+  private static class CameraProgressSystem extends EcsSystem {
+    @Override
+    public void update(World world, float deltaTime) {
+      var cameras = world.getEntitiesWithComponents(CameraComponent.class, TransformComponent.class);
+      var players = world.getEntitiesWithComponents(PlayerComponent.class, TransformComponent.class);
+
+      if (!cameras.isEmpty() && !players.isEmpty()) {
+        var camera = cameras.get(0);
+        var player = players.get(0);
+        var cameraTransform = camera.getComponent(TransformComponent.class);
+        var playerTransform = player.getComponent(TransformComponent.class);
+
+        float dx = playerTransform.getX() - cameraTransform.getX();
+
+        if (dx > 200) {
+          cameraTransform.setX(cameraTransform.getX() + (dx / 150));
+        }
+
+        float dy = playerTransform.getY() - cameraTransform.getY();
+
+        if (dy < 250) {
+          cameraTransform.setY(cameraTransform.getY() - 0.05f);
+        }
+      }
+    }
+
+    @Override
+    public int getOrder() {
+      return 50;
     }
   }
 }

@@ -6,7 +6,7 @@ import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.graphics.font.FontInfo;
-import technology.sola.engine.platform.javafx.exception.FailedFontLoadException;
+import technology.sola.engine.platform.javafx.assets.exception.FailedFontLoadException;
 
 import java.io.File;
 import java.io.FileReader;

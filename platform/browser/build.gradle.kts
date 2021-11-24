@@ -23,6 +23,7 @@ dependencies {
   implementation("org.teavm:teavm-jso-apis:0.6.1")
 
   // Logging
+  api("org.slf4j:slf4j-api:1.7.30")
   implementation("org.teavm:teavm-extras-slf4j:0.6.1")
 
   // Test

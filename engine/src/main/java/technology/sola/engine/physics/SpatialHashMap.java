@@ -1,8 +1,8 @@
 package technology.sola.engine.physics;
 
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.physics.component.ColliderComponent;
-import technology.sola.engine.physics.component.PositionComponent;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.*;
@@ -64,15 +64,15 @@ public class SpatialHashMap {
   }
 
   List<Vector2D> getBucketIdsForEntity(Entity entity) {
-    PositionComponent positionComponent = entity.getComponent(PositionComponent.class);
+    TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
     ColliderComponent colliderComponent = entity.getComponent(ColliderComponent.class);
 
-    if (positionComponent == null || colliderComponent == null) return Collections.emptyList();
+    if (transformComponent == null || colliderComponent == null) return Collections.emptyList();
 
-    float x = positionComponent.getX();
-    float y = positionComponent.getY();
-    float width = colliderComponent.getBoundingWidth();
-    float height = colliderComponent.getBoundingHeight();
+    float x = transformComponent.getX();
+    float y = transformComponent.getY();
+    float width = colliderComponent.getBoundingWidth() * transformComponent.getScaleX();
+    float height = colliderComponent.getBoundingHeight() * transformComponent.getScaleY();
 
     List<Vector2D> ids = new ArrayList<>();
 
@@ -106,10 +106,11 @@ public class SpatialHashMap {
       entities.stream()
         .map(entity -> {
           ColliderComponent colliderComponent = entity.getComponent(ColliderComponent.class);
+          TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
 
-          if (colliderComponent == null) return 0f;
+          if (colliderComponent == null || transformComponent == null) return 0f;
 
-          return Math.max(colliderComponent.getBoundingWidth(), colliderComponent.getBoundingHeight());
+          return Math.max(colliderComponent.getBoundingWidth() * transformComponent.getScaleX(), colliderComponent.getBoundingHeight() * transformComponent.getScaleY());
         })
         .max(Comparator.naturalOrder())
         .orElse(0.0f)

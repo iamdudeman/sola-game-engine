@@ -1,6 +1,6 @@
 package technology.sola.engine.assets;
 
-import technology.sola.engine.exception.asset.MissingAssetPoolException;
+import technology.sola.engine.assets.exception.MissingAssetPoolException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +13,7 @@ public class AssetPoolProvider {
   }
 
   @SuppressWarnings("unchecked")
-  public <T> AssetPool<T> getAssetPool(Class<T> assetClass) {
+  public <T extends Asset> AssetPool<T> getAssetPool(Class<T> assetClass) {
     AssetPool<?> assetPool = assetPoolMap.get(assetClass);
 
     if (assetPool == null) {

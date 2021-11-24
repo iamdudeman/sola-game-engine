@@ -1,8 +1,9 @@
 package technology.sola.engine.ecs;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class World {
+public class World implements Serializable {
   private final int maxEntityCount;
   private final Entity[] entities;
   private final Map<Class<? extends Component>, Component[]> components = new HashMap<>();

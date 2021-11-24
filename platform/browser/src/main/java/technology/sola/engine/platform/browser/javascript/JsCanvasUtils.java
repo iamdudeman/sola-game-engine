@@ -10,19 +10,22 @@ public class JsCanvasUtils {
       "canvasEle.id = '" + ID_SOLA_CANVAS + "';" +
       "canvasEle.width = width;" +
       "canvasEle.height = height;" +
-      "document.getElementById('" + ID_SOLA_ANCHOR + "').appendChild(canvasEle);";
+      "document.getElementById('" + ID_SOLA_ANCHOR + "').appendChild(canvasEle);" +
+      "window.solaCanvas = canvasEle;" +
+      "window.solaContext2d = window.solaCanvas.getContext('2d');";
 
   private static final String RENDER_SCRIPT =
-    "window.solaCanvas = window.solaCanvas || document.getElementById('" + ID_SOLA_CANVAS + "');" +
-      "var context = window.solaCanvas.getContext('2d');" +
       "var imageData = new ImageData(Uint8ClampedArray.from(rendererData), window.solaCanvas.width, window.solaCanvas.height);" +
-      "context.putImageData(imageData, 0, 0);";
+      "window.solaContext2d.putImageData(imageData, 0, 0);";
 
   @JSBody(params = { "width", "height" }, script = INIT_SCRIPT)
   public static native void canvasInit(int width, int height);
 
   @JSBody(params = { "rendererData" }, script = RENDER_SCRIPT)
   public static native void renderToCanvas(int[] rendererData);
+
+  @JSBody(params = { "w", "h"}, script = "window.solaContext2d.clearRect(0, 0, w, h)")
+  public static native void clearRect(int w, int h);
 
   private JsCanvasUtils() {
   }

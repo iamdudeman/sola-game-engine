@@ -1,10 +1,10 @@
 package technology.sola.engine.physics;
 
 import org.junit.jupiter.api.Test;
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.physics.component.ColliderComponent;
-import technology.sola.engine.physics.component.PositionComponent;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.Collections;
@@ -22,8 +22,8 @@ class SpatialHashMapTest {
   @Test
   void whenEntitiesHaveNoColliderComponent_shouldNotThrowException() {
     World world = new World(2);
-    world.createEntity().addComponent(new PositionComponent());
-    world.createEntity().addComponent(new PositionComponent());
+    world.createEntity().addComponent(new TransformComponent());
+    world.createEntity().addComponent(new TransformComponent());
 
     assertDoesNotThrow(() -> new SpatialHashMap(world.getEntitiesWithComponents()));
   }
@@ -31,8 +31,8 @@ class SpatialHashMapTest {
   @Test
   void whenEntitiesHaveNoPositionComponent_shouldNotThrowException() {
     World world = new World(2);
-    world.createEntity().addComponent(ColliderComponent.rectangle(10, 10));
-    world.createEntity().addComponent(ColliderComponent.rectangle(10, 10));
+    world.createEntity().addComponent(ColliderComponent.aabb(10, 10));
+    world.createEntity().addComponent(ColliderComponent.aabb(10, 10));
 
     assertDoesNotThrow(() -> new SpatialHashMap(world.getEntitiesWithComponents()));
   }
@@ -130,24 +130,24 @@ class SpatialHashMapTest {
     World world = new World(5);
 
     world.createEntity()
-      .addComponent(new PositionComponent(0, 0))
-      .addComponent(ColliderComponent.rectangle(10, 10));
+      .addComponent(new TransformComponent(0, 0))
+      .addComponent(ColliderComponent.aabb(10, 10));
 
     world.createEntity()
-      .addComponent(new PositionComponent(25, 25))
-      .addComponent(ColliderComponent.rectangle(20, 20));
+      .addComponent(new TransformComponent(25, 25))
+      .addComponent(ColliderComponent.aabb(20, 20));
 
     world.createEntity()
-      .addComponent(new PositionComponent(55, 55))
-      .addComponent(ColliderComponent.rectangle(15, 15));
+      .addComponent(new TransformComponent(55, 55))
+      .addComponent(ColliderComponent.aabb(15, 15));
 
     world.createEntity()
-      .addComponent(new PositionComponent(25, 35))
-      .addComponent(ColliderComponent.rectangle(10, 10));
+      .addComponent(new TransformComponent(25, 35))
+      .addComponent(ColliderComponent.aabb(10, 10));
 
     world.createEntity()
-      .addComponent(new PositionComponent(45, 35))
-      .addComponent(ColliderComponent.rectangle(10, 10));
+      .addComponent(new TransformComponent(45, 35))
+      .addComponent(ColliderComponent.aabb(10, 10));
 
     return world;
   }

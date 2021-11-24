@@ -1,16 +1,18 @@
 package technology.sola.engine.assets;
 
-import technology.sola.engine.exception.asset.MissingAssetException;
+import technology.sola.engine.assets.exception.MissingAssetException;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AssetPool<T> {
+public abstract class AssetPool<T extends Asset> {
   protected Map<String, T> cachedAssets = new HashMap<>();
   protected Map<String, String> assetIdToPathMap = new HashMap<>();
 
-  public void addAssetId(String id, String path) {
+  public AssetPool<T> addAssetId(String id, String path) {
     assetIdToPathMap.put(id, path);
+
+    return this;
   }
 
   public T addAndGetAsset(String id, String path) {
