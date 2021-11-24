@@ -39,25 +39,20 @@ class GuiGraphics {
   }
 
   private static void renderGuiPanels(Renderer renderer, Entity entity) {
-    // todo transform needs to account for parent values as well if present
     TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
     GuiPanelComponent guiPanelComponent = entity.getComponent(GuiPanelComponent.class);
 
     if (guiPanelComponent.getBackgroundColor().hasAlpha()) {
       renderer.setRenderMode(RenderMode.ALPHA);
     }
-
     renderer.fillRect(transformComponent.getX(), transformComponent.getY(), transformComponent.getScaleX(), transformComponent.getScaleY(), guiPanelComponent.getBackgroundColor());
-
     renderer.setRenderMode(RenderMode.NORMAL);
 
     if (guiPanelComponent.getBorderColor() != null) {
       if (guiPanelComponent.getBorderColor().hasAlpha()) {
         renderer.setRenderMode(RenderMode.ALPHA);
       }
-
       renderer.drawRect(transformComponent.getX(), transformComponent.getY(), transformComponent.getScaleX(), transformComponent.getScaleY(), guiPanelComponent.getBorderColor());
-
       renderer.setRenderMode(RenderMode.NORMAL);
     }
   }
@@ -69,7 +64,6 @@ class GuiGraphics {
     renderer.setFont(guiTextComponent.getFont(fontAssetPool));
 
     renderer.drawWithRenderModeMask(r -> {
-      // TODO vary position based on parent (if it is a container)
       renderer.drawString(guiTextComponent.getText(), transformComponent.getX(), transformComponent.getY(), guiTextComponent.getColor());
     });
   }

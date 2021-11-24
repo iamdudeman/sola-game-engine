@@ -1,15 +1,21 @@
 # Branch WIP
-* GUI
-  * Elements
-    * Panel / Container
-      * padding
-      * "child" elements should be relative to this
-    * Text
-      * should handle new lines probably?
-      * font choice
-    * Button
+
 
 # TODO List
+* Engine GUI Editor (Sola Editor)
+  * Way to view all Systems and Components available
+  * Way to view various EventListeners?
+  * Create child + parent relationships for the entities?
+  * Entity editor?
+    * primitive types could generate a dialog of some sort
+    * saves to json file
+  * could load in multiple files
+    * edit configurations go to appropriate files
+  * play mode for quick testing
+  * export stuff somehow maybe?
+  * GUI asset manager
+    * Allows adding images and via file selector
+    * Game has a project folder structure to add/remove files
 * Consider removing "Abstract" from various class names
 * Unit Testing
   * Add easy way to test the ability of ECS components to be serializable
@@ -36,21 +42,12 @@
   * time left alive
   * color?
   * size?
-* Engine GUI Editor (Sola Editor)
-  * Way to view all Systems and Components available
-  * Way to view various EventListeners?
-  * Create child + parent relationships for the entities?
-  * Entity editor?
-    * primitive types could generate a dialog of some sort
-    * saves to json file
-  * could load in multiple files
-    * edit configurations go to appropriate files
-  * play mode for quick testing
-  * export stuff somehow maybe?
-  * GUI asset manager
-    * Allows adding images and via file selector
-    * Game has a project folder structure to add/remove files
 * Gui Components
+  * Panel
+    * padding
+    * parent Panel option for nesting panels
+  * Text
+    * should handle wrapping based on parent Panel?
   * Button
 * Scripting language
   * Consider scrapping this features
