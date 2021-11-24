@@ -1,13 +1,13 @@
 package technology.sola.engine.physics.system;
 
-import technology.sola.engine.ecs.AbstractEcsSystem;
+import technology.sola.engine.ecs.EcsSystem;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.event.EventListener;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.event.CollisionManifoldEvent;
 
-public class GravitySystem extends AbstractEcsSystem implements EventListener<CollisionManifoldEvent> {
+public class GravitySystem extends EcsSystem implements EventListener<CollisionManifoldEvent> {
   public static final int ORDER = PhysicsSystem.ORDER - 1;
 
   private float gravityConstant;

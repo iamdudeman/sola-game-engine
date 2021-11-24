@@ -1,11 +1,11 @@
 package technology.sola.engine.graphics.sprite;
 
-import technology.sola.engine.ecs.AbstractEcsSystem;
+import technology.sola.engine.ecs.EcsSystem;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.components.SpriteAnimatorComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 
-public class SpriteAnimatorSystem extends AbstractEcsSystem {
+public class SpriteAnimatorSystem extends EcsSystem {
   @Override
   public void update(World world, float deltaTime) {
     world.getEntitiesWithComponents(SpriteComponent.class, SpriteAnimatorComponent.class)

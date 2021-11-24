@@ -1,9 +1,9 @@
 package technology.sola.engine.examples.common.singlefile;
 
-import technology.sola.engine.core.AbstractSola;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.AbstractEcsSystem;
+import technology.sola.engine.ecs.EcsSystem;
 import technology.sola.engine.ecs.Component;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
@@ -24,7 +24,7 @@ import technology.sola.math.linear.Vector2D;
 
 import java.util.List;
 
-public class RenderingExample extends AbstractSola {
+public class RenderingExample extends Sola {
   private SolaGraphics solaGraphics;
 
   @Override
@@ -71,7 +71,7 @@ public class RenderingExample extends AbstractSola {
   private static class MovingComponent implements Component {
   }
 
-  private class TestSystem extends AbstractEcsSystem {
+  private class TestSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
       world.getEntitiesWithComponents(TransformComponent.class, MovingComponent.class)

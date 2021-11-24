@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.function.Consumer;
 
-public abstract class AbstractGameLoop implements Runnable {
-  private static final Logger LOGGER = LoggerFactory.getLogger(AbstractGameLoop.class);
+public abstract class GameLoop implements Runnable {
+  private static final Logger LOGGER = LoggerFactory.getLogger(GameLoop.class);
   protected final FpsTracker fpsTracker = new FpsTracker();
   protected final Consumer<Float> updateMethod;
   protected final Runnable renderMethod;
@@ -16,7 +16,7 @@ public abstract class AbstractGameLoop implements Runnable {
   protected float updateCatchUpAccumulator;
   private boolean isRunning = false;
 
-  protected AbstractGameLoop(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
+  protected GameLoop(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
     this.updateMethod = updateMethod;
     this.renderMethod = renderMethod;
     this.deltaTime = 1f / targetUpdatesPerSecond;

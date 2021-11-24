@@ -1,7 +1,7 @@
 package technology.sola.engine.platform.browser;
 
 import technology.sola.engine.assets.AssetPoolProvider;
-import technology.sola.engine.core.AbstractSolaPlatform;
+import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
@@ -19,7 +19,7 @@ import technology.sola.engine.platform.browser.javascript.JsUtils;
 
 import java.util.function.Consumer;
 
-public class BrowserSolaPlatform extends AbstractSolaPlatform {
+public class BrowserSolaPlatform extends SolaPlatform {
   private final boolean useSoftwareRendering;
 
   public BrowserSolaPlatform() {

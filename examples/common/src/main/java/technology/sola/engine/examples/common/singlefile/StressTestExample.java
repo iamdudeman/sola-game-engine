@@ -1,6 +1,6 @@
 package technology.sola.engine.examples.common.singlefile;
 
-import technology.sola.engine.core.AbstractSola;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.World;
@@ -16,7 +16,7 @@ import technology.sola.engine.physics.component.DynamicBodyComponent;
 
 import java.util.Random;
 
-public class StressTestExample extends AbstractSola {
+public class StressTestExample extends Sola {
   private static final float CAMERA_SCALE = 1.5f;
   private static final float CIRCLE_RADIUS = 10f;
   private final Random random = new Random();

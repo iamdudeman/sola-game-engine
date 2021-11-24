@@ -1,7 +1,7 @@
 package technology.sola.engine.physics.system;
 
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.AbstractEcsSystem;
+import technology.sola.engine.ecs.EcsSystem;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.event.EventListener;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ImpulseCollisionResolutionSystem extends AbstractEcsSystem implements EventListener<CollisionManifoldEvent> {
+public class ImpulseCollisionResolutionSystem extends EcsSystem implements EventListener<CollisionManifoldEvent> {
   public static final int ORDER = CollisionDetectionSystem.ORDER + 1;
 
   /** Smaller number is more accurate */

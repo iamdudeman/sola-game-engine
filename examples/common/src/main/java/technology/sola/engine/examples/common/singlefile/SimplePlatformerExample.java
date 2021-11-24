@@ -1,9 +1,9 @@
 package technology.sola.engine.examples.common.singlefile;
 
-import technology.sola.engine.core.AbstractSola;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.AbstractEcsSystem;
+import technology.sola.engine.ecs.EcsSystem;
 import technology.sola.engine.ecs.Component;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.graphics.Color;
@@ -18,7 +18,7 @@ import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.math.linear.Vector2D;
 
-public class SimplePlatformerExample extends AbstractSola {
+public class SimplePlatformerExample extends Sola {
   private SolaGraphics solaGraphics;
 
   @Override
@@ -101,7 +101,7 @@ public class SimplePlatformerExample extends AbstractSola {
     private boolean isGoingUp = true;
   }
 
-  private static class MovingPlatformSystem extends AbstractEcsSystem {
+  private static class MovingPlatformSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
       world.getEntitiesWithComponents(MovingPlatformComponent.class, DynamicBodyComponent.class)
@@ -126,7 +126,7 @@ public class SimplePlatformerExample extends AbstractSola {
     }
   }
 
-  private class PlayerSystem extends AbstractEcsSystem {
+  private class PlayerSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
       world.getEntitiesWithComponents(PlayerComponent.class)
@@ -151,7 +151,7 @@ public class SimplePlatformerExample extends AbstractSola {
     }
   }
 
-  private static class CameraProgressSystem extends AbstractEcsSystem {
+  private static class CameraProgressSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
       var cameras = world.getEntitiesWithComponents(CameraComponent.class, TransformComponent.class);

@@ -1,11 +1,11 @@
 package technology.sola.engine.platform.javafx.core;
 
 import javafx.animation.AnimationTimer;
-import technology.sola.engine.core.AbstractGameLoop;
+import technology.sola.engine.core.GameLoop;
 
 import java.util.function.Consumer;
 
-public class JavaFxGameLoop extends AbstractGameLoop {
+public class JavaFxGameLoop extends GameLoop {
   public JavaFxGameLoop(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
     super(updateMethod, renderMethod, targetUpdatesPerSecond, isRestingAllowed);
   }

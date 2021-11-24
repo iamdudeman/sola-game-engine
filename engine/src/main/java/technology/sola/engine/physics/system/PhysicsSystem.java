@@ -1,12 +1,12 @@
 package technology.sola.engine.physics.system;
 
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.AbstractEcsSystem;
+import technology.sola.engine.ecs.EcsSystem;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.math.linear.Vector2D;
 
-public class PhysicsSystem extends AbstractEcsSystem {
+public class PhysicsSystem extends EcsSystem {
   public static final int ORDER = 10;
 
   @Override
