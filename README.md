@@ -1,7 +1,4 @@
 # Branch WIP
-
-
-# TODO List
 * Engine GUI Editor (Sola Editor)
   * Way to view all Systems and Components available
   * Way to view various EventListeners?
@@ -16,6 +13,10 @@
   * GUI asset manager
     * Allows adding images and via file selector
     * Game has a project folder structure to add/remove files
+  * Font creator tool
+
+
+# TODO List
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
 * Unit Testing
