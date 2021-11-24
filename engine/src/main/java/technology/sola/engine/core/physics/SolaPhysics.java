@@ -1,6 +1,5 @@
-package technology.sola.engine.physics;
+package technology.sola.engine.core.physics;
 
-import technology.sola.engine.ecs.AbstractEcsSystem;
 import technology.sola.engine.ecs.EcsSystemContainer;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.physics.event.CollisionManifoldEvent;
