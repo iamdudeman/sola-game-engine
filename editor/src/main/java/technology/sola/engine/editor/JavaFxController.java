@@ -2,18 +2,24 @@ package technology.sola.engine.editor;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import technology.sola.engine.editor.controllers.LandingScreenController;
 
 import java.io.IOException;
 
 public interface JavaFxController {
-  static Scene loadSceneForController(JavaFxController controller) throws IOException {
+  static Scene loadSceneForController(JavaFxController controller) {
     FXMLLoader loader = new FXMLLoader(controller.getClass().getResource(controller.getFxmlResource()));
 
-    loader.setController(new LandingScreenController());
+    loader.setController(controller);
 
-    return new Scene(loader.load());
+    try {
+      return new Scene(loader.load());
+    } catch (IOException ex) {
+      ex.printStackTrace();
+      throw new RuntimeException(ex);
+    }
   }
 
   String getFxmlResource();
+
+  void initialize();
 }

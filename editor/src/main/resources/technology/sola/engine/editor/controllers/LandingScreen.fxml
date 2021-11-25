@@ -2,22 +2,20 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox minHeight="200.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<VBox minHeight="200.0" minWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
   <MenuBar>
-    <Menu mnemonicParsing="false" text="File">
-      <MenuItem mnemonicParsing="false" text="Close" />
+    <Menu mnemonicParsing="false" text="Project">
+      <MenuItem fx:id="menuItemNew" mnemonicParsing="false" text="New" />
+      <MenuItem fx:id="menuItemOpen" mnemonicParsing="false" text="Open" />
     </Menu>
-    <Menu mnemonicParsing="false" text="Edit">
-      <MenuItem mnemonicParsing="false" text="Delete" />
-    </Menu>
-    <Menu mnemonicParsing="false" text="Help">
-      <MenuItem mnemonicParsing="false" text="About" />
-    </Menu>
-    <Menu mnemonicParsing="false" text="Unspecified Menu">
-      <MenuItem mnemonicParsing="false" text="Action 1" />
+
+    <Menu fx:id="menuWindows" mnemonicParsing="false" text="Windows" disable="true">
+      <CheckMenuItem fx:id="checkMenuItemAssets" mnemonicParsing="false" text="Assets"/>
+      <CheckMenuItem mnemonicParsing="false" text="World"/>
     </Menu>
   </MenuBar>
 
- <Button fx:id="buttonFonts" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Fonts" />
+   <Text fx:id="textCurrentProject" strokeType="OUTSIDE" strokeWidth="0.0" text="Create a new project or open an existing one" />
 </VBox>
