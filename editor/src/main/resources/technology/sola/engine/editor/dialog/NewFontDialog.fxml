@@ -12,7 +12,7 @@
       <children>
         <Label contentDisplay="BOTTOM" text="Font name">
           <graphic>
-            <ComboBox promptText="Pick a font" value="monospaced">
+            <ComboBox fx:id="comboBoxFontName" promptText="Pick a font" value="monospaced">
               <items>
                 <FXCollections fx:factory="observableArrayList">
                   <String fx:value="monospaced" />
@@ -24,20 +24,21 @@
         </Label>
         <Label contentDisplay="BOTTOM" text="Font size">
           <graphic>
-            <Spinner amountToStepBy="1" initialValue="16">
+            <Spinner fx:id="spinnerFontSize" amountToStepBy="1">
               <valueFactory>
-                <SpinnerValueFactory.IntegerSpinnerValueFactory max="124" min="2" />
+                <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="16" max="124" min="2" />
               </valueFactory>
             </Spinner>
           </graphic>
         </Label>
         <Label contentDisplay="BOTTOM" text="Font style">
           <graphic>
-            <ComboBox promptText="Font style" value="NORMAL">
+            <ComboBox fx:id="comboBoxFontStyle" promptText="Font style" value="NORMAL">
               <items>
                 <FXCollections fx:factory="observableArrayList">
                   <String fx:value="NORMAL" />
                   <String fx:value="BOLD" />
+                  <String fx:value="ITALIC" />
                 </FXCollections>
               </items>
             </ComboBox>

@@ -27,7 +27,7 @@ public class AssetsScreenController implements JavaFxController {
   @Override
   public void initialize() {
     menuItemCreateFont.setOnAction(event -> {
-      new NewFontDialog(owner).showAndWait();
+      new NewFontDialog(owner, solaEditorContext).showAndWait();
     });
   }
 }

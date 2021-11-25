@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 public class FontRasterizerExecutable implements ToolExecutable {
   private static final String CHARACTERS = "abcdefghijklmnopqrstuvwxyz{|}~ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`";
@@ -36,6 +37,20 @@ public class FontRasterizerExecutable implements ToolExecutable {
     } catch (IOException ex) {
       ex.printStackTrace();
     }
+  }
+
+  public void createFont(String fontName, String fontStyle, String fontSize, FontFileSaver fontFileSaver) {
+    var fontInformation = prepareFontInformation(fontName, fontStyle, fontSize);
+
+    try (var fontCanvas = prepareFontCanvas(fontInformation)) {
+      var fontModel = prepareFontModel(fontInformation, fontCanvas);
+
+      fontFileSaver.save(fontInformation, fontCanvas, serializeFontModel(fontModel));
+    }
+  }
+
+  public interface FontFileSaver {
+    void save(FontInformation fontInformation, FontCanvas fontCanvas, byte[] serializedFontModel);
   }
 
   private FontInformation prepareFontInformation(String... toolArgs) {

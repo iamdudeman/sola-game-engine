@@ -51,6 +51,10 @@ public class FontCanvas implements AutoCloseable {
     ImageIO.write(bufferedImage, "png", new File(filename));
   }
 
+  public void saveToFile(File file) throws IOException {
+    ImageIO.write(bufferedImage, "png", file);
+  }
+
   @Override
   public void close() {
     graphics2D.dispose();
