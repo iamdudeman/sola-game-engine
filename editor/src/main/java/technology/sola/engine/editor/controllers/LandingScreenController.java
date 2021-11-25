@@ -90,7 +90,7 @@ public class LandingScreenController implements JavaFxController {
         if (assetsStage == null) {
           assetsStage = new Stage();
           assetsStage.setTitle("Assets");
-          assetsStage.setScene(JavaFxController.loadSceneForController(new AssetsScreenController()));
+          assetsStage.setScene(JavaFxController.loadSceneForController(new AssetsScreenController(assetsStage, solaEditorContext)));
           assetsStage.setOnCloseRequest(event -> {
             checkMenuItemAssets.setSelected(false);
           });
