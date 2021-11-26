@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import technology.sola.engine.editor.core.FolderUtils;
 import technology.sola.engine.editor.core.SolaEditorContext;
 import technology.sola.engine.editor.screens.assets.AssetsScreenController;
+import technology.sola.engine.editor.screens.world.WorldScreenController;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,9 +28,12 @@ public class LandingScreenController implements SolaEditorScreen {
 
   @FXML
   private CheckMenuItem checkMenuItemAssets;
+  @FXML
+  private CheckMenuItem checkMenuItemWorld;
 
   private final SolaEditorContext solaEditorContext;
   private Stage assetsStage = null;
+  private Stage worldStage = null;
 
   public LandingScreenController(SolaEditorContext solaEditorContext) {
     this.solaEditorContext = solaEditorContext;
@@ -107,5 +111,24 @@ public class LandingScreenController implements SolaEditorScreen {
         assetsStage.hide();
       }
     });
+
+    checkMenuItemWorld.selectedProperty().addListener(((observable, oldValue, newValue) -> {
+      if (newValue) {
+        if (worldStage == null) {
+          worldStage = new Stage();
+          worldStage.setTitle("World");
+          worldStage.setScene(SolaEditorScreen.loadSceneForController(new WorldScreenController(worldStage, solaEditorContext)));
+          worldStage.setOnCloseRequest(event -> {
+            checkMenuItemWorld.setSelected(false);
+          });
+        }
+
+        worldStage.setX(solaEditorContext.getPrimaryStage().getX() + solaEditorContext.getPrimaryStage().getWidth() + 5);
+        worldStage.setY(solaEditorContext.getPrimaryStage().getY());
+        worldStage.show();
+      } else {
+        worldStage.hide();
+      }
+    }));
   }
 }
