@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.text.Text?>
-<VBox prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="container" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
   <MenuBar>
     <Menu mnemonicParsing="false" text="File">
-      <MenuItem fx:id="menuItemNew" mnemonicParsing="false" text="New"/>
-      <MenuItem fx:id="menuItemOpen" mnemonicParsing="false" text="Open"/>
+      <MenuItem fx:id="menuItemNew" mnemonicParsing="false" text="New" />
+      <MenuItem fx:id="menuItemOpen" mnemonicParsing="false" text="Open" />
+      <MenuItem fx:id="menuItemSave" mnemonicParsing="false" text="Save" disable="true" />
+    </Menu>
+    <Menu fx:id="menuWorld" mnemonicParsing="false" text="World" disable="true">
+      <MenuItem fx:id="menuItemNewEntity" mnemonicParsing="false" text="New Entity" />
     </Menu>
   </MenuBar>
-  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Entities"/>
+  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Entities" />
 </VBox>
