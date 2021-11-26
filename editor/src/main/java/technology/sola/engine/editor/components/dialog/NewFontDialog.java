@@ -9,8 +9,8 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.Spinner;
 import javafx.stage.Modality;
 import javafx.stage.Window;
-import technology.sola.engine.editor.FolderUtils;
-import technology.sola.engine.editor.SolaEditorContext;
+import technology.sola.engine.editor.core.FolderUtils;
+import technology.sola.engine.editor.core.SolaEditorContext;
 import technology.sola.engine.tools.font.FontRasterizer;
 
 import java.io.File;

@@ -7,15 +7,14 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import technology.sola.engine.editor.FolderUtils;
-import technology.sola.engine.editor.JavaFxController;
-import technology.sola.engine.editor.SolaEditorContext;
+import technology.sola.engine.editor.core.FolderUtils;
+import technology.sola.engine.editor.core.SolaEditorContext;
 import technology.sola.engine.editor.screens.assets.AssetsScreenController;
 
 import java.io.File;
 import java.io.IOException;
 
-public class LandingScreenController implements JavaFxController {
+public class LandingScreenController implements SolaEditorScreen {
   @FXML
   private Menu menuWindows;
   @FXML
@@ -95,7 +94,7 @@ public class LandingScreenController implements JavaFxController {
         if (assetsStage == null) {
           assetsStage = new Stage();
           assetsStage.setTitle("Assets");
-          assetsStage.setScene(JavaFxController.loadSceneForController(new AssetsScreenController(assetsStage, solaEditorContext)));
+          assetsStage.setScene(SolaEditorScreen.loadSceneForController(new AssetsScreenController(assetsStage, solaEditorContext)));
           assetsStage.setOnCloseRequest(event -> {
             checkMenuItemAssets.setSelected(false);
           });

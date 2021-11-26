@@ -1,4 +1,4 @@
-package technology.sola.engine.editor;
+package technology.sola.engine.editor.core;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;

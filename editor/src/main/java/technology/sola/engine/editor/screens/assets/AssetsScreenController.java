@@ -5,15 +5,15 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import technology.sola.engine.editor.FolderUtils;
-import technology.sola.engine.editor.JavaFxController;
-import technology.sola.engine.editor.SolaEditorContext;
+import technology.sola.engine.editor.core.FolderUtils;
+import technology.sola.engine.editor.screens.SolaEditorScreen;
+import technology.sola.engine.editor.core.SolaEditorContext;
 import technology.sola.engine.editor.components.FileTreeItem;
 import technology.sola.engine.editor.components.dialog.NewFontDialog;
 
 import java.io.File;
 
-public class AssetsScreenController implements JavaFxController {
+public class AssetsScreenController implements SolaEditorScreen {
   @FXML
   private MenuItem menuItemCreateFont;
 

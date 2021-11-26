@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="container" minHeight="200.0" minWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="container" minHeight="200.0" minWidth="800.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
   <MenuBar>
     <Menu mnemonicParsing="false" text="Fonts">
       <MenuItem fx:id="menuItemCreateFont" mnemonicParsing="false" text="Create" />

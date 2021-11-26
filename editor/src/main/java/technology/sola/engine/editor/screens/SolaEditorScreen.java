@@ -1,12 +1,12 @@
-package technology.sola.engine.editor;
+package technology.sola.engine.editor.screens;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public interface JavaFxController {
-  static Scene loadSceneForController(JavaFxController controller) {
+public interface SolaEditorScreen {
+  static Scene loadSceneForController(SolaEditorScreen controller) {
     FXMLLoader loader = new FXMLLoader(controller.getClass().getResource(controller.getFxmlResource()));
 
     loader.setController(controller);
