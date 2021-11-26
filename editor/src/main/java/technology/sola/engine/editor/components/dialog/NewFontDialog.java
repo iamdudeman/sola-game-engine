@@ -55,8 +55,4 @@ public class NewFontDialog extends Dialog<File> {
       return null;
     });
   }
-
-  public void initialize() {
-
-  }
 }

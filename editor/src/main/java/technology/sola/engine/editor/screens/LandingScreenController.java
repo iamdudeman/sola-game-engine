@@ -7,6 +7,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import technology.sola.engine.editor.FolderUtils;
 import technology.sola.engine.editor.JavaFxController;
 import technology.sola.engine.editor.SolaEditorContext;
 import technology.sola.engine.editor.screens.assets.AssetsScreenController;
@@ -69,6 +70,9 @@ public class LandingScreenController implements JavaFxController {
 
           if (projectFile.createNewFile()) {
             solaEditorContext.projectFilePropertyProperty().setValue(projectFile);
+
+            new FolderUtils(solaEditorContext)
+              .createDirectories("assets/fonts", "assets/sprites", "assets/worlds");
           }
         }
       } catch (IOException e) {

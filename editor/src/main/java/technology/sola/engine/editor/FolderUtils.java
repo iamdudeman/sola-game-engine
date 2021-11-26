@@ -17,4 +17,10 @@ public class FolderUtils {
 
     return childDirectory;
   }
+
+  public void createDirectories(String ...paths) {
+    for (String path : paths) {
+      getOrCreateFolder(path);
+    }
+  }
 }

@@ -37,7 +37,6 @@ public class AssetsScreenController implements JavaFxController {
   public void initialize() {
     FolderUtils folderUtils = new FolderUtils(solaEditorContext);
     File assetsFolder = folderUtils.getOrCreateFolder("assets");
-    folderUtils.getOrCreateFolder("assets/fonts");
 
     TreeView<File> fileView = new TreeView<>(new FileTreeItem(assetsFolder));
 
