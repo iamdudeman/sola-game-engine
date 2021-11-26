@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import technology.sola.engine.editor.components.EntityListView?>
 <VBox fx:id="container" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
   <MenuBar>
     <Menu mnemonicParsing="false" text="File">
@@ -16,4 +17,5 @@
     </Menu>
   </MenuBar>
   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Entities" />
+  <EntityListView fx:id="entityListView" />
 </VBox>

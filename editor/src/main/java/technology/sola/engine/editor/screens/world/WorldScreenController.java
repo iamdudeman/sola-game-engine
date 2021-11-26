@@ -23,14 +23,13 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.List;
 
 public class WorldScreenController implements SolaEditorScreen {
   private final Stage owner;
   private final SolaEditorContext solaEditorContext;
   private final Property<World> worldProperty = new SimpleObjectProperty<>(null);
   private final Property<File> worldFileProperty = new SimpleObjectProperty<>(null);
-  private ObservableList<Entity> entityList = FXCollections.observableList(new ArrayList<>());
+  private final ObservableList<Entity> entityList = FXCollections.observableList(new ArrayList<>());
 
   @FXML
   private VBox container;
@@ -44,6 +43,8 @@ public class WorldScreenController implements SolaEditorScreen {
   private Menu menuWorld;
   @FXML
   private MenuItem menuItemNewEntity;
+  @FXML
+  private EntityListView entityListView;
 
   public WorldScreenController(Stage owner, SolaEditorContext solaEditorContext) {
     this.owner = owner;
@@ -64,9 +65,6 @@ public class WorldScreenController implements SolaEditorScreen {
     fileChooser.setInitialDirectory(worldsFolder);
     fileChooser.getExtensionFilters().add(solaExtensionFilter);
     fileChooser.setSelectedExtensionFilter(solaExtensionFilter);
-
-    EntityListView entityListView = new EntityListView();
-    container.getChildren().add(entityListView);
 
     entityListView.setItems(entityList);
 
@@ -121,10 +119,16 @@ public class WorldScreenController implements SolaEditorScreen {
     menuItemNewEntity.setOnAction(event -> {
       Entity entity = worldProperty.getValue()
         .createEntity()
-        .setName("New");
+        .setName("New Entity");
 
       entityList.add(entity);
     });
+
+    entityListView.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+      if (newValue != null) {
+        System.out.println("selected " + newValue.getName());
+      }
+    }));
   }
 
   private void saveWorld() throws IOException {
