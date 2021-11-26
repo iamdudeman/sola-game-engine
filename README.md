@@ -1,14 +1,11 @@
 # Branch WIP
-
-
-# TODO List
 * Engine GUI Editor (Sola Editor)
-  * Way to view all Systems and Components available
-  * Way to view various EventListeners?
-  * Create child + parent relationships for the entities?
   * Entity editor?
     * primitive types could generate a dialog of some sort
     * saves to json file
+  * Way to view all Systems and Components available
+  * Way to view various EventListeners?
+  * Create child + parent relationships for the entities?
   * could load in multiple files
     * edit configurations go to appropriate files
   * play mode for quick testing
@@ -16,6 +13,8 @@
   * GUI asset manager
     * Allows adding images and via file selector
     * Game has a project folder structure to add/remove files
+
+# TODO List
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
 * Unit Testing

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<DialogPane headerText="New Font" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+  <content>
+    <VBox prefWidth="250.0" spacing="8.0">
+      <children>
+        <Label contentDisplay="BOTTOM" text="Font name">
+          <graphic>
+            <ComboBox fx:id="comboBoxFontName" promptText="Pick a font" value="monospaced">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="monospaced" />
+                  <String fx:value="times" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+          </graphic>
+        </Label>
+        <Label contentDisplay="BOTTOM" text="Font size">
+          <graphic>
+            <Spinner fx:id="spinnerFontSize" amountToStepBy="1">
+              <valueFactory>
+                <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="16" max="124" min="2" />
+              </valueFactory>
+            </Spinner>
+          </graphic>
+        </Label>
+        <Label contentDisplay="BOTTOM" text="Font style">
+          <graphic>
+            <ComboBox fx:id="comboBoxFontStyle" promptText="Font style" value="NORMAL">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="NORMAL" />
+                  <String fx:value="BOLD" />
+                  <String fx:value="ITALIC" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+          </graphic>
+        </Label>
+      </children>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+    </VBox>
+  </content>
+
+  <ButtonType buttonData="OK_DONE" text="Save" />
+  <ButtonType buttonData="CANCEL_CLOSE" text="Cancel" />
+   <padding>
+      <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+   </padding>
+</DialogPane>

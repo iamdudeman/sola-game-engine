@@ -2,7 +2,7 @@ package technology.sola.engine.tools.font;
 
 import java.util.List;
 
-public class FontModel {
+class FontModel {
   private String fontGlyphFile;
   private final String fontName;
   private final String fontStyle;

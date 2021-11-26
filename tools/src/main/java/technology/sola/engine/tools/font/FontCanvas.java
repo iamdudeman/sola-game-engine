@@ -1,15 +1,12 @@
 package technology.sola.engine.tools.font;
 
-import javax.imageio.ImageIO;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FontCanvas implements AutoCloseable {
+class FontCanvas implements AutoCloseable {
   private final BufferedImage bufferedImage;
   private final Graphics2D graphics2D;
   private final FontInformation fontInformation;
@@ -47,8 +44,8 @@ public class FontCanvas implements AutoCloseable {
     return fontGlyphModelsWithPosition;
   }
 
-  public void saveToFile(String filename) throws IOException {
-    ImageIO.write(bufferedImage, "png", new File(filename));
+  public BufferedImage getBufferedImage() {
+    return bufferedImage;
   }
 
   @Override
