@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.controllers;
+package technology.sola.engine.editor.screens.assets;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import technology.sola.engine.editor.JavaFxController;
 import technology.sola.engine.editor.SolaEditorContext;
 import technology.sola.engine.editor.components.FileTreeItem;
-import technology.sola.engine.editor.dialog.NewFontDialog;
+import technology.sola.engine.editor.components.dialog.NewFontDialog;
 
 import java.io.File;
 
