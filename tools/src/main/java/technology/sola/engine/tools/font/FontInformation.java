@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FontInformation {
+class FontInformation {
   private final String fontName;
   private final String fontStyle;
   private final int fontSize;

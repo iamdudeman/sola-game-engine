@@ -20,10 +20,6 @@ public class FileTreeItem extends TreeItem<File> {
     if (isFirstTimeChildren) {
       isFirstTimeChildren = false;
 
-      /*
-       * First getChildren() call, so we actually go off and determine the
-       * children of the File contained in this TreeItem.
-       */
       super.getChildren().setAll(buildChildren(this));
     }
     return super.getChildren();
@@ -39,8 +35,6 @@ public class FileTreeItem extends TreeItem<File> {
 
     return isLeaf;
   }
-
-
 
   private ObservableList<TreeItem<File>> buildChildren(TreeItem<File> TreeItem) {
     File f = TreeItem.getValue();

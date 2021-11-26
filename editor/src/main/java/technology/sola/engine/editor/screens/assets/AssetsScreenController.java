@@ -5,6 +5,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import technology.sola.engine.editor.FolderUtils;
 import technology.sola.engine.editor.JavaFxController;
 import technology.sola.engine.editor.SolaEditorContext;
 import technology.sola.engine.editor.components.FileTreeItem;
@@ -34,9 +35,11 @@ public class AssetsScreenController implements JavaFxController {
 
   @Override
   public void initialize() {
-    TreeView<File> fileView = new TreeView<>(
-      new FileTreeItem(new File(solaEditorContext.projectFilePropertyProperty().getValue().getParentFile(), "assets"))
-    );
+    FolderUtils folderUtils = new FolderUtils(solaEditorContext);
+    File assetsFolder = folderUtils.getOrCreateFolder("assets");
+    folderUtils.getOrCreateFolder("assets/fonts");
+
+    TreeView<File> fileView = new TreeView<>(new FileTreeItem(assetsFolder));
 
     container.getChildren().add(fileView);
 

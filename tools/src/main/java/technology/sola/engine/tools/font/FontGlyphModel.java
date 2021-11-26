@@ -1,6 +1,6 @@
 package technology.sola.engine.tools.font;
 
-public class FontGlyphModel {
+class FontGlyphModel {
   private final String glyph;
   private final int width;
   private final int height;
