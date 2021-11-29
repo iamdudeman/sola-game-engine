@@ -21,6 +21,8 @@ public class SolaEditor extends Application {
     primaryStage.setOnCloseRequest(event -> {
       // TODO probably use a dialog to prompt "are you sure?" first
       Platform.exit();
+      // TODO better way than this needed
+      System.exit(0);
     });
     primaryStage.setX(Screen.getPrimary().getVisualBounds().getWidth() / 8);
     primaryStage.setY(Screen.getPrimary().getVisualBounds().getHeight() / 4);

@@ -13,6 +13,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.ecs.World;
@@ -20,11 +21,13 @@ import technology.sola.engine.ecs.io.Base64WorldSerializer;
 import technology.sola.engine.editor.components.EntityListView;
 import technology.sola.engine.editor.components.ecs.RectangleRendererComponentController;
 import technology.sola.engine.editor.components.ecs.TransformComponentController;
+import technology.sola.engine.editor.core.EditorSola;
 import technology.sola.engine.editor.core.FolderUtils;
 import technology.sola.engine.editor.core.SolaEditorContext;
 import technology.sola.engine.editor.screens.SolaEditorScreen;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
+import technology.sola.engine.platform.javafx.JavaFxSolaPlatform;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,9 +65,15 @@ public class WorldScreenController implements SolaEditorScreen {
   @FXML
   private VBox vboxComponents;
 
+  private final EditorSola editorSola;
+  private final SolaPlatform solaPlatform;
+
   public WorldScreenController(Stage owner, SolaEditorContext solaEditorContext) {
     this.owner = owner;
     this.solaEditorContext = solaEditorContext;
+
+    editorSola = new EditorSola();
+    solaPlatform = new JavaFxSolaPlatform(false);
   }
 
   @Override
@@ -168,6 +177,8 @@ public class WorldScreenController implements SolaEditorScreen {
       updateComponentsUiForEntity(newValue);
       menuBarComponents.setDisable(newValue == null);
     }));
+
+    solaPlatform.play(editorSola);
   }
 
   private void saveWorld() throws IOException {
@@ -182,6 +193,8 @@ public class WorldScreenController implements SolaEditorScreen {
     worldProperty.setValue(new Base64WorldSerializer().parse(serializedWorld));
     entityList.clear();
     entityList.addAll(worldProperty.getValue().getEntitiesWithComponents());
+
+    editorSola.updateWorld(worldProperty.getValue());
   }
 
   private void updateComponentsUiForEntity(Entity entity) {
