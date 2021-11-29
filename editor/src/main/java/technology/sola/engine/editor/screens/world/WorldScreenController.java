@@ -144,7 +144,11 @@ public class WorldScreenController implements SolaEditorScreen {
     });
 
     entityListView.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+      if (newValue == null) {
+        vboxComponents.getChildren().clear();
+      }
       updateComponentsUiForEntity(newValue);
+      buttonAddComponent.setDisable(newValue == null);
     }));
   }
 
