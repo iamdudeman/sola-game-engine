@@ -104,8 +104,8 @@ public class LandingScreenController implements SolaEditorScreen {
           });
         }
 
-        assetsStage.setX(solaEditorContext.getPrimaryStage().getX() + solaEditorContext.getPrimaryStage().getWidth() + 5);
-        assetsStage.setY(solaEditorContext.getPrimaryStage().getY());
+        assetsStage.setX(solaEditorContext.getPrimaryStage().getX());
+        assetsStage.setY(solaEditorContext.getPrimaryStage().getY() + solaEditorContext.getPrimaryStage().getHeight() + 5);
         assetsStage.show();
       } else {
         assetsStage.hide();

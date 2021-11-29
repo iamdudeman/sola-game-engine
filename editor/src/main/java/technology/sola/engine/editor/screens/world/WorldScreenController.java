@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -204,12 +203,9 @@ public class WorldScreenController implements SolaEditorScreen {
 
       if (transformComponent != null) {
         TransformComponentController transformComponentController = new TransformComponentController(entity);
-        FXMLLoader loader = new FXMLLoader(transformComponentController.getClass().getResource(transformComponentController.getFxmlResource()));
-
-        loader.setController(transformComponentController);
 
         try {
-          vboxComponents.getChildren().add(loader.load());
+          vboxComponents.getChildren().add(transformComponentController.getNode());
         } catch (IOException e) {
           e.printStackTrace();
         }
@@ -219,12 +215,9 @@ public class WorldScreenController implements SolaEditorScreen {
 
       if (rectangleRendererComponent != null) {
         RectangleRendererComponentController controller = new RectangleRendererComponentController(entity);
-        FXMLLoader loader = new FXMLLoader(controller.getClass().getResource(controller.getFxmlResource()));
-
-        loader.setController(controller);
 
         try {
-          vboxComponents.getChildren().add(loader.load());
+          vboxComponents.getChildren().add(controller.getNode());
         } catch (IOException e) {
           e.printStackTrace();
         }

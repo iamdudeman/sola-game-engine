@@ -3,16 +3,16 @@
   * Entity editor?
     * primitive types could generate a dialog of some sort
     * saves to json file
-  * Way to view all Systems and Components available
-  * Way to view various EventListeners?
-  * Create child + parent relationships for the entities?
-  * could load in multiple files
-    * edit configurations go to appropriate files
-  * play mode for quick testing
-  * export stuff somehow maybe?
   * GUI asset manager
     * Allows adding images and via file selector
     * Game has a project folder structure to add/remove files
+  * play mode for quick testing
+  * could load in multiple files
+    * edit configurations go to appropriate files
+  * Way to view all Systems and Components available
+  * Way to view various EventListeners?
+  * export stuff somehow maybe?
+  * Create child + parent relationships for the entities?
 
 # TODO List
 * Rendering

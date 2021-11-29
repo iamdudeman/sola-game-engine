@@ -2,8 +2,12 @@ package technology.sola.engine.editor.components.ecs;
 
 import com.sun.javafx.scene.control.DoubleField;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.Entity;
+
+import java.io.IOException;
 
 public class TransformComponentController implements ComponentController<TransformComponent> {
   @FXML
@@ -46,6 +50,14 @@ public class TransformComponentController implements ComponentController<Transfo
       (float) doubleFieldScaleX.getValue(),
       (float) doubleFieldScaleY.getValue()
     );
+  }
+
+  public Node getNode() throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource(getFxmlResource()));
+
+    loader.setController(this);
+
+    return loader.load();
   }
 
   public void initialize() {

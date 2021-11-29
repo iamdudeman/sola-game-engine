@@ -18,17 +18,17 @@
   </MenuBar>
   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Entities" />
   <EntityListView fx:id="entityListView" />
-  <ScrollPane>
-    <VBox>
-      <MenuBar fx:id="menuBarComponents" disable="true">
-        <Menu mnemonicParsing="false" text="Common">
-          <MenuItem fx:id="menuItemTransform" mnemonicParsing="false" text="Transform"/>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Rendering">
-          <MenuItem fx:id="menuItemRectangleRenderer" mnemonicParsing="false" text="Rectangle Renderer"/>
-        </Menu>
-      </MenuBar>
-      <VBox fx:id="vboxComponents" prefHeight="200.0" prefWidth="100.0"/>
-    </VBox>
-  </ScrollPane>
+  <VBox>
+    <MenuBar fx:id="menuBarComponents" disable="true">
+      <Menu mnemonicParsing="false" text="Common">
+        <MenuItem fx:id="menuItemTransform" mnemonicParsing="false" text="Transform" />
+      </Menu>
+      <Menu mnemonicParsing="false" text="Rendering">
+        <MenuItem fx:id="menuItemRectangleRenderer" mnemonicParsing="false" text="Rectangle Renderer" />
+      </Menu>
+    </MenuBar>
+    <ScrollPane>
+      <VBox fx:id="vboxComponents" spacing="8.0" />
+    </ScrollPane>
+  </VBox>
 </VBox>
