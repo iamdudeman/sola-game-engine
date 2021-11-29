@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -194,7 +193,7 @@ public class WorldScreenController implements SolaEditorScreen {
     entityList.clear();
     entityList.addAll(worldProperty.getValue().getEntitiesWithComponents());
 
-    editorSola.updateWorld(worldProperty.getValue());
+    editorSola.setWorld(worldProperty.getValue());
   }
 
   private void updateComponentsUiForEntity(Entity entity) {

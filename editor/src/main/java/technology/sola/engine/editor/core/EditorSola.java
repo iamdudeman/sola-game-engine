@@ -17,6 +17,8 @@ public class EditorSola extends Sola {
 
   @Override
   protected void onInit() {
+    // TODO get assets based on project structure (might need this for all Sola [think VirtualFileSystem of sorts maybe])
+
     solaGraphics = SolaGraphics.use(ecsSystemContainer, platform.getRenderer(), assetPoolProvider);
   }
 
@@ -27,7 +29,7 @@ public class EditorSola extends Sola {
     solaGraphics.render();
   }
 
-  public void updateWorld(World world) {
+  public void setWorld(World world) {
     ecsSystemContainer.setWorld(world);
   }
 }
