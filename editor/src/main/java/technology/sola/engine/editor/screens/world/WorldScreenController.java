@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -17,10 +18,13 @@ import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.ecs.io.Base64WorldSerializer;
 import technology.sola.engine.editor.components.EntityListView;
+import technology.sola.engine.editor.components.ecs.RectangleRendererComponentController;
 import technology.sola.engine.editor.components.ecs.TransformComponentController;
 import technology.sola.engine.editor.core.FolderUtils;
 import technology.sola.engine.editor.core.SolaEditorContext;
 import technology.sola.engine.editor.screens.SolaEditorScreen;
+import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.components.RectangleRendererComponent;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,7 +54,11 @@ public class WorldScreenController implements SolaEditorScreen {
   @FXML
   private EntityListView entityListView;
   @FXML
-  private Button buttonAddComponent;
+  private MenuBar menuBarComponents;
+  @FXML
+  private MenuItem menuItemTransform;
+  @FXML
+  private MenuItem menuItemRectangleRenderer;
   @FXML
   private VBox vboxComponents;
 
@@ -133,11 +141,21 @@ public class WorldScreenController implements SolaEditorScreen {
       entityList.add(entity);
     });
 
-    buttonAddComponent.setOnAction(event -> {
+    menuItemTransform.setOnAction(event -> {
       Entity entity = entityListView.getSelectionModel().getSelectedItem();
 
       if (entity != null) {
         entity.addComponent(new TransformComponent());
+      }
+
+      updateComponentsUiForEntity(entity);
+    });
+
+    menuItemRectangleRenderer.setOnAction(event -> {
+      Entity entity = entityListView.getSelectionModel().getSelectedItem();
+
+      if (entity != null) {
+        entity.addComponent(new RectangleRendererComponent(Color.BLACK, false));
       }
 
       updateComponentsUiForEntity(entity);
@@ -148,7 +166,7 @@ public class WorldScreenController implements SolaEditorScreen {
         vboxComponents.getChildren().clear();
       }
       updateComponentsUiForEntity(newValue);
-      buttonAddComponent.setDisable(newValue == null);
+      menuBarComponents.setDisable(newValue == null);
     }));
   }
 
@@ -177,6 +195,21 @@ public class WorldScreenController implements SolaEditorScreen {
         FXMLLoader loader = new FXMLLoader(transformComponentController.getClass().getResource(transformComponentController.getFxmlResource()));
 
         loader.setController(transformComponentController);
+
+        try {
+          vboxComponents.getChildren().add(loader.load());
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+
+      RectangleRendererComponent rectangleRendererComponent = entity.getComponent(RectangleRendererComponent.class);
+
+      if (rectangleRendererComponent != null) {
+        RectangleRendererComponentController controller = new RectangleRendererComponentController(entity);
+        FXMLLoader loader = new FXMLLoader(controller.getClass().getResource(controller.getFxmlResource()));
+
+        loader.setController(controller);
 
         try {
           vboxComponents.getChildren().add(loader.load());

@@ -7,30 +7,28 @@
 <?import javafx.scene.text.*?>
 
 <VBox prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
-  <children>
-    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Transform"/>
-    <Label contentDisplay="RIGHT" text="X">
-      <graphic>
-        <DoubleField fx:id="doubleFieldX"/>
-      </graphic>
-    </Label>
-    <Label contentDisplay="RIGHT" text="Y">
-      <graphic>
-        <DoubleField fx:id="doubleFieldY"/>
-      </graphic>
-    </Label>
-    <Label contentDisplay="RIGHT" text="Scale X">
-      <graphic>
-        <DoubleField fx:id="doubleFieldScaleX" value="1"/>
-      </graphic>
-    </Label>
-    <Label contentDisplay="RIGHT" text="Scale Y">
-      <graphic>
-        <DoubleField fx:id="doubleFieldScaleY" value="1"/>
-      </graphic>
-    </Label>
-  </children>
   <padding>
     <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
   </padding>
+  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Transform"/>
+  <Label contentDisplay="RIGHT" text="X">
+    <graphic>
+      <DoubleField fx:id="doubleFieldX"/>
+    </graphic>
+  </Label>
+  <Label contentDisplay="RIGHT" text="Y">
+    <graphic>
+      <DoubleField fx:id="doubleFieldY"/>
+    </graphic>
+  </Label>
+  <Label contentDisplay="RIGHT" text="Scale X">
+    <graphic>
+      <DoubleField fx:id="doubleFieldScaleX" value="1"/>
+    </graphic>
+  </Label>
+  <Label contentDisplay="RIGHT" text="Scale Y">
+    <graphic>
+      <DoubleField fx:id="doubleFieldScaleY" value="1"/>
+    </graphic>
+  </Label>
 </VBox>
