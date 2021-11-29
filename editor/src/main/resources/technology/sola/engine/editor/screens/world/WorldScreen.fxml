@@ -3,19 +3,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import technology.sola.engine.editor.components.*?>
 
-<?import technology.sola.engine.editor.components.EntityListView?>
 <VBox fx:id="container" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
   <MenuBar>
     <Menu mnemonicParsing="false" text="File">
       <MenuItem fx:id="menuItemNew" mnemonicParsing="false" text="New" />
       <MenuItem fx:id="menuItemOpen" mnemonicParsing="false" text="Open" />
-      <MenuItem fx:id="menuItemSave" mnemonicParsing="false" text="Save" disable="true" />
+      <MenuItem fx:id="menuItemSave" disable="true" mnemonicParsing="false" text="Save" />
     </Menu>
-    <Menu fx:id="menuWorld" mnemonicParsing="false" text="World" disable="true">
+    <Menu fx:id="menuWorld" disable="true" mnemonicParsing="false" text="World">
       <MenuItem fx:id="menuItemNewEntity" mnemonicParsing="false" text="New Entity" />
     </Menu>
   </MenuBar>
   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Entities" />
   <EntityListView fx:id="entityListView" />
+   <Button fx:id="buttonAddComponent" mnemonicParsing="false" text="Add component" />
+   <VBox fx:id="vboxComponents" prefHeight="200.0" prefWidth="100.0" />
 </VBox>

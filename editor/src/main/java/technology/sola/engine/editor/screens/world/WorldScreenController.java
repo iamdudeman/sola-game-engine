@@ -5,15 +5,19 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.ecs.io.Base64WorldSerializer;
 import technology.sola.engine.editor.components.EntityListView;
+import technology.sola.engine.editor.components.ecs.TransformComponentController;
 import technology.sola.engine.editor.core.FolderUtils;
 import technology.sola.engine.editor.core.SolaEditorContext;
 import technology.sola.engine.editor.screens.SolaEditorScreen;
@@ -45,6 +49,10 @@ public class WorldScreenController implements SolaEditorScreen {
   private MenuItem menuItemNewEntity;
   @FXML
   private EntityListView entityListView;
+  @FXML
+  private Button buttonAddComponent;
+  @FXML
+  private VBox vboxComponents;
 
   public WorldScreenController(Stage owner, SolaEditorContext solaEditorContext) {
     this.owner = owner;
@@ -119,15 +127,24 @@ public class WorldScreenController implements SolaEditorScreen {
     menuItemNewEntity.setOnAction(event -> {
       Entity entity = worldProperty.getValue()
         .createEntity()
+        .addComponent(new TransformComponent())
         .setName("New Entity");
 
       entityList.add(entity);
     });
 
-    entityListView.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
-      if (newValue != null) {
-        System.out.println("selected " + newValue.getName());
+    buttonAddComponent.setOnAction(event -> {
+      Entity entity = entityListView.getSelectionModel().getSelectedItem();
+
+      if (entity != null) {
+        entity.addComponent(new TransformComponent());
       }
+
+      updateComponentsUiForEntity(entity);
+    });
+
+    entityListView.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+      updateComponentsUiForEntity(newValue);
     }));
   }
 
@@ -143,5 +160,26 @@ public class WorldScreenController implements SolaEditorScreen {
     worldProperty.setValue(new Base64WorldSerializer().parse(serializedWorld));
     entityList.clear();
     entityList.addAll(worldProperty.getValue().getEntitiesWithComponents());
+  }
+
+  private void updateComponentsUiForEntity(Entity entity) {
+    if (entity != null) {
+      vboxComponents.getChildren().clear();
+
+      TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
+
+      if (transformComponent != null) {
+        TransformComponentController transformComponentController = new TransformComponentController(entity);
+        FXMLLoader loader = new FXMLLoader(transformComponentController.getClass().getResource(transformComponentController.getFxmlResource()));
+
+        loader.setController(transformComponentController);
+
+        try {
+          vboxComponents.getChildren().add(loader.load());
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
   }
 }
