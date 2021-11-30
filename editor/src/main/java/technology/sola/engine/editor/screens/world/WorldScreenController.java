@@ -13,10 +13,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.ecs.Component;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.ecs.io.Base64WorldSerializer;
 import technology.sola.engine.editor.components.EntityListView;
+import technology.sola.engine.editor.components.ecs.ComponentController;
 import technology.sola.engine.editor.components.ecs.RectangleRendererComponentController;
 import technology.sola.engine.editor.components.ecs.TransformComponentController;
 import technology.sola.engine.editor.core.EditorSola;
@@ -32,6 +34,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 
 public class WorldScreenController implements SolaEditorScreen {
   private final Stage owner;
@@ -57,11 +62,13 @@ public class WorldScreenController implements SolaEditorScreen {
   @FXML
   private MenuBar menuBarComponents;
   @FXML
+  private VBox vboxComponents;
+
+  // todo temp hard coded component menu items
+  @FXML
   private MenuItem menuItemTransform;
   @FXML
   private MenuItem menuItemRectangleRenderer;
-  @FXML
-  private VBox vboxComponents;
 
   private final EditorSola editorSola;
   private final SolaPlatform solaPlatform;
@@ -148,6 +155,16 @@ public class WorldScreenController implements SolaEditorScreen {
       entityList.add(entity);
     });
 
+    entityListView.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+      if (newValue == null) {
+        vboxComponents.getChildren().clear();
+      }
+      updateComponentsUiForEntity(newValue);
+      menuBarComponents.setDisable(newValue == null);
+    }));
+
+
+    // todo replace temp menu code later
     menuItemTransform.setOnAction(event -> {
       Entity entity = entityListView.getSelectionModel().getSelectedItem();
 
@@ -168,14 +185,6 @@ public class WorldScreenController implements SolaEditorScreen {
       updateComponentsUiForEntity(entity);
     });
 
-    entityListView.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
-      if (newValue == null) {
-        vboxComponents.getChildren().clear();
-      }
-      updateComponentsUiForEntity(newValue);
-      menuBarComponents.setDisable(newValue == null);
-    }));
-
     solaPlatform.play(editorSola);
   }
 
@@ -195,33 +204,30 @@ public class WorldScreenController implements SolaEditorScreen {
     editorSola.setWorld(worldProperty.getValue());
   }
 
+  private static final Map<Class<? extends Component>, Function<Entity, ComponentController<?>>> componentToControllerMap = new HashMap<>();
+
+  static {
+    componentToControllerMap.put(TransformComponent.class, TransformComponentController::new);
+    componentToControllerMap.put(RectangleRendererComponent.class, RectangleRendererComponentController::new);
+  }
+
   private void updateComponentsUiForEntity(Entity entity) {
     if (entity != null) {
       vboxComponents.getChildren().clear();
 
-      TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
+      componentToControllerMap.forEach((key, value) -> {
+        Component component = entity.getComponent(key);
 
-      if (transformComponent != null) {
-        TransformComponentController transformComponentController = new TransformComponentController(entity);
+        if (component != null) {
+          ComponentController<?> componentController = value.apply(entity);
 
-        try {
-          vboxComponents.getChildren().add(transformComponentController.getNode());
-        } catch (IOException e) {
-          e.printStackTrace();
+          try {
+            vboxComponents.getChildren().add(componentController.getNode());
+          } catch (IOException ex) {
+            ex.printStackTrace();
+          }
         }
-      }
-
-      RectangleRendererComponent rectangleRendererComponent = entity.getComponent(RectangleRendererComponent.class);
-
-      if (rectangleRendererComponent != null) {
-        RectangleRendererComponentController controller = new RectangleRendererComponentController(entity);
-
-        try {
-          vboxComponents.getChildren().add(controller.getNode());
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      }
+      });
     }
   }
 }
