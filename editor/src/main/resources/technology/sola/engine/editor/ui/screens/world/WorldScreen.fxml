@@ -3,7 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import technology.sola.engine.editor.components.*?>
+<?import technology.sola.engine.editor.ui.control.EntityListView?>
+<?import technology.sola.engine.editor.ui.ecs.EntityComponents?>
 
 <VBox fx:id="container" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
   <MenuBar>

@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.screens;
+package technology.sola.engine.editor.ui.screens;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckMenuItem;
@@ -9,8 +9,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import technology.sola.engine.editor.core.FolderUtils;
 import technology.sola.engine.editor.core.SolaEditorContext;
-import technology.sola.engine.editor.screens.assets.AssetsScreenController;
-import technology.sola.engine.editor.screens.world.WorldScreenController;
+import technology.sola.engine.editor.ui.screens.assets.AssetsScreenController;
+import technology.sola.engine.editor.ui.screens.world.WorldScreenController;
 
 import java.io.File;
 import java.io.IOException;

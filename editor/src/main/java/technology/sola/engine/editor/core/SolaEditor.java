@@ -5,8 +5,8 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import technology.sola.engine.editor.screens.LandingScreenController;
-import technology.sola.engine.editor.screens.SolaEditorScreen;
+import technology.sola.engine.editor.ui.screens.LandingScreenController;
+import technology.sola.engine.editor.ui.screens.SolaEditorScreen;
 
 public class SolaEditor extends Application {
   public static void start(String[] args) {

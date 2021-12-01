@@ -1,8 +1,9 @@
-package technology.sola.engine.editor.components.ecs;
+package technology.sola.engine.editor.ui.ecs.general;
 
 import com.sun.javafx.scene.control.DoubleField;
 import javafx.fxml.FXML;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.editor.ui.ecs.ComponentController;
 
 public class TransformComponentController extends ComponentController<TransformComponent> {
   @FXML

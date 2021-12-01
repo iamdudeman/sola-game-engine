@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.screens;
+package technology.sola.engine.editor.ui.screens;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

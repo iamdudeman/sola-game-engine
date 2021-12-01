@@ -1,8 +1,9 @@
-package technology.sola.engine.editor.components.ecs;
+package technology.sola.engine.editor.ui.ecs.rendering;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
+import technology.sola.engine.editor.ui.ecs.ComponentController;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 

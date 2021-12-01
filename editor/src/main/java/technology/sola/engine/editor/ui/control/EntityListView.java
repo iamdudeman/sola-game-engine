@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.components;
+package technology.sola.engine.editor.ui.control;
 
 import javafx.scene.control.ListView;
 import javafx.scene.control.cell.TextFieldListCell;

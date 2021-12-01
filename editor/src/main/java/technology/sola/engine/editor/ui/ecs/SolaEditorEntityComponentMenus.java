@@ -1,11 +1,8 @@
-package technology.sola.engine.editor.core;
-
-import technology.sola.engine.editor.components.ecs.ComponentController;
+package technology.sola.engine.editor.ui.ecs;
 
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO WIP
 public class SolaEditorEntityComponentMenus {
   private final List<SolaEditorMenuItem> items = new ArrayList<>();
 

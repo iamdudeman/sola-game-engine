@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.components;
+package technology.sola.engine.editor.ui.ecs;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
@@ -11,8 +11,6 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import technology.sola.engine.ecs.Component;
 import technology.sola.engine.ecs.Entity;
-import technology.sola.engine.editor.components.ecs.ComponentController;
-import technology.sola.engine.editor.core.SolaEditorEntityComponentMenus;
 
 import java.util.HashMap;
 import java.util.List;

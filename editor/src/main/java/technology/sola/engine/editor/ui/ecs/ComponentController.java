@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.components.ecs;
+package technology.sola.engine.editor.ui.ecs;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
