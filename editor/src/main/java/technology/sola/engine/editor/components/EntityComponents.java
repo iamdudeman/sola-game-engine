@@ -2,10 +2,12 @@ package technology.sola.engine.editor.components;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.Component;
@@ -31,7 +33,8 @@ public class EntityComponents extends VBox {
     componentsMenu.setDisable(true);
 
     componentsContainer = new VBox();
-    componentsContainer.setSpacing(8);
+    componentsContainer.setSpacing(4);
+    componentsContainer.setPrefHeight(300);
 
     entityProperty.addListener(((observable, oldValue, newValue) -> updateEntity(newValue)));
 
@@ -111,6 +114,8 @@ public class EntityComponents extends VBox {
     componentsContainer.getChildren().clear();
 
     if (entity != null) {
+      Accordion accordion = new Accordion();
+
       componentToControllerMap.forEach((key, value) -> {
         Component component = entity.getComponent(key);
 
@@ -118,12 +123,15 @@ public class EntityComponents extends VBox {
           ComponentController<?> componentController = value.apply(entity);
 
           try {
-            componentsContainer.getChildren().add(componentController.getNode());
+            // TODO get friendly name for component?
+            accordion.getPanes().add(new TitledPane(component.getClass().getSimpleName(), componentController.getNode()));
           } catch (IOException ex) {
             ex.printStackTrace();
           }
         }
       });
+
+      componentsContainer.getChildren().add(accordion);
     }
   }
 }
