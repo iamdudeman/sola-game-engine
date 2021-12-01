@@ -17,6 +17,7 @@ import technology.sola.engine.ecs.World;
 import technology.sola.engine.ecs.io.Base64WorldSerializer;
 import technology.sola.engine.editor.components.EntityComponents;
 import technology.sola.engine.editor.components.EntityListView;
+import technology.sola.engine.editor.components.ecs.CircleRendererComponentController;
 import technology.sola.engine.editor.components.ecs.RectangleRendererComponentController;
 import technology.sola.engine.editor.components.ecs.TransformComponentController;
 import technology.sola.engine.editor.core.EditorSola;
@@ -74,6 +75,17 @@ public class WorldScreenController implements SolaEditorScreen {
 
   @Override
   public void initialize() {
+    // TODO build this menu elsewhere as a default
+    SolaEditorEntityComponentMenus solaEditorEntityComponentMenus = new SolaEditorEntityComponentMenus();
+    solaEditorEntityComponentMenus.addMenu("General")
+      .addItem("Transform", new TransformComponentController());
+    solaEditorEntityComponentMenus.addMenu("Rendering")
+      .addItem("Rectangle", new RectangleRendererComponentController())
+      .addItem("Circle", new CircleRendererComponentController())
+      .addSubMenu("Gui");
+    solaEditorEntityComponentMenus.addMenu("Physics");
+    entityComponents.setComponentsMenu(solaEditorEntityComponentMenus);
+
     File worldsFolder = new FolderUtils(solaEditorContext).getOrCreateFolder("assets/worlds");
     FileChooser.ExtensionFilter solaExtensionFilter = new FileChooser.ExtensionFilter("World file", "*.world");
     FileChooser fileChooser = new FileChooser();
@@ -140,15 +152,6 @@ public class WorldScreenController implements SolaEditorScreen {
 
       entityList.add(entity);
     });
-
-    // TODO build this menu elsewhere as a default
-    SolaEditorEntityComponentMenus solaEditorEntityComponentMenus = new SolaEditorEntityComponentMenus();
-    solaEditorEntityComponentMenus.addMenu("General")
-        .addItem("Transform", new TransformComponentController());
-    solaEditorEntityComponentMenus.addMenu("Rendering")
-        .addItem("Rectangle", new RectangleRendererComponentController());
-    solaEditorEntityComponentMenus.addMenu("Physics");
-    entityComponents.setComponentsMenu(solaEditorEntityComponentMenus);
 
     entityListView.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
       entityComponents.setEntity(newValue);

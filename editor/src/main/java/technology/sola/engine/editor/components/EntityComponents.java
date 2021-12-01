@@ -9,14 +9,10 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
-import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.ecs.Component;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.editor.components.ecs.ComponentController;
-import technology.sola.engine.editor.components.ecs.RectangleRendererComponentController;
-import technology.sola.engine.editor.components.ecs.TransformComponentController;
 import technology.sola.engine.editor.core.SolaEditorEntityComponentMenus;
-import technology.sola.engine.graphics.components.RectangleRendererComponent;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,8 +23,7 @@ public class EntityComponents extends VBox {
   private final Property<Entity> entityProperty = new SimpleObjectProperty<>();
   private final MenuBar componentsMenu;
   private final VBox componentsContainer;
-  // TODO this shouldn't be hard coded eventually
-  private final Map<Class<? extends Component>, ComponentController<?>> componentToDootMap = new HashMap<>();
+  private final Map<Class<? extends Component>, ComponentController<?>> classComponentControllerMap = new HashMap<>();
 
   public EntityComponents() {
     componentsMenu = new MenuBar();
@@ -41,6 +36,39 @@ public class EntityComponents extends VBox {
     entityProperty.addListener(((observable, oldValue, newValue) -> updateEntity(newValue)));
 
     getChildren().addAll(componentsMenu, new ScrollPane(componentsContainer));
+  }
+
+  public void setComponentsMenu(SolaEditorEntityComponentMenus solaEditorEntityComponentMenus) {
+    classComponentControllerMap.clear();
+    componentsMenu.getMenus().clear();
+    componentsMenu.getMenus().addAll(createMenus(solaEditorEntityComponentMenus));
+  }
+
+  public void setEntity(Entity entity) {
+    entityProperty.setValue(entity);
+  }
+
+  private void updateEntity(Entity entity) {
+    componentsMenu.setDisable(entity == null);
+
+    componentsContainer.getChildren().clear();
+
+    if (entity != null) {
+      Accordion accordion = new Accordion();
+
+      classComponentControllerMap.forEach((key, value) -> {
+        Component component = entity.getComponent(key);
+
+        if (component != null) {
+          value.setEntity(entity);
+
+          // TODO get friendly name from somewhere too
+          accordion.getPanes().add(new TitledPane(component.getClass().getSimpleName(), value.getNode()));
+        }
+      });
+
+      componentsContainer.getChildren().add(accordion);
+    }
   }
 
   private List<Menu> createMenus(SolaEditorEntityComponentMenus solaEditorEntityComponentMenus) {
@@ -65,15 +93,19 @@ public class EntityComponents extends VBox {
         applyToMenu((SolaEditorEntityComponentMenus.SolaEditorMenu) solaEditorMenuItem, subMenu);
       } else {
         CheckMenuItem checkMenuItem = new CheckMenuItem(solaEditorMenuItem.getTitle());
+        ComponentController<?> componentController = solaEditorMenuItem.getItem();
+        Class<? extends Component> componentClass = componentController.getComponentClass();
+
+        classComponentControllerMap.put(componentClass, componentController);
 
         checkMenuItem.setOnAction(event -> {
           Entity entity = entityProperty.getValue();
 
           if (entity != null) {
             if (checkMenuItem.isSelected()) {
-              entity.addComponent(solaEditorMenuItem.getItem().createDefault());
+              entity.addComponent(componentController.createDefault());
             } else {
-              entity.removeComponent(solaEditorMenuItem.getItem().getComponentClass());
+              entity.removeComponent(componentClass);
             }
             updateEntity(entity);
           }
@@ -84,49 +116,11 @@ public class EntityComponents extends VBox {
             return;
           }
 
-          checkMenuItem.setSelected(newValue.getComponent(solaEditorMenuItem.getItem().getComponentClass()) != null);
+          checkMenuItem.setSelected(newValue.getComponent(componentClass) != null);
         }));
 
         menu.getItems().add(checkMenuItem);
       }
     });
-  }
-
-  public void setComponentsMenu(SolaEditorEntityComponentMenus solaEditorEntityComponentMenus) {
-    componentsMenu.getMenus().clear();
-
-    componentsMenu.getMenus().addAll(createMenus(solaEditorEntityComponentMenus));
-
-    // TODO populate this from solaEditorMenuBar
-    componentToDootMap.put(TransformComponent.class, new TransformComponentController());
-    componentToDootMap.put(RectangleRendererComponent.class, new RectangleRendererComponentController());
-
-  }
-
-  public void setEntity(Entity entity) {
-    entityProperty.setValue(entity);
-  }
-
-  private void updateEntity(Entity entity) {
-    componentsMenu.setDisable(entity == null);
-
-    componentsContainer.getChildren().clear();
-
-    if (entity != null) {
-      Accordion accordion = new Accordion();
-
-      componentToDootMap.forEach((key, value) -> {
-        Component component = entity.getComponent(key);
-
-        if (component != null) {
-          value.setEntity(entity);
-
-          // TODO get friendly name from somewhere too
-          accordion.getPanes().add(new TitledPane(component.getClass().getSimpleName(), value.getNode()));
-        }
-      });
-
-      componentsContainer.getChildren().add(accordion);
-    }
   }
 }
