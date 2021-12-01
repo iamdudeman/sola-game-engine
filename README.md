@@ -9,6 +9,10 @@
     * GuiText
     * Collider
     * DynamicBody
+  * Project settings
+    * window title
+    * Renderer width/height
+    * fps / sleeping
   * play mode for quick testing
   * utility for sola to load assets from expected folder structure
   * Way to view all Systems and Components available
