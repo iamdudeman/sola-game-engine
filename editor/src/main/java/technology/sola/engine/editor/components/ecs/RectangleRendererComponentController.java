@@ -1,35 +1,44 @@
 package technology.sola.engine.editor.components.ecs;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
-import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 
-import java.io.IOException;
-
-public class RectangleRendererComponentController implements ComponentController<RectangleRendererComponent> {
-  private final Entity entity;
-
+public class RectangleRendererComponentController extends ComponentController<RectangleRendererComponent> {
   @FXML
   private ColorPicker colorPicker;
   @FXML
   private CheckBox checkBoxFill;
 
-  public RectangleRendererComponentController(Entity entity) {
-    this.entity = entity;
+  @Override
+  public void initialize() {
+    colorPicker.valueProperty().addListener(((observable, oldValue, newValue) -> {
+      entity.addComponent(createComponentFromFields());
+    }));
+    checkBoxFill.selectedProperty().addListener(((observable, oldValue, newValue) -> {
+      entity.addComponent(createComponentFromFields());
+    }));
   }
 
   @Override
-  public String getFxmlResource() {
+  public RectangleRendererComponent createDefault() {
+    return new RectangleRendererComponent(Color.BLACK);
+  }
+
+  @Override
+  public Class<RectangleRendererComponent> getComponentClass() {
+    return RectangleRendererComponent.class;
+  }
+
+  @Override
+  protected String getFxmlResource() {
     return "RectangleRendererComponent.fxml";
   }
 
   @Override
-  public void populateInitialValues() {
+  protected void updateFieldValuesFromEntity() {
     RectangleRendererComponent rectangleRendererComponent = entity.getComponent(RectangleRendererComponent.class);
 
     if (rectangleRendererComponent != null) {
@@ -43,16 +52,7 @@ public class RectangleRendererComponentController implements ComponentController
     }
   }
 
-  public Node getNode() throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource(getFxmlResource()));
-
-    loader.setController(this);
-
-    return loader.load();
-  }
-
-  @Override
-  public RectangleRendererComponent create() {
+  private RectangleRendererComponent createComponentFromFields() {
     var colorPickerColor = colorPicker.getValue();
     var color = new Color(
       (int)(colorPickerColor.getOpacity() * 255),
@@ -62,16 +62,5 @@ public class RectangleRendererComponentController implements ComponentController
     );
 
     return new RectangleRendererComponent(color, checkBoxFill.isSelected());
-  }
-
-  public void initialize() {
-    populateInitialValues();
-
-    colorPicker.valueProperty().addListener(((observable, oldValue, newValue) -> {
-      entity.addComponent(create());
-    }));
-    checkBoxFill.selectedProperty().addListener(((observable, oldValue, newValue) -> {
-      entity.addComponent(create());
-    }));
   }
 }

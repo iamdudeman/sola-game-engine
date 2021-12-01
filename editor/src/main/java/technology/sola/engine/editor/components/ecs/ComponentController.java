@@ -24,6 +24,10 @@ public abstract class ComponentController<T extends Component> {
     }
   }
 
+  public abstract void initialize();
+
+  public abstract T createDefault();
+
   public abstract Class<T> getComponentClass();
 
   public void setEntity(Entity entity) {
@@ -37,10 +41,6 @@ public abstract class ComponentController<T extends Component> {
   public Node getNode() {
     return node;
   }
-
-  public abstract void initialize();
-
-  public abstract T createDefault();
 
   protected abstract String getFxmlResource();
 
