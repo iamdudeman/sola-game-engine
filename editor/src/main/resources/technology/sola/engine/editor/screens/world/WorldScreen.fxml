@@ -18,24 +18,5 @@
   </MenuBar>
   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Entities" />
   <EntityListView fx:id="entityListView" />
-  <VBox>
-    <MenuBar fx:id="menuBarComponents" disable="true">
-      <Menu mnemonicParsing="false" text="General">
-        <!-- TODO consider CheckMenuItem for add/remove functionality -->
-        <MenuItem fx:id="menuItemTransform" mnemonicParsing="false" text="Transform" />
-      </Menu>
-      <Menu mnemonicParsing="false" text="Rendering">
-        <MenuItem fx:id="menuItemRectangleRenderer" mnemonicParsing="false" text="Rectangle Renderer" />
-        <Menu text="Gui">
-          <!-- TODO -->
-        </Menu>
-      </Menu>
-      <Menu mnemonicParsing="false" text="Physics">
-        <!-- TODO -->
-      </Menu>
-    </MenuBar>
-    <ScrollPane>
-      <VBox fx:id="vboxComponents" spacing="8.0" />
-    </ScrollPane>
-  </VBox>
+  <EntityComponents fx:id="entityComponents" />
 </VBox>
