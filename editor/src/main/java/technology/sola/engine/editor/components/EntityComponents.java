@@ -15,10 +15,13 @@ import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.editor.components.ecs.ComponentController;
 import technology.sola.engine.editor.components.ecs.RectangleRendererComponentController;
 import technology.sola.engine.editor.components.ecs.TransformComponentController;
+import technology.sola.engine.editor.core.SolaEditorEntityComponentMenus;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class EntityComponents extends VBox {
   private final Property<Entity> entityProperty = new SimpleObjectProperty<>();
@@ -40,60 +43,64 @@ public class EntityComponents extends VBox {
     getChildren().addAll(componentsMenu, new ScrollPane(componentsContainer));
   }
 
-  // TODO takes an argument of some sort to build menu
-  public void setComponentsMenu() {
+  private List<Menu> createMenus(SolaEditorEntityComponentMenus solaEditorEntityComponentMenus) {
+    return solaEditorEntityComponentMenus.getItems().stream()
+      .map(solaEditorMenuItem -> {
+        Menu menu = new Menu(solaEditorMenuItem.getTitle());
+
+        applyToMenu((SolaEditorEntityComponentMenus.SolaEditorMenu) solaEditorMenuItem, menu);
+
+        return menu;
+      })
+      .collect(Collectors.toList());
+  }
+
+  private void applyToMenu(SolaEditorEntityComponentMenus.SolaEditorMenu solaEditorMenu, Menu menu) {
+    solaEditorMenu.getItems().forEach(solaEditorMenuItem -> {
+      if (solaEditorMenuItem.isMenu()) {
+        Menu subMenu = new Menu(solaEditorMenuItem.getTitle());
+
+        menu.getItems().add(subMenu);
+
+        applyToMenu((SolaEditorEntityComponentMenus.SolaEditorMenu) solaEditorMenuItem, subMenu);
+      } else {
+        CheckMenuItem checkMenuItem = new CheckMenuItem(solaEditorMenuItem.getTitle());
+
+        checkMenuItem.setOnAction(event -> {
+          Entity entity = entityProperty.getValue();
+
+          if (entity != null) {
+            if (checkMenuItem.isSelected()) {
+              entity.addComponent(solaEditorMenuItem.getItem().createDefault());
+            } else {
+              entity.removeComponent(solaEditorMenuItem.getItem().getComponentClass());
+            }
+            updateEntity(entity);
+          }
+        });
+
+        entityProperty.addListener(((observable, oldValue, newValue) -> {
+          if (newValue == null) {
+            return;
+          }
+
+          checkMenuItem.setSelected(newValue.getComponent(solaEditorMenuItem.getItem().getComponentClass()) != null);
+        }));
+
+        menu.getItems().add(checkMenuItem);
+      }
+    });
+  }
+
+  public void setComponentsMenu(SolaEditorEntityComponentMenus solaEditorEntityComponentMenus) {
+    componentsMenu.getMenus().clear();
+
+    componentsMenu.getMenus().addAll(createMenus(solaEditorEntityComponentMenus));
+
+    // TODO populate this from solaEditorMenuBar
     componentToDootMap.put(TransformComponent.class, new TransformComponentController());
     componentToDootMap.put(RectangleRendererComponent.class, new RectangleRendererComponentController());
 
-
-    Menu generalMenu = new Menu("General");
-    CheckMenuItem transformItem = new CheckMenuItem("Transform");
-    transformItem.setOnAction(event -> {
-      Entity entity = entityProperty.getValue();
-
-      if (entity != null) {
-        if (transformItem.isSelected()) {
-          entity.addComponent(componentToDootMap.get(TransformComponent.class).createDefault());
-        } else {
-          entity.removeComponent(TransformComponent.class);
-        }
-        updateEntity(entity);
-      }
-    });
-    entityProperty.addListener(((observable, oldValue, newValue) -> {
-      if (newValue == null) {
-        return;
-      }
-
-      transformItem.setSelected(newValue.getComponent(TransformComponent.class) != null);
-    }));
-    generalMenu.getItems().add(transformItem);
-
-    Menu renderingMenu = new Menu("Rendering");
-    CheckMenuItem rectangleRendererItem = new CheckMenuItem("Rectangle");
-    rectangleRendererItem.setOnAction(event -> {
-      Entity entity = entityProperty.getValue();
-
-      if (entity != null) {
-        if (rectangleRendererItem.isSelected()) {
-          entity.addComponent(componentToDootMap.get(RectangleRendererComponent.class).createDefault());
-        } else {
-          entity.removeComponent(RectangleRendererComponent.class);
-        }
-        updateEntity(entity);
-      }
-    });
-    entityProperty.addListener(((observable, oldValue, newValue) -> {
-      if (newValue == null) {
-        return;
-      }
-
-      rectangleRendererItem.setSelected(newValue.getComponent(RectangleRendererComponent.class) != null);
-    }));
-    renderingMenu.getItems().add(rectangleRendererItem);
-
-    componentsMenu.getMenus()
-      .addAll(generalMenu, renderingMenu);
   }
 
   public void setEntity(Entity entity) {

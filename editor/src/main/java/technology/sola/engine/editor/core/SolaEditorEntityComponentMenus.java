@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // TODO WIP
-public class SolaEditorMenuBar {
+public class SolaEditorEntityComponentMenus {
   private final List<SolaEditorMenuItem> items = new ArrayList<>();
   private Property<Entity> entityProperty = new SimpleObjectProperty<>();
   private BooleanProperty missingEntityProperty = new SimpleBooleanProperty(false);
@@ -31,6 +31,10 @@ public class SolaEditorMenuBar {
 
       menuBar.getMenus().add(menu);
     });
+  }
+
+  public List<SolaEditorMenuItem> getItems() {
+    return items;
   }
 
   public void setEntity(Entity entity) {
@@ -73,6 +77,44 @@ public class SolaEditorMenuBar {
       } else {
         CheckMenuItem checkMenuItem = new CheckMenuItem(solaEditorMenuItem.title);
 
+        checkMenuItem.setOnAction(event -> {
+          Entity entity = entityProperty.getValue();
+
+          if (entity != null) {
+            if (checkMenuItem.isSelected()) {
+              entity.addComponent(solaEditorMenuItem.item.createDefault());
+
+//              entity.addComponent(componentToDootMap.get(TransformComponent.class).createDefault());
+            } else {
+              entity.removeComponent(solaEditorMenuItem.item.getComponentClass());
+
+//              entity.removeComponent(TransformComponent.class);
+            }
+//            updateEntity(entity);
+          }
+        });
+        /*
+        transformItem.setOnAction(event -> {
+      Entity entity = entityProperty.getValue();
+
+      if (entity != null) {
+        if (transformItem.isSelected()) {
+          entity.addComponent(componentToDootMap.get(TransformComponent.class).createDefault());
+        } else {
+          entity.removeComponent(TransformComponent.class);
+        }
+        updateEntity(entity);
+      }
+    });
+    entityProperty.addListener(((observable, oldValue, newValue) -> {
+      if (newValue == null) {
+        return;
+      }
+
+      transformItem.setSelected(newValue.getComponent(TransformComponent.class) != null);
+    }));
+         */
+
 //        checkMenuItem.selectedProperty().addListener(((observable, oldValue, newValue) -> solaEditorMenuItem.item.selectedStateChange(newValue)));
 
         menu.getItems().add(checkMenuItem);
@@ -92,6 +134,18 @@ public class SolaEditorMenuBar {
     private SolaEditorMenuItem(String title, ComponentController<?> item) {
       this.title = title;
       this.item = item;
+    }
+
+    public ComponentController<?> getItem() {
+      return item;
+    }
+
+    public String getTitle() {
+      return title;
+    }
+
+    public boolean isMenu() {
+      return isMenu;
     }
   }
 
@@ -119,6 +173,14 @@ public class SolaEditorMenuBar {
     }
 
     public SolaEditorMenu parent() {
+      return parent;
+    }
+
+    public List<SolaEditorMenuItem> getItems() {
+      return items;
+    }
+
+    public SolaEditorMenu getParent() {
       return parent;
     }
   }

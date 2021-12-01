@@ -17,9 +17,12 @@ import technology.sola.engine.ecs.World;
 import technology.sola.engine.ecs.io.Base64WorldSerializer;
 import technology.sola.engine.editor.components.EntityComponents;
 import technology.sola.engine.editor.components.EntityListView;
+import technology.sola.engine.editor.components.ecs.RectangleRendererComponentController;
+import technology.sola.engine.editor.components.ecs.TransformComponentController;
 import technology.sola.engine.editor.core.EditorSola;
 import technology.sola.engine.editor.core.FolderUtils;
 import technology.sola.engine.editor.core.SolaEditorContext;
+import technology.sola.engine.editor.core.SolaEditorEntityComponentMenus;
 import technology.sola.engine.editor.screens.SolaEditorScreen;
 import technology.sola.engine.platform.javafx.JavaFxSolaPlatform;
 
@@ -138,8 +141,14 @@ public class WorldScreenController implements SolaEditorScreen {
       entityList.add(entity);
     });
 
-    // TODO pass in something here at some point
-    entityComponents.setComponentsMenu();
+    // TODO build this menu elsewhere as a default
+    SolaEditorEntityComponentMenus solaEditorEntityComponentMenus = new SolaEditorEntityComponentMenus();
+    solaEditorEntityComponentMenus.addMenu("General")
+        .addItem("Transform", new TransformComponentController());
+    solaEditorEntityComponentMenus.addMenu("Rendering")
+        .addItem("Rectangle", new RectangleRendererComponentController());
+    solaEditorEntityComponentMenus.addMenu("Physics");
+    entityComponents.setComponentsMenu(solaEditorEntityComponentMenus);
 
     entityListView.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
       entityComponents.setEntity(newValue);
