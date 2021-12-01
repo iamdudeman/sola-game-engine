@@ -8,7 +8,7 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import technology.sola.engine.ecs.Entity;
-import technology.sola.engine.editor.components.ecs.AbstractComponentController;
+import technology.sola.engine.editor.components.ecs.ComponentController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +73,7 @@ public class SolaEditorMenuBar {
       } else {
         CheckMenuItem checkMenuItem = new CheckMenuItem(solaEditorMenuItem.title);
 
-        checkMenuItem.selectedProperty().addListener(((observable, oldValue, newValue) -> solaEditorMenuItem.item.selectedStateChange(newValue)));
+//        checkMenuItem.selectedProperty().addListener(((observable, oldValue, newValue) -> solaEditorMenuItem.item.selectedStateChange(newValue)));
 
         menu.getItems().add(checkMenuItem);
       }
@@ -81,7 +81,7 @@ public class SolaEditorMenuBar {
   }
 
   public static class SolaEditorMenuItem {
-    private AbstractComponentController<?> item;
+    private ComponentController<?> item;
     private final String title;
     protected boolean isMenu = false;
 
@@ -89,7 +89,7 @@ public class SolaEditorMenuBar {
       this.title = title;
     }
 
-    private SolaEditorMenuItem(String title, AbstractComponentController<?> item) {
+    private SolaEditorMenuItem(String title, ComponentController<?> item) {
       this.title = title;
       this.item = item;
     }
@@ -113,7 +113,7 @@ public class SolaEditorMenuBar {
       return subMenu;
     }
 
-    public SolaEditorMenu addItem(String title, AbstractComponentController<?> item) {
+    public SolaEditorMenu addItem(String title, ComponentController<?> item) {
       items.add(new SolaEditorMenuItem(title, item));
       return this;
     }

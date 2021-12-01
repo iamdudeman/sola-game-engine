@@ -1,21 +1,48 @@
 package technology.sola.engine.editor.components.ecs;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import technology.sola.engine.ecs.Component;
+import technology.sola.engine.ecs.Entity;
 
 import java.io.IOException;
 
-// TODO find a better shared abstraction for component controllers
-// TODO figure out how to have the UI dynamically create menus for available component types
+public abstract class ComponentController<T extends Component> {
+  protected Entity entity;
+  private Node node;
 
-// TODO this abstraction here might need to be able to create a MenuItem as well (possibly CheckMenuItem)
-// TODO would have definition of the default state of the new component
+  public ComponentController() {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource(getFxmlResource()));
 
-public interface ComponentController<T> {
-  String getFxmlResource();
+    loader.setController(this);
 
-  void populateInitialValues();
+    try {
+      node = loader.load();
+    } catch (IOException ex) {
+      // todo handle this better
+      ex.printStackTrace();
+    }
+  }
 
-  T create();
+  public abstract Class<T> getComponentClass();
 
-  Node getNode() throws IOException;
+  public void setEntity(Entity entity) {
+    this.entity = entity;
+
+    if (entity != null) {
+      updateFieldValuesFromEntity();
+    }
+  }
+
+  public Node getNode() {
+    return node;
+  }
+
+  public abstract void initialize();
+
+  public abstract T createDefault();
+
+  protected abstract String getFxmlResource();
+
+  protected abstract void updateFieldValuesFromEntity();
 }

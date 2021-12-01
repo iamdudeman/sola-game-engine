@@ -15,18 +15,17 @@ import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.editor.components.ecs.ComponentController;
 import technology.sola.engine.editor.components.ecs.RectangleRendererComponentController;
 import technology.sola.engine.editor.components.ecs.TransformComponentController;
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
 
 public class EntityComponents extends VBox {
   private final Property<Entity> entityProperty = new SimpleObjectProperty<>();
   private final MenuBar componentsMenu;
   private final VBox componentsContainer;
+  // TODO this shouldn't be hard coded eventually
+  private final Map<Class<? extends Component>, ComponentController<?>> componentToDootMap = new HashMap<>();
 
   public EntityComponents() {
     componentsMenu = new MenuBar();
@@ -41,17 +40,12 @@ public class EntityComponents extends VBox {
     getChildren().addAll(componentsMenu, new ScrollPane(componentsContainer));
   }
 
-
-  // TODO this shouldn't be hard coded eventually
-  private static final Map<Class<? extends Component>, Function<Entity, ComponentController<?>>> componentToControllerMap = new HashMap<>();
-
-  static {
-    componentToControllerMap.put(TransformComponent.class, TransformComponentController::new);
-    componentToControllerMap.put(RectangleRendererComponent.class, RectangleRendererComponentController::new);
-  }
-
   // TODO takes an argument of some sort to build menu
   public void setComponentsMenu() {
+    componentToDootMap.put(TransformComponent.class, new TransformComponentController());
+    componentToDootMap.put(RectangleRendererComponent.class, new RectangleRendererComponentController());
+
+
     Menu generalMenu = new Menu("General");
     CheckMenuItem transformItem = new CheckMenuItem("Transform");
     transformItem.setOnAction(event -> {
@@ -59,7 +53,7 @@ public class EntityComponents extends VBox {
 
       if (entity != null) {
         if (transformItem.isSelected()) {
-          entity.addComponent(new TransformComponent());
+          entity.addComponent(componentToDootMap.get(TransformComponent.class).createDefault());
         } else {
           entity.removeComponent(TransformComponent.class);
         }
@@ -82,7 +76,7 @@ public class EntityComponents extends VBox {
 
       if (entity != null) {
         if (rectangleRendererItem.isSelected()) {
-          entity.addComponent(new RectangleRendererComponent(Color.BLACK));
+          entity.addComponent(componentToDootMap.get(RectangleRendererComponent.class).createDefault());
         } else {
           entity.removeComponent(RectangleRendererComponent.class);
         }
@@ -107,8 +101,6 @@ public class EntityComponents extends VBox {
   }
 
   private void updateEntity(Entity entity) {
-    entityProperty.setValue(entity);
-
     componentsMenu.setDisable(entity == null);
 
     componentsContainer.getChildren().clear();
@@ -116,18 +108,14 @@ public class EntityComponents extends VBox {
     if (entity != null) {
       Accordion accordion = new Accordion();
 
-      componentToControllerMap.forEach((key, value) -> {
+      componentToDootMap.forEach((key, value) -> {
         Component component = entity.getComponent(key);
 
         if (component != null) {
-          ComponentController<?> componentController = value.apply(entity);
+          value.setEntity(entity);
 
-          try {
-            // TODO get friendly name for component?
-            accordion.getPanes().add(new TitledPane(component.getClass().getSimpleName(), componentController.getNode()));
-          } catch (IOException ex) {
-            ex.printStackTrace();
-          }
+          // TODO get friendly name from somewhere too
+          accordion.getPanes().add(new TitledPane(component.getClass().getSimpleName(), value.getNode()));
         }
       });
 
