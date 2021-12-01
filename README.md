@@ -1,14 +1,16 @@
 # Branch WIP
 * Engine GUI Editor (Sola Editor)
-  * Entity editor?
-    * primitive types could generate a dialog of some sort
-    * saves to json file
-  * GUI asset manager
-    * Allows adding images and via file selector
-    * Game has a project folder structure to add/remove files
+  * Add more component controllers
+    * Camera
+    * Layer
+    * Sprite
+    * SpriteAnimator
+    * GuiPanel
+    * GuiText
+    * Collider
+    * DynamicBody
   * play mode for quick testing
-  * could load in multiple files
-    * edit configurations go to appropriate files
+  * utility for sola to load assets from expected folder structure
   * Way to view all Systems and Components available
   * Way to view various EventListeners?
   * export stuff somehow maybe?

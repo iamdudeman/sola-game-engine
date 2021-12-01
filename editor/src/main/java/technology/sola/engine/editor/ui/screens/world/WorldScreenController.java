@@ -17,13 +17,9 @@ import technology.sola.engine.ecs.World;
 import technology.sola.engine.ecs.io.Base64WorldSerializer;
 import technology.sola.engine.editor.ui.ecs.EntityComponents;
 import technology.sola.engine.editor.ui.control.EntityListView;
-import technology.sola.engine.editor.ui.ecs.rendering.CircleRendererComponentController;
-import technology.sola.engine.editor.ui.ecs.rendering.RectangleRendererComponentController;
-import technology.sola.engine.editor.ui.ecs.general.TransformComponentController;
 import technology.sola.engine.editor.core.EditorSola;
 import technology.sola.engine.editor.core.FolderUtils;
 import technology.sola.engine.editor.core.SolaEditorContext;
-import technology.sola.engine.editor.ui.ecs.SolaEditorEntityComponentMenus;
 import technology.sola.engine.editor.ui.screens.SolaEditorScreen;
 import technology.sola.engine.platform.javafx.JavaFxSolaPlatform;
 
@@ -75,17 +71,6 @@ public class WorldScreenController implements SolaEditorScreen {
 
   @Override
   public void initialize() {
-    // TODO build this menu elsewhere as a default
-//    SolaEditorEntityComponentMenus solaEditorEntityComponentMenus = new SolaEditorEntityComponentMenus();
-//    solaEditorEntityComponentMenus.addMenu("General")
-//      .addItem("Transform", new TransformComponentController());
-//    solaEditorEntityComponentMenus.addMenu("Rendering")
-//      .addItem("Rectangle", new RectangleRendererComponentController())
-//      .addItem("Circle", new CircleRendererComponentController())
-//      .addSubMenu("Gui");
-//    solaEditorEntityComponentMenus.addMenu("Physics");
-//    entityComponents.setComponentsMenu(solaEditorEntityComponentMenus);
-
     entityComponents.setComponentsMenu(solaEditorContext.getConfiguration().getEntityComponentMenus());
 
     File worldsFolder = new FolderUtils(solaEditorContext).getOrCreateFolder("assets/worlds");
