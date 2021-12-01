@@ -12,6 +12,7 @@ import java.util.Properties;
 public class SolaEditorContext {
   private final Stage primaryStage;
   private final Property<File> projectFileProperty = new SimpleObjectProperty<>(null);
+  private final EditorConfiguration configuration;
   private Properties projectFileProperties = null;
 
   public SolaEditorContext(Stage primaryStage) {
@@ -26,6 +27,8 @@ public class SolaEditorContext {
         ex.printStackTrace();
       }
     }));
+
+    configuration = new EditorConfiguration();
   }
 
   public Stage getPrimaryStage() {
@@ -34,5 +37,9 @@ public class SolaEditorContext {
 
   public Property<File> projectFilePropertyProperty() {
     return projectFileProperty;
+  }
+
+  public EditorConfiguration getConfiguration() {
+    return configuration;
   }
 }

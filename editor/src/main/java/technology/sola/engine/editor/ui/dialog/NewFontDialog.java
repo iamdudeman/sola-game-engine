@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.components.dialog;
+package technology.sola.engine.editor.ui.dialog;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

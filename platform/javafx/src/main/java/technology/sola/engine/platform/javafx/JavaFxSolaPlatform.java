@@ -27,9 +27,18 @@ import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
 import java.util.function.Consumer;
 
 public class JavaFxSolaPlatform extends SolaPlatform {
+  private final boolean isPlatformStartupNeeded;
   private Canvas canvas;
   private GraphicsContext graphicsContext;
   private WritableImage writableImage;
+
+  public JavaFxSolaPlatform() {
+    this(true);
+  }
+
+  public JavaFxSolaPlatform(boolean isPlatformStartupNeeded) {
+    this.isPlatformStartupNeeded = isPlatformStartupNeeded;
+  }
 
   @Override
   public void onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
@@ -65,7 +74,11 @@ public class JavaFxSolaPlatform extends SolaPlatform {
 
   @Override
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
-    Platform.startup(() -> {
+    if (isPlatformStartupNeeded) {
+      Platform.startup(() -> {});
+    }
+
+    Platform.runLater(() -> {
       final Stage stage = new Stage();
       final Group root = new Group();
       int rendererWidth = solaConfiguration.getCanvasWidth();

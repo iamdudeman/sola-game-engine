@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.screens;
+package technology.sola.engine.editor.ui.screens;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckMenuItem;
@@ -9,7 +9,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import technology.sola.engine.editor.core.FolderUtils;
 import technology.sola.engine.editor.core.SolaEditorContext;
-import technology.sola.engine.editor.screens.assets.AssetsScreenController;
+import technology.sola.engine.editor.ui.screens.assets.AssetsScreenController;
+import technology.sola.engine.editor.ui.screens.world.WorldScreenController;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,9 +28,12 @@ public class LandingScreenController implements SolaEditorScreen {
 
   @FXML
   private CheckMenuItem checkMenuItemAssets;
+  @FXML
+  private CheckMenuItem checkMenuItemWorld;
 
   private final SolaEditorContext solaEditorContext;
   private Stage assetsStage = null;
+  private Stage worldStage = null;
 
   public LandingScreenController(SolaEditorContext solaEditorContext) {
     this.solaEditorContext = solaEditorContext;
@@ -100,12 +104,31 @@ public class LandingScreenController implements SolaEditorScreen {
           });
         }
 
-        assetsStage.setX(solaEditorContext.getPrimaryStage().getX() + solaEditorContext.getPrimaryStage().getWidth() + 5);
-        assetsStage.setY(solaEditorContext.getPrimaryStage().getY());
+        assetsStage.setX(solaEditorContext.getPrimaryStage().getX());
+        assetsStage.setY(solaEditorContext.getPrimaryStage().getY() + solaEditorContext.getPrimaryStage().getHeight() + 5);
         assetsStage.show();
       } else {
         assetsStage.hide();
       }
     });
+
+    checkMenuItemWorld.selectedProperty().addListener(((observable, oldValue, newValue) -> {
+      if (newValue) {
+        if (worldStage == null) {
+          worldStage = new Stage();
+          worldStage.setTitle("World");
+          worldStage.setScene(SolaEditorScreen.loadSceneForController(new WorldScreenController(worldStage, solaEditorContext)));
+          worldStage.setOnCloseRequest(event -> {
+            checkMenuItemWorld.setSelected(false);
+          });
+        }
+
+        worldStage.setX(solaEditorContext.getPrimaryStage().getX() + solaEditorContext.getPrimaryStage().getWidth() + 5);
+        worldStage.setY(solaEditorContext.getPrimaryStage().getY());
+        worldStage.show();
+      } else {
+        worldStage.hide();
+      }
+    }));
   }
 }

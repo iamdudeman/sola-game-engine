@@ -13,7 +13,7 @@
 
     <Menu fx:id="menuWindows" mnemonicParsing="false" text="Windows" disable="true">
       <CheckMenuItem fx:id="checkMenuItemAssets" mnemonicParsing="false" text="Assets"/>
-      <CheckMenuItem mnemonicParsing="false" text="World"/>
+      <CheckMenuItem fx:id="checkMenuItemWorld" mnemonicParsing="false" text="World"/>
     </Menu>
   </MenuBar>
 
