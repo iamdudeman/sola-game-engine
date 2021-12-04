@@ -5,7 +5,6 @@
     * Layer
     * Sprite
     * SpriteAnimator
-    * GuiPanel
     * GuiText
     * Collider
     * DynamicBody

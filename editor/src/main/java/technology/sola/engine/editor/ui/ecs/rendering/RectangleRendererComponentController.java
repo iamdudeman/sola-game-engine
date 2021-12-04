@@ -43,25 +43,12 @@ public class RectangleRendererComponentController extends ComponentController<Re
     RectangleRendererComponent rectangleRendererComponent = entity.getComponent(RectangleRendererComponent.class);
 
     if (rectangleRendererComponent != null) {
-      colorPicker.setValue(new javafx.scene.paint.Color(
-        rectangleRendererComponent.getColor().getRed() / 255f,
-        rectangleRendererComponent.getColor().getGreen() / 255f,
-        rectangleRendererComponent.getColor().getBlue() / 255f,
-        rectangleRendererComponent.getColor().getAlpha() / 255f
-      ));
+      colorPicker.setValue(ColorUtils.toJavaFxColor(rectangleRendererComponent.getColor()));
       checkBoxFill.setSelected(rectangleRendererComponent.isFilled());
     }
   }
 
   private RectangleRendererComponent createComponentFromFields() {
-    var colorPickerColor = colorPicker.getValue();
-    var color = new Color(
-      (int)(colorPickerColor.getOpacity() * 255),
-      (int)(colorPickerColor.getRed() * 255),
-      (int)(colorPickerColor.getGreen() * 255),
-      (int)(colorPickerColor.getBlue() * 255)
-    );
-
-    return new RectangleRendererComponent(color, checkBoxFill.isSelected());
+    return new RectangleRendererComponent(ColorUtils.toSolaColor(colorPicker.getValue()), checkBoxFill.isSelected());
   }
 }

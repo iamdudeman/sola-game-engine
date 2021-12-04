@@ -43,25 +43,12 @@ public class CircleRendererComponentController extends ComponentController<Circl
     CircleRendererComponent circleRendererComponent = entity.getComponent(CircleRendererComponent.class);
 
     if (circleRendererComponent != null) {
-      colorPicker.setValue(new javafx.scene.paint.Color(
-        circleRendererComponent.getColor().getRed() / 255f,
-        circleRendererComponent.getColor().getGreen() / 255f,
-        circleRendererComponent.getColor().getBlue() / 255f,
-        circleRendererComponent.getColor().getAlpha() / 255f
-      ));
+      colorPicker.setValue(ColorUtils.toJavaFxColor(circleRendererComponent.getColor()));
       checkBoxFill.setSelected(circleRendererComponent.isFilled());
     }
   }
 
   private CircleRendererComponent createComponentFromFields() {
-    var colorPickerColor = colorPicker.getValue();
-    var color = new Color(
-      (int)(colorPickerColor.getOpacity() * 255),
-      (int)(colorPickerColor.getRed() * 255),
-      (int)(colorPickerColor.getGreen() * 255),
-      (int)(colorPickerColor.getBlue() * 255)
-    );
-
-    return new CircleRendererComponent(color, checkBoxFill.isSelected());
+    return new CircleRendererComponent(ColorUtils.toSolaColor(colorPicker.getValue()), checkBoxFill.isSelected());
   }
 }

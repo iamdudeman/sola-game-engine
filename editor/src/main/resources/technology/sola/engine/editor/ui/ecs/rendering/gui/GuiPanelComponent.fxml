@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="200.0" prefWidth="300.0" spacing="8.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+  <padding>
+    <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+  </padding>
+  <Label contentDisplay="BOTTOM" text="Background">
+    <graphic>
+      <ColorPicker fx:id="colorPickerBackground" />
+    </graphic>
+  </Label>
+  <Label contentDisplay="BOTTOM" text="Border">
+    <graphic>
+      <ColorPicker fx:id="colorPickerBorder" />
+    </graphic>
+  </Label>
+   <Button fx:id="buttonClearBorder" mnemonicParsing="false" text="Clear" />
+</VBox>
