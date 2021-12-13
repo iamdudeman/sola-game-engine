@@ -47,5 +47,6 @@ public class EcsSystemContainer {
       .filter(EcsSystem::isActive)
       .iterator()
       .forEachRemaining(updateSystem -> updateSystem.update(world, deltaTime));
+    world.cleanupDestroyedEntities();
   }
 }
