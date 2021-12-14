@@ -15,6 +15,7 @@
     </Menu>
     <Menu fx:id="menuWorld" disable="true" mnemonicParsing="false" text="World">
       <MenuItem fx:id="menuItemNewEntity" mnemonicParsing="false" text="New Entity" />
+      <CheckMenuItem fx:id="menuItemLivePreview" mnemonicParsing="false" text="Live Preview" />
     </Menu>
   </MenuBar>
   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Entities" />

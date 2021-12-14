@@ -8,11 +8,11 @@
     * GuiText
     * Collider
     * DynamicBody
+      * Material stuff
   * Project settings
     * window title
     * Renderer width/height
     * fps / sleeping
-  * play mode for quick testing
   * utility for sola to load assets from expected folder structure
   * Way to view all Systems and Components available
   * Way to view various EventListeners?

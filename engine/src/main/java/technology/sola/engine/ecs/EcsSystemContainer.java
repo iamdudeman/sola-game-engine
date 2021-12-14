@@ -1,6 +1,7 @@
 package technology.sola.engine.ecs;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class EcsSystemContainer {
@@ -40,6 +41,12 @@ public class EcsSystemContainer {
       .map(updateSystemClass::cast)
       .findFirst()
       .orElse(null);
+  }
+
+  public Iterator<EcsSystem> activeSystemsIterator() {
+    return ecsSystems.stream()
+      .filter(EcsSystem::isActive)
+      .iterator();
   }
 
   public void update(float deltaTime) {

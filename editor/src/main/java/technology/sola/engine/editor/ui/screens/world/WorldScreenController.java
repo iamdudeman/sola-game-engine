@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
@@ -48,6 +49,8 @@ public class WorldScreenController implements SolaEditorScreen {
   private Menu menuWorld;
   @FXML
   private MenuItem menuItemNewEntity;
+  @FXML
+  private CheckMenuItem menuItemLivePreview;
   @FXML
   private EntityListView entityListView;
   @FXML
@@ -115,20 +118,12 @@ public class WorldScreenController implements SolaEditorScreen {
 
       if (worldFile != null) {
         worldFileProperty.setValue(worldFile);
-        try {
-          loadWorld();
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
+        loadWorld();
       }
     });
 
     menuItemSave.setOnAction(event -> {
-      try {
-        saveWorld();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+      saveWorld();
     });
 
     menuItemNewEntity.setOnAction(event -> {
@@ -140,6 +135,20 @@ public class WorldScreenController implements SolaEditorScreen {
       entityList.add(entity);
     });
 
+    menuItemLivePreview.selectedProperty().addListener(((observable, oldValue, newValue) -> {
+      if (newValue) {
+        menuItemNewEntity.setDisable(true);
+        entityListView.setDisable(true);
+        saveWorld();
+        editorSola.startPreview();
+      } else {
+        editorSola.stopPreview();
+        loadWorld();
+        entityListView.setDisable(false);
+        menuItemNewEntity.setDisable(false);
+      }
+    }));
+
     entityListView.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
       entityComponents.setEntity(newValue);
     }));
@@ -147,19 +156,27 @@ public class WorldScreenController implements SolaEditorScreen {
     solaPlatform.play(editorSola);
   }
 
-  private void saveWorld() throws IOException {
+  private void saveWorld() {
     String serializedWorld = new Base64WorldSerializer().stringify(worldProperty.getValue());
 
-    Files.write(worldFileProperty.getValue().toPath(), serializedWorld.getBytes(StandardCharsets.UTF_8));
+    try {
+      Files.write(worldFileProperty.getValue().toPath(), serializedWorld.getBytes(StandardCharsets.UTF_8));
+    } catch (IOException ex) {
+      ex.printStackTrace(); // todo handle this
+    }
   }
 
-  private void loadWorld() throws IOException {
-    String serializedWorld = Files.readString(worldFileProperty.getValue().toPath());
+  private void loadWorld() {
+    try {
+      String serializedWorld = Files.readString(worldFileProperty.getValue().toPath());
 
-    worldProperty.setValue(new Base64WorldSerializer().parse(serializedWorld));
-    entityList.clear();
-    entityList.addAll(worldProperty.getValue().getEntitiesWithComponents());
+      worldProperty.setValue(new Base64WorldSerializer().parse(serializedWorld));
+      entityList.clear();
+      entityList.addAll(worldProperty.getValue().getEntitiesWithComponents());
 
-    editorSola.setWorld(worldProperty.getValue());
+      editorSola.setWorld(worldProperty.getValue());
+    } catch (IOException ex) {
+      ex.printStackTrace(); // todo handle this
+    }
   }
 }
