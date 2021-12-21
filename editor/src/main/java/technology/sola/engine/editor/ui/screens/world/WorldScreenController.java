@@ -56,14 +56,13 @@ public class WorldScreenController implements SolaEditorScreen {
   @FXML
   private EntityComponents entityComponents;
 
-  private final EditorSola editorSola;
+  private EditorSola editorSola;
   private final SolaPlatform solaPlatform;
 
   public WorldScreenController(Stage owner, SolaEditorContext solaEditorContext) {
     this.owner = owner;
     this.solaEditorContext = solaEditorContext;
 
-    editorSola = new EditorSola();
     solaPlatform = new JavaFxSolaPlatform(false);
   }
 
@@ -157,7 +156,8 @@ public class WorldScreenController implements SolaEditorScreen {
   }
 
   private EditorSola buildEditorSola() {
-    return new EditorSola();
+    editorSola = new EditorSola();
+    return editorSola;
   }
 
   private void saveWorld() {
