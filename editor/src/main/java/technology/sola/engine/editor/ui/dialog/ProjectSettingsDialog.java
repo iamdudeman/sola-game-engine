@@ -7,6 +7,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Window;
@@ -26,6 +27,8 @@ public class ProjectSettingsDialog extends Dialog<SolaConfiguration> {
   private Spinner<Integer> spinnerGameLoopFps;
   @FXML
   private CheckBox checkBoxGameLoopResting;
+  @FXML
+  private TextArea textAreaLayers;
 
   public ProjectSettingsDialog(Window owner, SolaEditorContext solaEditorContext) {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("ProjectSettingsDialog.fxml"));
@@ -49,18 +52,20 @@ public class ProjectSettingsDialog extends Dialog<SolaConfiguration> {
     textFieldCanvasHeight.setText("" + solaConfiguration.getCanvasHeight());
     spinnerGameLoopFps.getValueFactory().setValue(solaConfiguration.getGameLoopTargetUpdatesPerSecond());
     checkBoxGameLoopResting.setSelected(solaConfiguration.isGameLoopRestingAllowed());
+    textAreaLayers.setText(String.join("\n", solaEditorContext.solaLayersProperty().getValue()));
 
     setResizable(false);
     setDialogPane(dialogPane);
     setResultConverter(buttonType -> {
       if (buttonType.getButtonData() == ButtonBar.ButtonData.OK_DONE) {
-        return new SolaConfiguration(
+        solaEditorContext.solaConfigurationProperty().setValue(new SolaConfiguration(
           textFieldTitle.getText(),
           Integer.parseInt(textFieldCanvasWidth.getText()),
           Integer.parseInt(textFieldCanvasHeight.getText()),
           spinnerGameLoopFps.getValue(),
           checkBoxGameLoopResting.isSelected()
-        );
+        ));
+        solaEditorContext.solaLayersProperty().setValue(textAreaLayers.getText().split("\n"));
       }
 
       return null;

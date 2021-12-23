@@ -1,10 +1,5 @@
 # Branch WIP
 * Engine Editor (Sola Editor)
-  * Project settings
-    * window title
-    * Renderer width/height
-    * fps / sleeping
-    * ui layers
   * Component controller
     * Layer
 

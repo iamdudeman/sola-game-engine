@@ -15,6 +15,7 @@ public class SolaEditorContext {
   private final Stage primaryStage;
   private final Property<File> projectFileProperty = new SimpleObjectProperty<>(null);
   private final Property<SolaConfiguration> solaConfigurationProperty = new SimpleObjectProperty<>(null);
+  private final Property<String[]> solaLayersProperty = new SimpleObjectProperty<>(new String[]{});
   private final EditorConfiguration configuration;
   private Properties projectFileProperties = null;
 
@@ -37,6 +38,8 @@ public class SolaEditorContext {
         Integer.parseInt(projectFileProperties.getOrDefault("gameLoopFps", 30).toString()),
         Boolean.parseBoolean(projectFileProperties.getOrDefault("gameLoopResting", true).toString())
       ));
+
+      solaLayersProperty.setValue(projectFileProperties.getProperty("layers", "").split(","));
     }));
 
     solaConfigurationProperty.addListener(((observable, oldValue, newValue) -> {
@@ -45,6 +48,16 @@ public class SolaEditorContext {
       projectFileProperties.setProperty("canvasHeight", "" + newValue.getCanvasHeight());
       projectFileProperties.setProperty("gameLoopFps", "" + newValue.getGameLoopTargetUpdatesPerSecond());
       projectFileProperties.setProperty("gameLoopResting", "" + newValue.isGameLoopRestingAllowed());
+
+      try (FileOutputStream fileOutputStream = new FileOutputStream(projectFileProperty.getValue())) {
+        projectFileProperties.store(fileOutputStream, null);
+      } catch (IOException ex) {
+        ex.printStackTrace();
+      }
+    }));
+
+    solaLayersProperty.addListener(((observable, oldValue, newValue) -> {
+      projectFileProperties.setProperty("layers", String.join(",", solaLayersProperty.getValue()));
 
       try (FileOutputStream fileOutputStream = new FileOutputStream(projectFileProperty.getValue())) {
         projectFileProperties.store(fileOutputStream, null);
@@ -66,6 +79,10 @@ public class SolaEditorContext {
 
   public Property<SolaConfiguration> solaConfigurationProperty() {
     return solaConfigurationProperty;
+  }
+
+  public Property<String[]> solaLayersProperty() {
+    return solaLayersProperty;
   }
 
   public EditorConfiguration getConfiguration() {

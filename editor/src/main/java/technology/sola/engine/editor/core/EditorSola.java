@@ -16,6 +16,7 @@ public class EditorSola extends Sola {
   private SolaGraphics solaGraphics;
   private final List<EcsSystem> previouslyActiveSystems = new ArrayList<>();
   private SolaConfiguration solaConfiguration;
+  private String[] layers = new String[0];
 
   public EditorSola(SolaConfiguration solaConfiguration) {
     this.solaConfiguration = solaConfiguration;
@@ -27,6 +28,10 @@ public class EditorSola extends Sola {
 
   public void setSolaConfiguration(SolaConfiguration solaConfiguration) {
     this.solaConfiguration = solaConfiguration;
+  }
+
+  public void setLayers(String[] layers) {
+    this.layers = layers;
   }
 
   public void startPreview() {
@@ -59,6 +64,8 @@ public class EditorSola extends Sola {
     solaGraphics = SolaGraphics.use(ecsSystemContainer, platform.getRenderer(), assetPoolProvider);
 
     stopPreview();
+
+    platform.getRenderer().createLayers(layers);
   }
 
   @Override

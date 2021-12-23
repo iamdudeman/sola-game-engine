@@ -61,7 +61,7 @@ public class LandingScreenController implements SolaEditorScreen {
     solaEditorContext.projectFilePropertyProperty().addListener((observable, oldValue, newValue) -> {
       menuWindows.setDisable(newValue == null);
       buttonEditSettings.setDisable(newValue == null);
-      textCurrentProject.setText(newValue.getName());
+      textCurrentProject.setText(newValue == null ? "" : newValue.getName());
     });
 
     menuItemNew.setOnAction(event -> {
@@ -138,11 +138,7 @@ public class LandingScreenController implements SolaEditorScreen {
     }));
 
     buttonEditSettings.setOnAction(event -> {
-      new ProjectSettingsDialog(solaEditorContext.getPrimaryStage(), solaEditorContext)
-        .showAndWait()
-        .ifPresent(solaConfiguration -> {
-          solaEditorContext.solaConfigurationProperty().setValue(solaConfiguration);
-        });
+      new ProjectSettingsDialog(solaEditorContext.getPrimaryStage(), solaEditorContext).showAndWait();
     });
   }
 }
