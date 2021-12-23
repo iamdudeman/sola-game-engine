@@ -3,6 +3,7 @@ package technology.sola.engine.editor.ui.ecs.rendering.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import technology.sola.engine.editor.core.SolaEditorContext;
 import technology.sola.engine.editor.ui.ecs.ComponentController;
 import technology.sola.engine.editor.ui.ecs.rendering.ColorUtils;
 import technology.sola.engine.graphics.Color;
@@ -15,6 +16,10 @@ public class GuiPanelComponentController extends ComponentController<GuiPanelCom
   private ColorPicker colorPickerBorder;
   @FXML
   private Button buttonClearBorder;
+
+  public GuiPanelComponentController(SolaEditorContext solaEditorContext) {
+    super(solaEditorContext);
+  }
 
   @Override
   public void initialize() {

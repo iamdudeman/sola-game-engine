@@ -66,6 +66,8 @@ public class ProjectSettingsDialog extends Dialog<SolaConfiguration> {
           checkBoxGameLoopResting.isSelected()
         ));
         solaEditorContext.solaLayersProperty().setValue(textAreaLayers.getText().split("\n"));
+        solaEditorContext.solaEditorConfigurationDirtyProperty().setValue(true);
+        solaEditorContext.solaEditorConfigurationDirtyProperty().setValue(false);
       }
 
       return null;

@@ -1,7 +1,5 @@
 # Branch WIP
-* Engine Editor (Sola Editor)
-  * Component controller
-    * Layer
+
 
 # TODO List
 * Engine GUI Editor (Sola Editor)

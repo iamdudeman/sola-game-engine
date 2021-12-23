@@ -1,6 +1,7 @@
 package technology.sola.engine.editor.core;
 
 import javafx.beans.property.Property;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.stage.Stage;
 import technology.sola.engine.core.SolaConfiguration;
@@ -16,6 +17,7 @@ public class SolaEditorContext {
   private final Property<File> projectFileProperty = new SimpleObjectProperty<>(null);
   private final Property<SolaConfiguration> solaConfigurationProperty = new SimpleObjectProperty<>(null);
   private final Property<String[]> solaLayersProperty = new SimpleObjectProperty<>(new String[]{});
+  private final Property<Boolean> solaEditorConfigurationDirtyProperty = new SimpleBooleanProperty(false);
   private final EditorConfiguration configuration;
   private Properties projectFileProperties = null;
 
@@ -66,7 +68,7 @@ public class SolaEditorContext {
       }
     }));
 
-    configuration = new EditorConfiguration();
+    configuration = new EditorConfiguration(this);
   }
 
   public Stage getPrimaryStage() {
@@ -83,6 +85,10 @@ public class SolaEditorContext {
 
   public Property<String[]> solaLayersProperty() {
     return solaLayersProperty;
+  }
+
+  public Property<Boolean> solaEditorConfigurationDirtyProperty() {
+    return solaEditorConfigurationDirtyProperty;
   }
 
   public EditorConfiguration getConfiguration() {

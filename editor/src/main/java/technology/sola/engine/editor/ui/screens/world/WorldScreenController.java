@@ -154,18 +154,24 @@ public class WorldScreenController implements SolaEditorScreen {
 
     editorSola = new EditorSola(solaEditorContext.solaConfigurationProperty().getValue());
 
-    solaEditorContext.solaConfigurationProperty().addListener(((observable, oldValue, newValue) -> {
-      updateEditorSola();
-    }));
+//    solaEditorContext.solaConfigurationProperty().addListener(((observable, oldValue, newValue) -> {
+//      updateEditorSola();
+//    }));
+//
+//    solaEditorContext.solaLayersProperty().addListener(((observable, oldValue, newValue) -> {
+//      updateEditorSola();
+//    }));
 
-    solaEditorContext.solaLayersProperty().addListener(((observable, oldValue, newValue) -> {
-      updateEditorSola();
+    solaEditorContext.solaEditorConfigurationDirtyProperty().addListener(((observable, oldValue, newValue) -> {
+      if (newValue) {
+        updateEditorSola();
+      }
     }));
 
     updateEditorSola();
   }
 
-  private void updateEditorSola() {
+  private synchronized void updateEditorSola() {
     editorSola.stop();
     editorSola.setSolaConfiguration(solaEditorContext.solaConfigurationProperty().getValue());
     editorSola.setLayers(solaEditorContext.solaLayersProperty().getValue());

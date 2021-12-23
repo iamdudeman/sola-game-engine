@@ -3,6 +3,7 @@ package technology.sola.engine.editor.ui.ecs.general;
 import com.sun.javafx.scene.control.DoubleField;
 import javafx.fxml.FXML;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.editor.core.SolaEditorContext;
 import technology.sola.engine.editor.ui.ecs.ComponentController;
 
 public class TransformComponentController extends ComponentController<TransformComponent> {
@@ -14,6 +15,10 @@ public class TransformComponentController extends ComponentController<TransformC
   private DoubleField doubleFieldScaleX;
   @FXML
   private DoubleField doubleFieldScaleY;
+
+  public TransformComponentController(SolaEditorContext solaEditorContext) {
+    super(solaEditorContext);
+  }
 
   @Override
   public void initialize() {
