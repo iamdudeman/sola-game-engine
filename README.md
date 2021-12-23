@@ -23,6 +23,7 @@
   * Way to view various EventListeners?
   * export stuff somehow maybe?
   * Create child + parent relationships for the entities?
+  * select entities by click them in world
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
 * Unit Testing

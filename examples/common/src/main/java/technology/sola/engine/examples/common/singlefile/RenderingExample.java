@@ -28,7 +28,7 @@ public class RenderingExample extends Sola {
   private SolaGraphics solaGraphics;
 
   @Override
-  protected SolaConfiguration buildConfiguration() {
+  protected SolaConfiguration getConfiguration() {
     return new SolaConfiguration("Rendering Example", 800, 600, 30, true);
   }
 

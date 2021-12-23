@@ -6,6 +6,7 @@ import technology.sola.engine.core.graphics.SolaGraphics;
 import technology.sola.engine.core.physics.SolaPhysics;
 import technology.sola.engine.ecs.EcsSystem;
 import technology.sola.engine.ecs.World;
+import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Renderer;
 
 import java.util.ArrayList;
@@ -14,9 +15,18 @@ import java.util.List;
 public class EditorSola extends Sola {
   private SolaGraphics solaGraphics;
   private final List<EcsSystem> previouslyActiveSystems = new ArrayList<>();
+  private SolaConfiguration solaConfiguration;
+
+  public EditorSola(SolaConfiguration solaConfiguration) {
+    this.solaConfiguration = solaConfiguration;
+  }
 
   public void setWorld(World world) {
     ecsSystemContainer.setWorld(world);
+  }
+
+  public void setSolaConfiguration(SolaConfiguration solaConfiguration) {
+    this.solaConfiguration = solaConfiguration;
   }
 
   public void startPreview() {
@@ -33,10 +43,13 @@ public class EditorSola extends Sola {
     });
   }
 
+  public void stop() {
+    eventHub.emit(GameLoopEvent.STOP);
+  }
+
   @Override
-  protected SolaConfiguration buildConfiguration() {
-    // TODO get this from project settings instead
-    return new SolaConfiguration("Preview", 800, 600, 10, true);
+  protected SolaConfiguration getConfiguration() {
+    return solaConfiguration;
   }
 
   @Override

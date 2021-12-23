@@ -152,12 +152,16 @@ public class WorldScreenController implements SolaEditorScreen {
       entityComponents.setEntity(newValue);
     }));
 
-    solaPlatform.play(buildEditorSola());
-  }
+    solaEditorContext.solaConfigurationProperty().addListener(((observable, oldValue, newValue) -> {
+      if (oldValue != newValue && newValue != null) {
+        editorSola.stop();
+        editorSola.setSolaConfiguration(solaEditorContext.solaConfigurationProperty().getValue());
+        solaPlatform.play(editorSola);
+      }
+    }));
 
-  private EditorSola buildEditorSola() {
-    editorSola = new EditorSola();
-    return editorSola;
+    editorSola = new EditorSola(solaEditorContext.solaConfigurationProperty().getValue());
+    solaPlatform.play(editorSola);
   }
 
   private void saveWorld() {

@@ -28,10 +28,10 @@ public abstract class SolaPlatform {
     LOGGER.info("Using platform [{}]", this.getClass().getName());
 
     this.solaEventHub = sola.eventHub;
-    this.viewport = buildViewport(sola.configuration);
+    this.viewport = buildViewport(sola.getConfiguration());
 
     populateAssetPoolProvider(sola.assetPoolProvider);
-    initializePlatform(sola.configuration, () -> initComplete(sola, sola.configuration));
+    initializePlatform(sola.getConfiguration(), () -> initComplete(sola, sola.getConfiguration()));
   }
 
   public Renderer getRenderer() {
@@ -58,7 +58,7 @@ public abstract class SolaPlatform {
 
   /**
    * Method to initialize a {@link SolaPlatform}. This operation can be async. It will provide the configuration
-   * from the {@link Sola#buildConfiguration()} method.
+   * from the {@link Sola#getConfiguration()} method.
    *
    * @param solaConfiguration  the Sola configuration
    * @param solaPlatformInitialization  call {@link SolaPlatformInitialization#finish()} when platform initialization is finished

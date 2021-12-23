@@ -28,7 +28,7 @@ public class StressTestExample extends Sola {
   }
 
   @Override
-  protected SolaConfiguration buildConfiguration() {
+  protected SolaConfiguration getConfiguration() {
     return new SolaConfiguration("Stress Test", 1200, 800, 60, false);
   }
 
@@ -51,8 +51,8 @@ public class StressTestExample extends Sola {
 
   private World buildWorld() {
     Material circleMaterial = new Material(1, 0.8f);
-    float zoomedWidth = configuration.getCanvasWidth() / CAMERA_SCALE;
-    float zoomedHeight = configuration.getCanvasHeight() / CAMERA_SCALE;
+    float zoomedWidth = getConfiguration().getCanvasWidth() / CAMERA_SCALE;
+    float zoomedHeight = getConfiguration().getCanvasHeight() / CAMERA_SCALE;
     float squareSide = CIRCLE_RADIUS;
     int bottomPlatformEntityCount = Math.round(zoomedWidth / squareSide) + 1;
     int sidePlatformEntityCount = Math.round(zoomedHeight / squareSide) * 2 + 2;
