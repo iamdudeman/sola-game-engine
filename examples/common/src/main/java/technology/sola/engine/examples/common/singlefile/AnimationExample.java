@@ -16,7 +16,7 @@ public class AnimationExample extends Sola {
   private SolaGraphics solaGraphics;
 
   @Override
-  protected SolaConfiguration buildConfiguration() {
+  protected SolaConfiguration getConfiguration() {
     return new SolaConfiguration(
       "Animation", 200, 200, 30, true
     );

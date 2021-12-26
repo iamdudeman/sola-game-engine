@@ -2,6 +2,7 @@ package technology.sola.engine.editor.ui.ecs.physics;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import technology.sola.engine.editor.core.SolaEditorContext;
 import technology.sola.engine.editor.ui.ecs.ComponentController;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 
@@ -10,6 +11,10 @@ import technology.sola.engine.physics.component.DynamicBodyComponent;
 public class DynamicBodyComponentController extends ComponentController<DynamicBodyComponent> {
   @FXML
   private CheckBox checkBoxKinematic;
+
+  public DynamicBodyComponentController(SolaEditorContext solaEditorContext) {
+    super(solaEditorContext);
+  }
 
   @Override
   public void initialize() {

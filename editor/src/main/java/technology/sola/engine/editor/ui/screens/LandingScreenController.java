@@ -1,14 +1,17 @@
 package technology.sola.engine.editor.ui.screens;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.editor.core.FolderUtils;
 import technology.sola.engine.editor.core.SolaEditorContext;
+import technology.sola.engine.editor.ui.dialog.ProjectSettingsDialog;
 import technology.sola.engine.editor.ui.screens.assets.AssetsScreenController;
 import technology.sola.engine.editor.ui.screens.world.WorldScreenController;
 
@@ -25,6 +28,8 @@ public class LandingScreenController implements SolaEditorScreen {
 
   @FXML
   private Text textCurrentProject;
+  @FXML
+  private Button buttonEditSettings;
 
   @FXML
   private CheckMenuItem checkMenuItemAssets;
@@ -55,7 +60,8 @@ public class LandingScreenController implements SolaEditorScreen {
 
     solaEditorContext.projectFilePropertyProperty().addListener((observable, oldValue, newValue) -> {
       menuWindows.setDisable(newValue == null);
-      textCurrentProject.setText(newValue.getName());
+      buttonEditSettings.setDisable(newValue == null);
+      textCurrentProject.setText(newValue == null ? "" : newValue.getName());
     });
 
     menuItemNew.setOnAction(event -> {
@@ -130,5 +136,9 @@ public class LandingScreenController implements SolaEditorScreen {
         worldStage.hide();
       }
     }));
+
+    buttonEditSettings.setOnAction(event -> {
+      new ProjectSettingsDialog(solaEditorContext.getPrimaryStage(), solaEditorContext).showAndWait();
+    });
   }
 }

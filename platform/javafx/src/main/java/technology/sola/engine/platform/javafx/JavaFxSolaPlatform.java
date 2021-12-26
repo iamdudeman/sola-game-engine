@@ -13,6 +13,7 @@ import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
+import technology.sola.engine.event.gameloop.GameLoopEventType;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.impl.SoftwareRenderer;
@@ -95,6 +96,12 @@ public class JavaFxSolaPlatform extends SolaPlatform {
 
       graphicsContext = canvas.getGraphicsContext2D();
       writableImage = new WritableImage(rendererWidth, rendererHeight);
+
+      solaEventHub.add(event -> {
+        if (event.getMessage() == GameLoopEventType.STOP) {
+          stage.close();
+        }
+      }, GameLoopEvent.class);
 
       stage.setOnShown(event -> canvas.requestFocus());
       stage.setOnCloseRequest(event -> solaEventHub.emit(GameLoopEvent.STOP));

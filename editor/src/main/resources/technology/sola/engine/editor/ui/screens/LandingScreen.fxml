@@ -11,11 +11,12 @@
       <MenuItem fx:id="menuItemOpen" mnemonicParsing="false" text="Open" />
     </Menu>
 
-    <Menu fx:id="menuWindows" mnemonicParsing="false" text="Windows" disable="true">
-      <CheckMenuItem fx:id="checkMenuItemAssets" mnemonicParsing="false" text="Assets"/>
-      <CheckMenuItem fx:id="checkMenuItemWorld" mnemonicParsing="false" text="World"/>
+    <Menu fx:id="menuWindows" disable="true" mnemonicParsing="false" text="Windows">
+      <CheckMenuItem fx:id="checkMenuItemAssets" mnemonicParsing="false" text="Assets" />
+      <CheckMenuItem fx:id="checkMenuItemWorld" mnemonicParsing="false" text="World" />
     </Menu>
   </MenuBar>
 
    <Text fx:id="textCurrentProject" strokeType="OUTSIDE" strokeWidth="0.0" text="Create a new project or open an existing one" />
+   <Button fx:id="buttonEditSettings" mnemonicParsing="false" text="Edit Settings" disable="true"/>
 </VBox>

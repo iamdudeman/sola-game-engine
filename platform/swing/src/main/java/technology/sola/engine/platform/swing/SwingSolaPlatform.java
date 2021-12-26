@@ -5,6 +5,7 @@ import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
+import technology.sola.engine.event.gameloop.GameLoopEventType;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.impl.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
@@ -111,6 +112,12 @@ public class SwingSolaPlatform extends SolaPlatform {
     } else {
       setupGraphics2dRendering();
     }
+
+    solaEventHub.add(event -> {
+      if (event.getMessage() == GameLoopEventType.STOP) {
+        jFrame.dispose();
+      }
+    }, GameLoopEvent.class);
 
     jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     jFrame.addComponentListener(new ComponentAdapter() {

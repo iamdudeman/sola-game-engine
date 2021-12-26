@@ -3,6 +3,7 @@ package technology.sola.engine.editor.ui.ecs.rendering;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
+import technology.sola.engine.editor.core.SolaEditorContext;
 import technology.sola.engine.editor.ui.ecs.ComponentController;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
@@ -12,6 +13,10 @@ public class RectangleRendererComponentController extends ComponentController<Re
   private ColorPicker colorPicker;
   @FXML
   private CheckBox checkBoxFill;
+
+  public RectangleRendererComponentController(SolaEditorContext solaEditorContext) {
+    super(solaEditorContext);
+  }
 
   @Override
   public void initialize() {

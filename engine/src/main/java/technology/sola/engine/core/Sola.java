@@ -8,7 +8,6 @@ import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
 
 public abstract class Sola {
-  protected final SolaConfiguration configuration;
   protected SolaPlatform platform;
   protected EcsSystemContainer ecsSystemContainer;
   protected EventHub eventHub;
@@ -22,10 +21,9 @@ public abstract class Sola {
     keyboardInput = new KeyboardInput();
     mouseInput = new MouseInput();
     assetPoolProvider = new AssetPoolProvider();
-    configuration = buildConfiguration();
   }
 
-  protected abstract SolaConfiguration buildConfiguration();
+  protected abstract SolaConfiguration getConfiguration();
 
   protected abstract void onInit();
 

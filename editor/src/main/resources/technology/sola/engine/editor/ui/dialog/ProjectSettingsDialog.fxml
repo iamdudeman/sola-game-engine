@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<DialogPane headerText="Project Settings" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+  <content>
+    <VBox prefWidth="250.0" spacing="8.0">
+      <Label contentDisplay="BOTTOM" text="Title">
+        <graphic>
+          <TextField fx:id="textFieldTitle"/>
+        </graphic>
+      </Label>
+
+      <HBox spacing="4.0">
+        <Label contentDisplay="BOTTOM" text="Canvas Width">
+          <graphic>
+            <TextField fx:id="textFieldCanvasWidth" prefHeight="25.0" prefWidth="100.0"/>
+          </graphic>
+        </Label>
+        <Label contentDisplay="BOTTOM" text="Canvas Height">
+          <graphic>
+            <TextField fx:id="textFieldCanvasHeight" prefHeight="25.0" prefWidth="100.0"/>
+          </graphic>
+        </Label>
+      </HBox>
+
+      <Label contentDisplay="BOTTOM" text="Game Loop FPS">
+        <graphic>
+          <Spinner fx:id="spinnerGameLoopFps" amountToStepBy="1">
+            <valueFactory>
+              <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="30" max="60" min="10"/>
+            </valueFactory>
+          </Spinner>
+        </graphic>
+      </Label>
+
+      <CheckBox fx:id="checkBoxGameLoopResting" mnemonicParsing="false" text="GameLoop Resting"/>
+      <Label contentDisplay="BOTTOM" text="Layers">
+        <graphic>
+          <TextArea fx:id="textAreaLayers" prefHeight="125.0" prefWidth="200.0"/>
+        </graphic>
+      </Label>
+
+    </VBox>
+  </content>
+
+  <ButtonType buttonData="OK_DONE" text="Save"/>
+  <ButtonType buttonData="CANCEL_CLOSE" text="Cancel"/>
+  <padding>
+    <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+  </padding>
+</DialogPane>

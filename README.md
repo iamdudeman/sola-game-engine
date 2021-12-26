@@ -1,25 +1,22 @@
 # Branch WIP
+
+
+# TODO List
 * Engine GUI Editor (Sola Editor)
   * Add more component controllers
+    * DynamicBody
+      * Material stuff
     * Camera
-    * Layer
     * Sprite
     * SpriteAnimator
     * GuiText
     * Collider
-    * DynamicBody
-      * Material stuff
-  * Project settings
-    * window title
-    * Renderer width/height
-    * fps / sleeping
   * utility for sola to load assets from expected folder structure
   * Way to view all Systems and Components available
   * Way to view various EventListeners?
   * export stuff somehow maybe?
   * Create child + parent relationships for the entities?
-
-# TODO List
+  * select entities by click them in world
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
 * Unit Testing

@@ -22,7 +22,7 @@ public class SimplePlatformerExample extends Sola {
   private SolaGraphics solaGraphics;
 
   @Override
-  protected SolaConfiguration buildConfiguration() {
+  protected SolaConfiguration getConfiguration() {
     return new SolaConfiguration("Simple Platformer",800, 600, 30, true);
   }
 

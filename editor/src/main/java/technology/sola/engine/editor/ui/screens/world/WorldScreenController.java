@@ -56,14 +56,13 @@ public class WorldScreenController implements SolaEditorScreen {
   @FXML
   private EntityComponents entityComponents;
 
-  private final EditorSola editorSola;
+  private EditorSola editorSola;
   private final SolaPlatform solaPlatform;
 
   public WorldScreenController(Stage owner, SolaEditorContext solaEditorContext) {
     this.owner = owner;
     this.solaEditorContext = solaEditorContext;
 
-    editorSola = new EditorSola();
     solaPlatform = new JavaFxSolaPlatform(false);
   }
 
@@ -153,6 +152,20 @@ public class WorldScreenController implements SolaEditorScreen {
       entityComponents.setEntity(newValue);
     }));
 
+    editorSola = new EditorSola(solaEditorContext.solaConfigurationProperty().getValue());
+    updateEditorSola();
+
+    solaEditorContext.solaEditorConfigurationDirtyProperty().addListener(((observable, oldValue, newValue) -> {
+      if (newValue) {
+        updateEditorSola();
+      }
+    }));
+  }
+
+  private synchronized void updateEditorSola() {
+    editorSola.stop();
+    editorSola.setSolaConfiguration(solaEditorContext.solaConfigurationProperty().getValue());
+    editorSola.setLayers(solaEditorContext.solaLayersProperty().getValue());
     solaPlatform.play(editorSola);
   }
 

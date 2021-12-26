@@ -4,14 +4,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import technology.sola.engine.ecs.Component;
 import technology.sola.engine.ecs.Entity;
+import technology.sola.engine.editor.core.SolaEditorContext;
 
 import java.io.IOException;
 
 public abstract class ComponentController<T extends Component> {
   protected Entity entity;
+  protected SolaEditorContext solaEditorContext;
   private Node node;
 
-  public ComponentController() {
+  public ComponentController(SolaEditorContext solaEditorContext) {
+    this.solaEditorContext = solaEditorContext;
+
     FXMLLoader loader = new FXMLLoader(getClass().getResource(getFxmlResource()));
 
     loader.setController(this);
