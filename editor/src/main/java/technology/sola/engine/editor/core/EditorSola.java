@@ -1,33 +1,36 @@
 package technology.sola.engine.editor.core;
 
+import javafx.scene.control.MultipleSelectionModel;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.core.graphics.GraphicsUtils;
 import technology.sola.engine.core.graphics.SolaGraphics;
 import technology.sola.engine.core.physics.SolaPhysics;
 import technology.sola.engine.ecs.EcsSystem;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
+import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class EditorSola extends Sola {
   private SolaGraphics solaGraphics;
   private final List<EcsSystem> previouslyActiveSystems = new ArrayList<>();
+  private final MultipleSelectionModel<Entity> entitySelectionModel;
   private SolaConfiguration solaConfiguration;
   private String[] layers = new String[0];
-  private List<Consumer<Entity>> entityClickSubscribers = new ArrayList<>();
 
-  public EditorSola(SolaConfiguration solaConfiguration) {
+  public EditorSola(SolaConfiguration solaConfiguration, MultipleSelectionModel<Entity> entitySelectionModel) {
     this.solaConfiguration = solaConfiguration;
+    this.entitySelectionModel = entitySelectionModel;
   }
 
   public void setWorld(World world) {
@@ -60,10 +63,6 @@ public class EditorSola extends Sola {
     eventHub.emit(GameLoopEvent.STOP);
   }
 
-  public void subscribeToEntityClick(Consumer<Entity> entityClickSubscriber) {
-    entityClickSubscribers.add(entityClickSubscriber);
-  }
-
   @Override
   protected SolaConfiguration getConfiguration() {
     return solaConfiguration;
@@ -79,6 +78,19 @@ public class EditorSola extends Sola {
 
     platform.getRenderer().createLayers(layers);
 
+    registerOnEntityClick();
+  }
+
+  @Override
+  protected void onRender(Renderer renderer) {
+    renderer.clear();
+
+    solaGraphics.render();
+
+    drawSelectedBorder(renderer);
+  }
+
+  private void registerOnEntityClick() {
     platform.onMousePressed(mouseEvent -> {
       Vector2D vector2D = solaGraphics.screenToWorldCoordinate(new Vector2D(mouseEvent.getX(), mouseEvent.getY()));
 
@@ -99,7 +111,7 @@ public class EditorSola extends Sola {
           Rectangle rectangle = new Rectangle(min, min.add(widthHeight));
           if (rectangle.contains(vector2D)) {
             System.out.println("selected" + entity.getName());
-            entityClickSubscribers.forEach(entityClickSubscriber -> entityClickSubscriber.accept(entity));
+            entitySelectionModel.select(entity);
             return true;
           }
 
@@ -108,10 +120,48 @@ public class EditorSola extends Sola {
     });
   }
 
-  @Override
-  protected void onRender(Renderer renderer) {
-    renderer.clear();
+  private void drawSelectedBorder(Renderer renderer) {
+    Entity selectedEntity = entitySelectionModel.getSelectedItem();
 
-    solaGraphics.render();
+    if (selectedEntity != null) {
+      List<Entity> cameraEntities = ecsSystemContainer.getWorld().getEntitiesWithComponents(CameraComponent.class);
+
+      TransformComponent cameraTransform = cameraEntities.isEmpty()
+        ? new TransformComponent()
+        : cameraEntities.get(0).getComponent(TransformComponent.class);
+      TransformComponent originalTransformComponent = selectedEntity.getComponent(TransformComponent.class);
+
+      if (originalTransformComponent != null) {
+        TransformComponent transformComponent = GraphicsUtils.getTransformForAppliedCamera(
+          originalTransformComponent,
+          cameraTransform
+        );
+
+
+        CircleRendererComponent circleRendererComponent = selectedEntity.getComponent(CircleRendererComponent.class);
+        float max = Math.max(transformComponent.getScaleX(), transformComponent.getScaleY());
+        Vector2D widthHeight = circleRendererComponent == null
+          ? new Vector2D(transformComponent.getScaleX(), transformComponent.getScaleY())
+          : new Vector2D(max, max);
+
+        int layers = renderer.getLayers().size();
+
+        if (layers > 0) {
+          renderer.drawToLayer(renderer.getLayers().get(layers - 1).getName(), r -> {
+            renderer.drawRect(
+              transformComponent.getX() - 3, transformComponent.getY() - 3,
+              widthHeight.x + 6, widthHeight.y + 6,
+              Color.ORANGE
+            );
+          });
+        } else {
+          renderer.drawRect(
+            transformComponent.getX() - 3, transformComponent.getY() - 3,
+            widthHeight.x + 6, widthHeight.y + 6,
+            Color.ORANGE
+          );
+        }
+      }
+    }
   }
 }

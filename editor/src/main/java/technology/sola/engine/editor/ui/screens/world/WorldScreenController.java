@@ -152,9 +152,8 @@ public class WorldScreenController implements SolaEditorScreen {
       entityComponents.setEntity(newValue);
     }));
 
-    editorSola = new EditorSola(solaEditorContext.solaConfigurationProperty().getValue());
+    editorSola = new EditorSola(solaEditorContext.solaConfigurationProperty().getValue(), entityListView.getSelectionModel());
     updateEditorSola();
-    editorSola.subscribeToEntityClick(entity -> entityListView.getSelectionModel().select(entity));
 
     solaEditorContext.solaEditorConfigurationDirtyProperty().addListener(((observable, oldValue, newValue) -> {
       if (newValue) {

@@ -8,8 +8,6 @@ import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
-import technology.sola.math.linear.Matrix3D;
-import technology.sola.math.linear.Vector2D;
 
 class GeometryGraphics {
   static void render(Renderer renderer, EcsSystemContainer ecsSystemContainer, TransformComponent cameraTransform) {
@@ -71,18 +69,5 @@ class GeometryGraphics {
     }
 
     renderer.setRenderMode(RenderMode.NORMAL);
-  }
-
-  private TransformComponent getTransformForAppliedCamera(TransformComponent entityTransform, TransformComponent cameraTransform) {
-    Matrix3D cameraScaleTransform = Matrix3D.scale(cameraTransform.getScaleX(), cameraTransform.getScaleY());
-    Vector2D entityScale = cameraScaleTransform.forward(entityTransform.getScaleX(), entityTransform.getScaleY());
-
-    Matrix3D cameraTranslationTransform = Matrix3D.translate(-cameraTransform.getX(), -cameraTransform.getY())
-      .multiply(cameraScaleTransform);
-    Vector2D entityTranslation = cameraTranslationTransform.forward(entityTransform.getX(), entityTransform.getY());
-
-    return new TransformComponent(
-      entityTranslation.x, entityTranslation.y, entityScale.x, entityScale.y
-    );
   }
 }

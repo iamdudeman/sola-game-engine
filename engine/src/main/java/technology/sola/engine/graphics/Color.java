@@ -8,10 +8,12 @@ public class Color implements Serializable {
   public static final Color BLANK = new Color(0, 0, 0, 0);
   public static final Color BLUE = new Color(255, 0, 0, 255);
   public static final Color GREEN = new Color(255, 0, 255, 0);
+  public static final Color ORANGE = new Color(255, 255, 165, 0);
   public static final Color RED = new Color(255, 255, 0, 0);
   public static final Color YELLOW = new Color(255, 255, 255, 0);
   public static final Color WHITE = new Color(255, 255, 255, 255);
 
+  private static final long serialVersionUID = 6993857654051014018L;
   private final int alpha;
   private final int r;
   private final int g;
