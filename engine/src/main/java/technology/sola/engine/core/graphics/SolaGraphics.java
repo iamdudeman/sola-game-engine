@@ -46,11 +46,7 @@ public class SolaGraphics {
   }
 
   public void render() {
-    var cameraEntities = ecsSystemContainer.getWorld().getEntitiesWithComponents(TransformComponent.class, CameraComponent.class);
-
-    TransformComponent cameraTransform = cameraEntities.isEmpty()
-      ? DEFAULT_CAMERA_TRANSFORM
-      : cameraEntities.get(0).getComponent(TransformComponent.class);
+    TransformComponent cameraTransform = getCameraTransform();
 
     GeometryGraphics.render(renderer, ecsSystemContainer, cameraTransform);
 
@@ -62,6 +58,14 @@ public class SolaGraphics {
     if (isRenderDebug) {
       DebugGraphics.render(renderer, ecsSystemContainer, cameraTransform);
     }
+  }
+
+  public TransformComponent getCameraTransform() {
+    var cameraEntities = ecsSystemContainer.getWorld().getEntitiesWithComponents(TransformComponent.class, CameraComponent.class);
+
+    return cameraEntities.isEmpty()
+      ? DEFAULT_CAMERA_TRANSFORM
+      : cameraEntities.get(0).getComponent(TransformComponent.class);
   }
 
   public boolean isRenderDebug() {

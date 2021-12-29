@@ -1,13 +1,21 @@
 package technology.sola.engine.editor.core;
 
+import javafx.scene.control.MultipleSelectionModel;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.core.graphics.GraphicsUtils;
 import technology.sola.engine.core.graphics.SolaGraphics;
 import technology.sola.engine.core.physics.SolaPhysics;
 import technology.sola.engine.ecs.EcsSystem;
+import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.ecs.World;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
+import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.components.CircleRendererComponent;
+import technology.sola.math.geometry.Rectangle;
+import technology.sola.math.linear.Vector2D;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +23,13 @@ import java.util.List;
 public class EditorSola extends Sola {
   private SolaGraphics solaGraphics;
   private final List<EcsSystem> previouslyActiveSystems = new ArrayList<>();
+  private final MultipleSelectionModel<Entity> entitySelectionModel;
   private SolaConfiguration solaConfiguration;
   private String[] layers = new String[0];
 
-  public EditorSola(SolaConfiguration solaConfiguration) {
+  public EditorSola(SolaConfiguration solaConfiguration, MultipleSelectionModel<Entity> entitySelectionModel) {
     this.solaConfiguration = solaConfiguration;
+    this.entitySelectionModel = entitySelectionModel;
   }
 
   public void setWorld(World world) {
@@ -66,6 +76,8 @@ public class EditorSola extends Sola {
     stopPreview();
 
     platform.getRenderer().createLayers(layers);
+
+    registerOnEntityClick();
   }
 
   @Override
@@ -73,5 +85,75 @@ public class EditorSola extends Sola {
     renderer.clear();
 
     solaGraphics.render();
+
+    drawSelectedBorder(renderer);
+  }
+
+  private Rectangle getEntityBoundingBox(Entity entity, TransformComponent transformComponent) {
+    CircleRendererComponent circleRendererComponent = entity.getComponent(CircleRendererComponent.class);
+
+    Vector2D min = new Vector2D(transformComponent.getX(), transformComponent.getY());
+    Vector2D widthHeight = new Vector2D(transformComponent.getScaleX(), transformComponent.getScaleY());
+
+    if (circleRendererComponent != null) {
+      float max = Math.max(transformComponent.getScaleX(), transformComponent.getScaleY());
+      widthHeight = new Vector2D(max, max);
+    }
+
+    return new Rectangle(min, min.add(widthHeight));
+  }
+
+  private void registerOnEntityClick() {
+    platform.onMousePressed(mouseEvent -> {
+      Vector2D clickPoint = solaGraphics.screenToWorldCoordinate(new Vector2D(mouseEvent.getX(), mouseEvent.getY()));
+
+      ecsSystemContainer.getWorld().getEntitiesWithComponents(TransformComponent.class)
+        .stream().filter(entity -> {
+          Rectangle boundingBox = getEntityBoundingBox(entity, entity.getComponent(TransformComponent.class));
+
+          if (boundingBox.contains(clickPoint)) {
+            entitySelectionModel.select(entity);
+            return true;
+          }
+
+          return false;
+        }).findFirst();
+    });
+  }
+
+  private void drawSelectedBorder(Renderer renderer) {
+    Entity selectedEntity = entitySelectionModel.getSelectedItem();
+
+    if (selectedEntity != null) {
+      TransformComponent cameraTransform = solaGraphics.getCameraTransform();
+      TransformComponent originalTransformComponent = selectedEntity.getComponent(TransformComponent.class);
+
+      if (originalTransformComponent != null) {
+        TransformComponent scaledTransformComponent = GraphicsUtils.getTransformForAppliedCamera(
+          originalTransformComponent, cameraTransform
+        );
+        Rectangle rectangle = getEntityBoundingBox(selectedEntity, scaledTransformComponent);
+        var layers = renderer.getLayers();
+        int layerCount = renderer.getLayers().size();
+
+        if (layerCount > 0) {
+          renderer.drawToLayer(layers.get(layerCount - 1).getName(), r -> {
+            renderSelectedEntityBox(renderer, scaledTransformComponent, rectangle);
+          });
+        } else {
+          renderSelectedEntityBox(renderer, scaledTransformComponent, rectangle);
+        }
+      }
+    }
+  }
+
+  private void renderSelectedEntityBox(Renderer renderer, TransformComponent scaledTransformComponent, Rectangle rectangle) {
+    float size = 3;
+    float doubleSize = 2 * size;
+    renderer.drawRect(
+      scaledTransformComponent.getX() - size, scaledTransformComponent.getY() - size,
+      rectangle.getWidth() + doubleSize, rectangle.getHeight() + doubleSize,
+      Color.ORANGE
+    );
   }
 }
