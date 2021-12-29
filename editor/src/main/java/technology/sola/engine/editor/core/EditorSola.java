@@ -13,7 +13,6 @@ import technology.sola.engine.ecs.World;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
@@ -90,27 +89,29 @@ public class EditorSola extends Sola {
     drawSelectedBorder(renderer);
   }
 
+  private Rectangle getEntityBoundingBox(Entity entity, TransformComponent transformComponent) {
+    CircleRendererComponent circleRendererComponent = entity.getComponent(CircleRendererComponent.class);
+
+    Vector2D min = new Vector2D(transformComponent.getX(), transformComponent.getY());
+    Vector2D widthHeight = new Vector2D(transformComponent.getScaleX(), transformComponent.getScaleY());
+
+    if (circleRendererComponent != null) {
+      float max = Math.max(transformComponent.getScaleX(), transformComponent.getScaleY());
+      widthHeight = new Vector2D(max, max);
+    }
+
+    return new Rectangle(min, min.add(widthHeight));
+  }
+
   private void registerOnEntityClick() {
     platform.onMousePressed(mouseEvent -> {
-      Vector2D vector2D = solaGraphics.screenToWorldCoordinate(new Vector2D(mouseEvent.getX(), mouseEvent.getY()));
+      Vector2D clickPoint = solaGraphics.screenToWorldCoordinate(new Vector2D(mouseEvent.getX(), mouseEvent.getY()));
 
       ecsSystemContainer.getWorld().getEntitiesWithComponents(TransformComponent.class)
         .stream().filter(entity -> {
-          TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
+          Rectangle boundingBox = getEntityBoundingBox(entity, entity.getComponent(TransformComponent.class));
 
-          Vector2D min = new Vector2D(transformComponent.getX(), transformComponent.getY());
-          Vector2D widthHeight = new Vector2D(transformComponent.getScaleX(), transformComponent.getScaleY());
-
-          CircleRendererComponent circleRendererComponent = entity.getComponent(CircleRendererComponent.class);
-
-          if (circleRendererComponent != null) {
-            float max = Math.max(transformComponent.getScaleX(), transformComponent.getScaleY());
-            widthHeight = new Vector2D(max, max);
-          }
-
-          Rectangle rectangle = new Rectangle(min, min.add(widthHeight));
-          if (rectangle.contains(vector2D)) {
-            System.out.println("selected" + entity.getName());
+          if (boundingBox.contains(clickPoint)) {
             entitySelectionModel.select(entity);
             return true;
           }
@@ -124,44 +125,35 @@ public class EditorSola extends Sola {
     Entity selectedEntity = entitySelectionModel.getSelectedItem();
 
     if (selectedEntity != null) {
-      List<Entity> cameraEntities = ecsSystemContainer.getWorld().getEntitiesWithComponents(CameraComponent.class);
-
-      TransformComponent cameraTransform = cameraEntities.isEmpty()
-        ? new TransformComponent()
-        : cameraEntities.get(0).getComponent(TransformComponent.class);
+      TransformComponent cameraTransform = solaGraphics.getCameraTransform();
       TransformComponent originalTransformComponent = selectedEntity.getComponent(TransformComponent.class);
 
       if (originalTransformComponent != null) {
-        TransformComponent transformComponent = GraphicsUtils.getTransformForAppliedCamera(
-          originalTransformComponent,
-          cameraTransform
+        TransformComponent scaledTransformComponent = GraphicsUtils.getTransformForAppliedCamera(
+          originalTransformComponent, cameraTransform
         );
+        Rectangle rectangle = getEntityBoundingBox(selectedEntity, scaledTransformComponent);
+        var layers = renderer.getLayers();
+        int layerCount = renderer.getLayers().size();
 
-
-        CircleRendererComponent circleRendererComponent = selectedEntity.getComponent(CircleRendererComponent.class);
-        float max = Math.max(transformComponent.getScaleX(), transformComponent.getScaleY());
-        Vector2D widthHeight = circleRendererComponent == null
-          ? new Vector2D(transformComponent.getScaleX(), transformComponent.getScaleY())
-          : new Vector2D(max, max);
-
-        int layers = renderer.getLayers().size();
-
-        if (layers > 0) {
-          renderer.drawToLayer(renderer.getLayers().get(layers - 1).getName(), r -> {
-            renderer.drawRect(
-              transformComponent.getX() - 3, transformComponent.getY() - 3,
-              widthHeight.x + 6, widthHeight.y + 6,
-              Color.ORANGE
-            );
+        if (layerCount > 0) {
+          renderer.drawToLayer(layers.get(layerCount - 1).getName(), r -> {
+            renderSelectedEntityBox(renderer, scaledTransformComponent, rectangle);
           });
         } else {
-          renderer.drawRect(
-            transformComponent.getX() - 3, transformComponent.getY() - 3,
-            widthHeight.x + 6, widthHeight.y + 6,
-            Color.ORANGE
-          );
+          renderSelectedEntityBox(renderer, scaledTransformComponent, rectangle);
         }
       }
     }
+  }
+
+  private void renderSelectedEntityBox(Renderer renderer, TransformComponent scaledTransformComponent, Rectangle rectangle) {
+    float size = 3;
+    float doubleSize = 2 * size;
+    renderer.drawRect(
+      scaledTransformComponent.getX() - size, scaledTransformComponent.getY() - size,
+      rectangle.getWidth() + doubleSize, rectangle.getHeight() + doubleSize,
+      Color.ORANGE
+    );
   }
 }

@@ -1,6 +1,4 @@
 # Branch WIP
-* Engine GUI Editor (Sola Editor)
-  * select entities by click them in world
 
 # TODO List
 * Engine GUI Editor (Sola Editor)
