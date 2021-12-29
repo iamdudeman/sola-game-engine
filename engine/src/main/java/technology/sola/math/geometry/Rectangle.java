@@ -65,4 +65,12 @@ public class Rectangle {
   public float getHeight() {
     return max.subtract(min).y;
   }
+
+  public boolean contains(Vector2D point) {
+    if (point.x < min.x) return false;
+    if (point.x > max.x) return false;
+    if (point.y < min.y) return false;
+    if (point.y > max.y) return false;
+    return true;
+  }
 }

@@ -1,5 +1,6 @@
 # Branch WIP
-
+* Engine GUI Editor (Sola Editor)
+  * select entities by click them in world
 
 # TODO List
 * Engine GUI Editor (Sola Editor)
@@ -16,7 +17,8 @@
   * Way to view various EventListeners?
   * export stuff somehow maybe?
   * Create child + parent relationships for the entities?
-  * select entities by click them in world
+  * load additional components, systems and engine ui from external JAR
+    * maybe generate a gradle file to build the jar from inside the engine?
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
 * Unit Testing
