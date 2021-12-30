@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public class World implements Serializable {
+  private static final long serialVersionUID = -4446723129672527365L;
   private final int maxEntityCount;
   private final Entity[] entities;
   private final Map<Class<? extends Component>, Component[]> components = new HashMap<>();
@@ -62,6 +63,14 @@ public class World implements Serializable {
     totalEntityCount++;
     Entity entity = new Entity(this, nextOpenEntityIndex());
     entities[entity.entityIndex] = entity;
+    return entity;
+  }
+
+  public Entity createEntity(String uuid) {
+    Entity entity = createEntity();
+
+    entity.uniqueId = uuid;
+
     return entity;
   }
 

@@ -82,7 +82,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   @Override
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     if (isPlatformStartupNeeded) {
-      Platform.startup(() -> {});
+      Platform.startup(() -> { });
     }
 
     Platform.runLater(() -> {

@@ -8,9 +8,10 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class Entity implements Serializable {
+  private static final long serialVersionUID = 1211787104356274322L;
   final int entityIndex;
+  String uniqueId;
   private final World world;
-  private final String uniqueId;
   private List<Class<? extends Component>> currentComponents = new ArrayList<>();
   private String name = null;
 
@@ -19,7 +20,7 @@ public class Entity implements Serializable {
    *
    * @return the id of this Entity
    */
-  public int getId() {
+  public int getIndexInWorld() {
     return entityIndex;
   }
 
