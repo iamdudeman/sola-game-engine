@@ -1,6 +1,7 @@
 package technology.sola.engine.editor.core;
 
 import technology.sola.engine.editor.ui.ecs.SolaEditorEntityComponentMenus;
+import technology.sola.engine.editor.ui.ecs.general.CameraComponentController;
 import technology.sola.engine.editor.ui.ecs.general.TransformComponentController;
 import technology.sola.engine.editor.ui.ecs.physics.DynamicBodyComponentController;
 import technology.sola.engine.editor.ui.ecs.rendering.CircleRendererComponentController;
@@ -15,7 +16,8 @@ public class EditorConfiguration {
     solaEditorEntityComponentMenus = new SolaEditorEntityComponentMenus();
 
     solaEditorEntityComponentMenus.addMenu("General")
-      .addItem("Transform", new TransformComponentController(solaEditorContext));
+      .addItem("Transform", new TransformComponentController(solaEditorContext))
+      .addItem("Camera", new CameraComponentController(solaEditorContext));
     solaEditorEntityComponentMenus.addMenu("Rendering")
       .addItem("Rectangle", new RectangleRendererComponentController(solaEditorContext))
       .addItem("Circle", new CircleRendererComponentController(solaEditorContext))
