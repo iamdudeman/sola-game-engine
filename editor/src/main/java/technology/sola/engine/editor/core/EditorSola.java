@@ -29,8 +29,6 @@ public class EditorSola extends Sola {
   private SolaConfiguration solaConfiguration;
   private String[] layers = new String[0];
   private boolean isLivePreview = false;
-  private TransformComponent editorCameraTransformComponent; // todo consider something like this?
-  private TransformComponent cameraEntityTransformComponent; // todo consider something like this?
 
   public EditorSola(SolaConfiguration solaConfiguration, MultipleSelectionModel<Entity> entitySelectionModel) {
     this.solaConfiguration = solaConfiguration;
