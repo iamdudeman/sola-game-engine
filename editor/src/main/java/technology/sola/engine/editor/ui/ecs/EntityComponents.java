@@ -21,7 +21,7 @@ public class EntityComponents extends VBox {
   private final Property<Entity> entityProperty = new SimpleObjectProperty<>();
   private final MenuBar componentsMenu;
   private final VBox componentsContainer;
-  private final Map<Class<? extends Component>, ComponentController<?>> classComponentControllerMap = new HashMap<>();
+  private final Map<Class<? extends Component<?>>, ComponentController<?>> classComponentControllerMap = new HashMap<>();
 
   public EntityComponents() {
     componentsMenu = new MenuBar();
@@ -55,7 +55,7 @@ public class EntityComponents extends VBox {
       Accordion accordion = new Accordion();
 
       classComponentControllerMap.forEach((key, value) -> {
-        Component component = entity.getComponent(key);
+        Component<?> component = entity.getComponent(key);
 
         if (component != null) {
           value.setEntity(entity);
@@ -92,7 +92,7 @@ public class EntityComponents extends VBox {
       } else {
         CheckMenuItem checkMenuItem = new CheckMenuItem(solaEditorMenuItem.getTitle());
         ComponentController<?> componentController = solaEditorMenuItem.getItem();
-        Class<? extends Component> componentClass = componentController.getComponentClass();
+        Class<? extends Component<?>> componentClass = componentController.getComponentClass();
 
         classComponentControllerMap.put(componentClass, componentController);
 

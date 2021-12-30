@@ -3,7 +3,8 @@ package technology.sola.engine.core.component;
 import technology.sola.engine.ecs.Component;
 import technology.sola.math.linear.Vector2D;
 
-public class TransformComponent implements Component {
+public class TransformComponent implements Component<TransformComponent> {
+  private static final long serialVersionUID = -1810768571143367371L;
   private float x;
   private float y;
   private float scaleX;
@@ -26,6 +27,11 @@ public class TransformComponent implements Component {
     this.y = y;
     this.scaleX = scaleX;
     this.scaleY = scaleY;
+  }
+
+  @Override
+  public TransformComponent copy() {
+    return new TransformComponent(x, y, scaleX, scaleY);
   }
 
   /**

@@ -5,7 +5,8 @@ import technology.sola.engine.ecs.Component;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.font.Font;
 
-public class GuiTextComponent implements Component {
+public class GuiTextComponent implements Component<GuiTextComponent> {
+  private static final long serialVersionUID = 158900611687830213L;
   private String fontAssetId;
   private String text;
   private Color color = Color.BLACK;
@@ -23,6 +24,11 @@ public class GuiTextComponent implements Component {
     this.fontAssetId = fontAssetId;
     this.text = text;
     this.color = color;
+  }
+
+  @Override
+  public GuiTextComponent copy() {
+    return new GuiTextComponent(fontAssetId, text, color);
   }
 
   public Font getFont(AssetPool<Font> fontAssetPool) {

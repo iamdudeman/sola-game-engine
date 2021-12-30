@@ -3,7 +3,8 @@ package technology.sola.engine.graphics.components;
 import technology.sola.engine.ecs.Component;
 import technology.sola.engine.graphics.Color;
 
-public class RectangleRendererComponent implements Component {
+public class RectangleRendererComponent implements Component<RectangleRendererComponent> {
+  private static final long serialVersionUID = -1301447777016343699L;
   private final Color color;
   private final boolean isFilled;
 
@@ -14,6 +15,11 @@ public class RectangleRendererComponent implements Component {
   public RectangleRendererComponent(Color color, boolean isFilled) {
     this.color = color;
     this.isFilled = isFilled;
+  }
+
+  @Override
+  public RectangleRendererComponent copy() {
+    return new RectangleRendererComponent(color, isFilled);
   }
 
   public Color getColor() {

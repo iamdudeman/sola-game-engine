@@ -54,7 +54,7 @@ class WorldTest {
       World world = new World(2);
       Entity entity = world.createEntity();
 
-      Entity result = world.getEntityById(entity.getId());
+      Entity result = world.getEntityById(entity.getIndexInWorld());
 
       assertEquals(entity, result);
     }
@@ -131,12 +131,12 @@ class WorldTest {
       TestComponent2 testComponent2 = new TestComponent2();
       Entity entity = world.createEntity();
 
-      world.addComponentForEntity(entity.getId(), testComponent);
-      world.addComponentForEntity(entity.getId(), testComponent2);
+      world.addComponentForEntity(entity.getIndexInWorld(), testComponent);
+      world.addComponentForEntity(entity.getIndexInWorld(), testComponent2);
 
       List<Entity> entities = world.getEntitiesWithComponents(TestComponent.class, TestComponent2.class);
       assertEquals(1, entities.size());
-      assertEquals(entity, entities.get(entity.getId()));
+      assertEquals(entity, entities.get(entity.getIndexInWorld()));
     }
 
     @Test
@@ -145,16 +145,28 @@ class WorldTest {
       TestComponent testComponent = new TestComponent();
       Entity entity = world.createEntity();
 
-      world.addComponentForEntity(entity.getId(), testComponent);
+      world.addComponentForEntity(entity.getIndexInWorld(), testComponent);
 
       List<Entity> entities = world.getEntitiesWithComponents(TestComponent.class, TestComponent2.class);
       assertEquals(0, entities.size());
     }
   }
 
-  private static class TestComponent implements Component {
+  private static class TestComponent implements Component<TestComponent> {
+    private static final long serialVersionUID = 7006711691304098007L;
+
+    @Override
+    public TestComponent copy() {
+      return new TestComponent();
+    }
   }
 
-  private static class TestComponent2 implements Component {
+  private static class TestComponent2 implements Component<TestComponent2> {
+    private static final long serialVersionUID = -5634193445825637894L;
+
+    @Override
+    public TestComponent2 copy() {
+      return new TestComponent2();
+    }
   }
 }

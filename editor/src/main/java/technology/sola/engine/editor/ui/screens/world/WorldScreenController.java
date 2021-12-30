@@ -138,11 +138,11 @@ public class WorldScreenController implements SolaEditorScreen {
       if (newValue) {
         menuItemNewEntity.setDisable(true);
         entityListView.setDisable(true);
-        saveWorld();
+        editorSola.setWorld(copyWorld());
         editorSola.startPreview();
       } else {
         editorSola.stopPreview();
-        loadWorld();
+        editorSola.setWorld(worldProperty.getValue());
         entityListView.setDisable(false);
         menuItemNewEntity.setDisable(false);
       }
@@ -167,6 +167,22 @@ public class WorldScreenController implements SolaEditorScreen {
     editorSola.setSolaConfiguration(solaEditorContext.solaConfigurationProperty().getValue());
     editorSola.setLayers(solaEditorContext.solaLayersProperty().getValue());
     solaPlatform.play(editorSola);
+  }
+
+  private World copyWorld() {
+    World world = new World(worldProperty.getValue().getMaxEntityCount());
+
+    worldProperty.getValue().getEntitiesWithComponents()
+      .forEach(entity -> {
+        Entity copyEntity = world.createEntity(entity.getUniqueId());
+        copyEntity.setName(entity.getName());
+
+        entity.getCurrentComponents().forEach(componentClass -> {
+          copyEntity.addComponent(entity.getComponent(componentClass).copy());
+        });
+      });
+
+    return world;
   }
 
   private void saveWorld() {

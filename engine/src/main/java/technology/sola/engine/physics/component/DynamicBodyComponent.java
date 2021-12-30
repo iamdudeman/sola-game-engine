@@ -4,7 +4,8 @@ import technology.sola.engine.ecs.Component;
 import technology.sola.engine.physics.Material;
 import technology.sola.math.linear.Vector2D;
 
-public class DynamicBodyComponent implements Component {
+public class DynamicBodyComponent implements Component<DynamicBodyComponent> {
+  private static final long serialVersionUID = -5626743889555051041L;
   private float forceX = 0.0f;
   private float forceY = 0.0f;
   private boolean isGrounded = false;
@@ -34,6 +35,11 @@ public class DynamicBodyComponent implements Component {
   public DynamicBodyComponent(Material material, boolean isKinematic) {
     setMaterial(material);
     this.isKinematic = isKinematic;
+  }
+
+  @Override
+  public DynamicBodyComponent copy() {
+    return new DynamicBodyComponent(material, isKinematic);
   }
 
   /**

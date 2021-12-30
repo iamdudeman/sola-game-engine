@@ -99,6 +99,12 @@ public class EntityTest {
     }
   }
 
-  private static class TestComponent implements Component {
+  private static class TestComponent implements Component<TestComponent> {
+    private static final long serialVersionUID = 24775932711767895L;
+
+    @Override
+    public TestComponent copy() {
+      return new TestComponent();
+    }
   }
 }

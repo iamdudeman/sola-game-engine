@@ -6,7 +6,8 @@ import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
-public class ColliderComponent implements Component {
+public class ColliderComponent implements Component<ColliderComponent> {
+  private static final long serialVersionUID = 6393414888672495864L;
   // Properties for all
   private ColliderType colliderType;
 
@@ -55,6 +56,13 @@ public class ColliderComponent implements Component {
     colliderComponent.radius = radius;
 
     return colliderComponent;
+  }
+
+  @Override
+  public ColliderComponent copy() {
+    return colliderType == ColliderType.AABB
+      ? aabb(width, height)
+      : circle(radius);
   }
 
   /**
