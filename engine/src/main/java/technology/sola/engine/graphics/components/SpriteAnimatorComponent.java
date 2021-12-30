@@ -5,7 +5,8 @@ import technology.sola.engine.ecs.Component;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SpriteAnimatorComponent implements Component {
+public class SpriteAnimatorComponent implements Component<SpriteAnimatorComponent> {
+  private static final long serialVersionUID = 8265042463767128400L;
   private final Map<String, SpriteKeyFrame[]> animationMap = new HashMap<>();
   private long lastFrameChange = 0;
   private int keyFrameIndex = 0;
@@ -13,9 +14,14 @@ public class SpriteAnimatorComponent implements Component {
   private SpriteKeyFrame activeFrame;
   private SpriteKeyFrame[] activeAnimationKeyFrames;
 
-  public SpriteAnimatorComponent(String activeAnimationId, SpriteKeyFrame ... activeAnimationKeyFrames) {
+  public SpriteAnimatorComponent(String activeAnimationId, SpriteKeyFrame ...activeAnimationKeyFrames) {
     addAnimation(activeAnimationId, activeAnimationKeyFrames);
     playAnimation(activeAnimationId);
+  }
+
+  @Override
+  public SpriteAnimatorComponent copy() {
+    return new SpriteAnimatorComponent(activeAnimationId, activeAnimationKeyFrames);
   }
 
   public SpriteAnimatorComponent addAnimation(String id, SpriteKeyFrame ...spriteKeyFrames) {

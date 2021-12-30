@@ -85,8 +85,8 @@ public class CollisionManifold {
 
   @Override
   public int hashCode() {
-    int min = Math.min(entityA.getId(), entityB.getId());
-    int max = Math.max(entityA.getId(), entityB.getId());
+    int min = Math.min(entityA.getIndexInWorld(), entityB.getIndexInWorld());
+    int max = Math.max(entityA.getIndexInWorld(), entityB.getIndexInWorld());
 
     return Objects.hash(min, max);
   }

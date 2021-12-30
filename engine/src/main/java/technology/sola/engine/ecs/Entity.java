@@ -8,9 +8,10 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class Entity implements Serializable {
+  private static final long serialVersionUID = 1211787104356274322L;
   final int entityIndex;
+  String uniqueId;
   private final World world;
-  private final String uniqueId;
   private List<Class<? extends Component>> currentComponents = new ArrayList<>();
   private String name = null;
 
@@ -19,7 +20,7 @@ public class Entity implements Serializable {
    *
    * @return the id of this Entity
    */
-  public int getId() {
+  public int getIndexInWorld() {
     return entityIndex;
   }
 
@@ -60,7 +61,7 @@ public class Entity implements Serializable {
    * @param component  the {@code Component} to add
    * @return this Entity
    */
-  public Entity addComponent(Component component) {
+  public Entity addComponent(Component<?> component) {
     world.addComponentForEntity(entityIndex, component);
     currentComponents.add(component.getClass());
     return this;
@@ -73,7 +74,7 @@ public class Entity implements Serializable {
    * @param <T>  the type of the {@code Component} class to get
    * @return the {@code Component} instance or null
    */
-  public <T extends Component> T getComponent(Class<T> componentClass) {
+  public <T extends Component<?>> T getComponent(Class<T> componentClass) {
     return world.getComponentForEntity(entityIndex, componentClass);
   }
 
@@ -84,7 +85,7 @@ public class Entity implements Serializable {
    * @param <T>  the type of the {@code Component} class to get
    * @return the {@code Optional}
    */
-  public <T extends Component> Optional<T> getOptionalComponent(Class<T> componentClass) {
+  public <T extends Component<?>> Optional<T> getOptionalComponent(Class<T> componentClass) {
     return Optional.ofNullable(world.getComponentForEntity(entityIndex, componentClass));
   }
 
@@ -93,7 +94,7 @@ public class Entity implements Serializable {
    *
    * @param componentClassToRemove  the Class of the {@code Component} to remove
    */
-  public void removeComponent(Class<? extends Component> componentClassToRemove) {
+  public void removeComponent(Class<? extends Component<?>> componentClassToRemove) {
     world.removeComponent(entityIndex, componentClassToRemove);
     currentComponents = currentComponents.stream().filter(currentComponentClass -> componentClassToRemove != currentComponentClass).collect(Collectors.toList());
   }

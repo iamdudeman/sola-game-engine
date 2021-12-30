@@ -8,6 +8,7 @@ import technology.sola.engine.graphics.sprite.exception.SpriteNotFoundException;
 import java.io.Serializable;
 
 public class SpriteKeyFrame implements Serializable {
+  private static final long serialVersionUID = -1643322034379275616L;
   private final String spriteSheetId;
   private final String spriteId;
   private final long duration;

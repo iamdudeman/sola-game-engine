@@ -13,8 +13,8 @@ class CollisionManifoldTest {
   void whenSameEntities_withDifferentOrder_shouldBeEqual() {
     Entity mockEntityA = Mockito.mock(Entity.class);
     Entity mockEntityB = Mockito.mock(Entity.class);
-    Mockito.when(mockEntityA.getId()).thenReturn(1);
-    Mockito.when(mockEntityB.getId()).thenReturn(2);
+    Mockito.when(mockEntityA.getIndexInWorld()).thenReturn(1);
+    Mockito.when(mockEntityB.getIndexInWorld()).thenReturn(2);
 
     CollisionManifold first = new CollisionManifold(mockEntityA, mockEntityB, new Vector2D(0, 0), 0);
     CollisionManifold second = new CollisionManifold(mockEntityB, mockEntityA, new Vector2D(5, 5), 5);
@@ -28,9 +28,9 @@ class CollisionManifoldTest {
     Entity mockEntityA = Mockito.mock(Entity.class);
     Entity mockEntityB = Mockito.mock(Entity.class);
     Entity mockEntityC = Mockito.mock(Entity.class);
-    Mockito.when(mockEntityA.getId()).thenReturn(1);
-    Mockito.when(mockEntityB.getId()).thenReturn(2);
-    Mockito.when(mockEntityC.getId()).thenReturn(3);
+    Mockito.when(mockEntityA.getIndexInWorld()).thenReturn(1);
+    Mockito.when(mockEntityB.getIndexInWorld()).thenReturn(2);
+    Mockito.when(mockEntityC.getIndexInWorld()).thenReturn(3);
 
     CollisionManifold first = new CollisionManifold(mockEntityA, mockEntityB, new Vector2D(0, 0), 0);
     CollisionManifold second = new CollisionManifold(mockEntityB, mockEntityC, new Vector2D(0, 0), 0);

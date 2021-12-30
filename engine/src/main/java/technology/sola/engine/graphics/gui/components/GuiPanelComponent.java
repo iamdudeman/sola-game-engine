@@ -3,7 +3,8 @@ package technology.sola.engine.graphics.gui.components;
 import technology.sola.engine.ecs.Component;
 import technology.sola.engine.graphics.Color;
 
-public class GuiPanelComponent implements Component {
+public class GuiPanelComponent implements Component<GuiPanelComponent> {
+  private static final long serialVersionUID = 5088264649382366612L;
   private Color backgroundColor;
   private Color borderColor = null;
 
@@ -17,6 +18,11 @@ public class GuiPanelComponent implements Component {
   public GuiPanelComponent(Color backgroundColor, Color borderColor) {
     this.backgroundColor = backgroundColor;
     this.borderColor = borderColor;
+  }
+
+  @Override
+  public GuiPanelComponent copy() {
+    return new GuiPanelComponent(backgroundColor, borderColor);
   }
 
   public Color getBackgroundColor() {
