@@ -23,7 +23,7 @@ public class EditorConfiguration {
       .addItem("Circle", new CircleRendererComponentController(solaEditorContext))
       .addItem("Layer", new LayerComponentController(solaEditorContext))
       .addSubMenu("Gui")
-      .addItem("Panel", new GuiPanelComponentController(solaEditorContext));
+        .addItem("Panel", new GuiPanelComponentController(solaEditorContext));
     solaEditorEntityComponentMenus.addMenu("Physics")
       .addItem("Dynamic Body", new DynamicBodyComponentController(solaEditorContext));
   }

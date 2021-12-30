@@ -13,6 +13,7 @@ import technology.sola.engine.ecs.World;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.math.geometry.Rectangle;
@@ -28,6 +29,8 @@ public class EditorSola extends Sola {
   private SolaConfiguration solaConfiguration;
   private String[] layers = new String[0];
   private boolean isLivePreview = false;
+  private TransformComponent editorCameraTransformComponent; // todo consider something like this?
+  private TransformComponent cameraEntityTransformComponent; // todo consider something like this?
 
   public EditorSola(SolaConfiguration solaConfiguration, MultipleSelectionModel<Entity> entitySelectionModel) {
     this.solaConfiguration = solaConfiguration;
@@ -48,6 +51,7 @@ public class EditorSola extends Sola {
 
   public void startPreview() {
     isLivePreview = true;
+
     previouslyActiveSystems.forEach(activeSystem -> {
       ecsSystemContainer.get(activeSystem.getClass()).setActive(true);
     });
@@ -140,6 +144,10 @@ public class EditorSola extends Sola {
     Entity selectedEntity = entitySelectionModel.getSelectedItem();
 
     if (selectedEntity != null) {
+      if (selectedEntity.getComponent(CameraComponent.class) != null) {
+        return;
+      }
+
       TransformComponent cameraTransform = solaGraphics.getCameraTransform();
       TransformComponent originalTransformComponent = selectedEntity.getComponent(TransformComponent.class);
 
