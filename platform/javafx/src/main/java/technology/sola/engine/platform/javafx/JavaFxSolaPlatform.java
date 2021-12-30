@@ -43,33 +43,39 @@ public class JavaFxSolaPlatform extends SolaPlatform {
 
   @Override
   public void onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
-    canvas.setOnKeyPressed(keyEvent -> keyEventConsumer.accept(new KeyEvent(keyEvent.getCode().getCode())));
+    canvas.addEventHandler(
+      javafx.scene.input.KeyEvent.KEY_PRESSED, keyEvent -> keyEventConsumer.accept(fxToSola(keyEvent))
+    );
   }
 
   @Override
   public void onKeyReleased(Consumer<KeyEvent> keyEventConsumer) {
-    canvas.setOnKeyReleased(keyEvent -> keyEventConsumer.accept(new KeyEvent(keyEvent.getCode().getCode())));
+    canvas.addEventHandler(
+      javafx.scene.input.KeyEvent.KEY_RELEASED, keyEvent -> keyEventConsumer.accept(fxToSola(keyEvent))
+    );
   }
 
   @Override
   public void onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
-    canvas.setOnMouseMoved(mouseEvent -> mouseEventConsumer.accept(
-      new MouseEvent(mouseEvent.getButton().ordinal(), (int)mouseEvent.getX(), (int)mouseEvent.getY()))
+    canvas.addEventHandler(
+      javafx.scene.input.MouseEvent.MOUSE_MOVED, mouseEvent -> mouseEventConsumer.accept(fxToSola(mouseEvent))
+    );
+    canvas.addEventHandler(
+      javafx.scene.input.MouseEvent.MOUSE_DRAGGED, mouseEvent -> mouseEventConsumer.accept(fxToSola(mouseEvent))
     );
   }
 
   @Override
   public void onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
-    canvas.setOnMousePressed(mouseEvent -> mouseEventConsumer.accept(
-      new MouseEvent(mouseEvent.getButton().ordinal(), (int)mouseEvent.getX(), (int)mouseEvent.getY()))
+    canvas.addEventHandler(
+      javafx.scene.input.MouseEvent.MOUSE_PRESSED, mouseEvent -> mouseEventConsumer.accept(fxToSola(mouseEvent))
     );
-
   }
 
   @Override
   public void onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
-    canvas.setOnMouseReleased(mouseEvent -> mouseEventConsumer.accept(
-      new MouseEvent(mouseEvent.getButton().ordinal(), (int)mouseEvent.getX(), (int)mouseEvent.getY()))
+    canvas.addEventHandler(
+      javafx.scene.input.MouseEvent.MOUSE_RELEASED, mouseEvent -> mouseEventConsumer.accept(fxToSola(mouseEvent))
     );
   }
 
@@ -142,5 +148,13 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   @Override
   protected GameLoopProvider buildGameLoop() {
     return JavaFxGameLoop::new;
+  }
+
+  private KeyEvent fxToSola(javafx.scene.input.KeyEvent fxKeyEvent) {
+    return new KeyEvent(fxKeyEvent.getCode().getCode());
+  }
+
+  private MouseEvent fxToSola(javafx.scene.input.MouseEvent fxMouseEvent) {
+    return new MouseEvent(fxMouseEvent.getButton().ordinal(), (int)fxMouseEvent.getX(), (int)fxMouseEvent.getY());
   }
 }

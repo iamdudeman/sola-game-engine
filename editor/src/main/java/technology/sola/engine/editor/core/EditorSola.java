@@ -14,6 +14,7 @@ import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
+import technology.sola.engine.input.MouseButton;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
@@ -26,6 +27,7 @@ public class EditorSola extends Sola {
   private final MultipleSelectionModel<Entity> entitySelectionModel;
   private SolaConfiguration solaConfiguration;
   private String[] layers = new String[0];
+  private boolean isLivePreview = false;
 
   public EditorSola(SolaConfiguration solaConfiguration, MultipleSelectionModel<Entity> entitySelectionModel) {
     this.solaConfiguration = solaConfiguration;
@@ -45,6 +47,7 @@ public class EditorSola extends Sola {
   }
 
   public void startPreview() {
+    isLivePreview = true;
     previouslyActiveSystems.forEach(activeSystem -> {
       ecsSystemContainer.get(activeSystem.getClass()).setActive(true);
     });
@@ -52,6 +55,7 @@ public class EditorSola extends Sola {
   }
 
   public void stopPreview() {
+    isLivePreview = false;
     ecsSystemContainer.activeSystemsIterator().forEachRemaining(activeSystem -> {
       previouslyActiveSystems.add(activeSystem);
       activeSystem.setActive(false);
@@ -86,7 +90,9 @@ public class EditorSola extends Sola {
 
     solaGraphics.render();
 
-    drawSelectedBorder(renderer);
+    if (!isLivePreview) {
+      drawSelectedBorder(renderer);
+    }
   }
 
   private Rectangle getEntityBoundingBox(Entity entity, TransformComponent transformComponent) {
@@ -105,19 +111,28 @@ public class EditorSola extends Sola {
 
   private void registerOnEntityClick() {
     platform.onMousePressed(mouseEvent -> {
+      if (isLivePreview) return;
+
       Vector2D clickPoint = solaGraphics.screenToWorldCoordinate(new Vector2D(mouseEvent.getX(), mouseEvent.getY()));
 
       ecsSystemContainer.getWorld().getEntitiesWithComponents(TransformComponent.class)
         .stream().filter(entity -> {
           Rectangle boundingBox = getEntityBoundingBox(entity, entity.getComponent(TransformComponent.class));
 
-          if (boundingBox.contains(clickPoint)) {
-            entitySelectionModel.select(entity);
-            return true;
-          }
+          return boundingBox.contains(clickPoint);
+        }).findFirst().ifPresentOrElse(entitySelectionModel::select, entitySelectionModel::clearSelection);
+    });
 
-          return false;
-        }).findFirst();
+    platform.onMouseMoved(mouseEvent -> {
+      if (isLivePreview) return;
+
+      if (!entitySelectionModel.isEmpty() && mouseInput.isMouseDragged(MouseButton.PRIMARY)) {
+        Entity entity = entitySelectionModel.getSelectedItem();
+        TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
+        Vector2D worldPoint = solaGraphics.screenToWorldCoordinate(new Vector2D(mouseEvent.getX(), mouseEvent.getY()));
+
+        transformComponent.setTranslate(worldPoint);
+      }
     });
   }
 

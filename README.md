@@ -10,6 +10,7 @@
     * SpriteAnimator
     * GuiText
     * Collider
+  * add new entity to center of editor camera
   * utility for sola to load assets from expected folder structure
   * Way to view all Systems and Components available
   * Way to view various EventListeners?

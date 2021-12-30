@@ -42,7 +42,7 @@ public class MouseAndCameraExample extends Sola {
   }
 
   private World createWorld() {
-    World world = new World(100);
+    World world = new World(1000);
 
     world.createEntity()
       .addComponent(new CameraComponent())

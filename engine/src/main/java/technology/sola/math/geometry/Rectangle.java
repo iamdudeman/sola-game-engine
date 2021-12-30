@@ -67,10 +67,6 @@ public class Rectangle {
   }
 
   public boolean contains(Vector2D point) {
-    if (point.x < min.x) return false;
-    if (point.x > max.x) return false;
-    if (point.y < min.y) return false;
-    if (point.y > max.y) return false;
-    return true;
+    return point.x >= min.x && point.x <= max.x && point.y >= min.y && point.y <= max.y;
   }
 }
