@@ -1,8 +1,6 @@
 # Branch WIP
 * Engine GUI Editor (Sola Editor)
   * add new entity to center of editor camera
-  * Add more component controllers
-    * Camera
 
 # TODO List
 * Engine GUI Editor (Sola Editor)

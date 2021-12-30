@@ -98,6 +98,7 @@ public class EntityListView extends ListView<Entity> {
       });
 
       setOnDragDropped(event -> {
+        // todo finish implementing drag drop functionality
         System.out.println("Not yet implemented");
       });
 
