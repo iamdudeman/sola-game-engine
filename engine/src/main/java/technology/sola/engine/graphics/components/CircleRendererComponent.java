@@ -3,7 +3,8 @@ package technology.sola.engine.graphics.components;
 import technology.sola.engine.ecs.Component;
 import technology.sola.engine.graphics.Color;
 
-public class CircleRendererComponent implements Component {
+public class CircleRendererComponent implements Component<CircleRendererComponent> {
+  private static final long serialVersionUID = -1490398951286309608L;
   private final Color color;
   private final boolean isFilled;
 
@@ -14,6 +15,11 @@ public class CircleRendererComponent implements Component {
   public CircleRendererComponent(Color color, boolean isFilled) {
     this.color = color;
     this.isFilled = isFilled;
+  }
+
+  @Override
+  public CircleRendererComponent copy() {
+    return new CircleRendererComponent(color, isFilled);
   }
 
   public Color getColor() {

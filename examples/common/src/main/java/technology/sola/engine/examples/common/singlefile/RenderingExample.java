@@ -68,7 +68,13 @@ public class RenderingExample extends Sola {
     solaGraphics.render();
   }
 
-  private static class MovingComponent implements Component {
+  private static class MovingComponent implements Component<MovingComponent> {
+    private static final long serialVersionUID = 8048288443738661480L;
+
+    @Override
+    public MovingComponent copy() {
+      return new MovingComponent();
+    }
   }
 
   private class TestSystem extends EcsSystem {

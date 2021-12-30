@@ -93,12 +93,29 @@ public class SimplePlatformerExample extends Sola {
     return world;
   }
 
-  private static class PlayerComponent implements Component {
+  private static class PlayerComponent implements Component<PlayerComponent> {
+    private static final long serialVersionUID = -8026881223157823822L;
+
+    @Override
+    public PlayerComponent copy() {
+      return new PlayerComponent();
+    }
   }
 
-  private static class MovingPlatformComponent implements Component {
+  private static class MovingPlatformComponent implements Component<MovingPlatformComponent> {
+    private static final long serialVersionUID = 3034112167409884394L;
     private float counter = 0;
     private boolean isGoingUp = true;
+
+    @Override
+    public MovingPlatformComponent copy() {
+      MovingPlatformComponent movingPlatformComponent = new MovingPlatformComponent();
+
+      movingPlatformComponent.counter = counter;
+      movingPlatformComponent.isGoingUp = isGoingUp;
+
+      return movingPlatformComponent;
+    }
   }
 
   private static class MovingPlatformSystem extends EcsSystem {

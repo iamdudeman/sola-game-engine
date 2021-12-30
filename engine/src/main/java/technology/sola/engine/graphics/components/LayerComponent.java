@@ -3,7 +3,8 @@ package technology.sola.engine.graphics.components;
 import technology.sola.engine.ecs.Component;
 import technology.sola.engine.graphics.Layer;
 
-public class LayerComponent implements Component {
+public class LayerComponent implements Component<LayerComponent> {
+  private static final long serialVersionUID = 3288049068995632130L;
   private String layer;
   private int priority;
 
@@ -14,6 +15,11 @@ public class LayerComponent implements Component {
   public LayerComponent(String layer, int priority) {
     this.layer = layer;
     this.priority = priority;
+  }
+
+  @Override
+  public LayerComponent copy() {
+    return new LayerComponent(layer, priority);
   }
 
   public String getLayer() {
