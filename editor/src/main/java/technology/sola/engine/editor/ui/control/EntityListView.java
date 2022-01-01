@@ -11,6 +11,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.util.StringConverter;
 import technology.sola.engine.ecs.Entity;
+import technology.sola.engine.editor.core.EditorSola;
 
 public class EntityListView extends ListView<Entity> {
   public EntityListView() {
@@ -39,7 +40,7 @@ public class EntityListView extends ListView<Entity> {
       super(new EntityNameStringConverter());
 
       itemProperty().addListener(((observable, oldValue, newValue) -> {
-        if (newValue != null && "editorCamera".equals(newValue.getName())) {
+        if (newValue != null && EditorSola.EDITOR_CAMERA_ENTITY_NAME.equals(newValue.getName())) {
           // TODO figure out a better way to hide the editorCamera entity
           this.setDisable(true);
           this.setOpacity(0);

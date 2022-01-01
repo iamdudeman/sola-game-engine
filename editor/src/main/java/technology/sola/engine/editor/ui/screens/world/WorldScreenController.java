@@ -91,7 +91,7 @@ public class WorldScreenController implements SolaEditorScreen {
       menuItemSave.setDisable(newValue == null);
 
       if (newValue != null) {
-        var editorCamera = newValue.getEntityByName("editorCamera");
+        var editorCamera = newValue.getEntityByName(EditorSola.EDITOR_CAMERA_ENTITY_NAME);
 
         if (editorCamera == null) {
           CameraComponent editorCameraComponent = new CameraComponent();
@@ -99,7 +99,7 @@ public class WorldScreenController implements SolaEditorScreen {
           editorCameraComponent.setPriority(Integer.MIN_VALUE);
 
           newValue.createEntity()
-            .setName("editorCamera")
+            .setName(EditorSola.EDITOR_CAMERA_ENTITY_NAME)
             .addComponent(new TransformComponent())
             .addComponent(editorCameraComponent);
         }
@@ -190,7 +190,7 @@ public class WorldScreenController implements SolaEditorScreen {
 
     worldProperty.getValue().getEntitiesWithComponents()
       .forEach(entity -> {
-        if ("editorCamera".equals(entity.getName())) return;
+        if (EditorSola.EDITOR_CAMERA_ENTITY_NAME.equals(entity.getName())) return;
 
         Entity copyEntity = world.createEntity(entity.getUniqueId());
         copyEntity.setName(entity.getName());

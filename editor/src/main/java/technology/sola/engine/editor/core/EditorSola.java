@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EditorSola extends Sola {
+  public static final String EDITOR_CAMERA_ENTITY_NAME = "editorCamera";
   private SolaGraphics solaGraphics;
   private final List<EcsSystem> previouslyActiveSystems = new ArrayList<>();
   private final MultipleSelectionModel<Entity> entitySelectionModel;
@@ -117,7 +118,7 @@ public class EditorSola extends Sola {
     platform.onKeyPressed(keyEvent -> {
       final float translateAmount = 10;
       final float scaleAmount = 0.1f;
-      var editorCameraEntity = ecsSystemContainer.getWorld().getEntityByName("editorCamera");
+      var editorCameraEntity = ecsSystemContainer.getWorld().getEntityByName(EDITOR_CAMERA_ENTITY_NAME);
       var transformComponent = editorCameraEntity.getComponent(TransformComponent.class);
 
       if (Key.D.getCode() == keyEvent.getKeyCode()) {
