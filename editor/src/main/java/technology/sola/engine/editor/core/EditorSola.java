@@ -115,41 +115,43 @@ public class EditorSola extends Sola {
 
   private void registerEditorCameraControls() {
     platform.onKeyPressed(keyEvent -> {
+      final float translateAmount = 10;
+      final float scaleAmount = 0.1f;
       var editorCameraEntity = ecsSystemContainer.getWorld().getEntityByName("editorCamera");
       var transformComponent = editorCameraEntity.getComponent(TransformComponent.class);
 
       if (Key.D.getCode() == keyEvent.getKeyCode()) {
-        transformComponent.setX(transformComponent.getX() + 10);
+        transformComponent.setX(transformComponent.getX() - translateAmount);
       }
       if (Key.A.getCode() == keyEvent.getKeyCode()) {
-        transformComponent.setX(transformComponent.getX() - 10);
+        transformComponent.setX(transformComponent.getX() + translateAmount);
       }
       if (Key.W.getCode() == keyEvent.getKeyCode()) {
-        transformComponent.setY(transformComponent.getY() + 10);
+        transformComponent.setY(transformComponent.getY() - translateAmount);
       }
       if (Key.S.getCode() == keyEvent.getKeyCode()) {
-        transformComponent.setY(transformComponent.getY() - 10);
+        transformComponent.setY(transformComponent.getY() + translateAmount);
+      }
+      if (Key.Z.getCode() == keyEvent.getKeyCode()) {
+        transformComponent.setScaleX(transformComponent.getScaleX() - scaleAmount);
+        transformComponent.setScaleY(transformComponent.getScaleY() - scaleAmount);
+      }
+      if (Key.X.getCode() == keyEvent.getKeyCode()) {
+        transformComponent.setScaleX(transformComponent.getScaleX() + scaleAmount);
+        transformComponent.setScaleY(transformComponent.getScaleY() + scaleAmount);
+      }
+      if (Key.ZERO.getCode() == keyEvent.getKeyCode()) {
+        transformComponent.setScaleX(1);
+        transformComponent.setScaleY(1);
       }
     });
-
-    entitySelectionModel.selectedItemProperty().addListener(((observable, oldValue, newValue ) -> {
-      var editorCameraEntity = ecsSystemContainer.getWorld().getEntityByName("editorCamera");
-      var transformComponent = editorCameraEntity.getComponent(TransformComponent.class);
-
-      if (newValue != null) {
-        var entityTransformComponent = newValue.getComponent(TransformComponent.class);
-
-        if (entityTransformComponent != null) {
-          // TODO maybe center this instead? and only if it is not currently viewable?
-          transformComponent.setTranslate(entityTransformComponent.getTranslate().add(new Vector2D(-50, -50)));
-        }
-      }
-    }));
   }
 
   private void registerOnEntityClick() {
     platform.onMousePressed(mouseEvent -> {
       if (isLivePreview) return;
+
+      // TODO this has a bug for selection if it is a Gui entity when camera transform is changed :(
 
       Vector2D clickPoint = solaGraphics.screenToWorldCoordinate(new Vector2D(mouseEvent.getX(), mouseEvent.getY()));
 

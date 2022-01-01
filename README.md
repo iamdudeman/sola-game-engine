@@ -13,7 +13,7 @@
   * editor camera improvements
     * add new entities to center of editor camera
     * better camera controls than WSAD
-    * option to focus on entity?
+    * option to focus editor camera on selected entity?
     * option to copy camera's transform for editor preview of it?
   * Way to view all Systems and Components available
   * Way to view various EventListeners?
