@@ -3,6 +3,7 @@ package technology.sola.engine.editor.core;
 import technology.sola.engine.editor.ui.ecs.SolaEditorEntityComponentMenus;
 import technology.sola.engine.editor.ui.ecs.general.CameraComponentController;
 import technology.sola.engine.editor.ui.ecs.general.TransformComponentController;
+import technology.sola.engine.editor.ui.ecs.physics.ColliderComponentController;
 import technology.sola.engine.editor.ui.ecs.physics.DynamicBodyComponentController;
 import technology.sola.engine.editor.ui.ecs.rendering.CircleRendererComponentController;
 import technology.sola.engine.editor.ui.ecs.rendering.LayerComponentController;
@@ -25,6 +26,7 @@ public class EditorConfiguration {
       .addSubMenu("Gui")
         .addItem("Panel", new GuiPanelComponentController(solaEditorContext));
     solaEditorEntityComponentMenus.addMenu("Physics")
+      .addItem("Collider", new ColliderComponentController(solaEditorContext))
       .addItem("Dynamic Body", new DynamicBodyComponentController(solaEditorContext));
   }
 
