@@ -13,7 +13,9 @@ import technology.sola.engine.ecs.World;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
+import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
@@ -22,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EditorSola extends Sola {
+  public static final String EDITOR_CAMERA_ENTITY_NAME = "editorCamera";
   private SolaGraphics solaGraphics;
   private final List<EcsSystem> previouslyActiveSystems = new ArrayList<>();
   private final MultipleSelectionModel<Entity> entitySelectionModel;
@@ -48,6 +51,7 @@ public class EditorSola extends Sola {
 
   public void startPreview() {
     isLivePreview = true;
+
     previouslyActiveSystems.forEach(activeSystem -> {
       ecsSystemContainer.get(activeSystem.getClass()).setActive(true);
     });
@@ -82,6 +86,7 @@ public class EditorSola extends Sola {
     platform.getRenderer().createLayers(layers);
 
     registerOnEntityClick();
+    registerEditorCameraControls();
   }
 
   @Override
@@ -109,9 +114,45 @@ public class EditorSola extends Sola {
     return new Rectangle(min, min.add(widthHeight));
   }
 
+  private void registerEditorCameraControls() {
+    platform.onKeyPressed(keyEvent -> {
+      final float translateAmount = 10;
+      final float scaleAmount = 0.1f;
+      var editorCameraEntity = ecsSystemContainer.getWorld().getEntityByName(EDITOR_CAMERA_ENTITY_NAME);
+      var transformComponent = editorCameraEntity.getComponent(TransformComponent.class);
+
+      if (Key.D.getCode() == keyEvent.getKeyCode()) {
+        transformComponent.setX(transformComponent.getX() - translateAmount);
+      }
+      if (Key.A.getCode() == keyEvent.getKeyCode()) {
+        transformComponent.setX(transformComponent.getX() + translateAmount);
+      }
+      if (Key.W.getCode() == keyEvent.getKeyCode()) {
+        transformComponent.setY(transformComponent.getY() - translateAmount);
+      }
+      if (Key.S.getCode() == keyEvent.getKeyCode()) {
+        transformComponent.setY(transformComponent.getY() + translateAmount);
+      }
+      if (Key.Z.getCode() == keyEvent.getKeyCode()) {
+        transformComponent.setScaleX(transformComponent.getScaleX() - scaleAmount);
+        transformComponent.setScaleY(transformComponent.getScaleY() - scaleAmount);
+      }
+      if (Key.X.getCode() == keyEvent.getKeyCode()) {
+        transformComponent.setScaleX(transformComponent.getScaleX() + scaleAmount);
+        transformComponent.setScaleY(transformComponent.getScaleY() + scaleAmount);
+      }
+      if (Key.ZERO.getCode() == keyEvent.getKeyCode()) {
+        transformComponent.setScaleX(1);
+        transformComponent.setScaleY(1);
+      }
+    });
+  }
+
   private void registerOnEntityClick() {
     platform.onMousePressed(mouseEvent -> {
       if (isLivePreview) return;
+
+      // TODO this has a bug for selection if it is a Gui entity when camera transform is changed :(
 
       Vector2D clickPoint = solaGraphics.screenToWorldCoordinate(new Vector2D(mouseEvent.getX(), mouseEvent.getY()));
 
@@ -140,6 +181,10 @@ public class EditorSola extends Sola {
     Entity selectedEntity = entitySelectionModel.getSelectedItem();
 
     if (selectedEntity != null) {
+      if (selectedEntity.getComponent(CameraComponent.class) != null) {
+        return;
+      }
+
       TransformComponent cameraTransform = solaGraphics.getCameraTransform();
       TransformComponent originalTransformComponent = selectedEntity.getComponent(TransformComponent.class);
 

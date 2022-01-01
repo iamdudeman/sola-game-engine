@@ -5,6 +5,7 @@ public enum Key {
   //
   SPACE(0x20, "Space"),
   //
+  ZERO(0x30, "0"),
   ONE(0x31, "1"),
   TWO(0x32, "2"),
   THREE(0x33, "3"),

@@ -5,13 +5,16 @@
   * Add more component controllers
     * DynamicBody
       * Material stuff
-    * Camera
     * Sprite
     * SpriteAnimator
     * GuiText
     * Collider
-  * add new entity to center of editor camera
   * utility for sola to load assets from expected folder structure
+  * editor camera improvements
+    * add new entities to center of editor camera
+    * better camera controls than WSAD
+    * option to focus editor camera on selected entity?
+    * option to copy camera's transform for editor preview of it?
   * Way to view all Systems and Components available
   * Way to view various EventListeners?
   * export stuff somehow maybe?
