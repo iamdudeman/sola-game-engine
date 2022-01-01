@@ -15,6 +15,7 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
+import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
@@ -84,6 +85,7 @@ public class EditorSola extends Sola {
     platform.getRenderer().createLayers(layers);
 
     registerOnEntityClick();
+    registerEditorCameraControls();
   }
 
   @Override
@@ -109,6 +111,40 @@ public class EditorSola extends Sola {
     }
 
     return new Rectangle(min, min.add(widthHeight));
+  }
+
+  private void registerEditorCameraControls() {
+    platform.onKeyPressed(keyEvent -> {
+      var editorCameraEntity = ecsSystemContainer.getWorld().getEntityByName("editorCamera");
+      var transformComponent = editorCameraEntity.getComponent(TransformComponent.class);
+
+      if (Key.D.getCode() == keyEvent.getKeyCode()) {
+        transformComponent.setX(transformComponent.getX() + 10);
+      }
+      if (Key.A.getCode() == keyEvent.getKeyCode()) {
+        transformComponent.setX(transformComponent.getX() - 10);
+      }
+      if (Key.W.getCode() == keyEvent.getKeyCode()) {
+        transformComponent.setY(transformComponent.getY() + 10);
+      }
+      if (Key.S.getCode() == keyEvent.getKeyCode()) {
+        transformComponent.setY(transformComponent.getY() - 10);
+      }
+    });
+
+    entitySelectionModel.selectedItemProperty().addListener(((observable, oldValue, newValue ) -> {
+      var editorCameraEntity = ecsSystemContainer.getWorld().getEntityByName("editorCamera");
+      var transformComponent = editorCameraEntity.getComponent(TransformComponent.class);
+
+      if (newValue != null) {
+        var entityTransformComponent = newValue.getComponent(TransformComponent.class);
+
+        if (entityTransformComponent != null) {
+          // TODO maybe center this instead? and only if it is not currently viewable?
+          transformComponent.setTranslate(entityTransformComponent.getTranslate().add(new Vector2D(-50, -50)));
+        }
+      }
+    }));
   }
 
   private void registerOnEntityClick() {

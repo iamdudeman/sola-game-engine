@@ -100,7 +100,7 @@ public class WorldScreenController implements SolaEditorScreen {
 
           newValue.createEntity()
             .setName("editorCamera")
-            .addComponent(new TransformComponent(-50, -50))
+            .addComponent(new TransformComponent())
             .addComponent(editorCameraComponent);
         }
       }
