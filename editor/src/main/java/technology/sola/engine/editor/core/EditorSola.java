@@ -122,10 +122,10 @@ public class EditorSola extends Sola {
       var transformComponent = editorCameraEntity.getComponent(TransformComponent.class);
 
       if (Key.D.getCode() == keyEvent.getKeyCode()) {
-        transformComponent.setX(transformComponent.getX() - translateAmount);
+        transformComponent.setX(transformComponent.getX() + translateAmount);
       }
       if (Key.A.getCode() == keyEvent.getKeyCode()) {
-        transformComponent.setX(transformComponent.getX() + translateAmount);
+        transformComponent.setX(transformComponent.getX() - translateAmount);
       }
       if (Key.W.getCode() == keyEvent.getKeyCode()) {
         transformComponent.setY(transformComponent.getY() - translateAmount);

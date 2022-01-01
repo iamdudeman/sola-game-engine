@@ -8,7 +8,6 @@
     * Sprite
     * SpriteAnimator
     * GuiText
-    * Collider
   * utility for sola to load assets from expected folder structure
   * editor camera improvements
     * add new entities to center of editor camera
