@@ -22,6 +22,7 @@ import technology.sola.engine.editor.core.EditorSola;
 import technology.sola.engine.editor.core.FolderUtils;
 import technology.sola.engine.editor.core.SolaEditorContext;
 import technology.sola.engine.editor.ui.screens.SolaEditorScreen;
+import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.platform.javafx.JavaFxSolaPlatform;
 
 import java.io.File;
@@ -88,6 +89,21 @@ public class WorldScreenController implements SolaEditorScreen {
     worldProperty.addListener(((observable, oldValue, newValue) -> {
       menuWorld.setDisable(newValue == null);
       menuItemSave.setDisable(newValue == null);
+
+      if (newValue != null) {
+        var editorCamera = newValue.getEntityByName("editorCamera");
+
+        if (editorCamera == null) {
+          CameraComponent editorCameraComponent = new CameraComponent();
+
+          editorCameraComponent.setPriority(Integer.MIN_VALUE);
+
+          newValue.createEntity()
+            .setName("editorCamera")
+            .addComponent(new TransformComponent(-50, -50))
+            .addComponent(editorCameraComponent);
+        }
+      }
     }));
 
     menuItemNew.setOnAction(event -> {
@@ -174,6 +190,8 @@ public class WorldScreenController implements SolaEditorScreen {
 
     worldProperty.getValue().getEntitiesWithComponents()
       .forEach(entity -> {
+        if ("editorCamera".equals(entity.getName())) return;
+
         Entity copyEntity = world.createEntity(entity.getUniqueId());
         copyEntity.setName(entity.getName());
 

@@ -12,6 +12,9 @@ import technology.sola.engine.graphics.sprite.SpriteSheet;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
 public class SolaGraphics {
   private static final TransformComponent DEFAULT_CAMERA_TRANSFORM = new TransformComponent();
   private final EcsSystemContainer ecsSystemContainer;
@@ -34,13 +37,10 @@ public class SolaGraphics {
 
   // TODO improve performance of this method
   public Vector2D screenToWorldCoordinate(Vector2D screenCoordinate) {
-    var cameraEntities = ecsSystemContainer.getWorld().getEntitiesWithComponents(TransformComponent.class, CameraComponent.class);
-    var cameraTransform = cameraEntities.isEmpty()
-      ? DEFAULT_CAMERA_TRANSFORM
-      : cameraEntities.get(0).getComponent(TransformComponent.class);
+    var cameraTransform = getCameraTransform();
     var transform = Matrix3D.translate(-cameraTransform.getX(), -cameraTransform.getY())
       .multiply(Matrix3D.scale(cameraTransform.getScaleX(), cameraTransform.getScaleY()))
-      .invert(); // TODO this invert is costly so clean this up later
+      .invert(); // TODO this invert is costly so clean this up later if possible
 
     return transform.forward(screenCoordinate.x, screenCoordinate.y);
   }
@@ -54,14 +54,18 @@ public class SolaGraphics {
 
     GuiGraphics.render(renderer, ecsSystemContainer, fontAssetPool);
 
-    // TODO need to render this to back most layer at some point
+    // TODO need to render this to back most layer at some point probably
     if (isRenderDebug) {
       DebugGraphics.render(renderer, ecsSystemContainer, cameraTransform);
     }
   }
 
   public TransformComponent getCameraTransform() {
-    var cameraEntities = ecsSystemContainer.getWorld().getEntitiesWithComponents(TransformComponent.class, CameraComponent.class);
+    var cameraEntities = ecsSystemContainer.getWorld()
+      .getEntitiesWithComponents(TransformComponent.class, CameraComponent.class)
+      .stream()
+      .sorted(Comparator.comparingInt(entity -> entity.getComponent(CameraComponent.class).getPriority()))
+      .collect(Collectors.toList());
 
     return cameraEntities.isEmpty()
       ? DEFAULT_CAMERA_TRANSFORM

@@ -38,6 +38,14 @@ public class EntityListView extends ListView<Entity> {
     EntityListCell() {
       super(new EntityNameStringConverter());
 
+      itemProperty().addListener(((observable, oldValue, newValue) -> {
+        if (newValue != null && "editorCamera".equals(newValue.getName())) {
+          // TODO figure out a better way to hide the editorCamera entity
+          this.setDisable(true);
+          this.setOpacity(0);
+        }
+      }));
+
       setupDragEvents();
       setupContextMenu();
     }
