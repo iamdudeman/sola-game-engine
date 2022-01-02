@@ -1,4 +1,5 @@
 # Branch WIP
+* Active / inactive entity state + engine ui
 
 # TODO List
 * Engine GUI Editor (Sola Editor)

@@ -40,7 +40,9 @@ public class EntityListView extends ListView<Entity> {
       super(new EntityNameStringConverter());
 
       itemProperty().addListener(((observable, oldValue, newValue) -> {
-        if (newValue != null && EditorSola.EDITOR_CAMERA_ENTITY_NAME.equals(newValue.getName())) {
+        if (newValue != null && !newValue.isActive()) {
+          this.setOpacity(0.4f);
+        } else if (newValue != null && EditorSola.EDITOR_CAMERA_ENTITY_NAME.equals(newValue.getName())) {
           // TODO figure out a better way to hide the editorCamera entity
           this.setDisable(true);
           this.setOpacity(0);
@@ -52,8 +54,8 @@ public class EntityListView extends ListView<Entity> {
     }
 
     private void setupContextMenu() {
-      MenuItem menuItem = new MenuItem("Delete");
-      menuItem.setOnAction(event -> {
+      MenuItem deleteMenuItem = new MenuItem("Delete");
+      deleteMenuItem.setOnAction(event -> {
         Entity selectedEntity = getSelectionModel().getSelectedItem();
 
         if (selectedEntity != null) {
@@ -62,8 +64,21 @@ public class EntityListView extends ListView<Entity> {
           getItems().remove(selectedEntity);
         }
       });
+      MenuItem activeToggleMenuItem = new MenuItem("Toggle active");
+      activeToggleMenuItem.setOnAction(event -> {
+        Entity selectedEntity = getSelectionModel().getSelectedItem();
+
+        if (selectedEntity != null) {
+          selectedEntity.setActive(!selectedEntity.isActive());
+          if (selectedEntity.isActive()) {
+            setOpacity(1.0);
+          } else {
+            setOpacity(0.4f);
+          }
+        }
+      });
       ContextMenu contextMenu = new ContextMenu();
-      contextMenu.getItems().add(menuItem);
+      contextMenu.getItems().addAll(activeToggleMenuItem, deleteMenuItem);
       setContextMenu(contextMenu);
     }
 

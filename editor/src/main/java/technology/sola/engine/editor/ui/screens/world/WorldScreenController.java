@@ -188,12 +188,13 @@ public class WorldScreenController implements SolaEditorScreen {
   private World copyWorld() {
     World world = new World(worldProperty.getValue().getMaxEntityCount());
 
-    worldProperty.getValue().getEntitiesWithComponents()
+    worldProperty.getValue().getEntities()
       .forEach(entity -> {
         if (EditorSola.EDITOR_CAMERA_ENTITY_NAME.equals(entity.getName())) return;
 
         Entity copyEntity = world.createEntity(entity.getUniqueId());
         copyEntity.setName(entity.getName());
+        copyEntity.setActive(entity.isActive());
 
         entity.getCurrentComponents().forEach(componentClass -> {
           copyEntity.addComponent(entity.getComponent(componentClass).copy());
@@ -219,7 +220,7 @@ public class WorldScreenController implements SolaEditorScreen {
 
       worldProperty.setValue(new Base64WorldSerializer().parse(serializedWorld));
       entityList.clear();
-      entityList.addAll(worldProperty.getValue().getEntitiesWithComponents());
+      entityList.addAll(worldProperty.getValue().getEntities());
 
       editorSola.setWorld(worldProperty.getValue());
     } catch (IOException ex) {

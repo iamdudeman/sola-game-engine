@@ -106,6 +106,18 @@ public class World implements Serializable {
     return null;
   }
 
+  public List<Entity> getEntities() {
+    List<Entity> entityList = new ArrayList<>(entities.length);
+
+    for (Entity entity : entities) {
+      if (entity == null) continue;
+
+      entityList.add(entity);
+    }
+
+    return entityList;
+  }
+
   /**
    * Gets a {@link List} of {@link Entity} where each {@code Entity} has all of the {@link Component} classes searched for.
    *
@@ -117,7 +129,7 @@ public class World implements Serializable {
     List<Entity> entitiesWithAllComponents = new ArrayList<>();
 
     for (Entity entity : entities) {
-      if (entity == null) continue;
+      if (entity == null || !entity.isActive()) continue;
 
       boolean hasAllClasses = true;
 
