@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.sun.javafx.scene.control.DoubleField?>
+<DialogPane headerText="New Material" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+  <content>
+    <VBox prefWidth="250.0" spacing="8.0">
+      <opaqueInsets>
+        <Insets/>
+      </opaqueInsets>
+
+      <Label contentDisplay="RIGHT" text="Name">
+        <graphic>
+          <TextField fx:id="textFieldName" text="New Material"/>
+        </graphic>
+      </Label>
+
+      <Label contentDisplay="RIGHT" text="Mass">
+        <graphic>
+          <DoubleField fx:id="doubleFieldMass" value="1"/>
+        </graphic>
+      </Label>
+
+      <Label contentDisplay="RIGHT" text="Restitution">
+        <graphic>
+          <DoubleField fx:id="doubleFieldRestitution" value="0.01"/>
+        </graphic>
+      </Label>
+
+      <Label contentDisplay="RIGHT" text="Friction">
+        <graphic>
+          <DoubleField fx:id="doubleFieldFriction" value="0"/>
+        </graphic>
+      </Label>
+    </VBox>
+  </content>
+
+  <ButtonType buttonData="OK_DONE" text="Save" />
+  <ButtonType buttonData="CANCEL_CLOSE" text="Cancel" />
+   <padding>
+      <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+   </padding>
+</DialogPane>

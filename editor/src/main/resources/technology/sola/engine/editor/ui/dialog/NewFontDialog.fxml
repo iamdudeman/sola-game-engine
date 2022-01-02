@@ -9,45 +9,43 @@
 <DialogPane headerText="New Font" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
   <content>
     <VBox prefWidth="250.0" spacing="8.0">
-      <children>
-        <Label contentDisplay="BOTTOM" text="Font name">
-          <graphic>
-            <ComboBox fx:id="comboBoxFontName" promptText="Pick a font" value="monospaced">
-              <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="monospaced" />
-                  <String fx:value="times" />
-                </FXCollections>
-              </items>
-            </ComboBox>
-          </graphic>
-        </Label>
-        <Label contentDisplay="BOTTOM" text="Font size">
-          <graphic>
-            <Spinner fx:id="spinnerFontSize" amountToStepBy="1">
-              <valueFactory>
-                <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="16" max="124" min="4" />
-              </valueFactory>
-            </Spinner>
-          </graphic>
-        </Label>
-        <Label contentDisplay="BOTTOM" text="Font style">
-          <graphic>
-            <ComboBox fx:id="comboBoxFontStyle" promptText="Font style" value="NORMAL">
-              <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="NORMAL" />
-                  <String fx:value="BOLD" />
-                  <String fx:value="ITALIC" />
-                </FXCollections>
-              </items>
-            </ComboBox>
-          </graphic>
-        </Label>
-      </children>
       <opaqueInsets>
-        <Insets />
+        <Insets/>
       </opaqueInsets>
+      <Label contentDisplay="BOTTOM" text="Font name">
+        <graphic>
+          <ComboBox fx:id="comboBoxFontName" promptText="Pick a font" value="monospaced">
+            <items>
+              <FXCollections fx:factory="observableArrayList">
+                <String fx:value="monospaced"/>
+                <String fx:value="times"/>
+              </FXCollections>
+            </items>
+          </ComboBox>
+        </graphic>
+      </Label>
+      <Label contentDisplay="BOTTOM" text="Font size">
+        <graphic>
+          <Spinner fx:id="spinnerFontSize" amountToStepBy="1">
+            <valueFactory>
+              <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="16" max="124" min="4"/>
+            </valueFactory>
+          </Spinner>
+        </graphic>
+      </Label>
+      <Label contentDisplay="BOTTOM" text="Font style">
+        <graphic>
+          <ComboBox fx:id="comboBoxFontStyle" promptText="Font style" value="NORMAL">
+            <items>
+              <FXCollections fx:factory="observableArrayList">
+                <String fx:value="NORMAL"/>
+                <String fx:value="BOLD"/>
+                <String fx:value="ITALIC"/>
+              </FXCollections>
+            </items>
+          </ComboBox>
+        </graphic>
+      </Label>
     </VBox>
   </content>
 
