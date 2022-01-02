@@ -125,21 +125,17 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
 
   private void applyImpulseToCollisionEntities(CollisionResolutionEntityData entityA, CollisionResolutionEntityData entityB, Vector2D impulse) {
     entityA.getDynamicBodyComponent().ifPresent(dynamicBodyComponent -> {
-      if (!dynamicBodyComponent.isKinematic()) {
-        Vector2D currentVelocity = dynamicBodyComponent.getVelocity();
-        Vector2D newVelocity = currentVelocity.subtract(impulse.scalar(entityA.inverseMass));
+      Vector2D currentVelocity = dynamicBodyComponent.getVelocity();
+      Vector2D newVelocity = currentVelocity.subtract(impulse.scalar(entityA.inverseMass));
 
-        dynamicBodyComponent.setVelocity(newVelocity);
-      }
+      dynamicBodyComponent.setVelocity(newVelocity);
     });
 
     entityB.getDynamicBodyComponent().ifPresent(dynamicBodyComponent -> {
-      if (!dynamicBodyComponent.isKinematic()) {
-        Vector2D currentVelocity = dynamicBodyComponent.getVelocity();
-        Vector2D newVelocity = currentVelocity.add(impulse.scalar(entityB.inverseMass));
+      Vector2D currentVelocity = dynamicBodyComponent.getVelocity();
+      Vector2D newVelocity = currentVelocity.add(impulse.scalar(entityB.inverseMass));
 
-        dynamicBodyComponent.setVelocity(newVelocity);
-      }
+      dynamicBodyComponent.setVelocity(newVelocity);
     });
   }
 
@@ -184,10 +180,10 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
 
       velocity = dynamicBodyComponent == null ? new Vector2D(0, 0) : dynamicBodyComponent.getVelocity();
 
-      if (dynamicBodyComponent == null) {
+      if (dynamicBodyComponent == null || dynamicBodyComponent.isKinematic()) {
         inverseMass = 0;
         restitution = 1;
-        friction = 0;
+        friction = 1;
       } else {
         inverseMass = dynamicBodyComponent.getMaterial().getInverseMass();
         restitution = dynamicBodyComponent.getMaterial().getRestitution();
