@@ -3,8 +3,6 @@
 # TODO List
 * Engine GUI Editor (Sola Editor)
   * Add more component controllers
-    * DynamicBody
-      * Material stuff
     * Sprite
     * SpriteAnimator
     * GuiText

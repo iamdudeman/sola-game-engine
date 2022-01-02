@@ -12,6 +12,9 @@
     <Menu mnemonicParsing="false" text="Sprite Sheets">
       <MenuItem fx:id="menuItemCreateSpriteSheet" mnemonicParsing="false" text="Create" />
     </Menu>
+    <Menu mnemonicParsing="false" text="Materials">
+      <MenuItem fx:id="menuItemCreateMaterial" mnemonicParsing="false" text="Create" />
+    </Menu>
   </MenuBar>
   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Assets" />
 </VBox>
