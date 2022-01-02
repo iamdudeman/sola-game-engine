@@ -9,16 +9,13 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Window;
-import technology.sola.engine.ecs.World;
 import technology.sola.engine.editor.core.FolderUtils;
 import technology.sola.engine.editor.core.SolaEditorContext;
 import technology.sola.engine.physics.Material;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -81,17 +78,6 @@ public class NewMaterialDialog extends Dialog<File> {
 
       return Base64.getEncoder().encodeToString(byteArrayOutputStream.toByteArray());
     } catch (IOException ex) {
-      // TODO handle this better
-      throw new RuntimeException(ex);
-    }
-  }
-
-  public Material parseMaterial(String materialString) {
-    final byte[] data = Base64.getDecoder().decode(materialString);
-
-    try (final ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(data))) {
-      return (Material) ois.readObject();
-    } catch (IOException | ClassNotFoundException ex) {
       // TODO handle this better
       throw new RuntimeException(ex);
     }
