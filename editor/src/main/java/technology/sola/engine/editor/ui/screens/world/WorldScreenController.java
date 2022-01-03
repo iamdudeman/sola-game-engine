@@ -194,7 +194,7 @@ public class WorldScreenController implements SolaEditorScreen {
 
         Entity copyEntity = world.createEntity(entity.getUniqueId());
         copyEntity.setName(entity.getName());
-        copyEntity.setActive(entity.isActive());
+        copyEntity.setDisabled(entity.isDisabled());
 
         entity.getCurrentComponents().forEach(componentClass -> {
           copyEntity.addComponent(entity.getComponent(componentClass).copy());

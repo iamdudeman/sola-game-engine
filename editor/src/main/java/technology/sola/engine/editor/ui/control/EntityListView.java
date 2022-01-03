@@ -40,7 +40,7 @@ public class EntityListView extends ListView<Entity> {
       super(new EntityNameStringConverter());
 
       itemProperty().addListener(((observable, oldValue, newValue) -> {
-        if (newValue != null && !newValue.isActive()) {
+        if (newValue != null && newValue.isDisabled()) {
           this.setOpacity(0.4f);
         } else if (newValue != null && EditorSola.EDITOR_CAMERA_ENTITY_NAME.equals(newValue.getName())) {
           // TODO figure out a better way to hide the editorCamera entity
@@ -64,16 +64,18 @@ public class EntityListView extends ListView<Entity> {
           getItems().remove(selectedEntity);
         }
       });
-      MenuItem activeToggleMenuItem = new MenuItem("Toggle active");
+      MenuItem activeToggleMenuItem = new MenuItem("Disable");
       activeToggleMenuItem.setOnAction(event -> {
         Entity selectedEntity = getSelectionModel().getSelectedItem();
 
         if (selectedEntity != null) {
-          selectedEntity.setActive(!selectedEntity.isActive());
-          if (selectedEntity.isActive()) {
-            setOpacity(1.0);
-          } else {
+          selectedEntity.setDisabled(!selectedEntity.isDisabled());
+          if (selectedEntity.isDisabled()) {
             setOpacity(0.4f);
+            activeToggleMenuItem.setText("Enable");
+          } else {
+            setOpacity(1.0);
+            activeToggleMenuItem.setText("Disable");
           }
         }
       });
