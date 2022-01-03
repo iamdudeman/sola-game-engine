@@ -1,6 +1,7 @@
 package technology.sola.engine.editor.core;
 
 import javafx.scene.control.MultipleSelectionModel;
+import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
@@ -15,11 +16,13 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
+import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,13 +31,15 @@ public class EditorSola extends Sola {
   private SolaGraphics solaGraphics;
   private final List<EcsSystem> previouslyActiveSystems = new ArrayList<>();
   private final MultipleSelectionModel<Entity> entitySelectionModel;
+  private final SolaEditorContext solaEditorContext;
   private SolaConfiguration solaConfiguration;
   private String[] layers = new String[0];
   private boolean isLivePreview = false;
 
-  public EditorSola(SolaConfiguration solaConfiguration, MultipleSelectionModel<Entity> entitySelectionModel) {
+  public EditorSola(SolaConfiguration solaConfiguration, MultipleSelectionModel<Entity> entitySelectionModel, SolaEditorContext solaEditorContext) {
     this.solaConfiguration = solaConfiguration;
     this.entitySelectionModel = entitySelectionModel;
+    this.solaEditorContext = solaEditorContext;
   }
 
   public void setWorld(World world) {
@@ -87,6 +92,7 @@ public class EditorSola extends Sola {
 
     registerOnEntityClick();
     registerEditorCameraControls();
+    populateFonts();
   }
 
   @Override
@@ -152,7 +158,8 @@ public class EditorSola extends Sola {
     platform.onMousePressed(mouseEvent -> {
       if (isLivePreview) return;
 
-      // TODO this has a bug for selection if it is a Gui entity when camera transform is changed :(
+      // TODO this has a bug for selection if it is an entity with a gui panel component when camera transform is changed :(
+      // TODO this has a bug for selection if it is an entity with a gui text component
 
       Vector2D clickPoint = solaGraphics.screenToWorldCoordinate(new Vector2D(mouseEvent.getX(), mouseEvent.getY()));
 
@@ -178,6 +185,7 @@ public class EditorSola extends Sola {
   }
 
   private void drawSelectedBorder(Renderer renderer) {
+    // TODO this does not properly draw around entities with a gui text component
     Entity selectedEntity = entitySelectionModel.getSelectedItem();
 
     if (selectedEntity != null) {
@@ -215,5 +223,22 @@ public class EditorSola extends Sola {
       rectangle.getWidth() + doubleSize, rectangle.getHeight() + doubleSize,
       Color.ORANGE
     );
+  }
+
+  private void populateFonts() {
+    // TODO need a way to reload fonts when project changes or new ones are added
+    AssetPool<Font> fontAssetPool = assetPoolProvider.getAssetPool(Font.class);
+
+    FolderUtils folderUtils = new FolderUtils(solaEditorContext);
+    File fontFolder = folderUtils.getOrCreateFolder("assets/fonts");
+    File[] fontFiles = fontFolder.listFiles();
+
+    if (fontFiles != null) {
+      for (File fontFile : fontFiles) {
+        if (fontFile.getName().endsWith(".json")) {
+          fontAssetPool.addAssetId(fontFile.getName(), fontFile.getAbsolutePath());
+        }
+      }
+    }
   }
 }

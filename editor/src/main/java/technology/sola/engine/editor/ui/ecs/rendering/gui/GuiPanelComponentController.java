@@ -51,11 +51,11 @@ public class GuiPanelComponentController extends ComponentController<GuiPanelCom
 
   @Override
   protected void updateFieldValuesFromEntity() {
-    GuiPanelComponent rectangleRendererComponent = entity.getComponent(GuiPanelComponent.class);
+    GuiPanelComponent guiPanelComponent = entity.getComponent(GuiPanelComponent.class);
 
-    if (rectangleRendererComponent != null) {
-      colorPickerBackground.setValue(ColorUtils.toJavaFxColor(rectangleRendererComponent.getBackgroundColor()));
-      colorPickerBorder.setValue(ColorUtils.toJavaFxColor(rectangleRendererComponent.getBorderColor()));
+    if (guiPanelComponent != null) {
+      colorPickerBackground.setValue(ColorUtils.toJavaFxColor(guiPanelComponent.getBackgroundColor()));
+      colorPickerBorder.setValue(ColorUtils.toJavaFxColor(guiPanelComponent.getBorderColor()));
     }
   }
 
