@@ -14,6 +14,7 @@ public class Entity implements Serializable {
   private final World world;
   private List<Class<? extends Component>> currentComponents = new ArrayList<>();
   private String name = null;
+  private boolean isDisabled = false;
 
   /**
    * Gets the integer id of this Entity.
@@ -46,6 +47,14 @@ public class Entity implements Serializable {
   public Entity setName(String name) {
     this.name = name;
     return this;
+  }
+
+  public boolean isDisabled() {
+    return isDisabled;
+  }
+
+  public void setDisabled(boolean disabled) {
+    isDisabled = disabled;
   }
 
   /**
