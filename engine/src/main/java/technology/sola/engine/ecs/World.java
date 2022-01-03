@@ -107,7 +107,25 @@ public class World implements Serializable {
   }
 
   /**
-   * Gets a {@link List} of {@link Entity} where each {@code Entity} has all of the {@link Component} classes searched for.
+   * Gets a {@link List} of all {@link Entity} in the world even if they are disabled.
+   *
+   * @return a {@code List} of all {@code Entity}
+   */
+  public List<Entity> getEntities() {
+    List<Entity> entityList = new ArrayList<>(entities.length);
+
+    for (Entity entity : entities) {
+      if (entity == null) continue;
+
+      entityList.add(entity);
+    }
+
+    return entityList;
+  }
+
+  /**
+   * Gets a {@link List} of {@link Entity} where each {@code Entity} has all of the {@link Component} classes searched for
+   * and is not disabled.
    *
    * @param componentClasses  array of {@code Component} classes each {@code Entity} will have
    * @return a {@code List} of {@code Entity} each having the desired {@code Component}s
@@ -117,7 +135,7 @@ public class World implements Serializable {
     List<Entity> entitiesWithAllComponents = new ArrayList<>();
 
     for (Entity entity : entities) {
-      if (entity == null) continue;
+      if (entity == null || entity.isDisabled()) continue;
 
       boolean hasAllClasses = true;
 
