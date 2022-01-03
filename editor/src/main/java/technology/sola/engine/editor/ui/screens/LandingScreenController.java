@@ -81,7 +81,7 @@ public class LandingScreenController implements SolaEditorScreen {
             solaEditorContext.projectFilePropertyProperty().setValue(projectFile);
 
             new FolderUtils(solaEditorContext)
-              .createDirectories("assets/fonts", "assets/sprites", "assets/worlds");
+              .createDirectories("assets/fonts", "assets/materials", "assets/sprites", "assets/worlds");
           }
         }
       } catch (IOException e) {

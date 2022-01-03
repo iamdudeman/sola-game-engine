@@ -2,7 +2,6 @@
 
 # TODO List
 * Engine GUI Editor (Sola Editor)
-  * Add folder for examples in editor module
   * Add more component controllers
     * Sprite
     * SpriteAnimator

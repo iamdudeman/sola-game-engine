@@ -1,0 +1,7 @@
+#Sun Jan 02 19:33:10 CST 2022
+canvasWidth=800
+gameLoopFps=30
+layers=test,test2,test3,gui
+gameLoopResting=true
+title=test 2
+canvasHeight=600
