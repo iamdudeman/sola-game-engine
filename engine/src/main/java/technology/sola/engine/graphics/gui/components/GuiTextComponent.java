@@ -39,6 +39,10 @@ public class GuiTextComponent implements Component<GuiTextComponent> {
     return cachedFont;
   }
 
+  public String getFontAssetId() {
+    return fontAssetId;
+  }
+
   public String getText() {
     return text;
   }

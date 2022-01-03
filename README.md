@@ -2,10 +2,10 @@
 
 # TODO List
 * Engine GUI Editor (Sola Editor)
+  * Add folder for examples in editor module
   * Add more component controllers
     * Sprite
     * SpriteAnimator
-    * GuiText
   * utility for sola to load assets from expected folder structure
   * editor camera improvements
     * add new entities to center of editor camera

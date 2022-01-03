@@ -61,6 +61,8 @@ class GuiGraphics {
     TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
     GuiTextComponent guiTextComponent = entity.getComponent(GuiTextComponent.class);
 
+    if (guiTextComponent.getFontAssetId() == null || guiTextComponent.getText() == null) return;
+
     renderer.setFont(guiTextComponent.getFont(fontAssetPool));
 
     renderer.drawWithRenderModeMask(r -> {
