@@ -64,6 +64,12 @@ public class Color implements Serializable {
     return alpha != 255;
   }
 
+  public Color toGreyScale() {
+    int greyscale = (int)(0.2126f * r + 0.7152f * g + 0.0722f * b);
+
+    return new Color(alpha, greyscale, greyscale, greyscale);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
