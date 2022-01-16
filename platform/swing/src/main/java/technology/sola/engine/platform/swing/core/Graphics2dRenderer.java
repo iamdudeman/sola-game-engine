@@ -9,6 +9,7 @@ import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.font.Font;
 
 import java.awt.*;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,6 +117,9 @@ public class Graphics2dRenderer implements Renderer {
   }
 
   private static class NotYetImplementedException extends UnsupportedOperationException {
+    @Serial
+    private static final long serialVersionUID = -1658225394042457154L;
+
     public NotYetImplementedException() {
       super("Work in progress");
     }
