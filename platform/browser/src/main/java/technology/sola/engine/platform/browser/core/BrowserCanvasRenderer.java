@@ -9,6 +9,7 @@ import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.font.Font;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,6 +138,9 @@ public class BrowserCanvasRenderer implements Renderer {
   }
 
   private static class NotYetImplementedException extends RuntimeException {
+    @Serial
+    private static final long serialVersionUID = -646245024534133365L;
+
     public NotYetImplementedException() {
       super("Not yet implemented");
     }

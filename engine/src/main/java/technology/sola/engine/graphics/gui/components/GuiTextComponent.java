@@ -5,7 +5,10 @@ import technology.sola.engine.ecs.Component;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.font.Font;
 
+import java.io.Serial;
+
 public class GuiTextComponent implements Component<GuiTextComponent> {
+  @Serial
   private static final long serialVersionUID = 158900611687830213L;
   private String fontAssetId;
   private String text;

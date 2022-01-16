@@ -1,5 +1,7 @@
 package technology.sola.engine.input;
 
+import java.util.Arrays;
+
 public enum MouseButton {
   NONE(0),
   PRIMARY(1),
@@ -9,6 +11,14 @@ public enum MouseButton {
   FORWARD(5);
 
   private final int code;
+
+  public static MouseButton valueOf(int buttonCode) {
+    if (buttonCode < 0 || buttonCode > MouseButton.values().length) {
+      throw new IllegalArgumentException(buttonCode + " must be in MouseButton values " + Arrays.toString(MouseButton.values()));
+    }
+
+    return MouseButton.values()[buttonCode];
+  }
 
   MouseButton(int code) {
     this.code = code;

@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -13,6 +14,7 @@ public class Color implements Serializable {
   public static final Color YELLOW = new Color(255, 255, 255, 0);
   public static final Color WHITE = new Color(255, 255, 255, 255);
 
+  @Serial
   private static final long serialVersionUID = 6993857654051014018L;
   private final int alpha;
   private final int r;
@@ -62,6 +64,12 @@ public class Color implements Serializable {
 
   public boolean hasAlpha() {
     return alpha != 255;
+  }
+
+  public Color toGreyScale() {
+    int greyscale = (int)(0.2126f * r + 0.7152f * g + 0.0722f * b);
+
+    return new Color(alpha, greyscale, greyscale, greyscale);
   }
 
   @Override

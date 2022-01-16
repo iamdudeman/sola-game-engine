@@ -49,16 +49,16 @@ public class MouseInput {
 
   public void onMousePressed(MouseEvent mouseEvent) {
     updateMousePosition(mouseEvent);
-    mouseDownMap.put(mouseEvent.getButton(), true);
+    mouseDownMap.put(mouseEvent.button(), true);
   }
 
   public void onMouseReleased(MouseEvent mouseEvent) {
     updateMousePosition(mouseEvent);
-    mouseDownMap.put(mouseEvent.getButton(), false);
+    mouseDownMap.put(mouseEvent.button(), false);
   }
 
   private void updateMousePosition(MouseEvent mouseEvent) {
-    lastEventPosition = new Vector2D((float)mouseEvent.getX(), (float)mouseEvent.getY());
+    lastEventPosition = new Vector2D((float)mouseEvent.x(), (float)mouseEvent.y());
   }
 
   private enum ButtonState {

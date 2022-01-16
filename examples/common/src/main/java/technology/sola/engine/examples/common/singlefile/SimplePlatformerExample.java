@@ -18,6 +18,8 @@ import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.math.linear.Vector2D;
 
+import java.io.Serial;
+
 public class SimplePlatformerExample extends Sola {
   private SolaGraphics solaGraphics;
 
@@ -94,6 +96,7 @@ public class SimplePlatformerExample extends Sola {
   }
 
   private static class PlayerComponent implements Component<PlayerComponent> {
+    @Serial
     private static final long serialVersionUID = -8026881223157823822L;
 
     @Override
@@ -103,6 +106,7 @@ public class SimplePlatformerExample extends Sola {
   }
 
   private static class MovingPlatformComponent implements Component<MovingPlatformComponent> {
+    @Serial
     private static final long serialVersionUID = 3034112167409884394L;
     private float counter = 0;
     private boolean isGoingUp = true;

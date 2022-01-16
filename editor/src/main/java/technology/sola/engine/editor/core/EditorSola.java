@@ -127,27 +127,27 @@ public class EditorSola extends Sola {
       var editorCameraEntity = ecsSystemContainer.getWorld().getEntityByName(EDITOR_CAMERA_ENTITY_NAME);
       var transformComponent = editorCameraEntity.getComponent(TransformComponent.class);
 
-      if (Key.D.getCode() == keyEvent.getKeyCode()) {
+      if (Key.D.getCode() == keyEvent.keyCode()) {
         transformComponent.setX(transformComponent.getX() + translateAmount);
       }
-      if (Key.A.getCode() == keyEvent.getKeyCode()) {
+      if (Key.A.getCode() == keyEvent.keyCode()) {
         transformComponent.setX(transformComponent.getX() - translateAmount);
       }
-      if (Key.W.getCode() == keyEvent.getKeyCode()) {
+      if (Key.W.getCode() == keyEvent.keyCode()) {
         transformComponent.setY(transformComponent.getY() - translateAmount);
       }
-      if (Key.S.getCode() == keyEvent.getKeyCode()) {
+      if (Key.S.getCode() == keyEvent.keyCode()) {
         transformComponent.setY(transformComponent.getY() + translateAmount);
       }
-      if (Key.Z.getCode() == keyEvent.getKeyCode()) {
+      if (Key.Z.getCode() == keyEvent.keyCode()) {
         transformComponent.setScaleX(transformComponent.getScaleX() - scaleAmount);
         transformComponent.setScaleY(transformComponent.getScaleY() - scaleAmount);
       }
-      if (Key.X.getCode() == keyEvent.getKeyCode()) {
+      if (Key.X.getCode() == keyEvent.keyCode()) {
         transformComponent.setScaleX(transformComponent.getScaleX() + scaleAmount);
         transformComponent.setScaleY(transformComponent.getScaleY() + scaleAmount);
       }
-      if (Key.ZERO.getCode() == keyEvent.getKeyCode()) {
+      if (Key.ZERO.getCode() == keyEvent.keyCode()) {
         transformComponent.setScaleX(1);
         transformComponent.setScaleY(1);
       }
@@ -161,7 +161,7 @@ public class EditorSola extends Sola {
       // TODO this has a bug for selection if it is an entity with a gui panel component when camera transform is changed :(
       // TODO this has a bug for selection if it is an entity with a gui text component
 
-      Vector2D clickPoint = solaGraphics.screenToWorldCoordinate(new Vector2D(mouseEvent.getX(), mouseEvent.getY()));
+      Vector2D clickPoint = solaGraphics.screenToWorldCoordinate(new Vector2D(mouseEvent.x(), mouseEvent.y()));
 
       ecsSystemContainer.getWorld().getEntitiesWithComponents(TransformComponent.class)
         .stream().filter(entity -> {
@@ -177,7 +177,7 @@ public class EditorSola extends Sola {
       if (!entitySelectionModel.isEmpty() && mouseInput.isMouseDragged(MouseButton.PRIMARY)) {
         Entity entity = entitySelectionModel.getSelectedItem();
         TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
-        Vector2D worldPoint = solaGraphics.screenToWorldCoordinate(new Vector2D(mouseEvent.getX(), mouseEvent.getY()));
+        Vector2D worldPoint = solaGraphics.screenToWorldCoordinate(new Vector2D(mouseEvent.x(), mouseEvent.y()));
 
         transformComponent.setTranslate(worldPoint);
       }

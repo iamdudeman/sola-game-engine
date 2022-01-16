@@ -51,8 +51,8 @@ public class StressTestExample extends Sola {
 
   private World buildWorld() {
     Material circleMaterial = new Material(1, 0.8f);
-    float zoomedWidth = getConfiguration().getCanvasWidth() / CAMERA_SCALE;
-    float zoomedHeight = getConfiguration().getCanvasHeight() / CAMERA_SCALE;
+    float zoomedWidth = getConfiguration().canvasWidth() / CAMERA_SCALE;
+    float zoomedHeight = getConfiguration().canvasHeight() / CAMERA_SCALE;
     float squareSide = CIRCLE_RADIUS;
     int bottomPlatformEntityCount = Math.round(zoomedWidth / squareSide) + 1;
     int sidePlatformEntityCount = Math.round(zoomedHeight / squareSide) * 2 + 2;

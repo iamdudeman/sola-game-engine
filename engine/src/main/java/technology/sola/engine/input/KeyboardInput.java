@@ -43,7 +43,7 @@ public class KeyboardInput {
   }
 
   public void keyPressed(KeyEvent keyEvent) {
-    int keyCode = keyEvent.getKeyCode();
+    int keyCode = keyEvent.keyCode();
 
     if (keyCode >= 0 && keyCode < KEY_COUNT) {
       keysDown[keyCode] = true;
@@ -53,7 +53,7 @@ public class KeyboardInput {
   }
 
   public void keyReleased(KeyEvent keyEvent) {
-    int keyCode = keyEvent.getKeyCode();
+    int keyCode = keyEvent.keyCode();
 
     if (keyCode >= 0 && keyCode < KEY_COUNT) {
       keysDown[keyCode] = false;

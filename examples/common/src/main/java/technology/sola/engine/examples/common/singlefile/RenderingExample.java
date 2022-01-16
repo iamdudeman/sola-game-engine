@@ -22,6 +22,7 @@ import technology.sola.engine.graphics.sprite.SpriteSheet;
 import technology.sola.engine.input.Key;
 import technology.sola.math.linear.Vector2D;
 
+import java.io.Serial;
 import java.util.List;
 
 public class RenderingExample extends Sola {
@@ -69,6 +70,7 @@ public class RenderingExample extends Sola {
   }
 
   private static class MovingComponent implements Component<MovingComponent> {
+    @Serial
     private static final long serialVersionUID = 8048288443738661480L;
 
     @Override

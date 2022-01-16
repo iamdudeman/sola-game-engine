@@ -50,8 +50,8 @@ class CollisionUtilsTest {
         CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, transformA, transformB, aabbColliderComponent, aabbColliderComponent);
 
       assertNotNull(collisionManifold);
-      assertEquals(new Vector2D(1, 0), collisionManifold.getNormal());
-      assertEquals(1, collisionManifold.getPenetration());
+      assertEquals(new Vector2D(1, 0), collisionManifold.normal());
+      assertEquals(1, collisionManifold.penetration());
     }
 
     @Test
@@ -63,8 +63,8 @@ class CollisionUtilsTest {
         CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, transformA, transformB, aabbColliderComponent, aabbColliderComponent);
 
       assertNotNull(collisionManifold);
-      assertEquals(new Vector2D(-1, 0), collisionManifold.getNormal());
-      assertEquals(1, collisionManifold.getPenetration());
+      assertEquals(new Vector2D(-1, 0), collisionManifold.normal());
+      assertEquals(1, collisionManifold.penetration());
     }
 
     @Test
@@ -76,8 +76,8 @@ class CollisionUtilsTest {
         CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, transformA, transformB, aabbColliderComponent, aabbColliderComponent);
 
       assertNotNull(collisionManifold);
-      assertEquals(new Vector2D(0, 1), collisionManifold.getNormal());
-      assertEquals(1, collisionManifold.getPenetration());
+      assertEquals(new Vector2D(0, 1), collisionManifold.normal());
+      assertEquals(1, collisionManifold.penetration());
     }
 
     @Test
@@ -89,8 +89,8 @@ class CollisionUtilsTest {
         CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, transformA, transformB, aabbColliderComponent, aabbColliderComponent);
 
       assertNotNull(collisionManifold);
-      assertEquals(new Vector2D(0, -1), collisionManifold.getNormal());
-      assertEquals(1, collisionManifold.getPenetration());
+      assertEquals(new Vector2D(0, -1), collisionManifold.normal());
+      assertEquals(1, collisionManifold.penetration());
     }
 
     @Test
@@ -102,8 +102,8 @@ class CollisionUtilsTest {
         CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, transformA, transformB, aabbColliderComponent, ColliderComponent.aabb(10, 10));
 
       assertNotNull(collisionManifold);
-      assertEquals(new Vector2D(1, 0), collisionManifold.getNormal());
-      assertEquals(4, collisionManifold.getPenetration());
+      assertEquals(new Vector2D(1, 0), collisionManifold.normal());
+      assertEquals(4, collisionManifold.penetration());
     }
   }
 
@@ -119,7 +119,7 @@ class CollisionUtilsTest {
       CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, positionA, positionB, colliderA, colliderB);
 
       assertNotNull(collisionManifold);
-      assertEquals(new Vector2D(-0.70710677f, -0.70710677f), collisionManifold.getNormal());
+      assertEquals(new Vector2D(-0.70710677f, -0.70710677f), collisionManifold.normal());
     }
 
     @Test
@@ -132,7 +132,7 @@ class CollisionUtilsTest {
       CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, positionA, positionB, colliderA, colliderB);
 
       assertNotNull(collisionManifold);
-      assertEquals(new Vector2D(-1, 0), collisionManifold.getNormal());
+      assertEquals(new Vector2D(-1, 0), collisionManifold.normal());
     }
   }
 
@@ -160,8 +160,8 @@ class CollisionUtilsTest {
 
       CollisionManifold result = CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, positionA, positionB, colliderA, colliderB);
       assertNotNull(result);
-      assertEquals(2.9289322f, result.getPenetration());
-      assertEquals(new Vector2D(0.7071068f, 0.7071068f), result.getNormal());
+      assertEquals(2.9289322f, result.penetration());
+      assertEquals(new Vector2D(0.7071068f, 0.7071068f), result.normal());
     }
   }
 }

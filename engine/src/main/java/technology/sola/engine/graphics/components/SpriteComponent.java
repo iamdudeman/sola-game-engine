@@ -5,7 +5,10 @@ import technology.sola.engine.ecs.Component;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.sprite.SpriteSheet;
 
+import java.io.Serial;
+
 public class SpriteComponent implements Component<SpriteComponent> {
+  @Serial
   private static final long serialVersionUID = 5969143866970628671L;
   private SpriteKeyFrame spriteKeyFrame;
 

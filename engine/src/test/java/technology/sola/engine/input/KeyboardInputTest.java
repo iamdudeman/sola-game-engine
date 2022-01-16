@@ -62,7 +62,7 @@ class KeyboardInputTest {
   private KeyEvent createMockKeyEvent(int keyCode) {
     KeyEvent mockKeyEvent = Mockito.mock(KeyEvent.class);
 
-    Mockito.when(mockKeyEvent.getKeyCode()).thenReturn(keyCode);
+    Mockito.when(mockKeyEvent.keyCode()).thenReturn(keyCode);
 
     return mockKeyEvent;
   }

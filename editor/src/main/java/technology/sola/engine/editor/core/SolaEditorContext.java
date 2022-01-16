@@ -45,10 +45,10 @@ public class SolaEditorContext {
     }));
 
     solaConfigurationProperty.addListener(((observable, oldValue, newValue) -> {
-      projectFileProperties.setProperty("title", newValue.getSolaTitle());
-      projectFileProperties.setProperty("canvasWidth", "" + newValue.getCanvasWidth());
-      projectFileProperties.setProperty("canvasHeight", "" + newValue.getCanvasHeight());
-      projectFileProperties.setProperty("gameLoopFps", "" + newValue.getGameLoopTargetUpdatesPerSecond());
+      projectFileProperties.setProperty("title", newValue.solaTitle());
+      projectFileProperties.setProperty("canvasWidth", "" + newValue.canvasWidth());
+      projectFileProperties.setProperty("canvasHeight", "" + newValue.canvasHeight());
+      projectFileProperties.setProperty("gameLoopFps", "" + newValue.gameLoopTargetUpdatesPerSecond());
       projectFileProperties.setProperty("gameLoopResting", "" + newValue.isGameLoopRestingAllowed());
 
       try (FileOutputStream fileOutputStream = new FileOutputStream(projectFileProperty.getValue())) {

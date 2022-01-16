@@ -6,7 +6,10 @@ import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
+import java.io.Serial;
+
 public class ColliderComponent implements Component<ColliderComponent> {
+  @Serial
   private static final long serialVersionUID = 6393414888672495864L;
   // Properties for all
   private ColliderType colliderType;
@@ -71,11 +74,10 @@ public class ColliderComponent implements Component<ColliderComponent> {
    * @return the bounding box width of this collider
    */
   public float getBoundingWidth() {
-    switch (colliderType) {
-      case AABB: return width;
-      case CIRCLE: return radius * 2;
-      default: return 0;
-    }
+    return switch (colliderType) {
+      case AABB -> width;
+      case CIRCLE -> radius * 2;
+    };
   }
 
   /**
@@ -84,11 +86,10 @@ public class ColliderComponent implements Component<ColliderComponent> {
    * @return the bounding box height of this collider
    */
   public float getBoundingHeight() {
-    switch (colliderType) {
-      case AABB: return height;
-      case CIRCLE: return radius * 2;
-      default: return 0;
-    }
+    return switch (colliderType) {
+      case AABB -> height;
+      case CIRCLE -> radius * 2;
+    };
   }
 
   /**

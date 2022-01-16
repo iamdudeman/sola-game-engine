@@ -72,11 +72,11 @@ public abstract class SolaPlatform {
   protected abstract void populateAssetPoolProvider(AssetPoolProvider assetPoolProvider);
 
   protected Viewport buildViewport(SolaConfiguration solaConfiguration) {
-    return new Viewport(solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight());
+    return new Viewport(solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight());
   }
 
   protected Renderer buildRenderer(SolaConfiguration solaConfiguration) {
-    return new SoftwareRenderer(solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight());
+    return new SoftwareRenderer(solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight());
   }
 
   protected GameLoopProvider buildGameLoop() {
@@ -92,7 +92,7 @@ public abstract class SolaPlatform {
     this.renderer = buildRenderer(solaConfiguration);
     this.gameLoop = buildGameLoop().create(
       deltaTime -> update(sola, deltaTime), () -> render(renderer, sola),
-      solaConfiguration.getGameLoopTargetUpdatesPerSecond(), solaConfiguration.isGameLoopRestingAllowed()
+      solaConfiguration.gameLoopTargetUpdatesPerSecond(), solaConfiguration.isGameLoopRestingAllowed()
     );
 
     solaEventHub.add(new GameLoopEventListener(gameLoop), GameLoopEvent.class);

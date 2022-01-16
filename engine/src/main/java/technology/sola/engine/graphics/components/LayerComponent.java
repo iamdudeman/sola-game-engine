@@ -3,7 +3,10 @@ package technology.sola.engine.graphics.components;
 import technology.sola.engine.ecs.Component;
 import technology.sola.engine.graphics.Layer;
 
+import java.io.Serial;
+
 public class LayerComponent implements Component<LayerComponent> {
+  @Serial
   private static final long serialVersionUID = 3288049068995632130L;
   private String layer;
   private int priority;

@@ -3,7 +3,10 @@ package technology.sola.engine.graphics.components;
 import technology.sola.engine.ecs.Component;
 import technology.sola.engine.graphics.Color;
 
+import java.io.Serial;
+
 public class RectangleRendererComponent implements Component<RectangleRendererComponent> {
+  @Serial
   private static final long serialVersionUID = -1301447777016343699L;
   private final Color color;
   private final boolean isFilled;

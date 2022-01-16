@@ -20,6 +20,7 @@ tasks.withType<Jar>() {
   manifest {
     attributes["Main-Class"] = "technology.sola.engine.editor.Main"
   }
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
   dependsOn(configurations.runtimeClasspath)
 

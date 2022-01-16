@@ -6,7 +6,7 @@ plugins {
 
 java {
   toolchain {
-    languageVersion.set(JavaLanguageVersion.of(11))
+    languageVersion.set(JavaLanguageVersion.of(16))
   }
 }
 
@@ -53,13 +53,4 @@ tasks.jacocoTestCoverageVerification {
       }
     }
   }
-}
-
-tasks.withType<Jar> {
-  from(sourceSets.main.get().output)
-
-  dependsOn(configurations.runtimeClasspath)
-  from({
-    configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
-  })
 }

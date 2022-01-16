@@ -1,11 +1,13 @@
 package technology.sola.engine.physics;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
 public class Material implements Serializable {
   /** Material with mass set to 1, restitution set to 0.01 and friction set to 0. */
   public static final Material UNIT_MASS_MATERIAL = new Material(1);
+  @Serial
   private static final long serialVersionUID = -6308618421104031127L;
 
   private final float mass;
@@ -94,8 +96,7 @@ public class Material implements Serializable {
 
   @Override
   public boolean equals(Object obj) {
-    if (obj instanceof Material) {
-      Material other = (Material) obj;
+    if (obj instanceof Material other) {
       return Objects.equals(mass, other.mass)
         && Objects.equals(restitution, other.restitution)
         && Objects.equals(friction, other.friction);
