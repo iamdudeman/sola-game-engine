@@ -47,10 +47,10 @@ public class ProjectSettingsDialog extends Dialog<SolaConfiguration> {
 
 
     SolaConfiguration solaConfiguration = solaEditorContext.solaConfigurationProperty().getValue();
-    textFieldTitle.setText(solaConfiguration.getSolaTitle());
-    textFieldCanvasWidth.setText("" + solaConfiguration.getCanvasWidth());
-    textFieldCanvasHeight.setText("" + solaConfiguration.getCanvasHeight());
-    spinnerGameLoopFps.getValueFactory().setValue(solaConfiguration.getGameLoopTargetUpdatesPerSecond());
+    textFieldTitle.setText(solaConfiguration.solaTitle());
+    textFieldCanvasWidth.setText("" + solaConfiguration.canvasWidth());
+    textFieldCanvasHeight.setText("" + solaConfiguration.canvasHeight());
+    spinnerGameLoopFps.getValueFactory().setValue(solaConfiguration.gameLoopTargetUpdatesPerSecond());
     checkBoxGameLoopResting.setSelected(solaConfiguration.isGameLoopRestingAllowed());
     textAreaLayers.setText(String.join("\n", solaEditorContext.solaLayersProperty().getValue()));
 

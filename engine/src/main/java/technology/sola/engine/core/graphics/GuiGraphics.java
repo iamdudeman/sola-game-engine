@@ -65,8 +65,6 @@ class GuiGraphics {
 
     renderer.setFont(guiTextComponent.getFont(fontAssetPool));
 
-    renderer.drawWithRenderModeMask(r -> {
-      renderer.drawString(guiTextComponent.getText(), transformComponent.getX(), transformComponent.getY(), guiTextComponent.getColor());
-    });
+    renderer.drawWithRenderModeMask(r -> renderer.drawString(guiTextComponent.getText(), transformComponent.getX(), transformComponent.getY(), guiTextComponent.getColor()));
   }
 }

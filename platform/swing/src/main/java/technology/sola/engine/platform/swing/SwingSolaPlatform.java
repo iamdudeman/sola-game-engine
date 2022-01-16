@@ -102,7 +102,7 @@ public class SwingSolaPlatform extends SolaPlatform {
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     JFrame jFrame = new JFrame();
     canvas = new Canvas();
-    canvas.setPreferredSize(new Dimension(solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight()));
+    canvas.setPreferredSize(new Dimension(solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight()));
     jFrame.getContentPane().add(canvas);
     jFrame.pack();
 
@@ -133,7 +133,7 @@ public class SwingSolaPlatform extends SolaPlatform {
         solaEventHub.emit(GameLoopEvent.STOP);
       }
     });
-    jFrame.setTitle(solaConfiguration.getSolaTitle());
+    jFrame.setTitle(solaConfiguration.solaTitle());
 
     canvas.requestFocus();
     jFrame.setVisible(true);
@@ -165,12 +165,12 @@ public class SwingSolaPlatform extends SolaPlatform {
 
     return useSoftwareRendering
       ? super.buildRenderer(solaConfiguration)
-      : new Graphics2dRenderer(graphics2D, solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight());
+      : new Graphics2dRenderer(graphics2D, solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight());
   }
 
   private void setupSoftwareRendering(SolaConfiguration solaConfiguration) {
     BufferedImage bufferedImage = new BufferedImage(
-      solaConfiguration.getCanvasWidth(), solaConfiguration.getCanvasHeight(), BufferedImage.TYPE_INT_ARGB
+      solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight(), BufferedImage.TYPE_INT_ARGB
     );
 
     beforeRender = renderer -> {

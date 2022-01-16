@@ -88,8 +88,8 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     Platform.runLater(() -> {
       final Stage stage = new Stage();
       final Group root = new Group();
-      int rendererWidth = solaConfiguration.getCanvasWidth();
-      int rendererHeight = solaConfiguration.getCanvasHeight();
+      int rendererWidth = solaConfiguration.canvasWidth();
+      int rendererHeight = solaConfiguration.canvasHeight();
       final Scene scene = new Scene(root, rendererWidth, rendererHeight);
 
       this.canvas = new Canvas(rendererWidth, rendererHeight);
@@ -111,7 +111,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
 
       stage.setOnShown(event -> canvas.requestFocus());
       stage.setOnCloseRequest(event -> solaEventHub.emit(GameLoopEvent.STOP));
-      stage.setTitle(solaConfiguration.getSolaTitle());
+      stage.setTitle(solaConfiguration.solaTitle());
       stage.setScene(scene);
       stage.show();
 

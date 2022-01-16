@@ -7,7 +7,6 @@ public class Layer {
   public static final int DEFAULT_PRIORITY = 0;
   private final PriorityQueue<PrioritizedDrawItem> drawQueue;
   private final String name;
-  // TODO change this to "isDisabled"
   private boolean isEnabled = true;
 
   public Layer(String name) {
