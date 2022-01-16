@@ -12,17 +12,7 @@ public class FileTreeView extends TreeView<FileTreeView.ShortNamedFile> {
     super(new FileTreeItem(rootFolder));
   }
 
-  protected static class ShortNamedFile {
-    private final File file;
-
-    public ShortNamedFile(File file) {
-      this.file = file;
-    }
-
-    public File getFile() {
-      return file;
-    }
-
+  protected record ShortNamedFile(File file) {
     @Override
     public String toString() {
       return file.getName();
@@ -55,14 +45,14 @@ public class FileTreeView extends TreeView<FileTreeView.ShortNamedFile> {
         ShortNamedFile file = getValue();
 
         isFirstTimeLeaf = false;
-        isLeaf = file.getFile().isFile();
+        isLeaf = file.file().isFile();
       }
 
       return isLeaf;
     }
 
     private ObservableList<TreeItem<ShortNamedFile>> buildChildren(TreeItem<ShortNamedFile> TreeItem) {
-      File f = TreeItem.getValue().getFile();
+      File f = TreeItem.getValue().file();
 
       if (f != null && f.isDirectory()) {
         File[] files = f.listFiles();
