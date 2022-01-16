@@ -3,7 +3,10 @@ package technology.sola.engine.graphics.gui.components;
 import technology.sola.engine.ecs.Component;
 import technology.sola.engine.graphics.Color;
 
+import java.io.Serial;
+
 public class GuiPanelComponent implements Component<GuiPanelComponent> {
+  @Serial
   private static final long serialVersionUID = 5088264649382366612L;
   private Color backgroundColor;
   private Color borderColor = null;

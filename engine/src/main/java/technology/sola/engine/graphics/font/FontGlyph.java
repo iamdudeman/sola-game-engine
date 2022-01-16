@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.font;
 
+// TODO convert to record if we don't use GSON for deserializing
 public class FontGlyph {
   private final char glyph;
   private final int x;

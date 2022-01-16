@@ -36,13 +36,9 @@ public class Viewport {
 
   private void recalculateAspectRatioSizing(int screenWidth, int screenHeight) {
     switch (aspectMode) {
-      case IGNORE_RESIZING:
-        aspectRatioSizing = new AspectRatioSizing(0, 0, canvasWidth, canvasHeight);
-        break;
-      case STRETCH:
-        aspectRatioSizing = new AspectRatioSizing(0, 0, screenWidth, screenHeight);
-        break;
-      case MAINTAIN:
+      case IGNORE_RESIZING -> aspectRatioSizing = new AspectRatioSizing(0, 0, canvasWidth, canvasHeight);
+      case STRETCH -> aspectRatioSizing = new AspectRatioSizing(0, 0, screenWidth, screenHeight);
+      case MAINTAIN -> {
         float rendererAspectRatio = canvasWidth / (float) canvasHeight;
         float canvasAspectRatio = screenWidth / (float) screenHeight;
         float scaleFactor = canvasAspectRatio > rendererAspectRatio
@@ -50,13 +46,13 @@ public class Viewport {
           : screenWidth / (float) canvasWidth;
         int adjustedWidth = (int) (canvasWidth * scaleFactor);
         int adjustedHeight = (int) (canvasHeight * scaleFactor);
-
         aspectRatioSizing = new AspectRatioSizing(
           (screenWidth - adjustedWidth) / 2, (screenHeight - adjustedHeight) / 2,
           adjustedWidth, adjustedHeight
         );
-        break;
-      default:
+      }
+      default -> {
+      }
     }
   }
 }

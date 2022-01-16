@@ -3,7 +3,10 @@ package technology.sola.engine.graphics.components;
 import technology.sola.engine.ecs.Component;
 import technology.sola.engine.graphics.Color;
 
+import java.io.Serial;
+
 public class CircleRendererComponent implements Component<CircleRendererComponent> {
+  @Serial
   private static final long serialVersionUID = -1490398951286309608L;
   private final Color color;
   private final boolean isFilled;

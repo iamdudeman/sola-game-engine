@@ -187,7 +187,7 @@ public class SwingSolaPlatform extends SolaPlatform {
       AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
 
       graphics.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-      graphics.drawImage(bufferedImage, aspectRatioSizing.getX(), aspectRatioSizing.getY(), aspectRatioSizing.getWidth(), aspectRatioSizing.getHeight(), null);
+      graphics.drawImage(bufferedImage, aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height(), null);
       graphics.dispose();
 
       canvas.getBufferStrategy().show();
@@ -203,8 +203,8 @@ public class SwingSolaPlatform extends SolaPlatform {
       graphics2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
       AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
-      graphics2D.translate(aspectRatioSizing.getX(), aspectRatioSizing.getY());
-      graphics2D.scale(aspectRatioSizing.getWidth() / (double) renderer.getWidth(), aspectRatioSizing.getHeight() / (double) renderer.getHeight());
+      graphics2D.translate(aspectRatioSizing.x(), aspectRatioSizing.y());
+      graphics2D.scale(aspectRatioSizing.width() / (double) renderer.getWidth(), aspectRatioSizing.height() / (double) renderer.getHeight());
     };
 
     onRender = renderer -> {

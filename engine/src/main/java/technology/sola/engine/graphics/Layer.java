@@ -7,6 +7,7 @@ public class Layer {
   public static final int DEFAULT_PRIORITY = 0;
   private final PriorityQueue<PrioritizedDrawItem> drawQueue;
   private final String name;
+  // TODO change this to "isDisabled"
   private boolean isEnabled = true;
 
   public Layer(String name) {
@@ -41,15 +42,7 @@ public class Layer {
     return name;
   }
 
-  private static class PrioritizedDrawItem implements DrawItem {
-    private final DrawItem drawItem;
-    private final int priority;
-
-    private PrioritizedDrawItem(DrawItem drawItem, int priority) {
-      this.drawItem = drawItem;
-      this.priority = priority;
-    }
-
+  private record PrioritizedDrawItem(DrawItem drawItem, int priority) implements DrawItem {
     @Override
     public void draw(Renderer renderer) {
       drawItem.draw(renderer);
