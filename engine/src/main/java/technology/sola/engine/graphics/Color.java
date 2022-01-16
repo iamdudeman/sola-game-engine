@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -13,6 +14,7 @@ public class Color implements Serializable {
   public static final Color YELLOW = new Color(255, 255, 255, 0);
   public static final Color WHITE = new Color(255, 255, 255, 255);
 
+  @Serial
   private static final long serialVersionUID = 6993857654051014018L;
   private final int alpha;
   private final int r;

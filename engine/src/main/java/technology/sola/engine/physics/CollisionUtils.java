@@ -17,32 +17,34 @@ public final class CollisionUtils {
     switch (colliderA.getColliderType()) {
       case AABB:
         switch (colliderB.getColliderType()) {
-          case AABB:
+          case AABB -> {
             Rectangle rectangleA = colliderA.asRectangle(transformA);
             Rectangle rectangleB = colliderB.asRectangle(transformB);
-
             return calculateAABBVsAABB(entityA, entityB, rectangleA, rectangleB);
-          case CIRCLE:
+          }
+          case CIRCLE -> {
             Rectangle rectangle = colliderA.asRectangle(transformA);
             Circle circle = colliderB.asCircle(transformB);
-
             return calculateAABBVsCircle(entityA, entityB, rectangle, circle);
-          default:
+          }
+          default -> {
+          }
         }
         break;
       case CIRCLE:
         switch (colliderB.getColliderType()) {
-          case AABB:
+          case AABB -> {
             Rectangle rectangle = colliderB.asRectangle(transformB);
             Circle circle = colliderA.asCircle(transformA);
-
             return calculateAABBVsCircle(entityB, entityA, rectangle, circle);
-          case CIRCLE:
+          }
+          case CIRCLE -> {
             Circle circleA = colliderA.asCircle(transformA);
             Circle circleB = colliderB.asCircle(transformB);
-
             return calculateCircleVsCircle(entityA, entityB, circleA, circleB);
-          default:
+          }
+          default -> {
+          }
         }
         break;
       default:
