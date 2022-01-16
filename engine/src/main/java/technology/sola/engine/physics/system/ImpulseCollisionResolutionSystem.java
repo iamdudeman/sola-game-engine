@@ -78,15 +78,15 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
   private void applyImpulse() {
     for (int i = 0; i < iterations; i++) {
       events.forEach(event -> {
-        CollisionResolutionEntityData entityA = new CollisionResolutionEntityData(event.getEntityA());
-        CollisionResolutionEntityData entityB = new CollisionResolutionEntityData(event.getEntityB());
+        CollisionResolutionEntityData entityA = new CollisionResolutionEntityData(event.entityA());
+        CollisionResolutionEntityData entityB = new CollisionResolutionEntityData(event.entityB());
 
         final float inverseMassSum = entityA.inverseMass + entityB.inverseMass;
 
         if (inverseMassSum <= 0) return;
 
         Vector2D relativeVelocity = entityB.velocity.subtract(entityA.velocity);
-        Vector2D relativeNormal = event.getNormal().normalize();
+        Vector2D relativeNormal = event.normal().normalize();
 
         // Moving away so return
         if (relativeVelocity.normalize().dot(relativeNormal) > 0) return;
@@ -141,8 +141,8 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
 
   private void adjustForSinking() {
     events.forEach(event -> {
-      CollisionResolutionEntityData entityA = new CollisionResolutionEntityData(event.getEntityA());
-      CollisionResolutionEntityData entityB = new CollisionResolutionEntityData(event.getEntityB());
+      CollisionResolutionEntityData entityA = new CollisionResolutionEntityData(event.entityA());
+      CollisionResolutionEntityData entityB = new CollisionResolutionEntityData(event.entityB());
 
       float inverseMassA = entityA.inverseMass;
       float inverseMassB = entityB.inverseMass;
@@ -150,9 +150,9 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
 
       if (inverseMassSum <= 0) return;
 
-      float depth = Math.max(event.getPenetration() - penetrationSlack, 0);
+      float depth = Math.max(event.penetration() - penetrationSlack, 0);
       float scalar = depth / inverseMassSum;
-      Vector2D correction = event.getNormal().scalar(scalar * linearProjectionPercentage);
+      Vector2D correction = event.normal().scalar(scalar * linearProjectionPercentage);
 
       Vector2D aPosition = new Vector2D(entityA.transformComponent.getX(), entityA.transformComponent.getY())
         .subtract(correction.scalar(inverseMassA));

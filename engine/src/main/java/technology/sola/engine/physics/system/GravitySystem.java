@@ -43,14 +43,14 @@ public class GravitySystem extends EcsSystem implements EventListener<CollisionM
   public void onEvent(CollisionManifoldEvent event) {
     CollisionManifold payload = event.getMessage();
 
-    if (payload.getNormal().y > 0) {
-      DynamicBodyComponent dynamicBodyComponent = payload.getEntityA().getComponent(DynamicBodyComponent.class);
+    if (payload.normal().y > 0) {
+      DynamicBodyComponent dynamicBodyComponent = payload.entityA().getComponent(DynamicBodyComponent.class);
 
       if (dynamicBodyComponent != null) {
         dynamicBodyComponent.setGrounded(true);
       }
-    } else if (payload.getNormal().y < 0) {
-      DynamicBodyComponent dynamicBodyComponent = payload.getEntityB().getComponent(DynamicBodyComponent.class);
+    } else if (payload.normal().y < 0) {
+      DynamicBodyComponent dynamicBodyComponent = payload.entityB().getComponent(DynamicBodyComponent.class);
 
       if (dynamicBodyComponent != null) {
         dynamicBodyComponent.setGrounded(true);
