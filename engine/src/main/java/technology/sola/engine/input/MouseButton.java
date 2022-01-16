@@ -10,6 +10,8 @@ public enum MouseButton {
   BACK(4),
   FORWARD(5);
 
+  private final int code;
+
   public static MouseButton valueOf(int buttonCode) {
     if (buttonCode < 0 || buttonCode > MouseButton.values().length) {
       throw new IllegalArgumentException(buttonCode + " must be in MouseButton values " + Arrays.toString(MouseButton.values()));
@@ -17,8 +19,6 @@ public enum MouseButton {
 
     return MouseButton.values()[buttonCode];
   }
-
-  private final int code;
 
   MouseButton(int code) {
     this.code = code;
