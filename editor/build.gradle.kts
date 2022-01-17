@@ -12,7 +12,13 @@ repositories {
 }
 
 dependencies {
-  api(project(":platform:javafx"))
+  api(project(":sola-engine:platform:javafx"))
+
+  // Test
+  testImplementation("org.mockito:mockito-inline:3.0.0")
+  testImplementation("org.mockito:mockito-junit-jupiter:3.0.0")
+  testImplementation(platform("org.junit:junit-bom:5.7.1"))
+  testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
 tasks.withType<Jar>() {
@@ -26,4 +32,6 @@ tasks.withType<Jar>() {
   from({
     configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
   })
+
+  archiveBaseName.set("sola-engine-${project.name}")
 }

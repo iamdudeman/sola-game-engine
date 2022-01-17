@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-  implementation(project(":platform:javafx"))
+  implementation(project(":sola-engine:platform:javafx"))
   implementation(project(":examples:common"))
 }
 
@@ -27,6 +27,8 @@ tasks.withType<Jar>() {
   from({
     configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
   })
+
+  archiveBaseName.set("sola-engine-examples-${project.name}")
 }
 
 tasks.withType<Zip>() {

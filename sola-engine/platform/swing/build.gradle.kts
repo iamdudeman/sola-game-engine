@@ -1,8 +1,11 @@
 plugins {
   id("java-library")
-  id("org.openjfx.javafxplugin") version "0.0.9"
   checkstyle
   jacoco
+}
+
+tasks.jar {
+  archiveBaseName.set("sola-engine-${project.name}")
 }
 
 java {
@@ -11,13 +14,8 @@ java {
   }
 }
 
-javafx {
-  modules("javafx.controls", "javafx.fxml")
-  configuration = "api" // TODO this might have issues on other platforms (possibly need reliant code in separate module)
-}
-
 checkstyle {
-  configFile = file("../../checkstyle.xml")
+  configFile = file("../../../checkstyle.xml")
 }
 
 repositories {

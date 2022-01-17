@@ -1,7 +1,12 @@
 plugins {
   id("java-library")
+  id("org.openjfx.javafxplugin") version "0.0.9"
   checkstyle
   jacoco
+}
+
+tasks.jar {
+  archiveBaseName.set("sola-engine-${project.name}")
 }
 
 java {
@@ -10,8 +15,13 @@ java {
   }
 }
 
+javafx {
+  modules("javafx.controls", "javafx.fxml")
+  configuration = "api" // TODO this might have issues on other platforms (possibly need reliant code in separate module)
+}
+
 checkstyle {
-  configFile = file("../../checkstyle.xml")
+  configFile = file("../../../checkstyle.xml")
 }
 
 repositories {
@@ -20,11 +30,9 @@ repositories {
 
 dependencies {
   api(project(":sola-engine"))
-  implementation("org.teavm:teavm-jso-apis:0.6.1")
 
   // Logging
-  api("org.slf4j:slf4j-api:1.7.30")
-  implementation("org.teavm:teavm-extras-slf4j:0.6.1")
+  implementation("org.slf4j:slf4j-log4j12:1.7.30")
 
   // Test
   testImplementation("org.mockito:mockito-inline:3.0.0")
