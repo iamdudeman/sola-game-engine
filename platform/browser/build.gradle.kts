@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-  api(project(":engine"))
+  api(project(":sola-engine"))
   implementation("org.teavm:teavm-jso-apis:0.6.1")
 
   // Logging

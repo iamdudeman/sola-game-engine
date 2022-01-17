@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-  api(project(":engine"))
+  api(project(":sola-engine"))
 
   // Logging
   implementation("org.slf4j:slf4j-log4j12:1.7.30")

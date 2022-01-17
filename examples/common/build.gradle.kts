@@ -7,5 +7,5 @@ repositories {
 }
 
 dependencies {
-  implementation(project(":engine"))
+  implementation(project(":sola-engine"))
 }
