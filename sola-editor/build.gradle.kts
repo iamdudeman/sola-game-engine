@@ -4,7 +4,7 @@ plugins {
 }
 
 application {
-  mainClass.set("technology.sola.engine.editor.Main")
+  mainClass.set("technology.sola.engine.editor.EditorMain")
 }
 
 repositories {
