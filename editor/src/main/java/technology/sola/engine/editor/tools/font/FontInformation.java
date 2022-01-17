@@ -1,4 +1,7 @@
-package technology.sola.engine.tools.font;
+package technology.sola.engine.editor.tools.font;
+
+import technology.sola.engine.graphics.font.FontGlyph;
+import technology.sola.engine.graphics.font.FontStyle;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -36,18 +39,18 @@ class FontInformation {
     return fontMetrics.getStringBounds(string, graphics2D);
   }
 
-  public List<FontGlyphModel> getFontGlyphs(String characters) {
-    List<FontGlyphModel> fontGlyphModelList = new ArrayList<>(characters.length());
+  public java.util.List<FontGlyph> getFontGlyphs(String characters) {
+    List<FontGlyph> fontGlyphList = new ArrayList<>(characters.length());
 
-    for (String character : characters.split("")) {
-      Rectangle2D characterBounds = getStringBounds(character);
+    for (char character : characters.toCharArray()) {
+      Rectangle2D characterBounds = getStringBounds("" + character);
       int width = (int) characterBounds.getWidth();
       int height = (int) characterBounds.getHeight();
 
-      fontGlyphModelList.add(new FontGlyphModel(character, width, height));
+      fontGlyphList.add(new FontGlyph(character, -1, -1, width, height));
     }
 
-    return fontGlyphModelList;
+    return fontGlyphList;
   }
 
   public String getFontName() {

@@ -232,7 +232,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
       SolaImage glyphImage = font.getGlyph(character, color);
 
       drawImage(x + xOffset, y, glyphImage);
-      xOffset += glyphImage.getWidth() + font.getFontInfo().getLeading();
+      xOffset += glyphImage.getWidth() + font.getFontInfo().leading();
     }
   }
 

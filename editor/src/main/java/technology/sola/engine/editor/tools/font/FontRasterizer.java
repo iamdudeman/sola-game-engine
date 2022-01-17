@@ -1,6 +1,9 @@
-package technology.sola.engine.tools.font;
+package technology.sola.engine.editor.tools.font;
 
-import com.google.gson.Gson;
+import technology.sola.engine.graphics.font.FontGlyph;
+import technology.sola.engine.graphics.font.FontInfo;
+import technology.sola.engine.graphics.font.FontStyle;
+import technology.sola.json.SolaJson;
 
 import javax.imageio.ImageIO;
 import java.awt.geom.Rectangle2D;
@@ -28,14 +31,14 @@ public class FontRasterizer {
     var fontInformation = new FontInformation(fontName, FontStyle.valueOf(fontStyle), fontSize);
 
     try (var fontCanvas = prepareFontCanvas(fontInformation)) {
-      var fontModel = prepareFontModel(fontInformation, fontCanvas);
+      var fontInfo = prepareFontInfo(fontInformation, fontCanvas);
 
       File fontImageFile = new File(parentDirectory, fontInformation.getFontFileName());
       File fontInfoFile = new File(parentDirectory, fontInformation.getFontInfoFileName());
 
       try {
         ImageIO.write(fontCanvas.getBufferedImage(), "png", fontImageFile);
-        Files.write(fontInfoFile.toPath(), serializeFontModel(fontModel));
+        Files.write(fontInfoFile.toPath(), serializeFontInfo(fontInfo));
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -50,13 +53,17 @@ public class FontRasterizer {
     return new FontCanvas(fontInformation, imageWidth, imageHeight);
   }
 
-  private FontModel prepareFontModel(FontInformation fontInformation, FontCanvas fontCanvas) {
-    List<FontGlyphModel> fontGlyphModelsWithPositions = fontCanvas.drawFontGlyphs(characters);
+  private FontInfo prepareFontInfo(FontInformation fontInformation, FontCanvas fontCanvas) {
+    List<FontGlyph> fontGlyphsWithPositions = fontCanvas.drawFontGlyphs(characters);
 
-    return new FontModel(fontInformation, fontGlyphModelsWithPositions);
+    return new FontInfo(
+      fontInformation.getFontFileName(), fontInformation.getFontName(),
+      FontStyle.valueOf(fontInformation.getFontStyle()), fontInformation.getFontSize(),
+      fontInformation.getLeading(), fontGlyphsWithPositions
+    );
   }
 
-  private byte[] serializeFontModel(FontModel fontModel) {
-    return new Gson().toJson(fontModel).getBytes(StandardCharsets.UTF_8);
+  private byte[] serializeFontInfo(FontInfo fontInfo) {
+    return new SolaJson().serialize(fontInfo, FontInfo.JSON_MAPPER).getBytes(StandardCharsets.UTF_8);
   }
 }

@@ -19,8 +19,8 @@ repositories {
 }
 
 dependencies {
-  // TODO possibly switch this back to implementation (need a JSON abstraction layer in place instead)
-  api("com.google.code.gson:gson:2.8.7")
+  // TODO get from maven when it is published there
+  api(files("libs/sola-json-1.0.2.jar"))
 
   // Logging
   implementation("org.slf4j:slf4j-log4j12:1.7.30")

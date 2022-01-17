@@ -1,16 +1,15 @@
 package technology.sola.engine.platform.swing.assets;
 
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.graphics.font.FontInfo;
 import technology.sola.engine.platform.swing.assets.exception.FailedFontLoadException;
+import technology.sola.json.SolaJson;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class FontAssetPool extends AssetPool<Font> {
   private final AssetPool<SolaImage> solaImageAssetPool;
@@ -26,14 +25,14 @@ public class FontAssetPool extends AssetPool<Font> {
 
   @Override
   protected Font loadAsset(String path) {
-    Gson gson = new Gson();
     File file = new File(path);
+    SolaJson solaJson = new SolaJson();
 
-    try (JsonReader reader = new JsonReader(new FileReader(file))) {
-      FontInfo fontInfo = gson.fromJson(reader, FontInfo.class);
+    try {
+      FontInfo fontInfo = solaJson.parse(Files.readString(file.toPath()), FontInfo.JSON_MAPPER);
       SolaImage fontImage = solaImageAssetPool.addAndGetAsset(
-        fontInfo.getFontGlyphFile(),
-        path.replace(file.getName(), "") + fontInfo.getFontGlyphFile()
+        fontInfo.fontGlyphFile(),
+        path.replace(file.getName(), "") + fontInfo.fontGlyphFile()
       );
 
       return new Font(fontImage, fontInfo);

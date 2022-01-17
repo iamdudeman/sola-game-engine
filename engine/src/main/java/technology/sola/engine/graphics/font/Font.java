@@ -17,13 +17,13 @@ public class Font implements Asset {
   public Font(SolaImage fontImage, FontInfo fontInfo) {
     this.fontInfo = fontInfo;
 
-    fontInfo.getGlyphs().forEach(fontGlyph -> {
+    fontInfo.glyphs().forEach(fontGlyph -> {
       SolaImage glyphImage = fontImage.getSubImage(
-        fontGlyph.getX(), fontGlyph.getY(),
-        fontGlyph.getWidth(), fontGlyph.getHeight()
+        fontGlyph.x(), fontGlyph.y(),
+        fontGlyph.width(), fontGlyph.height()
       );
 
-      this.blackCharacterToGlyphMap.put(fontGlyph.getGlyph(), glyphImage);
+      this.blackCharacterToGlyphMap.put(fontGlyph.glyph(), glyphImage);
     });
 
     this.colorToGlyphsMap.put(Color.BLACK, this.blackCharacterToGlyphMap);
@@ -73,7 +73,7 @@ public class Font implements Asset {
 
     if (glyph == null) {
       // TODO custom exception
-      throw new RuntimeException("glyph for character " + character + " is not in Font " + fontInfo.getFontName());
+      throw new RuntimeException("glyph for character " + character + " is not in Font " + fontInfo.fontName());
     }
 
     return glyph;

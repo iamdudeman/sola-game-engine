@@ -5,7 +5,6 @@
   * Add more component controllers
     * Sprite
     * SpriteAnimator
-  * utility for sola to load assets from expected folder structure
   * editor camera improvements
     * add new entities to center of editor camera
     * better camera controls than WSAD
@@ -13,7 +12,10 @@
     * option to copy camera's transform for editor preview of it?
   * Way to view all Systems and Components available
   * Way to view various EventListeners?
-  * export stuff somehow maybe?
+  * build for platform
+    * JavaFx
+    * Swing
+    * Browser
   * Create child + parent relationships for the entities?
   * load additional components, systems and engine ui from external JAR
     * maybe generate a gradle file to build the jar from inside the engine?

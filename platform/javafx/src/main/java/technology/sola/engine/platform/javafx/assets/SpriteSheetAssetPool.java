@@ -1,16 +1,15 @@
 package technology.sola.engine.platform.javafx.assets;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.stream.JsonReader;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.sprite.SpriteSheet;
 import technology.sola.engine.platform.javafx.assets.exception.FailedSpriteSheetLoadException;
+import technology.sola.json.JsonObject;
+import technology.sola.json.SolaJson;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class SpriteSheetAssetPool extends AssetPool<SpriteSheet> {
   private final AssetPool<SolaImage> solaImageAssetPool;
@@ -26,25 +25,25 @@ public class SpriteSheetAssetPool extends AssetPool<SpriteSheet> {
 
   @Override
   protected SpriteSheet loadAsset(String path) {
-    Gson gson = new Gson();
     File file = new File(path);
+    try {
+      String jsonString = Files.readString(file.toPath());
+      SolaJson solaJson = new SolaJson();
+      JsonObject spriteSheetJson = solaJson.parse(jsonString).asObject();
 
-    try (JsonReader reader = new JsonReader(new FileReader(file))) {
-      JsonObject spriteSheetJson = gson.fromJson(reader, JsonObject.class);
-
-      String spriteImageName = spriteSheetJson.get("spriteSheet").getAsString();
+      String spriteImageName = spriteSheetJson.getString("spriteSheet");
       SolaImage spriteImage = solaImageAssetPool.addAndGetAsset(spriteImageName, new File(file.getParent(), spriteImageName).getPath());
       SpriteSheet spriteSheet = new SpriteSheet(spriteImage);
 
-      spriteSheetJson.getAsJsonArray("sprites").forEach(spritesJsonEntry -> {
-        JsonObject spriteJson = spritesJsonEntry.getAsJsonObject();
+      spriteSheetJson.getArray("sprites").forEach(spritesJsonEntry -> {
+        JsonObject spriteJson = spritesJsonEntry.asObject();
 
         spriteSheet.addSpriteDefinition(
-          spriteJson.get("id").getAsString(),
-          spriteJson.get("x").getAsInt(),
-          spriteJson.get("y").getAsInt(),
-          spriteJson.get("w").getAsInt(),
-          spriteJson.get("h").getAsInt()
+          spriteJson.getString("id"),
+          spriteJson.getInt("x"),
+          spriteJson.getInt("y"),
+          spriteJson.getInt("w"),
+          spriteJson.getInt("h")
         );
       });
 
