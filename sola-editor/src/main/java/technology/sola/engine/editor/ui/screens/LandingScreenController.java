@@ -84,8 +84,8 @@ public class LandingScreenController implements SolaEditorScreen {
               .createDirectories("assets/fonts", "assets/materials", "assets/sprites", "assets/worlds");
           }
         }
-      } catch (IOException e) {
-        e.printStackTrace();
+      } catch (IOException ex) {
+        ex.printStackTrace();
       }
     });
 
@@ -118,7 +118,7 @@ public class LandingScreenController implements SolaEditorScreen {
       }
     });
 
-    checkMenuItemWorld.selectedProperty().addListener(((observable, oldValue, newValue) -> {
+    checkMenuItemWorld.selectedProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue) {
         if (worldStage == null) {
           worldStage = new Stage();
@@ -135,7 +135,7 @@ public class LandingScreenController implements SolaEditorScreen {
       } else {
         worldStage.hide();
       }
-    }));
+    });
 
     buttonEditSettings.setOnAction(event -> {
       new ProjectSettingsDialog(solaEditorContext.getPrimaryStage(), solaEditorContext).showAndWait();

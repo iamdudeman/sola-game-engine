@@ -86,7 +86,7 @@ public class WorldScreenController implements SolaEditorScreen {
 
     entityListView.setItems(entityList);
 
-    worldProperty.addListener(((observable, oldValue, newValue) -> {
+    worldProperty.addListener((observable, oldValue, newValue) -> {
       menuWorld.setDisable(newValue == null);
       menuItemSave.setDisable(newValue == null);
 
@@ -104,7 +104,7 @@ public class WorldScreenController implements SolaEditorScreen {
             .addComponent(editorCameraComponent);
         }
       }
-    }));
+    });
 
     menuItemNew.setOnAction(event -> {
       fileChooser.setInitialFileName("new_world.world");
@@ -121,8 +121,8 @@ public class WorldScreenController implements SolaEditorScreen {
 
           saveWorld();
         }
-      } catch (IOException e) {
-        e.printStackTrace();
+      } catch (IOException ex) {
+        ex.printStackTrace();
       }
     });
 
@@ -150,7 +150,7 @@ public class WorldScreenController implements SolaEditorScreen {
       entityList.add(entity);
     });
 
-    menuItemLivePreview.selectedProperty().addListener(((observable, oldValue, newValue) -> {
+    menuItemLivePreview.selectedProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue) {
         menuItemNewEntity.setDisable(true);
         entityListView.setDisable(true);
@@ -162,20 +162,20 @@ public class WorldScreenController implements SolaEditorScreen {
         entityListView.setDisable(false);
         menuItemNewEntity.setDisable(false);
       }
-    }));
+    });
 
-    entityListView.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+    entityListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
       entityComponents.setEntity(newValue);
-    }));
+    });
 
     editorSola = new EditorSola(solaEditorContext.solaConfigurationProperty().getValue(), entityListView.getSelectionModel(), solaEditorContext);
     updateEditorSola();
 
-    solaEditorContext.solaEditorConfigurationDirtyProperty().addListener(((observable, oldValue, newValue) -> {
+    solaEditorContext.solaEditorConfigurationDirtyProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue) {
         updateEditorSola();
       }
-    }));
+    });
   }
 
   private synchronized void updateEditorSola() {

@@ -20,16 +20,16 @@ public class LayerComponentController extends ComponentController<LayerComponent
 
   @Override
   public void initialize() {
-    solaEditorContext.solaLayersProperty().addListener(((observable, oldValue, newValue) -> {
+    solaEditorContext.solaLayersProperty().addListener((observable, oldValue, newValue) -> {
       comboBoxLayerId.setItems(FXCollections.observableArrayList(newValue));
-    }));
+    });
 
-    comboBoxLayerId.valueProperty().addListener(((observable, oldValue, newValue) -> {
+    comboBoxLayerId.valueProperty().addListener((observable, oldValue, newValue) -> {
       entity.addComponent(createComponentFromFields());
-    }));
-    textFieldPriority.textProperty().addListener(((observable, oldValue, newValue) -> {
+    });
+    textFieldPriority.textProperty().addListener((observable, oldValue, newValue) -> {
       entity.addComponent(createComponentFromFields());
-    }));
+    });
   }
 
   @Override

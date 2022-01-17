@@ -39,8 +39,8 @@ public class FontRasterizer {
       try {
         ImageIO.write(fontCanvas.getBufferedImage(), "png", fontImageFile);
         Files.write(fontInfoFile.toPath(), serializeFontInfo(fontInfo));
-      } catch (IOException e) {
-        e.printStackTrace();
+      } catch (IOException ex) {
+        ex.printStackTrace();
       }
     }
   }

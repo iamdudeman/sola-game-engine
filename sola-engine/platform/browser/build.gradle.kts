@@ -1,62 +1,10 @@
 plugins {
-  id("java-library")
-  checkstyle
-  jacoco
-}
-
-tasks.jar {
-  archiveBaseName.set("sola-engine-${project.name}")
-}
-
-java {
-  toolchain {
-    languageVersion.set(JavaLanguageVersion.of(16))
-  }
-}
-
-checkstyle {
-  configFile = file("../../../checkstyle.xml")
-}
-
-repositories {
-  mavenCentral()
+  id("sola.platform-conventions")
 }
 
 dependencies {
-  api(project(":sola-engine"))
   implementation("org.teavm:teavm-jso-apis:0.6.1")
 
   // Logging
-  api("org.slf4j:slf4j-api:1.7.30")
   implementation("org.teavm:teavm-extras-slf4j:0.6.1")
-
-  // Test
-  testImplementation("org.mockito:mockito-inline:3.0.0")
-  testImplementation("org.mockito:mockito-junit-jupiter:3.0.0")
-  testImplementation(platform("org.junit:junit-bom:5.7.1"))
-  testImplementation("org.junit.jupiter:junit-jupiter")
-}
-
-tasks.test {
-  useJUnitPlatform()
-  testLogging {
-    events("passed", "skipped", "failed")
-  }
-}
-
-tasks.jacocoTestReport {
-  reports {
-    html.isEnabled = true
-    html.destination = file("$buildDir/reports/coverage")
-  }
-}
-
-tasks.jacocoTestCoverageVerification {
-  violationRules {
-    rule {
-      limit {
-        minimum = "0.8".toBigDecimal()
-      }
-    }
-  }
 }

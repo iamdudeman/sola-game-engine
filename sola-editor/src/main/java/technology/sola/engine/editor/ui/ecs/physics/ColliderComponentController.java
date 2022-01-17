@@ -31,7 +31,7 @@ public class ColliderComponentController extends ComponentController<ColliderCom
 
   @Override
   public void initialize() {
-    comboBoxColliderType.valueProperty().addListener(((observable, oldValue, newValue) -> {
+    comboBoxColliderType.valueProperty().addListener((observable, oldValue, newValue) -> {
       if ("AABB".equals(newValue)) {
         labelWidth.setVisible(true);
         labelWidth.setManaged(true);
@@ -49,7 +49,7 @@ public class ColliderComponentController extends ComponentController<ColliderCom
       }
 
       entity.addComponent(createComponentFromFields());
-    }));
+    });
 
     doubleFieldWidth.valueProperty().addListener(observable -> entity.addComponent(createComponentFromFields()));
     doubleFieldHeight.valueProperty().addListener(observable -> entity.addComponent(createComponentFromFields()));
@@ -77,19 +77,20 @@ public class ColliderComponentController extends ComponentController<ColliderCom
 
     if (colliderComponent != null) {
       switch (colliderComponent.getColliderType()) {
-        case AABB:
+        case AABB -> {
           comboBoxColliderType.setValue("AABB");
           var temp = colliderComponent.asRectangle(new TransformComponent());
           doubleFieldWidth.setValue(temp.getWidth());
           doubleFieldHeight.setValue(temp.getHeight());
           doubleFieldRadius.setValue(0.5);
-          break;
-        case CIRCLE:
+        }
+        case CIRCLE -> {
           comboBoxColliderType.setValue("Circle");
           var temp2 = colliderComponent.asCircle(new TransformComponent());
           doubleFieldWidth.setValue(1);
           doubleFieldHeight.setValue(1);
           doubleFieldRadius.setValue(temp2.getRadius());
+        }
       }
     }
   }

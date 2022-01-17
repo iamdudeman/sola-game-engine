@@ -34,8 +34,8 @@ public class NewFontDialog extends Dialog<File> {
     DialogPane dialogPane = null;
     try {
       dialogPane = loader.load();
-    } catch (IOException e) {
-      e.printStackTrace();
+    } catch (IOException ex) {
+      ex.printStackTrace();
     }
 
     initOwner(owner);

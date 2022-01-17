@@ -31,7 +31,7 @@ public class EntityComponents extends VBox {
     componentsContainer.setSpacing(4);
     componentsContainer.setPrefHeight(300);
 
-    entityProperty.addListener(((observable, oldValue, newValue) -> updateEntity(newValue)));
+    entityProperty.addListener((observable, oldValue, newValue) -> updateEntity(newValue));
 
     getChildren().addAll(componentsMenu, new ScrollPane(componentsContainer));
   }
@@ -109,13 +109,13 @@ public class EntityComponents extends VBox {
           }
         });
 
-        entityProperty.addListener(((observable, oldValue, newValue) -> {
+        entityProperty.addListener((observable, oldValue, newValue) -> {
           if (newValue == null) {
             return;
           }
 
           checkMenuItem.setSelected(newValue.getComponent(componentClass) != null);
-        }));
+        });
 
         menu.getItems().add(checkMenuItem);
       }

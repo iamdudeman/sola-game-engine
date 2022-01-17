@@ -20,12 +20,12 @@ public class CircleRendererComponentController extends ComponentController<Circl
 
   @Override
   public void initialize() {
-    colorPicker.valueProperty().addListener(((observable, oldValue, newValue) -> {
+    colorPicker.valueProperty().addListener((observable, oldValue, newValue) -> {
       entity.addComponent(createComponentFromFields());
-    }));
-    checkBoxFill.selectedProperty().addListener(((observable, oldValue, newValue) -> {
+    });
+    checkBoxFill.selectedProperty().addListener((observable, oldValue, newValue) -> {
       entity.addComponent(createComponentFromFields());
-    }));
+    });
   }
 
   @Override

@@ -22,18 +22,18 @@ public class TransformComponentController extends ComponentController<TransformC
 
   @Override
   public void initialize() {
-    doubleFieldX.valueProperty().addListener(((observable, oldValue, newValue) -> {
+    doubleFieldX.valueProperty().addListener((observable, oldValue, newValue) -> {
       entity.addComponent(createComponentFromFields());
-    }));
-    doubleFieldY.valueProperty().addListener(((observable, oldValue, newValue) -> {
+    });
+    doubleFieldY.valueProperty().addListener((observable, oldValue, newValue) -> {
       entity.addComponent(createComponentFromFields());
-    }));
-    doubleFieldScaleX.valueProperty().addListener(((observable, oldValue, newValue) -> {
+    });
+    doubleFieldScaleX.valueProperty().addListener((observable, oldValue, newValue) -> {
       entity.addComponent(createComponentFromFields());
-    }));
-    doubleFieldScaleY.valueProperty().addListener(((observable, oldValue, newValue) -> {
+    });
+    doubleFieldScaleY.valueProperty().addListener((observable, oldValue, newValue) -> {
       entity.addComponent(createComponentFromFields());
-    }));
+    });
   }
 
   @Override
