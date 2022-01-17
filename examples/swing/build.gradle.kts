@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-  api(project(":platform:swing"))
+  api(project(":sola-engine:platform:swing"))
   api(project(":examples:common"))
 }
 
@@ -27,6 +27,8 @@ tasks.withType<Jar>() {
   from({
     configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
   })
+
+  archiveBaseName.set("sola-engine-examples-${project.name}")
 }
 
 tasks.withType<Zip>() {

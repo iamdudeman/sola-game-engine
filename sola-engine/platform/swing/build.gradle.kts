@@ -4,6 +4,10 @@ plugins {
   jacoco
 }
 
+tasks.jar {
+  archiveBaseName.set("sola-engine-${project.name}")
+}
+
 java {
   toolchain {
     languageVersion.set(JavaLanguageVersion.of(16))
@@ -11,7 +15,7 @@ java {
 }
 
 checkstyle {
-  configFile = file("../../checkstyle.xml")
+  configFile = file("../../../checkstyle.xml")
 }
 
 repositories {
@@ -19,12 +23,10 @@ repositories {
 }
 
 dependencies {
-  api(project(":engine"))
-  implementation("org.teavm:teavm-jso-apis:0.6.1")
+  api(project(":sola-engine"))
 
   // Logging
-  api("org.slf4j:slf4j-api:1.7.30")
-  implementation("org.teavm:teavm-extras-slf4j:0.6.1")
+  implementation("org.slf4j:slf4j-log4j12:1.7.30")
 
   // Test
   testImplementation("org.mockito:mockito-inline:3.0.0")
