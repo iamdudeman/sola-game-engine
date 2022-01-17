@@ -39,7 +39,7 @@ public class EntityListView extends ListView<Entity> {
     EntityListCell() {
       super(new EntityNameStringConverter());
 
-      itemProperty().addListener(((observable, oldValue, newValue) -> {
+      itemProperty().addListener((observable, oldValue, newValue) -> {
         if (newValue != null && newValue.isDisabled()) {
           this.setOpacity(0.4f);
         } else if (newValue != null && EditorSola.EDITOR_CAMERA_ENTITY_NAME.equals(newValue.getName())) {
@@ -47,7 +47,7 @@ public class EntityListView extends ListView<Entity> {
           this.setDisable(true);
           this.setOpacity(0);
         }
-      }));
+      });
 
       setupDragEvents();
       setupContextMenu();

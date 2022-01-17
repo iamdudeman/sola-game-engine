@@ -34,7 +34,7 @@ public class DynamicBodyComponentController extends ComponentController<DynamicB
 
   @Override
   public void initialize() {
-    solaEditorContext.projectFilePropertyProperty().addListener(((observable, oldValue, newValue) -> {
+    solaEditorContext.projectFilePropertyProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue != null) {
         materialMap.clear();
         materialMap.put("Default", Material.UNIT_MASS_MATERIAL);
@@ -59,15 +59,15 @@ public class DynamicBodyComponentController extends ComponentController<DynamicB
 
         comboBoxMaterial.setItems(FXCollections.observableList(new ArrayList<>(materialMap.keySet())));
       }
-    }));
+    });
 
-    comboBoxMaterial.valueProperty().addListener(((observable, oldValue, newValue) -> {
+    comboBoxMaterial.valueProperty().addListener((observable, oldValue, newValue) -> {
       entity.addComponent(createComponentFromFields());
-    }));
+    });
 
-    checkBoxKinematic.selectedProperty().addListener(((observable, oldValue, newValue) -> {
+    checkBoxKinematic.selectedProperty().addListener((observable, oldValue, newValue) -> {
       entity.addComponent(createComponentFromFields());
-    }));
+    });
   }
 
   @Override

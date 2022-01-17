@@ -1,24 +1,14 @@
 plugins {
   id("application")
-  id("java-library")
+  id("sola.java-conventions")
 }
 
 application {
   mainClass.set("technology.sola.engine.editor.EditorMain")
 }
 
-repositories {
-  mavenCentral()
-}
-
 dependencies {
   api(project(":sola-engine:platform:javafx"))
-
-  // Test
-  testImplementation("org.mockito:mockito-inline:3.0.0")
-  testImplementation("org.mockito:mockito-junit-jupiter:3.0.0")
-  testImplementation(platform("org.junit:junit-bom:5.7.1"))
-  testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
 tasks.withType<Jar>() {

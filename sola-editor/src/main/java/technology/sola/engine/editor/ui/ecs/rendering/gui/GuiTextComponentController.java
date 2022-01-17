@@ -30,7 +30,7 @@ public class GuiTextComponentController extends ComponentController<GuiTextCompo
     textFieldText.textProperty().addListener(observable -> entity.addComponent(createComponentFromFields()));
     colorPickerColor.valueProperty().addListener(observable -> entity.addComponent(createComponentFromFields()));
 
-    solaEditorContext.projectFilePropertyProperty().addListener(((observable, oldValue, newValue) -> {
+    solaEditorContext.projectFilePropertyProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue != null) {
         comboBoxFont.getItems().clear();
 
@@ -46,7 +46,7 @@ public class GuiTextComponentController extends ComponentController<GuiTextCompo
           }
         }
       }
-    }));
+    });
   }
 
   @Override

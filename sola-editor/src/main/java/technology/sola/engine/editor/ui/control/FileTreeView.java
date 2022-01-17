@@ -52,10 +52,10 @@ public class FileTreeView extends TreeView<FileTreeView.ShortNamedFile> {
     }
 
     private ObservableList<TreeItem<ShortNamedFile>> buildChildren(TreeItem<ShortNamedFile> TreeItem) {
-      File f = TreeItem.getValue().file();
+      File file = TreeItem.getValue().file();
 
-      if (f != null && f.isDirectory()) {
-        File[] files = f.listFiles();
+      if (file != null && file.isDirectory()) {
+        File[] files = file.listFiles();
 
         if (files != null) {
           ObservableList<TreeItem<ShortNamedFile>> children = FXCollections

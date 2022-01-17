@@ -24,7 +24,7 @@ public class SolaEditorContext {
   public SolaEditorContext(Stage primaryStage) {
     this.primaryStage = primaryStage;
 
-    projectFileProperty.addListener(((observable, oldValue, newValue) -> {
+    projectFileProperty.addListener((observable, oldValue, newValue) -> {
       projectFileProperties = new Properties();
 
       try (FileInputStream fileInputStream = new FileInputStream(newValue)) {
@@ -42,9 +42,9 @@ public class SolaEditorContext {
       ));
 
       solaLayersProperty.setValue(projectFileProperties.getProperty("layers", "").split(","));
-    }));
+    });
 
-    solaConfigurationProperty.addListener(((observable, oldValue, newValue) -> {
+    solaConfigurationProperty.addListener((observable, oldValue, newValue) -> {
       projectFileProperties.setProperty("title", newValue.solaTitle());
       projectFileProperties.setProperty("canvasWidth", "" + newValue.canvasWidth());
       projectFileProperties.setProperty("canvasHeight", "" + newValue.canvasHeight());
@@ -56,9 +56,9 @@ public class SolaEditorContext {
       } catch (IOException ex) {
         ex.printStackTrace();
       }
-    }));
+    });
 
-    solaLayersProperty.addListener(((observable, oldValue, newValue) -> {
+    solaLayersProperty.addListener((observable, oldValue, newValue) -> {
       projectFileProperties.setProperty("layers", String.join(",", solaLayersProperty.getValue()));
 
       try (FileOutputStream fileOutputStream = new FileOutputStream(projectFileProperty.getValue())) {
@@ -66,7 +66,7 @@ public class SolaEditorContext {
       } catch (IOException ex) {
         ex.printStackTrace();
       }
-    }));
+    });
 
     configuration = new EditorConfiguration(this);
   }

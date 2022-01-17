@@ -23,12 +23,12 @@ public class GuiPanelComponentController extends ComponentController<GuiPanelCom
 
   @Override
   public void initialize() {
-    colorPickerBackground.valueProperty().addListener(((observable, oldValue, newValue) -> {
+    colorPickerBackground.valueProperty().addListener((observable, oldValue, newValue) -> {
       entity.addComponent(createComponentFromFields());
-    }));
-    colorPickerBorder.valueProperty().addListener(((observable, oldValue, newValue) -> {
+    });
+    colorPickerBorder.valueProperty().addListener((observable, oldValue, newValue) -> {
       entity.addComponent(createComponentFromFields());
-    }));
+    });
     buttonClearBorder.setOnAction(event -> {
       colorPickerBorder.setValue(null);
     });

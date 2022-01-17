@@ -19,9 +19,9 @@ public class SolaEditorEntityComponentMenus {
   }
 
   public static class SolaEditorMenuItem {
+    protected boolean isMenu = false;
     private ComponentController<?> item;
     private final String title;
-    protected boolean isMenu = false;
 
     private SolaEditorMenuItem(String title) {
       this.title = title;
