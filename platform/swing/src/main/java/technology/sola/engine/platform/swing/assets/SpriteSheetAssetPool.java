@@ -40,10 +40,10 @@ public class SpriteSheetAssetPool extends AssetPool<SpriteSheet> {
 
         spriteSheet.addSpriteDefinition(
           spriteJson.getString("id"),
-          spriteJson.get("x").asInt(),
-          spriteJson.get("y").asInt(),
-          spriteJson.get("w").asInt(),
-          spriteJson.get("h").asInt()
+          spriteJson.getInt("x"),
+          spriteJson.getInt("y"),
+          spriteJson.getInt("w"),
+          spriteJson.getInt("h")
         );
       });
 
