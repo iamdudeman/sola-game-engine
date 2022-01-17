@@ -1,5 +1,7 @@
 package technology.sola.engine.tools.font;
 
+import technology.sola.engine.tools.font.model.FontGlyphModel;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;

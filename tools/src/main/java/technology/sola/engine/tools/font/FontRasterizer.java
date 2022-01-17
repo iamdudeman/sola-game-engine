@@ -1,6 +1,9 @@
 package technology.sola.engine.tools.font;
 
 import com.google.gson.Gson;
+import technology.sola.engine.tools.font.model.FontGlyphModel;
+import technology.sola.engine.tools.font.model.FontModel;
+import technology.sola.engine.tools.font.model.FontStyle;
 
 import javax.imageio.ImageIO;
 import java.awt.geom.Rectangle2D;
@@ -53,7 +56,11 @@ public class FontRasterizer {
   private FontModel prepareFontModel(FontInformation fontInformation, FontCanvas fontCanvas) {
     List<FontGlyphModel> fontGlyphModelsWithPositions = fontCanvas.drawFontGlyphs(characters);
 
-    return new FontModel(fontInformation, fontGlyphModelsWithPositions);
+    return new FontModel(
+      fontInformation.getFontFileName(), fontInformation.getFontName(),
+      fontInformation.getFontStyle(), fontInformation.getFontSize(),
+      fontInformation.getLeading(), fontGlyphModelsWithPositions
+    );
   }
 
   private byte[] serializeFontModel(FontModel fontModel) {

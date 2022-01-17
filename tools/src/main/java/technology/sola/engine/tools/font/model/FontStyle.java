@@ -1,8 +1,8 @@
-package technology.sola.engine.tools.font;
+package technology.sola.engine.tools.font.model;
 
 import java.awt.*;
 
-enum FontStyle {
+public enum FontStyle {
   NORMAL(Font.PLAIN),
   BOLD(Font.BOLD),
   ITALIC(Font.ITALIC),

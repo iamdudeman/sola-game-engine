@@ -1,5 +1,8 @@
 package technology.sola.engine.tools.font;
 
+import technology.sola.engine.tools.font.model.FontGlyphModel;
+import technology.sola.engine.tools.font.model.FontStyle;
+
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
