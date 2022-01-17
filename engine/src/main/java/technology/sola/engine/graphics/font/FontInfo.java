@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.font;
 
+import technology.sola.json.JsonArray;
 import technology.sola.json.JsonMapper;
 import technology.sola.json.JsonObject;
 
@@ -13,7 +14,17 @@ public record FontInfo(
   public static final JsonMapper<FontInfo> JSON_MAPPER = new JsonMapper<>() {
     @Override
     public JsonObject toJson(FontInfo fontInfo) {
-      throw new UnsupportedOperationException();
+      JsonArray glyphs = FontGlyph.JSON_MAPPER.toJson(fontInfo.glyphs);
+      JsonObject jsonObject = new JsonObject();
+
+      jsonObject.put("fontGlyphFile", fontInfo.fontGlyphFile);
+      jsonObject.put("fontName", fontInfo.fontName);
+      jsonObject.put("fontStyle", fontInfo.fontStyle.name());
+      jsonObject.put("fontSize", fontInfo.fontSize);
+      jsonObject.put("leading", fontInfo.leading);
+      jsonObject.put("glyphs", glyphs);
+
+      return jsonObject;
     }
 
     @Override

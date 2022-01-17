@@ -11,7 +11,7 @@ import javafx.stage.Modality;
 import javafx.stage.Window;
 import technology.sola.engine.editor.core.FolderUtils;
 import technology.sola.engine.editor.core.SolaEditorContext;
-import technology.sola.engine.tools.font.FontRasterizer;
+import technology.sola.engine.editor.tools.font.FontRasterizer;
 
 import java.io.File;
 import java.io.IOException;

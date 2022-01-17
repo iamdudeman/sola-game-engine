@@ -20,7 +20,7 @@ repositories {
 
 dependencies {
   // TODO get from maven when it is published there
-  api(files("libs/sola-json-1.0.1.jar"))
+  api(files("libs/sola-json-1.0.2.jar"))
 
   // Logging
   implementation("org.slf4j:slf4j-log4j12:1.7.30")
