@@ -31,14 +31,14 @@ public class FontRasterizer {
     var fontInformation = new FontInformation(fontName, FontStyle.valueOf(fontStyle), fontSize);
 
     try (var fontCanvas = prepareFontCanvas(fontInformation)) {
-      var fontModel = prepareFontModel(fontInformation, fontCanvas);
+      var fontInfo = prepareFontInfo(fontInformation, fontCanvas);
 
       File fontImageFile = new File(parentDirectory, fontInformation.getFontFileName());
       File fontInfoFile = new File(parentDirectory, fontInformation.getFontInfoFileName());
 
       try {
         ImageIO.write(fontCanvas.getBufferedImage(), "png", fontImageFile);
-        Files.write(fontInfoFile.toPath(), serializeFontModel(fontModel));
+        Files.write(fontInfoFile.toPath(), serializeFontInfo(fontInfo));
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -53,17 +53,17 @@ public class FontRasterizer {
     return new FontCanvas(fontInformation, imageWidth, imageHeight);
   }
 
-  private FontInfo prepareFontModel(FontInformation fontInformation, FontCanvas fontCanvas) {
-    List<FontGlyph> fontGlyphModelsWithPositions = fontCanvas.drawFontGlyphs(characters);
+  private FontInfo prepareFontInfo(FontInformation fontInformation, FontCanvas fontCanvas) {
+    List<FontGlyph> fontGlyphsWithPositions = fontCanvas.drawFontGlyphs(characters);
 
     return new FontInfo(
       fontInformation.getFontFileName(), fontInformation.getFontName(),
       FontStyle.valueOf(fontInformation.getFontStyle()), fontInformation.getFontSize(),
-      fontInformation.getLeading(), fontGlyphModelsWithPositions
+      fontInformation.getLeading(), fontGlyphsWithPositions
     );
   }
 
-  private byte[] serializeFontModel(FontInfo fontModel) {
-    return new SolaJson().serialize(fontModel, FontInfo.JSON_MAPPER).getBytes(StandardCharsets.UTF_8);
+  private byte[] serializeFontInfo(FontInfo fontInfo) {
+    return new SolaJson().serialize(fontInfo, FontInfo.JSON_MAPPER).getBytes(StandardCharsets.UTF_8);
   }
 }

@@ -40,18 +40,17 @@ class FontInformation {
   }
 
   public java.util.List<FontGlyph> getFontGlyphs(String characters) {
-    List<FontGlyph> fontGlyphModelList = new ArrayList<>(characters.length());
+    List<FontGlyph> fontGlyphList = new ArrayList<>(characters.length());
 
-    for (String character : characters.split("")) {
-      Rectangle2D characterBounds = getStringBounds(character);
+    for (char character : characters.toCharArray()) {
+      Rectangle2D characterBounds = getStringBounds("" + character);
       int width = (int) characterBounds.getWidth();
       int height = (int) characterBounds.getHeight();
 
-      // todo maybe don't use char at 0
-      fontGlyphModelList.add(new FontGlyph(character.charAt(0), -1, -1, width, height));
+      fontGlyphList.add(new FontGlyph(character, -1, -1, width, height));
     }
 
-    return fontGlyphModelList;
+    return fontGlyphList;
   }
 
   public String getFontName() {
