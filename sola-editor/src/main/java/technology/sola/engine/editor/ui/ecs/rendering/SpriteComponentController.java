@@ -35,7 +35,6 @@ public class SpriteComponentController extends ComponentController<SpriteCompone
 
       labelSpriteId.setDisable(false);
 
-//      entity.addComponent(createComponentFromFields());
       File file = new File(folderUtils.getOrCreateFolder("assets/sprites/"), newValue);
       try {
         String jsonFile = Files.readString(file.toPath());

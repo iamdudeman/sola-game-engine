@@ -3,7 +3,6 @@
 # TODO List
 * Engine GUI Editor (Sola Editor)
   * Add more component controllers
-    * Sprite
     * SpriteAnimator
   * editor camera improvements
     * add new entities to center of editor camera
@@ -12,6 +11,8 @@
     * option to copy camera's transform for editor preview of it?
   * Way to view all Systems and Components available
   * Way to view various EventListeners?
+  * Add sprite sheets by image ui
+    * Ability to update them later to add new sprite ids
   * build for platform
     * JavaFx
       * maybe include JRE
