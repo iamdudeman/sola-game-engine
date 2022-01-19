@@ -13,6 +13,8 @@
   * Way to view various EventListeners?
   * Add sprite sheets by image ui
     * Ability to update them later to add new sprite ids
+  * maybe show collider outline when collider component is active in editor?
+    * if not this a toggle to view all collider outlines
   * build for platform
     * JavaFx
       * maybe include JRE
