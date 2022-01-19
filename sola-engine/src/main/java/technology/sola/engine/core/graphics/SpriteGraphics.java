@@ -29,6 +29,10 @@ class SpriteGraphics {
     TransformComponent transformComponent = GraphicsUtils.getTransformForAppliedCamera(entity.getComponent(TransformComponent.class), cameraTransform);
     SpriteComponent spriteComponent = entity.getComponent(SpriteComponent.class);
 
+    if (spriteComponent.getSpriteId() == null) {
+      return;
+    }
+
     SolaImage sprite = spriteComponent.getSprite(spriteSheetAssetPool);
 
     if (transformComponent.getScaleX() != 1 || transformComponent.getScaleY() != 1) {

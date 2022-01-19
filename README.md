@@ -14,7 +14,9 @@
   * Way to view various EventListeners?
   * build for platform
     * JavaFx
+      * maybe include JRE
     * Swing
+      * maybe include JRE
     * Browser
   * Create child + parent relationships for the entities?
   * load additional components, systems and engine ui from external JAR
@@ -31,9 +33,6 @@
   * Implement Font loading
   * Implement SpriteSheet loading
   * Implement window resizing using Viewport
-* Tools
-  * Export from Engine UI to installer of some sort
-    * Include JRE and assets
 * Audio
   * Interface for type
   * Implement loader per platform (Swing and JavaFX can probably share though)
