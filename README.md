@@ -11,6 +11,7 @@
     * option to copy camera's transform for editor preview of it?
   * Way to view all Systems and Components available
   * Way to view various EventListeners?
+  * Allow Material assets to be updated
   * Add sprite sheets by image ui
     * Ability to update them later to add new sprite ids
   * maybe show collider outline when collider component is active in editor?
