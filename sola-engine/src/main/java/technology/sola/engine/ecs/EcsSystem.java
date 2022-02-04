@@ -6,8 +6,8 @@ public abstract class EcsSystem {
   /**
    * Called to update the state of {@link Component}s attached to an {@link Entity}.
    * <p>
-   * Typically they will call {@link World#getEntitiesWithComponents(Class[])} to get {@code Entity} instances that have
-   * a particular {@code Component} set.
+   * Implementations will usually create a view via {@link World#getView()} to get {@code Entity} instances that have
+   * a particular {@code Component} set to work on.
    *
    * @param world  the {@code World}
    * @param deltaTime  the delta time between the last frame and the current frame

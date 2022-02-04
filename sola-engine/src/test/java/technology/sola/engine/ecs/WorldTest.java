@@ -18,7 +18,7 @@ class WorldTest {
     World world = new World(2);
     int maxEntityCount = world.getMaxEntityCount();
 
-    assertThrows(ECSException.class, () -> {
+    assertThrows(EcsException.class, () -> {
       for (int i = 0; i < maxEntityCount + 1; i++) {
         world.createEntity();
       }
@@ -46,7 +46,7 @@ class WorldTest {
     void whenEntityWithIdNotCreated_shouldThrowException() {
       World world = new World(2);
 
-      assertThrows(ECSException.class, () -> world.getEntityById(0));
+      assertThrows(EcsException.class, () -> world.getEntityById(0));
     }
 
     @Test

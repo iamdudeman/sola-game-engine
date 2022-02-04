@@ -1,9 +1,12 @@
 package technology.sola.engine.ecs;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class World implements Serializable {
+  @Serial
   private static final long serialVersionUID = -4446723129672527365L;
   private final int maxEntityCount;
   private final Entity[] entities;
@@ -11,6 +14,7 @@ public class World implements Serializable {
   private int currentEntityIndex = 0;
   private int totalEntityCount = 0;
   private final List<Entity> entitiesToDestroy = new LinkedList<>();
+  private final EcsViewFactory ecsViewFactory;
 
   /**
    * Creates a new World instance with specified max {@link Entity} count.
@@ -24,6 +28,7 @@ public class World implements Serializable {
 
     this.maxEntityCount = maxEntityCount;
     entities = new Entity[maxEntityCount];
+    ecsViewFactory = new EcsViewFactory(entities);
   }
 
   /**
@@ -83,7 +88,7 @@ public class World implements Serializable {
   public Entity getEntityById(int id) {
     Entity entity = entities[id];
 
-    if (entity == null) throw new ECSException("Entity with id [" + id + "] does not exist");
+    if (entity == null) throw new EcsException("Entity with id [" + id + "] does not exist");
 
     return entity;
   }
@@ -112,15 +117,20 @@ public class World implements Serializable {
    * @return a {@code List} of all {@code Entity}
    */
   public List<Entity> getEntities() {
-    List<Entity> entityList = new ArrayList<>(entities.length);
+    return Arrays.stream(entities)
+      .filter(Objects::nonNull)
+      .collect(Collectors.toList());
+  }
 
-    for (Entity entity : entities) {
-      if (entity == null) continue;
-
-      entityList.add(entity);
-    }
-
-    return entityList;
+  /**
+   * Gets a {@link List} of all {@link Entity} in the world that are not disabled.
+   *
+   * @return a {@code List} of all enabled {@code Entity}
+   */
+  public List<Entity> getAllEnabledEntities() {
+    return Arrays.stream(entities)
+      .filter(entity -> entity != null && !entity.isDisabled())
+      .collect(Collectors.toList());
   }
 
   /**
@@ -152,6 +162,10 @@ public class World implements Serializable {
     }
 
     return entitiesWithAllComponents;
+  }
+
+  public EcsViewFactory getView() {
+    return ecsViewFactory;
   }
 
   void addComponentForEntity(int entityIndex, Component<?> component) {
@@ -193,7 +207,7 @@ public class World implements Serializable {
       currentEntityIndex = (currentEntityIndex + 1) % maxEntityCount;
       totalEntityCounter++;
       if (totalEntityCounter > maxEntityCount) {
-        throw new ECSException("Entity array is filled. No more entities can be created!");
+        throw new EcsException("Entity array is filled. No more entities can be created!");
       }
     }
 

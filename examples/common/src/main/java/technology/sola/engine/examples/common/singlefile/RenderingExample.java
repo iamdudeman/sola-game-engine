@@ -82,9 +82,9 @@ public class RenderingExample extends Sola {
   private class TestSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
-      world.getEntitiesWithComponents(TransformComponent.class, MovingComponent.class)
-        .forEach(entity -> {
-          TransformComponent transform = entity.getComponent(TransformComponent.class);
+      world.getView().of(TransformComponent.class, MovingComponent.class)
+        .forEach(view -> {
+          TransformComponent transform = view.getC1();
 
           transform.setX(transform.getX() + 1);
           transform.setY(transform.getY() + 1);
