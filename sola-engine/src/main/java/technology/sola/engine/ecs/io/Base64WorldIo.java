@@ -9,7 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Base64;
 
-public class Base64WorldSerializer implements WorldSerializer {
+public class Base64WorldIo implements WorldIo {
   @Override
   public String stringify(World world) {
     try (

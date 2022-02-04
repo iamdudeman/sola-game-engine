@@ -3,8 +3,8 @@ package technology.sola.engine.core;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import technology.sola.engine.assets.AssetPoolProvider;
-import technology.sola.engine.ecs.io.Base64WorldSerializer;
-import technology.sola.engine.ecs.io.WorldSerializer;
+import technology.sola.engine.ecs.io.Base64WorldIo;
+import technology.sola.engine.ecs.io.WorldIo;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.event.gameloop.GameLoopEventListener;
@@ -22,7 +22,7 @@ public abstract class SolaPlatform {
   protected GameLoop gameLoop;
   protected Viewport viewport;
   protected EventHub solaEventHub;
-  protected WorldSerializer worldSerializer;
+  protected WorldIo worldIo;
 
   public void play(Sola sola) {
     LOGGER.info("Using platform [{}]", this.getClass().getName());
@@ -42,8 +42,8 @@ public abstract class SolaPlatform {
     return viewport;
   }
 
-  public WorldSerializer getWorldSerializer() {
-    return worldSerializer;
+  public WorldIo getWorldSerializer() {
+    return worldIo;
   }
 
   public abstract void onKeyPressed(Consumer<KeyEvent> keyEventConsumer);
@@ -83,12 +83,12 @@ public abstract class SolaPlatform {
     return FixedUpdateGameLoop::new;
   }
 
-  protected WorldSerializer buildWorldSerializer() {
-    return new Base64WorldSerializer();
+  protected WorldIo buildWorldSerializer() {
+    return new Base64WorldIo();
   }
 
   private void initComplete(Sola sola, SolaConfiguration solaConfiguration) {
-    this.worldSerializer = buildWorldSerializer();
+    this.worldIo = buildWorldSerializer();
     this.renderer = buildRenderer(solaConfiguration);
     this.gameLoop = buildGameLoop().create(
       deltaTime -> update(sola, deltaTime), () -> render(renderer, sola),
