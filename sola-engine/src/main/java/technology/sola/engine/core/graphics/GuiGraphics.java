@@ -2,7 +2,7 @@ package technology.sola.engine.core.graphics;
 
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.EcsSystemContainer;
+import technology.sola.engine.ecs.SolaEcs;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.Renderer;
@@ -12,9 +12,9 @@ import technology.sola.engine.graphics.gui.components.GuiPanelComponent;
 import technology.sola.engine.graphics.gui.components.GuiTextComponent;
 
 class GuiGraphics {
-  static void render(Renderer renderer, EcsSystemContainer ecsSystemContainer, AssetPool<Font> fontAssetPool) {
+  static void render(Renderer renderer, SolaEcs solaEcs, AssetPool<Font> fontAssetPool) {
     // Gui panels
-    ecsSystemContainer.getWorld().getEntitiesWithComponents(TransformComponent.class, GuiPanelComponent.class)
+    solaEcs.getWorld().getEntitiesWithComponents(TransformComponent.class, GuiPanelComponent.class)
       .forEach(entity -> {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
 
@@ -26,7 +26,7 @@ class GuiGraphics {
       });
 
     // Gui text
-    ecsSystemContainer.getWorld().getEntitiesWithComponents(TransformComponent.class, GuiTextComponent.class)
+    solaEcs.getWorld().getEntitiesWithComponents(TransformComponent.class, GuiTextComponent.class)
       .forEach(entity -> {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
 

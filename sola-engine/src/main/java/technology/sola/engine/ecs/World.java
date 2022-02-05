@@ -1,5 +1,7 @@
 package technology.sola.engine.ecs;
 
+import technology.sola.engine.ecs.view.EcsViewFactory;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
@@ -127,7 +129,7 @@ public class World implements Serializable {
    *
    * @return a {@code List} of all enabled {@code Entity}
    */
-  public List<Entity> getAllEnabledEntities() {
+  public List<Entity> getEnabledEntities() {
     return Arrays.stream(entities)
       .filter(entity -> entity != null && !entity.isDisabled())
       .collect(Collectors.toList());

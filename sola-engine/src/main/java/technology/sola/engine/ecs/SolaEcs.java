@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class EcsSystemContainer {
+public class SolaEcs {
   private final List<EcsSystem> ecsSystems = new ArrayList<>();
   private World world = new World(1);
 
@@ -16,13 +16,13 @@ public class EcsSystemContainer {
     this.world = world;
   }
 
-  public void add(EcsSystem...ecsSystems) {
+  public void addSystems(EcsSystem...ecsSystems) {
     for (EcsSystem ecsSystem : ecsSystems) {
-      add(ecsSystem);
+      addSystem(ecsSystem);
     }
   }
 
-  public void add(EcsSystem ecsSystem) {
+  public void addSystem(EcsSystem ecsSystem) {
     int insertIndex = 0;
 
     for (EcsSystem orderedUpdateSystem : ecsSystems) {
@@ -35,7 +35,7 @@ public class EcsSystemContainer {
     ecsSystems.add(insertIndex, ecsSystem);
   }
 
-  public <T extends EcsSystem> T get(Class<T> updateSystemClass) {
+  public <T extends EcsSystem> T getSystem(Class<T> updateSystemClass) {
     return ecsSystems.stream()
       .filter(updateSystemClass::isInstance)
       .map(updateSystemClass::cast)
@@ -43,13 +43,17 @@ public class EcsSystemContainer {
       .orElse(null);
   }
 
-  public Iterator<EcsSystem> activeSystemsIterator() {
+  public Iterator<EcsSystem> systemIterator() {
+    return ecsSystems.iterator();
+  }
+
+  public Iterator<EcsSystem> activeSystemIterator() {
     return ecsSystems.stream()
       .filter(EcsSystem::isActive)
       .iterator();
   }
 
-  public void update(float deltaTime) {
+  public void updateWorld(float deltaTime) {
     ecsSystems.stream()
       .filter(EcsSystem::isActive)
       .iterator()

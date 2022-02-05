@@ -8,12 +8,12 @@ import org.mockito.Mockito;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-class EcsSystemContainerTest {
-  private EcsSystemContainer ecsService;
+class SolaEcsTest {
+  private SolaEcs ecsService;
 
   @BeforeEach
   void setup() {
-    ecsService = new EcsSystemContainer();
+    ecsService = new SolaEcs();
   }
 
   @Test
@@ -27,16 +27,16 @@ class EcsSystemContainerTest {
 
   @Test
   void whenGettingSystemsThatDoNoExist_shouldReturnNull() {
-    assertNull(ecsService.get(TestUpdateEcsSystem.class));
+    assertNull(ecsService.getSystem(TestUpdateEcsSystem.class));
   }
 
   @Test
   void whenGettingRegisteredSystems_shouldReturn() {
     TestUpdateEcsSystem testUpdateSystem = new TestUpdateEcsSystem();
 
-    ecsService.add(testUpdateSystem);
+    ecsService.addSystem(testUpdateSystem);
 
-    assertEquals(testUpdateSystem, ecsService.get(TestUpdateEcsSystem.class));
+    assertEquals(testUpdateSystem, ecsService.getSystem(TestUpdateEcsSystem.class));
   }
 
   @Test
@@ -52,13 +52,13 @@ class EcsSystemContainerTest {
     Mockito.when(mockThirdUpdateSystem.getOrder()).thenReturn(2);
     Mockito.when(mockThirdUpdateSystem.isActive()).thenReturn(false);
 
-    ecsService.add(mockSecondUpdateSystem);
-    ecsService.add(mockFirstUpdateSystem);
-    ecsService.add(mockThirdUpdateSystem);
+    ecsService.addSystem(mockSecondUpdateSystem);
+    ecsService.addSystem(mockFirstUpdateSystem);
+    ecsService.addSystem(mockThirdUpdateSystem);
 
     World mockWorld = Mockito.mock(World.class);
     ecsService.setWorld(mockWorld);
-    ecsService.update(0.16f);
+    ecsService.updateWorld(0.16f);
 
     InOrder inOrder = Mockito.inOrder(mockFirstUpdateSystem, mockSecondUpdateSystem);
     inOrder.verify(mockFirstUpdateSystem).update(mockWorld, 0.16f);

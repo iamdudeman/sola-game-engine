@@ -1,10 +1,7 @@
-package technology.sola.engine.ecs;
+package technology.sola.engine.ecs.view;
 
-import technology.sola.engine.ecs.view.EcsView1;
-import technology.sola.engine.ecs.view.EcsView2;
-import technology.sola.engine.ecs.view.EcsView3;
-import technology.sola.engine.ecs.view.EcsView4;
-import technology.sola.engine.ecs.view.EcsView5;
+import technology.sola.engine.ecs.Component;
+import technology.sola.engine.ecs.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +9,7 @@ import java.util.List;
 public class EcsViewFactory {
   private final Entity[] entities;
 
-  EcsViewFactory(Entity[] entities) {
+  public EcsViewFactory(Entity[] entities) {
     this.entities = entities;
   }
 

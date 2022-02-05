@@ -2,7 +2,7 @@ package technology.sola.engine.core.graphics;
 
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.EcsSystemContainer;
+import technology.sola.engine.ecs.SolaEcs;
 import technology.sola.engine.ecs.Entity;
 import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Renderer;
@@ -12,8 +12,8 @@ import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.sprite.SpriteSheet;
 
 class SpriteGraphics {
-  static void render(Renderer renderer, EcsSystemContainer ecsSystemContainer, TransformComponent cameraTransform, AssetPool<SpriteSheet> spriteSheetAssetPool) {
-    ecsSystemContainer.getWorld().getEntitiesWithComponents(TransformComponent.class, SpriteComponent.class)
+  static void render(Renderer renderer, SolaEcs solaEcs, TransformComponent cameraTransform, AssetPool<SpriteSheet> spriteSheetAssetPool) {
+    solaEcs.getWorld().getEntitiesWithComponents(TransformComponent.class, SpriteComponent.class)
       .forEach(entity -> {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
 

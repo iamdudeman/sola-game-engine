@@ -35,15 +35,15 @@ public class RenderingExample extends Sola {
 
   @Override
   protected void onInit() {
-    solaGraphics = SolaGraphics.use(ecsSystemContainer, platform.getRenderer(), assetPoolProvider);
+    solaGraphics = SolaGraphics.use(solaEcs, platform.getRenderer(), assetPoolProvider);
 
     assetPoolProvider.getAssetPool(SpriteSheet.class)
       .addAssetId("test", "assets/test_tiles_spritesheet.json");
     assetPoolProvider.getAssetPool(Font.class)
       .addAssetId("default", "assets/monospaced_NORMAL_18.json");
 
-    ecsSystemContainer.add(new TestSystem());
-    ecsSystemContainer.setWorld(createWorld());
+    solaEcs.addSystem(new TestSystem());
+    solaEcs.setWorld(createWorld());
 
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
   }

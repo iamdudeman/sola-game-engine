@@ -34,12 +34,12 @@ public class StressTestExample extends Sola {
 
   @Override
   protected void onInit() {
-    SolaPhysics.use(eventHub, ecsSystemContainer);
-    solaGraphics = SolaGraphics.use(ecsSystemContainer, platform.getRenderer(), assetPoolProvider);
+    SolaPhysics.use(eventHub, solaEcs);
+    solaGraphics = SolaGraphics.use(solaEcs, platform.getRenderer(), assetPoolProvider);
 
     solaGraphics.setRenderDebug(true);
 
-    ecsSystemContainer.setWorld(buildWorld());
+    solaEcs.setWorld(buildWorld());
   }
 
   @Override

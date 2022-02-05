@@ -30,11 +30,11 @@ public class SimplePlatformerExample extends Sola {
 
   @Override
   protected void onInit() {
-    SolaPhysics.use(eventHub, ecsSystemContainer);
-    solaGraphics = SolaGraphics.use(ecsSystemContainer, platform.getRenderer(), assetPoolProvider);
+    SolaPhysics.use(eventHub, solaEcs);
+    solaGraphics = SolaGraphics.use(solaEcs, platform.getRenderer(), assetPoolProvider);
 
-    ecsSystemContainer.add(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem());
-    ecsSystemContainer.setWorld(buildWorld());
+    solaEcs.addSystems(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem());
+    solaEcs.setWorld(buildWorld());
 
     solaGraphics.setRenderDebug(true);
   }

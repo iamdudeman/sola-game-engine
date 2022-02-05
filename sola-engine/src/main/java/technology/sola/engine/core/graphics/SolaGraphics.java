@@ -3,7 +3,7 @@ package technology.sola.engine.core.graphics;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.EcsSystemContainer;
+import technology.sola.engine.ecs.SolaEcs;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.font.Font;
@@ -17,20 +17,20 @@ import java.util.stream.Collectors;
 
 public class SolaGraphics {
   private static final TransformComponent DEFAULT_CAMERA_TRANSFORM = new TransformComponent();
-  private final EcsSystemContainer ecsSystemContainer;
+  private final SolaEcs solaEcs;
   private final Renderer renderer;
   private final AssetPool<SpriteSheet> spriteSheetAssetPool;
   private final AssetPool<Font> fontAssetPool;
   private boolean isRenderDebug = false;
   private final SpriteAnimatorSystem spriteAnimatorSystem;
 
-  public static SolaGraphics use(EcsSystemContainer ecsSystemContainer, Renderer renderer, AssetPoolProvider assetPoolProvider) {
+  public static SolaGraphics use(SolaEcs solaEcs, Renderer renderer, AssetPoolProvider assetPoolProvider) {
     SolaGraphics solaGraphics = new SolaGraphics(
-      ecsSystemContainer, renderer,
+            solaEcs, renderer,
       assetPoolProvider.getAssetPool(SpriteSheet.class), assetPoolProvider.getAssetPool(Font.class)
     );
 
-    ecsSystemContainer.add(solaGraphics.spriteAnimatorSystem);
+    solaEcs.addSystem(solaGraphics.spriteAnimatorSystem);
 
     return solaGraphics;
   }
@@ -48,20 +48,20 @@ public class SolaGraphics {
   public void render() {
     TransformComponent cameraTransform = getCameraTransform();
 
-    GeometryGraphics.render(renderer, ecsSystemContainer, cameraTransform);
+    GeometryGraphics.render(renderer, solaEcs, cameraTransform);
 
-    SpriteGraphics.render(renderer, ecsSystemContainer, cameraTransform, spriteSheetAssetPool);
+    SpriteGraphics.render(renderer, solaEcs, cameraTransform, spriteSheetAssetPool);
 
-    GuiGraphics.render(renderer, ecsSystemContainer, fontAssetPool);
+    GuiGraphics.render(renderer, solaEcs, fontAssetPool);
 
     // TODO need to render this to back most layer at some point probably
     if (isRenderDebug) {
-      DebugGraphics.render(renderer, ecsSystemContainer, cameraTransform);
+      DebugGraphics.render(renderer, solaEcs, cameraTransform);
     }
   }
 
   public TransformComponent getCameraTransform() {
-    var cameraEntities = ecsSystemContainer.getWorld()
+    var cameraEntities = solaEcs.getWorld()
       .getEntitiesWithComponents(TransformComponent.class, CameraComponent.class)
       .stream()
       .sorted(Comparator.comparingInt(entity -> entity.getComponent(CameraComponent.class).getPriority()))
@@ -80,9 +80,9 @@ public class SolaGraphics {
     isRenderDebug = renderDebug;
   }
 
-  private SolaGraphics(EcsSystemContainer ecsSystemContainer, Renderer renderer,
+  private SolaGraphics(SolaEcs solaEcs, Renderer renderer,
                        AssetPool<SpriteSheet> spriteSheetAssetPool, AssetPool<Font> fontAssetPool) {
-    this.ecsSystemContainer = ecsSystemContainer;
+    this.solaEcs = solaEcs;
     this.renderer = renderer;
     this.spriteSheetAssetPool = spriteSheetAssetPool;
     this.fontAssetPool = fontAssetPool;

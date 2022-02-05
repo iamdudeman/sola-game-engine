@@ -25,11 +25,11 @@ public class MouseAndCameraExample extends Sola {
 
   @Override
   protected void onInit() {
-    solaGraphics = SolaGraphics.use(ecsSystemContainer, platform.getRenderer(), assetPoolProvider);
+    solaGraphics = SolaGraphics.use(solaEcs, platform.getRenderer(), assetPoolProvider);
 
     clickCreateEntitySystem = new ClickCreateEntitySystem();
-    ecsSystemContainer.add(clickCreateEntitySystem);
-    ecsSystemContainer.setWorld(createWorld());
+    solaEcs.addSystem(clickCreateEntitySystem);
+    solaEcs.setWorld(createWorld());
   }
 
   @Override
