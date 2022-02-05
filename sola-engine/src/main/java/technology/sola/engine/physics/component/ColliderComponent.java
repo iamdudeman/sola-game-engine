@@ -1,7 +1,7 @@
 package technology.sola.engine.physics.component;
 
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.Component;
+import technology.sola.ecs.Component;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
@@ -95,7 +95,7 @@ public class ColliderComponent implements Component<ColliderComponent> {
   /**
    * Calculates the {@link Circle} representation of this collider based on the position.
    *
-   * @param transformComponent  the transform of the {@link technology.sola.engine.ecs.Entity}
+   * @param transformComponent  the transform of the {@link technology.sola.ecs.Entity}
    * @return the {@code Circle} representation of this collider
    */
   public Circle asCircle(TransformComponent transformComponent) {
@@ -112,7 +112,7 @@ public class ColliderComponent implements Component<ColliderComponent> {
   /**
    * Calculates the {@link Rectangle} representation of this collider based on the position.
    *
-   * @param transformComponent  the transform of the {@link technology.sola.engine.ecs.Entity}
+   * @param transformComponent  the transform of the {@link technology.sola.ecs.Entity}
    * @return the {@code Rectangle} representation of  this collider
    */
   public Rectangle asRectangle(TransformComponent transformComponent) {

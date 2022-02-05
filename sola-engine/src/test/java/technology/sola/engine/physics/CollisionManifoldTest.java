@@ -2,7 +2,7 @@ package technology.sola.engine.physics;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import technology.sola.engine.ecs.Entity;
+import technology.sola.ecs.Entity;
 import technology.sola.math.linear.Vector2D;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -3,7 +3,7 @@ package technology.sola.engine.core.graphics;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.SolaEcs;
+import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.font.Font;

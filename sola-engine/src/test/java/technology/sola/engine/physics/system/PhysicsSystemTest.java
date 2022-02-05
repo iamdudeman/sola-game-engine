@@ -3,7 +3,7 @@ package technology.sola.engine.physics.system;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.World;
+import technology.sola.ecs.World;
 import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.math.linear.Vector2D;

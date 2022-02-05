@@ -2,8 +2,8 @@ package technology.sola.engine.editor.ui.ecs;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import technology.sola.engine.ecs.Component;
-import technology.sola.engine.ecs.Entity;
+import technology.sola.ecs.Component;
+import technology.sola.ecs.Entity;
 import technology.sola.engine.editor.core.SolaEditorContext;
 
 import java.io.IOException;
