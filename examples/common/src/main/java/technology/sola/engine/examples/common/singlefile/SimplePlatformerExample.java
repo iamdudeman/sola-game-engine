@@ -3,9 +3,9 @@ package technology.sola.engine.examples.common.singlefile;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.EcsSystem;
-import technology.sola.engine.ecs.Component;
-import technology.sola.engine.ecs.World;
+import technology.sola.ecs.EcsSystem;
+import technology.sola.ecs.Component;
+import technology.sola.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.core.graphics.SolaGraphics;
@@ -30,11 +30,11 @@ public class SimplePlatformerExample extends Sola {
 
   @Override
   protected void onInit() {
-    SolaPhysics.use(eventHub, ecsSystemContainer);
-    solaGraphics = SolaGraphics.use(ecsSystemContainer, platform.getRenderer(), assetPoolProvider);
+    SolaPhysics.use(eventHub, solaEcs);
+    solaGraphics = SolaGraphics.use(solaEcs, platform.getRenderer(), assetPoolProvider);
 
-    ecsSystemContainer.add(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem());
-    ecsSystemContainer.setWorld(buildWorld());
+    solaEcs.addSystems(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem());
+    solaEcs.setWorld(buildWorld());
 
     solaGraphics.setRenderDebug(true);
   }
@@ -125,10 +125,10 @@ public class SimplePlatformerExample extends Sola {
   private static class MovingPlatformSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
-      world.getEntitiesWithComponents(MovingPlatformComponent.class, DynamicBodyComponent.class)
-        .forEach(entity -> {
-          MovingPlatformComponent movingPlatformComponent = entity.getComponent(MovingPlatformComponent.class);
-          DynamicBodyComponent velocityComponent = entity.getComponent(DynamicBodyComponent.class);
+      world.getView().of(MovingPlatformComponent.class, DynamicBodyComponent.class)
+        .forEach(view -> {
+          MovingPlatformComponent movingPlatformComponent = view.getC1();
+          DynamicBodyComponent velocityComponent = view.getC2();
 
           movingPlatformComponent.counter += deltaTime;
 
@@ -150,9 +150,9 @@ public class SimplePlatformerExample extends Sola {
   private class PlayerSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
-      world.getEntitiesWithComponents(PlayerComponent.class)
-        .forEach(entity -> {
-          DynamicBodyComponent dynamicBodyComponent = entity.getComponent(DynamicBodyComponent.class);
+      world.getView().of(PlayerComponent.class, DynamicBodyComponent.class)
+        .forEach(view -> {
+          DynamicBodyComponent dynamicBodyComponent = view.getC2();
 
           if (keyboardInput.isKeyHeld(Key.D)) {
             dynamicBodyComponent.applyForce(150, 0);

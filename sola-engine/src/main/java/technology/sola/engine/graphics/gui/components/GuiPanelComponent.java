@@ -1,6 +1,6 @@
 package technology.sola.engine.graphics.gui.components;
 
-import technology.sola.engine.ecs.Component;
+import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
 
 import java.io.Serial;

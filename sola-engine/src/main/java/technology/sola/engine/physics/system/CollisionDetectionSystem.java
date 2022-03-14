@@ -1,9 +1,9 @@
 package technology.sola.engine.physics.system;
 
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.EcsSystem;
-import technology.sola.engine.ecs.Entity;
-import technology.sola.engine.ecs.World;
+import technology.sola.ecs.EcsSystem;
+import technology.sola.ecs.Entity;
+import technology.sola.ecs.World;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.CollisionUtils;
 import technology.sola.engine.physics.SpatialHashMap;

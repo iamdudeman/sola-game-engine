@@ -2,8 +2,8 @@ package technology.sola.engine.physics;
 
 import org.junit.jupiter.api.Test;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.Entity;
-import technology.sola.engine.ecs.World;
+import technology.sola.ecs.Entity;
+import technology.sola.ecs.World;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.math.linear.Vector2D;
 

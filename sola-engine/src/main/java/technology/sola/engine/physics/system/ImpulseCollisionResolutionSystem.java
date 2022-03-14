@@ -1,9 +1,9 @@
 package technology.sola.engine.physics.system;
 
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.EcsSystem;
-import technology.sola.engine.ecs.Entity;
-import technology.sola.engine.ecs.World;
+import technology.sola.ecs.EcsSystem;
+import technology.sola.ecs.Entity;
+import technology.sola.ecs.World;
 import technology.sola.engine.event.EventListener;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
@@ -18,9 +18,13 @@ import java.util.Optional;
 public class ImpulseCollisionResolutionSystem extends EcsSystem implements EventListener<CollisionManifoldEvent> {
   public static final int ORDER = CollisionDetectionSystem.ORDER + 1;
 
-  /** Smaller number is more accurate */
+  /**
+   * Smaller number is more accurate
+   */
   private final float penetrationSlack;
-  /** Lower numbers cause less jittering but allow for deeper penetration */
+  /**
+   * Lower numbers cause less jittering but allow for deeper penetration
+   */
   private final float linearProjectionPercentage;
   private final int iterations;
   private List<CollisionManifold> events = new ArrayList<>();
@@ -35,7 +39,7 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
   /**
    * Creates an instance with custom iterations and recommended penetrationSlack and linearProjectionPercentage settings.
    *
-   * @param iterations  number of impulse resolution calculation iterations, larger is more accurate (1-20 is recommended)
+   * @param iterations number of impulse resolution calculation iterations, larger is more accurate (1-20 is recommended)
    */
   public ImpulseCollisionResolutionSystem(int iterations) {
     this(iterations, 0.01f, 0.45f);
@@ -44,9 +48,9 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
   /**
    * Creates an instance with custom settings.
    *
-   * @param iterations  number of impulse resolution calculation iterations, larger is more accurate (1-20 is recommended)
-   * @param penetrationSlack  smaller number is more accurate but causes more jittering (0.01-0.1 recommended)
-   * @param linearProjectionPercentage  how much positional correction to apply, small value allows objects to penetrate more with less jittering (0.2-0.8 recommended)
+   * @param iterations                 number of impulse resolution calculation iterations, larger is more accurate (1-20 is recommended)
+   * @param penetrationSlack           smaller number is more accurate but causes more jittering (0.01-0.1 recommended)
+   * @param linearProjectionPercentage how much positional correction to apply, small value allows objects to penetrate more with less jittering (0.2-0.8 recommended)
    */
   public ImpulseCollisionResolutionSystem(int iterations, float penetrationSlack, float linearProjectionPercentage) {
     if (iterations < 1) throw new IllegalArgumentException("iterations must be greater than or equal to one");
@@ -111,7 +115,7 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
 
         if (Float.compare(tangentImpulseScalar, 0) == 0) return;
 
-        float friction = (float)Math.sqrt(entityA.friction * entityB.friction);
+        float friction = (float) Math.sqrt(entityA.friction * entityB.friction);
         float impulseScalarTimesFriction = impulseScalar * friction;
 
         tangentImpulseScalar = SolaMath.clamp(-impulseScalarTimesFriction, impulseScalarTimesFriction, tangentImpulseScalar);

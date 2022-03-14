@@ -3,9 +3,9 @@ package technology.sola.engine.examples.common.singlefile;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.EcsSystem;
-import technology.sola.engine.ecs.Component;
-import technology.sola.engine.ecs.World;
+import technology.sola.ecs.EcsSystem;
+import technology.sola.ecs.Component;
+import technology.sola.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Layer;
 import technology.sola.engine.graphics.Renderer;
@@ -35,15 +35,15 @@ public class RenderingExample extends Sola {
 
   @Override
   protected void onInit() {
-    solaGraphics = SolaGraphics.use(ecsSystemContainer, platform.getRenderer(), assetPoolProvider);
+    solaGraphics = SolaGraphics.use(solaEcs, platform.getRenderer(), assetPoolProvider);
 
     assetPoolProvider.getAssetPool(SpriteSheet.class)
       .addAssetId("test", "assets/test_tiles_spritesheet.json");
     assetPoolProvider.getAssetPool(Font.class)
       .addAssetId("default", "assets/monospaced_NORMAL_18.json");
 
-    ecsSystemContainer.add(new TestSystem());
-    ecsSystemContainer.setWorld(createWorld());
+    solaEcs.addSystem(new TestSystem());
+    solaEcs.setWorld(createWorld());
 
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
   }
@@ -82,9 +82,9 @@ public class RenderingExample extends Sola {
   private class TestSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
-      world.getEntitiesWithComponents(TransformComponent.class, MovingComponent.class)
-        .forEach(entity -> {
-          TransformComponent transform = entity.getComponent(TransformComponent.class);
+      world.getView().of(TransformComponent.class, MovingComponent.class)
+        .forEach(view -> {
+          TransformComponent transform = view.getC1();
 
           transform.setX(transform.getX() + 1);
           transform.setY(transform.getY() + 1);

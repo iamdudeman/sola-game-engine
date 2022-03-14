@@ -1,7 +1,7 @@
 package technology.sola.engine.physics;
 
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.Entity;
+import technology.sola.ecs.Entity;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.math.SolaMath;
 import technology.sola.math.geometry.Circle;

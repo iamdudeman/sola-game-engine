@@ -1,6 +1,6 @@
 package technology.sola.engine.core.physics;
 
-import technology.sola.engine.ecs.EcsSystemContainer;
+import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.physics.event.CollisionManifoldEvent;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
@@ -14,7 +14,7 @@ public class SolaPhysics {
   private final CollisionDetectionSystem collisionDetectionSystem;
   private final ImpulseCollisionResolutionSystem impulseCollisionResolutionSystem;
 
-  public static SolaPhysics use(EventHub eventHub, EcsSystemContainer ecsSystemContainer) {
+  public static SolaPhysics use(EventHub eventHub, SolaEcs solaEcs) {
     SolaPhysics solaPhysics = new SolaPhysics();
 
     eventHub.add(solaPhysics.gravitySystem, CollisionManifoldEvent.class);
@@ -22,7 +22,7 @@ public class SolaPhysics {
 
     solaPhysics.collisionDetectionSystem.setEmitCollisionEvent(eventHub::emit);
 
-    ecsSystemContainer.add(
+    solaEcs.addSystems(
       solaPhysics.gravitySystem, solaPhysics.physicsSystem, solaPhysics.collisionDetectionSystem, solaPhysics.impulseCollisionResolutionSystem
     );
 
