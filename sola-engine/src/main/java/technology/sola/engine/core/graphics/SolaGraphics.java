@@ -13,7 +13,6 @@ import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.Comparator;
-import java.util.stream.Collectors;
 
 public class SolaGraphics {
   private static final TransformComponent DEFAULT_CAMERA_TRANSFORM = new TransformComponent();
@@ -61,15 +60,15 @@ public class SolaGraphics {
   }
 
   public TransformComponent getCameraTransform() {
-    var cameraEntities = solaEcs.getWorld()
-      .getEntitiesWithComponents(TransformComponent.class, CameraComponent.class)
+    var cameraViews = solaEcs.getWorld()
+      .getView().of(TransformComponent.class, CameraComponent.class)
       .stream()
-      .sorted(Comparator.comparingInt(entity -> entity.getComponent(CameraComponent.class).getPriority()))
-      .collect(Collectors.toList());
+      .sorted(Comparator.comparingInt(view -> view.getC2().getPriority()))
+      .toList();
 
-    return cameraEntities.isEmpty()
+    return cameraViews.isEmpty()
       ? DEFAULT_CAMERA_TRANSFORM
-      : cameraEntities.get(0).getComponent(TransformComponent.class);
+      : cameraViews.get(0).getC1();
   }
 
   public boolean isRenderDebug() {

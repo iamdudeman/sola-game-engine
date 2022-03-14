@@ -125,10 +125,10 @@ public class SimplePlatformerExample extends Sola {
   private static class MovingPlatformSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
-      world.getEntitiesWithComponents(MovingPlatformComponent.class, DynamicBodyComponent.class)
-        .forEach(entity -> {
-          MovingPlatformComponent movingPlatformComponent = entity.getComponent(MovingPlatformComponent.class);
-          DynamicBodyComponent velocityComponent = entity.getComponent(DynamicBodyComponent.class);
+      world.getView().of(MovingPlatformComponent.class, DynamicBodyComponent.class)
+        .forEach(view -> {
+          MovingPlatformComponent movingPlatformComponent = view.getC1();
+          DynamicBodyComponent velocityComponent = view.getC2();
 
           movingPlatformComponent.counter += deltaTime;
 
@@ -150,9 +150,9 @@ public class SimplePlatformerExample extends Sola {
   private class PlayerSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
-      world.getEntitiesWithComponents(PlayerComponent.class)
-        .forEach(entity -> {
-          DynamicBodyComponent dynamicBodyComponent = entity.getComponent(DynamicBodyComponent.class);
+      world.getView().of(PlayerComponent.class, DynamicBodyComponent.class)
+        .forEach(view -> {
+          DynamicBodyComponent dynamicBodyComponent = view.getC2();
 
           if (keyboardInput.isKeyHeld(Key.D)) {
             dynamicBodyComponent.applyForce(150, 0);

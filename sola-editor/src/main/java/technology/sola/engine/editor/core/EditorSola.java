@@ -163,12 +163,14 @@ public class EditorSola extends Sola {
 
       Vector2D clickPoint = solaGraphics.screenToWorldCoordinate(new Vector2D(mouseEvent.x(), mouseEvent.y()));
 
-      solaEcs.getWorld().getEntitiesWithComponents(TransformComponent.class)
-        .stream().filter(entity -> {
+      solaEcs.getWorld().getEntitiesWithComponents(TransformComponent.class).stream()
+        .filter(entity -> {
           Rectangle boundingBox = getEntityBoundingBox(entity, entity.getComponent(TransformComponent.class));
 
           return boundingBox.contains(clickPoint);
-        }).findFirst().ifPresentOrElse(entitySelectionModel::select, entitySelectionModel::clearSelection);
+        })
+        .findFirst()
+        .ifPresentOrElse(entitySelectionModel::select, entitySelectionModel::clearSelection);
     });
 
     platform.onMouseMoved(mouseEvent -> {
