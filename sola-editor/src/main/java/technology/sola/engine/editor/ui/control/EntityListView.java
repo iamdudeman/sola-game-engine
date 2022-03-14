@@ -10,7 +10,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.util.StringConverter;
-import technology.sola.engine.ecs.Entity;
+import technology.sola.ecs.Entity;
 import technology.sola.engine.editor.core.EditorSola;
 
 public class EntityListView extends ListView<Entity> {

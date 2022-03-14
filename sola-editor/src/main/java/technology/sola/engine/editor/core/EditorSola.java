@@ -8,9 +8,9 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.graphics.GraphicsUtils;
 import technology.sola.engine.core.graphics.SolaGraphics;
 import technology.sola.engine.core.physics.SolaPhysics;
-import technology.sola.engine.ecs.EcsSystem;
-import technology.sola.engine.ecs.Entity;
-import technology.sola.engine.ecs.World;
+import technology.sola.ecs.EcsSystem;
+import technology.sola.ecs.Entity;
+import technology.sola.ecs.World;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
@@ -43,7 +43,7 @@ public class EditorSola extends Sola {
   }
 
   public void setWorld(World world) {
-    ecsSystemContainer.setWorld(world);
+    solaEcs.setWorld(world);
   }
 
   public void setSolaConfiguration(SolaConfiguration solaConfiguration) {
@@ -58,14 +58,14 @@ public class EditorSola extends Sola {
     isLivePreview = true;
 
     previouslyActiveSystems.forEach(activeSystem -> {
-      ecsSystemContainer.get(activeSystem.getClass()).setActive(true);
+      solaEcs.getSystem(activeSystem.getClass()).setActive(true);
     });
     previouslyActiveSystems.clear();
   }
 
   public void stopPreview() {
     isLivePreview = false;
-    ecsSystemContainer.activeSystemsIterator().forEachRemaining(activeSystem -> {
+    solaEcs.activeSystemIterator().forEachRemaining(activeSystem -> {
       previouslyActiveSystems.add(activeSystem);
       activeSystem.setActive(false);
     });
@@ -83,8 +83,8 @@ public class EditorSola extends Sola {
   @Override
   protected void onInit() {
     // TODO get assets based on project structure (might need this for all Sola [think VirtualFileSystem of sorts maybe])
-    SolaPhysics.use(eventHub, ecsSystemContainer);
-    solaGraphics = SolaGraphics.use(ecsSystemContainer, platform.getRenderer(), assetPoolProvider);
+    SolaPhysics.use(eventHub, solaEcs);
+    solaGraphics = SolaGraphics.use(solaEcs, platform.getRenderer(), assetPoolProvider);
 
     stopPreview();
 
@@ -124,7 +124,7 @@ public class EditorSola extends Sola {
     platform.onKeyPressed(keyEvent -> {
       final float translateAmount = 10;
       final float scaleAmount = 0.1f;
-      var editorCameraEntity = ecsSystemContainer.getWorld().getEntityByName(EDITOR_CAMERA_ENTITY_NAME);
+      var editorCameraEntity = solaEcs.getWorld().getEntityByName(EDITOR_CAMERA_ENTITY_NAME);
       var transformComponent = editorCameraEntity.getComponent(TransformComponent.class);
 
       if (Key.D.getCode() == keyEvent.keyCode()) {
@@ -163,12 +163,14 @@ public class EditorSola extends Sola {
 
       Vector2D clickPoint = solaGraphics.screenToWorldCoordinate(new Vector2D(mouseEvent.x(), mouseEvent.y()));
 
-      ecsSystemContainer.getWorld().getEntitiesWithComponents(TransformComponent.class)
-        .stream().filter(entity -> {
+      solaEcs.getWorld().getEntitiesWithComponents(TransformComponent.class).stream()
+        .filter(entity -> {
           Rectangle boundingBox = getEntityBoundingBox(entity, entity.getComponent(TransformComponent.class));
 
           return boundingBox.contains(clickPoint);
-        }).findFirst().ifPresentOrElse(entitySelectionModel::select, entitySelectionModel::clearSelection);
+        })
+        .findFirst()
+        .ifPresentOrElse(entitySelectionModel::select, entitySelectionModel::clearSelection);
     });
 
     platform.onMouseMoved(mouseEvent -> {

@@ -1,6 +1,6 @@
 package technology.sola.engine.physics.component;
 
-import technology.sola.engine.ecs.Component;
+import technology.sola.ecs.Component;
 import technology.sola.engine.physics.Material;
 import technology.sola.math.linear.Vector2D;
 

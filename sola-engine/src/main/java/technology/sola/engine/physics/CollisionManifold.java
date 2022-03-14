@@ -1,6 +1,6 @@
 package technology.sola.engine.physics;
 
-import technology.sola.engine.ecs.Entity;
+import technology.sola.ecs.Entity;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.Objects;

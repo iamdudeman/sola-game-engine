@@ -3,7 +3,7 @@ package technology.sola.engine.examples.common.singlefile;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.World;
+import technology.sola.ecs.World;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.core.graphics.SolaGraphics;
 import technology.sola.engine.graphics.screen.AspectMode;
@@ -24,12 +24,12 @@ public class AnimationExample extends Sola {
 
   @Override
   protected void onInit() {
-    solaGraphics = SolaGraphics.use(ecsSystemContainer, platform.getRenderer(), assetPoolProvider);
+    solaGraphics = SolaGraphics.use(solaEcs, platform.getRenderer(), assetPoolProvider);
 
     assetPoolProvider.getAssetPool(SpriteSheet.class)
       .addAssetId("test", "assets/test_tiles_spritesheet.json");
 
-    ecsSystemContainer.setWorld(buildWorld());
+    solaEcs.setWorld(buildWorld());
 
     platform.getViewport().setAspectMode(AspectMode.STRETCH);
   }

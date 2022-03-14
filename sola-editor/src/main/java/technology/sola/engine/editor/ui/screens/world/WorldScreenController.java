@@ -13,9 +13,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.Entity;
-import technology.sola.engine.ecs.World;
-import technology.sola.engine.ecs.io.Base64WorldSerializer;
+import technology.sola.ecs.Entity;
+import technology.sola.ecs.World;
+import technology.sola.ecs.io.Base64WorldIo;
 import technology.sola.engine.editor.ui.ecs.EntityComponents;
 import technology.sola.engine.editor.ui.control.EntityListView;
 import technology.sola.engine.editor.core.EditorSola;
@@ -205,7 +205,7 @@ public class WorldScreenController implements SolaEditorScreen {
   }
 
   private void saveWorld() {
-    String serializedWorld = new Base64WorldSerializer().stringify(worldProperty.getValue());
+    String serializedWorld = new Base64WorldIo().stringify(worldProperty.getValue());
 
     try {
       Files.write(worldFileProperty.getValue().toPath(), serializedWorld.getBytes(StandardCharsets.UTF_8));
@@ -218,7 +218,7 @@ public class WorldScreenController implements SolaEditorScreen {
     try {
       String serializedWorld = Files.readString(worldFileProperty.getValue().toPath());
 
-      worldProperty.setValue(new Base64WorldSerializer().parse(serializedWorld));
+      worldProperty.setValue(new Base64WorldIo().parse(serializedWorld));
       entityList.clear();
       entityList.addAll(worldProperty.getValue().getEntities());
 

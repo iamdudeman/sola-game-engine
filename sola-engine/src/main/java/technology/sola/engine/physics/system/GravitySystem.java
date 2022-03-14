@@ -1,7 +1,7 @@
 package technology.sola.engine.physics.system;
 
-import technology.sola.engine.ecs.EcsSystem;
-import technology.sola.engine.ecs.World;
+import technology.sola.ecs.EcsSystem;
+import technology.sola.ecs.World;
 import technology.sola.engine.event.EventListener;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
@@ -22,9 +22,9 @@ public class GravitySystem extends EcsSystem implements EventListener<CollisionM
 
   @Override
   public void update(World world, float deltaTime) {
-    world.getEntitiesWithComponents(DynamicBodyComponent.class)
-      .forEach(entity -> {
-        DynamicBodyComponent dynamicBodyComponent = entity.getComponent(DynamicBodyComponent.class);
+    world.getView().of(DynamicBodyComponent.class)
+      .forEach(view -> {
+        DynamicBodyComponent dynamicBodyComponent = view.getC1();
 
         if (!dynamicBodyComponent.isGrounded() && !dynamicBodyComponent.isKinematic()) {
           dynamicBodyComponent.applyForce(0, gravityConstant * dynamicBodyComponent.getMaterial().getMass());

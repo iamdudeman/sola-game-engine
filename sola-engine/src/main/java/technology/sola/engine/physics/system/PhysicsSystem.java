@@ -1,8 +1,8 @@
 package technology.sola.engine.physics.system;
 
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.ecs.EcsSystem;
-import technology.sola.engine.ecs.World;
+import technology.sola.ecs.EcsSystem;
+import technology.sola.ecs.World;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.math.linear.Vector2D;
 
@@ -16,10 +16,10 @@ public class PhysicsSystem extends EcsSystem {
 
   @Override
   public void update(World world, float deltaTime) {
-    world.getEntitiesWithComponents(TransformComponent.class, DynamicBodyComponent.class)
-      .forEach(entity -> {
-        TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
-        DynamicBodyComponent dynamicBodyComponent = entity.getComponent(DynamicBodyComponent.class);
+    world.getView().of(TransformComponent.class, DynamicBodyComponent.class)
+      .forEach(view -> {
+        TransformComponent transformComponent = view.getC1();
+        DynamicBodyComponent dynamicBodyComponent = view.getC2();
 
         if (!dynamicBodyComponent.isKinematic()) {
           Vector2D acceleration = new Vector2D(dynamicBodyComponent.getForceX(), dynamicBodyComponent.getForceY())

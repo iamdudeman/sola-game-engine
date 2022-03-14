@@ -1,6 +1,6 @@
 package technology.sola.engine.core.component;
 
-import technology.sola.engine.ecs.Component;
+import technology.sola.ecs.Component;
 import technology.sola.math.linear.Vector2D;
 
 import java.io.Serial;
@@ -38,14 +38,14 @@ public class TransformComponent implements Component<TransformComponent> {
   }
 
   /**
-   * @return x coordinate of center of {@link technology.sola.engine.ecs.Entity}
+   * @return x coordinate of center of {@link technology.sola.ecs.Entity}
    */
   public float getX() {
     return x;
   }
 
   /**
-   * @return y coordinate of center of {@link technology.sola.engine.ecs.Entity}
+   * @return y coordinate of center of {@link technology.sola.ecs.Entity}
    */
   public float getY() {
     return y;

@@ -9,8 +9,8 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
-import technology.sola.engine.ecs.Component;
-import technology.sola.engine.ecs.Entity;
+import technology.sola.ecs.Component;
+import technology.sola.ecs.Entity;
 
 import java.util.HashMap;
 import java.util.List;
