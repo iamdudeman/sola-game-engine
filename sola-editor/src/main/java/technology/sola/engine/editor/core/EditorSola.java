@@ -17,6 +17,7 @@ import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.font.Font;
+import technology.sola.engine.graphics.sprite.SpriteSheet;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.math.geometry.Rectangle;
@@ -93,6 +94,7 @@ public class EditorSola extends Sola {
     registerOnEntityClick();
     registerEditorCameraControls();
     populateFonts();
+    populateSpriteSheets();
   }
 
   @Override
@@ -160,6 +162,7 @@ public class EditorSola extends Sola {
 
       // TODO this has a bug for selection if it is an entity with a gui panel component when camera transform is changed :(
       // TODO this has a bug for selection if it is an entity with a gui text component
+      // TODO this has a bug for selection if it is an entity with a sprite component
 
       Vector2D clickPoint = solaGraphics.screenToWorldCoordinate(new Vector2D(mouseEvent.x(), mouseEvent.y()));
 
@@ -242,5 +245,23 @@ public class EditorSola extends Sola {
         }
       }
     }
+  }
+
+  private void populateSpriteSheets() {
+    // TODO need a way to reload sprite sheets when project changes or new ones are added
+    AssetPool<SpriteSheet> spriteSheetAssetPool = assetPoolProvider.getAssetPool(SpriteSheet.class);
+
+    FolderUtils folderUtils = new FolderUtils(solaEditorContext);
+    File fontFolder = folderUtils.getOrCreateFolder("assets/sprites");
+    File[] spriteSheetFiles = fontFolder.listFiles();
+
+    if (spriteSheetFiles != null) {
+      for (File spriteSheetFile : spriteSheetFiles) {
+        if (spriteSheetFile.getName().endsWith(".json")) {
+          spriteSheetAssetPool.addAssetId(spriteSheetFile.getName(), spriteSheetFile.getAbsolutePath());
+        }
+      }
+    }
+
   }
 }
