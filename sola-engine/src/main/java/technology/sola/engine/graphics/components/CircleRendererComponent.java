@@ -5,7 +5,7 @@ import technology.sola.engine.graphics.Color;
 
 import java.io.Serial;
 
-public class CircleRendererComponent implements Component<CircleRendererComponent> {
+public class CircleRendererComponent implements Component {
   @Serial
   private static final long serialVersionUID = -1490398951286309608L;
   private final Color color;
@@ -18,11 +18,6 @@ public class CircleRendererComponent implements Component<CircleRendererComponen
   public CircleRendererComponent(Color color, boolean isFilled) {
     this.color = color;
     this.isFilled = isFilled;
-  }
-
-  @Override
-  public CircleRendererComponent copy() {
-    return new CircleRendererComponent(color, isFilled);
   }
 
   public Color getColor() {

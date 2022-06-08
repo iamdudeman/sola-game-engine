@@ -6,7 +6,7 @@ import technology.sola.math.linear.Vector2D;
 
 import java.io.Serial;
 
-public class DynamicBodyComponent implements Component<DynamicBodyComponent> {
+public class DynamicBodyComponent implements Component {
   @Serial
   private static final long serialVersionUID = -5626743889555051041L;
   private float forceX = 0.0f;
@@ -38,11 +38,6 @@ public class DynamicBodyComponent implements Component<DynamicBodyComponent> {
   public DynamicBodyComponent(Material material, boolean isKinematic) {
     setMaterial(material);
     this.isKinematic = isKinematic;
-  }
-
-  @Override
-  public DynamicBodyComponent copy() {
-    return new DynamicBodyComponent(material, isKinematic);
   }
 
   /**

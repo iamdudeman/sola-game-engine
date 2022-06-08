@@ -12,7 +12,7 @@ import technology.sola.engine.graphics.components.RectangleRendererComponent;
 class GeometryGraphics {
   static void render(Renderer renderer, SolaEcs solaEcs, TransformComponent cameraTransform) {
     // Draw rectangles
-    solaEcs.getWorld().getEntitiesWithComponents(TransformComponent.class, RectangleRendererComponent.class)
+    solaEcs.getWorld().findEntitiesWithComponents(TransformComponent.class, RectangleRendererComponent.class)
       .forEach(entity -> {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
 
@@ -24,7 +24,7 @@ class GeometryGraphics {
       });
 
     // Draw circles
-    solaEcs.getWorld().getEntitiesWithComponents(TransformComponent.class, CircleRendererComponent.class)
+    solaEcs.getWorld().findEntitiesWithComponents(TransformComponent.class, CircleRendererComponent.class)
       .forEach(entity -> {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
 

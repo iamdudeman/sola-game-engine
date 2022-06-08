@@ -6,7 +6,7 @@ plugins {
 
 java {
   toolchain {
-    languageVersion.set(JavaLanguageVersion.of(16))
+    languageVersion.set(JavaLanguageVersion.of(18))
   }
 }
 
@@ -27,6 +27,10 @@ dependencies {
   testImplementation("org.mockito:mockito-junit-jupiter:4.2.0")
   testImplementation(platform("org.junit:junit-bom:5.7.1"))
   testImplementation("org.junit.jupiter:junit-jupiter")
+}
+
+jacoco {
+  toolVersion = "0.8.8"
 }
 
 tasks.test {

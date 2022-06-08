@@ -8,7 +8,7 @@ import technology.sola.math.linear.Vector2D;
 
 import java.io.Serial;
 
-public class ColliderComponent implements Component<ColliderComponent> {
+public class ColliderComponent implements Component {
   @Serial
   private static final long serialVersionUID = 6393414888672495864L;
   // Properties for all
@@ -59,13 +59,6 @@ public class ColliderComponent implements Component<ColliderComponent> {
     colliderComponent.radius = radius;
 
     return colliderComponent;
-  }
-
-  @Override
-  public ColliderComponent copy() {
-    return colliderType == ColliderType.AABB
-      ? aabb(width, height)
-      : circle(radius);
   }
 
   /**

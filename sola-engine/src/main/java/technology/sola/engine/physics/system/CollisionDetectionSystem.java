@@ -59,7 +59,7 @@ public class CollisionDetectionSystem extends EcsSystem {
   @Override
   public void update(World world, float deltaTime) {
     Set<CollisionManifold> collisionEventsThisIteration = new HashSet<>();
-    List<Entity> entities = world.getEntitiesWithComponents(ColliderComponent.class, TransformComponent.class);
+    List<Entity> entities = world.findEntitiesWithComponents(ColliderComponent.class, TransformComponent.class);
 
     // TODO consider some sort of clear method for SpatialHashMap
     spatialHashMap = spatialHashMapCellSize == null ? new SpatialHashMap(entities) : new SpatialHashMap(entities, spatialHashMapCellSize);

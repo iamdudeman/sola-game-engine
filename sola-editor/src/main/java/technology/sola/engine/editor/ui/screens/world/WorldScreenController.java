@@ -11,6 +11,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import technology.sola.ecs.io.WorldIo;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.ecs.Entity;
@@ -90,19 +91,15 @@ public class WorldScreenController implements SolaEditorScreen {
       menuWorld.setDisable(newValue == null);
       menuItemSave.setDisable(newValue == null);
 
-      if (newValue != null) {
-        var editorCamera = newValue.getEntityByName(EditorSola.EDITOR_CAMERA_ENTITY_NAME);
+      if (newValue != null && newValue.findEntityByName(EditorSola.EDITOR_CAMERA_ENTITY_NAME).isEmpty()) {
+        CameraComponent editorCameraComponent = new CameraComponent();
 
-        if (editorCamera == null) {
-          CameraComponent editorCameraComponent = new CameraComponent();
+        editorCameraComponent.setPriority(Integer.MIN_VALUE);
 
-          editorCameraComponent.setPriority(Integer.MIN_VALUE);
-
-          newValue.createEntity()
-            .setName(EditorSola.EDITOR_CAMERA_ENTITY_NAME)
-            .addComponent(new TransformComponent())
-            .addComponent(editorCameraComponent);
-        }
+        newValue.createEntity()
+          .setName(EditorSola.EDITOR_CAMERA_ENTITY_NAME)
+          .addComponent(new TransformComponent())
+          .addComponent(editorCameraComponent);
       }
     });
 
@@ -186,22 +183,10 @@ public class WorldScreenController implements SolaEditorScreen {
   }
 
   private World copyWorld() {
-    World world = new World(worldProperty.getValue().getMaxEntityCount());
+    WorldIo worldIo = new Base64WorldIo();
+    String stringWorld = worldIo.stringify(worldProperty.getValue());
 
-    worldProperty.getValue().getEntities()
-      .forEach(entity -> {
-        if (EditorSola.EDITOR_CAMERA_ENTITY_NAME.equals(entity.getName())) return;
-
-        Entity copyEntity = world.createEntity(entity.getUniqueId());
-        copyEntity.setName(entity.getName());
-        copyEntity.setDisabled(entity.isDisabled());
-
-        entity.getCurrentComponents().forEach(componentClass -> {
-          copyEntity.addComponent(entity.getComponent(componentClass).copy());
-        });
-      });
-
-    return world;
+    return worldIo.parse(stringWorld);
   }
 
   private void saveWorld() {

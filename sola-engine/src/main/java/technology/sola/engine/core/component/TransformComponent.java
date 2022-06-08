@@ -5,7 +5,7 @@ import technology.sola.math.linear.Vector2D;
 
 import java.io.Serial;
 
-public class TransformComponent implements Component<TransformComponent> {
+public class TransformComponent implements Component {
   @Serial
   private static final long serialVersionUID = -1810768571143367371L;
   private float x;
@@ -30,11 +30,6 @@ public class TransformComponent implements Component<TransformComponent> {
     this.y = y;
     this.scaleX = scaleX;
     this.scaleY = scaleY;
-  }
-
-  @Override
-  public TransformComponent copy() {
-    return new TransformComponent(x, y, scaleX, scaleY);
   }
 
   /**

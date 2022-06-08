@@ -5,7 +5,7 @@ import technology.sola.engine.graphics.Layer;
 
 import java.io.Serial;
 
-public class LayerComponent implements Component<LayerComponent> {
+public class LayerComponent implements Component {
   @Serial
   private static final long serialVersionUID = 3288049068995632130L;
   private String layer;
@@ -18,11 +18,6 @@ public class LayerComponent implements Component<LayerComponent> {
   public LayerComponent(String layer, int priority) {
     this.layer = layer;
     this.priority = priority;
-  }
-
-  @Override
-  public LayerComponent copy() {
-    return new LayerComponent(layer, priority);
   }
 
   public String getLayer() {

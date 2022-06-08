@@ -5,7 +5,7 @@ import technology.sola.engine.graphics.Color;
 
 import java.io.Serial;
 
-public class GuiPanelComponent implements Component<GuiPanelComponent> {
+public class GuiPanelComponent implements Component {
   @Serial
   private static final long serialVersionUID = 5088264649382366612L;
   private Color backgroundColor;
@@ -21,11 +21,6 @@ public class GuiPanelComponent implements Component<GuiPanelComponent> {
   public GuiPanelComponent(Color backgroundColor, Color borderColor) {
     this.backgroundColor = backgroundColor;
     this.borderColor = borderColor;
-  }
-
-  @Override
-  public GuiPanelComponent copy() {
-    return new GuiPanelComponent(backgroundColor, borderColor);
   }
 
   public Color getBackgroundColor() {
