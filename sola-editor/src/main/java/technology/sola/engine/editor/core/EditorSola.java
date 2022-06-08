@@ -126,7 +126,7 @@ public class EditorSola extends Sola {
     platform.onKeyPressed(keyEvent -> {
       final float translateAmount = 10;
       final float scaleAmount = 0.1f;
-      var editorCameraEntity = solaEcs.getWorld().getEntityByName(EDITOR_CAMERA_ENTITY_NAME);
+      var editorCameraEntity = solaEcs.getWorld().findEntityByName(EDITOR_CAMERA_ENTITY_NAME).orElseThrow();
       var transformComponent = editorCameraEntity.getComponent(TransformComponent.class);
 
       if (Key.D.getCode() == keyEvent.keyCode()) {
@@ -166,7 +166,7 @@ public class EditorSola extends Sola {
 
       Vector2D clickPoint = solaGraphics.screenToWorldCoordinate(new Vector2D(mouseEvent.x(), mouseEvent.y()));
 
-      solaEcs.getWorld().getEntitiesWithComponents(TransformComponent.class).stream()
+      solaEcs.getWorld().findEntitiesWithComponents(TransformComponent.class).stream()
         .filter(entity -> {
           Rectangle boundingBox = getEntityBoundingBox(entity, entity.getComponent(TransformComponent.class));
 

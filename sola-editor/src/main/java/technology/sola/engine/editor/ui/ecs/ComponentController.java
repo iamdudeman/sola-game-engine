@@ -8,7 +8,7 @@ import technology.sola.engine.editor.core.SolaEditorContext;
 
 import java.io.IOException;
 
-public abstract class ComponentController<T extends Component<?>> {
+public abstract class ComponentController<T extends Component> {
   protected Entity entity;
   protected SolaEditorContext solaEditorContext;
   private Node node;

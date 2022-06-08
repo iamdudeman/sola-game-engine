@@ -14,7 +14,7 @@ import technology.sola.engine.graphics.gui.components.GuiTextComponent;
 class GuiGraphics {
   static void render(Renderer renderer, SolaEcs solaEcs, AssetPool<Font> fontAssetPool) {
     // Gui panels
-    solaEcs.getWorld().getEntitiesWithComponents(TransformComponent.class, GuiPanelComponent.class)
+    solaEcs.getWorld().findEntitiesWithComponents(TransformComponent.class, GuiPanelComponent.class)
       .forEach(entity -> {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
 
@@ -26,7 +26,7 @@ class GuiGraphics {
       });
 
     // Gui text
-    solaEcs.getWorld().getEntitiesWithComponents(TransformComponent.class, GuiTextComponent.class)
+    solaEcs.getWorld().findEntitiesWithComponents(TransformComponent.class, GuiTextComponent.class)
       .forEach(entity -> {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
 

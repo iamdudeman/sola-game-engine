@@ -61,14 +61,14 @@ public class SolaGraphics {
 
   public TransformComponent getCameraTransform() {
     var cameraViews = solaEcs.getWorld()
-      .getView().of(TransformComponent.class, CameraComponent.class)
+      .createView().of(TransformComponent.class, CameraComponent.class)
       .stream()
-      .sorted(Comparator.comparingInt(view -> view.getC2().getPriority()))
+      .sorted(Comparator.comparingInt(view -> view.c2().getPriority()))
       .toList();
 
     return cameraViews.isEmpty()
       ? DEFAULT_CAMERA_TRANSFORM
-      : cameraViews.get(0).getC1();
+      : cameraViews.get(0).c1();
   }
 
   public boolean isRenderDebug() {

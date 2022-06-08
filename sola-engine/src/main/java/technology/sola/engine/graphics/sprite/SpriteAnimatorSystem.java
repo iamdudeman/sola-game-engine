@@ -8,10 +8,10 @@ import technology.sola.engine.graphics.components.SpriteComponent;
 public class SpriteAnimatorSystem extends EcsSystem {
   @Override
   public void update(World world, float deltaTime) {
-    world.getView().of(SpriteComponent.class, SpriteAnimatorComponent.class)
+    world.createView().of(SpriteComponent.class, SpriteAnimatorComponent.class)
       .forEach(view -> {
-        SpriteComponent spriteComponent = view.getC1();
-        SpriteAnimatorComponent spriteAnimatorComponent = view.getC2();
+        SpriteComponent spriteComponent = view.c1();
+        SpriteAnimatorComponent spriteAnimatorComponent = view.c2();
 
         spriteComponent.setSpriteKeyFrame(spriteAnimatorComponent.getCurrentFrame());
       });

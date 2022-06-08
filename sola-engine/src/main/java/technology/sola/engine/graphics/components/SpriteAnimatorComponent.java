@@ -6,7 +6,7 @@ import java.io.Serial;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SpriteAnimatorComponent implements Component<SpriteAnimatorComponent> {
+public class SpriteAnimatorComponent implements Component {
   @Serial
   private static final long serialVersionUID = 8265042463767128400L;
   private final Map<String, SpriteKeyFrame[]> animationMap = new HashMap<>();
@@ -19,11 +19,6 @@ public class SpriteAnimatorComponent implements Component<SpriteAnimatorComponen
   public SpriteAnimatorComponent(String activeAnimationId, SpriteKeyFrame ...activeAnimationKeyFrames) {
     addAnimation(activeAnimationId, activeAnimationKeyFrames);
     playAnimation(activeAnimationId);
-  }
-
-  @Override
-  public SpriteAnimatorComponent copy() {
-    return new SpriteAnimatorComponent(activeAnimationId, activeAnimationKeyFrames);
   }
 
   public SpriteAnimatorComponent addAnimation(String id, SpriteKeyFrame ...spriteKeyFrames) {

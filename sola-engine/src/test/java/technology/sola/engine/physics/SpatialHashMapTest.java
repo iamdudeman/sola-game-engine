@@ -25,7 +25,7 @@ class SpatialHashMapTest {
     world.createEntity().addComponent(new TransformComponent());
     world.createEntity().addComponent(new TransformComponent());
 
-    assertDoesNotThrow(() -> new SpatialHashMap(world.getEntitiesWithComponents()));
+    assertDoesNotThrow(() -> new SpatialHashMap(world.getEnabledEntities()));
   }
 
   @Test
@@ -34,13 +34,13 @@ class SpatialHashMapTest {
     world.createEntity().addComponent(ColliderComponent.aabb(10, 10));
     world.createEntity().addComponent(ColliderComponent.aabb(10, 10));
 
-    assertDoesNotThrow(() -> new SpatialHashMap(world.getEntitiesWithComponents()));
+    assertDoesNotThrow(() -> new SpatialHashMap(world.getEnabledEntities()));
   }
 
   @Test
   void whenCreatedWithCellSize_shouldUsePassedValue() {
     World world = createTestWorld();
-    SpatialHashMap spatialHashMap = new SpatialHashMap(world.getEntitiesWithComponents(), 45);
+    SpatialHashMap spatialHashMap = new SpatialHashMap(world.getEnabledEntities(), 45);
 
     assertEquals(45, spatialHashMap.getCellSize());
   }
@@ -49,13 +49,13 @@ class SpatialHashMapTest {
   void whenCreatedWithCellSize_shouldNowAllowSmallerThanLargestEntity() {
     World world = createTestWorld();
 
-    assertThrows(IllegalArgumentException.class, () -> new SpatialHashMap(world.getEntitiesWithComponents(), 19));
+    assertThrows(IllegalArgumentException.class, () -> new SpatialHashMap(world.getEnabledEntities(), 19));
   }
 
   @Test
   void whenCreatedWithoutCellSize_shouldUseLargestEntityWidthOrHeight() {
     World world = createTestWorld();
-    SpatialHashMap spatialHashMap = new SpatialHashMap(world.getEntitiesWithComponents());
+    SpatialHashMap spatialHashMap = new SpatialHashMap(world.getEnabledEntities());
 
     assertEquals(40, spatialHashMap.getCellSize());
   }
@@ -63,7 +63,7 @@ class SpatialHashMapTest {
   @Test
   void whenEntitiesRegistered_shouldProperlyPlaceInBuckets() {
     World world = createTestWorld();
-    List<Entity> entities = world.getEntitiesWithComponents();
+    List<Entity> entities = world.getEnabledEntities();
     SpatialHashMap spatialHashMap = new SpatialHashMap(entities);
 
     List<Vector2D> points = spatialHashMap.getBucketIdsForEntity(entities.get(0));
@@ -100,7 +100,7 @@ class SpatialHashMapTest {
   @Test
   void whenEntitiesRegistered_shouldHaveProperNearbyEntities() {
     World world = createTestWorld();
-    List<Entity> entities = world.getEntitiesWithComponents();
+    List<Entity> entities = world.getEnabledEntities();
     SpatialHashMap spatialHashMap = new SpatialHashMap(entities);
 
     List<Entity> nearbyEntities = spatialHashMap.getNearbyEntities(entities.get(0));

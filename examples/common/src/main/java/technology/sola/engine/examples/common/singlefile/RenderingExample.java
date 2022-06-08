@@ -69,22 +69,17 @@ public class RenderingExample extends Sola {
     solaGraphics.render();
   }
 
-  private static class MovingComponent implements Component<MovingComponent> {
+  private record MovingComponent() implements Component {
     @Serial
     private static final long serialVersionUID = 8048288443738661480L;
-
-    @Override
-    public MovingComponent copy() {
-      return new MovingComponent();
-    }
   }
 
   private class TestSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
-      world.getView().of(TransformComponent.class, MovingComponent.class)
+      world.createView().of(TransformComponent.class, MovingComponent.class)
         .forEach(view -> {
-          TransformComponent transform = view.getC1();
+          TransformComponent transform = view.c1();
 
           transform.setX(transform.getX() + 1);
           transform.setY(transform.getY() + 1);
@@ -102,7 +97,9 @@ public class RenderingExample extends Sola {
       final float minSize = 0.1f;
       final float maxSize = 50;
 
-      TransformComponent dynamicScalingEntityTransformComponent = world.getEntityByName("dynamicScaling").getComponent(TransformComponent.class);
+      TransformComponent dynamicScalingEntityTransformComponent = world.findEntityByName("dynamicScaling")
+        .orElseThrow()
+        .getComponent(TransformComponent.class);
 
       if (keyboardInput.isKeyHeld(Key.A)) {
         float dynamicScale = dynamicScalingEntityTransformComponent.getScaleX() - scalingSpeed;

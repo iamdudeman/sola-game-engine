@@ -63,7 +63,7 @@ public class NewSpriteSheetDialog extends Dialog<File> {
             createInitialSpriteSheetJson(labelCurrentImage.getText())
           );
         } catch (IOException ex) {
-          ex.printStackTrace();;
+          ex.printStackTrace();
         }
       }
 

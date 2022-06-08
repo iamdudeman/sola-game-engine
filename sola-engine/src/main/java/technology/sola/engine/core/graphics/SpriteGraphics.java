@@ -13,7 +13,7 @@ import technology.sola.engine.graphics.sprite.SpriteSheet;
 
 class SpriteGraphics {
   static void render(Renderer renderer, SolaEcs solaEcs, TransformComponent cameraTransform, AssetPool<SpriteSheet> spriteSheetAssetPool) {
-    solaEcs.getWorld().getEntitiesWithComponents(TransformComponent.class, SpriteComponent.class)
+    solaEcs.getWorld().findEntitiesWithComponents(TransformComponent.class, SpriteComponent.class)
       .forEach(entity -> {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
 
