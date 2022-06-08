@@ -15,7 +15,6 @@ import technology.sola.ecs.Entity;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class EntityComponents extends VBox {
   private final Property<Entity> entityProperty = new SimpleObjectProperty<>();
@@ -78,7 +77,7 @@ public class EntityComponents extends VBox {
 
         return menu;
       })
-      .collect(Collectors.toList());
+      .toList();
   }
 
   private void applyToMenu(SolaEditorEntityComponentMenus.SolaEditorMenu solaEditorMenu, Menu menu) {

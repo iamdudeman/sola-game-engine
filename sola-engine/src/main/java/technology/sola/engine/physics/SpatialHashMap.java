@@ -6,7 +6,6 @@ import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class SpatialHashMap {
   private final int cellSize;
@@ -51,8 +50,7 @@ public class SpatialHashMap {
       .reduce(new ArrayList<>(), (nearbyEntities, entityBucket) -> {
         nearbyEntities.addAll(
           entityBucket.stream()
-            .filter(entityInBucket -> entity != entityInBucket && !nearbyEntities.contains(entityInBucket))
-            .collect(Collectors.toList())
+            .filter(entityInBucket -> entity != entityInBucket && !nearbyEntities.contains(entityInBucket)).toList()
         );
 
         return nearbyEntities;
