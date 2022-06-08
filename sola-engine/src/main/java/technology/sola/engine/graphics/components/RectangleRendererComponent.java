@@ -5,7 +5,7 @@ import technology.sola.engine.graphics.Color;
 
 import java.io.Serial;
 
-public class RectangleRendererComponent implements Component<RectangleRendererComponent> {
+public class RectangleRendererComponent implements Component {
   @Serial
   private static final long serialVersionUID = -1301447777016343699L;
   private final Color color;
@@ -18,11 +18,6 @@ public class RectangleRendererComponent implements Component<RectangleRendererCo
   public RectangleRendererComponent(Color color, boolean isFilled) {
     this.color = color;
     this.isFilled = isFilled;
-  }
-
-  @Override
-  public RectangleRendererComponent copy() {
-    return new RectangleRendererComponent(color, isFilled);
   }
 
   public Color getColor() {

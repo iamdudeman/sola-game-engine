@@ -7,7 +7,7 @@ import technology.sola.engine.graphics.font.Font;
 
 import java.io.Serial;
 
-public class GuiTextComponent implements Component<GuiTextComponent> {
+public class GuiTextComponent implements Component {
   @Serial
   private static final long serialVersionUID = 158900611687830213L;
   private String fontAssetId;
@@ -27,11 +27,6 @@ public class GuiTextComponent implements Component<GuiTextComponent> {
     this.fontAssetId = fontAssetId;
     this.text = text;
     this.color = color;
-  }
-
-  @Override
-  public GuiTextComponent copy() {
-    return new GuiTextComponent(fontAssetId, text, color);
   }
 
   public Font getFont(AssetPool<Font> fontAssetPool) {

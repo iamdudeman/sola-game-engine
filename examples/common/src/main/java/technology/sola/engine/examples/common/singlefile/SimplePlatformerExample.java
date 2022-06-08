@@ -95,40 +95,25 @@ public class SimplePlatformerExample extends Sola {
     return world;
   }
 
-  private static class PlayerComponent implements Component<PlayerComponent> {
+  private record PlayerComponent() implements Component {
     @Serial
     private static final long serialVersionUID = -8026881223157823822L;
-
-    @Override
-    public PlayerComponent copy() {
-      return new PlayerComponent();
-    }
   }
 
-  private static class MovingPlatformComponent implements Component<MovingPlatformComponent> {
+  private static class MovingPlatformComponent implements Component {
     @Serial
     private static final long serialVersionUID = 3034112167409884394L;
     private float counter = 0;
     private boolean isGoingUp = true;
-
-    @Override
-    public MovingPlatformComponent copy() {
-      MovingPlatformComponent movingPlatformComponent = new MovingPlatformComponent();
-
-      movingPlatformComponent.counter = counter;
-      movingPlatformComponent.isGoingUp = isGoingUp;
-
-      return movingPlatformComponent;
-    }
   }
 
   private static class MovingPlatformSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
-      world.getView().of(MovingPlatformComponent.class, DynamicBodyComponent.class)
+      world.createView().of(MovingPlatformComponent.class, DynamicBodyComponent.class)
         .forEach(view -> {
-          MovingPlatformComponent movingPlatformComponent = view.getC1();
-          DynamicBodyComponent velocityComponent = view.getC2();
+          MovingPlatformComponent movingPlatformComponent = view.c1();
+          DynamicBodyComponent velocityComponent = view.c2();
 
           movingPlatformComponent.counter += deltaTime;
 
@@ -150,9 +135,9 @@ public class SimplePlatformerExample extends Sola {
   private class PlayerSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
-      world.getView().of(PlayerComponent.class, DynamicBodyComponent.class)
+      world.createView().of(PlayerComponent.class, DynamicBodyComponent.class)
         .forEach(view -> {
-          DynamicBodyComponent dynamicBodyComponent = view.getC2();
+          DynamicBodyComponent dynamicBodyComponent = view.c2();
 
           if (keyboardInput.isKeyHeld(Key.D)) {
             dynamicBodyComponent.applyForce(150, 0);
@@ -175,8 +160,8 @@ public class SimplePlatformerExample extends Sola {
   private static class CameraProgressSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
-      var cameras = world.getEntitiesWithComponents(CameraComponent.class, TransformComponent.class);
-      var players = world.getEntitiesWithComponents(PlayerComponent.class, TransformComponent.class);
+      var cameras = world.findEntitiesWithComponents(CameraComponent.class, TransformComponent.class);
+      var players = world.findEntitiesWithComponents(PlayerComponent.class, TransformComponent.class);
 
       if (!cameras.isEmpty() && !players.isEmpty()) {
         var camera = cameras.get(0);

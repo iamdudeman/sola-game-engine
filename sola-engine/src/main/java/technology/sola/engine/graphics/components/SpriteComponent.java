@@ -7,18 +7,13 @@ import technology.sola.engine.graphics.sprite.SpriteSheet;
 
 import java.io.Serial;
 
-public class SpriteComponent implements Component<SpriteComponent> {
+public class SpriteComponent implements Component {
   @Serial
   private static final long serialVersionUID = 5969143866970628671L;
   private SpriteKeyFrame spriteKeyFrame;
 
   public SpriteComponent(String spriteSheetId, String spriteId) {
     spriteKeyFrame = new SpriteKeyFrame(spriteSheetId, spriteId, 0);
-  }
-
-  @Override
-  public SpriteComponent copy() {
-    return new SpriteComponent(spriteKeyFrame.getSpriteSheetId(), spriteKeyFrame.getSpriteId());
   }
 
   public String getSpriteSheetId() {

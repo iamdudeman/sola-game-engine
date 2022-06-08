@@ -28,7 +28,7 @@ class DebugGraphics {
         renderer.drawRect(useThis.getX(), useThis.getY(), useThis.getScaleX(), useThis.getScaleY(), Color.GREEN);
       });
 
-    solaEcs.getWorld().getEntitiesWithComponents(ColliderComponent.class, TransformComponent.class)
+    solaEcs.getWorld().findEntitiesWithComponents(ColliderComponent.class, TransformComponent.class)
       .forEach(entity -> {
         TransformComponent transformComponent = GraphicsUtils.getTransformForAppliedCamera(
           entity.getComponent(TransformComponent.class),
