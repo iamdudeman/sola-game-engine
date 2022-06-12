@@ -4,6 +4,6 @@ plugins {
 
 dependencies {
   // TODO get from maven when it is published there
-  api(files("libs/sola-json-1.0.2.jar"))
+  api(files("libs/sola-json-2.0.1.jar"))
   api(files("libs/sola-ecs-2.0.0.jar"))
 }
