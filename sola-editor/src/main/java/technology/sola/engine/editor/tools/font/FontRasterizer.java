@@ -3,6 +3,7 @@ package technology.sola.engine.editor.tools.font;
 import technology.sola.engine.graphics.font.FontGlyph;
 import technology.sola.engine.graphics.font.FontInfo;
 import technology.sola.engine.graphics.font.FontStyle;
+import technology.sola.engine.graphics.font.mapper.FontInfoJsonMapper;
 import technology.sola.json.SolaJson;
 
 import javax.imageio.ImageIO;
@@ -64,6 +65,6 @@ public class FontRasterizer {
   }
 
   private byte[] serializeFontInfo(FontInfo fontInfo) {
-    return new SolaJson().serialize(fontInfo, FontInfo.JSON_MAPPER).getBytes(StandardCharsets.UTF_8);
+    return new SolaJson().stringify(fontInfo, new FontInfoJsonMapper()).getBytes(StandardCharsets.UTF_8);
   }
 }
