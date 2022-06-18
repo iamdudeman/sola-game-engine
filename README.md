@@ -41,7 +41,6 @@
   * Interface for type
   * Implement loader per platform (Swing and JavaFX can probably share though)
 * Build pipeline
-  * Run full build for testing and code quality
   * Generate engine and platform artifacts
 * Particle System
   * transform
