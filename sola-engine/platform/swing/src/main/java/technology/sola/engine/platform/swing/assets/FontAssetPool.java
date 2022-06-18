@@ -4,6 +4,7 @@ import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.graphics.font.FontInfo;
+import technology.sola.engine.graphics.font.mapper.FontInfoJsonMapper;
 import technology.sola.engine.platform.swing.assets.exception.FailedFontLoadException;
 import technology.sola.json.SolaJson;
 
@@ -29,7 +30,7 @@ public class FontAssetPool extends AssetPool<Font> {
     SolaJson solaJson = new SolaJson();
 
     try {
-      FontInfo fontInfo = solaJson.parse(Files.readString(file.toPath()), FontInfo.JSON_MAPPER);
+      FontInfo fontInfo = solaJson.parse(Files.readString(file.toPath()), new FontInfoJsonMapper());
       SolaImage fontImage = solaImageAssetPool.addAndGetAsset(
         fontInfo.fontGlyphFile(),
         path.replace(file.getName(), "") + fontInfo.fontGlyphFile()
