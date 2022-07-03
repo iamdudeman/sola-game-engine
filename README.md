@@ -1,6 +1,19 @@
 # Branch WIP
 
 # TODO List
+* Game Gui Stuff
+  * Consider making Gui stuff a separate thing
+    * Layouts are easier with inheritance than ECS
+    * Could have a base GuiObject that contains many useful things (reference old Sol2d and SolKana implementations)
+    * If so remove usages of GuiTextComponent and GuiPanelComponent
+  * GuiPanelComponent
+    * padding
+    * parent Panel option for nesting panels
+  * GuiTextComponent
+    * should handle wrapping based on parent Panel?
+  * GuiButtonComponent implementation
+* Rendering
+  * SolaGraphics could cull entities that are outside the camera viewport
 * Engine GUI Editor (Sola Editor)
   * Add more component controllers
     * SpriteAnimator
@@ -25,12 +38,9 @@
   * Create child + parent relationships for the entities?
   * load additional components, systems and engine ui from external JAR
     * maybe generate a gradle file to build the jar from inside the engine?
-* Rendering
-  * SolaGraphics could cull entities that are outside the camera viewport
 * Unit Testing
   * Add easy way to test the ability of ECS components to be serializable
   * Add lots of missing tests :)
-* Research Virtual File System
 * Browser Platform
   * Implement better tool for compiling Java to JavaScript code (TeaVM gradle plugin has some file locking issues)
   * Improve performance (StressTestExample can't handle a lot of objects)
@@ -48,19 +58,16 @@
   * time left alive
   * color?
   * size?
-* Gui Components
-  * Panel
-    * padding
-    * parent Panel option for nesting panels
-  * Text
-    * should handle wrapping based on parent Panel?
-  * Button
+* Research Virtual File System
 * Scripting language
   * Consider scrapping this features
   * How will that work with browser implementation?
   * Maybe a custom Domain Specific Language?
     * Perhaps JSON that describes what Systems to load with what settings
     * Describe Scenes and Entities / components
+  * Needs to be able to update ECS things
+  * Needs to be able to assign mouse hover and click callbacks
+  * Needs to be able to assign keyboard press callbacks
 * Physics
   * Collision Detection
     * Collision layers / tags for ignoring specific collisions

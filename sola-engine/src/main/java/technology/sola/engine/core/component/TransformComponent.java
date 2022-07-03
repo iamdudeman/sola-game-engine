@@ -1,6 +1,8 @@
 package technology.sola.engine.core.component;
 
 import technology.sola.ecs.Component;
+import technology.sola.ecs.Entity;
+import technology.sola.ecs.World;
 import technology.sola.math.linear.Vector2D;
 
 import java.io.Serial;
@@ -12,6 +14,8 @@ public class TransformComponent implements Component {
   private float y;
   private float scaleX;
   private float scaleY;
+  private String parentUniqueId = null;
+  private TransformComponent parentTransformComponent = null;
 
   public TransformComponent() {
     this(0, 0);
@@ -32,22 +36,47 @@ public class TransformComponent implements Component {
     this.scaleY = scaleY;
   }
 
+  public TransformComponent(Entity parent) {
+    this(0, 0, parent);
+  }
+
+  public TransformComponent(float x, float y, Entity parent) {
+    this(x, y, 1, parent);
+  }
+
+  public TransformComponent(float x, float y, float scale, Entity parent) {
+    this(x, y, scale, scale, parent);
+  }
+
+  public TransformComponent(float x, float y, float scaleX, float scaleY, Entity parent) {
+    this(x, y, scaleX, scaleY);
+
+    setParent(parent);
+  }
+
+  @Override
+  public void afterDeserialize(World world) {
+    if (parentUniqueId != null) {
+      world.findEntityByUniqueId(parentUniqueId).ifPresent(this::setParent);
+    }
+  }
+
   /**
    * @return x coordinate of center of {@link technology.sola.ecs.Entity}
    */
   public float getX() {
-    return x;
+    return parentTransformComponent == null ? x : x + parentTransformComponent.getX();
   }
 
   /**
    * @return y coordinate of center of {@link technology.sola.ecs.Entity}
    */
   public float getY() {
-    return y;
+    return parentTransformComponent == null ? y : y + parentTransformComponent.getY();
   }
 
   public Vector2D getTranslate() {
-    return new Vector2D(x, y);
+    return new Vector2D(getX(), getY());
   }
 
   public void setTranslate(Vector2D translate) {
@@ -56,11 +85,15 @@ public class TransformComponent implements Component {
   }
 
   public float getScaleX() {
-    return scaleX;
+    return parentTransformComponent == null ? scaleX : scaleX * parentTransformComponent.scaleX;
   }
 
   public float getScaleY() {
-    return scaleY;
+    return parentTransformComponent == null ? scaleY : scaleY * parentTransformComponent.scaleY;
+  }
+
+  public String getParentUniqueId() {
+    return parentUniqueId;
   }
 
   public void setX(float x) {
@@ -77,5 +110,17 @@ public class TransformComponent implements Component {
 
   public void setScaleY(float scaleY) {
     this.scaleY = scaleY;
+  }
+
+  public TransformComponent setParent(Entity entity) {
+    if (entity == null) {
+      parentUniqueId = null;
+      parentTransformComponent = null;
+    } else {
+      parentUniqueId = entity.getUniqueId();
+      parentTransformComponent = entity.getComponent(TransformComponent.class);
+    }
+
+    return this;
   }
 }

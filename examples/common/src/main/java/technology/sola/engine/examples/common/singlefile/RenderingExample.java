@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.singlefile;
 
+import technology.sola.ecs.Entity;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
@@ -141,18 +142,23 @@ public class RenderingExample extends Sola {
     World world = new World(100);
 
     // moving stuff
+    Entity movingEntity = world.createEntity(
+      new MovingComponent(),
+      new LayerComponent("moving_stuff"),
+      new TransformComponent(0, 0, 50, 50)
+    );
     List.of(
       new Vector2D(0, 0),
       new Vector2D(50, 20),
       new Vector2D(100, 20),
       new Vector2D(150, 20),
       new Vector2D(200, 20)
-    ).forEach(vector2D -> world.createEntity()
-      .addComponent(new MovingComponent())
-      .addComponent(new LayerComponent("moving_stuff"))
-      .addComponent(new TransformComponent(vector2D.x, vector2D.y, 50, 50))
-      .addComponent(new RectangleRendererComponent(Color.RED))
+    ).forEach(vector2D -> world.createEntity(
+      new LayerComponent("moving_stuff"),
+      new TransformComponent(vector2D.x, vector2D.y, movingEntity),
+      new RectangleRendererComponent(Color.RED))
     );
+
     world.createEntity()
       .addComponent(new LayerComponent("moving_stuff"))
       .addComponent(new TransformComponent(400, 530, 1, 1))
@@ -217,9 +223,9 @@ public class RenderingExample extends Sola {
       .addComponent(new CircleRendererComponent(Color.RED, false));
 
     // ui
-    world.createEntity()
+    Entity uiParentEntity = world.createEntity()
       .addComponent(new LayerComponent("ui"))
-      .addComponent(new TransformComponent(0, 10, 600, 100))
+      .addComponent(new TransformComponent(0, 0, 600, 100))
       .addComponent(new GuiPanelComponent(new Color(120, 255, 255, 255), Color.YELLOW));
 
     final String characters1 = "!\"#$%&'()*+,-./0123456789:; <=>?@ABCDEFGHIJKLMN";
@@ -227,17 +233,23 @@ public class RenderingExample extends Sola {
 
     world.createEntity()
       .addComponent(new LayerComponent("ui"))
-      .addComponent(new TransformComponent(5, 5))
+      .addComponent(new TransformComponent(5, 5, uiParentEntity))
       .addComponent(new GuiTextComponent("default", characters1, Color.RED));
 
     world.createEntity()
       .addComponent(new LayerComponent("ui"))
-      .addComponent(new TransformComponent(5, 35))
+      .addComponent(new TransformComponent(5, 35, uiParentEntity))
       .addComponent(new GuiTextComponent("default", characters2, Color.BLACK));
+
+    Entity subPanel = world.createEntity(
+      new LayerComponent("ui"),
+      new TransformComponent(100, 65, 0.5f, 0.25f, uiParentEntity),
+      new GuiPanelComponent(Color.WHITE)
+    );
 
     world.createEntity()
       .addComponent(new LayerComponent("ui"))
-      .addComponent(new TransformComponent(5, 65))
+      .addComponent(new TransformComponent(2, 2, subPanel))
       .addComponent(new GuiTextComponent("default", "Hello world!", Color.BLUE));
 
     return world;
