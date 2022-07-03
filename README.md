@@ -1,6 +1,4 @@
 # Branch WIP
-
-# TODO List
 * Game Gui Stuff
   * Consider making Gui stuff a separate thing
     * Layouts are easier with inheritance than ECS
@@ -12,6 +10,8 @@
   * GuiTextComponent
     * should handle wrapping based on parent Panel?
   * GuiButtonComponent implementation
+
+# TODO List
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
 * Engine GUI Editor (Sola Editor)
