@@ -2,6 +2,7 @@ package technology.sola.engine.core.component;
 
 import technology.sola.ecs.Component;
 import technology.sola.ecs.Entity;
+import technology.sola.ecs.World;
 import technology.sola.math.linear.Vector2D;
 
 import java.io.Serial;
@@ -51,6 +52,13 @@ public class TransformComponent implements Component {
     this(x, y, scaleX, scaleY);
 
     setParent(parent);
+  }
+
+  @Override
+  public void afterDeserialize(World world) {
+    if (parentUniqueId != null) {
+      world.findEntityByUniqueId(parentUniqueId).ifPresent(this::setParent);
+    }
   }
 
   /**
