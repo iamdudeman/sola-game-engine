@@ -1,19 +1,17 @@
 # Branch WIP
-* Transform hierarchy of some sort (apply it to RenderingExample with GuiPanel and GuiText)
-  * position x and y should be relative to parent
-  * Maybe have a ChildComponent and a GuiSystem of some sort that calculates position before rendering?
-
 
 # TODO List
-* Gui Components
-  * Panel
+* Game Gui Stuff
+  * Consider making Gui stuff a separate thing
+    * Layouts are easier with inheritance than ECS
+    * Could have a base GuiObject that contains many useful things (reference old Sol2d and SolKana implementations)
+    * If so remove usages of GuiTextComponent and GuiPanelComponent
+  * GuiPanelComponent
     * padding
     * parent Panel option for nesting panels
-  * Text
+  * GuiTextComponent
     * should handle wrapping based on parent Panel?
-  * Button
-* Maybe remove copy() from Component and instead have something like a "EngineComponent" interface with copy() and name()
-  * name would be needed for serializing to json and back
+  * GuiButtonComponent implementation
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
 * Engine GUI Editor (Sola Editor)
