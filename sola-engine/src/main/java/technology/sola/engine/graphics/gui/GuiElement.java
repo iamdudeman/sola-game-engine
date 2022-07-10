@@ -3,6 +3,10 @@ package technology.sola.engine.graphics.gui;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.input.MouseEvent;
 
+/**
+ * @deprecated use {@link technology.sola.engine.graphics.gui.element.GuiElement} once built
+ */
+@Deprecated
 public abstract class GuiElement {
   private boolean showing = true;
   private GuiElementMouseEventCallback onMouseEnterCallback;

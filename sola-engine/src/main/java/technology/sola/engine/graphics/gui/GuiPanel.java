@@ -12,6 +12,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @deprecated use {@link GuiDocument} once built
+ */
+@Deprecated
 public class GuiPanel {
   private final List<GuiElementLocationDescription> guiElementLocationDescriptions;
   private final List<GuiElementPosition> guiElementPositions;
