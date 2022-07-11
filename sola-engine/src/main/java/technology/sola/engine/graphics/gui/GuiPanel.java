@@ -3,6 +3,7 @@ package technology.sola.engine.graphics.gui;
 // TODO study https://github.com/iamdudeman/sol2d/blob/master/src/main/java/me/solhub/sol2d/core/gamegui/GameGuiPanel.java
 
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.gui.element.GuiDocument;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
