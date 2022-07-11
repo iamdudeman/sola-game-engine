@@ -295,9 +295,12 @@ public class RenderingExample extends Sola {
     private Color selectedColor = notSelectedColor;
 
     private String text = null;
+    private Font font;
 
     private SimpleButton(String text) {
       this.text = text;
+
+      font = assetPoolProvider.getAssetPool(Font.class).getAsset("default");
 
       setOnMouseEnterCallback((event) -> {
         borderColor = hoverBorderColor;
@@ -321,7 +324,9 @@ public class RenderingExample extends Sola {
 
     @Override
     public int getWidth() {
-      return 240;
+      int textWidth = font.getDimensionsForText(text).width();
+
+      return Math.max(textWidth, 5) + 6;
     }
 
     @Override
@@ -333,7 +338,7 @@ public class RenderingExample extends Sola {
     public void render(Renderer renderer, int x, int y) {
       renderer.fillRect(x, y, getWidth(), getHeight(), borderColor);
       renderer.fillRect(x + 3, y + 3, getWidth() - 6, getHeight() - 6, selectedColor);
-      renderer.setFont(assetPoolProvider.getAssetPool(Font.class).getAsset("default"));
+      renderer.setFont(font);
       renderer.setRenderMode(RenderMode.MASK);
       renderer.drawString(text, x + 3, y + 10, borderColor);
       renderer.setRenderMode(RenderMode.NORMAL);
