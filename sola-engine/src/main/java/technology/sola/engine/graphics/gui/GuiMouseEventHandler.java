@@ -1,4 +1,4 @@
-package technology.sola.engine.graphics.gui.element;
+package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.input.MouseEvent;
 

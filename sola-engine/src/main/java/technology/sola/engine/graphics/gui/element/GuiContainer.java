@@ -1,15 +1,12 @@
 package technology.sola.engine.graphics.gui.element;
 
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.gui.element.properties.GuiElementBounds;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The node of the Gui Tree
- */
 public class GuiContainer extends GuiElement {
-  private List<GuiElement> children;
+  private List<GuiElement> children = new ArrayList<>();
   private int width;
   private int height;
   private Direction direction = Direction.HORIZONTAL;

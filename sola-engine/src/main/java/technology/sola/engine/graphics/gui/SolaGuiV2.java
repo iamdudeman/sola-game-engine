@@ -1,7 +1,6 @@
 package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.gui.element.GuiDocument;
 import technology.sola.engine.input.MouseEvent;
 
 import java.util.ArrayList;

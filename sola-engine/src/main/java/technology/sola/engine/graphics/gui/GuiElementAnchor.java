@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui;
 
+@Deprecated
 public enum GuiElementAnchor {
   BOTTOM_LEFT,
   BOTTOM_RIGHT,

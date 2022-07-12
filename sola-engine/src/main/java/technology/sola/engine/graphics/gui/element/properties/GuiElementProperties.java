@@ -1,16 +1,20 @@
 package technology.sola.engine.graphics.gui.element.properties;
 
 public class GuiElementProperties {
-  private GuiElementBounds padding;
-  private GuiElementBounds margin;
-  private GuiElementBounds absolutePosition;
-  private int zIndex;
-  private boolean isHidden;
+  public final GuiElementBounds padding;
+  public final GuiElementBounds margin;
+  public int layer;
+  public boolean isHidden;
 
   public GuiElementProperties() {
-    isHidden = false;
-    zIndex = 0;
     padding = new GuiElementBounds();
     margin = new GuiElementBounds();
+  }
+
+  public GuiElementProperties(GuiElementBounds padding, GuiElementBounds margin, int layer, boolean isHidden) {
+    this.padding = padding;
+    this.margin = margin;
+    this.layer = layer;
+    this.isHidden = isHidden;
   }
 }

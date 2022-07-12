@@ -1,12 +1,10 @@
-package technology.sola.engine.graphics.gui.element;
+package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.graphics.font.Font;
+import technology.sola.engine.graphics.gui.element.GuiContainer;
 
-/**
- * The tree
- */
 public class GuiDocument {
-  private GuiElement root;
+  private GuiContainer root;
 
   private int x;
   private int y;
