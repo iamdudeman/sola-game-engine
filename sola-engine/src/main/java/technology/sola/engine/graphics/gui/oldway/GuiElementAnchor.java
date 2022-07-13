@@ -1,4 +1,4 @@
-package technology.sola.engine.graphics.gui;
+package technology.sola.engine.graphics.gui.oldway;
 
 @Deprecated
 public enum GuiElementAnchor {

@@ -9,7 +9,7 @@ import java.util.List;
 // todo implement via GuiDocument
 
 public class SolaGuiV2 {
-  private List<GuiDocument> guiDocumentList = new ArrayList<>();
+  private List<GuiPanel> guiPanelList = new ArrayList<>();
 
   public void render(Renderer renderer) {
 

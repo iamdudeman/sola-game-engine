@@ -1,6 +1,7 @@
-package technology.sola.engine.graphics.gui;
+package technology.sola.engine.graphics.gui.oldway;
 
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.gui.SolaGuiV2;
 import technology.sola.engine.input.MouseEvent;
 
 // TODO maybe have a stack of GuiPanel based on a z-index of sorts
