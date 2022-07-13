@@ -8,22 +8,26 @@ import java.util.List;
 
 // todo implement via GuiDocument
 
-public class SolaGuiV2 {
+public class SolaGui {
   private List<GuiPanel> guiPanelList = new ArrayList<>();
 
-  public void render(Renderer renderer) {
+  public void addGuiPanel(GuiPanel guiPanel) {
+    guiPanelList.add(guiPanel);
+  }
 
+  public void render(Renderer renderer) {
+    guiPanelList.forEach(guiPanel -> guiPanel.render(renderer));
   }
 
   public void onMousePressed(MouseEvent event) {
-
+    guiPanelList.forEach(guiPanel -> guiPanel.onMousePressed(event));
   }
 
   public void onMouseReleased(MouseEvent event) {
-
+    guiPanelList.forEach(guiPanel -> guiPanel.onMouseReleased(event));
   }
 
   public void onMouseMoved(MouseEvent event) {
-
+    guiPanelList.forEach(guiPanel -> guiPanel.onMouseMoved(event));
   }
 }

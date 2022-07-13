@@ -4,13 +4,15 @@ import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.gui.oldway.SolaGui;
+import technology.sola.engine.graphics.gui.SolaGui;
+import technology.sola.engine.graphics.gui.oldway.OldSolaGui;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
 
 public abstract class Sola {
   protected SolaPlatform platform;
   protected SolaEcs solaEcs;
+  protected OldSolaGui oldSolaGui;
   protected SolaGui solaGui;
   protected EventHub eventHub;
   protected KeyboardInput keyboardInput;
@@ -19,6 +21,7 @@ public abstract class Sola {
 
   protected Sola() {
     solaEcs = new SolaEcs();
+    oldSolaGui = new OldSolaGui();
     solaGui = new SolaGui();
     eventHub = new EventHub();
     keyboardInput = new KeyboardInput();
@@ -44,14 +47,17 @@ public abstract class Sola {
     platform.onKeyReleased(keyboardInput::keyReleased);
     platform.onMouseMoved(event -> {
       mouseInput.onMouseMoved(event);
+      oldSolaGui.onMouseMoved(event);
       solaGui.onMouseMoved(event);
     });
     platform.onMousePressed(event -> {
       mouseInput.onMousePressed(event);
+      oldSolaGui.onMousePressed(event);
       solaGui.onMousePressed(event);
     });
     platform.onMouseReleased(event -> {
       mouseInput.onMouseReleased(event);
+      oldSolaGui.onMouseReleased(event);
       solaGui.onMouseReleased(event);
     });
     onInit();

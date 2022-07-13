@@ -17,11 +17,10 @@ import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.font.Font;
-import technology.sola.engine.graphics.gui.oldway.GuiElement;
-import technology.sola.engine.graphics.gui.oldway.GuiElementAnchor;
-import technology.sola.engine.graphics.gui.oldway.GuiPanel;
+import technology.sola.engine.graphics.gui.GuiPanel;
 import technology.sola.engine.graphics.gui.components.GuiPanelComponent;
 import technology.sola.engine.graphics.gui.components.GuiTextComponent;
+import technology.sola.engine.graphics.gui.element.GuiElement;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.graphics.sprite.SpriteSheet;
 import technology.sola.engine.input.Key;
@@ -52,7 +51,7 @@ public class RenderingExample extends Sola {
 
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
 
-    solaGui.setGuiPanel(buildGameGuiPanel());
+    solaGui.addGuiPanel(buildGuiPanel());
   }
 
   @Override
@@ -75,6 +74,7 @@ public class RenderingExample extends Sola {
 
     solaGraphics.render();
 
+    renderer.drawToLayer("ui", oldSolaGui::render);
     renderer.drawToLayer("ui", solaGui::render);
   }
 
@@ -263,25 +263,42 @@ public class RenderingExample extends Sola {
     return world;
   }
 
-  private GuiPanel buildGameGuiPanel() {
-    GuiPanel gameGuiPanel = new GuiPanel(200, 350, 400, 200);
+  private GuiPanel buildGuiPanel() {
+    GuiPanel guiPanel = new GuiPanel(200, 350, 400, 200);
 
     SimpleButton simpleButton1 = new SimpleButton("");
     SimpleButton simpleButton2 = new SimpleButton("Toggle above button");
     simpleButton2.setOnMouseUpCallback((event) -> {
-      if (simpleButton1.isShowing()) {
-        simpleButton1.hide();
-      } else {
-        simpleButton1.show();
-      }
+      simpleButton1.properties().setHidden(!simpleButton1.properties().isHidden());
     });
 
-    gameGuiPanel.addGuiElement(simpleButton1, GuiElementAnchor.TOP_LEFT, 10.0f, 10.0f);
-    gameGuiPanel.addGuiElement(simpleButton2, GuiElementAnchor.TOP_LEFT, 10.0f, 80.0f);
+    guiPanel.addGuiElement(simpleButton1);
+    guiPanel.addGuiElement(simpleButton2);
 
-    return gameGuiPanel;
+    return guiPanel;
   }
 
+
+
+//  private GuiPanel buildGameGuiPanel() {
+//    GuiPanel gameGuiPanel = new GuiPanel(200, 350, 400, 200);
+//
+//    SimpleButton simpleButton1 = new SimpleButton("");
+//    SimpleButton simpleButton2 = new SimpleButton("Toggle above button");
+//    simpleButton2.setOnMouseUpCallback((event) -> {
+//      if (simpleButton1.isShowing()) {
+//        simpleButton1.hide();
+//      } else {
+//        simpleButton1.show();
+//      }
+//    });
+//
+//    gameGuiPanel.addGuiElement(simpleButton1, GuiElementAnchor.TOP_LEFT, 10.0f, 10.0f);
+//    gameGuiPanel.addGuiElement(simpleButton2, GuiElementAnchor.TOP_LEFT, 10.0f, 80.0f);
+//
+//    return gameGuiPanel;
+//  }
+//
   private class SimpleButton extends GuiElement {
     private Color hoverBorderColor = Color.GREEN;
     private Color staticBorderColor = Color.WHITE;

@@ -1,17 +1,17 @@
 package technology.sola.engine.graphics.gui.oldway;
 
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.gui.SolaGuiV2;
+import technology.sola.engine.graphics.gui.SolaGui;
 import technology.sola.engine.input.MouseEvent;
 
 // TODO maybe have a stack of GuiPanel based on a z-index of sorts
 // TODO mouse event handlers would return a boolean or something for if the event should propagate further or not
 
 /**
- * @deprecated use {@link SolaGuiV2} once built
+ * @deprecated use {@link SolaGui} once built
  */
 @Deprecated
-public class SolaGui {
+public class OldSolaGui {
   private GuiPanel guiPanel;
 
   public void setGuiPanel(GuiPanel guiPanel) {
