@@ -9,8 +9,6 @@ import technology.sola.engine.editor.ui.ecs.rendering.CircleRendererComponentCon
 import technology.sola.engine.editor.ui.ecs.rendering.LayerComponentController;
 import technology.sola.engine.editor.ui.ecs.rendering.RectangleRendererComponentController;
 import technology.sola.engine.editor.ui.ecs.rendering.SpriteComponentController;
-import technology.sola.engine.editor.ui.ecs.rendering.gui.GuiPanelComponentController;
-import technology.sola.engine.editor.ui.ecs.rendering.gui.GuiTextComponentController;
 
 public class EditorConfiguration {
   private final SolaEditorEntityComponentMenus solaEditorEntityComponentMenus;
@@ -25,10 +23,7 @@ public class EditorConfiguration {
       .addItem("Rectangle", new RectangleRendererComponentController(solaEditorContext))
       .addItem("Circle", new CircleRendererComponentController(solaEditorContext))
       .addItem("Sprite", new SpriteComponentController(solaEditorContext))
-      .addItem("Layer", new LayerComponentController(solaEditorContext))
-      .addSubMenu("Gui")
-        .addItem("Panel", new GuiPanelComponentController(solaEditorContext))
-        .addItem("Text", new GuiTextComponentController(solaEditorContext));
+      .addItem("Layer", new LayerComponentController(solaEditorContext));
     solaEditorEntityComponentMenus.addMenu("Physics")
       .addItem("Collider", new ColliderComponentController(solaEditorContext))
       .addItem("Dynamic Body", new DynamicBodyComponentController(solaEditorContext));

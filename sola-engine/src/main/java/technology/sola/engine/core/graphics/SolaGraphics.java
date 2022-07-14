@@ -19,15 +19,11 @@ public class SolaGraphics {
   private final SolaEcs solaEcs;
   private final Renderer renderer;
   private final AssetPool<SpriteSheet> spriteSheetAssetPool;
-  private final AssetPool<Font> fontAssetPool;
   private boolean isRenderDebug = false;
   private final SpriteAnimatorSystem spriteAnimatorSystem;
 
   public static SolaGraphics use(SolaEcs solaEcs, Renderer renderer, AssetPoolProvider assetPoolProvider) {
-    SolaGraphics solaGraphics = new SolaGraphics(
-            solaEcs, renderer,
-      assetPoolProvider.getAssetPool(SpriteSheet.class), assetPoolProvider.getAssetPool(Font.class)
-    );
+    SolaGraphics solaGraphics = new SolaGraphics(solaEcs, renderer, assetPoolProvider.getAssetPool(SpriteSheet.class));
 
     solaEcs.addSystem(solaGraphics.spriteAnimatorSystem);
 
@@ -50,8 +46,6 @@ public class SolaGraphics {
     GeometryGraphics.render(renderer, solaEcs, cameraTransform);
 
     SpriteGraphics.render(renderer, solaEcs, cameraTransform, spriteSheetAssetPool);
-
-    GuiGraphics.render(renderer, solaEcs, fontAssetPool);
 
     // TODO need to render this to back most layer at some point probably
     if (isRenderDebug) {
@@ -79,12 +73,10 @@ public class SolaGraphics {
     isRenderDebug = renderDebug;
   }
 
-  private SolaGraphics(SolaEcs solaEcs, Renderer renderer,
-                       AssetPool<SpriteSheet> spriteSheetAssetPool, AssetPool<Font> fontAssetPool) {
+  private SolaGraphics(SolaEcs solaEcs, Renderer renderer, AssetPool<SpriteSheet> spriteSheetAssetPool) {
     this.solaEcs = solaEcs;
     this.renderer = renderer;
     this.spriteSheetAssetPool = spriteSheetAssetPool;
-    this.fontAssetPool = fontAssetPool;
 
     spriteAnimatorSystem = new SpriteAnimatorSystem();
   }

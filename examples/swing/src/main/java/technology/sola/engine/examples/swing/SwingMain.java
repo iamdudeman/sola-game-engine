@@ -12,8 +12,8 @@ public class SwingMain {
   public static void main(String[] args) {
 //    Sola sola = new StressTestExample(1337);
 //    Sola sola = new SimplePlatformerExample();
-    Sola sola = new RenderingExample();
-//    Sola sola = new GuiExample();
+//    Sola sola = new RenderingExample();
+    Sola sola = new GuiExample();
     SolaPlatform solaPlatform = new SwingSolaPlatform();
 
     solaPlatform.play(sola);
