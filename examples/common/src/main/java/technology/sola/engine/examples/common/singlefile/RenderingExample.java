@@ -9,7 +9,6 @@ import technology.sola.ecs.Component;
 import technology.sola.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Layer;
-import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.core.graphics.SolaGraphics;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
@@ -17,10 +16,8 @@ import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.font.Font;
-import technology.sola.engine.graphics.gui.GuiPanel;
 import technology.sola.engine.graphics.gui.components.GuiPanelComponent;
 import technology.sola.engine.graphics.gui.components.GuiTextComponent;
-import technology.sola.engine.graphics.gui.element.GuiElement;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.graphics.sprite.SpriteSheet;
 import technology.sola.engine.input.Key;
@@ -50,8 +47,6 @@ public class RenderingExample extends Sola {
     solaEcs.setWorld(createWorld());
 
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
-
-    solaGui.addGuiPanel(buildGuiPanel());
   }
 
   @Override
@@ -74,7 +69,6 @@ public class RenderingExample extends Sola {
 
     solaGraphics.render();
 
-    renderer.drawToLayer("ui", oldSolaGui::render);
     renderer.drawToLayer("ui", solaGui::render);
   }
 
@@ -262,103 +256,4 @@ public class RenderingExample extends Sola {
 
     return world;
   }
-
-  private GuiPanel buildGuiPanel() {
-    GuiPanel guiPanel = new GuiPanel(200, 350, 400, 200);
-
-    SimpleButton simpleButton1 = new SimpleButton("");
-    SimpleButton simpleButton2 = new SimpleButton("Toggle above button");
-    simpleButton2.setOnMouseUpCallback((event) -> {
-      simpleButton1.properties().setHidden(!simpleButton1.properties().isHidden());
-    });
-
-    guiPanel.addGuiElement(simpleButton1);
-    guiPanel.addGuiElement(simpleButton2);
-
-    return guiPanel;
-  }
-
-
-
-//  private GuiPanel buildGameGuiPanel() {
-//    GuiPanel gameGuiPanel = new GuiPanel(200, 350, 400, 200);
-//
-//    SimpleButton simpleButton1 = new SimpleButton("");
-//    SimpleButton simpleButton2 = new SimpleButton("Toggle above button");
-//    simpleButton2.setOnMouseUpCallback((event) -> {
-//      if (simpleButton1.isShowing()) {
-//        simpleButton1.hide();
-//      } else {
-//        simpleButton1.show();
-//      }
-//    });
-//
-//    gameGuiPanel.addGuiElement(simpleButton1, GuiElementAnchor.TOP_LEFT, 10.0f, 10.0f);
-//    gameGuiPanel.addGuiElement(simpleButton2, GuiElementAnchor.TOP_LEFT, 10.0f, 80.0f);
-//
-//    return gameGuiPanel;
-//  }
-//
-  private class SimpleButton extends GuiElement {
-    private Color hoverBorderColor = Color.GREEN;
-    private Color staticBorderColor = Color.WHITE;
-
-    private Color borderColor = staticBorderColor;
-
-
-    private Color isSelectedColor = Color.RED;
-    private Color notSelectedColor = Color.WHITE;
-
-    private Color selectedColor = notSelectedColor;
-
-    private String text = null;
-    private Font font;
-
-    private SimpleButton(String text) {
-      this.text = text;
-
-      font = assetPoolProvider.getAssetPool(Font.class).getAsset("default");
-
-      setOnMouseEnterCallback((event) -> {
-        borderColor = hoverBorderColor;
-        System.out.println("enter");
-      });
-
-      setOnMouseExitCallback((event) -> {
-        borderColor = staticBorderColor;
-        System.out.println("exit");
-      });
-
-      setOnMouseUpCallback((event) -> {
-        if (selectedColor.equals(notSelectedColor)) {
-          selectedColor = isSelectedColor;
-        } else {
-          selectedColor = notSelectedColor;
-        }
-        System.out.println("click");
-      });
-    }
-
-    @Override
-    public int getWidth() {
-      int textWidth = font.getDimensionsForText(text).width();
-
-      return Math.max(textWidth, 5) + 6;
-    }
-
-    @Override
-    public int getHeight() {
-      return 40;
-    }
-
-    @Override
-    public void render(Renderer renderer, int x, int y) {
-      renderer.fillRect(x, y, getWidth(), getHeight(), borderColor);
-      renderer.fillRect(x + 3, y + 3, getWidth() - 6, getHeight() - 6, selectedColor);
-      renderer.setFont(font);
-      renderer.setRenderMode(RenderMode.MASK);
-      renderer.drawString(text, x + 3, y + 10, borderColor);
-      renderer.setRenderMode(RenderMode.NORMAL);
-    }
-  };
 }

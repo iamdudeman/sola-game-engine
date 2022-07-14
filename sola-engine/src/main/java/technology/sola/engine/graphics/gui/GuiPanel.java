@@ -19,8 +19,8 @@ public class GuiPanel {
   private int width;
   private int height;
 
-  private Direction direction = Direction.HORIZONTAL;
-  private Anchor anchor = Anchor.TOP_LEFT;
+  private GuiLayoutDirection guiLayoutDirection = GuiLayoutDirection.HORIZONTAL;
+  private GuiLayoutAnchor guiLayoutAnchor = GuiLayoutAnchor.TOP_LEFT;
 
   private List<GuiElement> guiElementList = new ArrayList<>();
   private List<GuiElementPosition> guiElementPositions = new ArrayList<>();
@@ -46,7 +46,44 @@ public class GuiPanel {
 
   public void addGuiElement(GuiElement guiElement) {
     guiElementList.add(guiElement);
-    guiElementPositions.add(new GuiElementPosition(guiElement, x + guiElementPositions.size() * guiElement.getWidth(), y));
+    invalidate();
+  }
+
+  public void setDirection(GuiLayoutDirection guiLayoutDirection) {
+    this.guiLayoutDirection = guiLayoutDirection;
+    invalidate();
+  }
+
+  public void invalidate() {
+    guiElementPositions.clear();
+
+    if (guiLayoutDirection == GuiLayoutDirection.HORIZONTAL && guiLayoutAnchor == GuiLayoutAnchor.TOP_LEFT) {
+      int xOffset = 0;
+
+      for (GuiElement guiElement : guiElementList) {
+        xOffset += guiElement.properties().margin.getLeft();
+
+        guiElementPositions.add(new GuiElementPosition(guiElement, x + xOffset, y));
+
+        int width = guiElement.getWidth();
+
+        xOffset += width + guiElement.properties().margin.getRight();
+      }
+    } else if (guiLayoutDirection == GuiLayoutDirection.VERTICAL && guiLayoutAnchor == GuiLayoutAnchor.TOP_LEFT) {
+      int yOffset = 0;
+
+      for (GuiElement guiElement : guiElementList) {
+        yOffset += guiElement.properties().margin.getTop();
+
+        guiElementPositions.add(new GuiElementPosition(guiElement, x, y + yOffset));
+
+        int height = guiElement.getHeight();
+
+        yOffset += height + guiElement.properties().margin.getBottom();
+      }
+    } else {
+      throw new RuntimeException("not yet implemented");
+    }
   }
 
   public void onMousePressed(MouseEvent event) {
@@ -98,19 +135,6 @@ public class GuiPanel {
         }
       }
     });
-  }
-
-  public enum Direction {
-    HORIZONTAL,
-    VERTICAL,
-  }
-
-  public enum Anchor {
-    BOTTOM_LEFT,
-    BOTTOM_RIGHT,
-    CENTER,
-    TOP_LEFT,
-    TOP_RIGHT
   }
 
   private record GuiElementPosition(GuiElement guiElement, int x, int y) {

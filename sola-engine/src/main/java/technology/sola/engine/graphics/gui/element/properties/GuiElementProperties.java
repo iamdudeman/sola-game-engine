@@ -10,12 +10,6 @@ public class GuiElementProperties {
     margin = new GuiElementBounds();
   }
 
-  public GuiElementProperties(GuiElementBounds padding, GuiElementBounds margin, boolean isHidden) {
-    this.padding = padding;
-    this.margin = margin;
-    this.isHidden = isHidden;
-  }
-
   public boolean isHidden() {
     return isHidden;
   }
