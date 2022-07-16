@@ -9,6 +9,7 @@ import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.graphics.gui.element.container.GuiHorizontalContainerElement;
 import technology.sola.engine.graphics.gui.element.GuiElement;
 import technology.sola.engine.graphics.gui.element.GuiElementBaseProperties;
+import technology.sola.engine.graphics.gui.element.container.GuiVerticalContainerElement;
 
 public class GuiExample extends Sola {
   @Override
@@ -32,48 +33,54 @@ public class GuiExample extends Sola {
   }
 
   private GuiElement<?> buildGui() {
-    GuiHorizontalContainerElement guiHorizontalContainerElement = new GuiHorizontalContainerElement(400, 200);
+    GuiHorizontalContainerElement firstParent = new GuiHorizontalContainerElement(400, 100);
+    firstParent.properties().setBorderColor(Color.YELLOW);
 
-    guiHorizontalContainerElement.properties().setPosition(10, 200);
-    guiHorizontalContainerElement.properties().setBorderColor(Color.GREEN);
+    SimpleButton middleButton = new SimpleButton("Second");
+    middleButton.properties().margin.set(0, 15);
 
-    SimpleButton simpleButton1 = new SimpleButton("");
-    simpleButton1.properties().margin.set(0, 15, 0, 0);
-    SimpleButton simpleButton2 = new SimpleButton("Toggle above button");
-    simpleButton2.setOnMouseUpCallback((event) -> simpleButton1.properties().setHidden(!simpleButton1.properties().isHidden()));
+    firstParent.addChild(new SimpleButton("First"));
+    firstParent.addChild(middleButton);
+    firstParent.addChild(new SimpleButton("Third"));
 
-    guiHorizontalContainerElement.addChild(simpleButton1);
-    guiHorizontalContainerElement.addChild(simpleButton2);
 
-    return guiHorizontalContainerElement;
+    GuiHorizontalContainerElement secondParent = new GuiHorizontalContainerElement(400, 100);
+    secondParent.properties().setBorderColor(Color.ORANGE);
+
+    SimpleButton checkButton = new SimpleButton("");
+    checkButton.properties().margin.set(0, 15, 0, 0);
+    checkButton.setOnMouseUpCallback(event -> checkButton.properties().backgroundColor = checkButton.properties().backgroundColor.equals(Color.RED) ? Color.WHITE : Color.RED);
+    SimpleButton toggleOtherButton = new SimpleButton("Toggle other button");
+    toggleOtherButton.setOnMouseUpCallback((event) -> checkButton.properties().setHidden(!checkButton.properties().isHidden()));
+
+    secondParent.addChild(checkButton);
+    secondParent.addChild(toggleOtherButton);
+
+
+    GuiVerticalContainerElement rootElement = new GuiVerticalContainerElement(400, 200);
+
+    rootElement.properties().setPosition(15, 15);
+    rootElement.properties().setBorderColor(Color.GREEN);
+
+    rootElement.addChild(firstParent);
+    rootElement.addChild(secondParent);
+
+    return rootElement;
   }
 
-  private class SimpleButton extends GuiElement<GuiElementBaseProperties> {
-    private Color hoverBorderColor = Color.GREEN;
-    private Color staticBorderColor = Color.BLUE;
-
-    private Color borderColor = staticBorderColor;
-
-
-    private Color isSelectedColor = Color.RED;
-    private Color notSelectedColor = Color.WHITE;
-
-    private Color selectedColor = notSelectedColor;
-
+  private class SimpleButton extends GuiElement<SimpleButton.Properties> {
     private String text = null;
     private Font font;
 
     private SimpleButton(String text) {
-      properties = new GuiElementBaseProperties();
+      properties = new Properties();
       this.text = text;
 
       font = assetPoolProvider.getAssetPool(Font.class).getAsset("default");
 
-      setOnMouseEnterCallback((event) -> borderColor = hoverBorderColor);
+      setOnMouseEnterCallback((event) -> properties.borderColor = Color.GREEN);
 
-      setOnMouseExitCallback((event) -> borderColor = staticBorderColor);
-
-      setOnMouseUpCallback((event) -> selectedColor = selectedColor.equals(notSelectedColor) ? isSelectedColor : notSelectedColor);
+      setOnMouseExitCallback((event) -> properties.borderColor = Color.BLUE);
     }
 
     @Override
@@ -90,12 +97,17 @@ public class GuiExample extends Sola {
 
     @Override
     public void renderSelf(Renderer renderer, int x, int y) {
-      renderer.fillRect(x, y, getWidth(), getHeight(), borderColor);
-      renderer.fillRect(x + 3, y + 3, getWidth() - 6, getHeight() - 6, selectedColor);
+      renderer.fillRect(x, y, getWidth(), getHeight(), properties.borderColor);
+      renderer.fillRect(x + 3, y + 3, getWidth() - 6, getHeight() - 6, properties.backgroundColor);
       renderer.setFont(font);
       renderer.setRenderMode(RenderMode.MASK);
-      renderer.drawString(text, x + 3, y + 10, borderColor);
+      renderer.drawString(text, x + 3, y + 10, properties.borderColor);
       renderer.setRenderMode(RenderMode.NORMAL);
+    }
+
+    private static class Properties extends GuiElementBaseProperties {
+      private Color borderColor = Color.BLUE;
+      private Color backgroundColor = Color.WHITE;
     }
   }
 }

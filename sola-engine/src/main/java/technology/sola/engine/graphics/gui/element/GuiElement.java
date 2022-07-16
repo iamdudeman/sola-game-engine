@@ -27,7 +27,7 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
   public void render(Renderer renderer) {
     renderSelf(renderer, properties.getX(), properties.getY());
 
-    recalculateChildPositions(properties.getX(), properties.getY());
+    recalculateChildPositions();
 
     children.forEach(child -> {
       if (child.properties().isHidden()) {
@@ -103,7 +103,6 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
 
     boolean inElement = guiElementBounds.contains(new Vector2D(event.x(), event.y()));
 
-    // todo loop through child elements
     for (GuiElement<?> child : children) {
       if (child.handleMouseEvent(event, eventType)) {
         break;
@@ -132,7 +131,7 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
     return inElement;
   }
 
-  protected void recalculateChildPositions(int x, int y) {
+  public void recalculateChildPositions() {
     if (!properties().isLayoutChanged() && children.stream().noneMatch(child -> child.properties().isLayoutChanged())) {
       return;
     }
@@ -142,8 +141,8 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
     for (GuiElement<?> guiElement : children) {
       xOffset += guiElement.properties().margin.getLeft();
 
-      guiElement.properties.setPosition(x + xOffset, y);
-      guiElement.recalculateChildPositions(x + xOffset, y);
+      guiElement.properties.setPosition(properties().getX() + xOffset, properties().getY());
+      guiElement.recalculateChildPositions();
 
       int width = guiElement.getWidth();
 
@@ -152,68 +151,4 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
 
     properties.setLayoutChanged(false);
   }
-
-
-
-
-
-
-
-
-
-
-  public void onMousePressed(MouseEvent event) {
-    handleMouseEvent(event, "press");
-  }
-
-  public void onMouseReleased(MouseEvent event) {
-    handleMouseEvent(event, "release");
-  }
-
-  public void onMouseMoved(MouseEvent event) {
-    handleMouseEvent(event, "move");
-  }
-
-  private void handleMouseEvent(MouseEvent event, String eventType, int blah) {
-    /*
-    guiElementPositions.forEach(guiElementPosition -> {
-      GuiElement guiElement = guiElementPosition.guiElement;
-
-      if (guiElement.properties().isHidden()) {
-        return;
-      }
-
-      Integer x = guiElementPosition.x;
-      Integer y = guiElementPosition.y;
-      Integer width = guiElement.getWidth();
-      Integer height = guiElement.getHeight();
-
-      Rectangle guiElementBounds = new Rectangle(new Vector2D(x, y), new Vector2D(x + width, y + height));
-
-      if (guiElementBounds.contains(new Vector2D(event.x(), event.y()))) {
-        switch (eventType) {
-          case "press" -> guiElement.onMouseDown(event);
-          case "release" -> guiElement.onMouseUp(event);
-          case "move" -> {
-            boolean isOver = guiElementMouseOver.getOrDefault(guiElement, false);
-
-            if (!isOver) {
-              guiElementMouseOver.put(guiElement, true);
-              guiElement.onMouseEnter(event);
-            }
-          }
-        }
-      } else {
-        boolean isOver = guiElementMouseOver.getOrDefault(guiElement, false);
-
-        if (isOver) {
-          guiElement.onMouseExit(event);
-          guiElementMouseOver.put(guiElement, false);
-        }
-      }
-    });
-    */
-  }
-
-
 }
