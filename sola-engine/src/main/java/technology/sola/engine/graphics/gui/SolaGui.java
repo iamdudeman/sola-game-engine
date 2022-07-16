@@ -6,8 +6,6 @@ import technology.sola.engine.input.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-// todo implement via GuiDocument
-
 public class SolaGui {
   private List<GuiPanel> guiPanelList = new ArrayList<>();
 

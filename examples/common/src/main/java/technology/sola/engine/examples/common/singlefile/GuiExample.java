@@ -8,7 +8,9 @@ import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.graphics.gui.GuiLayoutDirection;
 import technology.sola.engine.graphics.gui.GuiPanel;
+import technology.sola.engine.graphics.gui.element.GuiHorizontalContainerElement;
 import technology.sola.engine.graphics.gui.element.GuiElement;
+import technology.sola.engine.graphics.gui.element.properties.GuiElementBaseProperties;
 
 public class GuiExample extends Sola {
   @Override
@@ -22,7 +24,7 @@ public class GuiExample extends Sola {
       .addAssetId("default", "assets/monospaced_NORMAL_18.json");
 
     solaGui.addGuiPanel(buildGuiPanel());
-    solaGui.addGuiPanel(buildGuiPanel2());
+//    solaGui.addGuiPanel(buildGuiPanel2());
   }
 
   @Override
@@ -33,38 +35,36 @@ public class GuiExample extends Sola {
   }
 
   private GuiPanel buildGuiPanel() {
-    GuiPanel guiPanel = new GuiPanel(10, 10, 400, 200);
-
-    guiPanel.setDirection(GuiLayoutDirection.HORIZONTAL);
+    GuiHorizontalContainerElement guiHorizontalContainerElement = new GuiHorizontalContainerElement(400, 200);
 
     SimpleButton simpleButton1 = new SimpleButton("");
     simpleButton1.properties().margin.set(0, 15, 0, 0);
     SimpleButton simpleButton2 = new SimpleButton("Toggle above button");
     simpleButton2.setOnMouseUpCallback((event) -> simpleButton1.properties().setHidden(!simpleButton1.properties().isHidden()));
 
-    guiPanel.addGuiElement(simpleButton1);
-    guiPanel.addGuiElement(simpleButton2);
+    guiHorizontalContainerElement.addChild(simpleButton1);
+    guiHorizontalContainerElement.addChild(simpleButton2);
 
-    return guiPanel;
+    return new GuiPanel(10, 200, guiHorizontalContainerElement);
   }
 
-  private GuiPanel buildGuiPanel2() {
-    GuiPanel guiPanel = new GuiPanel(10, 200, 400, 200);
+//  private GuiPanel buildGuiPanel2() {
+//    GuiPanel guiPanel = new GuiPanel(10, 200, 400, 200);
+//
+//    guiPanel.setDirection(GuiLayoutDirection.VERTICAL);
+//
+//    SimpleButton simpleButton1 = new SimpleButton("");
+//    simpleButton1.properties().margin.set(0, 0, 10, 0);
+//    SimpleButton simpleButton2 = new SimpleButton("Toggle above button");
+//    simpleButton2.setOnMouseUpCallback((event) -> simpleButton1.properties().setHidden(!simpleButton1.properties().isHidden()));
+//
+//    guiPanel.addGuiElement(simpleButton1);
+//    guiPanel.addGuiElement(simpleButton2);
+//
+//    return guiPanel;
+//  }
 
-    guiPanel.setDirection(GuiLayoutDirection.VERTICAL);
-
-    SimpleButton simpleButton1 = new SimpleButton("");
-    simpleButton1.properties().margin.set(0, 15, 10, 0);
-    SimpleButton simpleButton2 = new SimpleButton("Toggle above button");
-    simpleButton2.setOnMouseUpCallback((event) -> simpleButton1.properties().setHidden(!simpleButton1.properties().isHidden()));
-
-    guiPanel.addGuiElement(simpleButton1);
-    guiPanel.addGuiElement(simpleButton2);
-
-    return guiPanel;
-  }
-
-  private class SimpleButton extends GuiElement {
+  private class SimpleButton extends GuiElement<GuiElementBaseProperties> {
     private Color hoverBorderColor = Color.GREEN;
     private Color staticBorderColor = Color.BLUE;
 
@@ -80,28 +80,16 @@ public class GuiExample extends Sola {
     private Font font;
 
     private SimpleButton(String text) {
+      properties = new GuiElementBaseProperties();
       this.text = text;
 
       font = assetPoolProvider.getAssetPool(Font.class).getAsset("default");
 
-      setOnMouseEnterCallback((event) -> {
-        borderColor = hoverBorderColor;
-        System.out.println("enter");
-      });
+      setOnMouseEnterCallback((event) -> borderColor = hoverBorderColor);
 
-      setOnMouseExitCallback((event) -> {
-        borderColor = staticBorderColor;
-        System.out.println("exit");
-      });
+      setOnMouseExitCallback((event) -> borderColor = staticBorderColor);
 
-      setOnMouseUpCallback((event) -> {
-        if (selectedColor.equals(notSelectedColor)) {
-          selectedColor = isSelectedColor;
-        } else {
-          selectedColor = notSelectedColor;
-        }
-        System.out.println("click");
-      });
+      setOnMouseUpCallback((event) -> selectedColor = selectedColor.equals(notSelectedColor) ? isSelectedColor : notSelectedColor);
     }
 
     @Override
@@ -117,7 +105,7 @@ public class GuiExample extends Sola {
     }
 
     @Override
-    public void render(Renderer renderer, int x, int y) {
+    public void renderSelf(Renderer renderer, int x, int y) {
       renderer.fillRect(x, y, getWidth(), getHeight(), borderColor);
       renderer.fillRect(x + 3, y + 3, getWidth() - 6, getHeight() - 6, selectedColor);
       renderer.setFont(font);

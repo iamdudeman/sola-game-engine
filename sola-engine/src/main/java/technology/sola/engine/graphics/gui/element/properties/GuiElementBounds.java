@@ -7,10 +7,10 @@ public class GuiElementBounds {
   private int left;
 
   public void set(int top, int right, int bottom, int left) {
-    this.top = top;
-    this.right = right;
-    this.bottom = bottom;
-    this.left = left;
+    setTop(top);
+    setRight(right);
+    setBottom(bottom);
+    setLeft(left);
   }
 
   public void set(int top, int leftAndRight, int bottom) {

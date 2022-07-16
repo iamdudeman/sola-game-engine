@@ -1,9 +1,13 @@
 package technology.sola.engine.graphics.gui;
 
 public enum GuiLayoutAnchor {
-  BOTTOM_LEFT,
-  BOTTOM_RIGHT,
-  CENTER,
   TOP_LEFT,
-  TOP_RIGHT
+  TOP_CENTER,
+  TOP_RIGHT,
+  CENTER_LEFT,
+  CENTER,
+  CENTER_RIGHT,
+  BOTTOM_LEFT,
+  BOTTOM_CENTER,
+  BOTTOM_RIGHT
 }
