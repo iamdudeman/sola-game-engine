@@ -5,11 +5,11 @@ import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.gui.element.GuiElement;
 import technology.sola.engine.graphics.gui.element.GuiElementBaseProperties;
 
-public class GuiHorizontalContainerElement extends GuiElement<GuiHorizontalContainerElement.Properties> {
+public class HorizontalContainerGuiElement extends GuiElement<HorizontalContainerGuiElement.Properties> {
   private final int width;
   private final int height;
 
-  public GuiHorizontalContainerElement(int width, int height) {
+  public HorizontalContainerGuiElement(int width, int height) {
     this.properties = new Properties();
     this.width = width;
     this.height = height;

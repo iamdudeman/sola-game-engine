@@ -18,6 +18,8 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
   private Consumer<MouseEvent> onMouseDownCallback;
   private Consumer<MouseEvent> onMouseUpCallback;
 
+  private boolean wasMouseOverElement = false;
+
   public abstract int getWidth();
 
   public abstract int getHeight();
@@ -44,7 +46,8 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
   }
 
   public void onMouseEnter(MouseEvent mouseEvent) {
-    if (onMouseEnterCallback != null) {
+    if (onMouseEnterCallback != null && !wasMouseOverElement) {
+      wasMouseOverElement = true;
       onMouseEnterCallback.accept(mouseEvent);
     }
   }
@@ -54,7 +57,8 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
   }
 
   public void onMouseExit(MouseEvent mouseEvent) {
-    if (onMouseExitCallback != null) {
+    if (onMouseExitCallback != null && wasMouseOverElement) {
+      wasMouseOverElement = false;
       onMouseExitCallback.accept(mouseEvent);
     }
   }
@@ -87,8 +91,6 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
     return properties;
   }
 
-  private boolean isMouseOver = false;
-
   public boolean handleMouseEvent(MouseEvent event, String eventType) {
     if (properties().isHidden()) {
       return false;
@@ -101,34 +103,27 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
 
     Rectangle guiElementBounds = new Rectangle(new Vector2D(x, y), new Vector2D(x + width, y + height));
 
-    boolean inElement = guiElementBounds.contains(new Vector2D(event.x(), event.y()));
+    boolean isMouseCurrentlyOverElement = guiElementBounds.contains(new Vector2D(event.x(), event.y()));
 
-    for (GuiElement<?> child : children) {
-      if (child.handleMouseEvent(event, eventType)) {
-        break;
-      }
-    }
-
-    if (guiElementBounds.contains(new Vector2D(event.x(), event.y()))) {
+    if (isMouseCurrentlyOverElement) {
       switch (eventType) {
         case "press" -> onMouseDown(event);
         case "release" -> onMouseUp(event);
-        case "move" -> {
+        case "move" -> onMouseEnter(event);
+      }
 
-          if (!isMouseOver) {
-            isMouseOver = true;
-            onMouseEnter(event);
-          }
-        }
+      for (GuiElement<?> child : children) {
+        child.handleMouseEvent(event, eventType);
       }
     } else {
-      if (isMouseOver) {
-        onMouseExit(event);
-        isMouseOver = false;
+      for (GuiElement<?> child : children) {
+        child.onMouseExit(event);
       }
+
+      onMouseExit(event);
     }
 
-    return inElement;
+    return isMouseCurrentlyOverElement;
   }
 
   public void recalculateChildPositions() {

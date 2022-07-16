@@ -6,10 +6,11 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.font.Font;
-import technology.sola.engine.graphics.gui.element.container.GuiHorizontalContainerElement;
+import technology.sola.engine.graphics.gui.element.ChildlessGuiElement;
+import technology.sola.engine.graphics.gui.element.container.HorizontalContainerGuiElement;
 import technology.sola.engine.graphics.gui.element.GuiElement;
 import technology.sola.engine.graphics.gui.element.GuiElementBaseProperties;
-import technology.sola.engine.graphics.gui.element.container.GuiVerticalContainerElement;
+import technology.sola.engine.graphics.gui.element.container.VerticalContainerGuiElement;
 
 public class GuiExample extends Sola {
   @Override
@@ -33,7 +34,7 @@ public class GuiExample extends Sola {
   }
 
   private GuiElement<?> buildGui() {
-    GuiHorizontalContainerElement firstParent = new GuiHorizontalContainerElement(400, 100);
+    HorizontalContainerGuiElement firstParent = new HorizontalContainerGuiElement(400, 100);
     firstParent.properties().setBorderColor(Color.YELLOW);
 
     SimpleButton middleButton = new SimpleButton("Second");
@@ -44,7 +45,7 @@ public class GuiExample extends Sola {
     firstParent.addChild(new SimpleButton("Third"));
 
 
-    GuiHorizontalContainerElement secondParent = new GuiHorizontalContainerElement(400, 100);
+    HorizontalContainerGuiElement secondParent = new HorizontalContainerGuiElement(400, 100);
     secondParent.properties().setBorderColor(Color.ORANGE);
 
     SimpleButton checkButton = new SimpleButton("");
@@ -57,7 +58,7 @@ public class GuiExample extends Sola {
     secondParent.addChild(toggleOtherButton);
 
 
-    GuiVerticalContainerElement rootElement = new GuiVerticalContainerElement(400, 200);
+    VerticalContainerGuiElement rootElement = new VerticalContainerGuiElement(400, 200);
 
     rootElement.properties().setPosition(15, 15);
     rootElement.properties().setBorderColor(Color.GREEN);
@@ -68,7 +69,7 @@ public class GuiExample extends Sola {
     return rootElement;
   }
 
-  private class SimpleButton extends GuiElement<SimpleButton.Properties> {
+  private class SimpleButton extends ChildlessGuiElement<SimpleButton.Properties> {
     private String text = null;
     private Font font;
 
