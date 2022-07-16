@@ -1,12 +1,13 @@
 package technology.sola.engine.graphics.gui.element.container;
 
+import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.gui.element.GuiElement;
 import technology.sola.engine.graphics.gui.element.GuiElementBaseProperties;
 
 public class GuiHorizontalContainerElement extends GuiElement<GuiHorizontalContainerElement.Properties> {
-  private int width;
-  private int height;
+  private final int width;
+  private final int height;
 
   public GuiHorizontalContainerElement(int width, int height) {
     this.properties = new Properties();
@@ -26,9 +27,20 @@ public class GuiHorizontalContainerElement extends GuiElement<GuiHorizontalConta
 
   @Override
   public void renderSelf(Renderer renderer, int x, int y) {
-
+    if (properties.borderColor != null) {
+      renderer.drawRect(x, y, getWidth(), getHeight(), properties.borderColor);
+    }
   }
 
   public static class Properties extends GuiElementBaseProperties {
+    private Color borderColor;
+
+    public Color getBorderColor() {
+      return borderColor;
+    }
+
+    public void setBorderColor(Color borderColor) {
+      this.borderColor = borderColor;
+    }
   }
 }

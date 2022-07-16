@@ -21,8 +21,7 @@ public class GuiExample extends Sola {
     assetPoolProvider.getAssetPool(Font.class)
       .addAssetId("default", "assets/monospaced_NORMAL_18.json");
 
-    solaGui.addGuiElement(buildGuiPanel());
-//    solaGui.addGuiElement(buildGuiPanel2());
+    solaGui.setGuiRoot(buildGui());
   }
 
   @Override
@@ -32,10 +31,11 @@ public class GuiExample extends Sola {
     solaGui.render(renderer);
   }
 
-  private GuiElement<?> buildGuiPanel() {
+  private GuiElement<?> buildGui() {
     GuiHorizontalContainerElement guiHorizontalContainerElement = new GuiHorizontalContainerElement(400, 200);
 
     guiHorizontalContainerElement.properties().setPosition(10, 200);
+    guiHorizontalContainerElement.properties().setBorderColor(Color.GREEN);
 
     SimpleButton simpleButton1 = new SimpleButton("");
     simpleButton1.properties().margin.set(0, 15, 0, 0);
@@ -47,22 +47,6 @@ public class GuiExample extends Sola {
 
     return guiHorizontalContainerElement;
   }
-
-//  private GuiPanel buildGuiPanel2() {
-//    GuiPanel guiPanel = new GuiPanel(10, 200, 400, 200);
-//
-//    guiPanel.setDirection(GuiLayoutDirection.VERTICAL);
-//
-//    SimpleButton simpleButton1 = new SimpleButton("");
-//    simpleButton1.properties().margin.set(0, 0, 10, 0);
-//    SimpleButton simpleButton2 = new SimpleButton("Toggle above button");
-//    simpleButton2.setOnMouseUpCallback((event) -> simpleButton1.properties().setHidden(!simpleButton1.properties().isHidden()));
-//
-//    guiPanel.addGuiElement(simpleButton1);
-//    guiPanel.addGuiElement(simpleButton2);
-//
-//    return guiPanel;
-//  }
 
   private class SimpleButton extends GuiElement<GuiElementBaseProperties> {
     private Color hoverBorderColor = Color.GREEN;

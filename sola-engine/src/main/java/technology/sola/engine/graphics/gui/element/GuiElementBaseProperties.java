@@ -4,19 +4,19 @@ public class GuiElementBaseProperties {
   public final Bounds margin;
   private int x;
   private int y;
-  private boolean isChanged = true;
+  private boolean isLayoutChanged = true;
   private boolean isHidden;
 
   public GuiElementBaseProperties() {
     margin = new Bounds();
   }
 
-  public boolean isChanged() {
-    return isChanged;
+  public boolean isLayoutChanged() {
+    return isLayoutChanged;
   }
 
-  public void setChanged(boolean changed) {
-    this.isChanged = changed;
+  public void setLayoutChanged(boolean layoutChanged) {
+    this.isLayoutChanged = layoutChanged;
   }
 
   public boolean isHidden() {
@@ -30,7 +30,7 @@ public class GuiElementBaseProperties {
   public void setPosition(int x, int y) {
     this.x = x;
     this.y = y;
-    setChanged(true);
+    setLayoutChanged(true);
   }
 
   public int getX() {
@@ -72,7 +72,7 @@ public class GuiElementBaseProperties {
 
     public void setTop(int top) {
       this.top = top;
-      setChanged(true);
+      setLayoutChanged(true);
     }
 
     public int getRight() {
@@ -81,7 +81,7 @@ public class GuiElementBaseProperties {
 
     public void setRight(int right) {
       this.right = right;
-      setChanged(true);
+      setLayoutChanged(true);
     }
 
     public int getBottom() {
@@ -90,7 +90,7 @@ public class GuiElementBaseProperties {
 
     public void setBottom(int bottom) {
       this.bottom = bottom;
-      setChanged(true);
+      setLayoutChanged(true);
     }
 
     public int getLeft() {
@@ -99,7 +99,7 @@ public class GuiElementBaseProperties {
 
     public void setLeft(int left) {
       this.left = left;
-      setChanged(true);
+      setLayoutChanged(true);
     }
   }
 

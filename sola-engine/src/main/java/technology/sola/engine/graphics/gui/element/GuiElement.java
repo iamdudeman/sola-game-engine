@@ -2,6 +2,8 @@ package technology.sola.engine.graphics.gui.element;
 
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.math.geometry.Rectangle;
+import technology.sola.math.linear.Vector2D;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,7 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
 
   public void addChild(GuiElement<?> guiElement) {
     children.add(guiElement);
-    properties.setChanged(true);
+    properties.setLayoutChanged(true);
   }
 
   public void onMouseEnter(MouseEvent mouseEvent) {
@@ -85,8 +87,53 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
     return properties;
   }
 
+  private boolean isMouseOver = false;
+
+  public boolean handleMouseEvent(MouseEvent event, String eventType) {
+    if (properties().isHidden()) {
+      return false;
+    }
+
+    int x = properties.getX();
+    int y = properties.getY();
+    int width = getWidth();
+    int height = getHeight();
+
+    Rectangle guiElementBounds = new Rectangle(new Vector2D(x, y), new Vector2D(x + width, y + height));
+
+    boolean inElement = guiElementBounds.contains(new Vector2D(event.x(), event.y()));
+
+    // todo loop through child elements
+    for (GuiElement<?> child : children) {
+      if (child.handleMouseEvent(event, eventType)) {
+        break;
+      }
+    }
+
+    if (guiElementBounds.contains(new Vector2D(event.x(), event.y()))) {
+      switch (eventType) {
+        case "press" -> onMouseDown(event);
+        case "release" -> onMouseUp(event);
+        case "move" -> {
+
+          if (!isMouseOver) {
+            isMouseOver = true;
+            onMouseEnter(event);
+          }
+        }
+      }
+    } else {
+      if (isMouseOver) {
+        onMouseExit(event);
+        isMouseOver = false;
+      }
+    }
+
+    return inElement;
+  }
+
   protected void recalculateChildPositions(int x, int y) {
-    if (!properties().isChanged() && children.stream().noneMatch(child -> child.properties().isChanged())) {
+    if (!properties().isLayoutChanged() && children.stream().noneMatch(child -> child.properties().isLayoutChanged())) {
       return;
     }
 
@@ -103,6 +150,70 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
       xOffset += width + guiElement.properties().margin.getRight();
     }
 
-    properties.setChanged(false);
+    properties.setLayoutChanged(false);
   }
+
+
+
+
+
+
+
+
+
+
+  public void onMousePressed(MouseEvent event) {
+    handleMouseEvent(event, "press");
+  }
+
+  public void onMouseReleased(MouseEvent event) {
+    handleMouseEvent(event, "release");
+  }
+
+  public void onMouseMoved(MouseEvent event) {
+    handleMouseEvent(event, "move");
+  }
+
+  private void handleMouseEvent(MouseEvent event, String eventType, int blah) {
+    /*
+    guiElementPositions.forEach(guiElementPosition -> {
+      GuiElement guiElement = guiElementPosition.guiElement;
+
+      if (guiElement.properties().isHidden()) {
+        return;
+      }
+
+      Integer x = guiElementPosition.x;
+      Integer y = guiElementPosition.y;
+      Integer width = guiElement.getWidth();
+      Integer height = guiElement.getHeight();
+
+      Rectangle guiElementBounds = new Rectangle(new Vector2D(x, y), new Vector2D(x + width, y + height));
+
+      if (guiElementBounds.contains(new Vector2D(event.x(), event.y()))) {
+        switch (eventType) {
+          case "press" -> guiElement.onMouseDown(event);
+          case "release" -> guiElement.onMouseUp(event);
+          case "move" -> {
+            boolean isOver = guiElementMouseOver.getOrDefault(guiElement, false);
+
+            if (!isOver) {
+              guiElementMouseOver.put(guiElement, true);
+              guiElement.onMouseEnter(event);
+            }
+          }
+        }
+      } else {
+        boolean isOver = guiElementMouseOver.getOrDefault(guiElement, false);
+
+        if (isOver) {
+          guiElement.onMouseExit(event);
+          guiElementMouseOver.put(guiElement, false);
+        }
+      }
+    });
+    */
+  }
+
+
 }
