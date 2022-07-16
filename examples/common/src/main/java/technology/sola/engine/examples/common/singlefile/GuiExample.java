@@ -5,6 +5,7 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.font.Font;
+import technology.sola.engine.graphics.gui.element.TextGuiElement;
 import technology.sola.engine.graphics.gui.element.container.HorizontalContainerGuiElement;
 import technology.sola.engine.graphics.gui.element.GuiElement;
 import technology.sola.engine.graphics.gui.element.container.VerticalContainerGuiElement;
@@ -34,6 +35,9 @@ public class GuiExample extends Sola {
   }
 
   private GuiElement<?> buildGui() {
+    TextGuiElement textGuiElement = new TextGuiElement(assetPoolProvider, "Gui Example");
+    textGuiElement.properties().margin.setBottom(10);
+
     HorizontalContainerGuiElement firstParent = new HorizontalContainerGuiElement(400, 60);
     firstParent.properties().padding.set(5);
     firstParent.properties().setBorderColor(Color.YELLOW);
@@ -75,6 +79,7 @@ public class GuiExample extends Sola {
     rootElement.properties().setPosition(15, 15);
     rootElement.properties().setBorderColor(Color.GREEN);
 
+    rootElement.addChild(textGuiElement);
     rootElement.addChild(firstParent);
     rootElement.addChild(secondParent);
     rootElement.addChild(toggleFontButton);

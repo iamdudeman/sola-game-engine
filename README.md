@@ -1,7 +1,7 @@
 # Branch WIP
 * Game Gui Stuff
-  * Add a TextGuiElement maybe?
-    * should handle wrapping based on max width maybe?
+  * Consider adding anchors?
+
 
 # TODO List
 * Rendering
