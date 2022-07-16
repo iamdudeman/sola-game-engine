@@ -13,22 +13,24 @@ public class HorizontalContainerGuiElement extends GuiElement<HorizontalContaine
     this.properties = new Properties();
     this.width = width;
     this.height = height;
+
+    properties.setMaxDimensions(width, height);
   }
 
   @Override
-  public int getWidth() {
+  public int getContentWidth() {
     return width;
   }
 
   @Override
-  public int getHeight() {
+  public int getContentHeight() {
     return height;
   }
 
   @Override
   public void renderSelf(Renderer renderer, int x, int y) {
     if (properties.borderColor != null) {
-      renderer.drawRect(x, y, getWidth(), getHeight(), properties.borderColor);
+      renderer.drawRect(x, y, getWidth(), getHeight(), properties.getBorderColor());
     }
   }
 

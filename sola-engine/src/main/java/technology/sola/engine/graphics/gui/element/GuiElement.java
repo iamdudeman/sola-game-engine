@@ -20,9 +20,17 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
 
   private boolean wasMouseOverElement = false;
 
-  public abstract int getWidth();
+  public abstract int getContentWidth();
 
-  public abstract int getHeight();
+  public abstract int getContentHeight();
+
+  public int getWidth() {
+    return Math.min(properties().getMaxWidth(), getContentWidth());
+  }
+
+  public int getHeight() {
+    return Math.min(properties().getMaxHeight(), getContentHeight());
+  }
 
   public abstract void renderSelf(Renderer renderer, int x, int y);
 
@@ -91,9 +99,9 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
     return properties;
   }
 
-  public boolean handleMouseEvent(MouseEvent event, String eventType) {
+  public void handleMouseEvent(MouseEvent event, String eventType) {
     if (properties().isHidden()) {
-      return false;
+      return;
     }
 
     int x = properties.getX();
@@ -103,9 +111,7 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
 
     Rectangle guiElementBounds = new Rectangle(new Vector2D(x, y), new Vector2D(x + width, y + height));
 
-    boolean isMouseCurrentlyOverElement = guiElementBounds.contains(new Vector2D(event.x(), event.y()));
-
-    if (isMouseCurrentlyOverElement) {
+    if (guiElementBounds.contains(new Vector2D(event.x(), event.y()))) {
       switch (eventType) {
         case "press" -> onMouseDown(event);
         case "release" -> onMouseUp(event);
@@ -122,8 +128,6 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
 
       onMouseExit(event);
     }
-
-    return isMouseCurrentlyOverElement;
   }
 
   public void recalculateChildPositions() {
@@ -131,17 +135,23 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
       return;
     }
 
-    int xOffset = 0;
+    int xOffset = properties.padding.getLeft();
+    int yOffset = properties.padding.getTop();
 
-    for (GuiElement<?> guiElement : children) {
-      xOffset += guiElement.properties().margin.getLeft();
+    for (GuiElement<?> child : children) {
+      child.properties.setMaxDimensions(
+        getWidth() - properties.padding.getLeft() - properties.padding.getRight(),
+        getHeight() - properties.padding.getTop() - properties.padding.getBottom()
+      );
 
-      guiElement.properties.setPosition(properties().getX() + xOffset, properties().getY());
-      guiElement.recalculateChildPositions();
+      xOffset += child.properties().margin.getLeft();
 
-      int width = guiElement.getWidth();
+      child.properties.setPosition(properties().getX() + xOffset, properties().getY() + yOffset);
+      child.recalculateChildPositions();
 
-      xOffset += width + guiElement.properties().margin.getRight();
+      int width = child.getWidth();
+
+      xOffset += width + child.properties().margin.getRight();
     }
 
     properties.setLayoutChanged(false);

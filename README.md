@@ -1,15 +1,8 @@
 # Branch WIP
 * Game Gui Stuff
-  * Consider making Gui stuff a separate thing
-    * Layouts are easier with inheritance than ECS
-    * Could have a base GuiObject that contains many useful things (reference old Sol2d and SolKana implementations)
-    * If so remove usages of GuiTextComponent and GuiPanelComponent
-  * GuiPanelComponent
-    * padding
-    * parent Panel option for nesting panels
-  * GuiTextComponent
-    * should handle wrapping based on parent Panel?
-  * GuiButtonComponent implementation
+  * Cleanup SimpleButton from GuiExample into a ButtonGuiElement class instead
+  * Add a TextGuiElement maybe?
+    * should handle wrapping based on max width maybe?
 
 # TODO List
 * Rendering

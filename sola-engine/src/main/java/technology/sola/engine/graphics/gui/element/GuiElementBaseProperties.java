@@ -1,15 +1,14 @@
 package technology.sola.engine.graphics.gui.element;
 
 public class GuiElementBaseProperties {
-  public final Bounds margin;
+  public final Bounds margin = new Bounds();
+  public final Bounds padding = new Bounds();
   private int x;
   private int y;
+  private int maxWidth;
+  private int maxHeight;
   private boolean isLayoutChanged = true;
   private boolean isHidden;
-
-  public GuiElementBaseProperties() {
-    margin = new Bounds();
-  }
 
   public boolean isLayoutChanged() {
     return isLayoutChanged;
@@ -39,6 +38,20 @@ public class GuiElementBaseProperties {
 
   public int getY() {
     return y;
+  }
+
+  public void setMaxDimensions(int maxWidth, int maxHeight) {
+    this.maxWidth = maxWidth;
+    this.maxHeight = maxHeight;
+    setLayoutChanged(true);
+  }
+
+  public int getMaxWidth() {
+    return maxWidth;
+  }
+
+  public int getMaxHeight() {
+    return maxHeight;
   }
 
   public class Bounds {
@@ -102,5 +115,4 @@ public class GuiElementBaseProperties {
       setLayoutChanged(true);
     }
   }
-
 }

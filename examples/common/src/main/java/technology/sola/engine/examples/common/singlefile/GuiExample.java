@@ -34,7 +34,9 @@ public class GuiExample extends Sola {
   }
 
   private GuiElement<?> buildGui() {
-    HorizontalContainerGuiElement firstParent = new HorizontalContainerGuiElement(400, 100);
+    HorizontalContainerGuiElement firstParent = new HorizontalContainerGuiElement(400, 60);
+    firstParent.properties().padding.set(5);
+    firstParent.properties().margin.setBottom(5);
     firstParent.properties().setBorderColor(Color.YELLOW);
 
     SimpleButton middleButton = new SimpleButton("Second");
@@ -45,7 +47,8 @@ public class GuiExample extends Sola {
     firstParent.addChild(new SimpleButton("Third"));
 
 
-    HorizontalContainerGuiElement secondParent = new HorizontalContainerGuiElement(400, 100);
+    HorizontalContainerGuiElement secondParent = new HorizontalContainerGuiElement(400, 80);
+    secondParent.properties().padding.set(5);
     secondParent.properties().setBorderColor(Color.ORANGE);
 
     SimpleButton checkButton = new SimpleButton("");
@@ -59,6 +62,7 @@ public class GuiExample extends Sola {
 
 
     VerticalContainerGuiElement rootElement = new VerticalContainerGuiElement(400, 200);
+    rootElement.properties().padding.set(10);
 
     rootElement.properties().setPosition(15, 15);
     rootElement.properties().setBorderColor(Color.GREEN);
@@ -79,27 +83,31 @@ public class GuiExample extends Sola {
 
       font = assetPoolProvider.getAssetPool(Font.class).getAsset("default");
 
+      int textWidth = font.getDimensionsForText(text).width();
+
+      properties.setMaxDimensions(Math.max(textWidth, 5) + 6, 40);
+
       setOnMouseEnterCallback((event) -> properties.borderColor = Color.GREEN);
 
       setOnMouseExitCallback((event) -> properties.borderColor = Color.BLUE);
     }
 
     @Override
-    public int getWidth() {
+    public int getContentWidth() {
       int textWidth = font.getDimensionsForText(text).width();
 
       return Math.max(textWidth, 5) + 6;
     }
 
     @Override
-    public int getHeight() {
+    public int getContentHeight() {
       return 40;
     }
 
     @Override
     public void renderSelf(Renderer renderer, int x, int y) {
-      renderer.fillRect(x, y, getWidth(), getHeight(), properties.borderColor);
-      renderer.fillRect(x + 3, y + 3, getWidth() - 6, getHeight() - 6, properties.backgroundColor);
+      renderer.fillRect(x, y, getContentWidth(), getContentHeight(), properties.borderColor);
+      renderer.fillRect(x + 3, y + 3, getContentWidth() - 6, getContentHeight() - 6, properties.backgroundColor);
       renderer.setFont(font);
       renderer.setRenderMode(RenderMode.MASK);
       renderer.drawString(text, x + 3, y + 10, properties.borderColor);

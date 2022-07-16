@@ -13,15 +13,17 @@ public class VerticalContainerGuiElement extends GuiElement<VerticalContainerGui
     this.properties = new Properties();
     this.width = width;
     this.height = height;
+
+    properties.setMaxDimensions(width, height);
   }
 
   @Override
-  public int getWidth() {
+  public int getContentWidth() {
     return width;
   }
 
   @Override
-  public int getHeight() {
+  public int getContentHeight() {
     return height;
   }
 
@@ -38,15 +40,21 @@ public class VerticalContainerGuiElement extends GuiElement<VerticalContainerGui
       return;
     }
 
-    int yOffset = 0;
+    int xOffset = properties.padding.getLeft();
+    int yOffset = properties.padding.getTop();
 
     for (GuiElement<?> child : children) {
+      child.properties().setMaxDimensions(
+        getWidth() - properties.padding.getLeft() - properties.padding.getRight(),
+        getHeight() - properties.padding.getTop() - properties.padding.getBottom()
+      );
+
       yOffset += child.properties().margin.getTop();
 
-      child.properties().setPosition(properties().getX(), properties().getY() + yOffset);
+      child.properties().setPosition(properties().getX() + xOffset, properties().getY() + yOffset);
       child.recalculateChildPositions();
 
-      int height = child.getHeight();
+      int height = child.getContentHeight();
 
       yOffset += height + child.properties().margin.getBottom();
     }
