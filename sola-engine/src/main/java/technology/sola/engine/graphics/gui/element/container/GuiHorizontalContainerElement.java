@@ -1,7 +1,8 @@
-package technology.sola.engine.graphics.gui.element;
+package technology.sola.engine.graphics.gui.element.container;
 
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.gui.element.properties.GuiElementBaseProperties;
+import technology.sola.engine.graphics.gui.element.GuiElement;
+import technology.sola.engine.graphics.gui.element.GuiElementBaseProperties;
 
 public class GuiHorizontalContainerElement extends GuiElement<GuiHorizontalContainerElement.Properties> {
   private int width;

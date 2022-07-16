@@ -1,7 +1,6 @@
 package technology.sola.engine.graphics.gui.element;
 
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.gui.element.properties.GuiElementBaseProperties;
 import technology.sola.engine.input.MouseEvent;
 
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ import java.util.function.Consumer;
 public abstract class GuiElement<T extends GuiElementBaseProperties> {
   protected T properties;
   protected List<GuiElement<?>> children = new ArrayList<>();
-  protected List<GuiElementPosition> childPositions = new ArrayList<>();
 
   private Consumer<MouseEvent> onMouseEnterCallback;
   private Consumer<MouseEvent> onMouseExitCallback;
@@ -24,17 +22,17 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
 
   public abstract void renderSelf(Renderer renderer, int x, int y);
 
-  public void render(Renderer renderer, int x, int y) {
-    renderSelf(renderer, x, y);
+  public void render(Renderer renderer) {
+    renderSelf(renderer, properties.getX(), properties.getY());
 
-    recalculateChildPositions(x, y);
+    recalculateChildPositions(properties.getX(), properties.getY());
 
-    childPositions.forEach(childPosition -> {
-      if (childPosition.guiElement.properties().isHidden()) {
+    children.forEach(child -> {
+      if (child.properties().isHidden()) {
         return;
       }
 
-      childPosition.guiElement.render(renderer, childPosition.x, childPosition.y);
+      child.render(renderer);
     });
   }
 
@@ -92,13 +90,12 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
       return;
     }
 
-    List<GuiElementPosition> newPositions = new ArrayList<>(children.size());
     int xOffset = 0;
 
     for (GuiElement<?> guiElement : children) {
       xOffset += guiElement.properties().margin.getLeft();
 
-      newPositions.add(new GuiElementPosition(guiElement, x + xOffset, y));
+      guiElement.properties.setPosition(x + xOffset, y);
       guiElement.recalculateChildPositions(x + xOffset, y);
 
       int width = guiElement.getWidth();
@@ -106,10 +103,6 @@ public abstract class GuiElement<T extends GuiElementBaseProperties> {
       xOffset += width + guiElement.properties().margin.getRight();
     }
 
-    this.childPositions = newPositions;
     properties.setChanged(false);
-  }
-
-  protected record GuiElementPosition(GuiElement<?> guiElement, int x, int y) {
   }
 }

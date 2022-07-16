@@ -1,13 +1,13 @@
-package technology.sola.engine.graphics.gui.element.properties;
+package technology.sola.engine.graphics.gui.element;
 
 public class GuiElementBaseProperties {
-  public final Bounds padding;
   public final Bounds margin;
+  private int x;
+  private int y;
   private boolean isChanged = true;
   private boolean isHidden;
 
   public GuiElementBaseProperties() {
-    padding = new Bounds();
     margin = new Bounds();
   }
 
@@ -25,6 +25,20 @@ public class GuiElementBaseProperties {
 
   public void setHidden(boolean hidden) {
     isHidden = hidden;
+  }
+
+  public void setPosition(int x, int y) {
+    this.x = x;
+    this.y = y;
+    setChanged(true);
+  }
+
+  public int getX() {
+    return x;
+  }
+
+  public int getY() {
+    return y;
   }
 
   public class Bounds {

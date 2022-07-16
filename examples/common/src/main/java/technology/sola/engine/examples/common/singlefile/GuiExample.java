@@ -6,11 +6,9 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.font.Font;
-import technology.sola.engine.graphics.gui.GuiLayoutDirection;
-import technology.sola.engine.graphics.gui.GuiPanel;
-import technology.sola.engine.graphics.gui.element.GuiHorizontalContainerElement;
+import technology.sola.engine.graphics.gui.element.container.GuiHorizontalContainerElement;
 import technology.sola.engine.graphics.gui.element.GuiElement;
-import technology.sola.engine.graphics.gui.element.properties.GuiElementBaseProperties;
+import technology.sola.engine.graphics.gui.element.GuiElementBaseProperties;
 
 public class GuiExample extends Sola {
   @Override
@@ -23,8 +21,8 @@ public class GuiExample extends Sola {
     assetPoolProvider.getAssetPool(Font.class)
       .addAssetId("default", "assets/monospaced_NORMAL_18.json");
 
-    solaGui.addGuiPanel(buildGuiPanel());
-//    solaGui.addGuiPanel(buildGuiPanel2());
+    solaGui.addGuiElement(buildGuiPanel());
+//    solaGui.addGuiElement(buildGuiPanel2());
   }
 
   @Override
@@ -34,8 +32,10 @@ public class GuiExample extends Sola {
     solaGui.render(renderer);
   }
 
-  private GuiPanel buildGuiPanel() {
+  private GuiElement<?> buildGuiPanel() {
     GuiHorizontalContainerElement guiHorizontalContainerElement = new GuiHorizontalContainerElement(400, 200);
+
+    guiHorizontalContainerElement.properties().setPosition(10, 200);
 
     SimpleButton simpleButton1 = new SimpleButton("");
     simpleButton1.properties().margin.set(0, 15, 0, 0);
@@ -45,7 +45,7 @@ public class GuiExample extends Sola {
     guiHorizontalContainerElement.addChild(simpleButton1);
     guiHorizontalContainerElement.addChild(simpleButton2);
 
-    return new GuiPanel(10, 200, guiHorizontalContainerElement);
+    return guiHorizontalContainerElement;
   }
 
 //  private GuiPanel buildGuiPanel2() {

@@ -18,7 +18,11 @@ public class GuiPanel {
   }
 
   public void render(Renderer renderer) {
-    root.render(renderer, x, y);
+//    root.render(renderer, x, y);
+  }
+
+  public void setPosition(int x, int y) {
+
   }
 
   public void onMousePressed(MouseEvent event) {
