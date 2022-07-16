@@ -1,6 +1,5 @@
 # Branch WIP
 * Game Gui Stuff
-  * Cleanup SimpleButton from GuiExample into a ButtonGuiElement class instead
   * Add a TextGuiElement maybe?
     * should handle wrapping based on max width maybe?
 
