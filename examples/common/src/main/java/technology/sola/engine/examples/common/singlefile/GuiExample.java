@@ -36,15 +36,18 @@ public class GuiExample extends Sola {
 
   private GuiElement<?> buildGui() {
     TextGuiElement textGuiElement = new TextGuiElement(assetPoolProvider, "Gui Example");
-    textGuiElement.properties().margin.setBottom(10);
+    textGuiElement.properties()
+      .margin.setBottom(10);
 
     HorizontalContainerGuiElement firstParent = new HorizontalContainerGuiElement(400, 60);
-    firstParent.properties().padding.set(5);
-    firstParent.properties().setBorderColor(Color.YELLOW);
+    firstParent.properties()
+      .setBorderColor(Color.YELLOW)
+      .padding.set(5);
 
     ButtonGuiElement middleButton = new ButtonGuiElement(assetPoolProvider, "Second");
-    middleButton.properties().padding.set(5);
-    middleButton.properties().margin.set(0, 15);
+    middleButton.properties()
+      .padding.set(5)
+      .margin.set(0, 15);
 
     firstParent.addChild(new ButtonGuiElement(assetPoolProvider, "First"));
     firstParent.addChild(middleButton);
@@ -52,16 +55,19 @@ public class GuiExample extends Sola {
 
 
     HorizontalContainerGuiElement secondParent = new HorizontalContainerGuiElement(400, 80);
-    secondParent.properties().padding.set(5);
-    secondParent.properties().margin.set(8, 0);
-    secondParent.properties().setBorderColor(Color.ORANGE);
+    secondParent.properties()
+      .setBorderColor(Color.ORANGE)
+      .padding.set(5)
+      .margin.set(8, 0);
 
     ButtonGuiElement checkButton = new ButtonGuiElement(assetPoolProvider, "");
-    checkButton.properties().margin.set(0, 15, 0, 0);
-    checkButton.properties().padding.set(15);
+    checkButton.properties()
+      .margin.setRight(15)
+      .padding.set(15);
     checkButton.setOnClick(event -> checkButton.properties().setColorBackground(checkButton.properties().getColorBackground().equals(Color.RED) ? new Color(128, 128, 128) : Color.RED));
     ButtonGuiElement toggleOtherButton = new ButtonGuiElement(assetPoolProvider, "Toggle other button");
-    toggleOtherButton.properties().padding.set(5);
+    toggleOtherButton.properties()
+      .padding.set(5);
     toggleOtherButton.setOnClick((event) -> checkButton.properties().setHidden(!checkButton.properties().isHidden()));
 
     secondParent.addChild(checkButton);
@@ -69,15 +75,16 @@ public class GuiExample extends Sola {
 
 
     ButtonGuiElement toggleFontButton = new ButtonGuiElement(assetPoolProvider, "Toggle font on this button");
-    toggleFontButton.properties().padding.set(5);
+    toggleFontButton.properties()
+      .padding.set(5);
     toggleFontButton.setOnClick(event -> toggleFontButton.properties().setFontName(toggleFontButton.properties().getFontName().equals("times_NORMAL_18") ? "monospaced_NORMAL_18" : "times_NORMAL_18"));
 
 
     VerticalContainerGuiElement rootElement = new VerticalContainerGuiElement(400, 280);
-    rootElement.properties().padding.set(10);
-
-    rootElement.properties().setPosition(15, 15);
-    rootElement.properties().setBorderColor(Color.GREEN);
+    rootElement.properties()
+      .setBorderColor(Color.GREEN)
+      .padding.set(10)
+      .setPosition(15, 15);
 
     rootElement.addChild(textGuiElement);
     rootElement.addChild(firstParent);

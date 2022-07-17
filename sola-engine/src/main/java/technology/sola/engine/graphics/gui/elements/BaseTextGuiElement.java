@@ -15,7 +15,8 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
   private int textWidth;
   private int textHeight;
 
-  public BaseTextGuiElement(AssetPoolProvider assetPoolProvider) {
+  public BaseTextGuiElement(AssetPoolProvider assetPoolProvider, T properties) {
+    super(properties);
     this.assetPoolProvider = assetPoolProvider;
   }
 
@@ -56,26 +57,29 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
       return text;
     }
 
-    public void setText(String text) {
+    public Properties setText(String text) {
       this.text = text;
       setLayoutChanged(true);
+      return this;
     }
 
     public String getFontName() {
       return fontName;
     }
 
-    public void setFontName(String fontName) {
+    public Properties setFontName(String fontName) {
       this.fontName = fontName;
       setLayoutChanged(true);
+      return this;
     }
 
     public Color getColorText() {
       return colorText;
     }
 
-    public void setColorText(Color colorText) {
+    public Properties setColorText(Color colorText) {
       this.colorText = colorText;
+      return this;
     }
   }
 }

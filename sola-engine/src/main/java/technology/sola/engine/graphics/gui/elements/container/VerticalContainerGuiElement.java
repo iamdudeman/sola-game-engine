@@ -10,7 +10,7 @@ public class VerticalContainerGuiElement extends GuiElement<VerticalContainerGui
   private final int height;
 
   public VerticalContainerGuiElement(int width, int height) {
-    this.properties = new Properties();
+    super(new Properties());
     this.width = width;
     this.height = height;
 
@@ -69,8 +69,10 @@ public class VerticalContainerGuiElement extends GuiElement<VerticalContainerGui
       return borderColor;
     }
 
-    public void setBorderColor(Color borderColor) {
+    public Properties setBorderColor(Color borderColor) {
       this.borderColor = borderColor;
+
+      return this;
     }
   }
 }

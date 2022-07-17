@@ -15,8 +15,7 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
   private boolean isHovered = false;
 
   public ButtonGuiElement(AssetPoolProvider assetPoolProvider, String text) {
-    super(assetPoolProvider);
-    properties = new Properties();
+    super(assetPoolProvider, new Properties());
     properties.setText(text);
 
     setOnMouseEnterCallback((event) -> {});
@@ -93,40 +92,45 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
       return colorBackground;
     }
 
-    public void setColorBackground(Color colorBackground) {
+    public Properties setColorBackground(Color colorBackground) {
       this.colorBackground = colorBackground;
+      return this;
     }
 
     public Color getColorBorder() {
       return colorBorder;
     }
 
-    public void setColorBorder(Color colorBorder) {
+    public Properties setColorBorder(Color colorBorder) {
       this.colorBorder = colorBorder;
+      return this;
     }
 
     public Color getColorBorderHover() {
       return colorBorderHover;
     }
 
-    public void setColorBorderHover(Color colorBorderHover) {
+    public Properties setColorBorderHover(Color colorBorderHover) {
       this.colorBorderHover = colorBorderHover;
+      return this;
     }
 
     public Color getColorBackgroundHover() {
       return colorBackgroundHover;
     }
 
-    public void setColorBackgroundHover(Color colorBackgroundHover) {
+    public Properties setColorBackgroundHover(Color colorBackgroundHover) {
       this.colorBackgroundHover = colorBackgroundHover;
+      return this;
     }
 
     public Color getColorTextHover() {
       return colorTextHover;
     }
 
-    public void setColorTextHover(Color colorTextHover) {
+    public Properties setColorTextHover(Color colorTextHover) {
       this.colorTextHover = colorTextHover;
+      return this;
     }
   }
 }

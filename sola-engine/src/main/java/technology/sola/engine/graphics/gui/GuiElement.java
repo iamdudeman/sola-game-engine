@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public abstract class GuiElement<T extends GuiElementProperties> {
-  protected T properties;
+  protected final T properties;
   protected List<GuiElement<?>> children = new ArrayList<>();
 
   private Consumer<MouseEvent> onMouseEnterCallback;
@@ -19,6 +19,10 @@ public abstract class GuiElement<T extends GuiElementProperties> {
   private Consumer<MouseEvent> onMouseUpCallback;
 
   private boolean wasMouseOverElement = false;
+
+  public GuiElement(T properties) {
+    this.properties = properties;
+  }
 
   public abstract int getContentWidth();
 
