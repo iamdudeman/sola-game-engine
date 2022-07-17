@@ -6,6 +6,7 @@ import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -52,8 +53,26 @@ public abstract class GuiElement<T extends GuiElementProperties> {
     });
   }
 
-  public void addChild(GuiElement<?> guiElement) {
-    children.add(guiElement);
+  public void addChild(GuiElement<?> childOne) {
+    children.add(childOne);
+    properties.setLayoutChanged(true);
+  }
+
+  public void addChild(GuiElement<?> childOne, GuiElement<?> childTwo) {
+    children.add(childOne);
+    children.add(childTwo);
+    properties.setLayoutChanged(true);
+  }
+
+  public void addChild(GuiElement<?> childOne, GuiElement<?> childTwo, GuiElement<?> childThree) {
+    children.add(childOne);
+    children.add(childTwo);
+    children.add(childThree);
+    properties.setLayoutChanged(true);
+  }
+
+  public void addChild(GuiElement<?>... children) {
+    this.children.addAll(Arrays.asList(children));
     properties.setLayoutChanged(true);
   }
 

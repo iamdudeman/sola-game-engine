@@ -9,7 +9,22 @@ public abstract class ChildlessGuiElement<T extends GuiElementProperties> extend
   }
 
   @Override
-  public void addChild(GuiElement<?> guiElement) {
+  public void addChild(GuiElement<?> childOne) {
+    // Nothing to do here
+  }
+
+  @Override
+  public void addChild(GuiElement<?> childOne, GuiElement<?> childTwo) {
+    // Nothing to do here
+  }
+
+  @Override
+  public void addChild(GuiElement<?> childOne, GuiElement<?> childTwo, GuiElement<?> childThree) {
+    // Nothing to do here
+  }
+
+  @Override
+  public void addChild(GuiElement<?>... children) {
     // Nothing to do here
   }
 

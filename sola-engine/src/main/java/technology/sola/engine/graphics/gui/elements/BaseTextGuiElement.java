@@ -5,10 +5,9 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.font.Font;
-import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementProperties;
 
-public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties> extends GuiElement<T> {
+public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties> extends ChildlessGuiElement<T> {
   private final AssetPoolProvider assetPoolProvider;
   private Font font;
 
@@ -49,9 +48,9 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
   }
 
   public static class Properties extends GuiElementProperties {
-    private Color colorText = Color.WHITE;
-    private String fontName = "monospaced_NORMAL_18";
-    private String text = " ";
+    private Color colorText = Color.WHITE; // todo default should maybe come from a central place
+    private String fontName = "monospaced_NORMAL_18"; // todo default should maybe come from a central place
+    private String text = "";
 
     public String getText() {
       return text;

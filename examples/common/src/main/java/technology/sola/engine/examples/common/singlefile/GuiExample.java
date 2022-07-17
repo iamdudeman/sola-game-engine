@@ -49,9 +49,11 @@ public class GuiExample extends Sola {
       .padding.set(5)
       .margin.set(0, 15);
 
-    firstParent.addChild(new ButtonGuiElement(assetPoolProvider, "First"));
-    firstParent.addChild(middleButton);
-    firstParent.addChild(new ButtonGuiElement(assetPoolProvider, "Third"));
+    firstParent.addChild(
+      new ButtonGuiElement(assetPoolProvider, "First"),
+      middleButton,
+      new ButtonGuiElement(assetPoolProvider, "Third")
+    );
 
 
     HorizontalContainerGuiElement secondParent = new HorizontalContainerGuiElement(400, 80);
@@ -70,9 +72,7 @@ public class GuiExample extends Sola {
       .padding.set(5);
     toggleOtherButton.setOnClick((event) -> checkButton.properties().setHidden(!checkButton.properties().isHidden()));
 
-    secondParent.addChild(checkButton);
-    secondParent.addChild(toggleOtherButton);
-
+    secondParent.addChild(checkButton, toggleOtherButton);
 
     ButtonGuiElement toggleFontButton = new ButtonGuiElement(assetPoolProvider, "Toggle font on this button");
     toggleFontButton.properties()
@@ -86,10 +86,7 @@ public class GuiExample extends Sola {
       .padding.set(10)
       .setPosition(15, 15);
 
-    rootElement.addChild(textGuiElement);
-    rootElement.addChild(firstParent);
-    rootElement.addChild(secondParent);
-    rootElement.addChild(toggleFontButton);
+    rootElement.addChild(textGuiElement, firstParent, secondParent, toggleFontButton);
 
     return rootElement;
   }
