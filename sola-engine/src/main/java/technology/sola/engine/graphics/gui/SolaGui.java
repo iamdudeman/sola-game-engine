@@ -1,7 +1,6 @@
 package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.gui.element.GuiElement;
 import technology.sola.engine.input.MouseEvent;
 
 public class SolaGui {

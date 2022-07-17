@@ -1,9 +1,9 @@
-package technology.sola.engine.graphics.gui.element.container;
+package technology.sola.engine.graphics.gui.elements.container;
 
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.gui.element.GuiElement;
-import technology.sola.engine.graphics.gui.element.GuiElementBaseProperties;
+import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.GuiElementProperties;
 
 public class HorizontalContainerGuiElement extends GuiElement<HorizontalContainerGuiElement.Properties> {
   private final int width;
@@ -34,7 +34,7 @@ public class HorizontalContainerGuiElement extends GuiElement<HorizontalContaine
     }
   }
 
-  public static class Properties extends GuiElementBaseProperties {
+  public static class Properties extends GuiElementProperties {
     private Color borderColor;
 
     public Color getBorderColor() {

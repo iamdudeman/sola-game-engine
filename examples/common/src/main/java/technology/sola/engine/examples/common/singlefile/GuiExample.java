@@ -5,11 +5,11 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.font.Font;
-import technology.sola.engine.graphics.gui.element.TextGuiElement;
-import technology.sola.engine.graphics.gui.element.container.HorizontalContainerGuiElement;
-import technology.sola.engine.graphics.gui.element.GuiElement;
-import technology.sola.engine.graphics.gui.element.container.VerticalContainerGuiElement;
-import technology.sola.engine.graphics.gui.element.control.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.elements.TextGuiElement;
+import technology.sola.engine.graphics.gui.elements.container.HorizontalContainerGuiElement;
+import technology.sola.engine.graphics.gui.elements.container.VerticalContainerGuiElement;
+import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
 
 public class GuiExample extends Sola {
   @Override

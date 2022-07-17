@@ -1,6 +1,6 @@
-package technology.sola.engine.graphics.gui.element;
+package technology.sola.engine.graphics.gui;
 
-public class GuiElementBaseProperties {
+public class GuiElementProperties {
   public final Bounds margin = new Bounds();
   public final Bounds padding = new Bounds();
   private int x;

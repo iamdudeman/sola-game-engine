@@ -1,23 +1,22 @@
-package technology.sola.engine.graphics.gui.element;
+package technology.sola.engine.graphics.gui.elements;
 
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.font.Font;
+import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.GuiElementProperties;
 
-public class TextGuiElement extends GuiElement<TextGuiElement.Properties> {
+public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties> extends GuiElement<T> {
   private final AssetPoolProvider assetPoolProvider;
   private Font font;
 
   private int textWidth;
   private int textHeight;
 
-  public TextGuiElement(AssetPoolProvider assetPoolProvider, String text) {
+  public BaseTextGuiElement(AssetPoolProvider assetPoolProvider) {
     this.assetPoolProvider = assetPoolProvider;
-    properties = new TextGuiElement.Properties();
-
-    properties.setText(text);
   }
 
   @Override
@@ -34,21 +33,21 @@ public class TextGuiElement extends GuiElement<TextGuiElement.Properties> {
   public void renderSelf(Renderer renderer, int x, int y) {
     renderer.setFont(font);
     renderer.setRenderMode(RenderMode.MASK);
-    renderer.drawString(properties.text, x + properties.padding.getLeft(), y + properties.padding.getTop(), properties.colorText);
+    renderer.drawString(properties.getText(), x + properties.padding.getLeft(), y + properties.padding.getTop(), properties.getColorText());
     renderer.setRenderMode(RenderMode.NORMAL);
   }
 
   @Override
   public void recalculateChildPositions() {
-    font = assetPoolProvider.getAssetPool(Font.class).getAsset(properties().fontName);
+    font = assetPoolProvider.getAssetPool(Font.class).getAsset(properties().getFontName());
 
-    var textDimensions = font.getDimensionsForText(properties().text);
+    var textDimensions = font.getDimensionsForText(properties().getText());
 
     textWidth = Math.max(textDimensions.width(), 3);
     textHeight = Math.max(textDimensions.height(), 3);
   }
 
-  public static class Properties extends GuiElementBaseProperties {
+  public static class Properties extends GuiElementProperties {
     private Color colorText = Color.WHITE;
     private String fontName = "monospaced_NORMAL_18";
     private String text = " ";

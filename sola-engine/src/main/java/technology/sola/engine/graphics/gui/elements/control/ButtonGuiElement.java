@@ -1,32 +1,24 @@
-package technology.sola.engine.graphics.gui.element.control;
+package technology.sola.engine.graphics.gui.elements.control;
 
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.font.Font;
-import technology.sola.engine.graphics.gui.element.ChildlessGuiElement;
-import technology.sola.engine.graphics.gui.element.GuiElementBaseProperties;
+import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.input.MouseEvent;
 
 import java.util.function.Consumer;
 
-public class ButtonGuiElement extends ChildlessGuiElement<ButtonGuiElement.Properties> {
-  private final AssetPoolProvider assetPoolProvider;
-  private Font font;
-
+public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Properties> {
   private Consumer<MouseEvent> onClickConsumer = event -> {};
 
   private boolean wasMouseDownInside = false;
   private boolean isHovered = false;
-  private int textWidth;
-  private int textHeight;
 
   public ButtonGuiElement(AssetPoolProvider assetPoolProvider, String text) {
-    this.assetPoolProvider = assetPoolProvider;
+    super(assetPoolProvider);
     properties = new Properties();
-
     properties.setText(text);
+
     setOnMouseEnterCallback((event) -> {});
     setOnMouseExitCallback((event) -> {});
     setOnMouseDownCallback(event -> {});
@@ -34,25 +26,20 @@ public class ButtonGuiElement extends ChildlessGuiElement<ButtonGuiElement.Prope
   }
 
   @Override
-  public int getContentWidth() {
-    return textWidth + properties.padding.getLeft() + properties.padding.getRight();
-  }
-
-  @Override
-  public int getContentHeight() {
-    return textHeight + properties.padding.getTop() + properties.padding.getBottom();
-  }
-
-  @Override
   public void renderSelf(Renderer renderer, int x, int y) {
-    renderer.fillRect(x, y, getContentWidth(), getContentHeight(), isHovered ? properties.colorBackgroundHover : properties.colorBackground);
+    renderer.fillRect(x, y, getContentWidth(), getContentHeight(), isHovered ? properties().colorBackgroundHover : properties.colorBackground);
 
     renderer.drawRect(x, y, getContentWidth(), getContentHeight(), isHovered ? properties.colorBorderHover : properties.colorBorder);
 
-    renderer.setFont(font);
-    renderer.setRenderMode(RenderMode.MASK);
-    renderer.drawString(properties.text, x + properties.padding.getLeft(), y + properties.padding.getTop(), isHovered ? properties.colorTextHover : properties.colorText);
-    renderer.setRenderMode(RenderMode.NORMAL);
+    Color baseTextColor = properties.getColorText();
+
+    if (isHovered) {
+      properties.setColorText(properties.colorTextHover);
+    }
+
+    super.renderSelf(renderer, x, y);
+
+    properties.setColorText(baseTextColor);
   }
 
   @Override
@@ -91,47 +78,16 @@ public class ButtonGuiElement extends ChildlessGuiElement<ButtonGuiElement.Prope
     });
   }
 
-  @Override
-  public void recalculateChildPositions() {
-    font = assetPoolProvider.getAssetPool(Font.class).getAsset(properties().fontName);
-
-    var textDimensions = font.getDimensionsForText(properties().text);
-
-    textWidth = Math.max(textDimensions.width(), 3);
-    textHeight = Math.max(textDimensions.height(), 3);
-  }
-
   public void setOnClick(Consumer<MouseEvent> onClickConsumer) {
     this.onClickConsumer = onClickConsumer;
   }
 
-  public static class Properties extends GuiElementBaseProperties {
+  public static class Properties extends BaseTextGuiElement.Properties {
     private Color colorBorder = new Color(128, 128, 128);
     private Color colorBorderHover = new Color(128, 128, 128);
     private Color colorBackground = new Color(128, 128, 128);
     private Color colorBackgroundHover = Color.WHITE;
-    private Color colorText = Color.WHITE;
     private Color colorTextHover = new Color(128, 128, 128);
-    private String fontName = "monospaced_NORMAL_18";
-    private String text = " ";
-
-    public String getText() {
-      return text;
-    }
-
-    public void setText(String text) {
-      this.text = text;
-      setLayoutChanged(true);
-    }
-
-    public String getFontName() {
-      return fontName;
-    }
-
-    public void setFontName(String fontName) {
-      this.fontName = fontName;
-      setLayoutChanged(true);
-    }
 
     public Color getColorBackground() {
       return colorBackground;
@@ -163,14 +119,6 @@ public class ButtonGuiElement extends ChildlessGuiElement<ButtonGuiElement.Prope
 
     public void setColorBackgroundHover(Color colorBackgroundHover) {
       this.colorBackgroundHover = colorBackgroundHover;
-    }
-
-    public Color getColorText() {
-      return colorText;
-    }
-
-    public void setColorText(Color colorText) {
-      this.colorText = colorText;
     }
 
     public Color getColorTextHover() {
