@@ -123,7 +123,9 @@ public abstract class GuiElement<T extends GuiElementProperties> {
   }
 
   public void handleMouseEvent(MouseEvent event, String eventType) {
-    if (properties().isHidden()) {
+    T properties = properties();
+
+    if (properties.isHidden()) {
       return;
     }
 
@@ -154,27 +156,32 @@ public abstract class GuiElement<T extends GuiElementProperties> {
   }
 
   public void recalculateChildPositions() {
-    if (!properties().isLayoutChanged() && children.stream().noneMatch(child -> child.properties().isLayoutChanged())) {
+    T properties = properties();
+
+    if (!properties.isLayoutChanged() && children.stream().noneMatch(child -> child.properties().isLayoutChanged())) {
       return;
     }
 
-    int xOffset = properties.padding.getLeft();
-    int yOffset = properties.padding.getTop();
+    var padding = properties.padding;
+    int xOffset = padding.getLeft();
+    int yOffset = padding.getTop();
 
     for (GuiElement<?> child : children) {
-      child.properties.setMaxDimensions(
-        getWidth() - properties.padding.getLeft() - properties.padding.getRight(),
-        getHeight() - properties.padding.getTop() - properties.padding.getBottom()
+      var childProperties = child.properties();
+
+      childProperties.setMaxDimensions(
+        getWidth() - padding.getLeft() - padding.getRight(),
+        getHeight() - padding.getTop() - padding.getBottom()
       );
 
-      xOffset += child.properties().margin.getLeft();
+      xOffset += childProperties.margin.getLeft();
 
-      child.properties.setPosition(properties().getX() + xOffset, properties().getY() + yOffset);
+      childProperties.setPosition(properties.getX() + xOffset, properties.getY() + yOffset);
       child.recalculateChildPositions();
 
       int width = child.getWidth();
 
-      xOffset += width + child.properties().margin.getRight();
+      xOffset += width + childProperties.margin.getRight();
     }
 
     properties.setLayoutChanged(false);

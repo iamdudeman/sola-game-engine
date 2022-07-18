@@ -5,6 +5,8 @@ import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementProperties;
 
+// TODO consider joining container components with a DIRECTION enum
+
 public class VerticalContainerGuiElement extends GuiElement<VerticalContainerGuiElement.Properties> {
   private final int width;
   private final int height;

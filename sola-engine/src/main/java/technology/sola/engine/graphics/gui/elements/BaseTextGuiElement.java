@@ -31,6 +31,8 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
 
   @Override
   public void renderSelf(Renderer renderer, int x, int y) {
+    Properties properties = properties();
+
     renderer.setFont(font);
     renderer.setRenderMode(RenderMode.MASK);
     renderer.drawString(properties.getText(), x + properties.padding.getLeft(), y + properties.padding.getTop(), properties.getColorText());
