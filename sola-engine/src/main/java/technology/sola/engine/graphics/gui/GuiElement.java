@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
+// TODO consider simplifying GuiElement's base implementation of recalculateChildPositions (or maybe make it initially empty?)
 public abstract class GuiElement<T extends GuiElementProperties> {
   protected final T properties;
   protected List<GuiElement<?>> children = new ArrayList<>();

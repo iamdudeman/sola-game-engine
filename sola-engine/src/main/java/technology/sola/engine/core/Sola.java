@@ -19,11 +19,11 @@ public abstract class Sola {
 
   protected Sola() {
     solaEcs = new SolaEcs();
-    solaGui = new SolaGui();
     eventHub = new EventHub();
     keyboardInput = new KeyboardInput();
     mouseInput = new MouseInput();
     assetPoolProvider = new AssetPoolProvider();
+    solaGui = new SolaGui(assetPoolProvider);
   }
 
   protected abstract SolaConfiguration getConfiguration();

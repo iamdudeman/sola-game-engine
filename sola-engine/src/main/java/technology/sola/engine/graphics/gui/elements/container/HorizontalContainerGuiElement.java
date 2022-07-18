@@ -5,6 +5,9 @@ import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementProperties;
 
+// TODO consider moving width and height to properties.preferredWidth and properties.preferredHeight
+// TODO consider joining container components with a DIRECTION enum
+
 public class HorizontalContainerGuiElement extends GuiElement<HorizontalContainerGuiElement.Properties> {
   private final int width;
   private final int height;

@@ -10,6 +10,9 @@ public class GuiElementProperties {
   private boolean isLayoutChanged = true;
   private boolean isHidden;
 
+  // todo consider constructor that takes in GuiElementGlobalProperties
+  // TODO isLayoutChanged would then be global.isLayoutChanged() || isLayoutChanged
+
   public boolean isLayoutChanged() {
     return isLayoutChanged;
   }
