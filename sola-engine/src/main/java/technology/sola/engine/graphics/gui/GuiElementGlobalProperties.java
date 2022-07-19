@@ -1,13 +1,21 @@
 package technology.sola.engine.graphics.gui;
 
-public class GuiElementGlobalProperties {
-  private boolean isLayoutChanged = true;
-  private String defaultFont;
-  private String defaultTextColor;
+import technology.sola.engine.assets.AssetPoolProvider;
+import technology.sola.engine.graphics.Color;
 
-  public GuiElementGlobalProperties(String defaultFont, String defaultTextColor) {
-    this.defaultFont = defaultFont;
-    this.defaultTextColor = defaultTextColor;
+public class GuiElementGlobalProperties {
+  public static final String DEFAULT_FONT_ASSET_ID = "default";
+  private boolean isLayoutChanged = true;
+  private String defaultFontAssetId = DEFAULT_FONT_ASSET_ID;
+  private Color defaultTextColor = Color.BLACK;
+  private final AssetPoolProvider assetPoolProvider;
+
+  public GuiElementGlobalProperties(AssetPoolProvider assetPoolProvider) {
+    this.assetPoolProvider = assetPoolProvider;
+  }
+
+  public AssetPoolProvider getAssetPoolProvider() {
+    return assetPoolProvider;
   }
 
   public boolean isLayoutChanged() {
@@ -18,20 +26,24 @@ public class GuiElementGlobalProperties {
     isLayoutChanged = layoutChanged;
   }
 
-  public String getDefaultFont() {
-    return defaultFont;
+  public String getDefaultFontAssetId() {
+    return defaultFontAssetId;
   }
 
-  public void setDefaultFont(String defaultFont) {
-    this.defaultFont = defaultFont;
+  public GuiElementGlobalProperties setDefaultFontAssetId(String defaultFontAssetId) {
+    this.defaultFontAssetId = defaultFontAssetId;
     setLayoutChanged(true);
+
+    return this;
   }
 
-  public String getDefaultTextColor() {
+  public Color getDefaultTextColor() {
     return defaultTextColor;
   }
 
-  public void setDefaultTextColor(String defaultTextColor) {
+  public GuiElementGlobalProperties setDefaultTextColor(Color defaultTextColor) {
     this.defaultTextColor = defaultTextColor;
+
+    return this;
   }
 }

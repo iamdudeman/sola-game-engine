@@ -1,22 +1,20 @@
 package technology.sola.engine.graphics.gui.elements;
 
-import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.font.Font;
+import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.GuiElementProperties;
 
 public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties> extends ChildlessGuiElement<T> {
-  private final AssetPoolProvider assetPoolProvider;
   private Font font;
 
   private int textWidth;
   private int textHeight;
 
-  public BaseTextGuiElement(AssetPoolProvider assetPoolProvider, T properties) {
+  public BaseTextGuiElement(T properties) {
     super(properties);
-    this.assetPoolProvider = assetPoolProvider;
   }
 
   @Override
@@ -41,7 +39,7 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
 
   @Override
   public void recalculateChildPositions() {
-    font = assetPoolProvider.getAssetPool(Font.class).getAsset(properties().getFontName());
+    font = properties.getAssetPoolProvider().getAssetPool(Font.class).getAsset(properties().getFontAssetId());
 
     var textDimensions = font.getDimensionsForText(properties().getText());
 
@@ -50,9 +48,13 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
   }
 
   public static class Properties extends GuiElementProperties {
-    private Color colorText = Color.WHITE; // todo default should maybe come from a central place
-    private String fontName = "monospaced_NORMAL_18"; // todo default should maybe come from a central place
+    private Color colorText = null;
+    private String fontAssetId = null;
     private String text = "";
+
+    public Properties(GuiElementGlobalProperties globalProperties) {
+      super(globalProperties);
+    }
 
     public String getText() {
       return text;
@@ -64,18 +66,18 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
       return this;
     }
 
-    public String getFontName() {
-      return fontName;
+    public String getFontAssetId() {
+      return fontAssetId == null ? globalProperties.getDefaultFontAssetId() : fontAssetId;
     }
 
-    public Properties setFontName(String fontName) {
-      this.fontName = fontName;
+    public Properties setFontAssetId(String fontAssetId) {
+      this.fontAssetId = fontAssetId;
       setLayoutChanged(true);
       return this;
     }
 
     public Color getColorText() {
-      return colorText;
+      return colorText == null ? globalProperties.getDefaultTextColor() : colorText;
     }
 
     public Properties setColorText(Color colorText) {

@@ -3,31 +3,25 @@ package technology.sola.engine.graphics.gui.elements.container;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.GuiElementProperties;
 
 // TODO consider moving width and height to properties.preferredWidth and properties.preferredHeight
 // TODO consider joining container components with a DIRECTION enum
 
 public class HorizontalContainerGuiElement extends GuiElement<HorizontalContainerGuiElement.Properties> {
-  private final int width;
-  private final int height;
-
-  public HorizontalContainerGuiElement(int width, int height) {
-    super(new Properties());
-    this.width = width;
-    this.height = height;
-
-    properties.setMaxDimensions(width, height);
+  public HorizontalContainerGuiElement(Properties properties) {
+    super(properties);
   }
 
   @Override
   public int getContentWidth() {
-    return width;
+    return properties().preferredWidth;
   }
 
   @Override
   public int getContentHeight() {
-    return height;
+    return properties().preferredHeight;
   }
 
   @Override
@@ -39,6 +33,12 @@ public class HorizontalContainerGuiElement extends GuiElement<HorizontalContaine
 
   public static class Properties extends GuiElementProperties {
     private Color borderColor;
+    private int preferredWidth;
+    private int preferredHeight;
+
+    public Properties(GuiElementGlobalProperties globalProperties) {
+      super(globalProperties);
+    }
 
     public Color getBorderColor() {
       return borderColor;
@@ -48,6 +48,23 @@ public class HorizontalContainerGuiElement extends GuiElement<HorizontalContaine
       this.borderColor = borderColor;
 
       return this;
+    }
+
+    public Properties setPreferredDimensions(int preferredWidth, int preferredHeight) {
+      this.preferredWidth = preferredWidth;
+      this.preferredHeight = preferredHeight;
+      setMaxDimensions(preferredWidth, preferredHeight);
+      setLayoutChanged(true);
+
+      return this;
+    }
+
+    public int getPreferredWidth() {
+      return preferredWidth;
+    }
+
+    public int getPreferredHeight() {
+      return preferredHeight;
     }
   }
 }

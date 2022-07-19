@@ -3,6 +3,7 @@ package technology.sola.engine.graphics.gui.elements.control;
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.input.MouseEvent;
 
@@ -14,9 +15,8 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
   private boolean wasMouseDownInside = false;
   private boolean isHovered = false;
 
-  public ButtonGuiElement(AssetPoolProvider assetPoolProvider, String text) {
-    super(assetPoolProvider, new Properties());
-    properties.setText(text);
+  public ButtonGuiElement(Properties properties) {
+    super(properties);
 
     setOnMouseEnterCallback((event) -> {});
     setOnMouseExitCallback((event) -> {});
@@ -90,6 +90,10 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
     private Color colorBackground = new Color(128, 128, 128);
     private Color colorBackgroundHover = Color.WHITE;
     private Color colorTextHover = new Color(128, 128, 128);
+
+    public Properties(GuiElementGlobalProperties globalProperties) {
+      super(globalProperties);
+    }
 
     public Color getColorBackground() {
       return colorBackground;

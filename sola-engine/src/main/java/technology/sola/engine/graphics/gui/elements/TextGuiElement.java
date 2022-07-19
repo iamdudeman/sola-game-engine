@@ -1,10 +1,15 @@
 package technology.sola.engine.graphics.gui.elements;
 
-import technology.sola.engine.assets.AssetPoolProvider;
+import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 
-public class TextGuiElement extends BaseTextGuiElement<BaseTextGuiElement.Properties> {
-  public TextGuiElement(AssetPoolProvider assetPoolProvider, String text) {
-    super(assetPoolProvider, new BaseTextGuiElement.Properties());
-    properties.setText(text);
+public class TextGuiElement extends BaseTextGuiElement<TextGuiElement.Properties> {
+  public TextGuiElement(Properties properties) {
+    super(properties);
+  }
+
+  public static class Properties extends BaseTextGuiElement.Properties {
+    public Properties(GuiElementGlobalProperties globalProperties) {
+      super(globalProperties);
+    }
   }
 }

@@ -1,8 +1,11 @@
 package technology.sola.engine.graphics.gui;
 
+import technology.sola.engine.assets.AssetPoolProvider;
+
 public class GuiElementProperties {
   public final Bounds margin = new Bounds();
   public final Bounds padding = new Bounds();
+  protected final GuiElementGlobalProperties globalProperties;
   private int x;
   private int y;
   private int maxWidth;
@@ -10,11 +13,16 @@ public class GuiElementProperties {
   private boolean isLayoutChanged = true;
   private boolean isHidden;
 
-  // todo consider constructor that takes in GuiElementGlobalProperties
-  // TODO isLayoutChanged would then be global.isLayoutChanged() || isLayoutChanged
+  public GuiElementProperties(GuiElementGlobalProperties globalProperties) {
+    this.globalProperties = globalProperties;
+  }
+
+  public AssetPoolProvider getAssetPoolProvider() {
+    return globalProperties.getAssetPoolProvider();
+  }
 
   public boolean isLayoutChanged() {
-    return isLayoutChanged;
+    return isLayoutChanged || globalProperties.isLayoutChanged();
   }
 
   public GuiElementProperties setLayoutChanged(boolean layoutChanged) {
