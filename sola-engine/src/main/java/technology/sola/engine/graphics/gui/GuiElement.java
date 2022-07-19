@@ -43,7 +43,9 @@ public abstract class GuiElement<T extends GuiElementProperties> {
   public void render(Renderer renderer) {
     renderSelf(renderer, properties.getX(), properties.getY());
 
-    recalculateChildPositions();
+    if (properties.isLayoutChanged() || children.stream().anyMatch(child -> child.properties().isLayoutChanged())) {
+      recalculateChildPositions();
+    }
 
     children.forEach(child -> {
       if (child.properties().isHidden()) {
@@ -158,10 +160,6 @@ public abstract class GuiElement<T extends GuiElementProperties> {
 
   public void recalculateChildPositions() {
     T properties = properties();
-
-    if (!properties.isLayoutChanged() && children.stream().noneMatch(child -> child.properties().isLayoutChanged())) {
-      return;
-    }
 
     var padding = properties.padding;
     int xOffset = padding.getLeft();

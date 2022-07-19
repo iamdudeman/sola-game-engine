@@ -8,8 +8,7 @@ import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
-import technology.sola.engine.graphics.gui.elements.container.HorizontalContainerGuiElement;
-import technology.sola.engine.graphics.gui.elements.container.VerticalContainerGuiElement;
+import technology.sola.engine.graphics.gui.elements.container.FlowContainerGuiElement;
 import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
 
 public class GuiExample extends Sola {
@@ -38,34 +37,25 @@ public class GuiExample extends Sola {
   private GuiElement<?> buildGui() {
     solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
 
-    TextGuiElement textGuiElement = solaGui.createElement(
-      TextGuiElement::new,
-      TextGuiElement.Properties::new,
-      p -> p.setText("Gui Example").margin.setBottom(10)
-    );
-
-    HorizontalContainerGuiElement firstParent = solaGui.createElement(
-      HorizontalContainerGuiElement::new,
-      HorizontalContainerGuiElement.Properties::new,
+    FlowContainerGuiElement firstParent = solaGui.createElement(
+      FlowContainerGuiElement::new,
+      FlowContainerGuiElement.Properties::new,
       p -> p.setPreferredDimensions(400, 60).setBorderColor(Color.YELLOW).padding.set(5)
     );
 
-    ButtonGuiElement middleButton = solaGui.createElement(
-      ButtonGuiElement::new,
-      ButtonGuiElement.Properties::new,
-      p -> p.setText("Second").padding.set(5).margin.set(0, 15)
-    );
-
-
     firstParent.addChild(
       solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("First")),
-      middleButton,
-      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Third"))
+      solaGui.createElement(
+        ButtonGuiElement::new,
+        ButtonGuiElement.Properties::new,
+        p -> p.setText("Second").padding.set(5).margin.set(0, 15)
+      ),
+      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Third").margin.setTop(3))
     );
 
-    HorizontalContainerGuiElement secondParent = solaGui.createElement(
-      HorizontalContainerGuiElement::new,
-      HorizontalContainerGuiElement.Properties::new,
+    FlowContainerGuiElement secondParent = solaGui.createElement(
+      FlowContainerGuiElement::new,
+      FlowContainerGuiElement.Properties::new,
       p -> p.setPreferredDimensions(400, 80).setBorderColor(Color.ORANGE).padding.set(5).margin.set(8, 0)
     );
 
@@ -93,13 +83,20 @@ public class GuiExample extends Sola {
     toggleFontButton.setOnClick(event -> toggleFontButton.properties().setFontAssetId(toggleFontButton.properties().getFontAssetId().equals("times_NORMAL_18") ? GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID : "times_NORMAL_18"));
 
 
-    VerticalContainerGuiElement rootElement = solaGui.createElement(
-      VerticalContainerGuiElement::new,
-      VerticalContainerGuiElement.Properties::new,
-      p -> p.setPreferredDimensions(400, 280).setBorderColor(Color.GREEN).padding.set(10).setPosition(15, 15)
+    FlowContainerGuiElement rootElement = solaGui.createElement(
+      FlowContainerGuiElement::new,
+      FlowContainerGuiElement.Properties::new,
+      p -> p.setDirection(FlowContainerGuiElement.Direction.VERTICAL).setPreferredDimensions(400, 280).setBorderColor(Color.GREEN).padding.set(10).setPosition(15, 15)
     );
 
-    rootElement.addChild(textGuiElement, firstParent, secondParent, toggleFontButton);
+    rootElement.addChild(
+      solaGui.createElement(
+        TextGuiElement::new,
+        TextGuiElement.Properties::new,
+        p -> p.setText("Gui Example").margin.setBottom(10)
+      ),
+      firstParent, secondParent, toggleFontButton
+    );
 
     return rootElement;
   }

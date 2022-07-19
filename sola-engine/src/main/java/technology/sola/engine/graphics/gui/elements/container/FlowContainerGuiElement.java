@@ -6,11 +6,8 @@ import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.GuiElementProperties;
 
-// TODO consider moving width and height to properties.preferredWidth and properties.preferredHeight
-// TODO consider joining container components with a DIRECTION enum
-
-public class HorizontalContainerGuiElement extends GuiElement<HorizontalContainerGuiElement.Properties> {
-  public HorizontalContainerGuiElement(Properties properties) {
+public class FlowContainerGuiElement extends GuiElement<FlowContainerGuiElement.Properties> {
+  public FlowContainerGuiElement(Properties properties) {
     super(properties);
   }
 
@@ -31,10 +28,41 @@ public class HorizontalContainerGuiElement extends GuiElement<HorizontalContaine
     }
   }
 
+  @Override
+  public void recalculateChildPositions() {
+    int xOffset = properties.padding.getLeft();
+    int yOffset = properties.padding.getTop();
+
+    for (GuiElement<?> child : children) {
+      child.properties().setMaxDimensions(
+        getWidth() - properties.padding.getLeft() - properties.padding.getRight(),
+        getHeight() - properties.padding.getTop() - properties.padding.getBottom()
+      );
+
+      xOffset += child.properties().margin.getLeft();
+      yOffset += child.properties().margin.getTop();
+
+      child.properties().setPosition(properties().getX() + xOffset, properties().getY() + yOffset);
+      child.recalculateChildPositions();
+
+      xOffset += child.properties().margin.getRight();
+      yOffset += child.properties().margin.getBottom();
+
+      if (properties().direction == Direction.HORIZONTAL) {
+        xOffset += child.getContentWidth();
+      } else if (properties.direction == Direction.VERTICAL) {
+        yOffset += child.getContentHeight();
+      }
+    }
+
+    properties.setLayoutChanged(false);
+  }
+
   public static class Properties extends GuiElementProperties {
     private Color borderColor;
     private int preferredWidth;
     private int preferredHeight;
+    private Direction direction = Direction.HORIZONTAL;
 
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
@@ -66,5 +94,21 @@ public class HorizontalContainerGuiElement extends GuiElement<HorizontalContaine
     public int getPreferredHeight() {
       return preferredHeight;
     }
+
+    public Direction getDirection() {
+      return direction;
+    }
+
+    public Properties setDirection(Direction direction) {
+      this.direction = direction;
+      setLayoutChanged(true);
+
+      return this;
+    }
+  }
+
+  public enum Direction {
+    HORIZONTAL,
+    VERTICAL
   }
 }
