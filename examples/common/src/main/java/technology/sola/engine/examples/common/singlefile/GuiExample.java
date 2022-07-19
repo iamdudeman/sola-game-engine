@@ -24,6 +24,7 @@ public class GuiExample extends Sola {
       .addAssetId(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_18.json");
 
 
+    solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
     solaGui.setGuiRoot(buildGui());
   }
 
@@ -35,8 +36,6 @@ public class GuiExample extends Sola {
   }
 
   private GuiElement<?> buildGui() {
-    solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
-
     FlowContainerGuiElement firstParent = solaGui.createElement(
       FlowContainerGuiElement::new,
       FlowContainerGuiElement.Properties::new,

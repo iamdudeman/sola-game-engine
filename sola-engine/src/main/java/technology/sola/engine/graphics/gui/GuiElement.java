@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
-// TODO consider simplifying GuiElement's base implementation of recalculateChildPositions (or maybe make it initially empty?)
 public abstract class GuiElement<T extends GuiElementProperties> {
   protected final T properties;
   protected List<GuiElement<?>> children = new ArrayList<>();
@@ -38,13 +37,15 @@ public abstract class GuiElement<T extends GuiElementProperties> {
     return Math.min(properties().getMaxHeight(), getContentHeight());
   }
 
+  public abstract void recalculateLayout();
+
   public abstract void renderSelf(Renderer renderer, int x, int y);
 
   public void render(Renderer renderer) {
     renderSelf(renderer, properties.getX(), properties.getY());
 
     if (properties.isLayoutChanged() || children.stream().anyMatch(child -> child.properties().isLayoutChanged())) {
-      recalculateChildPositions();
+      recalculateLayout();
     }
 
     children.forEach(child -> {
@@ -54,6 +55,39 @@ public abstract class GuiElement<T extends GuiElementProperties> {
 
       child.render(renderer);
     });
+  }
+
+  public void handleMouseEvent(MouseEvent event, String eventType) {
+    T properties = properties();
+
+    if (properties.isHidden()) {
+      return;
+    }
+
+    int x = properties.getX();
+    int y = properties.getY();
+    int width = getWidth();
+    int height = getHeight();
+
+    Rectangle guiElementBounds = new Rectangle(new Vector2D(x, y), new Vector2D(x + width, y + height));
+
+    if (guiElementBounds.contains(new Vector2D(event.x(), event.y()))) {
+      switch (eventType) {
+        case "press" -> onMouseDown(event);
+        case "release" -> onMouseUp(event);
+        case "move" -> onMouseEnter(event);
+      }
+
+      for (GuiElement<?> child : children) {
+        child.handleMouseEvent(event, eventType);
+      }
+    } else {
+      for (GuiElement<?> child : children) {
+        child.onMouseExit(event);
+      }
+
+      onMouseExit(event);
+    }
   }
 
   public void addChild(GuiElement<?> childOne) {
@@ -123,66 +157,5 @@ public abstract class GuiElement<T extends GuiElementProperties> {
 
   public T properties() {
     return properties;
-  }
-
-  public void handleMouseEvent(MouseEvent event, String eventType) {
-    T properties = properties();
-
-    if (properties.isHidden()) {
-      return;
-    }
-
-    int x = properties.getX();
-    int y = properties.getY();
-    int width = getWidth();
-    int height = getHeight();
-
-    Rectangle guiElementBounds = new Rectangle(new Vector2D(x, y), new Vector2D(x + width, y + height));
-
-    if (guiElementBounds.contains(new Vector2D(event.x(), event.y()))) {
-      switch (eventType) {
-        case "press" -> onMouseDown(event);
-        case "release" -> onMouseUp(event);
-        case "move" -> onMouseEnter(event);
-      }
-
-      for (GuiElement<?> child : children) {
-        child.handleMouseEvent(event, eventType);
-      }
-    } else {
-      for (GuiElement<?> child : children) {
-        child.onMouseExit(event);
-      }
-
-      onMouseExit(event);
-    }
-  }
-
-  public void recalculateChildPositions() {
-    T properties = properties();
-
-    var padding = properties.padding;
-    int xOffset = padding.getLeft();
-    int yOffset = padding.getTop();
-
-    for (GuiElement<?> child : children) {
-      var childProperties = child.properties();
-
-      childProperties.setMaxDimensions(
-        getWidth() - padding.getLeft() - padding.getRight(),
-        getHeight() - padding.getTop() - padding.getBottom()
-      );
-
-      xOffset += childProperties.margin.getLeft();
-
-      childProperties.setPosition(properties.getX() + xOffset, properties.getY() + yOffset);
-      child.recalculateChildPositions();
-
-      int width = child.getWidth();
-
-      xOffset += width + childProperties.margin.getRight();
-    }
-
-    properties.setLayoutChanged(false);
   }
 }

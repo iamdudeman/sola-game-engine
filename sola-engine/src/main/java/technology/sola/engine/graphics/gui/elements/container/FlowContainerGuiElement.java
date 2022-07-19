@@ -29,7 +29,7 @@ public class FlowContainerGuiElement extends GuiElement<FlowContainerGuiElement.
   }
 
   @Override
-  public void recalculateChildPositions() {
+  public void recalculateLayout() {
     int xOffset = properties.padding.getLeft();
     int yOffset = properties.padding.getTop();
 
@@ -43,7 +43,7 @@ public class FlowContainerGuiElement extends GuiElement<FlowContainerGuiElement.
       yOffset += child.properties().margin.getTop();
 
       child.properties().setPosition(properties().getX() + xOffset, properties().getY() + yOffset);
-      child.recalculateChildPositions();
+      child.recalculateLayout();
 
       xOffset += child.properties().margin.getRight();
       yOffset += child.properties().margin.getBottom();

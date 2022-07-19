@@ -29,7 +29,7 @@ public abstract class ChildlessGuiElement<T extends GuiElementProperties> extend
   }
 
   @Override
-  public void recalculateChildPositions() {
+  public void recalculateLayout() {
     // Nothing to do here
   }
 }
