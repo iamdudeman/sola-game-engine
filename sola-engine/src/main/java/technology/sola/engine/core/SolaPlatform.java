@@ -6,8 +6,6 @@ import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.ecs.io.Base64WorldIo;
 import technology.sola.ecs.io.WorldIo;
 import technology.sola.engine.event.EventHub;
-import technology.sola.engine.event.gameloop.GameLoopEvent;
-import technology.sola.engine.event.gameloop.GameLoopEventListener;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.impl.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.Viewport;
@@ -91,11 +89,14 @@ public abstract class SolaPlatform {
     this.worldIo = buildWorldSerializer();
     this.renderer = buildRenderer(solaConfiguration);
     this.gameLoop = buildGameLoop().create(
-      deltaTime -> update(sola, deltaTime), () -> render(renderer, sola),
-      solaConfiguration.gameLoopTargetUpdatesPerSecond(), solaConfiguration.isGameLoopRestingAllowed()
+      solaEventHub,
+      deltaTime -> update(sola, deltaTime),
+      () -> render(renderer, sola),
+      solaConfiguration.gameLoopTargetUpdatesPerSecond(),
+      solaConfiguration.isGameLoopRestingAllowed()
     );
 
-    solaEventHub.add(new GameLoopEventListener(gameLoop), GameLoopEvent.class);
+//    solaEventHub.add(new GameLoopEventListener(gameLoop), GameLoopEvent.class);
 
     sola.initializeForPlatform(this);
     new Thread(gameLoop).start();
@@ -114,7 +115,7 @@ public abstract class SolaPlatform {
 
   @FunctionalInterface
   protected interface GameLoopProvider {
-    GameLoop create(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed);
+    GameLoop create(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed);
   }
 
   @FunctionalInterface

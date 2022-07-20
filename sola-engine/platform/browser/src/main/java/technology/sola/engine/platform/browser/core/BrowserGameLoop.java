@@ -1,13 +1,15 @@
 package technology.sola.engine.platform.browser.core;
 
 import technology.sola.engine.core.GameLoop;
+import technology.sola.engine.event.EventHub;
+import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.platform.browser.javascript.JsUtils;
 
 import java.util.function.Consumer;
 
 public class BrowserGameLoop extends GameLoop implements JsUtils.Function {
-  public BrowserGameLoop(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
-    super(updateMethod, renderMethod, targetUpdatesPerSecond, isRestingAllowed);
+  public BrowserGameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
+    super(eventHub, updateMethod, renderMethod, targetUpdatesPerSecond, isRestingAllowed);
   }
 
   @Override
@@ -19,7 +21,11 @@ public class BrowserGameLoop extends GameLoop implements JsUtils.Function {
   private class JsAnimationFrame implements JsUtils.Function {
     @Override
     public void run() {
-      if (!isRunning()) return;
+      if (!isRunning()) {
+        stop();
+        eventHub.emit(GameLoopEvent.STOPPED);
+        return;
+      }
 
       long loopStart = System.nanoTime();
       float delta = (loopStart - previousLoopStartNanos) / 1e9f;
