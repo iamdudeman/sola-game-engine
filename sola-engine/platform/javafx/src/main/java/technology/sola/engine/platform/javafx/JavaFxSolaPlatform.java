@@ -28,17 +28,18 @@ import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
 import java.util.function.Consumer;
 
 public class JavaFxSolaPlatform extends SolaPlatform {
-  private final boolean isPlatformStartupNeeded;
+  private static boolean isPlatformStartupNeeded = true;
   private Canvas canvas;
   private GraphicsContext graphicsContext;
   private WritableImage writableImage;
 
   public JavaFxSolaPlatform() {
-    this(true);
   }
 
   public JavaFxSolaPlatform(boolean isPlatformStartupNeeded) {
-    this.isPlatformStartupNeeded = isPlatformStartupNeeded;
+    if (JavaFxSolaPlatform.isPlatformStartupNeeded) {
+      JavaFxSolaPlatform.isPlatformStartupNeeded = isPlatformStartupNeeded;
+    }
   }
 
   @Override
@@ -83,6 +84,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     if (isPlatformStartupNeeded) {
       Platform.startup(() -> { });
+      isPlatformStartupNeeded = false;
     }
 
     Platform.runLater(() -> {
