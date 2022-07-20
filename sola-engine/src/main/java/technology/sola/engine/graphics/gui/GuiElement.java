@@ -5,17 +5,10 @@ import technology.sola.engine.input.MouseEvent;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.Consumer;
-
-// TODO consider creating a GuiElementContainer base class that has all the child stuff in it
-// TODO then remove need for ChildlessGuiElement file
 
 public abstract class GuiElement<T extends GuiElementProperties> {
   protected final T properties;
-  protected List<GuiElement<?>> children = new ArrayList<>();
 
   private Consumer<MouseEvent> onMouseEnterCallback;
   private Consumer<MouseEvent> onMouseExitCallback;
@@ -45,16 +38,12 @@ public abstract class GuiElement<T extends GuiElementProperties> {
   public abstract void renderSelf(Renderer renderer, int x, int y);
 
   public void render(Renderer renderer) {
-    if (properties.isLayoutChanged() || children.stream().anyMatch(child -> child.properties().isLayoutChanged())) {
+    if (properties.isLayoutChanged()) {
       recalculateLayout();
     }
 
     if (!properties.isHidden()) {
       renderSelf(renderer, properties.getX(), properties.getY());
-
-      children.stream()
-        .filter(child -> !child.properties.isHidden())
-        .forEach(child -> child.render(renderer));
     }
   }
 
@@ -78,40 +67,9 @@ public abstract class GuiElement<T extends GuiElementProperties> {
         case "release" -> onMouseUp(event);
         case "move" -> onMouseEnter(event);
       }
-
-      for (GuiElement<?> child : children) {
-        child.handleMouseEvent(event, eventType);
-      }
     } else {
-      for (GuiElement<?> child : children) {
-        child.onMouseExit(event);
-      }
-
       onMouseExit(event);
     }
-  }
-
-  public void addChild(GuiElement<?> childOne) {
-    children.add(childOne);
-    properties.setLayoutChanged(true);
-  }
-
-  public void addChild(GuiElement<?> childOne, GuiElement<?> childTwo) {
-    children.add(childOne);
-    children.add(childTwo);
-    properties.setLayoutChanged(true);
-  }
-
-  public void addChild(GuiElement<?> childOne, GuiElement<?> childTwo, GuiElement<?> childThree) {
-    children.add(childOne);
-    children.add(childTwo);
-    children.add(childThree);
-    properties.setLayoutChanged(true);
-  }
-
-  public void addChild(GuiElement<?>... children) {
-    this.children.addAll(Arrays.asList(children));
-    properties.setLayoutChanged(true);
   }
 
   public void onMouseEnter(MouseEvent mouseEvent) {

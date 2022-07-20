@@ -4,10 +4,11 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.font.Font;
+import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.GuiElementProperties;
 
-public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties> extends ChildlessGuiElement<T> {
+public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties> extends GuiElement<T> {
   private Font font;
 
   private int textWidth;

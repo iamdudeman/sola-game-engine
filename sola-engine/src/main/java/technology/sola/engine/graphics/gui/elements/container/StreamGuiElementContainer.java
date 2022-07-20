@@ -3,10 +3,11 @@ package technology.sola.engine.graphics.gui.elements.container;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.GuiElementContainer;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.GuiElementProperties;
 
-public class StreamGuiElementContainer extends GuiElement<StreamGuiElementContainer.Properties> {
+public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElementContainer.Properties> {
   public StreamGuiElementContainer(Properties properties) {
     super(properties);
   }
