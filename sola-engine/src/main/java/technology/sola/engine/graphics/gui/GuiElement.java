@@ -10,6 +10,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
+// TODO consider creating a GuiElementContainer base class that has all the child stuff in it
+// TODO then remove need for ChildlessGuiElement file
+
 public abstract class GuiElement<T extends GuiElementProperties> {
   protected final T properties;
   protected List<GuiElement<?>> children = new ArrayList<>();
@@ -42,19 +45,17 @@ public abstract class GuiElement<T extends GuiElementProperties> {
   public abstract void renderSelf(Renderer renderer, int x, int y);
 
   public void render(Renderer renderer) {
-    renderSelf(renderer, properties.getX(), properties.getY());
-
     if (properties.isLayoutChanged() || children.stream().anyMatch(child -> child.properties().isLayoutChanged())) {
       recalculateLayout();
     }
 
-    children.forEach(child -> {
-      if (child.properties().isHidden()) {
-        return;
-      }
+    if (!properties.isHidden()) {
+      renderSelf(renderer, properties.getX(), properties.getY());
 
-      child.render(renderer);
-    });
+      children.stream()
+        .filter(child -> !child.properties.isHidden())
+        .forEach(child -> child.render(renderer));
+    }
   }
 
   public void handleMouseEvent(MouseEvent event, String eventType) {

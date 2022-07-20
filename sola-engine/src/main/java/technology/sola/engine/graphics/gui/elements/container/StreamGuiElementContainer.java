@@ -6,8 +6,8 @@ import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.GuiElementProperties;
 
-public class FlowContainerGuiElement extends GuiElement<FlowContainerGuiElement.Properties> {
-  public FlowContainerGuiElement(Properties properties) {
+public class StreamGuiElementContainer extends GuiElement<StreamGuiElementContainer.Properties> {
+  public StreamGuiElementContainer(Properties properties) {
     super(properties);
   }
 

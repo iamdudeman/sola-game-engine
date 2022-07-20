@@ -1,6 +1,6 @@
 # Branch WIP
 * Game Gui Stuff
-  * Consider adding anchors?
+  * Consider adding anchors of some sort to be able to easily center things?
 
 
 # TODO List

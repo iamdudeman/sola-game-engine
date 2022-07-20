@@ -1,6 +1,5 @@
 package technology.sola.engine.graphics.gui.elements.control;
 
-import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
