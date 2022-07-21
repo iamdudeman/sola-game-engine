@@ -1,5 +1,10 @@
 # Branch WIP
-
+* Particle System
+  * transform
+  * speed
+  * time left alive
+  * color?
+  * size?
 
 # TODO List
 * Rendering
@@ -45,12 +50,6 @@
   * Implement loader per platform (Swing and JavaFX can probably share though)
 * Build pipeline
   * Generate engine and platform artifacts
-* Particle System
-  * transform
-  * speed
-  * time left alive
-  * color?
-  * size?
 * Research Virtual File System
 * Scripting language
   * Consider scrapping this features
