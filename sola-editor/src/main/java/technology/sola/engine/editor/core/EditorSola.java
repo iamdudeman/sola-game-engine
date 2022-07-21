@@ -160,8 +160,6 @@ public class EditorSola extends Sola {
     platform.onMousePressed(mouseEvent -> {
       if (isLivePreview) return;
 
-      // TODO this has a bug for selection if it is an entity with a gui panel component when camera transform is changed :(
-      // TODO this has a bug for selection if it is an entity with a gui text component
       // TODO this has a bug for selection if it is an entity with a sprite component
 
       Vector2D clickPoint = solaGraphics.screenToWorldCoordinate(new Vector2D(mouseEvent.x(), mouseEvent.y()));
@@ -190,7 +188,6 @@ public class EditorSola extends Sola {
   }
 
   private void drawSelectedBorder(Renderer renderer) {
-    // TODO this does not properly draw around entities with a gui text component
     Entity selectedEntity = entitySelectionModel.getSelectedItem();
 
     if (selectedEntity != null) {

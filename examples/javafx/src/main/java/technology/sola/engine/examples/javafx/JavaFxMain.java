@@ -2,13 +2,13 @@ package technology.sola.engine.examples.javafx;
 
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.Sola;
-import technology.sola.engine.examples.common.singlefile.RenderingExample;
+import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.platform.javafx.JavaFxSolaPlatform;
 
 public class JavaFxMain {
   public static void main(String[] args) {
-    Sola sola = new RenderingExample();
     SolaPlatform solaPlatform = new JavaFxSolaPlatform();
+    Sola sola = new ExampleLauncherSola(solaPlatform);
 
     solaPlatform.play(sola);
   }

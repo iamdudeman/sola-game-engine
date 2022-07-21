@@ -102,6 +102,8 @@
     <module name="MethodParamPad"/>
     <module name="SingleSpaceSeparator"/>
     <module name="TypecastParenPad"/>
-    <module name="WhitespaceAround"/>
+    <module name="WhitespaceAround">
+      <property name="allowEmptyLambdas" value="true" />
+    </module>
   </module>
 </module>

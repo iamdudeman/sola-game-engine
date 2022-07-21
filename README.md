@@ -1,19 +1,12 @@
 # Branch WIP
 
+
 # TODO List
-* Game Gui Stuff
-  * Consider making Gui stuff a separate thing
-    * Layouts are easier with inheritance than ECS
-    * Could have a base GuiObject that contains many useful things (reference old Sol2d and SolKana implementations)
-    * If so remove usages of GuiTextComponent and GuiPanelComponent
-  * GuiPanelComponent
-    * padding
-    * parent Panel option for nesting panels
-  * GuiTextComponent
-    * should handle wrapping based on parent Panel?
-  * GuiButtonComponent implementation
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
+* SolaGui Stuff
+  * GuiElementContainer
+    * Consider adding anchor support to Stream or a new container to be able to easily center things?
 * Engine GUI Editor (Sola Editor)
   * Add more component controllers
     * SpriteAnimator

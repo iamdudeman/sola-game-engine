@@ -2,12 +2,14 @@ package technology.sola.engine.platform.javafx.core;
 
 import javafx.animation.AnimationTimer;
 import technology.sola.engine.core.GameLoop;
+import technology.sola.engine.event.EventHub;
+import technology.sola.engine.event.gameloop.GameLoopEvent;
 
 import java.util.function.Consumer;
 
 public class JavaFxGameLoop extends GameLoop {
-  public JavaFxGameLoop(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
-    super(updateMethod, renderMethod, targetUpdatesPerSecond, isRestingAllowed);
+  public JavaFxGameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
+    super(eventHub, updateMethod, renderMethod, targetUpdatesPerSecond, isRestingAllowed);
   }
 
   @Override
@@ -20,7 +22,8 @@ public class JavaFxGameLoop extends GameLoop {
     @Override
     public void handle(long newNanoTime) {
       if (!isRunning()) {
-        stop();
+        this.stop();
+        eventHub.emit(GameLoopEvent.STOPPED);
         return;
       }
 

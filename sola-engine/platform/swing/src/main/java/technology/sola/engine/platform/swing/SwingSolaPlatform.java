@@ -29,8 +29,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.util.function.Consumer;
 
-// TODO fix insets issue
-
 public class SwingSolaPlatform extends SolaPlatform {
   private final boolean useSoftwareRendering;
   private Canvas canvas;
@@ -114,7 +112,7 @@ public class SwingSolaPlatform extends SolaPlatform {
     }
 
     solaEventHub.add(event -> {
-      if (event.getMessage() == GameLoopEventType.STOP) {
+      if (event.getMessage() == GameLoopEventType.STOPPED) {
         jFrame.dispose();
       }
     }, GameLoopEvent.class);

@@ -9,6 +9,7 @@ import technology.sola.ecs.Component;
 import technology.sola.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Layer;
+import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.core.graphics.SolaGraphics;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
@@ -16,8 +17,6 @@ import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.font.Font;
-import technology.sola.engine.graphics.gui.components.GuiPanelComponent;
-import technology.sola.engine.graphics.gui.components.GuiTextComponent;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.graphics.sprite.SpriteSheet;
 import technology.sola.engine.input.Key;
@@ -28,6 +27,7 @@ import java.util.List;
 
 public class RenderingExample extends Sola {
   private SolaGraphics solaGraphics;
+  private Font defaultFont;
 
   @Override
   protected SolaConfiguration getConfiguration() {
@@ -40,8 +40,8 @@ public class RenderingExample extends Sola {
 
     assetPoolProvider.getAssetPool(SpriteSheet.class)
       .addAssetId("test", "assets/test_tiles_spritesheet.json");
-    assetPoolProvider.getAssetPool(Font.class)
-      .addAssetId("default", "assets/monospaced_NORMAL_18.json");
+    defaultFont = assetPoolProvider.getAssetPool(Font.class)
+      .addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
 
     solaEcs.addSystem(new TestSystem());
     solaEcs.setWorld(createWorld());
@@ -68,6 +68,26 @@ public class RenderingExample extends Sola {
     });
 
     solaGraphics.render();
+
+    renderer.drawToLayer("ui", r -> {
+      renderer.setRenderMode(RenderMode.ALPHA);
+      renderer.fillRect(80, 0, 600, 100, new Color(120, 255, 255, 255));
+      renderer.setRenderMode(RenderMode.NORMAL);
+      renderer.drawRect(80, 0, 600, 100, Color.YELLOW);
+
+      renderer.fillRect(180, 65, 300, 25, Color.WHITE);
+
+      final String characters1 = "!\"#$%&'()*+,-./0123456789:; <=>?@ABCDEFGHIJKLMN";
+      final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+
+      renderer.setFont(defaultFont);
+      renderer.setRenderMode(RenderMode.MASK);
+      renderer.drawString(characters1, 85, 5, Color.RED);
+      renderer.drawString(characters2, 85, 35, Color.BLACK);
+      renderer.drawString("Hello world!", 182, 67, Color.BLUE);
+      renderer.setRenderMode(RenderMode.NORMAL);
+    });
+    renderer.drawToLayer("ui", solaGui::render);
   }
 
   private record MovingComponent() implements Component {
@@ -221,36 +241,6 @@ public class RenderingExample extends Sola {
       .addComponent(new LayerComponent("background"))
       .addComponent(new TransformComponent(300, 150, 105f, 105f))
       .addComponent(new CircleRendererComponent(Color.RED, false));
-
-    // ui
-    Entity uiParentEntity = world.createEntity()
-      .addComponent(new LayerComponent("ui"))
-      .addComponent(new TransformComponent(0, 0, 600, 100))
-      .addComponent(new GuiPanelComponent(new Color(120, 255, 255, 255), Color.YELLOW));
-
-    final String characters1 = "!\"#$%&'()*+,-./0123456789:; <=>?@ABCDEFGHIJKLMN";
-    final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
-
-    world.createEntity()
-      .addComponent(new LayerComponent("ui"))
-      .addComponent(new TransformComponent(5, 5, uiParentEntity))
-      .addComponent(new GuiTextComponent("default", characters1, Color.RED));
-
-    world.createEntity()
-      .addComponent(new LayerComponent("ui"))
-      .addComponent(new TransformComponent(5, 35, uiParentEntity))
-      .addComponent(new GuiTextComponent("default", characters2, Color.BLACK));
-
-    Entity subPanel = world.createEntity(
-      new LayerComponent("ui"),
-      new TransformComponent(100, 65, 0.5f, 0.25f, uiParentEntity),
-      new GuiPanelComponent(Color.WHITE)
-    );
-
-    world.createEntity()
-      .addComponent(new LayerComponent("ui"))
-      .addComponent(new TransformComponent(2, 2, subPanel))
-      .addComponent(new GuiTextComponent("default", "Hello world!", Color.BLUE));
 
     return world;
   }

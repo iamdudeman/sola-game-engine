@@ -2,11 +2,16 @@ package technology.sola.engine.core;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import technology.sola.engine.event.EventHub;
+import technology.sola.engine.event.EventListener;
+import technology.sola.engine.event.gameloop.GameLoopEvent;
+import technology.sola.engine.event.gameloop.GameLoopEventType;
 
 import java.util.function.Consumer;
 
-public abstract class GameLoop implements Runnable {
+public abstract class GameLoop implements Runnable, EventListener<GameLoopEvent> {
   private static final Logger LOGGER = LoggerFactory.getLogger(GameLoop.class);
+  protected final EventHub eventHub;
   protected final FpsTracker fpsTracker = new FpsTracker();
   protected final Consumer<Float> updateMethod;
   protected final Runnable renderMethod;
@@ -16,11 +21,21 @@ public abstract class GameLoop implements Runnable {
   protected float updateCatchUpAccumulator;
   private boolean isRunning = false;
 
-  protected GameLoop(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
+  protected GameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
+    this.eventHub = eventHub;
     this.updateMethod = updateMethod;
     this.renderMethod = renderMethod;
     this.deltaTime = 1f / targetUpdatesPerSecond;
     this.isRestingAllowed = isRestingAllowed;
+
+    eventHub.add(this, GameLoopEvent.class);
+  }
+
+  @Override
+  public void onEvent(GameLoopEvent event) {
+    if (GameLoopEventType.STOP == event.getMessage()) {
+      this.stop();
+    }
   }
 
   @Override

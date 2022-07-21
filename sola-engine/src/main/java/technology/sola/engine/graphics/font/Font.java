@@ -44,6 +44,25 @@ public class Font implements Asset {
     return cachedCharacterToGlyphMap.computeIfAbsent(character, key -> getGlyphAsColor(key, color));
   }
 
+  public TextDimensions getDimensionsForText(String text) {
+    int width = 0;
+    int height = 0;
+
+    for (char c : text.toCharArray()) {
+      SolaImage glyphImage = getBaseGlyph(c);
+
+      width += glyphImage.getWidth() + getFontInfo().leading();
+
+      if (glyphImage.getHeight() > height) {
+        height = glyphImage.getHeight();
+      }
+    }
+
+    width -= getFontInfo().leading();
+
+    return new TextDimensions(width, height);
+  }
+
   public FontInfo getFontInfo() {
     return fontInfo;
   }
@@ -77,5 +96,8 @@ public class Font implements Asset {
     }
 
     return glyph;
+  }
+
+  public record TextDimensions(int width, int height) {
   }
 }

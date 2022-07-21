@@ -1,10 +1,13 @@
 package technology.sola.engine.core;
 
+import technology.sola.engine.event.EventHub;
+import technology.sola.engine.event.gameloop.GameLoopEvent;
+
 import java.util.function.Consumer;
 
 class FixedUpdateGameLoop extends GameLoop {
-  FixedUpdateGameLoop(Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
-    super(updateMethod, renderMethod, targetUpdatesPerSecond, isRestingAllowed);
+  FixedUpdateGameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
+    super(eventHub, updateMethod, renderMethod, targetUpdatesPerSecond, isRestingAllowed);
   }
 
   @Override
@@ -32,5 +35,7 @@ class FixedUpdateGameLoop extends GameLoop {
         shortRest(loopStart);
       }
     }
+
+    eventHub.emit(GameLoopEvent.STOPPED);
   }
 }
