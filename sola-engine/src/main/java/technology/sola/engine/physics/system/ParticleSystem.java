@@ -28,7 +28,7 @@ public class ParticleSystem extends EcsSystem {
           view.entity().destroy();
         } else {
           // TODO update entity's position properly
-          view.c2().setTranslate(view.c2().getTranslate().add(particleComponent.getVelocity()));
+          view.c2().setTranslate(view.c2().getTranslate().add(particleComponent.getVelocity().scalar(delta)));
           particleComponent.reduceLifespan(delta);
 
           Color baseColor = particleComponent.getBaseColor();
@@ -54,8 +54,8 @@ public class ParticleSystem extends EcsSystem {
 
         if (particleEmitterComponent.isAbleToEmit()) {
 
-          float xVel = random.nextFloat(-5f, 5f);
-          float yVel = random.nextFloat( -10f, -0.1f);
+          float xVel = random.nextFloat(-50f, 50f);
+          float yVel = random.nextFloat( -100f, -0.1f);
 
           world.createEntity(
             // TODO scale stuff
