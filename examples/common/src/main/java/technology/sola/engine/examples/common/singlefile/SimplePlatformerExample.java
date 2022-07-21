@@ -24,13 +24,15 @@ import technology.sola.engine.physics.event.CollisionManifoldEvent;
 import technology.sola.math.linear.Vector2D;
 
 import java.io.Serial;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 public class SimplePlatformerExample extends Sola {
   private SolaGraphics solaGraphics;
 
   @Override
   protected SolaConfiguration getConfiguration() {
-    return new SolaConfiguration("Simple Platformer",800, 600, 30, true);
+    return new SolaConfiguration("Simple Platformer", 800, 600, 30, true);
   }
 
   @Override
@@ -43,7 +45,7 @@ public class SimplePlatformerExample extends Sola {
 
     solaGraphics.setRenderDebug(true);
 
-    eventHub.add(new GameDoneEventListener(solaEcs.getWorld()), CollisionManifoldEvent.class);
+    eventHub.add(new GameDoneEventListener(), CollisionManifoldEvent.class);
   }
 
   @Override
@@ -53,25 +55,21 @@ public class SimplePlatformerExample extends Sola {
     solaGraphics.render();
   }
 
-  private static class GameDoneEventListener implements EventListener<CollisionManifoldEvent> {
-    private final World world;
-
-    public GameDoneEventListener(World world) {
-      this.world = world;
-    }
-
+  private class GameDoneEventListener implements EventListener<CollisionManifoldEvent> {
     @Override
     public void onEvent(CollisionManifoldEvent event) {
       CollisionManifold collisionManifold = event.getMessage();
 
-      // TODO need better way to deal with checking collision event stuff
-
-      if ("player".equals(collisionManifold.entityA().getName()) || "finalBlock".equals(collisionManifold.entityA().getName())) {
-        if ("player".equals(collisionManifold.entityB().getName()) || "finalBlock".equals(collisionManifold.entityB().getName())) {
-          world.findEntityByName("confetti").ifPresent(entity -> entity.setDisabled(false));
-        }
-      }
+      collisionManifold.conditionallyResolveCollision(checkForPlayer, checkForFinalBlock, collisionResolver);
     }
+
+    private final Function<Entity, Boolean> checkForPlayer = entity -> "player".equals(entity.getName());
+    private final Function<Entity, Boolean> checkForFinalBlock = entity -> "finalBlock".equals(entity.getName());
+    private final BiConsumer<Entity, Entity> collisionResolver = (player, finalBlock) ->
+      solaEcs.getWorld().findEntityByName("confetti").ifPresent(entity -> {
+        entity.setDisabled(false);
+        eventHub.remove(this, CollisionManifoldEvent.class);
+      });
   }
 
   private World buildWorld() {
