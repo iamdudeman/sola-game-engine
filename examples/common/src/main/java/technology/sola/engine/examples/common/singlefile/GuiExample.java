@@ -36,24 +36,6 @@ public class GuiExample extends Sola {
   }
 
   private GuiElement<?> buildGui() {
-    StreamGuiElementContainer firstParent = solaGui.createElement(
-      StreamGuiElementContainer::new,
-      StreamGuiElementContainer.Properties::new,
-      p -> p.setPreferredDimensions(400, 60).setBorderColor(Color.YELLOW).padding.set(5)
-    );
-
-    firstParent.addChild(
-      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("First")),
-      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Second").padding.set(5).margin.set(0, 15)),
-      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Third").margin.setTop(3))
-    );
-
-    StreamGuiElementContainer secondParent = solaGui.createElement(
-      StreamGuiElementContainer::new,
-      StreamGuiElementContainer.Properties::new,
-      p -> p.setPreferredDimensions(400, 80).setBorderColor(Color.ORANGE).padding.set(5).margin.set(8, 0)
-    );
-
     ButtonGuiElement checkButton = solaGui.createElement(
       ButtonGuiElement::new,
       ButtonGuiElement.Properties::new,
@@ -68,14 +50,37 @@ public class GuiExample extends Sola {
     );
     toggleOtherButton.setOnClick((event) -> checkButton.properties().setHidden(!checkButton.properties().isHidden()));
 
-    secondParent.addChild(checkButton, toggleOtherButton);
-
     ButtonGuiElement toggleFontButton = solaGui.createElement(
       ButtonGuiElement::new,
       ButtonGuiElement.Properties::new,
-      p -> p.setText("Toggle font on this button").padding.set(5)
+      p -> p.setText("Change font").padding.set(5)
     );
-    toggleFontButton.setOnClick(event -> toggleFontButton.properties().setFontAssetId(toggleFontButton.properties().getFontAssetId().equals("times_NORMAL_18") ? GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID : "times_NORMAL_18"));
+    toggleFontButton.setOnClick(event -> solaGui.globalProperties.setDefaultFontAssetId("times_NORMAL_18"));
+
+
+    StreamGuiElementContainer firstContainer = solaGui.createElement(
+      StreamGuiElementContainer::new,
+      StreamGuiElementContainer.Properties::new,
+      p -> p.setPreferredDimensions(400, 60).setBorderColor(Color.YELLOW).padding.set(5)
+    );
+
+    firstContainer.addChild(
+      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("First")),
+      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Second").padding.set(5).margin.set(0, 15)),
+      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Third").margin.setTop(3))
+    );
+
+
+    StreamGuiElementContainer secondContainer = solaGui.createElement(
+      StreamGuiElementContainer::new,
+      StreamGuiElementContainer.Properties::new,
+      p -> p.setPreferredDimensions(400, 80).setBorderColor(Color.ORANGE).padding.set(5).margin.set(8, 0)
+    );
+
+    secondContainer.addChild(
+      checkButton,
+      toggleOtherButton
+    );
 
 
     StreamGuiElementContainer rootElement = solaGui.createElement(
@@ -90,7 +95,9 @@ public class GuiExample extends Sola {
         TextGuiElement.Properties::new,
         p -> p.setText("Gui Example").margin.setBottom(10)
       ),
-      firstParent, secondParent, toggleFontButton
+      firstContainer,
+      secondContainer,
+      toggleFontButton
     );
 
     return rootElement;

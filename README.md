@@ -1,11 +1,12 @@
 # Branch WIP
-* Game Gui Stuff
-  * Consider adding anchors of some sort to be able to easily center things?
 
 
 # TODO List
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
+* SolaGui Stuff
+  * GuiElementContainer
+    * Consider adding anchor support to Stream or a new container to be able to easily center things?
 * Engine GUI Editor (Sola Editor)
   * Add more component controllers
     * SpriteAnimator
