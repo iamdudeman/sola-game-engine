@@ -17,8 +17,8 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
   public ButtonGuiElement(Properties properties) {
     super(properties);
 
-    setOnMouseEnterCallback((event) -> {});
-    setOnMouseExitCallback((event) -> {});
+    setOnMouseEnterCallback(event -> {});
+    setOnMouseExitCallback(event -> {});
     setOnMouseDownCallback(event -> {});
     setOnMouseUpCallback(event -> {});
   }
