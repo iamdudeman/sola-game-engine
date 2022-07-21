@@ -8,8 +8,8 @@ import java.io.Serial;
 public class CircleRendererComponent implements Component {
   @Serial
   private static final long serialVersionUID = -1490398951286309608L;
-  private final Color color;
-  private final boolean isFilled;
+  private Color color;
+  private boolean isFilled;
 
   public CircleRendererComponent(Color color) {
     this(color, true);
@@ -26,5 +26,13 @@ public class CircleRendererComponent implements Component {
 
   public boolean isFilled() {
     return isFilled;
+  }
+
+  public void setColor(Color color) {
+    this.color = color;
+  }
+
+  public void setFilled(boolean filled) {
+    isFilled = filled;
   }
 }

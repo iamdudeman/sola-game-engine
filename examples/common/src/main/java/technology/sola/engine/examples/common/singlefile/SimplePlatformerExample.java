@@ -1,22 +1,26 @@
 package technology.sola.engine.examples.common.singlefile;
 
+import technology.sola.ecs.Entity;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Component;
 import technology.sola.ecs.World;
+import technology.sola.engine.event.EventListener;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.core.graphics.SolaGraphics;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.input.Key;
+import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.Material;
 import technology.sola.engine.core.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
+import technology.sola.engine.physics.event.CollisionManifoldEvent;
 import technology.sola.math.linear.Vector2D;
 
 import java.io.Serial;
@@ -38,6 +42,8 @@ public class SimplePlatformerExample extends Sola {
     solaEcs.setWorld(buildWorld());
 
     solaGraphics.setRenderDebug(true);
+
+    eventHub.add(new GameDoneEventListener(solaEcs.getWorld()), CollisionManifoldEvent.class);
   }
 
   @Override
@@ -45,6 +51,27 @@ public class SimplePlatformerExample extends Sola {
     renderer.clear();
 
     solaGraphics.render();
+  }
+
+  private static class GameDoneEventListener implements EventListener<CollisionManifoldEvent> {
+    private final World world;
+
+    public GameDoneEventListener(World world) {
+      this.world = world;
+    }
+
+    @Override
+    public void onEvent(CollisionManifoldEvent event) {
+      CollisionManifold collisionManifold = event.getMessage();
+
+      // TODO need better way to deal with checking collision event stuff
+
+      if ("player".equals(collisionManifold.entityA().getName()) || "finalBlock".equals(collisionManifold.entityA().getName())) {
+        if ("player".equals(collisionManifold.entityB().getName()) || "finalBlock".equals(collisionManifold.entityB().getName())) {
+          world.findEntityByName("confetti").ifPresent(entity -> entity.setDisabled(false));
+        }
+      }
+    }
   }
 
   private World buildWorld() {
@@ -59,11 +86,8 @@ public class SimplePlatformerExample extends Sola {
       .addComponent(new TransformComponent(200, 300, 50, 50))
       .addComponent(new RectangleRendererComponent(Color.BLUE))
       .addComponent(ColliderComponent.aabb())
-      .addComponent(new DynamicBodyComponent(new Material(1)));
-
-    world.createEntity()
-      .addComponent(new ParticleEmitterComponent())
-      .addComponent(new TransformComponent(220, 390));
+      .addComponent(new DynamicBodyComponent(new Material(1)))
+      .setName("player");
 
     world.createEntity()
       .addComponent(new TransformComponent(150, 400, 200, 75f))
@@ -92,10 +116,17 @@ public class SimplePlatformerExample extends Sola {
       .addComponent(new RectangleRendererComponent(Color.WHITE))
       .addComponent(ColliderComponent.aabb());
 
-    world.createEntity()
+    Entity finalBlock = world.createEntity()
       .addComponent(new TransformComponent(1800, 170, 50, 50f))
       .addComponent(new RectangleRendererComponent(Color.YELLOW))
-      .addComponent(ColliderComponent.aabb());
+      .addComponent(ColliderComponent.aabb())
+      .setName("finalBlock");
+
+    world.createEntity()
+      .setName("confetti")
+      .addComponent(new ParticleEmitterComponent())
+      .addComponent(new TransformComponent(25, 0, finalBlock))
+      .setDisabled(true);
 
     return world;
   }
