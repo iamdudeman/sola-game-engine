@@ -16,6 +16,7 @@ import technology.sola.engine.physics.Material;
 import technology.sola.engine.core.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
+import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.math.linear.Vector2D;
 
 import java.io.Serial;
@@ -47,7 +48,7 @@ public class SimplePlatformerExample extends Sola {
   }
 
   private World buildWorld() {
-    World world = new World(10);
+    World world = new World(100);
 
     world.createEntity()
       .addComponent(new CameraComponent())
@@ -59,6 +60,10 @@ public class SimplePlatformerExample extends Sola {
       .addComponent(new RectangleRendererComponent(Color.BLUE))
       .addComponent(ColliderComponent.aabb())
       .addComponent(new DynamicBodyComponent(new Material(1)));
+
+    world.createEntity()
+      .addComponent(new ParticleEmitterComponent())
+      .addComponent(new TransformComponent(220, 390));
 
     world.createEntity()
       .addComponent(new TransformComponent(150, 400, 200, 75f))
