@@ -96,8 +96,6 @@ public abstract class SolaPlatform {
       solaConfiguration.isGameLoopRestingAllowed()
     );
 
-//    solaEventHub.add(new GameLoopEventListener(gameLoop), GameLoopEvent.class);
-
     sola.initializeForPlatform(this);
     new Thread(gameLoop).start();
   }

@@ -22,7 +22,7 @@ public class JavaFxGameLoop extends GameLoop {
     @Override
     public void handle(long newNanoTime) {
       if (!isRunning()) {
-        stop();
+        this.stop();
         eventHub.emit(GameLoopEvent.STOPPED);
         return;
       }

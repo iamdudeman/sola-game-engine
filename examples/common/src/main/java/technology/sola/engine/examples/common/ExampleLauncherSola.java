@@ -30,7 +30,7 @@ public class ExampleLauncherSola extends Sola {
 
   @Override
   protected SolaConfiguration getConfiguration() {
-    return new SolaConfiguration("Example Launcher", 800, 600, 10, true);
+    return new SolaConfiguration("Example Launcher", 800, 600, 30, true);
   }
 
   @Override
