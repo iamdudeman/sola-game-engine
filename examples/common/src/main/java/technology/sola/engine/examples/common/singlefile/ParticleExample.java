@@ -38,7 +38,11 @@ public class ParticleExample extends Sola {
 
     world.createEntity()
       .addComponent(new ParticleEmitterComponent())
-      .addComponent(new TransformComponent(75, 500));
+      .addComponent(new TransformComponent(100, 500));
+
+    world.createEntity()
+      .addComponent(new ParticleEmitterComponent(0.01f))
+      .addComponent(new TransformComponent(350, 500));
 
     return world;
   }

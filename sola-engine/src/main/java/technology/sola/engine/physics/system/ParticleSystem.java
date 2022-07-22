@@ -29,8 +29,10 @@ public class ParticleSystem extends EcsSystem {
         if (particleComponent.getRemainingLifespan() <= 0) {
           view.entity().destroy();
         } else {
-          // TODO update entity's position properly
-          view.c2().setTranslate(view.c2().getTranslate().add(particleComponent.getVelocity().scalar(delta)));
+          TransformComponent transformComponent = view.c2();
+
+          // TODO consider acceleration and "swaying" of some sort for non-linear particles
+          transformComponent.setTranslate(transformComponent.getTranslate().add(particleComponent.getVelocity().scalar(delta)));
           particleComponent.reduceLifespan(delta);
 
           Color baseColor = particleComponent.getBaseColor();
@@ -57,20 +59,23 @@ public class ParticleSystem extends EcsSystem {
         particleEmitterComponent.addTimeSinceLastEmission(delta);
 
         if (particleEmitterComponent.isAbleToEmit()) {
+          Vector2D minVel = particleEmitterComponent.getParticleMinVelocity();
+          Vector2D maxVel = particleEmitterComponent.getParticleMaxVelocity();
 
-          float xVel = random.nextFloat(-50f, 50f);
-          float yVel = random.nextFloat( -100f, -0.1f);
+          // todo if min and max values are the same should not call random here
+          float xVel = random.nextFloat(minVel.x, maxVel.x);
+          float yVel = random.nextFloat(minVel.y, maxVel.y);
+          float size = random.nextFloat(particleEmitterComponent.getParticleMinSize(), particleEmitterComponent.getParticleMaxSize());
+          float life = random.nextFloat(particleEmitterComponent.getParticleMinLife(), particleEmitterComponent.getParticleMaxLife());
 
           world.createEntity(
-            // TODO scale stuff
-            new TransformComponent(transformComponent.getX(), transformComponent.getY(), 10, 10),
-            // TODO color stuff
-            new CircleRendererComponent(particleEmitterComponent.getBaseColor()),
-            // todo not hard coded lifespan
+            new TransformComponent(
+              transformComponent.getX(), transformComponent.getY(),
+              size, size
+            ),
+            new CircleRendererComponent(particleEmitterComponent.getParticleColor()),
             new ParticleComponent(
-              particleEmitterComponent.getBaseColor(),
-              particleEmitterComponent.getLife(),
-              new Vector2D(xVel, yVel)
+              particleEmitterComponent.getParticleColor(), life, new Vector2D(xVel, yVel)
             )
           );
 

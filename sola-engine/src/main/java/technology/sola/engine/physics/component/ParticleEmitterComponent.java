@@ -2,20 +2,35 @@ package technology.sola.engine.physics.component;
 
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
+import technology.sola.math.linear.Vector2D;
 
 import java.io.Serial;
+
+// todo consider an array of colors maybe? (think confetti)
+// todo consider adding some sort of blend mode instead of always fading out alpha?
 
 public class ParticleEmitterComponent implements Component {
   @Serial
   private static final long serialVersionUID = -8273651094891084287L;
+  private Color particleColor = Color.WHITE;
+  private float particleMinLife = 1f;
+  private float particleMaxLife = 2f;
+  private Vector2D particleMinVelocity = new Vector2D(-50, -100);
+  private Vector2D particleMaxVelocity = new Vector2D(50, -0.1f);
+  private float particleMinSize = 5f;
+  private float particleMaxSize = 10f;
 
-  // todo consider an array of colors maybe?
-  private Color baseColor = Color.WHITE;
 
-  private float life = 1.5f;
-
-  private float emissionDelay = 0.1f;
+  private float emissionDelay;
   private float timeSinceLastEmission;
+
+  public ParticleEmitterComponent() {
+    this(0.1f);
+  }
+
+  public ParticleEmitterComponent(float emissionDelay) {
+    this.emissionDelay = emissionDelay;
+  }
 
   public void addTimeSinceLastEmission(float delta) {
     timeSinceLastEmission += delta;
@@ -29,19 +44,32 @@ public class ParticleEmitterComponent implements Component {
     timeSinceLastEmission = 0;
   }
 
-  // min life, max life
-  // min x vel, max x vel
-  // min y vel, max y vel
-  // min size, max size
-  // color
-  // blend mode?
 
-
-  public Color getBaseColor() {
-    return baseColor;
+  public Color getParticleColor() {
+    return particleColor;
   }
 
-  public float getLife() {
-    return life;
+  public float getParticleMinLife() {
+    return particleMinLife;
+  }
+
+  public float getParticleMaxLife() {
+    return particleMaxLife;
+  }
+
+  public Vector2D getParticleMinVelocity() {
+    return particleMinVelocity;
+  }
+
+  public Vector2D getParticleMaxVelocity() {
+    return particleMaxVelocity;
+  }
+
+  public float getParticleMinSize() {
+    return particleMinSize;
+  }
+
+  public float getParticleMaxSize() {
+    return particleMaxSize;
   }
 }

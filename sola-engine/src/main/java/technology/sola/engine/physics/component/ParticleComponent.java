@@ -7,7 +7,7 @@ import technology.sola.math.linear.Vector2D;
 import java.io.Serial;
 
 // todo consider acceleration
-// todo consider some sort of "swaying" (like smoke might have?)
+// todo consider some sort of "swaying" for non-linear particles
 
 public class ParticleComponent implements Component {
   @Serial
