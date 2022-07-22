@@ -63,7 +63,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
         float green = currentColor.getGreen() * oneMinusAlpha + color.getGreen() * alphaMod;
         float blue = currentColor.getBlue() * oneMinusAlpha + color.getBlue() * alphaMod;
 
-        int newArgb = new Color(color.getAlpha(), (int) red, (int) green, (int) blue).hexInt();
+        int newArgb = new Color((int) red, (int) green, (int) blue).hexInt();
 
         pixels[x + y * width] = newArgb;
         break;
