@@ -12,6 +12,8 @@ import technology.sola.math.linear.Vector2D;
 import java.util.Random;
 
 public class ParticleSystem extends EcsSystem {
+  private final Random random = new Random();
+
   @Override
   public void update(World world, float delta) {
     updateParticles(world, delta);
@@ -33,8 +35,11 @@ public class ParticleSystem extends EcsSystem {
 
           Color baseColor = particleComponent.getBaseColor();
 
+          // todo avoid division here if possible
+          int alpha = Math.max((int)((255 * particleComponent.getRemainingLifespan() / particleComponent.getMaxLifespan()) + 0.5f), 0);
+
           view.c3().setColor(new Color(
-            (int)((255 * particleComponent.getRemainingLifespan() / particleComponent.getMaxLifespan()) + 0.5f),
+            alpha,
             baseColor.getRed(),
             baseColor.getGreen(),
             baseColor.getBlue())
@@ -42,7 +47,6 @@ public class ParticleSystem extends EcsSystem {
         }
       });
   }
-  Random random = new Random();
 
   private void emitParticles(World world, float delta) {
     world.createView().of(ParticleEmitterComponent.class, TransformComponent.class)
@@ -61,10 +65,10 @@ public class ParticleSystem extends EcsSystem {
             // TODO scale stuff
             new TransformComponent(transformComponent.getX(), transformComponent.getY(), 10, 10),
             // TODO color stuff
-            new CircleRendererComponent(particleEmitterComponent.getColor()),
+            new CircleRendererComponent(particleEmitterComponent.getBaseColor()),
             // todo not hard coded lifespan
             new ParticleComponent(
-              particleEmitterComponent.getColor(),
+              particleEmitterComponent.getBaseColor(),
               particleEmitterComponent.getLife(),
               new Vector2D(xVel, yVel)
             )

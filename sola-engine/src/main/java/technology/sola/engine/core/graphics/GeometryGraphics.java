@@ -55,17 +55,17 @@ class GeometryGraphics {
 
   private static void renderCircle(Renderer renderer, Entity entity, TransformComponent cameraTransform) {
     var transform = GraphicsUtils.getTransformForAppliedCamera(entity.getComponent(TransformComponent.class), cameraTransform);
-    var rectangleRenderer = entity.getComponent(CircleRendererComponent.class);
+    var circleRenderer = entity.getComponent(CircleRendererComponent.class);
     float radius = Math.max(transform.getScaleX(), transform.getScaleY()) * 0.5f;
 
-    if (rectangleRenderer.getColor().hasAlpha()) {
+    if (circleRenderer.getColor().hasAlpha()) {
       renderer.setRenderMode(RenderMode.ALPHA);
     }
 
-    if (rectangleRenderer.isFilled()) {
-      renderer.fillCircle(transform.getX(), transform.getY(), radius, rectangleRenderer.getColor());
+    if (circleRenderer.isFilled()) {
+      renderer.fillCircle(transform.getX(), transform.getY(), radius, circleRenderer.getColor());
     } else {
-      renderer.drawCircle(transform.getX(), transform.getY(), radius, rectangleRenderer.getColor());
+      renderer.drawCircle(transform.getX(), transform.getY(), radius, circleRenderer.getColor());
     }
 
     renderer.setRenderMode(RenderMode.NORMAL);

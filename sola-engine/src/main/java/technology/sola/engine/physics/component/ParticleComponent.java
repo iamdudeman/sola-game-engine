@@ -6,13 +6,16 @@ import technology.sola.math.linear.Vector2D;
 
 import java.io.Serial;
 
+// todo consider acceleration
+// todo consider some sort of "swaying" (like smoke might have?)
+
 public class ParticleComponent implements Component {
   @Serial
   private static final long serialVersionUID = 1954733794643288182L;
-  private Color baseColor;
+  private final Color baseColor;
   private final float maxLifespan;
+  private final Vector2D velocity;
   private float remainingLifespan;
-  private Vector2D velocity;
 
   public ParticleComponent(Color baseColor, float maxLifespan, Vector2D velocity) {
     this.baseColor = baseColor;

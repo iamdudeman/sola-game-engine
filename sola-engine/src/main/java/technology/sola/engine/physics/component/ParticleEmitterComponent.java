@@ -9,11 +9,12 @@ public class ParticleEmitterComponent implements Component {
   @Serial
   private static final long serialVersionUID = -8273651094891084287L;
 
-  private Color color = Color.YELLOW;
+  // todo consider an array of colors maybe?
+  private Color baseColor = Color.WHITE;
 
   private float life = 1.5f;
 
-  private float emissionDelay = 0.01f;
+  private float emissionDelay = 0.1f;
   private float timeSinceLastEmission;
 
   public void addTimeSinceLastEmission(float delta) {
@@ -36,8 +37,8 @@ public class ParticleEmitterComponent implements Component {
   // blend mode?
 
 
-  public Color getColor() {
-    return color;
+  public Color getBaseColor() {
+    return baseColor;
   }
 
   public float getLife() {
