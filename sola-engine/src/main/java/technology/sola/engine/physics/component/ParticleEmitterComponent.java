@@ -7,7 +7,10 @@ import technology.sola.math.linear.Vector2D;
 import java.io.Serial;
 
 // todo consider an array of colors maybe? (think confetti)
+// todo consider different methods for deciding which next color to use if it is an array
 // todo consider adding some sort of blend mode instead of always fading out alpha?
+
+// TODO note, blend mode would need to be implemented in Renderer as well
 
 public class ParticleEmitterComponent implements Component {
   @Serial
@@ -17,19 +20,19 @@ public class ParticleEmitterComponent implements Component {
   private float particleMaxLife = 2f;
   private Vector2D particleMinVelocity = new Vector2D(-50, -100);
   private Vector2D particleMaxVelocity = new Vector2D(50, -0.1f);
-  private float particleMinSize = 5f;
-  private float particleMaxSize = 10f;
+  private float particleMinSize = 8f;
+  private float particleMaxSize = 8f;
+  private int particlesPerEmit = 1;
+  private float particleEmissionDelay;
 
-
-  private float emissionDelay;
   private float timeSinceLastEmission;
 
   public ParticleEmitterComponent() {
     this(0.1f);
   }
 
-  public ParticleEmitterComponent(float emissionDelay) {
-    this.emissionDelay = emissionDelay;
+  public ParticleEmitterComponent(float particleEmissionDelay) {
+    this.particleEmissionDelay = particleEmissionDelay;
   }
 
   public void addTimeSinceLastEmission(float delta) {
@@ -37,7 +40,7 @@ public class ParticleEmitterComponent implements Component {
   }
 
   public boolean isAbleToEmit() {
-    return timeSinceLastEmission > emissionDelay;
+    return timeSinceLastEmission > particleEmissionDelay;
   }
 
   public void emit() {
@@ -45,8 +48,24 @@ public class ParticleEmitterComponent implements Component {
   }
 
 
+  public void setParticleEmissionDelay(float particleEmissionDelay) {
+    this.particleEmissionDelay = particleEmissionDelay;
+  }
+
+  public int getParticlesPerEmit() {
+    return particlesPerEmit;
+  }
+
+  public void setParticlesPerEmit(int particlesPerEmit) {
+    this.particlesPerEmit = particlesPerEmit;
+  }
+
   public Color getParticleColor() {
     return particleColor;
+  }
+
+  public void setParticleColor(Color particleColor) {
+    this.particleColor = particleColor;
   }
 
   public float getParticleMinLife() {
@@ -57,6 +76,15 @@ public class ParticleEmitterComponent implements Component {
     return particleMaxLife;
   }
 
+  public void setParticleLifeBounds(float particleMinLife, float particleMaxLife) {
+    this.particleMinLife = particleMinLife;
+    this.particleMaxLife = particleMaxLife;
+  }
+
+  public void setParticleLife(float life) {
+    setParticleLifeBounds(life, life);
+  }
+
   public Vector2D getParticleMinVelocity() {
     return particleMinVelocity;
   }
@@ -65,11 +93,29 @@ public class ParticleEmitterComponent implements Component {
     return particleMaxVelocity;
   }
 
+  public void setParticleVelocityBounds(Vector2D particleMinVelocity, Vector2D particleMaxVelocity) {
+    this.particleMinVelocity = particleMinVelocity;
+    this.particleMaxVelocity = particleMaxVelocity;
+  }
+
+  public void setParticleVelocity(Vector2D velocity) {
+    setParticleVelocityBounds(velocity, velocity);
+  }
+
   public float getParticleMinSize() {
     return particleMinSize;
   }
 
   public float getParticleMaxSize() {
     return particleMaxSize;
+  }
+
+  public void setParticleSizeBounds(float particleMinSize, float particleMaxSize) {
+    this.particleMinSize = particleMinSize;
+    this.particleMaxSize = particleMaxSize;
+  }
+
+  public void setParticleSize(float size) {
+    setParticleSizeBounds(size, size);
   }
 }

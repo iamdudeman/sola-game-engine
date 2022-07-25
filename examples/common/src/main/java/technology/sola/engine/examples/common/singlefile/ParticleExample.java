@@ -6,8 +6,10 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.graphics.SolaGraphics;
 import technology.sola.engine.core.physics.SolaPhysics;
+import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
+import technology.sola.math.linear.Vector2D;
 
 public class ParticleExample extends Sola {
   private SolaGraphics solaGraphics;
@@ -40,8 +42,17 @@ public class ParticleExample extends Sola {
       .addComponent(new ParticleEmitterComponent())
       .addComponent(new TransformComponent(100, 500));
 
+    ParticleEmitterComponent particleEmitterComponent = new ParticleEmitterComponent();
+
+    particleEmitterComponent.setParticleColor(new Color(230, 40, 45));
+    particleEmitterComponent.setParticleSizeBounds(8f, 12f);
+    particleEmitterComponent.setParticleLifeBounds(0.5f, 1f);
+    particleEmitterComponent.setParticleVelocityBounds(new Vector2D(-10f, -300f), new Vector2D(10f, -50f));
+    particleEmitterComponent.setParticleEmissionDelay(0.1f);
+    particleEmitterComponent.setParticlesPerEmit(15);
+
     world.createEntity()
-      .addComponent(new ParticleEmitterComponent(0.01f))
+      .addComponent(particleEmitterComponent)
       .addComponent(new TransformComponent(350, 500));
 
     return world;

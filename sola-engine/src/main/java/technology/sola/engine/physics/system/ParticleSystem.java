@@ -38,7 +38,7 @@ public class ParticleSystem extends EcsSystem {
           Color baseColor = particleComponent.getBaseColor();
 
           // todo avoid division here if possible
-          int alpha = Math.max((int)((255 * particleComponent.getRemainingLifespan() / particleComponent.getMaxLifespan()) + 0.5f), 0);
+          int alpha = Math.max((int) ((255 * particleComponent.getRemainingLifespan() / particleComponent.getMaxLifespan()) + 0.5f), 0);
 
           view.c3().setColor(new Color(
             alpha,
@@ -62,25 +62,35 @@ public class ParticleSystem extends EcsSystem {
           Vector2D minVel = particleEmitterComponent.getParticleMinVelocity();
           Vector2D maxVel = particleEmitterComponent.getParticleMaxVelocity();
 
-          // todo if min and max values are the same should not call random here
-          float xVel = random.nextFloat(minVel.x, maxVel.x);
-          float yVel = random.nextFloat(minVel.y, maxVel.y);
-          float size = random.nextFloat(particleEmitterComponent.getParticleMinSize(), particleEmitterComponent.getParticleMaxSize());
-          float life = random.nextFloat(particleEmitterComponent.getParticleMinLife(), particleEmitterComponent.getParticleMaxLife());
+          for (int i = 0; i < particleEmitterComponent.getParticlesPerEmit(); i++) {
 
-          world.createEntity(
-            new TransformComponent(
-              transformComponent.getX(), transformComponent.getY(),
-              size, size
-            ),
-            new CircleRendererComponent(particleEmitterComponent.getParticleColor()),
-            new ParticleComponent(
-              particleEmitterComponent.getParticleColor(), life, new Vector2D(xVel, yVel)
-            )
-          );
+            float xVel = getRandomFloat(minVel.x, maxVel.x);
+            float yVel = getRandomFloat(minVel.y, maxVel.y);
+            float size = getRandomFloat(particleEmitterComponent.getParticleMinSize(), particleEmitterComponent.getParticleMaxSize());
+            float life = getRandomFloat(particleEmitterComponent.getParticleMinLife(), particleEmitterComponent.getParticleMaxLife());
+
+            world.createEntity(
+              new TransformComponent(
+                transformComponent.getX(), transformComponent.getY(),
+                size, size
+              ),
+              new CircleRendererComponent(particleEmitterComponent.getParticleColor()),
+              new ParticleComponent(
+                particleEmitterComponent.getParticleColor(), life, new Vector2D(xVel, yVel)
+              )
+            );
+          }
 
           particleEmitterComponent.emit();
         }
       });
+  }
+
+  private float getRandomFloat(float min, float max) {
+    if (Float.compare(min, max) == 0) {
+      return min;
+    }
+
+    return random.nextFloat(min, max);
   }
 }
