@@ -5,7 +5,7 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
-import technology.sola.engine.graphics.components.RenderModeComponent;
+import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.physics.component.ParticleComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.math.linear.Vector2D;
@@ -74,7 +74,7 @@ public class ParticleSystem extends EcsSystem {
                 size, size
               ),
               new CircleRendererComponent(particleEmitterComponent.getParticleColor()),
-              new RenderModeComponent(particleEmitterComponent.getRenderMode()),
+              new BlendModeComponent(particleEmitterComponent.getRenderMode()),
               new ParticleComponent(
                 particleEmitterComponent.getParticleColor(), life, new Vector2D(xVel, yVel)
               )

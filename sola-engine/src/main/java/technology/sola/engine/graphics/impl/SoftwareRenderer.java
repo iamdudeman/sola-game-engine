@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Random;
 
 public class SoftwareRenderer extends Canvas implements Renderer {
-  private Random random = new Random();
+  private final Random random = new Random();
   private final List<Layer> layers = new ArrayList<>();
   private BlendMode blendMode = BlendMode.NO_BLENDING;
   private Font font;

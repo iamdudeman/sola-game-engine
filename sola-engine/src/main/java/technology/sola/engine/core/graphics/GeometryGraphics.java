@@ -8,7 +8,7 @@ import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
-import technology.sola.engine.graphics.components.RenderModeComponent;
+import technology.sola.engine.graphics.components.BlendModeComponent;
 
 class GeometryGraphics {
   static void render(Renderer renderer, SolaEcs solaEcs, TransformComponent cameraTransform) {
@@ -16,8 +16,8 @@ class GeometryGraphics {
     solaEcs.getWorld().findEntitiesWithComponents(TransformComponent.class, RectangleRendererComponent.class)
       .forEach(entity -> {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
-        RenderModeComponent renderModeComponent = entity.getComponent(RenderModeComponent.class);
-        BlendMode blendMode = renderModeComponent == null || renderModeComponent.getRenderMode() == null ? BlendMode.NORMAL : renderModeComponent.getRenderMode();
+        BlendModeComponent blendModeComponent = entity.getComponent(BlendModeComponent.class);
+        BlendMode blendMode = blendModeComponent == null ? renderer.getBlendMode() : blendModeComponent.getRenderMode();
 
         renderer.drawWithBlendMode(blendMode, r -> {
           if (layerComponent == null) {
@@ -32,8 +32,8 @@ class GeometryGraphics {
     solaEcs.getWorld().findEntitiesWithComponents(TransformComponent.class, CircleRendererComponent.class)
       .forEach(entity -> {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
-        RenderModeComponent renderModeComponent = entity.getComponent(RenderModeComponent.class);
-        BlendMode blendMode = renderModeComponent == null || renderModeComponent.getRenderMode() == null ? BlendMode.NORMAL : renderModeComponent.getRenderMode();
+        BlendModeComponent blendModeComponent = entity.getComponent(BlendModeComponent.class);
+        BlendMode blendMode = blendModeComponent == null ? renderer.getBlendMode() : blendModeComponent.getRenderMode();
 
         renderer.drawWithBlendMode(blendMode, r -> {
           if (layerComponent == null) {

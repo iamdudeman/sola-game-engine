@@ -5,15 +5,12 @@ import technology.sola.engine.graphics.BlendMode;
 
 import java.io.Serial;
 
-public class RenderModeComponent implements Component {
+public class BlendModeComponent implements Component {
   @Serial
   private static final long serialVersionUID = 2038522969023666619L;
   private BlendMode blendMode;
 
-  public RenderModeComponent() {
-  }
-
-  public RenderModeComponent(BlendMode blendMode) {
+  public BlendModeComponent(BlendMode blendMode) {
     this.blendMode = blendMode;
   }
 
