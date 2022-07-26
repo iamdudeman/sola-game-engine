@@ -14,8 +14,10 @@ import technology.sola.math.linear.Vector2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class SoftwareRenderer extends Canvas implements Renderer {
+  private Random random = new Random();
   private final List<Layer> layers = new ArrayList<>();
   private BlendMode blendMode = BlendMode.NO_BLENDING;
   private Font font;
@@ -25,12 +27,12 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   }
 
   @Override
-  public void setRenderMode(BlendMode blendMode) {
+  public void setBlendMode(BlendMode blendMode) {
     this.blendMode = blendMode;
   }
 
   @Override
-  public BlendMode getRenderMode() {
+  public BlendMode getBlendMode() {
     return blendMode;
   }
 
@@ -77,6 +79,12 @@ public class SoftwareRenderer extends Canvas implements Renderer {
         }
 
         break;
+      case DISSOLVE:
+        if (random.nextInt(0, 256) <= color.getAlpha()) {
+          pixels[x + y * width] = color.hexInt();
+        }
+
+        break;
       case LINEAR_DODGE:
         currentColor = new Color(pixels[x + y * width]);
 
@@ -87,6 +95,8 @@ public class SoftwareRenderer extends Canvas implements Renderer {
         ).hexInt();
 
         break;
+      default:
+        throw new RuntimeException("Not yet implemented " + blendMode.name());
     }
   }
 

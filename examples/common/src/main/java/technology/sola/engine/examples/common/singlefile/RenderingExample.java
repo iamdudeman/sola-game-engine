@@ -70,9 +70,9 @@ public class RenderingExample extends Sola {
     solaGraphics.render();
 
     renderer.drawToLayer("ui", r -> {
-      renderer.setRenderMode(BlendMode.NORMAL);
+      renderer.setBlendMode(BlendMode.NORMAL);
       renderer.fillRect(80, 0, 600, 100, new Color(120, 255, 255, 255));
-      renderer.setRenderMode(BlendMode.NO_BLENDING);
+      renderer.setBlendMode(BlendMode.NO_BLENDING);
       renderer.drawRect(80, 0, 600, 100, Color.YELLOW);
 
       renderer.fillRect(180, 65, 300, 25, Color.WHITE);
@@ -81,11 +81,11 @@ public class RenderingExample extends Sola {
       final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
       renderer.setFont(defaultFont);
-      renderer.setRenderMode(BlendMode.MASK);
+      renderer.setBlendMode(BlendMode.MASK);
       renderer.drawString(characters1, 85, 5, Color.RED);
       renderer.drawString(characters2, 85, 35, Color.BLACK);
       renderer.drawString("Hello world!", 182, 67, Color.BLUE);
-      renderer.setRenderMode(BlendMode.NO_BLENDING);
+      renderer.setBlendMode(BlendMode.NO_BLENDING);
     });
     renderer.drawToLayer("ui", solaGui::render);
   }

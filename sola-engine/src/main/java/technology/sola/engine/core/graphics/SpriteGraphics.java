@@ -41,7 +41,7 @@ class SpriteGraphics {
         .translate(transformComponent.getX(), transformComponent.getY())
         .scale(transformComponent.getScaleX(), transformComponent.getScaleY());
 
-      renderer.drawWithRenderMode(BlendMode.MASK, r -> renderer.drawImage(sprite, affineTransform));
+      renderer.drawWithBlendMode(BlendMode.MASK, r -> renderer.drawImage(sprite, affineTransform));
     } else {
       renderer.drawImage(transformComponent.getX(), transformComponent.getY(), sprite);
     }

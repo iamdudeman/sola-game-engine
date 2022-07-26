@@ -26,12 +26,12 @@ public class BrowserCanvasRenderer implements Renderer {
   }
 
   @Override
-  public void setRenderMode(BlendMode blendMode) {
+  public void setBlendMode(BlendMode blendMode) {
     throw new NotYetImplementedException();
   }
 
   @Override
-  public BlendMode getRenderMode() {
+  public BlendMode getBlendMode() {
     throw new NotYetImplementedException();
   }
 

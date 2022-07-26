@@ -19,7 +19,7 @@ class GeometryGraphics {
         RenderModeComponent renderModeComponent = entity.getComponent(RenderModeComponent.class);
         BlendMode blendMode = renderModeComponent == null || renderModeComponent.getRenderMode() == null ? BlendMode.NORMAL : renderModeComponent.getRenderMode();
 
-        renderer.drawWithRenderMode(blendMode, r -> {
+        renderer.drawWithBlendMode(blendMode, r -> {
           if (layerComponent == null) {
             renderRectangle(renderer, entity, cameraTransform);
           } else {
@@ -35,7 +35,7 @@ class GeometryGraphics {
         RenderModeComponent renderModeComponent = entity.getComponent(RenderModeComponent.class);
         BlendMode blendMode = renderModeComponent == null || renderModeComponent.getRenderMode() == null ? BlendMode.NORMAL : renderModeComponent.getRenderMode();
 
-        renderer.drawWithRenderMode(blendMode, r -> {
+        renderer.drawWithBlendMode(blendMode, r -> {
           if (layerComponent == null) {
             renderCircle(renderer, entity, cameraTransform);
           } else {

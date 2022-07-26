@@ -16,6 +16,7 @@ public enum BlendMode {
    */
   NORMAL,
 
+  DISSOLVE,
 
   LINEAR_DODGE,
 }
