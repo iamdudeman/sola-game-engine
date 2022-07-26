@@ -9,7 +9,7 @@ import technology.sola.ecs.Component;
 import technology.sola.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Layer;
-import technology.sola.engine.graphics.RenderMode;
+import technology.sola.engine.graphics.BlendMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.core.graphics.SolaGraphics;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
@@ -70,9 +70,9 @@ public class RenderingExample extends Sola {
     solaGraphics.render();
 
     renderer.drawToLayer("ui", r -> {
-      renderer.setRenderMode(RenderMode.ALPHA);
+      renderer.setRenderMode(BlendMode.NORMAL);
       renderer.fillRect(80, 0, 600, 100, new Color(120, 255, 255, 255));
-      renderer.setRenderMode(RenderMode.NORMAL);
+      renderer.setRenderMode(BlendMode.NO_BLENDING);
       renderer.drawRect(80, 0, 600, 100, Color.YELLOW);
 
       renderer.fillRect(180, 65, 300, 25, Color.WHITE);
@@ -81,11 +81,11 @@ public class RenderingExample extends Sola {
       final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
       renderer.setFont(defaultFont);
-      renderer.setRenderMode(RenderMode.MASK);
+      renderer.setRenderMode(BlendMode.MASK);
       renderer.drawString(characters1, 85, 5, Color.RED);
       renderer.drawString(characters2, 85, 35, Color.BLACK);
       renderer.drawString("Hello world!", 182, 67, Color.BLUE);
-      renderer.setRenderMode(RenderMode.NORMAL);
+      renderer.setRenderMode(BlendMode.NO_BLENDING);
     });
     renderer.drawToLayer("ui", solaGui::render);
   }

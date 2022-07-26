@@ -2,11 +2,11 @@ package technology.sola.engine.graphics;
 
 // TODO consider renaming to BlendMode (NORMAL -> NO_BLEND and ALPHA -> NORMAL maybe?)
 
-public enum RenderMode {
+public enum BlendMode {
   /**
    * No transparency
    */
-  NORMAL,
+  NO_BLENDING,
   /**
    * Transparent if alpha < 255
    */
@@ -14,7 +14,7 @@ public enum RenderMode {
   /**
    * Full transparency
    */
-  ALPHA,
+  NORMAL,
 
 
   LINEAR_DODGE,

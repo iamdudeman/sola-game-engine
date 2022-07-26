@@ -3,7 +3,7 @@ package technology.sola.engine.core.graphics;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.Entity;
-import technology.sola.engine.graphics.RenderMode;
+import technology.sola.engine.graphics.BlendMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
@@ -17,9 +17,9 @@ class GeometryGraphics {
       .forEach(entity -> {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
         RenderModeComponent renderModeComponent = entity.getComponent(RenderModeComponent.class);
-        RenderMode renderMode = renderModeComponent == null || renderModeComponent.getRenderMode() == null ? RenderMode.ALPHA : renderModeComponent.getRenderMode();
+        BlendMode blendMode = renderModeComponent == null || renderModeComponent.getRenderMode() == null ? BlendMode.NORMAL : renderModeComponent.getRenderMode();
 
-        renderer.drawWithRenderMode(renderMode, r -> {
+        renderer.drawWithRenderMode(blendMode, r -> {
           if (layerComponent == null) {
             renderRectangle(renderer, entity, cameraTransform);
           } else {
@@ -33,9 +33,9 @@ class GeometryGraphics {
       .forEach(entity -> {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
         RenderModeComponent renderModeComponent = entity.getComponent(RenderModeComponent.class);
-        RenderMode renderMode = renderModeComponent == null || renderModeComponent.getRenderMode() == null ? RenderMode.ALPHA : renderModeComponent.getRenderMode();
+        BlendMode blendMode = renderModeComponent == null || renderModeComponent.getRenderMode() == null ? BlendMode.NORMAL : renderModeComponent.getRenderMode();
 
-        renderer.drawWithRenderMode(renderMode, r -> {
+        renderer.drawWithRenderMode(blendMode, r -> {
           if (layerComponent == null) {
             renderCircle(renderer, entity, cameraTransform);
           } else {

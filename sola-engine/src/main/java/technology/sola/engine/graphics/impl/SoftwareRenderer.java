@@ -4,7 +4,7 @@ import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Canvas;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Layer;
-import technology.sola.engine.graphics.RenderMode;
+import technology.sola.engine.graphics.BlendMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.font.Font;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class SoftwareRenderer extends Canvas implements Renderer {
   private final List<Layer> layers = new ArrayList<>();
-  private RenderMode renderMode = RenderMode.NORMAL;
+  private BlendMode blendMode = BlendMode.NO_BLENDING;
   private Font font;
 
   public SoftwareRenderer(int width, int height) {
@@ -25,13 +25,13 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   }
 
   @Override
-  public void setRenderMode(RenderMode renderMode) {
-    this.renderMode = renderMode;
+  public void setRenderMode(BlendMode blendMode) {
+    this.blendMode = blendMode;
   }
 
   @Override
-  public RenderMode getRenderMode() {
-    return renderMode;
+  public BlendMode getRenderMode() {
+    return blendMode;
   }
 
   @Override
@@ -48,31 +48,20 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   public void setPixel(int x, int y, Color color) {
     if (x < 0 || x >= width || y < 0 || y >= height) return;
 
-    int hexInt = color.hexInt();
     Color currentColor;
 
-    switch (renderMode) {
-      case NORMAL:
-        pixels[x + y * width] = hexInt;
-        break;
+    switch (blendMode) {
+      case NO_BLENDING:
+        pixels[x + y * width] = color.hexInt();
 
+        break;
       case MASK:
         if (color.getAlpha() == 255) {
-          pixels[x + y * width] = hexInt;
+          pixels[x + y * width] = color.hexInt();
         }
+
         break;
-
-      case LINEAR_DODGE:
-        currentColor = new Color(pixels[x + y * width]);
-
-        pixels[x + y * width] = new Color(
-          Math.min(255, currentColor.getRed() + color.getRed()),
-          Math.min(255, currentColor.getGreen() + color.getGreen()),
-          Math.min(255, currentColor.getBlue() + color.getBlue())
-        ).hexInt();
-        break;
-
-      case ALPHA:
+      case NORMAL:
         if (color.hasAlpha()) {
           currentColor = new Color(pixels[x + y * width]);
           float alphaMod = color.getAlpha() / 255f;
@@ -84,14 +73,20 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
           pixels[x + y * width] = new Color((int) red, (int) green, (int) blue).hexInt();
         } else {
-          pixels[x + y * width] = hexInt;
+          pixels[x + y * width] = color.hexInt();
         }
 
         break;
-        
-      default:
-        // TODO specific exception
-        throw new RuntimeException("Unknown render mode");
+      case LINEAR_DODGE:
+        currentColor = new Color(pixels[x + y * width]);
+
+        pixels[x + y * width] = new Color(
+          Math.min(255, currentColor.getRed() + color.getRed()),
+          Math.min(255, currentColor.getGreen() + color.getGreen()),
+          Math.min(255, currentColor.getBlue() + color.getBlue())
+        ).hexInt();
+
+        break;
     }
   }
 

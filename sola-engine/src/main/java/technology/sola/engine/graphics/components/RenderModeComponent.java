@@ -1,27 +1,27 @@
 package technology.sola.engine.graphics.components;
 
 import technology.sola.ecs.Component;
-import technology.sola.engine.graphics.RenderMode;
+import technology.sola.engine.graphics.BlendMode;
 
 import java.io.Serial;
 
 public class RenderModeComponent implements Component {
   @Serial
   private static final long serialVersionUID = 2038522969023666619L;
-  private RenderMode renderMode;
+  private BlendMode blendMode;
 
   public RenderModeComponent() {
   }
 
-  public RenderModeComponent(RenderMode renderMode) {
-    this.renderMode = renderMode;
+  public RenderModeComponent(BlendMode blendMode) {
+    this.blendMode = blendMode;
   }
 
-  public RenderMode getRenderMode() {
-    return renderMode;
+  public BlendMode getRenderMode() {
+    return blendMode;
   }
 
-  public void setRenderMode(RenderMode renderMode) {
-    this.renderMode = renderMode;
+  public void setRenderMode(BlendMode blendMode) {
+    this.blendMode = blendMode;
   }
 }

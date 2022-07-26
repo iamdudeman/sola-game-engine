@@ -5,7 +5,7 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.Entity;
 import technology.sola.engine.graphics.AffineTransform;
-import technology.sola.engine.graphics.RenderMode;
+import technology.sola.engine.graphics.BlendMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.components.LayerComponent;
@@ -41,7 +41,7 @@ class SpriteGraphics {
         .translate(transformComponent.getX(), transformComponent.getY())
         .scale(transformComponent.getScaleX(), transformComponent.getScaleY());
 
-      renderer.drawWithRenderMode(RenderMode.MASK, r -> renderer.drawImage(sprite, affineTransform));
+      renderer.drawWithRenderMode(BlendMode.MASK, r -> renderer.drawImage(sprite, affineTransform));
     } else {
       renderer.drawImage(transformComponent.getX(), transformComponent.getY(), sprite);
     }

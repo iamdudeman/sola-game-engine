@@ -2,22 +2,19 @@ package technology.sola.engine.physics.component;
 
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.RenderMode;
+import technology.sola.engine.graphics.BlendMode;
 import technology.sola.math.linear.Vector2D;
 
 import java.io.Serial;
 
 // todo consider an array of colors maybe? (think confetti)
 // todo consider different methods for deciding which next color to use if it is an array
-// todo consider adding some sort of blend mode instead of always fading out alpha?
-
-// TODO note, blend mode would need to be implemented in Renderer as well (might actually be the same as "RenderMode")
 
 public class ParticleEmitterComponent implements Component {
   @Serial
   private static final long serialVersionUID = -8273651094891084287L;
   private Color particleColor = Color.WHITE;
-  private RenderMode renderMode = RenderMode.ALPHA;
+  private BlendMode blendMode = BlendMode.NORMAL;
   private float particleMinLife = 1f;
   private float particleMaxLife = 2f;
   private Vector2D particleMinVelocity = new Vector2D(-50, -100);
@@ -66,12 +63,12 @@ public class ParticleEmitterComponent implements Component {
     this.particleColor = particleColor;
   }
 
-  public RenderMode getRenderMode() {
-    return renderMode;
+  public BlendMode getRenderMode() {
+    return blendMode;
   }
 
-  public void setRenderMode(RenderMode renderMode) {
-    this.renderMode = renderMode;
+  public void setRenderMode(BlendMode blendMode) {
+    this.blendMode = blendMode;
   }
 
   public float getParticleMinLife() {

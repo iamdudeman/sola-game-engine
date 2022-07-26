@@ -7,7 +7,7 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.graphics.SolaGraphics;
 import technology.sola.engine.core.physics.SolaPhysics;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.RenderMode;
+import technology.sola.engine.graphics.BlendMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.math.linear.Vector2D;
@@ -45,7 +45,7 @@ public class ParticleExample extends Sola {
 
     ParticleEmitterComponent particleEmitterComponent = new ParticleEmitterComponent();
 
-    particleEmitterComponent.setRenderMode(RenderMode.LINEAR_DODGE);
+    particleEmitterComponent.setRenderMode(BlendMode.LINEAR_DODGE);
     particleEmitterComponent.setParticleColor(new Color(230, 40, 45));
     particleEmitterComponent.setParticleSizeBounds(6, 10);
     particleEmitterComponent.setParticleLifeBounds(1, 1);

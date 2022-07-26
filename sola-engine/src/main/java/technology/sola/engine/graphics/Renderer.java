@@ -5,15 +5,15 @@ import technology.sola.engine.graphics.font.Font;
 import java.util.List;
 
 public interface Renderer {
-  void setRenderMode(RenderMode renderMode);
+  void setRenderMode(BlendMode blendMode);
 
-  RenderMode getRenderMode();
+  BlendMode getRenderMode();
 
-  default void drawWithRenderMode(RenderMode renderMode, DrawItem drawItem) {
-    RenderMode previousRenderMode = getRenderMode();
-    setRenderMode(renderMode);
+  default void drawWithRenderMode(BlendMode blendMode, DrawItem drawItem) {
+    BlendMode previousBlendMode = getRenderMode();
+    setRenderMode(blendMode);
     drawItem.draw(this);
-    setRenderMode(previousRenderMode);
+    setRenderMode(previousBlendMode);
   }
 
   void setFont(Font font);
