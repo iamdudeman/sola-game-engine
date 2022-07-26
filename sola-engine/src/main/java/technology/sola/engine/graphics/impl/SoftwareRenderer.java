@@ -41,9 +41,10 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
   @Override
   public void setPixel(int x, int y, Color color) {
-    int hexInt = color.hexInt();
-
     if (x < 0 || x >= width || y < 0 || y >= height) return;
+
+    int hexInt = color.hexInt();
+    Color currentColor;
 
     switch (renderMode) {
       case NORMAL:
@@ -54,8 +55,17 @@ public class SoftwareRenderer extends Canvas implements Renderer {
           pixels[x + y * width] = hexInt;
         }
         break;
+      case LINEAR_DODGE:
+        currentColor = new Color(pixels[x + y * width]);
+
+        pixels[x + y * width] = new Color(
+          Math.min(255, currentColor.getRed() + color.getRed()),
+          Math.min(255, currentColor.getGreen() + color.getGreen()),
+          Math.min(255, currentColor.getBlue() + color.getBlue())
+        ).hexInt();
+        break;
       case ALPHA:
-        Color currentColor = new Color(pixels[x + y * width]);
+        currentColor = new Color(pixels[x + y * width]);
         float alphaMod = color.getAlpha() / 255f;
         float oneMinusAlpha = 1 - alphaMod;
 
@@ -63,9 +73,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
         float green = currentColor.getGreen() * oneMinusAlpha + color.getGreen() * alphaMod;
         float blue = currentColor.getBlue() * oneMinusAlpha + color.getBlue() * alphaMod;
 
-        int newArgb = new Color((int) red, (int) green, (int) blue).hexInt();
-
-        pixels[x + y * width] = newArgb;
+        pixels[x + y * width] = new Color((int) red, (int) green, (int) blue).hexInt();
         break;
       default:
         // TODO specific exception

@@ -58,7 +58,10 @@ class GeometryGraphics {
     var circleRenderer = entity.getComponent(CircleRendererComponent.class);
     float radius = Math.max(transform.getScaleX(), transform.getScaleY()) * 0.5f;
 
-    if (circleRenderer.getColor().hasAlpha()) {
+    // TODO better way to set RenderMode than this! (or else apply it to Rectangle as well?)
+    if (circleRenderer.getRenderMode() == RenderMode.LINEAR_DODGE) {
+      renderer.setRenderMode(RenderMode.LINEAR_DODGE);
+    } else if (circleRenderer.getColor().hasAlpha()) {
       renderer.setRenderMode(RenderMode.ALPHA);
     }
 
