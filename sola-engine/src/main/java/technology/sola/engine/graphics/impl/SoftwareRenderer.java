@@ -30,6 +30,11 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   }
 
   @Override
+  public RenderMode getRenderMode() {
+    return renderMode;
+  }
+
+  @Override
   public void setFont(Font font) {
     this.font = font;
   }
@@ -50,11 +55,13 @@ public class SoftwareRenderer extends Canvas implements Renderer {
       case NORMAL:
         pixels[x + y * width] = hexInt;
         break;
+
       case MASK:
         if (color.getAlpha() == 255) {
           pixels[x + y * width] = hexInt;
         }
         break;
+
       case LINEAR_DODGE:
         currentColor = new Color(pixels[x + y * width]);
 
@@ -64,17 +71,24 @@ public class SoftwareRenderer extends Canvas implements Renderer {
           Math.min(255, currentColor.getBlue() + color.getBlue())
         ).hexInt();
         break;
+
       case ALPHA:
-        currentColor = new Color(pixels[x + y * width]);
-        float alphaMod = color.getAlpha() / 255f;
-        float oneMinusAlpha = 1 - alphaMod;
+        if (color.hasAlpha()) {
+          currentColor = new Color(pixels[x + y * width]);
+          float alphaMod = color.getAlpha() / 255f;
+          float oneMinusAlpha = 1 - alphaMod;
 
-        float red = currentColor.getRed() * oneMinusAlpha + color.getRed() * alphaMod;
-        float green = currentColor.getGreen() * oneMinusAlpha + color.getGreen() * alphaMod;
-        float blue = currentColor.getBlue() * oneMinusAlpha + color.getBlue() * alphaMod;
+          float red = currentColor.getRed() * oneMinusAlpha + color.getRed() * alphaMod;
+          float green = currentColor.getGreen() * oneMinusAlpha + color.getGreen() * alphaMod;
+          float blue = currentColor.getBlue() * oneMinusAlpha + color.getBlue() * alphaMod;
 
-        pixels[x + y * width] = new Color((int) red, (int) green, (int) blue).hexInt();
+          pixels[x + y * width] = new Color((int) red, (int) green, (int) blue).hexInt();
+        } else {
+          pixels[x + y * width] = hexInt;
+        }
+
         break;
+        
       default:
         // TODO specific exception
         throw new RuntimeException("Unknown render mode");

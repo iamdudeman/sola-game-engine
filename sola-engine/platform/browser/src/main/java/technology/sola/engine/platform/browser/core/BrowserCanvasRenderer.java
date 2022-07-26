@@ -31,6 +31,11 @@ public class BrowserCanvasRenderer implements Renderer {
   }
 
   @Override
+  public RenderMode getRenderMode() {
+    throw new NotYetImplementedException();
+  }
+
+  @Override
   public void setFont(Font font) {
     throw new NotYetImplementedException();
   }

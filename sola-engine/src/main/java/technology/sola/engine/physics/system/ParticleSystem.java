@@ -4,8 +4,8 @@ import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.RenderMode;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
+import technology.sola.engine.graphics.components.RenderModeComponent;
 import technology.sola.engine.physics.component.ParticleComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.math.linear.Vector2D;
@@ -55,11 +55,9 @@ public class ParticleSystem extends EcsSystem {
     world.createView().of(ParticleEmitterComponent.class, TransformComponent.class)
       .forEach(view -> {
         ParticleEmitterComponent particleEmitterComponent = view.c1();
-        TransformComponent transformComponent = view.c2();
 
-        particleEmitterComponent.addTimeSinceLastEmission(delta);
-
-        if (particleEmitterComponent.isAbleToEmit()) {
+        particleEmitterComponent.emitIfAble(delta, () -> {
+          TransformComponent transformComponent = view.c2();
           Vector2D minVel = particleEmitterComponent.getParticleMinVelocity();
           Vector2D maxVel = particleEmitterComponent.getParticleMaxVelocity();
 
@@ -70,24 +68,19 @@ public class ParticleSystem extends EcsSystem {
             float size = getRandomFloat(particleEmitterComponent.getParticleMinSize(), particleEmitterComponent.getParticleMaxSize());
             float life = getRandomFloat(particleEmitterComponent.getParticleMinLife(), particleEmitterComponent.getParticleMaxLife());
 
-            CircleRendererComponent circleRendererComponent = new CircleRendererComponent(particleEmitterComponent.getParticleColor());
-
-            circleRendererComponent.setRenderMode(particleEmitterComponent.getRenderMode());
-
             world.createEntity(
               new TransformComponent(
                 transformComponent.getX(), transformComponent.getY(),
                 size, size
               ),
-              circleRendererComponent,
+              new CircleRendererComponent(particleEmitterComponent.getParticleColor()),
+              new RenderModeComponent(particleEmitterComponent.getRenderMode()),
               new ParticleComponent(
                 particleEmitterComponent.getParticleColor(), life, new Vector2D(xVel, yVel)
               )
             );
           }
-
-          particleEmitterComponent.emit();
-        }
+        });
       });
   }
 

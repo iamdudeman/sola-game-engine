@@ -7,16 +7,13 @@ import java.util.List;
 public interface Renderer {
   void setRenderMode(RenderMode renderMode);
 
-  default void drawWithRenderModeMask(DrawItem drawItem) {
-    setRenderMode(RenderMode.MASK);
-    drawItem.draw(this);
-    setRenderMode(RenderMode.NORMAL);
-  }
+  RenderMode getRenderMode();
 
-  default void drawWithRenderModeAlpha(DrawItem drawItem) {
-    setRenderMode(RenderMode.ALPHA);
+  default void drawWithRenderMode(RenderMode renderMode, DrawItem drawItem) {
+    RenderMode previousRenderMode = getRenderMode();
+    setRenderMode(renderMode);
     drawItem.draw(this);
-    setRenderMode(RenderMode.NORMAL);
+    setRenderMode(previousRenderMode);
   }
 
   void setFont(Font font);

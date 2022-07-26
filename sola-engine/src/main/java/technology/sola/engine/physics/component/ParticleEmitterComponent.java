@@ -37,18 +37,14 @@ public class ParticleEmitterComponent implements Component {
     this.particleEmissionDelay = particleEmissionDelay;
   }
 
-  public void addTimeSinceLastEmission(float delta) {
+  public void emitIfAble(float delta, Runnable runnable) {
     timeSinceLastEmission += delta;
-  }
 
-  public boolean isAbleToEmit() {
-    return timeSinceLastEmission > particleEmissionDelay;
+    if (timeSinceLastEmission > particleEmissionDelay) {
+      runnable.run();
+      timeSinceLastEmission = 0;
+    }
   }
-
-  public void emit() {
-    timeSinceLastEmission = 0;
-  }
-
 
   public void setParticleEmissionDelay(float particleEmissionDelay) {
     this.particleEmissionDelay = particleEmissionDelay;
