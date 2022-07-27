@@ -1,22 +1,27 @@
 package technology.sola.engine.graphics;
 
-// TODO consider renaming to BlendMode (NORMAL -> NO_BLEND and ALPHA -> NORMAL maybe?)
-
 public enum BlendMode {
   /**
-   * No transparency
+   * No blending happens
    */
   NO_BLENDING,
   /**
    * Transparent if alpha < 255
    */
   MASK,
+
   /**
-   * Full transparency
+   * Blends based on alpha of pixel being drawn
    */
   NORMAL,
 
+  /**
+   * Random chance of using color of pixel being drawn based on alpha
+   */
   DISSOLVE,
 
+  /**
+   * Adds the two colors together ignoring alpha
+   */
   LINEAR_DODGE,
 }
