@@ -43,33 +43,33 @@ public class ParticleExample extends Sola {
       .addComponent(new ParticleEmitterComponent())
       .addComponent(new TransformComponent(100, 500));
 
-    ParticleEmitterComponent particleEmitterComponent = new ParticleEmitterComponent();
+    ParticleEmitterComponent fireParticleEmitterComponent = new ParticleEmitterComponent();
 
-    particleEmitterComponent.setRenderMode(BlendMode.LINEAR_DODGE);
-    particleEmitterComponent.setParticleColor(new Color(230, 40, 45));
-    particleEmitterComponent.setParticleSizeBounds(6, 10);
-    particleEmitterComponent.setParticleLifeBounds(1, 1);
-    particleEmitterComponent.setParticleVelocityBounds(new Vector2D(-18f, -70f), new Vector2D(18f, 0));
-    particleEmitterComponent.setParticleEmissionDelay(0.1f);
-    particleEmitterComponent.setParticlesPerEmit(10);
-
-    world.createEntity()
-      .addComponent(particleEmitterComponent)
-      .addComponent(new TransformComponent(350, 500));
-
-    ParticleEmitterComponent particleEmitterComponent2 = new ParticleEmitterComponent();
-
-    particleEmitterComponent2.setRenderMode(BlendMode.DISSOLVE);
-    particleEmitterComponent2.setParticleColor(new Color(230, 40, 45));
-    particleEmitterComponent2.setParticleSizeBounds(8, 12);
-    particleEmitterComponent2.setParticleLifeBounds(1, 2);
-    particleEmitterComponent2.setParticleVelocityBounds(new Vector2D(-18f, -70f), new Vector2D(18f, 0));
-    particleEmitterComponent2.setParticleEmissionDelay(0.1f);
-    particleEmitterComponent2.setParticlesPerEmit(5);
+    fireParticleEmitterComponent.setParticleBlendMode(BlendMode.LINEAR_DODGE);
+    fireParticleEmitterComponent.setParticleColor(new Color(230, 40, 45));
+    fireParticleEmitterComponent.setParticleSizeBounds(6, 10);
+    fireParticleEmitterComponent.setParticleLifeBounds(1, 1);
+    fireParticleEmitterComponent.setParticleVelocityBounds(new Vector2D(-18f, -70f), new Vector2D(18f, 0));
+    fireParticleEmitterComponent.setParticleEmissionDelay(0.1f);
+    fireParticleEmitterComponent.setParticlesPerEmit(10);
 
     world.createEntity()
-      .addComponent(particleEmitterComponent2)
-      .addComponent(new TransformComponent(500, 500));
+      .addComponent(fireParticleEmitterComponent)
+      .addComponent(new TransformComponent(250, 500));
+
+    ParticleEmitterComponent sparksParticleEmitterComponent = new ParticleEmitterComponent();
+
+    sparksParticleEmitterComponent.setParticleBlendMode(BlendMode.DISSOLVE);
+    sparksParticleEmitterComponent.setParticleColor(new Color(210, 80, 45));
+    sparksParticleEmitterComponent.setParticleSizeBounds(6, 12);
+    sparksParticleEmitterComponent.setParticleLifeBounds(1, 3);
+    sparksParticleEmitterComponent.setParticleVelocityBounds(new Vector2D(-18f, -70f), new Vector2D(18f, 0));
+    sparksParticleEmitterComponent.setParticleEmissionDelay(0.01f);
+    sparksParticleEmitterComponent.setParticlesPerEmit(1);
+
+    world.createEntity()
+      .addComponent(sparksParticleEmitterComponent)
+      .addComponent(new TransformComponent(400, 500));
 
     return world;
   }

@@ -14,7 +14,7 @@ public class ParticleEmitterComponent implements Component {
   @Serial
   private static final long serialVersionUID = -8273651094891084287L;
   private Color particleColor = Color.WHITE;
-  private BlendMode blendMode = BlendMode.NORMAL;
+  private BlendMode particleBlendMode = BlendMode.NORMAL;
   private float particleMinLife = 1f;
   private float particleMaxLife = 2f;
   private Vector2D particleMinVelocity = new Vector2D(-50, -100);
@@ -63,12 +63,12 @@ public class ParticleEmitterComponent implements Component {
     this.particleColor = particleColor;
   }
 
-  public BlendMode getRenderMode() {
-    return blendMode;
+  public BlendMode getParticleBlendMode() {
+    return particleBlendMode;
   }
 
-  public void setRenderMode(BlendMode blendMode) {
-    this.blendMode = blendMode;
+  public void setParticleBlendMode(BlendMode blendMode) {
+    this.particleBlendMode = blendMode;
   }
 
   public float getParticleMinLife() {

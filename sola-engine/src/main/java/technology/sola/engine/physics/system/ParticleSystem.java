@@ -74,7 +74,7 @@ public class ParticleSystem extends EcsSystem {
                 size, size
               ),
               new CircleRendererComponent(particleEmitterComponent.getParticleColor()),
-              new BlendModeComponent(particleEmitterComponent.getRenderMode()),
+              new BlendModeComponent(particleEmitterComponent.getParticleBlendMode()),
               new ParticleComponent(
                 particleEmitterComponent.getParticleColor(), life, new Vector2D(xVel, yVel)
               )
