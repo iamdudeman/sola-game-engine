@@ -7,9 +7,6 @@ import technology.sola.math.linear.Vector2D;
 
 import java.io.Serial;
 
-// todo consider an array of colors maybe? (think confetti)
-// todo consider different methods for deciding which next color to use if it is an array
-
 public class ParticleEmitterComponent implements Component {
   @Serial
   private static final long serialVersionUID = -8273651094891084287L;

@@ -120,9 +120,16 @@ public class SimplePlatformerExample extends Sola {
       .addComponent(ColliderComponent.aabb())
       .setName("finalBlock");
 
+    ParticleEmitterComponent particleEmitterComponent = new ParticleEmitterComponent();
+
+    particleEmitterComponent.setParticleColor(Color.YELLOW);
+    particleEmitterComponent.setParticleVelocityBounds(new Vector2D(-100, -100), new Vector2D(100, 100));
+    particleEmitterComponent.setParticlesPerEmit(5);
+    particleEmitterComponent.setParticleSizeBounds(4f, 8f);
+
     world.createEntity()
       .setName("confetti")
-      .addComponent(new ParticleEmitterComponent())
+      .addComponent(particleEmitterComponent)
       .addComponent(new TransformComponent(25, 0, finalBlock))
       .setDisabled(true);
 

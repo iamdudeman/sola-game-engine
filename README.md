@@ -1,14 +1,10 @@
 # Branch WIP
-* Particle System
-  * transform
-  * speed
-  * time left alive
-  * color?
-  * size?
+
 
 # TODO List
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
+  * More BlendMode implementations
 * SolaGui Stuff
   * GuiElementContainer
     * Consider adding anchor support to Stream or a new container to be able to easily center things?
