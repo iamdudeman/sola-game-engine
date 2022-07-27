@@ -4,7 +4,7 @@ import org.teavm.jso.JSBody;
 import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Layer;
-import technology.sola.engine.graphics.RenderMode;
+import technology.sola.engine.graphics.BlendMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.SolaImage;
 import technology.sola.engine.graphics.font.Font;
@@ -26,7 +26,12 @@ public class BrowserCanvasRenderer implements Renderer {
   }
 
   @Override
-  public void setRenderMode(RenderMode renderMode) {
+  public void setBlendMode(BlendMode blendMode) {
+    throw new NotYetImplementedException();
+  }
+
+  @Override
+  public BlendMode getBlendMode() {
     throw new NotYetImplementedException();
   }
 

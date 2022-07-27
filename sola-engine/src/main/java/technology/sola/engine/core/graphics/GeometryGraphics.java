@@ -3,11 +3,12 @@ package technology.sola.engine.core.graphics;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.Entity;
-import technology.sola.engine.graphics.RenderMode;
+import technology.sola.engine.graphics.BlendMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
+import technology.sola.engine.graphics.components.BlendModeComponent;
 
 class GeometryGraphics {
   static void render(Renderer renderer, SolaEcs solaEcs, TransformComponent cameraTransform) {
@@ -15,24 +16,32 @@ class GeometryGraphics {
     solaEcs.getWorld().findEntitiesWithComponents(TransformComponent.class, RectangleRendererComponent.class)
       .forEach(entity -> {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
+        BlendModeComponent blendModeComponent = entity.getComponent(BlendModeComponent.class);
+        BlendMode blendMode = blendModeComponent == null ? renderer.getBlendMode() : blendModeComponent.getRenderMode();
 
-        if (layerComponent == null) {
-          renderRectangle(renderer, entity, cameraTransform);
-        } else {
-          renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r -> renderRectangle(renderer, entity, cameraTransform));
-        }
+        renderer.drawWithBlendMode(blendMode, r -> {
+          if (layerComponent == null) {
+            renderRectangle(renderer, entity, cameraTransform);
+          } else {
+            renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r2 -> renderRectangle(renderer, entity, cameraTransform));
+          }
+        });
       });
 
     // Draw circles
     solaEcs.getWorld().findEntitiesWithComponents(TransformComponent.class, CircleRendererComponent.class)
       .forEach(entity -> {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
+        BlendModeComponent blendModeComponent = entity.getComponent(BlendModeComponent.class);
+        BlendMode blendMode = blendModeComponent == null ? renderer.getBlendMode() : blendModeComponent.getRenderMode();
 
-        if (layerComponent == null) {
-          renderCircle(renderer, entity, cameraTransform);
-        } else {
-          renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r -> renderCircle(renderer, entity, cameraTransform));
-        }
+        renderer.drawWithBlendMode(blendMode, r -> {
+          if (layerComponent == null) {
+            renderCircle(renderer, entity, cameraTransform);
+          } else {
+            renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r2 -> renderCircle(renderer, entity, cameraTransform));
+          }
+        });
       });
   }
 
@@ -40,34 +49,22 @@ class GeometryGraphics {
     var transform = GraphicsUtils.getTransformForAppliedCamera(entity.getComponent(TransformComponent.class), cameraTransform);
     var rectangleRenderer = entity.getComponent(RectangleRendererComponent.class);
 
-    if (rectangleRenderer.getColor().hasAlpha()) {
-      renderer.setRenderMode(RenderMode.ALPHA);
-    }
-
     if (rectangleRenderer.isFilled()) {
       renderer.fillRect(transform.getX(), transform.getY(), transform.getScaleX(), transform.getScaleY(), rectangleRenderer.getColor());
     } else {
       renderer.drawRect(transform.getX(), transform.getY(), transform.getScaleX(), transform.getScaleY(), rectangleRenderer.getColor());
     }
-
-    renderer.setRenderMode(RenderMode.NORMAL);
   }
 
   private static void renderCircle(Renderer renderer, Entity entity, TransformComponent cameraTransform) {
     var transform = GraphicsUtils.getTransformForAppliedCamera(entity.getComponent(TransformComponent.class), cameraTransform);
-    var rectangleRenderer = entity.getComponent(CircleRendererComponent.class);
+    var circleRenderer = entity.getComponent(CircleRendererComponent.class);
     float radius = Math.max(transform.getScaleX(), transform.getScaleY()) * 0.5f;
 
-    if (rectangleRenderer.getColor().hasAlpha()) {
-      renderer.setRenderMode(RenderMode.ALPHA);
-    }
-
-    if (rectangleRenderer.isFilled()) {
-      renderer.fillCircle(transform.getX(), transform.getY(), radius, rectangleRenderer.getColor());
+    if (circleRenderer.isFilled()) {
+      renderer.fillCircle(transform.getX(), transform.getY(), radius, circleRenderer.getColor());
     } else {
-      renderer.drawCircle(transform.getX(), transform.getY(), radius, rectangleRenderer.getColor());
+      renderer.drawCircle(transform.getX(), transform.getY(), radius, circleRenderer.getColor());
     }
-
-    renderer.setRenderMode(RenderMode.NORMAL);
   }
 }

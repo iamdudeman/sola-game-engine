@@ -47,6 +47,7 @@ public class DynamicBodyComponent implements Component {
    * @param forceY  force in vertical axis
    */
   public void applyForce(float forceX, float forceY) {
+    // TODO if isKinematic should this do nothing?
     this.forceX += forceX;
     this.forceY += forceY;
   }
@@ -57,6 +58,7 @@ public class DynamicBodyComponent implements Component {
    * @param forceVector  force as a vector
    */
   public void applyForce(Vector2D forceVector) {
+    // TODO if isKinematic should this do nothing?
     this.forceX += forceVector.x;
     this.forceY += forceVector.y;
   }
@@ -76,6 +78,7 @@ public class DynamicBodyComponent implements Component {
    * @param forceX  the new horizontal axis force
    */
   public void setForceX(float forceX) {
+    // TODO if isKinematic should this do nothing?
     this.forceX = forceX;
   }
 
@@ -94,6 +97,7 @@ public class DynamicBodyComponent implements Component {
    * @param forceY  the new vertical axis force
    */
   public void setForceY(float forceY) {
+    // TODO if isKinematic should this do nothing?
     this.forceY = forceY;
   }
 

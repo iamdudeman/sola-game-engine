@@ -1,7 +1,7 @@
 package technology.sola.engine.graphics.gui.elements;
 
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.RenderMode;
+import technology.sola.engine.graphics.BlendMode;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.graphics.gui.GuiElement;
@@ -33,9 +33,7 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
     Properties properties = properties();
 
     renderer.setFont(font);
-    renderer.setRenderMode(RenderMode.MASK);
-    renderer.drawString(properties.getText(), x + properties.padding.getLeft(), y + properties.padding.getTop(), properties.getColorText());
-    renderer.setRenderMode(RenderMode.NORMAL);
+    renderer.drawWithBlendMode(BlendMode.MASK, r -> renderer.drawString(properties.getText(), x + properties.padding.getLeft(), y + properties.padding.getTop(), properties.getColorText()));
   }
 
   @Override

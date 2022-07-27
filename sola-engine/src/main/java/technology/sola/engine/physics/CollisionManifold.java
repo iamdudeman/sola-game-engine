@@ -4,9 +4,12 @@ import technology.sola.ecs.Entity;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.Objects;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 
-public record CollisionManifold(Entity entityA, Entity entityB,
-                                Vector2D normal, float penetration) {
+public record CollisionManifold(
+  Entity entityA, Entity entityB, Vector2D normal, float penetration
+) {
   /**
    * Creates a CollisionManifoldEventMessage for two entities.
    *
@@ -16,6 +19,18 @@ public record CollisionManifold(Entity entityA, Entity entityB,
    * @param penetration the penetration of the collision
    */
   public CollisionManifold {
+  }
+
+  public void conditionallyResolveCollision(
+    Function<Entity, Boolean> entityOneCollisionCondition,
+    Function<Entity, Boolean> entityTwoCollisionCondition,
+    BiConsumer<Entity, Entity> collisionResolver
+  ) {
+    if (entityOneCollisionCondition.apply(entityA) && entityTwoCollisionCondition.apply(entityB)) {
+      collisionResolver.accept(entityA, entityB);
+    } else if (entityOneCollisionCondition.apply(entityB) && entityTwoCollisionCondition.apply(entityA)) {
+      collisionResolver.accept(entityB, entityA);
+    }
   }
 
   /**

@@ -7,6 +7,7 @@ import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.examples.common.singlefile.AnimationExample;
 import technology.sola.engine.examples.common.singlefile.GuiExample;
 import technology.sola.engine.examples.common.singlefile.MouseAndCameraExample;
+import technology.sola.engine.examples.common.singlefile.ParticleExample;
 import technology.sola.engine.examples.common.singlefile.RenderingExample;
 import technology.sola.engine.examples.common.singlefile.SimplePlatformerExample;
 import technology.sola.engine.examples.common.singlefile.StressTestExample;
@@ -64,6 +65,7 @@ public class ExampleLauncherSola extends Sola {
     rootElement.addChild(buildExampleLaunchButton("Animation", AnimationExample::new));
     rootElement.addChild(buildExampleLaunchButton("Gui", GuiExample::new));
     rootElement.addChild(buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new));
+    rootElement.addChild(buildExampleLaunchButton("Particle", ParticleExample::new));
     rootElement.addChild(buildExampleLaunchButton("Rendering", RenderingExample::new));
     rootElement.addChild(buildExampleLaunchButton("Simple Platformer", SimplePlatformerExample::new));
     rootElement.addChild(buildExampleLaunchButton("Stress Test", () -> new StressTestExample(1337)));

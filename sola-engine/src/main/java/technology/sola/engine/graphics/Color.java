@@ -4,6 +4,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
+// TODO can probably be a record now
+
 public class Color implements Serializable {
   public static final Color BLACK = new Color(255, 0, 0, 0);
   public static final Color BLANK = new Color(0, 0, 0, 0);

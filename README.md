@@ -4,9 +4,17 @@
 # TODO List
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
+  * More BlendMode implementations
 * SolaGui Stuff
   * GuiElementContainer
     * Consider adding anchor support to Stream or a new container to be able to easily center things?
+  * Focus functionality and keyboard support
+    * keyboard down and up events should only happen on focussed elements
+    * programmatic ability to focus an element
+    * onFocus event listener and setOnFocusCallback to GujElement
+    * container elements could "forward" focus request to first child
+    * maybe have default key events for going to next child element that can be replaced?
+    * maybe new properties for things like ButtonGuiElement to add a focusOutline or something like that
 * Engine GUI Editor (Sola Editor)
   * Add more component controllers
     * SpriteAnimator
@@ -45,12 +53,6 @@
   * Implement loader per platform (Swing and JavaFX can probably share though)
 * Build pipeline
   * Generate engine and platform artifacts
-* Particle System
-  * transform
-  * speed
-  * time left alive
-  * color?
-  * size?
 * Research Virtual File System
 * Scripting language
   * Consider scrapping this features

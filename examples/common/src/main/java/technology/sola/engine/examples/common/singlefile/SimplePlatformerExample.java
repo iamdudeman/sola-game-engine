@@ -1,31 +1,38 @@
 package technology.sola.engine.examples.common.singlefile;
 
+import technology.sola.ecs.Entity;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Component;
 import technology.sola.ecs.World;
+import technology.sola.engine.event.EventListener;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.core.graphics.SolaGraphics;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.input.Key;
+import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.Material;
 import technology.sola.engine.core.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
+import technology.sola.engine.physics.component.ParticleEmitterComponent;
+import technology.sola.engine.physics.event.CollisionManifoldEvent;
 import technology.sola.math.linear.Vector2D;
 
 import java.io.Serial;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 public class SimplePlatformerExample extends Sola {
   private SolaGraphics solaGraphics;
 
   @Override
   protected SolaConfiguration getConfiguration() {
-    return new SolaConfiguration("Simple Platformer",800, 600, 30, true);
+    return new SolaConfiguration("Simple Platformer", 800, 600, 30, true);
   }
 
   @Override
@@ -37,6 +44,8 @@ public class SimplePlatformerExample extends Sola {
     solaEcs.setWorld(buildWorld());
 
     solaGraphics.setRenderDebug(true);
+
+    eventHub.add(new GameDoneEventListener(), CollisionManifoldEvent.class);
   }
 
   @Override
@@ -46,8 +55,25 @@ public class SimplePlatformerExample extends Sola {
     solaGraphics.render();
   }
 
+  private class GameDoneEventListener implements EventListener<CollisionManifoldEvent> {
+    @Override
+    public void onEvent(CollisionManifoldEvent event) {
+      CollisionManifold collisionManifold = event.getMessage();
+
+      collisionManifold.conditionallyResolveCollision(checkForPlayer, checkForFinalBlock, collisionResolver);
+    }
+
+    private final Function<Entity, Boolean> checkForPlayer = entity -> "player".equals(entity.getName());
+    private final Function<Entity, Boolean> checkForFinalBlock = entity -> "finalBlock".equals(entity.getName());
+    private final BiConsumer<Entity, Entity> collisionResolver = (player, finalBlock) ->
+      solaEcs.getWorld().findEntityByName("confetti").ifPresent(entity -> {
+        entity.setDisabled(false);
+        eventHub.remove(this, CollisionManifoldEvent.class);
+      });
+  }
+
   private World buildWorld() {
-    World world = new World(10);
+    World world = new World(100);
 
     world.createEntity()
       .addComponent(new CameraComponent())
@@ -58,7 +84,8 @@ public class SimplePlatformerExample extends Sola {
       .addComponent(new TransformComponent(200, 300, 50, 50))
       .addComponent(new RectangleRendererComponent(Color.BLUE))
       .addComponent(ColliderComponent.aabb())
-      .addComponent(new DynamicBodyComponent(new Material(1)));
+      .addComponent(new DynamicBodyComponent(new Material(1)))
+      .setName("player");
 
     world.createEntity()
       .addComponent(new TransformComponent(150, 400, 200, 75f))
@@ -87,10 +114,24 @@ public class SimplePlatformerExample extends Sola {
       .addComponent(new RectangleRendererComponent(Color.WHITE))
       .addComponent(ColliderComponent.aabb());
 
-    world.createEntity()
+    Entity finalBlock = world.createEntity()
       .addComponent(new TransformComponent(1800, 170, 50, 50f))
       .addComponent(new RectangleRendererComponent(Color.YELLOW))
-      .addComponent(ColliderComponent.aabb());
+      .addComponent(ColliderComponent.aabb())
+      .setName("finalBlock");
+
+    ParticleEmitterComponent particleEmitterComponent = new ParticleEmitterComponent();
+
+    particleEmitterComponent.setParticleColor(Color.YELLOW);
+    particleEmitterComponent.setParticleVelocityBounds(new Vector2D(-100, -100), new Vector2D(100, 100));
+    particleEmitterComponent.setParticlesPerEmit(5);
+    particleEmitterComponent.setParticleSizeBounds(4f, 8f);
+
+    world.createEntity()
+      .setName("confetti")
+      .addComponent(particleEmitterComponent)
+      .addComponent(new TransformComponent(25, 0, finalBlock))
+      .setDisabled(true);
 
     return world;
   }
