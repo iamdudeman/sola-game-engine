@@ -41,8 +41,14 @@ public abstract class Sola {
   void initializeForPlatform(SolaPlatform platform) {
     this.platform = platform;
 
-    platform.onKeyPressed(keyboardInput::keyPressed);
-    platform.onKeyReleased(keyboardInput::keyReleased);
+    platform.onKeyPressed(event -> {
+      keyboardInput.keyPressed(event);
+      solaGui.onKeyPressed(event);
+    });
+    platform.onKeyReleased(event -> {
+      keyboardInput.keyReleased(event);
+      solaGui.onKeyReleased(event);
+    });
     platform.onMouseMoved(event -> {
       mouseInput.onMouseMoved(event);
       solaGui.onMouseMoved(event);

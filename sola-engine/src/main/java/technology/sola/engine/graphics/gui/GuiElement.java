@@ -1,6 +1,7 @@
 package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
@@ -44,6 +45,23 @@ public abstract class GuiElement<T extends GuiElementProperties> {
 
     if (!properties.isHidden()) {
       renderSelf(renderer, properties.getX(), properties.getY());
+    }
+  }
+
+  public void requestFocus() {
+    // todo how to "unfocus" previously focussed element
+  }
+
+  public void handleKeyEvent(KeyEvent event, String eventType) {
+    // todo check if has focus
+
+    switch (eventType) {
+      case "press":
+
+        break;
+      case "release":
+
+        break;
     }
   }
 

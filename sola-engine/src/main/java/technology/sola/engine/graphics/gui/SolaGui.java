@@ -2,6 +2,7 @@ package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 
 import java.util.function.Consumer;
@@ -41,6 +42,18 @@ public class SolaGui {
   public void render(Renderer renderer) {
     if (root != null) {
       root.render(renderer);
+    }
+  }
+
+  public void onKeyPressed(KeyEvent keyEvent) {
+    if (root != null) {
+      root.handleKeyEvent(keyEvent, "press");
+    }
+  }
+
+  public void onKeyReleased(KeyEvent keyEvent) {
+    if (root != null) {
+      root.handleKeyEvent(keyEvent, "release");
     }
   }
 
