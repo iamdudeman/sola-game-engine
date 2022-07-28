@@ -3,6 +3,7 @@ package technology.sola.engine.graphics.gui.elements.control;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
+import technology.sola.engine.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.input.MouseEvent;
 
@@ -14,8 +15,8 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
   private boolean wasMouseDownInside = false;
   private boolean isHovered = false;
 
-  public ButtonGuiElement(Properties properties) {
-    super(properties);
+  public ButtonGuiElement(SolaGui solaGui, Properties properties) {
+    super(solaGui, properties);
 
     setOnMouseEnterCallback(event -> {});
     setOnMouseExitCallback(event -> {});

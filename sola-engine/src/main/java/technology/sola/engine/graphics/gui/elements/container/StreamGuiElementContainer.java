@@ -6,10 +6,11 @@ import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementContainer;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.GuiElementProperties;
+import technology.sola.engine.graphics.gui.SolaGui;
 
 public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElementContainer.Properties> {
-  public StreamGuiElementContainer(Properties properties) {
-    super(properties);
+  public StreamGuiElementContainer(SolaGui solaGui, Properties properties) {
+    super(solaGui, properties);
   }
 
   @Override

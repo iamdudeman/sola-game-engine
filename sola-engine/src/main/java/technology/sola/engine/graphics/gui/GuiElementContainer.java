@@ -12,8 +12,8 @@ import java.util.List;
 public abstract class GuiElementContainer<T extends GuiElementProperties> extends GuiElement<T> {
   protected List<GuiElement<?>> children = new ArrayList<>();
 
-  public GuiElementContainer(T properties) {
-    super(properties);
+  public GuiElementContainer(SolaGui solaGui, T properties) {
+    super(solaGui, properties);
   }
 
   public abstract int getContentWidth();

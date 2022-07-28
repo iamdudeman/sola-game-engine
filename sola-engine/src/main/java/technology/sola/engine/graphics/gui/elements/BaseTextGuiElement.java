@@ -7,6 +7,7 @@ import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.GuiElementProperties;
+import technology.sola.engine.graphics.gui.SolaGui;
 
 public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties> extends GuiElement<T> {
   private Font font;
@@ -14,8 +15,8 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
   private int textWidth;
   private int textHeight;
 
-  public BaseTextGuiElement(T properties) {
-    super(properties);
+  public BaseTextGuiElement(SolaGui solaGui, T properties) {
+    super(solaGui, properties);
   }
 
   @Override

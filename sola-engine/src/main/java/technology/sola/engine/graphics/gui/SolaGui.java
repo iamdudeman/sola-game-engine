@@ -10,21 +10,22 @@ import java.util.function.Function;
 
 public class SolaGui {
   public final GuiElementGlobalProperties globalProperties;
-  private GuiElement<?> root;
+  private GuiElement<?> rootGuiElement;
+  private GuiElement<?> focussedElement;
 
   public SolaGui(AssetPoolProvider assetPoolProvider) {
     globalProperties = new GuiElementGlobalProperties(assetPoolProvider);
   }
 
   public <T extends GuiElement<P>, P extends GuiElementProperties> T createElement(
-    Function<P, T> elementConstructor,
+    GuiElementCreator<T, P> elementCreator,
     Function<GuiElementGlobalProperties, P> elementPropertiesConstructor
   ) {
-    return createElement(elementConstructor, elementPropertiesConstructor, p -> {});
+    return createElement(elementCreator, elementPropertiesConstructor, p -> {});
   }
 
   public <T extends GuiElement<P>, P extends GuiElementProperties> T createElement(
-    Function<P, T> elementConstructor,
+    GuiElementCreator<T, P> elementCreator,
     Function<GuiElementGlobalProperties, P> elementPropertiesConstructor,
     Consumer<P> propertiesInitializer
   ) {
@@ -32,46 +33,55 @@ public class SolaGui {
 
     propertiesInitializer.accept(properties);
 
-    return elementConstructor.apply(properties);
+    return elementCreator.create(this, properties);
   }
 
   public void setGuiRoot(GuiElement<?> guiElement) {
-    this.root = guiElement;
+    this.rootGuiElement = guiElement;
+    this.focussedElement = guiElement;
+  }
+
+  public void focusElement(GuiElement<?> guiElement) {
+    this.focussedElement = guiElement;
   }
 
   public void render(Renderer renderer) {
-    if (root != null) {
-      root.render(renderer);
+    if (rootGuiElement != null) {
+      rootGuiElement.render(renderer);
     }
   }
 
   public void onKeyPressed(KeyEvent keyEvent) {
-    if (root != null) {
-      root.handleKeyEvent(keyEvent, "press");
+    if (focussedElement != null) {
+      focussedElement.onKeyPress(keyEvent);
     }
   }
 
   public void onKeyReleased(KeyEvent keyEvent) {
-    if (root != null) {
-      root.handleKeyEvent(keyEvent, "release");
+    if (focussedElement != null) {
+      focussedElement.onKeyRelease(keyEvent);
     }
   }
 
   public void onMousePressed(MouseEvent event) {
-    if (root != null) {
-      root.handleMouseEvent(event, "press");
+    if (rootGuiElement != null) {
+      rootGuiElement.handleMouseEvent(event, "press");
     }
   }
 
   public void onMouseReleased(MouseEvent event) {
-    if (root != null) {
-      root.handleMouseEvent(event, "release");
+    if (rootGuiElement != null) {
+      rootGuiElement.handleMouseEvent(event, "release");
     }
   }
 
   public void onMouseMoved(MouseEvent event) {
-    if (root != null) {
-      root.handleMouseEvent(event, "move");
+    if (rootGuiElement != null) {
+      rootGuiElement.handleMouseEvent(event, "move");
     }
+  }
+
+  public interface GuiElementCreator<T extends GuiElement<P>, P extends GuiElementProperties> {
+    T create(SolaGui solaGui, P properties);
   }
 }

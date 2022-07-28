@@ -9,6 +9,7 @@ import technology.sola.math.linear.Vector2D;
 import java.util.function.Consumer;
 
 public abstract class GuiElement<T extends GuiElementProperties> {
+  protected final SolaGui solaGui;
   protected final T properties;
 
   private Consumer<KeyEvent> onKeyPressCallback;
@@ -20,7 +21,8 @@ public abstract class GuiElement<T extends GuiElementProperties> {
 
   private boolean wasMouseOverElement = false;
 
-  public GuiElement(T properties) {
+  public GuiElement(SolaGui solaGui, T properties) {
+    this.solaGui = solaGui;
     this.properties = properties;
   }
 
@@ -50,12 +52,8 @@ public abstract class GuiElement<T extends GuiElementProperties> {
     }
   }
 
-
-  public void handleKeyEvent(KeyEvent event, String eventType) {
-    switch (eventType) {
-      case "press" -> onKeyPress(event);
-      case "release" -> onKeyRelease(event);
-    }
+  public void requestFocus() {
+    solaGui.focusElement(this);
   }
 
   public void handleMouseEvent(MouseEvent event, String eventType) {
