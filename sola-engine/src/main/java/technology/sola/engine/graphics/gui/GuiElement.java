@@ -11,6 +11,8 @@ import java.util.function.Consumer;
 public abstract class GuiElement<T extends GuiElementProperties> {
   protected final T properties;
 
+  private Consumer<KeyEvent> onKeyPressCallback;
+  private Consumer<KeyEvent> onKeyReleaseCallback;
   private Consumer<MouseEvent> onMouseEnterCallback;
   private Consumer<MouseEvent> onMouseExitCallback;
   private Consumer<MouseEvent> onMouseDownCallback;
@@ -48,20 +50,11 @@ public abstract class GuiElement<T extends GuiElementProperties> {
     }
   }
 
-  public void requestFocus() {
-    // todo how to "unfocus" previously focussed element
-  }
 
   public void handleKeyEvent(KeyEvent event, String eventType) {
-    // todo check if has focus
-
     switch (eventType) {
-      case "press":
-
-        break;
-      case "release":
-
-        break;
+      case "press" -> onKeyPress(event);
+      case "release" -> onKeyRelease(event);
     }
   }
 
@@ -88,6 +81,26 @@ public abstract class GuiElement<T extends GuiElementProperties> {
     } else {
       onMouseExit(event);
     }
+  }
+
+  public void onKeyPress(KeyEvent keyEvent) {
+    if (onKeyPressCallback != null) {
+      onKeyPressCallback.accept(keyEvent);
+    }
+  }
+
+  public void setOnKeyPressCallback(Consumer<KeyEvent> onKeyPressCallback) {
+    this.onKeyPressCallback = onKeyPressCallback;
+  }
+
+  public void onKeyRelease(KeyEvent keyEvent) {
+    if (onKeyReleaseCallback != null) {
+      onKeyReleaseCallback.accept(keyEvent);
+    }
+  }
+
+  public void setOnKeyReleaseCallback(Consumer<KeyEvent> onKeyReleaseCallback) {
+    this.onKeyReleaseCallback = onKeyReleaseCallback;
   }
 
   public void onMouseEnter(MouseEvent mouseEvent) {
