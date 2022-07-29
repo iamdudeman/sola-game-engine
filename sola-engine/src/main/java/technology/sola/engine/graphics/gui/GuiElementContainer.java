@@ -2,7 +2,6 @@ package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.input.Key;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.math.geometry.Rectangle;
@@ -17,33 +16,6 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
 
   public GuiElementContainer(SolaGui solaGui, T properties) {
     super(solaGui, properties);
-
-    setOnKeyPressCallback(keyEvent -> {
-      if (keyEvent.keyCode() == Key.RIGHT.getCode()) {
-        int focussedIndex = 0;
-        boolean noChildFocus = true;
-
-        for (GuiElement<?> child : children) {
-          if (child.isFocussed()) {
-            noChildFocus = false;
-            break;
-          }
-          focussedIndex++;
-        }
-
-        if (noChildFocus) {
-          children.get(0).requestFocus();
-          return false;
-        } else if (focussedIndex + 1 < children.size()) {
-          children.get(focussedIndex + 1).requestFocus();
-          return false;
-        } else {
-          return true;
-        }
-      }
-
-      return true;
-    });
   }
 
   public abstract int getContentWidth();
@@ -88,14 +60,14 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
     return solaGui.isFocussedElement(this) || children.stream().anyMatch(GuiElement::isFocussed);
   }
 
-  // todo this won't work since container loses focus and can no longer iterate through other children
-
   @Override
   public void requestFocus() {
-    if (children.isEmpty()) {
+    List<GuiElement<?>> visibleChildren = getChildren().stream().filter(child -> !child.properties.isHidden()).toList();
+
+    if (visibleChildren.isEmpty()) {
       super.requestFocus();
     } else {
-      children.get(0).requestFocus();
+      visibleChildren.get(0).requestFocus();
     }
   }
 

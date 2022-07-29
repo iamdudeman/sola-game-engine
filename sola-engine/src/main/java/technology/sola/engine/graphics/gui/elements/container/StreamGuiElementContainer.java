@@ -7,10 +7,69 @@ import technology.sola.engine.graphics.gui.GuiElementContainer;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.GuiElementProperties;
 import technology.sola.engine.graphics.gui.SolaGui;
+import technology.sola.engine.input.Key;
+
+import java.util.List;
 
 public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElementContainer.Properties> {
   public StreamGuiElementContainer(SolaGui solaGui, Properties properties) {
     super(solaGui, properties);
+
+    setOnKeyPressCallback(keyEvent -> {
+      List<GuiElement<?>> visibleChildren = getChildren().stream().filter(child -> !child.properties().isHidden()).toList();
+
+      int forwardKeyCode = properties.direction == Direction.HORIZONTAL ? Key.RIGHT.getCode() : Key.DOWN.getCode();
+      int backwardKeyCode = properties.direction == Direction.HORIZONTAL ? Key.LEFT.getCode() : Key.UP.getCode();
+
+      if (keyEvent.keyCode() == forwardKeyCode) {
+        int focussedIndex = 0;
+        boolean noChildFocus = true;
+
+        for (GuiElement<?> child : visibleChildren) {
+          if (child.isFocussed()) {
+            noChildFocus = false;
+            break;
+          }
+          focussedIndex++;
+        }
+
+        if (noChildFocus) {
+          visibleChildren.get(0).requestFocus();
+          return false;
+        } else if (focussedIndex + 1 < visibleChildren.size()) {
+          visibleChildren.get(focussedIndex + 1).requestFocus();
+          return false;
+        } else {
+          return true;
+        }
+      }
+
+      if (keyEvent.keyCode() == backwardKeyCode) {
+        int focussedIndex;
+        boolean noChildFocus = true;
+
+        for (focussedIndex = visibleChildren.size() - 1; focussedIndex >= 0; focussedIndex--) {
+          GuiElement<?> child = visibleChildren.get(focussedIndex);
+
+          if (child.isFocussed()) {
+            noChildFocus = false;
+            break;
+          }
+        }
+
+        if (noChildFocus) {
+          visibleChildren.get(visibleChildren.size() - 1).requestFocus();
+          return false;
+        } else if (focussedIndex - 1 >= 0) {
+          visibleChildren.get(focussedIndex - 1).requestFocus();
+          return false;
+        } else {
+          return true;
+        }
+      }
+
+      return true;
+    });
   }
 
   @Override

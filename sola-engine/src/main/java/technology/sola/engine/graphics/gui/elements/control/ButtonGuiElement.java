@@ -5,12 +5,13 @@ import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
+import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseEvent;
 
 import java.util.function.Consumer;
 
 public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Properties> {
-  private Consumer<MouseEvent> onClickConsumer = event -> {};
+  private Runnable onActionConsumer = () -> {};
 
   private boolean wasMouseDownInside = false;
   private boolean isHovered = false;
@@ -22,6 +23,14 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
     setOnMouseExitCallback(event -> {});
     setOnMouseDownCallback(event -> {});
     setOnMouseUpCallback(event -> {});
+    setOnKeyPressCallback(keyEvent -> {
+      if (keyEvent.keyCode() == Key.ENTER.getCode()) {
+        onActionConsumer.run();
+        return false;
+      }
+
+      return true;
+    });
   }
 
   @Override
@@ -74,14 +83,14 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
     super.setOnMouseUpCallback(event -> {
       callback.accept(event);
       if (wasMouseDownInside) {
-        onClickConsumer.accept(event);
+        onActionConsumer.run();
         wasMouseDownInside = false;
       }
     });
   }
 
-  public void setOnClick(Consumer<MouseEvent> onClickConsumer) {
-    this.onClickConsumer = onClickConsumer;
+  public void setOnAction(Runnable onActionConsumer) {
+    this.onActionConsumer = onActionConsumer;
   }
 
   public static class Properties extends BaseTextGuiElement.Properties {

@@ -1,6 +1,8 @@
 package technology.sola.engine.input;
 
 public enum Key {
+  ENTER(0x0A, "Enter"),
+  //
   ESCAPE(0x1B, "Escape"),
   //
   SPACE(0x20, "Space"),

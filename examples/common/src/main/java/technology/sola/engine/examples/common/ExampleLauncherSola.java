@@ -80,7 +80,7 @@ public class ExampleLauncherSola extends Sola {
       p -> p.setText(text).padding.set(5).margin.setBottom(5)
     );
 
-    exampleLaunchButton.setOnClick(event -> {
+    exampleLaunchButton.setOnAction(() -> {
       eventHub.emit(GameLoopEvent.STOP);
       solaPlatform.play(solaSupplier.get());
     });

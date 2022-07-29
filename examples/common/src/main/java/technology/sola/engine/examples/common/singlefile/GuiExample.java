@@ -41,21 +41,21 @@ public class GuiExample extends Sola {
       ButtonGuiElement.Properties::new,
       p -> p.margin.setRight(15).padding.set(15)
     );
-    checkButton.setOnClick(event -> checkButton.properties().setColorBackground(checkButton.properties().getColorBackground().equals(Color.RED) ? new Color(128, 128, 128) : Color.RED));
+    checkButton.setOnAction(() -> checkButton.properties().setColorBackground(checkButton.properties().getColorBackground().equals(Color.RED) ? new Color(128, 128, 128) : Color.RED));
 
     ButtonGuiElement toggleOtherButton = solaGui.createElement(
       ButtonGuiElement::new,
       ButtonGuiElement.Properties::new,
       p -> p.setText("Toggle other button").padding.set(5)
     );
-    toggleOtherButton.setOnClick((event) -> checkButton.properties().setHidden(!checkButton.properties().isHidden()));
+    toggleOtherButton.setOnAction(() -> checkButton.properties().setHidden(!checkButton.properties().isHidden()));
 
     ButtonGuiElement toggleFontButton = solaGui.createElement(
       ButtonGuiElement::new,
       ButtonGuiElement.Properties::new,
       p -> p.setText("Change font").padding.set(5)
     );
-    toggleFontButton.setOnClick(event -> solaGui.globalProperties.setDefaultFontAssetId("times_NORMAL_18"));
+    toggleFontButton.setOnAction(() -> solaGui.globalProperties.setDefaultFontAssetId("times_NORMAL_18"));
 
 
     StreamGuiElementContainer firstContainer = solaGui.createElement(
