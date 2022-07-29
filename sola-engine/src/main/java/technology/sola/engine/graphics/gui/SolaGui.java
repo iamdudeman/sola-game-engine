@@ -2,6 +2,7 @@ package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 
@@ -42,16 +43,6 @@ public class SolaGui {
     this.focusElement(guiElement);
   }
 
-  public boolean isFocussedElement(GuiElement<?> guiElement) {
-    return this.focussedElement == guiElement;
-  }
-
-  public void focusElement(GuiElement<?> guiElement) {
-    if (guiElement.properties().isFocusable()) {
-      this.focussedElement = guiElement;
-    }
-  }
-
   public void render(Renderer renderer) {
     if (rootGuiElement != null) {
       rootGuiElement.render(renderer);
@@ -60,13 +51,13 @@ public class SolaGui {
 
   public void onKeyPressed(KeyEvent keyEvent) {
     if (rootGuiElement != null) {
-      rootGuiElement.handleKeyEvent(keyEvent, "press");
+      rootGuiElement.handleKeyEvent(new GuiKeyEvent(keyEvent, GuiKeyEvent.Type.PRESS));
     }
   }
 
   public void onKeyReleased(KeyEvent keyEvent) {
     if (rootGuiElement != null) {
-      rootGuiElement.handleKeyEvent(keyEvent, "release");
+      rootGuiElement.handleKeyEvent(new GuiKeyEvent(keyEvent, GuiKeyEvent.Type.RELEASE));
     }
   }
 
@@ -90,6 +81,16 @@ public class SolaGui {
 
   public AssetPoolProvider getAssetPoolProvider() {
     return assetPoolProvider;
+  }
+
+  boolean isFocussedElement(GuiElement<?> guiElement) {
+    return this.focussedElement == guiElement;
+  }
+
+  void focusElement(GuiElement<?> guiElement) {
+    if (guiElement.properties().isFocusable()) {
+      this.focussedElement = guiElement;
+    }
   }
 
   public interface GuiElementCreator<T extends GuiElement<P>, P extends GuiElementProperties> {

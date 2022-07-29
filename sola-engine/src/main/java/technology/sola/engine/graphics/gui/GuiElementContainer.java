@@ -1,7 +1,7 @@
 package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.input.KeyEvent;
+import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
@@ -73,41 +73,25 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
   }
 
   @Override
-  public boolean handleKeyEvent(KeyEvent event, String eventType) {
+  public void handleKeyEvent(GuiKeyEvent event) {
     if (!isFocussed()) {
-      return true;
+      return;
     }
 
-    boolean continueEventChain = true;
-
-    switch (eventType) {
-      case "press" -> {
-        for (GuiElement<?> child : children) {
-          if (!child.handleKeyEvent(event, "press")) {
-            continueEventChain = false;
-            break;
-          }
-        }
-
-        if (continueEventChain) {
-          continueEventChain = onKeyPress(event);
-        }
-      }
-      case "release" -> {
-        for (GuiElement<?> child : children) {
-          if (!child.handleKeyEvent(event, "release")) {
-            continueEventChain = false;
-            break;
-          }
-        }
-
-        if (continueEventChain) {
-          continueEventChain = onKeyRelease(event);
-        }
+    for (GuiElement<?> child : children) {
+      if (event.isAbleToPropagate()) {
+        child.handleKeyEvent(event);
+      } else {
+        break;
       }
     }
 
-    return continueEventChain;
+    if (event.isAbleToPropagate()) {
+      switch (event.getType()) {
+        case PRESS -> onKeyPress(event);
+        case RELEASE -> onKeyRelease(event);
+      }
+    }
   }
 
   @Override

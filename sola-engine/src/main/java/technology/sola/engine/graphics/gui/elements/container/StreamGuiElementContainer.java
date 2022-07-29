@@ -21,7 +21,7 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
       int forwardKeyCode = properties.direction == Direction.HORIZONTAL ? Key.RIGHT.getCode() : Key.DOWN.getCode();
       int backwardKeyCode = properties.direction == Direction.HORIZONTAL ? Key.LEFT.getCode() : Key.UP.getCode();
 
-      if (keyEvent.keyCode() == forwardKeyCode) {
+      if (keyEvent.getKeyCode() == forwardKeyCode) {
         int focussedIndex = 0;
         boolean noChildFocus = true;
 
@@ -35,16 +35,15 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
 
         if (noChildFocus && !focusableChildren.isEmpty()) {
           focusableChildren.get(0).requestFocus();
-          return false;
+          keyEvent.stopPropagation();
         } else if (focussedIndex + 1 < focusableChildren.size()) {
+          System.out.println(properties.direction + " " + focussedIndex);
           focusableChildren.get(focussedIndex + 1).requestFocus();
-          return false;
-        } else {
-          return true;
+          keyEvent.stopPropagation();
         }
       }
 
-      if (keyEvent.keyCode() == backwardKeyCode) {
+      if (keyEvent.getKeyCode() == backwardKeyCode) {
         int focussedIndex;
         boolean noChildFocus = true;
 
@@ -59,16 +58,12 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
 
         if (noChildFocus && !focusableChildren.isEmpty()) {
           focusableChildren.get(focusableChildren.size() - 1).requestFocus();
-          return false;
+          keyEvent.stopPropagation();
         } else if (focussedIndex - 1 >= 0) {
           focusableChildren.get(focussedIndex - 1).requestFocus();
-          return false;
-        } else {
-          return true;
+          keyEvent.stopPropagation();
         }
       }
-
-      return true;
     });
   }
 

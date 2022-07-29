@@ -24,12 +24,10 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
     setOnMouseDownCallback(event -> {});
     setOnMouseUpCallback(event -> {});
     setOnKeyPressCallback(keyEvent -> {
-      if (keyEvent.keyCode() == Key.ENTER.getCode()) {
+      if (keyEvent.getKeyCode() == Key.ENTER.getCode()) {
         onActionConsumer.run();
-        return false;
+        keyEvent.stopPropagation();
       }
-
-      return true;
     });
   }
 
