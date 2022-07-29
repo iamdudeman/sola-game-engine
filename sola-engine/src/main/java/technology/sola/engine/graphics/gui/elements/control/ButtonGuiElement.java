@@ -83,6 +83,7 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
     super.setOnMouseUpCallback(event -> {
       callback.accept(event);
       if (wasMouseDownInside) {
+        requestFocus();
         onActionConsumer.run();
         wasMouseDownInside = false;
       }
