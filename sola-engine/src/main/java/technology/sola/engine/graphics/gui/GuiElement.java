@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui;
 
+import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
@@ -7,13 +8,14 @@ import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public abstract class GuiElement<T extends GuiElementProperties> {
   protected final SolaGui solaGui;
   protected final T properties;
 
-  private Consumer<KeyEvent> onKeyPressCallback;
-  private Consumer<KeyEvent> onKeyReleaseCallback;
+  private Function<KeyEvent, Boolean> onKeyPressCallback;
+  private Function<KeyEvent, Boolean> onKeyReleaseCallback;
   private Consumer<MouseEvent> onMouseEnterCallback;
   private Consumer<MouseEvent> onMouseExitCallback;
   private Consumer<MouseEvent> onMouseDownCallback;
@@ -50,10 +52,30 @@ public abstract class GuiElement<T extends GuiElementProperties> {
     if (!properties.isHidden()) {
       renderSelf(renderer, properties.getX(), properties.getY());
     }
+
+    if (isFocussed()) {
+      renderer.drawRect(properties().getX() - 1,  properties.getY() - 1, getWidth() + 2, getHeight() + 2, Color.WHITE);
+    }
+  }
+
+  public boolean isFocussed() {
+    return solaGui.isFocussedElement(this);
   }
 
   public void requestFocus() {
     solaGui.focusElement(this);
+  }
+
+  public boolean handleKeyEvent(KeyEvent event, String eventType) {
+    if (!isFocussed()) {
+      return true;
+    }
+
+    return switch (eventType) {
+      case "press" -> onKeyPress(event);
+      case "release" -> onKeyRelease(event);
+      default -> true;
+    };
   }
 
   public void handleMouseEvent(MouseEvent event, String eventType) {
@@ -81,23 +103,28 @@ public abstract class GuiElement<T extends GuiElementProperties> {
     }
   }
 
-  public void onKeyPress(KeyEvent keyEvent) {
-    if (onKeyPressCallback != null) {
-      onKeyPressCallback.accept(keyEvent);
+  public boolean onKeyPress(KeyEvent keyEvent) {
+    if (onKeyPressCallback == null) {
+      return true;
     }
+
+    return onKeyPressCallback.apply(keyEvent);
   }
 
-  public void setOnKeyPressCallback(Consumer<KeyEvent> onKeyPressCallback) {
+  public void setOnKeyPressCallback(Function<KeyEvent, Boolean> onKeyPressCallback) {
     this.onKeyPressCallback = onKeyPressCallback;
   }
 
-  public void onKeyRelease(KeyEvent keyEvent) {
-    if (onKeyReleaseCallback != null) {
-      onKeyReleaseCallback.accept(keyEvent);
+  public boolean onKeyRelease(KeyEvent keyEvent) {
+    if (onKeyReleaseCallback == null) {
+      return true;
     }
+
+    return onKeyReleaseCallback.apply(keyEvent);
+
   }
 
-  public void setOnKeyReleaseCallback(Consumer<KeyEvent> onKeyReleaseCallback) {
+  public void setOnKeyReleaseCallback(Function<KeyEvent, Boolean> onKeyReleaseCallback) {
     this.onKeyReleaseCallback = onKeyReleaseCallback;
   }
 

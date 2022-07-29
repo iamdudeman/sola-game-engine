@@ -5,6 +5,11 @@ public enum Key {
   //
   SPACE(0x20, "Space"),
   //
+  LEFT(0x25, "Left"),
+  UP(0x26, "Up"),
+  RIGHT(0x27, "Right"),
+  DOWN(0x28, "Down"),
+  //
   ZERO(0x30, "0"),
   ONE(0x31, "1"),
   TWO(0x32, "2"),

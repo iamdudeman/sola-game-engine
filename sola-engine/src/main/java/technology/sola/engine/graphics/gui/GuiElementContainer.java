@@ -1,6 +1,9 @@
 package technology.sola.engine.graphics.gui;
 
+import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.input.Key;
+import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
@@ -14,6 +17,33 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
 
   public GuiElementContainer(SolaGui solaGui, T properties) {
     super(solaGui, properties);
+
+    setOnKeyPressCallback(keyEvent -> {
+      if (keyEvent.keyCode() == Key.RIGHT.getCode()) {
+        int focussedIndex = 0;
+        boolean noChildFocus = true;
+
+        for (GuiElement<?> child : children) {
+          if (child.isFocussed()) {
+            noChildFocus = false;
+            break;
+          }
+          focussedIndex++;
+        }
+
+        if (noChildFocus) {
+          children.get(0).requestFocus();
+          return false;
+        } else if (focussedIndex + 1 < children.size()) {
+          children.get(focussedIndex + 1).requestFocus();
+          return false;
+        } else {
+          return true;
+        }
+      }
+
+      return true;
+    });
   }
 
   public abstract int getContentWidth();
@@ -47,6 +77,64 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
         .filter(child -> !child.properties.isHidden())
         .forEach(child -> child.render(renderer));
     }
+
+    if (isFocussed()) {
+      renderer.drawRect(properties().getX() - 1,  properties.getY() - 1, getWidth() + 2, getHeight() + 2, Color.WHITE);
+    }
+  }
+
+  @Override
+  public boolean isFocussed() {
+    return solaGui.isFocussedElement(this) || children.stream().anyMatch(GuiElement::isFocussed);
+  }
+
+  // todo this won't work since container loses focus and can no longer iterate through other children
+
+  @Override
+  public void requestFocus() {
+    if (children.isEmpty()) {
+      super.requestFocus();
+    } else {
+      children.get(0).requestFocus();
+    }
+  }
+
+  @Override
+  public boolean handleKeyEvent(KeyEvent event, String eventType) {
+    if (!isFocussed()) {
+      return true;
+    }
+
+    boolean continueEventChain = true;
+
+    switch (eventType) {
+      case "press" -> {
+        for (GuiElement<?> child : children) {
+          if (!child.handleKeyEvent(event, "press")) {
+            continueEventChain = false;
+            break;
+          }
+        }
+
+        if (continueEventChain) {
+          continueEventChain = onKeyPress(event);
+        }
+      }
+      case "release" -> {
+        for (GuiElement<?> child : children) {
+          if (!child.handleKeyEvent(event, "release")) {
+            continueEventChain = false;
+            break;
+          }
+        }
+
+        if (continueEventChain) {
+          continueEventChain = onKeyRelease(event);
+        }
+      }
+    }
+
+    return continueEventChain;
   }
 
   @Override

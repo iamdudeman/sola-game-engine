@@ -38,7 +38,11 @@ public class SolaGui {
 
   public void setGuiRoot(GuiElement<?> guiElement) {
     this.rootGuiElement = guiElement;
-    this.focussedElement = guiElement;
+    this.focusElement(guiElement);
+  }
+
+  public boolean isFocussedElement(GuiElement<?> guiElement) {
+    return this.focussedElement == guiElement;
   }
 
   public void focusElement(GuiElement<?> guiElement) {
@@ -52,14 +56,14 @@ public class SolaGui {
   }
 
   public void onKeyPressed(KeyEvent keyEvent) {
-    if (focussedElement != null) {
-      focussedElement.onKeyPress(keyEvent);
+    if (rootGuiElement != null) {
+      rootGuiElement.handleKeyEvent(keyEvent, "press");
     }
   }
 
   public void onKeyReleased(KeyEvent keyEvent) {
-    if (focussedElement != null) {
-      focussedElement.onKeyRelease(keyEvent);
+    if (rootGuiElement != null) {
+      rootGuiElement.handleKeyEvent(keyEvent, "release");
     }
   }
 
@@ -83,5 +87,8 @@ public class SolaGui {
 
   public interface GuiElementCreator<T extends GuiElement<P>, P extends GuiElementProperties> {
     T create(SolaGui solaGui, P properties);
+  }
+
+  public record GuiElementQueryResult(GuiElementContainer<?> parent, GuiElement<?> element) {
   }
 }
