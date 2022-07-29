@@ -47,7 +47,9 @@ public class SolaGui {
   }
 
   public void focusElement(GuiElement<?> guiElement) {
-    this.focussedElement = guiElement;
+    if (guiElement.properties().isFocusable()) {
+      this.focussedElement = guiElement;
+    }
   }
 
   public void render(Renderer renderer) {

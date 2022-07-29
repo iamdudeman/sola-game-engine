@@ -54,6 +54,7 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
 
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
+      setFocusable(false);
     }
 
     public String getText() {

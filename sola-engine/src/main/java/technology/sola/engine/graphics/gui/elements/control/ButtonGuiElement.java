@@ -103,6 +103,7 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
 
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
+      setFocusable(true);
       setFocusOutlineColor(Color.LIGHT_BLUE);
     }
 

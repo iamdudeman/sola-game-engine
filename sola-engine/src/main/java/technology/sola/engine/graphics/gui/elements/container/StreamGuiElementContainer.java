@@ -16,7 +16,7 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     super(solaGui, properties);
 
     setOnKeyPressCallback(keyEvent -> {
-      List<GuiElement<?>> visibleChildren = getChildren().stream().filter(child -> !child.properties().isHidden()).toList();
+      List<GuiElement<?>> focusableChildren = getChildren().stream().filter(child -> child.properties().isFocusable()).toList();
 
       int forwardKeyCode = properties.direction == Direction.HORIZONTAL ? Key.RIGHT.getCode() : Key.DOWN.getCode();
       int backwardKeyCode = properties.direction == Direction.HORIZONTAL ? Key.LEFT.getCode() : Key.UP.getCode();
@@ -25,7 +25,7 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
         int focussedIndex = 0;
         boolean noChildFocus = true;
 
-        for (GuiElement<?> child : visibleChildren) {
+        for (GuiElement<?> child : focusableChildren) {
           if (child.isFocussed()) {
             noChildFocus = false;
             break;
@@ -33,11 +33,11 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
           focussedIndex++;
         }
 
-        if (noChildFocus) {
-          visibleChildren.get(0).requestFocus();
+        if (noChildFocus && !focusableChildren.isEmpty()) {
+          focusableChildren.get(0).requestFocus();
           return false;
-        } else if (focussedIndex + 1 < visibleChildren.size()) {
-          visibleChildren.get(focussedIndex + 1).requestFocus();
+        } else if (focussedIndex + 1 < focusableChildren.size()) {
+          focusableChildren.get(focussedIndex + 1).requestFocus();
           return false;
         } else {
           return true;
@@ -48,8 +48,8 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
         int focussedIndex;
         boolean noChildFocus = true;
 
-        for (focussedIndex = visibleChildren.size() - 1; focussedIndex >= 0; focussedIndex--) {
-          GuiElement<?> child = visibleChildren.get(focussedIndex);
+        for (focussedIndex = focusableChildren.size() - 1; focussedIndex >= 0; focussedIndex--) {
+          GuiElement<?> child = focusableChildren.get(focussedIndex);
 
           if (child.isFocussed()) {
             noChildFocus = false;
@@ -57,11 +57,11 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
           }
         }
 
-        if (noChildFocus) {
-          visibleChildren.get(visibleChildren.size() - 1).requestFocus();
+        if (noChildFocus && !focusableChildren.isEmpty()) {
+          focusableChildren.get(focusableChildren.size() - 1).requestFocus();
           return false;
         } else if (focussedIndex - 1 >= 0) {
-          visibleChildren.get(focussedIndex - 1).requestFocus();
+          focusableChildren.get(focussedIndex - 1).requestFocus();
           return false;
         } else {
           return true;

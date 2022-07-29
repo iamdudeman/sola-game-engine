@@ -13,6 +13,7 @@ public class GuiElementProperties {
   private boolean isLayoutChanged = true;
   private Color focusOutlineColor = null;
   private boolean isHidden;
+  private boolean isFocusable = true;
 
   public GuiElementProperties(GuiElementGlobalProperties globalProperties) {
     this.globalProperties = globalProperties;
@@ -34,6 +35,16 @@ public class GuiElementProperties {
 
   public GuiElementProperties setHidden(boolean hidden) {
     isHidden = hidden;
+
+    return this;
+  }
+
+  public boolean isFocusable() {
+    return isFocusable && !isHidden();
+  }
+
+  public GuiElementProperties setFocusable(boolean focusable) {
+    isFocusable = focusable;
 
     return this;
   }
