@@ -39,7 +39,7 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
 
   @Override
   public void recalculateLayout() {
-    font = properties.getAssetPoolProvider().getAssetPool(Font.class).getAsset(properties().getFontAssetId());
+    font = solaGui.getAssetPoolProvider().getAssetPool(Font.class).getAsset(properties().getFontAssetId());
 
     var textDimensions = font.getDimensionsForText(properties().getText());
 

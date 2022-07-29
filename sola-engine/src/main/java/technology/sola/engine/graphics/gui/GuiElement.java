@@ -152,6 +152,7 @@ public abstract class GuiElement<T extends GuiElementProperties> {
 
   public void onMouseDown(MouseEvent mouseEvent) {
     if (onMouseDownCallback != null) {
+      requestFocus();
       onMouseDownCallback.accept(mouseEvent);
     }
   }

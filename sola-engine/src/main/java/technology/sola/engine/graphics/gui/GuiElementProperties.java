@@ -1,7 +1,5 @@
 package technology.sola.engine.graphics.gui;
 
-import technology.sola.engine.assets.AssetPoolProvider;
-
 public class GuiElementProperties {
   public final Bounds margin = new Bounds();
   public final Bounds padding = new Bounds();
@@ -15,10 +13,6 @@ public class GuiElementProperties {
 
   public GuiElementProperties(GuiElementGlobalProperties globalProperties) {
     this.globalProperties = globalProperties;
-  }
-
-  public AssetPoolProvider getAssetPoolProvider() {
-    return globalProperties.getAssetPoolProvider();
   }
 
   public boolean isLayoutChanged() {

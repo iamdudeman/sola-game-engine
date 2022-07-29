@@ -9,12 +9,13 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class SolaGui {
-  public final GuiElementGlobalProperties globalProperties;
+  public final GuiElementGlobalProperties globalProperties = new GuiElementGlobalProperties();
+  private final AssetPoolProvider assetPoolProvider;
   private GuiElement<?> rootGuiElement;
   private GuiElement<?> focussedElement;
 
   public SolaGui(AssetPoolProvider assetPoolProvider) {
-    globalProperties = new GuiElementGlobalProperties(assetPoolProvider);
+    this.assetPoolProvider = assetPoolProvider;
   }
 
   public <T extends GuiElement<P>, P extends GuiElementProperties> T createElement(
@@ -85,10 +86,11 @@ public class SolaGui {
     }
   }
 
-  public interface GuiElementCreator<T extends GuiElement<P>, P extends GuiElementProperties> {
-    T create(SolaGui solaGui, P properties);
+  public AssetPoolProvider getAssetPoolProvider() {
+    return assetPoolProvider;
   }
 
-  public record GuiElementQueryResult(GuiElementContainer<?> parent, GuiElement<?> element) {
+  public interface GuiElementCreator<T extends GuiElement<P>, P extends GuiElementProperties> {
+    T create(SolaGui solaGui, P properties);
   }
 }
