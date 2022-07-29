@@ -64,44 +64,6 @@ public abstract class GuiElement<T extends GuiElementProperties> {
     solaGui.focusElement(this);
   }
 
-  // todo package access only?
-  public void handleKeyEvent(GuiKeyEvent event) {
-    if (!isFocussed()) {
-      return;
-    }
-
-    switch (event.getType()) {
-      case PRESS -> onKeyPress(event);
-      case RELEASE -> onKeyRelease(event);
-    };
-  }
-
-  // todo package access only?
-  public void handleMouseEvent(MouseEvent event, String eventType) {
-    T properties = properties();
-
-    if (properties.isHidden()) {
-      return;
-    }
-
-    int x = properties.getX();
-    int y = properties.getY();
-    int width = getWidth();
-    int height = getHeight();
-
-    Rectangle guiElementBounds = new Rectangle(new Vector2D(x, y), new Vector2D(x + width, y + height));
-
-    if (guiElementBounds.contains(new Vector2D(event.x(), event.y()))) {
-      switch (eventType) {
-        case "press" -> onMouseDown(event);
-        case "release" -> onMouseUp(event);
-        case "move" -> onMouseEnter(event);
-      }
-    } else {
-      onMouseExit(event);
-    }
-  }
-
   public void onKeyPress(GuiKeyEvent keyEvent) {
     if (onKeyPressCallback != null) {
       onKeyPressCallback.accept(keyEvent);
@@ -166,5 +128,41 @@ public abstract class GuiElement<T extends GuiElementProperties> {
 
   public T properties() {
     return properties;
+  }
+
+  void handleKeyEvent(GuiKeyEvent event) {
+    if (!isFocussed()) {
+      return;
+    }
+
+    switch (event.getType()) {
+      case PRESS -> onKeyPress(event);
+      case RELEASE -> onKeyRelease(event);
+    };
+  }
+
+  void handleMouseEvent(MouseEvent event, String eventType) {
+    T properties = properties();
+
+    if (properties.isHidden()) {
+      return;
+    }
+
+    int x = properties.getX();
+    int y = properties.getY();
+    int width = getWidth();
+    int height = getHeight();
+
+    Rectangle guiElementBounds = new Rectangle(new Vector2D(x, y), new Vector2D(x + width, y + height));
+
+    if (guiElementBounds.contains(new Vector2D(event.x(), event.y()))) {
+      switch (eventType) {
+        case "press" -> onMouseDown(event);
+        case "release" -> onMouseUp(event);
+        case "move" -> onMouseEnter(event);
+      }
+    } else {
+      onMouseExit(event);
+    }
   }
 }

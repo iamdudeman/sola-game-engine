@@ -72,8 +72,35 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
     }
   }
 
+  public List<GuiElement<?>> getChildren() {
+    return children;
+  }
+
+  public void addChild(GuiElement<?> childOne) {
+    children.add(childOne);
+    properties.setLayoutChanged(true);
+  }
+
+  public void addChild(GuiElement<?> childOne, GuiElement<?> childTwo) {
+    children.add(childOne);
+    children.add(childTwo);
+    properties.setLayoutChanged(true);
+  }
+
+  public void addChild(GuiElement<?> childOne, GuiElement<?> childTwo, GuiElement<?> childThree) {
+    children.add(childOne);
+    children.add(childTwo);
+    children.add(childThree);
+    properties.setLayoutChanged(true);
+  }
+
+  public void addChild(GuiElement<?>... children) {
+    this.children.addAll(Arrays.asList(children));
+    properties.setLayoutChanged(true);
+  }
+
   @Override
-  public void handleKeyEvent(GuiKeyEvent event) {
+  void handleKeyEvent(GuiKeyEvent event) {
     if (!isFocussed()) {
       return;
     }
@@ -95,7 +122,7 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
   }
 
   @Override
-  public void handleMouseEvent(MouseEvent event, String eventType) {
+  void handleMouseEvent(MouseEvent event, String eventType) {
     T properties = properties();
 
     if (properties.isHidden()) {
@@ -126,32 +153,5 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
 
       onMouseExit(event);
     }
-  }
-
-  public List<GuiElement<?>> getChildren() {
-    return children;
-  }
-
-  public void addChild(GuiElement<?> childOne) {
-    children.add(childOne);
-    properties.setLayoutChanged(true);
-  }
-
-  public void addChild(GuiElement<?> childOne, GuiElement<?> childTwo) {
-    children.add(childOne);
-    children.add(childTwo);
-    properties.setLayoutChanged(true);
-  }
-
-  public void addChild(GuiElement<?> childOne, GuiElement<?> childTwo, GuiElement<?> childThree) {
-    children.add(childOne);
-    children.add(childTwo);
-    children.add(childThree);
-    properties.setLayoutChanged(true);
-  }
-
-  public void addChild(GuiElement<?>... children) {
-    this.children.addAll(Arrays.asList(children));
-    properties.setLayoutChanged(true);
   }
 }
