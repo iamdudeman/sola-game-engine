@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.gui;
 
+import technology.sola.engine.graphics.Color;
+
 public class GuiElementProperties {
   public final Bounds margin = new Bounds();
   public final Bounds padding = new Bounds();
@@ -9,6 +11,7 @@ public class GuiElementProperties {
   private int maxWidth;
   private int maxHeight;
   private boolean isLayoutChanged = true;
+  private Color focusOutlineColor = null;
   private boolean isHidden;
 
   public GuiElementProperties(GuiElementGlobalProperties globalProperties) {
@@ -65,6 +68,16 @@ public class GuiElementProperties {
 
   public int getMaxHeight() {
     return maxHeight;
+  }
+
+  public Color getFocusOutlineColor() {
+    return focusOutlineColor;
+  }
+
+  public GuiElementProperties setFocusOutlineColor(Color focusOutlineColor) {
+    this.focusOutlineColor = focusOutlineColor;
+
+    return this;
   }
 
   public class Bounds {

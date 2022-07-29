@@ -1,6 +1,5 @@
 package technology.sola.engine.graphics.gui;
 
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
@@ -51,10 +50,10 @@ public abstract class GuiElement<T extends GuiElementProperties> {
 
     if (!properties.isHidden()) {
       renderSelf(renderer, properties.getX(), properties.getY());
-    }
 
-    if (isFocussed()) {
-      renderer.drawRect(properties().getX() - 1,  properties.getY() - 1, getWidth() + 2, getHeight() + 2, Color.WHITE);
+      if (properties.getFocusOutlineColor() != null && isFocussed()) {
+        renderer.drawRect(properties().getX() - 1,  properties.getY() - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
+      }
     }
   }
 
@@ -152,7 +151,6 @@ public abstract class GuiElement<T extends GuiElementProperties> {
 
   public void onMouseDown(MouseEvent mouseEvent) {
     if (onMouseDownCallback != null) {
-      requestFocus();
       onMouseDownCallback.accept(mouseEvent);
     }
   }

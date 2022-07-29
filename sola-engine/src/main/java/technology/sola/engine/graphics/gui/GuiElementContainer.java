@@ -1,6 +1,5 @@
 package technology.sola.engine.graphics.gui;
 
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
@@ -48,10 +47,10 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
       children.stream()
         .filter(child -> !child.properties.isHidden())
         .forEach(child -> child.render(renderer));
-    }
 
-    if (isFocussed()) {
-      renderer.drawRect(properties().getX() - 1,  properties.getY() - 1, getWidth() + 2, getHeight() + 2, Color.WHITE);
+      if (properties.getFocusOutlineColor() != null && isFocussed()) {
+        renderer.drawRect(properties().getX() - 1,  properties.getY() - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
+      }
     }
   }
 
