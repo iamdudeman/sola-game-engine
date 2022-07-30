@@ -61,13 +61,24 @@ public class GuiExample extends Sola {
     StreamGuiElementContainer firstContainer = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.setPreferredDimensions(400, 60).setBorderColor(Color.YELLOW).padding.set(5)
+      p -> p.setPreferredDimensions(400, 260).setBorderColor(Color.YELLOW).padding.set(5)
+    );
+
+    StreamGuiElementContainer firstSubContainer = solaGui.createElement(
+      StreamGuiElementContainer::new,
+      StreamGuiElementContainer.Properties::new,
+      p -> p.setPreferredDimensions(130, 200).setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.WHITE).padding.set(5).margin.setLeft(10)
+    );
+    firstSubContainer.addChild(
+      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Sub First")),
+      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Sub Second").margin.set(15, 0))
     );
 
     firstContainer.addChild(
       solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("First")),
       solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Second").padding.set(5).margin.set(0, 15)),
-      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Third").margin.setTop(3))
+      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Third").margin.setTop(3)),
+      firstSubContainer
     );
 
 
@@ -86,7 +97,7 @@ public class GuiExample extends Sola {
     StreamGuiElementContainer rootElement = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setPreferredDimensions(400, 280).setBorderColor(Color.GREEN).padding.set(10).setPosition(15, 15)
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setPreferredDimensions(500, 500).setBorderColor(Color.GREEN).padding.set(10).setPosition(15, 15)
     );
 
     rootElement.addChild(
