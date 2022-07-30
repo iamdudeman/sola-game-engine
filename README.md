@@ -2,13 +2,32 @@
 
 
 # TODO List
+* Audio
+  * Interface for type
+  * Implement loader per platform (Swing and JavaFX can probably share though)
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
   * More BlendMode implementations
 * SolaGui Stuff
   * GuiElementContainer
     * Consider adding anchor support to Stream or a new container to be able to easily center things?
+* Research build tooling of some sort
+  * Take a main java file and build for a platform maybe?
+  * would be later used in Engine GUI Editor
+* Unit Testing
+  * Add easy way to test the ability of ECS components to be serializable
+  * Add lots of missing tests :)
+* Browser Platform
+  * Implement better tool for compiling Java to JavaScript code (TeaVM gradle plugin has some file locking issues)
+  * Improve performance (StressTestExample can't handle a lot of objects)
+  * Implement Font loading
+  * Implement SpriteSheet loading
+  * Implement window resizing using Viewport
+* Research Virtual File System
+* Build pipeline
+  * Generate engine and platform artifacts
 * Engine GUI Editor (Sola Editor)
+  * GuiElement stuff
   * Add more component controllers
     * SpriteAnimator
   * editor camera improvements
@@ -32,23 +51,7 @@
   * Create child + parent relationships for the entities?
   * load additional components, systems and engine ui from external JAR
     * maybe generate a gradle file to build the jar from inside the engine?
-* Unit Testing
-  * Add easy way to test the ability of ECS components to be serializable
-  * Add lots of missing tests :)
-* Browser Platform
-  * Implement better tool for compiling Java to JavaScript code (TeaVM gradle plugin has some file locking issues)
-  * Improve performance (StressTestExample can't handle a lot of objects)
-  * Implement Font loading
-  * Implement SpriteSheet loading
-  * Implement window resizing using Viewport
-* Audio
-  * Interface for type
-  * Implement loader per platform (Swing and JavaFX can probably share though)
-* Build pipeline
-  * Generate engine and platform artifacts
-* Research Virtual File System
 * Scripting language
-  * Consider scrapping this features
   * How will that work with browser implementation?
   * Maybe a custom Domain Specific Language?
     * Perhaps JSON that describes what Systems to load with what settings
