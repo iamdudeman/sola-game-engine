@@ -62,7 +62,7 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
   @Override
   public void requestFocus() {
     if (properties.isFocusable()) {
-      List<GuiElement<?>> focusableChildren = getChildren().stream().filter(child -> child.properties.isFocusable()).toList();
+      List<GuiElement<?>> focusableChildren = getFocusableChildren();
 
       if (focusableChildren.isEmpty()) {
         super.requestFocus();
@@ -74,6 +74,12 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
 
   public List<GuiElement<?>> getChildren() {
     return children;
+  }
+
+  public List<GuiElement<?>> getFocusableChildren() {
+    return getChildren().stream()
+      .filter(child -> child.properties.isFocusable())
+      .toList();
   }
 
   public void addChild(GuiElement<?> childOne) {

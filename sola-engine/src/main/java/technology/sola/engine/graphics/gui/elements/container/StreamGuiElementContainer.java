@@ -16,50 +16,25 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     super(solaGui, properties);
 
     setOnKeyPressCallback(keyEvent -> {
-      List<GuiElement<?>> focusableChildren = getChildren().stream().filter(child -> child.properties().isFocusable()).toList();
-
       int forwardKeyCode = properties.direction == Direction.HORIZONTAL ? Key.RIGHT.getCode() : Key.DOWN.getCode();
       int backwardKeyCode = properties.direction == Direction.HORIZONTAL ? Key.LEFT.getCode() : Key.UP.getCode();
 
       if (keyEvent.getKeyCode() == forwardKeyCode) {
-        int focussedIndex = 0;
-        boolean noChildFocus = true;
+        List<GuiElement<?>> focusableChildren = getFocusableChildren();
+        int nextFocussedIndex = findFocussedChild(focusableChildren) + 1;
 
-        for (GuiElement<?> child : focusableChildren) {
-          if (child.isFocussed()) {
-            noChildFocus = false;
-            break;
-          }
-          focussedIndex++;
-        }
-
-        if (noChildFocus && !focusableChildren.isEmpty()) {
-          focusableChildren.get(0).requestFocus();
-          keyEvent.stopPropagation();
-        } else if (focussedIndex + 1 < focusableChildren.size()) {
-          focusableChildren.get(focussedIndex + 1).requestFocus();
+        if (nextFocussedIndex < focusableChildren.size()) {
+          focusableChildren.get(nextFocussedIndex).requestFocus();
           keyEvent.stopPropagation();
         }
       }
 
       if (keyEvent.getKeyCode() == backwardKeyCode) {
-        int focussedIndex;
-        boolean noChildFocus = true;
+        List<GuiElement<?>> focusableChildren = getFocusableChildren();
+        int nextFocussedIndex = findFocussedChild(focusableChildren) - 1;
 
-        for (focussedIndex = focusableChildren.size() - 1; focussedIndex >= 0; focussedIndex--) {
-          GuiElement<?> child = focusableChildren.get(focussedIndex);
-
-          if (child.isFocussed()) {
-            noChildFocus = false;
-            break;
-          }
-        }
-
-        if (noChildFocus && !focusableChildren.isEmpty()) {
-          focusableChildren.get(focusableChildren.size() - 1).requestFocus();
-          keyEvent.stopPropagation();
-        } else if (focussedIndex - 1 >= 0) {
-          focusableChildren.get(focussedIndex - 1).requestFocus();
+        if (nextFocussedIndex >= 0) {
+          focusableChildren.get(nextFocussedIndex).requestFocus();
           keyEvent.stopPropagation();
         }
       }
@@ -111,6 +86,20 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     }
 
     properties.setLayoutChanged(false);
+  }
+
+  private int findFocussedChild(List<GuiElement<?>> children) {
+    int focussedIndex = 0;
+
+    for (GuiElement<?> child : children) {
+      if (child.isFocussed()) {
+        return focussedIndex;
+      }
+
+      focussedIndex++;
+    }
+
+    return -1;
   }
 
   public static class Properties extends GuiElementProperties {
