@@ -37,7 +37,6 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
           focusableChildren.get(0).requestFocus();
           keyEvent.stopPropagation();
         } else if (focussedIndex + 1 < focusableChildren.size()) {
-          System.out.println(properties.direction + " " + focussedIndex);
           focusableChildren.get(focussedIndex + 1).requestFocus();
           keyEvent.stopPropagation();
         }
