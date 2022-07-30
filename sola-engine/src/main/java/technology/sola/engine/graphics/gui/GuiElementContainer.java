@@ -49,7 +49,7 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
         .forEach(child -> child.render(renderer));
 
       if (properties.getFocusOutlineColor() != null && isFocussed()) {
-        renderer.drawRect(properties().getX() - 1,  properties.getY() - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
+        renderer.drawRect(properties().getX() - 1, properties.getY() - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
       }
     }
   }

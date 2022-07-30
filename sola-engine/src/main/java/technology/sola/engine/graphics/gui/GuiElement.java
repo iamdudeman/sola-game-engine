@@ -51,7 +51,7 @@ public abstract class GuiElement<T extends GuiElementProperties> {
       renderSelf(renderer, properties.getX(), properties.getY());
 
       if (properties.getFocusOutlineColor() != null && isFocussed()) {
-        renderer.drawRect(properties().getX() - 1,  properties.getY() - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
+        renderer.drawRect(properties().getX() - 1, properties.getY() - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
       }
     }
   }
@@ -138,7 +138,7 @@ public abstract class GuiElement<T extends GuiElementProperties> {
     switch (event.getType()) {
       case PRESS -> onKeyPress(event);
       case RELEASE -> onKeyRelease(event);
-    };
+    }
   }
 
   void handleMouseEvent(MouseEvent event, String eventType) {
