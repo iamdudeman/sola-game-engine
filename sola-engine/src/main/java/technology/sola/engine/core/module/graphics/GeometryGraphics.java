@@ -1,4 +1,4 @@
-package technology.sola.engine.core.use.graphics;
+package technology.sola.engine.core.module.graphics;
 
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.SolaEcs;

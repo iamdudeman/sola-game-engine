@@ -1,8 +1,8 @@
-package technology.sola.engine.core.use.graphics.gui;
+package technology.sola.engine.core.module.graphics.gui;
 
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.core.SolaPlatform;
-import technology.sola.engine.core.use.SolaUse;
+import technology.sola.engine.core.module.SolaModule;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.GuiElementProperties;
@@ -14,16 +14,18 @@ import technology.sola.engine.input.MouseEvent;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-@SolaUse
+@SolaModule
 public class SolaGui {
   public final GuiElementGlobalProperties globalProperties = new GuiElementGlobalProperties();
   private final AssetPoolProvider assetPoolProvider;
   private GuiElement<?> rootGuiElement;
   private GuiElement<?> focussedElement;
+  private Renderer renderer;
 
-  public static SolaGui use(AssetPoolProvider assetPoolProvider, SolaPlatform platform) {
+  public static SolaGui createInstance(AssetPoolProvider assetPoolProvider, SolaPlatform platform) {
     SolaGui solaGui = new SolaGui(assetPoolProvider);
 
+    solaGui.renderer = platform.getRenderer();
     platform.onKeyPressed(solaGui::onKeyPressed);
     platform.onKeyReleased(solaGui::onKeyReleased);
     platform.onMouseMoved(solaGui::onMouseMoved);
@@ -57,7 +59,7 @@ public class SolaGui {
     this.focusElement(guiElement);
   }
 
-  public void render(Renderer renderer) {
+  public void render() {
     if (rootGuiElement != null) {
       rootGuiElement.render(renderer);
     }

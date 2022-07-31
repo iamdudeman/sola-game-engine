@@ -19,7 +19,7 @@ public class SolaEditor extends Application {
     final Scene scene = SolaEditorScreen.loadSceneForController(new LandingScreenController(solaEditorContext));
 
     primaryStage.setOnCloseRequest(event -> {
-      // TODO probably use a dialog to prompt "are you sure?" first
+      // TODO probably createInstance a dialog to prompt "are you sure?" first
       Platform.exit();
       // TODO better way than this needed
       System.exit(0);

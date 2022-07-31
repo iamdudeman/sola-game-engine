@@ -1,4 +1,4 @@
-package technology.sola.engine.core.use.graphics;
+package technology.sola.engine.core.module.graphics;
 
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.math.linear.Matrix3D;

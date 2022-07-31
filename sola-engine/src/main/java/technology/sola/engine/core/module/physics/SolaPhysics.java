@@ -1,7 +1,7 @@
-package technology.sola.engine.core.use.physics;
+package technology.sola.engine.core.module.physics;
 
 import technology.sola.ecs.SolaEcs;
-import technology.sola.engine.core.use.SolaUse;
+import technology.sola.engine.core.module.SolaModule;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.physics.event.CollisionManifoldEvent;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
@@ -10,7 +10,7 @@ import technology.sola.engine.physics.system.ImpulseCollisionResolutionSystem;
 import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.engine.physics.system.PhysicsSystem;
 
-@SolaUse
+@SolaModule
 public class SolaPhysics {
   private final GravitySystem gravitySystem;
   private final PhysicsSystem physicsSystem;
@@ -18,7 +18,7 @@ public class SolaPhysics {
   private final ImpulseCollisionResolutionSystem impulseCollisionResolutionSystem;
   private final ParticleSystem particleSystem;
 
-  public static SolaPhysics use(EventHub eventHub, SolaEcs solaEcs) {
+  public static SolaPhysics createInstance(EventHub eventHub, SolaEcs solaEcs) {
     SolaPhysics solaPhysics = new SolaPhysics();
 
     eventHub.add(solaPhysics.gravitySystem, CollisionManifoldEvent.class);

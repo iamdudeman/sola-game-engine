@@ -1,6 +1,6 @@
 package technology.sola.engine.graphics.gui;
 
-import technology.sola.engine.core.use.graphics.gui.SolaGui;
+import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.MouseEvent;

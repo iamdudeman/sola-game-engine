@@ -5,7 +5,7 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.event.GameLoopEvent;
-import technology.sola.engine.core.use.graphics.gui.SolaGui;
+import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.examples.common.singlefile.AnimationExample;
 import technology.sola.engine.examples.common.singlefile.AudioExample;
 import technology.sola.engine.examples.common.singlefile.GuiExample;
@@ -39,7 +39,7 @@ public class ExampleLauncherSola extends Sola {
 
   @Override
   protected void onInit() {
-    solaGui = SolaGui.use(assetPoolProvider, platform);
+    solaGui = SolaGui.createInstance(assetPoolProvider, platform);
 
     assetPoolProvider.getAssetPool(Font.class)
       .addAssetId(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_18.json");
@@ -52,7 +52,7 @@ public class ExampleLauncherSola extends Sola {
   protected void onRender(Renderer renderer) {
     renderer.clear();
 
-    solaGui.render(renderer);
+    solaGui.render();
   }
 
   private GuiElement<?> buildGui() {
