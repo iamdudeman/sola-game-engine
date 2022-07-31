@@ -1,6 +1,7 @@
 package technology.sola.engine.graphics.gui;
 
-import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.core.use.graphics.SolaGui;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.math.geometry.Rectangle;
@@ -106,7 +107,7 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
   }
 
   @Override
-  void handleKeyEvent(GuiKeyEvent event) {
+  public void handleKeyEvent(GuiKeyEvent event) {
     if (!isFocussed()) {
       return;
     }
@@ -128,7 +129,7 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
   }
 
   @Override
-  void handleMouseEvent(MouseEvent event, String eventType) {
+  public void handleMouseEvent(MouseEvent event, String eventType) {
     T properties = properties();
 
     if (properties.isHidden()) {

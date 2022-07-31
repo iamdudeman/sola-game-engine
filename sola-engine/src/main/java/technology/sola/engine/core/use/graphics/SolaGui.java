@@ -1,9 +1,12 @@
-package technology.sola.engine.graphics.gui;
+package technology.sola.engine.core.use.graphics;
 
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.core.SolaPlatform;
-import technology.sola.engine.core.annotation.SolaUseConfiguration;
-import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.core.use.SolaUse;
+import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
+import technology.sola.engine.graphics.gui.GuiElementProperties;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
@@ -11,7 +14,7 @@ import technology.sola.engine.input.MouseEvent;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-@SolaUseConfiguration
+@SolaUse
 public class SolaGui {
   public final GuiElementGlobalProperties globalProperties = new GuiElementGlobalProperties();
   private final AssetPoolProvider assetPoolProvider;
@@ -94,11 +97,11 @@ public class SolaGui {
     return assetPoolProvider;
   }
 
-  boolean isFocussedElement(GuiElement<?> guiElement) {
+  public boolean isFocussedElement(GuiElement<?> guiElement) {
     return this.focussedElement == guiElement;
   }
 
-  void focusElement(GuiElement<?> guiElement) {
+  public void focusElement(GuiElement<?> guiElement) {
     if (guiElement.properties().isFocusable()) {
       this.focussedElement = guiElement;
     }

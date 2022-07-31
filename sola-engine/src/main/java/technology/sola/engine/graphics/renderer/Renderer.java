@@ -1,7 +1,9 @@
-package technology.sola.engine.graphics;
+package technology.sola.engine.graphics.renderer;
 
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.Font;
+import technology.sola.engine.graphics.AffineTransform;
+import technology.sola.engine.graphics.Color;
 
 import java.util.List;
 

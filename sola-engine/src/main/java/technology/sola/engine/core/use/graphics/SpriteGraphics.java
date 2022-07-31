@@ -1,12 +1,12 @@
-package technology.sola.engine.core.graphics;
+package technology.sola.engine.core.use.graphics;
 
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.Entity;
 import technology.sola.engine.graphics.AffineTransform;
-import technology.sola.engine.graphics.BlendMode;
-import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.renderer.BlendMode;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;

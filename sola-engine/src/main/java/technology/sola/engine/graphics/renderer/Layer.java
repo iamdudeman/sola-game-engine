@@ -1,4 +1,4 @@
-package technology.sola.engine.graphics;
+package technology.sola.engine.graphics.renderer;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;

@@ -2,7 +2,7 @@ package technology.sola.engine.physics.component;
 
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.BlendMode;
+import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.math.linear.Vector2D;
 
 import java.io.Serial;

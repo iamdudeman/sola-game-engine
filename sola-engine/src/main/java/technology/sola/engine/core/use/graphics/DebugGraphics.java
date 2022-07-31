@@ -1,9 +1,9 @@
-package technology.sola.engine.core.graphics;
+package technology.sola.engine.core.use.graphics;
 
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
 import technology.sola.math.geometry.Circle;

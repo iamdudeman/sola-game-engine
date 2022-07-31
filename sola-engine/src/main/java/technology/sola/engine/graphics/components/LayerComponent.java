@@ -1,7 +1,7 @@
 package technology.sola.engine.graphics.components;
 
 import technology.sola.ecs.Component;
-import technology.sola.engine.graphics.Layer;
+import technology.sola.engine.graphics.renderer.Layer;
 
 import java.io.Serial;
 

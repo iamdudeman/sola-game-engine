@@ -1,4 +1,4 @@
-package technology.sola.engine.graphics;
+package technology.sola.engine.graphics.renderer;
 
 public enum BlendMode {
   /**

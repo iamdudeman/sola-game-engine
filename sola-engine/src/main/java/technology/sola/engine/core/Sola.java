@@ -3,7 +3,7 @@ package technology.sola.engine.core;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.event.EventHub;
-import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
 

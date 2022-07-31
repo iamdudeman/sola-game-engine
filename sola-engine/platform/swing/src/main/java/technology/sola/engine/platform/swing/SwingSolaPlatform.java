@@ -7,7 +7,8 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.event.gameloop.GameLoopEventType;
 import technology.sola.engine.assets.graphics.SolaImage;
-import technology.sola.engine.graphics.SoftwareRenderer;
+import technology.sola.engine.graphics.renderer.SoftwareRenderer;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
@@ -33,8 +34,8 @@ import java.util.function.Consumer;
 public class SwingSolaPlatform extends SolaPlatform {
   private final boolean useSoftwareRendering;
   private Canvas canvas;
-  private Consumer<technology.sola.engine.graphics.Renderer> beforeRender;
-  private Consumer<technology.sola.engine.graphics.Renderer> onRender;
+  private Consumer<Renderer> beforeRender;
+  private Consumer<Renderer> onRender;
 
   // For graphics2d rendering
   private Graphics2D graphics2D;
@@ -141,12 +142,12 @@ public class SwingSolaPlatform extends SolaPlatform {
   }
 
   @Override
-  protected void beforeRender(technology.sola.engine.graphics.Renderer renderer) {
+  protected void beforeRender(Renderer renderer) {
     beforeRender.accept(renderer);
   }
 
   @Override
-  protected void onRender(technology.sola.engine.graphics.Renderer renderer) {
+  protected void onRender(Renderer renderer) {
     onRender.accept(renderer);
   }
 
@@ -160,7 +161,7 @@ public class SwingSolaPlatform extends SolaPlatform {
   }
 
   @Override
-  protected technology.sola.engine.graphics.Renderer buildRenderer(SolaConfiguration solaConfiguration) {
+  protected Renderer buildRenderer(SolaConfiguration solaConfiguration) {
     LOGGER.info("Using {} rendering", useSoftwareRendering ? "Software" : "Graphics2D");
 
     return useSoftwareRendering

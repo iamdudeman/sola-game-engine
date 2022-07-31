@@ -1,7 +1,7 @@
 package technology.sola.engine.graphics.components;
 
 import technology.sola.ecs.Component;
-import technology.sola.engine.graphics.BlendMode;
+import technology.sola.engine.graphics.renderer.BlendMode;
 
 import java.io.Serial;
 

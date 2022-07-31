@@ -1,9 +1,9 @@
 package technology.sola.engine.graphics.gui.elements.control;
 
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
-import technology.sola.engine.graphics.gui.SolaGui;
+import technology.sola.engine.core.use.graphics.SolaGui;
 import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseEvent;

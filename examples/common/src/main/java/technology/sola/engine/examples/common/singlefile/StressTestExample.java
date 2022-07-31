@@ -5,12 +5,12 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.ecs.World;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.core.graphics.SolaGraphics;
+import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.core.use.graphics.SolaGraphics;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.physics.Material;
-import technology.sola.engine.physics.SolaPhysics;
+import technology.sola.engine.core.use.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 
