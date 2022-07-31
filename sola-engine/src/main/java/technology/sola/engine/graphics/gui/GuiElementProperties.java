@@ -1,6 +1,6 @@
 package technology.sola.engine.graphics.gui;
 
-import technology.sola.engine.assets.AssetPoolProvider;
+import technology.sola.engine.graphics.Color;
 
 public class GuiElementProperties {
   public final Bounds margin = new Bounds();
@@ -11,14 +11,12 @@ public class GuiElementProperties {
   private int maxWidth;
   private int maxHeight;
   private boolean isLayoutChanged = true;
+  private Color focusOutlineColor = null;
   private boolean isHidden;
+  private boolean isFocusable = true;
 
   public GuiElementProperties(GuiElementGlobalProperties globalProperties) {
     this.globalProperties = globalProperties;
-  }
-
-  public AssetPoolProvider getAssetPoolProvider() {
-    return globalProperties.getAssetPoolProvider();
   }
 
   public boolean isLayoutChanged() {
@@ -37,6 +35,16 @@ public class GuiElementProperties {
 
   public GuiElementProperties setHidden(boolean hidden) {
     isHidden = hidden;
+
+    return this;
+  }
+
+  public boolean isFocusable() {
+    return isFocusable && !isHidden();
+  }
+
+  public GuiElementProperties setFocusable(boolean focusable) {
+    isFocusable = focusable;
 
     return this;
   }
@@ -71,6 +79,16 @@ public class GuiElementProperties {
 
   public int getMaxHeight() {
     return maxHeight;
+  }
+
+  public Color getFocusOutlineColor() {
+    return focusOutlineColor;
+  }
+
+  public GuiElementProperties setFocusOutlineColor(Color focusOutlineColor) {
+    this.focusOutlineColor = focusOutlineColor;
+
+    return this;
   }
 
   public class Bounds {

@@ -2,28 +2,32 @@ package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
+import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class SolaGui {
-  public final GuiElementGlobalProperties globalProperties;
-  private GuiElement<?> root;
+  public final GuiElementGlobalProperties globalProperties = new GuiElementGlobalProperties();
+  private final AssetPoolProvider assetPoolProvider;
+  private GuiElement<?> rootGuiElement;
+  private GuiElement<?> focussedElement;
 
   public SolaGui(AssetPoolProvider assetPoolProvider) {
-    globalProperties = new GuiElementGlobalProperties(assetPoolProvider);
+    this.assetPoolProvider = assetPoolProvider;
   }
 
   public <T extends GuiElement<P>, P extends GuiElementProperties> T createElement(
-    Function<P, T> elementConstructor,
+    GuiElementCreator<T, P> elementCreator,
     Function<GuiElementGlobalProperties, P> elementPropertiesConstructor
   ) {
-    return createElement(elementConstructor, elementPropertiesConstructor, p -> {});
+    return createElement(elementCreator, elementPropertiesConstructor, p -> {});
   }
 
   public <T extends GuiElement<P>, P extends GuiElementProperties> T createElement(
-    Function<P, T> elementConstructor,
+    GuiElementCreator<T, P> elementCreator,
     Function<GuiElementGlobalProperties, P> elementPropertiesConstructor,
     Consumer<P> propertiesInitializer
   ) {
@@ -31,34 +35,65 @@ public class SolaGui {
 
     propertiesInitializer.accept(properties);
 
-    return elementConstructor.apply(properties);
+    return elementCreator.create(this, properties);
   }
 
   public void setGuiRoot(GuiElement<?> guiElement) {
-    this.root = guiElement;
+    this.rootGuiElement = guiElement;
+    this.focusElement(guiElement);
   }
 
   public void render(Renderer renderer) {
-    if (root != null) {
-      root.render(renderer);
+    if (rootGuiElement != null) {
+      rootGuiElement.render(renderer);
+    }
+  }
+
+  public void onKeyPressed(KeyEvent keyEvent) {
+    if (rootGuiElement != null) {
+      rootGuiElement.handleKeyEvent(new GuiKeyEvent(keyEvent, GuiKeyEvent.Type.PRESS));
+    }
+  }
+
+  public void onKeyReleased(KeyEvent keyEvent) {
+    if (rootGuiElement != null) {
+      rootGuiElement.handleKeyEvent(new GuiKeyEvent(keyEvent, GuiKeyEvent.Type.RELEASE));
     }
   }
 
   public void onMousePressed(MouseEvent event) {
-    if (root != null) {
-      root.handleMouseEvent(event, "press");
+    if (rootGuiElement != null) {
+      rootGuiElement.handleMouseEvent(event, "press");
     }
   }
 
   public void onMouseReleased(MouseEvent event) {
-    if (root != null) {
-      root.handleMouseEvent(event, "release");
+    if (rootGuiElement != null) {
+      rootGuiElement.handleMouseEvent(event, "release");
     }
   }
 
   public void onMouseMoved(MouseEvent event) {
-    if (root != null) {
-      root.handleMouseEvent(event, "move");
+    if (rootGuiElement != null) {
+      rootGuiElement.handleMouseEvent(event, "move");
     }
+  }
+
+  public AssetPoolProvider getAssetPoolProvider() {
+    return assetPoolProvider;
+  }
+
+  boolean isFocussedElement(GuiElement<?> guiElement) {
+    return this.focussedElement == guiElement;
+  }
+
+  void focusElement(GuiElement<?> guiElement) {
+    if (guiElement.properties().isFocusable()) {
+      this.focussedElement = guiElement;
+    }
+  }
+
+  public interface GuiElementCreator<T extends GuiElement<P>, P extends GuiElementProperties> {
+    T create(SolaGui solaGui, P properties);
   }
 }

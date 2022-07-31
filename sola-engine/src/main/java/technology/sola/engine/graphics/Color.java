@@ -4,8 +4,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
-// TODO can probably be a record now
-
 public class Color implements Serializable {
   public static final Color BLACK = new Color(255, 0, 0, 0);
   public static final Color BLANK = new Color(0, 0, 0, 0);
@@ -13,6 +11,7 @@ public class Color implements Serializable {
   public static final Color GREEN = new Color(255, 0, 255, 0);
   public static final Color ORANGE = new Color(255, 255, 165, 0);
   public static final Color RED = new Color(255, 255, 0, 0);
+  public static final Color LIGHT_BLUE = new Color(255, 173, 216, 230);
   public static final Color YELLOW = new Color(255, 255, 255, 0);
   public static final Color WHITE = new Color(255, 255, 255, 255);
 

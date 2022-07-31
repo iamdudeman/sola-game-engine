@@ -3,24 +3,32 @@ package technology.sola.engine.graphics.gui.elements.control;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
+import technology.sola.engine.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
+import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseEvent;
 
 import java.util.function.Consumer;
 
 public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Properties> {
-  private Consumer<MouseEvent> onClickConsumer = event -> {};
+  private Runnable onActionConsumer = () -> {};
 
   private boolean wasMouseDownInside = false;
   private boolean isHovered = false;
 
-  public ButtonGuiElement(Properties properties) {
-    super(properties);
+  public ButtonGuiElement(SolaGui solaGui, Properties properties) {
+    super(solaGui, properties);
 
     setOnMouseEnterCallback(event -> {});
     setOnMouseExitCallback(event -> {});
     setOnMouseDownCallback(event -> {});
     setOnMouseUpCallback(event -> {});
+    setOnKeyPressCallback(keyEvent -> {
+      if (keyEvent.getKeyCode() == Key.ENTER.getCode()) {
+        onActionConsumer.run();
+        keyEvent.stopPropagation();
+      }
+    });
   }
 
   @Override
@@ -73,14 +81,15 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
     super.setOnMouseUpCallback(event -> {
       callback.accept(event);
       if (wasMouseDownInside) {
-        onClickConsumer.accept(event);
+        requestFocus();
+        onActionConsumer.run();
         wasMouseDownInside = false;
       }
     });
   }
 
-  public void setOnClick(Consumer<MouseEvent> onClickConsumer) {
-    this.onClickConsumer = onClickConsumer;
+  public void setOnAction(Runnable onActionConsumer) {
+    this.onActionConsumer = onActionConsumer;
   }
 
   public static class Properties extends BaseTextGuiElement.Properties {
@@ -92,6 +101,8 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
 
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
+      setFocusable(true);
+      setFocusOutlineColor(Color.LIGHT_BLUE);
     }
 
     public Color getColorBackground() {

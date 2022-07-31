@@ -1,6 +1,7 @@
 package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
@@ -8,8 +9,11 @@ import technology.sola.math.linear.Vector2D;
 import java.util.function.Consumer;
 
 public abstract class GuiElement<T extends GuiElementProperties> {
+  protected final SolaGui solaGui;
   protected final T properties;
 
+  private Consumer<GuiKeyEvent> onKeyPressCallback;
+  private Consumer<GuiKeyEvent> onKeyReleaseCallback;
   private Consumer<MouseEvent> onMouseEnterCallback;
   private Consumer<MouseEvent> onMouseExitCallback;
   private Consumer<MouseEvent> onMouseDownCallback;
@@ -17,7 +21,8 @@ public abstract class GuiElement<T extends GuiElementProperties> {
 
   private boolean wasMouseOverElement = false;
 
-  public GuiElement(T properties) {
+  public GuiElement(SolaGui solaGui, T properties) {
+    this.solaGui = solaGui;
     this.properties = properties;
   }
 
@@ -44,32 +49,39 @@ public abstract class GuiElement<T extends GuiElementProperties> {
 
     if (!properties.isHidden()) {
       renderSelf(renderer, properties.getX(), properties.getY());
+
+      if (properties.getFocusOutlineColor() != null && isFocussed()) {
+        renderer.drawRect(properties().getX() - 1, properties.getY() - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
+      }
     }
   }
 
-  public void handleMouseEvent(MouseEvent event, String eventType) {
-    T properties = properties();
+  public boolean isFocussed() {
+    return solaGui.isFocussedElement(this);
+  }
 
-    if (properties.isHidden()) {
-      return;
+  public void requestFocus() {
+    solaGui.focusElement(this);
+  }
+
+  public void onKeyPress(GuiKeyEvent keyEvent) {
+    if (onKeyPressCallback != null) {
+      onKeyPressCallback.accept(keyEvent);
     }
+  }
 
-    int x = properties.getX();
-    int y = properties.getY();
-    int width = getWidth();
-    int height = getHeight();
+  public void setOnKeyPressCallback(Consumer<GuiKeyEvent> onKeyPressCallback) {
+    this.onKeyPressCallback = onKeyPressCallback;
+  }
 
-    Rectangle guiElementBounds = new Rectangle(new Vector2D(x, y), new Vector2D(x + width, y + height));
-
-    if (guiElementBounds.contains(new Vector2D(event.x(), event.y()))) {
-      switch (eventType) {
-        case "press" -> onMouseDown(event);
-        case "release" -> onMouseUp(event);
-        case "move" -> onMouseEnter(event);
-      }
-    } else {
-      onMouseExit(event);
+  public void onKeyRelease(GuiKeyEvent keyEvent) {
+    if (onKeyReleaseCallback != null) {
+      onKeyReleaseCallback.accept(keyEvent);
     }
+  }
+
+  public void setOnKeyReleaseCallback(Consumer<GuiKeyEvent> onKeyReleaseCallback) {
+    this.onKeyReleaseCallback = onKeyReleaseCallback;
   }
 
   public void onMouseEnter(MouseEvent mouseEvent) {
@@ -116,5 +128,41 @@ public abstract class GuiElement<T extends GuiElementProperties> {
 
   public T properties() {
     return properties;
+  }
+
+  void handleKeyEvent(GuiKeyEvent event) {
+    if (!isFocussed()) {
+      return;
+    }
+
+    switch (event.getType()) {
+      case PRESS -> onKeyPress(event);
+      case RELEASE -> onKeyRelease(event);
+    }
+  }
+
+  void handleMouseEvent(MouseEvent event, String eventType) {
+    T properties = properties();
+
+    if (properties.isHidden()) {
+      return;
+    }
+
+    int x = properties.getX();
+    int y = properties.getY();
+    int width = getWidth();
+    int height = getHeight();
+
+    Rectangle guiElementBounds = new Rectangle(new Vector2D(x, y), new Vector2D(x + width, y + height));
+
+    if (guiElementBounds.contains(new Vector2D(event.x(), event.y()))) {
+      switch (eventType) {
+        case "press" -> onMouseDown(event);
+        case "release" -> onMouseUp(event);
+        case "move" -> onMouseEnter(event);
+      }
+    } else {
+      onMouseExit(event);
+    }
   }
 }

@@ -6,10 +6,39 @@ import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementContainer;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.GuiElementProperties;
+import technology.sola.engine.graphics.gui.SolaGui;
+import technology.sola.engine.input.Key;
+
+import java.util.List;
 
 public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElementContainer.Properties> {
-  public StreamGuiElementContainer(Properties properties) {
-    super(properties);
+  public StreamGuiElementContainer(SolaGui solaGui, Properties properties) {
+    super(solaGui, properties);
+
+    setOnKeyPressCallback(keyEvent -> {
+      int forwardKeyCode = properties.direction == Direction.HORIZONTAL ? Key.RIGHT.getCode() : Key.DOWN.getCode();
+      int backwardKeyCode = properties.direction == Direction.HORIZONTAL ? Key.LEFT.getCode() : Key.UP.getCode();
+
+      if (keyEvent.getKeyCode() == forwardKeyCode) {
+        List<GuiElement<?>> focusableChildren = getFocusableChildren();
+        int nextFocussedIndex = findFocussedChild(focusableChildren) + 1;
+
+        if (nextFocussedIndex < focusableChildren.size()) {
+          focusableChildren.get(nextFocussedIndex).requestFocus();
+          keyEvent.stopPropagation();
+        }
+      }
+
+      if (keyEvent.getKeyCode() == backwardKeyCode) {
+        List<GuiElement<?>> focusableChildren = getFocusableChildren();
+        int nextFocussedIndex = findFocussedChild(focusableChildren) - 1;
+
+        if (nextFocussedIndex >= 0) {
+          focusableChildren.get(nextFocussedIndex).requestFocus();
+          keyEvent.stopPropagation();
+        }
+      }
+    });
   }
 
   @Override
@@ -57,6 +86,20 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     }
 
     properties.setLayoutChanged(false);
+  }
+
+  private int findFocussedChild(List<GuiElement<?>> children) {
+    int focussedIndex = 0;
+
+    for (GuiElement<?> child : children) {
+      if (child.isFocussed()) {
+        return focussedIndex;
+      }
+
+      focussedIndex++;
+    }
+
+    return -1;
   }
 
   public static class Properties extends GuiElementProperties {
