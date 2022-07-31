@@ -2,9 +2,8 @@
 
 
 # TODO List
-* Audio
-  * Interface for type
-  * Implement loader per platform (Swing and JavaFX can probably share though)
+* Cleanup
+  * Move Asset related files under asset package maybe?
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
   * More BlendMode implementations
@@ -22,6 +21,7 @@
   * Improve performance (StressTestExample can't handle a lot of objects)
   * Implement Font loading
   * Implement SpriteSheet loading
+  * Implement Audio loading
   * Implement window resizing using Viewport
 * Research Virtual File System
 * Build pipeline

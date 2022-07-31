@@ -20,6 +20,7 @@ import technology.sola.engine.graphics.impl.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.platform.javafx.assets.AudiClipAssetPool;
 import technology.sola.engine.platform.javafx.assets.FontAssetPool;
 import technology.sola.engine.platform.javafx.assets.SolaImageAssetPool;
 import technology.sola.engine.platform.javafx.assets.SpriteSheetAssetPool;
@@ -145,6 +146,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     assetPoolProvider.addAssetPool(solaImageAssetPool);
     assetPoolProvider.addAssetPool(new FontAssetPool(solaImageAssetPool));
     assetPoolProvider.addAssetPool(new SpriteSheetAssetPool(solaImageAssetPool));
+    assetPoolProvider.addAssetPool(new AudiClipAssetPool());
   }
 
   @Override
