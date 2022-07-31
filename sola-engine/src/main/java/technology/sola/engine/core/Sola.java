@@ -4,14 +4,12 @@ import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.gui.SolaGui;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
 
 public abstract class Sola {
   protected SolaPlatform platform;
   protected SolaEcs solaEcs;
-  protected SolaGui solaGui;
   protected EventHub eventHub;
   protected KeyboardInput keyboardInput;
   protected MouseInput mouseInput;
@@ -23,7 +21,6 @@ public abstract class Sola {
     keyboardInput = new KeyboardInput();
     mouseInput = new MouseInput();
     assetPoolProvider = new AssetPoolProvider();
-    solaGui = new SolaGui(assetPoolProvider);
   }
 
   protected abstract SolaConfiguration getConfiguration();
@@ -41,26 +38,11 @@ public abstract class Sola {
   void initializeForPlatform(SolaPlatform platform) {
     this.platform = platform;
 
-    platform.onKeyPressed(event -> {
-      keyboardInput.keyPressed(event);
-      solaGui.onKeyPressed(event);
-    });
-    platform.onKeyReleased(event -> {
-      keyboardInput.keyReleased(event);
-      solaGui.onKeyReleased(event);
-    });
-    platform.onMouseMoved(event -> {
-      mouseInput.onMouseMoved(event);
-      solaGui.onMouseMoved(event);
-    });
-    platform.onMousePressed(event -> {
-      mouseInput.onMousePressed(event);
-      solaGui.onMousePressed(event);
-    });
-    platform.onMouseReleased(event -> {
-      mouseInput.onMouseReleased(event);
-      solaGui.onMouseReleased(event);
-    });
+    platform.onKeyPressed(event -> keyboardInput.keyPressed(event));
+    platform.onKeyReleased(event -> keyboardInput.keyReleased(event));
+    platform.onMouseMoved(event -> mouseInput.onMouseMoved(event));
+    platform.onMousePressed(event -> mouseInput.onMousePressed(event));
+    platform.onMouseReleased(event -> mouseInput.onMouseReleased(event));
 
     onInit();
   }

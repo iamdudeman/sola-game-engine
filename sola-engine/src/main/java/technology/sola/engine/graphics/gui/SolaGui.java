@@ -1,6 +1,8 @@
 package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.assets.AssetPoolProvider;
+import technology.sola.engine.core.SolaPlatform;
+import technology.sola.engine.core.annotation.SolaUseConfiguration;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.input.KeyEvent;
@@ -9,14 +11,23 @@ import technology.sola.engine.input.MouseEvent;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+@SolaUseConfiguration
 public class SolaGui {
   public final GuiElementGlobalProperties globalProperties = new GuiElementGlobalProperties();
   private final AssetPoolProvider assetPoolProvider;
   private GuiElement<?> rootGuiElement;
   private GuiElement<?> focussedElement;
 
-  public SolaGui(AssetPoolProvider assetPoolProvider) {
-    this.assetPoolProvider = assetPoolProvider;
+  public static SolaGui use(AssetPoolProvider assetPoolProvider, SolaPlatform platform) {
+    SolaGui solaGui = new SolaGui(assetPoolProvider);
+
+    platform.onKeyPressed(solaGui::onKeyPressed);
+    platform.onKeyReleased(solaGui::onKeyReleased);
+    platform.onMouseMoved(solaGui::onMouseMoved);
+    platform.onMousePressed(solaGui::onMousePressed);
+    platform.onMouseReleased(solaGui::onMouseReleased);
+
+    return solaGui;
   }
 
   public <T extends GuiElement<P>, P extends GuiElementProperties> T createElement(
@@ -91,6 +102,10 @@ public class SolaGui {
     if (guiElement.properties().isFocusable()) {
       this.focussedElement = guiElement;
     }
+  }
+
+  private SolaGui(AssetPoolProvider assetPoolProvider) {
+    this.assetPoolProvider = assetPoolProvider;
   }
 
   public interface GuiElementCreator<T extends GuiElement<P>, P extends GuiElementProperties> {

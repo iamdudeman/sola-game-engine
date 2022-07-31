@@ -2,6 +2,7 @@ package technology.sola.engine.core.graphics;
 
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.AssetPoolProvider;
+import technology.sola.engine.core.annotation.SolaUseConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.graphics.Renderer;
@@ -13,6 +14,7 @@ import technology.sola.math.linear.Vector2D;
 
 import java.util.Comparator;
 
+@SolaUseConfiguration
 public class SolaGraphics {
   private static final TransformComponent DEFAULT_CAMERA_TRANSFORM = new TransformComponent();
   private final SolaEcs solaEcs;

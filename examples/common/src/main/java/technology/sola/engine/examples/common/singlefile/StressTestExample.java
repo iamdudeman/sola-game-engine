@@ -10,7 +10,7 @@ import technology.sola.engine.core.graphics.SolaGraphics;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.physics.Material;
-import technology.sola.engine.graphics.physics.SolaPhysics;
+import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 

@@ -8,11 +8,14 @@ import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
+import technology.sola.engine.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
 
 public class AudioExample extends Sola {
+  private SolaGui solaGui;
+
   @Override
   protected SolaConfiguration getConfiguration() {
     return new SolaConfiguration("Gui Example", 800, 600, 30, true);
@@ -20,6 +23,8 @@ public class AudioExample extends Sola {
 
   @Override
   protected void onInit() {
+    solaGui = SolaGui.use(assetPoolProvider, platform);
+
     assetPoolProvider.getAssetPool(Font.class)
       .addAssetId(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_18.json");
 

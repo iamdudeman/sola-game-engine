@@ -7,7 +7,7 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.graphics.GraphicsUtils;
 import technology.sola.engine.core.graphics.SolaGraphics;
-import technology.sola.engine.graphics.physics.SolaPhysics;
+import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;

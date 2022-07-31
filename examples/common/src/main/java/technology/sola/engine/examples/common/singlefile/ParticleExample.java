@@ -5,7 +5,7 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.graphics.SolaGraphics;
-import technology.sola.engine.graphics.physics.SolaPhysics;
+import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.BlendMode;
 import technology.sola.engine.graphics.Renderer;

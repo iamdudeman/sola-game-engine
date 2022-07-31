@@ -87,7 +87,6 @@ public class RenderingExample extends Sola {
       renderer.drawString("Hello world!", 182, 67, Color.BLUE);
       renderer.setBlendMode(BlendMode.NO_BLENDING);
     });
-    renderer.drawToLayer("ui", solaGui::render);
   }
 
   private record MovingComponent() implements Component {
