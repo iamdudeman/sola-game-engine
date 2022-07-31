@@ -6,9 +6,9 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.use.graphics.SolaGraphics;
-import technology.sola.engine.graphics.components.SpriteAnimatorComponent;
-import technology.sola.engine.graphics.components.SpriteComponent;
-import technology.sola.engine.graphics.components.SpriteKeyFrame;
+import technology.sola.engine.graphics.components.sprite.SpriteAnimatorComponent;
+import technology.sola.engine.graphics.components.sprite.SpriteComponent;
+import technology.sola.engine.graphics.components.sprite.SpriteKeyFrame;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 

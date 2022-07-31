@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import technology.sola.engine.editor.core.FolderUtils;
 import technology.sola.engine.editor.core.SolaEditorContext;
 import technology.sola.engine.editor.ui.ecs.ComponentController;
-import technology.sola.engine.graphics.components.SpriteComponent;
+import technology.sola.engine.graphics.components.sprite.SpriteComponent;
 import technology.sola.json.JsonArray;
 import technology.sola.json.SolaJson;
 

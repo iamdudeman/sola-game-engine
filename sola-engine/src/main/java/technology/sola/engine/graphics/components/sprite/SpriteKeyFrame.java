@@ -1,4 +1,4 @@
-package technology.sola.engine.graphics.components;
+package technology.sola.engine.graphics.components.sprite;
 
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.graphics.SolaImage;
@@ -7,8 +7,6 @@ import technology.sola.engine.graphics.exception.SpriteNotFoundException;
 
 import java.io.Serial;
 import java.io.Serializable;
-
-// TODO consider making this a sub class of SpriteComponent
 
 public class SpriteKeyFrame implements Serializable {
   @Serial
