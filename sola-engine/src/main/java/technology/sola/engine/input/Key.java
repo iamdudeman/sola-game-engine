@@ -6,7 +6,10 @@ public enum Key {
   ESCAPE(0x1B, "Escape"),
   //
   SPACE(0x20, "Space"),
-  //
+  PAGE_UP(0x21, "Page Up"),
+  PAGE_DOWN(0x22, "Page Down"),
+  END(0x23, "End"),
+  HOME(0x24, "Home"),
   LEFT(0x25, "Left"),
   UP(0x26, "Up"),
   RIGHT(0x27, "Right"),
@@ -31,7 +34,7 @@ public enum Key {
   W(0x57, "W"),
   X(0x58, "X"),
   Y(0x59, "Y"),
-  Z(0x5A, "Z")
+  Z(0x5A, "Z"),
   ;
 
   private final int code;
