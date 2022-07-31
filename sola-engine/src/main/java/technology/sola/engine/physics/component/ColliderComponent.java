@@ -1,7 +1,7 @@
 package technology.sola.engine.physics.component;
 
-import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.ecs.Component;
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;

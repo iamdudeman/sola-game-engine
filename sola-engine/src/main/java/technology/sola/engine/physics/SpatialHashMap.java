@@ -1,11 +1,17 @@
 package technology.sola.engine.physics;
 
-import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.ecs.Entity;
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.math.linear.Vector2D;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public class SpatialHashMap {
   private final int cellSize;
