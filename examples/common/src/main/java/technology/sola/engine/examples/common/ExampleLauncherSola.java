@@ -5,6 +5,7 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.examples.common.singlefile.AnimationExample;
+import technology.sola.engine.examples.common.singlefile.AudioExample;
 import technology.sola.engine.examples.common.singlefile.GuiExample;
 import technology.sola.engine.examples.common.singlefile.MouseAndCameraExample;
 import technology.sola.engine.examples.common.singlefile.ParticleExample;
@@ -63,6 +64,7 @@ public class ExampleLauncherSola extends Sola {
       p -> p.setText("Select an example to launch").margin.setBottom(15)
     ));
     rootElement.addChild(buildExampleLaunchButton("Animation", AnimationExample::new));
+    rootElement.addChild(buildExampleLaunchButton("Audio", AudioExample::new));
     rootElement.addChild(buildExampleLaunchButton("Gui", GuiExample::new));
     rootElement.addChild(buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new));
     rootElement.addChild(buildExampleLaunchButton("Particle", ParticleExample::new));

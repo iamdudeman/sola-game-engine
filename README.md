@@ -1,9 +1,9 @@
 # Branch WIP
-* Audio
-  * Interface for type
-  * Implement loader per platform (Swing and JavaFX can probably share though)
+
 
 # TODO List
+* Audio
+  * Volume controls
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
   * More BlendMode implementations
