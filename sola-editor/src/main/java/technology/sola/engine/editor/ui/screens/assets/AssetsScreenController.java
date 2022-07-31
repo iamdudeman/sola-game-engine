@@ -4,13 +4,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import technology.sola.engine.editor.ui.control.FileTreeView;
 import technology.sola.engine.editor.core.FolderUtils;
+import technology.sola.engine.editor.core.SolaEditorContext;
+import technology.sola.engine.editor.ui.control.FileTreeView;
+import technology.sola.engine.editor.ui.dialog.NewFontDialog;
 import technology.sola.engine.editor.ui.dialog.NewMaterialDialog;
 import technology.sola.engine.editor.ui.dialog.NewSpriteSheetDialog;
 import technology.sola.engine.editor.ui.screens.SolaEditorScreen;
-import technology.sola.engine.editor.core.SolaEditorContext;
-import technology.sola.engine.editor.ui.dialog.NewFontDialog;
 
 import java.io.File;
 
