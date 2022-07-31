@@ -1,4 +1,4 @@
-package technology.sola.engine.event.gameloop;
+package technology.sola.engine.core.event;
 
 import technology.sola.engine.event.Event;
 

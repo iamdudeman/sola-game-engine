@@ -1,7 +1,7 @@
 package technology.sola.engine.core;
 
+import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.event.EventHub;
-import technology.sola.engine.event.gameloop.GameLoopEvent;
 
 import java.util.function.Consumer;
 

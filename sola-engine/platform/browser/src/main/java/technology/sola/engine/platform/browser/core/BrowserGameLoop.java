@@ -1,8 +1,8 @@
 package technology.sola.engine.platform.browser.core;
 
 import technology.sola.engine.core.GameLoop;
+import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.event.EventHub;
-import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.platform.browser.javascript.JsUtils;
 
 import java.util.function.Consumer;
