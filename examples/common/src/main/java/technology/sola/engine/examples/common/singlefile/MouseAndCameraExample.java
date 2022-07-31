@@ -1,15 +1,15 @@
 package technology.sola.engine.examples.common.singlefile;
 
+import technology.sola.ecs.EcsSystem;
+import technology.sola.ecs.World;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.ecs.EcsSystem;
-import technology.sola.ecs.World;
-import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.core.use.graphics.SolaGraphics;
+import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.math.linear.Vector2D;

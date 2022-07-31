@@ -2,13 +2,13 @@ package technology.sola.engine.platform.swing;
 
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.AssetPoolProvider;
-import technology.sola.engine.core.SolaPlatform;
+import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.event.gameloop.GameLoopEventType;
-import technology.sola.engine.assets.graphics.SolaImage;
-import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;

@@ -1,8 +1,10 @@
 package technology.sola.engine.examples.common;
 
+import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
+import technology.sola.engine.core.use.graphics.SolaGui;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.examples.common.singlefile.AnimationExample;
 import technology.sola.engine.examples.common.singlefile.AudioExample;
@@ -13,14 +15,12 @@ import technology.sola.engine.examples.common.singlefile.RenderingExample;
 import technology.sola.engine.examples.common.singlefile.SimplePlatformerExample;
 import technology.sola.engine.examples.common.singlefile.StressTestExample;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.renderer.Renderer;
-import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
-import technology.sola.engine.core.use.graphics.SolaGui;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
+import technology.sola.engine.graphics.renderer.Renderer;
 
 import java.util.function.Supplier;
 

@@ -1,24 +1,24 @@
 package technology.sola.engine.examples.common.singlefile;
 
+import technology.sola.ecs.Component;
+import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
+import technology.sola.ecs.World;
+import technology.sola.engine.assets.graphics.SpriteSheet;
+import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.ecs.EcsSystem;
-import technology.sola.ecs.Component;
-import technology.sola.ecs.World;
-import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.renderer.Layer;
-import technology.sola.engine.graphics.renderer.BlendMode;
-import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.core.use.graphics.SolaGraphics;
+import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
-import technology.sola.engine.assets.graphics.font.Font;
+import technology.sola.engine.graphics.renderer.BlendMode;
+import technology.sola.engine.graphics.renderer.Layer;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
-import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.input.Key;
 import technology.sola.math.linear.Vector2D;
 
