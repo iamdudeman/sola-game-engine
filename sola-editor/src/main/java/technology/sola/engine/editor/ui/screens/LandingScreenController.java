@@ -8,7 +8,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.editor.core.FolderUtils;
 import technology.sola.engine.editor.core.SolaEditorContext;
 import technology.sola.engine.editor.ui.dialog.ProjectSettingsDialog;

@@ -1,23 +1,23 @@
 package technology.sola.engine.editor.core;
 
 import javafx.scene.control.MultipleSelectionModel;
-import technology.sola.engine.assets.AssetPool;
-import technology.sola.engine.core.Sola;
-import technology.sola.engine.core.SolaConfiguration;
-import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.core.graphics.GraphicsUtils;
-import technology.sola.engine.core.graphics.SolaGraphics;
-import technology.sola.engine.core.physics.SolaPhysics;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
-import technology.sola.engine.event.gameloop.GameLoopEvent;
+import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.graphics.SpriteSheet;
+import technology.sola.engine.assets.graphics.font.Font;
+import technology.sola.engine.core.Sola;
+import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.core.event.GameLoopEvent;
+import technology.sola.engine.core.module.graphics.GraphicsUtils;
+import technology.sola.engine.core.module.graphics.SolaGraphics;
+import technology.sola.engine.core.module.physics.SolaPhysics;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
-import technology.sola.engine.graphics.font.Font;
-import technology.sola.engine.graphics.sprite.SpriteSheet;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.math.geometry.Rectangle;
@@ -84,8 +84,8 @@ public class EditorSola extends Sola {
   @Override
   protected void onInit() {
     // TODO get assets based on project structure (might need this for all Sola [think VirtualFileSystem of sorts maybe])
-    SolaPhysics.use(eventHub, solaEcs);
-    solaGraphics = SolaGraphics.use(solaEcs, platform.getRenderer(), assetPoolProvider);
+    SolaPhysics.createInstance(eventHub, solaEcs);
+    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetPoolProvider);
 
     stopPreview();
 

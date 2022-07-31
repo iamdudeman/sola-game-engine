@@ -1,16 +1,16 @@
 package technology.sola.engine.examples.common.singlefile;
 
+import technology.sola.ecs.World;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.ecs.World;
+import technology.sola.engine.core.module.graphics.SolaGraphics;
+import technology.sola.engine.core.module.physics.SolaPhysics;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.core.graphics.SolaGraphics;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.Material;
-import technology.sola.engine.core.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 
@@ -34,8 +34,8 @@ public class StressTestExample extends Sola {
 
   @Override
   protected void onInit() {
-    SolaPhysics.use(eventHub, solaEcs);
-    solaGraphics = SolaGraphics.use(solaEcs, platform.getRenderer(), assetPoolProvider);
+    SolaPhysics.createInstance(eventHub, solaEcs);
+    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetPoolProvider);
 
     solaGraphics.setRenderDebug(true);
 

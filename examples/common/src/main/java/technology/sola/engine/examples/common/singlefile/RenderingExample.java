@@ -1,24 +1,24 @@
 package technology.sola.engine.examples.common.singlefile;
 
+import technology.sola.ecs.Component;
+import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
+import technology.sola.ecs.World;
+import technology.sola.engine.assets.graphics.SpriteSheet;
+import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.ecs.EcsSystem;
-import technology.sola.ecs.Component;
-import technology.sola.ecs.World;
+import technology.sola.engine.core.module.graphics.SolaGraphics;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.Layer;
-import technology.sola.engine.graphics.BlendMode;
-import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.core.graphics.SolaGraphics;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
-import technology.sola.engine.graphics.components.SpriteComponent;
-import technology.sola.engine.graphics.font.Font;
+import technology.sola.engine.graphics.components.sprite.SpriteComponent;
+import technology.sola.engine.graphics.renderer.BlendMode;
+import technology.sola.engine.graphics.renderer.Layer;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
-import technology.sola.engine.graphics.sprite.SpriteSheet;
 import technology.sola.engine.input.Key;
 import technology.sola.math.linear.Vector2D;
 
@@ -36,7 +36,7 @@ public class RenderingExample extends Sola {
 
   @Override
   protected void onInit() {
-    solaGraphics = SolaGraphics.use(solaEcs, platform.getRenderer(), assetPoolProvider);
+    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetPoolProvider);
 
     assetPoolProvider.getAssetPool(SpriteSheet.class)
       .addAssetId("test", "assets/test_tiles_spritesheet.json");
@@ -87,7 +87,6 @@ public class RenderingExample extends Sola {
       renderer.drawString("Hello world!", 182, 67, Color.BLUE);
       renderer.setBlendMode(BlendMode.NO_BLENDING);
     });
-    renderer.drawToLayer("ui", solaGui::render);
   }
 
   private record MovingComponent() implements Component {

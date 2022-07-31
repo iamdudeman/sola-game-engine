@@ -1,13 +1,13 @@
 package technology.sola.engine.platform.browser.core;
 
 import org.teavm.jso.JSBody;
+import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.Layer;
-import technology.sola.engine.graphics.BlendMode;
-import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.SolaImage;
-import technology.sola.engine.graphics.font.Font;
+import technology.sola.engine.graphics.renderer.BlendMode;
+import technology.sola.engine.graphics.renderer.Layer;
+import technology.sola.engine.graphics.renderer.Renderer;
 
 import java.io.Serial;
 import java.util.ArrayList;

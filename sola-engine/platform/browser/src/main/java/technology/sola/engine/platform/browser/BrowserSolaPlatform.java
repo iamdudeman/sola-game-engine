@@ -1,12 +1,12 @@
 package technology.sola.engine.platform.browser;
 
 import technology.sola.engine.assets.AssetPoolProvider;
-import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.SolaConfiguration;
-import technology.sola.engine.event.gameloop.GameLoopEvent;
+import technology.sola.engine.core.SolaPlatform;
+import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.impl.SoftwareRenderer;
+import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.platform.browser.assets.SolaImageAssetPool;

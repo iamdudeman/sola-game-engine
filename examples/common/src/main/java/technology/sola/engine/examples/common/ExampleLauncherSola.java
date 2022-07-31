@@ -1,9 +1,11 @@
 package technology.sola.engine.examples.common;
 
+import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
-import technology.sola.engine.event.gameloop.GameLoopEvent;
+import technology.sola.engine.core.event.GameLoopEvent;
+import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.examples.common.singlefile.AnimationExample;
 import technology.sola.engine.examples.common.singlefile.AudioExample;
 import technology.sola.engine.examples.common.singlefile.GuiExample;
@@ -13,18 +15,18 @@ import technology.sola.engine.examples.common.singlefile.RenderingExample;
 import technology.sola.engine.examples.common.singlefile.SimplePlatformerExample;
 import technology.sola.engine.examples.common.singlefile.StressTestExample;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
+import technology.sola.engine.graphics.renderer.Renderer;
 
 import java.util.function.Supplier;
 
 public class ExampleLauncherSola extends Sola {
   private final SolaPlatform solaPlatform;
+  private SolaGui solaGui;
 
   public ExampleLauncherSola(SolaPlatform solaPlatform) {
     this.solaPlatform = solaPlatform;
@@ -37,6 +39,8 @@ public class ExampleLauncherSola extends Sola {
 
   @Override
   protected void onInit() {
+    solaGui = SolaGui.createInstance(assetPoolProvider, platform);
+
     assetPoolProvider.getAssetPool(Font.class)
       .addAssetId(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_18.json");
 
@@ -48,7 +52,7 @@ public class ExampleLauncherSola extends Sola {
   protected void onRender(Renderer renderer) {
     renderer.clear();
 
-    solaGui.render(renderer);
+    solaGui.render();
   }
 
   private GuiElement<?> buildGui() {

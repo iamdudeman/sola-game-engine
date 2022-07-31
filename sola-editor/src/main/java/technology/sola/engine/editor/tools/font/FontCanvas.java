@@ -1,6 +1,6 @@
 package technology.sola.engine.editor.tools.font;
 
-import technology.sola.engine.graphics.font.FontGlyph;
+import technology.sola.engine.assets.graphics.font.FontGlyph;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

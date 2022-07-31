@@ -3,7 +3,7 @@ package technology.sola.engine.platform.javafx.assets;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelFormat;
 import technology.sola.engine.assets.AssetPool;
-import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.assets.graphics.SolaImage;
 
 import java.io.File;
 

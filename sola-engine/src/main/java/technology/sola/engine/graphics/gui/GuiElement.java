@@ -1,7 +1,8 @@
 package technology.sola.engine.graphics.gui;
 
-import technology.sola.engine.graphics.Renderer;
+import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
@@ -130,7 +131,7 @@ public abstract class GuiElement<T extends GuiElementProperties> {
     return properties;
   }
 
-  void handleKeyEvent(GuiKeyEvent event) {
+  public void handleKeyEvent(GuiKeyEvent event) {
     if (!isFocussed()) {
       return;
     }
@@ -141,7 +142,7 @@ public abstract class GuiElement<T extends GuiElementProperties> {
     }
   }
 
-  void handleMouseEvent(MouseEvent event, String eventType) {
+  public void handleMouseEvent(MouseEvent event, String eventType) {
     T properties = properties();
 
     if (properties.isHidden()) {

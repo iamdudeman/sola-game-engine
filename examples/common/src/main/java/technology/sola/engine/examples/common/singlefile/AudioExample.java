@@ -1,18 +1,21 @@
 package technology.sola.engine.examples.common.singlefile;
 
 import technology.sola.engine.assets.audio.AudioClip;
+import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.font.Font;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
+import technology.sola.engine.graphics.renderer.Renderer;
 
 public class AudioExample extends Sola {
+  private SolaGui solaGui;
+
   @Override
   protected SolaConfiguration getConfiguration() {
     return new SolaConfiguration("Gui Example", 800, 600, 30, true);
@@ -20,6 +23,8 @@ public class AudioExample extends Sola {
 
   @Override
   protected void onInit() {
+    solaGui = SolaGui.createInstance(assetPoolProvider, platform);
+
     assetPoolProvider.getAssetPool(Font.class)
       .addAssetId(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_18.json");
 
@@ -36,7 +41,7 @@ public class AudioExample extends Sola {
   protected void onRender(Renderer renderer) {
     renderer.clear();
 
-    solaGui.render(renderer);
+    solaGui.render();
   }
 
   private GuiElement<?> buildGui(AudioClip audioClip) {

@@ -1,9 +1,9 @@
 package technology.sola.engine.editor.tools.font;
 
-import technology.sola.engine.graphics.font.FontGlyph;
-import technology.sola.engine.graphics.font.FontInfo;
-import technology.sola.engine.graphics.font.FontStyle;
-import technology.sola.engine.graphics.font.mapper.FontInfoJsonMapper;
+import technology.sola.engine.assets.graphics.font.FontGlyph;
+import technology.sola.engine.assets.graphics.font.FontInfo;
+import technology.sola.engine.assets.graphics.font.FontStyle;
+import technology.sola.engine.assets.graphics.font.mapper.FontInfoJsonMapper;
 import technology.sola.json.SolaJson;
 
 import javax.imageio.ImageIO;

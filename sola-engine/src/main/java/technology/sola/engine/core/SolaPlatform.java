@@ -2,12 +2,12 @@ package technology.sola.engine.core;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.ecs.io.Base64WorldIo;
 import technology.sola.ecs.io.WorldIo;
+import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.event.EventHub;
-import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.impl.SoftwareRenderer;
+import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.Viewport;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;

@@ -2,10 +2,10 @@ package technology.sola.engine.core;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import technology.sola.engine.core.event.GameLoopEvent;
+import technology.sola.engine.core.event.GameLoopEventType;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.event.EventListener;
-import technology.sola.engine.event.gameloop.GameLoopEvent;
-import technology.sola.engine.event.gameloop.GameLoopEventType;
 
 import java.util.function.Consumer;
 
