@@ -1,6 +1,7 @@
 package technology.sola.engine.graphics;
 
-import technology.sola.engine.graphics.font.Font;
+import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.assets.graphics.font.Font;
 
 import java.util.List;
 

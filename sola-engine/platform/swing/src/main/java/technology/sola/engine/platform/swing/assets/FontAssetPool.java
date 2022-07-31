@@ -1,10 +1,10 @@
 package technology.sola.engine.platform.swing.assets;
 
 import technology.sola.engine.assets.AssetPool;
-import technology.sola.engine.graphics.SolaImage;
-import technology.sola.engine.graphics.font.Font;
-import technology.sola.engine.graphics.font.FontInfo;
-import technology.sola.engine.graphics.font.mapper.FontInfoJsonMapper;
+import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.assets.graphics.font.Font;
+import technology.sola.engine.assets.graphics.font.FontInfo;
+import technology.sola.engine.assets.graphics.font.mapper.FontInfoJsonMapper;
 import technology.sola.engine.platform.swing.assets.exception.FailedFontLoadException;
 import technology.sola.json.SolaJson;
 

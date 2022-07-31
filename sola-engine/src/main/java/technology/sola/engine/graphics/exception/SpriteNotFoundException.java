@@ -1,4 +1,4 @@
-package technology.sola.engine.graphics.sprite.exception;
+package technology.sola.engine.graphics.exception;
 
 import java.io.Serial;
 

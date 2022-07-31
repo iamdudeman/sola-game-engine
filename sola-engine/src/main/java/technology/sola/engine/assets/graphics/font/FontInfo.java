@@ -1,4 +1,4 @@
-package technology.sola.engine.graphics.font;
+package technology.sola.engine.assets.graphics.font;
 
 import java.util.List;
 

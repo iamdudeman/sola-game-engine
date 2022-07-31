@@ -6,9 +6,8 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.graphics.Renderer;
 import technology.sola.engine.graphics.components.CameraComponent;
-import technology.sola.engine.graphics.font.Font;
-import technology.sola.engine.graphics.sprite.SpriteAnimatorSystem;
-import technology.sola.engine.graphics.sprite.SpriteSheet;
+import technology.sola.engine.graphics.system.SpriteAnimatorSystem;
+import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 

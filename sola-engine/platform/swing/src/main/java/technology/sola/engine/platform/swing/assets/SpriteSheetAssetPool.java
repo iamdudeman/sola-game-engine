@@ -1,8 +1,8 @@
 package technology.sola.engine.platform.swing.assets;
 
 import technology.sola.engine.assets.AssetPool;
-import technology.sola.engine.graphics.SolaImage;
-import technology.sola.engine.graphics.sprite.SpriteSheet;
+import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.platform.swing.assets.exception.FailedSpriteSheetLoadException;
 import technology.sola.json.JsonObject;
 import technology.sola.json.SolaJson;

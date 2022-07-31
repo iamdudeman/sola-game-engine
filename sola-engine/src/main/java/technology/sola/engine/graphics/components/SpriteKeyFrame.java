@@ -1,9 +1,9 @@
 package technology.sola.engine.graphics.components;
 
 import technology.sola.engine.assets.AssetPool;
-import technology.sola.engine.graphics.SolaImage;
-import technology.sola.engine.graphics.sprite.SpriteSheet;
-import technology.sola.engine.graphics.sprite.exception.SpriteNotFoundException;
+import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.assets.graphics.SpriteSheet;
+import technology.sola.engine.graphics.exception.SpriteNotFoundException;
 
 import java.io.Serial;
 import java.io.Serializable;

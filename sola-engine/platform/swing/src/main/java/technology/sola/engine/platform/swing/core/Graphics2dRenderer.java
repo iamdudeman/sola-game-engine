@@ -5,8 +5,8 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.Layer;
 import technology.sola.engine.graphics.BlendMode;
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.SolaImage;
-import technology.sola.engine.graphics.font.Font;
+import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.assets.graphics.font.Font;
 
 import java.awt.*;
 import java.io.Serial;

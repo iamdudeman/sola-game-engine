@@ -10,7 +10,7 @@ import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.graphics.components.SpriteAnimatorComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.components.SpriteKeyFrame;
-import technology.sola.engine.graphics.sprite.SpriteSheet;
+import technology.sola.engine.assets.graphics.SpriteSheet;
 
 public class AnimationExample extends Sola {
   private SolaGraphics solaGraphics;

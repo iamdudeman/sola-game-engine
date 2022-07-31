@@ -7,10 +7,10 @@ import technology.sola.ecs.Entity;
 import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.BlendMode;
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
-import technology.sola.engine.graphics.sprite.SpriteSheet;
+import technology.sola.engine.assets.graphics.SpriteSheet;
 
 class SpriteGraphics {
   static void render(Renderer renderer, SolaEcs solaEcs, TransformComponent cameraTransform, AssetPool<SpriteSheet> spriteSheetAssetPool) {

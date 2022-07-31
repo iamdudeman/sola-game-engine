@@ -16,9 +16,9 @@ import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
-import technology.sola.engine.graphics.font.Font;
+import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.screen.AspectMode;
-import technology.sola.engine.graphics.sprite.SpriteSheet;
+import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.input.Key;
 import technology.sola.math.linear.Vector2D;
 

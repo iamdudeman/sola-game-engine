@@ -1,7 +1,6 @@
-package technology.sola.engine.graphics.sprite;
+package technology.sola.engine.assets.graphics;
 
 import technology.sola.engine.assets.Asset;
-import technology.sola.engine.graphics.SolaImage;
 
 import java.util.HashMap;
 import java.util.Map;

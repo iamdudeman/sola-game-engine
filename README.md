@@ -2,8 +2,6 @@
 
 
 # TODO List
-* Cleanup
-  * Move Asset related files under asset package maybe?
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
   * More BlendMode implementations

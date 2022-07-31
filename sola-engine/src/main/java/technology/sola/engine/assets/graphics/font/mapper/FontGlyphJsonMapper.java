@@ -1,6 +1,6 @@
-package technology.sola.engine.graphics.font.mapper;
+package technology.sola.engine.assets.graphics.font.mapper;
 
-import technology.sola.engine.graphics.font.FontGlyph;
+import technology.sola.engine.assets.graphics.font.FontGlyph;
 import technology.sola.json.JsonObject;
 import technology.sola.json.mapper.JsonMapper;
 

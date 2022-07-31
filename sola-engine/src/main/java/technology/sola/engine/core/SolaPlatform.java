@@ -7,7 +7,7 @@ import technology.sola.ecs.io.Base64WorldIo;
 import technology.sola.ecs.io.WorldIo;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Renderer;
-import technology.sola.engine.graphics.impl.SoftwareRenderer;
+import technology.sola.engine.graphics.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.Viewport;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;

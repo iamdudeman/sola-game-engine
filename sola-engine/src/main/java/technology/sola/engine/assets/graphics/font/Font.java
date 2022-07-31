@@ -1,8 +1,8 @@
-package technology.sola.engine.graphics.font;
+package technology.sola.engine.assets.graphics.font;
 
 import technology.sola.engine.assets.Asset;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.SolaImage;
+import technology.sola.engine.assets.graphics.SolaImage;
 
 import java.util.HashMap;
 import java.util.Map;

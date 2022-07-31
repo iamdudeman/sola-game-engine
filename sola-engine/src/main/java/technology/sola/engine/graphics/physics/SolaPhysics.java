@@ -1,4 +1,4 @@
-package technology.sola.engine.core.physics;
+package technology.sola.engine.graphics.physics;
 
 import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.event.EventHub;

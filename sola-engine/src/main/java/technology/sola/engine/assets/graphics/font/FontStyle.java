@@ -1,4 +1,4 @@
-package technology.sola.engine.graphics.font;
+package technology.sola.engine.assets.graphics.font;
 
 public enum FontStyle {
   NORMAL(0),
