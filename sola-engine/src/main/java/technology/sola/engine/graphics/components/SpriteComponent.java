@@ -1,7 +1,7 @@
 package technology.sola.engine.graphics.components;
 
-import technology.sola.engine.assets.AssetPool;
 import technology.sola.ecs.Component;
+import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 

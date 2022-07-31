@@ -4,7 +4,7 @@ import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
-import technology.sola.engine.core.use.graphics.SolaGui;
+import technology.sola.engine.core.use.graphics.gui.SolaGui;
 import technology.sola.engine.event.gameloop.GameLoopEvent;
 import technology.sola.engine.examples.common.singlefile.AnimationExample;
 import technology.sola.engine.examples.common.singlefile.AudioExample;

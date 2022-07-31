@@ -3,7 +3,7 @@ package technology.sola.engine.examples.common.singlefile;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
-import technology.sola.engine.core.use.graphics.SolaGui;
+import technology.sola.engine.core.use.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;

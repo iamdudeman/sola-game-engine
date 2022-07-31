@@ -8,6 +8,8 @@ import technology.sola.engine.graphics.exception.SpriteNotFoundException;
 import java.io.Serial;
 import java.io.Serializable;
 
+// TODO consider making this a sub class of SpriteComponent
+
 public class SpriteKeyFrame implements Serializable {
   @Serial
   private static final long serialVersionUID = -1643322034379275616L;

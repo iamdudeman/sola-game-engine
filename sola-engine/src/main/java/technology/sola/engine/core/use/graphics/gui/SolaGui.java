@@ -1,13 +1,13 @@
-package technology.sola.engine.core.use.graphics;
+package technology.sola.engine.core.use.graphics.gui;
 
 import technology.sola.engine.assets.AssetPoolProvider;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.use.SolaUse;
-import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.GuiElementProperties;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 

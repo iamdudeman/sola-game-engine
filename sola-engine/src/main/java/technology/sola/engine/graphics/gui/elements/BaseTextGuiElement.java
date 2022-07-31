@@ -1,13 +1,13 @@
 package technology.sola.engine.graphics.gui.elements;
 
-import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.renderer.BlendMode;
-import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.assets.graphics.font.Font;
+import technology.sola.engine.core.use.graphics.gui.SolaGui;
+import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.GuiElementProperties;
-import technology.sola.engine.core.use.graphics.SolaGui;
+import technology.sola.engine.graphics.renderer.BlendMode;
+import technology.sola.engine.graphics.renderer.Renderer;
 
 public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties> extends GuiElement<T> {
   private Font font;

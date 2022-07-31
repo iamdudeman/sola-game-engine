@@ -1,12 +1,12 @@
 package technology.sola.engine.graphics.gui.elements.container;
 
+import technology.sola.engine.core.use.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementContainer;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.GuiElementProperties;
-import technology.sola.engine.core.use.graphics.SolaGui;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 
 import java.util.List;

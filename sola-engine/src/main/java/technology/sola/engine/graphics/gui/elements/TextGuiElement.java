@@ -1,7 +1,7 @@
 package technology.sola.engine.graphics.gui.elements;
 
+import technology.sola.engine.core.use.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
-import technology.sola.engine.core.use.graphics.SolaGui;
 
 public class TextGuiElement extends BaseTextGuiElement<TextGuiElement.Properties> {
   public TextGuiElement(SolaGui solaGui, Properties properties) {

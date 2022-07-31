@@ -1,7 +1,7 @@
 package technology.sola.engine.core.use.graphics;
 
-import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.ecs.SolaEcs;
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.component.ColliderComponent;

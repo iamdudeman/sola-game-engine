@@ -1,14 +1,14 @@
 package technology.sola.engine.core.use.graphics;
 
-import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.Entity;
-import technology.sola.engine.graphics.renderer.BlendMode;
-import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.ecs.SolaEcs;
+import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
-import technology.sola.engine.graphics.components.BlendModeComponent;
+import technology.sola.engine.graphics.renderer.BlendMode;
+import technology.sola.engine.graphics.renderer.Renderer;
 
 class GeometryGraphics {
   static void render(Renderer renderer, SolaEcs solaEcs, TransformComponent cameraTransform) {
