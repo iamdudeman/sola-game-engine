@@ -23,11 +23,13 @@ public class AudioExample extends Sola {
     assetPoolProvider.getAssetPool(Font.class)
       .addAssetId(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_18.json");
 
-    assetPoolProvider.getAssetPool(AudioClip.class)
-        .addAssetId("test_song", "assets/asgaseg.wav");
+    AudioClip audioClip = assetPoolProvider.getAssetPool(AudioClip.class)
+      .addAndGetAsset("test_song", "assets/asgaseg.wav");
+
+    audioClip.setVolume(0.5f);
 
     solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
-    solaGui.setGuiRoot(buildGui());
+    solaGui.setGuiRoot(buildGui(audioClip));
   }
 
   @Override
@@ -37,46 +39,7 @@ public class AudioExample extends Sola {
     solaGui.render(renderer);
   }
 
-  private GuiElement<?> buildGui() {
-    // Loop, Play Once, Pause, Stop
-
-    StreamGuiElementContainer controlsContainer = solaGui.createElement(
-      StreamGuiElementContainer::new,
-      StreamGuiElementContainer.Properties::new,
-      p -> p.setPreferredDimensions(400, 80).padding.set(5).margin.set(8, 0)
-    );
-
-    ButtonGuiElement loopButton = createButton("Loop", () -> {
-      assetPoolProvider.getAssetPool(AudioClip.class)
-        .getAsset("test_song")
-        .loop(AudioClip.CONTINUOUS_LOOPING);
-    });
-
-    ButtonGuiElement playButton = createButton("Play Once", () -> {
-      assetPoolProvider.getAssetPool(AudioClip.class)
-        .getAsset("test_song")
-        .play();
-    });
-
-    ButtonGuiElement pauseButton = createButton("Pause", () -> {
-      assetPoolProvider.getAssetPool(AudioClip.class)
-        .getAsset("test_song")
-        .pause();
-    });
-
-    ButtonGuiElement stopButton = createButton("Stop", () -> {
-      assetPoolProvider.getAssetPool(AudioClip.class)
-        .getAsset("test_song")
-        .stop();
-    });
-
-    controlsContainer.addChild(
-      loopButton,
-      playButton,
-      pauseButton,
-      stopButton
-    );
-
+  private GuiElement<?> buildGui(AudioClip audioClip) {
     StreamGuiElementContainer rootElement = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
@@ -89,10 +52,68 @@ public class AudioExample extends Sola {
         TextGuiElement.Properties::new,
         p -> p.setText("Play a Song").margin.setBottom(10)
       ),
-      controlsContainer
+      buildControlsContainer(audioClip),
+      buildVolumeContainer(audioClip)
     );
 
     return rootElement;
+  }
+
+  private StreamGuiElementContainer buildVolumeContainer(AudioClip audioClip) {
+    StreamGuiElementContainer volumeContainer = solaGui.createElement(
+      StreamGuiElementContainer::new,
+      StreamGuiElementContainer.Properties::new,
+      p -> p.setPreferredDimensions(400, 80).padding.set(5).margin.set(8, 0)
+    );
+
+    TextGuiElement volumeTextGuiElement = solaGui.createElement(
+      TextGuiElement::new,
+      TextGuiElement.Properties::new,
+      p -> p.setText(formatAudioVolume(audioClip.getVolume()))
+    );
+
+    volumeContainer.addChild(
+      createButton("Vol Up", () -> {
+        float newVolume = audioClip.getVolume() + 0.05f;
+
+        if (newVolume > 1) {
+          newVolume = 1;
+        }
+
+        audioClip.setVolume(newVolume);
+        volumeTextGuiElement.properties().setText(formatAudioVolume(newVolume));
+      }),
+      createButton("Vol Down", () -> {
+        float newVolume = audioClip.getVolume() - 0.05f;
+
+        if (newVolume < 0) {
+          newVolume = 0;
+        }
+
+        audioClip.setVolume(newVolume);
+        volumeTextGuiElement.properties().setText(formatAudioVolume(newVolume));
+      }),
+      volumeTextGuiElement
+    );
+
+    return volumeContainer;
+  }
+
+  private StreamGuiElementContainer buildControlsContainer(AudioClip audioClip) {
+    StreamGuiElementContainer controlsContainer = solaGui.createElement(
+      StreamGuiElementContainer::new,
+      StreamGuiElementContainer.Properties::new,
+      p -> p.setPreferredDimensions(400, 80).padding.set(5).margin.set(8, 0)
+    );
+
+    controlsContainer.addChild(
+      createButton("Loop", () -> audioClip.loop(AudioClip.CONTINUOUS_LOOPING)),
+      createButton("Play Once", audioClip::play),
+      createButton("Pause", audioClip::pause),
+      createButton("Stop", audioClip::stop)
+    );
+
+    return controlsContainer;
   }
 
   private ButtonGuiElement createButton(String text, Runnable action) {
@@ -105,5 +126,9 @@ public class AudioExample extends Sola {
     buttonGuiElement.setOnAction(action);
 
     return buttonGuiElement;
+  }
+
+  private String formatAudioVolume(float volume) {
+    return "" + Math.round(volume * 100);
   }
 }

@@ -39,6 +39,18 @@ public interface AudioClip extends Asset {
   void loop(int times);
 
   /**
+   * @return volume where 0 is silent and 1 is full volume
+   */
+  float getVolume();
+
+  /**
+   * Sets the volume where 0 is silent and 1 is full volume.
+   *
+   * @param volume the new volume
+   */
+  void setVolume(float volume);
+
+  /**
    * Frees up any system resources being used.
    */
   void dispose();
