@@ -18,8 +18,8 @@ buildscript {
 }
 
 dependencies {
-  api(project(":sola-engine:platform:browser"))
-  api(project(":examples:common"))
+  implementation(project(":sola-engine:platform:browser"))
+  implementation(project(":examples:common"))
 }
 
 teavm {

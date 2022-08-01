@@ -12,8 +12,8 @@ import technology.sola.engine.graphics.renderer.Renderer;
 public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties> extends GuiElement<T> {
   private Font font;
 
-  private int textWidth;
-  private int textHeight;
+  private int textWidth = 1;
+  private int textHeight = 1;
 
   public BaseTextGuiElement(SolaGui solaGui, T properties) {
     super(solaGui, properties);
@@ -43,8 +43,8 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
 
     var textDimensions = font.getDimensionsForText(properties().getText());
 
-    textWidth = Math.max(textDimensions.width(), 3);
-    textHeight = Math.max(textDimensions.height(), 3);
+    textWidth = Math.max(textDimensions.width(), 1);
+    textHeight = Math.max(textDimensions.height(), 1);
   }
 
   public static class Properties extends GuiElementProperties {

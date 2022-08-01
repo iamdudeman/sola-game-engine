@@ -46,6 +46,7 @@ public abstract class GuiElement<T extends GuiElementProperties> {
   public void render(Renderer renderer) {
     if (properties.isLayoutChanged()) {
       recalculateLayout();
+      properties.setLayoutChanged(false);
     }
 
     if (!properties.isHidden()) {

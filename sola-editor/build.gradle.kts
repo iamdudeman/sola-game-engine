@@ -8,7 +8,7 @@ application {
 }
 
 dependencies {
-  api(project(":sola-engine:platform:javafx"))
+  implementation(project(":sola-engine:platform:javafx"))
 }
 
 tasks.withType<Jar>() {
