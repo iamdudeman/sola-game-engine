@@ -20,7 +20,7 @@ public class GuiElementProperties {
   }
 
   public boolean isLayoutChanged() {
-    return isLayoutChanged || globalProperties.isLayoutChanged();
+    return isLayoutChanged;
   }
 
   public GuiElementProperties setLayoutChanged(boolean layoutChanged) {
