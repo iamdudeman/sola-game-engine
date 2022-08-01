@@ -22,7 +22,7 @@ public class SolaBrowserFileBuilder {
   }
 
   /**
-   * Note: only supports Java 8 at the moment
+   * Note: only confirmed to support up to Java 11 at the moment
    * @param jarPath
    * @param mainClass
    */
