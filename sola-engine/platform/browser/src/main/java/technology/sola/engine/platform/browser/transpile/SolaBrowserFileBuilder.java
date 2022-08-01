@@ -5,20 +5,28 @@ import org.teavm.tooling.builder.BuildException;
 import org.teavm.tooling.builder.BuildResult;
 import org.teavm.tooling.builder.InProcessBuildStrategy;
 import org.teavm.vm.TeaVMOptimizationLevel;
+import technology.sola.engine.platform.browser.javascript.JsCanvasUtils;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URLClassLoader;
+import java.nio.file.Files;
 
-// TODO might be good to also generate html file
+public class SolaBrowserFileBuilder {
+  private static final String OUTPUT_FILE_JS = "sola.js";
+  private static final String OUTPUT_FILE_HTML = "index.html";
+  private final String buildDirectory;
 
-public class SolaJsTranspiler {
+  public SolaBrowserFileBuilder(String buildDirectory) {
+    this.buildDirectory = buildDirectory;
+  }
+
   /**
    * Note: only supports Java 8 at the moment
    * @param jarPath
-   * @param outputDir
-   * @param outputFile
    * @param mainClass
    */
-  public void transpileJar(String jarPath, String outputDir, String outputFile, String mainClass) {
+  public void transpileSolaJar(String jarPath, String mainClass) {
     InProcessBuildStrategy buildStrategy = new InProcessBuildStrategy(URLClassLoader::new);
 
     buildStrategy.init();
@@ -26,8 +34,8 @@ public class SolaJsTranspiler {
     // Configurable
     buildStrategy.setMainClass(mainClass);
     buildStrategy.addSourcesJar(jarPath);
-    buildStrategy.setTargetFileName(outputFile);
-    buildStrategy.setTargetDirectory(outputDir);
+    buildStrategy.setTargetFileName(OUTPUT_FILE_JS);
+    buildStrategy.setTargetDirectory(buildDirectory);
 
 
     // Should be configurable
@@ -68,6 +76,33 @@ public class SolaJsTranspiler {
       });
 
       throw new RuntimeException("Build failed");
+    }
+  }
+
+  public void createIndexHtml() {
+    String template = """
+      <html>
+      <head>
+          <script type="text/javascript" charset="utf-8" src="%s"></script>
+          <script>
+              window.start = function () {
+                  main();
+              };
+          </script>
+      </head>
+      <body onload="start()">
+        <div id="%s"></div>
+      </body>
+      </html>
+      """;
+
+    String html = template.formatted(OUTPUT_FILE_JS, JsCanvasUtils.ID_SOLA_ANCHOR);
+
+    try {
+      Files.createDirectories(new File(buildDirectory).toPath());
+      Files.writeString(new File(buildDirectory, OUTPUT_FILE_HTML).toPath(), html);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
   }
 }
