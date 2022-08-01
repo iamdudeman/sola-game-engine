@@ -12,8 +12,8 @@ repositories {
 }
 
 dependencies {
-  api(project(":sola-engine:platform:swing"))
-  api(project(":examples:common"))
+  implementation(project(":sola-engine:platform:swing"))
+  implementation(project(":examples:common"))
 }
 
 tasks.withType<Jar>() {

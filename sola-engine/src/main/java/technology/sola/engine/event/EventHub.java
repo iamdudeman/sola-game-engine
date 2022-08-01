@@ -1,11 +1,12 @@
 package technology.sola.engine.event;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 public class EventHub {
+  @SuppressWarnings("rawtypes")
   private final Map<Class<? extends Event>, List<EventListener>> eventListenersMap;
 
   public EventHub() {
@@ -13,7 +14,7 @@ public class EventHub {
   }
 
   public <T extends Event<?>> void add(EventListener<T> eventListener, Class<T> eventClass) {
-    eventListenersMap.computeIfAbsent(eventClass, key -> new LinkedList<>()).add(eventListener);
+    eventListenersMap.computeIfAbsent(eventClass, key -> new ArrayList<>()).add(eventListener);
   }
 
   public <T extends Event<?>> void remove(EventListener<T> eventListener, Class<T> eventClass) {
@@ -23,11 +24,12 @@ public class EventHub {
     });
   }
 
-  public void off(Class<? extends Event<?>> eventClass) {
-    eventListenersMap.put(eventClass, new LinkedList<>());
+  public <T extends Event<?>> void off(Class<T> eventClass) {
+    eventListenersMap.put(eventClass, new ArrayList<>());
   }
 
-  public void emit(Event<?> event) {
+  @SuppressWarnings("unchecked")
+  public <T extends Event<?>> void emit(T event) {
     eventListenersMap.computeIfPresent(event.getClass(), (key, value) -> {
       value.forEach(eventListener -> eventListener.onEvent(event));
       return value;

@@ -14,7 +14,7 @@
   <module name="SuppressWarningsFilter" />
 
   <module name="TreeWalker">
-    <!-- See: https://checkstyle.sourceforge.io/config_annotation.html#SuppressWarningsHolder -->
+    <!-- See: https://checkstyle.sourceforge.io/co nfig_annotation.html#SuppressWarningsHolder -->
     <module name="SuppressWarningsHolder" />
 
     <!-- Block Checks: https://checkstyle.sourceforge.io/config_blocks.html -->
@@ -62,7 +62,7 @@
     <module name="SimplifyBooleanExpression"/>
     <module name="SimplifyBooleanReturn"/>
     <module name="StringLiteralEquality"/>
-    <module name="UnnecessaryParentheses"/>
+    <!-- <module name="UnnecessaryParentheses"/> -->
     <module name="UnnecessarySemicolonAfterTypeMemberDeclaration"/>
     <module name="UnnecessarySemicolonInEnumeration"/>
     <module name="UnnecessarySemicolonInTryWithResources"/>
