@@ -40,6 +40,7 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
 
     if (properties.isLayoutChanged() || children.stream().anyMatch(child -> child.properties().isLayoutChanged())) {
       recalculateLayout();
+      properties.setLayoutChanged(false);
     }
 
     if (!properties.isHidden()) {

@@ -84,8 +84,6 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
         yOffset += child.getContentHeight();
       }
     }
-
-    properties.setLayoutChanged(false);
   }
 
   private int findFocussedChild(List<GuiElement<?>> children) {

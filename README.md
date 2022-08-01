@@ -15,7 +15,8 @@
   * Add easy way to test the ability of ECS components to be serializable
   * Add lots of missing tests :)
 * Browser Platform
-  * Implement better tool for compiling Java to JavaScript code (TeaVM gradle plugin has some file locking issues)
+  * Implement better tool for compiling Java to JavaScript code (TeaVM gradle plugin has some major file locking issues)
+  * TeaVM doesn't seem to support Java 18 yet (might actually be issue with gradle plugin using version 0.0.6)
   * Improve performance (StressTestExample can't handle a lot of objects)
   * Implement Font loading
   * Implement SpriteSheet loading

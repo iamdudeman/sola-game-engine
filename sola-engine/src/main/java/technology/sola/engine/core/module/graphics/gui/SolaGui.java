@@ -16,7 +16,7 @@ import java.util.function.Function;
 
 @SolaModule
 public class SolaGui {
-  public final GuiElementGlobalProperties globalProperties = new GuiElementGlobalProperties();
+  public final GuiElementGlobalProperties globalProperties;
   private final AssetPoolProvider assetPoolProvider;
   private GuiElement<?> rootGuiElement;
   private GuiElement<?> focussedElement;
@@ -111,6 +111,7 @@ public class SolaGui {
 
   private SolaGui(AssetPoolProvider assetPoolProvider) {
     this.assetPoolProvider = assetPoolProvider;
+    this.globalProperties = new GuiElementGlobalProperties(() -> rootGuiElement);
   }
 
   public interface GuiElementCreator<T extends GuiElement<P>, P extends GuiElementProperties> {
