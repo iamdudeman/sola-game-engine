@@ -101,8 +101,8 @@ public class SolaBrowserFileBuilder {
     try {
       Files.createDirectories(new File(buildDirectory).toPath());
       Files.writeString(new File(buildDirectory, OUTPUT_FILE_HTML).toPath(), html);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
     }
   }
 }
