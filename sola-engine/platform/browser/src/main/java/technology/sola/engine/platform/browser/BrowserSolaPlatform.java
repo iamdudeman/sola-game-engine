@@ -10,6 +10,7 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.platform.browser.assets.SolaImageAssetPool;
+import technology.sola.engine.platform.browser.assets.SpriteSheetAssetPool;
 import technology.sola.engine.platform.browser.core.BrowserCanvasRenderer;
 import technology.sola.engine.platform.browser.core.BrowserGameLoop;
 import technology.sola.engine.platform.browser.javascript.JsCanvasUtils;
@@ -58,7 +59,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
   @Override
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     JsUtils.setTitle(solaConfiguration.solaTitle());
-    JsCanvasUtils.canvasInit(solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight());
+    JsCanvasUtils.canvasInit(JsCanvasUtils.ID_SOLA_ANCHOR, solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight());
 
     // TODO something better than this
     JsUtils.exportObject("solaStop", (JsUtils.Function) () -> solaEventHub.emit(GameLoopEvent.STOP));
@@ -94,6 +95,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
   @Override
   protected void populateAssetPoolProvider(AssetPoolProvider assetPoolProvider) {
     assetPoolProvider.addAssetPool(new SolaImageAssetPool());
+    assetPoolProvider.addAssetPool(new SpriteSheetAssetPool());
   }
 
   @Override
