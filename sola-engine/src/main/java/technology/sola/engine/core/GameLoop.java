@@ -7,6 +7,8 @@ import technology.sola.engine.core.event.GameLoopEventType;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.event.EventListener;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.function.Consumer;
 
 public abstract class GameLoop implements Runnable, EventListener<GameLoopEvent> {
@@ -69,15 +71,20 @@ public abstract class GameLoop implements Runnable, EventListener<GameLoopEvent>
   }
 
   private void startFpsTrackerThread() {
-    new Thread(() -> {
-      while (isRunning) {
-        fpsTracker.logStats();
+    Timer timer = new Timer();
+    timer.scheduleAtFixedRate(new TimerTask() {
+      @Override
+      public void run() {
+        if (isRunning()) {
+          fpsTracker.logStats();
+        } else {
+          timer.cancel();
+        }
       }
-    }).start();
+    }, 0, 1000);
   }
 
   protected static class FpsTracker {
-    private long fpsSecondTracker = System.nanoTime();
     private int updatesThisSecond = 0;
     private int framesThisSecond = 0;
 
@@ -90,14 +97,9 @@ public abstract class GameLoop implements Runnable, EventListener<GameLoopEvent>
     }
 
     private void logStats() {
-      long now = System.nanoTime();
-
-      if (now - fpsSecondTracker >= 1e9) {
-        LOGGER.info("ups: {} fps: {}", updatesThisSecond, framesThisSecond);
-        updatesThisSecond = 0;
-        framesThisSecond = 0;
-        fpsSecondTracker = now;
-      }
+      LOGGER.info("ups: {} fps: {}", updatesThisSecond, framesThisSecond);
+      updatesThisSecond = 0;
+      framesThisSecond = 0;
     }
   }
 }

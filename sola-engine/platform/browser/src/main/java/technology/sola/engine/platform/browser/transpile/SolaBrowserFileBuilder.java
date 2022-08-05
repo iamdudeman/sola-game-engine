@@ -21,12 +21,17 @@ public class SolaBrowserFileBuilder {
     this.buildDirectory = buildDirectory;
   }
 
+  public void transpileSolaJar(String jarPath, String mainClass) {
+    transpileSolaJar(jarPath, mainClass, true);
+  }
+
   /**
-   * Note: only supports up to Java 11 at the moment (record support is in progress!)
+   * Note: supports up to Java 17
    * @param jarPath
    * @param mainClass
+   * @param obfuscate
    */
-  public void transpileSolaJar(String jarPath, String mainClass) {
+  public void transpileSolaJar(String jarPath, String mainClass, boolean obfuscate) {
     InProcessBuildStrategy buildStrategy = new InProcessBuildStrategy(URLClassLoader::new);
 
     buildStrategy.init();
@@ -34,17 +39,13 @@ public class SolaBrowserFileBuilder {
     // Configurable
     buildStrategy.setMainClass(mainClass);
     buildStrategy.addSourcesJar(jarPath);
-    buildStrategy.setTargetFileName(OUTPUT_FILE_JS);
-    buildStrategy.setTargetDirectory(buildDirectory);
-
-
-    // Should be configurable
-    buildStrategy.setObfuscated(false);
-
+    buildStrategy.setObfuscated(obfuscate);
 
 
     // Non-configurable
     buildStrategy.setEntryPointName("main");
+    buildStrategy.setTargetFileName(OUTPUT_FILE_JS);
+    buildStrategy.setTargetDirectory(buildDirectory);
     buildStrategy.setTargetType(TeaVMTargetType.JAVASCRIPT);
 
     buildStrategy.setStrict(false);
@@ -60,7 +61,7 @@ public class SolaBrowserFileBuilder {
     buildStrategy.setMaxTopLevelNames(10000);
     buildStrategy.setLongjmpSupported(true);
 
-    BuildResult buildResult = null;
+    BuildResult buildResult;
     try {
       buildResult = buildStrategy.build();
     } catch (BuildException ex) {
