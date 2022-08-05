@@ -5,18 +5,24 @@ import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;
 
 public class JsImageUtils {
-  private static final String LOAD_IMAGE_SCRIPT =
-    "var img = new Image();" +
-    "img.onload = function() {" +
-    "  var canvas = document.createElement('canvas');" +
-    "  var context = canvas.getContext('2d');" +
-    "  canvas.width = img.width;" +
-    "  canvas.height = img.height;" +
-    "  context.drawImage(img, 0, 0 );" +
-    "  var imageData = context.getImageData(0, 0, img.width, img.height);" +
-    "  callback(img.width, img.height, Array.from(imageData.data));" +
-    "};" +
-    "img.src = path;";
+  private static final String LOAD_IMAGE_SCRIPT = """
+    var img = new Image();
+
+    img.onload = function() {
+      var canvas = document.createElement('canvas');
+      var context = canvas.getContext('2d');
+
+      canvas.width = img.width;
+      canvas.height = img.height;
+      context.drawImage(img, 0, 0 );
+
+      var imageData = context.getImageData(0, 0, img.width, img.height);
+
+      callback(img.width, img.height, Array.from(imageData.data));
+    };
+
+    img.src = path;
+    """;
 
   @JSBody(params = {"path", "callback"}, script = LOAD_IMAGE_SCRIPT)
   public static native void loadImage(String path, ImageLoadCallback callback);

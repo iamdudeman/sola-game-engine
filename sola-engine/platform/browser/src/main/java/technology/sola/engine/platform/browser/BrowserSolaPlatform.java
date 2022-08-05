@@ -59,7 +59,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
   @Override
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     JsUtils.setTitle(solaConfiguration.solaTitle());
-    JsCanvasUtils.canvasInit(solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight());
+    JsCanvasUtils.canvasInit(JsCanvasUtils.ID_SOLA_ANCHOR, solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight());
 
     // TODO something better than this
     JsUtils.exportObject("solaStop", (JsUtils.Function) () -> solaEventHub.emit(GameLoopEvent.STOP));

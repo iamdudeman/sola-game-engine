@@ -10,6 +10,7 @@ public class JsMouseUtils {
       var rect = event.target.getBoundingClientRect();
       var x = event.clientX - rect.left;
       var y = event.clientY - rect.top;
+
       callback(event.which, x, y);
     }, false);
     """;
