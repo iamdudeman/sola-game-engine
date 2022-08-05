@@ -5,7 +5,7 @@ import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.platform.browser.javascript.JsImageUtils;
 
-public class SolaImageAssetPool extends AssetPool<SolaImage> {
+public class BrowserSolaImageAssetPool extends AssetPool<SolaImage> {
   @Override
   public Class<SolaImage> getAssetClass() {
     return SolaImage.class;
