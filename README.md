@@ -1,4 +1,7 @@
 # Branch WIP
+* Browser Platform
+  * Implement SpriteSheet loading
+  * Implement Font loading
 
 
 # TODO List
@@ -16,8 +19,6 @@
   * Add lots of missing tests :)
 * Browser Platform
   * Improve performance (StressTestExample can't handle a lot of objects)
-  * Implement Font loading
-  * Implement SpriteSheet loading
   * Implement Audio loading
   * Implement window resizing using Viewport
 * Research Virtual File System
