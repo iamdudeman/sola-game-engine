@@ -10,6 +10,7 @@ public class JsCanvasUtils {
       "canvasEle.id = '" + ID_SOLA_CANVAS + "';" +
       "canvasEle.width = width;" +
       "canvasEle.height = height;" +
+      "canvasEle.oncontextmenu = function(e) { e.preventDefault(); e.stopPropagation(); };"+
       "document.getElementById('" + ID_SOLA_ANCHOR + "').appendChild(canvasEle);" +
       "window.solaCanvas = canvasEle;" +
       "window.solaContext2d = window.solaCanvas.getContext('2d');";

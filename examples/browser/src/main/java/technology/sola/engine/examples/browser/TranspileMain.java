@@ -4,7 +4,7 @@ import technology.sola.engine.platform.browser.transpile.SolaBrowserFileBuilder;
 
 public class TranspileMain {
   public static void main(String[] args) {
-    SolaBrowserFileBuilder solaBrowserFileBuilder = new SolaBrowserFileBuilder("build");
+    SolaBrowserFileBuilder solaBrowserFileBuilder = new SolaBrowserFileBuilder("examples/browser/build");
 
     solaBrowserFileBuilder.transpileSolaJar(
       "build/libs/browser-0.0.1.jar",
