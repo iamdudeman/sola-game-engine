@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.swing.assets;
 
+import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.platform.swing.assets.exception.FailedSolaImageLoadException;
@@ -16,7 +17,7 @@ public class SolaImageAssetPool extends AssetPool<SolaImage> {
   }
 
   @Override
-  protected SolaImage loadAsset(String path) {
+  protected AssetHandle<SolaImage> loadAsset(String path) {
     try {
       File file = new File(path);
       BufferedImage bufferedImage = ImageIO.read(file);
@@ -24,7 +25,7 @@ public class SolaImageAssetPool extends AssetPool<SolaImage> {
 
       bufferedImage.getRGB(0, 0, solaImage.getWidth(), solaImage.getHeight(), solaImage.getPixels(), 0, solaImage.getWidth());
 
-      return solaImage;
+      return new AssetHandle<>(solaImage);
     } catch (IOException ex) {
       throw new FailedSolaImageLoadException(path);
     }

@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.browser.assets;
 
+import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.graphics.Color;
@@ -12,20 +13,19 @@ public class BrowserSolaImageAssetPool extends AssetPool<SolaImage> {
   }
 
   @Override
-  protected SolaImage loadAsset(String path) {
-    SolaImage solaImage = new SolaImage(0, 0);
+  protected AssetHandle<SolaImage> loadAsset(String path) {
+    AssetHandle<SolaImage> solaImageAssetHandle = new AssetHandle<>();
 
-    // TODO figure out a way to do this not async maybe
-    JsImageUtils.loadImage(path, new ImageLoadCallbackImpl(solaImage));
+    JsImageUtils.loadImage(path, new ImageLoadCallbackImpl(solaImageAssetHandle));
 
-    return solaImage;
+    return solaImageAssetHandle;
   }
 
   private static class ImageLoadCallbackImpl implements JsImageUtils.ImageLoadCallback {
-    private final SolaImage solaImage;
+    private final AssetHandle<SolaImage> solaImageAssetHandle;
 
-    public ImageLoadCallbackImpl(SolaImage solaImage) {
-      this.solaImage = solaImage;
+    public ImageLoadCallbackImpl(AssetHandle<SolaImage> solaImageAssetHandle) {
+      this.solaImageAssetHandle = solaImageAssetHandle;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class BrowserSolaImageAssetPool extends AssetPool<SolaImage> {
         index++;
       }
 
-      solaImage.setPixels(width, height, pixels);
+      solaImageAssetHandle.setAsset(new SolaImage(width, height, pixels));
     }
   }
 }

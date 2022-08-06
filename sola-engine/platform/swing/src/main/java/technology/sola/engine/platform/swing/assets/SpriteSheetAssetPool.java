@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.swing.assets;
 
+import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.SpriteSheet;
@@ -24,7 +25,7 @@ public class SpriteSheetAssetPool extends AssetPool<SpriteSheet> {
   }
 
   @Override
-  protected SpriteSheet loadAsset(String path) {
+  protected AssetHandle<SpriteSheet> loadAsset(String path) {
     File file = new File(path);
     try {
       String jsonString = Files.readString(file.toPath());
@@ -32,22 +33,28 @@ public class SpriteSheetAssetPool extends AssetPool<SpriteSheet> {
       JsonObject spriteSheetJson = solaJson.parse(jsonString).asObject();
 
       String spriteImageName = spriteSheetJson.getString("spriteSheet");
-      SolaImage spriteImage = solaImageAssetPool.addAndGetAsset(spriteImageName, new File(file.getParent(), spriteImageName).getPath());
-      SpriteSheet spriteSheet = new SpriteSheet(spriteImage);
+      AssetHandle<SpriteSheet> spriteSheetAssetHandle = new AssetHandle<>();
 
-      spriteSheetJson.getArray("sprites").forEach(spritesJsonEntry -> {
-        JsonObject spriteJson = spritesJsonEntry.asObject();
+      solaImageAssetPool.addAndGetAsset(spriteImageName, new File(file.getParent(), spriteImageName).getPath())
+        .executeWhenLoaded(solaImage -> {
+          SpriteSheet spriteSheet = new SpriteSheet(solaImage);
 
-        spriteSheet.addSpriteDefinition(
-          spriteJson.getString("id"),
-          spriteJson.getInt("x"),
-          spriteJson.getInt("y"),
-          spriteJson.getInt("w"),
-          spriteJson.getInt("h")
-        );
-      });
+          spriteSheetJson.getArray("sprites").forEach(spritesJsonEntry -> {
+            JsonObject spriteJson = spritesJsonEntry.asObject();
 
-      return spriteSheet;
+            spriteSheet.addSpriteDefinition(
+              spriteJson.getString("id"),
+              spriteJson.getInt("x"),
+              spriteJson.getInt("y"),
+              spriteJson.getInt("w"),
+              spriteJson.getInt("h")
+            );
+          });
+
+          spriteSheetAssetHandle.setAsset(spriteSheet);
+        });
+
+      return spriteSheetAssetHandle;
     } catch (IOException ex) {
       throw new FailedSpriteSheetLoadException(path);
     }

@@ -39,12 +39,14 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
 
   @Override
   public void recalculateLayout() {
-    font = solaGui.getAssetPoolProvider().getAssetPool(Font.class).getAsset(properties().getFontAssetId());
+    solaGui.getAssetPoolProvider().getAssetPool(Font.class).getAsset(properties().getFontAssetId())
+      .executeIfLoaded(font -> {
+        this.font = font;
+        var textDimensions = font.getDimensionsForText(properties().getText());
 
-    var textDimensions = font.getDimensionsForText(properties().getText());
-
-    textWidth = Math.max(textDimensions.width(), 1);
-    textHeight = Math.max(textDimensions.height(), 1);
+        textWidth = Math.max(textDimensions.width(), 1);
+        textHeight = Math.max(textDimensions.height(), 1);
+      });
   }
 
   public static class Properties extends GuiElementProperties {

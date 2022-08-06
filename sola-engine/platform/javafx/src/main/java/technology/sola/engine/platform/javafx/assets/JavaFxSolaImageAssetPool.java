@@ -2,19 +2,20 @@ package technology.sola.engine.platform.javafx.assets;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelFormat;
+import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.graphics.SolaImage;
 
 import java.io.File;
 
-public class SolaImageAssetPool extends AssetPool<SolaImage> {
+public class JavaFxSolaImageAssetPool extends AssetPool<SolaImage> {
   @Override
   public Class<SolaImage> getAssetClass() {
     return SolaImage.class;
   }
 
   @Override
-  protected SolaImage loadAsset(String path) {
+  protected AssetHandle<SolaImage> loadAsset(String path) {
     File file = new File(path);
     Image image = new Image(file.toURI().toString());
     int width = (int)image.getWidth();
@@ -25,6 +26,6 @@ public class SolaImageAssetPool extends AssetPool<SolaImage> {
     image.getPixelReader()
       .getPixels(0, 0, width, height, PixelFormat.getIntArgbPreInstance(), solaImage.getPixels(), 0, width);
 
-    return solaImage;
+    return new AssetHandle<>(solaImage);
   }
 }

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class AssetPool<T extends Asset> {
-  protected Map<String, T> cachedAssets = new HashMap<>();
+  protected Map<String, AssetHandle<T>> cachedAssets = new HashMap<>();
   protected Map<String, String> assetIdToPathMap = new HashMap<>();
 
   public AssetPool<T> addAssetId(String id, String path) {
@@ -15,13 +15,13 @@ public abstract class AssetPool<T extends Asset> {
     return this;
   }
 
-  public T addAndGetAsset(String id, String path) {
+  public AssetHandle<T> addAndGetAsset(String id, String path) {
     addAssetId(id, path);
 
     return getAsset(id);
   }
 
-  public T getAsset(String id) {
+  public AssetHandle<T> getAsset(String id) {
     String assetPath = assetIdToPathMap.get(id);
 
     if (assetPath == null) {
@@ -33,5 +33,5 @@ public abstract class AssetPool<T extends Asset> {
 
   public abstract Class<T> getAssetClass();
 
-  protected abstract T loadAsset(String path);
+  protected abstract AssetHandle<T> loadAsset(String path);
 }

@@ -40,8 +40,9 @@ public class RenderingExample extends Sola {
 
     assetPoolProvider.getAssetPool(SpriteSheet.class)
       .addAssetId("test", "assets/test_tiles_spritesheet.json");
-    defaultFont = assetPoolProvider.getAssetPool(Font.class)
-      .addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
+    assetPoolProvider.getAssetPool(Font.class)
+      .addAndGetAsset("default", "assets/monospaced_NORMAL_18.json")
+      .executeWhenLoaded(font -> this.defaultFont = font);
 
     solaEcs.addSystem(new TestSystem());
     solaEcs.setWorld(createWorld());

@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.swing.assets;
 
+import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.Font;
@@ -12,10 +13,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class FontAssetPool extends AssetPool<Font> {
+public class SwingFontAssetPool extends AssetPool<Font> {
   private final AssetPool<SolaImage> solaImageAssetPool;
 
-  public FontAssetPool(AssetPool<SolaImage> solaImageAssetPool) {
+  public SwingFontAssetPool(AssetPool<SolaImage> solaImageAssetPool) {
     this.solaImageAssetPool = solaImageAssetPool;
   }
 
@@ -25,18 +26,20 @@ public class FontAssetPool extends AssetPool<Font> {
   }
 
   @Override
-  protected Font loadAsset(String path) {
+  protected AssetHandle<Font> loadAsset(String path) {
     File file = new File(path);
     SolaJson solaJson = new SolaJson();
 
     try {
       FontInfo fontInfo = solaJson.parse(Files.readString(file.toPath()), new FontInfoJsonMapper());
-      SolaImage fontImage = solaImageAssetPool.addAndGetAsset(
+      AssetHandle<Font> fontAssetHandle = new AssetHandle<>();
+
+      solaImageAssetPool.addAndGetAsset(
         fontInfo.fontGlyphFile(),
         path.replace(file.getName(), "") + fontInfo.fontGlyphFile()
-      );
+      ).executeWhenLoaded(solaImage -> fontAssetHandle.setAsset(new Font(solaImage, fontInfo)));
 
-      return new Font(fontImage, fontInfo);
+      return fontAssetHandle;
     } catch (IOException ex) {
       throw new FailedFontLoadException(path);
     }

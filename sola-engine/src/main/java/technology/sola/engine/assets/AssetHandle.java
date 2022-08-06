@@ -1,11 +1,15 @@
 package technology.sola.engine.assets;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class AssetHandle<T extends Asset> {
   private T asset;
+  private List<Consumer<T>> onLoadSubscribers;
 
   public AssetHandle() {
+    onLoadSubscribers = new ArrayList<>();
   }
 
   public AssetHandle(T asset) {
@@ -21,10 +25,22 @@ public class AssetHandle<T extends Asset> {
   }
 
   public void setAsset(T asset) {
-    this.asset = asset;
+    if (this.asset == null) {
+      this.asset = asset;
+      onLoadSubscribers.forEach(consumer -> consumer.accept(asset));
+      onLoadSubscribers = null;
+    }
   }
 
   public void executeWhenLoaded(Consumer<T> consumer) {
+    if (isLoading()) {
+      onLoadSubscribers.add(consumer);
+    } else {
+      consumer.accept(asset);
+    }
+  }
+
+  public void executeIfLoaded(Consumer<T> consumer) {
     if (!isLoading()) {
       consumer.accept(asset);
     }

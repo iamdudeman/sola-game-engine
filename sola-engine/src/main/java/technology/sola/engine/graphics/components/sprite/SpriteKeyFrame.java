@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.components.sprite;
 
+import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.SpriteSheet;
@@ -14,7 +15,7 @@ public class SpriteKeyFrame implements Serializable {
   private final String spriteSheetId;
   private final String spriteId;
   private final long duration;
-  private transient SolaImage cachedSprite;
+  private final transient AssetHandle<SolaImage> cachedSprite = new AssetHandle<>();
 
   public SpriteKeyFrame(String spriteSheetId, String spriteId, long duration) {
     this.spriteSheetId = spriteSheetId;
@@ -34,14 +35,11 @@ public class SpriteKeyFrame implements Serializable {
     return duration;
   }
 
-  SolaImage getSprite(AssetPool<SpriteSheet> spriteSheetAssetPool) {
-    if (cachedSprite == null) {
-      SpriteSheet spriteSheet = spriteSheetAssetPool.getAsset(spriteSheetId);
-      cachedSprite = spriteSheet.getSprite(spriteId);
-    }
-
-    if (cachedSprite == null) {
-      throw new SpriteNotFoundException(spriteId);
+  AssetHandle<SolaImage> getSprite(AssetPool<SpriteSheet> spriteSheetAssetPool) {
+    if (cachedSprite.isLoading()) {
+      spriteSheetAssetPool.getAsset(spriteSheetId).executeIfLoaded(spriteSheet -> {
+        cachedSprite.setAsset(spriteSheet.getSprite(spriteId));
+      });
     }
 
     return cachedSprite;

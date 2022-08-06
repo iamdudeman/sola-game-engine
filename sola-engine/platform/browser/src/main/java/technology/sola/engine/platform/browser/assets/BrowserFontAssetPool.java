@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.browser.assets;
 
+import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.graphics.font.Font;
 
@@ -10,7 +11,7 @@ public class BrowserFontAssetPool extends AssetPool<Font> {
   }
 
   @Override
-  protected Font loadAsset(String path) {
+  protected AssetHandle<Font> loadAsset(String path) {
     // todo implement
     throw new RuntimeException("Not yet implemented");
   }

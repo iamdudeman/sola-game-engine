@@ -26,15 +26,18 @@ public class AudioExample extends Sola {
     solaGui = SolaGui.createInstance(assetPoolProvider, platform);
 
     assetPoolProvider.getAssetPool(Font.class)
-      .addAssetId(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_18.json");
+      .addAndGetAsset(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_18.json")
+      .executeWhenLoaded(font -> {
 
-    AudioClip audioClip = assetPoolProvider.getAssetPool(AudioClip.class)
-      .addAndGetAsset("test_song", "assets/asgaseg.wav");
+        assetPoolProvider.getAssetPool(AudioClip.class)
+          .addAndGetAsset("test_song", "assets/asgaseg.wav")
+          .executeWhenLoaded(audioClip -> {
+            audioClip.setVolume(0.5f);
 
-    audioClip.setVolume(0.5f);
-
-    solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
-    solaGui.setGuiRoot(buildGui(audioClip));
+            solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
+            solaGui.setGuiRoot(buildGui(audioClip));
+          });
+      });
   }
 
   @Override

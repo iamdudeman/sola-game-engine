@@ -12,8 +12,8 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
-import technology.sola.engine.platform.swing.assets.AudiClipAssetPool;
-import technology.sola.engine.platform.swing.assets.FontAssetPool;
+import technology.sola.engine.platform.swing.assets.SwingAudiClipAssetPool;
+import technology.sola.engine.platform.swing.assets.SwingFontAssetPool;
 import technology.sola.engine.platform.swing.assets.SolaImageAssetPool;
 import technology.sola.engine.platform.swing.assets.SpriteSheetAssetPool;
 import technology.sola.engine.platform.swing.core.Graphics2dRenderer;
@@ -155,9 +155,9 @@ public class SwingSolaPlatform extends SolaPlatform {
   protected void populateAssetPoolProvider(AssetPoolProvider assetPoolProvider) {
     AssetPool<SolaImage> solaImageAssetPool = new SolaImageAssetPool();
     assetPoolProvider.addAssetPool(solaImageAssetPool);
-    assetPoolProvider.addAssetPool(new FontAssetPool(solaImageAssetPool));
+    assetPoolProvider.addAssetPool(new SwingFontAssetPool(solaImageAssetPool));
     assetPoolProvider.addAssetPool(new SpriteSheetAssetPool(solaImageAssetPool));
-    assetPoolProvider.addAssetPool(new AudiClipAssetPool());
+    assetPoolProvider.addAssetPool(new SwingAudiClipAssetPool());
   }
 
   @Override

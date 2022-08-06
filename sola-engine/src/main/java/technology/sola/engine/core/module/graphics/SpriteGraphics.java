@@ -34,16 +34,18 @@ class SpriteGraphics {
       return;
     }
 
-    SolaImage sprite = spriteComponent.getSprite(spriteSheetAssetPool);
+    spriteComponent.getSprite(spriteSheetAssetPool).executeIfLoaded(sprite -> {
+      if (transformComponent.getScaleX() != 1 || transformComponent.getScaleY() != 1) {
+        AffineTransform affineTransform = new AffineTransform()
+          .translate(transformComponent.getX(), transformComponent.getY())
+          .scale(transformComponent.getScaleX(), transformComponent.getScaleY());
 
-    if (transformComponent.getScaleX() != 1 || transformComponent.getScaleY() != 1) {
-      AffineTransform affineTransform = new AffineTransform()
-        .translate(transformComponent.getX(), transformComponent.getY())
-        .scale(transformComponent.getScaleX(), transformComponent.getScaleY());
+        renderer.drawWithBlendMode(BlendMode.MASK, r -> renderer.drawImage(sprite, affineTransform));
+      } else {
+        renderer.drawImage(transformComponent.getX(), transformComponent.getY(), sprite);
+      }
+    });
 
-      renderer.drawWithBlendMode(BlendMode.MASK, r -> renderer.drawImage(sprite, affineTransform));
-    } else {
-      renderer.drawImage(transformComponent.getX(), transformComponent.getY(), sprite);
-    }
+
   }
 }

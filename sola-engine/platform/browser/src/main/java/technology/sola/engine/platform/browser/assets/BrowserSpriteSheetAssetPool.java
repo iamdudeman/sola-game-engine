@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.browser.assets;
 
+import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.SpriteSheet;
@@ -20,30 +21,33 @@ public class BrowserSpriteSheetAssetPool extends AssetPool<SpriteSheet> {
   }
 
   @Override
-  protected SpriteSheet loadAsset(String path) {
+  protected AssetHandle<SpriteSheet> loadAsset(String path) {
+    AssetHandle<SpriteSheet> spriteSheetAssetHandle = new AssetHandle<>();
+
     JsJsonUtils.loadJson(path, jsonString -> {
       SolaJson solaJson = new SolaJson();
       JsonObject spriteSheetJson = solaJson.parse(jsonString).asObject();
 
       String spriteImageName = spriteSheetJson.getString("spriteSheet");
-      SolaImage spriteImage = solaImageAssetPool.addAndGetAsset(spriteImageName, path + "/" + spriteImageName);
-      SpriteSheet spriteSheet = new SpriteSheet(spriteImage);
+      solaImageAssetPool.addAndGetAsset(spriteImageName, path.substring(0, path.lastIndexOf("/")) + "/" + spriteImageName).executeWhenLoaded(solaImage -> {
+        SpriteSheet spriteSheet = new SpriteSheet(solaImage);
 
-      spriteSheetJson.getArray("sprites").forEach(spritesJsonEntry -> {
-        JsonObject spriteJson = spritesJsonEntry.asObject();
+        spriteSheetJson.getArray("sprites").forEach(spritesJsonEntry -> {
+          JsonObject spriteJson = spritesJsonEntry.asObject();
 
-        spriteSheet.addSpriteDefinition(
-          spriteJson.getString("id"),
-          spriteJson.getInt("x"),
-          spriteJson.getInt("y"),
-          spriteJson.getInt("w"),
-          spriteJson.getInt("h")
-        );
+          spriteSheet.addSpriteDefinition(
+            spriteJson.getString("id"),
+            spriteJson.getInt("x"),
+            spriteJson.getInt("y"),
+            spriteJson.getInt("w"),
+            spriteJson.getInt("h")
+          );
+        });
+
+        spriteSheetAssetHandle.setAsset(spriteSheet);
       });
     });
 
-
-
-    return null;
+    return spriteSheetAssetHandle;
   }
 }
