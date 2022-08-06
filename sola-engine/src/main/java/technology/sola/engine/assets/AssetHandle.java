@@ -21,6 +21,10 @@ public class AssetHandle<T extends Asset> {
   }
 
   public T getAsset() {
+    if (isLoading()) {
+      throw new RuntimeException("AssetHandle has not had its Asset loaded yet.");
+    }
+
     return asset;
   }
 

@@ -101,7 +101,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
     AssetPool<SolaImage> solaImageAssetPool = new BrowserSolaImageAssetPool();
     assetPoolProvider.addAssetPool(solaImageAssetPool);
     assetPoolProvider.addAssetPool(new BrowserSpriteSheetAssetPool(solaImageAssetPool));
-    assetPoolProvider.addAssetPool(new BrowserFontAssetPool());
+    assetPoolProvider.addAssetPool(new BrowserFontAssetPool(solaImageAssetPool));
     assetPoolProvider.addAssetPool(new BrowserAudioClipAssetPool());
   }
 

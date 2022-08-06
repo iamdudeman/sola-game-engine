@@ -18,13 +18,21 @@ public class JsMouseUtils {
 
   private static class Scripts {
     private static final String MOUSE_EVENT = """
-        solaCanvas.addEventListener(eventName, function(event) {
+      window.mouseListeners = window.mouseListeners || {};
+
+      if (window.mouseListeners[eventName]) {
+        solaCanvas.removeEventListener(eventName, window.mouseListeners[eventName], false);
+      }
+
+      window.mouseListeners[eventName] = function(event) {
         var rect = event.target.getBoundingClientRect();
         var x = event.clientX - rect.left;
         var y = event.clientY - rect.top;
 
         callback(event.which, x, y);
-      }, false);
-        """;
+      };
+
+      solaCanvas.addEventListener(eventName, window.mouseListeners[eventName], false);
+      """;
   }
 }
