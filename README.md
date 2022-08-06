@@ -1,5 +1,7 @@
 # Branch WIP
-
+* Browser Platform
+  * Implement Audio loading
+  * Implement simple http server that hosts index.html and assets folders
 
 
 # TODO List
@@ -22,7 +24,6 @@
     * worker sends ImageData to main thread to render
     * (this approach may improve performance for StressTestExample to work better)
   * Improve performance (StressTestExample can't handle a lot of objects)
-  * Implement Audio loading
   * Implement window resizing using Viewport
     * Maybe add extra DOM elements to allow resizing?
 * Research Virtual File System
