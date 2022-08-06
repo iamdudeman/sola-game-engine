@@ -33,19 +33,25 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
   public void renderSelf(Renderer renderer, int x, int y) {
     Properties properties = properties();
 
-    renderer.setFont(font);
-    renderer.drawWithBlendMode(BlendMode.MASK, r -> renderer.drawString(properties.getText(), x + properties.padding.getLeft(), y + properties.padding.getTop(), properties.getColorText()));
+    if (font != null) {
+      renderer.setFont(font);
+      renderer.drawWithBlendMode(BlendMode.MASK, r -> renderer.drawString(properties.getText(), x + properties.padding.getLeft(), y + properties.padding.getTop(), properties.getColorText()));
+    }
   }
 
   @Override
   public void recalculateLayout() {
     solaGui.getAssetPoolProvider().getAssetPool(Font.class).getAsset(properties().getFontAssetId())
-      .executeIfLoaded(font -> {
-        this.font = font;
-        var textDimensions = font.getDimensionsForText(properties().getText());
+      .executeWhenLoaded(font -> {
+        if (this.font != font) {
+          this.font = font;
+          var textDimensions = font.getDimensionsForText(properties().getText());
 
-        textWidth = Math.max(textDimensions.width(), 1);
-        textHeight = Math.max(textDimensions.height(), 1);
+          textWidth = Math.max(textDimensions.width(), 1);
+          textHeight = Math.max(textDimensions.height(), 1);
+          // TODO fix this code as it is quite hacky
+          properties.setLayoutChanged(true);
+        }
       });
   }
 

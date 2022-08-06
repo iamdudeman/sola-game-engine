@@ -4,6 +4,7 @@ import technology.sola.ecs.Component;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
+import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
@@ -27,7 +28,7 @@ import java.util.List;
 
 public class RenderingExample extends Sola {
   private SolaGraphics solaGraphics;
-  private Font defaultFont;
+  private AssetHandle<Font> defaultFontAssetHandle;
 
   @Override
   protected SolaConfiguration getConfiguration() {
@@ -40,9 +41,8 @@ public class RenderingExample extends Sola {
 
     assetPoolProvider.getAssetPool(SpriteSheet.class)
       .addAssetId("test", "assets/test_tiles_spritesheet.json");
-    assetPoolProvider.getAssetPool(Font.class)
-      .addAndGetAsset("default", "assets/monospaced_NORMAL_18.json")
-      .executeWhenLoaded(font -> this.defaultFont = font);
+    defaultFontAssetHandle = assetPoolProvider.getAssetPool(Font.class)
+      .addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
 
     solaEcs.addSystem(new TestSystem());
     solaEcs.setWorld(createWorld());
@@ -81,12 +81,14 @@ public class RenderingExample extends Sola {
       final String characters1 = "!\"#$%&'()*+,-./0123456789:; <=>?@ABCDEFGHIJKLMN";
       final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
-      renderer.setFont(defaultFont);
-      renderer.setBlendMode(BlendMode.MASK);
-      renderer.drawString(characters1, 85, 5, Color.RED);
-      renderer.drawString(characters2, 85, 35, Color.BLACK);
-      renderer.drawString("Hello world!", 182, 67, Color.BLUE);
-      renderer.setBlendMode(BlendMode.NO_BLENDING);
+      defaultFontAssetHandle.executeIfLoaded(font -> {
+        renderer.setFont(font);
+        renderer.setBlendMode(BlendMode.MASK);
+        renderer.drawString(characters1, 85, 5, Color.RED);
+        renderer.drawString(characters2, 85, 35, Color.BLACK);
+        renderer.drawString("Hello world!", 182, 67, Color.BLUE);
+        renderer.setBlendMode(BlendMode.NO_BLENDING);
+      });
     });
   }
 
