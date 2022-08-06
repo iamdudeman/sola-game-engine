@@ -3,6 +3,7 @@ package technology.sola.engine.platform.browser.assets.audio;
 import org.teavm.jso.webaudio.AudioBuffer;
 import org.teavm.jso.webaudio.AudioBufferSourceNode;
 import org.teavm.jso.webaudio.AudioContext;
+import org.teavm.jso.webaudio.GainNode;
 import technology.sola.engine.assets.audio.AudioClip;
 
 import java.util.function.Consumer;
@@ -10,6 +11,11 @@ import java.util.function.Consumer;
 public class BrowserAudioClip implements AudioClip {
   private final AudioContext audioContext;
   private final AudioBuffer audioBuffer;
+  private AudioBufferSourceNode audioBufferSourceNode;
+  private boolean isPlaying = false;
+  private double startedAt = 0;
+  private double pausedAt = 0;
+  private float volume = 1f;
 
   public BrowserAudioClip(AudioContext audioContext, AudioBuffer audioBuffer) {
     this.audioContext = audioContext;
@@ -18,27 +24,45 @@ public class BrowserAudioClip implements AudioClip {
 
   @Override
   public boolean isPlaying() {
-    // todo implement
-    return false;
+    return isPlaying;
   }
 
   @Override
   public void play() {
-    AudioBufferSourceNode audioBufferSourceNode = audioContext.createBufferSource();
+    if (isPlaying) {
+      return;
+    }
 
+    double offset = pausedAt;
+
+    audioBufferSourceNode = audioContext.createBufferSource();
     audioBufferSourceNode.setBuffer(audioBuffer);
-    audioBufferSourceNode.connect(audioContext.getDestination());
-    audioBufferSourceNode.start();
+    GainNode gainNode = audioContext.createGain();
+    gainNode.connect(audioContext.getDestination());
+    gainNode.getGain().setValue(volume);
+    audioBufferSourceNode.connect(gainNode);
+    audioBufferSourceNode.start(0, offset);
+
+    startedAt = audioContext.getCurrentTime() - offset;
+    pausedAt = 0;
+    isPlaying = true;
   }
 
   @Override
   public void pause() {
-    throw new RuntimeException("Not yet implemented");
+    double elapsed = audioContext.getCurrentTime() - startedAt;
+    stop();
+    pausedAt = elapsed;
+    isPlaying = false;
   }
 
   @Override
   public void stop() {
-    throw new RuntimeException("Not yet implemented");
+    dispose();
+
+    pausedAt = 0;
+    startedAt = 0;
+    isPlaying = false;
   }
 
   @Override
@@ -48,18 +72,31 @@ public class BrowserAudioClip implements AudioClip {
 
   @Override
   public float getVolume() {
-    // todo implement
-    return 0;
+    return volume;
   }
 
   @Override
   public void setVolume(float volume) {
-    throw new RuntimeException("Not yet implemented");
+    boolean wasPlaying = isPlaying;
+
+    if (isPlaying) {
+      pause();
+    }
+
+    this.volume = volume;
+
+    if (wasPlaying) {
+      play();
+    }
   }
 
   @Override
   public void dispose() {
-    throw new RuntimeException("Not yet implemented");
+    if (audioBufferSourceNode != null) {
+      audioBufferSourceNode.disconnect();
+      audioBufferSourceNode.stop(0);
+      audioBufferSourceNode = null;
+    }
   }
 
   @Override
