@@ -1,6 +1,4 @@
 # Branch WIP
-* Browser Platform
-  * Implement simple http server that hosts index.html and assets folders
 
 
 # TODO List

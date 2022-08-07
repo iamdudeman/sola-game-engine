@@ -1,6 +1,6 @@
 package technology.sola.engine.examples.browser;
 
-import technology.sola.engine.platform.browser.transpile.SolaBrowserFileBuilder;
+import technology.sola.engine.platform.browser.tools.SolaBrowserFileBuilder;
 
 public class GenerateBrowserFilesMain {
   public static void main(String[] args) {

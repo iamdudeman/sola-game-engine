@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.browser.transpile;
+package technology.sola.engine.platform.browser.tools;
 
 import org.teavm.tooling.TeaVMTargetType;
 import org.teavm.tooling.builder.BuildException;
