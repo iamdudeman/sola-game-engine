@@ -1,6 +1,5 @@
 # Branch WIP
 * Browser Platform
-  * Implement Audio loading
   * Implement simple http server that hosts index.html and assets folders
 
 

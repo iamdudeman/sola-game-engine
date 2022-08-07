@@ -6,11 +6,14 @@ import org.teavm.jso.webaudio.AudioContext;
 import org.teavm.jso.webaudio.GainNode;
 import technology.sola.engine.assets.audio.AudioClip;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class BrowserAudioClip implements AudioClip {
   private final AudioContext audioContext;
   private final AudioBuffer audioBuffer;
+  private final List<Consumer<AudioClip>> finishListenerCallbacks = new ArrayList<>();
   private AudioBufferSourceNode audioBufferSourceNode;
   private boolean isPlaying = false;
   private double startedAt = 0;
@@ -36,6 +39,10 @@ public class BrowserAudioClip implements AudioClip {
     double offset = pausedAt;
 
     audioBufferSourceNode = audioContext.createBufferSource();
+    audioBufferSourceNode.setOnEnded(evt -> {
+      this.isPlaying = false;
+      finishListenerCallbacks.forEach(callback -> callback.accept(this));
+    });
     audioBufferSourceNode.setBuffer(audioBuffer);
     GainNode gainNode = audioContext.createGain();
     gainNode.connect(audioContext.getDestination());
@@ -67,7 +74,11 @@ public class BrowserAudioClip implements AudioClip {
 
   @Override
   public void loop(int times) {
-    throw new RuntimeException("Not yet implemented");
+    play();
+    audioBufferSourceNode.setLoop(true);
+    if (times > 0) {
+      audioBufferSourceNode.stop(audioContext.getCurrentTime() + audioBuffer.getDuration() * times);
+    }
   }
 
   @Override
@@ -101,6 +112,6 @@ public class BrowserAudioClip implements AudioClip {
 
   @Override
   public void addFinishListener(Consumer<AudioClip> callback) {
-    throw new RuntimeException("Not yet implemented");
+    finishListenerCallbacks.add(callback);
   }
 }
