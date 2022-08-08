@@ -1,5 +1,7 @@
 # Branch WIP
 * Sola init should probably be made to be async now so assets can be preloaded if desired
+* Consider making JavaFx and Swing asset pools async since they can be now
+
 
 # TODO List
 * Rendering
