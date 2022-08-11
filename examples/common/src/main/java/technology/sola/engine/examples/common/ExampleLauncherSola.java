@@ -3,6 +3,7 @@ package technology.sola.engine.examples.common;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.core.SolaInitialization;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
@@ -38,7 +39,7 @@ public class ExampleLauncherSola extends Sola {
   }
 
   @Override
-  protected void onInit() {
+  protected void onInit(SolaInitialization solaInitialization) {
     solaGui = SolaGui.createInstance(assetPoolProvider, platform);
 
     assetPoolProvider.getAssetPool(Font.class)

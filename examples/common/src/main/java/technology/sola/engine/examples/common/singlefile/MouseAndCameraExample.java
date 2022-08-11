@@ -4,6 +4,7 @@ import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.core.SolaInitialization;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.module.graphics.SolaGraphics;
 import technology.sola.engine.graphics.Color;
@@ -24,7 +25,7 @@ public class MouseAndCameraExample extends Sola {
   }
 
   @Override
-  protected void onInit() {
+  protected void onInit(SolaInitialization solaInitialization) {
     solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetPoolProvider);
 
     clickCreateEntitySystem = new ClickCreateEntitySystem();

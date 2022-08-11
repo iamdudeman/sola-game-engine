@@ -5,6 +5,7 @@ import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.core.SolaInitialization;
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
@@ -23,9 +24,8 @@ public class AudioExample extends Sola {
   }
 
   @Override
-  protected void onInit() {
-    solaGui = SolaGui.createInstance(assetPoolProvider, platform);
-
+  protected void onInit(SolaInitialization solaInitialization) {
+    solaInitialization.setAsyncInitialization();
     BulkAssetLoader bulkAssetLoader = new BulkAssetLoader(assetPoolProvider);
 
     bulkAssetLoader.loadAll(
@@ -35,9 +35,12 @@ public class AudioExample extends Sola {
       if (assets[1] instanceof AudioClip audioClip) {
         audioClip.setVolume(0.5f);
 
+        solaGui = SolaGui.createInstance(assetPoolProvider, platform);
         solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
         solaGui.setGuiRoot(buildGui(audioClip));
       }
+
+      solaInitialization.completeAsync();
     });
   }
 

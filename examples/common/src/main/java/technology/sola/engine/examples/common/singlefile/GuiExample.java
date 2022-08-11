@@ -3,6 +3,7 @@ package technology.sola.engine.examples.common.singlefile;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.core.SolaInitialization;
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
@@ -21,7 +22,8 @@ public class GuiExample extends Sola {
   }
 
   @Override
-  protected void onInit() {
+  protected void onInit(SolaInitialization solaInitialization) {
+    solaInitialization.setAsyncInitialization();
     solaGui = SolaGui.createInstance(assetPoolProvider, platform);
 
     assetPoolProvider.getAssetPool(Font.class)
@@ -30,6 +32,8 @@ public class GuiExample extends Sola {
       .executeWhenLoaded(font -> {
         solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
         solaGui.setGuiRoot(buildGui());
+
+        solaInitialization.completeAsync();
       });
   }
 

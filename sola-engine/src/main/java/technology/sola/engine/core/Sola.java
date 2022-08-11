@@ -25,7 +25,7 @@ public abstract class Sola {
 
   protected abstract SolaConfiguration getConfiguration();
 
-  protected abstract void onInit();
+  protected abstract void onInit(SolaInitialization solaInitialization);
 
   protected void onUpdate(float deltaTime) {
     keyboardInput.updateStatusOfKeys();
@@ -35,7 +35,7 @@ public abstract class Sola {
 
   protected abstract void onRender(Renderer renderer);
 
-  void initializeForPlatform(SolaPlatform platform) {
+  void initializeForPlatform(SolaPlatform platform, SolaInitialization solaInitialization) {
     this.platform = platform;
 
     platform.onKeyPressed(event -> keyboardInput.keyPressed(event));
@@ -44,6 +44,6 @@ public abstract class Sola {
     platform.onMousePressed(event -> mouseInput.onMousePressed(event));
     platform.onMouseReleased(event -> mouseInput.onMouseReleased(event));
 
-    onInit();
+    onInit(solaInitialization);
   }
 }
