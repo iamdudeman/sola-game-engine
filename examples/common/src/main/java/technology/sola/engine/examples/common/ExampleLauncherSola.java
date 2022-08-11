@@ -39,7 +39,7 @@ public class ExampleLauncherSola extends Sola {
   }
 
   @Override
-  protected void onInit(SolaInitialization solaInitialization) {
+  protected void onInit() {
     solaGui = SolaGui.createInstance(assetPoolProvider, platform);
 
     assetPoolProvider.getAssetPool(Font.class)

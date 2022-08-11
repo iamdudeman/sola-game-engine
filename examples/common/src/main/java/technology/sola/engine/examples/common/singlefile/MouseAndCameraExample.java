@@ -25,7 +25,7 @@ public class MouseAndCameraExample extends Sola {
   }
 
   @Override
-  protected void onInit(SolaInitialization solaInitialization) {
+  protected void onInit() {
     solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetPoolProvider);
 
     clickCreateEntitySystem = new ClickCreateEntitySystem();

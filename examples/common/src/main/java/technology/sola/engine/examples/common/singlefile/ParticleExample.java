@@ -22,7 +22,7 @@ public class ParticleExample extends Sola {
   }
 
   @Override
-  protected void onInit(SolaInitialization solaInitialization) {
+  protected void onInit() {
     SolaPhysics.createInstance(eventHub, solaEcs);
 
     solaEcs.setWorld(buildWorld());

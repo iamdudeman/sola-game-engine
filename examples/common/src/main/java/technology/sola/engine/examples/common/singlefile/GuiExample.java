@@ -22,7 +22,7 @@ public class GuiExample extends Sola {
   }
 
   @Override
-  protected void onInit(SolaInitialization solaInitialization) {
+  protected void onInit() {
     solaInitialization.setAsyncInitialization();
     solaGui = SolaGui.createInstance(assetPoolProvider, platform);
 

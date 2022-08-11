@@ -24,7 +24,7 @@ public class AudioExample extends Sola {
   }
 
   @Override
-  protected void onInit(SolaInitialization solaInitialization) {
+  protected void onInit() {
     solaInitialization.setAsyncInitialization();
     BulkAssetLoader bulkAssetLoader = new BulkAssetLoader(assetPoolProvider);
 

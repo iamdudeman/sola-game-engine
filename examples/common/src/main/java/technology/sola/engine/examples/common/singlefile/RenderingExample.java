@@ -37,7 +37,7 @@ public class RenderingExample extends Sola {
   }
 
   @Override
-  protected void onInit(SolaInitialization solaInitialization) {
+  protected void onInit() {
     solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetPoolProvider);
 
     assetPoolProvider.getAssetPool(SpriteSheet.class)
