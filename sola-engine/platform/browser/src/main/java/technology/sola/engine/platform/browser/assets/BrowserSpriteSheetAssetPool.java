@@ -29,7 +29,7 @@ public class BrowserSpriteSheetAssetPool extends AssetPool<SpriteSheet> {
       JsonObject spriteSheetJson = solaJson.parse(jsonString).asObject();
 
       String spriteImageName = spriteSheetJson.getString("spriteSheet");
-      solaImageAssetPool.addAndGetAsset(spriteImageName, path.substring(0, path.lastIndexOf("/")) + "/" + spriteImageName).executeWhenLoaded(solaImage -> {
+      solaImageAssetPool.getNewAsset(spriteImageName, path.substring(0, path.lastIndexOf("/")) + "/" + spriteImageName).executeWhenLoaded(solaImage -> {
         SpriteSheet spriteSheet = new SpriteSheet(solaImage);
 
         spriteSheetJson.getArray("sprites").forEach(spritesJsonEntry -> {

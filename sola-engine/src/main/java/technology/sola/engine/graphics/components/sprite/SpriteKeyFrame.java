@@ -4,7 +4,6 @@ import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.SpriteSheet;
-import technology.sola.engine.graphics.exception.SpriteNotFoundException;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -37,7 +36,7 @@ public class SpriteKeyFrame implements Serializable {
 
   AssetHandle<SolaImage> getSprite(AssetPool<SpriteSheet> spriteSheetAssetPool) {
     if (cachedSprite.isLoading()) {
-      spriteSheetAssetPool.getAsset(spriteSheetId).executeIfLoaded(spriteSheet -> {
+      spriteSheetAssetPool.get(spriteSheetId).executeIfLoaded(spriteSheet -> {
         cachedSprite.setAsset(spriteSheet.getSprite(spriteId));
       });
     }

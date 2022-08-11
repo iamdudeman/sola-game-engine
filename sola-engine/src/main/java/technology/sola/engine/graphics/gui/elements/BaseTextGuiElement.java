@@ -41,7 +41,7 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
 
   @Override
   public void recalculateLayout() {
-    solaGui.getAssetPoolProvider().getAssetPool(Font.class).getAsset(properties().getFontAssetId())
+    solaGui.getAssetPoolProvider().get(Font.class).get(properties().getFontAssetId())
       .executeWhenLoaded(font -> {
         if (this.font != font) {
           this.font = font;

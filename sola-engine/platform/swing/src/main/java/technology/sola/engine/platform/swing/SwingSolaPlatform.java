@@ -154,10 +154,10 @@ public class SwingSolaPlatform extends SolaPlatform {
   @Override
   protected void populateAssetPoolProvider(AssetPoolProvider assetPoolProvider) {
     AssetPool<SolaImage> solaImageAssetPool = new SolaImageAssetPool();
-    assetPoolProvider.addAssetPool(solaImageAssetPool);
-    assetPoolProvider.addAssetPool(new SwingFontAssetPool(solaImageAssetPool));
-    assetPoolProvider.addAssetPool(new SpriteSheetAssetPool(solaImageAssetPool));
-    assetPoolProvider.addAssetPool(new SwingAudiClipAssetPool());
+    assetPoolProvider.add(solaImageAssetPool);
+    assetPoolProvider.add(new SwingFontAssetPool(solaImageAssetPool));
+    assetPoolProvider.add(new SpriteSheetAssetPool(solaImageAssetPool));
+    assetPoolProvider.add(new SwingAudiClipAssetPool());
   }
 
   @Override

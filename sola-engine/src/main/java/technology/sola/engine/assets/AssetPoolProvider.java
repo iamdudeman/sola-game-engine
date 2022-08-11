@@ -8,12 +8,12 @@ import java.util.Map;
 public class AssetPoolProvider {
   private final Map<Class<?>, AssetPool<?>> assetPoolMap = new HashMap<>();
 
-  public void addAssetPool(AssetPool<?> assetPool) {
+  public void add(AssetPool<?> assetPool) {
     assetPoolMap.put(assetPool.getAssetClass(), assetPool);
   }
 
   @SuppressWarnings("unchecked")
-  public <T extends Asset> AssetPool<T> getAssetPool(Class<T> assetClass) {
+  public <T extends Asset> AssetPool<T> get(Class<T> assetClass) {
     AssetPool<?> assetPool = assetPoolMap.get(assetClass);
 
     if (assetPool == null) {

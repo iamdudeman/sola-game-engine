@@ -29,7 +29,7 @@ public class BrowserFontAssetPool extends AssetPool<Font> {
       SolaJson solaJson = new SolaJson();
       FontInfo fontInfo = solaJson.parse(jsonString, new FontInfoJsonMapper());
 
-      solaImageAssetPool.addAndGetAsset(
+      solaImageAssetPool.getNewAsset(
         fontInfo.fontGlyphFile(),
         path.substring(0, path.lastIndexOf("/")) + "/" + fontInfo.fontGlyphFile()).executeWhenLoaded(solaImage -> {
           fontAssetHandle.setAsset(new Font(solaImage, fontInfo));

@@ -27,8 +27,8 @@ public class BulkAssetLoader {
       final int currentAssetIndex = index;
 
       assetPoolProvider
-        .getAssetPool(bulkAssetDescription.assetClass())
-        .addAndGetAsset(bulkAssetDescription.assetId(), bulkAssetDescription.path()).executeWhenLoaded(asset -> {
+        .get(bulkAssetDescription.assetClass())
+        .getNewAsset(bulkAssetDescription.assetId(), bulkAssetDescription.path()).executeWhenLoaded(asset -> {
           assetCounter.increment();
 
           assets[currentAssetIndex] = asset;

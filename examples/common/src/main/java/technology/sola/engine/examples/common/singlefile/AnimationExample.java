@@ -26,7 +26,7 @@ public class AnimationExample extends Sola {
   protected void onInit() {
     solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetPoolProvider);
 
-    assetPoolProvider.getAssetPool(SpriteSheet.class)
+    assetPoolProvider.get(SpriteSheet.class)
       .addAssetId("test", "assets/test_tiles_spritesheet.json");
 
     solaEcs.setWorld(buildWorld());

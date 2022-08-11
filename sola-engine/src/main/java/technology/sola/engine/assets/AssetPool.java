@@ -9,19 +9,24 @@ public abstract class AssetPool<T extends Asset> {
   protected Map<String, AssetHandle<T>> cachedAssets = new HashMap<>();
   protected Map<String, String> assetIdToPathMap = new HashMap<>();
 
+  /**
+   * Adds an asset id to path mapping but does not populate the cache until the asset is requested via {@link AssetPool#get(String)}
+   * @param id
+   * @param path
+   * @return
+   */
   public AssetPool<T> addAssetId(String id, String path) {
     assetIdToPathMap.put(id, path);
 
     return this;
   }
 
-  public AssetHandle<T> addAndGetAsset(String id, String path) {
-    addAssetId(id, path);
-
-    return getAsset(id);
-  }
-
-  public AssetHandle<T> getAsset(String id) {
+  /**
+   * Returns an {@link AssetHandle} for the asset requested or throws an exception if not found.
+   * @param id
+   * @return
+   */
+  public AssetHandle<T> get(String id) {
     String assetPath = assetIdToPathMap.get(id);
 
     if (assetPath == null) {
@@ -29,6 +34,18 @@ public abstract class AssetPool<T extends Asset> {
     }
 
     return cachedAssets.computeIfAbsent(id, key -> loadAsset(assetPath));
+  }
+
+  /**
+   * Adds an asset id to path mapping and then returns an {@link AssetHandle} to the asset.
+   * @param id
+   * @param path
+   * @return
+   */
+  public AssetHandle<T> getNewAsset(String id, String path) {
+    addAssetId(id, path);
+
+    return get(id);
   }
 
   public abstract Class<T> getAssetClass();

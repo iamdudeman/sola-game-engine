@@ -143,10 +143,10 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   @Override
   protected void populateAssetPoolProvider(AssetPoolProvider assetPoolProvider) {
     AssetPool<SolaImage> solaImageAssetPool = new JavaFxSolaImageAssetPool();
-    assetPoolProvider.addAssetPool(solaImageAssetPool);
-    assetPoolProvider.addAssetPool(new JavaFxFontAssetPool(solaImageAssetPool));
-    assetPoolProvider.addAssetPool(new JavaFxSpriteSheetAssetPool(solaImageAssetPool));
-    assetPoolProvider.addAssetPool(new JavaFxAudiClipAssetPool());
+    assetPoolProvider.add(solaImageAssetPool);
+    assetPoolProvider.add(new JavaFxFontAssetPool(solaImageAssetPool));
+    assetPoolProvider.add(new JavaFxSpriteSheetAssetPool(solaImageAssetPool));
+    assetPoolProvider.add(new JavaFxAudiClipAssetPool());
   }
 
   @Override

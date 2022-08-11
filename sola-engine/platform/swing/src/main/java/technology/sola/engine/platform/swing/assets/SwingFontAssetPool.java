@@ -34,7 +34,7 @@ public class SwingFontAssetPool extends AssetPool<Font> {
       FontInfo fontInfo = solaJson.parse(Files.readString(file.toPath()), new FontInfoJsonMapper());
       AssetHandle<Font> fontAssetHandle = new AssetHandle<>();
 
-      solaImageAssetPool.addAndGetAsset(
+      solaImageAssetPool.getNewAsset(
         fontInfo.fontGlyphFile(),
         path.replace(file.getName(), "") + fontInfo.fontGlyphFile()
       ).executeWhenLoaded(solaImage -> fontAssetHandle.setAsset(new Font(solaImage, fontInfo)));

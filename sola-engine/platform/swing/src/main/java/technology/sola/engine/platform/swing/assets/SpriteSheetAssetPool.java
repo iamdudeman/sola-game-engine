@@ -35,7 +35,7 @@ public class SpriteSheetAssetPool extends AssetPool<SpriteSheet> {
       String spriteImageName = spriteSheetJson.getString("spriteSheet");
       AssetHandle<SpriteSheet> spriteSheetAssetHandle = new AssetHandle<>();
 
-      solaImageAssetPool.addAndGetAsset(spriteImageName, new File(file.getParent(), spriteImageName).getPath())
+      solaImageAssetPool.getNewAsset(spriteImageName, new File(file.getParent(), spriteImageName).getPath())
         .executeWhenLoaded(solaImage -> {
           SpriteSheet spriteSheet = new SpriteSheet(solaImage);
 

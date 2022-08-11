@@ -99,10 +99,10 @@ public class BrowserSolaPlatform extends SolaPlatform {
   @Override
   protected void populateAssetPoolProvider(AssetPoolProvider assetPoolProvider) {
     AssetPool<SolaImage> solaImageAssetPool = new BrowserSolaImageAssetPool();
-    assetPoolProvider.addAssetPool(solaImageAssetPool);
-    assetPoolProvider.addAssetPool(new BrowserSpriteSheetAssetPool(solaImageAssetPool));
-    assetPoolProvider.addAssetPool(new BrowserFontAssetPool(solaImageAssetPool));
-    assetPoolProvider.addAssetPool(new BrowserAudioClipAssetPool());
+    assetPoolProvider.add(solaImageAssetPool);
+    assetPoolProvider.add(new BrowserSpriteSheetAssetPool(solaImageAssetPool));
+    assetPoolProvider.add(new BrowserFontAssetPool(solaImageAssetPool));
+    assetPoolProvider.add(new BrowserAudioClipAssetPool());
   }
 
   @Override

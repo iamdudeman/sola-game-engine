@@ -39,10 +39,10 @@ public class RenderingExample extends Sola {
   protected void onInit() {
     solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetPoolProvider);
 
-    assetPoolProvider.getAssetPool(SpriteSheet.class)
+    assetPoolProvider.get(SpriteSheet.class)
       .addAssetId("test", "assets/test_tiles_spritesheet.json");
-    defaultFontAssetHandle = assetPoolProvider.getAssetPool(Font.class)
-      .addAndGetAsset("default", "assets/monospaced_NORMAL_16.json");
+    defaultFontAssetHandle = assetPoolProvider.get(Font.class)
+      .getNewAsset("default", "assets/monospaced_NORMAL_16.json");
 
     solaEcs.addSystem(new TestSystem());
     solaEcs.setWorld(createWorld());

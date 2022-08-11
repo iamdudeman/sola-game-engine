@@ -229,7 +229,7 @@ public class EditorSola extends Sola {
 
   private void populateFonts() {
     // TODO need a way to reload fonts when project changes or new ones are added
-    AssetPool<Font> fontAssetPool = assetPoolProvider.getAssetPool(Font.class);
+    AssetPool<Font> fontAssetPool = assetPoolProvider.get(Font.class);
 
     FolderUtils folderUtils = new FolderUtils(solaEditorContext);
     File fontFolder = folderUtils.getOrCreateFolder("assets/fonts");
@@ -246,7 +246,7 @@ public class EditorSola extends Sola {
 
   private void populateSpriteSheets() {
     // TODO need a way to reload sprite sheets when project changes or new ones are added
-    AssetPool<SpriteSheet> spriteSheetAssetPool = assetPoolProvider.getAssetPool(SpriteSheet.class);
+    AssetPool<SpriteSheet> spriteSheetAssetPool = assetPoolProvider.get(SpriteSheet.class);
 
     FolderUtils folderUtils = new FolderUtils(solaEditorContext);
     File fontFolder = folderUtils.getOrCreateFolder("assets/sprites");
