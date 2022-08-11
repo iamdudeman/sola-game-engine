@@ -9,7 +9,6 @@ import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
-import technology.sola.engine.core.SolaInitialization;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.module.graphics.SolaGraphics;
 import technology.sola.engine.graphics.Color;
@@ -43,7 +42,7 @@ public class RenderingExample extends Sola {
     assetPoolProvider.getAssetPool(SpriteSheet.class)
       .addAssetId("test", "assets/test_tiles_spritesheet.json");
     defaultFontAssetHandle = assetPoolProvider.getAssetPool(Font.class)
-      .addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
+      .addAndGetAsset("default", "assets/monospaced_NORMAL_16.json");
 
     solaEcs.addSystem(new TestSystem());
     solaEcs.setWorld(createWorld());

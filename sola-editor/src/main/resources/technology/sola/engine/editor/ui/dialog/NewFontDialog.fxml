@@ -19,6 +19,7 @@
               <FXCollections fx:factory="observableArrayList">
                 <String fx:value="monospaced"/>
                 <String fx:value="times"/>
+                <String fx:value="arial"/>
               </FXCollections>
             </items>
           </ComboBox>

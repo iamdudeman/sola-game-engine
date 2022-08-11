@@ -3,6 +3,8 @@
 
 
 # TODO List
+* Bugs
+  * Font asset generation for non-monospaced fonts has some issues getting extra pixels from adjacent characters
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
   * More BlendMode implementations

@@ -3,7 +3,6 @@ package technology.sola.engine.examples.common.singlefile;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
-import technology.sola.engine.core.SolaInitialization;
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
@@ -27,7 +26,7 @@ public class GuiExample extends Sola {
     solaGui = SolaGui.createInstance(assetPoolProvider, platform);
 
     assetPoolProvider.getAssetPool(Font.class)
-      .addAssetId(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_18.json")
+      .addAssetId(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_16.json")
       .addAndGetAsset("times_NORMAL_18", "assets/times_NORMAL_18.json")
       .executeWhenLoaded(font -> {
         solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
