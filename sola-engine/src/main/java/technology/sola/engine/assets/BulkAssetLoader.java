@@ -23,18 +23,20 @@ public class BulkAssetLoader {
     AssetCounter assetCounter = new AssetCounter();
     BulkAssetHandle bulkAssetHandle = new BulkAssetHandle();
 
-    for (var bulkAssetInfo : bulkAssetDescriptionList) {
-      final var currentAssetIndex = index;
+    for (BulkAssetDescription bulkAssetDescription : bulkAssetDescriptionList) {
+      final int currentAssetIndex = index;
 
-      assetPoolProvider.getAssetPool(bulkAssetInfo.assetClass()).addAndGetAsset(bulkAssetInfo.assetId(), bulkAssetInfo.path()).executeWhenLoaded(asset -> {
-        assetCounter.increment();
+      assetPoolProvider
+        .getAssetPool(bulkAssetDescription.assetClass())
+        .addAndGetAsset(bulkAssetDescription.assetId(), bulkAssetDescription.path()).executeWhenLoaded(asset -> {
+          assetCounter.increment();
 
-        assets[currentAssetIndex] = asset;
+          assets[currentAssetIndex] = asset;
 
-        if (assetCounter.count >= totalToLoad) {
-          bulkAssetHandle.complete(assets);
-        }
-      });
+          if (assetCounter.count >= totalToLoad) {
+            bulkAssetHandle.complete(assets);
+          }
+        });
 
       index++;
     }
