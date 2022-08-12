@@ -27,21 +27,23 @@ public class JavaFxFontAssetPool extends AssetPool<Font> {
 
   @Override
   protected AssetHandle<Font> loadAsset(String path) {
-    File file = new File(path);
-    SolaJson solaJson = new SolaJson();
+    AssetHandle<Font> fontAssetHandle = new AssetHandle<>();
 
-    try {
-      FontInfo fontInfo = solaJson.parse(Files.readString(file.toPath()), new FontInfoJsonMapper());
-      AssetHandle<Font> fontAssetHandle = new AssetHandle<>();
+    new Thread(() -> {
+      try {
+        File file = new File(path);
+        SolaJson solaJson = new SolaJson();
+        FontInfo fontInfo = solaJson.parse(Files.readString(file.toPath()), new FontInfoJsonMapper());
+        String fontImagePath = path.replace(file.getName(), "") + fontInfo.fontGlyphFile();
 
-      solaImageAssetPool.getNewAsset(
-        fontInfo.fontGlyphFile(),
-        path.replace(file.getName(), "") + fontInfo.fontGlyphFile()
-      ).executeWhenLoaded(solaImage -> fontAssetHandle.setAsset(new Font(solaImage, fontInfo)));
+        solaImageAssetPool
+          .getNewAsset(fontInfo.fontGlyphFile(), fontImagePath)
+          .executeWhenLoaded(solaImage -> fontAssetHandle.setAsset(new Font(solaImage, fontInfo)));
+      } catch (IOException ex) {
+        throw new FailedFontLoadException(path);
+      }
+    }).start();
 
-      return fontAssetHandle;
-    } catch (IOException ex) {
-      throw new FailedFontLoadException(path);
-    }
+    return fontAssetHandle;
   }
 }

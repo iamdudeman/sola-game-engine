@@ -16,16 +16,22 @@ public class JavaFxSolaImageAssetPool extends AssetPool<SolaImage> {
 
   @Override
   protected AssetHandle<SolaImage> loadAsset(String path) {
-    File file = new File(path);
-    Image image = new Image(file.toURI().toString());
-    int width = (int)image.getWidth();
-    int height = (int)image.getHeight();
+    AssetHandle<SolaImage> solaImageAssetHandle = new AssetHandle<>();
 
-    SolaImage solaImage = new SolaImage(width, height);
+    new Thread(() -> {
+      File file = new File(path);
+      Image image = new Image(file.toURI().toString());
+      int width = (int) image.getWidth();
+      int height = (int) image.getHeight();
 
-    image.getPixelReader()
-      .getPixels(0, 0, width, height, PixelFormat.getIntArgbPreInstance(), solaImage.getPixels(), 0, width);
+      SolaImage solaImage = new SolaImage(width, height);
 
-    return new AssetHandle<>(solaImage);
+      image.getPixelReader()
+        .getPixels(0, 0, width, height, PixelFormat.getIntArgbPreInstance(), solaImage.getPixels(), 0, width);
+
+      solaImageAssetHandle.setAsset(solaImage);
+    }).start();
+
+    return solaImageAssetHandle;
   }
 }

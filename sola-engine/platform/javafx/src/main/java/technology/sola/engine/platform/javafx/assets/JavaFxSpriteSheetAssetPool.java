@@ -26,37 +26,41 @@ public class JavaFxSpriteSheetAssetPool extends AssetPool<SpriteSheet> {
 
   @Override
   protected AssetHandle<SpriteSheet> loadAsset(String path) {
-    File file = new File(path);
-    try {
-      String jsonString = Files.readString(file.toPath());
-      SolaJson solaJson = new SolaJson();
-      JsonObject spriteSheetJson = solaJson.parse(jsonString).asObject();
+    AssetHandle<SpriteSheet> spriteSheetAssetHandle = new AssetHandle<>();
 
-      String spriteImageName = spriteSheetJson.getString("spriteSheet");
-      AssetHandle<SpriteSheet> spriteSheetAssetHandle = new AssetHandle<>();
+    new Thread(() -> {
+      File file = new File(path);
 
-      solaImageAssetPool.getNewAsset(spriteImageName, new File(file.getParent(), spriteImageName).getPath())
-        .executeWhenLoaded(solaImage -> {
-          SpriteSheet spriteSheet = new SpriteSheet(solaImage);
+      try {
+        String jsonString = Files.readString(file.toPath());
+        SolaJson solaJson = new SolaJson();
+        JsonObject spriteSheetJson = solaJson.parse(jsonString).asObject();
+        String spriteImageName = spriteSheetJson.getString("spriteSheet");
+        String spriteImagePath = new File(file.getParent(), spriteImageName).getPath();
 
-          spriteSheetJson.getArray("sprites").forEach(spritesJsonEntry -> {
-            JsonObject spriteJson = spritesJsonEntry.asObject();
+        solaImageAssetPool.getNewAsset(spriteImageName, spriteImagePath)
+          .executeWhenLoaded(solaImage -> {
+            SpriteSheet spriteSheet = new SpriteSheet(solaImage);
 
-            spriteSheet.addSpriteDefinition(
-              spriteJson.getString("id"),
-              spriteJson.getInt("x"),
-              spriteJson.getInt("y"),
-              spriteJson.getInt("w"),
-              spriteJson.getInt("h")
-            );
+            spriteSheetJson.getArray("sprites").forEach(spritesJsonEntry -> {
+              JsonObject spriteJson = spritesJsonEntry.asObject();
+
+              spriteSheet.addSpriteDefinition(
+                spriteJson.getString("id"),
+                spriteJson.getInt("x"),
+                spriteJson.getInt("y"),
+                spriteJson.getInt("w"),
+                spriteJson.getInt("h")
+              );
+            });
+
+            spriteSheetAssetHandle.setAsset(spriteSheet);
           });
+      } catch (IOException ex) {
+        throw new FailedSpriteSheetLoadException(path);
+      }
+    }).start();
 
-          spriteSheetAssetHandle.setAsset(spriteSheet);
-        });
-
-      return spriteSheetAssetHandle;
-    } catch (IOException ex) {
-      throw new FailedSpriteSheetLoadException(path);
-    }
+    return spriteSheetAssetHandle;
   }
 }
