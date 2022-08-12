@@ -25,11 +25,17 @@ public class SwingAudiClipAssetPool extends AssetPool<AudioClip> {
     String fileExtension = file.getPath().substring(file.getPath().lastIndexOf('.')).toLowerCase();
 
     if (".wav".equals(fileExtension)) {
-      try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file)) {
-        return new AssetHandle<>(new WavAudioClip(AudioSystem.getClip(), audioInputStream));
-      } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
-        throw new AudioClipException("Could not create AudioClip: " + ex.getMessage());
-      }
+      AssetHandle<AudioClip> audioClipAssetHandle = new AssetHandle<>();
+
+      new Thread(() -> {
+        try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file)) {
+          audioClipAssetHandle.setAsset(new WavAudioClip(AudioSystem.getClip(), audioInputStream));
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+          throw new AudioClipException("Could not create AudioClip: " + ex.getMessage());
+        }
+      }).start();
+
+      return audioClipAssetHandle;
     }
 
     throw new AudioClipException("Could not load AudioClip from file " + file.getPath());

@@ -28,7 +28,7 @@ public class AssetHandle<T extends Asset> {
     return asset;
   }
 
-  public void setAsset(T asset) {
+  public synchronized void setAsset(T asset) {
     if (this.asset == null) {
       this.asset = asset;
       onLoadSubscribers.forEach(consumer -> consumer.accept(asset));
