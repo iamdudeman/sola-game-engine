@@ -1,10 +1,12 @@
 # Branch WIP
-* Consider making JavaFx and Swing asset pools async since they can be now
 
 
 # TODO List
 * Bugs
   * Font asset generation for non-monospaced fonts has some issues getting extra pixels from adjacent characters
+* Assets
+  * Consider adding JsonAsset and JsonAssetPool
+  * Consider implementing generic SpriteSheetAssetPool and generic FontAssetPool utilizing platform specific JsonAssetPool and SolaImageAssetPool
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
   * More BlendMode implementations
