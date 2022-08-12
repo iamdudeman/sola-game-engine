@@ -45,7 +45,5 @@ class SpriteGraphics {
         renderer.drawImage(transformComponent.getX(), transformComponent.getY(), sprite);
       }
     });
-
-
   }
 }

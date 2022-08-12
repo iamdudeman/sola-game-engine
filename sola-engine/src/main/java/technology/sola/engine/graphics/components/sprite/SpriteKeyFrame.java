@@ -15,6 +15,7 @@ public class SpriteKeyFrame implements Serializable {
   private final String spriteId;
   private final long duration;
   private final transient AssetHandle<SolaImage> cachedSprite = new AssetHandle<>();
+  private transient boolean isRequested = false;
 
   public SpriteKeyFrame(String spriteSheetId, String spriteId, long duration) {
     this.spriteSheetId = spriteSheetId;
@@ -35,7 +36,9 @@ public class SpriteKeyFrame implements Serializable {
   }
 
   AssetHandle<SolaImage> getSprite(AssetPool<SpriteSheet> spriteSheetAssetPool) {
-    if (cachedSprite.isLoading()) {
+    // TODO clean this up!
+    if (!isRequested && cachedSprite.isLoading()) {
+      isRequested = true;
       spriteSheetAssetPool.get(spriteSheetId).executeIfLoaded(spriteSheet -> {
         cachedSprite.setAsset(spriteSheet.getSprite(spriteId));
       });

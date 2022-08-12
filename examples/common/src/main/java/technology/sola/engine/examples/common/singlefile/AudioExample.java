@@ -25,22 +25,22 @@ public class AudioExample extends Sola {
   @Override
   protected void onInit() {
     solaInitialization.setAsyncInitialization();
-    BulkAssetLoader bulkAssetLoader = new BulkAssetLoader(assetPoolProvider);
 
-    bulkAssetLoader.loadAll(
-      new BulkAssetLoader.BulkAssetDescription(Font.class, GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_16.json"),
-      new BulkAssetLoader.BulkAssetDescription(AudioClip.class, "test_song", "assets/asgaseg.wav")
-    ).onComplete(assets -> {
-      if (assets[1] instanceof AudioClip audioClip) {
-        audioClip.setVolume(0.5f);
+    new BulkAssetLoader(assetPoolProvider)
+      .addAsset(Font.class, GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_16.json")
+      .addAsset(AudioClip.class, "test_song", "assets/asgaseg.wav")
+      .loadAll()
+      .onComplete(assets -> {
+        if (assets[1] instanceof AudioClip audioClip) {
+          audioClip.setVolume(0.5f);
 
-        solaGui = SolaGui.createInstance(assetPoolProvider, platform);
-        solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
-        solaGui.setGuiRoot(buildGui(audioClip));
-      }
+          solaGui = SolaGui.createInstance(assetPoolProvider, platform);
+          solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
+          solaGui.setGuiRoot(buildGui(audioClip));
+        }
 
-      solaInitialization.completeAsync();
-    });
+        solaInitialization.completeAsync();
+      });
   }
 
   @Override

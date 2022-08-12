@@ -1,22 +1,24 @@
 package technology.sola.engine.assets;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
 public class BulkAssetLoader {
   private final AssetPoolProvider assetPoolProvider;
+  private final List<BulkAssetDescription> bulkAssetDescriptionList = new ArrayList<>();
 
   public BulkAssetLoader(AssetPoolProvider assetPoolProvider) {
     this.assetPoolProvider = assetPoolProvider;
   }
 
-  public BulkAssetHandle loadAll(BulkAssetDescription... bulkAssetDescriptions) {
-    return loadAll(Arrays.asList(bulkAssetDescriptions));
+  public BulkAssetLoader addAsset(Class<? extends Asset> assetClass, String assetId, String path) {
+    bulkAssetDescriptionList.add(new BulkAssetDescription(assetClass, assetId, path));
+
+    return this;
   }
 
-  public BulkAssetHandle loadAll(List<BulkAssetDescription> bulkAssetDescriptionList) {
+  public BulkAssetHandle loadAll() {
     int totalToLoad = bulkAssetDescriptionList.size();
     int index = 0;
     Asset[] assets = new Asset[totalToLoad];
@@ -65,7 +67,7 @@ public class BulkAssetLoader {
     }
   }
 
-  public record BulkAssetDescription(Class<? extends Asset> assetClass, String assetId, String path) {
+  private record BulkAssetDescription(Class<? extends Asset> assetClass, String assetId, String path) {
   }
 
   private static class AssetCounter {

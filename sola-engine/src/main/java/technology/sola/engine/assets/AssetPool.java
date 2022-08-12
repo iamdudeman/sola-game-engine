@@ -5,6 +5,7 @@ import technology.sola.engine.assets.exception.MissingAssetException;
 import java.util.HashMap;
 import java.util.Map;
 
+// todo consider renaming to AssetLoader
 public abstract class AssetPool<T extends Asset> {
   protected Map<String, AssetHandle<T>> cachedAssets = new HashMap<>();
   protected Map<String, String> assetIdToPathMap = new HashMap<>();

@@ -31,9 +31,9 @@ public class BrowserFontAssetPool extends AssetPool<Font> {
 
       solaImageAssetPool.getNewAsset(
         fontInfo.fontGlyphFile(),
-        path.substring(0, path.lastIndexOf("/")) + "/" + fontInfo.fontGlyphFile()).executeWhenLoaded(solaImage -> {
-          fontAssetHandle.setAsset(new Font(solaImage, fontInfo));
-      });
+        path.substring(0, path.lastIndexOf("/")) + "/" + fontInfo.fontGlyphFile()
+        )
+        .executeWhenLoaded(solaImage -> fontAssetHandle.setAsset(new Font(solaImage, fontInfo)));
     });
 
     return fontAssetHandle;
