@@ -4,7 +4,7 @@ import technology.sola.ecs.Component;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
-import technology.sola.engine.assets.AssetHandle;
+import technology.sola.engine.assets.BulkAssetLoader;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
@@ -28,7 +28,7 @@ import java.util.List;
 
 public class RenderingExample extends Sola {
   private SolaGraphics solaGraphics;
-  private AssetHandle<Font> defaultFontAssetHandle;
+  private Font defaultFont;
 
   @Override
   protected SolaConfiguration getConfiguration() {
@@ -37,17 +37,25 @@ public class RenderingExample extends Sola {
 
   @Override
   protected void onInit() {
+    solaInitialization.setAsyncInitialization();
     solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetPoolProvider);
-
-    assetPoolProvider.get(SpriteSheet.class)
-      .addAssetId("test", "assets/test_tiles_spritesheet.json");
-    defaultFontAssetHandle = assetPoolProvider.get(Font.class)
-      .getNewAsset("default", "assets/monospaced_NORMAL_16.json");
 
     solaEcs.addSystem(new TestSystem());
     solaEcs.setWorld(createWorld());
 
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
+
+    new BulkAssetLoader(assetPoolProvider)
+      .addAsset(SpriteSheet.class, "test", "assets/test_tiles_spritesheet.json")
+      .addAsset(Font.class, "default", "assets/monospaced_NORMAL_16.json")
+      .loadAll()
+      .onComplete(assets -> {
+        if (assets[1] instanceof Font font) {
+          this.defaultFont = font;
+
+          solaInitialization.completeAsync();
+        }
+      });
   }
 
   @Override
@@ -81,14 +89,12 @@ public class RenderingExample extends Sola {
       final String characters1 = "!\"#$%&'()*+,-./0123456789:; <=>?@ABCDEFGHIJKLMN";
       final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
-      defaultFontAssetHandle.executeIfLoaded(font -> {
-        renderer.setFont(font);
-        renderer.setBlendMode(BlendMode.MASK);
-        renderer.drawString(characters1, 85, 5, Color.RED);
-        renderer.drawString(characters2, 85, 35, Color.BLACK);
-        renderer.drawString("Hello world!", 182, 67, Color.BLUE);
-        renderer.setBlendMode(BlendMode.NO_BLENDING);
-      });
+      renderer.setFont(defaultFont);
+      renderer.setBlendMode(BlendMode.MASK);
+      renderer.drawString(characters1, 85, 5, Color.RED);
+      renderer.drawString(characters2, 85, 35, Color.BLACK);
+      renderer.drawString("Hello world!", 182, 67, Color.BLUE);
+      renderer.setBlendMode(BlendMode.NO_BLENDING);
     });
   }
 
