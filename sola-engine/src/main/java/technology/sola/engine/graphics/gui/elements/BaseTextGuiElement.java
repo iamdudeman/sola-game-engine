@@ -11,6 +11,7 @@ import technology.sola.engine.graphics.renderer.Renderer;
 
 public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties> extends GuiElement<T> {
   private Font font;
+  private String currentFontAssetId;
 
   private int textWidth = 1;
   private int textHeight = 1;
@@ -41,7 +42,19 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
 
   @Override
   public void recalculateLayout() {
-    this.font = solaGui.getAssetPoolProvider().get(Font.class).get(properties().getFontAssetId()).getAsset();
+    String propertiesAssetId = properties().getFontAssetId();
+
+    if (!propertiesAssetId.equals(currentFontAssetId)) {
+      solaGui.getAssetPoolProvider()
+        .get(Font.class)
+        .get(propertiesAssetId)
+        .executeWhenLoaded(font -> {
+          this.font = font;
+          this.currentFontAssetId = propertiesAssetId;
+          properties().setLayoutChanged(true);
+        });
+    }
+
     var textDimensions = font.getDimensionsForText(properties().getText());
 
     textWidth = Math.max(textDimensions.width(), 1);

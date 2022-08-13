@@ -24,7 +24,7 @@ public class AudioExample extends Sola {
 
   @Override
   protected void onInit() {
-    solaInitialization.setAsyncInitialization();
+    solaInitialization.useAsyncInitialization();
 
     new BulkAssetLoader(assetPoolProvider)
       .addAsset(Font.class, GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_16.json")
@@ -39,7 +39,7 @@ public class AudioExample extends Sola {
           solaGui.setGuiRoot(buildGui(audioClip));
         }
 
-        solaInitialization.completeAsync();
+        solaInitialization.completeAsyncInitialization();
       });
   }
 

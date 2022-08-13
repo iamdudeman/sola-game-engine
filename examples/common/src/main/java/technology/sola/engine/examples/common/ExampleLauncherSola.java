@@ -39,7 +39,7 @@ public class ExampleLauncherSola extends Sola {
 
   @Override
   protected void onInit() {
-    solaInitialization.setAsyncInitialization();
+    solaInitialization.useAsyncInitialization();
     solaGui = SolaGui.createInstance(assetPoolProvider, platform);
 
     assetPoolProvider.get(Font.class)
@@ -47,7 +47,7 @@ public class ExampleLauncherSola extends Sola {
       .executeWhenLoaded(font -> {
         solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
         solaGui.setGuiRoot(buildGui());
-        solaInitialization.completeAsync();
+        solaInitialization.completeAsyncInitialization();
       });
   }
 

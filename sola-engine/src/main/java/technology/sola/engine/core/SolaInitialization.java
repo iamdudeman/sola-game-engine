@@ -12,13 +12,13 @@ public class SolaInitialization {
     return isAsync;
   }
 
-  public void setAsyncInitialization() {
+  public void useAsyncInitialization() {
     isAsync = true;
   }
 
-  public void completeAsync() {
+  public void completeAsyncInitialization() {
     if (!isAsync) {
-      throw new RuntimeException("Should not manually call completeAsync when not using async initialization");
+      throw new RuntimeException("Should not manually call completeAsyncInitialization when not using async initialization");
     }
 
     onComplete.run();

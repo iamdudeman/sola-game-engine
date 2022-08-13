@@ -37,7 +37,7 @@ public class RenderingExample extends Sola {
 
   @Override
   protected void onInit() {
-    solaInitialization.setAsyncInitialization();
+    solaInitialization.useAsyncInitialization();
     solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetPoolProvider);
 
     solaEcs.addSystem(new TestSystem());
@@ -53,7 +53,7 @@ public class RenderingExample extends Sola {
         if (assets[1] instanceof Font font) {
           this.defaultFont = font;
 
-          solaInitialization.completeAsync();
+          solaInitialization.completeAsyncInitialization();
         }
       });
   }

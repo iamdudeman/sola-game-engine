@@ -22,17 +22,17 @@ public class GuiExample extends Sola {
 
   @Override
   protected void onInit() {
-    solaInitialization.setAsyncInitialization();
+    solaInitialization.useAsyncInitialization();
     solaGui = SolaGui.createInstance(assetPoolProvider, platform);
 
     assetPoolProvider.get(Font.class)
-      .addAssetId(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_16.json")
-      .getNewAsset("times_NORMAL_18", "assets/times_NORMAL_18.json")
+      .addAssetId("times_NORMAL_18", "assets/times_NORMAL_18.json")
+      .getNewAsset(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_16.json")
       .executeWhenLoaded(font -> {
         solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
         solaGui.setGuiRoot(buildGui());
 
-        solaInitialization.completeAsync();
+        solaInitialization.completeAsyncInitialization();
       });
   }
 

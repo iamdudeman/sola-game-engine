@@ -24,7 +24,7 @@ public class AnimationExample extends Sola {
 
   @Override
   protected void onInit() {
-    solaInitialization.setAsyncInitialization();
+    solaInitialization.useAsyncInitialization();
     solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetPoolProvider);
 
     solaEcs.setWorld(buildWorld());
@@ -32,7 +32,7 @@ public class AnimationExample extends Sola {
 
     assetPoolProvider.get(SpriteSheet.class)
       .getNewAsset("test", "assets/test_tiles_spritesheet.json")
-      .executeWhenLoaded(spriteSheet -> solaInitialization.completeAsync());
+      .executeWhenLoaded(spriteSheet -> solaInitialization.completeAsyncInitialization());
   }
 
   @Override
