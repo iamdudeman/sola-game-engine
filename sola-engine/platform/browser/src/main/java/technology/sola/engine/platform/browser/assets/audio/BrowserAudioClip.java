@@ -36,8 +36,6 @@ public class BrowserAudioClip implements AudioClip {
       return;
     }
 
-    double offset = pausedAt;
-
     audioBufferSourceNode = audioContext.createBufferSource();
     audioBufferSourceNode.setOnEnded(evt -> {
       this.isPlaying = false;
@@ -48,6 +46,9 @@ public class BrowserAudioClip implements AudioClip {
     gainNode.connect(audioContext.getDestination());
     gainNode.getGain().setValue(volume);
     audioBufferSourceNode.connect(gainNode);
+
+    double offset = pausedAt;
+
     audioBufferSourceNode.start(0, offset);
 
     startedAt = audioContext.getCurrentTime() - offset;
