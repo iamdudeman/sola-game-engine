@@ -32,11 +32,23 @@ public abstract class GuiElement<T extends GuiElementProperties> {
   public abstract int getContentHeight();
 
   public int getWidth() {
-    return Math.min(properties().getMaxWidth(), getContentWidth());
+    int maxWidth = properties().getMaxWidth();
+
+    if (maxWidth == 0) {
+      return getContentWidth();
+    }
+
+    return Math.min(maxWidth, getContentWidth());
   }
 
   public int getHeight() {
-    return Math.min(properties().getMaxHeight(), getContentHeight());
+    int maxHeight = properties.getMaxHeight();
+
+    if (maxHeight == 0) {
+      return getContentHeight();
+    }
+
+    return Math.min(maxHeight, getContentHeight());
   }
 
   public abstract void recalculateLayout();
