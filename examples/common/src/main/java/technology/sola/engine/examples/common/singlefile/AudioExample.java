@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.singlefile;
 
+import technology.sola.engine.assets.BulkAssetLoader;
 import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
@@ -23,18 +24,23 @@ public class AudioExample extends Sola {
 
   @Override
   protected void onInit() {
-    solaGui = SolaGui.createInstance(assetPoolProvider, platform);
+    solaInitialization.useAsyncInitialization();
 
-    assetPoolProvider.getAssetPool(Font.class)
-      .addAssetId(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_18.json");
+    new BulkAssetLoader(assetPoolProvider)
+      .addAsset(Font.class, GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_16.json")
+      .addAsset(AudioClip.class, "test_song", "assets/asgaseg.wav")
+      .loadAll()
+      .onComplete(assets -> {
+        if (assets[1] instanceof AudioClip audioClip) {
+          audioClip.setVolume(0.5f);
 
-    AudioClip audioClip = assetPoolProvider.getAssetPool(AudioClip.class)
-      .addAndGetAsset("test_song", "assets/asgaseg.wav");
+          solaGui = SolaGui.createInstance(assetPoolProvider, platform);
+          solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
+          solaGui.setGuiRoot(buildGui(audioClip));
+        }
 
-    audioClip.setVolume(0.5f);
-
-    solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
-    solaGui.setGuiRoot(buildGui(audioClip));
+        solaInitialization.completeAsyncInitialization();
+      });
   }
 
   @Override

@@ -96,8 +96,14 @@ public abstract class SolaPlatform {
       solaConfiguration.isGameLoopRestingAllowed()
     );
 
-    sola.initializeForPlatform(this);
-    new Thread(gameLoop).start();
+    Runnable startGameLoopThread = () -> new Thread(gameLoop).start();
+    SolaInitialization solaInitialization = new SolaInitialization(startGameLoopThread);
+
+    sola.initializeForPlatform(this, solaInitialization);
+
+    if (!solaInitialization.isAsync()) {
+      startGameLoopThread.run();
+    }
   }
 
   private void update(Sola sola, float deltaTime) {

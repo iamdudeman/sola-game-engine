@@ -20,10 +20,10 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
-import technology.sola.engine.platform.javafx.assets.AudiClipAssetPool;
-import technology.sola.engine.platform.javafx.assets.FontAssetPool;
-import technology.sola.engine.platform.javafx.assets.SolaImageAssetPool;
-import technology.sola.engine.platform.javafx.assets.SpriteSheetAssetPool;
+import technology.sola.engine.platform.javafx.assets.JavaFxAudiClipAssetPool;
+import technology.sola.engine.platform.javafx.assets.JavaFxFontAssetPool;
+import technology.sola.engine.platform.javafx.assets.JavaFxSolaImageAssetPool;
+import technology.sola.engine.platform.javafx.assets.JavaFxSpriteSheetAssetPool;
 import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
 
 import java.util.function.Consumer;
@@ -142,11 +142,11 @@ public class JavaFxSolaPlatform extends SolaPlatform {
 
   @Override
   protected void populateAssetPoolProvider(AssetPoolProvider assetPoolProvider) {
-    AssetPool<SolaImage> solaImageAssetPool = new SolaImageAssetPool();
-    assetPoolProvider.addAssetPool(solaImageAssetPool);
-    assetPoolProvider.addAssetPool(new FontAssetPool(solaImageAssetPool));
-    assetPoolProvider.addAssetPool(new SpriteSheetAssetPool(solaImageAssetPool));
-    assetPoolProvider.addAssetPool(new AudiClipAssetPool());
+    AssetPool<SolaImage> solaImageAssetPool = new JavaFxSolaImageAssetPool();
+    assetPoolProvider.add(solaImageAssetPool);
+    assetPoolProvider.add(new JavaFxFontAssetPool(solaImageAssetPool));
+    assetPoolProvider.add(new JavaFxSpriteSheetAssetPool(solaImageAssetPool));
+    assetPoolProvider.add(new JavaFxAudiClipAssetPool());
   }
 
   @Override

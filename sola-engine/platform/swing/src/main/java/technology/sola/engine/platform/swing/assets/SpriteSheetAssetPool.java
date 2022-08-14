@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.swing.assets;
 
+import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.SpriteSheet;
@@ -24,32 +25,42 @@ public class SpriteSheetAssetPool extends AssetPool<SpriteSheet> {
   }
 
   @Override
-  protected SpriteSheet loadAsset(String path) {
-    File file = new File(path);
-    try {
-      String jsonString = Files.readString(file.toPath());
-      SolaJson solaJson = new SolaJson();
-      JsonObject spriteSheetJson = solaJson.parse(jsonString).asObject();
+  protected AssetHandle<SpriteSheet> loadAsset(String path) {
+    AssetHandle<SpriteSheet> spriteSheetAssetHandle = new AssetHandle<>();
 
-      String spriteImageName = spriteSheetJson.getString("spriteSheet");
-      SolaImage spriteImage = solaImageAssetPool.addAndGetAsset(spriteImageName, new File(file.getParent(), spriteImageName).getPath());
-      SpriteSheet spriteSheet = new SpriteSheet(spriteImage);
+    new Thread(() -> {
+      File file = new File(path);
 
-      spriteSheetJson.getArray("sprites").forEach(spritesJsonEntry -> {
-        JsonObject spriteJson = spritesJsonEntry.asObject();
+      try {
+        String jsonString = Files.readString(file.toPath());
+        SolaJson solaJson = new SolaJson();
+        JsonObject spriteSheetJson = solaJson.parse(jsonString).asObject();
+        String spriteImageName = spriteSheetJson.getString("spriteSheet");
+        String spriteImagePath = new File(file.getParent(), spriteImageName).getPath();
 
-        spriteSheet.addSpriteDefinition(
-          spriteJson.getString("id"),
-          spriteJson.getInt("x"),
-          spriteJson.getInt("y"),
-          spriteJson.getInt("w"),
-          spriteJson.getInt("h")
-        );
-      });
+        solaImageAssetPool.getNewAsset(spriteImageName, spriteImagePath)
+          .executeWhenLoaded(solaImage -> {
+            SpriteSheet spriteSheet = new SpriteSheet(solaImage);
 
-      return spriteSheet;
-    } catch (IOException ex) {
-      throw new FailedSpriteSheetLoadException(path);
-    }
+            spriteSheetJson.getArray("sprites").forEach(spritesJsonEntry -> {
+              JsonObject spriteJson = spritesJsonEntry.asObject();
+
+              spriteSheet.addSpriteDefinition(
+                spriteJson.getString("id"),
+                spriteJson.getInt("x"),
+                spriteJson.getInt("y"),
+                spriteJson.getInt("w"),
+                spriteJson.getInt("h")
+              );
+            });
+
+            spriteSheetAssetHandle.setAsset(spriteSheet);
+          });
+      } catch (IOException ex) {
+        throw new FailedSpriteSheetLoadException(path);
+      }
+    }).start();
+
+    return spriteSheetAssetHandle;
   }
 }

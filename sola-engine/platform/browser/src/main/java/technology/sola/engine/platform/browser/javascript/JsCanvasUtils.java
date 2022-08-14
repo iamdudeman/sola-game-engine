@@ -26,7 +26,11 @@ public class JsCanvasUtils {
       canvasEle.oncontextmenu = function(e) {
         e.preventDefault(); e.stopPropagation();
       };
-      document.getElementById(anchorId).appendChild(canvasEle);
+
+      var anchorEle = document.getElementById(anchorId);
+
+      anchorEle.innerHTML = '';
+      anchorEle.appendChild(canvasEle);
       window.solaCanvas = canvasEle;
       window.solaContext2d = window.solaCanvas.getContext('2d');
       """;

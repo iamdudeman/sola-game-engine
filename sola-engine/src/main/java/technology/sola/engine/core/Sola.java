@@ -13,6 +13,7 @@ public abstract class Sola {
   protected EventHub eventHub;
   protected KeyboardInput keyboardInput;
   protected MouseInput mouseInput;
+  protected SolaInitialization solaInitialization;
   protected AssetPoolProvider assetPoolProvider;
 
   protected Sola() {
@@ -35,8 +36,9 @@ public abstract class Sola {
 
   protected abstract void onRender(Renderer renderer);
 
-  void initializeForPlatform(SolaPlatform platform) {
+  void initializeForPlatform(SolaPlatform platform, SolaInitialization solaInitialization) {
     this.platform = platform;
+    this.solaInitialization = solaInitialization;
 
     platform.onKeyPressed(event -> keyboardInput.keyPressed(event));
     platform.onKeyReleased(event -> keyboardInput.keyReleased(event));

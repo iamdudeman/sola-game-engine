@@ -1,6 +1,7 @@
 package technology.sola.engine.graphics.components.sprite;
 
 import technology.sola.ecs.Component;
+import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.SpriteSheet;
@@ -28,7 +29,7 @@ public class SpriteComponent implements Component {
     this.spriteKeyFrame = spriteKeyFrame;
   }
 
-  public SolaImage getSprite(AssetPool<SpriteSheet> spriteSheetAssetPool) {
+  public AssetHandle<SolaImage> getSprite(AssetPool<SpriteSheet> spriteSheetAssetPool) {
     return spriteKeyFrame.getSprite(spriteSheetAssetPool);
   }
 }

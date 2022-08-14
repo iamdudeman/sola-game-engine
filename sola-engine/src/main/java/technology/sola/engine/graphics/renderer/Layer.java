@@ -1,6 +1,5 @@
 package technology.sola.engine.graphics.renderer;
 
-import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class Layer {
@@ -11,7 +10,7 @@ public class Layer {
 
   public Layer(String name) {
     this.name = name;
-    drawQueue = new PriorityQueue<>(Comparator.comparingInt(item -> item.priority));
+    drawQueue = new PriorityQueue<>();
   }
 
   public void add(DrawItem drawItem) {
@@ -41,10 +40,15 @@ public class Layer {
     return name;
   }
 
-  private record PrioritizedDrawItem(DrawItem drawItem, int priority) implements DrawItem {
+  private record PrioritizedDrawItem(DrawItem drawItem, int priority) implements DrawItem, Comparable<PrioritizedDrawItem> {
     @Override
     public void draw(Renderer renderer) {
       drawItem.draw(renderer);
+    }
+
+    @Override
+    public int compareTo(PrioritizedDrawItem o) {
+      return Integer.compare(this.priority, o.priority);
     }
   }
 }

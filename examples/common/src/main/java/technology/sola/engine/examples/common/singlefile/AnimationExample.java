@@ -24,14 +24,15 @@ public class AnimationExample extends Sola {
 
   @Override
   protected void onInit() {
+    solaInitialization.useAsyncInitialization();
     solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetPoolProvider);
 
-    assetPoolProvider.getAssetPool(SpriteSheet.class)
-      .addAssetId("test", "assets/test_tiles_spritesheet.json");
-
     solaEcs.setWorld(buildWorld());
-
     platform.getViewport().setAspectMode(AspectMode.STRETCH);
+
+    assetPoolProvider.get(SpriteSheet.class)
+      .getNewAsset("test", "assets/test_tiles_spritesheet.json")
+      .executeWhenLoaded(spriteSheet -> solaInitialization.completeAsyncInitialization());
   }
 
   @Override

@@ -1,6 +1,8 @@
 package technology.sola.engine.platform.browser;
 
+import technology.sola.engine.assets.AssetPool;
 import technology.sola.engine.assets.AssetPoolProvider;
+import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.event.GameLoopEvent;
@@ -9,8 +11,10 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
-import technology.sola.engine.platform.browser.assets.SolaImageAssetPool;
-import technology.sola.engine.platform.browser.assets.SpriteSheetAssetPool;
+import technology.sola.engine.platform.browser.assets.BrowserAudioClipAssetPool;
+import technology.sola.engine.platform.browser.assets.BrowserFontAssetPool;
+import technology.sola.engine.platform.browser.assets.BrowserSolaImageAssetPool;
+import technology.sola.engine.platform.browser.assets.BrowserSpriteSheetAssetPool;
 import technology.sola.engine.platform.browser.core.BrowserCanvasRenderer;
 import technology.sola.engine.platform.browser.core.BrowserGameLoop;
 import technology.sola.engine.platform.browser.javascript.JsCanvasUtils;
@@ -94,8 +98,11 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   @Override
   protected void populateAssetPoolProvider(AssetPoolProvider assetPoolProvider) {
-    assetPoolProvider.addAssetPool(new SolaImageAssetPool());
-    assetPoolProvider.addAssetPool(new SpriteSheetAssetPool());
+    AssetPool<SolaImage> solaImageAssetPool = new BrowserSolaImageAssetPool();
+    assetPoolProvider.add(solaImageAssetPool);
+    assetPoolProvider.add(new BrowserSpriteSheetAssetPool(solaImageAssetPool));
+    assetPoolProvider.add(new BrowserFontAssetPool(solaImageAssetPool));
+    assetPoolProvider.add(new BrowserAudioClipAssetPool());
   }
 
   @Override

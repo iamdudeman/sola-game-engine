@@ -24,7 +24,7 @@ public class SolaGraphics {
   private final SpriteAnimatorSystem spriteAnimatorSystem;
 
   public static SolaGraphics createInstance(SolaEcs solaEcs, Renderer renderer, AssetPoolProvider assetPoolProvider) {
-    SolaGraphics solaGraphics = new SolaGraphics(solaEcs, renderer, assetPoolProvider.getAssetPool(SpriteSheet.class));
+    SolaGraphics solaGraphics = new SolaGraphics(solaEcs, renderer, assetPoolProvider.get(SpriteSheet.class));
 
     solaEcs.addSystem(solaGraphics.spriteAnimatorSystem);
 

@@ -18,9 +18,20 @@ public class JsKeyboardUtils {
 
   private static class Scripts {
     private static final String KEY_EVENT = """
-      window.addEventListener(eventName, function(event) {
+      window.keyboardListeners = window.keyboardListeners || {};
+
+      if (window.keyboardListeners[eventName]) {
+        window.removeEventListener(eventName, window.keyboardListeners[eventName], false);
+      }
+
+      window.keyboardListeners[eventName] = function(event) {
+        event.stopPropagation();
+        event.preventDefault();
+
         callback(event.keyCode);
-      }, false);
+      };
+
+      window.addEventListener(eventName, window.keyboardListeners[eventName], false);
       """;
   }
 }

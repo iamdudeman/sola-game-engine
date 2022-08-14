@@ -4,6 +4,7 @@ import technology.sola.ecs.Component;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
+import technology.sola.engine.assets.BulkAssetLoader;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
@@ -36,17 +37,25 @@ public class RenderingExample extends Sola {
 
   @Override
   protected void onInit() {
+    solaInitialization.useAsyncInitialization();
     solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetPoolProvider);
-
-    assetPoolProvider.getAssetPool(SpriteSheet.class)
-      .addAssetId("test", "assets/test_tiles_spritesheet.json");
-    defaultFont = assetPoolProvider.getAssetPool(Font.class)
-      .addAndGetAsset("default", "assets/monospaced_NORMAL_18.json");
 
     solaEcs.addSystem(new TestSystem());
     solaEcs.setWorld(createWorld());
 
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
+
+    new BulkAssetLoader(assetPoolProvider)
+      .addAsset(SpriteSheet.class, "test", "assets/test_tiles_spritesheet.json")
+      .addAsset(Font.class, "default", "assets/monospaced_NORMAL_16.json")
+      .loadAll()
+      .onComplete(assets -> {
+        if (assets[1] instanceof Font font) {
+          this.defaultFont = font;
+
+          solaInitialization.completeAsyncInitialization();
+        }
+      });
   }
 
   @Override

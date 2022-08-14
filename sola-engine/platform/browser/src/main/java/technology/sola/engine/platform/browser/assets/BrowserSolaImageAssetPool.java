@@ -1,0 +1,46 @@
+package technology.sola.engine.platform.browser.assets;
+
+import technology.sola.engine.assets.AssetHandle;
+import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.graphics.Color;
+import technology.sola.engine.platform.browser.javascript.JsImageUtils;
+
+public class BrowserSolaImageAssetPool extends AssetPool<SolaImage> {
+  @Override
+  public Class<SolaImage> getAssetClass() {
+    return SolaImage.class;
+  }
+
+  @Override
+  protected AssetHandle<SolaImage> loadAsset(String path) {
+    AssetHandle<SolaImage> solaImageAssetHandle = new AssetHandle<>();
+
+    JsImageUtils.loadImage(path, new ImageLoadCallbackImpl(solaImageAssetHandle));
+
+    return solaImageAssetHandle;
+  }
+
+  private static class ImageLoadCallbackImpl implements JsImageUtils.ImageLoadCallback {
+    private final AssetHandle<SolaImage> solaImageAssetHandle;
+
+    public ImageLoadCallbackImpl(AssetHandle<SolaImage> solaImageAssetHandle) {
+      this.solaImageAssetHandle = solaImageAssetHandle;
+    }
+
+    @Override
+    public void call(int width, int height, int[] uInt8Pixels) {
+      int[] pixels = new int[width * height];
+      int index = 0;
+
+      for (int i = 0; i < width * height * 4; i += 4) {
+        Color color = new Color(uInt8Pixels[i + 3], uInt8Pixels[i], uInt8Pixels[i + 1], uInt8Pixels[i + 2]);
+
+        pixels[index] = color.hexInt();
+        index++;
+      }
+
+      solaImageAssetHandle.setAsset(new SolaImage(width, height, pixels));
+    }
+  }
+}

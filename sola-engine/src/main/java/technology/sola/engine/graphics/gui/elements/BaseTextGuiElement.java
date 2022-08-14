@@ -11,6 +11,7 @@ import technology.sola.engine.graphics.renderer.Renderer;
 
 public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties> extends GuiElement<T> {
   private Font font;
+  private String currentFontAssetId;
 
   private int textWidth = 1;
   private int textHeight = 1;
@@ -33,13 +34,26 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
   public void renderSelf(Renderer renderer, int x, int y) {
     Properties properties = properties();
 
-    renderer.setFont(font);
-    renderer.drawWithBlendMode(BlendMode.MASK, r -> renderer.drawString(properties.getText(), x + properties.padding.getLeft(), y + properties.padding.getTop(), properties.getColorText()));
+    if (font != null) {
+      renderer.setFont(font);
+      renderer.drawWithBlendMode(BlendMode.MASK, r -> renderer.drawString(properties.getText(), x + properties.padding.getLeft(), y + properties.padding.getTop(), properties.getColorText()));
+    }
   }
 
   @Override
   public void recalculateLayout() {
-    font = solaGui.getAssetPoolProvider().getAssetPool(Font.class).getAsset(properties().getFontAssetId());
+    String propertiesAssetId = properties().getFontAssetId();
+
+    if (!propertiesAssetId.equals(currentFontAssetId)) {
+      solaGui.getAssetPoolProvider()
+        .get(Font.class)
+        .get(propertiesAssetId)
+        .executeWhenLoaded(font -> {
+          this.font = font;
+          this.currentFontAssetId = propertiesAssetId;
+          properties().setLayoutChanged(true);
+        });
+    }
 
     var textDimensions = font.getDimensionsForText(properties().getText());
 
