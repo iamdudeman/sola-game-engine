@@ -107,7 +107,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       writableImage = new WritableImage(rendererWidth, rendererHeight);
 
       solaEventHub.add(event -> {
-        if (event.getMessage() == GameLoopEventType.STOP) {
+        if (event.getMessage() == GameLoopEventType.STOPPED) {
           stage.close();
         }
       }, GameLoopEvent.class);

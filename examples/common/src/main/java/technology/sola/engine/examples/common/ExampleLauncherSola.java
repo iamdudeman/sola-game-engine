@@ -5,6 +5,7 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.event.GameLoopEvent;
+import technology.sola.engine.core.event.GameLoopEventType;
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.examples.common.singlefile.AnimationExample;
 import technology.sola.engine.examples.common.singlefile.AudioExample;
@@ -90,8 +91,13 @@ public class ExampleLauncherSola extends Sola {
     );
 
     exampleLaunchButton.setOnAction(() -> {
+      eventHub.add(event -> {
+        if (event.getMessage() == GameLoopEventType.STOPPED) {
+          solaPlatform.play(solaSupplier.get());
+        }
+      }, GameLoopEvent.class);
+
       eventHub.emit(GameLoopEvent.STOP);
-      solaPlatform.play(solaSupplier.get());
     });
 
     return exampleLaunchButton;
