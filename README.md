@@ -5,15 +5,12 @@
 ## Bugs List
 * Font asset generation for non-monospaced fonts has some issues getting extra pixels from adjacent characters
 * Verify Key.ENTER code on browser and desktop (doesn't seem to be the same for some reason)
-* SolaSwingPlatform does not shut down and start up new instances properly
-  * Exception in thread "Thread-2" java.lang.NullPointerException: Cannot invoke "java.awt.image.BufferStrategy.show()" because the return value of "java.awt.Canvas.getBufferStrategy()" is null
-    at technology.sola.engine.platform.swing.SwingSolaPlatform.lambda$setupSoftwareRendering$2(SwingSolaPlatform.java:194)
-    at technology.sola.engine.platform.swing.SwingSolaPlatform.onRender(SwingSolaPlatform.java:151)
-    at technology.sola.engine.core.SolaPlatform.render(SolaPlatform.java:117)
-    at technology.sola.engine.core.SolaPlatform.lambda$initComplete$2(SolaPlatform.java:94)
-    at technology.sola.engine.core.FixedUpdateGameLoop.run(FixedUpdateGameLoop.java:31)
-    at java.base/java.lang.Thread.run(Thread.java:833)
 * Bug with mouse input in Gui stuff when loading a new Sola
+  * Exception in thread "JavaFX Application Thread" java.lang.IllegalArgumentException: max.x cannot be less than min.x
+    at technology.sola.math.geometry.Rectangle.<init>(Rectangle.java:22)
+    at technology.sola.engine.graphics.gui.GuiElement.handleMouseEvent(GuiElement.java:158)
+    at technology.sola.engine.graphics.gui.GuiElementContainer.handleMouseEvent(GuiElementContainer.java:155)
+    at technology.sola.engine.core.module.graphics.gui.SolaGui.onMouseMoved(SolaGui.java:94)
 
 
 ## Cleanup List
