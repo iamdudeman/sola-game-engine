@@ -22,6 +22,10 @@
   * Consider implementing generic SpriteSheetAssetLoader and generic FontAssetLoader utilizing platform specific
     JsonAssetLoader and SolaImageAssetLoader
     * Maybe pass AssetLoaderProvider to each AssetLoader instance to make this easier
+* Consider adding a "debug console"
+  * While open can toggle things like render debug outlines and debug spacial hashmap stuff
+  * Could also maybe allow adding custom commands
+  * Should probably always use a "default font" if it is implemented
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
   * More BlendMode implementations
