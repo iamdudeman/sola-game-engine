@@ -10,8 +10,6 @@
 
 ## Cleanup List
 
-* Review SpriteComponent and SpriteKeyFrame caching code
-
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
@@ -23,6 +21,7 @@
   * Consider adding JsonAsset and JsonAssetLoader
   * Consider implementing generic SpriteSheetAssetLoader and generic FontAssetLoader utilizing platform specific
     JsonAssetLoader and SolaImageAssetLoader
+    * Maybe pass AssetLoaderProvider to each AssetLoader instance to make this easier
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
   * More BlendMode implementations

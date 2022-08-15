@@ -36,12 +36,11 @@ public class SpriteKeyFrame implements Serializable {
   }
 
   AssetHandle<SolaImage> getSprite(AssetLoader<SpriteSheet> spriteSheetAssetLoader) {
-    // TODO clean this up!
     if (!isRequested && cachedSprite.isLoading()) {
       isRequested = true;
-      spriteSheetAssetLoader.get(spriteSheetId).executeIfLoaded(spriteSheet -> {
-        cachedSprite.setAsset(spriteSheet.getSprite(spriteId));
-      });
+      spriteSheetAssetLoader
+        .get(spriteSheetId)
+        .executeWhenLoaded(spriteSheet -> cachedSprite.setAsset(spriteSheet.getSprite(spriteId)));
     }
 
     return cachedSprite;

@@ -250,14 +250,16 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
   @Override
   public void drawString(String text, float x, float y, Color color) {
-    int xOffset = 0;
+    drawWithBlendMode(BlendMode.MASK, r -> {
+      int xOffset = 0;
 
-    for (char character : text.toCharArray()) {
-      SolaImage glyphImage = font.getGlyph(character, color);
+      for (char character : text.toCharArray()) {
+        SolaImage glyphImage = font.getGlyph(character, color);
 
-      drawImage(x + xOffset, y, glyphImage);
-      xOffset += glyphImage.getWidth() + font.getFontInfo().leading();
-    }
+        drawImage(x + xOffset, y, glyphImage);
+        xOffset += glyphImage.getWidth() + font.getFontInfo().leading();
+      }
+    });
   }
 
   @Override

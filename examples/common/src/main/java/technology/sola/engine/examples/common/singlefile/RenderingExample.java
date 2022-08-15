@@ -52,9 +52,9 @@ public class RenderingExample extends Sola {
       .onComplete(assets -> {
         if (assets[1] instanceof Font font) {
           this.defaultFont = font;
-
-          solaInitialization.completeAsyncInitialization();
         }
+
+        solaInitialization.completeAsyncInitialization();
       });
   }
 
@@ -90,11 +90,9 @@ public class RenderingExample extends Sola {
       final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
       renderer.setFont(defaultFont);
-      renderer.setBlendMode(BlendMode.MASK);
       renderer.drawString(characters1, 85, 5, Color.RED);
       renderer.drawString(characters2, 85, 35, Color.BLACK);
       renderer.drawString("Hello world!", 182, 67, Color.BLUE);
-      renderer.setBlendMode(BlendMode.NO_BLENDING);
     });
   }
 
