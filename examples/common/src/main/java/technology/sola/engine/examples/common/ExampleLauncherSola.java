@@ -14,7 +14,8 @@ import technology.sola.engine.examples.common.singlefile.MouseAndCameraExample;
 import technology.sola.engine.examples.common.singlefile.ParticleExample;
 import technology.sola.engine.examples.common.singlefile.RenderingExample;
 import technology.sola.engine.examples.common.singlefile.SimplePlatformerExample;
-import technology.sola.engine.examples.common.singlefile.StressTestExample;
+import technology.sola.engine.examples.common.singlefile.StressTestPhysicsExample;
+import technology.sola.engine.examples.common.singlefile.StressTestRenderingExample;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
@@ -78,7 +79,8 @@ public class ExampleLauncherSola extends Sola {
     rootElement.addChild(buildExampleLaunchButton("Particle", ParticleExample::new));
     rootElement.addChild(buildExampleLaunchButton("Rendering", RenderingExample::new));
     rootElement.addChild(buildExampleLaunchButton("Simple Platformer", SimplePlatformerExample::new));
-    rootElement.addChild(buildExampleLaunchButton("Stress Test", () -> new StressTestExample(1337)));
+    rootElement.addChild(buildExampleLaunchButton("Stress Test - Physics", () -> new StressTestPhysicsExample(500)));
+    rootElement.addChild(buildExampleLaunchButton("Stress Test - Rendering", StressTestRenderingExample::new));
 
     return rootElement;
   }
