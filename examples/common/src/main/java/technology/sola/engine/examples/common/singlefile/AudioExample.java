@@ -26,7 +26,7 @@ public class AudioExample extends Sola {
   protected void onInit() {
     solaInitialization.useAsyncInitialization();
 
-    new BulkAssetLoader(assetPoolProvider)
+    new BulkAssetLoader(assetLoaderProvider)
       .addAsset(Font.class, GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_16.json")
       .addAsset(AudioClip.class, "test_song", "assets/asgaseg.wav")
       .loadAll()
@@ -34,7 +34,7 @@ public class AudioExample extends Sola {
         if (assets[1] instanceof AudioClip audioClip) {
           audioClip.setVolume(0.5f);
 
-          solaGui = SolaGui.createInstance(assetPoolProvider, platform);
+          solaGui = SolaGui.createInstance(assetLoaderProvider, platform);
           solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
           solaGui.setGuiRoot(buildGui(audioClip));
         }

@@ -16,26 +16,26 @@ import technology.sola.engine.physics.component.DynamicBodyComponent;
 
 import java.util.Random;
 
-public class StressTestExample extends Sola {
+public class StressTestPhysicsExample extends Sola {
   private static final float CAMERA_SCALE = 1.5f;
   private static final float CIRCLE_RADIUS = 10f;
   private final Random random = new Random();
   private final int objectCount;
   private SolaGraphics solaGraphics;
 
-  public StressTestExample(int objectCount) {
+  public StressTestPhysicsExample(int objectCount) {
     this.objectCount = objectCount;
   }
 
   @Override
   protected SolaConfiguration getConfiguration() {
-    return new SolaConfiguration("Stress Test", 1200, 800, 60, false);
+    return new SolaConfiguration("Stress Test - Physics", 1200, 800, 60, false);
   }
 
   @Override
   protected void onInit() {
     SolaPhysics.createInstance(eventHub, solaEcs);
-    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetPoolProvider);
+    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetLoaderProvider);
 
     solaGraphics.setRenderDebug(true);
 

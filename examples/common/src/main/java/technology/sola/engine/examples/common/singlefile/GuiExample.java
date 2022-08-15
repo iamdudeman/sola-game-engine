@@ -24,10 +24,10 @@ public class GuiExample extends Sola {
   @Override
   protected void onInit() {
     solaInitialization.useAsyncInitialization();
-    solaGui = SolaGui.createInstance(assetPoolProvider, platform);
+    solaGui = SolaGui.createInstance(assetLoaderProvider, platform);
 
-    assetPoolProvider.get(Font.class)
-      .addAssetId("times_NORMAL_18", "assets/times_NORMAL_18.json")
+    assetLoaderProvider.get(Font.class)
+      .addAssetMapping("times_NORMAL_18", "assets/times_NORMAL_18.json")
       .getNewAsset(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_16.json")
       .executeWhenLoaded(font -> {
         solaGui.globalProperties.setDefaultTextColor(Color.WHITE);

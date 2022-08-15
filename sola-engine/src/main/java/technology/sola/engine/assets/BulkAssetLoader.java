@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class BulkAssetLoader {
-  private final AssetPoolProvider assetPoolProvider;
+  private final AssetLoaderProvider assetLoaderProvider;
   private final List<BulkAssetDescription> bulkAssetDescriptionList = new ArrayList<>();
 
-  public BulkAssetLoader(AssetPoolProvider assetPoolProvider) {
-    this.assetPoolProvider = assetPoolProvider;
+  public BulkAssetLoader(AssetLoaderProvider assetLoaderProvider) {
+    this.assetLoaderProvider = assetLoaderProvider;
   }
 
   public BulkAssetLoader addAsset(Class<? extends Asset> assetClass, String assetId, String path) {
@@ -28,7 +28,7 @@ public class BulkAssetLoader {
     for (BulkAssetDescription bulkAssetDescription : bulkAssetDescriptionList) {
       final int currentAssetIndex = index;
 
-      assetPoolProvider
+      assetLoaderProvider
         .get(bulkAssetDescription.assetClass())
         .getNewAsset(bulkAssetDescription.assetId(), bulkAssetDescription.path()).executeWhenLoaded(asset -> {
           assetCounter.increment();

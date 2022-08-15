@@ -1,7 +1,7 @@
 package technology.sola.engine.graphics.components.sprite;
 
 import technology.sola.engine.assets.AssetHandle;
-import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 
@@ -35,13 +35,12 @@ public class SpriteKeyFrame implements Serializable {
     return duration;
   }
 
-  AssetHandle<SolaImage> getSprite(AssetPool<SpriteSheet> spriteSheetAssetPool) {
-    // TODO clean this up!
+  AssetHandle<SolaImage> getSprite(AssetLoader<SpriteSheet> spriteSheetAssetLoader) {
     if (!isRequested && cachedSprite.isLoading()) {
       isRequested = true;
-      spriteSheetAssetPool.get(spriteSheetId).executeIfLoaded(spriteSheet -> {
-        cachedSprite.setAsset(spriteSheet.getSprite(spriteId));
-      });
+      spriteSheetAssetLoader
+        .get(spriteSheetId)
+        .executeWhenLoaded(spriteSheet -> cachedSprite.setAsset(spriteSheet.getSprite(spriteId)));
     }
 
     return cachedSprite;

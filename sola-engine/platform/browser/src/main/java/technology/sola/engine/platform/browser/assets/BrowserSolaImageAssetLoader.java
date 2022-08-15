@@ -1,12 +1,12 @@
 package technology.sola.engine.platform.browser.assets;
 
 import technology.sola.engine.assets.AssetHandle;
-import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.platform.browser.javascript.JsImageUtils;
 
-public class BrowserSolaImageAssetPool extends AssetPool<SolaImage> {
+public class BrowserSolaImageAssetLoader extends AssetLoader<SolaImage> {
   @Override
   public Class<SolaImage> getAssetClass() {
     return SolaImage.class;

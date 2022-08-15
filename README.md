@@ -1,19 +1,31 @@
 # Branch WIP
 
-
+-----------------------------------------------------------------------------------------------------------------------
 
 ## Bugs List
+
 * Font asset generation for non-monospaced fonts has some issues getting extra pixels from adjacent characters
 
+-----------------------------------------------------------------------------------------------------------------------
 
 ## Cleanup List
-* Review SpriteComponent and SpriteKeyFrame caching code
-* `KeyEvent(int keyCode)` could instead be `KeyEvent(Key key)` for enum checks instead of always calling getCode()
+
+-----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
+
+* Ship a default font (maybe monospaced 16?)
+  * maybe base64 for image and hardcoded minified json?
+  * or maybe manually create Font object to default? (problem here is AssetLoader should have it still)
 * Assets
-  * Consider adding JsonAsset and JsonAssetPool
-  * Consider implementing generic SpriteSheetAssetPool and generic FontAssetPool utilizing platform specific JsonAssetPool and SolaImageAssetPool
+  * Consider adding JsonAsset and JsonAssetLoader
+  * Consider implementing generic SpriteSheetAssetLoader and generic FontAssetLoader utilizing platform specific
+    JsonAssetLoader and SolaImageAssetLoader
+    * Maybe pass AssetLoaderProvider to each AssetLoader instance to make this easier
+* Consider adding a "debug console"
+  * While open can toggle things like render debug outlines and debug spacial hashmap stuff
+  * Could also maybe allow adding custom commands
+  * Should probably always use a "default font" if it is implemented
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
   * More BlendMode implementations
@@ -85,3 +97,5 @@
       * might vary per platform
 * Android Platform
   * Implement
+
+-----------------------------------------------------------------------------------------------------------------------

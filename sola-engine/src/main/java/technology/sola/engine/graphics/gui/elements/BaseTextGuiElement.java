@@ -6,7 +6,6 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.GuiElementProperties;
-import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties> extends GuiElement<T> {
@@ -36,7 +35,12 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
 
     if (font != null) {
       renderer.setFont(font);
-      renderer.drawWithBlendMode(BlendMode.MASK, r -> renderer.drawString(properties.getText(), x + properties.padding.getLeft(), y + properties.padding.getTop(), properties.getColorText()));
+      renderer.drawString(
+        properties.getText(),
+        x + properties.padding.getLeft(),
+        y + properties.padding.getTop(),
+        properties.getColorText()
+      );
     }
   }
 
@@ -45,7 +49,7 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
     String propertiesAssetId = properties().getFontAssetId();
 
     if (!propertiesAssetId.equals(currentFontAssetId)) {
-      solaGui.getAssetPoolProvider()
+      solaGui.getAssetLoaderProvider()
         .get(Font.class)
         .get(propertiesAssetId)
         .executeWhenLoaded(font -> {

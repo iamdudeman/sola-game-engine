@@ -1,6 +1,6 @@
 package technology.sola.engine.core.module.graphics.gui;
 
-import technology.sola.engine.assets.AssetPoolProvider;
+import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.module.SolaModule;
 import technology.sola.engine.graphics.gui.GuiElement;
@@ -17,13 +17,13 @@ import java.util.function.Function;
 @SolaModule
 public class SolaGui {
   public final GuiElementGlobalProperties globalProperties;
-  private final AssetPoolProvider assetPoolProvider;
+  private final AssetLoaderProvider assetLoaderProvider;
   private GuiElement<?> rootGuiElement;
   private GuiElement<?> focussedElement;
   private Renderer renderer;
 
-  public static SolaGui createInstance(AssetPoolProvider assetPoolProvider, SolaPlatform platform) {
-    SolaGui solaGui = new SolaGui(assetPoolProvider);
+  public static SolaGui createInstance(AssetLoaderProvider assetLoaderProvider, SolaPlatform platform) {
+    SolaGui solaGui = new SolaGui(assetLoaderProvider);
 
     solaGui.renderer = platform.getRenderer();
     platform.onKeyPressed(solaGui::onKeyPressed);
@@ -95,8 +95,8 @@ public class SolaGui {
     }
   }
 
-  public AssetPoolProvider getAssetPoolProvider() {
-    return assetPoolProvider;
+  public AssetLoaderProvider getAssetLoaderProvider() {
+    return assetLoaderProvider;
   }
 
   public boolean isFocussedElement(GuiElement<?> guiElement) {
@@ -109,8 +109,8 @@ public class SolaGui {
     }
   }
 
-  private SolaGui(AssetPoolProvider assetPoolProvider) {
-    this.assetPoolProvider = assetPoolProvider;
+  private SolaGui(AssetLoaderProvider assetLoaderProvider) {
+    this.assetLoaderProvider = assetLoaderProvider;
     this.globalProperties = new GuiElementGlobalProperties(() -> rootGuiElement);
   }
 

@@ -1,10 +1,10 @@
-package technology.sola.engine.platform.javafx.assets;
+package technology.sola.engine.platform.swing.assets;
 
 import technology.sola.engine.assets.AssetHandle;
-import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.SpriteSheet;
-import technology.sola.engine.platform.javafx.assets.exception.FailedSpriteSheetLoadException;
+import technology.sola.engine.platform.swing.assets.exception.FailedSpriteSheetLoadException;
 import technology.sola.json.JsonObject;
 import technology.sola.json.SolaJson;
 
@@ -12,11 +12,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class JavaFxSpriteSheetAssetPool extends AssetPool<SpriteSheet> {
-  private final AssetPool<SolaImage> solaImageAssetPool;
+public class SpriteSheetAssetLoader extends AssetLoader<SpriteSheet> {
+  private final AssetLoader<SolaImage> solaImageAssetLoader;
 
-  public JavaFxSpriteSheetAssetPool(AssetPool<SolaImage> solaImageAssetPool) {
-    this.solaImageAssetPool = solaImageAssetPool;
+  public SpriteSheetAssetLoader(AssetLoader<SolaImage> solaImageAssetLoader) {
+    this.solaImageAssetLoader = solaImageAssetLoader;
   }
 
   @Override
@@ -38,7 +38,7 @@ public class JavaFxSpriteSheetAssetPool extends AssetPool<SpriteSheet> {
         String spriteImageName = spriteSheetJson.getString("spriteSheet");
         String spriteImagePath = new File(file.getParent(), spriteImageName).getPath();
 
-        solaImageAssetPool.getNewAsset(spriteImageName, spriteImagePath)
+        solaImageAssetLoader.getNewAsset(spriteImageName, spriteImagePath)
           .executeWhenLoaded(solaImage -> {
             SpriteSheet spriteSheet = new SpriteSheet(solaImage);
 

@@ -38,23 +38,23 @@ public class RenderingExample extends Sola {
   @Override
   protected void onInit() {
     solaInitialization.useAsyncInitialization();
-    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetPoolProvider);
+    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetLoaderProvider);
 
     solaEcs.addSystem(new TestSystem());
     solaEcs.setWorld(createWorld());
 
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
 
-    new BulkAssetLoader(assetPoolProvider)
+    new BulkAssetLoader(assetLoaderProvider)
       .addAsset(SpriteSheet.class, "test", "assets/test_tiles_spritesheet.json")
       .addAsset(Font.class, "default", "assets/monospaced_NORMAL_16.json")
       .loadAll()
       .onComplete(assets -> {
         if (assets[1] instanceof Font font) {
           this.defaultFont = font;
-
-          solaInitialization.completeAsyncInitialization();
         }
+
+        solaInitialization.completeAsyncInitialization();
       });
   }
 
@@ -90,11 +90,9 @@ public class RenderingExample extends Sola {
       final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
       renderer.setFont(defaultFont);
-      renderer.setBlendMode(BlendMode.MASK);
       renderer.drawString(characters1, 85, 5, Color.RED);
       renderer.drawString(characters2, 85, 35, Color.BLACK);
       renderer.drawString("Hello world!", 182, 67, Color.BLUE);
-      renderer.setBlendMode(BlendMode.NO_BLENDING);
     });
   }
 

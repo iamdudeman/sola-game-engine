@@ -1,18 +1,18 @@
 package technology.sola.engine.platform.browser.assets;
 
 import technology.sola.engine.assets.AssetHandle;
-import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.platform.browser.javascript.JsJsonUtils;
 import technology.sola.json.JsonObject;
 import technology.sola.json.SolaJson;
 
-public class BrowserSpriteSheetAssetPool extends AssetPool<SpriteSheet> {
-  private final AssetPool<SolaImage> solaImageAssetPool;
+public class BrowserSpriteSheetAssetLoader extends AssetLoader<SpriteSheet> {
+  private final AssetLoader<SolaImage> solaImageAssetLoader;
 
-  public BrowserSpriteSheetAssetPool(AssetPool<SolaImage> solaImageAssetPool) {
-    this.solaImageAssetPool = solaImageAssetPool;
+  public BrowserSpriteSheetAssetLoader(AssetLoader<SolaImage> solaImageAssetLoader) {
+    this.solaImageAssetLoader = solaImageAssetLoader;
   }
 
   @Override
@@ -29,7 +29,7 @@ public class BrowserSpriteSheetAssetPool extends AssetPool<SpriteSheet> {
       JsonObject spriteSheetJson = solaJson.parse(jsonString).asObject();
 
       String spriteImageName = spriteSheetJson.getString("spriteSheet");
-      solaImageAssetPool.getNewAsset(spriteImageName, path.substring(0, path.lastIndexOf("/")) + "/" + spriteImageName).executeWhenLoaded(solaImage -> {
+      solaImageAssetLoader.getNewAsset(spriteImageName, path.substring(0, path.lastIndexOf("/")) + "/" + spriteImageName).executeWhenLoaded(solaImage -> {
         SpriteSheet spriteSheet = new SpriteSheet(solaImage);
 
         spriteSheetJson.getArray("sprites").forEach(spritesJsonEntry -> {
