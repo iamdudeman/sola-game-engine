@@ -9,7 +9,7 @@ import javafx.scene.image.PixelFormat;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 import technology.sola.engine.assets.AssetPool;
-import technology.sola.engine.assets.AssetPoolProvider;
+import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
@@ -141,12 +141,12 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   }
 
   @Override
-  protected void populateAssetPoolProvider(AssetPoolProvider assetPoolProvider) {
+  protected void populateAssetLoaderProvider(AssetLoaderProvider assetLoaderProvider) {
     AssetPool<SolaImage> solaImageAssetPool = new JavaFxSolaImageAssetPool();
-    assetPoolProvider.add(solaImageAssetPool);
-    assetPoolProvider.add(new JavaFxFontAssetPool(solaImageAssetPool));
-    assetPoolProvider.add(new JavaFxSpriteSheetAssetPool(solaImageAssetPool));
-    assetPoolProvider.add(new JavaFxAudiClipAssetPool());
+    assetLoaderProvider.add(solaImageAssetPool);
+    assetLoaderProvider.add(new JavaFxFontAssetPool(solaImageAssetPool));
+    assetLoaderProvider.add(new JavaFxSpriteSheetAssetPool(solaImageAssetPool));
+    assetLoaderProvider.add(new JavaFxAudiClipAssetPool());
   }
 
   @Override

@@ -5,8 +5,7 @@ import technology.sola.engine.assets.exception.MissingAssetPoolException;
 import java.util.HashMap;
 import java.util.Map;
 
-// TODO consider renaming
-public class AssetPoolProvider {
+public class AssetLoaderProvider {
   private final Map<Class<?>, AssetPool<?>> assetPoolMap = new HashMap<>();
 
   public void add(AssetPool<?> assetPool) {

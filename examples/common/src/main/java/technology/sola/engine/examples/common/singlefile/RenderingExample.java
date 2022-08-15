@@ -38,14 +38,14 @@ public class RenderingExample extends Sola {
   @Override
   protected void onInit() {
     solaInitialization.useAsyncInitialization();
-    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetPoolProvider);
+    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetLoaderProvider);
 
     solaEcs.addSystem(new TestSystem());
     solaEcs.setWorld(createWorld());
 
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
 
-    new BulkAssetLoader(assetPoolProvider)
+    new BulkAssetLoader(assetLoaderProvider)
       .addAsset(SpriteSheet.class, "test", "assets/test_tiles_spritesheet.json")
       .addAsset(Font.class, "default", "assets/monospaced_NORMAL_16.json")
       .loadAll()

@@ -41,9 +41,9 @@ public class ExampleLauncherSola extends Sola {
   @Override
   protected void onInit() {
     solaInitialization.useAsyncInitialization();
-    solaGui = SolaGui.createInstance(assetPoolProvider, platform);
+    solaGui = SolaGui.createInstance(assetLoaderProvider, platform);
 
-    assetPoolProvider.get(Font.class)
+    assetLoaderProvider.get(Font.class)
       .getNewAsset(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_16.json")
       .executeWhenLoaded(font -> {
         solaGui.globalProperties.setDefaultTextColor(Color.WHITE);

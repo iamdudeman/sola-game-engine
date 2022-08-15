@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import technology.sola.ecs.io.Base64WorldIo;
 import technology.sola.ecs.io.WorldIo;
-import technology.sola.engine.assets.AssetPoolProvider;
+import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
@@ -28,7 +28,7 @@ public abstract class SolaPlatform {
     this.solaEventHub = sola.eventHub;
     this.viewport = buildViewport(sola.getConfiguration());
 
-    populateAssetPoolProvider(sola.assetPoolProvider);
+    populateAssetLoaderProvider(sola.assetLoaderProvider);
     initializePlatform(sola.getConfiguration(), () -> initComplete(sola, sola.getConfiguration()));
   }
 
@@ -67,7 +67,7 @@ public abstract class SolaPlatform {
 
   protected abstract void onRender(Renderer renderer);
 
-  protected abstract void populateAssetPoolProvider(AssetPoolProvider assetPoolProvider);
+  protected abstract void populateAssetLoaderProvider(AssetLoaderProvider assetLoaderProvider);
 
   protected Viewport buildViewport(SolaConfiguration solaConfiguration) {
     return new Viewport(solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight());

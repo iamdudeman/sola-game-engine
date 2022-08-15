@@ -26,7 +26,7 @@ public class ParticleExample extends Sola {
 
     solaEcs.setWorld(buildWorld());
 
-    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetPoolProvider);
+    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetLoaderProvider);
   }
 
   @Override

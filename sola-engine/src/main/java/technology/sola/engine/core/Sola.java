@@ -1,7 +1,7 @@
 package technology.sola.engine.core;
 
 import technology.sola.ecs.SolaEcs;
-import technology.sola.engine.assets.AssetPoolProvider;
+import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.KeyboardInput;
@@ -14,14 +14,14 @@ public abstract class Sola {
   protected KeyboardInput keyboardInput;
   protected MouseInput mouseInput;
   protected SolaInitialization solaInitialization;
-  protected AssetPoolProvider assetPoolProvider;
+  protected AssetLoaderProvider assetLoaderProvider;
 
   protected Sola() {
     solaEcs = new SolaEcs();
     eventHub = new EventHub();
     keyboardInput = new KeyboardInput();
     mouseInput = new MouseInput();
-    assetPoolProvider = new AssetPoolProvider();
+    assetLoaderProvider = new AssetLoaderProvider();
   }
 
   protected abstract SolaConfiguration getConfiguration();

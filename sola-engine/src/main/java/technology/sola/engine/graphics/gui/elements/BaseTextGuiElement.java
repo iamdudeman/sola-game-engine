@@ -45,7 +45,7 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
     String propertiesAssetId = properties().getFontAssetId();
 
     if (!propertiesAssetId.equals(currentFontAssetId)) {
-      solaGui.getAssetPoolProvider()
+      solaGui.getAssetLoaderProvider()
         .get(Font.class)
         .get(propertiesAssetId)
         .executeWhenLoaded(font -> {

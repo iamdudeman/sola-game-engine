@@ -1,7 +1,7 @@
 package technology.sola.engine.platform.browser;
 
 import technology.sola.engine.assets.AssetPool;
-import technology.sola.engine.assets.AssetPoolProvider;
+import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
@@ -97,12 +97,12 @@ public class BrowserSolaPlatform extends SolaPlatform {
   }
 
   @Override
-  protected void populateAssetPoolProvider(AssetPoolProvider assetPoolProvider) {
+  protected void populateAssetLoaderProvider(AssetLoaderProvider assetLoaderProvider) {
     AssetPool<SolaImage> solaImageAssetPool = new BrowserSolaImageAssetPool();
-    assetPoolProvider.add(solaImageAssetPool);
-    assetPoolProvider.add(new BrowserSpriteSheetAssetPool(solaImageAssetPool));
-    assetPoolProvider.add(new BrowserFontAssetPool(solaImageAssetPool));
-    assetPoolProvider.add(new BrowserAudioClipAssetPool());
+    assetLoaderProvider.add(solaImageAssetPool);
+    assetLoaderProvider.add(new BrowserSpriteSheetAssetPool(solaImageAssetPool));
+    assetLoaderProvider.add(new BrowserFontAssetPool(solaImageAssetPool));
+    assetLoaderProvider.add(new BrowserAudioClipAssetPool());
   }
 
   @Override

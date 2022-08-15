@@ -1,7 +1,7 @@
 package technology.sola.engine.platform.swing;
 
 import technology.sola.engine.assets.AssetPool;
-import technology.sola.engine.assets.AssetPoolProvider;
+import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
@@ -152,12 +152,12 @@ public class SwingSolaPlatform extends SolaPlatform {
   }
 
   @Override
-  protected void populateAssetPoolProvider(AssetPoolProvider assetPoolProvider) {
+  protected void populateAssetLoaderProvider(AssetLoaderProvider assetLoaderProvider) {
     AssetPool<SolaImage> solaImageAssetPool = new SwingSolaImageAssetPool();
-    assetPoolProvider.add(solaImageAssetPool);
-    assetPoolProvider.add(new SwingFontAssetPool(solaImageAssetPool));
-    assetPoolProvider.add(new SpriteSheetAssetPool(solaImageAssetPool));
-    assetPoolProvider.add(new SwingAudiClipAssetPool());
+    assetLoaderProvider.add(solaImageAssetPool);
+    assetLoaderProvider.add(new SwingFontAssetPool(solaImageAssetPool));
+    assetLoaderProvider.add(new SpriteSheetAssetPool(solaImageAssetPool));
+    assetLoaderProvider.add(new SwingAudiClipAssetPool());
   }
 
   @Override

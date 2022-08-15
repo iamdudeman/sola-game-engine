@@ -2,7 +2,7 @@ package technology.sola.engine.core.module.graphics;
 
 import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.assets.AssetPool;
-import technology.sola.engine.assets.AssetPoolProvider;
+import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.module.SolaModule;
@@ -23,8 +23,8 @@ public class SolaGraphics {
   private boolean isRenderDebug = false;
   private final SpriteAnimatorSystem spriteAnimatorSystem;
 
-  public static SolaGraphics createInstance(SolaEcs solaEcs, Renderer renderer, AssetPoolProvider assetPoolProvider) {
-    SolaGraphics solaGraphics = new SolaGraphics(solaEcs, renderer, assetPoolProvider.get(SpriteSheet.class));
+  public static SolaGraphics createInstance(SolaEcs solaEcs, Renderer renderer, AssetLoaderProvider assetLoaderProvider) {
+    SolaGraphics solaGraphics = new SolaGraphics(solaEcs, renderer, assetLoaderProvider.get(SpriteSheet.class));
 
     solaEcs.addSystem(solaGraphics.spriteAnimatorSystem);
 

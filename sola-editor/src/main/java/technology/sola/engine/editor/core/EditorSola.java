@@ -85,7 +85,7 @@ public class EditorSola extends Sola {
   protected void onInit() {
     // TODO get assets based on project structure (might need this for all Sola [think VirtualFileSystem of sorts maybe])
     SolaPhysics.createInstance(eventHub, solaEcs);
-    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetPoolProvider);
+    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetLoaderProvider);
 
     stopPreview();
 
@@ -229,7 +229,7 @@ public class EditorSola extends Sola {
 
   private void populateFonts() {
     // TODO need a way to reload fonts when project changes or new ones are added
-    AssetPool<Font> fontAssetPool = assetPoolProvider.get(Font.class);
+    AssetPool<Font> fontAssetPool = assetLoaderProvider.get(Font.class);
 
     FolderUtils folderUtils = new FolderUtils(solaEditorContext);
     File fontFolder = folderUtils.getOrCreateFolder("assets/fonts");
@@ -246,7 +246,7 @@ public class EditorSola extends Sola {
 
   private void populateSpriteSheets() {
     // TODO need a way to reload sprite sheets when project changes or new ones are added
-    AssetPool<SpriteSheet> spriteSheetAssetPool = assetPoolProvider.get(SpriteSheet.class);
+    AssetPool<SpriteSheet> spriteSheetAssetPool = assetLoaderProvider.get(SpriteSheet.class);
 
     FolderUtils folderUtils = new FolderUtils(solaEditorContext);
     File fontFolder = folderUtils.getOrCreateFolder("assets/sprites");
