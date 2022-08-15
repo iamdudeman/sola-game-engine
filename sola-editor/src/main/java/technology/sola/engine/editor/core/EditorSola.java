@@ -238,7 +238,7 @@ public class EditorSola extends Sola {
     if (fontFiles != null) {
       for (File fontFile : fontFiles) {
         if (fontFile.getName().endsWith(".json")) {
-          fontAssetLoader.addAssetId(fontFile.getName(), fontFile.getAbsolutePath());
+          fontAssetLoader.addAssetMapping(fontFile.getName(), fontFile.getAbsolutePath());
         }
       }
     }
@@ -255,7 +255,7 @@ public class EditorSola extends Sola {
     if (spriteSheetFiles != null) {
       for (File spriteSheetFile : spriteSheetFiles) {
         if (spriteSheetFile.getName().endsWith(".json")) {
-          spriteSheetAssetLoader.addAssetId(spriteSheetFile.getName(), spriteSheetFile.getAbsolutePath());
+          spriteSheetAssetLoader.addAssetMapping(spriteSheetFile.getName(), spriteSheetFile.getAbsolutePath());
         }
       }
     }

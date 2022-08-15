@@ -15,14 +15,14 @@ public abstract class AssetLoader<T extends Asset> {
    * @param path
    * @return
    */
-  public AssetLoader<T> addAssetId(String id, String path) {
+  public AssetLoader<T> addAssetMapping(String id, String path) {
     assetIdToPathMap.put(id, path);
 
     return this;
   }
 
   /**
-   * Returns an {@link AssetHandle} for the asset requested or throws an exception if not found.
+   * Returns an {@link AssetHandle} for the asset requested or throws an exception if id to path mapping not found.
    * @param id
    * @return
    */
@@ -43,7 +43,7 @@ public abstract class AssetLoader<T extends Asset> {
    * @return
    */
   public AssetHandle<T> getNewAsset(String id, String path) {
-    addAssetId(id, path);
+    addAssetMapping(id, path);
 
     return get(id);
   }
