@@ -11,6 +11,7 @@ import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.input.Key;
 
 public class GuiExample extends Sola {
   private SolaGui solaGui;
@@ -116,9 +117,35 @@ public class GuiExample extends Sola {
       ),
       firstContainer,
       secondContainer,
-      toggleFontButton
+      toggleFontButton,
+      createKeyTesterElement()
     );
 
     return rootElement;
+  }
+
+  private GuiElement<?> createKeyTesterElement() {
+    TextGuiElement textGuiElement = solaGui.createElement(
+      TextGuiElement::new,
+      TextGuiElement.Properties::new,
+      p -> p.setText("Type a key").setColorText(Color.WHITE).setFocusable(true).padding.set(3).margin.setTop(10).setFocusOutlineColor(Color.LIGHT_BLUE)
+    );
+
+    textGuiElement.setOnKeyPressCallback(guiKeyEvent -> {
+      Key keyExists = null;
+
+      for (Key key : Key.values()) {
+        if (key.getCode() == guiKeyEvent.getKeyCode()) {
+          keyExists = key;
+          break;
+        }
+      }
+
+      String keyEnumName = keyExists == null ? "No Key enum entry: " : keyExists.getName() + ": ";
+
+      textGuiElement.properties().setText(keyEnumName + guiKeyEvent.getKeyCode());
+    });
+
+    return textGuiElement;
   }
 }
