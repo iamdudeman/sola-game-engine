@@ -4,12 +4,11 @@
 
 ## Bugs List
 * Font asset generation for non-monospaced fonts has some issues getting extra pixels from adjacent characters
-* Verify Key.ENTER code on browser and desktop (doesn't seem to be the same for some reason)
 
 
 ## Cleanup List
 * Review SpriteComponent and SpriteKeyFrame caching code
-
+* `KeyEvent(int keyCode)` could instead be `KeyEvent(Key key)` for enum checks instead of always calling getCode()
 
 ## TODO List
 * Assets
