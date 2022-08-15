@@ -11,7 +11,6 @@
 ## Cleanup List
 
 * Review SpriteComponent and SpriteKeyFrame caching code
-* Consider renaming AssetPool to AssetLoader
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -19,11 +18,11 @@
 
 * Ship a default font (maybe monospaced 16?)
   * maybe base64 for image and hardcoded minified json?
-  * or maybe manually create Font object to default? (problem here is AssetPool should have it still)
+  * or maybe manually create Font object to default? (problem here is AssetLoader should have it still)
 * Assets
-  * Consider adding JsonAsset and JsonAssetPool
-  * Consider implementing generic SpriteSheetAssetPool and generic FontAssetPool utilizing platform specific
-    JsonAssetPool and SolaImageAssetPool
+  * Consider adding JsonAsset and JsonAssetLoader
+  * Consider implementing generic SpriteSheetAssetLoader and generic FontAssetLoader utilizing platform specific
+    JsonAssetLoader and SolaImageAssetLoader
 * Rendering
   * SolaGraphics could cull entities that are outside the camera viewport
   * More BlendMode implementations

@@ -2,8 +2,7 @@ package technology.sola.engine.core.module.graphics;
 
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.SolaEcs;
-import technology.sola.engine.assets.AssetPool;
-import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.AffineTransform;
@@ -13,20 +12,20 @@ import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 class SpriteGraphics {
-  static void render(Renderer renderer, SolaEcs solaEcs, TransformComponent cameraTransform, AssetPool<SpriteSheet> spriteSheetAssetPool) {
+  static void render(Renderer renderer, SolaEcs solaEcs, TransformComponent cameraTransform, AssetLoader<SpriteSheet> spriteSheetAssetLoader) {
     solaEcs.getWorld().findEntitiesWithComponents(TransformComponent.class, SpriteComponent.class)
       .forEach(entity -> {
         LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
 
         if (layerComponent == null) {
-          renderSprite(renderer, entity, cameraTransform, spriteSheetAssetPool);
+          renderSprite(renderer, entity, cameraTransform, spriteSheetAssetLoader);
         } else {
-          renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r -> renderSprite(renderer, entity, cameraTransform, spriteSheetAssetPool));
+          renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r -> renderSprite(renderer, entity, cameraTransform, spriteSheetAssetLoader));
         }
       });
   }
 
-  private static void renderSprite(Renderer renderer, Entity entity, TransformComponent cameraTransform, AssetPool<SpriteSheet> spriteSheetAssetPool) {
+  private static void renderSprite(Renderer renderer, Entity entity, TransformComponent cameraTransform, AssetLoader<SpriteSheet> spriteSheetAssetLoader) {
     TransformComponent transformComponent = GraphicsUtils.getTransformForAppliedCamera(entity.getComponent(TransformComponent.class), cameraTransform);
     SpriteComponent spriteComponent = entity.getComponent(SpriteComponent.class);
 
@@ -34,7 +33,7 @@ class SpriteGraphics {
       return;
     }
 
-    spriteComponent.getSprite(spriteSheetAssetPool).executeIfLoaded(sprite -> {
+    spriteComponent.getSprite(spriteSheetAssetLoader).executeIfLoaded(sprite -> {
       if (transformComponent.getScaleX() != 1 || transformComponent.getScaleY() != 1) {
         AffineTransform affineTransform = new AffineTransform()
           .translate(transformComponent.getX(), transformComponent.getY())

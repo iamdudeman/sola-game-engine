@@ -1,7 +1,7 @@
 package technology.sola.engine.platform.swing.assets;
 
 import technology.sola.engine.assets.AssetHandle;
-import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.platform.swing.assets.exception.FailedSolaImageLoadException;
 
@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class SwingSolaImageAssetPool extends AssetPool<SolaImage> {
+public class SwingSolaImageAssetLoader extends AssetLoader<SolaImage> {
   @Override
   public Class<SolaImage> getAssetClass() {
     return SolaImage.class;

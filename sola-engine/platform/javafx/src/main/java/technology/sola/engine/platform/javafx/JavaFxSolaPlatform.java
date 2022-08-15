@@ -8,7 +8,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.PixelFormat;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
-import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.core.SolaConfiguration;
@@ -20,10 +20,10 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
-import technology.sola.engine.platform.javafx.assets.JavaFxAudiClipAssetPool;
-import technology.sola.engine.platform.javafx.assets.JavaFxFontAssetPool;
-import technology.sola.engine.platform.javafx.assets.JavaFxSolaImageAssetPool;
-import technology.sola.engine.platform.javafx.assets.JavaFxSpriteSheetAssetPool;
+import technology.sola.engine.platform.javafx.assets.JavaFxAudiClipAssetLoader;
+import technology.sola.engine.platform.javafx.assets.JavaFxFontAssetLoader;
+import technology.sola.engine.platform.javafx.assets.JavaFxSolaImageAssetLoader;
+import technology.sola.engine.platform.javafx.assets.JavaFxSpriteSheetAssetLoader;
 import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
 
 import java.util.function.Consumer;
@@ -142,11 +142,11 @@ public class JavaFxSolaPlatform extends SolaPlatform {
 
   @Override
   protected void populateAssetLoaderProvider(AssetLoaderProvider assetLoaderProvider) {
-    AssetPool<SolaImage> solaImageAssetPool = new JavaFxSolaImageAssetPool();
-    assetLoaderProvider.add(solaImageAssetPool);
-    assetLoaderProvider.add(new JavaFxFontAssetPool(solaImageAssetPool));
-    assetLoaderProvider.add(new JavaFxSpriteSheetAssetPool(solaImageAssetPool));
-    assetLoaderProvider.add(new JavaFxAudiClipAssetPool());
+    AssetLoader<SolaImage> solaImageAssetLoader = new JavaFxSolaImageAssetLoader();
+    assetLoaderProvider.add(solaImageAssetLoader);
+    assetLoaderProvider.add(new JavaFxFontAssetLoader(solaImageAssetLoader));
+    assetLoaderProvider.add(new JavaFxSpriteSheetAssetLoader(solaImageAssetLoader));
+    assetLoaderProvider.add(new JavaFxAudiClipAssetLoader());
   }
 
   @Override

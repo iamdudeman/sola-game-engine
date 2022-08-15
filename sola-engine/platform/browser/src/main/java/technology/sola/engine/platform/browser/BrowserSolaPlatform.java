@@ -1,6 +1,6 @@
 package technology.sola.engine.platform.browser;
 
-import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.core.SolaConfiguration;
@@ -11,10 +11,10 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
-import technology.sola.engine.platform.browser.assets.BrowserAudioClipAssetPool;
-import technology.sola.engine.platform.browser.assets.BrowserFontAssetPool;
-import technology.sola.engine.platform.browser.assets.BrowserSolaImageAssetPool;
-import technology.sola.engine.platform.browser.assets.BrowserSpriteSheetAssetPool;
+import technology.sola.engine.platform.browser.assets.BrowserAudioClipAssetLoader;
+import technology.sola.engine.platform.browser.assets.BrowserFontAssetLoader;
+import technology.sola.engine.platform.browser.assets.BrowserSolaImageAssetLoader;
+import technology.sola.engine.platform.browser.assets.BrowserSpriteSheetAssetLoader;
 import technology.sola.engine.platform.browser.core.BrowserCanvasRenderer;
 import technology.sola.engine.platform.browser.core.BrowserGameLoop;
 import technology.sola.engine.platform.browser.javascript.JsCanvasUtils;
@@ -98,11 +98,11 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   @Override
   protected void populateAssetLoaderProvider(AssetLoaderProvider assetLoaderProvider) {
-    AssetPool<SolaImage> solaImageAssetPool = new BrowserSolaImageAssetPool();
-    assetLoaderProvider.add(solaImageAssetPool);
-    assetLoaderProvider.add(new BrowserSpriteSheetAssetPool(solaImageAssetPool));
-    assetLoaderProvider.add(new BrowserFontAssetPool(solaImageAssetPool));
-    assetLoaderProvider.add(new BrowserAudioClipAssetPool());
+    AssetLoader<SolaImage> solaImageAssetLoader = new BrowserSolaImageAssetLoader();
+    assetLoaderProvider.add(solaImageAssetLoader);
+    assetLoaderProvider.add(new BrowserSpriteSheetAssetLoader(solaImageAssetLoader));
+    assetLoaderProvider.add(new BrowserFontAssetLoader(solaImageAssetLoader));
+    assetLoaderProvider.add(new BrowserAudioClipAssetLoader());
   }
 
   @Override

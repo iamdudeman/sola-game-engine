@@ -1,23 +1,23 @@
-package technology.sola.engine.platform.javafx.assets;
+package technology.sola.engine.platform.swing.assets;
 
 import technology.sola.engine.assets.AssetHandle;
-import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.assets.graphics.font.FontInfo;
 import technology.sola.engine.assets.graphics.font.mapper.FontInfoJsonMapper;
-import technology.sola.engine.platform.javafx.assets.exception.FailedFontLoadException;
+import technology.sola.engine.platform.swing.assets.exception.FailedFontLoadException;
 import technology.sola.json.SolaJson;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class JavaFxFontAssetPool extends AssetPool<Font> {
-  private final AssetPool<SolaImage> solaImageAssetPool;
+public class SwingFontAssetLoader extends AssetLoader<Font> {
+  private final AssetLoader<SolaImage> solaImageAssetLoader;
 
-  public JavaFxFontAssetPool(AssetPool<SolaImage> solaImageAssetPool) {
-    this.solaImageAssetPool = solaImageAssetPool;
+  public SwingFontAssetLoader(AssetLoader<SolaImage> solaImageAssetLoader) {
+    this.solaImageAssetLoader = solaImageAssetLoader;
   }
 
   @Override
@@ -30,18 +30,20 @@ public class JavaFxFontAssetPool extends AssetPool<Font> {
     AssetHandle<Font> fontAssetHandle = new AssetHandle<>();
 
     new Thread(() -> {
-      try {
-        File file = new File(path);
-        SolaJson solaJson = new SolaJson();
-        FontInfo fontInfo = solaJson.parse(Files.readString(file.toPath()), new FontInfoJsonMapper());
-        String fontImagePath = path.replace(file.getName(), "") + fontInfo.fontGlyphFile();
+      File file = new File(path);
+      SolaJson solaJson = new SolaJson();
 
-        solaImageAssetPool
-          .getNewAsset(fontInfo.fontGlyphFile(), fontImagePath)
-          .executeWhenLoaded(solaImage -> fontAssetHandle.setAsset(new Font(solaImage, fontInfo)));
+      try {
+        FontInfo fontInfo = solaJson.parse(Files.readString(file.toPath()), new FontInfoJsonMapper());
+
+        solaImageAssetLoader.getNewAsset(
+          fontInfo.fontGlyphFile(),
+          path.replace(file.getName(), "") + fontInfo.fontGlyphFile()
+        ).executeWhenLoaded(solaImage -> fontAssetHandle.setAsset(new Font(solaImage, fontInfo)));
       } catch (IOException ex) {
         throw new FailedFontLoadException(path);
       }
+
     }).start();
 
     return fontAssetHandle;

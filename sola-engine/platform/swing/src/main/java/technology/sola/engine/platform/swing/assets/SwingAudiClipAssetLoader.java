@@ -1,7 +1,7 @@
 package technology.sola.engine.platform.swing.assets;
 
 import technology.sola.engine.assets.AssetHandle;
-import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.platform.swing.assets.audio.WavAudioClip;
 import technology.sola.engine.platform.swing.assets.exception.AudioClipException;
@@ -13,7 +13,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 
-public class SwingAudiClipAssetPool extends AssetPool<AudioClip> {
+public class SwingAudiClipAssetLoader extends AssetLoader<AudioClip> {
   @Override
   public Class<AudioClip> getAssetClass() {
     return AudioClip.class;

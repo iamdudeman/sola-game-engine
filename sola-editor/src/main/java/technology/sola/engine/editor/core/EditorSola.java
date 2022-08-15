@@ -4,7 +4,7 @@ import javafx.scene.control.MultipleSelectionModel;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
-import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
@@ -229,7 +229,7 @@ public class EditorSola extends Sola {
 
   private void populateFonts() {
     // TODO need a way to reload fonts when project changes or new ones are added
-    AssetPool<Font> fontAssetPool = assetLoaderProvider.get(Font.class);
+    AssetLoader<Font> fontAssetLoader = assetLoaderProvider.get(Font.class);
 
     FolderUtils folderUtils = new FolderUtils(solaEditorContext);
     File fontFolder = folderUtils.getOrCreateFolder("assets/fonts");
@@ -238,7 +238,7 @@ public class EditorSola extends Sola {
     if (fontFiles != null) {
       for (File fontFile : fontFiles) {
         if (fontFile.getName().endsWith(".json")) {
-          fontAssetPool.addAssetId(fontFile.getName(), fontFile.getAbsolutePath());
+          fontAssetLoader.addAssetId(fontFile.getName(), fontFile.getAbsolutePath());
         }
       }
     }
@@ -246,7 +246,7 @@ public class EditorSola extends Sola {
 
   private void populateSpriteSheets() {
     // TODO need a way to reload sprite sheets when project changes or new ones are added
-    AssetPool<SpriteSheet> spriteSheetAssetPool = assetLoaderProvider.get(SpriteSheet.class);
+    AssetLoader<SpriteSheet> spriteSheetAssetLoader = assetLoaderProvider.get(SpriteSheet.class);
 
     FolderUtils folderUtils = new FolderUtils(solaEditorContext);
     File fontFolder = folderUtils.getOrCreateFolder("assets/sprites");
@@ -255,7 +255,7 @@ public class EditorSola extends Sola {
     if (spriteSheetFiles != null) {
       for (File spriteSheetFile : spriteSheetFiles) {
         if (spriteSheetFile.getName().endsWith(".json")) {
-          spriteSheetAssetPool.addAssetId(spriteSheetFile.getName(), spriteSheetFile.getAbsolutePath());
+          spriteSheetAssetLoader.addAssetId(spriteSheetFile.getName(), spriteSheetFile.getAbsolutePath());
         }
       }
     }

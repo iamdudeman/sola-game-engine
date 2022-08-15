@@ -1,7 +1,7 @@
 package technology.sola.engine.platform.browser.assets;
 
 import technology.sola.engine.assets.AssetHandle;
-import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.assets.graphics.font.FontInfo;
@@ -9,11 +9,11 @@ import technology.sola.engine.assets.graphics.font.mapper.FontInfoJsonMapper;
 import technology.sola.engine.platform.browser.javascript.JsJsonUtils;
 import technology.sola.json.SolaJson;
 
-public class BrowserFontAssetPool extends AssetPool<Font> {
-  private final AssetPool<SolaImage> solaImageAssetPool;
+public class BrowserFontAssetLoader extends AssetLoader<Font> {
+  private final AssetLoader<SolaImage> solaImageAssetLoader;
 
-  public BrowserFontAssetPool(AssetPool<SolaImage> solaImageAssetPool) {
-    this.solaImageAssetPool = solaImageAssetPool;
+  public BrowserFontAssetLoader(AssetLoader<SolaImage> solaImageAssetLoader) {
+    this.solaImageAssetLoader = solaImageAssetLoader;
   }
 
   @Override
@@ -29,7 +29,7 @@ public class BrowserFontAssetPool extends AssetPool<Font> {
       SolaJson solaJson = new SolaJson();
       FontInfo fontInfo = solaJson.parse(jsonString, new FontInfoJsonMapper());
 
-      solaImageAssetPool.getNewAsset(
+      solaImageAssetLoader.getNewAsset(
         fontInfo.fontGlyphFile(),
         path.substring(0, path.lastIndexOf("/")) + "/" + fontInfo.fontGlyphFile()
         )

@@ -1,7 +1,7 @@
 package technology.sola.engine.core.module.graphics;
 
 import technology.sola.ecs.SolaEcs;
-import technology.sola.engine.assets.AssetPool;
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.component.TransformComponent;
@@ -19,7 +19,7 @@ public class SolaGraphics {
   private static final TransformComponent DEFAULT_CAMERA_TRANSFORM = new TransformComponent();
   private final SolaEcs solaEcs;
   private final Renderer renderer;
-  private final AssetPool<SpriteSheet> spriteSheetAssetPool;
+  private final AssetLoader<SpriteSheet> spriteSheetAssetLoader;
   private boolean isRenderDebug = false;
   private final SpriteAnimatorSystem spriteAnimatorSystem;
 
@@ -46,7 +46,7 @@ public class SolaGraphics {
 
     GeometryGraphics.render(renderer, solaEcs, cameraTransform);
 
-    SpriteGraphics.render(renderer, solaEcs, cameraTransform, spriteSheetAssetPool);
+    SpriteGraphics.render(renderer, solaEcs, cameraTransform, spriteSheetAssetLoader);
 
     // TODO need to render this to back most layer at some point probably
     if (isRenderDebug) {
@@ -74,10 +74,10 @@ public class SolaGraphics {
     isRenderDebug = renderDebug;
   }
 
-  private SolaGraphics(SolaEcs solaEcs, Renderer renderer, AssetPool<SpriteSheet> spriteSheetAssetPool) {
+  private SolaGraphics(SolaEcs solaEcs, Renderer renderer, AssetLoader<SpriteSheet> spriteSheetAssetLoader) {
     this.solaEcs = solaEcs;
     this.renderer = renderer;
-    this.spriteSheetAssetPool = spriteSheetAssetPool;
+    this.spriteSheetAssetLoader = spriteSheetAssetLoader;
 
     spriteAnimatorSystem = new SpriteAnimatorSystem();
   }
