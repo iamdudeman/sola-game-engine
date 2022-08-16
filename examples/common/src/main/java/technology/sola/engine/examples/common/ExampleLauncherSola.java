@@ -1,6 +1,5 @@
 package technology.sola.engine.examples.common;
 
-import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
@@ -18,7 +17,6 @@ import technology.sola.engine.examples.common.singlefile.StressTestPhysicsExampl
 import technology.sola.engine.examples.common.singlefile.StressTestRenderingExample;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
-import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
@@ -41,16 +39,9 @@ public class ExampleLauncherSola extends Sola {
 
   @Override
   protected void onInit() {
-    solaInitialization.useAsyncInitialization();
     solaGui = SolaGui.createInstance(assetLoaderProvider, platform);
-
-    assetLoaderProvider.get(Font.class)
-      .getNewAsset(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_16.json")
-      .executeWhenLoaded(font -> {
-        solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
-        solaGui.setGuiRoot(buildGui());
-        solaInitialization.completeAsyncInitialization();
-      });
+    solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
+    solaGui.setGuiRoot(buildGui());
   }
 
   @Override

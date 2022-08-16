@@ -21,6 +21,17 @@ public abstract class AssetLoader<T extends Asset> {
     return this;
   }
 
+  public boolean hasAssetMapping(String id) {
+    return assetIdToPathMap.containsKey(id);
+  }
+
+  public AssetLoader<T> addAsset(String id, T asset) {
+    cachedAssets.put(id, new AssetHandle<>(asset));
+    assetIdToPathMap.put(id, "manual");
+
+    return this;
+  }
+
   /**
    * Returns an {@link AssetHandle} for the asset requested or throws an exception if id to path mapping not found.
    * @param id

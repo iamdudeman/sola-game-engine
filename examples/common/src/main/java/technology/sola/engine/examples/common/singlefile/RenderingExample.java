@@ -4,9 +4,8 @@ import technology.sola.ecs.Component;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
-import technology.sola.engine.assets.BulkAssetLoader;
 import technology.sola.engine.assets.graphics.SpriteSheet;
-import technology.sola.engine.assets.graphics.font.Font;
+import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
@@ -28,7 +27,6 @@ import java.util.List;
 
 public class RenderingExample extends Sola {
   private SolaGraphics solaGraphics;
-  private Font defaultFont;
 
   @Override
   protected SolaConfiguration getConfiguration() {
@@ -37,27 +35,16 @@ public class RenderingExample extends Sola {
 
   @Override
   protected void onInit() {
-    solaInitialization.useAsyncInitialization();
     solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetLoaderProvider);
 
     solaEcs.addSystem(new TestSystem());
     solaEcs.setWorld(createWorld());
 
-    platform.getRenderer().setFont(Font.getDefaultFont());
-
+    platform.getRenderer().setFont(DefaultFont.get());
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
 
-    new BulkAssetLoader(assetLoaderProvider)
-      .addAsset(SpriteSheet.class, "test", "assets/test_tiles_spritesheet.json")
-//      .addAsset(Font.class, "default", "assets/monospaced_NORMAL_16.json")
-      .loadAll()
-      .onComplete(assets -> {
-//        if (assets[1] instanceof Font font) {
-//          this.defaultFont = font;
-//        }
-
-        solaInitialization.completeAsyncInitialization();
-      });
+    assetLoaderProvider.get(SpriteSheet.class)
+      .addAssetMapping("test", "assets/test_tiles_spritesheet.json");
   }
 
   @Override
@@ -91,7 +78,6 @@ public class RenderingExample extends Sola {
       final String characters1 = "!\"#$%&'()*+,-./0123456789:; <=>?@ABCDEFGHIJKLMN";
       final String characters2 = "OPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
-//      renderer.setFont(defaultFont);
       renderer.drawString(characters1, 85, 5, Color.RED);
       renderer.drawString(characters2, 85, 35, Color.BLACK);
       renderer.drawString("Hello world!", 182, 67, Color.BLUE);
