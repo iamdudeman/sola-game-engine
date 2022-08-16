@@ -5,7 +5,6 @@ import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.graphics.SpriteSheet;
-import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
@@ -40,7 +39,6 @@ public class RenderingExample extends Sola {
     solaEcs.addSystem(new TestSystem());
     solaEcs.setWorld(createWorld());
 
-    platform.getRenderer().setFont(DefaultFont.get());
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
 
     assetLoaderProvider.get(SpriteSheet.class)

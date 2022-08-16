@@ -1,6 +1,7 @@
 package technology.sola.engine.graphics.renderer;
 
 import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Canvas;
@@ -31,6 +32,15 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   @Override
   public BlendMode getBlendMode() {
     return blendMode;
+  }
+
+  @Override
+  public Font getFont() {
+    if (font == null) {
+      font = DefaultFont.get();
+    }
+
+    return font;
   }
 
   @Override
@@ -246,20 +256,6 @@ public class SoftwareRenderer extends Canvas implements Renderer {
       .translate(x, y);
 
     drawImage(solaImage, affineTransform);
-  }
-
-  @Override
-  public void drawString(String text, float x, float y, Color color) {
-    drawWithBlendMode(BlendMode.MASK, r -> {
-      int xOffset = 0;
-
-      for (char character : text.toCharArray()) {
-        SolaImage glyphImage = font.getGlyph(character, color);
-
-        drawImage(x + xOffset, y, glyphImage);
-        xOffset += glyphImage.getWidth() + font.getFontInfo().leading();
-      }
-    });
   }
 
   @Override
