@@ -14,9 +14,6 @@
 
 ## TODO List
 
-* Ship a default font (maybe monospaced 16?)
-  * maybe base64 for image and hardcoded minified json?
-  * or maybe manually create Font object to default? (problem here is AssetLoader should have it still)
 * Assets
   * Consider adding JsonAsset and JsonAssetLoader
   * Consider implementing generic SpriteSheetAssetLoader and generic FontAssetLoader utilizing platform specific
