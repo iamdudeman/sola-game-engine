@@ -13,29 +13,33 @@ import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.screen.AspectMode;
 
 public class AudioExample extends Sola {
   private SolaGui solaGui;
 
   @Override
   protected SolaConfiguration getConfiguration() {
-    return new SolaConfiguration("Gui Example", 800, 600, 30, true);
+    return new SolaConfiguration("Gui Example", 600, 400, 30, true);
   }
 
   @Override
   protected void onInit() {
     solaInitialization.useAsyncInitialization();
+    platform.getViewport().setAspectMode(AspectMode.STRETCH);
+    solaGui = SolaGui.createInstance(assetLoaderProvider, platform);
+
+    solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
+    solaGui.globalProperties.setDefaultFontAssetId("arial");
 
     new BulkAssetLoader(assetLoaderProvider)
-      .addAsset(Font.class, GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_16.json")
+      .addAsset(Font.class, "arial", "assets/arial_NORMAL_16.json")
       .addAsset(AudioClip.class, "test_song", "assets/asgaseg.wav")
       .loadAll()
       .onComplete(assets -> {
         if (assets[1] instanceof AudioClip audioClip) {
           audioClip.setVolume(0.5f);
 
-          solaGui = SolaGui.createInstance(assetLoaderProvider, platform);
-          solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
           solaGui.setGuiRoot(buildGui(audioClip));
         }
 

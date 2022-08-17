@@ -4,7 +4,7 @@
 
 ## Bugs List
 
-* Font asset generation for non-monospaced fonts has some issues getting extra pixels from adjacent characters
+* GuiElement mouse events do not respect view port resizing yet!
 
 -----------------------------------------------------------------------------------------------------------------------
 
