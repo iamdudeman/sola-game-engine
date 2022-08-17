@@ -93,7 +93,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
       pixelDataForCanvas[index++] = color.getAlpha();
     }
 
-    JsCanvasUtils.renderToCanvas(pixelDataForCanvas);
+    JsCanvasUtils.renderToCanvas(pixelDataForCanvas, renderer.getWidth(), renderer.getHeight());
   }
 
   @Override

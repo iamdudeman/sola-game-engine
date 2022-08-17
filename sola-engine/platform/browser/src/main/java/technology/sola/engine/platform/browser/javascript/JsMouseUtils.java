@@ -25,11 +25,13 @@ public class JsMouseUtils {
       }
 
       window.mouseListeners[eventName] = function(event) {
-        var rect = event.target.getBoundingClientRect();
-        var x = event.clientX - rect.left;
-        var y = event.clientY - rect.top;
+        if (event.target === window.solaCanvas) {
+          var rect = event.target.getBoundingClientRect();
+          var x = event.clientX - rect.left;
+          var y = event.clientY - rect.top;
 
-        callback(event.which, x, y);
+          callback(event.which, x, y);
+        }
       };
 
       solaCanvas.addEventListener(eventName, window.mouseListeners[eventName], false);

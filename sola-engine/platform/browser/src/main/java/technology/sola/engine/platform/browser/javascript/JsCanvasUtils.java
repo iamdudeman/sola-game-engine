@@ -8,8 +8,8 @@ public class JsCanvasUtils {
   @JSBody(params = {"anchorId", "width", "height"}, script = Scripts.INIT)
   public static native void canvasInit(String anchorId, int width, int height);
 
-  @JSBody(params = {"rendererData"}, script = Scripts.RENDER)
-  public static native void renderToCanvas(int[] rendererData);
+  @JSBody(params = {"rendererData", "width", "height"}, script = Scripts.RENDER)
+  public static native void renderToCanvas(int[] rendererData, int width, int height);
 
   @JSBody(params = {"w", "h"}, script = "window.solaContext2d.clearRect(0, 0, w, h)")
   public static native void clearRect(int w, int h);
@@ -21,6 +21,7 @@ public class JsCanvasUtils {
     private static final String INIT = """
       var canvasEle = document.createElement('canvas');
 
+      canvasEle.tabIndex = "1";
       canvasEle.width = width;
       canvasEle.height = height;
       canvasEle.oncontextmenu = function(e) {
@@ -33,12 +34,14 @@ public class JsCanvasUtils {
       anchorEle.appendChild(canvasEle);
       window.solaCanvas = canvasEle;
       window.solaContext2d = window.solaCanvas.getContext('2d');
+
+      canvasEle.focus();
       """;
 
     // todo https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/putImageData
     // todo putImageData(imageData, dx, dy, dirtyX, dirtyY, dirtyWidth, dirtyHeight)
     private static final String RENDER = """
-      var imageData = new ImageData(Uint8ClampedArray.from(rendererData), window.solaCanvas.width, window.solaCanvas.height);
+      var imageData = new ImageData(Uint8ClampedArray.from(rendererData), width, height);
 
       window.solaContext2d.putImageData(imageData, 0, 0);
       """;

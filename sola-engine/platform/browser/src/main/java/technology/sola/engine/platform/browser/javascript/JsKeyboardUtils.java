@@ -25,10 +25,12 @@ public class JsKeyboardUtils {
       }
 
       window.keyboardListeners[eventName] = function(event) {
-        event.stopPropagation();
-        event.preventDefault();
+        if (event.target === window.solaCanvas) {
+          event.stopPropagation();
+          event.preventDefault();
 
-        callback(event.keyCode);
+          callback(event.keyCode);
+        }
       };
 
       window.addEventListener(eventName, window.keyboardListeners[eventName], false);
