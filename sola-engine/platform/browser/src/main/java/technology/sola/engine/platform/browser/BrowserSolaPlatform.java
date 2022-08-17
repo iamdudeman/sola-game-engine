@@ -9,6 +9,7 @@ import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
+import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.platform.browser.assets.BrowserAudioClipAssetLoader;
@@ -47,23 +48,25 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   @Override
   public void onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
-    JsMouseUtils.mouseEventListener("mousemove", (which, x, y) -> mouseEventConsumer.accept(new MouseEvent(which, x, y)));
+    JsMouseUtils.mouseEventListener("mousemove", (which, x, y) -> mouseEventConsumer.accept(browserToSola(which, x, y)));
   }
 
   @Override
   public void onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
-    JsMouseUtils.mouseEventListener("mousedown", (which, x, y) -> mouseEventConsumer.accept(new MouseEvent(which, x, y)));
+    JsMouseUtils.mouseEventListener("mousedown", (which, x, y) -> mouseEventConsumer.accept(browserToSola(which, x, y)));
   }
 
   @Override
   public void onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
-    JsMouseUtils.mouseEventListener("mouseup", (which, x, y) -> mouseEventConsumer.accept(new MouseEvent(which, x, y)));
+    JsMouseUtils.mouseEventListener("mouseup", (which, x, y) -> mouseEventConsumer.accept(browserToSola(which, x, y)));
   }
 
   @Override
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     JsUtils.setTitle(solaConfiguration.solaTitle());
     JsCanvasUtils.canvasInit(JsCanvasUtils.ID_SOLA_ANCHOR, solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight());
+
+    JsCanvasUtils.observeResize((int width, int height) -> viewport.resize(width, height));
 
     // TODO something better than this
     JsUtils.exportObject("solaStop", (JsUtils.Function) () -> solaEventHub.emit(GameLoopEvent.STOP));
@@ -73,9 +76,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   @Override
   protected void beforeRender(Renderer renderer) {
-    if (!useSoftwareRendering) {
-      JsCanvasUtils.clearRect(renderer.getWidth(), renderer.getHeight());
-    }
+    JsCanvasUtils.clearRect();
   }
 
   @Override
@@ -93,7 +94,9 @@ public class BrowserSolaPlatform extends SolaPlatform {
       pixelDataForCanvas[index++] = color.getAlpha();
     }
 
-    JsCanvasUtils.renderToCanvas(pixelDataForCanvas, renderer.getWidth(), renderer.getHeight());
+    AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+
+    JsCanvasUtils.renderToCanvas(pixelDataForCanvas, renderer.getWidth(), renderer.getHeight(), aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height());
   }
 
   @Override
@@ -117,5 +120,11 @@ public class BrowserSolaPlatform extends SolaPlatform {
     return useSoftwareRendering
       ? super.buildRenderer(solaConfiguration)
       : new BrowserCanvasRenderer(solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight());
+  }
+
+  private MouseEvent browserToSola(int which, int x, int y) {
+    MouseCoordinate adjusted = adjustMouseForViewport(x, y);
+
+    return new MouseEvent(which, adjusted.x(), adjusted.y());
   }
 }
