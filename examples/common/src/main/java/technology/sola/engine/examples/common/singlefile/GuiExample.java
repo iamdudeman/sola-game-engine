@@ -6,7 +6,6 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
-import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
@@ -23,18 +22,13 @@ public class GuiExample extends Sola {
 
   @Override
   protected void onInit() {
-    solaInitialization.useAsyncInitialization();
     solaGui = SolaGui.createInstance(assetLoaderProvider, platform);
 
-    assetLoaderProvider.get(Font.class)
-      .addAssetMapping("times_NORMAL_18", "assets/times_NORMAL_18.json")
-      .getNewAsset(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, "assets/monospaced_NORMAL_16.json")
-      .executeWhenLoaded(font -> {
-        solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
-        solaGui.setGuiRoot(buildGui());
+    solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
+    solaGui.setGuiRoot(buildGui());
 
-        solaInitialization.completeAsyncInitialization();
-      });
+    assetLoaderProvider.get(Font.class)
+      .addAssetMapping("times_NORMAL_18", "assets/times_NORMAL_18.json");
   }
 
   @Override

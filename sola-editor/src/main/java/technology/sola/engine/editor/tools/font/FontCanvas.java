@@ -29,7 +29,7 @@ class FontCanvas implements AutoCloseable {
     List<FontGlyph> fontGlyphModelsWithPosition = new ArrayList<>();
 
     for (FontGlyph fontGlyph : fontGlyphModelList) {
-      int characterWidth = fontGlyph.width();
+      int characterWidth = fontGlyph.width() + fontInformation.getLeading();
 
       if (x + characterWidth >= bufferedImage.getWidth()) {
         x = 0;
