@@ -52,6 +52,11 @@ public class Graphics2dRenderer implements Renderer {
   }
 
   @Override
+  public Font getFont() {
+    throw new NotYetImplementedException();
+  }
+
+  @Override
   public void setFont(Font font) {
     throw new NotYetImplementedException();
   }

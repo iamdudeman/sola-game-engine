@@ -19,6 +19,8 @@ public interface Renderer {
     setBlendMode(previousBlendMode);
   }
 
+  Font getFont();
+
   void setFont(Font font);
 
   int getWidth();
@@ -58,7 +60,19 @@ public interface Renderer {
     setPixel(x, y, new Color(color));
   }
 
-  void drawString(String text, float x, float y, Color color);
+  default void drawString(String text, float x, float y, Color color) {
+    drawWithBlendMode(BlendMode.MASK, r -> {
+      int xOffset = 0;
+      Font font = getFont();
+
+      for (char character : text.toCharArray()) {
+        SolaImage glyphImage = font.getGlyph(character, color);
+
+        drawImage(x + xOffset, y, glyphImage);
+        xOffset += glyphImage.getWidth() + font.getFontInfo().leading();
+      }
+    });
+  }
 
   void drawLine(float x, float y, float x2, float y2, Color color);
 

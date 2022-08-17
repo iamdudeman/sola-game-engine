@@ -85,4 +85,9 @@ public class Color implements Serializable {
   public int hashCode() {
     return Objects.hash(hexInt);
   }
+
+  @Override
+  public String toString() {
+    return String.format("rgba(%s, %s, %s, %s)", r, g, b, alpha);
+  }
 }
