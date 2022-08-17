@@ -35,6 +35,8 @@ public class JsCanvasUtils {
       window.solaContext2d = window.solaCanvas.getContext('2d');
       """;
 
+    // todo https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/putImageData
+    // todo putImageData(imageData, dx, dy, dirtyX, dirtyY, dirtyWidth, dirtyHeight)
     private static final String RENDER = """
       var imageData = new ImageData(Uint8ClampedArray.from(rendererData), window.solaCanvas.width, window.solaCanvas.height);
 
