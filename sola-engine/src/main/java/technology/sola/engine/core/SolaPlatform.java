@@ -8,9 +8,11 @@ import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
+import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.graphics.screen.Viewport;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.math.linear.Vector2D;
 
 import java.util.function.Consumer;
 
@@ -58,8 +60,8 @@ public abstract class SolaPlatform {
    * Method to initialize a {@link SolaPlatform}. This operation can be async. It will provide the configuration
    * from the {@link Sola#getConfiguration()} method.
    *
-   * @param solaConfiguration  the Sola configuration
-   * @param solaPlatformInitialization  call {@link SolaPlatformInitialization#finish()} when platform initialization is finished
+   * @param solaConfiguration          the Sola configuration
+   * @param solaPlatformInitialization call {@link SolaPlatformInitialization#finish()} when platform initialization is finished
    */
   protected abstract void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization);
 
@@ -83,6 +85,40 @@ public abstract class SolaPlatform {
 
   protected WorldIo buildWorldSerializer() {
     return new Base64WorldIo();
+  }
+
+  protected MouseCoordinate adjustMouseForViewport(int x, int y) {
+    return switch (getViewport().getAspectMode()) {
+      case IGNORE_RESIZING -> new MouseCoordinate(x, y);
+      case STRETCH -> {
+        Vector2D ratios = calculateMouseAdjustmentRatios();
+
+        yield new MouseCoordinate(Math.round(x * ratios.x), Math.round(y * ratios.y));
+      }
+      case MAINTAIN -> {
+        AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+        Vector2D ratios = calculateMouseAdjustmentRatios();
+
+        yield new MouseCoordinate(
+          Math.round(x * ratios.x) - Math.round(aspectRatioSizing.x() * ratios.x),
+          Math.round(y * ratios.y) - Math.round(aspectRatioSizing.y() * ratios.y)
+        );
+      }
+    };
+  }
+
+  private Vector2D calculateMouseAdjustmentRatios() {
+    AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+
+    int rendererWidth = renderer.getWidth();
+    int rendererHeight = renderer.getHeight();
+    int viewPortWidth = aspectRatioSizing.width();
+    int viewPortHeight = aspectRatioSizing.height();
+
+    float ratioX = rendererWidth / (float) viewPortWidth;
+    float ratioY = rendererHeight / (float) viewPortHeight;
+
+    return new Vector2D(ratioX, ratioY);
   }
 
   private void initComplete(Sola sola, SolaConfiguration solaConfiguration) {
@@ -115,6 +151,9 @@ public abstract class SolaPlatform {
     sola.onRender(renderer);
     renderer.getLayers().forEach(layer -> layer.draw(renderer));
     onRender(renderer);
+  }
+
+  protected record MouseCoordinate(int x, int y) {
   }
 
   @FunctionalInterface

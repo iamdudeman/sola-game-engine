@@ -26,21 +26,19 @@ public class MouseInput {
   public void updateStatusOfMouse() {
     currentMousePosition = lastEventPosition;
 
-    // TODO browser doesn't work with just forEach for some reason :|
-    mouseDownMap.keySet()
-        .forEach(mouseButton -> {
-          boolean isDown = mouseDownMap.getOrDefault(mouseButton, false);
+    mouseDownMap.forEach((mouseButton, isDown) -> {
+      if (isDown) {
+        ButtonState buttonState = mouseStatusMap.getOrDefault(mouseButton, ButtonState.RELEASED);
 
-          if (isDown) {
-            if (mouseStatusMap.get(mouseButton) == ButtonState.CLICKED) {
-              mouseStatusMap.put(mouseButton, ButtonState.DRAGGED);
-            } else if (mouseStatusMap.get(mouseButton) == ButtonState.RELEASED) {
-              mouseStatusMap.put(mouseButton, ButtonState.CLICKED);
-            }
-          } else {
-            mouseStatusMap.put(mouseButton, ButtonState.RELEASED);
-          }
-        });
+        if (buttonState == ButtonState.CLICKED) {
+          mouseStatusMap.put(mouseButton, ButtonState.DRAGGED);
+        } else if (buttonState == ButtonState.RELEASED) {
+          mouseStatusMap.put(mouseButton, ButtonState.CLICKED);
+        }
+      } else {
+        mouseStatusMap.put(mouseButton, ButtonState.RELEASED);
+      }
+    });
   }
 
   public void onMouseMoved(MouseEvent mouseEvent) {
@@ -58,7 +56,7 @@ public class MouseInput {
   }
 
   private void updateMousePosition(MouseEvent mouseEvent) {
-    lastEventPosition = new Vector2D((float)mouseEvent.x(), (float)mouseEvent.y());
+    lastEventPosition = new Vector2D((float) mouseEvent.x(), (float) mouseEvent.y());
   }
 
   private enum ButtonState {

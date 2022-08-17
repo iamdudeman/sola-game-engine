@@ -10,6 +10,7 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.math.linear.Vector2D;
@@ -25,6 +26,7 @@ public class MouseAndCameraExample extends Sola {
 
   @Override
   protected void onInit() {
+    platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
     solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetLoaderProvider);
 
     clickCreateEntitySystem = new ClickCreateEntitySystem();

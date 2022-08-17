@@ -159,6 +159,8 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   }
 
   private MouseEvent fxToSola(javafx.scene.input.MouseEvent fxMouseEvent) {
-    return new MouseEvent(fxMouseEvent.getButton().ordinal(), (int)fxMouseEvent.getX(), (int)fxMouseEvent.getY());
+    MouseCoordinate adjusted = adjustMouseForViewport((int)fxMouseEvent.getX(), (int)fxMouseEvent.getY());
+
+    return new MouseEvent(fxMouseEvent.getButton().ordinal(), adjusted.x(), adjusted.y());
   }
 }
