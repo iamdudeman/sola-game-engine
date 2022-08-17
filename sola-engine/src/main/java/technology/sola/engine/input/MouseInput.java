@@ -30,11 +30,12 @@ public class MouseInput {
     mouseDownMap.keySet()
         .forEach(mouseButton -> {
           boolean isDown = mouseDownMap.getOrDefault(mouseButton, false);
+          ButtonState buttonState = mouseStatusMap.getOrDefault(mouseButton, ButtonState.RELEASED);
 
           if (isDown) {
-            if (mouseStatusMap.get(mouseButton) == ButtonState.CLICKED) {
+            if (buttonState == ButtonState.CLICKED) {
               mouseStatusMap.put(mouseButton, ButtonState.DRAGGED);
-            } else if (mouseStatusMap.get(mouseButton) == ButtonState.RELEASED) {
+            } else if (buttonState == ButtonState.RELEASED) {
               mouseStatusMap.put(mouseButton, ButtonState.CLICKED);
             }
           } else {
