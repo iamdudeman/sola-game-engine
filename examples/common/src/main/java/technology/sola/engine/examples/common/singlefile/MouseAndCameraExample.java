@@ -26,7 +26,7 @@ public class MouseAndCameraExample extends Sola {
 
   @Override
   protected void onInit() {
-    platform.getViewport().setAspectMode(AspectMode.STRETCH);
+    platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
     solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetLoaderProvider);
 
     clickCreateEntitySystem = new ClickCreateEntitySystem();
