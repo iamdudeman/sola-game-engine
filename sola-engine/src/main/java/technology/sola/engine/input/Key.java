@@ -39,6 +39,8 @@ public enum Key {
   //
   NUM_ZERO(96, "Num 0"),
   NUM_ONE(97, "Num 1"),
+  //
+  F11(122, "F11"),
   ;
 
   private final int code;

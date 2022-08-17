@@ -1,8 +1,5 @@
 # Branch WIP
-* Browser Platform
-  * Implement window resizing using Viewport
-    * Maybe add extra DOM elements to allow resizing?
-    * Utilize adjustMouseForViewport to map mouse event coordinates properly
+
 
 -----------------------------------------------------------------------------------------------------------------------
 

@@ -86,9 +86,13 @@ public class SolaBrowserFileBuilder {
       <head>
           <script type="text/javascript" charset="utf-8" src="%s"></script>
           <style>
-          canvas {
-            outline: none;
-          }
+            body {
+              margin: 0;
+            }
+
+            canvas {
+              outline: none;
+            }
           </style>
           <script>
               window.start = function () {

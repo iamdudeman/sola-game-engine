@@ -32,8 +32,8 @@ public class JsCanvasUtils {
       var canvasEle = document.createElement('canvas');
 
       canvasEle.tabIndex = "1";
-      canvasEle.width = width;
-      canvasEle.height = height;
+      canvasEle.width = window.innerWidth;
+      canvasEle.height = window.innerHeight;
       canvasEle.oncontextmenu = function(e) {
         e.preventDefault(); e.stopPropagation();
       };
@@ -58,6 +58,13 @@ public class JsCanvasUtils {
       }
 
       new ResizeObserver(resizeCanvas).observe(window.solaCanvas);
+
+      function onWindowResize() {
+        window.solaCanvas.width = window.innerWidth;
+        window.solaCanvas.height = window.innerHeight;
+      }
+
+      window.addEventListener("resize", onWindowResize);
       """;
 
     private static final String RENDER = """
@@ -70,8 +77,6 @@ public class JsCanvasUtils {
       tempCanvas.getContext("2d").putImageData(imageData, 0, 0);
 
       window.solaContext2d.drawImage(tempCanvas, viewportX, viewportY, viewportWidth, viewportHeight);
-
-      // window.solaContext2d.putImageData(imageData, viewportX, viewportY, 0, 0, viewportWidth, viewportHeight);
       """;
   }
 }
