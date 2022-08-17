@@ -1,5 +1,6 @@
 # Branch WIP
 
+
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Bugs List
@@ -40,9 +41,6 @@
     * worker sends ImageData to main thread to render
     * (this approach may improve performance for StressTestExample to work better)
   * Improve performance (StressTestExample can't handle a lot of objects)
-  * Implement window resizing using Viewport
-    * Maybe add extra DOM elements to allow resizing?
-    * Utilize adjustMouseForViewport to map mouse event coordinates properly
 * Research Virtual File System
 * Build pipeline
   * Generate engine and platform artifacts

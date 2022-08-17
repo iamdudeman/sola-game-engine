@@ -2,6 +2,7 @@ package technology.sola.engine.assets.graphics.font;
 
 import technology.sola.engine.assets.Asset;
 import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.assets.graphics.font.exception.MissingGlyphException;
 import technology.sola.engine.graphics.Color;
 
 import java.util.HashMap;
@@ -91,8 +92,7 @@ public class Font implements Asset {
     SolaImage glyph = blackCharacterToGlyphMap.get(character);
 
     if (glyph == null) {
-      // TODO custom exception
-      throw new RuntimeException("glyph for character " + character + " is not in Font " + fontInfo.fontName());
+      throw new MissingGlyphException(character, fontInfo);
     }
 
     return glyph;

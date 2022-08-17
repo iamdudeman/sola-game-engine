@@ -5,5 +5,5 @@ plugins {
 
 javafx {
   modules("javafx.controls", "javafx.fxml")
-  configuration = "api" // TODO this might have issues on other platforms (possibly need reliant code in separate module)
+  configuration = "api"
 }
