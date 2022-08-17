@@ -14,13 +14,13 @@ public class JsCanvasUtils {
   public static native void renderToCanvas(int[] rendererData, int width, int height, int viewportX, int viewportY, int viewportWidth, int viewportHeight);
 
   @JSBody(params = {"callback"}, script = Scripts.RESIZE)
-  public static native void observeResize(ResizeCallback callback);
+  public static native void observeCanvasResize(CanvasResizeCallback callback);
 
   @JSBody(script = Scripts.CLEAR_CANVAS)
   public static native void clearRect();
 
   @JSFunctor
-  public interface ResizeCallback extends JSObject {
+  public interface CanvasResizeCallback extends JSObject {
     void call(int width, int height);
   }
 
@@ -60,14 +60,18 @@ public class JsCanvasUtils {
       new ResizeObserver(resizeCanvas).observe(window.solaCanvas);
       """;
 
-    // todo https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/putImageData
-    // todo putImageData(imageData, dx, dy, dirtyX, dirtyY, dirtyWidth, dirtyHeight)
-
-    // TODO this isn't right, drawImage is the one that resizes images
     private static final String RENDER = """
       var imageData = new ImageData(Uint8ClampedArray.from(rendererData), width, height);
 
-      window.solaContext2d.putImageData(imageData, viewportX, viewportY, 0, 0, viewportWidth, viewportHeight);
+      var tempCanvas = document.createElement("canvas");
+
+      tempCanvas.width = width;
+      tempCanvas.height = height;
+      tempCanvas.getContext("2d").putImageData(imageData, 0, 0);
+
+      window.solaContext2d.drawImage(tempCanvas, viewportX, viewportY, viewportWidth, viewportHeight);
+
+      // window.solaContext2d.putImageData(imageData, viewportX, viewportY, 0, 0, viewportWidth, viewportHeight);
       """;
   }
 }

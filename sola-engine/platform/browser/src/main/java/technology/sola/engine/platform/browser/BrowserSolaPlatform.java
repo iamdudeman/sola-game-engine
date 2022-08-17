@@ -5,7 +5,6 @@ import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
-import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
@@ -66,10 +65,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
     JsUtils.setTitle(solaConfiguration.solaTitle());
     JsCanvasUtils.canvasInit(JsCanvasUtils.ID_SOLA_ANCHOR, solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight());
 
-    JsCanvasUtils.observeResize((int width, int height) -> viewport.resize(width, height));
-
-    // TODO something better than this
-    JsUtils.exportObject("solaStop", (JsUtils.Function) () -> solaEventHub.emit(GameLoopEvent.STOP));
+    JsCanvasUtils.observeCanvasResize((int width, int height) -> viewport.resize(width, height));
 
     solaPlatformInitialization.finish();
   }
