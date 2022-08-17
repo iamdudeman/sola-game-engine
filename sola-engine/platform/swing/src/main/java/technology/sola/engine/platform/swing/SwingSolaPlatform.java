@@ -72,8 +72,8 @@ public class SwingSolaPlatform extends SolaPlatform {
   public void onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
     canvas.addMouseMotionListener(new MouseMotionAdapter() {
       @Override
-      public void mouseMoved(java.awt.event.MouseEvent e) {
-        mouseEventConsumer.accept(new technology.sola.engine.input.MouseEvent(e.getButton(), e.getX(), e.getY()));
+      public void mouseMoved(java.awt.event.MouseEvent mouseEvent) {
+        mouseEventConsumer.accept(swingToSola(mouseEvent));
       }
     });
   }
@@ -82,8 +82,8 @@ public class SwingSolaPlatform extends SolaPlatform {
   public void onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
     canvas.addMouseListener(new MouseAdapter() {
       @Override
-      public void mousePressed(java.awt.event.MouseEvent e) {
-        mouseEventConsumer.accept(new technology.sola.engine.input.MouseEvent(e.getButton(), e.getX(), e.getY()));
+      public void mousePressed(java.awt.event.MouseEvent mouseEvent) {
+        mouseEventConsumer.accept(swingToSola(mouseEvent));
       }
     });
   }
@@ -92,8 +92,8 @@ public class SwingSolaPlatform extends SolaPlatform {
   public void onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
     canvas.addMouseListener(new MouseAdapter() {
       @Override
-      public void mouseReleased(java.awt.event.MouseEvent e) {
-        mouseEventConsumer.accept(new technology.sola.engine.input.MouseEvent(e.getButton(), e.getX(), e.getY()));
+      public void mouseReleased(java.awt.event.MouseEvent mouseEvent) {
+        mouseEventConsumer.accept(swingToSola(mouseEvent));
       }
     });
   }
@@ -212,5 +212,11 @@ public class SwingSolaPlatform extends SolaPlatform {
       canvas.getBufferStrategy().show();
       graphics2D.dispose();
     };
+  }
+
+  private MouseEvent swingToSola(java.awt.event.MouseEvent swingMouseEvent) {
+    MouseCoordinate adjusted = adjustMouseForViewport(swingMouseEvent.getX(), swingMouseEvent.getY());
+
+    return new MouseEvent(swingMouseEvent.getButton(), adjusted.x(), adjusted.y());
   }
 }

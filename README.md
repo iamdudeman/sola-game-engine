@@ -4,8 +4,6 @@
 
 ## Bugs List
 
-* GuiElement mouse events do not respect view port resizing yet!
-
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Cleanup List
@@ -44,6 +42,7 @@
   * Improve performance (StressTestExample can't handle a lot of objects)
   * Implement window resizing using Viewport
     * Maybe add extra DOM elements to allow resizing?
+    * Utilize adjustMouseForViewport to map mouse event coordinates properly
 * Research Virtual File System
 * Build pipeline
   * Generate engine and platform artifacts

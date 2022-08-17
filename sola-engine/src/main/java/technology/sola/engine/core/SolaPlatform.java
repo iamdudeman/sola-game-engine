@@ -8,6 +8,7 @@ import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
+import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.graphics.screen.Viewport;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
@@ -85,6 +86,24 @@ public abstract class SolaPlatform {
     return new Base64WorldIo();
   }
 
+  protected MouseCoordinate adjustMouseForViewport(int x, int y) {
+    if (getViewport().getAspectMode() == AspectMode.IGNORE_RESIZING) {
+      return new MouseCoordinate(x, y);
+    } else if (getViewport().getAspectMode() == AspectMode.STRETCH) {
+      int rendererWidth = getRenderer().getWidth();
+      int rendererHeight = getRenderer().getHeight();
+      int viewPortWidth = getViewport().getAspectRatioSizing().width();
+      int viewPortHeight = getViewport().getAspectRatioSizing().height();
+
+      float ratioX = rendererWidth / (float)viewPortWidth;
+      float ratioY = rendererHeight / (float)viewPortHeight;
+
+      return new MouseCoordinate(Math.round(x * ratioX), Math.round(y * ratioY));
+    } else {
+      throw new RuntimeException("Not yet implemented");
+    }
+  }
+
   private void initComplete(Sola sola, SolaConfiguration solaConfiguration) {
     this.worldIo = buildWorldSerializer();
     this.renderer = buildRenderer(solaConfiguration);
@@ -115,6 +134,9 @@ public abstract class SolaPlatform {
     sola.onRender(renderer);
     renderer.getLayers().forEach(layer -> layer.draw(renderer));
     onRender(renderer);
+  }
+
+  protected record MouseCoordinate(int x, int y) {
   }
 
   @FunctionalInterface

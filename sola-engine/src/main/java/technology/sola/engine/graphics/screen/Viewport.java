@@ -14,6 +14,10 @@ public class Viewport {
     resize(canvasWidth, canvasHeight);
   }
 
+  public AspectMode getAspectMode() {
+    return aspectMode;
+  }
+
   public void setAspectMode(AspectMode aspectMode) {
     this.aspectMode = aspectMode;
     recalculateAspectRatioSizing(previousScreenWidth, previousScreenHeight);
