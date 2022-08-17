@@ -27,7 +27,7 @@ public abstract class AssetLoader<T extends Asset> {
 
   public AssetLoader<T> addAsset(String id, T asset) {
     cachedAssets.put(id, new AssetHandle<>(asset));
-    assetIdToPathMap.put(id, "manual");
+    assetIdToPathMap.put(id, "");
 
     return this;
   }

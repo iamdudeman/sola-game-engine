@@ -1,5 +1,6 @@
 package technology.sola.engine.core.module.graphics.gui;
 
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
@@ -34,8 +35,10 @@ public class SolaGui {
     platform.onMousePressed(solaGui::onMousePressed);
     platform.onMouseReleased(solaGui::onMouseReleased);
 
-    if (!assetLoaderProvider.get(Font.class).hasAssetMapping(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID)) {
-      assetLoaderProvider.get(Font.class).addAsset(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, DefaultFont.get());
+    AssetLoader<Font> fontAssetLoader = assetLoaderProvider.get(Font.class);
+
+    if (!fontAssetLoader.hasAssetMapping(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID)) {
+      fontAssetLoader.addAsset(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, DefaultFont.get());
     }
 
     return solaGui;
