@@ -115,4 +115,171 @@ public class SolaBrowserFileBuilder {
       throw new RuntimeException(ex);
     }
   }
+
+  public void createIndexPocHtml() {
+    String template = """
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>web worker test</title>
+        <style>
+          body {
+            margin: 0;
+          }
+
+          canvas {
+            outline: none;
+          }
+        </style>
+      </head>
+      <body>
+      <canvas tabindex="1" id="sola-canvas" width="100" height="100"></canvas>
+      <script>
+      var solaCanvas = document.getElementById("sola-canvas");
+      var solaContext2d = solaCanvas.getContext("2d");
+      var solaWorker = new Worker("%s");
+
+      solaWorker.onmessage = function (event) {
+        console.log("main received", event.data);
+
+        var data = event.data;
+        var payload = data.payload;
+
+        switch (data.type) {
+          case "initKeyboard": {
+            initializeKeyboardForEvent(payload.eventName);
+            break;
+          }
+          case "initMouse": {
+            initializeMouseForEvent(payload.eventName);
+            break;
+          }
+          case "render": {
+            render(payload.rendererData, payload.width, payload.height, payload.viewportX, payload.viewportY, payload.viewportWidth, payload.viewportHeight);
+            break;
+          }
+        }
+      }
+
+      window.onload = function() {
+        initCanvas();
+
+        solaWorker.postMessage({
+          type: "start"
+        });
+      }
+
+
+
+      function initCanvas() {
+        function resizeCanvas() {
+          solaWorker.postMessage({
+            type: "resize",
+            payload: {
+              width: solaCanvas.width,
+              height: solaCanvas.height,
+            }
+          });
+        }
+
+        new ResizeObserver(resizeCanvas).observe(window.solaCanvas);
+
+        function onWindowResize() {
+          window.solaCanvas.width = window.innerWidth;
+          window.solaCanvas.height = window.innerHeight;
+        }
+
+        window.addEventListener("resize", onWindowResize);
+
+        solaCanvas.width = window.innerWidth;
+        solaCanvas.height = window.innerHeight;
+
+        solaCanvas.oncontextmenu = function(e) {
+          e.preventDefault(); e.stopPropagation();
+        };
+
+        solaCanvas.focus();
+      }
+
+      function initializeKeyboardForEvent(eventName) {
+        window.keyboardListeners = window.keyboardListeners || {};
+
+        if (window.keyboardListeners[eventName]) {
+          window.removeEventListener(eventName, window.keyboardListeners[eventName], false);
+        }
+
+        window.keyboardListeners[eventName] = function(event) {
+          if (event.target === solaCanvas) {
+            event.stopPropagation();
+            event.preventDefault();
+
+            solaWorker.postMessage({
+              type: "keyboard",
+              payload: {
+                eventName: eventName,
+                keyCode: event.keyCode,
+              },
+            });
+          }
+        };
+
+        window.addEventListener(eventName, window.keyboardListeners[eventName], false);
+      }
+
+      function initializeMouseForEvent(eventName) {
+        window.mouseListeners = window.mouseListeners || {};
+
+        if (window.mouseListeners[eventName]) {
+          solaCanvas.removeEventListener(eventName, window.mouseListeners[eventName], false);
+        }
+
+        window.mouseListeners[eventName] = function(event) {
+          if (event.target === window.solaCanvas) {
+            var rect = event.target.getBoundingClientRect();
+            var x = event.clientX - rect.left;
+            var y = event.clientY - rect.top;
+
+            solaWorker.postMessage({
+              type: "mouse",
+              payload: {
+                eventName: eventName,
+                which: event.which,
+                x: x,
+                y: y,
+              },
+            });
+          }
+        };
+
+        solaCanvas.addEventListener(eventName, window.mouseListeners[eventName], false);
+      }
+
+      function render(rendererData, width, height, viewportX, viewportY, viewportWidth, viewportHeight) {
+        solaContext2d.clearRect(0, 0, solaCanvas.width, solaCanvas.height);
+
+        var imageData = new ImageData(Uint8ClampedArray.from(rendererData), width, height);
+
+        var tempCanvas = document.createElement("canvas");
+
+        tempCanvas.width = width;
+        tempCanvas.height = height;
+        tempCanvas.getContext("2d").putImageData(imageData, 0, 0);
+
+        window.solaContext2d.drawImage(tempCanvas, viewportX, viewportY, viewportWidth, viewportHeight);
+      }
+      </script>
+      </body>
+      </html>
+      """;
+
+    String html = template.formatted(OUTPUT_FILE_JS);
+
+    try {
+      Files.createDirectories(new File(buildDirectory).toPath());
+      Files.writeString(new File(buildDirectory, OUTPUT_FILE_HTML).toPath(), html);
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
+    }
+  }
 }

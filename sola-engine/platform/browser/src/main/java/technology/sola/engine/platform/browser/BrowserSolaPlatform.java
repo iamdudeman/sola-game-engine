@@ -21,6 +21,7 @@ import technology.sola.engine.platform.browser.javascript.JsCanvasUtils;
 import technology.sola.engine.platform.browser.javascript.JsKeyboardUtils;
 import technology.sola.engine.platform.browser.javascript.JsMouseUtils;
 import technology.sola.engine.platform.browser.javascript.JsUtils;
+import technology.sola.engine.platform.browser.javascript.JsWorkerUtils;
 
 import java.util.function.Consumer;
 
@@ -62,8 +63,11 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   @Override
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
-    JsUtils.setTitle(solaConfiguration.solaTitle());
-    JsCanvasUtils.canvasInit(JsCanvasUtils.ID_SOLA_ANCHOR, solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight());
+//    JsUtils.setTitle(solaConfiguration.solaTitle()); // TODO
+
+    JsWorkerUtils.initializeWorkerThread();
+
+//    JsCanvasUtils.canvasInit(JsCanvasUtils.ID_SOLA_ANCHOR, solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight());
 
     JsCanvasUtils.observeCanvasResize((int width, int height) -> viewport.resize(width, height));
 
@@ -72,7 +76,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   @Override
   protected void beforeRender(Renderer renderer) {
-    JsCanvasUtils.clearRect();
+//    JsCanvasUtils.clearRect();
   }
 
   @Override

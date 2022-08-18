@@ -18,22 +18,15 @@ public class JsKeyboardUtils {
 
   private static class Scripts {
     private static final String KEY_EVENT = """
-      window.keyboardListeners = window.keyboardListeners || {};
-
-      if (window.keyboardListeners[eventName]) {
-        window.removeEventListener(eventName, window.keyboardListeners[eventName], false);
+      if (keyboardListeners[eventName].length === 0) {
+        postMessage({
+          type: "initKeyboard",
+          payload: {
+            eventName: eventName,
+          };
+        });
       }
-
-      window.keyboardListeners[eventName] = function(event) {
-        if (event.target === window.solaCanvas) {
-          event.stopPropagation();
-          event.preventDefault();
-
-          callback(event.keyCode);
-        }
-      };
-
-      window.addEventListener(eventName, window.keyboardListeners[eventName], false);
+      keyboardListeners[eventName].push(callback);
       """;
   }
 }

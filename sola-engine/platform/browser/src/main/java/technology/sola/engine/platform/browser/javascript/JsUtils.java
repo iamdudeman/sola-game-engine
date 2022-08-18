@@ -8,7 +8,7 @@ public class JsUtils {
   @JSBody(params = {"message"}, script = "console.log(message);")
   public static native void consoleLog(String message);
 
-  @JSBody(params = {"handler"}, script = "window.requestAnimationFrame(handler)")
+  @JSBody(params = {"handler"}, script = "requestAnimationFrame(handler)")
   public static native void requestAnimationFrame(Function runnable);
 
   @JSBody(params = {"title"}, script = "document.title = title")
