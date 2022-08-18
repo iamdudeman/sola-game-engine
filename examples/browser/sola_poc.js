@@ -39,4 +39,9 @@ function main() {
       eventName: "mousedown"
     }
   });
+
+  // todo use this for game loop probably
+  requestAnimationFrame(() => console.log("requested"));
+
+  // todo postMessage({ type: "render" ... });
 }
