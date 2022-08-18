@@ -1,5 +1,11 @@
 # Branch WIP
-
+* Browser Platform
+  * Consider web worker for game loop
+    * main thread creates needed dom events
+    * mouse and key events sent to worker
+    * worker sends ImageData to main thread to render
+    * (this approach may improve performance for StressTestExample to work better)
+  * Improve performance (StressTestExample can't handle a lot of objects)
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -34,13 +40,6 @@
 * Unit Testing
   * Add easy way to test the ability of ECS components to be serializable
   * Add lots of missing tests :)
-* Browser Platform
-  * Consider web worker for game loop
-    * main thread creates needed dom events
-    * mouse and key events sent to worker
-    * worker sends ImageData to main thread to render
-    * (this approach may improve performance for StressTestExample to work better)
-  * Improve performance (StressTestExample can't handle a lot of objects)
 * Research Virtual File System
 * Build pipeline
   * Generate engine and platform artifacts

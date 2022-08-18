@@ -13,6 +13,6 @@ trim_trailing_whitespace = true
 charset = utf-8
 
 # 2 space indentation
-[*.{json,java,md,xml,css,fxml,kts}]
+[*.{json,java,md,xml,css,fxml,kts,html,js}]
 indent_style = space
 indent_size = 2
