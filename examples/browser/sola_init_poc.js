@@ -1,13 +1,14 @@
 var solaCanvas = document.getElementById("sola-canvas");
 var solaContext2d = solaCanvas.getContext("2d");
-var solaWorker = new Worker("sola_webworker_poc.js");
+var solaWorker = new Worker("sola_poc.js");
 
 solaWorker.onmessage = function (event) {
   console.log("main received", event.data);
 
-  var payload = event.data.payload;
+  var data = event.data;
+  var payload = data.payload;
 
-  switch (event.data.type) {
+  switch (data.type) {
     case "initKeyboard": {
       initializeKeyboardForEvent(payload.eventName);
       break;
@@ -23,15 +24,21 @@ solaWorker.onmessage = function (event) {
   }
 }
 
-initCanvas();
+window.onload = function() {
+  initCanvas();
 
-////////////// utility stuff past here
+  solaWorker.postMessage({
+    type: "start"
+  });
+}
+
+
 
 function initCanvas() {
   function resizeCanvas() {
     solaWorker.postMessage({
       type: "resize",
-      body: {
+      payload: {
         width: solaCanvas.width,
         height: solaCanvas.height,
       }
@@ -65,13 +72,13 @@ function initializeKeyboardForEvent(eventName) {
   }
 
   window.keyboardListeners[eventName] = function(event) {
-    if (event.target === window.solaCanvas) {
+    if (event.target === solaCanvas) {
       event.stopPropagation();
       event.preventDefault();
 
       solaWorker.postMessage({
         type: "keyboard",
-        body: {
+        payload: {
           eventName: eventName,
           keyCode: event.keyCode,
         },
@@ -96,8 +103,8 @@ function initializeMouseForEvent(eventName) {
       var y = event.clientY - rect.top;
 
       solaWorker.postMessage({
-        type: "keyboard",
-        body: {
+        type: "mouse",
+        payload: {
           eventName: eventName,
           which: event.which,
           x: x,
