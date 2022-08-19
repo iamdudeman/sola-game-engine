@@ -23,7 +23,7 @@ public class JsKeyboardUtils {
           type: "initKeyboard",
           payload: {
             eventName: eventName,
-          };
+          },
         });
       }
       keyboardListeners[eventName].push(callback);

@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 
 public class SolaBrowserFileBuilder {
   private static final String OUTPUT_FILE_JS = "sola.js";
@@ -77,6 +78,12 @@ public class SolaBrowserFileBuilder {
       });
 
       throw new RuntimeException("Build failed");
+    } else {
+      try {
+        Files.write(new File(buildDirectory, OUTPUT_FILE_JS).toPath(), "main();".getBytes(), StandardOpenOption.APPEND);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
     }
   }
 
@@ -164,10 +171,6 @@ public class SolaBrowserFileBuilder {
 
       window.onload = function() {
         initCanvas();
-
-        solaWorker.postMessage({
-          type: "start"
-        });
       }
 
 

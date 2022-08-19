@@ -23,7 +23,7 @@ public class JsMouseUtils {
           type: "initMouse",
           payload: {
             eventName: eventName,
-          };
+          },
         });
       }
 

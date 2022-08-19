@@ -23,7 +23,7 @@ public class JsCanvasUtils {
 
   private static class Scripts {
     private static final String RESIZE = """
-      resizeCallback = callback;
+      self.resizeCallback = callback;
       """;
 
     private static final String RENDER = """
