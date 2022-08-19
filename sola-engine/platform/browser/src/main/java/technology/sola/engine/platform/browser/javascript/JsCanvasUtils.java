@@ -30,7 +30,7 @@ public class JsCanvasUtils {
       postMessage({
         type: "render",
         payload: {
-          rendererData: rendererData,
+          rendererData: Uint8ClampedArray.from(rendererData),
           width: width,
           height: height,
           viewportX: viewportX,

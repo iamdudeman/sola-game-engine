@@ -261,7 +261,7 @@ public class SolaBrowserFileBuilder {
       function render(rendererData, width, height, viewportX, viewportY, viewportWidth, viewportHeight) {
         solaContext2d.clearRect(0, 0, solaCanvas.width, solaCanvas.height);
 
-        var imageData = new ImageData(Uint8ClampedArray.from(rendererData), width, height);
+        var imageData = new ImageData(rendererData, width, height);
 
         var tempCanvas = document.createElement("canvas");
 
