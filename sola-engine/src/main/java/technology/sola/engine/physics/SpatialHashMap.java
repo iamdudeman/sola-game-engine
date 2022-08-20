@@ -3,7 +3,6 @@ package technology.sola.engine.physics;
 import technology.sola.ecs.Entity;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
-import technology.sola.math.linear.Vector2D;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -13,10 +12,10 @@ import java.util.Map;
 import java.util.Set;
 
 public class SpatialHashMap {
-  private static final Vector2D[] EMPTY_BUCKET_IDS = new Vector2D[0];
+  private static final BucketId[] EMPTY_BUCKET_IDS = new BucketId[0];
   private final int cellSize;
   private final float inverseCellSize;
-  private final Map<Vector2D, List<Entity>> entityBuckets = new HashMap<>();
+  private final Map<BucketId, List<Entity>> entityBuckets = new HashMap<>();
 
   /**
    * Creates a SpatialHashMap with cellSize set to twice the max width/height of the largest {@link Entity}.
@@ -54,7 +53,7 @@ public class SpatialHashMap {
   public List<Entity> getNearbyEntities(Entity entity) {
     List<Entity> nearbyEntities = new ArrayList<>();
 
-    for (Vector2D bucketId : getBucketIdsForEntity(entity)) {
+    for (BucketId bucketId : getBucketIdsForEntity(entity)) {
       List<Entity> bucket = getOrCreateBucket(bucketId);
 
       for (Entity entityInBucket : bucket) {
@@ -67,11 +66,11 @@ public class SpatialHashMap {
     return nearbyEntities;
   }
 
-  public Set<Vector2D> getEntityBucketIds() {
+  public Set<BucketId> getEntityBucketIds() {
     return entityBuckets.keySet();
   }
 
-  Vector2D[] getBucketIdsForEntity(Entity entity) {
+  BucketId[] getBucketIdsForEntity(Entity entity) {
     TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
     ColliderComponent colliderComponent = entity.getComponent(ColliderComponent.class);
 
@@ -82,16 +81,16 @@ public class SpatialHashMap {
     float width = colliderComponent.getBoundingWidth() * transformComponent.getScaleX();
     float height = colliderComponent.getBoundingHeight() * transformComponent.getScaleY();
 
-    return new Vector2D[] {
+    return new BucketId[]{
       getIdForPoint(x, y),
       getIdForPoint(x + width, y),
       getIdForPoint(x, y + height),
-      getIdForPoint(x + width, y + height)
+      getIdForPoint(x + width, y + height),
     };
   }
 
   private void registerEntity(Entity entity) {
-    for (Vector2D bucketId : getBucketIdsForEntity(entity)) {
+    for (BucketId bucketId : getBucketIdsForEntity(entity)) {
       List<Entity> entityBucket = getOrCreateBucket(bucketId);
 
       if (!entityBucket.contains(entity)) {
@@ -100,28 +99,34 @@ public class SpatialHashMap {
     }
   }
 
-  private Vector2D getIdForPoint(float x, float y) {
-    return new Vector2D((float) Math.floor(x * inverseCellSize), (float) Math.floor(y * inverseCellSize));
+  private BucketId getIdForPoint(float x, float y) {
+    return new BucketId((int) Math.floor(x * inverseCellSize), (int) Math.floor(y * inverseCellSize));
   }
 
-  private List<Entity> getOrCreateBucket(Vector2D bucketId) {
+  private List<Entity> getOrCreateBucket(BucketId bucketId) {
     return entityBuckets.computeIfAbsent(bucketId, key -> new ArrayList<>());
   }
 
   private int calculateMinSizeForEntities(List<Entity> entities) {
-    return Math.round(
-      entities.stream()
-        .map(entity -> {
-          ColliderComponent colliderComponent = entity.getComponent(ColliderComponent.class);
-          TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
+    int minSize = 0;
 
-          if (colliderComponent == null || transformComponent == null) return 0f;
+    for (Entity entity : entities) {
+      ColliderComponent colliderComponent = entity.getComponent(ColliderComponent.class);
+      TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
 
-          return Math.max(colliderComponent.getBoundingWidth() * transformComponent.getScaleX(), colliderComponent.getBoundingHeight() * transformComponent.getScaleY());
-        })
-        .max(Comparator.naturalOrder())
-        .orElse(0.0f)
-    );
+      if (colliderComponent == null || transformComponent == null) continue;
+
+      float newValue = Math.max(
+        colliderComponent.getBoundingWidth() * transformComponent.getScaleX(),
+        colliderComponent.getBoundingHeight() * transformComponent.getScaleY()
+      );
+
+      if (newValue > minSize) {
+        minSize = Math.round(newValue);
+      }
+    }
+
+    return minSize;
   }
 
   private int calculateAppropriateCellSizeForEntities(List<Entity> entities) {
@@ -132,5 +137,8 @@ public class SpatialHashMap {
     }
 
     return maxWidthOrHeight;
+  }
+
+  public record BucketId(int x, int y) {
   }
 }

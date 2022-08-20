@@ -46,7 +46,7 @@ public class CollisionDetectionSystem extends EcsSystem {
     return spatialHashMap.getCellSize();
   }
 
-  public Set<Vector2D> getSpacialHashMapEntityBuckets() {
+  public Set<SpatialHashMap.BucketId> getSpacialHashMapEntityBuckets() {
     return spatialHashMap.getEntityBucketIds();
   }
 

@@ -5,6 +5,7 @@ import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.physics.SpatialHashMap;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
 import technology.sola.math.geometry.Circle;
@@ -17,8 +18,8 @@ class DebugGraphics {
 
     int cellSize = collisionDetectionSystem.getSpacialHashMapCellSize();
 
-    for (Vector2D bucketVector : collisionDetectionSystem.getSpacialHashMapEntityBuckets()) {
-      Vector2D topLeftPoint = bucketVector.scalar(cellSize);
+    for (SpatialHashMap.BucketId bucketId : collisionDetectionSystem.getSpacialHashMapEntityBuckets()) {
+      Vector2D topLeftPoint = new Vector2D(bucketId.x(), bucketId.y()).scalar(cellSize);
 
       TransformComponent useThis = GraphicsUtils.getTransformForAppliedCamera(
         new TransformComponent(topLeftPoint.x, topLeftPoint.y, cellSize, cellSize),
