@@ -22,16 +22,15 @@ public class GravitySystem extends EcsSystem implements EventListener<CollisionM
 
   @Override
   public void update(World world, float deltaTime) {
-    world.createView().of(DynamicBodyComponent.class)
-      .forEach(view -> {
-        DynamicBodyComponent dynamicBodyComponent = view.c1();
+    for (var view : world.createView().of(DynamicBodyComponent.class)) {
+      DynamicBodyComponent dynamicBodyComponent = view.c1();
 
-        if (!dynamicBodyComponent.isGrounded() && !dynamicBodyComponent.isKinematic()) {
-          dynamicBodyComponent.applyForce(0, gravityConstant * dynamicBodyComponent.getMaterial().getMass());
-        }
+      if (!dynamicBodyComponent.isGrounded() && !dynamicBodyComponent.isKinematic()) {
+        dynamicBodyComponent.applyForce(0, gravityConstant * dynamicBodyComponent.getMaterial().getMass());
+      }
 
-        dynamicBodyComponent.setGrounded(false);
-      });
+      dynamicBodyComponent.setGrounded(false);
+    }
   }
 
   @Override

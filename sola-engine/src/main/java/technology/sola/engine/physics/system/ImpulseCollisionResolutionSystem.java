@@ -27,7 +27,7 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
    */
   private final float linearProjectionPercentage;
   private final int iterations;
-  private List<CollisionManifold> events = new ArrayList<>();
+  private final List<CollisionManifold> collisionManifolds = new ArrayList<>();
 
   /**
    * Creates an instance with recommended settings.
@@ -66,7 +66,7 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
 
     adjustForSinking();
 
-    events = new ArrayList<>(events.size());
+    collisionManifolds.clear();
   }
 
   @Override
@@ -76,24 +76,24 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
 
   @Override
   public void onEvent(CollisionManifoldEvent eventObject) {
-    events.add(eventObject.getMessage());
+    collisionManifolds.add(eventObject.getMessage());
   }
 
   private void applyImpulse() {
     for (int i = 0; i < iterations; i++) {
-      events.forEach(event -> {
-        CollisionResolutionEntityData entityA = new CollisionResolutionEntityData(event.entityA());
-        CollisionResolutionEntityData entityB = new CollisionResolutionEntityData(event.entityB());
+      for (CollisionManifold collisionManifold : collisionManifolds) {
+        CollisionResolutionEntityData entityA = new CollisionResolutionEntityData(collisionManifold.entityA());
+        CollisionResolutionEntityData entityB = new CollisionResolutionEntityData(collisionManifold.entityB());
 
         final float inverseMassSum = entityA.inverseMass + entityB.inverseMass;
 
-        if (inverseMassSum <= 0) return;
+        if (inverseMassSum <= 0) continue;
 
         Vector2D relativeVelocity = entityB.velocity.subtract(entityA.velocity);
-        Vector2D relativeNormal = event.normal().normalize();
+        Vector2D relativeNormal = collisionManifold.normal().normalize();
 
-        // Moving away so return
-        if (relativeVelocity.normalize().dot(relativeNormal) > 0) return;
+        // Moving away so we're done here
+        if (relativeVelocity.normalize().dot(relativeNormal) > 0) continue;
 
         final float restitution = Math.min(entityA.restitution, entityB.restitution);
         float numerator = -(1 + restitution) * relativeVelocity.dot(relativeNormal);
@@ -106,14 +106,14 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
         // Friction
         Vector2D tangentNormal = relativeVelocity.subtract(relativeNormal.scalar(relativeVelocity.dot(relativeNormal)));
 
-        if (Float.compare(tangentNormal.magnitudeSq(), 0) == 0) return;
+        if (Float.compare(tangentNormal.magnitudeSq(), 0) == 0) continue;
 
         tangentNormal = tangentNormal.normalize();
         numerator = -relativeVelocity.dot(tangentNormal);
 
         float tangentImpulseScalar = numerator / inverseMassSum;
 
-        if (Float.compare(tangentImpulseScalar, 0) == 0) return;
+        if (Float.compare(tangentImpulseScalar, 0) == 0) continue;
 
         float friction = (float) Math.sqrt(entityA.friction * entityB.friction);
         float impulseScalarTimesFriction = impulseScalar * friction;
@@ -123,7 +123,7 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
         Vector2D tangentImpulse = tangentNormal.scalar(tangentImpulseScalar);
 
         applyImpulseToCollisionEntities(entityA, entityB, tangentImpulse);
-      });
+      }
     }
   }
 
@@ -144,19 +144,19 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
   }
 
   private void adjustForSinking() {
-    for (CollisionManifold event : events) {
-      CollisionResolutionEntityData entityA = new CollisionResolutionEntityData(event.entityA());
-      CollisionResolutionEntityData entityB = new CollisionResolutionEntityData(event.entityB());
+    for (CollisionManifold collisionManifold : collisionManifolds) {
+      CollisionResolutionEntityData entityA = new CollisionResolutionEntityData(collisionManifold.entityA());
+      CollisionResolutionEntityData entityB = new CollisionResolutionEntityData(collisionManifold.entityB());
 
       float inverseMassA = entityA.inverseMass;
       float inverseMassB = entityB.inverseMass;
       float inverseMassSum = inverseMassA + inverseMassB;
 
-      if (inverseMassSum <= 0) return;
+      if (inverseMassSum <= 0) continue;
 
-      float depth = Math.max(event.penetration() - penetrationSlack, 0);
+      float depth = Math.max(collisionManifold.penetration() - penetrationSlack, 0);
       float scalar = depth / inverseMassSum;
-      Vector2D correction = event.normal().scalar(scalar * linearProjectionPercentage);
+      Vector2D correction = collisionManifold.normal().scalar(scalar * linearProjectionPercentage);
 
       Vector2D aPosition = new Vector2D(entityA.transformComponent.getX(), entityA.transformComponent.getY())
         .subtract(correction.scalar(inverseMassA));
