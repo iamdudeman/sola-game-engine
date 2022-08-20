@@ -17,16 +17,21 @@ import java.util.Random;
 public class SoftwareRenderer extends Canvas implements Renderer {
   private final Random random = new Random();
   private final List<Layer> layers = new ArrayList<>();
-  private BlendMode blendMode = BlendMode.NO_BLENDING;
+  private BlendMode blendMode;
   private Font font;
+  private final int pixelCount;
+  private PixelUpdater pixelUpdater;
 
   public SoftwareRenderer(int width, int height) {
     super(width, height);
+    pixelCount = pixels.length;
+    setBlendMode(BlendMode.NO_BLENDING);
   }
 
   @Override
   public void setBlendMode(BlendMode blendMode) {
     this.blendMode = blendMode;
+    updatePixelUpdaterForBlendMode();
   }
 
   @Override
@@ -55,55 +60,10 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
   @Override
   public void setPixel(int x, int y, Color color) {
-    if (x < 0 || x >= width || y < 0 || y >= height) return;
+    if (x >= 0 && x < width && y >= 0 && y < height) {
+      int pixelIndex = x + y * width;
 
-    Color currentColor;
-
-    switch (blendMode) {
-      case NO_BLENDING:
-        pixels[x + y * width] = color.hexInt();
-
-        break;
-      case MASK:
-        if (color.getAlpha() == 255) {
-          pixels[x + y * width] = color.hexInt();
-        }
-
-        break;
-      case NORMAL:
-        if (color.hasAlpha()) {
-          currentColor = new Color(pixels[x + y * width]);
-          float alphaMod = color.getAlpha() / 255f;
-          float oneMinusAlpha = 1 - alphaMod;
-
-          float red = currentColor.getRed() * oneMinusAlpha + color.getRed() * alphaMod;
-          float green = currentColor.getGreen() * oneMinusAlpha + color.getGreen() * alphaMod;
-          float blue = currentColor.getBlue() * oneMinusAlpha + color.getBlue() * alphaMod;
-
-          pixels[x + y * width] = new Color((int) red, (int) green, (int) blue).hexInt();
-        } else {
-          pixels[x + y * width] = color.hexInt();
-        }
-
-        break;
-      case DISSOLVE:
-        if (random.nextInt(0, 256) <= color.getAlpha()) {
-          pixels[x + y * width] = color.hexInt();
-        }
-
-        break;
-      case LINEAR_DODGE:
-        currentColor = new Color(pixels[x + y * width]);
-
-        pixels[x + y * width] = new Color(
-          Math.min(255, currentColor.getRed() + color.getRed()),
-          Math.min(255, currentColor.getGreen() + color.getGreen()),
-          Math.min(255, currentColor.getBlue() + color.getBlue())
-        ).hexInt();
-
-        break;
-      default:
-        throw new RuntimeException("Not yet implemented " + blendMode.name());
+      pixelUpdater.set(pixelIndex, color);
     }
   }
 
@@ -373,5 +333,52 @@ public class SoftwareRenderer extends Canvas implements Renderer {
         setPixel(x, y, color);
       }
     }
+  }
+
+  private void updatePixelUpdaterForBlendMode() {
+    int[] pixels = this.pixels;
+
+    this.pixelUpdater = switch (this.blendMode) {
+      case NO_BLENDING -> (pixelIndex, color) -> pixels[pixelIndex] = color.hexInt();
+      case MASK -> ((pixelIndex, color) -> {
+        if (color.getAlpha() == 255) {
+          pixels[pixelIndex] = color.hexInt();
+        }
+      });
+      case NORMAL -> ((pixelIndex, color) -> {
+        if (color.hasAlpha()) {
+          Color currentColor = new Color(pixels[pixelIndex]);
+          float alphaMod = color.getAlpha() / 255f;
+          float oneMinusAlpha = 1 - alphaMod;
+
+          float red = currentColor.getRed() * oneMinusAlpha + color.getRed() * alphaMod;
+          float green = currentColor.getGreen() * oneMinusAlpha + color.getGreen() * alphaMod;
+          float blue = currentColor.getBlue() * oneMinusAlpha + color.getBlue() * alphaMod;
+
+          pixels[pixelIndex] = new Color((int) red, (int) green, (int) blue).hexInt();
+        } else {
+          pixels[pixelIndex] = color.hexInt();
+        }
+      });
+      case DISSOLVE -> ((pixelIndex, color) -> {
+        if (random.nextInt(0, 256) <= color.getAlpha()) {
+          pixels[pixelIndex] = color.hexInt();
+        }
+      });
+      case LINEAR_DODGE -> ((pixelIndex, color) -> {
+        Color currentColor = new Color(pixels[pixelIndex]);
+
+        pixels[pixelIndex] = new Color(
+          Math.min(255, currentColor.getRed() + color.getRed()),
+          Math.min(255, currentColor.getGreen() + color.getGreen()),
+          Math.min(255, currentColor.getBlue() + color.getBlue())
+        ).hexInt();
+      });
+    };
+  }
+
+  @FunctionalInterface
+  private interface PixelUpdater {
+    void set(int pixelIndex, Color color);
   }
 }

@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class SpatialHashMap {
   private final int cellSize;
@@ -66,8 +66,8 @@ public class SpatialHashMap {
     return nearbyEntities;
   }
 
-  public Iterator<Vector2D> entityBucketIterator() {
-    return entityBuckets.keySet().iterator();
+  public Set<Vector2D> getEntityBucketIds() {
+    return entityBuckets.keySet();
   }
 
   List<Vector2D> getBucketIdsForEntity(Entity entity) {

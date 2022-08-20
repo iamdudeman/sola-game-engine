@@ -12,7 +12,6 @@ import technology.sola.engine.physics.event.CollisionManifoldEvent;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -47,8 +46,8 @@ public class CollisionDetectionSystem extends EcsSystem {
     return spatialHashMap.getCellSize();
   }
 
-  public Iterator<Vector2D> getSpacialHashMapEntityBucketIterator() {
-    return spatialHashMap.entityBucketIterator();
+  public Set<Vector2D> getSpacialHashMapEntityBuckets() {
+    return spatialHashMap.getEntityBucketIds();
   }
 
   @Override
