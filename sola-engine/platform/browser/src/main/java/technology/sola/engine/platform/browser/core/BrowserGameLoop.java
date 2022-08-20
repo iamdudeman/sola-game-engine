@@ -32,16 +32,20 @@ public class BrowserGameLoop extends GameLoop implements JsUtils.Function {
 
       previousLoopStartNanos = loopStart;
       updateCatchUpAccumulator += delta;
+      boolean hasUpdated = false;
 
       while (updateCatchUpAccumulator >= deltaTime) {
         updateMethod.accept(deltaTime);
         fpsTracker.tickUpdate();
 
         updateCatchUpAccumulator -= deltaTime;
+        hasUpdated = true;
       }
 
-      renderMethod.run();
-      fpsTracker.tickFrames();
+      if (hasUpdated) {
+        renderMethod.run();
+        fpsTracker.tickFrames();
+      }
 
       JsUtils.requestAnimationFrame(this);
     }
