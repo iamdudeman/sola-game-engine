@@ -51,16 +51,19 @@ public class SpatialHashMap {
   }
 
   public List<Entity> getNearbyEntities(Entity entity) {
-    return getBucketIdsForEntity(entity).stream()
-      .map(this::getOrCreateBucket)
-      .reduce(new ArrayList<>(), (nearbyEntities, entityBucket) -> {
-        nearbyEntities.addAll(
-          entityBucket.stream()
-            .filter(entityInBucket -> entity != entityInBucket && !nearbyEntities.contains(entityInBucket)).toList()
-        );
+    List<Entity> nearbyEntities = new ArrayList<>();
 
-        return nearbyEntities;
-      });
+    for (Vector2D bucketId :getBucketIdsForEntity(entity)) {
+      List<Entity> bucket = getOrCreateBucket(bucketId);
+
+      for (Entity entityInBucket : bucket) {
+        if (entity != entityInBucket && !nearbyEntities.contains(entityInBucket)) {
+          nearbyEntities.add(entityInBucket);
+        }
+      }
+    }
+
+    return nearbyEntities;
   }
 
   public Iterator<Vector2D> entityBucketIterator() {
