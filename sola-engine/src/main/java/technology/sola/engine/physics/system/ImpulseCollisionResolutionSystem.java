@@ -144,7 +144,7 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
   }
 
   private void adjustForSinking() {
-    events.forEach(event -> {
+    for (CollisionManifold event : events) {
       CollisionResolutionEntityData entityA = new CollisionResolutionEntityData(event.entityA());
       CollisionResolutionEntityData entityB = new CollisionResolutionEntityData(event.entityB());
 
@@ -167,7 +167,7 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
         .add(correction.scalar(inverseMassB));
       entityB.transformComponent.setX(bPosition.x);
       entityB.transformComponent.setY(bPosition.y);
-    });
+    }
   }
 
   private static class CollisionResolutionEntityData {
