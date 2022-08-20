@@ -46,12 +46,12 @@ public record CollisionManifold(
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    CollisionManifold that = (CollisionManifold) o;
 
-    return
-      (entityA.equals(that.entityA) && entityB.equals(that.entityB)) ||
-        (entityA.equals(that.entityB) && entityB.equals(that.entityA));
+    if (o instanceof CollisionManifold that) {
+      return (entityA == that.entityA && entityB == that.entityB) || (entityA == that.entityB && entityB == that.entityA);
+    }
+
+    return false;
   }
 
   @Override

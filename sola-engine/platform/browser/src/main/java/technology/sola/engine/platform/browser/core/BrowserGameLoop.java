@@ -8,8 +8,16 @@ import technology.sola.engine.platform.browser.javascript.JsUtils;
 import java.util.function.Consumer;
 
 public class BrowserGameLoop extends GameLoop implements JsUtils.Function {
+  /**
+   * todo
+   * @param eventHub
+   * @param updateMethod
+   * @param renderMethod
+   * @param targetUpdatesPerSecond this is currently capped at 30 updates per second
+   * @param isRestingAllowed
+   */
   public BrowserGameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
-    super(eventHub, updateMethod, renderMethod, targetUpdatesPerSecond, isRestingAllowed);
+    super(eventHub, updateMethod, renderMethod, Math.min(targetUpdatesPerSecond, 30), isRestingAllowed);
   }
 
   @Override
