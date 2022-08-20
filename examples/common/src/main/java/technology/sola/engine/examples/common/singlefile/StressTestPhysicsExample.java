@@ -19,12 +19,17 @@ import java.util.Random;
 public class StressTestPhysicsExample extends Sola {
   private static final float CAMERA_SCALE = 1.5f;
   private static final float CIRCLE_RADIUS = 10f;
-  private final Random random = new Random();
+  private final Random random;
   private final int objectCount;
   private SolaGraphics solaGraphics;
 
   public StressTestPhysicsExample(int objectCount) {
+    this(objectCount, false);
+  }
+
+  public StressTestPhysicsExample(int objectCount, boolean useFixedSeed) {
     this.objectCount = objectCount;
+    this.random = useFixedSeed ? new Random(123456789) : new Random();
   }
 
   @Override
