@@ -66,35 +66,35 @@ class SpatialHashMapTest {
     List<Entity> entities = world.getEnabledEntities();
     SpatialHashMap spatialHashMap = new SpatialHashMap(entities);
 
-    List<Vector2D> points = spatialHashMap.getBucketIdsForEntity(entities.get(0));
-    assertEquals(new Vector2D(0, 0), points.get(0));
-    assertEquals(new Vector2D(0, 0), points.get(1));
-    assertEquals(new Vector2D(0, 0), points.get(2));
-    assertEquals(new Vector2D(0, 0), points.get(3));
+    Vector2D[] points = spatialHashMap.getBucketIdsForEntity(entities.get(0));
+    assertEquals(new Vector2D(0, 0), points[0]);
+    assertEquals(new Vector2D(0, 0), points[1]);
+    assertEquals(new Vector2D(0, 0), points[2]);
+    assertEquals(new Vector2D(0, 0), points[3]);
 
     points = spatialHashMap.getBucketIdsForEntity(entities.get(1));
-    assertEquals(new Vector2D(0, 0), points.get(0));
-    assertEquals(new Vector2D(1, 0), points.get(1));
-    assertEquals(new Vector2D(0, 1), points.get(2));
-    assertEquals(new Vector2D(1, 1), points.get(3));
+    assertEquals(new Vector2D(0, 0), points[0]);
+    assertEquals(new Vector2D(1, 0), points[1]);
+    assertEquals(new Vector2D(0, 1), points[2]);
+    assertEquals(new Vector2D(1, 1), points[3]);
 
     points = spatialHashMap.getBucketIdsForEntity(entities.get(2));
-    assertEquals(new Vector2D(1, 1), points.get(0));
-    assertEquals(new Vector2D(1, 1), points.get(1));
-    assertEquals(new Vector2D(1, 1), points.get(2));
-    assertEquals(new Vector2D(1, 1), points.get(3));
+    assertEquals(new Vector2D(1, 1), points[0]);
+    assertEquals(new Vector2D(1, 1), points[1]);
+    assertEquals(new Vector2D(1, 1), points[2]);
+    assertEquals(new Vector2D(1, 1), points[3]);
 
     points = spatialHashMap.getBucketIdsForEntity(entities.get(3));
-    assertEquals(new Vector2D(0, 0), points.get(0));
-    assertEquals(new Vector2D(0, 0), points.get(1));
-    assertEquals(new Vector2D(0, 1), points.get(2));
-    assertEquals(new Vector2D(0, 1), points.get(3));
+    assertEquals(new Vector2D(0, 0), points[0]);
+    assertEquals(new Vector2D(0, 0), points[1]);
+    assertEquals(new Vector2D(0, 1), points[2]);
+    assertEquals(new Vector2D(0, 1), points[3]);
 
     points = spatialHashMap.getBucketIdsForEntity(entities.get(4));
-    assertEquals(new Vector2D(1, 0), points.get(0));
-    assertEquals(new Vector2D(1, 0), points.get(1));
-    assertEquals(new Vector2D(1, 1), points.get(2));
-    assertEquals(new Vector2D(1, 1), points.get(3));
+    assertEquals(new Vector2D(1, 0), points[0]);
+    assertEquals(new Vector2D(1, 0), points[1]);
+    assertEquals(new Vector2D(1, 1), points[2]);
+    assertEquals(new Vector2D(1, 1), points[3]);
   }
 
   @Test
