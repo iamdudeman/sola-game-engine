@@ -6,6 +6,7 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventListener;
 import technology.sola.engine.physics.CollisionManifold;
+import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.event.CollisionManifoldEvent;
 import technology.sola.math.SolaMath;
@@ -13,7 +14,6 @@ import technology.sola.math.linear.Vector2D;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ImpulseCollisionResolutionSystem extends EcsSystem implements EventListener<CollisionManifoldEvent> {
   public static final int ORDER = CollisionDetectionSystem.ORDER + 1;
@@ -128,19 +128,23 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
   }
 
   private void applyImpulseToCollisionEntities(CollisionResolutionEntityData entityA, CollisionResolutionEntityData entityB, Vector2D impulse) {
-    entityA.getDynamicBodyComponent().ifPresent(dynamicBodyComponent -> {
-      Vector2D currentVelocity = dynamicBodyComponent.getVelocity();
+    DynamicBodyComponent dynamicBodyComponentA = entityA.dynamicBodyComponent;
+
+    if (dynamicBodyComponentA != null) {
+      Vector2D currentVelocity = dynamicBodyComponentA.getVelocity();
       Vector2D newVelocity = currentVelocity.subtract(impulse.scalar(entityA.inverseMass));
 
-      dynamicBodyComponent.setVelocity(newVelocity);
-    });
+      dynamicBodyComponentA.setVelocity(newVelocity);
+    }
 
-    entityB.getDynamicBodyComponent().ifPresent(dynamicBodyComponent -> {
-      Vector2D currentVelocity = dynamicBodyComponent.getVelocity();
+    DynamicBodyComponent dynamicBodyComponentB = entityB.dynamicBodyComponent;
+
+    if (dynamicBodyComponentB != null) {
+      Vector2D currentVelocity = dynamicBodyComponentB.getVelocity();
       Vector2D newVelocity = currentVelocity.add(impulse.scalar(entityB.inverseMass));
 
-      dynamicBodyComponent.setVelocity(newVelocity);
-    });
+      dynamicBodyComponentB.setVelocity(newVelocity);
+    }
   }
 
   private void adjustForSinking() {
@@ -189,14 +193,12 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
         restitution = 1;
         friction = 1;
       } else {
-        inverseMass = dynamicBodyComponent.getMaterial().getInverseMass();
-        restitution = dynamicBodyComponent.getMaterial().getRestitution();
-        friction = dynamicBodyComponent.getMaterial().getFriction();
-      }
-    }
+        Material material = dynamicBodyComponent.getMaterial();
 
-    Optional<DynamicBodyComponent> getDynamicBodyComponent() {
-      return Optional.ofNullable(dynamicBodyComponent);
+        inverseMass = material.getInverseMass();
+        restitution = material.getRestitution();
+        friction = material.getFriction();
+      }
     }
   }
 }
