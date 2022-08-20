@@ -19,12 +19,10 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   private final List<Layer> layers = new ArrayList<>();
   private BlendMode blendMode;
   private Font font;
-  private final int pixelCount;
   private PixelUpdater pixelUpdater;
 
   public SoftwareRenderer(int width, int height) {
     super(width, height);
-    pixelCount = pixels.length;
     setBlendMode(BlendMode.NO_BLENDING);
   }
 

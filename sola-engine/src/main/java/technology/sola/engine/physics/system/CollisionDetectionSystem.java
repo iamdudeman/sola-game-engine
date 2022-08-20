@@ -9,7 +9,6 @@ import technology.sola.engine.physics.CollisionUtils;
 import technology.sola.engine.physics.SpatialHashMap;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.event.CollisionManifoldEvent;
-import technology.sola.math.linear.Vector2D;
 
 import java.util.HashSet;
 import java.util.List;
