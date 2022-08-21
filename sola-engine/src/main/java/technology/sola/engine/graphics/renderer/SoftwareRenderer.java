@@ -28,8 +28,10 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
   @Override
   public void setBlendMode(BlendMode blendMode) {
-    this.blendMode = blendMode;
-    updatePixelUpdaterForBlendMode();
+    if (this.blendMode != blendMode) {
+      this.blendMode = blendMode;
+      updatePixelUpdaterForBlendMode();
+    }
   }
 
   @Override

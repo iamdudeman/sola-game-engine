@@ -61,17 +61,20 @@ public interface Renderer {
   }
 
   default void drawString(String text, float x, float y, Color color) {
-    drawWithBlendMode(BlendMode.MASK, r -> {
-      int xOffset = 0;
-      Font font = getFont();
+    BlendMode previousBlendMode = getBlendMode();
+    setBlendMode(BlendMode.MASK);
 
-      for (char character : text.toCharArray()) {
-        SolaImage glyphImage = font.getGlyph(character, color);
+    int xOffset = 0;
+    Font font = getFont();
 
-        drawImage(x + xOffset, y, glyphImage);
-        xOffset += glyphImage.getWidth() + font.getFontInfo().leading();
-      }
-    });
+    for (char character : text.toCharArray()) {
+      SolaImage glyphImage = font.getGlyph(character, color);
+
+      drawImage(x + xOffset, y, glyphImage);
+      xOffset += glyphImage.getWidth() + font.getFontInfo().leading();
+    }
+
+    setBlendMode(previousBlendMode);
   }
 
   void drawLine(float x, float y, float x2, float y2, Color color);
