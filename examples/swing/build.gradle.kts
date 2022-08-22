@@ -1,6 +1,6 @@
 plugins {
   id("application")
-  id("java-library")
+  id("sola.java-conventions")
 }
 
 application {

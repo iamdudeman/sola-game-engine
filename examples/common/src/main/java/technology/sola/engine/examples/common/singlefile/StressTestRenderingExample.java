@@ -46,9 +46,9 @@ public class StressTestRenderingExample extends Sola {
       int y = random.nextInt(0, 600);
       int scale = random.nextInt(3, 20);
 
-      int r = random.nextInt(0, 256);
-      int g = random.nextInt(0, 256);
-      int b = random.nextInt(0, 256);
+      int red = random.nextInt(0, 256);
+      int green = random.nextInt(0, 256);
+      int blue = random.nextInt(0, 256);
       boolean filled = random.nextBoolean();
 
       float velX = random.nextFloat(-50, 50);
@@ -61,7 +61,7 @@ public class StressTestRenderingExample extends Sola {
       world.createEntity(
         new TransformComponent(x, y, scale),
         dynamicBodyComponent,
-        new CircleRendererComponent(new Color(r, g, b), filled)
+        new CircleRendererComponent(new Color(red, green, blue), filled)
       );
     }
 

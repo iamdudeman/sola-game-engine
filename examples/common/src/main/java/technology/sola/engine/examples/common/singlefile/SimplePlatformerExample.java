@@ -16,7 +16,6 @@ import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.CollisionManifold;
-import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
@@ -57,13 +56,6 @@ public class SimplePlatformerExample extends Sola {
   }
 
   private class GameDoneEventListener implements EventListener<CollisionManifoldEvent> {
-    @Override
-    public void onEvent(CollisionManifoldEvent event) {
-      CollisionManifold collisionManifold = event.getMessage();
-
-      collisionManifold.conditionallyResolveCollision(checkForPlayer, checkForFinalBlock, collisionResolver);
-    }
-
     private final Function<Entity, Boolean> checkForPlayer = entity -> "player".equals(entity.getName());
     private final Function<Entity, Boolean> checkForFinalBlock = entity -> "finalBlock".equals(entity.getName());
     private final BiConsumer<Entity, Entity> collisionResolver = (player, finalBlock) ->
@@ -71,6 +63,13 @@ public class SimplePlatformerExample extends Sola {
         entity.setDisabled(false);
         eventHub.remove(this, CollisionManifoldEvent.class);
       });
+    
+    @Override
+    public void onEvent(CollisionManifoldEvent event) {
+      CollisionManifold collisionManifold = event.getMessage();
+
+      collisionManifold.conditionallyResolveCollision(checkForPlayer, checkForFinalBlock, collisionResolver);
+    }
   }
 
   private World buildWorld() {
