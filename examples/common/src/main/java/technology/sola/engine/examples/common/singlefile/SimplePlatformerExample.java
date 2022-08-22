@@ -187,7 +187,7 @@ public class SimplePlatformerExample extends Sola {
           if (keyboardInput.isKeyHeld(Key.A) && dynamicBodyComponent.getVelocity().x > -150) {
             dynamicBodyComponent.applyForce(-150, 0);
           }
-          if (dynamicBodyComponent.isGrounded() && keyboardInput.isKeyPressed(Key.SPACE)) {
+          if (dynamicBodyComponent.isGrounded() && keyboardInput.isKeyHeld(Key.SPACE)) {
             dynamicBodyComponent.applyForce(0, -3000);
           } else if (dynamicBodyComponent.getVelocity().y > 0) {
             dynamicBodyComponent.applyForce(0, 1.5f * solaPhysics.getGravitySystem().getGravityConstant() * dynamicBodyComponent.getMaterial().getMass());
