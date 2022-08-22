@@ -4,31 +4,29 @@ import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.event.EventHub;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.CollisionUtils;
 import technology.sola.engine.physics.SpatialHashMap;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.event.CollisionManifoldEvent;
-import technology.sola.math.linear.Vector2D;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 
 public class CollisionDetectionSystem extends EcsSystem {
   public static final int ORDER = PhysicsSystem.ORDER + 1;
+  private final EventHub eventHub;
   private SpatialHashMap spatialHashMap;
   private final Integer spatialHashMapCellSize;
-  private Consumer<CollisionManifoldEvent> emitCollisionEvent = event -> { };
 
   /**
    * Creates a CollisionDetectionSystem that allows the internal spacial hash map to determine a good cell size based on
    * the entities.
    */
-  public CollisionDetectionSystem() {
-    this(null);
+  public CollisionDetectionSystem(EventHub eventHub) {
+    this(eventHub, null);
   }
 
   /**
@@ -36,7 +34,8 @@ public class CollisionDetectionSystem extends EcsSystem {
    *
    * @param spatialHashMapCellSize  the cell size of the internal spacial hash map
    */
-  public CollisionDetectionSystem(Integer spatialHashMapCellSize) {
+  public CollisionDetectionSystem(EventHub eventHub, Integer spatialHashMapCellSize) {
+    this.eventHub = eventHub;
     this.spatialHashMapCellSize = spatialHashMapCellSize;
     this.spatialHashMap = spatialHashMapCellSize == null
       ? new SpatialHashMap(List.of())
@@ -47,8 +46,8 @@ public class CollisionDetectionSystem extends EcsSystem {
     return spatialHashMap.getCellSize();
   }
 
-  public Iterator<Vector2D> getSpacialHashMapEntityBucketIterator() {
-    return spatialHashMap.entityBucketIterator();
+  public Set<SpatialHashMap.BucketId> getSpacialHashMapEntityBuckets() {
+    return spatialHashMap.getEntityBucketIds();
   }
 
   @Override
@@ -84,10 +83,6 @@ public class CollisionDetectionSystem extends EcsSystem {
     }
 
     // By emitting only events from the set we do not send duplicates
-    collisionEventsThisIteration.forEach(collisionManifold -> emitCollisionEvent.accept(new CollisionManifoldEvent(collisionManifold)));
-  }
-
-  public void setEmitCollisionEvent(Consumer<CollisionManifoldEvent> emitCollisionEvent) {
-    this.emitCollisionEvent = emitCollisionEvent;
+    collisionEventsThisIteration.forEach(collisionManifold -> eventHub.emit(new CollisionManifoldEvent(collisionManifold)));
   }
 }

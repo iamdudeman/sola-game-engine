@@ -23,8 +23,11 @@ public class Layer {
 
   public void draw(Renderer renderer) {
     if (isEnabled) {
-      drawQueue.forEach(drawItem -> drawItem.draw(renderer));
+      for (DrawItem drawItem : drawQueue) {
+        drawItem.draw(renderer);
+      }
     }
+
     drawQueue.clear();
   }
 

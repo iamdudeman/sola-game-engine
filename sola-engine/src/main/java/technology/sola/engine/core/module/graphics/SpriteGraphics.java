@@ -13,16 +13,15 @@ import technology.sola.engine.graphics.renderer.Renderer;
 
 class SpriteGraphics {
   static void render(Renderer renderer, SolaEcs solaEcs, TransformComponent cameraTransform, AssetLoader<SpriteSheet> spriteSheetAssetLoader) {
-    solaEcs.getWorld().findEntitiesWithComponents(TransformComponent.class, SpriteComponent.class)
-      .forEach(entity -> {
-        LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
+    for (Entity entity : solaEcs.getWorld().findEntitiesWithComponents(TransformComponent.class, SpriteComponent.class)) {
+      LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
 
-        if (layerComponent == null) {
-          renderSprite(renderer, entity, cameraTransform, spriteSheetAssetLoader);
-        } else {
-          renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r -> renderSprite(renderer, entity, cameraTransform, spriteSheetAssetLoader));
-        }
-      });
+      if (layerComponent == null) {
+        renderSprite(renderer, entity, cameraTransform, spriteSheetAssetLoader);
+      } else {
+        renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r -> renderSprite(renderer, entity, cameraTransform, spriteSheetAssetLoader));
+      }
+    }
   }
 
   private static void renderSprite(Renderer renderer, Entity entity, TransformComponent cameraTransform, AssetLoader<SpriteSheet> spriteSheetAssetLoader) {

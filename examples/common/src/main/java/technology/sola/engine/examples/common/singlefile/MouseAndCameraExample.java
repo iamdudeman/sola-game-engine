@@ -57,7 +57,9 @@ public class MouseAndCameraExample extends Sola {
   private final class ClickCreateEntitySystem extends EcsSystem {
     private int colorIndex = 0;
     private final Color[] colors = {
-      Color.RED, Color.GREEN, Color.BLUE
+      Color.RED,
+      Color.GREEN,
+      Color.BLUE,
     };
 
     @Override

@@ -6,6 +6,7 @@ import technology.sola.ecs.io.Base64WorldIo;
 import technology.sola.ecs.io.WorldIo;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.event.EventHub;
+import technology.sola.engine.graphics.renderer.Layer;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
@@ -149,7 +150,11 @@ public abstract class SolaPlatform {
   private void render(Renderer renderer, Sola sola) {
     beforeRender(renderer);
     sola.onRender(renderer);
-    renderer.getLayers().forEach(layer -> layer.draw(renderer));
+
+    for (Layer layer : renderer.getLayers()) {
+      layer.draw(renderer);
+    }
+
     onRender(renderer);
   }
 

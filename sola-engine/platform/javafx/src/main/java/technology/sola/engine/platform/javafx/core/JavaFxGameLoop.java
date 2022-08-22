@@ -31,13 +31,17 @@ public class JavaFxGameLoop extends GameLoop {
 
       previousLoopStartNanos = newNanoTime;
       updateCatchUpAccumulator += delta;
+      boolean hasUpdated = false;
 
       while (updateCatchUpAccumulator >= deltaTime) {
         updateMethod.accept(deltaTime);
         fpsTracker.tickUpdate();
 
         updateCatchUpAccumulator -= deltaTime;
+        hasUpdated = true;
+      }
 
+      if (hasUpdated) {
         renderMethod.run();
         fpsTracker.tickFrames();
       }

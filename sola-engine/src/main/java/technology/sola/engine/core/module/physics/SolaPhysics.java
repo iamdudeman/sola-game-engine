@@ -19,12 +19,10 @@ public class SolaPhysics {
   private final ParticleSystem particleSystem;
 
   public static SolaPhysics createInstance(EventHub eventHub, SolaEcs solaEcs) {
-    SolaPhysics solaPhysics = new SolaPhysics();
+    SolaPhysics solaPhysics = new SolaPhysics(eventHub);
 
     eventHub.add(solaPhysics.gravitySystem, CollisionManifoldEvent.class);
     eventHub.add(solaPhysics.impulseCollisionResolutionSystem, CollisionManifoldEvent.class);
-
-    solaPhysics.collisionDetectionSystem.setEmitCollisionEvent(eventHub::emit);
 
     solaEcs.addSystems(
       solaPhysics.gravitySystem,
@@ -57,10 +55,10 @@ public class SolaPhysics {
     return particleSystem;
   }
 
-  private SolaPhysics() {
+  private SolaPhysics(EventHub eventHub) {
     gravitySystem = new GravitySystem();
     physicsSystem = new PhysicsSystem();
-    collisionDetectionSystem = new CollisionDetectionSystem();
+    collisionDetectionSystem = new CollisionDetectionSystem(eventHub);
     impulseCollisionResolutionSystem = new ImpulseCollisionResolutionSystem();
     particleSystem = new ParticleSystem();
   }

@@ -70,6 +70,10 @@
       <property name="allowedDistance" value="5"/>
     </module>
 
+    <!-- Imports: https://checkstyle.sourceforge.io/config_imports.html -->
+    <module name="RedundantImport"/>
+    <module name="UnusedImports"/>
+
     <!-- Miscellaneous: https://checkstyle.sourceforge.io/config_misc.html -->
     <module name="ArrayTypeStyle"/>
     <module name="CommentsIndentation"/>

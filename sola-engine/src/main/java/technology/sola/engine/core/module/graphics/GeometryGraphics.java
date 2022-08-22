@@ -13,36 +13,38 @@ import technology.sola.engine.graphics.renderer.Renderer;
 class GeometryGraphics {
   static void render(Renderer renderer, SolaEcs solaEcs, TransformComponent cameraTransform) {
     // Draw rectangles
-    solaEcs.getWorld().findEntitiesWithComponents(TransformComponent.class, RectangleRendererComponent.class)
-      .forEach(entity -> {
-        LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
-        BlendModeComponent blendModeComponent = entity.getComponent(BlendModeComponent.class);
-        BlendMode blendMode = blendModeComponent == null ? renderer.getBlendMode() : blendModeComponent.getRenderMode();
+    for (Entity entity : solaEcs.getWorld().findEntitiesWithComponents(TransformComponent.class, RectangleRendererComponent.class)) {
+      LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
+      BlendModeComponent blendModeComponent = entity.getComponent(BlendModeComponent.class);
 
-        renderer.drawWithBlendMode(blendMode, r -> {
-          if (layerComponent == null) {
-            renderRectangle(renderer, entity, cameraTransform);
-          } else {
-            renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r2 -> renderRectangle(renderer, entity, cameraTransform));
-          }
-        });
-      });
+      BlendMode previousBlendMode = renderer.getBlendMode();
+      BlendMode blendMode = blendModeComponent == null ? previousBlendMode : blendModeComponent.getRenderMode();
+
+      renderer.setBlendMode(blendMode);
+      if (layerComponent == null) {
+        renderRectangle(renderer, entity, cameraTransform);
+      } else {
+        renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r2 -> renderRectangle(renderer, entity, cameraTransform));
+      }
+      renderer.setBlendMode(previousBlendMode);
+    }
 
     // Draw circles
-    solaEcs.getWorld().findEntitiesWithComponents(TransformComponent.class, CircleRendererComponent.class)
-      .forEach(entity -> {
-        LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
-        BlendModeComponent blendModeComponent = entity.getComponent(BlendModeComponent.class);
-        BlendMode blendMode = blendModeComponent == null ? renderer.getBlendMode() : blendModeComponent.getRenderMode();
+    for (Entity entity : solaEcs.getWorld().findEntitiesWithComponents(TransformComponent.class, CircleRendererComponent.class)) {
+      LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
+      BlendModeComponent blendModeComponent = entity.getComponent(BlendModeComponent.class);
 
-        renderer.drawWithBlendMode(blendMode, r -> {
-          if (layerComponent == null) {
-            renderCircle(renderer, entity, cameraTransform);
-          } else {
-            renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r2 -> renderCircle(renderer, entity, cameraTransform));
-          }
-        });
-      });
+      BlendMode previousBlendMode = renderer.getBlendMode();
+      BlendMode blendMode = blendModeComponent == null ? previousBlendMode : blendModeComponent.getRenderMode();
+
+      renderer.setBlendMode(blendMode);
+      if (layerComponent == null) {
+        renderCircle(renderer, entity, cameraTransform);
+      } else {
+        renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r2 -> renderCircle(r2, entity, cameraTransform));
+      }
+      renderer.setBlendMode(previousBlendMode);
+    }
   }
 
   private static void renderRectangle(Renderer renderer, Entity entity, TransformComponent cameraTransform) {

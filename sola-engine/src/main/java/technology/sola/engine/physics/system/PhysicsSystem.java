@@ -16,21 +16,20 @@ public class PhysicsSystem extends EcsSystem {
 
   @Override
   public void update(World world, float deltaTime) {
-    world.createView().of(TransformComponent.class, DynamicBodyComponent.class)
-      .forEach(view -> {
-        TransformComponent transformComponent = view.c1();
-        DynamicBodyComponent dynamicBodyComponent = view.c2();
+    for (var view : world.createView().of(TransformComponent.class, DynamicBodyComponent.class)) {
+      TransformComponent transformComponent = view.c1();
+      DynamicBodyComponent dynamicBodyComponent = view.c2();
 
-        if (!dynamicBodyComponent.isKinematic()) {
-          Vector2D acceleration = new Vector2D(dynamicBodyComponent.getForceX(), dynamicBodyComponent.getForceY())
-            .scalar(dynamicBodyComponent.getMaterial().getInverseMass());
+      if (!dynamicBodyComponent.isKinematic()) {
+        Vector2D acceleration = new Vector2D(dynamicBodyComponent.getForceX(), dynamicBodyComponent.getForceY())
+          .scalar(dynamicBodyComponent.getMaterial().getInverseMass());
 
-          dynamicBodyComponent.setForceX(0);
-          dynamicBodyComponent.setForceY(0);
-          dynamicBodyComponent.setVelocity(dynamicBodyComponent.getVelocity().add(acceleration.scalar(deltaTime)));
-        }
+        dynamicBodyComponent.setForceX(0);
+        dynamicBodyComponent.setForceY(0);
+        dynamicBodyComponent.setVelocity(dynamicBodyComponent.getVelocity().add(acceleration.scalar(deltaTime)));
+      }
 
-        transformComponent.setTranslate(transformComponent.getTranslate().add(dynamicBodyComponent.getVelocity().scalar(deltaTime)));
-      });
+      transformComponent.setTranslate(transformComponent.getTranslate().add(dynamicBodyComponent.getVelocity().scalar(deltaTime)));
+    }
   }
 }

@@ -1,5 +1,5 @@
 plugins {
-  id("java-library")
+  id("sola.java-conventions")
 }
 
 repositories {
