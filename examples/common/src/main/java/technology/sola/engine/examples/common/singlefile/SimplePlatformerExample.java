@@ -29,6 +29,7 @@ import java.util.function.Function;
 
 public class SimplePlatformerExample extends Sola {
   private SolaGraphics solaGraphics;
+  private SolaPhysics solaPhysics;
 
   @Override
   protected SolaConfiguration getConfiguration() {
@@ -37,7 +38,7 @@ public class SimplePlatformerExample extends Sola {
 
   @Override
   protected void onInit() {
-    SolaPhysics.createInstance(eventHub, solaEcs);
+    solaPhysics = SolaPhysics.createInstance(eventHub, solaEcs);
     solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetLoaderProvider);
 
     solaEcs.addSystems(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem());
@@ -84,7 +85,7 @@ public class SimplePlatformerExample extends Sola {
       .addComponent(new TransformComponent(200, 300, 50, 50))
       .addComponent(new RectangleRendererComponent(Color.BLUE))
       .addComponent(ColliderComponent.aabb())
-      .addComponent(new DynamicBodyComponent(new Material(1)))
+      .addComponent(new DynamicBodyComponent())
       .setName("player");
 
     world.createEntity()
@@ -105,17 +106,17 @@ public class SimplePlatformerExample extends Sola {
       .addComponent(ColliderComponent.aabb());
 
     world.createEntity()
-      .addComponent(new TransformComponent(1050, 190, 200, 75f))
+      .addComponent(new TransformComponent(950, 190, 200, 75f))
       .addComponent(new RectangleRendererComponent(Color.WHITE))
       .addComponent(ColliderComponent.aabb());
 
     world.createEntity()
-      .addComponent(new TransformComponent(1575, 180, 100, 50f))
+      .addComponent(new TransformComponent(1500, 320, 100, 50f))
       .addComponent(new RectangleRendererComponent(Color.WHITE))
       .addComponent(ColliderComponent.aabb());
 
     Entity finalBlock = world.createEntity()
-      .addComponent(new TransformComponent(1800, 170, 50, 50f))
+      .addComponent(new TransformComponent(1750, 280, 50, 50f))
       .addComponent(new RectangleRendererComponent(Color.YELLOW))
       .addComponent(ColliderComponent.aabb())
       .setName("finalBlock");
@@ -180,14 +181,16 @@ public class SimplePlatformerExample extends Sola {
         .forEach(view -> {
           DynamicBodyComponent dynamicBodyComponent = view.c2();
 
-          if (keyboardInput.isKeyHeld(Key.D)) {
+          if (keyboardInput.isKeyHeld(Key.D) && dynamicBodyComponent.getVelocity().x < 150) {
             dynamicBodyComponent.applyForce(150, 0);
           }
-          if (keyboardInput.isKeyHeld(Key.A)) {
+          if (keyboardInput.isKeyHeld(Key.A) && dynamicBodyComponent.getVelocity().x > -150) {
             dynamicBodyComponent.applyForce(-150, 0);
           }
           if (dynamicBodyComponent.isGrounded() && keyboardInput.isKeyPressed(Key.SPACE)) {
             dynamicBodyComponent.applyForce(0, -3000);
+          } else if (dynamicBodyComponent.getVelocity().y > 0) {
+            dynamicBodyComponent.applyForce(0, 1.5f * solaPhysics.getGravitySystem().getGravityConstant() * dynamicBodyComponent.getMaterial().getMass());
           }
         });
     }
@@ -213,7 +216,7 @@ public class SimplePlatformerExample extends Sola {
         float dx = playerTransform.getX() - cameraTransform.getX();
 
         if (dx > 200) {
-          cameraTransform.setX(cameraTransform.getX() + (dx / 150));
+          cameraTransform.setX(cameraTransform.getX() + (dx / 100));
         }
 
         float dy = playerTransform.getY() - cameraTransform.getY();
