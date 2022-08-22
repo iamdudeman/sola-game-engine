@@ -1,22 +1,4 @@
 # Branch WIP
-* Bug discovered in JavaFxMain when doing PlatformerExample and getting to the end from the side
-  * Exception in thread "JavaFX Application Thread" java.util.ConcurrentModificationException
-    at java.base/java.util.ArrayList.forEach(ArrayList.java:1513)
-    at technology.sola.engine.event.EventHub.lambda$emit$3(EventHub.java:34)
-    at java.base/java.util.HashMap.computeIfPresent(HashMap.java:1261)
-    at technology.sola.engine.event.EventHub.emit(EventHub.java:33)
-    at technology.sola.engine.physics.system.CollisionDetectionSystem.lambda$update$1(CollisionDetectionSystem.java:85)
-    at java.base/java.lang.Iterable.forEach(Iterable.java:75)
-    at technology.sola.engine.physics.system.CollisionDetectionSystem.update(CollisionDetectionSystem.java:85)
-    at technology.sola.ecs.SolaEcs.lambda$updateWorld$0(SolaEcs.java:58)
-    at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
-    at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1625)
-    at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
-    at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
-    at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:310)
-    at java.base/java.util.Spliterators$1Adapter.forEachRemaining(Spliterators.java:706)
-    at technology.sola.ecs.SolaEcs.updateWorld(SolaEcs.java:58)
-    at
 
 -----------------------------------------------------------------------------------------------------------------------
 
