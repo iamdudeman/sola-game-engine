@@ -9,7 +9,7 @@ dependencies {
 }
 
 val fatJar = task("fatJar", type = Jar::class) {
-  baseName = "${project.name}-fat"
+  archiveBaseName.set("${project.name}-fat")
   group = "build"
   manifest {
     attributes["Implementation-Title"] = "Sola Engine"

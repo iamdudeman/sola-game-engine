@@ -9,7 +9,7 @@ javafx {
 }
 
 val fatJar = task("fatJar", type = Jar::class) {
-  baseName = "sola-engine-${project.name}-fat"
+  archiveBaseName.set("sola-engine-${project.name}-fat")
   group = "build"
   manifest {
     attributes["Implementation-Title"] = "Sola Engine Platform ${project.name}"
