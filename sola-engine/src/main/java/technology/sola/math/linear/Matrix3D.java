@@ -4,8 +4,8 @@ import technology.sola.math.geometry.Rectangle;
 
 /**
  * Credit to OneLoneCoder for guiding through this implementation
- * https://github.com/OneLoneCoder/olcPixelGameEngine/blob/master/Videos/OneLoneCoder_PGE_SpriteTransforms.cpp
- * https://www.youtube.com/watch?v=zxwLN2blwbQ&ab_channel=javidx9
+ * @see <a href="https://github.com/OneLoneCoder/olcPixelGameEngine/blob/master/Videos/OneLoneCoder_PGE_SpriteTransforms.cpp">Video</a>
+ * @see <a href="https://www.youtube.com/watch?v=zxwLN2blwbQ&ab_channel=javidx9">Channel</a>
  */
 @SuppressWarnings("checkstyle:OneStatementPerLine")
 public class Matrix3D {
