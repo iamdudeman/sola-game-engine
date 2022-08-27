@@ -3,6 +3,9 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Bugs List
+* browser fat jar not working without consuming project also defining a couple teavm dependencies
+  * runtimeOnly("org.teavm:teavm-classlib:0.7.0")
+    runtimeOnly("org.teavm:teavm-extras-slf4j:0.7.0")
 
 -----------------------------------------------------------------------------------------------------------------------
 

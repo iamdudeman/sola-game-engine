@@ -11,7 +11,7 @@ dependencies {
   implementation(project(":examples:common"))
 }
 
-tasks.register<JavaExec>("generateBrowserExampleHtmlAndJs") {
+task("generateBrowserExampleHtmlAndJs", type = JavaExec::class) {
   group = "build"
 
   dependsOn(tasks.getByPath("assemble"))
