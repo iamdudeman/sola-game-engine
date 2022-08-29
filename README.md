@@ -17,6 +17,9 @@
 
 ## TODO List
 
+* Refactor event system
+  * creating EventListeners is a bit inconvenient
+  * one class cannot implement multiple EventListeners
 * Assets
   * Consider adding JsonAsset and JsonAssetLoader
   * Consider implementing generic SpriteSheetAssetLoader and generic FontAssetLoader utilizing platform specific
