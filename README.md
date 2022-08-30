@@ -10,6 +10,7 @@
 * When browser tab loses focus the game can run in an indeterminate state
   * Probably need some sort of safe "pause" functionality (maybe used when games are minimized in desktop as well
 * AABB vs Circle collision might not be working right if circle is fully contained by AABB
+* SwingPlatform aspect ratio MAINTAIN does not seem to be accounting for insets at the top
 
 -----------------------------------------------------------------------------------------------------------------------
 
