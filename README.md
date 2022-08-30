@@ -3,6 +3,7 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Bugs List
+* fix Entity#remove issue in sola-ecs
 * browser fat jar not working without consuming project also defining a couple teavm dependencies
   * runtimeOnly("org.teavm:teavm-classlib:0.7.0")
     runtimeOnly("org.teavm:teavm-extras-slf4j:0.7.0")
@@ -17,7 +18,12 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
-
+* SwingSolaPlatform
+  * Add ability to position window
+  * Add ability to set initial size of window
+* JavaFxPlatform
+  * Add ability to position window
+  * Add ability to set initial size of window
 * Refactor event system
   * creating EventListeners is a bit inconvenient
   * one class cannot implement multiple EventListeners
