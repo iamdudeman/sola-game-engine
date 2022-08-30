@@ -12,6 +12,7 @@
 * AABB vs Circle collision might not be working right if circle is fully contained by AABB
 * SwingPlatform aspect ratio MAINTAIN does not seem to be accounting for insets at the top
 * Investigate JavaFx library bundling (api vs implementation?)
+* Figure out proper fat jar setup so stuff isn't duplicated
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -20,6 +21,8 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
+* Ability to ignore certain collision types
+  * Tiles may be collidable but if they don't move at all don't check for collisions with each other
 * SwingSolaPlatform
   * Add ability to position window
   * Add ability to set initial size of window

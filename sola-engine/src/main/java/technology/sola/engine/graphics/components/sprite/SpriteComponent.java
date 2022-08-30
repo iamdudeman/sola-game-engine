@@ -14,7 +14,11 @@ public class SpriteComponent implements Component {
   private SpriteKeyFrame spriteKeyFrame;
 
   public SpriteComponent(String spriteSheetId, String spriteId) {
-    spriteKeyFrame = new SpriteKeyFrame(spriteSheetId, spriteId, 0);
+    spriteKeyFrame = new SpriteKeyFrame(spriteSheetId, spriteId);
+  }
+
+  public SpriteComponent(SpriteKeyFrame spriteKeyFrame) {
+    this.spriteKeyFrame = spriteKeyFrame;
   }
 
   public String getSpriteSheetId() {
