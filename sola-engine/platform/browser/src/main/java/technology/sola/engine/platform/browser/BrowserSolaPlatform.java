@@ -64,6 +64,8 @@ public class BrowserSolaPlatform extends SolaPlatform {
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     JsUtils.setTitle(solaConfiguration.solaTitle());
     JsCanvasUtils.canvasInit(JsCanvasUtils.ID_SOLA_ANCHOR, solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight());
+    JsKeyboardUtils.init();
+    JsMouseUtils.init();
 
     JsCanvasUtils.observeCanvasResize((int width, int height) -> viewport.resize(width, height));
 
