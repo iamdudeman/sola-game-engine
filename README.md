@@ -21,6 +21,10 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
+* Figure out touch events for browser
+  * touchstart end and move all hard coded to MouseButton.Primary
+  * How to handle multitouch
+  * Should it have its own TouchInput instead of doing it with MouseInput?
 * Ability to ignore certain collision types
   * Tiles may be collidable but if they don't move at all don't check for collisions with each other
 * SwingSolaPlatform
