@@ -13,6 +13,8 @@
 * SwingPlatform aspect ratio MAINTAIN does not seem to be accounting for insets at the top
 * Investigate JavaFx library bundling (api vs implementation?)
 * Figure out proper fat jar setup so stuff isn't duplicated
+* investigate performance hits when moving mouse on browser canvas
+  * shouldn't cause slowdowns
 
 -----------------------------------------------------------------------------------------------------------------------
 
