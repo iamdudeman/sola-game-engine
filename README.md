@@ -21,6 +21,7 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
+* Ability to add offset for colliders
 * Figure out touch events for browser
   * touchstart end and move all hard coded to MouseButton.Primary
   * How to handle multitouch
