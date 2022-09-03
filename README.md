@@ -15,6 +15,7 @@
 * Figure out proper fat jar setup so stuff isn't duplicated
 * investigate performance hits when moving mouse on browser canvas
   * shouldn't cause slowdowns
+* audio stuff not running sometimes https://developer.chrome.com/blog/autoplay/#webaudio
 
 -----------------------------------------------------------------------------------------------------------------------
 
