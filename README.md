@@ -3,6 +3,18 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Bugs List
+* browser fat jar not working without consuming project also defining a couple teavm dependencies
+  * runtimeOnly("org.teavm:teavm-classlib:0.7.0")
+    runtimeOnly("org.teavm:teavm-extras-slf4j:0.7.0")
+* When browser tab loses focus the game can run in an indeterminate state
+  * Probably need some sort of safe "pause" functionality (maybe used when games are minimized in desktop as well
+* AABB vs Circle collision might not be working right if circle is fully contained by AABB
+* SwingPlatform aspect ratio MAINTAIN does not seem to be accounting for insets at the top
+* Investigate JavaFx library bundling (api vs implementation?)
+* Figure out proper fat jar setup so stuff isn't duplicated
+* investigate performance hits when moving mouse on browser canvas
+  * shouldn't cause slowdowns
+* audio stuff not running sometimes https://developer.chrome.com/blog/autoplay/#webaudio
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -11,7 +23,22 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
-
+* Ability to add offset for colliders
+* Figure out touch events for browser
+  * touchstart end and move all hard coded to MouseButton.Primary
+  * How to handle multitouch
+  * Should it have its own TouchInput instead of doing it with MouseInput?
+* Ability to ignore certain collision types
+  * Tiles may be collidable but if they don't move at all don't check for collisions with each other
+* SwingSolaPlatform
+  * Add ability to position window
+  * Add ability to set initial size of window
+* JavaFxPlatform
+  * Add ability to position window
+  * Add ability to set initial size of window
+* Refactor event system
+  * creating EventListeners is a bit inconvenient
+  * one class cannot implement multiple EventListeners
 * Assets
   * Consider adding JsonAsset and JsonAssetLoader
   * Consider implementing generic SpriteSheetAssetLoader and generic FontAssetLoader utilizing platform specific

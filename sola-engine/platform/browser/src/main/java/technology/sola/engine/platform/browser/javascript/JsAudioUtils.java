@@ -20,7 +20,7 @@ public class JsAudioUtils {
 
   private static class Scripts {
     static final String LOAD = """
-      var audioContext = new AudioContext();
+      window.audioContext = window.audioContext || new AudioContext();
       var request = new XMLHttpRequest();
 
       request.open("GET", path);
@@ -28,7 +28,7 @@ public class JsAudioUtils {
       request.onload = function() {
         let rawAudio = request.response;
 
-        audioContext.decodeAudioData(rawAudio, function(data) { callback(audioContext, data) });
+        window.audioContext.decodeAudioData(rawAudio, function(data) { callback(audioContext, data) });
       };
 
       request.send();
