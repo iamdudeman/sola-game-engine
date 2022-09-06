@@ -6,12 +6,11 @@
 * browser fat jar not working without consuming project also defining a couple teavm dependencies
   * runtimeOnly("org.teavm:teavm-classlib:0.7.0")
     runtimeOnly("org.teavm:teavm-extras-slf4j:0.7.0")
+* Figure out proper fat jar setup so stuff isn't duplicated
+* Investigate JavaFx library bundling (api vs implementation?)
 * When browser tab loses focus the game can run in an indeterminate state
   * Probably need some sort of safe "pause" functionality (maybe used when games are minimized in desktop as well
 * AABB vs Circle collision might not be working right if circle is fully contained by AABB
-* SwingPlatform aspect ratio MAINTAIN does not seem to be accounting for insets at the top
-* Investigate JavaFx library bundling (api vs implementation?)
-* Figure out proper fat jar setup so stuff isn't duplicated
 * investigate performance hits when moving mouse on browser canvas
   * shouldn't cause slowdowns
 * audio stuff not running sometimes https://developer.chrome.com/blog/autoplay/#webaudio
@@ -23,6 +22,7 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
+* Consider creating a Point2D class to use in cases where Vector2D is not needed
 * Ability to add offset for colliders
 * Figure out touch events for browser
   * touchstart end and move all hard coded to MouseButton.Primary

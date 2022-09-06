@@ -120,7 +120,7 @@ public class SwingSolaPlatform extends SolaPlatform {
     }, GameLoopEvent.class);
 
     jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    jFrame.addComponentListener(new ComponentAdapter() {
+    canvas.addComponentListener(new ComponentAdapter() {
       @Override
       public void componentResized(ComponentEvent e) {
         viewport.resize(e.getComponent().getWidth(), e.getComponent().getHeight());
