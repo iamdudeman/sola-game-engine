@@ -53,9 +53,11 @@
 * SolaGui Stuff
   * GuiElementContainer
     * Consider adding anchor support to Stream or a new container to be able to easily center things?
-* Research build tooling of some sort
-  * Take a main java file and build for a platform maybe?
-* Consider adding tool to rasterize fonts
+* Add tooling project back
+  * Could have a gradle task example for each tool similar to generateBrowserExampleHtmlAndJs?
+  * Consider adding tool to rasterize fonts
+  * Research build tooling of some sort
+    * Take a main java file and build for a platform maybe?
 * Unit Testing
   * Add easy way to test the ability of ECS components to be serializable
   * Add lots of missing tests :)
