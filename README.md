@@ -29,12 +29,6 @@
   * Should it have its own TouchInput instead of doing it with MouseInput?
 * Ability to ignore certain collision types
   * Tiles may be collidable but if they don't move at all don't check for collisions with each other
-* SwingSolaPlatform
-  * Add ability to position window
-  * Add ability to set initial size of window
-* JavaFxPlatform
-  * Add ability to position window
-  * Add ability to set initial size of window
 * Refactor event system
   * creating EventListeners is a bit inconvenient
   * one class cannot implement multiple EventListeners
