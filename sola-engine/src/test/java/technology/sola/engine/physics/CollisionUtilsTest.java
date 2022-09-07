@@ -125,8 +125,8 @@ class CollisionUtilsTest {
     @Test
     void whenCircleCenterInsideRectangle_shouldHaveCorrectNormal() {
       TransformComponent positionA = new TransformComponent(0, 0);
-      TransformComponent positionB = new TransformComponent(-2, -1);
-      ColliderComponent colliderA = ColliderComponent.aabb(5, 3);
+      TransformComponent positionB = new TransformComponent(10, 10);
+      ColliderComponent colliderA = ColliderComponent.aabb(50, 30);
       ColliderComponent colliderB = ColliderComponent.circle(3);
 
       CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, positionA, positionB, colliderA, colliderB);

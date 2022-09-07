@@ -82,7 +82,7 @@ public final class CollisionUtils {
     // Normal
     Vector2D diff = closestPointOnRectangle.subtract(circleCenter);
 
-    if (diff.magnitudeSq() > circle.getRadius() * circle.getRadius()) {
+    if (!isCircleCenterInsideRectangle && diff.magnitudeSq() > circle.getRadius() * circle.getRadius()) {
       return null;
     }
 

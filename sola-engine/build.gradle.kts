@@ -3,9 +3,7 @@ plugins {
 }
 
 dependencies {
-  // TODO get from maven when it is published there
-  api(files("libs/sola-ecs-2.0.4.jar"))
-  api(files("libs/sola-json-2.1.1.jar"))
+  api("com.github.iamdudeman:sola-ecs:2.0.5")
 }
 
 val fatJar = task("fatJar", type = Jar::class) {
