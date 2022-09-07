@@ -26,7 +26,6 @@ import technology.sola.engine.platform.javafx.assets.JavaFxSolaImageAssetLoader;
 import technology.sola.engine.platform.javafx.assets.JavaFxSpriteSheetAssetLoader;
 import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
 
-import java.awt.*;
 import java.util.function.Consumer;
 
 public class JavaFxSolaPlatform extends SolaPlatform {
