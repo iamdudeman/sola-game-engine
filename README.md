@@ -69,6 +69,8 @@
 * Research Virtual File System
 * Build pipeline
   * Generate engine and platform artifacts
+  * sources and javadoc jar
+  * use github pages and "Javadoc deploy" action for hosting javadocs
 * Engine GUI Editor (Sola Editor)
   * GuiElement stuff
   * Add more component controllers
