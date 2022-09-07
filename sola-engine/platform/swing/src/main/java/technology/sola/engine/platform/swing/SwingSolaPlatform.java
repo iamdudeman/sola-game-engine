@@ -36,6 +36,7 @@ public class SwingSolaPlatform extends SolaPlatform {
   private Canvas canvas;
   private Consumer<Renderer> beforeRender;
   private Consumer<Renderer> onRender;
+  private Dimension windowSize = null;
 
   // For graphics2d rendering
   private Graphics2D graphics2D;
@@ -46,6 +47,10 @@ public class SwingSolaPlatform extends SolaPlatform {
 
   public SwingSolaPlatform(boolean useSoftwareRendering) {
     this.useSoftwareRendering = useSoftwareRendering;
+  }
+
+  public void setWindowSize(int width, int height) {
+    this.windowSize = new Dimension(width, height);
   }
 
   @Override
@@ -104,6 +109,9 @@ public class SwingSolaPlatform extends SolaPlatform {
     canvas = new Canvas();
     canvas.setPreferredSize(new Dimension(solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight()));
     jFrame.getContentPane().add(canvas);
+    if (windowSize != null) {
+      jFrame.setPreferredSize(windowSize);
+    }
     jFrame.pack();
 
     canvas.createBufferStrategy(2);
@@ -134,6 +142,7 @@ public class SwingSolaPlatform extends SolaPlatform {
       }
     });
     jFrame.setTitle(solaConfiguration.solaTitle());
+    jFrame.setLocationRelativeTo(null);
 
     canvas.requestFocus();
     jFrame.setVisible(true);

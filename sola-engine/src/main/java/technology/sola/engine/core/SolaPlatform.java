@@ -2,8 +2,6 @@ package technology.sola.engine.core;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import technology.sola.ecs.io.Base64WorldIo;
-import technology.sola.ecs.io.WorldIo;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Layer;
@@ -23,7 +21,6 @@ public abstract class SolaPlatform {
   protected GameLoop gameLoop;
   protected Viewport viewport;
   protected EventHub solaEventHub;
-  protected WorldIo worldIo;
 
   public void play(Sola sola) {
     LOGGER.info("Using platform [{}]", this.getClass().getName());
@@ -41,10 +38,6 @@ public abstract class SolaPlatform {
 
   public Viewport getViewport() {
     return viewport;
-  }
-
-  public WorldIo getWorldSerializer() {
-    return worldIo;
   }
 
   public abstract void onKeyPressed(Consumer<KeyEvent> keyEventConsumer);
@@ -84,10 +77,6 @@ public abstract class SolaPlatform {
     return FixedUpdateGameLoop::new;
   }
 
-  protected WorldIo buildWorldSerializer() {
-    return new Base64WorldIo();
-  }
-
   protected MouseCoordinate adjustMouseForViewport(int x, int y) {
     return switch (getViewport().getAspectMode()) {
       case IGNORE_RESIZING -> new MouseCoordinate(x, y);
@@ -123,7 +112,6 @@ public abstract class SolaPlatform {
   }
 
   private void initComplete(Sola sola, SolaConfiguration solaConfiguration) {
-    this.worldIo = buildWorldSerializer();
     this.renderer = buildRenderer(solaConfiguration);
     this.gameLoop = buildGameLoop().create(
       solaEventHub,
