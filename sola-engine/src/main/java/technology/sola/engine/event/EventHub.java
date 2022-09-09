@@ -7,11 +7,7 @@ import java.util.Map;
 
 public class EventHub {
   @SuppressWarnings("rawtypes")
-  private final Map<Class<? extends Event>, List<EventListener>> eventListenersMap;
-
-  public EventHub() {
-    eventListenersMap = new HashMap<>();
-  }
+  private final Map<Class<? extends Event>, List<EventListener>> eventListenersMap = new HashMap<>();
 
   public <T extends Event> void add(Class<T> eventClass, EventListener<T> eventListener) {
     var eventListeners = eventListenersMap.computeIfAbsent(eventClass, key -> new ArrayList<>());

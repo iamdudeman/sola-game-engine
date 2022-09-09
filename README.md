@@ -29,9 +29,6 @@
   * Should it have its own TouchInput instead of doing it with MouseInput?
 * Ability to ignore certain collision types
   * Tiles may be collidable but if they don't move at all don't check for collisions with each other
-* Refactor event system
-  * creating EventListeners is a bit inconvenient
-  * one class cannot implement multiple EventListeners
 * Assets
   * Consider adding JsonAsset and JsonAssetLoader
   * Consider implementing generic SpriteSheetAssetLoader and generic FontAssetLoader utilizing platform specific
