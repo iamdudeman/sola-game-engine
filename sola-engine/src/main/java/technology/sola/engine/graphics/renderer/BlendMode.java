@@ -6,7 +6,7 @@ public enum BlendMode {
    */
   NO_BLENDING,
   /**
-   * Transparent if alpha < 255
+   * Transparent if {@code alpha < 255}
    */
   MASK,
 

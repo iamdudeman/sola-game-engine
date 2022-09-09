@@ -3,6 +3,16 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Bugs List
+* browser fat jar not working without consuming project also defining a couple teavm dependencies
+  * runtimeOnly("org.teavm:teavm-classlib:0.7.0")
+    runtimeOnly("org.teavm:teavm-extras-slf4j:0.7.0")
+* Figure out proper fat jar setup so stuff isn't duplicated
+* Investigate JavaFx library bundling (api vs implementation?)
+* When browser tab loses focus the game can run in an indeterminate state
+  * Probably need some sort of safe "pause" functionality (maybe used when games are minimized in desktop as well
+* investigate performance hits when moving mouse on browser canvas
+  * shouldn't cause slowdowns
+* audio stuff not running sometimes https://developer.chrome.com/blog/autoplay/#webaudio
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -11,7 +21,17 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
-
+* Consider creating a Point2D class to use in cases where Vector2D is not needed
+* Ability to add offset for colliders
+* Figure out touch events for browser
+  * touchstart end and move all hard coded to MouseButton.Primary
+  * How to handle multitouch
+  * Should it have its own TouchInput instead of doing it with MouseInput?
+* Ability to ignore certain collision types
+  * Tiles may be collidable but if they don't move at all don't check for collisions with each other
+* Refactor event system
+  * creating EventListeners is a bit inconvenient
+  * one class cannot implement multiple EventListeners
 * Assets
   * Consider adding JsonAsset and JsonAssetLoader
   * Consider implementing generic SpriteSheetAssetLoader and generic FontAssetLoader utilizing platform specific
@@ -27,9 +47,11 @@
 * SolaGui Stuff
   * GuiElementContainer
     * Consider adding anchor support to Stream or a new container to be able to easily center things?
-* Research build tooling of some sort
-  * Take a main java file and build for a platform maybe?
-  * would be later used in Engine GUI Editor
+* Add tooling project back
+  * Could have a gradle task example for each tool similar to generateBrowserExampleHtmlAndJs?
+  * Consider adding tool to rasterize fonts
+  * Research build tooling of some sort
+    * Take a main java file and build for a platform maybe?
 * Unit Testing
   * Add easy way to test the ability of ECS components to be serializable
   * Add lots of missing tests :)
@@ -43,31 +65,8 @@
 * Research Virtual File System
 * Build pipeline
   * Generate engine and platform artifacts
-* Engine GUI Editor (Sola Editor)
-  * GuiElement stuff
-  * Add more component controllers
-    * SpriteAnimator
-  * editor camera improvements
-    * add new entities to center of editor camera
-    * better camera controls than WSAD
-    * option to focus editor camera on selected entity?
-    * option to copy camera's transform for editor preview of it?
-  * Way to view all Systems and Components available
-  * Way to view various EventListeners?
-  * Allow Material assets to be updated
-  * Add sprite sheets by image ui
-    * Ability to update them later to add new sprite ids
-  * maybe show collider outline when collider component is active in editor?
-    * if not this a toggle to view all collider outlines
-  * build for platform
-    * JavaFx
-      * maybe include JRE
-    * Swing
-      * maybe include JRE
-    * Browser
-  * Create child + parent relationships for the entities?
-  * load additional components, systems and engine ui from external JAR
-    * maybe generate a gradle file to build the jar from inside the engine?
+  * sources and javadoc jar
+  * use github pages and "Javadoc deploy" action for hosting javadocs
 * Scripting language
   * How will that work with browser implementation?
   * Maybe a custom Domain Specific Language?

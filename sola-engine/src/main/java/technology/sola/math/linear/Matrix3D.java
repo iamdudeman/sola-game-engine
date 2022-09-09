@@ -4,21 +4,22 @@ import technology.sola.math.geometry.Rectangle;
 
 /**
  * Credit to OneLoneCoder for guiding through this implementation
- * https://github.com/OneLoneCoder/olcPixelGameEngine/blob/master/Videos/OneLoneCoder_PGE_SpriteTransforms.cpp
- * https://www.youtube.com/watch?v=zxwLN2blwbQ&ab_channel=javidx9
+ * @see <a href="https://github.com/OneLoneCoder/olcPixelGameEngine/blob/master/Videos/OneLoneCoder_PGE_SpriteTransforms.cpp">Video</a>
+ * @see <a href="https://www.youtube.com/watch?v=zxwLN2blwbQ&ab_channel=javidx9">Channel</a>
  */
 @SuppressWarnings("checkstyle:OneStatementPerLine")
 public class Matrix3D {
-  private float[][] matrix = new float[3][3];
+  private static final Matrix3D IDENTITY_MATRIX = new Matrix3D();
+  private final float[][] matrix = new float[3][3];
+
+  static {
+    IDENTITY_MATRIX.matrix[0][0] = 1f; IDENTITY_MATRIX.matrix[1][0] = 0f; IDENTITY_MATRIX.matrix[2][0] = 0f;
+    IDENTITY_MATRIX.matrix[0][1] = 0f; IDENTITY_MATRIX.matrix[1][1] = 1f; IDENTITY_MATRIX.matrix[2][1] = 0f;
+    IDENTITY_MATRIX.matrix[0][2] = 0f; IDENTITY_MATRIX.matrix[1][2] = 0f; IDENTITY_MATRIX.matrix[2][2] = 1f;
+  }
 
   public static Matrix3D identity() {
-    Matrix3D result = new Matrix3D();
-
-    result.matrix[0][0] = 1f; result.matrix[1][0] = 0f; result.matrix[2][0] = 0f;
-    result.matrix[0][1] = 0f; result.matrix[1][1] = 1f; result.matrix[2][1] = 0f;
-    result.matrix[0][2] = 0f; result.matrix[1][2] = 0f; result.matrix[2][2] = 1f;
-
-    return result;
+    return IDENTITY_MATRIX;
   }
 
   public static Matrix3D translate(float tx, float ty) {
@@ -32,6 +33,10 @@ public class Matrix3D {
   }
 
   public static Matrix3D scale(float sx, float sy) {
+    if (sx == 1 && sy == 1) {
+      return IDENTITY_MATRIX;
+    }
+
     Matrix3D result = new Matrix3D();
 
     result.matrix[0][0] = sx; result.matrix[1][0] = 0f; result.matrix[2][0] = 0f;

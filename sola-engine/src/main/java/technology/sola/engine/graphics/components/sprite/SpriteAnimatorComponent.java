@@ -35,12 +35,17 @@ public class SpriteAnimatorComponent implements Component {
   }
 
   public SpriteKeyFrame getCurrentFrame() {
-    long now = System.currentTimeMillis();
+    long duration = activeFrame.getDuration();
 
-    if (now - lastFrameChange > activeFrame.getDuration()) {
-      keyFrameIndex = (keyFrameIndex + 1) % activeAnimationKeyFrames.length;
-      activeFrame = activeAnimationKeyFrames[keyFrameIndex];
-      lastFrameChange = now;
+
+    if (duration != SpriteKeyFrame.HOLD) {
+      long now = System.currentTimeMillis();
+
+      if (now - lastFrameChange > duration) {
+        keyFrameIndex = (keyFrameIndex + 1) % activeAnimationKeyFrames.length;
+        activeFrame = activeAnimationKeyFrames[keyFrameIndex];
+        lastFrameChange = now;
+      }
     }
 
     return activeFrame;

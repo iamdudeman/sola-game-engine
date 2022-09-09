@@ -33,6 +33,8 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   private Canvas canvas;
   private GraphicsContext graphicsContext;
   private WritableImage writableImage;
+  private Double windowWidth;
+  private Double windowHeight;
 
   public JavaFxSolaPlatform() {
   }
@@ -41,6 +43,11 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     if (JavaFxSolaPlatform.isPlatformStartupNeeded) {
       JavaFxSolaPlatform.isPlatformStartupNeeded = isPlatformStartupNeeded;
     }
+  }
+
+  public void setWindowSize(int width, int height) {
+    windowWidth = (double)width;
+    windowHeight = (double)height;
   }
 
   @Override
@@ -116,6 +123,12 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       stage.setOnCloseRequest(event -> solaEventHub.emit(GameLoopEvent.STOP));
       stage.setTitle(solaConfiguration.solaTitle());
       stage.setScene(scene);
+      if (windowWidth != null) {
+        stage.setWidth(windowWidth);
+      }
+      if (windowHeight != null) {
+        stage.setHeight(windowHeight);
+      }
       stage.show();
 
       solaPlatformInitialization.finish();

@@ -5,6 +5,9 @@ import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;
 
 public class JsKeyboardUtils {
+  @JSBody(script = Scripts.INIT)
+  public static native void init();
+
   @JSBody(params = {"eventName", "callback"}, script = Scripts.KEY_EVENT)
   public static native void keyEventListener(String eventName, KeyEventCallback callback);
 
@@ -17,23 +20,37 @@ public class JsKeyboardUtils {
   }
 
   private static class Scripts {
-    private static final String KEY_EVENT = """
-      window.keyboardListeners = window.keyboardListeners || {};
+    // TODO remove duplication of code here
+    private static final String INIT = """
+      window.keyboardListeners = {
+        keydown: [],
+        keyup: [],
+      };
 
-      if (window.keyboardListeners[eventName]) {
-        window.removeEventListener(eventName, window.keyboardListeners[eventName], false);
-      }
-
-      window.keyboardListeners[eventName] = function(event) {
+      solaCanvas.addEventListener("keydown", function (event) {
         if (event.target === window.solaCanvas) {
           event.stopPropagation();
           event.preventDefault();
 
-          callback(event.keyCode);
+          window.keyboardListeners["keydown"].forEach(function(callback) {
+            callback(event.keyCode);
+          });
         }
-      };
+      }, false);
+      solaCanvas.addEventListener("keyup", function (event) {
+        if (event.target === window.solaCanvas) {
+          event.stopPropagation();
+          event.preventDefault();
 
-      window.addEventListener(eventName, window.keyboardListeners[eventName], false);
+          window.keyboardListeners["keyup"].forEach(function(callback) {
+            callback(event.keyCode);
+          });
+        }
+      }, false);
+      """;
+
+    private static final String KEY_EVENT = """
+      window.keyboardListeners[eventName].push(callback);
       """;
   }
 }
