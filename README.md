@@ -22,6 +22,8 @@
 
 ## TODO List
 * Consider creating a Point2D class to use in cases where Vector2D is not needed
+  * or, does Vector2D need the isNegativeZero check? Could it maybe be replaced with adding positive zero?
+  * Can Vector2D be a record?
 * Ability to add offset for colliders
 * Figure out touch events for browser
   * touchstart end and move all hard coded to MouseButton.Primary
@@ -50,7 +52,6 @@
   * Research build tooling of some sort
     * Take a main java file and build for a platform maybe?
 * Unit Testing
-  * Add easy way to test the ability of ECS components to be serializable
   * Add lots of missing tests :)
 * Browser Platform
   * Consider web worker for game loop
