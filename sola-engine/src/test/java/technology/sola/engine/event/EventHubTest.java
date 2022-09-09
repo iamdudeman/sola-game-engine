@@ -51,20 +51,10 @@ class EventHubTest {
 
     @Override
     public void onEvent(TestEvent event) {
-      result = event.getMessage();
+      result = event.message();
     }
   }
 
-  private static class TestEvent implements Event<String> {
-    private final String message;
-
-    public TestEvent(String message) {
-      this.message = message;
-    }
-
-    @Override
-    public String getMessage() {
-      return message;
-    }
+  private record TestEvent(String message) implements Event {
   }
 }

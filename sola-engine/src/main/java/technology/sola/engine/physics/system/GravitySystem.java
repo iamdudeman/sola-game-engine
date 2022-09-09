@@ -40,7 +40,7 @@ public class GravitySystem extends EcsSystem implements EventListener<CollisionM
 
   @Override
   public void onEvent(CollisionManifoldEvent event) {
-    CollisionManifold payload = event.getMessage();
+    CollisionManifold payload = event.collisionManifold();
 
     if (payload.normal().y > 0) {
       DynamicBodyComponent dynamicBodyComponent = payload.entityA().getComponent(DynamicBodyComponent.class);

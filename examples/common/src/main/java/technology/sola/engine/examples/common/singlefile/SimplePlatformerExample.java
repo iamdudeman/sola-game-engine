@@ -66,7 +66,7 @@ public class SimplePlatformerExample extends Sola {
 
     @Override
     public void onEvent(CollisionManifoldEvent event) {
-      CollisionManifold collisionManifold = event.getMessage();
+      CollisionManifold collisionManifold = event.collisionManifold();
 
       collisionManifold.conditionallyResolveCollision(checkForPlayer, checkForFinalBlock, collisionResolver);
     }

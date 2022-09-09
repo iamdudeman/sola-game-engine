@@ -75,8 +75,8 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem implements Event
   }
 
   @Override
-  public void onEvent(CollisionManifoldEvent eventObject) {
-    collisionManifolds.add(eventObject.getMessage());
+  public void onEvent(CollisionManifoldEvent event) {
+    collisionManifolds.add(event.collisionManifold());
   }
 
   private void applyImpulse() {

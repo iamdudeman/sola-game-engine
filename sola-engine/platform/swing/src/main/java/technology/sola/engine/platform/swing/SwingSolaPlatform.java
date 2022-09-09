@@ -122,7 +122,7 @@ public class SwingSolaPlatform extends SolaPlatform {
     }
 
     solaEventHub.add(GameLoopEvent.class, event -> {
-      if (event.getMessage() == GameLoopEventType.STOPPED) {
+      if (event.type() == GameLoopEventType.STOPPED) {
         jFrame.dispose();
       }
     });
