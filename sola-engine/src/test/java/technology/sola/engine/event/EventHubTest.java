@@ -39,7 +39,6 @@ class EventHubTest {
     assertTestListener(testEventListener, null);
     assertTestListener(testEventListenerTwo, null);
     assertTestListener(testEventListenerThree, null);
-
   }
 
   private static void assertTestListener(TestEventListener testEventListener, String expected) {
