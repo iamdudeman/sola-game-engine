@@ -22,6 +22,8 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
+* Add ability to disable input options maybe in SolaConfiguration?
+  * If game won't have mouse support for example no reason binding listeners
 * Ability to add offset for colliders
 * Figure out touch events for browser
   * touchstart end and move all hard coded to MouseButton.Primary
