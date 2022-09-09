@@ -30,7 +30,7 @@ public abstract class GameLoop implements Runnable, EventListener<GameLoopEvent>
     this.deltaTime = 1f / targetUpdatesPerSecond;
     this.isRestingAllowed = isRestingAllowed;
 
-    eventHub.add(this, GameLoopEvent.class);
+    eventHub.add(GameLoopEvent.class, this);
   }
 
   @Override

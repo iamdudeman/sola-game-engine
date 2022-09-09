@@ -84,11 +84,11 @@ public class ExampleLauncherSola extends Sola {
     );
 
     exampleLaunchButton.setOnAction(() -> {
-      eventHub.add(event -> {
+      eventHub.add(GameLoopEvent.class, event -> {
         if (event.getMessage() == GameLoopEventType.STOPPED) {
           solaPlatform.play(solaSupplier.get());
         }
-      }, GameLoopEvent.class);
+      });
 
       eventHub.emit(GameLoopEvent.STOP);
     });

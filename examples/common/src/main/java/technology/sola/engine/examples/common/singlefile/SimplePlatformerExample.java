@@ -45,7 +45,7 @@ public class SimplePlatformerExample extends Sola {
 
     solaGraphics.setRenderDebug(true);
 
-    eventHub.add(new GameDoneEventListener(), CollisionManifoldEvent.class);
+    eventHub.add(CollisionManifoldEvent.class, new GameDoneEventListener());
   }
 
   @Override
@@ -61,9 +61,9 @@ public class SimplePlatformerExample extends Sola {
     private final BiConsumer<Entity, Entity> collisionResolver = (player, finalBlock) ->
       solaEcs.getWorld().findEntityByName("confetti").ifPresent(entity -> {
         entity.setDisabled(false);
-        eventHub.remove(this, CollisionManifoldEvent.class);
+        eventHub.remove(CollisionManifoldEvent.class, this);
       });
-    
+
     @Override
     public void onEvent(CollisionManifoldEvent event) {
       CollisionManifold collisionManifold = event.getMessage();

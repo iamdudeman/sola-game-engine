@@ -21,8 +21,8 @@ public class SolaPhysics {
   public static SolaPhysics createInstance(EventHub eventHub, SolaEcs solaEcs) {
     SolaPhysics solaPhysics = new SolaPhysics(eventHub);
 
-    eventHub.add(solaPhysics.gravitySystem, CollisionManifoldEvent.class);
-    eventHub.add(solaPhysics.impulseCollisionResolutionSystem, CollisionManifoldEvent.class);
+    eventHub.add(CollisionManifoldEvent.class, solaPhysics.gravitySystem);
+    eventHub.add(CollisionManifoldEvent.class, solaPhysics.impulseCollisionResolutionSystem);
 
     solaEcs.addSystems(
       solaPhysics.gravitySystem,

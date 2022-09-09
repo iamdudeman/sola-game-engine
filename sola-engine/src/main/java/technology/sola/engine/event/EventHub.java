@@ -7,28 +7,23 @@ import java.util.Map;
 
 public class EventHub {
   @SuppressWarnings("rawtypes")
-  private static final List<EventListener> EMPTY = new ArrayList<>();
-  @SuppressWarnings("rawtypes")
   private final Map<Class<? extends Event>, List<EventListener>> eventListenersMap;
 
   public EventHub() {
     eventListenersMap = new HashMap<>();
   }
 
-  public <T extends Event<?>> void add(EventListener<T> eventListener, Class<T> eventClass) {
-    var eventListeners = eventListenersMap.getOrDefault(eventClass, new ArrayList<>());
-    var newEventListeners = new ArrayList<>(eventListeners);
+  public <T extends Event<?>> void add(Class<T> eventClass, EventListener<T> eventListener) {
+    var eventListeners = eventListenersMap.computeIfAbsent(eventClass, key -> new ArrayList<>());
 
-    newEventListeners.add(eventListener);
-
-    eventListenersMap.put(eventClass, newEventListeners);
+    eventListeners.add(eventListener);
   }
 
-  public <T extends Event<?>> void remove(EventListener<T> eventListener, Class<T> eventClass) {
+  public <T extends Event<?>> void remove(Class<T> eventClass, EventListener<T> eventListener) {
     var eventListeners = eventListenersMap.get(eventClass);
 
     if (eventListeners != null) {
-      eventListenersMap.put(eventClass, eventListeners.stream().filter(eventListenerPresent -> eventListenerPresent != eventListener).toList());
+      eventListeners.remove(eventListener);
     }
   }
 
@@ -38,10 +33,12 @@ public class EventHub {
 
   @SuppressWarnings("unchecked")
   public <T extends Event<?>> void emit(T event) {
-    var eventListeners = eventListenersMap.getOrDefault(event.getClass(), EMPTY);
+    var eventListeners = eventListenersMap.get(event.getClass());
 
-    for (var eventListener : eventListeners) {
-      eventListener.onEvent(event);
+    if (eventListeners != null) {
+      for (var eventListener : eventListeners) {
+        eventListener.onEvent(event);
+      }
     }
   }
 }

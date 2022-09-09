@@ -12,10 +12,10 @@ class EventHubTest {
     TestEventListener testEventListenerThree = new TestEventListener();
     EventHub eventHub = new EventHub();
 
-    eventHub.add(testEventListener, TestEvent.class);
-    eventHub.add(testEventListenerTwo, TestEvent.class);
-    eventHub.add(testEventListenerThree, TestEvent.class);
-    eventHub.remove(testEventListenerTwo, TestEvent.class);
+    eventHub.add(TestEvent.class, testEventListener);
+    eventHub.add(TestEvent.class, testEventListenerTwo);
+    eventHub.add(TestEvent.class, testEventListenerThree);
+    eventHub.remove(TestEvent.class, testEventListenerTwo);
     eventHub.emit(new TestEvent("test_message"));
 
     assertTestListener(testEventListener, "test_message");
@@ -30,9 +30,9 @@ class EventHubTest {
     TestEventListener testEventListenerThree = new TestEventListener();
     EventHub eventHub = new EventHub();
 
-    eventHub.add(testEventListener, TestEvent.class);
-    eventHub.add(testEventListenerTwo, TestEvent.class);
-    eventHub.add(testEventListenerThree, TestEvent.class);
+    eventHub.add(TestEvent.class, testEventListener);
+    eventHub.add(TestEvent.class, testEventListenerTwo);
+    eventHub.add(TestEvent.class, testEventListenerThree);
     eventHub.off(TestEvent.class);
     eventHub.emit(new TestEvent("test_message"));
 
