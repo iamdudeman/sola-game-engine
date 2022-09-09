@@ -83,15 +83,15 @@ public abstract class SolaPlatform {
       case STRETCH -> {
         Vector2D ratios = calculateMouseAdjustmentRatios();
 
-        yield new MouseCoordinate(Math.round(x * ratios.x), Math.round(y * ratios.y));
+        yield new MouseCoordinate(Math.round(x * ratios.x()), Math.round(y * ratios.y()));
       }
       case MAINTAIN -> {
         AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
         Vector2D ratios = calculateMouseAdjustmentRatios();
 
         yield new MouseCoordinate(
-          Math.round(x * ratios.x) - Math.round(aspectRatioSizing.x() * ratios.x),
-          Math.round(y * ratios.y) - Math.round(aspectRatioSizing.y() * ratios.y)
+          Math.round(x * ratios.x()) - Math.round(aspectRatioSizing.x() * ratios.x()),
+          Math.round(y * ratios.y()) - Math.round(aspectRatioSizing.y() * ratios.y())
         );
       }
     };
@@ -105,6 +105,7 @@ public abstract class SolaPlatform {
     int viewPortWidth = aspectRatioSizing.width();
     int viewPortHeight = aspectRatioSizing.height();
 
+    // TODO refactor out this division if possible
     float ratioX = rendererWidth / (float) viewPortWidth;
     float ratioY = rendererHeight / (float) viewPortHeight;
 

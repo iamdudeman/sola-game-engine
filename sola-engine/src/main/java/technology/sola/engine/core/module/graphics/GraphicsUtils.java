@@ -14,7 +14,7 @@ public class GraphicsUtils {
     Vector2D entityTranslation = cameraTranslationTransform.forward(entityTransform.getX(), entityTransform.getY());
 
     return new TransformComponent(
-      entityTranslation.x, entityTranslation.y, entityScale.x, entityScale.y
+      entityTranslation.x(), entityTranslation.y(), entityScale.x(), entityScale.y()
     );
   }
 }

@@ -38,7 +38,7 @@ public class SolaGraphics {
       .multiply(Matrix3D.scale(cameraTransform.getScaleX(), cameraTransform.getScaleY()))
       .invert(); // TODO this invert is costly so clean this up later if possible
 
-    return transform.forward(screenCoordinate.x, screenCoordinate.y);
+    return transform.forward(screenCoordinate.x(), screenCoordinate.y());
   }
 
   public void render() {

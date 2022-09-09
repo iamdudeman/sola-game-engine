@@ -3,16 +3,18 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Bugs List
-* browser fat jar not working without consuming project also defining a couple teavm dependencies
-  * runtimeOnly("org.teavm:teavm-classlib:0.7.0")
-    runtimeOnly("org.teavm:teavm-extras-slf4j:0.7.0")
-* Figure out proper fat jar setup so stuff isn't duplicated
-* Investigate JavaFx library bundling (api vs implementation?)
+* jar stuff
+  * browser fat jar not working without consuming project also defining a couple teavm dependencies
+    * runtimeOnly("org.teavm:teavm-classlib:0.7.0")
+      runtimeOnly("org.teavm:teavm-extras-slf4j:0.7.0")
+  * Figure out proper fat jar setup so stuff isn't duplicated
+  * Investigate JavaFx library bundling (api vs implementation?)
 * When browser tab loses focus the game can run in an indeterminate state
   * Probably need some sort of safe "pause" functionality (maybe used when games are minimized in desktop as well
 * investigate performance hits when moving mouse on browser canvas
   * shouldn't cause slowdowns
 * audio stuff not running sometimes https://developer.chrome.com/blog/autoplay/#webaudio
+  * maybe add a "play" overlay of some sort?
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -21,19 +23,29 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
-* Consider creating a Point2D class to use in cases where Vector2D is not needed
-* Ability to add offset for colliders
-* Figure out touch events for browser
-  * touchstart end and move all hard coded to MouseButton.Primary
-  * How to handle multitouch
-  * Should it have its own TouchInput instead of doing it with MouseInput?
-* Ability to ignore certain collision types
-  * Tiles may be collidable but if they don't move at all don't check for collisions with each other
+* Add ability to disable input options maybe in SolaConfiguration?
+  * If game won't have mouse support for example no reason binding listeners
+* ColliderComponent
+  * Ability to add offset for colliders
+  * Ability to ignore certain collision types
+    * Tiles may be collidable but if they don't move at all don't check for collisions with each other
+  * Consider using a constructor instead of static methods
+  * Confirm if Bounding rect works correctly for ColliderComponent
 * Assets
   * Consider adding JsonAsset and JsonAssetLoader
   * Consider implementing generic SpriteSheetAssetLoader and generic FontAssetLoader utilizing platform specific
     JsonAssetLoader and SolaImageAssetLoader
     * Maybe pass AssetLoaderProvider to each AssetLoader instance to make this easier
+* Add tooling project back
+  * Could have a gradle task example for each tool similar to generateBrowserExampleHtmlAndJs?
+  * Consider adding tool to rasterize fonts
+  * Research build tooling of some sort
+    * Take a main java file and build for a platform maybe?
+* Figure out how to handle TouchInput
+  * Primarily for browser
+  * touchstart end and move all hard coded to MouseButton.Primary
+  * How to handle multitouch
+  * Should it have its own TouchInput instead of doing it with MouseInput?
 * Consider adding a "debug console"
   * While open can toggle things like render debug outlines and debug spacial hashmap stuff
   * Could also maybe allow adding custom commands
@@ -44,13 +56,7 @@
 * SolaGui Stuff
   * GuiElementContainer
     * Consider adding anchor support to Stream or a new container to be able to easily center things?
-* Add tooling project back
-  * Could have a gradle task example for each tool similar to generateBrowserExampleHtmlAndJs?
-  * Consider adding tool to rasterize fonts
-  * Research build tooling of some sort
-    * Take a main java file and build for a platform maybe?
 * Unit Testing
-  * Add easy way to test the ability of ECS components to be serializable
   * Add lots of missing tests :)
 * Browser Platform
   * Consider web worker for game loop

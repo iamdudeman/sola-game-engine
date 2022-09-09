@@ -18,11 +18,11 @@ public class Rectangle {
    * @param max  the bottom, right point of the rectangle
    */
   public Rectangle(Vector2D min, Vector2D max) {
-    if (max.x <= min.x) {
+    if (max.x() <= min.x()) {
       throw new IllegalArgumentException("max.x cannot be less than min.x");
     }
 
-    if (max.y <= min.y) {
+    if (max.y() <= min.y()) {
       throw new IllegalArgumentException("max.y cannot be less than min.y");
     }
 
@@ -54,7 +54,7 @@ public class Rectangle {
    * @return the width
    */
   public float getWidth() {
-    return max.subtract(min).x;
+    return max.subtract(min).x();
   }
 
   /**
@@ -63,10 +63,10 @@ public class Rectangle {
    * @return the height
    */
   public float getHeight() {
-    return max.subtract(min).y;
+    return max.subtract(min).y();
   }
 
   public boolean contains(Vector2D point) {
-    return point.x >= min.x && point.x <= max.x && point.y >= min.y && point.y <= max.y;
+    return point.x() >= min.x() && point.x() <= max.x() && point.y() >= min.y() && point.y() <= max.y();
   }
 }

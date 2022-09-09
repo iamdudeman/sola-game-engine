@@ -63,8 +63,8 @@ public class ParticleSystem extends EcsSystem {
 
           for (int i = 0; i < particleEmitterComponent.getParticlesPerEmit(); i++) {
 
-            float xVel = getRandomFloat(minVel.x, maxVel.x);
-            float yVel = getRandomFloat(minVel.y, maxVel.y);
+            float xVel = getRandomFloat(minVel.x(), maxVel.x());
+            float yVel = getRandomFloat(minVel.y(), maxVel.y());
             float size = getRandomFloat(particleEmitterComponent.getParticleMinSize(), particleEmitterComponent.getParticleMaxSize());
             float life = getRandomFloat(particleEmitterComponent.getParticleMinLife(), particleEmitterComponent.getParticleMaxLife());
 

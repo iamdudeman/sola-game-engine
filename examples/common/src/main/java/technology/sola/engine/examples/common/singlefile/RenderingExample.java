@@ -167,7 +167,7 @@ public class RenderingExample extends Sola {
       new Vector2D(200, 20)
     ).forEach(vector2D -> world.createEntity(
       new LayerComponent("moving_stuff"),
-      new TransformComponent(vector2D.x, vector2D.y, movingEntity),
+      new TransformComponent(vector2D.x(), vector2D.y(), movingEntity),
       new RectangleRendererComponent(Color.RED))
     );
 

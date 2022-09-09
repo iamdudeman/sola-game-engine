@@ -72,7 +72,7 @@ public class MouseAndCameraExample extends Sola {
         Vector2D worldPosition = solaGraphics.screenToWorldCoordinate(mousePosition);
 
         world.createEntity()
-          .addComponent(new TransformComponent(worldPosition.x, worldPosition.y, 10, 10))
+          .addComponent(new TransformComponent(worldPosition.x(), worldPosition.y(), 10, 10))
           .addComponent(new RectangleRendererComponent(colors[colorIndex]));
       }
 

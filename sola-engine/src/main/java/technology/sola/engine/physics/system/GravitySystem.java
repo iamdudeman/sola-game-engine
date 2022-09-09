@@ -52,13 +52,13 @@ public class GravitySystem extends EcsSystem {
     if (isActive()) {
       CollisionManifold payload = event.collisionManifold();
 
-      if (payload.normal().y > 0) {
+      if (payload.normal().y() > 0) {
         DynamicBodyComponent dynamicBodyComponent = payload.entityA().getComponent(DynamicBodyComponent.class);
 
         if (dynamicBodyComponent != null) {
           dynamicBodyComponent.setGrounded(true);
         }
-      } else if (payload.normal().y < 0) {
+      } else if (payload.normal().y() < 0) {
         DynamicBodyComponent dynamicBodyComponent = payload.entityB().getComponent(DynamicBodyComponent.class);
 
         if (dynamicBodyComponent != null) {

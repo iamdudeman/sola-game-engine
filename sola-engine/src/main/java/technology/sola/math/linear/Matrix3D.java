@@ -113,31 +113,31 @@ public class Matrix3D {
     // top left
     Vector2D point = forward(0, 0);
 
-    float sx = point.x;
-    float ex = point.x;
-    float sy = point.y;
-    float ey = point.y;
+    float sx = point.x();
+    float ex = point.x();
+    float sy = point.y();
+    float ey = point.y();
 
     // bottom right
     point = forward(width, height);
-    sx = Math.min(sx, point.x);
-    sy = Math.min(sy, point.y);
-    ex = Math.max(ex, point.x);
-    ey = Math.max(ey, point.y);
+    sx = Math.min(sx, point.x());
+    sy = Math.min(sy, point.y());
+    ex = Math.max(ex, point.x());
+    ey = Math.max(ey, point.y());
 
     // top right
     point = forward(width, 0);
-    sx = Math.min(sx, point.x);
-    sy = Math.min(sy, point.y);
-    ex = Math.max(ex, point.x);
-    ey = Math.max(ey, point.y);
+    sx = Math.min(sx, point.x());
+    sy = Math.min(sy, point.y());
+    ex = Math.max(ex, point.x());
+    ey = Math.max(ey, point.y());
 
     // bottom left
     point = forward(0, height);
-    sx = Math.min(sx, point.x);
-    sy = Math.min(sy, point.y);
-    ex = Math.max(ex, point.x);
-    ey = Math.max(ey, point.y);
+    sx = Math.min(sx, point.x());
+    sy = Math.min(sy, point.y());
+    ex = Math.max(ex, point.x());
+    ey = Math.max(ey, point.y());
 
     return new Rectangle(new Vector2D(sx, sy), new Vector2D(ex, ey));
   }

@@ -63,19 +63,19 @@ public final class CollisionUtils {
 
     if (isCircleCenterInsideRectangle) {
       // Find the closest edge since that is the closest point on rectangle for the normal
-      float minDistanceX = circleCenter.x - rectangle.getMin().x;
-      float maxDistanceX = rectangle.getMax().x - circleCenter.x;
-      float minDistanceY = circleCenter.y - rectangle.getMin().y;
-      float maxDistanceY = rectangle.getMax().y - circleCenter.y;
+      float minDistanceX = circleCenter.x() - rectangle.getMin().x();
+      float maxDistanceX = rectangle.getMax().x() - circleCenter.x();
+      float minDistanceY = circleCenter.y() - rectangle.getMin().y();
+      float maxDistanceY = rectangle.getMax().y() - circleCenter.y();
 
       if (maxDistanceY < minDistanceY && maxDistanceY < maxDistanceX && maxDistanceY < minDistanceX) {
-        closestPointOnRectangle = new Vector2D(circleCenter.x, rectangle.getMax().y);
+        closestPointOnRectangle = new Vector2D(circleCenter.x(), rectangle.getMax().y());
       } else if (minDistanceY < maxDistanceX && minDistanceY < minDistanceX) {
-        closestPointOnRectangle = new Vector2D(circleCenter.x, rectangle.getMin().y);
+        closestPointOnRectangle = new Vector2D(circleCenter.x(), rectangle.getMin().y());
       } else if (maxDistanceX < minDistanceX) {
-        closestPointOnRectangle = new Vector2D(rectangle.getMax().x, circleCenter.y);
+        closestPointOnRectangle = new Vector2D(rectangle.getMax().x(), circleCenter.y());
       } else {
-        closestPointOnRectangle = new Vector2D(rectangle.getMin().x, circleCenter.y);
+        closestPointOnRectangle = new Vector2D(rectangle.getMin().x(), circleCenter.y());
       }
     }
 
@@ -109,18 +109,18 @@ public final class CollisionUtils {
     Vector2D posDiffMin = bBoxMin.subtract(aBoxMin);
     Vector2D posDiffMax = bBoxMax.subtract(aBoxMax);
 
-    float aWidth = aBoxMax.x - aBoxMin.x;
-    float bWidth = bBoxMax.x - bBoxMin.x;
-    float xAxisOverlap = (aWidth + bWidth - (Math.abs(posDiffMin.x) + Math.abs(posDiffMax.x))) / 2;
+    float aWidth = aBoxMax.x() - aBoxMin.x();
+    float bWidth = bBoxMax.x() - bBoxMin.x();
+    float xAxisOverlap = (aWidth + bWidth - (Math.abs(posDiffMin.x()) + Math.abs(posDiffMax.x()))) / 2;
 
     // No collision if no x overlap
     if (xAxisOverlap <= 0) {
       return null;
     }
 
-    float aHeight = aBoxMax.y - aBoxMin.y;
-    float bHeight = bBoxMax.y - bBoxMin.y;
-    float yAxisOverlap = (aHeight + bHeight - (Math.abs(posDiffMin.y) + Math.abs(posDiffMax.y))) / 2;
+    float aHeight = aBoxMax.y() - aBoxMin.y();
+    float bHeight = bBoxMax.y() - bBoxMin.y();
+    float yAxisOverlap = (aHeight + bHeight - (Math.abs(posDiffMin.y()) + Math.abs(posDiffMax.y()))) / 2;
 
     // No collision if no y overlap
     if (yAxisOverlap <= 0) {
@@ -133,13 +133,13 @@ public final class CollisionUtils {
 
     if (xAxisOverlap < yAxisOverlap) {
       penetration = xAxisOverlap;
-      if (posDiffMin.x > 0)
+      if (posDiffMin.x() > 0)
         normal = new Vector2D(1, 0);
       else
         normal = new Vector2D(-1, 0);
     } else {
       penetration = yAxisOverlap;
-      if (posDiffMin.y > 0)
+      if (posDiffMin.y() > 0)
         normal = new Vector2D(0, 1);
       else
         normal = new Vector2D(0, -1);
