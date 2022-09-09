@@ -180,15 +180,15 @@ public class SimplePlatformerExample extends Sola {
         .forEach(view -> {
           DynamicBodyComponent dynamicBodyComponent = view.c2();
 
-          if (keyboardInput.isKeyHeld(Key.D) && dynamicBodyComponent.getVelocity().x < 150) {
+          if (keyboardInput.isKeyHeld(Key.D) && dynamicBodyComponent.getVelocity().x() < 150) {
             dynamicBodyComponent.applyForce(150, 0);
           }
-          if (keyboardInput.isKeyHeld(Key.A) && dynamicBodyComponent.getVelocity().x > -150) {
+          if (keyboardInput.isKeyHeld(Key.A) && dynamicBodyComponent.getVelocity().x() > -150) {
             dynamicBodyComponent.applyForce(-150, 0);
           }
           if (dynamicBodyComponent.isGrounded() && keyboardInput.isKeyHeld(Key.SPACE)) {
             dynamicBodyComponent.applyForce(0, -3000);
-          } else if (dynamicBodyComponent.getVelocity().y > 0) {
+          } else if (dynamicBodyComponent.getVelocity().y() > 0) {
             dynamicBodyComponent.applyForce(0, 1.5f * solaPhysics.getGravitySystem().getGravityConstant() * dynamicBodyComponent.getMaterial().getMass());
           }
         });

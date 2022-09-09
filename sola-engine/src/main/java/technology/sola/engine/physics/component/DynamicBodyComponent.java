@@ -59,8 +59,8 @@ public class DynamicBodyComponent implements Component {
    */
   public void applyForce(Vector2D forceVector) {
     // TODO if isKinematic should this do nothing?
-    this.forceX += forceVector.x;
-    this.forceY += forceVector.y;
+    this.forceX += forceVector.x();
+    this.forceY += forceVector.y();
   }
 
   /**

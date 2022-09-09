@@ -29,8 +29,8 @@ public final class SolaMath {
    * @return the clamped {@code Vector2D}
    */
   public static Vector2D clamp(Vector2D min, Vector2D max, Vector2D value) {
-    float closestX = SolaMath.clamp(min.x, max.x, value.x);
-    float closestY = SolaMath.clamp(min.y, max.y, value.y);
+    float closestX = SolaMath.clamp(min.x(), max.x(), value.x());
+    float closestY = SolaMath.clamp(min.y(), max.y(), value.y());
 
     return new Vector2D(closestX, closestY);
   }

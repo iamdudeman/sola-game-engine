@@ -13,6 +13,7 @@
 * investigate performance hits when moving mouse on browser canvas
   * shouldn't cause slowdowns
 * audio stuff not running sometimes https://developer.chrome.com/blog/autoplay/#webaudio
+  * maybe add a "play" overlay of some sort?
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -21,9 +22,6 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
-* Consider creating a Point2D class to use in cases where Vector2D is not needed
-  * or, does Vector2D need the isNegativeZero check? Could it maybe be replaced with adding positive zero?
-  * Can Vector2D be a record?
 * Ability to add offset for colliders
 * Figure out touch events for browser
   * touchstart end and move all hard coded to MouseButton.Primary

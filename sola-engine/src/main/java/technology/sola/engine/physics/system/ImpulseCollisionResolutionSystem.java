@@ -167,13 +167,13 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
 
       Vector2D aPosition = new Vector2D(entityA.transformComponent.getX(), entityA.transformComponent.getY())
         .subtract(correction.scalar(inverseMassA));
-      entityA.transformComponent.setX(aPosition.x);
-      entityA.transformComponent.setY(aPosition.y);
+      entityA.transformComponent.setX(aPosition.x());
+      entityA.transformComponent.setY(aPosition.y());
 
       Vector2D bPosition = new Vector2D(entityB.transformComponent.getX(), entityB.transformComponent.getY())
         .add(correction.scalar(inverseMassB));
-      entityB.transformComponent.setX(bPosition.x);
-      entityB.transformComponent.setY(bPosition.y);
+      entityB.transformComponent.setX(bPosition.x());
+      entityB.transformComponent.setY(bPosition.y());
     }
   }
 
