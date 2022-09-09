@@ -113,11 +113,11 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       graphicsContext = canvas.getGraphicsContext2D();
       writableImage = new WritableImage(rendererWidth, rendererHeight);
 
-      solaEventHub.add(event -> {
-        if (event.getMessage() == GameLoopEventType.STOPPED) {
+      solaEventHub.add(GameLoopEvent.class, event -> {
+        if (event.type() == GameLoopEventType.STOPPED) {
           stage.close();
         }
-      }, GameLoopEvent.class);
+      });
 
       stage.setOnShown(event -> canvas.requestFocus());
       stage.setOnCloseRequest(event -> solaEventHub.emit(GameLoopEvent.STOP));

@@ -5,13 +5,12 @@ import org.slf4j.LoggerFactory;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopEventType;
 import technology.sola.engine.event.EventHub;
-import technology.sola.engine.event.EventListener;
 
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.function.Consumer;
 
-public abstract class GameLoop implements Runnable, EventListener<GameLoopEvent> {
+public abstract class GameLoop implements Runnable {
   private static final Logger LOGGER = LoggerFactory.getLogger(GameLoop.class);
   protected final EventHub eventHub;
   protected final FpsTracker fpsTracker = new FpsTracker();
@@ -30,14 +29,7 @@ public abstract class GameLoop implements Runnable, EventListener<GameLoopEvent>
     this.deltaTime = 1f / targetUpdatesPerSecond;
     this.isRestingAllowed = isRestingAllowed;
 
-    eventHub.add(this, GameLoopEvent.class);
-  }
-
-  @Override
-  public void onEvent(GameLoopEvent event) {
-    if (GameLoopEventType.STOP == event.getMessage()) {
-      this.stop();
-    }
+    eventHub.add(GameLoopEvent.class, this::onGameLoopEvent);
   }
 
   @Override
@@ -70,8 +62,15 @@ public abstract class GameLoop implements Runnable, EventListener<GameLoopEvent>
     }
   }
 
+  private void onGameLoopEvent(GameLoopEvent event) {
+    if (GameLoopEventType.STOP == event.type()) {
+      this.stop();
+    }
+  }
+
   private void startFpsTrackerThread() {
     Timer timer = new Timer();
+
     timer.scheduleAtFixedRate(new TimerTask() {
       @Override
       public void run() {

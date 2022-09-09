@@ -3,15 +3,5 @@ package technology.sola.engine.physics.event;
 import technology.sola.engine.event.Event;
 import technology.sola.engine.physics.CollisionManifold;
 
-public class CollisionManifoldEvent implements Event<CollisionManifold> {
-  private final CollisionManifold collisionManifold;
-
-  public CollisionManifoldEvent(CollisionManifold collisionManifold) {
-    this.collisionManifold = collisionManifold;
-  }
-
-  @Override
-  public CollisionManifold getMessage() {
-    return collisionManifold;
-  }
+public record CollisionManifoldEvent(CollisionManifold collisionManifold) implements Event {
 }

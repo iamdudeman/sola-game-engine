@@ -121,11 +121,11 @@ public class SwingSolaPlatform extends SolaPlatform {
       setupGraphics2dRendering();
     }
 
-    solaEventHub.add(event -> {
-      if (event.getMessage() == GameLoopEventType.STOPPED) {
+    solaEventHub.add(GameLoopEvent.class, event -> {
+      if (event.type() == GameLoopEventType.STOPPED) {
         jFrame.dispose();
       }
-    }, GameLoopEvent.class);
+    });
 
     jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     canvas.addComponentListener(new ComponentAdapter() {

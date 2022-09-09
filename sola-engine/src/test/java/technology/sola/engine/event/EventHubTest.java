@@ -12,10 +12,10 @@ class EventHubTest {
     TestEventListener testEventListenerThree = new TestEventListener();
     EventHub eventHub = new EventHub();
 
-    eventHub.add(testEventListener, TestEvent.class);
-    eventHub.add(testEventListenerTwo, TestEvent.class);
-    eventHub.add(testEventListenerThree, TestEvent.class);
-    eventHub.remove(testEventListenerTwo, TestEvent.class);
+    eventHub.add(TestEvent.class, testEventListener);
+    eventHub.add(TestEvent.class, testEventListenerTwo);
+    eventHub.add(TestEvent.class, testEventListenerThree);
+    eventHub.remove(TestEvent.class, testEventListenerTwo);
     eventHub.emit(new TestEvent("test_message"));
 
     assertTestListener(testEventListener, "test_message");
@@ -30,16 +30,15 @@ class EventHubTest {
     TestEventListener testEventListenerThree = new TestEventListener();
     EventHub eventHub = new EventHub();
 
-    eventHub.add(testEventListener, TestEvent.class);
-    eventHub.add(testEventListenerTwo, TestEvent.class);
-    eventHub.add(testEventListenerThree, TestEvent.class);
+    eventHub.add(TestEvent.class, testEventListener);
+    eventHub.add(TestEvent.class, testEventListenerTwo);
+    eventHub.add(TestEvent.class, testEventListenerThree);
     eventHub.off(TestEvent.class);
     eventHub.emit(new TestEvent("test_message"));
 
     assertTestListener(testEventListener, null);
     assertTestListener(testEventListenerTwo, null);
     assertTestListener(testEventListenerThree, null);
-
   }
 
   private static void assertTestListener(TestEventListener testEventListener, String expected) {
@@ -51,20 +50,10 @@ class EventHubTest {
 
     @Override
     public void onEvent(TestEvent event) {
-      result = event.getMessage();
+      result = event.message();
     }
   }
 
-  private static class TestEvent implements Event<String> {
-    private final String message;
-
-    public TestEvent(String message) {
-      this.message = message;
-    }
-
-    @Override
-    public String getMessage() {
-      return message;
-    }
+  private record TestEvent(String message) implements Event {
   }
 }
