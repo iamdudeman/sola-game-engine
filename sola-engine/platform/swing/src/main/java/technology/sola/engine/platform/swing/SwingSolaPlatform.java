@@ -142,7 +142,6 @@ public class SwingSolaPlatform extends SolaPlatform {
       }
     });
     jFrame.addWindowStateListener(e -> {
-      System.out.println(e.getNewState());
       if (e.getNewState() == Frame.ICONIFIED) {
         solaEventHub.emit(new GameLoopEvent(GameLoopEventType.PAUSE));
       } else if (e.getNewState() != Frame.ICONIFIED) {

@@ -120,8 +120,8 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       });
 
       stage.setOnShown(event -> canvas.requestFocus());
-      stage.iconifiedProperty().addListener((observable, oldValue, newValue) -> {
-        if (newValue) {
+      stage.iconifiedProperty().addListener((observable, oldValue, isMinimized) -> {
+        if (isMinimized) {
           solaEventHub.emit(new GameLoopEvent(GameLoopEventType.PAUSE));
         } else {
           solaEventHub.emit(new GameLoopEvent(GameLoopEventType.RESUME));
