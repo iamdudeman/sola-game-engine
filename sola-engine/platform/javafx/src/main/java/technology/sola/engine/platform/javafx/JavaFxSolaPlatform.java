@@ -120,7 +120,14 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       });
 
       stage.setOnShown(event -> canvas.requestFocus());
-      stage.setOnCloseRequest(event -> solaEventHub.emit(GameLoopEvent.STOP));
+      stage.iconifiedProperty().addListener((observable, oldValue, newValue) -> {
+        if (newValue) {
+          solaEventHub.emit(new GameLoopEvent(GameLoopEventType.PAUSE));
+        } else {
+          solaEventHub.emit(new GameLoopEvent(GameLoopEventType.RESUME));
+        }
+      });
+      stage.setOnCloseRequest(event -> solaEventHub.emit(new GameLoopEvent(GameLoopEventType.STOP)));
       stage.setTitle(solaConfiguration.solaTitle());
       stage.setScene(scene);
       if (windowWidth != null) {

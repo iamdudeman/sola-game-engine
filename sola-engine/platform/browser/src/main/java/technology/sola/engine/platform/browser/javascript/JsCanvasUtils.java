@@ -13,6 +13,9 @@ public class JsCanvasUtils {
   @JSBody(params = {"rendererData", "width", "height", "viewportX", "viewportY", "viewportWidth", "viewportHeight"}, script = Scripts.RENDER)
   public static native void renderToCanvas(int[] rendererData, int width, int height, int viewportX, int viewportY, int viewportWidth, int viewportHeight);
 
+  @JSBody(params = {"callback"}, script = Scripts.ON_FOCUS_CHANGE)
+  public static native void observeCanvasFocus(CanvasFocusCallback callback);
+
   @JSBody(params = {"callback"}, script = Scripts.RESIZE)
   public static native void observeCanvasResize(CanvasResizeCallback callback);
 
@@ -22,6 +25,11 @@ public class JsCanvasUtils {
   @JSFunctor
   public interface CanvasResizeCallback extends JSObject {
     void call(int width, int height);
+  }
+
+  @JSFunctor
+  public interface CanvasFocusCallback extends JSObject {
+    void call(boolean isFocused);
   }
 
   private JsCanvasUtils() {
@@ -46,6 +54,15 @@ public class JsCanvasUtils {
       window.solaContext2d = window.solaCanvas.getContext('2d');
 
       canvasEle.focus();
+      """;
+
+    private static final String ON_FOCUS_CHANGE = """
+      window.solaCanvas.onfocus = function() {
+        callback(true);
+      }
+      window.solaCanvas.onblur = function() {
+        callback(false);
+      }
       """;
 
     private static final String CLEAR_CANVAS = """

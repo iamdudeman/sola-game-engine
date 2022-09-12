@@ -9,8 +9,6 @@
       runtimeOnly("org.teavm:teavm-extras-slf4j:0.7.0")
   * Figure out proper fat jar setup so stuff isn't duplicated
   * Investigate JavaFx library bundling (api vs implementation?)
-* When browser tab loses focus the game can run in an indeterminate state
-  * Probably need some sort of safe "pause" functionality (maybe used when games are minimized in desktop as well
 * investigate performance hits when moving mouse on browser canvas
   * shouldn't cause slowdowns
 * audio stuff not running sometimes https://developer.chrome.com/blog/autoplay/#webaudio

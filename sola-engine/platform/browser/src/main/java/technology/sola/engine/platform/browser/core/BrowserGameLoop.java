@@ -2,6 +2,7 @@ package technology.sola.engine.platform.browser.core;
 
 import technology.sola.engine.core.GameLoop;
 import technology.sola.engine.core.event.GameLoopEvent;
+import technology.sola.engine.core.event.GameLoopEventType;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.platform.browser.javascript.JsUtils;
 
@@ -31,7 +32,7 @@ public class BrowserGameLoop extends GameLoop implements JsUtils.Function {
     public void run() {
       if (!isRunning()) {
         stop();
-        eventHub.emit(GameLoopEvent.STOPPED);
+        eventHub.emit(new GameLoopEvent(GameLoopEventType.STOPPED));
         return;
       }
 

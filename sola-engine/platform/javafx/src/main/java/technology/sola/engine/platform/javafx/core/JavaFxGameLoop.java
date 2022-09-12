@@ -3,6 +3,7 @@ package technology.sola.engine.platform.javafx.core;
 import javafx.animation.AnimationTimer;
 import technology.sola.engine.core.GameLoop;
 import technology.sola.engine.core.event.GameLoopEvent;
+import technology.sola.engine.core.event.GameLoopEventType;
 import technology.sola.engine.event.EventHub;
 
 import java.util.function.Consumer;
@@ -23,7 +24,7 @@ public class JavaFxGameLoop extends GameLoop {
     public void handle(long newNanoTime) {
       if (!isRunning()) {
         this.stop();
-        eventHub.emit(GameLoopEvent.STOPPED);
+        eventHub.emit(new GameLoopEvent(GameLoopEventType.STOPPED));
         return;
       }
 
