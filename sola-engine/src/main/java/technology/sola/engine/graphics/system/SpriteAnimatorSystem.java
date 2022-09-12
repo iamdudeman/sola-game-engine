@@ -13,6 +13,7 @@ public class SpriteAnimatorSystem extends EcsSystem {
         SpriteComponent spriteComponent = view.c1();
         SpriteAnimatorComponent spriteAnimatorComponent = view.c2();
 
+        spriteAnimatorComponent.tickAnimation(deltaTime);
         spriteComponent.setSpriteKeyFrame(spriteAnimatorComponent.getCurrentFrame());
       });
   }

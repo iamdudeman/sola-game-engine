@@ -13,7 +13,6 @@
   * shouldn't cause slowdowns
 * audio stuff not running sometimes https://developer.chrome.com/blog/autoplay/#webaudio
   * maybe add a "play" overlay of some sort?
-* SpriteAnimatorComponent should use delta time for animations instead of last millis
 
 -----------------------------------------------------------------------------------------------------------------------
 

@@ -10,11 +10,11 @@ public class SpriteAnimatorComponent implements Component {
   @Serial
   private static final long serialVersionUID = 8265042463767128400L;
   private final Map<String, SpriteKeyFrame[]> animationMap = new HashMap<>();
-  private long lastFrameChange = 0;
   private int keyFrameIndex = 0;
   private String activeAnimationId = null;
   private SpriteKeyFrame activeFrame;
   private SpriteKeyFrame[] activeAnimationKeyFrames;
+  private transient float ticks = 0;
 
   public SpriteAnimatorComponent(String activeAnimationId, SpriteKeyFrame ...activeAnimationKeyFrames) {
     addAnimation(activeAnimationId, activeAnimationKeyFrames);
@@ -26,13 +26,16 @@ public class SpriteAnimatorComponent implements Component {
     return this;
   }
 
+  public void tickAnimation(float deltaTime) {
+    ticks += deltaTime;
+  }
+
   public void playAnimation(String id) {
     activeAnimationId = id;
     activeAnimationKeyFrames = animationMap.get(id);
     keyFrameIndex = 0;
     activeFrame = activeAnimationKeyFrames[0];
-    // TODO convert millis to instead use delta time from system for consistent animations!
-    lastFrameChange = System.currentTimeMillis();
+    ticks = 0;
   }
 
   public SpriteKeyFrame getCurrentFrame() {
@@ -40,12 +43,10 @@ public class SpriteAnimatorComponent implements Component {
 
 
     if (duration != SpriteKeyFrame.HOLD) {
-      long now = System.currentTimeMillis();
-
-      if (now - lastFrameChange > duration) {
+      if (ticks * 1000 > duration) {
         keyFrameIndex = (keyFrameIndex + 1) % activeAnimationKeyFrames.length;
         activeFrame = activeAnimationKeyFrames[keyFrameIndex];
-        lastFrameChange = now;
+        ticks = 0;
       }
     }
 
