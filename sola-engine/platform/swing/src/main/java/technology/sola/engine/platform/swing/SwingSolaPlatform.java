@@ -38,7 +38,7 @@ public class SwingSolaPlatform extends SolaPlatform {
   private Consumer<Renderer> onRender;
   private Dimension windowSize = null;
 
-  // For graphics2d rendering
+  // For Graphics2d rendering
   private Graphics2D graphics2D;
 
   public SwingSolaPlatform() {
@@ -138,7 +138,14 @@ public class SwingSolaPlatform extends SolaPlatform {
       @Override
       public void windowClosing(WindowEvent e) {
         super.windowClosing(e);
-        solaEventHub.emit(GameLoopEvent.STOP);
+        solaEventHub.emit(new GameLoopEvent(GameLoopEventType.STOP));
+      }
+    });
+    jFrame.addWindowStateListener(e -> {
+      if (e.getNewState() == Frame.ICONIFIED) {
+        solaEventHub.emit(new GameLoopEvent(GameLoopEventType.PAUSE));
+      } else if (e.getNewState() != Frame.ICONIFIED) {
+        solaEventHub.emit(new GameLoopEvent(GameLoopEventType.RESUME));
       }
     });
     jFrame.setTitle(solaConfiguration.solaTitle());

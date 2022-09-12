@@ -5,6 +5,8 @@ import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
+import technology.sola.engine.core.event.GameLoopEvent;
+import technology.sola.engine.core.event.GameLoopEventType;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
@@ -68,6 +70,13 @@ public class BrowserSolaPlatform extends SolaPlatform {
     JsMouseUtils.init();
 
     JsCanvasUtils.observeCanvasResize((int width, int height) -> viewport.resize(width, height));
+    JsCanvasUtils.observeCanvasFocus(isFocused -> {
+      if (isFocused) {
+        solaEventHub.emit(new GameLoopEvent(GameLoopEventType.RESUME));
+      } else {
+        solaEventHub.emit(new GameLoopEvent(GameLoopEventType.PAUSE));
+      }
+    });
 
     solaPlatformInitialization.finish();
   }

@@ -3,7 +3,6 @@ package technology.sola.engine.core;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import technology.sola.engine.core.event.GameLoopEvent;
-import technology.sola.engine.core.event.GameLoopEventType;
 import technology.sola.engine.event.EventHub;
 
 import java.util.Timer;
@@ -21,6 +20,7 @@ public abstract class GameLoop implements Runnable {
   protected long previousLoopStartNanos;
   protected float updateCatchUpAccumulator;
   private boolean isRunning = false;
+  private boolean isPaused = false;
 
   protected GameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
     this.eventHub = eventHub;
@@ -44,6 +44,10 @@ public abstract class GameLoop implements Runnable {
     return isRunning;
   }
 
+  public boolean isPaused() {
+    return isPaused;
+  }
+
   public void stop() {
     isRunning = false;
     LOGGER.info("----------Sola is stopping----------");
@@ -63,8 +67,10 @@ public abstract class GameLoop implements Runnable {
   }
 
   private void onGameLoopEvent(GameLoopEvent event) {
-    if (GameLoopEventType.STOP == event.type()) {
-      this.stop();
+    switch (event.type()) {
+      case STOP -> this.stop();
+      case PAUSE -> this.isPaused = true;
+      case RESUME -> this.isPaused = false;
     }
   }
 

@@ -90,7 +90,7 @@ public class ExampleLauncherSola extends Sola {
         }
       });
 
-      eventHub.emit(GameLoopEvent.STOP);
+      eventHub.emit(new GameLoopEvent(GameLoopEventType.STOP));
     });
 
     return exampleLaunchButton;

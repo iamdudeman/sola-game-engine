@@ -31,7 +31,9 @@ public abstract class Sola {
   protected void onUpdate(float deltaTime) {
     keyboardInput.updateStatusOfKeys();
     mouseInput.updateStatusOfMouse();
-    solaEcs.updateWorld(deltaTime);
+    if (!platform.gameLoop.isPaused()) {
+      solaEcs.updateWorld(deltaTime);
+    }
   }
 
   protected abstract void onRender(Renderer renderer);
