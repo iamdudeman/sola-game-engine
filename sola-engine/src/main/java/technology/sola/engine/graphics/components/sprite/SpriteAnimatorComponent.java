@@ -16,12 +16,12 @@ public class SpriteAnimatorComponent implements Component {
   private SpriteKeyFrame[] activeAnimationKeyFrames;
   private transient float ticks = 0;
 
-  public SpriteAnimatorComponent(String activeAnimationId, SpriteKeyFrame ...activeAnimationKeyFrames) {
+  public SpriteAnimatorComponent(String activeAnimationId, SpriteKeyFrame... activeAnimationKeyFrames) {
     addAnimation(activeAnimationId, activeAnimationKeyFrames);
     playAnimation(activeAnimationId);
   }
 
-  public SpriteAnimatorComponent addAnimation(String id, SpriteKeyFrame ...spriteKeyFrames) {
+  public SpriteAnimatorComponent addAnimation(String id, SpriteKeyFrame... spriteKeyFrames) {
     animationMap.put(id, spriteKeyFrames);
     return this;
   }
@@ -41,13 +41,10 @@ public class SpriteAnimatorComponent implements Component {
   public SpriteKeyFrame getCurrentFrame() {
     long duration = activeFrame.getDuration();
 
-
-    if (duration != SpriteKeyFrame.HOLD) {
-      if (ticks * 1000 > duration) {
-        keyFrameIndex = (keyFrameIndex + 1) % activeAnimationKeyFrames.length;
-        activeFrame = activeAnimationKeyFrames[keyFrameIndex];
-        ticks = 0;
-      }
+    if (duration != SpriteKeyFrame.HOLD && ticks * 1000 > duration) {
+      keyFrameIndex = (keyFrameIndex + 1) % activeAnimationKeyFrames.length;
+      activeFrame = activeAnimationKeyFrames[keyFrameIndex];
+      ticks = 0;
     }
 
     return activeFrame;
