@@ -31,6 +31,7 @@ public class SpriteAnimatorComponent implements Component {
     activeAnimationKeyFrames = animationMap.get(id);
     keyFrameIndex = 0;
     activeFrame = activeAnimationKeyFrames[0];
+    // TODO convert millis to instead use delta time from system for consistent animations!
     lastFrameChange = System.currentTimeMillis();
   }
 
