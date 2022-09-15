@@ -30,9 +30,8 @@ public class SimplePlatformerExample extends Sola {
   private SolaGraphics solaGraphics;
   private SolaPhysics solaPhysics;
 
-  @Override
-  protected SolaConfiguration getConfiguration() {
-    return new SolaConfiguration("Simple Platformer", 800, 600, 30, true);
+  public SimplePlatformerExample() {
+    super(SolaConfiguration.build("Simple Platformer", 800, 600).withTargetUpdatesPerSecond(30).withGameLoopRestingOn());
   }
 
   @Override

@@ -28,13 +28,9 @@ public class StressTestPhysicsExample extends Sola {
   }
 
   public StressTestPhysicsExample(int objectCount, boolean useFixedSeed) {
+    super(new SolaConfiguration("Stress Test - Physics", 1200, 800));
     this.objectCount = objectCount;
     this.random = useFixedSeed ? new Random(123456789) : new Random();
-  }
-
-  @Override
-  protected SolaConfiguration getConfiguration() {
-    return new SolaConfiguration("Stress Test - Physics", 1200, 800, 60, false);
   }
 
   @Override
@@ -56,8 +52,8 @@ public class StressTestPhysicsExample extends Sola {
 
   private World buildWorld() {
     Material circleMaterial = new Material(1, 0.8f);
-    float zoomedWidth = getConfiguration().canvasWidth() / CAMERA_SCALE;
-    float zoomedHeight = getConfiguration().canvasHeight() / CAMERA_SCALE;
+    float zoomedWidth = configuration.rendererWidth() / CAMERA_SCALE;
+    float zoomedHeight = configuration.rendererHeight() / CAMERA_SCALE;
     float squareSide = CIRCLE_RADIUS;
     int bottomPlatformEntityCount = Math.round(zoomedWidth / squareSide) + 1;
     int sidePlatformEntityCount = Math.round(zoomedHeight / squareSide) * 2 + 2;

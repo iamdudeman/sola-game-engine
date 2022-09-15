@@ -26,10 +26,10 @@ public abstract class SolaPlatform {
     LOGGER.info("Using platform [{}]", this.getClass().getName());
 
     this.solaEventHub = sola.eventHub;
-    this.viewport = buildViewport(sola.getConfiguration());
+    this.viewport = buildViewport(sola.configuration);
 
     populateAssetLoaderProvider(sola.assetLoaderProvider);
-    initializePlatform(sola.getConfiguration(), () -> initComplete(sola, sola.getConfiguration()));
+    initializePlatform(sola.configuration, () -> initComplete(sola, sola.configuration));
   }
 
   public Renderer getRenderer() {
@@ -52,7 +52,7 @@ public abstract class SolaPlatform {
 
   /**
    * Method to initialize a {@link SolaPlatform}. This operation can be async. It will provide the configuration
-   * from the {@link Sola#getConfiguration()} method.
+   * from the {@link Sola#configuration )}.
    *
    * @param solaConfiguration          the Sola configuration
    * @param solaPlatformInitialization call {@link SolaPlatformInitialization#finish()} when platform initialization is finished
@@ -66,11 +66,11 @@ public abstract class SolaPlatform {
   protected abstract void populateAssetLoaderProvider(AssetLoaderProvider assetLoaderProvider);
 
   protected Viewport buildViewport(SolaConfiguration solaConfiguration) {
-    return new Viewport(solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight());
+    return new Viewport(solaConfiguration.rendererWidth(), solaConfiguration.rendererHeight());
   }
 
   protected Renderer buildRenderer(SolaConfiguration solaConfiguration) {
-    return new SoftwareRenderer(solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight());
+    return new SoftwareRenderer(solaConfiguration.rendererWidth(), solaConfiguration.rendererHeight());
   }
 
   protected GameLoopProvider buildGameLoop() {
@@ -118,8 +118,8 @@ public abstract class SolaPlatform {
       solaEventHub,
       deltaTime -> update(sola, deltaTime),
       () -> render(renderer, sola),
-      solaConfiguration.gameLoopTargetUpdatesPerSecond(),
-      solaConfiguration.isGameLoopRestingAllowed()
+      solaConfiguration.targetUpdatesPerSecond(),
+      solaConfiguration.isGameLoopRestingOn()
     );
 
     Runnable startGameLoopThread = () -> new Thread(gameLoop).start();
