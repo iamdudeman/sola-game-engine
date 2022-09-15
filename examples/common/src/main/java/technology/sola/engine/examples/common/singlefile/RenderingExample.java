@@ -27,9 +27,8 @@ import java.util.List;
 public class RenderingExample extends Sola {
   private SolaGraphics solaGraphics;
 
-  @Override
-  protected SolaConfiguration getConfiguration() {
-    return new SolaConfiguration("Rendering Example", 800, 600, 30, true);
+  public RenderingExample() {
+    super(SolaConfiguration.build("Rendering Example", 800, 600).withTargetUpdatesPerSecond(30).withGameLoopRestingOn());
   }
 
   @Override

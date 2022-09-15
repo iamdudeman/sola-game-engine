@@ -15,10 +15,9 @@ import technology.sola.engine.graphics.screen.AspectMode;
 public class AnimationExample extends Sola {
   private SolaGraphics solaGraphics;
 
-  @Override
-  protected SolaConfiguration getConfiguration() {
-    return new SolaConfiguration(
-      "Animation", 200, 200, 30, true
+  public AnimationExample() {
+    super(
+      SolaConfiguration.build("Animation Example", 200, 200).withTargetUpdatesPerSecond(30).withGameLoopRestingOn()
     );
   }
 

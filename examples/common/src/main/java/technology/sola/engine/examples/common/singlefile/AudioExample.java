@@ -17,9 +17,8 @@ import technology.sola.engine.graphics.screen.AspectMode;
 public class AudioExample extends Sola {
   private SolaGui solaGui;
 
-  @Override
-  protected SolaConfiguration getConfiguration() {
-    return new SolaConfiguration("Gui Example", 600, 400, 30, true);
+  public AudioExample() {
+    super(SolaConfiguration.build("Audio Example", 600, 400).withTargetUpdatesPerSecond(30).withGameLoopRestingOn());
   }
 
   @Override

@@ -64,8 +64,8 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   @Override
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
-    JsUtils.setTitle(solaConfiguration.solaTitle());
-    JsCanvasUtils.canvasInit(JsCanvasUtils.ID_SOLA_ANCHOR, solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight());
+    JsUtils.setTitle(solaConfiguration.title());
+    JsCanvasUtils.canvasInit(JsCanvasUtils.ID_SOLA_ANCHOR, solaConfiguration.rendererWidth(), solaConfiguration.rendererHeight());
     JsKeyboardUtils.init();
     JsMouseUtils.init();
 
@@ -126,7 +126,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
     return useSoftwareRendering
       ? super.buildRenderer(solaConfiguration)
-      : new BrowserCanvasRenderer(solaConfiguration.canvasWidth(), solaConfiguration.canvasHeight());
+      : new BrowserCanvasRenderer(solaConfiguration.rendererWidth(), solaConfiguration.rendererHeight());
   }
 
   private MouseEvent browserToSola(int which, int x, int y) {
