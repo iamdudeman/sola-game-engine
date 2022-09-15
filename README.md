@@ -1,4 +1,7 @@
 # Branch WIP
+* SolaGraphics
+  * SpriteGraphics needs ability to utilize BlendModeComponent
+  * SolaGraphics could cull entities that are outside the camera viewport
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -35,9 +38,6 @@
   * Consider adding tool to rasterize fonts
   * Research build tooling of some sort
     * Take a main java file and build for a platform maybe?
-* SolaGraphics
-  * SpriteGraphics needs ability to utilize BlendModeComponent
-  * SolaGraphics could cull entities that are outside the camera viewport
 * SolaGui Stuff
   * GuiElementContainer
     * Consider adding anchor support to Stream or a new container to be able to easily center things?

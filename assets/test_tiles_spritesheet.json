@@ -41,6 +41,13 @@
       "y": 35,
       "w": 16,
       "h": 16
+    },
+    {
+      "id": "stick_figure",
+      "x": 52,
+      "y": 1,
+      "w": 16,
+      "h": 16
     }
   ],
   "spriteSheet": "test_tiles.png"
