@@ -33,6 +33,8 @@ class SpriteGraphics {
     }
 
     spriteComponent.getSprite(spriteSheetAssetLoader).executeIfLoaded(sprite -> {
+      // TODO needs ability to check for BlendModeComponent and use it if present
+
       if (transformComponent.getScaleX() != 1 || transformComponent.getScaleY() != 1) {
         AffineTransform affineTransform = new AffineTransform()
           .translate(transformComponent.getX(), transformComponent.getY())

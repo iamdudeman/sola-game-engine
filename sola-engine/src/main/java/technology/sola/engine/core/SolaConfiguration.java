@@ -3,8 +3,8 @@ package technology.sola.engine.core;
 public record SolaConfiguration(
   String title,
   int rendererWidth, int rendererHeight,
-  int targetUpdatesPerSecond, boolean isGameLoopRestingOn) {
-
+  int targetUpdatesPerSecond, boolean isGameLoopRestingOn
+) {
   /**
    * Creates a {@link SolaConfiguration} with targetUpdatePerSecond defaulted to 60 and game loop resting off.
    *
@@ -51,7 +51,11 @@ public record SolaConfiguration(
     }
 
     public SolaConfiguration build() {
-      return new SolaConfiguration(title, rendererWidth, rendererHeight, targetUpdatesPerSecond, isGameLoopRestingOn);
+      return new SolaConfiguration(
+        title, rendererWidth,
+        rendererHeight, targetUpdatesPerSecond,
+        isGameLoopRestingOn
+      );
     }
   }
 }

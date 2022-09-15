@@ -9,8 +9,6 @@
       runtimeOnly("org.teavm:teavm-extras-slf4j:0.7.0")
   * Figure out proper fat jar setup so stuff isn't duplicated
   * Investigate JavaFx library bundling (api vs implementation?)
-* investigate performance hits when moving mouse on browser canvas
-  * shouldn't cause slowdowns
 * audio stuff not running sometimes https://developer.chrome.com/blog/autoplay/#webaudio
   * maybe add a "play" overlay of some sort?
 
@@ -21,8 +19,6 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
-* Add ability to disable input options maybe in SolaConfiguration?
-  * If game won't have mouse support for example no reason binding listeners
 * ColliderComponent
   * Ability to add offset for colliders
   * Ability to ignore certain collision types
@@ -39,6 +35,12 @@
   * Consider adding tool to rasterize fonts
   * Research build tooling of some sort
     * Take a main java file and build for a platform maybe?
+* SolaGraphics
+  * SpriteGraphics needs ability to utilize BlendModeComponent
+  * SolaGraphics could cull entities that are outside the camera viewport
+* SolaGui Stuff
+  * GuiElementContainer
+    * Consider adding anchor support to Stream or a new container to be able to easily center things?
 * Figure out how to handle TouchInput
   * Primarily for browser
   * touchstart end and move all hard coded to MouseButton.Primary
@@ -49,11 +51,7 @@
   * Could also maybe allow adding custom commands
   * Should probably always use a "default font" if it is implemented
 * Rendering
-  * SolaGraphics could cull entities that are outside the camera viewport
-  * More BlendMode implementations
-* SolaGui Stuff
-  * GuiElementContainer
-    * Consider adding anchor support to Stream or a new container to be able to easily center things?
+  * Implement more BlendModes
 * Unit Testing
   * Add lots of missing tests :)
 * Browser Platform
@@ -63,6 +61,7 @@
     * worker sends ImageData to main thread to render
     * (this approach may improve performance for StressTestExample to work better)
   * Improve performance (StressTestExample can't handle a lot of objects)
+    * Possibly finish implementing BrowserCanvasRenderer?
 * Research Virtual File System
 * Build pipeline
   * Generate engine and platform artifacts
