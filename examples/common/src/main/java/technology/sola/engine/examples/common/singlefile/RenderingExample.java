@@ -175,7 +175,6 @@ public class RenderingExample extends Sola {
       new LayerComponent("moving_stuff"),
       new TransformComponent(0, 0),
       new SpriteComponent("test", "stick_figure"),
-      // todo hook this up in SpriteGraphics
       new BlendModeComponent(BlendMode.MASK),
       new MovingComponent()
     );

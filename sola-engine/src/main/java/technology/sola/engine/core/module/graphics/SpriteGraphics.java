@@ -6,6 +6,7 @@ import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.AffineTransform;
+import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.sprite.SpriteComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
@@ -33,17 +34,23 @@ class SpriteGraphics {
     }
 
     spriteComponent.getSprite(spriteSheetAssetLoader).executeIfLoaded(sprite -> {
-      // TODO needs ability to check for BlendModeComponent and use it if present
+      BlendModeComponent blendModeComponent = entity.getComponent(BlendModeComponent.class);
+      BlendMode previousBlendMode = renderer.getBlendMode();
+      BlendMode blendMode = blendModeComponent == null ? previousBlendMode : blendModeComponent.getRenderMode();
 
       if (transformComponent.getScaleX() != 1 || transformComponent.getScaleY() != 1) {
         AffineTransform affineTransform = new AffineTransform()
           .translate(transformComponent.getX(), transformComponent.getY())
           .scale(transformComponent.getScaleX(), transformComponent.getScaleY());
 
-        renderer.drawWithBlendMode(BlendMode.MASK, r -> renderer.drawImage(sprite, affineTransform));
+        renderer.setBlendMode(BlendMode.MASK);
+        renderer.drawImage(sprite, affineTransform);
       } else {
+        renderer.setBlendMode(blendMode);
         renderer.drawImage(transformComponent.getX(), transformComponent.getY(), sprite);
       }
+
+      renderer.setBlendMode(previousBlendMode);
     });
   }
 }

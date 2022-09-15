@@ -1,6 +1,5 @@
 # Branch WIP
 * SolaGraphics
-  * SpriteGraphics needs ability to utilize BlendModeComponent
   * SolaGraphics could cull entities that are outside the camera viewport
 
 -----------------------------------------------------------------------------------------------------------------------
