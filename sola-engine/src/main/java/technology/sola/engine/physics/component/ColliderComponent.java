@@ -64,24 +64,26 @@ public class ColliderComponent implements Component {
   /**
    * Gets the width of the bounding box around this collider.
    *
+   * @param transformScaleX the x-axis scale of the transform
    * @return the bounding box width of this collider
    */
-  public float getBoundingWidth() {
+  public float getBoundingWidth(float transformScaleX) {
     return switch (colliderType) {
-      case AABB -> width;
-      case CIRCLE -> radius * 2;
+      case AABB -> width * transformScaleX;
+      case CIRCLE -> radius * 2 * transformScaleX;
     };
   }
 
   /**
    * Gets the height of the bounding box around this collider.
    *
+   * @param transformScaleY the y-axis scale of the transform
    * @return the bounding box height of this collider
    */
-  public float getBoundingHeight() {
+  public float getBoundingHeight(float transformScaleY) {
     return switch (colliderType) {
-      case AABB -> height;
-      case CIRCLE -> radius * 2;
+      case AABB -> height * transformScaleY;
+      case CIRCLE -> radius * 2 * transformScaleY;
     };
   }
 

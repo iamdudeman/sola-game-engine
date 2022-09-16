@@ -1,4 +1,9 @@
 # Branch WIP
+* ColliderComponent
+  * Ability to add offset for colliders
+  * Ability to ignore certain collision types
+    * Tiles may be collidable but if they don't move at all don't check for collisions with each other
+  * Consider using a constructor instead of static methods
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -19,12 +24,6 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
-* ColliderComponent
-  * Ability to add offset for colliders
-  * Ability to ignore certain collision types
-    * Tiles may be collidable but if they don't move at all don't check for collisions with each other
-  * Consider using a constructor instead of static methods
-  * Confirm if Bounding rect works correctly for ColliderComponent
 * Assets
   * Consider adding JsonAsset and JsonAssetLoader
   * Consider implementing generic SpriteSheetAssetLoader and generic FontAssetLoader utilizing platform specific
