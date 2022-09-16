@@ -30,14 +30,12 @@
   * Consider implementing generic SpriteSheetAssetLoader and generic FontAssetLoader utilizing platform specific
     JsonAssetLoader and SolaImageAssetLoader
     * Maybe pass AssetLoaderProvider to each AssetLoader instance to make this easier
+* Rendering scaled images should be cached instead of recalculated
 * Add tooling project back
   * Could have a gradle task example for each tool similar to generateBrowserExampleHtmlAndJs?
   * Consider adding tool to rasterize fonts
   * Research build tooling of some sort
     * Take a main java file and build for a platform maybe?
-* SolaGraphics
-  * SpriteGraphics needs ability to utilize BlendModeComponent
-  * SolaGraphics could cull entities that are outside the camera viewport
 * SolaGui Stuff
   * GuiElementContainer
     * Consider adding anchor support to Stream or a new container to be able to easily center things?

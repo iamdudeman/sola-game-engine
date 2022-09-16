@@ -10,6 +10,7 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.module.graphics.SolaGraphics;
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
@@ -168,6 +169,14 @@ public class RenderingExample extends Sola {
       new LayerComponent("moving_stuff"),
       new TransformComponent(vector2D.x(), vector2D.y(), movingEntity),
       new RectangleRendererComponent(Color.RED))
+    );
+
+    world.createEntity(
+      new LayerComponent("moving_stuff"),
+      new TransformComponent(0, 0),
+      new SpriteComponent("test", "stick_figure"),
+      new BlendModeComponent(BlendMode.MASK),
+      new MovingComponent()
     );
 
     world.createEntity()
