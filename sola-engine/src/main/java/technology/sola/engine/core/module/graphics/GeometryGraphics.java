@@ -51,10 +51,6 @@ class GeometryGraphics {
     var transform = GraphicsUtils.getTransformForAppliedCamera(entity.getComponent(TransformComponent.class), cameraTransform);
     var rectangleRenderer = entity.getComponent(RectangleRendererComponent.class);
 
-    if (GraphicsUtils.shouldCullEntity(renderer, transform.getX(), transform.getY(), transform.getScaleX(), transform.getScaleY())) {
-      return;
-    }
-
     if (rectangleRenderer.isFilled()) {
       renderer.fillRect(transform.getX(), transform.getY(), transform.getScaleX(), transform.getScaleY(), rectangleRenderer.getColor());
     } else {
@@ -66,10 +62,6 @@ class GeometryGraphics {
     var transform = GraphicsUtils.getTransformForAppliedCamera(entity.getComponent(TransformComponent.class), cameraTransform);
     var circleRenderer = entity.getComponent(CircleRendererComponent.class);
     float radius = Math.max(transform.getScaleX(), transform.getScaleY()) * 0.5f;
-
-    if (GraphicsUtils.shouldCullEntity(renderer, transform.getX(), transform.getY(), radius)) {
-      return;
-    }
 
     if (circleRenderer.isFilled()) {
       renderer.fillCircle(transform.getX(), transform.getY(), radius, circleRenderer.getColor());
