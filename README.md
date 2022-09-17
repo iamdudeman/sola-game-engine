@@ -9,8 +9,6 @@
       runtimeOnly("org.teavm:teavm-extras-slf4j:0.7.0")
   * Figure out proper fat jar setup so stuff isn't duplicated
   * Investigate JavaFx library bundling (api vs implementation?)
-* audio stuff not running sometimes https://developer.chrome.com/blog/autoplay/#webaudio
-  * maybe add a "play" overlay of some sort?
 
 -----------------------------------------------------------------------------------------------------------------------
 
