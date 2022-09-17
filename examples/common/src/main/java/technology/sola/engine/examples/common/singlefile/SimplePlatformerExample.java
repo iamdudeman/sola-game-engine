@@ -11,8 +11,10 @@ import technology.sola.engine.core.module.graphics.SolaGraphics;
 import technology.sola.engine.core.module.physics.SolaPhysics;
 import technology.sola.engine.event.EventListener;
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
+import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.CollisionManifold;
@@ -78,13 +80,25 @@ public class SimplePlatformerExample extends Sola {
       .addComponent(new CameraComponent())
       .addComponent(new TransformComponent(0, 0, 1, 1));
 
+    ColliderComponent playerColliderComponent = ColliderComponent.aabb();
+    playerColliderComponent.setIgnoreTags(CollisionTags.GLASS);
+
     world.createEntity()
       .addComponent(new PlayerComponent())
       .addComponent(new TransformComponent(200, 300, 50, 50))
       .addComponent(new RectangleRendererComponent(Color.BLUE))
-      .addComponent(ColliderComponent.aabb())
+      .addComponent(playerColliderComponent)
       .addComponent(new DynamicBodyComponent())
       .setName("player");
+
+    ColliderComponent glassColliderComponent = ColliderComponent.aabb();
+    glassColliderComponent.setColliderTags(CollisionTags.GLASS);
+
+    world.createEntity()
+      .addComponent(new TransformComponent(300, 250, 50, 150f))
+      .addComponent(new RectangleRendererComponent(new Color(150, 173, 216, 230)))
+      .addComponent(new BlendModeComponent(BlendMode.NORMAL))
+      .addComponent(glassColliderComponent);
 
     world.createEntity()
       .addComponent(new TransformComponent(150, 400, 200, 75f))
@@ -229,5 +243,9 @@ public class SimplePlatformerExample extends Sola {
     public int getOrder() {
       return 50;
     }
+  }
+
+  private enum CollisionTags implements ColliderComponent.ColliderTag {
+    GLASS
   }
 }

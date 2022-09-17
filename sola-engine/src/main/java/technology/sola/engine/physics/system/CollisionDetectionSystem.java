@@ -70,6 +70,11 @@ public class CollisionDetectionSystem extends EcsSystem {
       for (Entity entityB : spatialHashMap.getNearbyEntities(entityA)) {
         TransformComponent transformB = entityB.getComponent(TransformComponent.class);
         ColliderComponent colliderB = entityB.getComponent(ColliderComponent.class);
+
+        if (colliderA.shouldIgnoreCollision(colliderB)) {
+          continue;
+        }
+
         CollisionManifold collisionManifoldEvent = CollisionUtils.calculateCollisionManifold(
           entityA, entityB,
           transformA, transformB,

@@ -15,6 +15,8 @@ public class ColliderComponent implements Component {
   private ColliderType colliderType;
   private float offsetX;
   private float offsetY;
+  private ColliderTag[] colliderTags = new ColliderTag[0];
+  private ColliderTag[] ignoreTags = new ColliderTag[0];
 
   // Properties for circle
   private Float radius = null;
@@ -109,6 +111,30 @@ public class ColliderComponent implements Component {
     };
   }
 
+  public boolean shouldIgnoreCollision(ColliderComponent colliderComponent) {
+    for (ColliderTag colliderTag : this.colliderTags) {
+      for (ColliderTag otherIgnoreTag : colliderComponent.ignoreTags) {
+        if (colliderTag == otherIgnoreTag) return true;
+      }
+    }
+
+    for (ColliderTag otherColliderTag : colliderComponent.colliderTags) {
+      for (ColliderTag ignoreTag : this.ignoreTags) {
+        if (otherColliderTag == ignoreTag) return true;
+      }
+    }
+
+    return false;
+  }
+
+  public void setColliderTags(ColliderTag ...colliderTags) {
+    this.colliderTags = colliderTags;
+  }
+
+  public void setIgnoreTags(ColliderTag ...ignoreTags) {
+    this.ignoreTags = ignoreTags;
+  }
+
   /**
    * Calculates the {@link Circle} representation of this collider based on the position.
    *
@@ -174,5 +200,8 @@ public class ColliderComponent implements Component {
     AABB,
     /** Circle */
     CIRCLE
+  }
+
+  public interface ColliderTag {
   }
 }
