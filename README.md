@@ -1,5 +1,4 @@
 # Branch WIP
-* Consider better way to create ColliderComponent instances
 
 -----------------------------------------------------------------------------------------------------------------------
 

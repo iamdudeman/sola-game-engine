@@ -127,12 +127,16 @@ public class ColliderComponent implements Component {
     return false;
   }
 
-  public void setColliderTags(ColliderTag ...colliderTags) {
+  public ColliderComponent setColliderTags(ColliderTag ...colliderTags) {
     this.colliderTags = colliderTags;
+
+    return this;
   }
 
-  public void setIgnoreTags(ColliderTag ...ignoreTags) {
+  public ColliderComponent setIgnoreTags(ColliderTag ...ignoreTags) {
     this.ignoreTags = ignoreTags;
+
+    return this;
   }
 
   /**

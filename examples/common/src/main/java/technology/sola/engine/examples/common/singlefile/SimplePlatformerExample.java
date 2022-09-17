@@ -80,25 +80,19 @@ public class SimplePlatformerExample extends Sola {
       .addComponent(new CameraComponent())
       .addComponent(new TransformComponent(0, 0, 1, 1));
 
-    ColliderComponent playerColliderComponent = ColliderComponent.aabb();
-    playerColliderComponent.setIgnoreTags(CollisionTags.GLASS);
-
     world.createEntity()
       .addComponent(new PlayerComponent())
       .addComponent(new TransformComponent(200, 300, 50, 50))
       .addComponent(new RectangleRendererComponent(Color.BLUE))
-      .addComponent(playerColliderComponent)
+      .addComponent(ColliderComponent.aabb().setIgnoreTags(CollisionTags.GLASS))
       .addComponent(new DynamicBodyComponent())
       .setName("player");
-
-    ColliderComponent glassColliderComponent = ColliderComponent.aabb();
-    glassColliderComponent.setColliderTags(CollisionTags.GLASS);
 
     world.createEntity()
       .addComponent(new TransformComponent(300, 250, 50, 150f))
       .addComponent(new RectangleRendererComponent(new Color(150, 173, 216, 230)))
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(glassColliderComponent);
+      .addComponent(ColliderComponent.aabb().setColliderTags(CollisionTags.GLASS));
 
     world.createEntity()
       .addComponent(new TransformComponent(150, 400, 200, 75f))
