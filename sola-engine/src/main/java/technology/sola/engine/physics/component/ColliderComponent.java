@@ -13,6 +13,8 @@ public class ColliderComponent implements Component {
   private static final long serialVersionUID = 6393414888672495864L;
   // Properties for all
   private ColliderType colliderType;
+  private float offsetX;
+  private float offsetY;
 
   // Properties for circle
   private Float radius = null;
@@ -33,8 +35,14 @@ public class ColliderComponent implements Component {
    * @return a rectangle {@code ColliderComponent}
    */
   public static ColliderComponent aabb(float width, float height) {
+    return aabb(0, 0, width, height);
+  }
+
+  public static ColliderComponent aabb(float offsetX, float offsetY, float width, float height) {
     ColliderComponent colliderComponent = new ColliderComponent();
 
+    colliderComponent.offsetX = offsetX;
+    colliderComponent.offsetY = offsetY;
     colliderComponent.colliderType = ColliderType.AABB;
     colliderComponent.width = width;
     colliderComponent.height = height;
@@ -53,12 +61,26 @@ public class ColliderComponent implements Component {
    * @return a circle {@code ColliderComponent}
    */
   public static ColliderComponent circle(float radius) {
+    return circle(0, 0, radius);
+  }
+
+  public static ColliderComponent circle(float offsetX, float offsetY, float radius) {
     ColliderComponent colliderComponent = new ColliderComponent();
 
+    colliderComponent.offsetX = offsetX;
+    colliderComponent.offsetY = offsetY;
     colliderComponent.colliderType = ColliderType.CIRCLE;
     colliderComponent.radius = radius;
 
     return colliderComponent;
+  }
+
+  public float getOffsetX() {
+    return offsetX;
+  }
+
+  public float getOffsetY() {
+    return offsetY;
   }
 
   /**
@@ -101,7 +123,12 @@ public class ColliderComponent implements Component {
     float transformScale = Math.max(transformComponent.getScaleX(), transformComponent.getScaleY());
     float radiusWithTransform = radius * transformScale;
 
-    return new Circle(radiusWithTransform, transformComponent.getTranslate().add(new Vector2D(radiusWithTransform, radiusWithTransform)));
+    Vector2D center = new Vector2D(
+      transformComponent.getX() + radiusWithTransform + offsetX,
+      transformComponent.getY() + radiusWithTransform + offsetY
+    );
+
+    return new Circle(radiusWithTransform, center);
   }
 
   /**
@@ -115,10 +142,16 @@ public class ColliderComponent implements Component {
       throw new ColliderComponentException(colliderType, ColliderType.AABB);
     }
 
-    return new Rectangle(
-      transformComponent.getTranslate(),
-      transformComponent.getTranslate().add(new Vector2D(transformComponent.getScaleX() * width, transformComponent.getScaleY() * height))
+    Vector2D min = new Vector2D(
+      transformComponent.getX() + offsetX,
+      transformComponent.getY() + offsetY
     );
+    Vector2D max = new Vector2D(
+      min.x() + transformComponent.getScaleX() * width,
+      min.y() + transformComponent.getScaleY() * height
+    );
+
+    return new Rectangle(min, max);
   }
 
   /**

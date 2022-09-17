@@ -75,8 +75,8 @@ public class SpatialHashMap {
 
     if (transformComponent == null || colliderComponent == null) return EMPTY_BUCKET_IDS;
 
-    float x = transformComponent.getX();
-    float y = transformComponent.getY();
+    float x = transformComponent.getX() + colliderComponent.getOffsetX();
+    float y = transformComponent.getY() + colliderComponent.getOffsetY();
     float width = colliderComponent.getBoundingWidth(transformComponent.getScaleX());
     float height = colliderComponent.getBoundingHeight(transformComponent.getScaleY());
 
