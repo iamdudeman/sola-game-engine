@@ -15,7 +15,7 @@ import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.platform.swing.assets.SwingAudiClipAssetLoader;
 import technology.sola.engine.platform.swing.assets.SwingFontAssetLoader;
 import technology.sola.engine.platform.swing.assets.SwingSolaImageAssetLoader;
-import technology.sola.engine.platform.swing.assets.SpriteSheetAssetLoader;
+import technology.sola.engine.platform.swing.assets.SwingSpriteSheetAssetLoader;
 import technology.sola.engine.platform.swing.core.Graphics2dRenderer;
 
 import javax.swing.*;
@@ -172,7 +172,7 @@ public class SwingSolaPlatform extends SolaPlatform {
     AssetLoader<SolaImage> solaImageAssetLoader = new SwingSolaImageAssetLoader();
     assetLoaderProvider.add(solaImageAssetLoader);
     assetLoaderProvider.add(new SwingFontAssetLoader(solaImageAssetLoader));
-    assetLoaderProvider.add(new SpriteSheetAssetLoader(solaImageAssetLoader));
+    assetLoaderProvider.add(new SwingSpriteSheetAssetLoader(solaImageAssetLoader));
     assetLoaderProvider.add(new SwingAudiClipAssetLoader());
   }
 

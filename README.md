@@ -19,11 +19,6 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
-* Assets
-  * Consider adding JsonAsset and JsonAssetLoader
-  * Consider implementing generic SpriteSheetAssetLoader and generic FontAssetLoader utilizing platform specific
-    JsonAssetLoader and SolaImageAssetLoader
-    * Maybe pass AssetLoaderProvider to each AssetLoader instance to make this easier
 * Rendering scaled images should be cached instead of recalculated
 * Add tooling project back
   * Could have a gradle task example for each tool similar to generateBrowserExampleHtmlAndJs?
