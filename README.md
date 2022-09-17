@@ -1,6 +1,5 @@
 # Branch WIP
 * ColliderComponent
-  * Ability to add offset for colliders
   * Ability to ignore certain collision types
     * Tiles may be collidable but if they don't move at all don't check for collisions with each other
   * Consider using a constructor instead of static methods

@@ -11,15 +11,19 @@ public class EventHub {
 
   public <T extends Event> void add(Class<T> eventClass, EventListener<T> eventListener) {
     var eventListeners = eventListenersMap.computeIfAbsent(eventClass, key -> new ArrayList<>());
+    var newListeners = new ArrayList<>(eventListeners);
 
-    eventListeners.add(eventListener);
+    newListeners.add(eventListener);
+    eventListenersMap.put(eventClass, newListeners);
   }
 
   public <T extends Event> void remove(Class<T> eventClass, EventListener<T> eventListener) {
     var eventListeners = eventListenersMap.get(eventClass);
 
     if (eventListeners != null) {
-      eventListeners.remove(eventListener);
+      var newListeners = new ArrayList<>(eventListeners);
+      newListeners.remove(eventListener);
+      eventListenersMap.put(eventClass, newListeners);
     }
   }
 
