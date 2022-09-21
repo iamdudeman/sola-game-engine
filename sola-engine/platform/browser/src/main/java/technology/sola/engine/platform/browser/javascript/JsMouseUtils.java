@@ -20,7 +20,6 @@ public class JsMouseUtils {
   }
 
   private static class Scripts {
-    // TODO remove duplication of code here
     // TODO touch events are hard coded to always send MouseButton.PRIMARY
     private static final String INIT = """
       window.mouseListeners = {
@@ -29,39 +28,28 @@ public class JsMouseUtils {
         mousedown: [],
       };
 
-      solaCanvas.addEventListener("mousemove", function (event) {
+      function handleMouseEvent(event, eventName) {
         if (event.target === window.solaCanvas) {
           var rect = event.target.getBoundingClientRect();
           var x = event.clientX - rect.left;
           var y = event.clientY - rect.top;
 
-          window.mouseListeners["mousemove"].forEach(function(callback) {
+          window.mouseListeners[eventName].forEach(function(callback) {
             callback(event.which, x, y);
           });
         }
+      }
+
+      solaCanvas.addEventListener("mousemove", function (event) {
+        handleMouseEvent(event, "mousemove");
       }, false);
       solaCanvas.addEventListener("mouseup", function (event) {
-        if (event.target === window.solaCanvas) {
-          var rect = event.target.getBoundingClientRect();
-          var x = event.clientX - rect.left;
-          var y = event.clientY - rect.top;
-
-          window.mouseListeners["mouseup"].forEach(function(callback) {
-            callback(event.which, x, y);
-          });
-        }
+        handleMouseEvent(event, "mouseup");
       }, false);
       solaCanvas.addEventListener("mousedown", function (event) {
-        if (event.target === window.solaCanvas) {
-          var rect = event.target.getBoundingClientRect();
-          var x = event.clientX - rect.left;
-          var y = event.clientY - rect.top;
-
-          window.mouseListeners["mousedown"].forEach(function(callback) {
-            callback(event.which, x, y);
-          });
-        }
+        handleMouseEvent(event, "mousedown");
       }, false);
+
       solaCanvas.addEventListener("touchstart", function (event) {
         var firstTouch = event.changedTouches.item(0);
 

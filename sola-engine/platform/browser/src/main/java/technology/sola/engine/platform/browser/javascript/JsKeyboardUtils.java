@@ -20,32 +20,28 @@ public class JsKeyboardUtils {
   }
 
   private static class Scripts {
-    // TODO remove duplication of code here
     private static final String INIT = """
       window.keyboardListeners = {
         keydown: [],
         keyup: [],
       };
 
-      solaCanvas.addEventListener("keydown", function (event) {
+      function handleKeyboardEvent(event, eventName) {
         if (event.target === window.solaCanvas) {
           event.stopPropagation();
           event.preventDefault();
 
-          window.keyboardListeners["keydown"].forEach(function(callback) {
+          window.keyboardListeners[eventName].forEach(function(callback) {
             callback(event.keyCode);
           });
         }
+      }
+
+      solaCanvas.addEventListener("keydown", function (event) {
+        handleKeyboardEvent(event, "keydown");
       }, false);
       solaCanvas.addEventListener("keyup", function (event) {
-        if (event.target === window.solaCanvas) {
-          event.stopPropagation();
-          event.preventDefault();
-
-          window.keyboardListeners["keyup"].forEach(function(callback) {
-            callback(event.keyCode);
-          });
-        }
+        handleKeyboardEvent(event, "keyup");
       }, false);
       """;
 
