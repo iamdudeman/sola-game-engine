@@ -1,9 +1,4 @@
 # Branch WIP
-* Add tooling project back
-  * Could have a gradle task example for each tool similar to generateBrowserExampleHtmlAndJs?
-  * Consider adding tool to rasterize fonts
-  * Research build tooling of some sort
-    * Take a main java file and build for a platform maybe?
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -38,6 +33,9 @@
   * Implement more BlendModes
 * Unit Testing
   * Add lots of missing tests :)
+* tooling
+  * Research build tooling of some sort
+    * Take a main java file and build for a platform maybe?
 * Browser Platform
   * Consider web worker for game loop
     * main thread creates needed dom events
