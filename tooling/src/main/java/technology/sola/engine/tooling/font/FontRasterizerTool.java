@@ -44,7 +44,7 @@ public class FontRasterizerTool implements Tool {
   }
 
   @Override
-  public String execute(String[] args) {
+  public String execute(String... args) {
     if (args.length >= 2) {
       String fontFamily = args[0];
       int fontSize = Integer.parseInt(args[1]);
@@ -80,8 +80,8 @@ public class FontRasterizerTool implements Tool {
 
   private FontCanvas prepareFontCanvas(FontInformation fontInformation) {
     Rectangle2D fullBounds = fontInformation.getStringBounds(characters);
-    int imageWidth = (int)fullBounds.getWidth() / 2;
-    int imageHeight = (int)fullBounds.getHeight() * 5;
+    int imageWidth = (int) fullBounds.getWidth() / 2;
+    int imageHeight = (int) fullBounds.getHeight() * 5;
 
     return new FontCanvas(fontInformation, imageWidth, imageHeight);
   }
