@@ -37,7 +37,7 @@ public class FontRasterizerTool implements Tool {
   @Override
   public String getHelp() {
     return """
-      *arg1 - Font name ["monospaced", "arial", "times"]
+      *arg1 - Font family ["monospaced", "arial", "times"]
       *arg2 - Font size ["16", "24"]
       arg3  - Font style ["NORMAL", "ITALIC", "BOLD"] defaults to NORMAL
       """;
@@ -46,20 +46,20 @@ public class FontRasterizerTool implements Tool {
   @Override
   public String execute(String[] args) {
     if (args.length >= 2) {
-      String fontName = args[0];
+      String fontFamily = args[0];
       int fontSize = Integer.parseInt(args[1]);
       String fontStyle = args.length > 2 ? args[2] : "NORMAL";
 
-      String fileCreated = rasterizeFont(fontName, fontStyle, fontSize);
+      String fileCreated = rasterizeFont(fontFamily, fontStyle, fontSize);
 
       return "New font info successfully created at [" + fileCreated + "]";
     } else {
-      throw new RuntimeException("Must provide at least first two arguments [fontName] [fontSize] [fontStyle]");
+      throw new RuntimeException("Must provide at least first two arguments [fontFamily] [fontSize] [fontStyle]");
     }
   }
 
-  public String rasterizeFont(String fontName, String fontStyle, int fontSize) {
-    var fontInformation = new FontInformation(fontName, FontStyle.valueOf(fontStyle), fontSize);
+  public String rasterizeFont(String fontFamily, String fontStyle, int fontSize) {
+    var fontInformation = new FontInformation(fontFamily, FontStyle.valueOf(fontStyle), fontSize);
 
     try (var fontCanvas = prepareFontCanvas(fontInformation)) {
       var fontInfo = prepareFontInfo(fontInformation, fontCanvas);
@@ -90,7 +90,7 @@ public class FontRasterizerTool implements Tool {
     List<FontGlyph> fontGlyphsWithPositions = fontCanvas.drawFontGlyphs(characters);
 
     return new FontInfo(
-      fontInformation.getFontFileName(), fontInformation.getFontName(),
+      fontInformation.getFontFileName(), fontInformation.getFontFamily(),
       FontStyle.valueOf(fontInformation.getFontStyle()), fontInformation.getFontSize(),
       fontInformation.getLeading(), fontGlyphsWithPositions
     );

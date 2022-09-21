@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class FontInformation {
-  private final String fontName;
+  private final String fontFamily;
   private final String fontStyle;
   private final int fontSize;
   private final String fontFileName;
@@ -19,14 +19,14 @@ class FontInformation {
   private final FontMetrics fontMetrics;
   private final Graphics2D graphics2D;
 
-  FontInformation(String fontName, FontStyle fontStyle, int fontSize) {
-    this.fontName = fontName;
+  FontInformation(String fontFamily, FontStyle fontStyle, int fontSize) {
+    this.fontFamily = fontFamily;
     this.fontStyle = fontStyle.name();
     this.fontSize = fontSize;
-    this.fontFileName = fontName + "_" + fontStyle + "_" + fontSize + ".png";
-    this.fontInfoFileName = fontName + "_" + fontStyle + "_" + fontSize + ".json";
+    this.fontFileName = fontFamily + "_" + fontStyle + "_" + fontSize + ".png";
+    this.fontInfoFileName = fontFamily + "_" + fontStyle + "_" + fontSize + ".json";
 
-    this.font = new Font(fontName, fontStyle.getCode(), fontSize);
+    this.font = new Font(fontFamily, fontStyle.getCode(), fontSize);
     var bufferedImage = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
 
     graphics2D = (Graphics2D) bufferedImage.getGraphics();
@@ -53,8 +53,8 @@ class FontInformation {
     return fontGlyphList;
   }
 
-  String getFontName() {
-    return fontName;
+  String getFontFamily() {
+    return fontFamily;
   }
 
   String getFontStyle() {
