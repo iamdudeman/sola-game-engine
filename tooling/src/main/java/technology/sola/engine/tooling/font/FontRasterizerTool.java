@@ -13,12 +13,17 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 public class FontRasterizerTool implements Tool {
   public static final String DEFAULT_CHARACTERS = "abcdefghijklmnopqrstuvwxyz{|}~ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`";
   private final File parentDirectory;
   private final String characters;
+
+  public FontRasterizerTool() {
+    this(new File(Path.of("").toAbsolutePath().toString()));
+  }
 
   public FontRasterizerTool(File parentDirectory) {
     this(parentDirectory, DEFAULT_CHARACTERS);
@@ -30,8 +35,8 @@ public class FontRasterizerTool implements Tool {
   }
 
   @Override
-  public String getCommand() {
-    return "rasterizeFont";
+  public String getName() {
+    return "fontRasterize";
   }
 
   @Override
@@ -48,7 +53,7 @@ public class FontRasterizerTool implements Tool {
     if (args.length >= 2) {
       String fontFamily = args[0];
       int fontSize = Integer.parseInt(args[1]);
-      String fontStyle = args.length > 2 ? args[2] : "NORMAL";
+      String fontStyle = args.length > 2 ? args[2].toUpperCase() : "NORMAL";
 
       String fileCreated = rasterizeFont(fontFamily, fontStyle, fontSize);
 

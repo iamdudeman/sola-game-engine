@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class FontListTool implements Tool {
   @Override
-  public String getCommand() {
+  public String getName() {
     return "fontList";
   }
 

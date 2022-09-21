@@ -1,7 +1,7 @@
 package technology.sola.engine.tooling;
 
 public interface Tool {
-  String getCommand();
+  String getName();
 
   /**
    * Called by the command line to execute the tool
