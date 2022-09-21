@@ -23,7 +23,7 @@ public class FontInfoJsonMapper implements JsonMapper<FontInfo> {
     JsonObject jsonObject = new JsonObject();
 
     jsonObject.put("fontGlyphFile", fontInfo.fontGlyphFile());
-    jsonObject.put("fontName", fontInfo.fontName());
+    jsonObject.put("fontFamily", fontInfo.fontFamily());
     jsonObject.put("fontStyle", fontInfo.fontStyle().name());
     jsonObject.put("fontSize", fontInfo.fontSize());
     jsonObject.put("leading", fontInfo.leading());
@@ -40,7 +40,7 @@ public class FontInfoJsonMapper implements JsonMapper<FontInfo> {
 
     return new FontInfo(
       jsonObject.getString("fontGlyphFile"),
-      jsonObject.getString("fontName"),
+      jsonObject.getString("fontFamily"),
       FontStyle.valueOf(jsonObject.getString("fontStyle")),
       jsonObject.getInt("fontSize"),
       jsonObject.getInt("leading"),
