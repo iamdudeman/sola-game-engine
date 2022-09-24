@@ -88,6 +88,7 @@ public class SolaBrowserFileBuilder {
           <style>
             body {
               margin: 0;
+              touch-action: manipulation;
             }
 
             canvas {
@@ -124,6 +125,7 @@ public class SolaBrowserFileBuilder {
         <style>
           body {
             margin: 0;
+            touch-action: manipulation;
           }
 
           canvas {
@@ -150,9 +152,15 @@ public class SolaBrowserFileBuilder {
           }
         </style>
       </head>
-      <body onload="start()">
+      <script>
+        function runGame() {
+          document.getElementById("overlay").remove();
+          main();
+        }
+      </script>
+      <body>
         <div id="overlay">
-          <button onclick="main()">Run game</button>
+          <button onclick="runGame()">Run game</button>
         </div>
         <div id="%s"></div>
       </body>
