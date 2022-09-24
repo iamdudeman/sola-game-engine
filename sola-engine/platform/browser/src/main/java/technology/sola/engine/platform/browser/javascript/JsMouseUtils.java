@@ -20,7 +20,6 @@ public class JsMouseUtils {
   }
 
   private static class Scripts {
-    // TODO touch events are hard coded to always send MouseButton.PRIMARY
     private static final String INIT = """
       window.mouseListeners = {
         mousemove: [],
@@ -58,20 +57,7 @@ public class JsMouseUtils {
           var x = firstTouch.clientX - rect.left;
           var y = firstTouch.clientY - rect.top;
 
-          window.mouseListeners["mouseup"].forEach(function(callback) {
-            callback(1, x, y);
-          });
-        }
-      }, false);
-      solaCanvas.addEventListener("touchmove", function (event) {
-        var firstTouch = event.touches.item(0);
-
-        if (event.target === window.solaCanvas) {
-          var rect = firstTouch.target.getBoundingClientRect();
-          var x = firstTouch.clientX - rect.left;
-          var y = firstTouch.clientY - rect.top;
-
-          window.mouseListeners["mousemove"].forEach(function(callback) {
+          window.mouseListeners["mousedown"].forEach(function(callback) {
             callback(1, x, y);
           });
         }
@@ -84,7 +70,7 @@ public class JsMouseUtils {
           var x = firstTouch.clientX - rect.left;
           var y = firstTouch.clientY - rect.top;
 
-          window.mouseListeners["mousedown"].forEach(function(callback) {
+          window.mouseListeners["mouseup"].forEach(function(callback) {
             callback(1, x, y);
           });
         }

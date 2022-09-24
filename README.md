@@ -22,15 +22,17 @@
     * Consider adding anchor support to Stream or a new container to be able to easily center things?
 * Figure out how to handle TouchInput
   * Primarily for browser
-  * touchstart end and move all hard coded to MouseButton.Primary
-  * How to handle multitouch
-  * Should it have its own TouchInput instead of doing it with MouseInput?
+  * touchstart and touchend all hard coded to MouseButton.Primary currently
+    * implement touchmove
+  * Figure out TouchInput API
+    * How to handle multitouch
 * Consider adding a "debug console"
   * While open can toggle things like render debug outlines and debug spacial hashmap stuff
   * Could also maybe allow adding custom commands
   * Should probably always use a "default font" if it is implemented
 * Rendering
   * Implement more BlendModes
+  * Ability to change line width when drawing
 * Unit Testing
   * Add lots of missing tests :)
 * tooling
