@@ -28,14 +28,14 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
     }
 
     if (!properties.isHidden()) {
-      renderSelf(renderer, properties.getX(), properties.getY());
+      renderSelf(renderer, getX(), getY());
 
       children.stream()
         .filter(child -> !child.properties.isHidden())
         .forEach(child -> child.render(renderer));
 
       if (properties.getFocusOutlineColor() != null && isFocussed()) {
-        renderer.drawRect(properties().getX() - 1, properties.getY() - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
+        renderer.drawRect(getX() - 1, getY() - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
       }
     }
   }
@@ -121,12 +121,10 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
       return;
     }
 
-    int x = properties.getX();
-    int y = properties.getY();
     int width = getWidth();
     int height = getHeight();
 
-    Rectangle guiElementBounds = new Rectangle(new Vector2D(x, y), new Vector2D(x + width, y + height));
+    Rectangle guiElementBounds = new Rectangle(new Vector2D(getX(), getY()), new Vector2D(getX() + width, getY() + height));
 
     if (guiElementBounds.contains(new Vector2D(event.x(), event.y()))) {
       switch (eventType) {

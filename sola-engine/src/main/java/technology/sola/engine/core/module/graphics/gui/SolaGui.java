@@ -68,6 +68,11 @@ public class SolaGui {
     this.focusElement(guiElement);
   }
 
+  public void setGuiRoot(GuiElement<?> guiElement, int x, int y) {
+    guiElement.setPosition(x, y);
+    setGuiRoot(guiElement);
+  }
+
   public void render() {
     if (rootGuiElement != null) {
       rootGuiElement.render(renderer);

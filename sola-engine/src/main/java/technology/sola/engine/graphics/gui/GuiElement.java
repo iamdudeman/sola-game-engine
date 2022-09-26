@@ -12,6 +12,8 @@ import java.util.function.Consumer;
 public abstract class GuiElement<T extends GuiElementProperties> {
   protected final SolaGui solaGui;
   protected final T properties;
+  private int x;
+  private int y;
 
   private Consumer<GuiKeyEvent> onKeyPressCallback;
   private Consumer<GuiKeyEvent> onKeyReleaseCallback;
@@ -32,25 +34,11 @@ public abstract class GuiElement<T extends GuiElementProperties> {
   public abstract int getContentHeight();
 
   public int getWidth() {
-//    int maxWidth = properties().getMaxWidth();
-    int contentAndPaddingWidth = getContentWidth() + properties.padding.getLeft() + properties.padding.getRight();
-
-//    if (maxWidth == 0) {
-      return contentAndPaddingWidth;
-//    }
-
-//    return Math.min(maxWidth, contentAndPaddingWidth);
+    return getContentWidth() + properties.padding.getLeft() + properties.padding.getRight();
   }
 
   public int getHeight() {
-//    int maxHeight = properties.getMaxHeight();
-    int contentAndPaddingHeight = getContentHeight() + properties.padding.getTop() + properties.padding.getBottom();
-
-//    if (maxHeight == 0) {
-      return contentAndPaddingHeight;
-//    }
-
-//    return Math.min(maxHeight, contentAndPaddingHeight);
+    return getContentHeight() + properties.padding.getTop() + properties.padding.getBottom();
   }
 
   public abstract void recalculateLayout();
@@ -64,12 +52,26 @@ public abstract class GuiElement<T extends GuiElementProperties> {
     }
 
     if (!properties.isHidden()) {
-      renderSelf(renderer, properties.getX(), properties.getY());
+      renderSelf(renderer, x, y);
 
       if (properties.getFocusOutlineColor() != null && isFocussed()) {
-        renderer.drawRect(properties().getX() - 1, properties.getY() - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
+        renderer.drawRect(x, y - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
       }
     }
+  }
+
+  public void setPosition(int x, int y) {
+    this.x = x;
+    this.y = y;
+    properties.setLayoutChanged(true);
+  }
+
+  public int getX() {
+    return x;
+  }
+
+  public int getY() {
+    return y;
   }
 
   public boolean isFocussed() {
@@ -164,8 +166,6 @@ public abstract class GuiElement<T extends GuiElementProperties> {
       return;
     }
 
-    int x = properties.getX();
-    int y = properties.getY();
     int width = getWidth();
     int height = getHeight();
 

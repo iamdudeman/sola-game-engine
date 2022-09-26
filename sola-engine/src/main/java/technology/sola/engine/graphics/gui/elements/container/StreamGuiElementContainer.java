@@ -72,15 +72,10 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     int yOffset = properties.padding.getTop();
 
     for (GuiElement<?> child : children) {
-//      child.properties().setMaxDimensions(
-//        getWidth() - properties.padding.getLeft() - properties.padding.getRight(),
-//        getHeight() - properties.padding.getTop() - properties.padding.getBottom()
-//      );
-
       xOffset += child.properties().margin.getLeft();
       yOffset += child.properties().margin.getTop();
 
-      child.properties().setPosition(properties().getX() + xOffset, properties().getY() + yOffset);
+      child.setPosition(getX() + xOffset, getY() + yOffset);
       child.recalculateLayout();
 
       xOffset += child.properties().margin.getRight();

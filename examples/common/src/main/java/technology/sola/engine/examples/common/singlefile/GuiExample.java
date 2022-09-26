@@ -24,7 +24,7 @@ public class GuiExample extends Sola {
     solaGui = SolaGui.createInstance(assetLoaderProvider, platform);
 
     solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
-    solaGui.setGuiRoot(buildGui());
+    solaGui.setGuiRoot(buildGui(), 15, 15);
 
     assetLoaderProvider.get(Font.class)
       .addAssetMapping("times_NORMAL_18", "assets/times_NORMAL_18.json");
@@ -99,7 +99,7 @@ public class GuiExample extends Sola {
     StreamGuiElementContainer rootElement = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.GREEN).padding.set(10).setPosition(15, 15)
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.GREEN).padding.set(10)
     );
 
     rootElement.addChild(

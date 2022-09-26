@@ -6,10 +6,6 @@ public class GuiElementProperties {
   public final Bounds margin = new Bounds();
   public final Bounds padding = new Bounds();
   protected final GuiElementGlobalProperties globalProperties;
-  private int x;
-  private int y;
-  private int maxWidth;
-  private int maxHeight;
   private boolean isLayoutChanged = true;
   private Color focusOutlineColor = null;
   private boolean isHidden;
@@ -47,30 +43,6 @@ public class GuiElementProperties {
     isFocusable = focusable;
 
     return this;
-  }
-
-  public GuiElementProperties setPosition(int x, int y) {
-    this.x = x;
-    this.y = y;
-    setLayoutChanged(true);
-
-    return this;
-  }
-
-  public int getX() {
-    return x;
-  }
-
-  public int getY() {
-    return y;
-  }
-
-  public int getMaxWidth() {
-    return maxWidth;
-  }
-
-  public int getMaxHeight() {
-    return maxHeight;
   }
 
   public Color getFocusOutlineColor() {
