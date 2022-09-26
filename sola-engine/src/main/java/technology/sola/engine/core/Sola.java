@@ -6,6 +6,7 @@ import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
+import technology.sola.engine.input.TouchInput;
 
 public abstract class Sola {
   protected final SolaConfiguration configuration;
@@ -14,6 +15,7 @@ public abstract class Sola {
   protected EventHub eventHub;
   protected KeyboardInput keyboardInput;
   protected MouseInput mouseInput;
+  protected TouchInput touchInput;
   protected SolaInitialization solaInitialization;
   protected AssetLoaderProvider assetLoaderProvider;
 
@@ -27,6 +29,7 @@ public abstract class Sola {
     eventHub = new EventHub();
     keyboardInput = new KeyboardInput();
     mouseInput = new MouseInput();
+    touchInput = new TouchInput();
     assetLoaderProvider = new AssetLoaderProvider();
   }
 
@@ -35,6 +38,8 @@ public abstract class Sola {
   protected void onUpdate(float deltaTime) {
     keyboardInput.update();
     mouseInput.update();
+    touchInput.update();
+
     if (!platform.gameLoop.isPaused()) {
       solaEcs.updateWorld(deltaTime);
     }
@@ -46,11 +51,14 @@ public abstract class Sola {
     this.platform = platform;
     this.solaInitialization = solaInitialization;
 
-    platform.onKeyPressed(event -> keyboardInput.keyPressed(event));
-    platform.onKeyReleased(event -> keyboardInput.keyReleased(event));
-    platform.onMouseMoved(event -> mouseInput.onMouseMoved(event));
-    platform.onMousePressed(event -> mouseInput.onMousePressed(event));
-    platform.onMouseReleased(event -> mouseInput.onMouseReleased(event));
+    platform.onKeyPressed(keyboardInput::keyPressed);
+    platform.onKeyReleased(keyboardInput::keyReleased);
+    platform.onMouseMoved(mouseInput::onMouseMoved);
+    platform.onMousePressed(mouseInput::onMousePressed);
+    platform.onMouseReleased(mouseInput::onMouseReleased);
+    platform.onTouchMove(touchInput::onTouchMove);
+    platform.onTouchStart(touchInput::onTouchStart);
+    platform.onTouchEnd(touchInput::onTouchEnd);
 
     onInit();
   }

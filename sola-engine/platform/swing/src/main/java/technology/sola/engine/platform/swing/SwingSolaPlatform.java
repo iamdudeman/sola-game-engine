@@ -12,6 +12,7 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.input.TouchEvent;
 import technology.sola.engine.platform.swing.assets.SwingAudiClipAssetLoader;
 import technology.sola.engine.platform.swing.assets.SwingFontAssetLoader;
 import technology.sola.engine.platform.swing.assets.SwingSolaImageAssetLoader;
@@ -101,6 +102,21 @@ public class SwingSolaPlatform extends SolaPlatform {
         mouseEventConsumer.accept(swingToSola(mouseEvent));
       }
     });
+  }
+
+  @Override
+  public void onTouchMove(Consumer<TouchEvent> touchEventConsumer) {
+    // Swing does not implement these
+  }
+
+  @Override
+  public void onTouchStart(Consumer<TouchEvent> touchEventConsumer) {
+    // Swing does not implement these
+  }
+
+  @Override
+  public void onTouchEnd(Consumer<TouchEvent> touchEventConsumer) {
+    // Swing does not implement these
   }
 
   @Override

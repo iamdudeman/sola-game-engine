@@ -20,6 +20,7 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.input.TouchEvent;
 import technology.sola.engine.platform.javafx.assets.JavaFxAudiClipAssetLoader;
 import technology.sola.engine.platform.javafx.assets.JavaFxFontAssetLoader;
 import technology.sola.engine.platform.javafx.assets.JavaFxSolaImageAssetLoader;
@@ -86,6 +87,21 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     canvas.addEventHandler(
       javafx.scene.input.MouseEvent.MOUSE_RELEASED, mouseEvent -> mouseEventConsumer.accept(fxToSola(mouseEvent))
     );
+  }
+
+  @Override
+  public void onTouchMove(Consumer<TouchEvent> touchEventConsumer) {
+    // todo
+  }
+
+  @Override
+  public void onTouchStart(Consumer<TouchEvent> touchEventConsumer) {
+    // todo
+  }
+
+  @Override
+  public void onTouchEnd(Consumer<TouchEvent> touchEventConsumer) {
+    // todo
   }
 
   @Override

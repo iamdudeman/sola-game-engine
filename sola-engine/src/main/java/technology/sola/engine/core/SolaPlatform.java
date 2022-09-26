@@ -11,6 +11,7 @@ import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.graphics.screen.Viewport;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.input.TouchEvent;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.function.Consumer;
@@ -49,6 +50,12 @@ public abstract class SolaPlatform {
   public abstract void onMousePressed(Consumer<MouseEvent> mouseEventConsumer);
 
   public abstract void onMouseReleased(Consumer<MouseEvent> mouseEventConsumer);
+
+  public abstract void onTouchMove(Consumer<TouchEvent> touchEventConsumer);
+
+  public abstract void onTouchStart(Consumer<TouchEvent> touchEventConsumer);
+
+  public abstract void onTouchEnd(Consumer<TouchEvent> touchEventConsumer);
 
   /**
    * Method to initialize a {@link SolaPlatform}. This operation can be async. It will provide the configuration

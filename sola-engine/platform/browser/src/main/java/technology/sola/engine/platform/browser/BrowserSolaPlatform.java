@@ -13,6 +13,7 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.input.TouchEvent;
 import technology.sola.engine.platform.browser.assets.BrowserAudioClipAssetLoader;
 import technology.sola.engine.platform.browser.assets.BrowserFontAssetLoader;
 import technology.sola.engine.platform.browser.assets.BrowserSolaImageAssetLoader;
@@ -60,6 +61,21 @@ public class BrowserSolaPlatform extends SolaPlatform {
   @Override
   public void onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
     JsMouseUtils.mouseEventListener("mouseup", (which, x, y) -> mouseEventConsumer.accept(browserToSola(which, x, y)));
+  }
+
+  @Override
+  public void onTouchMove(Consumer<TouchEvent> touchEventConsumer) {
+    // todo
+  }
+
+  @Override
+  public void onTouchStart(Consumer<TouchEvent> touchEventConsumer) {
+    // todo
+  }
+
+  @Override
+  public void onTouchEnd(Consumer<TouchEvent> touchEventConsumer) {
+    // todo
   }
 
   @Override
