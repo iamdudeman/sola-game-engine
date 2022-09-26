@@ -21,12 +21,12 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
 
   @Override
   public int getContentWidth() {
-    return textWidth + properties.padding.getLeft() + properties.padding.getRight();
+    return textWidth;
   }
 
   @Override
   public int getContentHeight() {
-    return textHeight + properties.padding.getTop() + properties.padding.getBottom();
+    return textHeight;
   }
 
   @Override

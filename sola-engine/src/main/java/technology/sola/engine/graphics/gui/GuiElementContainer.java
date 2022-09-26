@@ -18,22 +18,6 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
     super(solaGui, properties);
   }
 
-  public abstract int getContentWidth();
-
-  public abstract int getContentHeight();
-
-  public int getWidth() {
-    return Math.min(properties().getMaxWidth(), getContentWidth());
-  }
-
-  public int getHeight() {
-    return Math.min(properties().getMaxHeight(), getContentHeight());
-  }
-
-  public abstract void recalculateLayout();
-
-  public abstract void renderSelf(Renderer renderer, int x, int y);
-
   @Override
   public void render(Renderer renderer) {
     T properties = properties();

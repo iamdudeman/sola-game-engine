@@ -43,12 +43,20 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
 
   @Override
   public int getContentWidth() {
-    return properties().preferredWidth;
+    if (properties.direction == Direction.HORIZONTAL) {
+      return children.stream().mapToInt(ele -> ele.getWidth() + ele.properties().margin.getLeft() + ele.properties().margin.getRight()).sum();
+    }
+
+    return children.stream().mapToInt(ele -> ele.getWidth() + ele.properties().margin.getLeft() + ele.properties().margin.getRight()).max().orElse(0);
   }
 
   @Override
   public int getContentHeight() {
-    return properties().preferredHeight;
+    if (properties.direction == Direction.HORIZONTAL) {
+      return children.stream().mapToInt(ele -> ele.getHeight() + ele.properties().margin.getTop() + ele.properties().margin.getBottom()).max().orElse(0);
+    }
+
+    return children.stream().mapToInt(ele -> ele.getHeight() + ele.properties().margin.getTop() + ele.properties().margin.getBottom()).sum();
   }
 
   @Override
@@ -64,10 +72,10 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     int yOffset = properties.padding.getTop();
 
     for (GuiElement<?> child : children) {
-      child.properties().setMaxDimensions(
-        getWidth() - properties.padding.getLeft() - properties.padding.getRight(),
-        getHeight() - properties.padding.getTop() - properties.padding.getBottom()
-      );
+//      child.properties().setMaxDimensions(
+//        getWidth() - properties.padding.getLeft() - properties.padding.getRight(),
+//        getHeight() - properties.padding.getTop() - properties.padding.getBottom()
+//      );
 
       xOffset += child.properties().margin.getLeft();
       yOffset += child.properties().margin.getTop();
@@ -79,9 +87,9 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
       yOffset += child.properties().margin.getBottom();
 
       if (properties().direction == Direction.HORIZONTAL) {
-        xOffset += child.getContentWidth();
+        xOffset += child.getWidth();
       } else if (properties.direction == Direction.VERTICAL) {
-        yOffset += child.getContentHeight();
+        yOffset += child.getHeight();
       }
     }
   }
@@ -102,8 +110,6 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
 
   public static class Properties extends GuiElementProperties {
     private Color borderColor;
-    private int preferredWidth;
-    private int preferredHeight;
     private Direction direction = Direction.HORIZONTAL;
 
     public Properties(GuiElementGlobalProperties globalProperties) {
@@ -118,23 +124,6 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
       this.borderColor = borderColor;
 
       return this;
-    }
-
-    public Properties setPreferredDimensions(int preferredWidth, int preferredHeight) {
-      this.preferredWidth = preferredWidth;
-      this.preferredHeight = preferredHeight;
-      setMaxDimensions(preferredWidth, preferredHeight);
-      setLayoutChanged(true);
-
-      return this;
-    }
-
-    public int getPreferredWidth() {
-      return preferredWidth;
-    }
-
-    public int getPreferredHeight() {
-      return preferredHeight;
     }
 
     public Direction getDirection() {

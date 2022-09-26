@@ -34,8 +34,8 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
   @Override
   public void renderSelf(Renderer renderer, int x, int y) {
     Properties properties = properties();
-    int contentWidth = getContentWidth();
-    int contentHeight = getContentHeight();
+    int contentWidth = getWidth();
+    int contentHeight = getHeight();
 
     renderer.fillRect(x, y, contentWidth, contentHeight, isHovered ? properties.colorBackgroundHover : properties.colorBackground);
     renderer.drawRect(x, y, contentWidth, contentHeight, isHovered ? properties.colorBorderHover : properties.colorBorder);

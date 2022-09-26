@@ -65,14 +65,6 @@ public class GuiElementProperties {
     return y;
   }
 
-  public GuiElementProperties setMaxDimensions(int maxWidth, int maxHeight) {
-    this.maxWidth = maxWidth;
-    this.maxHeight = maxHeight;
-    setLayoutChanged(true);
-
-    return this;
-  }
-
   public int getMaxWidth() {
     return maxWidth;
   }
