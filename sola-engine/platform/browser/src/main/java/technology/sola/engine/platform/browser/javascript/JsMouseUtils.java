@@ -39,41 +39,14 @@ public class JsMouseUtils {
         }
       }
 
-      solaCanvas.addEventListener("mousemove", function (event) {
+      solaCanvas.addEventListener("pointermove", function (event) {
         handleMouseEvent(event, "mousemove");
       }, false);
-      solaCanvas.addEventListener("mouseup", function (event) {
+      solaCanvas.addEventListener("pointerup", function (event) {
         handleMouseEvent(event, "mouseup");
       }, false);
-      solaCanvas.addEventListener("mousedown", function (event) {
+      solaCanvas.addEventListener("pointerdown", function (event) {
         handleMouseEvent(event, "mousedown");
-      }, false);
-
-      solaCanvas.addEventListener("touchstart", function (event) {
-        var firstTouch = event.changedTouches.item(0);
-
-        if (event.target === window.solaCanvas) {
-          var rect = firstTouch.target.getBoundingClientRect();
-          var x = firstTouch.clientX - rect.left;
-          var y = firstTouch.clientY - rect.top;
-
-          window.mouseListeners["mousedown"].forEach(function(callback) {
-            callback(1, x, y);
-          });
-        }
-      }, false);
-      solaCanvas.addEventListener("touchend", function (event) {
-        var firstTouch = event.changedTouches.item(0);
-
-        if (firstTouch.target === window.solaCanvas) {
-          var rect = firstTouch.target.getBoundingClientRect();
-          var x = firstTouch.clientX - rect.left;
-          var y = firstTouch.clientY - rect.top;
-
-          window.mouseListeners["mouseup"].forEach(function(callback) {
-            callback(1, x, y);
-          });
-        }
       }, false);
       """;
 
