@@ -28,7 +28,7 @@ class KeyboardInputTest {
   @Test
   void whenKeyPressed_withOneUpdate_shouldShowKeyAsPressedButNotHeld() {
     keyboardInput.keyPressed(createMockKeyEvent(Key.A));
-    keyboardInput.updateStatusOfKeys();
+    keyboardInput.update();
 
     assertTrue(keyboardInput.isKeyPressed(Key.A));
     assertFalse(keyboardInput.isKeyHeld(Key.A));
@@ -37,8 +37,8 @@ class KeyboardInputTest {
   @Test
   void whenKeyPressed_withTwoUpdates_shouldShowKeyAsHeldButNotPressed() {
     keyboardInput.keyPressed(createMockKeyEvent(Key.A));
-    keyboardInput.updateStatusOfKeys();
-    keyboardInput.updateStatusOfKeys();
+    keyboardInput.update();
+    keyboardInput.update();
 
     assertFalse(keyboardInput.isKeyPressed(Key.A.getCode()));
     assertTrue(keyboardInput.isKeyHeld(Key.A.getCode()));
@@ -47,9 +47,9 @@ class KeyboardInputTest {
   @Test
   void whenKeyPressedThenReleased_shouldShowKeyNotHeldOrPressed() {
     keyboardInput.keyPressed(createMockKeyEvent(Key.B));
-    keyboardInput.updateStatusOfKeys();
+    keyboardInput.update();
     keyboardInput.keyReleased(createMockKeyEvent(Key.B));
-    keyboardInput.updateStatusOfKeys();
+    keyboardInput.update();
 
     assertFalse(keyboardInput.isKeyPressed(Key.B.getCode()));
     assertFalse(keyboardInput.isKeyHeld(Key.B.getCode()));

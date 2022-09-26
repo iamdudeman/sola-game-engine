@@ -5,7 +5,7 @@ import technology.sola.math.linear.Vector2D;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class MouseInput {
+public class MouseInput implements InputDevice {
   private final Map<MouseButton, Boolean> mouseDownMap = new EnumMap<>(MouseButton.class);
   private final Map<MouseButton, ButtonState> mouseStatusMap = new EnumMap<>(MouseButton.class);
   private Vector2D lastEventPosition = new Vector2D(0, 0);
@@ -23,7 +23,8 @@ public class MouseInput {
     return currentMousePosition;
   }
 
-  public void updateStatusOfMouse() {
+  @Override
+  public void update() {
     currentMousePosition = lastEventPosition;
 
     mouseDownMap.forEach((mouseButton, isDown) -> {

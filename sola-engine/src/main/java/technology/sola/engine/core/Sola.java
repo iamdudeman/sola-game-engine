@@ -33,8 +33,8 @@ public abstract class Sola {
   protected abstract void onInit();
 
   protected void onUpdate(float deltaTime) {
-    keyboardInput.updateStatusOfKeys();
-    mouseInput.updateStatusOfMouse();
+    keyboardInput.update();
+    mouseInput.update();
     if (!platform.gameLoop.isPaused()) {
       solaEcs.updateWorld(deltaTime);
     }

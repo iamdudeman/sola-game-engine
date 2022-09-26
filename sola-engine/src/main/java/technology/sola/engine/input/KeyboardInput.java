@@ -2,7 +2,7 @@ package technology.sola.engine.input;
 
 import java.util.Arrays;
 
-public class KeyboardInput {
+public class KeyboardInput implements InputDevice {
   static final int KEY_COUNT = 256;
 
   private final boolean[] keysDown = new boolean[KEY_COUNT];
@@ -28,7 +28,8 @@ public class KeyboardInput {
     return isKeyHeld(key.getCode());
   }
 
-  public void updateStatusOfKeys() {
+  @Override
+  public void update() {
     for (int i = 0; i < KEY_COUNT; i++) {
       if (keysDown[i]) {
         if (keyStates[i] == KeyState.RELEASED) {
