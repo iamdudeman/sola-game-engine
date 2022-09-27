@@ -1,4 +1,7 @@
 # Branch WIP
+* SolaGui Stuff
+  * GuiElementContainer
+    * Consider adding anchor support to Stream or a new container to be able to easily center things?
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -17,9 +20,6 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
-* SolaGui Stuff
-  * GuiElementContainer
-    * Consider adding anchor support to Stream or a new container to be able to easily center things?
 * Figure out how to handle TouchInput
   * Primarily for browser but also could be supported in JavaFX
   * touchstart and touchend all hard coded to MouseButton.Primary currently

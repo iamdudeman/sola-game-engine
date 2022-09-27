@@ -1,6 +1,7 @@
-package technology.sola.engine.graphics.gui;
+package technology.sola.engine.graphics.gui.properties;
 
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.gui.GuiElement;
 
 import java.util.function.Supplier;
 

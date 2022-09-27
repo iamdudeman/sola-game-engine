@@ -2,7 +2,7 @@ package technology.sola.engine.graphics.gui.elements.control;
 
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
+import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
