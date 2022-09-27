@@ -26,7 +26,7 @@ public class GuiElementGlobalProperties {
     GuiElement<?> rootElement = this.rootElementSupplier.get();
 
     if (rootElement != null) {
-      rootElement.properties.setLayoutChanged(true);
+      rootElement.properties().setLayoutChanged(true);
     }
 
     return this;
