@@ -6,6 +6,7 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
@@ -78,7 +79,7 @@ public class GuiExample extends Sola {
     ButtonGuiElement toggleOtherButton = solaGui.createElement(
       ButtonGuiElement::new,
       ButtonGuiElement.Properties::new,
-      p -> p.setText("Toggle other button").padding.set(5)
+      p -> p.setText("Toggle other button").setTextAlign(BaseTextGuiElement.TextAlign.RIGHT).padding.set(5).setWidth(250)
     );
     toggleOtherButton.setOnAction(() -> checkButton.properties().setHidden(!checkButton.properties().isHidden()));
 

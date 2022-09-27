@@ -17,6 +17,7 @@ import technology.sola.engine.examples.common.singlefile.StressTestPhysicsExampl
 import technology.sola.engine.examples.common.singlefile.StressTestRenderingExample;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
@@ -76,7 +77,7 @@ public class ExampleLauncherSola extends Sola {
     ButtonGuiElement exampleLaunchButton = solaGui.createElement(
       ButtonGuiElement::new,
       ButtonGuiElement.Properties::new,
-      p -> p.setText(text).padding.set(5).margin.setBottom(5).setWidth(300)
+      p -> p.setText(text).setTextAlign(BaseTextGuiElement.TextAlign.CENTER).padding.set(5).margin.setBottom(5).setWidth(300)
     );
 
     exampleLaunchButton.setOnAction(() -> {

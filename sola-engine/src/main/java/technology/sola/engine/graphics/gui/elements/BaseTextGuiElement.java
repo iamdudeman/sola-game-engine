@@ -34,10 +34,21 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
     Properties properties = properties();
 
     if (font != null) {
+      Integer width = properties.getWidth();
+      int alignOffsetX = 0;
+
+      if (width != null) {
+        alignOffsetX = switch (properties.textAlign) {
+          case LEFT -> 0;
+          case CENTER -> width / 2 - getContentWidth() / 2;
+          case RIGHT -> (width - ((properties.padding.getLeft() + properties.padding.getRight() + getContentWidth())));
+        };
+      }
+
       renderer.setFont(font);
       renderer.drawString(
         properties.getText(),
-        x + properties.padding.getLeft(),
+        x + alignOffsetX + properties.padding.getLeft(),
         y + properties.padding.getTop(),
         properties.getColorText()
       );
@@ -69,6 +80,7 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
     private Color colorText = null;
     private String fontAssetId = null;
     private String text = "";
+    private TextAlign textAlign = TextAlign.LEFT;
 
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
@@ -103,5 +115,20 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
       this.colorText = colorText;
       return this;
     }
+
+    public TextAlign getTextAlign() {
+      return textAlign;
+    }
+
+    public Properties setTextAlign(TextAlign textAlign) {
+      this.textAlign = textAlign;
+      return this;
+    }
+  }
+
+  public enum TextAlign {
+    LEFT,
+    CENTER,
+    RIGHT
   }
 }
