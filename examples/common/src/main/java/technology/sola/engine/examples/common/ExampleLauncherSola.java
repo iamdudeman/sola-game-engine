@@ -76,7 +76,7 @@ public class ExampleLauncherSola extends Sola {
     ButtonGuiElement exampleLaunchButton = solaGui.createElement(
       ButtonGuiElement::new,
       ButtonGuiElement.Properties::new,
-      p -> p.setText(text).padding.set(5).margin.setBottom(5)
+      p -> p.setText(text).padding.set(5).margin.setBottom(5).setWidth(300)
     );
 
     exampleLaunchButton.setOnAction(() -> {

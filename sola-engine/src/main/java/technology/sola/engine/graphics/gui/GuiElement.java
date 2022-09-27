@@ -35,10 +35,18 @@ public abstract class GuiElement<T extends GuiElementProperties> {
   public abstract int getContentHeight();
 
   public int getWidth() {
+    if (properties.getWidth() != null) {
+      return properties.getWidth();
+    }
+
     return getContentWidth() + properties.padding.getLeft() + properties.padding.getRight();
   }
 
   public int getHeight() {
+    if (properties.getHeight() != null) {
+      return properties.getHeight();
+    }
+
     return getContentHeight() + properties.padding.getTop() + properties.padding.getBottom();
   }
 

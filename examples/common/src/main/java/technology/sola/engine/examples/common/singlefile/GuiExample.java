@@ -65,13 +65,13 @@ public class GuiExample extends Sola {
     StreamGuiElementContainer secondContainer = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.setBorderColor(Color.ORANGE).padding.set(5).margin.set(8, 0)
+      p -> p.setBorderColor(Color.ORANGE).padding.set(5).margin.set(8, 0).setWidth(410)
     );
 
     ButtonGuiElement checkButton = solaGui.createElement(
       ButtonGuiElement::new,
       ButtonGuiElement.Properties::new,
-      p -> p.margin.setRight(15).padding.set(15)
+      p -> p.margin.setRight(15).setWidth(30).setHeight(30)
     );
     checkButton.setOnAction(() -> checkButton.properties().setColorBackground(checkButton.properties().getColorBackground().equals(Color.RED) ? new Color(128, 128, 128) : Color.RED));
 

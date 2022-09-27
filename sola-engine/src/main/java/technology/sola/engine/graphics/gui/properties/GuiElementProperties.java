@@ -10,6 +10,8 @@ public class GuiElementProperties {
   private Color focusOutlineColor = null;
   private boolean isHidden;
   private boolean isFocusable = true;
+  private Integer width;
+  private Integer height;
 
   public GuiElementProperties(GuiElementGlobalProperties globalProperties) {
     this.globalProperties = globalProperties;
@@ -51,6 +53,28 @@ public class GuiElementProperties {
 
   public GuiElementProperties setFocusOutlineColor(Color focusOutlineColor) {
     this.focusOutlineColor = focusOutlineColor;
+
+    return this;
+  }
+
+  public Integer getWidth() {
+    return width;
+  }
+
+  public GuiElementProperties setWidth(Integer width) {
+    this.width = width;
+    setLayoutChanged(true);
+
+    return this;
+  }
+
+  public Integer getHeight() {
+    return height;
+  }
+
+  public GuiElementProperties setHeight(Integer height) {
+    this.height = height;
+    setLayoutChanged(true);
 
     return this;
   }
