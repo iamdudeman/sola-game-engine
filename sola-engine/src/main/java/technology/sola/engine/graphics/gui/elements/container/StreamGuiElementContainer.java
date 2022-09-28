@@ -74,16 +74,16 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
       };
     }
 
-//    Integer height = properties.getHeight();
+    Integer height = properties.getHeight();
     int alignOffsetY = 0;
 
-//    if (height != null) {
-//      alignOffsetY = switch (properties.verticalAlignment) {
-//        case TOP -> 0;
-//        case CENTER -> height / 2 - (getContentHeight() + properties.padding.getTop() + properties.padding.getBottom()) / 2;
-//        case BOTTOM -> (height - ((properties.padding.getTop() + properties.padding.getBottom() + getContentHeight())));
-//      };
-//    }
+    if (height != null) {
+      alignOffsetY = switch (properties.verticalAlignment) {
+        case TOP -> 0;
+        case CENTER -> height / 2 - (getContentHeight() + properties.padding.getTop() + properties.padding.getBottom()) / 2;
+        case BOTTOM -> (height - ((properties.padding.getTop() + properties.padding.getBottom() + getContentHeight())));
+      };
+    }
 
     int borderOffset = properties.getBorderColor() == null ? 0 : 1;
     int xOffset = getX() + properties.padding.getLeft() + borderOffset + alignOffsetX;

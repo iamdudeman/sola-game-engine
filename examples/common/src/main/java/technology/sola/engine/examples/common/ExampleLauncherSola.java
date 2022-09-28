@@ -54,6 +54,7 @@ public class ExampleLauncherSola extends Sola {
       StreamGuiElementContainer.Properties::new,
       p -> p.setFlow(StreamGuiElementContainer.Flow.VERTICAL).setGap(5)
         .setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.CENTER)
+        .setVerticalAlignment(StreamGuiElementContainer.VerticalAlignment.CENTER)
         .padding.set(5).setWidth(800).setHeight(580)
     );
 
