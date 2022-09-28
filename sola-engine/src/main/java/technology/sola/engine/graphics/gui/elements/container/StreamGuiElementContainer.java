@@ -14,8 +14,8 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     super(solaGui, properties);
 
     setOnKeyPressCallback(keyEvent -> {
-      int forwardKeyCode = properties.direction == Direction.HORIZONTAL ? Key.RIGHT.getCode() : Key.DOWN.getCode();
-      int backwardKeyCode = properties.direction == Direction.HORIZONTAL ? Key.LEFT.getCode() : Key.UP.getCode();
+      int forwardKeyCode = properties.flow == Flow.HORIZONTAL ? Key.RIGHT.getCode() : Key.DOWN.getCode();
+      int backwardKeyCode = properties.flow == Flow.HORIZONTAL ? Key.LEFT.getCode() : Key.UP.getCode();
 
       if (keyEvent.getKeyCode() == forwardKeyCode) {
         List<GuiElement<?>> focusableChildren = getFocusableChildren();
@@ -41,44 +41,52 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
 
   @Override
   public int getContentWidth() {
-    if (properties.direction == Direction.HORIZONTAL) {
-      return children.stream().mapToInt(ele -> ele.getWidth() + ele.properties().margin.getLeft() + ele.properties().margin.getRight()).sum();
+    if (properties.flow == Flow.HORIZONTAL) {
+      return children.stream().mapToInt(this::calculateChildRequiredHorizontalSpace).sum() + calculateSpaceFromGap();
     }
 
-    return children.stream().mapToInt(ele -> ele.getWidth() + ele.properties().margin.getLeft() + ele.properties().margin.getRight()).max().orElse(0);
+    return children.stream().mapToInt(this::calculateChildRequiredHorizontalSpace).max().orElse(0);
   }
 
   @Override
   public int getContentHeight() {
-    if (properties.direction == Direction.HORIZONTAL) {
-      return children.stream().mapToInt(ele -> ele.getHeight() + ele.properties().margin.getTop() + ele.properties().margin.getBottom()).max().orElse(0);
+    if (properties.flow == Flow.HORIZONTAL) {
+      return children.stream().mapToInt(this::calculateChildRequiredVerticalSpace).max().orElse(0);
     }
 
-    return children.stream().mapToInt(ele -> ele.getHeight() + ele.properties().margin.getTop() + ele.properties().margin.getBottom()).sum();
+    return children.stream().mapToInt(this::calculateChildRequiredVerticalSpace).sum() + calculateSpaceFromGap();
   }
 
   @Override
   public void recalculateLayout() {
     int borderOffset = properties.getBorderColor() == null ? 0 : 1;
-    int xOffset = properties.padding.getLeft() + borderOffset;
-    int yOffset = properties.padding.getTop() + borderOffset;
+    int xOffset = getX() + properties.padding.getLeft() + borderOffset;
+    int yOffset = getY() + properties.padding.getTop() + borderOffset;
 
     for (GuiElement<?> child : children) {
-      xOffset += child.properties().margin.getLeft();
-      yOffset += child.properties().margin.getTop();
+      var childMargin = child.properties().margin;
 
-      child.setPosition(getX() + xOffset, getY() + yOffset);
+      child.setPosition(xOffset + childMargin.getLeft(), yOffset + childMargin.getTop());
       child.recalculateLayout();
 
-      xOffset += child.properties().margin.getRight();
-      yOffset += child.properties().margin.getBottom();
-
-      if (properties().direction == Direction.HORIZONTAL) {
-        xOffset += child.getWidth();
-      } else if (properties.direction == Direction.VERTICAL) {
-        yOffset += child.getHeight();
+      if (properties().flow == Flow.HORIZONTAL) {
+        xOffset += childMargin.getLeft();
+        xOffset += childMargin.getRight();
+        xOffset += child.getWidth() + properties.gap;
+      } else if (properties.flow == Flow.VERTICAL) {
+        yOffset += childMargin.getTop();
+        yOffset += childMargin.getBottom();
+        yOffset += child.getHeight() + properties.gap;
       }
     }
+  }
+
+  private int calculateSpaceFromGap() {
+    if (children.isEmpty()) {
+      return 0;
+    }
+
+    return ((children.size() - 1) * properties.gap);
   }
 
   private int findFocussedChild(List<GuiElement<?>> children) {
@@ -96,25 +104,37 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
   }
 
   public static class Properties extends GuiElementProperties {
-    private Direction direction = Direction.HORIZONTAL;
+    private Flow flow = Flow.HORIZONTAL;
+    private int gap = 0;
 
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
     }
 
-    public Direction getDirection() {
-      return direction;
+    public Flow getFlow() {
+      return flow;
     }
 
-    public Properties setDirection(Direction direction) {
-      this.direction = direction;
+    public Properties setFlow(Flow flow) {
+      this.flow = flow;
+      setLayoutChanged(true);
+
+      return this;
+    }
+
+    public int getGap() {
+      return gap;
+    }
+
+    public Properties setGap(int gap) {
+      this.gap = gap;
       setLayoutChanged(true);
 
       return this;
     }
   }
 
-  public enum Direction {
+  public enum Flow {
     HORIZONTAL,
     VERTICAL
   }

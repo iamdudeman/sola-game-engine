@@ -56,7 +56,7 @@ public class AudioExample extends Sola {
     StreamGuiElementContainer rootElement = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).padding.set(10)
+      p -> p.setFlow(StreamGuiElementContainer.Flow.VERTICAL).padding.set(10)
     );
 
     rootElement.addChild(

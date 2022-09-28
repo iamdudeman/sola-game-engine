@@ -144,4 +144,12 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
       onMouseExit(event);
     }
   }
+
+  protected int calculateChildRequiredHorizontalSpace(GuiElement<?> childEle) {
+    return childEle.getWidth() + childEle.properties().margin.getLeft() + childEle.properties().margin.getRight();
+  }
+
+  protected int calculateChildRequiredVerticalSpace(GuiElement<?> childEle) {
+    return childEle.getHeight() + childEle.properties().margin.getTop() + childEle.properties().margin.getBottom();
+  }
 }
