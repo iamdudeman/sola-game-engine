@@ -1,8 +1,11 @@
 # Branch WIP
 * SolaGui Stuff
-  * GuiElementContainer
-    _* Consider adding anchor support to Stream or a new container to be able to easily center things?_
   * Some sort of image element
+* Bug
+  * Infinite layout rebuilding
+    1. Go to Gui example
+    2. Toggle checkbox button to be hidden
+    3. Click change font button
 
 -----------------------------------------------------------------------------------------------------------------------
 
