@@ -92,7 +92,7 @@ public class GuiExample extends Sola {
     StreamGuiElementContainer rootElement = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.GREEN).padding.set(10)
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.GREEN)
     );
 
     ButtonGuiElement toggleFontButton = solaGui.createElement(
@@ -121,7 +121,7 @@ public class GuiExample extends Sola {
     TextGuiElement textGuiElement = solaGui.createElement(
       TextGuiElement::new,
       TextGuiElement.Properties::new,
-      p -> p.setText("Type a key").setColorText(Color.WHITE).setFocusable(true).padding.set(3).margin.setTop(10).setFocusOutlineColor(Color.LIGHT_BLUE)
+      p -> p.setText("Type a key").setColorText(Color.WHITE).setFocusable(true).padding.set(3).margin.setTop(10).setFocusOutlineColor(Color.LIGHT_BLUE).setBorderColor(Color.WHITE)
     );
 
     textGuiElement.setOnKeyPressCallback(guiKeyEvent -> {

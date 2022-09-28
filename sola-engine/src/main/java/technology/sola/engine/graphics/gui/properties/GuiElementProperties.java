@@ -10,6 +10,7 @@ public class GuiElementProperties {
   private Color focusOutlineColor = null;
   private boolean isHidden;
   private boolean isFocusable = true;
+  private Color borderColor;
   private Integer width;
   private Integer height;
 
@@ -53,6 +54,21 @@ public class GuiElementProperties {
 
   public GuiElementProperties setFocusOutlineColor(Color focusOutlineColor) {
     this.focusOutlineColor = focusOutlineColor;
+
+    return this;
+  }
+
+  public Color getBorderColor() {
+    return borderColor;
+  }
+
+  public GuiElementProperties setBorderColor(Color borderColor) {
+    if (this.borderColor == null && borderColor != null) {
+      setLayoutChanged(true);
+    } else if (this.borderColor != null && borderColor == null) {
+      setLayoutChanged(true);
+    }
+    this.borderColor = borderColor;
 
     return this;
   }

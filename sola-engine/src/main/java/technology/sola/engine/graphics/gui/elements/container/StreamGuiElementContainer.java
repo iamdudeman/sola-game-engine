@@ -1,7 +1,6 @@
 package technology.sola.engine.graphics.gui.elements.container;
 
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementContainer;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
@@ -61,15 +60,13 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
 
   @Override
   public void renderSelf(Renderer renderer, int x, int y) {
-    if (properties.borderColor != null) {
-      renderer.drawRect(x, y, getWidth(), getHeight(), properties.getBorderColor());
-    }
   }
 
   @Override
   public void recalculateLayout() {
-    int xOffset = properties.padding.getLeft();
-    int yOffset = properties.padding.getTop();
+    int borderOffset = properties.getBorderColor() == null ? 0 : 1;
+    int xOffset = properties.padding.getLeft() + borderOffset;
+    int yOffset = properties.padding.getTop() + borderOffset;
 
     for (GuiElement<?> child : children) {
       xOffset += child.properties().margin.getLeft();
@@ -104,21 +101,10 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
   }
 
   public static class Properties extends GuiElementProperties {
-    private Color borderColor;
     private Direction direction = Direction.HORIZONTAL;
 
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
-    }
-
-    public Color getBorderColor() {
-      return borderColor;
-    }
-
-    public Properties setBorderColor(Color borderColor) {
-      this.borderColor = borderColor;
-
-      return this;
     }
 
     public Direction getDirection() {

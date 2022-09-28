@@ -29,11 +29,17 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
     }
 
     if (!properties.isHidden()) {
-      renderSelf(renderer, getX(), getY());
+      int borderOffset = properties.getBorderColor() == null ? 0 : 1;
+
+      renderSelf(renderer, getX() + borderOffset, getY() + borderOffset);
 
       children.stream()
         .filter(child -> !child.properties.isHidden())
         .forEach(child -> child.render(renderer));
+
+      if (properties.getBorderColor() != null) {
+        renderer.drawRect(getX(), getY(), getWidth(), getHeight(), properties.getBorderColor());
+      }
 
       if (properties.getFocusOutlineColor() != null && isFocussed()) {
         renderer.drawRect(getX() - 1, getY() - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());

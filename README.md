@@ -1,7 +1,8 @@
 # Branch WIP
 * SolaGui Stuff
   * GuiElementContainer
-    * Consider adding anchor support to Stream or a new container to be able to easily center things?
+    _* Consider adding anchor support to Stream or a new container to be able to easily center things?_
+  * Some sort of image element
 
 -----------------------------------------------------------------------------------------------------------------------
 

@@ -39,7 +39,9 @@ public abstract class GuiElement<T extends GuiElementProperties> {
       return properties.getWidth();
     }
 
-    return getContentWidth() + properties.padding.getLeft() + properties.padding.getRight();
+    int borderSize = properties.getBorderColor() == null ? 0 : 2;
+
+    return getContentWidth() + properties.padding.getLeft() + properties.padding.getRight() + borderSize;
   }
 
   public int getHeight() {
@@ -47,7 +49,9 @@ public abstract class GuiElement<T extends GuiElementProperties> {
       return properties.getHeight();
     }
 
-    return getContentHeight() + properties.padding.getTop() + properties.padding.getBottom();
+    int borderSize = properties.getBorderColor() == null ? 0 : 2;
+
+    return getContentHeight() + properties.padding.getTop() + properties.padding.getBottom() + borderSize;
   }
 
   public abstract void recalculateLayout();
@@ -61,7 +65,13 @@ public abstract class GuiElement<T extends GuiElementProperties> {
     }
 
     if (!properties.isHidden()) {
-      renderSelf(renderer, x, y);
+      int borderOffset = properties.getBorderColor() == null ? 0 : 1;
+
+      renderSelf(renderer, x + borderOffset, y + borderOffset);
+
+      if (properties.getBorderColor() != null) {
+        renderer.drawRect(x, y, getWidth(), getHeight(), properties.getBorderColor());
+      }
 
       if (properties.getFocusOutlineColor() != null && isFocussed()) {
         renderer.drawRect(x, y - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
