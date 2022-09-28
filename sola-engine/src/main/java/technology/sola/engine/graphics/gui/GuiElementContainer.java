@@ -21,12 +21,12 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
 
   @Override
   public void render(Renderer renderer) {
+    super.render(renderer);
+
     if (children.stream().anyMatch(child -> child.properties().isLayoutChanged())) {
       recalculateLayout();
       properties().setLayoutChanged(false);
     }
-
-    super.render(renderer);
 
     if (!properties().isHidden()) {
       children.stream()
