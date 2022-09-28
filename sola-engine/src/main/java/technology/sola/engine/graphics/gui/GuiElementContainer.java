@@ -21,30 +21,23 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
 
   @Override
   public void render(Renderer renderer) {
-    T properties = properties();
-
-    if (properties.isLayoutChanged() || children.stream().anyMatch(child -> child.properties().isLayoutChanged())) {
+    if (children.stream().anyMatch(child -> child.properties().isLayoutChanged())) {
       recalculateLayout();
-      properties.setLayoutChanged(false);
+      properties().setLayoutChanged(false);
     }
 
-    if (!properties.isHidden()) {
-      int borderOffset = properties.getBorderColor() == null ? 0 : 1;
+    super.render(renderer);
 
-      renderSelf(renderer, getX() + borderOffset, getY() + borderOffset);
-
+    if (!properties().isHidden()) {
       children.stream()
         .filter(child -> !child.properties.isHidden())
         .forEach(child -> child.render(renderer));
-
-      if (properties.getBorderColor() != null) {
-        renderer.drawRect(getX(), getY(), getWidth(), getHeight(), properties.getBorderColor());
-      }
-
-      if (properties.getFocusOutlineColor() != null && isFocussed()) {
-        renderer.drawRect(getX() - 1, getY() - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
-      }
     }
+  }
+
+  @Override
+  public void renderSelf(Renderer renderer, int x, int y) {
+    // Nothing needed here
   }
 
   @Override

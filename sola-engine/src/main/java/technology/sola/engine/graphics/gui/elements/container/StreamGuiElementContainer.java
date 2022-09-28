@@ -5,7 +5,6 @@ import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementContainer;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.properties.GuiElementProperties;
-import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 
 import java.util.List;
@@ -56,10 +55,6 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     }
 
     return children.stream().mapToInt(ele -> ele.getHeight() + ele.properties().margin.getTop() + ele.properties().margin.getBottom()).sum();
-  }
-
-  @Override
-  public void renderSelf(Renderer renderer, int x, int y) {
   }
 
   @Override
