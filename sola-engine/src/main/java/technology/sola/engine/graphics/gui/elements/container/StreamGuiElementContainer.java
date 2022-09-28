@@ -41,27 +41,53 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
 
   @Override
   public int getContentWidth() {
+    var childrenHorizontalSpaceStream = children.stream().mapToInt(this::calculateChildRequiredHorizontalSpace);
+
     if (properties.flow == Flow.HORIZONTAL) {
-      return children.stream().mapToInt(this::calculateChildRequiredHorizontalSpace).sum() + calculateSpaceFromGap();
+      return childrenHorizontalSpaceStream.sum() + calculateSpaceFromGap();
     }
 
-    return children.stream().mapToInt(this::calculateChildRequiredHorizontalSpace).max().orElse(0);
+    return childrenHorizontalSpaceStream.max().orElse(0);
   }
 
   @Override
   public int getContentHeight() {
+    var childrenVerticalSpaceStream = children.stream().mapToInt(this::calculateChildRequiredVerticalSpace);
+
     if (properties.flow == Flow.HORIZONTAL) {
-      return children.stream().mapToInt(this::calculateChildRequiredVerticalSpace).max().orElse(0);
+      return childrenVerticalSpaceStream.max().orElse(0);
     }
 
-    return children.stream().mapToInt(this::calculateChildRequiredVerticalSpace).sum() + calculateSpaceFromGap();
+    return childrenVerticalSpaceStream.sum() + calculateSpaceFromGap();
   }
 
   @Override
   public void recalculateLayout() {
+    Integer width = properties.getWidth();
+    int alignOffsetX = 0;
+
+    if (width != null) {
+      alignOffsetX = switch (properties.horizontalAlignment) {
+        case LEFT -> 0;
+        case CENTER -> width / 2 - (getContentWidth() + properties.padding.getLeft() + properties.padding.getRight()) / 2;
+        case RIGHT -> (width - ((properties.padding.getLeft() + properties.padding.getRight() + getContentWidth())));
+      };
+    }
+
+//    Integer height = properties.getHeight();
+    int alignOffsetY = 0;
+
+//    if (height != null) {
+//      alignOffsetY = switch (properties.verticalAlignment) {
+//        case TOP -> 0;
+//        case CENTER -> height / 2 - (getContentHeight() + properties.padding.getTop() + properties.padding.getBottom()) / 2;
+//        case BOTTOM -> (height - ((properties.padding.getTop() + properties.padding.getBottom() + getContentHeight())));
+//      };
+//    }
+
     int borderOffset = properties.getBorderColor() == null ? 0 : 1;
-    int xOffset = getX() + properties.padding.getLeft() + borderOffset;
-    int yOffset = getY() + properties.padding.getTop() + borderOffset;
+    int xOffset = getX() + properties.padding.getLeft() + borderOffset + alignOffsetX;
+    int yOffset = getY() + properties.padding.getTop() + borderOffset + alignOffsetY;
 
     for (GuiElement<?> child : children) {
       var childMargin = child.properties().margin;
@@ -105,6 +131,8 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
 
   public static class Properties extends GuiElementProperties {
     private Flow flow = Flow.HORIZONTAL;
+    private HorizontalAlignment horizontalAlignment = HorizontalAlignment.LEFT;
+    private VerticalAlignment verticalAlignment = VerticalAlignment.TOP;
     private int gap = 0;
 
     public Properties(GuiElementGlobalProperties globalProperties) {
@@ -122,6 +150,28 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
       return this;
     }
 
+    public HorizontalAlignment getHorizontalAlignment() {
+      return horizontalAlignment;
+    }
+
+    public Properties setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
+      this.horizontalAlignment = horizontalAlignment;
+      setLayoutChanged(true);
+
+      return this;
+    }
+
+    public VerticalAlignment getVerticalAlignment() {
+      return verticalAlignment;
+    }
+
+    public Properties setVerticalAlignment(VerticalAlignment verticalAlignment) {
+      this.verticalAlignment = verticalAlignment;
+      setLayoutChanged(true);
+
+      return this;
+    }
+
     public int getGap() {
       return gap;
     }
@@ -132,6 +182,18 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
 
       return this;
     }
+  }
+
+  public enum VerticalAlignment {
+    TOP,
+    CENTER,
+    BOTTOM
+  }
+
+  public enum HorizontalAlignment {
+    LEFT,
+    CENTER,
+    RIGHT
   }
 
   public enum Flow {

@@ -52,7 +52,9 @@ public class ExampleLauncherSola extends Sola {
     StreamGuiElementContainer rootElement = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.setFlow(StreamGuiElementContainer.Flow.VERTICAL).setGap(5).padding.set(5)
+      p -> p.setFlow(StreamGuiElementContainer.Flow.VERTICAL).setGap(5)
+        .setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.CENTER)
+        .padding.set(5).setWidth(800).setHeight(580)
     );
 
     rootElement.addChild(solaGui.createElement(
