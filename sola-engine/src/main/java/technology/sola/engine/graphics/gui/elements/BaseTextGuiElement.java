@@ -40,7 +40,7 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
       if (width != null) {
         alignOffsetX = switch (properties.textAlign) {
           case LEFT -> 0;
-          case CENTER -> width / 2 - getContentWidth() / 2;
+          case CENTER -> width / 2 - (getContentWidth() + properties.padding.getLeft() + properties.padding.getRight()) / 2;
           case RIGHT -> (width - ((properties.padding.getLeft() + properties.padding.getRight() + getContentWidth())));
         };
       }
