@@ -74,7 +74,7 @@ public abstract class GuiElement<T extends GuiElementProperties> {
       }
 
       if (properties.getFocusOutlineColor() != null && isFocussed()) {
-        renderer.drawRect(x, y - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
+        renderer.drawRect(x - 1, y - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
       }
     }
   }
