@@ -29,10 +29,13 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
     }
 
     if (!properties().isHidden()) {
-      children.stream()
-        .filter(child -> !child.properties.isHidden())
-        .forEach(child -> child.render(renderer));
+      children.forEach(child -> child.render(renderer));
     }
+  }
+
+  @Override
+  public boolean isLayoutChanged() {
+    return super.isLayoutChanged() || children.stream().anyMatch(GuiElement::isLayoutChanged);
   }
 
   @Override

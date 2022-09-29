@@ -56,10 +56,14 @@ public abstract class GuiElement<T extends GuiElementProperties> {
 
   public abstract void recalculateLayout();
 
+  public boolean isLayoutChanged() {
+    return properties().isLayoutChanged();
+  }
+
   public abstract void renderSelf(Renderer renderer, int x, int y);
 
   public void render(Renderer renderer) {
-    if (properties.isLayoutChanged()) {
+    if (isLayoutChanged()) {
       recalculateLayout();
       properties.setLayoutChanged(false);
     }
