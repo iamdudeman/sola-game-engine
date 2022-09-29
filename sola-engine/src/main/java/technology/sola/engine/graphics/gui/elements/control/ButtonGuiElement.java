@@ -37,17 +37,18 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
     int width = getWidth();
     int height = getHeight();
 
-    renderer.fillRect(x, y, width, height, isHovered ? properties.colorBackgroundHover : properties.colorBackground);
-    renderer.drawRect(x, y, width, height, isHovered ? properties.colorBorderHover : properties.colorBorder);
-
     Color baseTextColor = properties.getColorText();
+    Color borderColor = properties.getBorderColor();
 
     if (isHovered) {
+      properties.setBorderColor(properties.colorBorderHover); // todo need to do this for over color
       properties.setColorText(properties.colorTextHover);
     }
 
+    renderer.fillRect(x, y, width, height, isHovered ? properties.colorBackgroundHover : properties.colorBackground);
     super.renderSelf(renderer, x, y);
 
+    properties.setBorderColor(borderColor); // todo need to do this to reset the color but border is drawn in #render !
     properties.setColorText(baseTextColor);
   }
 
@@ -93,7 +94,6 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
   }
 
   public static class Properties extends BaseTextGuiElement.Properties {
-    private Color colorBorder = new Color(128, 128, 128);
     private Color colorBorderHover = new Color(128, 128, 128);
     private Color colorBackground = new Color(128, 128, 128);
     private Color colorBackgroundHover = Color.WHITE;
@@ -111,15 +111,6 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
 
     public Properties setColorBackground(Color colorBackground) {
       this.colorBackground = colorBackground;
-      return this;
-    }
-
-    public Color getColorBorder() {
-      return colorBorder;
-    }
-
-    public Properties setColorBorder(Color colorBorder) {
-      this.colorBorder = colorBorder;
       return this;
     }
 
