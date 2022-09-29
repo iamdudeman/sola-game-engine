@@ -1,8 +1,6 @@
 # Branch WIP
 * SolaGui Stuff
   * Some sort of image element
-* Bugs
-  * hover border color in ButtonGuiElement not working right (see todo comments )
 
 -----------------------------------------------------------------------------------------------------------------------
 

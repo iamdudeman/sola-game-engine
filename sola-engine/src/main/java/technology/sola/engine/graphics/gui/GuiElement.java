@@ -73,8 +73,9 @@ public abstract class GuiElement<T extends GuiElementProperties> {
 
       renderSelf(renderer, x + borderOffset, y + borderOffset);
 
+      // TODO probably should also render if hover border color is not null and is hovered
       if (properties.getBorderColor() != null) {
-        renderer.drawRect(x, y, getWidth(), getHeight(), properties.getBorderColor());
+        renderer.drawRect(x, y, getWidth(), getHeight(), isHovered() ? properties.getHoverBorderColor() : properties.getBorderColor());
       }
 
       if (properties.getFocusOutlineColor() != null && isFocussed()) {
@@ -95,6 +96,10 @@ public abstract class GuiElement<T extends GuiElementProperties> {
 
   public int getY() {
     return y;
+  }
+
+  public boolean isHovered() {
+    return wasMouseOverElement;
   }
 
   public boolean isFocussed() {

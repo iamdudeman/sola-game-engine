@@ -11,6 +11,7 @@ public class GuiElementProperties {
   private boolean isHidden;
   private boolean isFocusable = true;
   private Color borderColor;
+  private Color hoverBorderColor;
   private Integer width;
   private Integer height;
 
@@ -70,6 +71,16 @@ public class GuiElementProperties {
     }
     this.borderColor = borderColor;
 
+    return this;
+  }
+
+  public Color getHoverBorderColor() {
+    return hoverBorderColor == null ? getBorderColor() : hoverBorderColor;
+  }
+
+  public GuiElementProperties setHoverBorderColor(Color hoverBorderColor) {
+    // todo probably need layout changed stuff
+    this.hoverBorderColor = hoverBorderColor;
     return this;
   }
 
