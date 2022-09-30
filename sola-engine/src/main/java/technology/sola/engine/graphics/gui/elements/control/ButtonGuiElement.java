@@ -42,7 +42,7 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
       properties.setColorText(properties.colorTextHover);
     }
 
-    renderer.fillRect(x, y, width, height, isHovered() ? properties.colorBackgroundHover : properties.colorBackground);
+    renderer.fillRect(x - properties.padding.getLeft(), y - properties.padding.getTop(), width, height, isHovered() ? properties.colorBackgroundHover : properties.colorBackground);
     super.renderSelf(renderer, x, y);
 
     properties.setColorText(baseTextColor);

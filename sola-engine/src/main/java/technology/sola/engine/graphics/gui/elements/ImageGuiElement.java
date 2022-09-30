@@ -64,7 +64,7 @@ public class ImageGuiElement extends GuiElement<ImageGuiElement.Properties> {
   public void renderSelf(Renderer renderer, int x, int y) {
     if (transformedImage != null) {
       renderer.setBlendMode(BlendMode.MASK);
-      renderer.drawImage(x + properties.padding.getLeft(), y + properties.padding.getTop(), transformedImage);
+      renderer.drawImage(x, y, transformedImage);
       renderer.setBlendMode(BlendMode.NO_BLENDING);
     }
   }
@@ -74,6 +74,7 @@ public class ImageGuiElement extends GuiElement<ImageGuiElement.Properties> {
 
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
+      setFocusable(false);
     }
 
     public String getAssetId() {

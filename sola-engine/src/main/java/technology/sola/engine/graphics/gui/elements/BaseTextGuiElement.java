@@ -46,12 +46,7 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
       }
 
       renderer.setFont(font);
-      renderer.drawString(
-        properties.getText(),
-        x + alignOffsetX + properties.padding.getLeft(),
-        y + properties.padding.getTop(),
-        properties.getColorText()
-      );
+      renderer.drawString(properties.getText(), x + alignOffsetX, y, properties.getColorText());
     }
   }
 
