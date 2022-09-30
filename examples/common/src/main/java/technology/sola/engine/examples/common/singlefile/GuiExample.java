@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.singlefile;
 
+import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
@@ -7,6 +8,7 @@ import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
+import technology.sola.engine.graphics.gui.elements.ImageGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
@@ -27,6 +29,8 @@ public class GuiExample extends Sola {
     solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
     solaGui.setGuiRoot(buildGui(), 15, 15);
 
+    assetLoaderProvider.get(SolaImage.class)
+      .addAssetMapping("test", "assets/test_tiles.png");
     assetLoaderProvider.get(Font.class)
       .addAssetMapping("times_NORMAL_18", "assets/times_NORMAL_18.json");
   }
@@ -66,7 +70,7 @@ public class GuiExample extends Sola {
     StreamGuiElementContainer secondContainer = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.setBorderColor(Color.ORANGE).padding.set(5).margin.set(8, 0).setWidth(410)
+      p -> p.setBorderColor(Color.ORANGE).padding.set(5).setWidth(410)
     );
 
     ButtonGuiElement checkButton = solaGui.createElement(
@@ -92,7 +96,7 @@ public class GuiExample extends Sola {
     StreamGuiElementContainer rootElement = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.setFlow(StreamGuiElementContainer.Flow.VERTICAL).setBorderColor(Color.GREEN)
+      p -> p.setFlow(StreamGuiElementContainer.Flow.VERTICAL).setGap(15).setBorderColor(Color.GREEN)
     );
 
     ButtonGuiElement toggleFontButton = solaGui.createElement(
@@ -111,7 +115,12 @@ public class GuiExample extends Sola {
       firstContainer,
       secondContainer,
       toggleFontButton,
-      createKeyTesterElement()
+      createKeyTesterElement(),
+      solaGui.createElement(
+        ImageGuiElement::new,
+        ImageGuiElement.Properties::new,
+        p -> p.setAssetId("test")
+      )
     );
 
     return rootElement;
