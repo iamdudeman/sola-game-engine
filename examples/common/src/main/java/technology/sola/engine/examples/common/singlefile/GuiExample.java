@@ -70,7 +70,7 @@ public class GuiExample extends Sola {
     StreamGuiElementContainer secondContainer = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.setBorderColor(Color.ORANGE).padding.set(5).setWidth(410)
+      p -> p.setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.RIGHT).setBorderColor(Color.ORANGE).padding.set(5).setWidth(410)
     );
 
     ButtonGuiElement checkButton = solaGui.createElement(
