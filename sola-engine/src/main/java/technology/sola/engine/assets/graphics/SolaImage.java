@@ -29,7 +29,6 @@ public class SolaImage extends Canvas implements Asset {
 
     for (int i = 0; i < subPixels.length; i++) {
       subPixels[i] = this.pixels[startingIndex + parentHorizontalOffset + parentVerticalOffset];
-
       parentHorizontalOffset++;
 
       if (parentHorizontalOffset >= width) {
@@ -43,13 +42,9 @@ public class SolaImage extends Canvas implements Asset {
 
   public SolaImage resize(int newWidth, int newHeight) {
     int[] newImagePixels = new int[newWidth * newHeight];
-
     float scaleX = (float) newWidth / getWidth();
     float scaleY = (float) newHeight / getHeight();
-
-    AffineTransform affineTransform = new AffineTransform()
-      .scale(scaleX, scaleY);
-
+    AffineTransform affineTransform = new AffineTransform().scale(scaleX, scaleY);
     Rectangle transformBoundingBox = affineTransform.getBoundingBoxForTransform(getWidth(), getHeight());
 
     for (int x = (int) transformBoundingBox.getMin().x(); x < transformBoundingBox.getMax().x(); x++) {

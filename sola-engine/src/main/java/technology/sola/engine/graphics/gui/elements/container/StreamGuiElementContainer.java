@@ -63,31 +63,10 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
 
   @Override
   public void recalculateLayout() {
-    Integer width = properties.getWidth();
-    int alignOffsetX = 0;
-
-    if (width != null) {
-      alignOffsetX = switch (properties.horizontalAlignment) {
-        case LEFT -> 0;
-        case CENTER -> width / 2 - (getContentWidth() + properties.padding.getLeft() + properties.padding.getRight()) / 2;
-        case RIGHT -> (width - ((properties.padding.getLeft() + properties.padding.getRight() + getContentWidth())));
-      };
-    }
-
-    Integer height = properties.getHeight();
-    int alignOffsetY = 0;
-
-    if (height != null) {
-      alignOffsetY = switch (properties.verticalAlignment) {
-        case TOP -> 0;
-        case CENTER -> height / 2 - (getContentHeight() + properties.padding.getTop() + properties.padding.getBottom()) / 2;
-        case BOTTOM -> (height - ((properties.padding.getTop() + properties.padding.getBottom() + getContentHeight())));
-      };
-    }
-
+    Properties properties = this.properties;
     int borderOffset = properties.getBorderColor() == null ? 0 : 1;
-    int xOffset = getX() + properties.padding.getLeft() + borderOffset + alignOffsetX;
-    int yOffset = getY() + properties.padding.getTop() + borderOffset + alignOffsetY;
+    int xOffset = getX() + properties.padding.getLeft() + borderOffset + getHorizontalAlignmentOffset();
+    int yOffset = getY() + properties.padding.getTop() + borderOffset + getVerticalAlignmentOffset();
 
     for (GuiElement<?> child : children) {
       var childMargin = child.properties().margin;
@@ -96,15 +75,39 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
       child.recalculateLayout();
 
       if (properties().flow == Flow.HORIZONTAL) {
-        xOffset += childMargin.getLeft();
-        xOffset += childMargin.getRight();
-        xOffset += child.getWidth() + properties.gap;
+        xOffset += childMargin.getLeft() + childMargin.getRight() + child.getWidth() + properties.gap;
       } else if (properties.flow == Flow.VERTICAL) {
-        yOffset += childMargin.getTop();
-        yOffset += childMargin.getBottom();
-        yOffset += child.getHeight() + properties.gap;
+        yOffset += childMargin.getTop() + childMargin.getBottom() + child.getHeight() + properties.gap;
       }
     }
+  }
+
+  private int getHorizontalAlignmentOffset() {
+    Integer width = properties.getWidth();
+
+    if (width == null) {
+      return 0;
+    }
+
+    return switch (properties.horizontalAlignment) {
+      case LEFT -> 0;
+      case CENTER -> width / 2 - (getContentWidth() + properties.padding.getLeft() + properties.padding.getRight()) / 2;
+      case RIGHT -> (width - ((properties.padding.getLeft() + properties.padding.getRight() + getContentWidth())));
+    };
+  }
+
+  private int getVerticalAlignmentOffset() {
+    Integer height = properties.getHeight();
+
+    if (height == null) {
+      return 0;
+    }
+
+    return switch (properties.verticalAlignment) {
+      case TOP -> 0;
+      case CENTER -> height / 2 - (getContentHeight() + properties.padding.getTop() + properties.padding.getBottom()) / 2;
+      case BOTTOM -> (height - ((properties.padding.getTop() + properties.padding.getBottom() + getContentHeight())));
+    };
   }
 
   private int calculateSpaceFromGap() {
