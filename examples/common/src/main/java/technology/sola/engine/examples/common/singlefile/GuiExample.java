@@ -116,11 +116,7 @@ public class GuiExample extends Sola {
       secondContainer,
       toggleFontButton,
       createKeyTesterElement(),
-      solaGui.createElement(
-        ImageGuiElement::new,
-        ImageGuiElement.Properties::new,
-        p -> p.setAssetId("test")
-      )
+      createImageContainer()
     );
 
     return rootElement;
@@ -149,5 +145,33 @@ public class GuiExample extends Sola {
     });
 
     return textGuiElement;
+  }
+
+  private GuiElement<?> createImageContainer() {
+    StreamGuiElementContainer streamGuiElementContainer = solaGui.createElement(
+      StreamGuiElementContainer::new,
+      StreamGuiElementContainer.Properties::new,
+      p -> p.setGap(5)
+    );
+
+    streamGuiElementContainer.addChild(
+      solaGui.createElement(
+        ImageGuiElement::new,
+        ImageGuiElement.Properties::new,
+        p -> p.setAssetId("test").setBorderColor(Color.ORANGE).padding.set(5)
+      ),
+      solaGui.createElement(
+        ImageGuiElement::new,
+        ImageGuiElement.Properties::new,
+        p -> p.setAssetId("test").setWidth(50).setHeight(50).setBorderColor(Color.GREEN).padding.set(5)
+      ),
+      solaGui.createElement(
+        ImageGuiElement::new,
+        ImageGuiElement.Properties::new,
+        p -> p.setAssetId("test").setWidth(150).setHeight(150).setBorderColor(Color.YELLOW).padding.set(5)
+      )
+    );
+
+    return streamGuiElementContainer;
   }
 }

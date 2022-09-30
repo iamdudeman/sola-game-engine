@@ -5,13 +5,15 @@ import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.properties.GuiElementProperties;
+import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 public class ImageGuiElement extends GuiElement<ImageGuiElement.Properties> {
-  private int imageWidth;
-  private int imageHeight;
+  private int imageWidth = 1;
+  private int imageHeight = 1;
   private String currentAssetId;
   private SolaImage solaImage;
+  private SolaImage transformedImage;
 
   public ImageGuiElement(SolaGui solaGui, Properties properties) {
     super(solaGui, properties);
@@ -41,15 +43,29 @@ public class ImageGuiElement extends GuiElement<ImageGuiElement.Properties> {
     }
 
     if (solaImage != null) {
-      imageWidth = solaImage.getWidth();
-      imageHeight = solaImage.getHeight();
+      if (properties.getWidth() != null || properties.getHeight() != null) {
+        int width = properties().getWidth() == null ? solaImage.getWidth() : properties.getWidth();
+        int height = properties().getHeight() == null ? solaImage.getHeight() : properties.getHeight();
+
+        transformedImage = solaImage.resize(
+          width - properties.padding.getLeft() - properties.padding.getRight(),
+          height - properties.padding.getTop() - properties.padding.getBottom()
+        );
+      } else {
+        transformedImage = solaImage;
+      }
+
+      imageWidth = transformedImage.getWidth();
+      imageHeight = transformedImage.getHeight();
     }
   }
 
   @Override
   public void renderSelf(Renderer renderer, int x, int y) {
-    if (solaImage != null) {
-      renderer.drawImage(x, y, solaImage);
+    if (transformedImage != null) {
+      renderer.setBlendMode(BlendMode.MASK);
+      renderer.drawImage(x + properties.padding.getLeft(), y + properties.padding.getTop(), transformedImage);
+      renderer.setBlendMode(BlendMode.NO_BLENDING);
     }
   }
 

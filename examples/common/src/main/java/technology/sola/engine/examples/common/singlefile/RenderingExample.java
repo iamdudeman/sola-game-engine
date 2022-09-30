@@ -4,6 +4,7 @@ import technology.sola.ecs.Component;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
+import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
@@ -41,6 +42,8 @@ public class RenderingExample extends Sola {
 
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
 
+    assetLoaderProvider.get(SolaImage.class)
+      .addAssetMapping("test", "assets/test_tiles.png");
     assetLoaderProvider.get(SpriteSheet.class)
       .addAssetMapping("test", "assets/test_tiles_spritesheet.json");
   }
@@ -61,6 +64,13 @@ public class RenderingExample extends Sola {
 
       renderer.drawLine(0, 0, 800, 600, Color.BLUE);
       renderer.drawLine(750, 0, 20, 500, Color.BLUE);
+
+      assetLoaderProvider.get(SolaImage.class).get("test").executeIfLoaded(solaImage -> {
+        renderer.fillRect(350, 320, 200, 200, Color.WHITE);
+        renderer.setBlendMode(BlendMode.MASK);
+        renderer.drawImage(solaImage , 350, 320, 200, 200);
+        renderer.setBlendMode(BlendMode.NO_BLENDING);
+      });
     });
 
     solaGraphics.render();

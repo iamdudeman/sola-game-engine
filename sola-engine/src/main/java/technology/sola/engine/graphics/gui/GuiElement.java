@@ -71,6 +71,7 @@ public abstract class GuiElement<T extends GuiElementProperties> {
     if (!properties.isHidden()) {
       int borderOffset = properties.getBorderColor() == null ? 0 : 1;
 
+      // todo hook up padding left and top here maybe?
       renderSelf(renderer, x + borderOffset, y + borderOffset);
 
       if (properties.getBorderColor() != null) {
