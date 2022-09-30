@@ -56,14 +56,14 @@ public class AudioExample extends Sola {
     StreamGuiElementContainer rootElement = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.setFlow(StreamGuiElementContainer.Flow.VERTICAL).padding.set(10)
+      p -> p.setFlow(StreamGuiElementContainer.Flow.VERTICAL).setGap(8).padding.set(10)
     );
 
     rootElement.addChild(
       solaGui.createElement(
         TextGuiElement::new,
         TextGuiElement.Properties::new,
-        p -> p.setText("Play a Song").margin.setBottom(10)
+        p -> p.setText("Play a Song").padding.set(5)
       ),
       buildControlsContainer(audioClip),
       buildVolumeContainer(audioClip)
@@ -76,7 +76,7 @@ public class AudioExample extends Sola {
     StreamGuiElementContainer volumeContainer = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.padding.set(5).margin.set(8, 0)
+      p -> p.padding.set(5)
     );
 
     TextGuiElement volumeTextGuiElement = solaGui.createElement(
@@ -116,7 +116,7 @@ public class AudioExample extends Sola {
     StreamGuiElementContainer controlsContainer = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.padding.set(5).margin.set(8, 0)
+      p -> p.padding.set(5)
     );
 
     controlsContainer.addChild(
