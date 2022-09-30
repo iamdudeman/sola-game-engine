@@ -74,12 +74,17 @@ public class GuiElementProperties {
     return this;
   }
 
+  /**
+   * Note: hover border color will only render if there is also a border color set. If no hover color is set it will
+   * default to the current border color.
+   *
+   * @return the border color for when the {@link technology.sola.engine.graphics.gui.GuiElement} is hovered
+   */
   public Color getHoverBorderColor() {
     return hoverBorderColor == null ? getBorderColor() : hoverBorderColor;
   }
 
   public GuiElementProperties setHoverBorderColor(Color hoverBorderColor) {
-    // todo probably need layout changed stuff
     this.hoverBorderColor = hoverBorderColor;
     return this;
   }

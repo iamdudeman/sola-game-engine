@@ -73,7 +73,6 @@ public abstract class GuiElement<T extends GuiElementProperties> {
 
       renderSelf(renderer, x + borderOffset, y + borderOffset);
 
-      // TODO probably should also render if hover border color is not null and is hovered
       if (properties.getBorderColor() != null) {
         renderer.drawRect(x, y, getWidth(), getHeight(), isHovered() ? properties.getHoverBorderColor() : properties.getBorderColor());
       }
