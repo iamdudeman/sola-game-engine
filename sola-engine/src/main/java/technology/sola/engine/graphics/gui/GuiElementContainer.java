@@ -2,6 +2,7 @@ package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
+import technology.sola.engine.graphics.gui.properties.GuiElementProperties;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.math.geometry.Rectangle;
@@ -18,42 +19,28 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
     super(solaGui, properties);
   }
 
-  public abstract int getContentWidth();
-
-  public abstract int getContentHeight();
-
-  public int getWidth() {
-    return Math.min(properties().getMaxWidth(), getContentWidth());
-  }
-
-  public int getHeight() {
-    return Math.min(properties().getMaxHeight(), getContentHeight());
-  }
-
-  public abstract void recalculateLayout();
-
-  public abstract void renderSelf(Renderer renderer, int x, int y);
-
   @Override
   public void render(Renderer renderer) {
-    T properties = properties();
+    super.render(renderer);
 
-    if (properties.isLayoutChanged() || children.stream().anyMatch(child -> child.properties().isLayoutChanged())) {
+    if (children.stream().anyMatch(child -> child.properties().isLayoutChanged())) {
       recalculateLayout();
-      properties.setLayoutChanged(false);
+      properties().setLayoutChanged(false);
     }
 
-    if (!properties.isHidden()) {
-      renderSelf(renderer, properties.getX(), properties.getY());
-
-      children.stream()
-        .filter(child -> !child.properties.isHidden())
-        .forEach(child -> child.render(renderer));
-
-      if (properties.getFocusOutlineColor() != null && isFocussed()) {
-        renderer.drawRect(properties().getX() - 1, properties.getY() - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
-      }
+    if (!properties().isHidden()) {
+      children.forEach(child -> child.render(renderer));
     }
+  }
+
+  @Override
+  public boolean isLayoutChanged() {
+    return super.isLayoutChanged() || children.stream().anyMatch(GuiElement::isLayoutChanged);
+  }
+
+  @Override
+  public void renderSelf(Renderer renderer, int x, int y) {
+    // Nothing needed here
   }
 
   @Override
@@ -137,12 +124,10 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
       return;
     }
 
-    int x = properties.getX();
-    int y = properties.getY();
     int width = getWidth();
     int height = getHeight();
 
-    Rectangle guiElementBounds = new Rectangle(new Vector2D(x, y), new Vector2D(x + width, y + height));
+    Rectangle guiElementBounds = new Rectangle(new Vector2D(getX(), getY()), new Vector2D(getX() + width, getY() + height));
 
     if (guiElementBounds.contains(new Vector2D(event.x(), event.y()))) {
       switch (eventType) {
@@ -161,5 +146,13 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
 
       onMouseExit(event);
     }
+  }
+
+  protected int calculateChildRequiredHorizontalSpace(GuiElement<?> childEle) {
+    return childEle.getWidth() + childEle.properties().margin.getLeft() + childEle.properties().margin.getRight();
+  }
+
+  protected int calculateChildRequiredVerticalSpace(GuiElement<?> childEle) {
+    return childEle.getHeight() + childEle.properties().margin.getTop() + childEle.properties().margin.getBottom();
   }
 }

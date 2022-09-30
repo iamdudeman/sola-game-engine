@@ -1,12 +1,10 @@
 package technology.sola.engine.graphics.gui.elements.container;
 
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementContainer;
-import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
-import technology.sola.engine.graphics.gui.GuiElementProperties;
-import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
+import technology.sola.engine.graphics.gui.properties.GuiElementProperties;
 import technology.sola.engine.input.Key;
 
 import java.util.List;
@@ -43,47 +41,81 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
 
   @Override
   public int getContentWidth() {
-    return properties().preferredWidth;
+    var childrenHorizontalSpaceStream = children.stream().mapToInt(this::calculateChildRequiredHorizontalSpace);
+
+    if (properties.direction == Direction.HORIZONTAL) {
+      return childrenHorizontalSpaceStream.sum() + calculateSpaceFromGap();
+    }
+
+    return childrenHorizontalSpaceStream.max().orElse(0);
   }
 
   @Override
   public int getContentHeight() {
-    return properties().preferredHeight;
-  }
+    var childrenVerticalSpaceStream = children.stream().mapToInt(this::calculateChildRequiredVerticalSpace);
 
-  @Override
-  public void renderSelf(Renderer renderer, int x, int y) {
-    if (properties.borderColor != null) {
-      renderer.drawRect(x, y, getWidth(), getHeight(), properties.getBorderColor());
+    if (properties.direction == Direction.HORIZONTAL) {
+      return childrenVerticalSpaceStream.max().orElse(0);
     }
+
+    return childrenVerticalSpaceStream.sum() + calculateSpaceFromGap();
   }
 
   @Override
   public void recalculateLayout() {
-    int xOffset = properties.padding.getLeft();
-    int yOffset = properties.padding.getTop();
+    Properties properties = this.properties;
+    int borderOffset = properties.getBorderColor() == null ? 0 : 1;
+    int xOffset = getX() + properties.padding.getLeft() + borderOffset + getHorizontalAlignmentOffset();
+    int yOffset = getY() + properties.padding.getTop() + borderOffset + getVerticalAlignmentOffset();
 
     for (GuiElement<?> child : children) {
-      child.properties().setMaxDimensions(
-        getWidth() - properties.padding.getLeft() - properties.padding.getRight(),
-        getHeight() - properties.padding.getTop() - properties.padding.getBottom()
-      );
+      var childMargin = child.properties().margin;
 
-      xOffset += child.properties().margin.getLeft();
-      yOffset += child.properties().margin.getTop();
-
-      child.properties().setPosition(properties().getX() + xOffset, properties().getY() + yOffset);
+      child.setPosition(xOffset + childMargin.getLeft(), yOffset + childMargin.getTop());
       child.recalculateLayout();
 
-      xOffset += child.properties().margin.getRight();
-      yOffset += child.properties().margin.getBottom();
-
       if (properties().direction == Direction.HORIZONTAL) {
-        xOffset += child.getContentWidth();
+        xOffset += childMargin.getLeft() + childMargin.getRight() + child.getWidth() + properties.gap;
       } else if (properties.direction == Direction.VERTICAL) {
-        yOffset += child.getContentHeight();
+        yOffset += childMargin.getTop() + childMargin.getBottom() + child.getHeight() + properties.gap;
       }
     }
+  }
+
+  private int getHorizontalAlignmentOffset() {
+    Integer width = properties.getWidth();
+
+    if (width == null) {
+      return 0;
+    }
+
+    return switch (properties.horizontalAlignment) {
+      case LEFT -> 0;
+      case CENTER -> width / 2 - (getContentWidth() + properties.padding.getLeft() + properties.padding.getRight()) / 2;
+      case RIGHT -> (width - ((properties.padding.getLeft() + properties.padding.getRight() + getContentWidth())));
+    };
+  }
+
+  private int getVerticalAlignmentOffset() {
+    Integer height = properties.getHeight();
+
+    if (height == null) {
+      return 0;
+    }
+
+    return switch (properties.verticalAlignment) {
+      case TOP -> 0;
+      case CENTER -> height / 2 - (getContentHeight() + properties.padding.getTop() + properties.padding.getBottom()) / 2;
+      case BOTTOM -> (height - ((properties.padding.getTop() + properties.padding.getBottom() + getContentHeight())));
+    };
+  }
+
+  private int calculateSpaceFromGap() {
+    if (children.isEmpty()) {
+      return 0;
+    }
+
+    return ((children.size() - 1) * properties.gap);
   }
 
   private int findFocussedChild(List<GuiElement<?>> children) {
@@ -101,40 +133,13 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
   }
 
   public static class Properties extends GuiElementProperties {
-    private Color borderColor;
-    private int preferredWidth;
-    private int preferredHeight;
     private Direction direction = Direction.HORIZONTAL;
+    private HorizontalAlignment horizontalAlignment = HorizontalAlignment.LEFT;
+    private VerticalAlignment verticalAlignment = VerticalAlignment.TOP;
+    private int gap = 0;
 
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
-    }
-
-    public Color getBorderColor() {
-      return borderColor;
-    }
-
-    public Properties setBorderColor(Color borderColor) {
-      this.borderColor = borderColor;
-
-      return this;
-    }
-
-    public Properties setPreferredDimensions(int preferredWidth, int preferredHeight) {
-      this.preferredWidth = preferredWidth;
-      this.preferredHeight = preferredHeight;
-      setMaxDimensions(preferredWidth, preferredHeight);
-      setLayoutChanged(true);
-
-      return this;
-    }
-
-    public int getPreferredWidth() {
-      return preferredWidth;
-    }
-
-    public int getPreferredHeight() {
-      return preferredHeight;
     }
 
     public Direction getDirection() {
@@ -147,10 +152,55 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
 
       return this;
     }
+
+    public HorizontalAlignment getHorizontalAlignment() {
+      return horizontalAlignment;
+    }
+
+    public Properties setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
+      this.horizontalAlignment = horizontalAlignment;
+      setLayoutChanged(true);
+
+      return this;
+    }
+
+    public VerticalAlignment getVerticalAlignment() {
+      return verticalAlignment;
+    }
+
+    public Properties setVerticalAlignment(VerticalAlignment verticalAlignment) {
+      this.verticalAlignment = verticalAlignment;
+      setLayoutChanged(true);
+
+      return this;
+    }
+
+    public int getGap() {
+      return gap;
+    }
+
+    public Properties setGap(int gap) {
+      this.gap = gap;
+      setLayoutChanged(true);
+
+      return this;
+    }
   }
 
   public enum Direction {
     HORIZONTAL,
     VERTICAL
+  }
+
+  public enum VerticalAlignment {
+    TOP,
+    CENTER,
+    BOTTOM
+  }
+
+  public enum HorizontalAlignment {
+    LEFT,
+    CENTER,
+    RIGHT
   }
 }

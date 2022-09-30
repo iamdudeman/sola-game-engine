@@ -1,11 +1,14 @@
 package technology.sola.engine.examples.common.singlefile;
 
+import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
+import technology.sola.engine.graphics.gui.elements.ImageGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
@@ -24,8 +27,10 @@ public class GuiExample extends Sola {
     solaGui = SolaGui.createInstance(assetLoaderProvider, platform);
 
     solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
-    solaGui.setGuiRoot(buildGui());
+    solaGui.setGuiRoot(buildGui(), 15, 15);
 
+    assetLoaderProvider.get(SolaImage.class)
+      .addAssetMapping("test", "assets/test_tiles.png");
     assetLoaderProvider.get(Font.class)
       .addAssetMapping("times_NORMAL_18", "assets/times_NORMAL_18.json");
   }
@@ -38,38 +43,16 @@ public class GuiExample extends Sola {
   }
 
   private GuiElement<?> buildGui() {
-    ButtonGuiElement checkButton = solaGui.createElement(
-      ButtonGuiElement::new,
-      ButtonGuiElement.Properties::new,
-      p -> p.margin.setRight(15).padding.set(15)
-    );
-    checkButton.setOnAction(() -> checkButton.properties().setColorBackground(checkButton.properties().getColorBackground().equals(Color.RED) ? new Color(128, 128, 128) : Color.RED));
-
-    ButtonGuiElement toggleOtherButton = solaGui.createElement(
-      ButtonGuiElement::new,
-      ButtonGuiElement.Properties::new,
-      p -> p.setText("Toggle other button").padding.set(5)
-    );
-    toggleOtherButton.setOnAction(() -> checkButton.properties().setHidden(!checkButton.properties().isHidden()));
-
-    ButtonGuiElement toggleFontButton = solaGui.createElement(
-      ButtonGuiElement::new,
-      ButtonGuiElement.Properties::new,
-      p -> p.setText("Change font").padding.set(5)
-    );
-    toggleFontButton.setOnAction(() -> solaGui.globalProperties.setDefaultFontAssetId("times_NORMAL_18"));
-
-
     StreamGuiElementContainer firstContainer = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.setPreferredDimensions(400, 260).setBorderColor(Color.YELLOW).padding.set(5)
+      p -> p.setGap(10).setBorderColor(Color.YELLOW).padding.set(5)
     );
 
     StreamGuiElementContainer firstSubContainer = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.setPreferredDimensions(130, 200).setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.WHITE).padding.set(5).margin.setLeft(10)
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.WHITE).padding.set(5)
     );
     firstSubContainer.addChild(
       solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Sub First")),
@@ -78,8 +61,8 @@ public class GuiExample extends Sola {
 
     firstContainer.addChild(
       solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("First")),
-      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Second").padding.set(5).margin.set(0, 15)),
-      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Third").margin.setTop(3)),
+      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Second").padding.set(5)),
+      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Third").margin.setTop(30)),
       firstSubContainer
     );
 
@@ -87,8 +70,22 @@ public class GuiExample extends Sola {
     StreamGuiElementContainer secondContainer = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.setPreferredDimensions(400, 80).setBorderColor(Color.ORANGE).padding.set(5).margin.set(8, 0)
+      p -> p.setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.RIGHT).setBorderColor(Color.ORANGE).padding.set(5).setWidth(410)
     );
+
+    ButtonGuiElement checkButton = solaGui.createElement(
+      ButtonGuiElement::new,
+      ButtonGuiElement.Properties::new,
+      p -> p.margin.setRight(15).setWidth(30).setHeight(30)
+    );
+    checkButton.setOnAction(() -> checkButton.properties().setColorBackground(checkButton.properties().getColorBackground().equals(Color.RED) ? new Color(128, 128, 128) : Color.RED));
+
+    ButtonGuiElement toggleOtherButton = solaGui.createElement(
+      ButtonGuiElement::new,
+      ButtonGuiElement.Properties::new,
+      p -> p.setText("Toggle other button").setTextAlign(BaseTextGuiElement.TextAlign.RIGHT).padding.set(5).setWidth(250)
+    );
+    toggleOtherButton.setOnAction(() -> checkButton.properties().setHidden(!checkButton.properties().isHidden()));
 
     secondContainer.addChild(
       checkButton,
@@ -99,8 +96,15 @@ public class GuiExample extends Sola {
     StreamGuiElementContainer rootElement = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setPreferredDimensions(500, 500).setBorderColor(Color.GREEN).padding.set(10).setPosition(15, 15)
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).setBorderColor(Color.GREEN)
     );
+
+    ButtonGuiElement toggleFontButton = solaGui.createElement(
+      ButtonGuiElement::new,
+      ButtonGuiElement.Properties::new,
+      p -> p.setText("Change font").padding.set(5)
+    );
+    toggleFontButton.setOnAction(() -> solaGui.globalProperties.setDefaultFontAssetId("times_NORMAL_18"));
 
     rootElement.addChild(
       solaGui.createElement(
@@ -111,7 +115,8 @@ public class GuiExample extends Sola {
       firstContainer,
       secondContainer,
       toggleFontButton,
-      createKeyTesterElement()
+      createKeyTesterElement(),
+      createImageContainer()
     );
 
     return rootElement;
@@ -121,7 +126,7 @@ public class GuiExample extends Sola {
     TextGuiElement textGuiElement = solaGui.createElement(
       TextGuiElement::new,
       TextGuiElement.Properties::new,
-      p -> p.setText("Type a key").setColorText(Color.WHITE).setFocusable(true).padding.set(3).margin.setTop(10).setFocusOutlineColor(Color.LIGHT_BLUE)
+      p -> p.setText("Type a key").setColorText(Color.WHITE).setFocusable(true).padding.set(3).margin.setTop(10).setFocusOutlineColor(Color.LIGHT_BLUE).setBorderColor(Color.WHITE)
     );
 
     textGuiElement.setOnKeyPressCallback(guiKeyEvent -> {
@@ -140,5 +145,33 @@ public class GuiExample extends Sola {
     });
 
     return textGuiElement;
+  }
+
+  private GuiElement<?> createImageContainer() {
+    StreamGuiElementContainer streamGuiElementContainer = solaGui.createElement(
+      StreamGuiElementContainer::new,
+      StreamGuiElementContainer.Properties::new,
+      p -> p.setGap(5)
+    );
+
+    streamGuiElementContainer.addChild(
+      solaGui.createElement(
+        ImageGuiElement::new,
+        ImageGuiElement.Properties::new,
+        p -> p.setAssetId("test").setBorderColor(Color.ORANGE).padding.set(5)
+      ),
+      solaGui.createElement(
+        ImageGuiElement::new,
+        ImageGuiElement.Properties::new,
+        p -> p.setAssetId("test").setWidth(50).setHeight(50).setBorderColor(Color.GREEN).padding.set(5)
+      ),
+      solaGui.createElement(
+        ImageGuiElement::new,
+        ImageGuiElement.Properties::new,
+        p -> p.setAssetId("test").setWidth(150).setHeight(150).setBorderColor(Color.YELLOW).padding.set(5)
+      )
+    );
+
+    return streamGuiElementContainer;
   }
 }

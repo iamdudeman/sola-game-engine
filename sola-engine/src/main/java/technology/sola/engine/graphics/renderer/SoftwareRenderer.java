@@ -232,14 +232,11 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
   @Override
   public void drawImage(SolaImage solaImage, float x, float y, float width, float height) {
-    float scaleX = solaImage.getWidth() / width;
-    float scaleY = solaImage.getHeight() / height;
+    if (shouldSkipDrawCall(x, y, width, height)) {
+      return;
+    }
 
-    AffineTransform affineTransform = new AffineTransform()
-      .scale(scaleX, scaleY)
-      .translate(x, y);
-
-    drawImage(solaImage, affineTransform);
+    drawImage(x, y, solaImage.resize((int) width, (int) height));
   }
 
   @Override
