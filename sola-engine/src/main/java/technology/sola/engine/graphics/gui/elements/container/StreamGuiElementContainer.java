@@ -14,8 +14,8 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     super(solaGui, properties);
 
     setOnKeyPressCallback(keyEvent -> {
-      int forwardKeyCode = properties.flow == Flow.HORIZONTAL ? Key.RIGHT.getCode() : Key.DOWN.getCode();
-      int backwardKeyCode = properties.flow == Flow.HORIZONTAL ? Key.LEFT.getCode() : Key.UP.getCode();
+      int forwardKeyCode = properties.direction == Direction.HORIZONTAL ? Key.RIGHT.getCode() : Key.DOWN.getCode();
+      int backwardKeyCode = properties.direction == Direction.HORIZONTAL ? Key.LEFT.getCode() : Key.UP.getCode();
 
       if (keyEvent.getKeyCode() == forwardKeyCode) {
         List<GuiElement<?>> focusableChildren = getFocusableChildren();
@@ -43,7 +43,7 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
   public int getContentWidth() {
     var childrenHorizontalSpaceStream = children.stream().mapToInt(this::calculateChildRequiredHorizontalSpace);
 
-    if (properties.flow == Flow.HORIZONTAL) {
+    if (properties.direction == Direction.HORIZONTAL) {
       return childrenHorizontalSpaceStream.sum() + calculateSpaceFromGap();
     }
 
@@ -54,7 +54,7 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
   public int getContentHeight() {
     var childrenVerticalSpaceStream = children.stream().mapToInt(this::calculateChildRequiredVerticalSpace);
 
-    if (properties.flow == Flow.HORIZONTAL) {
+    if (properties.direction == Direction.HORIZONTAL) {
       return childrenVerticalSpaceStream.max().orElse(0);
     }
 
@@ -74,9 +74,9 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
       child.setPosition(xOffset + childMargin.getLeft(), yOffset + childMargin.getTop());
       child.recalculateLayout();
 
-      if (properties().flow == Flow.HORIZONTAL) {
+      if (properties().direction == Direction.HORIZONTAL) {
         xOffset += childMargin.getLeft() + childMargin.getRight() + child.getWidth() + properties.gap;
-      } else if (properties.flow == Flow.VERTICAL) {
+      } else if (properties.direction == Direction.VERTICAL) {
         yOffset += childMargin.getTop() + childMargin.getBottom() + child.getHeight() + properties.gap;
       }
     }
@@ -133,7 +133,7 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
   }
 
   public static class Properties extends GuiElementProperties {
-    private Flow flow = Flow.HORIZONTAL;
+    private Direction direction = Direction.HORIZONTAL;
     private HorizontalAlignment horizontalAlignment = HorizontalAlignment.LEFT;
     private VerticalAlignment verticalAlignment = VerticalAlignment.TOP;
     private int gap = 0;
@@ -142,12 +142,12 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
       super(globalProperties);
     }
 
-    public Flow getFlow() {
-      return flow;
+    public Direction getDirection() {
+      return direction;
     }
 
-    public Properties setFlow(Flow flow) {
-      this.flow = flow;
+    public Properties setDirection(Direction direction) {
+      this.direction = direction;
       setLayoutChanged(true);
 
       return this;
@@ -187,6 +187,11 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     }
   }
 
+  public enum Direction {
+    HORIZONTAL,
+    VERTICAL
+  }
+
   public enum VerticalAlignment {
     TOP,
     CENTER,
@@ -197,10 +202,5 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     LEFT,
     CENTER,
     RIGHT
-  }
-
-  public enum Flow {
-    HORIZONTAL,
-    VERTICAL
   }
 }
