@@ -57,9 +57,14 @@ public class SolaGraphics {
 
     SpriteGraphics.render(renderer, solaEcs, cameraTransform, spriteSheetAssetLoader);
 
-    // TODO need to render this to back most layer at some point probably
     if (isRenderDebug) {
-      DebugGraphics.render(renderer, solaEcs, cameraTransform);
+      if (renderer.getLayers().isEmpty()) {
+        DebugGraphics.render(renderer, solaEcs, cameraTransform);
+      } else {
+        var lastLayer = renderer.getLayers().get(renderer.getLayers().size() - 1);
+
+        lastLayer.add(r -> DebugGraphics.render(renderer, solaEcs, cameraTransform), Integer.MAX_VALUE);
+      }
     }
   }
 
