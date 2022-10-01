@@ -77,15 +77,6 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     drawLineInt(xInt, yInt, x2Int, y2Int, color);
   }
 
-  /**
-   * todo
-   *
-   * @param x      top left coordinate x
-   * @param y      top left coordinate y
-   * @param width
-   * @param height
-   * @param color
-   */
   @Override
   public void drawRect(float x, float y, float width, float height, Color color) {
     if (shouldSkipDrawCall(x, y, width, height)) {
@@ -98,15 +89,6 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     drawLine(x + width, y, x + width, y + height, color);
   }
 
-  /**
-   * todo
-   *
-   * @param x      top left coordinate x
-   * @param y      top left coordinate y
-   * @param width
-   * @param height
-   * @param color
-   */
   @Override
   public void fillRect(float x, float y, float width, float height, Color color) {
     if (shouldSkipDrawCall(x, y, width, height)) {
@@ -123,14 +105,6 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     }
   }
 
-  /**
-   * Uses Bresenham's circle drawing algorithm
-   *
-   * @param x      top left coordinate x
-   * @param y      top left coordinate y
-   * @param radius
-   * @param color
-   */
   @Override
   public void drawCircle(float x, float y, float radius, Color color) {
     if (shouldSkipDrawCall(x, y, radius)) {
@@ -159,14 +133,6 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     }
   }
 
-  /**
-   * todo
-   *
-   * @param x      top left coordinate x
-   * @param y      top left coordinate y
-   * @param radius
-   * @param color
-   */
   @Override
   public void fillCircle(float x, float y, float radius, Color color) {
     if (shouldSkipDrawCall(x, y, radius)) {
@@ -185,7 +151,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   }
 
   @Override
-  public void drawImage(float x, float y, SolaImage solaImage) {
+  public void drawImage(SolaImage solaImage, float x, float y) {
     if (shouldSkipDrawCall(x, y, solaImage.getWidth(), solaImage.getHeight())) {
       return;
     }
@@ -236,7 +202,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
       return;
     }
 
-    drawImage(x, y, solaImage.resize((int) width, (int) height));
+    drawImage(solaImage.resize((int) width, (int) height), x, y);
   }
 
   @Override

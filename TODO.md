@@ -27,6 +27,9 @@
 * Rendering
   * Implement more BlendModes
   * Ability to change line width when drawing
+* Particle System
+  * consider adding acceleration
+  * consider some sort of "swaying" for non-linear particles
 * Unit Testing
   * Add lots of missing tests :)
 * Consider adding a "debug console" option

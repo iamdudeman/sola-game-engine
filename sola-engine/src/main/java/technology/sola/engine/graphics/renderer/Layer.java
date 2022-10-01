@@ -17,6 +17,11 @@ public class Layer {
     add(drawItem, DEFAULT_PRIORITY);
   }
 
+  /**
+   * todo
+   * @param drawItem
+   * @param priority higher numbers will be drawn on top
+   */
   public void add(DrawItem drawItem, int priority) {
     drawQueue.add(new PrioritizedDrawItem(drawItem, priority));
   }
