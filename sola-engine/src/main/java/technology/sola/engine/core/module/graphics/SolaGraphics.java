@@ -22,6 +22,10 @@ public class SolaGraphics {
   private final AssetLoader<SpriteSheet> spriteSheetAssetLoader;
   private boolean isRenderDebug = false;
   private final SpriteAnimatorSystem spriteAnimatorSystem;
+  private Matrix3D cachedScreenToWorldMatrix = null;
+  private Vector2D previousCameraTranslate = null;
+  private float previousCameraScaleX = 1;
+  private float previousCameraScaleY = 1;
 
   public static SolaGraphics createInstance(SolaEcs solaEcs, Renderer renderer, AssetLoaderProvider assetLoaderProvider) {
     SolaGraphics solaGraphics = new SolaGraphics(solaEcs, renderer, assetLoaderProvider.get(SpriteSheet.class));
@@ -31,14 +35,19 @@ public class SolaGraphics {
     return solaGraphics;
   }
 
-  // TODO improve performance of this method
   public Vector2D screenToWorldCoordinate(Vector2D screenCoordinate) {
     var cameraTransform = getCameraTransform();
-    var transform = Matrix3D.translate(-cameraTransform.getX(), -cameraTransform.getY())
-      .multiply(Matrix3D.scale(cameraTransform.getScaleX(), cameraTransform.getScaleY()))
-      .invert(); // TODO this invert is costly so clean this up later if possible
 
-    return transform.forward(screenCoordinate.x(), screenCoordinate.y());
+    if (!cameraTransform.getTranslate().equals(previousCameraTranslate) || previousCameraScaleX != cameraTransform.getScaleX() || previousCameraScaleY != cameraTransform.getScaleY()) {
+      previousCameraTranslate = cameraTransform.getTranslate();
+      previousCameraScaleX = cameraTransform.getScaleX();
+      previousCameraScaleY = cameraTransform.getScaleY();
+      cachedScreenToWorldMatrix = Matrix3D.translate(-previousCameraTranslate.x(), -previousCameraTranslate.y())
+        .multiply(Matrix3D.scale(previousCameraScaleX, previousCameraScaleY))
+        .invert();
+    }
+
+    return cachedScreenToWorldMatrix.forward(screenCoordinate.x(), screenCoordinate.y());
   }
 
   public void render() {
