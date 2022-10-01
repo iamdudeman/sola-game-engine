@@ -126,6 +126,5 @@ public interface Renderer {
 
   void drawImage(SolaImage solaImage, AffineTransform affineTransform);
 
-  // TODO is this method needed?
   void drawImage(SolaImage solaImage, float x, float y, float width, float height);
 }
