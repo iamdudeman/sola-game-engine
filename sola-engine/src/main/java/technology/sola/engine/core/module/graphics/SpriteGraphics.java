@@ -47,7 +47,7 @@ class SpriteGraphics {
         renderer.drawImage(sprite, affineTransform);
       } else {
         renderer.setBlendMode(blendMode);
-        renderer.drawImage(transformComponent.getX(), transformComponent.getY(), sprite);
+        renderer.drawImage(sprite, transformComponent.getX(), transformComponent.getY());
       }
 
       renderer.setBlendMode(previousBlendMode);

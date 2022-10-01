@@ -151,7 +151,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   }
 
   @Override
-  public void drawImage(float x, float y, SolaImage solaImage) {
+  public void drawImage(SolaImage solaImage, float x, float y) {
     if (shouldSkipDrawCall(x, y, solaImage.getWidth(), solaImage.getHeight())) {
       return;
     }
@@ -202,7 +202,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
       return;
     }
 
-    drawImage(x, y, solaImage.resize((int) width, (int) height));
+    drawImage(solaImage.resize((int) width, (int) height), x, y);
   }
 
   @Override
