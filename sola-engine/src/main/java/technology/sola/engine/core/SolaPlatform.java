@@ -11,7 +11,6 @@ import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.graphics.screen.Viewport;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
-import technology.sola.math.linear.Vector2D;
 
 import java.util.function.Consumer;
 
@@ -86,8 +85,8 @@ public abstract class SolaPlatform {
         AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
 
         yield new MouseCoordinate(
-          Math.round(x * viewport.getRendererToAspectRatioX()) - Math.round(aspectRatioSizing.x() * viewport.getRendererToAspectRatioX()),
-          Math.round(y * viewport.getRendererToAspectRatioY()) - Math.round(aspectRatioSizing.y() * viewport.getRendererToAspectRatioY())
+          Math.round(x * viewport.getRendererToAspectRatioX() - aspectRatioSizing.x() * viewport.getRendererToAspectRatioX()),
+          Math.round(y * viewport.getRendererToAspectRatioY() - aspectRatioSizing.y() * viewport.getRendererToAspectRatioY())
         );
       }
     };
