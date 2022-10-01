@@ -7,6 +7,8 @@ public class Viewport {
   private int previousScreenWidth;
   private int previousScreenHeight;
   private AspectRatioSizing aspectRatioSizing;
+  private float rendererToAspectRatioX = 1;
+  private float rendererToAspectRatioY = 1;
 
   public Viewport(int canvasWidth, int canvasHeight) {
     this.canvasWidth = canvasWidth;
@@ -25,6 +27,14 @@ public class Viewport {
 
   public AspectRatioSizing getAspectRatioSizing() {
     return aspectRatioSizing;
+  }
+
+  public float getRendererToAspectRatioX() {
+    return rendererToAspectRatioX;
+  }
+
+  public float getRendererToAspectRatioY() {
+    return rendererToAspectRatioY;
   }
 
   public void resize(int screenWidth, int screenHeight) {
@@ -58,5 +68,8 @@ public class Viewport {
       default -> {
       }
     }
+
+    rendererToAspectRatioX = canvasWidth / (float) aspectRatioSizing.width();
+    rendererToAspectRatioY = canvasHeight / (float) aspectRatioSizing.height();
   }
 }

@@ -78,38 +78,19 @@ public abstract class SolaPlatform {
   }
 
   protected MouseCoordinate adjustMouseForViewport(int x, int y) {
-    return switch (getViewport().getAspectMode()) {
+    return switch (viewport.getAspectMode()) {
       case IGNORE_RESIZING -> new MouseCoordinate(x, y);
-      case STRETCH -> {
-        Vector2D ratios = calculateMouseAdjustmentRatios();
-
-        yield new MouseCoordinate(Math.round(x * ratios.x()), Math.round(y * ratios.y()));
-      }
+      case STRETCH ->
+        new MouseCoordinate(Math.round(x * viewport.getRendererToAspectRatioX()), Math.round(y * viewport.getRendererToAspectRatioY()));
       case MAINTAIN -> {
         AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
-        Vector2D ratios = calculateMouseAdjustmentRatios();
 
         yield new MouseCoordinate(
-          Math.round(x * ratios.x()) - Math.round(aspectRatioSizing.x() * ratios.x()),
-          Math.round(y * ratios.y()) - Math.round(aspectRatioSizing.y() * ratios.y())
+          Math.round(x * viewport.getRendererToAspectRatioX()) - Math.round(aspectRatioSizing.x() * viewport.getRendererToAspectRatioX()),
+          Math.round(y * viewport.getRendererToAspectRatioY()) - Math.round(aspectRatioSizing.y() * viewport.getRendererToAspectRatioY())
         );
       }
     };
-  }
-
-  private Vector2D calculateMouseAdjustmentRatios() {
-    AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
-
-    int rendererWidth = renderer.getWidth();
-    int rendererHeight = renderer.getHeight();
-    int viewPortWidth = aspectRatioSizing.width();
-    int viewPortHeight = aspectRatioSizing.height();
-
-    // TODO refactor out this division if possible
-    float ratioX = rendererWidth / (float) viewPortWidth;
-    float ratioY = rendererHeight / (float) viewPortHeight;
-
-    return new Vector2D(ratioX, ratioY);
   }
 
   private void initComplete(Sola sola, SolaConfiguration solaConfiguration) {
