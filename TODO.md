@@ -4,7 +4,6 @@
     * Unsupported JavaFX configuration: classes were loaded from 'unnamed module @531be3c5'
 * Modularize projects
 
-
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------

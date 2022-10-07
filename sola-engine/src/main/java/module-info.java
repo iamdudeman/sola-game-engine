@@ -24,7 +24,18 @@ module technology.sola.engine {
 
   exports technology.sola.engine.event;
 
-  // todo graphics
+  exports technology.sola.engine.graphics;
+  exports technology.sola.engine.graphics.components;
+  exports technology.sola.engine.graphics.components.sprite;
+  exports technology.sola.engine.graphics.gui;
+  exports technology.sola.engine.graphics.gui.elements;
+  exports technology.sola.engine.graphics.gui.elements.container;
+  exports technology.sola.engine.graphics.gui.elements.control;
+  exports technology.sola.engine.graphics.gui.event;
+  exports technology.sola.engine.graphics.gui.properties;
+  exports technology.sola.engine.graphics.renderer;
+  exports technology.sola.engine.graphics.screen;
+  exports technology.sola.engine.graphics.system;
 
   exports technology.sola.engine.input;
 
