@@ -1,5 +1,6 @@
 dependencies {
-  api("com.github.iamdudeman:sola-ecs:2.0.5")
+  // todo switch to 2.0.6 when it is released
+  api("com.github.iamdudeman:sola-ecs:2301f68106")
 }
 
 publishing {
