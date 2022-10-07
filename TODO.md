@@ -1,16 +1,3 @@
-# Branch WIP
-* jar stuff
-  * browser fat jar not working without consuming project also defining a couple teavm dependencies
-    * runtimeOnly("org.teavm:teavm-classlib:0.7.0")
-      runtimeOnly("org.teavm:teavm-extras-slf4j:0.7.0")
-  * Figure out proper fat jar setup so stuff isn't duplicated
-  * Investigate JavaFx library bundling (api vs implementation?)
-* Build pipeline
-  * Generate engine, tooling and platform artifacts
-  * sources and javadoc jar
-  * use github pages and "Javadoc deploy" action for hosting javadocs
-
-
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -22,7 +9,7 @@
 ## TODO List
 * SolaGui
   * Implement a way to load gui stuff from a file
-  * JSON defines gui structure
+  * possibly use JSON to define gui structure
   * A "post load" callback to add event listeners and such
 * Figure out how to handle TouchInput
   * Primarily for browser but also could be supported in JavaFX
