@@ -25,7 +25,9 @@ module technology.sola.engine {
   exports technology.sola.engine.event;
 
   // todo graphics
-  // todo input
+
+  exports technology.sola.engine.input;
+
   // todo physics
 
   exports technology.sola.math;
