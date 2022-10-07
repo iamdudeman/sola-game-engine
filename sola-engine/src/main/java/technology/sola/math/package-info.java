@@ -1,4 +1,4 @@
 /**
- * A group of math classes and utilities.
+ * This package provides several math classes and utilities.
  */
 package technology.sola.math;

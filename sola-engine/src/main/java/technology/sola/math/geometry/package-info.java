@@ -1,4 +1,4 @@
 /**
- * A group of geometry classes and utilities.
+ * This package provides geometry classes and utilities.
  */
 package technology.sola.math.geometry;
