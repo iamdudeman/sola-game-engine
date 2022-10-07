@@ -1,7 +1,3 @@
-plugins {
-  id("sola.java-conventions")
-}
-
 repositories {
   mavenCentral()
 }

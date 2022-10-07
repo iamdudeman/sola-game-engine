@@ -1,5 +1,4 @@
 plugins {
-  id("sola.java-conventions")
   id("maven-publish")
 }
 
