@@ -28,7 +28,10 @@ module technology.sola.engine {
 
   exports technology.sola.engine.input;
 
-  // todo physics
+  exports technology.sola.engine.physics;
+  exports technology.sola.engine.physics.component;
+  exports technology.sola.engine.physics.event;
+  exports technology.sola.engine.physics.system;
 
   exports technology.sola.math;
   exports technology.sola.math.geometry;
