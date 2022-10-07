@@ -27,7 +27,7 @@ repositories {
 
 dependencies {
   // Logging
-  implementation("org.slf4j:slf4j-log4j12:1.7.30")
+  implementation("org.slf4j:slf4j-log4j12:1.7.36")
 
   // Test
   testImplementation("org.mockito:mockito-inline:4.2.0")
