@@ -9,3 +9,14 @@ javafx {
   configuration = "api"
   version = "17"
 }
+
+publishing {
+  publications {
+    create<MavenPublication>("maven") {
+      group = "technology.sola.engine"
+      artifactId = "platform-javafx"
+
+      from(components["java"])
+    }
+  }
+}

@@ -8,3 +8,14 @@ dependencies {
   implementation("com.github.konsoletyper.teavm:teavm-tooling:2b671b8088")
   implementation("org.teavm:teavm-extras-slf4j:0.7.0")
 }
+
+publishing {
+  publications {
+    create<MavenPublication>("maven") {
+      group = "technology.sola.engine"
+      artifactId = "platform-browser"
+
+      from(components["java"])
+    }
+  }
+}
