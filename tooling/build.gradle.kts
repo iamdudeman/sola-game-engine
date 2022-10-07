@@ -1,5 +1,6 @@
 plugins {
   id("sola.java-conventions")
+  id("maven-publish")
   id("application")
 }
 
@@ -9,4 +10,15 @@ dependencies {
 
 application {
   mainClass.set("technology.sola.engine.tooling.ToolingMain")
+}
+
+publishing {
+  publications {
+    create<MavenPublication>("maven") {
+      group = "technology.sola.engine"
+      artifactId = "tooling"
+
+      from(components["java"])
+    }
+  }
 }

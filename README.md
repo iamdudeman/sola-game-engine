@@ -2,6 +2,24 @@
 sola game engine is a zero external dependency game engine (other than teavm for transpiling to JavaScript) that has been a hobby project for a long time. Two larger pieces of this project were broken into separate repositories for easier maintenance (the entity component system and JSON parser). Its purpose has been primarily for learning about how games are developed from the ground up, but I hope to one day use it to also make some small games
 
 [![Java CI](https://github.com/iamdudeman/sola-game-engine/actions/workflows/ci_build.yml/badge.svg)](https://github.com/iamdudeman/sola-game-engine/actions/workflows/ci_build.yml)
+[![Javadocs Link](https://img.shields.io/badge/Javadocs-blue.svg)](https://iamdudeman.github.io/sola-game-engine/)
+[![](https://jitpack.io/v/iamdudeman/sola-game-engine.svg)](https://jitpack.io/#iamdudeman/sola-game-engine)
+
+## Download
+### Gradle + Jitpack:
+```kotlin
+repositories {
+  maven {
+    url = uri("https://jitpack.io")
+  }
+}
+
+dependencies {
+  implementation("com.github.iamdudeman.sola-game-engine:sola-engine:<VERSION>")
+  implementation("com.github.iamdudeman.sola-game-engine:platform-swing:<VERSION>")
+  implementation("com.github.iamdudeman.sola-game-engine:tooling:<VERSION>")
+}
+```
 
 ## Internally developed libraries uses
 * [sola-json](https://github.com/iamdudeman/sola-json)

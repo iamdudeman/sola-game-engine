@@ -1,10 +1,17 @@
-## Known Bugs List
+# Branch WIP
 * jar stuff
   * browser fat jar not working without consuming project also defining a couple teavm dependencies
     * runtimeOnly("org.teavm:teavm-classlib:0.7.0")
       runtimeOnly("org.teavm:teavm-extras-slf4j:0.7.0")
   * Figure out proper fat jar setup so stuff isn't duplicated
   * Investigate JavaFx library bundling (api vs implementation?)
+* Build pipeline
+  * Generate engine, tooling and platform artifacts
+  * sources and javadoc jar
+  * use github pages and "Javadoc deploy" action for hosting javadocs
+
+
+## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -48,10 +55,6 @@
   * Improve performance (StressTestExample can't handle a lot of objects)
     * Possibly finish implementing BrowserCanvasRenderer?
 * Research Virtual File System
-* Build pipeline
-  * Generate engine and platform artifacts
-  * sources and javadoc jar
-  * use github pages and "Javadoc deploy" action for hosting javadocs
 * Scripting language
   * How will that work with browser implementation?
   * Maybe a custom Domain Specific Language?
