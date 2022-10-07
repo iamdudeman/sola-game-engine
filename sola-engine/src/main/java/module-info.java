@@ -22,7 +22,8 @@ module technology.sola.engine {
   exports technology.sola.engine.core.module.graphics.gui;
   exports technology.sola.engine.core.module.physics;
 
-  // todo event
+  exports technology.sola.engine.event;
+
   // todo graphics
   // todo input
   // todo physics
