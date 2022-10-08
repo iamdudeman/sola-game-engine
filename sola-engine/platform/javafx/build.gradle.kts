@@ -1,11 +1,12 @@
 plugins {
   id("sola.platform-conventions")
-  id("org.openjfx.javafxplugin") version "0.0.9"
+  id("org.openjfx.javafxplugin") version "0.0.13"
 }
 
 javafx {
   modules("javafx.controls")
-  version = "17"
+  version = "17.0.2"
+  configuration = "api"
 }
 
 publishing {
