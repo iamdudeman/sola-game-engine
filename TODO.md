@@ -1,8 +1,4 @@
 # Branch WIP
-* Bugs
-  * JavaFXPlatform
-    * Unsupported JavaFX configuration: classes were loaded from 'unnamed module @531be3c5'
-* Modularize projects
 
 ## Known Bugs List
 
@@ -27,6 +23,8 @@
 * Rendering
   * Implement more BlendModes
   * Ability to change line width when drawing
+* BrowserPlatform
+  * modularize (requires figuring out how to modularize parts of teavm needed)
 * Particle System
   * consider adding acceleration
   * consider some sort of "swaying" for non-linear particles
