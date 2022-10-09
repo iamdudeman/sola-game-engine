@@ -4,7 +4,7 @@
 module technology.sola.engine.platform.javafx {
   // requires org.slf4j;
   requires java.desktop;
-  requires static javafx.controls;
+  requires javafx.controls;
   requires transitive technology.sola.engine;
 
   exports technology.sola.engine.platform.javafx;

@@ -6,6 +6,7 @@ plugins {
 javafx {
   modules("javafx.controls")
   version = "17.0.2"
+  configuration = "api"
 }
 
 publishing {
