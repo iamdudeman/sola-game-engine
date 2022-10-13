@@ -10,20 +10,24 @@ public class SpriteAnimatorComponent implements Component {
   @Serial
   private static final long serialVersionUID = 8265042463767128400L;
   private final Map<String, SpriteKeyFrame[]> animationMap = new HashMap<>();
-  private long lastFrameChange = 0;
   private int keyFrameIndex = 0;
   private String activeAnimationId = null;
   private SpriteKeyFrame activeFrame;
   private SpriteKeyFrame[] activeAnimationKeyFrames;
+  private transient float ticks = 0;
 
-  public SpriteAnimatorComponent(String activeAnimationId, SpriteKeyFrame ...activeAnimationKeyFrames) {
+  public SpriteAnimatorComponent(String activeAnimationId, SpriteKeyFrame... activeAnimationKeyFrames) {
     addAnimation(activeAnimationId, activeAnimationKeyFrames);
     playAnimation(activeAnimationId);
   }
 
-  public SpriteAnimatorComponent addAnimation(String id, SpriteKeyFrame ...spriteKeyFrames) {
+  public SpriteAnimatorComponent addAnimation(String id, SpriteKeyFrame... spriteKeyFrames) {
     animationMap.put(id, spriteKeyFrames);
     return this;
+  }
+
+  public void tickAnimation(float deltaTime) {
+    ticks += deltaTime;
   }
 
   public void playAnimation(String id) {
@@ -31,21 +35,16 @@ public class SpriteAnimatorComponent implements Component {
     activeAnimationKeyFrames = animationMap.get(id);
     keyFrameIndex = 0;
     activeFrame = activeAnimationKeyFrames[0];
-    lastFrameChange = System.currentTimeMillis();
+    ticks = 0;
   }
 
   public SpriteKeyFrame getCurrentFrame() {
     long duration = activeFrame.getDuration();
 
-
-    if (duration != SpriteKeyFrame.HOLD) {
-      long now = System.currentTimeMillis();
-
-      if (now - lastFrameChange > duration) {
-        keyFrameIndex = (keyFrameIndex + 1) % activeAnimationKeyFrames.length;
-        activeFrame = activeAnimationKeyFrames[keyFrameIndex];
-        lastFrameChange = now;
-      }
+    if (duration != SpriteKeyFrame.HOLD && ticks * 1000 > duration) {
+      keyFrameIndex = (keyFrameIndex + 1) % activeAnimationKeyFrames.length;
+      activeFrame = activeAnimationKeyFrames[keyFrameIndex];
+      ticks = 0;
     }
 
     return activeFrame;

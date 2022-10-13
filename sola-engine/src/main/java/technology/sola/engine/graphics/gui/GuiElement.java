@@ -2,6 +2,7 @@ package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
+import technology.sola.engine.graphics.gui.properties.GuiElementProperties;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.math.geometry.Rectangle;
@@ -12,6 +13,8 @@ import java.util.function.Consumer;
 public abstract class GuiElement<T extends GuiElementProperties> {
   protected final SolaGui solaGui;
   protected final T properties;
+  private int x;
+  private int y;
 
   private Consumer<GuiKeyEvent> onKeyPressCallback;
   private Consumer<GuiKeyEvent> onKeyReleaseCallback;
@@ -32,42 +35,70 @@ public abstract class GuiElement<T extends GuiElementProperties> {
   public abstract int getContentHeight();
 
   public int getWidth() {
-    int maxWidth = properties().getMaxWidth();
-
-    if (maxWidth == 0) {
-      return getContentWidth();
+    if (properties.getWidth() != null) {
+      return properties.getWidth();
     }
 
-    return Math.min(maxWidth, getContentWidth());
+    int borderSize = properties.getBorderColor() == null ? 0 : 2;
+
+    return getContentWidth() + properties.padding.getLeft() + properties.padding.getRight() + borderSize;
   }
 
   public int getHeight() {
-    int maxHeight = properties.getMaxHeight();
-
-    if (maxHeight == 0) {
-      return getContentHeight();
+    if (properties.getHeight() != null) {
+      return properties.getHeight();
     }
 
-    return Math.min(maxHeight, getContentHeight());
+    int borderSize = properties.getBorderColor() == null ? 0 : 2;
+
+    return getContentHeight() + properties.padding.getTop() + properties.padding.getBottom() + borderSize;
   }
 
   public abstract void recalculateLayout();
 
+  public boolean isLayoutChanged() {
+    return properties().isLayoutChanged();
+  }
+
   public abstract void renderSelf(Renderer renderer, int x, int y);
 
   public void render(Renderer renderer) {
-    if (properties.isLayoutChanged()) {
+    if (isLayoutChanged()) {
       recalculateLayout();
       properties.setLayoutChanged(false);
     }
 
     if (!properties.isHidden()) {
-      renderSelf(renderer, properties.getX(), properties.getY());
+      int borderOffset = properties.getBorderColor() == null ? 0 : 1;
+
+      renderSelf(renderer, x + borderOffset + properties.padding.getLeft(), y + borderOffset + properties.padding.getTop());
+
+      if (properties.getBorderColor() != null) {
+        renderer.drawRect(x, y, getWidth(), getHeight(), isHovered() ? properties.getHoverBorderColor() : properties.getBorderColor());
+      }
 
       if (properties.getFocusOutlineColor() != null && isFocussed()) {
-        renderer.drawRect(properties().getX() - 1, properties.getY() - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
+        renderer.drawRect(x - 1, y - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
       }
     }
+  }
+
+  public void setPosition(int x, int y) {
+    this.x = x;
+    this.y = y;
+    properties.setLayoutChanged(true);
+  }
+
+  public int getX() {
+    return x;
+  }
+
+  public int getY() {
+    return y;
+  }
+
+  public boolean isHovered() {
+    return wasMouseOverElement;
   }
 
   public boolean isFocussed() {
@@ -162,8 +193,6 @@ public abstract class GuiElement<T extends GuiElementProperties> {
       return;
     }
 
-    int x = properties.getX();
-    int y = properties.getY();
     int width = getWidth();
     int height = getHeight();
 

@@ -22,7 +22,7 @@ class DebugGraphics {
       Vector2D topLeftPoint = new Vector2D(bucketId.x(), bucketId.y()).scalar(cellSize);
 
       TransformComponent useThis = GraphicsUtils.getTransformForAppliedCamera(
-        new TransformComponent(topLeftPoint.x, topLeftPoint.y, cellSize, cellSize),
+        new TransformComponent(topLeftPoint.x(), topLeftPoint.y(), cellSize, cellSize),
         cameraTransform
       );
 
@@ -40,11 +40,11 @@ class DebugGraphics {
       if (ColliderComponent.ColliderType.CIRCLE.equals(colliderComponent.getColliderType())) {
         Circle circle = colliderComponent.asCircle(transformComponent);
 
-        renderer.drawCircle(transform.x, transform.y, circle.getRadius(), Color.RED);
+        renderer.drawCircle(transform.x() + colliderComponent.getOffsetX(), transform.y() + colliderComponent.getOffsetY(), circle.getRadius(), Color.RED);
       } else {
         Rectangle rectangle = colliderComponent.asRectangle(transformComponent);
 
-        renderer.drawRect(transform.x, transform.y, rectangle.getWidth(), rectangle.getHeight(), Color.RED);
+        renderer.drawRect(rectangle.getMin().x(), rectangle.getMin().y(), rectangle.getWidth(), rectangle.getHeight(), Color.RED);
       }
     }
   }

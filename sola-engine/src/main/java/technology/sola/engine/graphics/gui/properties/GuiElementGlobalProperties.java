@@ -1,6 +1,7 @@
-package technology.sola.engine.graphics.gui;
+package technology.sola.engine.graphics.gui.properties;
 
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.gui.GuiElement;
 
 import java.util.function.Supplier;
 
@@ -25,7 +26,7 @@ public class GuiElementGlobalProperties {
     GuiElement<?> rootElement = this.rootElementSupplier.get();
 
     if (rootElement != null) {
-      rootElement.properties.setLayoutChanged(true);
+      rootElement.properties().setLayoutChanged(true);
     }
 
     return this;

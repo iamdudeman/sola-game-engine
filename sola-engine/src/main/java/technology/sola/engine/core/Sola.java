@@ -8,6 +8,7 @@ import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
 
 public abstract class Sola {
+  protected final SolaConfiguration configuration;
   protected SolaPlatform platform;
   protected SolaEcs solaEcs;
   protected EventHub eventHub;
@@ -16,7 +17,12 @@ public abstract class Sola {
   protected SolaInitialization solaInitialization;
   protected AssetLoaderProvider assetLoaderProvider;
 
-  protected Sola() {
+  protected Sola(SolaConfiguration.Builder solaConfigurationBuilder) {
+    this(solaConfigurationBuilder.build());
+  }
+
+  protected Sola(SolaConfiguration configuration) {
+    this.configuration = configuration;
     solaEcs = new SolaEcs();
     eventHub = new EventHub();
     keyboardInput = new KeyboardInput();
@@ -24,14 +30,14 @@ public abstract class Sola {
     assetLoaderProvider = new AssetLoaderProvider();
   }
 
-  protected abstract SolaConfiguration getConfiguration();
-
   protected abstract void onInit();
 
   protected void onUpdate(float deltaTime) {
     keyboardInput.updateStatusOfKeys();
     mouseInput.updateStatusOfMouse();
-    solaEcs.updateWorld(deltaTime);
+    if (!platform.gameLoop.isPaused()) {
+      solaEcs.updateWorld(deltaTime);
+    }
   }
 
   protected abstract void onRender(Renderer renderer);

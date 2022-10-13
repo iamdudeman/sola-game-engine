@@ -2,7 +2,7 @@ package technology.sola.engine.graphics.gui.elements.control;
 
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
+import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
@@ -14,7 +14,6 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
   private Runnable onActionConsumer = () -> {};
 
   private boolean wasMouseDownInside = false;
-  private boolean isHovered = false;
 
   public ButtonGuiElement(SolaGui solaGui, Properties properties) {
     super(solaGui, properties);
@@ -34,35 +33,24 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
   @Override
   public void renderSelf(Renderer renderer, int x, int y) {
     Properties properties = properties();
-    int contentWidth = getContentWidth();
-    int contentHeight = getContentHeight();
-
-    renderer.fillRect(x, y, contentWidth, contentHeight, isHovered ? properties.colorBackgroundHover : properties.colorBackground);
-    renderer.drawRect(x, y, contentWidth, contentHeight, isHovered ? properties.colorBorderHover : properties.colorBorder);
+    int width = getWidth();
+    int height = getHeight();
 
     Color baseTextColor = properties.getColorText();
 
-    if (isHovered) {
+    if (isHovered()) {
       properties.setColorText(properties.colorTextHover);
     }
 
+    renderer.fillRect(x - properties.padding.getLeft(), y - properties.padding.getTop(), width, height, isHovered() ? properties.colorBackgroundHover : properties.colorBackground);
     super.renderSelf(renderer, x, y);
 
     properties.setColorText(baseTextColor);
   }
 
   @Override
-  public void setOnMouseEnterCallback(Consumer<MouseEvent> callback) {
-    super.setOnMouseEnterCallback(event -> {
-      isHovered = true;
-      callback.accept(event);
-    });
-  }
-
-  @Override
   public void setOnMouseExitCallback(Consumer<MouseEvent> callback) {
     super.setOnMouseExitCallback(event -> {
-      isHovered = false;
       wasMouseDownInside = false;
       callback.accept(event);
     });
@@ -93,8 +81,6 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
   }
 
   public static class Properties extends BaseTextGuiElement.Properties {
-    private Color colorBorder = new Color(128, 128, 128);
-    private Color colorBorderHover = new Color(128, 128, 128);
     private Color colorBackground = new Color(128, 128, 128);
     private Color colorBackgroundHover = Color.WHITE;
     private Color colorTextHover = new Color(128, 128, 128);
@@ -102,6 +88,8 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
       setFocusable(true);
+      setBorderColor(Color.WHITE);
+      setHoverBorderColor(new Color(128, 128, 128));
       setFocusOutlineColor(Color.LIGHT_BLUE);
     }
 
@@ -111,24 +99,6 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
 
     public Properties setColorBackground(Color colorBackground) {
       this.colorBackground = colorBackground;
-      return this;
-    }
-
-    public Color getColorBorder() {
-      return colorBorder;
-    }
-
-    public Properties setColorBorder(Color colorBorder) {
-      this.colorBorder = colorBorder;
-      return this;
-    }
-
-    public Color getColorBorderHover() {
-      return colorBorderHover;
-    }
-
-    public Properties setColorBorderHover(Color colorBorderHover) {
-      this.colorBorderHover = colorBorderHover;
       return this;
     }
 

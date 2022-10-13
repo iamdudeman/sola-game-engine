@@ -12,10 +12,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class SpriteSheetAssetLoader extends AssetLoader<SpriteSheet> {
+public class SwingSpriteSheetAssetLoader extends AssetLoader<SpriteSheet> {
   private final AssetLoader<SolaImage> solaImageAssetLoader;
 
-  public SpriteSheetAssetLoader(AssetLoader<SolaImage> solaImageAssetLoader) {
+  public SwingSpriteSheetAssetLoader(AssetLoader<SolaImage> solaImageAssetLoader) {
     this.solaImageAssetLoader = solaImageAssetLoader;
   }
 

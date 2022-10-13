@@ -112,7 +112,7 @@ public class Graphics2dRenderer implements Renderer {
   }
 
   @Override
-  public void drawImage(float x, float y, SolaImage solaImage) {
+  public void drawImage(SolaImage solaImage, float x, float y) {
     throw new NotYetImplementedException();
   }
 

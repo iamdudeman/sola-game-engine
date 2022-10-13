@@ -4,12 +4,14 @@ import technology.sola.ecs.Component;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
+import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.module.graphics.SolaGraphics;
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
@@ -27,9 +29,8 @@ import java.util.List;
 public class RenderingExample extends Sola {
   private SolaGraphics solaGraphics;
 
-  @Override
-  protected SolaConfiguration getConfiguration() {
-    return new SolaConfiguration("Rendering Example", 800, 600, 30, true);
+  public RenderingExample() {
+    super(SolaConfiguration.build("Rendering Example", 800, 600).withTargetUpdatesPerSecond(30).withGameLoopRestingOn());
   }
 
   @Override
@@ -41,6 +42,8 @@ public class RenderingExample extends Sola {
 
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
 
+    assetLoaderProvider.get(SolaImage.class)
+      .addAssetMapping("test", "assets/test_tiles.png");
     assetLoaderProvider.get(SpriteSheet.class)
       .addAssetMapping("test", "assets/test_tiles_spritesheet.json");
   }
@@ -61,6 +64,13 @@ public class RenderingExample extends Sola {
 
       renderer.drawLine(0, 0, 800, 600, Color.BLUE);
       renderer.drawLine(750, 0, 20, 500, Color.BLUE);
+
+      assetLoaderProvider.get(SolaImage.class).get("test").executeIfLoaded(solaImage -> {
+        renderer.fillRect(350, 320, 200, 200, Color.WHITE);
+        renderer.setBlendMode(BlendMode.MASK);
+        renderer.drawImage(solaImage , 350, 320, 200, 200);
+        renderer.setBlendMode(BlendMode.NO_BLENDING);
+      });
     });
 
     solaGraphics.render();
@@ -167,8 +177,16 @@ public class RenderingExample extends Sola {
       new Vector2D(200, 20)
     ).forEach(vector2D -> world.createEntity(
       new LayerComponent("moving_stuff"),
-      new TransformComponent(vector2D.x, vector2D.y, movingEntity),
+      new TransformComponent(vector2D.x(), vector2D.y(), movingEntity),
       new RectangleRendererComponent(Color.RED))
+    );
+
+    world.createEntity(
+      new LayerComponent("moving_stuff"),
+      new TransformComponent(0, 0),
+      new SpriteComponent("test", "stick_figure"),
+      new BlendModeComponent(BlendMode.MASK),
+      new MovingComponent()
     );
 
     world.createEntity()

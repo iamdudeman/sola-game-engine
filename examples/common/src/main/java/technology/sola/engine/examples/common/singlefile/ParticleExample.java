@@ -15,9 +15,8 @@ import technology.sola.math.linear.Vector2D;
 public class ParticleExample extends Sola {
   private SolaGraphics solaGraphics;
 
-  @Override
-  protected SolaConfiguration getConfiguration() {
-    return new SolaConfiguration("Particle Example", 800, 600, 30, true);
+  public ParticleExample() {
+    super(SolaConfiguration.build("Particle Example", 800, 600).withTargetUpdatesPerSecond(30).withGameLoopRestingOn());
   }
 
   @Override

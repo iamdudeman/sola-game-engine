@@ -98,8 +98,8 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     Platform.runLater(() -> {
       final Stage stage = new Stage();
       final Group root = new Group();
-      int rendererWidth = solaConfiguration.canvasWidth();
-      int rendererHeight = solaConfiguration.canvasHeight();
+      int rendererWidth = solaConfiguration.rendererWidth();
+      int rendererHeight = solaConfiguration.rendererHeight();
       final Scene scene = new Scene(root, rendererWidth, rendererHeight);
 
       this.canvas = new Canvas(rendererWidth, rendererHeight);
@@ -113,15 +113,22 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       graphicsContext = canvas.getGraphicsContext2D();
       writableImage = new WritableImage(rendererWidth, rendererHeight);
 
-      solaEventHub.add(event -> {
-        if (event.getMessage() == GameLoopEventType.STOPPED) {
+      solaEventHub.add(GameLoopEvent.class, event -> {
+        if (event.type() == GameLoopEventType.STOPPED) {
           stage.close();
         }
-      }, GameLoopEvent.class);
+      });
 
       stage.setOnShown(event -> canvas.requestFocus());
-      stage.setOnCloseRequest(event -> solaEventHub.emit(GameLoopEvent.STOP));
-      stage.setTitle(solaConfiguration.solaTitle());
+      stage.iconifiedProperty().addListener((observable, oldValue, isMinimized) -> {
+        if (isMinimized) {
+          solaEventHub.emit(new GameLoopEvent(GameLoopEventType.PAUSE));
+        } else {
+          solaEventHub.emit(new GameLoopEvent(GameLoopEventType.RESUME));
+        }
+      });
+      stage.setOnCloseRequest(event -> solaEventHub.emit(new GameLoopEvent(GameLoopEventType.STOP)));
+      stage.setTitle(solaConfiguration.title());
       stage.setScene(scene);
       if (windowWidth != null) {
         stage.setWidth(windowWidth);

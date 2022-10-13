@@ -88,6 +88,7 @@ public class SolaBrowserFileBuilder {
           <style>
             body {
               margin: 0;
+              touch-action: manipulation;
             }
 
             canvas {
@@ -101,6 +102,66 @@ public class SolaBrowserFileBuilder {
           </script>
       </head>
       <body onload="start()">
+        <div id="%s"></div>
+      </body>
+      </html>
+      """;
+
+    String html = template.formatted(OUTPUT_FILE_JS, JsCanvasUtils.ID_SOLA_ANCHOR);
+
+    try {
+      Files.createDirectories(new File(buildDirectory).toPath());
+      Files.writeString(new File(buildDirectory, OUTPUT_FILE_HTML).toPath(), html);
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
+    }
+  }
+
+  public void createIndexHtmlWithOverlay() {
+    String template = """
+      <html>
+      <head>
+        <script type="text/javascript" charset="utf-8" src="%s"></script>
+        <style>
+          body {
+            margin: 0;
+            touch-action: manipulation;
+          }
+
+          canvas {
+            outline: none;
+          }
+
+          #overlay {
+            align-items: center;
+            background: gray;
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            width: 100vw;
+          }
+
+          #overlay button {
+            border-radius: 8px;
+            font-size: 24px;
+            padding: 16px;
+          }
+
+          #overlay button:hover {
+            opacity: 80%%;
+          }
+        </style>
+      </head>
+      <script>
+        function runGame() {
+          document.getElementById("overlay").remove();
+          main();
+        }
+      </script>
+      <body>
+        <div id="overlay">
+          <button onclick="runGame()">Run game</button>
+        </div>
         <div id="%s"></div>
       </body>
       </html>

@@ -77,34 +77,24 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     drawLineInt(xInt, yInt, x2Int, y2Int, color);
   }
 
-  /**
-   * todo
-   *
-   * @param x      top left coordinate x
-   * @param y      top left coordinate y
-   * @param width
-   * @param height
-   * @param color
-   */
   @Override
   public void drawRect(float x, float y, float width, float height, Color color) {
+    if (shouldSkipDrawCall(x, y, width, height)) {
+      return;
+    }
+
     drawLine(x, y, x + width, y, color);
     drawLine(x, y + height, x + width, y + height, color);
     drawLine(x, y, x, y + height, color);
     drawLine(x + width, y, x + width, y + height, color);
   }
 
-  /**
-   * todo
-   *
-   * @param x      top left coordinate x
-   * @param y      top left coordinate y
-   * @param width
-   * @param height
-   * @param color
-   */
   @Override
   public void fillRect(float x, float y, float width, float height, Color color) {
+    if (shouldSkipDrawCall(x, y, width, height)) {
+      return;
+    }
+
     int xInt = (int) (x + 0.5f);
     int yInt = (int) (y + 0.5f);
     int xPlusWidth = (int) (x + width + 0.5f);
@@ -115,16 +105,12 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     }
   }
 
-  /**
-   * Uses Bresenham's circle drawing algorithm
-   *
-   * @param x      top left coordinate x
-   * @param y      top left coordinate y
-   * @param radius
-   * @param color
-   */
   @Override
   public void drawCircle(float x, float y, float radius, Color color) {
+    if (shouldSkipDrawCall(x, y, radius)) {
+      return;
+    }
+
     int xCenter = (int) (x + radius + 0.5f);
     int yCenter = (int) (y + radius + 0.5f);
     int radiusInt = (int) (radius + 0.5f);
@@ -147,16 +133,12 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     }
   }
 
-  /**
-   * todo
-   *
-   * @param x      top left coordinate x
-   * @param y      top left coordinate y
-   * @param radius
-   * @param color
-   */
   @Override
   public void fillCircle(float x, float y, float radius, Color color) {
+    if (shouldSkipDrawCall(x, y, radius)) {
+      return;
+    }
+
     int xInt = (int) (x + radius + 0.5f);
     int yInt = (int) (y + radius + 0.5f);
     int radiusInt = (int) (radius + 0.5f);
@@ -169,7 +151,11 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   }
 
   @Override
-  public void drawImage(float x, float y, SolaImage solaImage) {
+  public void drawImage(SolaImage solaImage, float x, float y) {
+    if (shouldSkipDrawCall(x, y, solaImage.getWidth(), solaImage.getHeight())) {
+      return;
+    }
+
     int[] imagePixels = solaImage.getPixels();
     int xInt = (int) (x + 0.5f);
     int yInt = (int) (y + 0.5f);
@@ -196,10 +182,14 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   public void drawImage(SolaImage solaImage, AffineTransform affineTransform) {
     Rectangle transformBoundingBox = affineTransform.getBoundingBoxForTransform(solaImage.getWidth(), solaImage.getHeight());
 
-    for (int x = (int) transformBoundingBox.getMin().x; x < transformBoundingBox.getMax().x; x++) {
-      for (int y = (int) transformBoundingBox.getMin().y; y < transformBoundingBox.getMax().y; y++) {
+    if (shouldSkipDrawCall(transformBoundingBox.getMin().x(), transformBoundingBox.getMin().y(), transformBoundingBox.getWidth(), transformBoundingBox.getHeight())) {
+      return;
+    }
+
+    for (int x = (int) transformBoundingBox.getMin().x(); x < transformBoundingBox.getMax().x(); x++) {
+      for (int y = (int) transformBoundingBox.getMin().y(); y < transformBoundingBox.getMax().y(); y++) {
         Vector2D newPosition = affineTransform.backward(x, y);
-        int pixel = solaImage.getPixel(newPosition.x, newPosition.y);
+        int pixel = solaImage.getPixel(newPosition.x(), newPosition.y());
 
         setPixel(x, y, pixel);
       }
@@ -208,19 +198,36 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
   @Override
   public void drawImage(SolaImage solaImage, float x, float y, float width, float height) {
-    float scaleX = solaImage.getWidth() / width;
-    float scaleY = solaImage.getHeight() / height;
+    if (shouldSkipDrawCall(x, y, width, height)) {
+      return;
+    }
 
-    AffineTransform affineTransform = new AffineTransform()
-      .scale(scaleX, scaleY)
-      .translate(x, y);
-
-    drawImage(solaImage, affineTransform);
+    drawImage(solaImage.resize((int) width, (int) height), x, y);
   }
 
   @Override
   public List<Layer> getLayers() {
     return layers;
+  }
+
+  private boolean shouldSkipDrawCall(float x, float y, float radius) {
+    return shouldSkipDrawCall(x, y, radius, radius);
+  }
+
+  private boolean shouldSkipDrawCall(float x, float y, float width, float height) {
+    if (x - width > getWidth()) {
+      return true;
+    }
+
+    if (x + width < 0) {
+      return true;
+    }
+
+    if (y - height > getHeight()) {
+      return true;
+    }
+
+    return y + height < 0;
   }
 
   private void drawEightWaySymmetry(int centerX, int centerY, int x, int y, Color color) {

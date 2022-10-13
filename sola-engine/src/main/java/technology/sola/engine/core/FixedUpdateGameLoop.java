@@ -1,6 +1,7 @@
 package technology.sola.engine.core;
 
 import technology.sola.engine.core.event.GameLoopEvent;
+import technology.sola.engine.core.event.GameLoopEventType;
 import technology.sola.engine.event.EventHub;
 
 import java.util.function.Consumer;
@@ -36,6 +37,6 @@ class FixedUpdateGameLoop extends GameLoop {
       }
     }
 
-    eventHub.emit(GameLoopEvent.STOPPED);
+    eventHub.emit(new GameLoopEvent(GameLoopEventType.STOPPED));
   }
 }

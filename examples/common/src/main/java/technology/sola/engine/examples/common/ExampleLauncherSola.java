@@ -17,6 +17,7 @@ import technology.sola.engine.examples.common.singlefile.StressTestPhysicsExampl
 import technology.sola.engine.examples.common.singlefile.StressTestRenderingExample;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
@@ -29,12 +30,8 @@ public class ExampleLauncherSola extends Sola {
   private SolaGui solaGui;
 
   public ExampleLauncherSola(SolaPlatform solaPlatform) {
+    super(SolaConfiguration.build("Example Launcher", 800, 600).withTargetUpdatesPerSecond(30).withGameLoopRestingOn());
     this.solaPlatform = solaPlatform;
-  }
-
-  @Override
-  protected SolaConfiguration getConfiguration() {
-    return new SolaConfiguration("Example Launcher", 800, 600, 30, true);
   }
 
   @Override
@@ -55,7 +52,10 @@ public class ExampleLauncherSola extends Sola {
     StreamGuiElementContainer rootElement = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.setPreferredDimensions(800, 600).setDirection(StreamGuiElementContainer.Direction.VERTICAL).padding.set(5)
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(5)
+        .setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.CENTER)
+        .setVerticalAlignment(StreamGuiElementContainer.VerticalAlignment.CENTER)
+        .padding.set(5).setWidth(800).setHeight(580)
     );
 
     rootElement.addChild(solaGui.createElement(
@@ -80,17 +80,17 @@ public class ExampleLauncherSola extends Sola {
     ButtonGuiElement exampleLaunchButton = solaGui.createElement(
       ButtonGuiElement::new,
       ButtonGuiElement.Properties::new,
-      p -> p.setText(text).padding.set(5).margin.setBottom(5)
+      p -> p.setText(text).setTextAlign(BaseTextGuiElement.TextAlign.CENTER).padding.set(10).setWidth(300)
     );
 
     exampleLaunchButton.setOnAction(() -> {
-      eventHub.add(event -> {
-        if (event.getMessage() == GameLoopEventType.STOPPED) {
+      eventHub.add(GameLoopEvent.class, event -> {
+        if (event.type() == GameLoopEventType.STOPPED) {
           solaPlatform.play(solaSupplier.get());
         }
-      }, GameLoopEvent.class);
+      });
 
-      eventHub.emit(GameLoopEvent.STOP);
+      eventHub.emit(new GameLoopEvent(GameLoopEventType.STOP));
     });
 
     return exampleLaunchButton;

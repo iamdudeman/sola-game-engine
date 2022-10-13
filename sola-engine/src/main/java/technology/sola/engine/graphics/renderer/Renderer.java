@@ -70,7 +70,7 @@ public interface Renderer {
     for (char character : text.toCharArray()) {
       SolaImage glyphImage = font.getGlyph(character, color);
 
-      drawImage(x + xOffset, y, glyphImage);
+      drawImage(glyphImage, x + xOffset, y);
       xOffset += glyphImage.getWidth() + font.getFontInfo().leading();
     }
 
@@ -121,11 +121,9 @@ public interface Renderer {
    */
   void fillCircle(float x, float y, float radius, Color color);
 
-  // TODO should this be SolaImage, x, y?
-  void drawImage(float x, float y, SolaImage solaImage);
+  void drawImage(SolaImage solaImage, float x, float y);
 
   void drawImage(SolaImage solaImage, AffineTransform affineTransform);
 
-  // TODO is this method needed?
   void drawImage(SolaImage solaImage, float x, float y, float width, float height);
 }

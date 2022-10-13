@@ -6,14 +6,12 @@ import technology.sola.math.linear.Vector2D;
 
 import java.io.Serial;
 
-// todo consider acceleration
-// todo consider some sort of "swaying" for non-linear particles
-
 public class ParticleComponent implements Component {
   @Serial
   private static final long serialVersionUID = 1954733794643288182L;
   private final Color baseColor;
   private final float maxLifespan;
+  private final float inverseMaxLifespan;
   private final Vector2D velocity;
   private float remainingLifespan;
 
@@ -22,6 +20,8 @@ public class ParticleComponent implements Component {
     this.maxLifespan = maxLifespan;
     this.remainingLifespan = maxLifespan;
     this.velocity = velocity;
+
+    inverseMaxLifespan = 1 / maxLifespan;
   }
 
   public Color getBaseColor() {
@@ -30,6 +30,10 @@ public class ParticleComponent implements Component {
 
   public float getMaxLifespan() {
     return maxLifespan;
+  }
+
+  public float getInverseMaxLifespan() {
+    return inverseMaxLifespan;
   }
 
   public float getRemainingLifespan() {

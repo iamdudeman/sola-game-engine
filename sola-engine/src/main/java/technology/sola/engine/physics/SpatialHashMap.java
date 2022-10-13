@@ -75,10 +75,10 @@ public class SpatialHashMap {
 
     if (transformComponent == null || colliderComponent == null) return EMPTY_BUCKET_IDS;
 
-    float x = transformComponent.getX();
-    float y = transformComponent.getY();
-    float width = colliderComponent.getBoundingWidth() * transformComponent.getScaleX();
-    float height = colliderComponent.getBoundingHeight() * transformComponent.getScaleY();
+    float x = transformComponent.getX() + colliderComponent.getOffsetX();
+    float y = transformComponent.getY() + colliderComponent.getOffsetY();
+    float width = colliderComponent.getBoundingWidth(transformComponent.getScaleX());
+    float height = colliderComponent.getBoundingHeight(transformComponent.getScaleY());
 
     return new BucketId[]{
       getIdForPoint(x, y),
@@ -116,8 +116,8 @@ public class SpatialHashMap {
       if (colliderComponent == null || transformComponent == null) continue;
 
       float newValue = Math.max(
-        colliderComponent.getBoundingWidth() * transformComponent.getScaleX(),
-        colliderComponent.getBoundingHeight() * transformComponent.getScaleY()
+        colliderComponent.getBoundingWidth(transformComponent.getScaleX()),
+        colliderComponent.getBoundingHeight(transformComponent.getScaleY())
       );
 
       if (newValue > minSize) {

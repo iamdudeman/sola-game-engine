@@ -15,8 +15,8 @@ class Vector2DTest {
       void when_shouldReturnCorrectVector() {
         Vector2D headingVector = Vector2D.headingVectorFromAngle(Math.PI);
 
-        assertEquals(-1, headingVector.x, 0.0001);
-        assertEquals(0, headingVector.y, 0.0001);
+        assertEquals(-1, headingVector.x(), 0.0001);
+        assertEquals(0, headingVector.y(), 0.0001);
       }
     }
   }
@@ -29,8 +29,8 @@ class Vector2DTest {
       Vector2D vector2 = new Vector2D(3, 1);
 
       Vector2D result = vector.add(vector2);
-      assertEquals(6, result.x);
-      assertEquals(5, result.y);
+      assertEquals(6, result.x());
+      assertEquals(5, result.y());
 
       // Ensure the result object is a new object
       assertNotEquals(vector, result);
@@ -47,8 +47,8 @@ class Vector2DTest {
       Vector2D vector2 = new Vector2D(3, 1);
 
       Vector2D result = vector.subtract(vector2);
-      assertEquals(0, result.x);
-      assertEquals(3, result.y);
+      assertEquals(0, result.x());
+      assertEquals(3, result.y());
 
       // Ensure the result object is a new object
       assertNotEquals(vector, result);
@@ -64,12 +64,12 @@ class Vector2DTest {
       Vector2D vector = new Vector2D(2, 8);
 
       Vector2D result = vector.scalar(0.5f);
-      assertEquals(1, result.x);
-      assertEquals(4, result.y);
+      assertEquals(1, result.x());
+      assertEquals(4, result.y());
 
       result = vector.scalar(2);
-      assertEquals(4, result.x);
-      assertEquals(16, result.y);
+      assertEquals(4, result.x());
+      assertEquals(16, result.y());
 
       // Ensure the result object is a new object
       assertNotEquals(vector, result);
@@ -149,20 +149,20 @@ class Vector2DTest {
       Vector2D vector2D = new Vector2D(1, 1);
 
       Vector2D rotation = vector2D.rotate(Math.PI / 2);
-      assertEquals(-1, rotation.x);
-      assertEquals(1, rotation.y);
+      assertEquals(-1, rotation.x());
+      assertEquals(1, rotation.y());
 
       rotation = rotation.rotate(Math.PI / 2);
-      assertEquals(-1, rotation.x);
-      assertEquals(-1, rotation.y);
+      assertEquals(-1, rotation.x());
+      assertEquals(-1, rotation.y());
 
       rotation = rotation.rotate(Math.PI / 2);
-      assertEquals(1, rotation.x);
-      assertEquals(-1, rotation.y);
+      assertEquals(1, rotation.x());
+      assertEquals(-1, rotation.y());
 
       rotation = rotation.rotate(Math.PI / 2);
-      assertEquals(1, rotation.x);
-      assertEquals(1, rotation.y);
+      assertEquals(1, rotation.x());
+      assertEquals(1, rotation.y());
     }
 
     @Nested

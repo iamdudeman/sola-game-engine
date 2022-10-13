@@ -1,4 +1,4 @@
-package technology.sola.engine.graphics.gui;
+package technology.sola.engine.graphics.gui.properties;
 
 import technology.sola.engine.graphics.Color;
 
@@ -6,14 +6,14 @@ public class GuiElementProperties {
   public final Bounds margin = new Bounds();
   public final Bounds padding = new Bounds();
   protected final GuiElementGlobalProperties globalProperties;
-  private int x;
-  private int y;
-  private int maxWidth;
-  private int maxHeight;
   private boolean isLayoutChanged = true;
   private Color focusOutlineColor = null;
   private boolean isHidden;
   private boolean isFocusable = true;
+  private Color borderColor;
+  private Color hoverBorderColor;
+  private Integer width;
+  private Integer height;
 
   public GuiElementProperties(GuiElementGlobalProperties globalProperties) {
     this.globalProperties = globalProperties;
@@ -49,44 +49,64 @@ public class GuiElementProperties {
     return this;
   }
 
-  public GuiElementProperties setPosition(int x, int y) {
-    this.x = x;
-    this.y = y;
-    setLayoutChanged(true);
-
-    return this;
-  }
-
-  public int getX() {
-    return x;
-  }
-
-  public int getY() {
-    return y;
-  }
-
-  public GuiElementProperties setMaxDimensions(int maxWidth, int maxHeight) {
-    this.maxWidth = maxWidth;
-    this.maxHeight = maxHeight;
-    setLayoutChanged(true);
-
-    return this;
-  }
-
-  public int getMaxWidth() {
-    return maxWidth;
-  }
-
-  public int getMaxHeight() {
-    return maxHeight;
-  }
-
   public Color getFocusOutlineColor() {
     return focusOutlineColor;
   }
 
   public GuiElementProperties setFocusOutlineColor(Color focusOutlineColor) {
     this.focusOutlineColor = focusOutlineColor;
+
+    return this;
+  }
+
+  public Color getBorderColor() {
+    return borderColor;
+  }
+
+  public GuiElementProperties setBorderColor(Color borderColor) {
+    if (this.borderColor == null && borderColor != null) {
+      setLayoutChanged(true);
+    } else if (this.borderColor != null && borderColor == null) {
+      setLayoutChanged(true);
+    }
+    this.borderColor = borderColor;
+
+    return this;
+  }
+
+  /**
+   * Note: hover border color will only render if there is also a border color set. If no hover color is set it will
+   * default to the current border color.
+   *
+   * @return the border color for when the {@link technology.sola.engine.graphics.gui.GuiElement} is hovered
+   */
+  public Color getHoverBorderColor() {
+    return hoverBorderColor == null ? getBorderColor() : hoverBorderColor;
+  }
+
+  public GuiElementProperties setHoverBorderColor(Color hoverBorderColor) {
+    this.hoverBorderColor = hoverBorderColor;
+    return this;
+  }
+
+  public Integer getWidth() {
+    return width;
+  }
+
+  public GuiElementProperties setWidth(Integer width) {
+    this.width = width;
+    setLayoutChanged(true);
+
+    return this;
+  }
+
+  public Integer getHeight() {
+    return height;
+  }
+
+  public GuiElementProperties setHeight(Integer height) {
+    this.height = height;
+    setLayoutChanged(true);
 
     return this;
   }

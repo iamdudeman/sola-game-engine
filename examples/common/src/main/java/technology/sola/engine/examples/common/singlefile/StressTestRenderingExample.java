@@ -17,9 +17,8 @@ import java.util.Random;
 public class StressTestRenderingExample extends Sola {
   private SolaGraphics solaGraphics;
 
-  @Override
-  protected SolaConfiguration getConfiguration() {
-    return new SolaConfiguration("Stress Test - Rendering", 800, 600, 30, true);
+  public StressTestRenderingExample() {
+    super(SolaConfiguration.build("Stress Test - Rendering", 800, 600).withTargetUpdatesPerSecond(30));
   }
 
   @Override

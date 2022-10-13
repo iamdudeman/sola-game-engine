@@ -19,9 +19,8 @@ public class MouseAndCameraExample extends Sola {
   private SolaGraphics solaGraphics;
   private ClickCreateEntitySystem clickCreateEntitySystem;
 
-  @Override
-  protected SolaConfiguration getConfiguration() {
-    return new SolaConfiguration("Mouse and Camera", 800, 600, 30, true);
+  public MouseAndCameraExample() {
+    super(SolaConfiguration.build("Mouse and Camera", 800, 600).withTargetUpdatesPerSecond(30).withGameLoopRestingOn());
   }
 
   @Override
@@ -72,7 +71,7 @@ public class MouseAndCameraExample extends Sola {
         Vector2D worldPosition = solaGraphics.screenToWorldCoordinate(mousePosition);
 
         world.createEntity()
-          .addComponent(new TransformComponent(worldPosition.x, worldPosition.y, 10, 10))
+          .addComponent(new TransformComponent(worldPosition.x(), worldPosition.y(), 10, 10))
           .addComponent(new RectangleRendererComponent(colors[colorIndex]));
       }
 

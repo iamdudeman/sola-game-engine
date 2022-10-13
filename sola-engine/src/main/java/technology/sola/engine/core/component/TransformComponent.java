@@ -80,8 +80,8 @@ public class TransformComponent implements Component {
   }
 
   public void setTranslate(Vector2D translate) {
-    this.x = translate.x;
-    this.y = translate.y;
+    this.x = translate.x();
+    this.y = translate.y();
   }
 
   public float getScaleX() {

@@ -15,9 +15,9 @@ public class Triangle {
 
   public float getArea() {
     return Math.abs(
-      (edgeB.x * edgeA.y - edgeA.x * edgeB.y)
-        + (edgeC.x * edgeB.y - edgeB.x * edgeC.y)
-        + (edgeA.x * edgeC.y - edgeC.x * edgeA.y)
+      (edgeB.x() * edgeA.y() - edgeA.x() * edgeB.y())
+        + (edgeC.x() * edgeB.y() - edgeB.x() * edgeC.y())
+        + (edgeA.x() * edgeC.y() - edgeC.x() * edgeA.y())
     ) * 0.5f;
   }
 }

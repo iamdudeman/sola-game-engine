@@ -4,8 +4,8 @@ import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
-import technology.sola.engine.graphics.gui.GuiElementGlobalProperties;
-import technology.sola.engine.graphics.gui.GuiElementProperties;
+import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
+import technology.sola.engine.graphics.gui.properties.GuiElementProperties;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties> extends GuiElement<T> {
@@ -21,12 +21,12 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
 
   @Override
   public int getContentWidth() {
-    return textWidth + properties.padding.getLeft() + properties.padding.getRight();
+    return textWidth;
   }
 
   @Override
   public int getContentHeight() {
-    return textHeight + properties.padding.getTop() + properties.padding.getBottom();
+    return textHeight;
   }
 
   @Override
@@ -34,13 +34,19 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
     Properties properties = properties();
 
     if (font != null) {
+      Integer width = properties.getWidth();
+      int alignOffsetX = 0;
+
+      if (width != null) {
+        alignOffsetX = switch (properties.textAlign) {
+          case LEFT -> 0;
+          case CENTER -> width / 2 - (getContentWidth() + properties.padding.getLeft() + properties.padding.getRight()) / 2;
+          case RIGHT -> (width - ((properties.padding.getLeft() + properties.padding.getRight() + getContentWidth())));
+        };
+      }
+
       renderer.setFont(font);
-      renderer.drawString(
-        properties.getText(),
-        x + properties.padding.getLeft(),
-        y + properties.padding.getTop(),
-        properties.getColorText()
-      );
+      renderer.drawString(properties.getText(), x + alignOffsetX, y, properties.getColorText());
     }
   }
 
@@ -69,6 +75,7 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
     private Color colorText = null;
     private String fontAssetId = null;
     private String text = "";
+    private TextAlign textAlign = TextAlign.LEFT;
 
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
@@ -103,5 +110,20 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
       this.colorText = colorText;
       return this;
     }
+
+    public TextAlign getTextAlign() {
+      return textAlign;
+    }
+
+    public Properties setTextAlign(TextAlign textAlign) {
+      this.textAlign = textAlign;
+      return this;
+    }
+  }
+
+  public enum TextAlign {
+    LEFT,
+    CENTER,
+    RIGHT
   }
 }

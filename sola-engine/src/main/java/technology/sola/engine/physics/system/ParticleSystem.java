@@ -32,14 +32,12 @@ public class ParticleSystem extends EcsSystem {
         } else {
           TransformComponent transformComponent = view.c2();
 
-          // TODO consider acceleration and "swaying" of some sort for non-linear particles
           transformComponent.setTranslate(transformComponent.getTranslate().add(particleComponent.getVelocity().scalar(delta)));
           particleComponent.reduceLifespan(delta);
 
           Color baseColor = particleComponent.getBaseColor();
 
-          // todo avoid division here if possible
-          int alpha = Math.max((int) ((255 * particleComponent.getRemainingLifespan() / particleComponent.getMaxLifespan()) + 0.5f), 0);
+          int alpha = Math.max((int) ((255 * particleComponent.getRemainingLifespan() * particleComponent.getInverseMaxLifespan()) + 0.5f), 0);
 
           view.c3().setColor(new Color(
             alpha,
@@ -63,8 +61,8 @@ public class ParticleSystem extends EcsSystem {
 
           for (int i = 0; i < particleEmitterComponent.getParticlesPerEmit(); i++) {
 
-            float xVel = getRandomFloat(minVel.x, maxVel.x);
-            float yVel = getRandomFloat(minVel.y, maxVel.y);
+            float xVel = getRandomFloat(minVel.x(), maxVel.x());
+            float yVel = getRandomFloat(minVel.y(), maxVel.y());
             float size = getRandomFloat(particleEmitterComponent.getParticleMinSize(), particleEmitterComponent.getParticleMaxSize());
             float life = getRandomFloat(particleEmitterComponent.getParticleMinLife(), particleEmitterComponent.getParticleMaxLife());
 

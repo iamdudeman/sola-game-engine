@@ -9,6 +9,6 @@ public class MissingGlyphException extends RuntimeException {
   private static final long serialVersionUID = 2280054643044235363L;
 
   public MissingGlyphException(char character, FontInfo fontInfo) {
-    super("Glyph for character [" + character + "] is not in Font [" + fontInfo.fontName() + "]");
+    super("Glyph for character [" + character + "] is not in Font [" + fontInfo.fontFamily() + "]");
   }
 }

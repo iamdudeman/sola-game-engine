@@ -7,41 +7,38 @@ import java.util.Map;
 
 public class EventHub {
   @SuppressWarnings("rawtypes")
-  private static final List<EventListener> EMPTY = new ArrayList<>();
-  @SuppressWarnings("rawtypes")
-  private final Map<Class<? extends Event>, List<EventListener>> eventListenersMap;
+  private final Map<Class<? extends Event>, List<EventListener>> eventListenersMap = new HashMap<>();
 
-  public EventHub() {
-    eventListenersMap = new HashMap<>();
+  public <T extends Event> void add(Class<T> eventClass, EventListener<T> eventListener) {
+    var eventListeners = eventListenersMap.computeIfAbsent(eventClass, key -> new ArrayList<>());
+    var newListeners = new ArrayList<>(eventListeners);
+
+    newListeners.add(eventListener);
+    eventListenersMap.put(eventClass, newListeners);
   }
 
-  public <T extends Event<?>> void add(EventListener<T> eventListener, Class<T> eventClass) {
-    var eventListeners = eventListenersMap.getOrDefault(eventClass, new ArrayList<>());
-    var newEventListeners = new ArrayList<>(eventListeners);
-
-    newEventListeners.add(eventListener);
-
-    eventListenersMap.put(eventClass, newEventListeners);
-  }
-
-  public <T extends Event<?>> void remove(EventListener<T> eventListener, Class<T> eventClass) {
+  public <T extends Event> void remove(Class<T> eventClass, EventListener<T> eventListener) {
     var eventListeners = eventListenersMap.get(eventClass);
 
     if (eventListeners != null) {
-      eventListenersMap.put(eventClass, eventListeners.stream().filter(eventListenerPresent -> eventListenerPresent != eventListener).toList());
+      var newListeners = new ArrayList<>(eventListeners);
+      newListeners.remove(eventListener);
+      eventListenersMap.put(eventClass, newListeners);
     }
   }
 
-  public <T extends Event<?>> void off(Class<T> eventClass) {
+  public <T extends Event> void off(Class<T> eventClass) {
     eventListenersMap.put(eventClass, new ArrayList<>());
   }
 
   @SuppressWarnings("unchecked")
-  public <T extends Event<?>> void emit(T event) {
-    var eventListeners = eventListenersMap.getOrDefault(event.getClass(), EMPTY);
+  public <T extends Event> void emit(T event) {
+    var eventListeners = eventListenersMap.get(event.getClass());
 
-    for (var eventListener : eventListeners) {
-      eventListener.onEvent(event);
+    if (eventListeners != null) {
+      for (var eventListener : eventListeners) {
+        eventListener.onEvent(event);
+      }
     }
   }
 }
