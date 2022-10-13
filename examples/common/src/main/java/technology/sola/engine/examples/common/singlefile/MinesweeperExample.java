@@ -15,13 +15,9 @@ public class MinesweeperExample {
         //if point is bomb print '#'
         if (tile == -1) {
           System.out.print("#");
-        }
-        //if point is nothing then print " "
-        else if (tile == 0) {
+        } else if (tile == 0) { //if point is nothing then print " "
           System.out.print(" ");
-        }
-        //else print its number
-        else {
+        } else { //else print its number
           System.out.print(tile);
         }
         //space them out
