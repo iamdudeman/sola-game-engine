@@ -7,7 +7,7 @@ dependencies {
   implementation(project(":examples:common"))
 }
 
-task("generateBrowserExampleHtmlAndJs", type = JavaExec::class) {
+task("generateWebHtmlAndJs", type = JavaExec::class) {
   group = "build"
 
   dependsOn(tasks.getByPath("assemble"))
@@ -15,4 +15,8 @@ task("generateBrowserExampleHtmlAndJs", type = JavaExec::class) {
   classpath = sourceSets.main.get().runtimeClasspath
   setArgsString("build ${project.name}-${project.version}.jar")
   mainClass.set("technology.sola.engine.examples.browser.GenerateBrowserFilesMain")
+}
+
+tasks.assemble {
+  finalizedBy(tasks.getByName("generateWebHtmlAndJs"))
 }
