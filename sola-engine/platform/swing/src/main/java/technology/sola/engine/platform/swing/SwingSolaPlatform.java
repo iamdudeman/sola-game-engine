@@ -111,6 +111,7 @@ public class SwingSolaPlatform extends SolaPlatform {
     jFrame.getContentPane().add(canvas);
     if (windowSize != null) {
       jFrame.setPreferredSize(windowSize);
+      viewport.resize(windowSize.width, windowSize.height);
     }
     jFrame.pack();
 

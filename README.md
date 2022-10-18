@@ -47,6 +47,9 @@ public class Main {
 }
 ```
 
+You can use the [Sola Game Template repo](https://github.com/iamdudeman/sola-game-template) as a template to start
+your repo using Sola Game Engine.
+
 ## Example Code
 * [Sola examples](examples/common)
 * [Swing Platform example](examples/swing)
