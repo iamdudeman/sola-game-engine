@@ -1,3 +1,4 @@
+module:technology.sola.engine
 technology.sola.engine.assets
 technology.sola.engine.assets.audio
 technology.sola.engine.assets.exception
@@ -16,7 +17,6 @@ technology.sola.engine.event
 technology.sola.engine.graphics
 technology.sola.engine.graphics.components
 technology.sola.engine.graphics.components.sprite
-technology.sola.engine.graphics.exception
 technology.sola.engine.graphics.gui
 technology.sola.engine.graphics.gui.elements
 technology.sola.engine.graphics.gui.elements.container
