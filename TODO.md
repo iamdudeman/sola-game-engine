@@ -30,6 +30,13 @@
   * consider some sort of "swaying" for non-linear particles
 * Unit Testing
   * Add lots of missing tests :)
+* JavaDocs
+  * add missing JavaDocs
+* Build files
+  * See if `duplicatesStrategy = DuplicatesStrategy.EXCLUDE` can be removed
+  * Make JavaFX and Swing examples into an executable jar of some sort
+    * include assets with them
+  * Add convenience gradle task for browser that zips web files and assets
 * Consider adding a "debug console" option
   * While open can toggle things like render debug outlines and debug spacial hashmap stuff
   * Could also maybe allow adding custom commands
