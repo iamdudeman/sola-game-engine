@@ -88,22 +88,26 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   @Override
   protected void onRender(Renderer renderer) {
-    int[] pixels = ((SoftwareRenderer) renderer).getPixels();
-    int[] pixelDataForCanvas = new int[pixels.length * 4];
-    int index = 0;
+    if (useSoftwareRendering) {
+      int[] pixels = ((SoftwareRenderer) renderer).getPixels();
+      int[] pixelDataForCanvas = new int[pixels.length * 4];
+      int index = 0;
 
-    for (int current : pixels) {
-      Color color = new Color(current);
+      for (int current : pixels) {
+        Color color = new Color(current);
 
-      pixelDataForCanvas[index++] = color.getRed();
-      pixelDataForCanvas[index++] = color.getGreen();
-      pixelDataForCanvas[index++] = color.getBlue();
-      pixelDataForCanvas[index++] = color.getAlpha();
+        pixelDataForCanvas[index++] = color.getRed();
+        pixelDataForCanvas[index++] = color.getGreen();
+        pixelDataForCanvas[index++] = color.getBlue();
+        pixelDataForCanvas[index++] = color.getAlpha();
+      }
+
+      AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+
+      JsCanvasUtils.renderToCanvas(pixelDataForCanvas, renderer.getWidth(), renderer.getHeight(), aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height());
+    } else {
+      // TODO handle aspect ratio stuff somehow
     }
-
-    AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
-
-    JsCanvasUtils.renderToCanvas(pixelDataForCanvas, renderer.getWidth(), renderer.getHeight(), aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height());
   }
 
   @Override
