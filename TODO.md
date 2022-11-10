@@ -1,3 +1,21 @@
+# branch WIP
+* Research jpackage
+* Check if need a fatjar with jpackage
+* Check how to include assets
+
+https://docs.oracle.com/en/java/javase/14/docs/specs/man/jpackage.html
+https://docs.oracle.com/en/java/javase/15/jpackage/packaging-overview.html#GUID-C1027043-587D-418D-8188-EF8F44A4C06A
+
+
+What you can do if you want an executable that can run the program directly without installing,
+is use the --type app-image flag, which will create an application image that
+contains a .exe launcher to launch the app.
+
+* Create readme steps for packaging
+  * Install JDK 17
+  * Update $JAVA_HOME path
+  * etc
+
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
