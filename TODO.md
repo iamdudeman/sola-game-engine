@@ -14,8 +14,12 @@ contains a .exe launcher to launch the app.
 * Maybe create jar distributable as well as .exe?
 * Create readme steps for packaging
   * Install JDK 17
+    * https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
   * Update $JAVA_HOME path
-  * etc
+    * ex. C:\Program Files\Java\jdk-17.0.5
+    * powershell: $env:JAVA_HOME
+  * Run
+    * `& $env:JAVA_HOME/bin/jpackage.exe --version`
 
 ## Known Bugs List
 
