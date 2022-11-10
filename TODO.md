@@ -11,6 +11,7 @@ What you can do if you want an executable that can run the program directly with
 is use the --type app-image flag, which will create an application image that
 contains a .exe launcher to launch the app.
 
+* Maybe create jar distributable as well as .exe?
 * Create readme steps for packaging
   * Install JDK 17
   * Update $JAVA_HOME path
