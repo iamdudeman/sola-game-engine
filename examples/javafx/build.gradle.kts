@@ -11,13 +11,13 @@ tasks.withType<Tar> {
   duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-// todo need to include assets
 // todo update code to check for assets internally first, then externally
 task("distFatJar", Jar::class) {
   group = "distribution"
   duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
-  archiveBaseName.set("sola-engine-examples-${project.name}")
+  val osClassifier = getOsClassifier()
+  archiveBaseName.set("sola-engine-examples-${project.name}-${osClassifier}")
 
   manifest {
     attributes["Main-Class"] = "technology.sola.engine.examples.javafx.JavaFxMain"
@@ -26,6 +26,19 @@ task("distFatJar", Jar::class) {
   val dependencies = configurations.runtimeClasspath.get().map(::zipTree)
 
   from(dependencies)
+  from("${project.rootDir}/assets") {
+    into("assets")
+  }
   with(tasks.jar.get())
   dependsOn(configurations.runtimeClasspath)
+}
+
+fun getOsClassifier(): String {
+  if (org.apache.tools.ant.taskdefs.condition.Os.isFamily(org.apache.tools.ant.taskdefs.condition.Os.FAMILY_MAC)) {
+    return "mac"
+  } else if (org.apache.tools.ant.taskdefs.condition.Os.isFamily(org.apache.tools.ant.taskdefs.condition.Os.FAMILY_UNIX)) {
+    return "linux"
+  }
+
+  return "win"
 }

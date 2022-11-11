@@ -11,7 +11,6 @@ tasks.withType<Tar> {
   duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-// todo need to include assets
 // todo update code to check for assets internally first, then externally
 task("distFatJar", Jar::class) {
   group = "distribution"
@@ -26,6 +25,9 @@ task("distFatJar", Jar::class) {
   val dependencies = configurations.runtimeClasspath.get().map(::zipTree)
 
   from(dependencies)
+  from("${project.rootDir}/assets") {
+    into("assets")
+  }
   with(tasks.jar.get())
   dependsOn(configurations.runtimeClasspath)
 }
