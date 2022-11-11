@@ -13,7 +13,7 @@ tasks.withType<Tar> {
 
 // todo need to include assets
 // todo update code to check for assets internally first, then externally
-tasks.register("distFatJar", Jar::class) {
+task("distFatJar", Jar::class) {
   group = "distribution"
   duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
