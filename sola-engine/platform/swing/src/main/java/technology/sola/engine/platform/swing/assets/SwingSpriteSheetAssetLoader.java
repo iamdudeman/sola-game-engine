@@ -8,9 +8,7 @@ import technology.sola.engine.platform.swing.assets.exception.FailedSpriteSheetL
 import technology.sola.json.JsonObject;
 import technology.sola.json.SolaJson;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 
 public class SwingSpriteSheetAssetLoader extends AssetLoader<SpriteSheet> {
   private final AssetLoader<SolaImage> solaImageAssetLoader;
@@ -29,14 +27,11 @@ public class SwingSpriteSheetAssetLoader extends AssetLoader<SpriteSheet> {
     AssetHandle<SpriteSheet> spriteSheetAssetHandle = new AssetHandle<>();
 
     new Thread(() -> {
-      File file = new File(path);
-
       try {
-        String jsonString = Files.readString(file.toPath());
-        SolaJson solaJson = new SolaJson();
-        JsonObject spriteSheetJson = solaJson.parse(jsonString).asObject();
+        String jsonString = PathUtils.readContents(path);
+        JsonObject spriteSheetJson = new SolaJson().parse(jsonString).asObject();
         String spriteImageName = spriteSheetJson.getString("spriteSheet");
-        String spriteImagePath = new File(file.getParent(), spriteImageName).getPath();
+        String spriteImagePath = PathUtils.getParentPath(path) + "/" + spriteImageName;
 
         solaImageAssetLoader.getNewAsset(spriteImageName, spriteImagePath)
           .executeWhenLoaded(solaImage -> {

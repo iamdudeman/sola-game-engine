@@ -7,7 +7,6 @@ import technology.sola.engine.platform.swing.assets.exception.FailedSolaImageLoa
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class SwingSolaImageAssetLoader extends AssetLoader<SolaImage> {
@@ -22,8 +21,7 @@ public class SwingSolaImageAssetLoader extends AssetLoader<SolaImage> {
 
     new Thread(() -> {
       try {
-        File file = new File(path);
-        BufferedImage bufferedImage = ImageIO.read(file);
+        BufferedImage bufferedImage = ImageIO.read(PathUtils.asUrl(path));
         SolaImage solaImage = new SolaImage(bufferedImage.getWidth(), bufferedImage.getHeight());
 
         bufferedImage.getRGB(0, 0, solaImage.getWidth(), solaImage.getHeight(), solaImage.getPixels(), 0, solaImage.getWidth());
