@@ -23,7 +23,7 @@ contains a .exe launcher to launch the app.
 
 ```shell
 # Run from sola-game-engine\examples\swing on Windows Powershell
-& $env:JAVA_HOME/bin/jpackage.exe --name Test --dest build --input build/libs --main-jar sola-engine-examples-swing-0.1.1.jar --type app-image
+& $env:JAVA_HOME/bin/jpackage.exe --name Test --app-version 0.1.1 --vendor sola.technology --dest build --input build/libs --main-jar sola-engine-examples-swing-0.1.1.jar --type app-image
 ```
 
 ## Known Bugs List
