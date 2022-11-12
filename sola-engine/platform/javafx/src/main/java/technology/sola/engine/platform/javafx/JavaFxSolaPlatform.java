@@ -20,7 +20,7 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
-import technology.sola.engine.platform.javafx.assets.JavaFxAudiClipAssetLoader;
+import technology.sola.engine.platform.javafx.assets.JavaFxAudioClipAssetLoader;
 import technology.sola.engine.platform.javafx.assets.JavaFxFontAssetLoader;
 import technology.sola.engine.platform.javafx.assets.JavaFxSolaImageAssetLoader;
 import technology.sola.engine.platform.javafx.assets.JavaFxSpriteSheetAssetLoader;
@@ -166,7 +166,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     assetLoaderProvider.add(solaImageAssetLoader);
     assetLoaderProvider.add(new JavaFxFontAssetLoader(solaImageAssetLoader));
     assetLoaderProvider.add(new JavaFxSpriteSheetAssetLoader(solaImageAssetLoader));
-    assetLoaderProvider.add(new JavaFxAudiClipAssetLoader());
+    assetLoaderProvider.add(new JavaFxAudioClipAssetLoader());
   }
 
   @Override

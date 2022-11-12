@@ -6,7 +6,8 @@ import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
 
-import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class JavaFxSolaImageAssetLoader extends AssetLoader<SolaImage> {
   @Override
@@ -19,17 +20,19 @@ public class JavaFxSolaImageAssetLoader extends AssetLoader<SolaImage> {
     AssetHandle<SolaImage> solaImageAssetHandle = new AssetHandle<>();
 
     new Thread(() -> {
-      File file = new File(path);
-      Image image = new Image(file.toURI().toString());
-      int width = (int) image.getWidth();
-      int height = (int) image.getHeight();
+      try (InputStream inputStream = PathUtils.asUrl(path).openStream()) {
+        Image image = new Image(inputStream);
+        int width = (int) image.getWidth();
+        int height = (int) image.getHeight();
+        SolaImage solaImage = new SolaImage(width, height);
 
-      SolaImage solaImage = new SolaImage(width, height);
+        image.getPixelReader()
+          .getPixels(0, 0, width, height, PixelFormat.getIntArgbPreInstance(), solaImage.getPixels(), 0, width);
 
-      image.getPixelReader()
-        .getPixels(0, 0, width, height, PixelFormat.getIntArgbPreInstance(), solaImage.getPixels(), 0, width);
-
-      solaImageAssetHandle.setAsset(solaImage);
+        solaImageAssetHandle.setAsset(solaImage);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
     }).start();
 
     return solaImageAssetHandle;
