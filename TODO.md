@@ -1,7 +1,13 @@
 # branch WIP
-* Research jpackage
-* Check if need a fatjar with jpackage
-* Check how to include assets
+[x] Research jpackage
+[x] Check if need a fatjar with jpackage
+[x] Check how to include assets
+
+* Build files
+  [x] Make JavaFX and Swing examples into an executable jar of some sort
+    [x] include assets with them
+  [x] Add convenience gradle task for browser that zips web files and assets
+
 
 https://docs.oracle.com/en/java/javase/14/docs/specs/man/jpackage.html
 https://docs.oracle.com/en/java/javase/15/jpackage/packaging-overview.html#GUID-C1027043-587D-418D-8188-EF8F44A4C06A
@@ -58,11 +64,6 @@ contains a .exe launcher to launch the app.
   * Add lots of missing tests :)
 * JavaDocs
   * add missing JavaDocs
-* Build files
-  * See if `duplicatesStrategy = DuplicatesStrategy.EXCLUDE` can be removed
-  * Make JavaFX and Swing examples into an executable jar of some sort
-    * include assets with them
-  * Add convenience gradle task for browser that zips web files and assets
 * Consider adding a "debug console" option
   * While open can toggle things like render debug outlines and debug spacial hashmap stuff
   * Could also maybe allow adding custom commands
@@ -111,10 +112,6 @@ contains a .exe launcher to launch the app.
     * Polygon x Polygon
 * Camera
   * Possibly allow multiple cameras (think split screen games)
-* Integrations
-  * Steam?
-    * include JRE in the output file
-      * might vary per platform
 * Android Platform
   * Implement
 
