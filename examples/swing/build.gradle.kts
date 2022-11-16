@@ -15,12 +15,11 @@ tasks.withType<Tar> {
   duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-// todo update code to check for assets internally first, then externally
 task("distFatJar", Jar::class) {
   group = "distribution"
   duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
-  archiveBaseName.set("sola-engine-examples-${project.name}")
+  archiveBaseName.set("examples-${project.name}")
 
   manifest {
     attributes["Main-Class"] = "technology.sola.engine.examples.swing.SwingMain"

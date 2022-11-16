@@ -5,6 +5,12 @@ plugins {
 dependencies {
   implementation(project(":sola-engine:platform:javafx"))
   implementation(project(":examples:common"))
+
+  val osClassifier = getOsClassifier()
+
+  runtimeOnly("org.openjfx", "javafx-base", "17.0.2", classifier = osClassifier)
+  runtimeOnly("org.openjfx", "javafx-controls", "17.0.2", classifier = osClassifier)
+  runtimeOnly("org.openjfx", "javafx-graphics", "17.0.2", classifier = osClassifier)
 }
 
 tasks.withType<Zip> {
@@ -15,13 +21,12 @@ tasks.withType<Tar> {
   duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-// todo update code to check for assets internally first, then externally
 task("distFatJar", Jar::class) {
   group = "distribution"
   duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
   val osClassifier = getOsClassifier()
-  archiveBaseName.set("sola-engine-examples-${project.name}-${osClassifier}")
+  archiveBaseName.set("examples-${project.name}-${osClassifier}")
 
   manifest {
     attributes["Main-Class"] = "technology.sola.engine.examples.javafx.JavaFxMain"
