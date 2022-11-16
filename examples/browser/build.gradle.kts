@@ -20,6 +20,7 @@ task("generateWebHtmlAndJs", JavaExec::class) {
 task("distWebZip", Zip::class) {
   group = "distribution"
   destinationDirectory.set(file(buildDir))
+  archiveBaseName.set("examples-${project.name}")
 
   dependsOn(tasks.getByName("generateWebHtmlAndJs"))
 

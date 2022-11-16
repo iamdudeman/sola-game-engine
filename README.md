@@ -68,7 +68,7 @@ Run the following command
 ```shell
 .\gradlew.bat distWebZip
 ```
-The output will be at `examples/browser/build/browser-<version>.zip`.
+The output will be at `examples/browser/build/examples-browser-<version>.zip`.
 This can be deployed to places like `itch.io` when using the "HTML" project type.
 
 ### Swing + JavaFx fat jar
