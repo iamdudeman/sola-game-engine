@@ -30,8 +30,8 @@ public class JavaFxSolaImageAssetLoader extends AssetLoader<SolaImage> {
           .getPixels(0, 0, width, height, PixelFormat.getIntArgbPreInstance(), solaImage.getPixels(), 0, width);
 
         solaImageAssetHandle.setAsset(solaImage);
-      } catch (IOException e) {
-        throw new RuntimeException(e);
+      } catch (IOException ex) {
+        throw new RuntimeException(ex);
       }
     }).start();
 

@@ -1,5 +1,5 @@
-repositories {
-  mavenCentral()
+plugins {
+  id("sola.java-conventions")
 }
 
 dependencies {

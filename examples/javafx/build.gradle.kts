@@ -1,3 +1,7 @@
+plugins {
+  id("sola.java-conventions")
+}
+
 dependencies {
   implementation(project(":sola-engine:platform:javafx"))
   implementation(project(":examples:common"))
