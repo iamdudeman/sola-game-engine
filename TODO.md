@@ -1,36 +1,4 @@
-# branch WIP
-[x] Research jpackage
-[x] Check if need a fatjar with jpackage
-[x] Check how to include assets
-
-* Build files
-  [x] Make JavaFX and Swing examples into an executable jar of some sort
-    [x] include assets with them
-  [x] Add convenience gradle task for browser that zips web files and assets
-
-
-https://docs.oracle.com/en/java/javase/14/docs/specs/man/jpackage.html
-https://docs.oracle.com/en/java/javase/15/jpackage/packaging-overview.html#GUID-C1027043-587D-418D-8188-EF8F44A4C06A
-
-
-What you can do if you want an executable that can run the program directly without installing,
-is use the --type app-image flag, which will create an application image that
-contains a .exe launcher to launch the app.
-
-* Maybe create jar distributable as well as .exe?
-* Create readme steps for packaging
-  * Install JDK 17
-    * https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
-  * Update $JAVA_HOME path
-    * ex. C:\Program Files\Java\jdk-17.0.5
-    * powershell: $env:JAVA_HOME
-  * Run
-    * `& $env:JAVA_HOME/bin/jpackage.exe --version`
-
-```shell
-# Run from sola-game-engine\examples\swing on Windows Powershell
-& $env:JAVA_HOME/bin/jpackage.exe --name Test --app-version 0.1.1 --vendor sola.technology --dest build --input build/libs --main-jar examples-swing-0.1.1.jar --type app-image
-```
+# sola-game-engine TODO list
 
 ## Known Bugs List
 
@@ -41,6 +9,7 @@ contains a .exe launcher to launch the app.
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
+
 * SolaGui
   * Implement a way to load gui stuff from a file
   * possibly use JSON to define gui structure

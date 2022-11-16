@@ -61,3 +61,39 @@ your repo using Sola Game Engine.
 
 ## Games Currently Using sola-game-engine
 * [Acid Rain](https://iamdudeman.itch.io/acid-rain)
+
+## Creating Distributable Games
+### Browser zip file
+Run the following command
+```shell
+.\gradlew.bat distWebZip
+```
+The output will be at `examples/browser/build/browser-<version>.zip`.
+This can be deployed to places like `itch.io` when using the "HTML" project type.
+
+### Swing + JavaFx fat jar
+Run the following command
+```shell
+.\gradlew.bat distFatJar
+```
+The output will be at `examples/swing/build/swing-<version>.jar` and `examples/javafx/build/javafx-<os>-<version>.jar`.
+Your users will need to have Java 17 installed to run the jar.
+
+### Swing + JavaFx .exe
+You also have the option to use [jpackage](
+https://docs.oracle.com/en/java/javase/17/jpackage/packaging-overview.html) to create an executable exe file.
+Your users will not need to have Java installed.
+
+1. Install [JDK 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+2. Update $JAVA_HOME path environment variable
+   * ex. C:\Program Files\Java\jdk-17.0.5
+   * powershell: $env:JAVA_HOME
+   * To test configuration run: `& $env:JAVA_HOME/bin/jpackage.exe --version`
+3. Run from sola-game-engine\examples\swing on Windows Powershell
+```shell
+& $env:JAVA_HOME/bin/jpackage.exe --name Examples --app-version 0.1.1 --vendor sola.technology --dest build --input build/libs --main-jar examples-swing-0.1.1.jar --type app-image
+```
+4. Run from sola-game-engine\examples\javafx on Windows Powershell
+```shell
+& $env:JAVA_HOME/bin/jpackage.exe --name Examples --app-version 0.1.1 --vendor sola.technology --dest build --input build/libs --main-jar examples-javafx-win-0.1.1.jar --type app-image
+```
