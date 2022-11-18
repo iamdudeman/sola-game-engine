@@ -1,4 +1,12 @@
 # sola-game-engine TODO list
+* SolaGui
+  * Implement a way to load gui stuff from a file
+  * possibly use JSON to define gui structure
+  * A "post load" callback to add event listeners and such
+  * add `id` attribute to GuiElement
+    * add ability to get element by id
+      * possibly include a second param to cast to desired type (throw error if not of type?)
+
 
 ## Known Bugs List
 
@@ -10,10 +18,7 @@
 
 ## TODO List
 
-* SolaGui
-  * Implement a way to load gui stuff from a file
-  * possibly use JSON to define gui structure
-  * A "post load" callback to add event listeners and such
+
 * Figure out how to handle TouchInput
   * Primarily for browser but also could be supported in JavaFX
   * touchstart and touchend all hard coded to MouseButton.Primary currently
