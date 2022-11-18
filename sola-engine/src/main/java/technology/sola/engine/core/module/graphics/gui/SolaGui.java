@@ -14,12 +14,15 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
 @SolaModule
 public class SolaGui {
   public final GuiElementGlobalProperties globalProperties;
+  private final Map<String, GuiElement<?>> guiElementIdCache = new HashMap<>();
   private final AssetLoaderProvider assetLoaderProvider;
   private GuiElement<?> rootGuiElement;
   private GuiElement<?> focussedElement;
@@ -64,13 +67,18 @@ public class SolaGui {
   }
 
   public void setGuiRoot(GuiElement<?> guiElement) {
-    this.rootGuiElement = guiElement;
-    this.focusElement(guiElement);
+    setGuiRoot(guiElement, 0, 0);
   }
 
   public void setGuiRoot(GuiElement<?> guiElement, int x, int y) {
     guiElement.setPosition(x, y);
-    setGuiRoot(guiElement);
+
+    if (rootGuiElement != guiElement) {
+      guiElementIdCache.clear();
+      this.rootGuiElement = guiElement;
+    }
+
+    focusElement(guiElement);
   }
 
   public void render() {
@@ -123,7 +131,21 @@ public class SolaGui {
     }
   }
 
-  // TODO getElementById method
+  public GuiElement<?> getElementById(String id) {
+    // todo does GuiElement need a method to search through tree if not found in cache?
+    // todo consider caching nulls as well (if setId is called then it could clear out the null)
+    return guiElementIdCache.get(id);
+  }
+
+  public <T extends GuiElement<?>> T getElementById(String id, Class<T> clazz) {
+    GuiElement<?> guiElement = getElementById(id);
+
+    if (guiElement == null) {
+      return null;
+    }
+
+    return clazz.cast(guiElement);
+  }
 
   private SolaGui(AssetLoaderProvider assetLoaderProvider) {
     this.assetLoaderProvider = assetLoaderProvider;
