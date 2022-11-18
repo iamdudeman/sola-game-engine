@@ -1,11 +1,13 @@
 # sola-game-engine TODO list
 * SolaGui
   * Implement a way to load gui stuff from a file
-  * possibly use JSON to define gui structure
+    * possibly use JSON to define gui structure
   * A "post load" callback to add event listeners and such
-  * add `id` attribute to GuiElement
+  * ~~add `id` attribute to GuiElement~~
     * add ability to get element by id
       * possibly include a second param to cast to desired type (throw error if not of type?)
+    * consider a cache of element's with ids (should probably live in SolaGui)
+      * need to add/remove when id changes for an element
 
 
 ## Known Bugs List

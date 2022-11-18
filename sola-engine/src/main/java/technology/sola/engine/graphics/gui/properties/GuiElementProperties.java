@@ -7,6 +7,7 @@ public class GuiElementProperties {
   public final Bounds padding = new Bounds();
   protected final GuiElementGlobalProperties globalProperties;
   private boolean isLayoutChanged = true;
+  private String id;
   private Color focusOutlineColor = null;
   private boolean isHidden;
   private boolean isFocusable = true;
@@ -25,6 +26,16 @@ public class GuiElementProperties {
 
   public GuiElementProperties setLayoutChanged(boolean layoutChanged) {
     this.isLayoutChanged = layoutChanged;
+
+    return this;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public GuiElementProperties setId(String id) {
+    this.id = id;
 
     return this;
   }

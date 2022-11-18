@@ -123,6 +123,8 @@ public class SolaGui {
     }
   }
 
+  // TODO getElementById method
+
   private SolaGui(AssetLoaderProvider assetLoaderProvider) {
     this.assetLoaderProvider = assetLoaderProvider;
     this.globalProperties = new GuiElementGlobalProperties(() -> rootGuiElement);
