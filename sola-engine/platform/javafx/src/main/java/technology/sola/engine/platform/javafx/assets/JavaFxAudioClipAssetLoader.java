@@ -10,10 +10,9 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.File;
 import java.io.IOException;
 
-public class JavaFxAudiClipAssetLoader extends AssetLoader<AudioClip> {
+public class JavaFxAudioClipAssetLoader extends AssetLoader<AudioClip> {
   @Override
   public Class<AudioClip> getAssetClass() {
     return AudioClip.class;
@@ -21,14 +20,13 @@ public class JavaFxAudiClipAssetLoader extends AssetLoader<AudioClip> {
 
   @Override
   protected AssetHandle<AudioClip> loadAsset(String path) {
-    File file = new File(path);
-    String fileExtension = file.getPath().substring(file.getPath().lastIndexOf('.')).toLowerCase();
+    String fileExtension = PathUtils.getExtension(path);
 
     if (".wav".equals(fileExtension)) {
       AssetHandle<AudioClip> audioClipAssetHandle = new AssetHandle<>();
 
       new Thread(() -> {
-        try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file)) {
+        try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(PathUtils.asUrl(path))) {
           audioClipAssetHandle.setAsset(new WavAudioClip(AudioSystem.getClip(), audioInputStream));
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
           throw new AudioClipException("Could not create AudioClip: " + ex.getMessage());
@@ -38,6 +36,6 @@ public class JavaFxAudiClipAssetLoader extends AssetLoader<AudioClip> {
       return audioClipAssetHandle;
     }
 
-    throw new AudioClipException("Could not load AudioClip from file " + file.getPath());
+    throw new AudioClipException("Could not load AudioClip from file " + path);
   }
 }

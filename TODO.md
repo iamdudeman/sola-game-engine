@@ -1,3 +1,5 @@
+# sola-game-engine TODO list
+
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -7,6 +9,7 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
+
 * SolaGui
   * Implement a way to load gui stuff from a file
   * possibly use JSON to define gui structure
@@ -30,11 +33,6 @@
   * Add lots of missing tests :)
 * JavaDocs
   * add missing JavaDocs
-* Build files
-  * See if `duplicatesStrategy = DuplicatesStrategy.EXCLUDE` can be removed
-  * Make JavaFX and Swing examples into an executable jar of some sort
-    * include assets with them
-  * Add convenience gradle task for browser that zips web files and assets
 * Consider adding a "debug console" option
   * While open can toggle things like render debug outlines and debug spacial hashmap stuff
   * Could also maybe allow adding custom commands
@@ -83,10 +81,6 @@
     * Polygon x Polygon
 * Camera
   * Possibly allow multiple cameras (think split screen games)
-* Integrations
-  * Steam?
-    * include JRE in the output file
-      * might vary per platform
 * Android Platform
   * Implement
 

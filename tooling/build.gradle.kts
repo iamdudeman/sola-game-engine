@@ -1,13 +1,9 @@
 plugins {
-  id("application")
+  id("sola.java-conventions")
 }
 
 dependencies {
   implementation(project(":sola-engine"))
-}
-
-application {
-  mainClass.set("technology.sola.engine.tooling.ToolingMain")
 }
 
 publishing {

@@ -12,7 +12,7 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
-import technology.sola.engine.platform.swing.assets.SwingAudiClipAssetLoader;
+import technology.sola.engine.platform.swing.assets.SwingAudioClipAssetLoader;
 import technology.sola.engine.platform.swing.assets.SwingFontAssetLoader;
 import technology.sola.engine.platform.swing.assets.SwingSolaImageAssetLoader;
 import technology.sola.engine.platform.swing.assets.SwingSpriteSheetAssetLoader;
@@ -111,9 +111,11 @@ public class SwingSolaPlatform extends SolaPlatform {
     jFrame.getContentPane().add(canvas);
     if (windowSize != null) {
       jFrame.setPreferredSize(windowSize);
-      viewport.resize(windowSize.width, windowSize.height);
     }
     jFrame.pack();
+    if (windowSize != null) {
+      viewport.resize(canvas.getWidth(), canvas.getHeight());
+    }
 
     canvas.createBufferStrategy(2);
     if (useSoftwareRendering) {
@@ -174,7 +176,7 @@ public class SwingSolaPlatform extends SolaPlatform {
     assetLoaderProvider.add(solaImageAssetLoader);
     assetLoaderProvider.add(new SwingFontAssetLoader(solaImageAssetLoader));
     assetLoaderProvider.add(new SwingSpriteSheetAssetLoader(solaImageAssetLoader));
-    assetLoaderProvider.add(new SwingAudiClipAssetLoader());
+    assetLoaderProvider.add(new SwingAudioClipAssetLoader());
   }
 
   @Override

@@ -1,9 +1,5 @@
-tasks.jar {
-  archiveBaseName.set("sola-engine-examples-${project.name}")
-}
-
-repositories {
-  mavenCentral()
+plugins {
+  id("sola.java-conventions")
 }
 
 dependencies {
