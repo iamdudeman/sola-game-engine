@@ -10,17 +10,6 @@
 
 ## TODO List
 
-* SolaGui
-  * Implement a way to load gui stuff from a file
-  * possibly use JSON to define gui structure
-  * A "post load" callback to add event listeners and such
-* Figure out how to handle TouchInput
-  * Primarily for browser but also could be supported in JavaFX
-  * touchstart and touchend all hard coded to MouseButton.Primary currently
-    * implement touchmove
-  * Figure out TouchInput API
-    * How to handle multitouch
-  * Switch JsMouseUtils to mouse events instead of pointer events
 * Rendering
   * Implement more BlendModes
   * Ability to change line width when drawing
@@ -33,13 +22,30 @@
   * Add lots of missing tests :)
 * JavaDocs
   * add missing JavaDocs
+* SolaGui
+  * Implement a way to load gui stuff from a file
+    * possibly use JSON to define gui structure
+  * A "post load" callback to add event listeners and such
+* Consider adding rotation to TransformComponent
+  * Would need to update rendering stuff
+  * Would need to update physics stuff
+* Physics
+  * Collision Detection
+    * Collision layers / tags for ignoring specific collisions
+    * Polygon x AABB
+    * Polygon x Circle
+    * Polygon x Polygon
+* Figure out how to handle TouchInput
+  * Primarily for browser but also could be supported in JavaFX
+  * touchstart and touchend all hard coded to MouseButton.Primary currently
+    * implement touchmove
+  * Figure out TouchInput API
+    * How to handle multitouch
+  * Switch JsMouseUtils to mouse events instead of pointer events
 * Consider adding a "debug console" option
   * While open can toggle things like render debug outlines and debug spacial hashmap stuff
   * Could also maybe allow adding custom commands
   * Should probably always use a "default font" if it is implemented
-* Tooling
-  * Research build tooling of some sort
-    * Take a main java file and build for a platform maybe?
 * Browser Platform
   * Consider web worker for game loop
     * main thread creates needed dom events
@@ -70,15 +76,6 @@
   * Needs to be able to update ECS things
   * Needs to be able to assign mouse hover and click callbacks
   * Needs to be able to assign keyboard press callbacks
-* Consider adding rotation to TransformComponent
-  * Would need to update rendering stuff
-  * Would need to update physics stuff
-* Physics
-  * Collision Detection
-    * Collision layers / tags for ignoring specific collisions
-    * Polygon x AABB
-    * Polygon x Circle
-    * Polygon x Polygon
 * Camera
   * Possibly allow multiple cameras (think split screen games)
 * Android Platform

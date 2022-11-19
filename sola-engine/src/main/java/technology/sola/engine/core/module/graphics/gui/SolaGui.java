@@ -64,13 +64,13 @@ public class SolaGui {
   }
 
   public void setGuiRoot(GuiElement<?> guiElement) {
-    this.rootGuiElement = guiElement;
-    this.focusElement(guiElement);
+    setGuiRoot(guiElement, 0, 0);
   }
 
   public void setGuiRoot(GuiElement<?> guiElement, int x, int y) {
     guiElement.setPosition(x, y);
-    setGuiRoot(guiElement);
+    this.rootGuiElement = guiElement;
+    focusElement(guiElement);
   }
 
   public void render() {
@@ -121,6 +121,20 @@ public class SolaGui {
     if (guiElement.properties().isFocusable()) {
       this.focussedElement = guiElement;
     }
+  }
+
+  public GuiElement<?> getElementById(String id) {
+    return rootGuiElement.getElementById(id);
+  }
+
+  public <T extends GuiElement<?>> T getElementById(String id, Class<T> clazz) {
+    GuiElement<?> guiElement = getElementById(id);
+
+    if (guiElement == null) {
+      return null;
+    }
+
+    return clazz.cast(guiElement);
   }
 
   private SolaGui(AssetLoaderProvider assetLoaderProvider) {

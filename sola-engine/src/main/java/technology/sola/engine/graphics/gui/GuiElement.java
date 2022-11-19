@@ -109,6 +109,10 @@ public abstract class GuiElement<T extends GuiElementProperties> {
     solaGui.focusElement(this);
   }
 
+  public GuiElement<?> getElementById(String id) {
+    return id.equals(properties.getId()) ? this : null;
+  }
+
   public void onKeyPress(GuiKeyEvent keyEvent) {
     if (onKeyPressCallback != null) {
       onKeyPressCallback.accept(keyEvent);
