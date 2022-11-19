@@ -1,6 +1,12 @@
 package technology.sola.engine.tooling;
 
+/**
+ * Tools can be executed from the command line to provide some useful functionality for building games.
+ */
 public interface Tool {
+  /**
+   * @return the name of the Tool
+   */
   String getName();
 
   /**
@@ -11,5 +17,8 @@ public interface Tool {
    */
   String execute(String... args);
 
+  /**
+   * @return the help text for the Tool
+   */
   String getHelp();
 }

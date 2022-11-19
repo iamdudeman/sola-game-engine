@@ -14,6 +14,8 @@ task("generateWebHtmlAndJs", JavaExec::class) {
 
   classpath = sourceSets.main.get().runtimeClasspath
   setArgsString("build ${project.name}-${project.version}.jar")
+  inputs.file("build/libs/${project.name}-${project.version}.jar")
+  outputs.file("build/sola.js")
   mainClass.set("technology.sola.engine.examples.browser.GenerateBrowserFilesMain")
 }
 
