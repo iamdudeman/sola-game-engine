@@ -61,6 +61,23 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
     }
   }
 
+  @Override
+  public GuiElement<?> getElementById(String id) {
+    if (id.equals(properties.getId())) {
+      return this;
+    }
+
+    for (GuiElement<?> child : getChildren()) {
+      GuiElement<?> possibleMatch = child.getElementById(id);
+
+      if (possibleMatch != null) {
+        return possibleMatch;
+      }
+    }
+
+    return null;
+  }
+
   public List<GuiElement<?>> getChildren() {
     return children;
   }

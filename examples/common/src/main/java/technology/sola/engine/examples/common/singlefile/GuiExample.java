@@ -29,6 +29,9 @@ public class GuiExample extends Sola {
     solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
     solaGui.setGuiRoot(buildGui(), 15, 15);
 
+    solaGui.getElementById("changeFont", ButtonGuiElement.class)
+      .setOnAction(() -> solaGui.globalProperties.setDefaultFontAssetId("times_NORMAL_18"));
+
     assetLoaderProvider.get(SolaImage.class)
       .addAssetMapping("test", "assets/test_tiles.png");
     assetLoaderProvider.get(Font.class)
@@ -99,13 +102,6 @@ public class GuiExample extends Sola {
       p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).setBorderColor(Color.GREEN)
     );
 
-    ButtonGuiElement toggleFontButton = solaGui.createElement(
-      ButtonGuiElement::new,
-      ButtonGuiElement.Properties::new,
-      p -> p.setText("Change font").padding.set(5)
-    );
-    toggleFontButton.setOnAction(() -> solaGui.globalProperties.setDefaultFontAssetId("times_NORMAL_18"));
-
     rootElement.addChild(
       solaGui.createElement(
         TextGuiElement::new,
@@ -114,7 +110,11 @@ public class GuiExample extends Sola {
       ),
       firstContainer,
       secondContainer,
-      toggleFontButton,
+      solaGui.createElement(
+        ButtonGuiElement::new,
+        ButtonGuiElement.Properties::new,
+        p -> p.setText("Change font").padding.set(5).setId("changeFont")
+      ),
       createKeyTesterElement(),
       createImageContainer()
     );
