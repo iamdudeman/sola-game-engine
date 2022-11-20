@@ -1,6 +1,8 @@
 # sola-game-engine TODO list
 
 ## Known Bugs List
+* SolaGraphics#setDebugRendering requires CollisionDetectionSystem to be present or exceptions are thrown
+  * Consider a better way to enable debug rendering that won't hard fail
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -10,6 +12,11 @@
 
 ## TODO List
 
+* ColliderComponent needs the ability to be a "trigger"
+  * Emits collision event but is not handled by a collision resolver
+* Consider changing SwingSolaPlatform to not have extra render frames wasted
+* Consider mechanism to "batch" together SolaGraphics entity draws when they are in the same layer
+  * Currently, it does each one individually
 * Rendering
   * Implement more BlendModes
   * Ability to change line width when drawing
