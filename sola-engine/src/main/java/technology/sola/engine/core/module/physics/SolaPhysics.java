@@ -17,7 +17,7 @@ public class SolaPhysics {
   private final ImpulseCollisionResolutionSystem impulseCollisionResolutionSystem;
   private final ParticleSystem particleSystem;
 
-  public static SolaPhysics createInstance(EventHub eventHub, SolaEcs solaEcs) {
+  public static SolaPhysics useModule(EventHub eventHub, SolaEcs solaEcs) {
     SolaPhysics solaPhysics = new SolaPhysics(eventHub);
 
     solaEcs.addSystems(

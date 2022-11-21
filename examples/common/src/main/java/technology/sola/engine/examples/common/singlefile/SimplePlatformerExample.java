@@ -38,8 +38,8 @@ public class SimplePlatformerExample extends Sola {
 
   @Override
   protected void onInit() {
-    solaPhysics = SolaPhysics.createInstance(eventHub, solaEcs);
-    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetLoaderProvider);
+    solaPhysics = SolaPhysics.useModule(eventHub, solaEcs);
+    solaGraphics = SolaGraphics.useModule(solaEcs, platform.getRenderer(), assetLoaderProvider);
 
     solaEcs.addSystems(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem());
     solaEcs.setWorld(buildWorld());

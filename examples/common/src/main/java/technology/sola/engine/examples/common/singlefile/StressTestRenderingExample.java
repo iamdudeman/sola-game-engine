@@ -23,7 +23,7 @@ public class StressTestRenderingExample extends Sola {
 
   @Override
   protected void onInit() {
-    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetLoaderProvider);
+    solaGraphics = SolaGraphics.useModule(solaEcs, platform.getRenderer(), assetLoaderProvider);
 
     solaEcs.addSystems(new PhysicsSystem());
     solaEcs.setWorld(buildWorld());

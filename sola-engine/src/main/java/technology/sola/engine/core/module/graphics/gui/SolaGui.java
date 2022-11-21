@@ -25,7 +25,7 @@ public class SolaGui {
   private GuiElement<?> focussedElement;
   private Renderer renderer;
 
-  public static SolaGui createInstance(AssetLoaderProvider assetLoaderProvider, SolaPlatform platform) {
+  public static SolaGui useModule(AssetLoaderProvider assetLoaderProvider, SolaPlatform platform) {
     SolaGui solaGui = new SolaGui(assetLoaderProvider);
 
     solaGui.renderer = platform.getRenderer();
@@ -42,6 +42,12 @@ public class SolaGui {
     }
 
     return solaGui;
+  }
+
+  public void render() {
+    if (rootGuiElement != null) {
+      rootGuiElement.render(renderer);
+    }
   }
 
   public <T extends GuiElement<P>, P extends GuiElementProperties> T createElement(
@@ -71,12 +77,6 @@ public class SolaGui {
     guiElement.setPosition(x, y);
     this.rootGuiElement = guiElement;
     focusElement(guiElement);
-  }
-
-  public void render() {
-    if (rootGuiElement != null) {
-      rootGuiElement.render(renderer);
-    }
   }
 
   public void onKeyPressed(KeyEvent keyEvent) {

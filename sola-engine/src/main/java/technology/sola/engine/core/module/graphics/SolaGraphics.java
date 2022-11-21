@@ -28,12 +28,30 @@ public class SolaGraphics {
   private float previousCameraScaleX = 1;
   private float previousCameraScaleY = 1;
 
-  public static SolaGraphics createInstance(SolaEcs solaEcs, Renderer renderer, AssetLoaderProvider assetLoaderProvider) {
+  public static SolaGraphics useModule(SolaEcs solaEcs, Renderer renderer, AssetLoaderProvider assetLoaderProvider) {
     SolaGraphics solaGraphics = new SolaGraphics(solaEcs, renderer, assetLoaderProvider.get(SpriteSheet.class));
 
     solaEcs.addSystem(solaGraphics.spriteAnimatorSystem);
 
     return solaGraphics;
+  }
+
+  public void render() {
+    TransformComponent cameraTransform = getCameraTransform();
+
+    GeometryGraphics.render(renderer, solaEcs, cameraTransform);
+
+    SpriteGraphics.render(renderer, solaEcs, cameraTransform, spriteSheetAssetLoader);
+
+    if (isRenderDebug) {
+      if (renderer.getLayers().isEmpty()) {
+        DebugGraphics.render(renderer, solaEcs, cameraTransform);
+      } else {
+        var lastLayer = renderer.getLayers().get(renderer.getLayers().size() - 1);
+
+        lastLayer.add(r -> DebugGraphics.render(renderer, solaEcs, cameraTransform), Integer.MAX_VALUE);
+      }
+    }
   }
 
   public Vector2D screenToWorldCoordinate(Vector2D screenCoordinate) {
@@ -53,24 +71,6 @@ public class SolaGraphics {
     }
 
     return cachedScreenToWorldMatrix.forward(screenCoordinate.x(), screenCoordinate.y());
-  }
-
-  public void render() {
-    TransformComponent cameraTransform = getCameraTransform();
-
-    GeometryGraphics.render(renderer, solaEcs, cameraTransform);
-
-    SpriteGraphics.render(renderer, solaEcs, cameraTransform, spriteSheetAssetLoader);
-
-    if (isRenderDebug) {
-      if (renderer.getLayers().isEmpty()) {
-        DebugGraphics.render(renderer, solaEcs, cameraTransform);
-      } else {
-        var lastLayer = renderer.getLayers().get(renderer.getLayers().size() - 1);
-
-        lastLayer.add(r -> DebugGraphics.render(renderer, solaEcs, cameraTransform), Integer.MAX_VALUE);
-      }
-    }
   }
 
   public TransformComponent getCameraTransform() {

@@ -24,7 +24,7 @@ public class AnimationExample extends Sola {
   @Override
   protected void onInit() {
     solaInitialization.useAsyncInitialization();
-    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetLoaderProvider);
+    solaGraphics = SolaGraphics.useModule(solaEcs, platform.getRenderer(), assetLoaderProvider);
 
     solaEcs.setWorld(buildWorld());
     platform.getViewport().setAspectMode(AspectMode.STRETCH);
