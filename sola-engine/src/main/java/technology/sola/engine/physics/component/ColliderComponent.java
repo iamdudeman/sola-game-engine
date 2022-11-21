@@ -15,6 +15,7 @@ public class ColliderComponent implements Component {
   private ColliderType colliderType;
   private float offsetX;
   private float offsetY;
+  private boolean isSensor = false;
   private ColliderTag[] colliderTags = new ColliderTag[0];
   private ColliderTag[] ignoreTags = new ColliderTag[0];
 
@@ -109,6 +110,27 @@ public class ColliderComponent implements Component {
       case AABB -> height * transformScaleY;
       case CIRCLE -> radius * 2 * transformScaleY;
     };
+  }
+
+  /**
+   * A collider that is a sensor will not respond to collision resolution but will emit collision events if an
+   * {@link technology.sola.ecs.Entity} with a {@link DynamicBodyComponent} collides.
+   *
+   * @return true if this collider is a sensor
+   */
+  public boolean isSensor() {
+    return isSensor;
+  }
+
+  /**
+   * Sets whether this collider is a sensor or not.
+   *
+   * @param isSensor whether this collider is a sensor or not
+   * @return this
+   */
+  public ColliderComponent setSensor(boolean isSensor) {
+    this.isSensor = isSensor;
+    return this;
   }
 
   public boolean shouldIgnoreCollision(ColliderComponent colliderComponent) {

@@ -21,7 +21,7 @@ import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
-import technology.sola.engine.physics.event.CollisionManifoldEvent;
+import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.math.linear.Vector2D;
 
 import java.io.Serial;
@@ -46,7 +46,7 @@ public class SimplePlatformerExample extends Sola {
 
     solaGraphics.setRenderDebug(true);
 
-    eventHub.add(CollisionManifoldEvent.class, new GameDoneEventListener());
+    eventHub.add(CollisionEvent.class, new GameDoneEventListener());
   }
 
   @Override
@@ -56,17 +56,17 @@ public class SimplePlatformerExample extends Sola {
     solaGraphics.render();
   }
 
-  private class GameDoneEventListener implements EventListener<CollisionManifoldEvent> {
+  private class GameDoneEventListener implements EventListener<CollisionEvent> {
     private final Function<Entity, Boolean> checkForPlayer = entity -> "player".equals(entity.getName());
     private final Function<Entity, Boolean> checkForFinalBlock = entity -> "finalBlock".equals(entity.getName());
     private final BiConsumer<Entity, Entity> collisionResolver = (player, finalBlock) ->
       solaEcs.getWorld().findEntityByName("confetti").ifPresent(entity -> {
         entity.setDisabled(false);
-        eventHub.remove(CollisionManifoldEvent.class, this);
+        eventHub.remove(CollisionEvent.class, this);
       });
 
     @Override
-    public void onEvent(CollisionManifoldEvent event) {
+    public void onEvent(CollisionEvent event) {
       CollisionManifold collisionManifold = event.collisionManifold();
 
       collisionManifold.conditionallyResolveCollision(checkForPlayer, checkForFinalBlock, collisionResolver);

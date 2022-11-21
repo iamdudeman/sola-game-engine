@@ -9,7 +9,8 @@ import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.CollisionUtils;
 import technology.sola.engine.physics.SpatialHashMap;
 import technology.sola.engine.physics.component.ColliderComponent;
-import technology.sola.engine.physics.event.CollisionManifoldEvent;
+import technology.sola.engine.physics.event.CollisionEvent;
+import technology.sola.engine.physics.event.SensorEvent;
 
 import java.util.HashSet;
 import java.util.List;
@@ -57,7 +58,8 @@ public class CollisionDetectionSystem extends EcsSystem {
 
   @Override
   public void update(World world, float deltaTime) {
-    Set<CollisionManifold> collisionEventsThisIteration = new HashSet<>();
+    Set<CollisionManifold> collisionsThisIteration = new HashSet<>();
+    Set<CollisionManifold> sensorDetectionsThisIteration = new HashSet<>();
     List<Entity> entities = world.findEntitiesWithComponents(ColliderComponent.class, TransformComponent.class);
 
     // TODO consider some sort of clear method for SpatialHashMap
@@ -75,19 +77,24 @@ public class CollisionDetectionSystem extends EcsSystem {
           continue;
         }
 
-        CollisionManifold collisionManifoldEvent = CollisionUtils.calculateCollisionManifold(
+        CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(
           entityA, entityB,
           transformA, transformB,
           colliderA, colliderB
         );
 
-        if (collisionManifoldEvent != null) {
-          collisionEventsThisIteration.add(collisionManifoldEvent);
+        if (collisionManifold != null) {
+          if (colliderA.isSensor() || colliderB.isSensor()) {
+            sensorDetectionsThisIteration.add(collisionManifold);
+          } else {
+            collisionsThisIteration.add(collisionManifold);
+          }
         }
       }
     }
 
     // By emitting only events from the set we do not send duplicates
-    collisionEventsThisIteration.forEach(collisionManifold -> eventHub.emit(new CollisionManifoldEvent(collisionManifold)));
+    sensorDetectionsThisIteration.forEach(collisionManifold -> eventHub.emit(new SensorEvent(collisionManifold)));
+    collisionsThisIteration.forEach(collisionManifold -> eventHub.emit(new CollisionEvent(collisionManifold)));
   }
 }

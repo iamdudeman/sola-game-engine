@@ -8,7 +8,7 @@ import technology.sola.engine.event.EventHub;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
-import technology.sola.engine.physics.event.CollisionManifoldEvent;
+import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.math.SolaMath;
 import technology.sola.math.linear.Vector2D;
 
@@ -59,7 +59,7 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
     this.penetrationSlack = penetrationSlack;
     this.linearProjectionPercentage = linearProjectionPercentage;
 
-    eventHub.add(CollisionManifoldEvent.class, this::handleCollisionManifoldEvent);
+    eventHub.add(CollisionEvent.class, this::handleCollisionManifoldEvent);
   }
 
   @Override
@@ -76,7 +76,7 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
     return ORDER;
   }
 
-  private void handleCollisionManifoldEvent(CollisionManifoldEvent event) {
+  private void handleCollisionManifoldEvent(CollisionEvent event) {
     if (isActive()) {
       collisionManifolds.add(event.collisionManifold());
     }
