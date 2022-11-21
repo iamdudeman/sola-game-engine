@@ -73,7 +73,7 @@ public class CollisionDetectionSystem extends EcsSystem {
         TransformComponent transformB = entityB.getComponent(TransformComponent.class);
         ColliderComponent colliderB = entityB.getComponent(ColliderComponent.class);
 
-        if (colliderA.shouldIgnoreCollision(colliderB)) {
+        if (shouldIgnoreCollision(colliderA, colliderB)) {
           continue;
         }
 
@@ -96,5 +96,21 @@ public class CollisionDetectionSystem extends EcsSystem {
     // By emitting only events from the set we do not send duplicates
     sensorDetectionsThisIteration.forEach(collisionManifold -> eventHub.emit(new SensorEvent(collisionManifold)));
     collisionsThisIteration.forEach(collisionManifold -> eventHub.emit(new CollisionEvent(collisionManifold)));
+  }
+
+  private boolean shouldIgnoreCollision(ColliderComponent colliderA, ColliderComponent colliderB) {
+    for (ColliderComponent.ColliderTag colliderTag : colliderA.getTags()) {
+      if (colliderB.hasIgnoreColliderTag(colliderTag)) {
+        return true;
+      }
+    }
+
+    for (ColliderComponent.ColliderTag colliderTag : colliderB.getTags()) {
+      if (colliderA.hasIgnoreColliderTag(colliderTag)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

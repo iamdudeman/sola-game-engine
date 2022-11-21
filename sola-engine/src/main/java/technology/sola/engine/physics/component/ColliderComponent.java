@@ -16,7 +16,7 @@ public class ColliderComponent implements Component {
   private float offsetX;
   private float offsetY;
   private boolean isSensor = false;
-  private ColliderTag[] colliderTags = new ColliderTag[0];
+  private ColliderTag[] tags = new ColliderTag[0];
   private ColliderTag[] ignoreTags = new ColliderTag[0];
 
   // Properties for circle
@@ -133,32 +133,74 @@ public class ColliderComponent implements Component {
     return this;
   }
 
-  public boolean shouldIgnoreCollision(ColliderComponent colliderComponent) {
-    for (ColliderTag colliderTag : this.colliderTags) {
-      for (ColliderTag otherIgnoreTag : colliderComponent.ignoreTags) {
-        if (colliderTag == otherIgnoreTag) return true;
-      }
-    }
+  /**
+   * @return the {@link ColliderTag}s for this Collider
+   */
+  public ColliderTag[] getTags() {
+    return tags;
+  }
 
-    for (ColliderTag otherColliderTag : colliderComponent.colliderTags) {
-      for (ColliderTag ignoreTag : this.ignoreTags) {
-        if (otherColliderTag == ignoreTag) return true;
+  /**
+   * Sets the {@link ColliderTag}s for this collider.
+   *
+   * @param tags the new tags
+   * @return this
+   */
+  public ColliderComponent setTags(ColliderTag ...tags) {
+    this.tags = tags;
+
+    return this;
+  }
+
+  /**
+   * Checks to see if this collider has a {@link ColliderTag}.
+   *
+   * @param colliderTag the tag to check
+   * @return true if collider has tag
+   */
+  public boolean hasTag(ColliderTag colliderTag) {
+    for (ColliderTag tag : tags) {
+      if (colliderTag == tag) {
+        return true;
       }
     }
 
     return false;
   }
 
-  public ColliderComponent setColliderTags(ColliderTag ...colliderTags) {
-    this.colliderTags = colliderTags;
-
-    return this;
+  /**
+   * @return the {@link ColliderTag}s to ignore for this Collider
+   */
+  public ColliderTag[] getIgnoreTags() {
+    return ignoreTags;
   }
 
+  /**
+   * Sets the {@link ColliderTag}s to ignore for this collider.
+   *
+   * @param ignoreTags the new tags to ignore
+   * @return this
+   */
   public ColliderComponent setIgnoreTags(ColliderTag ...ignoreTags) {
     this.ignoreTags = ignoreTags;
 
     return this;
+  }
+
+  /**
+   * Checks to see if this collider has a {@link ColliderTag} that it is ignoring.
+   *
+   * @param colliderTag the tag to check
+   * @return true if collider is ignoring tag
+   */
+  public boolean hasIgnoreColliderTag(ColliderTag colliderTag) {
+    for (ColliderTag tag : ignoreTags) {
+      if (colliderTag == tag) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   /**
@@ -228,6 +270,9 @@ public class ColliderComponent implements Component {
     CIRCLE
   }
 
+  /**
+   * Identifier tag for this collider. Can be used to ignore collisions with other colliders with various tags.
+   */
   public interface ColliderTag {
   }
 }
