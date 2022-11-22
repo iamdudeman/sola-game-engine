@@ -1,11 +1,5 @@
 # sola-game-engine TODO list
-* ~~ColliderComponent needs the ability to be a "sensor"~~
-  * ~~Emits collision event but is not handled by a collision resolver~~
-* ~~Update platformer example with a use of a sensor~~
 * Consider changing SwingSolaPlatform to not have extra render frames wasted
-* SolaGraphics#setDebugRendering requires CollisionDetectionSystem to be present or exceptions are thrown
-  * Consider a better way to enable debug rendering that won't hard fail
-* JavaDocs for the three SolaModule files
 
 ## Known Bugs List
 
