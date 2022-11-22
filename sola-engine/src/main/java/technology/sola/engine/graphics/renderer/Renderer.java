@@ -7,9 +7,21 @@ import technology.sola.engine.graphics.Color;
 
 import java.util.List;
 
+/**
+ * Renderer defines the API for a sola game engine renderer. {@link SoftwareRenderer} is the default implementation but
+ * each {@link technology.sola.engine.core.SolaPlatform} can implement their own as well to take advantage of the GPU.
+ */
 public interface Renderer {
+  /**
+   * Sets the {@link BlendMode} that should be used.
+   *
+   * @param blendMode the new {@code BlendMode} to use
+   */
   void setBlendMode(BlendMode blendMode);
 
+  /**
+   * @return the current {@link BlendMode} being used when drawing
+   */
   BlendMode getBlendMode();
 
   default void drawWithBlendMode(BlendMode blendMode, DrawItem drawItem) {
@@ -19,12 +31,26 @@ public interface Renderer {
     setBlendMode(previousBlendMode);
   }
 
+  /**
+   * @return the current {@link Font} being used for drawing text
+   */
   Font getFont();
 
+  /**
+   * Sets the {@link Font} to use when drawing text.
+   *
+   * @param font the new {@code Font} to use
+   */
   void setFont(Font font);
 
+  /**
+   * @return the width of the {@link Renderer}
+   */
   int getWidth();
 
+  /**
+   * @return the height of the {@link Renderer}
+   */
   int getHeight();
 
   default void createLayers(String... layerIds) {
@@ -40,6 +66,7 @@ public interface Renderer {
   default Layer getLayer(String name) {
     return getLayers().stream().filter(layer -> layer.getName().equals(name)).findFirst().orElseThrow();
   }
+
   default void drawToLayer(String layerId, DrawItem drawItem) {
     drawToLayer(layerId, Layer.DEFAULT_PRIORITY, drawItem);
   }
@@ -48,10 +75,18 @@ public interface Renderer {
     getLayer(layerId).add(drawItem, priority);
   }
 
+  /**
+   * Sets all pixels to {@link Color#BLACK}
+   */
   default void clear() {
     clear(Color.BLACK);
   }
 
+  /**
+   * Sets all pixels to desired {@link Color}.
+   *
+   * @param color the {@code Color} to set all pixels to
+   */
   void clear(Color color);
 
   void setPixel(int x, int y, Color color);
