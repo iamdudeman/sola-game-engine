@@ -17,6 +17,11 @@ import technology.sola.engine.input.MouseEvent;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+/**
+ * SolaGui is a {@link SolaModule} that handles registering event listeners and loading a default {@link Font} for
+ * {@link GuiElement}s to use. It also contains several utility methods for creating instances of gui elements, setting
+ * the root element of a tree, and searching for elements in the tree.
+ */
 @SolaModule
 public class SolaGui {
   public final GuiElementGlobalProperties globalProperties;
@@ -25,6 +30,14 @@ public class SolaGui {
   private GuiElement<?> focussedElement;
   private Renderer renderer;
 
+  /**
+   * Creates a new instances of {@link SolaGui}. Registers event listeners for the {@link SolaPlatform} and prepares a
+   * default {@link Font} to be loaded.
+   *
+   * @param assetLoaderProvider the {@link AssetLoaderProvider} to load the {@code Font}
+   * @param platform            the {@link SolaPlatform} instance
+   * @return this
+   */
   public static SolaGui useModule(AssetLoaderProvider assetLoaderProvider, SolaPlatform platform) {
     SolaGui solaGui = new SolaGui(assetLoaderProvider);
 
@@ -44,6 +57,9 @@ public class SolaGui {
     return solaGui;
   }
 
+  /**
+   * Renders the root {@link GuiElement} and its children.
+   */
   public void render() {
     if (rootGuiElement != null) {
       rootGuiElement.render(renderer);

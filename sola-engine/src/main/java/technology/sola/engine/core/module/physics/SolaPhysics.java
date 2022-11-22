@@ -9,6 +9,10 @@ import technology.sola.engine.physics.system.ImpulseCollisionResolutionSystem;
 import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.engine.physics.system.PhysicsSystem;
 
+/**
+ * SolaPhysics is a {@link SolaModule} that adds several {@link technology.sola.ecs.EcsSystem}s with default configurations
+ * for handling physics calculations like gravity, collisions and collision resolution.
+ */
 @SolaModule
 public class SolaPhysics {
   private final GravitySystem gravitySystem;
@@ -17,6 +21,13 @@ public class SolaPhysics {
   private final ImpulseCollisionResolutionSystem impulseCollisionResolutionSystem;
   private final ParticleSystem particleSystem;
 
+  /**
+   * Creates an instance of {@link SolaPhysics} and adds {@link technology.sola.ecs.EcsSystem}s for physics calculations.
+   *
+   * @param eventHub {@link EventHub} instance
+   * @param solaEcs  {@link SolaEcs} instance
+   * @return a new {@code SolaPhysics} instance
+   */
   public static SolaPhysics useModule(EventHub eventHub, SolaEcs solaEcs) {
     SolaPhysics solaPhysics = new SolaPhysics(eventHub);
 
