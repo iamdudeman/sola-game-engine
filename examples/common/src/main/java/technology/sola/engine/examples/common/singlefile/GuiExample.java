@@ -19,7 +19,7 @@ public class GuiExample extends Sola {
   private SolaGui solaGui;
 
   public GuiExample() {
-    super(SolaConfiguration.build("Gui Example", 800, 600).withTargetUpdatesPerSecond(30).withGameLoopRestingOn());
+    super(SolaConfiguration.build("Gui Example", 800, 600).withTargetUpdatesPerSecond(30));
   }
 
   @Override

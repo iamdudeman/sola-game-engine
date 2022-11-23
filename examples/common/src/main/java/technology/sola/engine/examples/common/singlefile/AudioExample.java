@@ -18,7 +18,7 @@ public class AudioExample extends Sola {
   private SolaGui solaGui;
 
   public AudioExample() {
-    super(SolaConfiguration.build("Audio Example", 600, 400).withTargetUpdatesPerSecond(30).withGameLoopRestingOn());
+    super(SolaConfiguration.build("Audio Example", 600, 400).withTargetUpdatesPerSecond(30));
   }
 
   @Override

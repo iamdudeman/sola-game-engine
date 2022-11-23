@@ -16,10 +16,9 @@ public class BrowserGameLoop extends GameLoop implements JsUtils.Function {
    * @param updateMethod           method that is run every update tick
    * @param renderMethod           method that is run every render tick
    * @param targetUpdatesPerSecond this is currently capped at 30 updates per second
-   * @param isRestingAllowed       whether the game loop will rest for a short while or not each loop
    */
-  public BrowserGameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
-    super(eventHub, updateMethod, renderMethod, Math.min(targetUpdatesPerSecond, 30), isRestingAllowed);
+  public BrowserGameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond) {
+    super(eventHub, updateMethod, renderMethod, Math.min(targetUpdatesPerSecond, 30));
   }
 
   @Override

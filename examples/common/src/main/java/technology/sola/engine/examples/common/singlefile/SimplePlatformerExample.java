@@ -37,7 +37,7 @@ public class SimplePlatformerExample extends Sola {
   private SolaPhysics solaPhysics;
 
   public SimplePlatformerExample() {
-    super(SolaConfiguration.build("Simple Platformer", 800, 600).withTargetUpdatesPerSecond(30).withGameLoopRestingOn());
+    super(SolaConfiguration.build("Simple Platformer", 800, 600).withTargetUpdatesPerSecond(30));
   }
 
   @Override

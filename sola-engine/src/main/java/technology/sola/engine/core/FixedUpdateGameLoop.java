@@ -9,8 +9,8 @@ import java.util.function.Consumer;
 class FixedUpdateGameLoop extends GameLoop {
   private final float timeBetweenUpdates;
 
-  FixedUpdateGameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
-    super(eventHub, updateMethod, renderMethod, targetUpdatesPerSecond, isRestingAllowed);
+  FixedUpdateGameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond) {
+    super(eventHub, updateMethod, renderMethod, targetUpdatesPerSecond);
     this.timeBetweenUpdates = 1000000000f / targetUpdatesPerSecond;
   }
 

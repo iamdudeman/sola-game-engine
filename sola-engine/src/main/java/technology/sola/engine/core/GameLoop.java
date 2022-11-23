@@ -15,19 +15,17 @@ public abstract class GameLoop implements Runnable {
   protected final FpsTracker fpsTracker = new FpsTracker();
   protected final Consumer<Float> updateMethod;
   protected final Runnable renderMethod;
-  protected final boolean isRestingAllowed;
   protected final float deltaTime;
   protected long previousLoopStartNanos;
   protected float updateCatchUpAccumulator;
   private boolean isRunning = false;
   private boolean isPaused = false;
 
-  protected GameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
+  protected GameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond) {
     this.eventHub = eventHub;
     this.updateMethod = updateMethod;
     this.renderMethod = renderMethod;
     this.deltaTime = 1f / targetUpdatesPerSecond;
-    this.isRestingAllowed = isRestingAllowed;
 
     eventHub.add(GameLoopEvent.class, this::onGameLoopEvent);
   }

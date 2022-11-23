@@ -1,5 +1,4 @@
 # sola-game-engine TODO list
-* Consider removing game loop "isRestingAllowed"
 
 ## Known Bugs List
 
