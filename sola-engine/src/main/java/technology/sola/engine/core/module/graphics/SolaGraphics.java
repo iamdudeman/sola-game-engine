@@ -14,6 +14,11 @@ import technology.sola.math.linear.Vector2D;
 
 import java.util.Comparator;
 
+/**
+ * SolaGraphics is a {@link SolaModule} that adds needed {@link technology.sola.ecs.EcsSystem}s for animating and handles
+ * querying {@link SolaEcs} for {@link technology.sola.ecs.Entity} instances that should be rendered. It will handle
+ * offsetting rendering if an {@code Entity} with a {@link CameraComponent} is present.
+ */
 @SolaModule
 public class SolaGraphics {
   private static final TransformComponent DEFAULT_CAMERA_TRANSFORM = new TransformComponent();
@@ -28,7 +33,15 @@ public class SolaGraphics {
   private float previousCameraScaleX = 1;
   private float previousCameraScaleY = 1;
 
-  public static SolaGraphics createInstance(SolaEcs solaEcs, Renderer renderer, AssetLoaderProvider assetLoaderProvider) {
+  /**
+   * Creates an instance of {@link SolaGraphics} and adds {@link technology.sola.ecs.EcsSystem}s for animation.
+   *
+   * @param solaEcs             {@link SolaEcs} instance
+   * @param renderer            {@link Renderer} instance
+   * @param assetLoaderProvider {@link AssetLoaderProvider} instance
+   * @return a new {@code SolaGraphics} instance
+   */
+  public static SolaGraphics useModule(SolaEcs solaEcs, Renderer renderer, AssetLoaderProvider assetLoaderProvider) {
     SolaGraphics solaGraphics = new SolaGraphics(solaEcs, renderer, assetLoaderProvider.get(SpriteSheet.class));
 
     solaEcs.addSystem(solaGraphics.spriteAnimatorSystem);
@@ -36,6 +49,35 @@ public class SolaGraphics {
     return solaGraphics;
   }
 
+  /**
+   * Renders all {@link technology.sola.ecs.Entity} that have various render components. Also renders debug physics
+   * graphics if enabled and physics {@link technology.sola.ecs.EcsSystem}s are present.
+   */
+  public void render() {
+    TransformComponent cameraTransform = getCameraTransform();
+
+    GeometryGraphics.render(renderer, solaEcs, cameraTransform);
+
+    SpriteGraphics.render(renderer, solaEcs, cameraTransform, spriteSheetAssetLoader);
+
+    if (isRenderDebug) {
+      if (renderer.getLayers().isEmpty()) {
+        DebugGraphics.render(renderer, solaEcs, cameraTransform);
+      } else {
+        var lastLayer = renderer.getLayers().get(renderer.getLayers().size() - 1);
+
+        lastLayer.add(r -> DebugGraphics.render(renderer, solaEcs, cameraTransform), Integer.MAX_VALUE);
+      }
+    }
+  }
+
+  /**
+   * Calculates the corresponding world coordinate based on a screen coordinate. This accounts for camera translate and
+   * scaling.
+   *
+   * @param screenCoordinate the screen coordinate
+   * @return the world coordinate
+   */
   public Vector2D screenToWorldCoordinate(Vector2D screenCoordinate) {
     var cameraTransform = getCameraTransform();
 
@@ -53,24 +95,6 @@ public class SolaGraphics {
     }
 
     return cachedScreenToWorldMatrix.forward(screenCoordinate.x(), screenCoordinate.y());
-  }
-
-  public void render() {
-    TransformComponent cameraTransform = getCameraTransform();
-
-    GeometryGraphics.render(renderer, solaEcs, cameraTransform);
-
-    SpriteGraphics.render(renderer, solaEcs, cameraTransform, spriteSheetAssetLoader);
-
-    if (isRenderDebug) {
-      if (renderer.getLayers().isEmpty()) {
-        DebugGraphics.render(renderer, solaEcs, cameraTransform);
-      } else {
-        var lastLayer = renderer.getLayers().get(renderer.getLayers().size() - 1);
-
-        lastLayer.add(r -> DebugGraphics.render(renderer, solaEcs, cameraTransform), Integer.MAX_VALUE);
-      }
-    }
   }
 
   public TransformComponent getCameraTransform() {

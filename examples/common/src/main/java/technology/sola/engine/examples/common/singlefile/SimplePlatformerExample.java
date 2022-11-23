@@ -9,6 +9,7 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.module.graphics.SolaGraphics;
 import technology.sola.engine.core.module.physics.SolaPhysics;
+import technology.sola.engine.event.EventHub;
 import technology.sola.engine.event.EventListener;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
@@ -21,10 +22,13 @@ import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
-import technology.sola.engine.physics.event.CollisionManifoldEvent;
+import technology.sola.engine.physics.event.CollisionEvent;
+import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.math.linear.Vector2D;
 
 import java.io.Serial;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
@@ -38,15 +42,15 @@ public class SimplePlatformerExample extends Sola {
 
   @Override
   protected void onInit() {
-    solaPhysics = SolaPhysics.createInstance(eventHub, solaEcs);
-    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetLoaderProvider);
+    solaPhysics = SolaPhysics.useModule(eventHub, solaEcs);
+    solaGraphics = SolaGraphics.useModule(solaEcs, platform.getRenderer(), assetLoaderProvider);
 
-    solaEcs.addSystems(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem());
+    solaEcs.addSystems(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem(), new GlassSystem(eventHub));
     solaEcs.setWorld(buildWorld());
 
     solaGraphics.setRenderDebug(true);
 
-    eventHub.add(CollisionManifoldEvent.class, new GameDoneEventListener());
+    eventHub.add(CollisionEvent.class, new GameDoneEventListener());
   }
 
   @Override
@@ -56,17 +60,18 @@ public class SimplePlatformerExample extends Sola {
     solaGraphics.render();
   }
 
-  private class GameDoneEventListener implements EventListener<CollisionManifoldEvent> {
+  private class GameDoneEventListener implements EventListener<CollisionEvent> {
     private final Function<Entity, Boolean> checkForPlayer = entity -> "player".equals(entity.getName());
     private final Function<Entity, Boolean> checkForFinalBlock = entity -> "finalBlock".equals(entity.getName());
     private final BiConsumer<Entity, Entity> collisionResolver = (player, finalBlock) ->
       solaEcs.getWorld().findEntityByName("confetti").ifPresent(entity -> {
         entity.setDisabled(false);
-        eventHub.remove(CollisionManifoldEvent.class, this);
+        finalBlock.getComponent(ColliderComponent.class).setTags(ColliderTags.IGNORE);
+        eventHub.remove(CollisionEvent.class, this);
       });
 
     @Override
-    public void onEvent(CollisionManifoldEvent event) {
+    public void onEvent(CollisionEvent event) {
       CollisionManifold collisionManifold = event.collisionManifold();
 
       collisionManifold.conditionallyResolveCollision(checkForPlayer, checkForFinalBlock, collisionResolver);
@@ -84,15 +89,15 @@ public class SimplePlatformerExample extends Sola {
       .addComponent(new PlayerComponent())
       .addComponent(new TransformComponent(200, 300, 50, 50))
       .addComponent(new RectangleRendererComponent(Color.BLUE))
-      .addComponent(ColliderComponent.aabb().setIgnoreTags(CollisionTags.GLASS))
+      .addComponent(ColliderComponent.aabb().setIgnoreTags(ColliderTags.IGNORE))
       .addComponent(new DynamicBodyComponent())
       .setName("player");
 
     world.createEntity()
       .addComponent(new TransformComponent(300, 250, 50, 150f))
-      .addComponent(new RectangleRendererComponent(new Color(150, 173, 216, 230)))
-      .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(ColliderComponent.aabb().setColliderTags(CollisionTags.GLASS));
+      .addComponent(new RectangleRendererComponent(new Color(120, 173, 216, 230)))
+      .addComponent(new GlassComponent())
+      .addComponent(ColliderComponent.aabb().setSensor(true));
 
     world.createEntity()
       .addComponent(new TransformComponent(150, 400, 200, 75f))
@@ -143,9 +148,10 @@ public class SimplePlatformerExample extends Sola {
     return world;
   }
 
+  private record GlassComponent() implements Component {
+  }
+
   private record PlayerComponent() implements Component {
-    @Serial
-    private static final long serialVersionUID = -8026881223157823822L;
   }
 
   private static class MovingPlatformComponent implements Component {
@@ -177,6 +183,29 @@ public class SimplePlatformerExample extends Sola {
     @Override
     public int getOrder() {
       return 0;
+    }
+  }
+
+  private static class GlassSystem extends EcsSystem {
+    private final List<Entity> entitiesToMakeTransparent = new ArrayList<>();
+
+    public GlassSystem(EventHub eventHub) {
+      eventHub.add(SensorEvent.class, event -> {
+        event.collisionManifold().conditionallyResolveCollision(
+          entity -> entity.hasComponent(PlayerComponent.class),
+          entity -> entity.hasComponent(GlassComponent.class),
+          (player, glass) -> entitiesToMakeTransparent.add(glass)
+        );
+      });
+    }
+
+    @Override
+    public void update(World world, float deltaTime) {
+      world.createView().of(GlassComponent.class)
+        .forEach(view -> view.entity().removeComponent(BlendModeComponent.class));
+
+      entitiesToMakeTransparent.forEach(entity -> entity.addComponent(new BlendModeComponent(BlendMode.NORMAL)));
+      entitiesToMakeTransparent.clear();
     }
   }
 
@@ -239,7 +268,7 @@ public class SimplePlatformerExample extends Sola {
     }
   }
 
-  private enum CollisionTags implements ColliderComponent.ColliderTag {
-    GLASS
+  private enum ColliderTags implements ColliderComponent.ColliderTag {
+    IGNORE
   }
 }

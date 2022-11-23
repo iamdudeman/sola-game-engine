@@ -11,9 +11,10 @@ public abstract class AssetLoader<T extends Asset> {
 
   /**
    * Adds an asset id to path mapping but does not populate the cache until the asset is requested via {@link AssetLoader#get(String)}
-   * @param id
-   * @param path
-   * @return
+   *
+   * @param id   id of the asset
+   * @param path path to the asset
+   * @return this
    */
   public AssetLoader<T> addAssetMapping(String id, String path) {
     assetIdToPathMap.put(id, path);
@@ -34,8 +35,9 @@ public abstract class AssetLoader<T extends Asset> {
 
   /**
    * Returns an {@link AssetHandle} for the asset requested or throws an exception if id to path mapping not found.
-   * @param id
-   * @return
+   *
+   * @param id id of the asset
+   * @return handle for the asset
    */
   public AssetHandle<T> get(String id) {
     String assetPath = assetIdToPathMap.get(id);
@@ -49,9 +51,10 @@ public abstract class AssetLoader<T extends Asset> {
 
   /**
    * Adds an asset id to path mapping and then returns an {@link AssetHandle} to the asset.
-   * @param id
-   * @param path
-   * @return
+   *
+   * @param id   id of the asset
+   * @param path path to the asset
+   * @return handle for the asset
    */
   public AssetHandle<T> getNewAsset(String id, String path) {
     addAssetMapping(id, path);

@@ -35,7 +35,7 @@ public class RenderingExample extends Sola {
 
   @Override
   protected void onInit() {
-    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetLoaderProvider);
+    solaGraphics = SolaGraphics.useModule(solaEcs, platform.getRenderer(), assetLoaderProvider);
 
     solaEcs.addSystem(new TestSystem());
     solaEcs.setWorld(createWorld());

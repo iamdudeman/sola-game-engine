@@ -21,11 +21,11 @@ public class ParticleExample extends Sola {
 
   @Override
   protected void onInit() {
-    SolaPhysics.createInstance(eventHub, solaEcs);
+    SolaPhysics.useModule(eventHub, solaEcs);
 
     solaEcs.setWorld(buildWorld());
 
-    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetLoaderProvider);
+    solaGraphics = SolaGraphics.useModule(solaEcs, platform.getRenderer(), assetLoaderProvider);
   }
 
   @Override

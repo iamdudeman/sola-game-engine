@@ -14,19 +14,23 @@ import technology.sola.math.linear.Vector2D;
 
 class DebugGraphics {
   static void render(Renderer renderer, SolaEcs solaEcs, TransformComponent cameraTransform) {
-    CollisionDetectionSystem collisionDetectionSystem = solaEcs.getSystem(CollisionDetectionSystem.class);
+    boolean hasCollisionDetectionSystem = solaEcs.getSystems().stream()
+      .anyMatch(ecsSystem -> ecsSystem.getClass().equals(CollisionDetectionSystem.class));
 
-    int cellSize = collisionDetectionSystem.getSpacialHashMapCellSize();
+    if (hasCollisionDetectionSystem) {
+      CollisionDetectionSystem collisionDetectionSystem = solaEcs.getSystem(CollisionDetectionSystem.class);
+      int cellSize = collisionDetectionSystem.getSpacialHashMapCellSize();
 
-    for (SpatialHashMap.BucketId bucketId : collisionDetectionSystem.getSpacialHashMapEntityBuckets()) {
-      Vector2D topLeftPoint = new Vector2D(bucketId.x(), bucketId.y()).scalar(cellSize);
+      for (SpatialHashMap.BucketId bucketId : collisionDetectionSystem.getSpacialHashMapEntityBuckets()) {
+        Vector2D topLeftPoint = new Vector2D(bucketId.x(), bucketId.y()).scalar(cellSize);
 
-      TransformComponent useThis = GraphicsUtils.getTransformForAppliedCamera(
-        new TransformComponent(topLeftPoint.x(), topLeftPoint.y(), cellSize, cellSize),
-        cameraTransform
-      );
+        TransformComponent useThis = GraphicsUtils.getTransformForAppliedCamera(
+          new TransformComponent(topLeftPoint.x(), topLeftPoint.y(), cellSize, cellSize),
+          cameraTransform
+        );
 
-      renderer.drawRect(useThis.getX(), useThis.getY(), useThis.getScaleX(), useThis.getScaleY(), Color.GREEN);
+        renderer.drawRect(useThis.getX(), useThis.getY(), useThis.getScaleX(), useThis.getScaleY(), Color.GREEN);
+      }
     }
 
     for (Entity entity : solaEcs.getWorld().findEntitiesWithComponents(ColliderComponent.class, TransformComponent.class)) {

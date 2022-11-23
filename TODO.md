@@ -1,4 +1,6 @@
 # sola-game-engine TODO list
+* Consider changing SwingSolaPlatform to not have extra render frames wasted
+* Consider removing game loop "isRestingAllowed"
 
 ## Known Bugs List
 
@@ -10,6 +12,8 @@
 
 ## TODO List
 
+* Consider mechanism to "batch" together SolaGraphics entity draws when they are in the same layer
+  * Currently, it does each one individually
 * Rendering
   * Implement more BlendModes
   * Ability to change line width when drawing

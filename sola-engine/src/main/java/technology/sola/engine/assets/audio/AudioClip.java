@@ -4,6 +4,9 @@ import technology.sola.engine.assets.Asset;
 
 import java.util.function.Consumer;
 
+/**
+ * AudioClip defines the api for audio {@link Asset}s.
+ */
 public interface AudioClip extends Asset {
   /**
    * Constant used in {@link AudioClip#loop(int)} to loop until {@link AudioClip#stop()} is called.
@@ -57,7 +60,8 @@ public interface AudioClip extends Asset {
 
   /**
    * Called when an AudioClip completes playing.
-   * @param callback  {@link Consumer} that provides the AudioClip that finished
+   *
+   * @param callback {@link Consumer} that provides the AudioClip that finished
    */
   void addFinishListener(Consumer<AudioClip> callback);
 }

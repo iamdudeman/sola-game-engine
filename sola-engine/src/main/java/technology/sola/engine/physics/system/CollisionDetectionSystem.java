@@ -9,7 +9,8 @@ import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.CollisionUtils;
 import technology.sola.engine.physics.SpatialHashMap;
 import technology.sola.engine.physics.component.ColliderComponent;
-import technology.sola.engine.physics.event.CollisionManifoldEvent;
+import technology.sola.engine.physics.event.CollisionEvent;
+import technology.sola.engine.physics.event.SensorEvent;
 
 import java.util.HashSet;
 import java.util.List;
@@ -24,6 +25,8 @@ public class CollisionDetectionSystem extends EcsSystem {
   /**
    * Creates a CollisionDetectionSystem that allows the internal spacial hash map to determine a good cell size based on
    * the entities.
+   *
+   * @param eventHub {@link EventHub} instance
    */
   public CollisionDetectionSystem(EventHub eventHub) {
     this(eventHub, null);
@@ -32,7 +35,8 @@ public class CollisionDetectionSystem extends EcsSystem {
   /**
    * Creates a CollisionDetectionSystem with custom spacial hash map cell sizing.
    *
-   * @param spatialHashMapCellSize  the cell size of the internal spacial hash map
+   * @param eventHub               {@link EventHub} instance
+   * @param spatialHashMapCellSize the cell size of the internal spacial hash map
    */
   public CollisionDetectionSystem(EventHub eventHub, Integer spatialHashMapCellSize) {
     this.eventHub = eventHub;
@@ -57,7 +61,8 @@ public class CollisionDetectionSystem extends EcsSystem {
 
   @Override
   public void update(World world, float deltaTime) {
-    Set<CollisionManifold> collisionEventsThisIteration = new HashSet<>();
+    Set<CollisionManifold> collisionsThisIteration = new HashSet<>();
+    Set<CollisionManifold> sensorDetectionsThisIteration = new HashSet<>();
     List<Entity> entities = world.findEntitiesWithComponents(ColliderComponent.class, TransformComponent.class);
 
     // TODO consider some sort of clear method for SpatialHashMap
@@ -71,23 +76,44 @@ public class CollisionDetectionSystem extends EcsSystem {
         TransformComponent transformB = entityB.getComponent(TransformComponent.class);
         ColliderComponent colliderB = entityB.getComponent(ColliderComponent.class);
 
-        if (colliderA.shouldIgnoreCollision(colliderB)) {
+        if (shouldIgnoreCollision(colliderA, colliderB)) {
           continue;
         }
 
-        CollisionManifold collisionManifoldEvent = CollisionUtils.calculateCollisionManifold(
+        CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(
           entityA, entityB,
           transformA, transformB,
           colliderA, colliderB
         );
 
-        if (collisionManifoldEvent != null) {
-          collisionEventsThisIteration.add(collisionManifoldEvent);
+        if (collisionManifold != null) {
+          if (colliderA.isSensor() || colliderB.isSensor()) {
+            sensorDetectionsThisIteration.add(collisionManifold);
+          } else {
+            collisionsThisIteration.add(collisionManifold);
+          }
         }
       }
     }
 
     // By emitting only events from the set we do not send duplicates
-    collisionEventsThisIteration.forEach(collisionManifold -> eventHub.emit(new CollisionManifoldEvent(collisionManifold)));
+    sensorDetectionsThisIteration.forEach(collisionManifold -> eventHub.emit(new SensorEvent(collisionManifold)));
+    collisionsThisIteration.forEach(collisionManifold -> eventHub.emit(new CollisionEvent(collisionManifold)));
+  }
+
+  private boolean shouldIgnoreCollision(ColliderComponent colliderA, ColliderComponent colliderB) {
+    for (ColliderComponent.ColliderTag colliderTag : colliderA.getTags()) {
+      if (colliderB.hasIgnoreColliderTag(colliderTag)) {
+        return true;
+      }
+    }
+
+    for (ColliderComponent.ColliderTag colliderTag : colliderB.getTags()) {
+      if (colliderA.hasIgnoreColliderTag(colliderTag)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

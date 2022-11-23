@@ -14,6 +14,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * SoftwareRenderer is a {@link Renderer} implementation that draws on an in memory array of pixels using the CPU. This
+ * is portable across {@link technology.sola.engine.core.SolaPlatform}s but will be less performant than a GPU based
+ * implementation.
+ */
 public class SoftwareRenderer extends Canvas implements Renderer {
   private final Random random = new Random();
   private final List<Layer> layers = new ArrayList<>();
@@ -21,6 +26,12 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   private Font font;
   private PixelUpdater pixelUpdater;
 
+  /**
+   * Creates a SoftwareRenderer with width and height.
+   *
+   * @param width  width of the renderer
+   * @param height height of the renderer
+   */
   public SoftwareRenderer(int width, int height) {
     super(width, height);
     setBlendMode(BlendMode.NO_BLENDING);
