@@ -10,11 +10,9 @@
 
 ## TODO List
 
-* Consider mechanism to "batch" together SolaGraphics entity draws when they are in the same layer
-  * Currently, it does each one individually
 * Rendering
-  * Implement more BlendModes
   * Ability to change line width when drawing
+  * Implement more BlendModes
 * BrowserPlatform
   * modularize (requires figuring out how to modularize parts of teavm needed)
 * Particle System
@@ -24,6 +22,8 @@
   * Add lots of missing tests :)
 * JavaDocs
   * add missing JavaDocs
+* Consider mechanism to "batch" together SolaGraphics entity draws when they are in the same layer
+  * Currently, it does each one individually
 * SolaGui
   * Implement a way to load gui stuff from a file
     * possibly use JSON to define gui structure
@@ -33,7 +33,6 @@
   * Would need to update physics stuff
 * Physics
   * Collision Detection
-    * Collision layers / tags for ignoring specific collisions
     * Polygon x AABB
     * Polygon x Circle
     * Polygon x Polygon
