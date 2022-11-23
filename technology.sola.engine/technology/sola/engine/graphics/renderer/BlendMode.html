@@ -84,6 +84,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public enum </span><span class="element-name type-name-label">BlendMode</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Enum.html" title="class or interface in java.lang" class="external-link">Enum</a>&lt;<a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a>&gt;</span></div>
+<div class="block">BlendMode controls how the pixel being drawn (top) and the destination pixel (bottom will be blended together to
+ produce a final color that is drawn.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -106,23 +108,23 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code><a href="#DISSOLVE" class="member-name-link">DISSOLVE</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Random chance of using color of pixel being drawn based on alpha</div>
+<div class="block">Random chance of using color of top pixel based on alpha as the probability.</div>
 </div>
 <div class="col-first odd-row-color"><code><a href="#LINEAR_DODGE" class="member-name-link">LINEAR_DODGE</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">Adds the two colors together ignoring alpha</div>
+<div class="block">Adds the top and bottom pixels together ignoring alpha.</div>
 </div>
 <div class="col-first even-row-color"><code><a href="#MASK" class="member-name-link">MASK</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Transparent if <code>alpha &lt; 255</code></div>
+<div class="block">Transparent if <code>alpha &lt; 255</code> (bottom pixel used).</div>
 </div>
 <div class="col-first odd-row-color"><code><a href="#NO_BLENDING" class="member-name-link">NO_BLENDING</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">No blending happens</div>
+<div class="block">No blending happens.</div>
 </div>
 <div class="col-first even-row-color"><code><a href="#NORMAL" class="member-name-link">NORMAL</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Blends based on alpha of pixel being drawn</div>
+<div class="block">Blends top onto bottom based on alpha of top pixel.</div>
 </div>
 </div>
 </section>
@@ -173,35 +175,36 @@ the order they are declared.</div>
 <section class="detail" id="NO_BLENDING">
 <h3>NO_BLENDING</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a></span>&nbsp;<span class="element-name">NO_BLENDING</span></div>
-<div class="block">No blending happens</div>
+<div class="block">No blending happens. Top pixel is used.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="MASK">
 <h3>MASK</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a></span>&nbsp;<span class="element-name">MASK</span></div>
-<div class="block">Transparent if <code>alpha &lt; 255</code></div>
+<div class="block">Transparent if <code>alpha &lt; 255</code> (bottom pixel used).</div>
 </section>
 </li>
 <li>
 <section class="detail" id="NORMAL">
 <h3>NORMAL</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a></span>&nbsp;<span class="element-name">NORMAL</span></div>
-<div class="block">Blends based on alpha of pixel being drawn</div>
+<div class="block">Blends top onto bottom based on alpha of top pixel.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="DISSOLVE">
 <h3>DISSOLVE</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a></span>&nbsp;<span class="element-name">DISSOLVE</span></div>
-<div class="block">Random chance of using color of pixel being drawn based on alpha</div>
+<div class="block">Random chance of using color of top pixel based on alpha as the probability. An alpha of 127 would be a 50% chance
+ of using the top pixel.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="LINEAR_DODGE">
 <h3>LINEAR_DODGE</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a></span>&nbsp;<span class="element-name">LINEAR_DODGE</span></div>
-<div class="block">Adds the two colors together ignoring alpha</div>
+<div class="block">Adds the top and bottom pixels together ignoring alpha.</div>
 </section>
 </li>
 </ul>

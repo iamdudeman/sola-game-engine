@@ -82,6 +82,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Canvas</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Canvas is an array of pixels with a width and height defined.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -116,11 +117,15 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int)" class="member-name-link">Canvas</a><wbr>(int&nbsp;width,
  int&nbsp;height)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a Canvas instance with an empty array of pixels.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(int,int,int%5B%5D)" class="member-name-link">Canvas</a><wbr>(int&nbsp;width,
  int&nbsp;height,
  int[]&nbsp;pixels)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Creates a canvas instance with desired array of pixels.</div>
+</div>
 </div>
 </section>
 </li>
@@ -141,11 +146,15 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPixel(float,float)" class="member-name-link">getPixel</a><wbr>(float&nbsp;x,
  float&nbsp;y)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the hex value of the pixel at desired coordinate on the canvas.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPixel(int,int)" class="member-name-link">getPixel</a><wbr>(int&nbsp;x,
  int&nbsp;y)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the hex value of the pixel at desired coordinate on the canvas.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int[]</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPixels()" class="member-name-link">getPixels</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -200,6 +209,12 @@ loadScripts(document, 'script');</script>
 <h3>Canvas</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Canvas</span><wbr><span class="parameters">(int&nbsp;width,
  int&nbsp;height)</span></div>
+<div class="block">Creates a Canvas instance with an empty array of pixels.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>width</code> - the width of the Canvas</dd>
+<dd><code>height</code> - the height of the canvas</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -208,6 +223,13 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Canvas</span><wbr><span class="parameters">(int&nbsp;width,
  int&nbsp;height,
  int[]&nbsp;pixels)</span></div>
+<div class="block">Creates a canvas instance with desired array of pixels.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>width</code> - the width of the Canvas</dd>
+<dd><code>height</code> - the height of the canvas</dd>
+<dd><code>pixels</code> - the array of pixels to use for this canvas</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -223,6 +245,14 @@ loadScripts(document, 'script');</script>
 <h3>getPixel</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getPixel</span><wbr><span class="parameters">(int&nbsp;x,
  int&nbsp;y)</span></div>
+<div class="block">Returns the hex value of the pixel at desired coordinate on the canvas.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>x</code> - the x coordinate</dd>
+<dd><code>y</code> - the y coordinate</dd>
+<dt>Returns:</dt>
+<dd>the hex value of the pixel</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -230,24 +260,45 @@ loadScripts(document, 'script');</script>
 <h3>getPixel</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getPixel</span><wbr><span class="parameters">(float&nbsp;x,
  float&nbsp;y)</span></div>
+<div class="block">Returns the hex value of the pixel at desired coordinate on the canvas. Since pixels coordinates are integers this
+ rounds the float values half up.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>x</code> - the x coordinate</dd>
+<dd><code>y</code> - the y coordinate</dd>
+<dt>Returns:</dt>
+<dd>the hex value of the pixel</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getPixels()">
 <h3>getPixels</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name">getPixels</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the array of pixels in the canvas</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getWidth()">
 <h3>getWidth</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getWidth</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the width of the canvas</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getHeight()">
 <h3>getHeight</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getHeight</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the height of the canvas</dd>
+</dl>
 </section>
 </li>
 </ul>

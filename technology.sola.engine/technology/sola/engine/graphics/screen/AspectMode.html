@@ -84,6 +84,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public enum </span><span class="element-name type-name-label">AspectMode</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Enum.html" title="class or interface in java.lang" class="external-link">Enum</a>&lt;<a href="AspectMode.html" title="enum class in technology.sola.engine.graphics.screen">AspectMode</a>&gt;</span></div>
+<div class="block">AspectMode specifies how rendered output will be scaled when the window resizes.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -105,11 +106,17 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Enum Constant</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code><a href="#IGNORE_RESIZING" class="member-name-link">IGNORE_RESIZING</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Resizing the window will not cause a change in the rendered output.</div>
+</div>
 <div class="col-first odd-row-color"><code><a href="#MAINTAIN" class="member-name-link">MAINTAIN</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Resizing the window will cause the rendered output to change while maintaining the original aspect ratio.</div>
+</div>
 <div class="col-first even-row-color"><code><a href="#STRETCH" class="member-name-link">STRETCH</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Resizing the window will cause the rendered output to stretch to fill the screen.</div>
+</div>
 </div>
 </section>
 </li>
@@ -159,18 +166,21 @@ the order they are declared.</div>
 <section class="detail" id="IGNORE_RESIZING">
 <h3>IGNORE_RESIZING</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="AspectMode.html" title="enum class in technology.sola.engine.graphics.screen">AspectMode</a></span>&nbsp;<span class="element-name">IGNORE_RESIZING</span></div>
+<div class="block">Resizing the window will not cause a change in the rendered output.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="MAINTAIN">
 <h3>MAINTAIN</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="AspectMode.html" title="enum class in technology.sola.engine.graphics.screen">AspectMode</a></span>&nbsp;<span class="element-name">MAINTAIN</span></div>
+<div class="block">Resizing the window will cause the rendered output to change while maintaining the original aspect ratio.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="STRETCH">
 <h3>STRETCH</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="AspectMode.html" title="enum class in technology.sola.engine.graphics.screen">AspectMode</a></span>&nbsp;<span class="element-name">STRETCH</span></div>
+<div class="block">Resizing the window will cause the rendered output to stretch to fill the screen.</div>
 </section>
 </li>
 </ul>

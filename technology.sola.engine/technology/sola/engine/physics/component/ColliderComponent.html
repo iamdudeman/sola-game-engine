@@ -105,7 +105,9 @@ implements technology.sola.ecs.Component</span></div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static interface&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="ColliderComponent.ColliderTag.html" class="type-name-link" title="interface in technology.sola.engine.physics.component">ColliderComponent.ColliderTag</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Identifier tag for this collider.</div>
+</div>
 <div class="col-first odd-row-color"><code>static enum&nbsp;</code></div>
 <div class="col-second odd-row-color"><code><a href="ColliderComponent.ColliderType.html" class="type-name-link" title="enum class in technology.sola.engine.physics.component">ColliderComponent.ColliderType</a></code></div>
 <div class="col-last odd-row-color">
@@ -178,21 +180,49 @@ implements technology.sola.ecs.Component</span></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gets the <a href="ColliderComponent.ColliderType.html" title="enum class in technology.sola.engine.physics.component"><code>ColliderComponent.ColliderType</code></a> of this collider.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOffsetX()" class="member-name-link">getOffsetX</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component">ColliderComponent.ColliderTag</a>[]</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getIgnoreTags()" class="member-name-link">getIgnoreTags</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOffsetY()" class="member-name-link">getOffsetY</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOffsetX()" class="member-name-link">getOffsetX</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setColliderTags(technology.sola.engine.physics.component.ColliderComponent.ColliderTag...)" class="member-name-link">setColliderTags</a><wbr>(<a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component">ColliderComponent.ColliderTag</a>...&nbsp;colliderTags)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOffsetY()" class="member-name-link">getOffsetY</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setIgnoreTags(technology.sola.engine.physics.component.ColliderComponent.ColliderTag...)" class="member-name-link">setIgnoreTags</a><wbr>(<a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component">ColliderComponent.ColliderTag</a>...&nbsp;ignoreTags)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component">ColliderComponent.ColliderTag</a>[]</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTags()" class="member-name-link">getTags</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#shouldIgnoreCollision(technology.sola.engine.physics.component.ColliderComponent)" class="member-name-link">shouldIgnoreCollision</a><wbr>(<a href="ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>&nbsp;colliderComponent)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasIgnoreColliderTag(technology.sola.engine.physics.component.ColliderComponent.ColliderTag)" class="member-name-link">hasIgnoreColliderTag</a><wbr>(<a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component">ColliderComponent.ColliderTag</a>&nbsp;colliderTag)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks to see if this collider has a <a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component"><code>ColliderComponent.ColliderTag</code></a> that it is ignoring.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasTag(technology.sola.engine.physics.component.ColliderComponent.ColliderTag)" class="member-name-link">hasTag</a><wbr>(<a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component">ColliderComponent.ColliderTag</a>&nbsp;colliderTag)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks to see if this collider has a <a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component"><code>ColliderComponent.ColliderTag</code></a>.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isSensor()" class="member-name-link">isSensor</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">A collider that is a sensor will not respond to collision resolution but will emit collision events if an
+ <code>Entity</code> with a <a href="DynamicBodyComponent.html" title="class in technology.sola.engine.physics.component"><code>DynamicBodyComponent</code></a> collides.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setIgnoreTags(technology.sola.engine.physics.component.ColliderComponent.ColliderTag...)" class="member-name-link">setIgnoreTags</a><wbr>(<a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component">ColliderComponent.ColliderTag</a>...&nbsp;ignoreTags)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the <a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component"><code>ColliderComponent.ColliderTag</code></a>s to ignore for this collider.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSensor(boolean)" class="member-name-link">setSensor</a><wbr>(boolean&nbsp;isSensor)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets whether this collider is a sensor or not.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTags(technology.sola.engine.physics.component.ColliderComponent.ColliderTag...)" class="member-name-link">setTags</a><wbr>(<a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component">ColliderComponent.ColliderTag</a>...&nbsp;tags)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the <a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component"><code>ColliderComponent.ColliderTag</code></a>s for this collider.</div>
+</div>
 </div>
 </div>
 </div>
@@ -309,21 +339,100 @@ implements technology.sola.ecs.Component</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="shouldIgnoreCollision(technology.sola.engine.physics.component.ColliderComponent)">
-<h3>shouldIgnoreCollision</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">shouldIgnoreCollision</span><wbr><span class="parameters">(<a href="ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>&nbsp;colliderComponent)</span></div>
+<section class="detail" id="isSensor()">
+<h3>isSensor</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isSensor</span>()</div>
+<div class="block">A collider that is a sensor will not respond to collision resolution but will emit collision events if an
+ <code>Entity</code> with a <a href="DynamicBodyComponent.html" title="class in technology.sola.engine.physics.component"><code>DynamicBodyComponent</code></a> collides.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if this collider is a sensor</dd>
+</dl>
 </section>
 </li>
 <li>
-<section class="detail" id="setColliderTags(technology.sola.engine.physics.component.ColliderComponent.ColliderTag...)">
-<h3>setColliderTags</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a></span>&nbsp;<span class="element-name">setColliderTags</span><wbr><span class="parameters">(<a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component">ColliderComponent.ColliderTag</a>...&nbsp;colliderTags)</span></div>
+<section class="detail" id="setSensor(boolean)">
+<h3>setSensor</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a></span>&nbsp;<span class="element-name">setSensor</span><wbr><span class="parameters">(boolean&nbsp;isSensor)</span></div>
+<div class="block">Sets whether this collider is a sensor or not.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>isSensor</code> - whether this collider is a sensor or not</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getTags()">
+<h3>getTags</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component">ColliderComponent.ColliderTag</a>[]</span>&nbsp;<span class="element-name">getTags</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the <a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component"><code>ColliderComponent.ColliderTag</code></a>s for this Collider</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setTags(technology.sola.engine.physics.component.ColliderComponent.ColliderTag...)">
+<h3>setTags</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a></span>&nbsp;<span class="element-name">setTags</span><wbr><span class="parameters">(<a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component">ColliderComponent.ColliderTag</a>...&nbsp;tags)</span></div>
+<div class="block">Sets the <a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component"><code>ColliderComponent.ColliderTag</code></a>s for this collider.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>tags</code> - the new tags</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="hasTag(technology.sola.engine.physics.component.ColliderComponent.ColliderTag)">
+<h3>hasTag</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasTag</span><wbr><span class="parameters">(<a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component">ColliderComponent.ColliderTag</a>&nbsp;colliderTag)</span></div>
+<div class="block">Checks to see if this collider has a <a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component"><code>ColliderComponent.ColliderTag</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>colliderTag</code> - the tag to check</dd>
+<dt>Returns:</dt>
+<dd>true if collider has tag</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getIgnoreTags()">
+<h3>getIgnoreTags</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component">ColliderComponent.ColliderTag</a>[]</span>&nbsp;<span class="element-name">getIgnoreTags</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the <a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component"><code>ColliderComponent.ColliderTag</code></a>s to ignore for this Collider</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setIgnoreTags(technology.sola.engine.physics.component.ColliderComponent.ColliderTag...)">
 <h3>setIgnoreTags</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a></span>&nbsp;<span class="element-name">setIgnoreTags</span><wbr><span class="parameters">(<a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component">ColliderComponent.ColliderTag</a>...&nbsp;ignoreTags)</span></div>
+<div class="block">Sets the <a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component"><code>ColliderComponent.ColliderTag</code></a>s to ignore for this collider.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>ignoreTags</code> - the new tags to ignore</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="hasIgnoreColliderTag(technology.sola.engine.physics.component.ColliderComponent.ColliderTag)">
+<h3>hasIgnoreColliderTag</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasIgnoreColliderTag</span><wbr><span class="parameters">(<a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component">ColliderComponent.ColliderTag</a>&nbsp;colliderTag)</span></div>
+<div class="block">Checks to see if this collider has a <a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component"><code>ColliderComponent.ColliderTag</code></a> that it is ignoring.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>colliderTag</code> - the tag to check</dd>
+<dt>Returns:</dt>
+<dd>true if collider is ignoring tag</dd>
+</dl>
 </section>
 </li>
 <li>

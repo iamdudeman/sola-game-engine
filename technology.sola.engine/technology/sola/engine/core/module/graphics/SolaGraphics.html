@@ -79,6 +79,9 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="annotations"><a href="../SolaModule.html" title="annotation interface in technology.sola.engine.core.module">@SolaModule</a>
 </span><span class="modifiers">public class </span><span class="element-name type-name-label">SolaGraphics</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">SolaGraphics is a <a href="../SolaModule.html" title="annotation interface in technology.sola.engine.core.module"><code>SolaModule</code></a> that adds needed <code>EcsSystem</code>s for animating and handles
+ querying <code>SolaEcs</code> for <code>Entity</code> instances that should be rendered. It will handle
+ offsetting rendering if an <code>Entity</code> with a <a href="../../../graphics/components/CameraComponent.html" title="class in technology.sola.engine.graphics.components"><code>CameraComponent</code></a> is present.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -93,26 +96,32 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="SolaGraphics.html" title="class in technology.sola.engine.core.module.graphics">SolaGraphics</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#createInstance(technology.sola.ecs.SolaEcs,technology.sola.engine.graphics.renderer.Renderer,technology.sola.engine.assets.AssetLoaderProvider)" class="member-name-link">createInstance</a><wbr>(technology.sola.ecs.SolaEcs&nbsp;solaEcs,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCameraTransform()" class="member-name-link">getCameraTransform</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isRenderDebug()" class="member-name-link">isRenderDebug</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render()" class="member-name-link">render</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Renders all <code>Entity</code> that have various render components.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#screenToWorldCoordinate(technology.sola.math.linear.Vector2D)" class="member-name-link">screenToWorldCoordinate</a><wbr>(<a href="../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;screenCoordinate)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Calculates the corresponding world coordinate based on a screen coordinate.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRenderDebug(boolean)" class="member-name-link">setRenderDebug</a><wbr>(boolean&nbsp;renderDebug)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="SolaGraphics.html" title="class in technology.sola.engine.core.module.graphics">SolaGraphics</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#useModule(technology.sola.ecs.SolaEcs,technology.sola.engine.graphics.renderer.Renderer,technology.sola.engine.assets.AssetLoaderProvider)" class="member-name-link">useModule</a><wbr>(technology.sola.ecs.SolaEcs&nbsp;solaEcs,
  <a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
  <a href="../../../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCameraTransform()" class="member-name-link">getCameraTransform</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isRenderDebug()" class="member-name-link">isRenderDebug</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render()" class="member-name-link">render</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#screenToWorldCoordinate(technology.sola.math.linear.Vector2D)" class="member-name-link">screenToWorldCoordinate</a><wbr>(<a href="../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;screenCoordinate)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRenderDebug(boolean)" class="member-name-link">setRenderDebug</a><wbr>(boolean&nbsp;renderDebug)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Creates an instance of <a href="SolaGraphics.html" title="class in technology.sola.engine.core.module.graphics"><code>SolaGraphics</code></a> and adds <code>EcsSystem</code>s for animation.</div>
+</div>
 </div>
 </div>
 </div>
@@ -131,23 +140,42 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="createInstance(technology.sola.ecs.SolaEcs,technology.sola.engine.graphics.renderer.Renderer,technology.sola.engine.assets.AssetLoaderProvider)">
-<h3>createInstance</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="SolaGraphics.html" title="class in technology.sola.engine.core.module.graphics">SolaGraphics</a></span>&nbsp;<span class="element-name">createInstance</span><wbr><span class="parameters">(technology.sola.ecs.SolaEcs&nbsp;solaEcs,
+<section class="detail" id="useModule(technology.sola.ecs.SolaEcs,technology.sola.engine.graphics.renderer.Renderer,technology.sola.engine.assets.AssetLoaderProvider)">
+<h3>useModule</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="SolaGraphics.html" title="class in technology.sola.engine.core.module.graphics">SolaGraphics</a></span>&nbsp;<span class="element-name">useModule</span><wbr><span class="parameters">(technology.sola.ecs.SolaEcs&nbsp;solaEcs,
  <a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
  <a href="../../../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider)</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="screenToWorldCoordinate(technology.sola.math.linear.Vector2D)">
-<h3>screenToWorldCoordinate</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">screenToWorldCoordinate</span><wbr><span class="parameters">(<a href="../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;screenCoordinate)</span></div>
+<div class="block">Creates an instance of <a href="SolaGraphics.html" title="class in technology.sola.engine.core.module.graphics"><code>SolaGraphics</code></a> and adds <code>EcsSystem</code>s for animation.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>solaEcs</code> - <code>SolaEcs</code> instance</dd>
+<dd><code>renderer</code> - <a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> instance</dd>
+<dd><code>assetLoaderProvider</code> - <a href="../../../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets"><code>AssetLoaderProvider</code></a> instance</dd>
+<dt>Returns:</dt>
+<dd>a new <code>SolaGraphics</code> instance</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="render()">
 <h3>render</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">render</span>()</div>
+<div class="block">Renders all <code>Entity</code> that have various render components. Also renders debug physics
+ graphics if enabled and physics <code>EcsSystem</code>s are present.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="screenToWorldCoordinate(technology.sola.math.linear.Vector2D)">
+<h3>screenToWorldCoordinate</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">screenToWorldCoordinate</span><wbr><span class="parameters">(<a href="../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;screenCoordinate)</span></div>
+<div class="block">Calculates the corresponding world coordinate based on a screen coordinate. This accounts for camera translate and
+ scaling.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>screenCoordinate</code> - the screen coordinate</dd>
+<dt>Returns:</dt>
+<dd>the world coordinate</dd>
+</dl>
 </section>
 </li>
 <li>

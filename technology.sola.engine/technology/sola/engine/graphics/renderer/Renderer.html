@@ -78,6 +78,8 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">Renderer</span></div>
+<div class="block">Renderer defines the API for a sola game engine renderer. <a href="SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer"><code>SoftwareRenderer</code></a> is the default implementation but
+ each <a href="../../core/SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> can implement their own as well to take advantage of the GPU.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -94,10 +96,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#clear()" class="member-name-link">clear</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Sets all pixels to <a href="../Color.html#BLACK"><code>Color.BLACK</code></a></div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#clear(technology.sola.engine.graphics.Color)" class="member-name-link">clear</a><wbr>(<a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Sets all pixels to desired <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a>.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#createLayers(java.lang.String...)" class="member-name-link">createLayers</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>...&nbsp;layerIds)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
@@ -107,7 +113,7 @@ loadScripts(document, 'script');</script>
  float&nbsp;radius,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Uses Bresenham's circle drawing algorithm</div>
+<div class="block">Draws an unfilled circle.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#drawImage(technology.sola.engine.assets.graphics.SolaImage,float,float)" class="member-name-link">drawImage</a><wbr>(<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;solaImage,
@@ -131,7 +137,9 @@ loadScripts(document, 'script');</script>
  float&nbsp;x2,
  float&nbsp;y2,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Draws a line.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#drawRect(float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">drawRect</a><wbr>(float&nbsp;x,
  float&nbsp;y,
@@ -139,14 +147,16 @@ loadScripts(document, 'script');</script>
  float&nbsp;height,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">todo</div>
+<div class="block">Draws an unfilled rectangle.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#drawString(java.lang.String,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">drawString</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text,
  float&nbsp;x,
  float&nbsp;y,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Draws a string of text using the current <a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a>.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#drawToLayer(java.lang.String,int,technology.sola.engine.graphics.renderer.DrawItem)" class="member-name-link">drawToLayer</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;layerId,
  int&nbsp;priority,
@@ -166,7 +176,7 @@ loadScripts(document, 'script');</script>
  float&nbsp;radius,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">todo</div>
+<div class="block">Draws a filled circle.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#fillRect(float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">fillRect</a><wbr>(float&nbsp;x,
@@ -175,7 +185,7 @@ loadScripts(document, 'script');</script>
  float&nbsp;height,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">todo</div>
+<div class="block">Draws a filled rectangle.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getBlendMode()" class="member-name-link">getBlendMode</a>()</code></div>
@@ -197,10 +207,14 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setBlendMode(technology.sola.engine.graphics.renderer.BlendMode)" class="member-name-link">setBlendMode</a><wbr>(<a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a>&nbsp;blendMode)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Sets the <a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer"><code>BlendMode</code></a> that should be used.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setFont(technology.sola.engine.assets.graphics.font.Font)" class="member-name-link">setFont</a><wbr>(<a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a>&nbsp;font)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Sets the <a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a> to use when drawing text.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#setPixel(int,int,int)" class="member-name-link">setPixel</a><wbr>(int&nbsp;x,
  int&nbsp;y,
@@ -229,12 +243,21 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="setBlendMode(technology.sola.engine.graphics.renderer.BlendMode)">
 <h3>setBlendMode</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">setBlendMode</span><wbr><span class="parameters">(<a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a>&nbsp;blendMode)</span></div>
+<div class="block">Sets the <a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer"><code>BlendMode</code></a> that should be used.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>blendMode</code> - the new <code>BlendMode</code> to use</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getBlendMode()">
 <h3>getBlendMode</h3>
 <div class="member-signature"><span class="return-type"><a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a></span>&nbsp;<span class="element-name">getBlendMode</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the current <a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer"><code>BlendMode</code></a> being used when drawing</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -248,24 +271,41 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getFont()">
 <h3>getFont</h3>
 <div class="member-signature"><span class="return-type"><a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a></span>&nbsp;<span class="element-name">getFont</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the current <a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a> being used for drawing text</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setFont(technology.sola.engine.assets.graphics.font.Font)">
 <h3>setFont</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">setFont</span><wbr><span class="parameters">(<a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a>&nbsp;font)</span></div>
+<div class="block">Sets the <a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a> to use when drawing text.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>font</code> - the new <code>Font</code> to use</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getWidth()">
 <h3>getWidth</h3>
 <div class="member-signature"><span class="return-type">int</span>&nbsp;<span class="element-name">getWidth</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the width of the <a href="Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a></dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getHeight()">
 <h3>getHeight</h3>
 <div class="member-signature"><span class="return-type">int</span>&nbsp;<span class="element-name">getHeight</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the height of the <a href="Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a></dd>
+</dl>
 </section>
 </li>
 <li>
@@ -278,6 +318,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getLayers()">
 <h3>getLayers</h3>
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Layer.html" title="class in technology.sola.engine.graphics.renderer">Layer</a>&gt;</span>&nbsp;<span class="element-name">getLayers</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> of <a href="Layer.html" title="class in technology.sola.engine.graphics.renderer"><code>Layer</code></a>s this Renderer has</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -305,12 +349,18 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="clear()">
 <h3>clear</h3>
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">clear</span>()</div>
+<div class="block">Sets all pixels to <a href="../Color.html#BLACK"><code>Color.BLACK</code></a></div>
 </section>
 </li>
 <li>
 <section class="detail" id="clear(technology.sola.engine.graphics.Color)">
 <h3>clear</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">clear</span><wbr><span class="parameters">(<a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</span></div>
+<div class="block">Sets all pixels to desired <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>color</code> - the <code>Color</code> to set all pixels to</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -336,6 +386,14 @@ loadScripts(document, 'script');</script>
  float&nbsp;x,
  float&nbsp;y,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</span></div>
+<div class="block">Draws a string of text using the current <a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>text</code> - the text to draw</dd>
+<dd><code>x</code> - the x coordinate to draw it at</dd>
+<dd><code>y</code> - the y coordinate to draw it at</dd>
+<dd><code>color</code> - the <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the text</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -346,6 +404,15 @@ loadScripts(document, 'script');</script>
  float&nbsp;x2,
  float&nbsp;y2,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</span></div>
+<div class="block">Draws a line.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>x</code> - the x coordinate of the first point</dd>
+<dd><code>y</code> - the y coordinate of the first point</dd>
+<dd><code>x2</code> - the x coordinate of the second point</dd>
+<dd><code>y2</code> - the y coordinate of the second point</dd>
+<dd><code>color</code> - the <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the line</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -356,14 +423,14 @@ loadScripts(document, 'script');</script>
  float&nbsp;width,
  float&nbsp;height,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</span></div>
-<div class="block">todo</div>
+<div class="block">Draws an unfilled rectangle.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>x</code> - top left coordinate x</dd>
 <dd><code>y</code> - top left coordinate y</dd>
-<dd><code>width</code> - </dd>
-<dd><code>height</code> - </dd>
-<dd><code>color</code> - </dd>
+<dd><code>width</code> - width of the rectangle</dd>
+<dd><code>height</code> - height of the rectangle</dd>
+<dd><code>color</code> - <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the rectangle</dd>
 </dl>
 </section>
 </li>
@@ -375,14 +442,14 @@ loadScripts(document, 'script');</script>
  float&nbsp;width,
  float&nbsp;height,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</span></div>
-<div class="block">todo</div>
+<div class="block">Draws a filled rectangle.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>x</code> - top left coordinate x</dd>
 <dd><code>y</code> - top left coordinate y</dd>
-<dd><code>width</code> - </dd>
-<dd><code>height</code> - </dd>
-<dd><code>color</code> - </dd>
+<dd><code>width</code> - width of the rectangle</dd>
+<dd><code>height</code> - height of the rectangle</dd>
+<dd><code>color</code> - <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the rectangle</dd>
 </dl>
 </section>
 </li>
@@ -393,13 +460,13 @@ loadScripts(document, 'script');</script>
  float&nbsp;y,
  float&nbsp;radius,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</span></div>
-<div class="block">Uses Bresenham's circle drawing algorithm</div>
+<div class="block">Draws an unfilled circle. Uses Bresenham's circle drawing algorithm.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>x</code> - top left coordinate x</dd>
 <dd><code>y</code> - top left coordinate y</dd>
-<dd><code>radius</code> - </dd>
-<dd><code>color</code> - </dd>
+<dd><code>radius</code> - radius of the circle</dd>
+<dd><code>color</code> - <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the circle</dd>
 </dl>
 </section>
 </li>
@@ -410,13 +477,13 @@ loadScripts(document, 'script');</script>
  float&nbsp;y,
  float&nbsp;radius,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</span></div>
-<div class="block">todo</div>
+<div class="block">Draws a filled circle.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>x</code> - top left coordinate x</dd>
 <dd><code>y</code> - top left coordinate y</dd>
-<dd><code>radius</code> - </dd>
-<dd><code>color</code> - </dd>
+<dd><code>radius</code> - radius of the circle</dd>
+<dd><code>color</code> - <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the circle</dd>
 </dl>
 </section>
 </li>

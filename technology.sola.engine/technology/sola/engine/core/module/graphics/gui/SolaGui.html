@@ -79,6 +79,9 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="annotations"><a href="../../SolaModule.html" title="annotation interface in technology.sola.engine.core.module">@SolaModule</a>
 </span><span class="modifiers">public class </span><span class="element-name type-name-label">SolaGui</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">SolaGui is a <a href="../../SolaModule.html" title="annotation interface in technology.sola.engine.core.module"><code>SolaModule</code></a> that handles registering event listeners and loading a default <a href="../../../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a> for
+ <a href="../../../../graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>s to use. It also contains several utility methods for creating instances of gui elements, setting
+ the root element of a tree, and searching for elements in the tree.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -134,52 +137,56 @@ P extends <a href="../../../../graphics/gui/properties/GuiElementProperties.html
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="../../../../graphics/gui/properties/GuiElementGlobalProperties.html" title="class in technology.sola.engine.graphics.gui.properties">GuiElementGlobalProperties</a>,<wbr>P&gt;&nbsp;elementPropertiesConstructor,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;P&gt;&nbsp;propertiesInitializer)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="SolaGui.html" title="class in technology.sola.engine.core.module.graphics.gui">SolaGui</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#createInstance(technology.sola.engine.assets.AssetLoaderProvider,technology.sola.engine.core.SolaPlatform)" class="member-name-link">createInstance</a><wbr>(<a href="../../../../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider,
- <a href="../../../SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a>&nbsp;platform)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#focusElement(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">focusElement</a><wbr>(<a href="../../../../graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&nbsp;guiElement)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAssetLoaderProvider()" class="member-name-link">getAssetLoaderProvider</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#focusElement(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">focusElement</a><wbr>(<a href="../../../../graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&nbsp;guiElement)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../../graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getElementById(java.lang.String)" class="member-name-link">getElementById</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAssetLoaderProvider()" class="member-name-link">getAssetLoaderProvider</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="../../../../graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&gt;<br>T</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getElementById(java.lang.String,java.lang.Class)" class="member-name-link">getElementById</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../../graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getElementById(java.lang.String)" class="member-name-link">getElementById</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="../../../../graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&gt;<br>T</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getElementById(java.lang.String,java.lang.Class)" class="member-name-link">getElementById</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;clazz)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isFocussedElement(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">isFocussedElement</a><wbr>(<a href="../../../../graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&nbsp;guiElement)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onKeyPressed(technology.sola.engine.input.KeyEvent)" class="member-name-link">onKeyPressed</a><wbr>(<a href="../../../../input/KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&nbsp;keyEvent)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isFocussedElement(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">isFocussedElement</a><wbr>(<a href="../../../../graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&nbsp;guiElement)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onKeyReleased(technology.sola.engine.input.KeyEvent)" class="member-name-link">onKeyReleased</a><wbr>(<a href="../../../../input/KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&nbsp;keyEvent)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onKeyPressed(technology.sola.engine.input.KeyEvent)" class="member-name-link">onKeyPressed</a><wbr>(<a href="../../../../input/KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&nbsp;keyEvent)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onMouseMoved(technology.sola.engine.input.MouseEvent)" class="member-name-link">onMouseMoved</a><wbr>(<a href="../../../../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&nbsp;event)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onKeyReleased(technology.sola.engine.input.KeyEvent)" class="member-name-link">onKeyReleased</a><wbr>(<a href="../../../../input/KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&nbsp;keyEvent)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onMousePressed(technology.sola.engine.input.MouseEvent)" class="member-name-link">onMousePressed</a><wbr>(<a href="../../../../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&nbsp;event)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onMouseMoved(technology.sola.engine.input.MouseEvent)" class="member-name-link">onMouseMoved</a><wbr>(<a href="../../../../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&nbsp;event)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onMouseReleased(technology.sola.engine.input.MouseEvent)" class="member-name-link">onMouseReleased</a><wbr>(<a href="../../../../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&nbsp;event)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onMousePressed(technology.sola.engine.input.MouseEvent)" class="member-name-link">onMousePressed</a><wbr>(<a href="../../../../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&nbsp;event)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render()" class="member-name-link">render</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onMouseReleased(technology.sola.engine.input.MouseEvent)" class="member-name-link">onMouseReleased</a><wbr>(<a href="../../../../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&nbsp;event)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setGuiRoot(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">setGuiRoot</a><wbr>(<a href="../../../../graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&nbsp;guiElement)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render()" class="member-name-link">render</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Renders the root <a href="../../../../graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a> and its children.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setGuiRoot(technology.sola.engine.graphics.gui.GuiElement,int,int)" class="member-name-link">setGuiRoot</a><wbr>(<a href="../../../../graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&nbsp;guiElement,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setGuiRoot(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">setGuiRoot</a><wbr>(<a href="../../../../graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&nbsp;guiElement)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setGuiRoot(technology.sola.engine.graphics.gui.GuiElement,int,int)" class="member-name-link">setGuiRoot</a><wbr>(<a href="../../../../graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&nbsp;guiElement,
  int&nbsp;x,
  int&nbsp;y)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="SolaGui.html" title="class in technology.sola.engine.core.module.graphics.gui">SolaGui</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#useModule(technology.sola.engine.assets.AssetLoaderProvider,technology.sola.engine.core.SolaPlatform)" class="member-name-link">useModule</a><wbr>(<a href="../../../../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider,
+ <a href="../../../SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a>&nbsp;platform)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Creates a new instances of <a href="SolaGui.html" title="class in technology.sola.engine.core.module.graphics.gui"><code>SolaGui</code></a>.</div>
+</div>
 </div>
 </div>
 </div>
@@ -212,10 +219,26 @@ P extends <a href="../../../../graphics/gui/properties/GuiElementProperties.html
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="createInstance(technology.sola.engine.assets.AssetLoaderProvider,technology.sola.engine.core.SolaPlatform)">
-<h3>createInstance</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="SolaGui.html" title="class in technology.sola.engine.core.module.graphics.gui">SolaGui</a></span>&nbsp;<span class="element-name">createInstance</span><wbr><span class="parameters">(<a href="../../../../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider,
+<section class="detail" id="useModule(technology.sola.engine.assets.AssetLoaderProvider,technology.sola.engine.core.SolaPlatform)">
+<h3>useModule</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="SolaGui.html" title="class in technology.sola.engine.core.module.graphics.gui">SolaGui</a></span>&nbsp;<span class="element-name">useModule</span><wbr><span class="parameters">(<a href="../../../../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider,
  <a href="../../../SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a>&nbsp;platform)</span></div>
+<div class="block">Creates a new instances of <a href="SolaGui.html" title="class in technology.sola.engine.core.module.graphics.gui"><code>SolaGui</code></a>. Registers event listeners for the <a href="../../../SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> and prepares a
+ default <a href="../../../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a> to be loaded.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>assetLoaderProvider</code> - the <a href="../../../../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets"><code>AssetLoaderProvider</code></a> to load the <code>Font</code></dd>
+<dd><code>platform</code> - the <a href="../../../SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> instance</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="render()">
+<h3>render</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">render</span>()</div>
+<div class="block">Renders the root <a href="../../../../graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a> and its children.</div>
 </section>
 </li>
 <li>
@@ -249,12 +272,6 @@ P extends <a href="../../../../graphics/gui/properties/GuiElementProperties.html
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setGuiRoot</span><wbr><span class="parameters">(<a href="../../../../graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&nbsp;guiElement,
  int&nbsp;x,
  int&nbsp;y)</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="render()">
-<h3>render</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">render</span>()</div>
 </section>
 </li>
 <li>
