@@ -1,4 +1,12 @@
 # sola-game-engine TODO list
+* GuiElement
+  * background color generic property
+  * SolaGui should expose the instance of EventHub
+  * when height or width specified clamp to available space
+* Animation
+  * ability to manually set Sprite for sprite animation component
+    * ie. resizing existing sprite to be smaller
+  * maybe expose transform as an animatable property for sprite animation component
 
 ## Known Bugs List
 
