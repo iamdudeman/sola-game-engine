@@ -53,19 +53,6 @@ public abstract class GameLoop implements Runnable {
     LOGGER.info("----------Sola is stopping----------");
   }
 
-  protected void shortRest(long loopStartTime) {
-    double endTime = loopStartTime + deltaTime;
-
-    while (System.nanoTime() < endTime) {
-      try {
-        Thread.sleep(1);
-      } catch (InterruptedException ex) {
-        LOGGER.error("rest was interrupted", ex);
-        break;
-      }
-    }
-  }
-
   private void onGameLoopEvent(GameLoopEvent event) {
     switch (event.type()) {
       case STOP -> this.stop();

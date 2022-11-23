@@ -1,5 +1,4 @@
 # sola-game-engine TODO list
-* Consider changing SwingSolaPlatform to not have extra render frames wasted
 * Consider removing game loop "isRestingAllowed"
 
 ## Known Bugs List
