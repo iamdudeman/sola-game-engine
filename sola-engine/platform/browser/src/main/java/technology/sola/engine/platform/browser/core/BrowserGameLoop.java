@@ -10,12 +10,13 @@ import java.util.function.Consumer;
 
 public class BrowserGameLoop extends GameLoop implements JsUtils.Function {
   /**
-   * todo
-   * @param eventHub
-   * @param updateMethod
-   * @param renderMethod
+   * Creates a new BrowserGameLoop instance. This currently caps target updates per second to 30.
+   *
+   * @param eventHub               {@link EventHub}
+   * @param updateMethod           method that is run every update tick
+   * @param renderMethod           method that is run every render tick
    * @param targetUpdatesPerSecond this is currently capped at 30 updates per second
-   * @param isRestingAllowed
+   * @param isRestingAllowed       whether the game loop will rest for a short while or not each loop
    */
   public BrowserGameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
     super(eventHub, updateMethod, renderMethod, Math.min(targetUpdatesPerSecond, 30), isRestingAllowed);

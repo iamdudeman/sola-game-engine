@@ -18,8 +18,9 @@ public class Layer {
   }
 
   /**
-   * todo
-   * @param drawItem
+   * Adds a {@link DrawItem} to be drawn when this {@link Layer} is drawn.
+   *
+   * @param drawItem the {@code DrawItem} to be drawn
    * @param priority higher numbers will be drawn on top
    */
   public void add(DrawItem drawItem, int priority) {
@@ -48,7 +49,10 @@ public class Layer {
     return name;
   }
 
-  private record PrioritizedDrawItem(DrawItem drawItem, int priority) implements DrawItem, Comparable<PrioritizedDrawItem> {
+  private record PrioritizedDrawItem(
+    DrawItem drawItem,
+    int priority
+  ) implements DrawItem, Comparable<PrioritizedDrawItem> {
     @Override
     public void draw(Renderer renderer) {
       drawItem.draw(renderer);
