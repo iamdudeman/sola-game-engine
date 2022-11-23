@@ -30,7 +30,7 @@ public class ExampleLauncherSola extends Sola {
   private SolaGui solaGui;
 
   public ExampleLauncherSola(SolaPlatform solaPlatform) {
-    super(SolaConfiguration.build("Example Launcher", 800, 600).withTargetUpdatesPerSecond(30).withGameLoopRestingOn());
+    super(SolaConfiguration.build("Example Launcher", 800, 600).withTargetUpdatesPerSecond(30));
     this.solaPlatform = solaPlatform;
   }
 

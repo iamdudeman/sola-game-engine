@@ -98,8 +98,7 @@ public abstract class SolaPlatform {
       solaEventHub,
       deltaTime -> update(sola, deltaTime),
       () -> render(renderer, sola),
-      solaConfiguration.targetUpdatesPerSecond(),
-      solaConfiguration.isGameLoopRestingOn()
+      solaConfiguration.targetUpdatesPerSecond()
     );
 
     Runnable startGameLoopThread = () -> new Thread(gameLoop).start();
@@ -132,7 +131,7 @@ public abstract class SolaPlatform {
 
   @FunctionalInterface
   protected interface GameLoopProvider {
-    GameLoop create(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed);
+    GameLoop create(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond);
   }
 
   @FunctionalInterface

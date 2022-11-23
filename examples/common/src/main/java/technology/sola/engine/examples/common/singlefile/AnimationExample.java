@@ -17,7 +17,7 @@ public class AnimationExample extends Sola {
 
   public AnimationExample() {
     super(
-      SolaConfiguration.build("Animation Example", 200, 200).withTargetUpdatesPerSecond(30).withGameLoopRestingOn()
+      SolaConfiguration.build("Animation Example", 200, 200).withTargetUpdatesPerSecond(30)
     );
   }
 

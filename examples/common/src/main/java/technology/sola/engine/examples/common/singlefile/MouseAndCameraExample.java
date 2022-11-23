@@ -20,7 +20,7 @@ public class MouseAndCameraExample extends Sola {
   private ClickCreateEntitySystem clickCreateEntitySystem;
 
   public MouseAndCameraExample() {
-    super(SolaConfiguration.build("Mouse and Camera", 800, 600).withTargetUpdatesPerSecond(30).withGameLoopRestingOn());
+    super(SolaConfiguration.build("Mouse and Camera", 800, 600).withTargetUpdatesPerSecond(30));
   }
 
   @Override

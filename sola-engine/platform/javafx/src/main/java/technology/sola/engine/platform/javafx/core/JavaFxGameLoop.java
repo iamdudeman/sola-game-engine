@@ -9,8 +9,8 @@ import technology.sola.engine.event.EventHub;
 import java.util.function.Consumer;
 
 public class JavaFxGameLoop extends GameLoop {
-  public JavaFxGameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean isRestingAllowed) {
-    super(eventHub, updateMethod, renderMethod, targetUpdatesPerSecond, isRestingAllowed);
+  public JavaFxGameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond) {
+    super(eventHub, updateMethod, renderMethod, targetUpdatesPerSecond);
   }
 
   @Override

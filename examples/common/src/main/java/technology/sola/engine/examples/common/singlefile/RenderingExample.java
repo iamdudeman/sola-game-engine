@@ -30,7 +30,7 @@ public class RenderingExample extends Sola {
   private SolaGraphics solaGraphics;
 
   public RenderingExample() {
-    super(SolaConfiguration.build("Rendering Example", 800, 600).withTargetUpdatesPerSecond(30).withGameLoopRestingOn());
+    super(SolaConfiguration.build("Rendering Example", 800, 600).withTargetUpdatesPerSecond(30));
   }
 
   @Override

@@ -3,21 +3,21 @@ package technology.sola.engine.core;
 public record SolaConfiguration(
   String title,
   int rendererWidth, int rendererHeight,
-  int targetUpdatesPerSecond, boolean isGameLoopRestingOn
+  int targetUpdatesPerSecond
 ) {
   /**
-   * Creates a {@link SolaConfiguration} with targetUpdatePerSecond defaulted to 60 and game loop resting off.
+   * Creates a {@link SolaConfiguration} with targetUpdatePerSecond defaulted to 60.
    *
    * @param title          the title for the {@link Sola}.
    * @param rendererWidth  the width of the {@link technology.sola.engine.graphics.renderer.Renderer}
    * @param rendererHeight the height of the {@link technology.sola.engine.graphics.renderer.Renderer}
    */
   public SolaConfiguration(String title, int rendererWidth, int rendererHeight) {
-    this(title, rendererWidth, rendererHeight, 60, false);
+    this(title, rendererWidth, rendererHeight, 60);
   }
 
   /**
-   * Creates a {@link SolaConfiguration} {@link Builder} with targetUpdatePerSecond defaulted to 60 and game loop resting off.
+   * Creates a {@link SolaConfiguration} {@link Builder} with targetUpdatePerSecond defaulted to 60.
    *
    * @param title          the title for the {@link Sola}.
    * @param rendererWidth  the width of the {@link technology.sola.engine.graphics.renderer.Renderer}
@@ -32,7 +32,6 @@ public record SolaConfiguration(
     private final int rendererWidth;
     private final int rendererHeight;
     private int targetUpdatesPerSecond = 60;
-    private boolean isGameLoopRestingOn = false;
 
     private Builder(String title, int rendererWidth, int rendererHeight) {
       this.title = title;
@@ -45,17 +44,8 @@ public record SolaConfiguration(
       return this;
     }
 
-    public Builder withGameLoopRestingOn() {
-      isGameLoopRestingOn = true;
-      return this;
-    }
-
     public SolaConfiguration build() {
-      return new SolaConfiguration(
-        title, rendererWidth,
-        rendererHeight, targetUpdatesPerSecond,
-        isGameLoopRestingOn
-      );
+      return new SolaConfiguration(title, rendererWidth, rendererHeight, targetUpdatesPerSecond);
     }
   }
 }
