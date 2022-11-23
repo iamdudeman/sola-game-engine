@@ -25,6 +25,8 @@ public class CollisionDetectionSystem extends EcsSystem {
   /**
    * Creates a CollisionDetectionSystem that allows the internal spacial hash map to determine a good cell size based on
    * the entities.
+   *
+   * @param eventHub {@link EventHub} instance
    */
   public CollisionDetectionSystem(EventHub eventHub) {
     this(eventHub, null);
@@ -33,7 +35,8 @@ public class CollisionDetectionSystem extends EcsSystem {
   /**
    * Creates a CollisionDetectionSystem with custom spacial hash map cell sizing.
    *
-   * @param spatialHashMapCellSize  the cell size of the internal spacial hash map
+   * @param eventHub               {@link EventHub} instance
+   * @param spatialHashMapCellSize the cell size of the internal spacial hash map
    */
   public CollisionDetectionSystem(EventHub eventHub, Integer spatialHashMapCellSize) {
     this.eventHub = eventHub;
