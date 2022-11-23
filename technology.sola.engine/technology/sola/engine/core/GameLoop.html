@@ -119,21 +119,18 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first even-row-color"><code>protected final <a href="GameLoop.FpsTracker.html" title="class in technology.sola.engine.core">GameLoop.FpsTracker</a></code></div>
 <div class="col-second even-row-color"><code><a href="#fpsTracker" class="member-name-link">fpsTracker</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>protected final boolean</code></div>
-<div class="col-second odd-row-color"><code><a href="#isRestingAllowed" class="member-name-link">isRestingAllowed</a></code></div>
+<div class="col-first odd-row-color"><code>protected long</code></div>
+<div class="col-second odd-row-color"><code><a href="#previousLoopStartNanos" class="member-name-link">previousLoopStartNanos</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>protected long</code></div>
-<div class="col-second even-row-color"><code><a href="#previousLoopStartNanos" class="member-name-link">previousLoopStartNanos</a></code></div>
+<div class="col-first even-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a></code></div>
+<div class="col-second even-row-color"><code><a href="#renderMethod" class="member-name-link">renderMethod</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#renderMethod" class="member-name-link">renderMethod</a></code></div>
+<div class="col-first odd-row-color"><code>protected float</code></div>
+<div class="col-second odd-row-color"><code><a href="#updateCatchUpAccumulator" class="member-name-link">updateCatchUpAccumulator</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>protected float</code></div>
-<div class="col-second even-row-color"><code><a href="#updateCatchUpAccumulator" class="member-name-link">updateCatchUpAccumulator</a></code></div>
+<div class="col-first even-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Float.html" title="class or interface in java.lang" class="external-link">Float</a>&gt;</code></div>
+<div class="col-second even-row-color"><code><a href="#updateMethod" class="member-name-link">updateMethod</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Float.html" title="class or interface in java.lang" class="external-link">Float</a>&gt;</code></div>
-<div class="col-second odd-row-color"><code><a href="#updateMethod" class="member-name-link">updateMethod</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -147,11 +144,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="table-header col-second">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>protected </code></div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.event.EventHub,java.util.function.Consumer,java.lang.Runnable,int,boolean)" class="member-name-link">GameLoop</a><wbr>(<a href="../event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a>&nbsp;eventHub,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.event.EventHub,java.util.function.Consumer,java.lang.Runnable,int)" class="member-name-link">GameLoop</a><wbr>(<a href="../event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a>&nbsp;eventHub,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Float.html" title="class or interface in java.lang" class="external-link">Float</a>&gt;&nbsp;updateMethod,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;renderMethod,
- int&nbsp;targetUpdatesPerSecond,
- boolean&nbsp;isRestingAllowed)</code></div>
+ int&nbsp;targetUpdatesPerSecond)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
@@ -176,12 +172,9 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#run()" class="member-name-link">run</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#shortRest(long)" class="member-name-link">shortRest</a><wbr>(long&nbsp;loopStartTime)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stop()" class="member-name-link">stop</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stop()" class="member-name-link">stop</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -224,12 +217,6 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 </section>
 </li>
 <li>
-<section class="detail" id="isRestingAllowed">
-<h3>isRestingAllowed</h3>
-<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isRestingAllowed</span></div>
-</section>
-</li>
-<li>
 <section class="detail" id="deltaTime">
 <h3>deltaTime</h3>
 <div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">deltaTime</span></div>
@@ -256,13 +243,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(technology.sola.engine.event.EventHub,java.util.function.Consumer,java.lang.Runnable,int,boolean)">
+<section class="detail" id="&lt;init&gt;(technology.sola.engine.event.EventHub,java.util.function.Consumer,java.lang.Runnable,int)">
 <h3>GameLoop</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">GameLoop</span><wbr><span class="parameters">(<a href="../event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a>&nbsp;eventHub,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Float.html" title="class or interface in java.lang" class="external-link">Float</a>&gt;&nbsp;updateMethod,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;renderMethod,
- int&nbsp;targetUpdatesPerSecond,
- boolean&nbsp;isRestingAllowed)</span></div>
+ int&nbsp;targetUpdatesPerSecond)</span></div>
 </section>
 </li>
 </ul>
@@ -299,12 +285,6 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="stop()">
 <h3>stop</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">stop</span>()</div>
-</section>
-</li>
-<li>
-<section class="detail" id="shortRest(long)">
-<h3>shortRest</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">shortRest</span><wbr><span class="parameters">(long&nbsp;loopStartTime)</span></div>
 </section>
 </li>
 </ul>

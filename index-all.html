@@ -212,7 +212,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.html#build(java.lang.String,int,int)" class="member-name-link">build(String, int, int)</a> - Static method in record class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.html" title="class in technology.sola.engine.core">SolaConfiguration</a></dt>
 <dd>
-<div class="block">Creates a <a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.html" title="class in technology.sola.engine.core"><code>SolaConfiguration</code></a> <a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.Builder.html" title="class in technology.sola.engine.core"><code>SolaConfiguration.Builder</code></a> with targetUpdatePerSecond defaulted to 60 and game loop resting off.</div>
+<div class="block">Creates a <a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.html" title="class in technology.sola.engine.core"><code>SolaConfiguration</code></a> <a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.Builder.html" title="class in technology.sola.engine.core"><code>SolaConfiguration.Builder</code></a> with targetUpdatePerSecond defaulted to 60.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#buildGameLoop()" class="member-name-link">buildGameLoop()</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
 <dd>&nbsp;</dd>
@@ -386,7 +386,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/module/graphics/gui/SolaGui.GuiElementCreator.html#create(technology.sola.engine.core.module.graphics.gui.SolaGui,P)" class="member-name-link">create(SolaGui, P)</a> - Method in interface technology.sola.engine.core.module.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/core/module/graphics/gui/SolaGui.GuiElementCreator.html" title="interface in technology.sola.engine.core.module.graphics.gui">SolaGui.GuiElementCreator</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.GameLoopProvider.html#create(technology.sola.engine.event.EventHub,java.util.function.Consumer,java.lang.Runnable,int,boolean)" class="member-name-link">create(EventHub, Consumer&lt;Float&gt;, Runnable, int, boolean)</a> - Method in interface technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.GameLoopProvider.html" title="interface in technology.sola.engine.core">SolaPlatform.GameLoopProvider</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.GameLoopProvider.html#create(technology.sola.engine.event.EventHub,java.util.function.Consumer,java.lang.Runnable,int)" class="member-name-link">create(EventHub, Consumer&lt;Float&gt;, Runnable, int)</a> - Method in interface technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.GameLoopProvider.html" title="interface in technology.sola.engine.core">SolaPlatform.GameLoopProvider</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/module/graphics/gui/SolaGui.html#createElement(technology.sola.engine.core.module.graphics.gui.SolaGui.GuiElementCreator,java.util.function.Function)" class="member-name-link">createElement(SolaGui.GuiElementCreator&lt;T, P&gt;, Function&lt;GuiElementGlobalProperties, P&gt;)</a> - Method in class technology.sola.engine.core.module.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/core/module/graphics/gui/SolaGui.html" title="class in technology.sola.engine.core.module.graphics.gui">SolaGui</a></dt>
 <dd>&nbsp;</dd>
@@ -672,7 +672,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html" class="type-name-link" title="class in technology.sola.engine.core">GameLoop</a> - Class in <a href="technology.sola.engine/technology/sola/engine/core/package-summary.html">technology.sola.engine.core</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html#%3Cinit%3E(technology.sola.engine.event.EventHub,java.util.function.Consumer,java.lang.Runnable,int,boolean)" class="member-name-link">GameLoop(EventHub, Consumer&lt;Float&gt;, Runnable, int, boolean)</a> - Constructor for class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html" title="class in technology.sola.engine.core">GameLoop</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html#%3Cinit%3E(technology.sola.engine.event.EventHub,java.util.function.Consumer,java.lang.Runnable,int)" class="member-name-link">GameLoop(EventHub, Consumer&lt;Float&gt;, Runnable, int)</a> - Constructor for class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html" title="class in technology.sola.engine.core">GameLoop</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/GameLoop.FpsTracker.html" class="type-name-link" title="class in technology.sola.engine.core">GameLoop.FpsTracker</a> - Class in <a href="technology.sola.engine/technology/sola/engine/core/package-summary.html">technology.sola.engine.core</a></dt>
 <dd>&nbsp;</dd>
@@ -1270,10 +1270,6 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/module/graphics/gui/SolaGui.html#isFocussedElement(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">isFocussedElement(GuiElement&lt;?&gt;)</a> - Method in class technology.sola.engine.core.module.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/core/module/graphics/gui/SolaGui.html" title="class in technology.sola.engine.core.module.graphics.gui">SolaGui</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.html#isGameLoopRestingOn()" class="member-name-link">isGameLoopRestingOn()</a> - Method in record class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.html" title="class in technology.sola.engine.core">SolaConfiguration</a></dt>
-<dd>
-<div class="block">Returns the value of the <code>isGameLoopRestingOn</code> record component.</div>
-</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/DynamicBodyComponent.html#isGrounded()" class="member-name-link">isGrounded()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/DynamicBodyComponent.html" title="class in technology.sola.engine.physics.component">DynamicBodyComponent</a></dt>
 <dd>
 <div class="block">Gets whether or no this DynamicBodyComponent is considered grounded.</div>
@@ -1309,8 +1305,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/audio/AudioClip.html#isPlaying()" class="member-name-link">isPlaying()</a> - Method in interface technology.sola.engine.assets.audio.<a href="technology.sola.engine/technology/sola/engine/assets/audio/AudioClip.html" title="interface in technology.sola.engine.assets.audio">AudioClip</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/module/graphics/SolaGraphics.html#isRenderDebug()" class="member-name-link">isRenderDebug()</a> - Method in class technology.sola.engine.core.module.graphics.<a href="technology.sola.engine/technology/sola/engine/core/module/graphics/SolaGraphics.html" title="class in technology.sola.engine.core.module.graphics">SolaGraphics</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html#isRestingAllowed" class="member-name-link">isRestingAllowed</a> - Variable in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html" title="class in technology.sola.engine.core">GameLoop</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html#isRunning()" class="member-name-link">isRunning()</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html" title="class in technology.sola.engine.core">GameLoop</a></dt>
 <dd>&nbsp;</dd>
@@ -1965,8 +1959,6 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/math/linear/Matrix3D.html#sheer(float,float)" class="member-name-link">sheer(float, float)</a> - Static method in class technology.sola.math.linear.<a href="technology.sola.engine/technology/sola/math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html#shortRest(long)" class="member-name-link">shortRest(long)</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html" title="class in technology.sola.engine.core">GameLoop</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html" class="type-name-link" title="class in technology.sola.engine.graphics.renderer">SoftwareRenderer</a> - Class in <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/package-summary.html">technology.sola.engine.graphics.renderer</a></dt>
 <dd>
 <div class="block">SoftwareRenderer is a <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> implementation that draws on an in memory array of pixels using the CPU.</div>
@@ -1985,9 +1977,9 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.html#%3Cinit%3E(java.lang.String,int,int)" class="member-name-link">SolaConfiguration(String, int, int)</a> - Constructor for record class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.html" title="class in technology.sola.engine.core">SolaConfiguration</a></dt>
 <dd>
-<div class="block">Creates a <a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.html" title="class in technology.sola.engine.core"><code>SolaConfiguration</code></a> with targetUpdatePerSecond defaulted to 60 and game loop resting off.</div>
+<div class="block">Creates a <a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.html" title="class in technology.sola.engine.core"><code>SolaConfiguration</code></a> with targetUpdatePerSecond defaulted to 60.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.html#%3Cinit%3E(java.lang.String,int,int,int,boolean)" class="member-name-link">SolaConfiguration(String, int, int, int, boolean)</a> - Constructor for record class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.html" title="class in technology.sola.engine.core">SolaConfiguration</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.html#%3Cinit%3E(java.lang.String,int,int,int)" class="member-name-link">SolaConfiguration(String, int, int, int)</a> - Constructor for record class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.html" title="class in technology.sola.engine.core">SolaConfiguration</a></dt>
 <dd>
 <div class="block">Creates an instance of a <code>SolaConfiguration</code> record class.</div>
 </dd>
@@ -2591,8 +2583,6 @@ the order they are declared.</div>
 <dd>
 <div class="block">Returns the value of the <code>width</code> record component.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.Builder.html#withGameLoopRestingOn()" class="member-name-link">withGameLoopRestingOn()</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.Builder.html" title="class in technology.sola.engine.core">SolaConfiguration.Builder</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.Builder.html#withTargetUpdatesPerSecond(int)" class="member-name-link">withTargetUpdatesPerSecond(int)</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.Builder.html" title="class in technology.sola.engine.core">SolaConfiguration.Builder</a></dt>
 <dd>&nbsp;</dd>
 </dl>

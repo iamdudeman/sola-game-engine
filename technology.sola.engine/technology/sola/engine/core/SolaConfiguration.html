@@ -78,7 +78,7 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <hr>
-<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">SolaConfiguration</span>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title, int&nbsp;rendererWidth, int&nbsp;rendererHeight, int&nbsp;targetUpdatesPerSecond, boolean&nbsp;isGameLoopRestingOn)
+<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">SolaConfiguration</span>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title, int&nbsp;rendererWidth, int&nbsp;rendererHeight, int&nbsp;targetUpdatesPerSecond)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
 </section>
 <section class="summary">
@@ -110,13 +110,12 @@ loadScripts(document, 'script');</script>
  int&nbsp;rendererWidth,
  int&nbsp;rendererHeight)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Creates a <a href="SolaConfiguration.html" title="class in technology.sola.engine.core"><code>SolaConfiguration</code></a> with targetUpdatePerSecond defaulted to 60 and game loop resting off.</div>
+<div class="block">Creates a <a href="SolaConfiguration.html" title="class in technology.sola.engine.core"><code>SolaConfiguration</code></a> with targetUpdatePerSecond defaulted to 60.</div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String,int,int,int,boolean)" class="member-name-link">SolaConfiguration</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title,
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String,int,int,int)" class="member-name-link">SolaConfiguration</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title,
  int&nbsp;rendererWidth,
  int&nbsp;rendererHeight,
- int&nbsp;targetUpdatesPerSecond,
- boolean&nbsp;isGameLoopRestingOn)</code></div>
+ int&nbsp;targetUpdatesPerSecond)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Creates an instance of a <code>SolaConfiguration</code> record class.</div>
 </div>
@@ -139,7 +138,7 @@ loadScripts(document, 'script');</script>
  int&nbsp;rendererWidth,
  int&nbsp;rendererHeight)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Creates a <a href="SolaConfiguration.html" title="class in technology.sola.engine.core"><code>SolaConfiguration</code></a> <a href="SolaConfiguration.Builder.html" title="class in technology.sola.engine.core"><code>SolaConfiguration.Builder</code></a> with targetUpdatePerSecond defaulted to 60 and game loop resting off.</div>
+<div class="block">Creates a <a href="SolaConfiguration.html" title="class in technology.sola.engine.core"><code>SolaConfiguration</code></a> <a href="SolaConfiguration.Builder.html" title="class in technology.sola.engine.core"><code>SolaConfiguration.Builder</code></a> with targetUpdatePerSecond defaulted to 60.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
@@ -151,34 +150,29 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a hash code value for this object.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isGameLoopRestingOn()" class="member-name-link">isGameLoopRestingOn</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rendererHeight()" class="member-name-link">rendererHeight</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>isGameLoopRestingOn</code> record component.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rendererHeight()" class="member-name-link">rendererHeight</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <code>rendererHeight</code> record component.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rendererWidth()" class="member-name-link">rendererWidth</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rendererWidth()" class="member-name-link">rendererWidth</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <code>rendererWidth</code> record component.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#targetUpdatesPerSecond()" class="member-name-link">targetUpdatesPerSecond</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#targetUpdatesPerSecond()" class="member-name-link">targetUpdatesPerSecond</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <code>targetUpdatesPerSecond</code> record component.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#title()" class="member-name-link">title</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#title()" class="member-name-link">title</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <code>title</code> record component.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a string representation of this record class.</div>
 </div>
 </div>
@@ -204,7 +198,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SolaConfiguration</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title,
  int&nbsp;rendererWidth,
  int&nbsp;rendererHeight)</span></div>
-<div class="block">Creates a <a href="SolaConfiguration.html" title="class in technology.sola.engine.core"><code>SolaConfiguration</code></a> with targetUpdatePerSecond defaulted to 60 and game loop resting off.</div>
+<div class="block">Creates a <a href="SolaConfiguration.html" title="class in technology.sola.engine.core"><code>SolaConfiguration</code></a> with targetUpdatePerSecond defaulted to 60.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>title</code> - the title for the <a href="Sola.html" title="class in technology.sola.engine.core"><code>Sola</code></a>.</dd>
@@ -214,13 +208,12 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="&lt;init&gt;(java.lang.String,int,int,int,boolean)">
+<section class="detail" id="&lt;init&gt;(java.lang.String,int,int,int)">
 <h3>SolaConfiguration</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SolaConfiguration</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title,
  int&nbsp;rendererWidth,
  int&nbsp;rendererHeight,
- int&nbsp;targetUpdatesPerSecond,
- boolean&nbsp;isGameLoopRestingOn)</span></div>
+ int&nbsp;targetUpdatesPerSecond)</span></div>
 <div class="block">Creates an instance of a <code>SolaConfiguration</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -228,7 +221,6 @@ loadScripts(document, 'script');</script>
 <dd><code>rendererWidth</code> - the value for the <code>rendererWidth</code> record component</dd>
 <dd><code>rendererHeight</code> - the value for the <code>rendererHeight</code> record component</dd>
 <dd><code>targetUpdatesPerSecond</code> - the value for the <code>targetUpdatesPerSecond</code> record component</dd>
-<dd><code>isGameLoopRestingOn</code> - the value for the <code>isGameLoopRestingOn</code> record component</dd>
 </dl>
 </section>
 </li>
@@ -246,7 +238,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="SolaConfiguration.Builder.html" title="class in technology.sola.engine.core">SolaConfiguration.Builder</a></span>&nbsp;<span class="element-name">build</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title,
  int&nbsp;rendererWidth,
  int&nbsp;rendererHeight)</span></div>
-<div class="block">Creates a <a href="SolaConfiguration.html" title="class in technology.sola.engine.core"><code>SolaConfiguration</code></a> <a href="SolaConfiguration.Builder.html" title="class in technology.sola.engine.core"><code>SolaConfiguration.Builder</code></a> with targetUpdatePerSecond defaulted to 60 and game loop resting off.</div>
+<div class="block">Creates a <a href="SolaConfiguration.html" title="class in technology.sola.engine.core"><code>SolaConfiguration</code></a> <a href="SolaConfiguration.Builder.html" title="class in technology.sola.engine.core"><code>SolaConfiguration.Builder</code></a> with targetUpdatePerSecond defaulted to 60.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>title</code> - the title for the <a href="Sola.html" title="class in technology.sola.engine.core"><code>Sola</code></a>.</dd>
@@ -337,17 +329,6 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the value of the <code>targetUpdatesPerSecond</code> record component</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="isGameLoopRestingOn()">
-<h3>isGameLoopRestingOn</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isGameLoopRestingOn</span>()</div>
-<div class="block">Returns the value of the <code>isGameLoopRestingOn</code> record component.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>the value of the <code>isGameLoopRestingOn</code> record component</dd>
 </dl>
 </section>
 </li>
