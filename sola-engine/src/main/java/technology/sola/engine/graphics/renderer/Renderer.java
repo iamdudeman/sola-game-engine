@@ -61,6 +61,9 @@ public interface Renderer {
     }
   }
 
+  /**
+   * @return the {@link List} of {@link Layer}s this Renderer has
+   */
   List<Layer> getLayers();
 
   default Layer getLayer(String name) {
@@ -95,6 +98,14 @@ public interface Renderer {
     setPixel(x, y, new Color(color));
   }
 
+  /**
+   * Draws a string of text using the current {@link Font}.
+   *
+   * @param text  the text to draw
+   * @param x     the x coordinate to draw it at
+   * @param y     the y coordinate to draw it at
+   * @param color the {@link Color} of the text
+   */
   default void drawString(String text, float x, float y, Color color) {
     BlendMode previousBlendMode = getBlendMode();
     setBlendMode(BlendMode.MASK);
@@ -112,47 +123,56 @@ public interface Renderer {
     setBlendMode(previousBlendMode);
   }
 
+  /**
+   * Draws a line.
+   *
+   * @param x     the x coordinate of the first point
+   * @param y     the y coordinate of the first point
+   * @param x2    the x coordinate of the second point
+   * @param y2    the y coordinate of the second point
+   * @param color the {@link Color} of the line
+   */
   void drawLine(float x, float y, float x2, float y2, Color color);
 
   /**
-   * todo
+   * Draws an unfilled rectangle.
    *
    * @param x      top left coordinate x
    * @param y      top left coordinate y
-   * @param width
-   * @param height
-   * @param color
+   * @param width  width of the rectangle
+   * @param height height of the rectangle
+   * @param color  {@link Color} of the rectangle
    */
   void drawRect(float x, float y, float width, float height, Color color);
 
   /**
-   * todo
+   * Draws a filled rectangle.
    *
    * @param x      top left coordinate x
    * @param y      top left coordinate y
-   * @param width
-   * @param height
-   * @param color
+   * @param width  width of the rectangle
+   * @param height height of the rectangle
+   * @param color  {@link Color} of the rectangle
    */
   void fillRect(float x, float y, float width, float height, Color color);
 
   /**
-   * Uses Bresenham's circle drawing algorithm
+   * Draws an unfilled circle. Uses Bresenham's circle drawing algorithm.
    *
    * @param x      top left coordinate x
    * @param y      top left coordinate y
-   * @param radius
-   * @param color
+   * @param radius radius of the circle
+   * @param color  {@link Color} of the circle
    */
   void drawCircle(float x, float y, float radius, Color color);
 
   /**
-   * todo
+   * Draws a filled circle.
    *
    * @param x      top left coordinate x
    * @param y      top left coordinate y
-   * @param radius
-   * @param color
+   * @param radius radius of the circle
+   * @param color  {@link Color} of the circle
    */
   void fillCircle(float x, float y, float radius, Color color);
 

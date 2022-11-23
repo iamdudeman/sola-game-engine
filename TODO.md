@@ -1,6 +1,5 @@
 # sola-game-engine TODO list
 * Consider changing SwingSolaPlatform to not have extra render frames wasted
-* Document ~~Canvas~~, Renderer, ~~SoftwareRenderer~~
 
 ## Known Bugs List
 
