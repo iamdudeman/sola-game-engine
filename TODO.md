@@ -1,7 +1,7 @@
 # sola-game-engine TODO list
 * GuiElement
   * ~~background color generic property~~
-  * SolaGui should expose the instance of EventHub
+  * ~~SolaGui should expose the instance of EventHub~~
   * when height or width specified clamp to available space
 * Consider refactor for hover and focus styling?
 * Animation

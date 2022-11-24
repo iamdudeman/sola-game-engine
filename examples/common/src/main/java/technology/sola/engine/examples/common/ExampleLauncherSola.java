@@ -36,7 +36,7 @@ public class ExampleLauncherSola extends Sola {
 
   @Override
   protected void onInit() {
-    solaGui = SolaGui.useModule(assetLoaderProvider, platform);
+    solaGui = SolaGui.useModule(assetLoaderProvider, platform, eventHub);
     solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
     solaGui.setGuiRoot(buildGui());
   }

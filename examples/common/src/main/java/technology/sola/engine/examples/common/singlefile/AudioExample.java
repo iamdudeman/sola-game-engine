@@ -25,7 +25,7 @@ public class AudioExample extends Sola {
   protected void onInit() {
     solaInitialization.useAsyncInitialization();
     platform.getViewport().setAspectMode(AspectMode.STRETCH);
-    solaGui = SolaGui.useModule(assetLoaderProvider, platform);
+    solaGui = SolaGui.useModule(assetLoaderProvider, platform, eventHub);
 
     solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
     solaGui.globalProperties.setDefaultFontAssetId("arial");

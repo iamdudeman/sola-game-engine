@@ -6,6 +6,7 @@ import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.module.SolaModule;
+import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.properties.GuiElementProperties;
@@ -25,6 +26,7 @@ import java.util.function.Function;
 @SolaModule
 public class SolaGui {
   public final GuiElementGlobalProperties globalProperties;
+  public final EventHub eventHub;
   private final AssetLoaderProvider assetLoaderProvider;
   private GuiElement<?> rootGuiElement;
   private GuiElement<?> focussedElement;
@@ -36,10 +38,11 @@ public class SolaGui {
    *
    * @param assetLoaderProvider the {@link AssetLoaderProvider} to load the {@code Font}
    * @param platform            the {@link SolaPlatform} instance
+   * @param eventHub            the {@link EventHub} instance
    * @return this
    */
-  public static SolaGui useModule(AssetLoaderProvider assetLoaderProvider, SolaPlatform platform) {
-    SolaGui solaGui = new SolaGui(assetLoaderProvider);
+  public static SolaGui useModule(AssetLoaderProvider assetLoaderProvider, SolaPlatform platform, EventHub eventHub) {
+    SolaGui solaGui = new SolaGui(assetLoaderProvider, eventHub);
 
     solaGui.renderer = platform.getRenderer();
     platform.onKeyPressed(solaGui::onKeyPressed);
@@ -70,7 +73,8 @@ public class SolaGui {
     GuiElementCreator<T, P> elementCreator,
     Function<GuiElementGlobalProperties, P> elementPropertiesConstructor
   ) {
-    return createElement(elementCreator, elementPropertiesConstructor, p -> {});
+    return createElement(elementCreator, elementPropertiesConstructor, p -> {
+    });
   }
 
   public <T extends GuiElement<P>, P extends GuiElementProperties> T createElement(
@@ -153,8 +157,9 @@ public class SolaGui {
     return clazz.cast(guiElement);
   }
 
-  private SolaGui(AssetLoaderProvider assetLoaderProvider) {
+  private SolaGui(AssetLoaderProvider assetLoaderProvider, EventHub eventHub) {
     this.assetLoaderProvider = assetLoaderProvider;
+    this.eventHub = eventHub;
     this.globalProperties = new GuiElementGlobalProperties(() -> rootGuiElement);
   }
 
