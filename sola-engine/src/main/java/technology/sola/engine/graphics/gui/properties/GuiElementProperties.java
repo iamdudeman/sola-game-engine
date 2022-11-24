@@ -13,6 +13,8 @@ public class GuiElementProperties {
   private boolean isFocusable = true;
   private Color borderColor;
   private Color hoverBorderColor;
+  private Color backgroundColor;
+  private Color hoverBackgroundColor;
   private Integer width;
   private Integer height;
 
@@ -97,6 +99,26 @@ public class GuiElementProperties {
 
   public GuiElementProperties setHoverBorderColor(Color hoverBorderColor) {
     this.hoverBorderColor = hoverBorderColor;
+    return this;
+  }
+
+  public Color getBackgroundColor() {
+    return backgroundColor;
+  }
+
+  public GuiElementProperties setBackgroundColor(Color backgroundColor) {
+    this.backgroundColor = backgroundColor;
+
+    return this;
+  }
+
+  public Color getHoverBackgroundColor() {
+    return hoverBackgroundColor;
+  }
+
+  public GuiElementProperties setHoverBackgroundColor(Color hoverBackgroundColor) {
+    this.hoverBackgroundColor = hoverBackgroundColor;
+
     return this;
   }
 

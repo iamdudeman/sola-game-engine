@@ -71,6 +71,14 @@ public abstract class GuiElement<T extends GuiElementProperties> {
     if (!properties.isHidden()) {
       int borderOffset = properties.getBorderColor() == null ? 0 : 1;
 
+      if (properties.getBackgroundColor() != null) {
+        renderer.fillRect(
+          x + borderOffset, y + borderOffset,
+          getWidth() - borderOffset, getHeight() - borderOffset,
+          isHovered() ? properties.getHoverBackgroundColor() : properties.getBackgroundColor()
+        );
+      }
+
       renderSelf(renderer, x + borderOffset + properties.padding.getLeft(), y + borderOffset + properties.padding.getTop());
 
       if (properties.getBorderColor() != null) {

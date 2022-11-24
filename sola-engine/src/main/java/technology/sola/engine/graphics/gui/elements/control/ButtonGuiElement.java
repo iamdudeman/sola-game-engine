@@ -33,16 +33,12 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
   @Override
   public void renderSelf(Renderer renderer, int x, int y) {
     Properties properties = properties();
-    int width = getWidth();
-    int height = getHeight();
-
     Color baseTextColor = properties.getColorText();
 
     if (isHovered()) {
       properties.setColorText(properties.colorTextHover);
     }
 
-    renderer.fillRect(x - properties.padding.getLeft(), y - properties.padding.getTop(), width, height, isHovered() ? properties.colorBackgroundHover : properties.colorBackground);
     super.renderSelf(renderer, x, y);
 
     properties.setColorText(baseTextColor);
@@ -81,34 +77,17 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
   }
 
   public static class Properties extends BaseTextGuiElement.Properties {
-    private Color colorBackground = Color.DARK_GRAY;
-    private Color colorBackgroundHover = Color.WHITE;
     private Color colorTextHover = Color.DARK_GRAY;
 
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
+      setBackgroundColor(Color.DARK_GRAY);
+      setHoverBackgroundColor(Color.WHITE);
+
       setFocusable(true);
       setBorderColor(Color.WHITE);
       setHoverBorderColor(Color.DARK_GRAY);
       setFocusOutlineColor(Color.LIGHT_BLUE);
-    }
-
-    public Color getColorBackground() {
-      return colorBackground;
-    }
-
-    public Properties setColorBackground(Color colorBackground) {
-      this.colorBackground = colorBackground;
-      return this;
-    }
-
-    public Color getColorBackgroundHover() {
-      return colorBackgroundHover;
-    }
-
-    public Properties setColorBackgroundHover(Color colorBackgroundHover) {
-      this.colorBackgroundHover = colorBackgroundHover;
-      return this;
     }
 
     public Color getColorTextHover() {

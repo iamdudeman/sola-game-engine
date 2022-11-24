@@ -55,7 +55,8 @@ public class GuiExample extends Sola {
     StreamGuiElementContainer firstSubContainer = solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.WHITE).padding.set(5)
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.RED).padding.set(5)
+        .setBackgroundColor(Color.WHITE)
     );
     firstSubContainer.addChild(
       solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Sub First")),
@@ -81,7 +82,7 @@ public class GuiExample extends Sola {
       ButtonGuiElement.Properties::new,
       p -> p.margin.setRight(15).setWidth(30).setHeight(30)
     );
-    checkButton.setOnAction(() -> checkButton.properties().setColorBackground(checkButton.properties().getColorBackground().equals(Color.RED) ? new Color(128, 128, 128) : Color.RED));
+    checkButton.setOnAction(() -> checkButton.properties().setBackgroundColor(checkButton.properties().getBackgroundColor().equals(Color.RED) ? new Color(128, 128, 128) : Color.RED));
 
     ButtonGuiElement toggleOtherButton = solaGui.createElement(
       ButtonGuiElement::new,
