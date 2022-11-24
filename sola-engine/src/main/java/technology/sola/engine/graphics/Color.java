@@ -8,6 +8,7 @@ public class Color implements Serializable {
   public static final Color BLACK = new Color(255, 0, 0, 0);
   public static final Color BLANK = new Color(0, 0, 0, 0);
   public static final Color BLUE = new Color(255, 0, 0, 255);
+  public static final Color DARK_GRAY = new Color(255, 169, 169, 169);
   public static final Color GREEN = new Color(255, 0, 255, 0);
   public static final Color ORANGE = new Color(255, 255, 165, 0);
   public static final Color RED = new Color(255, 255, 0, 0);

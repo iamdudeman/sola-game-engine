@@ -81,15 +81,15 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
   }
 
   public static class Properties extends BaseTextGuiElement.Properties {
-    private Color colorBackground = new Color(128, 128, 128);
+    private Color colorBackground = Color.DARK_GRAY;
     private Color colorBackgroundHover = Color.WHITE;
-    private Color colorTextHover = new Color(128, 128, 128);
+    private Color colorTextHover = Color.DARK_GRAY;
 
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
       setFocusable(true);
       setBorderColor(Color.WHITE);
-      setHoverBorderColor(new Color(128, 128, 128));
+      setHoverBorderColor(Color.DARK_GRAY);
       setFocusOutlineColor(Color.LIGHT_BLUE);
     }
 
