@@ -4,7 +4,7 @@ import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
-import technology.sola.engine.graphics.gui.properties.GuiElementProperties;
+import technology.sola.engine.graphics.gui.properties.DefaultGuiElementProperties;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 
@@ -69,7 +69,7 @@ public class ImageGuiElement extends GuiElement<ImageGuiElement.Properties> {
     }
   }
 
-  public static class Properties extends GuiElementProperties {
+  public static class Properties extends DefaultGuiElementProperties {
     private String assetId;
 
     public Properties(GuiElementGlobalProperties globalProperties) {

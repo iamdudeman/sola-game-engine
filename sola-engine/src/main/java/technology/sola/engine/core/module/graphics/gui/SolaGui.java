@@ -8,8 +8,8 @@ import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.module.SolaModule;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
-import technology.sola.engine.graphics.gui.properties.GuiElementProperties;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.KeyEvent;
@@ -69,7 +69,7 @@ public class SolaGui {
     }
   }
 
-  public <T extends GuiElement<P>, P extends GuiElementProperties> T createElement(
+  public <T extends GuiElement<P>, P extends GuiElementBaseProperties<?>> T createElement(
     GuiElementCreator<T, P> elementCreator,
     Function<GuiElementGlobalProperties, P> elementPropertiesConstructor
   ) {
@@ -77,7 +77,7 @@ public class SolaGui {
     });
   }
 
-  public <T extends GuiElement<P>, P extends GuiElementProperties> T createElement(
+  public <T extends GuiElement<P>, P extends GuiElementBaseProperties<?>> T createElement(
     GuiElementCreator<T, P> elementCreator,
     Function<GuiElementGlobalProperties, P> elementPropertiesConstructor,
     Consumer<P> propertiesInitializer
@@ -163,7 +163,7 @@ public class SolaGui {
     this.globalProperties = new GuiElementGlobalProperties(() -> rootGuiElement);
   }
 
-  public interface GuiElementCreator<T extends GuiElement<P>, P extends GuiElementProperties> {
+  public interface GuiElementCreator<T extends GuiElement<P>, P extends GuiElementBaseProperties<?>> {
     T create(SolaGui solaGui, P properties);
   }
 }

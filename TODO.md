@@ -2,8 +2,8 @@
 * GuiElement
   * ~~background color generic property~~
   * ~~SolaGui should expose the instance of EventHub~~
-  * when height or width specified clamp to available space
-* Consider refactor for hover and focus styling?
+  * Consider when height or width specified clamp to available space?
+* ~~Consider refactor for hover styling~~?
 * Animation
   * ability to manually set Sprite for sprite animation component
     * ie. resizing existing sprite to be smaller

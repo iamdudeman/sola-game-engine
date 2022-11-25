@@ -2,9 +2,10 @@ package technology.sola.engine.graphics.gui.properties;
 
 import technology.sola.engine.graphics.Color;
 
-public class GuiElementProperties {
+public class GuiElementBaseProperties<GuiElementHoverProperties extends GuiElementBaseHoverProperties> {
   public final Bounds margin = new Bounds();
   public final Bounds padding = new Bounds();
+  public final GuiElementHoverProperties hover;
   protected final GuiElementGlobalProperties globalProperties;
   private boolean isLayoutChanged = true;
   private String id;
@@ -12,21 +13,20 @@ public class GuiElementProperties {
   private boolean isHidden;
   private boolean isFocusable = true;
   private Color borderColor;
-  private Color hoverBorderColor;
   private Color backgroundColor;
-  private Color hoverBackgroundColor;
   private Integer width;
   private Integer height;
 
-  public GuiElementProperties(GuiElementGlobalProperties globalProperties) {
+  public GuiElementBaseProperties(GuiElementGlobalProperties globalProperties, GuiElementHoverProperties hoverProperties) {
     this.globalProperties = globalProperties;
+    this.hover = hoverProperties;
   }
 
   public boolean isLayoutChanged() {
     return isLayoutChanged;
   }
 
-  public GuiElementProperties setLayoutChanged(boolean layoutChanged) {
+  public GuiElementBaseProperties<GuiElementHoverProperties> setLayoutChanged(boolean layoutChanged) {
     this.isLayoutChanged = layoutChanged;
 
     return this;
@@ -36,7 +36,7 @@ public class GuiElementProperties {
     return id;
   }
 
-  public GuiElementProperties setId(String id) {
+  public GuiElementBaseProperties<GuiElementHoverProperties> setId(String id) {
     this.id = id;
 
     return this;
@@ -46,7 +46,7 @@ public class GuiElementProperties {
     return isHidden;
   }
 
-  public GuiElementProperties setHidden(boolean hidden) {
+  public GuiElementBaseProperties<GuiElementHoverProperties> setHidden(boolean hidden) {
     isHidden = hidden;
 
     return this;
@@ -56,7 +56,7 @@ public class GuiElementProperties {
     return isFocusable && !isHidden();
   }
 
-  public GuiElementProperties setFocusable(boolean focusable) {
+  public GuiElementBaseProperties<GuiElementHoverProperties> setFocusable(boolean focusable) {
     isFocusable = focusable;
 
     return this;
@@ -66,7 +66,7 @@ public class GuiElementProperties {
     return focusOutlineColor;
   }
 
-  public GuiElementProperties setFocusOutlineColor(Color focusOutlineColor) {
+  public GuiElementBaseProperties<GuiElementHoverProperties> setFocusOutlineColor(Color focusOutlineColor) {
     this.focusOutlineColor = focusOutlineColor;
 
     return this;
@@ -76,7 +76,7 @@ public class GuiElementProperties {
     return borderColor;
   }
 
-  public GuiElementProperties setBorderColor(Color borderColor) {
+  public GuiElementBaseProperties<GuiElementHoverProperties> setBorderColor(Color borderColor) {
     if (this.borderColor == null && borderColor != null) {
       setLayoutChanged(true);
     } else if (this.borderColor != null && borderColor == null) {
@@ -87,37 +87,12 @@ public class GuiElementProperties {
     return this;
   }
 
-  /**
-   * Note: hover border color will only render if there is also a border color set. If no hover color is set it will
-   * default to the current border color.
-   *
-   * @return the border color for when the {@link technology.sola.engine.graphics.gui.GuiElement} is hovered
-   */
-  public Color getHoverBorderColor() {
-    return hoverBorderColor == null ? getBorderColor() : hoverBorderColor;
-  }
-
-  public GuiElementProperties setHoverBorderColor(Color hoverBorderColor) {
-    this.hoverBorderColor = hoverBorderColor;
-    return this;
-  }
-
   public Color getBackgroundColor() {
     return backgroundColor;
   }
 
-  public GuiElementProperties setBackgroundColor(Color backgroundColor) {
+  public GuiElementBaseProperties<GuiElementHoverProperties> setBackgroundColor(Color backgroundColor) {
     this.backgroundColor = backgroundColor;
-
-    return this;
-  }
-
-  public Color getHoverBackgroundColor() {
-    return hoverBackgroundColor;
-  }
-
-  public GuiElementProperties setHoverBackgroundColor(Color hoverBackgroundColor) {
-    this.hoverBackgroundColor = hoverBackgroundColor;
 
     return this;
   }
@@ -126,7 +101,7 @@ public class GuiElementProperties {
     return width;
   }
 
-  public GuiElementProperties setWidth(Integer width) {
+  public GuiElementBaseProperties<GuiElementHoverProperties> setWidth(Integer width) {
     this.width = width;
     setLayoutChanged(true);
 
@@ -137,7 +112,7 @@ public class GuiElementProperties {
     return height;
   }
 
-  public GuiElementProperties setHeight(Integer height) {
+  public GuiElementBaseProperties<GuiElementHoverProperties> setHeight(Integer height) {
     this.height = height;
     setLayoutChanged(true);
 
@@ -150,24 +125,24 @@ public class GuiElementProperties {
     private int bottom;
     private int left;
 
-    public GuiElementProperties set(int top, int right, int bottom, int left) {
+    public GuiElementBaseProperties<GuiElementHoverProperties> set(int top, int right, int bottom, int left) {
       setTop(top);
       setRight(right);
       setBottom(bottom);
       setLeft(left);
 
-      return GuiElementProperties.this;
+      return GuiElementBaseProperties.this;
     }
 
-    public GuiElementProperties set(int top, int leftAndRight, int bottom) {
+    public GuiElementBaseProperties<GuiElementHoverProperties> set(int top, int leftAndRight, int bottom) {
       return set(top, leftAndRight, bottom, leftAndRight);
     }
 
-    public GuiElementProperties set(int topAndBottom, int leftAndRight) {
+    public GuiElementBaseProperties<GuiElementHoverProperties> set(int topAndBottom, int leftAndRight) {
       return set(topAndBottom, leftAndRight, topAndBottom, leftAndRight);
     }
 
-    public GuiElementProperties set(int value) {
+    public GuiElementBaseProperties<GuiElementHoverProperties> set(int value) {
       return set(value, value, value, value);
     }
 
@@ -175,44 +150,44 @@ public class GuiElementProperties {
       return top;
     }
 
-    public GuiElementProperties setTop(int top) {
+    public GuiElementBaseProperties<GuiElementHoverProperties> setTop(int top) {
       this.top = top;
       setLayoutChanged(true);
 
-      return GuiElementProperties.this;
+      return GuiElementBaseProperties.this;
     }
 
     public int getRight() {
       return right;
     }
 
-    public GuiElementProperties setRight(int right) {
+    public GuiElementBaseProperties<GuiElementHoverProperties> setRight(int right) {
       this.right = right;
       setLayoutChanged(true);
 
-      return GuiElementProperties.this;
+      return GuiElementBaseProperties.this;
     }
 
     public int getBottom() {
       return bottom;
     }
 
-    public GuiElementProperties setBottom(int bottom) {
+    public GuiElementBaseProperties<GuiElementHoverProperties> setBottom(int bottom) {
       this.bottom = bottom;
       setLayoutChanged(true);
 
-      return GuiElementProperties.this;
+      return GuiElementBaseProperties.this;
     }
 
     public int getLeft() {
       return left;
     }
 
-    public GuiElementProperties setLeft(int left) {
+    public GuiElementBaseProperties<GuiElementHoverProperties> setLeft(int left) {
       this.left = left;
       setLayoutChanged(true);
 
-      return GuiElementProperties.this;
+      return GuiElementBaseProperties.this;
     }
   }
 }

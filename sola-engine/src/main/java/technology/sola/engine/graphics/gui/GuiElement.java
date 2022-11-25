@@ -2,7 +2,7 @@ package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
-import technology.sola.engine.graphics.gui.properties.GuiElementProperties;
+import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.math.geometry.Rectangle;
@@ -10,7 +10,7 @@ import technology.sola.math.linear.Vector2D;
 
 import java.util.function.Consumer;
 
-public abstract class GuiElement<T extends GuiElementProperties> {
+public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
   protected final SolaGui solaGui;
   protected final T properties;
   private int x;
@@ -75,17 +75,17 @@ public abstract class GuiElement<T extends GuiElementProperties> {
         renderer.fillRect(
           x + borderOffset, y + borderOffset,
           getWidth() - borderOffset, getHeight() - borderOffset,
-          isHovered() ? properties.getHoverBackgroundColor() : properties.getBackgroundColor()
+          isHovered() ? properties.hover.getBackgroundColor() : properties.getBackgroundColor()
         );
       }
 
       renderSelf(renderer, x + borderOffset + properties.padding.getLeft(), y + borderOffset + properties.padding.getTop());
 
       if (properties.getBorderColor() != null) {
-        renderer.drawRect(x, y, getWidth(), getHeight(), isHovered() ? properties.getHoverBorderColor() : properties.getBorderColor());
+        renderer.drawRect(x, y, getWidth(), getHeight(), isHovered() ? properties.hover.getBorderColor() : properties.getBorderColor());
       }
 
-      if (properties.getFocusOutlineColor() != null && isFocussed()) {
+      if (isFocussed() && properties.getFocusOutlineColor() != null) {
         renderer.drawRect(x - 1, y - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
       }
     }
