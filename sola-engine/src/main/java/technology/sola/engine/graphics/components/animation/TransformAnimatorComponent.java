@@ -11,15 +11,40 @@ public class TransformAnimatorComponent implements Component {
 
   private EasingFunction easingFunction;
   private long duration;
+  private AnimationCompleteCallback animationCompleteCallback;
 
   private float startingTranslateX;
   private float startingTranslateY;
   private float startingScaleX;
   private float startingScaleY;
   private boolean isInit = false;
+  private float elapsedTime = 0;
 
   public TransformAnimatorComponent(EasingFunction easingFunction, long duration) {
     // todo need ability to set destination (ie. x,y 50,50)
+  }
+
+  public TransformAnimatorComponent setAnimationCompleteCallback(AnimationCompleteCallback animationCompleteCallback) {
+    this.animationCompleteCallback = animationCompleteCallback;
+
+    return this;
+  }
+
+  public TransformAnimatorComponent reverse() {
+    // todo implement
+    throw new RuntimeException("not yet implemented");
+  }
+
+  public void tickAnimation(TransformComponent transformComponent, float deltaTime) {
+    if (!isInit) {
+      initialize(transformComponent);
+      isInit = true;
+    } else {
+      elapsedTime += deltaTime;
+      // todo update transform stuff
+    }
+
+    // todo call callback when animation finished
   }
 
   private void initialize(TransformComponent transformComponent) {
@@ -29,21 +54,13 @@ public class TransformAnimatorComponent implements Component {
     startingScaleX = transformComponent.getScaleY();
   }
 
-  public void tickAnimation(TransformComponent transformComponent, float deltaTime) {
-    if (!isInit) {
-      initialize(transformComponent);
-      isInit = true;
-    }
-
-    // todo update transform stuff
-  }
 
   @FunctionalInterface
   public interface AnimationCompleteCallback {
     void onComplete();
   }
 
-  // todo need easing function to set this
+  // todo implement a few default easing functions
   //  linear - (x)
   //  ease-in - (x^2)
   //  ease-out - (1 - (x - 1)^2)

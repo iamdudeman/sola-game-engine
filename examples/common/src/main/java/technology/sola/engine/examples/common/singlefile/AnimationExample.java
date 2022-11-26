@@ -43,6 +43,8 @@ public class AnimationExample extends Sola {
     World world = new World(50);
 
     for (int i = 0; i < 6; i++) {
+      final boolean showMessage = i == 0;
+
       world.createEntity()
         .addComponent(new TransformComponent(5 + (i * 20f), 5))
         .addComponent(new SpriteComponent("test", "blue"))
@@ -55,7 +57,11 @@ public class AnimationExample extends Sola {
           new SpriteKeyFrame("test", "lime", 750),
           new SpriteKeyFrame("test", "orange", 750),
           new SpriteKeyFrame("test", "maroon", 750)
-        ).setAnimationCompleteCallback(animationId -> System.out.println("Completed " + animationId)));
+        ).setAnimationCompleteCallback(animationId -> {
+          if (showMessage) {
+            System.out.println("Completed " + animationId);
+          }
+        }));
     }
 
     world.createEntity()

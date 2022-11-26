@@ -5,7 +5,7 @@
     * ~~Callback for when finished~~
 * Implement TransformAnimatorComponent
   * Ability to animate to a translate and scale
-  * Ability to restart
+  * Ability to create reverse
   * Callback for when finished
   * implement TransformAnimatorSystem
     * ~~Add to SolaGraphics -> SpriteGraphics~~
