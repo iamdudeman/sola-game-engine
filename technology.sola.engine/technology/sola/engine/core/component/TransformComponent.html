@@ -172,10 +172,17 @@ implements technology.sola.ecs.Component</span></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParent(technology.sola.ecs.Entity)" class="member-name-link">setParent</a><wbr>(technology.sola.ecs.Entity&nbsp;entity)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setScaleX(float)" class="member-name-link">setScaleX</a><wbr>(float&nbsp;scaleX)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setScale(float)" class="member-name-link">setScale</a><wbr>(float&nbsp;scale)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setScaleY(float)" class="member-name-link">setScaleY</a><wbr>(float&nbsp;scaleY)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setScaleX(float)" class="member-name-link">setScaleX</a><wbr>(float&nbsp;scaleX)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setScaleY(float)" class="member-name-link">setScaleY</a><wbr>(float&nbsp;scaleY)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTranslate(float,float)" class="member-name-link">setTranslate</a><wbr>(float&nbsp;x,
+ float&nbsp;y)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTranslate(technology.sola.math.linear.Vector2D)" class="member-name-link">setTranslate</a><wbr>(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;translate)</code></div>
@@ -288,20 +295,12 @@ implements technology.sola.ecs.Component</span></div>
 <section class="detail" id="getX()">
 <h3>getX</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getX</span>()</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>x coordinate of center of <code>Entity</code></dd>
-</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getY()">
 <h3>getY</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getY</span>()</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>y coordinate of center of <code>Entity</code></dd>
-</dl>
 </section>
 </li>
 <li>
@@ -314,6 +313,13 @@ implements technology.sola.ecs.Component</span></div>
 <section class="detail" id="setTranslate(technology.sola.math.linear.Vector2D)">
 <h3>setTranslate</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setTranslate</span><wbr><span class="parameters">(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;translate)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="setTranslate(float,float)">
+<h3>setTranslate</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setTranslate</span><wbr><span class="parameters">(float&nbsp;x,
+ float&nbsp;y)</span></div>
 </section>
 </li>
 <li>
@@ -344,6 +350,12 @@ implements technology.sola.ecs.Component</span></div>
 <section class="detail" id="setY(float)">
 <h3>setY</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setY</span><wbr><span class="parameters">(float&nbsp;y)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="setScale(float)">
+<h3>setScale</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setScale</span><wbr><span class="parameters">(float&nbsp;scale)</span></div>
 </section>
 </li>
 <li>
