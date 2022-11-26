@@ -65,7 +65,6 @@ public class ImageGuiElement extends GuiElement<ImageGuiElement.Properties> {
     if (transformedImage != null) {
       renderer.setBlendMode(BlendMode.MASK);
       renderer.drawImage(transformedImage, x, y);
-      renderer.setBlendMode(BlendMode.NO_BLENDING);
     }
   }
 

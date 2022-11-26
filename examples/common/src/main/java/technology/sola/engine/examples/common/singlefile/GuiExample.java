@@ -56,7 +56,7 @@ public class GuiExample extends Sola {
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
       p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.RED).padding.set(5)
-        .setBackgroundColor(Color.WHITE)
+        .setBackgroundColor(new Color(100, 50, 50, 255))
     );
     firstSubContainer.addChild(
       solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Sub First")),
