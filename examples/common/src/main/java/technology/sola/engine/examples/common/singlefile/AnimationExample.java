@@ -40,7 +40,7 @@ public class AnimationExample extends Sola {
   }
 
   private World buildWorld() {
-    World world = new World(14);
+    World world = new World(50);
 
     for (int i = 0; i < 6; i++) {
       world.createEntity()
@@ -48,13 +48,14 @@ public class AnimationExample extends Sola {
         .addComponent(new SpriteComponent("test", "blue"))
         .addComponent(new SpriteAnimatorComponent(
           "first",
+          2,
           new SpriteKeyFrame("test", "blue", 750),
           new SpriteKeyFrame("test", "purple", 750),
           new SpriteKeyFrame("test", "brown", 750),
           new SpriteKeyFrame("test", "lime", 750),
           new SpriteKeyFrame("test", "orange", 750),
           new SpriteKeyFrame("test", "maroon", 750)
-        ));
+        ).setAnimationCompleteCallback(animationId -> System.out.println("Completed " + animationId)));
     }
 
     world.createEntity()
