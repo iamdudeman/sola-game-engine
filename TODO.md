@@ -10,10 +10,6 @@
 
 ## TODO List
 
-* Animation
-  * ability to manually set Sprite for sprite animation component
-    * ie. resizing existing sprite to be smaller
-  * maybe expose transform as an animatable property for sprite animation component
 * Rendering
   * Ability to change line width when drawing
   * Implement more BlendModes

@@ -61,16 +61,10 @@ public class TransformComponent implements Component {
     }
   }
 
-  /**
-   * @return x coordinate of center of {@link technology.sola.ecs.Entity}
-   */
   public float getX() {
     return parentTransformComponent == null ? x : x + parentTransformComponent.getX();
   }
 
-  /**
-   * @return y coordinate of center of {@link technology.sola.ecs.Entity}
-   */
   public float getY() {
     return parentTransformComponent == null ? y : y + parentTransformComponent.getY();
   }
@@ -80,8 +74,13 @@ public class TransformComponent implements Component {
   }
 
   public void setTranslate(Vector2D translate) {
-    this.x = translate.x();
-    this.y = translate.y();
+    setX(translate.x());
+    setY(translate.y());
+  }
+
+  public void setTranslate(float x, float y) {
+    setX(x);
+    setY(y);
   }
 
   public float getScaleX() {
@@ -102,6 +101,11 @@ public class TransformComponent implements Component {
 
   public void setY(float y) {
     this.y = y;
+  }
+
+  public void setScale(float scale) {
+    setScaleX(scale);
+    setScaleY(scale);
   }
 
   public void setScaleX(float scaleX) {
