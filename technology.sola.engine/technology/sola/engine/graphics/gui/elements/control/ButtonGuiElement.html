@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="../../../../../../../../script-dir/jquery-ui.min.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../../../../../jquery-ui.overrides.css" title="Style">
 <script type="text/javascript" src="../../../../../../../../script.js"></script>
-<script type="text/javascript" src="../../../../../../../../script-dir/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="../../../../../../../../script-dir/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="../../../../../../../../script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="class-declaration-page">
@@ -100,7 +100,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="inherited-list">
 <h2 id="nested-classes-inherited-from-class-technology.sola.engine.graphics.gui.elements.BaseTextGuiElement">Nested classes/interfaces inherited from class&nbsp;technology.sola.engine.graphics.gui.elements.<a href="../BaseTextGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements">BaseTextGuiElement</a></h2>
-<code><a href="../BaseTextGuiElement.TextAlign.html" title="enum class in technology.sola.engine.graphics.gui.elements">BaseTextGuiElement.TextAlign</a></code></div>
+<code><a href="../BaseTextGuiElement.HoverProperties.html" title="class in technology.sola.engine.graphics.gui.elements">BaseTextGuiElement.HoverProperties</a>, <a href="../BaseTextGuiElement.TextAlign.html" title="enum class in technology.sola.engine.graphics.gui.elements">BaseTextGuiElement.TextAlign</a></code></div>
 </section>
 </li>
 <!-- =========== FIELD SUMMARY =========== -->
@@ -138,28 +138,23 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#renderSelf(technology.sola.engine.graphics.renderer.Renderer,int,int)" class="member-name-link">renderSelf</a><wbr>(<a href="../../../renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
- int&nbsp;x,
- int&nbsp;y)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOnAction(java.lang.Runnable)" class="member-name-link">setOnAction</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;onActionConsumer)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOnAction(java.lang.Runnable)" class="member-name-link">setOnAction</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;onActionConsumer)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOnMouseDownCallback(java.util.function.Consumer)" class="member-name-link">setOnMouseDownCallback</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../../../../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&gt;&nbsp;callback)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOnMouseDownCallback(java.util.function.Consumer)" class="member-name-link">setOnMouseDownCallback</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../../../../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&gt;&nbsp;callback)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOnMouseExitCallback(java.util.function.Consumer)" class="member-name-link">setOnMouseExitCallback</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../../../../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&gt;&nbsp;callback)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOnMouseExitCallback(java.util.function.Consumer)" class="member-name-link">setOnMouseExitCallback</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../../../../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&gt;&nbsp;callback)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOnMouseUpCallback(java.util.function.Consumer)" class="member-name-link">setOnMouseUpCallback</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../../../../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&gt;&nbsp;callback)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOnMouseUpCallback(java.util.function.Consumer)" class="member-name-link">setOnMouseUpCallback</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../../../../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&gt;&nbsp;callback)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-technology.sola.engine.graphics.gui.elements.BaseTextGuiElement">Methods inherited from class&nbsp;technology.sola.engine.graphics.gui.elements.<a href="../BaseTextGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements">BaseTextGuiElement</a></h3>
-<code><a href="../BaseTextGuiElement.html#getContentHeight()">getContentHeight</a>, <a href="../BaseTextGuiElement.html#getContentWidth()">getContentWidth</a>, <a href="../BaseTextGuiElement.html#recalculateLayout()">recalculateLayout</a></code></div>
+<code><a href="../BaseTextGuiElement.html#getContentHeight()">getContentHeight</a>, <a href="../BaseTextGuiElement.html#getContentWidth()">getContentWidth</a>, <a href="../BaseTextGuiElement.html#recalculateLayout()">recalculateLayout</a>, <a href="../BaseTextGuiElement.html#renderSelf(technology.sola.engine.graphics.renderer.Renderer,int,int)">renderSelf</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-technology.sola.engine.graphics.gui.GuiElement">Methods inherited from class&nbsp;technology.sola.engine.graphics.gui.<a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a></h3>
 <code><a href="../../GuiElement.html#getElementById(java.lang.String)">getElementById</a>, <a href="../../GuiElement.html#getHeight()">getHeight</a>, <a href="../../GuiElement.html#getWidth()">getWidth</a>, <a href="../../GuiElement.html#getX()">getX</a>, <a href="../../GuiElement.html#getY()">getY</a>, <a href="../../GuiElement.html#handleKeyEvent(technology.sola.engine.graphics.gui.event.GuiKeyEvent)">handleKeyEvent</a>, <a href="../../GuiElement.html#handleMouseEvent(technology.sola.engine.input.MouseEvent,java.lang.String)">handleMouseEvent</a>, <a href="../../GuiElement.html#isFocussed()">isFocussed</a>, <a href="../../GuiElement.html#isHovered()">isHovered</a>, <a href="../../GuiElement.html#isLayoutChanged()">isLayoutChanged</a>, <a href="../../GuiElement.html#onKeyPress(technology.sola.engine.graphics.gui.event.GuiKeyEvent)">onKeyPress</a>, <a href="../../GuiElement.html#onKeyRelease(technology.sola.engine.graphics.gui.event.GuiKeyEvent)">onKeyRelease</a>, <a href="../../GuiElement.html#onMouseDown(technology.sola.engine.input.MouseEvent)">onMouseDown</a>, <a href="../../GuiElement.html#onMouseEnter(technology.sola.engine.input.MouseEvent)">onMouseEnter</a>, <a href="../../GuiElement.html#onMouseExit(technology.sola.engine.input.MouseEvent)">onMouseExit</a>, <a href="../../GuiElement.html#onMouseUp(technology.sola.engine.input.MouseEvent)">onMouseUp</a>, <a href="../../GuiElement.html#properties()">properties</a>, <a href="../../GuiElement.html#render(technology.sola.engine.graphics.renderer.Renderer)">render</a>, <a href="../../GuiElement.html#requestFocus()">requestFocus</a>, <a href="../../GuiElement.html#setOnKeyPressCallback(java.util.function.Consumer)">setOnKeyPressCallback</a>, <a href="../../GuiElement.html#setOnKeyReleaseCallback(java.util.function.Consumer)">setOnKeyReleaseCallback</a>, <a href="../../GuiElement.html#setOnMouseEnterCallback(java.util.function.Consumer)">setOnMouseEnterCallback</a>, <a href="../../GuiElement.html#setPosition(int,int)">setPosition</a></code></div>
@@ -192,18 +187,6 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
-<li>
-<section class="detail" id="renderSelf(technology.sola.engine.graphics.renderer.Renderer,int,int)">
-<h3>renderSelf</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">renderSelf</span><wbr><span class="parameters">(<a href="../../../renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
- int&nbsp;x,
- int&nbsp;y)</span></div>
-<dl class="notes">
-<dt>Overrides:</dt>
-<dd><code><a href="../BaseTextGuiElement.html#renderSelf(technology.sola.engine.graphics.renderer.Renderer,int,int)">renderSelf</a></code>&nbsp;in class&nbsp;<code><a href="../BaseTextGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements">BaseTextGuiElement</a>&lt;<a href="ButtonGuiElement.Properties.html" title="class in technology.sola.engine.graphics.gui.elements.control">ButtonGuiElement.Properties</a>&gt;</code></dd>
-</dl>
-</section>
-</li>
 <li>
 <section class="detail" id="setOnMouseExitCallback(java.util.function.Consumer)">
 <h3>setOnMouseExitCallback</h3>
