@@ -46,37 +46,6 @@ public class GuiExample extends Sola {
   }
 
   private GuiElement<?> buildGui() {
-    StreamGuiElementContainer firstContainer = solaGui.createElement(
-      StreamGuiElementContainer::new,
-      StreamGuiElementContainer.Properties::new,
-      p -> p.setGap(10).setBorderColor(Color.YELLOW).padding.set(5)
-    );
-
-    StreamGuiElementContainer firstSubContainer = solaGui.createElement(
-      StreamGuiElementContainer::new,
-      StreamGuiElementContainer.Properties::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.RED).padding.set(5)
-        .setBackgroundColor(new Color(100, 50, 50, 255))
-    );
-    firstSubContainer.addChild(
-      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Sub First")),
-      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Sub Second").margin.set(15, 0))
-    );
-
-    firstContainer.addChild(
-      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("First")),
-      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Second").padding.set(5)),
-      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Third").margin.setTop(30)),
-      firstSubContainer
-    );
-
-
-    StreamGuiElementContainer secondContainer = solaGui.createElement(
-      StreamGuiElementContainer::new,
-      StreamGuiElementContainer.Properties::new,
-      p -> p.setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.RIGHT).setBorderColor(Color.ORANGE).padding.set(5).setWidth(410)
-    );
-
     ButtonGuiElement checkButton = solaGui.createElement(
       ButtonGuiElement::new,
       ButtonGuiElement.Properties::new,
@@ -91,26 +60,42 @@ public class GuiExample extends Sola {
     );
     toggleOtherButton.setOnAction(() -> checkButton.properties().setHidden(!checkButton.properties().isHidden()));
 
-    secondContainer.addChild(
-      checkButton,
-      toggleOtherButton
-    );
-
-
-    StreamGuiElementContainer rootElement = solaGui.createElement(
+    return solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
       p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).setBorderColor(Color.GREEN)
-    );
-
-    rootElement.addChild(
+    ).addChild(
       solaGui.createElement(
         TextGuiElement::new,
         TextGuiElement.Properties::new,
         p -> p.setText("Gui Example").margin.setBottom(10)
       ),
-      firstContainer,
-      secondContainer,
+      solaGui.createElement(
+        StreamGuiElementContainer::new,
+        StreamGuiElementContainer.Properties::new,
+        p -> p.setGap(10).setBorderColor(Color.YELLOW).padding.set(5)
+      ).addChild(
+        solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("First")),
+        solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Second").padding.set(5)),
+        solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Third").margin.setTop(30)),
+        solaGui.createElement(
+          StreamGuiElementContainer::new,
+          StreamGuiElementContainer.Properties::new,
+          p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.RED).padding.set(5)
+            .setBackgroundColor(new Color(100, 50, 50, 255))
+        ).addChild(
+          solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Sub First")),
+          solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Sub Second").margin.set(15, 0))
+        )
+      ),
+      solaGui.createElement(
+        StreamGuiElementContainer::new,
+        StreamGuiElementContainer.Properties::new,
+        p -> p.setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.RIGHT).setBorderColor(Color.ORANGE).padding.set(5).setWidth(410)
+      ).addChild(
+        checkButton,
+        toggleOtherButton
+      ),
       solaGui.createElement(
         ButtonGuiElement::new,
         ButtonGuiElement.Properties::new,
@@ -119,8 +104,6 @@ public class GuiExample extends Sola {
       createKeyTesterElement(),
       createImageContainer()
     );
-
-    return rootElement;
   }
 
   private GuiElement<?> createKeyTesterElement() {
@@ -149,13 +132,11 @@ public class GuiExample extends Sola {
   }
 
   private GuiElement<?> createImageContainer() {
-    StreamGuiElementContainer streamGuiElementContainer = solaGui.createElement(
+    return solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
       p -> p.setGap(5)
-    );
-
-    streamGuiElementContainer.addChild(
+    ).addChild(
       solaGui.createElement(
         ImageGuiElement::new,
         ImageGuiElement.Properties::new,
@@ -172,7 +153,5 @@ public class GuiExample extends Sola {
         p -> p.setAssetId("test").setWidth(150).setHeight(150).setBorderColor(Color.YELLOW).padding.set(5)
       )
     );
-
-    return streamGuiElementContainer;
   }
 }

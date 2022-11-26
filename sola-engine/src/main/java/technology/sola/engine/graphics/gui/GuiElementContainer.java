@@ -88,27 +88,11 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
       .toList();
   }
 
-  public void addChild(GuiElement<?> childOne) {
-    children.add(childOne);
-    properties.setLayoutChanged(true);
-  }
-
-  public void addChild(GuiElement<?> childOne, GuiElement<?> childTwo) {
-    children.add(childOne);
-    children.add(childTwo);
-    properties.setLayoutChanged(true);
-  }
-
-  public void addChild(GuiElement<?> childOne, GuiElement<?> childTwo, GuiElement<?> childThree) {
-    children.add(childOne);
-    children.add(childTwo);
-    children.add(childThree);
-    properties.setLayoutChanged(true);
-  }
-
-  public void addChild(GuiElement<?>... children) {
+  public GuiElementContainer<T> addChild(GuiElement<?>... children) {
     this.children.addAll(Arrays.asList(children));
     properties.setLayoutChanged(true);
+
+    return this;
   }
 
   @Override

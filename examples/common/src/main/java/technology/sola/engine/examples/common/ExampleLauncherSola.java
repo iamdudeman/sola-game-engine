@@ -49,31 +49,29 @@ public class ExampleLauncherSola extends Sola {
   }
 
   private GuiElement<?> buildGui() {
-    StreamGuiElementContainer rootElement = solaGui.createElement(
+    return solaGui.createElement(
       StreamGuiElementContainer::new,
       StreamGuiElementContainer.Properties::new,
       p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(5)
         .setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.CENTER)
         .setVerticalAlignment(StreamGuiElementContainer.VerticalAlignment.CENTER)
         .padding.set(5).setWidth(800).setHeight(580)
+    ).addChild(
+      solaGui.createElement(
+        TextGuiElement::new,
+        TextGuiElement.Properties::new,
+        p -> p.setText("Select an example to launch").margin.setBottom(15)
+      ),
+      buildExampleLaunchButton("Animation", AnimationExample::new),
+      buildExampleLaunchButton("Audio", AudioExample::new),
+      buildExampleLaunchButton("Gui", GuiExample::new),
+      buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new),
+      buildExampleLaunchButton("Particle", ParticleExample::new),
+      buildExampleLaunchButton("Rendering", RenderingExample::new),
+      buildExampleLaunchButton("Simple Platformer", SimplePlatformerExample::new),
+      buildExampleLaunchButton("Stress Test - Physics", () -> new StressTestPhysicsExample(500)),
+      buildExampleLaunchButton("Stress Test - Rendering", StressTestRenderingExample::new)
     );
-
-    rootElement.addChild(solaGui.createElement(
-      TextGuiElement::new,
-      TextGuiElement.Properties::new,
-      p -> p.setText("Select an example to launch").margin.setBottom(15)
-    ));
-    rootElement.addChild(buildExampleLaunchButton("Animation", AnimationExample::new));
-    rootElement.addChild(buildExampleLaunchButton("Audio", AudioExample::new));
-    rootElement.addChild(buildExampleLaunchButton("Gui", GuiExample::new));
-    rootElement.addChild(buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new));
-    rootElement.addChild(buildExampleLaunchButton("Particle", ParticleExample::new));
-    rootElement.addChild(buildExampleLaunchButton("Rendering", RenderingExample::new));
-    rootElement.addChild(buildExampleLaunchButton("Simple Platformer", SimplePlatformerExample::new));
-    rootElement.addChild(buildExampleLaunchButton("Stress Test - Physics", () -> new StressTestPhysicsExample(500)));
-    rootElement.addChild(buildExampleLaunchButton("Stress Test - Rendering", StressTestRenderingExample::new));
-
-    return rootElement;
   }
 
   private GuiElement<?> buildExampleLaunchButton(String text, Supplier<Sola> solaSupplier) {
