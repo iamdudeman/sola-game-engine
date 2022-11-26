@@ -2,8 +2,8 @@ package technology.sola.engine.graphics.system;
 
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
-import technology.sola.engine.graphics.components.sprite.SpriteAnimatorComponent;
-import technology.sola.engine.graphics.components.sprite.SpriteComponent;
+import technology.sola.engine.graphics.components.animation.SpriteAnimatorComponent;
+import technology.sola.engine.graphics.components.SpriteComponent;
 
 public class SpriteAnimatorSystem extends EcsSystem {
   @Override

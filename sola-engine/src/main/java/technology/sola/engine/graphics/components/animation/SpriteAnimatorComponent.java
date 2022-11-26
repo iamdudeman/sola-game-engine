@@ -1,6 +1,7 @@
-package technology.sola.engine.graphics.components.sprite;
+package technology.sola.engine.graphics.components.animation;
 
 import technology.sola.ecs.Component;
+import technology.sola.engine.graphics.components.SpriteKeyFrame;
 
 import java.io.Serial;
 import java.util.HashMap;

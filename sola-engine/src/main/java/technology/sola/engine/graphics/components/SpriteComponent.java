@@ -1,4 +1,4 @@
-package technology.sola.engine.graphics.components.sprite;
+package technology.sola.engine.graphics.components;
 
 import technology.sola.ecs.Component;
 import technology.sola.engine.assets.AssetHandle;
@@ -19,6 +19,10 @@ public class SpriteComponent implements Component {
 
   public SpriteComponent(SpriteKeyFrame spriteKeyFrame) {
     this.spriteKeyFrame = spriteKeyFrame;
+  }
+
+  public SpriteComponent(SolaImage solaImage) {
+    this.spriteKeyFrame = new SpriteKeyFrame(solaImage);
   }
 
   public String getSpriteSheetId() {
