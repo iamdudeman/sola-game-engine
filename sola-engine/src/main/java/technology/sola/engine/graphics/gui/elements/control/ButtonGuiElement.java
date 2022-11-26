@@ -4,7 +4,6 @@ import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
-import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseEvent;
 
@@ -28,24 +27,6 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
         keyEvent.stopPropagation();
       }
     });
-  }
-
-  @Override
-  public void renderSelf(Renderer renderer, int x, int y) {
-    Properties properties = properties();
-    int width = getWidth();
-    int height = getHeight();
-
-    Color baseTextColor = properties.getColorText();
-
-    if (isHovered()) {
-      properties.setColorText(properties.colorTextHover);
-    }
-
-    renderer.fillRect(x - properties.padding.getLeft(), y - properties.padding.getTop(), width, height, isHovered() ? properties.colorBackgroundHover : properties.colorBackground);
-    super.renderSelf(renderer, x, y);
-
-    properties.setColorText(baseTextColor);
   }
 
   @Override
@@ -81,43 +62,17 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
   }
 
   public static class Properties extends BaseTextGuiElement.Properties {
-    private Color colorBackground = new Color(128, 128, 128);
-    private Color colorBackgroundHover = Color.WHITE;
-    private Color colorTextHover = new Color(128, 128, 128);
-
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
       setFocusable(true);
-      setBorderColor(Color.WHITE);
-      setHoverBorderColor(new Color(128, 128, 128));
       setFocusOutlineColor(Color.LIGHT_BLUE);
-    }
 
-    public Color getColorBackground() {
-      return colorBackground;
-    }
+      setBackgroundColor(Color.DARK_GRAY);
+      setBorderColor(Color.WHITE);
 
-    public Properties setColorBackground(Color colorBackground) {
-      this.colorBackground = colorBackground;
-      return this;
-    }
-
-    public Color getColorBackgroundHover() {
-      return colorBackgroundHover;
-    }
-
-    public Properties setColorBackgroundHover(Color colorBackgroundHover) {
-      this.colorBackgroundHover = colorBackgroundHover;
-      return this;
-    }
-
-    public Color getColorTextHover() {
-      return colorTextHover;
-    }
-
-    public Properties setColorTextHover(Color colorTextHover) {
-      this.colorTextHover = colorTextHover;
-      return this;
+      hover.setBackgroundColor(Color.WHITE);
+      hover.setBorderColor(Color.DARK_GRAY);
+      hover.setColorText(Color.DARK_GRAY);
     }
   }
 }

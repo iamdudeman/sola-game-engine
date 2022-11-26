@@ -4,8 +4,9 @@ import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.properties.GuiElementBaseHoverProperties;
+import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
-import technology.sola.engine.graphics.gui.properties.GuiElementProperties;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties> extends GuiElement<T> {
@@ -45,8 +46,14 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
         };
       }
 
+      Color colorToRender = properties.getColorText();
+
+      if (properties.hover.colorText != null && isHovered()) {
+        colorToRender = properties.hover.colorText;
+      }
+
       renderer.setFont(font);
-      renderer.drawString(properties.getText(), x + alignOffsetX, y, properties.getColorText());
+      renderer.drawString(properties.getText(), x + alignOffsetX, y, colorToRender);
     }
   }
 
@@ -71,14 +78,28 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
     textHeight = Math.max(textDimensions.height(), 1);
   }
 
-  public static class Properties extends GuiElementProperties {
+  public static class HoverProperties extends GuiElementBaseHoverProperties {
+    private Color colorText = null;
+
+    public Color getColorText() {
+      return colorText;
+    }
+
+    public HoverProperties setColorText(Color colorText) {
+      this.colorText = colorText;
+
+      return this;
+    }
+  }
+
+  public static class Properties extends GuiElementBaseProperties<HoverProperties> {
     private Color colorText = null;
     private String fontAssetId = null;
     private String text = "";
     private TextAlign textAlign = TextAlign.LEFT;
 
     public Properties(GuiElementGlobalProperties globalProperties) {
-      super(globalProperties);
+      super(globalProperties, new HoverProperties());
       setFocusable(false);
     }
 
