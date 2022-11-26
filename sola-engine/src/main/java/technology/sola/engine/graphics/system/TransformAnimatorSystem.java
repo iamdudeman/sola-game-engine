@@ -13,14 +13,7 @@ public class TransformAnimatorSystem extends EcsSystem {
         TransformComponent transformComponent = view.c1();
         TransformAnimatorComponent transformAnimatorComponent = view.c2();
 
-
-        // todo need easing function to set this
-        //  linear - (x)
-        //  ease-in - (x^2)
-        //  ease-out - (1 - (x - 1)^2)
-        //  smooth - (x^2)(3 - 2x)
-        transformComponent.setTranslate(0, 0);
-        transformComponent.setScale(1, 1);
+        transformAnimatorComponent.tickAnimation(transformComponent, deltaTime);
       });
   }
 }
