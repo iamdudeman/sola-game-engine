@@ -2,6 +2,7 @@ package technology.sola.engine.graphics.components.animation;
 
 import technology.sola.ecs.Component;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.math.EasingFunction;
 
 import java.io.Serial;
 
@@ -20,8 +21,13 @@ public class TransformAnimatorComponent implements Component {
   private boolean isInit = false;
   private float elapsedTime = 0;
 
-  public TransformAnimatorComponent(EasingFunction easingFunction, long duration) {
+  private float destinationTranslateX;
+
+  public TransformAnimatorComponent(EasingFunction easingFunction, long duration, float translateX) {
     // todo need ability to set destination (ie. x,y 50,50)
+    this.easingFunction = easingFunction;
+    this.duration = duration;
+    this.destinationTranslateX = translateX;
   }
 
   public TransformAnimatorComponent setAnimationCompleteCallback(AnimationCompleteCallback animationCompleteCallback) {
@@ -36,15 +42,25 @@ public class TransformAnimatorComponent implements Component {
   }
 
   public void tickAnimation(TransformComponent transformComponent, float deltaTime) {
+    if (elapsedTime >= duration) {
+      return;
+    }
+
     if (!isInit) {
       initialize(transformComponent);
       isInit = true;
     } else {
-      elapsedTime += deltaTime;
+      elapsedTime += deltaTime * 1000;
+
+      float percent = Math.min(elapsedTime / duration, 1);
+
+      transformComponent.setX(easingFunction.ease(percent, startingTranslateX, destinationTranslateX));
       // todo update transform stuff
     }
 
-    // todo call callback when animation finished
+    if (elapsedTime >= duration && animationCompleteCallback != null) {
+      animationCompleteCallback.onComplete();
+    }
   }
 
   private void initialize(TransformComponent transformComponent) {
@@ -58,28 +74,5 @@ public class TransformAnimatorComponent implements Component {
   @FunctionalInterface
   public interface AnimationCompleteCallback {
     void onComplete();
-  }
-
-  // todo implement a few default easing functions
-  //  linear - (x)
-  //  ease-in - (x^2)
-  //  ease-out - (1 - (x - 1)^2)
-  //  smooth - (x^2)(3 - 2x)
-
-  @FunctionalInterface
-  public interface EasingFunction {
-    EasingFunction Linear = ((startingValue, endingValue, percent) -> {
-      return startingValue + (endingValue - startingValue) * percent;
-    });
-
-    /**
-     * Eases a value based.
-     *
-     * @param startingValue the value to where easing began from
-     * @param endingValue   the value to where easing will finish
-     * @param percent       the current percent to ease to (0 - 1)
-     * @return the value after ease has been applied
-     */
-    float ease(float startingValue, float endingValue, float percent);
   }
 }

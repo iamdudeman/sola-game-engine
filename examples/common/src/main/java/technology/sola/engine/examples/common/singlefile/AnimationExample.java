@@ -6,18 +6,22 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.module.graphics.SolaGraphics;
+import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.animation.SpriteAnimatorComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.components.SpriteKeyFrame;
+import technology.sola.engine.graphics.components.animation.TransformAnimatorComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
+import technology.sola.math.EasingFunction;
 
 public class AnimationExample extends Sola {
   private SolaGraphics solaGraphics;
 
   public AnimationExample() {
     super(
-      SolaConfiguration.build("Animation Example", 200, 200).withTargetUpdatesPerSecond(30)
+      SolaConfiguration.build("Animation Example", 210, 200).withTargetUpdatesPerSecond(30)
     );
   }
 
@@ -36,13 +40,15 @@ public class AnimationExample extends Sola {
 
   @Override
   protected void onRender(Renderer renderer) {
+    renderer.clear(Color.WHITE);
+
     solaGraphics.render();
   }
 
   private World buildWorld() {
     World world = new World(50);
 
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 10; i++) {
       final boolean showMessage = i == 0;
 
       world.createEntity()
@@ -65,7 +71,7 @@ public class AnimationExample extends Sola {
     }
 
     world.createEntity()
-      .addComponent(new TransformComponent(25, 60))
+      .addComponent(new TransformComponent(25, 45))
       .addComponent(new SpriteComponent("test", "lime"))
       .addComponent(new SpriteAnimatorComponent(
         "stop_light1",
@@ -75,7 +81,7 @@ public class AnimationExample extends Sola {
       ));
 
     world.createEntity()
-      .addComponent(new TransformComponent(95, 60))
+      .addComponent(new TransformComponent(95, 45))
       .addComponent(new SpriteComponent("test", "maroon"))
       .addComponent(new SpriteAnimatorComponent(
         "stop_light2",
@@ -84,9 +90,34 @@ public class AnimationExample extends Sola {
         new SpriteKeyFrame("test", "orange", 1500)
       ));
 
-    for (int i = 0; i < 6; i++) {
+    world.createEntity(
+      new TransformComponent(5, 70, 15),
+      new CircleRendererComponent(Color.RED, true),
+      new TransformAnimatorComponent(EasingFunction.Linear, 4000, 180)
+    );
+
+    world.createEntity(
+      new TransformComponent(5, 90, 15),
+      new CircleRendererComponent(Color.GREEN, true),
+      new TransformAnimatorComponent(EasingFunction.EaseIn, 4000, 180)
+    );
+
+    world.createEntity(
+      new TransformComponent(5, 110, 15),
+      new CircleRendererComponent(Color.BLUE, true),
+      new TransformAnimatorComponent(EasingFunction.EaseOut, 4000, 180)
+    );
+
+    world.createEntity(
+      new TransformComponent(5, 130, 15),
+      new CircleRendererComponent(Color.BLACK, true),
+      new TransformAnimatorComponent(EasingFunction.SmoothStep, 4000, 180)
+        .setAnimationCompleteCallback(() -> System.out.println("Finished smooth step"))
+    );
+
+    for (int i = 0; i < 10; i++) {
       world.createEntity()
-        .addComponent(new TransformComponent(5 + (i * 20f), 150))
+        .addComponent(new TransformComponent(5 + (i * 20f), 180))
         .addComponent(new SpriteComponent("test", "blue"))
         .addComponent(new SpriteAnimatorComponent(
           "first",
