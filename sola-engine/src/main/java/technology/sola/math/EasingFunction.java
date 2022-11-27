@@ -6,24 +6,40 @@ package technology.sola.math;
  */
 public interface EasingFunction {
   /**
-   * Linear over time.
+   * Function that is linear over time.
+   *
+   * <pre>
+   *   x
+   * </pre>
    */
-  EasingFunction Linear = x -> x;
+  EasingFunction LINEAR = x -> x;
 
   /**
-   * Slower at the start. Quicker at the end.
+   * Function that is slower at the start and quicker at the end.
+   *
+   * <pre>
+   *   x²
+   * </pre>
    */
-  EasingFunction EaseIn = x -> x * x;
+  EasingFunction EASE_IN = x -> x * x;
 
   /**
-   * Quicker at the start. Slower at the end.
+   * Function that is quicker at the start and slower at the end.
+   *
+   * <pre>
+   *   1-(x-1)²
+   * </pre>
    */
-  EasingFunction EaseOut = x -> 1 - ((x - 1) * (x - 1));
+  EasingFunction EASE_OUT = x -> 1 - ((x - 1) * (x - 1));
 
   /**
-   * Slower at the start and at the end. Quicker in the middle.
+   * Function that is slower at the start and at the end, but quicker in the middle.
+   *
+   * <pre>
+   *   x²(3-2x)
+   * </pre>
    */
-  EasingFunction SmoothStep = x -> (x * x) * (3 - 2 * x);
+  EasingFunction SMOOTH_STEP = x -> (x * x) * (3 - 2 * x);
 
   /**
    * Eases a value. A value of 0 for x should return 0. A value of 1 for x should return 1.

@@ -93,25 +93,25 @@ public class AnimationExample extends Sola {
     world.createEntity(
       new TransformComponent(5, 70, 15),
       new CircleRendererComponent(Color.RED, true),
-      new TransformAnimatorComponent(EasingFunction.Linear, 4000, 180)
+      new TransformAnimatorComponent(EasingFunction.LINEAR, 4000, 180)
     );
 
     world.createEntity(
       new TransformComponent(5, 90, 15),
       new CircleRendererComponent(Color.GREEN, true),
-      new TransformAnimatorComponent(EasingFunction.EaseIn, 4000, 180)
+      new TransformAnimatorComponent(EasingFunction.EASE_IN, 4000, 180)
     );
 
     world.createEntity(
       new TransformComponent(5, 110, 15),
       new CircleRendererComponent(Color.BLUE, true),
-      new TransformAnimatorComponent(EasingFunction.EaseOut, 4000, 180)
+      new TransformAnimatorComponent(EasingFunction.EASE_OUT, 4000, 180)
     );
 
     world.createEntity(
       new TransformComponent(5, 130, 15),
       new CircleRendererComponent(Color.BLACK, true),
-      new TransformAnimatorComponent(EasingFunction.SmoothStep, 4000, 180)
+      new TransformAnimatorComponent(EasingFunction.SMOOTH_STEP, 4000, 180)
         .setAnimationCompleteCallback(() -> System.out.println("Finished smooth step"))
     );
 
