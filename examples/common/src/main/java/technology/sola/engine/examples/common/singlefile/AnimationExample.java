@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.singlefile;
 
+import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.Sola;
@@ -93,27 +94,35 @@ public class AnimationExample extends Sola {
     world.createEntity(
       new TransformComponent(5, 70, 15),
       new CircleRendererComponent(Color.RED, true),
-      new TransformAnimatorComponent(EasingFunction.LINEAR, 4000, 180)
+      new TransformAnimatorComponent.Builder(EasingFunction.LINEAR, 4000).withTranslateX(180).build()
     );
 
     world.createEntity(
       new TransformComponent(5, 90, 15),
       new CircleRendererComponent(Color.GREEN, true),
-      new TransformAnimatorComponent(EasingFunction.EASE_IN, 4000, 180)
+      new TransformAnimatorComponent.Builder(EasingFunction.EASE_IN, 4000).withTranslateX(180).build()
     );
 
     world.createEntity(
       new TransformComponent(5, 110, 15),
       new CircleRendererComponent(Color.BLUE, true),
-      new TransformAnimatorComponent(EasingFunction.EASE_OUT, 4000, 180)
+      new TransformAnimatorComponent.Builder(EasingFunction.EASE_OUT, 4000).withTranslateX(180).build()
     );
 
-    world.createEntity(
+    TransformAnimatorComponent smoothTransformAnimator = new TransformAnimatorComponent.Builder(EasingFunction.SMOOTH_STEP, 4000).withTranslateX(180).build();
+
+    final Entity smoothStepAnimationEntity = world.createEntity(
       new TransformComponent(5, 130, 15),
       new CircleRendererComponent(Color.BLACK, true),
-      new TransformAnimatorComponent(EasingFunction.SMOOTH_STEP, 4000, 180)
-        .setAnimationCompleteCallback(() -> System.out.println("Finished smooth step"))
+      smoothTransformAnimator
     );
+
+    smoothTransformAnimator.setAnimationCompleteCallback(() -> smoothStepAnimationEntity.addComponent(
+      new TransformAnimatorComponent.Builder(EasingFunction.SMOOTH_STEP, 4000).withTranslateX(0).build()
+        .setAnimationCompleteCallback(() -> smoothStepAnimationEntity.addComponent(
+          new TransformAnimatorComponent.Builder(EasingFunction.SMOOTH_STEP, 3000).withTranslateX(90).withScale(5).build())
+        )
+    ));
 
     for (int i = 0; i < 10; i++) {
       world.createEntity()

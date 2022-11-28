@@ -59,6 +59,10 @@ public interface EasingFunction {
    * @return the eased value clamped between min and max
    */
   default float ease(float x, float min, float max) {
+    if (min == max) {
+      return min;
+    }
+
     return min + (max - min) * ease(x);
   }
 }

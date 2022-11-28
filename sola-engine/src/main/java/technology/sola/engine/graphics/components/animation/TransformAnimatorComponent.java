@@ -10,35 +10,25 @@ public class TransformAnimatorComponent implements Component {
   @Serial
   private static final long serialVersionUID = 1002749182938133802L;
 
-  private EasingFunction easingFunction;
-  private long duration;
+  private final EasingFunction easingFunction;
+  private final long duration;
+  private Float endingTranslateX;
+  private Float endingTranslateY;
+  private Float endingScaleX;
+  private Float endingScaleY;
   private AnimationCompleteCallback animationCompleteCallback;
 
-  private float startingTranslateX;
-  private float startingTranslateY;
-  private float startingScaleX;
-  private float startingScaleY;
-  private boolean isInit = false;
-  private float elapsedTime = 0;
-
-  private float destinationTranslateX;
-
-  public TransformAnimatorComponent(EasingFunction easingFunction, long duration, float translateX) {
-    // todo need ability to set destination (ie. x,y 50,50)
-    this.easingFunction = easingFunction;
-    this.duration = duration;
-    this.destinationTranslateX = translateX;
-  }
+  private transient boolean isInit = false;
+  private transient float startingTranslateX;
+  private transient float startingTranslateY;
+  private transient float startingScaleX;
+  private transient float startingScaleY;
+  private transient float elapsedTime = 0;
 
   public TransformAnimatorComponent setAnimationCompleteCallback(AnimationCompleteCallback animationCompleteCallback) {
     this.animationCompleteCallback = animationCompleteCallback;
 
     return this;
-  }
-
-  public TransformAnimatorComponent reverse() {
-    // todo implement
-    throw new RuntimeException("not yet implemented");
   }
 
   public void tickAnimation(TransformComponent transformComponent, float deltaTime) {
@@ -54,8 +44,10 @@ public class TransformAnimatorComponent implements Component {
 
       float percent = Math.min(elapsedTime / duration, 1);
 
-      transformComponent.setX(easingFunction.ease(percent, startingTranslateX, destinationTranslateX));
-      // todo update transform stuff
+      transformComponent.setX(easingFunction.ease(percent, startingTranslateX, endingTranslateX));
+      transformComponent.setY(easingFunction.ease(percent, startingTranslateY, endingTranslateY));
+      transformComponent.setScaleX(easingFunction.ease(percent, startingScaleX, endingScaleX));
+      transformComponent.setScaleY(easingFunction.ease(percent, startingScaleY, endingScaleY));
     }
 
     if (elapsedTime >= duration && animationCompleteCallback != null) {
@@ -67,12 +59,84 @@ public class TransformAnimatorComponent implements Component {
     startingTranslateX = transformComponent.getX();
     startingTranslateY = transformComponent.getY();
     startingScaleX = transformComponent.getScaleX();
-    startingScaleX = transformComponent.getScaleY();
+    startingScaleY = transformComponent.getScaleY();
+
+    if (endingTranslateX == null) endingTranslateX = startingTranslateX;
+    if (endingTranslateY == null) endingTranslateY = startingTranslateY;
+    if (endingScaleX == null) endingScaleX = startingScaleX;
+    if (endingScaleY == null) endingScaleY = startingScaleY;
   }
 
+  private TransformAnimatorComponent(EasingFunction easingFunction, long duration) {
+    this.easingFunction = easingFunction;
+    this.duration = duration;
+  }
 
   @FunctionalInterface
   public interface AnimationCompleteCallback {
     void onComplete();
+  }
+
+  public static class Builder {
+    private final EasingFunction easingFunction;
+    private final long duration;
+    private Float endingTranslateX;
+    private Float endingTranslateY;
+    private Float endingScaleX;
+    private Float endingScaleY;
+
+    public Builder(EasingFunction easingFunction, long duration) {
+      this.easingFunction = easingFunction;
+      this.duration = duration;
+    }
+
+    public Builder withTranslateX(float x) {
+      endingTranslateX = x;
+      return this;
+    }
+
+    public Builder withTranslateY(float y) {
+      endingTranslateY = y;
+      return this;
+    }
+
+    public Builder withTranslate(float x, float y) {
+      endingTranslateX = x;
+      endingTranslateY = y;
+      return this;
+    }
+
+    public Builder withScaleX(float x) {
+      endingScaleX = x;
+      return this;
+    }
+
+    public Builder withScaleY(float y) {
+      endingScaleY = y;
+      return this;
+    }
+
+    public Builder withScale(float scale) {
+      endingScaleX = scale;
+      endingScaleY = scale;
+      return this;
+    }
+
+    public Builder withScale(float x, float y) {
+      endingScaleX = x;
+      endingScaleY = y;
+      return this;
+    }
+
+    public TransformAnimatorComponent build() {
+      TransformAnimatorComponent transformAnimatorComponent = new TransformAnimatorComponent(easingFunction, duration);
+
+      transformAnimatorComponent.endingTranslateX = endingTranslateX;
+      transformAnimatorComponent.endingTranslateY = endingTranslateY;
+      transformAnimatorComponent.endingScaleX = endingScaleX;
+      transformAnimatorComponent.endingScaleY = endingScaleY;
+
+      return transformAnimatorComponent;
+    }
   }
 }
