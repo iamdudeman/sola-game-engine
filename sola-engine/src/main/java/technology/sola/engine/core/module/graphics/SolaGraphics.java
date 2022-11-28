@@ -9,6 +9,7 @@ import technology.sola.engine.core.module.SolaModule;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.system.SpriteAnimatorSystem;
+import technology.sola.engine.graphics.system.TransformAnimatorSystem;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
@@ -26,7 +27,6 @@ public class SolaGraphics {
   private final Renderer renderer;
   private final AssetLoader<SpriteSheet> spriteSheetAssetLoader;
   private boolean isRenderDebug = false;
-  private final SpriteAnimatorSystem spriteAnimatorSystem;
   private Matrix3D cachedScreenToWorldMatrix = null;
   private float previousCameraX = 0;
   private float previousCameraY = 0;
@@ -44,7 +44,8 @@ public class SolaGraphics {
   public static SolaGraphics useModule(SolaEcs solaEcs, Renderer renderer, AssetLoaderProvider assetLoaderProvider) {
     SolaGraphics solaGraphics = new SolaGraphics(solaEcs, renderer, assetLoaderProvider.get(SpriteSheet.class));
 
-    solaEcs.addSystem(solaGraphics.spriteAnimatorSystem);
+    solaEcs.addSystem(new SpriteAnimatorSystem());
+    solaEcs.addSystem(new TransformAnimatorSystem());
 
     return solaGraphics;
   }
@@ -121,7 +122,5 @@ public class SolaGraphics {
     this.solaEcs = solaEcs;
     this.renderer = renderer;
     this.spriteSheetAssetLoader = spriteSheetAssetLoader;
-
-    spriteAnimatorSystem = new SpriteAnimatorSystem();
   }
 }

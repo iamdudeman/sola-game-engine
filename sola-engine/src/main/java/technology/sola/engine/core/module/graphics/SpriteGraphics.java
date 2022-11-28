@@ -8,7 +8,7 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
-import technology.sola.engine.graphics.components.sprite.SpriteComponent;
+import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 

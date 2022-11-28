@@ -103,6 +103,11 @@ public class TransformComponent implements Component {
     this.y = y;
   }
 
+  public void setScale(float scaleX, float scaleY) {
+    setScaleX(scaleX);
+    setScaleY(scaleY);
+  }
+
   public void setScale(float scale) {
     setScaleX(scale);
     setScaleY(scale);

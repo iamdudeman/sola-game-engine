@@ -15,7 +15,7 @@ import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
-import technology.sola.engine.graphics.components.sprite.SpriteComponent;
+import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Layer;
 import technology.sola.engine.graphics.renderer.Renderer;

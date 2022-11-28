@@ -1,4 +1,4 @@
-package technology.sola.engine.graphics.components.sprite;
+package technology.sola.engine.graphics.components;
 
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
