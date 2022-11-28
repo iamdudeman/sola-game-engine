@@ -1,13 +1,4 @@
 # sola-game-engine TODO list
-* ~~SpriteAnimatorComponent~~
-  * ~~Ability to play certain number of times~~
-    * ~~Ability to restart~~
-    * ~~Callback for when finished~~
-* ~~Implement TransformAnimatorComponent~~
-  * ~~Ability to animate to a translate and scale~~
-  * ~~Callback for when finished~~
-  * ~~implement TransformAnimatorSystem~~
-    * ~~Add to SolaGraphics -> SpriteGraphics~~
 
 ## Known Bugs List
 
