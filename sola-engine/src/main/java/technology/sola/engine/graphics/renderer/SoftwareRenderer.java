@@ -193,12 +193,12 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   public void drawImage(SolaImage solaImage, AffineTransform affineTransform) {
     Rectangle transformBoundingBox = affineTransform.getBoundingBoxForTransform(solaImage.getWidth(), solaImage.getHeight());
 
-    if (shouldSkipDrawCall(transformBoundingBox.getMin().x(), transformBoundingBox.getMin().y(), transformBoundingBox.getWidth(), transformBoundingBox.getHeight())) {
+    if (shouldSkipDrawCall(transformBoundingBox.min().x(), transformBoundingBox.min().y(), transformBoundingBox.getWidth(), transformBoundingBox.getHeight())) {
       return;
     }
 
-    for (int x = (int) transformBoundingBox.getMin().x(); x < transformBoundingBox.getMax().x(); x++) {
-      for (int y = (int) transformBoundingBox.getMin().y(); y < transformBoundingBox.getMax().y(); y++) {
+    for (int x = (int) transformBoundingBox.min().x(); x < transformBoundingBox.max().x(); x++) {
+      for (int y = (int) transformBoundingBox.min().y(); y < transformBoundingBox.max().y(); y++) {
         Vector2D newPosition = affineTransform.backward(x, y);
         int pixel = solaImage.getPixel(newPosition.x(), newPosition.y());
 

@@ -47,8 +47,8 @@ public class SolaImage extends Canvas implements Asset {
     AffineTransform affineTransform = new AffineTransform().scale(scaleX, scaleY);
     Rectangle transformBoundingBox = affineTransform.getBoundingBoxForTransform(getWidth(), getHeight());
 
-    for (int x = (int) transformBoundingBox.getMin().x(); x < transformBoundingBox.getMax().x(); x++) {
-      for (int y = (int) transformBoundingBox.getMin().y(); y < transformBoundingBox.getMax().y(); y++) {
+    for (int x = (int) transformBoundingBox.min().x(); x < transformBoundingBox.max().x(); x++) {
+      for (int y = (int) transformBoundingBox.min().y(); y < transformBoundingBox.max().y(); y++) {
         Vector2D newPosition = affineTransform.backward(x, y);
         int pixel = getPixel(newPosition.x(), newPosition.y());
 

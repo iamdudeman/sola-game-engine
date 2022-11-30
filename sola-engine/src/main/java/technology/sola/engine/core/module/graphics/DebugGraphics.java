@@ -44,11 +44,11 @@ class DebugGraphics {
       if (ColliderComponent.ColliderType.CIRCLE.equals(colliderComponent.getColliderType())) {
         Circle circle = colliderComponent.asCircle(transformComponent);
 
-        renderer.drawCircle(transform.x() + colliderComponent.getOffsetX(), transform.y() + colliderComponent.getOffsetY(), circle.getRadius(), Color.RED);
+        renderer.drawCircle(transform.x() + colliderComponent.getOffsetX(), transform.y() + colliderComponent.getOffsetY(), circle.radius(), Color.RED);
       } else {
         Rectangle rectangle = colliderComponent.asRectangle(transformComponent);
 
-        renderer.drawRect(rectangle.getMin().x(), rectangle.getMin().y(), rectangle.getWidth(), rectangle.getHeight(), Color.RED);
+        renderer.drawRect(rectangle.min().x(), rectangle.min().y(), rectangle.getWidth(), rectangle.getHeight(), Color.RED);
       }
     }
   }
