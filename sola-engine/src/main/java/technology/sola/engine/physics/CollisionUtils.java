@@ -57,36 +57,36 @@ public final class CollisionUtils {
     Entity rectEntity, Entity circeEntity,
     Rectangle rectangle, Circle circle
   ) {
-    Vector2D circleCenter = circle.getCenter();
-    Vector2D closestPointOnRectangle = SolaMath.clamp(rectangle.getMin(), rectangle.getMax(), circleCenter);
+    Vector2D circleCenter = circle.center();
+    Vector2D closestPointOnRectangle = SolaMath.clamp(rectangle.min(), rectangle.max(), circleCenter);
     boolean isCircleCenterInsideRectangle = circleCenter.equals(closestPointOnRectangle);
 
     if (isCircleCenterInsideRectangle) {
       // Find the closest edge since that is the closest point on rectangle for the normal
-      float minDistanceX = circleCenter.x() - rectangle.getMin().x();
-      float maxDistanceX = rectangle.getMax().x() - circleCenter.x();
-      float minDistanceY = circleCenter.y() - rectangle.getMin().y();
-      float maxDistanceY = rectangle.getMax().y() - circleCenter.y();
+      float minDistanceX = circleCenter.x() - rectangle.min().x();
+      float maxDistanceX = rectangle.max().x() - circleCenter.x();
+      float minDistanceY = circleCenter.y() - rectangle.min().y();
+      float maxDistanceY = rectangle.max().y() - circleCenter.y();
 
       if (maxDistanceY < minDistanceY && maxDistanceY < maxDistanceX && maxDistanceY < minDistanceX) {
-        closestPointOnRectangle = new Vector2D(circleCenter.x(), rectangle.getMax().y());
+        closestPointOnRectangle = new Vector2D(circleCenter.x(), rectangle.max().y());
       } else if (minDistanceY < maxDistanceX && minDistanceY < minDistanceX) {
-        closestPointOnRectangle = new Vector2D(circleCenter.x(), rectangle.getMin().y());
+        closestPointOnRectangle = new Vector2D(circleCenter.x(), rectangle.min().y());
       } else if (maxDistanceX < minDistanceX) {
-        closestPointOnRectangle = new Vector2D(rectangle.getMax().x(), circleCenter.y());
+        closestPointOnRectangle = new Vector2D(rectangle.max().x(), circleCenter.y());
       } else {
-        closestPointOnRectangle = new Vector2D(rectangle.getMin().x(), circleCenter.y());
+        closestPointOnRectangle = new Vector2D(rectangle.min().x(), circleCenter.y());
       }
     }
 
     // Normal
     Vector2D diff = closestPointOnRectangle.subtract(circleCenter);
 
-    if (!isCircleCenterInsideRectangle && diff.magnitudeSq() > circle.getRadius() * circle.getRadius()) {
+    if (!isCircleCenterInsideRectangle && diff.magnitudeSq() > circle.radius() * circle.radius()) {
       return null;
     }
 
-    float penetration = circle.getRadius() - closestPointOnRectangle.distance(circleCenter);
+    float penetration = circle.radius() - closestPointOnRectangle.distance(circleCenter);
     Vector2D normal = diff.normalize();
 
     // If not inside
@@ -101,10 +101,10 @@ public final class CollisionUtils {
     Entity entityA, Entity entityB,
     Rectangle rectangleA, Rectangle rectangleB
   ) {
-    Vector2D aBoxMin = rectangleA.getMin();
-    Vector2D aBoxMax = rectangleA.getMax();
-    Vector2D bBoxMin = rectangleB.getMin();
-    Vector2D bBoxMax = rectangleB.getMax();
+    Vector2D aBoxMin = rectangleA.min();
+    Vector2D aBoxMax = rectangleA.max();
+    Vector2D bBoxMin = rectangleB.min();
+    Vector2D bBoxMax = rectangleB.max();
 
     Vector2D posDiffMin = bBoxMin.subtract(aBoxMin);
     Vector2D posDiffMax = bBoxMax.subtract(aBoxMax);
@@ -152,10 +152,10 @@ public final class CollisionUtils {
     Entity entityA, Entity entityB,
     Circle circleA, Circle circleB
   ) {
-    Vector2D posA = circleA.getCenter();
-    Vector2D posB = circleB.getCenter();
+    Vector2D posA = circleA.center();
+    Vector2D posB = circleB.center();
     float distance = posA.distance(posB);
-    float penetration = circleA.getRadius() + circleB.getRadius() - distance;
+    float penetration = circleA.radius() + circleB.radius() - distance;
 
     if (penetration <= 0) {
       return null;

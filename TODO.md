@@ -1,22 +1,6 @@
 # sola-game-engine TODO list
 
 ## Known Bugs List
-* When SpriteComponent used with TransformComponent that has scale of 0 an exception is thrown
-  * Exception in thread "Thread-4" java.lang.IllegalArgumentException: max.x cannot be less than min.x
-    at technology.sola.engine/technology.sola.math.geometry.Rectangle.<init>(Rectangle.java:22)
-    at technology.sola.engine/technology.sola.math.linear.Matrix3D.getBoundingBoxForTransform(Matrix3D.java:142)
-    at technology.sola.engine/technology.sola.engine.graphics.AffineTransform.getBoundingBoxForTransform(AffineTransform.java:44)
-    at technology.sola.engine/technology.sola.engine.graphics.renderer.SoftwareRenderer.drawImage(SoftwareRenderer.java:194)
-    at technology.sola.engine/technology.sola.engine.core.module.graphics.SpriteGraphics.lambda$renderSprite$1(SpriteGraphics.java:47)
-    at technology.sola.engine/technology.sola.engine.assets.AssetHandle.executeIfLoaded(AssetHandle.java:49)
-    at technology.sola.engine/technology.sola.engine.core.module.graphics.SpriteGraphics.renderSprite(SpriteGraphics.java:36)
-    at technology.sola.engine/technology.sola.engine.core.module.graphics.SpriteGraphics.lambda$render$0(SpriteGraphics.java:23)
-    at technology.sola.engine/technology.sola.engine.graphics.renderer.Layer$PrioritizedDrawItem.draw(Layer.java:58)
-    at technology.sola.engine/technology.sola.engine.graphics.renderer.Layer.draw(Layer.java:33)
-    at technology.sola.engine/technology.sola.engine.core.SolaPlatform.render(SolaPlatform.java:123)
-    at technology.sola.engine/technology.sola.engine.core.SolaPlatform.lambda$initComplete$2(SolaPlatform.java:100)
-    at technology.sola.engine/technology.sola.engine.core.FixedUpdateGameLoop.run(FixedUpdateGameLoop.java:37)
-    at java.base/java.lang.Thread.run(Thread.java:833)
 
 -----------------------------------------------------------------------------------------------------------------------
 
