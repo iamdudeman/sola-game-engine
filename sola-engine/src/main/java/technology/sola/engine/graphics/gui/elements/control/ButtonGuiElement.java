@@ -22,7 +22,9 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
     setOnMouseDownCallback(event -> {});
     setOnMouseUpCallback(event -> {});
     setOnKeyPressCallback(keyEvent -> {
-      if (keyEvent.getKeyCode() == Key.ENTER.getCode() || keyEvent.getKeyCode() == Key.CARRIAGE_RETURN.getCode()) {
+      int keyCode = keyEvent.getKeyCode();
+
+      if (keyCode == Key.ENTER.getCode() || keyCode == Key.CARRIAGE_RETURN.getCode() || keyCode == Key.SPACE.getCode()) {
         onActionConsumer.run();
         keyEvent.stopPropagation();
       }
