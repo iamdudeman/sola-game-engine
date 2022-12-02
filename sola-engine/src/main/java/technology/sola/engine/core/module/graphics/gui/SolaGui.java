@@ -17,7 +17,6 @@ import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 /**
  * SolaGui is a {@link SolaModule} that handles registering event listeners and loading a default {@link Font} for
