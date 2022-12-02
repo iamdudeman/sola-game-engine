@@ -14,8 +14,8 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
 
   private boolean wasMouseDownInside = false;
 
-  public ButtonGuiElement(SolaGui solaGui, Properties properties) {
-    super(solaGui, properties);
+  public ButtonGuiElement(SolaGui solaGui) {
+    super(solaGui, new Properties(solaGui.globalProperties));
 
     setOnMouseEnterCallback(event -> {});
     setOnMouseExitCallback(event -> {});

@@ -70,15 +70,36 @@ public class SolaGui {
   }
 
   public <T extends GuiElement<P>, P extends GuiElementBaseProperties<?>> T createElement(
+    GuiElementCreator<T, P> elementCreator
+  ) {
+    return elementCreator.create(this);
+  }
+
+  public <T extends GuiElement<P>, P extends GuiElementBaseProperties<?>> T createElement(
     GuiElementCreator<T, P> elementCreator,
+    Consumer<P> propertiesInitializer
+  ) {
+    var ele = elementCreator.create(this);
+
+    propertiesInitializer.accept(ele.properties());
+
+    return ele;
+  }
+
+  // TODO consider a createContainer method as well that allows passing in children
+
+  @Deprecated
+  public <T extends GuiElement<P>, P extends GuiElementBaseProperties<?>> T createElement(
+    GuiElementCreatorOld<T, P> elementCreator,
     Function<GuiElementGlobalProperties, P> elementPropertiesConstructor
   ) {
     return createElement(elementCreator, elementPropertiesConstructor, p -> {
     });
   }
 
+  @Deprecated
   public <T extends GuiElement<P>, P extends GuiElementBaseProperties<?>> T createElement(
-    GuiElementCreator<T, P> elementCreator,
+    GuiElementCreatorOld<T, P> elementCreator,
     Function<GuiElementGlobalProperties, P> elementPropertiesConstructor,
     Consumer<P> propertiesInitializer
   ) {
@@ -164,6 +185,10 @@ public class SolaGui {
   }
 
   public interface GuiElementCreator<T extends GuiElement<P>, P extends GuiElementBaseProperties<?>> {
+    T create(SolaGui solaGui);
+  }
+
+  public interface GuiElementCreatorOld<T extends GuiElement<P>, P extends GuiElementBaseProperties<?>> {
     T create(SolaGui solaGui, P properties);
   }
 }
