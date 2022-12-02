@@ -60,32 +60,28 @@ public class GuiExample extends Sola {
 
     return solaGui.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).setBorderColor(Color.GREEN)
-    ).addChild(
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).setBorderColor(Color.GREEN),
       solaGui.createElement(
         TextGuiElement::new,
         p -> p.setText("Gui Example").margin.setBottom(10)
       ),
       solaGui.createElement(
         StreamGuiElementContainer::new,
-        p -> p.setGap(10).setBorderColor(Color.YELLOW).padding.set(5)
-      ).addChild(
+        p -> p.setGap(10).setBorderColor(Color.YELLOW).padding.set(5),
         solaGui.createElement(ButtonGuiElement::new, p -> p.setText("First")),
         solaGui.createElement(ButtonGuiElement::new, p -> p.setText("Second").padding.set(5)),
         solaGui.createElement(ButtonGuiElement::new, p -> p.setText("Third").margin.setTop(30)),
         solaGui.createElement(
           StreamGuiElementContainer::new,
           p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.RED).padding.set(5)
-            .setBackgroundColor(new Color(100, 50, 50, 255))
-        ).addChild(
+            .setBackgroundColor(new Color(100, 50, 50, 255)),
           solaGui.createElement(ButtonGuiElement::new, p -> p.setText("Sub First")),
           solaGui.createElement(ButtonGuiElement::new, p -> p.setText("Sub Second").margin.set(15, 0))
         )
       ),
       solaGui.createElement(
         StreamGuiElementContainer::new,
-        p -> p.setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.RIGHT).setBorderColor(Color.ORANGE).padding.set(5).setWidth(410)
-      ).addChild(
+        p -> p.setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.RIGHT).setBorderColor(Color.ORANGE).padding.set(5).setWidth(410),
         checkButton,
         toggleOtherButton
       ),
@@ -125,8 +121,7 @@ public class GuiExample extends Sola {
   private GuiElement<?> createImageContainer() {
     return solaGui.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setGap(5)
-    ).addChild(
+      p -> p.setGap(5),
       solaGui.createElement(
         ImageGuiElement::new,
         p -> p.setAssetId("test").setBorderColor(Color.ORANGE).padding.set(5)

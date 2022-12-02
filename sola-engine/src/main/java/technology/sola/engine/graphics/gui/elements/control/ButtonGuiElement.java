@@ -59,8 +59,10 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
     });
   }
 
-  public void setOnAction(Runnable onActionConsumer) {
+  public ButtonGuiElement setOnAction(Runnable onActionConsumer) {
     this.onActionConsumer = onActionConsumer;
+
+    return this;
   }
 
   public static class Properties extends BaseTextGuiElement.Properties {

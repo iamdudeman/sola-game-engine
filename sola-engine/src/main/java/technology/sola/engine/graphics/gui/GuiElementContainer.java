@@ -89,6 +89,10 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
   }
 
   public GuiElementContainer<T> addChild(GuiElement<?>... children) {
+    if (children == null) {
+      return this;
+    }
+
     this.children.addAll(Arrays.asList(children));
     properties.setLayoutChanged(true);
 

@@ -54,8 +54,7 @@ public class ExampleLauncherSola extends Sola {
       p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(5)
         .setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.CENTER)
         .setVerticalAlignment(StreamGuiElementContainer.VerticalAlignment.CENTER)
-        .padding.set(5).setWidth(800).setHeight(580)
-    ).addChild(
+        .padding.set(5).setWidth(800).setHeight(580),
       solaGui.createElement(
         TextGuiElement::new,
         p -> p.setText("Select an example to launch").margin.setBottom(15)
@@ -73,12 +72,10 @@ public class ExampleLauncherSola extends Sola {
   }
 
   private GuiElement<?> buildExampleLaunchButton(String text, Supplier<Sola> solaSupplier) {
-    ButtonGuiElement exampleLaunchButton = solaGui.createElement(
+    return solaGui.createElement(
       ButtonGuiElement::new,
       p -> p.setText(text).setTextAlign(BaseTextGuiElement.TextAlign.CENTER).padding.set(10).setWidth(300)
-    );
-
-    exampleLaunchButton.setOnAction(() -> {
+    ).setOnAction(() -> {
       eventHub.add(GameLoopEvent.class, event -> {
         if (event.type() == GameLoopEventType.STOPPED) {
           solaPlatform.play(solaSupplier.get());
@@ -87,7 +84,5 @@ public class ExampleLauncherSola extends Sola {
 
       eventHub.emit(new GameLoopEvent(GameLoopEventType.STOP));
     });
-
-    return exampleLaunchButton;
   }
 }

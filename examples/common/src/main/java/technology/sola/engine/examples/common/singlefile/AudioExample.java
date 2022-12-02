@@ -55,8 +55,7 @@ public class AudioExample extends Sola {
   private GuiElement<?> buildGui(AudioClip audioClip) {
     return solaGui.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(8).padding.set(10)
-    ).addChild(
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(8).padding.set(10),
       solaGui.createElement(
         TextGuiElement::new,
         p -> p.setText("Play a Song").padding.set(5)
@@ -107,8 +106,7 @@ public class AudioExample extends Sola {
   private GuiElement<?> buildControlsContainer(AudioClip audioClip) {
     return solaGui.createElement(
       StreamGuiElementContainer::new,
-      p -> p.padding.set(5)
-    ).addChild(
+      p -> p.padding.set(5),
       createButton("Loop", () -> audioClip.loop(AudioClip.CONTINUOUS_LOOPING)),
       createButton("Play Once", audioClip::play),
       createButton("Pause", audioClip::pause),
@@ -117,14 +115,10 @@ public class AudioExample extends Sola {
   }
 
   private ButtonGuiElement createButton(String text, Runnable action) {
-    ButtonGuiElement buttonGuiElement = solaGui.createElement(
+    return solaGui.createElement(
       ButtonGuiElement::new,
       p -> p.setText(text).padding.set(5).margin.setRight(5)
-    );
-
-    buttonGuiElement.setOnAction(action);
-
-    return buttonGuiElement;
+    ).setOnAction(action);
   }
 
   private String formatAudioVolume(float volume) {

@@ -8,6 +8,7 @@ import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.module.SolaModule;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.GuiElementContainer;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
@@ -79,35 +80,23 @@ public class SolaGui {
     GuiElementCreator<T, P> elementCreator,
     Consumer<P> propertiesInitializer
   ) {
-    var ele = elementCreator.create(this);
+    T guiElement = elementCreator.create(this);
 
-    propertiesInitializer.accept(ele.properties());
+    propertiesInitializer.accept(guiElement.properties());
 
-    return ele;
+    return guiElement;
   }
 
-  // TODO consider a createContainer method as well that allows passing in children
-
-  @Deprecated
-  public <T extends GuiElement<P>, P extends GuiElementBaseProperties<?>> T createElement(
-    GuiElementCreatorOld<T, P> elementCreator,
-    Function<GuiElementGlobalProperties, P> elementPropertiesConstructor
+  public <T extends GuiElementContainer<P>, P extends GuiElementBaseProperties<?>> T createElement(
+    GuiElementCreator<T, P> elementCreator,
+    Consumer<P> propertiesInitializer,
+    GuiElement<?> ...children
   ) {
-    return createElement(elementCreator, elementPropertiesConstructor, p -> {
-    });
-  }
+    T guiElementContainer = createElement(elementCreator, propertiesInitializer);
 
-  @Deprecated
-  public <T extends GuiElement<P>, P extends GuiElementBaseProperties<?>> T createElement(
-    GuiElementCreatorOld<T, P> elementCreator,
-    Function<GuiElementGlobalProperties, P> elementPropertiesConstructor,
-    Consumer<P> propertiesInitializer
-  ) {
-    P properties = elementPropertiesConstructor.apply(globalProperties);
+    guiElementContainer.addChild(children);
 
-    propertiesInitializer.accept(properties);
-
-    return elementCreator.create(this, properties);
+    return guiElementContainer;
   }
 
   public void setGuiRoot(GuiElement<?> guiElement) {
@@ -186,9 +175,5 @@ public class SolaGui {
 
   public interface GuiElementCreator<T extends GuiElement<P>, P extends GuiElementBaseProperties<?>> {
     T create(SolaGui solaGui);
-  }
-
-  public interface GuiElementCreatorOld<T extends GuiElement<P>, P extends GuiElementBaseProperties<?>> {
-    T create(SolaGui solaGui, P properties);
   }
 }
