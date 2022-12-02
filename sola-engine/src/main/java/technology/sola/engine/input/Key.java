@@ -77,7 +77,20 @@ public enum Key {
   //
   NUM_ZERO(96, "Num 0"),
   NUM_ONE(97, "Num 1"),
+  NUM_TWO(98, "Num 2"),
+  NUM_THREE(99, "Num 3"),
+  NUM_FOUR(100, "Num 4"),
+  NUM_FIVE(101, "Num 5"),
+  NUM_SIX(102, "Num 6"),
+  NUM_SEVEN(103, "Num 7"),
+  NUM_EIGHT(104, "Num 8"),
+  NUM_NINE(105, "Num 9"),
+  NUM_MULTIPLY(106, "Multiply"),
+  NUM_PLUS(107, "Plus"),
   //
+  NUM_MINUS(109, "Minus"),
+  NUM_POINT(110, "Point"),
+  NUM_DIVIDE(111, "Divide"),
   F1(112, "F1"),
   F2(113, "F2"),
   F3(114, "F3"),
@@ -90,6 +103,12 @@ public enum Key {
   F10(121, "F10"),
   F11(122, "F11"),
   F12(123, "F12"),
+  //
+  DELETE(127, "Delete"),
+  //
+  NUM_LOCK(144, "Num Lock"),
+  //
+  INSERT(155, "Insert"),
   //
   BACK_QUOTE(192, "Back Quote"),
   //
