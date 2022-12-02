@@ -14,15 +14,17 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
 
   private boolean wasMouseDownInside = false;
 
-  public ButtonGuiElement(SolaGui solaGui, Properties properties) {
-    super(solaGui, properties);
+  public ButtonGuiElement(SolaGui solaGui) {
+    super(solaGui, new Properties(solaGui.globalProperties));
 
     setOnMouseEnterCallback(event -> {});
     setOnMouseExitCallback(event -> {});
     setOnMouseDownCallback(event -> {});
     setOnMouseUpCallback(event -> {});
     setOnKeyPressCallback(keyEvent -> {
-      if (keyEvent.getKeyCode() == Key.ENTER.getCode() || keyEvent.getKeyCode() == Key.CARRIAGE_RETURN.getCode()) {
+      int keyCode = keyEvent.getKeyCode();
+
+      if (keyCode == Key.ENTER.getCode() || keyCode == Key.CARRIAGE_RETURN.getCode() || keyCode == Key.SPACE.getCode()) {
         onActionConsumer.run();
         keyEvent.stopPropagation();
       }
@@ -57,8 +59,10 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
     });
   }
 
-  public void setOnAction(Runnable onActionConsumer) {
+  public ButtonGuiElement setOnAction(Runnable onActionConsumer) {
     this.onActionConsumer = onActionConsumer;
+
+    return this;
   }
 
   public static class Properties extends BaseTextGuiElement.Properties {

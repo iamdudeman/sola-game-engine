@@ -4,8 +4,8 @@ import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
 
 public class TextGuiElement extends BaseTextGuiElement<TextGuiElement.Properties> {
-  public TextGuiElement(SolaGui solaGui, Properties properties) {
-    super(solaGui, properties);
+  public TextGuiElement(SolaGui solaGui) {
+    super(solaGui, new Properties(solaGui.globalProperties));
   }
 
   public static class Properties extends BaseTextGuiElement.Properties {
