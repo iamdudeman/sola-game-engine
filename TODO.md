@@ -1,4 +1,5 @@
 # sola-game-engine TODO list
+* cache transformed sprite when it is scaled for use in SpriteGraphics (or other places maybe?)
 
 ## Known Bugs List
 
