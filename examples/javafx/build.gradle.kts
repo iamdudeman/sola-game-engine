@@ -29,7 +29,7 @@ task("distFatJar", Jar::class) {
   archiveBaseName.set("examples-${project.name}-${osClassifier}")
 
   manifest {
-    attributes["Main-Class"] = "technology.sola.engine.examples.javafx.JavaFxMain"
+    attributes["Main-Class"] = "${project.properties["basePackage"]}.${project.name}.JavaFxMain"
   }
 
   val dependencies = configurations.runtimeClasspath.get().map(::zipTree)
@@ -39,7 +39,40 @@ task("distFatJar", Jar::class) {
     into("assets")
   }
   with(tasks.jar.get())
+  destinationDirectory.set(file("$buildDir/dist"))
   dependsOn(configurations.runtimeClasspath)
+}
+
+task("prepareJPackage", Delete::class) {
+  delete("$buildDir/jpackage")
+}
+
+task("distWinJPackage", Exec::class) {
+  group = "distribution"
+  dependsOn(tasks.getByName("prepareJPackage"))
+  dependsOn(tasks.getByName("distFatJar"))
+
+  executable("jpackage")
+
+  args(
+    "--name", "${project.properties["gameName"]}-${project.version}",
+    "--app-version", "${project.version}",
+    "--vendor", project.properties["vendor"],
+    "--dest", "$buildDir/jpackage",
+    "--input", "$buildDir/dist",
+    "--main-jar", "${project.properties["gameName"]}-${project.name}-win-${project.version}.jar",
+    "--type", "app-image"
+  )
+}
+
+task("distWinJPackageZip", Zip::class) {
+  group = "distribution"
+  destinationDirectory.set(file("$buildDir/jpackage"))
+  archiveBaseName.set("${project.properties["gameName"]}-win-${project.name}")
+
+  dependsOn(tasks.getByName("distWinJPackage"))
+
+  from("${buildDir}/jpackage/${project.properties["gameName"]}")
 }
 
 fun getOsClassifier(): String {

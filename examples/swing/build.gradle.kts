@@ -22,7 +22,7 @@ task("distFatJar", Jar::class) {
   archiveBaseName.set("examples-${project.name}")
 
   manifest {
-    attributes["Main-Class"] = "${project.properties["basePackage"]}.swing.SwingMain"
+    attributes["Main-Class"] = "${project.properties["basePackage"]}.${project.name}.SwingMain"
   }
 
   val dependencies = configurations.runtimeClasspath.get().map(::zipTree)
@@ -36,14 +36,19 @@ task("distFatJar", Jar::class) {
   dependsOn(configurations.runtimeClasspath)
 }
 
+task("prepareJPackage", Delete::class) {
+  delete("$buildDir/jpackage")
+}
+
 task("distWinJPackage", Exec::class) {
   group = "distribution"
+  dependsOn(tasks.getByName("prepareJPackage"))
   dependsOn(tasks.getByName("distFatJar"))
 
   executable("jpackage")
 
   args(
-    "--name", "${project.properties["gameName"]}",
+    "--name", "${project.properties["gameName"]}-${project.version}",
     "--app-version", "${project.version}",
     "--vendor", project.properties["vendor"],
     "--dest", "$buildDir/jpackage",
@@ -52,7 +57,6 @@ task("distWinJPackage", Exec::class) {
     "--type", "app-image"
   )
 }
-
 
 task("distWinJPackageZip", Zip::class) {
   group = "distribution"

@@ -89,11 +89,8 @@ Your users will not need to have Java installed.
    * ex. C:\Program Files\Java\jdk-17.0.5
    * powershell: $env:JAVA_HOME
    * To test configuration run: `& $env:JAVA_HOME/bin/jpackage.exe --version`
-3. Run from sola-game-engine\examples\swing on Windows Powershell
+3. Run the following command
 ```shell
-& $env:JAVA_HOME/bin/jpackage.exe --name Examples --app-version 0.1.1 --vendor sola.technology --dest build --input build/libs --main-jar examples-swing-0.1.1.jar --type app-image
+.\gradlew.bat distFatJarZip
 ```
-4. Run from sola-game-engine\examples\javafx on Windows Powershell
-```shell
-& $env:JAVA_HOME/bin/jpackage.exe --name Examples --app-version 0.1.1 --vendor sola.technology --dest build --input build/libs --main-jar examples-javafx-win-0.1.1.jar --type app-image
-```
+4. Output will be in the `build/jpackage` directory
