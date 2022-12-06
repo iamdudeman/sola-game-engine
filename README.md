@@ -64,7 +64,7 @@ your repo using Sola Game Engine.
 
 ## Creating Distributable Games
 ### Browser zip file
-Run the following command
+Run the following gradle command
 ```shell
 .\gradlew.bat distWebZip
 ```
@@ -72,7 +72,7 @@ The output will be at `examples/browser/build/examples-browser-<version>.zip`.
 This can be deployed to places like `itch.io` when using the "HTML" project type.
 
 ### Swing + JavaFx fat jar
-Run the following command
+Run the following gradle command
 ```shell
 .\gradlew.bat distFatJar
 ```
@@ -87,9 +87,9 @@ Your users will not need to have Java installed.
 1. Install [JDK 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 2. Update $JAVA_HOME path environment variable
    * ex. C:\Program Files\Java\jdk-17.0.5
-   * powershell: $env:JAVA_HOME
-   * To test configuration run: `& $env:JAVA_HOME/bin/jpackage.exe --version`
-3. Run the following command
+   * To test configuration run: `jpackage --version`
+     * Should see the current jdk version returned: `17.0.5`
+3. Run the following gradle command
 ```shell
 .\gradlew.bat distFatJarZip
 ```
