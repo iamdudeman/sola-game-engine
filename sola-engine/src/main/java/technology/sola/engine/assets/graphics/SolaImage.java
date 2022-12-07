@@ -6,7 +6,13 @@ import technology.sola.engine.graphics.Canvas;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SolaImage extends Canvas implements Asset {
+  private static final int CACHE_SIZE = 10;
+  private final transient Map<String, SolaImage> cachedTransforms = new HashMap<>(CACHE_SIZE + CACHE_SIZE / 3);
+
   public SolaImage(int width, int height) {
     super(width, height);
   }
@@ -19,6 +25,7 @@ public class SolaImage extends Canvas implements Asset {
     this.width = width;
     this.height = height;
     this.pixels = pixels;
+    cachedTransforms.clear();
   }
 
   public SolaImage getSubImage(int x, int y, int width, int height) {
@@ -40,8 +47,23 @@ public class SolaImage extends Canvas implements Asset {
     return new SolaImage(width, height, subPixels);
   }
 
+  public SolaImage scale(float scaleX, float scaleY) {
+    int newWidth = (int) (scaleX * width + 0.5f);
+    int newHeight = (int) (scaleY * height + 0.5f);
+
+    return resize(newWidth, newHeight);
+  }
+
   public SolaImage resize(int newWidth, int newHeight) {
-    int[] newImagePixels = new int[newWidth * newHeight];
+    String cacheKey = getCachedTransformKey(newWidth, newHeight);
+    SolaImage cachedTransform = cachedTransforms.get(cacheKey);
+
+    if (cachedTransform != null) {
+      return cachedTransform;
+    }
+
+    int totalPixelCount = newWidth * newHeight;
+    int[] newImagePixels = new int[totalPixelCount];
     float scaleX = (float) newWidth / getWidth();
     float scaleY = (float) newHeight / getHeight();
     AffineTransform affineTransform = new AffineTransform().scale(scaleX, scaleY);
@@ -52,12 +74,23 @@ public class SolaImage extends Canvas implements Asset {
         Vector2D newPosition = affineTransform.backward(x, y);
         int pixel = getPixel(newPosition.x(), newPosition.y());
 
-        if (x + y * newWidth < newWidth * newHeight) {
+        if (x + y * newWidth < totalPixelCount) {
           newImagePixels[x + y * newWidth] = pixel;
         }
       }
     }
 
-    return new SolaImage(newWidth, newHeight, newImagePixels);
+    if (cachedTransforms.size() >= CACHE_SIZE) {
+      cachedTransforms.clear();
+    }
+
+    cachedTransform = new SolaImage(newWidth, newHeight, newImagePixels);
+    cachedTransforms.put(cacheKey, cachedTransform);
+
+    return cachedTransform;
+  }
+
+  private String getCachedTransformKey(int width, int height) {
+    return width + "-" + height;
   }
 }
