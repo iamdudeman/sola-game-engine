@@ -60,7 +60,7 @@ public class GuiExample extends Sola {
 
     return solaGui.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).setBorderColor(Color.GREEN),
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).padding.set(3).setBorderColor(Color.GREEN),
       solaGui.createElement(
         TextGuiElement::new,
         p -> p.setText("Gui Example").margin.setBottom(10)
@@ -90,7 +90,11 @@ public class GuiExample extends Sola {
         p -> p.setText("Change font").padding.set(5).setId("changeFont")
       ),
       createKeyTesterElement(),
-      createImageContainer()
+      createImageContainer(),
+      solaGui.createElement(
+        TextGuiElement::new,
+        p -> p.setText("This is a longer text that should wrap a bit. It might even wrap to a third line.").padding.set(15).setWidth(380).setBorderColor(Color.DARK_GRAY)
+      )
     );
   }
 
