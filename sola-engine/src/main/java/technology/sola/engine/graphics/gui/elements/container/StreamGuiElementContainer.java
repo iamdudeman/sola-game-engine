@@ -10,8 +10,8 @@ import technology.sola.engine.input.Key;
 import java.util.List;
 
 public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElementContainer.Properties> {
-  public StreamGuiElementContainer(SolaGui solaGui, Properties properties) {
-    super(solaGui, properties);
+  public StreamGuiElementContainer(SolaGui solaGui) {
+    super(solaGui, new StreamGuiElementContainer.Properties(solaGui.globalProperties));
 
     setOnKeyPressCallback(keyEvent -> {
       int forwardKeyCode = properties.direction == Direction.HORIZONTAL ? Key.RIGHT.getCode() : Key.DOWN.getCode();

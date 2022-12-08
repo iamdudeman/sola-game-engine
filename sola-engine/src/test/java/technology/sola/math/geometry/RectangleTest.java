@@ -14,8 +14,8 @@ class RectangleTest {
     void when_shouldSetMinMax() {
       Rectangle rectangle = new Rectangle(new Vector2D(0, 0), new Vector2D(10, 10));
 
-      assertEquals(new Vector2D(0, 0), rectangle.getMin());
-      assertEquals(new Vector2D(10, 10), rectangle.getMax());
+      assertEquals(new Vector2D(0, 0), rectangle.min());
+      assertEquals(new Vector2D(10, 10), rectangle.max());
     }
 
     @Test

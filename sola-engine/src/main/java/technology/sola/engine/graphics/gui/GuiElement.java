@@ -40,9 +40,7 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
       return properties.getWidth();
     }
 
-    int borderSize = properties.getBorderColor() == null ? 0 : 2;
-
-    return getContentWidth() + properties.padding.getLeft() + properties.padding.getRight() + borderSize;
+    return getContentWidth() + getNonContentWidth();
   }
 
   public int getHeight() {
@@ -50,9 +48,15 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
       return properties.getHeight();
     }
 
-    int borderSize = properties.getBorderColor() == null ? 0 : 2;
+    return getContentHeight() + getNonContentHeight();
+  }
 
-    return getContentHeight() + properties.padding.getTop() + properties.padding.getBottom() + borderSize;
+  public int getNonContentWidth() {
+    return properties.padding.getLeft() + properties.padding.getRight() + properties().getBorderSize() * 2;
+  }
+
+  public int getNonContentHeight() {
+    return properties.padding.getTop() + properties.padding.getBottom() + properties().getBorderSize() * 2;
   }
 
   public abstract void recalculateLayout();

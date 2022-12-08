@@ -21,6 +21,10 @@ public class GuiElementGlobalProperties {
   }
 
   public GuiElementGlobalProperties setDefaultFontAssetId(String defaultFontAssetId) {
+    if (this.defaultFontAssetId.equals(defaultFontAssetId)) {
+      return this;
+    }
+
     this.defaultFontAssetId = defaultFontAssetId;
 
     GuiElement<?> rootElement = this.rootElementSupplier.get();

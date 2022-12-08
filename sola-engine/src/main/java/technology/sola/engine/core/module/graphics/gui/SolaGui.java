@@ -8,6 +8,7 @@ import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.module.SolaModule;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.GuiElementContainer;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
@@ -16,7 +17,6 @@ import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 /**
  * SolaGui is a {@link SolaModule} that handles registering event listeners and loading a default {@link Font} for
@@ -70,23 +70,32 @@ public class SolaGui {
   }
 
   public <T extends GuiElement<P>, P extends GuiElementBaseProperties<?>> T createElement(
-    GuiElementCreator<T, P> elementCreator,
-    Function<GuiElementGlobalProperties, P> elementPropertiesConstructor
+    GuiElementCreator<T, P> elementCreator
   ) {
-    return createElement(elementCreator, elementPropertiesConstructor, p -> {
-    });
+    return elementCreator.create(this);
   }
 
   public <T extends GuiElement<P>, P extends GuiElementBaseProperties<?>> T createElement(
     GuiElementCreator<T, P> elementCreator,
-    Function<GuiElementGlobalProperties, P> elementPropertiesConstructor,
     Consumer<P> propertiesInitializer
   ) {
-    P properties = elementPropertiesConstructor.apply(globalProperties);
+    T guiElement = elementCreator.create(this);
 
-    propertiesInitializer.accept(properties);
+    propertiesInitializer.accept(guiElement.properties());
 
-    return elementCreator.create(this, properties);
+    return guiElement;
+  }
+
+  public <T extends GuiElementContainer<P>, P extends GuiElementBaseProperties<?>> T createElement(
+    GuiElementCreator<T, P> elementCreator,
+    Consumer<P> propertiesInitializer,
+    GuiElement<?> ...children
+  ) {
+    T guiElementContainer = createElement(elementCreator, propertiesInitializer);
+
+    guiElementContainer.addChild(children);
+
+    return guiElementContainer;
   }
 
   public void setGuiRoot(GuiElement<?> guiElement) {
@@ -164,6 +173,6 @@ public class SolaGui {
   }
 
   public interface GuiElementCreator<T extends GuiElement<P>, P extends GuiElementBaseProperties<?>> {
-    T create(SolaGui solaGui, P properties);
+    T create(SolaGui solaGui);
   }
 }

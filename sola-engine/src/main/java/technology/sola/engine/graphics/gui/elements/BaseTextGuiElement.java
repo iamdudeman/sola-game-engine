@@ -9,12 +9,17 @@ import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.renderer.Renderer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties> extends GuiElement<T> {
   private Font font;
   private String currentFontAssetId;
 
   private int textWidth = 1;
   private int textHeight = 1;
+  private int lineHeight = 1;
+  private List<String> lines = new ArrayList<>();
 
   public BaseTextGuiElement(SolaGui solaGui, T properties) {
     super(solaGui, properties);
@@ -53,7 +58,10 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
       }
 
       renderer.setFont(font);
-      renderer.drawString(properties.getText(), x + alignOffsetX, y, colorToRender);
+
+      for (int i = 0; i < lines.size(); i++) {
+        renderer.drawString(lines.get(i), x + alignOffsetX, y + lineHeight * i, colorToRender);
+      }
     }
   }
 
@@ -72,10 +80,39 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
         });
     }
 
-    var textDimensions = font.getDimensionsForText(properties().getText());
+    Font.TextDimensions textDimensions = font.getDimensionsForText(properties().getText());
 
+    lineHeight = Math.max(textDimensions.height(), 1);
+    textHeight = lineHeight;
     textWidth = Math.max(textDimensions.width(), 1);
-    textHeight = Math.max(textDimensions.height(), 1);
+    int availableWidth = properties.getWidth() == null ? textWidth : properties.getWidth() - getNonContentWidth();
+
+    if (availableWidth < textWidth) {
+      textWidth = availableWidth;
+      lines = new ArrayList<>();
+      String[] words = properties.getText().split(" ");
+      String sentence = words.length > 0 ? words[0] : " ";
+
+      for (int i = 1; i < words.length; i++) {
+        String word = words[i];
+        String tempSentence = sentence + " " + word;
+        Font.TextDimensions sentenceDimensions = font.getDimensionsForText(tempSentence);
+
+        if (sentenceDimensions.width() < availableWidth) {
+          sentence = tempSentence;
+        } else {
+          // Start next line with current word
+          lines.add(sentence);
+          sentence = word;
+        }
+      }
+
+      lines.add(sentence);
+      textHeight = lineHeight * lines.size();
+    } else {
+      lines = new ArrayList<>(1);
+      lines.add(properties().getText());
+    }
   }
 
   public static class HoverProperties extends GuiElementBaseHoverProperties {

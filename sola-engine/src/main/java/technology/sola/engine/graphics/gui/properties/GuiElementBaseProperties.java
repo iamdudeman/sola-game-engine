@@ -72,6 +72,10 @@ public class GuiElementBaseProperties<GuiElementHoverProperties extends GuiEleme
     return this;
   }
 
+  public int getBorderSize() {
+    return borderColor == null ? 0 : 1;
+  }
+
   public Color getBorderColor() {
     return borderColor;
   }

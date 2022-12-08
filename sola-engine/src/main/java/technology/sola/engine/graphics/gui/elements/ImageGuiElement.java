@@ -15,8 +15,8 @@ public class ImageGuiElement extends GuiElement<ImageGuiElement.Properties> {
   private SolaImage solaImage;
   private SolaImage transformedImage;
 
-  public ImageGuiElement(SolaGui solaGui, Properties properties) {
-    super(solaGui, properties);
+  public ImageGuiElement(SolaGui solaGui) {
+    super(solaGui, new Properties(solaGui.globalProperties));
   }
 
   @Override

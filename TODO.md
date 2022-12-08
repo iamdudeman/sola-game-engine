@@ -28,6 +28,7 @@
   * Implement a way to load gui stuff from a file
     * possibly use JSON to define gui structure
   * A "post load" callback to add event listeners and such
+* Consider some sort of lighting mechanism implementation
 * Consider adding rotation to TransformComponent
   * Would need to update rendering stuff
   * Would need to update physics stuff
