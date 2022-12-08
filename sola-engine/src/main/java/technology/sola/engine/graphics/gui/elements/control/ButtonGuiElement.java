@@ -4,6 +4,7 @@ import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseEvent;
 
@@ -60,12 +61,34 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
   }
 
   public ButtonGuiElement setOnAction(Runnable onActionConsumer) {
-    this.onActionConsumer = onActionConsumer;
+    this.onActionConsumer = () -> {
+      if (!properties().isDisabled) {
+        onActionConsumer.run();
+      }
+    };
 
     return this;
   }
 
+  @Override
+  public boolean isHovered() {
+    return super.isHovered() && !properties.isDisabled();
+  }
+
+  @Override
+  public void render(Renderer renderer) {
+    Color backgroundColor = properties.getBackgroundColor();
+    if (properties().isDisabled()) {
+      properties.setBackgroundColor(properties.getDisabledBackgroundColor());
+    }
+    super.render(renderer);
+    properties.setBackgroundColor(backgroundColor);
+  }
+
   public static class Properties extends BaseTextGuiElement.Properties {
+    private boolean isDisabled = false;
+    private Color disabledBackgroundColor = new Color(85, 239, 239, 239);
+
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
       setFocusable(true);
@@ -77,6 +100,29 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
       hover.setBackgroundColor(Color.WHITE);
       hover.setBorderColor(Color.DARK_GRAY);
       hover.setColorText(Color.DARK_GRAY);
+    }
+
+    @Override
+    public boolean isFocusable() {
+      return super.isFocusable() && !isDisabled();
+    }
+
+    public boolean isDisabled() {
+      return isDisabled;
+    }
+
+    public Properties setDisabled(boolean disabled) {
+      isDisabled = disabled;
+      return this;
+    }
+
+    public Color getDisabledBackgroundColor() {
+      return disabledBackgroundColor;
+    }
+
+    public Properties setDisabledBackgroundColor(Color disabledBackgroundColor) {
+      this.disabledBackgroundColor = disabledBackgroundColor;
+      return this;
     }
   }
 }

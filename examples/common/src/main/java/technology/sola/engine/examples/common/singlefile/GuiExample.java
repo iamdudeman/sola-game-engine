@@ -29,8 +29,12 @@ public class GuiExample extends Sola {
     solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
     solaGui.setGuiRoot(buildGui(), 15, 15);
 
-    solaGui.getElementById("changeFont", ButtonGuiElement.class)
-      .setOnAction(() -> solaGui.globalProperties.setDefaultFontAssetId("times_NORMAL_18"));
+    ButtonGuiElement changeFontButtonEle = solaGui.getElementById("changeFont", ButtonGuiElement.class);
+
+    changeFontButtonEle.setOnAction(() -> {
+      solaGui.globalProperties.setDefaultFontAssetId("times_NORMAL_18");
+      changeFontButtonEle.properties().setDisabled(true);
+    });
 
     assetLoaderProvider.get(SolaImage.class)
       .addAssetMapping("test", "assets/test_tiles.png");
