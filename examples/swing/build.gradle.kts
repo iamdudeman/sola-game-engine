@@ -65,5 +65,5 @@ task("distWinJPackageZip", Zip::class) {
 
   dependsOn(tasks.getByName("distWinJPackage"))
 
-  from("${buildDir}/jpackage/${project.properties["gameName"]}")
+  from("${buildDir}/jpackage/${project.properties["gameName"]}-${project.version}")
 }
