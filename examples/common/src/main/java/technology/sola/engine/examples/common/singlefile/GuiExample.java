@@ -29,8 +29,12 @@ public class GuiExample extends Sola {
     solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
     solaGui.setGuiRoot(buildGui(), 15, 15);
 
-    solaGui.getElementById("changeFont", ButtonGuiElement.class)
-      .setOnAction(() -> solaGui.globalProperties.setDefaultFontAssetId("times_NORMAL_18"));
+    ButtonGuiElement changeFontButtonEle = solaGui.getElementById("changeFont", ButtonGuiElement.class);
+
+    changeFontButtonEle.setOnAction(() -> {
+      solaGui.globalProperties.setDefaultFontAssetId("times_NORMAL_18");
+      changeFontButtonEle.properties().setDisabled(true);
+    });
 
     assetLoaderProvider.get(SolaImage.class)
       .addAssetMapping("test", "assets/test_tiles.png");
@@ -60,7 +64,7 @@ public class GuiExample extends Sola {
 
     return solaGui.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).setBorderColor(Color.GREEN),
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).padding.set(3).setBorderColor(Color.GREEN),
       solaGui.createElement(
         TextGuiElement::new,
         p -> p.setText("Gui Example").margin.setBottom(10)
@@ -90,14 +94,18 @@ public class GuiExample extends Sola {
         p -> p.setText("Change font").padding.set(5).setId("changeFont")
       ),
       createKeyTesterElement(),
-      createImageContainer()
+      createImageContainer(),
+      solaGui.createElement(
+        TextGuiElement::new,
+        p -> p.setText("This is a longer text that should wrap a bit. It might even wrap to a third line.").padding.set(15).setWidth(380).setBorderColor(Color.DARK_GRAY)
+      )
     );
   }
 
   private GuiElement<?> createKeyTesterElement() {
     TextGuiElement textGuiElement = solaGui.createElement(
       TextGuiElement::new,
-      p -> p.setText("Type a key").setColorText(Color.WHITE).setFocusable(true).padding.set(3).margin.setTop(10).setFocusOutlineColor(Color.LIGHT_BLUE).setBorderColor(Color.WHITE)
+      p -> p.setText("Type a key").setColorText(Color.WHITE).setFocusable(true).padding.set(3).margin.setTop(5).setFocusOutlineColor(Color.LIGHT_BLUE).setBorderColor(Color.WHITE)
     );
 
     textGuiElement.setOnKeyPressCallback(guiKeyEvent -> {
