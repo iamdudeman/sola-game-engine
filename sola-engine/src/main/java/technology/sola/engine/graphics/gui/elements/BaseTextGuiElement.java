@@ -80,39 +80,36 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
         });
     }
 
-    var textDimensions = font.getDimensionsForText(properties().getText());
+    Font.TextDimensions textDimensions = font.getDimensionsForText(properties().getText());
 
+    lineHeight = Math.max(textDimensions.height(), 1);
+    textHeight = lineHeight;
     textWidth = Math.max(textDimensions.width(), 1);
     int availableWidth = properties.getWidth() == null ? textWidth : properties.getWidth() - getNonContentWidth();
 
     if (availableWidth < textWidth) {
+      textWidth = availableWidth;
       lines = new ArrayList<>();
       String[] words = properties.getText().split(" ");
-      String sentence = "";
+      String sentence = words.length > 0 ? words[0] : " ";
 
-      for (String word : words) {
-        if (sentence.isEmpty()) {
-          sentence = word;
+      for (int i = 1; i < words.length; i++) {
+        String word = words[i];
+        String tempSentence = sentence + " " + word;
+        Font.TextDimensions sentenceDimensions = font.getDimensionsForText(tempSentence);
+
+        if (sentenceDimensions.width() < availableWidth) {
+          sentence = tempSentence;
         } else {
-          String tempSentence = sentence + " " + word;
-          var sentenceDimensions = font.getDimensionsForText(tempSentence);
-
-          if (sentenceDimensions.width() >= availableWidth) {
-            lines.add(sentence);
-            sentence = word;
-          } else {
-            sentence = tempSentence;
-          }
+          // Start next line with current word
+          lines.add(sentence);
+          sentence = word;
         }
       }
 
       lines.add(sentence);
-      textWidth = availableWidth;
-      lineHeight = Math.max(textDimensions.height(), 1);
       textHeight = lineHeight * lines.size();
     } else {
-      lineHeight = Math.max(textDimensions.height(), 1);
-      textHeight = lineHeight;
       lines = new ArrayList<>(1);
       lines.add(properties().getText());
     }
