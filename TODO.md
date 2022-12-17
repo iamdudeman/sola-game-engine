@@ -1,4 +1,17 @@
 # sola-game-engine TODO list
+* Consider some networking stuff
+  * Socket Clients would need an interface to work off of
+    * implement for Swing and JavaFX
+    * implement for Browser (socket.io maybe)
+  * Socket Server could maybe use a "console" SolaPlatform
+    * or maybe the Server can "play" a Sola but is something custom?
+  * REST client as well (some interface)
+    * implement for Swing and JavaFX
+    * implement for Browser
+* rendering improvement
+  * ability to "clamp" the rendering
+    * currently anything outside of renderer width+height is default
+    * ability to set smaller space temporarily could be useful for things like the GUI stuff
 
 ## Known Bugs List
 
@@ -61,15 +74,6 @@
     * possible example, instead of png use different file format that many can be compressed into one larger file
       * path /test
       * contents 100 100 ffffffff 00ff00ff
-* Consider some networking stuff
-  * Socket Clients would need an interface to work off of
-    * implement for Swing and JavaFX
-    * implement for Browser (socket.io maybe)
-  * Socket Server could maybe use a "console" SolaPlatform
-    * or maybe the Server can "play" a Sola but is something custom?
-  * REST client as well (some interface)
-    * implement for Swing and JavaFX
-    * implement for Browser
 * Scripting language
   * How will that work with browser implementation?
   * Maybe a custom Domain Specific Language?
