@@ -5,6 +5,7 @@
     * implement for Browser (socket.io maybe)
   * Socket Server could maybe use a "console" SolaPlatform
     * or maybe the Server can "play" a Sola but is something custom?
+    * Maybe allow for making rest routes too?
   * REST client as well (some interface)
     * implement for Swing and JavaFX
     * implement for Browser
