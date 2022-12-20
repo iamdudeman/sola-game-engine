@@ -1,7 +1,7 @@
 package technology.sola.engine.networking.socket;
 
-public interface SocketMessage<T> {
-  SocketHeader header();
+import java.io.Serializable;
 
+public interface SocketMessage<T> extends Serializable {
   T body();
 }
