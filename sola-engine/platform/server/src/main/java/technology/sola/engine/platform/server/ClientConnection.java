@@ -50,7 +50,7 @@ public class ClientConnection implements Runnable, Closeable {
         LOGGER.info("Waiting for message");
         SocketMessage<?> socketMessage = (SocketMessage<?>) objectInputStream.readObject(); // blocking
 //          networkMessage.setClientId(clientId);
-        LOGGER.info("Message received from {}", clientId);
+        LOGGER.info("Message received from {} {}", clientId, socketMessage.body().toString());
         networkQueue.addLast(socketMessage);
       }
     } catch (IOException | ClassNotFoundException ex) {
