@@ -16,7 +16,7 @@ public class ServerMain {
    */
   public static void main(String[] args) {
     SolaPlatform solaPlatform = new ServerSolaPlatform();
-    Sola sola = new ExampleLauncherSola(solaPlatform);
+    Sola sola = new ExampleServerSola(30);
 
     solaPlatform.play(sola);
   }

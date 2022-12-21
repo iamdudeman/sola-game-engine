@@ -1,6 +1,7 @@
 package technology.sola.engine.platform.server;
 
 import technology.sola.engine.assets.AssetLoaderProvider;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -9,9 +10,16 @@ import technology.sola.engine.input.MouseEvent;
 
 import java.util.function.Consumer;
 
-// todo need ability to set port
-
 public class ServerSolaPlatform extends SolaPlatform {
+  @Override
+  public void play(Sola sola) {
+    if (sola instanceof ServerSola) {
+      super.play(sola);
+    } else {
+      throw new IllegalArgumentException("Can only play ServerSola instances");
+    }
+  }
+
   @Override
   public void onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
     // Nothing needed
@@ -39,7 +47,7 @@ public class ServerSolaPlatform extends SolaPlatform {
 
   @Override
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
-
+    solaPlatformInitialization.finish();
   }
 
   @Override
@@ -54,6 +62,6 @@ public class ServerSolaPlatform extends SolaPlatform {
 
   @Override
   protected void populateAssetLoaderProvider(AssetLoaderProvider assetLoaderProvider) {
-
+    // todo probably need ability to load json at least
   }
 }
