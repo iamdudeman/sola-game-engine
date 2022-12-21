@@ -7,7 +7,9 @@ import technology.sola.engine.networking.socket.SocketMessage;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SocketServer {
@@ -56,7 +58,7 @@ public class SocketServer {
     }
   }
 
-  public void message(long id, SocketMessage<?> socketMessage) {
+  public void message(long id, SocketMessage socketMessage) {
     try {
       ClientConnection clientConnection = clientConnectionMap.get(id);
 
@@ -70,8 +72,20 @@ public class SocketServer {
     }
   }
 
-  public void broadcast(SocketMessage<?> socketMessage, SocketClient... ignoreClients) {
+  public void broadcast(SocketMessage socketMessage, long... ignoreClients) {
+    List<Long> ignoreIds = new ArrayList<>();
+
+    if (ignoreClients != null) {
+      for (long ignoreId : ignoreClients) {
+        ignoreIds.add(ignoreId);
+      }
+    }
+
     clientConnectionMap.forEach((id, client) -> {
+      if (ignoreIds.contains(id)) {
+        return;
+      }
+
       try {
         client.sendMessage(socketMessage);
       } catch (IOException ex) {

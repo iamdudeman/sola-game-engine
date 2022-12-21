@@ -1,9 +1,7 @@
 package technology.sola.engine.networking.socket;
 
-import java.io.IOException;
-
 public interface SocketClient {
-  void sendMessage(SocketMessage<?> socketMessage);
+  void sendMessage(SocketMessage socketMessage);
 
   void connect(String host, int port);
 

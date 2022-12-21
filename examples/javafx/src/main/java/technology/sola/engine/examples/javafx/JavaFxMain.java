@@ -5,7 +5,6 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.examples.common.networking.ChatSocketMessage;
 import technology.sola.engine.networking.socket.SocketClient;
-import technology.sola.engine.networking.socket.SocketMessage;
 import technology.sola.engine.platform.javafx.JavaFxSocketClient;
 import technology.sola.engine.platform.javafx.JavaFxSolaPlatform;
 
@@ -31,7 +30,7 @@ public class JavaFxMain {
 
     try {
       Thread.sleep(2000);
-      socketClient.sendMessage(new ChatSocketMessage("Test"));
+      socketClient.sendMessage(new ChatSocketMessage("Test", "Message"));
     } catch (InterruptedException ex) {
       ex.printStackTrace();
     }

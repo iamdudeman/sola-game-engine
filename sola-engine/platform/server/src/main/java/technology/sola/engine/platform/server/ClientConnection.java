@@ -13,7 +13,7 @@ import java.net.Socket;
 
 public class ClientConnection implements Runnable, Closeable {
   private static final Logger LOGGER = LoggerFactory.getLogger(ClientConnection.class);
-  private final NetworkQueue<SocketMessage<?>> networkQueue = new NetworkQueue<>();
+  private final NetworkQueue<SocketMessage> networkQueue = new NetworkQueue<>();
   private final Socket socket;
   private final long clientId;
   private boolean isConnected = false;
@@ -29,11 +29,11 @@ public class ClientConnection implements Runnable, Closeable {
     return clientId;
   }
 
-  public NetworkQueue<SocketMessage<?>> getNetworkQueue() {
+  public NetworkQueue<SocketMessage> getNetworkQueue() {
     return networkQueue;
   }
 
-  public void sendMessage(SocketMessage<?> socketMessage) throws IOException {
+  public void sendMessage(SocketMessage socketMessage) throws IOException {
     objectOutputStream.writeObject(socketMessage);
     LOGGER.info("Message sent to {}", clientId);
   }
@@ -48,9 +48,9 @@ public class ClientConnection implements Runnable, Closeable {
 
       while (isConnected) {
         LOGGER.info("Waiting for message");
-        SocketMessage<?> socketMessage = (SocketMessage<?>) objectInputStream.readObject(); // blocking
+        SocketMessage socketMessage = (SocketMessage) objectInputStream.readObject(); // blocking
 //          networkMessage.setClientId(clientId);
-        LOGGER.info("Message received from {} {}", clientId, socketMessage.body().toString());
+        LOGGER.info("Message received from {} {}", clientId, socketMessage.toString());
         networkQueue.addLast(socketMessage);
       }
     } catch (IOException | ClassNotFoundException ex) {

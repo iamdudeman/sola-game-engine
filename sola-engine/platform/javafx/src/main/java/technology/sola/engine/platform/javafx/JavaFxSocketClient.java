@@ -18,10 +18,10 @@ public class JavaFxSocketClient implements SocketClient {
   private ObjectOutputStream objectOutputStream = null;
   private boolean isStarted = false;
   private Socket socket;
-  private final NetworkQueue<SocketMessage<?>> networkQueue = new NetworkQueue<>();
+  private final NetworkQueue<SocketMessage> networkQueue = new NetworkQueue<>();
 
   @Override
-  public void sendMessage(SocketMessage<?> socketMessage) {
+  public void sendMessage(SocketMessage socketMessage) {
     try {
       objectOutputStream.writeObject(socketMessage);
       LOGGER.info("Message sent");
@@ -44,7 +44,7 @@ public class JavaFxSocketClient implements SocketClient {
 
           while (isConnected) {
             LOGGER.info("Waiting for message");
-            SocketMessage<?> socketMessage = (SocketMessage<?>) objectInputStream.readObject(); // blocking
+            SocketMessage socketMessage = (SocketMessage) objectInputStream.readObject(); // blocking
             LOGGER.info("Message received");
             networkQueue.addLast(socketMessage);
           }
