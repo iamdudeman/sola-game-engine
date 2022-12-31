@@ -2,6 +2,9 @@ package technology.sola.engine.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import technology.sola.ecs.SolaEcs;
+import technology.sola.engine.core.GameLoop;
+import technology.sola.engine.event.EventHub;
 import technology.sola.engine.networking.socket.SocketMessage;
 
 import java.io.IOException;
@@ -11,17 +14,42 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SocketServer {
-  private static final Logger LOGGER = LoggerFactory.getLogger(SocketServer.class);
+public abstract class SolaServer {
+  private static final Logger LOGGER = LoggerFactory.getLogger(SolaServer.class);
   private final Map<Long, ClientConnection> clientConnectionMap = new HashMap<>();
   private long clientCount = 0;
   private ServerSocket serverSocket;
   private boolean isAcceptingConnections = true;
   private boolean isStarted = false;
+  protected final SolaEcs solaEcs;
+  protected final EventHub eventHub;
+  private final GameLoop gameLoop;
+
+  protected SolaServer(int targetUpdatesPerSecond) {
+    solaEcs = new SolaEcs();
+    eventHub = new EventHub();
+    this.gameLoop = new ServerGameLoop(eventHub, solaEcs::updateWorld, targetUpdatesPerSecond);
+  }
+
+  public abstract void initialize();
+
+  public abstract boolean onConnect(ClientConnection clientConnection);
+
+  // todo hook this up
+  public abstract void onDisconnect(ClientConnection clientConnection);
+
+  // todo hook this up
+  public abstract boolean onMessage(ClientConnection clientConnection, SocketMessage socketMessage);
 
   public void start(int port) {
+    initialize();
+
     isStarted = true;
 
+    // game loop thread
+    new Thread(gameLoop).start();
+
+    // network thread
     new Thread(() -> {
       try {
         serverSocket = new ServerSocket(port);
@@ -29,9 +57,16 @@ public class SocketServer {
         do {
           LOGGER.info("Waiting for connection...");
           ClientConnection clientConnection = new ClientConnection(serverSocket.accept(), nextClientId());
-          LOGGER.info("Client {} connected", clientConnection.getClientId());
-          clientConnectionMap.put(clientConnection.getClientId(), clientConnection);
-          new Thread(clientConnection).start();
+
+          if (onConnect(clientConnection)) {
+            LOGGER.info("Client {} accepted", clientConnection.getClientId());
+            clientConnectionMap.put(clientConnection.getClientId(), clientConnection);
+            new Thread(clientConnection).start();
+          } else {
+            LOGGER.info("Client {} rejected", clientConnection.getClientId());
+            clientConnection.close();
+          }
+
         } while (isAcceptingConnections);
       } catch (IOException ex) {
         LOGGER.error(ex.getMessage(), ex);
@@ -92,10 +127,6 @@ public class SocketServer {
       }
     });
   }
-
-  // onConnect(client)
-  // onDisconnect(client)
-  // onMessage(client, message)
 
   private long nextClientId() {
     return clientCount++;
