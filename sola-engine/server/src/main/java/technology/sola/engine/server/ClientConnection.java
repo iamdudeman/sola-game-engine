@@ -6,10 +6,12 @@ import technology.sola.engine.networking.NetworkQueue;
 import technology.sola.engine.networking.socket.SocketMessage;
 
 import java.io.Closeable;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.function.Consumer;
 
 public class ClientConnection implements Runnable, Closeable {
   private static final Logger LOGGER = LoggerFactory.getLogger(ClientConnection.class);
@@ -19,10 +21,12 @@ public class ClientConnection implements Runnable, Closeable {
   private boolean isConnected = false;
   private ObjectInputStream objectInputStream = null;
   private ObjectOutputStream objectOutputStream = null;
+  private Consumer<ClientConnection> onDisconnect;
 
-  ClientConnection(Socket socket, long clientId) {
+  ClientConnection(Socket socket, long clientId, Consumer<ClientConnection> onDisconnect) {
     this.socket = socket;
     this.clientId = clientId;
+    this.onDisconnect = onDisconnect;
   }
 
   public long getClientId() {
@@ -52,6 +56,8 @@ public class ClientConnection implements Runnable, Closeable {
         LOGGER.info("Message received from {} {}", clientId, socketMessage.toString());
         networkQueue.addLast(socketMessage);
       }
+    } catch (EOFException ex) {
+      onDisconnect.accept(this);
     } catch (IOException | ClassNotFoundException ex) {
       LOGGER.error(ex.getMessage(), ex);
     }

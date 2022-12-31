@@ -33,7 +33,7 @@ public class ServerMain {
 
     @Override
     public void onDisconnect(ClientConnection clientConnection) {
-
+      System.out.println("Disconnected - " + clientConnection.getClientId());
     }
 
     @Override

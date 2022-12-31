@@ -35,7 +35,6 @@ public abstract class SolaServer {
 
   public abstract boolean onConnect(ClientConnection clientConnection);
 
-  // todo hook this up
   public abstract void onDisconnect(ClientConnection clientConnection);
 
   // todo hook this up
@@ -56,7 +55,9 @@ public abstract class SolaServer {
 
         do {
           LOGGER.info("Waiting for connection...");
-          ClientConnection clientConnection = new ClientConnection(serverSocket.accept(), nextClientId());
+          ClientConnection clientConnection = new ClientConnection(
+            serverSocket.accept(), nextClientId(), this::onDisconnect
+          );
 
           if (onConnect(clientConnection)) {
             LOGGER.info("Client {} accepted", clientConnection.getClientId());
@@ -66,7 +67,6 @@ public abstract class SolaServer {
             LOGGER.info("Client {} rejected", clientConnection.getClientId());
             clientConnection.close();
           }
-
         } while (isAcceptingConnections);
       } catch (IOException ex) {
         LOGGER.error(ex.getMessage(), ex);
