@@ -6,6 +6,7 @@ import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopEventType;
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
+import technology.sola.engine.examples.common.networking.NetworkingExample;
 import technology.sola.engine.examples.common.singlefile.AnimationExample;
 import technology.sola.engine.examples.common.singlefile.AudioExample;
 import technology.sola.engine.examples.common.singlefile.GuiExample;
@@ -63,6 +64,7 @@ public class ExampleLauncherSola extends Sola {
       buildExampleLaunchButton("Audio", AudioExample::new),
       buildExampleLaunchButton("Gui", GuiExample::new),
       buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new),
+      buildExampleLaunchButton("Networking", NetworkingExample::new),
       buildExampleLaunchButton("Particle", ParticleExample::new),
       buildExampleLaunchButton("Rendering", RenderingExample::new),
       buildExampleLaunchButton("Simple Platformer", SimplePlatformerExample::new),
