@@ -18,15 +18,17 @@ public class ClientConnection implements Runnable, Closeable {
   private final NetworkQueue<SocketMessage> networkQueue = new NetworkQueue<>();
   private final Socket socket;
   private final long clientId;
+  private final Consumer<ClientConnection> onDisconnect;
+  private final OnMessageHandler onMessage;
   private boolean isConnected = false;
   private ObjectInputStream objectInputStream = null;
   private ObjectOutputStream objectOutputStream = null;
-  private Consumer<ClientConnection> onDisconnect;
 
-  ClientConnection(Socket socket, long clientId, Consumer<ClientConnection> onDisconnect) {
+  ClientConnection(Socket socket, long clientId, Consumer<ClientConnection> onDisconnect, OnMessageHandler onMessage) {
     this.socket = socket;
     this.clientId = clientId;
     this.onDisconnect = onDisconnect;
+    this.onMessage = onMessage;
   }
 
   public long getClientId() {
@@ -53,10 +55,15 @@ public class ClientConnection implements Runnable, Closeable {
       while (isConnected) {
         LOGGER.info("Waiting for message");
         SocketMessage socketMessage = (SocketMessage) objectInputStream.readObject(); // blocking
-        LOGGER.info("Message received from {} {}", clientId, socketMessage.toString());
-        networkQueue.addLast(socketMessage);
+
+        if (onMessage.accept(this, socketMessage)) {
+          LOGGER.info("Message received from {} {}", clientId, socketMessage.toString());
+          networkQueue.addLast(socketMessage);
+        }
       }
     } catch (EOFException ex) {
+      LOGGER.info("Disconnected {}", clientId);
+      isConnected = false;
       onDisconnect.accept(this);
     } catch (IOException | ClassNotFoundException ex) {
       LOGGER.error(ex.getMessage(), ex);
@@ -80,5 +87,10 @@ public class ClientConnection implements Runnable, Closeable {
     } catch (IOException ex) {
       LOGGER.error(ex.getMessage(), ex);
     }
+  }
+
+  @FunctionalInterface
+  interface OnMessageHandler {
+    boolean accept(ClientConnection clientConnection, SocketMessage socketMessage);
   }
 }

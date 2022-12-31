@@ -37,7 +37,6 @@ public abstract class SolaServer {
 
   public abstract void onDisconnect(ClientConnection clientConnection);
 
-  // todo hook this up
   public abstract boolean onMessage(ClientConnection clientConnection, SocketMessage socketMessage);
 
   public void start(int port) {
@@ -56,7 +55,7 @@ public abstract class SolaServer {
         do {
           LOGGER.info("Waiting for connection...");
           ClientConnection clientConnection = new ClientConnection(
-            serverSocket.accept(), nextClientId(), this::onDisconnect
+            serverSocket.accept(), nextClientId(), this::onDisconnect, this::onMessage
           );
 
           if (onConnect(clientConnection)) {

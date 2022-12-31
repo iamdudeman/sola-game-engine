@@ -38,6 +38,7 @@ public class ServerMain {
 
     @Override
     public boolean onMessage(ClientConnection clientConnection, SocketMessage socketMessage) {
+      System.out.println("Message received " + socketMessage.getClass());
       return true;
     }
   }
