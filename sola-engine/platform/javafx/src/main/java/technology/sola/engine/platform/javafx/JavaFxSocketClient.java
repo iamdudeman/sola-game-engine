@@ -21,6 +21,11 @@ public class JavaFxSocketClient implements SocketClient {
 
   @Override
   public void sendMessage(SocketMessage socketMessage) {
+    if (!isConnected()) {
+      LOGGER.warn("Connect send message when not connected");
+      return;
+    }
+
     try {
       objectOutputStream.writeObject(socketMessage);
       LOGGER.info("Message sent");
@@ -31,6 +36,11 @@ public class JavaFxSocketClient implements SocketClient {
 
   @Override
   public void connect(String host, int port) {
+    if (isConnected()) {
+      LOGGER.warn("Already connected to {}", socket.getInetAddress().toString());
+      return;
+    }
+
     try {
       socket = new Socket(host, port);
 
@@ -57,22 +67,25 @@ public class JavaFxSocketClient implements SocketClient {
 
   @Override
   public void disconnect() {
-    if (isConnected) {
-      try {
-        LOGGER.info("Stopping client");
-        isConnected = false;
-        if (socket != null) {
-          socket.close();
-        }
-        if (objectInputStream != null) {
-          objectInputStream.close();
-        }
-        if (objectOutputStream != null) {
-          objectOutputStream.close();
-        }
-      } catch (IOException ex) {
-        LOGGER.error(ex.getMessage(), ex);
+    if (!isConnected()) {
+      LOGGER.info("No connection active to disconnect");
+      return;
+    }
+
+    try {
+      LOGGER.info("Stopping client");
+      isConnected = false;
+      if (socket != null) {
+        socket.close();
       }
+      if (objectInputStream != null) {
+        objectInputStream.close();
+      }
+      if (objectOutputStream != null) {
+        objectOutputStream.close();
+      }
+    } catch (IOException ex) {
+      LOGGER.error(ex.getMessage(), ex);
     }
   }
 
