@@ -39,6 +39,10 @@ public abstract class SolaServer {
 
   public abstract boolean onMessage(ClientConnection clientConnection, SocketMessage socketMessage);
 
+  public Map<Long, ClientConnection> getClientConnectionMap() {
+    return clientConnectionMap;
+  }
+
   public void start(int port) {
     initialize();
 

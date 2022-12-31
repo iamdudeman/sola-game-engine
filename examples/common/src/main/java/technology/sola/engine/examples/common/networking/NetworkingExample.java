@@ -1,5 +1,7 @@
 package technology.sola.engine.examples.common.networking;
 
+import technology.sola.ecs.EcsSystem;
+import technology.sola.ecs.World;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
@@ -9,7 +11,9 @@ import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.networking.socket.SocketMessage;
 
+import java.util.Date;
 import java.util.UUID;
 
 public class NetworkingExample extends Sola {
@@ -24,11 +28,14 @@ public class NetworkingExample extends Sola {
 
   @Override
   protected void onInit() {
+    solaEcs.addSystem(new NetworkQueueSystem());
+
     solaGui = SolaGui.useModule(assetLoaderProvider, platform, eventHub);
 
     solaGui.setGuiRoot(buildGui());
 
     ButtonGuiElement greetingButton = solaGui.getElementById("greeting", ButtonGuiElement.class);
+    ButtonGuiElement updateTimeButton = solaGui.getElementById("updateTime", ButtonGuiElement.class);
     ButtonGuiElement connectButton = solaGui.getElementById("connect", ButtonGuiElement.class);
     ButtonGuiElement disconnectButton = solaGui.getElementById("disconnect", ButtonGuiElement.class);
     connectButton.setOnAction(() -> {
@@ -36,15 +43,20 @@ public class NetworkingExample extends Sola {
       connectButton.properties().setDisabled(true);
       disconnectButton.properties().setDisabled(false);
       greetingButton.properties().setDisabled(false);
+      updateTimeButton.properties().setDisabled(false);
     });
     disconnectButton.setOnAction(() -> {
       platform.getSocketClient().disconnect();
       connectButton.properties().setDisabled(false);
       disconnectButton.properties().setDisabled(true);
       greetingButton.properties().setDisabled(true);
+      updateTimeButton.properties().setDisabled(true);
     });
     greetingButton.setOnAction(() -> {
       platform.getSocketClient().sendMessage(new ChatSocketMessage(userName, "Greetings!"));
+    });
+    updateTimeButton.setOnAction(() -> {
+      platform.getSocketClient().sendMessage(new RequestTimeMessage());
     });
   }
 
@@ -53,6 +65,19 @@ public class NetworkingExample extends Sola {
     renderer.clear();
 
     solaGui.render();
+  }
+
+  private class NetworkQueueSystem extends EcsSystem {
+    @Override
+    public void update(World world, float deltaTime) {
+      while (!platform.getSocketClient().getNetworkQueue().isEmpty()) {
+        SocketMessage socketMessage = platform.getSocketClient().getNetworkQueue().removeFirst();
+
+        if (socketMessage instanceof UpdateTimeMessage updateTimeMessage) {
+          solaGui.getElementById("time", TextGuiElement.class).properties().setText(new Date(updateTimeMessage.time()).toString());
+        }
+      }
+    }
   }
 
   private GuiElement<?> buildGui() {
@@ -64,12 +89,20 @@ public class NetworkingExample extends Sola {
         p -> p.setText("Networking Example").setColorText(Color.WHITE)
       ),
       solaGui.createElement(
+        TextGuiElement::new,
+        p -> p.setText("").setColorText(Color.WHITE).setId("time")
+      ),
+      solaGui.createElement(
         ButtonGuiElement::new,
         p -> p.setText("Connect").setId("connect").setWidth(200).padding.set(15)
       ),
       solaGui.createElement(
         ButtonGuiElement::new,
         p -> p.setDisabled(true).setText("Send Greeting").setId("greeting").setWidth(200).padding.set(15)
+      ),
+      solaGui.createElement(
+        ButtonGuiElement::new,
+        p -> p.setDisabled(true).setText("Update Time").setId("updateTime").setWidth(200).padding.set(15)
       ),
       solaGui.createElement(
         ButtonGuiElement::new,

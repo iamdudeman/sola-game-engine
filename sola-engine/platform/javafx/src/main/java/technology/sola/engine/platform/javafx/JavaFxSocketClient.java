@@ -20,6 +20,11 @@ public class JavaFxSocketClient implements SocketClient {
   private final NetworkQueue<SocketMessage> networkQueue = new NetworkQueue<>();
 
   @Override
+  public NetworkQueue<SocketMessage> getNetworkQueue() {
+    return networkQueue;
+  }
+
+  @Override
   public void sendMessage(SocketMessage socketMessage) {
     if (!isConnected()) {
       LOGGER.warn("Connect send message when not connected");

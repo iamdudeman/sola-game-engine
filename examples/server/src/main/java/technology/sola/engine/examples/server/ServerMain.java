@@ -1,5 +1,7 @@
 package technology.sola.engine.examples.server;
 
+import technology.sola.engine.examples.common.networking.RequestTimeMessage;
+import technology.sola.engine.examples.common.networking.UpdateTimeMessage;
 import technology.sola.engine.networking.socket.SocketMessage;
 import technology.sola.engine.server.ClientConnection;
 import technology.sola.engine.server.SolaServer;
@@ -28,6 +30,8 @@ public class ServerMain {
 
     @Override
     public boolean onConnect(ClientConnection clientConnection) {
+      message(clientConnection.getClientId(), new UpdateTimeMessage(System.currentTimeMillis()));
+
       return true;
     }
 
@@ -39,6 +43,11 @@ public class ServerMain {
     @Override
     public boolean onMessage(ClientConnection clientConnection, SocketMessage socketMessage) {
       System.out.println("Message received " + socketMessage.getClass());
+
+      if (socketMessage instanceof RequestTimeMessage) {
+        message(clientConnection.getClientId(), new UpdateTimeMessage(System.currentTimeMillis()));
+      }
+
       return true;
     }
   }
