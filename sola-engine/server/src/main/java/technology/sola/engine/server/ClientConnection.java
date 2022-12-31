@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.server;
+package technology.sola.engine.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,12 +49,10 @@ public class ClientConnection implements Runnable, Closeable {
       while (isConnected) {
         LOGGER.info("Waiting for message");
         SocketMessage socketMessage = (SocketMessage) objectInputStream.readObject(); // blocking
-//          networkMessage.setClientId(clientId);
         LOGGER.info("Message received from {} {}", clientId, socketMessage.toString());
         networkQueue.addLast(socketMessage);
       }
     } catch (IOException | ClassNotFoundException ex) {
-//        networkEventsQueue.add(new NetworkConnectionMessage(NetworkConnectionEventType.DISCONNECT));
       LOGGER.error(ex.getMessage(), ex);
     }
   }

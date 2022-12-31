@@ -6,7 +6,7 @@ publishing {
   publications {
     create<MavenPublication>("maven") {
       group = "technology.sola.engine"
-      artifactId = "platform-server"
+      artifactId = "server"
 
       from(components["java"])
     }

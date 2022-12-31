@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-  implementation(project(":sola-engine:platform:server"))
+  implementation(project(":sola-engine:server"))
   implementation(project(":examples:common"))
 }
 
