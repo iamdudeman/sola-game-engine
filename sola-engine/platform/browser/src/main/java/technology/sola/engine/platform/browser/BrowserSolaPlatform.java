@@ -35,6 +35,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   public BrowserSolaPlatform(boolean useSoftwareRendering) {
     this.useSoftwareRendering = useSoftwareRendering;
+    // todo create socket client instance
   }
 
   @Override

@@ -47,6 +47,7 @@ public class SwingSolaPlatform extends SolaPlatform {
 
   public SwingSolaPlatform(boolean useSoftwareRendering) {
     this.useSoftwareRendering = useSoftwareRendering;
+    // todo create socket client instance
   }
 
   public void setWindowSize(int width, int height) {

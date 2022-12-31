@@ -40,10 +40,12 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     socketClient = new JavaFxSocketClient();
   }
 
+  // todo is this needed anymore?
   public JavaFxSolaPlatform(boolean isPlatformStartupNeeded) {
     if (JavaFxSolaPlatform.isPlatformStartupNeeded) {
       JavaFxSolaPlatform.isPlatformStartupNeeded = isPlatformStartupNeeded;
     }
+    socketClient = new JavaFxSocketClient();
   }
 
   public void setWindowSize(int width, int height) {
