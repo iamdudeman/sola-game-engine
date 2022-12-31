@@ -16,7 +16,6 @@ public class JavaFxSocketClient implements SocketClient {
   private boolean isConnected = false;
   private ObjectInputStream objectInputStream = null;
   private ObjectOutputStream objectOutputStream = null;
-  private boolean isStarted = false;
   private Socket socket;
   private final NetworkQueue<SocketMessage> networkQueue = new NetworkQueue<>();
 
@@ -32,7 +31,6 @@ public class JavaFxSocketClient implements SocketClient {
 
   @Override
   public void connect(String host, int port) {
-    isStarted = true;
     try {
       socket = new Socket(host, port);
 
@@ -59,24 +57,22 @@ public class JavaFxSocketClient implements SocketClient {
 
   @Override
   public void disconnect() {
-    if (!isStarted) {
-      return;
-    }
-
-    try {
-      LOGGER.info("Stopping client");
-      isConnected = false;
-      if (socket != null) {
-        socket.close();
+    if (isConnected) {
+      try {
+        LOGGER.info("Stopping client");
+        isConnected = false;
+        if (socket != null) {
+          socket.close();
+        }
+        if (objectInputStream != null) {
+          objectInputStream.close();
+        }
+        if (objectOutputStream != null) {
+          objectOutputStream.close();
+        }
+      } catch (IOException ex) {
+        LOGGER.error(ex.getMessage(), ex);
       }
-      if (objectInputStream != null) {
-        objectInputStream.close();
-      }
-      if (objectOutputStream != null) {
-        objectOutputStream.close();
-      }
-    } catch (IOException ex) {
-      LOGGER.error(ex.getMessage(), ex);
     }
   }
 

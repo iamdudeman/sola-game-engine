@@ -20,7 +20,7 @@ public class ClientConnection implements Runnable, Closeable {
   private ObjectInputStream objectInputStream = null;
   private ObjectOutputStream objectOutputStream = null;
 
-  public ClientConnection(Socket socket, long clientId) {
+  ClientConnection(Socket socket, long clientId) {
     this.socket = socket;
     this.clientId = clientId;
   }

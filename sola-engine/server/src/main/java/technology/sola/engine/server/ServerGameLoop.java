@@ -7,10 +7,10 @@ import technology.sola.engine.event.EventHub;
 
 import java.util.function.Consumer;
 
-public class ServerGameLoop extends GameLoop {
+class ServerGameLoop extends GameLoop {
   private final float timeBetweenUpdates;
 
-  protected ServerGameLoop(EventHub eventHub, Consumer<Float> updateMethod, int targetUpdatesPerSecond) {
+  ServerGameLoop(EventHub eventHub, Consumer<Float> updateMethod, int targetUpdatesPerSecond) {
     super(eventHub, updateMethod, null, targetUpdatesPerSecond);
     this.timeBetweenUpdates = 1000000000f / targetUpdatesPerSecond;
   }
