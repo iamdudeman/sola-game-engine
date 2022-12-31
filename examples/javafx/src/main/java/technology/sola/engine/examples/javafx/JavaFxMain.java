@@ -1,11 +1,9 @@
 package technology.sola.engine.examples.javafx;
 
 import technology.sola.engine.core.SolaPlatform;
-import technology.sola.engine.core.Sola;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.examples.common.networking.ChatSocketMessage;
 import technology.sola.engine.networking.socket.SocketClient;
-import technology.sola.engine.platform.javafx.JavaFxSocketClient;
 import technology.sola.engine.platform.javafx.JavaFxSolaPlatform;
 
 /**
@@ -18,13 +16,13 @@ public class JavaFxMain {
    * @param args command line args
    */
   public static void main(String[] args) {
-//    SolaPlatform solaPlatform = new JavaFxSolaPlatform();
+    SolaPlatform solaPlatform = new JavaFxSolaPlatform();
 //    Sola sola = new ExampleLauncherSola(solaPlatform);
 //
 //    solaPlatform.play(sola);
 
     // todo remove hard coded socket client usage here
-    SocketClient socketClient = new JavaFxSocketClient();
+    SocketClient socketClient = solaPlatform.getSocketClient();
 
     socketClient.connect("127.0.0.1", 60000);
 

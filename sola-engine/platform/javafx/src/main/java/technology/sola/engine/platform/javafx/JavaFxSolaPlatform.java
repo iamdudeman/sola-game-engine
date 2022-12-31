@@ -37,6 +37,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   private Double windowHeight;
 
   public JavaFxSolaPlatform() {
+    socketClient = new JavaFxSocketClient();
   }
 
   public JavaFxSolaPlatform(boolean isPlatformStartupNeeded) {
