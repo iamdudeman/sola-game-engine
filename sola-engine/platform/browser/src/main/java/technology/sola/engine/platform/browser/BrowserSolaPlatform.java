@@ -19,6 +19,7 @@ import technology.sola.engine.platform.browser.assets.BrowserSolaImageAssetLoade
 import technology.sola.engine.platform.browser.assets.BrowserSpriteSheetAssetLoader;
 import technology.sola.engine.platform.browser.core.BrowserCanvasRenderer;
 import technology.sola.engine.platform.browser.core.BrowserGameLoop;
+import technology.sola.engine.platform.browser.core.BrowserSocketClient;
 import technology.sola.engine.platform.browser.javascript.JsCanvasUtils;
 import technology.sola.engine.platform.browser.javascript.JsKeyboardUtils;
 import technology.sola.engine.platform.browser.javascript.JsMouseUtils;
@@ -35,7 +36,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   public BrowserSolaPlatform(boolean useSoftwareRendering) {
     this.useSoftwareRendering = useSoftwareRendering;
-    // todo create socket client instance
+    this.socketClient = new BrowserSocketClient();
   }
 
   @Override
