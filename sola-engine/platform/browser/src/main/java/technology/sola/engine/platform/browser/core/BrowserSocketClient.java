@@ -3,9 +3,11 @@ package technology.sola.engine.platform.browser.core;
 import technology.sola.engine.networking.NetworkQueue;
 import technology.sola.engine.networking.socket.SocketClient;
 import technology.sola.engine.networking.socket.SocketMessage;
+import technology.sola.engine.platform.browser.javascript.JsNetworkUtils;
 
 public class BrowserSocketClient implements SocketClient {
-  private NetworkQueue<SocketMessage> networkQueue;
+  private final NetworkQueue<SocketMessage> networkQueue = new NetworkQueue<>();
+  private boolean isConnected = false;
 
   @Override
   public NetworkQueue<SocketMessage> getNetworkQueue() {
@@ -14,21 +16,24 @@ public class BrowserSocketClient implements SocketClient {
 
   @Override
   public void sendMessage(SocketMessage socketMessage) {
-
+    throw new RuntimeException("Not yet implemented");
   }
 
   @Override
   public void connect(String host, int port) {
-
+    JsNetworkUtils.connectSocket(host, port);
+    // todo need to hook up adding messages to NetworkQueue
+    isConnected = true;
   }
 
   @Override
   public void disconnect() {
-
+    JsNetworkUtils.disconnect();
+    isConnected = false;
   }
 
   @Override
   public boolean isConnected() {
-    return false;
+    return isConnected;
   }
 }
