@@ -62,13 +62,14 @@ public abstract class SolaServer {
             serverSocket.accept(), nextClientId(), this::onDisconnect, this::onMessage
           );
 
+          clientConnectionMap.put(clientConnection.getClientId(), clientConnection);
+
           if (onConnect(clientConnection)) {
             LOGGER.info("Client {} accepted", clientConnection.getClientId());
-            clientConnectionMap.put(clientConnection.getClientId(), clientConnection);
             new Thread(clientConnection).start();
           } else {
             LOGGER.info("Client {} rejected", clientConnection.getClientId());
-            clientConnection.close();
+            clientConnectionMap.remove(clientConnection.getClientId()).close();
           }
         } while (isAcceptingConnections);
       } catch (IOException ex) {

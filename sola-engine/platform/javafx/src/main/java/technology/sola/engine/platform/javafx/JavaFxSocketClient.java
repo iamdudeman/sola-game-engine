@@ -33,7 +33,6 @@ public class JavaFxSocketClient implements SocketClient {
 
     try {
       objectOutputStream.writeObject(socketMessage);
-      LOGGER.info("Message sent");
     } catch (IOException ex) {
       LOGGER.error("Failed to send message", ex);
     }
@@ -56,9 +55,7 @@ public class JavaFxSocketClient implements SocketClient {
           isConnected = true;
 
           while (isConnected) {
-            LOGGER.info("Waiting for message");
             SocketMessage socketMessage = (SocketMessage) objectInputStream.readObject(); // blocking
-            LOGGER.info("Message received");
             networkQueue.addLast(socketMessage);
           }
         } catch (IOException | ClassNotFoundException ex) {

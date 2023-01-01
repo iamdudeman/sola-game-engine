@@ -29,6 +29,14 @@ public class ClientConnection implements Runnable, Closeable {
     this.clientId = clientId;
     this.onDisconnect = onDisconnect;
     this.onMessage = onMessage;
+
+    try {
+      objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+      objectInputStream = new ObjectInputStream(socket.getInputStream());
+    } catch (IOException ex) {
+      // todo
+      LOGGER.error("Something went wrong establishing connection", ex);
+    }
   }
 
   public long getClientId() {
@@ -49,9 +57,6 @@ public class ClientConnection implements Runnable, Closeable {
     isConnected = true;
 
     try {
-      objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-      objectInputStream = new ObjectInputStream(socket.getInputStream());
-
       while (isConnected) {
         LOGGER.info("Waiting for message");
         SocketMessage socketMessage = (SocketMessage) objectInputStream.readObject(); // blocking
