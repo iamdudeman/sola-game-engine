@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.javafx;
+package technology.sola.engine.platform.javafx.core;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
