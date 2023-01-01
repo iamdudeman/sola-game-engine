@@ -6,9 +6,12 @@ import technology.sola.engine.networking.NetworkQueue;
 import technology.sola.engine.networking.socket.SocketClient;
 import technology.sola.engine.networking.socket.SocketMessage;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 public class JavaFxSocketClient implements SocketClient {
@@ -16,6 +19,8 @@ public class JavaFxSocketClient implements SocketClient {
   private boolean isConnected = false;
   private ObjectInputStream objectInputStream = null;
   private ObjectOutputStream objectOutputStream = null;
+  private BufferedReader bufferedReader;
+  private PrintWriter printWriter;
   private Socket socket;
   private final NetworkQueue<SocketMessage> networkQueue = new NetworkQueue<>();
 
@@ -50,8 +55,10 @@ public class JavaFxSocketClient implements SocketClient {
 
       new Thread(() -> {
         try {
-          objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-          objectInputStream = new ObjectInputStream(socket.getInputStream());
+          bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+          printWriter = new PrintWriter(socket.getOutputStream());
+//          objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+//          objectInputStream = new ObjectInputStream(socket.getInputStream());
           isConnected = true;
 
           while (isConnected) {

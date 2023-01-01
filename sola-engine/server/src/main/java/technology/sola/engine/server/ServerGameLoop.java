@@ -11,7 +11,7 @@ class ServerGameLoop extends GameLoop {
   private final float timeBetweenUpdates;
 
   ServerGameLoop(EventHub eventHub, Consumer<Float> updateMethod, int targetUpdatesPerSecond) {
-    super(eventHub, updateMethod, null, targetUpdatesPerSecond);
+    super(eventHub, updateMethod, null, targetUpdatesPerSecond, false);
     this.timeBetweenUpdates = 1000000000f / targetUpdatesPerSecond;
   }
 

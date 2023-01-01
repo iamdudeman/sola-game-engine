@@ -16,6 +16,8 @@ public class JsNetworkUtils {
 
       window.solaSocket.addEventListener("open", function (event) {
         console.log("open", event);
+
+        window.solaSocket.send("hello");
       });
 
       window.solaSocket.addEventListener("message", function (event) {

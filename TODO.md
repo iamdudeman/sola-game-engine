@@ -1,4 +1,8 @@
 # sola-game-engine TODO list
+* Convert messages from objects to something even browsers can use
+  * maybe JSON?
+* Support needed for WebSockets and regular sockets
+
 * Consider some networking stuff
   * Socket Clients would need an interface to work off of
     * implement for Swing and JavaFX
@@ -9,6 +13,7 @@
   * REST client as well (some interface)
     * implement for Swing and JavaFX
     * implement for Browser
+
 * rendering improvement
   * ability to "clamp" the rendering
     * currently anything outside of renderer width+height is default
