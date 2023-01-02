@@ -16,13 +16,13 @@ import java.util.Map;
 
 public abstract class SolaServer {
   private static final Logger LOGGER = LoggerFactory.getLogger(SolaServer.class);
+  protected final SolaEcs solaEcs;
+  protected final EventHub eventHub;
   private final Map<Long, ClientConnection> clientConnectionMap = new HashMap<>();
   private long clientCount = 0;
   private ServerSocket serverSocket;
   private boolean isAcceptingConnections = true;
   private boolean isStarted = false;
-  protected final SolaEcs solaEcs;
-  protected final EventHub eventHub;
   private final GameLoop gameLoop;
 
   protected SolaServer(int targetUpdatesPerSecond) {

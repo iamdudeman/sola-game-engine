@@ -16,9 +16,9 @@ public abstract class GameLoop implements Runnable {
   protected final Consumer<Float> updateMethod;
   protected final Runnable renderMethod;
   protected final float deltaTime;
-  private final boolean trackFps;
   protected long previousLoopStartNanos;
   protected float updateCatchUpAccumulator;
+  private final boolean trackFps;
   private boolean isRunning = false;
   private boolean isPaused = false;
 
