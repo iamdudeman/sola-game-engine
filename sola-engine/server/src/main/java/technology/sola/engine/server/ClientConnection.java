@@ -10,8 +10,6 @@ import java.io.Closeable;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.function.Consumer;
@@ -27,8 +25,6 @@ public class ClientConnection implements Runnable, Closeable {
   private final Consumer<ClientConnection> onDisconnect;
   private final OnMessageHandler onMessage;
   private boolean isConnected = false;
-  private ObjectInputStream objectInputStream = null;
-  private ObjectOutputStream objectOutputStream = null;
 
   private BufferedReader bufferedReader;
   private PrintWriter printWriter;
@@ -42,9 +38,6 @@ public class ClientConnection implements Runnable, Closeable {
     try {
       bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
       printWriter = new PrintWriter(socket.getOutputStream());
-
-//      objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-//      objectInputStream = new ObjectInputStream(socket.getInputStream());
     } catch (IOException ex) {
       // todo
       LOGGER.error("Something went wrong establishing connection", ex);
@@ -60,9 +53,8 @@ public class ClientConnection implements Runnable, Closeable {
   }
 
   public void sendMessage(SocketMessage socketMessage) throws IOException {
-//    printWriter.write("some text");
-//    printWriter.flush();
-//    objectOutputStream.writeObject(socketMessage);
+    printWriter.write(socketMessage.toString());
+    printWriter.flush();
     LOGGER.info("Message sent to {}", clientId);
   }
 
@@ -74,23 +66,21 @@ public class ClientConnection implements Runnable, Closeable {
       while (isConnected) {
         LOGGER.info("Waiting for message");
 
-        String line = bufferedReader.readLine();
+        String messageLine = bufferedReader.readLine(); // blocking
 
-        System.out.println("read " + line);
+        System.out.println("message " + messageLine);
 
-        if (line == null) {
+        if (messageLine == null) {
           isConnected = false;
           onDisconnect.accept(this);
         } else {
-          System.out.println("read " + line);
-        }
+          SocketMessage socketMessage = SocketMessage.fromString(messageLine);
 
-//        SocketMessage socketMessage = (SocketMessage) objectInputStream.readObject(); // blocking
-//
-//        if (onMessage.accept(this, socketMessage)) {
-//          LOGGER.info("Message received from {} {}", clientId, socketMessage.toString());
-//          networkQueue.addLast(socketMessage);
-//        }
+          if (onMessage.accept(this, socketMessage)) {
+            LOGGER.info("Message received from {} {}", clientId, socketMessage.toString());
+            networkQueue.addLast(socketMessage);
+          }
+        }
       }
     } catch (EOFException ex) {
       LOGGER.info("Disconnected {}", clientId);
@@ -114,12 +104,6 @@ public class ClientConnection implements Runnable, Closeable {
       }
       if (bufferedReader != null) {
         bufferedReader.close();
-      }
-      if (objectInputStream != null) {
-        objectInputStream.close();
-      }
-      if (objectOutputStream != null) {
-        objectOutputStream.close();
       }
     } catch (IOException ex) {
       LOGGER.error(ex.getMessage(), ex);

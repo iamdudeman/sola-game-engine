@@ -2,6 +2,8 @@
 * Convert messages from objects to something even browsers can use
   * maybe JSON?
 * Support needed for WebSockets and regular sockets
+  * Java server: https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_a_WebSocket_server_in_Java
+  * JS client: https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
 
 * Consider some networking stuff
   * Socket Clients would need an interface to work off of

@@ -8,12 +8,14 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.module.graphics.SolaGraphics;
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
-import technology.sola.engine.examples.common.networking.messages.AssignPlayerIdMessage;
-import technology.sola.engine.examples.common.networking.messages.PlayerAddedMessage;
-import technology.sola.engine.examples.common.networking.messages.PlayerRemovedMessage;
-import technology.sola.engine.examples.common.networking.messages.PlayerUpdateMessage;
+import technology.sola.engine.examples.common.networking.messages.MessageTypes;
 import technology.sola.engine.examples.common.networking.messages.RequestTimeMessage;
-import technology.sola.engine.examples.common.networking.messages.UpdateTimeMessage;
+import technology.sola.engine.examples.common.networking.messages.old.AssignPlayerIdMessageOld;
+import technology.sola.engine.examples.common.networking.messages.old.PlayerAddedMessageOld;
+import technology.sola.engine.examples.common.networking.messages.old.PlayerRemovedMessageOld;
+import technology.sola.engine.examples.common.networking.messages.old.PlayerUpdateMessageOld;
+import technology.sola.engine.examples.common.networking.messages.old.RequestTimeMessageOld;
+import technology.sola.engine.examples.common.networking.messages.old.UpdateTimeMessageOld;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.gui.GuiElement;
@@ -23,6 +25,7 @@ import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.networking.socket.SocketMessage;
+import technology.sola.engine.networking.socket.SocketMessageOld;
 
 import java.util.Date;
 import java.util.UUID;
@@ -102,7 +105,7 @@ public class NetworkingExample extends Sola {
         }
 
         if (platform.getSocketClient().isConnected()) {
-          platform.getSocketClient().sendMessage(new PlayerUpdateMessage(clientPlayerId, transformComponent.getTranslate()));
+//          platform.getSocketClient().sendMessage(new PlayerUpdateMessageOld(clientPlayerId, transformComponent.getTranslate()));
         }
       });
     }
@@ -114,34 +117,46 @@ public class NetworkingExample extends Sola {
       while (!platform.getSocketClient().getNetworkQueue().isEmpty()) {
         SocketMessage socketMessage = platform.getSocketClient().getNetworkQueue().removeFirst();
 
-        if (socketMessage instanceof AssignPlayerIdMessage assignPlayerIdMessage) {
-          System.out.println("client id assigned " + assignPlayerIdMessage.id());
-          clientPlayerId = assignPlayerIdMessage.id();
-        } else if (socketMessage instanceof UpdateTimeMessage updateTimeMessage) {
-          solaGui.getElementById("time", TextGuiElement.class).properties().setText(new Date(updateTimeMessage.time()).toString());
-        } else if (socketMessage instanceof PlayerAddedMessage playerAddedMessage) {
-          System.out.println("player created");
+        // todo ideally would be nice to use switch here
+        if (socketMessage.getType() == MessageTypes.UPDATE_TIME.ordinal()) {
 
-          solaEcs.getWorld().createEntity(
-            "" + playerAddedMessage.id(), "player-" + playerAddedMessage.id(),
-            new TransformComponent(400, 400, 25),
-            new CircleRendererComponent(Color.WHITE, true)
-          );
-        } else if (socketMessage instanceof PlayerRemovedMessage playerRemovedMessage) {
-          solaEcs.getWorld().findEntityByUniqueId("" + playerRemovedMessage.id())
-            .ifPresent(Entity::destroy);
-        } else if (socketMessage instanceof PlayerUpdateMessage playerUpdateMessage) {
-          solaEcs.getWorld().findEntityByUniqueId("" + playerUpdateMessage.id())
-            .ifPresentOrElse(entity -> {
-              entity.getComponent(TransformComponent.class).setTranslate(playerUpdateMessage.position());
-            }, () -> {
-              solaEcs.getWorld().createEntity(
-                "" + playerUpdateMessage.id(), "player-" + playerUpdateMessage.id(),
-                new TransformComponent(playerUpdateMessage.position().x(), playerUpdateMessage.position().y(), 25),
-                new CircleRendererComponent(Color.WHITE, true)
-              );
-            });
+          // todo clean this up instead of using socketMessage.getBody() directly
+          solaGui.getElementById("time", TextGuiElement.class).properties().setText(new Date(Long.parseLong(socketMessage.getBody())).toString());
+
         }
+
+        /*
+        else if (socketMessageOld instanceof UpdateTimeMessageOld updateTimeMessage) {
+          solaGui.getElementById("time", TextGuiElement.class).properties().setText(new Date(updateTimeMessage.time()).toString());
+        }
+         */
+
+//        if (socketMessageOld instanceof AssignPlayerIdMessageOld assignPlayerIdMessage) {
+//          System.out.println("client id assigned " + assignPlayerIdMessage.id());
+//          clientPlayerId = assignPlayerIdMessage.id();
+//        }  else if (socketMessageOld instanceof PlayerAddedMessageOld playerAddedMessage) {
+//          System.out.println("player created");
+//
+//          solaEcs.getWorld().createEntity(
+//            "" + playerAddedMessage.id(), "player-" + playerAddedMessage.id(),
+//            new TransformComponent(400, 400, 25),
+//            new CircleRendererComponent(Color.WHITE, true)
+//          );
+//        } else if (socketMessageOld instanceof PlayerRemovedMessageOld playerRemovedMessage) {
+//          solaEcs.getWorld().findEntityByUniqueId("" + playerRemovedMessage.id())
+//            .ifPresent(Entity::destroy);
+//        } else if (socketMessageOld instanceof PlayerUpdateMessageOld playerUpdateMessage) {
+//          solaEcs.getWorld().findEntityByUniqueId("" + playerUpdateMessage.id())
+//            .ifPresentOrElse(entity -> {
+//              entity.getComponent(TransformComponent.class).setTranslate(playerUpdateMessage.position());
+//            }, () -> {
+//              solaEcs.getWorld().createEntity(
+//                "" + playerUpdateMessage.id(), "player-" + playerUpdateMessage.id(),
+//                new TransformComponent(playerUpdateMessage.position().x(), playerUpdateMessage.position().y(), 25),
+//                new CircleRendererComponent(Color.WHITE, true)
+//              );
+//            });
+//        }
       }
     }
   }

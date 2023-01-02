@@ -9,16 +9,12 @@ import technology.sola.engine.networking.socket.SocketMessage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
 public class JavaFxSocketClient implements SocketClient {
   private static final Logger LOGGER = LoggerFactory.getLogger(JavaFxSocketClient.class);
   private boolean isConnected = false;
-  private ObjectInputStream objectInputStream = null;
-  private ObjectOutputStream objectOutputStream = null;
   private BufferedReader bufferedReader;
   private PrintWriter printWriter;
   private Socket socket;
@@ -36,11 +32,8 @@ public class JavaFxSocketClient implements SocketClient {
       return;
     }
 
-    try {
-      objectOutputStream.writeObject(socketMessage);
-    } catch (IOException ex) {
-      LOGGER.error("Failed to send message", ex);
-    }
+    printWriter.write(socketMessage.toString());
+    printWriter.flush();
   }
 
   @Override
@@ -57,15 +50,22 @@ public class JavaFxSocketClient implements SocketClient {
         try {
           bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
           printWriter = new PrintWriter(socket.getOutputStream());
-//          objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-//          objectInputStream = new ObjectInputStream(socket.getInputStream());
           isConnected = true;
 
           while (isConnected) {
-            SocketMessage socketMessage = (SocketMessage) objectInputStream.readObject(); // blocking
-            networkQueue.addLast(socketMessage);
+            String messageLine = bufferedReader.readLine(); // blocking
+
+            System.out.println("message " + messageLine);
+
+            if (messageLine == null) {
+              disconnect();
+            } else {
+              SocketMessage socketMessage = SocketMessage.fromString(messageLine);
+
+              networkQueue.addLast(socketMessage);
+            }
           }
-        } catch (IOException | ClassNotFoundException ex) {
+        } catch (IOException ex) {
           LOGGER.error(ex.getMessage(), ex);
         }
       }).start();
@@ -87,11 +87,11 @@ public class JavaFxSocketClient implements SocketClient {
       if (socket != null) {
         socket.close();
       }
-      if (objectInputStream != null) {
-        objectInputStream.close();
+      if (bufferedReader != null) {
+        bufferedReader.close();
       }
-      if (objectOutputStream != null) {
-        objectOutputStream.close();
+      if (printWriter != null) {
+        printWriter.close();
       }
     } catch (IOException ex) {
       LOGGER.error(ex.getMessage(), ex);

@@ -95,7 +95,7 @@ public abstract class GameLoop implements Runnable {
     }
 
     private void logStats() {
-      LOGGER.info("ups: {} fps: {}", updatesThisSecond, framesThisSecond);
+//      LOGGER.info("ups: {} fps: {}", updatesThisSecond, framesThisSecond);
       updatesThisSecond = 0;
       framesThisSecond = 0;
     }
