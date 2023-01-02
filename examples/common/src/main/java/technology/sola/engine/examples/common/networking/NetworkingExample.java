@@ -10,6 +10,8 @@ import technology.sola.engine.core.module.graphics.SolaGraphics;
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.examples.common.networking.messages.AssignPlayerIdMessage;
 import technology.sola.engine.examples.common.networking.messages.MessageTypes;
+import technology.sola.engine.examples.common.networking.messages.PlayerAddedMessage;
+import technology.sola.engine.examples.common.networking.messages.PlayerRemovedMessage;
 import technology.sola.engine.examples.common.networking.messages.RequestTimeMessage;
 import technology.sola.engine.examples.common.networking.messages.UpdateTimeMessage;
 import technology.sola.engine.graphics.Color;
@@ -21,21 +23,16 @@ import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.networking.socket.SocketMessage;
-import technology.sola.engine.networking.socket.SocketMessageOld;
 
 import java.util.Date;
-import java.util.UUID;
 
 public class NetworkingExample extends Sola {
   private SolaGui solaGui;
   private SolaGraphics solaGraphics;
-  private final String userName;
   private long clientPlayerId = -1;
 
   public NetworkingExample() {
     super(SolaConfiguration.build("Networking Example", 800, 600).withTargetUpdatesPerSecond(30));
-
-    userName = UUID.randomUUID().toString();
   }
 
   @Override
@@ -123,19 +120,27 @@ public class NetworkingExample extends Sola {
 
           clientPlayerId = assignPlayerIdMessage.getClientPlayerId();
           System.out.println("client id assigned " + clientPlayerId);
+        } else if (socketMessage.getType() == MessageTypes.PLAYER_ADDED.ordinal()) {
+          PlayerAddedMessage playerAddedMessage = PlayerAddedMessage.fromBody(socketMessage.getBody());
+
+          System.out.println("player created");
+
+          solaEcs.getWorld().createEntity(
+            "" + playerAddedMessage.getClientPlayerId(), "player-" + playerAddedMessage.getClientPlayerId(),
+            new TransformComponent(400, 400, 25),
+            new CircleRendererComponent(Color.WHITE, true)
+          );
+        } else if (socketMessage.getType() == MessageTypes.PLAYER_REMOVED.ordinal()) {
+          PlayerRemovedMessage playerRemovedMessage = PlayerRemovedMessage.fromBody(socketMessage.getBody());
+
+          solaEcs.getWorld().findEntityByUniqueId("" + playerRemovedMessage.getClientPlayerId())
+            .ifPresent(Entity::destroy);
         }
 
 
 
-//          else if (socketMessageOld instanceof PlayerAddedMessageOld playerAddedMessage) {
-//          System.out.println("player created");
-//
-//          solaEcs.getWorld().createEntity(
-//            "" + playerAddedMessage.id(), "player-" + playerAddedMessage.id(),
-//            new TransformComponent(400, 400, 25),
-//            new CircleRendererComponent(Color.WHITE, true)
-//          );
-//        } else if (socketMessageOld instanceof PlayerRemovedMessageOld playerRemovedMessage) {
+
+//        else if (socketMessageOld instanceof PlayerRemovedMessageOld playerRemovedMessage) {
 //          solaEcs.getWorld().findEntityByUniqueId("" + playerRemovedMessage.id())
 //            .ifPresent(Entity::destroy);
 //        } else if (socketMessageOld instanceof PlayerUpdateMessageOld playerUpdateMessage) {

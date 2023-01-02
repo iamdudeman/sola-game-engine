@@ -2,6 +2,8 @@ package technology.sola.engine.examples.server;
 
 import technology.sola.engine.examples.common.networking.messages.AssignPlayerIdMessage;
 import technology.sola.engine.examples.common.networking.messages.MessageTypes;
+import technology.sola.engine.examples.common.networking.messages.PlayerAddedMessage;
+import technology.sola.engine.examples.common.networking.messages.PlayerRemovedMessage;
 import technology.sola.engine.examples.common.networking.messages.UpdateTimeMessage;
 import technology.sola.engine.networking.socket.SocketMessage;
 import technology.sola.engine.networking.socket.SocketMessageOld;
@@ -34,7 +36,7 @@ public class ServerMain {
     public boolean onConnect(ClientConnection clientConnection) {
       message(clientConnection.getClientId(), new UpdateTimeMessage(System.currentTimeMillis()));
       message(clientConnection.getClientId(), new AssignPlayerIdMessage(clientConnection.getClientId()));
-//      broadcast(new PlayerAddedMessageOld(clientConnection.getClientId()));
+      broadcast(new PlayerAddedMessage(clientConnection.getClientId()));
 
       return true;
     }
@@ -43,7 +45,7 @@ public class ServerMain {
     public void onDisconnect(ClientConnection clientConnection) {
       System.out.println("Disconnected - " + clientConnection.getClientId());
 
-//      broadcast(new PlayerRemovedMessageOld(clientConnection.getClientId()), clientConnection.getClientId());
+      broadcast(new PlayerRemovedMessage(clientConnection.getClientId()), clientConnection.getClientId());
     }
 
     @Override
