@@ -95,6 +95,7 @@ public abstract class GameLoop implements Runnable {
     }
 
     private void logStats() {
+      // todo uncomment this
 //      LOGGER.info("ups: {} fps: {}", updatesThisSecond, framesThisSecond);
       updatesThisSecond = 0;
       framesThisSecond = 0;

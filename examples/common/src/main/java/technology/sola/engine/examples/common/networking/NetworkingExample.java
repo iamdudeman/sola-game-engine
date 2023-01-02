@@ -8,14 +8,10 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.module.graphics.SolaGraphics;
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
+import technology.sola.engine.examples.common.networking.messages.AssignPlayerIdMessage;
 import technology.sola.engine.examples.common.networking.messages.MessageTypes;
 import technology.sola.engine.examples.common.networking.messages.RequestTimeMessage;
-import technology.sola.engine.examples.common.networking.messages.old.AssignPlayerIdMessageOld;
-import technology.sola.engine.examples.common.networking.messages.old.PlayerAddedMessageOld;
-import technology.sola.engine.examples.common.networking.messages.old.PlayerRemovedMessageOld;
-import technology.sola.engine.examples.common.networking.messages.old.PlayerUpdateMessageOld;
-import technology.sola.engine.examples.common.networking.messages.old.RequestTimeMessageOld;
-import technology.sola.engine.examples.common.networking.messages.old.UpdateTimeMessageOld;
+import technology.sola.engine.examples.common.networking.messages.UpdateTimeMessage;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.gui.GuiElement;
@@ -119,22 +115,19 @@ public class NetworkingExample extends Sola {
 
         // todo ideally would be nice to use switch here
         if (socketMessage.getType() == MessageTypes.UPDATE_TIME.ordinal()) {
+          UpdateTimeMessage updateTimeMessage = UpdateTimeMessage.fromBody(socketMessage.getBody());
 
-          // todo clean this up instead of using socketMessage.getBody() directly
-          solaGui.getElementById("time", TextGuiElement.class).properties().setText(new Date(Long.parseLong(socketMessage.getBody())).toString());
+          solaGui.getElementById("time", TextGuiElement.class).properties().setText(new Date(updateTimeMessage.getTime()).toString());
+        } else if (socketMessage.getType() == MessageTypes.ASSIGN_PLAYER_ID.ordinal()) {
+          AssignPlayerIdMessage assignPlayerIdMessage = AssignPlayerIdMessage.fromBody(socketMessage.getBody());
 
+          clientPlayerId = assignPlayerIdMessage.getClientPlayerId();
+          System.out.println("client id assigned " + clientPlayerId);
         }
 
-        /*
-        else if (socketMessageOld instanceof UpdateTimeMessageOld updateTimeMessage) {
-          solaGui.getElementById("time", TextGuiElement.class).properties().setText(new Date(updateTimeMessage.time()).toString());
-        }
-         */
 
-//        if (socketMessageOld instanceof AssignPlayerIdMessageOld assignPlayerIdMessage) {
-//          System.out.println("client id assigned " + assignPlayerIdMessage.id());
-//          clientPlayerId = assignPlayerIdMessage.id();
-//        }  else if (socketMessageOld instanceof PlayerAddedMessageOld playerAddedMessage) {
+
+//          else if (socketMessageOld instanceof PlayerAddedMessageOld playerAddedMessage) {
 //          System.out.println("player created");
 //
 //          solaEcs.getWorld().createEntity(

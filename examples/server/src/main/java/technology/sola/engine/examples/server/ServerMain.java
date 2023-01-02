@@ -1,10 +1,8 @@
 package technology.sola.engine.examples.server;
 
+import technology.sola.engine.examples.common.networking.messages.AssignPlayerIdMessage;
 import technology.sola.engine.examples.common.networking.messages.MessageTypes;
 import technology.sola.engine.examples.common.networking.messages.UpdateTimeMessage;
-import technology.sola.engine.examples.common.networking.messages.old.PlayerUpdateMessageOld;
-import technology.sola.engine.examples.common.networking.messages.old.RequestTimeMessageOld;
-import technology.sola.engine.examples.common.networking.messages.old.UpdateTimeMessageOld;
 import technology.sola.engine.networking.socket.SocketMessage;
 import technology.sola.engine.networking.socket.SocketMessageOld;
 import technology.sola.engine.server.ClientConnection;
@@ -34,9 +32,8 @@ public class ServerMain {
 
     @Override
     public boolean onConnect(ClientConnection clientConnection) {
-      message(clientConnection.getClientId(), new UpdateTimeMessage());
-
-//      message(clientConnection.getClientId(), new AssignPlayerIdMessageOld(clientConnection.getClientId()));
+      message(clientConnection.getClientId(), new UpdateTimeMessage(System.currentTimeMillis()));
+      message(clientConnection.getClientId(), new AssignPlayerIdMessage(clientConnection.getClientId()));
 //      broadcast(new PlayerAddedMessageOld(clientConnection.getClientId()));
 
       return true;
@@ -54,12 +51,10 @@ public class ServerMain {
       System.out.println("Message received " + socketMessage);
 
       if (socketMessage.getType() == MessageTypes.REQUEST_TIME.ordinal()) {
-        message(clientConnection.getClientId(), new UpdateTimeMessage());
+        message(clientConnection.getClientId(), new UpdateTimeMessage(System.currentTimeMillis()));
       }
 
-//      if (socketMessageOld instanceof RequestTimeMessageOld) {
-//        message(clientConnection.getClientId(), new UpdateTimeMessageOld(System.currentTimeMillis()));
-//      } else if (socketMessageOld instanceof PlayerUpdateMessageOld playerUpdateMessage) {
+//       else if (socketMessageOld instanceof PlayerUpdateMessageOld playerUpdateMessage) {
 //        broadcast(playerUpdateMessage, clientConnection.getClientId());
 //      }
 
