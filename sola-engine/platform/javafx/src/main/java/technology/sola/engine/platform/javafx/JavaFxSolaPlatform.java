@@ -41,7 +41,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     socketClient = new JavaFxSocketClient();
   }
 
-  // todo is this needed anymore?
+  // Note: this is used by the sola engine editor project
   public JavaFxSolaPlatform(boolean isPlatformStartupNeeded) {
     if (JavaFxSolaPlatform.isPlatformStartupNeeded) {
       JavaFxSolaPlatform.isPlatformStartupNeeded = isPlatformStartupNeeded;
