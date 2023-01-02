@@ -6,7 +6,6 @@ import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.core.GameLoop;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.networking.socket.SocketMessage;
-import technology.sola.engine.networking.socket.SocketMessageOld;
 
 import java.io.IOException;
 import java.net.ServerSocket;
