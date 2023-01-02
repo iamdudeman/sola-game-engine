@@ -6,7 +6,6 @@ import technology.sola.engine.examples.common.networking.messages.PlayerAddedMes
 import technology.sola.engine.examples.common.networking.messages.PlayerRemovedMessage;
 import technology.sola.engine.examples.common.networking.messages.UpdateTimeMessage;
 import technology.sola.engine.networking.socket.SocketMessage;
-import technology.sola.engine.networking.socket.SocketMessageOld;
 import technology.sola.engine.server.ClientConnection;
 import technology.sola.engine.server.SolaServer;
 
@@ -54,11 +53,9 @@ public class ServerMain {
 
       if (socketMessage.getType() == MessageTypes.REQUEST_TIME.ordinal()) {
         message(clientConnection.getClientId(), new UpdateTimeMessage(System.currentTimeMillis()));
+      } else if (socketMessage.getType() == MessageTypes.PLAYER_UPDATE.ordinal()) {
+        broadcast(socketMessage, clientConnection.getClientId());
       }
-
-//       else if (socketMessageOld instanceof PlayerUpdateMessageOld playerUpdateMessage) {
-//        broadcast(playerUpdateMessage, clientConnection.getClientId());
-//      }
 
       return true;
     }

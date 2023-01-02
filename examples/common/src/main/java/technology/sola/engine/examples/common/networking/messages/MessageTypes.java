@@ -6,4 +6,5 @@ public enum MessageTypes {
   ASSIGN_PLAYER_ID,
   PLAYER_ADDED,
   PLAYER_REMOVED,
+  PLAYER_UPDATE,
 }

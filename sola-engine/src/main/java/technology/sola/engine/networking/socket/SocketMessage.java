@@ -1,6 +1,7 @@
 package technology.sola.engine.networking.socket;
 
 public class SocketMessage {
+  private static final String SEPARATOR = "~";
   private final int type;
   private final String body;
 
@@ -14,7 +15,7 @@ public class SocketMessage {
   }
 
   public static SocketMessage fromString(String message) {
-    String[] parts = message.split("-");
+    String[] parts = message.split(SEPARATOR);
     int type = Integer.parseInt(parts[0]);
     String body = parts.length == 2 ? parts[1] : "";
 
@@ -31,6 +32,6 @@ public class SocketMessage {
 
   @Override
   public String toString() {
-    return type + "-" + body + "\n";
+    return type + SEPARATOR + body + "\n";
   }
 }

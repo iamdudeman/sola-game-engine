@@ -12,6 +12,7 @@ import technology.sola.engine.examples.common.networking.messages.AssignPlayerId
 import technology.sola.engine.examples.common.networking.messages.MessageTypes;
 import technology.sola.engine.examples.common.networking.messages.PlayerAddedMessage;
 import technology.sola.engine.examples.common.networking.messages.PlayerRemovedMessage;
+import technology.sola.engine.examples.common.networking.messages.PlayerUpdateMessage;
 import technology.sola.engine.examples.common.networking.messages.RequestTimeMessage;
 import technology.sola.engine.examples.common.networking.messages.UpdateTimeMessage;
 import technology.sola.engine.graphics.Color;
@@ -98,7 +99,7 @@ public class NetworkingExample extends Sola {
         }
 
         if (platform.getSocketClient().isConnected()) {
-//          platform.getSocketClient().sendMessage(new PlayerUpdateMessageOld(clientPlayerId, transformComponent.getTranslate()));
+          platform.getSocketClient().sendMessage(new PlayerUpdateMessage(clientPlayerId, transformComponent.getTranslate()));
         }
       });
     }
@@ -135,26 +136,19 @@ public class NetworkingExample extends Sola {
 
           solaEcs.getWorld().findEntityByUniqueId("" + playerRemovedMessage.getClientPlayerId())
             .ifPresent(Entity::destroy);
+        } else if (socketMessage.getType() == MessageTypes.PLAYER_UPDATE.ordinal()) {
+          PlayerUpdateMessage playerUpdateMessage = PlayerUpdateMessage.fromBody(socketMessage.getBody());
+          solaEcs.getWorld().findEntityByUniqueId("" + playerUpdateMessage.getClientPlayerId())
+            .ifPresentOrElse(entity -> {
+              entity.getComponent(TransformComponent.class).setTranslate(playerUpdateMessage.getPosition());
+            }, () -> {
+              solaEcs.getWorld().createEntity(
+                "" + playerUpdateMessage.getClientPlayerId(), "player-" + playerUpdateMessage.getClientPlayerId(),
+                new TransformComponent(playerUpdateMessage.getPosition().x(), playerUpdateMessage.getPosition().y(), 25),
+                new CircleRendererComponent(Color.WHITE, true)
+              );
+            });
         }
-
-
-
-
-//        else if (socketMessageOld instanceof PlayerRemovedMessageOld playerRemovedMessage) {
-//          solaEcs.getWorld().findEntityByUniqueId("" + playerRemovedMessage.id())
-//            .ifPresent(Entity::destroy);
-//        } else if (socketMessageOld instanceof PlayerUpdateMessageOld playerUpdateMessage) {
-//          solaEcs.getWorld().findEntityByUniqueId("" + playerUpdateMessage.id())
-//            .ifPresentOrElse(entity -> {
-//              entity.getComponent(TransformComponent.class).setTranslate(playerUpdateMessage.position());
-//            }, () -> {
-//              solaEcs.getWorld().createEntity(
-//                "" + playerUpdateMessage.id(), "player-" + playerUpdateMessage.id(),
-//                new TransformComponent(playerUpdateMessage.position().x(), playerUpdateMessage.position().y(), 25),
-//                new CircleRendererComponent(Color.WHITE, true)
-//              );
-//            });
-//        }
       }
     }
   }
