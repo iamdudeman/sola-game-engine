@@ -216,35 +216,30 @@ the rest: payload
     int length = 0xff & (bytes[1] - 0x80);
     System.out.println("length - " + length);
 
+    int offset = 6;
+    byte[] key;
+
     if (length < 125) {
-      byte[] key = {
+      key = new byte[] {
         bytes[2], bytes[3], bytes[4], bytes[5]
       };
-
-      byte[] decoded = new byte[length];
-      for (int i = 6; i < bytes.length; i++)
-      {
-        int decodedIndex = i - 6;
-        decoded[decodedIndex] = (byte)(bytes[i] ^ key[decodedIndex & 0x3]);
-      }
-
-      return new String(decoded, StandardCharsets.UTF_8);
     } else {
       System.out.printf("%02x%n", bytes[1]);
 
+      offset = 8;
       length = (bytes[2] << 8) + bytes[3];
-      byte[] key = {
+      key = new byte[] {
         bytes[4], bytes[5], bytes[6], bytes[7]
       };
-
-      byte[] decoded = new byte[length];
-      for (int i = 8; i < bytes.length; i++)
-      {
-        int decodedIndex = i - 8;
-        decoded[decodedIndex] = (byte)(bytes[i] ^ key[decodedIndex & 0x3]);
-      }
-
-      return new String(decoded, StandardCharsets.UTF_8);
     }
+
+    byte[] decoded = new byte[length];
+    for (int i = offset; i < bytes.length; i++)
+    {
+      int decodedIndex = i - offset;
+      decoded[decodedIndex] = (byte)(bytes[i] ^ key[decodedIndex & 0x3]);
+    }
+
+    return new String(decoded, StandardCharsets.UTF_8);
   }
 }
