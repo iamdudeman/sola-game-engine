@@ -58,18 +58,18 @@ public abstract class SolaServer {
 
         do {
           LOGGER.info("Waiting for connection...");
-          ClientConnection clientConnection = new ClientConnection(
+          ClientConnection rawSocketClientConnection = new RawSocketClientConnection(
             serverSocket.accept(), nextClientId(), this::onDisconnect, this::onMessage
           );
 
-          clientConnectionMap.put(clientConnection.getClientId(), clientConnection);
+          clientConnectionMap.put(rawSocketClientConnection.getClientId(), rawSocketClientConnection);
 
-          if (onConnect(clientConnection)) {
-            LOGGER.info("Client {} accepted", clientConnection.getClientId());
-            new Thread(clientConnection).start();
+          if (onConnect(rawSocketClientConnection)) {
+            LOGGER.info("Client {} accepted", rawSocketClientConnection.getClientId());
+            new Thread(rawSocketClientConnection).start();
           } else {
-            LOGGER.info("Client {} rejected", clientConnection.getClientId());
-            clientConnectionMap.remove(clientConnection.getClientId()).close();
+            LOGGER.info("Client {} rejected", rawSocketClientConnection.getClientId());
+            clientConnectionMap.remove(rawSocketClientConnection.getClientId()).close();
           }
         } while (isAcceptingConnections);
       } catch (IOException ex) {
@@ -90,7 +90,9 @@ public abstract class SolaServer {
         serverSocket.close();
       }
 
-      clientConnectionMap.values().forEach(ClientConnection::close);
+      for (ClientConnection clientConnection : clientConnectionMap.values()) {
+        clientConnection.close();
+      }
     } catch (IOException ex) {
       LOGGER.error(ex.getMessage(), ex);
     }
@@ -98,12 +100,12 @@ public abstract class SolaServer {
 
   public void message(long id, SocketMessage socketMessage) {
     try {
-      ClientConnection clientConnection = clientConnectionMap.get(id);
+      ClientConnection rawSocketClientConnection = clientConnectionMap.get(id);
 
-      if (clientConnection == null) {
+      if (rawSocketClientConnection == null) {
         LOGGER.warn("ClientConnection with id {} does not exist", id);
       } else {
-        clientConnection.sendMessage(socketMessage);
+        rawSocketClientConnection.sendMessage(socketMessage);
       }
     } catch (IOException ex) {
       LOGGER.error("Failed to send message to {}", id, ex);
