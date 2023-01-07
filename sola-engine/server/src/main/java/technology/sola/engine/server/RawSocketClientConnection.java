@@ -6,7 +6,6 @@ import technology.sola.engine.networking.NetworkQueue;
 import technology.sola.engine.networking.socket.SocketMessage;
 
 import java.io.BufferedReader;
-import java.io.Closeable;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,22 +13,19 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.function.Consumer;
 
-// todo need to handle WebSockets if that is the connection type
-//   https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_a_WebSocket_server_in_Java
-
 class RawSocketClientConnection implements ClientConnection {
   private static final Logger LOGGER = LoggerFactory.getLogger(RawSocketClientConnection.class);
   private final NetworkQueue<SocketMessage> networkQueue = new NetworkQueue<>();
   private final Socket socket;
   private final long clientId;
-  private final Consumer<RawSocketClientConnection> onDisconnect;
+  private final Consumer<ClientConnection> onDisconnect;
   private final OnMessageHandler onMessage;
   private boolean isConnected = false;
 
   private BufferedReader bufferedReader;
   private PrintWriter printWriter;
 
-  RawSocketClientConnection(Socket socket, long clientId, Consumer<RawSocketClientConnection> onDisconnect, OnMessageHandler onMessage) {
+  RawSocketClientConnection(Socket socket, long clientId, Consumer<ClientConnection> onDisconnect, OnMessageHandler onMessage) {
     this.socket = socket;
     this.clientId = clientId;
     this.onDisconnect = onDisconnect;
@@ -55,7 +51,7 @@ class RawSocketClientConnection implements ClientConnection {
   }
 
   @Override
-  public void sendMessage(SocketMessage socketMessage) throws IOException {
+  public void sendMessage(SocketMessage socketMessage) {
     printWriter.write(socketMessage.toString());
     printWriter.flush();
     LOGGER.info("Message sent to {}", clientId);
@@ -111,10 +107,5 @@ class RawSocketClientConnection implements ClientConnection {
     } catch (IOException ex) {
       LOGGER.error(ex.getMessage(), ex);
     }
-  }
-
-  @FunctionalInterface
-  interface OnMessageHandler {
-    boolean accept(RawSocketClientConnection rawSocketClientConnection, SocketMessage socketMessage);
   }
 }

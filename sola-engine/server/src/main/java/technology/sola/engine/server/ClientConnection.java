@@ -4,14 +4,13 @@ import technology.sola.engine.networking.NetworkQueue;
 import technology.sola.engine.networking.socket.SocketMessage;
 
 import java.io.Closeable;
-import java.io.IOException;
 
 public interface ClientConnection extends Runnable, Closeable {
   long getClientId();
 
   NetworkQueue<SocketMessage> getNetworkQueue();
 
-  void sendMessage(SocketMessage socketMessage) throws IOException;
+  void sendMessage(SocketMessage socketMessage);
 
   @FunctionalInterface
   interface OnMessageHandler {

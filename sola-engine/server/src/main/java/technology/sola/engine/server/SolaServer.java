@@ -20,7 +20,8 @@ public abstract class SolaServer {
   protected final EventHub eventHub;
   private final Map<Long, ClientConnection> clientConnectionMap = new HashMap<>();
   private long clientCount = 0;
-  private ServerSocket serverSocket;
+  private ServerSocket rawServerSocket;
+  private ServerSocket webServerSocket;
   private boolean isAcceptingConnections = true;
   private boolean isStarted = false;
   private final GameLoop gameLoop;
@@ -54,12 +55,12 @@ public abstract class SolaServer {
     // network thread
     new Thread(() -> {
       try {
-        serverSocket = new ServerSocket(port);
+        rawServerSocket = new ServerSocket(port);
 
         do {
           LOGGER.info("Waiting for connection...");
           ClientConnection rawSocketClientConnection = new RawSocketClientConnection(
-            serverSocket.accept(), nextClientId(), this::onDisconnect, this::onMessage
+            rawServerSocket.accept(), nextClientId(), this::onDisconnect, this::onMessage
           );
 
           clientConnectionMap.put(rawSocketClientConnection.getClientId(), rawSocketClientConnection);
@@ -76,6 +77,26 @@ public abstract class SolaServer {
         LOGGER.error(ex.getMessage(), ex);
       }
     }).start();
+
+    new Thread(() -> {
+      try {
+        // todo don't manually hard code this port
+        webServerSocket = new ServerSocket(60080);
+
+        do {
+          LOGGER.info("Waiting for web socket connection...");
+          ClientConnection webSocketClientConnection = new WebSocketClientConnection(
+            webServerSocket.accept(), nextClientId(), this::onConnect, this::onDisconnect, this::onMessage
+          );
+
+          clientConnectionMap.put(webSocketClientConnection.getClientId(), webSocketClientConnection);
+
+          new Thread(webSocketClientConnection).start();
+        } while (isAcceptingConnections);
+      } catch (IOException ex) {
+        LOGGER.error(ex.getMessage(), ex);
+      }
+    }).start();
   }
 
   public void stop() {
@@ -86,8 +107,11 @@ public abstract class SolaServer {
     try {
       LOGGER.info("Stopping server");
       isAcceptingConnections = false;
-      if (serverSocket != null) {
-        serverSocket.close();
+      if (rawServerSocket != null) {
+        rawServerSocket.close();
+      }
+      if (webServerSocket != null) {
+        webServerSocket.close();
       }
 
       for (ClientConnection clientConnection : clientConnectionMap.values()) {
@@ -99,16 +123,12 @@ public abstract class SolaServer {
   }
 
   public void message(long id, SocketMessage socketMessage) {
-    try {
-      ClientConnection rawSocketClientConnection = clientConnectionMap.get(id);
+    ClientConnection clientConnection = clientConnectionMap.get(id);
 
-      if (rawSocketClientConnection == null) {
-        LOGGER.warn("ClientConnection with id {} does not exist", id);
-      } else {
-        rawSocketClientConnection.sendMessage(socketMessage);
-      }
-    } catch (IOException ex) {
-      LOGGER.error("Failed to send message to {}", id, ex);
+    if (clientConnection == null) {
+      LOGGER.warn("ClientConnection with id {} does not exist", id);
+    } else {
+      clientConnection.sendMessage(socketMessage);
     }
   }
 
@@ -126,11 +146,7 @@ public abstract class SolaServer {
         return;
       }
 
-      try {
-        client.sendMessage(socketMessage);
-      } catch (IOException ex) {
-        LOGGER.error("Failed to send broadcast to {}", id, ex);
-      }
+      client.sendMessage(socketMessage);
     });
   }
 
