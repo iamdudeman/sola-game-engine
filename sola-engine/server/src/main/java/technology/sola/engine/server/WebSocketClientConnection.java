@@ -229,9 +229,22 @@ the rest: payload
       }
 
       return new String(decoded, StandardCharsets.UTF_8);
+    } else {
+      System.out.printf("%02x%n", bytes[1]);
+
+      length = (bytes[2] << 8) + bytes[3];
+      byte[] key = {
+        bytes[4], bytes[5], bytes[6], bytes[7]
+      };
+
+      byte[] decoded = new byte[length];
+      for (int i = 8; i < bytes.length; i++)
+      {
+        int decodedIndex = i - 8;
+        decoded[decodedIndex] = (byte)(bytes[i] ^ key[decodedIndex & 0x3]);
+      }
+
+      return new String(decoded, StandardCharsets.UTF_8);
     }
-
-
-    return null;
   }
 }
