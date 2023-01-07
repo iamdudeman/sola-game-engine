@@ -128,7 +128,11 @@ public abstract class SolaServer {
     if (clientConnection == null) {
       LOGGER.warn("ClientConnection with id {} does not exist", id);
     } else {
-      clientConnection.sendMessage(socketMessage);
+      try {
+        clientConnection.sendMessage(socketMessage);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
     }
   }
 
@@ -146,7 +150,11 @@ public abstract class SolaServer {
         return;
       }
 
-      client.sendMessage(socketMessage);
+      try {
+        client.sendMessage(socketMessage);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
     });
   }
 

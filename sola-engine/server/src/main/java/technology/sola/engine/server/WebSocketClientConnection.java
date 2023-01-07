@@ -6,6 +6,7 @@ import technology.sola.engine.networking.NetworkQueue;
 import technology.sola.engine.networking.socket.SocketMessage;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.IOException;
@@ -15,7 +16,10 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
+import java.util.Random;
 import java.util.function.Consumer;
 
 // todo need to handle WebSockets if that is the connection type
@@ -24,6 +28,7 @@ import java.util.function.Consumer;
 class WebSocketClientConnection implements ClientConnection {
   private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketClientConnection.class);
   private final NetworkQueue<SocketMessage> networkQueue = new NetworkQueue<>();
+  private final Random random = new Random();
   private final Socket socket;
   private final long clientId;
   private final Consumer<ClientConnection> onConnect;
@@ -34,6 +39,7 @@ class WebSocketClientConnection implements ClientConnection {
   private BufferedReader bufferedReader;
   private BufferedInputStream bufferedInputStream;
   private PrintWriter printWriter;
+  private BufferedOutputStream bufferedOutputStream;
 
   WebSocketClientConnection(Socket socket, long clientId, Consumer<ClientConnection> onConnect, Consumer<ClientConnection> onDisconnect, OnMessageHandler onMessage) {
     this.socket = socket;
@@ -45,6 +51,7 @@ class WebSocketClientConnection implements ClientConnection {
     try {
       bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
       bufferedInputStream = new BufferedInputStream(socket.getInputStream());
+      bufferedOutputStream = new BufferedOutputStream(socket.getOutputStream());
       printWriter = new PrintWriter(socket.getOutputStream());
     } catch (IOException ex) {
       // todo
@@ -63,9 +70,9 @@ class WebSocketClientConnection implements ClientConnection {
   }
 
   @Override
-  public void sendMessage(SocketMessage socketMessage) {
-    printWriter.write(socketMessage.toString());
-    printWriter.flush();
+  public void sendMessage(SocketMessage socketMessage) throws IOException {
+    bufferedOutputStream.write(formatForClient(socketMessage.toString()));
+    bufferedOutputStream.flush();
     LOGGER.info("Message sent to {}", clientId);
   }
 
@@ -89,16 +96,6 @@ class WebSocketClientConnection implements ClientConnection {
           System.out.println("discarded - " + messageLine);
           messageLine = bufferedReader.readLine();
         }
-
-
-//          byte[] response = ("HTTP/1.1 101 Switching Protocols\r\n"
-//    + "Connection: Upgrade\r\n"
-//    + "Upgrade: websocket\r\n"
-//    + "Sec-WebSocket-Accept: "
-//    + Base64.getEncoder().encodeToString(MessageDigest.getInstance("SHA-1").digest((thingy + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11").getBytes("UTF-8")))
-//    + "\r\n\r\n").getBytes("UTF-8");
-
-//        printWriter.write(response, 0, response.length);
 
         String blah = Base64.getEncoder().encodeToString(
           MessageDigest.getInstance("SHA-1").digest((thingy + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11").getBytes())
@@ -128,26 +125,16 @@ class WebSocketClientConnection implements ClientConnection {
       while (isConnected) {
         LOGGER.info("Waiting for message");
 
+        String decoded = decode(bufferedInputStream);
 
-//        String messageLine = bufferedReader.readLine(); // blocking
+        System.out.println("decoded - " + decoded);
 
-//        System.out.println("message " + messageLine);
+        SocketMessage socketMessage = SocketMessage.fromString(decoded);
 
-//        if (messageLine == null) {
-//          isConnected = false;
-//          onDisconnect.accept(this);
-//        } else {
-          String decoded = decode(bufferedInputStream);
-
-          System.out.println("decoded - " + decoded);
-
-          SocketMessage socketMessage = SocketMessage.fromString(decoded);
-
-          if (onMessage.accept(this, socketMessage)) {
-            LOGGER.info("Message received from {} {}", clientId, socketMessage.toString());
-            networkQueue.addLast(socketMessage);
-          }
-//        }
+        if (onMessage.accept(this, socketMessage)) {
+          LOGGER.info("Message received from {} {}", clientId, socketMessage.toString());
+          networkQueue.addLast(socketMessage);
+        }
       }
     } catch (EOFException ex) {
       LOGGER.info("Disconnected {}", clientId);
@@ -168,6 +155,9 @@ class WebSocketClientConnection implements ClientConnection {
       }
       if (printWriter != null) {
         printWriter.close();
+      }
+      if (bufferedOutputStream != null) {
+        bufferedOutputStream.close();
       }
       if (bufferedReader != null) {
         bufferedReader.close();
@@ -210,5 +200,84 @@ class WebSocketClientConnection implements ClientConnection {
     }
 
     return new String(decoded, StandardCharsets.UTF_8);
+  }
+
+  public byte[] formatForClient(String string) {
+    byte[] bytes = string.getBytes(StandardCharsets.UTF_8);
+
+    int indexStartRawData = -1;
+    List<Byte> formattedBuilder = new ArrayList<>();
+
+    formattedBuilder.add((byte) 0x81);
+
+    if (bytes.length <= 125) {
+      formattedBuilder.add((byte)bytes.length);
+      indexStartRawData = 2;
+    } else {
+      formattedBuilder.add((byte)126);
+      formattedBuilder.add((byte)(bytes.length >> 8 & 0xff));
+      formattedBuilder.add((byte)(bytes.length & 0xff));
+      indexStartRawData = 4;
+    }
+
+    for (byte rawByte : bytes) {
+      formattedBuilder.add(rawByte);
+    }
+
+
+
+    byte[] encoded = new byte[formattedBuilder.size()];
+
+    for (int i = 0; i < formattedBuilder.size(); i++) {
+      encoded[i] = formattedBuilder.get(i);
+    }
+
+    return encoded;
+  }
+
+  public byte[] encode(String string) {
+    byte[] bytes = string.getBytes(StandardCharsets.UTF_8);
+
+    List<Byte> encodedBuilder = new ArrayList<>();
+
+
+    encodedBuilder.add((byte) 0x81);
+    encodedBuilder.add(
+      (byte) (0x80 | (bytes.length < 125 ? bytes.length : 126))
+    );
+
+    if (bytes.length >= 125) {
+      encodedBuilder.add((byte)0xfe);
+      byte[] buf = new byte[2];
+      // 2-byte in network byte order.
+      buf[1] = (byte) (bytes.length & 0xFF);
+      buf[0] = (byte) ((bytes.length >> 8) & 0xFF);
+
+      encodedBuilder.add(buf[0]);
+      encodedBuilder.add(buf[1]);
+
+    }
+
+    byte[] key = new byte[4];
+    random.nextBytes(key);
+
+    for (byte keyByte : key) {
+      encodedBuilder.add(keyByte);
+    }
+
+    for (int i = 0; i < bytes.length; i++) {
+      encodedBuilder.add(
+        (byte)((bytes[i] ^ key[i % 4]) & 0xFF)
+      );
+    }
+
+
+    byte[] encoded = new byte[encodedBuilder.size()];
+
+    for (int i = 0; i < encodedBuilder.size(); i++) {
+      encoded[i] = encodedBuilder.get(i);
+    }
+
+    return encoded;
   }
 }
