@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import technology.sola.engine.networking.NetworkQueue;
 import technology.sola.engine.networking.socket.SocketMessage;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.IOException;
@@ -31,6 +32,7 @@ class WebSocketClientConnection implements ClientConnection {
   private boolean isConnected = false;
 
   private BufferedReader bufferedReader;
+  private BufferedInputStream bufferedInputStream;
   private PrintWriter printWriter;
 
   WebSocketClientConnection(Socket socket, long clientId, Consumer<ClientConnection> onConnect, Consumer<ClientConnection> onDisconnect, OnMessageHandler onMessage) {
@@ -42,6 +44,7 @@ class WebSocketClientConnection implements ClientConnection {
 
     try {
       bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+      bufferedInputStream = new BufferedInputStream(socket.getInputStream());
       printWriter = new PrintWriter(socket.getOutputStream());
     } catch (IOException ex) {
       // todo
@@ -125,23 +128,26 @@ class WebSocketClientConnection implements ClientConnection {
       while (isConnected) {
         LOGGER.info("Waiting for message");
 
-        String messageLine = bufferedReader.readLine(); // blocking
 
-        System.out.println("message " + messageLine);
+//        String messageLine = bufferedReader.readLine(); // blocking
 
-        if (messageLine == null) {
-          isConnected = false;
-          onDisconnect.accept(this);
-        } else {
-          decode(messageLine);
+//        System.out.println("message " + messageLine);
 
-          SocketMessage socketMessage = SocketMessage.fromString(messageLine);
+//        if (messageLine == null) {
+//          isConnected = false;
+//          onDisconnect.accept(this);
+//        } else {
+          String decoded = decode(bufferedInputStream);
+
+          System.out.println("decoded - " + decoded);
+
+          SocketMessage socketMessage = SocketMessage.fromString(decoded);
 
           if (onMessage.accept(this, socketMessage)) {
             LOGGER.info("Message received from {} {}", clientId, socketMessage.toString());
             networkQueue.addLast(socketMessage);
           }
-        }
+//        }
       }
     } catch (EOFException ex) {
       LOGGER.info("Disconnected {}", clientId);
@@ -166,78 +172,41 @@ class WebSocketClientConnection implements ClientConnection {
       if (bufferedReader != null) {
         bufferedReader.close();
       }
+      if (bufferedInputStream != null) {
+        bufferedInputStream.close();
+      }
     } catch (IOException ex) {
       LOGGER.error(ex.getMessage(), ex);
     }
   }
 
-  private String decode(String encodedMessage) {
-    /*
-    byte 0: The 0x81 is just an indicator that a message received
-    byte 1: the 0x8a is the length, substract 0x80 from it, 0x0A == 10
-byte 2, 3, 4, 5: the 4 byte xor key to decrypt the payload
-the rest: payload
+  private static String decode(BufferedInputStream bufferedInputStream) throws IOException {
+    byte[] starterBytes = bufferedInputStream.readNBytes(2);
 
-     */
+    System.out.printf("%02x%n", starterBytes[0]);
 
-    byte[] bytes = encodedMessage.getBytes(StandardCharsets.UTF_8);
-
-
-    StringBuilder sb = new StringBuilder();
-    StringBuilder sb2 = new StringBuilder();
-    for (byte b : bytes) {
-      sb.append(String.format("%02X ", b));
-      sb2.append(b);
-      sb2.append(" ");
-    }
-    System.out.println("bytes: " + sb.toString());
-    System.out.println("bytes2: " + sb2.toString());
-
-
-    int length = bytes[1] - 0x80;
-    byte[] key = {
-      bytes[2], bytes[3], bytes[4], bytes[5]
-    };
-
-    byte[] decoded = new byte[length];
-    for (int i = 6; i < length; i++)
-    {
-      decoded[i] = (byte)(bytes[i] ^ key[i & 0x3]);
-    }
-
-    System.out.println("result " + new String(decoded, StandardCharsets.UTF_8));
-
-    return null;
-  }
-
-  private static String decode(byte[] bytes) {
-    System.out.printf("%02x%n", bytes[0]);
-
-    int length = 0xff & (bytes[1] - 0x80);
+    int length = 0xff & (starterBytes[1] - 0x80);
     System.out.println("length - " + length);
 
-    int offset = 6;
     byte[] key;
 
     if (length < 125) {
-      key = new byte[] {
-        bytes[2], bytes[3], bytes[4], bytes[5]
-      };
+      key = bufferedInputStream.readNBytes(4);
     } else {
-      System.out.printf("%02x%n", bytes[1]);
+      System.out.printf("%02x%n", bufferedInputStream.readNBytes(1)[0]);
 
-      offset = 8;
-      length = (bytes[2] << 8) + bytes[3];
-      key = new byte[] {
-        bytes[4], bytes[5], bytes[6], bytes[7]
-      };
+      byte[] newLengthBytes = bufferedInputStream.readNBytes(2);
+
+      length = (newLengthBytes[2] << 8) + newLengthBytes[3];
+      System.out.println("corrected length " + length);
+      key = bufferedInputStream.readNBytes(4);
     }
 
+    byte[] raw = bufferedInputStream.readNBytes(length);
     byte[] decoded = new byte[length];
-    for (int i = offset; i < bytes.length; i++)
+    for (int i = 0; i < raw.length; i++)
     {
-      int decodedIndex = i - offset;
-      decoded[decodedIndex] = (byte)(bytes[i] ^ key[decodedIndex & 0x3]);
+      decoded[i] = (byte)(raw[i] ^ key[i & 0x3]);
     }
 
     return new String(decoded, StandardCharsets.UTF_8);
