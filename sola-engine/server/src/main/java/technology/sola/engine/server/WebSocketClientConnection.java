@@ -209,4 +209,29 @@ the rest: payload
 
     return null;
   }
+
+  private static String decode(byte[] bytes) {
+    System.out.printf("%02x%n", bytes[0]);
+
+    int length = 0xff & (bytes[1] - 0x80);
+    System.out.println("length - " + length);
+
+    if (length < 125) {
+      byte[] key = {
+        bytes[2], bytes[3], bytes[4], bytes[5]
+      };
+
+      byte[] decoded = new byte[length];
+      for (int i = 6; i < bytes.length; i++)
+      {
+        int decodedIndex = i - 6;
+        decoded[decodedIndex] = (byte)(bytes[i] ^ key[decodedIndex & 0x3]);
+      }
+
+      return new String(decoded, StandardCharsets.UTF_8);
+    }
+
+
+    return null;
+  }
 }
