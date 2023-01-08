@@ -22,9 +22,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Consumer;
 
-// todo need to handle WebSockets if that is the connection type
-//   https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_a_WebSocket_server_in_Java
-
 class WebSocketClientConnection implements ClientConnection {
   private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketClientConnection.class);
   private final NetworkQueue<SocketMessage> networkQueue = new NetworkQueue<>();
@@ -119,8 +116,7 @@ class WebSocketClientConnection implements ClientConnection {
     isConnected = true;
 
     try {
-      // todo reenable in a bit
-//      onConnect.accept(this);
+      onConnect.accept(this);
 
       while (isConnected) {
         LOGGER.info("Waiting for message");
