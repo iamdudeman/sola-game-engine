@@ -20,21 +20,21 @@ class WebSocketUtils {
   public static String decodeMessageFromClient(BufferedInputStream bufferedInputStream) throws IOException {
     byte[] starterBytes = bufferedInputStream.readNBytes(2);
 
-    System.out.printf("%02x%n", starterBytes[0]);
+    System.out.printf("%n%02x%n", starterBytes[0]);
 
     int length = 0xff & (starterBytes[1] - 0x80);
     System.out.println("length - " + length);
 
     byte[] key;
 
-    if (length < 125) {
+    if (length <= 125) {
       key = bufferedInputStream.readNBytes(4);
     } else {
-      System.out.printf("%02x%n", bufferedInputStream.readNBytes(1)[0]);
-
       byte[] newLengthBytes = bufferedInputStream.readNBytes(2);
+      int firstByteValue = 0xff & (newLengthBytes[0] << 8);
+      int secondByteValue = 0xff & newLengthBytes[1];
 
-      length = (newLengthBytes[2] << 8) + newLengthBytes[3];
+      length = firstByteValue + secondByteValue;
       System.out.println("corrected length " + length);
       key = bufferedInputStream.readNBytes(4);
     }
@@ -82,7 +82,7 @@ class WebSocketUtils {
     return encoded;
   }
 
-  public byte[] encodeMessageToServer(String string) {
+  public static byte[] encodeMessageToServer(String string) {
     byte[] bytes = string.getBytes(StandardCharsets.UTF_8);
 
     List<Byte> encodedBuilder = new ArrayList<>();
@@ -92,8 +92,7 @@ class WebSocketUtils {
       (byte) (0x80 | (bytes.length < 125 ? bytes.length : 126))
     );
 
-    if (bytes.length >= 125) {
-      encodedBuilder.add((byte) 0xfe);
+    if (bytes.length > 125) {
       byte[] buf = new byte[2];
       // 2-byte in network byte order.
       buf[1] = (byte) (bytes.length & 0xFF);
