@@ -19,25 +19,17 @@ class WebSocketUtils {
    */
   public static String decodeMessageFromClient(BufferedInputStream bufferedInputStream) throws IOException {
     byte[] starterBytes = bufferedInputStream.readNBytes(2);
-
-    System.out.printf("%n%02x%n", starterBytes[0]);
-
     int length = 0xff & (starterBytes[1] - 0x80);
-    System.out.println("length - " + length);
 
-    byte[] key;
-
-    if (length <= 125) {
-      key = bufferedInputStream.readNBytes(4);
-    } else {
+    if (length > 125) {
       byte[] newLengthBytes = bufferedInputStream.readNBytes(2);
       int firstByteValue = 0xff & (newLengthBytes[0] << 8);
       int secondByteValue = 0xff & newLengthBytes[1];
 
       length = firstByteValue + secondByteValue;
-      System.out.println("corrected length " + length);
-      key = bufferedInputStream.readNBytes(4);
     }
+
+    byte[] key = bufferedInputStream.readNBytes(4);
 
     byte[] raw = bufferedInputStream.readNBytes(length);
     byte[] decoded = new byte[length];
@@ -100,7 +92,6 @@ class WebSocketUtils {
 
       encodedBuilder.add(buf[0]);
       encodedBuilder.add(buf[1]);
-
     }
 
     byte[] key = new byte[4];
