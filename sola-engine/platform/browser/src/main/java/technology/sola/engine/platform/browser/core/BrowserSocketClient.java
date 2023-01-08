@@ -16,13 +16,16 @@ public class BrowserSocketClient implements SocketClient {
 
   @Override
   public void sendMessage(SocketMessage socketMessage) {
-    throw new RuntimeException("Not yet implemented");
+    JsNetworkUtils.sendMessage(socketMessage.toString());
   }
 
   @Override
   public void connect(String host, int port) {
-    JsNetworkUtils.connectSocket(host, port);
-    // todo need to hook up adding messages to NetworkQueue
+    JsNetworkUtils.connectSocket(host, port, (messageData) -> {
+      SocketMessage socketMessage = SocketMessage.fromString(messageData);
+
+      networkQueue.addLast(socketMessage);
+    });
     isConnected = true;
   }
 
