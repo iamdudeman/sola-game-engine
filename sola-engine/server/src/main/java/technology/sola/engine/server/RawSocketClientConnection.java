@@ -59,6 +59,9 @@ class RawSocketClientConnection implements ClientConnection {
 
   @Override
   public void run() {
+    // todo need to implement a simple handshake of some sort
+    // todo then need to join this together with WebSocketClientConnection
+
     isConnected = true;
 
     try {

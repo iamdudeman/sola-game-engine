@@ -87,22 +87,22 @@ class WebSocketClientConnection implements ClientConnection {
           System.out.println("messageline - " + messageLine);
         }
 
-        String thingy = messageLine.replace("Sec-WebSocket-Key:", "").trim();
+        String websocketKey = messageLine.replace("Sec-WebSocket-Key:", "").trim();
 
         while (!messageLine.isEmpty()) {
           System.out.println("discarded - " + messageLine);
           messageLine = bufferedReader.readLine();
         }
 
-        String blah = Base64.getEncoder().encodeToString(
-          MessageDigest.getInstance("SHA-1").digest((thingy + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11").getBytes())
+        String websocketAccept = Base64.getEncoder().encodeToString(
+          MessageDigest.getInstance("SHA-1").digest((websocketKey + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11").getBytes())
         );
 
         printWriter.write(
           "HTTP/1.1 101 Switching Protocols\r\n" +
-          "Upgrade: websocket\r\n" +
-          "Connection: Upgrade\r\n" +
-          "Sec-WebSocket-Accept: " + blah + "\r\n\r\n"
+            "Upgrade: websocket\r\n" +
+            "Connection: Upgrade\r\n" +
+            "Sec-WebSocket-Accept: " + websocketAccept + "\r\n\r\n"
         );
         printWriter.flush();
       }
@@ -190,9 +190,8 @@ class WebSocketClientConnection implements ClientConnection {
 
     byte[] raw = bufferedInputStream.readNBytes(length);
     byte[] decoded = new byte[length];
-    for (int i = 0; i < raw.length; i++)
-    {
-      decoded[i] = (byte)(raw[i] ^ key[i & 0x3]);
+    for (int i = 0; i < raw.length; i++) {
+      decoded[i] = (byte) (raw[i] ^ key[i & 0x3]);
     }
 
     return new String(decoded, StandardCharsets.UTF_8);
@@ -201,26 +200,21 @@ class WebSocketClientConnection implements ClientConnection {
   public byte[] formatForClient(String string) {
     byte[] bytes = string.getBytes(StandardCharsets.UTF_8);
 
-    int indexStartRawData = -1;
     List<Byte> formattedBuilder = new ArrayList<>();
 
     formattedBuilder.add((byte) 0x81);
 
     if (bytes.length <= 125) {
-      formattedBuilder.add((byte)bytes.length);
-      indexStartRawData = 2;
+      formattedBuilder.add((byte) bytes.length);
     } else {
-      formattedBuilder.add((byte)126);
-      formattedBuilder.add((byte)(bytes.length >> 8 & 0xff));
-      formattedBuilder.add((byte)(bytes.length & 0xff));
-      indexStartRawData = 4;
+      formattedBuilder.add((byte) 126);
+      formattedBuilder.add((byte) (bytes.length >> 8 & 0xff));
+      formattedBuilder.add((byte) (bytes.length & 0xff));
     }
 
     for (byte rawByte : bytes) {
       formattedBuilder.add(rawByte);
     }
-
-
 
     byte[] encoded = new byte[formattedBuilder.size()];
 
@@ -243,7 +237,7 @@ class WebSocketClientConnection implements ClientConnection {
     );
 
     if (bytes.length >= 125) {
-      encodedBuilder.add((byte)0xfe);
+      encodedBuilder.add((byte) 0xfe);
       byte[] buf = new byte[2];
       // 2-byte in network byte order.
       buf[1] = (byte) (bytes.length & 0xFF);
@@ -263,7 +257,7 @@ class WebSocketClientConnection implements ClientConnection {
 
     for (int i = 0; i < bytes.length; i++) {
       encodedBuilder.add(
-        (byte)((bytes[i] ^ key[i % 4]) & 0xFF)
+        (byte) ((bytes[i] ^ key[i % 4]) & 0xFF)
       );
     }
 
