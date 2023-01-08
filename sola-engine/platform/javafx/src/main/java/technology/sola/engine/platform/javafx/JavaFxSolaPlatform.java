@@ -119,7 +119,9 @@ public class JavaFxSolaPlatform extends SolaPlatform {
 
       solaEventHub.add(GameLoopEvent.class, event -> {
         if (event.type() == GameLoopEventType.STOPPED) {
-          socketClient.disconnect();
+          if (socketClient.isConnected()) {
+            socketClient.disconnect();
+          }
           stage.close();
         }
       });
