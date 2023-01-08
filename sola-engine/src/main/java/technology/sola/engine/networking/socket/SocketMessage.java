@@ -6,12 +6,13 @@ public class SocketMessage {
   private final String body;
 
   public SocketMessage(int type, String body) {
+    this.type = type;
+    this.body = body;
+
+    // todo if redoing everything to not use BufferedReader than this restriction is not needed
     if (body.getBytes().length > 8192 - 4) {
       throw new IllegalArgumentException("Message body can only be 8188 bytes long");
     }
-
-    this.type = type;
-    this.body = body;
   }
 
   public static SocketMessage fromString(String message) {
@@ -19,7 +20,7 @@ public class SocketMessage {
     int type = Integer.parseInt(parts[0]);
     String body = parts.length == 2 ? parts[1] : "";
 
-    return new SocketMessage(type, body);
+    return new SocketMessage(type, body.trim());
   }
 
   public int getType() {
