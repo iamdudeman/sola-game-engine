@@ -9,7 +9,7 @@ public class SocketMessage {
     this.type = type;
     this.body = body;
 
-    // todo if redoing everything to not use BufferedReader than this restriction is not needed
+    // todo if redoing everything to not use BufferedReader than this restriction is not needed instead it should be ( <= 65535 )
     if (body.getBytes().length > 8192 - 4) {
       throw new IllegalArgumentException("Message body can only be 8188 bytes long");
     }

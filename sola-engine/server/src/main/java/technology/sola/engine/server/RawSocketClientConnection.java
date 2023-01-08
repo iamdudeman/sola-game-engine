@@ -68,6 +68,8 @@ class RawSocketClientConnection implements ClientConnection {
       while (isConnected) {
         LOGGER.info("Waiting for message");
 
+        // todo consider replacing this readLine with read bytes so newline character isn't required?
+
         String messageLine = bufferedReader.readLine(); // blocking
 
         System.out.println("message " + messageLine);

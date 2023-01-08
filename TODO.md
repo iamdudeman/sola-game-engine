@@ -1,25 +1,14 @@
 # sola-game-engine TODO list
-* Convert messages from objects to something even browsers can use
-  * maybe JSON?
-* Support needed for WebSockets and regular sockets
+* messages need to be something even browsers can use
+* server Support needed for WebSockets and regular sockets
   * Java server: https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_a_WebSocket_server_in_Java
   * JS client: https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
-
+  *
 * Consider some networking stuff
   * Socket Clients would need an interface to work off of
     * implement for Swing and JavaFX
     * implement for Browser (socket.io maybe)
-  * Socket Server could maybe use a "console" SolaPlatform
-    * or maybe the Server can "play" a Sola but is something custom?
-    * Maybe allow for making rest routes too?
-  * REST client as well (some interface)
-    * implement for Swing and JavaFX
-    * implement for Browser
 
-* rendering improvement
-  * ability to "clamp" the rendering
-    * currently anything outside of renderer width+height is default
-    * ability to set smaller space temporarily could be useful for things like the GUI stuff
 
 ## Known Bugs List
 
@@ -31,6 +20,15 @@
 
 ## TODO List
 
+* rendering improvement
+  * ability to "clamp" the rendering
+    * currently anything outside of renderer width+height is default
+    * ability to set smaller space temporarily could be useful for things like the GUI stuff
+* networking
+  * rest client interface
+    * javafx/swing impl
+    * browser impl
+  * simple rest server
 * Rendering
   * Ability to change line width when drawing
   * Implement more BlendModes
