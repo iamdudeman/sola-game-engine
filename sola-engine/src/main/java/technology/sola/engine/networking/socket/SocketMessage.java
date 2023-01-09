@@ -9,7 +9,7 @@ public class SocketMessage {
   private final String body;
 
   /**
-   * Creates a new SocketMessage instance.
+   * Creates a new SocketMessage instance. Body must be 65533 bytes or fewer.
    *
    * @param type the type of the message
    * @param body the body of the message
@@ -35,7 +35,7 @@ public class SocketMessage {
     int type = Integer.parseInt(parts[0]);
     String body = parts.length == 2 ? parts[1] : "";
 
-    return new SocketMessage(type, body.trim());
+    return new SocketMessage(type, body);
   }
 
   /**
