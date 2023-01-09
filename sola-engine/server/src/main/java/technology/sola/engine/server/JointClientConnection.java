@@ -25,7 +25,7 @@ class JointClientConnection implements ClientConnection {
   private final Socket socket;
   private final long clientId;
   private final Consumer<ClientConnection> onConnectionEstablished;
-  private final Consumer<ClientConnection> onDisconnect; // todo hook this up
+  private final Consumer<ClientConnection> onDisconnect;
   private final ClientConnection.OnMessageHandler onMessage;
   private boolean isConnected = false;
 
@@ -90,18 +90,20 @@ class JointClientConnection implements ClientConnection {
     while (isConnected) {
       LOGGER.info("Waiting for message");
 
-      SocketMessage socketMessage = null;
       try {
-        socketMessage = isWebSocketConnection
+        SocketMessage socketMessage = isWebSocketConnection
           ? socketMessageDecoder.decodeForWeb(bufferedInputStream)
           : socketMessageDecoder.decodeForRaw(bufferedInputStream);
+
+        if (socketMessage == null) {
+          isConnected = false;
+          onDisconnect.accept(this);
+        } else if (onMessage.accept(this, socketMessage)) {
+          LOGGER.info("Message received from {} {}", clientId, socketMessage);
+          networkQueue.addLast(socketMessage);
+        }
       } catch (IOException ex) {
         throw new RuntimeException(ex);
-      }
-
-      if (onMessage.accept(this, socketMessage)) {
-        LOGGER.info("Message received from {} {}", clientId, socketMessage.toString());
-        networkQueue.addLast(socketMessage);
       }
     }
   }

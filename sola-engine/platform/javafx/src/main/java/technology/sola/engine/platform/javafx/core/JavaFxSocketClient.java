@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class JavaFxSocketClient implements SocketClient {
   private static final Logger LOGGER = LoggerFactory.getLogger(JavaFxSocketClient.class);
@@ -43,8 +44,11 @@ public class JavaFxSocketClient implements SocketClient {
     try {
       bufferedOutputStream.write(socketMessageEncoder.encodeForRaw(socketMessage));
       bufferedOutputStream.flush();
+    } catch (SocketException ex) {
+      LOGGER.error("Something happened with the connection", ex);
+      disconnect();
     } catch (IOException ex) {
-      ex.printStackTrace();
+      throw new RuntimeException(ex);
     }
   }
 
@@ -74,12 +78,14 @@ public class JavaFxSocketClient implements SocketClient {
 
             networkQueue.addLast(socketMessage);
           }
+        } catch (SocketException ex) {
+          // this happens when a disconnect happens
         } catch (IOException ex) {
-          LOGGER.error(ex.getMessage(), ex);
+          throw new RuntimeException(ex);
         }
       }).start();
     } catch (IOException ex) {
-      LOGGER.error(ex.getMessage(), ex);
+      throw new RuntimeException(ex);
     }
   }
 
@@ -91,7 +97,7 @@ public class JavaFxSocketClient implements SocketClient {
     }
 
     try {
-      LOGGER.info("Stopping client");
+      LOGGER.info("Stopping connection to {}", socket.getInetAddress().toString());
       isConnected = false;
       if (socket != null) {
         socket.close();
@@ -101,6 +107,12 @@ public class JavaFxSocketClient implements SocketClient {
       }
       if (printWriter != null) {
         printWriter.close();
+      }
+      if (bufferedInputStream != null) {
+        bufferedInputStream.close();
+      }
+      if (bufferedOutputStream != null) {
+        bufferedOutputStream.close();
       }
     } catch (IOException ex) {
       LOGGER.error(ex.getMessage(), ex);
