@@ -18,14 +18,20 @@ public abstract class GameLoop implements Runnable {
   protected final float deltaTime;
   protected long previousLoopStartNanos;
   protected float updateCatchUpAccumulator;
+  private final boolean trackFps;
   private boolean isRunning = false;
   private boolean isPaused = false;
 
   protected GameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond) {
+    this(eventHub, updateMethod, renderMethod, targetUpdatesPerSecond, true);
+  }
+
+  protected GameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean trackFps) {
     this.eventHub = eventHub;
     this.updateMethod = updateMethod;
     this.renderMethod = renderMethod;
     this.deltaTime = 1f / targetUpdatesPerSecond;
+    this.trackFps = trackFps;
 
     eventHub.add(GameLoopEvent.class, this::onGameLoopEvent);
   }
@@ -35,7 +41,9 @@ public abstract class GameLoop implements Runnable {
     isRunning = true;
     updateCatchUpAccumulator = 0f;
     previousLoopStartNanos = System.nanoTime();
-    startFpsTrackerThread();
+    if (trackFps) {
+      startFpsTrackerThread();
+    }
   }
 
   public boolean isRunning() {

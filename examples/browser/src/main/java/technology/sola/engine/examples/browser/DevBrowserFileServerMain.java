@@ -7,7 +7,7 @@ import java.io.IOException;
 /**
  * Runs a {@link SimpleSolaBrowserFileServer} on part 1337.
  */
-public class DevServerMain {
+public class DevBrowserFileServerMain {
   /**
    * Entry point for Browser example dev server.
    *

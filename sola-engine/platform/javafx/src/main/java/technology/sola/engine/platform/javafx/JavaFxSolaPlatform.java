@@ -25,6 +25,7 @@ import technology.sola.engine.platform.javafx.assets.JavaFxFontAssetLoader;
 import technology.sola.engine.platform.javafx.assets.JavaFxSolaImageAssetLoader;
 import technology.sola.engine.platform.javafx.assets.JavaFxSpriteSheetAssetLoader;
 import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
+import technology.sola.engine.platform.javafx.core.JavaFxSocketClient;
 
 import java.util.function.Consumer;
 
@@ -37,12 +38,15 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   private Double windowHeight;
 
   public JavaFxSolaPlatform() {
+    socketClient = new JavaFxSocketClient();
   }
 
+  // Note: this is used by the sola engine editor project
   public JavaFxSolaPlatform(boolean isPlatformStartupNeeded) {
     if (JavaFxSolaPlatform.isPlatformStartupNeeded) {
       JavaFxSolaPlatform.isPlatformStartupNeeded = isPlatformStartupNeeded;
     }
+    socketClient = new JavaFxSocketClient();
   }
 
   public void setWindowSize(int width, int height) {
@@ -115,6 +119,9 @@ public class JavaFxSolaPlatform extends SolaPlatform {
 
       solaEventHub.add(GameLoopEvent.class, event -> {
         if (event.type() == GameLoopEventType.STOPPED) {
+          if (socketClient.isConnected()) {
+            socketClient.disconnect();
+          }
           stage.close();
         }
       });
