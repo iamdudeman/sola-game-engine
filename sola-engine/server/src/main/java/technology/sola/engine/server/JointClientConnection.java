@@ -72,7 +72,7 @@ class JointClientConnection implements ClientConnection {
 
     bufferedOutputStream.write(bytes);
     bufferedOutputStream.flush();
-    LOGGER.info("Message sent to {}", clientId);
+    // LOGGER.info("Message sent to {}", clientId);
   }
 
   @Override
@@ -88,7 +88,7 @@ class JointClientConnection implements ClientConnection {
     onConnectionEstablished.accept(this);
 
     while (isConnected) {
-      LOGGER.info("Waiting for message");
+      // LOGGER.debug("Waiting for message");
 
       try {
         SocketMessage socketMessage = isWebSocketConnection
@@ -99,10 +99,11 @@ class JointClientConnection implements ClientConnection {
           isConnected = false;
           onDisconnect.accept(this);
         } else if (onMessage.accept(this, socketMessage)) {
-          LOGGER.info("Message received from {} {}", clientId, socketMessage);
+          // LOGGER.debug("Message received from {} {}", clientId, socketMessage);
           networkQueue.addLast(socketMessage);
         }
       } catch (IOException ex) {
+        onDisconnect.accept(this);
         throw new RuntimeException(ex);
       }
     }

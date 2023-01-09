@@ -52,8 +52,6 @@ public class ServerMain {
 
     @Override
     public boolean onMessage(ClientConnection clientConnection, SocketMessage socketMessage) {
-      System.out.println("Message received " + socketMessage);
-
       if (socketMessage.getType() == MessageTypes.REQUEST_TIME.ordinal()) {
         message(clientConnection.getClientId(), new UpdateTimeMessage(System.currentTimeMillis()));
       } else if (socketMessage.getType() == MessageTypes.PLAYER_UPDATE.ordinal()) {

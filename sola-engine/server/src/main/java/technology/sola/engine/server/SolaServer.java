@@ -9,6 +9,7 @@ import technology.sola.engine.networking.socket.SocketMessage;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -160,10 +161,9 @@ public abstract class SolaServer {
     if (clientConnection == null) {
       LOGGER.warn("ClientConnection with id {} does not exist", id);
     } else {
-      try {
-        clientConnection.sendMessage(socketMessage);
-      } catch (IOException e) {
-        throw new RuntimeException(e);
+      if (!messageClient(clientConnection, socketMessage)) {
+        onDisconnect(clientConnection);
+        clientConnectionMap.remove(id);
       }
     }
   }
@@ -183,17 +183,31 @@ public abstract class SolaServer {
       }
     }
 
-    clientConnectionMap.forEach((id, client) -> {
-      if (ignoreIds.contains(id)) {
-        return;
+    for (var iter = clientConnectionMap.entrySet().iterator(); iter.hasNext(); ) {
+      var entry = iter.next();
+
+      if (ignoreIds.contains(entry.getKey())) {
+        continue;
       }
 
-      try {
-        client.sendMessage(socketMessage);
-      } catch (IOException e) {
-        throw new RuntimeException(e);
+      if (!messageClient(entry.getValue(), socketMessage)) {
+        onDisconnect(entry.getValue());
+        iter.remove();
       }
-    });
+    }
+  }
+
+  private boolean messageClient(ClientConnection clientConnection, SocketMessage socketMessage) {
+    try {
+      clientConnection.sendMessage(socketMessage);
+    } catch (SocketException ex) {
+      LOGGER.error("Error sending message to {}", clientConnection.getClientId(), ex);
+      return false;
+    } catch (IOException ex) {
+      LOGGER.error("Error sending message to {}", clientConnection.getClientId(), ex);
+    }
+
+    return true;
   }
 
   private long nextClientId() {
