@@ -55,48 +55,70 @@ public abstract class SolaServer {
     // network thread
     new Thread(() -> {
       try {
-        rawServerSocket = new ServerSocket(port);
-
-        do {
-          LOGGER.info("Waiting for connection...");
-          ClientConnection rawSocketClientConnection = new RawSocketClientConnection(
-            rawServerSocket.accept(), nextClientId(), this::onConnect, this::onDisconnect, this::onMessage
-          );
-
-          clientConnectionMap.put(rawSocketClientConnection.getClientId(), rawSocketClientConnection);
-
-//          if (onConnect(rawSocketClientConnection)) {
-//            LOGGER.info("Client {} accepted", rawSocketClientConnection.getClientId());
-            new Thread(rawSocketClientConnection).start();
-//          } else {
-//            LOGGER.info("Client {} rejected", rawSocketClientConnection.getClientId());
-//            clientConnectionMap.remove(rawSocketClientConnection.getClientId()).close();
-//          }
-        } while (isAcceptingConnections);
-      } catch (IOException ex) {
-        LOGGER.error(ex.getMessage(), ex);
-      }
-    }).start();
-
-    new Thread(() -> {
-      try {
         // todo don't manually hard code this port
-        webServerSocket = new ServerSocket(60080);
+        webServerSocket = new ServerSocket(port);
 
         do {
           LOGGER.info("Waiting for web socket connection...");
-          ClientConnection webSocketClientConnection = new WebSocketClientConnection(
+          ClientConnection jointClientConnection = new JointClientConnection(
             webServerSocket.accept(), nextClientId(), this::onConnect, this::onDisconnect, this::onMessage
           );
 
-          clientConnectionMap.put(webSocketClientConnection.getClientId(), webSocketClientConnection);
+          clientConnectionMap.put(jointClientConnection.getClientId(), jointClientConnection);
 
-          new Thread(webSocketClientConnection).start();
+          new Thread(jointClientConnection).start();
         } while (isAcceptingConnections);
       } catch (IOException ex) {
         LOGGER.error(ex.getMessage(), ex);
       }
     }).start();
+
+
+
+//    new Thread(() -> {
+//      try {
+//        rawServerSocket = new ServerSocket(port);
+//
+//        do {
+//          LOGGER.info("Waiting for connection...");
+//          ClientConnection rawSocketClientConnection = new RawSocketClientConnection(
+//            rawServerSocket.accept(), nextClientId(), this::onConnect, this::onDisconnect, this::onMessage
+//          );
+//
+//          clientConnectionMap.put(rawSocketClientConnection.getClientId(), rawSocketClientConnection);
+//
+////          if (onConnect(rawSocketClientConnection)) {
+////            LOGGER.info("Client {} accepted", rawSocketClientConnection.getClientId());
+//            new Thread(rawSocketClientConnection).start();
+////          } else {
+////            LOGGER.info("Client {} rejected", rawSocketClientConnection.getClientId());
+////            clientConnectionMap.remove(rawSocketClientConnection.getClientId()).close();
+////          }
+//        } while (isAcceptingConnections);
+//      } catch (IOException ex) {
+//        LOGGER.error(ex.getMessage(), ex);
+//      }
+//    }).start();
+
+//    new Thread(() -> {
+//      try {
+//        // todo don't manually hard code this port
+//        webServerSocket = new ServerSocket(60080);
+//
+//        do {
+//          LOGGER.info("Waiting for web socket connection...");
+//          ClientConnection webSocketClientConnection = new WebSocketClientConnection(
+//            webServerSocket.accept(), nextClientId(), this::onConnect, this::onDisconnect, this::onMessage
+//          );
+//
+//          clientConnectionMap.put(webSocketClientConnection.getClientId(), webSocketClientConnection);
+//
+//          new Thread(webSocketClientConnection).start();
+//        } while (isAcceptingConnections);
+//      } catch (IOException ex) {
+//        LOGGER.error(ex.getMessage(), ex);
+//      }
+//    }).start();
   }
 
   public void stop() {

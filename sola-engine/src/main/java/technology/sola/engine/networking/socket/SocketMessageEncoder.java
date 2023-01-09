@@ -21,7 +21,7 @@ public class SocketMessageEncoder {
   }
 
   /**
-   * Formats a message to the client. Works for string size of <= 65535 bytes. Does not mask payload.
+   * Formats a message to the client. Works for string size of less than or equal to 65535 bytes. Does not mask payload.
    *
    * @param socketMessage {@link SocketMessage} to encode
    * @return encoded message
