@@ -120,11 +120,8 @@ public class NetworkingExample extends Sola {
           AssignPlayerIdMessage assignPlayerIdMessage = AssignPlayerIdMessage.fromBody(socketMessage.getBody());
 
           clientPlayerId = assignPlayerIdMessage.getClientPlayerId();
-          System.out.println("client id assigned " + clientPlayerId);
         } else if (socketMessage.getType() == MessageTypes.PLAYER_ADDED.ordinal()) {
           PlayerAddedMessage playerAddedMessage = PlayerAddedMessage.fromBody(socketMessage.getBody());
-
-          System.out.println("player created");
 
           solaEcs.getWorld().createEntity(
             "" + playerAddedMessage.getClientPlayerId(), "player-" + playerAddedMessage.getClientPlayerId(),

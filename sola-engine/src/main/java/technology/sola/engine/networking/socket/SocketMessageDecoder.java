@@ -68,6 +68,10 @@ public class SocketMessageDecoder {
 
     String body = new String(decoded, StandardCharsets.UTF_8);
 
+    if (body.isEmpty()) {
+      return null;
+    }
+
     return SocketMessage.fromString(body);
   }
 }
