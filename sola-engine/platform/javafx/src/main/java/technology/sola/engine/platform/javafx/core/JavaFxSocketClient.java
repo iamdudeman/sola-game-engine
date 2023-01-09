@@ -5,7 +5,11 @@ import org.slf4j.LoggerFactory;
 import technology.sola.engine.networking.NetworkQueue;
 import technology.sola.engine.networking.socket.SocketClient;
 import technology.sola.engine.networking.socket.SocketMessage;
+import technology.sola.engine.networking.socket.SocketMessageDecoder;
+import technology.sola.engine.networking.socket.SocketMessageEncoder;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,8 +21,12 @@ public class JavaFxSocketClient implements SocketClient {
   private boolean isConnected = false;
   private BufferedReader bufferedReader;
   private PrintWriter printWriter;
+  private BufferedInputStream bufferedInputStream;
+  private BufferedOutputStream bufferedOutputStream;
   private Socket socket;
   private final NetworkQueue<SocketMessage> networkQueue = new NetworkQueue<>();
+  private final SocketMessageDecoder socketMessageDecoder = new SocketMessageDecoder();
+  private final SocketMessageEncoder socketMessageEncoder = new SocketMessageEncoder();
 
   @Override
   public NetworkQueue<SocketMessage> getNetworkQueue() {
@@ -32,8 +40,12 @@ public class JavaFxSocketClient implements SocketClient {
       return;
     }
 
-    printWriter.write(socketMessage.toString());
-    printWriter.flush();
+    try {
+      bufferedOutputStream.write(socketMessageEncoder.encodeForRaw(socketMessage));
+      bufferedOutputStream.flush();
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
   }
 
   @Override
@@ -48,22 +60,29 @@ public class JavaFxSocketClient implements SocketClient {
 
       new Thread(() -> {
         try {
+          bufferedOutputStream = new BufferedOutputStream(socket.getOutputStream());
+          bufferedInputStream = new BufferedInputStream(socket.getInputStream());
           bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
           printWriter = new PrintWriter(socket.getOutputStream());
           isConnected = true;
 
+          printWriter.write("hello\r\n");
+          printWriter.flush();
+
           while (isConnected) {
-            String messageLine = bufferedReader.readLine(); // blocking
+            SocketMessage socketMessage = socketMessageDecoder.decodeForRaw(bufferedInputStream);
 
-            System.out.println("message " + messageLine);
+//            String messageLine = bufferedReader.readLine(); // blocking
 
-            if (messageLine == null) {
-              disconnect();
-            } else {
-              SocketMessage socketMessage = SocketMessage.fromString(messageLine);
+//            System.out.println("message " + messageLine);
+
+//            if (messageLine == null) {
+//              disconnect();
+//            } else {
+//              SocketMessage socketMessage = SocketMessage.fromString(messageLine);
 
               networkQueue.addLast(socketMessage);
-            }
+//            }
           }
         } catch (IOException ex) {
           LOGGER.error(ex.getMessage(), ex);

@@ -60,18 +60,18 @@ public abstract class SolaServer {
         do {
           LOGGER.info("Waiting for connection...");
           ClientConnection rawSocketClientConnection = new RawSocketClientConnection(
-            rawServerSocket.accept(), nextClientId(), this::onDisconnect, this::onMessage
+            rawServerSocket.accept(), nextClientId(), this::onConnect, this::onDisconnect, this::onMessage
           );
 
           clientConnectionMap.put(rawSocketClientConnection.getClientId(), rawSocketClientConnection);
 
-          if (onConnect(rawSocketClientConnection)) {
-            LOGGER.info("Client {} accepted", rawSocketClientConnection.getClientId());
+//          if (onConnect(rawSocketClientConnection)) {
+//            LOGGER.info("Client {} accepted", rawSocketClientConnection.getClientId());
             new Thread(rawSocketClientConnection).start();
-          } else {
-            LOGGER.info("Client {} rejected", rawSocketClientConnection.getClientId());
-            clientConnectionMap.remove(rawSocketClientConnection.getClientId()).close();
-          }
+//          } else {
+//            LOGGER.info("Client {} rejected", rawSocketClientConnection.getClientId());
+//            clientConnectionMap.remove(rawSocketClientConnection.getClientId()).close();
+//          }
         } while (isAcceptingConnections);
       } catch (IOException ex) {
         LOGGER.error(ex.getMessage(), ex);

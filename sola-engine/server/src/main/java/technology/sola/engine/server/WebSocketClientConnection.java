@@ -29,8 +29,8 @@ class WebSocketClientConnection implements ClientConnection {
   private boolean isConnected = false;
 
   private BufferedReader bufferedReader;
-  private BufferedInputStream bufferedInputStream;
   private PrintWriter printWriter;
+  private BufferedInputStream bufferedInputStream;
   private BufferedOutputStream bufferedOutputStream;
 
   WebSocketClientConnection(Socket socket, long clientId, Consumer<ClientConnection> onConnect, Consumer<ClientConnection> onDisconnect, OnMessageHandler onMessage) {
