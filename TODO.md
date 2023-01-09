@@ -1,5 +1,4 @@
 # sola-game-engine TODO list
-* SwingSocketClient
 
 ## Known Bugs List
 

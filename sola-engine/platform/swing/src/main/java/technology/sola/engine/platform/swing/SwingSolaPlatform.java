@@ -17,6 +17,7 @@ import technology.sola.engine.platform.swing.assets.SwingFontAssetLoader;
 import technology.sola.engine.platform.swing.assets.SwingSolaImageAssetLoader;
 import technology.sola.engine.platform.swing.assets.SwingSpriteSheetAssetLoader;
 import technology.sola.engine.platform.swing.core.Graphics2dRenderer;
+import technology.sola.engine.platform.swing.core.SwingSocketClient;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,7 +48,7 @@ public class SwingSolaPlatform extends SolaPlatform {
 
   public SwingSolaPlatform(boolean useSoftwareRendering) {
     this.useSoftwareRendering = useSoftwareRendering;
-    // todo create socket client instance
+    socketClient = new SwingSocketClient();
   }
 
   public void setWindowSize(int width, int height) {
