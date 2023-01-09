@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * SolaServer handles network traffic to and from many client connections.
+ */
 public abstract class SolaServer {
   private static final Logger LOGGER = LoggerFactory.getLogger(SolaServer.class);
   protected final SolaEcs solaEcs;
@@ -25,35 +28,66 @@ public abstract class SolaServer {
   private boolean isStarted = false;
   private final GameLoop gameLoop;
 
+  /**
+   * Creates an instance of this SolaServer.
+   *
+   * @param targetUpdatesPerSecond the target updates per second for the game loop
+   */
   protected SolaServer(int targetUpdatesPerSecond) {
     solaEcs = new SolaEcs();
     eventHub = new EventHub();
     this.gameLoop = new ServerGameLoop(eventHub, solaEcs::updateWorld, targetUpdatesPerSecond);
   }
 
+  /**
+   * Called when the server is starting up to initialize things.
+   */
   public abstract void initialize();
 
+  /**
+   * Called when a new connection is attempted to accept or reject it.
+   *
+   * @param clientConnection the {@link ClientConnection} that is connecting
+   * @return true to allow connection
+   */
   public abstract boolean isAllowedConnection(ClientConnection clientConnection);
 
+  /**
+   * Called when a new connection has been established and messages can be sent.
+   *
+   * @param clientConnection the {@link ClientConnection} that is now established
+   */
   public abstract void onConnectionEstablished(ClientConnection clientConnection);
 
+  /**
+   * Called when a client disconnects.
+   *
+   * @param clientConnection the {@link ClientConnection} that is disconnecting
+   */
   public abstract void onDisconnect(ClientConnection clientConnection);
 
+  /**
+   * Called whenever a message is received from a client. If the message is valid returning true will add it to the
+   * {@link technology.sola.engine.networking.NetworkQueue} for the client's connection.
+   *
+   * @param clientConnection the {@link ClientConnection} that sent the message
+   * @param socketMessage    the {@link SocketMessage} that was sent
+   * @return true if message should be added to the queue
+   */
   public abstract boolean onMessage(ClientConnection clientConnection, SocketMessage socketMessage);
 
+  /**
+   * @return the map of client connections
+   */
   public Map<Long, ClientConnection> getClientConnectionMap() {
     return clientConnectionMap;
   }
 
-  private void handleDisconnect(ClientConnection clientConnection) {
-    try {
-      onDisconnect(clientConnection);
-      clientConnectionMap.remove(clientConnection.getClientId()).close();
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-  }
-
+  /**
+   * Starts the server and desired port.
+   *
+   * @param port the port to listen to
+   */
   public void start(int port) {
     initialize();
 
@@ -90,6 +124,9 @@ public abstract class SolaServer {
     }).start();
   }
 
+  /**
+   * Stops the server.
+   */
   public void stop() {
     if (!isStarted) {
       return;
@@ -111,6 +148,12 @@ public abstract class SolaServer {
     }
   }
 
+  /**
+   * Sends a message to a specific client.
+   *
+   * @param id            the client's id
+   * @param socketMessage the {@link SocketMessage} to send
+   */
   public void message(long id, SocketMessage socketMessage) {
     ClientConnection clientConnection = clientConnectionMap.get(id);
 
@@ -125,6 +168,12 @@ public abstract class SolaServer {
     }
   }
 
+  /**
+   * Sends a message to all connected clients excluding ignored clients.
+   *
+   * @param socketMessage the {@link SocketMessage} to send
+   * @param ignoreClients the client ids to ignore sending the message to
+   */
   public void broadcast(SocketMessage socketMessage, long... ignoreClients) {
     List<Long> ignoreIds = new ArrayList<>();
 
@@ -149,5 +198,14 @@ public abstract class SolaServer {
 
   private long nextClientId() {
     return clientCount++;
+  }
+
+  private void handleDisconnect(ClientConnection clientConnection) {
+    try {
+      onDisconnect(clientConnection);
+      clientConnectionMap.remove(clientConnection.getClientId()).close();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 }

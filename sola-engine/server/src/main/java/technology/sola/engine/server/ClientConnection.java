@@ -6,11 +6,26 @@ import technology.sola.engine.networking.socket.SocketMessage;
 import java.io.Closeable;
 import java.io.IOException;
 
+/**
+ * ClientConnection is a handle to the client's connection to the server.
+ */
 public interface ClientConnection extends Runnable, Closeable {
+  /**
+   * @return the id for the client
+   */
   long getClientId();
 
+  /**
+   * @return the queue of messages from the server
+   */
   NetworkQueue<SocketMessage> getNetworkQueue();
 
+  /**
+   * Sends a message to the server.
+   *
+   * @param socketMessage the {@link SocketMessage} to send
+   * @throws IOException if an I/O error occurs.
+   */
   void sendMessage(SocketMessage socketMessage) throws IOException;
 
   @FunctionalInterface
