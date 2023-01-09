@@ -32,12 +32,15 @@ public class ServerMain {
     }
 
     @Override
-    public boolean onConnect(ClientConnection clientConnection) {
+    public boolean isAllowedConnection(ClientConnection clientConnection) {
+      return true;
+    }
+
+    @Override
+    public void onConnectionEstablished(ClientConnection clientConnection) {
       message(clientConnection.getClientId(), new UpdateTimeMessage(System.currentTimeMillis()));
       message(clientConnection.getClientId(), new AssignPlayerIdMessage(clientConnection.getClientId()));
       broadcast(new PlayerAddedMessage(clientConnection.getClientId()));
-
-      return true;
     }
 
     @Override

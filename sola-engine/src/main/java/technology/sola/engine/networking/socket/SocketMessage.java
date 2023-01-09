@@ -9,9 +9,9 @@ public class SocketMessage {
     this.type = type;
     this.body = body;
 
-    // todo if redoing everything to not use BufferedReader than this restriction is not needed instead it should be ( <= 65535 )
-    if (body.getBytes().length > 8192 - 4) {
-      throw new IllegalArgumentException("Message body can only be 8188 bytes long");
+    // 65535 is the max size minus 2 bytes for type and separator character
+    if (body.getBytes().length > 65535 - 2) {
+      throw new IllegalArgumentException("Message body can only be 65533 bytes long");
     }
   }
 
@@ -33,6 +33,6 @@ public class SocketMessage {
 
   @Override
   public String toString() {
-    return type + SEPARATOR + body + "\n";
+    return type + SEPARATOR + body;
   }
 }

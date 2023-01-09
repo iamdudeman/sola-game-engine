@@ -19,13 +19,13 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.function.Consumer;
 
-public class JointClientConnection implements ClientConnection {
+class JointClientConnection implements ClientConnection {
   private static final Logger LOGGER = LoggerFactory.getLogger(JointClientConnection.class);
   private final NetworkQueue<SocketMessage> networkQueue = new NetworkQueue<>();
   private final Socket socket;
   private final long clientId;
-  private final Consumer<ClientConnection> onConnect;
-  private final Consumer<ClientConnection> onDisconnect;
+  private final Consumer<ClientConnection> onConnectionEstablished;
+  private final Consumer<ClientConnection> onDisconnect; // todo hook this up
   private final ClientConnection.OnMessageHandler onMessage;
   private boolean isConnected = false;
 
@@ -37,10 +37,10 @@ public class JointClientConnection implements ClientConnection {
   private final SocketMessageDecoder socketMessageDecoder = new SocketMessageDecoder();
   private boolean isWebSocketConnection = false;
 
-  JointClientConnection(Socket socket, long clientId, Consumer<ClientConnection> onConnect, Consumer<ClientConnection> onDisconnect, ClientConnection.OnMessageHandler onMessage) {
+  JointClientConnection(Socket socket, long clientId, Consumer<ClientConnection> onConnectionEstablished, Consumer<ClientConnection> onDisconnect, ClientConnection.OnMessageHandler onMessage) {
     this.socket = socket;
     this.clientId = clientId;
-    this.onConnect = onConnect;
+    this.onConnectionEstablished = onConnectionEstablished;
     this.onDisconnect = onDisconnect;
     this.onMessage = onMessage;
 
@@ -85,7 +85,7 @@ public class JointClientConnection implements ClientConnection {
 
     isConnected = true;
 
-    onConnect.accept(this);
+    onConnectionEstablished.accept(this);
 
     while (isConnected) {
       LOGGER.info("Waiting for message");

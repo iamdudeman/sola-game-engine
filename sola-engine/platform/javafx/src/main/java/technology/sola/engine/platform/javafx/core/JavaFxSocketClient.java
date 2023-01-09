@@ -72,17 +72,7 @@ public class JavaFxSocketClient implements SocketClient {
           while (isConnected) {
             SocketMessage socketMessage = socketMessageDecoder.decodeForRaw(bufferedInputStream);
 
-//            String messageLine = bufferedReader.readLine(); // blocking
-
-//            System.out.println("message " + messageLine);
-
-//            if (messageLine == null) {
-//              disconnect();
-//            } else {
-//              SocketMessage socketMessage = SocketMessage.fromString(messageLine);
-
-              networkQueue.addLast(socketMessage);
-//            }
+            networkQueue.addLast(socketMessage);
           }
         } catch (IOException ex) {
           LOGGER.error(ex.getMessage(), ex);

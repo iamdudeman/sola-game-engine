@@ -20,8 +20,7 @@ public abstract class SolaServer {
   protected final EventHub eventHub;
   private final Map<Long, ClientConnection> clientConnectionMap = new HashMap<>();
   private long clientCount = 0;
-  private ServerSocket rawServerSocket;
-  private ServerSocket webServerSocket;
+  private ServerSocket serverSocket;
   private boolean isAcceptingConnections = true;
   private boolean isStarted = false;
   private final GameLoop gameLoop;
@@ -34,7 +33,9 @@ public abstract class SolaServer {
 
   public abstract void initialize();
 
-  public abstract boolean onConnect(ClientConnection clientConnection);
+  public abstract boolean isAllowedConnection(ClientConnection clientConnection);
+
+  public abstract void onConnectionEstablished(ClientConnection clientConnection);
 
   public abstract void onDisconnect(ClientConnection clientConnection);
 
@@ -55,70 +56,29 @@ public abstract class SolaServer {
     // network thread
     new Thread(() -> {
       try {
-        // todo don't manually hard code this port
-        webServerSocket = new ServerSocket(port);
+        serverSocket = new ServerSocket(port);
 
         do {
-          LOGGER.info("Waiting for web socket connection...");
+          LOGGER.info("Waiting for connection...");
           ClientConnection jointClientConnection = new JointClientConnection(
-            webServerSocket.accept(), nextClientId(), this::onConnect, this::onDisconnect, this::onMessage
+            serverSocket.accept(), nextClientId(), this::onConnectionEstablished, this::onDisconnect, this::onMessage
           );
 
           clientConnectionMap.put(jointClientConnection.getClientId(), jointClientConnection);
 
-          new Thread(jointClientConnection).start();
+          if (isAllowedConnection(jointClientConnection)) {
+            LOGGER.info("Client {} accepted", jointClientConnection.getClientId());
+            new Thread(jointClientConnection).start();
+          } else {
+            LOGGER.info("Client {} rejected", jointClientConnection.getClientId());
+            clientConnectionMap.remove(jointClientConnection.getClientId()).close();
+          }
+
         } while (isAcceptingConnections);
       } catch (IOException ex) {
         LOGGER.error(ex.getMessage(), ex);
       }
     }).start();
-
-
-
-//    new Thread(() -> {
-//      try {
-//        rawServerSocket = new ServerSocket(port);
-//
-//        do {
-//          LOGGER.info("Waiting for connection...");
-//          ClientConnection rawSocketClientConnection = new RawSocketClientConnection(
-//            rawServerSocket.accept(), nextClientId(), this::onConnect, this::onDisconnect, this::onMessage
-//          );
-//
-//          clientConnectionMap.put(rawSocketClientConnection.getClientId(), rawSocketClientConnection);
-//
-////          if (onConnect(rawSocketClientConnection)) {
-////            LOGGER.info("Client {} accepted", rawSocketClientConnection.getClientId());
-//            new Thread(rawSocketClientConnection).start();
-////          } else {
-////            LOGGER.info("Client {} rejected", rawSocketClientConnection.getClientId());
-////            clientConnectionMap.remove(rawSocketClientConnection.getClientId()).close();
-////          }
-//        } while (isAcceptingConnections);
-//      } catch (IOException ex) {
-//        LOGGER.error(ex.getMessage(), ex);
-//      }
-//    }).start();
-
-//    new Thread(() -> {
-//      try {
-//        // todo don't manually hard code this port
-//        webServerSocket = new ServerSocket(60080);
-//
-//        do {
-//          LOGGER.info("Waiting for web socket connection...");
-//          ClientConnection webSocketClientConnection = new WebSocketClientConnection(
-//            webServerSocket.accept(), nextClientId(), this::onConnect, this::onDisconnect, this::onMessage
-//          );
-//
-//          clientConnectionMap.put(webSocketClientConnection.getClientId(), webSocketClientConnection);
-//
-//          new Thread(webSocketClientConnection).start();
-//        } while (isAcceptingConnections);
-//      } catch (IOException ex) {
-//        LOGGER.error(ex.getMessage(), ex);
-//      }
-//    }).start();
   }
 
   public void stop() {
@@ -129,11 +89,9 @@ public abstract class SolaServer {
     try {
       LOGGER.info("Stopping server");
       isAcceptingConnections = false;
-      if (rawServerSocket != null) {
-        rawServerSocket.close();
-      }
-      if (webServerSocket != null) {
-        webServerSocket.close();
+
+      if (serverSocket != null) {
+        serverSocket.close();
       }
 
       for (ClientConnection clientConnection : clientConnectionMap.values()) {
