@@ -1,7 +1,5 @@
 package technology.sola.engine.server;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import technology.sola.engine.networking.NetworkQueue;
 import technology.sola.engine.networking.socket.SocketMessage;
 import technology.sola.engine.networking.socket.SocketMessageDecoder;
@@ -19,8 +17,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.function.Consumer;
 
-class JointClientConnection implements ClientConnection {
-  private static final Logger LOGGER = LoggerFactory.getLogger(JointClientConnection.class);
+class ClientConnectionImpl implements ClientConnection {
   private final NetworkQueue<SocketMessage> networkQueue = new NetworkQueue<>();
   private final Socket socket;
   private final long clientId;
@@ -37,7 +34,7 @@ class JointClientConnection implements ClientConnection {
   private final SocketMessageDecoder socketMessageDecoder = new SocketMessageDecoder();
   private boolean isWebSocketConnection = false;
 
-  JointClientConnection(Socket socket, long clientId, Consumer<ClientConnection> onConnectionEstablished, Consumer<ClientConnection> onDisconnect, ClientConnection.OnMessageHandler onMessage) {
+  ClientConnectionImpl(Socket socket, long clientId, Consumer<ClientConnection> onConnectionEstablished, Consumer<ClientConnection> onDisconnect, ClientConnection.OnMessageHandler onMessage) {
     this.socket = socket;
     this.clientId = clientId;
     this.onConnectionEstablished = onConnectionEstablished;
@@ -72,7 +69,6 @@ class JointClientConnection implements ClientConnection {
 
     bufferedOutputStream.write(bytes);
     bufferedOutputStream.flush();
-    // LOGGER.info("Message sent to {}", clientId);
   }
 
   @Override
@@ -88,8 +84,6 @@ class JointClientConnection implements ClientConnection {
     onConnectionEstablished.accept(this);
 
     while (isConnected) {
-      // LOGGER.debug("Waiting for message");
-
       try {
         SocketMessage socketMessage = isWebSocketConnection
           ? socketMessageDecoder.decodeForWeb(bufferedInputStream)
@@ -99,7 +93,6 @@ class JointClientConnection implements ClientConnection {
           isConnected = false;
           onDisconnect.accept(this);
         } else if (onMessage.accept(this, socketMessage)) {
-          // LOGGER.debug("Message received from {} {}", clientId, socketMessage);
           networkQueue.addLast(socketMessage);
         }
       } catch (IOException ex) {
@@ -160,8 +153,8 @@ class JointClientConnection implements ClientConnection {
             "Sec-WebSocket-Accept: " + websocketAccept + "\r\n\r\n"
         );
         printWriter.flush();
-      } catch (NoSuchAlgorithmException e) {
-        throw new RuntimeException(e);
+      } catch (NoSuchAlgorithmException ex) {
+        throw new RuntimeException(ex);
       }
     }
   }

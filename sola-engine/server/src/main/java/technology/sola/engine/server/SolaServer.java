@@ -104,7 +104,7 @@ public abstract class SolaServer {
 
         do {
           LOGGER.info("Waiting for connection...");
-          ClientConnection jointClientConnection = new JointClientConnection(
+          ClientConnection jointClientConnection = new ClientConnectionImpl(
             serverSocket.accept(), nextClientId(), this::onConnectionEstablished, this::handleDisconnect, this::onMessage
           );
 
@@ -218,8 +218,8 @@ public abstract class SolaServer {
     try {
       onDisconnect(clientConnection);
       clientConnectionMap.remove(clientConnection.getClientId()).close();
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
     }
   }
 }
