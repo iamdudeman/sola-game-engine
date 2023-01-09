@@ -6,12 +6,12 @@ public class AssignPlayerIdMessage extends SocketMessage {
   private final long clientPlayerId;
 
   public AssignPlayerIdMessage(long clientPlayerId) {
-    super(MessageTypes.ASSIGN_PLAYER_ID.ordinal(), "" + clientPlayerId);
+    super(MessageType.ASSIGN_PLAYER_ID.ordinal(), "" + clientPlayerId);
     this.clientPlayerId = clientPlayerId;
   }
 
-  public static AssignPlayerIdMessage fromBody(String body) {
-    long clientPlayerId = Long.parseLong(body);
+  public static AssignPlayerIdMessage parse(SocketMessage socketMessage) {
+    long clientPlayerId = Long.parseLong(socketMessage.getBody());
 
     return new AssignPlayerIdMessage(clientPlayerId);
   }

@@ -8,13 +8,13 @@ public class PlayerUpdateMessage extends SocketMessage {
   private final Vector2D position;
 
   public PlayerUpdateMessage(long clientPlayerId, Vector2D position) {
-    super(MessageTypes.PLAYER_UPDATE.ordinal(), clientPlayerId + "_" + position.x() + "_" + position.y());
+    super(MessageType.PLAYER_UPDATE.ordinal(), clientPlayerId + "_" + position.x() + "_" + position.y());
     this.clientPlayerId = clientPlayerId;
     this.position = position;
   }
 
-  public static PlayerUpdateMessage fromBody(String body) {
-    String[] parts = body.split("_");
+  public static PlayerUpdateMessage parse(SocketMessage socketMessage) {
+    String[] parts = socketMessage.getBody().split("_");
     long clientPlayerId = Long.parseLong(parts[0]);
     float x = Float.parseFloat(parts[1]);
     float y = Float.parseFloat(parts[2]);

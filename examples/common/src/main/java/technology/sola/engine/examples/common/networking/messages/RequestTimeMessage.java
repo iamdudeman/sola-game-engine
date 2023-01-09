@@ -4,6 +4,6 @@ import technology.sola.engine.networking.socket.SocketMessage;
 
 public class RequestTimeMessage extends SocketMessage {
   public RequestTimeMessage() {
-    super(MessageTypes.REQUEST_TIME.ordinal(), "");
+    super(MessageType.REQUEST_TIME.ordinal(), "");
   }
 }

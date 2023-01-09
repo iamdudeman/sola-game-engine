@@ -9,7 +9,7 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.module.graphics.SolaGraphics;
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.examples.common.networking.messages.AssignPlayerIdMessage;
-import technology.sola.engine.examples.common.networking.messages.MessageTypes;
+import technology.sola.engine.examples.common.networking.messages.MessageType;
 import technology.sola.engine.examples.common.networking.messages.PlayerAddedMessage;
 import technology.sola.engine.examples.common.networking.messages.PlayerRemovedMessage;
 import technology.sola.engine.examples.common.networking.messages.PlayerUpdateMessage;
@@ -110,41 +110,47 @@ public class NetworkingExample extends Sola {
     public void update(World world, float deltaTime) {
       while (!platform.getSocketClient().getNetworkQueue().isEmpty()) {
         SocketMessage socketMessage = platform.getSocketClient().getNetworkQueue().removeFirst();
+        MessageType messageType = MessageType.values()[socketMessage.getType()];
 
-        // todo ideally would be nice to use switch here
-        if (socketMessage.getType() == MessageTypes.UPDATE_TIME.ordinal()) {
-          UpdateTimeMessage updateTimeMessage = UpdateTimeMessage.fromBody(socketMessage.getBody());
+        switch (messageType) {
+          case UPDATE_TIME -> {
+            UpdateTimeMessage updateTimeMessage = UpdateTimeMessage.parse(socketMessage);
 
-          solaGui.getElementById("time", TextGuiElement.class).properties().setText(new Date(updateTimeMessage.getTime()).toString());
-        } else if (socketMessage.getType() == MessageTypes.ASSIGN_PLAYER_ID.ordinal()) {
-          AssignPlayerIdMessage assignPlayerIdMessage = AssignPlayerIdMessage.fromBody(socketMessage.getBody());
+            solaGui.getElementById("time", TextGuiElement.class).properties()
+              .setText(new Date(updateTimeMessage.getTime()).toString());
+          }
+          case ASSIGN_PLAYER_ID -> {
+            AssignPlayerIdMessage assignPlayerIdMessage = AssignPlayerIdMessage.parse(socketMessage);
 
-          clientPlayerId = assignPlayerIdMessage.getClientPlayerId();
-        } else if (socketMessage.getType() == MessageTypes.PLAYER_ADDED.ordinal()) {
-          PlayerAddedMessage playerAddedMessage = PlayerAddedMessage.fromBody(socketMessage.getBody());
+            clientPlayerId = assignPlayerIdMessage.getClientPlayerId();
+          }
+          case PLAYER_ADDED -> {
+            PlayerAddedMessage playerAddedMessage = PlayerAddedMessage.parse(socketMessage);
 
-          solaEcs.getWorld().createEntity(
-            "" + playerAddedMessage.getClientPlayerId(), "player-" + playerAddedMessage.getClientPlayerId(),
-            new TransformComponent(400, 400, 25),
-            new CircleRendererComponent(Color.WHITE, true)
-          );
-        } else if (socketMessage.getType() == MessageTypes.PLAYER_REMOVED.ordinal()) {
-          PlayerRemovedMessage playerRemovedMessage = PlayerRemovedMessage.fromBody(socketMessage.getBody());
+            solaEcs.getWorld().createEntity(
+              "" + playerAddedMessage.getClientPlayerId(), "player-" + playerAddedMessage.getClientPlayerId(),
+              new TransformComponent(400, 400, 25),
+              new CircleRendererComponent(Color.WHITE, true)
+            );
+          }
+          case PLAYER_REMOVED -> {
+            PlayerRemovedMessage playerRemovedMessage = PlayerRemovedMessage.parse(socketMessage);
 
-          solaEcs.getWorld().findEntityByUniqueId("" + playerRemovedMessage.getClientPlayerId())
-            .ifPresent(Entity::destroy);
-        } else if (socketMessage.getType() == MessageTypes.PLAYER_UPDATE.ordinal()) {
-          PlayerUpdateMessage playerUpdateMessage = PlayerUpdateMessage.fromBody(socketMessage.getBody());
-          solaEcs.getWorld().findEntityByUniqueId("" + playerUpdateMessage.getClientPlayerId())
-            .ifPresentOrElse(entity -> {
-              entity.getComponent(TransformComponent.class).setTranslate(playerUpdateMessage.getPosition());
-            }, () -> {
-              solaEcs.getWorld().createEntity(
-                "" + playerUpdateMessage.getClientPlayerId(), "player-" + playerUpdateMessage.getClientPlayerId(),
-                new TransformComponent(playerUpdateMessage.getPosition().x(), playerUpdateMessage.getPosition().y(), 25),
-                new CircleRendererComponent(Color.WHITE, true)
-              );
-            });
+            solaEcs.getWorld().findEntityByUniqueId("" + playerRemovedMessage.getClientPlayerId())
+              .ifPresent(Entity::destroy);
+          }
+          case PLAYER_UPDATE -> {
+            PlayerUpdateMessage playerUpdateMessage = PlayerUpdateMessage.parse(socketMessage);
+
+            solaEcs.getWorld().findEntityByUniqueId("" + playerUpdateMessage.getClientPlayerId())
+              .ifPresentOrElse(entity ->
+                  entity.getComponent(TransformComponent.class).setTranslate(playerUpdateMessage.getPosition()),
+                () -> solaEcs.getWorld().createEntity(
+                  "" + playerUpdateMessage.getClientPlayerId(), "player-" + playerUpdateMessage.getClientPlayerId(),
+                  new TransformComponent(playerUpdateMessage.getPosition().x(), playerUpdateMessage.getPosition().y(), 25),
+                  new CircleRendererComponent(Color.WHITE, true)
+                ));
+          }
         }
       }
     }

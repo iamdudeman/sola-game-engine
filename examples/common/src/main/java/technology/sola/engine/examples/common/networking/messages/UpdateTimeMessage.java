@@ -6,12 +6,12 @@ public class UpdateTimeMessage extends SocketMessage {
   private final long time;
 
   public UpdateTimeMessage(long time) {
-    super(MessageTypes.UPDATE_TIME.ordinal(), "" + time);
+    super(MessageType.UPDATE_TIME.ordinal(), "" + time);
     this.time = time;
   }
 
-  public static UpdateTimeMessage fromBody(String body) {
-    long time = Long.parseLong(body);
+  public static UpdateTimeMessage parse(SocketMessage socketMessage) {
+    long time = Long.parseLong(socketMessage.getBody());
 
     return new UpdateTimeMessage(time);
   }

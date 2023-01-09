@@ -1,7 +1,7 @@
 package technology.sola.engine.examples.server;
 
 import technology.sola.engine.examples.common.networking.messages.AssignPlayerIdMessage;
-import technology.sola.engine.examples.common.networking.messages.MessageTypes;
+import technology.sola.engine.examples.common.networking.messages.MessageType;
 import technology.sola.engine.examples.common.networking.messages.PlayerAddedMessage;
 import technology.sola.engine.examples.common.networking.messages.PlayerRemovedMessage;
 import technology.sola.engine.examples.common.networking.messages.UpdateTimeMessage;
@@ -52,10 +52,11 @@ public class ServerMain {
 
     @Override
     public boolean onMessage(ClientConnection clientConnection, SocketMessage socketMessage) {
-      if (socketMessage.getType() == MessageTypes.REQUEST_TIME.ordinal()) {
-        message(clientConnection.getClientId(), new UpdateTimeMessage(System.currentTimeMillis()));
-      } else if (socketMessage.getType() == MessageTypes.PLAYER_UPDATE.ordinal()) {
-        broadcast(socketMessage, clientConnection.getClientId());
+      MessageType messageType = MessageType.values()[socketMessage.getType()];
+
+      switch (messageType) {
+        case REQUEST_TIME -> message(clientConnection.getClientId(), new UpdateTimeMessage(System.currentTimeMillis()));
+        case PLAYER_UPDATE -> broadcast(socketMessage, clientConnection.getClientId());
       }
 
       return true;

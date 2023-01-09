@@ -6,12 +6,12 @@ public class PlayerRemovedMessage extends SocketMessage {
   private final long clientPlayerId;
 
   public PlayerRemovedMessage(long clientPlayerId) {
-    super(MessageTypes.PLAYER_REMOVED.ordinal(), "" + clientPlayerId);
+    super(MessageType.PLAYER_REMOVED.ordinal(), "" + clientPlayerId);
     this.clientPlayerId = clientPlayerId;
   }
 
-  public static PlayerRemovedMessage fromBody(String body) {
-    long clientPlayerId = Long.parseLong(body);
+  public static PlayerRemovedMessage parse(SocketMessage socketMessage) {
+    long clientPlayerId = Long.parseLong(socketMessage.getBody());
 
     return new PlayerRemovedMessage(clientPlayerId);
   }

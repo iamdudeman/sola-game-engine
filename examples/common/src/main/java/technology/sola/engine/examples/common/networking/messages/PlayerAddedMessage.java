@@ -6,12 +6,12 @@ public class PlayerAddedMessage extends SocketMessage {
   private final long clientPlayerId;
 
   public PlayerAddedMessage(long clientPlayerId) {
-    super(MessageTypes.PLAYER_ADDED.ordinal(), "" + clientPlayerId);
+    super(MessageType.PLAYER_ADDED.ordinal(), "" + clientPlayerId);
     this.clientPlayerId = clientPlayerId;
   }
 
-  public static PlayerAddedMessage fromBody(String body) {
-    long clientPlayerId = Long.parseLong(body);
+  public static PlayerAddedMessage parse(SocketMessage socketMessage) {
+    long clientPlayerId = Long.parseLong(socketMessage.getBody());
 
     return new PlayerAddedMessage(clientPlayerId);
   }
