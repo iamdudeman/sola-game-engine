@@ -22,7 +22,7 @@ public class BrowserSocketClient implements SocketClient {
   @Override
   public void connect(String host, int port) {
     JsNetworkUtils.connectSocket(host, port, (messageData) -> {
-      SocketMessage socketMessage = SocketMessage.fromString(messageData);
+      SocketMessage socketMessage = SocketMessage.parse(messageData);
 
       networkQueue.addLast(socketMessage);
     });

@@ -147,22 +147,21 @@ class JointClientConnection implements ClientConnection {
         messageLine = bufferedReader.readLine();
       }
 
-      String websocketAccept = null;
       try {
-        websocketAccept = Base64.getEncoder().encodeToString(
+        String websocketAccept = Base64.getEncoder().encodeToString(
           MessageDigest.getInstance("SHA-1").digest((websocketKey + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11").getBytes())
         );
+
+        printWriter.write(
+          "HTTP/1.1 101 Switching Protocols\r\n" +
+            "Upgrade: websocket\r\n" +
+            "Connection: Upgrade\r\n" +
+            "Sec-WebSocket-Accept: " + websocketAccept + "\r\n\r\n"
+        );
+        printWriter.flush();
       } catch (NoSuchAlgorithmException e) {
         throw new RuntimeException(e);
       }
-
-      printWriter.write(
-        "HTTP/1.1 101 Switching Protocols\r\n" +
-          "Upgrade: websocket\r\n" +
-          "Connection: Upgrade\r\n" +
-          "Sec-WebSocket-Accept: " + websocketAccept + "\r\n\r\n"
-      );
-      printWriter.flush();
     }
   }
 }

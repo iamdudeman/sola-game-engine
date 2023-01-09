@@ -30,7 +30,7 @@ public class SocketMessageDecoder {
 
     String body = new String(raw, StandardCharsets.UTF_8);
 
-    return SocketMessage.fromString(body);
+    return SocketMessage.parse(body);
   }
 
   /**
@@ -72,6 +72,6 @@ public class SocketMessageDecoder {
       return null;
     }
 
-    return SocketMessage.fromString(body);
+    return SocketMessage.parse(body);
   }
 }

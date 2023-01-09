@@ -1,10 +1,19 @@
 package technology.sola.engine.networking.socket;
 
+/**
+ * SocketMessage contains data transmitted between a server and client.
+ */
 public class SocketMessage {
   private static final String SEPARATOR = "~";
   private final int type;
   private final String body;
 
+  /**
+   * Creates a new SocketMessage instance.
+   *
+   * @param type the type of the message
+   * @param body the body of the message
+   */
   public SocketMessage(int type, String body) {
     this.type = type;
     this.body = body;
@@ -15,7 +24,13 @@ public class SocketMessage {
     }
   }
 
-  public static SocketMessage fromString(String message) {
+  /**
+   * Creates a SocketMessage instance from a raw string message.
+   *
+   * @param message the raw message
+   * @return the parsed {@link SocketMessage} instance
+   */
+  public static SocketMessage parse(String message) {
     String[] parts = message.split(SEPARATOR);
     int type = Integer.parseInt(parts[0]);
     String body = parts.length == 2 ? parts[1] : "";
@@ -23,10 +38,16 @@ public class SocketMessage {
     return new SocketMessage(type, body.trim());
   }
 
+  /**
+   * @return the type of the message
+   */
   public int getType() {
     return type;
   }
 
+  /**
+   * @return the body of the message
+   */
   public String getBody() {
     return body;
   }

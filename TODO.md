@@ -1,14 +1,10 @@
 # sola-game-engine TODO list
-* messages need to be something even browsers can use
-* server Support needed for WebSockets and regular sockets
+* ~~messages need to be something even browsers can use~~
+* ~~server Support needed for WebSockets and regular sockets~~
   * Java server: https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_a_WebSocket_server_in_Java
   * JS client: https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
   *
-* Consider some networking stuff
-  * Socket Clients would need an interface to work off of
-    * implement for Swing and JavaFX
-    * implement for Browser (socket.io maybe)
-
+* SwingSocketClient
 
 ## Known Bugs List
 
