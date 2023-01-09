@@ -57,7 +57,8 @@ your repo using Sola Game Engine.
 * [Browser Platform example](examples/browser)
   * For browser the [GenerateBrowserFilesMain](examples/browser/src/main/java/technology/sola/engine/examples/browser/GenerateBrowserFilesMain.java) is responsible for generating the JavaScript files
   * The [BrowserMain](examples/browser/src/main/java/technology/sola/engine/examples/browser/BrowserMain.java) is the entry point GenerateBrowserFilesMain uses.
-  * Then [DevServerMain](examples/browser/src/main/java/technology/sola/engine/examples/browser/DevServerMain.java) acts as a simple http server for the files
+  * Then [DevBrowserFileServerMain](examples/browser/src/main/java/technology/sola/engine/examples/browser/DevBrowserFileServerMain.java) acts as a simple http server for the files
+* [Server example](examples/server)
 
 ## Games Currently Using sola-game-engine
 * [Acid Rain](https://iamdudeman.itch.io/acid-rain)
