@@ -5,9 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * SocketMessageEncoder is responsible for encoding {@link SocketMessage}s for transmission over sockets.
+ */
 public class SocketMessageEncoder {
   private final Random random = new Random();
 
+  /**
+   * Encodes a message for transmission over raw sockets. Works for string size of less than or equal to 65535 bytes.
+   *
+   * @param socketMessage {@link SocketMessage} to encode
+   * @return encoded message
+   */
   public byte[] encodeForRaw(SocketMessage socketMessage) {
     String message = socketMessage.toString();
     byte[] bytes = message.getBytes(StandardCharsets.UTF_8);
@@ -21,7 +30,7 @@ public class SocketMessageEncoder {
   }
 
   /**
-   * Formats a message to the client. Works for string size of less than or equal to 65535 bytes. Does not mask payload.
+   * Encodes a message for transmission over web sockets. Works for string size of less than or equal to 65535 bytes. Does not mask payload.
    *
    * @param socketMessage {@link SocketMessage} to encode
    * @return encoded message
@@ -55,8 +64,15 @@ public class SocketMessageEncoder {
     return encoded;
   }
 
-  public byte[] encodeForWebWithMask(String string) {
-    byte[] bytes = string.getBytes(StandardCharsets.UTF_8);
+  /**
+   * Encodes a message for transmission over web sockets. Works for string size of less than or equal to 65535 bytes.
+   *
+   * @param socketMessage {@link SocketMessage} to encode
+   * @return encoded message
+   */
+  public byte[] encodeForWebWithMask(SocketMessage socketMessage) {
+    String message = socketMessage.toString();
+    byte[] bytes = message.getBytes(StandardCharsets.UTF_8);
 
     List<Byte> encodedBuilder = new ArrayList<>();
 

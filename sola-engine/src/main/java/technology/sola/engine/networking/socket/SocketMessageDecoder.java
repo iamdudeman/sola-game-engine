@@ -4,6 +4,9 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * SocketMessageDecoder is responsible for decoding {@link SocketMessage}s from payloads received over sockets.
+ */
 public class SocketMessageDecoder {
   /**
    * Decodes a raw socket encoded message from the client. Note, this is a blocking operation.
