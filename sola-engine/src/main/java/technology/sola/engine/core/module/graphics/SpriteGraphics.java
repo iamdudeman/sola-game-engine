@@ -20,7 +20,7 @@ class SpriteGraphics {
       if (layerComponent == null) {
         renderSprite(renderer, entity, cameraTransform, spriteSheetAssetLoader);
       } else {
-        renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r -> renderSprite(renderer, entity, cameraTransform, spriteSheetAssetLoader));
+        renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getOrder(), r -> renderSprite(renderer, entity, cameraTransform, spriteSheetAssetLoader));
       }
     }
   }

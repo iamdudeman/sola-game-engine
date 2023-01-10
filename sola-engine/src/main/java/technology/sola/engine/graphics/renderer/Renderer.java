@@ -7,6 +7,9 @@ import technology.sola.engine.graphics.Color;
 
 import java.util.List;
 
+// todo add new setClamp(float x, float y, float width, float height) method
+// todo add new resetClamp() method
+
 /**
  * Renderer defines the API for a sola game engine renderer. {@link SoftwareRenderer} is the default implementation but
  * each {@link technology.sola.engine.core.SolaPlatform} can implement their own as well to take advantage of the GPU.
@@ -23,13 +26,6 @@ public interface Renderer {
    * @return the current {@link BlendMode} being used when drawing
    */
   BlendMode getBlendMode();
-
-  default void drawWithBlendMode(BlendMode blendMode, DrawItem drawItem) {
-    BlendMode previousBlendMode = getBlendMode();
-    setBlendMode(blendMode);
-    drawItem.draw(this);
-    setBlendMode(previousBlendMode);
-  }
 
   /**
    * @return the current {@link Font} being used for drawing text
@@ -53,10 +49,15 @@ public interface Renderer {
    */
   int getHeight();
 
-  default void createLayers(String... layerIds) {
+  /**
+   * Creates new layers for drawing on.
+   *
+   * @param layerNames the names of the layers to create
+   */
+  default void createLayers(String... layerNames) {
     List<Layer> layers = getLayers();
 
-    for (String layerName : layerIds) {
+    for (String layerName : layerNames) {
       layers.add(new Layer(layerName));
     }
   }
@@ -66,16 +67,35 @@ public interface Renderer {
    */
   List<Layer> getLayers();
 
+  /**
+   * Gets a {@link Layer} by name.
+   *
+   * @param name the name of the layer to get
+   * @return the layer
+   */
   default Layer getLayer(String name) {
     return getLayers().stream().filter(layer -> layer.getName().equals(name)).findFirst().orElseThrow();
   }
 
-  default void drawToLayer(String layerId, DrawItem drawItem) {
-    drawToLayer(layerId, Layer.DEFAULT_PRIORITY, drawItem);
+  /**
+   * Adds a {@link DrawItem} to a layer at default order.
+   *
+   * @param layerName name of the layer to add draw item to
+   * @param drawItem the draw item
+   */
+  default void drawToLayer(String layerName, DrawItem drawItem) {
+    drawToLayer(layerName, Layer.DEFAULT_ORDER, drawItem);
   }
 
-  default void drawToLayer(String layerId, int priority, DrawItem drawItem) {
-    getLayer(layerId).add(drawItem, priority);
+  /**
+   * Adds a {@link DrawItem} to a layer at desired order. Higher order render later.
+   *
+   * @param layerName name of the layer to add draw item to
+   * @param order the order of the draw item
+   * @param drawItem the draw item
+   */
+  default void drawToLayer(String layerName, int order, DrawItem drawItem) {
+    getLayer(layerName).add(drawItem, order);
   }
 
   /**
