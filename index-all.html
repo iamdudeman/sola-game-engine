@@ -71,10 +71,12 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/AssetLoaderProvider.html#add(technology.sola.engine.assets.AssetLoader)" class="member-name-link">add(AssetLoader&lt;?&gt;)</a> - Method in class technology.sola.engine.assets.<a href="technology.sola.engine/technology/sola/engine/assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html#add(technology.sola.engine.graphics.renderer.DrawItem)" class="member-name-link">add(DrawItem)</a> - Method in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html" title="class in technology.sola.engine.graphics.renderer">Layer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Adds a <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> to be drawn when this <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html" title="class in technology.sola.engine.graphics.renderer"><code>Layer</code></a> is drawn with default order.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html#add(technology.sola.engine.graphics.renderer.DrawItem,int)" class="member-name-link">add(DrawItem, int)</a> - Method in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html" title="class in technology.sola.engine.graphics.renderer">Layer</a></dt>
 <dd>
-<div class="block">Adds a <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> to be drawn when this <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html" title="class in technology.sola.engine.graphics.renderer"><code>Layer</code></a> is drawn.</div>
+<div class="block">Adds a <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> to be drawn when this <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html" title="class in technology.sola.engine.graphics.renderer"><code>Layer</code></a> is drawn with desired order.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/math/linear/Vector2D.html#add(technology.sola.math.linear.Vector2D)" class="member-name-link">add(Vector2D)</a> - Method in record class technology.sola.math.linear.<a href="technology.sola.engine/technology/sola/math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></dt>
 <dd>
@@ -429,7 +431,9 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/module/graphics/gui/SolaGui.html#createElement(technology.sola.engine.core.module.graphics.gui.SolaGui.GuiElementCreator,java.util.function.Consumer,technology.sola.engine.graphics.gui.GuiElement...)" class="member-name-link">createElement(SolaGui.GuiElementCreator&lt;T, P&gt;, Consumer&lt;P&gt;, GuiElement&lt;?&gt;...)</a> - Method in class technology.sola.engine.core.module.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/core/module/graphics/gui/SolaGui.html" title="class in technology.sola.engine.core.module.graphics.gui">SolaGui</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#createLayers(java.lang.String...)" class="member-name-link">createLayers(String...)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates new layers for drawing on.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:D">D</h2>
 <dl class="index">
@@ -447,7 +451,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/properties/GuiElementGlobalProperties.html#DEFAULT_FONT_ASSET_ID" class="member-name-link">DEFAULT_FONT_ASSET_ID</a> - Static variable in class technology.sola.engine.graphics.gui.properties.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/properties/GuiElementGlobalProperties.html" title="class in technology.sola.engine.graphics.gui.properties">GuiElementGlobalProperties</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html#DEFAULT_PRIORITY" class="member-name-link">DEFAULT_PRIORITY</a> - Static variable in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html" title="class in technology.sola.engine.graphics.renderer">Layer</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html#DEFAULT_ORDER" class="member-name-link">DEFAULT_ORDER</a> - Static variable in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html" title="class in technology.sola.engine.graphics.renderer">Layer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/DefaultFont.html" class="type-name-link" title="class in technology.sola.engine.assets.graphics.font">DefaultFont</a> - Class in <a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/package-summary.html">technology.sola.engine.assets.graphics.font</a></dt>
 <dd>&nbsp;</dd>
@@ -482,9 +486,13 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#DOWN" class="member-name-link">DOWN</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/DrawItem.html#draw(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">draw(Renderer)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/DrawItem.html" title="interface in technology.sola.engine.graphics.renderer">DrawItem</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Draws this DrawItem to a <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a>.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html#draw(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">draw(Renderer)</a> - Method in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html" title="class in technology.sola.engine.graphics.renderer">Layer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Draw this Layer to a <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a>.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#drawCircle(float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">drawCircle(float, float, float, Color)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
 <dd>
 <div class="block">Draws an unfilled circle.</div>
@@ -492,19 +500,27 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html#drawCircle(float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">drawCircle(float, float, float, Color)</a> - Method in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer">SoftwareRenderer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#drawImage(technology.sola.engine.assets.graphics.SolaImage,float,float)" class="member-name-link">drawImage(SolaImage, float, float)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Draws a <a href="technology.sola.engine/technology/sola/engine/assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> at desired coordinate.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html#drawImage(technology.sola.engine.assets.graphics.SolaImage,float,float)" class="member-name-link">drawImage(SolaImage, float, float)</a> - Method in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer">SoftwareRenderer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#drawImage(technology.sola.engine.assets.graphics.SolaImage,float,float,float,float)" class="member-name-link">drawImage(SolaImage, float, float, float, float)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Draws a <a href="technology.sola.engine/technology/sola/engine/assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> scaled to fit within a rectangle specified by x,y, width and height.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html#drawImage(technology.sola.engine.assets.graphics.SolaImage,float,float,float,float)" class="member-name-link">drawImage(SolaImage, float, float, float, float)</a> - Method in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer">SoftwareRenderer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#drawImage(technology.sola.engine.assets.graphics.SolaImage,technology.sola.engine.graphics.AffineTransform)" class="member-name-link">drawImage(SolaImage, AffineTransform)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Draws a <a href="technology.sola.engine/technology/sola/engine/assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> with <a href="technology.sola.engine/technology/sola/engine/graphics/AffineTransform.html" title="class in technology.sola.engine.graphics"><code>AffineTransform</code></a> applied.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html#drawImage(technology.sola.engine.assets.graphics.SolaImage,technology.sola.engine.graphics.AffineTransform)" class="member-name-link">drawImage(SolaImage, AffineTransform)</a> - Method in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer">SoftwareRenderer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/DrawItem.html" class="type-name-link" title="interface in technology.sola.engine.graphics.renderer">DrawItem</a> - Interface in <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/package-summary.html">technology.sola.engine.graphics.renderer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">DrawItem hold logic to draw things onto a <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a>.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#drawLine(float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">drawLine(float, float, float, float, Color)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
 <dd>
 <div class="block">Draws a line.</div>
@@ -522,11 +538,13 @@ loadScripts(document, 'script');</script>
 <div class="block">Draws a string of text using the current <a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a>.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#drawToLayer(java.lang.String,int,technology.sola.engine.graphics.renderer.DrawItem)" class="member-name-link">drawToLayer(String, int, DrawItem)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Adds a <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> to a layer at desired order.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#drawToLayer(java.lang.String,technology.sola.engine.graphics.renderer.DrawItem)" class="member-name-link">drawToLayer(String, DrawItem)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#drawWithBlendMode(technology.sola.engine.graphics.renderer.BlendMode,technology.sola.engine.graphics.renderer.DrawItem)" class="member-name-link">drawWithBlendMode(BlendMode, DrawItem)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Adds a <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> to a layer at default order.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/DynamicBodyComponent.html" class="type-name-link" title="class in technology.sola.engine.physics.component">DynamicBodyComponent</a> - Class in <a href="technology.sola.engine/technology/sola/engine/physics/component/package-summary.html">technology.sola.engine.physics.component</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/DynamicBodyComponent.html#%3Cinit%3E()" class="member-name-link">DynamicBodyComponent()</a> - Constructor for class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/DynamicBodyComponent.html" title="class in technology.sola.engine.physics.component">DynamicBodyComponent</a></dt>
@@ -1033,7 +1051,9 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html#getLayer()" class="member-name-link">getLayer()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html" title="class in technology.sola.engine.graphics.components">LayerComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#getLayer(java.lang.String)" class="member-name-link">getLayer(String)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Gets a <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html" title="class in technology.sola.engine.graphics.renderer"><code>Layer</code></a> by name.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#getLayers()" class="member-name-link">getLayers()</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html#getLayers()" class="member-name-link">getLayers()</a> - Method in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer">SoftwareRenderer</a></dt>
@@ -1075,6 +1095,8 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html#getOffsetX()" class="member-name-link">getOffsetX()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html#getOffsetY()" class="member-name-link">getOffsetY()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html#getOrder()" class="member-name-link">getOrder()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html" title="class in technology.sola.engine.graphics.components">LayerComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/system/SpriteAnimatorSystem.html#getOrder()" class="member-name-link">getOrder()</a> - Method in class technology.sola.engine.graphics.system.<a href="technology.sola.engine/technology/sola/engine/graphics/system/SpriteAnimatorSystem.html" title="class in technology.sola.engine.graphics.system">SpriteAnimatorSystem</a></dt>
 <dd>&nbsp;</dd>
@@ -1121,8 +1143,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/Canvas.html#getPixels()" class="member-name-link">getPixels()</a> - Method in class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/Canvas.html" title="class in technology.sola.engine.graphics">Canvas</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/CameraComponent.html#getPriority()" class="member-name-link">getPriority()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/CameraComponent.html" title="class in technology.sola.engine.graphics.components">CameraComponent</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html#getPriority()" class="member-name-link">getPriority()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html" title="class in technology.sola.engine.graphics.components">LayerComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/Color.html#getRed()" class="member-name-link">getRed()</a> - Method in class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/Color.html" title="class in technology.sola.engine.graphics">Color</a></dt>
 <dd>&nbsp;</dd>
@@ -1447,7 +1467,9 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/networking/NetworkQueue.html#isEmpty()" class="member-name-link">isEmpty()</a> - Method in class technology.sola.engine.networking.<a href="technology.sola.engine/technology/sola/engine/networking/NetworkQueue.html" title="class in technology.sola.engine.networking">NetworkQueue</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html#isEnabled()" class="member-name-link">isEnabled()</a> - Method in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html" title="class in technology.sola.engine.graphics.renderer">Layer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Return if this layer is enabled or not.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/CircleRendererComponent.html#isFilled()" class="member-name-link">isFilled()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/CircleRendererComponent.html" title="class in technology.sola.engine.graphics.components">CircleRendererComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html#isFilled()" class="member-name-link">isFilled()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html" title="class in technology.sola.engine.graphics.components">RectangleRendererComponent</a></dt>
@@ -1549,9 +1571,13 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#L" class="member-name-link">L</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html" class="type-name-link" title="class in technology.sola.engine.graphics.renderer">Layer</a> - Class in <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/package-summary.html">technology.sola.engine.graphics.renderer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Layers contain a queue of <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> to ensure a particular draw order.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html#%3Cinit%3E(java.lang.String)" class="member-name-link">Layer(String)</a> - Constructor for class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html" title="class in technology.sola.engine.graphics.renderer">Layer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a Layer with an identifier name.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html" class="type-name-link" title="class in technology.sola.engine.graphics.components">LayerComponent</a> - Class in <a href="technology.sola.engine/technology/sola/engine/graphics/components/package-summary.html">technology.sola.engine.graphics.components</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html#%3Cinit%3E(java.lang.String)" class="member-name-link">LayerComponent(String)</a> - Constructor for class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html" title="class in technology.sola.engine.graphics.components">LayerComponent</a></dt>
@@ -1988,6 +2014,10 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/AffineTransform.html#reset()" class="member-name-link">reset()</a> - Method in class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/AffineTransform.html" title="class in technology.sola.engine.graphics">AffineTransform</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#resetClamp()" class="member-name-link">resetClamp()</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
+<dd>
+<div class="block">Resets the rendering clamp to the full size of the <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a>.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/SolaImage.html#resize(int,int)" class="member-name-link">resize(int, int)</a> - Method in class technology.sola.engine.assets.graphics.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/screen/Viewport.html#resize(int,int)" class="member-name-link">resize(int, int)</a> - Method in class technology.sola.engine.graphics.screen.<a href="technology.sola.engine/technology/sola/engine/graphics/screen/Viewport.html" title="class in technology.sola.engine.graphics.screen">Viewport</a></dt>
@@ -2091,6 +2121,12 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/properties/GuiElementBaseProperties.Bounds.html#setBottom(int)" class="member-name-link">setBottom(int)</a> - Method in class technology.sola.engine.graphics.gui.properties.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/properties/GuiElementBaseProperties.Bounds.html" title="class in technology.sola.engine.graphics.gui.properties">GuiElementBaseProperties.Bounds</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#setClamp(float,float,float,float)" class="member-name-link">setClamp(float, float, float, float)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
+<dd>
+<div class="block">Restricts rendering of pixels within a rectangle.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html#setClamp(float,float,float,float)" class="member-name-link">setClamp(float, float, float, float)</a> - Method in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer">SoftwareRenderer</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/CircleRendererComponent.html#setColor(technology.sola.engine.graphics.Color)" class="member-name-link">setColor(Color)</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/CircleRendererComponent.html" title="class in technology.sola.engine.graphics.components">CircleRendererComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/BaseTextGuiElement.HoverProperties.html#setColorText(technology.sola.engine.graphics.Color)" class="member-name-link">setColorText(Color)</a> - Method in class technology.sola.engine.graphics.gui.elements.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/BaseTextGuiElement.HoverProperties.html" title="class in technology.sola.engine.graphics.gui.elements">BaseTextGuiElement.HoverProperties</a></dt>
@@ -2108,7 +2144,9 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/control/ButtonGuiElement.Properties.html#setDisabledBackgroundColor(technology.sola.engine.graphics.Color)" class="member-name-link">setDisabledBackgroundColor(Color)</a> - Method in class technology.sola.engine.graphics.gui.elements.control.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/control/ButtonGuiElement.Properties.html" title="class in technology.sola.engine.graphics.gui.elements.control">ButtonGuiElement.Properties</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html#setEnabled(boolean)" class="member-name-link">setEnabled(boolean)</a> - Method in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html" title="class in technology.sola.engine.graphics.renderer">Layer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets the enabled state of this layer.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/CircleRendererComponent.html#setFilled(boolean)" class="member-name-link">setFilled(boolean)</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/CircleRendererComponent.html" title="class in technology.sola.engine.graphics.components">CircleRendererComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/properties/GuiElementBaseProperties.html#setFocusable(boolean)" class="member-name-link">setFocusable(boolean)</a> - Method in class technology.sola.engine.graphics.gui.properties.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/properties/GuiElementBaseProperties.html" title="class in technology.sola.engine.graphics.gui.properties">GuiElementBaseProperties</a></dt>
@@ -2187,6 +2225,8 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html#setOnMouseUpCallback(java.util.function.Consumer)" class="member-name-link">setOnMouseUpCallback(Consumer&lt;MouseEvent&gt;)</a> - Method in class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html#setOrder(int)" class="member-name-link">setOrder(int)</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html" title="class in technology.sola.engine.graphics.components">LayerComponent</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html#setParent(technology.sola.ecs.Entity)" class="member-name-link">setParent(Entity)</a> - Method in class technology.sola.engine.core.component.<a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#setParticleBlendMode(technology.sola.engine.graphics.renderer.BlendMode)" class="member-name-link">setParticleBlendMode(BlendMode)</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
@@ -2210,9 +2250,13 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#setParticleVelocityBounds(technology.sola.math.linear.Vector2D,technology.sola.math.linear.Vector2D)" class="member-name-link">setParticleVelocityBounds(Vector2D, Vector2D)</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#setPixel(int,int,int)" class="member-name-link">setPixel(int, int, int)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets the <a href="technology.sola.engine/technology/sola/engine/graphics/Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of a pixel at coordinate.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#setPixel(int,int,technology.sola.engine.graphics.Color)" class="member-name-link">setPixel(int, int, Color)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets the <a href="technology.sola.engine/technology/sola/engine/graphics/Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of a pixel at coordinate.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html#setPixel(int,int,technology.sola.engine.graphics.Color)" class="member-name-link">setPixel(int, int, Color)</a> - Method in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer">SoftwareRenderer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/SolaImage.html#setPixels(int,int,int%5B%5D)" class="member-name-link">setPixels(int, int, int[])</a> - Method in class technology.sola.engine.assets.graphics.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a></dt>
@@ -2220,8 +2264,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html#setPosition(int,int)" class="member-name-link">setPosition(int, int)</a> - Method in class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/CameraComponent.html#setPriority(int)" class="member-name-link">setPriority(int)</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/CameraComponent.html" title="class in technology.sola.engine.graphics.components">CameraComponent</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html#setPriority(int)" class="member-name-link">setPriority(int)</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html" title="class in technology.sola.engine.graphics.components">LayerComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/module/graphics/SolaGraphics.html#setRenderDebug(boolean)" class="member-name-link">setRenderDebug(boolean)</a> - Method in class technology.sola.engine.core.module.graphics.<a href="technology.sola.engine/technology/sola/engine/core/module/graphics/SolaGraphics.html" title="class in technology.sola.engine.core.module.graphics">SolaGraphics</a></dt>
 <dd>&nbsp;</dd>

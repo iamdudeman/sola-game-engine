@@ -78,6 +78,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Layer</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Layers contain a queue of <a href="DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> to ensure a particular draw order.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -91,7 +92,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static final int</code></div>
-<div class="col-second even-row-color"><code><a href="#DEFAULT_PRIORITY" class="member-name-link">DEFAULT_PRIORITY</a></code></div>
+<div class="col-second even-row-color"><code><a href="#DEFAULT_ORDER" class="member-name-link">DEFAULT_ORDER</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
@@ -105,7 +106,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">Layer</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a Layer with an identifier name.</div>
+</div>
 </div>
 </section>
 </li>
@@ -122,25 +125,33 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#add(technology.sola.engine.graphics.renderer.DrawItem)" class="member-name-link">add</a><wbr>(<a href="DrawItem.html" title="interface in technology.sola.engine.graphics.renderer">DrawItem</a>&nbsp;drawItem)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Adds a <a href="DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> to be drawn when this <a href="Layer.html" title="class in technology.sola.engine.graphics.renderer"><code>Layer</code></a> is drawn with default order.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#add(technology.sola.engine.graphics.renderer.DrawItem,int)" class="member-name-link">add</a><wbr>(<a href="DrawItem.html" title="interface in technology.sola.engine.graphics.renderer">DrawItem</a>&nbsp;drawItem,
- int&nbsp;priority)</code></div>
+ int&nbsp;order)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Adds a <a href="DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> to be drawn when this <a href="Layer.html" title="class in technology.sola.engine.graphics.renderer"><code>Layer</code></a> is drawn.</div>
+<div class="block">Adds a <a href="DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> to be drawn when this <a href="Layer.html" title="class in technology.sola.engine.graphics.renderer"><code>Layer</code></a> is drawn with desired order.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#draw(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">draw</a><wbr>(<a href="Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Draw this Layer to a <a href="Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a>.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getName()" class="member-name-link">getName</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEnabled()" class="member-name-link">isEnabled</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Return if this layer is enabled or not.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setEnabled(boolean)" class="member-name-link">setEnabled</a><wbr>(boolean&nbsp;isEnabled)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the enabled state of this layer.</div>
+</div>
 </div>
 </div>
 </div>
@@ -159,14 +170,14 @@ loadScripts(document, 'script');</script>
 <h2>Field Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="DEFAULT_PRIORITY">
-<h3>DEFAULT_PRIORITY</h3>
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">DEFAULT_PRIORITY</span></div>
+<section class="detail" id="DEFAULT_ORDER">
+<h3>DEFAULT_ORDER</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">DEFAULT_ORDER</span></div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list">
-<li><a href="../../../../../../constant-values.html#technology.sola.engine.graphics.renderer.Layer.DEFAULT_PRIORITY">Constant Field Values</a></li>
+<li><a href="../../../../../../constant-values.html#technology.sola.engine.graphics.renderer.Layer.DEFAULT_ORDER">Constant Field Values</a></li>
 </ul>
 </dd>
 </dl>
@@ -184,6 +195,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>Layer</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Layer</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="block">Creates a Layer with an identifier name.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>name</code> - the name of the layer</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -198,18 +214,23 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="add(technology.sola.engine.graphics.renderer.DrawItem)">
 <h3>add</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">add</span><wbr><span class="parameters">(<a href="DrawItem.html" title="interface in technology.sola.engine.graphics.renderer">DrawItem</a>&nbsp;drawItem)</span></div>
+<div class="block">Adds a <a href="DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> to be drawn when this <a href="Layer.html" title="class in technology.sola.engine.graphics.renderer"><code>Layer</code></a> is drawn with default order.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>drawItem</code> - the <code>DrawItem</code> to be drawn</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="add(technology.sola.engine.graphics.renderer.DrawItem,int)">
 <h3>add</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">add</span><wbr><span class="parameters">(<a href="DrawItem.html" title="interface in technology.sola.engine.graphics.renderer">DrawItem</a>&nbsp;drawItem,
- int&nbsp;priority)</span></div>
-<div class="block">Adds a <a href="DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> to be drawn when this <a href="Layer.html" title="class in technology.sola.engine.graphics.renderer"><code>Layer</code></a> is drawn.</div>
+ int&nbsp;order)</span></div>
+<div class="block">Adds a <a href="DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> to be drawn when this <a href="Layer.html" title="class in technology.sola.engine.graphics.renderer"><code>Layer</code></a> is drawn with desired order.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>drawItem</code> - the <code>DrawItem</code> to be drawn</dd>
-<dd><code>priority</code> - higher numbers will be drawn on top</dd>
+<dd><code>order</code> - higher numbers will be drawn later</dd>
 </dl>
 </section>
 </li>
@@ -217,24 +238,43 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="draw(technology.sola.engine.graphics.renderer.Renderer)">
 <h3>draw</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">draw</span><wbr><span class="parameters">(<a href="Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</span></div>
+<div class="block">Draw this Layer to a <a href="Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>renderer</code> - the <code>Renderer</code> to draw to</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isEnabled()">
 <h3>isEnabled</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isEnabled</span>()</div>
+<div class="block">Return if this layer is enabled or not. A layer that is not enabled will not render.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if enabled</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setEnabled(boolean)">
 <h3>setEnabled</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setEnabled</span><wbr><span class="parameters">(boolean&nbsp;isEnabled)</span></div>
+<div class="block">Sets the enabled state of this layer.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>isEnabled</code> - the new enabled state</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getName()">
 <h3>getName</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getName</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the identifier name of this layer</dd>
+</dl>
 </section>
 </li>
 </ul>
