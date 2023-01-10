@@ -81,7 +81,7 @@ public interface Renderer {
    * Adds a {@link DrawItem} to a layer at default order.
    *
    * @param layerName name of the layer to add draw item to
-   * @param drawItem the draw item
+   * @param drawItem  the draw item
    */
   default void drawToLayer(String layerName, DrawItem drawItem) {
     drawToLayer(layerName, Layer.DEFAULT_ORDER, drawItem);
@@ -91,8 +91,8 @@ public interface Renderer {
    * Adds a {@link DrawItem} to a layer at desired order. Higher order render later.
    *
    * @param layerName name of the layer to add draw item to
-   * @param order the order of the draw item
-   * @param drawItem the draw item
+   * @param order     the order of the draw item
+   * @param drawItem  the draw item
    */
   default void drawToLayer(String layerName, int order, DrawItem drawItem) {
     getLayer(layerName).add(drawItem, order);
@@ -112,8 +112,22 @@ public interface Renderer {
    */
   void clear(Color color);
 
+  /**
+   * Sets the {@link Color} of a pixel at coordinate.
+   *
+   * @param x     the x coordinate of the pixel
+   * @param y     the y coordinate of the pixel
+   * @param color the new {@code Color}
+   */
   void setPixel(int x, int y, Color color);
 
+  /**
+   * Sets the {@link Color} of a pixel at coordinate.
+   *
+   * @param x     the x coordinate of the pixel
+   * @param y     the y coordinate of the pixel
+   * @param color the new {@code Color}
+   */
   default void setPixel(int x, int y, int color) {
     setPixel(x, y, new Color(color));
   }
@@ -196,9 +210,31 @@ public interface Renderer {
    */
   void fillCircle(float x, float y, float radius, Color color);
 
+  /**
+   * Draws a {@link SolaImage} at desired coordinate. The coordinate will be the top-left of the image drawn.
+   *
+   * @param solaImage the {@code SolaImage} to draw
+   * @param x         top left coordinate x
+   * @param y         top left coordinate y
+   */
   void drawImage(SolaImage solaImage, float x, float y);
 
+  /**
+   * Draws a {@link SolaImage} with {@link AffineTransform} applied.
+   *
+   * @param solaImage       the {@code SolaImage} to draw
+   * @param affineTransform the transform to apply
+   */
   void drawImage(SolaImage solaImage, AffineTransform affineTransform);
 
+  /**
+   * Draws a {@link SolaImage} scaled to fit within a rectangle specified by x,y, width and height.
+   *
+   * @param solaImage the {@code SolaImage} to draw
+   * @param x         top left coordinate x of the scaling rectangle
+   * @param y         top left coordinate y of the scaling rectangle
+   * @param width     the width of the scaling rectangle
+   * @param height    the height of the scaling rectangle
+   */
   void drawImage(SolaImage solaImage, float x, float y, float width, float height);
 }
