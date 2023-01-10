@@ -4,8 +4,17 @@ package technology.sola.engine.graphics;
  * Canvas is an array of pixels with a width and height defined.
  */
 public class Canvas {
+  /**
+   * The width of the canvas.
+   */
   protected int width;
+  /**
+   * The height of the canvas.
+   */
   protected int height;
+  /**
+   * The pixel array for the canvas.
+   */
   protected int[] pixels;
 
   /**

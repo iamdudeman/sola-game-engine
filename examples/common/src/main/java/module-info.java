@@ -1,3 +1,6 @@
+/**
+ * Defines the dependencies for the common example project.
+ */
 module technology.sola.engine.examples.common {
   requires technology.sola.engine;
 
