@@ -11,6 +11,7 @@ import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.graphics.screen.Viewport;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.networking.socket.SocketClient;
 
 import java.util.function.Consumer;
 
@@ -20,6 +21,7 @@ public abstract class SolaPlatform {
   protected GameLoop gameLoop;
   protected Viewport viewport;
   protected EventHub solaEventHub;
+  protected SocketClient socketClient;
 
   public void play(Sola sola) {
     LOGGER.info("Using platform [{}]", this.getClass().getName());
@@ -37,6 +39,10 @@ public abstract class SolaPlatform {
 
   public Viewport getViewport() {
     return viewport;
+  }
+
+  public SocketClient getSocketClient() {
+    return socketClient;
   }
 
   public abstract void onKeyPressed(Consumer<KeyEvent> keyEventConsumer);

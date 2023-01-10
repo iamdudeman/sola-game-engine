@@ -3,14 +3,8 @@ plugins {
 }
 
 dependencies {
-  implementation(project(":sola-engine:platform:javafx"))
+  implementation(project(":sola-engine:server"))
   implementation(project(":examples:common"))
-
-  val osClassifier = getOsClassifier()
-
-  runtimeOnly("org.openjfx", "javafx-base", "17.0.2", classifier = osClassifier)
-  runtimeOnly("org.openjfx", "javafx-controls", "17.0.2", classifier = osClassifier)
-  runtimeOnly("org.openjfx", "javafx-graphics", "17.0.2", classifier = osClassifier)
 }
 
 tasks.withType<Zip> {
@@ -25,11 +19,10 @@ task("distFatJar", Jar::class) {
   group = "distribution"
   duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
-  val osClassifier = getOsClassifier()
-  archiveBaseName.set("examples-${project.name}-${osClassifier}")
+  archiveBaseName.set("examples-${project.name}")
 
   manifest {
-    attributes["Main-Class"] = "${project.properties["basePackage"]}.${project.name}.JavaFxMain"
+    attributes["Main-Class"] = "${project.properties["basePackage"]}.${project.name}.ServerMain"
   }
 
   val dependencies = configurations.runtimeClasspath.get().map(::zipTree)
@@ -60,7 +53,7 @@ task("distWinJPackage", Exec::class) {
     "--vendor", project.properties["vendor"],
     "--dest", "$buildDir/jpackage",
     "--input", "$buildDir/dist",
-    "--main-jar", "${project.properties["gameName"]}-${project.name}-win-${project.version}.jar",
+    "--main-jar", "${project.properties["gameName"]}-${project.name}-${project.version}.jar",
     "--type", "app-image"
   )
 }
@@ -73,14 +66,4 @@ task("distWinJPackageZip", Zip::class) {
   dependsOn(tasks.getByName("distWinJPackage"))
 
   from("${buildDir}/jpackage/${project.properties["gameName"]}-${project.version}")
-}
-
-fun getOsClassifier(): String {
-  if (org.apache.tools.ant.taskdefs.condition.Os.isFamily(org.apache.tools.ant.taskdefs.condition.Os.FAMILY_MAC)) {
-    return "mac"
-  } else if (org.apache.tools.ant.taskdefs.condition.Os.isFamily(org.apache.tools.ant.taskdefs.condition.Os.FAMILY_UNIX)) {
-    return "linux"
-  }
-
-  return "win"
 }
