@@ -99,6 +99,23 @@ public interface Renderer {
   }
 
   /**
+   * Restricts rendering of pixels within a rectangle. Any setPixel call outside of this rectangle will be ignored.
+   *
+   * @param x      top left coordinate x
+   * @param y      top left coordinate y
+   * @param width  width of the rectangle
+   * @param height height of the rectangle
+   */
+  void setClamp(float x, float y, float width, float height);
+
+  /**
+   * Resets the rendering clamp to the full size of the {@link Renderer}.
+   */
+  default void resetClamp() {
+    setClamp(0, 0, getWidth(), getHeight());
+  }
+
+  /**
    * Sets all pixels to {@link Color#BLACK}
    */
   default void clear() {

@@ -61,6 +61,11 @@ public class BrowserCanvasRenderer implements Renderer {
   }
 
   @Override
+  public void setClamp(float x, float y, float width, float height) {
+    throw new NotYetImplementedException();
+  }
+
+  @Override
   public void clear(Color color) {
     setColor(color);
     CanvasRenderScripts.fillRect(0, 0, width, height);

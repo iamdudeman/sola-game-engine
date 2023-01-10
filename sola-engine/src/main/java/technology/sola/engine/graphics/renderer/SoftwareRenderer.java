@@ -25,6 +25,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   private BlendMode blendMode;
   private Font font;
   private PixelUpdater pixelUpdater;
+  private Rectangle renderClamp;
 
   /**
    * Creates a SoftwareRenderer with width and height.
@@ -35,6 +36,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   public SoftwareRenderer(int width, int height) {
     super(width, height);
     setBlendMode(BlendMode.NO_BLENDING);
+    resetClamp();
   }
 
   @Override
@@ -65,13 +67,18 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   }
 
   @Override
+  public void setClamp(float x, float y, float width, float height) {
+    this.renderClamp = new Rectangle(new Vector2D(x, y), new Vector2D(x + width, y + height));
+  }
+
+  @Override
   public void clear(Color color) {
     Arrays.fill(this.pixels, color.hexInt());
   }
 
   @Override
   public void setPixel(int x, int y, Color color) {
-    if (x >= 0 && x < width && y >= 0 && y < height) {
+    if (renderClamp.contains(new Vector2D(x, y))) {
       int pixelIndex = x + y * width;
 
       pixelUpdater.set(pixelIndex, color);
