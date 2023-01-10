@@ -10,10 +10,6 @@
 
 ## TODO List
 
-* rendering improvement
-  * ability to "clamp" the rendering
-    * currently anything outside of renderer width+height is default
-    * ability to set smaller space temporarily could be useful for things like the GUI stuff
 * networking
   * rest client interface
     * javafx/swing impl

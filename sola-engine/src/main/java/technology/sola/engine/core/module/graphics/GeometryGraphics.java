@@ -24,7 +24,7 @@ class GeometryGraphics {
       if (layerComponent == null) {
         renderRectangle(renderer, entity, cameraTransform);
       } else {
-        renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r2 -> renderRectangle(renderer, entity, cameraTransform));
+        renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getOrder(), r2 -> renderRectangle(renderer, entity, cameraTransform));
       }
       renderer.setBlendMode(previousBlendMode);
     }
@@ -41,7 +41,7 @@ class GeometryGraphics {
       if (layerComponent == null) {
         renderCircle(renderer, entity, cameraTransform);
       } else {
-        renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getPriority(), r2 -> renderCircle(r2, entity, cameraTransform));
+        renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getOrder(), r2 -> renderCircle(r2, entity, cameraTransform));
       }
       renderer.setBlendMode(previousBlendMode);
     }

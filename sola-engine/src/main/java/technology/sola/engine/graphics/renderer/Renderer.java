@@ -7,6 +7,9 @@ import technology.sola.engine.graphics.Color;
 
 import java.util.List;
 
+// todo add new setClamp(float x, float y, float width, float height) method
+// todo add new resetClamp() method
+
 /**
  * Renderer defines the API for a sola game engine renderer. {@link SoftwareRenderer} is the default implementation but
  * each {@link technology.sola.engine.core.SolaPlatform} can implement their own as well to take advantage of the GPU.
@@ -23,13 +26,6 @@ public interface Renderer {
    * @return the current {@link BlendMode} being used when drawing
    */
   BlendMode getBlendMode();
-
-  default void drawWithBlendMode(BlendMode blendMode, DrawItem drawItem) {
-    BlendMode previousBlendMode = getBlendMode();
-    setBlendMode(blendMode);
-    drawItem.draw(this);
-    setBlendMode(previousBlendMode);
-  }
 
   /**
    * @return the current {@link Font} being used for drawing text
@@ -53,10 +49,15 @@ public interface Renderer {
    */
   int getHeight();
 
-  default void createLayers(String... layerIds) {
+  /**
+   * Creates new layers for drawing on.
+   *
+   * @param layerNames the names of the layers to create
+   */
+  default void createLayers(String... layerNames) {
     List<Layer> layers = getLayers();
 
-    for (String layerName : layerIds) {
+    for (String layerName : layerNames) {
       layers.add(new Layer(layerName));
     }
   }
@@ -66,16 +67,52 @@ public interface Renderer {
    */
   List<Layer> getLayers();
 
+  /**
+   * Gets a {@link Layer} by name.
+   *
+   * @param name the name of the layer to get
+   * @return the layer
+   */
   default Layer getLayer(String name) {
     return getLayers().stream().filter(layer -> layer.getName().equals(name)).findFirst().orElseThrow();
   }
 
-  default void drawToLayer(String layerId, DrawItem drawItem) {
-    drawToLayer(layerId, Layer.DEFAULT_PRIORITY, drawItem);
+  /**
+   * Adds a {@link DrawItem} to a layer at default order.
+   *
+   * @param layerName name of the layer to add draw item to
+   * @param drawItem  the draw item
+   */
+  default void drawToLayer(String layerName, DrawItem drawItem) {
+    drawToLayer(layerName, Layer.DEFAULT_ORDER, drawItem);
   }
 
-  default void drawToLayer(String layerId, int priority, DrawItem drawItem) {
-    getLayer(layerId).add(drawItem, priority);
+  /**
+   * Adds a {@link DrawItem} to a layer at desired order. Higher order render later.
+   *
+   * @param layerName name of the layer to add draw item to
+   * @param order     the order of the draw item
+   * @param drawItem  the draw item
+   */
+  default void drawToLayer(String layerName, int order, DrawItem drawItem) {
+    getLayer(layerName).add(drawItem, order);
+  }
+
+  /**
+   * Restricts rendering of pixels within a rectangle. Any setPixel call outside of this rectangle will be ignored.
+   *
+   * @param x      top left coordinate x
+   * @param y      top left coordinate y
+   * @param width  width of the rectangle
+   * @param height height of the rectangle
+   */
+  void setClamp(float x, float y, float width, float height);
+
+  /**
+   * Resets the rendering clamp to the full size of the {@link Renderer}.
+   */
+  default void resetClamp() {
+    setClamp(0, 0, getWidth(), getHeight());
   }
 
   /**
@@ -92,8 +129,22 @@ public interface Renderer {
    */
   void clear(Color color);
 
+  /**
+   * Sets the {@link Color} of a pixel at coordinate.
+   *
+   * @param x     the x coordinate of the pixel
+   * @param y     the y coordinate of the pixel
+   * @param color the new {@code Color}
+   */
   void setPixel(int x, int y, Color color);
 
+  /**
+   * Sets the {@link Color} of a pixel at coordinate.
+   *
+   * @param x     the x coordinate of the pixel
+   * @param y     the y coordinate of the pixel
+   * @param color the new {@code Color}
+   */
   default void setPixel(int x, int y, int color) {
     setPixel(x, y, new Color(color));
   }
@@ -176,9 +227,31 @@ public interface Renderer {
    */
   void fillCircle(float x, float y, float radius, Color color);
 
+  /**
+   * Draws a {@link SolaImage} at desired coordinate. The coordinate will be the top-left of the image drawn.
+   *
+   * @param solaImage the {@code SolaImage} to draw
+   * @param x         top left coordinate x
+   * @param y         top left coordinate y
+   */
   void drawImage(SolaImage solaImage, float x, float y);
 
+  /**
+   * Draws a {@link SolaImage} with {@link AffineTransform} applied.
+   *
+   * @param solaImage       the {@code SolaImage} to draw
+   * @param affineTransform the transform to apply
+   */
   void drawImage(SolaImage solaImage, AffineTransform affineTransform);
 
+  /**
+   * Draws a {@link SolaImage} scaled to fit within a rectangle specified by x,y, width and height.
+   *
+   * @param solaImage the {@code SolaImage} to draw
+   * @param x         top left coordinate x of the scaling rectangle
+   * @param y         top left coordinate y of the scaling rectangle
+   * @param width     the width of the scaling rectangle
+   * @param height    the height of the scaling rectangle
+   */
   void drawImage(SolaImage solaImage, float x, float y, float width, float height);
 }
