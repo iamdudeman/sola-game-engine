@@ -27,6 +27,9 @@ technology.sola.engine.graphics.renderer
 technology.sola.engine.graphics.screen
 technology.sola.engine.graphics.system
 technology.sola.engine.input
+technology.sola.engine.networking
+technology.sola.engine.networking.rest
+technology.sola.engine.networking.socket
 technology.sola.engine.physics
 technology.sola.engine.physics.component
 technology.sola.engine.physics.event
