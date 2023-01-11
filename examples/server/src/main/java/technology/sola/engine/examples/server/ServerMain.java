@@ -9,6 +9,9 @@ import technology.sola.engine.networking.socket.SocketMessage;
 import technology.sola.engine.server.ClientConnection;
 import technology.sola.engine.server.SolaServer;
 
+/**
+ * Runs the example server listening on port 60000.
+ */
 public class ServerMain {
   /**
    * Entry point for Server example.
