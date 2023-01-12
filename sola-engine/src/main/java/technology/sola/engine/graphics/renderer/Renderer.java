@@ -106,7 +106,7 @@ public interface Renderer {
    * @param width  width of the rectangle
    * @param height height of the rectangle
    */
-  void setClamp(float x, float y, float width, float height);
+  void setClamp(int x, int y, int width, int height);
 
   /**
    * Resets the rendering clamp to the full size of the {@link Renderer}.

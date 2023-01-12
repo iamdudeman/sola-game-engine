@@ -61,7 +61,7 @@ public class BrowserCanvasRenderer implements Renderer {
   }
 
   @Override
-  public void setClamp(float x, float y, float width, float height) {
+  public void setClamp(int x, int y, int width, int height) {
     throw new NotYetImplementedException();
   }
 
