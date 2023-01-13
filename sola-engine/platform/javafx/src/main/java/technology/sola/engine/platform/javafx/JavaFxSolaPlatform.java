@@ -14,7 +14,7 @@ import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.event.GameLoopEvent;
-import technology.sola.engine.core.event.GameLoopEventType;
+import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
@@ -118,7 +118,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       writableImage = new WritableImage(rendererWidth, rendererHeight);
 
       solaEventHub.add(GameLoopEvent.class, event -> {
-        if (event.type() == GameLoopEventType.STOPPED) {
+        if (event.state() == GameLoopState.STOPPED) {
           if (socketClient.isConnected()) {
             socketClient.disconnect();
           }
@@ -129,12 +129,12 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       stage.setOnShown(event -> canvas.requestFocus());
       stage.iconifiedProperty().addListener((observable, oldValue, isMinimized) -> {
         if (isMinimized) {
-          solaEventHub.emit(new GameLoopEvent(GameLoopEventType.PAUSE));
+          solaEventHub.emit(new GameLoopEvent(GameLoopState.PAUSE));
         } else {
-          solaEventHub.emit(new GameLoopEvent(GameLoopEventType.RESUME));
+          solaEventHub.emit(new GameLoopEvent(GameLoopState.RESUME));
         }
       });
-      stage.setOnCloseRequest(event -> solaEventHub.emit(new GameLoopEvent(GameLoopEventType.STOP)));
+      stage.setOnCloseRequest(event -> solaEventHub.emit(new GameLoopEvent(GameLoopState.STOP)));
       stage.setTitle(solaConfiguration.title());
       stage.setScene(scene);
       if (windowWidth != null) {

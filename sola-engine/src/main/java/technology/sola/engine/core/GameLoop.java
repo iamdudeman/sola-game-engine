@@ -60,7 +60,7 @@ public abstract class GameLoop implements Runnable {
   }
 
   private void onGameLoopEvent(GameLoopEvent event) {
-    switch (event.type()) {
+    switch (event.state()) {
       case STOP -> this.stop();
       case PAUSE -> this.isPaused = true;
       case RESUME -> this.isPaused = false;
