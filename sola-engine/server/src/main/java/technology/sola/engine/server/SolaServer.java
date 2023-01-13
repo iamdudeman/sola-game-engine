@@ -20,7 +20,13 @@ import java.util.Map;
  */
 public abstract class SolaServer {
   private static final Logger LOGGER = LoggerFactory.getLogger(SolaServer.class);
+  /**
+   * {@link SolaEcs} instance used by the server's game loop.
+   */
   protected final SolaEcs solaEcs;
+  /**
+   * {@link EventHub} instance used by the server's game loop.
+   */
   protected final EventHub eventHub;
   private final Map<Long, ClientConnection> clientConnectionMap = new HashMap<>();
   private long clientCount = 0;
