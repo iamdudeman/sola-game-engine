@@ -51,7 +51,7 @@ public class NetworkingExample extends Sola {
     ButtonGuiElement connectButton = solaGui.getElementById("connect", ButtonGuiElement.class);
     ButtonGuiElement disconnectButton = solaGui.getElementById("disconnect", ButtonGuiElement.class);
     connectButton.setOnAction(() -> {
-      platform.getSocketClient().connect("127.0.0.1", 60000);
+      platform.getSocketClient().connect("127.0.0.1", 1380);
       connectButton.properties().setDisabled(true);
       disconnectButton.properties().setDisabled(false);
       updateTimeButton.properties().setDisabled(false);
