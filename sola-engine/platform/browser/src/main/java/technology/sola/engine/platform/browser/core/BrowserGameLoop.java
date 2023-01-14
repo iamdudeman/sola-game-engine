@@ -22,8 +22,7 @@ public class BrowserGameLoop extends GameLoop implements JsUtils.Function {
   }
 
   @Override
-  public void run() {
-    super.run();
+  protected void startLoop() {
     new JsAnimationFrame().run();
   }
 

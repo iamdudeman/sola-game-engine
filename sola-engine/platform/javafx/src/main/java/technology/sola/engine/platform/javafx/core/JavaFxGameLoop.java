@@ -14,8 +14,7 @@ public class JavaFxGameLoop extends GameLoop {
   }
 
   @Override
-  public void run() {
-    super.run();
+  protected void startLoop() {
     new JavaFxGameLoopTimer().start();
   }
 

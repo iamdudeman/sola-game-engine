@@ -16,9 +16,7 @@ class ServerGameLoop extends GameLoop {
   }
 
   @Override
-  public void run() {
-    super.run();
-
+  protected void startLoop() {
     while (isRunning()) {
       long loopStart = System.nanoTime();
       float delta = (loopStart - previousLoopStartNanos) / 1e9f;
