@@ -15,6 +15,9 @@ import technology.sola.engine.networking.socket.SocketClient;
 
 import java.util.function.Consumer;
 
+/**
+ * SolaPlatform defines the API for a platform to run {@link Sola}.
+ */
 public abstract class SolaPlatform {
   protected static final Logger LOGGER = LoggerFactory.getLogger(SolaPlatform.class);
   protected Renderer renderer;
@@ -23,6 +26,11 @@ public abstract class SolaPlatform {
   protected EventHub solaEventHub;
   protected SocketClient socketClient;
 
+  /**
+   * Main entry point for starting a {@link Sola}.
+   *
+   * @param sola the {@code Sola} to start
+   */
   public void play(Sola sola) {
     LOGGER.info("Using platform [{}]", this.getClass().getName());
 
@@ -33,26 +41,60 @@ public abstract class SolaPlatform {
     initializePlatform(sola.configuration, () -> initComplete(sola, sola.configuration));
   }
 
+  /**
+   * @return the platform's {@link Renderer}
+   */
   public Renderer getRenderer() {
     return renderer;
   }
 
+  /**
+   * @return the platform's {@link Viewport}
+   */
   public Viewport getViewport() {
     return viewport;
   }
 
+  /**
+   * @return the platform's {@link SocketClient}
+   */
   public SocketClient getSocketClient() {
     return socketClient;
   }
 
+  /**
+   * Registers an on key pressed listener.
+   *
+   * @param keyEventConsumer the method called when key is pressed
+   */
   public abstract void onKeyPressed(Consumer<KeyEvent> keyEventConsumer);
 
+  /**
+   * Registers an on key released listener.
+   *
+   * @param keyEventConsumer the method called when key is released
+   */
   public abstract void onKeyReleased(Consumer<KeyEvent> keyEventConsumer);
 
+  /**
+   * Registers an on mouse moved listener.
+   *
+   * @param mouseEventConsumer the method called when mouse is moved
+   */
   public abstract void onMouseMoved(Consumer<MouseEvent> mouseEventConsumer);
 
+  /**
+   * Registers an on mouse pressed listener.
+   *
+   * @param mouseEventConsumer the method called when mouse is pressed
+   */
   public abstract void onMousePressed(Consumer<MouseEvent> mouseEventConsumer);
 
+  /**
+   * Registers an on mouse released listener.
+   *
+   * @param mouseEventConsumer the method called when mouse is released
+   */
   public abstract void onMouseReleased(Consumer<MouseEvent> mouseEventConsumer);
 
   /**
