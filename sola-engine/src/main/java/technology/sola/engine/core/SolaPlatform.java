@@ -108,13 +108,8 @@ public abstract class SolaPlatform {
     );
 
     Runnable startGameLoopThread = () -> new Thread(gameLoop).start();
-    SolaInitialization solaInitialization = new SolaInitialization(startGameLoopThread);
 
-    sola.initializeForPlatform(this, solaInitialization);
-
-    if (!solaInitialization.isAsync()) {
-      startGameLoopThread.run();
-    }
+    sola.initializeForPlatform(this, startGameLoopThread);
   }
 
   private void update(Sola sola, float deltaTime) {

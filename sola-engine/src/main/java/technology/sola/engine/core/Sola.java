@@ -14,7 +14,6 @@ public abstract class Sola {
   protected EventHub eventHub;
   protected KeyboardInput keyboardInput;
   protected MouseInput mouseInput;
-  protected SolaInitialization solaInitialization;
   protected AssetLoaderProvider assetLoaderProvider;
 
   protected Sola(SolaConfiguration.Builder solaConfigurationBuilder) {
@@ -30,21 +29,25 @@ public abstract class Sola {
     assetLoaderProvider = new AssetLoaderProvider();
   }
 
+  protected abstract void onRender(Renderer renderer);
+
   protected abstract void onInit();
+
+  protected void onAsyncInit(Runnable completeAsyncInit) {
+    completeAsyncInit.run();
+  }
 
   protected void onUpdate(float deltaTime) {
     keyboardInput.updateStatusOfKeys();
     mouseInput.updateStatusOfMouse();
+
     if (!platform.gameLoop.isPaused()) {
       solaEcs.updateWorld(deltaTime);
     }
   }
 
-  protected abstract void onRender(Renderer renderer);
-
-  void initializeForPlatform(SolaPlatform platform, SolaInitialization solaInitialization) {
+  void initializeForPlatform(SolaPlatform platform, Runnable completeAsyncInit) {
     this.platform = platform;
-    this.solaInitialization = solaInitialization;
 
     platform.onKeyPressed(event -> keyboardInput.keyPressed(event));
     platform.onKeyReleased(event -> keyboardInput.keyReleased(event));
@@ -53,5 +56,6 @@ public abstract class Sola {
     platform.onMouseReleased(event -> mouseInput.onMouseReleased(event));
 
     onInit();
+    onAsyncInit(completeAsyncInit);
   }
 }
