@@ -23,25 +23,27 @@ public class AudioExample extends Sola {
 
   @Override
   protected void onInit() {
-    solaInitialization.useAsyncInitialization();
     platform.getViewport().setAspectMode(AspectMode.STRETCH);
     solaGui = SolaGui.useModule(assetLoaderProvider, platform, eventHub);
 
     solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
     solaGui.globalProperties.setDefaultFontAssetId("arial");
+  }
 
+  @Override
+  protected void onAsyncInit(Runnable completeAsyncInit) {
     new BulkAssetLoader(assetLoaderProvider)
       .addAsset(Font.class, "arial", "assets/arial_NORMAL_16.json")
       .addAsset(AudioClip.class, "test_song", "assets/asgaseg.wav")
       .loadAll()
       .onComplete(assets -> {
         if (assets[1] instanceof AudioClip audioClip) {
-          audioClip.setVolume(0.5f);
+          audioClip.setVolume(0.25f);
 
           solaGui.setGuiRoot(buildGui(audioClip), 15, 15);
         }
 
-        solaInitialization.completeAsyncInitialization();
+        completeAsyncInit.run();
       });
   }
 

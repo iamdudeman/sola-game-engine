@@ -21,7 +21,7 @@ public class ServerMain {
   public static void main(String[] args) {
     SolaServer solaServer = new ExampleSolaServer();
 
-    solaServer.start(60000);
+    solaServer.start(1380);
   }
 
   private static class ExampleSolaServer extends SolaServer {

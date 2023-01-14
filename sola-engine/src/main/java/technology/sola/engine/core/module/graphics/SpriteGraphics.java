@@ -26,7 +26,7 @@ class SpriteGraphics {
   }
 
   private static void renderSprite(Renderer renderer, Entity entity, TransformComponent cameraTransform, AssetLoader<SpriteSheet> spriteSheetAssetLoader) {
-    TransformComponent transformComponent = GraphicsUtils.getTransformForAppliedCamera(entity.getComponent(TransformComponent.class), cameraTransform);
+    TransformComponent transformComponent = SolaGraphics.getTransformForAppliedCamera(entity.getComponent(TransformComponent.class), cameraTransform);
     SpriteComponent spriteComponent = entity.getComponent(SpriteComponent.class);
 
     if (spriteComponent.getSpriteId() == null) {

@@ -24,7 +24,7 @@ class DebugGraphics {
       for (SpatialHashMap.BucketId bucketId : collisionDetectionSystem.getSpacialHashMapEntityBuckets()) {
         Vector2D topLeftPoint = new Vector2D(bucketId.x(), bucketId.y()).scalar(cellSize);
 
-        TransformComponent useThis = GraphicsUtils.getTransformForAppliedCamera(
+        TransformComponent useThis = SolaGraphics.getTransformForAppliedCamera(
           new TransformComponent(topLeftPoint.x(), topLeftPoint.y(), cellSize, cellSize),
           cameraTransform
         );
@@ -34,7 +34,7 @@ class DebugGraphics {
     }
 
     for (Entity entity : solaEcs.getWorld().findEntitiesWithComponents(ColliderComponent.class, TransformComponent.class)) {
-      TransformComponent transformComponent = GraphicsUtils.getTransformForAppliedCamera(
+      TransformComponent transformComponent = SolaGraphics.getTransformForAppliedCamera(
         entity.getComponent(TransformComponent.class),
         cameraTransform
       );

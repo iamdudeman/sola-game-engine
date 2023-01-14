@@ -48,7 +48,7 @@ class GeometryGraphics {
   }
 
   private static void renderRectangle(Renderer renderer, Entity entity, TransformComponent cameraTransform) {
-    var transform = GraphicsUtils.getTransformForAppliedCamera(entity.getComponent(TransformComponent.class), cameraTransform);
+    var transform = SolaGraphics.getTransformForAppliedCamera(entity.getComponent(TransformComponent.class), cameraTransform);
     var rectangleRenderer = entity.getComponent(RectangleRendererComponent.class);
 
     if (rectangleRenderer.isFilled()) {
@@ -59,7 +59,7 @@ class GeometryGraphics {
   }
 
   private static void renderCircle(Renderer renderer, Entity entity, TransformComponent cameraTransform) {
-    var transform = GraphicsUtils.getTransformForAppliedCamera(entity.getComponent(TransformComponent.class), cameraTransform);
+    var transform = SolaGraphics.getTransformForAppliedCamera(entity.getComponent(TransformComponent.class), cameraTransform);
     var circleRenderer = entity.getComponent(CircleRendererComponent.class);
     float radius = Math.max(transform.getScaleX(), transform.getScaleY()) * 0.5f;
 

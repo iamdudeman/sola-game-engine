@@ -7,20 +7,24 @@ import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
+/**
+ * Creates a CollisionManifoldEventMessage for two entities.
+ *
+ * @param entityA     the first {@link Entity} in the collision
+ * @param entityB     the second {@link Entity} in the collision
+ * @param normal      the collision normal
+ * @param penetration the penetration of the collision
+ */
 public record CollisionManifold(
   Entity entityA, Entity entityB, Vector2D normal, float penetration
 ) {
   /**
-   * Creates a CollisionManifoldEventMessage for two entities.
+   * Calls the collision resolve callback if both entity collision condition checks return true.
    *
-   * @param entityA     the first {@link Entity} in the collision
-   * @param entityB     the second {@link Entity} in the collision
-   * @param normal      the collision normal
-   * @param penetration the penetration of the collision
+   * @param entityOneCollisionCondition the first entity collision condition
+   * @param entityTwoCollisionCondition the second entity collision condition
+   * @param collisionResolver           the resolver for the collision
    */
-  public CollisionManifold {
-  }
-
   public void conditionallyResolveCollision(
     Function<Entity, Boolean> entityOneCollisionCondition,
     Function<Entity, Boolean> entityTwoCollisionCondition,

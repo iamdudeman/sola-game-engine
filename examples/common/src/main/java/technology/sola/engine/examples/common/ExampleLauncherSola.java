@@ -4,7 +4,7 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.event.GameLoopEvent;
-import technology.sola.engine.core.event.GameLoopEventType;
+import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.examples.common.networking.NetworkingExample;
 import technology.sola.engine.examples.common.singlefile.AnimationExample;
@@ -79,12 +79,12 @@ public class ExampleLauncherSola extends Sola {
       p -> p.setText(text).setTextAlign(BaseTextGuiElement.TextAlign.CENTER).padding.set(10).setWidth(300)
     ).setOnAction(() -> {
       eventHub.add(GameLoopEvent.class, event -> {
-        if (event.type() == GameLoopEventType.STOPPED) {
+        if (event.state() == GameLoopState.STOPPED) {
           solaPlatform.play(solaSupplier.get());
         }
       });
 
-      eventHub.emit(new GameLoopEvent(GameLoopEventType.STOP));
+      eventHub.emit(new GameLoopEvent(GameLoopState.STOP));
     });
   }
 }

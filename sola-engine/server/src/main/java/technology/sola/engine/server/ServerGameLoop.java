@@ -2,7 +2,7 @@ package technology.sola.engine.server;
 
 import technology.sola.engine.core.GameLoop;
 import technology.sola.engine.core.event.GameLoopEvent;
-import technology.sola.engine.core.event.GameLoopEventType;
+import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.event.EventHub;
 
 import java.util.function.Consumer;
@@ -16,9 +16,7 @@ class ServerGameLoop extends GameLoop {
   }
 
   @Override
-  public void run() {
-    super.run();
-
+  protected void startLoop() {
     while (isRunning()) {
       long loopStart = System.nanoTime();
       float delta = (loopStart - previousLoopStartNanos) / 1e9f;
@@ -40,7 +38,7 @@ class ServerGameLoop extends GameLoop {
       }
     }
 
-    eventHub.emit(new GameLoopEvent(GameLoopEventType.STOPPED));
+    eventHub.emit(new GameLoopEvent(GameLoopState.STOPPED));
   }
 
   private void shortRest(long loopStartTime) {
