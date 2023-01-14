@@ -26,12 +26,12 @@ public abstract class GameLoop implements Runnable {
     this(eventHub, updateMethod, renderMethod, targetUpdatesPerSecond, true);
   }
 
-  protected GameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean trackFps) {
+  protected GameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond, boolean logFps) {
     this.eventHub = eventHub;
     this.updateMethod = updateMethod;
     this.renderMethod = renderMethod;
     this.deltaTime = 1f / targetUpdatesPerSecond;
-    this.trackFps = trackFps;
+    this.trackFps = logFps;
 
     eventHub.add(GameLoopEvent.class, this::onGameLoopEvent);
   }

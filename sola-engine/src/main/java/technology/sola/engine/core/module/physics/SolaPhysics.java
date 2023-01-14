@@ -42,22 +42,37 @@ public class SolaPhysics {
     return solaPhysics;
   }
 
+  /**
+   * @return the {@link GravitySystem} being used
+   */
   public GravitySystem getGravitySystem() {
     return gravitySystem;
   }
 
+  /**
+   * @return the {@link PhysicsSystem} being used
+   */
   public PhysicsSystem getPhysicsSystem() {
     return physicsSystem;
   }
 
+  /**
+   * @return the {@link CollisionDetectionSystem} being used
+   */
   public CollisionDetectionSystem getCollisionDetectionSystem() {
     return collisionDetectionSystem;
   }
 
+  /**
+   * @return the {@link ImpulseCollisionResolutionSystem} being used
+   */
   public ImpulseCollisionResolutionSystem getImpulseCollisionResolutionSystem() {
     return impulseCollisionResolutionSystem;
   }
 
+  /**
+   * @return the {@link ParticleSystem} being used
+   */
   public ParticleSystem getParticleSystem() {
     return particleSystem;
   }

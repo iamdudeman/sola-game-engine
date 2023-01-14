@@ -51,6 +51,27 @@ public class SolaGraphics {
   }
 
   /**
+   * Calculates the resulting {@link TransformComponent} for an {@link technology.sola.ecs.Entity} based on the transform
+   * of the active camera.
+   *
+   * @param entityTransform the transform of the entity
+   * @param cameraTransform the transform of the camera
+   * @return the resulting transform for the entity after camera transform is applied
+   */
+  public static TransformComponent getTransformForAppliedCamera(TransformComponent entityTransform, TransformComponent cameraTransform) {
+    Matrix3D cameraScaleTransform = Matrix3D.scale(cameraTransform.getScaleX(), cameraTransform.getScaleY());
+    Vector2D entityScale = cameraScaleTransform.forward(entityTransform.getScaleX(), entityTransform.getScaleY());
+
+    Matrix3D cameraTranslationTransform = Matrix3D.translate(-cameraTransform.getX(), -cameraTransform.getY())
+      .multiply(cameraScaleTransform);
+    Vector2D entityTranslation = cameraTranslationTransform.forward(entityTransform.getX(), entityTransform.getY());
+
+    return new TransformComponent(
+      entityTranslation.x(), entityTranslation.y(), entityScale.x(), entityScale.y()
+    );
+  }
+
+  /**
    * Renders all {@link technology.sola.ecs.Entity} that have various render components. Also renders debug physics
    * graphics if enabled and physics {@link technology.sola.ecs.EcsSystem}s are present.
    */
@@ -98,6 +119,12 @@ public class SolaGraphics {
     return cachedScreenToWorldMatrix.forward(screenCoordinate.x(), screenCoordinate.y());
   }
 
+  /**
+   * Returns the {@link TransformComponent} of the {@link CameraComponent} {@link technology.sola.ecs.Entity} with the
+   * highest priority. If no camera is found then a default transform is returned.
+   *
+   * @return the {@link TransformComponent} of the {@link CameraComponent} {@link technology.sola.ecs.Entity}
+   */
   public TransformComponent getCameraTransform() {
     var cameraViews = solaEcs.getWorld()
       .createView().of(TransformComponent.class, CameraComponent.class)
@@ -110,10 +137,20 @@ public class SolaGraphics {
       : cameraViews.get(0).c1();
   }
 
+  /**
+   * Debug information includes spacial hash map and collider outlines.
+   *
+   * @return true if currently rendering debug information
+   */
   public boolean isRenderDebug() {
     return isRenderDebug;
   }
 
+  /**
+   * Sets whether or not debug rendering is enabled.
+   *
+   * @param renderDebug the new render debug state
+   */
   public void setRenderDebug(boolean renderDebug) {
     isRenderDebug = renderDebug;
   }
