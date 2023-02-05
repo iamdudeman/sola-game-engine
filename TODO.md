@@ -2,6 +2,9 @@
 
 ## Known Bugs List
 
+* hover background and border won't show unless onMouseEnter and onMouseExit callbacks are set
+* NPE if no hover background color set (should default to current border color)
+
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Planned Cleanup List
