@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class SolaGraphicsModule {
   public abstract List<Entity> getEntitiesToRender(World world);
 
-  public abstract void renderMethod(Entity entity, TransformComponent entityTransform);
+  public abstract void renderMethod(Renderer renderer, Entity entity, TransformComponent entityTransform);
 
   public void render(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
     for (Entity entity : getEntitiesToRender(world)) {
@@ -29,9 +29,9 @@ public abstract class SolaGraphicsModule {
 
       renderer.setBlendMode(blendMode);
       if (layerComponent == null) {
-        renderMethod(entity, transformWithCameraComponent);
+        renderMethod(renderer, entity, transformWithCameraComponent);
       } else {
-        renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getOrder(), r2 -> renderMethod(entity, transformWithCameraComponent));
+        renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getOrder(), r2 -> renderMethod(renderer, entity, transformWithCameraComponent));
       }
       renderer.setBlendMode(previousBlendMode);
     }

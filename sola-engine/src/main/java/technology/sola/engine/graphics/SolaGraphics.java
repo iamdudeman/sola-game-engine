@@ -29,7 +29,6 @@ public class SolaGraphics {
   private final SpriteAnimatorSystem spriteAnimatorSystem;
   private final TransformAnimatorSystem transformAnimatorSystem;
 
-
   public SolaGraphics(SolaEcs solaEcs, Renderer renderer) {
     this.solaEcs = solaEcs;
     this.renderer = renderer;
