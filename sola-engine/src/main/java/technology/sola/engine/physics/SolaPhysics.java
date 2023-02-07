@@ -32,7 +32,7 @@ public class SolaPhysics {
       physicsSystem,
       collisionDetectionSystem,
       impulseCollisionResolutionSystem,
-      particleSystem
+      particleSystem,
     };
   }
 
