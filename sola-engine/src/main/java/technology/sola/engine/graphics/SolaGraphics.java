@@ -1,11 +1,14 @@
 package technology.sola.engine.graphics;
 
+import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.modules.SolaGraphicsModule;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.system.SpriteAnimatorSystem;
+import technology.sola.engine.graphics.system.TransformAnimatorSystem;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
@@ -23,10 +26,22 @@ public class SolaGraphics {
   private float previousCameraY = 0;
   private float previousCameraScaleX = 1;
   private float previousCameraScaleY = 1;
+  private final SpriteAnimatorSystem spriteAnimatorSystem;
+  private final TransformAnimatorSystem transformAnimatorSystem;
+
 
   public SolaGraphics(SolaEcs solaEcs, Renderer renderer) {
     this.solaEcs = solaEcs;
     this.renderer = renderer;
+    spriteAnimatorSystem = new SpriteAnimatorSystem();
+    transformAnimatorSystem = new TransformAnimatorSystem();
+  }
+
+  public EcsSystem[] getSystems() {
+    return new EcsSystem[] {
+      spriteAnimatorSystem,
+      transformAnimatorSystem
+    };
   }
 
   public void render() {
