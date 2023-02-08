@@ -19,8 +19,7 @@ import java.util.List;
 public class SolaGraphics {
   private static final TransformComponent DEFAULT_CAMERA_TRANSFORM = new TransformComponent();
   private SolaEcs solaEcs;
-  private Renderer renderer;
-  private List<SolaGraphicsModule> solaGraphicsModuleList = new ArrayList<>();
+  private List<SolaGraphicsModule> graphicsModuleList = new ArrayList<>();
   private Matrix3D cachedScreenToWorldMatrix = null;
   private float previousCameraX = 0;
   private float previousCameraY = 0;
@@ -29,11 +28,14 @@ public class SolaGraphics {
   private final SpriteAnimatorSystem spriteAnimatorSystem;
   private final TransformAnimatorSystem transformAnimatorSystem;
 
-  public SolaGraphics(SolaEcs solaEcs, Renderer renderer) {
+  public SolaGraphics(SolaEcs solaEcs) {
     this.solaEcs = solaEcs;
-    this.renderer = renderer;
     spriteAnimatorSystem = new SpriteAnimatorSystem();
     transformAnimatorSystem = new TransformAnimatorSystem();
+  }
+
+  public List<SolaGraphicsModule> getGraphicsModuleList() {
+    return graphicsModuleList;
   }
 
   public EcsSystem[] getSystems() {
@@ -43,16 +45,20 @@ public class SolaGraphics {
     };
   }
 
-  public void render() {
+  public void render(Renderer renderer) {
+    // todo renderer clear?
+
     TransformComponent cameraTransform = getCameraTransform();
     Matrix3D cameraScaleTransform = Matrix3D.scale(cameraTransform.getScaleX(), cameraTransform.getScaleY());
     Matrix3D cameraTranslationTransform = Matrix3D.translate(-cameraTransform.getX(), -cameraTransform.getY())
       .multiply(cameraScaleTransform);
     World world = solaEcs.getWorld();
 
-    for (var graphicsModule : solaGraphicsModuleList) {
+    for (var graphicsModule : graphicsModuleList) {
       graphicsModule.render(renderer, world, cameraScaleTransform, cameraTranslationTransform);
     }
+
+    // todo render gui document?
   }
 
   public Vector2D screenToWorldCoordinate(Vector2D screenCoordinate) {
@@ -74,7 +80,7 @@ public class SolaGraphics {
     return cachedScreenToWorldMatrix.forward(screenCoordinate.x(), screenCoordinate.y());
   }
 
-  public TransformComponent getCameraTransform() {
+  private TransformComponent getCameraTransform() {
     var cameraViews = solaEcs.getWorld()
       .createView().of(TransformComponent.class, CameraComponent.class)
       .stream()
