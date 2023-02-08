@@ -20,7 +20,6 @@ module technology.sola.engine {
   exports technology.sola.engine.core.module;
   exports technology.sola.engine.core.module.graphics;
   exports technology.sola.engine.core.module.graphics.gui;
-  exports technology.sola.engine.core.module.physics;
 
   exports technology.sola.engine.event;
 
