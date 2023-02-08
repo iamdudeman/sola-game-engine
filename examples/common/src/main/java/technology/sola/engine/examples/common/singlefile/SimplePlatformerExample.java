@@ -8,7 +8,6 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.module.graphics.SolaGraphics;
-import technology.sola.engine.core.module.physics.SolaPhysics;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.event.EventListener;
 import technology.sola.engine.graphics.Color;
@@ -19,6 +18,7 @@ import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.CollisionManifold;
+import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
@@ -33,18 +33,19 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 public class SimplePlatformerExample extends Sola {
+  private final SolaPhysics solaPhysics;
   private SolaGraphics solaGraphics;
-  private SolaPhysics solaPhysics;
 
   public SimplePlatformerExample() {
     super(SolaConfiguration.build("Simple Platformer", 800, 600).withTargetUpdatesPerSecond(30));
+    solaPhysics = new SolaPhysics(eventHub);
   }
 
   @Override
   protected void onInit() {
-    solaPhysics = SolaPhysics.useModule(eventHub, solaEcs);
     solaGraphics = SolaGraphics.useModule(solaEcs, platform.getRenderer(), assetLoaderProvider);
 
+    solaEcs.addSystems(solaPhysics.getSystems());
     solaEcs.addSystems(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem(), new GlassSystem(eventHub));
     solaEcs.setWorld(buildWorld());
 

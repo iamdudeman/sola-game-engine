@@ -5,11 +5,11 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.module.graphics.SolaGraphics;
-import technology.sola.engine.core.module.physics.SolaPhysics;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
+import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.math.linear.Vector2D;
 
 public class ParticleExample extends Sola {
@@ -21,9 +21,8 @@ public class ParticleExample extends Sola {
 
   @Override
   protected void onInit() {
-    SolaPhysics.useModule(eventHub, solaEcs);
-
     solaEcs.setWorld(buildWorld());
+    solaEcs.addSystem(new ParticleSystem());
 
     solaGraphics = SolaGraphics.useModule(solaEcs, platform.getRenderer(), assetLoaderProvider);
   }

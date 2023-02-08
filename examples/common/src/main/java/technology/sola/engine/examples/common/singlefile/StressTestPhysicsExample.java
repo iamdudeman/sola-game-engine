@@ -5,12 +5,12 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.module.graphics.SolaGraphics;
-import technology.sola.engine.core.module.physics.SolaPhysics;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.Material;
+import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 
@@ -35,11 +35,12 @@ public class StressTestPhysicsExample extends Sola {
 
   @Override
   protected void onInit() {
-    SolaPhysics.useModule(eventHub, solaEcs);
     solaGraphics = SolaGraphics.useModule(solaEcs, platform.getRenderer(), assetLoaderProvider);
-
     solaGraphics.setRenderDebug(true);
 
+
+    SolaPhysics solaPhysics = new SolaPhysics(eventHub);
+    solaEcs.addSystems(solaPhysics.getSystems());
     solaEcs.setWorld(buildWorld());
   }
 
