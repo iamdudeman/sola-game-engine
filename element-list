@@ -12,7 +12,6 @@ technology.sola.engine.core.event
 technology.sola.engine.core.module
 technology.sola.engine.core.module.graphics
 technology.sola.engine.core.module.graphics.gui
-technology.sola.engine.core.module.physics
 technology.sola.engine.event
 technology.sola.engine.graphics
 technology.sola.engine.graphics.components
