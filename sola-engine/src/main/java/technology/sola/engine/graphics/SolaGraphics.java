@@ -13,6 +13,7 @@ import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -36,6 +37,12 @@ public class SolaGraphics {
 
   public List<SolaGraphicsModule> getGraphicsModuleList() {
     return graphicsModuleList;
+  }
+
+  public void addGraphicsModules(SolaGraphicsModule... graphicsModules) {
+    if (graphicsModules != null) {
+      graphicsModuleList.addAll(Arrays.asList(graphicsModules));
+    }
   }
 
   public EcsSystem[] getSystems() {

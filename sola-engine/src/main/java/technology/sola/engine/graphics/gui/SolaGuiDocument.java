@@ -42,22 +42,6 @@ public class SolaGuiDocument {
     initializeForPlatform(platform);
   }
 
-  public void initializeForPlatform(SolaPlatform platform) {
-    // Register event listeners
-    platform.onKeyPressed(this::onKeyPressed);
-    platform.onKeyReleased(this::onKeyReleased);
-    platform.onMouseMoved(this::onMouseMoved);
-    platform.onMousePressed(this::onMousePressed);
-    platform.onMouseReleased(this::onMouseReleased);
-
-    // Prepare default font
-    AssetLoader<Font> fontAssetLoader = assetLoaderProvider.get(Font.class);
-
-    if (!fontAssetLoader.hasAssetMapping(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID)) {
-      fontAssetLoader.addAsset(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, DefaultFont.get());
-    }
-  }
-
   /**
    * Renders the root {@link GuiElement} and its children.
    *
@@ -166,7 +150,23 @@ public class SolaGuiDocument {
     return clazz.cast(guiElement);
   }
 
+  private void initializeForPlatform(SolaPlatform platform) {
+    // Register event listeners
+    platform.onKeyPressed(this::onKeyPressed);
+    platform.onKeyReleased(this::onKeyReleased);
+    platform.onMouseMoved(this::onMouseMoved);
+    platform.onMousePressed(this::onMousePressed);
+    platform.onMouseReleased(this::onMouseReleased);
+
+    // Prepare default font
+    AssetLoader<Font> fontAssetLoader = assetLoaderProvider.get(Font.class);
+
+    if (!fontAssetLoader.hasAssetMapping(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID)) {
+      fontAssetLoader.addAsset(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, DefaultFont.get());
+    }
+  }
+
   public interface GuiElementCreator<T extends GuiElement<P>, P extends GuiElementBaseProperties<?>> {
-    T create(SolaGuiDocument solaGui);
+    T create(SolaGuiDocument solaGuiDocument);
   }
 }

@@ -27,13 +27,17 @@ public abstract class SolaGraphicsModule {
       BlendMode previousBlendMode = renderer.getBlendMode();
       BlendMode blendMode = blendModeComponent == null ? previousBlendMode : blendModeComponent.getRenderMode();
 
-      renderer.setBlendMode(blendMode);
       if (layerComponent == null) {
+        renderer.setBlendMode(blendMode);
         renderMethod(renderer, entity, transformWithCameraComponent);
+        renderer.setBlendMode(previousBlendMode);
       } else {
-        renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getOrder(), r2 -> renderMethod(renderer, entity, transformWithCameraComponent));
+        renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getOrder(), r2 -> {
+          renderer.setBlendMode(blendMode);
+          renderMethod(renderer, entity, transformWithCameraComponent);
+          renderer.setBlendMode(previousBlendMode);
+        });
       }
-      renderer.setBlendMode(previousBlendMode);
     }
   }
 
