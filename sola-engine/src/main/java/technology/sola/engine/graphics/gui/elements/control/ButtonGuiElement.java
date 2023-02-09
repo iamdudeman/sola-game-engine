@@ -1,7 +1,7 @@
 package technology.sola.engine.graphics.gui.elements.control;
 
-import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -15,8 +15,8 @@ public class ButtonGuiElement extends BaseTextGuiElement<ButtonGuiElement.Proper
 
   private boolean wasMouseDownInside = false;
 
-  public ButtonGuiElement(SolaGui solaGui) {
-    super(solaGui, new Properties(solaGui.globalProperties));
+  public ButtonGuiElement(SolaGuiDocument document) {
+    super(document, new Properties(document.globalProperties));
 
     setOnMouseEnterCallback(event -> {});
     setOnMouseExitCallback(event -> {});

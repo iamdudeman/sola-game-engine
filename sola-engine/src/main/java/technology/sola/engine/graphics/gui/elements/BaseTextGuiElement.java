@@ -1,9 +1,9 @@
 package technology.sola.engine.graphics.gui.elements;
 
 import technology.sola.engine.assets.graphics.font.Font;
-import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseHoverProperties;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
@@ -21,8 +21,8 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
   private int lineHeight = 1;
   private List<String> lines = new ArrayList<>();
 
-  public BaseTextGuiElement(SolaGui solaGui, T properties) {
-    super(solaGui, properties);
+  public BaseTextGuiElement(SolaGuiDocument document, T properties) {
+    super(document, properties);
   }
 
   @Override
@@ -70,7 +70,7 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
     String propertiesAssetId = properties().getFontAssetId();
 
     if (!propertiesAssetId.equals(currentFontAssetId)) {
-      solaGui.getAssetLoaderProvider()
+      document.getAssetLoaderProvider()
         .get(Font.class)
         .get(propertiesAssetId)
         .executeWhenLoaded(font -> {

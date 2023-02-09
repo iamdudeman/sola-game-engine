@@ -1,8 +1,8 @@
 package technology.sola.engine.graphics.gui.elements;
 
 import technology.sola.engine.assets.graphics.SolaImage;
-import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.properties.DefaultGuiElementProperties;
 import technology.sola.engine.graphics.renderer.BlendMode;
@@ -15,8 +15,8 @@ public class ImageGuiElement extends GuiElement<ImageGuiElement.Properties> {
   private SolaImage solaImage;
   private SolaImage transformedImage;
 
-  public ImageGuiElement(SolaGui solaGui) {
-    super(solaGui, new Properties(solaGui.globalProperties));
+  public ImageGuiElement(SolaGuiDocument document) {
+    super(document, new Properties(document.globalProperties));
   }
 
   @Override
@@ -33,7 +33,7 @@ public class ImageGuiElement extends GuiElement<ImageGuiElement.Properties> {
   public void recalculateLayout() {
     if (properties.assetId != null && !properties.assetId.equals(currentAssetId)) {
       this.currentAssetId = properties().assetId;
-      solaGui.getAssetLoaderProvider()
+      document.getAssetLoaderProvider()
         .get(SolaImage.class)
         .get(currentAssetId)
         .executeWhenLoaded(solaImage -> {

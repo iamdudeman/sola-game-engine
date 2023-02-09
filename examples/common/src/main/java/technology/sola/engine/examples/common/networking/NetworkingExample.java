@@ -3,11 +3,9 @@ package technology.sola.engine.examples.common.networking;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
-import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.core.SolaWithDefaults;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.core.module.graphics.SolaGraphics;
-import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.examples.common.networking.messages.AssignPlayerIdMessage;
 import technology.sola.engine.examples.common.networking.messages.MessageType;
 import technology.sola.engine.examples.common.networking.messages.PlayerAddedMessage;
@@ -21,15 +19,12 @@ import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
-import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.networking.socket.SocketMessage;
 
 import java.util.Date;
 
-public class NetworkingExample extends Sola {
-  private SolaGui solaGui;
-  private SolaGraphics solaGraphics;
+public class NetworkingExample extends SolaWithDefaults {
   private long clientPlayerId = -1;
 
   public NetworkingExample() {
@@ -37,19 +32,16 @@ public class NetworkingExample extends Sola {
   }
 
   @Override
-  protected void onInit() {
-    solaGraphics = SolaGraphics.useModule(solaEcs, platform.getRenderer(), assetLoaderProvider);
-    solaGraphics.setRenderDebug(true);
+  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+    defaultsConfigurator.useGui().useGraphics().useDebug();
 
     solaEcs.setWorld(new World(50));
     solaEcs.addSystems(new NetworkQueueSystem(), new PlayerSystem());
+    solaGuiDocument.setGuiRoot(buildGui());
 
-    solaGui = SolaGui.useModule(assetLoaderProvider, platform, eventHub);
-    solaGui.setGuiRoot(buildGui());
-
-    ButtonGuiElement updateTimeButton = solaGui.getElementById("updateTime", ButtonGuiElement.class);
-    ButtonGuiElement connectButton = solaGui.getElementById("connect", ButtonGuiElement.class);
-    ButtonGuiElement disconnectButton = solaGui.getElementById("disconnect", ButtonGuiElement.class);
+    ButtonGuiElement updateTimeButton = solaGuiDocument.getElementById("updateTime", ButtonGuiElement.class);
+    ButtonGuiElement connectButton = solaGuiDocument.getElementById("connect", ButtonGuiElement.class);
+    ButtonGuiElement disconnectButton = solaGuiDocument.getElementById("disconnect", ButtonGuiElement.class);
     connectButton.setOnAction(() -> {
       platform.getSocketClient().connect("127.0.0.1", 1380);
       connectButton.properties().setDisabled(true);
@@ -66,15 +58,6 @@ public class NetworkingExample extends Sola {
     updateTimeButton.setOnAction(() -> {
       platform.getSocketClient().sendMessage(new RequestTimeMessage());
     });
-  }
-
-  @Override
-  protected void onRender(Renderer renderer) {
-    renderer.clear();
-
-    solaGraphics.render();
-
-    solaGui.render();
   }
 
   private class PlayerSystem extends EcsSystem {
@@ -116,7 +99,7 @@ public class NetworkingExample extends Sola {
           case UPDATE_TIME -> {
             UpdateTimeMessage updateTimeMessage = UpdateTimeMessage.parse(socketMessage);
 
-            solaGui.getElementById("time", TextGuiElement.class).properties()
+            solaGuiDocument.getElementById("time", TextGuiElement.class).properties()
               .setText(new Date(updateTimeMessage.getTime()).toString());
           }
           case ASSIGN_PLAYER_ID -> {
@@ -157,26 +140,26 @@ public class NetworkingExample extends Sola {
   }
 
   private GuiElement<?> buildGui() {
-    return solaGui.createElement(
+    return solaGuiDocument.createElement(
       StreamGuiElementContainer::new,
       p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(5).padding.set(5),
-      solaGui.createElement(
+      solaGuiDocument.createElement(
         TextGuiElement::new,
         p -> p.setText("Networking Example").setColorText(Color.WHITE)
       ),
-      solaGui.createElement(
+      solaGuiDocument.createElement(
         TextGuiElement::new,
         p -> p.setText("").setColorText(Color.WHITE).setId("time")
       ),
-      solaGui.createElement(
+      solaGuiDocument.createElement(
         ButtonGuiElement::new,
         p -> p.setText("Connect").setId("connect").setWidth(200).padding.set(15)
       ),
-      solaGui.createElement(
+      solaGuiDocument.createElement(
         ButtonGuiElement::new,
         p -> p.setDisabled(true).setText("Update Time").setId("updateTime").setWidth(200).padding.set(15)
       ),
-      solaGui.createElement(
+      solaGuiDocument.createElement(
         ButtonGuiElement::new,
         p -> p.setDisabled(true).setText("Disconnect").setId("disconnect").setWidth(200).padding.set(15)
       )

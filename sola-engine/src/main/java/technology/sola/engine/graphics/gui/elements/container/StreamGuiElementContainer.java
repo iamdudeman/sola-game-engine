@@ -1,8 +1,8 @@
 package technology.sola.engine.graphics.gui.elements.container;
 
-import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementContainer;
+import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.gui.properties.DefaultGuiElementProperties;
 import technology.sola.engine.input.Key;
@@ -10,8 +10,8 @@ import technology.sola.engine.input.Key;
 import java.util.List;
 
 public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElementContainer.Properties> {
-  public StreamGuiElementContainer(SolaGui solaGui) {
-    super(solaGui, new StreamGuiElementContainer.Properties(solaGui.globalProperties));
+  public StreamGuiElementContainer(SolaGuiDocument document) {
+    super(document, new StreamGuiElementContainer.Properties(document.globalProperties));
 
     setOnKeyPressCallback(keyEvent -> {
       int forwardKeyCode = properties.direction == Direction.HORIZONTAL ? Key.RIGHT.getCode() : Key.DOWN.getCode();
