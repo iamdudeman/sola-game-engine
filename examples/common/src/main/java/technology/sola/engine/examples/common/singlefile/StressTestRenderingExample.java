@@ -1,39 +1,28 @@
 package technology.sola.engine.examples.common.singlefile;
 
 import technology.sola.ecs.World;
-import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.core.SolaWithDefaults;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.core.module.graphics.SolaGraphics;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
-import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.system.PhysicsSystem;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.Random;
 
-public class StressTestRenderingExample extends Sola {
-  private SolaGraphics solaGraphics;
-
+public class StressTestRenderingExample extends SolaWithDefaults {
   public StressTestRenderingExample() {
     super(SolaConfiguration.build("Stress Test - Rendering", 800, 600).withTargetUpdatesPerSecond(30));
   }
 
   @Override
-  protected void onInit() {
-    solaGraphics = SolaGraphics.useModule(solaEcs, platform.getRenderer(), assetLoaderProvider);
+  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+    defaultsConfigurator.useGraphics();
 
     solaEcs.addSystems(new PhysicsSystem());
     solaEcs.setWorld(buildWorld());
-  }
-
-  @Override
-  protected void onRender(Renderer renderer) {
-    renderer.clear();
-
-    solaGraphics.render();
   }
 
   private World buildWorld() {

@@ -4,10 +4,9 @@ import technology.sola.ecs.Component;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
-import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.core.SolaWithDefaults;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.core.module.graphics.SolaGraphics;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.event.EventListener;
 import technology.sola.engine.graphics.Color;
@@ -15,10 +14,8 @@ import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
-import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.CollisionManifold;
-import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
@@ -32,33 +29,18 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-public class SimplePlatformerExample extends Sola {
-  private final SolaPhysics solaPhysics;
-  private SolaGraphics solaGraphics;
-
+public class SimplePlatformerExample extends SolaWithDefaults {
   public SimplePlatformerExample() {
     super(SolaConfiguration.build("Simple Platformer", 800, 600).withTargetUpdatesPerSecond(30));
-    solaPhysics = new SolaPhysics(eventHub);
   }
 
   @Override
-  protected void onInit() {
-    solaGraphics = SolaGraphics.useModule(solaEcs, platform.getRenderer(), assetLoaderProvider);
+  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+    defaultsConfigurator.useGraphics().usePhysics().useDebug();
 
-    solaEcs.addSystems(solaPhysics.getSystems());
     solaEcs.addSystems(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem(), new GlassSystem(eventHub));
     solaEcs.setWorld(buildWorld());
-
-    solaGraphics.setRenderDebug(true);
-
     eventHub.add(CollisionEvent.class, new GameDoneEventListener());
-  }
-
-  @Override
-  protected void onRender(Renderer renderer) {
-    renderer.clear();
-
-    solaGraphics.render();
   }
 
   private class GameDoneEventListener implements EventListener<CollisionEvent> {
