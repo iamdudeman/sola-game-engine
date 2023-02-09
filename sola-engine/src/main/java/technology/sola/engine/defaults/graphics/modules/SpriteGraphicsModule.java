@@ -1,4 +1,4 @@
-package technology.sola.engine.core.defaults.graphics.modules;
+package technology.sola.engine.defaults.graphics.modules;
 
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;

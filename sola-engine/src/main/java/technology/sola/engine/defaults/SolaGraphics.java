@@ -1,11 +1,11 @@
-package technology.sola.engine.core.defaults;
+package technology.sola.engine.defaults;
 
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule;
 import technology.sola.engine.graphics.components.CameraComponent;
-import technology.sola.engine.core.defaults.graphics.modules.SolaGraphicsModule;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.system.SpriteAnimatorSystem;
 import technology.sola.engine.graphics.system.TransformAnimatorSystem;

@@ -1,4 +1,4 @@
-package technology.sola.engine.core.defaults;
+package technology.sola.engine.defaults;
 
 import technology.sola.ecs.EcsSystem;
 import technology.sola.engine.event.EventHub;

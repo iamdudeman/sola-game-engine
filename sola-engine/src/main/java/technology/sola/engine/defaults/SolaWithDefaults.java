@@ -1,15 +1,15 @@
-package technology.sola.engine.core.defaults;
+package technology.sola.engine.defaults;
 
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.defaults.graphics.modules.CircleGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.DebugGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.RectangleGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.SpriteGraphicsModule;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
-import technology.sola.engine.core.defaults.graphics.modules.CircleGraphicsModule;
-import technology.sola.engine.core.defaults.graphics.modules.DebugGraphicsModule;
-import technology.sola.engine.core.defaults.graphics.modules.RectangleGraphicsModule;
-import technology.sola.engine.core.defaults.graphics.modules.SpriteGraphicsModule;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
 
