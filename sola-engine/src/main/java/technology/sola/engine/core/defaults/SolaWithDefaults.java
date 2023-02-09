@@ -1,16 +1,16 @@
-package technology.sola.engine.core;
+package technology.sola.engine.core.defaults;
 
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SpriteSheet;
+import technology.sola.engine.core.Sola;
+import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
-import technology.sola.engine.graphics.modules.CircleGraphicsModule;
-import technology.sola.engine.graphics.modules.DebugGraphicsModule;
-import technology.sola.engine.graphics.modules.RectangleGraphicsModule;
-import technology.sola.engine.graphics.modules.SpriteGraphicsModule;
+import technology.sola.engine.core.defaults.graphics.modules.CircleGraphicsModule;
+import technology.sola.engine.core.defaults.graphics.modules.DebugGraphicsModule;
+import technology.sola.engine.core.defaults.graphics.modules.RectangleGraphicsModule;
+import technology.sola.engine.core.defaults.graphics.modules.SpriteGraphicsModule;
 import technology.sola.engine.graphics.renderer.Renderer;
-import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
 
 import java.util.function.Consumer;

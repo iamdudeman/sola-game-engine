@@ -1,11 +1,11 @@
-package technology.sola.engine.graphics;
+package technology.sola.engine.core.defaults;
 
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.components.CameraComponent;
-import technology.sola.engine.graphics.modules.SolaGraphicsModule;
+import technology.sola.engine.core.defaults.graphics.modules.SolaGraphicsModule;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.system.SpriteAnimatorSystem;
 import technology.sola.engine.graphics.system.TransformAnimatorSystem;
@@ -19,8 +19,8 @@ import java.util.List;
 
 public class SolaGraphics {
   private static final TransformComponent DEFAULT_CAMERA_TRANSFORM = new TransformComponent();
-  private SolaEcs solaEcs;
-  private List<SolaGraphicsModule> graphicsModuleList = new ArrayList<>();
+  private final SolaEcs solaEcs;
+  private final List<SolaGraphicsModule> graphicsModuleList = new ArrayList<>();
   private Matrix3D cachedScreenToWorldMatrix = null;
   private float previousCameraX = 0;
   private float previousCameraY = 0;

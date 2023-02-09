@@ -3,7 +3,7 @@ package technology.sola.engine.examples.common;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
-import technology.sola.engine.core.SolaWithDefaults;
+import technology.sola.engine.core.defaults.SolaWithDefaults;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.examples.common.networking.NetworkingExample;

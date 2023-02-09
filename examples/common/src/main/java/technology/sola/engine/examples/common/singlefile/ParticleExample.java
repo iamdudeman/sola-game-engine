@@ -2,7 +2,7 @@ package technology.sola.engine.examples.common.singlefile;
 
 import technology.sola.ecs.World;
 import technology.sola.engine.core.SolaConfiguration;
-import technology.sola.engine.core.SolaWithDefaults;
+import technology.sola.engine.core.defaults.SolaWithDefaults;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.BlendMode;

@@ -5,7 +5,7 @@ import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.SolaConfiguration;
-import technology.sola.engine.core.SolaWithDefaults;
+import technology.sola.engine.core.defaults.SolaWithDefaults;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.event.EventListener;
