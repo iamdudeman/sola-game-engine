@@ -48,7 +48,7 @@ public class SolaGraphics {
   public EcsSystem[] getSystems() {
     return new EcsSystem[] {
       spriteAnimatorSystem,
-      transformAnimatorSystem
+      transformAnimatorSystem,
     };
   }
 
