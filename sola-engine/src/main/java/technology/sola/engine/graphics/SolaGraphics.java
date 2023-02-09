@@ -53,8 +53,6 @@ public class SolaGraphics {
   }
 
   public void render(Renderer renderer) {
-    // todo renderer clear?
-
     TransformComponent cameraTransform = getCameraTransform();
     Matrix3D cameraScaleTransform = Matrix3D.scale(cameraTransform.getScaleX(), cameraTransform.getScaleY());
     Matrix3D cameraTranslationTransform = Matrix3D.translate(-cameraTransform.getX(), -cameraTransform.getY())
@@ -64,8 +62,6 @@ public class SolaGraphics {
     for (var graphicsModule : graphicsModuleList) {
       graphicsModule.render(renderer, world, cameraScaleTransform, cameraTranslationTransform);
     }
-
-    // todo render gui document?
   }
 
   public Vector2D screenToWorldCoordinate(Vector2D screenCoordinate) {
