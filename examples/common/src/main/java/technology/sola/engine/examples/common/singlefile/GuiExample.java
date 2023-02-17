@@ -105,7 +105,7 @@ public class GuiExample extends Sola {
   private GuiElement<?> createKeyTesterElement() {
     TextGuiElement textGuiElement = solaGui.createElement(
       TextGuiElement::new,
-      p -> p.setText("Type a key").setColorText(Color.WHITE).setFocusable(true).padding.set(3).margin.setTop(5).setFocusOutlineColor(Color.LIGHT_BLUE).setBorderColor(Color.WHITE)
+      p -> p.setText("Type a key").setColorText(Color.WHITE).setFocusable(true).padding.set(3).margin.setTop(5).setFocusOutlineColor(Color.LIGHT_BLUE).setBorderColor(Color.WHITE).hover.setBorderColor(Color.YELLOW)
     );
 
     textGuiElement.setOnKeyPressCallback(guiKeyEvent -> {
