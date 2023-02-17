@@ -1,6 +1,5 @@
 package technology.sola.engine.graphics.gui;
 
-import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -15,8 +14,8 @@ import java.util.List;
 public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>> extends GuiElement<T> {
   protected List<GuiElement<?>> children = new ArrayList<>();
 
-  public GuiElementContainer(SolaGui solaGui, T properties) {
-    super(solaGui, properties);
+  public GuiElementContainer(SolaGuiDocument document, T properties) {
+    super(document, properties);
   }
 
   @Override
@@ -45,7 +44,7 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
 
   @Override
   public boolean isFocussed() {
-    return solaGui.isFocussedElement(this) || children.stream().anyMatch(GuiElement::isFocussed);
+    return document.isFocussedElement(this) || children.stream().anyMatch(GuiElement::isFocussed);
   }
 
   @Override

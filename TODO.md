@@ -6,9 +6,7 @@
 
 ## Planned Cleanup List
 
-* Move SolaGraphics.getTransformForAppliedCamera into CameraComponent as a util method maybe?
-  * somehow make it more convenient to use for custom Renderer classes
-  * Maybe create a new parent renderer class that has access to this helper method and others?
+* remove Serializable when sola-ecs updates to no longer need it
 
 -----------------------------------------------------------------------------------------------------------------------
 

@@ -1,17 +1,14 @@
-package technology.sola.engine.core.module.graphics.gui;
+package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.SolaPlatform;
-import technology.sola.engine.core.module.SolaModule;
 import technology.sola.engine.event.EventHub;
-import technology.sola.engine.graphics.gui.GuiElement;
-import technology.sola.engine.graphics.gui.GuiElementContainer;
+import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
-import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
@@ -19,51 +16,38 @@ import technology.sola.engine.input.MouseEvent;
 import java.util.function.Consumer;
 
 /**
- * SolaGui is a {@link SolaModule} that handles registering event listeners and loading a default {@link Font} for
- * {@link GuiElement}s to use. It also contains several utility methods for creating instances of gui elements, setting
- * the root element of a tree, and searching for elements in the tree.
+ * SolaGuiDocument is a container for {@link GuiElement}s. It also contains several utility methods for creating
+ * instances of gui elements, setting the root element of a tree, and searching for elements in the tree.
  */
-@SolaModule
-public class SolaGui {
+public class SolaGuiDocument {
   public final GuiElementGlobalProperties globalProperties;
   public final EventHub eventHub;
   private final AssetLoaderProvider assetLoaderProvider;
   private GuiElement<?> rootGuiElement;
   private GuiElement<?> focussedElement;
-  private Renderer renderer;
 
   /**
-   * Creates a new instances of {@link SolaGui}. Registers event listeners for the {@link SolaPlatform} and prepares a
-   * default {@link Font} to be loaded.
+   * Creates a new instances of {@link SolaGuiDocument}. Registers event listeners for the {@link SolaPlatform} and
+   * prepares a default {@link Font} to be loaded.
    *
-   * @param assetLoaderProvider the {@link AssetLoaderProvider} to load the {@code Font}
    * @param platform            the {@link SolaPlatform} instance
+   * @param assetLoaderProvider the {@link AssetLoaderProvider} to load the {@code Font}
    * @param eventHub            the {@link EventHub} instance
-   * @return this
    */
-  public static SolaGui useModule(AssetLoaderProvider assetLoaderProvider, SolaPlatform platform, EventHub eventHub) {
-    SolaGui solaGui = new SolaGui(assetLoaderProvider, eventHub);
+  public SolaGuiDocument(SolaPlatform platform, AssetLoaderProvider assetLoaderProvider, EventHub eventHub) {
+    this.assetLoaderProvider = assetLoaderProvider;
+    this.eventHub = eventHub;
+    this.globalProperties = new GuiElementGlobalProperties(() -> rootGuiElement);
 
-    solaGui.renderer = platform.getRenderer();
-    platform.onKeyPressed(solaGui::onKeyPressed);
-    platform.onKeyReleased(solaGui::onKeyReleased);
-    platform.onMouseMoved(solaGui::onMouseMoved);
-    platform.onMousePressed(solaGui::onMousePressed);
-    platform.onMouseReleased(solaGui::onMouseReleased);
-
-    AssetLoader<Font> fontAssetLoader = assetLoaderProvider.get(Font.class);
-
-    if (!fontAssetLoader.hasAssetMapping(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID)) {
-      fontAssetLoader.addAsset(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, DefaultFont.get());
-    }
-
-    return solaGui;
+    initializeForPlatform(platform);
   }
 
   /**
    * Renders the root {@link GuiElement} and its children.
+   *
+   * @param renderer the {@link Renderer} instance
    */
-  public void render() {
+  public void render(Renderer renderer) {
     if (rootGuiElement != null) {
       rootGuiElement.render(renderer);
     }
@@ -166,13 +150,23 @@ public class SolaGui {
     return clazz.cast(guiElement);
   }
 
-  private SolaGui(AssetLoaderProvider assetLoaderProvider, EventHub eventHub) {
-    this.assetLoaderProvider = assetLoaderProvider;
-    this.eventHub = eventHub;
-    this.globalProperties = new GuiElementGlobalProperties(() -> rootGuiElement);
+  private void initializeForPlatform(SolaPlatform platform) {
+    // Register event listeners
+    platform.onKeyPressed(this::onKeyPressed);
+    platform.onKeyReleased(this::onKeyReleased);
+    platform.onMouseMoved(this::onMouseMoved);
+    platform.onMousePressed(this::onMousePressed);
+    platform.onMouseReleased(this::onMouseReleased);
+
+    // Prepare default font
+    AssetLoader<Font> fontAssetLoader = assetLoaderProvider.get(Font.class);
+
+    if (!fontAssetLoader.hasAssetMapping(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID)) {
+      fontAssetLoader.addAsset(GuiElementGlobalProperties.DEFAULT_FONT_ASSET_ID, DefaultFont.get());
+    }
   }
 
   public interface GuiElementCreator<T extends GuiElement<P>, P extends GuiElementBaseProperties<?>> {
-    T create(SolaGui solaGui);
+    T create(SolaGuiDocument solaGuiDocument);
   }
 }

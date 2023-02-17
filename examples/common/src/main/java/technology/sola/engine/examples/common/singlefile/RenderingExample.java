@@ -9,7 +9,10 @@ import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.core.module.graphics.SolaGraphics;
+import technology.sola.engine.defaults.SolaGraphics;
+import technology.sola.engine.defaults.graphics.modules.CircleGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.RectangleGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.SpriteGraphicsModule;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
@@ -27,17 +30,24 @@ import java.io.Serial;
 import java.util.List;
 
 public class RenderingExample extends Sola {
-  private SolaGraphics solaGraphics;
+  private final SolaGraphics solaGraphics;
 
   public RenderingExample() {
     super(SolaConfiguration.build("Rendering Example", 800, 600).withTargetUpdatesPerSecond(30));
+
+    solaGraphics = new SolaGraphics(solaEcs);
   }
 
   @Override
   protected void onInit() {
-    solaGraphics = SolaGraphics.useModule(solaEcs, platform.getRenderer(), assetLoaderProvider);
+    solaGraphics.addGraphicsModules(
+      new CircleGraphicsModule(),
+      new RectangleGraphicsModule(),
+      new SpriteGraphicsModule(assetLoaderProvider.get(SpriteSheet.class))
+    );
 
     solaEcs.addSystem(new TestSystem());
+    solaEcs.addSystems(solaGraphics.getSystems());
     solaEcs.setWorld(createWorld());
 
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
@@ -73,7 +83,7 @@ public class RenderingExample extends Sola {
       });
     });
 
-    solaGraphics.render();
+    solaGraphics.render(renderer);
 
     renderer.drawToLayer("ui", r -> {
       renderer.setBlendMode(BlendMode.NORMAL);

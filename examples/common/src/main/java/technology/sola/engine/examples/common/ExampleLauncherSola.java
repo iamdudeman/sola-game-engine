@@ -5,7 +5,7 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
-import technology.sola.engine.core.module.graphics.gui.SolaGui;
+import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.examples.common.networking.NetworkingExample;
 import technology.sola.engine.examples.common.singlefile.AnimationExample;
 import technology.sola.engine.examples.common.singlefile.AudioExample;
@@ -22,13 +22,11 @@ import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
-import technology.sola.engine.graphics.renderer.Renderer;
 
 import java.util.function.Supplier;
 
-public class ExampleLauncherSola extends Sola {
+public class ExampleLauncherSola extends SolaWithDefaults {
   private final SolaPlatform solaPlatform;
-  private SolaGui solaGui;
 
   public ExampleLauncherSola(SolaPlatform solaPlatform) {
     super(SolaConfiguration.build("Example Launcher", 800, 600).withTargetUpdatesPerSecond(30));
@@ -36,27 +34,20 @@ public class ExampleLauncherSola extends Sola {
   }
 
   @Override
-  protected void onInit() {
-    solaGui = SolaGui.useModule(assetLoaderProvider, platform, eventHub);
-    solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
-    solaGui.setGuiRoot(buildGui());
-  }
-
-  @Override
-  protected void onRender(Renderer renderer) {
-    renderer.clear();
-
-    solaGui.render();
+  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+    defaultsConfigurator.useGui();
+    solaGuiDocument.globalProperties.setDefaultTextColor(Color.WHITE);
+    solaGuiDocument.setGuiRoot(buildGui());
   }
 
   private GuiElement<?> buildGui() {
-    return solaGui.createElement(
+    return solaGuiDocument.createElement(
       StreamGuiElementContainer::new,
       p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(5)
         .setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.CENTER)
         .setVerticalAlignment(StreamGuiElementContainer.VerticalAlignment.CENTER)
         .padding.set(5).setWidth(800).setHeight(580),
-      solaGui.createElement(
+      solaGuiDocument.createElement(
         TextGuiElement::new,
         p -> p.setText("Select an example to launch").margin.setBottom(15)
       ),
@@ -74,7 +65,7 @@ public class ExampleLauncherSola extends Sola {
   }
 
   private GuiElement<?> buildExampleLaunchButton(String text, Supplier<Sola> solaSupplier) {
-    return solaGui.createElement(
+    return solaGuiDocument.createElement(
       ButtonGuiElement::new,
       p -> p.setText(text).setTextAlign(BaseTextGuiElement.TextAlign.CENTER).padding.set(10).setWidth(300)
     ).setOnAction(() -> {

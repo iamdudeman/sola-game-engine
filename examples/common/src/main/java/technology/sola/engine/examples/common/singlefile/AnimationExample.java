@@ -3,23 +3,19 @@ package technology.sola.engine.examples.common.singlefile;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.graphics.SpriteSheet;
-import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.core.module.graphics.SolaGraphics;
+import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
-import technology.sola.engine.graphics.components.animation.SpriteAnimatorComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.components.SpriteKeyFrame;
+import technology.sola.engine.graphics.components.animation.SpriteAnimatorComponent;
 import technology.sola.engine.graphics.components.animation.TransformAnimatorComponent;
-import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.math.EasingFunction;
 
-public class AnimationExample extends Sola {
-  private SolaGraphics solaGraphics;
-
+public class AnimationExample extends SolaWithDefaults {
   public AnimationExample() {
     super(
       SolaConfiguration.build("Animation Example", 210, 200).withTargetUpdatesPerSecond(30)
@@ -27,8 +23,8 @@ public class AnimationExample extends Sola {
   }
 
   @Override
-  protected void onInit() {
-    solaGraphics = SolaGraphics.useModule(solaEcs, platform.getRenderer(), assetLoaderProvider);
+  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+    defaultsConfigurator.useGraphics().useBackgroundColor(Color.WHITE);
 
     solaEcs.setWorld(buildWorld());
     platform.getViewport().setAspectMode(AspectMode.STRETCH);
@@ -39,13 +35,6 @@ public class AnimationExample extends Sola {
     assetLoaderProvider.get(SpriteSheet.class)
       .getNewAsset("test", "assets/test_tiles_spritesheet.json")
       .executeWhenLoaded(spriteSheet -> completeAsyncInit.run());
-  }
-
-  @Override
-  protected void onRender(Renderer renderer) {
-    renderer.clear(Color.WHITE);
-
-    solaGraphics.render();
   }
 
   private World buildWorld() {
