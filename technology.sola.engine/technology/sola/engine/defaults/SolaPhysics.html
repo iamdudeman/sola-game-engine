@@ -5,7 +5,7 @@
 <title>SolaPhysics (sola-engine 0.2.1 API)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="declaration: module: technology.sola.engine, package: technology.sola.engine.physics, class: SolaPhysics">
+<meta name="description" content="declaration: module: technology.sola.engine, package: technology.sola.engine.defaults, class: SolaPhysics">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -68,11 +68,11 @@ loadScripts(document, 'script');</script>
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="sub-title"><span class="module-label-in-type">Module</span>&nbsp;<a href="../../../../module-summary.html">technology.sola.engine</a></div>
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">technology.sola.engine.physics</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">technology.sola.engine.defaults</a></div>
 <h1 title="Class SolaPhysics" class="title">Class SolaPhysics</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">technology.sola.engine.physics.SolaPhysics</div>
+<div class="inheritance">technology.sola.engine.defaults.SolaPhysics</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
@@ -91,7 +91,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.event.EventHub)" class="member-name-link">SolaPhysics</a><wbr>(<a href="../event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a>&nbsp;eventHub)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a SolaPhysics instance using an <a href="../event/EventHub.html" title="class in technology.sola.engine.event"><code>EventHub</code></a>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -106,19 +108,19 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="system/CollisionDetectionSystem.html" title="class in technology.sola.engine.physics.system">CollisionDetectionSystem</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../physics/system/CollisionDetectionSystem.html" title="class in technology.sola.engine.physics.system">CollisionDetectionSystem</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCollisionDetectionSystem()" class="member-name-link">getCollisionDetectionSystem</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="system/GravitySystem.html" title="class in technology.sola.engine.physics.system">GravitySystem</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../physics/system/GravitySystem.html" title="class in technology.sola.engine.physics.system">GravitySystem</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getGravitySystem()" class="member-name-link">getGravitySystem</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="system/ImpulseCollisionResolutionSystem.html" title="class in technology.sola.engine.physics.system">ImpulseCollisionResolutionSystem</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../physics/system/ImpulseCollisionResolutionSystem.html" title="class in technology.sola.engine.physics.system">ImpulseCollisionResolutionSystem</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getImpulseCollisionResolutionSystem()" class="member-name-link">getImpulseCollisionResolutionSystem</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="system/ParticleSystem.html" title="class in technology.sola.engine.physics.system">ParticleSystem</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../physics/system/ParticleSystem.html" title="class in technology.sola.engine.physics.system">ParticleSystem</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParticleSystem()" class="member-name-link">getParticleSystem</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="system/PhysicsSystem.html" title="class in technology.sola.engine.physics.system">PhysicsSystem</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../physics/system/PhysicsSystem.html" title="class in technology.sola.engine.physics.system">PhysicsSystem</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPhysicsSystem()" class="member-name-link">getPhysicsSystem</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>technology.sola.ecs.EcsSystem[]</code></div>
@@ -145,6 +147,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(technology.sola.engine.event.EventHub)">
 <h3>SolaPhysics</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SolaPhysics</span><wbr><span class="parameters">(<a href="../event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a>&nbsp;eventHub)</span></div>
+<div class="block">Creates a SolaPhysics instance using an <a href="../event/EventHub.html" title="class in technology.sola.engine.event"><code>EventHub</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>eventHub</code> - the <code>EventHub</code> to use</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -159,55 +166,59 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getSystems()">
 <h3>getSystems</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">technology.sola.ecs.EcsSystem[]</span>&nbsp;<span class="element-name">getSystems</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>an array of all physics related <code>EcsSystem</code>s</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getGravitySystem()">
 <h3>getGravitySystem</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="system/GravitySystem.html" title="class in technology.sola.engine.physics.system">GravitySystem</a></span>&nbsp;<span class="element-name">getGravitySystem</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../physics/system/GravitySystem.html" title="class in technology.sola.engine.physics.system">GravitySystem</a></span>&nbsp;<span class="element-name">getGravitySystem</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the <a href="system/GravitySystem.html" title="class in technology.sola.engine.physics.system"><code>GravitySystem</code></a></dd>
+<dd>the <a href="../physics/system/GravitySystem.html" title="class in technology.sola.engine.physics.system"><code>GravitySystem</code></a></dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getPhysicsSystem()">
 <h3>getPhysicsSystem</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="system/PhysicsSystem.html" title="class in technology.sola.engine.physics.system">PhysicsSystem</a></span>&nbsp;<span class="element-name">getPhysicsSystem</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../physics/system/PhysicsSystem.html" title="class in technology.sola.engine.physics.system">PhysicsSystem</a></span>&nbsp;<span class="element-name">getPhysicsSystem</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the <a href="system/PhysicsSystem.html" title="class in technology.sola.engine.physics.system"><code>PhysicsSystem</code></a></dd>
+<dd>the <a href="../physics/system/PhysicsSystem.html" title="class in technology.sola.engine.physics.system"><code>PhysicsSystem</code></a></dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getCollisionDetectionSystem()">
 <h3>getCollisionDetectionSystem</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="system/CollisionDetectionSystem.html" title="class in technology.sola.engine.physics.system">CollisionDetectionSystem</a></span>&nbsp;<span class="element-name">getCollisionDetectionSystem</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../physics/system/CollisionDetectionSystem.html" title="class in technology.sola.engine.physics.system">CollisionDetectionSystem</a></span>&nbsp;<span class="element-name">getCollisionDetectionSystem</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the <a href="system/CollisionDetectionSystem.html" title="class in technology.sola.engine.physics.system"><code>CollisionDetectionSystem</code></a></dd>
+<dd>the <a href="../physics/system/CollisionDetectionSystem.html" title="class in technology.sola.engine.physics.system"><code>CollisionDetectionSystem</code></a></dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getImpulseCollisionResolutionSystem()">
 <h3>getImpulseCollisionResolutionSystem</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="system/ImpulseCollisionResolutionSystem.html" title="class in technology.sola.engine.physics.system">ImpulseCollisionResolutionSystem</a></span>&nbsp;<span class="element-name">getImpulseCollisionResolutionSystem</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../physics/system/ImpulseCollisionResolutionSystem.html" title="class in technology.sola.engine.physics.system">ImpulseCollisionResolutionSystem</a></span>&nbsp;<span class="element-name">getImpulseCollisionResolutionSystem</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the <a href="system/ImpulseCollisionResolutionSystem.html" title="class in technology.sola.engine.physics.system"><code>ImpulseCollisionResolutionSystem</code></a></dd>
+<dd>the <a href="../physics/system/ImpulseCollisionResolutionSystem.html" title="class in technology.sola.engine.physics.system"><code>ImpulseCollisionResolutionSystem</code></a></dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getParticleSystem()">
 <h3>getParticleSystem</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="system/ParticleSystem.html" title="class in technology.sola.engine.physics.system">ParticleSystem</a></span>&nbsp;<span class="element-name">getParticleSystem</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../physics/system/ParticleSystem.html" title="class in technology.sola.engine.physics.system">ParticleSystem</a></span>&nbsp;<span class="element-name">getParticleSystem</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the <a href="system/ParticleSystem.html" title="class in technology.sola.engine.physics.system"><code>ParticleSystem</code></a></dd>
+<dd>the <a href="../physics/system/ParticleSystem.html" title="class in technology.sola.engine.physics.system"><code>ParticleSystem</code></a></dd>
 </dl>
 </section>
 </li>
