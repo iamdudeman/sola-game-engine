@@ -17,9 +17,9 @@ module technology.sola.engine {
   exports technology.sola.engine.core;
   exports technology.sola.engine.core.component;
   exports technology.sola.engine.core.event;
-  exports technology.sola.engine.core.module;
-  exports technology.sola.engine.core.module.graphics;
-  exports technology.sola.engine.core.module.graphics.gui;
+
+  exports technology.sola.engine.defaults;
+  exports technology.sola.engine.defaults.graphics.modules;
 
   exports technology.sola.engine.event;
 

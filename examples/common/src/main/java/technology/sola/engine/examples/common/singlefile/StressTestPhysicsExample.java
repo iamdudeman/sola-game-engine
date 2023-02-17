@@ -1,27 +1,23 @@
 package technology.sola.engine.examples.common.singlefile;
 
 import technology.sola.ecs.World;
-import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.core.module.graphics.SolaGraphics;
+import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
-import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.Material;
-import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 
 import java.util.Random;
 
-public class StressTestPhysicsExample extends Sola {
+public class StressTestPhysicsExample extends SolaWithDefaults {
   private static final float CAMERA_SCALE = 1.5f;
   private static final float CIRCLE_RADIUS = 10f;
   private final Random random;
   private final int objectCount;
-  private SolaGraphics solaGraphics;
 
   public StressTestPhysicsExample(int objectCount) {
     this(objectCount, false);
@@ -34,21 +30,10 @@ public class StressTestPhysicsExample extends Sola {
   }
 
   @Override
-  protected void onInit() {
-    solaGraphics = SolaGraphics.useModule(solaEcs, platform.getRenderer(), assetLoaderProvider);
-    solaGraphics.setRenderDebug(true);
+  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+    defaultsConfigurator.useGraphics().usePhysics().useDebug();
 
-
-    SolaPhysics solaPhysics = new SolaPhysics(eventHub);
-    solaEcs.addSystems(solaPhysics.getSystems());
     solaEcs.setWorld(buildWorld());
-  }
-
-  @Override
-  protected void onRender(Renderer renderer) {
-    renderer.clear();
-
-    solaGraphics.render();
   }
 
   private World buildWorld() {

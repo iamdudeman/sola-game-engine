@@ -1,6 +1,5 @@
 package technology.sola.engine.graphics.gui;
 
-import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.renderer.BlendMode;
@@ -12,7 +11,7 @@ import technology.sola.math.linear.Vector2D;
 import java.util.function.Consumer;
 
 public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
-  protected final SolaGui solaGui;
+  protected final SolaGuiDocument document;
   protected final T properties;
   private int x;
   private int y;
@@ -26,8 +25,8 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
 
   private boolean wasMouseOverElement = false;
 
-  public GuiElement(SolaGui solaGui, T properties) {
-    this.solaGui = solaGui;
+  public GuiElement(SolaGuiDocument document, T properties) {
+    this.document = document;
     this.properties = properties;
   }
 
@@ -117,11 +116,11 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
   }
 
   public boolean isFocussed() {
-    return solaGui.isFocussedElement(this);
+    return document.isFocussedElement(this);
   }
 
   public void requestFocus() {
-    solaGui.focusElement(this);
+    document.focusElement(this);
   }
 
   public GuiElement<?> getElementById(String id) {

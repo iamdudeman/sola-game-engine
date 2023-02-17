@@ -1,37 +1,26 @@
 package technology.sola.engine.examples.common.singlefile;
 
 import technology.sola.ecs.World;
-import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.core.module.graphics.SolaGraphics;
+import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.BlendMode;
-import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.math.linear.Vector2D;
 
-public class ParticleExample extends Sola {
-  private SolaGraphics solaGraphics;
-
+public class ParticleExample extends SolaWithDefaults {
   public ParticleExample() {
     super(SolaConfiguration.build("Particle Example", 800, 600).withTargetUpdatesPerSecond(30));
   }
 
   @Override
-  protected void onInit() {
+  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+    defaultsConfigurator.useGraphics();
+
     solaEcs.setWorld(buildWorld());
     solaEcs.addSystem(new ParticleSystem());
-
-    solaGraphics = SolaGraphics.useModule(solaEcs, platform.getRenderer(), assetLoaderProvider);
-  }
-
-  @Override
-  protected void onRender(Renderer renderer) {
-    renderer.clear();
-
-    solaGraphics.render();
   }
 
   private World buildWorld() {

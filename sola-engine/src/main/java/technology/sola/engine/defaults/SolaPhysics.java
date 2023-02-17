@@ -1,4 +1,4 @@
-package technology.sola.engine.physics;
+package technology.sola.engine.defaults;
 
 import technology.sola.ecs.EcsSystem;
 import technology.sola.engine.event.EventHub;
@@ -18,6 +18,11 @@ public class SolaPhysics {
   private final ImpulseCollisionResolutionSystem impulseCollisionResolutionSystem;
   private final ParticleSystem particleSystem;
 
+  /**
+   * Creates a SolaPhysics instance using an {@link EventHub}.
+   *
+   * @param eventHub the {@code EventHub} to use
+   */
   public SolaPhysics(EventHub eventHub) {
     gravitySystem = new GravitySystem(eventHub);
     physicsSystem = new PhysicsSystem();
@@ -26,8 +31,11 @@ public class SolaPhysics {
     particleSystem = new ParticleSystem();
   }
 
+  /**
+   * @return an array of all physics related {@link EcsSystem}s
+   */
   public EcsSystem[] getSystems() {
-    return new EcsSystem[] {
+    return new EcsSystem[]{
       gravitySystem,
       physicsSystem,
       collisionDetectionSystem,
