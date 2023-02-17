@@ -8,6 +8,10 @@ import technology.sola.engine.graphics.renderer.Renderer;
 
 import java.util.List;
 
+/**
+ * RectangleGraphicsModule is a {@link SolaGraphicsModule} implementation for rendering {@link Entity} that have a
+ * {@link TransformComponent} and {@link RectangleRendererComponent}.
+ */
 public class RectangleGraphicsModule extends SolaGraphicsModule {
   @Override
   public List<Entity> getEntitiesToRender(World world) {

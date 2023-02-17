@@ -8,6 +8,11 @@ import technology.sola.engine.graphics.renderer.Renderer;
 
 import java.util.List;
 
+
+/**
+ * CircleGraphicsModule is a {@link SolaGraphicsModule} implementation for rendering {@link Entity} that have a
+ * {@link TransformComponent} and {@link CircleRendererComponent}.
+ */
 public class CircleGraphicsModule extends SolaGraphicsModule {
   @Override
   public List<Entity> getEntitiesToRender(World world) {

@@ -17,6 +17,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * SolaGraphics provides default rendering capabilities while also allowing for customization via {@link SolaGraphicsModule}s.
+ */
 public class SolaGraphics {
   private static final TransformComponent DEFAULT_CAMERA_TRANSFORM = new TransformComponent();
   private final SolaEcs solaEcs;
@@ -29,29 +32,51 @@ public class SolaGraphics {
   private final SpriteAnimatorSystem spriteAnimatorSystem;
   private final TransformAnimatorSystem transformAnimatorSystem;
 
+  /**
+   * Creates a SolaGraphics instance.
+   *
+   * @param solaEcs the {@link SolaEcs} instance to render {@link technology.sola.ecs.Entity} from
+   */
   public SolaGraphics(SolaEcs solaEcs) {
     this.solaEcs = solaEcs;
     spriteAnimatorSystem = new SpriteAnimatorSystem();
     transformAnimatorSystem = new TransformAnimatorSystem();
   }
 
+  /**
+   * @return the list of current {@link SolaGraphicsModule}s
+   */
   public List<SolaGraphicsModule> getGraphicsModuleList() {
     return graphicsModuleList;
   }
 
+  /**
+   * Adds {@link SolaGraphicsModule}s to be rendered.
+   *
+   * @param graphicsModules the modules to add
+   */
   public void addGraphicsModules(SolaGraphicsModule... graphicsModules) {
     if (graphicsModules != null) {
       graphicsModuleList.addAll(Arrays.asList(graphicsModules));
     }
   }
 
+  /**
+   * @return an array of all graphics related {@link EcsSystem}s
+   */
   public EcsSystem[] getSystems() {
-    return new EcsSystem[] {
+    return new EcsSystem[]{
       spriteAnimatorSystem,
       transformAnimatorSystem,
     };
   }
 
+  /**
+   * Renders all {@link SolaGraphicsModule}s that have been added. Passes each the current camera's translation and
+   * scale.
+   *
+   * @param renderer the {@link Renderer} instance
+   */
   public void render(Renderer renderer) {
     TransformComponent cameraTransform = getCameraTransform();
     Matrix3D cameraScaleTransform = Matrix3D.scale(cameraTransform.getScaleX(), cameraTransform.getScaleY());
@@ -64,6 +89,13 @@ public class SolaGraphics {
     }
   }
 
+  /**
+   * Using the camera's transform, this method calculates the {@link World} coordinate based on the screen's coordinate
+   * system.
+   *
+   * @param screenCoordinate the coordinate of the screen to map
+   * @return the coordinate mapped to the {@code World}'s coordinate system
+   */
   public Vector2D screenToWorldCoordinate(Vector2D screenCoordinate) {
     var cameraTransform = getCameraTransform();
 

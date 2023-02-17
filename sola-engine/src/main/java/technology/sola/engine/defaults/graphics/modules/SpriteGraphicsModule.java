@@ -12,9 +12,18 @@ import technology.sola.engine.graphics.renderer.Renderer;
 
 import java.util.List;
 
+/**
+ * SpriteGraphicsModule is a {@link SolaGraphicsModule} implementation for rendering {@link Entity} that have a
+ * {@link TransformComponent} and {@link SpriteComponent}.
+ */
 public class SpriteGraphicsModule extends SolaGraphicsModule {
   private final AssetLoader<SpriteSheet> spriteSheetAssetLoader;
 
+  /**
+   * Creates an instance of SpriteGraphicsModule.
+   *
+   * @param spriteSheetAssetLoader the {@link AssetLoader} instance for {@link SpriteSheet}s
+   */
   public SpriteGraphicsModule(AssetLoader<SpriteSheet> spriteSheetAssetLoader) {
     this.spriteSheetAssetLoader = spriteSheetAssetLoader;
   }

@@ -15,6 +15,10 @@ import technology.sola.math.linear.Vector2D;
 
 import java.util.List;
 
+/**
+ * DebugGraphicsModule is a {@link SolaGraphicsModule} implementation for rendering debug information for a {@link World}.
+ * It will render spacial hashmap boundaries and colliders for {@link Entity} that have a {@link ColliderComponent}.
+ */
 public class DebugGraphicsModule extends SolaGraphicsModule {
   private final CollisionDetectionSystem collisionDetectionSystem;
 
@@ -22,6 +26,11 @@ public class DebugGraphicsModule extends SolaGraphicsModule {
     collisionDetectionSystem = null;
   }
 
+  /**
+   * Creates an instance of DebugGraphicsModule.
+   *
+   * @param collisionDetectionSystem the {@link CollisionDetectionSystem} instance
+   */
   public DebugGraphicsModule(CollisionDetectionSystem collisionDetectionSystem) {
     this.collisionDetectionSystem = collisionDetectionSystem;
   }
