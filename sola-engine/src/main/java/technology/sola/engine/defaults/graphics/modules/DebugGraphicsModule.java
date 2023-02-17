@@ -50,16 +50,16 @@ public class DebugGraphicsModule extends SolaGraphicsModule {
   }
 
   @Override
-  public void renderMethod(Renderer renderer, Entity entity, TransformComponent entityTransform) {
-    Vector2D transform = entityTransform.getTranslate();
+  public void renderMethod(Renderer renderer, Entity entity, TransformComponent cameraModifiedEntityTransform) {
+    Vector2D transform = cameraModifiedEntityTransform.getTranslate();
     ColliderComponent colliderComponent = entity.getComponent(ColliderComponent.class);
 
     if (ColliderComponent.ColliderType.CIRCLE.equals(colliderComponent.getColliderType())) {
-      Circle circle = colliderComponent.asCircle(entityTransform);
+      Circle circle = colliderComponent.asCircle(cameraModifiedEntityTransform);
 
       renderer.drawCircle(transform.x() + colliderComponent.getOffsetX(), transform.y() + colliderComponent.getOffsetY(), circle.radius(), Color.RED);
     } else {
-      Rectangle rectangle = colliderComponent.asRectangle(entityTransform);
+      Rectangle rectangle = colliderComponent.asRectangle(cameraModifiedEntityTransform);
 
       renderer.drawRect(rectangle.min().x(), rectangle.min().y(), rectangle.getWidth(), rectangle.getHeight(), Color.RED);
     }

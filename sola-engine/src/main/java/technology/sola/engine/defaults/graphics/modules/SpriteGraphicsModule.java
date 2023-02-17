@@ -25,7 +25,7 @@ public class SpriteGraphicsModule extends SolaGraphicsModule {
   }
 
   @Override
-  public void renderMethod(Renderer renderer, Entity entity, TransformComponent entityTransform) {
+  public void renderMethod(Renderer renderer, Entity entity, TransformComponent cameraModifiedEntityTransform) {
     SpriteComponent spriteComponent = entity.getComponent(SpriteComponent.class);
 
     if (spriteComponent.getSpriteId() == null) {
@@ -35,12 +35,12 @@ public class SpriteGraphicsModule extends SolaGraphicsModule {
     spriteComponent.getSprite(spriteSheetAssetLoader).executeIfLoaded(sprite -> {
       SolaImage spriteImage = sprite;
 
-      if (entityTransform.getScaleX() != 1 || entityTransform.getScaleY() != 1) {
-        spriteImage = sprite.scale(entityTransform.getScaleX(), entityTransform.getScaleY());
+      if (cameraModifiedEntityTransform.getScaleX() != 1 || cameraModifiedEntityTransform.getScaleY() != 1) {
+        spriteImage = sprite.scale(cameraModifiedEntityTransform.getScaleX(), cameraModifiedEntityTransform.getScaleY());
         renderer.setBlendMode(BlendMode.MASK);
       }
 
-      renderer.drawImage(spriteImage, entityTransform.getX(), entityTransform.getY());
+      renderer.drawImage(spriteImage, cameraModifiedEntityTransform.getX(), cameraModifiedEntityTransform.getY());
     });
   }
 }

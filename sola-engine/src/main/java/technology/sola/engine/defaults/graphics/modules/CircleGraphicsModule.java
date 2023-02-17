@@ -15,14 +15,14 @@ public class CircleGraphicsModule extends SolaGraphicsModule {
   }
 
   @Override
-  public void renderMethod(Renderer renderer, Entity entity, TransformComponent entityTransform) {
+  public void renderMethod(Renderer renderer, Entity entity, TransformComponent cameraModifiedEntityTransform) {
     var circleRenderer = entity.getComponent(CircleRendererComponent.class);
-    float radius = Math.max(entityTransform.getScaleX(), entityTransform.getScaleY()) * 0.5f;
+    float radius = Math.max(cameraModifiedEntityTransform.getScaleX(), cameraModifiedEntityTransform.getScaleY()) * 0.5f;
 
     if (circleRenderer.isFilled()) {
-      renderer.fillCircle(entityTransform.getX(), entityTransform.getY(), radius, circleRenderer.getColor());
+      renderer.fillCircle(cameraModifiedEntityTransform.getX(), cameraModifiedEntityTransform.getY(), radius, circleRenderer.getColor());
     } else {
-      renderer.drawCircle(entityTransform.getX(), entityTransform.getY(), radius, circleRenderer.getColor());
+      renderer.drawCircle(cameraModifiedEntityTransform.getX(), cameraModifiedEntityTransform.getY(), radius, circleRenderer.getColor());
     }
   }
 }

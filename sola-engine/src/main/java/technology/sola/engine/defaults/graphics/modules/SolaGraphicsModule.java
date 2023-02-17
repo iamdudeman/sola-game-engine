@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class SolaGraphicsModule {
   public abstract List<Entity> getEntitiesToRender(World world);
 
-  public abstract void renderMethod(Renderer renderer, Entity entity, TransformComponent entityTransform);
+  public abstract void renderMethod(Renderer renderer, Entity entity, TransformComponent cameraModifiedEntityTransform);
 
   public void render(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
     for (Entity entity : getEntitiesToRender(world)) {

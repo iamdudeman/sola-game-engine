@@ -15,13 +15,13 @@ public class RectangleGraphicsModule extends SolaGraphicsModule {
   }
 
   @Override
-  public void renderMethod(Renderer renderer, Entity entity, TransformComponent entityTransform) {
+  public void renderMethod(Renderer renderer, Entity entity, TransformComponent cameraModifiedEntityTransform) {
     var rectangleRenderer = entity.getComponent(RectangleRendererComponent.class);
 
     if (rectangleRenderer.isFilled()) {
-      renderer.fillRect(entityTransform.getX(), entityTransform.getY(), entityTransform.getScaleX(), entityTransform.getScaleY(), rectangleRenderer.getColor());
+      renderer.fillRect(cameraModifiedEntityTransform.getX(), cameraModifiedEntityTransform.getY(), cameraModifiedEntityTransform.getScaleX(), cameraModifiedEntityTransform.getScaleY(), rectangleRenderer.getColor());
     } else {
-      renderer.drawRect(entityTransform.getX(), entityTransform.getY(), entityTransform.getScaleX(), entityTransform.getScaleY(), rectangleRenderer.getColor());
+      renderer.drawRect(cameraModifiedEntityTransform.getX(), cameraModifiedEntityTransform.getY(), cameraModifiedEntityTransform.getScaleX(), cameraModifiedEntityTransform.getScaleY(), rectangleRenderer.getColor());
     }
   }
 }
