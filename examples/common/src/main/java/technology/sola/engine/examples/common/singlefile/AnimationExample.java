@@ -24,7 +24,7 @@ public class AnimationExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGraphics().useClearColor(Color.WHITE);
+    defaultsConfigurator.useGraphics().useBackgroundColor(Color.WHITE);
 
     solaEcs.setWorld(buildWorld());
     platform.getViewport().setAspectMode(AspectMode.STRETCH);
