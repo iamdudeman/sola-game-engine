@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui;
 
+import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.renderer.BlendMode;
@@ -75,20 +76,26 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     if (!properties.isHidden()) {
       int borderOffset = properties.getBorderColor() == null ? 0 : 1;
 
-      if (properties.getBackgroundColor() != null) {
+      Color hoverBackgroundColor = properties.hover.getBackgroundColor() == null ? properties.getBackgroundColor() : properties.hover.getBackgroundColor();
+      Color backgroundColor = isHovered() ? hoverBackgroundColor : properties.getBackgroundColor();
+
+      if (backgroundColor != null) {
         renderer.setBlendMode(BlendMode.NORMAL);
         renderer.fillRect(
           x + borderOffset, y + borderOffset,
           getWidth() - borderOffset, getHeight() - borderOffset,
-          isHovered() ? properties.hover.getBackgroundColor() : properties.getBackgroundColor()
+          backgroundColor
         );
       }
 
       renderSelf(renderer, x + borderOffset + properties.padding.getLeft(), y + borderOffset + properties.padding.getTop());
 
-      if (properties.getBorderColor() != null) {
+      Color hoverBorderColor = properties.hover.getBorderColor() == null ? properties.getBorderColor() : properties.hover.getBorderColor();
+      Color borderColor = isHovered() ? hoverBorderColor : properties.getBorderColor();
+
+      if (borderColor != null) {
         renderer.setBlendMode(BlendMode.NORMAL);
-        renderer.drawRect(x, y, getWidth(), getHeight(), isHovered() ? properties.hover.getBorderColor() : properties.getBorderColor());
+        renderer.drawRect(x, y, getWidth(), getHeight(), borderColor);
       }
 
       if (isFocussed() && properties.getFocusOutlineColor() != null) {
@@ -148,9 +155,12 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
   }
 
   public void onMouseEnter(MouseEvent mouseEvent) {
-    if (onMouseEnterCallback != null && !wasMouseOverElement) {
+    if (!wasMouseOverElement) {
       wasMouseOverElement = true;
-      onMouseEnterCallback.accept(mouseEvent);
+
+      if (onMouseEnterCallback != null) {
+        onMouseEnterCallback.accept(mouseEvent);
+      }
     }
   }
 
@@ -159,9 +169,12 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
   }
 
   public void onMouseExit(MouseEvent mouseEvent) {
-    if (onMouseExitCallback != null && wasMouseOverElement) {
+    if (wasMouseOverElement) {
       wasMouseOverElement = false;
-      onMouseExitCallback.accept(mouseEvent);
+
+      if (onMouseExitCallback != null) {
+        onMouseExitCallback.accept(mouseEvent);
+      }
     }
   }
 
