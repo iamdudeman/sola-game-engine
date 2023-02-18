@@ -65,7 +65,7 @@ public class CollisionDetectionSystem extends EcsSystem {
    * @return the set of the internal {@link SpatialHashMap.BucketId}s
    */
   public Set<SpatialHashMap.BucketId> getSpacialHashMapBucketIds() {
-    return spatialHashMap.getEntityBucketIds();
+    return spatialHashMap.getBucketIds();
   }
 
   @Override
@@ -86,7 +86,7 @@ public class CollisionDetectionSystem extends EcsSystem {
     for (var viewEntryA : viewEntries) {
       ColliderComponent colliderA = viewEntryA.c1();
 
-      for (var viewEntryB : spatialHashMap.getNearbyEntities(viewEntryA)) {
+      for (var viewEntryB : spatialHashMap.getNearbyViewEntries(viewEntryA)) {
         ColliderComponent colliderB = viewEntryB.c1();
 
         if (shouldIgnoreCollision(colliderA, colliderB)) {

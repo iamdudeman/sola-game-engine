@@ -3,14 +3,15 @@ package technology.sola.engine.physics;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import technology.sola.ecs.Entity;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.ecs.Entity;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.math.linear.Vector2D;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class CollisionUtilsTest {
   private final Entity mockEntityA = Mockito.mock(Entity.class);
