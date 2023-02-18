@@ -53,7 +53,7 @@ public abstract class SolaGraphicsModule<V extends ViewEntry> {
       TransformComponent transformWithCameraComponent = getTransformForAppliedCamera(transformComponent, cameraScaleTransform, cameraTranslationTransform);
 
       BlendMode previousBlendMode = renderer.getBlendMode();
-      BlendMode blendMode = blendModeComponent == null ? previousBlendMode : blendModeComponent.getRenderMode();
+      BlendMode blendMode = blendModeComponent == null ? previousBlendMode : blendModeComponent.getBlendMode();
 
       if (layerComponent == null) {
         renderer.setBlendMode(blendMode);
