@@ -1,7 +1,6 @@
 package technology.sola.engine.physics.system;
 
 import technology.sola.ecs.EcsSystem;
-import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
@@ -16,7 +15,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The CollisionDetectionSystem class is a {@link EcsSystem} implementation that handles checking if a {@link World}
+ * has any {@link technology.sola.ecs.Entity} with {@link ColliderComponent}s that are colliding with each other. If a
+ * collision is detected either a {@link SensorEvent} or a {@link CollisionEvent} will be emitted depending on if either
+ * collider {@link ColliderComponent#isSensor()} or not.
+ */
 public class CollisionDetectionSystem extends EcsSystem {
+  /**
+   * Collision detection order is one after the {@link PhysicsSystem#ORDER}.
+   */
   public static final int ORDER = PhysicsSystem.ORDER + 1;
   private final EventHub eventHub;
   private SpatialHashMap spatialHashMap;
@@ -46,11 +54,17 @@ public class CollisionDetectionSystem extends EcsSystem {
       : new SpatialHashMap(List.of(), spatialHashMapCellSize);
   }
 
+  /**
+   * @return the size of the internal {@link SpatialHashMap} cell size
+   */
   public int getSpacialHashMapCellSize() {
     return spatialHashMap.getCellSize();
   }
 
-  public Set<SpatialHashMap.BucketId> getSpacialHashMapEntityBuckets() {
+  /**
+   * @return the set of the internal {@link SpatialHashMap.BucketId}s
+   */
+  public Set<SpatialHashMap.BucketId> getSpacialHashMapBucketIds() {
     return spatialHashMap.getEntityBucketIds();
   }
 
@@ -69,20 +83,18 @@ public class CollisionDetectionSystem extends EcsSystem {
     // TODO consider some sort of clear method for SpatialHashMap
     spatialHashMap = spatialHashMapCellSize == null ? new SpatialHashMap(viewEntries) : new SpatialHashMap(viewEntries, spatialHashMapCellSize);
 
-    for (var entryA : viewEntries) {
-      TransformComponent transformA = entryA.c2();
-      ColliderComponent colliderA = entryA.c1();
+    for (var viewEntryA : viewEntries) {
+      ColliderComponent colliderA = viewEntryA.c1();
 
-      for (var entryB : spatialHashMap.getNearbyEntities(entryA)) {
-        TransformComponent transformB = entryB.c2();
-        ColliderComponent colliderB = entryB.c1();
+      for (var viewEntryB : spatialHashMap.getNearbyEntities(viewEntryA)) {
+        ColliderComponent colliderB = viewEntryB.c1();
 
         if (shouldIgnoreCollision(colliderA, colliderB)) {
           continue;
         }
 
         CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(
-          entryA, entryB
+          viewEntryA, viewEntryB
         );
 
         if (collisionManifold != null) {

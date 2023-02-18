@@ -47,7 +47,7 @@ public class DebugGraphicsModule extends SolaGraphicsModule<View2Entry<ColliderC
     if (collisionDetectionSystem != null) {
       int cellSize = collisionDetectionSystem.getSpacialHashMapCellSize();
 
-      for (SpatialHashMap.BucketId bucketId : collisionDetectionSystem.getSpacialHashMapEntityBuckets()) {
+      for (SpatialHashMap.BucketId bucketId : collisionDetectionSystem.getSpacialHashMapBucketIds()) {
         Vector2D topLeftPoint = new Vector2D(bucketId.x(), bucketId.y()).scalar(cellSize);
         TransformComponent useThis = getTransformForAppliedCamera(
           new TransformComponent(topLeftPoint.x(), topLeftPoint.y(), cellSize, cellSize), cameraScaleTransform, cameraTranslationTransform
