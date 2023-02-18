@@ -27,15 +27,18 @@ import java.util.function.Consumer;
  */
 public abstract class SolaWithDefaults extends Sola {
   /**
-   * The {@link SolaGraphics} instance for this Sola.
+   * The {@link SolaGraphics} instance for this Sola. This is null until {@link DefaultsConfigurator#useGraphics()} is
+   * called.
    */
   protected SolaGraphics solaGraphics;
   /**
-   * The {@link SolaPhysics} instance for this Sola.
+   * The {@link SolaPhysics} instance for this Sola. This is null until {@link DefaultsConfigurator#usePhysics()} is
+   * called.
    */
   protected SolaPhysics solaPhysics;
   /**
-   * The {@link SolaGuiDocument} instance for this Sola.
+   * The {@link SolaGuiDocument} instance for this Sola. This is null until {@link DefaultsConfigurator#useGui()} is
+   * called.
    */
   protected SolaGuiDocument solaGuiDocument;
   private Consumer<Renderer> renderFunction = renderer -> {

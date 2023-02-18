@@ -10,6 +10,9 @@ import javax.sound.sampled.LineUnavailableException;
 import java.io.IOException;
 import java.util.function.Consumer;
 
+/**
+ * The WavAudioClip class is a {@link AudioClip} implementation for .wav files.
+ */
 public class WavAudioClip implements AudioClip {
   private final Clip clip;
 

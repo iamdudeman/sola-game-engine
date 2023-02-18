@@ -22,10 +22,6 @@ import technology.sola.math.linear.Vector2D;
 public class DebugGraphicsModule extends SolaGraphicsModule<View2Entry<ColliderComponent, TransformComponent>> {
   private final CollisionDetectionSystem collisionDetectionSystem;
 
-  public DebugGraphicsModule() {
-    collisionDetectionSystem = null;
-  }
-
   /**
    * Creates an instance of DebugGraphicsModule.
    *

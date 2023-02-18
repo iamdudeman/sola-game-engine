@@ -29,6 +29,10 @@ import technology.sola.engine.platform.javafx.core.JavaFxSocketClient;
 
 import java.util.function.Consumer;
 
+/**
+ * JavaFxSolaPlatform is a {@link SolaPlatform} implementation for running a {@link technology.sola.engine.core.Sola} in
+ * a JavaFX powered window.
+ */
 public class JavaFxSolaPlatform extends SolaPlatform {
   private static boolean isPlatformStartupNeeded = true;
   private Canvas canvas;
@@ -49,9 +53,15 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     socketClient = new JavaFxSocketClient();
   }
 
+  /**
+   * Sets the initial window size when a {@link technology.sola.engine.core.Sola} is player.
+   *
+   * @param width  the width of the window
+   * @param height the height of the window
+   */
   public void setWindowSize(int width, int height) {
-    windowWidth = (double)width;
-    windowHeight = (double)height;
+    windowWidth = (double) width;
+    windowHeight = (double) height;
   }
 
   @Override
@@ -95,7 +105,8 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   @Override
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     if (isPlatformStartupNeeded) {
-      Platform.startup(() -> { });
+      Platform.startup(() -> {
+      });
       isPlatformStartupNeeded = false;
     }
 
@@ -186,7 +197,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   }
 
   private MouseEvent fxToSola(javafx.scene.input.MouseEvent fxMouseEvent) {
-    MouseCoordinate adjusted = adjustMouseForViewport((int)fxMouseEvent.getX(), (int)fxMouseEvent.getY());
+    MouseCoordinate adjusted = adjustMouseForViewport((int) fxMouseEvent.getX(), (int) fxMouseEvent.getY());
 
     return new MouseEvent(fxMouseEvent.getButton().ordinal(), adjusted.x(), adjusted.y());
   }
