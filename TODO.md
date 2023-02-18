@@ -6,8 +6,6 @@
 
 ## Planned Cleanup List
 
-* remove Serializable when sola-ecs updates to no longer need it
-
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
