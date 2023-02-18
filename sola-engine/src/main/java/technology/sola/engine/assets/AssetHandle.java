@@ -16,6 +16,9 @@ public class AssetHandle<T extends Asset> {
     this.asset = asset;
   }
 
+  /**
+   * @return true if the {@link Asset} for this handle has not yet been loaded
+   */
   public boolean isLoading() {
     return asset == null;
   }
@@ -36,6 +39,12 @@ public class AssetHandle<T extends Asset> {
     }
   }
 
+  /**
+   * Executes the provided consumer asynchronously once the {@link Asset} for this handle has been loaded. This will
+   * execute immediately if the asset is already loaded.
+   *
+   * @param consumer the function to execute if the asset is loaded
+   */
   public void executeWhenLoaded(Consumer<T> consumer) {
     if (isLoading()) {
       onLoadSubscribers.add(consumer);
@@ -44,6 +53,12 @@ public class AssetHandle<T extends Asset> {
     }
   }
 
+  /**
+   * Executes the provided consumer synchronously if the {@link Asset} for this handle has been loaded. Otherwise, it
+   * does nothing.
+   *
+   * @param consumer the function to execute if the asset is loaded
+   */
   public void executeIfLoaded(Consumer<T> consumer) {
     if (!isLoading()) {
       consumer.accept(asset);

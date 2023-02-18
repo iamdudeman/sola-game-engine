@@ -2,6 +2,9 @@ package technology.sola.engine.graphics;
 
 import java.util.Objects;
 
+/**
+ * The Color class represents an argb color that can be used for rendering.
+ */
 public class Color {
   /**
    * Color constant - rgb(0, 0, 0).
