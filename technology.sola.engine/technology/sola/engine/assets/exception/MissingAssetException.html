@@ -84,6 +84,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">MissingAssetException</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/RuntimeException.html" title="class or interface in java.lang" class="external-link">RuntimeException</a></span></div>
+<div class="block">Exception thrown when a <a href="../Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> is requested but has not been registered with
+ an <a href="../AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a>.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -104,7 +106,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">MissingAssetException</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;assetId)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates an instances of this exception.</div>
+</div>
 </div>
 </section>
 </li>
@@ -133,6 +137,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>MissingAssetException</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">MissingAssetException</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;assetId)</span></div>
+<div class="block">Creates an instances of this exception.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>assetId</code> - the id of the asset requested</dd>
+</dl>
 </section>
 </li>
 </ul>

@@ -78,6 +78,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">AssetLoaderProvider</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">The AssetLoaderProvider class holds instances of <a href="AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a>s for various <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> types.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -107,10 +108,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#add(technology.sola.engine.assets.AssetLoader)" class="member-name-link">add</a><wbr>(<a href="AssetLoader.html" title="class in technology.sola.engine.assets">AssetLoader</a>&lt;?&gt;&nbsp;assetLoader)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Adds an <a href="AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a> that can be retrieved and used later.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="Asset.html" title="interface in technology.sola.engine.assets">Asset</a>&gt;<br><a href="AssetLoader.html" title="class in technology.sola.engine.assets">AssetLoader</a>&lt;T&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#get(java.lang.Class)" class="member-name-link">get</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;assetClass)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Retrieves an <a href="AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a> for the desired <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> type via the asset's class.</div>
+</div>
 </div>
 </div>
 </div>
@@ -146,12 +151,28 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="add(technology.sola.engine.assets.AssetLoader)">
 <h3>add</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">add</span><wbr><span class="parameters">(<a href="AssetLoader.html" title="class in technology.sola.engine.assets">AssetLoader</a>&lt;?&gt;&nbsp;assetLoader)</span></div>
+<div class="block">Adds an <a href="AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a> that can be retrieved and used later.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>assetLoader</code> - the <code>AssetLoader</code> to add</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="get(java.lang.Class)">
 <h3>get</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="Asset.html" title="interface in technology.sola.engine.assets">Asset</a>&gt;</span>&nbsp;<span class="return-type"><a href="AssetLoader.html" title="class in technology.sola.engine.assets">AssetLoader</a>&lt;T&gt;</span>&nbsp;<span class="element-name">get</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;assetClass)</span></div>
+<div class="block">Retrieves an <a href="AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a> for the desired <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> type via the asset's class.</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>T</code> - the type of Asset</dd>
+<dt>Parameters:</dt>
+<dd><code>assetClass</code> - the class of asset to load</dd>
+<dt>Returns:</dt>
+<dd>the <code>AssetLoader</code> instance for the desired asset class</dd>
+<dt>Throws:</dt>
+<dd><code><a href="exception/MissingAssetLoaderException.html" title="class in technology.sola.engine.assets.exception">MissingAssetLoaderException</a></code> - if there is no asset loader added for desired asset</dd>
+</dl>
 </section>
 </li>
 </ul>

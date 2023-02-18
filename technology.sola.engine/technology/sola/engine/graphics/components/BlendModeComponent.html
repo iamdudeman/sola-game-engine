@@ -77,20 +77,14 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></code>, <code>technology.sola.ecs.Component</code></dd>
+<dd><code>technology.sola.ecs.Component</code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">BlendModeComponent</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements technology.sola.ecs.Component</span></div>
-<dl class="notes">
-<dt>See Also:</dt>
-<dd>
-<ul class="see-list">
-<li><a href="../../../../../../serialized-form.html#technology.sola.engine.graphics.components.BlendModeComponent">Serialized Form</a></li>
-</ul>
-</dd>
-</dl>
+<div class="block">BlendModeComponent is a <code>Component</code> that modifies the <a href="../renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer"><code>BlendMode</code></a> used when rendering this
+ <code>Entity</code></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -103,7 +97,9 @@ implements technology.sola.ecs.Component</span></div>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.renderer.BlendMode)" class="member-name-link">BlendModeComponent</a><wbr>(<a href="../renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a>&nbsp;blendMode)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a new instance initialized to a <a href="../renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer"><code>BlendMode</code></a>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -119,11 +115,13 @@ implements technology.sola.ecs.Component</span></div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRenderMode()" class="member-name-link">getRenderMode</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBlendMode()" class="member-name-link">getBlendMode</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRenderMode(technology.sola.engine.graphics.renderer.BlendMode)" class="member-name-link">setRenderMode</a><wbr>(<a href="../renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a>&nbsp;blendMode)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setBlendMode(technology.sola.engine.graphics.renderer.BlendMode)" class="member-name-link">setBlendMode</a><wbr>(<a href="../renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a>&nbsp;blendMode)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the <a href="../renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer"><code>BlendMode</code></a> to be used.</div>
+</div>
 </div>
 </div>
 </div>
@@ -148,6 +146,11 @@ implements technology.sola.ecs.Component</span></div>
 <section class="detail" id="&lt;init&gt;(technology.sola.engine.graphics.renderer.BlendMode)">
 <h3>BlendModeComponent</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">BlendModeComponent</span><wbr><span class="parameters">(<a href="../renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a>&nbsp;blendMode)</span></div>
+<div class="block">Creates a new instance initialized to a <a href="../renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer"><code>BlendMode</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>blendMode</code> - the initial <code>BlendMode</code></dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -159,15 +162,24 @@ implements technology.sola.ecs.Component</span></div>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getRenderMode()">
-<h3>getRenderMode</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a></span>&nbsp;<span class="element-name">getRenderMode</span>()</div>
+<section class="detail" id="getBlendMode()">
+<h3>getBlendMode</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a></span>&nbsp;<span class="element-name">getBlendMode</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the current <a href="../renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer"><code>BlendMode</code></a></dd>
+</dl>
 </section>
 </li>
 <li>
-<section class="detail" id="setRenderMode(technology.sola.engine.graphics.renderer.BlendMode)">
-<h3>setRenderMode</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setRenderMode</span><wbr><span class="parameters">(<a href="../renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a>&nbsp;blendMode)</span></div>
+<section class="detail" id="setBlendMode(technology.sola.engine.graphics.renderer.BlendMode)">
+<h3>setBlendMode</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setBlendMode</span><wbr><span class="parameters">(<a href="../renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a>&nbsp;blendMode)</span></div>
+<div class="block">Sets the <a href="../renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer"><code>BlendMode</code></a> to be used.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>blendMode</code> - the new <code>BlendMode</code></dd>
+</dl>
 </section>
 </li>
 </ul>

@@ -84,6 +84,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">MissingAssetLoaderException</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/RuntimeException.html" title="class or interface in java.lang" class="external-link">RuntimeException</a></span></div>
+<div class="block">Exception that is thrown when an <a href="../AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a> is requested but has no
+ implementation provided.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -103,8 +105,10 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.Class)" class="member-name-link">MissingAssetLoaderException</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;assetClass)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.Class)" class="member-name-link">MissingAssetLoaderException</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="../Asset.html" title="interface in technology.sola.engine.assets">Asset</a>&gt;&nbsp;assetClass)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Creates an instance of this exception.</div>
+</div>
 </div>
 </section>
 </li>
@@ -132,7 +136,12 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(java.lang.Class)">
 <h3>MissingAssetLoaderException</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">MissingAssetLoaderException</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;assetClass)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">MissingAssetLoaderException</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="../Asset.html" title="interface in technology.sola.engine.assets">Asset</a>&gt;&nbsp;assetClass)</span></div>
+<div class="block">Creates an instance of this exception.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>assetClass</code> - the class of <a href="../Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> that was requested</dd>
+</dl>
 </section>
 </li>
 </ul>

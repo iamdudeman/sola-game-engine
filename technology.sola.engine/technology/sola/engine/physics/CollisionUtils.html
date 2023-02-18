@@ -78,6 +78,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">CollisionUtils</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">The CollisionUtils class is a collection of various methods that help in collision detection and resolution.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -99,7 +100,9 @@ loadScripts(document, 'script');</script>
  <a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformB,
  <a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>&nbsp;colliderA,
  <a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>&nbsp;colliderB)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Calculates a <a href="CollisionManifold.html" title="class in technology.sola.engine.physics"><code>CollisionManifold</code></a> for two <code>Entity</code> that collided.</div>
+</div>
 </div>
 </div>
 </div>
@@ -126,6 +129,18 @@ loadScripts(document, 'script');</script>
  <a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformB,
  <a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>&nbsp;colliderA,
  <a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>&nbsp;colliderB)</span></div>
+<div class="block">Calculates a <a href="CollisionManifold.html" title="class in technology.sola.engine.physics"><code>CollisionManifold</code></a> for two <code>Entity</code> that collided.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>entityA</code> - the first Entity</dd>
+<dd><code>entityB</code> - the second Entity</dd>
+<dd><code>transformA</code> - the <a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> of the first entity</dd>
+<dd><code>transformB</code> - the <code>TransformComponent</code> of the second entity</dd>
+<dd><code>colliderA</code> - the <a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component"><code>ColliderComponent</code></a> of the first entity</dd>
+<dd><code>colliderB</code> - the <code>ColliderComponent</code> of the second entity</dd>
+<dt>Returns:</dt>
+<dd>the resulting <code>CollisionManifold</code></dd>
+</dl>
 </section>
 </li>
 </ul>

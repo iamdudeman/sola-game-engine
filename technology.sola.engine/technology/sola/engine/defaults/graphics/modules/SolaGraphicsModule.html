@@ -69,10 +69,10 @@ loadScripts(document, 'script');</script>
 <div class="header">
 <div class="sub-title"><span class="module-label-in-type">Module</span>&nbsp;<a href="../../../../../../module-summary.html">technology.sola.engine</a></div>
 <div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">technology.sola.engine.defaults.graphics.modules</a></div>
-<h1 title="Class SolaGraphicsModule" class="title">Class SolaGraphicsModule</h1>
+<h1 title="Class SolaGraphicsModule" class="title">Class SolaGraphicsModule&lt;V extends technology.sola.ecs.view.ViewEntry&gt;</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule</div>
+<div class="inheritance">technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule&lt;V&gt;</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
@@ -80,7 +80,7 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="CircleGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">CircleGraphicsModule</a></code>, <code><a href="DebugGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugGraphicsModule</a></code>, <code><a href="RectangleGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">RectangleGraphicsModule</a></code>, <code><a href="SpriteGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SpriteGraphicsModule</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">SolaGraphicsModule</span>
+<div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">SolaGraphicsModule&lt;V extends technology.sola.ecs.view.ViewEntry&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">SolaGraphicsModules provide details on how to render <code>Entity</code> that have specified <code>Component</code>s.</div>
 </section>
@@ -110,17 +110,18 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.ecs.Entity&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getEntitiesToRender(technology.sola.ecs.World)" class="member-name-link">getEntitiesToRender</a><wbr>(technology.sola.ecs.World&nbsp;world)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Returns the <code>Entity</code> that need to be rendered via <a href="#renderMethod(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent)"><code>renderMethod(Renderer, Entity, TransformComponent)</code></a>.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTransformForAppliedCamera(technology.sola.engine.core.component.TransformComponent,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)" class="member-name-link">getTransformForAppliedCamera</a><wbr>(<a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;entityTransform,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTransformForAppliedCamera(technology.sola.engine.core.component.TransformComponent,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)" class="member-name-link">getTransformForAppliedCamera</a><wbr>(<a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;entityTransform,
  <a href="../../../../math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a>&nbsp;cameraScaleTransform,
  <a href="../../../../math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a>&nbsp;cameraTranslationTransform)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Utility method for calculating the transform when a camera's transform is applied to another transform.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract technology.sola.ecs.view.View&lt;<a href="SolaGraphicsModule.html" title="type parameter in SolaGraphicsModule">V</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getViewToRender(technology.sola.ecs.World)" class="member-name-link">getViewToRender</a><wbr>(technology.sola.ecs.World&nbsp;world)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns a <code>View</code> of <code>Entity</code> that need to be rendered via
+ <a href="#renderMethod(technology.sola.engine.graphics.renderer.Renderer,V,technology.sola.engine.core.component.TransformComponent)"><code>renderMethod(Renderer, V, TransformComponent)</code></a></div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.World,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)" class="member-name-link">render</a><wbr>(<a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
@@ -131,8 +132,8 @@ loadScripts(document, 'script');</script>
 <div class="block">The main render method for a graphics module that is called once per frame.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#renderMethod(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderMethod</a><wbr>(<a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
- technology.sola.ecs.Entity&nbsp;entity,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#renderMethod(technology.sola.engine.graphics.renderer.Renderer,V,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderMethod</a><wbr>(<a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
+ <a href="SolaGraphicsModule.html" title="type parameter in SolaGraphicsModule">V</a>&nbsp;viewEntry,
  <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;cameraModifiedEntityTransform)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Called on each <code>Entity</code> to render it.</div>
@@ -169,30 +170,31 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getEntitiesToRender(technology.sola.ecs.World)">
-<h3>getEntitiesToRender</h3>
-<div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.ecs.Entity&gt;</span>&nbsp;<span class="element-name">getEntitiesToRender</span><wbr><span class="parameters">(technology.sola.ecs.World&nbsp;world)</span></div>
-<div class="block">Returns the <code>Entity</code> that need to be rendered via <a href="#renderMethod(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent)"><code>renderMethod(Renderer, Entity, TransformComponent)</code></a>.</div>
+<section class="detail" id="getViewToRender(technology.sola.ecs.World)">
+<h3>getViewToRender</h3>
+<div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">technology.sola.ecs.view.View&lt;<a href="SolaGraphicsModule.html" title="type parameter in SolaGraphicsModule">V</a>&gt;</span>&nbsp;<span class="element-name">getViewToRender</span><wbr><span class="parameters">(technology.sola.ecs.World&nbsp;world)</span></div>
+<div class="block">Returns a <code>View</code> of <code>Entity</code> that need to be rendered via
+ <a href="#renderMethod(technology.sola.engine.graphics.renderer.Renderer,V,technology.sola.engine.core.component.TransformComponent)"><code>renderMethod(Renderer, V, TransformComponent)</code></a></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>world</code> - the <code>World</code></dd>
 <dt>Returns:</dt>
-<dd>the list of entities</dd>
+<dd>the view of entities</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="renderMethod(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent)">
-<h3>renderMethod</h3>
+<section class="detail" id="renderMethod(technology.sola.engine.graphics.renderer.Renderer,V,technology.sola.engine.core.component.TransformComponent)">
+<h3 id="renderMethod(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.ViewEntry,technology.sola.engine.core.component.TransformComponent)">renderMethod</h3>
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">renderMethod</span><wbr><span class="parameters">(<a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
- technology.sola.ecs.Entity&nbsp;entity,
+ <a href="SolaGraphicsModule.html" title="type parameter in SolaGraphicsModule">V</a>&nbsp;viewEntry,
  <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;cameraModifiedEntityTransform)</span></div>
 <div class="block">Called on each <code>Entity</code> to render it. A <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> instance with the camera's transform
  applied is provided for each entity.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>renderer</code> - tbe <a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> instance</dd>
-<dd><code>entity</code> - the <code>Entity</code> to render</dd>
+<dd><code>viewEntry</code> - the <code>ViewEntry</code> containing the <code>Entity</code> to render</dd>
 <dd><code>cameraModifiedEntityTransform</code> - a <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> with the camera's transform applied to the entity's</dd>
 </dl>
 </section>
@@ -204,8 +206,8 @@ loadScripts(document, 'script');</script>
  technology.sola.ecs.World&nbsp;world,
  <a href="../../../../math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a>&nbsp;cameraScaleTransform,
  <a href="../../../../math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a>&nbsp;cameraTranslationTransform)</span></div>
-<div class="block">The main render method for a graphics module that is called once per frame. It will call the <a href="#renderMethod(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent)"><code>renderMethod(Renderer, Entity, TransformComponent)</code></a>
- for each <code>Entity</code> provided by <a href="#getEntitiesToRender(technology.sola.ecs.World)"><code>getEntitiesToRender(World)</code></a>.</div>
+<div class="block">The main render method for a graphics module that is called once per frame. It will call the <a href="#renderMethod(technology.sola.engine.graphics.renderer.Renderer,V,technology.sola.engine.core.component.TransformComponent)"><code>renderMethod(Renderer, V, TransformComponent)</code></a>
+ for each <code>Entity</code> provided by <a href="#getViewToRender(technology.sola.ecs.World)"><code>getViewToRender(World)</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>renderer</code> - tbe <a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> instance</dd>
