@@ -5,14 +5,9 @@ import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 
-import java.io.Serial;
-import java.io.Serializable;
-
-public class SpriteKeyFrame implements Serializable {
+public class SpriteKeyFrame {
   public static final long HOLD = -1L;
 
-  @Serial
-  private static final long serialVersionUID = -1643322034379275616L;
   private final String spriteSheetId;
   private final String spriteId;
   private final long duration;

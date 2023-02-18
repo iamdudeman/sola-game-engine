@@ -23,7 +23,6 @@ import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.math.linear.Vector2D;
 
-import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -141,8 +140,6 @@ public class SimplePlatformerExample extends SolaWithDefaults {
   }
 
   private static class MovingPlatformComponent implements Component {
-    @Serial
-    private static final long serialVersionUID = 3034112167409884394L;
     private float counter = 0;
     private boolean isGoingUp = true;
   }

@@ -6,11 +6,7 @@ import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
-import java.io.Serial;
-
 public class ColliderComponent implements Component {
-  @Serial
-  private static final long serialVersionUID = 6393414888672495864L;
   // Properties for all
   private ColliderType colliderType;
   private float offsetX;

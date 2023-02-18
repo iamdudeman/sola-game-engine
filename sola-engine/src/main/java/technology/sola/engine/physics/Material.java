@@ -1,14 +1,10 @@
 package technology.sola.engine.physics;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.Objects;
 
-public class Material implements Serializable {
+public class Material  {
   /** Material with mass set to 1, restitution set to 0.01 and friction set to 0. */
   public static final Material UNIT_MASS_MATERIAL = new Material(1);
-  @Serial
-  private static final long serialVersionUID = -6308618421104031127L;
 
   private final float mass;
   private final float inverseMass;

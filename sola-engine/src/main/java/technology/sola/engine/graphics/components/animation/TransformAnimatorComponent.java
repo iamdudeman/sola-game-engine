@@ -4,12 +4,7 @@ import technology.sola.ecs.Component;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.math.EasingFunction;
 
-import java.io.Serial;
-
 public class TransformAnimatorComponent implements Component {
-  @Serial
-  private static final long serialVersionUID = 1002749182938133802L;
-
   private final EasingFunction easingFunction;
   private final long duration;
   private Float endingTranslateX;

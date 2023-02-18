@@ -26,7 +26,6 @@ import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 import technology.sola.math.linear.Vector2D;
 
-import java.io.Serial;
 import java.util.List;
 
 public class RenderingExample extends Sola {
@@ -103,8 +102,6 @@ public class RenderingExample extends Sola {
   }
 
   private record MovingComponent() implements Component {
-    @Serial
-    private static final long serialVersionUID = 8048288443738661480L;
   }
 
   private class TestSystem extends EcsSystem {
