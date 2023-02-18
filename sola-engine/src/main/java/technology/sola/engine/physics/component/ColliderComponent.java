@@ -22,6 +22,11 @@ public class ColliderComponent implements Component {
   private Float width = null;
   private Float height = null;
 
+  /**
+   * Creates a rectangle {@link ColliderComponent} with a width and height of 1.
+   *
+   * @return a rectangle {@code ColliderComponent}
+   */
   public static ColliderComponent aabb() {
     return aabb(1, 1);
   }
@@ -30,7 +35,7 @@ public class ColliderComponent implements Component {
    * Creates a rectangle {@link ColliderComponent} with defined width and height.
    *
    * @param width  the width of the collision box
-   * @param height  the height of the collision box
+   * @param height the height of the collision box
    * @return a rectangle {@code ColliderComponent}
    */
   public static ColliderComponent aabb(float width, float height) {
@@ -49,6 +54,11 @@ public class ColliderComponent implements Component {
     return colliderComponent;
   }
 
+  /**
+   * Creates a circle {@link ColliderComponent} with a radius of 0.5.
+   *
+   * @return a circle {@code ColliderComponent}
+   */
   public static ColliderComponent circle() {
     return circle(0.5f);
   }
@@ -56,7 +66,7 @@ public class ColliderComponent implements Component {
   /**
    * Creates a circle {@link ColliderComponent} with defined radius.
    *
-   * @param radius  the radius of the collider
+   * @param radius the radius of the collider
    * @return a circle {@code ColliderComponent}
    */
   public static ColliderComponent circle(float radius) {
@@ -142,7 +152,7 @@ public class ColliderComponent implements Component {
    * @param tags the new tags
    * @return this
    */
-  public ColliderComponent setTags(ColliderTag ...tags) {
+  public ColliderComponent setTags(ColliderTag... tags) {
     this.tags = tags;
 
     return this;
@@ -177,7 +187,7 @@ public class ColliderComponent implements Component {
    * @param ignoreTags the new tags to ignore
    * @return this
    */
-  public ColliderComponent setIgnoreTags(ColliderTag ...ignoreTags) {
+  public ColliderComponent setIgnoreTags(ColliderTag... ignoreTags) {
     this.ignoreTags = ignoreTags;
 
     return this;
@@ -202,7 +212,7 @@ public class ColliderComponent implements Component {
   /**
    * Calculates the {@link Circle} representation of this collider based on the position.
    *
-   * @param transformComponent  the transform of the {@link technology.sola.ecs.Entity}
+   * @param transformComponent the transform of the {@link technology.sola.ecs.Entity}
    * @return the {@code Circle} representation of this collider
    */
   public Circle asCircle(TransformComponent transformComponent) {
@@ -224,7 +234,7 @@ public class ColliderComponent implements Component {
   /**
    * Calculates the {@link Rectangle} representation of this collider based on the position.
    *
-   * @param transformComponent  the transform of the {@link technology.sola.ecs.Entity}
+   * @param transformComponent the transform of the {@link technology.sola.ecs.Entity}
    * @return the {@code Rectangle} representation of  this collider
    */
   public Rectangle asRectangle(TransformComponent transformComponent) {
@@ -260,9 +270,13 @@ public class ColliderComponent implements Component {
    * Available collider types.
    */
   public enum ColliderType {
-    /** Axis Aligned Bounding Box */
+    /**
+     * Axis Aligned Bounding Box
+     */
     AABB,
-    /** Circle */
+    /**
+     * Circle
+     */
     CIRCLE
   }
 

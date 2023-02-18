@@ -1,6 +1,7 @@
 package technology.sola.engine.physics;
 
 import technology.sola.ecs.Entity;
+import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.math.SolaMath;
@@ -15,19 +16,21 @@ public final class CollisionUtils {
   /**
    * Calculates a {@link CollisionManifold} for two {@link Entity} that collided.
    *
-   * @param entityA    the first Entity
-   * @param entityB    the second Entity
-   * @param transformA the {@link TransformComponent} of the first entity
-   * @param transformB the {@code TransformComponent} of the second entity
-   * @param colliderA  the {@link ColliderComponent} of the first entity
-   * @param colliderB  the {@code ColliderComponent} of the second entity
+   * @param viewEntryA the first Entity in a {@link technology.sola.ecs.view.View2Entry} of {@link ColliderComponent} and {@link TransformComponent}
+   * @param viewEntryB the second Entity in a {@link technology.sola.ecs.view.View2Entry} of {@link ColliderComponent} and {@link TransformComponent}
    * @return the resulting {@code CollisionManifold}
    */
   public static CollisionManifold calculateCollisionManifold(
-    Entity entityA, Entity entityB,
-    TransformComponent transformA, TransformComponent transformB,
-    ColliderComponent colliderA, ColliderComponent colliderB
+    View2Entry<ColliderComponent, TransformComponent> viewEntryA,
+    View2Entry<ColliderComponent, TransformComponent> viewEntryB
   ) {
+    Entity entityA = viewEntryA.entity();
+    Entity entityB = viewEntryB.entity();
+    TransformComponent transformA = viewEntryA.c2();
+    TransformComponent transformB = viewEntryB.c2();
+    ColliderComponent colliderA = viewEntryA.c1();
+    ColliderComponent colliderB = viewEntryB.c1();
+
     return switch (colliderA.getColliderType()) {
       case AABB -> switch (colliderB.getColliderType()) {
         case AABB ->
