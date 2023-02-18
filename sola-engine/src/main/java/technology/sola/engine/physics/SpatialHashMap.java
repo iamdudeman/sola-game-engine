@@ -1,6 +1,8 @@
 package technology.sola.engine.physics;
 
 import technology.sola.ecs.Entity;
+import technology.sola.ecs.view.View2;
+import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
 
@@ -14,18 +16,18 @@ public class SpatialHashMap {
   private static final BucketId[] EMPTY_BUCKET_IDS = new BucketId[0];
   private final int cellSize;
   private final float inverseCellSize;
-  private final Map<BucketId, List<Entity>> entityBuckets = new HashMap<>();
+  private final Map<BucketId, List<View2Entry<ColliderComponent, TransformComponent>>> entityBuckets = new HashMap<>();
 
   /**
    * Creates a SpatialHashMap with cellSize set to twice the max width/height of the largest {@link Entity}.
    *
    * @param entities the list of entities being tracked by the SpatialHashMap
    */
-  public SpatialHashMap(List<Entity> entities) {
-    this.cellSize = calculateAppropriateCellSizeForEntities(entities);
+  public SpatialHashMap(List<View2Entry<ColliderComponent, TransformComponent>> entries) {
+    this.cellSize = calculateAppropriateCellSizeForEntities(entries);
     this.inverseCellSize = 1f / this.cellSize;
 
-    entities.forEach(this::registerEntity);
+    entries.forEach(this::registerEntity);
   }
 
   /**
@@ -34,28 +36,28 @@ public class SpatialHashMap {
    * @param entities the list of entities being tracked by the SpatialHashMap
    * @param cellSize the cell size of the SpatialHashMap
    */
-  public SpatialHashMap(List<Entity> entities, int cellSize) {
-    int minimumCellSize = calculateMinSizeForEntities(entities);
+  public SpatialHashMap(List<View2Entry<ColliderComponent, TransformComponent>> entries, int cellSize) {
+    int minimumCellSize = calculateMinSizeForEntities(entries);
 
     if (cellSize < minimumCellSize)
       throw new IllegalArgumentException("Cell size must be greater than largest object [" + minimumCellSize + "]");
 
     this.cellSize = cellSize;
     this.inverseCellSize = 1f / this.cellSize;
-    entities.forEach(this::registerEntity);
+    entries.forEach(this::registerEntity);
   }
 
   public int getCellSize() {
     return cellSize;
   }
 
-  public List<Entity> getNearbyEntities(Entity entity) {
-    List<Entity> nearbyEntities = new ArrayList<>();
+  public List<View2Entry<ColliderComponent, TransformComponent>> getNearbyEntities(View2Entry<ColliderComponent, TransformComponent> entity) {
+    List<View2Entry<ColliderComponent, TransformComponent>> nearbyEntities = new ArrayList<>();
 
     for (BucketId bucketId : getBucketIdsForEntity(entity)) {
-      List<Entity> bucket = getOrCreateBucket(bucketId);
+      List<View2Entry<ColliderComponent, TransformComponent>> bucket = getOrCreateBucket(bucketId);
 
-      for (Entity entityInBucket : bucket) {
+      for (var entityInBucket : bucket) {
         if (entity != entityInBucket && !nearbyEntities.contains(entityInBucket)) {
           nearbyEntities.add(entityInBucket);
         }
@@ -69,9 +71,9 @@ public class SpatialHashMap {
     return entityBuckets.keySet();
   }
 
-  BucketId[] getBucketIdsForEntity(Entity entity) {
-    TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
-    ColliderComponent colliderComponent = entity.getComponent(ColliderComponent.class);
+  BucketId[] getBucketIdsForEntity(View2Entry<ColliderComponent, TransformComponent> entry) {
+    TransformComponent transformComponent = entry.c2();
+    ColliderComponent colliderComponent = entry.c1();
 
     if (transformComponent == null || colliderComponent == null) return EMPTY_BUCKET_IDS;
 
@@ -88,12 +90,12 @@ public class SpatialHashMap {
     };
   }
 
-  private void registerEntity(Entity entity) {
-    for (BucketId bucketId : getBucketIdsForEntity(entity)) {
-      List<Entity> entityBucket = getOrCreateBucket(bucketId);
+  private void registerEntity(View2Entry<ColliderComponent, TransformComponent> entry) {
+    for (BucketId bucketId : getBucketIdsForEntity(entry)) {
+      List<View2Entry<ColliderComponent, TransformComponent>> entityBucket = getOrCreateBucket(bucketId);
 
-      if (!entityBucket.contains(entity)) {
-        entityBucket.add(entity);
+      if (!entityBucket.contains(entry)) {
+        entityBucket.add(entry);
       }
     }
   }
@@ -102,18 +104,16 @@ public class SpatialHashMap {
     return new BucketId((int) Math.floor(x * inverseCellSize), (int) Math.floor(y * inverseCellSize));
   }
 
-  private List<Entity> getOrCreateBucket(BucketId bucketId) {
+  private List<View2Entry<ColliderComponent, TransformComponent>> getOrCreateBucket(BucketId bucketId) {
     return entityBuckets.computeIfAbsent(bucketId, key -> new ArrayList<>());
   }
 
-  private int calculateMinSizeForEntities(List<Entity> entities) {
+  private int calculateMinSizeForEntities(List<View2Entry<ColliderComponent, TransformComponent>> entries) {
     int minSize = 0;
 
-    for (Entity entity : entities) {
-      ColliderComponent colliderComponent = entity.getComponent(ColliderComponent.class);
-      TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
-
-      if (colliderComponent == null || transformComponent == null) continue;
+    for (var entry : entries) {
+      ColliderComponent colliderComponent = entry.c1();
+      TransformComponent transformComponent = entry.c2();
 
       float newValue = Math.max(
         colliderComponent.getBoundingWidth(transformComponent.getScaleX()),
@@ -128,8 +128,8 @@ public class SpatialHashMap {
     return minSize;
   }
 
-  private int calculateAppropriateCellSizeForEntities(List<Entity> entities) {
-    int maxWidthOrHeight = calculateMinSizeForEntities(entities) * 2;
+  private int calculateAppropriateCellSizeForEntities(List<View2Entry<ColliderComponent, TransformComponent>> entries) {
+    int maxWidthOrHeight = calculateMinSizeForEntities(entries) * 2;
 
     if (maxWidthOrHeight == 0) {
       return Integer.MAX_VALUE;

@@ -63,27 +63,26 @@ public class CollisionDetectionSystem extends EcsSystem {
   public void update(World world, float deltaTime) {
     Set<CollisionManifold> collisionsThisIteration = new HashSet<>();
     Set<CollisionManifold> sensorDetectionsThisIteration = new HashSet<>();
-    List<Entity> entities = world.findEntitiesWithComponents(ColliderComponent.class, TransformComponent.class);
+
+    var viewEntries = world.createView().of(ColliderComponent.class, TransformComponent.class).getEntries();
 
     // TODO consider some sort of clear method for SpatialHashMap
-    spatialHashMap = spatialHashMapCellSize == null ? new SpatialHashMap(entities) : new SpatialHashMap(entities, spatialHashMapCellSize);
+    spatialHashMap = spatialHashMapCellSize == null ? new SpatialHashMap(viewEntries) : new SpatialHashMap(viewEntries, spatialHashMapCellSize);
 
-    for (Entity entityA : entities) {
-      TransformComponent transformA = entityA.getComponent(TransformComponent.class);
-      ColliderComponent colliderA = entityA.getComponent(ColliderComponent.class);
+    for (var entryA : viewEntries) {
+      TransformComponent transformA = entryA.c2();
+      ColliderComponent colliderA = entryA.c1();
 
-      for (Entity entityB : spatialHashMap.getNearbyEntities(entityA)) {
-        TransformComponent transformB = entityB.getComponent(TransformComponent.class);
-        ColliderComponent colliderB = entityB.getComponent(ColliderComponent.class);
+      for (var entryB : spatialHashMap.getNearbyEntities(entryA)) {
+        TransformComponent transformB = entryB.c2();
+        ColliderComponent colliderB = entryB.c1();
 
         if (shouldIgnoreCollision(colliderA, colliderB)) {
           continue;
         }
 
         CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(
-          entityA, entityB,
-          transformA, transformB,
-          colliderA, colliderB
+          entryA, entryB
         );
 
         if (collisionManifold != null) {

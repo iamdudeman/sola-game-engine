@@ -1,6 +1,7 @@
 package technology.sola.engine.physics;
 
 import technology.sola.ecs.Entity;
+import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.math.SolaMath;
@@ -24,10 +25,15 @@ public final class CollisionUtils {
    * @return the resulting {@code CollisionManifold}
    */
   public static CollisionManifold calculateCollisionManifold(
-    Entity entityA, Entity entityB,
-    TransformComponent transformA, TransformComponent transformB,
-    ColliderComponent colliderA, ColliderComponent colliderB
+    View2Entry<ColliderComponent, TransformComponent> entryA, View2Entry<ColliderComponent, TransformComponent> entryB
   ) {
+    Entity entityA = entryA.entity();
+    Entity entityB = entryB.entity();
+    TransformComponent transformA = entryA.c2();
+    TransformComponent transformB = entryB.c2();
+    ColliderComponent colliderA = entryA.c1();
+    ColliderComponent colliderB = entryB.c1();
+
     return switch (colliderA.getColliderType()) {
       case AABB -> switch (colliderB.getColliderType()) {
         case AABB ->
