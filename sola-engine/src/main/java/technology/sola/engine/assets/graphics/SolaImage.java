@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class SolaImage extends Canvas implements Asset {
   private static final int CACHE_SIZE = 10;
-  private final transient Map<String, SolaImage> cachedTransforms = new HashMap<>(CACHE_SIZE + CACHE_SIZE / 3);
+  private final Map<String, SolaImage> cachedTransforms = new HashMap<>(CACHE_SIZE + CACHE_SIZE / 3);
 
   public SolaImage(int width, int height) {
     super(width, height);

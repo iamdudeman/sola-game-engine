@@ -18,8 +18,8 @@ public class SpriteAnimatorComponent implements Component {
   private SpriteKeyFrame[] activeAnimationKeyFrames;
   private boolean animationCompleteCalled = false;
   private AnimationCompleteCallback animationCompleteCallback;
-  private transient float elapsedAnimationTime = 0;
-  private transient float elapsedLoops = 0;
+  private float elapsedAnimationTime = 0;
+  private float elapsedLoops = 0;
 
   public SpriteAnimatorComponent(String activeAnimationId, SpriteKeyFrame... activeAnimationKeyFrames) {
     this(activeAnimationId, CONTINUOUS, activeAnimationKeyFrames);

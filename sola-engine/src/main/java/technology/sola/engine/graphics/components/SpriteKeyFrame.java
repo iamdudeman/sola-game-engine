@@ -11,8 +11,8 @@ public class SpriteKeyFrame {
   private final String spriteSheetId;
   private final String spriteId;
   private final long duration;
-  private final transient AssetHandle<SolaImage> cachedSpriteHandle = new AssetHandle<>();
-  private transient boolean isRequested = false;
+  private final AssetHandle<SolaImage> cachedSpriteHandle = new AssetHandle<>();
+  private boolean isRequested = false;
 
   public SpriteKeyFrame(String spriteSheetId, String spriteId) {
     this(spriteSheetId, spriteId, HOLD);

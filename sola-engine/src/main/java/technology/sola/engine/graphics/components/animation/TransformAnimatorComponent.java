@@ -13,12 +13,12 @@ public class TransformAnimatorComponent implements Component {
   private Float endingScaleY;
   private AnimationCompleteCallback animationCompleteCallback;
 
-  private transient boolean isInit = false;
-  private transient float startingTranslateX;
-  private transient float startingTranslateY;
-  private transient float startingScaleX;
-  private transient float startingScaleY;
-  private transient float elapsedTime = 0;
+  private boolean isInit = false;
+  private float startingTranslateX;
+  private float startingTranslateY;
+  private float startingScaleX;
+  private float startingScaleY;
+  private float elapsedTime = 0;
 
   public TransformAnimatorComponent setAnimationCompleteCallback(AnimationCompleteCallback animationCompleteCallback) {
     this.animationCompleteCallback = animationCompleteCallback;
