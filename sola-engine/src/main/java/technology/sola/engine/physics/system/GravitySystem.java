@@ -24,7 +24,7 @@ public class GravitySystem extends EcsSystem {
 
   @Override
   public void update(World world, float deltaTime) {
-    for (var view : world.createView().of(DynamicBodyComponent.class)) {
+    for (var view : world.createView().of(DynamicBodyComponent.class).getEntries()) {
       DynamicBodyComponent dynamicBodyComponent = view.c1();
 
       if (!dynamicBodyComponent.isGrounded() && !dynamicBodyComponent.isKinematic()) {

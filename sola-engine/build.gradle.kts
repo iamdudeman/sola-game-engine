@@ -1,5 +1,6 @@
 dependencies {
-  api("com.github.iamdudeman:sola-ecs:2.0.6")
+  // todo replace with version instead of commit hash when it is published
+  api("com.github.iamdudeman:sola-ecs:72b900f020")
 }
 
 publishing {

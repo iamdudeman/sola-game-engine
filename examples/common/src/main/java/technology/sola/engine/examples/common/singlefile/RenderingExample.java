@@ -111,6 +111,7 @@ public class RenderingExample extends Sola {
     @Override
     public void update(World world, float deltaTime) {
       world.createView().of(TransformComponent.class, MovingComponent.class)
+        .getEntries()
         .forEach(view -> {
           TransformComponent transform = view.c1();
 
@@ -131,7 +132,6 @@ public class RenderingExample extends Sola {
       final float maxSize = 50;
 
       TransformComponent dynamicScalingEntityTransformComponent = world.findEntityByName("dynamicScaling")
-        .orElseThrow()
         .getComponent(TransformComponent.class);
 
       if (keyboardInput.isKeyHeld(Key.A)) {

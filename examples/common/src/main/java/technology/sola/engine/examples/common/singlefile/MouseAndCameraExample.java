@@ -60,7 +60,7 @@ public class MouseAndCameraExample extends SolaWithDefaults {
 
     @Override
     public void update(World world, float deltaTime) {
-      var camera = world.findEntityByName("camera").orElseThrow();
+      var camera = world.findEntityByName("camera");
       var cameraTransform = camera.getComponent(TransformComponent.class);
 
       if (mouseInput.isMouseClicked(MouseButton.PRIMARY)) {

@@ -46,12 +46,15 @@ public class SimplePlatformerExample extends SolaWithDefaults {
   private class GameDoneEventListener implements EventListener<CollisionEvent> {
     private final Function<Entity, Boolean> checkForPlayer = entity -> "player".equals(entity.getName());
     private final Function<Entity, Boolean> checkForFinalBlock = entity -> "finalBlock".equals(entity.getName());
-    private final BiConsumer<Entity, Entity> collisionResolver = (player, finalBlock) ->
-      solaEcs.getWorld().findEntityByName("confetti").ifPresent(entity -> {
+    private final BiConsumer<Entity, Entity> collisionResolver = (player, finalBlock) -> {
+      Entity entity = solaEcs.getWorld().findEntityByName("confetti");
+
+      if (entity != null) {
         entity.setDisabled(false);
         finalBlock.getComponent(ColliderComponent.class).setTags(ColliderTags.IGNORE);
         eventHub.remove(CollisionEvent.class, this);
-      });
+      }
+    };
 
     @Override
     public void onEvent(CollisionEvent event) {
@@ -148,6 +151,7 @@ public class SimplePlatformerExample extends SolaWithDefaults {
     @Override
     public void update(World world, float deltaTime) {
       world.createView().of(MovingPlatformComponent.class, DynamicBodyComponent.class)
+        .getEntries()
         .forEach(view -> {
           MovingPlatformComponent movingPlatformComponent = view.c1();
           DynamicBodyComponent velocityComponent = view.c2();
@@ -185,6 +189,7 @@ public class SimplePlatformerExample extends SolaWithDefaults {
     @Override
     public void update(World world, float deltaTime) {
       world.createView().of(GlassComponent.class)
+        .getEntries()
         .forEach(view -> view.entity().removeComponent(BlendModeComponent.class));
 
       entitiesToMakeTransparent.forEach(entity -> entity.addComponent(new BlendModeComponent(BlendMode.NORMAL)));
@@ -196,6 +201,7 @@ public class SimplePlatformerExample extends SolaWithDefaults {
     @Override
     public void update(World world, float deltaTime) {
       world.createView().of(PlayerComponent.class, DynamicBodyComponent.class)
+        .getEntries()
         .forEach(view -> {
           DynamicBodyComponent dynamicBodyComponent = view.c2();
 

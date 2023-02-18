@@ -117,7 +117,7 @@ public class TransformComponent implements Component {
   @Override
   public void afterDeserialize(World world) {
     if (parentUniqueId != null) {
-      world.findEntityByUniqueId(parentUniqueId).ifPresent(this::setParent);
+      setParent(world.findEntityByUniqueId(parentUniqueId));
     }
   }
 

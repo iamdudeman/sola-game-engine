@@ -65,8 +65,10 @@ public class NetworkingExample extends SolaWithDefaults {
 
     @Override
     public void update(World world, float deltaTime) {
-      world.findEntityByUniqueId("" + clientPlayerId).ifPresent(entity -> {
-        TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
+      Entity clientPlayerEntity = world.findEntityByUniqueId("" + clientPlayerId);
+
+      if (clientPlayerEntity != null) {
+        TransformComponent transformComponent = clientPlayerEntity.getComponent(TransformComponent.class);
 
         if (keyboardInput.isKeyHeld(Key.W)) {
           transformComponent.setY(transformComponent.getY() - MOVEMENT);
@@ -84,7 +86,7 @@ public class NetworkingExample extends SolaWithDefaults {
         if (platform.getSocketClient().isConnected()) {
           platform.getSocketClient().sendMessage(new PlayerUpdateMessage(clientPlayerId, transformComponent.getTranslate()));
         }
-      });
+      }
     }
   }
 
@@ -118,21 +120,26 @@ public class NetworkingExample extends SolaWithDefaults {
           }
           case PLAYER_REMOVED -> {
             PlayerRemovedMessage playerRemovedMessage = PlayerRemovedMessage.parse(socketMessage);
+            Entity playerEntity = solaEcs.getWorld().findEntityByUniqueId("" + playerRemovedMessage.getClientPlayerId());
 
-            solaEcs.getWorld().findEntityByUniqueId("" + playerRemovedMessage.getClientPlayerId())
-              .ifPresent(Entity::destroy);
+            if (playerEntity != null) {
+              playerEntity.destroy();
+            }
           }
           case PLAYER_UPDATE -> {
             PlayerUpdateMessage playerUpdateMessage = PlayerUpdateMessage.parse(socketMessage);
+            String playerId = "" + playerUpdateMessage.getClientPlayerId();
+            Entity playerEntity = solaEcs.getWorld().findEntityByUniqueId(playerId);
 
-            solaEcs.getWorld().findEntityByUniqueId("" + playerUpdateMessage.getClientPlayerId())
-              .ifPresentOrElse(entity ->
-                  entity.getComponent(TransformComponent.class).setTranslate(playerUpdateMessage.getPosition()),
-                () -> solaEcs.getWorld().createEntity(
-                  "" + playerUpdateMessage.getClientPlayerId(), "player-" + playerUpdateMessage.getClientPlayerId(),
-                  new TransformComponent(playerUpdateMessage.getPosition().x(), playerUpdateMessage.getPosition().y(), 25),
-                  new CircleRendererComponent(Color.WHITE, true)
-                ));
+            if (playerEntity == null) {
+              solaEcs.getWorld().createEntity(
+                playerId, "player-" + playerId,
+                new TransformComponent(playerUpdateMessage.getPosition().x(), playerUpdateMessage.getPosition().y(), 25),
+                new CircleRendererComponent(Color.WHITE, true)
+              );
+            } else {
+              playerEntity.getComponent(TransformComponent.class).setTranslate(playerUpdateMessage.getPosition());
+            }
           }
         }
       }
