@@ -6,11 +6,7 @@ import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 
-import java.io.Serial;
-
 public class SpriteComponent implements Component {
-  @Serial
-  private static final long serialVersionUID = 5969143866970628671L;
   private SpriteKeyFrame spriteKeyFrame;
 
   public SpriteComponent(String spriteSheetId, String spriteId) {

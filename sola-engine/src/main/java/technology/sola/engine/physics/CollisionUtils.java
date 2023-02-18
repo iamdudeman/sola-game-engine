@@ -8,49 +8,40 @@ import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
+/**
+ * The CollisionUtils class is a collection of various methods that help in collision detection and resolution.
+ */
 public final class CollisionUtils {
+  /**
+   * Calculates a {@link CollisionManifold} for two {@link Entity} that collided.
+   *
+   * @param entityA    the first Entity
+   * @param entityB    the second Entity
+   * @param transformA the {@link TransformComponent} of the first entity
+   * @param transformB the {@code TransformComponent} of the second entity
+   * @param colliderA  the {@link ColliderComponent} of the first entity
+   * @param colliderB  the {@code ColliderComponent} of the second entity
+   * @return the resulting {@code CollisionManifold}
+   */
   public static CollisionManifold calculateCollisionManifold(
     Entity entityA, Entity entityB,
     TransformComponent transformA, TransformComponent transformB,
     ColliderComponent colliderA, ColliderComponent colliderB
   ) {
-    switch (colliderA.getColliderType()) {
-      case AABB:
-        switch (colliderB.getColliderType()) {
-          case AABB -> {
-            Rectangle rectangleA = colliderA.asRectangle(transformA);
-            Rectangle rectangleB = colliderB.asRectangle(transformB);
-            return calculateAABBVsAABB(entityA, entityB, rectangleA, rectangleB);
-          }
-          case CIRCLE -> {
-            Rectangle rectangle = colliderA.asRectangle(transformA);
-            Circle circle = colliderB.asCircle(transformB);
-            return calculateAABBVsCircle(entityA, entityB, rectangle, circle);
-          }
-          default -> {
-          }
-        }
-        break;
-      case CIRCLE:
-        switch (colliderB.getColliderType()) {
-          case AABB -> {
-            Rectangle rectangle = colliderB.asRectangle(transformB);
-            Circle circle = colliderA.asCircle(transformA);
-            return calculateAABBVsCircle(entityB, entityA, rectangle, circle);
-          }
-          case CIRCLE -> {
-            Circle circleA = colliderA.asCircle(transformA);
-            Circle circleB = colliderB.asCircle(transformB);
-            return calculateCircleVsCircle(entityA, entityB, circleA, circleB);
-          }
-          default -> {
-          }
-        }
-        break;
-      default:
-    }
-
-    return null;
+    return switch (colliderA.getColliderType()) {
+      case AABB -> switch (colliderB.getColliderType()) {
+        case AABB ->
+          calculateAABBVsAABB(entityA, entityB, colliderA.asRectangle(transformA), colliderB.asRectangle(transformB));
+        case CIRCLE ->
+          calculateAABBVsCircle(entityA, entityB, colliderA.asRectangle(transformA), colliderB.asCircle(transformB));
+      };
+      case CIRCLE -> switch (colliderB.getColliderType()) {
+        case AABB ->
+          calculateAABBVsCircle(entityB, entityA, colliderB.asRectangle(transformB), colliderA.asCircle(transformA));
+        case CIRCLE ->
+          calculateCircleVsCircle(entityA, entityB, colliderA.asCircle(transformA), colliderB.asCircle(transformB));
+      };
+    };
   }
 
   private static CollisionManifold calculateAABBVsCircle(

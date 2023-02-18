@@ -2,6 +2,8 @@ package technology.sola.engine.defaults.graphics.modules;
 
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
+import technology.sola.ecs.view.View;
+import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -13,13 +15,11 @@ import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
-import java.util.List;
-
 /**
  * DebugGraphicsModule is a {@link SolaGraphicsModule} implementation for rendering debug information for a {@link World}.
  * It will render spacial hashmap boundaries and colliders for {@link Entity} that have a {@link ColliderComponent}.
  */
-public class DebugGraphicsModule extends SolaGraphicsModule {
+public class DebugGraphicsModule extends SolaGraphicsModule<View2Entry<ColliderComponent, TransformComponent>> {
   private final CollisionDetectionSystem collisionDetectionSystem;
 
   public DebugGraphicsModule() {
@@ -36,8 +36,8 @@ public class DebugGraphicsModule extends SolaGraphicsModule {
   }
 
   @Override
-  public List<Entity> getEntitiesToRender(World world) {
-    return world.findEntitiesWithComponents(ColliderComponent.class, TransformComponent.class);
+  public View<View2Entry<ColliderComponent, TransformComponent>> getViewToRender(World world) {
+    return world.createView().of(ColliderComponent.class, TransformComponent.class);
   }
 
   @Override
@@ -59,9 +59,9 @@ public class DebugGraphicsModule extends SolaGraphicsModule {
   }
 
   @Override
-  public void renderMethod(Renderer renderer, Entity entity, TransformComponent cameraModifiedEntityTransform) {
+  public void renderMethod(Renderer renderer, View2Entry<ColliderComponent, TransformComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
     Vector2D transform = cameraModifiedEntityTransform.getTranslate();
-    ColliderComponent colliderComponent = entity.getComponent(ColliderComponent.class);
+    ColliderComponent colliderComponent = viewEntry.c1();
 
     if (ColliderComponent.ColliderType.CIRCLE.equals(colliderComponent.getColliderType())) {
       Circle circle = colliderComponent.asCircle(cameraModifiedEntityTransform);

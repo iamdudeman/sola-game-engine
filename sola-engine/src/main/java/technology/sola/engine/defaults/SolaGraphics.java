@@ -118,6 +118,7 @@ public class SolaGraphics {
   private TransformComponent getCameraTransform() {
     var cameraViews = solaEcs.getWorld()
       .createView().of(TransformComponent.class, CameraComponent.class)
+      .getEntries()
       .stream()
       .sorted(Comparator.comparingInt(view -> view.c2().getPriority()))
       .toList();

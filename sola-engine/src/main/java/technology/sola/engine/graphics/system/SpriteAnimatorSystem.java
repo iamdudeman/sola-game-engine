@@ -9,6 +9,7 @@ public class SpriteAnimatorSystem extends EcsSystem {
   @Override
   public void update(World world, float deltaTime) {
     world.createView().of(SpriteComponent.class, SpriteAnimatorComponent.class)
+      .getEntries()
       .forEach(view -> {
         SpriteComponent spriteComponent = view.c1();
         SpriteAnimatorComponent spriteAnimatorComponent = view.c2();

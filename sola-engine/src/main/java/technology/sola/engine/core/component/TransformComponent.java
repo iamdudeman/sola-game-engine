@@ -5,14 +5,10 @@ import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.math.linear.Vector2D;
 
-import java.io.Serial;
-
 /**
  * TransformComponent is a {@link Component} containing translate and scale data for an {@link Entity}.
  */
 public class TransformComponent implements Component {
-  @Serial
-  private static final long serialVersionUID = -1810768571143367371L;
   private float x;
   private float y;
   private float scaleX;
@@ -117,7 +113,7 @@ public class TransformComponent implements Component {
   @Override
   public void afterDeserialize(World world) {
     if (parentUniqueId != null) {
-      world.findEntityByUniqueId(parentUniqueId).ifPresent(this::setParent);
+      setParent(world.findEntityByUniqueId(parentUniqueId));
     }
   }
 

@@ -3,15 +3,12 @@ package technology.sola.engine.graphics.components.animation;
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.components.SpriteKeyFrame;
 
-import java.io.Serial;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SpriteAnimatorComponent implements Component {
   public static final int CONTINUOUS = -1;
 
-  @Serial
-  private static final long serialVersionUID = 8265042463767128400L;
   private final Map<String, SpriteKeyFrame[]> animationMap = new HashMap<>();
   private final Map<String, Integer> animationLoopsMap = new HashMap<>();
   private int keyFrameIndex = 0;
@@ -21,8 +18,8 @@ public class SpriteAnimatorComponent implements Component {
   private SpriteKeyFrame[] activeAnimationKeyFrames;
   private boolean animationCompleteCalled = false;
   private AnimationCompleteCallback animationCompleteCallback;
-  private transient float elapsedAnimationTime = 0;
-  private transient float elapsedLoops = 0;
+  private float elapsedAnimationTime = 0;
+  private float elapsedLoops = 0;
 
   public SpriteAnimatorComponent(String activeAnimationId, SpriteKeyFrame... activeAnimationKeyFrames) {
     this(activeAnimationId, CONTINUOUS, activeAnimationKeyFrames);

@@ -4,12 +4,7 @@ import technology.sola.ecs.Component;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.math.EasingFunction;
 
-import java.io.Serial;
-
 public class TransformAnimatorComponent implements Component {
-  @Serial
-  private static final long serialVersionUID = 1002749182938133802L;
-
   private final EasingFunction easingFunction;
   private final long duration;
   private Float endingTranslateX;
@@ -18,12 +13,12 @@ public class TransformAnimatorComponent implements Component {
   private Float endingScaleY;
   private AnimationCompleteCallback animationCompleteCallback;
 
-  private transient boolean isInit = false;
-  private transient float startingTranslateX;
-  private transient float startingTranslateY;
-  private transient float startingScaleX;
-  private transient float startingScaleY;
-  private transient float elapsedTime = 0;
+  private boolean isInit = false;
+  private float startingTranslateX;
+  private float startingTranslateY;
+  private float startingScaleX;
+  private float startingScaleY;
+  private float elapsedTime = 0;
 
   public TransformAnimatorComponent setAnimationCompleteCallback(AnimationCompleteCallback animationCompleteCallback) {
     this.animationCompleteCallback = animationCompleteCallback;
