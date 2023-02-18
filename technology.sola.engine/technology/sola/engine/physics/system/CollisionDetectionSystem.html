@@ -80,6 +80,10 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">CollisionDetectionSystem</span>
 <span class="extends-implements">extends technology.sola.ecs.EcsSystem</span></div>
+<div class="block">The CollisionDetectionSystem class is a <code>EcsSystem</code> implementation that handles checking if a <code>World</code>
+ has any <code>Entity</code> with <a href="../component/ColliderComponent.html" title="class in technology.sola.engine.physics.component"><code>ColliderComponent</code></a>s that are colliding with each other. If a
+ collision is detected either a <a href="../event/SensorEvent.html" title="class in technology.sola.engine.physics.event"><code>SensorEvent</code></a> or a <a href="../event/CollisionEvent.html" title="class in technology.sola.engine.physics.event"><code>CollisionEvent</code></a> will be emitted depending on if either
+ collider <a href="../component/ColliderComponent.html#isSensor()"><code>ColliderComponent.isSensor()</code></a> or not.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -94,7 +98,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static final int</code></div>
 <div class="col-second even-row-color"><code><a href="#ORDER" class="member-name-link">ORDER</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Collision detection order is one after the <a href="PhysicsSystem.html#ORDER"><code>PhysicsSystem.ORDER</code></a>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -133,11 +139,11 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrder()" class="member-name-link">getOrder</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSpacialHashMapCellSize()" class="member-name-link">getSpacialHashMapCellSize</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../SpatialHashMap.BucketId.html" title="class in technology.sola.engine.physics">SpatialHashMap.BucketId</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSpacialHashMapBucketIds()" class="member-name-link">getSpacialHashMapBucketIds</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../SpatialHashMap.BucketId.html" title="class in technology.sola.engine.physics">SpatialHashMap.BucketId</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSpacialHashMapEntityBuckets()" class="member-name-link">getSpacialHashMapEntityBuckets</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSpacialHashMapCellSize()" class="member-name-link">getSpacialHashMapCellSize</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#update(technology.sola.ecs.World,float)" class="member-name-link">update</a><wbr>(technology.sola.ecs.World&nbsp;world,
@@ -167,6 +173,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="ORDER">
 <h3>ORDER</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">ORDER</span></div>
+<div class="block">Collision detection order is one after the <a href="PhysicsSystem.html#ORDER"><code>PhysicsSystem.ORDER</code></a>.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -222,12 +229,20 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getSpacialHashMapCellSize()">
 <h3>getSpacialHashMapCellSize</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getSpacialHashMapCellSize</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the size of the internal <a href="../SpatialHashMap.html" title="class in technology.sola.engine.physics"><code>SpatialHashMap</code></a> cell size</dd>
+</dl>
 </section>
 </li>
 <li>
-<section class="detail" id="getSpacialHashMapEntityBuckets()">
-<h3>getSpacialHashMapEntityBuckets</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../SpatialHashMap.BucketId.html" title="class in technology.sola.engine.physics">SpatialHashMap.BucketId</a>&gt;</span>&nbsp;<span class="element-name">getSpacialHashMapEntityBuckets</span>()</div>
+<section class="detail" id="getSpacialHashMapBucketIds()">
+<h3>getSpacialHashMapBucketIds</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../SpatialHashMap.BucketId.html" title="class in technology.sola.engine.physics">SpatialHashMap.BucketId</a>&gt;</span>&nbsp;<span class="element-name">getSpacialHashMapBucketIds</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the set of the internal <a href="../SpatialHashMap.BucketId.html" title="class in technology.sola.engine.physics"><code>SpatialHashMap.BucketId</code></a>s</dd>
+</dl>
 </section>
 </li>
 <li>

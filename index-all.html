@@ -55,7 +55,9 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#A" class="member-name-link">A</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html#aabb()" class="member-name-link">aabb()</a> - Static method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a rectangle <a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component"><code>ColliderComponent</code></a> with a width and height of 1.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html#aabb(float,float)" class="member-name-link">aabb(float, float)</a> - Static method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a></dt>
 <dd>
 <div class="block">Creates a rectangle <a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component"><code>ColliderComponent</code></a> with defined width and height.</div>
@@ -286,7 +288,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElementContainer.html#calculateChildRequiredVerticalSpace(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">calculateChildRequiredVerticalSpace(GuiElement&lt;?&gt;)</a> - Method in class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElementContainer.html" title="class in technology.sola.engine.graphics.gui">GuiElementContainer</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/CollisionUtils.html#calculateCollisionManifold(technology.sola.ecs.Entity,technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,technology.sola.engine.core.component.TransformComponent,technology.sola.engine.physics.component.ColliderComponent,technology.sola.engine.physics.component.ColliderComponent)" class="member-name-link">calculateCollisionManifold(Entity, Entity, TransformComponent, TransformComponent, ColliderComponent, ColliderComponent)</a> - Static method in class technology.sola.engine.physics.<a href="technology.sola.engine/technology/sola/engine/physics/CollisionUtils.html" title="class in technology.sola.engine.physics">CollisionUtils</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/CollisionUtils.html#calculateCollisionManifold(technology.sola.ecs.view.View2Entry,technology.sola.ecs.view.View2Entry)" class="member-name-link">calculateCollisionManifold(View2Entry&lt;ColliderComponent, TransformComponent&gt;, View2Entry&lt;ColliderComponent, TransformComponent&gt;)</a> - Static method in class technology.sola.engine.physics.<a href="technology.sola.engine/technology/sola/engine/physics/CollisionUtils.html" title="class in technology.sola.engine.physics">CollisionUtils</a></dt>
 <dd>
 <div class="block">Calculates a <a href="technology.sola.engine/technology/sola/engine/physics/CollisionManifold.html" title="class in technology.sola.engine.physics"><code>CollisionManifold</code></a> for two <code>Entity</code> that collided.</div>
 </dd>
@@ -323,7 +325,9 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElementContainer.html#children" class="member-name-link">children</a> - Variable in class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElementContainer.html" title="class in technology.sola.engine.graphics.gui">GuiElementContainer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html#circle()" class="member-name-link">circle()</a> - Static method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a circle <a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component"><code>ColliderComponent</code></a> with a radius of 0.5.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html#circle(float)" class="member-name-link">circle(float)</a> - Static method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a></dt>
 <dd>
 <div class="block">Creates a circle <a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component"><code>ColliderComponent</code></a> with defined radius.</div>
@@ -386,7 +390,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Available collider types.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/system/CollisionDetectionSystem.html" class="type-name-link" title="class in technology.sola.engine.physics.system">CollisionDetectionSystem</a> - Class in <a href="technology.sola.engine/technology/sola/engine/physics/system/package-summary.html">technology.sola.engine.physics.system</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">The CollisionDetectionSystem class is a <code>EcsSystem</code> implementation that handles checking if a <code>World</code>
+ has any <code>Entity</code> with <a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component"><code>ColliderComponent</code></a>s that are colliding with each other.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/system/CollisionDetectionSystem.html#%3Cinit%3E(technology.sola.engine.event.EventHub)" class="member-name-link">CollisionDetectionSystem(EventHub)</a> - Constructor for class technology.sola.engine.physics.system.<a href="technology.sola.engine/technology/sola/engine/physics/system/CollisionDetectionSystem.html" title="class in technology.sola.engine.physics.system">CollisionDetectionSystem</a></dt>
 <dd>
 <div class="block">Creates a CollisionDetectionSystem that allows the internal spacial hash map to determine a good cell size based on
@@ -994,6 +1001,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Gets the width of the bounding box around this collider.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html#getBucketIds()" class="member-name-link">getBucketIds()</a> - Method in class technology.sola.engine.physics.<a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html" title="class in technology.sola.engine.physics">SpatialHashMap</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html#getCellSize()" class="member-name-link">getCellSize()</a> - Method in class technology.sola.engine.physics.<a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html" title="class in technology.sola.engine.physics">SpatialHashMap</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElementContainer.html#getChildren()" class="member-name-link">getChildren()</a> - Method in class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElementContainer.html" title="class in technology.sola.engine.graphics.gui">GuiElementContainer</a></dt>
@@ -1055,8 +1064,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/SolaGuiDocument.html#getElementById(java.lang.String)" class="member-name-link">getElementById(String)</a> - Method in class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/SolaGuiDocument.html" title="class in technology.sola.engine.graphics.gui">SolaGuiDocument</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/SolaGuiDocument.html#getElementById(java.lang.String,java.lang.Class)" class="member-name-link">getElementById(String, Class&lt;T&gt;)</a> - Method in class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/SolaGuiDocument.html" title="class in technology.sola.engine.graphics.gui">SolaGuiDocument</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html#getEntityBucketIds()" class="member-name-link">getEntityBucketIds()</a> - Method in class technology.sola.engine.physics.<a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html" title="class in technology.sola.engine.physics">SpatialHashMap</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/networking/NetworkQueue.html#getFirst()" class="member-name-link">getFirst()</a> - Method in class technology.sola.engine.networking.<a href="technology.sola.engine/technology/sola/engine/networking/NetworkQueue.html" title="class in technology.sola.engine.networking">NetworkQueue</a></dt>
 <dd>&nbsp;</dd>
@@ -1154,8 +1161,11 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#getName()" class="member-name-link">getName()</a> - Method in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html#getNearbyEntities(technology.sola.ecs.Entity)" class="member-name-link">getNearbyEntities(Entity)</a> - Method in class technology.sola.engine.physics.<a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html" title="class in technology.sola.engine.physics">SpatialHashMap</a></dt>
-<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html#getNearbyViewEntries(technology.sola.ecs.view.View2Entry)" class="member-name-link">getNearbyViewEntries(View2Entry&lt;ColliderComponent, TransformComponent&gt;)</a> - Method in class technology.sola.engine.physics.<a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html" title="class in technology.sola.engine.physics">SpatialHashMap</a></dt>
+<dd>
+<div class="block">Returns a list of <code>ViewEntry</code> containing an Entity that is in the same bucket as the
+ entity to check.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketClient.html#getNetworkQueue()" class="member-name-link">getNetworkQueue()</a> - Method in interface technology.sola.engine.networking.socket.<a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket">SocketClient</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/AssetLoader.html#getNewAsset(java.lang.String,java.lang.String)" class="member-name-link">getNewAsset(String, String)</a> - Method in class technology.sola.engine.assets.<a href="technology.sola.engine/technology/sola/engine/assets/AssetLoader.html" title="class in technology.sola.engine.assets">AssetLoader</a></dt>
@@ -1244,9 +1254,9 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#getSocketClient()" class="member-name-link">getSocketClient()</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/system/CollisionDetectionSystem.html#getSpacialHashMapCellSize()" class="member-name-link">getSpacialHashMapCellSize()</a> - Method in class technology.sola.engine.physics.system.<a href="technology.sola.engine/technology/sola/engine/physics/system/CollisionDetectionSystem.html" title="class in technology.sola.engine.physics.system">CollisionDetectionSystem</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/system/CollisionDetectionSystem.html#getSpacialHashMapBucketIds()" class="member-name-link">getSpacialHashMapBucketIds()</a> - Method in class technology.sola.engine.physics.system.<a href="technology.sola.engine/technology/sola/engine/physics/system/CollisionDetectionSystem.html" title="class in technology.sola.engine.physics.system">CollisionDetectionSystem</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/system/CollisionDetectionSystem.html#getSpacialHashMapEntityBuckets()" class="member-name-link">getSpacialHashMapEntityBuckets()</a> - Method in class technology.sola.engine.physics.system.<a href="technology.sola.engine/technology/sola/engine/physics/system/CollisionDetectionSystem.html" title="class in technology.sola.engine.physics.system">CollisionDetectionSystem</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/system/CollisionDetectionSystem.html#getSpacialHashMapCellSize()" class="member-name-link">getSpacialHashMapCellSize()</a> - Method in class technology.sola.engine.physics.system.<a href="technology.sola.engine/technology/sola/engine/physics/system/CollisionDetectionSystem.html" title="class in technology.sola.engine.physics.system">CollisionDetectionSystem</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/SpriteSheet.html#getSprite(java.lang.String)" class="member-name-link">getSprite(String)</a> - Method in class technology.sola.engine.assets.graphics.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics">SpriteSheet</a></dt>
 <dd>&nbsp;</dd>
@@ -1973,7 +1983,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Color constant - rgb(255, 165, 0).</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/system/CollisionDetectionSystem.html#ORDER" class="member-name-link">ORDER</a> - Static variable in class technology.sola.engine.physics.system.<a href="technology.sola.engine/technology/sola/engine/physics/system/CollisionDetectionSystem.html" title="class in technology.sola.engine.physics.system">CollisionDetectionSystem</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Collision detection order is one after the <a href="technology.sola.engine/technology/sola/engine/physics/system/PhysicsSystem.html#ORDER"><code>PhysicsSystem.ORDER</code></a>.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/system/GravitySystem.html#ORDER" class="member-name-link">ORDER</a> - Static variable in class technology.sola.engine.physics.system.<a href="technology.sola.engine/technology/sola/engine/physics/system/GravitySystem.html" title="class in technology.sola.engine.physics.system">GravitySystem</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/system/ImpulseCollisionResolutionSystem.html#ORDER" class="member-name-link">ORDER</a> - Static variable in class technology.sola.engine.physics.system.<a href="technology.sola.engine/technology/sola/engine/physics/system/ImpulseCollisionResolutionSystem.html" title="class in technology.sola.engine.physics.system">ImpulseCollisionResolutionSystem</a></dt>
@@ -2678,12 +2690,15 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#SPACE" class="member-name-link">SPACE</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html" class="type-name-link" title="class in technology.sola.engine.physics">SpatialHashMap</a> - Class in <a href="technology.sola.engine/technology/sola/engine/physics/package-summary.html">technology.sola.engine.physics</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html#%3Cinit%3E(java.util.List)" class="member-name-link">SpatialHashMap(List&lt;Entity&gt;)</a> - Constructor for class technology.sola.engine.physics.<a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html" title="class in technology.sola.engine.physics">SpatialHashMap</a></dt>
+<dd>
+<div class="block">The SpacialHashMap class is a spacial hashmap implementation that maps <code>Entity</code> into a
+ bucket with other entities based on its 2D coordinate.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html#%3Cinit%3E(java.util.List)" class="member-name-link">SpatialHashMap(List&lt;View2Entry&lt;ColliderComponent, TransformComponent&gt;&gt;)</a> - Constructor for class technology.sola.engine.physics.<a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html" title="class in technology.sola.engine.physics">SpatialHashMap</a></dt>
 <dd>
 <div class="block">Creates a SpatialHashMap with cellSize set to twice the max width/height of the largest <code>Entity</code>.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html#%3Cinit%3E(java.util.List,int)" class="member-name-link">SpatialHashMap(List&lt;Entity&gt;, int)</a> - Constructor for class technology.sola.engine.physics.<a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html" title="class in technology.sola.engine.physics">SpatialHashMap</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html#%3Cinit%3E(java.util.List,int)" class="member-name-link">SpatialHashMap(List&lt;View2Entry&lt;ColliderComponent, TransformComponent&gt;&gt;, int)</a> - Constructor for class technology.sola.engine.physics.<a href="technology.sola.engine/technology/sola/engine/physics/SpatialHashMap.html" title="class in technology.sola.engine.physics">SpatialHashMap</a></dt>
 <dd>
 <div class="block">Creates a SpatialHashMap with desired cell size.</div>
 </dd>

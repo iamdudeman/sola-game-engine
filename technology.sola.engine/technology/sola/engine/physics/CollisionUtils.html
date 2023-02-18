@@ -94,12 +94,8 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CollisionManifold.html" title="class in technology.sola.engine.physics">CollisionManifold</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#calculateCollisionManifold(technology.sola.ecs.Entity,technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,technology.sola.engine.core.component.TransformComponent,technology.sola.engine.physics.component.ColliderComponent,technology.sola.engine.physics.component.ColliderComponent)" class="member-name-link">calculateCollisionManifold</a><wbr>(technology.sola.ecs.Entity&nbsp;entityA,
- technology.sola.ecs.Entity&nbsp;entityB,
- <a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformA,
- <a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformB,
- <a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>&nbsp;colliderA,
- <a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>&nbsp;colliderB)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#calculateCollisionManifold(technology.sola.ecs.view.View2Entry,technology.sola.ecs.view.View2Entry)" class="member-name-link">calculateCollisionManifold</a><wbr>(technology.sola.ecs.view.View2Entry&lt;<a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&nbsp;viewEntryA,
+ technology.sola.ecs.view.View2Entry&lt;<a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&nbsp;viewEntryB)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Calculates a <a href="CollisionManifold.html" title="class in technology.sola.engine.physics"><code>CollisionManifold</code></a> for two <code>Entity</code> that collided.</div>
 </div>
@@ -121,23 +117,15 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="calculateCollisionManifold(technology.sola.ecs.Entity,technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,technology.sola.engine.core.component.TransformComponent,technology.sola.engine.physics.component.ColliderComponent,technology.sola.engine.physics.component.ColliderComponent)">
+<section class="detail" id="calculateCollisionManifold(technology.sola.ecs.view.View2Entry,technology.sola.ecs.view.View2Entry)">
 <h3>calculateCollisionManifold</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="CollisionManifold.html" title="class in technology.sola.engine.physics">CollisionManifold</a></span>&nbsp;<span class="element-name">calculateCollisionManifold</span><wbr><span class="parameters">(technology.sola.ecs.Entity&nbsp;entityA,
- technology.sola.ecs.Entity&nbsp;entityB,
- <a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformA,
- <a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformB,
- <a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>&nbsp;colliderA,
- <a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>&nbsp;colliderB)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="CollisionManifold.html" title="class in technology.sola.engine.physics">CollisionManifold</a></span>&nbsp;<span class="element-name">calculateCollisionManifold</span><wbr><span class="parameters">(technology.sola.ecs.view.View2Entry&lt;<a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&nbsp;viewEntryA,
+ technology.sola.ecs.view.View2Entry&lt;<a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&nbsp;viewEntryB)</span></div>
 <div class="block">Calculates a <a href="CollisionManifold.html" title="class in technology.sola.engine.physics"><code>CollisionManifold</code></a> for two <code>Entity</code> that collided.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>entityA</code> - the first Entity</dd>
-<dd><code>entityB</code> - the second Entity</dd>
-<dd><code>transformA</code> - the <a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> of the first entity</dd>
-<dd><code>transformB</code> - the <code>TransformComponent</code> of the second entity</dd>
-<dd><code>colliderA</code> - the <a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component"><code>ColliderComponent</code></a> of the first entity</dd>
-<dd><code>colliderB</code> - the <code>ColliderComponent</code> of the second entity</dd>
+<dd><code>viewEntryA</code> - the first Entity in a <code>View2Entry</code> of <a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component"><code>ColliderComponent</code></a> and <a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a></dd>
+<dd><code>viewEntryB</code> - the second Entity in a <code>View2Entry</code> of <a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component"><code>ColliderComponent</code></a> and <a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a></dd>
 <dt>Returns:</dt>
 <dd>the resulting <code>CollisionManifold</code></dd>
 </dl>

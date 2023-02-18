@@ -78,6 +78,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SpatialHashMap</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">The SpacialHashMap class is a spacial hashmap implementation that maps <code>Entity</code> into a
+ bucket with other entities based on its 2D coordinate. This helps reduce the number of collision checks that are
+ needed during broad phase collision detection.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -104,11 +107,11 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.List)" class="member-name-link">SpatialHashMap</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.ecs.Entity&gt;&nbsp;entities)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.List)" class="member-name-link">SpatialHashMap</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.ecs.view.View2Entry&lt;<a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&gt;&nbsp;viewEntries)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates a SpatialHashMap with cellSize set to twice the max width/height of the largest <code>Entity</code>.</div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.util.List,int)" class="member-name-link">SpatialHashMap</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.ecs.Entity&gt;&nbsp;entities,
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.util.List,int)" class="member-name-link">SpatialHashMap</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.ecs.view.View2Entry&lt;<a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&gt;&nbsp;viewEntries,
  int&nbsp;cellSize)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Creates a SpatialHashMap with desired cell size.</div>
@@ -127,15 +130,18 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCellSize()" class="member-name-link">getCellSize</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="SpatialHashMap.BucketId.html" title="class in technology.sola.engine.physics">SpatialHashMap.BucketId</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBucketIds()" class="member-name-link">getBucketIds</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="SpatialHashMap.BucketId.html" title="class in technology.sola.engine.physics">SpatialHashMap.BucketId</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getEntityBucketIds()" class="member-name-link">getEntityBucketIds</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCellSize()" class="member-name-link">getCellSize</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.ecs.Entity&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNearbyEntities(technology.sola.ecs.Entity)" class="member-name-link">getNearbyEntities</a><wbr>(technology.sola.ecs.Entity&nbsp;entity)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.ecs.view.View2Entry&lt;<a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNearbyViewEntries(technology.sola.ecs.view.View2Entry)" class="member-name-link">getNearbyViewEntries</a><wbr>(technology.sola.ecs.view.View2Entry&lt;<a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&nbsp;viewEntry)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns a list of <code>ViewEntry</code> containing an Entity that is in the same bucket as the
+ entity to check.</div>
+</div>
 </div>
 </div>
 </div>
@@ -156,23 +162,24 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(java.util.List)">
 <h3>SpatialHashMap</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SpatialHashMap</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.ecs.Entity&gt;&nbsp;entities)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SpatialHashMap</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.ecs.view.View2Entry&lt;<a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&gt;&nbsp;viewEntries)</span></div>
 <div class="block">Creates a SpatialHashMap with cellSize set to twice the max width/height of the largest <code>Entity</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>entities</code> - the list of entities being tracked by the SpatialHashMap</dd>
+<dd><code>viewEntries</code> - the list of <code>View2Entry</code> of <a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component"><code>ColliderComponent</code></a> and <a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a></dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(java.util.List,int)">
 <h3>SpatialHashMap</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SpatialHashMap</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.ecs.Entity&gt;&nbsp;entities,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SpatialHashMap</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.ecs.view.View2Entry&lt;<a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&gt;&nbsp;viewEntries,
  int&nbsp;cellSize)</span></div>
-<div class="block">Creates a SpatialHashMap with desired cell size. Ensure that the cellSize is greater than the max width or height of the largest <code>Entity</code>.</div>
+<div class="block">Creates a SpatialHashMap with desired cell size. Ensure that the cellSize is greater than the max width or height
+ of the largest <code>Entity</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>entities</code> - the list of entities being tracked by the SpatialHashMap</dd>
+<dd><code>viewEntries</code> - the list of <code>View2Entry</code> of <a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component"><code>ColliderComponent</code></a> and <a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a></dd>
 <dd><code>cellSize</code> - the cell size of the SpatialHashMap</dd>
 </dl>
 </section>
@@ -189,18 +196,34 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getCellSize()">
 <h3>getCellSize</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getCellSize</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the current cell size of this spacial hashmap</dd>
+</dl>
 </section>
 </li>
 <li>
-<section class="detail" id="getNearbyEntities(technology.sola.ecs.Entity)">
-<h3>getNearbyEntities</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.ecs.Entity&gt;</span>&nbsp;<span class="element-name">getNearbyEntities</span><wbr><span class="parameters">(technology.sola.ecs.Entity&nbsp;entity)</span></div>
+<section class="detail" id="getNearbyViewEntries(technology.sola.ecs.view.View2Entry)">
+<h3>getNearbyViewEntries</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.ecs.view.View2Entry&lt;<a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&gt;</span>&nbsp;<span class="element-name">getNearbyViewEntries</span><wbr><span class="parameters">(technology.sola.ecs.view.View2Entry&lt;<a href="component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&nbsp;viewEntry)</span></div>
+<div class="block">Returns a list of <code>ViewEntry</code> containing an Entity that is in the same bucket as the
+ entity to check.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>viewEntry</code> - the view entry containing the entity to check</dd>
+<dt>Returns:</dt>
+<dd>list of nearby entities</dd>
+</dl>
 </section>
 </li>
 <li>
-<section class="detail" id="getEntityBucketIds()">
-<h3>getEntityBucketIds</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="SpatialHashMap.BucketId.html" title="class in technology.sola.engine.physics">SpatialHashMap.BucketId</a>&gt;</span>&nbsp;<span class="element-name">getEntityBucketIds</span>()</div>
+<section class="detail" id="getBucketIds()">
+<h3>getBucketIds</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="SpatialHashMap.BucketId.html" title="class in technology.sola.engine.physics">SpatialHashMap.BucketId</a>&gt;</span>&nbsp;<span class="element-name">getBucketIds</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the set of current <a href="SpatialHashMap.BucketId.html" title="class in technology.sola.engine.physics"><code>SpatialHashMap.BucketId</code></a>s</dd>
+</dl>
 </section>
 </li>
 </ul>
