@@ -2,6 +2,7 @@ package technology.sola.engine.defaults.graphics.modules;
 
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
+import technology.sola.ecs.view.View;
 import technology.sola.ecs.view.ViewEntry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.components.BlendModeComponent;
@@ -11,19 +12,18 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
-import java.util.List;
-
 /**
  * SolaGraphicsModules provide details on how to render {@link Entity} that have specified {@link technology.sola.ecs.Component}s.
  */
 public abstract class SolaGraphicsModule<V extends ViewEntry> {
   /**
-   * Returns the {@link Entity} that need to be rendered via {@link SolaGraphicsModule#renderMethod(Renderer, V, TransformComponent)}
+   * Returns a {@link View} of {@link Entity} that need to be rendered via
+   * {@link SolaGraphicsModule#renderMethod(Renderer, V, TransformComponent)}
    *
    * @param world the {@link World}
-   * @return the list of entities
+   * @return the view of entities
    */
-  public abstract List<V> getEntitiesToRender(World world);
+  public abstract View<V> getViewToRender(World world);
 
   /**
    * Called on each {@link Entity} to render it. A {@link TransformComponent} instance with the camera's transform
@@ -37,7 +37,7 @@ public abstract class SolaGraphicsModule<V extends ViewEntry> {
 
   /**
    * The main render method for a graphics module that is called once per frame. It will call the {@link #renderMethod(Renderer, V, TransformComponent)}
-   * for each {@link Entity} provided by {@link #getEntitiesToRender(World)}.
+   * for each {@link Entity} provided by {@link #getViewToRender(World)}.
    *
    * @param renderer                   tbe {@link Renderer} instance
    * @param world                      the {@link World} instance
@@ -45,7 +45,7 @@ public abstract class SolaGraphicsModule<V extends ViewEntry> {
    * @param cameraTranslationTransform the camera's translation
    */
   public void render(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
-    for (var entry : getEntitiesToRender(world)) {
+    for (var entry : getViewToRender(world).getEntries()) {
       Entity entity = entry.entity();
       LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
       BlendModeComponent blendModeComponent = entity.getComponent(BlendModeComponent.class);
