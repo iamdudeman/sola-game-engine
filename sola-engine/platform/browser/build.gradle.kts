@@ -3,12 +3,16 @@ plugins {
 }
 
 // Note: TeaVM:2b671b8088 contains needed features [records, Random#nextInt(origin, bounds), Random#nextFloat(origin, bounds), Thread#setName]
-val teavmVersion = "2b671b8088"
+//val teavmVersion = "2b671b8088"
 
 dependencies {
-  implementation("com.github.konsoletyper.teavm:teavm-classlib:${teavmVersion}")
-  implementation("com.github.konsoletyper.teavm:teavm-tooling:${teavmVersion}")
-  implementation("com.github.konsoletyper.teavm:teavm-extras-slf4j:${teavmVersion}")
+//  implementation("com.github.konsoletyper.teavm:teavm-classlib:${teavmVersion}")
+//  implementation("com.github.konsoletyper.teavm:teavm-tooling:${teavmVersion}")
+//  implementation("com.github.konsoletyper.teavm:teavm-extras-slf4j:${teavmVersion}")
+
+  implementation("org.teavm:teavm-tooling:0.8.0")
+  implementation("org.teavm:teavm-classlib:0.8.0")
+  implementation("org.teavm:teavm-extras-slf4j:0.8.0")
 }
 
 publishing {
