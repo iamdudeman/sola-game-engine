@@ -30,6 +30,7 @@ module technology.sola.engine {
   exports technology.sola.engine.graphics.gui.elements;
   exports technology.sola.engine.graphics.gui.elements.container;
   exports technology.sola.engine.graphics.gui.elements.control;
+  exports technology.sola.engine.graphics.gui.elements.form;
   exports technology.sola.engine.graphics.gui.event;
   exports technology.sola.engine.graphics.gui.properties;
   exports technology.sola.engine.graphics.renderer;

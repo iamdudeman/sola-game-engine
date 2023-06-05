@@ -11,6 +11,7 @@ import technology.sola.engine.graphics.gui.elements.ImageGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.elements.form.TextInputGuiElement;
 import technology.sola.engine.input.Key;
 
 public class GuiExample extends SolaWithDefaults {
@@ -77,6 +78,10 @@ public class GuiExample extends SolaWithDefaults {
         p -> p.setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.RIGHT).setBorderColor(Color.ORANGE).padding.set(5).setWidth(410),
         checkButton,
         toggleOtherButton
+      ),
+      solaGuiDocument.createElement(
+        TextInputGuiElement::new,
+        p -> p.setLabel("Label").setMaxLength(15)
       ),
       solaGuiDocument.createElement(
         ButtonGuiElement::new,
