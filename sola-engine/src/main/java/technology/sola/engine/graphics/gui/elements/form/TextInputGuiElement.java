@@ -69,39 +69,45 @@ public class TextInputGuiElement extends BaseTextGuiElement<TextInputGuiElement.
 
   @Override
   public void renderSelf(Renderer renderer, int x, int y) {
-    if (isFocussed()) {
-      properties.setBorderColor(Color.LIGHT_BLUE);
-    } else {
-      properties.setBorderColor(Color.WHITE);
-    }
+//    if (isFocussed()) {
+//      properties.setBorderColor(Color.LIGHT_BLUE);
+//    } else {
+//      properties.setBorderColor(Color.WHITE);
+//    }
 
     super.renderSelf(renderer, x, y);
   }
 
   public static class Properties extends BaseTextGuiElement.Properties {
-    private String label = "";
+    private String placeholder = "";
     private String value = "";
     private Integer maxLength;
 
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
       setFocusable(true);
+      setFocusOutlineColor(Color.LIGHT_BLUE);
+
       setBorderColor(Color.WHITE);
       setBackgroundColor(Color.BLACK);
       hover.setBackgroundColor(new Color(150, 40, 40, 40));
       padding.set(4);
     }
 
-    public Properties setLabel(String label) {
-      this.label = label;
-      setText(label + ": " + value);
+    public Properties setPlaceholder(String placeholder) {
+      this.placeholder = placeholder;
+
+      if (value.isEmpty()) {
+        setText(placeholder);
+      }
 
       return this;
     }
 
     public Properties setValue(String value) {
       this.value = value;
-      setText(label + ": " + value);
+
+      setText(value.isEmpty() ? placeholder : value);
 
       return this;
     }

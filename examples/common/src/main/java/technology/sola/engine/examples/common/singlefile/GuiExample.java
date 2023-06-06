@@ -88,7 +88,7 @@ public class GuiExample extends SolaWithDefaults {
         ),
         solaGuiDocument.createElement(
           TextInputGuiElement::new,
-          p -> p.setLabel("Label").setMaxLength(15)
+          p -> p.setPlaceholder("Placeholder").setMaxLength(15)
         )
       ),
       createKeyTesterElement(),
