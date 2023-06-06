@@ -69,13 +69,7 @@ public class TextInputGuiElement extends BaseTextGuiElement<TextInputGuiElement.
 
   @Override
   public void renderSelf(Renderer renderer, int x, int y) {
-//    if (isFocussed()) {
-//      properties.setBorderColor(Color.LIGHT_BLUE);
-//    } else {
-//      properties.setBorderColor(Color.WHITE);
-//    }
-
-    Color originalColor = properties.getColorText();
+    Color originalColorText = properties.getColorText();
 
     if (properties.value.isEmpty()) {
       properties.setColorText(properties.colorPlaceholderText);
@@ -83,7 +77,7 @@ public class TextInputGuiElement extends BaseTextGuiElement<TextInputGuiElement.
 
     super.renderSelf(renderer, x, y);
 
-    properties.setColorText(originalColor);
+    properties.setColorText(originalColorText);
   }
 
   public static class Properties extends BaseTextGuiElement.Properties {
