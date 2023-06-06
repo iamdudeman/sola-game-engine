@@ -75,13 +75,22 @@ public class TextInputGuiElement extends BaseTextGuiElement<TextInputGuiElement.
 //      properties.setBorderColor(Color.WHITE);
 //    }
 
+    Color originalColor = properties.getColorText();
+
+    if (properties.value.isEmpty()) {
+      properties.setColorText(properties.colorPlaceholderText);
+    }
+
     super.renderSelf(renderer, x, y);
+
+    properties.setColorText(originalColor);
   }
 
   public static class Properties extends BaseTextGuiElement.Properties {
     private String placeholder = "";
     private String value = "";
     private Integer maxLength;
+    private Color colorPlaceholderText = Color.LIGHT_GRAY;
 
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
@@ -92,6 +101,10 @@ public class TextInputGuiElement extends BaseTextGuiElement<TextInputGuiElement.
       setBackgroundColor(Color.BLACK);
       hover.setBackgroundColor(new Color(150, 40, 40, 40));
       padding.set(4);
+    }
+
+    public void setColorPlaceholderText(Color colorPlaceholderText) {
+      this.colorPlaceholderText = colorPlaceholderText;
     }
 
     public Properties setPlaceholder(String placeholder) {
