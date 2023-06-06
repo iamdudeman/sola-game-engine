@@ -39,11 +39,11 @@ public class TextInputGuiElement extends BaseTextGuiElement<TextInputGuiElement.
       } else if (isLessThanMaxLength) {
         char character = (char) keyCode;
 
-        if (keyCode >= 65 && keyCode <= 90) {
+        if (keyCode >= Key.A.getCode() && keyCode <= Key.Z.getCode()) {
           if (isShiftDown) {
             valueBuilder.append(character);
           } else {
-            valueBuilder.append(Character.toLowerCase(character));
+            valueBuilder.append((char) (keyCode + 32));
           }
         } else if (hasShift(keyCode)) {
           if (isShiftDown) {
