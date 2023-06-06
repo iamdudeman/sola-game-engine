@@ -83,12 +83,12 @@ public class GuiExample extends SolaWithDefaults {
         StreamGuiElementContainer::new,
         p -> p.setDirection(StreamGuiElementContainer.Direction.HORIZONTAL).setGap(5),
         solaGuiDocument.createElement(
-          TextInputGuiElement::new,
-          p -> p.setLabel("Label").setMaxLength(15)
-        ),
-        solaGuiDocument.createElement(
           ButtonGuiElement::new,
           p -> p.setText("Change font").padding.set(5).setId("changeFont")
+        ),
+        solaGuiDocument.createElement(
+          TextInputGuiElement::new,
+          p -> p.setLabel("Label").setMaxLength(15)
         )
       ),
       createKeyTesterElement(),

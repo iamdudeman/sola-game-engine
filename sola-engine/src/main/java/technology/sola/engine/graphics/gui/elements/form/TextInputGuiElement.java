@@ -30,9 +30,6 @@ public class TextInputGuiElement extends BaseTextGuiElement<TextInputGuiElement.
       int length = valueBuilder.length();
       boolean isLessThanMaxLength = properties().maxLength == null || length < properties().maxLength;
 
-      // todo handle space, dash, underscore
-      // todo handle lowercase + shift
-
       if (keyCode == Key.SHIFT.getCode()) {
         isShiftDown = true;
       }
@@ -40,27 +37,34 @@ public class TextInputGuiElement extends BaseTextGuiElement<TextInputGuiElement.
       if (keyCode == Key.BACKSPACE.getCode() && length > 0) {
         valueBuilder.deleteCharAt(length - 1);
       } else if (isLessThanMaxLength) {
-        if (keyCode >= 65 && keyCode <= 90) {
-          char character = (char) keyCode;
+        char character = (char) keyCode;
 
+        if (keyCode >= 65 && keyCode <= 90) {
           if (isShiftDown) {
             valueBuilder.append(character);
           } else {
             valueBuilder.append(Character.toLowerCase(character));
           }
-        } else if (keyCode >= 44 && keyCode <= 57) {
+        } else if (hasShift(keyCode)) {
           if (isShiftDown) {
-            valueBuilder.append(KeyboardLayout.shift((char) keyCode));
+            valueBuilder.append(KeyboardLayout.shift(character));
           } else {
-            valueBuilder.append((char) keyCode);
+            valueBuilder.append(character);
           }
-        } else if (Character.isWhitespace(keyCode)) {
-          valueBuilder.append((char) keyCode);
+        } else if (keyCode == Key.SPACE.getCode()) {
+          valueBuilder.append(character);
         }
       }
 
       properties.setValue(valueBuilder.toString());
     });
+  }
+
+  private boolean hasShift(int keyCode) {
+    return (keyCode >= Key.COMMA.getCode() && keyCode <= Key.NINE.getCode())
+      || keyCode == Key.SEMI_COLON.getCode()
+      || keyCode == Key.EQUALS.getCode()
+      || (keyCode >= Key.LEFT_BRACKET.getCode() && keyCode <= Key.RIGHT_BRACKET.getCode());
   }
 
   @Override
