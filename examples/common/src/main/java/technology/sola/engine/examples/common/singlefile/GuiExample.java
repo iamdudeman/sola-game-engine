@@ -80,12 +80,16 @@ public class GuiExample extends SolaWithDefaults {
         toggleOtherButton
       ),
       solaGuiDocument.createElement(
-        TextInputGuiElement::new,
-        p -> p.setLabel("Label").setMaxLength(15)
-      ),
-      solaGuiDocument.createElement(
-        ButtonGuiElement::new,
-        p -> p.setText("Change font").padding.set(5).setId("changeFont")
+        StreamGuiElementContainer::new,
+        p -> p.setDirection(StreamGuiElementContainer.Direction.HORIZONTAL).setGap(5),
+        solaGuiDocument.createElement(
+          TextInputGuiElement::new,
+          p -> p.setLabel("Label").setMaxLength(15)
+        ),
+        solaGuiDocument.createElement(
+          ButtonGuiElement::new,
+          p -> p.setText("Change font").padding.set(5).setId("changeFont")
+        )
       ),
       createKeyTesterElement(),
       createImageContainer(),

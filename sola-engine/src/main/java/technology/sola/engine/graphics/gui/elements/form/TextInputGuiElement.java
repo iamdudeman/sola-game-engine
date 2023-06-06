@@ -6,14 +6,24 @@ import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
+import technology.sola.engine.input.KeyboardLayout;
 
 public class TextInputGuiElement extends BaseTextGuiElement<TextInputGuiElement.Properties> {
   private final StringBuilder valueBuilder = new StringBuilder();
+  private boolean isShiftDown = false;
 
   public TextInputGuiElement(SolaGuiDocument solaGuiDocument) {
     super(solaGuiDocument, new Properties(solaGuiDocument.globalProperties));
 
     setOnMouseUpCallback(mouseEvent -> requestFocus());
+
+    setOnKeyReleaseCallback(guiKeyEvent -> {
+      int keyCode = guiKeyEvent.getKeyCode();
+
+      if (keyCode == Key.SHIFT.getCode()) {
+        isShiftDown = false;
+      }
+    });
 
     setOnKeyPressCallback(guiKeyEvent -> {
       int keyCode = guiKeyEvent.getKeyCode();
@@ -23,12 +33,30 @@ public class TextInputGuiElement extends BaseTextGuiElement<TextInputGuiElement.
       // todo handle space, dash, underscore
       // todo handle lowercase + shift
 
+      if (keyCode == Key.SHIFT.getCode()) {
+        isShiftDown = true;
+      }
+
       if (keyCode == Key.BACKSPACE.getCode() && length > 0) {
         valueBuilder.deleteCharAt(length - 1);
-      } else if (keyCode >= 65 && keyCode <= 90 && isLessThanMaxLength) {
-        char character = (char) keyCode;
+      } else if (isLessThanMaxLength) {
+        if (keyCode >= 65 && keyCode <= 90) {
+          char character = (char) keyCode;
 
-        valueBuilder.append(character);
+          if (isShiftDown) {
+            valueBuilder.append(character);
+          } else {
+            valueBuilder.append(Character.toLowerCase(character));
+          }
+        } else if (keyCode >= 44 && keyCode <= 57) {
+          if (isShiftDown) {
+            valueBuilder.append(KeyboardLayout.shift((char) keyCode));
+          } else {
+            valueBuilder.append((char) keyCode);
+          }
+        } else if (Character.isWhitespace(keyCode)) {
+          valueBuilder.append((char) keyCode);
+        }
       }
 
       properties.setValue(valueBuilder.toString());
