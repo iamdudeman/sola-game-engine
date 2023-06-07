@@ -1,14 +1,13 @@
-package technology.sola.engine.graphics.gui.elements.form;
+package technology.sola.engine.graphics.gui.elements.input;
 
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
-import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.KeyboardLayout;
 
-public class TextInputGuiElement extends BaseTextGuiElement<TextInputGuiElement.Properties> {
+public class TextInputGuiElement extends BaseInputGuiElement<TextInputGuiElement.Properties> {
   private final StringBuilder valueBuilder = new StringBuilder();
   private boolean isShiftDown = false;
 
@@ -80,7 +79,7 @@ public class TextInputGuiElement extends BaseTextGuiElement<TextInputGuiElement.
     properties.setColorText(originalColorText);
   }
 
-  public static class Properties extends BaseTextGuiElement.Properties {
+  public static class Properties extends BaseInputGuiElement.Properties {
     private String placeholder = "";
     private String value = "";
     private Integer maxLength;
@@ -97,8 +96,10 @@ public class TextInputGuiElement extends BaseTextGuiElement<TextInputGuiElement.
       padding.set(4);
     }
 
-    public void setColorPlaceholderText(Color colorPlaceholderText) {
+    public Properties setColorPlaceholderText(Color colorPlaceholderText) {
       this.colorPlaceholderText = colorPlaceholderText;
+
+      return this;
     }
 
     public Properties setPlaceholder(String placeholder) {
@@ -127,8 +128,10 @@ public class TextInputGuiElement extends BaseTextGuiElement<TextInputGuiElement.
       return maxLength;
     }
 
-    public void setMaxLength(Integer maxLength) {
+    public Properties setMaxLength(Integer maxLength) {
       this.maxLength = maxLength;
+
+      return this;
     }
   }
 }
