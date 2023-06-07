@@ -16,7 +16,7 @@ import technology.sola.engine.input.Key;
 
 public class GuiExample extends SolaWithDefaults {
   public GuiExample() {
-    super(SolaConfiguration.build("Gui Example", 800, 800).withTargetUpdatesPerSecond(30));
+    super(SolaConfiguration.build("Gui Example", 800, 700).withTargetUpdatesPerSecond(30));
   }
 
   @Override

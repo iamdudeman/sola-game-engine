@@ -108,8 +108,6 @@ public enum Key {
   //
   NUM_LOCK(144, "Num Lock"),
   //
-  DASH(151, "Dash"),
-  //
   INSERT(155, "Insert"),
   //
   BACK_QUOTE(192, "Back Quote"),
