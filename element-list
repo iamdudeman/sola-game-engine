@@ -18,7 +18,7 @@ technology.sola.engine.graphics.components.animation
 technology.sola.engine.graphics.gui
 technology.sola.engine.graphics.gui.elements
 technology.sola.engine.graphics.gui.elements.container
-technology.sola.engine.graphics.gui.elements.control
+technology.sola.engine.graphics.gui.elements.input
 technology.sola.engine.graphics.gui.event
 technology.sola.engine.graphics.gui.properties
 technology.sola.engine.graphics.renderer
