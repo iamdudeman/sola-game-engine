@@ -9,7 +9,7 @@ public class Color {
   /**
    * Color constant - rgb(0, 0, 0).
    */
-  public static final Color BLACK = new Color(255, 0, 0, 0);
+  public static final Color BLACK = new Color(0, 0, 0);
   /**
    * Color constant - argb(0, 0, 0, 0).
    */
@@ -17,35 +17,39 @@ public class Color {
   /**
    * Color constant - rgb(0, 0, 255).
    */
-  public static final Color BLUE = new Color(255, 0, 0, 255);
+  public static final Color BLUE = new Color(0, 0, 255);
   /**
    * Color constant - rgb(169, 169, 169).
    */
-  public static final Color DARK_GRAY = new Color(255, 169, 169, 169);
+  public static final Color DARK_GRAY = new Color(169, 169, 169);
   /**
    * Color constant - rgb(0, 255, 0).
    */
-  public static final Color GREEN = new Color(255, 0, 255, 0);
+  public static final Color GREEN = new Color(0, 255, 0);
   /**
    * Color constant - rgb(255, 165, 0).
    */
-  public static final Color ORANGE = new Color(255, 255, 165, 0);
+  public static final Color ORANGE = new Color(255, 165, 0);
   /**
    * Color constant - rgb(255, 0, 0).
    */
-  public static final Color RED = new Color(255, 255, 0, 0);
+  public static final Color RED = new Color(255, 0, 0);
   /**
    * Color constant - rgb(173, 216, 230).
    */
-  public static final Color LIGHT_BLUE = new Color(255, 173, 216, 230);
+  public static final Color LIGHT_BLUE = new Color(173, 216, 230);
+  /**
+   * Color constant - rgb(211, 211, 211)
+   */
+  public static final Color LIGHT_GRAY = new Color(211, 211, 211);
   /**
    * Color constant - rgb(255, 255, 0).
    */
-  public static final Color YELLOW = new Color(255, 255, 255, 0);
+  public static final Color YELLOW = new Color(255, 255, 0);
   /**
    * Color constant - rgb(255, 255, 255).
    */
-  public static final Color WHITE = new Color(255, 255, 255, 255);
+  public static final Color WHITE = new Color(255, 255, 255);
 
   private final int alpha;
   private final int r;

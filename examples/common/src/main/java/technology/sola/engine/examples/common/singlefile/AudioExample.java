@@ -9,7 +9,7 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
-import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.screen.AspectMode;
 
 public class AudioExample extends SolaWithDefaults {

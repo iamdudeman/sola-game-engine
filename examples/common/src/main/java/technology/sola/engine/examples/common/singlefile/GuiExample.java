@@ -10,12 +10,13 @@ import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.gui.elements.ImageGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
-import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.elements.input.TextInputGuiElement;
 import technology.sola.engine.input.Key;
 
 public class GuiExample extends SolaWithDefaults {
   public GuiExample() {
-    super(SolaConfiguration.build("Gui Example", 800, 600).withTargetUpdatesPerSecond(30));
+    super(SolaConfiguration.build("Gui Example", 800, 700).withTargetUpdatesPerSecond(30));
   }
 
   @Override
@@ -79,9 +80,21 @@ public class GuiExample extends SolaWithDefaults {
         toggleOtherButton
       ),
       solaGuiDocument.createElement(
-        ButtonGuiElement::new,
-        p -> p.setText("Change font").padding.set(5).setId("changeFont")
+        StreamGuiElementContainer::new,
+        p -> p.setDirection(StreamGuiElementContainer.Direction.HORIZONTAL).setGap(5),
+        solaGuiDocument.createElement(
+          ButtonGuiElement::new,
+          p -> p.setText("Change font").padding.set(5).setId("changeFont")
+        ),
+        solaGuiDocument.createElement(
+          TextInputGuiElement::new,
+          p -> p.setPlaceholder("Placeholder").setMaxLength(15).setDisabled(true).setId("textInput")
+        )
       ),
+      solaGuiDocument.createElement(
+        ButtonGuiElement::new,
+        p -> p.setText("Enable text input").padding.set(5)
+      ).setOnAction(() -> ((TextInputGuiElement) solaGuiDocument.getElementById("textInput")).properties().setDisabled(false)),
       createKeyTesterElement(),
       createImageContainer(),
       solaGuiDocument.createElement(
