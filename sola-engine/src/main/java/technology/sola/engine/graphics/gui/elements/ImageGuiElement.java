@@ -3,8 +3,9 @@ package technology.sola.engine.graphics.gui.elements;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
+import technology.sola.engine.graphics.gui.properties.GuiElementBaseHoverProperties;
+import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
-import technology.sola.engine.graphics.gui.properties.DefaultGuiElementProperties;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 
@@ -68,11 +69,11 @@ public class ImageGuiElement extends GuiElement<ImageGuiElement.Properties> {
     }
   }
 
-  public static class Properties extends DefaultGuiElementProperties {
+  public static class Properties extends GuiElementBaseProperties<GuiElementBaseHoverProperties> {
     private String assetId;
 
     public Properties(GuiElementGlobalProperties globalProperties) {
-      super(globalProperties);
+      super(globalProperties, new GuiElementBaseHoverProperties());
       setFocusable(false);
     }
 

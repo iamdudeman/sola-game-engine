@@ -3,8 +3,9 @@ package technology.sola.engine.graphics.gui.elements.container;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementContainer;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
+import technology.sola.engine.graphics.gui.properties.GuiElementBaseHoverProperties;
+import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
-import technology.sola.engine.graphics.gui.properties.DefaultGuiElementProperties;
 import technology.sola.engine.input.Key;
 
 import java.util.List;
@@ -132,14 +133,14 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     return -1;
   }
 
-  public static class Properties extends DefaultGuiElementProperties {
+  public static class Properties extends GuiElementBaseProperties<GuiElementBaseHoverProperties> {
     private Direction direction = Direction.HORIZONTAL;
     private HorizontalAlignment horizontalAlignment = HorizontalAlignment.LEFT;
     private VerticalAlignment verticalAlignment = VerticalAlignment.TOP;
     private int gap = 0;
 
     public Properties(GuiElementGlobalProperties globalProperties) {
-      super(globalProperties);
+      super(globalProperties, new GuiElementBaseHoverProperties());
     }
 
     public Direction getDirection() {

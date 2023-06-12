@@ -23,6 +23,8 @@
 * Rendering
   * Ability to change line width when drawing
   * Implement more BlendModes
+  * Add a way to do gradients
+    * maybe just linear at first
 * BrowserPlatform
   * modularize (requires figuring out how to modularize parts of teavm needed)
 * Particle System

@@ -144,10 +144,38 @@ public class Color {
    *
    * @return this color as greyscale
    */
-  public Color toGreyScale() {
+  public Color greyScale() {
     int greyscale = (int) (0.2126f * r + 0.7152f * g + 0.0722f * b);
 
     return new Color(alpha, greyscale, greyscale, greyscale);
+  }
+
+  /**
+   * Creates a new Color that is a shade of this Color.
+   *
+   * @param shadeFactor the shade factor from 0-1
+   * @return the shaded Color
+   */
+  public Color shade(float shadeFactor) {
+    int newR = (int) (r * (1 - shadeFactor));
+    int newG = (int) (g * (1 - shadeFactor));
+    int newB = (int) (b * (1 - shadeFactor));
+
+    return new Color(newR, newG, newB);
+  }
+
+  /**
+   * Creates a new Color that is a tint of this Color.
+   *
+   * @param tintFactor the tint factor from 0-1
+   * @return the tinted Color
+   */
+  public Color tint(float tintFactor) {
+    int newR = (int) (r + (255 - r) * tintFactor);
+    int newG = (int) (g + (255 - g) * tintFactor);
+    int newB = (int) (b + (255 - b) * tintFactor);
+
+    return new Color(newR, newG, newB);
   }
 
   @Override
