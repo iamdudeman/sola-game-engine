@@ -24,7 +24,10 @@ public class GuiExample extends SolaWithDefaults {
     defaultsConfigurator.useGui();
 
     solaGuiDocument.globalProperties.setDefaultTextColor(Color.WHITE);
-    solaGuiDocument.setGuiRoot(buildGui(), 15, 15);
+
+    var guiRoot = buildGui();
+    solaGuiDocument.setGuiRoot(guiRoot, 15, 15);
+    guiRoot.requestFocus();
 
     ButtonGuiElement changeFontButtonEle = solaGuiDocument.getElementById("changeFont", ButtonGuiElement.class);
 
