@@ -15,6 +15,8 @@
 
 ## TODO List
 
+* gui element hidden enhancement of some sort
+    * no way to "display none" an element (only hide while taking up space still)
 * networking
   * rest client interface
     * javafx/swing impl

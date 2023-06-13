@@ -98,6 +98,13 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
     return this;
   }
 
+  public GuiElementContainer<T> removeChild(GuiElement<?> child) {
+    children.remove(child);
+    properties.setLayoutChanged(true);
+
+    return this;
+  }
+
   @Override
   public void handleKeyEvent(GuiKeyEvent event) {
     if (!isFocussed()) {
@@ -140,11 +147,11 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
         case "move" -> onMouseEnter(event);
       }
 
-      for (GuiElement<?> child : children) {
+      for (GuiElement<?> child : children.stream().toList()) {
         child.handleMouseEvent(event, eventType);
       }
     } else {
-      for (GuiElement<?> child : children) {
+      for (GuiElement<?> child : children.stream().toList()) {
         child.onMouseExit(event);
       }
 
