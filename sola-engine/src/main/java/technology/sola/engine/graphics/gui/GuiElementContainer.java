@@ -99,8 +99,13 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
   }
 
   public GuiElementContainer<T> removeChild(GuiElement<?> child) {
-    children.remove(child);
-    properties.setLayoutChanged(true);
+    if (child != null) {
+      children.remove(child);
+      if (child.isFocussed()) {
+        this.requestFocus();
+      }
+      properties.setLayoutChanged(true);
+    }
 
     return this;
   }
@@ -111,7 +116,7 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
       return;
     }
 
-    for (GuiElement<?> child : children) {
+    for (GuiElement<?> child : children.stream().toList()) {
       if (event.isAbleToPropagate()) {
         child.handleKeyEvent(event);
       } else {
