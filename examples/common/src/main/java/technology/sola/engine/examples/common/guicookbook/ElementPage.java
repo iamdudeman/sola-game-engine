@@ -15,10 +15,14 @@ public abstract class ElementPage {
     this.title = title;
   }
 
+  public String getTitle() {
+    return title;
+  }
+
   public GuiElement<?> build() {
     return document.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(5),
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(5).setId("element"),
       document.createElement(
         StreamGuiElementContainer::new,
         p -> p.setGap(5),
@@ -29,7 +33,11 @@ public abstract class ElementPage {
         document.createElement(
           ButtonGuiElement::new,
           p -> p.setText("Close")
-        )
+        ).setOnAction(() -> {
+          document.getElementById("category", StreamGuiElementContainer.class).removeChild(
+            document.getElementById("element")
+          );
+        })
       ),
       document.createElement(
         StreamGuiElementContainer::new,

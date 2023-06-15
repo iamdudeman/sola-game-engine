@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>> extends GuiElement<T> {
-  protected List<GuiElement<?>> children = new ArrayList<>();
+  protected List<GuiElement<?>> children = List.of();
 
   public GuiElementContainer(SolaGuiDocument document, T properties) {
     super(document, properties);
@@ -66,7 +66,7 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
       return this;
     }
 
-    for (GuiElement<?> child : getChildren()) {
+    for (GuiElement<?> child : children) {
       GuiElement<?> possibleMatch = child.getElementById(id);
 
       if (possibleMatch != null) {
@@ -78,34 +78,40 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
   }
 
   public List<GuiElement<?>> getChildren() {
-    return children;
+    return children.stream().toList();
   }
 
   public List<GuiElement<?>> getFocusableChildren() {
-    return getChildren().stream()
+    return children.stream()
       .filter(child -> child.properties.isFocusable())
       .toList();
   }
 
-  // todo change this to copy on add
   public GuiElementContainer<T> addChild(GuiElement<?>... children) {
     if (children == null) {
       return this;
     }
 
-    this.children.addAll(Arrays.asList(children));
+    List<GuiElement<?>> newChildren = new ArrayList<>(this.children.size() + children.length);
+
+    newChildren.addAll(this.children);
+    newChildren.addAll(Arrays.asList(children));
+
+    this.children = newChildren;
+
     properties.setLayoutChanged(true);
 
     return this;
   }
 
-  // todo change this to copy on remove
-  public GuiElementContainer<T> removeChild(GuiElement<?> child) {
-    if (child != null) {
-      children.remove(child);
-      if (child.isFocussed()) {
+  public GuiElementContainer<T> removeChild(GuiElement<?> childToRemove) {
+    if (childToRemove != null) {
+      this.children = this.children.stream().filter(child -> child != childToRemove).toList();
+
+      if (childToRemove.isFocussed()) {
         this.requestFocus();
       }
+      
       properties.setLayoutChanged(true);
     }
 
@@ -118,8 +124,7 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
       return;
     }
 
-    // todo change this to iterate over children after add/remove updated
-    for (GuiElement<?> child : children.stream().toList()) {
+    for (GuiElement<?> child : children) {
       if (event.isAbleToPropagate()) {
         child.handleKeyEvent(event);
       } else {
@@ -155,15 +160,9 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
         case "move" -> onMouseEnter(event);
       }
 
-      // todo change this to iterate over children after add/remove updated
-      for (GuiElement<?> child : children.stream().toList()) {
-        child.handleMouseEvent(event, eventType);
-      }
+      children.forEach(child -> child.handleMouseEvent(event, eventType));
     } else {
-      // todo change this to iterate over children after add/remove updated
-      for (GuiElement<?> child : children.stream().toList()) {
-        child.onMouseExit(event);
-      }
+      children.forEach(child -> child.onMouseExit(event));
 
       onMouseExit(event);
     }

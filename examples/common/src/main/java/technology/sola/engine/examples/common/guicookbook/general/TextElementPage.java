@@ -6,8 +6,9 @@ import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 
-public class TextPage extends ElementPage {
-  public TextPage(SolaGuiDocument document) {
+// todo fill out page
+public class TextElementPage extends ElementPage {
+  public TextElementPage(SolaGuiDocument document) {
     super(document, "Text");
   }
 

@@ -4,7 +4,8 @@ import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
-import technology.sola.engine.examples.common.guicookbook.general.GeneralCategoryPage;
+import technology.sola.engine.examples.common.guicookbook.general.ImageElementPage;
+import technology.sola.engine.examples.common.guicookbook.general.TextElementPage;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
@@ -23,14 +24,14 @@ import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 
 public class GuiCookbook extends SolaWithDefaults {
   public GuiCookbook() {
-    super(SolaConfiguration.build("Gui Cookbook", 800, 700).withTargetUpdatesPerSecond(30));
+    super(SolaConfiguration.build("Gui Cookbook", 1200, 800).withTargetUpdatesPerSecond(30));
   }
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     defaultsConfigurator.useGui();
 
-    solaGuiDocument.setGuiRoot(buildGui(), 15, 15);
+    solaGuiDocument.setGuiRoot(buildGui());
 
     assetLoaderProvider.get(SolaImage.class)
       .addAssetMapping("test_tiles", "assets/test_tiles.png");
@@ -41,7 +42,7 @@ public class GuiCookbook extends SolaWithDefaults {
   private GuiElement<?> buildGui() {
     return solaGuiDocument.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).padding.set(5).setId("root"),
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).padding.set(5).setWidth(platform.getRenderer().getWidth()).setHeight(platform.getRenderer().getHeight()).setId("root"),
       solaGuiDocument.createElement(
         TextGuiElement::new,
         p -> p.setText("Gui Cookbook").margin.setBottom(10)
@@ -49,7 +50,7 @@ public class GuiCookbook extends SolaWithDefaults {
       solaGuiDocument.createElement(
         StreamGuiElementContainer::new,
         p -> p.setGap(5).setId("nav"),
-        makeNavButton(new GeneralCategoryPage(solaGuiDocument))
+        makeNavButton(new CategoryPage(solaGuiDocument, "General", new TextElementPage(solaGuiDocument), new ImageElementPage(solaGuiDocument)))
       )
     );
   }
