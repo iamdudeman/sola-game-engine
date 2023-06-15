@@ -87,6 +87,7 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
       .toList();
   }
 
+  // todo change this to copy on add
   public GuiElementContainer<T> addChild(GuiElement<?>... children) {
     if (children == null) {
       return this;
@@ -98,6 +99,7 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
     return this;
   }
 
+  // todo change this to copy on remove
   public GuiElementContainer<T> removeChild(GuiElement<?> child) {
     if (child != null) {
       children.remove(child);
@@ -116,6 +118,7 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
       return;
     }
 
+    // todo change this to iterate over children after add/remove updated
     for (GuiElement<?> child : children.stream().toList()) {
       if (event.isAbleToPropagate()) {
         child.handleKeyEvent(event);
@@ -152,10 +155,12 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
         case "move" -> onMouseEnter(event);
       }
 
+      // todo change this to iterate over children after add/remove updated
       for (GuiElement<?> child : children.stream().toList()) {
         child.handleMouseEvent(event, eventType);
       }
     } else {
+      // todo change this to iterate over children after add/remove updated
       for (GuiElement<?> child : children.stream().toList()) {
         child.onMouseExit(event);
       }

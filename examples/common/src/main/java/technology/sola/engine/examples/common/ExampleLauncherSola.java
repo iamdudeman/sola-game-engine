@@ -17,7 +17,6 @@ import technology.sola.engine.examples.common.singlefile.RenderingExample;
 import technology.sola.engine.examples.common.singlefile.SimplePlatformerExample;
 import technology.sola.engine.examples.common.singlefile.StressTestPhysicsExample;
 import technology.sola.engine.examples.common.singlefile.StressTestRenderingExample;
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
@@ -37,7 +36,6 @@ public class ExampleLauncherSola extends SolaWithDefaults {
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     defaultsConfigurator.useGui();
-    solaGuiDocument.globalProperties.setDefaultTextColor(Color.WHITE);
 
     var guiRoot = buildGui();
 

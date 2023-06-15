@@ -20,6 +20,8 @@ public class GuiElementBaseProperties<GuiElementHoverProperties extends GuiEleme
   public GuiElementBaseProperties(GuiElementGlobalProperties globalProperties, GuiElementHoverProperties hoverProperties) {
     this.globalProperties = globalProperties;
     this.hover = hoverProperties;
+
+    setBackgroundColor(Color.WHITE);
   }
 
   public boolean isLayoutChanged() {

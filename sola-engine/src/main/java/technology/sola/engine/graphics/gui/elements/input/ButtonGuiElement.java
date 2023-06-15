@@ -71,11 +71,6 @@ public class ButtonGuiElement extends BaseInputGuiElement<ButtonGuiElement.Prope
   public static class Properties extends BaseInputGuiElement.Properties {
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
-      setFocusable(true);
-      setFocusOutlineColor(Color.LIGHT_BLUE);
-
-      setBackgroundColor(Color.DARK_GRAY);
-      setBorderColor(Color.WHITE);
     }
   }
 }

@@ -5,7 +5,6 @@ import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.examples.common.guicookbook.general.GeneralCategoryPage;
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
@@ -31,7 +30,6 @@ public class GuiCookbook extends SolaWithDefaults {
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     defaultsConfigurator.useGui();
 
-    solaGuiDocument.globalProperties.setDefaultTextColor(Color.WHITE);
     solaGuiDocument.setGuiRoot(buildGui(), 15, 15);
 
     assetLoaderProvider.get(SolaImage.class)

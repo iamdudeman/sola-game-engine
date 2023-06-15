@@ -28,19 +28,17 @@ public abstract class BaseInputGuiElement<T extends BaseInputGuiElement.Properti
 
   public static class Properties extends BaseTextGuiElement.Properties {
     private boolean isDisabled = false;
-    private Color disabledBackgroundColor = new Color(85, 239, 239, 239);
+    private Color disabledBackgroundColor;
 
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
       setFocusable(true);
-      setFocusOutlineColor(Color.LIGHT_BLUE);
 
-      setBackgroundColor(Color.DARK_GRAY);
-      setBorderColor(Color.WHITE);
+      setFocusOutlineColor(Color.BLACK);
+      setBorderColor(Color.BLACK);
+      setDisabledBackgroundColor(getBackgroundColor().shade(0.18f));
 
-      hover.setBackgroundColor(Color.WHITE);
-      hover.setBorderColor(Color.DARK_GRAY);
-      hover.setColorText(Color.DARK_GRAY);
+      hover.setBackgroundColor(getBackgroundColor().shade(0.1f));
     }
 
     @Override

@@ -23,8 +23,6 @@ public class GuiExample extends SolaWithDefaults {
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     defaultsConfigurator.useGui();
 
-    solaGuiDocument.globalProperties.setDefaultTextColor(Color.WHITE);
-
     var guiRoot = buildGui();
     solaGuiDocument.setGuiRoot(guiRoot, 15, 15);
     guiRoot.requestFocus();
@@ -110,7 +108,7 @@ public class GuiExample extends SolaWithDefaults {
   private GuiElement<?> createKeyTesterElement() {
     TextGuiElement textGuiElement = solaGuiDocument.createElement(
       TextGuiElement::new,
-      p -> p.setText("Type a key").setColorText(Color.WHITE).setFocusable(true).padding.set(3).margin.setTop(5).setFocusOutlineColor(Color.LIGHT_BLUE).setBorderColor(Color.WHITE).hover.setBorderColor(Color.YELLOW)
+      p -> p.setText("Type a key").setFocusable(true).padding.set(3).margin.setTop(5).setFocusOutlineColor(Color.LIGHT_BLUE).setBorderColor(Color.BLACK).hover.setBorderColor(Color.YELLOW)
     );
 
     textGuiElement.setOnKeyPressCallback(guiKeyEvent -> {
@@ -141,7 +139,7 @@ public class GuiExample extends SolaWithDefaults {
       ),
       solaGuiDocument.createElement(
         ImageGuiElement::new,
-        p -> p.setAssetId("test").setWidth(50).setHeight(50).setBorderColor(Color.GREEN).padding.set(5)
+        p -> p.setAssetId("test").setWidth(75).setHeight(75).setBorderColor(Color.GREEN).padding.set(5)
       ),
       solaGuiDocument.createElement(
         ImageGuiElement::new,
