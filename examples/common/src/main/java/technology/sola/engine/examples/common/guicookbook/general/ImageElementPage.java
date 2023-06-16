@@ -34,7 +34,7 @@ public class ImageElementPage extends ElementPage {
         p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(10),
         document.createElement(
           TextGuiElement::new,
-          p -> p.setText("Smaller size")
+          p -> p.setText("50x50 size")
         ),
         document.createElement(
           ImageGuiElement::new,
@@ -46,7 +46,7 @@ public class ImageElementPage extends ElementPage {
         p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(10),
         document.createElement(
           TextGuiElement::new,
-          p -> p.setText("Larger size")
+          p -> p.setText("200x200 size")
         ),
         document.createElement(
           ImageGuiElement::new,

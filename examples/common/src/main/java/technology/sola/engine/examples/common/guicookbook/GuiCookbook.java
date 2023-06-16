@@ -36,6 +36,7 @@ public class GuiCookbook extends SolaWithDefaults {
     assetLoaderProvider.get(SolaImage.class)
       .addAssetMapping("test_tiles", "assets/test_tiles.png");
     assetLoaderProvider.get(Font.class)
+      .addAssetMapping("arial_NORMAL_16", "assets/arial_NORMAL_16.json")
       .addAssetMapping("times_NORMAL_18", "assets/times_NORMAL_18.json");
   }
 
