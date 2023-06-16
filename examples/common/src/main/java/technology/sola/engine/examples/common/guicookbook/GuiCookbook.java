@@ -4,17 +4,15 @@ import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
-import technology.sola.engine.examples.common.guicookbook.general.ImageElementPage;
-import technology.sola.engine.examples.common.guicookbook.general.TextElementPage;
+import technology.sola.engine.examples.common.guicookbook.general.CommonPropertiesDemo;
+import technology.sola.engine.examples.common.guicookbook.general.ImageElementDemo;
+import technology.sola.engine.examples.common.guicookbook.general.TextElementDemo;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 
-/* todo common properties
-    general
-     text
-     image
+/* todo
     container
      stream container
     form
@@ -34,6 +32,7 @@ public class GuiCookbook extends SolaWithDefaults {
     solaGuiDocument.setGuiRoot(buildGui());
 
     assetLoaderProvider.get(SolaImage.class)
+      .addAssetMapping("duck", "assets/duck.png")
       .addAssetMapping("test_tiles", "assets/test_tiles.png");
     assetLoaderProvider.get(Font.class)
       .addAssetMapping("arial_NORMAL_16", "assets/arial_NORMAL_16.json")
@@ -43,28 +42,28 @@ public class GuiCookbook extends SolaWithDefaults {
   private GuiElement<?> buildGui() {
     return solaGuiDocument.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).padding.set(5).setWidth(platform.getRenderer().getWidth()).setHeight(platform.getRenderer().getHeight()).setId("root"),
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).padding.set(10).setWidth(platform.getRenderer().getWidth()).setHeight(platform.getRenderer().getHeight()).setId("root"),
       solaGuiDocument.createElement(
         TextGuiElement::new,
-        p -> p.setText("Gui Cookbook").margin.setBottom(10)
+        p -> p.setText("Gui Cookbook").margin.setLeft(10).margin.setBottom(10)
       ),
       solaGuiDocument.createElement(
         StreamGuiElementContainer::new,
         p -> p.setGap(5).setId("nav"),
-        makeNavButton(new CategoryPage(solaGuiDocument, "General", new TextElementPage(solaGuiDocument), new ImageElementPage(solaGuiDocument)))
+        makeNavButton(new ElementGroup(solaGuiDocument, "General", new CommonPropertiesDemo(solaGuiDocument), new TextElementDemo(solaGuiDocument), new ImageElementDemo(solaGuiDocument)))
       )
     );
   }
 
-  private GuiElement<?> makeNavButton(CategoryPage categoryPage) {
+  private GuiElement<?> makeNavButton(ElementGroup elementGroup) {
     return solaGuiDocument.createElement(
       ButtonGuiElement::new,
-      p -> p.setText(categoryPage.getTitle())
+      p -> p.setText(elementGroup.getTitle())
     ).setOnAction(() -> {
       var rootEle = solaGuiDocument.getElementById("root", StreamGuiElementContainer.class);
 
       rootEle.removeChild(solaGuiDocument.getElementById("category"));
-      rootEle.addChild(categoryPage.build());
+      rootEle.addChild(elementGroup.build());
     });
   }
 }

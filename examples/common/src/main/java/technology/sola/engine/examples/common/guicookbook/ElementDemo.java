@@ -6,11 +6,11 @@ import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 
-public abstract class ElementPage {
+public abstract class ElementDemo {
   protected final SolaGuiDocument document;
   private final String title;
 
-  public ElementPage(SolaGuiDocument document, String title) {
+  public ElementDemo(SolaGuiDocument document, String title) {
     this.document = document;
     this.title = title;
   }
@@ -22,7 +22,7 @@ public abstract class ElementPage {
   public GuiElement<?> build() {
     return document.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(5).setId("element"),
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).setId("element"),
       document.createElement(
         StreamGuiElementContainer::new,
         p -> p.setGap(5),

@@ -1,6 +1,6 @@
 package technology.sola.engine.examples.common.guicookbook.general;
 
-import technology.sola.engine.examples.common.guicookbook.ElementPage;
+import technology.sola.engine.examples.common.guicookbook.ElementDemo;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
@@ -8,8 +8,8 @@ import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 
-public class TextElementPage extends ElementPage {
-  public TextElementPage(SolaGuiDocument document) {
+public class TextElementDemo extends ElementDemo {
+  public TextElementDemo(SolaGuiDocument document) {
     super(document, "Text");
   }
 
@@ -36,6 +36,10 @@ public class TextElementPage extends ElementPage {
         document.createElement(
           TextGuiElement::new,
           p -> p.setText("Blue").setColorText(Color.BLUE)
+        ),
+        document.createElement(
+          TextGuiElement::new,
+          p -> p.setText("Orange on hover").hover.setColorText(Color.ORANGE)
         )
       ),
       document.createElement(

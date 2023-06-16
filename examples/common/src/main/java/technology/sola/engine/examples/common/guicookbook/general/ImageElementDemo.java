@@ -1,14 +1,14 @@
 package technology.sola.engine.examples.common.guicookbook.general;
 
-import technology.sola.engine.examples.common.guicookbook.ElementPage;
+import technology.sola.engine.examples.common.guicookbook.ElementDemo;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.elements.ImageGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 
-public class ImageElementPage extends ElementPage {
-  public ImageElementPage(SolaGuiDocument document) {
+public class ImageElementDemo extends ElementDemo {
+  public ImageElementDemo(SolaGuiDocument document) {
     super(document, "Image");
   }
 
@@ -27,6 +27,10 @@ public class ImageElementPage extends ElementPage {
         document.createElement(
           ImageGuiElement::new,
           p -> p.setAssetId("test_tiles")
+        ),
+        document.createElement(
+          ImageGuiElement::new,
+          p -> p.setAssetId("duck")
         )
       ),
       document.createElement(
@@ -39,6 +43,10 @@ public class ImageElementPage extends ElementPage {
         document.createElement(
           ImageGuiElement::new,
           p -> p.setAssetId("test_tiles").setWidth(50).setHeight(50)
+        ),
+        document.createElement(
+          ImageGuiElement::new,
+          p -> p.setAssetId("duck").setWidth(50).setHeight(50)
         )
       ),
       document.createElement(
@@ -51,6 +59,10 @@ public class ImageElementPage extends ElementPage {
         document.createElement(
           ImageGuiElement::new,
           p -> p.setAssetId("test_tiles").setWidth(200).setHeight(200)
+        ),
+        document.createElement(
+          ImageGuiElement::new,
+          p -> p.setAssetId("duck").setWidth(200).setHeight(200)
         )
       )
     );
