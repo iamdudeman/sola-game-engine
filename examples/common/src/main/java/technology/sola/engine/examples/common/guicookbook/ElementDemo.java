@@ -24,7 +24,7 @@ public abstract class ElementDemo {
       p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).setId("element"),
       document.createElement(
         TextGuiElement::new,
-        p -> p.setText(title)
+        p -> p.setText(title).margin.setLeft(30)
       ),
       document.createElement(
         StreamGuiElementContainer::new,

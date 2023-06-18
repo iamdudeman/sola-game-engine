@@ -44,7 +44,7 @@ public class GuiCookbook extends SolaWithDefaults {
   private GuiElement<?> buildGui() {
     return solaGuiDocument.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).padding.set(10).setWidth(platform.getRenderer().getWidth()).setHeight(platform.getRenderer().getHeight()).setId("root"),
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(10).padding.set(10).setWidth(platform.getRenderer().getWidth()).setHeight(platform.getRenderer().getHeight()).setId("root"),
       solaGuiDocument.createElement(
         StreamGuiElementContainer::new,
         p -> p.setGap(5),

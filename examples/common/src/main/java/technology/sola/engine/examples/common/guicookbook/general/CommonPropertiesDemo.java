@@ -7,10 +7,6 @@ import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 
-// todo
-//  background + hover
-//  padding
-//  margin
 
 public class CommonPropertiesDemo extends ElementDemo {
   public CommonPropertiesDemo(SolaGuiDocument document) {
@@ -36,6 +32,62 @@ public class CommonPropertiesDemo extends ElementDemo {
         document.createElement(
           TextGuiElement::new,
           p -> p.setText("Red w/ blue hover").setBorderColor(Color.RED).hover.setBorderColor(Color.BLUE)
+        )
+      ),
+      document.createElement(
+        StreamGuiElementContainer::new,
+        p -> p.setGap(10).setDirection(StreamGuiElementContainer.Direction.VERTICAL),
+        document.createElement(
+          TextGuiElement::new,
+          p -> p.setText("Background")
+        ),
+        document.createElement(
+          TextGuiElement::new,
+          p -> p.setText("Green w/ orange hover").setBackgroundColor(Color.GREEN).hover.setBackgroundColor(Color.ORANGE)
+        ),
+        document.createElement(
+          TextGuiElement::new,
+          p -> p.setText("Red w/ blue hover").setBackgroundColor(Color.RED).hover.setBackgroundColor(Color.BLUE)
+        )
+      ),
+      document.createElement(
+        StreamGuiElementContainer::new,
+        p -> p.setGap(10).setDirection(StreamGuiElementContainer.Direction.VERTICAL),
+        document.createElement(
+          TextGuiElement::new,
+          p -> p.setText("Padding")
+        ),
+        document.createElement(
+          TextGuiElement::new,
+          p -> p.setText("0").padding.set(0).setBorderColor(Color.BLACK)
+        ),
+        document.createElement(
+          TextGuiElement::new,
+          p -> p.setText("25,50").padding.set(25, 50).setBorderColor(Color.BLACK)
+        ),
+        document.createElement(
+          TextGuiElement::new,
+          p -> p.setText("50").padding.set(50).setBorderColor(Color.BLACK)
+        )
+      ),
+      document.createElement(
+        StreamGuiElementContainer::new,
+        p -> p.setGap(10).setDirection(StreamGuiElementContainer.Direction.VERTICAL),
+        document.createElement(
+          TextGuiElement::new,
+          p -> p.setText("Margin")
+        ),
+        document.createElement(
+          TextGuiElement::new,
+          p -> p.setText("0").margin.set(0).setBorderColor(Color.BLACK)
+        ),
+        document.createElement(
+          TextGuiElement::new,
+          p -> p.setText("25,50").margin.set(25, 50).setBorderColor(Color.BLACK)
+        ),
+        document.createElement(
+          TextGuiElement::new,
+          p -> p.setText("50").margin.set(50).setBorderColor(Color.BLACK)
         )
       )
     );

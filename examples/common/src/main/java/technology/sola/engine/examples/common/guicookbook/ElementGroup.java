@@ -26,7 +26,7 @@ public class ElementGroup {
   public GuiElement<?> build() {
     return document.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).setId("category"),
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(10).setId("category"),
       document.createElement(
         StreamGuiElementContainer::new,
         p -> p.setGap(5),
