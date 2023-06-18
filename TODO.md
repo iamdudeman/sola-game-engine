@@ -17,11 +17,16 @@
   * maybe default light and dark theme
   * sets defaults for all gui elements
     * focus, borders, backgrounds, text, etc.
+* change vertical and horizontal alignment enums to one alignment enum with Start, Center, End as options
 
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
 
+* gui cookbook
+  * forum category
+    * button
+    * text input
 * gui element hidden enhancement of some sort
     * no way to "display none" an element (only hide while taking up space still)
 * networking
