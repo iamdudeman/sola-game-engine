@@ -9,7 +9,6 @@ import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementCo
 
 // todo
 //  background + hover
-//  border
 //  padding
 //  margin
 

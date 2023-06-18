@@ -4,7 +4,6 @@ import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
-import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 
 public abstract class ElementDemo {
   protected final SolaGuiDocument document;
@@ -24,20 +23,8 @@ public abstract class ElementDemo {
       StreamGuiElementContainer::new,
       p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).setId("element"),
       document.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setGap(5),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setText(title)
-        ),
-        document.createElement(
-          ButtonGuiElement::new,
-          p -> p.setText("Close")
-        ).setOnAction(() -> {
-          document.getElementById("category", StreamGuiElementContainer.class).removeChild(
-            document.getElementById("element")
-          );
-        })
+        TextGuiElement::new,
+        p -> p.setText(title)
       ),
       document.createElement(
         StreamGuiElementContainer::new,

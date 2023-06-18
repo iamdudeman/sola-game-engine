@@ -29,7 +29,9 @@ public class GuiCookbook extends SolaWithDefaults {
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     defaultsConfigurator.useGui();
 
-    solaGuiDocument.setGuiRoot(buildGui());
+    var guiRoot = buildGui();
+    solaGuiDocument.setGuiRoot(guiRoot);
+    guiRoot.requestFocus();
 
     assetLoaderProvider.get(SolaImage.class)
       .addAssetMapping("duck", "assets/duck.png")
@@ -44,12 +46,12 @@ public class GuiCookbook extends SolaWithDefaults {
       StreamGuiElementContainer::new,
       p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).padding.set(10).setWidth(platform.getRenderer().getWidth()).setHeight(platform.getRenderer().getHeight()).setId("root"),
       solaGuiDocument.createElement(
-        TextGuiElement::new,
-        p -> p.setText("Gui Cookbook").margin.setLeft(10).margin.setBottom(10)
-      ),
-      solaGuiDocument.createElement(
         StreamGuiElementContainer::new,
-        p -> p.setGap(5).setId("nav"),
+        p -> p.setGap(5),
+        solaGuiDocument.createElement(
+          TextGuiElement::new,
+          p -> p.setText("Gui Cookbook").margin.setLeft(10).margin.setRight(10)
+        ),
         makeNavButton(new ElementGroup(solaGuiDocument, "General", new CommonPropertiesDemo(solaGuiDocument), new TextElementDemo(solaGuiDocument), new ImageElementDemo(solaGuiDocument)))
       )
     );

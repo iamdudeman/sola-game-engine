@@ -32,21 +32,13 @@ public class ElementGroup {
         p -> p.setGap(5),
         document.createElement(
           TextGuiElement::new,
-          p -> p.setText(title)
+          p -> p.setText(title).margin.setLeft(20).margin.setRight(10)
         ),
         document.createElement(
-          ButtonGuiElement::new,
-          p -> p.setText("Close")
-        ).setOnAction(() -> {
-          document.getElementById("root", StreamGuiElementContainer.class).removeChild(
-            document.getElementById("category")
-          );
-        })
-      ),
-      document.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setGap(5).setId("elementNav"),
-        Arrays.stream(elementDemos).map(this::makeNavButton).toList().toArray(new GuiElement<?>[]{})
+          StreamGuiElementContainer::new,
+          p -> p.setGap(5),
+          Arrays.stream(elementDemos).map(this::makeNavButton).toList().toArray(new GuiElement<?>[]{})
+        )
       )
     );
   }
