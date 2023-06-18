@@ -93,7 +93,7 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     return switch (properties.horizontalAlignment) {
       case LEFT -> 0;
       case CENTER -> width / 2 - (getContentWidth() + properties.padding.getLeft() + properties.padding.getRight()) / 2;
-      case RIGHT -> (width - ((properties.padding.getLeft() + properties.padding.getRight() + getContentWidth())));
+      case RIGHT -> (width - ((properties.padding.getLeft() + (properties.padding.getRight() * 2) + getContentWidth())));
     };
   }
 
@@ -107,7 +107,7 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     return switch (properties.verticalAlignment) {
       case TOP -> 0;
       case CENTER -> height / 2 - (getContentHeight() + properties.padding.getTop() + properties.padding.getBottom()) / 2;
-      case BOTTOM -> (height - ((properties.padding.getTop() + properties.padding.getBottom() + getContentHeight())));
+      case BOTTOM -> (height - ((properties.padding.getTop() + (properties.padding.getBottom() * 2) + getContentHeight())));
     };
   }
 
