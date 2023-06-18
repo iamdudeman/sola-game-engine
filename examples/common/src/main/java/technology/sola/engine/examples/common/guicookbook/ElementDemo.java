@@ -35,4 +35,15 @@ public abstract class ElementDemo {
   }
 
   protected abstract GuiElement<?> getElementPage();
+
+  protected GuiElement<?> createExampleContainer(String title, GuiElement<?> ...entries) {
+    return document.createElement(
+      StreamGuiElementContainer::new,
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(10),
+      document.createElement(
+        TextGuiElement::new,
+        p -> p.setText(title)
+      )
+    ).addChild(entries);
+  }
 }

@@ -4,7 +4,6 @@ import technology.sola.engine.examples.common.guicookbook.ElementDemo;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.elements.ImageGuiElement;
-import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 
 public class ImageElementDemo extends ElementDemo {
@@ -17,13 +16,8 @@ public class ImageElementDemo extends ElementDemo {
     return document.createElement(
       StreamGuiElementContainer::new,
       p -> p.setGap(25),
-      document.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(10),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setText("Original size")
-        ),
+
+      createExampleContainer("Original size",
         document.createElement(
           ImageGuiElement::new,
           p -> p.setAssetId("test_tiles")
@@ -33,13 +27,8 @@ public class ImageElementDemo extends ElementDemo {
           p -> p.setAssetId("duck")
         )
       ),
-      document.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(10),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setText("50x50 size")
-        ),
+
+      createExampleContainer("50x50 size",
         document.createElement(
           ImageGuiElement::new,
           p -> p.setAssetId("test_tiles").setWidth(50).setHeight(50)
@@ -49,13 +38,8 @@ public class ImageElementDemo extends ElementDemo {
           p -> p.setAssetId("duck").setWidth(50).setHeight(50)
         )
       ),
-      document.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(10),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setText("200x200 size")
-        ),
+
+      createExampleContainer("200x200 size",
         document.createElement(
           ImageGuiElement::new,
           p -> p.setAssetId("test_tiles").setWidth(200).setHeight(200)

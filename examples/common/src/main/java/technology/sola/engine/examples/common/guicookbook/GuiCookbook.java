@@ -4,6 +4,7 @@ import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.examples.common.guicookbook.container.StreamContainerDemo;
 import technology.sola.engine.examples.common.guicookbook.general.CommonPropertiesDemo;
 import technology.sola.engine.examples.common.guicookbook.general.ImageElementDemo;
 import technology.sola.engine.examples.common.guicookbook.general.TextElementDemo;
@@ -13,8 +14,6 @@ import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementCo
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 
 /* todo
-    container
-     stream container
     form
      button
      text input
@@ -52,7 +51,8 @@ public class GuiCookbook extends SolaWithDefaults {
           TextGuiElement::new,
           p -> p.setText("Gui Cookbook").margin.setLeft(10).margin.setRight(10)
         ),
-        makeNavButton(new ElementGroup(solaGuiDocument, "General", new CommonPropertiesDemo(solaGuiDocument), new TextElementDemo(solaGuiDocument), new ImageElementDemo(solaGuiDocument)))
+        makeNavButton(new ElementGroup(solaGuiDocument, "General", new CommonPropertiesDemo(solaGuiDocument), new TextElementDemo(solaGuiDocument), new ImageElementDemo(solaGuiDocument))),
+        makeNavButton(new ElementGroup(solaGuiDocument, "Container", new StreamContainerDemo(solaGuiDocument)))
       )
     );
   }

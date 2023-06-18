@@ -18,13 +18,7 @@ public class TextElementDemo extends ElementDemo {
     return document.createElement(
       StreamGuiElementContainer::new,
       p -> p.setGap(25),
-      document.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(10),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setText("Colors")
-        ),
+      createExampleContainer("Colors",
         document.createElement(
           TextGuiElement::new,
           p -> p.setText("Red").setColorText(Color.RED)
@@ -42,6 +36,8 @@ public class TextElementDemo extends ElementDemo {
           p -> p.setText("Orange on hover").hover.setColorText(Color.ORANGE)
         )
       ),
+
+
       document.createElement(
         StreamGuiElementContainer::new,
         p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(10).setWidth(202).setBorderColor(Color.DARK_GRAY),
@@ -62,13 +58,8 @@ public class TextElementDemo extends ElementDemo {
           p -> p.setText("Right").setTextAlign(BaseTextGuiElement.TextAlign.RIGHT).setWidth(200)
         )
       ),
-      document.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(10),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setText("Fonts")
-        ),
+
+      createExampleContainer("Fonts",
         document.createElement(
           TextGuiElement::new,
           p -> p.setText("default (monospaced_NORMAL_16)")
@@ -82,16 +73,11 @@ public class TextElementDemo extends ElementDemo {
           p -> p.setText("times_NORMAL_18").setFontAssetId("times_NORMAL_18")
         )
       ),
-      document.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(10).setBorderColor(Color.DARK_GRAY),
+
+      createExampleContainer("Text wrapping",
         document.createElement(
           TextGuiElement::new,
-          p -> p.setText("Text wrapping")
-        ),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setText("This is a longer text that will wrap into another line for sure.").setWidth(200)
+          p -> p.setText("This is a longer text that will wrap into another line for sure.").setWidth(200).setBorderColor(Color.DARK_GRAY)
         )
       )
     );

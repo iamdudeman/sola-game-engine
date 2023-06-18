@@ -18,13 +18,7 @@ public class CommonPropertiesDemo extends ElementDemo {
     return document.createElement(
       StreamGuiElementContainer::new,
       p -> p.setGap(25),
-      document.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setGap(10).setDirection(StreamGuiElementContainer.Direction.VERTICAL),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setText("Borders")
-        ),
+      createExampleContainer("Borders",
         document.createElement(
           TextGuiElement::new,
           p -> p.setText("Green w/ orange hover").setBorderColor(Color.GREEN).hover.setBorderColor(Color.ORANGE)
@@ -34,13 +28,8 @@ public class CommonPropertiesDemo extends ElementDemo {
           p -> p.setText("Red w/ blue hover").setBorderColor(Color.RED).hover.setBorderColor(Color.BLUE)
         )
       ),
-      document.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setGap(10).setDirection(StreamGuiElementContainer.Direction.VERTICAL),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setText("Background")
-        ),
+
+      createExampleContainer("Background",
         document.createElement(
           TextGuiElement::new,
           p -> p.setText("Green w/ orange hover").setBackgroundColor(Color.GREEN).hover.setBackgroundColor(Color.ORANGE)
@@ -50,13 +39,8 @@ public class CommonPropertiesDemo extends ElementDemo {
           p -> p.setText("Red w/ blue hover").setBackgroundColor(Color.RED).hover.setBackgroundColor(Color.BLUE)
         )
       ),
-      document.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setGap(10).setDirection(StreamGuiElementContainer.Direction.VERTICAL),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setText("Padding")
-        ),
+
+      createExampleContainer("Padding",
         document.createElement(
           TextGuiElement::new,
           p -> p.setText("0").padding.set(0).setBorderColor(Color.BLACK)
@@ -70,13 +54,8 @@ public class CommonPropertiesDemo extends ElementDemo {
           p -> p.setText("50").padding.set(50).setBorderColor(Color.BLACK)
         )
       ),
-      document.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setGap(10).setDirection(StreamGuiElementContainer.Direction.VERTICAL),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setText("Margin")
-        ),
+
+      createExampleContainer("Margin",
         document.createElement(
           TextGuiElement::new,
           p -> p.setText("0").margin.set(0).setBorderColor(Color.BLACK)
