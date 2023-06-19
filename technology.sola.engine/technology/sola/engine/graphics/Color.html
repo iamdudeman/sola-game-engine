@@ -203,19 +203,29 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRed()" class="member-name-link">getRed</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasAlpha()" class="member-name-link">hasAlpha</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#greyScale()" class="member-name-link">greyScale</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a grey scale Color using this Color as the base.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasAlpha()" class="member-name-link">hasAlpha</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hexInt()" class="member-name-link">hexInt</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hexInt()" class="member-name-link">hexInt</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#shade(float)" class="member-name-link">shade</a><wbr>(float&nbsp;shadeFactor)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a new Color that is a shade of this Color.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toGreyScale()" class="member-name-link">toGreyScale</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#tint(float)" class="member-name-link">tint</a><wbr>(float&nbsp;tintFactor)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Creates a grey scale Color using this Color as the base.</div>
+<div class="block">Creates a new Color that is a tint of this Color.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -434,13 +444,39 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="toGreyScale()">
-<h3>toGreyScale</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">toGreyScale</span>()</div>
+<section class="detail" id="greyScale()">
+<h3>greyScale</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">greyScale</span>()</div>
 <div class="block">Creates a grey scale Color using this Color as the base.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>this color as greyscale</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="shade(float)">
+<h3>shade</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">shade</span><wbr><span class="parameters">(float&nbsp;shadeFactor)</span></div>
+<div class="block">Creates a new Color that is a shade of this Color.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>shadeFactor</code> - the shade factor from 0-1</dd>
+<dt>Returns:</dt>
+<dd>the shaded Color</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="tint(float)">
+<h3>tint</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">tint</span><wbr><span class="parameters">(float&nbsp;tintFactor)</span></div>
+<div class="block">Creates a new Color that is a tint of this Color.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>tintFactor</code> - the tint factor from 0-1</dd>
+<dt>Returns:</dt>
+<dd>the tinted Color</dd>
 </dl>
 </section>
 </li>
