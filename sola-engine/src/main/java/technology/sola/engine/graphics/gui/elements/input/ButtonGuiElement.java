@@ -1,6 +1,5 @@
 package technology.sola.engine.graphics.gui.elements.input;
 
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
 import technology.sola.engine.input.Key;
