@@ -6,6 +6,7 @@ import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.examples.common.guicookbook.GuiCookbook;
 import technology.sola.engine.examples.common.networking.NetworkingExample;
 import technology.sola.engine.examples.common.singlefile.AnimationExample;
 import technology.sola.engine.examples.common.singlefile.AudioExample;
@@ -16,7 +17,6 @@ import technology.sola.engine.examples.common.singlefile.RenderingExample;
 import technology.sola.engine.examples.common.singlefile.SimplePlatformerExample;
 import technology.sola.engine.examples.common.singlefile.StressTestPhysicsExample;
 import technology.sola.engine.examples.common.singlefile.StressTestRenderingExample;
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
@@ -36,31 +36,52 @@ public class ExampleLauncherSola extends SolaWithDefaults {
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     defaultsConfigurator.useGui();
-    solaGuiDocument.globalProperties.setDefaultTextColor(Color.WHITE);
-    solaGuiDocument.setGuiRoot(buildGui());
+
+    var guiRoot = buildGui();
+
+    solaGuiDocument.setGuiRoot(guiRoot);
+
+    guiRoot.requestFocus();
   }
 
   private GuiElement<?> buildGui() {
     return solaGuiDocument.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(5)
+      p -> p.setDirection(StreamGuiElementContainer.Direction.HORIZONTAL).setGap(5)
         .setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.CENTER)
         .setVerticalAlignment(StreamGuiElementContainer.VerticalAlignment.CENTER)
         .padding.set(5).setWidth(800).setHeight(580),
       solaGuiDocument.createElement(
-        TextGuiElement::new,
-        p -> p.setText("Select an example to launch").margin.setBottom(15)
+        StreamGuiElementContainer::new,
+        p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(5)
+          .setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.CENTER)
+          .setVerticalAlignment(StreamGuiElementContainer.VerticalAlignment.CENTER),
+        solaGuiDocument.createElement(
+          TextGuiElement::new,
+          p -> p.setText("Single file examples").margin.setBottom(15)
+        ),
+        buildExampleLaunchButton("Animation", AnimationExample::new),
+        buildExampleLaunchButton("Audio", AudioExample::new),
+        buildExampleLaunchButton("Gui", GuiExample::new),
+        buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new),
+        buildExampleLaunchButton("Particle", ParticleExample::new),
+        buildExampleLaunchButton("Rendering", RenderingExample::new),
+        buildExampleLaunchButton("Simple Platformer", SimplePlatformerExample::new),
+        buildExampleLaunchButton("Stress Test - Physics", () -> new StressTestPhysicsExample(500)),
+        buildExampleLaunchButton("Stress Test - Rendering", StressTestRenderingExample::new)
       ),
-      buildExampleLaunchButton("Animation", AnimationExample::new),
-      buildExampleLaunchButton("Audio", AudioExample::new),
-      buildExampleLaunchButton("Gui", GuiExample::new),
-      buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new),
-      buildExampleLaunchButton("Networking", NetworkingExample::new),
-      buildExampleLaunchButton("Particle", ParticleExample::new),
-      buildExampleLaunchButton("Rendering", RenderingExample::new),
-      buildExampleLaunchButton("Simple Platformer", SimplePlatformerExample::new),
-      buildExampleLaunchButton("Stress Test - Physics", () -> new StressTestPhysicsExample(500)),
-      buildExampleLaunchButton("Stress Test - Rendering", StressTestRenderingExample::new)
+      solaGuiDocument.createElement(
+        StreamGuiElementContainer::new,
+        p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(5)
+          .setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.CENTER)
+          .setVerticalAlignment(StreamGuiElementContainer.VerticalAlignment.CENTER),
+        solaGuiDocument.createElement(
+          TextGuiElement::new,
+          p -> p.setText("Larger examples").margin.setBottom(15)
+        ),
+        buildExampleLaunchButton("Gui Cookbook", GuiCookbook::new),
+        buildExampleLaunchButton("Networking", NetworkingExample::new)
+      )
     );
   }
 

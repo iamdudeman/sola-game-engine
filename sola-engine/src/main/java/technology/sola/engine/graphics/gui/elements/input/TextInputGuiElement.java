@@ -83,17 +83,12 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputGuiElement
     private String placeholder = "";
     private String value = "";
     private Integer maxLength;
-    private Color colorPlaceholderText = Color.LIGHT_GRAY;
+    private Color colorPlaceholderText;
 
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
-      setFocusable(true);
-      setFocusOutlineColor(Color.LIGHT_BLUE);
 
-      setBorderColor(Color.WHITE);
-      setBackgroundColor(Color.BLACK);
-      hover.setBackgroundColor(new Color(150, 40, 40, 40));
-      padding.set(4);
+      setColorPlaceholderText(getColorText().tint(0.5f));
     }
 
     public Properties setColorPlaceholderText(Color colorPlaceholderText) {

@@ -36,7 +36,10 @@ public class AudioExample extends SolaWithDefaults {
         if (assets[1] instanceof AudioClip audioClip) {
           audioClip.setVolume(0.25f);
 
-          solaGuiDocument.setGuiRoot(buildGui(audioClip), 15, 15);
+          var guiRoot = buildGui(audioClip);
+
+          solaGuiDocument.setGuiRoot(guiRoot, 15, 15);
+          guiRoot.requestFocus();
         }
 
         completeAsyncInit.run();
@@ -57,17 +60,14 @@ public class AudioExample extends SolaWithDefaults {
   }
 
   private StreamGuiElementContainer buildVolumeContainer(AudioClip audioClip) {
-    StreamGuiElementContainer volumeContainer = solaGuiDocument.createElement(
-      StreamGuiElementContainer::new,
-      p -> p.padding.set(5)
-    );
-
     TextGuiElement volumeTextGuiElement = solaGuiDocument.createElement(
       TextGuiElement::new,
       p -> p.setText(formatAudioVolume(audioClip.getVolume()))
     );
 
-    volumeContainer.addChild(
+    return solaGuiDocument.createElement(
+      StreamGuiElementContainer::new,
+      p -> p.padding.set(5),
       createButton("Vol Up", () -> {
         float newVolume = audioClip.getVolume() + 0.05f;
 
@@ -90,8 +90,6 @@ public class AudioExample extends SolaWithDefaults {
       }),
       volumeTextGuiElement
     );
-
-    return volumeContainer;
   }
 
   private GuiElement<?> buildControlsContainer(AudioClip audioClip) {
@@ -113,6 +111,6 @@ public class AudioExample extends SolaWithDefaults {
   }
 
   private String formatAudioVolume(float volume) {
-    return "" + Math.round(volume * 100);
+    return Integer.toString(Math.round(volume * 100));
   }
 }

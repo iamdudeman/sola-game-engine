@@ -3,8 +3,9 @@ package technology.sola.engine.graphics.gui.elements.container;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementContainer;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
+import technology.sola.engine.graphics.gui.properties.GuiElementBaseHoverProperties;
+import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
-import technology.sola.engine.graphics.gui.properties.DefaultGuiElementProperties;
 import technology.sola.engine.input.Key;
 
 import java.util.List;
@@ -92,7 +93,7 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     return switch (properties.horizontalAlignment) {
       case LEFT -> 0;
       case CENTER -> width / 2 - (getContentWidth() + properties.padding.getLeft() + properties.padding.getRight()) / 2;
-      case RIGHT -> (width - ((properties.padding.getLeft() + properties.padding.getRight() + getContentWidth())));
+      case RIGHT -> (width - ((properties.padding.getLeft() + (properties.padding.getRight() * 2) + getContentWidth())));
     };
   }
 
@@ -106,7 +107,7 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     return switch (properties.verticalAlignment) {
       case TOP -> 0;
       case CENTER -> height / 2 - (getContentHeight() + properties.padding.getTop() + properties.padding.getBottom()) / 2;
-      case BOTTOM -> (height - ((properties.padding.getTop() + properties.padding.getBottom() + getContentHeight())));
+      case BOTTOM -> (height - ((properties.padding.getTop() + (properties.padding.getBottom() * 2) + getContentHeight())));
     };
   }
 
@@ -132,14 +133,14 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     return -1;
   }
 
-  public static class Properties extends DefaultGuiElementProperties {
+  public static class Properties extends GuiElementBaseProperties<GuiElementBaseHoverProperties> {
     private Direction direction = Direction.HORIZONTAL;
     private HorizontalAlignment horizontalAlignment = HorizontalAlignment.LEFT;
     private VerticalAlignment verticalAlignment = VerticalAlignment.TOP;
     private int gap = 0;
 
     public Properties(GuiElementGlobalProperties globalProperties) {
-      super(globalProperties);
+      super(globalProperties, new GuiElementBaseHoverProperties());
     }
 
     public Direction getDirection() {

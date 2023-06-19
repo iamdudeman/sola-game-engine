@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui.elements;
 
+import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties> extends GuiElement<T> {
-  private Font font;
+  private Font font = DefaultFont.get();
   private String currentFontAssetId;
 
   private int textWidth = 1;

@@ -2,6 +2,13 @@
 
 ## Known Bugs List
 
+* Exception in thread "Thread-6" java.util.ConcurrentModificationException
+  at java.base/java.util.HashMap.computeIfAbsent(HashMap.java:1221)
+  at technology.sola.engine/technology.sola.engine.assets.AssetLoader.get(AssetLoader.java:49)
+  at technology.sola.engine/technology.sola.engine.assets.AssetLoader.getNewAsset(AssetLoader.java:62)
+  at technology.sola.engine.platform.javafx@0.3.1/technology.sola.engine.platform.javafx.assets.JavaFxFontAssetLoader.lambda$loadAsset$1(JavaFxFontAssetLoader.java:38)
+* gui hover state gets "stuck" when mouse moves off container
+
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Planned Cleanup List
@@ -10,11 +17,18 @@
   * maybe default light and dark theme
   * sets defaults for all gui elements
     * focus, borders, backgrounds, text, etc.
+* change vertical and horizontal alignment enums to one alignment enum with Start, Center, End as options
 
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
 
+* gui cookbook
+  * forum category
+    * button
+    * text input
+* gui element hidden enhancement of some sort
+    * no way to "display none" an element (only hide while taking up space still)
 * networking
   * rest client interface
     * javafx/swing impl
@@ -23,6 +37,8 @@
 * Rendering
   * Ability to change line width when drawing
   * Implement more BlendModes
+  * Add a way to do gradients
+    * maybe just linear at first
 * BrowserPlatform
   * modularize (requires figuring out how to modularize parts of teavm needed)
 * Particle System

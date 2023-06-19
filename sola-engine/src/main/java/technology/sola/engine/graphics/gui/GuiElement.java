@@ -52,17 +52,17 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
   }
 
   public int getNonContentWidth() {
-    return properties.padding.getLeft() + properties.padding.getRight() + properties().getBorderSize() * 2;
+    return properties.padding.getLeft() + properties.padding.getRight() + properties.getBorderSize() * 2;
   }
 
   public int getNonContentHeight() {
-    return properties.padding.getTop() + properties.padding.getBottom() + properties().getBorderSize() * 2;
+    return properties.padding.getTop() + properties.padding.getBottom() + properties.getBorderSize() * 2;
   }
 
   public abstract void recalculateLayout();
 
   public boolean isLayoutChanged() {
-    return properties().isLayoutChanged();
+    return properties.isLayoutChanged();
   }
 
   public abstract void renderSelf(Renderer renderer, int x, int y);
@@ -218,8 +218,6 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
   }
 
   public void handleMouseEvent(MouseEvent event, String eventType) {
-    T properties = properties();
-
     if (properties.isHidden()) {
       return;
     }

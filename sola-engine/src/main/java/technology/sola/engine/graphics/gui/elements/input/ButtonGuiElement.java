@@ -1,6 +1,5 @@
 package technology.sola.engine.graphics.gui.elements.input;
 
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
 import technology.sola.engine.input.Key;
@@ -71,11 +70,6 @@ public class ButtonGuiElement extends BaseInputGuiElement<ButtonGuiElement.Prope
   public static class Properties extends BaseInputGuiElement.Properties {
     public Properties(GuiElementGlobalProperties globalProperties) {
       super(globalProperties);
-      setFocusable(true);
-      setFocusOutlineColor(Color.LIGHT_BLUE);
-
-      setBackgroundColor(Color.DARK_GRAY);
-      setBorderColor(Color.WHITE);
     }
   }
 }

@@ -92,36 +92,6 @@ public class SolaGuiDocument {
     focusElement(guiElement);
   }
 
-  public void onKeyPressed(KeyEvent keyEvent) {
-    if (rootGuiElement != null) {
-      rootGuiElement.handleKeyEvent(new GuiKeyEvent(keyEvent, GuiKeyEvent.Type.PRESS));
-    }
-  }
-
-  public void onKeyReleased(KeyEvent keyEvent) {
-    if (rootGuiElement != null) {
-      rootGuiElement.handleKeyEvent(new GuiKeyEvent(keyEvent, GuiKeyEvent.Type.RELEASE));
-    }
-  }
-
-  public void onMousePressed(MouseEvent event) {
-    if (rootGuiElement != null) {
-      rootGuiElement.handleMouseEvent(event, "press");
-    }
-  }
-
-  public void onMouseReleased(MouseEvent event) {
-    if (rootGuiElement != null) {
-      rootGuiElement.handleMouseEvent(event, "release");
-    }
-  }
-
-  public void onMouseMoved(MouseEvent event) {
-    if (rootGuiElement != null) {
-      rootGuiElement.handleMouseEvent(event, "move");
-    }
-  }
-
   public AssetLoaderProvider getAssetLoaderProvider() {
     return assetLoaderProvider;
   }
@@ -148,6 +118,36 @@ public class SolaGuiDocument {
     }
 
     return clazz.cast(guiElement);
+  }
+
+  private void onKeyPressed(KeyEvent keyEvent) {
+    if (rootGuiElement != null) {
+      rootGuiElement.handleKeyEvent(new GuiKeyEvent(keyEvent, GuiKeyEvent.Type.PRESS));
+    }
+  }
+
+  private void onKeyReleased(KeyEvent keyEvent) {
+    if (rootGuiElement != null) {
+      rootGuiElement.handleKeyEvent(new GuiKeyEvent(keyEvent, GuiKeyEvent.Type.RELEASE));
+    }
+  }
+
+  private void onMousePressed(MouseEvent event) {
+    if (rootGuiElement != null) {
+      rootGuiElement.handleMouseEvent(event, "press");
+    }
+  }
+
+  private void onMouseReleased(MouseEvent event) {
+    if (rootGuiElement != null) {
+      rootGuiElement.handleMouseEvent(event, "release");
+    }
+  }
+
+  private void onMouseMoved(MouseEvent event) {
+    if (rootGuiElement != null) {
+      rootGuiElement.handleMouseEvent(event, "move");
+    }
   }
 
   private void initializeForPlatform(SolaPlatform platform) {
