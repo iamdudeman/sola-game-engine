@@ -18,7 +18,6 @@
 
 * gui cookbook
   * forum category
-    * button
     * text input
 * gui element hidden enhancement of some sort
     * no way to "display none" an element (only hide while taking up space still)
