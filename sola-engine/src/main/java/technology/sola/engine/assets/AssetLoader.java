@@ -5,6 +5,12 @@ import technology.sola.engine.assets.exception.MissingAssetException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The AssetLoader class contains functionality for loading an {@link Asset} type. These are implemented for each
+ * {@link technology.sola.engine.core.SolaPlatform} and {@link Asset} combination.
+ *
+ * @param <T> the {@link Asset} type
+ */
 public abstract class AssetLoader<T extends Asset> {
   protected Map<String, AssetHandle<T>> cachedAssets = new HashMap<>();
   protected Map<String, String> assetIdToPathMap = new HashMap<>();
@@ -22,10 +28,23 @@ public abstract class AssetLoader<T extends Asset> {
     return this;
   }
 
+  /**
+   * Checks to see if an asset mapping has already been added to this loader.
+   *
+   * @param id the id for the asset mapping
+   * @return true if the asset mapping has already been added
+   */
   public boolean hasAssetMapping(String id) {
     return assetIdToPathMap.containsKey(id);
   }
 
+  /**
+   * Manually add an {@link Asset} to this loader.
+   *
+   * @param id    the id for the {@code Asset}
+   * @param asset the {@code Asset}
+   * @return this loader
+   */
   public AssetLoader<T> addAsset(String id, T asset) {
     cachedAssets.put(id, new AssetHandle<>(asset));
     assetIdToPathMap.put(id, "");
@@ -46,7 +65,14 @@ public abstract class AssetLoader<T extends Asset> {
       throw new MissingAssetException(id);
     }
 
-    return cachedAssets.computeIfAbsent(id, key -> loadAsset(assetPath));
+    AssetHandle<T> cachedAsset = cachedAssets.get(id);
+
+    if (cachedAsset == null) {
+      cachedAsset = loadAsset(assetPath);
+      cachedAssets.put(id, cachedAsset);
+    }
+
+    return cachedAsset;
   }
 
   /**

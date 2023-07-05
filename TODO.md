@@ -2,13 +2,6 @@
 
 ## Known Bugs List
 
-* Exception in thread "Thread-6" java.util.ConcurrentModificationException
-  at java.base/java.util.HashMap.computeIfAbsent(HashMap.java:1221)
-  at technology.sola.engine/technology.sola.engine.assets.AssetLoader.get(AssetLoader.java:49)
-  at technology.sola.engine/technology.sola.engine.assets.AssetLoader.getNewAsset(AssetLoader.java:62)
-  at technology.sola.engine.platform.javafx@0.3.1/technology.sola.engine.platform.javafx.assets.JavaFxFontAssetLoader.lambda$loadAsset$1(JavaFxFontAssetLoader.java:38)
-* gui hover state gets "stuck" when mouse moves off container
-
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Planned Cleanup List
