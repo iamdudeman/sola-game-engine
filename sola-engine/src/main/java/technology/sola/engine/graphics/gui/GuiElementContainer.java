@@ -111,7 +111,7 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
       if (childToRemove.isFocussed()) {
         this.requestFocus();
       }
-      
+
       properties.setLayoutChanged(true);
     }
 
@@ -162,7 +162,7 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
 
       children.forEach(child -> child.handleMouseEvent(event, eventType));
     } else {
-      children.forEach(child -> child.onMouseExit(event));
+      children.forEach(child -> child.handleMouseEvent(event, eventType));
 
       onMouseExit(event);
     }
