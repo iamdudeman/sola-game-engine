@@ -75,9 +75,15 @@ loadScripts(document, 'script');</script>
 <div class="inheritance">technology.sola.engine.assets.AssetLoader&lt;T&gt;</div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>T</code> - the <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> type</dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">AssetLoader&lt;T extends <a href="Asset.html" title="interface in technology.sola.engine.assets">Asset</a>&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">The AssetLoader class contains functionality for loading an <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> type. These are implemented for each
+ <a href="../core/SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> and <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> combination.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -126,7 +132,9 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="AssetLoader.html" title="class in technology.sola.engine.assets">AssetLoader</a>&lt;<a href="AssetLoader.html" title="type parameter in AssetLoader">T</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addAsset(java.lang.String,T)" class="member-name-link">addAsset</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  <a href="AssetLoader.html" title="type parameter in AssetLoader">T</a>&nbsp;asset)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Manually add an <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> to this loader.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="AssetLoader.html" title="class in technology.sola.engine.assets">AssetLoader</a>&lt;<a href="AssetLoader.html" title="type parameter in AssetLoader">T</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addAssetMapping(java.lang.String,java.lang.String)" class="member-name-link">addAssetMapping</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</code></div>
@@ -149,7 +157,9 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasAssetMapping(java.lang.String)" class="member-name-link">hasAssetMapping</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks to see if an asset mapping has already been added to this loader.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract <a href="AssetHandle.html" title="class in technology.sola.engine.assets">AssetHandle</a>&lt;<a href="AssetLoader.html" title="type parameter in AssetLoader">T</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#loadAsset(java.lang.String)" class="member-name-link">loadAsset</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
@@ -223,6 +233,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="hasAssetMapping(java.lang.String)">
 <h3>hasAssetMapping</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasAssetMapping</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</span></div>
+<div class="block">Checks to see if an asset mapping has already been added to this loader.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>id</code> - the id for the asset mapping</dd>
+<dt>Returns:</dt>
+<dd>true if the asset mapping has already been added</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -230,6 +247,14 @@ loadScripts(document, 'script');</script>
 <h3 id="addAsset(java.lang.String,technology.sola.engine.assets.Asset)">addAsset</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="AssetLoader.html" title="class in technology.sola.engine.assets">AssetLoader</a>&lt;<a href="AssetLoader.html" title="type parameter in AssetLoader">T</a>&gt;</span>&nbsp;<span class="element-name">addAsset</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  <a href="AssetLoader.html" title="type parameter in AssetLoader">T</a>&nbsp;asset)</span></div>
+<div class="block">Manually add an <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> to this loader.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>id</code> - the id for the <code>Asset</code></dd>
+<dd><code>asset</code> - the <code>Asset</code></dd>
+<dt>Returns:</dt>
+<dd>this loader</dd>
+</dl>
 </section>
 </li>
 <li>
