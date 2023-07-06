@@ -8,16 +8,12 @@ import technology.sola.engine.examples.common.guicookbook.container.StreamContai
 import technology.sola.engine.examples.common.guicookbook.general.CommonPropertiesDemo;
 import technology.sola.engine.examples.common.guicookbook.general.ImageElementDemo;
 import technology.sola.engine.examples.common.guicookbook.general.TextElementDemo;
+import technology.sola.engine.examples.common.guicookbook.input.ButtonElementDemo;
+import technology.sola.engine.examples.common.guicookbook.input.TextInputElementDemo;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
-
-/* todo
-    form
-     button
-     text input
-*/
 
 public class GuiCookbook extends SolaWithDefaults {
   public GuiCookbook() {
@@ -52,7 +48,8 @@ public class GuiCookbook extends SolaWithDefaults {
           p -> p.setText("Gui Cookbook").margin.setLeft(10).margin.setRight(10)
         ),
         makeNavButton(new ElementGroup(solaGuiDocument, "General", new CommonPropertiesDemo(solaGuiDocument), new TextElementDemo(solaGuiDocument), new ImageElementDemo(solaGuiDocument))),
-        makeNavButton(new ElementGroup(solaGuiDocument, "Container", new StreamContainerDemo(solaGuiDocument)))
+        makeNavButton(new ElementGroup(solaGuiDocument, "Container", new StreamContainerDemo(solaGuiDocument))),
+        makeNavButton(new ElementGroup(solaGuiDocument, "Input", new ButtonElementDemo(solaGuiDocument), new TextInputElementDemo(solaGuiDocument)))
       )
     );
   }
