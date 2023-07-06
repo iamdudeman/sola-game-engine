@@ -25,7 +25,10 @@ public class ButtonElementDemo extends ElementDemo {
           var buttonProps = document.getElementById("button", ButtonGuiElement.class).properties();
 
           buttonProps.setText(buttonProps.getText().equals("Off") ? "On" : "Off");
-        }),
+        })
+      ),
+
+      createExampleContainer("Disabled",
         document.createElement(
           ButtonGuiElement::new,
           p -> p.setText("Toggle disabled example state")
@@ -35,10 +38,7 @@ public class ButtonElementDemo extends ElementDemo {
 
           buttonProps1.setDisabled(!buttonProps1.isDisabled());
           buttonProps2.setDisabled(!buttonProps2.isDisabled());
-        })
-      ),
-
-      createExampleContainer("Disabled",
+        }),
         document.createElement(
           ButtonGuiElement::new,
           p -> p.setDisabled(true).setText("Disabled button").setId("disabled-one")
