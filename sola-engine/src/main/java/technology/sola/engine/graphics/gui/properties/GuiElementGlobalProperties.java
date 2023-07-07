@@ -1,13 +1,14 @@
 package technology.sola.engine.graphics.gui.properties;
 
+import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 
 import java.util.function.Supplier;
 
+@Deprecated
 public class GuiElementGlobalProperties {
-  public static final String DEFAULT_FONT_ASSET_ID = "default";
-  private String defaultFontAssetId = DEFAULT_FONT_ASSET_ID;
+  private String defaultFontAssetId = DefaultFont.ASSET_ID;
   private Color defaultTextColor = Color.BLACK;
 
   private final Supplier<GuiElement<?>> rootElementSupplier;

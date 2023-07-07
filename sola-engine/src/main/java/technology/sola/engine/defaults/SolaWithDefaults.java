@@ -2,6 +2,8 @@ package technology.sola.engine.defaults;
 
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SpriteSheet;
+import technology.sola.engine.assets.graphics.font.DefaultFont;
+import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.graphics.modules.CircleGraphicsModule;
@@ -193,9 +195,19 @@ public abstract class SolaWithDefaults extends Sola {
      * @return this
      */
     public DefaultsConfigurator useGui() {
+      // todo could pass in GuiPropertyDefaults object to useGui or else use default "light defaults" settings
+      //   "LightDefaults" implementation or object could be in this defaults package
       if (solaGuiDocument == null) {
-        solaGuiDocument = new SolaGuiDocument(platform, assetLoaderProvider, eventHub);
+        solaGuiDocument = new SolaGuiDocument(assetLoaderProvider, eventHub);
+        solaGuiDocument.registerEventListeners(platform);
         rebuildRenderFunction();
+
+        // Prepare default font
+        AssetLoader<Font> fontAssetLoader = assetLoaderProvider.get(Font.class);
+
+        if (!fontAssetLoader.hasAssetMapping(DefaultFont.ASSET_ID)) {
+          fontAssetLoader.addAsset(DefaultFont.ASSET_ID, DefaultFont.get());
+        }
       }
 
       return this;

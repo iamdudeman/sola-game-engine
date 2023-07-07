@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.renderer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
@@ -20,6 +22,7 @@ import java.util.Random;
  * implementation.
  */
 public class SoftwareRenderer extends Canvas implements Renderer {
+  private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareRenderer.class);
   private final Random random = new Random();
   private final List<Layer> layers = new ArrayList<>();
   private BlendMode blendMode;
@@ -58,6 +61,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   @Override
   public Font getFont() {
     if (font == null) {
+      LOGGER.warn("No font is currently set. Using DefaultFont as a backup.");
       font = DefaultFont.get();
     }
 
