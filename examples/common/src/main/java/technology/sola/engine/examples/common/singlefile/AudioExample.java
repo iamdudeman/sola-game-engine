@@ -22,7 +22,8 @@ public class AudioExample extends SolaWithDefaults {
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     defaultsConfigurator.useGui(new GuiPropertyDefaults(
       "arial_NORMAL_16",
-      Color.BLUE
+      Color.BLUE,
+      Color.WHITE
     ));
 
     platform.getViewport().setAspectMode(AspectMode.STRETCH);

@@ -34,11 +34,11 @@ public abstract class BaseInputGuiElement<T extends BaseInputGuiElement.Properti
       super(propertyDefaults);
       setFocusable(true);
 
-      setFocusOutlineColor(Color.BLACK);
-      setBorderColor(Color.BLACK);
-      setDisabledBackgroundColor(getBackgroundColor().shade(0.18f));
-
-      hover.setBackgroundColor(getBackgroundColor().shade(0.1f));
+      // property defaults
+      setFocusOutlineColor(propertyDefaults.colorFocusOutline());
+      setBorderColor(propertyDefaults.colorInputBorder());
+      setDisabledBackgroundColor(propertyDefaults.colorInputDisabledBackground());
+      hover.setBackgroundColor(propertyDefaults.colorInputHoverBackgroundColor());
     }
 
     @Override
