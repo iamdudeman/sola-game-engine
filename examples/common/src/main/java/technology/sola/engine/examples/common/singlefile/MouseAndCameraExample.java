@@ -14,9 +14,21 @@ import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.math.linear.Vector2D;
 
+/**
+ * MouseAndCameraExample is a {@link technology.sola.engine.core.Sola} for demoing mouse interactions with various
+ * camera transforms.
+ *
+ * <ul>
+ *   <li>{@link technology.sola.engine.input.MouseInput}</li>
+ *   <li>{@link CameraComponent}</li>
+ * </ul>
+ */
 public class MouseAndCameraExample extends SolaWithDefaults {
   private ClickCreateEntitySystem clickCreateEntitySystem;
 
+  /**
+   * Creates an instance of this {@link technology.sola.engine.core.Sola}.
+   */
   public MouseAndCameraExample() {
     super(SolaConfiguration.build("Mouse and Camera", 800, 600).withTargetUpdatesPerSecond(30));
   }

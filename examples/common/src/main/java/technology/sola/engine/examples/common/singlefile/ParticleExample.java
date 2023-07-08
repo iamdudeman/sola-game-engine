@@ -10,7 +10,19 @@ import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.math.linear.Vector2D;
 
+/**
+ * ParticleExample is a {@link technology.sola.engine.core.Sola} for demoing particles for the sola game engine.
+ *
+ * <ul>
+ *   <li>{@link ParticleSystem}</li>
+ *   <li>{@link technology.sola.engine.physics.component.ParticleComponent}</li>
+ *   <li>{@link ParticleEmitterComponent}</li>
+ * </ul>
+ */
 public class ParticleExample extends SolaWithDefaults {
+  /**
+   * Creates an instance of this {@link technology.sola.engine.core.Sola}.
+   */
   public ParticleExample() {
     super(SolaConfiguration.build("Particle Example", 800, 600).withTargetUpdatesPerSecond(30));
   }

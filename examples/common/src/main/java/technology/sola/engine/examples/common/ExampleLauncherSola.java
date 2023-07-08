@@ -26,9 +26,18 @@ import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 
 import java.util.function.Supplier;
 
+/**
+ * ExampleLauncherSola is a {@link Sola} that provides buttons to launch various example {@code Sola} showing off
+ * various parts of the sola game engine.
+ */
 public class ExampleLauncherSola extends SolaWithDefaults {
   private final SolaPlatform solaPlatform;
 
+  /**
+   * Creates an instance of this {@link Sola}
+   *
+   * @param solaPlatform the {@link SolaPlatform} that will launch the examples
+   */
   public ExampleLauncherSola(SolaPlatform solaPlatform) {
     super(SolaConfiguration.build("Example Launcher", 800, 600).withTargetUpdatesPerSecond(30));
     this.solaPlatform = solaPlatform;

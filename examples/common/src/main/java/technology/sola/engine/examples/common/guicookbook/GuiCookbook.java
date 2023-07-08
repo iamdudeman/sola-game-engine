@@ -15,7 +15,14 @@ import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 
+/**
+ * GuiCookbook is a {@link technology.sola.engine.core.Sola} that demos the various {@link GuiElement}s that have been
+ * implemented.
+ */
 public class GuiCookbook extends SolaWithDefaults {
+  /**
+   * Creates in instances of this {@link technology.sola.engine.core.Sola}.
+   */
   public GuiCookbook() {
     super(SolaConfiguration.build("Gui Cookbook", 1200, 800).withTargetUpdatesPerSecond(30));
   }

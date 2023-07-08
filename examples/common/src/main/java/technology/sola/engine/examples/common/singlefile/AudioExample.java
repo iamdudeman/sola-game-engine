@@ -13,7 +13,17 @@ import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.graphics.screen.AspectMode;
 
+/**
+ * AudioExample is a {@link technology.sola.engine.core.Sola} for demoing audio for the sola game engine.
+ *
+ * <ul>
+ *   <li>{@link AudioClip}</li>
+ * </ul>
+ */
 public class AudioExample extends SolaWithDefaults {
+  /**
+   * Creates an instance of this {@link technology.sola.engine.core.Sola}.
+   */
   public AudioExample() {
     super(SolaConfiguration.build("Audio Example", 600, 400).withTargetUpdatesPerSecond(30));
   }

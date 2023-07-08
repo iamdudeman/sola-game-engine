@@ -4,6 +4,9 @@ import technology.sola.math.linear.Vector2D;
 
 /**
  * Circle represents a geometric circle.
+ *
+ * @param radius the radius of the circle
+ * @param center the center point of the circle
  */
 public record Circle(float radius, Vector2D center) {
   /**
@@ -21,25 +24,5 @@ public record Circle(float radius, Vector2D center) {
     if (center == null) {
       throw new IllegalArgumentException("center cannot be null");
     }
-  }
-
-  /**
-   * Gets the radius.
-   *
-   * @return the radius
-   */
-  @Override
-  public float radius() {
-    return radius;
-  }
-
-  /**
-   * Gets the center point.
-   *
-   * @return the center point
-   */
-  @Override
-  public Vector2D center() {
-    return center;
   }
 }

@@ -10,7 +10,14 @@ import technology.sola.engine.examples.common.minesweeper.system.MinefieldSystem
 import technology.sola.engine.examples.common.minesweeper.system.PlayerInputSystem;
 import technology.sola.engine.graphics.screen.AspectMode;
 
+/**
+ * MinesweeperExample is a {@link technology.sola.engine.core.Sola} for a simple implementation of Minesweeper using
+ * the sola game engine.
+ */
 public class MinesweeperExample extends SolaWithDefaults {
+  /**
+   * Creates an instance of this {@link technology.sola.engine.core.Sola}.
+   */
   public MinesweeperExample() {
     super(SolaConfiguration.build("Minesweeper", 801, 656).withTargetUpdatesPerSecond(30));
   }

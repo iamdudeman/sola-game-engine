@@ -7,9 +7,6 @@ import technology.sola.engine.graphics.Color;
 
 import java.util.List;
 
-// todo add new setClamp(float x, float y, float width, float height) method
-// todo add new resetClamp() method
-
 /**
  * Renderer defines the API for a sola game engine renderer. {@link SoftwareRenderer} is the default implementation but
  * each {@link technology.sola.engine.core.SolaPlatform} can implement their own as well to take advantage of the GPU.

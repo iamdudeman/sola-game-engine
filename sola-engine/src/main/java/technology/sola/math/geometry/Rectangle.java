@@ -4,6 +4,9 @@ import technology.sola.math.linear.Vector2D;
 
 /**
  * Rectangle represents an axis aligned geometric rectangle.
+ *
+ * @param min the top, left point of the rectangle
+ * @param max the bottom, right point of the rectangle
  */
 public record Rectangle(Vector2D min, Vector2D max) {
   /**
@@ -23,26 +26,6 @@ public record Rectangle(Vector2D min, Vector2D max) {
     if (max.y() < min.y()) {
       throw new IllegalArgumentException("max.y cannot be less than min.y");
     }
-  }
-
-  /**
-   * Gets the top, left point of the rectangle.
-   *
-   * @return the min point
-   */
-  @Override
-  public Vector2D min() {
-    return min;
-  }
-
-  /**
-   * Gets the bottom, right point of the rectangle.
-   *
-   * @return the max point
-   */
-  @Override
-  public Vector2D max() {
-    return max;
   }
 
   /**

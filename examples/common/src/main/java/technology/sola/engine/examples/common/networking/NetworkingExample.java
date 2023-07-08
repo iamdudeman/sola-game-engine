@@ -24,9 +24,16 @@ import technology.sola.engine.networking.socket.SocketMessage;
 
 import java.util.Date;
 
+/**
+ * NetworkingExample is a {@link technology.sola.engine.core.Sola} that demos a simple socket based game. This requires
+ * that examples:server:ServerMain is running.
+ */
 public class NetworkingExample extends SolaWithDefaults {
   private long clientPlayerId = -1;
 
+  /**
+   * Creates an instance of this {@link technology.sola.engine.core.Sola}.
+   */
   public NetworkingExample() {
     super(SolaConfiguration.build("Networking Example", 800, 600).withTargetUpdatesPerSecond(30));
   }

@@ -12,7 +12,14 @@ import technology.sola.math.linear.Vector2D;
 
 import java.util.Random;
 
+/**
+ * StressTestRenderingExample is a {@link technology.sola.engine.core.Sola} for stress testing rendering for the sola
+ * game engine.
+ */
 public class StressTestRenderingExample extends SolaWithDefaults {
+  /**
+   * Creates an instance of this {@link technology.sola.engine.core.Sola}.
+   */
   public StressTestRenderingExample() {
     super(SolaConfiguration.build("Stress Test - Rendering", 800, 600).withTargetUpdatesPerSecond(30));
   }

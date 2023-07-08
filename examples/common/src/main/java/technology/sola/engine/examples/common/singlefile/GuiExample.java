@@ -14,7 +14,14 @@ import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.gui.elements.input.TextInputGuiElement;
 import technology.sola.engine.input.Key;
 
+/**
+ * GuiExample is a {@link technology.sola.engine.core.Sola} that shows an example custom gui using various
+ * {@link GuiElement}s.
+ */
 public class GuiExample extends SolaWithDefaults {
+  /**
+   * Creates an instance of this {@link technology.sola.engine.core.Sola}.
+   */
   public GuiExample() {
     super(SolaConfiguration.build("Gui Example", 800, 700).withTargetUpdatesPerSecond(30));
   }
