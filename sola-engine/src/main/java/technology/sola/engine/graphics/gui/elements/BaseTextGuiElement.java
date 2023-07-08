@@ -139,8 +139,10 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
     public Properties(GuiPropertyDefaults propertyDefaults) {
       super(propertyDefaults, new HoverProperties());
       setFocusable(false);
+
+      // default properties
       setColorText(propertyDefaults.textColor());
-      fontAssetId = propertyDefaults.fontAssetId();
+      setFontAssetId(propertyDefaults.fontAssetId());
     }
 
     public String getText() {

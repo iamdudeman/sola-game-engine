@@ -88,7 +88,8 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputGuiElement
     public Properties(GuiPropertyDefaults propertyDefaults) {
       super(propertyDefaults);
 
-      setColorPlaceholderText(getColorText().tint(0.5f));
+      // property defaults
+      setColorPlaceholderText(propertyDefaults.colorPlaceholderText());
     }
 
     public Properties setColorPlaceholderText(Color colorPlaceholderText) {
