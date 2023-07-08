@@ -9,9 +9,8 @@ public class MinesweeperField {
   private final int mineCount;
   private final int[][] field;
 
-  public MinesweeperField(int rows, int columns, int percentMines) {
-    this.mineCount = (int) (percentMines / 100.0 * (rows * columns));
-
+  public MinesweeperField(int rows, int columns, int mines) {
+    this.mineCount = mines;
     this.field = generateMinefield(rows, columns, mineCount);
   }
 
@@ -83,7 +82,7 @@ public class MinesweeperField {
       List<Point> points = getPointsAroundCoordinate(minefield, x, y);
       int count = 0;
 
-      // while it has not been placed and we still have points around attempted mine place
+      // while it has not been placed, and we still have points around attempted mine place
       while (!isPlaced && count < points.size()) {
         Point temp = points.get(count);
 

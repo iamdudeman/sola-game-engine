@@ -2,6 +2,7 @@ package technology.sola.engine.examples.common.minesweeper;
 
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.examples.common.minesweeper.event.NewGameEvent;
 import technology.sola.engine.examples.common.minesweeper.graphics.MinesweeperSquareGraphicsModule;
 import technology.sola.engine.examples.common.minesweeper.graphics.gui.MinesweeperGui;
 import technology.sola.engine.examples.common.minesweeper.system.GameOverSystem;
@@ -37,5 +38,10 @@ public class MinesweeperExample extends SolaWithDefaults {
     minefieldSystem.registerEvents(eventHub);
     gameOverSystem.registerEvents(eventHub);
     playerInputSystem.registerEvents();
+
+    eventHub.emit(new NewGameEvent(
+      MinesweeperGui.sizeOptions[0].rows(), MinesweeperGui.sizeOptions[0].columns(),
+      MinesweeperGui.difficultyOptions[0]
+    ));
   }
 }

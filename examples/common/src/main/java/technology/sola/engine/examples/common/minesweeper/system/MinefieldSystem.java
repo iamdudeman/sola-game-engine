@@ -33,20 +33,20 @@ public class MinefieldSystem extends EcsSystem {
   @Override
   public void update(World world, float deltaTime) {
     if (newGameEvent != null) {
-      solaEcs.setWorld(buildWorld(newGameEvent.rows(), newGameEvent.columns(), newGameEvent.percentMines()));
+      solaEcs.setWorld(buildWorld(newGameEvent.rows(), newGameEvent.columns(), newGameEvent.totalMines()));
       newGameEvent = null;
     }
 
     setActive(false);
   }
 
-  private World buildWorld(int rows, int columns, int percentMines) {
+  private World buildWorld(int rows, int columns, int mines) {
     World world = new World(rows * columns);
 
     int rowIndex = 0;
     int columnIndex = 0;
 
-    for (int[] row : new MinesweeperField(rows, columns, percentMines).getField()) {
+    for (int[] row : new MinesweeperField(rows, columns, mines).getField()) {
       columnIndex = 0;
 
       for (int tile : row) {
