@@ -3,7 +3,6 @@ package technology.sola.engine.graphics.gui.elements.input;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
-import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.KeyboardLayout;
 
@@ -66,19 +65,6 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputGuiElement
       || (keyCode >= Key.LEFT_BRACKET.getCode() && keyCode <= Key.RIGHT_BRACKET.getCode());
   }
 
-  @Override
-  public void renderSelf(Renderer renderer, int x, int y) {
-    Color originalColorText = properties.getColorText();
-
-    if (properties.value.isEmpty()) {
-      properties.setColorText(properties.colorPlaceholderText);
-    }
-
-    super.renderSelf(renderer, x, y);
-
-    properties.setColorText(originalColorText);
-  }
-
   public static class Properties extends BaseInputGuiElement.Properties {
     private String placeholder = "";
     private String value = "";
@@ -90,6 +76,11 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputGuiElement
 
       // property defaults
       setColorPlaceholderText(propertyDefaults.colorPlaceholderText());
+    }
+
+    @Override
+    public Color getColorText() {
+      return value.isEmpty() ? colorPlaceholderText : super.getColorText();
     }
 
     public Properties setColorPlaceholderText(Color colorPlaceholderText) {
