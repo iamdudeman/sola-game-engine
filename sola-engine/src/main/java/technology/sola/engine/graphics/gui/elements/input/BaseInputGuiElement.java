@@ -4,7 +4,6 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
-import technology.sola.engine.graphics.renderer.Renderer;
 
 public abstract class BaseInputGuiElement<T extends BaseInputGuiElement.Properties> extends BaseTextGuiElement<T> {
   public BaseInputGuiElement(SolaGuiDocument document, T properties) {
@@ -14,16 +13,6 @@ public abstract class BaseInputGuiElement<T extends BaseInputGuiElement.Properti
   @Override
   public boolean isHovered() {
     return super.isHovered() && !properties.isDisabled();
-  }
-
-  @Override
-  public void render(Renderer renderer) {
-    Color backgroundColor = properties.getBackgroundColor();
-    if (properties().isDisabled()) {
-      properties.setBackgroundColor(properties.getDisabledBackgroundColor());
-    }
-    super.render(renderer);
-    properties.setBackgroundColor(backgroundColor);
   }
 
   public static class Properties extends BaseTextGuiElement.Properties {
@@ -44,6 +33,11 @@ public abstract class BaseInputGuiElement<T extends BaseInputGuiElement.Properti
     @Override
     public boolean isFocusable() {
       return super.isFocusable() && !isDisabled();
+    }
+
+    @Override
+    public Color getBackgroundColor() {
+      return isDisabled() ? getDisabledBackgroundColor() : super.getBackgroundColor();
     }
 
     public boolean isDisabled() {
