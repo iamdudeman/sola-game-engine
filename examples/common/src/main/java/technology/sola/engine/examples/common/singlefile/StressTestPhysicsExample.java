@@ -13,16 +13,40 @@ import technology.sola.engine.physics.component.DynamicBodyComponent;
 
 import java.util.Random;
 
+/**
+ * StressTestPhysicsExample is a {@link technology.sola.engine.core.Sola} for demoing and stress testing physics for the
+ * sola game engine.
+ *
+ * <ul>
+ *   <li>{@link technology.sola.engine.defaults.SolaPhysics}</li>
+ *   <li>{@link technology.sola.engine.physics.system.PhysicsSystem}</li>
+ *   <li>{@link technology.sola.engine.physics.system.GravitySystem}</li>
+ *   <li>{@link technology.sola.engine.physics.system.CollisionDetectionSystem}</li>
+ *   <li>{@link technology.sola.engine.physics.system.ImpulseCollisionResolutionSystem}</li>
+ *   <li>{@link DynamicBodyComponent}</li>
+ * </ul>
+ */
 public class StressTestPhysicsExample extends SolaWithDefaults {
   private static final float CAMERA_SCALE = 1.5f;
   private static final float CIRCLE_RADIUS = 10f;
   private final Random random;
   private final int objectCount;
 
+  /**
+   * Creates an instance of this {@link technology.sola.engine.core.Sola}.
+   *
+   * @param objectCount the count of physics objects to create
+   */
   public StressTestPhysicsExample(int objectCount) {
     this(objectCount, false);
   }
 
+  /**
+   * Creates an instance of this {@link technology.sola.engine.core.Sola}.
+   *
+   * @param objectCount  the count of physics objects to create
+   * @param useFixedSeed causes the same random seed to be used each run for consistency
+   */
   public StressTestPhysicsExample(int objectCount, boolean useFixedSeed) {
     super(new SolaConfiguration("Stress Test - Physics", 1200, 800));
     this.objectCount = objectCount;

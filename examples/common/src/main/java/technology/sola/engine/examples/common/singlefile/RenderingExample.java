@@ -28,9 +28,23 @@ import technology.sola.math.linear.Vector2D;
 
 import java.util.List;
 
+/**
+ * RenderingExample is a {@link Sola} for demoing various graphics related things for the sola game engine.
+ *
+ * <ul>
+ *   <li>{@link Renderer}</li>
+ *   <li>{@link SolaGraphics}</li>
+ *   <li>{@link technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule}</li>
+ *   <li>{@link SolaImage}</li>
+ *   <li>{@link LayerComponent}</li>
+ * </ul>
+ */
 public class RenderingExample extends Sola {
   private final SolaGraphics solaGraphics;
 
+  /**
+   * Creates an instance of this {@link technology.sola.engine.core.Sola}.
+   */
   public RenderingExample() {
     super(SolaConfiguration.build("Rendering Example", 800, 600).withTargetUpdatesPerSecond(30));
 

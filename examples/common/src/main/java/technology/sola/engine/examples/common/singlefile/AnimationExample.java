@@ -15,7 +15,18 @@ import technology.sola.engine.graphics.components.animation.TransformAnimatorCom
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.math.EasingFunction;
 
+/**
+ * AnimationExample is a {@link technology.sola.engine.core.Sola} for demoing animations for the sola game engine.
+ *
+ * <ul>
+ *   <li>{@link SpriteAnimatorComponent}</li>
+ *   <li>{@link TransformAnimatorComponent}</li>
+ * </ul>
+ */
 public class AnimationExample extends SolaWithDefaults {
+  /**
+   * Creates an instance of this {@link technology.sola.engine.core.Sola}.
+   */
   public AnimationExample() {
     super(
       SolaConfiguration.build("Animation Example", 210, 200).withTargetUpdatesPerSecond(30)
