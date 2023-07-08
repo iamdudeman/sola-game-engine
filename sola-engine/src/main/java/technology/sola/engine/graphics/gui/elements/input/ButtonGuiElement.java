@@ -1,7 +1,7 @@
 package technology.sola.engine.graphics.gui.elements.input;
 
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
-import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
+import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseEvent;
 
@@ -13,7 +13,7 @@ public class ButtonGuiElement extends BaseInputGuiElement<ButtonGuiElement.Prope
   private boolean wasMouseDownInside = false;
 
   public ButtonGuiElement(SolaGuiDocument document) {
-    super(document, new Properties(document.globalProperties));
+    super(document, new Properties(document.propertyDefaults));
 
     setOnMouseEnterCallback(event -> {});
     setOnMouseExitCallback(event -> {});
@@ -68,8 +68,8 @@ public class ButtonGuiElement extends BaseInputGuiElement<ButtonGuiElement.Prope
   }
 
   public static class Properties extends BaseInputGuiElement.Properties {
-    public Properties(GuiElementGlobalProperties globalProperties) {
-      super(globalProperties);
+    public Properties(GuiPropertyDefaults propertyDefaults) {
+      super(propertyDefaults);
     }
   }
 }

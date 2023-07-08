@@ -27,13 +27,6 @@ public class GuiExample extends SolaWithDefaults {
     solaGuiDocument.setGuiRoot(guiRoot, 15, 15);
     guiRoot.requestFocus();
 
-    ButtonGuiElement changeFontButtonEle = solaGuiDocument.getElementById("changeFont", ButtonGuiElement.class);
-
-    changeFontButtonEle.setOnAction(() -> {
-      solaGuiDocument.globalProperties.setDefaultFontAssetId("times_NORMAL_18");
-      changeFontButtonEle.properties().setDisabled(true);
-    });
-
     assetLoaderProvider.get(SolaImage.class)
       .addAssetMapping("test", "assets/test_tiles.png");
     assetLoaderProvider.get(Font.class)
@@ -85,17 +78,13 @@ public class GuiExample extends SolaWithDefaults {
         p -> p.setDirection(StreamGuiElementContainer.Direction.HORIZONTAL).setGap(5),
         solaGuiDocument.createElement(
           ButtonGuiElement::new,
-          p -> p.setText("Change font").padding.set(5).setId("changeFont")
-        ),
+          p -> p.setText("Enable text input").padding.set(5)
+        ).setOnAction(() -> ((TextInputGuiElement) solaGuiDocument.getElementById("textInput")).properties().setDisabled(false)),
         solaGuiDocument.createElement(
           TextInputGuiElement::new,
           p -> p.setPlaceholder("Placeholder").setMaxLength(15).setDisabled(true).setId("textInput")
         )
       ),
-      solaGuiDocument.createElement(
-        ButtonGuiElement::new,
-        p -> p.setText("Enable text input").padding.set(5)
-      ).setOnAction(() -> ((TextInputGuiElement) solaGuiDocument.getElementById("textInput")).properties().setDisabled(false)),
       createKeyTesterElement(),
       createImageContainer(),
       solaGuiDocument.createElement(

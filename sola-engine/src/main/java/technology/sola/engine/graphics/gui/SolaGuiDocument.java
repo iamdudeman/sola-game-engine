@@ -5,7 +5,7 @@ import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
-import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
+import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
@@ -17,7 +17,7 @@ import java.util.function.Consumer;
  * instances of gui elements, setting the root element of a tree, and searching for elements in the tree.
  */
 public class SolaGuiDocument {
-  public final GuiElementGlobalProperties globalProperties;
+  public final GuiPropertyDefaults propertyDefaults;
   public final EventHub eventHub;
   private final AssetLoaderProvider assetLoaderProvider;
   private GuiElement<?> rootGuiElement;
@@ -30,10 +30,10 @@ public class SolaGuiDocument {
    * @param assetLoaderProvider the {@link AssetLoaderProvider} to load the {@code Font}
    * @param eventHub            the {@link EventHub} instance
    */
-  public SolaGuiDocument(AssetLoaderProvider assetLoaderProvider, EventHub eventHub) {
+  public SolaGuiDocument(AssetLoaderProvider assetLoaderProvider, EventHub eventHub, GuiPropertyDefaults propertyDefaults) {
     this.assetLoaderProvider = assetLoaderProvider;
     this.eventHub = eventHub;
-    this.globalProperties = new GuiElementGlobalProperties(() -> rootGuiElement);
+    this.propertyDefaults = propertyDefaults;
   }
 
   /**

@@ -3,7 +3,7 @@ package technology.sola.engine.graphics.gui.elements.input;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
-import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
+import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 public abstract class BaseInputGuiElement<T extends BaseInputGuiElement.Properties> extends BaseTextGuiElement<T> {
@@ -30,8 +30,8 @@ public abstract class BaseInputGuiElement<T extends BaseInputGuiElement.Properti
     private boolean isDisabled = false;
     private Color disabledBackgroundColor;
 
-    public Properties(GuiElementGlobalProperties globalProperties) {
-      super(globalProperties);
+    public Properties(GuiPropertyDefaults propertyDefaults) {
+      super(propertyDefaults);
       setFocusable(true);
 
       setFocusOutlineColor(Color.BLACK);

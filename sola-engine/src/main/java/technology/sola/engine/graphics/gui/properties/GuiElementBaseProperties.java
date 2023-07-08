@@ -6,7 +6,7 @@ public class GuiElementBaseProperties<GuiElementHoverProperties extends GuiEleme
   public final Bounds margin = new Bounds();
   public final Bounds padding = new Bounds();
   public final GuiElementHoverProperties hover;
-  protected final GuiElementGlobalProperties globalProperties;
+  protected final GuiPropertyDefaults propertyDefaults;
   private boolean isLayoutChanged = true;
   private String id;
   private Color focusOutlineColor = null;
@@ -17,8 +17,8 @@ public class GuiElementBaseProperties<GuiElementHoverProperties extends GuiEleme
   private Integer width;
   private Integer height;
 
-  public GuiElementBaseProperties(GuiElementGlobalProperties globalProperties, GuiElementHoverProperties hoverProperties) {
-    this.globalProperties = globalProperties;
+  public GuiElementBaseProperties(GuiPropertyDefaults propertyDefaults, GuiElementHoverProperties hoverProperties) {
+    this.propertyDefaults = propertyDefaults;
     this.hover = hoverProperties;
 
     setBackgroundColor(Color.WHITE);

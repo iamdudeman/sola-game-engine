@@ -10,6 +10,7 @@ import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.graphics.screen.AspectMode;
 
 public class AudioExample extends SolaWithDefaults {
@@ -19,17 +20,18 @@ public class AudioExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGui();
+    defaultsConfigurator.useGui(new GuiPropertyDefaults(
+      "arial_NORMAL_16",
+      Color.BLUE
+    ));
 
     platform.getViewport().setAspectMode(AspectMode.STRETCH);
-    solaGuiDocument.globalProperties.setDefaultTextColor(Color.WHITE);
-    solaGuiDocument.globalProperties.setDefaultFontAssetId("arial");
   }
 
   @Override
   protected void onAsyncInit(Runnable completeAsyncInit) {
     new BulkAssetLoader(assetLoaderProvider)
-      .addAsset(Font.class, "arial", "assets/arial_NORMAL_16.json")
+      .addAsset(Font.class, "arial_NORMAL_16", "assets/arial_NORMAL_16.json")
       .addAsset(AudioClip.class, "test_song", "assets/asgaseg.wav")
       .loadAll()
       .onComplete(assets -> {

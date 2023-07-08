@@ -12,6 +12,7 @@ import technology.sola.engine.defaults.graphics.modules.RectangleGraphicsModule;
 import technology.sola.engine.defaults.graphics.modules.SpriteGraphicsModule;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
+import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
 
@@ -192,13 +193,12 @@ public abstract class SolaWithDefaults extends Sola {
     /**
      * Initializes the {@link SolaGuiDocument} instance.
      *
+     * @param propertyDefaults the {@link GuiPropertyDefaults} to use
      * @return this
      */
-    public DefaultsConfigurator useGui() {
-      // todo could pass in GuiPropertyDefaults object to useGui or else use default "light defaults" settings
-      //   "LightDefaults" implementation or object could be in this defaults package
+    public DefaultsConfigurator useGui(GuiPropertyDefaults propertyDefaults) {
       if (solaGuiDocument == null) {
-        solaGuiDocument = new SolaGuiDocument(assetLoaderProvider, eventHub);
+        solaGuiDocument = new SolaGuiDocument(assetLoaderProvider, eventHub, propertyDefaults);
         solaGuiDocument.registerEventListeners(platform);
         rebuildRenderFunction();
 
@@ -211,6 +211,15 @@ public abstract class SolaWithDefaults extends Sola {
       }
 
       return this;
+    }
+
+    /**
+     * Initializes the {@link SolaGuiDocument} instance with light themed {@link GuiPropertyDefaults}.
+     *
+     * @return this
+     */
+    public DefaultsConfigurator useGui() {
+      return useGui(new GuiPropertyDefaults());
     }
 
     private void rebuildRenderFunction() {

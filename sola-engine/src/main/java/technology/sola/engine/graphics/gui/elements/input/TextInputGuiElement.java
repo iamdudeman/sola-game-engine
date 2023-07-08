@@ -2,7 +2,7 @@ package technology.sola.engine.graphics.gui.elements.input;
 
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
-import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
+import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.KeyboardLayout;
@@ -12,7 +12,7 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputGuiElement
   private boolean isShiftDown = false;
 
   public TextInputGuiElement(SolaGuiDocument solaGuiDocument) {
-    super(solaGuiDocument, new Properties(solaGuiDocument.globalProperties));
+    super(solaGuiDocument, new Properties(solaGuiDocument.propertyDefaults));
 
     setOnMouseUpCallback(mouseEvent -> requestFocus());
 
@@ -85,8 +85,8 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputGuiElement
     private Integer maxLength;
     private Color colorPlaceholderText;
 
-    public Properties(GuiElementGlobalProperties globalProperties) {
-      super(globalProperties);
+    public Properties(GuiPropertyDefaults propertyDefaults) {
+      super(propertyDefaults);
 
       setColorPlaceholderText(getColorText().tint(0.5f));
     }
