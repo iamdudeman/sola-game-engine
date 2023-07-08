@@ -7,6 +7,7 @@ import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.examples.common.guicookbook.GuiCookbook;
+import technology.sola.engine.examples.common.minesweeper.MinesweeperExample;
 import technology.sola.engine.examples.common.networking.NetworkingExample;
 import technology.sola.engine.examples.common.singlefile.AnimationExample;
 import technology.sola.engine.examples.common.singlefile.AudioExample;
@@ -80,7 +81,8 @@ public class ExampleLauncherSola extends SolaWithDefaults {
           p -> p.setText("Larger examples").margin.setBottom(15)
         ),
         buildExampleLaunchButton("Gui Cookbook", GuiCookbook::new),
-        buildExampleLaunchButton("Networking", NetworkingExample::new)
+        buildExampleLaunchButton("Networking", NetworkingExample::new),
+        buildExampleLaunchButton("Minesweeper", MinesweeperExample::new)
       )
     );
   }

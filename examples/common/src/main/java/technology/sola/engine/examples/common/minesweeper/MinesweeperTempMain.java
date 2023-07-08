@@ -1,10 +1,10 @@
-package technology.sola.engine.examples.common.singlefile;
+package technology.sola.engine.examples.common.minesweeper;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MinesweeperExample {
+public class MinesweeperTempMain {
   public static void main(String[] args) {
     int[][] testField = generateMinefield(25, 20, 16);
 
