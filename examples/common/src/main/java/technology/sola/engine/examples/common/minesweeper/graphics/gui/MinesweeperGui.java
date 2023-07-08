@@ -11,18 +11,18 @@ import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementCo
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 
 public class MinesweeperGui {
-  public static final Size[] sizeOptions = new Size[] {
+  public static final Size[] SIZE_OPTIONS = new Size[] {
     new Size(10, 10),
     new Size(15, 15),
     new Size(20, 20),
     new Size(25, 30),
-    new Size(30, 40)
+    new Size(30, 40),
   };
-  public static final int[] difficultyOptions = new int[] {
+  public static final int[] DIFFICULTY_OPTIONS = new int[] {
     8,
     12,
     16,
-    20
+    20,
   };
   private static int mineCount = 0;
   private static int sizeIndex = 0;
@@ -57,14 +57,14 @@ public class MinesweeperGui {
           ButtonGuiElement::new,
           p -> p.setText("Change size").padding.set(5)
         ).setOnAction(() -> {
-          sizeIndex = (sizeIndex + 1) % sizeOptions.length;
+          sizeIndex = (sizeIndex + 1) % SIZE_OPTIONS.length;
           newGame(eventHub);
         }),
         document.createElement(
           ButtonGuiElement::new,
           p -> p.setText("Change difficulty").padding.set(5)
         ).setOnAction(() -> {
-          difficultyIndex = (difficultyIndex + 1) % difficultyOptions.length;
+          difficultyIndex = (difficultyIndex + 1) % DIFFICULTY_OPTIONS.length;
           newGame(eventHub);
         })
       )
@@ -72,8 +72,8 @@ public class MinesweeperGui {
   }
 
   private static void newGame(EventHub eventHub) {
-    Size size = sizeOptions[sizeIndex];
-    int difficulty = difficultyOptions[difficultyIndex];
+    Size size = SIZE_OPTIONS[sizeIndex];
+    int difficulty = DIFFICULTY_OPTIONS[difficultyIndex];
 
     eventHub.emit(new NewGameEvent(size.rows, size.columns, difficulty));
   }

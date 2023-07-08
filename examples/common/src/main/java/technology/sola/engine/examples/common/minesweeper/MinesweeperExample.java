@@ -40,8 +40,8 @@ public class MinesweeperExample extends SolaWithDefaults {
     playerInputSystem.registerEvents();
 
     eventHub.emit(new NewGameEvent(
-      MinesweeperGui.sizeOptions[0].rows(), MinesweeperGui.sizeOptions[0].columns(),
-      MinesweeperGui.difficultyOptions[0]
+      MinesweeperGui.SIZE_OPTIONS[0].rows(), MinesweeperGui.SIZE_OPTIONS[0].columns(),
+      MinesweeperGui.DIFFICULTY_OPTIONS[0]
     ));
   }
 }
