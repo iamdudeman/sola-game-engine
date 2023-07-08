@@ -78,6 +78,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Viewport</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Viewport contains various information about the current viewport used. This is primarily used to keep track of the
+ correct <a href="AspectRatioSizing.html" title="class in technology.sola.engine.graphics.screen"><code>AspectRatioSizing</code></a> based on the current <a href="AspectMode.html" title="enum class in technology.sola.engine.graphics.screen"><code>AspectMode</code></a> and screen width and height.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -91,7 +93,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int)" class="member-name-link">Viewport</a><wbr>(int&nbsp;canvasWidth,
  int&nbsp;canvasHeight)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates an instance of the viewport given the canvas's width and height.</div>
+</div>
 </div>
 </section>
 </li>
@@ -121,10 +125,14 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#resize(int,int)" class="member-name-link">resize</a><wbr>(int&nbsp;screenWidth,
  int&nbsp;screenHeight)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Recalculates the <a href="AspectRatioSizing.html" title="class in technology.sola.engine.graphics.screen"><code>AspectRatioSizing</code></a> using the current <a href="AspectMode.html" title="enum class in technology.sola.engine.graphics.screen"><code>AspectMode</code></a> and the new screen width and height.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setAspectMode(technology.sola.engine.graphics.screen.AspectMode)" class="member-name-link">setAspectMode</a><wbr>(<a href="AspectMode.html" title="enum class in technology.sola.engine.graphics.screen">AspectMode</a>&nbsp;aspectMode)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Updates the <a href="AspectMode.html" title="enum class in technology.sola.engine.graphics.screen"><code>AspectMode</code></a> used and recalculates <a href="AspectRatioSizing.html" title="class in technology.sola.engine.graphics.screen"><code>AspectRatioSizing</code></a>.</div>
+</div>
 </div>
 </div>
 </div>
@@ -147,6 +155,12 @@ loadScripts(document, 'script');</script>
 <h3>Viewport</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Viewport</span><wbr><span class="parameters">(int&nbsp;canvasWidth,
  int&nbsp;canvasHeight)</span></div>
+<div class="block">Creates an instance of the viewport given the canvas's width and height.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>canvasWidth</code> - the width of the canvas (renderer)</dd>
+<dd><code>canvasHeight</code> - the height of the canvas (renderer)</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -161,30 +175,51 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getAspectMode()">
 <h3>getAspectMode</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="AspectMode.html" title="enum class in technology.sola.engine.graphics.screen">AspectMode</a></span>&nbsp;<span class="element-name">getAspectMode</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the current <a href="AspectMode.html" title="enum class in technology.sola.engine.graphics.screen"><code>AspectMode</code></a></dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setAspectMode(technology.sola.engine.graphics.screen.AspectMode)">
 <h3>setAspectMode</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setAspectMode</span><wbr><span class="parameters">(<a href="AspectMode.html" title="enum class in technology.sola.engine.graphics.screen">AspectMode</a>&nbsp;aspectMode)</span></div>
+<div class="block">Updates the <a href="AspectMode.html" title="enum class in technology.sola.engine.graphics.screen"><code>AspectMode</code></a> used and recalculates <a href="AspectRatioSizing.html" title="class in technology.sola.engine.graphics.screen"><code>AspectRatioSizing</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>aspectMode</code> - the new <code>AspectMode</code></dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getAspectRatioSizing()">
 <h3>getAspectRatioSizing</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="AspectRatioSizing.html" title="class in technology.sola.engine.graphics.screen">AspectRatioSizing</a></span>&nbsp;<span class="element-name">getAspectRatioSizing</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the current <a href="AspectRatioSizing.html" title="class in technology.sola.engine.graphics.screen"><code>AspectRatioSizing</code></a></dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getRendererToAspectRatioX()">
 <h3>getRendererToAspectRatioX</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getRendererToAspectRatioX</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the ratio of <code>canvasWidth</code> to <a href="AspectRatioSizing.html#width()"><code>AspectRatioSizing.width()</code></a></dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getRendererToAspectRatioY()">
 <h3>getRendererToAspectRatioY</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getRendererToAspectRatioY</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the ratio of <code>canvasHeight</code> to <a href="AspectRatioSizing.html#height()"><code>AspectRatioSizing.height()</code></a></dd>
+</dl>
 </section>
 </li>
 <li>
@@ -192,6 +227,12 @@ loadScripts(document, 'script');</script>
 <h3>resize</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">resize</span><wbr><span class="parameters">(int&nbsp;screenWidth,
  int&nbsp;screenHeight)</span></div>
+<div class="block">Recalculates the <a href="AspectRatioSizing.html" title="class in technology.sola.engine.graphics.screen"><code>AspectRatioSizing</code></a> using the current <a href="AspectMode.html" title="enum class in technology.sola.engine.graphics.screen"><code>AspectMode</code></a> and the new screen width and height.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>screenWidth</code> - the width of the screen</dd>
+<dd><code>screenHeight</code> - the height of the screen</dd>
+</dl>
 </section>
 </li>
 </ul>
