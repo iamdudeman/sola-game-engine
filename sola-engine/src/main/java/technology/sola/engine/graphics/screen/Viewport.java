@@ -1,5 +1,9 @@
 package technology.sola.engine.graphics.screen;
 
+/**
+ * Viewport contains various information about the current viewport used. This is primarily used to keep track of the
+ * correct {@link AspectRatioSizing} based on the current {@link AspectMode} and screen width and height.
+ */
 public class Viewport {
   private final int canvasWidth;
   private final int canvasHeight;
@@ -10,33 +14,63 @@ public class Viewport {
   private float rendererToAspectRatioX = 1;
   private float rendererToAspectRatioY = 1;
 
+  /**
+   * Creates an instance of the viewport given the canvas's width and height.
+   *
+   * @param canvasWidth  the width of the canvas (renderer)
+   * @param canvasHeight the height of the canvas (renderer)
+   */
   public Viewport(int canvasWidth, int canvasHeight) {
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
+
     resize(canvasWidth, canvasHeight);
   }
 
+  /**
+   * @return the current {@link AspectMode}
+   */
   public AspectMode getAspectMode() {
     return aspectMode;
   }
 
+  /**
+   * Updates the {@link AspectMode} used and recalculates {@link AspectRatioSizing}.
+   *
+   * @param aspectMode the new {@code AspectMode}
+   */
   public void setAspectMode(AspectMode aspectMode) {
     this.aspectMode = aspectMode;
     recalculateAspectRatioSizing(previousScreenWidth, previousScreenHeight);
   }
 
+  /**
+   * @return the current {@link AspectRatioSizing}
+   */
   public AspectRatioSizing getAspectRatioSizing() {
     return aspectRatioSizing;
   }
 
+  /**
+   * @return the ratio of {@link Viewport#canvasWidth} to {@link AspectRatioSizing#width()}
+   */
   public float getRendererToAspectRatioX() {
     return rendererToAspectRatioX;
   }
 
+  /**
+   * @return the ratio of {@link Viewport#canvasHeight} to {@link AspectRatioSizing#height()}
+   */
   public float getRendererToAspectRatioY() {
     return rendererToAspectRatioY;
   }
 
+  /**
+   * Recalculates the {@link AspectRatioSizing} using the current {@link AspectMode} and the new screen width and height.
+   *
+   * @param screenWidth  the width of the screen
+   * @param screenHeight the height of the screen
+   */
   public void resize(int screenWidth, int screenHeight) {
     if (screenWidth == previousScreenWidth && screenHeight == previousScreenHeight) {
       return;
