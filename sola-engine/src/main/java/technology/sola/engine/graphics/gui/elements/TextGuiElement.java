@@ -1,16 +1,16 @@
 package technology.sola.engine.graphics.gui.elements;
 
-import technology.sola.engine.core.module.graphics.gui.SolaGui;
-import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
+import technology.sola.engine.graphics.gui.SolaGuiDocument;
+import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 
 public class TextGuiElement extends BaseTextGuiElement<TextGuiElement.Properties> {
-  public TextGuiElement(SolaGui solaGui, Properties properties) {
-    super(solaGui, properties);
+  public TextGuiElement(SolaGuiDocument document) {
+    super(document, new Properties(document.propertyDefaults));
   }
 
   public static class Properties extends BaseTextGuiElement.Properties {
-    public Properties(GuiElementGlobalProperties globalProperties) {
-      super(globalProperties);
+    public Properties(GuiPropertyDefaults propertyDefaults) {
+      super(propertyDefaults);
     }
   }
 }

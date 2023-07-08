@@ -1,14 +1,12 @@
 package technology.sola.math.linear;
 
-import java.io.Serializable;
-
 /**
  * The Vector2D class is an implementation of a linear algebra vector.
  *
  * @param x the x coordinate
  * @param y the y coordinate
  */
-public record Vector2D(float x, float y) implements Serializable {
+public record Vector2D(float x, float y) {
   public static final Vector2D ZERO_VECTOR = new Vector2D(0, 0);
 
   /**

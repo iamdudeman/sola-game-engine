@@ -8,6 +8,9 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * {@link Tool} that lists available font families that can be used in the {@link FontRasterizerTool}.
+ */
 public class FontListTool implements Tool {
   @Override
   public String getName() {
@@ -31,6 +34,9 @@ public class FontListTool implements Tool {
       """;
   }
 
+  /**
+   * @return a Set of available font families
+   */
   public java.util.Set<String> getLocalFontFamilies() {
     java.util.Set<String> fontFamilies = new HashSet<>();
     GraphicsEnvironment ge = GraphicsEnvironment

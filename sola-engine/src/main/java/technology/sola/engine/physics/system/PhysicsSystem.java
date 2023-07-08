@@ -16,7 +16,7 @@ public class PhysicsSystem extends EcsSystem {
 
   @Override
   public void update(World world, float deltaTime) {
-    for (var view : world.createView().of(TransformComponent.class, DynamicBodyComponent.class)) {
+    for (var view : world.createView().of(TransformComponent.class, DynamicBodyComponent.class).getEntries()) {
       TransformComponent transformComponent = view.c1();
       DynamicBodyComponent dynamicBodyComponent = view.c2();
 

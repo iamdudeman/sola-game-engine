@@ -9,13 +9,16 @@ import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.core.module.graphics.SolaGraphics;
+import technology.sola.engine.defaults.SolaGraphics;
+import technology.sola.engine.defaults.graphics.modules.CircleGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.RectangleGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.SpriteGraphicsModule;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
-import technology.sola.engine.graphics.components.sprite.SpriteComponent;
+import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Layer;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -23,21 +26,27 @@ import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 import technology.sola.math.linear.Vector2D;
 
-import java.io.Serial;
 import java.util.List;
 
 public class RenderingExample extends Sola {
-  private SolaGraphics solaGraphics;
+  private final SolaGraphics solaGraphics;
 
   public RenderingExample() {
-    super(SolaConfiguration.build("Rendering Example", 800, 600).withTargetUpdatesPerSecond(30).withGameLoopRestingOn());
+    super(SolaConfiguration.build("Rendering Example", 800, 600).withTargetUpdatesPerSecond(30));
+
+    solaGraphics = new SolaGraphics(solaEcs);
   }
 
   @Override
   protected void onInit() {
-    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetLoaderProvider);
+    solaGraphics.addGraphicsModules(
+      new CircleGraphicsModule(),
+      new RectangleGraphicsModule(),
+      new SpriteGraphicsModule(assetLoaderProvider.get(SpriteSheet.class))
+    );
 
     solaEcs.addSystem(new TestSystem());
+    solaEcs.addSystems(solaGraphics.getSystems());
     solaEcs.setWorld(createWorld());
 
     platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
@@ -73,7 +82,7 @@ public class RenderingExample extends Sola {
       });
     });
 
-    solaGraphics.render();
+    solaGraphics.render(renderer);
 
     renderer.drawToLayer("ui", r -> {
       renderer.setBlendMode(BlendMode.NORMAL);
@@ -93,14 +102,13 @@ public class RenderingExample extends Sola {
   }
 
   private record MovingComponent() implements Component {
-    @Serial
-    private static final long serialVersionUID = 8048288443738661480L;
   }
 
   private class TestSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
       world.createView().of(TransformComponent.class, MovingComponent.class)
+        .getEntries()
         .forEach(view -> {
           TransformComponent transform = view.c1();
 
@@ -121,7 +129,6 @@ public class RenderingExample extends Sola {
       final float maxSize = 50;
 
       TransformComponent dynamicScalingEntityTransformComponent = world.findEntityByName("dynamicScaling")
-        .orElseThrow()
         .getComponent(TransformComponent.class);
 
       if (keyboardInput.isKeyHeld(Key.A)) {

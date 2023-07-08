@@ -2,32 +2,30 @@ package technology.sola.engine.examples.common.singlefile;
 
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.Font;
-import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
-import technology.sola.engine.core.module.graphics.gui.SolaGui;
+import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.gui.elements.ImageGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
-import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
-import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.elements.input.TextInputGuiElement;
 import technology.sola.engine.input.Key;
 
-public class GuiExample extends Sola {
-  private SolaGui solaGui;
-
+public class GuiExample extends SolaWithDefaults {
   public GuiExample() {
-    super(SolaConfiguration.build("Gui Example", 800, 600).withTargetUpdatesPerSecond(30).withGameLoopRestingOn());
+    super(SolaConfiguration.build("Gui Example", 800, 700).withTargetUpdatesPerSecond(30));
   }
 
   @Override
-  protected void onInit() {
-    solaGui = SolaGui.createInstance(assetLoaderProvider, platform);
+  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+    defaultsConfigurator.useGui();
 
-    solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
-    solaGui.setGuiRoot(buildGui(), 15, 15);
+    var guiRoot = buildGui();
+    solaGuiDocument.setGuiRoot(guiRoot, 15, 15);
+    guiRoot.requestFocus();
 
     assetLoaderProvider.get(SolaImage.class)
       .addAssetMapping("test", "assets/test_tiles.png");
@@ -35,98 +33,71 @@ public class GuiExample extends Sola {
       .addAssetMapping("times_NORMAL_18", "assets/times_NORMAL_18.json");
   }
 
-  @Override
-  protected void onRender(Renderer renderer) {
-    renderer.clear();
-
-    solaGui.render();
-  }
-
   private GuiElement<?> buildGui() {
-    StreamGuiElementContainer firstContainer = solaGui.createElement(
-      StreamGuiElementContainer::new,
-      StreamGuiElementContainer.Properties::new,
-      p -> p.setGap(10).setBorderColor(Color.YELLOW).padding.set(5)
-    );
-
-    StreamGuiElementContainer firstSubContainer = solaGui.createElement(
-      StreamGuiElementContainer::new,
-      StreamGuiElementContainer.Properties::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.WHITE).padding.set(5)
-    );
-    firstSubContainer.addChild(
-      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Sub First")),
-      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Sub Second").margin.set(15, 0))
-    );
-
-    firstContainer.addChild(
-      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("First")),
-      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Second").padding.set(5)),
-      solaGui.createElement(ButtonGuiElement::new, ButtonGuiElement.Properties::new, p -> p.setText("Third").margin.setTop(30)),
-      firstSubContainer
-    );
-
-
-    StreamGuiElementContainer secondContainer = solaGui.createElement(
-      StreamGuiElementContainer::new,
-      StreamGuiElementContainer.Properties::new,
-      p -> p.setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.RIGHT).setBorderColor(Color.ORANGE).padding.set(5).setWidth(410)
-    );
-
-    ButtonGuiElement checkButton = solaGui.createElement(
+    ButtonGuiElement checkButton = solaGuiDocument.createElement(
       ButtonGuiElement::new,
-      ButtonGuiElement.Properties::new,
       p -> p.margin.setRight(15).setWidth(30).setHeight(30)
     );
-    checkButton.setOnAction(() -> checkButton.properties().setColorBackground(checkButton.properties().getColorBackground().equals(Color.RED) ? new Color(128, 128, 128) : Color.RED));
+    checkButton.setOnAction(() -> checkButton.properties().setBackgroundColor(checkButton.properties().getBackgroundColor().equals(Color.RED) ? new Color(128, 128, 128) : Color.RED));
 
-    ButtonGuiElement toggleOtherButton = solaGui.createElement(
+    ButtonGuiElement toggleOtherButton = solaGuiDocument.createElement(
       ButtonGuiElement::new,
-      ButtonGuiElement.Properties::new,
       p -> p.setText("Toggle other button").setTextAlign(BaseTextGuiElement.TextAlign.RIGHT).padding.set(5).setWidth(250)
     );
     toggleOtherButton.setOnAction(() -> checkButton.properties().setHidden(!checkButton.properties().isHidden()));
 
-    secondContainer.addChild(
-      checkButton,
-      toggleOtherButton
-    );
-
-
-    StreamGuiElementContainer rootElement = solaGui.createElement(
+    return solaGuiDocument.createElement(
       StreamGuiElementContainer::new,
-      StreamGuiElementContainer.Properties::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).setBorderColor(Color.GREEN)
-    );
-
-    ButtonGuiElement toggleFontButton = solaGui.createElement(
-      ButtonGuiElement::new,
-      ButtonGuiElement.Properties::new,
-      p -> p.setText("Change font").padding.set(5)
-    );
-    toggleFontButton.setOnAction(() -> solaGui.globalProperties.setDefaultFontAssetId("times_NORMAL_18"));
-
-    rootElement.addChild(
-      solaGui.createElement(
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(15).padding.set(3).setBorderColor(Color.GREEN),
+      solaGuiDocument.createElement(
         TextGuiElement::new,
-        TextGuiElement.Properties::new,
         p -> p.setText("Gui Example").margin.setBottom(10)
       ),
-      firstContainer,
-      secondContainer,
-      toggleFontButton,
+      solaGuiDocument.createElement(
+        StreamGuiElementContainer::new,
+        p -> p.setGap(10).setBorderColor(Color.YELLOW).padding.set(5),
+        solaGuiDocument.createElement(ButtonGuiElement::new, p -> p.setText("First")),
+        solaGuiDocument.createElement(ButtonGuiElement::new, p -> p.setText("Second").padding.set(5)),
+        solaGuiDocument.createElement(ButtonGuiElement::new, p -> p.setText("Third").margin.setTop(30)),
+        solaGuiDocument.createElement(
+          StreamGuiElementContainer::new,
+          p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.RED).padding.set(5)
+            .setBackgroundColor(new Color(100, 50, 50, 255)),
+          solaGuiDocument.createElement(ButtonGuiElement::new, p -> p.setText("Sub First")),
+          solaGuiDocument.createElement(ButtonGuiElement::new, p -> p.setText("Sub Second").margin.set(15, 0))
+        )
+      ),
+      solaGuiDocument.createElement(
+        StreamGuiElementContainer::new,
+        p -> p.setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.RIGHT).setBorderColor(Color.ORANGE).padding.set(5).setWidth(410),
+        checkButton,
+        toggleOtherButton
+      ),
+      solaGuiDocument.createElement(
+        StreamGuiElementContainer::new,
+        p -> p.setDirection(StreamGuiElementContainer.Direction.HORIZONTAL).setGap(5),
+        solaGuiDocument.createElement(
+          ButtonGuiElement::new,
+          p -> p.setText("Enable text input").padding.set(5)
+        ).setOnAction(() -> ((TextInputGuiElement) solaGuiDocument.getElementById("textInput")).properties().setDisabled(false)),
+        solaGuiDocument.createElement(
+          TextInputGuiElement::new,
+          p -> p.setPlaceholder("Placeholder").setMaxLength(15).setDisabled(true).setId("textInput")
+        )
+      ),
       createKeyTesterElement(),
-      createImageContainer()
+      createImageContainer(),
+      solaGuiDocument.createElement(
+        TextGuiElement::new,
+        p -> p.setText("This is a longer text that should wrap a bit. It might even wrap to a third line.").padding.set(15).setWidth(380).setBorderColor(Color.DARK_GRAY)
+      )
     );
-
-    return rootElement;
   }
 
   private GuiElement<?> createKeyTesterElement() {
-    TextGuiElement textGuiElement = solaGui.createElement(
+    TextGuiElement textGuiElement = solaGuiDocument.createElement(
       TextGuiElement::new,
-      TextGuiElement.Properties::new,
-      p -> p.setText("Type a key").setColorText(Color.WHITE).setFocusable(true).padding.set(3).margin.setTop(10).setFocusOutlineColor(Color.LIGHT_BLUE).setBorderColor(Color.WHITE)
+      p -> p.setText("Type a key").setFocusable(true).padding.set(3).margin.setTop(5).setFocusOutlineColor(Color.LIGHT_BLUE).setBorderColor(Color.BLACK).hover.setBorderColor(Color.YELLOW)
     );
 
     textGuiElement.setOnKeyPressCallback(guiKeyEvent -> {
@@ -148,30 +119,21 @@ public class GuiExample extends Sola {
   }
 
   private GuiElement<?> createImageContainer() {
-    StreamGuiElementContainer streamGuiElementContainer = solaGui.createElement(
+    return solaGuiDocument.createElement(
       StreamGuiElementContainer::new,
-      StreamGuiElementContainer.Properties::new,
-      p -> p.setGap(5)
-    );
-
-    streamGuiElementContainer.addChild(
-      solaGui.createElement(
+      p -> p.setGap(5),
+      solaGuiDocument.createElement(
         ImageGuiElement::new,
-        ImageGuiElement.Properties::new,
         p -> p.setAssetId("test").setBorderColor(Color.ORANGE).padding.set(5)
       ),
-      solaGui.createElement(
+      solaGuiDocument.createElement(
         ImageGuiElement::new,
-        ImageGuiElement.Properties::new,
-        p -> p.setAssetId("test").setWidth(50).setHeight(50).setBorderColor(Color.GREEN).padding.set(5)
+        p -> p.setAssetId("test").setWidth(75).setHeight(75).setBorderColor(Color.GREEN).padding.set(5)
       ),
-      solaGui.createElement(
+      solaGuiDocument.createElement(
         ImageGuiElement::new,
-        ImageGuiElement.Properties::new,
         p -> p.setAssetId("test").setWidth(150).setHeight(150).setBorderColor(Color.YELLOW).padding.set(5)
       )
     );
-
-    return streamGuiElementContainer;
   }
 }

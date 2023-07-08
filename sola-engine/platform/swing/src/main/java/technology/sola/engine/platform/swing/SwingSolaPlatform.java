@@ -6,17 +6,18 @@ import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.event.GameLoopEvent;
-import technology.sola.engine.core.event.GameLoopEventType;
+import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
-import technology.sola.engine.platform.swing.assets.SwingAudiClipAssetLoader;
+import technology.sola.engine.platform.swing.assets.SwingAudioClipAssetLoader;
 import technology.sola.engine.platform.swing.assets.SwingFontAssetLoader;
 import technology.sola.engine.platform.swing.assets.SwingSolaImageAssetLoader;
 import technology.sola.engine.platform.swing.assets.SwingSpriteSheetAssetLoader;
 import technology.sola.engine.platform.swing.core.Graphics2dRenderer;
+import technology.sola.engine.platform.swing.core.SwingSocketClient;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,6 +48,7 @@ public class SwingSolaPlatform extends SolaPlatform {
 
   public SwingSolaPlatform(boolean useSoftwareRendering) {
     this.useSoftwareRendering = useSoftwareRendering;
+    socketClient = new SwingSocketClient();
   }
 
   public void setWindowSize(int width, int height) {
@@ -113,6 +115,9 @@ public class SwingSolaPlatform extends SolaPlatform {
       jFrame.setPreferredSize(windowSize);
     }
     jFrame.pack();
+    if (windowSize != null) {
+      viewport.resize(canvas.getWidth(), canvas.getHeight());
+    }
 
     canvas.createBufferStrategy(2);
     if (useSoftwareRendering) {
@@ -122,7 +127,8 @@ public class SwingSolaPlatform extends SolaPlatform {
     }
 
     solaEventHub.add(GameLoopEvent.class, event -> {
-      if (event.type() == GameLoopEventType.STOPPED) {
+      if (event.state() == GameLoopState.STOPPED) {
+        socketClient.disconnect();
         jFrame.dispose();
       }
     });
@@ -138,14 +144,14 @@ public class SwingSolaPlatform extends SolaPlatform {
       @Override
       public void windowClosing(WindowEvent e) {
         super.windowClosing(e);
-        solaEventHub.emit(new GameLoopEvent(GameLoopEventType.STOP));
+        solaEventHub.emit(new GameLoopEvent(GameLoopState.STOP));
       }
     });
     jFrame.addWindowStateListener(e -> {
       if (e.getNewState() == Frame.ICONIFIED) {
-        solaEventHub.emit(new GameLoopEvent(GameLoopEventType.PAUSE));
+        solaEventHub.emit(new GameLoopEvent(GameLoopState.PAUSE));
       } else if (e.getNewState() != Frame.ICONIFIED) {
-        solaEventHub.emit(new GameLoopEvent(GameLoopEventType.RESUME));
+        solaEventHub.emit(new GameLoopEvent(GameLoopState.RESUME));
       }
     });
     jFrame.setTitle(solaConfiguration.title());
@@ -173,7 +179,7 @@ public class SwingSolaPlatform extends SolaPlatform {
     assetLoaderProvider.add(solaImageAssetLoader);
     assetLoaderProvider.add(new SwingFontAssetLoader(solaImageAssetLoader));
     assetLoaderProvider.add(new SwingSpriteSheetAssetLoader(solaImageAssetLoader));
-    assetLoaderProvider.add(new SwingAudiClipAssetLoader());
+    assetLoaderProvider.add(new SwingAudioClipAssetLoader());
   }
 
   @Override

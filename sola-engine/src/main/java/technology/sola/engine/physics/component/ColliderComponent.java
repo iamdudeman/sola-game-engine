@@ -6,16 +6,13 @@ import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
-import java.io.Serial;
-
 public class ColliderComponent implements Component {
-  @Serial
-  private static final long serialVersionUID = 6393414888672495864L;
   // Properties for all
   private ColliderType colliderType;
   private float offsetX;
   private float offsetY;
-  private ColliderTag[] colliderTags = new ColliderTag[0];
+  private boolean isSensor = false;
+  private ColliderTag[] tags = new ColliderTag[0];
   private ColliderTag[] ignoreTags = new ColliderTag[0];
 
   // Properties for circle
@@ -25,6 +22,11 @@ public class ColliderComponent implements Component {
   private Float width = null;
   private Float height = null;
 
+  /**
+   * Creates a rectangle {@link ColliderComponent} with a width and height of 1.
+   *
+   * @return a rectangle {@code ColliderComponent}
+   */
   public static ColliderComponent aabb() {
     return aabb(1, 1);
   }
@@ -33,7 +35,7 @@ public class ColliderComponent implements Component {
    * Creates a rectangle {@link ColliderComponent} with defined width and height.
    *
    * @param width  the width of the collision box
-   * @param height  the height of the collision box
+   * @param height the height of the collision box
    * @return a rectangle {@code ColliderComponent}
    */
   public static ColliderComponent aabb(float width, float height) {
@@ -52,6 +54,11 @@ public class ColliderComponent implements Component {
     return colliderComponent;
   }
 
+  /**
+   * Creates a circle {@link ColliderComponent} with a radius of 0.5.
+   *
+   * @return a circle {@code ColliderComponent}
+   */
   public static ColliderComponent circle() {
     return circle(0.5f);
   }
@@ -59,7 +66,7 @@ public class ColliderComponent implements Component {
   /**
    * Creates a circle {@link ColliderComponent} with defined radius.
    *
-   * @param radius  the radius of the collider
+   * @param radius the radius of the collider
    * @return a circle {@code ColliderComponent}
    */
   public static ColliderComponent circle(float radius) {
@@ -111,38 +118,101 @@ public class ColliderComponent implements Component {
     };
   }
 
-  public boolean shouldIgnoreCollision(ColliderComponent colliderComponent) {
-    for (ColliderTag colliderTag : this.colliderTags) {
-      for (ColliderTag otherIgnoreTag : colliderComponent.ignoreTags) {
-        if (colliderTag == otherIgnoreTag) return true;
-      }
-    }
+  /**
+   * A collider that is a sensor will not respond to collision resolution but will emit collision events if an
+   * {@link technology.sola.ecs.Entity} with a {@link DynamicBodyComponent} collides.
+   *
+   * @return true if this collider is a sensor
+   */
+  public boolean isSensor() {
+    return isSensor;
+  }
 
-    for (ColliderTag otherColliderTag : colliderComponent.colliderTags) {
-      for (ColliderTag ignoreTag : this.ignoreTags) {
-        if (otherColliderTag == ignoreTag) return true;
+  /**
+   * Sets whether this collider is a sensor or not.
+   *
+   * @param isSensor whether this collider is a sensor or not
+   * @return this
+   */
+  public ColliderComponent setSensor(boolean isSensor) {
+    this.isSensor = isSensor;
+    return this;
+  }
+
+  /**
+   * @return the {@link ColliderTag}s for this Collider
+   */
+  public ColliderTag[] getTags() {
+    return tags;
+  }
+
+  /**
+   * Sets the {@link ColliderTag}s for this collider.
+   *
+   * @param tags the new tags
+   * @return this
+   */
+  public ColliderComponent setTags(ColliderTag... tags) {
+    this.tags = tags;
+
+    return this;
+  }
+
+  /**
+   * Checks to see if this collider has a {@link ColliderTag}.
+   *
+   * @param colliderTag the tag to check
+   * @return true if collider has tag
+   */
+  public boolean hasTag(ColliderTag colliderTag) {
+    for (ColliderTag tag : tags) {
+      if (colliderTag == tag) {
+        return true;
       }
     }
 
     return false;
   }
 
-  public ColliderComponent setColliderTags(ColliderTag ...colliderTags) {
-    this.colliderTags = colliderTags;
-
-    return this;
+  /**
+   * @return the {@link ColliderTag}s to ignore for this Collider
+   */
+  public ColliderTag[] getIgnoreTags() {
+    return ignoreTags;
   }
 
-  public ColliderComponent setIgnoreTags(ColliderTag ...ignoreTags) {
+  /**
+   * Sets the {@link ColliderTag}s to ignore for this collider.
+   *
+   * @param ignoreTags the new tags to ignore
+   * @return this
+   */
+  public ColliderComponent setIgnoreTags(ColliderTag... ignoreTags) {
     this.ignoreTags = ignoreTags;
 
     return this;
   }
 
   /**
+   * Checks to see if this collider has a {@link ColliderTag} that it is ignoring.
+   *
+   * @param colliderTag the tag to check
+   * @return true if collider is ignoring tag
+   */
+  public boolean hasIgnoreColliderTag(ColliderTag colliderTag) {
+    for (ColliderTag tag : ignoreTags) {
+      if (colliderTag == tag) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  /**
    * Calculates the {@link Circle} representation of this collider based on the position.
    *
-   * @param transformComponent  the transform of the {@link technology.sola.ecs.Entity}
+   * @param transformComponent the transform of the {@link technology.sola.ecs.Entity}
    * @return the {@code Circle} representation of this collider
    */
   public Circle asCircle(TransformComponent transformComponent) {
@@ -164,7 +234,7 @@ public class ColliderComponent implements Component {
   /**
    * Calculates the {@link Rectangle} representation of this collider based on the position.
    *
-   * @param transformComponent  the transform of the {@link technology.sola.ecs.Entity}
+   * @param transformComponent the transform of the {@link technology.sola.ecs.Entity}
    * @return the {@code Rectangle} representation of  this collider
    */
   public Rectangle asRectangle(TransformComponent transformComponent) {
@@ -200,12 +270,19 @@ public class ColliderComponent implements Component {
    * Available collider types.
    */
   public enum ColliderType {
-    /** Axis Aligned Bounding Box */
+    /**
+     * Axis Aligned Bounding Box
+     */
     AABB,
-    /** Circle */
+    /**
+     * Circle
+     */
     CIRCLE
   }
 
+  /**
+   * Identifier tag for this collider. Can be used to ignore collisions with other colliders with various tags.
+   */
   public interface ColliderTag {
   }
 }

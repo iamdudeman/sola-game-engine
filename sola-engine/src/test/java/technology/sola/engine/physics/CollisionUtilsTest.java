@@ -3,13 +3,15 @@ package technology.sola.engine.physics;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.ecs.Entity;
+import technology.sola.ecs.view.View2Entry;
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.math.linear.Vector2D;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class CollisionUtilsTest {
   private final Entity mockEntityA = Mockito.mock(Entity.class);
@@ -21,33 +23,30 @@ class CollisionUtilsTest {
 
     @Test
     void whenNotOverlappingX_shouldReturnNull() {
-      TransformComponent transformA = new TransformComponent(0, 0);
-      TransformComponent transformB = new TransformComponent(6, 2);
+      var viewEntryA = new View2Entry<>(mockEntityA, aabbColliderComponent, new TransformComponent(0, 0));
+      var viewEntryB = new View2Entry<>(mockEntityB, aabbColliderComponent, new TransformComponent(6, 2));
 
-      CollisionManifold collisionManifold =
-        CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, transformA, transformB, aabbColliderComponent, aabbColliderComponent);
+      CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(viewEntryA, viewEntryB);
 
       assertNull(collisionManifold);
     }
 
     @Test
     void whenOverlappingXAndNotY_shouldReturnNull() {
-      TransformComponent transformA = new TransformComponent(0, 0);
-      TransformComponent transformB = new TransformComponent(3, 6);
+      var viewEntryA = new View2Entry<>(mockEntityA, aabbColliderComponent, new TransformComponent(0, 0));
+      var viewEntryB = new View2Entry<>(mockEntityB, aabbColliderComponent, new TransformComponent(3, 6));
 
-      CollisionManifold collisionManifold =
-        CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, transformA, transformB, aabbColliderComponent, aabbColliderComponent);
+      CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(viewEntryA, viewEntryB);
 
       assertNull(collisionManifold);
     }
 
     @Test
     void whenOverlapping_withPositivePositionDifferenceAndLessXOverlap_shouldReturnCorrectManifold() {
-      TransformComponent transformA = new TransformComponent(0, 0);
-      TransformComponent transformB = new TransformComponent(4, 1);
+      var viewEntryA = new View2Entry<>(mockEntityA, aabbColliderComponent, new TransformComponent(0, 0));
+      var viewEntryB = new View2Entry<>(mockEntityB, aabbColliderComponent, new TransformComponent(4, 1));
 
-      CollisionManifold collisionManifold =
-        CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, transformA, transformB, aabbColliderComponent, aabbColliderComponent);
+      CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(viewEntryA, viewEntryB);
 
       assertNotNull(collisionManifold);
       assertEquals(new Vector2D(1, 0), collisionManifold.normal());
@@ -56,11 +55,10 @@ class CollisionUtilsTest {
 
     @Test
     void whenOverlapping_withNegativePositionDifferenceAndLessXOverlap_shouldReturnCorrectManifold() {
-      TransformComponent transformA = new TransformComponent(0, 0);
-      TransformComponent transformB = new TransformComponent(-4, 1);
+      var viewEntryA = new View2Entry<>(mockEntityA, aabbColliderComponent, new TransformComponent(0, 0));
+      var viewEntryB = new View2Entry<>(mockEntityB, aabbColliderComponent, new TransformComponent(-4, 1));
 
-      CollisionManifold collisionManifold =
-        CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, transformA, transformB, aabbColliderComponent, aabbColliderComponent);
+      CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(viewEntryA, viewEntryB);
 
       assertNotNull(collisionManifold);
       assertEquals(new Vector2D(-1, 0), collisionManifold.normal());
@@ -69,11 +67,10 @@ class CollisionUtilsTest {
 
     @Test
     void whenOverlapping_withPositivePositionDifferenceAndLessYOverlap_shouldReturnCorrectManifold() {
-      TransformComponent transformA = new TransformComponent(0, 0);
-      TransformComponent transformB = new TransformComponent(1, 4);
+      var viewEntryA = new View2Entry<>(mockEntityA, aabbColliderComponent, new TransformComponent(0, 0));
+      var viewEntryB = new View2Entry<>(mockEntityB, aabbColliderComponent, new TransformComponent(1, 4));
 
-      CollisionManifold collisionManifold =
-        CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, transformA, transformB, aabbColliderComponent, aabbColliderComponent);
+      CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(viewEntryA, viewEntryB);
 
       assertNotNull(collisionManifold);
       assertEquals(new Vector2D(0, 1), collisionManifold.normal());
@@ -82,11 +79,10 @@ class CollisionUtilsTest {
 
     @Test
     void whenOverlapping_withNegativePositionDifferenceAndLessYOverlap_shouldReturnCorrectManifold() {
-      TransformComponent transformA = new TransformComponent(0, 0);
-      TransformComponent transformB = new TransformComponent(1, -4);
+      var viewEntryA = new View2Entry<>(mockEntityA, aabbColliderComponent, new TransformComponent(0, 0));
+      var viewEntryB = new View2Entry<>(mockEntityB, aabbColliderComponent, new TransformComponent(1, -4));
 
-      CollisionManifold collisionManifold =
-        CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, transformA, transformB, aabbColliderComponent, aabbColliderComponent);
+      CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(viewEntryA, viewEntryB);
 
       assertNotNull(collisionManifold);
       assertEquals(new Vector2D(0, -1), collisionManifold.normal());
@@ -95,11 +91,10 @@ class CollisionUtilsTest {
 
     @Test
     void whenOverlapping_withDifferentSizedColliders_shouldReturnCorrectManifold() {
-      TransformComponent transformA = new TransformComponent(0, 0);
-      TransformComponent transformB = new TransformComponent(1, -4);
+      var viewEntryA = new View2Entry<>(mockEntityA, aabbColliderComponent, new TransformComponent(0, 0));
+      var viewEntryB = new View2Entry<>(mockEntityB, ColliderComponent.aabb(10, 10), new TransformComponent(1, -4));
 
-      CollisionManifold collisionManifold =
-        CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, transformA, transformB, aabbColliderComponent, ColliderComponent.aabb(10, 10));
+      CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(viewEntryA, viewEntryB);
 
       assertNotNull(collisionManifold);
       assertEquals(new Vector2D(1, 0), collisionManifold.normal());
@@ -111,12 +106,10 @@ class CollisionUtilsTest {
   class calculateAABBVsCircle {
     @Test
     void whenCircleCenterOutsideRectangle_shouldHaveCorrectNormal() {
-      TransformComponent positionA = new TransformComponent(0, 0);
-      TransformComponent positionB = new TransformComponent(-4, -4);
-      ColliderComponent colliderA = ColliderComponent.aabb(5, 3);
-      ColliderComponent colliderB = ColliderComponent.circle(3);
+      var viewEntryA = new View2Entry<>(mockEntityA, ColliderComponent.aabb(5, 3), new TransformComponent(0, 0));
+      var viewEntryB = new View2Entry<>(mockEntityB, ColliderComponent.circle(3), new TransformComponent(-4, -4));
 
-      CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, positionA, positionB, colliderA, colliderB);
+      CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(viewEntryA, viewEntryB);
 
       assertNotNull(collisionManifold);
       assertEquals(new Vector2D(-0.70710677f, -0.70710677f), collisionManifold.normal());
@@ -124,12 +117,10 @@ class CollisionUtilsTest {
 
     @Test
     void whenCircleCenterInsideRectangle_shouldHaveCorrectNormal() {
-      TransformComponent positionA = new TransformComponent(0, 0);
-      TransformComponent positionB = new TransformComponent(10, 10);
-      ColliderComponent colliderA = ColliderComponent.aabb(50, 30);
-      ColliderComponent colliderB = ColliderComponent.circle(3);
+      var viewEntryA = new View2Entry<>(mockEntityA, ColliderComponent.aabb(50, 30), new TransformComponent(0, 0));
+      var viewEntryB = new View2Entry<>(mockEntityB, ColliderComponent.circle(3), new TransformComponent(10, 10));
 
-      CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, positionA, positionB, colliderA, colliderB);
+      CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(viewEntryA, viewEntryB);
 
       assertNotNull(collisionManifold);
       assertEquals(new Vector2D(-1, 0), collisionManifold.normal());
@@ -140,28 +131,24 @@ class CollisionUtilsTest {
   class calculateCircleVsCircle {
     @Test
     void whenNotOverlapping_shouldReturnNull() {
-      TransformComponent positionA = new TransformComponent();
-      ColliderComponent colliderA = ColliderComponent.circle(5f);
+      var viewEntryA = new View2Entry<>(mockEntityA, ColliderComponent.circle(5f), new TransformComponent(0, 0));
+      var viewEntryB = new View2Entry<>(mockEntityB, ColliderComponent.circle(5f), new TransformComponent(10, 0));
 
-      TransformComponent positionB = new TransformComponent(10, 0);
-      ColliderComponent colliderB = ColliderComponent.circle(5f);
+      CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(viewEntryA, viewEntryB);
 
-      CollisionManifold result = CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, positionA, positionB, colliderA, colliderB);
-      assertNull(result);
+      assertNull(collisionManifold);
     }
 
     @Test
     void whenOverlapping_shouldReturnCollisionManifold() {
-      TransformComponent positionA = new TransformComponent();
-      ColliderComponent colliderA = ColliderComponent.circle(5f);
+      var viewEntryA = new View2Entry<>(mockEntityA, ColliderComponent.circle(5f), new TransformComponent(0, 0));
+      var viewEntryB = new View2Entry<>(mockEntityB, ColliderComponent.circle(5f), new TransformComponent(5, 5));
 
-      TransformComponent positionB = new TransformComponent(5, 5);
-      ColliderComponent colliderB = ColliderComponent.circle(5f);
+      CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(viewEntryA, viewEntryB);
 
-      CollisionManifold result = CollisionUtils.calculateCollisionManifold(mockEntityA, mockEntityB, positionA, positionB, colliderA, colliderB);
-      assertNotNull(result);
-      assertEquals(2.9289322f, result.penetration());
-      assertEquals(new Vector2D(0.7071068f, 0.7071068f), result.normal());
+      assertNotNull(collisionManifold);
+      assertEquals(2.9289322f, collisionManifold.penetration());
+      assertEquals(new Vector2D(0.7071068f, 0.7071068f), collisionManifold.normal());
     }
   }
 }

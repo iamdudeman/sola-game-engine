@@ -5,7 +5,7 @@ import technology.sola.ecs.World;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
-import technology.sola.engine.physics.event.CollisionManifoldEvent;
+import technology.sola.engine.physics.event.CollisionEvent;
 
 public class GravitySystem extends EcsSystem {
   public static final int ORDER = PhysicsSystem.ORDER - 1;
@@ -19,12 +19,12 @@ public class GravitySystem extends EcsSystem {
   public GravitySystem(EventHub eventHub, float gravityConstant) {
     setGravityConstant(gravityConstant);
 
-    eventHub.add(CollisionManifoldEvent.class, this::handleCollisionManifoldEvent);
+    eventHub.add(CollisionEvent.class, this::handleCollisionManifoldEvent);
   }
 
   @Override
   public void update(World world, float deltaTime) {
-    for (var view : world.createView().of(DynamicBodyComponent.class)) {
+    for (var view : world.createView().of(DynamicBodyComponent.class).getEntries()) {
       DynamicBodyComponent dynamicBodyComponent = view.c1();
 
       if (!dynamicBodyComponent.isGrounded() && !dynamicBodyComponent.isKinematic()) {
@@ -48,7 +48,7 @@ public class GravitySystem extends EcsSystem {
     this.gravityConstant = gravityConstant;
   }
 
-  private void handleCollisionManifoldEvent(CollisionManifoldEvent event) {
+  private void handleCollisionManifoldEvent(CollisionEvent event) {
     if (isActive()) {
       CollisionManifold payload = event.collisionManifold();
 

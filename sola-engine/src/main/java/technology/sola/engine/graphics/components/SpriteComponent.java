@@ -1,0 +1,39 @@
+package technology.sola.engine.graphics.components;
+
+import technology.sola.ecs.Component;
+import technology.sola.engine.assets.AssetHandle;
+import technology.sola.engine.assets.AssetLoader;
+import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.assets.graphics.SpriteSheet;
+
+public class SpriteComponent implements Component {
+  private SpriteKeyFrame spriteKeyFrame;
+
+  public SpriteComponent(String spriteSheetId, String spriteId) {
+    spriteKeyFrame = new SpriteKeyFrame(spriteSheetId, spriteId);
+  }
+
+  public SpriteComponent(SpriteKeyFrame spriteKeyFrame) {
+    this.spriteKeyFrame = spriteKeyFrame;
+  }
+
+  public SpriteComponent(SolaImage solaImage) {
+    this.spriteKeyFrame = new SpriteKeyFrame(solaImage);
+  }
+
+  public String getSpriteSheetId() {
+    return spriteKeyFrame.getSpriteSheetId();
+  }
+
+  public String getSpriteId() {
+    return spriteKeyFrame.getSpriteId();
+  }
+
+  public void setSpriteKeyFrame(SpriteKeyFrame spriteKeyFrame) {
+    this.spriteKeyFrame = spriteKeyFrame;
+  }
+
+  public AssetHandle<SolaImage> getSprite(AssetLoader<SpriteSheet> spriteSheetAssetLoader) {
+    return spriteKeyFrame.getSprite(spriteSheetAssetLoader);
+  }
+}

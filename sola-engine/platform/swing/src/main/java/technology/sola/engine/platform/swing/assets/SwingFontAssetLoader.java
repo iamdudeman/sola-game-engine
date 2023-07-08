@@ -11,7 +11,6 @@ import technology.sola.json.SolaJson;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 
 public class SwingFontAssetLoader extends AssetLoader<Font> {
   private final AssetLoader<SolaImage> solaImageAssetLoader;
@@ -34,7 +33,7 @@ public class SwingFontAssetLoader extends AssetLoader<Font> {
       SolaJson solaJson = new SolaJson();
 
       try {
-        FontInfo fontInfo = solaJson.parse(Files.readString(file.toPath()), new FontInfoJsonMapper());
+        FontInfo fontInfo = solaJson.parse(PathUtils.readContents(path), new FontInfoJsonMapper());
 
         solaImageAssetLoader.getNewAsset(
           fontInfo.fontGlyphFile(),

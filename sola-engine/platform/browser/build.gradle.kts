@@ -3,10 +3,9 @@ plugins {
 }
 
 dependencies {
-  // Note: TeaVM:2b671b8088 contains needed features [records, Random#nextInt(origin, bounds), Random#nextFloat(origin, bounds), Thread#setName]
-  implementation("com.github.konsoletyper.teavm:teavm-classlib:2b671b8088")
-  implementation("com.github.konsoletyper.teavm:teavm-tooling:2b671b8088")
-  implementation("org.teavm:teavm-extras-slf4j:0.7.0")
+  implementation("org.teavm:teavm-tooling:0.8.1")
+  implementation("org.teavm:teavm-classlib:0.8.1")
+  implementation("org.teavm:teavm-extras-slf4j:0.8.1")
 }
 
 publishing {

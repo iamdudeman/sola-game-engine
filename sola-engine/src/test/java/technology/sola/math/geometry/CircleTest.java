@@ -14,15 +14,15 @@ class CircleTest {
     void when_shouldSetValues() {
       Circle circle = new Circle(5f, new Vector2D(0, 0));
 
-      assertEquals(5f, circle.getRadius());
-      assertEquals(new Vector2D(0, 0), circle.getCenter());
+      assertEquals(5f, circle.radius());
+      assertEquals(new Vector2D(0, 0), circle.center());
     }
 
     @Test
     void when_withInvalidRadius_shouldThrowException() {
       Vector2D center = new Vector2D(0, 0);
 
-      assertThrows(IllegalArgumentException.class, () -> new Circle(0, center));
+      assertThrows(IllegalArgumentException.class, () -> new Circle(-1, center));
     }
 
     @Test

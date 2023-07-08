@@ -1,22 +1,29 @@
 package technology.sola.engine.graphics.gui.elements;
 
+import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
-import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
-import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
-import technology.sola.engine.graphics.gui.properties.GuiElementProperties;
+import technology.sola.engine.graphics.gui.SolaGuiDocument;
+import technology.sola.engine.graphics.gui.properties.GuiElementBaseHoverProperties;
+import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
+import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.graphics.renderer.Renderer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties> extends GuiElement<T> {
-  private Font font;
+  private Font font = DefaultFont.get();
   private String currentFontAssetId;
 
   private int textWidth = 1;
   private int textHeight = 1;
+  private int lineHeight = 1;
+  private List<String> lines = new ArrayList<>();
 
-  public BaseTextGuiElement(SolaGui solaGui, T properties) {
-    super(solaGui, properties);
+  public BaseTextGuiElement(SolaGuiDocument document, T properties) {
+    super(document, properties);
   }
 
   @Override
@@ -45,8 +52,17 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
         };
       }
 
+      Color colorToRender = properties.getColorText();
+
+      if (properties.hover.colorText != null && isHovered()) {
+        colorToRender = properties.hover.colorText;
+      }
+
       renderer.setFont(font);
-      renderer.drawString(properties.getText(), x + alignOffsetX, y, properties.getColorText());
+
+      for (int i = 0; i < lines.size(); i++) {
+        renderer.drawString(lines.get(i), x + alignOffsetX, y + lineHeight * i, colorToRender);
+      }
     }
   }
 
@@ -55,7 +71,7 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
     String propertiesAssetId = properties().getFontAssetId();
 
     if (!propertiesAssetId.equals(currentFontAssetId)) {
-      solaGui.getAssetLoaderProvider()
+      document.getAssetLoaderProvider()
         .get(Font.class)
         .get(propertiesAssetId)
         .executeWhenLoaded(font -> {
@@ -65,21 +81,68 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
         });
     }
 
-    var textDimensions = font.getDimensionsForText(properties().getText());
+    Font.TextDimensions textDimensions = font.getDimensionsForText(properties().getText());
 
+    lineHeight = Math.max(textDimensions.height(), 1);
+    textHeight = lineHeight;
     textWidth = Math.max(textDimensions.width(), 1);
-    textHeight = Math.max(textDimensions.height(), 1);
+    int availableWidth = properties.getWidth() == null ? textWidth : properties.getWidth() - getNonContentWidth();
+
+    if (availableWidth < textWidth) {
+      textWidth = availableWidth;
+      lines = new ArrayList<>();
+      String[] words = properties.getText().split(" ");
+      String sentence = words.length > 0 ? words[0] : " ";
+
+      for (int i = 1; i < words.length; i++) {
+        String word = words[i];
+        String tempSentence = sentence + " " + word;
+        Font.TextDimensions sentenceDimensions = font.getDimensionsForText(tempSentence);
+
+        if (sentenceDimensions.width() < availableWidth) {
+          sentence = tempSentence;
+        } else {
+          // Start next line with current word
+          lines.add(sentence);
+          sentence = word;
+        }
+      }
+
+      lines.add(sentence);
+      textHeight = lineHeight * lines.size();
+    } else {
+      lines = new ArrayList<>(1);
+      lines.add(properties().getText());
+    }
   }
 
-  public static class Properties extends GuiElementProperties {
+  public static class HoverProperties extends GuiElementBaseHoverProperties {
+    private Color colorText = null;
+
+    public Color getColorText() {
+      return colorText;
+    }
+
+    public HoverProperties setColorText(Color colorText) {
+      this.colorText = colorText;
+
+      return this;
+    }
+  }
+
+  public static class Properties extends GuiElementBaseProperties<HoverProperties> {
     private Color colorText = null;
     private String fontAssetId = null;
     private String text = "";
     private TextAlign textAlign = TextAlign.LEFT;
 
-    public Properties(GuiElementGlobalProperties globalProperties) {
-      super(globalProperties);
+    public Properties(GuiPropertyDefaults propertyDefaults) {
+      super(propertyDefaults, new HoverProperties());
       setFocusable(false);
+
+      // default properties
+      setColorText(propertyDefaults.colorText());
+      setFontAssetId(propertyDefaults.fontAssetId());
     }
 
     public String getText() {
@@ -93,7 +156,7 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
     }
 
     public String getFontAssetId() {
-      return fontAssetId == null ? globalProperties.getDefaultFontAssetId() : fontAssetId;
+      return fontAssetId;
     }
 
     public Properties setFontAssetId(String fontAssetId) {
@@ -103,7 +166,7 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
     }
 
     public Color getColorText() {
-      return colorText == null ? globalProperties.getDefaultTextColor() : colorText;
+      return colorText;
     }
 
     public Properties setColorText(Color colorText) {

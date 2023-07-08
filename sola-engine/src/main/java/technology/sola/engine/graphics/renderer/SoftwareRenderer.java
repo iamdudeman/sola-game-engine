@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.renderer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
@@ -14,16 +16,33 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * SoftwareRenderer is a {@link Renderer} implementation that draws on an in memory array of pixels using the CPU. This
+ * is portable across {@link technology.sola.engine.core.SolaPlatform}s but will be less performant than a GPU based
+ * implementation.
+ */
 public class SoftwareRenderer extends Canvas implements Renderer {
+  private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareRenderer.class);
   private final Random random = new Random();
   private final List<Layer> layers = new ArrayList<>();
   private BlendMode blendMode;
   private Font font;
   private PixelUpdater pixelUpdater;
+  private int clampX;
+  private int clampY;
+  private int clampMaxX;
+  private int clampMaxY;
 
+  /**
+   * Creates a SoftwareRenderer with width and height.
+   *
+   * @param width  width of the renderer
+   * @param height height of the renderer
+   */
   public SoftwareRenderer(int width, int height) {
     super(width, height);
     setBlendMode(BlendMode.NO_BLENDING);
+    resetClamp();
   }
 
   @Override
@@ -42,6 +61,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   @Override
   public Font getFont() {
     if (font == null) {
+      LOGGER.warn("No font is currently set. Using DefaultFont as a backup.");
       font = DefaultFont.get();
     }
 
@@ -54,13 +74,21 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   }
 
   @Override
+  public void setClamp(int x, int y, int width, int height) {
+    this.clampX = x;
+    this.clampY = y;
+    this.clampMaxX = x + width;
+    this.clampMaxY = y + height;
+  }
+
+  @Override
   public void clear(Color color) {
     Arrays.fill(this.pixels, color.hexInt());
   }
 
   @Override
   public void setPixel(int x, int y, Color color) {
-    if (x >= 0 && x < width && y >= 0 && y < height) {
+    if (x >= clampX && x < clampMaxX && y >= clampY && y < clampMaxY) {
       int pixelIndex = x + y * width;
 
       pixelUpdater.set(pixelIndex, color);
@@ -182,12 +210,12 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   public void drawImage(SolaImage solaImage, AffineTransform affineTransform) {
     Rectangle transformBoundingBox = affineTransform.getBoundingBoxForTransform(solaImage.getWidth(), solaImage.getHeight());
 
-    if (shouldSkipDrawCall(transformBoundingBox.getMin().x(), transformBoundingBox.getMin().y(), transformBoundingBox.getWidth(), transformBoundingBox.getHeight())) {
+    if (shouldSkipDrawCall(transformBoundingBox.min().x(), transformBoundingBox.min().y(), transformBoundingBox.getWidth(), transformBoundingBox.getHeight())) {
       return;
     }
 
-    for (int x = (int) transformBoundingBox.getMin().x(); x < transformBoundingBox.getMax().x(); x++) {
-      for (int y = (int) transformBoundingBox.getMin().y(); y < transformBoundingBox.getMax().y(); y++) {
+    for (int x = (int) transformBoundingBox.min().x(); x < transformBoundingBox.max().x(); x++) {
+      for (int y = (int) transformBoundingBox.min().y(); y < transformBoundingBox.max().y(); y++) {
         Vector2D newPosition = affineTransform.backward(x, y);
         int pixel = solaImage.getPixel(newPosition.x(), newPosition.y());
 

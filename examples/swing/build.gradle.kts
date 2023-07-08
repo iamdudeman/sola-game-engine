@@ -1,13 +1,5 @@
 plugins {
-  id("application")
-}
-
-application {
-  mainClass.set("technology.sola.engine.examples.swing.SwingMain")
-}
-
-repositories {
-  mavenCentral()
+  id("sola.java-conventions")
 }
 
 dependencies {
@@ -15,25 +7,63 @@ dependencies {
   implementation(project(":examples:common"))
 }
 
-tasks.withType<Jar>() {
+tasks.withType<Zip> {
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.withType<Tar> {
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+task("distFatJar", Jar::class) {
+  group = "distribution"
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+  archiveBaseName.set("examples-${project.name}")
+
   manifest {
-    attributes["Main-Class"] = "technology.sola.engine.examples.swing.SwingMain"
+    attributes["Main-Class"] = "${project.properties["basePackage"]}.${project.name}.SwingMain"
   }
 
-  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+  val dependencies = configurations.runtimeClasspath.get().map(::zipTree)
+
+  from(dependencies)
+  from("${project.rootDir}/assets") {
+    into("assets")
+  }
+  with(tasks.jar.get())
+  destinationDirectory.set(file("$buildDir/dist"))
   dependsOn(configurations.runtimeClasspath)
-
-  from({
-    configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
-  })
-
-  archiveBaseName.set("sola-engine-examples-${project.name}")
 }
 
-tasks.withType<Zip>() {
-  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+task("prepareJPackage", Delete::class) {
+  delete("$buildDir/jpackage")
 }
 
-tasks.withType<Tar>() {
-  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+task("distWinJPackage", Exec::class) {
+  group = "distribution"
+  dependsOn(tasks.getByName("prepareJPackage"))
+  dependsOn(tasks.getByName("distFatJar"))
+
+  executable("jpackage")
+
+  args(
+    "--name", "${project.properties["gameName"]}-${project.version}",
+    "--app-version", "${project.version}",
+    "--vendor", project.properties["vendor"],
+    "--dest", "$buildDir/jpackage",
+    "--input", "$buildDir/dist",
+    "--main-jar", "${project.properties["gameName"]}-${project.name}-${project.version}.jar",
+    "--type", "app-image"
+  )
+}
+
+task("distWinJPackageZip", Zip::class) {
+  group = "distribution"
+  destinationDirectory.set(file("$buildDir/jpackage"))
+  archiveBaseName.set("${project.properties["gameName"]}-win-${project.name}")
+
+  dependsOn(tasks.getByName("distWinJPackage"))
+
+  from("${buildDir}/jpackage/${project.properties["gameName"]}-${project.version}")
 }

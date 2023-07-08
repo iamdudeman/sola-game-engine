@@ -1,10 +1,11 @@
 package technology.sola.engine.graphics.gui.elements;
 
 import technology.sola.engine.assets.graphics.SolaImage;
-import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.GuiElement;
-import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
-import technology.sola.engine.graphics.gui.properties.GuiElementProperties;
+import technology.sola.engine.graphics.gui.SolaGuiDocument;
+import technology.sola.engine.graphics.gui.properties.GuiElementBaseHoverProperties;
+import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
+import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 
@@ -15,8 +16,8 @@ public class ImageGuiElement extends GuiElement<ImageGuiElement.Properties> {
   private SolaImage solaImage;
   private SolaImage transformedImage;
 
-  public ImageGuiElement(SolaGui solaGui, Properties properties) {
-    super(solaGui, properties);
+  public ImageGuiElement(SolaGuiDocument document) {
+    super(document, new Properties(document.propertyDefaults));
   }
 
   @Override
@@ -33,7 +34,7 @@ public class ImageGuiElement extends GuiElement<ImageGuiElement.Properties> {
   public void recalculateLayout() {
     if (properties.assetId != null && !properties.assetId.equals(currentAssetId)) {
       this.currentAssetId = properties().assetId;
-      solaGui.getAssetLoaderProvider()
+      document.getAssetLoaderProvider()
         .get(SolaImage.class)
         .get(currentAssetId)
         .executeWhenLoaded(solaImage -> {
@@ -65,15 +66,14 @@ public class ImageGuiElement extends GuiElement<ImageGuiElement.Properties> {
     if (transformedImage != null) {
       renderer.setBlendMode(BlendMode.MASK);
       renderer.drawImage(transformedImage, x, y);
-      renderer.setBlendMode(BlendMode.NO_BLENDING);
     }
   }
 
-  public static class Properties extends GuiElementProperties {
+  public static class Properties extends GuiElementBaseProperties<GuiElementBaseHoverProperties> {
     private String assetId;
 
-    public Properties(GuiElementGlobalProperties globalProperties) {
-      super(globalProperties);
+    public Properties(GuiPropertyDefaults propertyDefaults) {
+      super(propertyDefaults, new GuiElementBaseHoverProperties());
       setFocusable(false);
     }
 

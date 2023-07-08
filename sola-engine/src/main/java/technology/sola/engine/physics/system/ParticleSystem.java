@@ -24,6 +24,7 @@ public class ParticleSystem extends EcsSystem {
 
   private void updateParticles(World world, float delta) {
     world.createView().of(ParticleComponent.class, TransformComponent.class, CircleRendererComponent.class)
+      .getEntries()
       .forEach(view -> {
         ParticleComponent particleComponent = view.c1();
 
@@ -51,6 +52,7 @@ public class ParticleSystem extends EcsSystem {
 
   private void emitParticles(World world, float delta) {
     world.createView().of(ParticleEmitterComponent.class, TransformComponent.class)
+      .getEntries()
       .forEach(view -> {
         ParticleEmitterComponent particleEmitterComponent = view.c1();
 

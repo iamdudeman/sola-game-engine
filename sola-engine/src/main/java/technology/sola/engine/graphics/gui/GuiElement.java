@@ -1,8 +1,9 @@
 package technology.sola.engine.graphics.gui;
 
-import technology.sola.engine.core.module.graphics.gui.SolaGui;
+import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
-import technology.sola.engine.graphics.gui.properties.GuiElementProperties;
+import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
+import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.math.geometry.Rectangle;
@@ -10,8 +11,8 @@ import technology.sola.math.linear.Vector2D;
 
 import java.util.function.Consumer;
 
-public abstract class GuiElement<T extends GuiElementProperties> {
-  protected final SolaGui solaGui;
+public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
+  protected final SolaGuiDocument document;
   protected final T properties;
   private int x;
   private int y;
@@ -25,8 +26,8 @@ public abstract class GuiElement<T extends GuiElementProperties> {
 
   private boolean wasMouseOverElement = false;
 
-  public GuiElement(SolaGui solaGui, T properties) {
-    this.solaGui = solaGui;
+  public GuiElement(SolaGuiDocument document, T properties) {
+    this.document = document;
     this.properties = properties;
   }
 
@@ -39,9 +40,7 @@ public abstract class GuiElement<T extends GuiElementProperties> {
       return properties.getWidth();
     }
 
-    int borderSize = properties.getBorderColor() == null ? 0 : 2;
-
-    return getContentWidth() + properties.padding.getLeft() + properties.padding.getRight() + borderSize;
+    return getContentWidth() + getNonContentWidth();
   }
 
   public int getHeight() {
@@ -49,15 +48,21 @@ public abstract class GuiElement<T extends GuiElementProperties> {
       return properties.getHeight();
     }
 
-    int borderSize = properties.getBorderColor() == null ? 0 : 2;
+    return getContentHeight() + getNonContentHeight();
+  }
 
-    return getContentHeight() + properties.padding.getTop() + properties.padding.getBottom() + borderSize;
+  public int getNonContentWidth() {
+    return properties.padding.getLeft() + properties.padding.getRight() + properties.getBorderSize() * 2;
+  }
+
+  public int getNonContentHeight() {
+    return properties.padding.getTop() + properties.padding.getBottom() + properties.getBorderSize() * 2;
   }
 
   public abstract void recalculateLayout();
 
   public boolean isLayoutChanged() {
-    return properties().isLayoutChanged();
+    return properties.isLayoutChanged();
   }
 
   public abstract void renderSelf(Renderer renderer, int x, int y);
@@ -71,13 +76,29 @@ public abstract class GuiElement<T extends GuiElementProperties> {
     if (!properties.isHidden()) {
       int borderOffset = properties.getBorderColor() == null ? 0 : 1;
 
-      renderSelf(renderer, x + borderOffset + properties.padding.getLeft(), y + borderOffset + properties.padding.getTop());
+      Color hoverBackgroundColor = properties.hover.getBackgroundColor() == null ? properties.getBackgroundColor() : properties.hover.getBackgroundColor();
+      Color backgroundColor = isHovered() ? hoverBackgroundColor : properties.getBackgroundColor();
 
-      if (properties.getBorderColor() != null) {
-        renderer.drawRect(x, y, getWidth(), getHeight(), isHovered() ? properties.getHoverBorderColor() : properties.getBorderColor());
+      if (backgroundColor != null) {
+        renderer.setBlendMode(BlendMode.NORMAL);
+        renderer.fillRect(
+          x + borderOffset, y + borderOffset,
+          getWidth() - borderOffset, getHeight() - borderOffset,
+          backgroundColor
+        );
       }
 
-      if (properties.getFocusOutlineColor() != null && isFocussed()) {
+      renderSelf(renderer, x + borderOffset + properties.padding.getLeft(), y + borderOffset + properties.padding.getTop());
+
+      Color hoverBorderColor = properties.hover.getBorderColor() == null ? properties.getBorderColor() : properties.hover.getBorderColor();
+      Color borderColor = isHovered() ? hoverBorderColor : properties.getBorderColor();
+
+      if (borderColor != null) {
+        renderer.setBlendMode(BlendMode.NORMAL);
+        renderer.drawRect(x, y, getWidth(), getHeight(), borderColor);
+      }
+
+      if (isFocussed() && properties.getFocusOutlineColor() != null) {
         renderer.drawRect(x - 1, y - 1, getWidth() + 2, getHeight() + 2, properties.getFocusOutlineColor());
       }
     }
@@ -102,11 +123,15 @@ public abstract class GuiElement<T extends GuiElementProperties> {
   }
 
   public boolean isFocussed() {
-    return solaGui.isFocussedElement(this);
+    return document.isFocussedElement(this);
   }
 
   public void requestFocus() {
-    solaGui.focusElement(this);
+    document.focusElement(this);
+  }
+
+  public GuiElement<?> getElementById(String id) {
+    return id.equals(properties.getId()) ? this : null;
   }
 
   public void onKeyPress(GuiKeyEvent keyEvent) {
@@ -130,9 +155,12 @@ public abstract class GuiElement<T extends GuiElementProperties> {
   }
 
   public void onMouseEnter(MouseEvent mouseEvent) {
-    if (onMouseEnterCallback != null && !wasMouseOverElement) {
+    if (!wasMouseOverElement) {
       wasMouseOverElement = true;
-      onMouseEnterCallback.accept(mouseEvent);
+
+      if (onMouseEnterCallback != null) {
+        onMouseEnterCallback.accept(mouseEvent);
+      }
     }
   }
 
@@ -141,9 +169,12 @@ public abstract class GuiElement<T extends GuiElementProperties> {
   }
 
   public void onMouseExit(MouseEvent mouseEvent) {
-    if (onMouseExitCallback != null && wasMouseOverElement) {
+    if (wasMouseOverElement) {
       wasMouseOverElement = false;
-      onMouseExitCallback.accept(mouseEvent);
+
+      if (onMouseExitCallback != null) {
+        onMouseExitCallback.accept(mouseEvent);
+      }
     }
   }
 
@@ -187,8 +218,6 @@ public abstract class GuiElement<T extends GuiElementProperties> {
   }
 
   public void handleMouseEvent(MouseEvent event, String eventType) {
-    T properties = properties();
-
     if (properties.isHidden()) {
       return;
     }

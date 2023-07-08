@@ -3,29 +3,24 @@ package technology.sola.math.geometry;
 import technology.sola.math.linear.Vector2D;
 
 /**
- * The Circle class represents a geometric circle.
+ * Circle represents a geometric circle.
  */
-public class Circle {
-  private final float radius;
-  private final Vector2D center;
-
+public record Circle(float radius, Vector2D center) {
   /**
-   * Creates a circle with defined radius and center.
+   * Creates a circle with defined radius and center. If the radius provided is zero then a degenerate circle will be
+   * created.
    *
-   * @param radius  the radius of the circle, greater than 0
-   * @param center  the center point of the circle
+   * @param radius the radius of the circle, positive number
+   * @param center the center point of the circle
    */
-  public Circle(float radius, Vector2D center) {
-    if (radius <= 0) {
+  public Circle {
+    if (radius < 0) {
       throw new IllegalArgumentException("radius must be a positive number");
     }
 
     if (center == null) {
       throw new IllegalArgumentException("center cannot be null");
     }
-
-    this.radius = radius;
-    this.center = center;
   }
 
   /**
@@ -33,7 +28,8 @@ public class Circle {
    *
    * @return the radius
    */
-  public float getRadius() {
+  @Override
+  public float radius() {
     return radius;
   }
 
@@ -42,7 +38,8 @@ public class Circle {
    *
    * @return the center point
    */
-  public Vector2D getCenter() {
+  @Override
+  public Vector2D center() {
     return center;
   }
 }

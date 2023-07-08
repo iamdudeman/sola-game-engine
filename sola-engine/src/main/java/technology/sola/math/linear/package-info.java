@@ -1,4 +1,4 @@
 /**
- * A group of linear algebra classes and utilities.
+ * This package provides linear algebra classes and utilities.
  */
 package technology.sola.math.linear;

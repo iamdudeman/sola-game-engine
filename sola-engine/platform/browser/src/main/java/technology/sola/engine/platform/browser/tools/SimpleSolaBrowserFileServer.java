@@ -42,6 +42,7 @@ public class SimpleSolaBrowserFileServer {
 
     httpServer.setExecutor(Executors.newCachedThreadPool());
     httpServer.start();
+    System.out.println("Started file server on port " + port);
   }
 
   private HttpHandler buildRootHandler(Function<HttpExchange, File> getFile) {

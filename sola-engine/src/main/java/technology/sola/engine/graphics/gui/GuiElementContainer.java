@@ -1,8 +1,7 @@
 package technology.sola.engine.graphics.gui;
 
-import technology.sola.engine.core.module.graphics.gui.SolaGui;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
-import technology.sola.engine.graphics.gui.properties.GuiElementProperties;
+import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.math.geometry.Rectangle;
@@ -12,11 +11,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class GuiElementContainer<T extends GuiElementProperties> extends GuiElement<T> {
-  protected List<GuiElement<?>> children = new ArrayList<>();
+public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>> extends GuiElement<T> {
+  protected List<GuiElement<?>> children = List.of();
 
-  public GuiElementContainer(SolaGui solaGui, T properties) {
-    super(solaGui, properties);
+  public GuiElementContainer(SolaGuiDocument document, T properties) {
+    super(document, properties);
   }
 
   @Override
@@ -45,7 +44,7 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
 
   @Override
   public boolean isFocussed() {
-    return solaGui.isFocussedElement(this) || children.stream().anyMatch(GuiElement::isFocussed);
+    return document.isFocussedElement(this) || children.stream().anyMatch(GuiElement::isFocussed);
   }
 
   @Override
@@ -61,37 +60,62 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
     }
   }
 
+  @Override
+  public GuiElement<?> getElementById(String id) {
+    if (id.equals(properties.getId())) {
+      return this;
+    }
+
+    for (GuiElement<?> child : children) {
+      GuiElement<?> possibleMatch = child.getElementById(id);
+
+      if (possibleMatch != null) {
+        return possibleMatch;
+      }
+    }
+
+    return null;
+  }
+
   public List<GuiElement<?>> getChildren() {
-    return children;
+    return children.stream().toList();
   }
 
   public List<GuiElement<?>> getFocusableChildren() {
-    return getChildren().stream()
+    return children.stream()
       .filter(child -> child.properties.isFocusable())
       .toList();
   }
 
-  public void addChild(GuiElement<?> childOne) {
-    children.add(childOne);
+  public GuiElementContainer<T> addChild(GuiElement<?>... children) {
+    if (children == null) {
+      return this;
+    }
+
+    List<GuiElement<?>> newChildren = new ArrayList<>(this.children.size() + children.length);
+
+    newChildren.addAll(this.children);
+    newChildren.addAll(Arrays.asList(children));
+
+    this.children = newChildren;
+
     properties.setLayoutChanged(true);
+
+    return this;
   }
 
-  public void addChild(GuiElement<?> childOne, GuiElement<?> childTwo) {
-    children.add(childOne);
-    children.add(childTwo);
-    properties.setLayoutChanged(true);
-  }
+  public GuiElementContainer<T> removeChild(GuiElement<?> childToRemove) {
+    if (childToRemove != null) {
+      this.children = this.children.stream().filter(child -> child != childToRemove).toList();
 
-  public void addChild(GuiElement<?> childOne, GuiElement<?> childTwo, GuiElement<?> childThree) {
-    children.add(childOne);
-    children.add(childTwo);
-    children.add(childThree);
-    properties.setLayoutChanged(true);
-  }
+      if (childToRemove.isFocussed()) {
+        this.requestFocus();
+      }
 
-  public void addChild(GuiElement<?>... children) {
-    this.children.addAll(Arrays.asList(children));
-    properties.setLayoutChanged(true);
+      properties.setLayoutChanged(true);
+    }
+
+    return this;
   }
 
   @Override
@@ -136,13 +160,9 @@ public abstract class GuiElementContainer<T extends GuiElementProperties> extend
         case "move" -> onMouseEnter(event);
       }
 
-      for (GuiElement<?> child : children) {
-        child.handleMouseEvent(event, eventType);
-      }
+      children.forEach(child -> child.handleMouseEvent(event, eventType));
     } else {
-      for (GuiElement<?> child : children) {
-        child.onMouseExit(event);
-      }
+      children.forEach(child -> child.handleMouseEvent(event, eventType));
 
       onMouseExit(event);
     }

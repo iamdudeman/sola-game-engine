@@ -4,8 +4,10 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.event.GameLoopEvent;
-import technology.sola.engine.core.event.GameLoopEventType;
-import technology.sola.engine.core.module.graphics.gui.SolaGui;
+import technology.sola.engine.core.event.GameLoopState;
+import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.examples.common.guicookbook.GuiCookbook;
+import technology.sola.engine.examples.common.networking.NetworkingExample;
 import technology.sola.engine.examples.common.singlefile.AnimationExample;
 import technology.sola.engine.examples.common.singlefile.AudioExample;
 import technology.sola.engine.examples.common.singlefile.GuiExample;
@@ -15,84 +17,86 @@ import technology.sola.engine.examples.common.singlefile.RenderingExample;
 import technology.sola.engine.examples.common.singlefile.SimplePlatformerExample;
 import technology.sola.engine.examples.common.singlefile.StressTestPhysicsExample;
 import technology.sola.engine.examples.common.singlefile.StressTestRenderingExample;
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
-import technology.sola.engine.graphics.gui.elements.control.ButtonGuiElement;
-import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 
 import java.util.function.Supplier;
 
-public class ExampleLauncherSola extends Sola {
+public class ExampleLauncherSola extends SolaWithDefaults {
   private final SolaPlatform solaPlatform;
-  private SolaGui solaGui;
 
   public ExampleLauncherSola(SolaPlatform solaPlatform) {
-    super(SolaConfiguration.build("Example Launcher", 800, 600).withTargetUpdatesPerSecond(30).withGameLoopRestingOn());
+    super(SolaConfiguration.build("Example Launcher", 800, 600).withTargetUpdatesPerSecond(30));
     this.solaPlatform = solaPlatform;
   }
 
   @Override
-  protected void onInit() {
-    solaGui = SolaGui.createInstance(assetLoaderProvider, platform);
-    solaGui.globalProperties.setDefaultTextColor(Color.WHITE);
-    solaGui.setGuiRoot(buildGui());
-  }
+  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+    defaultsConfigurator.useGui();
 
-  @Override
-  protected void onRender(Renderer renderer) {
-    renderer.clear();
+    var guiRoot = buildGui();
 
-    solaGui.render();
+    solaGuiDocument.setGuiRoot(guiRoot);
+
+    guiRoot.requestFocus();
   }
 
   private GuiElement<?> buildGui() {
-    StreamGuiElementContainer rootElement = solaGui.createElement(
+    return solaGuiDocument.createElement(
       StreamGuiElementContainer::new,
-      StreamGuiElementContainer.Properties::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(5)
+      p -> p.setDirection(StreamGuiElementContainer.Direction.HORIZONTAL).setGap(5)
         .setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.CENTER)
         .setVerticalAlignment(StreamGuiElementContainer.VerticalAlignment.CENTER)
-        .padding.set(5).setWidth(800).setHeight(580)
+        .padding.set(5).setWidth(800).setHeight(580),
+      solaGuiDocument.createElement(
+        StreamGuiElementContainer::new,
+        p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(5)
+          .setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.CENTER)
+          .setVerticalAlignment(StreamGuiElementContainer.VerticalAlignment.CENTER),
+        solaGuiDocument.createElement(
+          TextGuiElement::new,
+          p -> p.setText("Single file examples").margin.setBottom(15)
+        ),
+        buildExampleLaunchButton("Animation", AnimationExample::new),
+        buildExampleLaunchButton("Audio", AudioExample::new),
+        buildExampleLaunchButton("Gui", GuiExample::new),
+        buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new),
+        buildExampleLaunchButton("Particle", ParticleExample::new),
+        buildExampleLaunchButton("Rendering", RenderingExample::new),
+        buildExampleLaunchButton("Simple Platformer", SimplePlatformerExample::new),
+        buildExampleLaunchButton("Stress Test - Physics", () -> new StressTestPhysicsExample(500)),
+        buildExampleLaunchButton("Stress Test - Rendering", StressTestRenderingExample::new)
+      ),
+      solaGuiDocument.createElement(
+        StreamGuiElementContainer::new,
+        p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(5)
+          .setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.CENTER)
+          .setVerticalAlignment(StreamGuiElementContainer.VerticalAlignment.CENTER),
+        solaGuiDocument.createElement(
+          TextGuiElement::new,
+          p -> p.setText("Larger examples").margin.setBottom(15)
+        ),
+        buildExampleLaunchButton("Gui Cookbook", GuiCookbook::new),
+        buildExampleLaunchButton("Networking", NetworkingExample::new)
+      )
     );
-
-    rootElement.addChild(solaGui.createElement(
-      TextGuiElement::new,
-      TextGuiElement.Properties::new,
-      p -> p.setText("Select an example to launch").margin.setBottom(15)
-    ));
-    rootElement.addChild(buildExampleLaunchButton("Animation", AnimationExample::new));
-    rootElement.addChild(buildExampleLaunchButton("Audio", AudioExample::new));
-    rootElement.addChild(buildExampleLaunchButton("Gui", GuiExample::new));
-    rootElement.addChild(buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new));
-    rootElement.addChild(buildExampleLaunchButton("Particle", ParticleExample::new));
-    rootElement.addChild(buildExampleLaunchButton("Rendering", RenderingExample::new));
-    rootElement.addChild(buildExampleLaunchButton("Simple Platformer", SimplePlatformerExample::new));
-    rootElement.addChild(buildExampleLaunchButton("Stress Test - Physics", () -> new StressTestPhysicsExample(500)));
-    rootElement.addChild(buildExampleLaunchButton("Stress Test - Rendering", StressTestRenderingExample::new));
-
-    return rootElement;
   }
 
   private GuiElement<?> buildExampleLaunchButton(String text, Supplier<Sola> solaSupplier) {
-    ButtonGuiElement exampleLaunchButton = solaGui.createElement(
+    return solaGuiDocument.createElement(
       ButtonGuiElement::new,
-      ButtonGuiElement.Properties::new,
       p -> p.setText(text).setTextAlign(BaseTextGuiElement.TextAlign.CENTER).padding.set(10).setWidth(300)
-    );
-
-    exampleLaunchButton.setOnAction(() -> {
+    ).setOnAction(() -> {
       eventHub.add(GameLoopEvent.class, event -> {
-        if (event.type() == GameLoopEventType.STOPPED) {
+        if (event.state() == GameLoopState.STOPPED) {
           solaPlatform.play(solaSupplier.get());
         }
       });
 
-      eventHub.emit(new GameLoopEvent(GameLoopEventType.STOP));
+      eventHub.emit(new GameLoopEvent(GameLoopState.STOP));
     });
-
-    return exampleLaunchButton;
   }
 }

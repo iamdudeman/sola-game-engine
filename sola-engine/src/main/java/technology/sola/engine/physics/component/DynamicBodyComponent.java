@@ -4,11 +4,7 @@ import technology.sola.ecs.Component;
 import technology.sola.engine.physics.Material;
 import technology.sola.math.linear.Vector2D;
 
-import java.io.Serial;
-
 public class DynamicBodyComponent implements Component {
-  @Serial
-  private static final long serialVersionUID = -5626743889555051041L;
   private float forceX = 0.0f;
   private float forceY = 0.0f;
   private boolean isGrounded = false;

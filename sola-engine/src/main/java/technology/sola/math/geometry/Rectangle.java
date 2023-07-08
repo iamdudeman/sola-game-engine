@@ -3,31 +3,26 @@ package technology.sola.math.geometry;
 import technology.sola.math.linear.Vector2D;
 
 /**
- * The Rectangle class represents an axis aligned geometric rectangle.
+ * Rectangle represents an axis aligned geometric rectangle.
  */
-public class Rectangle {
-  private final Vector2D min;
-  private final Vector2D max;
-
+public record Rectangle(Vector2D min, Vector2D max) {
   /**
    * Creates a rectangle by min and max points.
    * <p>
-   * The min point's x and y must both be below the max point's x and y.
+   * The min point's x and y must both be below the max point's x and y. If they are the same then a degenerate rectangle
+   * with width or height of zero will be created.
    *
-   * @param min  the top, left point of the rectangle
-   * @param max  the bottom, right point of the rectangle
+   * @param min the top, left point of the rectangle
+   * @param max the bottom, right point of the rectangle
    */
-  public Rectangle(Vector2D min, Vector2D max) {
-    if (max.x() <= min.x()) {
+  public Rectangle {
+    if (max.x() < min.x()) {
       throw new IllegalArgumentException("max.x cannot be less than min.x");
     }
 
-    if (max.y() <= min.y()) {
+    if (max.y() < min.y()) {
       throw new IllegalArgumentException("max.y cannot be less than min.y");
     }
-
-    this.min = min;
-    this.max = max;
   }
 
   /**
@@ -35,7 +30,8 @@ public class Rectangle {
    *
    * @return the min point
    */
-  public Vector2D getMin() {
+  @Override
+  public Vector2D min() {
     return min;
   }
 
@@ -44,7 +40,8 @@ public class Rectangle {
    *
    * @return the max point
    */
-  public Vector2D getMax() {
+  @Override
+  public Vector2D max() {
     return max;
   }
 
@@ -66,6 +63,12 @@ public class Rectangle {
     return max.subtract(min).y();
   }
 
+  /**
+   * Checks if this Rectangle contains a point.
+   *
+   * @param point the point to check
+   * @return true if this rectangle contains the point
+   */
   public boolean contains(Vector2D point) {
     return point.x() >= min.x() && point.x() <= max.x() && point.y() >= min.y() && point.y() <= max.y();
   }

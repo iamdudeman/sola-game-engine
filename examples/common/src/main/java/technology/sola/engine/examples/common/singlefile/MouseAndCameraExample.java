@@ -2,10 +2,9 @@ package technology.sola.engine.examples.common.singlefile;
 
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
-import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.core.module.graphics.SolaGraphics;
+import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
@@ -15,18 +14,18 @@ import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.math.linear.Vector2D;
 
-public class MouseAndCameraExample extends Sola {
-  private SolaGraphics solaGraphics;
+public class MouseAndCameraExample extends SolaWithDefaults {
   private ClickCreateEntitySystem clickCreateEntitySystem;
 
   public MouseAndCameraExample() {
-    super(SolaConfiguration.build("Mouse and Camera", 800, 600).withTargetUpdatesPerSecond(30).withGameLoopRestingOn());
+    super(SolaConfiguration.build("Mouse and Camera", 800, 600).withTargetUpdatesPerSecond(30));
   }
 
   @Override
-  protected void onInit() {
+  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+    defaultsConfigurator.useGraphics();
+
     platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
-    solaGraphics = SolaGraphics.createInstance(solaEcs, platform.getRenderer(), assetLoaderProvider);
 
     clickCreateEntitySystem = new ClickCreateEntitySystem();
     solaEcs.addSystem(clickCreateEntitySystem);
@@ -35,9 +34,7 @@ public class MouseAndCameraExample extends Sola {
 
   @Override
   protected void onRender(Renderer renderer) {
-    renderer.clear();
-
-    solaGraphics.render();
+    super.onRender(renderer);
 
     renderer.fillRect(0, 0, 800, 10, clickCreateEntitySystem.colors[clickCreateEntitySystem.colorIndex]);
   }
@@ -63,7 +60,7 @@ public class MouseAndCameraExample extends Sola {
 
     @Override
     public void update(World world, float deltaTime) {
-      var camera = world.findEntityByName("camera").orElseThrow();
+      var camera = world.findEntityByName("camera");
       var cameraTransform = camera.getComponent(TransformComponent.class);
 
       if (mouseInput.isMouseClicked(MouseButton.PRIMARY)) {

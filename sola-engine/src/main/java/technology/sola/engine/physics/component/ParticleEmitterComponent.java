@@ -5,11 +5,7 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.math.linear.Vector2D;
 
-import java.io.Serial;
-
 public class ParticleEmitterComponent implements Component {
-  @Serial
-  private static final long serialVersionUID = -8273651094891084287L;
   private Color particleColor = Color.WHITE;
   private BlendMode particleBlendMode = BlendMode.NORMAL;
   private float particleMinLife = 1f;

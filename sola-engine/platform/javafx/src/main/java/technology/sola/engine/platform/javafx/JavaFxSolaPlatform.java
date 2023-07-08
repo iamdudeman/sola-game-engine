@@ -14,20 +14,25 @@ import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.event.GameLoopEvent;
-import technology.sola.engine.core.event.GameLoopEventType;
+import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
-import technology.sola.engine.platform.javafx.assets.JavaFxAudiClipAssetLoader;
+import technology.sola.engine.platform.javafx.assets.JavaFxAudioClipAssetLoader;
 import technology.sola.engine.platform.javafx.assets.JavaFxFontAssetLoader;
 import technology.sola.engine.platform.javafx.assets.JavaFxSolaImageAssetLoader;
 import technology.sola.engine.platform.javafx.assets.JavaFxSpriteSheetAssetLoader;
 import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
+import technology.sola.engine.platform.javafx.core.JavaFxSocketClient;
 
 import java.util.function.Consumer;
 
+/**
+ * JavaFxSolaPlatform is a {@link SolaPlatform} implementation for running a {@link technology.sola.engine.core.Sola} in
+ * a JavaFX powered window.
+ */
 public class JavaFxSolaPlatform extends SolaPlatform {
   private static boolean isPlatformStartupNeeded = true;
   private Canvas canvas;
@@ -37,17 +42,26 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   private Double windowHeight;
 
   public JavaFxSolaPlatform() {
+    socketClient = new JavaFxSocketClient();
   }
 
+  // Note: this is used by the sola engine editor project
   public JavaFxSolaPlatform(boolean isPlatformStartupNeeded) {
     if (JavaFxSolaPlatform.isPlatformStartupNeeded) {
       JavaFxSolaPlatform.isPlatformStartupNeeded = isPlatformStartupNeeded;
     }
+    socketClient = new JavaFxSocketClient();
   }
 
+  /**
+   * Sets the initial window size when a {@link technology.sola.engine.core.Sola} is player.
+   *
+   * @param width  the width of the window
+   * @param height the height of the window
+   */
   public void setWindowSize(int width, int height) {
-    windowWidth = (double)width;
-    windowHeight = (double)height;
+    windowWidth = (double) width;
+    windowHeight = (double) height;
   }
 
   @Override
@@ -91,7 +105,8 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   @Override
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     if (isPlatformStartupNeeded) {
-      Platform.startup(() -> { });
+      Platform.startup(() -> {
+      });
       isPlatformStartupNeeded = false;
     }
 
@@ -114,7 +129,10 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       writableImage = new WritableImage(rendererWidth, rendererHeight);
 
       solaEventHub.add(GameLoopEvent.class, event -> {
-        if (event.type() == GameLoopEventType.STOPPED) {
+        if (event.state() == GameLoopState.STOPPED) {
+          if (socketClient.isConnected()) {
+            socketClient.disconnect();
+          }
           stage.close();
         }
       });
@@ -122,12 +140,12 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       stage.setOnShown(event -> canvas.requestFocus());
       stage.iconifiedProperty().addListener((observable, oldValue, isMinimized) -> {
         if (isMinimized) {
-          solaEventHub.emit(new GameLoopEvent(GameLoopEventType.PAUSE));
+          solaEventHub.emit(new GameLoopEvent(GameLoopState.PAUSE));
         } else {
-          solaEventHub.emit(new GameLoopEvent(GameLoopEventType.RESUME));
+          solaEventHub.emit(new GameLoopEvent(GameLoopState.RESUME));
         }
       });
-      stage.setOnCloseRequest(event -> solaEventHub.emit(new GameLoopEvent(GameLoopEventType.STOP)));
+      stage.setOnCloseRequest(event -> solaEventHub.emit(new GameLoopEvent(GameLoopState.STOP)));
       stage.setTitle(solaConfiguration.title());
       stage.setScene(scene);
       if (windowWidth != null) {
@@ -166,7 +184,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     assetLoaderProvider.add(solaImageAssetLoader);
     assetLoaderProvider.add(new JavaFxFontAssetLoader(solaImageAssetLoader));
     assetLoaderProvider.add(new JavaFxSpriteSheetAssetLoader(solaImageAssetLoader));
-    assetLoaderProvider.add(new JavaFxAudiClipAssetLoader());
+    assetLoaderProvider.add(new JavaFxAudioClipAssetLoader());
   }
 
   @Override
@@ -179,7 +197,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   }
 
   private MouseEvent fxToSola(javafx.scene.input.MouseEvent fxMouseEvent) {
-    MouseCoordinate adjusted = adjustMouseForViewport((int)fxMouseEvent.getX(), (int)fxMouseEvent.getY());
+    MouseCoordinate adjusted = adjustMouseForViewport((int) fxMouseEvent.getX(), (int) fxMouseEvent.getY());
 
     return new MouseEvent(fxMouseEvent.getButton().ordinal(), adjusted.x(), adjusted.y());
   }

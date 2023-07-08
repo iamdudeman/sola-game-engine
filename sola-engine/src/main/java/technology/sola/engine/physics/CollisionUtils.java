@@ -1,6 +1,7 @@
 package technology.sola.engine.physics;
 
 import technology.sola.ecs.Entity;
+import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.math.SolaMath;
@@ -8,85 +9,78 @@ import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
+/**
+ * The CollisionUtils class is a collection of various methods that help in collision detection and resolution.
+ */
 public final class CollisionUtils {
+  /**
+   * Calculates a {@link CollisionManifold} for two {@link Entity} that collided.
+   *
+   * @param viewEntryA the first Entity in a {@link technology.sola.ecs.view.View2Entry} of {@link ColliderComponent} and {@link TransformComponent}
+   * @param viewEntryB the second Entity in a {@link technology.sola.ecs.view.View2Entry} of {@link ColliderComponent} and {@link TransformComponent}
+   * @return the resulting {@code CollisionManifold}
+   */
   public static CollisionManifold calculateCollisionManifold(
-    Entity entityA, Entity entityB,
-    TransformComponent transformA, TransformComponent transformB,
-    ColliderComponent colliderA, ColliderComponent colliderB
+    View2Entry<ColliderComponent, TransformComponent> viewEntryA,
+    View2Entry<ColliderComponent, TransformComponent> viewEntryB
   ) {
-    switch (colliderA.getColliderType()) {
-      case AABB:
-        switch (colliderB.getColliderType()) {
-          case AABB -> {
-            Rectangle rectangleA = colliderA.asRectangle(transformA);
-            Rectangle rectangleB = colliderB.asRectangle(transformB);
-            return calculateAABBVsAABB(entityA, entityB, rectangleA, rectangleB);
-          }
-          case CIRCLE -> {
-            Rectangle rectangle = colliderA.asRectangle(transformA);
-            Circle circle = colliderB.asCircle(transformB);
-            return calculateAABBVsCircle(entityA, entityB, rectangle, circle);
-          }
-          default -> {
-          }
-        }
-        break;
-      case CIRCLE:
-        switch (colliderB.getColliderType()) {
-          case AABB -> {
-            Rectangle rectangle = colliderB.asRectangle(transformB);
-            Circle circle = colliderA.asCircle(transformA);
-            return calculateAABBVsCircle(entityB, entityA, rectangle, circle);
-          }
-          case CIRCLE -> {
-            Circle circleA = colliderA.asCircle(transformA);
-            Circle circleB = colliderB.asCircle(transformB);
-            return calculateCircleVsCircle(entityA, entityB, circleA, circleB);
-          }
-          default -> {
-          }
-        }
-        break;
-      default:
-    }
+    Entity entityA = viewEntryA.entity();
+    Entity entityB = viewEntryB.entity();
+    TransformComponent transformA = viewEntryA.c2();
+    TransformComponent transformB = viewEntryB.c2();
+    ColliderComponent colliderA = viewEntryA.c1();
+    ColliderComponent colliderB = viewEntryB.c1();
 
-    return null;
+    return switch (colliderA.getColliderType()) {
+      case AABB -> switch (colliderB.getColliderType()) {
+        case AABB ->
+          calculateAABBVsAABB(entityA, entityB, colliderA.asRectangle(transformA), colliderB.asRectangle(transformB));
+        case CIRCLE ->
+          calculateAABBVsCircle(entityA, entityB, colliderA.asRectangle(transformA), colliderB.asCircle(transformB));
+      };
+      case CIRCLE -> switch (colliderB.getColliderType()) {
+        case AABB ->
+          calculateAABBVsCircle(entityB, entityA, colliderB.asRectangle(transformB), colliderA.asCircle(transformA));
+        case CIRCLE ->
+          calculateCircleVsCircle(entityA, entityB, colliderA.asCircle(transformA), colliderB.asCircle(transformB));
+      };
+    };
   }
 
   private static CollisionManifold calculateAABBVsCircle(
     Entity rectEntity, Entity circeEntity,
     Rectangle rectangle, Circle circle
   ) {
-    Vector2D circleCenter = circle.getCenter();
-    Vector2D closestPointOnRectangle = SolaMath.clamp(rectangle.getMin(), rectangle.getMax(), circleCenter);
+    Vector2D circleCenter = circle.center();
+    Vector2D closestPointOnRectangle = SolaMath.clamp(rectangle.min(), rectangle.max(), circleCenter);
     boolean isCircleCenterInsideRectangle = circleCenter.equals(closestPointOnRectangle);
 
     if (isCircleCenterInsideRectangle) {
       // Find the closest edge since that is the closest point on rectangle for the normal
-      float minDistanceX = circleCenter.x() - rectangle.getMin().x();
-      float maxDistanceX = rectangle.getMax().x() - circleCenter.x();
-      float minDistanceY = circleCenter.y() - rectangle.getMin().y();
-      float maxDistanceY = rectangle.getMax().y() - circleCenter.y();
+      float minDistanceX = circleCenter.x() - rectangle.min().x();
+      float maxDistanceX = rectangle.max().x() - circleCenter.x();
+      float minDistanceY = circleCenter.y() - rectangle.min().y();
+      float maxDistanceY = rectangle.max().y() - circleCenter.y();
 
       if (maxDistanceY < minDistanceY && maxDistanceY < maxDistanceX && maxDistanceY < minDistanceX) {
-        closestPointOnRectangle = new Vector2D(circleCenter.x(), rectangle.getMax().y());
+        closestPointOnRectangle = new Vector2D(circleCenter.x(), rectangle.max().y());
       } else if (minDistanceY < maxDistanceX && minDistanceY < minDistanceX) {
-        closestPointOnRectangle = new Vector2D(circleCenter.x(), rectangle.getMin().y());
+        closestPointOnRectangle = new Vector2D(circleCenter.x(), rectangle.min().y());
       } else if (maxDistanceX < minDistanceX) {
-        closestPointOnRectangle = new Vector2D(rectangle.getMax().x(), circleCenter.y());
+        closestPointOnRectangle = new Vector2D(rectangle.max().x(), circleCenter.y());
       } else {
-        closestPointOnRectangle = new Vector2D(rectangle.getMin().x(), circleCenter.y());
+        closestPointOnRectangle = new Vector2D(rectangle.min().x(), circleCenter.y());
       }
     }
 
     // Normal
     Vector2D diff = closestPointOnRectangle.subtract(circleCenter);
 
-    if (!isCircleCenterInsideRectangle && diff.magnitudeSq() > circle.getRadius() * circle.getRadius()) {
+    if (!isCircleCenterInsideRectangle && diff.magnitudeSq() > circle.radius() * circle.radius()) {
       return null;
     }
 
-    float penetration = circle.getRadius() - closestPointOnRectangle.distance(circleCenter);
+    float penetration = circle.radius() - closestPointOnRectangle.distance(circleCenter);
     Vector2D normal = diff.normalize();
 
     // If not inside
@@ -101,10 +95,10 @@ public final class CollisionUtils {
     Entity entityA, Entity entityB,
     Rectangle rectangleA, Rectangle rectangleB
   ) {
-    Vector2D aBoxMin = rectangleA.getMin();
-    Vector2D aBoxMax = rectangleA.getMax();
-    Vector2D bBoxMin = rectangleB.getMin();
-    Vector2D bBoxMax = rectangleB.getMax();
+    Vector2D aBoxMin = rectangleA.min();
+    Vector2D aBoxMax = rectangleA.max();
+    Vector2D bBoxMin = rectangleB.min();
+    Vector2D bBoxMax = rectangleB.max();
 
     Vector2D posDiffMin = bBoxMin.subtract(aBoxMin);
     Vector2D posDiffMax = bBoxMax.subtract(aBoxMax);
@@ -152,10 +146,10 @@ public final class CollisionUtils {
     Entity entityA, Entity entityB,
     Circle circleA, Circle circleB
   ) {
-    Vector2D posA = circleA.getCenter();
-    Vector2D posB = circleB.getCenter();
+    Vector2D posA = circleA.center();
+    Vector2D posB = circleB.center();
     float distance = posA.distance(posB);
-    float penetration = circleA.getRadius() + circleB.getRadius() - distance;
+    float penetration = circleA.radius() + circleB.radius() - distance;
 
     if (penetration <= 0) {
       return null;

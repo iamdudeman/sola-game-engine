@@ -16,19 +16,39 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
+/**
+ * FontRasterizerTool generates a font json and font png file that can be used by the sola game engine.
+ */
 public class FontRasterizerTool implements Tool {
+  /**
+   * Default characters used in the font rasterizer tool.
+   */
   public static final String DEFAULT_CHARACTERS = "abcdefghijklmnopqrstuvwxyz{|}~ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`";
   private final File parentDirectory;
   private final String characters;
 
+  /**
+   * Creates a FontRasterizerTool using the current directory as the output directory and {@link FontRasterizerTool#DEFAULT_CHARACTERS} characters
+   */
   public FontRasterizerTool() {
     this(new File(Path.of("").toAbsolutePath().toString()));
   }
 
+  /**
+   * Creates a FontRasterizerTool using desired parentDirectory as output and {@link FontRasterizerTool#DEFAULT_CHARACTERS} characters
+   *
+   * @param parentDirectory the directory to output the generated files to
+   */
   public FontRasterizerTool(File parentDirectory) {
     this(parentDirectory, DEFAULT_CHARACTERS);
   }
 
+  /**
+   * Creates a FontRasterizerTool using desired parentDirectory as output and desired characters included.
+   *
+   * @param parentDirectory the directory to output the generated files to
+   * @param characters      the characters to include in the font assets
+   */
   public FontRasterizerTool(File parentDirectory, String characters) {
     this.parentDirectory = parentDirectory;
     this.characters = characters;
@@ -63,6 +83,15 @@ public class FontRasterizerTool implements Tool {
     }
   }
 
+  /**
+   * Generates a font info and font image file for the desired font family with a font style and size.
+   * See {@link FontListTool} to view what font families are available.
+   *
+   * @param fontFamily the font family to generate asset for
+   * @param fontStyle  the font style [NORMAL, ITALIC, BOLD]
+   * @param fontSize   the font size
+   * @return the path to the font info file that was generated
+   */
   public String rasterizeFont(String fontFamily, String fontStyle, int fontSize) {
     var fontInformation = new FontInformation(fontFamily, FontStyle.valueOf(fontStyle), fontSize);
 

@@ -67,6 +67,11 @@ public class Graphics2dRenderer implements Renderer {
   }
 
   @Override
+  public void setClamp(int x, int y, int width, int height) {
+    throw new NotYetImplementedException();
+  }
+
+  @Override
   public void clear(Color color) {
     graphics2D.setColor(new java.awt.Color(color.hexInt(), true));
     graphics2D.fillRect(0, 0, width, height);
