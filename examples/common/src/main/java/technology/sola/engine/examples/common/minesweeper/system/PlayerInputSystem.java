@@ -21,25 +21,42 @@ public class PlayerInputSystem extends EcsSystem {
 
   @Override
   public void update(World world, float deltaTime) {
-    if (mouseInput.isMouseClicked(MouseButton.PRIMARY)) {
-      Vector2D worldPosition = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
+    if (mouseInput.isMouseClicked(MouseButton.PRIMARY) || mouseInput.isMouseClicked(MouseButton.SECONDARY)) {
+      Vector2D worldMousePosition = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
 
       for (var entry : world.createView().of(TransformComponent.class, MinesweeperSquareComponent.class).getEntries()) {
         Vector2D translate = entry.c1().getTranslate();
-        Rectangle rectangle = new Rectangle(translate, translate.add(new Vector2D(MinesweeperSquareComponent.SQUARE_SIZE - 1, MinesweeperSquareComponent.SQUARE_SIZE - 1)));
+        Rectangle squareBounds = new Rectangle(translate, translate.add(new Vector2D(MinesweeperSquareComponent.SQUARE_SIZE - 1, MinesweeperSquareComponent.SQUARE_SIZE - 1)));
         MinesweeperSquareComponent square = entry.c2();
 
-        if (rectangle.contains(worldPosition)) {
-          square.reveal();
-
-          if (square.isBomb()) {
-            // todo emit loss event
-            System.out.println("You lost");
-          } else if (square.getAdjacentCount() == 0) {
-            // todo reveal adjacent ones in all directions until numbered are found (or boundary) recursively
+        if (squareBounds.contains(worldMousePosition)) {
+          if (mouseInput.isMouseClicked(MouseButton.PRIMARY)) {
+            handleReveal(square);
+          } else {
+            handleFlag(square);
           }
         }
       }
+    }
+  }
+
+  private void handleReveal(MinesweeperSquareComponent squareComponent) {
+    if (!squareComponent.isFlagged()) {
+      squareComponent.reveal();
+
+      if (squareComponent.isBomb()) {
+        // todo emit loss event
+        System.out.println("You lost");
+      } else if (squareComponent.getAdjacentCount() == 0) {
+        // todo reveal adjacent ones in all directions until numbered are found (or boundary) recursively
+      }
+    }
+  }
+
+  private void handleFlag(MinesweeperSquareComponent squareComponent) {
+    if (!squareComponent.isRevealed()) {
+      // todo emit event to increase/decrease flag count
+      squareComponent.toggleFlag();
     }
   }
 }

@@ -34,6 +34,8 @@ public class MinesweeperSquareGraphicsModule extends SolaGraphicsModule<View2Ent
         renderer.fillRect(x, y, squareSize, squareSize, Color.LIGHT_GRAY);
         renderer.drawString(String.valueOf(square.getAdjacentCount()), x + FONT_OFFSET, y, Color.BLACK);
       }
+    } else if (square.isFlagged()) {
+      renderer.fillRect(x, y, squareSize, squareSize, Color.GREEN);
     } else {
       renderer.fillRect(x, y, squareSize, squareSize, Color.DARK_GRAY);
     }
