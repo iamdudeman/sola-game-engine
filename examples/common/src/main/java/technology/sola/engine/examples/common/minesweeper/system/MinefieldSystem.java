@@ -99,9 +99,8 @@ public class MinefieldSystem extends EcsSystem {
         if (minefield[i][j] == MINE_INDICATOR) {
           // get coordinates around position
           List<Point> points = getPointsAroundCoordinate(minefield, i, j);
-          // for every point
-          for (int k = 0; k < points.size(); k++) {
-            Point temp = points.get(k);
+
+          for (Point temp : points) {
             // check to see if point is not a mine
             if (minefield[temp.x][temp.y] != MINE_INDICATOR) {
               // if it is not a mine then increase its value by one(since it is by a mine)
