@@ -23,10 +23,10 @@
     * Add a way to do gradients
         * maybe just linear at first
 * networking
-      * rest client interface
-          * javafx/swing impl
-          * browser impl
-      * simple rest server
+    * rest client interface
+        * javafx/swing impl
+        * browser impl
+    * simple rest server
 * Particle System
     * consider adding acceleration
     * consider some sort of "swaying" for non-linear particles
@@ -37,37 +37,36 @@
         * possibly use JSON to define gui structure
     * A "post load" callback to add event listeners and such
 * Consider adding rotation to TransformComponent
-      * Would need to update rendering stuff
-      * Would need to update physics stuff
+    * Would need to update rendering stuff
+    * Would need to update physics stuff
 * Physics
-      * Collision Detection
-  * Polygon x AABB
-  * Polygon x Circle
-  * Polygon x Polygon
+    * Collision Detection
+        * Polygon x AABB
+        * Polygon x Circle
+        * Polygon x Polygon
 * Figure out how to handle TouchInput (probably at the same time as AndroidPlatform implementation)
-      * Primarily for browser but also could be supported in JavaFX
-      * touchstart and touchend all hard coded to MouseButton.Primary currently
-  * implement touchmove
-      * Figure out TouchInput API
-  * How to handle multitouch
-      * Switch JsMouseUtils to mouse events instead of pointer events
+    * Primarily for browser but also could be supported in JavaFX
+    * touchstart and touchend all hard coded to MouseButton.Primary currently
+        * implement touchmove
+            * Figure out TouchInput API
+        * How to handle multitouch
+            * Switch JsMouseUtils to mouse events instead of pointer events
 * Android Platform
-      * Implement
-* BrowserPlatform
-    * modularize (requires figuring out how to modularize parts of teavm needed)
+    * Implement
 * Consider some sort of lighting mechanism implementation
 * Consider adding a "debug console" option
     * While open can toggle things like render debug outlines and debug spacial hashmap stuff
     * Could also maybe allow adding custom commands
     * Should probably always use a "default font" if it is implemented
 * Browser Platform
+    * modularize (requires figuring out how to modularize parts of teavm needed)
+    * Improve performance (StressTestExample can't handle a lot of objects)
+        * Possibly finish implementing BrowserCanvasRenderer?
     * Consider web worker for game loop
         * main thread creates needed dom events
         * mouse and key events sent to worker
         * worker sends ImageData to main thread to render
         * (this approach may improve performance for StressTestExample to work better)
-    * Improve performance (StressTestExample can't handle a lot of objects)
-        * Possibly finish implementing BrowserCanvasRenderer?
 * Research Virtual File System
     * ability to mount archives of some sort
         * possible example, instead of png use different file format that many can be compressed into one larger file
