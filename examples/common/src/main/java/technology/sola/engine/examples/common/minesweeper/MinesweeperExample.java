@@ -3,6 +3,7 @@ package technology.sola.engine.examples.common.minesweeper;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.examples.common.minesweeper.graphics.MinesweeperSquareGraphicsModule;
 import technology.sola.engine.graphics.screen.AspectMode;
 
 public class MinesweeperExample extends SolaWithDefaults {
@@ -13,6 +14,8 @@ public class MinesweeperExample extends SolaWithDefaults {
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     defaultsConfigurator.useGui().useGraphics();
+
+    solaGraphics.addGraphicsModules(new MinesweeperSquareGraphicsModule());
 
     solaEcs.setWorld(buildWorld());
     platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
