@@ -73,7 +73,9 @@ public class PlayerInputSystem extends EcsSystem {
         revealForZero(entries, squareComponent.getRowIndex(), squareComponent.getColumnIndex());
       }
 
-      // todo Check for victory
+      if (entries.stream().filter(entry -> !entry.c2().isBomb()).allMatch(entry -> entry.c2().isRevealed())) {
+        eventHub.emit(new GameOverEvent(true));
+      }
     }
   }
 

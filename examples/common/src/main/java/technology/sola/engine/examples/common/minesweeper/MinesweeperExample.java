@@ -21,7 +21,7 @@ public class MinesweeperExample extends SolaWithDefaults {
 
     // graphics
     solaGraphics.addGraphicsModules(new MinesweeperSquareGraphicsModule());
-    solaGuiDocument.setGuiRoot(MinesweeperGui.build(solaGuiDocument, eventHub), 5, 5);
+    solaGuiDocument.setGuiRoot(MinesweeperGui.build(solaGuiDocument, eventHub), 2, 2);
     platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
 
     // systems

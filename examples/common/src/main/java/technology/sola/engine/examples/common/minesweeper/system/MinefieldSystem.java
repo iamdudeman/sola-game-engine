@@ -52,7 +52,7 @@ public class MinefieldSystem extends EcsSystem {
       for (int columnIndex = 0; columnIndex < minefield[rowIndex].length; columnIndex++) {
         int tile = minefield[rowIndex][columnIndex];
         float x = columnIndex * MinesweeperSquareComponent.SQUARE_SIZE;
-        float y = rowIndex * MinesweeperSquareComponent.SQUARE_SIZE + 50; // 50 is offset to prevent gui overlap
+        float y = rowIndex * MinesweeperSquareComponent.SQUARE_SIZE + 60; // 60 is offset to prevent gui overlap
 
         world.createEntity(
           new TransformComponent(x, y),
