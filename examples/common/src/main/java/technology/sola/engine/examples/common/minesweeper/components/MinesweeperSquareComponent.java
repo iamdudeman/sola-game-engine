@@ -3,6 +3,7 @@ package technology.sola.engine.examples.common.minesweeper.components;
 import technology.sola.ecs.Component;
 
 public class MinesweeperSquareComponent implements Component {
+  public static final int SQUARE_SIZE = 20;
   private final Integer adjacentCount;
   private boolean isRevealed;
 
