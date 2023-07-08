@@ -110,8 +110,8 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code>final <a href="../../event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a></code></div>
 <div class="col-second even-row-color"><code><a href="#eventHub" class="member-name-link">eventHub</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>final <a href="properties/GuiElementGlobalProperties.html" title="class in technology.sola.engine.graphics.gui.properties">GuiElementGlobalProperties</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#globalProperties" class="member-name-link">globalProperties</a></code></div>
+<div class="col-first odd-row-color"><code>final <a href="properties/GuiPropertyDefaults.html" title="class in technology.sola.engine.graphics.gui.properties">GuiPropertyDefaults</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#propertyDefaults" class="member-name-link">propertyDefaults</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </section>
@@ -124,9 +124,9 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.core.SolaPlatform,technology.sola.engine.assets.AssetLoaderProvider,technology.sola.engine.event.EventHub)" class="member-name-link">SolaGuiDocument</a><wbr>(<a href="../../core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a>&nbsp;platform,
- <a href="../../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider,
- <a href="../../event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a>&nbsp;eventHub)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.assets.AssetLoaderProvider,technology.sola.engine.event.EventHub,technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults)" class="member-name-link">SolaGuiDocument</a><wbr>(<a href="../../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider,
+ <a href="../../event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a>&nbsp;eventHub,
+ <a href="properties/GuiPropertyDefaults.html" title="class in technology.sola.engine.graphics.gui.properties">GuiPropertyDefaults</a>&nbsp;propertyDefaults)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates a new instances of <a href="SolaGuiDocument.html" title="class in technology.sola.engine.graphics.gui"><code>SolaGuiDocument</code></a>.</div>
 </div>
@@ -176,18 +176,21 @@ P extends <a href="properties/GuiElementBaseProperties.html" title="class in tec
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isFocussedElement(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">isFocussedElement</a><wbr>(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&nbsp;guiElement)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">render</a><wbr>(<a href="../renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#registerEventListeners(technology.sola.engine.core.SolaPlatform)" class="member-name-link">registerEventListeners</a><wbr>(<a href="../../core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a>&nbsp;platform)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">render</a><wbr>(<a href="../renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Renders the root <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a> and its children.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setGuiRoot(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">setGuiRoot</a><wbr>(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&nbsp;guiElement)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setGuiRoot(technology.sola.engine.graphics.gui.GuiElement,int,int)" class="member-name-link">setGuiRoot</a><wbr>(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&nbsp;guiElement,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setGuiRoot(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">setGuiRoot</a><wbr>(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&nbsp;guiElement)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setGuiRoot(technology.sola.engine.graphics.gui.GuiElement,int,int)" class="member-name-link">setGuiRoot</a><wbr>(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&nbsp;guiElement,
  int&nbsp;x,
  int&nbsp;y)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -206,9 +209,9 @@ P extends <a href="properties/GuiElementBaseProperties.html" title="class in tec
 <h2>Field Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="globalProperties">
-<h3>globalProperties</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="properties/GuiElementGlobalProperties.html" title="class in technology.sola.engine.graphics.gui.properties">GuiElementGlobalProperties</a></span>&nbsp;<span class="element-name">globalProperties</span></div>
+<section class="detail" id="propertyDefaults">
+<h3>propertyDefaults</h3>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="properties/GuiPropertyDefaults.html" title="class in technology.sola.engine.graphics.gui.properties">GuiPropertyDefaults</a></span>&nbsp;<span class="element-name">propertyDefaults</span></div>
 </section>
 </li>
 <li>
@@ -226,16 +229,14 @@ P extends <a href="properties/GuiElementBaseProperties.html" title="class in tec
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(technology.sola.engine.core.SolaPlatform,technology.sola.engine.assets.AssetLoaderProvider,technology.sola.engine.event.EventHub)">
+<section class="detail" id="&lt;init&gt;(technology.sola.engine.assets.AssetLoaderProvider,technology.sola.engine.event.EventHub,technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults)">
 <h3>SolaGuiDocument</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SolaGuiDocument</span><wbr><span class="parameters">(<a href="../../core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a>&nbsp;platform,
- <a href="../../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider,
- <a href="../../event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a>&nbsp;eventHub)</span></div>
-<div class="block">Creates a new instances of <a href="SolaGuiDocument.html" title="class in technology.sola.engine.graphics.gui"><code>SolaGuiDocument</code></a>. Registers event listeners for the <a href="../../core/SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> and
- prepares a default <a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a> to be loaded.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SolaGuiDocument</span><wbr><span class="parameters">(<a href="../../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider,
+ <a href="../../event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a>&nbsp;eventHub,
+ <a href="properties/GuiPropertyDefaults.html" title="class in technology.sola.engine.graphics.gui.properties">GuiPropertyDefaults</a>&nbsp;propertyDefaults)</span></div>
+<div class="block">Creates a new instances of <a href="SolaGuiDocument.html" title="class in technology.sola.engine.graphics.gui"><code>SolaGuiDocument</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>platform</code> - the <a href="../../core/SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> instance</dd>
 <dd><code>assetLoaderProvider</code> - the <a href="../../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets"><code>AssetLoaderProvider</code></a> to load the <code>Font</code></dd>
 <dd><code>eventHub</code> - the <a href="../../event/EventHub.html" title="class in technology.sola.engine.event"><code>EventHub</code></a> instance</dd>
 </dl>
@@ -258,6 +259,12 @@ P extends <a href="properties/GuiElementBaseProperties.html" title="class in tec
 <dt>Parameters:</dt>
 <dd><code>renderer</code> - the <a href="../renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> instance</dd>
 </dl>
+</section>
+</li>
+<li>
+<section class="detail" id="registerEventListeners(technology.sola.engine.core.SolaPlatform)">
+<h3>registerEventListeners</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">registerEventListeners</span><wbr><span class="parameters">(<a href="../../core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a>&nbsp;platform)</span></div>
 </section>
 </li>
 <li>
