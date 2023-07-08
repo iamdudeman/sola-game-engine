@@ -4,11 +4,15 @@ import technology.sola.ecs.Component;
 
 public class MinesweeperSquareComponent implements Component {
   public static final int SQUARE_SIZE = 20;
+  private final int rowIndex;
+  private final int columnIndex;
   private final Integer adjacentCount;
   private boolean isRevealed;
   private boolean isFlagged;
 
-  public MinesweeperSquareComponent(Integer adjacentCount) {
+  public MinesweeperSquareComponent(int rowIndex, int columnIndex, Integer adjacentCount) {
+    this.rowIndex = rowIndex;
+    this.columnIndex = columnIndex;
     this.adjacentCount = adjacentCount;
   }
 

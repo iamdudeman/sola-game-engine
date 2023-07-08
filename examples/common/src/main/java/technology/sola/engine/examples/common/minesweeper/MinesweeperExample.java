@@ -6,6 +6,8 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.examples.common.minesweeper.components.MinesweeperSquareComponent;
 import technology.sola.engine.examples.common.minesweeper.graphics.MinesweeperSquareGraphicsModule;
+import technology.sola.engine.examples.common.minesweeper.state.MinesweeperField;
+import technology.sola.engine.examples.common.minesweeper.state.MinesweeperGameState;
 import technology.sola.engine.examples.common.minesweeper.system.PlayerInputSystem;
 import technology.sola.engine.graphics.screen.AspectMode;
 
@@ -28,14 +30,17 @@ public class MinesweeperExample extends SolaWithDefaults {
 
   // todo add UI to allow generating fields to play
   private World buildWorld() {
-    World world = new World(30 * 40);
+    int rows = 30;
+    int columns = 40;
+    int percentMines = 16;
+    World world = new World(rows * columns);
 
-    int[][] minefield = MinesweeperFieldGenerator.generateMinefield(30, 40, 16);
+    MinesweeperGameState.setCurrentField(new MinesweeperField(rows, columns, percentMines));
 
     int rowIndex = 0;
     int columnIndex = 0;
 
-    for (int[] row : minefield) {
+    for (int[] row : MinesweeperGameState.getCurrentField().getField()) {
       columnIndex = 0;
 
       for (int tile : row) {
@@ -44,7 +49,7 @@ public class MinesweeperExample extends SolaWithDefaults {
 
         world.createEntity(
           new TransformComponent(x, y),
-          new MinesweeperSquareComponent(tile == -1 ? null : tile)
+          new MinesweeperSquareComponent(rowIndex, columnIndex, tile == MinesweeperField.MINE_INDICATOR ? null : tile)
         );
 
         columnIndex++;

@@ -26,7 +26,9 @@ public class PlayerInputSystem extends EcsSystem {
 
       for (var entry : world.createView().of(TransformComponent.class, MinesweeperSquareComponent.class).getEntries()) {
         Vector2D translate = entry.c1().getTranslate();
-        Rectangle squareBounds = new Rectangle(translate, translate.add(new Vector2D(MinesweeperSquareComponent.SQUARE_SIZE - 1, MinesweeperSquareComponent.SQUARE_SIZE - 1)));
+        Vector2D minBounds = translate.add(new Vector2D(1, 1));
+        Vector2D maxBounds = translate.add(new Vector2D(MinesweeperSquareComponent.SQUARE_SIZE - 1, MinesweeperSquareComponent.SQUARE_SIZE - 1));
+        Rectangle squareBounds = new Rectangle(minBounds, maxBounds);
         MinesweeperSquareComponent square = entry.c2();
 
         if (squareBounds.contains(worldMousePosition)) {
