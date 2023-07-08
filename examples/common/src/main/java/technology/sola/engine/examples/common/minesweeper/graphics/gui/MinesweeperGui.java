@@ -11,6 +11,8 @@ import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 
+import java.text.DecimalFormat;
+
 public class MinesweeperGui {
   public static final Size[] SIZE_OPTIONS = new Size[] {
     new Size(10, 10),
@@ -47,9 +49,10 @@ public class MinesweeperGui {
       if (gameOverEvent.isVictory()) {
         long millisTaken = System.currentTimeMillis() - timeStarted;
         double secondsTaken = millisTaken / 1000f;
+        DecimalFormat decimalFormat = new DecimalFormat("##.00");
 
         document.getElementById("victory", TextGuiElement.class).properties()
-          .setText(String.format("You won in %.2f seconds", secondsTaken))
+          .setText("You won in " + decimalFormat.format(secondsTaken) + " seconds")
           .setHidden(false);
       }
     });
