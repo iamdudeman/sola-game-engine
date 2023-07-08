@@ -5,7 +5,11 @@ import technology.sola.ecs.World;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaGraphics;
+import technology.sola.engine.event.EventHub;
 import technology.sola.engine.examples.common.minesweeper.components.MinesweeperSquareComponent;
+import technology.sola.engine.examples.common.minesweeper.event.FlagEvent;
+import technology.sola.engine.examples.common.minesweeper.event.GameOverEvent;
+import technology.sola.engine.examples.common.minesweeper.event.NewGameEvent;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.engine.input.MouseInput;
 import technology.sola.math.geometry.Rectangle;
@@ -16,10 +20,22 @@ import java.util.List;
 public class PlayerInputSystem extends EcsSystem {
   private final SolaGraphics solaGraphics;
   private final MouseInput mouseInput;
+  private final EventHub eventHub;
 
-  public PlayerInputSystem(SolaGraphics solaGraphics, MouseInput mouseInput) {
+  public PlayerInputSystem(SolaGraphics solaGraphics, MouseInput mouseInput, EventHub eventHub) {
     this.solaGraphics = solaGraphics;
     this.mouseInput = mouseInput;
+    this.eventHub = eventHub;
+  }
+
+  public void registerEvents() {
+    eventHub.add(GameOverEvent.class, gameOverEvent -> {
+      setActive(false);
+    });
+
+    eventHub.add(NewGameEvent.class, newGameEvent -> {
+      setActive(true);
+    });
   }
 
   @Override
@@ -52,18 +68,19 @@ public class PlayerInputSystem extends EcsSystem {
       squareComponent.reveal();
 
       if (squareComponent.isBomb()) {
-        // todo emit loss event
-        System.out.println("You lost");
+        eventHub.emit(new GameOverEvent(false));
       } else if (squareComponent.getAdjacentCount() == 0) {
         revealForZero(entries, squareComponent.getRowIndex(), squareComponent.getColumnIndex());
       }
+
+      // todo Check for victory
     }
   }
 
   private void handleFlag(MinesweeperSquareComponent squareComponent) {
     if (!squareComponent.isRevealed()) {
-      // todo emit event to increase/decrease flag count
       squareComponent.toggleFlag();
+      eventHub.emit(new FlagEvent(squareComponent.isFlagged()));
     }
   }
 
