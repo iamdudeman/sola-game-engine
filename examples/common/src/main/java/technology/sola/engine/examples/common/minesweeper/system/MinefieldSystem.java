@@ -46,28 +46,19 @@ public class MinefieldSystem extends EcsSystem {
 
   private World buildWorld(int rows, int columns, int mines) {
     World world = new World(rows * columns);
-
-    int rowIndex = 0;
-    int columnIndex = 0;
-
     int[][] minefield = generateMinefield(rows, columns, mines);
 
-    for (int[] row : minefield) {
-      columnIndex = 0;
-
-      for (int tile : row) {
+    for (int rowIndex = 0; rowIndex < minefield.length; rowIndex++) {
+      for (int columnIndex = 0; columnIndex < minefield[rowIndex].length; columnIndex++) {
+        int tile = minefield[rowIndex][columnIndex];
         float x = columnIndex * MinesweeperSquareComponent.SQUARE_SIZE;
-        float y = rowIndex * MinesweeperSquareComponent.SQUARE_SIZE + 50; // 50 is gui offset
+        float y = rowIndex * MinesweeperSquareComponent.SQUARE_SIZE + 50; // 50 is offset to prevent gui overlap
 
         world.createEntity(
           new TransformComponent(x, y),
           new MinesweeperSquareComponent(rowIndex, columnIndex, tile == MINE_INDICATOR ? null : tile)
         );
-
-        columnIndex++;
       }
-
-      rowIndex++;
     }
 
     return world;
@@ -82,7 +73,7 @@ public class MinefieldSystem extends EcsSystem {
    * @param mineCount the total number of mines as calculated by (percentMines/100.0)*(rows*columns)
    * @return the minefield
    */
-  private static int[][] generateMinefield(int rows, int columns, int mineCount) {
+  private int[][] generateMinefield(int rows, int columns, int mineCount) {
     int[][] minefield = new int[rows][columns];
     int count = mineCount;
 
@@ -119,7 +110,7 @@ public class MinefieldSystem extends EcsSystem {
    * @param minefield The array to put a mine in
    * @return Success or fail
    */
-  private static boolean placeMine(int[][] minefield) {
+  private boolean placeMine(int[][] minefield) {
     boolean isPlaced = false;
     Random random = new Random();
     // int from 0 to number of rows
@@ -158,7 +149,7 @@ public class MinefieldSystem extends EcsSystem {
    * @param y     the y coordinate
    * @return true if in the array
    */
-  private static boolean isCoordinateIn2dArray(int[][] array, int x, int y) {
+  private boolean isCoordinateIn2dArray(int[][] array, int x, int y) {
     boolean isInArray = false;
 
     // check rows
@@ -180,62 +171,53 @@ public class MinefieldSystem extends EcsSystem {
    * @param y     the y coordinate
    * @return the List of Points
    */
-  private static List<Point> getPointsAroundCoordinate(int[][] array, int x, int y) {
+  private List<Point> getPointsAroundCoordinate(int[][] array, int x, int y) {
     List<Point> points = new ArrayList<>();
+
     if (isCoordinateIn2dArray(array, x, y)) {
       // top left corner of point
       int tempX = x - 1;
       int tempY = y - 1;
-      if (isCoordinateIn2dArray(array, tempX, tempY)) {
-        points.add(new Point(tempX, tempY));
-      }
+      addIfInArray(points, array, tempX, tempY);
 
       // top middle of point
       tempY = y;
-      if (isCoordinateIn2dArray(array, tempX, tempY)) {
-        points.add(new Point(tempX, tempY));
-      }
+      addIfInArray(points, array, tempX, tempY);
 
       // top right corner of point
       tempY = y + 1;
-      if (isCoordinateIn2dArray(array, tempX, tempY)) {
-        points.add(new Point(tempX, tempY));
-      }
+      addIfInArray(points, array, tempX, tempY);
 
       // left of point
       tempX = x;
       tempY = y - 1;
-      if (isCoordinateIn2dArray(array, tempX, tempY)) {
-        points.add(new Point(tempX, tempY));
-      }
+      addIfInArray(points, array, tempX, tempY);
 
       // right of point
       tempY = y + 1;
-      if (isCoordinateIn2dArray(array, tempX, tempY)) {
-        points.add(new Point(tempX, tempY));
-      }
+      addIfInArray(points, array, tempX, tempY);
 
       // bottom left corner of point
       tempX = x + 1;
       tempY = y - 1;
-      if (isCoordinateIn2dArray(array, tempX, tempY)) {
-        points.add(new Point(tempX, tempY));
-      }
+      addIfInArray(points, array, tempX, tempY);
 
       // bottom middle of point
       tempY = y;
-      if (isCoordinateIn2dArray(array, tempX, tempY)) {
-        points.add(new Point(tempX, tempY));
-      }
+      addIfInArray(points, array, tempX, tempY);
 
       // bottom right corner of point
       tempY = y + 1;
-      if (isCoordinateIn2dArray(array, tempX, tempY)) {
-        points.add(new Point(tempX, tempY));
-      }
+      addIfInArray(points, array, tempX, tempY);
     }
 
     return points;
+  }
+
+  private void addIfInArray(List<Point> points, int[][] array, int tempX, int tempY) {
+    if (isCoordinateIn2dArray(array, tempX, tempY)) {
+      points.add(new Point(tempX, tempY));
+    }
   }
 
   private record Point(int x, int y) {

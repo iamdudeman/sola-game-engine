@@ -52,9 +52,7 @@ public class MinesweeperGui {
         document.createElement(
           ButtonGuiElement::new,
           p -> p.setText("New game").padding.set(5)
-        ).setOnAction(() -> {
-          newGame(eventHub);
-        }),
+        ).setOnAction(() -> newGame(eventHub)),
         document.createElement(
           ButtonGuiElement::new,
           p -> p.setText("Change size").padding.set(5)
