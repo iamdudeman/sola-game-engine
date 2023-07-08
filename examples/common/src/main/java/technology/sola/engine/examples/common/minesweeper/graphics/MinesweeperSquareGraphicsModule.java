@@ -10,7 +10,8 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 public class MinesweeperSquareGraphicsModule extends SolaGraphicsModule<View2Entry<TransformComponent, MinesweeperSquareComponent>> {
-  private static final int SQUARE_SIZE = 20;
+  public static final int SQUARE_SIZE = 20;
+  private static final int FONT_OFFSET = 5;
 
   @Override
   public View<View2Entry<TransformComponent, MinesweeperSquareComponent>> getViewToRender(World world) {
@@ -26,17 +27,17 @@ public class MinesweeperSquareGraphicsModule extends SolaGraphicsModule<View2Ent
     if (square.isRevealed()) {
       if (square.isBomb()) {
         renderer.fillRect(x, y, SQUARE_SIZE, SQUARE_SIZE, Color.RED);
-        renderer.drawString("X", x, y, Color.BLACK);
+        renderer.drawString("X", x + FONT_OFFSET, y, Color.BLACK);
       } else if (square.getAdjacentCount() == 0) {
         renderer.fillRect(x, y, SQUARE_SIZE, SQUARE_SIZE, Color.LIGHT_GRAY);
       } else {
         renderer.fillRect(x, y, SQUARE_SIZE, SQUARE_SIZE, Color.LIGHT_GRAY);
-        renderer.drawString(String.valueOf(square.getAdjacentCount()), x, y, Color.BLACK);
+        renderer.drawString(String.valueOf(square.getAdjacentCount()), x + FONT_OFFSET, y, Color.BLACK);
       }
     } else {
       renderer.fillRect(x, y, SQUARE_SIZE, SQUARE_SIZE, Color.DARK_GRAY);
     }
 
-    renderer.drawRect(x, y, SQUARE_SIZE, SQUARE_SIZE, Color.WHITE);
+    renderer.drawRect(x, y, SQUARE_SIZE, SQUARE_SIZE, Color.BLACK);
   }
 }
