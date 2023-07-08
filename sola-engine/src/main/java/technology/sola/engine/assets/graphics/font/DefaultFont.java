@@ -10,6 +10,10 @@ import technology.sola.json.SolaJson;
  * default font is a 16 point Monospaced font.
  */
 public class DefaultFont {
+  /**
+   * {@link technology.sola.engine.assets.Asset} id for the default {@link Font} that is always available for use.
+   */
+  public static final String ASSET_ID = "monospaced_NORMAL_16";
   private static Font font;
 
   /**

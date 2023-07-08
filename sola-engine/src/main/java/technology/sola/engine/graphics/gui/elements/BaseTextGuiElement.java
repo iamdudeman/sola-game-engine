@@ -7,7 +7,7 @@ import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseHoverProperties;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
-import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
+import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 import java.util.ArrayList;
@@ -136,9 +136,13 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
     private String text = "";
     private TextAlign textAlign = TextAlign.LEFT;
 
-    public Properties(GuiElementGlobalProperties globalProperties) {
-      super(globalProperties, new HoverProperties());
+    public Properties(GuiPropertyDefaults propertyDefaults) {
+      super(propertyDefaults, new HoverProperties());
       setFocusable(false);
+
+      // default properties
+      setColorText(propertyDefaults.colorText());
+      setFontAssetId(propertyDefaults.fontAssetId());
     }
 
     public String getText() {
@@ -152,7 +156,7 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
     }
 
     public String getFontAssetId() {
-      return fontAssetId == null ? globalProperties.getDefaultFontAssetId() : fontAssetId;
+      return fontAssetId;
     }
 
     public Properties setFontAssetId(String fontAssetId) {
@@ -162,7 +166,7 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
     }
 
     public Color getColorText() {
-      return colorText == null ? globalProperties.getDefaultTextColor() : colorText;
+      return colorText;
     }
 
     public Properties setColorText(Color colorText) {

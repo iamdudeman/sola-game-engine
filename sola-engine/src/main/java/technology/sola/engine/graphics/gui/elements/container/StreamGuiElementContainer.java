@@ -5,14 +5,14 @@ import technology.sola.engine.graphics.gui.GuiElementContainer;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseHoverProperties;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
-import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
+import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.input.Key;
 
 import java.util.List;
 
 public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElementContainer.Properties> {
   public StreamGuiElementContainer(SolaGuiDocument document) {
-    super(document, new StreamGuiElementContainer.Properties(document.globalProperties));
+    super(document, new StreamGuiElementContainer.Properties(document.propertyDefaults));
 
     setOnKeyPressCallback(keyEvent -> {
       int forwardKeyCode = properties.direction == Direction.HORIZONTAL ? Key.RIGHT.getCode() : Key.DOWN.getCode();
@@ -139,8 +139,8 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     private VerticalAlignment verticalAlignment = VerticalAlignment.TOP;
     private int gap = 0;
 
-    public Properties(GuiElementGlobalProperties globalProperties) {
-      super(globalProperties, new GuiElementBaseHoverProperties());
+    public Properties(GuiPropertyDefaults propertyDefaults) {
+      super(propertyDefaults, new GuiElementBaseHoverProperties());
     }
 
     public Direction getDirection() {

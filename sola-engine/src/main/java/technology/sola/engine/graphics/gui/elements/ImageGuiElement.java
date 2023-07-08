@@ -5,7 +5,7 @@ import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseHoverProperties;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
-import technology.sola.engine.graphics.gui.properties.GuiElementGlobalProperties;
+import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 
@@ -17,7 +17,7 @@ public class ImageGuiElement extends GuiElement<ImageGuiElement.Properties> {
   private SolaImage transformedImage;
 
   public ImageGuiElement(SolaGuiDocument document) {
-    super(document, new Properties(document.globalProperties));
+    super(document, new Properties(document.propertyDefaults));
   }
 
   @Override
@@ -72,8 +72,8 @@ public class ImageGuiElement extends GuiElement<ImageGuiElement.Properties> {
   public static class Properties extends GuiElementBaseProperties<GuiElementBaseHoverProperties> {
     private String assetId;
 
-    public Properties(GuiElementGlobalProperties globalProperties) {
-      super(globalProperties, new GuiElementBaseHoverProperties());
+    public Properties(GuiPropertyDefaults propertyDefaults) {
+      super(propertyDefaults, new GuiElementBaseHoverProperties());
       setFocusable(false);
     }
 

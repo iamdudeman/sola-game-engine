@@ -2,6 +2,8 @@ package technology.sola.engine.defaults;
 
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SpriteSheet;
+import technology.sola.engine.assets.graphics.font.DefaultFont;
+import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.graphics.modules.CircleGraphicsModule;
@@ -10,6 +12,7 @@ import technology.sola.engine.defaults.graphics.modules.RectangleGraphicsModule;
 import technology.sola.engine.defaults.graphics.modules.SpriteGraphicsModule;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
+import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
 
@@ -190,15 +193,33 @@ public abstract class SolaWithDefaults extends Sola {
     /**
      * Initializes the {@link SolaGuiDocument} instance.
      *
+     * @param propertyDefaults the {@link GuiPropertyDefaults} to use
      * @return this
      */
-    public DefaultsConfigurator useGui() {
+    public DefaultsConfigurator useGui(GuiPropertyDefaults propertyDefaults) {
       if (solaGuiDocument == null) {
-        solaGuiDocument = new SolaGuiDocument(platform, assetLoaderProvider, eventHub);
+        solaGuiDocument = new SolaGuiDocument(assetLoaderProvider, eventHub, propertyDefaults);
+        solaGuiDocument.registerEventListeners(platform);
         rebuildRenderFunction();
+
+        // Prepare default font
+        AssetLoader<Font> fontAssetLoader = assetLoaderProvider.get(Font.class);
+
+        if (!fontAssetLoader.hasAssetMapping(DefaultFont.ASSET_ID)) {
+          fontAssetLoader.addAsset(DefaultFont.ASSET_ID, DefaultFont.get());
+        }
       }
 
       return this;
+    }
+
+    /**
+     * Initializes the {@link SolaGuiDocument} instance with light themed {@link GuiPropertyDefaults}.
+     *
+     * @return this
+     */
+    public DefaultsConfigurator useGui() {
+      return useGui(new GuiPropertyDefaults());
     }
 
     private void rebuildRenderFunction() {
