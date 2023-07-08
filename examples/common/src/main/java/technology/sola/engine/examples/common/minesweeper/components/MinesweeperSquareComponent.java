@@ -16,6 +16,14 @@ public class MinesweeperSquareComponent implements Component {
     this.adjacentCount = adjacentCount;
   }
 
+  public int getRowIndex() {
+    return rowIndex;
+  }
+
+  public int getColumnIndex() {
+    return columnIndex;
+  }
+
   public Integer getAdjacentCount() {
     return adjacentCount;
   }

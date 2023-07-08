@@ -2,6 +2,7 @@ package technology.sola.engine.examples.common.minesweeper.system;
 
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
+import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaGraphics;
 import technology.sola.engine.examples.common.minesweeper.components.MinesweeperSquareComponent;
@@ -9,6 +10,8 @@ import technology.sola.engine.input.MouseButton;
 import technology.sola.engine.input.MouseInput;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
+
+import java.util.List;
 
 public class PlayerInputSystem extends EcsSystem {
   private final SolaGraphics solaGraphics;
@@ -24,7 +27,9 @@ public class PlayerInputSystem extends EcsSystem {
     if (mouseInput.isMouseClicked(MouseButton.PRIMARY) || mouseInput.isMouseClicked(MouseButton.SECONDARY)) {
       Vector2D worldMousePosition = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
 
-      for (var entry : world.createView().of(TransformComponent.class, MinesweeperSquareComponent.class).getEntries()) {
+      var entries = world.createView().of(TransformComponent.class, MinesweeperSquareComponent.class).getEntries();
+
+      for (var entry : entries) {
         Vector2D translate = entry.c1().getTranslate();
         Vector2D minBounds = translate.add(new Vector2D(1, 1));
         Vector2D maxBounds = translate.add(new Vector2D(MinesweeperSquareComponent.SQUARE_SIZE - 1, MinesweeperSquareComponent.SQUARE_SIZE - 1));
@@ -33,7 +38,7 @@ public class PlayerInputSystem extends EcsSystem {
 
         if (squareBounds.contains(worldMousePosition)) {
           if (mouseInput.isMouseClicked(MouseButton.PRIMARY)) {
-            handleReveal(square);
+            handleReveal(entries, square);
           } else {
             handleFlag(square);
           }
@@ -42,7 +47,7 @@ public class PlayerInputSystem extends EcsSystem {
     }
   }
 
-  private void handleReveal(MinesweeperSquareComponent squareComponent) {
+  private void handleReveal(List<View2Entry<TransformComponent, MinesweeperSquareComponent>> entries, MinesweeperSquareComponent squareComponent) {
     if (!squareComponent.isFlagged()) {
       squareComponent.reveal();
 
@@ -50,7 +55,7 @@ public class PlayerInputSystem extends EcsSystem {
         // todo emit loss event
         System.out.println("You lost");
       } else if (squareComponent.getAdjacentCount() == 0) {
-        // todo reveal adjacent ones in all directions until numbered are found (or boundary) recursively
+        revealForZero(entries, squareComponent.getRowIndex(), squareComponent.getColumnIndex());
       }
     }
   }
@@ -60,5 +65,40 @@ public class PlayerInputSystem extends EcsSystem {
       // todo emit event to increase/decrease flag count
       squareComponent.toggleFlag();
     }
+  }
+
+  private void revealForZero(List<View2Entry<TransformComponent, MinesweeperSquareComponent>> entries, int rowIndex, int columnIndex) {
+    revealIfFound(entries, rowIndex, columnIndex - 1);
+    revealIfFound(entries, rowIndex, columnIndex + 1);
+    revealIfFound(entries, rowIndex - 1, columnIndex);
+    revealIfFound(entries, rowIndex + 1, columnIndex);
+  }
+
+  private void revealIfFound(List<View2Entry<TransformComponent, MinesweeperSquareComponent>> entries, int rowIndex, int columnIndex) {
+    MinesweeperSquareComponent nextSquare = findByRowColumn(entries, rowIndex, columnIndex);
+
+    if (nextSquare != null && !nextSquare.isRevealed()) {
+      nextSquare.reveal();
+
+      if (nextSquare.getAdjacentCount() == 0) {
+        revealForZero(entries, rowIndex, columnIndex);
+      }
+    }
+  }
+
+  private MinesweeperSquareComponent findByRowColumn(List<View2Entry<TransformComponent, MinesweeperSquareComponent>> entries, int rowIndex, int columnIndex) {
+    if (rowIndex < 0 || columnIndex < 0) {
+      return null;
+    }
+
+    for (var entry : entries) {
+      MinesweeperSquareComponent squareComponent = entry.c2();
+
+      if (squareComponent.getRowIndex() == rowIndex && squareComponent.getColumnIndex() == columnIndex) {
+        return squareComponent;
+      }
+    }
+
+    return null;
   }
 }
