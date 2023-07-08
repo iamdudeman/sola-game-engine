@@ -1,10 +1,5 @@
 # sola-game-engine TODO list
 
-* maybe gui themes
-    * maybe default light and dark theme
-    * sets defaults for all gui elements
-        * focus, borders, backgrounds, text, etc.
-
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
