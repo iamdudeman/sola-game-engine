@@ -51,7 +51,7 @@ public class MinefieldSystem extends EcsSystem {
 
       for (int tile : row) {
         float x = columnIndex * MinesweeperSquareComponent.SQUARE_SIZE;
-        float y = rowIndex * MinesweeperSquareComponent.SQUARE_SIZE;
+        float y = rowIndex * MinesweeperSquareComponent.SQUARE_SIZE + 50; // 50 is gui offset
 
         world.createEntity(
           new TransformComponent(x, y),

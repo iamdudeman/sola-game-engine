@@ -11,7 +11,7 @@ import technology.sola.engine.graphics.screen.AspectMode;
 
 public class MinesweeperExample extends SolaWithDefaults {
   public MinesweeperExample() {
-    super(SolaConfiguration.build("Minesweeper", 801, 601).withTargetUpdatesPerSecond(30));
+    super(SolaConfiguration.build("Minesweeper", 801, 656).withTargetUpdatesPerSecond(30));
   }
 
   @Override
