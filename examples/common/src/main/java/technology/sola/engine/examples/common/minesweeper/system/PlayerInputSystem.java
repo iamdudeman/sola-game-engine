@@ -84,12 +84,26 @@ public class PlayerInputSystem extends EcsSystem {
     }
   }
 
-  // todo fix bug where corners aren't done
   private void revealForZero(List<View2Entry<TransformComponent, MinesweeperSquareComponent>> entries, int rowIndex, int columnIndex) {
+    // left and corners
     revealIfFound(entries, rowIndex, columnIndex - 1);
+    revealIfFound(entries, rowIndex - 1, columnIndex - 1);
+    revealIfFound(entries, rowIndex + 1, columnIndex - 1);
+
+    // right and corners
     revealIfFound(entries, rowIndex, columnIndex + 1);
+    revealIfFound(entries, rowIndex - 1, columnIndex + 1);
+    revealIfFound(entries, rowIndex + 1, columnIndex + 1);
+
+    // up and corners
     revealIfFound(entries, rowIndex - 1, columnIndex);
+    revealIfFound(entries, rowIndex - 1, columnIndex - 1);
+    revealIfFound(entries, rowIndex - 1, columnIndex + 1);
+
+    // down and corners
     revealIfFound(entries, rowIndex + 1, columnIndex);
+    revealIfFound(entries, rowIndex + 1, columnIndex - 1);
+    revealIfFound(entries, rowIndex + 1, columnIndex + 1);
   }
 
   private void revealIfFound(List<View2Entry<TransformComponent, MinesweeperSquareComponent>> entries, int rowIndex, int columnIndex) {
