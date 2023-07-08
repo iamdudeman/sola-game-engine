@@ -12,19 +12,12 @@ import technology.sola.engine.graphics.components.SpriteComponent;
 public class SpriteAnimatorSystem extends EcsSystem {
   @Override
   public void update(World world, float deltaTime) {
-    world.createView().of(SpriteComponent.class, SpriteAnimatorComponent.class)
-      .getEntries()
-      .forEach(view -> {
-        SpriteComponent spriteComponent = view.c1();
-        SpriteAnimatorComponent spriteAnimatorComponent = view.c2();
+    for (var entry : world.createView().of(SpriteComponent.class, SpriteAnimatorComponent.class).getEntries()) {
+      SpriteComponent spriteComponent = entry.c1();
+      SpriteAnimatorComponent spriteAnimatorComponent = entry.c2();
 
-        spriteAnimatorComponent.tickAnimation(deltaTime);
-        spriteComponent.setSpriteKeyFrame(spriteAnimatorComponent.getCurrentFrame());
-      });
-  }
-
-  @Override
-  public int getOrder() {
-    return 0;
+      spriteAnimatorComponent.tickAnimation(deltaTime);
+      spriteComponent.setSpriteKeyFrame(spriteAnimatorComponent.getCurrentFrame());
+    }
   }
 }
