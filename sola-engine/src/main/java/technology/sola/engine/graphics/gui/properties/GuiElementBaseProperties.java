@@ -21,7 +21,8 @@ public class GuiElementBaseProperties<GuiElementHoverProperties extends GuiEleme
     this.propertyDefaults = propertyDefaults;
     this.hover = hoverProperties;
 
-    setBackgroundColor(Color.WHITE);
+    // property defaults
+    setBackgroundColor(propertyDefaults.colorBackground());
   }
 
   public boolean isLayoutChanged() {

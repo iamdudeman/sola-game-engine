@@ -141,7 +141,7 @@ public abstract class BaseTextGuiElement<T extends BaseTextGuiElement.Properties
       setFocusable(false);
 
       // default properties
-      setColorText(propertyDefaults.textColor());
+      setColorText(propertyDefaults.colorText());
       setFontAssetId(propertyDefaults.fontAssetId());
     }
 
