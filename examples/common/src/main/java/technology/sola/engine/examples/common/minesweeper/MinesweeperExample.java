@@ -19,7 +19,7 @@ public class MinesweeperExample extends SolaWithDefaults {
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public MinesweeperExample() {
-    super(SolaConfiguration.build("Minesweeper", 801, 656).withTargetUpdatesPerSecond(30));
+    super(SolaConfiguration.build("Minesweeper", 801, 686).withTargetUpdatesPerSecond(30));
   }
 
   @Override

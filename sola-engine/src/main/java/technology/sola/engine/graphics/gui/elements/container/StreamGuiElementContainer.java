@@ -76,9 +76,9 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
       child.recalculateLayout();
 
       if (properties().direction == Direction.HORIZONTAL) {
-        xOffset += childMargin.getLeft() + childMargin.getRight() + child.getWidth() + properties.gap;
+        xOffset += calculateChildRequiredHorizontalSpace(child) + properties.gap;
       } else if (properties.direction == Direction.VERTICAL) {
-        yOffset += childMargin.getTop() + childMargin.getBottom() + child.getHeight() + properties.gap;
+        yOffset += calculateChildRequiredVerticalSpace(child) + properties.gap;
       }
     }
   }

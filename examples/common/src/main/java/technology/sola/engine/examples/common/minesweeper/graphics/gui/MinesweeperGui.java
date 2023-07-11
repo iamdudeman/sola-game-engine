@@ -42,6 +42,14 @@ public class MinesweeperGui {
       mineCount = newGameEvent.totalMines();
       document.getElementById("title", TextGuiElement.class).properties().setText("sola Minesweeper - " + mineCount);
       document.getElementById("victory", TextGuiElement.class).properties().setHidden(true);
+      document.getElementById("size", ButtonGuiElement.class).properties().setText(newGameEvent.rows() + "x" + newGameEvent.columns());
+      String difficulty = switch (difficultyIndex) {
+        case 0 -> "Easy";
+        case 1 -> "Okay";
+        case 2 -> "Hard";
+        default -> "Whoa";
+      };
+      document.getElementById("difficulty", ButtonGuiElement.class).properties().setText(difficulty);
       timeStarted = System.currentTimeMillis();
     });
 
@@ -81,16 +89,18 @@ public class MinesweeperGui {
         ).setOnAction(() -> newGame(eventHub)),
         document.createElement(
           ButtonGuiElement::new,
-          p -> p.setText("Change size").padding.set(5)
+          p -> p.setText("10x10").padding.set(5).setId("size")
         ).setOnAction(() -> {
           sizeIndex = (sizeIndex + 1) % SIZE_OPTIONS.length;
+          var size = SIZE_OPTIONS[sizeIndex];
           newGame(eventHub);
         }),
         document.createElement(
           ButtonGuiElement::new,
-          p -> p.setText("Change difficulty").padding.set(5)
+          p -> p.setText("8%").padding.set(5).setId("difficulty")
         ).setOnAction(() -> {
           difficultyIndex = (difficultyIndex + 1) % DIFFICULTY_OPTIONS.length;
+          document.getElementById("difficulty", ButtonGuiElement.class).properties().setText(DIFFICULTY_OPTIONS[difficultyIndex] + "%");
           newGame(eventHub);
         })
       )
