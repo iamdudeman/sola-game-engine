@@ -15,8 +15,6 @@
 
 ## TODO List
 
-* gui element hidden enhancement of some sort
-    * no way to "display none" an element (can currently only hide while taking up space still)
 * Rendering
     * Ability to change line width when drawing
     * Implement more BlendModes

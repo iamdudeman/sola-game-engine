@@ -10,7 +10,8 @@ public class GuiElementBaseProperties<GuiElementHoverProperties extends GuiEleme
   private boolean isLayoutChanged = true;
   private String id;
   private Color focusOutlineColor = null;
-  private boolean isHidden;
+  private Visibility visibility = Visibility.VISIBLE;
+  private Display display = Display.DEFAULT;
   private boolean isFocusable = true;
   private Color borderColor;
   private Color backgroundColor;
@@ -45,20 +46,68 @@ public class GuiElementBaseProperties<GuiElementHoverProperties extends GuiEleme
     return this;
   }
 
-  public boolean isHidden() {
-    return isHidden;
+  /**
+   * @return the {@link Visibility} of the element
+   */
+  public Visibility getVisibility() {
+    return visibility;
   }
 
-  public GuiElementBaseProperties<GuiElementHoverProperties> setHidden(boolean hidden) {
-    isHidden = hidden;
+  /**
+   * Sets the {@link Visibility} of the element.
+   *
+   * @param visibility the new {@code Visibility}
+   * @return this
+   */
+  public GuiElementBaseProperties<GuiElementHoverProperties> setVisibility(Visibility visibility) {
+    this.visibility = visibility;
 
     return this;
   }
 
+  /**
+   * @return the {@link Display} of the element
+   */
+  public Display getDisplay() {
+    return display;
+  }
+
+  /**
+   * Sets the {@link Display} of the element.
+   *
+   * @param display the new {@code Display}
+   * @return this
+   */
+  public GuiElementBaseProperties<GuiElementHoverProperties> setDisplay(Display display) {
+    if (this.display != display) {
+      setLayoutChanged(true);
+    }
+
+    this.display = display;
+
+    return this;
+  }
+
+  /**
+   * @return true if the element is visually hidden ({@link Visibility#HIDDEN} or {@link Display#NONE})
+   */
+  public boolean isHidden() {
+    return visibility == Visibility.HIDDEN || display == Display.NONE;
+  }
+
+  /**
+   * @return true if focusable and not {@link #isHidden()}
+   */
   public boolean isFocusable() {
     return isFocusable && !isHidden();
   }
 
+  /**
+   * Sets whether this element should be focusable or not.
+   *
+   * @param focusable the new focusability
+   * @return this
+   */
   public GuiElementBaseProperties<GuiElementHoverProperties> setFocusable(boolean focusable) {
     isFocusable = focusable;
 
