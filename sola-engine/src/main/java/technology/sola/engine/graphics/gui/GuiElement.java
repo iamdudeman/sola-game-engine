@@ -2,6 +2,7 @@ package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
+import technology.sola.engine.graphics.gui.properties.Display;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -36,6 +37,10 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
   public abstract int getContentHeight();
 
   public int getWidth() {
+    if (properties.getDisplay() == Display.NONE) {
+      return 0;
+    }
+
     if (properties.getWidth() != null) {
       return properties.getWidth();
     }
@@ -44,6 +49,10 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
   }
 
   public int getHeight() {
+    if (properties.getDisplay() == Display.NONE) {
+      return 0;
+    }
+
     if (properties.getHeight() != null) {
       return properties.getHeight();
     }

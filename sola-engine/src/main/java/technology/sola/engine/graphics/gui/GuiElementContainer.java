@@ -1,6 +1,7 @@
 package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
+import technology.sola.engine.graphics.gui.properties.Display;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.MouseEvent;
@@ -87,6 +88,12 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
       .toList();
   }
 
+  public List<GuiElement<?>> getLayoutChildren() {
+    return children.stream()
+      .filter(child -> child.properties.getDisplay() != Display.NONE)
+      .toList();
+  }
+
   public GuiElementContainer<T> addChild(GuiElement<?>... children) {
     if (children == null) {
       return this;
@@ -169,10 +176,18 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
   }
 
   protected int calculateChildRequiredHorizontalSpace(GuiElement<?> childEle) {
+    if (childEle.properties.getDisplay() == Display.NONE) {
+      return 0;
+    }
+
     return childEle.getWidth() + childEle.properties().margin.getLeft() + childEle.properties().margin.getRight();
   }
 
   protected int calculateChildRequiredVerticalSpace(GuiElement<?> childEle) {
+    if (childEle.properties.getDisplay() == Display.NONE) {
+      return 0;
+    }
+
     return childEle.getHeight() + childEle.properties().margin.getTop() + childEle.properties().margin.getBottom();
   }
 }

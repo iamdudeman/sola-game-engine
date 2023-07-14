@@ -10,7 +10,7 @@ import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
-import technology.sola.engine.graphics.gui.properties.Visibility;
+import technology.sola.engine.graphics.gui.properties.Display;
 
 import java.text.DecimalFormat;
 
@@ -42,7 +42,7 @@ public class MinesweeperGui {
     eventHub.add(NewGameEvent.class, newGameEvent -> {
       mineCount = newGameEvent.totalMines();
       document.getElementById("title", TextGuiElement.class).properties().setText("sola Minesweeper - " + mineCount);
-      document.getElementById("victory", TextGuiElement.class).properties().setVisibility(Visibility.HIDDEN);
+      document.getElementById("victory", TextGuiElement.class).properties().setDisplay(Display.NONE);
       document.getElementById("size", ButtonGuiElement.class).properties().setText(newGameEvent.rows() + "x" + newGameEvent.columns());
       String difficulty = switch (difficultyIndex) {
         case 0 -> "Easy";
@@ -62,7 +62,7 @@ public class MinesweeperGui {
 
         document.getElementById("victory", TextGuiElement.class).properties()
           .setText("You won in " + decimalFormat.format(secondsTaken) + " seconds")
-          .setVisibility(Visibility.VISIBLE);
+          .setDisplay(Display.DEFAULT);
       }
     });
 
@@ -78,7 +78,7 @@ public class MinesweeperGui {
         ),
         document.createElement(
           TextGuiElement::new,
-          p -> p.setText("You won in 0 seconds").setId("victory").setVisibility(Visibility.HIDDEN)
+          p -> p.setText("You won in 0 seconds").setId("victory").setDisplay(Display.NONE)
         )
       ),
       document.createElement(
