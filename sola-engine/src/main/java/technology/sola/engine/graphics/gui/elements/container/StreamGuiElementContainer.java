@@ -3,6 +3,7 @@ package technology.sola.engine.graphics.gui.elements.container;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementContainer;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
+import technology.sola.engine.graphics.gui.properties.Display;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseHoverProperties;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
@@ -69,16 +70,20 @@ public class StreamGuiElementContainer extends GuiElementContainer<StreamGuiElem
     int xOffset = getX() + properties.padding.getLeft() + borderOffset + getHorizontalAlignmentOffset();
     int yOffset = getY() + properties.padding.getTop() + borderOffset + getVerticalAlignmentOffset();
 
-    for (GuiElement<?> child : children) {
+    for (GuiElement<?> child : getLayoutChildren()) {
+      if (child.properties().getDisplay() == Display.NONE) {
+        continue;
+      }
+
       var childMargin = child.properties().margin;
 
       child.setPosition(xOffset + childMargin.getLeft(), yOffset + childMargin.getTop());
       child.recalculateLayout();
 
       if (properties().direction == Direction.HORIZONTAL) {
-        xOffset += childMargin.getLeft() + childMargin.getRight() + child.getWidth() + properties.gap;
+        xOffset += calculateChildRequiredHorizontalSpace(child) + properties.gap;
       } else if (properties.direction == Direction.VERTICAL) {
-        yOffset += childMargin.getTop() + childMargin.getBottom() + child.getHeight() + properties.gap;
+        yOffset += calculateChildRequiredVerticalSpace(child) + properties.gap;
       }
     }
   }

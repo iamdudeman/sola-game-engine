@@ -12,6 +12,7 @@ import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.gui.elements.input.TextInputGuiElement;
+import technology.sola.engine.graphics.gui.properties.Visibility;
 import technology.sola.engine.input.Key;
 
 /**
@@ -51,7 +52,13 @@ public class GuiExample extends SolaWithDefaults {
       ButtonGuiElement::new,
       p -> p.setText("Toggle other button").setTextAlign(BaseTextGuiElement.TextAlign.RIGHT).padding.set(5).setWidth(250)
     );
-    toggleOtherButton.setOnAction(() -> checkButton.properties().setHidden(!checkButton.properties().isHidden()));
+    toggleOtherButton.setOnAction(() -> {
+      if (checkButton.properties().getVisibility() == Visibility.VISIBLE) {
+        checkButton.properties().setVisibility(Visibility.HIDDEN);
+      } else {
+        checkButton.properties().setVisibility(Visibility.VISIBLE);
+      }
+    });
 
     return solaGuiDocument.createElement(
       StreamGuiElementContainer::new,
