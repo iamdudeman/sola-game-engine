@@ -13,6 +13,7 @@ import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementCo
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.gui.elements.input.TextInputGuiElement;
 import technology.sola.engine.graphics.gui.properties.Visibility;
+import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 
 /**
@@ -39,6 +40,8 @@ public class GuiExample extends SolaWithDefaults {
       .addAssetMapping("test", "assets/test_tiles.png");
     assetLoaderProvider.get(Font.class)
       .addAssetMapping("times_NORMAL_18", "assets/times_NORMAL_18.json");
+
+    platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
   }
 
   private GuiElement<?> buildGui() {
@@ -72,7 +75,7 @@ public class GuiExample extends SolaWithDefaults {
         p -> p.setGap(10).setBorderColor(Color.YELLOW).padding.set(5),
         solaGuiDocument.createElement(ButtonGuiElement::new, p -> p.setText("First")),
         solaGuiDocument.createElement(ButtonGuiElement::new, p -> p.setText("Second").padding.set(5)),
-        solaGuiDocument.createElement(ButtonGuiElement::new, p -> p.setText("Third").margin.setTop(30)),
+        solaGuiDocument.createElement(ButtonGuiElement::new, p -> p.setDisabled(true).setText("Third").margin.setTop(30)),
         solaGuiDocument.createElement(
           StreamGuiElementContainer::new,
           p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.RED).padding.set(5)

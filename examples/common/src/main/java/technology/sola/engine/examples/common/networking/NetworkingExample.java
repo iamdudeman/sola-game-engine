@@ -19,6 +19,7 @@ import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.networking.socket.SocketMessage;
 
@@ -40,7 +41,7 @@ public class NetworkingExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGui().useGraphics().useDebug();
+    defaultsConfigurator.useGui(GuiPropertyDefaults.defaultDarkTheme()).useGraphics().useDebug();
 
     solaEcs.setWorld(new World(50));
     solaEcs.addSystems(new NetworkQueueSystem(), new PlayerSystem());
@@ -72,7 +73,7 @@ public class NetworkingExample extends SolaWithDefaults {
 
     @Override
     public void update(World world, float deltaTime) {
-      Entity clientPlayerEntity = world.findEntityByUniqueId("" + clientPlayerId);
+      Entity clientPlayerEntity = world.findEntityByUniqueId(String.valueOf(clientPlayerId));
 
       if (clientPlayerEntity != null) {
         TransformComponent transformComponent = clientPlayerEntity.getComponent(TransformComponent.class);
@@ -120,14 +121,14 @@ public class NetworkingExample extends SolaWithDefaults {
             PlayerAddedMessage playerAddedMessage = PlayerAddedMessage.parse(socketMessage);
 
             solaEcs.getWorld().createEntity(
-              "" + playerAddedMessage.getClientPlayerId(), "player-" + playerAddedMessage.getClientPlayerId(),
+              String.valueOf(playerAddedMessage.getClientPlayerId()), "player-" + playerAddedMessage.getClientPlayerId(),
               new TransformComponent(400, 400, 25),
               new CircleRendererComponent(Color.WHITE, true)
             );
           }
           case PLAYER_REMOVED -> {
             PlayerRemovedMessage playerRemovedMessage = PlayerRemovedMessage.parse(socketMessage);
-            Entity playerEntity = solaEcs.getWorld().findEntityByUniqueId("" + playerRemovedMessage.getClientPlayerId());
+            Entity playerEntity = solaEcs.getWorld().findEntityByUniqueId(String.valueOf(playerRemovedMessage.getClientPlayerId()));
 
             if (playerEntity != null) {
               playerEntity.destroy();
@@ -135,7 +136,7 @@ public class NetworkingExample extends SolaWithDefaults {
           }
           case PLAYER_UPDATE -> {
             PlayerUpdateMessage playerUpdateMessage = PlayerUpdateMessage.parse(socketMessage);
-            String playerId = "" + playerUpdateMessage.getClientPlayerId();
+            String playerId = String.valueOf(playerUpdateMessage.getClientPlayerId());
             Entity playerEntity = solaEcs.getWorld().findEntityByUniqueId(playerId);
 
             if (playerEntity == null) {
@@ -159,11 +160,11 @@ public class NetworkingExample extends SolaWithDefaults {
       p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(5).padding.set(5),
       solaGuiDocument.createElement(
         TextGuiElement::new,
-        p -> p.setText("Networking Example").setColorText(Color.WHITE)
+        p -> p.setText("Networking Example")
       ),
       solaGuiDocument.createElement(
         TextGuiElement::new,
-        p -> p.setText("").setColorText(Color.WHITE).setId("time")
+        p -> p.setText("").setId("time")
       ),
       solaGuiDocument.createElement(
         ButtonGuiElement::new,
