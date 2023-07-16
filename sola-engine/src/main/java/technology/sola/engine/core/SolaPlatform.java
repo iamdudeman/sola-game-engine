@@ -19,11 +19,29 @@ import java.util.function.Consumer;
  * SolaPlatform defines the API for a platform to run {@link Sola}.
  */
 public abstract class SolaPlatform {
+  /**
+   * The {@link Logger} instance for the platform.
+   */
   protected static final Logger LOGGER = LoggerFactory.getLogger(SolaPlatform.class);
+  /**
+   * The {@link Renderer} for the platform.
+   */
   protected Renderer renderer;
+  /**
+   * The {@link GameLoop} for the platform.
+   */
   protected GameLoop gameLoop;
+  /**
+   * The {@link Viewport} for the platform.
+   */
   protected Viewport viewport;
+  /**
+   * The {@link EventHub} for the running {@link Sola}.
+   */
   protected EventHub solaEventHub;
+  /**
+   * The {@link SocketClient} for the platform.
+   */
   protected SocketClient socketClient;
 
   /**
@@ -106,24 +124,57 @@ public abstract class SolaPlatform {
    */
   protected abstract void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization);
 
+  /**
+   * Method called before each render frame.
+   *
+   * @param renderer the {@link Renderer}
+   */
   protected abstract void beforeRender(Renderer renderer);
 
+  /**
+   * Main render frame method.
+   *
+   * @param renderer the {@link Renderer}
+   */
   protected abstract void onRender(Renderer renderer);
 
+  /**
+   * Method to populate the {@link SolaPlatform} {@link AssetLoaderProvider} with
+   * {@link technology.sola.engine.assets.AssetLoader}s that {@link Sola} will be able to utilize.
+   *
+   * @param assetLoaderProvider the {@link AssetLoaderProvider}
+   */
   protected abstract void populateAssetLoaderProvider(AssetLoaderProvider assetLoaderProvider);
 
-  protected Viewport buildViewport(SolaConfiguration solaConfiguration) {
-    return new Viewport(solaConfiguration.rendererWidth(), solaConfiguration.rendererHeight());
-  }
-
+  /**
+   * Builds the {@link Renderer} for this platform. Default implementation will utilize the {@link SoftwareRenderer}
+   * implementation.
+   *
+   * @param solaConfiguration the {@link SolaConfiguration} for the {@link Sola}
+   * @return the built {@code Renderer}
+   */
   protected Renderer buildRenderer(SolaConfiguration solaConfiguration) {
     return new SoftwareRenderer(solaConfiguration.rendererWidth(), solaConfiguration.rendererHeight());
   }
 
+  /**
+   * Builds the {@link GameLoop} for this platform. Default implmentation will utilize the {@link FixedUpdateGameLoop}
+   * implementation.
+   *
+   * @return the built {@code GameLoop}
+   */
   protected GameLoopProvider buildGameLoop() {
     return FixedUpdateGameLoop::new;
   }
 
+  /**
+   * Convenience method for calculating adjusted mouse coordinate considering the current
+   * {@link technology.sola.engine.graphics.screen.AspectMode} of the {@link Viewport}.
+   *
+   * @param x the raw x coordinate of the mouse click
+   * @param y the raw y coordinate of the mouse click
+   * @return the viewport adjusted mouse click coordinate
+   */
   protected MouseCoordinate adjustMouseForViewport(int x, int y) {
     return switch (viewport.getAspectMode()) {
       case IGNORE_RESIZING -> new MouseCoordinate(x, y);
@@ -138,6 +189,10 @@ public abstract class SolaPlatform {
         );
       }
     };
+  }
+
+  private Viewport buildViewport(SolaConfiguration solaConfiguration) {
+    return new Viewport(solaConfiguration.rendererWidth(), solaConfiguration.rendererHeight());
   }
 
   private void initComplete(Sola sola, SolaConfiguration solaConfiguration) {
@@ -169,11 +224,26 @@ public abstract class SolaPlatform {
     onRender(renderer);
   }
 
+  /**
+   * Holds the coordinate of the mouse.
+   *
+   * @param x the x coordinate
+   * @param y the y coordinate
+   */
   protected record MouseCoordinate(int x, int y) {
   }
 
   @FunctionalInterface
   protected interface GameLoopProvider {
+    /**
+     * Creates a new {@link GameLoop} instance
+     *
+     * @param eventHub               the {@link EventHub} instance
+     * @param updateMethod           the update method that is called each frame
+     * @param renderMethod           the render method that is called each frame
+     * @param targetUpdatesPerSecond the target updates per second for the game loop
+     * @return a new {@code GameLoop} instance
+     */
     GameLoop create(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond);
   }
 

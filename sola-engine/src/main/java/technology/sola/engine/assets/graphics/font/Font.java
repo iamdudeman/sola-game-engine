@@ -52,14 +52,12 @@ public class Font implements Asset {
     for (char c : text.toCharArray()) {
       SolaImage glyphImage = getBaseGlyph(c);
 
-      width += glyphImage.getWidth() + getFontInfo().leading();
+      width += glyphImage.getWidth();
 
       if (glyphImage.getHeight() > height) {
         height = glyphImage.getHeight();
       }
     }
-
-    width -= getFontInfo().leading();
 
     return new TextDimensions(width, height);
   }

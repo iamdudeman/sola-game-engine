@@ -8,10 +8,19 @@ public class AssetHandle<T extends Asset> {
   private T asset;
   private List<Consumer<T>> onLoadSubscribers;
 
+  /**
+   * Creates an empty AssetHandle with an empty list of onLoadSubscribers. Listeners will be notified when
+   * {@link #setAsset(Asset)} is called with the loaded asset.
+   */
   public AssetHandle() {
     onLoadSubscribers = new ArrayList<>();
   }
 
+  /**
+   * Creates an AssetHandle instance with a preloaded {@link Asset}.
+   *
+   * @param asset the preloaded asset
+   */
   public AssetHandle(T asset) {
     this.asset = asset;
   }
@@ -23,6 +32,11 @@ public class AssetHandle<T extends Asset> {
     return asset == null;
   }
 
+  /**
+   * Gets the loaded {@link Asset} immediately, but throws a runtime exception if it is not yet loaded.
+   *
+   * @return the loaded asset
+   */
   public T getAsset() {
     if (isLoading()) {
       throw new RuntimeException("AssetHandle has not had its Asset loaded yet.");
@@ -31,6 +45,11 @@ public class AssetHandle<T extends Asset> {
     return asset;
   }
 
+  /**
+   * Sets the loaded {@link Asset} for this {@code AssetHandle}.
+   *
+   * @param asset the loaded asset
+   */
   public synchronized void setAsset(T asset) {
     if (this.asset == null) {
       this.asset = asset;

@@ -165,7 +165,7 @@ public interface Renderer {
       SolaImage glyphImage = font.getGlyph(character, color);
 
       drawImage(glyphImage, x + xOffset, y);
-      xOffset += glyphImage.getWidth() + font.getFontInfo().leading();
+      xOffset += glyphImage.getWidth();
     }
 
     setBlendMode(previousBlendMode);

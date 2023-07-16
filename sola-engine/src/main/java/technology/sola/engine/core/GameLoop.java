@@ -14,12 +14,33 @@ import java.util.function.Consumer;
  */
 public abstract class GameLoop implements Runnable {
   private static final Logger LOGGER = LoggerFactory.getLogger(GameLoop.class);
+  /**
+   * The {@link EventHub} instance.
+   */
   protected final EventHub eventHub;
+  /**
+   * The {@link FpsTracker} instance.
+   */
   protected final FpsTracker fpsTracker = new FpsTracker();
+  /**
+   * Method to call each update. The delta time is passed into the {@link Consumer}.
+   */
   protected final Consumer<Float> updateMethod;
+  /**
+   * Method to call each render frame.
+   */
   protected final Runnable renderMethod;
+  /**
+   * The time since the last update.
+   */
   protected final float deltaTime;
+  /**
+   * The previous time for when the previous loop started in nanoseconds.
+   */
   protected long previousLoopStartNanos;
+  /**
+   * Holds accumulated lost time when the fixed update loop cannot keep up.
+   */
   protected float updateCatchUpAccumulator;
   private final boolean trackFps;
   private boolean isRunning = false;
@@ -118,14 +139,23 @@ public abstract class GameLoop implements Runnable {
     }, 0, 1000);
   }
 
+  /**
+   * FpsTracker is a simple class for tracking update and frame ticks.
+   */
   protected static class FpsTracker {
     private int updatesThisSecond = 0;
     private int framesThisSecond = 0;
 
+    /**
+     * Signals an update tick happened.
+     */
     public void tickUpdate() {
       updatesThisSecond++;
     }
 
+    /**
+     * Signal a frame tick happened.
+     */
     public void tickFrames() {
       framesThisSecond++;
     }
