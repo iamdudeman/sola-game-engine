@@ -12,8 +12,8 @@ import java.util.Map;
  * @param <T> the {@link Asset} type
  */
 public abstract class AssetLoader<T extends Asset> {
-  protected Map<String, AssetHandle<T>> cachedAssets = new HashMap<>();
-  protected Map<String, String> assetIdToPathMap = new HashMap<>();
+  private final Map<String, AssetHandle<T>> cachedAssets = new HashMap<>();
+  private final Map<String, String> assetIdToPathMap = new HashMap<>();
 
   /**
    * Adds an asset id to path mapping but does not populate the cache until the asset is requested via {@link AssetLoader#get(String)}
@@ -88,7 +88,16 @@ public abstract class AssetLoader<T extends Asset> {
     return get(id);
   }
 
+  /**
+   * @return The {@link Class} of the {@link Asset}
+   */
   public abstract Class<T> getAssetClass();
 
+  /**
+   * Returns an {@link AssetHandle} for the specified path and beings loading the {@link Asset}.
+   *
+   * @param path the path to the asset
+   * @return the {@code AssetHandle} for the path
+   */
   protected abstract AssetHandle<T> loadAsset(String path);
 }

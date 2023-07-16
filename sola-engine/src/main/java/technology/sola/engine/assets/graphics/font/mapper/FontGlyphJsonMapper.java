@@ -4,6 +4,9 @@ import technology.sola.engine.assets.graphics.font.FontGlyph;
 import technology.sola.json.JsonObject;
 import technology.sola.json.mapper.JsonMapper;
 
+/**
+ * FontGlyphJsonMapper is a {@link JsonMapper} implementation for {@link FontGlyph}s.
+ */
 public class FontGlyphJsonMapper implements JsonMapper<FontGlyph> {
   @Override
   public Class<FontGlyph> getObjectClass() {

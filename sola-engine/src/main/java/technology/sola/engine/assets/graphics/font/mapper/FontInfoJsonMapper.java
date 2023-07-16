@@ -9,6 +9,9 @@ import technology.sola.json.mapper.JsonMapper;
 
 import java.util.List;
 
+/**
+ * FontInfoJsonMapper is a {@link JsonMapper} implementation for {@link FontInfo}.
+ */
 public class FontInfoJsonMapper implements JsonMapper<FontInfo> {
   private final FontGlyphJsonMapper fontGlyphJsonMapper = new FontGlyphJsonMapper();
 
