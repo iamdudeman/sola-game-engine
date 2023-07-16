@@ -6,6 +6,14 @@ import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
+/**
+ * ColliderComponent is a {@link Component} that contains collision data for an {@link technology.sola.ecs.Entity}.
+ * The currently supported collider types are:
+ * <ul>
+ *   <li>{@link ColliderComponent.ColliderType#AABB}</li>
+ *   <li>{@link ColliderComponent.ColliderType#CIRCLE}</li>
+ * </ul>
+ */
 public class ColliderComponent implements Component {
   // Properties for all
   private ColliderType colliderType;
