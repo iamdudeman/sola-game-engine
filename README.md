@@ -63,6 +63,9 @@ your repo using Sola Game Engine.
 
 ## Example Code
 
+You can execute the example code in the browser at https://iamdudeman.itch.io/sola-game-engine-demos. The local server
+will have to be downloaded and executed separately.
+
 * [Sola examples](examples/common)
 * [Swing Platform example](examples/swing)
 * [JavaFX Platform example](examples/javafx)
@@ -79,7 +82,9 @@ your repo using Sola Game Engine.
 
 ## Games using sola game engine
 
-1. Acid Rain
+1. sola game engine demos
+    * Play it on its [itch.io page](https://iamdudeman.itch.io/sola-game-engine-demos)
+2. Acid Rain
     * Play it on its [itch.io page](https://iamdudeman.itch.io/acid-rain)
     * Check out its [GitHub repo](https://github.com/iamdudeman/acid-rain)
 
