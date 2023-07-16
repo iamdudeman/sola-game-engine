@@ -60,7 +60,7 @@ public record GuiPropertyDefaults(
     Color background = Color.BLACK;
 
     return new GuiPropertyDefaults(
-      DefaultFont.ASSET_ID, text, text.shade(0.3f),
+      DefaultFont.ASSET_ID, text, text.shade(0.2f),
       background,
       Color.WHITE, Color.WHITE,
       background.tint(0.18f), background.tint(0.25f)
