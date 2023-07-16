@@ -77,9 +77,23 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Record Components:</dt>
+<dd><code><span id="param-fontAssetId">fontAssetId</span></code> - the font asset id used</dd>
+<dd><code><span id="param-colorText">colorText</span></code> - the color of rendered text</dd>
+<dd><code><span id="param-colorPlaceholderText">colorPlaceholderText</span></code> - the color of rendered placeholder text</dd>
+<dd><code><span id="param-colorBackground">colorBackground</span></code> - the background color for elements</dd>
+<dd><code><span id="param-colorFocusOutline">colorFocusOutline</span></code> - the outline color if an element is focusable</dd>
+<dd><code><span id="param-colorInputBorder">colorInputBorder</span></code> - the border color if an element is an input</dd>
+<dd><code><span id="param-colorInputDisabledBackground">colorInputDisabledBackground</span></code> - the background color for an input that has been disabled</dd>
+<dd><code><span id="param-colorInputHoverBackgroundColor">colorInputHoverBackgroundColor</span></code> - the background color for an input when it is hovered</dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">GuiPropertyDefaults</span>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fontAssetId, <a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;colorText, <a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;colorPlaceholderText, <a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;colorBackground, <a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;colorFocusOutline, <a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;colorInputBorder, <a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;colorInputDisabledBackground, <a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;colorInputHoverBackgroundColor)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
+<div class="block">GuiPropertyDefaults are used by various <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>s to initialize their
+ property classes extending <a href="GuiElementBaseProperties.html" title="class in technology.sola.engine.graphics.gui.properties"><code>GuiElementBaseProperties</code></a>. These values are set on instance creation but can be
+ updated.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -92,11 +106,15 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">GuiPropertyDefaults</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a light themed GuiPropertyDefaults instance.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String,technology.sola.engine.graphics.Color,technology.sola.engine.graphics.Color)" class="member-name-link">GuiPropertyDefaults</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fontAssetId,
  <a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;colorText,
  <a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;colorBackground)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Creates a GUiPropertyDefaults instance with font asset id, color text and color background updated.</div>
+</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,technology.sola.engine.graphics.Color,technology.sola.engine.graphics.Color,technology.sola.engine.graphics.Color,technology.sola.engine.graphics.Color,technology.sola.engine.graphics.Color,technology.sola.engine.graphics.Color,technology.sola.engine.graphics.Color)" class="member-name-link">GuiPropertyDefaults</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fontAssetId,
  <a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;colorText,
  <a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;colorPlaceholderText,
@@ -116,7 +134,7 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel">
 <div class="summary-table three-column-summary" aria-labelledby="method-summary-table-tab0">
 <div class="table-header col-first">Modifier and Type</div>
@@ -125,56 +143,61 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#colorBackground()" class="member-name-link">colorBackground</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>colorBackground</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-colorBackground"><code>colorBackground</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#colorFocusOutline()" class="member-name-link">colorFocusOutline</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>colorFocusOutline</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-colorFocusOutline"><code>colorFocusOutline</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#colorInputBorder()" class="member-name-link">colorInputBorder</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>colorInputBorder</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-colorInputBorder"><code>colorInputBorder</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#colorInputDisabledBackground()" class="member-name-link">colorInputDisabledBackground</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>colorInputDisabledBackground</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-colorInputDisabledBackground"><code>colorInputDisabledBackground</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#colorInputHoverBackgroundColor()" class="member-name-link">colorInputHoverBackgroundColor</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>colorInputHoverBackgroundColor</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-colorInputHoverBackgroundColor"><code>colorInputHoverBackgroundColor</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#colorPlaceholderText()" class="member-name-link">colorPlaceholderText</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>colorPlaceholderText</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-colorPlaceholderText"><code>colorPlaceholderText</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#colorText()" class="member-name-link">colorText</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>colorText</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-colorText"><code>colorText</code></a> record component.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="GuiPropertyDefaults.html" title="class in technology.sola.engine.graphics.gui.properties">GuiPropertyDefaults</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#defaultDarkTheme()" class="member-name-link">defaultDarkTheme</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Creates a dark themed GuiPropertyDefaults instance.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#fontAssetId()" class="member-name-link">fontAssetId</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>fontAssetId</code> record component.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#fontAssetId()" class="member-name-link">fontAssetId</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the value of the <a href="#param-fontAssetId"><code>fontAssetId</code></a> record component.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a hash code value for this object.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a string representation of this record class.</div>
 </div>
 </div>
@@ -198,6 +221,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>GuiPropertyDefaults</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">GuiPropertyDefaults</span>()</div>
+<div class="block">Creates a light themed GuiPropertyDefaults instance.</div>
 </section>
 </li>
 <li>
@@ -206,6 +230,13 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">GuiPropertyDefaults</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fontAssetId,
  <a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;colorText,
  <a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;colorBackground)</span></div>
+<div class="block">Creates a GUiPropertyDefaults instance with font asset id, color text and color background updated.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>fontAssetId</code> - the font asset id used</dd>
+<dd><code>colorText</code> - the color of rendered text</dd>
+<dd><code>colorBackground</code> - the background color for elements</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -222,14 +253,14 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates an instance of a <code>GuiPropertyDefaults</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>fontAssetId</code> - the value for the <code>fontAssetId</code> record component</dd>
-<dd><code>colorText</code> - the value for the <code>colorText</code> record component</dd>
-<dd><code>colorPlaceholderText</code> - the value for the <code>colorPlaceholderText</code> record component</dd>
-<dd><code>colorBackground</code> - the value for the <code>colorBackground</code> record component</dd>
-<dd><code>colorFocusOutline</code> - the value for the <code>colorFocusOutline</code> record component</dd>
-<dd><code>colorInputBorder</code> - the value for the <code>colorInputBorder</code> record component</dd>
-<dd><code>colorInputDisabledBackground</code> - the value for the <code>colorInputDisabledBackground</code> record component</dd>
-<dd><code>colorInputHoverBackgroundColor</code> - the value for the <code>colorInputHoverBackgroundColor</code> record component</dd>
+<dd><code>fontAssetId</code> - the value for the <a href="#param-fontAssetId"><code>fontAssetId</code></a> record component</dd>
+<dd><code>colorText</code> - the value for the <a href="#param-colorText"><code>colorText</code></a> record component</dd>
+<dd><code>colorPlaceholderText</code> - the value for the <a href="#param-colorPlaceholderText"><code>colorPlaceholderText</code></a> record component</dd>
+<dd><code>colorBackground</code> - the value for the <a href="#param-colorBackground"><code>colorBackground</code></a> record component</dd>
+<dd><code>colorFocusOutline</code> - the value for the <a href="#param-colorFocusOutline"><code>colorFocusOutline</code></a> record component</dd>
+<dd><code>colorInputBorder</code> - the value for the <a href="#param-colorInputBorder"><code>colorInputBorder</code></a> record component</dd>
+<dd><code>colorInputDisabledBackground</code> - the value for the <a href="#param-colorInputDisabledBackground"><code>colorInputDisabledBackground</code></a> record component</dd>
+<dd><code>colorInputHoverBackgroundColor</code> - the value for the <a href="#param-colorInputHoverBackgroundColor"><code>colorInputHoverBackgroundColor</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -241,6 +272,17 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="defaultDarkTheme()">
+<h3>defaultDarkTheme</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="GuiPropertyDefaults.html" title="class in technology.sola.engine.graphics.gui.properties">GuiPropertyDefaults</a></span>&nbsp;<span class="element-name">defaultDarkTheme</span>()</div>
+<div class="block">Creates a dark themed GuiPropertyDefaults instance.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the dark themed <a href="GuiPropertyDefaults.html" title="class in technology.sola.engine.graphics.gui.properties"><code>GuiPropertyDefaults</code></a></dd>
+</dl>
+</section>
+</li>
 <li>
 <section class="detail" id="toString()">
 <h3>toString</h3>
@@ -286,10 +328,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="fontAssetId()">
 <h3>fontAssetId</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">fontAssetId</span>()</div>
-<div class="block">Returns the value of the <code>fontAssetId</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-fontAssetId"><code>fontAssetId</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>fontAssetId</code> record component</dd>
+<dd>the value of the <a href="#param-fontAssetId"><code>fontAssetId</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -297,10 +339,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="colorText()">
 <h3>colorText</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">colorText</span>()</div>
-<div class="block">Returns the value of the <code>colorText</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-colorText"><code>colorText</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>colorText</code> record component</dd>
+<dd>the value of the <a href="#param-colorText"><code>colorText</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -308,10 +350,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="colorPlaceholderText()">
 <h3>colorPlaceholderText</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">colorPlaceholderText</span>()</div>
-<div class="block">Returns the value of the <code>colorPlaceholderText</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-colorPlaceholderText"><code>colorPlaceholderText</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>colorPlaceholderText</code> record component</dd>
+<dd>the value of the <a href="#param-colorPlaceholderText"><code>colorPlaceholderText</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -319,10 +361,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="colorBackground()">
 <h3>colorBackground</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">colorBackground</span>()</div>
-<div class="block">Returns the value of the <code>colorBackground</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-colorBackground"><code>colorBackground</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>colorBackground</code> record component</dd>
+<dd>the value of the <a href="#param-colorBackground"><code>colorBackground</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -330,10 +372,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="colorFocusOutline()">
 <h3>colorFocusOutline</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">colorFocusOutline</span>()</div>
-<div class="block">Returns the value of the <code>colorFocusOutline</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-colorFocusOutline"><code>colorFocusOutline</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>colorFocusOutline</code> record component</dd>
+<dd>the value of the <a href="#param-colorFocusOutline"><code>colorFocusOutline</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -341,10 +383,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="colorInputBorder()">
 <h3>colorInputBorder</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">colorInputBorder</span>()</div>
-<div class="block">Returns the value of the <code>colorInputBorder</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-colorInputBorder"><code>colorInputBorder</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>colorInputBorder</code> record component</dd>
+<dd>the value of the <a href="#param-colorInputBorder"><code>colorInputBorder</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -352,10 +394,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="colorInputDisabledBackground()">
 <h3>colorInputDisabledBackground</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">colorInputDisabledBackground</span>()</div>
-<div class="block">Returns the value of the <code>colorInputDisabledBackground</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-colorInputDisabledBackground"><code>colorInputDisabledBackground</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>colorInputDisabledBackground</code> record component</dd>
+<dd>the value of the <a href="#param-colorInputDisabledBackground"><code>colorInputDisabledBackground</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -363,10 +405,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="colorInputHoverBackgroundColor()">
 <h3>colorInputHoverBackgroundColor</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">colorInputHoverBackgroundColor</span>()</div>
-<div class="block">Returns the value of the <code>colorInputHoverBackgroundColor</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-colorInputHoverBackgroundColor"><code>colorInputHoverBackgroundColor</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>colorInputHoverBackgroundColor</code> record component</dd>
+<dd>the value of the <a href="#param-colorInputHoverBackgroundColor"><code>colorInputHoverBackgroundColor</code></a> record component</dd>
 </dl>
 </section>
 </li>
