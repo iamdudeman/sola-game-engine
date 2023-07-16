@@ -19,6 +19,7 @@ import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.networking.socket.SocketMessage;
 
@@ -40,7 +41,7 @@ public class NetworkingExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGui().useGraphics().useDebug();
+    defaultsConfigurator.useGui(GuiPropertyDefaults.defaultDarkTheme()).useGraphics().useDebug();
 
     solaEcs.setWorld(new World(50));
     solaEcs.addSystems(new NetworkQueueSystem(), new PlayerSystem());
