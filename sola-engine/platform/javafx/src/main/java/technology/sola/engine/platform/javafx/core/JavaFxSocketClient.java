@@ -17,6 +17,9 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
 
+/**
+ * A JavaFX implementation of {@link SocketClient}.
+ */
 public class JavaFxSocketClient implements SocketClient {
   private static final Logger LOGGER = LoggerFactory.getLogger(JavaFxSocketClient.class);
   private boolean isConnected = false;

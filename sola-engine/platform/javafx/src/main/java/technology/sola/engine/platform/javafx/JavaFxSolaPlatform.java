@@ -41,11 +41,18 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   private Double windowWidth;
   private Double windowHeight;
 
+  /**
+   * Creates a JavaFxSolaPlatform instance.
+   */
   public JavaFxSolaPlatform() {
-    socketClient = new JavaFxSocketClient();
+    this(true);
   }
 
-  // Note: this is used by the sola engine editor project
+  /**
+   * Creates a JavaFxSolaPlatform instance.
+   *
+   * @param isPlatformStartupNeeded whether JavaFX platform startup is still needed or not
+   */
   public JavaFxSolaPlatform(boolean isPlatformStartupNeeded) {
     if (JavaFxSolaPlatform.isPlatformStartupNeeded) {
       JavaFxSolaPlatform.isPlatformStartupNeeded = isPlatformStartupNeeded;

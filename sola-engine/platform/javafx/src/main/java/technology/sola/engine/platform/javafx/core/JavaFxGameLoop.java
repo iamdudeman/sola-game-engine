@@ -8,7 +8,18 @@ import technology.sola.engine.event.EventHub;
 
 import java.util.function.Consumer;
 
+/**
+ * A {@link GameLoop} implementation for JavaFX.
+ */
 public class JavaFxGameLoop extends GameLoop {
+  /**
+   * Creates a JavaFxGameLoop with desired update and render logic at target updates per second.
+   *
+   * @param eventHub               the {@link EventHub} instance
+   * @param updateMethod           the update method that is called each frame
+   * @param renderMethod           the render method that is called each frame
+   * @param targetUpdatesPerSecond the target updates per second for the game loop
+   */
   public JavaFxGameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond) {
     super(eventHub, updateMethod, renderMethod, targetUpdatesPerSecond);
   }
