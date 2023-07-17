@@ -83,6 +83,8 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">DynamicBodyComponent</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements technology.sola.ecs.Component</span></div>
+<div class="block">ColliderComponent is a <code>Component</code> that contains dynamic body physics data for an
+ <code>Entity</code>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -99,14 +101,18 @@ implements technology.sola.ecs.Component</span></div>
 <div class="block">Creates a DynamicBodyComponent with a <a href="../Material.html#UNIT_MASS_MATERIAL"><code>Material.UNIT_MASS_MATERIAL</code></a> <a href="../Material.html" title="class in technology.sola.engine.physics"><code>Material</code></a>.</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(boolean)" class="member-name-link">DynamicBodyComponent</a><wbr>(boolean&nbsp;isKinematic)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Creates a DynamicBodyComponent instance with a unit mass <a href="../Material.html" title="class in technology.sola.engine.physics"><code>Material</code></a> and desired isKinematic value.</div>
+</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.physics.Material)" class="member-name-link">DynamicBodyComponent</a><wbr>(<a href="../Material.html" title="class in technology.sola.engine.physics">Material</a>&nbsp;material)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates a DynamicBodyComponent with desired <a href="../Material.html" title="class in technology.sola.engine.physics"><code>Material</code></a>.</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.physics.Material,boolean)" class="member-name-link">DynamicBodyComponent</a><wbr>(<a href="../Material.html" title="class in technology.sola.engine.physics">Material</a>&nbsp;material,
  boolean&nbsp;isKinematic)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Creates a DynamicBodyComponent with desired <a href="../Material.html" title="class in technology.sola.engine.physics"><code>Material</code></a> and isKinematic value.</div>
+</div>
 </div>
 </section>
 </li>
@@ -157,7 +163,9 @@ implements technology.sola.ecs.Component</span></div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isKinematic()" class="member-name-link">isKinematic</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">A kinematic dynamic body will not respond to external forces applied to it.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setForceX(float)" class="member-name-link">setForceX</a><wbr>(float&nbsp;forceX)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -175,7 +183,9 @@ implements technology.sola.ecs.Component</span></div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setKinematic(boolean)" class="member-name-link">setKinematic</a><wbr>(boolean&nbsp;kinematic)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Updates the kinematic property for this dynamic body.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMaterial(technology.sola.engine.physics.Material)" class="member-name-link">setMaterial</a><wbr>(<a href="../Material.html" title="class in technology.sola.engine.physics">Material</a>&nbsp;material)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -183,7 +193,9 @@ implements technology.sola.ecs.Component</span></div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setVelocity(technology.sola.math.linear.Vector2D)" class="member-name-link">setVelocity</a><wbr>(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;velocity)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the velocity for this dynamic body.</div>
+</div>
 </div>
 </div>
 </div>
@@ -226,6 +238,11 @@ implements technology.sola.ecs.Component</span></div>
 <section class="detail" id="&lt;init&gt;(boolean)">
 <h3>DynamicBodyComponent</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">DynamicBodyComponent</span><wbr><span class="parameters">(boolean&nbsp;isKinematic)</span></div>
+<div class="block">Creates a DynamicBodyComponent instance with a unit mass <a href="../Material.html" title="class in technology.sola.engine.physics"><code>Material</code></a> and desired isKinematic value.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>isKinematic</code> - whether this dynamic body is treated as kinematic or not</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -233,6 +250,12 @@ implements technology.sola.ecs.Component</span></div>
 <h3>DynamicBodyComponent</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">DynamicBodyComponent</span><wbr><span class="parameters">(<a href="../Material.html" title="class in technology.sola.engine.physics">Material</a>&nbsp;material,
  boolean&nbsp;isKinematic)</span></div>
+<div class="block">Creates a DynamicBodyComponent with desired <a href="../Material.html" title="class in technology.sola.engine.physics"><code>Material</code></a> and isKinematic value.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>material</code> - the <code>Material</code> used</dd>
+<dd><code>isKinematic</code> - whether this dynamic body is treated as kinematic or not</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -315,24 +338,43 @@ implements technology.sola.ecs.Component</span></div>
 <section class="detail" id="getVelocity()">
 <h3>getVelocity</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">getVelocity</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the velocity of this dynamic body</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setVelocity(technology.sola.math.linear.Vector2D)">
 <h3>setVelocity</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setVelocity</span><wbr><span class="parameters">(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;velocity)</span></div>
+<div class="block">Sets the velocity for this dynamic body.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>velocity</code> - the new velocity</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isKinematic()">
 <h3>isKinematic</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isKinematic</span>()</div>
+<div class="block">A kinematic dynamic body will not respond to external forces applied to it.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if this dynamic body is kinematic</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setKinematic(boolean)">
 <h3>setKinematic</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setKinematic</span><wbr><span class="parameters">(boolean&nbsp;kinematic)</span></div>
+<div class="block">Updates the kinematic property for this dynamic body. If true it will not respond to external forces applied to it.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>kinematic</code> - whether this dynamic body is treated as kinematic or not</dd>
+</dl>
 </section>
 </li>
 <li>

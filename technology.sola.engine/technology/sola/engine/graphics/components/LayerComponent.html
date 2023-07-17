@@ -83,6 +83,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">LayerComponent</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements technology.sola.ecs.Component</span></div>
+<div class="block">LayerComponent is a <code>Component</code> that contains data for a 2d rendering layers for an <code>Entity</code>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -95,10 +96,14 @@ implements technology.sola.ecs.Component</span></div>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">LayerComponent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;layer)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a LayerComponent for the desired layer with default ordering.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String,int)" class="member-name-link">LayerComponent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;layer,
  int&nbsp;order)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Creates a LayerComponent for the desired layer with default ordering.</div>
+</div>
 </div>
 </section>
 </li>
@@ -121,10 +126,14 @@ implements technology.sola.ecs.Component</span></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setLayer(java.lang.String)" class="member-name-link">setLayer</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;layer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Updates the layer.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOrder(int)" class="member-name-link">setOrder</a><wbr>(int&nbsp;order)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Updates the order in the layer.</div>
+</div>
 </div>
 </div>
 </div>
@@ -149,6 +158,11 @@ implements technology.sola.ecs.Component</span></div>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>LayerComponent</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">LayerComponent</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;layer)</span></div>
+<div class="block">Creates a LayerComponent for the desired layer with default ordering.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>layer</code> - the identifier string for the layer</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -156,6 +170,12 @@ implements technology.sola.ecs.Component</span></div>
 <h3>LayerComponent</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">LayerComponent</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;layer,
  int&nbsp;order)</span></div>
+<div class="block">Creates a LayerComponent for the desired layer with default ordering.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>layer</code> - the identifier string for the layer</dd>
+<dd><code>order</code> - the order for which this will be rendered in the layer (lower numbers are rendered earlier)</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -170,24 +190,42 @@ implements technology.sola.ecs.Component</span></div>
 <section class="detail" id="getLayer()">
 <h3>getLayer</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getLayer</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the layer string identifier</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getOrder()">
 <h3>getOrder</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getOrder</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the order in the layer</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setLayer(java.lang.String)">
 <h3>setLayer</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setLayer</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;layer)</span></div>
+<div class="block">Updates the layer.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>layer</code> - the new layer string identifier</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setOrder(int)">
 <h3>setOrder</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setOrder</span><wbr><span class="parameters">(int&nbsp;order)</span></div>
+<div class="block">Updates the order in the layer.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>order</code> - the new order</dd>
+</dl>
 </section>
 </li>
 </ul>

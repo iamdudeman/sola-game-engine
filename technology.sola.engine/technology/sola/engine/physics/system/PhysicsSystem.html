@@ -80,6 +80,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">PhysicsSystem</span>
 <span class="extends-implements">extends technology.sola.ecs.EcsSystem</span></div>
+<div class="block">PhysicsSystem is an <code>EcsSystem</code> that handles updating <code>Entity</code> with a
+ <a href="../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> and <a href="../component/DynamicBodyComponent.html" title="class in technology.sola.engine.physics.component"><code>DynamicBodyComponent</code></a>. It will update the velocity based on its applied force
+ unless it is kinematic. Then it will update the translation based on the velocity scaled to deltaTime.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">

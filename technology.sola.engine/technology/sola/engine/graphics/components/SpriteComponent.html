@@ -83,6 +83,8 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SpriteComponent</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements technology.sola.ecs.Component</span></div>
+<div class="block">SpriteCOmponent is a <code>Component</code> that contains data for rendering 2d sprites for an
+ <code>Entity</code>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -96,11 +98,17 @@ implements technology.sola.ecs.Component</span></div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,java.lang.String)" class="member-name-link">SpriteComponent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;spriteSheetId,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;spriteId)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a SpriteComponent for a sprite sheet and sprite id.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.assets.graphics.SolaImage)" class="member-name-link">SpriteComponent</a><wbr>(<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;solaImage)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Creates a SpriteComponent from a <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a>.</div>
+</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.components.SpriteKeyFrame)" class="member-name-link">SpriteComponent</a><wbr>(<a href="SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a>&nbsp;spriteKeyFrame)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a SpriteComponent from a <a href="SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components"><code>SpriteKeyFrame</code></a>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -117,7 +125,9 @@ implements technology.sola.ecs.Component</span></div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../assets/AssetHandle.html" title="class in technology.sola.engine.assets">AssetHandle</a>&lt;<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSprite(technology.sola.engine.assets.AssetLoader)" class="member-name-link">getSprite</a><wbr>(<a href="../../assets/AssetLoader.html" title="class in technology.sola.engine.assets">AssetLoader</a>&lt;<a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics">SpriteSheet</a>&gt;&nbsp;spriteSheetAssetLoader)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns an <a href="../../assets/AssetHandle.html" title="class in technology.sola.engine.assets"><code>AssetHandle</code></a> for the <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> of the sprite.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSpriteId()" class="member-name-link">getSpriteId</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -126,7 +136,9 @@ implements technology.sola.ecs.Component</span></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSpriteKeyFrame(technology.sola.engine.graphics.components.SpriteKeyFrame)" class="member-name-link">setSpriteKeyFrame</a><wbr>(<a href="SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a>&nbsp;spriteKeyFrame)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Updates the <a href="SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components"><code>SpriteKeyFrame</code></a>.</div>
+</div>
 </div>
 </div>
 </div>
@@ -152,18 +164,34 @@ implements technology.sola.ecs.Component</span></div>
 <h3>SpriteComponent</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SpriteComponent</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;spriteSheetId,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;spriteId)</span></div>
+<div class="block">Creates a SpriteComponent for a sprite sheet and sprite id.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>spriteSheetId</code> - the id for the <a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics"><code>SpriteSheet</code></a> asset</dd>
+<dd><code>spriteId</code> - the id for the sprite</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(technology.sola.engine.graphics.components.SpriteKeyFrame)">
 <h3>SpriteComponent</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SpriteComponent</span><wbr><span class="parameters">(<a href="SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a>&nbsp;spriteKeyFrame)</span></div>
+<div class="block">Creates a SpriteComponent from a <a href="SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components"><code>SpriteKeyFrame</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>spriteKeyFrame</code> - the sprite's key frame</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(technology.sola.engine.assets.graphics.SolaImage)">
 <h3>SpriteComponent</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SpriteComponent</span><wbr><span class="parameters">(<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;solaImage)</span></div>
+<div class="block">Creates a SpriteComponent from a <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>solaImage</code> - the image for the sprite</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -178,24 +206,44 @@ implements technology.sola.ecs.Component</span></div>
 <section class="detail" id="getSpriteSheetId()">
 <h3>getSpriteSheetId</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getSpriteSheetId</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the id of the <a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics"><code>SpriteSheet</code></a> this sprite is in</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getSpriteId()">
 <h3>getSpriteId</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getSpriteId</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the id for the sprite</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setSpriteKeyFrame(technology.sola.engine.graphics.components.SpriteKeyFrame)">
 <h3>setSpriteKeyFrame</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setSpriteKeyFrame</span><wbr><span class="parameters">(<a href="SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a>&nbsp;spriteKeyFrame)</span></div>
+<div class="block">Updates the <a href="SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components"><code>SpriteKeyFrame</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>spriteKeyFrame</code> - the new <code>SpriteKeyFrame</code></dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getSprite(technology.sola.engine.assets.AssetLoader)">
 <h3>getSprite</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../assets/AssetHandle.html" title="class in technology.sola.engine.assets">AssetHandle</a>&lt;<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&gt;</span>&nbsp;<span class="element-name">getSprite</span><wbr><span class="parameters">(<a href="../../assets/AssetLoader.html" title="class in technology.sola.engine.assets">AssetLoader</a>&lt;<a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics">SpriteSheet</a>&gt;&nbsp;spriteSheetAssetLoader)</span></div>
+<div class="block">Returns an <a href="../../assets/AssetHandle.html" title="class in technology.sola.engine.assets"><code>AssetHandle</code></a> for the <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> of the sprite.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>spriteSheetAssetLoader</code> - the <a href="../../assets/AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a> for <a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics"><code>SpriteSheet</code></a>s</dd>
+<dt>Returns:</dt>
+<dd>the <code>AssetHandle</code> for the sprite</dd>
+</dl>
 </section>
 </li>
 </ul>
