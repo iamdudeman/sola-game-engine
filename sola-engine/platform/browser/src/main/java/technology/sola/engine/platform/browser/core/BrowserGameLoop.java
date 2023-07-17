@@ -8,6 +8,9 @@ import technology.sola.engine.platform.browser.javascript.JsUtils;
 
 import java.util.function.Consumer;
 
+/**
+ * A {@link GameLoop} implementation for web browsers.
+ */
 public class BrowserGameLoop extends GameLoop implements JsUtils.Function {
   /**
    * Creates a new BrowserGameLoop instance. This currently caps target updates per second to 30.

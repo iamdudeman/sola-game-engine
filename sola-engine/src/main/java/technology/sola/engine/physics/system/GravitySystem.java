@@ -7,15 +7,35 @@ import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.event.CollisionEvent;
 
+/**
+ * GravitySystem is an {@link EcsSystem} that applies a gravity constant of force to all
+ * {@link technology.sola.ecs.Entity} that have a {@link DynamicBodyComponent}, are not kinematic and not grounded.
+ */
 public class GravitySystem extends EcsSystem {
+  /**
+   * The order for this system which is one before the {@link PhysicsSystem#ORDER}.
+   */
   public static final int ORDER = PhysicsSystem.ORDER - 1;
 
   private float gravityConstant;
 
+  /**
+   * Creates a GravitySystem instance and registers event listeners to {@link CollisionEvent} to handle updating the
+   * grounding of dynamic bodies.
+   *
+   * @param eventHub the {@link EventHub} instance
+   */
   public GravitySystem(EventHub eventHub) {
     this(eventHub, 98f);
   }
 
+  /**
+   * Creates a GravitySystem instance with desired gravity constant and registers event listeners to
+   * {@link CollisionEvent} to handle updating the grounding of dynamic bodies.
+   *
+   * @param eventHub the {@link EventHub} instance
+   * @param gravityConstant the gravity constant to use
+   */
   public GravitySystem(EventHub eventHub, float gravityConstant) {
     setGravityConstant(gravityConstant);
 
@@ -40,10 +60,18 @@ public class GravitySystem extends EcsSystem {
     return ORDER;
   }
 
+  /**
+   * @return the gravity constant
+   */
   public float getGravityConstant() {
     return gravityConstant;
   }
 
+  /**
+   * Updates the gravity constant
+   *
+   * @param gravityConstant the new gravity constant
+   */
   public void setGravityConstant(float gravityConstant) {
     this.gravityConstant = gravityConstant;
   }

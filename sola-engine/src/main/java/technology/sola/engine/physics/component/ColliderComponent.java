@@ -6,6 +6,14 @@ import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
+/**
+ * ColliderComponent is a {@link Component} that contains collision data for an {@link technology.sola.ecs.Entity}.
+ * The currently supported collider types are:
+ * <ul>
+ *   <li>{@link ColliderComponent.ColliderType#AABB}</li>
+ *   <li>{@link ColliderComponent.ColliderType#CIRCLE}</li>
+ * </ul>
+ */
 public class ColliderComponent implements Component {
   // Properties for all
   private ColliderType colliderType;
@@ -42,6 +50,16 @@ public class ColliderComponent implements Component {
     return aabb(0, 0, width, height);
   }
 
+  /**
+   * Creates a rectangle {@link ColliderComponent} with defined width and height. Its top, left coordinate is offset
+   * from the top, left coordinate of the Transform.
+   *
+   * @param offsetX the x coordinate offset
+   * @param offsetY the y coordinate offset
+   * @param width   the width of the collision box
+   * @param height  the height of the collision box
+   * @return a rectangle {@code ColliderComponent}
+   */
   public static ColliderComponent aabb(float offsetX, float offsetY, float width, float height) {
     ColliderComponent colliderComponent = new ColliderComponent();
 
@@ -73,6 +91,15 @@ public class ColliderComponent implements Component {
     return circle(0, 0, radius);
   }
 
+  /**
+   * Creates a circle {@link ColliderComponent} with defined radius. Its top, left coordinate is offset  from the
+   * top, left coordinate of the Transform.
+   *
+   * @param offsetX the x coordinate offset
+   * @param offsetY the y coordinate offset
+   * @param radius  the radius of the collider
+   * @return a circle {@code ColliderComponent}
+   */
   public static ColliderComponent circle(float offsetX, float offsetY, float radius) {
     ColliderComponent colliderComponent = new ColliderComponent();
 
@@ -84,10 +111,16 @@ public class ColliderComponent implements Component {
     return colliderComponent;
   }
 
+  /**
+   * @return the x offset from the transform
+   */
   public float getOffsetX() {
     return offsetX;
   }
 
+  /**
+   * @return the y offset from the transform
+   */
   public float getOffsetY() {
     return offsetY;
   }

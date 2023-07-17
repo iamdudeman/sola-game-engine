@@ -6,6 +6,11 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.math.linear.Vector2D;
 
+/**
+ * PhysicsSystem is an {@link EcsSystem} that handles updating {@link technology.sola.ecs.Entity} with a
+ * {@link TransformComponent} and {@link DynamicBodyComponent}. It will update the velocity based on its applied force
+ * unless it is kinematic. Then it will update the translation based on the velocity scaled to deltaTime.
+ */
 public class PhysicsSystem extends EcsSystem {
   public static final int ORDER = 10;
 

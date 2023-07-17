@@ -47,7 +47,7 @@ public abstract class GameLoop implements Runnable {
   private boolean isPaused = false;
 
   /**
-   * Creates a game loop instead with desired update and render logic at target updates per second.
+   * Creates a game loop instance with desired update and render logic at target updates per second.
    *
    * @param eventHub               the {@link EventHub} instance
    * @param updateMethod           the update method that is called each frame
@@ -59,7 +59,7 @@ public abstract class GameLoop implements Runnable {
   }
 
   /**
-   * Creates a game loop instead with desired update and render logic at target updates per second.
+   * Creates a game loop instance with desired update and render logic at target updates per second.
    *
    * @param eventHub               the {@link EventHub} instance
    * @param updateMethod           the update method that is called each frame
