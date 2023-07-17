@@ -15,7 +15,14 @@ import technology.sola.math.linear.Vector2D;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ImpulseCollisionResolutionSystem is an {@link EcsSystem} that responds to {@link CollisionEvent}s applying an
+ * impulse to resolve collisions so that they will no longer overlap.
+ */
 public class ImpulseCollisionResolutionSystem extends EcsSystem {
+  /**
+   * The order for this system which is one after the {@link CollisionDetectionSystem#ORDER}.
+   */
   public static final int ORDER = CollisionDetectionSystem.ORDER + 1;
 
   /**
