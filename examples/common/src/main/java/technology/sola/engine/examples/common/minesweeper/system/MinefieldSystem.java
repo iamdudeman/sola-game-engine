@@ -12,16 +12,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * {@link EcsSystem} for handling creating minefields when a new game is started.
+ */
 public class MinefieldSystem extends EcsSystem {
   private static final int MINE_INDICATOR = -1;
   private final SolaEcs solaEcs;
   private NewGameEvent newGameEvent;
 
+  /**
+   * Creates a MinefieldSystem instance that is currently inactive.
+   *
+   * @param solaEcs the {@link SolaEcs}
+   */
   public MinefieldSystem(SolaEcs solaEcs) {
     this.solaEcs = solaEcs;
     setActive(false);
   }
 
+  /**
+   * Registers event listener to {@link NewGameEvent} that activates the system to create a new minefield.
+   *
+   * @param eventHub the {@link EventHub}
+   */
   public void registerEvents(EventHub eventHub) {
     eventHub.add(NewGameEvent.class, newGameEvent -> {
       this.newGameEvent = newGameEvent;

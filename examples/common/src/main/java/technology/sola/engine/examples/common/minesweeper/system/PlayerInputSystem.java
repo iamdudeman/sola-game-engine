@@ -17,17 +17,32 @@ import technology.sola.math.linear.Vector2D;
 
 import java.util.List;
 
+/**
+ * {@link EcsSystem} that handles player input. Left-clicking reveals a tile and right-clicking marks a square as
+ * possibly a bomb.
+ */
 public class PlayerInputSystem extends EcsSystem {
   private final SolaGraphics solaGraphics;
   private final MouseInput mouseInput;
   private final EventHub eventHub;
 
+  /**
+   * Creates a PlayerInputSystem.
+   *
+   * @param solaGraphics the {@link SolaGraphics}
+   * @param mouseInput the {@link MouseInput}
+   * @param eventHub the {@link EventHub}
+   */
   public PlayerInputSystem(SolaGraphics solaGraphics, MouseInput mouseInput, EventHub eventHub) {
     this.solaGraphics = solaGraphics;
     this.mouseInput = mouseInput;
     this.eventHub = eventHub;
   }
 
+  /**
+   * Registers {@link GameOverEvent} and {@link NewGameEvent} event handlers for enabling and disabling player input
+   * based on game state.
+   */
   public void registerEvents() {
     eventHub.add(GameOverEvent.class, gameOverEvent -> {
       setActive(false);
