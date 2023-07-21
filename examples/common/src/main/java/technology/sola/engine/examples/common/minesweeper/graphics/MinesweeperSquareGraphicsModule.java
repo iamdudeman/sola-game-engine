@@ -9,6 +9,9 @@ import technology.sola.engine.examples.common.minesweeper.components.Minesweeper
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
 
+/**
+ * {@link SolaGraphicsModule} for rendering {@link technology.sola.ecs.Entity} with {@link MinesweeperSquareComponent}.
+ */
 public class MinesweeperSquareGraphicsModule extends SolaGraphicsModule<View2Entry<TransformComponent, MinesweeperSquareComponent>> {
   private static final int FONT_OFFSET = 5;
 
