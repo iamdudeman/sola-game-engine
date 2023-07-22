@@ -8,14 +8,33 @@ import org.teavm.jso.JSObject;
  * A collection of Java wrapper functions around JavaScript mouse utility functions.
  */
 public class JsMouseUtils {
+  /**
+   * Initializes mouse event listeners.
+   */
   @JSBody(script = Scripts.INIT)
   public static native void init();
 
+  /**
+   * Adds a mouse event listener.
+   *
+   * @param eventName the event name
+   * @param callback  the callback for the event
+   */
   @JSBody(params = {"eventName", "callback"}, script = Scripts.MOUSE_EVENT)
   public static native void mouseEventListener(String eventName, MouseEventCallback callback);
 
+  /**
+   * Callback definition for when an event for the mouse happens.
+   */
   @JSFunctor
   public interface MouseEventCallback extends JSObject {
+    /**
+     * Called when a mouse event happens.
+     *
+     * @param which the code for which mouse button had the event
+     * @param x     the x coordinate of the mouse when the event happened
+     * @param y     the y coordinate of the mouse when the event happened
+     */
     void call(int which, int x, int y);
   }
 
