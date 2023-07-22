@@ -9,6 +9,9 @@ import technology.sola.engine.assets.graphics.SolaImage;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * A JavaFX implementation of the {@link SolaImage} {@link AssetLoader}.
+ */
 public class JavaFxSolaImageAssetLoader extends AssetLoader<SolaImage> {
   @Override
   public Class<SolaImage> getAssetClass() {

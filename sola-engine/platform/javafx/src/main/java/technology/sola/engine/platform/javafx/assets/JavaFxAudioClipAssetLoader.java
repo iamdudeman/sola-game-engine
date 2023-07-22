@@ -12,6 +12,9 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
+/**
+ * A JavaFX implementation of the {@link AudioClip} {@link AssetLoader}.
+ */
 public class JavaFxAudioClipAssetLoader extends AssetLoader<AudioClip> {
   @Override
   public Class<AudioClip> getAssetClass() {
