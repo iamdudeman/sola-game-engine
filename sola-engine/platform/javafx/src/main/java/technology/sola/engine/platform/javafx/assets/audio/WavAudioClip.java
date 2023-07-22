@@ -17,7 +17,7 @@ public class WavAudioClip implements AudioClip {
   private final Clip clip;
 
   /**
-   * Creates an instance of the WavAudioClip utilizing JavaFX {@link Clip} and {@link AudioInputStream}.
+   * Creates an instance of the WavAudioClip utilizing javafx sound {@link Clip} and {@link AudioInputStream}.
    *
    * @param clip the {@code Clip}
    * @param audioInputStream the {@code AudioInputStream}

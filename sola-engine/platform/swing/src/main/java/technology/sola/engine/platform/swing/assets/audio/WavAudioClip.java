@@ -10,9 +10,20 @@ import javax.sound.sampled.LineUnavailableException;
 import java.io.IOException;
 import java.util.function.Consumer;
 
+/**
+ * The WavAudioClip class is a {@link AudioClip} implementation for .wav files.
+ */
 public class WavAudioClip implements AudioClip {
   private final Clip clip;
 
+  /**
+   * Creates an instance of the WavAudioClip utilizing javafx sound {@link Clip} and {@link AudioInputStream}.
+   *
+   * @param clip             the {@code Clip}
+   * @param audioInputStream the {@code AudioInputStream}
+   * @throws IOException              if an I/O exception occurs during reading of the stream
+   * @throws LineUnavailableException if the line cannot be opened due to resource restriction
+   */
   public WavAudioClip(Clip clip, AudioInputStream audioInputStream) throws IOException, LineUnavailableException {
     this.clip = clip;
 

@@ -17,6 +17,9 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
 
+/**
+ * A Swing implementation of {@link SocketClient}.
+ */
 public class SwingSocketClient implements SocketClient {
   private static final Logger LOGGER = LoggerFactory.getLogger(SwingSocketClient.class);
   private boolean isConnected = false;
