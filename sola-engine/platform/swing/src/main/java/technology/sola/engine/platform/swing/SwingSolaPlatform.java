@@ -32,6 +32,10 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.util.function.Consumer;
 
+/**
+ * SwingSolaPlatform is a {@link SolaPlatform} implementation for running a {@link technology.sola.engine.core.Sola} in
+ * a Swing powered window.
+ */
 public class SwingSolaPlatform extends SolaPlatform {
   private final boolean useSoftwareRendering;
   private Canvas canvas;
@@ -42,15 +46,30 @@ public class SwingSolaPlatform extends SolaPlatform {
   // For Graphics2d rendering
   private Graphics2D graphics2D;
 
+  /**
+   * Creates a SwingSolaPlatform instance using software rendering.
+   */
   public SwingSolaPlatform() {
     this(true);
   }
 
+  /**
+   * Creates a SwingSolaPlatform instance with the ability to turn off software rendering in favor of
+   * {@link Graphics2dRenderer}.
+   *
+   * @param useSoftwareRendering whether to use software rendering or not
+   */
   public SwingSolaPlatform(boolean useSoftwareRendering) {
     this.useSoftwareRendering = useSoftwareRendering;
     socketClient = new SwingSocketClient();
   }
 
+  /**
+   * Sets the initial window size when a {@link technology.sola.engine.core.Sola} is played.
+   *
+   * @param width  the width of the window
+   * @param height the height of the window
+   */
   public void setWindowSize(int width, int height) {
     this.windowSize = new Dimension(width, height);
   }

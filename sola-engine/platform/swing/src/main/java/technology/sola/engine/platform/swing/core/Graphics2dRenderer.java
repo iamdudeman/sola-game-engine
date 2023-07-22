@@ -15,18 +15,35 @@ import java.util.List;
 
 // TODO finish implementing this
 
+/**
+ * A {@link Graphics2D} based {@link Renderer} implementation.
+ * <p>
+ * <strong>Note: Not yet fully implemented</strong>
+ */
 public class Graphics2dRenderer implements Renderer {
   private final List<Layer> layers = new ArrayList<>();
   private final int width;
   private final int height;
   private Graphics2D graphics2D;
 
+  /**
+   * Creates a Graphics2dRenderer instance.
+   *
+   * @param graphics2D the {@link Graphics2D} instance
+   * @param width      width of the renderer
+   * @param height     height of the renderer
+   */
   public Graphics2dRenderer(Graphics2D graphics2D, int width, int height) {
     this.graphics2D = graphics2D;
     this.width = width;
     this.height = height;
   }
 
+  /**
+   * Updates the {@link Graphics2D} instance used for rendering.
+   *
+   * @param graphics2D the new {@code Graphics2D} instance
+   */
   public void updateGraphics2D(Graphics2D graphics2D) {
     this.graphics2D = graphics2D;
   }
