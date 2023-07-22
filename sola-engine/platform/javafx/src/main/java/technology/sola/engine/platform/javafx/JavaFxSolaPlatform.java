@@ -61,7 +61,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   }
 
   /**
-   * Sets the initial window size when a {@link technology.sola.engine.core.Sola} is player.
+   * Sets the initial window size when a {@link technology.sola.engine.core.Sola} is played.
    *
    * @param width  the width of the window
    * @param height the height of the window

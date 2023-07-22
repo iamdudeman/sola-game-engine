@@ -12,9 +12,17 @@ import technology.sola.json.SolaJson;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * A Swing implementation of the {@link Font} {@link AssetLoader}.
+ */
 public class SwingFontAssetLoader extends AssetLoader<Font> {
   private final AssetLoader<SolaImage> solaImageAssetLoader;
 
+  /**
+   * Creates an instance of this asset loader.
+   *
+   * @param solaImageAssetLoader the {@link SolaImage} {@link AssetLoader}
+   */
   public SwingFontAssetLoader(AssetLoader<SolaImage> solaImageAssetLoader) {
     this.solaImageAssetLoader = solaImageAssetLoader;
   }
