@@ -7,8 +7,16 @@ import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 
-
+/**
+ * {@link ElementDemo} for {@link technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties} common
+ * across {@link GuiElement}.
+ */
 public class CommonPropertiesDemo extends ElementDemo {
+  /**
+   * Creates a new instance.
+   *
+   * @param document the {@link SolaGuiDocument}
+   */
   public CommonPropertiesDemo(SolaGuiDocument document) {
     super(document, "Common Properties");
   }
