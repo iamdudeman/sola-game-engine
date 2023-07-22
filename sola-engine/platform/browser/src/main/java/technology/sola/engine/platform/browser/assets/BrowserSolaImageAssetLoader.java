@@ -6,6 +6,9 @@ import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.platform.browser.javascript.JsImageUtils;
 
+/**
+ * A browser implementation of the {@link SolaImage} {@link AssetLoader}.
+ */
 public class BrowserSolaImageAssetLoader extends AssetLoader<SolaImage> {
   @Override
   public Class<SolaImage> getAssetClass() {

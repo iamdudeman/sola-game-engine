@@ -6,6 +6,9 @@ import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.platform.browser.assets.audio.BrowserAudioClip;
 import technology.sola.engine.platform.browser.javascript.JsAudioUtils;
 
+/**
+ * A browser implementation of the {@link AudioClip} {@link AssetLoader}.
+ */
 public class BrowserAudioClipAssetLoader extends AssetLoader<AudioClip> {
   @Override
   public Class<AudioClip> getAssetClass() {
