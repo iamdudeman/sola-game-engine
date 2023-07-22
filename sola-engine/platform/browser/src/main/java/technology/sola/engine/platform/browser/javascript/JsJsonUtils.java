@@ -4,6 +4,9 @@ import org.teavm.jso.JSBody;
 import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;
 
+/**
+ * A collection of Java wrapper functions around JavaScript json utility functions.
+ */
 public class JsJsonUtils {
   @JSBody(params = {"path", "callback"}, script = Scripts.LOAD_JSON)
   public static native void loadJson(String path, JsonLoadCallback callback);

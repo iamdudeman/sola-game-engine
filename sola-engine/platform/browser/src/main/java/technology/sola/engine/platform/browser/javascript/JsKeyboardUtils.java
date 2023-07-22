@@ -4,6 +4,9 @@ import org.teavm.jso.JSBody;
 import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;
 
+/**
+ * A collection of Java wrapper functions around JavaScript keyboard utility functions.
+ */
 public class JsKeyboardUtils {
   @JSBody(script = Scripts.INIT)
   public static native void init();

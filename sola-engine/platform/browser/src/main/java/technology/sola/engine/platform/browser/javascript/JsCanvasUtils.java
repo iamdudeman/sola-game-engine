@@ -4,6 +4,9 @@ import org.teavm.jso.JSBody;
 import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;
 
+/**
+ * A collection of Java wrapper functions around JavaScript Canvas utility functions.
+ */
 public class JsCanvasUtils {
   public static final String ID_SOLA_ANCHOR = "sola-anchor";
 

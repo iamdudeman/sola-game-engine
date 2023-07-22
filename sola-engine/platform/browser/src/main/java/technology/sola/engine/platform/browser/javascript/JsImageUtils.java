@@ -4,6 +4,9 @@ import org.teavm.jso.JSBody;
 import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;
 
+/**
+ * A collection of Java wrapper functions around JavaScript image utility functions.
+ */
 public class JsImageUtils {
   @JSBody(params = {"path", "callback"}, script = Scripts.LOAD_IMAGE)
   public static native void loadImage(String path, ImageLoadCallback callback);

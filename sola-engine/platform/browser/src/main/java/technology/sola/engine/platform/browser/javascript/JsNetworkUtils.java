@@ -4,6 +4,9 @@ import org.teavm.jso.JSBody;
 import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;
 
+/**
+ * A collection of Java wrapper functions around JavaScript network utility functions.
+ */
 public class JsNetworkUtils {
   @JSBody(params = {"host", "port", "callback"}, script = Scripts.CONNECT)
   public static native void connectSocket(String host, int port, OnMessageCallback callback);
