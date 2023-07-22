@@ -8,30 +8,82 @@ import org.teavm.jso.JSObject;
  * A collection of Java wrapper functions around JavaScript Canvas utility functions.
  */
 public class JsCanvasUtils {
+  /**
+   * The id of the sola anchor element.
+   */
   public static final String ID_SOLA_ANCHOR = "sola-anchor";
 
+  /**
+   * Initializes the canvas.
+   *
+   * @param anchorId the id of the anchor element
+   * @param width    the width of the canvas
+   * @param height   the height of the canvas
+   */
   @JSBody(params = {"anchorId", "width", "height"}, script = Scripts.INIT)
   public static native void canvasInit(String anchorId, int width, int height);
 
+  /**
+   * Renders the renderData array to a canvas. This utilizes ImageData and Canvas#drawImage and is affected by the
+   * viewport's {@link technology.sola.engine.graphics.screen.AspectRatioSizing}.
+   *
+   * @param rendererData   the data to render
+   * @param width          the width of the renderer
+   * @param height         the height of the renderer
+   * @param viewportX      the x coordinate of the viewport
+   * @param viewportY      the y coordinate of the viewport
+   * @param viewportWidth  the width of the viewport
+   * @param viewportHeight the height of the viewport
+   */
   @JSBody(params = {"rendererData", "width", "height", "viewportX", "viewportY", "viewportWidth", "viewportHeight"}, script = Scripts.RENDER)
   public static native void renderToCanvas(int[] rendererData, int width, int height, int viewportX, int viewportY, int viewportWidth, int viewportHeight);
 
+  /**
+   * Adds a listener to when the canvas focus changes.
+   *
+   * @param callback called when canvas focus changes
+   */
   @JSBody(params = {"callback"}, script = Scripts.ON_FOCUS_CHANGE)
   public static native void observeCanvasFocus(CanvasFocusCallback callback);
 
+  /**
+   * Adds a listener to when the canvas resizes.
+   *
+   * @param callback called when the canvas resizes
+   */
   @JSBody(params = {"callback"}, script = Scripts.RESIZE)
   public static native void observeCanvasResize(CanvasResizeCallback callback);
 
+  /**
+   * Clears the canvas.
+   */
   @JSBody(script = Scripts.CLEAR_CANVAS)
   public static native void clearRect();
 
+  /**
+   * Callback definition for when the canvas resizes.
+   */
   @JSFunctor
   public interface CanvasResizeCallback extends JSObject {
+    /**
+     * Called when the canvas resizes.
+     *
+     * @param width  the new canvas width
+     * @param height the new canvas height
+     */
     void call(int width, int height);
   }
 
+  /**
+   * Callback definition for when the canvas gains or loses focus.
+   */
   @JSFunctor
   public interface CanvasFocusCallback extends JSObject {
+    /**
+     * Called when canvas focus changes
+     *
+     * @param isFocused whether the canvas is focussed or not
+     */
     void call(boolean isFocused);
   }
 
