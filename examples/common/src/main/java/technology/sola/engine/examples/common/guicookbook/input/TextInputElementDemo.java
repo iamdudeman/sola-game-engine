@@ -8,7 +8,15 @@ import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementCo
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.gui.elements.input.TextInputGuiElement;
 
+/**
+ * {@link ElementDemo} for the {@link TextInputGuiElement}.
+ */
 public class TextInputElementDemo extends ElementDemo {
+  /**
+   * Creates a new instance.
+   *
+   * @param document the {@link SolaGuiDocument}
+   */
   public TextInputElementDemo(SolaGuiDocument document) {
     super(document, "TextInput");
   }

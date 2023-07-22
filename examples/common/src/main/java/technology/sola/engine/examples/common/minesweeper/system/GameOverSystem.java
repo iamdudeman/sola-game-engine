@@ -7,11 +7,22 @@ import technology.sola.engine.event.EventHub;
 import technology.sola.engine.examples.common.minesweeper.components.MinesweeperSquareComponent;
 import technology.sola.engine.examples.common.minesweeper.event.GameOverEvent;
 
+/**
+ * {@link EcsSystem} for handling a game over revealing all bomb squares if the player lost.
+ */
 public class GameOverSystem extends EcsSystem {
+  /**
+   * Creates a GameOverSystem instance and sets it to inactive.
+   */
   public GameOverSystem() {
     setActive(false);
   }
 
+  /**
+   * Registers event listener for {@link GameOverEvent} that will enable this system.
+   *
+   * @param eventHub the {@link EventHub} instance
+   */
   public void registerEvents(EventHub eventHub) {
     eventHub.add(GameOverEvent.class, gameOverEvent -> {
       if (!gameOverEvent.isVictory()) {

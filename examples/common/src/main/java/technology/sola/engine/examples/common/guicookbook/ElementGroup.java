@@ -8,21 +8,42 @@ import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 
 import java.util.Arrays;
 
+/**
+ * ElementGroup contains a grouping of {@link ElementDemo} that share a common category (such as container or input).
+ */
 public class ElementGroup {
+  /**
+   * The {@link SolaGuiDocument}.
+   */
   protected final SolaGuiDocument document;
   private final String title;
   private final ElementDemo[] elementDemos;
 
+  /**
+   * Creates an ElementGroup instance.
+   *
+   * @param document     the {@link SolaGuiDocument}
+   * @param title        the title of the grouping
+   * @param elementDemos the {@link ElementDemo}s for the group
+   */
   public ElementGroup(SolaGuiDocument document, String title, ElementDemo... elementDemos) {
     this.document = document;
     this.title = title;
     this.elementDemos = elementDemos;
   }
 
+  /**
+   * @return the title of the group
+   */
   public String getTitle() {
     return title;
   }
 
+  /**
+   * Builds a {@link GuiElement} containing a simple navigation for {@link ElementDemo}
+   *
+   * @return a gui element for navigating the demos in the group
+   */
   public GuiElement<?> build() {
     return document.createElement(
       StreamGuiElementContainer::new,

@@ -14,15 +14,24 @@ import technology.sola.engine.graphics.gui.properties.Display;
 
 import java.text.DecimalFormat;
 
+/**
+ * MinesweeperGui contains the functionality needed to build the Minesweeper GUI.
+ */
 public class MinesweeperGui {
-  public static final Size[] SIZE_OPTIONS = new Size[] {
+  /**
+   * The valid minefield size options.
+   */
+  public static final Size[] SIZE_OPTIONS = new Size[]{
     new Size(10, 10),
     new Size(15, 15),
     new Size(20, 20),
     new Size(25, 30),
     new Size(30, 40),
   };
-  public static final int[] DIFFICULTY_OPTIONS = new int[] {
+  /**
+   * The valid difficulty options.
+   */
+  public static final int[] DIFFICULTY_OPTIONS = new int[]{
     8,
     12,
     16,
@@ -33,6 +42,13 @@ public class MinesweeperGui {
   private static int difficultyIndex = 0;
   private static long timeStarted;
 
+  /**
+   * Builds the GUI for Minesweeper.
+   *
+   * @param document the {@link SolaGuiDocument} for the {@link technology.sola.engine.core.Sola}
+   * @param eventHub the {@link EventHub} for the {@link technology.sola.engine.core.Sola}
+   * @return the {@link GuiElement} containing the Minesweeper GUI
+   */
   public static GuiElement<?> build(SolaGuiDocument document, EventHub eventHub) {
     eventHub.add(FlagEvent.class, flagEvent -> {
       mineCount += flagEvent.isAddingFlag() ? -1 : 1;
@@ -93,7 +109,6 @@ public class MinesweeperGui {
           p -> p.setText("10x10").padding.set(5).setId("size")
         ).setOnAction(() -> {
           sizeIndex = (sizeIndex + 1) % SIZE_OPTIONS.length;
-          var size = SIZE_OPTIONS[sizeIndex];
           newGame(eventHub);
         }),
         document.createElement(
@@ -101,7 +116,6 @@ public class MinesweeperGui {
           p -> p.setText("8%").padding.set(5).setId("difficulty")
         ).setOnAction(() -> {
           difficultyIndex = (difficultyIndex + 1) % DIFFICULTY_OPTIONS.length;
-          document.getElementById("difficulty", ButtonGuiElement.class).properties().setText(DIFFICULTY_OPTIONS[difficultyIndex] + "%");
           newGame(eventHub);
         })
       )
@@ -115,6 +129,12 @@ public class MinesweeperGui {
     eventHub.emit(new NewGameEvent(size.rows, size.columns, difficulty));
   }
 
+  /**
+   * Size represents the size of a minefield in rows by columns.
+   *
+   * @param rows    the number of rows
+   * @param columns the number of columns
+   */
   public record Size(int rows, int columns) {
   }
 }
