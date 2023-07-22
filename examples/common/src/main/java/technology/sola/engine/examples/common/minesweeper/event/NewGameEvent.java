@@ -10,6 +10,9 @@ import technology.sola.engine.event.Event;
  * @param percentMines percentage of mines for the new game
  */
 public record NewGameEvent(int rows, int columns, int percentMines) implements Event {
+  /**
+   * @return the total number of mines for the new game
+   */
   public int totalMines() {
     return Math.round(percentMines / 100.0f * (rows * columns));
   }

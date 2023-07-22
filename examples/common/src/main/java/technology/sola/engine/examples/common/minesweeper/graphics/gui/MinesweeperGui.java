@@ -131,6 +131,12 @@ public class MinesweeperGui {
     eventHub.emit(new NewGameEvent(size.rows, size.columns, difficulty));
   }
 
+  /**
+   * Size represents the size of a minefield in rows by columns.
+   *
+   * @param rows    the number of rows
+   * @param columns the number of columns
+   */
   public record Size(int rows, int columns) {
   }
 }
