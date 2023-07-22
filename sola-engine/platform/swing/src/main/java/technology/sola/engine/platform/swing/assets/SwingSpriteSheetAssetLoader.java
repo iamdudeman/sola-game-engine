@@ -10,9 +10,17 @@ import technology.sola.json.SolaJson;
 
 import java.io.IOException;
 
+/**
+ * A Swing implementation of the {@link SpriteSheet} {@link AssetLoader}.
+ */
 public class SwingSpriteSheetAssetLoader extends AssetLoader<SpriteSheet> {
   private final AssetLoader<SolaImage> solaImageAssetLoader;
 
+  /**
+   * Creates an instance of this asset loader.
+   *
+   * @param solaImageAssetLoader the {@link SolaImage} {@link AssetLoader}
+   */
   public SwingSpriteSheetAssetLoader(AssetLoader<SolaImage> solaImageAssetLoader) {
     this.solaImageAssetLoader = solaImageAssetLoader;
   }
