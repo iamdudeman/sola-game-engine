@@ -5,6 +5,9 @@ import technology.sola.engine.networking.socket.SocketClient;
 import technology.sola.engine.networking.socket.SocketMessage;
 import technology.sola.engine.platform.browser.javascript.JsNetworkUtils;
 
+/**
+ * A browser implementation of {@link SocketClient}.
+ */
 public class BrowserSocketClient implements SocketClient {
   private final NetworkQueue<SocketMessage> networkQueue = new NetworkQueue<>();
   private boolean isConnected = false;

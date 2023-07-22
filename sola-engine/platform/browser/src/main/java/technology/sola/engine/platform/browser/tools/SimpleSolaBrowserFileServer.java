@@ -13,6 +13,10 @@ import java.net.URLConnection;
 import java.util.concurrent.Executors;
 import java.util.function.Function;
 
+/**
+ * SimpleSolaBrowserFileServer is a simple static asset server implementation that can be used to serve browser platform
+ * index.html, sola.js and game assets.
+ */
 public class SimpleSolaBrowserFileServer {
   private final String indexHtmlDirectoryPath;
   private final String solaJsDirectoryPath;

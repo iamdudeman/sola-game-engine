@@ -15,11 +15,22 @@ import java.util.List;
 
 // TODO finish implementing this
 
+/**
+ * A Canvas based {@link Renderer} implementation.
+ * <p>
+ * <strong>Note: Not yet fully implemented</strong>
+ */
 public class BrowserCanvasRenderer implements Renderer {
   private final List<Layer> layers = new ArrayList<>();
   private final int width;
   private final int height;
 
+  /**
+   * Creates a Graphics2dRenderer instance.
+   *
+   * @param width      width of the renderer
+   * @param height     height of the renderer
+   */
   public BrowserCanvasRenderer(int width, int height) {
     this.width = width;
     this.height = height;
