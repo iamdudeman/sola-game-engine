@@ -12,9 +12,17 @@ import technology.sola.json.SolaJson;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * A JavaFX implementation of the {@link Font} {@link AssetLoader}.
+ */
 public class JavaFxFontAssetLoader extends AssetLoader<Font> {
   private final AssetLoader<SolaImage> solaImageAssetLoader;
 
+  /**
+   * Creates an instance of this asset loader.
+   *
+   * @param solaImageAssetLoader the {@link SolaImage} {@link AssetLoader}
+   */
   public JavaFxFontAssetLoader(AssetLoader<SolaImage> solaImageAssetLoader) {
     this.solaImageAssetLoader = solaImageAssetLoader;
   }
