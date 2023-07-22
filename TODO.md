@@ -15,6 +15,8 @@
 
 ## TODO List
 
+* Add ability to have a platform identifier if platform specific logic is desired
+    * Possibly an enum with [Swing, JavaFx, Browser, Custom]?
 * Rendering
     * Ability to change line width when drawing
     * Implement more BlendModes
@@ -58,6 +60,7 @@
     * Should probably always use a "default font" if it is implemented
 * Browser Platform
     * modularize (requires figuring out how to modularize parts of teavm needed)
+        * ensure `SimpleSolaBrowserFileServer` and `SolaBrowserFileBuilder` in `tools` is exposed as well
     * Improve performance (StressTestExample can't handle a lot of objects)
         * Possibly finish implementing BrowserCanvasRenderer?
     * Consider web worker for game loop

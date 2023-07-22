@@ -27,13 +27,26 @@ import technology.sola.engine.platform.browser.javascript.JsUtils;
 
 import java.util.function.Consumer;
 
+/**
+ * BrowserSolaPlatform is a {@link SolaPlatform} implementation for running a {@link technology.sola.engine.core.Sola} in
+ * a web browser.
+ */
 public class BrowserSolaPlatform extends SolaPlatform {
   private final boolean useSoftwareRendering;
 
+  /**
+   * Creates a BrowserSolaPlatform instance using software rendering.
+   */
   public BrowserSolaPlatform() {
     this(true);
   }
 
+  /**
+   * Creates a BrowserSolaPlatform instance with the ability to turn off software rendering in favor of
+   * Canvas.
+   *
+   * @param useSoftwareRendering whether to use software rendering or not
+   */
   public BrowserSolaPlatform(boolean useSoftwareRendering) {
     this.useSoftwareRendering = useSoftwareRendering;
     this.socketClient = new BrowserSocketClient();

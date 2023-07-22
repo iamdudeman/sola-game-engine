@@ -13,21 +13,46 @@ import java.net.URLConnection;
 import java.util.concurrent.Executors;
 import java.util.function.Function;
 
+/**
+ * SimpleSolaBrowserFileServer is a simple static asset server implementation that can be used to serve browser platform
+ * index.html, sola.js and game assets.
+ */
 public class SimpleSolaBrowserFileServer {
   private final String indexHtmlDirectoryPath;
   private final String solaJsDirectoryPath;
   private final String assetsDirectoryPath;
 
+  /**
+   * Creates a SimpleSolaBrowserFileServer serving the index.html and sola.js files from indexHtmlDirectoryPath and
+   * assets from assetsDirectoryPath.
+   *
+   * @param indexHtmlDirectoryPath the path to the directory containing index.html and sola.js files
+   * @param assetsDirectoryPath    the path to the directory containing assets
+   */
   public SimpleSolaBrowserFileServer(String indexHtmlDirectoryPath, String assetsDirectoryPath) {
     this(indexHtmlDirectoryPath, indexHtmlDirectoryPath, assetsDirectoryPath);
   }
 
+  /**
+   * Creates a SimpleSolaBrowserFileServer serving the index.html from indexHtmlDirectoryPath, sola.js file from
+   * solaJsDirectoryPath and assets from assetsDirectoryPath.
+   *
+   * @param indexHtmlDirectoryPath the path to the directory containing index.html file
+   * @param solaJsDirectoryPath    the path to the directory containing sola.js file
+   * @param assetsDirectoryPath    the path to the directory containing assets
+   */
   public SimpleSolaBrowserFileServer(String indexHtmlDirectoryPath, String solaJsDirectoryPath, String assetsDirectoryPath) {
     this.indexHtmlDirectoryPath = indexHtmlDirectoryPath;
     this.solaJsDirectoryPath = solaJsDirectoryPath;
     this.assetsDirectoryPath = assetsDirectoryPath;
   }
 
+  /**
+   * Starts the server on desired port.
+   *
+   * @param port the port to start the server on
+   * @throws IOException if an I/O error occurs
+   */
   public void start(int port) throws IOException {
     HttpServer httpServer = HttpServer.create(new InetSocketAddress(port), 0);
 

@@ -9,9 +9,17 @@ import technology.sola.engine.assets.graphics.font.mapper.FontInfoJsonMapper;
 import technology.sola.engine.platform.browser.javascript.JsJsonUtils;
 import technology.sola.json.SolaJson;
 
+/**
+ * A browser implementation of the {@link Font} {@link AssetLoader}.
+ */
 public class BrowserFontAssetLoader extends AssetLoader<Font> {
   private final AssetLoader<SolaImage> solaImageAssetLoader;
 
+  /**
+   * Creates an instance of this asset loader.
+   *
+   * @param solaImageAssetLoader the {@link SolaImage} {@link AssetLoader}
+   */
   public BrowserFontAssetLoader(AssetLoader<SolaImage> solaImageAssetLoader) {
     this.solaImageAssetLoader = solaImageAssetLoader;
   }
@@ -30,8 +38,8 @@ public class BrowserFontAssetLoader extends AssetLoader<Font> {
       FontInfo fontInfo = solaJson.parse(jsonString, new FontInfoJsonMapper());
 
       solaImageAssetLoader.getNewAsset(
-        fontInfo.fontGlyphFile(),
-        path.substring(0, path.lastIndexOf("/")) + "/" + fontInfo.fontGlyphFile()
+          fontInfo.fontGlyphFile(),
+          path.substring(0, path.lastIndexOf("/")) + "/" + fontInfo.fontGlyphFile()
         )
         .executeWhenLoaded(solaImage -> fontAssetHandle.setAsset(new Font(solaImage, fontInfo)));
     });

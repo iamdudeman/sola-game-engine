@@ -12,24 +12,54 @@ import java.io.IOException;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
 
+/**
+ * SolaBrowserFileBuilder is a wrapper around {@link org.teavm.vm.TeaVM} for generating the "sola.js" bundle for a
+ * {@link technology.sola.engine.core.Sola}.
+ * <p>
+ * Example usage:
+ * <pre>
+ * SolaBrowserFileBuilder solaBrowserFileBuilder = new SolaBrowserFileBuilder("browser/build");
+ *
+ * solaBrowserFileBuilder.transpileSolaJar(
+ *   "build/libs/browser-1.0.0.jar",
+ *   BrowserMain.class.getName(),
+ * );
+ *
+ * solaBrowserFileBuilder.createIndexHtmlWithOverlay();
+ * </pre>
+ */
 public class SolaBrowserFileBuilder {
   private static final String OUTPUT_FILE_JS = "sola.js";
   private static final String OUTPUT_FILE_HTML = "index.html";
   private final String buildDirectory;
 
+  /**
+   * Creates a SolaBrowserFileBuilder with targeted build output directory.
+   *
+   * @param buildDirectory the build output directory
+   */
   public SolaBrowserFileBuilder(String buildDirectory) {
     this.buildDirectory = buildDirectory;
   }
 
+  /**
+   * Transpiles a jar file into an obfuscated sola.js bundle.
+   * <strong>Note: supports up to Java 17</strong>
+   *
+   * @param jarPath   path to the jar file
+   * @param mainClass the main class
+   */
   public void transpileSolaJar(String jarPath, String mainClass) {
     transpileSolaJar(jarPath, mainClass, true);
   }
 
   /**
-   * Note: supports up to Java 17
-   * @param jarPath
-   * @param mainClass
-   * @param obfuscate
+   * Transpiles a jar file into a sola.js bundle.
+   * <strong>Note: supports up to Java 17</strong>
+   *
+   * @param jarPath   path to the jar file
+   * @param mainClass the main class
+   * @param obfuscate whether to obfuscate the js bundle or not
    */
   public void transpileSolaJar(String jarPath, String mainClass, boolean obfuscate) {
     InProcessBuildStrategy buildStrategy = new InProcessBuildStrategy(URLClassLoader::new);
@@ -40,7 +70,6 @@ public class SolaBrowserFileBuilder {
     buildStrategy.setMainClass(mainClass);
     buildStrategy.addSourcesJar(jarPath);
     buildStrategy.setObfuscated(obfuscate);
-
 
     // Non-configurable
     buildStrategy.setEntryPointName("main");
@@ -80,6 +109,10 @@ public class SolaBrowserFileBuilder {
     }
   }
 
+  /**
+   * Creates an index.html file that immediately executes the {@link technology.sola.engine.core.Sola} when the page
+   * loads.
+   */
   public void createIndexHtml() {
     String template = """
       <html>
@@ -117,6 +150,10 @@ public class SolaBrowserFileBuilder {
     }
   }
 
+  /**
+   * Creates an index.html file with an overlay to begin executing the {@link technology.sola.engine.core.Sola} when the
+   * "run game" button is clicked.
+   */
   public void createIndexHtmlWithOverlay() {
     String template = """
       <html>

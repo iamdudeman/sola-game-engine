@@ -8,9 +8,17 @@ import technology.sola.engine.platform.browser.javascript.JsJsonUtils;
 import technology.sola.json.JsonObject;
 import technology.sola.json.SolaJson;
 
+/**
+ * A browser implementation of the {@link SpriteSheet} {@link AssetLoader}.
+ */
 public class BrowserSpriteSheetAssetLoader extends AssetLoader<SpriteSheet> {
   private final AssetLoader<SolaImage> solaImageAssetLoader;
 
+  /**
+   * Creates an instance of this asset loader.
+   *
+   * @param solaImageAssetLoader the {@link SolaImage} {@link AssetLoader}
+   */
   public BrowserSpriteSheetAssetLoader(AssetLoader<SolaImage> solaImageAssetLoader) {
     this.solaImageAssetLoader = solaImageAssetLoader;
   }

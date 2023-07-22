@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * BrowserAudioClip is an {@link AudioClip} implementation for the browser using the Web Audio API.
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a>
+ */
 public class BrowserAudioClip implements AudioClip {
   private final AudioContext audioContext;
   private final AudioBuffer audioBuffer;
@@ -20,6 +25,12 @@ public class BrowserAudioClip implements AudioClip {
   private double pausedAt = 0;
   private float volume = 1f;
 
+  /**
+   * Creates a BrowserAudioClip instance.
+   *
+   * @param audioContext the <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext">Audio Context</a>
+   * @param audioBuffer the <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioBuffer">Audio Buffer</a>
+   */
   public BrowserAudioClip(AudioContext audioContext, AudioBuffer audioBuffer) {
     this.audioContext = audioContext;
     this.audioBuffer = audioBuffer;
