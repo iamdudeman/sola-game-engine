@@ -7,7 +7,15 @@ import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 
+/**
+ * {@link ElementDemo} for the {@link ButtonGuiElement}.
+ */
 public class ButtonElementDemo extends ElementDemo {
+  /**
+   * Creates a new instance.
+   *
+   * @param document the {@link SolaGuiDocument}
+   */
   public ButtonElementDemo(SolaGuiDocument document) {
     super(document, "Button");
   }

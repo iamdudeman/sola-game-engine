@@ -9,7 +9,15 @@ import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 
+/**
+ * {@link ElementDemo} for the {@link StreamGuiElementContainer}.
+ */
 public class StreamContainerDemo extends ElementDemo {
+  /**
+   * Creates a new instance.
+   *
+   * @param document the {@link SolaGuiDocument}
+   */
   public StreamContainerDemo(SolaGuiDocument document) {
     super(document, "Stream");
   }

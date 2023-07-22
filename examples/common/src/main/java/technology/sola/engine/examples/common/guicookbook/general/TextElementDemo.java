@@ -8,7 +8,15 @@ import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 
+/**
+ * {@link ElementDemo} for the {@link TextGuiElement}.
+ */
 public class TextElementDemo extends ElementDemo {
+  /**
+   * Creates a new instance.
+   *
+   * @param document the {@link SolaGuiDocument}
+   */
   public TextElementDemo(SolaGuiDocument document) {
     super(document, "Text");
   }

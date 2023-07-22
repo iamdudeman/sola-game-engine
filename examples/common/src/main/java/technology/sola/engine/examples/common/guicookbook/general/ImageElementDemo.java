@@ -6,7 +6,15 @@ import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.elements.ImageGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 
+/**
+ * {@link ElementDemo} for the {@link ImageGuiElement}.
+ */
 public class ImageElementDemo extends ElementDemo {
+  /**
+   * Creates a new instance.
+   *
+   * @param document the {@link SolaGuiDocument}
+   */
   public ImageElementDemo(SolaGuiDocument document) {
     super(document, "Image");
   }

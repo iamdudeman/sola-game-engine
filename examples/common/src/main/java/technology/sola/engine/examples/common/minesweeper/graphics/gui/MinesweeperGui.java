@@ -109,7 +109,6 @@ public class MinesweeperGui {
           p -> p.setText("10x10").padding.set(5).setId("size")
         ).setOnAction(() -> {
           sizeIndex = (sizeIndex + 1) % SIZE_OPTIONS.length;
-          var size = SIZE_OPTIONS[sizeIndex];
           newGame(eventHub);
         }),
         document.createElement(
@@ -117,7 +116,6 @@ public class MinesweeperGui {
           p -> p.setText("8%").padding.set(5).setId("difficulty")
         ).setOnAction(() -> {
           difficultyIndex = (difficultyIndex + 1) % DIFFICULTY_OPTIONS.length;
-          document.getElementById("difficulty", ButtonGuiElement.class).properties().setText(DIFFICULTY_OPTIONS[difficultyIndex] + "%");
           newGame(eventHub);
         })
       )
