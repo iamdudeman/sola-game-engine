@@ -23,7 +23,7 @@ import java.util.List;
 public class SolaGraphics {
   private static final TransformComponent DEFAULT_CAMERA_TRANSFORM = new TransformComponent();
   private final SolaEcs solaEcs;
-  private final List<SolaGraphicsModule> graphicsModuleList = new ArrayList<>();
+  private final List<SolaGraphicsModule<?>> graphicsModuleList = new ArrayList<>();
   private Matrix3D cachedScreenToWorldMatrix = null;
   private float previousCameraX = 0;
   private float previousCameraY = 0;
@@ -46,7 +46,7 @@ public class SolaGraphics {
   /**
    * @return the list of current {@link SolaGraphicsModule}s
    */
-  public List<SolaGraphicsModule> getGraphicsModuleList() {
+  public List<SolaGraphicsModule<?>> getGraphicsModuleList() {
     return graphicsModuleList;
   }
 
@@ -55,7 +55,7 @@ public class SolaGraphics {
    *
    * @param graphicsModules the modules to add
    */
-  public void addGraphicsModules(SolaGraphicsModule... graphicsModules) {
+  public void addGraphicsModules(SolaGraphicsModule<?>... graphicsModules) {
     if (graphicsModules != null) {
       graphicsModuleList.addAll(Arrays.asList(graphicsModules));
     }
