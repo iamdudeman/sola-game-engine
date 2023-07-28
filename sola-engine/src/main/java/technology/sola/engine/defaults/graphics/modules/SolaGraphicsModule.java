@@ -16,6 +16,8 @@ import technology.sola.math.linear.Vector2D;
  * SolaGraphicsModules provide details on how to render {@link Entity} that have specified {@link technology.sola.ecs.Component}s.
  */
 public abstract class SolaGraphicsModule<V extends ViewEntry> {
+  private boolean isActive = true;
+
   /**
    * Returns a {@link View} of {@link Entity} that need to be rendered via
    * {@link SolaGraphicsModule#renderMethod(Renderer, V, TransformComponent)}
@@ -45,6 +47,10 @@ public abstract class SolaGraphicsModule<V extends ViewEntry> {
    * @param cameraTranslationTransform the camera's translation
    */
   public void render(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
+    if (!isActive()) {
+      return;
+    }
+
     for (var entry : getViewToRender(world).getEntries()) {
       Entity entity = entry.entity();
       LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
@@ -67,6 +73,22 @@ public abstract class SolaGraphicsModule<V extends ViewEntry> {
         });
       }
     }
+  }
+
+  /**
+   * @return true if this graphics module is actively rendering
+   */
+  public boolean isActive() {
+    return isActive;
+  }
+
+  /**
+   * Sets the active state of this graphics module.
+   *
+   * @param active the new active state
+   */
+  public void setActive(boolean active) {
+    isActive = active;
   }
 
   /**
