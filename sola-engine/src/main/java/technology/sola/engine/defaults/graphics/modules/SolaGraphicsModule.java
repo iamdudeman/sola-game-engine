@@ -15,7 +15,7 @@ import technology.sola.math.linear.Vector2D;
 /**
  * SolaGraphicsModules provide details on how to render {@link Entity} that have specified {@link technology.sola.ecs.Component}s.
  */
-public abstract class SolaGraphicsModule<V extends ViewEntry> {
+public abstract class SolaGraphicsModule<V extends ViewEntry> implements Comparable<SolaGraphicsModule<?>> {
   private boolean isActive = true;
 
   /**
@@ -89,6 +89,20 @@ public abstract class SolaGraphicsModule<V extends ViewEntry> {
    */
   public void setActive(boolean active) {
     isActive = active;
+  }
+
+  /**
+   * Gets the order of this graphics module. A higher value means it will be rendered on top.
+   *
+   * @return the order of this graphics module
+   */
+  public int getOrder() {
+    return 0;
+  }
+
+  @Override
+  public int compareTo(SolaGraphicsModule<?> solaGraphicsModule) {
+    return Integer.compare(getOrder(), solaGraphicsModule.getOrder());
   }
 
   /**

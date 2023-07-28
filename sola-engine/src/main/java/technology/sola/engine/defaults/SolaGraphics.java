@@ -12,10 +12,9 @@ import technology.sola.engine.graphics.system.TransformAnimatorSystem;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  * SolaGraphics provides default rendering capabilities while also allowing for customization via {@link SolaGraphicsModule}s.
@@ -23,7 +22,7 @@ import java.util.List;
 public class SolaGraphics {
   private static final TransformComponent DEFAULT_CAMERA_TRANSFORM = new TransformComponent();
   private final SolaEcs solaEcs;
-  private final List<SolaGraphicsModule<?>> graphicsModuleList = new ArrayList<>();
+  private final PriorityQueue<SolaGraphicsModule<?>> graphicsModuleQueue = new PriorityQueue<>();
   private Matrix3D cachedScreenToWorldMatrix = null;
   private float previousCameraX = 0;
   private float previousCameraY = 0;
@@ -44,10 +43,10 @@ public class SolaGraphics {
   }
 
   /**
-   * @return the list of current {@link SolaGraphicsModule}s
+   * @return the ordered queue of current {@link SolaGraphicsModule}s
    */
-  public List<SolaGraphicsModule<?>> getGraphicsModuleList() {
-    return graphicsModuleList;
+  public PriorityQueue<SolaGraphicsModule<?>> getGraphicsModuleQueue() {
+    return graphicsModuleQueue;
   }
 
   /**
@@ -57,7 +56,7 @@ public class SolaGraphics {
    */
   public void addGraphicsModules(SolaGraphicsModule<?>... graphicsModules) {
     if (graphicsModules != null) {
-      graphicsModuleList.addAll(Arrays.asList(graphicsModules));
+      graphicsModuleQueue.addAll(Arrays.asList(graphicsModules));
     }
   }
 
@@ -84,7 +83,7 @@ public class SolaGraphics {
       .multiply(cameraScaleTransform);
     World world = solaEcs.getWorld();
 
-    for (var graphicsModule : graphicsModuleList) {
+    for (var graphicsModule : graphicsModuleQueue) {
       graphicsModule.render(renderer, world, cameraScaleTransform, cameraTranslationTransform);
     }
   }

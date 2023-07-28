@@ -6,6 +6,9 @@ import java.util.PriorityQueue;
  * Layers contain a queue of {@link DrawItem} to ensure a particular draw order.
  */
 public class Layer {
+  /**
+   * The default order for a {@link DrawItem} that is added to this Layer.
+   */
   public static final int DEFAULT_ORDER = 0;
   private final PriorityQueue<OrdererDrawItem> drawQueue;
   private final String name;
@@ -90,8 +93,8 @@ public class Layer {
     }
 
     @Override
-    public int compareTo(OrdererDrawItem o) {
-      return Integer.compare(this.order, o.order);
+    public int compareTo(OrdererDrawItem ordererDrawItem) {
+      return Integer.compare(this.order, ordererDrawItem.order);
     }
   }
 }
