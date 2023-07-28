@@ -13,6 +13,7 @@ import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
+import technology.sola.engine.core.SolaPlatformIdentifier;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -69,6 +70,11 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   public void setWindowSize(int width, int height) {
     windowWidth = (double) width;
     windowHeight = (double) height;
+  }
+
+  @Override
+  public SolaPlatformIdentifier getIdentifier() {
+    return SolaPlatformIdentifier.JAVA_FX;
   }
 
   @Override

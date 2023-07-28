@@ -15,8 +15,8 @@
 
 ## TODO List
 
-* Add ability to have a platform identifier if platform specific logic is desired
-    * Possibly an enum with [Swing, JavaFx, Browser, Custom]?
+* Move custom build "distribution" tasks to a gradle plugin
+  * sola game template should use these plugins as well
 * Rendering
     * Ability to change line width when drawing
     * Implement more BlendModes
