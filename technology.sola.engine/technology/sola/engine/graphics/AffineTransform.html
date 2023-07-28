@@ -78,6 +78,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">AffineTransform</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">AffineTransform represents an affine transformation.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -105,36 +106,52 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#backward(float,float)" class="member-name-link">backward</a><wbr>(float&nbsp;x,
- float&nbsp;y)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#forward(float,float)" class="member-name-link">forward</a><wbr>(float&nbsp;x,
- float&nbsp;y)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBoundingBoxForTransform(int,int)" class="member-name-link">getBoundingBoxForTransform</a><wbr>(int&nbsp;width,
  int&nbsp;height)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the bounding box for this transform applied to a rectangle with width and height.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#multiply(float,float)" class="member-name-link">multiply</a><wbr>(float&nbsp;x,
+ float&nbsp;y)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Multiplies the <a href="AffineTransform.html" title="class in technology.sola.engine.graphics"><code>AffineTransform</code></a> with a point (x, y).</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#multiplyInverse(float,float)" class="member-name-link">multiplyInverse</a><wbr>(float&nbsp;x,
+ float&nbsp;y)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Multiplies the inverse of the <a href="AffineTransform.html" title="class in technology.sola.engine.graphics"><code>AffineTransform</code></a> with a point (x, y).</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reset()" class="member-name-link">reset</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Resets this AffineTransform back to the <a href="../../math/linear/Matrix3D.html#identity()"><code>Matrix3D.identity()</code></a>.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="AffineTransform.html" title="class in technology.sola.engine.graphics">AffineTransform</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rotate(float)" class="member-name-link">rotate</a><wbr>(float&nbsp;radians)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Rotates by radians.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="AffineTransform.html" title="class in technology.sola.engine.graphics">AffineTransform</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#scale(float,float)" class="member-name-link">scale</a><wbr>(float&nbsp;sx,
  float&nbsp;sy)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Scales by sx, sy.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="AffineTransform.html" title="class in technology.sola.engine.graphics">AffineTransform</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sheer(float,float)" class="member-name-link">sheer</a><wbr>(float&nbsp;sx,
  float&nbsp;sy)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sheers by sx, sy.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="AffineTransform.html" title="class in technology.sola.engine.graphics">AffineTransform</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#translate(float,float)" class="member-name-link">translate</a><wbr>(float&nbsp;tx,
  float&nbsp;ty)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Translates by tx, ty.</div>
+</div>
 </div>
 </div>
 </div>
@@ -170,6 +187,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="reset()">
 <h3>reset</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">reset</span>()</div>
+<div class="block">Resets this AffineTransform back to the <a href="../../math/linear/Matrix3D.html#identity()"><code>Matrix3D.identity()</code></a>.</div>
 </section>
 </li>
 <li>
@@ -177,6 +195,14 @@ loadScripts(document, 'script');</script>
 <h3>translate</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="AffineTransform.html" title="class in technology.sola.engine.graphics">AffineTransform</a></span>&nbsp;<span class="element-name">translate</span><wbr><span class="parameters">(float&nbsp;tx,
  float&nbsp;ty)</span></div>
+<div class="block">Translates by tx, ty.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>tx</code> - the x translation</dd>
+<dd><code>ty</code> - the y translation</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -184,12 +210,27 @@ loadScripts(document, 'script');</script>
 <h3>scale</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="AffineTransform.html" title="class in technology.sola.engine.graphics">AffineTransform</a></span>&nbsp;<span class="element-name">scale</span><wbr><span class="parameters">(float&nbsp;sx,
  float&nbsp;sy)</span></div>
+<div class="block">Scales by sx, sy.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>sx</code> - the x scale factor</dd>
+<dd><code>sy</code> - the y scale factor</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="rotate(float)">
 <h3>rotate</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="AffineTransform.html" title="class in technology.sola.engine.graphics">AffineTransform</a></span>&nbsp;<span class="element-name">rotate</span><wbr><span class="parameters">(float&nbsp;radians)</span></div>
+<div class="block">Rotates by radians.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>radians</code> - the radians to rotate the transform</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -197,20 +238,44 @@ loadScripts(document, 'script');</script>
 <h3>sheer</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="AffineTransform.html" title="class in technology.sola.engine.graphics">AffineTransform</a></span>&nbsp;<span class="element-name">sheer</span><wbr><span class="parameters">(float&nbsp;sx,
  float&nbsp;sy)</span></div>
+<div class="block">Sheers by sx, sy.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>sx</code> - the x sheer</dd>
+<dd><code>sy</code> - the y sheer</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
-<section class="detail" id="forward(float,float)">
-<h3>forward</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">forward</span><wbr><span class="parameters">(float&nbsp;x,
+<section class="detail" id="multiply(float,float)">
+<h3>multiply</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">multiply</span><wbr><span class="parameters">(float&nbsp;x,
  float&nbsp;y)</span></div>
+<div class="block">Multiplies the <a href="AffineTransform.html" title="class in technology.sola.engine.graphics"><code>AffineTransform</code></a> with a point (x, y).</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>x</code> - the x coordinate</dd>
+<dd><code>y</code> - the y coordinate</dd>
+<dt>Returns:</dt>
+<dd>a <code>Vector2D</code> of the transform multiplied with the point</dd>
+</dl>
 </section>
 </li>
 <li>
-<section class="detail" id="backward(float,float)">
-<h3>backward</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">backward</span><wbr><span class="parameters">(float&nbsp;x,
+<section class="detail" id="multiplyInverse(float,float)">
+<h3>multiplyInverse</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">multiplyInverse</span><wbr><span class="parameters">(float&nbsp;x,
  float&nbsp;y)</span></div>
+<div class="block">Multiplies the inverse of the <a href="AffineTransform.html" title="class in technology.sola.engine.graphics"><code>AffineTransform</code></a> with a point (x, y).</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>x</code> - the x coordinate</dd>
+<dd><code>y</code> - the y coordinate</dd>
+<dt>Returns:</dt>
+<dd>a <code>Vector2D</code> of the inverse transform multiplied with the point</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -218,6 +283,14 @@ loadScripts(document, 'script');</script>
 <h3>getBoundingBoxForTransform</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></span>&nbsp;<span class="element-name">getBoundingBoxForTransform</span><wbr><span class="parameters">(int&nbsp;width,
  int&nbsp;height)</span></div>
+<div class="block">Returns the bounding box for this transform applied to a rectangle with width and height.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>width</code> - the original width of the rectangle</dd>
+<dd><code>height</code> - the original height of the rectangle</dd>
+<dt>Returns:</dt>
+<dd>the bounding box after transform is applied</dd>
+</dl>
 </section>
 </li>
 </ul>
