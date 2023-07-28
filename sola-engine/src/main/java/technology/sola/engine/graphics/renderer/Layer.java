@@ -9,7 +9,7 @@ public class Layer {
   public static final int DEFAULT_ORDER = 0;
   private final PriorityQueue<OrdererDrawItem> drawQueue;
   private final String name;
-  private boolean isEnabled = true;
+  private boolean isActive = true;
 
   /**
    * Creates a Layer with an identifier name.
@@ -46,7 +46,7 @@ public class Layer {
    * @param renderer the {@code Renderer} to draw to
    */
   public void draw(Renderer renderer) {
-    if (isEnabled) {
+    if (isActive) {
       for (DrawItem drawItem : drawQueue) {
         drawItem.draw(renderer);
       }
@@ -56,21 +56,21 @@ public class Layer {
   }
 
   /**
-   * Return if this layer is enabled or not. A layer that is not enabled will not render.
+   * Return if this layer is active or not. A layer that is not active will not render any of its {@link DrawItem}s.
    *
-   * @return true if enabled
+   * @return true if active
    */
-  public boolean isEnabled() {
-    return isEnabled;
+  public boolean isActive() {
+    return isActive;
   }
 
   /**
-   * Sets the enabled state of this layer.
+   * Sets the active state of this layer.
    *
-   * @param isEnabled the new enabled state
+   * @param isActive the new active state
    */
-  public void setEnabled(boolean isEnabled) {
-    this.isEnabled = isEnabled;
+  public void setActive(boolean isActive) {
+    this.isActive = isActive;
   }
 
   /**

@@ -168,10 +168,10 @@ public class RenderingExample extends Sola {
 
       if (keyboardInput.isKeyPressed(Key.H)) {
         Layer blockLayer = platform.getRenderer().getLayer("blocks");
-        blockLayer.setEnabled(!blockLayer.isEnabled());
+        blockLayer.setActive(!blockLayer.isActive());
 
         Layer backgroundLayer = platform.getRenderer().getLayer("background");
-        backgroundLayer.setEnabled(!backgroundLayer.isEnabled());
+        backgroundLayer.setActive(!backgroundLayer.isActive());
       }
     }
   }
