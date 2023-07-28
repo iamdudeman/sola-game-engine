@@ -216,7 +216,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
     for (int x = (int) transformBoundingBox.min().x(); x < transformBoundingBox.max().x(); x++) {
       for (int y = (int) transformBoundingBox.min().y(); y < transformBoundingBox.max().y(); y++) {
-        Vector2D newPosition = affineTransform.backward(x, y);
+        Vector2D newPosition = affineTransform.multiplyInverse(x, y);
         int pixel = solaImage.getPixel(newPosition.x(), newPosition.y());
 
         setPixel(x, y, pixel);

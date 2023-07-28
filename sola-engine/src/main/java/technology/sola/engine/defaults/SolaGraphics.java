@@ -112,7 +112,7 @@ public class SolaGraphics {
         .invert();
     }
 
-    return cachedScreenToWorldMatrix.forward(screenCoordinate.x(), screenCoordinate.y());
+    return cachedScreenToWorldMatrix.multiply(screenCoordinate);
   }
 
   private TransformComponent getCameraTransform() {
