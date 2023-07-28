@@ -17,9 +17,11 @@ public class Matrix3D {
     IDENTITY_MATRIX.matrix[0][0] = 1f;
     IDENTITY_MATRIX.matrix[1][0] = 0f;
     IDENTITY_MATRIX.matrix[2][0] = 0f;
+    // next row
     IDENTITY_MATRIX.matrix[0][1] = 0f;
     IDENTITY_MATRIX.matrix[1][1] = 1f;
     IDENTITY_MATRIX.matrix[2][1] = 0f;
+    // next row
     IDENTITY_MATRIX.matrix[0][2] = 0f;
     IDENTITY_MATRIX.matrix[1][2] = 0f;
     IDENTITY_MATRIX.matrix[2][2] = 1f;
@@ -35,9 +37,11 @@ public class Matrix3D {
     result.matrix[0][0] = 1f;
     result.matrix[1][0] = 0f;
     result.matrix[2][0] = tx;
+    // next row
     result.matrix[0][1] = 0f;
     result.matrix[1][1] = 1f;
     result.matrix[2][1] = ty;
+    // next row
     result.matrix[0][2] = 0f;
     result.matrix[1][2] = 0f;
     result.matrix[2][2] = 1f;
@@ -55,9 +59,11 @@ public class Matrix3D {
     result.matrix[0][0] = sx;
     result.matrix[1][0] = 0f;
     result.matrix[2][0] = 0f;
+    // next row
     result.matrix[0][1] = 0f;
     result.matrix[1][1] = sy;
     result.matrix[2][1] = 0f;
+    // next row
     result.matrix[0][2] = 0f;
     result.matrix[1][2] = 0f;
     result.matrix[2][2] = 1f;
@@ -71,9 +77,11 @@ public class Matrix3D {
     result.matrix[0][0] = (float) Math.cos(radians);
     result.matrix[1][0] = (float) Math.sin(radians);
     result.matrix[2][0] = 0f;
+    // next row
     result.matrix[0][1] = (float) -Math.sin(radians);
     result.matrix[1][1] = (float) Math.cos(radians);
     result.matrix[2][1] = 0f;
+    // next row
     result.matrix[0][2] = 0f;
     result.matrix[1][2] = 0f;
     result.matrix[2][2] = 1f;
@@ -87,9 +95,11 @@ public class Matrix3D {
     result.matrix[0][0] = 1f;
     result.matrix[1][0] = sx;
     result.matrix[2][0] = 0f;
+    // next row
     result.matrix[0][1] = sy;
     result.matrix[1][1] = 1f;
     result.matrix[2][1] = 0f;
+    // next row
     result.matrix[0][2] = 0f;
     result.matrix[1][2] = 0f;
     result.matrix[2][2] = 1f;
@@ -152,9 +162,11 @@ public class Matrix3D {
     result.matrix[0][0] = (matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1]) * inverseDeterminant;
     result.matrix[1][0] = (matrix[2][0] * matrix[1][2] - matrix[1][0] * matrix[2][2]) * inverseDeterminant;
     result.matrix[2][0] = (matrix[1][0] * matrix[2][1] - matrix[2][0] * matrix[1][1]) * inverseDeterminant;
+    // next row
     result.matrix[0][1] = (matrix[2][1] * matrix[0][2] - matrix[0][1] * matrix[2][2]) * inverseDeterminant;
     result.matrix[1][1] = (matrix[0][0] * matrix[2][2] - matrix[2][0] * matrix[0][2]) * inverseDeterminant;
     result.matrix[2][1] = (matrix[0][1] * matrix[2][0] - matrix[0][0] * matrix[2][1]) * inverseDeterminant;
+    // next row
     result.matrix[0][2] = (matrix[0][1] * matrix[1][2] - matrix[0][2] * matrix[1][1]) * inverseDeterminant;
     result.matrix[1][2] = (matrix[0][2] * matrix[1][0] - matrix[0][0] * matrix[1][2]) * inverseDeterminant;
     result.matrix[2][2] = (matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]) * inverseDeterminant;
