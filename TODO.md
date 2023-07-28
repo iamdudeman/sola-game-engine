@@ -15,8 +15,10 @@
 
 ## TODO List
 
+* FontStyle should be changed to just Normal and Italic
+    * Add FontWeight for Normal and Bold
 * Move custom build "distribution" tasks to a gradle plugin
-  * sola game template should use these plugins as well
+    * sola game template should use these plugins as well
 * Rendering
     * Ability to change line width when drawing
     * Implement more BlendModes

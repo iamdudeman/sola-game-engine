@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * AssetHandle is a handle to an {@link Asset} that may or may not be loaded yet.
+ *
+ * @param <T> the type of the asset
+ */
 public class AssetHandle<T extends Asset> {
   private T asset;
   private List<Consumer<T>> onLoadSubscribers;
