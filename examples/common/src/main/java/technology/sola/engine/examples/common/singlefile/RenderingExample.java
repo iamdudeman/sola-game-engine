@@ -174,11 +174,6 @@ public class RenderingExample extends Sola {
         backgroundLayer.setEnabled(!backgroundLayer.isEnabled());
       }
     }
-
-    @Override
-    public int getOrder() {
-      return 0;
-    }
   }
 
   private World createWorld() {

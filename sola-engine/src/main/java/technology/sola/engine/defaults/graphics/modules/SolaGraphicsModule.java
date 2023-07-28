@@ -78,8 +78,8 @@ public abstract class SolaGraphicsModule<V extends ViewEntry> {
    * @return the resulting {@link TransformComponent}
    */
   protected TransformComponent getTransformForAppliedCamera(TransformComponent entityTransform, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
-    Vector2D entityScale = cameraScaleTransform.forward(entityTransform.getScaleX(), entityTransform.getScaleY());
-    Vector2D entityTranslation = cameraTranslationTransform.forward(entityTransform.getX(), entityTransform.getY());
+    Vector2D entityScale = cameraScaleTransform.multiply(entityTransform.getScaleX(), entityTransform.getScaleY());
+    Vector2D entityTranslation = cameraTranslationTransform.multiply(entityTransform.getX(), entityTransform.getY());
 
     return new TransformComponent(
       entityTranslation.x(), entityTranslation.y(), entityScale.x(), entityScale.y()

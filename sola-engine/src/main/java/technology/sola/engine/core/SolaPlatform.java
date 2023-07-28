@@ -81,6 +81,11 @@ public abstract class SolaPlatform {
   }
 
   /**
+   * @return the platform's identifier
+   */
+  public abstract SolaPlatformIdentifier getIdentifier();
+
+  /**
    * Registers an on key pressed listener.
    *
    * @param keyEventConsumer the method called when key is pressed

@@ -15,8 +15,11 @@
 
 ## TODO List
 
-* Add ability to have a platform identifier if platform specific logic is desired
-    * Possibly an enum with [Swing, JavaFx, Browser, Custom]?
+* Add ability to disable SolaGraphicsModules
+* FontStyle should be changed to just Normal and Italic
+    * Add FontWeight for Normal and Bold
+* Move custom build "distribution" tasks to a gradle plugin
+    * sola game template should use these plugins as well
 * Rendering
     * Ability to change line width when drawing
     * Implement more BlendModes
