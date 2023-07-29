@@ -10,10 +10,11 @@ import technology.sola.math.linear.Matrix3D;
 
 public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
   public static final int ORDER = 99;
+  private Color baseDarkness;
 
-  private Color baseDarkness = new Color(20, 20, 20);
-
-  // todo need some sort of "base level darkness"
+  public ScreenSpaceLightMapGraphicsModule(Color baseDarkness) {
+    this.baseDarkness = baseDarkness;
+  }
 
   // todo note should add overlapping lights
 
@@ -33,5 +34,13 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
   @Override
   public int getOrder() {
     return ORDER;
+  }
+
+  public Color getBaseDarkness() {
+    return baseDarkness;
+  }
+
+  public void setBaseDarkness(Color baseDarkness) {
+    this.baseDarkness = baseDarkness;
   }
 }

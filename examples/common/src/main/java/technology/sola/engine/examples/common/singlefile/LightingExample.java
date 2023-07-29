@@ -36,7 +36,7 @@ public class LightingExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGraphics(true).useBackgroundColor(Color.BLACK);
+    defaultsConfigurator.useGraphics().useLighting().useBackgroundColor(Color.BLACK);
 
     solaEcs.addSystem(new PlayerSystem());
     solaEcs.setWorld(buildWorld());
