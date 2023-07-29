@@ -19,6 +19,9 @@
     * Add FontWeight for Normal and Bold
 * Move custom build "distribution" tasks to a gradle plugin
     * sola game template should use these plugins as well
+* Consider some sort of lighting mechanism implementation
+    * Maybe this can be a GraphicsModule with a higher order paired with a new LightComponent?
+    * LightComponent could maybe have a radius, direction, and flicker data?
 * Rendering
     * Ability to change line width when drawing
     * Implement more BlendModes
@@ -55,7 +58,6 @@
             * Switch JsMouseUtils to mouse events instead of pointer events
 * Android Platform
     * Implement
-* Consider some sort of lighting mechanism implementation
 * Consider adding a "debug console" option
     * While open can toggle things like render debug outlines and debug spacial hashmap stuff
     * Could also maybe allow adding custom commands
