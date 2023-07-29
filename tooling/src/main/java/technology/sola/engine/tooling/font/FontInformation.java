@@ -26,7 +26,14 @@ class FontInformation {
     this.fontFileName = fontFamily + "_" + fontStyle + "_" + fontSize + ".png";
     this.fontInfoFileName = fontFamily + "_" + fontStyle + "_" + fontSize + ".json";
 
-    this.font = new Font(fontFamily, fontStyle.getCode(), fontSize);
+    int fontStyleCode = switch (fontStyle) {
+      case NORMAL -> Font.PLAIN;
+      case BOLD -> Font.BOLD;
+      case ITALIC -> Font.ITALIC;
+      case BOLD_ITALIC -> Font.BOLD | Font.ITALIC;
+    };
+
+    this.font = new Font(fontFamily, fontStyleCode, fontSize);
     var bufferedImage = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
 
     graphics2D = (Graphics2D) bufferedImage.getGraphics();
