@@ -7,7 +7,7 @@ import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaWithDefaults;
-import technology.sola.engine.defaults.graphics.modules.SpriteEntityGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.ScreenSpaceLightMapGraphicsModule;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.LightComponent;
@@ -23,7 +23,7 @@ import java.util.Random;
  *
  * <ul>
  *   <li>{@link LightComponent}</li>
- *   <li>{@link technology.sola.engine.defaults.graphics.modules.ScreenSpaceLightMapGraphicsModule}</li>
+ *   <li>{@link ScreenSpaceLightMapGraphicsModule}</li>
  * </ul>
  */
 public class LightingExample extends SolaWithDefaults {
@@ -88,18 +88,17 @@ public class LightingExample extends SolaWithDefaults {
   }
 
   private class PlayerSystem extends EcsSystem {
-    private static final int speed = 2;
 
     @Override
     public void update(World world, float deltaTime) {
+      final int speed = 2;
       Entity playerEntity = world.findEntityByName("player");
       TransformComponent transformComponent = playerEntity.getComponent(TransformComponent.class);
 
-      if (keyboardInput.isKeyPressed(Key.O)) {
-        solaGraphics.activateGraphicsModule(SpriteEntityGraphicsModule.class);
-      }
-      if (keyboardInput.isKeyPressed(Key.P)) {
-        solaGraphics.deactivateGraphicsModule(SpriteEntityGraphicsModule.class);
+      if (keyboardInput.isKeyPressed(Key.SPACE)) {
+        ScreenSpaceLightMapGraphicsModule screenSpaceLightMapGraphicsModule = solaGraphics.getGraphicsModule(ScreenSpaceLightMapGraphicsModule.class);
+
+        screenSpaceLightMapGraphicsModule.setActive(!screenSpaceLightMapGraphicsModule.isActive());
       }
       if (keyboardInput.isKeyHeld(Key.W)) {
         transformComponent.setY(transformComponent.getY() - speed);

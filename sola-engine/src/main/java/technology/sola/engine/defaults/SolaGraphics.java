@@ -57,29 +57,21 @@ public class SolaGraphics {
   }
 
   /**
-   * Activates {@link SolaGraphicsModule} with specified class.
+   * Gets a {@link SolaGraphicsModule} that has been added or else null.
    *
-   * @param solaGraphicsModuleClass the class of graphics module to activate
+   * @param solaGraphicsModuleClass the class of the SolaGraphicsModule
+   * @param <T>                     the type of graphics module
+   * @return the graphics module
    */
-  public void activateGraphicsModule(Class<? extends SolaGraphicsModule> solaGraphicsModuleClass) {
+  @SuppressWarnings("unchecked")
+  public <T extends SolaGraphicsModule> T getGraphicsModule(Class<T> solaGraphicsModuleClass) {
     for (var graphicsModule : graphicsModuleList) {
       if (graphicsModule.getClass() == solaGraphicsModuleClass) {
-        graphicsModule.setActive(true);
+        return (T) graphicsModule;
       }
     }
-  }
 
-  /**
-   * Deactivates {@link SolaGraphicsModule} with specified class.
-   *
-   * @param solaGraphicsModuleClass the class of graphics module to deactivate
-   */
-  public void deactivateGraphicsModule(Class<? extends SolaGraphicsModule> solaGraphicsModuleClass) {
-    for (var graphicsModule : graphicsModuleList) {
-      if (graphicsModule.getClass() == solaGraphicsModuleClass) {
-        graphicsModule.setActive(false);
-      }
-    }
+    return null;
   }
 
   /**
