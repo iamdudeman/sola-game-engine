@@ -20,6 +20,9 @@ import technology.sola.math.linear.Vector2D;
  * It will render spacial hashmap boundaries and colliders for {@link Entity} that have a {@link ColliderComponent}.
  */
 public class DebugGraphicsModule extends SolaGraphicsModule<View2Entry<ColliderComponent, TransformComponent>> {
+  /**
+   * The render order for the DebugGraphicsModule.
+   */
   public static final int ORDER = 999;
   private final CollisionDetectionSystem collisionDetectionSystem;
 
