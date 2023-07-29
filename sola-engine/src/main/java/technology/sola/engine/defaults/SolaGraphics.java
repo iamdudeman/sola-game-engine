@@ -12,9 +12,10 @@ import technology.sola.engine.graphics.system.TransformAnimatorSystem;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.List;
 
 /**
  * SolaGraphics provides default rendering capabilities while also allowing for customization via {@link SolaGraphicsModule}s.
@@ -22,7 +23,7 @@ import java.util.PriorityQueue;
 public class SolaGraphics {
   private static final TransformComponent DEFAULT_CAMERA_TRANSFORM = new TransformComponent();
   private final SolaEcs solaEcs;
-  private final PriorityQueue<SolaGraphicsModule<?>> graphicsModuleQueue = new PriorityQueue<>();
+  private final List<SolaGraphicsModule<?>> graphicsModuleList = new ArrayList<>();
   private Matrix3D cachedScreenToWorldMatrix = null;
   private float previousCameraX = 0;
   private float previousCameraY = 0;
@@ -43,20 +44,14 @@ public class SolaGraphics {
   }
 
   /**
-   * @return the ordered queue of current {@link SolaGraphicsModule}s
-   */
-  public PriorityQueue<SolaGraphicsModule<?>> getGraphicsModuleQueue() {
-    return graphicsModuleQueue;
-  }
-
-  /**
    * Adds {@link SolaGraphicsModule}s to be rendered.
    *
    * @param graphicsModules the modules to add
    */
   public void addGraphicsModules(SolaGraphicsModule<?>... graphicsModules) {
     if (graphicsModules != null) {
-      graphicsModuleQueue.addAll(Arrays.asList(graphicsModules));
+      graphicsModuleList.addAll(Arrays.asList(graphicsModules));
+      graphicsModuleList.sort(SolaGraphicsModule::compareTo);
     }
   }
 
@@ -83,7 +78,7 @@ public class SolaGraphics {
       .multiply(cameraScaleTransform);
     World world = solaEcs.getWorld();
 
-    for (var graphicsModule : graphicsModuleQueue) {
+    for (var graphicsModule : graphicsModuleList) {
       graphicsModule.render(renderer, world, cameraScaleTransform, cameraTranslationTransform);
     }
   }
