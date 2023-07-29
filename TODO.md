@@ -1,5 +1,10 @@
 # sola-game-engine TODO list
 
+* Consider some sort of lighting mechanism implementation
+    * Maybe this can be a GraphicsModule with a higher order paired with a new LightComponent?
+    * LightComponent could maybe have a radius, direction, and flicker data?
+    * Consider Simple screen space lightmap implementation
+
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -17,9 +22,6 @@
 
 * Move custom build "distribution" tasks to a gradle plugin
     * sola game template should use these plugins as well
-* Consider some sort of lighting mechanism implementation
-    * Maybe this can be a GraphicsModule with a higher order paired with a new LightComponent?
-    * LightComponent could maybe have a radius, direction, and flicker data?
 * Rendering
     * Ability to change line width when drawing
     * Implement more BlendModes
