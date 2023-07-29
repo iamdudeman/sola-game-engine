@@ -44,13 +44,6 @@ public class SolaGraphics {
   }
 
   /**
-   * @return the list of current {@link SolaGraphicsModule}s
-   */
-  public List<SolaGraphicsModule<?>> getGraphicsModuleList() {
-    return graphicsModuleList;
-  }
-
-  /**
    * Adds {@link SolaGraphicsModule}s to be rendered.
    *
    * @param graphicsModules the modules to add
@@ -58,6 +51,7 @@ public class SolaGraphics {
   public void addGraphicsModules(SolaGraphicsModule<?>... graphicsModules) {
     if (graphicsModules != null) {
       graphicsModuleList.addAll(Arrays.asList(graphicsModules));
+      graphicsModuleList.sort(SolaGraphicsModule::compareTo);
     }
   }
 

@@ -168,10 +168,10 @@ public class RenderingExample extends Sola {
 
       if (keyboardInput.isKeyPressed(Key.H)) {
         Layer blockLayer = platform.getRenderer().getLayer("blocks");
-        blockLayer.setEnabled(!blockLayer.isEnabled());
+        blockLayer.setActive(!blockLayer.isActive());
 
         Layer backgroundLayer = platform.getRenderer().getLayer("background");
-        backgroundLayer.setEnabled(!backgroundLayer.isEnabled());
+        backgroundLayer.setActive(!backgroundLayer.isActive());
       }
     }
   }
@@ -198,7 +198,7 @@ public class RenderingExample extends Sola {
     );
 
     world.createEntity(
-      new LayerComponent("moving_stuff"),
+      new LayerComponent("moving_stuff", 10),
       new TransformComponent(0, 0),
       new SpriteComponent("test", "stick_figure"),
       new BlendModeComponent(BlendMode.MASK),
@@ -206,7 +206,6 @@ public class RenderingExample extends Sola {
     );
 
     world.createEntity()
-      .addComponent(new LayerComponent("moving_stuff"))
       .addComponent(new TransformComponent(400, 530, 1, 1))
       .addComponent(new SpriteComponent("test", "blue"));
     world.createEntity()

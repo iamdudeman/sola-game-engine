@@ -1,15 +1,19 @@
 package technology.sola.engine.graphics.renderer;
 
-import java.util.PriorityQueue;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Layers contain a queue of {@link DrawItem} to ensure a particular draw order.
  */
 public class Layer {
+  /**
+   * The default order for a {@link DrawItem} that is added to this Layer.
+   */
   public static final int DEFAULT_ORDER = 0;
-  private final PriorityQueue<OrdererDrawItem> drawQueue;
+  private final List<OrdererDrawItem> drawItems;
   private final String name;
-  private boolean isEnabled = true;
+  private boolean isActive = true;
 
   /**
    * Creates a Layer with an identifier name.
@@ -18,7 +22,7 @@ public class Layer {
    */
   public Layer(String name) {
     this.name = name;
-    drawQueue = new PriorityQueue<>();
+    drawItems = new LinkedList<>();
   }
 
   /**
@@ -37,7 +41,19 @@ public class Layer {
    * @param order    higher numbers will be drawn later
    */
   public void add(DrawItem drawItem, int order) {
-    drawQueue.add(new OrdererDrawItem(drawItem, order));
+    if (isActive) {
+      int insertIndex = 0;
+
+      for (var orderedDrawItem : drawItems) {
+        if (order < orderedDrawItem.order) {
+          break;
+        }
+
+        insertIndex++;
+      }
+
+      drawItems.add(insertIndex, new OrdererDrawItem(drawItem, order));
+    }
   }
 
   /**
@@ -46,31 +62,31 @@ public class Layer {
    * @param renderer the {@code Renderer} to draw to
    */
   public void draw(Renderer renderer) {
-    if (isEnabled) {
-      for (DrawItem drawItem : drawQueue) {
+    if (isActive) {
+      for (DrawItem drawItem : drawItems) {
         drawItem.draw(renderer);
       }
     }
 
-    drawQueue.clear();
+    drawItems.clear();
   }
 
   /**
-   * Return if this layer is enabled or not. A layer that is not enabled will not render.
+   * Return if this layer is active or not. A layer that is not active will not render any of its {@link DrawItem}s.
    *
-   * @return true if enabled
+   * @return true if active
    */
-  public boolean isEnabled() {
-    return isEnabled;
+  public boolean isActive() {
+    return isActive;
   }
 
   /**
-   * Sets the enabled state of this layer.
+   * Sets the active state of this layer.
    *
-   * @param isEnabled the new enabled state
+   * @param isActive the new active state
    */
-  public void setEnabled(boolean isEnabled) {
-    this.isEnabled = isEnabled;
+  public void setActive(boolean isActive) {
+    this.isActive = isActive;
   }
 
   /**
@@ -90,8 +106,8 @@ public class Layer {
     }
 
     @Override
-    public int compareTo(OrdererDrawItem o) {
-      return Integer.compare(this.order, o.order);
+    public int compareTo(OrdererDrawItem ordererDrawItem) {
+      return Integer.compare(this.order, ordererDrawItem.order);
     }
   }
 }

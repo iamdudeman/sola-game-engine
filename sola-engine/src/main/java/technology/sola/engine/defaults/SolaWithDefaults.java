@@ -99,7 +99,7 @@ public abstract class SolaWithDefaults extends Sola {
         this.isDebug = true;
 
         if (solaGraphics != null && solaPhysics != null) {
-          solaGraphics.getGraphicsModuleList().add(new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
+          solaGraphics.addGraphicsModules(new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
         }
       }
 
@@ -141,7 +141,7 @@ public abstract class SolaWithDefaults extends Sola {
         solaEcs.addSystems(solaPhysics.getSystems());
 
         if (isDebug && solaGraphics != null) {
-          solaGraphics.getGraphicsModuleList().add(new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
+          solaGraphics.addGraphicsModules(new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
         }
       }
 
@@ -176,12 +176,14 @@ public abstract class SolaWithDefaults extends Sola {
 
         AssetLoader<SpriteSheet> spriteSheetAssetLoader = assetLoaderProvider.get(SpriteSheet.class);
 
-        solaGraphics.getGraphicsModuleList().add(new CircleGraphicsModule());
-        solaGraphics.getGraphicsModuleList().add(new RectangleGraphicsModule());
-        solaGraphics.getGraphicsModuleList().add(new SpriteGraphicsModule(spriteSheetAssetLoader));
+        solaGraphics.addGraphicsModules(
+          new CircleGraphicsModule(),
+          new RectangleGraphicsModule(),
+          new SpriteGraphicsModule(spriteSheetAssetLoader)
+        );
 
         if (isDebug && solaPhysics != null) {
-          solaGraphics.getGraphicsModuleList().add(new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
+          solaGraphics.addGraphicsModules(new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
         }
 
         rebuildRenderFunction();
