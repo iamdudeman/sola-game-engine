@@ -93,7 +93,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static final int</code></div>
 <div class="col-second even-row-color"><code><a href="#DEFAULT_ORDER" class="member-name-link">DEFAULT_ORDER</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">The default order for a <a href="DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> that is added to this Layer.</div>
+</div>
 </div>
 </section>
 </li>
@@ -143,14 +145,14 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getName()" class="member-name-link">getName</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEnabled()" class="member-name-link">isEnabled</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isActive()" class="member-name-link">isActive</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Return if this layer is enabled or not.</div>
+<div class="block">Return if this layer is active or not.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setEnabled(boolean)" class="member-name-link">setEnabled</a><wbr>(boolean&nbsp;isEnabled)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setActive(boolean)" class="member-name-link">setActive</a><wbr>(boolean&nbsp;isActive)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Sets the enabled state of this layer.</div>
+<div class="block">Sets the active state of this layer.</div>
 </div>
 </div>
 </div>
@@ -173,6 +175,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="DEFAULT_ORDER">
 <h3>DEFAULT_ORDER</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">DEFAULT_ORDER</span></div>
+<div class="block">The default order for a <a href="DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> that is added to this Layer.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -246,24 +249,24 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="isEnabled()">
-<h3>isEnabled</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isEnabled</span>()</div>
-<div class="block">Return if this layer is enabled or not. A layer that is not enabled will not render.</div>
+<section class="detail" id="isActive()">
+<h3>isActive</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isActive</span>()</div>
+<div class="block">Return if this layer is active or not. A layer that is not active will not render any of its <a href="DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a>s.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>true if enabled</dd>
+<dd>true if active</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="setEnabled(boolean)">
-<h3>setEnabled</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setEnabled</span><wbr><span class="parameters">(boolean&nbsp;isEnabled)</span></div>
-<div class="block">Sets the enabled state of this layer.</div>
+<section class="detail" id="setActive(boolean)">
+<h3>setActive</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setActive</span><wbr><span class="parameters">(boolean&nbsp;isActive)</span></div>
+<div class="block">Sets the active state of this layer.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>isEnabled</code> - the new enabled state</dd>
+<dd><code>isActive</code> - the new active state</dd>
 </dl>
 </section>
 </li>

@@ -44,13 +44,13 @@ loadScripts(document, 'script');</script>
 <ul class="sub-nav-list">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field-summary">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor-summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-summary">Method</a></li>
 </ul>
 <ul class="sub-nav-list">
 <li>Detail:&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field-detail">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor-detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-detail">Method</a></li>
 </ul>
@@ -77,6 +77,10 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>All Implemented Interfaces:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;<a href="SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaGraphicsModule</a>&lt;?&gt;&gt;</code></dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">DebugGraphicsModule</span>
 <span class="extends-implements">extends <a href="SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaGraphicsModule</a>&lt;technology.sola.ecs.view.View2Entry&lt;<a href="../../../physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&gt;</span></div>
@@ -85,6 +89,23 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="summary">
 <ul class="summary-list">
+<!-- =========== FIELD SUMMARY =========== -->
+<li>
+<section class="field-summary" id="field-summary">
+<h2>Field Summary</h2>
+<div class="caption"><span>Fields</span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Field</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>static final int</code></div>
+<div class="col-second even-row-color"><code><a href="#ORDER" class="member-name-link">ORDER</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">The render order for the DebugGraphicsModule.</div>
+</div>
+</div>
+</section>
+</li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <li>
 <section class="constructor-summary" id="constructor-summary">
@@ -111,25 +132,30 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>technology.sola.ecs.view.View&lt;technology.sola.ecs.view.View2Entry&lt;<a href="../../../physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getViewToRender(technology.sola.ecs.World)" class="member-name-link">getViewToRender</a><wbr>(technology.sola.ecs.World&nbsp;world)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrder()" class="member-name-link">getOrder</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Gets the order of this graphics module.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>technology.sola.ecs.view.View&lt;technology.sola.ecs.view.View2Entry&lt;<a href="../../../physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getViewToRender(technology.sola.ecs.World)" class="member-name-link">getViewToRender</a><wbr>(technology.sola.ecs.World&nbsp;world)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a <code>View</code> of <code>Entity</code> that need to be rendered via
  <a href="SolaGraphicsModule.html#renderMethod(technology.sola.engine.graphics.renderer.Renderer,V,technology.sola.engine.core.component.TransformComponent)"><code>SolaGraphicsModule.renderMethod(Renderer, V, TransformComponent)</code></a></div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.World,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)" class="member-name-link">render</a><wbr>(<a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.World,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)" class="member-name-link">render</a><wbr>(<a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
  technology.sola.ecs.World&nbsp;world,
  <a href="../../../../math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a>&nbsp;cameraScaleTransform,
  <a href="../../../../math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a>&nbsp;cameraTranslationTransform)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The main render method for a graphics module that is called once per frame.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#renderMethod(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderMethod</a><wbr>(<a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#renderMethod(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderMethod</a><wbr>(<a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
  technology.sola.ecs.view.View2Entry&lt;<a href="../../../physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&nbsp;viewEntry,
  <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;cameraModifiedEntityTransform)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Called on each <code>Entity</code> to render it.</div>
 </div>
 </div>
@@ -137,7 +163,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule">Methods inherited from class&nbsp;technology.sola.engine.defaults.graphics.modules.<a href="SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaGraphicsModule</a></h3>
-<code><a href="SolaGraphicsModule.html#getTransformForAppliedCamera(technology.sola.engine.core.component.TransformComponent,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)">getTransformForAppliedCamera</a></code></div>
+<code><a href="SolaGraphicsModule.html#compareTo(technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule)">compareTo</a>, <a href="SolaGraphicsModule.html#getTransformForAppliedCamera(technology.sola.engine.core.component.TransformComponent,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)">getTransformForAppliedCamera</a>, <a href="SolaGraphicsModule.html#isActive()">isActive</a>, <a href="SolaGraphicsModule.html#setActive(boolean)">setActive</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
@@ -147,6 +173,29 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="details">
 <ul class="details-list">
+<!-- ============ FIELD DETAIL =========== -->
+<li>
+<section class="field-details" id="field-detail">
+<h2>Field Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="ORDER">
+<h3>ORDER</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">ORDER</span></div>
+<div class="block">The render order for the DebugGraphicsModule.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="../../../../../../../constant-values.html#technology.sola.engine.defaults.graphics.modules.DebugGraphicsModule.ORDER">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+</ul>
+</section>
+</li>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <li>
 <section class="constructor-details" id="constructor-detail">
@@ -225,6 +274,20 @@ loadScripts(document, 'script');</script>
 <dd><code>renderer</code> - tbe <a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> instance</dd>
 <dd><code>viewEntry</code> - the <code>ViewEntry</code> containing the <code>Entity</code> to render</dd>
 <dd><code>cameraModifiedEntityTransform</code> - a <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> with the camera's transform applied to the entity's</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getOrder()">
+<h3>getOrder</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getOrder</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="SolaGraphicsModule.html#getOrder()">SolaGraphicsModule</a></code></span></div>
+<div class="block">Gets the order of this graphics module. A higher value means it will be rendered on top.</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="SolaGraphicsModule.html#getOrder()">getOrder</a></code>&nbsp;in class&nbsp;<code><a href="SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaGraphicsModule</a>&lt;technology.sola.ecs.view.View2Entry&lt;<a href="../../../physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&gt;</code></dd>
+<dt>Returns:</dt>
+<dd>the order of this graphics module</dd>
 </dl>
 </section>
 </li>

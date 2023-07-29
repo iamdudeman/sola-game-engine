@@ -82,6 +82,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public static class </span><span class="element-name type-name-label">BulkAssetLoader.BulkAssetHandle</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">BulkAssetHandle holds the collection of <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a>s that have been loaded by a <a href="BulkAssetLoader.html" title="class in technology.sola.engine.assets"><code>BulkAssetLoader</code></a>. These
+ are accessed via the onComplete method where callbacks can be added.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -98,7 +100,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onComplete(java.util.function.Consumer)" class="member-name-link">onComplete</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="Asset.html" title="interface in technology.sola.engine.assets">Asset</a>[]&gt;&nbsp;callback)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Method called when bulk asset loading has completed.</div>
+</div>
 </div>
 </div>
 </div>
@@ -120,6 +124,12 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="onComplete(java.util.function.Consumer)">
 <h3>onComplete</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onComplete</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="Asset.html" title="interface in technology.sola.engine.assets">Asset</a>[]&gt;&nbsp;callback)</span></div>
+<div class="block">Method called when bulk asset loading has completed. The array of <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a>s that were loaded are passed
+ into the callback.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>callback</code> - called when loading finished with the loaded assets.</dd>
+</dl>
 </section>
 </li>
 </ul>

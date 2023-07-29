@@ -78,6 +78,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">BulkAssetLoader</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">BulkAssetLoader handles loading a collection of various <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a>s proving a handle for the collection with
+ callbacks for when all the assets have finished loading.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -92,7 +94,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static class&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="BulkAssetLoader.BulkAssetHandle.html" class="type-name-link" title="class in technology.sola.engine.assets">BulkAssetLoader.BulkAssetHandle</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">BulkAssetHandle holds the collection of <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a>s that have been loaded by a <a href="BulkAssetLoader.html" title="class in technology.sola.engine.assets"><code>BulkAssetLoader</code></a>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -105,7 +109,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.assets.AssetLoaderProvider)" class="member-name-link">BulkAssetLoader</a><wbr>(<a href="AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a BulkAssetLoader instance.</div>
+</div>
 </div>
 </section>
 </li>
@@ -124,10 +130,15 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addAsset(java.lang.Class,java.lang.String,java.lang.String)" class="member-name-link">addAsset</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="Asset.html" title="interface in technology.sola.engine.assets">Asset</a>&gt;&nbsp;assetClass,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;assetId,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Adds an <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> to be loaded.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="BulkAssetLoader.BulkAssetHandle.html" title="class in technology.sola.engine.assets">BulkAssetLoader.BulkAssetHandle</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#loadAll()" class="member-name-link">loadAll</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Starts loading all the <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a>s that have been added returning a <a href="BulkAssetLoader.BulkAssetHandle.html" title="class in technology.sola.engine.assets"><code>BulkAssetLoader.BulkAssetHandle</code></a> where callbacks
+ can be added to for being notified when loading finishes.</div>
+</div>
 </div>
 </div>
 </div>
@@ -149,6 +160,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(technology.sola.engine.assets.AssetLoaderProvider)">
 <h3>BulkAssetLoader</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">BulkAssetLoader</span><wbr><span class="parameters">(<a href="AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider)</span></div>
+<div class="block">Creates a BulkAssetLoader instance.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>assetLoaderProvider</code> - the <a href="AssetLoaderProvider.html" title="class in technology.sola.engine.assets"><code>AssetLoaderProvider</code></a></dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -165,12 +181,27 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="BulkAssetLoader.html" title="class in technology.sola.engine.assets">BulkAssetLoader</a></span>&nbsp;<span class="element-name">addAsset</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="Asset.html" title="interface in technology.sola.engine.assets">Asset</a>&gt;&nbsp;assetClass,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;assetId,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</span></div>
+<div class="block">Adds an <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> to be loaded.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>assetClass</code> - the class of the asset</dd>
+<dd><code>assetId</code> - the id of the asset</dd>
+<dd><code>path</code> - the path to the asset</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="loadAll()">
 <h3>loadAll</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="BulkAssetLoader.BulkAssetHandle.html" title="class in technology.sola.engine.assets">BulkAssetLoader.BulkAssetHandle</a></span>&nbsp;<span class="element-name">loadAll</span>()</div>
+<div class="block">Starts loading all the <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a>s that have been added returning a <a href="BulkAssetLoader.BulkAssetHandle.html" title="class in technology.sola.engine.assets"><code>BulkAssetLoader.BulkAssetHandle</code></a> where callbacks
+ can be added to for being notified when loading finishes.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the <code>BulkAssetHandle</code></dd>
+</dl>
 </section>
 </li>
 </ul>

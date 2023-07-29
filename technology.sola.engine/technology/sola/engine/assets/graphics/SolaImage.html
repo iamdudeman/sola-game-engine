@@ -50,7 +50,7 @@ loadScripts(document, 'script');</script>
 </ul>
 <ul class="sub-nav-list">
 <li>Detail:&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field-detail">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor-detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-detail">Method</a></li>
 </ul>
@@ -85,6 +85,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SolaImage</span>
 <span class="extends-implements">extends <a href="../../graphics/Canvas.html" title="class in technology.sola.engine.graphics">Canvas</a>
 implements <a href="../Asset.html" title="interface in technology.sola.engine.assets">Asset</a></span></div>
+<div class="block">SolaImage is an <a href="../Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> that holds pixel data for an image.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -92,6 +93,17 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
 <li>
 <section class="field-summary" id="field-summary">
 <h2>Field Summary</h2>
+<div class="caption"><span>Fields</span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Field</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>static final int</code></div>
+<div class="col-second even-row-color"><code><a href="#CACHE_SIZE" class="member-name-link">CACHE_SIZE</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">The number of cached resizes this image with hold.</div>
+</div>
+</div>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-technology.sola.engine.graphics.Canvas">Fields inherited from class&nbsp;technology.sola.engine.graphics.<a href="../../graphics/Canvas.html" title="class in technology.sola.engine.graphics">Canvas</a></h3>
 <code><a href="../../graphics/Canvas.html#height">height</a>, <a href="../../graphics/Canvas.html#pixels">pixels</a>, <a href="../../graphics/Canvas.html#width">width</a></code></div>
@@ -107,11 +119,15 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int)" class="member-name-link">SolaImage</a><wbr>(int&nbsp;width,
  int&nbsp;height)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates an empty image with width and height.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(int,int,int%5B%5D)" class="member-name-link">SolaImage</a><wbr>(int&nbsp;width,
  int&nbsp;height,
  int[]&nbsp;pixels)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Creates an image from source pixel array.</div>
+</div>
 </div>
 </section>
 </li>
@@ -131,20 +147,28 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
  int&nbsp;y,
  int&nbsp;width,
  int&nbsp;height)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a new <a href="SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> that is a sub-image of this <code>SolaImage</code>.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#resize(int,int)" class="member-name-link">resize</a><wbr>(int&nbsp;newWidth,
  int&nbsp;newHeight)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Resizes this image to a new width and height.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#scale(float,float)" class="member-name-link">scale</a><wbr>(float&nbsp;scaleX,
  float&nbsp;scaleY)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Scales this image by an x-axis and y-axis scale factor.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPixels(int,int,int%5B%5D)" class="member-name-link">setPixels</a><wbr>(int&nbsp;width,
  int&nbsp;height,
  int[]&nbsp;pixels)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Manually set the pixel data in this image.</div>
+</div>
 </div>
 </div>
 </div>
@@ -160,6 +184,29 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
 </section>
 <section class="details">
 <ul class="details-list">
+<!-- ============ FIELD DETAIL =========== -->
+<li>
+<section class="field-details" id="field-detail">
+<h2>Field Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="CACHE_SIZE">
+<h3>CACHE_SIZE</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">CACHE_SIZE</span></div>
+<div class="block">The number of cached resizes this image with hold.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="../../../../../../constant-values.html#technology.sola.engine.assets.graphics.SolaImage.CACHE_SIZE">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+</ul>
+</section>
+</li>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <li>
 <section class="constructor-details" id="constructor-detail">
@@ -170,6 +217,12 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
 <h3>SolaImage</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SolaImage</span><wbr><span class="parameters">(int&nbsp;width,
  int&nbsp;height)</span></div>
+<div class="block">Creates an empty image with width and height.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>width</code> - the width of the image</dd>
+<dd><code>height</code> - the height of the image</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -178,6 +231,13 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SolaImage</span><wbr><span class="parameters">(int&nbsp;width,
  int&nbsp;height,
  int[]&nbsp;pixels)</span></div>
+<div class="block">Creates an image from source pixel array.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>width</code> - the width of the image</dd>
+<dd><code>height</code> - the height of the image</dd>
+<dd><code>pixels</code> - the pixel data for the image</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -194,6 +254,13 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setPixels</span><wbr><span class="parameters">(int&nbsp;width,
  int&nbsp;height,
  int[]&nbsp;pixels)</span></div>
+<div class="block">Manually set the pixel data in this image.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>width</code> - the width of the image</dd>
+<dd><code>height</code> - the height of the image</dd>
+<dd><code>pixels</code> - the pixel data for the image</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -203,6 +270,16 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
  int&nbsp;y,
  int&nbsp;width,
  int&nbsp;height)</span></div>
+<div class="block">Creates a new <a href="SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> that is a sub-image of this <code>SolaImage</code>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>x</code> - the left most coordinate of the sub-image</dd>
+<dd><code>y</code> - the top most coordinate of the sub-image</dd>
+<dd><code>width</code> - the width of the sub-image</dd>
+<dd><code>height</code> - the height of the sub-image</dd>
+<dt>Returns:</dt>
+<dd>the sub-image</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -210,6 +287,15 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
 <h3>scale</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a></span>&nbsp;<span class="element-name">scale</span><wbr><span class="parameters">(float&nbsp;scaleX,
  float&nbsp;scaleY)</span></div>
+<div class="block">Scales this image by an x-axis and y-axis scale factor. The original image will cache <a href="#CACHE_SIZE"><code>CACHE_SIZE</code></a>
+ transformations before clearing the cache.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>scaleX</code> - the x-axis scale factor</dd>
+<dd><code>scaleY</code> - the y-axis scale factor</dd>
+<dt>Returns:</dt>
+<dd>the scaled image</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -217,6 +303,15 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
 <h3>resize</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a></span>&nbsp;<span class="element-name">resize</span><wbr><span class="parameters">(int&nbsp;newWidth,
  int&nbsp;newHeight)</span></div>
+<div class="block">Resizes this image to a new width and height. The original image will cache <a href="#CACHE_SIZE"><code>CACHE_SIZE</code></a>
+ transformations before clearing the cache.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>newWidth</code> - the new width</dd>
+<dd><code>newHeight</code> - the new height</dd>
+<dt>Returns:</dt>
+<dd>the resized image</dd>
+</dl>
 </section>
 </li>
 </ul>

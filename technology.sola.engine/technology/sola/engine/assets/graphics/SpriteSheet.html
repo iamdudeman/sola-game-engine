@@ -83,6 +83,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SpriteSheet</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="../Asset.html" title="interface in technology.sola.engine.assets">Asset</a></span></div>
+<div class="block">SpriteSheet is an <a href="../Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> for a collection of sprites.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -95,7 +96,9 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.assets.graphics.SolaImage)" class="member-name-link">SpriteSheet</a><wbr>(<a href="SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;solaImage)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a new SpriteSheet from a <a href="SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> source.</div>
+</div>
 </div>
 </section>
 </li>
@@ -116,10 +119,14 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
  int&nbsp;y,
  int&nbsp;width,
  int&nbsp;height)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Adds a sprite definition to the sprite sheet.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSprite(java.lang.String)" class="member-name-link">getSprite</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Gets a sprite's <a href="SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> by id.</div>
+</div>
 </div>
 </div>
 </div>
@@ -141,6 +148,11 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
 <section class="detail" id="&lt;init&gt;(technology.sola.engine.assets.graphics.SolaImage)">
 <h3>SpriteSheet</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SpriteSheet</span><wbr><span class="parameters">(<a href="SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;solaImage)</span></div>
+<div class="block">Creates a new SpriteSheet from a <a href="SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> source.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>solaImage</code> - the source image</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -159,12 +171,31 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
  int&nbsp;y,
  int&nbsp;width,
  int&nbsp;height)</span></div>
+<div class="block">Adds a sprite definition to the sprite sheet. This will be a sub-image of the source image that can be retrieved
+ layer by id.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>id</code> - the id of the sprite</dd>
+<dd><code>x</code> - the left most coordinate of the sprite in the source image</dd>
+<dd><code>y</code> - the top most coordinate of the sprite in the source image</dd>
+<dd><code>width</code> - the width of the sprite in the source image</dd>
+<dd><code>height</code> - the height of the sprite in the source image</dd>
+<dt>Returns:</dt>
+<dd>the sprite's <a href="SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a></dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getSprite(java.lang.String)">
 <h3>getSprite</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a></span>&nbsp;<span class="element-name">getSprite</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</span></div>
+<div class="block">Gets a sprite's <a href="SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> by id.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>id</code> - the id of the sprite</dd>
+<dt>Returns:</dt>
+<dd>the sprite's image</dd>
+</dl>
 </section>
 </li>
 </ul>

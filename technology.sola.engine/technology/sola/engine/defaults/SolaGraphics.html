@@ -113,20 +113,17 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Adds <a href="graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaGraphicsModule</code></a>s to be rendered.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaGraphicsModule</a>&lt;?&gt;&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getGraphicsModuleList()" class="member-name-link">getGraphicsModuleList</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>technology.sola.ecs.EcsSystem[]</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSystems()" class="member-name-link">getSystems</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>technology.sola.ecs.EcsSystem[]</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSystems()" class="member-name-link">getSystems</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">render</a><wbr>(<a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">render</a><wbr>(<a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Renders all <a href="graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaGraphicsModule</code></a>s that have been added.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#screenToWorldCoordinate(technology.sola.math.linear.Vector2D)" class="member-name-link">screenToWorldCoordinate</a><wbr>(<a href="../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;screenCoordinate)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#screenToWorldCoordinate(technology.sola.math.linear.Vector2D)" class="member-name-link">screenToWorldCoordinate</a><wbr>(<a href="../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;screenCoordinate)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Using the camera's transform, this method calculates the <code>World</code> coordinate based on the screen's coordinate
  system.</div>
 </div>
@@ -166,16 +163,6 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
-<li>
-<section class="detail" id="getGraphicsModuleList()">
-<h3>getGraphicsModuleList</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaGraphicsModule</a>&lt;?&gt;&gt;</span>&nbsp;<span class="element-name">getGraphicsModuleList</span>()</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>the list of current <a href="graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaGraphicsModule</code></a>s</dd>
-</dl>
-</section>
-</li>
 <li>
 <section class="detail" id="addGraphicsModules(technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule...)">
 <h3>addGraphicsModules</h3>
