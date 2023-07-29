@@ -64,7 +64,7 @@ public class FontRasterizerTool implements Tool {
     return """
       *arg1 - Font family ["monospaced", "arial", "times"]
       *arg2 - Font size ["16", "24"]
-      arg3  - Font style ["NORMAL", "ITALIC", "BOLD"] defaults to NORMAL
+      arg3  - Font style ["NORMAL", "ITALIC", "BOLD", "BOLD_ITALIC"] defaults to NORMAL
       """;
   }
 
@@ -106,7 +106,6 @@ public class FontRasterizerTool implements Tool {
         Files.write(fontInfoFile.toPath(), serializeFontInfo(fontInfo));
         return fontInfoFile.toString();
       } catch (IOException ex) {
-        ex.printStackTrace();
         throw new RuntimeException(ex);
       }
     }

@@ -8,6 +8,10 @@ import technology.sola.engine.graphics.Color;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Font is an {@link Asset} containing the information required to render strings of text for a particular font that
+ * has been rasterized into an image.
+ */
 public class Font implements Asset {
   private final FontInfo fontInfo;
   private final Map<Color, Map<Character, SolaImage>> colorToGlyphsMap = new HashMap<>();
@@ -15,6 +19,12 @@ public class Font implements Asset {
   private Map<Character, SolaImage> cachedCharacterToGlyphMap;
   private Color cachedColor;
 
+  /**
+   * Creates a Font instance from a {@link SolaImage} with {@link FontInfo}.
+   *
+   * @param fontImage the image for the rasterized font
+   * @param fontInfo  the information regarding the rasterized font
+   */
   public Font(SolaImage fontImage, FontInfo fontInfo) {
     this.fontInfo = fontInfo;
 
@@ -32,6 +42,13 @@ public class Font implements Asset {
     this.cachedColor = Color.BLACK;
   }
 
+  /**
+   * Gets a {@link SolaImage} for a glyph to render in desired {@link Color}.
+   *
+   * @param character the character to render
+   * @param color     the color to render the character
+   * @return the image for the character's glyph in desired color
+   */
   public SolaImage getGlyph(char character, Color color) {
     if (color.equals(Color.BLACK)) {
       return getBaseGlyph(character);
@@ -45,6 +62,12 @@ public class Font implements Asset {
     return cachedCharacterToGlyphMap.computeIfAbsent(character, key -> getGlyphAsColor(key, color));
   }
 
+  /**
+   * Calculates and returns the {@link TextDimensions} for a string of text that would be rendered with this font.
+   *
+   * @param text the string of text
+   * @return the text dimensions
+   */
   public TextDimensions getDimensionsForText(String text) {
     int width = 0;
     int height = 0;
@@ -62,6 +85,9 @@ public class Font implements Asset {
     return new TextDimensions(width, height);
   }
 
+  /**
+   * @return the {@link FontInfo}
+   */
   public FontInfo getFontInfo() {
     return fontInfo;
   }
@@ -96,6 +122,12 @@ public class Font implements Asset {
     return glyph;
   }
 
+  /**
+   * Represents the width and height that a string of text that would be rendered with a particular {@link Font}.
+   *
+   * @param width  the width of the string of text
+   * @param height the height of the string of text
+   */
   public record TextDimensions(int width, int height) {
   }
 }
