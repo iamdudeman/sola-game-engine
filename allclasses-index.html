@@ -220,9 +220,14 @@ loadScripts(document, 'script');</script>
 <div class="block">The EventListener interface defines the api for listening to emitted <a href="technology.sola.engine/technology/sola/engine/event/Event.html" title="interface in technology.sola.engine.event"><code>Event</code></a>s of a certain type.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Font is an <a href="technology.sola.engine/technology/sola/engine/assets/Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> containing the information required to render strings of text for a particular font that
+ has been rasterized into an image.</div>
+</div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab4"><a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/Font.TextDimensions.html" title="class in technology.sola.engine.assets.graphics.font">Font.TextDimensions</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab4">
+<div class="block">Represents the width and height that a string of text that would be rendered with a particular <a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a>.</div>
+</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab4"><a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/FontGlyph.html" title="class in technology.sola.engine.assets.graphics.font">FontGlyph</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab4">
 <div class="block">FontGlyph holds information on a glyph's placement in the rasterized <a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a></div>
@@ -240,7 +245,9 @@ loadScripts(document, 'script');</script>
 <div class="block">FontInfoJsonMapper is a <code>JsonMapper</code> implementation for <a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/FontInfo.html" title="class in technology.sola.engine.assets.graphics.font"><code>FontInfo</code></a>.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab3"><a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/FontStyle.html" title="enum class in technology.sola.engine.assets.graphics.font">FontStyle</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab3">
+<div class="block">FontStyle is an enum of possible <a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a> style options.</div>
+</div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html" title="class in technology.sola.engine.core">GameLoop</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">GameLoop handles running a sequence of update and render commands at a target rate.</div>
@@ -331,7 +338,10 @@ loadScripts(document, 'script');</script>
  implementation provided.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab5"><a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/exception/MissingGlyphException.html" title="class in technology.sola.engine.assets.graphics.font.exception">MissingGlyphException</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab5">&nbsp;</div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab5">
+<div class="block">Exception thrown when attempting to render a <a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/FontGlyph.html" title="class in technology.sola.engine.assets.graphics.font"><code>FontGlyph</code></a> that is
+ not present in the rasterized <a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a>.</div>
+</div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab3"><a href="technology.sola.engine/technology/sola/engine/input/MouseButton.html" title="enum class in technology.sola.engine.input">MouseButton</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab3">&nbsp;</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab4"><a href="technology.sola.engine/technology/sola/engine/input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a></div>

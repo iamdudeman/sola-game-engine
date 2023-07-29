@@ -84,6 +84,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">MissingGlyphException</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/RuntimeException.html" title="class or interface in java.lang" class="external-link">RuntimeException</a></span></div>
+<div class="block">Exception thrown when attempting to render a <a href="../FontGlyph.html" title="class in technology.sola.engine.assets.graphics.font"><code>FontGlyph</code></a> that is
+ not present in the rasterized <a href="../Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a>.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -105,7 +107,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(char,technology.sola.engine.assets.graphics.font.FontInfo)" class="member-name-link">MissingGlyphException</a><wbr>(char&nbsp;character,
  <a href="../FontInfo.html" title="class in technology.sola.engine.assets.graphics.font">FontInfo</a>&nbsp;fontInfo)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates an instance of this exception.</div>
+</div>
 </div>
 </section>
 </li>
@@ -135,6 +139,12 @@ loadScripts(document, 'script');</script>
 <h3>MissingGlyphException</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">MissingGlyphException</span><wbr><span class="parameters">(char&nbsp;character,
  <a href="../FontInfo.html" title="class in technology.sola.engine.assets.graphics.font">FontInfo</a>&nbsp;fontInfo)</span></div>
+<div class="block">Creates an instance of this exception.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>character</code> - the character for the <a href="../FontGlyph.html" title="class in technology.sola.engine.assets.graphics.font"><code>FontGlyph</code></a></dd>
+<dd><code>fontInfo</code> - the <a href="../FontInfo.html" title="class in technology.sola.engine.assets.graphics.font"><code>FontInfo</code></a> for the current <a href="../Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a></dd>
+</dl>
 </section>
 </li>
 </ul>

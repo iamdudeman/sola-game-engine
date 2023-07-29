@@ -84,6 +84,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public enum </span><span class="element-name type-name-label">FontStyle</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Enum.html" title="class or interface in java.lang" class="external-link">Enum</a>&lt;<a href="FontStyle.html" title="enum class in technology.sola.engine.assets.graphics.font">FontStyle</a>&gt;</span></div>
+<div class="block">FontStyle is an enum of possible <a href="Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a> style options. These are based on the
+ <a href="https://docs.oracle.com/javase/8/docs/api/java/awt/Font.html">java.awt.Font</a> style options.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -105,11 +107,21 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Enum Constant</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code><a href="#BOLD" class="member-name-link">BOLD</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code><a href="#ITALIC" class="member-name-link">ITALIC</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code><a href="#NORMAL" class="member-name-link">NORMAL</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Bold styling.</div>
+</div>
+<div class="col-first odd-row-color"><code><a href="#BOLD_ITALIC" class="member-name-link">BOLD_ITALIC</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">Bold and italic styling.</div>
+</div>
+<div class="col-first even-row-color"><code><a href="#ITALIC" class="member-name-link">ITALIC</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">Italic styling.</div>
+</div>
+<div class="col-first odd-row-color"><code><a href="#NORMAL" class="member-name-link">NORMAL</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">Normal/plain styling.</div>
+</div>
 </div>
 </section>
 </li>
@@ -126,15 +138,20 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCode()" class="member-name-link">getCode</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="FontStyle.html" title="enum class in technology.sola.engine.assets.graphics.font">FontStyle</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#valueOf(java.lang.String)" class="member-name-link">valueOf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the integer representation of the font style.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getName()" class="member-name-link">getName</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="FontStyle.html" title="enum class in technology.sola.engine.assets.graphics.font">FontStyle</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#valueOf(java.lang.String)" class="member-name-link">valueOf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns the enum constant of this class with the specified name.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="FontStyle.html" title="enum class in technology.sola.engine.assets.graphics.font">FontStyle</a>[]</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#values()" class="member-name-link">values</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="FontStyle.html" title="enum class in technology.sola.engine.assets.graphics.font">FontStyle</a>[]</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#values()" class="member-name-link">values</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns an array containing the constants of this enum class, in
 the order they are declared.</div>
 </div>
@@ -162,18 +179,28 @@ the order they are declared.</div>
 <section class="detail" id="NORMAL">
 <h3>NORMAL</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="FontStyle.html" title="enum class in technology.sola.engine.assets.graphics.font">FontStyle</a></span>&nbsp;<span class="element-name">NORMAL</span></div>
+<div class="block">Normal/plain styling.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="ITALIC">
 <h3>ITALIC</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="FontStyle.html" title="enum class in technology.sola.engine.assets.graphics.font">FontStyle</a></span>&nbsp;<span class="element-name">ITALIC</span></div>
+<div class="block">Italic styling.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="BOLD">
 <h3>BOLD</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="FontStyle.html" title="enum class in technology.sola.engine.assets.graphics.font">FontStyle</a></span>&nbsp;<span class="element-name">BOLD</span></div>
+<div class="block">Bold styling.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="BOLD_ITALIC">
+<h3>BOLD_ITALIC</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="FontStyle.html" title="enum class in technology.sola.engine.assets.graphics.font">FontStyle</a></span>&nbsp;<span class="element-name">BOLD_ITALIC</span></div>
+<div class="block">Bold and italic styling.</div>
 </section>
 </li>
 </ul>
@@ -219,6 +246,21 @@ not permitted.)</div>
 <section class="detail" id="getCode()">
 <h3>getCode</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getCode</span>()</div>
+<div class="block">Returns the integer representation of the font style.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the font style code</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getName()">
+<h3>getName</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getName</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the name of the font style</dd>
+</dl>
 </section>
 </li>
 </ul>

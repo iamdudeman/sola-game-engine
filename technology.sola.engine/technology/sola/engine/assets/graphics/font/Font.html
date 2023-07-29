@@ -83,6 +83,8 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Font</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="../../Asset.html" title="interface in technology.sola.engine.assets">Asset</a></span></div>
+<div class="block">Font is an <a href="../../Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> containing the information required to render strings of text for a particular font that
+ has been rasterized into an image.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -97,7 +99,9 @@ implements <a href="../../Asset.html" title="interface in technology.sola.engine
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static final record&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="Font.TextDimensions.html" class="type-name-link" title="class in technology.sola.engine.assets.graphics.font">Font.TextDimensions</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Represents the width and height that a string of text that would be rendered with a particular <a href="Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -111,7 +115,9 @@ implements <a href="../../Asset.html" title="interface in technology.sola.engine
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.assets.graphics.SolaImage,technology.sola.engine.assets.graphics.font.FontInfo)" class="member-name-link">Font</a><wbr>(<a href="../SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;fontImage,
  <a href="FontInfo.html" title="class in technology.sola.engine.assets.graphics.font">FontInfo</a>&nbsp;fontInfo)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a Font instance from a <a href="../SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> with <a href="FontInfo.html" title="class in technology.sola.engine.assets.graphics.font"><code>FontInfo</code></a>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -128,14 +134,18 @@ implements <a href="../../Asset.html" title="interface in technology.sola.engine
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Font.TextDimensions.html" title="class in technology.sola.engine.assets.graphics.font">Font.TextDimensions</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getDimensionsForText(java.lang.String)" class="member-name-link">getDimensionsForText</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Calculates and returns the <a href="Font.TextDimensions.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font.TextDimensions</code></a> for a string of text that would be rendered with this font.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="FontInfo.html" title="class in technology.sola.engine.assets.graphics.font">FontInfo</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFontInfo()" class="member-name-link">getFontInfo</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getGlyph(char,technology.sola.engine.graphics.Color)" class="member-name-link">getGlyph</a><wbr>(char&nbsp;character,
  <a href="../../../graphics/Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Gets a <a href="../SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> for a glyph to render in desired <a href="../../../graphics/Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a>.</div>
+</div>
 </div>
 </div>
 </div>
@@ -158,6 +168,12 @@ implements <a href="../../Asset.html" title="interface in technology.sola.engine
 <h3>Font</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Font</span><wbr><span class="parameters">(<a href="../SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;fontImage,
  <a href="FontInfo.html" title="class in technology.sola.engine.assets.graphics.font">FontInfo</a>&nbsp;fontInfo)</span></div>
+<div class="block">Creates a Font instance from a <a href="../SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> with <a href="FontInfo.html" title="class in technology.sola.engine.assets.graphics.font"><code>FontInfo</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>fontImage</code> - the image for the rasterized font</dd>
+<dd><code>fontInfo</code> - the information regarding the rasterized font</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -173,18 +189,37 @@ implements <a href="../../Asset.html" title="interface in technology.sola.engine
 <h3>getGlyph</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a></span>&nbsp;<span class="element-name">getGlyph</span><wbr><span class="parameters">(char&nbsp;character,
  <a href="../../../graphics/Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</span></div>
+<div class="block">Gets a <a href="../SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> for a glyph to render in desired <a href="../../../graphics/Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>character</code> - the character to render</dd>
+<dd><code>color</code> - the color to render the character</dd>
+<dt>Returns:</dt>
+<dd>the image for the character's glyph in desired color</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getDimensionsForText(java.lang.String)">
 <h3>getDimensionsForText</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Font.TextDimensions.html" title="class in technology.sola.engine.assets.graphics.font">Font.TextDimensions</a></span>&nbsp;<span class="element-name">getDimensionsForText</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</span></div>
+<div class="block">Calculates and returns the <a href="Font.TextDimensions.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font.TextDimensions</code></a> for a string of text that would be rendered with this font.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>text</code> - the string of text</dd>
+<dt>Returns:</dt>
+<dd>the text dimensions</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getFontInfo()">
 <h3>getFontInfo</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="FontInfo.html" title="class in technology.sola.engine.assets.graphics.font">FontInfo</a></span>&nbsp;<span class="element-name">getFontInfo</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the <a href="FontInfo.html" title="class in technology.sola.engine.assets.graphics.font"><code>FontInfo</code></a></dd>
+</dl>
 </section>
 </li>
 </ul>
