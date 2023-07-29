@@ -4,15 +4,15 @@ import technology.sola.ecs.World;
 import technology.sola.ecs.view.View;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.SolaEntityGraphicsModule;
 import technology.sola.engine.examples.common.minesweeper.components.MinesweeperSquareComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 /**
- * {@link SolaGraphicsModule} for rendering {@link technology.sola.ecs.Entity} with {@link MinesweeperSquareComponent}.
+ * {@link SolaEntityGraphicsModule} for rendering {@link technology.sola.ecs.Entity} with {@link MinesweeperSquareComponent}.
  */
-public class MinesweeperSquareGraphicsModule extends SolaGraphicsModule<View2Entry<TransformComponent, MinesweeperSquareComponent>> {
+public class MinesweeperSquareEntityGraphicsModule extends SolaEntityGraphicsModule<View2Entry<TransformComponent, MinesweeperSquareComponent>> {
   private static final int FONT_OFFSET = 5;
 
   @Override

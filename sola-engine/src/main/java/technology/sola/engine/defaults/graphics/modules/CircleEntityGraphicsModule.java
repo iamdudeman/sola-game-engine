@@ -9,10 +9,10 @@ import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 /**
- * CircleGraphicsModule is a {@link SolaGraphicsModule} implementation for rendering {@link Entity} that have a
+ * CircleEntityGraphicsModule is a {@link SolaEntityGraphicsModule} implementation for rendering {@link Entity} that have a
  * {@link TransformComponent} and {@link CircleRendererComponent}.
  */
-public class CircleGraphicsModule extends SolaGraphicsModule<View2Entry<CircleRendererComponent, TransformComponent>> {
+public class CircleEntityGraphicsModule extends SolaEntityGraphicsModule<View2Entry<CircleRendererComponent, TransformComponent>> {
   @Override
   public View<View2Entry<CircleRendererComponent, TransformComponent>> getViewToRender(World world) {
     return world.createView().of(CircleRendererComponent.class, TransformComponent.class);

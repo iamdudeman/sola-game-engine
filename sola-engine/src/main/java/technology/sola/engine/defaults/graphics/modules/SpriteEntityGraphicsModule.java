@@ -13,18 +13,18 @@ import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 /**
- * SpriteGraphicsModule is a {@link SolaGraphicsModule} implementation for rendering {@link Entity} that have a
+ * SpriteEntityGraphicsModule is a {@link SolaEntityGraphicsModule} implementation for rendering {@link Entity} that have a
  * {@link TransformComponent} and {@link SpriteComponent}.
  */
-public class SpriteGraphicsModule extends SolaGraphicsModule<View2Entry<SpriteComponent, TransformComponent>> {
+public class SpriteEntityGraphicsModule extends SolaEntityGraphicsModule<View2Entry<SpriteComponent, TransformComponent>> {
   private final AssetLoader<SpriteSheet> spriteSheetAssetLoader;
 
   /**
-   * Creates an instance of SpriteGraphicsModule.
+   * Creates an instance of SpriteEntityGraphicsModule.
    *
    * @param spriteSheetAssetLoader the {@link AssetLoader} instance for {@link SpriteSheet}s
    */
-  public SpriteGraphicsModule(AssetLoader<SpriteSheet> spriteSheetAssetLoader) {
+  public SpriteEntityGraphicsModule(AssetLoader<SpriteSheet> spriteSheetAssetLoader) {
     this.spriteSheetAssetLoader = spriteSheetAssetLoader;
   }
 

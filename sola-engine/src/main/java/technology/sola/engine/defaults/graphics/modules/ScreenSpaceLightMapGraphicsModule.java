@@ -1,21 +1,16 @@
 package technology.sola.engine.defaults.graphics.modules;
 
 import technology.sola.ecs.World;
-import technology.sola.ecs.view.View;
-import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.components.LightComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.math.linear.Matrix3D;
 
-public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule<View2Entry<TransformComponent, LightComponent>> {
+public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
   @Override
-  public View<View2Entry<TransformComponent, LightComponent>> getViewToRender(World world) {
-    return world.createView().of(TransformComponent.class, LightComponent.class);
-  }
-
-  @Override
-  public void renderMethod(Renderer renderer, View2Entry<TransformComponent, LightComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
+  public void renderMethod(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
     // todo generate light map image
+    world.createView().of(TransformComponent.class, LightComponent.class);
 
     // todo render light map image with BlendMode to do color * light
   }

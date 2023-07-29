@@ -6,10 +6,11 @@ import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
-import technology.sola.engine.defaults.graphics.modules.CircleGraphicsModule;
-import technology.sola.engine.defaults.graphics.modules.DebugGraphicsModule;
-import technology.sola.engine.defaults.graphics.modules.RectangleGraphicsModule;
-import technology.sola.engine.defaults.graphics.modules.SpriteGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.CircleEntityGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.DebugEntityGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.RectangleEntityGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.SolaEntityGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.SpriteEntityGraphicsModule;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
@@ -99,7 +100,7 @@ public abstract class SolaWithDefaults extends Sola {
         this.isDebug = true;
 
         if (solaGraphics != null && solaPhysics != null) {
-          solaGraphics.addGraphicsModules(new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
+          solaGraphics.addGraphicsModules(new DebugEntityGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
         }
       }
 
@@ -141,7 +142,7 @@ public abstract class SolaWithDefaults extends Sola {
         solaEcs.addSystems(solaPhysics.getSystems());
 
         if (isDebug && solaGraphics != null) {
-          solaGraphics.addGraphicsModules(new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
+          solaGraphics.addGraphicsModules(new DebugEntityGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
         }
       }
 
@@ -150,14 +151,14 @@ public abstract class SolaWithDefaults extends Sola {
 
     /**
      * Initializes the {@link SolaWithDefaults#solaGraphics} instance. This adds several
-     * {@link technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule}s to it and adds several
+     * {@link SolaEntityGraphicsModule}s to it and adds several
      * {@link technology.sola.ecs.EcsSystem}s to the {@link Sola#solaEcs} instance.
      * <p>
      * Modules added
      * <ul>
-     *   <li>{@link CircleGraphicsModule}</li>
-     *   <li>{@link RectangleGraphicsModule}</li>
-     *   <li>{@link SpriteGraphicsModule}</li>
+     *   <li>{@link CircleEntityGraphicsModule}</li>
+     *   <li>{@link RectangleEntityGraphicsModule}</li>
+     *   <li>{@link SpriteEntityGraphicsModule}</li>
      * </ul>
      * <p>
      * EcsSystems added
@@ -177,13 +178,13 @@ public abstract class SolaWithDefaults extends Sola {
         AssetLoader<SpriteSheet> spriteSheetAssetLoader = assetLoaderProvider.get(SpriteSheet.class);
 
         solaGraphics.addGraphicsModules(
-          new CircleGraphicsModule(),
-          new RectangleGraphicsModule(),
-          new SpriteGraphicsModule(spriteSheetAssetLoader)
+          new CircleEntityGraphicsModule(),
+          new RectangleEntityGraphicsModule(),
+          new SpriteEntityGraphicsModule(spriteSheetAssetLoader)
         );
 
         if (isDebug && solaPhysics != null) {
-          solaGraphics.addGraphicsModules(new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
+          solaGraphics.addGraphicsModules(new DebugEntityGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
         }
 
         rebuildRenderFunction();

@@ -18,12 +18,13 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * SolaGraphics provides default rendering capabilities while also allowing for customization via {@link SolaGraphicsModule}s.
+ * SolaGraphics provides default rendering capabilities while also allowing for adding new rendering
+ * capabilities via {@link SolaGraphicsModule}s.
  */
 public class SolaGraphics {
   private static final TransformComponent DEFAULT_CAMERA_TRANSFORM = new TransformComponent();
   private final SolaEcs solaEcs;
-  private final List<SolaGraphicsModule<?>> graphicsModuleList = new ArrayList<>();
+  private final List<SolaGraphicsModule> graphicsModuleList = new ArrayList<>();
   private Matrix3D cachedScreenToWorldMatrix = null;
   private float previousCameraX = 0;
   private float previousCameraY = 0;
@@ -35,7 +36,7 @@ public class SolaGraphics {
   /**
    * Creates a SolaGraphics instance.
    *
-   * @param solaEcs the {@link SolaEcs} instance to render {@link technology.sola.ecs.Entity} from
+   * @param solaEcs the {@link SolaEcs} instance
    */
   public SolaGraphics(SolaEcs solaEcs) {
     this.solaEcs = solaEcs;
@@ -48,10 +49,36 @@ public class SolaGraphics {
    *
    * @param graphicsModules the modules to add
    */
-  public void addGraphicsModules(SolaGraphicsModule<?>... graphicsModules) {
+  public void addGraphicsModules(SolaGraphicsModule... graphicsModules) {
     if (graphicsModules != null) {
       graphicsModuleList.addAll(Arrays.asList(graphicsModules));
       graphicsModuleList.sort(SolaGraphicsModule::compareTo);
+    }
+  }
+
+  /**
+   * Activates {@link SolaGraphicsModule} with specified class.
+   *
+   * @param solaGraphicsModuleClass the class of graphics module to activate
+   */
+  public void activateGraphicsModule(Class<? extends SolaGraphicsModule> solaGraphicsModuleClass) {
+    for (var graphicsModule : graphicsModuleList) {
+      if (graphicsModule.getClass() == solaGraphicsModuleClass) {
+        graphicsModule.setActive(true);
+      }
+    }
+  }
+
+  /**
+   * Deactivates {@link SolaGraphicsModule} with specified class.
+   *
+   * @param solaGraphicsModuleClass the class of graphics module to deactivate
+   */
+  public void deactivateGraphicsModule(Class<? extends SolaGraphicsModule> solaGraphicsModuleClass) {
+    for (var graphicsModule : graphicsModuleList) {
+      if (graphicsModule.getClass() == solaGraphicsModuleClass) {
+        graphicsModule.setActive(false);
+      }
     }
   }
 

@@ -9,10 +9,10 @@ import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 /**
- * RectangleGraphicsModule is a {@link SolaGraphicsModule} implementation for rendering {@link Entity} that have a
+ * RectangleEntityGraphicsModule is a {@link SolaEntityGraphicsModule} implementation for rendering {@link Entity} that have a
  * {@link TransformComponent} and {@link RectangleRendererComponent}.
  */
-public class RectangleGraphicsModule extends SolaGraphicsModule<View2Entry<RectangleRendererComponent, TransformComponent>> {
+public class RectangleEntityGraphicsModule extends SolaEntityGraphicsModule<View2Entry<RectangleRendererComponent, TransformComponent>> {
   @Override
   public View<View2Entry<RectangleRendererComponent, TransformComponent>> getViewToRender(World world) {
     return world.createView().of(RectangleRendererComponent.class, TransformComponent.class);
