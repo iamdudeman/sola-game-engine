@@ -1,6 +1,7 @@
 package technology.sola.engine.graphics.renderer;
 
-import java.util.PriorityQueue;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Layers contain a queue of {@link DrawItem} to ensure a particular draw order.
@@ -10,7 +11,7 @@ public class Layer {
    * The default order for a {@link DrawItem} that is added to this Layer.
    */
   public static final int DEFAULT_ORDER = 0;
-  private final PriorityQueue<OrdererDrawItem> drawQueue;
+  private final List<OrdererDrawItem> drawItems;
   private final String name;
   private boolean isActive = true;
 
@@ -21,7 +22,7 @@ public class Layer {
    */
   public Layer(String name) {
     this.name = name;
-    drawQueue = new PriorityQueue<>();
+    drawItems = new LinkedList<>();
   }
 
   /**
@@ -40,7 +41,19 @@ public class Layer {
    * @param order    higher numbers will be drawn later
    */
   public void add(DrawItem drawItem, int order) {
-    drawQueue.add(new OrdererDrawItem(drawItem, order));
+    if (isActive) {
+      int insertIndex = 0;
+
+      for (var orderedDrawItem : drawItems) {
+        if (order < orderedDrawItem.order) {
+          break;
+        }
+
+        insertIndex++;
+      }
+
+      drawItems.add(insertIndex, new OrdererDrawItem(drawItem, order));
+    }
   }
 
   /**
@@ -50,12 +63,12 @@ public class Layer {
    */
   public void draw(Renderer renderer) {
     if (isActive) {
-      for (DrawItem drawItem : drawQueue) {
+      for (DrawItem drawItem : drawItems) {
         drawItem.draw(renderer);
       }
     }
 
-    drawQueue.clear();
+    drawItems.clear();
   }
 
   /**
