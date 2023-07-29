@@ -106,7 +106,6 @@ public class FontRasterizerTool implements Tool {
         Files.write(fontInfoFile.toPath(), serializeFontInfo(fontInfo));
         return fontInfoFile.toString();
       } catch (IOException ex) {
-        ex.printStackTrace();
         throw new RuntimeException(ex);
       }
     }
