@@ -9,18 +9,44 @@ import technology.sola.math.linear.Vector2D;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * SolaImage is an {@link Asset} that holds pixel data for an image.
+ */
 public class SolaImage extends Canvas implements Asset {
-  private static final int CACHE_SIZE = 10;
+  /**
+   * The number of cached resizes this image with hold.
+   */
+  public static final int CACHE_SIZE = 10;
   private final Map<String, SolaImage> cachedTransforms = new HashMap<>(CACHE_SIZE + CACHE_SIZE / 3);
 
+  /**
+   * Creates an empty image with width and height.
+   *
+   * @param width  the width of the image
+   * @param height the height of the image
+   */
   public SolaImage(int width, int height) {
     super(width, height);
   }
 
+  /**
+   * Creates an image from source pixel array.
+   *
+   * @param width  the width of the image
+   * @param height the height of the image
+   * @param pixels the pixel data for the image
+   */
   public SolaImage(int width, int height, int[] pixels) {
     super(width, height, pixels);
   }
 
+  /**
+   * Manually set the pixel data in this image.
+   *
+   * @param width  the width of the image
+   * @param height the height of the image
+   * @param pixels the pixel data for the image
+   */
   public void setPixels(int width, int height, int[] pixels) {
     this.width = width;
     this.height = height;
@@ -28,6 +54,15 @@ public class SolaImage extends Canvas implements Asset {
     cachedTransforms.clear();
   }
 
+  /**
+   * Creates a new {@link SolaImage} that is a sub-image of this {@code SolaImage}.
+   *
+   * @param x      the left most coordinate of the sub-image
+   * @param y      the top most coordinate of the sub-image
+   * @param width  the width of the sub-image
+   * @param height the height of the sub-image
+   * @return the sub-image
+   */
   public SolaImage getSubImage(int x, int y, int width, int height) {
     int[] subPixels = new int[width * height];
     int startingIndex = x + y * this.width;
@@ -47,6 +82,14 @@ public class SolaImage extends Canvas implements Asset {
     return new SolaImage(width, height, subPixels);
   }
 
+  /**
+   * Scales this image by an x-axis and y-axis scale factor. The original image will cache {@link SolaImage#CACHE_SIZE}
+   * transformations before clearing the cache.
+   *
+   * @param scaleX the x-axis scale factor
+   * @param scaleY the y-axis scale factor
+   * @return the scaled image
+   */
   public SolaImage scale(float scaleX, float scaleY) {
     int newWidth = (int) (scaleX * width + 0.5f);
     int newHeight = (int) (scaleY * height + 0.5f);
@@ -54,6 +97,14 @@ public class SolaImage extends Canvas implements Asset {
     return resize(newWidth, newHeight);
   }
 
+  /**
+   * Resizes this image to a new width and height. The original image will cache {@link SolaImage#CACHE_SIZE}
+   * transformations before clearing the cache.
+   *
+   * @param newWidth  the new width
+   * @param newHeight the new height
+   * @return the resized image
+   */
   public SolaImage resize(int newWidth, int newHeight) {
     String cacheKey = getCachedTransformKey(newWidth, newHeight);
     SolaImage cachedTransform = cachedTransforms.get(cacheKey);
