@@ -1,6 +1,5 @@
 package technology.sola.engine.examples.common.singlefile;
 
-import technology.sola.ecs.Component;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
@@ -8,7 +7,7 @@ import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaWithDefaults;
-import technology.sola.engine.defaults.graphics.modules.ScreenSpaceLightMapGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.SpriteEntityGraphicsModule;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.LightComponent;
@@ -24,7 +23,7 @@ import java.util.Random;
  *
  * <ul>
  *   <li>{@link LightComponent}</li>
- *   <li>{@link ScreenSpaceLightMapGraphicsModule}</li>
+ *   <li>{@link technology.sola.engine.defaults.graphics.modules.ScreenSpaceLightMapGraphicsModule}</li>
  * </ul>
  */
 public class LightingExample extends SolaWithDefaults {
@@ -37,9 +36,7 @@ public class LightingExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGraphics().useBackgroundColor(Color.BLACK);
-
-    solaGraphics.addGraphicsModules(new ScreenSpaceLightMapGraphicsModule());
+    defaultsConfigurator.useGraphics(true).useBackgroundColor(Color.BLACK);
 
     solaEcs.addSystem(new PlayerSystem());
     solaEcs.setWorld(buildWorld());
@@ -91,24 +88,30 @@ public class LightingExample extends SolaWithDefaults {
   }
 
   private class PlayerSystem extends EcsSystem {
-    private final int speed = 2;
+    private static final int speed = 2;
 
     @Override
     public void update(World world, float deltaTime) {
       Entity playerEntity = world.findEntityByName("player");
       TransformComponent transformComponent = playerEntity.getComponent(TransformComponent.class);
 
+      if (keyboardInput.isKeyPressed(Key.O)) {
+        solaGraphics.activateGraphicsModule(SpriteEntityGraphicsModule.class);
+      }
+      if (keyboardInput.isKeyPressed(Key.P)) {
+        solaGraphics.deactivateGraphicsModule(SpriteEntityGraphicsModule.class);
+      }
       if (keyboardInput.isKeyHeld(Key.W)) {
-        transformComponent.setY(transformComponent.getY() - 2);
+        transformComponent.setY(transformComponent.getY() - speed);
       }
       if (keyboardInput.isKeyHeld(Key.S)) {
-        transformComponent.setY(transformComponent.getY() + 2);
+        transformComponent.setY(transformComponent.getY() + speed);
       }
       if (keyboardInput.isKeyHeld(Key.A)) {
-        transformComponent.setX(transformComponent.getX() - 2);
+        transformComponent.setX(transformComponent.getX() - speed);
       }
       if (keyboardInput.isKeyHeld(Key.D)) {
-        transformComponent.setX(transformComponent.getX() + 2);
+        transformComponent.setX(transformComponent.getX() + speed);
       }
     }
   }

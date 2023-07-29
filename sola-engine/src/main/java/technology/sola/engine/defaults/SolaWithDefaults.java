@@ -9,6 +9,7 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.graphics.modules.CircleEntityGraphicsModule;
 import technology.sola.engine.defaults.graphics.modules.DebugEntityGraphicsModule;
 import technology.sola.engine.defaults.graphics.modules.RectangleEntityGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.ScreenSpaceLightMapGraphicsModule;
 import technology.sola.engine.defaults.graphics.modules.SolaEntityGraphicsModule;
 import technology.sola.engine.defaults.graphics.modules.SpriteEntityGraphicsModule;
 import technology.sola.engine.graphics.Color;
@@ -159,6 +160,7 @@ public abstract class SolaWithDefaults extends Sola {
      *   <li>{@link CircleEntityGraphicsModule}</li>
      *   <li>{@link RectangleEntityGraphicsModule}</li>
      *   <li>{@link SpriteEntityGraphicsModule}</li>
+     *   <li>{@link ScreenSpaceLightMapGraphicsModule} (if true passed in)</li>
      * </ul>
      * <p>
      * EcsSystems added
@@ -167,9 +169,10 @@ public abstract class SolaWithDefaults extends Sola {
      *   <li>{@link technology.sola.engine.graphics.system.TransformAnimatorSystem}</li>
      * </ul>
      *
+     * @param useLighting whether the {@link ScreenSpaceLightMapGraphicsModule} should be added or not
      * @return this
      */
-    public DefaultsConfigurator useGraphics() {
+    public DefaultsConfigurator useGraphics(boolean useLighting) {
       if (solaGraphics == null) {
         solaGraphics = new SolaGraphics(solaEcs);
 
@@ -183,6 +186,10 @@ public abstract class SolaWithDefaults extends Sola {
           new SpriteEntityGraphicsModule(spriteSheetAssetLoader)
         );
 
+        if (useLighting) {
+          solaGraphics.addGraphicsModules(new ScreenSpaceLightMapGraphicsModule());
+        }
+
         if (isDebug && solaPhysics != null) {
           solaGraphics.addGraphicsModules(new DebugEntityGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
         }
@@ -191,6 +198,30 @@ public abstract class SolaWithDefaults extends Sola {
       }
 
       return this;
+    }
+
+    /**
+     * Initializes the {@link SolaWithDefaults#solaGraphics} instance. This adds several
+     * {@link SolaEntityGraphicsModule}s to it and adds several
+     * {@link technology.sola.ecs.EcsSystem}s to the {@link Sola#solaEcs} instance.
+     * <p>
+     * Modules added
+     * <ul>
+     *   <li>{@link CircleEntityGraphicsModule}</li>
+     *   <li>{@link RectangleEntityGraphicsModule}</li>
+     *   <li>{@link SpriteEntityGraphicsModule}</li>
+     * </ul>
+     * <p>
+     * EcsSystems added
+     * <ul>
+     *   <li>{@link technology.sola.engine.graphics.system.SpriteAnimatorSystem}</li>
+     *   <li>{@link technology.sola.engine.graphics.system.TransformAnimatorSystem}</li>
+     * </ul>
+     *
+     * @return this
+     */
+    public DefaultsConfigurator useGraphics() {
+      return useGraphics(false);
     }
 
     /**
