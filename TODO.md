@@ -15,8 +15,6 @@
 
 ## TODO List
 
-* FontStyle should be changed to just Normal and Italic
-    * Add FontWeight for Normal and Bold
 * Move custom build "distribution" tasks to a gradle plugin
     * sola game template should use these plugins as well
 * Consider some sort of lighting mechanism implementation
