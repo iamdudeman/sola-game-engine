@@ -23,6 +23,7 @@ import java.util.Random;
  */
 public class SoftwareRenderer extends Canvas implements Renderer {
   private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareRenderer.class);
+  private final float oneDiv255 = 1 / 255f;
   private final Random random = new Random();
   private final List<Layer> layers = new ArrayList<>();
   private BlendMode blendMode;
@@ -407,6 +408,16 @@ public class SoftwareRenderer extends Canvas implements Renderer {
           Math.min(255, currentColor.getRed() + color.getRed()),
           Math.min(255, currentColor.getGreen() + color.getGreen()),
           Math.min(255, currentColor.getBlue() + color.getBlue())
+        ).hexInt();
+      });
+      case MULTIPLY -> ((pixelIndex, color) -> {
+        Color currentColor = new Color(pixels[pixelIndex]);
+
+        pixels[pixelIndex] = new Color(
+          currentColor.getAlpha(),
+          Math.round((currentColor.getRed() * oneDiv255) * (color.getRed() * oneDiv255)),
+          Math.round((currentColor.getGreen()) * (color.getGreen() * oneDiv255)),
+          Math.round((currentColor.getBlue()) * (color.getBlue() * oneDiv255))
         ).hexInt();
       });
     };
