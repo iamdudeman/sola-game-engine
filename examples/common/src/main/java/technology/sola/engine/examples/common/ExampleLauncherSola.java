@@ -12,6 +12,7 @@ import technology.sola.engine.examples.common.networking.NetworkingExample;
 import technology.sola.engine.examples.common.singlefile.AnimationExample;
 import technology.sola.engine.examples.common.singlefile.AudioExample;
 import technology.sola.engine.examples.common.singlefile.GuiExample;
+import technology.sola.engine.examples.common.singlefile.LightingExample;
 import technology.sola.engine.examples.common.singlefile.MouseAndCameraExample;
 import technology.sola.engine.examples.common.singlefile.ParticleExample;
 import technology.sola.engine.examples.common.singlefile.RenderingExample;
@@ -73,6 +74,7 @@ public class ExampleLauncherSola extends SolaWithDefaults {
         buildExampleLaunchButton("Animation", AnimationExample::new),
         buildExampleLaunchButton("Audio", AudioExample::new),
         buildExampleLaunchButton("Gui", GuiExample::new),
+        buildExampleLaunchButton("Lighting", LightingExample::new),
         buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new),
         buildExampleLaunchButton("Particle", ParticleExample::new),
         buildExampleLaunchButton("Rendering", RenderingExample::new),
