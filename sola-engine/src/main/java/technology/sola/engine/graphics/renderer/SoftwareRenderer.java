@@ -60,6 +60,15 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   }
 
   @Override
+  public Renderer createRendererForImage(SolaImage solaImage) {
+    SoftwareRenderer softwareRenderer = new SoftwareRenderer(solaImage.getWidth(), solaImage.getHeight());
+
+    solaImage.setPixels(solaImage.getWidth(), solaImage.getHeight(), softwareRenderer.pixels);
+
+    return softwareRenderer;
+  }
+
+  @Override
   public Font getFont() {
     if (font == null) {
       LOGGER.warn("No font is currently set. Using DefaultFont as a backup.");
@@ -415,9 +424,9 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
         pixels[pixelIndex] = new Color(
           currentColor.getAlpha(),
-          Math.round((currentColor.getRed() * oneDiv255) * (color.getRed() * oneDiv255)),
-          Math.round((currentColor.getGreen()) * (color.getGreen() * oneDiv255)),
-          Math.round((currentColor.getBlue()) * (color.getBlue() * oneDiv255))
+          Math.round(currentColor.getRed() * (color.getRed() * oneDiv255)),
+          Math.round(currentColor.getGreen() * (color.getGreen() * oneDiv255)),
+          Math.round(currentColor.getBlue() * (color.getBlue() * oneDiv255))
         ).hexInt();
       });
     };

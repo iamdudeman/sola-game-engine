@@ -47,6 +47,14 @@ public interface Renderer {
   int getHeight();
 
   /**
+   * Creates a new Renderer instance that draws to a {@link SolaImage} instead of the screen.
+   *
+   * @param solaImage the image to draw to
+   * @return a new renderer instance drawing to an image
+   */
+  Renderer createRendererForImage(SolaImage solaImage);
+
+  /**
    * Creates new layers for drawing on.
    *
    * @param layerNames the names of the layers to create

@@ -89,7 +89,7 @@ public abstract class SolaWithDefaults extends Sola {
    * DefaultsConfigurator provides methods for enabling various default functionality.
    */
   public class DefaultsConfigurator {
-    private Color baseDarknessColor = null;
+    private Color ambientColor = null;
     private boolean isDebug = false;
 
     /**
@@ -185,8 +185,8 @@ public abstract class SolaWithDefaults extends Sola {
           new SpriteEntityGraphicsModule(spriteSheetAssetLoader)
         );
 
-        if (baseDarknessColor != null) {
-          solaGraphics.addGraphicsModules(new ScreenSpaceLightMapGraphicsModule(baseDarknessColor));
+        if (ambientColor != null) {
+          solaGraphics.addGraphicsModules(new ScreenSpaceLightMapGraphicsModule(ambientColor));
         }
 
         if (isDebug && solaPhysics != null) {
@@ -201,7 +201,7 @@ public abstract class SolaWithDefaults extends Sola {
 
     /**
      * Adds the {@link ScreenSpaceLightMapGraphicsModule}
-     * {@link technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule} with base darkness set to black.
+     * {@link technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule} with ambient color set to black.
      *
      * @return this
      */
@@ -211,16 +211,16 @@ public abstract class SolaWithDefaults extends Sola {
 
     /**
      * Adds the {@link ScreenSpaceLightMapGraphicsModule}
-     * {@link technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule} with base darkness set.
+     * {@link technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule} with ambient color set.
      *
-     * @param baseDarknessColor the base darkness color to use
+     * @param ambientColor the ambient color to use
      * @return this
      */
-    public DefaultsConfigurator useLighting(Color baseDarknessColor) {
+    public DefaultsConfigurator useLighting(Color ambientColor) {
       if (solaGraphics == null) {
-        this.baseDarknessColor = baseDarknessColor;
+        this.ambientColor = ambientColor;
       } else {
-        solaGraphics.addGraphicsModules(new ScreenSpaceLightMapGraphicsModule(baseDarknessColor));
+        solaGraphics.addGraphicsModules(new ScreenSpaceLightMapGraphicsModule(ambientColor));
       }
 
       return this;

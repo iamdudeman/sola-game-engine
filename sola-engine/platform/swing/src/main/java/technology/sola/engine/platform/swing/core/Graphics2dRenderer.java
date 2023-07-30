@@ -59,6 +59,11 @@ public class Graphics2dRenderer implements Renderer {
   }
 
   @Override
+  public Renderer createRendererForImage(SolaImage solaImage) {
+    throw new NotYetImplementedException();
+  }
+
+  @Override
   public void setBlendMode(BlendMode blendMode) {
     throw new NotYetImplementedException();
   }

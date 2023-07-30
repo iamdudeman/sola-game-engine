@@ -36,7 +36,7 @@ public class LightingExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGraphics().useLighting().useBackgroundColor(Color.BLACK);
+    defaultsConfigurator.useGraphics().useLighting(new Color(20, 20, 20)).useBackgroundColor(Color.BLACK);
 
     solaEcs.addSystem(new PlayerSystem());
     solaEcs.setWorld(buildWorld());
@@ -70,18 +70,25 @@ public class LightingExample extends SolaWithDefaults {
       int x = random.nextInt(platform.getRenderer().getWidth() - 20) + 10;
       int y = random.nextInt(platform.getRenderer().getHeight() - 20) + 10;
 
-      world.createEntity(
+      Entity treeEntity = world.createEntity(
         new TransformComponent(x, y),
         new SpriteComponent("forest", "tree"),
         new BlendModeComponent(BlendMode.MASK)
       );
+
+      if (random.nextInt(100) < 2) {
+        float radius = random.nextFloat(8f, 16f);
+        float intensity = random.nextFloat(0.1f, 0.9f);
+
+        treeEntity.addComponent(new LightComponent(radius, intensity).setOffset(4, 4));
+      }
     }
 
     world.createEntity(
       new TransformComponent(platform.getRenderer().getWidth() / 2f, platform.getRenderer().getHeight() / 2f),
       new SpriteComponent("forest", "player"),
       new BlendModeComponent(BlendMode.MASK),
-      new LightComponent()
+      new LightComponent(30, 0.8f).setOffset(2.5f, 4)
     ).setName("player");
 
     return world;
