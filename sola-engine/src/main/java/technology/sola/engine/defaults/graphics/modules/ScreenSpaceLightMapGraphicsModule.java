@@ -31,7 +31,8 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
       LightComponent lightComponent = entry.c2();
       float radius = lightComponent.getRadius();
 
-      drawPointLight(lightImageRenderer,
+      drawPointLight(
+        lightImageRenderer,
         transformComponent.getX() - radius + lightComponent.getOffsetX(),
         transformComponent.getY() - radius + lightComponent.getOffsetY(),
         lightComponent

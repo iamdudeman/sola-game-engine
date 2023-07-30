@@ -5,13 +5,13 @@ import technology.sola.engine.graphics.Color;
 
 public class LightComponent implements Component {
   private float radius;
-  private float flickerRate;
   private Color color;
+  private float flickerRate;
   private float offsetX;
   private float offsetY;
   private float c1 = 1;
   private float c2 = 0;
-  private float c3 = 4;
+  private float c3 = 1;
 
   public LightComponent(float radius) {
     this(radius, Color.WHITE);
@@ -26,9 +26,9 @@ public class LightComponent implements Component {
   }
 
   public LightComponent(float radius, float flickerRate, Color color) {
-    this.radius = radius;
+    setRadius(radius);
     this.flickerRate = flickerRate;
-    this.color = color;
+    setColor(color);
   }
 
   public void tickFlicker(float deltaTime) {
