@@ -78,9 +78,9 @@ public class LightingExample extends SolaWithDefaults {
 
       if (random.nextInt(100) < 2) {
         float radius = random.nextFloat(8f, 16f);
-        float intensity = random.nextFloat(0.1f, 0.9f);
+        int intensity = random.nextInt(25, 220);
 
-        treeEntity.addComponent(new LightComponent(radius, intensity).setOffset(4, 4));
+        treeEntity.addComponent(new LightComponent(radius, new Color(intensity, 255, 255, 255)).setOffset(4, 4));
       }
     }
 
@@ -88,7 +88,7 @@ public class LightingExample extends SolaWithDefaults {
       new TransformComponent(platform.getRenderer().getWidth() / 2f, platform.getRenderer().getHeight() / 2f),
       new SpriteComponent("forest", "player"),
       new BlendModeComponent(BlendMode.MASK),
-      new LightComponent(30, 0.8f).setOffset(2.5f, 4)
+      new LightComponent(30, new Color(200, 255, 255, 255)).setOffset(2.5f, 4)
     ).setName("player");
 
     return world;

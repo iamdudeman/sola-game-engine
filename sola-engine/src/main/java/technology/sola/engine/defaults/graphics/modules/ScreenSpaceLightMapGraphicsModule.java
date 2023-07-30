@@ -32,15 +32,14 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
       TransformComponent transformComponent = entry.c1();
       LightComponent lightComponent = entry.c2();
       float radius = lightComponent.getRadius();
-      int alpha = Math.round(lightComponent.getIntensity() * 255);
 
       // todo figure out gradient to black here
 
-      renderGradient(lightImageRenderer,
+      drawRadialGradient(lightImageRenderer,
         transformComponent.getX() - radius + lightComponent.getOffsetX(),
         transformComponent.getY() - radius + lightComponent.getOffsetY(),
         radius,
-        new Color(alpha,255, 255, 255)
+        lightComponent.getColor()
       );
     });
 
@@ -65,7 +64,7 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
   }
 
   // todo this is really hacky
-  private void renderGradient(Renderer renderer, float x, float y, float radius, Color color) {
+  private void drawRadialGradient(Renderer renderer, float x, float y, float radius, Color color) {
     if (shouldSkipDrawCall(renderer, x, y, radius)) {
       return;
     }

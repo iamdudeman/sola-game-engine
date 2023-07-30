@@ -1,36 +1,37 @@
 package technology.sola.engine.graphics.components;
 
 import technology.sola.ecs.Component;
+import technology.sola.engine.graphics.Color;
 
 public class LightComponent implements Component {
   private float radius;
-  private float intensity;
+  private Color color;
   private float offsetX;
   private float offsetY;
 
   public LightComponent(float radius) {
-    this(radius, 1f);
+    this(radius, Color.WHITE);
   }
 
-  public LightComponent(float radius, float intensity) {
+  public LightComponent(float radius, Color color) {
     this.radius = radius;
-    this.intensity = intensity;
+    this.color = color;
   }
 
   public float getRadius() {
     return radius;
   }
 
-  public float getIntensity() {
-    return intensity;
+  public Color getColor() {
+    return color;
   }
 
   public void setRadius(float radius) {
     this.radius = radius;
   }
 
-  public void setIntensity(float intensity) {
-    this.intensity = intensity;
+  public void setColor(Color color) {
+    this.color = color;
   }
 
   public LightComponent setOffset(float x, float y) {
