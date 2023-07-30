@@ -18,6 +18,14 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
     this.ambientColor = ambientColor;
   }
 
+  public Color getAmbientColor() {
+    return ambientColor;
+  }
+
+  public void setAmbientColor(Color ambientColor) {
+    this.ambientColor = ambientColor;
+  }
+
   @Override
   public void renderMethod(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
     SolaImage lightImage = new SolaImage(renderer.getWidth(), renderer.getHeight());
@@ -49,14 +57,6 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
   @Override
   public int getOrder() {
     return ORDER;
-  }
-
-  public Color getAmbientColor() {
-    return ambientColor;
-  }
-
-  public void setAmbientColor(Color ambientColor) {
-    this.ambientColor = ambientColor;
   }
 
   private void drawPointLight(Renderer renderer, float x, float y, LightComponent lightComponent) {
