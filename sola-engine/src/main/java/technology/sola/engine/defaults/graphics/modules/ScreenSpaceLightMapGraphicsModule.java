@@ -18,8 +18,6 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
     this.ambientColor = ambientColor;
   }
 
-  // todo note should add overlapping lights
-
   @Override
   public void renderMethod(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
     SolaImage lightImage = new SolaImage(renderer.getWidth(), renderer.getHeight());
@@ -33,13 +31,10 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
       LightComponent lightComponent = entry.c2();
       float radius = lightComponent.getRadius();
 
-      // todo figure out gradient to black here
-
-      drawRadialGradient(lightImageRenderer,
+      drawPointLight(lightImageRenderer,
         transformComponent.getX() - radius + lightComponent.getOffsetX(),
         transformComponent.getY() - radius + lightComponent.getOffsetY(),
-        radius,
-        lightComponent.getColor()
+        lightComponent
       );
     });
 
@@ -63,12 +58,27 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
     this.ambientColor = ambientColor;
   }
 
-  // todo this is really hacky
-  private void drawRadialGradient(Renderer renderer, float x, float y, float radius, Color color) {
-    if (shouldSkipDrawCall(renderer, x, y, radius)) {
+  private void drawPointLight(Renderer renderer, float x, float y, LightComponent lightComponent) {
+    float radius = lightComponent.getRadius();
+    float diameter = radius * 2;
+
+    if (x - diameter > renderer.getWidth()) {
       return;
     }
 
+    if (x + diameter < 0) {
+      return;
+    }
+
+    if (y - diameter > renderer.getHeight()) {
+      return;
+    }
+
+    if (y + diameter < 0) {
+      return;
+    }
+
+    Color color = lightComponent.getColor();
     float centerX = x + radius;
     float centerY = y + radius;
 
@@ -76,15 +86,15 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
     int yInt = (int) (y + radius + 0.5f);
     int radiusInt = (int) (radius + 0.5f);
     int radiusSquaredInt = (int) (radius * radius + 0.5f);
+    float oneOverRadius = 1f / radius;
 
     for (int i = -radiusInt; i <= radius; i++) {
       for (int j = -radiusInt; j <= radius; j++) {
         if (j * j + i * i <= radiusSquaredInt) {
           int px = xInt + j;
           int py = yInt + i;
-          // todo hackkkyyyy
-          float doot = (radius - new Vector2D(px, py).distance(new Vector2D(centerX, centerY))) / radius;
-          int alpha = Math.round(doot * color.getAlpha());
+          float distance = new Vector2D(px, py).distance(new Vector2D(centerX, centerY)) * oneOverRadius;
+          int alpha = Math.round(lightComponent.calculateAttenuation(distance) * color.getAlpha());
 
           Color newColor = new Color(alpha, color.getRed(), color.getGreen(), color.getBlue());
 
@@ -92,26 +102,5 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
         }
       }
     }
-  }
-
-  // todo these methods are copied from SoftwareRenderer
-  private boolean shouldSkipDrawCall(Renderer renderer, float x, float y, float radius) {
-    return shouldSkipDrawCall(renderer, x, y, radius, radius);
-  }
-
-  private boolean shouldSkipDrawCall(Renderer renderer, float x, float y, float width, float height) {
-    if (x - width > renderer.getWidth()) {
-      return true;
-    }
-
-    if (x + width < 0) {
-      return true;
-    }
-
-    if (y - height > renderer.getHeight()) {
-      return true;
-    }
-
-    return y + height < 0;
   }
 }

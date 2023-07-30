@@ -249,7 +249,9 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   }
 
   private boolean shouldSkipDrawCall(float x, float y, float radius) {
-    return shouldSkipDrawCall(x, y, radius, radius);
+    float diameter = radius * 2;
+
+    return shouldSkipDrawCall(x, y, diameter, diameter);
   }
 
   private boolean shouldSkipDrawCall(float x, float y, float width, float height) {
