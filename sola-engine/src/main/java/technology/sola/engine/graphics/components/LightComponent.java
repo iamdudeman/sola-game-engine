@@ -3,10 +3,11 @@ package technology.sola.engine.graphics.components;
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
 
+import java.util.function.Function;
+
 public class LightComponent implements Component {
   private float radius;
   private Color color;
-  private float flickerRate;
   private float offsetX;
   private float offsetY;
   private float c1 = 1;
@@ -17,17 +18,8 @@ public class LightComponent implements Component {
     this(radius, Color.WHITE);
   }
 
-  public LightComponent(float radius, Color color) {
-    this(radius, 0, color);
-  }
-
-  public LightComponent(float radius, float flickerRate) {
-    this(radius, flickerRate, Color.WHITE);
-  }
-
-  public LightComponent(float radius, float flickerRate, Color color) {
+  public LightComponent(float radius,  Color color) {
     setRadius(radius);
-    this.flickerRate = flickerRate;
     setColor(color);
   }
 
@@ -92,5 +84,14 @@ public class LightComponent implements Component {
 
   public float getOffsetY() {
     return offsetY;
+  }
+
+  // todo finalize and hook up to tickFlicker
+  public record FlickerSettings(
+    float min,
+    float max,
+    float changeChance, // chance per frame to change
+    Function<Float, Float> smoothingFunction
+  ) {
   }
 }

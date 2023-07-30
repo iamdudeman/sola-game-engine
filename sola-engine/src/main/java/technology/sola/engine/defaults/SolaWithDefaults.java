@@ -16,6 +16,7 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.system.LightFlickerSystem;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
 
 import java.util.function.Consumer;
@@ -187,6 +188,7 @@ public abstract class SolaWithDefaults extends Sola {
 
         if (ambientColor != null) {
           solaGraphics.addGraphicsModules(new ScreenSpaceLightMapGraphicsModule(ambientColor));
+          solaEcs.addSystem(new LightFlickerSystem());
         }
 
         if (isDebug && solaPhysics != null) {
@@ -221,6 +223,7 @@ public abstract class SolaWithDefaults extends Sola {
         this.ambientColor = ambientColor;
       } else {
         solaGraphics.addGraphicsModules(new ScreenSpaceLightMapGraphicsModule(ambientColor));
+        solaEcs.addSystem(new LightFlickerSystem());
       }
 
       return this;
