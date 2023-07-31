@@ -124,7 +124,9 @@ public class LightingExample extends SolaWithDefaults {
           new TransformComponent(coordinate.x(), coordinate.y()),
           new SpriteComponent("forest", "torch"),
           new BlendModeComponent(BlendMode.MASK),
-          new LightComponent(radius, new Color(intensity, 255, 255, 255)).setOffset(1.5f, 3)
+          new LightComponent(radius, new Color(intensity, 255, 255, 255)).setOffset(1.5f, 3).setFlickerSettings(new LightComponent.FlickerSettings(
+            0.2f, .8f
+          ))
         );
       }
     }

@@ -3,11 +3,12 @@ package technology.sola.engine.graphics.components;
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
 
-import java.util.function.Function;
+import java.util.Random;
 
 public class LightComponent implements Component {
   private float radius;
   private Color color;
+  private FlickerSettings flickerSettings;
   private float offsetX;
   private float offsetY;
   private float c1 = 1;
@@ -24,7 +25,18 @@ public class LightComponent implements Component {
   }
 
   public void tickFlicker(float deltaTime) {
+    if (flickerSettings != null) {
+      Random random = new Random();
 
+      if (random.nextFloat() < flickerSettings.rate) {
+        int nextValue = (int) (255 * random.nextFloat(flickerSettings.min, flickerSettings.max) + 0.5f);
+        int smoothedValue = flickerSettings.smoothingFunction.apply(color.getAlpha(), nextValue, deltaTime);
+
+        setColor(new Color(
+          smoothedValue, color.getRed(), color.getGreen(), color.getBlue()
+        ));
+      }
+    }
   }
 
   /**
@@ -86,12 +98,25 @@ public class LightComponent implements Component {
     return offsetY;
   }
 
-  // todo finalize and hook up to tickFlicker
+  public LightComponent setFlickerSettings(FlickerSettings flickerSettings) {
+    this.flickerSettings = flickerSettings;
+
+    return this;
+  }
+
   public record FlickerSettings(
     float min,
     float max,
-    float changeChance, // chance per frame to change
-    Function<Float, Float> smoothingFunction
+    float rate,
+    FlickerSmoothing smoothingFunction
   ) {
+    public FlickerSettings(float min, float max) {
+      this(min, max, 0.15f, (current, next, deltaTime) -> ((current + next) / 2));
+    }
+  }
+
+  @FunctionalInterface
+  public interface FlickerSmoothing {
+    int apply(int current, int next, float deltaTime);
   }
 }
