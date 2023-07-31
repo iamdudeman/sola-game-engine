@@ -2,6 +2,8 @@
 
 ## Known Bugs List
 
+* Render order of lighting example is not correct for Browser platform
+
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Planned Cleanup List
@@ -15,7 +17,6 @@
 
 ## TODO List
 
-* Add ability for lights to flicker
 * Move custom build "distribution" tasks to a gradle plugin
     * sola game template should use these plugins as well
 * Rendering
