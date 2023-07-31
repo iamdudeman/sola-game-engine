@@ -15,6 +15,8 @@ import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
+import technology.sola.engine.input.MouseButton;
+import technology.sola.math.linear.Vector2D;
 
 import java.util.Random;
 
@@ -36,7 +38,7 @@ public class LightingExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGraphics().useLighting(new Color(20, 20, 20)).useBackgroundColor(Color.BLACK);
+    defaultsConfigurator.useGraphics().useLighting(new Color(10, 10, 10)).useBackgroundColor(Color.BLACK);
 
     solaEcs.addSystem(new PlayerSystem());
     solaEcs.setWorld(buildWorld());
@@ -56,7 +58,7 @@ public class LightingExample extends SolaWithDefaults {
 
     for (int i = 0; i < platform.getRenderer().getWidth(); i += 8) {
       for (int j = 0; j < platform.getRenderer().getHeight(); j += 8) {
-        int grassTileIndex = random.nextInt(4) + 1;
+        int grassTileIndex = random.nextInt(3) + 1;
         String grassSprite = "grass_" + grassTileIndex;
 
         world.createEntity(
@@ -70,32 +72,24 @@ public class LightingExample extends SolaWithDefaults {
       int x = random.nextInt(platform.getRenderer().getWidth() - 20) + 10;
       int y = random.nextInt(platform.getRenderer().getHeight() - 20) + 10;
 
-      Entity treeEntity = world.createEntity(
+      world.createEntity(
         new TransformComponent(x, y),
         new SpriteComponent("forest", "tree"),
         new BlendModeComponent(BlendMode.MASK)
       );
-
-      if (random.nextInt(100) < 2) {
-        float radius = random.nextFloat(8f, 16f);
-        int intensity = random.nextInt(25, 220);
-
-        treeEntity.addComponent(new LightComponent(radius, new Color(intensity, 255, 255, 255)).setOffset(4, 4));
-      }
     }
 
     world.createEntity(
       new TransformComponent(platform.getRenderer().getWidth() / 2f, platform.getRenderer().getHeight() / 2f),
       new SpriteComponent("forest", "player"),
       new BlendModeComponent(BlendMode.MASK),
-      new LightComponent(30, new Color(200, 255, 255, 255)).setOffset(2.5f, 4)
+      new LightComponent(50, new Color(200, 255, 255, 255)).setOffset(2.5f, 4)
     ).setName("player");
 
     return world;
   }
 
   private class PlayerSystem extends EcsSystem {
-
     @Override
     public void update(World world, float deltaTime) {
       final int speed = 2;
@@ -118,6 +112,20 @@ public class LightingExample extends SolaWithDefaults {
       }
       if (keyboardInput.isKeyHeld(Key.D)) {
         transformComponent.setX(transformComponent.getX() + speed);
+      }
+
+      if (mouseInput.isMouseClicked(MouseButton.PRIMARY)) {
+        Random random = new Random();
+        Vector2D coordinate = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
+        float radius = random.nextFloat(8f, 32f);
+        int intensity = random.nextInt(25, 220);
+
+        world.createEntity(
+          new TransformComponent(coordinate.x(), coordinate.y()),
+          new SpriteComponent("forest", "torch"),
+          new BlendModeComponent(BlendMode.MASK),
+          new LightComponent(radius, new Color(intensity, 255, 255, 255)).setOffset(1.5f, 3)
+        );
       }
     }
   }
