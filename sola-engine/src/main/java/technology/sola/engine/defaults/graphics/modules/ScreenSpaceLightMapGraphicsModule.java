@@ -10,18 +10,38 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
+/**
+ * ScreenSpaceLightMapGraphicsModule is a {@link SolaGraphicsModule} that handles drawing lighting for
+ * {@link technology.sola.ecs.Entity} that have {@link LightComponent}s.
+ */
 public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
+  /**
+   * The render order for this graphics module.
+   */
   public static final int ORDER = 99;
   private Color ambientColor;
 
+  /**
+   * Creates an instance of this graphics module with ambient {@link Color} used for lighting.
+   *
+   * @param ambientColor the ambient color for lighting
+   */
   public ScreenSpaceLightMapGraphicsModule(Color ambientColor) {
     this.ambientColor = ambientColor;
   }
 
+  /**
+   * @return the ambient {@link Color}
+   */
   public Color getAmbientColor() {
     return ambientColor;
   }
 
+  /**
+   * Sets the ambient {@link Color} used for lighting.
+   *
+   * @param ambientColor the new ambient color
+   */
   public void setAmbientColor(Color ambientColor) {
     this.ambientColor = ambientColor;
   }

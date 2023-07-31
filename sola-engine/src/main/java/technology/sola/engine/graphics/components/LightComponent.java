@@ -19,7 +19,7 @@ public class LightComponent implements Component {
     this(radius, Color.WHITE);
   }
 
-  public LightComponent(float radius,  Color color) {
+  public LightComponent(float radius, Color color) {
     setRadius(radius);
     setColor(color);
   }
