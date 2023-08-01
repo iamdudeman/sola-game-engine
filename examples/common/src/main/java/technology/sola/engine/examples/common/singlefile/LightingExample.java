@@ -13,6 +13,7 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.LightComponent;
+import technology.sola.engine.graphics.components.LightFlicker;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.screen.AspectMode;
@@ -27,6 +28,7 @@ import java.util.Random;
  *
  * <ul>
  *   <li>{@link LightComponent}</li>
+ *   <li>{@link technology.sola.engine.graphics.system.LightFlickerSystem}</li>
  *   <li>{@link ScreenSpaceLightMapGraphicsModule}</li>
  * </ul>
  */
@@ -143,7 +145,7 @@ public class LightingExample extends SolaWithDefaults {
           new LayerComponent("objects", 1),
           new LightComponent(radius, new Color(intensity, 255, 255, 255))
             .setOffset(1.5f, 3)
-            .setFlickerSettings(new LightComponent.FlickerSettings(0.2f, .8f))
+            .setLightFlicker(new LightFlicker(0.2f, .8f))
         );
       }
     }

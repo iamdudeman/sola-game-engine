@@ -5,32 +5,51 @@ import technology.sola.engine.graphics.Color;
 
 import java.util.Random;
 
+/**
+ * LightComponent is a {@link Component} containing data for rendering lights.
+ */
 public class LightComponent implements Component {
+  private final Random random = new Random();
   private float radius;
   private Color color;
-  private FlickerSettings flickerSettings;
+  private LightFlicker lightFlicker;
   private float offsetX;
   private float offsetY;
   private float c1 = 1;
   private float c2 = 0;
   private float c3 = 1;
 
+  /**
+   * Creates a fully bright, white point light with radius.
+   *
+   * @param radius the radius of the point light
+   */
   public LightComponent(float radius) {
     this(radius, Color.WHITE);
   }
 
+  /**
+   * Creates a point light with radius and {@link Color}.
+   *
+   * @param radius the radius of the point light
+   * @param color  the color of the light
+   */
   public LightComponent(float radius, Color color) {
     setRadius(radius);
     setColor(color);
   }
 
+  /**
+   * Method called each from to tick the state of this light's flickering if a {@link LightFlicker} has been set.
+   *
+   * @param deltaTime the delta time of the frame
+   */
   public void tickFlicker(float deltaTime) {
-    if (flickerSettings != null) {
-      Random random = new Random();
+    if (lightFlicker != null) {
 
-      if (random.nextFloat() < flickerSettings.rate) {
-        int nextValue = (int) (255 * random.nextFloat(flickerSettings.min, flickerSettings.max) + 0.5f);
-        int smoothedValue = flickerSettings.smoothingFunction.apply(color.getAlpha(), nextValue, deltaTime);
+      if (random.nextFloat() < lightFlicker.rate()) {
+        int nextValue = (int) (255 * random.nextFloat(lightFlicker.min(), lightFlicker.max()) + 0.5f);
+        int smoothedValue = lightFlicker.smoothingFunction().apply(color.getAlpha(), nextValue, deltaTime);
 
         setColor(new Color(
           smoothedValue, color.getRed(), color.getGreen(), color.getBlue()
@@ -40,24 +59,30 @@ public class LightComponent implements Component {
   }
 
   /**
-   * todo
+   * Calculates the attenuation of the light for a distance.
    *
-   * 1.0 / (c1 + c2*d + c3*d^2)
+   * <pre>
+   * 1.0 / (c1 + (c2 * d) + (c3 * d^2))
+   * </pre>
    *
-   * @param distance
-   * @return
+   * @param distance the distance to calculate for
+   * @return the attenuation
    */
   public float calculateAttenuation(float distance) {
     return 1f / (c1 + c2 * distance + c3 * distance * distance);
   }
 
   /**
-   * todo
+   * Sets the attenuation calculation constants.
+   *
+   * <pre>
+   * 1.0 / (c1 + (c2 * d) + (c3 * d^2))
+   * </pre>
    *
    * @param c1 constant value (1 is a good value)
    * @param c2 linear constant
    * @param c3 quadratic constant
-   * @return
+   * @return this
    */
   public LightComponent setAttenuationConstants(float c1, float c2, float c3) {
     this.c1 = c1;
@@ -67,22 +92,45 @@ public class LightComponent implements Component {
     return this;
   }
 
+  /**
+   * @return the radius of the light
+   */
   public float getRadius() {
     return radius;
   }
 
+  /**
+   * @return the {@link Color} of the light
+   */
   public Color getColor() {
     return color;
   }
 
+  /**
+   * Sets the radius of the light.
+   *
+   * @param radius the new radius
+   */
   public void setRadius(float radius) {
     this.radius = radius;
   }
 
+  /**
+   * Sets the {@link Color} of the light.
+   *
+   * @param color the new color
+   */
   public void setColor(Color color) {
     this.color = color;
   }
 
+  /**
+   * Sets a positional offset for the light.
+   *
+   * @param x the x offset
+   * @param y the y offset
+   * @return this
+   */
   public LightComponent setOffset(float x, float y) {
     this.offsetX = x;
     this.offsetY = y;
@@ -90,33 +138,29 @@ public class LightComponent implements Component {
     return this;
   }
 
+  /**
+   * @return the x positional offset
+   */
   public float getOffsetX() {
     return offsetX;
   }
 
+  /**
+   * @return the y positional offset
+   */
   public float getOffsetY() {
     return offsetY;
   }
 
-  public LightComponent setFlickerSettings(FlickerSettings flickerSettings) {
-    this.flickerSettings = flickerSettings;
+  /**
+   * Sets the {@link LightFlicker} to use or null if no flicker is desired.
+   *
+   * @param lightFlicker the new light flicker behavior
+   * @return this
+   */
+  public LightComponent setLightFlicker(LightFlicker lightFlicker) {
+    this.lightFlicker = lightFlicker;
 
     return this;
-  }
-
-  public record FlickerSettings(
-    float min,
-    float max,
-    float rate,
-    FlickerSmoothing smoothingFunction
-  ) {
-    public FlickerSettings(float min, float max) {
-      this(min, max, 0.15f, (current, next, deltaTime) -> ((current + next) / 2));
-    }
-  }
-
-  @FunctionalInterface
-  public interface FlickerSmoothing {
-    int apply(int current, int next, float deltaTime);
   }
 }
