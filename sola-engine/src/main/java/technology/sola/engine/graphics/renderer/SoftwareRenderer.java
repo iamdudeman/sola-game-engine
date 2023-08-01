@@ -8,6 +8,7 @@ import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Canvas;
 import technology.sola.engine.graphics.Color;
+import technology.sola.math.SolaMath;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
@@ -426,9 +427,9 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
         pixels[pixelIndex] = new Color(
           currentColor.getAlpha(),
-          Math.round(currentColor.getRed() * (color.getRed() * oneDiv255)),
-          Math.round(currentColor.getGreen() * (color.getGreen() * oneDiv255)),
-          Math.round(currentColor.getBlue() * (color.getBlue() * oneDiv255))
+          SolaMath.fastRound(currentColor.getRed() * (color.getRed() * oneDiv255)),
+          SolaMath.fastRound(currentColor.getGreen() * (color.getGreen() * oneDiv255)),
+          SolaMath.fastRound(currentColor.getBlue() * (color.getBlue() * oneDiv255))
         ).hexInt();
       });
     };

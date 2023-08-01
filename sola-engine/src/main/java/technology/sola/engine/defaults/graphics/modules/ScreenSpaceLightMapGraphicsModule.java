@@ -8,6 +8,7 @@ import technology.sola.engine.graphics.components.LightComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Layer;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.math.SolaMath;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
@@ -122,10 +123,10 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
     float centerX = x + radius;
     float centerY = y + radius;
 
-    int xInt = (int) (x + radius + 0.5f);
-    int yInt = (int) (y + radius + 0.5f);
-    int radiusInt = (int) (radius + 0.5f);
-    int radiusSquaredInt = (int) (radius * radius + 0.5f);
+    int xInt = SolaMath.fastRound(x + radius);
+    int yInt = SolaMath.fastRound(y + radius);
+    int radiusInt = SolaMath.fastRound(radius);
+    int radiusSquaredInt = SolaMath.fastRound(radius * radius);
     float oneOverRadius = 1f / radius;
 
     for (int i = -radiusInt; i <= radius; i++) {

@@ -2,6 +2,7 @@ package technology.sola.engine.graphics.components;
 
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
+import technology.sola.math.SolaMath;
 
 import java.util.Random;
 
@@ -48,7 +49,7 @@ public class LightComponent implements Component {
     if (lightFlicker != null) {
 
       if (random.nextFloat() < lightFlicker.rate()) {
-        int nextValue = (int) (255 * random.nextFloat(lightFlicker.min(), lightFlicker.max()) + 0.5f);
+        int nextValue = SolaMath.fastRound(255 * random.nextFloat(lightFlicker.min(), lightFlicker.max()));
         int smoothedValue = lightFlicker.smoothingFunction().apply(color.getAlpha(), nextValue, deltaTime);
 
         setColor(new Color(
