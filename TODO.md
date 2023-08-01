@@ -2,8 +2,6 @@
 
 ## Known Bugs List
 
-* Render order of lighting example is not correct for Browser platform
-
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Planned Cleanup List

@@ -8,8 +8,10 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.defaults.graphics.modules.ScreenSpaceLightMapGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.SpriteEntityGraphicsModule;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
+import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.LightComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
@@ -38,11 +40,12 @@ public class LightingExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGraphics().useLighting(new Color(10, 10, 10)).useBackgroundColor(Color.BLACK);
+    defaultsConfigurator.useGraphics().useLighting(new Color(10, 10, 10)).useBackgroundColor(Color.WHITE);
 
     solaEcs.addSystem(new PlayerSystem());
     solaEcs.setWorld(buildWorld());
     platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
+    platform.getRenderer().createLayers("objects");
   }
 
   @Override
@@ -75,6 +78,7 @@ public class LightingExample extends SolaWithDefaults {
       world.createEntity(
         new TransformComponent(x, y),
         new SpriteComponent("forest", "tree"),
+        new LayerComponent("objects"),
         new BlendModeComponent(BlendMode.MASK)
       );
     }
@@ -83,6 +87,7 @@ public class LightingExample extends SolaWithDefaults {
       new TransformComponent(platform.getRenderer().getWidth() / 2f, platform.getRenderer().getHeight() / 2f),
       new SpriteComponent("forest", "player"),
       new BlendModeComponent(BlendMode.MASK),
+      new LayerComponent("objects", 2),
       new LightComponent(50, new Color(200, 255, 255, 255)).setOffset(2.5f, 4)
     ).setName("player");
 
@@ -98,8 +103,19 @@ public class LightingExample extends SolaWithDefaults {
 
       if (keyboardInput.isKeyPressed(Key.SPACE)) {
         ScreenSpaceLightMapGraphicsModule screenSpaceLightMapGraphicsModule = solaGraphics.getGraphicsModule(ScreenSpaceLightMapGraphicsModule.class);
+        SpriteEntityGraphicsModule spriteEntityGraphicsModule = solaGraphics.getGraphicsModule(SpriteEntityGraphicsModule.class);
 
-        screenSpaceLightMapGraphicsModule.setActive(!screenSpaceLightMapGraphicsModule.isActive());
+        if (spriteEntityGraphicsModule.isActive() && screenSpaceLightMapGraphicsModule.isActive()) {
+          screenSpaceLightMapGraphicsModule.setActive(false);
+          spriteEntityGraphicsModule.setActive(true);
+        } else if (spriteEntityGraphicsModule.isActive() && !screenSpaceLightMapGraphicsModule.isActive()) {
+          screenSpaceLightMapGraphicsModule.setActive(true);
+          spriteEntityGraphicsModule.setActive(false);
+        } else {
+          screenSpaceLightMapGraphicsModule.setActive(true);
+          spriteEntityGraphicsModule.setActive(true);
+        }
+
       }
       if (keyboardInput.isKeyHeld(Key.W)) {
         transformComponent.setY(transformComponent.getY() - speed);
@@ -124,9 +140,10 @@ public class LightingExample extends SolaWithDefaults {
           new TransformComponent(coordinate.x(), coordinate.y()),
           new SpriteComponent("forest", "torch"),
           new BlendModeComponent(BlendMode.MASK),
-          new LightComponent(radius, new Color(intensity, 255, 255, 255)).setOffset(1.5f, 3).setFlickerSettings(new LightComponent.FlickerSettings(
-            0.2f, .8f
-          ))
+          new LayerComponent("objects", 1),
+          new LightComponent(radius, new Color(intensity, 255, 255, 255))
+            .setOffset(1.5f, 3)
+            .setFlickerSettings(new LightComponent.FlickerSettings(0.2f, .8f))
         );
       }
     }
