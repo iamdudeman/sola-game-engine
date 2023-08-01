@@ -6,9 +6,12 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.LightComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
+import technology.sola.engine.graphics.renderer.Layer;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
+
+import java.util.List;
 
 /**
  * ScreenSpaceLightMapGraphicsModule is a {@link SolaGraphicsModule} that handles drawing lighting for
@@ -52,26 +55,42 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
     Renderer lightImageRenderer = renderer.createRendererForImage(lightImage);
 
     lightImageRenderer.clear(ambientColor);
-
     lightImageRenderer.setBlendMode(BlendMode.NORMAL);
-    world.createView().of(TransformComponent.class, LightComponent.class).getEntries().forEach(entry -> {
-      TransformComponent transformComponent = entry.c1();
-      LightComponent lightComponent = entry.c2();
-      float radius = lightComponent.getRadius();
+    world.createView().of(TransformComponent.class, LightComponent.class)
+      .getEntries()
+      .forEach(entry -> {
+        TransformComponent transformComponent = entry.c1();
+        LightComponent lightComponent = entry.c2();
+        float radius = lightComponent.getRadius();
 
-      drawPointLight(
-        lightImageRenderer,
-        transformComponent.getX() - radius + lightComponent.getOffsetX(),
-        transformComponent.getY() - radius + lightComponent.getOffsetY(),
-        lightComponent
-      );
-    });
+        drawPointLight(
+          lightImageRenderer,
+          transformComponent.getX() - radius + lightComponent.getOffsetX(),
+          transformComponent.getY() - radius + lightComponent.getOffsetY(),
+          lightComponent
+        );
+      });
 
-    BlendMode previousBlendMode = renderer.getBlendMode();
+    List<Layer> layers = renderer.getLayers();
 
-    renderer.setBlendMode(BlendMode.MULTIPLY);
-    renderer.drawImage(lightImage, 0, 0);
-    renderer.setBlendMode(previousBlendMode);
+    if (layers.isEmpty()) {
+      BlendMode previousBlendMode = renderer.getBlendMode();
+
+      renderer.setBlendMode(BlendMode.MULTIPLY);
+      renderer.drawImage(lightImage, 0, 0);
+      renderer.setBlendMode(previousBlendMode);
+    } else {
+      // If there are layers ensure lighting is rendered in the last one
+      Layer lastLayer = layers.get(layers.size() - 1);
+
+      lastLayer.add(r -> {
+        BlendMode previousBlendMode = r.getBlendMode();
+
+        r.setBlendMode(BlendMode.MULTIPLY);
+        r.drawImage(lightImage, 0, 0);
+        r.setBlendMode(previousBlendMode);
+      }, ORDER);
+    }
   }
 
   @Override
