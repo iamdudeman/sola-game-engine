@@ -47,14 +47,11 @@ public class LightComponent implements Component {
    */
   public void tickFlicker(float deltaTime) {
     if (lightFlicker != null) {
-
       if (random.nextFloat() < lightFlicker.rate()) {
         int nextValue = SolaMath.fastRound(255 * random.nextFloat(lightFlicker.min(), lightFlicker.max()));
         int smoothedValue = lightFlicker.smoothingFunction().apply(color.getAlpha(), nextValue, deltaTime);
 
-        setColor(new Color(
-          smoothedValue, color.getRed(), color.getGreen(), color.getBlue()
-        ));
+        setColor(color.updateAlpha(smoothedValue));
       }
     }
   }

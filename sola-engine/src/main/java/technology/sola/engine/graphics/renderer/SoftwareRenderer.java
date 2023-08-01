@@ -108,10 +108,10 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
   @Override
   public void drawLine(float x1, float y1, float x2, float y2, Color color) {
-    int xInt = (int) (x1 + 0.5f);
-    int yInt = (int) (y1 + 0.5f);
-    int x2Int = (int) (x2 + 0.5f);
-    int y2Int = (int) (y2 + 0.5f);
+    int xInt = SolaMath.fastRound(x1);
+    int yInt = SolaMath.fastRound(y1);
+    int x2Int = SolaMath.fastRound(x2);
+    int y2Int = SolaMath.fastRound(y2);
 
     drawLineInt(xInt, yInt, x2Int, y2Int, color);
   }
@@ -134,10 +134,10 @@ public class SoftwareRenderer extends Canvas implements Renderer {
       return;
     }
 
-    int xInt = (int) (x + 0.5f);
-    int yInt = (int) (y + 0.5f);
-    int xPlusWidth = (int) (x + width + 0.5f);
-    int yPlusHeight = (int) (y + height + 0.5f);
+    int xInt = SolaMath.fastRound(x);
+    int yInt = SolaMath.fastRound(y);
+    int xPlusWidth = SolaMath.fastRound(x + width);
+    int yPlusHeight = SolaMath.fastRound(y + height);
 
     for (int i = xInt; i < xPlusWidth; i++) {
       drawLine(i, yInt, i, yPlusHeight, color);
@@ -150,9 +150,9 @@ public class SoftwareRenderer extends Canvas implements Renderer {
       return;
     }
 
-    int xCenter = (int) (x + radius + 0.5f);
-    int yCenter = (int) (y + radius + 0.5f);
-    int radiusInt = (int) (radius + 0.5f);
+    int xCenter = SolaMath.fastRound(x + radius);
+    int yCenter = SolaMath.fastRound(y + radius);
+    int radiusInt = SolaMath.fastRound(radius);
 
     int dVar = 3 - 2 * radiusInt;
     int plotX = 0;
@@ -178,15 +178,18 @@ public class SoftwareRenderer extends Canvas implements Renderer {
       return;
     }
 
-    int xInt = (int) (x + radius + 0.5f);
-    int yInt = (int) (y + radius + 0.5f);
-    int radiusInt = (int) (radius + 0.5f);
-    int radiusSquaredInt = (int) (radius * radius + 0.5f);
+    int xInt = SolaMath.fastRound(x + radius);
+    int yInt = SolaMath.fastRound(y + radius);
+    int radiusInt = SolaMath.fastRound(radius);
+    int radiusSquaredInt = SolaMath.fastRound(radius * radius);
 
-    for (int i = -radiusInt; i <= radius; i++)
-      for (int j = -radiusInt; j <= radius; j++)
-        if (j * j + i * i <= radiusSquaredInt)
+    for (int i = -radiusInt; i <= radius; i++) {
+      for (int j = -radiusInt; j <= radius; j++) {
+        if (j * j + i * i <= radiusSquaredInt) {
           setPixel(xInt + j, yInt + i, color);
+        }
+      }
+    }
   }
 
   @Override
@@ -196,8 +199,8 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     }
 
     int[] imagePixels = solaImage.getPixels();
-    int xInt = (int) (x + 0.5f);
-    int yInt = (int) (y + 0.5f);
+    int xInt = SolaMath.fastRound(x);
+    int yInt = SolaMath.fastRound(y);
 
     int index = 0;
     int xImagePos = 0;

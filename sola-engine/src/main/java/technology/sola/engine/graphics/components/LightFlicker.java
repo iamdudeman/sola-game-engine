@@ -21,7 +21,7 @@ public record LightFlicker(
    * @param max maximum light intensity between 0 and 1
    */
   public LightFlicker(float min, float max) {
-    this(min, max, 0.15f, (current, next, deltaTime) -> ((current + next) / 2));
+    this(min, max, 0.15f, FlickerSmoothing.RUNNING_AVERAGE);
   }
 
   /**
@@ -29,6 +29,11 @@ public record LightFlicker(
    */
   @FunctionalInterface
   public interface FlickerSmoothing {
+    /**
+     * Returns the average of the current value and the next value.
+     */
+    FlickerSmoothing RUNNING_AVERAGE = ((current, next, deltaTime) -> (current + next) / 2);
+
     /**
      * Function called to smooth the transition between the current and next light intensity values
      *

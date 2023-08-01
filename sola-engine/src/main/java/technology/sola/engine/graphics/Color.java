@@ -140,6 +140,16 @@ public class Color {
   }
 
   /**
+   * Returns a new {@link Color} with updated alpha.
+   *
+   * @param alpha the new alpha
+   * @return a new color instance with updated alpha
+   */
+  public Color updateAlpha(int alpha) {
+    return new Color(alpha, r, g, b);
+  }
+
+  /**
    * Creates a grey scale Color using this Color as the base.
    *
    * @return this color as greyscale
@@ -179,10 +189,10 @@ public class Color {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Color color = (Color) o;
+  public boolean equals(Object other) {
+    if (this == other) return true;
+    if (other == null || getClass() != other.getClass()) return false;
+    Color color = (Color) other;
     return hexInt == color.hexInt;
   }
 

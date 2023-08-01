@@ -137,9 +137,7 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
           float distance = new Vector2D(px, py).distance(new Vector2D(centerX, centerY)) * oneOverRadius;
           int alpha = Math.round(lightComponent.calculateAttenuation(distance) * color.getAlpha());
 
-          Color newColor = new Color(alpha, color.getRed(), color.getGreen(), color.getBlue());
-
-          renderer.setPixel(px, py, newColor);
+          renderer.setPixel(px, py, color.updateAlpha(alpha));
         }
       }
     }
