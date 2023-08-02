@@ -24,7 +24,6 @@ import java.util.Random;
  */
 public class SoftwareRenderer extends Canvas implements Renderer {
   private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareRenderer.class);
-  private final float oneDiv255 = 1 / 255f;
   private final Random random = new Random();
   private final List<Layer> layers = new ArrayList<>();
   private BlendMode blendMode;
@@ -399,7 +398,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
       case NORMAL -> ((pixelIndex, color) -> {
         if (color.hasAlpha()) {
           Color currentColor = new Color(pixels[pixelIndex]);
-          float alphaMod = color.getAlpha() / 255f;
+          float alphaMod = color.getAlpha() * Color.ONE_DIV_255;
           float oneMinusAlpha = 1 - alphaMod;
 
           float red = currentColor.getRed() * oneMinusAlpha + color.getRed() * alphaMod;
@@ -430,9 +429,19 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
         pixels[pixelIndex] = new Color(
           currentColor.getAlpha(),
-          SolaMath.fastRound(currentColor.getRed() * (color.getRed() * oneDiv255)),
-          SolaMath.fastRound(currentColor.getGreen() * (color.getGreen() * oneDiv255)),
-          SolaMath.fastRound(currentColor.getBlue() * (color.getBlue() * oneDiv255))
+          SolaMath.fastRound(currentColor.getRed() * (color.getRed() * Color.ONE_DIV_255)),
+          SolaMath.fastRound(currentColor.getGreen() * (color.getGreen() * Color.ONE_DIV_255)),
+          SolaMath.fastRound(currentColor.getBlue() * (color.getBlue() * Color.ONE_DIV_255))
+        ).hexInt();
+      });
+      case LIGHTEN -> ((pixelIndex, color) -> {
+        Color currentColor = new Color(pixels[pixelIndex]);
+
+        pixels[pixelIndex] = new Color(
+          Math.max(currentColor.getAlpha(), color.getAlpha()),
+          Math.max(currentColor.getRed(), color.getRed()),
+          Math.max(currentColor.getGreen(), color.getGreen()),
+          Math.max(currentColor.getBlue(), color.getBlue())
         ).hexInt();
       });
     };

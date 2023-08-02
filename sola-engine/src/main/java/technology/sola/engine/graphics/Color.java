@@ -50,6 +50,10 @@ public class Color {
    * Color constant - rgb(255, 255, 255).
    */
   public static final Color WHITE = new Color(255, 255, 255);
+  /**
+   * Constant used to normalize ARGB values to between 0 and 1.
+   */
+  public static final float ONE_DIV_255 = 1 / 255f;
 
   private final int alpha;
   private final int r;

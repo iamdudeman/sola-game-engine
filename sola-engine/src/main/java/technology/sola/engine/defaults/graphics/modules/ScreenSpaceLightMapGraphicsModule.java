@@ -52,11 +52,39 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
 
   @Override
   public void renderMethod(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
+    SolaImage lightMapImage = prepareLightmap(renderer, world);
+
+    // Draw lightmap on top of everything else
+    List<Layer> layers = renderer.getLayers();
+
+    if (layers.isEmpty()) {
+      drawLightmap(renderer, lightMapImage);
+    } else {
+      // If there are layers ensure lighting is rendered in the last one
+      Layer lastLayer = layers.get(layers.size() - 1);
+
+      lastLayer.add(r -> drawLightmap(r, lightMapImage), ORDER);
+    }
+  }
+
+  @Override
+  public int getOrder() {
+    return ORDER;
+  }
+
+  private void drawLightmap(Renderer renderer, SolaImage lightMapImage) {
+    BlendMode previousBlendMode = renderer.getBlendMode();
+
+    renderer.setBlendMode(BlendMode.MULTIPLY);
+    renderer.drawImage(lightMapImage, 0, 0);
+    renderer.setBlendMode(previousBlendMode);
+  }
+
+  private SolaImage prepareLightmap(Renderer renderer, World world) {
     SolaImage lightImage = new SolaImage(renderer.getWidth(), renderer.getHeight());
     Renderer lightImageRenderer = renderer.createRendererForImage(lightImage);
 
-    lightImageRenderer.clear(ambientColor);
-    lightImageRenderer.setBlendMode(BlendMode.NORMAL);
+    lightImageRenderer.setBlendMode(BlendMode.LIGHTEN);
     world.createView().of(TransformComponent.class, LightComponent.class)
       .getEntries()
       .forEach(entry -> {
@@ -72,31 +100,14 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
         );
       });
 
-    List<Layer> layers = renderer.getLayers();
+    // Blend the lights into the ambient lighting color
+    SolaImage lightMapImage = new SolaImage(renderer.getWidth(), renderer.getHeight());
+    Renderer lightMapRenderer = renderer.createRendererForImage(lightMapImage);
+    lightMapRenderer.clear(ambientColor);
+    lightMapRenderer.setBlendMode(BlendMode.NORMAL);
+    lightMapRenderer.drawImage(lightImage, 0, 0);
 
-    if (layers.isEmpty()) {
-      BlendMode previousBlendMode = renderer.getBlendMode();
-
-      renderer.setBlendMode(BlendMode.MULTIPLY);
-      renderer.drawImage(lightImage, 0, 0);
-      renderer.setBlendMode(previousBlendMode);
-    } else {
-      // If there are layers ensure lighting is rendered in the last one
-      Layer lastLayer = layers.get(layers.size() - 1);
-
-      lastLayer.add(r -> {
-        BlendMode previousBlendMode = r.getBlendMode();
-
-        r.setBlendMode(BlendMode.MULTIPLY);
-        r.drawImage(lightImage, 0, 0);
-        r.setBlendMode(previousBlendMode);
-      }, ORDER);
-    }
-  }
-
-  @Override
-  public int getOrder() {
-    return ORDER;
+    return lightMapImage;
   }
 
   private void drawPointLight(Renderer renderer, float x, float y, LightComponent lightComponent) {

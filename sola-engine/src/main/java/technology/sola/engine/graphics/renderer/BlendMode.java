@@ -36,4 +36,9 @@ public enum BlendMode {
    * corresponding pixel from the bottom layer.
    */
   MULTIPLY,
+
+  /**
+   * Takes the max value of each channel for the destination pixel; alpha, red, green, blue.
+   */
+  LIGHTEN,
 }
