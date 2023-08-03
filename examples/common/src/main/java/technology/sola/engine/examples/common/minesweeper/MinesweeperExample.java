@@ -3,7 +3,7 @@ package technology.sola.engine.examples.common.minesweeper;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.examples.common.minesweeper.event.NewGameEvent;
-import technology.sola.engine.examples.common.minesweeper.graphics.MinesweeperSquareGraphicsModule;
+import technology.sola.engine.examples.common.minesweeper.graphics.MinesweeperSquareEntityGraphicsModule;
 import technology.sola.engine.examples.common.minesweeper.graphics.gui.MinesweeperGui;
 import technology.sola.engine.examples.common.minesweeper.system.GameOverSystem;
 import technology.sola.engine.examples.common.minesweeper.system.MinefieldSystem;
@@ -27,7 +27,7 @@ public class MinesweeperExample extends SolaWithDefaults {
     defaultsConfigurator.useGui().useGraphics();
 
     // graphics
-    solaGraphics.addGraphicsModules(new MinesweeperSquareGraphicsModule());
+    solaGraphics.addGraphicsModules(new MinesweeperSquareEntityGraphicsModule());
     solaGuiDocument.setGuiRoot(MinesweeperGui.build(solaGuiDocument, eventHub), 2, 2);
     platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
 

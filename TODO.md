@@ -17,24 +17,22 @@
 
 * Move custom build "distribution" tasks to a gradle plugin
     * sola game template should use these plugins as well
-* Consider some sort of lighting mechanism implementation
-    * Maybe this can be a GraphicsModule with a higher order paired with a new LightComponent?
-    * LightComponent could maybe have a radius, direction, and flicker data?
+* Consider mechanism to "batch" together SolaGraphics entity draws when they are in the same layer
+    * Currently, it does each one individually
 * Rendering
     * Ability to change line width when drawing
-    * Implement more BlendModes
-    * Add a way to do gradients
-        * maybe just linear at first
+    * Add a way to do gradients?
+        * maybe just linear at first?
 * networking
     * rest client interface
         * javafx/swing impl
         * browser impl
     * simple rest server
+* Lighting
+    * implement more light types other than just point lights
 * Particle System
     * consider adding acceleration
     * consider some sort of "swaying" for non-linear particles
-* Consider mechanism to "batch" together SolaGraphics entity draws when they are in the same layer
-    * Currently, it does each one individually
 * SolaGui
     * Implement a way to load gui stuff from a file
         * possibly use JSON to define gui structure
@@ -60,6 +58,7 @@
     * While open can toggle things like render debug outlines and debug spacial hashmap stuff
     * Could also maybe allow adding custom commands
     * Should probably always use a "default font" if it is implemented
+    * Possibly also have ability to show light maps if lighting is enabled
 * Browser Platform
     * modularize (requires figuring out how to modularize parts of teavm needed)
         * ensure `SimpleSolaBrowserFileServer` and `SolaBrowserFileBuilder` in `tools` is exposed as well

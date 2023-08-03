@@ -18,12 +18,13 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * SolaGraphics provides default rendering capabilities while also allowing for customization via {@link SolaGraphicsModule}s.
+ * SolaGraphics provides default rendering capabilities while also allowing for adding new rendering
+ * capabilities via {@link SolaGraphicsModule}s.
  */
 public class SolaGraphics {
   private static final TransformComponent DEFAULT_CAMERA_TRANSFORM = new TransformComponent();
   private final SolaEcs solaEcs;
-  private final List<SolaGraphicsModule<?>> graphicsModuleList = new ArrayList<>();
+  private final List<SolaGraphicsModule> graphicsModuleList = new ArrayList<>();
   private Matrix3D cachedScreenToWorldMatrix = null;
   private float previousCameraX = 0;
   private float previousCameraY = 0;
@@ -35,7 +36,7 @@ public class SolaGraphics {
   /**
    * Creates a SolaGraphics instance.
    *
-   * @param solaEcs the {@link SolaEcs} instance to render {@link technology.sola.ecs.Entity} from
+   * @param solaEcs the {@link SolaEcs} instance
    */
   public SolaGraphics(SolaEcs solaEcs) {
     this.solaEcs = solaEcs;
@@ -48,11 +49,29 @@ public class SolaGraphics {
    *
    * @param graphicsModules the modules to add
    */
-  public void addGraphicsModules(SolaGraphicsModule<?>... graphicsModules) {
+  public void addGraphicsModules(SolaGraphicsModule... graphicsModules) {
     if (graphicsModules != null) {
       graphicsModuleList.addAll(Arrays.asList(graphicsModules));
       graphicsModuleList.sort(SolaGraphicsModule::compareTo);
     }
+  }
+
+  /**
+   * Gets a {@link SolaGraphicsModule} that has been added or else null.
+   *
+   * @param solaGraphicsModuleClass the class of the SolaGraphicsModule
+   * @param <T>                     the type of graphics module
+   * @return the graphics module
+   */
+  @SuppressWarnings("unchecked")
+  public <T extends SolaGraphicsModule> T getGraphicsModule(Class<T> solaGraphicsModuleClass) {
+    for (var graphicsModule : graphicsModuleList) {
+      if (graphicsModule.getClass() == solaGraphicsModuleClass) {
+        return (T) graphicsModule;
+      }
+    }
+
+    return null;
   }
 
   /**

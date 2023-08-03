@@ -37,6 +37,11 @@ public class BrowserCanvasRenderer implements Renderer {
   }
 
   @Override
+  public Renderer createRendererForImage(SolaImage solaImage) {
+    throw new NotYetImplementedException();
+  }
+
+  @Override
   public void setBlendMode(BlendMode blendMode) {
     throw new NotYetImplementedException();
   }
@@ -137,7 +142,7 @@ public class BrowserCanvasRenderer implements Renderer {
     if (color.getAlpha() == 255) {
       CanvasRenderScripts.setFillStyle(color.getRed(), color.getGreen(), color.getBlue());
     } else {
-      CanvasRenderScripts.setFillStyle(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha() / 255f);
+      CanvasRenderScripts.setFillStyle(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha() * Color.ONE_DIV_255);
     }
   }
 

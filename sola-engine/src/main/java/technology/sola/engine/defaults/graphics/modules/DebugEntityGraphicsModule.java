@@ -16,22 +16,22 @@ import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
 /**
- * DebugGraphicsModule is a {@link SolaGraphicsModule} implementation for rendering debug information for a {@link World}.
+ * DebugEntityGraphicsModule is a {@link SolaEntityGraphicsModule} implementation for rendering debug information for a {@link World}.
  * It will render spacial hashmap boundaries and colliders for {@link Entity} that have a {@link ColliderComponent}.
  */
-public class DebugGraphicsModule extends SolaGraphicsModule<View2Entry<ColliderComponent, TransformComponent>> {
+public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Entry<ColliderComponent, TransformComponent>> {
   /**
-   * The render order for the DebugGraphicsModule.
+   * The render order for the DebugEntityGraphicsModule.
    */
   public static final int ORDER = 999;
   private final CollisionDetectionSystem collisionDetectionSystem;
 
   /**
-   * Creates an instance of DebugGraphicsModule.
+   * Creates an instance of DebugEntityGraphicsModule.
    *
    * @param collisionDetectionSystem the {@link CollisionDetectionSystem} instance
    */
-  public DebugGraphicsModule(CollisionDetectionSystem collisionDetectionSystem) {
+  public DebugEntityGraphicsModule(CollisionDetectionSystem collisionDetectionSystem) {
     this.collisionDetectionSystem = collisionDetectionSystem;
   }
 

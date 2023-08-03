@@ -9,9 +9,9 @@ public final class SolaMath {
   /**
    * Clamps a float value between a min and max.
    *
-   * @param min  the minimum value
-   * @param max  the maximum value
-   * @param value  the value to clamp
+   * @param min   the minimum value
+   * @param max   the maximum value
+   * @param value the value to clamp
    * @return the clamped value
    */
   public static float clamp(float min, float max, float value) {
@@ -23,9 +23,9 @@ public final class SolaMath {
   /**
    * Clamps a {@link Vector2D} between a min and max.
    *
-   * @param min  the minimum value
-   * @param max  the maximum value
-   * @param value  the value to clamp
+   * @param min   the minimum value
+   * @param max   the maximum value
+   * @param value the value to clamp
    * @return the clamped {@code Vector2D}
    */
   public static Vector2D clamp(Vector2D min, Vector2D max, Vector2D value) {
@@ -33,6 +33,16 @@ public final class SolaMath {
     float closestY = SolaMath.clamp(min.y(), max.y(), value.y());
 
     return new Vector2D(closestX, closestY);
+  }
+
+  /**
+   * Rounds a positive float value to the nearest integer quickly.
+   *
+   * @param value the float value to round
+   * @return the rounded value
+   */
+  public static int fastRound(float value) {
+    return (int) (value + 0.5f);
   }
 
   private SolaMath() {

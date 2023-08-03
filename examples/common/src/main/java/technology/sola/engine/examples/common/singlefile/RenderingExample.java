@@ -10,9 +10,9 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaGraphics;
-import technology.sola.engine.defaults.graphics.modules.CircleGraphicsModule;
-import technology.sola.engine.defaults.graphics.modules.RectangleGraphicsModule;
-import technology.sola.engine.defaults.graphics.modules.SpriteGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.CircleEntityGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.RectangleEntityGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.SpriteEntityGraphicsModule;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
@@ -34,7 +34,7 @@ import java.util.List;
  * <ul>
  *   <li>{@link Renderer}</li>
  *   <li>{@link SolaGraphics}</li>
- *   <li>{@link technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule}</li>
+ *   <li>{@link technology.sola.engine.defaults.graphics.modules.SolaEntityGraphicsModule}</li>
  *   <li>{@link SolaImage}</li>
  *   <li>{@link LayerComponent}</li>
  * </ul>
@@ -54,9 +54,9 @@ public class RenderingExample extends Sola {
   @Override
   protected void onInit() {
     solaGraphics.addGraphicsModules(
-      new CircleGraphicsModule(),
-      new RectangleGraphicsModule(),
-      new SpriteGraphicsModule(assetLoaderProvider.get(SpriteSheet.class))
+      new CircleEntityGraphicsModule(),
+      new RectangleEntityGraphicsModule(),
+      new SpriteEntityGraphicsModule(assetLoaderProvider.get(SpriteSheet.class))
     );
 
     solaEcs.addSystem(new TestSystem());
