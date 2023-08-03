@@ -126,7 +126,7 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
   }
 
   @Override
-  public void handleKeyEvent(GuiKeyEvent event) {
+  void handleKeyEvent(GuiKeyEvent event) {
     if (!isFocussed()) {
       return;
     }
@@ -148,7 +148,7 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
   }
 
   @Override
-  public void handleMouseEvent(MouseEvent event, String eventType) {
+  void handleMouseEvent(MouseEvent event, String eventType) {
     T properties = properties();
 
     if (properties.isHidden()) {

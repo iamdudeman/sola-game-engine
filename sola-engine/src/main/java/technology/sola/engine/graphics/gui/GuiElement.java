@@ -215,7 +215,7 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     return properties;
   }
 
-  public void handleKeyEvent(GuiKeyEvent event) {
+  void handleKeyEvent(GuiKeyEvent event) {
     if (!isFocussed()) {
       return;
     }
@@ -226,7 +226,7 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     }
   }
 
-  public void handleMouseEvent(MouseEvent event, String eventType) {
+  void handleMouseEvent(MouseEvent event, String eventType) {
     if (properties.isHidden()) {
       return;
     }
