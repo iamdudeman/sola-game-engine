@@ -1,9 +1,9 @@
 package technology.sola.engine.graphics.gui.elements.input;
 
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
+import technology.sola.engine.graphics.gui.event.GuiMouseEvent;
 import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.input.Key;
-import technology.sola.engine.input.MouseEvent;
 
 import java.util.function.Consumer;
 
@@ -44,7 +44,7 @@ public class ButtonGuiElement extends BaseInputGuiElement<ButtonGuiElement.Prope
   }
 
   @Override
-  public void setOnMouseExitCallback(Consumer<MouseEvent> callback) {
+  public void setOnMouseExitCallback(Consumer<GuiMouseEvent> callback) {
     super.setOnMouseExitCallback(event -> {
       wasMouseDownInside = false;
       callback.accept(event);
@@ -52,7 +52,7 @@ public class ButtonGuiElement extends BaseInputGuiElement<ButtonGuiElement.Prope
   }
 
   @Override
-  public void setOnMouseDownCallback(Consumer<MouseEvent> callback) {
+  public void setOnMouseDownCallback(Consumer<GuiMouseEvent> callback) {
     super.setOnMouseDownCallback(event -> {
       wasMouseDownInside = true;
       callback.accept(event);
@@ -60,7 +60,7 @@ public class ButtonGuiElement extends BaseInputGuiElement<ButtonGuiElement.Prope
   }
 
   @Override
-  public void setOnMouseUpCallback(Consumer<MouseEvent> callback) {
+  public void setOnMouseUpCallback(Consumer<GuiMouseEvent> callback) {
     super.setOnMouseUpCallback(event -> {
       callback.accept(event);
       if (wasMouseDownInside) {

@@ -2,6 +2,9 @@
 
 ## Known Bugs List
 
+* stopping gui mouse event propagation currently isn't hooked up
+    * this needs to be added to `GuiElementContainer#handleMouseEvent`
+
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Planned Cleanup List

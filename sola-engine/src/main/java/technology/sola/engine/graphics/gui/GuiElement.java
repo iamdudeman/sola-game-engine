@@ -2,11 +2,11 @@ package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
+import technology.sola.engine.graphics.gui.event.GuiMouseEvent;
 import technology.sola.engine.graphics.gui.properties.Display;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
-import technology.sola.engine.input.MouseEvent;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
@@ -20,10 +20,10 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
 
   private Consumer<GuiKeyEvent> onKeyPressCallback;
   private Consumer<GuiKeyEvent> onKeyReleaseCallback;
-  private Consumer<MouseEvent> onMouseEnterCallback;
-  private Consumer<MouseEvent> onMouseExitCallback;
-  private Consumer<MouseEvent> onMouseDownCallback;
-  private Consumer<MouseEvent> onMouseUpCallback;
+  private Consumer<GuiMouseEvent> onMouseEnterCallback;
+  private Consumer<GuiMouseEvent> onMouseExitCallback;
+  private Consumer<GuiMouseEvent> onMouseDownCallback;
+  private Consumer<GuiMouseEvent> onMouseUpCallback;
 
   private boolean wasMouseOverElement = false;
 
@@ -110,19 +110,19 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     this.onKeyReleaseCallback = onKeyReleaseCallback;
   }
 
-  public void setOnMouseEnterCallback(Consumer<MouseEvent> callback) {
+  public void setOnMouseEnterCallback(Consumer<GuiMouseEvent> callback) {
     onMouseEnterCallback = callback;
   }
 
-  public void setOnMouseExitCallback(Consumer<MouseEvent> callback) {
+  public void setOnMouseExitCallback(Consumer<GuiMouseEvent> callback) {
     onMouseExitCallback = callback;
   }
 
-  public void setOnMouseDownCallback(Consumer<MouseEvent> callback) {
+  public void setOnMouseDownCallback(Consumer<GuiMouseEvent> callback) {
     onMouseDownCallback = callback;
   }
 
-  public void setOnMouseUpCallback(Consumer<MouseEvent> callback) {
+  public void setOnMouseUpCallback(Consumer<GuiMouseEvent> callback) {
     onMouseUpCallback = callback;
   }
 
@@ -183,7 +183,7 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     }
   }
 
-  void onMouseEnter(MouseEvent mouseEvent) {
+  void onMouseEnter(GuiMouseEvent mouseEvent) {
     if (!wasMouseOverElement) {
       wasMouseOverElement = true;
 
@@ -193,7 +193,7 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     }
   }
 
-  void onMouseExit(MouseEvent mouseEvent) {
+  void onMouseExit(GuiMouseEvent mouseEvent) {
     if (wasMouseOverElement) {
       wasMouseOverElement = false;
 
@@ -203,13 +203,13 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     }
   }
 
-  void onMouseDown(MouseEvent mouseEvent) {
+  void onMouseDown(GuiMouseEvent mouseEvent) {
     if (onMouseDownCallback != null) {
       onMouseDownCallback.accept(mouseEvent);
     }
   }
 
-  void onMouseUp(MouseEvent mouseEvent) {
+  void onMouseUp(GuiMouseEvent mouseEvent) {
     if (onMouseUpCallback != null) {
       onMouseUpCallback.accept(mouseEvent);
     }
@@ -226,7 +226,7 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     }
   }
 
-  void handleMouseEvent(MouseEvent event, String eventType) {
+  void handleMouseEvent(GuiMouseEvent event) {
     if (properties.isHidden()) {
       return;
     }
@@ -237,10 +237,10 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     Rectangle guiElementBounds = new Rectangle(new Vector2D(x, y), new Vector2D(x + width, y + height));
 
     if (guiElementBounds.contains(new Vector2D(event.x(), event.y()))) {
-      switch (eventType) {
-        case "press" -> onMouseDown(event);
-        case "release" -> onMouseUp(event);
-        case "move" -> onMouseEnter(event);
+      switch (event.getType()) {
+        case PRESS -> onMouseDown(event);
+        case RELEASE -> onMouseUp(event);
+        case MOVE -> onMouseEnter(event);
       }
     } else {
       onMouseExit(event);
