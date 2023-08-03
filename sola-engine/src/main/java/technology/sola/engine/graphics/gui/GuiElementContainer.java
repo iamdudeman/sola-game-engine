@@ -20,20 +20,6 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
   }
 
   @Override
-  public void render(Renderer renderer) {
-    super.render(renderer);
-
-    if (children.stream().anyMatch(child -> child.properties().isLayoutChanged())) {
-      recalculateLayout();
-      properties().setLayoutChanged(false);
-    }
-
-    if (!properties().isHidden()) {
-      children.forEach(child -> child.render(renderer));
-    }
-  }
-
-  @Override
   public boolean isLayoutChanged() {
     return super.isLayoutChanged() || children.stream().anyMatch(GuiElement::isLayoutChanged);
   }
@@ -123,6 +109,20 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
     }
 
     return this;
+  }
+
+  @Override
+  void render(Renderer renderer) {
+    super.render(renderer);
+
+    if (children.stream().anyMatch(child -> child.properties().isLayoutChanged())) {
+      recalculateLayout();
+      properties().setLayoutChanged(false);
+    }
+
+    if (!properties().isHidden()) {
+      children.forEach(child -> child.render(renderer));
+    }
   }
 
   @Override

@@ -36,6 +36,10 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
 
   public abstract int getContentHeight();
 
+  public abstract void recalculateLayout();
+
+  public abstract void renderSelf(Renderer renderer, int x, int y);
+
   public int getWidth() {
     if (properties.getDisplay() == Display.NONE) {
       return 0;
@@ -68,15 +72,65 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     return properties.padding.getTop() + properties.padding.getBottom() + properties.getBorderSize() * 2;
   }
 
-  public abstract void recalculateLayout();
-
-  public boolean isLayoutChanged() {
-    return properties.isLayoutChanged();
+  public void setPosition(int x, int y) {
+    this.x = x;
+    this.y = y;
+    properties.setLayoutChanged(true);
   }
 
-  public abstract void renderSelf(Renderer renderer, int x, int y);
+  public int getX() {
+    return x;
+  }
 
-  public void render(Renderer renderer) {
+  public int getY() {
+    return y;
+  }
+
+  public boolean isHovered() {
+    return wasMouseOverElement;
+  }
+
+  public boolean isFocussed() {
+    return document.isFocussedElement(this);
+  }
+
+  public void requestFocus() {
+    document.focusElement(this);
+  }
+
+  public GuiElement<?> getElementById(String id) {
+    return id.equals(properties.getId()) ? this : null;
+  }
+
+  public void setOnKeyPressCallback(Consumer<GuiKeyEvent> onKeyPressCallback) {
+    this.onKeyPressCallback = onKeyPressCallback;
+  }
+
+  public void setOnKeyReleaseCallback(Consumer<GuiKeyEvent> onKeyReleaseCallback) {
+    this.onKeyReleaseCallback = onKeyReleaseCallback;
+  }
+
+  public void setOnMouseEnterCallback(Consumer<MouseEvent> callback) {
+    onMouseEnterCallback = callback;
+  }
+
+  public void setOnMouseExitCallback(Consumer<MouseEvent> callback) {
+    onMouseExitCallback = callback;
+  }
+
+  public void setOnMouseDownCallback(Consumer<MouseEvent> callback) {
+    onMouseDownCallback = callback;
+  }
+
+  public void setOnMouseUpCallback(Consumer<MouseEvent> callback) {
+    onMouseUpCallback = callback;
+  }
+
+  public T properties() {
+    return properties;
+  }
+
+  void render(Renderer renderer) {
     if (isLayoutChanged()) {
       recalculateLayout();
       properties.setLayoutChanged(false);
@@ -113,57 +167,23 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     }
   }
 
-  public void setPosition(int x, int y) {
-    this.x = x;
-    this.y = y;
-    properties.setLayoutChanged(true);
+  boolean isLayoutChanged() {
+    return properties.isLayoutChanged();
   }
 
-  public int getX() {
-    return x;
-  }
-
-  public int getY() {
-    return y;
-  }
-
-  public boolean isHovered() {
-    return wasMouseOverElement;
-  }
-
-  public boolean isFocussed() {
-    return document.isFocussedElement(this);
-  }
-
-  public void requestFocus() {
-    document.focusElement(this);
-  }
-
-  public GuiElement<?> getElementById(String id) {
-    return id.equals(properties.getId()) ? this : null;
-  }
-
-  public void onKeyPress(GuiKeyEvent keyEvent) {
+  void onKeyPress(GuiKeyEvent keyEvent) {
     if (onKeyPressCallback != null) {
       onKeyPressCallback.accept(keyEvent);
     }
   }
 
-  public void setOnKeyPressCallback(Consumer<GuiKeyEvent> onKeyPressCallback) {
-    this.onKeyPressCallback = onKeyPressCallback;
-  }
-
-  public void onKeyRelease(GuiKeyEvent keyEvent) {
+  void onKeyRelease(GuiKeyEvent keyEvent) {
     if (onKeyReleaseCallback != null) {
       onKeyReleaseCallback.accept(keyEvent);
     }
   }
 
-  public void setOnKeyReleaseCallback(Consumer<GuiKeyEvent> onKeyReleaseCallback) {
-    this.onKeyReleaseCallback = onKeyReleaseCallback;
-  }
-
-  public void onMouseEnter(MouseEvent mouseEvent) {
+  void onMouseEnter(MouseEvent mouseEvent) {
     if (!wasMouseOverElement) {
       wasMouseOverElement = true;
 
@@ -173,11 +193,7 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     }
   }
 
-  public void setOnMouseEnterCallback(Consumer<MouseEvent> callback) {
-    onMouseEnterCallback = callback;
-  }
-
-  public void onMouseExit(MouseEvent mouseEvent) {
+  void onMouseExit(MouseEvent mouseEvent) {
     if (wasMouseOverElement) {
       wasMouseOverElement = false;
 
@@ -187,32 +203,16 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     }
   }
 
-  public void setOnMouseExitCallback(Consumer<MouseEvent> callback) {
-    onMouseExitCallback = callback;
-  }
-
-  public void onMouseDown(MouseEvent mouseEvent) {
+  void onMouseDown(MouseEvent mouseEvent) {
     if (onMouseDownCallback != null) {
       onMouseDownCallback.accept(mouseEvent);
     }
   }
 
-  public void setOnMouseDownCallback(Consumer<MouseEvent> callback) {
-    onMouseDownCallback = callback;
-  }
-
-  public void onMouseUp(MouseEvent mouseEvent) {
+  void onMouseUp(MouseEvent mouseEvent) {
     if (onMouseUpCallback != null) {
       onMouseUpCallback.accept(mouseEvent);
     }
-  }
-
-  public void setOnMouseUpCallback(Consumer<MouseEvent> callback) {
-    onMouseUpCallback = callback;
-  }
-
-  public T properties() {
-    return properties;
   }
 
   void handleKeyEvent(GuiKeyEvent event) {
