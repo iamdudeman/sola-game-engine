@@ -139,9 +139,9 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab4">
 <div class="block">Circle represents a geometric circle.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/CircleGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">CircleGraphicsModule</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/CircleEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">CircleEntityGraphicsModule</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">CircleGraphicsModule is a <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaGraphicsModule</code></a> implementation for rendering <code>Entity</code> that have a
+<div class="block">CircleEntityGraphicsModule is a <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaEntityGraphicsModule</code></a> implementation for rendering <code>Entity</code> that have a
  <a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> and <a href="technology.sola.engine/technology/sola/engine/graphics/components/CircleRendererComponent.html" title="class in technology.sola.engine.graphics.components"><code>CircleRendererComponent</code></a>.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/graphics/components/CircleRendererComponent.html" title="class in technology.sola.engine.graphics.components">CircleRendererComponent</a></div>
@@ -181,9 +181,9 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">The Color class represents an argb color that can be used for rendering.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugGraphicsModule</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugEntityGraphicsModule</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">DebugGraphicsModule is a <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaGraphicsModule</code></a> implementation for rendering debug information for a <code>World</code>.</div>
+<div class="block">DebugEntityGraphicsModule is a <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaEntityGraphicsModule</code></a> implementation for rendering debug information for a <code>World</code>.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/DefaultFont.html" title="class in technology.sola.engine.assets.graphics.font">DefaultFont</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
@@ -321,6 +321,22 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">LayerComponent is a <code>Component</code> that contains data for a 2d rendering layers for an <code>Entity</code>.</div>
 </div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/graphics/components/LightComponent.html" title="class in technology.sola.engine.graphics.components">LightComponent</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">LightComponent is a <code>Component</code> containing data for rendering lights.</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab4"><a href="technology.sola.engine/technology/sola/engine/graphics/components/LightFlicker.html" title="class in technology.sola.engine.graphics.components">LightFlicker</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab4">
+<div class="block">LightFlicker</div>
+</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="technology.sola.engine/technology/sola/engine/graphics/components/LightFlicker.FlickerSmoothing.html" title="interface in technology.sola.engine.graphics.components">LightFlicker.FlickerSmoothing</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab1">
+<div class="block">Defines the API for the function called to smooth the transition between the current and next light intensity values.</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/graphics/system/LightFlickerSystem.html" title="class in technology.sola.engine.graphics.system">LightFlickerSystem</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">LightFlickerSystem is an <code>EcsSystem</code> that handles updating the flicker data of a <a href="technology.sola.engine/technology/sola/engine/graphics/components/LightComponent.html" title="class in technology.sola.engine.graphics.components"><code>LightComponent</code></a>.</div>
+</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/physics/Material.html" title="class in technology.sola.engine.physics">Material</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a></div>
@@ -365,9 +381,9 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab4">
 <div class="block">Rectangle represents an axis aligned geometric rectangle.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/RectangleGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">RectangleGraphicsModule</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/RectangleEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">RectangleEntityGraphicsModule</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">RectangleGraphicsModule is a <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaGraphicsModule</code></a> implementation for rendering <code>Entity</code> that have a
+<div class="block">RectangleEntityGraphicsModule is a <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaEntityGraphicsModule</code></a> implementation for rendering <code>Entity</code> that have a
  <a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> and <a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html" title="class in technology.sola.engine.graphics.components"><code>RectangleRendererComponent</code></a>.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html" title="class in technology.sola.engine.graphics.components">RectangleRendererComponent</a></div>
@@ -378,49 +394,60 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="technology.sola.engine/technology/sola/engine/networking/rest/RestClient.html" title="interface in technology.sola.engine.networking.rest">RestClient</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab1">&nbsp;</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab4"><a href="technology.sola.engine/technology/sola/engine/physics/event/SensorEvent.html" title="class in technology.sola.engine.physics.event">SensorEvent</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab4">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/ScreenSpaceLightMapGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">ScreenSpaceLightMapGraphicsModule</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">ScreenSpaceLightMapGraphicsModule is a <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaGraphicsModule</code></a> that handles drawing lighting for
+ <code>Entity</code> that have <a href="technology.sola.engine/technology/sola/engine/graphics/components/LightComponent.html" title="class in technology.sola.engine.graphics.components"><code>LightComponent</code></a>s.</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab4"><a href="technology.sola.engine/technology/sola/engine/physics/event/SensorEvent.html" title="class in technology.sola.engine.physics.event">SensorEvent</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab4">
 <div class="block"><a href="technology.sola.engine/technology/sola/engine/event/Event.html" title="interface in technology.sola.engine.event"><code>Event</code></a> that a collision happened but will not be resolved by applying any forces.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket">SocketClient</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket">SocketClient</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab1">
 <div class="block">SocketClient defines the api for interacting with a socket server.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketMessage.html" title="class in technology.sola.engine.networking.socket">SocketMessage</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketMessage.html" title="class in technology.sola.engine.networking.socket">SocketMessage</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">SocketMessage contains data transmitted between a server and client.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketMessageDecoder.html" title="class in technology.sola.engine.networking.socket">SocketMessageDecoder</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketMessageDecoder.html" title="class in technology.sola.engine.networking.socket">SocketMessageDecoder</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">SocketMessageDecoder is responsible for decoding <a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketMessage.html" title="class in technology.sola.engine.networking.socket"><code>SocketMessage</code></a>s from payloads received over sockets.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketMessageEncoder.html" title="class in technology.sola.engine.networking.socket">SocketMessageEncoder</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketMessageEncoder.html" title="class in technology.sola.engine.networking.socket">SocketMessageEncoder</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">SocketMessageEncoder is responsible for encoding <a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketMessage.html" title="class in technology.sola.engine.networking.socket"><code>SocketMessage</code></a>s for transmission over sockets.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer">SoftwareRenderer</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer">SoftwareRenderer</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">SoftwareRenderer is a <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> implementation that draws on an in memory array of pixels using the CPU.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/core/Sola.html" title="class in technology.sola.engine.core">Sola</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/core/Sola.html" title="class in technology.sola.engine.core">Sola</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Sola contains the core functionality needed to make a game.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab4"><a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.html" title="class in technology.sola.engine.core">SolaConfiguration</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab4">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab4"><a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.html" title="class in technology.sola.engine.core">SolaConfiguration</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab4">
 <div class="block">Creates a <a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.html" title="class in technology.sola.engine.core"><code>SolaConfiguration</code></a>.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.Builder.html" title="class in technology.sola.engine.core">SolaConfiguration.Builder</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.Builder.html" title="class in technology.sola.engine.core">SolaConfiguration.Builder</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Builder for <a href="technology.sola.engine/technology/sola/engine/core/SolaConfiguration.html" title="class in technology.sola.engine.core"><code>SolaConfiguration</code></a>.</div>
+</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaEntityGraphicsModule</a>&lt;<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html" title="type parameter in SolaEntityGraphicsModule">V</a> extends technology.sola.ecs.view.ViewEntry&gt;</div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">SolaEntityGraphicsModule adds rendering functionality to <a href="technology.sola.engine/technology/sola/engine/defaults/SolaGraphics.html" title="class in technology.sola.engine.defaults"><code>SolaGraphics</code></a> for
+ rendering <code>Entity</code> that have specified <code>Component</code>s.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/defaults/SolaGraphics.html" title="class in technology.sola.engine.defaults">SolaGraphics</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">SolaGraphics provides default rendering capabilities while also allowing for customization via <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaGraphicsModule</code></a>s.</div>
+<div class="block">SolaGraphics provides default rendering capabilities while also allowing for adding new rendering
+ capabilities via <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaGraphicsModule</code></a>s.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaGraphicsModule</a>&lt;<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaGraphicsModule.html" title="type parameter in SolaGraphicsModule">V</a> extends technology.sola.ecs.view.ViewEntry&gt;</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaGraphicsModule</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">SolaGraphicsModules provide details on how to render <code>Entity</code> that have specified <code>Component</code>s.</div>
+<div class="block">SolaGraphicsModule adds additional rendering functionality to <a href="technology.sola.engine/technology/sola/engine/defaults/SolaGraphics.html" title="class in technology.sola.engine.defaults"><code>SolaGraphics</code></a>.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/graphics/gui/SolaGuiDocument.html" title="class in technology.sola.engine.graphics.gui">SolaGuiDocument</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
@@ -486,9 +513,9 @@ loadScripts(document, 'script');</script>
 <div class="block">SpriteCOmponent is a <code>Component</code> that contains data for rendering 2d sprites for an
  <code>Entity</code>.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SpriteGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SpriteGraphicsModule</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SpriteEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SpriteEntityGraphicsModule</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">SpriteGraphicsModule is a <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaGraphicsModule</code></a> implementation for rendering <code>Entity</code> that have a
+<div class="block">SpriteEntityGraphicsModule is a <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaEntityGraphicsModule</code></a> implementation for rendering <code>Entity</code> that have a
  <a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> and <a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteComponent.html" title="class in technology.sola.engine.graphics.components"><code>SpriteComponent</code></a>.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a></div>

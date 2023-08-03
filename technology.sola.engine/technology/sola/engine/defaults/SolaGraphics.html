@@ -78,7 +78,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SolaGraphics</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">SolaGraphics provides default rendering capabilities while also allowing for customization via <a href="graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaGraphicsModule</code></a>s.</div>
+<div class="block">SolaGraphics provides default rendering capabilities while also allowing for adding new rendering
+ capabilities via <a href="graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaGraphicsModule</code></a>s.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -109,21 +110,26 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addGraphicsModules(technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule...)" class="member-name-link">addGraphicsModules</a><wbr>(<a href="graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaGraphicsModule</a>&lt;?&gt;...&nbsp;graphicsModules)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addGraphicsModules(technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule...)" class="member-name-link">addGraphicsModules</a><wbr>(<a href="graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaGraphicsModule</a>...&nbsp;graphicsModules)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Adds <a href="graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaGraphicsModule</code></a>s to be rendered.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>technology.sola.ecs.EcsSystem[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSystems()" class="member-name-link">getSystems</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">render</a><wbr>(<a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaGraphicsModule</a>&gt;<br>T</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getGraphicsModule(java.lang.Class)" class="member-name-link">getGraphicsModule</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;solaGraphicsModuleClass)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Gets a <a href="graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaGraphicsModule</code></a> that has been added or else null.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>technology.sola.ecs.EcsSystem[]</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSystems()" class="member-name-link">getSystems</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">render</a><wbr>(<a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Renders all <a href="graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaGraphicsModule</code></a>s that have been added.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#screenToWorldCoordinate(technology.sola.math.linear.Vector2D)" class="member-name-link">screenToWorldCoordinate</a><wbr>(<a href="../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;screenCoordinate)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#screenToWorldCoordinate(technology.sola.math.linear.Vector2D)" class="member-name-link">screenToWorldCoordinate</a><wbr>(<a href="../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;screenCoordinate)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Using the camera's transform, this method calculates the <code>World</code> coordinate based on the screen's coordinate
  system.</div>
 </div>
@@ -151,7 +157,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates a SolaGraphics instance.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>solaEcs</code> - the <code>SolaEcs</code> instance to render <code>Entity</code> from</dd>
+<dd><code>solaEcs</code> - the <code>SolaEcs</code> instance</dd>
 </dl>
 </section>
 </li>
@@ -166,11 +172,26 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="addGraphicsModules(technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule...)">
 <h3>addGraphicsModules</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addGraphicsModules</span><wbr><span class="parameters">(<a href="graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaGraphicsModule</a>&lt;?&gt;...&nbsp;graphicsModules)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addGraphicsModules</span><wbr><span class="parameters">(<a href="graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaGraphicsModule</a>...&nbsp;graphicsModules)</span></div>
 <div class="block">Adds <a href="graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaGraphicsModule</code></a>s to be rendered.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>graphicsModules</code> - the modules to add</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getGraphicsModule(java.lang.Class)">
+<h3>getGraphicsModule</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaGraphicsModule</a>&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name">getGraphicsModule</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;solaGraphicsModuleClass)</span></div>
+<div class="block">Gets a <a href="graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaGraphicsModule</code></a> that has been added or else null.</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>T</code> - the type of graphics module</dd>
+<dt>Parameters:</dt>
+<dd><code>solaGraphicsModuleClass</code> - the class of the SolaGraphicsModule</dd>
+<dt>Returns:</dt>
+<dd>the graphics module</dd>
 </dl>
 </section>
 </li>

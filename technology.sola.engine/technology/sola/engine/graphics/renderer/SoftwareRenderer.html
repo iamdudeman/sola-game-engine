@@ -132,103 +132,108 @@ implements <a href="Renderer.html" title="interface in technology.sola.engine.gr
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets all pixels to desired <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#drawCircle(float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">drawCircle</a><wbr>(float&nbsp;x,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#createRendererForImage(technology.sola.engine.assets.graphics.SolaImage)" class="member-name-link">createRendererForImage</a><wbr>(<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;solaImage)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a new Renderer instance that draws to a <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> instead of the screen.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#drawCircle(float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">drawCircle</a><wbr>(float&nbsp;x,
  float&nbsp;y,
  float&nbsp;radius,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Draws an unfilled circle.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#drawImage(technology.sola.engine.assets.graphics.SolaImage,float,float)" class="member-name-link">drawImage</a><wbr>(<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;solaImage,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#drawImage(technology.sola.engine.assets.graphics.SolaImage,float,float)" class="member-name-link">drawImage</a><wbr>(<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;solaImage,
  float&nbsp;x,
  float&nbsp;y)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Draws a <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> at desired coordinate.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#drawImage(technology.sola.engine.assets.graphics.SolaImage,float,float,float,float)" class="member-name-link">drawImage</a><wbr>(<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;solaImage,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#drawImage(technology.sola.engine.assets.graphics.SolaImage,float,float,float,float)" class="member-name-link">drawImage</a><wbr>(<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;solaImage,
  float&nbsp;x,
  float&nbsp;y,
  float&nbsp;width,
  float&nbsp;height)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Draws a <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> scaled to fit within a rectangle specified by x,y, width and height.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#drawImage(technology.sola.engine.assets.graphics.SolaImage,technology.sola.engine.graphics.AffineTransform)" class="member-name-link">drawImage</a><wbr>(<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;solaImage,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#drawImage(technology.sola.engine.assets.graphics.SolaImage,technology.sola.engine.graphics.AffineTransform)" class="member-name-link">drawImage</a><wbr>(<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;solaImage,
  <a href="../AffineTransform.html" title="class in technology.sola.engine.graphics">AffineTransform</a>&nbsp;affineTransform)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Draws a <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> with <a href="../AffineTransform.html" title="class in technology.sola.engine.graphics"><code>AffineTransform</code></a> applied.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#drawLine(float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">drawLine</a><wbr>(float&nbsp;x1,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#drawLine(float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">drawLine</a><wbr>(float&nbsp;x1,
  float&nbsp;y1,
  float&nbsp;x2,
  float&nbsp;y2,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Draws a line.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#drawRect(float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">drawRect</a><wbr>(float&nbsp;x,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#drawRect(float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">drawRect</a><wbr>(float&nbsp;x,
  float&nbsp;y,
  float&nbsp;width,
  float&nbsp;height,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Draws an unfilled rectangle.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#fillCircle(float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">fillCircle</a><wbr>(float&nbsp;x,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#fillCircle(float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">fillCircle</a><wbr>(float&nbsp;x,
  float&nbsp;y,
  float&nbsp;radius,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Draws a filled circle.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#fillRect(float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">fillRect</a><wbr>(float&nbsp;x,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#fillRect(float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">fillRect</a><wbr>(float&nbsp;x,
  float&nbsp;y,
  float&nbsp;width,
  float&nbsp;height,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Draws a filled rectangle.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBlendMode()" class="member-name-link">getBlendMode</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFont()" class="member-name-link">getFont</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBlendMode()" class="member-name-link">getBlendMode</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Layer.html" title="class in technology.sola.engine.graphics.renderer">Layer</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLayers()" class="member-name-link">getLayers</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFont()" class="member-name-link">getFont</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setBlendMode(technology.sola.engine.graphics.renderer.BlendMode)" class="member-name-link">setBlendMode</a><wbr>(<a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a>&nbsp;blendMode)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Layer.html" title="class in technology.sola.engine.graphics.renderer">Layer</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLayers()" class="member-name-link">getLayers</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setBlendMode(technology.sola.engine.graphics.renderer.BlendMode)" class="member-name-link">setBlendMode</a><wbr>(<a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a>&nbsp;blendMode)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the <a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer"><code>BlendMode</code></a> that should be used.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setClamp(int,int,int,int)" class="member-name-link">setClamp</a><wbr>(int&nbsp;x,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setClamp(int,int,int,int)" class="member-name-link">setClamp</a><wbr>(int&nbsp;x,
  int&nbsp;y,
  int&nbsp;width,
  int&nbsp;height)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Restricts rendering of pixels within a rectangle.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setFont(technology.sola.engine.assets.graphics.font.Font)" class="member-name-link">setFont</a><wbr>(<a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a>&nbsp;font)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setFont(technology.sola.engine.assets.graphics.font.Font)" class="member-name-link">setFont</a><wbr>(<a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a>&nbsp;font)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the <a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a> to use when drawing text.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPixel(int,int,technology.sola.engine.graphics.Color)" class="member-name-link">setPixel</a><wbr>(int&nbsp;x,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPixel(int,int,technology.sola.engine.graphics.Color)" class="member-name-link">setPixel</a><wbr>(int&nbsp;x,
  int&nbsp;y,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of a pixel at coordinate.</div>
 </div>
 </div>
@@ -298,6 +303,22 @@ implements <a href="Renderer.html" title="interface in technology.sola.engine.gr
 <dd><code><a href="Renderer.html#getBlendMode()">getBlendMode</a></code>&nbsp;in interface&nbsp;<code><a href="Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></code></dd>
 <dt>Returns:</dt>
 <dd>the current <a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer"><code>BlendMode</code></a> being used when drawing</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="createRendererForImage(technology.sola.engine.assets.graphics.SolaImage)">
+<h3>createRendererForImage</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></span>&nbsp;<span class="element-name">createRendererForImage</span><wbr><span class="parameters">(<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;solaImage)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Renderer.html#createRendererForImage(technology.sola.engine.assets.graphics.SolaImage)">Renderer</a></code></span></div>
+<div class="block">Creates a new Renderer instance that draws to a <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> instead of the screen.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="Renderer.html#createRendererForImage(technology.sola.engine.assets.graphics.SolaImage)">createRendererForImage</a></code>&nbsp;in interface&nbsp;<code><a href="Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>solaImage</code> - the image to draw to</dd>
+<dt>Returns:</dt>
+<dd>a new renderer instance drawing to an image</dd>
 </dl>
 </section>
 </li>
