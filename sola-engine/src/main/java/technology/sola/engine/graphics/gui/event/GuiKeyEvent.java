@@ -2,10 +2,9 @@ package technology.sola.engine.graphics.gui.event;
 
 import technology.sola.engine.input.KeyEvent;
 
-public class GuiKeyEvent {
+public class GuiKeyEvent extends GuiEvent {
   private final KeyEvent keyEvent;
   private final Type type;
-  private boolean isAbleToPropagate = true;
 
   public GuiKeyEvent(KeyEvent keyEvent, Type type) {
     this.keyEvent = keyEvent;
@@ -18,14 +17,6 @@ public class GuiKeyEvent {
 
   public Type getType() {
     return type;
-  }
-
-  public boolean isAbleToPropagate() {
-    return isAbleToPropagate;
-  }
-
-  public void stopPropagation() {
-    isAbleToPropagate = false;
   }
 
   public enum Type {

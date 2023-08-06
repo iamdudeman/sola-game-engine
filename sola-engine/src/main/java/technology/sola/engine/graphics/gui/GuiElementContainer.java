@@ -1,10 +1,10 @@
 package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
+import technology.sola.engine.graphics.gui.event.GuiMouseEvent;
 import technology.sola.engine.graphics.gui.properties.Display;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.renderer.Renderer;
-import technology.sola.engine.input.MouseEvent;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
@@ -17,20 +17,6 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
 
   public GuiElementContainer(SolaGuiDocument document, T properties) {
     super(document, properties);
-  }
-
-  @Override
-  public void render(Renderer renderer) {
-    super.render(renderer);
-
-    if (children.stream().anyMatch(child -> child.properties().isLayoutChanged())) {
-      recalculateLayout();
-      properties().setLayoutChanged(false);
-    }
-
-    if (!properties().isHidden()) {
-      children.forEach(child -> child.render(renderer));
-    }
   }
 
   @Override
@@ -126,7 +112,21 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
   }
 
   @Override
-  public void handleKeyEvent(GuiKeyEvent event) {
+  void render(Renderer renderer) {
+    super.render(renderer);
+
+    if (children.stream().anyMatch(child -> child.properties().isLayoutChanged())) {
+      recalculateLayout();
+      properties().setLayoutChanged(false);
+    }
+
+    if (!properties().isHidden()) {
+      children.forEach(child -> child.render(renderer));
+    }
+  }
+
+  @Override
+  void handleKeyEvent(GuiKeyEvent event) {
     if (!isFocussed()) {
       return;
     }
@@ -148,7 +148,7 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
   }
 
   @Override
-  public void handleMouseEvent(MouseEvent event, String eventType) {
+  void handleMouseEvent(GuiMouseEvent event) {
     T properties = properties();
 
     if (properties.isHidden()) {
@@ -161,15 +161,15 @@ public abstract class GuiElementContainer<T extends GuiElementBaseProperties<?>>
     Rectangle guiElementBounds = new Rectangle(new Vector2D(getX(), getY()), new Vector2D(getX() + width, getY() + height));
 
     if (guiElementBounds.contains(new Vector2D(event.x(), event.y()))) {
-      switch (eventType) {
-        case "press" -> onMouseDown(event);
-        case "release" -> onMouseUp(event);
-        case "move" -> onMouseEnter(event);
+      switch (event.getType()) {
+        case PRESS -> onMouseDown(event);
+        case RELEASE -> onMouseUp(event);
+        case MOVE -> onMouseEnter(event);
       }
 
-      children.forEach(child -> child.handleMouseEvent(event, eventType));
+      children.forEach(child -> child.handleMouseEvent(event));
     } else {
-      children.forEach(child -> child.handleMouseEvent(event, eventType));
+      children.forEach(child -> child.handleMouseEvent(event));
 
       onMouseExit(event);
     }

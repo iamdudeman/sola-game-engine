@@ -4,6 +4,7 @@ import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
+import technology.sola.engine.graphics.gui.event.GuiMouseEvent;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -139,19 +140,19 @@ public class SolaGuiDocument {
 
   private void onMousePressed(MouseEvent event) {
     if (rootGuiElement != null) {
-      rootGuiElement.handleMouseEvent(event, "press");
+      rootGuiElement.handleMouseEvent(new GuiMouseEvent(event, GuiMouseEvent.Type.PRESS));
     }
   }
 
   private void onMouseReleased(MouseEvent event) {
     if (rootGuiElement != null) {
-      rootGuiElement.handleMouseEvent(event, "release");
+      rootGuiElement.handleMouseEvent(new GuiMouseEvent(event, GuiMouseEvent.Type.RELEASE));
     }
   }
 
   private void onMouseMoved(MouseEvent event) {
     if (rootGuiElement != null) {
-      rootGuiElement.handleMouseEvent(event, "move");
+      rootGuiElement.handleMouseEvent(new GuiMouseEvent(event, GuiMouseEvent.Type.MOVE));
     }
   }
 

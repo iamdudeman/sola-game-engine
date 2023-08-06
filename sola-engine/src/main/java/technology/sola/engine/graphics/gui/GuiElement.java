@@ -2,11 +2,11 @@ package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
+import technology.sola.engine.graphics.gui.event.GuiMouseEvent;
 import technology.sola.engine.graphics.gui.properties.Display;
 import technology.sola.engine.graphics.gui.properties.GuiElementBaseProperties;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
-import technology.sola.engine.input.MouseEvent;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
@@ -20,10 +20,10 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
 
   private Consumer<GuiKeyEvent> onKeyPressCallback;
   private Consumer<GuiKeyEvent> onKeyReleaseCallback;
-  private Consumer<MouseEvent> onMouseEnterCallback;
-  private Consumer<MouseEvent> onMouseExitCallback;
-  private Consumer<MouseEvent> onMouseDownCallback;
-  private Consumer<MouseEvent> onMouseUpCallback;
+  private Consumer<GuiMouseEvent> onMouseEnterCallback;
+  private Consumer<GuiMouseEvent> onMouseExitCallback;
+  private Consumer<GuiMouseEvent> onMouseDownCallback;
+  private Consumer<GuiMouseEvent> onMouseUpCallback;
 
   private boolean wasMouseOverElement = false;
 
@@ -35,6 +35,10 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
   public abstract int getContentWidth();
 
   public abstract int getContentHeight();
+
+  public abstract void recalculateLayout();
+
+  public abstract void renderSelf(Renderer renderer, int x, int y);
 
   public int getWidth() {
     if (properties.getDisplay() == Display.NONE) {
@@ -68,15 +72,65 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     return properties.padding.getTop() + properties.padding.getBottom() + properties.getBorderSize() * 2;
   }
 
-  public abstract void recalculateLayout();
-
-  public boolean isLayoutChanged() {
-    return properties.isLayoutChanged();
+  public void setPosition(int x, int y) {
+    this.x = x;
+    this.y = y;
+    properties.setLayoutChanged(true);
   }
 
-  public abstract void renderSelf(Renderer renderer, int x, int y);
+  public int getX() {
+    return x;
+  }
 
-  public void render(Renderer renderer) {
+  public int getY() {
+    return y;
+  }
+
+  public boolean isHovered() {
+    return wasMouseOverElement;
+  }
+
+  public boolean isFocussed() {
+    return document.isFocussedElement(this);
+  }
+
+  public void requestFocus() {
+    document.focusElement(this);
+  }
+
+  public GuiElement<?> getElementById(String id) {
+    return id.equals(properties.getId()) ? this : null;
+  }
+
+  public void setOnKeyPressCallback(Consumer<GuiKeyEvent> onKeyPressCallback) {
+    this.onKeyPressCallback = onKeyPressCallback;
+  }
+
+  public void setOnKeyReleaseCallback(Consumer<GuiKeyEvent> onKeyReleaseCallback) {
+    this.onKeyReleaseCallback = onKeyReleaseCallback;
+  }
+
+  public void setOnMouseEnterCallback(Consumer<GuiMouseEvent> callback) {
+    onMouseEnterCallback = callback;
+  }
+
+  public void setOnMouseExitCallback(Consumer<GuiMouseEvent> callback) {
+    onMouseExitCallback = callback;
+  }
+
+  public void setOnMouseDownCallback(Consumer<GuiMouseEvent> callback) {
+    onMouseDownCallback = callback;
+  }
+
+  public void setOnMouseUpCallback(Consumer<GuiMouseEvent> callback) {
+    onMouseUpCallback = callback;
+  }
+
+  public T properties() {
+    return properties;
+  }
+
+  void render(Renderer renderer) {
     if (isLayoutChanged()) {
       recalculateLayout();
       properties.setLayoutChanged(false);
@@ -113,57 +167,23 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     }
   }
 
-  public void setPosition(int x, int y) {
-    this.x = x;
-    this.y = y;
-    properties.setLayoutChanged(true);
+  boolean isLayoutChanged() {
+    return properties.isLayoutChanged();
   }
 
-  public int getX() {
-    return x;
-  }
-
-  public int getY() {
-    return y;
-  }
-
-  public boolean isHovered() {
-    return wasMouseOverElement;
-  }
-
-  public boolean isFocussed() {
-    return document.isFocussedElement(this);
-  }
-
-  public void requestFocus() {
-    document.focusElement(this);
-  }
-
-  public GuiElement<?> getElementById(String id) {
-    return id.equals(properties.getId()) ? this : null;
-  }
-
-  public void onKeyPress(GuiKeyEvent keyEvent) {
+  void onKeyPress(GuiKeyEvent keyEvent) {
     if (onKeyPressCallback != null) {
       onKeyPressCallback.accept(keyEvent);
     }
   }
 
-  public void setOnKeyPressCallback(Consumer<GuiKeyEvent> onKeyPressCallback) {
-    this.onKeyPressCallback = onKeyPressCallback;
-  }
-
-  public void onKeyRelease(GuiKeyEvent keyEvent) {
+  void onKeyRelease(GuiKeyEvent keyEvent) {
     if (onKeyReleaseCallback != null) {
       onKeyReleaseCallback.accept(keyEvent);
     }
   }
 
-  public void setOnKeyReleaseCallback(Consumer<GuiKeyEvent> onKeyReleaseCallback) {
-    this.onKeyReleaseCallback = onKeyReleaseCallback;
-  }
-
-  public void onMouseEnter(MouseEvent mouseEvent) {
+  void onMouseEnter(GuiMouseEvent mouseEvent) {
     if (!wasMouseOverElement) {
       wasMouseOverElement = true;
 
@@ -173,11 +193,7 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     }
   }
 
-  public void setOnMouseEnterCallback(Consumer<MouseEvent> callback) {
-    onMouseEnterCallback = callback;
-  }
-
-  public void onMouseExit(MouseEvent mouseEvent) {
+  void onMouseExit(GuiMouseEvent mouseEvent) {
     if (wasMouseOverElement) {
       wasMouseOverElement = false;
 
@@ -187,35 +203,19 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     }
   }
 
-  public void setOnMouseExitCallback(Consumer<MouseEvent> callback) {
-    onMouseExitCallback = callback;
-  }
-
-  public void onMouseDown(MouseEvent mouseEvent) {
+  void onMouseDown(GuiMouseEvent mouseEvent) {
     if (onMouseDownCallback != null) {
       onMouseDownCallback.accept(mouseEvent);
     }
   }
 
-  public void setOnMouseDownCallback(Consumer<MouseEvent> callback) {
-    onMouseDownCallback = callback;
-  }
-
-  public void onMouseUp(MouseEvent mouseEvent) {
+  void onMouseUp(GuiMouseEvent mouseEvent) {
     if (onMouseUpCallback != null) {
       onMouseUpCallback.accept(mouseEvent);
     }
   }
 
-  public void setOnMouseUpCallback(Consumer<MouseEvent> callback) {
-    onMouseUpCallback = callback;
-  }
-
-  public T properties() {
-    return properties;
-  }
-
-  public void handleKeyEvent(GuiKeyEvent event) {
+  void handleKeyEvent(GuiKeyEvent event) {
     if (!isFocussed()) {
       return;
     }
@@ -226,7 +226,7 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     }
   }
 
-  public void handleMouseEvent(MouseEvent event, String eventType) {
+  void handleMouseEvent(GuiMouseEvent event) {
     if (properties.isHidden()) {
       return;
     }
@@ -237,10 +237,10 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
     Rectangle guiElementBounds = new Rectangle(new Vector2D(x, y), new Vector2D(x + width, y + height));
 
     if (guiElementBounds.contains(new Vector2D(event.x(), event.y()))) {
-      switch (eventType) {
-        case "press" -> onMouseDown(event);
-        case "release" -> onMouseUp(event);
-        case "move" -> onMouseEnter(event);
+      switch (event.getType()) {
+        case PRESS -> onMouseDown(event);
+        case RELEASE -> onMouseUp(event);
+        case MOVE -> onMouseEnter(event);
       }
     } else {
       onMouseExit(event);

@@ -37,7 +37,7 @@ public class LightingExample extends SolaWithDefaults {
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public LightingExample() {
-    super(SolaConfiguration.build("Lighting", 600, 480).withTargetUpdatesPerSecond(30));
+    super(SolaConfiguration.build("Lighting", 256, 240).withTargetUpdatesPerSecond(30));
   }
 
   @Override
@@ -59,7 +59,7 @@ public class LightingExample extends SolaWithDefaults {
 
   private World buildWorld() {
     Random random = new Random();
-    World world = new World(6000);
+    World world = new World(1500);
 
     for (int i = 0; i < platform.getRenderer().getWidth(); i += 8) {
       for (int j = 0; j < platform.getRenderer().getHeight(); j += 8) {
@@ -73,7 +73,7 @@ public class LightingExample extends SolaWithDefaults {
       }
     }
 
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 200; i++) {
       int x = random.nextInt(platform.getRenderer().getWidth() - 20) + 10;
       int y = random.nextInt(platform.getRenderer().getHeight() - 20) + 10;
 
