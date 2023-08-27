@@ -411,7 +411,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
         }
       });
       case DISSOLVE -> ((pixelIndex, color) -> {
-        if (random.nextInt(0, 256) <= color.getAlpha()) {
+        if (random.nextInt(0, 255) < color.getAlpha()) {
           pixels[pixelIndex] = color.hexInt();
         }
       });
