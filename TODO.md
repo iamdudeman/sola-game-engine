@@ -4,12 +4,6 @@
 
 * stopping gui mouse event propagation currently isn't hooked up
     * this needs to be added to `GuiElementContainer#handleMouseEvent`
-* Exception in thread "Thread-3" technology.sola.engine.assets.exception.MissingAssetException: Asset with id [rememory.png] does not exist
-  at technology.sola.engine/technology.sola.engine.assets.AssetLoader.get(AssetLoader.java:65)
-  at technology.sola.engine/technology.sola.engine.assets.AssetLoader.getNewAsset(AssetLoader.java:88)
-  at technology.sola.engine.platform.javafx@4d0fd62f4f/technology.sola.engine.platform.javafx.assets.JavaFxSpriteSheetAssetLoader.lambda$loadAsset$2(JavaFxSpriteSheetAssetLoader.java:44)
-  at java.base/java.lang.Thread.run(Thread.java:833)
-
 
 -----------------------------------------------------------------------------------------------------------------------
 

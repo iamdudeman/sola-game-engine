@@ -83,9 +83,12 @@ public abstract class AssetLoader<T extends Asset> {
    * @return handle for the asset
    */
   public AssetHandle<T> getNewAsset(String id, String path) {
-    addAssetMapping(id, path);
+    AssetHandle<T> newAsset = loadAsset(path);
 
-    return get(id);
+    addAssetMapping(id, path);
+    cachedAssets.put(id, newAsset);
+
+    return newAsset;
   }
 
   /**
