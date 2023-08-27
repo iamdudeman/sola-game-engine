@@ -4,11 +4,19 @@
 
 * stopping gui mouse event propagation currently isn't hooked up
     * this needs to be added to `GuiElementContainer#handleMouseEvent`
+* Exception in thread "Thread-3" technology.sola.engine.assets.exception.MissingAssetException: Asset with id [rememory.png] does not exist
+  at technology.sola.engine/technology.sola.engine.assets.AssetLoader.get(AssetLoader.java:65)
+  at technology.sola.engine/technology.sola.engine.assets.AssetLoader.getNewAsset(AssetLoader.java:88)
+  at technology.sola.engine.platform.javafx@4d0fd62f4f/technology.sola.engine.platform.javafx.assets.JavaFxSpriteSheetAssetLoader.lambda$loadAsset$2(JavaFxSpriteSheetAssetLoader.java:44)
+  at java.base/java.lang.Thread.run(Thread.java:833)
+
 
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Planned Cleanup List
 
+* Change `SolaEntityGraphicsModule<View1Entry<SomeComponent>>` to just `SolaEntityGraphicsModule<SomeComponent>` if possible
+* Don't force setting props for containers when creating them via gui document
 * Unit Testing
     * Add lots of missing tests :)
 * JavaDocs
@@ -36,6 +44,8 @@
 * Particle System
     * consider adding acceleration
     * consider some sort of "swaying" for non-linear particles
+    * consider ability to spawn particles in a radius away from center
+        * probably want the ability to make particles go to and from center for this
 * SolaGui
     * Implement a way to load gui stuff from a file
         * possibly use JSON to define gui structure
