@@ -20,6 +20,7 @@
 
 ## TODO List
 
+* Consider "stopping" AudioClip when it is finished, so it can be immediately played again
 * Move custom build "distribution" tasks to a gradle plugin
     * sola game template should use these plugins as well
 * Consider mechanism to "batch" together SolaGraphics entity draws when they are in the same layer
