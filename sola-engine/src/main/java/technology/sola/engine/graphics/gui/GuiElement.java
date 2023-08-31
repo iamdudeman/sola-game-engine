@@ -91,7 +91,7 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
   }
 
   public boolean isFocussed() {
-    return document.isFocussedElement(this);
+    return !properties.isHidden() && document.isFocussedElement(this);
   }
 
   public void requestFocus() {

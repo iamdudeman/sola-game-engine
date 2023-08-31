@@ -9,6 +9,8 @@
 
 ## Planned Cleanup List
 
+* Change `SolaEntityGraphicsModule<View1Entry<SomeComponent>>` to just `SolaEntityGraphicsModule<SomeComponent>` if possible
+* Don't force setting props for containers when creating them via gui document
 * Unit Testing
     * Add lots of missing tests :)
 * JavaDocs
@@ -18,6 +20,7 @@
 
 ## TODO List
 
+* Consider "stopping" AudioClip when it is finished, so it can be immediately played again
 * Move custom build "distribution" tasks to a gradle plugin
     * sola game template should use these plugins as well
 * Consider mechanism to "batch" together SolaGraphics entity draws when they are in the same layer
@@ -36,6 +39,8 @@
 * Particle System
     * consider adding acceleration
     * consider some sort of "swaying" for non-linear particles
+    * consider ability to spawn particles in a radius away from center
+        * probably want the ability to make particles go to and from center for this
 * SolaGui
     * Implement a way to load gui stuff from a file
         * possibly use JSON to define gui structure

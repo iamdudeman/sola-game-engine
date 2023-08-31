@@ -266,7 +266,14 @@ public abstract class SolaWithDefaults extends Sola {
         renderFunction = renderer -> {
           renderer.clear(backgroundColor);
           solaGraphics.render(renderer);
-          solaGuiDocument.render(renderer);
+
+          var layers = renderer.getLayers();
+
+          if (layers.isEmpty()) {
+            solaGuiDocument.render(renderer);
+          } else {
+            layers.get(layers.size() - 1).add(solaGuiDocument::render, ScreenSpaceLightMapGraphicsModule.ORDER + 1);
+          }
         };
       } else if (solaGraphics != null) {
         renderFunction = renderer -> {

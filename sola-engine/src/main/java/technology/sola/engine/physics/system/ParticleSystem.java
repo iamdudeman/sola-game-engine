@@ -1,11 +1,13 @@
 package technology.sola.engine.physics.system;
 
 import technology.sola.ecs.EcsSystem;
+import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
+import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.physics.component.ParticleComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.math.linear.Vector2D;
@@ -68,7 +70,7 @@ public class ParticleSystem extends EcsSystem {
             float size = getRandomFloat(particleEmitterComponent.getParticleMinSize(), particleEmitterComponent.getParticleMaxSize());
             float life = getRandomFloat(particleEmitterComponent.getParticleMinLife(), particleEmitterComponent.getParticleMaxLife());
 
-            world.createEntity(
+            Entity entity = world.createEntity(
               new TransformComponent(
                 transformComponent.getX(), transformComponent.getY(),
                 size, size
@@ -79,6 +81,12 @@ public class ParticleSystem extends EcsSystem {
                 particleEmitterComponent.getParticleColor(), life, new Vector2D(xVel, yVel)
               )
             );
+
+            LayerComponent layerComponent = view.entity().getComponent(LayerComponent.class);
+
+            if (layerComponent != null) {
+              entity.addComponent(layerComponent);
+            }
           }
         });
       });
