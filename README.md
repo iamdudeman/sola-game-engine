@@ -87,9 +87,12 @@ will have to be downloaded and executed separately.
 
 1. sola game engine demos
     * Play it on its [itch.io page](https://iamdudeman.itch.io/sola-game-engine-demos)
-2. Acid Rain
+2. Acid Rain [OLC CodeJam 2022](https://itch.io/jam/olc-codejam-2022/entries)
     * Play it on its [itch.io page](https://iamdudeman.itch.io/acid-rain)
     * Check out its [GitHub repo](https://github.com/iamdudeman/acid-rain)
+3. re;memory [OLC CodeJam 2023](https://itch.io/jam/olc-codejam-2023/entries)
+    * Play it on its [itch.io page](https://iamdudeman.itch.io/rememory)
+    * Check out its [GitHub repo](https://github.com/iamdudeman/re-memory)
 
 ## Packaging for release
 

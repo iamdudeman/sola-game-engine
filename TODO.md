@@ -20,9 +20,12 @@
 
 ## TODO List
 
-* Consider "stopping" AudioClip when it is finished, so it can be immediately played again
+* GUI V2 implementation
+* Allow for custom BlendMode functions (maybe refactor current ones out of SoftwareRenderer for reuse?)
+* Consider "stopping" AudioClip when it is finished by default, so it can be immediately played again?
 * Move custom build "distribution" tasks to a gradle plugin
     * sola game template should use these plugins as well
+    * maybe have all distributable files go to the same parent folder for convenience?
 * Consider mechanism to "batch" together SolaGraphics entity draws when they are in the same layer
     * Currently, it does each one individually
 * Rendering
