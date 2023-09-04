@@ -1,10 +1,5 @@
 # sola-game-engine TODO list
 
-* Allow for custom BlendMode functions (maybe refactor current ones out of SoftwareRenderer for reuse?)
-* BlendMode maybe is an interface that points to a blend mode function
-* setBlendMode takes in new interface instead
-* provide some default functions
-
 ## Known Bugs List
 
 * stopping gui mouse event propagation currently isn't hooked up
