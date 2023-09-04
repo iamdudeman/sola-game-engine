@@ -1,8 +1,8 @@
-package technology.sola.engine.graphics.renderer.pixel;
+package technology.sola.engine.graphics.renderer.blend;
 
 import technology.sola.engine.graphics.Color;
 
-public class NoBlendPixelUpdater implements PixelUpdater {
+public class NoBlendFunction implements BlendFunction {
   @Override
   public void set(int[] pixels, int pixelIndex, Color color) {
     pixels[pixelIndex] = color.hexInt();

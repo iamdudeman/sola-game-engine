@@ -1,9 +1,9 @@
-package technology.sola.engine.graphics.renderer.pixel;
+package technology.sola.engine.graphics.renderer.blend;
 
 import technology.sola.engine.graphics.Color;
 import technology.sola.math.SolaMath;
 
-public class MultiplyPixelUpdater implements PixelUpdater {
+public class MultiplyBlendFunction implements BlendFunction {
   @Override
   public void set(int[] pixels, int pixelIndex, Color color) {
     Color currentColor = new Color(pixels[pixelIndex]);

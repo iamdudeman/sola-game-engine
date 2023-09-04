@@ -1,8 +1,8 @@
-package technology.sola.engine.graphics.renderer.pixel;
+package technology.sola.engine.graphics.renderer.blend;
 
 import technology.sola.engine.graphics.Color;
 
-public class NormalPixelUpdater implements PixelUpdater {
+public class NormalBlendFunction implements BlendFunction {
   @Override
   public void set(int[] pixels, int pixelIndex, Color color) {
     if (color.hasAlpha()) {

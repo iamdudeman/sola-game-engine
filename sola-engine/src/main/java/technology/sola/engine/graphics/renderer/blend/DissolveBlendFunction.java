@@ -1,10 +1,10 @@
-package technology.sola.engine.graphics.renderer.pixel;
+package technology.sola.engine.graphics.renderer.blend;
 
 import technology.sola.engine.graphics.Color;
 
 import java.util.Random;
 
-public class DissolvePixelUpdater implements PixelUpdater {
+public class DissolveBlendFunction implements BlendFunction {
   private final Random random = new Random();
 
   @Override
