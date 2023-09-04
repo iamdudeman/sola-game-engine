@@ -200,8 +200,8 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Draws a filled rectangle.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getBlendMode()" class="member-name-link">getBlendMode</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend">BlendFunction</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getBlendFunction()" class="member-name-link">getBlendFunction</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getFont()" class="member-name-link">getFont</a>()</code></div>
@@ -226,9 +226,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Resets the rendering clamp to the full size of the <a href="Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setBlendMode(technology.sola.engine.graphics.renderer.BlendMode)" class="member-name-link">setBlendMode</a><wbr>(<a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a>&nbsp;blendMode)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setBlendFunction(technology.sola.engine.graphics.renderer.blend.BlendFunction)" class="member-name-link">setBlendFunction</a><wbr>(<a href="blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend">BlendFunction</a>&nbsp;blendFunction)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Sets the <a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer"><code>BlendMode</code></a> that should be used.</div>
+<div class="block">Sets the <a href="blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend"><code>BlendFunction</code></a> that should be used.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setClamp(int,int,int,int)" class="member-name-link">setClamp</a><wbr>(int&nbsp;x,
@@ -272,23 +272,23 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="setBlendMode(technology.sola.engine.graphics.renderer.BlendMode)">
-<h3>setBlendMode</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">setBlendMode</span><wbr><span class="parameters">(<a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a>&nbsp;blendMode)</span></div>
-<div class="block">Sets the <a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer"><code>BlendMode</code></a> that should be used.</div>
+<section class="detail" id="setBlendFunction(technology.sola.engine.graphics.renderer.blend.BlendFunction)">
+<h3>setBlendFunction</h3>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">setBlendFunction</span><wbr><span class="parameters">(<a href="blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend">BlendFunction</a>&nbsp;blendFunction)</span></div>
+<div class="block">Sets the <a href="blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend"><code>BlendFunction</code></a> that should be used.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>blendMode</code> - the new <code>BlendMode</code> to use</dd>
+<dd><code>blendFunction</code> - the new <code>BlendMode</code> to use</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="getBlendMode()">
-<h3>getBlendMode</h3>
-<div class="member-signature"><span class="return-type"><a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a></span>&nbsp;<span class="element-name">getBlendMode</span>()</div>
+<section class="detail" id="getBlendFunction()">
+<h3>getBlendFunction</h3>
+<div class="member-signature"><span class="return-type"><a href="blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend">BlendFunction</a></span>&nbsp;<span class="element-name">getBlendFunction</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the current <a href="BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer"><code>BlendMode</code></a> being used when drawing</dd>
+<dd>the current <a href="blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend"><code>BlendFunction</code></a> being used when drawing</dd>
 </dl>
 </section>
 </li>

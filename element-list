@@ -22,6 +22,7 @@ technology.sola.engine.graphics.gui.elements.input
 technology.sola.engine.graphics.gui.event
 technology.sola.engine.graphics.gui.properties
 technology.sola.engine.graphics.renderer
+technology.sola.engine.graphics.renderer.blend
 technology.sola.engine.graphics.screen
 technology.sola.engine.graphics.system
 technology.sola.engine.input

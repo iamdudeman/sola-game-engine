@@ -116,8 +116,8 @@ implements technology.sola.ecs.Component</span></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#emitIfAble(float,java.lang.Runnable)" class="member-name-link">emitIfAble</a><wbr>(float&nbsp;delta,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;runnable)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../graphics/renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParticleBlendMode()" class="member-name-link">getParticleBlendMode</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../graphics/renderer/blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend">BlendFunction</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParticleBlendFunction()" class="member-name-link">getParticleBlendFunction</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../graphics/Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParticleColor()" class="member-name-link">getParticleColor</a>()</code></div>
@@ -144,7 +144,7 @@ implements technology.sola.ecs.Component</span></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParticlesPerEmit()" class="member-name-link">getParticlesPerEmit</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleBlendMode(technology.sola.engine.graphics.renderer.BlendMode)" class="member-name-link">setParticleBlendMode</a><wbr>(<a href="../../graphics/renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a>&nbsp;blendMode)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleBlendFunction(technology.sola.engine.graphics.renderer.blend.BlendFunction)" class="member-name-link">setParticleBlendFunction</a><wbr>(<a href="../../graphics/renderer/blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend">BlendFunction</a>&nbsp;blendMode)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleColor(technology.sola.engine.graphics.Color)" class="member-name-link">setParticleColor</a><wbr>(<a href="../../graphics/Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;particleColor)</code></div>
@@ -254,15 +254,15 @@ implements technology.sola.ecs.Component</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="getParticleBlendMode()">
-<h3>getParticleBlendMode</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../graphics/renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a></span>&nbsp;<span class="element-name">getParticleBlendMode</span>()</div>
+<section class="detail" id="getParticleBlendFunction()">
+<h3>getParticleBlendFunction</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../graphics/renderer/blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend">BlendFunction</a></span>&nbsp;<span class="element-name">getParticleBlendFunction</span>()</div>
 </section>
 </li>
 <li>
-<section class="detail" id="setParticleBlendMode(technology.sola.engine.graphics.renderer.BlendMode)">
-<h3>setParticleBlendMode</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></span>&nbsp;<span class="element-name">setParticleBlendMode</span><wbr><span class="parameters">(<a href="../../graphics/renderer/BlendMode.html" title="enum class in technology.sola.engine.graphics.renderer">BlendMode</a>&nbsp;blendMode)</span></div>
+<section class="detail" id="setParticleBlendFunction(technology.sola.engine.graphics.renderer.blend.BlendFunction)">
+<h3>setParticleBlendFunction</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></span>&nbsp;<span class="element-name">setParticleBlendFunction</span><wbr><span class="parameters">(<a href="../../graphics/renderer/blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend">BlendFunction</a>&nbsp;blendMode)</span></div>
 </section>
 </li>
 <li>
