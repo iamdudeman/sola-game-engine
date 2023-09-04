@@ -25,7 +25,7 @@ import java.util.List;
 public class SoftwareRenderer extends Canvas implements Renderer {
   private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareRenderer.class);
   private final List<Layer> layers = new ArrayList<>();
-  private BlendMode blendMode;
+  private BlendFunction blendFunction;
   private Font font;
   private int clampX;
   private int clampY;
@@ -40,20 +40,20 @@ public class SoftwareRenderer extends Canvas implements Renderer {
    */
   public SoftwareRenderer(int width, int height) {
     super(width, height);
-    setBlendMode(BlendMode.NO_BLENDING);
+    setBlendFunction(BlendMode.NO_BLENDING);
     resetClamp();
   }
 
   @Override
-  public void setBlendMode(BlendMode blendMode) {
-    if (this.blendMode != blendMode) {
-      this.blendMode = blendMode;
+  public void setBlendFunction(BlendFunction blendFunction) {
+    if (this.blendFunction != blendFunction) {
+      this.blendFunction = blendFunction;
     }
   }
 
   @Override
-  public BlendMode getBlendMode() {
-    return blendMode;
+  public BlendFunction getBlendFunction() {
+    return blendFunction;
   }
 
   @Override
@@ -96,7 +96,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   @Override
   public void setPixel(int x, int y, Color color) {
     int[] pixels = this.pixels;
-    BlendFunction blendFunction = blendMode;
+    BlendFunction blendFunction = this.blendFunction;
 
     if (x >= clampX && x < clampMaxX && y >= clampY && y < clampMaxY) {
       int pixelIndex = x + y * width;

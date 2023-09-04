@@ -3,11 +3,12 @@ package technology.sola.engine.physics.component;
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.BlendMode;
+import technology.sola.engine.graphics.renderer.blend.BlendFunction;
 import technology.sola.math.linear.Vector2D;
 
 public class ParticleEmitterComponent implements Component {
   private Color particleColor = Color.WHITE;
-  private BlendMode particleBlendMode = BlendMode.NORMAL;
+  private BlendFunction particleBlendFunction = BlendMode.NORMAL;
   private float particleMinLife = 1f;
   private float particleMaxLife = 2f;
   private Vector2D particleMinVelocity = new Vector2D(-50, -100);
@@ -62,12 +63,12 @@ public class ParticleEmitterComponent implements Component {
     return this;
   }
 
-  public BlendMode getParticleBlendMode() {
-    return particleBlendMode;
+  public BlendFunction getParticleBlendFunction() {
+    return particleBlendFunction;
   }
 
-  public ParticleEmitterComponent setParticleBlendMode(BlendMode blendMode) {
-    this.particleBlendMode = blendMode;
+  public ParticleEmitterComponent setParticleBlendFunction(BlendFunction blendMode) {
+    this.particleBlendFunction = blendMode;
 
     return this;
   }

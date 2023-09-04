@@ -7,7 +7,6 @@ import technology.sola.ecs.view.ViewEntry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
-import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
@@ -45,18 +44,18 @@ public abstract class SolaEntityGraphicsModule<V extends ViewEntry> extends Sola
       TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
       TransformComponent transformWithCameraComponent = getTransformForAppliedCamera(transformComponent, cameraScaleTransform, cameraTranslationTransform);
 
-      BlendMode previousBlendMode = renderer.getBlendMode();
-      BlendMode blendMode = blendModeComponent == null ? previousBlendMode : blendModeComponent.getBlendMode();
+      var previousBlendFunction = renderer.getBlendFunction();
+      var blendFunction = blendModeComponent == null ? previousBlendFunction : blendModeComponent.getBlendFunction();
 
       if (layerComponent == null) {
-        renderer.setBlendMode(blendMode);
+        renderer.setBlendFunction(blendFunction);
         renderMethod(renderer, entry, transformWithCameraComponent);
-        renderer.setBlendMode(previousBlendMode);
+        renderer.setBlendFunction(previousBlendFunction);
       } else {
         renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getOrder(), r2 -> {
-          renderer.setBlendMode(blendMode);
+          renderer.setBlendFunction(blendFunction);
           renderMethod(renderer, entry, transformWithCameraComponent);
-          renderer.setBlendMode(previousBlendMode);
+          renderer.setBlendFunction(previousBlendFunction);
         });
       }
     }

@@ -44,7 +44,7 @@ public class ParticleExample extends SolaWithDefaults {
 
     ParticleEmitterComponent fireParticleEmitterComponent = new ParticleEmitterComponent();
 
-    fireParticleEmitterComponent.setParticleBlendMode(BlendMode.LINEAR_DODGE);
+    fireParticleEmitterComponent.setParticleBlendFunction(BlendMode.LINEAR_DODGE);
     fireParticleEmitterComponent.setParticleColor(new Color(230, 40, 45));
     fireParticleEmitterComponent.setParticleSizeBounds(6, 10);
     fireParticleEmitterComponent.setParticleLifeBounds(1, 1);
@@ -58,7 +58,7 @@ public class ParticleExample extends SolaWithDefaults {
 
     ParticleEmitterComponent sparksParticleEmitterComponent = new ParticleEmitterComponent();
 
-    sparksParticleEmitterComponent.setParticleBlendMode(BlendMode.DISSOLVE);
+    sparksParticleEmitterComponent.setParticleBlendFunction(BlendMode.DISSOLVE);
     sparksParticleEmitterComponent.setParticleColor(new Color(210, 80, 45));
     sparksParticleEmitterComponent.setParticleSizeBounds(6, 12);
     sparksParticleEmitterComponent.setParticleLifeBounds(1, 3);

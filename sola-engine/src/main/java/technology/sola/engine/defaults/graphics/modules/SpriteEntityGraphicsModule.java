@@ -46,7 +46,7 @@ public class SpriteEntityGraphicsModule extends SolaEntityGraphicsModule<View2En
 
       if (cameraModifiedEntityTransform.getScaleX() != 1 || cameraModifiedEntityTransform.getScaleY() != 1) {
         spriteImage = sprite.scale(cameraModifiedEntityTransform.getScaleX(), cameraModifiedEntityTransform.getScaleY());
-        renderer.setBlendMode(BlendMode.MASK);
+        renderer.setBlendFunction(BlendMode.MASK);
       }
 
       renderer.drawImage(spriteImage, cameraModifiedEntityTransform.getX(), cameraModifiedEntityTransform.getY());

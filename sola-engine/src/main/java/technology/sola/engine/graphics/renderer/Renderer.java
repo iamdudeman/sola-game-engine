@@ -4,6 +4,7 @@ import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.renderer.blend.BlendFunction;
 
 import java.util.List;
 
@@ -13,16 +14,16 @@ import java.util.List;
  */
 public interface Renderer {
   /**
-   * Sets the {@link BlendMode} that should be used.
+   * Sets the {@link BlendFunction} that should be used.
    *
-   * @param blendMode the new {@code BlendMode} to use
+   * @param blendFunction the new {@code BlendMode} to use
    */
-  void setBlendMode(BlendMode blendMode);
+  void setBlendFunction(BlendFunction blendFunction);
 
   /**
-   * @return the current {@link BlendMode} being used when drawing
+   * @return the current {@link BlendFunction} being used when drawing
    */
-  BlendMode getBlendMode();
+  BlendFunction getBlendFunction();
 
   /**
    * @return the current {@link Font} being used for drawing text
@@ -163,8 +164,8 @@ public interface Renderer {
    * @param color the {@link Color} of the text
    */
   default void drawString(String text, float x, float y, Color color) {
-    BlendMode previousBlendMode = getBlendMode();
-    setBlendMode(BlendMode.MASK);
+    var previousBlendFunction = getBlendFunction();
+    setBlendFunction(BlendMode.MASK);
 
     int xOffset = 0;
     Font font = getFont();
@@ -176,7 +177,7 @@ public interface Renderer {
       xOffset += glyphImage.getWidth();
     }
 
-    setBlendMode(previousBlendMode);
+    setBlendFunction(previousBlendFunction);
   }
 
   /**

@@ -2,36 +2,37 @@ package technology.sola.engine.graphics.components;
 
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.renderer.BlendMode;
+import technology.sola.engine.graphics.renderer.blend.BlendFunction;
 
 /**
- * BlendModeComponent is a {@link Component} that modifies the {@link BlendMode} used when rendering this
+ * BlendModeComponent is a {@link Component} that modifies the {@link BlendFunction} used when rendering this
  * {@link technology.sola.ecs.Entity}
  */
 public class BlendModeComponent implements Component {
-  private BlendMode blendMode;
+  private BlendFunction blendFunction;
 
   /**
-   * Creates a new instance initialized to a {@link BlendMode}.
+   * Creates a new instance initialized to a {@link BlendFunction}.
    *
-   * @param blendMode the initial {@code BlendMode}
+   * @param blendFunction the initial {@code BlendFunction}
    */
-  public BlendModeComponent(BlendMode blendMode) {
-    this.blendMode = blendMode;
+  public BlendModeComponent(BlendFunction blendFunction) {
+    this.blendFunction = blendFunction;
   }
 
   /**
    * @return the current {@link BlendMode}
    */
-  public BlendMode getBlendMode() {
-    return blendMode;
+  public BlendFunction getBlendFunction() {
+    return blendFunction;
   }
 
   /**
-   * Sets the {@link BlendMode} to be used.
+   * Sets the {@link BlendFunction} to be used.
    *
-   * @param blendMode the new {@code BlendMode}
+   * @param blendFunction the new {@code BlendFunction}
    */
-  public void setBlendMode(BlendMode blendMode) {
-    this.blendMode = blendMode;
+  public void setBlendFunction(BlendFunction blendFunction) {
+    this.blendFunction = blendFunction;
   }
 }

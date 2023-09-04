@@ -73,18 +73,18 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
   }
 
   private void drawLightmap(Renderer renderer, SolaImage lightMapImage) {
-    BlendMode previousBlendMode = renderer.getBlendMode();
+    var previousBlendFunction = renderer.getBlendFunction();
 
-    renderer.setBlendMode(BlendMode.MULTIPLY);
+    renderer.setBlendFunction(BlendMode.MULTIPLY);
     renderer.drawImage(lightMapImage, 0, 0);
-    renderer.setBlendMode(previousBlendMode);
+    renderer.setBlendFunction(previousBlendFunction);
   }
 
   private SolaImage prepareLightmap(Renderer renderer, World world) {
     SolaImage lightImage = new SolaImage(renderer.getWidth(), renderer.getHeight());
     Renderer lightImageRenderer = renderer.createRendererForImage(lightImage);
 
-    lightImageRenderer.setBlendMode(BlendMode.LIGHTEN);
+    lightImageRenderer.setBlendFunction(BlendMode.LIGHTEN);
     world.createView().of(TransformComponent.class, LightComponent.class)
       .getEntries()
       .forEach(entry -> {
@@ -104,7 +104,7 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
     SolaImage lightMapImage = new SolaImage(renderer.getWidth(), renderer.getHeight());
     Renderer lightMapRenderer = renderer.createRendererForImage(lightMapImage);
     lightMapRenderer.clear(ambientColor);
-    lightMapRenderer.setBlendMode(BlendMode.NORMAL);
+    lightMapRenderer.setBlendFunction(BlendMode.NORMAL);
     lightMapRenderer.drawImage(lightImage, 0, 0);
 
     return lightMapImage;
