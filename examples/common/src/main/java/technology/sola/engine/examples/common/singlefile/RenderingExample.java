@@ -90,18 +90,18 @@ public class RenderingExample extends Sola {
 
       assetLoaderProvider.get(SolaImage.class).get("test").executeIfLoaded(solaImage -> {
         renderer.fillRect(350, 320, 200, 200, Color.WHITE);
-        renderer.setBlendMode(BlendMode.MASK);
+        renderer.setBlendFunction(BlendMode.MASK);
         renderer.drawImage(solaImage , 350, 320, 200, 200);
-        renderer.setBlendMode(BlendMode.NO_BLENDING);
+        renderer.setBlendFunction(BlendMode.NO_BLENDING);
       });
     });
 
     solaGraphics.render(renderer);
 
     renderer.drawToLayer("ui", r -> {
-      renderer.setBlendMode(BlendMode.NORMAL);
+      renderer.setBlendFunction(BlendMode.NORMAL);
       renderer.fillRect(80, 0, 600, 100, new Color(120, 255, 255, 255));
-      renderer.setBlendMode(BlendMode.NO_BLENDING);
+      renderer.setBlendFunction(BlendMode.NO_BLENDING);
       renderer.drawRect(80, 0, 600, 100, Color.YELLOW);
 
       renderer.fillRect(180, 65, 300, 25, Color.WHITE);

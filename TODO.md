@@ -21,7 +21,12 @@
 ## TODO List
 
 * GUI V2 implementation
-* Allow for custom BlendMode functions (maybe refactor current ones out of SoftwareRenderer for reuse?)
+    * "style" attribute
+        * "layout" options
+        * "paint" options
+    * any element can have children passed in (but doesn't have to use them)
+    * inherit styles from parent?
+    * root "element" of document is full width and height by default and is always defined?
 * Consider "stopping" AudioClip when it is finished by default, so it can be immediately played again?
 * Move custom build "distribution" tasks to a gradle plugin
     * sola game template should use these plugins as well

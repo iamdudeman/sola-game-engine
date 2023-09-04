@@ -5,9 +5,9 @@ import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Layer;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.renderer.blend.BlendFunction;
 
 import java.io.Serial;
 import java.util.ArrayList;
@@ -42,12 +42,12 @@ public class BrowserCanvasRenderer implements Renderer {
   }
 
   @Override
-  public void setBlendMode(BlendMode blendMode) {
+  public void setBlendFunction(BlendFunction blendFunction) {
     throw new NotYetImplementedException();
   }
 
   @Override
-  public BlendMode getBlendMode() {
+  public BlendFunction getBlendFunction() {
     throw new NotYetImplementedException();
   }
 

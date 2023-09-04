@@ -143,7 +143,7 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
       Color backgroundColor = isHovered() ? hoverBackgroundColor : properties.getBackgroundColor();
 
       if (backgroundColor != null) {
-        renderer.setBlendMode(BlendMode.NORMAL);
+        renderer.setBlendFunction(BlendMode.NORMAL);
         renderer.fillRect(
           x + borderOffset, y + borderOffset,
           getWidth() - borderOffset, getHeight() - borderOffset,
@@ -157,7 +157,7 @@ public abstract class GuiElement<T extends GuiElementBaseProperties<?>> {
       Color borderColor = isHovered() ? hoverBorderColor : properties.getBorderColor();
 
       if (borderColor != null) {
-        renderer.setBlendMode(BlendMode.NORMAL);
+        renderer.setBlendFunction(BlendMode.NORMAL);
         renderer.drawRect(x, y, getWidth(), getHeight(), borderColor);
       }
 

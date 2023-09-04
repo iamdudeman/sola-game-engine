@@ -8,6 +8,7 @@ import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Canvas;
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.renderer.blend.BlendFunction;
 import technology.sola.math.SolaMath;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
@@ -15,7 +16,6 @@ import technology.sola.math.linear.Vector2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 /**
  * SoftwareRenderer is a {@link Renderer} implementation that draws on an in memory array of pixels using the CPU. This
@@ -24,11 +24,9 @@ import java.util.Random;
  */
 public class SoftwareRenderer extends Canvas implements Renderer {
   private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareRenderer.class);
-  private final Random random = new Random();
   private final List<Layer> layers = new ArrayList<>();
-  private BlendMode blendMode;
+  private BlendFunction blendFunction;
   private Font font;
-  private PixelUpdater pixelUpdater;
   private int clampX;
   private int clampY;
   private int clampMaxX;
@@ -42,21 +40,20 @@ public class SoftwareRenderer extends Canvas implements Renderer {
    */
   public SoftwareRenderer(int width, int height) {
     super(width, height);
-    setBlendMode(BlendMode.NO_BLENDING);
+    setBlendFunction(BlendMode.NO_BLENDING);
     resetClamp();
   }
 
   @Override
-  public void setBlendMode(BlendMode blendMode) {
-    if (this.blendMode != blendMode) {
-      this.blendMode = blendMode;
-      updatePixelUpdaterForBlendMode();
+  public void setBlendFunction(BlendFunction blendFunction) {
+    if (this.blendFunction != blendFunction) {
+      this.blendFunction = blendFunction;
     }
   }
 
   @Override
-  public BlendMode getBlendMode() {
-    return blendMode;
+  public BlendFunction getBlendFunction() {
+    return blendFunction;
   }
 
   @Override
@@ -98,10 +95,13 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
   @Override
   public void setPixel(int x, int y, Color color) {
+    int[] pixels = this.pixels;
+    BlendFunction blendFunction = this.blendFunction;
+
     if (x >= clampX && x < clampMaxX && y >= clampY && y < clampMaxY) {
       int pixelIndex = x + y * width;
 
-      pixelUpdater.set(pixelIndex, color);
+      blendFunction.set(pixels, pixelIndex, color);
     }
   }
 
@@ -383,72 +383,5 @@ public class SoftwareRenderer extends Canvas implements Renderer {
         setPixel(x, y, color);
       }
     }
-  }
-
-  private void updatePixelUpdaterForBlendMode() {
-    int[] pixels = this.pixels;
-
-    this.pixelUpdater = switch (this.blendMode) {
-      case NO_BLENDING -> (pixelIndex, color) -> pixels[pixelIndex] = color.hexInt();
-      case MASK -> ((pixelIndex, color) -> {
-        if (color.getAlpha() == 255) {
-          pixels[pixelIndex] = color.hexInt();
-        }
-      });
-      case NORMAL -> ((pixelIndex, color) -> {
-        if (color.hasAlpha()) {
-          Color currentColor = new Color(pixels[pixelIndex]);
-          float alphaMod = color.getAlpha() * Color.ONE_DIV_255;
-          float oneMinusAlpha = 1 - alphaMod;
-
-          float red = currentColor.getRed() * oneMinusAlpha + color.getRed() * alphaMod;
-          float green = currentColor.getGreen() * oneMinusAlpha + color.getGreen() * alphaMod;
-          float blue = currentColor.getBlue() * oneMinusAlpha + color.getBlue() * alphaMod;
-
-          pixels[pixelIndex] = new Color((int) red, (int) green, (int) blue).hexInt();
-        } else {
-          pixels[pixelIndex] = color.hexInt();
-        }
-      });
-      case DISSOLVE -> ((pixelIndex, color) -> {
-        if (random.nextInt(0, 255) < color.getAlpha()) {
-          pixels[pixelIndex] = color.hexInt();
-        }
-      });
-      case LINEAR_DODGE -> ((pixelIndex, color) -> {
-        Color currentColor = new Color(pixels[pixelIndex]);
-
-        pixels[pixelIndex] = new Color(
-          Math.min(255, currentColor.getRed() + color.getRed()),
-          Math.min(255, currentColor.getGreen() + color.getGreen()),
-          Math.min(255, currentColor.getBlue() + color.getBlue())
-        ).hexInt();
-      });
-      case MULTIPLY -> ((pixelIndex, color) -> {
-        Color currentColor = new Color(pixels[pixelIndex]);
-
-        pixels[pixelIndex] = new Color(
-          currentColor.getAlpha(),
-          SolaMath.fastRound(currentColor.getRed() * (color.getRed() * Color.ONE_DIV_255)),
-          SolaMath.fastRound(currentColor.getGreen() * (color.getGreen() * Color.ONE_DIV_255)),
-          SolaMath.fastRound(currentColor.getBlue() * (color.getBlue() * Color.ONE_DIV_255))
-        ).hexInt();
-      });
-      case LIGHTEN -> ((pixelIndex, color) -> {
-        Color currentColor = new Color(pixels[pixelIndex]);
-
-        pixels[pixelIndex] = new Color(
-          Math.max(currentColor.getAlpha(), color.getAlpha()),
-          Math.max(currentColor.getRed(), color.getRed()),
-          Math.max(currentColor.getGreen(), color.getGreen()),
-          Math.max(currentColor.getBlue(), color.getBlue())
-        ).hexInt();
-      });
-    };
-  }
-
-  @FunctionalInterface
-  private interface PixelUpdater {
-    void set(int pixelIndex, Color color);
   }
 }
