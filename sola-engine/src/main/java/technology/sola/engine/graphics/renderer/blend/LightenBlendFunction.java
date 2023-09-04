@@ -2,6 +2,9 @@ package technology.sola.engine.graphics.renderer.blend;
 
 import technology.sola.engine.graphics.Color;
 
+/**
+ * Takes the max value of each channel for the destination pixel; alpha, red, green, blue.
+ */
 public class LightenBlendFunction implements BlendFunction {
   @Override
   public void set(int[] pixels, int pixelIndex, Color color) {

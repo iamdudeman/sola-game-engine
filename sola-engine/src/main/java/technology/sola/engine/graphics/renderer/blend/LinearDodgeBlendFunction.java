@@ -2,6 +2,9 @@ package technology.sola.engine.graphics.renderer.blend;
 
 import technology.sola.engine.graphics.Color;
 
+/**
+ * Adds the top and bottom pixels together ignoring alpha.
+ */
 public class LinearDodgeBlendFunction implements BlendFunction {
   @Override
   public void set(int[] pixels, int pixelIndex, Color color) {

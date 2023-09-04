@@ -2,6 +2,9 @@ package technology.sola.engine.graphics.renderer.blend;
 
 import technology.sola.engine.graphics.Color;
 
+/**
+ * Blends top onto bottom based on alpha of top pixel.
+ */
 public class NormalBlendFunction implements BlendFunction {
   @Override
   public void set(int[] pixels, int pixelIndex, Color color) {

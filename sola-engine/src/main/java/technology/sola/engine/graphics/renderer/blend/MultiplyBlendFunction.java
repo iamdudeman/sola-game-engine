@@ -3,6 +3,10 @@ package technology.sola.engine.graphics.renderer.blend;
 import technology.sola.engine.graphics.Color;
 import technology.sola.math.SolaMath;
 
+/**
+ * Takes the RGB channel values from 0 to 1 of each pixel in the top layer and multiples them with the values for the
+ * corresponding pixel from the bottom layer.
+ */
 public class MultiplyBlendFunction implements BlendFunction {
   @Override
   public void set(int[] pixels, int pixelIndex, Color color) {
