@@ -3,7 +3,7 @@ package technology.sola.engine.graphics.guiv2;
 import org.junit.jupiter.api.Test;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.guiv2.style.StyleContainer;
-import technology.sola.engine.graphics.guiv2.style.TextStyles;
+import technology.sola.engine.graphics.guiv2.elements.TextStyles;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

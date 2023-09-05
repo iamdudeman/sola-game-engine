@@ -15,6 +15,8 @@ public class StyleContainer<T extends BaseStyles> {
     setStyles(styles);
   }
 
+  // todo maybe this invalidates GuiElement layout when updated?
+
   @SafeVarargs
   public final void setStyles(T... styles) {
     computedCache.clear();

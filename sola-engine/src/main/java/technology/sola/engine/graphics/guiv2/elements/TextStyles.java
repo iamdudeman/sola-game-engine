@@ -1,6 +1,7 @@
-package technology.sola.engine.graphics.guiv2.style;
+package technology.sola.engine.graphics.guiv2.elements;
 
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 
 public class TextStyles extends BaseStyles {
   private Color textColor;
