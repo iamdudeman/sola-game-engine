@@ -1,23 +1,21 @@
 package technology.sola.engine.graphics.guiv2;
 
-import technology.sola.engine.graphics.guiv2.event.GuiEventList;
+import technology.sola.engine.graphics.guiv2.event.GuiElementEvents;
 import technology.sola.engine.graphics.guiv2.event.GuiKeyEvent;
+import technology.sola.engine.graphics.guiv2.event.GuiMouseEvent;
 import technology.sola.engine.graphics.guiv2.style.StyleContainer;
 import technology.sola.engine.graphics.renderer.Renderer;
-import technology.sola.engine.input.KeyEvent;
-import technology.sola.engine.input.MouseEvent;
-import technology.sola.math.geometry.Rectangle;
 
 import java.util.List;
 
 public abstract class GuiElement {
+  protected GuiElementBounds bounds;
+  GuiDocument guiDocument;
+  private final GuiElementEvents events = new GuiElementEvents();
   private StyleContainer style;
-  // todo when adding child be sure to remove from previous parent if there is one
   private List<GuiElement> children;
   private GuiElement parent;
   private boolean isLayoutChanged;
-  private Rectangle boundingRect;
-  private final GuiEventList<GuiKeyEvent> keyPressedEventList = new GuiEventList<>();
 
   public abstract void render(Renderer renderer);
 
@@ -25,43 +23,85 @@ public abstract class GuiElement {
     // todo handle layout stuff and what not
   }
 
-  public void recalculateLayout() {
+  public void invalidateLayout() {
     isLayoutChanged = true;
   }
 
-  // onKeyPressed
-  // oneKeyPressed
-  // offKeyPressed
-
-  // todo consider naming
-  public GuiEventList<GuiKeyEvent> getKeyPressedEventList() {
-    return keyPressedEventList;
+  public boolean isFocussed() {
+    return this.guiDocument.isFocussed(this);
   }
 
-  void onKeyPressed(KeyEvent keyEvent) {
-    GuiKeyEvent guiKeyEvent = new GuiKeyEvent(keyEvent);
-
-    // todo check if in bounds
-
-    // todo call event listeners
-    keyPressedEventList.trigger(guiKeyEvent);
-
-    // todo if propagation not stopped then propagate
+  public void requestFocus() {
+    this.guiDocument.requestFocus(this);
   }
 
-  void onKeyReleased(KeyEvent keyEvent) {
-    // todo
+  public GuiElementEvents events() {
+    return events;
   }
 
-  void onMousePressed(MouseEvent event) {
-    // todo
+  public void appendChildren(GuiElement... children) {
+    if (children != null) {
+      for (GuiElement child : children) {
+        if (child.parent == null) {
+          child.guiDocument = this.guiDocument;
+        } else {
+          child.parent.children.remove(child);
+          child.parent.invalidateLayout();
+        }
+
+        child.parent = this;
+        child.invalidateLayout();
+        this.children.add(child);
+      }
+
+      invalidateLayout();
+    }
   }
 
-  void onMouseReleased(MouseEvent event) {
-    // todo
+  void onKeyPressed(GuiKeyEvent event) {
+    events.keyPressed().emit(event);
+
+    if (event.isAbleToPropagate()) {
+      parent.onKeyPressed(event);
+    }
   }
 
-  void onMouseMoved(MouseEvent event) {
-    // todo
+  void onKeyReleased(GuiKeyEvent event) {
+
+    events.keyReleased().emit(event);
+
+    if (event.isAbleToPropagate()) {
+      parent.onKeyReleased(event);
+    }
+  }
+
+  void onMousePressed(GuiMouseEvent event) {
+    if (bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
+      children.forEach(child -> child.onMousePressed(event));
+
+      if (event.isAbleToPropagate()) {
+        events.mousePressed().emit(event);
+      }
+    }
+  }
+
+  void onMouseReleased(GuiMouseEvent event) {
+    if (bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
+      children.forEach(child -> child.onMouseReleased(event));
+
+      if (event.isAbleToPropagate()) {
+        events.mouseReleased().emit(event);
+      }
+    }
+  }
+
+  void onMouseMoved(GuiMouseEvent event) {
+    if (bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
+      children.forEach(child -> child.onMouseMoved(event));
+
+      if (event.isAbleToPropagate()) {
+        events.mouseMoved().emit(event);
+      }
+    }
   }
 }

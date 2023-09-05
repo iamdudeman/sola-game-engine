@@ -3,7 +3,7 @@ package technology.sola.engine.graphics.guiv2.event;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuiEventList<E extends GuiEvent> {
+public class GuiEventListenerList<E extends GuiEvent> {
   private final List<GuiEventListener<E>> eventListeners = new ArrayList<>();
 
   public GuiEventSubscription on(GuiEventListener<E> eventListener) {
@@ -22,7 +22,7 @@ public class GuiEventList<E extends GuiEvent> {
     eventListeners.clear();
   }
 
-  public void trigger(E event) {
+  public void emit(E event) {
     eventListeners.forEach(eventListener -> eventListener.onEvent(event));
   }
 
