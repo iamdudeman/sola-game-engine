@@ -1,16 +1,26 @@
 # sola-game-engine TODO list
 
-## Known Bugs List
-
+* GUI V2 implementation
+    * "style" attribute
+        * "layout" options
+        * "paint" options
+    * any element can have children passed in (but doesn't have to use them)
+    * inherit styles from parent?
+    * root "element" of document is full width and height by default and is always defined?
+* Don't force setting props for containers when creating them via gui document
 * stopping gui mouse event propagation currently isn't hooked up
     * this needs to be added to `GuiElementContainer#handleMouseEvent`
+* SolaGui
+    * Implement a way to load gui stuff from a file
+        * possibly use JSON to define gui structure
+    * A "post load" callback to add event listeners and such
+
+## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Planned Cleanup List
 
-* Change `SolaEntityGraphicsModule<View1Entry<SomeComponent>>` to just `SolaEntityGraphicsModule<SomeComponent>` if possible
-* Don't force setting props for containers when creating them via gui document
 * Unit Testing
     * Add lots of missing tests :)
 * JavaDocs
@@ -20,13 +30,6 @@
 
 ## TODO List
 
-* GUI V2 implementation
-    * "style" attribute
-        * "layout" options
-        * "paint" options
-    * any element can have children passed in (but doesn't have to use them)
-    * inherit styles from parent?
-    * root "element" of document is full width and height by default and is always defined?
 * Consider "stopping" AudioClip when it is finished by default, so it can be immediately played again?
 * Move custom build "distribution" tasks to a gradle plugin
     * sola game template should use these plugins as well
@@ -49,10 +52,6 @@
     * consider some sort of "swaying" for non-linear particles
     * consider ability to spawn particles in a radius away from center
         * probably want the ability to make particles go to and from center for this
-* SolaGui
-    * Implement a way to load gui stuff from a file
-        * possibly use JSON to define gui structure
-    * A "post load" callback to add event listeners and such
 * Consider adding rotation to TransformComponent
     * Would need to update rendering stuff
     * Would need to update physics stuff
