@@ -3,18 +3,19 @@ package technology.sola.engine.graphics.guiv2;
 import technology.sola.engine.graphics.guiv2.event.GuiElementEvents;
 import technology.sola.engine.graphics.guiv2.event.GuiKeyEvent;
 import technology.sola.engine.graphics.guiv2.event.GuiMouseEvent;
+import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.guiv2.style.StyleContainer;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 import java.util.List;
 
-public abstract class GuiElement {
+public abstract class GuiElement<T extends BaseStyles> {
   protected GuiElementBounds bounds;
   GuiDocument guiDocument;
   private final GuiElementEvents events = new GuiElementEvents();
-  private StyleContainer style;
-  private List<GuiElement> children;
-  private GuiElement parent;
+  private StyleContainer<T> style;
+  private List<GuiElement<?>> children;
+  private GuiElement<?> parent;
   private boolean isLayoutChanged;
 
   public abstract void render(Renderer renderer);
@@ -39,9 +40,9 @@ public abstract class GuiElement {
     return events;
   }
 
-  public void appendChildren(GuiElement... children) {
+  public void appendChildren(GuiElement<?>... children) {
     if (children != null) {
-      for (GuiElement child : children) {
+      for (GuiElement<?> child : children) {
         if (child.parent == null) {
           child.guiDocument = this.guiDocument;
         } else {
@@ -67,7 +68,6 @@ public abstract class GuiElement {
   }
 
   void onKeyReleased(GuiKeyEvent event) {
-
     events.keyReleased().emit(event);
 
     if (event.isAbleToPropagate()) {

@@ -8,8 +8,8 @@ import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 
 public class GuiDocument {
-  private final GuiElement root;
-  private GuiElement focussedElement;
+  private final GuiElement<?> root;
+  private GuiElement<?> focussedElement;
 
   public GuiDocument(SolaPlatform platform) {
     root = new RootGuiElement(this, platform.getRenderer().getWidth(), platform.getRenderer().getHeight());
@@ -23,11 +23,11 @@ public class GuiDocument {
     platform.onMouseReleased(this::onMouseReleased);
   }
 
-  public boolean isFocussed(GuiElement guiElement) {
+  public boolean isFocussed(GuiElement<?> guiElement) {
     return this.focussedElement == guiElement;
   }
 
-  public void requestFocus(GuiElement guiElement) {
+  public void requestFocus(GuiElement<?> guiElement) {
     this.focussedElement = guiElement;
   }
 
