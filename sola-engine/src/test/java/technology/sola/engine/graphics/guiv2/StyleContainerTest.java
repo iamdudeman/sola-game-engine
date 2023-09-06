@@ -11,22 +11,20 @@ public class StyleContainerTest {
   @Test
   void test() {
     var styleContainer = new StyleContainer<>(
-      TextStyles.create().setBackgroundColor(Color.RED).build(),
-
-      new TextStyles.Builder<>().setBackgroundColor(Color.WHITE).build(),
-      new TextStyles.Builder<>().setTextColor(Color.RED).build(),
-      new TextStyles.Builder<>().setTextColor(Color.BLUE).setBackgroundColor(Color.BLACK).build()
+      TextStyles.create().setBackgroundColor(Color.WHITE).build(),
+      TextStyles.create().setTextColor(Color.RED).build(),
+      TextStyles.create().setTextColor(Color.BLUE).setBackgroundColor(Color.BLACK).build()
     );
 
-    assertEquals(Color.BLACK, styleContainer.getPropertyValue(TextStyles::getBackgroundColor));
+    assertEquals(Color.BLACK, styleContainer.getPropertyValue(TextStyles::backgroundColor));
     assertEquals(Color.BLUE, styleContainer.getPropertyValue(TextStyles::getTextColor));
 
     styleContainer.setStyles(
-      new TextStyles.Builder<>().setBackgroundColor(Color.WHITE).build(),
-      new TextStyles.Builder<>().setTextColor(Color.RED).build()
+      TextStyles.create().setBackgroundColor(Color.WHITE),
+      TextStyles.create().setTextColor(Color.RED)
     );
 
-    assertEquals(Color.WHITE, styleContainer.getPropertyValue(TextStyles::getBackgroundColor));
+    assertEquals(Color.WHITE, styleContainer.getPropertyValue(TextStyles::backgroundColor));
     assertEquals(Color.RED, styleContainer.getPropertyValue(TextStyles::getTextColor));
   }
 }

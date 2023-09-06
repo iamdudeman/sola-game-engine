@@ -1,12 +1,12 @@
-package technology.sola.engine.graphics.guiv2;
+package technology.sola.engine.graphics.guiv2.elements;
 
+import technology.sola.engine.graphics.guiv2.GuiElement;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.renderer.Renderer;
 
-class RootGuiElement extends GuiElement<BaseStyles> {
-  RootGuiElement(GuiDocument guiDocument, int width, int height) {
-    this.guiDocument = guiDocument;
-    bounds = new GuiElementBounds(0, 0, width, height);
+public class SectionElement extends GuiElement<BaseStyles> {
+  public SectionElement(BaseStyles... styles) {
+    super(styles);
   }
 
   @Override
@@ -22,10 +22,5 @@ class RootGuiElement extends GuiElement<BaseStyles> {
   @Override
   public int getContentHeight() {
     return 0;
-  }
-
-  @Override
-  boolean isLayoutChanged() {
-    return false;
   }
 }

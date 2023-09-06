@@ -1,11 +1,12 @@
 # sola-game-engine TODO list
 
+* Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
 * GUI V2 implementation
     * "style" attribute
         * "layout" options
         * "paint" options
     * any element can have children passed in (but doesn't have to use them)
-    * inherit styles from parent?
+    * inherit styles from parent? (NO)
     * root "element" of document is full width and height by default and is always defined?
 * Don't force setting props for containers when creating them via gui document
 * stopping gui mouse event propagation currently isn't hooked up

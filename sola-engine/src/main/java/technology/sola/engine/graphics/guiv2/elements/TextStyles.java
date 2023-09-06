@@ -8,7 +8,7 @@ import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 //   textAlign
 
 public class TextStyles extends BaseStyles {
-  protected Color textColor;
+  private final Color textColor;
 
   public TextStyles(Builder<?> builder) {
     super(builder);
@@ -25,6 +25,9 @@ public class TextStyles extends BaseStyles {
 
   public static class Builder<Self extends Builder<Self>> extends BaseStyles.Builder<Self> {
     private Color textColor;
+
+    protected Builder() {
+    }
 
     @Override
     public TextStyles build() {

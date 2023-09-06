@@ -23,6 +23,10 @@ public class GuiDocument {
     platform.onMouseReleased(this::onMouseReleased);
   }
 
+  public GuiElement<?> getRoot() {
+    return root;
+  }
+
   public boolean isFocussed(GuiElement<?> guiElement) {
     return this.focussedElement == guiElement;
   }
