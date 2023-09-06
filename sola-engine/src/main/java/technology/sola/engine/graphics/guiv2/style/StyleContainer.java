@@ -6,19 +6,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-public class StyleContainer<T extends BaseStyles> {
-  private final Map<Function<T, ?>, Object> computedCache = new HashMap<>();
-  private List<T> styles;
+public class StyleContainer<Style extends BaseStyles> {
+  private final Map<Function<Style, ?>, Object> computedCache = new HashMap<>();
+  private List<Style> styles;
 
   @SafeVarargs
-  public StyleContainer(T... styles) {
+  public StyleContainer(Style... styles) {
     setStyles(styles);
   }
 
-  // todo maybe this invalidates GuiElement layout when updated?
-
   @SafeVarargs
-  public final void setStyles(T... styles) {
+  public final void setStyles(Style... styles) {
     computedCache.clear();
 
     if (styles == null) {
@@ -29,14 +27,14 @@ public class StyleContainer<T extends BaseStyles> {
   }
 
   @SuppressWarnings("unchecked")
-  public <R> R getPropertyValue(Function<T, R> propertySupplier) {
+  public <R> R getPropertyValue(Function<Style, R> propertySupplier) {
     if (computedCache.containsKey(propertySupplier)) {
       return (R) computedCache.get(propertySupplier);
     }
 
     R value = null;
 
-    for (T style : styles) {
+    for (Style style : styles) {
       R tempValue = propertySupplier.apply(style);
 
       if (tempValue != null) {

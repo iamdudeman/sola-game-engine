@@ -9,23 +9,31 @@ import technology.sola.engine.graphics.renderer.Renderer;
 
 import java.util.List;
 
-public abstract class GuiElement<T extends BaseStyles> {
+public abstract class GuiElement<Style extends BaseStyles> {
+  protected final StyleContainer<Style> styleContainer;
   protected GuiElementBounds bounds;
   GuiDocument guiDocument;
   private final GuiElementEvents events = new GuiElementEvents();
-  private StyleContainer<T> style;
   private List<GuiElement<?>> children;
   private GuiElement<?> parent;
   private boolean isLayoutChanged;
+
+  @SafeVarargs
+  public GuiElement(Style... styles) {
+    styleContainer = new StyleContainer<>();
+    setStyle(styles);
+  }
+
+  @SafeVarargs
+  public final void setStyle(Style... styles) {
+    styleContainer.setStyles(styles);
+    isLayoutChanged = true;
+  }
 
   public abstract void render(Renderer renderer);
 
   public void renderChildren(Renderer renderer) {
     // todo handle layout stuff and what not
-  }
-
-  public void invalidateLayout() {
-    isLayoutChanged = true;
   }
 
   public boolean isFocussed() {
@@ -47,15 +55,15 @@ public abstract class GuiElement<T extends BaseStyles> {
           child.guiDocument = this.guiDocument;
         } else {
           child.parent.children.remove(child);
-          child.parent.invalidateLayout();
+          child.parent.isLayoutChanged = true;
         }
 
         child.parent = this;
-        child.invalidateLayout();
+        child.isLayoutChanged = true;
         this.children.add(child);
       }
 
-      invalidateLayout();
+      this.isLayoutChanged = true;
     }
   }
 

@@ -2,26 +2,51 @@ package technology.sola.engine.graphics.guiv2.style;
 
 import technology.sola.engine.graphics.Color;
 
-// todo how does updating this trigger a change in GuiElement for layout shift?
-// todo ideally this is "stateless" outside of its own properties
-// todo maybe StyleContainer#setStyles causes the change and BaseStyles as a whole has no setters (Builder only pattern)?
+// todo
+//   margin (layout)
+//   padding (layout)
+//   focus outline (layout?)
+//   display (layout)
+//   visibility
+//   borderWidth (layout)
+//   borderColor
+//   width (layout)
+//   height (layout)
+//   position? (layout)
+//   direction (layout)
+//   horizontalAlignment? (layout)
+//   verticalAlignment? (layout)
+//   gap (layout)
 
 public class BaseStyles {
-  private Color backgroundColor;
-  // margin (layout)
-  // padding (layout)
-  // focus outline (layout?)
-  // display (layout)
-  // borderWidth (layout)
-  // borderColor
+  protected Color backgroundColor;
 
-  public BaseStyles setBackgroundColor(Color backgroundColor) {
-    this.backgroundColor = backgroundColor;
+  public BaseStyles(Builder<?> builder) {
+    this.backgroundColor = builder.backgroundColor;
+  }
 
-    return this;
+  public static Builder<?> create() {
+    return new Builder<>();
   }
 
   public Color getBackgroundColor() {
     return backgroundColor;
+  }
+
+  public static class Builder<Self extends Builder<Self>> {
+    private Color backgroundColor;
+
+    protected Builder() {
+    }
+
+    public BaseStyles build() {
+      return new BaseStyles(this);
+    }
+
+    @SuppressWarnings("unchecked")
+    public Self setBackgroundColor(Color backgroundColor) {
+      this.backgroundColor = backgroundColor;
+      return (Self) this;
+    }
   }
 }

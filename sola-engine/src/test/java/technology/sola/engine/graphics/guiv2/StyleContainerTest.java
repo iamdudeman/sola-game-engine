@@ -11,17 +11,19 @@ public class StyleContainerTest {
   @Test
   void test() {
     var styleContainer = new StyleContainer<>(
-      new TextStyles().setBackgroundColor(Color.WHITE),
-      new TextStyles().setTextColor(Color.RED),
-      new TextStyles().setTextColor(Color.BLUE).setBackgroundColor(Color.BLACK)
+      TextStyles.create().setBackgroundColor(Color.RED).build(),
+
+      new TextStyles.Builder<>().setBackgroundColor(Color.WHITE).build(),
+      new TextStyles.Builder<>().setTextColor(Color.RED).build(),
+      new TextStyles.Builder<>().setTextColor(Color.BLUE).setBackgroundColor(Color.BLACK).build()
     );
 
     assertEquals(Color.BLACK, styleContainer.getPropertyValue(TextStyles::getBackgroundColor));
     assertEquals(Color.BLUE, styleContainer.getPropertyValue(TextStyles::getTextColor));
 
     styleContainer.setStyles(
-      new TextStyles().setBackgroundColor(Color.WHITE),
-      new TextStyles().setTextColor(Color.RED)
+      new TextStyles.Builder<>().setBackgroundColor(Color.WHITE).build(),
+      new TextStyles.Builder<>().setTextColor(Color.RED).build()
     );
 
     assertEquals(Color.WHITE, styleContainer.getPropertyValue(TextStyles::getBackgroundColor));
