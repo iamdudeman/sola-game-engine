@@ -1,45 +1,58 @@
 package technology.sola.engine.graphics.guiv2.style;
 
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.guiv2.style.property.Background;
+import technology.sola.engine.graphics.guiv2.style.property.Border;
 import technology.sola.engine.graphics.guiv2.style.property.Spacing;
 import technology.sola.engine.graphics.guiv2.style.property.StyleValue;
 import technology.sola.engine.graphics.guiv2.style.property.Visibility;
+import technology.sola.engine.graphics.guiv2.style.property.layout.BlockLayout;
+import technology.sola.engine.graphics.guiv2.style.property.layout.FlexLayout;
+import technology.sola.engine.graphics.guiv2.style.property.layout.InlineLayout;
+import technology.sola.engine.graphics.guiv2.style.property.layout.Layout;
 
 // todo
-//   focus outline (layout?)
-//   display (layout)
-//   visibility
-//   borderWidth (layout)
-//   borderColor
-//   position? (layout)
-//   direction (layout)
-//   horizontalAlignment? (layout)
-//   verticalAlignment? (layout)
-//   gap (layout)
+//   relative + absolute position? (layout) + top,left,bottom,right
 
+// todo consider splitting out some things into a new BaseLayoutStyles (and then everything would use that one instead)
+//    or make new "base" file of some sort and have this one extend it?
 public class BaseStyles {
-  private final Color backgroundColor;
+  private final Background background;
+  private final Border border;
+  private final Border outline;
   private final Spacing margin;
   private final Spacing padding;
   private final StyleValue width;
   private final StyleValue height;
   private final Visibility visibility;
+  private final Layout<?> layout;
 
   public BaseStyles(Builder<?> builder) {
-    this.backgroundColor = builder.backgroundColor;
+    this.background = builder.background;
+    this.border = builder.border;
+    this.outline = builder.outline;
     this.margin = builder.margin;
     this.padding = builder.padding;
     this.width = builder.width;
     this.height = builder.height;
     this.visibility = builder.visibility;
+    this.layout = builder.layout;
   }
 
   public static Builder<?> create() {
     return new Builder<>();
   }
 
-  public Color backgroundColor() {
-    return backgroundColor;
+  public Background background() {
+    return background;
+  }
+
+  public Border border() {
+    return border;
+  }
+
+  public Border outline() {
+    return outline;
   }
 
   public Spacing margin() {
@@ -58,17 +71,24 @@ public class BaseStyles {
     return height;
   }
 
+  public Layout<?> layout() {
+    return layout;
+  }
+
   public Visibility visibility() {
     return visibility;
   }
 
   public static class Builder<Self extends Builder<Self>> {
-    private Color backgroundColor;
+    private Background background;
+    private Border border;
+    private Border outline;
     private Spacing margin = new Spacing();
     private Spacing padding = new Spacing();
     private StyleValue width;
     private StyleValue height;
     private Visibility visibility;
+    private Layout<?> layout = new BlockLayout();
 
     protected Builder() {
     }
@@ -79,7 +99,37 @@ public class BaseStyles {
 
     @SuppressWarnings("unchecked")
     public Self setBackgroundColor(Color backgroundColor) {
-      this.backgroundColor = backgroundColor;
+      this.background = backgroundColor == null ? null : new Background(backgroundColor);
+      return (Self) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Self setBorderColor(Color borderColor) {
+      this.border = borderColor == null ? null : new Border(1, borderColor);
+      return (Self) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Self setOutlineColor(Color outlineColor) {
+      this.outline = outlineColor == null ? null : new Border(1, outlineColor);
+      return (Self) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Self setLayoutBlock() {
+      this.layout = new BlockLayout();
+      return (Self) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Self setLayoutInline() {
+      this.layout = new InlineLayout();
+      return (Self) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Self setLayoutFlex(FlexLayout.Direction direction, int gap) {
+      this.layout = new FlexLayout(new FlexLayout.FlexLayoutInfo(direction, gap));
       return (Self) this;
     }
 

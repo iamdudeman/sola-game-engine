@@ -1,13 +1,13 @@
 package technology.sola.engine.graphics.guiv2;
 
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.guiv2.event.GuiElementEvents;
 import technology.sola.engine.graphics.guiv2.event.GuiKeyEvent;
 import technology.sola.engine.graphics.guiv2.event.GuiMouseEvent;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.guiv2.style.StyleContainer;
-import technology.sola.engine.graphics.guiv2.style.property.StyleValue;
+import technology.sola.engine.graphics.guiv2.style.property.Background;
 import technology.sola.engine.graphics.guiv2.style.property.Visibility;
+import technology.sola.engine.graphics.guiv2.style.property.layout.BlockLayout;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 import java.util.ArrayList;
@@ -41,19 +41,17 @@ public abstract class GuiElement<Style extends BaseStyles> {
   public abstract int getContentHeight();
 
   public void render(Renderer renderer) {
-    if (isLayoutChanged()) {
-      recalculateLayout();
-    }
+    recalculateLayout();
 
     if (styleContainer.getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE) == Visibility.HIDDEN) {
       return;
     }
 
-    Color backgroundColor = styleContainer.getPropertyValue(BaseStyles::backgroundColor);
+    Background background = styleContainer.getPropertyValue(BaseStyles::background);
 
-    if (backgroundColor != null) {
+    if (background != null && background.color() != null) {
       // todo subtract padding from this if padding is included in bounds calculation
-      renderer.fillRect(bounds.x(), bounds.y(), bounds.width(), bounds.height(), backgroundColor);
+      renderer.fillRect(bounds.x(), bounds.y(), bounds.width(), bounds.height(), background.color());
     }
 
     renderContent(renderer);
@@ -76,6 +74,18 @@ public abstract class GuiElement<Style extends BaseStyles> {
     return events;
   }
 
+  public StyleContainer<Style> getStyles() {
+    return styleContainer;
+  }
+
+  public GuiElement<?> getParent() {
+    return parent;
+  }
+
+  public GuiElementBounds getBounds() {
+    return bounds;
+  }
+
   public void appendChildren(GuiElement<?>... children) {
     if (children != null) {
       for (GuiElement<?> child : children) {
@@ -88,7 +98,6 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
         child.parent = this;
         child.isLayoutChanged = true;
-        child.recalculateLayout();
         this.children.add(child);
       }
 
@@ -147,15 +156,14 @@ public abstract class GuiElement<Style extends BaseStyles> {
   }
 
   private void recalculateLayout() {
-    int parentWidth = parent.bounds.width();
-    int parentHeight = parent.bounds.height();
-    StyleValue widthStyle = styleContainer.getPropertyValue(BaseStyles::width, StyleValue.AUTO);
-    StyleValue heightStyle = styleContainer.getPropertyValue(BaseStyles::height, StyleValue.AUTO);
+    if (!isLayoutChanged()) {
+      return;
+    }
 
-    int width = widthStyle == StyleValue.AUTO ? parentWidth : widthStyle.getValue(parentWidth);
-    int height = heightStyle == StyleValue.AUTO ? getContentHeight() : heightStyle.getValue(parentHeight);
+    var layout = styleContainer.getPropertyValue(BaseStyles::layout, new BlockLayout());
 
-    bounds = new GuiElementBounds(parent.bounds.x(), parent.bounds.y(), width, height);
+    bounds = layout.calculateBounds(this);
+    children.forEach(GuiElement::recalculateLayout);
 
     isLayoutChanged = false;
   }
