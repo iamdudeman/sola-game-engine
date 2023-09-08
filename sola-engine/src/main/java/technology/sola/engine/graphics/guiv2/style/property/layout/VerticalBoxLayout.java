@@ -3,14 +3,41 @@ package technology.sola.engine.graphics.guiv2.style.property.layout;
 import technology.sola.engine.graphics.guiv2.GuiElement;
 import technology.sola.engine.graphics.guiv2.GuiElementBounds;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
+import technology.sola.engine.graphics.guiv2.style.property.Border;
 import technology.sola.engine.graphics.guiv2.style.property.StyleValue;
 
-public record VerticalBoxLayout(
-  VerticalBoxLayoutInfo info
-) implements Layout<VerticalBoxLayout.VerticalBoxLayoutInfo> {
+import java.util.List;
+
+// todo needs to respect margin
+
+public record VerticalBoxLayout(VerticalBoxLayoutInfo info) implements Layout<VerticalBoxLayout.VerticalBoxLayoutInfo> {
   @Override
-  public GuiElementBounds calculateBounds(GuiElement<?> guiElement) {
-    throw new RuntimeException("Not yet implemented");
+  public GuiElementBounds updateChildBounds(GuiElement<?> guiElement, List<GuiElement<?>> children, UpdateGuiElementPosition updateGuiElementPosition) {
+    int x = guiElement.getBounds().x();
+    int y = guiElement.getBounds().y();
+    int autoHeight = 0;
+
+    int xOffset = x + guiElement.getStyles().getPropertyValue(BaseStyles::border, Border.NONE).left();
+    int yOffset = y + guiElement.getStyles().getPropertyValue(BaseStyles::border, Border.NONE).top();
+
+    for (GuiElement<?> child : children) {
+      updateGuiElementPosition.update(child, xOffset, yOffset);
+
+      int childHeight = child.getHeight();
+      yOffset += childHeight;
+      autoHeight = yOffset;
+    }
+
+
+    if (guiElement.getStyles().getPropertyValue(BaseStyles::height, StyleValue.AUTO) == StyleValue.AUTO) {
+      return new GuiElementBounds(x, y, guiElement.getWidth(), autoHeight);
+    } else {
+      return guiElement.getBounds();
+    }
+
+//    throw new RuntimeException("Not yet implemented");
+
+
 //    GuiElement<?> parent = guiElement.getParent();
 //
 //    int parentWidth = parent.getBounds().width();
