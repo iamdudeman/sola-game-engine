@@ -47,6 +47,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
   public abstract int getContentHeight();
 
+  // todo is this needed or will bounds/contentBounds work?
   public int getWidth() {
     StyleValue widthStyle = styleContainer.getPropertyValue(BaseStyles::width, StyleValue.AUTO);
 
@@ -58,12 +59,13 @@ public abstract class GuiElement<Style extends BaseStyles> {
     Spacing padding = getStyles().getPropertyValue(BaseStyles::padding, Spacing.NONE);
 
     int borderSize = border.left() + border.right();
-//    int paddingSize = padding.left().getValue(parent.getWidth()) + padding.right().getValue(parent.getWidth());
-    int paddingSize = 0;
+    int paddingSize = padding.left().getValue(parent.getWidth()) + padding.right().getValue(parent.getWidth());
+//    int paddingSize = 0;
 
     return getContentWidth() + borderSize + paddingSize;
   }
 
+  // todo is this needed or will bounds/contentBounds work?
   public int getHeight() {
     StyleValue heightStyle = styleContainer.getPropertyValue(BaseStyles::height, StyleValue.AUTO);
 
@@ -75,8 +77,8 @@ public abstract class GuiElement<Style extends BaseStyles> {
     Spacing padding = getStyles().getPropertyValue(BaseStyles::padding, Spacing.NONE);
 
     int borderSize = border.top() + border.bottom();
-//    int paddingSize = padding.top().getValue(parent.getHeight()) + padding.bottom().getValue(parent.getHeight());
-    int paddingSize = 0;
+    int paddingSize = padding.top().getValue(parent.getHeight()) + padding.bottom().getValue(parent.getHeight());
+//    int paddingSize = 0;
 
     return getContentHeight() + borderSize + paddingSize;
   }
