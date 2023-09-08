@@ -27,6 +27,10 @@ public record Spacing(StyleValue top, StyleValue right, StyleValue bottom, Style
     this(StyleValue.of(topBottom), StyleValue.of(leftAndRight), StyleValue.of(topBottom), StyleValue.of(leftAndRight));
   }
 
+  public Spacing(String size) {
+    this(size, size);
+  }
+
   @Override
   public Spacing mergeWith(Spacing otherProperty) {
     if (otherProperty == null) {

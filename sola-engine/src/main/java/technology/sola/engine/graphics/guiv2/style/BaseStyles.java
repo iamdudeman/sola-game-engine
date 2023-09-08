@@ -137,6 +137,12 @@ public class BaseStyles {
     }
 
     @SuppressWarnings("unchecked")
+    public Self setMargin(String size) {
+      margin = new Spacing(size);
+      return (Self) this;
+    }
+
+    @SuppressWarnings("unchecked")
     public Self setMarginVertical(String topBottom) {
       margin = new Spacing(StyleValue.of(topBottom), margin.left(), StyleValue.of(topBottom), margin.right());
       return (Self) this;
@@ -151,6 +157,12 @@ public class BaseStyles {
     @SuppressWarnings("unchecked")
     public Self setPadding(String top, String right, String bottom, String left) {
       padding = new Spacing(top, right, bottom, left);
+      return (Self) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Self setPadding(String size) {
+      padding = new Spacing(size);
       return (Self) this;
     }
 
