@@ -51,6 +51,11 @@ public record VerticalBoxLayout(VerticalBoxLayoutInfo info) implements Layout<Ve
 //    return new GuiElementBounds(parent.getBounds().x(), parent.getBounds().y(), width, height);
   }
 
+  @Override
+  public Layout<VerticalBoxLayoutInfo> mergeWith(Layout<VerticalBoxLayoutInfo> otherProperty) {
+    return otherProperty == null ? this : otherProperty;
+  }
+
   public record VerticalBoxLayoutInfo(int gap) {
   }
 }

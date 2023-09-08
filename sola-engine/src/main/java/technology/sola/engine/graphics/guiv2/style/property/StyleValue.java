@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.guiv2.style.property;
 
+import java.util.Objects;
+
 public class StyleValue {
   public static final StyleValue AUTO = new StyleValue(-1);
   public static final StyleValue ZERO = new StyleValue(0);
@@ -28,5 +30,28 @@ public class StyleValue {
 
   public int getValue(int parentValue) {
     return isPercentage ? (int) (percentageValue * parentValue) : pixelValue;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    StyleValue that = (StyleValue) o;
+
+    if (isPercentage == that.isPercentage) {
+      return isPercentage ? Objects.equals(percentageValue, that.percentageValue) : Objects.equals(pixelValue, that.pixelValue);
+    }
+
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+    if (isPercentage) {
+      return (percentageValue != null ? percentageValue.hashCode() : 0);
+    } else {
+      return (pixelValue != null ? pixelValue.hashCode() : 0);
+    }
   }
 }

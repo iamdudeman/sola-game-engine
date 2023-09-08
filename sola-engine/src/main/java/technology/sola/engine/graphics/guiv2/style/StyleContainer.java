@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.guiv2.style;
 
+import technology.sola.engine.graphics.guiv2.style.property.MergeableProperty;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,6 +62,29 @@ public class StyleContainer<Style extends BaseStyles> {
 
       if (tempValue != null) {
         value = tempValue;
+      }
+    }
+
+    computedCache.put(propertySupplier, value);
+
+    return value;
+  }
+
+  @SuppressWarnings("unchecked")
+  public <R extends MergeableProperty<R>> R getPropertyValue(Function<Style, R> propertySupplier, R defaultValue) {
+    if (computedCache.containsKey(propertySupplier)) {
+      return (R) computedCache.get(propertySupplier);
+    }
+
+    R value = defaultValue;
+
+    for (Style style : styles) {
+      R tempValue = propertySupplier.apply(style);
+
+      if (value == null) {
+        value = tempValue;
+      } else {
+        value = value.mergeWith(tempValue);
       }
     }
 
