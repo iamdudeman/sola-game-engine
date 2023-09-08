@@ -10,9 +10,11 @@ class RootGuiElement extends GuiElement<BaseStyles> {
     this.guiDocument = guiDocument;
     setStyle(BaseStyles.create().setHeight("100%").setWidth("100%").build());
     bounds = new GuiElementBounds(0, 0, width, height);
+    contentBounds = bounds;
     parent = new GuiElement<BaseStyles>() {
       {
         bounds = new GuiElementBounds(0, 0, width, height);
+        contentBounds = bounds;
       }
 
       @Override

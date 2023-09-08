@@ -19,6 +19,7 @@ import java.util.List;
 public abstract class GuiElement<Style extends BaseStyles> {
   protected final StyleContainer<Style> styleContainer;
   protected GuiElementBounds bounds;
+  protected GuiElementBounds contentBounds;
   GuiElement<?> parent;
   private final GuiElementEvents events = new GuiElementEvents();
   private final List<GuiElement<?>> children = new ArrayList<>();
@@ -30,6 +31,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
   public GuiElement(Style... styles) {
     styleContainer = new StyleContainer<>();
     bounds = new GuiElementBounds(0, 0, 0, 0);
+    contentBounds = bounds;
     setStyle(styles);
   }
 
@@ -124,7 +126,6 @@ public abstract class GuiElement<Style extends BaseStyles> {
   }
 
   public void renderChildren(Renderer renderer) {
-    // todo handle layout stuff and what not
     children.forEach(child -> child.render(renderer));
   }
 
@@ -150,6 +151,10 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
   public GuiElementBounds getBounds() {
     return bounds;
+  }
+
+  public GuiElementBounds getContentBounds() {
+    return contentBounds;
   }
 
   public GuiElement<Style> appendChildren(GuiElement<?>... children) {
@@ -185,23 +190,23 @@ public abstract class GuiElement<Style extends BaseStyles> {
     var layout = styleContainer.getPropertyValue(BaseStyles::layout, new VerticalBoxLayout(new VerticalBoxLayout.VerticalBoxLayoutInfo(0)));
 
     // set bounds based on specific values
-    var parentBounds = parent.getBounds();
+    var parentBounds = parent.getContentBounds();
     var widthStyle = styleContainer.getPropertyValue(BaseStyles::width, StyleValue.AUTO);
     var heightStyle = styleContainer.getPropertyValue(BaseStyles::height, StyleValue.AUTO);
-
-    int borderSize = this.getParent().styleContainer.getPropertyValue(BaseStyles::border, Border.NONE).left() * 2; // todo temp hack since border size is 1 or 0
 
     // todo need to get parent CONTENT bounds instead (bounds - borders - padding)
     // todo probably need method to get initial element bounds from layout as well?
     // initial bounds (grows to parent size if auto temporarily so children have space to use)
     bounds = new GuiElementBounds(
       bounds.x(), bounds.y(),
-      widthStyle == StyleValue.AUTO ? parentBounds.width() - borderSize : widthStyle.getValue(parentBounds.width()),
-      heightStyle == StyleValue.AUTO ? parentBounds.height() - borderSize : heightStyle.getValue(parentBounds.height())
+      widthStyle == StyleValue.AUTO ? parentBounds.width() : widthStyle.getValue(parentBounds.width()),
+      heightStyle == StyleValue.AUTO ? parentBounds.height() : heightStyle.getValue(parentBounds.height())
     );
+    recalculateContentBounds();
 
     // final bounds (shrinks to children content size if auto)
     bounds = layout.updateChildBounds(this, children, GuiElement::setElementPosition);
+    recalculateContentBounds();
 
     isLayoutChanged = false;
   }
@@ -256,9 +261,22 @@ public abstract class GuiElement<Style extends BaseStyles> {
     return this.parent.getGuiDocument();
   }
 
+  private void recalculateContentBounds() {
+    Border border = styleContainer.getPropertyValue(BaseStyles::border, Border.NONE);
+    Spacing padding = styleContainer.getPropertyValue(BaseStyles::padding, Spacing.NONE);
+
+    contentBounds = new GuiElementBounds(
+      bounds.x() + border.left() + padding.left().getValue(parent.getWidth()),
+      bounds.y() + border.top() + padding.top().getValue(parent.getHeight()),
+      bounds.width() - (border.left() + border.right() + padding.left().getValue(parent.getWidth()) + padding.right().getValue(parent.getWidth())),
+      bounds.height() - (border.top() + border.bottom() + padding.top().getValue(parent.getHeight()) + padding.bottom().getValue(parent.getHeight()))
+    );
+  }
+
   private static void setElementPosition(GuiElement<?> guiElement, int x, int y) {
     guiElement.x = x;
     guiElement.y = y;
     guiElement.bounds = new GuiElementBounds(guiElement.x, guiElement.y, guiElement.bounds.width(), guiElement.bounds.height());
+    guiElement.recalculateContentBounds();
   }
 }
