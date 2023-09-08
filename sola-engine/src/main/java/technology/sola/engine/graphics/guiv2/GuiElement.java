@@ -6,8 +6,9 @@ import technology.sola.engine.graphics.guiv2.event.GuiMouseEvent;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.guiv2.style.StyleContainer;
 import technology.sola.engine.graphics.guiv2.style.property.Background;
+import technology.sola.engine.graphics.guiv2.style.property.Border;
+import technology.sola.engine.graphics.guiv2.style.property.Spacing;
 import technology.sola.engine.graphics.guiv2.style.property.Visibility;
-import technology.sola.engine.graphics.guiv2.style.property.layout.BlockLayout;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 import java.util.ArrayList;
@@ -39,6 +40,30 @@ public abstract class GuiElement<Style extends BaseStyles> {
   public abstract int getContentWidth();
 
   public abstract int getContentHeight();
+
+  public int getHeight() {
+    Border border = getStyles().getPropertyValue(BaseStyles::border, Border.NONE);
+    Spacing margin = getStyles().getPropertyValue(BaseStyles::margin, Spacing.NONE);
+    Spacing padding = getStyles().getPropertyValue(BaseStyles::padding, Spacing.NONE);
+
+    int borderSize = border.left() + border.right();
+    int paddingSize = padding.left().getValue(parent.getHeight()) + padding.right().getValue(parent.getHeight());
+    int marginSize = margin.left().getValue(parent.getHeight()) + margin.right().getValue(parent.getHeight());
+
+    return getContentHeight() + borderSize + paddingSize + marginSize;
+  }
+
+  public int getWidth() {
+    Border border = getStyles().getPropertyValue(BaseStyles::border, Border.NONE);
+    Spacing margin = getStyles().getPropertyValue(BaseStyles::margin, Spacing.NONE);
+    Spacing padding = getStyles().getPropertyValue(BaseStyles::padding, Spacing.NONE);
+
+    int borderSize = border.top() + border.bottom();
+    int paddingSize = padding.top().getValue(parent.getWidth()) + padding.bottom().getValue(parent.getWidth());
+    int marginSize = margin.top().getValue(parent.getWidth()) + margin.bottom().getValue(parent.getWidth());
+
+    return getContentWidth() + borderSize + paddingSize + marginSize;
+  }
 
   public void render(Renderer renderer) {
     recalculateLayout();
@@ -86,7 +111,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     return bounds;
   }
 
-  public void appendChildren(GuiElement<?>... children) {
+  public GuiElement<Style> appendChildren(GuiElement<?>... children) {
     if (children != null) {
       for (GuiElement<?> child : children) {
         if (child.parent == null) {
@@ -103,6 +128,8 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
       this.isLayoutChanged = true;
     }
+
+    return this;
   }
 
   void onKeyPressed(GuiKeyEvent event) {
@@ -160,11 +187,11 @@ public abstract class GuiElement<Style extends BaseStyles> {
       return;
     }
 
-    var layout = styleContainer.getPropertyValue(BaseStyles::layout, new BlockLayout());
-
-    bounds = layout.calculateBounds(this);
-    children.forEach(GuiElement::recalculateLayout);
-
-    isLayoutChanged = false;
+//    var layout = styleContainer.getPropertyValue(BaseStyles::layout, new BlockLayout());
+//
+//    bounds = layout.calculateBounds(this);
+//    children.forEach(GuiElement::recalculateLayout);
+//
+//    isLayoutChanged = false;
   }
 }

@@ -7,8 +7,6 @@ import technology.sola.engine.graphics.guiv2.GuiElementBounds;
 // todo consider HorizontalLayout
 
 public interface Layout<Info> {
-  LayoutType type();
-
   Info info();
 
   GuiElementBounds calculateBounds(GuiElement<?> guiElement);

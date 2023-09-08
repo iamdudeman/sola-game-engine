@@ -6,9 +6,6 @@ import technology.sola.engine.graphics.guiv2.style.property.Border;
 import technology.sola.engine.graphics.guiv2.style.property.Spacing;
 import technology.sola.engine.graphics.guiv2.style.property.StyleValue;
 import technology.sola.engine.graphics.guiv2.style.property.Visibility;
-import technology.sola.engine.graphics.guiv2.style.property.layout.BlockLayout;
-import technology.sola.engine.graphics.guiv2.style.property.layout.FlexLayout;
-import technology.sola.engine.graphics.guiv2.style.property.layout.InlineLayout;
 import technology.sola.engine.graphics.guiv2.style.property.layout.Layout;
 
 // todo
@@ -88,7 +85,7 @@ public class BaseStyles {
     private StyleValue width;
     private StyleValue height;
     private Visibility visibility;
-    private Layout<?> layout = new BlockLayout();
+    private Layout<?> layout;
 
     protected Builder() {
     }
@@ -112,24 +109,6 @@ public class BaseStyles {
     @SuppressWarnings("unchecked")
     public Self setOutlineColor(Color outlineColor) {
       this.outline = outlineColor == null ? null : new Border(1, outlineColor);
-      return (Self) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    public Self setLayoutBlock() {
-      this.layout = new BlockLayout();
-      return (Self) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    public Self setLayoutInline() {
-      this.layout = new InlineLayout();
-      return (Self) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    public Self setLayoutFlex(FlexLayout.Direction direction, int gap) {
-      this.layout = new FlexLayout(new FlexLayout.FlexLayoutInfo(direction, gap));
       return (Self) this;
     }
 

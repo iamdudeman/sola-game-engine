@@ -1,6 +1,8 @@
 package technology.sola.engine.graphics.guiv2.style.property;
 
 public record Spacing(StyleValue top, StyleValue right, StyleValue bottom, StyleValue left) {
+  public static final Spacing NONE = new Spacing("0", "0", "0", "0");
+
   public Spacing() {
     this((String) null, null, null, null);
   }
