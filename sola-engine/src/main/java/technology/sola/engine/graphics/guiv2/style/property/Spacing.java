@@ -7,8 +7,8 @@ public record Spacing(StyleValue top, StyleValue right, StyleValue bottom, Style
     this((String) null, null, null, null);
   }
 
-  public Spacing(String top, String left, String bottom, String right) {
-    this(StyleValue.of(top), StyleValue.of(left), StyleValue.of(bottom), StyleValue.of(right));
+  public Spacing(String top, String right, String bottom, String left) {
+    this(StyleValue.of(top), StyleValue.of(right), StyleValue.of(bottom), StyleValue.of(left));
   }
 
   public Spacing(StyleValue top, StyleValue leftAndRight, StyleValue bottom) {

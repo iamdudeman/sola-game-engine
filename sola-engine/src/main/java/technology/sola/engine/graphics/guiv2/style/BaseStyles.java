@@ -131,8 +131,8 @@ public class BaseStyles {
     }
 
     @SuppressWarnings("unchecked")
-    public Self setMargin(String top, String left, String bottom, String right) {
-      margin = new Spacing(top, left, bottom, right);
+    public Self setMargin(String top, String right, String bottom, String left) {
+      margin = new Spacing(top, right, bottom, left);
       return (Self) this;
     }
 
@@ -149,8 +149,8 @@ public class BaseStyles {
     }
 
     @SuppressWarnings("unchecked")
-    public Self setPadding(String top, String left, String bottom, String right) {
-      padding = new Spacing(top, left, bottom, right);
+    public Self setPadding(String top, String right, String bottom, String left) {
+      padding = new Spacing(top, right, bottom, left);
       return (Self) this;
     }
 
