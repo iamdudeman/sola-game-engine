@@ -1,5 +1,13 @@
 # sola-game-engine TODO list
 
+* Flex only layouts
+    * no margin
+    * gap
+    * Visibility - none, hidden, visible
+    * HorizontalAlignment - left, right, center
+    * VerticalAlignment - top, center, bottom
+    * direction - row, row-reverse, column, column-reverse
+
 * Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
 * GUI V2 implementation
     * "style" attribute
