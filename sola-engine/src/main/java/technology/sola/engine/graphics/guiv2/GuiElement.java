@@ -7,10 +7,10 @@ import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.guiv2.style.StyleContainer;
 import technology.sola.engine.graphics.guiv2.style.property.Background;
 import technology.sola.engine.graphics.guiv2.style.property.Border;
-import technology.sola.engine.graphics.guiv2.style.property.Spacing;
+import technology.sola.engine.graphics.guiv2.style.property.Padding;
 import technology.sola.engine.graphics.guiv2.style.property.StyleValue;
 import technology.sola.engine.graphics.guiv2.style.property.Visibility;
-import technology.sola.engine.graphics.guiv2.style.property.layout.VerticalBoxLayout;
+import technology.sola.engine.graphics.guiv2.style.property.layout.BlockLayout;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     }
 
     Border border = getStyles().getPropertyValue(BaseStyles::border, Border.NONE);
-    Spacing padding = getStyles().getPropertyValue(BaseStyles::padding, Spacing.NONE);
+    Padding padding = getStyles().getPropertyValue(BaseStyles::padding, Padding.NONE);
 
     int borderSize = border.left() + border.right();
     int paddingSize = padding.left().getValue(parent.getWidth()) + padding.right().getValue(parent.getWidth());
@@ -74,7 +74,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     }
 
     Border border = getStyles().getPropertyValue(BaseStyles::border, Border.NONE);
-    Spacing padding = getStyles().getPropertyValue(BaseStyles::padding, Spacing.NONE);
+    Padding padding = getStyles().getPropertyValue(BaseStyles::padding, Padding.NONE);
 
     int borderSize = border.top() + border.bottom();
     int paddingSize = padding.top().getValue(parent.getHeight()) + padding.bottom().getValue(parent.getHeight());
@@ -189,7 +189,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
       return;
     }
 
-    var layout = styleContainer.getPropertyValue(BaseStyles::layout, new VerticalBoxLayout(new VerticalBoxLayout.VerticalBoxLayoutInfo(0)));
+    var layout = styleContainer.getPropertyValue(BaseStyles::layout, new BlockLayout(new BlockLayout.BlockLayoutInfo(0)));
 
     // set bounds based on specific values
     var parentBounds = parent.getContentBounds();
@@ -265,7 +265,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
   private void recalculateContentBounds() {
     Border border = styleContainer.getPropertyValue(BaseStyles::border, Border.NONE);
-    Spacing padding = styleContainer.getPropertyValue(BaseStyles::padding, Spacing.NONE);
+    Padding padding = styleContainer.getPropertyValue(BaseStyles::padding, Padding.NONE);
 
     contentBounds = new GuiElementBounds(
       bounds.x() + border.left() + padding.left().getValue(parent.getWidth()),

@@ -3,10 +3,11 @@ package technology.sola.engine.graphics.guiv2.style;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.guiv2.style.property.Background;
 import technology.sola.engine.graphics.guiv2.style.property.Border;
-import technology.sola.engine.graphics.guiv2.style.property.Spacing;
+import technology.sola.engine.graphics.guiv2.style.property.Padding;
 import technology.sola.engine.graphics.guiv2.style.property.StyleValue;
 import technology.sola.engine.graphics.guiv2.style.property.Visibility;
 import technology.sola.engine.graphics.guiv2.style.property.layout.Layout;
+import technology.sola.engine.graphics.guiv2.style.property.layout.LayoutItem;
 
 // todo
 //   relative + absolute position? (layout) + top,left,bottom,right
@@ -17,23 +18,23 @@ public class BaseStyles {
   private final Background background;
   private final Border border;
   private final Border outline;
-  private final Spacing margin;
-  private final Spacing padding;
+  private final Padding padding;
   private final StyleValue width;
   private final StyleValue height;
   private final Visibility visibility;
   private final Layout<?> layout;
+  private final LayoutItem<?> layoutItem;
 
   public BaseStyles(Builder<?> builder) {
     this.background = builder.background;
     this.border = builder.border;
     this.outline = builder.outline;
-    this.margin = builder.margin;
     this.padding = builder.padding;
     this.width = builder.width;
     this.height = builder.height;
     this.visibility = builder.visibility;
     this.layout = builder.layout;
+    this.layoutItem = builder.layoutItem;
   }
 
   public static Builder<?> create() {
@@ -52,11 +53,7 @@ public class BaseStyles {
     return outline;
   }
 
-  public Spacing margin() {
-    return margin;
-  }
-
-  public Spacing padding() {
+  public Padding padding() {
     return padding;
   }
 
@@ -72,6 +69,10 @@ public class BaseStyles {
     return layout;
   }
 
+  public LayoutItem<?> layoutItem() {
+    return layoutItem;
+  }
+
   public Visibility visibility() {
     return visibility;
   }
@@ -80,12 +81,12 @@ public class BaseStyles {
     private Background background;
     private Border border;
     private Border outline;
-    private Spacing margin = new Spacing();
-    private Spacing padding = new Spacing();
+    private Padding padding = new Padding();
     private StyleValue width;
     private StyleValue height;
     private Visibility visibility;
     private Layout<?> layout;
+    private LayoutItem<?> layoutItem;
 
     protected Builder() {
     }
@@ -131,50 +132,26 @@ public class BaseStyles {
     }
 
     @SuppressWarnings("unchecked")
-    public Self setMargin(String top, String right, String bottom, String left) {
-      margin = new Spacing(top, right, bottom, left);
-      return (Self) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    public Self setMargin(String size) {
-      margin = new Spacing(size);
-      return (Self) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    public Self setMarginVertical(String topBottom) {
-      margin = new Spacing(StyleValue.of(topBottom), margin.left(), StyleValue.of(topBottom), margin.right());
-      return (Self) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    public Self setMarginHorizontal(String leftRight) {
-      margin = new Spacing(margin.top(), StyleValue.of(leftRight), margin.bottom(), StyleValue.of(leftRight));
-      return (Self) this;
-    }
-
-    @SuppressWarnings("unchecked")
     public Self setPadding(String top, String right, String bottom, String left) {
-      padding = new Spacing(top, right, bottom, left);
+      padding = new Padding(top, right, bottom, left);
       return (Self) this;
     }
 
     @SuppressWarnings("unchecked")
     public Self setPadding(String size) {
-      padding = new Spacing(size);
+      padding = new Padding(size);
       return (Self) this;
     }
 
     @SuppressWarnings("unchecked")
     public Self setPaddingVertical(String topBottom) {
-      padding = new Spacing(StyleValue.of(topBottom), padding.left(), StyleValue.of(topBottom), padding.right());
+      padding = new Padding(StyleValue.of(topBottom), padding.left(), StyleValue.of(topBottom), padding.right());
       return (Self) this;
     }
 
     @SuppressWarnings("unchecked")
     public Self setPaddingHorizontal(String leftRight) {
-      padding = new Spacing(padding.top(), StyleValue.of(leftRight), padding.bottom(), StyleValue.of(leftRight));
+      padding = new Padding(padding.top(), StyleValue.of(leftRight), padding.bottom(), StyleValue.of(leftRight));
       return (Self) this;
     }
   }

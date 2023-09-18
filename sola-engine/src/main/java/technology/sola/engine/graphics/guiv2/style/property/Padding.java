@@ -1,38 +1,38 @@
 package technology.sola.engine.graphics.guiv2.style.property;
 
-public record Spacing(StyleValue top, StyleValue right, StyleValue bottom, StyleValue left) implements MergeableProperty<Spacing> {
-  public static final Spacing NONE = new Spacing("0", "0", "0", "0");
+public record Padding(StyleValue top, StyleValue right, StyleValue bottom, StyleValue left) implements MergeableProperty<Padding> {
+  public static final Padding NONE = new Padding("0", "0", "0", "0");
 
-  public Spacing() {
+  public Padding() {
     this((String) null, null, null, null);
   }
 
-  public Spacing(String top, String right, String bottom, String left) {
+  public Padding(String top, String right, String bottom, String left) {
     this(StyleValue.of(top), StyleValue.of(right), StyleValue.of(bottom), StyleValue.of(left));
   }
 
-  public Spacing(StyleValue top, StyleValue leftAndRight, StyleValue bottom) {
+  public Padding(StyleValue top, StyleValue leftAndRight, StyleValue bottom) {
     this(top, leftAndRight, bottom, leftAndRight);
   }
 
-  public Spacing(String top, String leftAndRight, String bottom) {
+  public Padding(String top, String leftAndRight, String bottom) {
     this(StyleValue.of(top), StyleValue.of(leftAndRight), StyleValue.of(bottom), StyleValue.of(leftAndRight));
   }
 
-  public Spacing(StyleValue topAndBottom, StyleValue leftAndRight) {
+  public Padding(StyleValue topAndBottom, StyleValue leftAndRight) {
     this(topAndBottom, leftAndRight, topAndBottom, leftAndRight);
   }
 
-  public Spacing(String topBottom, String leftAndRight) {
+  public Padding(String topBottom, String leftAndRight) {
     this(StyleValue.of(topBottom), StyleValue.of(leftAndRight), StyleValue.of(topBottom), StyleValue.of(leftAndRight));
   }
 
-  public Spacing(String size) {
+  public Padding(String size) {
     this(size, size);
   }
 
   @Override
-  public Spacing mergeWith(Spacing otherProperty) {
+  public Padding mergeWith(Padding otherProperty) {
     if (otherProperty == null) {
       return this;
     }
@@ -42,6 +42,6 @@ public record Spacing(StyleValue top, StyleValue right, StyleValue bottom, Style
     StyleValue bottom = otherProperty.bottom == null ? this.bottom : otherProperty.bottom;
     StyleValue left = otherProperty.left == null ? this.left : otherProperty.left;
 
-    return new Spacing(top, right, bottom, left);
+    return new Padding(top, right, bottom, left);
   }
 }
