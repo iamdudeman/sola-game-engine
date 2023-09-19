@@ -132,6 +132,12 @@ public class BaseStyles {
     }
 
     @SuppressWarnings("unchecked")
+    public Self setLayout(Layout<?> layout) {
+      this.layout = layout;
+      return (Self) this;
+    }
+
+    @SuppressWarnings("unchecked")
     public Self setPadding(String top, String right, String bottom, String left) {
       padding = new Padding(top, right, bottom, left);
       return (Self) this;

@@ -279,6 +279,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     guiElement.x = x;
     guiElement.y = y;
     guiElement.bounds = new GuiElementBounds(guiElement.x, guiElement.y, guiElement.bounds.width(), guiElement.bounds.height());
-    guiElement.recalculateContentBounds();
+//    guiElement.recalculateContentBounds();
+    guiElement.recalculateLayout();
   }
 }
