@@ -38,7 +38,6 @@ module technology.sola.engine {
   exports technology.sola.engine.graphics.guiv2.event;
   exports technology.sola.engine.graphics.guiv2.style;
   exports technology.sola.engine.graphics.guiv2.style.property;
-  exports technology.sola.engine.graphics.guiv2.style.property.layout;
   exports technology.sola.engine.graphics.renderer;
   exports technology.sola.engine.graphics.renderer.blend;
   exports technology.sola.engine.graphics.screen;

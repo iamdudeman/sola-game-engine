@@ -10,7 +10,6 @@ import technology.sola.engine.graphics.guiv2.style.property.Border;
 import technology.sola.engine.graphics.guiv2.style.property.Padding;
 import technology.sola.engine.graphics.guiv2.style.property.StyleValue;
 import technology.sola.engine.graphics.guiv2.style.property.Visibility;
-import technology.sola.engine.graphics.guiv2.style.property.layout.BlockLayout;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 import java.util.ArrayList;
@@ -189,8 +188,6 @@ public abstract class GuiElement<Style extends BaseStyles> {
       return;
     }
 
-    var layout = styleContainer.getPropertyValue(BaseStyles::layout, new BlockLayout(new BlockLayout.BlockLayoutInfo(0)));
-
     // set bounds based on specific values
     var parentBounds = parent.getContentBounds();
     var widthStyle = styleContainer.getPropertyValue(BaseStyles::width, StyleValue.AUTO);
@@ -207,7 +204,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     recalculateContentBounds();
 
     // final bounds (shrinks to children content size if auto)
-    bounds = layout.updateChildBounds(this, children, GuiElement::setElementPosition);
+    bounds = tempCalcStuff(this);
     recalculateContentBounds();
 
     isLayoutChanged = false;
@@ -281,5 +278,34 @@ public abstract class GuiElement<Style extends BaseStyles> {
     guiElement.bounds = new GuiElementBounds(guiElement.x, guiElement.y, guiElement.bounds.width(), guiElement.bounds.height());
 //    guiElement.recalculateContentBounds();
     guiElement.recalculateLayout();
+  }
+
+  private GuiElementBounds tempCalcStuff(GuiElement<?> guiElement) {
+    int x = guiElement.getContentBounds().x();
+    int y = guiElement.getContentBounds().y();
+    int autoHeight = 0;
+
+    int xOffset = x;
+    int yOffset = y;
+
+    int gap = guiElement.getStyles().getPropertyValue(BaseStyles::gap, 0);
+
+    for (GuiElement<?> child : guiElement.children) {
+      setElementPosition(child, xOffset, yOffset);
+//      updateGuiElementPosition.update(child, xOffset, yOffset);
+
+      int childHeight = child.getContentBounds().height();
+      yOffset += childHeight + gap;
+      autoHeight = yOffset;
+    }
+
+    int newWidth = guiElement.getBounds().width();
+    int newHeight = guiElement.getBounds().height();
+
+    if (guiElement.getStyles().getPropertyValue(BaseStyles::height, StyleValue.AUTO) == StyleValue.AUTO) {
+      newHeight = autoHeight + guiElement.getStyles().getPropertyValue(BaseStyles::border, Border.NONE).top() + guiElement.getStyles().getPropertyValue(BaseStyles::border, Border.NONE).bottom() + guiElement.getStyles().getPropertyValue(BaseStyles::padding, Padding.NONE).bottom().getValue(guiElement.getParent().getContentBounds().height());
+    }
+
+    return new GuiElementBounds(guiElement.getBounds().x(), guiElement.getBounds().y(), newWidth, newHeight);
   }
 }
