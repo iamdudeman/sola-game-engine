@@ -204,7 +204,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     recalculateContentBounds();
 
     // final bounds (shrinks to children content size if auto)
-    bounds = tempCalcStuff(this);
+    bounds = tempCalcLayoutStuff(this);
     recalculateContentBounds();
 
     isLayoutChanged = false;
@@ -280,7 +280,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     guiElement.recalculateLayout();
   }
 
-  private GuiElementBounds tempCalcStuff(GuiElement<?> guiElement) {
+  private GuiElementBounds tempCalcLayoutStuff(GuiElement<?> guiElement) {
     int x = guiElement.getContentBounds().x();
     int y = guiElement.getContentBounds().y();
     int autoHeight = 0;

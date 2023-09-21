@@ -10,11 +10,6 @@ import technology.sola.engine.graphics.guiv2.style.property.Padding;
 import technology.sola.engine.graphics.guiv2.style.property.StyleValue;
 import technology.sola.engine.graphics.guiv2.style.property.Visibility;
 
-// todo
-//   relative + absolute position? (layout) + top,left,bottom,right
-
-// todo consider splitting out some things into a new BaseLayoutStyles (and then everything would use that one instead)
-//    or make new "base" file of some sort and have this one extend it?
 public class BaseStyles {
   private final Background background;
   private final Border border;

@@ -18,13 +18,17 @@
     * any element can have children passed in (but doesn't have to use them)
     * inherit styles from parent? (NO)
     * root "element" of document is full width and height by default and is always defined?
-* Don't force setting props for containers when creating them via gui document
-* stopping gui mouse event propagation currently isn't hooked up
-    * this needs to be added to `GuiElementContainer#handleMouseEvent`
+* ~~Don't force setting props for containers when creating them via gui document~~
+* v1 bugs
+    * stopping gui mouse event propagation currently isn't hooked up
+        * this needs to be added to `GuiElementContainer#handleMouseEvent`
 * SolaGui
     * Implement a way to load gui stuff from a file
         * possibly use JSON to define gui structure
     * A "post load" callback to add event listeners and such
+* v2 later
+    * absolute positioning
+    * space-between, space-around, space-evenly
 
 ## Known Bugs List
 
@@ -41,6 +45,7 @@
 
 ## TODO List
 
+* Consider array list for possible SpacialHashMap performance boost
 * Consider "stopping" AudioClip when it is finished by default, so it can be immediately played again?
 * Move custom build "distribution" tasks to a gradle plugin
     * sola game template should use these plugins as well
