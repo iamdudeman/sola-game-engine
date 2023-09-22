@@ -17,8 +17,8 @@ import java.util.List;
 
 public abstract class GuiElement<Style extends BaseStyles> {
   protected final StyleContainer<Style> styleContainer;
-  protected GuiElementBounds bounds;
-  protected GuiElementBounds contentBounds;
+  protected GuiElementBounds bounds; // includes border + padding + content
+  protected GuiElementBounds contentBounds; // just content
   GuiElement<?> parent;
   private final GuiElementEvents events = new GuiElementEvents();
   private final List<GuiElement<?>> children = new ArrayList<>();
@@ -59,7 +59,6 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
     int borderSize = border.left() + border.right();
     int paddingSize = padding.left().getValue(parent.getWidth()) + padding.right().getValue(parent.getWidth());
-//    int paddingSize = 0;
 
     return getContentWidth() + borderSize + paddingSize;
   }
@@ -77,7 +76,6 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
     int borderSize = border.top() + border.bottom();
     int paddingSize = padding.top().getValue(parent.getHeight()) + padding.bottom().getValue(parent.getHeight());
-//    int paddingSize = 0;
 
     return getContentHeight() + borderSize + paddingSize;
   }

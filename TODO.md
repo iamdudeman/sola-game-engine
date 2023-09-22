@@ -1,5 +1,33 @@
 # sola-game-engine TODO list
 
+
+```javascript
+function layout(element) {
+    calculateMaxBounds(element);
+
+    const childBounds = calculateChildBounds(element.children);
+
+    shrinkIfAuto(element);
+}
+
+function calculateMaxBounds(element) {
+    // if size return it
+
+    // else if relative return based on parent
+
+    // else if auto return parent dimension
+}
+
+function calculateChildBounds(children) {
+    children.forEach(layout);
+}
+
+function shrinkIfAuto(element) {
+   // if auto shrink to max of child size or content size
+}
+```
+
+
 * Flex only layouts
     * no margin
     * gap
