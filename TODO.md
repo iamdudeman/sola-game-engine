@@ -1,31 +1,12 @@
 # sola-game-engine TODO list
 
+Rough order
+1. Text or image implementation to prove out layout basics
+2. Load from file implementation (little UI with refresh button from file for easier testing)
+3. Finish hooking up layout properties
 
-```javascript
-function layout(element) {
-    calculateMaxBounds(element);
-
-    const childBounds = calculateChildBounds(element.children);
-
-    shrinkIfAuto(element);
-}
-
-function calculateMaxBounds(element) {
-    // if size return it
-
-    // else if relative return based on parent
-
-    // else if auto return parent dimension
-}
-
-function calculateChildBounds(children) {
-    children.forEach(layout);
-}
-
-function shrinkIfAuto(element) {
-   // if auto shrink to max of child size or content size
-}
-```
+Later things
+* when should layout be invalidated (can partial invalidations happen for children/parent)
 
 
 * Flex only layouts

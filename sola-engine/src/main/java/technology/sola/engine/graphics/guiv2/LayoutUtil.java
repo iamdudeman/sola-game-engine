@@ -5,7 +5,7 @@ import technology.sola.engine.graphics.guiv2.style.property.Border;
 import technology.sola.engine.graphics.guiv2.style.property.Padding;
 import technology.sola.engine.graphics.guiv2.style.property.StyleValue;
 
-class LayoutUtils {
+class LayoutUtil {
   static void rebuildLayout(GuiElement<?> guiElement, int x, int y) {
     guiElement.bounds = calculateMaxBounds(guiElement, x, y);
     guiElement.contentBounds = calculateContentBounds(guiElement);
@@ -114,5 +114,8 @@ class LayoutUtils {
       bounds.width() - (border.left() + border.right() + padding.left().getValue(parentWidth) + padding.right().getValue(parentWidth)),
       bounds.height() - (border.top() + border.bottom() + padding.top().getValue(parentHeight) + padding.bottom().getValue(parentHeight))
     );
+  }
+
+  private record Dimensions(int width, int height) {
   }
 }

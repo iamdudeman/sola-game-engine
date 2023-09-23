@@ -192,6 +192,6 @@ public abstract class GuiElement<Style extends BaseStyles> {
       return;
     }
 
-    LayoutUtils.rebuildLayout(this, getParent().contentBounds.x(), getParent().contentBounds.y());
+    LayoutUtil.rebuildLayout(this, getParent().contentBounds.x(), getParent().contentBounds.y());
   }
 }
