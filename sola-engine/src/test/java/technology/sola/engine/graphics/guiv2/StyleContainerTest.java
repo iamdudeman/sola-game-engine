@@ -17,7 +17,7 @@ public class StyleContainerTest {
     );
 
     assertEquals(Color.BLACK, styleContainer.getPropertyValue(TextStyles::background).color());
-    assertEquals(Color.BLUE, styleContainer.getPropertyValue(TextStyles::getTextColor));
+    assertEquals(Color.BLUE, styleContainer.getPropertyValue(TextStyles::textColor));
 
     styleContainer.setStyles(
       TextStyles.create().setBackgroundColor(Color.WHITE),
@@ -25,6 +25,6 @@ public class StyleContainerTest {
     );
 
     assertEquals(Color.WHITE, styleContainer.getPropertyValue(TextStyles::background).color());
-    assertEquals(Color.RED, styleContainer.getPropertyValue(TextStyles::getTextColor));
+    assertEquals(Color.RED, styleContainer.getPropertyValue(TextStyles::textColor));
   }
 }
