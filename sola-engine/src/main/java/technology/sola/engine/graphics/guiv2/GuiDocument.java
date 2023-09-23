@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.guiv2;
 
+import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.graphics.guiv2.event.GuiKeyEvent;
 import technology.sola.engine.graphics.guiv2.event.GuiMouseEvent;
@@ -11,8 +12,8 @@ public class GuiDocument {
   private final GuiElement<?> root;
   private GuiElement<?> focussedElement;
 
-  public GuiDocument(SolaPlatform platform) {
-    root = new RootGuiElement(this, platform.getRenderer().getWidth(), platform.getRenderer().getHeight());
+  public GuiDocument(SolaPlatform platform, AssetLoaderProvider assetLoaderProvider) {
+    root = new RootGuiElement(this, assetLoaderProvider, platform.getRenderer().getWidth(), platform.getRenderer().getHeight());
     focussedElement = root;
 
     // register listeners

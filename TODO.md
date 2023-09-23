@@ -7,6 +7,7 @@ Rough order
 
 Later things
 * when should layout be invalidated (can partial invalidations happen for children/parent)
+* ensure transparency stuff is hooked up properly
 
 
 * Flex only layouts

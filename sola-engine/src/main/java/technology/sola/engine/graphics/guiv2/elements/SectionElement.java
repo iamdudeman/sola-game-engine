@@ -13,4 +13,9 @@ public class SectionElement extends GuiElement<BaseStyles> {
   public void renderContent(Renderer renderer) {
     renderChildren(renderer);
   }
+
+  @Override
+  public void onRecalculateLayout() {
+
+  }
 }

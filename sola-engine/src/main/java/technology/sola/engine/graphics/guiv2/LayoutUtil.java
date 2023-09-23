@@ -14,6 +14,8 @@ class LayoutUtil {
 
     resizeAfterChildrenUpdates(guiElement, childDimensions);
 
+    guiElement.onRecalculateLayout();
+
     guiElement.isLayoutChanged = false;
   }
 

@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.guiv2;
 
+import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.graphics.guiv2.event.GuiElementEvents;
 import technology.sola.engine.graphics.guiv2.event.GuiKeyEvent;
 import technology.sola.engine.graphics.guiv2.event.GuiMouseEvent;
@@ -22,11 +23,11 @@ public abstract class GuiElement<Style extends BaseStyles> {
   /**
    * Includes only content size.
    */
-  protected GuiElementBounds contentBounds; // just content
+  protected GuiElementBounds contentBounds;
   final List<GuiElement<?>> children = new ArrayList<>();
-  GuiElement<?> parent;
-  private final GuiElementEvents events = new GuiElementEvents();
   boolean isLayoutChanged;
+  private GuiElement<?> parent;
+  private final GuiElementEvents events = new GuiElementEvents();
   private int x;
   private int y;
 
@@ -45,6 +46,8 @@ public abstract class GuiElement<Style extends BaseStyles> {
   }
 
   public abstract void renderContent(Renderer renderer);
+
+  public abstract void onRecalculateLayout();
 
   public void render(Renderer renderer) {
     recalculateLayout();
@@ -67,6 +70,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     // border
     Border border = styleContainer.getPropertyValue(BaseStyles::border, Border.NONE);
 
+    // checking any border size for now since they will all be 0 or 1
     if (border.bottom() > 0) {
       renderer.drawRect(x, y, width - border.right(), height - border.bottom(), border.color());
     }
@@ -115,15 +119,15 @@ public abstract class GuiElement<Style extends BaseStyles> {
       for (GuiElement<?> child : children) {
         if (child.parent != null) {
           child.parent.children.remove(child);
-          child.parent.isLayoutChanged = true;
+          child.parent.invalidateLayout();
         }
 
         child.parent = this;
-        child.isLayoutChanged = true;
+        child.invalidateLayout();
         this.children.add(child);
       }
 
-      this.isLayoutChanged = true;
+      this.invalidateLayout();
     }
 
     return this;
@@ -133,8 +137,16 @@ public abstract class GuiElement<Style extends BaseStyles> {
     return isLayoutChanged;
   }
 
+  public void invalidateLayout() {
+    isLayoutChanged = true;
+  }
+
   protected void renderChildren(Renderer renderer) {
     children.forEach(child -> child.render(renderer));
+  }
+
+  protected AssetLoaderProvider getAssetLoaderProvider() {
+    return this.parent.getAssetLoaderProvider();
   }
 
   void onKeyPressed(GuiKeyEvent event) {
@@ -191,6 +203,8 @@ public abstract class GuiElement<Style extends BaseStyles> {
     if (!isLayoutChanged()) {
       return;
     }
+
+    // todo, this might need to be called on parent or higher depending on auto sizing of content
 
     LayoutUtil.rebuildLayout(this, getParent().contentBounds.x(), getParent().contentBounds.y());
   }
