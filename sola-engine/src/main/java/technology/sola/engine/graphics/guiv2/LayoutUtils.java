@@ -7,14 +7,14 @@ import technology.sola.engine.graphics.guiv2.style.property.StyleValue;
 
 class LayoutUtils {
   static void rebuildLayout(GuiElement<?> guiElement, int x, int y) {
-    GuiElementBounds bounds = calculateMaxBounds(guiElement, x, y);
-    guiElement.bounds = bounds;
-    GuiElementBounds contentBounds = calculateContentBounds(guiElement);
-    guiElement.contentBounds = contentBounds;
+    guiElement.bounds = calculateMaxBounds(guiElement, x, y);
+    guiElement.contentBounds = calculateContentBounds(guiElement);
 
     Dimensions childDimensions = calculateChildDimensionsForElement(guiElement);
 
     resizeAfterChildrenUpdates(guiElement, childDimensions);
+
+    guiElement.isLayoutChanged = false;
   }
 
   private static GuiElementBounds calculateMaxBounds(GuiElement<?> guiElement, int x, int y) {
@@ -51,8 +51,8 @@ class LayoutUtils {
     return new GuiElementBounds(x, y, width, height);
   }
 
+  // todo should depend on direction and such
   private static Dimensions calculateChildDimensionsForElement(GuiElement<?> guiElement) {
-
     int x = guiElement.getContentBounds().x();
     int y = guiElement.getContentBounds().y();
     int autoHeight = 0;
@@ -65,7 +65,8 @@ class LayoutUtils {
     for (GuiElement<?> child : guiElement.children) {
       rebuildLayout(child, xOffset, yOffset);
 
-      int childHeight = child.getContentBounds().height();
+      int childHeight = child.getBounds().height();
+
       yOffset += childHeight + gap;
       autoHeight = yOffset;
     }
@@ -75,6 +76,7 @@ class LayoutUtils {
     return new Dimensions(newWidth, autoHeight);
   }
 
+  // todo depends on direction and such
   private static void resizeAfterChildrenUpdates(GuiElement<?> guiElement, Dimensions childDimensions) {
     // if auto shrink to max of child size or content size
     var styleContainer = guiElement.getStyles();
@@ -100,15 +102,17 @@ class LayoutUtils {
     var styleContainer = guiElement.getStyles();
     var parent = guiElement.getParent();
     var bounds = guiElement.getBounds();
+    var parentWidth = parent.getContentBounds().width();
+    var parentHeight = parent.getContentBounds().height();
 
     Border border = styleContainer.getPropertyValue(BaseStyles::border, Border.NONE);
     Padding padding = styleContainer.getPropertyValue(BaseStyles::padding, Padding.NONE);
 
     return new GuiElementBounds(
-      bounds.x() + border.left() + padding.left().getValue(parent.getWidth()),
-      bounds.y() + border.top() + padding.top().getValue(parent.getHeight()),
-      bounds.width() - (border.left() + border.right() + padding.left().getValue(parent.getWidth()) + padding.right().getValue(parent.getWidth())),
-      bounds.height() - (border.top() + border.bottom() + padding.top().getValue(parent.getHeight()) + padding.bottom().getValue(parent.getHeight()))
+      bounds.x() + border.left() + padding.left().getValue(parentWidth),
+      bounds.y() + border.top() + padding.top().getValue(parentHeight),
+      bounds.width() - (border.left() + border.right() + padding.left().getValue(parentWidth) + padding.right().getValue(parentWidth)),
+      bounds.height() - (border.top() + border.bottom() + padding.top().getValue(parentHeight) + padding.bottom().getValue(parentHeight))
     );
   }
 }

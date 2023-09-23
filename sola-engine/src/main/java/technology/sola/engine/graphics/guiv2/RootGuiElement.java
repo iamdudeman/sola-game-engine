@@ -23,16 +23,6 @@ class RootGuiElement extends GuiElement<BaseStyles> {
       }
 
       @Override
-      public int getWidth() {
-        return width;
-      }
-
-      @Override
-      public int getHeight() {
-        return height;
-      }
-
-      @Override
       public int getContentWidth() {
         return 0;
       }
@@ -47,18 +37,9 @@ class RootGuiElement extends GuiElement<BaseStyles> {
         return false;
       }
 
-      @Override
-      protected void recalculateLayout() {
-      }
     };
   }
 
-//  @Override
-//  public void render(Renderer renderer) {
-//    // todo this won't really work, it needs to behave like other elements and by style-able
-//    renderChildren(renderer);
-//  }
-//
   @Override
   public void renderContent(Renderer renderer) {
     renderChildren(renderer);
@@ -78,14 +59,4 @@ class RootGuiElement extends GuiElement<BaseStyles> {
   GuiDocument getGuiDocument() {
     return guiDocument;
   }
-
-  //  @Override
-//  public boolean isLayoutChanged() {
-//    return false;
-//  }
-//
-//  @Override
-//  protected void recalculateLayout() {
-//    // Nothing to do here
-//  }
 }
