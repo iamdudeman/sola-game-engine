@@ -46,10 +46,6 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
   public abstract void renderContent(Renderer renderer);
 
-  public abstract int getContentWidth();
-
-  public abstract int getContentHeight();
-
   public void render(Renderer renderer) {
     recalculateLayout();
 

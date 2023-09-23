@@ -13,14 +13,4 @@ public class SectionElement extends GuiElement<BaseStyles> {
   public void renderContent(Renderer renderer) {
     renderChildren(renderer);
   }
-
-  @Override
-  public int getContentWidth() {
-    return 0;
-  }
-
-  @Override
-  public int getContentHeight() {
-    return 0;
-  }
 }
