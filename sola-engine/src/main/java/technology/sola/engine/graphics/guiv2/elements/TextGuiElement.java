@@ -34,9 +34,6 @@ public class TextGuiElement extends GuiElementWithoutChildren<TextStyles> {
     getAssetLoaderProvider().get(Font.class).get(fontAssetId).executeWhenLoaded(font -> {
       this.font = font;
 
-      Border border = getStyles().getPropertyValue(TextStyles::border, Border.NONE);
-      Padding padding = getStyles().getPropertyValue(TextStyles::padding, Padding.NONE);
-
       if (text == null) {
         // todo this is only true if "align self" was set to "flex-start"
         contentBounds = contentBounds.setDimensions(0, 0);
@@ -46,6 +43,9 @@ public class TextGuiElement extends GuiElementWithoutChildren<TextStyles> {
         // todo this is only true if "align self" was set to "flex-start"
         contentBounds = contentBounds.setDimensions(textDimensions.width(), textDimensions.height());
       }
+
+      Border border = getStyles().getPropertyValue(TextStyles::border, Border.NONE);
+      Padding padding = getStyles().getPropertyValue(TextStyles::padding, Padding.NONE);
 
       bounds = new GuiElementBounds(
         contentBounds.x() - border.left() - padding.left().getValue(getParent().getContentBounds().width()),
