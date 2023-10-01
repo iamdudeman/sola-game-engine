@@ -8,7 +8,10 @@ import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.json.JsonObject;
 import technology.sola.json.SolaJson;
 
-// todo need to figure out how to register "JsonDefinitions" and also AssetLoader stuff for this
+import java.util.ArrayList;
+import java.util.List;
+
+// todo need to figure out how to link GuiDocumentJsonParser and AssetLoader stuff for this
 public class GuiAsJsonTempTesting {
   public static void main(String[] args) {
     String exampleJson = """
@@ -27,15 +30,24 @@ public class GuiAsJsonTempTesting {
             "text": "Hello world"
           },
           "styles": {
-
-          }
+            "fontAssetId": "default"
+          },
+          "children": []
         }
       ]
     }
     """;
     JsonObject jsonObject = new SolaJson().parse(exampleJson).asObject();
 
-    var result = new SectionElementJsonDefinition().doTheThing(jsonObject);
+    GuiDocumentJsonParser guiDocumentJsonParser = new GuiDocumentJsonParser();
+
+    guiDocumentJsonParser.jsonDefinitionList.add(new SectionElementJsonDefinition());
+    guiDocumentJsonParser.jsonDefinitionList.add(new TextElementJsonDefinition());
+
+//    var result = new SectionElementJsonDefinition().doTheThing(jsonObject);
+    var result = guiDocumentJsonParser.parse(jsonObject);
+
+    System.out.println(result);
   }
 
 
@@ -140,5 +152,24 @@ public class GuiAsJsonTempTesting {
     protected abstract Element buildElement(JsonObject propsJson);
 
     protected abstract Builder getBuilder();
+  }
+
+  public static class GuiDocumentJsonParser {
+    private List<GuiElementJsonDefinition<?, ?, ?>> jsonDefinitionList = new ArrayList<>();
+
+    public GuiElement<?> parse(JsonObject documentJson) {
+      String elementId = documentJson.getString("ele");
+
+      var theDefinition = jsonDefinitionList.stream().filter(definition -> definition.getElementName().equals(elementId)).findFirst().orElseThrow();
+
+      var element = theDefinition.doTheThing(documentJson);
+
+      // todo should be nullable
+      documentJson.getArray("children").stream().map(childJson -> {
+        return parse(childJson.asObject());
+      }).forEach(element::appendChildren);
+
+      return element;
+    }
   }
 }
