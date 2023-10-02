@@ -6,10 +6,19 @@ import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.mapper.FontInfoJsonMapper;
 import technology.sola.engine.assets.json.JsonElementAsset;
 
+/**
+ * FontAssetLoader is an {@link AssetLoader} implementation for {@link Font}s.
+ */
 public class FontAssetLoader extends AssetLoader<Font> {
   private final AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader;
   private final AssetLoader<SolaImage> solaImageAssetLoader;
 
+  /**
+   * Creates an instance of this asset loader.
+   *
+   * @param jsonElementAssetAssetLoader the {@link JsonElementAsset} {@link AssetLoader} to use internally
+   * @param solaImageAssetLoader        the {@link SolaImage} {@link AssetLoader} to use internally
+   */
   public FontAssetLoader(AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader, AssetLoader<SolaImage> solaImageAssetLoader) {
     this.jsonElementAssetAssetLoader = jsonElementAssetAssetLoader;
     this.solaImageAssetLoader = solaImageAssetLoader;

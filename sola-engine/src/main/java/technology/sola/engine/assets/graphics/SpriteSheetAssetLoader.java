@@ -5,10 +5,19 @@ import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.json.JsonElementAsset;
 import technology.sola.json.JsonObject;
 
+/**
+ * SpriteSheetAssetLoader is an {@link AssetLoader} implementation for {@link SpriteSheet}s.
+ */
 public class SpriteSheetAssetLoader extends AssetLoader<SpriteSheet> {
   private final AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader;
   private final AssetLoader<SolaImage> solaImageAssetLoader;
 
+  /**
+   * Creates an instance of this asset loader.
+   *
+   * @param jsonElementAssetAssetLoader the {@link JsonElementAsset} {@link AssetLoader} to use internally
+   * @param solaImageAssetLoader        the {@link SolaImage} {@link AssetLoader} to use internally
+   */
   public SpriteSheetAssetLoader(AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader, AssetLoader<SolaImage> solaImageAssetLoader) {
     this.jsonElementAssetAssetLoader = jsonElementAssetAssetLoader;
     this.solaImageAssetLoader = solaImageAssetLoader;
