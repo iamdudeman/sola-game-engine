@@ -6,6 +6,7 @@ technology.sola.engine.assets.graphics
 technology.sola.engine.assets.graphics.font
 technology.sola.engine.assets.graphics.font.exception
 technology.sola.engine.assets.graphics.font.mapper
+technology.sola.engine.assets.json
 technology.sola.engine.core
 technology.sola.engine.core.component
 technology.sola.engine.core.event
