@@ -1,10 +1,8 @@
-package technology.sola.engine.assets.loader;
+package technology.sola.engine.assets.graphics.font;
 
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
-import technology.sola.engine.assets.graphics.font.Font;
-import technology.sola.engine.assets.graphics.font.FontInfo;
 import technology.sola.engine.assets.graphics.font.mapper.FontInfoJsonMapper;
 import technology.sola.engine.assets.json.JsonElementAsset;
 
