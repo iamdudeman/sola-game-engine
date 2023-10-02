@@ -1,8 +1,9 @@
-package technology.sola.engine.platform.swing.assets;
+package technology.sola.engine.platform.swing.assets.graphics;
 
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.platform.swing.assets.SwingPathUtils;
 import technology.sola.engine.platform.swing.assets.exception.FailedSolaImageLoadException;
 
 import javax.imageio.ImageIO;
@@ -24,7 +25,7 @@ public class SwingSolaImageAssetLoader extends AssetLoader<SolaImage> {
 
     new Thread(() -> {
       try {
-        BufferedImage bufferedImage = ImageIO.read(PathUtils.asUrl(path));
+        BufferedImage bufferedImage = ImageIO.read(SwingPathUtils.asUrl(path));
         SolaImage solaImage = new SolaImage(bufferedImage.getWidth(), bufferedImage.getHeight());
 
         bufferedImage.getRGB(0, 0, solaImage.getWidth(), solaImage.getHeight(), solaImage.getPixels(), 0, solaImage.getWidth());

@@ -3,6 +3,9 @@ package technology.sola.engine.platform.swing;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.assets.graphics.font.FontAssetLoader;
+import technology.sola.engine.assets.graphics.SpriteSheetAssetLoader;
+import technology.sola.engine.assets.json.JsonElementAsset;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.SolaPlatformIdentifier;
@@ -13,10 +16,9 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
-import technology.sola.engine.platform.swing.assets.SwingAudioClipAssetLoader;
-import technology.sola.engine.platform.swing.assets.SwingFontAssetLoader;
-import technology.sola.engine.platform.swing.assets.SwingSolaImageAssetLoader;
-import technology.sola.engine.platform.swing.assets.SwingSpriteSheetAssetLoader;
+import technology.sola.engine.platform.swing.assets.audio.SwingAudioClipAssetLoader;
+import technology.sola.engine.platform.swing.assets.SwingJsonAssetLoader;
+import technology.sola.engine.platform.swing.assets.graphics.SwingSolaImageAssetLoader;
 import technology.sola.engine.platform.swing.core.Graphics2dRenderer;
 import technology.sola.engine.platform.swing.core.SwingSocketClient;
 
@@ -201,10 +203,18 @@ public class SwingSolaPlatform extends SolaPlatform {
   @Override
   protected void populateAssetLoaderProvider(AssetLoaderProvider assetLoaderProvider) {
     AssetLoader<SolaImage> solaImageAssetLoader = new SwingSolaImageAssetLoader();
+    AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader = new SwingJsonAssetLoader();
+
     assetLoaderProvider.add(solaImageAssetLoader);
-    assetLoaderProvider.add(new SwingFontAssetLoader(solaImageAssetLoader));
-    assetLoaderProvider.add(new SwingSpriteSheetAssetLoader(solaImageAssetLoader));
+    assetLoaderProvider.add(jsonElementAssetAssetLoader);
     assetLoaderProvider.add(new SwingAudioClipAssetLoader());
+
+    assetLoaderProvider.add(new FontAssetLoader(
+      jsonElementAssetAssetLoader, solaImageAssetLoader
+    ));
+    assetLoaderProvider.add(new SpriteSheetAssetLoader(
+      jsonElementAssetAssetLoader, solaImageAssetLoader
+    ));
   }
 
   @Override
