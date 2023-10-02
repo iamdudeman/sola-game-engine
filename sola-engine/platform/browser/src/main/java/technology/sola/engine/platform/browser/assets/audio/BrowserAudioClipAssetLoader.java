@@ -1,9 +1,8 @@
-package technology.sola.engine.platform.browser.assets;
+package technology.sola.engine.platform.browser.assets.audio;
 
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.audio.AudioClip;
-import technology.sola.engine.platform.browser.assets.audio.BrowserAudioClip;
 import technology.sola.engine.platform.browser.javascript.JsAudioUtils;
 
 /**

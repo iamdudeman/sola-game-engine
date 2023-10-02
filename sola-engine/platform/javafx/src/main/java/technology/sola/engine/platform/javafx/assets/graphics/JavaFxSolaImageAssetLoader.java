@@ -1,10 +1,11 @@
-package technology.sola.engine.platform.javafx.assets;
+package technology.sola.engine.platform.javafx.assets.graphics;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelFormat;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,7 +24,7 @@ public class JavaFxSolaImageAssetLoader extends AssetLoader<SolaImage> {
     AssetHandle<SolaImage> solaImageAssetHandle = new AssetHandle<>();
 
     new Thread(() -> {
-      try (InputStream inputStream = PathUtils.asUrl(path).openStream()) {
+      try (InputStream inputStream = JavaFxPathUtils.asUrl(path).openStream()) {
         Image image = new Image(inputStream);
         int width = (int) image.getWidth();
         int height = (int) image.getHeight();
