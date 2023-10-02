@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 // todo need to figure out how to link GuiDocumentJsonParser and AssetLoader stuff for this
+// todo consider moving all of this to assets package
+// todo SolaWithDefaults could set initial GuiDocumentJsonParser GuiElementJsonDefinitions and then allow adding new ones
 public class GuiAsJsonTempTesting {
   public static void main(String[] args) {
     String exampleJson = """
