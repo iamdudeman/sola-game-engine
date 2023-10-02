@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.browser.assets;
+package technology.sola.engine.platform.browser.assets.graphics;
 
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;

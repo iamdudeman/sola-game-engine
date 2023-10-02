@@ -6,7 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-class PathUtils {
+public class JavaFxPathUtils {
   public static URL asUrl(String path) throws MalformedURLException {
     File file = new File(path);
 
@@ -14,7 +14,7 @@ class PathUtils {
   }
 
   public static String readContents(String path) throws IOException {
-    Scanner scanner = new Scanner(PathUtils.asUrl(path).openStream()).useDelimiter("\\A");
+    Scanner scanner = new Scanner(JavaFxPathUtils.asUrl(path).openStream()).useDelimiter("\\A");
     String contents = scanner.next();
 
     scanner.close();
@@ -30,6 +30,6 @@ class PathUtils {
     return path.substring(0, path.lastIndexOf("/"));
   }
 
-  private PathUtils() {
+  private JavaFxPathUtils() {
   }
 }

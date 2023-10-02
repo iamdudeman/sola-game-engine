@@ -13,6 +13,8 @@ module technology.sola.engine {
   exports technology.sola.engine.assets.graphics.font;
   exports technology.sola.engine.assets.graphics.font.exception;
   exports technology.sola.engine.assets.graphics.font.mapper;
+  exports technology.sola.engine.assets.json;
+  exports technology.sola.engine.assets.loader;
 
   exports technology.sola.engine.core;
   exports technology.sola.engine.core.component;

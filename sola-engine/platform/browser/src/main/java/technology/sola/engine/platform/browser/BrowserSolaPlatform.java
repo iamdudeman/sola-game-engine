@@ -3,6 +3,9 @@ package technology.sola.engine.platform.browser;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.assets.json.JsonElementAsset;
+import technology.sola.engine.assets.loader.FontAssetLoader;
+import technology.sola.engine.assets.loader.SpriteSheetAssetLoader;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.SolaPlatformIdentifier;
@@ -14,10 +17,9 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
-import technology.sola.engine.platform.browser.assets.BrowserAudioClipAssetLoader;
-import technology.sola.engine.platform.browser.assets.BrowserFontAssetLoader;
-import technology.sola.engine.platform.browser.assets.BrowserSolaImageAssetLoader;
-import technology.sola.engine.platform.browser.assets.BrowserSpriteSheetAssetLoader;
+import technology.sola.engine.platform.browser.assets.BrowserJsonElementAssetLoader;
+import technology.sola.engine.platform.browser.assets.audio.BrowserAudioClipAssetLoader;
+import technology.sola.engine.platform.browser.assets.graphics.BrowserSolaImageAssetLoader;
 import technology.sola.engine.platform.browser.core.BrowserCanvasRenderer;
 import technology.sola.engine.platform.browser.core.BrowserGameLoop;
 import technology.sola.engine.platform.browser.core.BrowserSocketClient;
@@ -130,10 +132,18 @@ public class BrowserSolaPlatform extends SolaPlatform {
   @Override
   protected void populateAssetLoaderProvider(AssetLoaderProvider assetLoaderProvider) {
     AssetLoader<SolaImage> solaImageAssetLoader = new BrowserSolaImageAssetLoader();
+    AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader = new BrowserJsonElementAssetLoader();
+
     assetLoaderProvider.add(solaImageAssetLoader);
-    assetLoaderProvider.add(new BrowserSpriteSheetAssetLoader(solaImageAssetLoader));
-    assetLoaderProvider.add(new BrowserFontAssetLoader(solaImageAssetLoader));
+    assetLoaderProvider.add(jsonElementAssetAssetLoader);
     assetLoaderProvider.add(new BrowserAudioClipAssetLoader());
+
+    assetLoaderProvider.add(new SpriteSheetAssetLoader(
+      jsonElementAssetAssetLoader, solaImageAssetLoader
+    ));
+    assetLoaderProvider.add(new FontAssetLoader(
+      jsonElementAssetAssetLoader, solaImageAssetLoader
+    ));
   }
 
   @Override
