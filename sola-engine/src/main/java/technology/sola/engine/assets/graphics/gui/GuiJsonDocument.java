@@ -1,4 +1,4 @@
-package technology.sola.engine.assets.gui;
+package technology.sola.engine.assets.graphics.gui;
 
 import technology.sola.engine.assets.Asset;
 import technology.sola.engine.graphics.guiv2.GuiElement;

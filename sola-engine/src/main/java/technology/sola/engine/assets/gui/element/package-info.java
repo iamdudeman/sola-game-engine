@@ -1,2 +1,0 @@
-// todo javadoc
-package technology.sola.engine.assets.gui.element;

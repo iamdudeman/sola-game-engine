@@ -1,6 +1,6 @@
-package technology.sola.engine.assets.gui.element;
+package technology.sola.engine.graphics.guiv2.json.element;
 
-import technology.sola.engine.assets.gui.styles.TextStylesJsonParser;
+import technology.sola.engine.graphics.guiv2.json.styles.TextStylesJsonParser;
 import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
 import technology.sola.engine.graphics.guiv2.elements.TextStyles;
 import technology.sola.json.JsonObject;

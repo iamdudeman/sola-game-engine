@@ -1,4 +1,4 @@
-package technology.sola.engine.assets.gui;
+package technology.sola.engine.assets.graphics.gui;
 
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;

@@ -1,11 +1,12 @@
-package technology.sola.engine.assets.gui;
+package technology.sola.engine.assets.graphics.gui;
 
-import technology.sola.engine.assets.gui.element.GuiElementJsonDefinition;
+import technology.sola.engine.graphics.guiv2.json.element.GuiElementJsonDefinition;
 import technology.sola.engine.graphics.guiv2.GuiElement;
 import technology.sola.json.JsonObject;
 
 import java.util.List;
 
+// todo maybe this is package private or part of the asset loader file instead?
 public class GuiDocumentJsonParser {
   private final List<GuiElementJsonDefinition<?, ?, ?>> jsonDefinitionList;
 

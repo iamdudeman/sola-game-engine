@@ -1,7 +1,7 @@
-package technology.sola.engine.assets.gui;
+package technology.sola.engine.assets.graphics.gui;
 
-import technology.sola.engine.assets.gui.element.SectionElementJsonDefinition;
-import technology.sola.engine.assets.gui.element.TextElementJsonDefinition;
+import technology.sola.engine.graphics.guiv2.json.element.SectionElementJsonDefinition;
+import technology.sola.engine.graphics.guiv2.json.element.TextElementJsonDefinition;
 import technology.sola.json.JsonObject;
 import technology.sola.json.SolaJson;
 

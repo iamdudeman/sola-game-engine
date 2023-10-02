@@ -1,4 +1,4 @@
-package technology.sola.engine.assets.gui.styles;
+package technology.sola.engine.graphics.guiv2.json.styles;
 
 import technology.sola.engine.graphics.guiv2.elements.TextStyles;
 import technology.sola.json.JsonObject;
