@@ -13,6 +13,7 @@ module technology.sola.engine {
   exports technology.sola.engine.assets.graphics.font;
   exports technology.sola.engine.assets.graphics.font.exception;
   exports technology.sola.engine.assets.graphics.font.mapper;
+  exports technology.sola.engine.assets.graphics.gui;
   exports technology.sola.engine.assets.json;
 
   exports technology.sola.engine.core;
@@ -37,6 +38,9 @@ module technology.sola.engine {
   exports technology.sola.engine.graphics.guiv2.elements;
   exports technology.sola.engine.graphics.guiv2.elements.input;
   exports technology.sola.engine.graphics.guiv2.event;
+  exports technology.sola.engine.graphics.guiv2.json;
+  exports technology.sola.engine.graphics.guiv2.json.element;
+  exports technology.sola.engine.graphics.guiv2.json.styles;
   exports technology.sola.engine.graphics.guiv2.style;
   exports technology.sola.engine.graphics.guiv2.style.property;
   exports technology.sola.engine.graphics.renderer;
