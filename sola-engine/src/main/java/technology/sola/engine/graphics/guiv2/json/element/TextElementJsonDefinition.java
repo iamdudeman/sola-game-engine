@@ -1,6 +1,6 @@
 package technology.sola.engine.graphics.guiv2.json.element;
 
-import technology.sola.engine.graphics.guiv2.json.styles.TextStylesJsonParser;
+import technology.sola.engine.graphics.guiv2.json.styles.TextStylesJsonDefinition;
 import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
 import technology.sola.engine.graphics.guiv2.elements.TextStyles;
 import technology.sola.json.JsonObject;
@@ -13,7 +13,7 @@ public class TextElementJsonDefinition extends GuiElementJsonDefinition<TextStyl
    * Creates an instance of this {@link GuiElementJsonDefinition}.
    */
   public TextElementJsonDefinition() {
-    super(new TextStylesJsonParser());
+    super(new TextStylesJsonDefinition());
   }
 
   @Override

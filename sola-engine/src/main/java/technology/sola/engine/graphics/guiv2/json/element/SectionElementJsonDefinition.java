@@ -1,6 +1,6 @@
 package technology.sola.engine.graphics.guiv2.json.element;
 
-import technology.sola.engine.graphics.guiv2.json.styles.BaseStylesJsonParser;
+import technology.sola.engine.graphics.guiv2.json.styles.BaseStylesJsonDefinition;
 import technology.sola.engine.graphics.guiv2.elements.SectionElement;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.json.JsonObject;
@@ -13,7 +13,7 @@ public class SectionElementJsonDefinition extends GuiElementJsonDefinition<BaseS
    * Creates an instance of this {@link GuiElementJsonDefinition}.
    */
   public SectionElementJsonDefinition() {
-    super(new BaseStylesJsonParser());
+    super(new BaseStylesJsonDefinition());
   }
 
   @Override
