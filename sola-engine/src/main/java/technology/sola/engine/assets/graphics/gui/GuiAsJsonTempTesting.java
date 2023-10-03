@@ -1,5 +1,6 @@
 package technology.sola.engine.assets.graphics.gui;
 
+import technology.sola.engine.graphics.guiv2.json.GuiDocumentJsonParser;
 import technology.sola.engine.graphics.guiv2.json.element.SectionElementJsonDefinition;
 import technology.sola.engine.graphics.guiv2.json.element.TextElementJsonDefinition;
 import technology.sola.json.JsonObject;
