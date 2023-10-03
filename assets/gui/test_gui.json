@@ -1,0 +1,60 @@
+{
+  "ele": "Section",
+  "styles": {
+    "backgroundColor": "#000000",
+    "borderColor": "rgb(169, 169, 169)",
+    "padding": 10,
+    "gap": 10
+  },
+  "children": [
+    {
+      "ele": "Section",
+      "styles": {
+        "backgroundColor": "argb(255, 0, 0, 255)",
+        "borderColor": "#ff0000",
+        "height": "50%",
+        "gap": 5,
+        "paddingHorizontal": 5
+      },
+      "children": [
+        {
+          "ele": "Text",
+          "props": {
+            "text": "Hello world"
+          },
+          "styles": {
+            "borderColor": "rgb(0, 255, 0)",
+            "padding": 5,
+            "textColor": "rgb(255, 255, 0)"
+          }
+        },
+        {
+          "ele": "Section",
+          "styles": {
+            "backgroundColor": "rgb(255, 255, 0)",
+            "borderColor": "rgb(169, 169, 169)",
+            "height": 30
+          }
+        }
+      ]
+    },
+    {
+      "ele": "Section",
+      "styles": {
+        "backgroundColor": "#00ff00",
+        "height": 60,
+        "padding": "5"
+      },
+      "children": [
+        {
+          "ele": "Section",
+          "styles": {
+            "backgroundColor": "#fF0000",
+            "borderColor": "#000000",
+            "height": "50%"
+          }
+        }
+      ]
+    }
+  ]
+}

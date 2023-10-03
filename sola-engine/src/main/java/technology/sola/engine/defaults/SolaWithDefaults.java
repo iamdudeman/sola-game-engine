@@ -4,6 +4,8 @@ import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
+import technology.sola.engine.assets.graphics.gui.GuiJsonDocumentAssetLoader;
+import technology.sola.engine.assets.json.JsonElementAsset;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.graphics.modules.CircleEntityGraphicsModule;
@@ -15,10 +17,15 @@ import technology.sola.engine.defaults.graphics.modules.SpriteEntityGraphicsModu
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
+import technology.sola.engine.graphics.guiv2.GuiDocument;
+import technology.sola.engine.graphics.guiv2.json.GuiDocumentJsonParser;
+import technology.sola.engine.graphics.guiv2.json.element.SectionElementJsonDefinition;
+import technology.sola.engine.graphics.guiv2.json.element.TextElementJsonDefinition;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.system.LightFlickerSystem;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -47,6 +54,7 @@ public abstract class SolaWithDefaults extends Sola {
    * called.
    */
   protected SolaGuiDocument solaGuiDocument;
+  protected GuiDocument guiDocument;
   private Consumer<Renderer> renderFunction = renderer -> {
   };
   private Color backgroundColor = Color.BLACK;
@@ -261,8 +269,34 @@ public abstract class SolaWithDefaults extends Sola {
       return useGui(new GuiPropertyDefaults());
     }
 
+    // todo document
+    // todo pass in Json definition list (but also provide default list)
+    public DefaultsConfigurator useGuiV2() {
+      if (guiDocument == null) {
+        guiDocument = new GuiDocument(platform, assetLoaderProvider);
+        rebuildRenderFunction();
+
+        // Prepare default font
+        AssetLoader<Font> fontAssetLoader = assetLoaderProvider.get(Font.class);
+
+        if (!fontAssetLoader.hasAssetMapping(DefaultFont.ASSET_ID)) {
+          fontAssetLoader.addAsset(DefaultFont.ASSET_ID, DefaultFont.get());
+        }
+
+        assetLoaderProvider.add(new GuiJsonDocumentAssetLoader(
+          assetLoaderProvider.get(JsonElementAsset.class),
+          new GuiDocumentJsonParser(List.of(
+            new SectionElementJsonDefinition(),
+            new TextElementJsonDefinition()
+          ))
+        ));
+      }
+
+      return this;
+    }
+
     private void rebuildRenderFunction() {
-      if (solaGraphics != null && solaGuiDocument != null) {
+      if (solaGraphics != null && (solaGuiDocument != null || guiDocument != null)) {
         renderFunction = renderer -> {
           renderer.clear(backgroundColor);
           solaGraphics.render(renderer);
@@ -270,7 +304,11 @@ public abstract class SolaWithDefaults extends Sola {
           var layers = renderer.getLayers();
 
           if (layers.isEmpty()) {
-            solaGuiDocument.render(renderer);
+            if (solaGuiDocument == null) {
+              guiDocument.render(renderer);
+            } else {
+              solaGuiDocument.render(renderer);
+            }
           } else {
             layers.get(layers.size() - 1).add(solaGuiDocument::render, ScreenSpaceLightMapGraphicsModule.ORDER + 1);
           }
@@ -280,10 +318,14 @@ public abstract class SolaWithDefaults extends Sola {
           renderer.clear(backgroundColor);
           solaGraphics.render(renderer);
         };
-      } else if (solaGuiDocument != null) {
+      } else if (solaGuiDocument != null || guiDocument != null) {
         renderFunction = renderer -> {
           renderer.clear(backgroundColor);
-          solaGuiDocument.render(renderer);
+          if (solaGuiDocument == null) {
+            guiDocument.render(renderer);
+          } else {
+            solaGuiDocument.render(renderer);
+          }
         };
       }
     }
