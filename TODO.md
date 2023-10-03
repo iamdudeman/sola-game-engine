@@ -55,6 +55,10 @@ Later things
 
 ## TODO List
 
+* JSON schema files for
+    * GuiV2 stuff
+    * font stuff
+    * spritesheet stuff
 * Consider array list for possible SpacialHashMap performance boost
 * Consider "stopping" AudioClip when it is finished by default, so it can be immediately played again?
 * Move custom build "distribution" tasks to a gradle plugin

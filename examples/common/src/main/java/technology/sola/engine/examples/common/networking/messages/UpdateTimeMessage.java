@@ -21,7 +21,7 @@ public class UpdateTimeMessage extends SocketMessage {
   /**
    * Parses a {@link SocketMessage} as a {@link UpdateTimeMessage}.
    *
-   * @param socketMessage the message to parse
+   * @param socketMessage the message to build
    * @return the parsed UpdateTimeMessage
    */
   public static UpdateTimeMessage parse(SocketMessage socketMessage) {

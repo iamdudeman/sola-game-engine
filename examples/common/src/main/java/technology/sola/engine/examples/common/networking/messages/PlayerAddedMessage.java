@@ -21,7 +21,7 @@ public class PlayerAddedMessage extends SocketMessage {
   /**
    * Parses a {@link SocketMessage} as a {@link PlayerAddedMessage}.
    *
-   * @param socketMessage the message to parse
+   * @param socketMessage the message to build
    * @return the parsed PlayerAddedMessage
    */
   public static PlayerAddedMessage parse(SocketMessage socketMessage) {

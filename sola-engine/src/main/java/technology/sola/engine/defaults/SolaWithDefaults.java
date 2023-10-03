@@ -18,9 +18,9 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.graphics.guiv2.GuiDocument;
-import technology.sola.engine.graphics.guiv2.json.GuiDocumentJsonParser;
-import technology.sola.engine.graphics.guiv2.json.element.SectionElementJsonDefinition;
-import technology.sola.engine.graphics.guiv2.json.element.TextElementJsonDefinition;
+import technology.sola.engine.graphics.guiv2.json.GuiJsonDocumentBuilder;
+import technology.sola.engine.graphics.guiv2.json.element.SectionElementJsonBlueprint;
+import technology.sola.engine.graphics.guiv2.json.element.TextElementJsonBlueprint;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.system.LightFlickerSystem;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
@@ -269,7 +269,7 @@ public abstract class SolaWithDefaults extends Sola {
       return useGui(new GuiPropertyDefaults());
     }
 
-    // todo document
+    // todo javadoc
     // todo pass in Json definition list (but also provide default list)
     public DefaultsConfigurator useGuiV2() {
       if (guiDocument == null) {
@@ -285,9 +285,9 @@ public abstract class SolaWithDefaults extends Sola {
 
         assetLoaderProvider.add(new GuiJsonDocumentAssetLoader(
           assetLoaderProvider.get(JsonElementAsset.class),
-          new GuiDocumentJsonParser(List.of(
-            new SectionElementJsonDefinition(),
-            new TextElementJsonDefinition()
+          new GuiJsonDocumentBuilder(List.of(
+            new SectionElementJsonBlueprint(),
+            new TextElementJsonBlueprint()
           ))
         ));
       }

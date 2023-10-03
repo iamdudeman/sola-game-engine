@@ -1,19 +1,19 @@
 package technology.sola.engine.graphics.guiv2.json.element;
 
-import technology.sola.engine.graphics.guiv2.json.styles.TextStylesJsonDefinition;
+import technology.sola.engine.graphics.guiv2.json.styles.TextStylesJsonBlueprint;
 import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
 import technology.sola.engine.graphics.guiv2.elements.TextStyles;
 import technology.sola.json.JsonObject;
 
 /**
- * A {@link GuiElementJsonDefinition} for {@link TextGuiElement}.
+ * A {@link GuiElementJsonBlueprint} for {@link TextGuiElement}.
  */
-public class TextElementJsonDefinition extends GuiElementJsonDefinition<TextStyles, TextGuiElement, TextStyles.Builder<?>> {
+public class TextElementJsonBlueprint extends GuiElementJsonBlueprint<TextStyles, TextGuiElement, TextStyles.Builder<?>> {
   /**
-   * Creates an instance of this {@link GuiElementJsonDefinition}.
+   * Creates an instance of this {@link GuiElementJsonBlueprint}.
    */
-  public TextElementJsonDefinition() {
-    super(new TextStylesJsonDefinition());
+  public TextElementJsonBlueprint() {
+    super(new TextStylesJsonBlueprint());
   }
 
   @Override
@@ -22,7 +22,7 @@ public class TextElementJsonDefinition extends GuiElementJsonDefinition<TextStyl
   }
 
   @Override
-  public TextGuiElement createElement(JsonObject propsJson) {
+  public TextGuiElement createElementFromJson(JsonObject propsJson) {
     TextGuiElement textGuiElement = new TextGuiElement();
 
     textGuiElement.setText(propsJson.getString("text", null));

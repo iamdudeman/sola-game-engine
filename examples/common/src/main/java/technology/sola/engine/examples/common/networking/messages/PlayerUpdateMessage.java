@@ -25,7 +25,7 @@ public class PlayerUpdateMessage extends SocketMessage {
   /**
    * Parses a {@link SocketMessage} as a {@link PlayerUpdateMessage}.
    *
-   * @param socketMessage the message to parse
+   * @param socketMessage the message to build
    * @return the parsed PlayerUpdateMessage
    */
   public static PlayerUpdateMessage parse(SocketMessage socketMessage) {
