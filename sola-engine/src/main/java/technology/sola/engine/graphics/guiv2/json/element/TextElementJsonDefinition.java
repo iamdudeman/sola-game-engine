@@ -5,7 +5,13 @@ import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
 import technology.sola.engine.graphics.guiv2.elements.TextStyles;
 import technology.sola.json.JsonObject;
 
+/**
+ * A {@link GuiElementJsonDefinition} for {@link TextGuiElement}.
+ */
 public class TextElementJsonDefinition extends GuiElementJsonDefinition<TextStyles, TextGuiElement, TextStyles.Builder<?>> {
+  /**
+   * Creates an instance of this {@link GuiElementJsonDefinition}.
+   */
   public TextElementJsonDefinition() {
     super(new TextStylesJsonParser());
   }
@@ -16,11 +22,10 @@ public class TextElementJsonDefinition extends GuiElementJsonDefinition<TextStyl
   }
 
   @Override
-  protected TextGuiElement createElement(JsonObject propsJson) {
+  public TextGuiElement createElement(JsonObject propsJson) {
     TextGuiElement textGuiElement = new TextGuiElement();
 
-    // todo should be nullable
-    textGuiElement.setText(propsJson.getString("text"));
+    textGuiElement.setText(propsJson.getString("text", null));
 
     return textGuiElement;
   }

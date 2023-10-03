@@ -5,7 +5,13 @@ import technology.sola.engine.graphics.guiv2.elements.SectionElement;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.json.JsonObject;
 
+/**
+ * A {@link GuiElementJsonDefinition} for {@link SectionElement}.
+ */
 public class SectionElementJsonDefinition extends GuiElementJsonDefinition<BaseStyles, SectionElement, BaseStyles.Builder<?>> {
+  /**
+   * Creates an instance of this {@link GuiElementJsonDefinition}.
+   */
   public SectionElementJsonDefinition() {
     super(new BaseStylesJsonParser());
   }
@@ -16,7 +22,7 @@ public class SectionElementJsonDefinition extends GuiElementJsonDefinition<BaseS
   }
 
   @Override
-  protected SectionElement createElement(JsonObject propsJson) {
+  public SectionElement createElement(JsonObject propsJson) {
     return new SectionElement();
   }
 

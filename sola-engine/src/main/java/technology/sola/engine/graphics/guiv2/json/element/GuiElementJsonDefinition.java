@@ -14,21 +14,11 @@ public abstract class GuiElementJsonDefinition<Styles extends BaseStyles, Elemen
 
   public abstract String getTag();
 
-  // todo better name
-  public Element doTheThing(JsonObject elementJson) {
-    // todo props shouldn't be required
-    Element element = createElement(elementJson.getObject("props"));
-
-    // todo styles shouldn't be required
-    var builder = stylesJsonParser.populateStyles(elementJson.getObject("styles"), createStylesBuilder());
-    element.setStyle((Styles) builder.build());
-
-    // todo need to handle children as well
-
-    return element;
+  public Styles createStyles(JsonObject stylesJson) {
+    return (Styles) stylesJsonParser.populateStyles(stylesJson, createStylesBuilder()).build();
   }
 
-  protected abstract Element createElement(JsonObject propsJson);
+  public abstract Element createElement(JsonObject propsJson);
 
   protected abstract StylesBuilder createStylesBuilder();
 }
