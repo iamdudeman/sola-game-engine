@@ -11,17 +11,17 @@ public class SectionElementJsonDefinition extends GuiElementJsonDefinition<BaseS
   }
 
   @Override
-  public String getElementName() {
+  public String getTag() {
     return "Section";
   }
 
   @Override
-  protected SectionElement buildElement(JsonObject propsJson) {
+  protected SectionElement createElement(JsonObject propsJson) {
     return new SectionElement();
   }
 
   @Override
-  protected BaseStyles.Builder<?> getBuilder() {
+  protected BaseStyles.Builder<?> createStylesBuilder() {
     return BaseStyles.create();
   }
 }

@@ -11,12 +11,12 @@ public class TextElementJsonDefinition extends GuiElementJsonDefinition<TextStyl
   }
 
   @Override
-  public String getElementName() {
+  public String getTag() {
     return "Text";
   }
 
   @Override
-  protected TextGuiElement buildElement(JsonObject propsJson) {
+  protected TextGuiElement createElement(JsonObject propsJson) {
     TextGuiElement textGuiElement = new TextGuiElement();
 
     // todo should be nullable
@@ -26,7 +26,7 @@ public class TextElementJsonDefinition extends GuiElementJsonDefinition<TextStyl
   }
 
   @Override
-  protected TextStyles.Builder<?> getBuilder() {
+  protected TextStyles.Builder<?> createStylesBuilder() {
     return TextStyles.create();
   }
 }

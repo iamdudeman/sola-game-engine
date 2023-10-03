@@ -14,7 +14,7 @@ public class GuiAsJsonTempTesting {
   public static void main(String[] args) {
     String exampleJson = """
     {
-      "ele": "Section",
+      "tag": "Section",
       "props": {
 
       },
@@ -23,7 +23,7 @@ public class GuiAsJsonTempTesting {
       },
       "children": [
         {
-          "ele": "Text",
+          "tag": "Text",
           "props": {
             "text": "Hello world"
           },

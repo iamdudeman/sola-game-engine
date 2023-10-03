@@ -5,30 +5,30 @@ import technology.sola.engine.graphics.guiv2.GuiElement;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.json.JsonObject;
 
-public abstract class GuiElementJsonDefinition<Style extends BaseStyles, Element extends GuiElement<Style>, Builder extends BaseStyles.Builder<?>> {
-  protected StylesJsonParser<Builder> stylesJsonParser;
+public abstract class GuiElementJsonDefinition<Styles extends BaseStyles, Element extends GuiElement<Styles>, StylesBuilder extends BaseStyles.Builder<?>> {
+  protected StylesJsonParser<StylesBuilder> stylesJsonParser;
 
-  public GuiElementJsonDefinition(StylesJsonParser<Builder> stylesJsonParser) {
+  public GuiElementJsonDefinition(StylesJsonParser<StylesBuilder> stylesJsonParser) {
     this.stylesJsonParser = stylesJsonParser;
   }
 
-  public abstract String getElementName();
+  public abstract String getTag();
 
   // todo better name
   public Element doTheThing(JsonObject elementJson) {
     // todo props shouldn't be required
-    Element element = buildElement(elementJson.getObject("props"));
+    Element element = createElement(elementJson.getObject("props"));
 
     // todo styles shouldn't be required
-    var builder = stylesJsonParser.populateStyles(elementJson.getObject("styles"), getBuilder());
-    element.setStyle((Style) builder.build());
+    var builder = stylesJsonParser.populateStyles(elementJson.getObject("styles"), createStylesBuilder());
+    element.setStyle((Styles) builder.build());
 
     // todo need to handle children as well
 
     return element;
   }
 
-  protected abstract Element buildElement(JsonObject propsJson);
+  protected abstract Element createElement(JsonObject propsJson);
 
-  protected abstract Builder getBuilder();
+  protected abstract StylesBuilder createStylesBuilder();
 }
