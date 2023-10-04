@@ -16,7 +16,7 @@ public class JavaFxMain {
    */
   public static void main(String[] args) {
     SolaPlatform solaPlatform = new JavaFxSolaPlatform();
-    Sola sola = new GuiV2Example();
+    Sola sola = new ExampleLauncherSola(solaPlatform);
 
     solaPlatform.play(sola);
   }

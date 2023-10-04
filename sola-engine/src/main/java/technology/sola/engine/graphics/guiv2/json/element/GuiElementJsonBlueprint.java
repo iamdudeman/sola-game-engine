@@ -15,7 +15,11 @@ public abstract class GuiElementJsonBlueprint<Styles extends BaseStyles, Element
   public abstract String getTag();
 
   public Styles createStylesFromJson(JsonObject stylesJson) {
-    return (Styles) stylesJsonBlueprint.populateStylesBuilderFromJson(createStylesBuilder(), stylesJson).build();
+    StylesBuilder stylesBuilder = createStylesBuilder();
+
+    stylesJson.forEach((key, value) -> stylesJsonBlueprint.parseStylesJsonValue(stylesBuilder, key, value));
+
+    return (Styles) stylesBuilder.build();
   }
 
   public abstract Element createElementFromJson(JsonObject propsJson);

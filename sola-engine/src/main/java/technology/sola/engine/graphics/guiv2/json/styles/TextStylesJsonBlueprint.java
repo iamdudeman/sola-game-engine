@@ -1,25 +1,17 @@
 package technology.sola.engine.graphics.guiv2.json.styles;
 
 import technology.sola.engine.graphics.guiv2.elements.TextStyles;
-import technology.sola.json.JsonObject;
+import technology.sola.json.JsonElement;
 
-/**
- * {@link StylesJsonBlueprint} for populating a {@link TextStyles.Builder} from a styles {@link JsonObject}.
- */
 public class TextStylesJsonBlueprint implements StylesJsonBlueprint<TextStyles.Builder<?>> {
   private final BaseStylesJsonBlueprint baseStylesJsonDefinition = new BaseStylesJsonBlueprint();
 
   @Override
-  public TextStyles.Builder<?> populateStylesBuilderFromJson(TextStyles.Builder<?> stylesBuilder, JsonObject stylesJson) {
-    baseStylesJsonDefinition.populateStylesBuilderFromJson(stylesBuilder, stylesJson);
-
-    stylesJson.forEach((key, value) -> {
-      switch (key) {
-        case "fontAssetId" -> stylesBuilder.setFontAssetId(StylesJsonBlueprintUtils.parseString(value));
-        case "textColor" -> stylesBuilder.setTextColor(StylesJsonBlueprintUtils.parseColor(value));
-      }
-    });
-
-    return stylesBuilder;
+  public void parseStylesJsonValue(TextStyles.Builder<?> stylesBuilder, String propertyKey, JsonElement value) {
+    switch (propertyKey) {
+      case "fontAssetId" -> stylesBuilder.setFontAssetId(StylesJsonBlueprintUtils.parseString(value));
+      case "textColor" -> stylesBuilder.setTextColor(StylesJsonBlueprintUtils.parseColor(value));
+      default -> baseStylesJsonDefinition.parseStylesJsonValue(stylesBuilder, propertyKey, value);
+    }
   }
 }

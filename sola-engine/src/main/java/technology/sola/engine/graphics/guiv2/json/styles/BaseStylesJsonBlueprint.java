@@ -1,24 +1,30 @@
 package technology.sola.engine.graphics.guiv2.json.styles;
 
+import technology.sola.engine.graphics.guiv2.json.exception.UnsupportedStylesPropertyException;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.guiv2.style.property.Visibility;
 import technology.sola.json.JsonElement;
-import technology.sola.json.JsonObject;
 
-/**
- * {@link StylesJsonBlueprint} for populating a {@link BaseStyles.Builder} from a styles {@link JsonObject}.
- */
 public class BaseStylesJsonBlueprint implements StylesJsonBlueprint<BaseStyles.Builder<?>> {
   @Override
-  public BaseStyles.Builder<?> populateStylesBuilderFromJson(BaseStyles.Builder<?> stylesBuilder, JsonObject stylesJson) {
-    stylesJson.forEach((key, value) -> {
-      switch (key) {
-        case "backgroundColor" -> stylesBuilder.setBackgroundColor(StylesJsonBlueprintUtils.parseColor(value));
-        case "visibility" -> stylesBuilder.setVisibility(parseVisibility(value));
-      }
-    });
-
-    return stylesBuilder;
+  public void parseStylesJsonValue(BaseStyles.Builder<?> stylesBuilder, String propertyKey, JsonElement value) {
+    /*
+    //    todo border;
+    //    todo outline;
+    //    todo padding;
+    //    todo width;
+    //    todo height;
+    //
+    //    todo gap;
+    //    todo direction;
+    //    todo mainAxisChildren;
+    //    todo crossAxisChildren;
+     */
+    switch (propertyKey) {
+      case "backgroundColor" -> stylesBuilder.setBackgroundColor(StylesJsonBlueprintUtils.parseColor(value));
+      case "visibility" -> stylesBuilder.setVisibility(parseVisibility(value));
+      default -> throw new UnsupportedStylesPropertyException(propertyKey);
+    }
   }
 
   private Visibility parseVisibility(JsonElement value) {
@@ -35,17 +41,4 @@ public class BaseStylesJsonBlueprint implements StylesJsonBlueprint<BaseStyles.B
       default -> throw new IllegalArgumentException("Unrecognized visibility [" + visibilityString + "]");
     };
   }
-
-  /*
-  //    todo border;
-  //    todo outline;
-  //    todo padding;
-  //    todo width;
-  //    todo height;
-  //
-  //    todo gap;
-  //    todo direction;
-  //    todo mainAxisChildren;
-  //    todo crossAxisChildren;
-   */
 }
