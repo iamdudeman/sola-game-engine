@@ -13,4 +13,19 @@ public class BaseStylesJsonBlueprint implements StylesJsonBlueprint<BaseStyles.B
 
     return stylesBuilder;
   }
+
+  /*
+  //    todo background;
+  //    todo border;
+  //    todo outline;
+  //    todo padding;
+  //    todo width;
+  //    todo height;
+  //    todo visibility;
+  //
+  //    todo gap;
+  //    todo direction;
+  //    todo mainAxisChildren;
+  //    todo crossAxisChildren;
+   */
 }

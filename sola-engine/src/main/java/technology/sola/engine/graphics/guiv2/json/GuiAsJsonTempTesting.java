@@ -22,6 +22,9 @@ public class GuiAsJsonTempTesting {
           "tag": "Text",
           "props": {
             "text": "Hello world"
+          },
+          "styles": {
+            "textColor": "rgb(150, 150, 150)"
           }
         }
       ]
