@@ -132,20 +132,8 @@ public class BaseStyles {
     }
 
     @SuppressWarnings("unchecked")
-    public Self setWidth(StyleValue width) {
-      this.width = width;
-      return (Self) this;
-    }
-
-    @SuppressWarnings("unchecked")
     public Self setHeight(String height) {
       this.height = StyleValue.of(height);
-      return (Self) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    public Self setHeight(StyleValue height) {
-      this.height = height;
       return (Self) this;
     }
 
@@ -200,6 +188,30 @@ public class BaseStyles {
     @SuppressWarnings("unchecked")
     public Self setPaddingHorizontal(String leftRight) {
       padding = new Padding(padding.top(), StyleValue.of(leftRight), padding.bottom(), StyleValue.of(leftRight));
+      return (Self) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Self setPaddingTop(String top) {
+      padding = new Padding(StyleValue.of(top), padding.right(), padding.bottom(), padding.left());
+      return (Self) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Self setPaddingRight(String right) {
+      padding = new Padding(padding.top(), StyleValue.of(right), padding.bottom(), padding.left());
+      return (Self) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Self setPaddingBottom(String bottom) {
+      padding = new Padding(padding.top(), padding.right(), StyleValue.of(bottom), padding.left());
+      return (Self) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Self setPaddingLeft(String left) {
+      padding = new Padding(padding.top(), padding.right(), padding.bottom(), StyleValue.of(left));
       return (Self) this;
     }
   }

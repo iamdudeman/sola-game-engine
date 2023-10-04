@@ -1,7 +1,6 @@
 package technology.sola.engine.graphics.guiv2.json.styles;
 
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.guiv2.style.property.StyleValue;
 import technology.sola.json.JsonElement;
 
 public class StylesJsonBlueprintUtils {
@@ -13,11 +12,11 @@ public class StylesJsonBlueprintUtils {
     return value.isNull() ? null : value.asInt();
   }
 
-  public static StyleValue parseStyleValue(JsonElement value) {
+  public static String parseStyleValueAsString(JsonElement value) {
     return switch (value.getType()) {
-      case LONG -> new StyleValue(value.asInt());
       case NULL -> null;
-      case STRING -> new StyleValue(value.asString());
+      case LONG -> "" + value.asInt();
+      case STRING -> value.asString();
       default -> throw new IllegalArgumentException("Unrecognized StyleValue format [" + value + "]");
     };
   }

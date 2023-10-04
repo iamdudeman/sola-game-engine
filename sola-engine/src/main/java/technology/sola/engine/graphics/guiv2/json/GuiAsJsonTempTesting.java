@@ -24,6 +24,10 @@ public class GuiAsJsonTempTesting {
         "borderColor": "#ff0000",
         "outlineColor": "#0ff000",
         "visibility": "visible",
+        "paddingTop": 10,
+        "paddingRight": 15,
+        "paddingBottom": "20%",
+        "paddingLeft": "28",
         "width": "10%"
       },
       "children": [
@@ -33,7 +37,9 @@ public class GuiAsJsonTempTesting {
             "text": "Hello world"
           },
           "styles": {
-            "textColor": "#aabbccdd"
+            "textColor": "#aabbccdd",
+            "paddingHorizontal": 4,
+            "paddingVertical": "10%"
           }
         }
       ]
