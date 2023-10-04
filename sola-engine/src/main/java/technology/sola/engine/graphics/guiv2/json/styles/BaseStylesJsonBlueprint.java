@@ -2,27 +2,30 @@ package technology.sola.engine.graphics.guiv2.json.styles;
 
 import technology.sola.engine.graphics.guiv2.json.exception.UnsupportedStylesPropertyException;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
-import technology.sola.engine.graphics.guiv2.style.property.CrossAxisChildren;
-import technology.sola.engine.graphics.guiv2.style.property.Direction;
-import technology.sola.engine.graphics.guiv2.style.property.MainAxisChildren;
-import technology.sola.engine.graphics.guiv2.style.property.Visibility;
+import technology.sola.engine.graphics.guiv2.style.property.*;
 import technology.sola.json.JsonElement;
 
 public class BaseStylesJsonBlueprint implements StylesJsonBlueprint<BaseStyles.Builder<?>> {
   @Override
   public void parseStylesJsonValue(BaseStyles.Builder<?> stylesBuilder, String propertyKey, JsonElement value) {
     /*
-    //    todo border;
-    //    todo outline;
     //    todo padding;
+    //    todo paddingHorizontal;
+    //    todo paddingVertical;
+    //    todo paddingTop;
+    //    todo paddingBottom;
+    //    todo paddingLeft;
+    //    todo paddingRight;
      */
     switch (propertyKey) {
       case "backgroundColor" -> stylesBuilder.setBackgroundColor(StylesJsonBlueprintUtils.parseColor(value));
+      case "borderColor" -> stylesBuilder.setBorderColor(StylesJsonBlueprintUtils.parseColor(value));
       case "crossAxisChildren" -> stylesBuilder.setCrossAxisChildren(parseCrossAxisChildren(value));
       case "direction" -> stylesBuilder.setDirection(parseDirection(value));
       case "gap" -> stylesBuilder.setGap(StylesJsonBlueprintUtils.parseInteger(value));
       case "height" -> stylesBuilder.setHeight(StylesJsonBlueprintUtils.parseStyleValue(value));
       case "mainAxisChildren" -> stylesBuilder.setMainAxisChildren(parseMainAxisChildren(value));
+      case "outlineColor" -> stylesBuilder.setOutlineColor(StylesJsonBlueprintUtils.parseColor(value));
       case "visibility" -> stylesBuilder.setVisibility(parseVisibility(value));
       case "width" -> stylesBuilder.setWidth(StylesJsonBlueprintUtils.parseStyleValue(value));
       default -> throw new UnsupportedStylesPropertyException(propertyKey);

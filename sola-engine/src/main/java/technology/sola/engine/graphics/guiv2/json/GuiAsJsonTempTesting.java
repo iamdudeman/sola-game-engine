@@ -21,6 +21,8 @@ public class GuiAsJsonTempTesting {
         "height": 10,
         "mainAxisChildren": "center",
         "crossAxisChildren": "end",
+        "borderColor": "#ff0000",
+        "outlineColor": "#0ff000",
         "visibility": "visible",
         "width": "10%"
       },
