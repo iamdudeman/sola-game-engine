@@ -19,6 +19,8 @@ public class GuiAsJsonTempTesting {
         "direction": "column",
         "gap": 5,
         "height": 10,
+        "mainAxisChildren": "center",
+        "crossAxisChildren": "end",
         "visibility": "visible",
         "width": "10%"
       },
