@@ -12,8 +12,6 @@ public class BaseStylesJsonBlueprint implements StylesJsonBlueprint<BaseStyles.B
     //    todo border;
     //    todo outline;
     //    todo padding;
-    //    todo width;
-    //    todo height;
     //
     //    todo gap;
     //    todo direction;
@@ -22,7 +20,9 @@ public class BaseStylesJsonBlueprint implements StylesJsonBlueprint<BaseStyles.B
      */
     switch (propertyKey) {
       case "backgroundColor" -> stylesBuilder.setBackgroundColor(StylesJsonBlueprintUtils.parseColor(value));
+      case "height" -> stylesBuilder.setHeight(StylesJsonBlueprintUtils.parseStyleValue(value));
       case "visibility" -> stylesBuilder.setVisibility(parseVisibility(value));
+      case "width" -> stylesBuilder.setWidth(StylesJsonBlueprintUtils.parseStyleValue(value));
       default -> throw new UnsupportedStylesPropertyException(propertyKey);
     }
   }

@@ -16,7 +16,9 @@ public class GuiAsJsonTempTesting {
       "tag": "Section",
       "styles": {
         "backgroundColor": "rgb(250, 240, 100)",
-        "visibility": "visible"
+        "height": 10,
+        "visibility": "visible",
+        "width": "10%"
       },
       "children": [
         {
@@ -39,6 +41,7 @@ public class GuiAsJsonTempTesting {
     ));
 
     var result = guiJsonDocumentBuilder.build(jsonObject);
+    var styles = result.rootElement().getStyles();
 
     System.out.println(result);
   }
