@@ -27,7 +27,7 @@ public class StylesJsonBlueprintUtils {
       return null;
     }
 
-    String colorString = value.asString();
+    String colorString = value.asString().toLowerCase();
 
     if (colorString.startsWith("rgb")) {
       String[] parts = colorString.replace("rgb(", "").replace(")", "").split(",");
