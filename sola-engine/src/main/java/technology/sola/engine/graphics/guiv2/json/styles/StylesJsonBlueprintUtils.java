@@ -9,6 +9,10 @@ public class StylesJsonBlueprintUtils {
     return value.isNull() ? null : value.asString();
   }
 
+  public static Integer parseInteger(JsonElement value) {
+    return value.isNull() ? null : value.asInt();
+  }
+
   public static StyleValue parseStyleValue(JsonElement value) {
     return switch (value.getType()) {
       case LONG -> new StyleValue(value.asInt());

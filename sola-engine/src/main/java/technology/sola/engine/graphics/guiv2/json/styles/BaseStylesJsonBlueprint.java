@@ -20,6 +20,7 @@ public class BaseStylesJsonBlueprint implements StylesJsonBlueprint<BaseStyles.B
      */
     switch (propertyKey) {
       case "backgroundColor" -> stylesBuilder.setBackgroundColor(StylesJsonBlueprintUtils.parseColor(value));
+      case "gap" -> stylesBuilder.setGap(StylesJsonBlueprintUtils.parseInteger(value));
       case "height" -> stylesBuilder.setHeight(StylesJsonBlueprintUtils.parseStyleValue(value));
       case "visibility" -> stylesBuilder.setVisibility(parseVisibility(value));
       case "width" -> stylesBuilder.setWidth(StylesJsonBlueprintUtils.parseStyleValue(value));

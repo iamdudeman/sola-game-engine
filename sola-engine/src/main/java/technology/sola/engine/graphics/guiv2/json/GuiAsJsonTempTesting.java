@@ -16,6 +16,7 @@ public class GuiAsJsonTempTesting {
       "tag": "Section",
       "styles": {
         "backgroundColor": "rgb(250, 240, 100)",
+        "gap": 5,
         "height": 10,
         "visibility": "visible",
         "width": "10%"
