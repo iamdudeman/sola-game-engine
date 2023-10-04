@@ -1,6 +1,6 @@
 package technology.sola.engine.graphics.guiv2.json.element;
 
-import technology.sola.engine.graphics.guiv2.json.styles.TextStylesJsonBlueprint;
+import technology.sola.engine.graphics.guiv2.json.styles.TextStylesJsonValueParser;
 import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
 import technology.sola.engine.graphics.guiv2.elements.TextStyles;
 import technology.sola.json.JsonObject;
@@ -13,7 +13,7 @@ public class TextElementJsonBlueprint extends GuiElementJsonBlueprint<TextStyles
    * Creates an instance of this {@link GuiElementJsonBlueprint}.
    */
   public TextElementJsonBlueprint() {
-    super(new TextStylesJsonBlueprint());
+    super(new TextStylesJsonValueParser());
   }
 
   @Override

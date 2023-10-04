@@ -1,6 +1,6 @@
 package technology.sola.engine.graphics.guiv2.json.element;
 
-import technology.sola.engine.graphics.guiv2.json.styles.BaseStylesJsonBlueprint;
+import technology.sola.engine.graphics.guiv2.json.styles.BaseStylesJsonValueParser;
 import technology.sola.engine.graphics.guiv2.elements.SectionGuiElement;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.json.JsonObject;
@@ -13,7 +13,7 @@ public class SectionElementJsonBlueprint extends GuiElementJsonBlueprint<BaseSty
    * Creates an instance of this {@link GuiElementJsonBlueprint}.
    */
   public SectionElementJsonBlueprint() {
-    super(new BaseStylesJsonBlueprint());
+    super(new BaseStylesJsonValueParser());
   }
 
   @Override
