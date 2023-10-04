@@ -9,12 +9,33 @@ public class StylesJsonBlueprintUtils {
   }
 
   public static Color parseColor(JsonElement value) {
-    // todo null
-    // todo rgb
-    // todo argb
-    // todo #00ff00
+    if (value.isNull()) {
+      return null;
+    }
 
-    // todo implement
-    return null;
+    String colorString = value.asString();
+
+    if (colorString.startsWith("rgb")) {
+      String[] parts = colorString.replace("rgb(", "").replace(")", "").split(",");
+
+      return new Color(
+        Integer.parseInt(parts[0].trim()),
+        Integer.parseInt(parts[1].trim()),
+        Integer.parseInt(parts[2].trim())
+      );
+    } else if (colorString.startsWith("argb")) {
+      String[] parts = colorString.replace("argb(", "").replace(")", "").split(",");
+
+      return new Color(
+        Integer.parseInt(parts[0].trim()),
+        Integer.parseInt(parts[1].trim()),
+        Integer.parseInt(parts[2].trim()),
+        Integer.parseInt(parts[3].trim())
+      );
+    } else if (colorString.startsWith("#")) {
+      return new Color(Long.decode(colorString.replace("#", "0x")).intValue());
+    }
+
+    throw new IllegalArgumentException("Unrecognized color format [" + colorString + "]");
   }
 }

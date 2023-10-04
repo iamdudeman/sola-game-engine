@@ -24,7 +24,7 @@ public class GuiAsJsonTempTesting {
             "text": "Hello world"
           },
           "styles": {
-            "textColor": "rgb(150, 150, 150)"
+            "textColor": "#aabbccdd"
           }
         }
       ]

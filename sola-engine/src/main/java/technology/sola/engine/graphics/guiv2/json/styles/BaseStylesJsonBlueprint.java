@@ -3,6 +3,9 @@ package technology.sola.engine.graphics.guiv2.json.styles;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.json.JsonObject;
 
+/**
+ * {@link StylesJsonBlueprint} for populating a {@link BaseStyles.Builder} from a styles {@link JsonObject}.
+ */
 public class BaseStylesJsonBlueprint implements StylesJsonBlueprint<BaseStyles.Builder<?>> {
   @Override
   public BaseStyles.Builder<?> populateStylesBuilderFromJson(BaseStyles.Builder<?> stylesBuilder, JsonObject stylesJson) {
