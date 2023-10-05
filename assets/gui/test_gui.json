@@ -1,7 +1,7 @@
 {
   "tag": "Section",
   "styles": {
-    "backgroundColor": "#000000",
+    "backgroundColor": "#ffffffff",
     "borderColor": "rgb(169, 169, 169)",
     "padding": 10,
     "gap": 10
@@ -11,7 +11,7 @@
       "tag": "Section",
       "styles": {
         "backgroundColor": "argb(255, 0, 0, 255)",
-        "borderColor": "#ff0000",
+        "borderColor": "#ffff0000",
         "height": "50%",
         "gap": 5,
         "paddingHorizontal": 5
@@ -41,7 +41,7 @@
     {
       "tag": "Section",
       "styles": {
-        "backgroundColor": "#00ff00",
+        "backgroundColor": "#ff00ff00",
         "height": 60,
         "padding": "5"
       },
@@ -49,8 +49,8 @@
         {
           "tag": "Section",
           "styles": {
-            "backgroundColor": "#fF0000",
-            "borderColor": "#000000",
+            "backgroundColor": "#ffff0000",
+            "borderColor": "#ff000000",
             "height": "50%"
           }
         }
