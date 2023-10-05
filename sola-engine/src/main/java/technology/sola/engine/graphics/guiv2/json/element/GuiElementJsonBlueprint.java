@@ -17,7 +17,7 @@ public abstract class GuiElementJsonBlueprint<Styles extends BaseStyles, Element
   public Styles createStylesFromJson(JsonObject stylesJson) {
     StylesBuilder stylesBuilder = createStylesBuilder();
 
-    stylesJson.forEach((key, value) -> stylesJsonValueParser.parse(stylesBuilder, key, value));
+    stylesJson.forEach((key, value) -> stylesJsonValueParser.setPropertyFromJson(stylesBuilder, key, value));
 
     return (Styles) stylesBuilder.build();
   }

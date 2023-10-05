@@ -5,9 +5,12 @@ import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.guiv2.style.property.*;
 import technology.sola.json.JsonElement;
 
+/**
+ * A {@link StylesJsonValueParser} implementation for {@link BaseStyles.Builder}.
+ */
 public class BaseStylesJsonValueParser implements StylesJsonValueParser<BaseStyles.Builder<?>> {
   @Override
-  public void parse(BaseStyles.Builder<?> stylesBuilder, String propertyKey, JsonElement value) {
+  public void setPropertyFromJson(BaseStyles.Builder<?> stylesBuilder, String propertyKey, JsonElement value) {
     switch (propertyKey) {
       case "backgroundColor" -> stylesBuilder.setBackgroundColor(StylesJsonBlueprintUtils.parseColor(value));
       case "borderColor" -> stylesBuilder.setBorderColor(StylesJsonBlueprintUtils.parseColor(value));
