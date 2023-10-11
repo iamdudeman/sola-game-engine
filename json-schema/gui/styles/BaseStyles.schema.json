@@ -1,6 +1,6 @@
 {
-  "$id": "/json-schema/styles/BaseStyles.schema.json",
-  "$schema": "https://json-schema.org/draft/-/schema",
+  "$id": "BaseStyles.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "BaseStyles",
   "type": "object",
   "properties": {

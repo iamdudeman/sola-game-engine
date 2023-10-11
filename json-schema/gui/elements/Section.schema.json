@@ -1,6 +1,6 @@
 {
-  "$id": "/json-schema/elements/Section.schema.json",
-  "$schema": "https://json-schema.org/draft/-/schema",
+  "$id": "Section.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "SectionGuiElement",
   "type": "object",
   "allOf": [
