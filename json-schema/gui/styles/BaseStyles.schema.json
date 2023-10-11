@@ -5,8 +5,17 @@
   "type": "object",
   "properties": {
     "backgroundColor": {
+      "$ref": "#/$defs/color",
+      "description": "Background color of the element."
+    },
+    "borderColor": {
+      "$ref": "#/$defs/color",
+      "description": "Border color of the element."
+    }
+  },
+  "$defs": {
+    "color": {
       "type": "string",
-      "description": "Background color of the element.",
       "anyOf": [
         {
           "pattern": "^#[0-9a-f]{6}$"
