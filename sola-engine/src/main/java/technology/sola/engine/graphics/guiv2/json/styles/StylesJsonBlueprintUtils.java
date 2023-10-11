@@ -81,6 +81,11 @@ public class StylesJsonBlueprintUtils {
         Integer.parseInt(parts[3].trim())
       );
     } else if (colorString.startsWith("#")) {
+      // rgb hash
+      if (colorString.length() == 7) {
+        return new Color(Long.decode(colorString.replace("#", "0xff")).intValue());
+      }
+
       return new Color(Long.decode(colorString.replace("#", "0x")).intValue());
     }
 
