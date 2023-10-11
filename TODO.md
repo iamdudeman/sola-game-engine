@@ -1,14 +1,15 @@
 # sola-game-engine TODO list
 
 Rough order
-1. Text or image implementation to prove out layout basics
-2. Load from file implementation (little UI with refresh button from file for easier testing)
+1. ~~Text or image implementation to prove out layout basics~~
+2. ~~Load from file implementation (little UI with refresh button from file for easier testing)~~
 3. Finish hooking up layout properties
+4. Add other GuiElements + json blueprints
 
 Later things
 * when should layout be invalidated (can partial invalidations happen for children/parent)
 * ensure transparency stuff is hooked up properly
-
+* hover properties
 
 * Flex only layouts
     * no margin
@@ -32,11 +33,11 @@ Later things
 * v1 bugs
     * stopping gui mouse event propagation currently isn't hooked up
         * this needs to be added to `GuiElementContainer#handleMouseEvent`
-* SolaGui
-    * Implement a way to load gui stuff from a file
-        * possibly use JSON to define gui structure
-    * A "post load" callback to add event listeners and such
-* v2 later
+* ~~SolaGui~~
+    * ~~Implement a way to load gui stuff from a file~~
+        * ~~possibly use JSON to define gui structure~~
+    * ~~A "post load" callback to add event listeners and such~~
+* gui v2 later
     * absolute positioning
     * space-between, space-around, space-evenly
 
