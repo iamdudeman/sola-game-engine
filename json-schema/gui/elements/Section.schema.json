@@ -1,0 +1,20 @@
+{
+  "$id": "/json-schema/elements/Section.schema.json",
+  "$schema": "https://json-schema.org/draft/-/schema",
+  "title": "SectionGuiElement",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../GuiElement.schema.json"
+    }
+  ],
+  "properties": {
+    "tag": {
+      "type": "string",
+      "description": "The tag of the element.",
+      "enum": [
+        "Section"
+      ]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$id": "/json-schema/GuiDocument",
+  "$schema": "https://json-schema.org/draft/-/schema",
+  "title": "GuiDocument",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "/elements/Section.schema.json"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "$id": "Section.schema.json",
+  "$schema": "https://json-schema.org/draft/-/schema",
+  "title": "GuiElement",
+  "type": "object",
+  "properties": {
+    "tag": {
+      "type": "string",
+      "description": "The tag of the element."
+    },
+    "props": {
+      "type": "object",
+      "description": "Properties of the element."
+    },
+    "styles": {
+      "description": "The styles of the element.",
+      "$ref": "/styles/BaseStyles.schema.json"
+    },
+    "children": {
+      "type": "array",
+      "description": "Array of children elements.",
+      "items": {
+        "$ref": "Section.schema.json"
+      }
+    }
+  }
+}

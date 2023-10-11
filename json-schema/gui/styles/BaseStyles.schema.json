@@ -1,0 +1,26 @@
+{
+  "$id": "/json-schema/styles/BaseStyles.schema.json",
+  "$schema": "https://json-schema.org/draft/-/schema",
+  "title": "BaseStyles",
+  "type": "object",
+  "properties": {
+    "backgroundColor": {
+      "type": "string",
+      "description": "Background color of the element.",
+      "anyOf": [
+        {
+          "pattern": "^#[0-9a-f]{6}$"
+        },
+        {
+          "pattern": "^#[0-9a-f]{8}$"
+        },
+        {
+          "pattern": "^rgb\\((\\W*\\d{1,3},){2}\\W*\\d{1,3}\\W*\\)$"
+        },
+        {
+          "pattern": "^argb\\((\\W*\\d{1,3},){3}\\W*\\d{1,3}\\W*\\)$"
+        }
+      ]
+    }
+  }
+}

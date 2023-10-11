@@ -50,6 +50,7 @@ public class StylesJsonBlueprintUtils {
    * <ul>
    *   <li><pre>rgb(int, int, int)</pre></li>
    *   <li><pre>argb(int, int, int, int)</pre></li>
+   *   <li><pre>#rrggbb</pre></li>
    *   <li><pre>#aarrggbb</pre></li>
    * </ul>
    *
