@@ -3,9 +3,11 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "BaseStyles",
   "type": "object",
-  "allOf": {
-    "$ref": "./BaseStyles.schema.json"
-  },
+  "allOf": [
+    {
+      "$ref": "./BaseStyles.schema.json"
+    }
+  ],
   "properties": {
     "fontAssetId": {
       "type": "string",
