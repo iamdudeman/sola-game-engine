@@ -12,6 +12,10 @@
     "fontAssetId": {
       "type": "string",
       "description": "The asset id for the Font."
+    },
+    "textColor": {
+      "$ref": "./BaseStyles.schema.json#/$defs/color",
+      "description": "The color of the rendered text."
     }
   }
 }
