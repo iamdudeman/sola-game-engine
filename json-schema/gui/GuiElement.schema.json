@@ -3,25 +3,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "GuiElement",
   "type": "object",
-  "properties": {
-    "tag": {
-      "type": "string",
-      "description": "The tag of the element."
+  "oneOf": [
+    {
+      "$ref": "/elements/Section.schema.json"
     },
-    "props": {
-      "type": "object",
-      "description": "Properties of the element."
-    },
-    "styles": {
-      "description": "The styles of the element.",
-      "$ref": "/styles/BaseStyles.schema.json"
-    },
-    "children": {
-      "type": "array",
-      "description": "Array of children elements.",
-      "items": {
-        "$ref": "#"
-      }
+    {
+      "$ref": "/elements/Text.schema.json"
     }
-  }
+  ]
 }

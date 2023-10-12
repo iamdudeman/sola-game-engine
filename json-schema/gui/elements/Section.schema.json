@@ -10,6 +10,12 @@
     },
     "styles": {
       "$ref": "../styles/BaseStyles.schema.json"
+    },
+    "children": {
+      "type": "array",
+      "items": {
+        "$ref": "../GuiElement.schema.json"
+      }
     }
   }
 }
