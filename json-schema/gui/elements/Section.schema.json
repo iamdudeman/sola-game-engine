@@ -3,18 +3,13 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "SectionGuiElement",
   "type": "object",
-  "allOf": [
-    {
-      "$ref": "../GuiElement.schema.json"
-    }
-  ],
   "properties": {
     "tag": {
-      "type": "string",
-      "description": "The tag of the element.",
-      "enum": [
-        "Section"
-      ]
+      "const": "Section",
+      "description": "The tag of the element."
+    },
+    "styles": {
+      "$ref": "../styles/BaseStyles.schema.json"
     }
   }
 }

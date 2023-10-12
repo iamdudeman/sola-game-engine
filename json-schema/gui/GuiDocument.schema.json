@@ -3,9 +3,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "GuiDocument",
   "type": "object",
-  "allOf": [
+  "oneOf": [
     {
       "$ref": "/elements/Section.schema.json"
+    },
+    {
+      "$ref": "/elements/Text.schema.json"
     }
   ]
 }

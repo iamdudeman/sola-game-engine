@@ -1,0 +1,15 @@
+{
+  "$id": "BaseStyles.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BaseStyles",
+  "type": "object",
+  "allOf": {
+    "$ref": "./BaseStyles.schema.json"
+  },
+  "properties": {
+    "fontAssetId": {
+      "type": "string",
+      "description": "The asset id for the Font."
+    }
+  }
+}
