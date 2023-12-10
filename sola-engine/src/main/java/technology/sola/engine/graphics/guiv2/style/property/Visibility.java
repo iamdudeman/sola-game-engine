@@ -1,7 +1,7 @@
 package technology.sola.engine.graphics.guiv2.style.property;
 
 /**
- * Visibility contains options for element rendering that do not change layout.
+ * Visibility contains options for element rendering.
  */
 public enum Visibility {
   /**

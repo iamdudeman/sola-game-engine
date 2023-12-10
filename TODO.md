@@ -56,6 +56,8 @@ Later things
 
 ## TODO List
 
+* update to Java 21
+    * teavm 0.9.0 has support
 * JSON schema files for
     * GuiV2 stuff
     * font stuff
