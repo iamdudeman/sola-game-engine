@@ -11,12 +11,16 @@ public class VerticalBoxGuiLayout extends GuiLayout<VerticalBoxStyles> {
 
   @Override
   public void renderContent(Renderer renderer) {
-
+    for (var child : children) {
+      child.render(renderer);
+    }
   }
 
   @Override
   public void onRecalculateLayout() {
-
+    if (isLayoutChanged()) {
+      // todo
+    }
   }
 
   public VerticalBoxGuiLayout addChild(GuiElement<?> child) {

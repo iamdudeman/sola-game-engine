@@ -19,9 +19,13 @@ public class BaseStyles {
   private final StyleValue height;
   private final Visibility visibility;
 
+  @Deprecated
   private final Integer gap;
+  @Deprecated
   private final Direction direction;
+  @Deprecated
   private final MainAxisChildren mainAxisChildren;
+  @Deprecated
   private final CrossAxisChildren crossAxisChildren;
 
   public BaseStyles(Builder<?> builder) {

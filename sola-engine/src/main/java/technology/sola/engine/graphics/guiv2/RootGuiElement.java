@@ -7,6 +7,7 @@ import technology.sola.engine.graphics.renderer.Renderer;
 class RootGuiElement extends GuiElement<BaseStyles> {
   private final GuiDocument guiDocument;
   private final AssetLoaderProvider assetLoaderProvider;
+  private GuiElement<?> element;
 
   RootGuiElement(GuiDocument guiDocument, AssetLoaderProvider assetLoaderProvider, int width, int height) {
     this.guiDocument = guiDocument;
@@ -15,9 +16,14 @@ class RootGuiElement extends GuiElement<BaseStyles> {
     contentBounds = bounds;
   }
 
+  public void setElement(GuiElement<?> element) {
+    this.element = element;
+    element.setParent(this);
+  }
+
   @Override
   public void renderContent(Renderer renderer) {
-    renderChildren(renderer);
+    element.render(renderer);
   }
 
   @Override

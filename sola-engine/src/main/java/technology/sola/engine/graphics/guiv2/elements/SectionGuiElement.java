@@ -4,6 +4,7 @@ import technology.sola.engine.graphics.guiv2.GuiElement;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.renderer.Renderer;
 
+@Deprecated
 public class SectionGuiElement extends GuiElement<BaseStyles> {
   public SectionGuiElement(BaseStyles... styles) {
     super(styles);

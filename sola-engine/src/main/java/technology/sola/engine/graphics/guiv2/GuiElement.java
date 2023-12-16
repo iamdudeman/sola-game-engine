@@ -8,6 +8,7 @@ import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.guiv2.style.StyleContainer;
 import technology.sola.engine.graphics.guiv2.style.property.Background;
 import technology.sola.engine.graphics.guiv2.style.property.Border;
+import technology.sola.engine.graphics.guiv2.style.property.Padding;
 import technology.sola.engine.graphics.guiv2.style.property.Visibility;
 import technology.sola.engine.graphics.renderer.Renderer;
 
@@ -28,8 +29,12 @@ public abstract class GuiElement<Style extends BaseStyles> {
   boolean isLayoutChanged;
   private GuiElement<?> parent;
   private final GuiElementEvents events = new GuiElementEvents();
-  private int x;
-  private int y;
+
+  // todo is this needed
+  public void setParent(GuiElement<?> parent) {
+    this.parent = parent;
+  }
+
 
   @SafeVarargs
   public GuiElement(Style... styles) {
@@ -84,6 +89,40 @@ public abstract class GuiElement<Style extends BaseStyles> {
     }
 
     renderContent(renderer);
+  }
+
+  public void setBounds(GuiElementBounds bounds) {
+    this.bounds = bounds;
+
+    var styleContainer = getStyles();
+    var parent = getParent();
+    var parentWidth = parent.getContentBounds().width();
+    var parentHeight = parent.getContentBounds().height();
+
+    Border border = styleContainer.getPropertyValue(BaseStyles::border, Border.NONE);
+    Padding padding = styleContainer.getPropertyValue(BaseStyles::padding, Padding.NONE);
+
+    this.contentBounds = new GuiElementBounds(
+      bounds.x() + border.left() + padding.left().getValue(parentWidth),
+      bounds.y() + border.top() + padding.top().getValue(parentHeight),
+      bounds.width() - (border.left() + border.right() + padding.left().getValue(parentWidth) + padding.right().getValue(parentWidth)),
+      bounds.height() - (border.top() + border.bottom() + padding.top().getValue(parentHeight) + padding.bottom().getValue(parentHeight))
+    );
+  }
+
+  public void setContentBounds(GuiElementBounds contentBounds) {
+    this.contentBounds = contentBounds;
+
+    Border border = getStyles().getPropertyValue(BaseStyles::border, Border.NONE);
+    Padding padding = getStyles().getPropertyValue(BaseStyles::padding, Padding.NONE);
+    GuiElementBounds parentContentBounds = getParent().getContentBounds();
+
+    this.bounds = new GuiElementBounds(
+      contentBounds.x() - border.left() - padding.left().getValue(parentContentBounds.width()),
+      contentBounds.y() - border.top() - padding.top().getValue(parentContentBounds.height()),
+      contentBounds.width() + border.left() + border.right() + padding.left().getValue(parentContentBounds.width()) + padding.right().getValue(parentContentBounds.width()),
+      contentBounds.height() + border.top() + border.bottom() + padding.top().getValue(parentContentBounds.height()) + padding.bottom().getValue(parentContentBounds.height())
+    );
   }
 
   public boolean isFocussed() {
@@ -141,6 +180,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     isLayoutChanged = true;
   }
 
+  @Deprecated
   protected void renderChildren(Renderer renderer) {
     children.forEach(child -> child.render(renderer));
   }

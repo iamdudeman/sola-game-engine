@@ -7,8 +7,7 @@ import technology.sola.engine.graphics.guiv2.style.property.StyleValue;
 
 class LayoutUtil {
   static void rebuildLayout(GuiElement<?> guiElement, int x, int y) {
-    guiElement.bounds = calculateMaxBounds(guiElement, x, y);
-    guiElement.contentBounds = calculateContentBounds(guiElement);
+    guiElement.setBounds(calculateMaxBounds(guiElement, x, y));
 
     Dimensions childDimensions = calculateChildDimensionsForElement(guiElement);
 
@@ -96,26 +95,7 @@ class LayoutUtil {
       newHeight = childDimensions.height() + border.top() + border.bottom() + padding.bottom().getValue(parentHeight);
     }
 
-    guiElement.bounds = guiElement.bounds.setDimensions(newWidth, newHeight);
-    guiElement.contentBounds = calculateContentBounds(guiElement);
-  }
-
-  private static GuiElementBounds calculateContentBounds(GuiElement<?> guiElement) {
-    var styleContainer = guiElement.getStyles();
-    var parent = guiElement.getParent();
-    var bounds = guiElement.getBounds();
-    var parentWidth = parent.getContentBounds().width();
-    var parentHeight = parent.getContentBounds().height();
-
-    Border border = styleContainer.getPropertyValue(BaseStyles::border, Border.NONE);
-    Padding padding = styleContainer.getPropertyValue(BaseStyles::padding, Padding.NONE);
-
-    return new GuiElementBounds(
-      bounds.x() + border.left() + padding.left().getValue(parentWidth),
-      bounds.y() + border.top() + padding.top().getValue(parentHeight),
-      bounds.width() - (border.left() + border.right() + padding.left().getValue(parentWidth) + padding.right().getValue(parentWidth)),
-      bounds.height() - (border.top() + border.bottom() + padding.top().getValue(parentHeight) + padding.bottom().getValue(parentHeight))
-    );
+    guiElement.setBounds(guiElement.bounds.setDimensions(newWidth, newHeight));
   }
 
   private record Dimensions(int width, int height) {

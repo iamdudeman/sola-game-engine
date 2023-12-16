@@ -36,23 +36,13 @@ public class TextGuiElement extends GuiElementWithoutChildren<TextStyles> {
 
       if (text == null) {
         // todo this is only true if "align self" was set to "flex-start"
-        contentBounds = contentBounds.setDimensions(0, 0);
+        setContentBounds(contentBounds.setDimensions(0, 0));
       } else {
         var textDimensions = font.getDimensionsForText(text);
 
         // todo this is only true if "align self" was set to "flex-start"
-        contentBounds = contentBounds.setDimensions(textDimensions.width(), textDimensions.height());
+        setContentBounds(contentBounds.setDimensions(textDimensions.width(), textDimensions.height()));
       }
-
-      Border border = getStyles().getPropertyValue(TextStyles::border, Border.NONE);
-      Padding padding = getStyles().getPropertyValue(TextStyles::padding, Padding.NONE);
-
-      bounds = new GuiElementBounds(
-        contentBounds.x() - border.left() - padding.left().getValue(getParent().getContentBounds().width()),
-        contentBounds.y() - border.top() - padding.top().getValue(getParent().getContentBounds().height()),
-        contentBounds.width() + border.left() + border.right() + padding.left().getValue(getParent().getContentBounds().width()) + padding.right().getValue(getParent().getContentBounds().width()),
-        contentBounds.height() + border.top() + border.bottom() + padding.top().getValue(getParent().getContentBounds().height()) + padding.bottom().getValue(getParent().getContentBounds().height())
-      );
     });
   }
 

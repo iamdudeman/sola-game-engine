@@ -9,7 +9,7 @@ import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 
 public class GuiDocument {
-  private final GuiElement<?> root;
+  private final RootGuiElement root;
   private GuiElement<?> focussedElement;
 
   public GuiDocument(SolaPlatform platform, AssetLoaderProvider assetLoaderProvider) {
@@ -24,8 +24,8 @@ public class GuiDocument {
     platform.onMouseReleased(this::onMouseReleased);
   }
 
-  public GuiElement<?> getRoot() {
-    return root;
+  public void setRootElement(GuiElement<?> element) {
+    root.setElement(element);
   }
 
   public boolean isFocussed(GuiElement<?> guiElement) {
