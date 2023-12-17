@@ -3,13 +3,10 @@ package technology.sola.engine.graphics.guiv2.elements;
 import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.guiv2.GuiElementBounds;
-import technology.sola.engine.graphics.guiv2.GuiElementWithoutChildren;
-import technology.sola.engine.graphics.guiv2.style.property.Border;
-import technology.sola.engine.graphics.guiv2.style.property.Padding;
+import technology.sola.engine.graphics.guiv2.GuiElement;
 import technology.sola.engine.graphics.renderer.Renderer;
 
-public class TextGuiElement extends GuiElementWithoutChildren<TextStyles> {
+public class TextGuiElement extends GuiElement<TextStyles> {
   private String text;
   private Font font;
 
