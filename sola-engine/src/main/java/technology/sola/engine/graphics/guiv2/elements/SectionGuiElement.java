@@ -16,6 +16,6 @@ public class SectionGuiElement extends GuiElement<BaseStyles> {
 
   @Override
   public void onRecalculateLayout() {
-
+    // Nothing to do
   }
 }

@@ -3,8 +3,8 @@ package technology.sola.engine.graphics.guiv2.style.property;
 import java.util.Objects;
 
 public class StyleValue {
-  public static final StyleValue AUTO = new StyleValue(-1);
   public static final StyleValue ZERO = new StyleValue(0);
+  public static final StyleValue FULL = new StyleValue("100%");
   private final boolean isPercentage;
   private Integer pixelValue;
   private Float percentageValue;

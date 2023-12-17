@@ -4,7 +4,9 @@ Rough order
 1. ~~Text or image implementation to prove out layout basics~~
 2. ~~Load from file implementation (little UI with refresh button from file for easier testing)~~
 3. Finish hooking up layout properties
-4. Add other GuiElements + json blueprints
+4. Implement "absolute" positioning where it is relative to parent but otherwise excluded from layout
+5. Switch events to have each child check if it "captures" the event (needed for absolute positioning)
+6. Add other GuiElements + json blueprints
 
 Later things
 * when should layout be invalidated (can partial invalidations happen for children/parent)

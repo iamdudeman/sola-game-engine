@@ -28,6 +28,8 @@ public class TextGuiElement extends GuiElement<TextStyles> {
   public void onRecalculateLayout() {
     String fontAssetId = getStyles().getPropertyValue(TextStyles::fontAssetId, DefaultFont.ASSET_ID);
 
+    // todo handle multiple lines and text wrapping
+
     getAssetLoaderProvider().get(Font.class).get(fontAssetId).executeWhenLoaded(font -> {
       this.font = font;
 
