@@ -30,12 +30,6 @@ public abstract class GuiElement<Style extends BaseStyles> {
   private GuiElement<?> parent;
   private final GuiElementEvents events = new GuiElementEvents();
 
-  // todo is this needed
-  public void setParent(GuiElement<?> parent) {
-    this.parent = parent;
-  }
-
-
   @SafeVarargs
   public GuiElement(Style... styles) {
     styleContainer = new StyleContainer<>();
@@ -180,9 +174,10 @@ public abstract class GuiElement<Style extends BaseStyles> {
     isLayoutChanged = true;
   }
 
-  @Deprecated
   protected void renderChildren(Renderer renderer) {
-    children.forEach(child -> child.render(renderer));
+    for (var child : children) {
+      child.render(renderer);
+    }
   }
 
   protected AssetLoaderProvider getAssetLoaderProvider() {

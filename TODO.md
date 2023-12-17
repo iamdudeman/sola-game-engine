@@ -10,6 +10,7 @@ Later things
 * when should layout be invalidated (can partial invalidations happen for children/parent)
 * ensure transparency stuff is hooked up properly
 * hover properties
+* "active" properties (apply style when clicking for example)
 
 * Flex only layouts
     * no margin

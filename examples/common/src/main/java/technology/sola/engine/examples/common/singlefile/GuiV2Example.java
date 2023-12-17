@@ -54,7 +54,7 @@ public class GuiV2Example extends SolaWithDefaults {
     assetLoaderProvider.get(GuiJsonDocument.class).getNewAsset("test-gui", "assets/gui/test_gui2.json")
       .executeWhenLoaded(guiJsonDocument -> {
 
-        guiDocument.setRootElement(guiJsonDocument.rootElement());
+        guiDocument.getRoot().appendChildren(guiJsonDocument.rootElement());
 
         completeAsyncInit.run();
       });

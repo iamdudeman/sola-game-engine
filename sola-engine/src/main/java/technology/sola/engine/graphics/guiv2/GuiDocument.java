@@ -24,8 +24,8 @@ public class GuiDocument {
     platform.onMouseReleased(this::onMouseReleased);
   }
 
-  public void setRootElement(GuiElement<?> element) {
-    root.setElement(element);
+  public GuiElement<?> getRoot() {
+    return root;
   }
 
   public boolean isFocussed(GuiElement<?> guiElement) {
