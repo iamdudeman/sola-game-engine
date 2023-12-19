@@ -55,32 +55,39 @@
       "description": "Outline color of the element when it has focus."
     },
     "padding": {
-      "$ref": "#/$defs/styleValue",
-      "description": "The top, right, bottom and left padding of the element."
+      "type": "integer",
+      "description": "The top, right, bottom and left padding of the element.",
+      "minimum": 0
     },
     "paddingBottom": {
-      "$ref": "#/$defs/styleValue",
-      "description": "The bottom padding of the element."
+      "type": "integer",
+      "description": "The bottom padding of the element.",
+      "minimum": 0
     },
     "paddingHorizontal": {
-      "$ref": "#/$defs/styleValue",
-      "description": "The right and left padding of the element."
+      "type": "integer",
+      "description": "The right and left padding of the element.",
+      "minimum": 0
     },
     "paddingLeft": {
-      "$ref": "#/$defs/styleValue",
-      "description": "The left padding of the element."
+      "type": "integer",
+      "description": "The left padding of the element.",
+      "minimum": 0
     },
     "paddingRight": {
-      "$ref": "#/$defs/styleValue",
-      "description": "The right padding of the element."
+      "type": "integer",
+      "description": "The right padding of the element.",
+      "minimum": 0
     },
     "paddingTop": {
-      "$ref": "#/$defs/styleValue",
-      "description": "The top padding of the element."
+      "type": "integer",
+      "description": "The top padding of the element.",
+      "minimum": 0
     },
     "paddingVertical": {
-      "$ref": "#/$defs/styleValue",
-      "description": "The top and bottom padding of the element."
+      "type": "integer",
+      "description": "The top and bottom padding of the element.",
+      "minimum": 0
     },
     "visibility": {
       "type": "string",

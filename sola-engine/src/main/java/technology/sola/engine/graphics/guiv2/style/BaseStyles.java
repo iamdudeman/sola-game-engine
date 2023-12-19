@@ -168,50 +168,50 @@ public class BaseStyles {
     }
 
     @SuppressWarnings("unchecked")
-    public Self setPadding(String top, String right, String bottom, String left) {
+    public Self setPadding(Integer top, Integer right, Integer bottom, Integer left) {
       padding = new Padding(top, right, bottom, left);
       return (Self) this;
     }
 
     @SuppressWarnings("unchecked")
-    public Self setPadding(String size) {
+    public Self setPadding(Integer size) {
       padding = new Padding(size);
       return (Self) this;
     }
 
     @SuppressWarnings("unchecked")
-    public Self setPaddingVertical(String topBottom) {
-      padding = new Padding(StyleValue.of(topBottom), padding.left(), StyleValue.of(topBottom), padding.right());
+    public Self setPaddingVertical(Integer topBottom) {
+      padding = new Padding(topBottom, padding.left(), topBottom, padding.right());
       return (Self) this;
     }
 
     @SuppressWarnings("unchecked")
-    public Self setPaddingHorizontal(String leftRight) {
-      padding = new Padding(padding.top(), StyleValue.of(leftRight), padding.bottom(), StyleValue.of(leftRight));
+    public Self setPaddingHorizontal(Integer leftRight) {
+      padding = new Padding(padding.top(), leftRight, padding.bottom(), leftRight);
       return (Self) this;
     }
 
     @SuppressWarnings("unchecked")
-    public Self setPaddingTop(String top) {
-      padding = new Padding(StyleValue.of(top), padding.right(), padding.bottom(), padding.left());
+    public Self setPaddingTop(Integer top) {
+      padding = new Padding(top, padding.right(), padding.bottom(), padding.left());
       return (Self) this;
     }
 
     @SuppressWarnings("unchecked")
-    public Self setPaddingRight(String right) {
-      padding = new Padding(padding.top(), StyleValue.of(right), padding.bottom(), padding.left());
+    public Self setPaddingRight(Integer right) {
+      padding = new Padding(padding.top(), right, padding.bottom(), padding.left());
       return (Self) this;
     }
 
     @SuppressWarnings("unchecked")
-    public Self setPaddingBottom(String bottom) {
-      padding = new Padding(padding.top(), padding.right(), StyleValue.of(bottom), padding.left());
+    public Self setPaddingBottom(Integer bottom) {
+      padding = new Padding(padding.top(), padding.right(), bottom, padding.left());
       return (Self) this;
     }
 
     @SuppressWarnings("unchecked")
-    public Self setPaddingLeft(String left) {
-      padding = new Padding(padding.top(), padding.right(), padding.bottom(), StyleValue.of(left));
+    public Self setPaddingLeft(Integer left) {
+      padding = new Padding(padding.top(), padding.right(), padding.bottom(), left);
       return (Self) this;
     }
   }

@@ -43,7 +43,7 @@
       "styles": {
         "backgroundColor": "#ff00ff00",
         "height": 60,
-        "padding": "5"
+        "padding": 5
       },
       "children": [
         {

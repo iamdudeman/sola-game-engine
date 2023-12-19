@@ -11,7 +11,8 @@ class RootGuiElement extends GuiElement<BaseStyles> {
   RootGuiElement(GuiDocument guiDocument, AssetLoaderProvider assetLoaderProvider, int width, int height) {
     this.guiDocument = guiDocument;
     this.assetLoaderProvider = assetLoaderProvider;
-    bounds = new GuiElementBounds(0, 0, width, height);
+    boundConstraints = new GuiElementBounds(0, 0, width, height);
+    bounds = boundConstraints;
     contentBounds = bounds;
   }
 
@@ -21,18 +22,8 @@ class RootGuiElement extends GuiElement<BaseStyles> {
   }
 
   @Override
-  public void onRecalculateLayout() {
-    // Nothing to do
-  }
-
-  @Override
   GuiDocument getGuiDocument() {
     return guiDocument;
-  }
-
-  @Override
-  public boolean isLayoutChanged() {
-    return false;
   }
 
   @Override
