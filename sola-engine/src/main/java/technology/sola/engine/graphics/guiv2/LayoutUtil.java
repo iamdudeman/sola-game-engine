@@ -2,10 +2,10 @@ package technology.sola.engine.graphics.guiv2;
 
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.guiv2.style.property.Border;
+import technology.sola.engine.graphics.guiv2.style.property.Direction;
 import technology.sola.engine.graphics.guiv2.style.property.Padding;
 import technology.sola.engine.graphics.guiv2.style.property.StyleValue;
 
-// todo Direction
 // todo main and cross axis alignment
 // todo absolute positioning
 
@@ -18,17 +18,31 @@ class LayoutUtil {
     int xOffset = x;
     int yOffset = y;
 
-    int gap = guiElement.getStyles().getPropertyValue(BaseStyles::gap, 0);
+    var styles = guiElement.getStyles();
 
-    for (GuiElement<?> child : guiElement.children) {
+    Direction direction = styles.getPropertyValue(BaseStyles::direction, Direction.COLUMN);
+    int gap = styles.getPropertyValue(BaseStyles::gap, 0);
+
+    int startIndex = switch (direction) {
+      case ROW, COLUMN -> 0;
+      case ROW_REVERSE, COLUMN_REVERSE -> guiElement.children.size() - 1;
+    };
+
+    for (int i = 0; i < guiElement.children.size(); i++) {
+      int index = startIndex > 0 ? startIndex - i : i;
+      GuiElement<?> child = guiElement.children.get(index);
+
       child.boundConstraints = recalculateBoundConstraints(child, xOffset, yOffset);
-      System.out.println(child.boundConstraints);
+
       rebuildLayout(child);
+
       child.setBounds(child.calculateBounds(child.boundConstraints));
 
-      int childHeight = child.getBounds().height();
-
-      yOffset += childHeight + gap;
+      if (direction == Direction.COLUMN || direction == Direction.COLUMN_REVERSE) {
+        yOffset += child.getBounds().height() + gap;
+      } else {
+        xOffset += child.getBounds().width() + gap;
+      }
     }
   }
 
