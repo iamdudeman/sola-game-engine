@@ -64,10 +64,9 @@ class LayoutUtil {
           case END -> child.boundConstraints.width() - usedWidth;
         };
         int yAlignment = switch (crossAxisChildren) {
-          case START -> 0;
+          case START, STRETCH -> 0;
           case CENTER -> (child.boundConstraints.height() - child.bounds.height()) / 2;
           case END -> child.boundConstraints.height() - child.bounds.height();
-          default -> throw new IllegalStateException("Unexpected value: " + mainAxisChildren);
         };
 
         int newX = child.bounds.x();
@@ -82,6 +81,10 @@ class LayoutUtil {
         }
 
         child.setBounds(child.bounds.setPosition(newX, newY));
+
+        if (crossAxisChildren == CrossAxisChildren.STRETCH) {
+          child.setBounds(child.bounds.setDimensions(child.bounds.width(), child.boundConstraints.height()));
+        }
       }
     }
   }
