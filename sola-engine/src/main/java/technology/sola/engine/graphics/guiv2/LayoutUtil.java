@@ -1,16 +1,12 @@
 package technology.sola.engine.graphics.guiv2;
 
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
-import technology.sola.engine.graphics.guiv2.style.property.Border;
-import technology.sola.engine.graphics.guiv2.style.property.Direction;
-import technology.sola.engine.graphics.guiv2.style.property.Padding;
-import technology.sola.engine.graphics.guiv2.style.property.StyleValue;
+import technology.sola.engine.graphics.guiv2.style.property.*;
 
-// todo main and cross axis alignment
+// todo cross axis alignment
 // todo absolute positioning
 
 class LayoutUtil {
-  // todo should depend on direction and such
   static void rebuildLayout(GuiElement<?> guiElement) {
     int x = guiElement.boundConstraints.x();
     int y = guiElement.boundConstraints.y();
@@ -28,6 +24,9 @@ class LayoutUtil {
       case ROW_REVERSE, COLUMN_REVERSE -> guiElement.children.size() - 1;
     };
 
+    int usedWidth = 0;
+    int usedHeight = 0;
+
     for (int i = 0; i < guiElement.children.size(); i++) {
       int index = startIndex > 0 ? startIndex - i : i;
       GuiElement<?> child = guiElement.children.get(index);
@@ -38,10 +37,36 @@ class LayoutUtil {
 
       child.setBounds(child.calculateBounds(child.boundConstraints));
 
-      if (direction == Direction.COLUMN || direction == Direction.COLUMN_REVERSE) {
-        yOffset += child.getBounds().height() + gap;
-      } else {
-        xOffset += child.getBounds().width() + gap;
+      switch (direction) {
+        case COLUMN:
+        case COLUMN_REVERSE:
+          yOffset += child.getBounds().height() + gap;
+          usedHeight = yOffset;
+          break;
+        case ROW:
+        case ROW_REVERSE:
+          xOffset += child.getBounds().width() + gap;
+          usedWidth = xOffset;
+          break;
+      }
+    }
+
+    var mainAxisChildren = styles.getPropertyValue(BaseStyles::mainAxisChildren, MainAxisChildren.START);
+
+    if (mainAxisChildren != MainAxisChildren.START) {
+      for (int i = 0; i < guiElement.children.size(); i++) {
+        int index = startIndex > 0 ? startIndex - i : i;
+        GuiElement<?> child = guiElement.children.get(index);
+
+        int spaceToMove = switch (mainAxisChildren) {
+          case CENTER -> (child.boundConstraints.width() - usedWidth) / 2;
+          case END -> child.boundConstraints.width() - usedWidth;
+          default -> throw new IllegalStateException("Unexpected value: " + mainAxisChildren);
+        };
+
+        if (spaceToMove > 0) {
+          child.setBounds(child.bounds.setPosition(child.bounds.x() + spaceToMove, child.bounds.y()));
+        }
       }
     }
   }
