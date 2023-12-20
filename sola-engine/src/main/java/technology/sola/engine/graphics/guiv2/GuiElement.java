@@ -61,7 +61,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
   public void render(Renderer renderer) {
     recalculateLayout();
 
-    if (styleContainer.getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE) == Visibility.HIDDEN) {
+    if (styleContainer.getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE) != Visibility.VISIBLE) {
       return;
     }
 

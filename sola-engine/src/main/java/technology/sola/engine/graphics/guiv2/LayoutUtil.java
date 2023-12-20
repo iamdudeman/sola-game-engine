@@ -4,10 +4,19 @@ import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.guiv2.style.property.*;
 
 // todo absolute positioning
-// todo visibility none + visibility hidden
 
 class LayoutUtil {
   static void rebuildLayout(GuiElement<?> guiElement) {
+    Visibility visibility = guiElement.getStyles().getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE);
+
+    // If no visibility then clear out all bounds so no layout space is taken
+    if (visibility == Visibility.NONE) {
+      guiElement.boundConstraints = new GuiElementBounds(0, 0, 0, 0);
+      guiElement.bounds = guiElement.boundConstraints;
+      guiElement.contentBounds = guiElement.bounds;
+      return;
+    }
+
     int x = guiElement.boundConstraints.x();
     int y = guiElement.boundConstraints.y();
 
