@@ -10,6 +10,7 @@ Rough order
 7. Make a "cookbook" to play around with properties and elements
 
 Later things
+* maybe put default style values in a common place?
 * when should layout be invalidated (can partial invalidations happen for children/parent)
 * ensure transparency stuff is hooked up properly
 * hover properties
