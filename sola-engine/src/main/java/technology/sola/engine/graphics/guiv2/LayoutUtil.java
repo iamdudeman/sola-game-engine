@@ -3,8 +3,6 @@ package technology.sola.engine.graphics.guiv2;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.guiv2.style.property.*;
 
-// todo absolute positioning
-
 class LayoutUtil {
   static void rebuildLayout(GuiElement<?> guiElement) {
     Visibility visibility = guiElement.getStyles().getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE);
@@ -44,17 +42,26 @@ class LayoutUtil {
 
       child.setBounds(child.calculateBounds(child.boundConstraints));
 
-      switch (direction) {
-        case COLUMN:
-        case COLUMN_REVERSE:
-          yOffset += child.getBounds().height() + gap;
-          usedHeightAccumulator = yOffset;
-          break;
-        case ROW:
-        case ROW_REVERSE:
-          xOffset += child.getBounds().width() + gap;
-          usedWidthAccumulator = xOffset;
-          break;
+      var position = child.getStyles().getPropertyValue(BaseStyles::position, Position.NONE);
+
+      if (position.isAbsolute()) {
+        int absoluteX = position.x() == null ? child.bounds.x() : position.x().getValue(child.boundConstraints.x() + child.boundConstraints.width());
+        int absoluteY = position.y() == null ? child.bounds.y() : position.y().getValue(child.boundConstraints.y() + child.boundConstraints.height());
+
+        child.setBounds(child.bounds.setPosition(absoluteX, absoluteY));
+      } else {
+        switch (direction) {
+          case COLUMN, COLUMN_REVERSE: {
+            yOffset += child.getBounds().height() + gap;
+            usedHeightAccumulator = yOffset;
+            break;
+          }
+          case ROW, ROW_REVERSE: {
+            xOffset += child.getBounds().width() + gap;
+            usedWidthAccumulator = xOffset;
+            break;
+          }
+        }
       }
     }
 
@@ -74,7 +81,12 @@ class LayoutUtil {
         int index = startIndex > 0 ? startIndex - i : i;
         GuiElement<?> child = guiElementChildren.get(index);
 
-        child.setBounds(alignmentFunction.apply(child));
+        var position = child.getStyles().getPropertyValue(BaseStyles::position, Position.NONE);
+
+        // If child is position absolute alignment is ignored
+        if (!position.isAbsolute()) {
+          child.setBounds(alignmentFunction.apply(child));
+        }
       }
     }
   }

@@ -251,8 +251,6 @@ public abstract class GuiElement<Style extends BaseStyles> {
   }
 
   private void recalculateLayout() {
-    // todo, this might need to be called on parent or higher depending on auto sizing of content
-
     if (isLayoutChanged()) {
       LayoutUtil.rebuildLayout(this);
 

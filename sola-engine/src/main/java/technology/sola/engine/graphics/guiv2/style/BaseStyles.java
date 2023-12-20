@@ -169,26 +169,14 @@ public class BaseStyles {
     }
 
     @SuppressWarnings("unchecked")
-    public Self setPositionTop(String top) {
-      this.position = new Position(StyleValue.of(top), position.right(), position.bottom(), position.left());
+    public Self setPositionX(String x) {
+      this.position = new Position(StyleValue.of(x), position.y());
       return (Self) this;
     }
 
     @SuppressWarnings("unchecked")
-    public Self setPositionBottom(String bottom) {
-      this.position = new Position(position.top(), position.right(), StyleValue.of(bottom), position.left());
-      return (Self) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    public Self setPositionRight(String right) {
-      this.position = new Position(position.top(), StyleValue.of(right), position.bottom(), position.left());
-      return (Self) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    public Self setPositionLeft(String left) {
-      this.position = new Position(position.top(), position.right(), position.bottom(), StyleValue.of(left));
+    public Self setPositionY(String y) {
+      this.position = new Position(position.x(), StyleValue.of(y));
       return (Self) this;
     }
 

@@ -27,10 +27,8 @@ public class BaseStylesJsonValueParser implements StylesJsonValueParser<BaseStyl
       case "paddingRight" -> stylesBuilder.setPaddingRight(StylesJsonBlueprintUtils.parseInteger(value));
       case "paddingTop" -> stylesBuilder.setPaddingTop(StylesJsonBlueprintUtils.parseInteger(value));
       case "paddingVertical" -> stylesBuilder.setPaddingVertical(StylesJsonBlueprintUtils.parseInteger(value));
-      case "positionBottom" -> stylesBuilder.setPositionBottom(StylesJsonBlueprintUtils.parseStyleValueAsString(value));
-      case "positionLeft" -> stylesBuilder.setPositionLeft(StylesJsonBlueprintUtils.parseStyleValueAsString(value));
-      case "positionRight" -> stylesBuilder.setPositionRight(StylesJsonBlueprintUtils.parseStyleValueAsString(value));
-      case "positionTop" -> stylesBuilder.setPositionTop(StylesJsonBlueprintUtils.parseStyleValueAsString(value));
+      case "positionX" -> stylesBuilder.setPositionX(StylesJsonBlueprintUtils.parseStyleValueAsString(value));
+      case "positionY" -> stylesBuilder.setPositionY(StylesJsonBlueprintUtils.parseStyleValueAsString(value));
       case "visibility" -> stylesBuilder.setVisibility(parseVisibility(value));
       case "width" -> stylesBuilder.setWidth(StylesJsonBlueprintUtils.parseStyleValueAsString(value));
       default -> throw new UnsupportedStylesPropertyException(propertyKey);
