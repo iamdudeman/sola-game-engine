@@ -27,6 +27,9 @@ public class TextGuiElement extends GuiElement<TextStyles> {
 
   @Override
   public GuiElementBounds calculateBounds(GuiElementBounds boundConstraints) {
+    // todo cleanup this bad code
+    //   maybe find a way to not need to setContentBounds directly!
+    // todo support multiple line wrapping
     String fontAssetId = getStyles().getPropertyValue(TextStyles::fontAssetId, DefaultFont.ASSET_ID);
 
     var fontAssetHandle = getAssetLoaderProvider().get(Font.class).get(fontAssetId);

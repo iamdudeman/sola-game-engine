@@ -2,6 +2,7 @@
   "tag": "Section",
   "styles": {
     "backgroundColor": "rgb(255, 255, 255)",
+    "mainAxisChildren": "end",
     "direction": "row",
     "height": "50%",
     "gap": 5,
@@ -19,6 +20,7 @@
       "tag": "Section",
       "styles": {
         "backgroundColor": "rgb(0, 255, 0)",
+        "height": "50%",
         "width": 50
       }
     },
