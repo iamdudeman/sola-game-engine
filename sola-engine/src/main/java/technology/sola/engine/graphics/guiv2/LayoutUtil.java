@@ -3,7 +3,6 @@ package technology.sola.engine.graphics.guiv2;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.guiv2.style.property.*;
 
-// todo cross axis alignment
 // todo absolute positioning
 
 class LayoutUtil {
@@ -52,21 +51,37 @@ class LayoutUtil {
     }
 
     var mainAxisChildren = styles.getPropertyValue(BaseStyles::mainAxisChildren, MainAxisChildren.START);
+    var crossAxisChildren = styles.getPropertyValue(BaseStyles::crossAxisChildren, CrossAxisChildren.START);
 
-    if (mainAxisChildren != MainAxisChildren.START) {
+    if (mainAxisChildren != MainAxisChildren.START || crossAxisChildren != CrossAxisChildren.START) {
       for (int i = 0; i < guiElement.children.size(); i++) {
         int index = startIndex > 0 ? startIndex - i : i;
         GuiElement<?> child = guiElement.children.get(index);
 
-        int spaceToMove = switch (mainAxisChildren) {
+        int xAlignment = switch (mainAxisChildren) {
+          case START -> 0;
           case CENTER -> (child.boundConstraints.width() - usedWidth) / 2;
           case END -> child.boundConstraints.width() - usedWidth;
+        };
+        int yAlignment = switch (crossAxisChildren) {
+          case START -> 0;
+          case CENTER -> (child.boundConstraints.height() - child.bounds.height()) / 2;
+          case END -> child.boundConstraints.height() - child.bounds.height();
           default -> throw new IllegalStateException("Unexpected value: " + mainAxisChildren);
         };
 
-        if (spaceToMove > 0) {
-          child.setBounds(child.bounds.setPosition(child.bounds.x() + spaceToMove, child.bounds.y()));
+        int newX = child.bounds.x();
+        int newY = child.bounds.y();
+
+        if (xAlignment > 0) {
+          newX += xAlignment;
         }
+
+        if (yAlignment > 0) {
+          newY += yAlignment;
+        }
+
+        child.setBounds(child.bounds.setPosition(newX, newY));
       }
     }
   }

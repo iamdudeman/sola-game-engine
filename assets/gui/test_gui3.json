@@ -3,6 +3,7 @@
   "styles": {
     "backgroundColor": "rgb(255, 255, 255)",
     "mainAxisChildren": "center",
+    "crossAxisChildren": "center",
     "direction": "row",
     "height": "50%",
     "gap": 5,
