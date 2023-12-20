@@ -89,6 +89,22 @@
       "description": "The top and bottom padding of the element.",
       "minimum": 0
     },
+    "positionBottom": {
+      "$ref": "#/$defs/styleValue",
+      "description": "The bottom position of the element."
+    },
+    "positionLeft": {
+      "$ref": "#/$defs/styleValue",
+      "description": "The left position of the element."
+    },
+    "positionRight": {
+      "$ref": "#/$defs/styleValue",
+      "description": "The right position of the element."
+    },
+    "positionTop": {
+      "$ref": "#/$defs/styleValue",
+      "description": "The top position of the element."
+    },
     "visibility": {
       "type": "string",
       "description": "The visibility of the element.",

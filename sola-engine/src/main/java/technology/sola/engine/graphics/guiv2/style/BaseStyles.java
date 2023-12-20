@@ -1,14 +1,7 @@
 package technology.sola.engine.graphics.guiv2.style;
 
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.guiv2.style.property.Background;
-import technology.sola.engine.graphics.guiv2.style.property.Border;
-import technology.sola.engine.graphics.guiv2.style.property.CrossAxisChildren;
-import technology.sola.engine.graphics.guiv2.style.property.Direction;
-import technology.sola.engine.graphics.guiv2.style.property.MainAxisChildren;
-import technology.sola.engine.graphics.guiv2.style.property.Padding;
-import technology.sola.engine.graphics.guiv2.style.property.StyleValue;
-import technology.sola.engine.graphics.guiv2.style.property.Visibility;
+import technology.sola.engine.graphics.guiv2.style.property.*;
 
 public class BaseStyles {
   private final Background background;
@@ -19,10 +12,12 @@ public class BaseStyles {
   private final StyleValue height;
   private final Visibility visibility;
 
+  // Layout specific
   private final Integer gap;
   private final Direction direction;
   private final MainAxisChildren mainAxisChildren;
   private final CrossAxisChildren crossAxisChildren;
+  private final Position position;
 
   public BaseStyles(Builder<?> builder) {
     this.background = builder.background;
@@ -37,6 +32,7 @@ public class BaseStyles {
     this.direction = builder.direction;
     this.mainAxisChildren = builder.mainAxisChildren;
     this.crossAxisChildren = builder.crossAxisChildren;
+    this.position = builder.position;
   }
 
   public static Builder<?> create() {
@@ -83,6 +79,10 @@ public class BaseStyles {
     return crossAxisChildren;
   }
 
+  public Position position() {
+    return position;
+  }
+
   public Visibility visibility() {
     return visibility;
   }
@@ -99,6 +99,7 @@ public class BaseStyles {
     private MainAxisChildren mainAxisChildren;
     private CrossAxisChildren crossAxisChildren;
     private Direction direction;
+    private Position position = new Position();
 
     protected Builder() {
     }
@@ -164,6 +165,30 @@ public class BaseStyles {
     @SuppressWarnings("unchecked")
     public Self setCrossAxisChildren(CrossAxisChildren crossAxisChildren) {
       this.crossAxisChildren = crossAxisChildren;
+      return (Self) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Self setPositionTop(String top) {
+      this.position = new Position(StyleValue.of(top), position.right(), position.bottom(), position.left());
+      return (Self) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Self setPositionBottom(String bottom) {
+      this.position = new Position(position.top(), position.right(), StyleValue.of(bottom), position.left());
+      return (Self) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Self setPositionRight(String right) {
+      this.position = new Position(position.top(), StyleValue.of(right), position.bottom(), position.left());
+      return (Self) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Self setPositionLeft(String left) {
+      this.position = new Position(position.top(), position.right(), position.bottom(), StyleValue.of(left));
       return (Self) this;
     }
 
