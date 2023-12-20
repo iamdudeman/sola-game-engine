@@ -4,6 +4,7 @@ import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.guiv2.style.property.*;
 
 // todo absolute positioning
+// todo visibility none + visibility hidden
 
 class LayoutUtil {
   static void rebuildLayout(GuiElement<?> guiElement) {
@@ -53,38 +54,20 @@ class LayoutUtil {
     var mainAxisChildren = styles.getPropertyValue(BaseStyles::mainAxisChildren, MainAxisChildren.START);
     var crossAxisChildren = styles.getPropertyValue(BaseStyles::crossAxisChildren, CrossAxisChildren.START);
 
+    final int totalUsedWidth = usedWidth;
+    final int totalUsedHeight = usedHeight;
+
+    AlignmentFunction alignmentFunction = switch (direction) {
+      case ROW, ROW_REVERSE -> child -> calculateRowChildAlignmentBounds(child, mainAxisChildren, crossAxisChildren, totalUsedWidth);
+      case COLUMN, COLUMN_REVERSE -> child -> calculateColumnChildAlignmentBounds(child, mainAxisChildren, crossAxisChildren, totalUsedHeight);
+    };
+
     if (mainAxisChildren != MainAxisChildren.START || crossAxisChildren != CrossAxisChildren.START) {
       for (int i = 0; i < guiElement.children.size(); i++) {
         int index = startIndex > 0 ? startIndex - i : i;
         GuiElement<?> child = guiElement.children.get(index);
 
-        int xAlignment = switch (mainAxisChildren) {
-          case START -> 0;
-          case CENTER -> (child.boundConstraints.width() - usedWidth) / 2;
-          case END -> child.boundConstraints.width() - usedWidth;
-        };
-        int yAlignment = switch (crossAxisChildren) {
-          case START, STRETCH -> 0;
-          case CENTER -> (child.boundConstraints.height() - child.bounds.height()) / 2;
-          case END -> child.boundConstraints.height() - child.bounds.height();
-        };
-
-        int newX = child.bounds.x();
-        int newY = child.bounds.y();
-
-        if (xAlignment > 0) {
-          newX += xAlignment;
-        }
-
-        if (yAlignment > 0) {
-          newY += yAlignment;
-        }
-
-        child.setBounds(child.bounds.setPosition(newX, newY));
-
-        if (crossAxisChildren == CrossAxisChildren.STRETCH) {
-          child.setBounds(child.bounds.setDimensions(child.bounds.width(), child.boundConstraints.height()));
-        }
+        child.setBounds(alignmentFunction.apply(child));
       }
     }
   }
@@ -108,5 +91,58 @@ class LayoutUtil {
 
     // done!
     return new GuiElementBounds(xConstraint, yConstraint, widthConstraint, heightConstraint);
+  }
+
+  private static GuiElementBounds calculateRowChildAlignmentBounds(GuiElement<?> child, MainAxisChildren mainAxisChildren, CrossAxisChildren crossAxisChildren, int usedWidth) {
+    int xAlignment = switch (mainAxisChildren) {
+      case START -> 0;
+      case CENTER -> (child.boundConstraints.width() - usedWidth) / 2;
+      case END -> child.boundConstraints.width() - usedWidth;
+    };
+    int yAlignment = switch (crossAxisChildren) {
+      case START, STRETCH -> 0;
+      case CENTER -> (child.boundConstraints.height() - child.bounds.height()) / 2;
+      case END -> child.boundConstraints.height() - child.bounds.height();
+    };
+
+    int newX = xAlignment > 0 ? child.bounds.x() + xAlignment : child.bounds.x();
+    int newY = yAlignment > 0 ? child.bounds.y() + yAlignment : child.bounds.y();
+
+    GuiElementBounds result = child.bounds.setPosition(newX, newY);
+
+    if (crossAxisChildren == CrossAxisChildren.STRETCH) {
+      result = result.setDimensions(child.bounds.width(), child.boundConstraints.height());
+    }
+
+    return result;
+  }
+
+  private static GuiElementBounds calculateColumnChildAlignmentBounds(GuiElement<?> child, MainAxisChildren mainAxisChildren, CrossAxisChildren crossAxisChildren, int usedHeight) {
+    int xAlignment = switch (crossAxisChildren) {
+      case START, STRETCH -> 0;
+      case CENTER -> (child.boundConstraints.width() - child.bounds.width()) / 2;
+      case END -> child.boundConstraints.width() - child.bounds.width();
+    };
+    int yAlignment = switch (mainAxisChildren) {
+      case START -> 0;
+      case CENTER -> (child.boundConstraints.height() - usedHeight) / 2;
+      case END -> child.boundConstraints.height() - usedHeight;
+    };
+
+    int newX = xAlignment > 0 ? child.bounds.x() + xAlignment : child.bounds.x();
+    int newY = yAlignment > 0 ? child.bounds.y() + yAlignment : child.bounds.y();
+
+    GuiElementBounds result = child.bounds.setPosition(newX, newY);
+
+    if (crossAxisChildren == CrossAxisChildren.STRETCH) {
+      result = result.setDimensions(child.boundConstraints.width(), child.bounds.height());
+    }
+
+    return result;
+  }
+
+  @FunctionalInterface
+  interface AlignmentFunction {
+    GuiElementBounds apply(GuiElement<?> child);
   }
 }
