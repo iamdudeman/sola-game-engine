@@ -40,13 +40,23 @@ class LayoutUtil {
 
       rebuildLayout(child);
 
-      child.setBounds(child.calculateBounds(child.boundConstraints));
+      child.setBounds(calculateDefaultLayoutBounds(child));
+
+      var contentDimensions = child.calculateContentDimensions();
+
+      if (contentDimensions != null) {
+        child.setContentBounds(child.getContentBounds().setDimensions(contentDimensions));
+      }
 
       var position = child.getStyles().getPropertyValue(BaseStyles::position, Position.NONE);
 
       if (position.isAbsolute()) {
-        int absoluteX = position.x() == null ? child.bounds.x() : position.x().getValue(child.boundConstraints.x() + child.boundConstraints.width());
-        int absoluteY = position.y() == null ? child.bounds.y() : position.y().getValue(child.boundConstraints.y() + child.boundConstraints.height());
+        int absoluteX = position.x() == null
+          ? child.bounds.x()
+          : position.x().getValue(child.boundConstraints.x() + child.boundConstraints.width());
+        int absoluteY = position.y() == null
+          ? child.bounds.y()
+          : position.y().getValue(child.boundConstraints.y() + child.boundConstraints.height());
 
         child.setBounds(child.bounds.setPosition(absoluteX, absoluteY));
       } else {
@@ -158,6 +168,19 @@ class LayoutUtil {
     }
 
     return result;
+  }
+
+  private static GuiElementBounds calculateDefaultLayoutBounds(GuiElement<?> guiElement) {
+    var styles = guiElement.getStyles();
+    var boundConstraints = guiElement.boundConstraints;
+
+    final int width = styles.getPropertyValue(BaseStyles::width, StyleValue.FULL).getValue(boundConstraints.width());
+    final int widthBound = Math.min(width, boundConstraints.width());
+
+    final int height = styles.getPropertyValue(BaseStyles::height, StyleValue.FULL).getValue(boundConstraints.height());
+    final int heightBound = Math.min(height, boundConstraints.height());
+
+    return new GuiElementBounds(boundConstraints.x(), boundConstraints.y(), widthBound, heightBound);
   }
 
   @FunctionalInterface

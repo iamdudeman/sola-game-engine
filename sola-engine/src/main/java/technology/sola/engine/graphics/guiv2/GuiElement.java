@@ -48,14 +48,8 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
   public abstract void renderContent(Renderer renderer);
 
-  public GuiElementBounds calculateBounds(GuiElementBounds boundConstraints) {
-    final int width = styleContainer.getPropertyValue(BaseStyles::width, StyleValue.FULL).getValue(boundConstraints.width());
-    final int widthBound = Math.min(width, boundConstraints.width());
-
-    final int height = styleContainer.getPropertyValue(BaseStyles::height, StyleValue.FULL).getValue(boundConstraints.height());
-    final int heightBound = Math.min(height, boundConstraints.height());
-
-    return new GuiElementBounds(boundConstraints.x(), boundConstraints.y(), widthBound, heightBound);
+  public GuiElementDimensions calculateContentDimensions() {
+    return null;
   }
 
   public void render(Renderer renderer) {

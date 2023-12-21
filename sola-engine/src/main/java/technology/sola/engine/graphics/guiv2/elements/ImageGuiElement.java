@@ -2,7 +2,7 @@ package technology.sola.engine.graphics.guiv2.elements;
 
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.graphics.guiv2.GuiElement;
-import technology.sola.engine.graphics.guiv2.GuiElementBounds;
+import technology.sola.engine.graphics.guiv2.GuiElementDimensions;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -25,9 +25,7 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
   }
 
   @Override
-  public GuiElementBounds calculateBounds(GuiElementBounds boundConstraints) {
-    setBounds(super.calculateBounds(boundConstraints));
-
+  public GuiElementDimensions calculateContentDimensions() {
     if (assetId != null && !assetId.equals(currentAssetId)) {
       getAssetLoaderProvider().get(SolaImage.class)
         .get(assetId)
@@ -40,9 +38,11 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
 
     if (transformedImage != null) {
       transformedImage = transformedImage.resize(contentBounds.width(), contentBounds.height());
+
+      return new GuiElementDimensions(transformedImage.getWidth(), transformedImage.getHeight());
     }
 
-    return bounds;
+    return new GuiElementDimensions(0, 0);
   }
 
   public String getAssetId() {
