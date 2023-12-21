@@ -5,6 +5,7 @@ import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 class RootGuiElement extends GuiElement<BaseStyles> {
+  // internals
   private final GuiDocument guiDocument;
   private final AssetLoaderProvider assetLoaderProvider;
 

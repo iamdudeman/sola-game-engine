@@ -1,0 +1,24 @@
+{
+  "$id": "Image.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ImageGuiElement",
+  "type": "object",
+  "properties": {
+    "tag": {
+      "const": "Image",
+      "description": "The tag of the element."
+    },
+    "props": {
+      "type": "object",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "The asset id for the image to render."
+        }
+      }
+    },
+    "styles": {
+      "$ref": "../styles/BaseStyles.schema.json"
+    }
+  }
+}

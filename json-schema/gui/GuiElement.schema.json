@@ -9,6 +9,9 @@
     },
     {
       "$ref": "/elements/Text.schema.json"
+    },
+    {
+      "$ref": "/elements/Image.schema.json"
     }
   ]
 }

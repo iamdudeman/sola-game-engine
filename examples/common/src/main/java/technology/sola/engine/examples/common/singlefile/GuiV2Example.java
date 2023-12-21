@@ -26,7 +26,7 @@ public class GuiV2Example extends SolaWithDefaults {
     defaultsConfigurator.useGuiV2();
 
     assetLoaderProvider.get(SolaImage.class)
-      .addAssetMapping("test", "assets/test_tiles.png");
+      .addAssetMapping("test_tiles", "assets/test_tiles.png");
     assetLoaderProvider.get(Font.class)
       .addAssetMapping("times_NORMAL_18", "assets/times_NORMAL_18.json");
 
@@ -51,7 +51,7 @@ public class GuiV2Example extends SolaWithDefaults {
 
   @Override
   protected void onAsyncInit(Runnable completeAsyncInit) {
-    assetLoaderProvider.get(GuiJsonDocument.class).getNewAsset("test-gui", "assets/gui/test_text.json")
+    assetLoaderProvider.get(GuiJsonDocument.class).getNewAsset("test-gui", "assets/gui/test_image.json")
       .executeWhenLoaded(guiJsonDocument -> {
 
         guiDocument.setRootElement(guiJsonDocument.rootElement());

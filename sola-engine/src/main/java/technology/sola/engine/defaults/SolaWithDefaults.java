@@ -19,6 +19,7 @@ import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.graphics.guiv2.GuiDocument;
 import technology.sola.engine.graphics.guiv2.json.GuiJsonDocumentBuilder;
+import technology.sola.engine.graphics.guiv2.json.element.ImageElementJsonBlueprint;
 import technology.sola.engine.graphics.guiv2.json.element.SectionElementJsonBlueprint;
 import technology.sola.engine.graphics.guiv2.json.element.TextElementJsonBlueprint;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -287,7 +288,8 @@ public abstract class SolaWithDefaults extends Sola {
           assetLoaderProvider.get(JsonElementAsset.class),
           new GuiJsonDocumentBuilder(List.of(
             new SectionElementJsonBlueprint(),
-            new TextElementJsonBlueprint()
+            new TextElementJsonBlueprint(),
+            new ImageElementJsonBlueprint()
           ))
         ));
       }

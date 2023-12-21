@@ -5,9 +5,10 @@ Rough order
 2. ~~Load from file implementation (little UI with refresh button from file for easier testing)~~
 3. ~~Finish hooking up layout properties~~
 4. ~~Implement "absolute" positioning where it is relative to parent but otherwise excluded from layout~~
-5. Switch events to have each child check if it "captures" the event (needed for absolute positioning)
-6. Add other GuiElements + json blueprints
-7. Make a "cookbook" to play around with properties and elements
+5. Add other GuiElements + json blueprints
+6. Switch events to have each child check if it "captures" the event (needed for absolute positioning)
+7. Add "id" to elements and ability to getElementById (and method to add events after loading gui from json)
+8. Make a "cookbook" to play around with properties and elements
 
 Later things
 * maybe put default style values in a common place?

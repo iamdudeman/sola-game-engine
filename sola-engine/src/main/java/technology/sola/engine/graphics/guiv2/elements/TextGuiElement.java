@@ -43,8 +43,6 @@ public class TextGuiElement extends GuiElement<TextStyles> {
 
     String fontAssetId = getStyles().getPropertyValue(TextStyles::fontAssetId, DefaultFont.ASSET_ID);
 
-    System.out.println(text + " " + fontAssetId);
-
     if (!fontAssetId.equals(currentFontId)) {
       var fontAssetHandle = getAssetLoaderProvider().get(Font.class).get(fontAssetId);
 
@@ -52,7 +50,7 @@ public class TextGuiElement extends GuiElement<TextStyles> {
         fontAssetHandle.executeWhenLoaded(font -> {
           this.font = font;
           this.currentFontId = fontAssetId;
-          System.out.println("loaded " + font.getFontInfo().fontFamily());
+
           getParent().invalidateLayout();
         });
       } else {
