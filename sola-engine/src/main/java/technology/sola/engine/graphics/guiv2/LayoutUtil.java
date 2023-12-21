@@ -36,18 +36,19 @@ class LayoutUtil {
       int index = startIndex > 0 ? startIndex - i : i;
       GuiElement<?> child = guiElementChildren.get(index);
 
+      // calculate constraints
       child.boundConstraints = recalculateBoundConstraints(child, xOffset, yOffset);
 
+      // recursively build child layouts
       rebuildLayout(child);
 
+      // update bounds after children layouts determined
       child.setBounds(calculateDefaultLayoutBounds(child));
 
-      var contentDimensions = child.calculateContentDimensions();
+      // update content bounds if it should shrink
+      updateContentBounds(child);
 
-      if (contentDimensions != null) {
-        child.setContentBounds(child.getContentBounds().setDimensions(contentDimensions));
-      }
-
+      // calculate where in the layout flow the element should go or if it is outside the flow
       var position = child.getStyles().getPropertyValue(BaseStyles::position, Position.NONE);
 
       if (position.isAbsolute()) {
@@ -75,6 +76,7 @@ class LayoutUtil {
       }
     }
 
+    // calculate alignment of elements in the flow
     final int usedWidth = usedWidthAccumulator;
     final int usedHeight = usedHeightAccumulator;
     var mainAxisChildren = styles.getPropertyValue(BaseStyles::mainAxisChildren, MainAxisChildren.START);
@@ -170,9 +172,6 @@ class LayoutUtil {
     return result;
   }
 
-  // todo fix bug here where if content size is smaller than this it shrinks even if width is set!
-  //   width should always win
-
   private static GuiElementBounds calculateDefaultLayoutBounds(GuiElement<?> guiElement) {
     var styles = guiElement.getStyles();
     var boundConstraints = guiElement.boundConstraints;
@@ -184,6 +183,20 @@ class LayoutUtil {
     final int heightBound = Math.min(height, boundConstraints.height());
 
     return new GuiElementBounds(boundConstraints.x(), boundConstraints.y(), widthBound, heightBound);
+  }
+
+  private static void updateContentBounds(GuiElement<?> guiElement) {
+    var contentDimensions = guiElement.calculateContentDimensions();
+
+    if (contentDimensions != null) {
+      // If a width or height is set those should always "win out"
+      contentDimensions = new GuiElementDimensions(
+        guiElement.getStyles().getPropertyValue(BaseStyles::width) == null ? contentDimensions.width() : guiElement.contentBounds.width(),
+        guiElement.getStyles().getPropertyValue(BaseStyles::height) == null ? contentDimensions.height() : guiElement.contentBounds.height()
+      );
+
+      guiElement.setContentBounds(guiElement.getContentBounds().setDimensions(contentDimensions));
+    }
   }
 
   @FunctionalInterface

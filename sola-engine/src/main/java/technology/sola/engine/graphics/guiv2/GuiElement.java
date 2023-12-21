@@ -89,36 +89,6 @@ public abstract class GuiElement<Style extends BaseStyles> {
     renderContent(renderer);
   }
 
-  public void setBounds(GuiElementBounds bounds) {
-    this.bounds = bounds;
-
-    var styleContainer = getStyles();
-
-    Border border = styleContainer.getPropertyValue(BaseStyles::border, Border.NONE);
-    Padding padding = styleContainer.getPropertyValue(BaseStyles::padding, Padding.NONE);
-
-    this.contentBounds = new GuiElementBounds(
-      bounds.x() + border.left() + padding.left(),
-      bounds.y() + border.top() + padding.top(),
-      bounds.width() - (border.left() + border.right() + padding.left() + padding.right()),
-      bounds.height() - (border.top() + border.bottom() + padding.top() + padding.bottom())
-    );
-  }
-
-  public void setContentBounds(GuiElementBounds contentBounds) {
-    this.contentBounds = contentBounds;
-
-    Border border = getStyles().getPropertyValue(BaseStyles::border, Border.NONE);
-    Padding padding = getStyles().getPropertyValue(BaseStyles::padding, Padding.NONE);
-
-    this.bounds = new GuiElementBounds(
-      contentBounds.x() - border.left() - padding.left(),
-      contentBounds.y() - border.top() - padding.top(),
-      contentBounds.width() + border.left() + border.right() + padding.left() + padding.right(),
-      contentBounds.height() + border.top() + border.bottom() + padding.top() + padding.bottom()
-    );
-  }
-
   public boolean isFocussed() {
     return getGuiDocument().isFocussed(this);
   }
@@ -238,6 +208,36 @@ public abstract class GuiElement<Style extends BaseStyles> {
         events.mouseMoved().emit(event);
       }
     }
+  }
+
+  void setBounds(GuiElementBounds bounds) {
+    this.bounds = bounds;
+
+    var styleContainer = getStyles();
+
+    Border border = styleContainer.getPropertyValue(BaseStyles::border, Border.NONE);
+    Padding padding = styleContainer.getPropertyValue(BaseStyles::padding, Padding.NONE);
+
+    this.contentBounds = new GuiElementBounds(
+      bounds.x() + border.left() + padding.left(),
+      bounds.y() + border.top() + padding.top(),
+      bounds.width() - (border.left() + border.right() + padding.left() + padding.right()),
+      bounds.height() - (border.top() + border.bottom() + padding.top() + padding.bottom())
+    );
+  }
+
+  void setContentBounds(GuiElementBounds contentBounds) {
+    this.contentBounds = contentBounds;
+
+    Border border = getStyles().getPropertyValue(BaseStyles::border, Border.NONE);
+    Padding padding = getStyles().getPropertyValue(BaseStyles::padding, Padding.NONE);
+
+    this.bounds = new GuiElementBounds(
+      contentBounds.x() - border.left() - padding.left(),
+      contentBounds.y() - border.top() - padding.top(),
+      contentBounds.width() + border.left() + border.right() + padding.left() + padding.right(),
+      contentBounds.height() + border.top() + border.bottom() + padding.top() + padding.bottom()
+    );
   }
 
   GuiDocument getGuiDocument() {
