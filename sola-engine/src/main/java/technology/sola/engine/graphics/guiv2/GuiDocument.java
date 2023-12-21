@@ -25,7 +25,10 @@ public class GuiDocument {
   }
 
   public void setRootElement(GuiElement<?> rootEle) {
-    root.children.forEach(rootEle::removeChild);
+    for (var child : root.children.stream().toList()) {
+      root.removeChild(child);
+    }
+
     root.appendChildren(rootEle);
   }
 

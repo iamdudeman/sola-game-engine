@@ -170,6 +170,9 @@ class LayoutUtil {
     return result;
   }
 
+  // todo fix bug here where if content size is smaller than this it shrinks even if width is set!
+  //   width should always win
+
   private static GuiElementBounds calculateDefaultLayoutBounds(GuiElement<?> guiElement) {
     var styles = guiElement.getStyles();
     var boundConstraints = guiElement.boundConstraints;

@@ -1,6 +1,8 @@
 package technology.sola.engine.graphics.guiv2;
 
 import technology.sola.engine.assets.AssetLoaderProvider;
+import technology.sola.engine.graphics.guiv2.event.GuiKeyEvent;
+import technology.sola.engine.graphics.guiv2.event.GuiMouseEvent;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.renderer.Renderer;
 
@@ -30,5 +32,30 @@ class RootGuiElement extends GuiElement<BaseStyles> {
   @Override
   protected AssetLoaderProvider getAssetLoaderProvider() {
     return assetLoaderProvider;
+  }
+
+  @Override
+  void onKeyPressed(GuiKeyEvent event) {
+    event.stopPropagation();
+  }
+
+  @Override
+  void onKeyReleased(GuiKeyEvent event) {
+    event.stopPropagation();
+  }
+
+  @Override
+  void onMousePressed(GuiMouseEvent event) {
+    event.stopPropagation();
+  }
+
+  @Override
+  void onMouseReleased(GuiMouseEvent event) {
+    event.stopPropagation();
+  }
+
+  @Override
+  void onMouseMoved(GuiMouseEvent event) {
+    event.stopPropagation();
   }
 }
