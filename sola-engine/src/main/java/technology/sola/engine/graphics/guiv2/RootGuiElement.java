@@ -25,6 +25,11 @@ class RootGuiElement extends GuiElement<BaseStyles> {
   }
 
   @Override
+  public GuiElementDimensions calculateContentDimensions() {
+    return null;
+  }
+
+  @Override
   GuiDocument getGuiDocument() {
     return guiDocument;
   }

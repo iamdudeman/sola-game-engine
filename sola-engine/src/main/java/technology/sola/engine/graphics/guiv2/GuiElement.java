@@ -15,17 +15,17 @@ import java.util.List;
 public abstract class GuiElement<Style extends BaseStyles> {
   protected final StyleContainer<Style> styleContainer;
   /**
+   * Includes only content size. Do not manually update this unless you know what you are doing!
+   */
+  protected GuiElementBounds contentBounds;
+  /**
    * The maximum allowed size an element can be. {@link GuiElement#bounds} may be smaller than this.
    */
-  protected GuiElementBounds boundConstraints;
+  GuiElementBounds boundConstraints;
   /**
    * Includes border, padding and content size.
    */
-  protected GuiElementBounds bounds;
-  /**
-   * Includes only content size.
-   */
-  protected GuiElementBounds contentBounds;
+  GuiElementBounds bounds;
   final List<GuiElement<?>> children = new ArrayList<>();
   boolean isLayoutChanged;
   private GuiElement<?> parent;
@@ -48,9 +48,13 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
   public abstract void renderContent(Renderer renderer);
 
-  public GuiElementDimensions calculateContentDimensions() {
-    return null;
-  }
+  /**
+   * Calculates content dimensions for this element. If its dimensions are derived from only its
+   * children then it should return null.
+   *
+   * @return the dimensions of the content of this element or null if only children dimensions matter
+   */
+  public abstract GuiElementDimensions calculateContentDimensions();
 
   public void render(Renderer renderer) {
     recalculateLayout();
