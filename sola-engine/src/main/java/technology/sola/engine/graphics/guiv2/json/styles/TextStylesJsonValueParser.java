@@ -14,7 +14,23 @@ public class TextStylesJsonValueParser implements StylesJsonValueParser<TextStyl
     switch (propertyKey) {
       case "fontAssetId" -> stylesBuilder.setFontAssetId(StylesJsonBlueprintUtils.parseString(value));
       case "textColor" -> stylesBuilder.setTextColor(StylesJsonBlueprintUtils.parseColor(value));
+      case "textAlignment" -> stylesBuilder.setTextColor(parseTextAlignment(value));
       default -> baseStylesJsonDefinition.setPropertyFromJson(stylesBuilder, propertyKey, value);
     }
+  }
+
+  private TextStyles.TextAlignment parseTextAlignment(JsonElement value) {
+    if (value.isNull()) {
+      return null;
+    }
+
+    String textAlignment = value.asString().toLowerCase();
+
+    return switch (textAlignment) {
+      case "start" -> TextStyles.TextAlignment.START;
+      case "center" -> TextStyles.TextAlignment.CENTER;
+      case "end" -> TextStyles.TextAlignment.END;
+      default -> throw new IllegalArgumentException("Unrecognized textAlignment [" + textAlignment + "]");
+    };
   }
 }

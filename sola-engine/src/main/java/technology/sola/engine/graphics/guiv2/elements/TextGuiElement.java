@@ -29,10 +29,28 @@ public class TextGuiElement extends GuiElement<TextStyles> {
     Color textColor = getStyles().getPropertyValue(TextStyles::textColor, Color.BLACK);
     renderer.setFont(font);
 
+    var textAlignment = styleContainer.getPropertyValue(TextStyles::getTextAlignment, TextStyles.TextAlignment.START);
+
     for (int i = 0; i < lines.size(); i++) {
       int leadingSpace = font.getFontInfo().leading() * i;
+      String line = lines.get(i);
 
-      renderer.drawString(lines.get(i), contentBounds.x(), contentBounds.y() + leadingSpace + lineHeight * i, textColor);
+      int xAdjustment = 0;
+
+      if (textAlignment != TextStyles.TextAlignment.START) {
+        var textDimensions = font.getDimensionsForText(line);
+        int availableSpace = contentBounds.width() - textDimensions.width();
+
+        if (availableSpace > 0) {
+          if (textAlignment == TextStyles.TextAlignment.CENTER) {
+            xAdjustment = availableSpace / 2;
+          } else if (textAlignment == TextStyles.TextAlignment.END) {
+            xAdjustment = availableSpace;
+          }
+        }
+      }
+
+      renderer.drawString(lines.get(i), contentBounds.x() + xAdjustment, contentBounds.y() + leadingSpace + lineHeight * i, textColor);
     }
   }
 

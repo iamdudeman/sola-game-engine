@@ -13,6 +13,15 @@
       "type": "string",
       "description": "The asset id for the Font."
     },
+    "textAlignment": {
+      "type": "string",
+      "description": "How the text is aligned on the horizontal axis if there is extra space.",
+      "enum": [
+        "start",
+        "center",
+        "end"
+      ]
+    },
     "textColor": {
       "$ref": "./BaseStyles.schema.json#/$defs/color",
       "description": "The color of the rendered text."

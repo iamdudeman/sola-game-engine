@@ -17,6 +17,7 @@
       "styles": {
         "borderColor": "#000000",
         "padding": 10,
+        "textAlignment": "end",
         "width": 500
       }
     },
@@ -36,7 +37,8 @@
       "styles": {
         "borderColor": "#000000",
         "padding": 10,
-        "textColor": "#0000ff"
+        "textColor": "#0000ff",
+        "textAlignment": "center"
       }
     },
     {
