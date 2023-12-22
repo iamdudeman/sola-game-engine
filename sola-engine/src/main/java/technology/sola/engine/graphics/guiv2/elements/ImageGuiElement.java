@@ -7,18 +7,19 @@ import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 
-// TODO this isn't working yet
 public class ImageGuiElement extends GuiElement<BaseStyles> {
   // props
   private String assetId;
 
   // internals
-  private SolaImage transformedImage;
+  private SolaImage solaImage;
   private String currentAssetId;
 
   @Override
   public void renderContent(Renderer renderer) {
-    if (transformedImage != null) {
+    if (solaImage != null) {
+      SolaImage transformedImage = solaImage.resize(contentBounds.width(), contentBounds.height());
+
       renderer.setBlendFunction(BlendMode.MASK);
       renderer.drawImage(transformedImage, contentBounds.x(), contentBounds.y());
     }
@@ -30,16 +31,14 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
       getAssetLoaderProvider().get(SolaImage.class)
         .get(assetId)
         .executeWhenLoaded(solaImage -> {
-          this.transformedImage = solaImage;
+          this.solaImage = solaImage;
           this.currentAssetId = assetId;
-          invalidateLayout();
+          getParent().invalidateLayout();
         });
     }
 
-    if (transformedImage != null) {
-      transformedImage = transformedImage.resize(contentBounds.width(), contentBounds.height());
-
-      return new GuiElementDimensions(transformedImage.getWidth(), transformedImage.getHeight());
+    if (solaImage != null) {
+      return new GuiElementDimensions(solaImage.getWidth(), solaImage.getHeight());
     }
 
     return new GuiElementDimensions(0, 0);

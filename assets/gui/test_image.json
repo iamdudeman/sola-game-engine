@@ -34,7 +34,8 @@
       },
       "styles": {
         "borderColor": "#000000",
-        "padding": 10
+        "padding": 10,
+        "width": "25%"
       }
     },
     {
@@ -44,7 +45,8 @@
       },
       "styles": {
         "borderColor": "#000000",
-        "padding": 10
+        "padding": 10,
+        "height": "25%"
       }
     }
   ]
