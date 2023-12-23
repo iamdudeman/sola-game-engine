@@ -30,6 +30,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
   boolean isLayoutChanged;
   private GuiElement<?> parent;
   private final GuiElementEvents events = new GuiElementEvents();
+  private boolean isMouseInside = false;
 
   @SafeVarargs
   public GuiElement(Style... styles) {
@@ -185,36 +186,67 @@ public abstract class GuiElement<Style extends BaseStyles> {
   }
 
   void onMousePressed(GuiMouseEvent event) {
-    if (bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
-      children.forEach(child -> child.onMousePressed(event));
-
-      if (event.isAbleToPropagate()) {
-        events.mousePressed().emit(event);
-      }
+    for (var child : children) {
+      child.onMousePressed(event);
     }
+
+    if (event.isAbleToPropagate() && bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
+      events.mousePressed().emit(event);
+    }
+
+//    if (bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
+//      children.forEach(child -> child.onMousePressed(event));
+//
+//      if (event.isAbleToPropagate()) {
+//        events.mousePressed().emit(event);
+//      }
+//    }
   }
 
   void onMouseReleased(GuiMouseEvent event) {
-    if (bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
-      children.forEach(child -> child.onMouseReleased(event));
-
-      if (event.isAbleToPropagate()) {
-        events.mouseReleased().emit(event);
-      }
+    for (var child : children) {
+      child.onMouseReleased(event);
     }
+
+    if (event.isAbleToPropagate() && bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
+      events.mouseReleased().emit(event);
+    }
+
+//    if (bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
+//      children.forEach(child -> child.onMouseReleased(event));
+//
+//      if (event.isAbleToPropagate()) {
+//        events.mouseReleased().emit(event);
+//      }
+//    }
   }
 
   void onMouseMoved(GuiMouseEvent event) {
-    // todo add events.mouseEnter()
-    // todo add events.mouseExit()
+    for (var child : children) {
+      child.onMouseMoved(event);
+    }
 
-    if (bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
-      children.forEach(child -> child.onMouseMoved(event));
-
-      if (event.isAbleToPropagate()) {
+    if (event.isAbleToPropagate()) {
+      if (bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
         events.mouseMoved().emit(event);
+
+        if (!isMouseInside) {
+          isMouseInside = true;
+          events.mouseEntered().emit(event);
+        }
+      } else if (isMouseInside) {
+        isMouseInside = false;
+        events.mouseExited().emit(event);
       }
     }
+
+//    if (bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
+//      children.forEach(child -> child.onMouseMoved(event));
+//
+//      if (event.isAbleToPropagate()) {
+//        events.mouseMoved().emit(event);
+//      }
+//    }
   }
 
   void setBounds(GuiElementBounds bounds) {
