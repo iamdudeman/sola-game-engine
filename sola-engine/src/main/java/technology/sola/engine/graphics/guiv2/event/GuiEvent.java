@@ -5,7 +5,6 @@ package technology.sola.engine.graphics.guiv2.event;
  */
 public abstract class GuiEvent {
   private boolean isAbleToPropagate = true;
-  private boolean isPreventingDefault = false;
 
   /**
    * Returns whether this event will propagate to child elements or not.
@@ -21,19 +20,5 @@ public abstract class GuiEvent {
    */
   public void stopPropagation() {
     isAbleToPropagate = false;
-  }
-
-  /**
-   * @return whether default event handlers on the element should fire or not
-   */
-  public boolean isPreventingDefault() {
-    return isPreventingDefault;
-  }
-
-  /**
-   * Stops default event handlers from firing on the element.
-   */
-  public void preventDefault() {
-    isPreventingDefault = true;
   }
 }

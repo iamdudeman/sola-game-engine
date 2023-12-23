@@ -6,6 +6,8 @@ public class GuiElementEvents {
   private final GuiEventListenerList<GuiMouseEvent> mousePressedEventListenerList = new GuiEventListenerList<>();
   private final GuiEventListenerList<GuiMouseEvent> mouseReleasedEventListenerList = new GuiEventListenerList<>();
   private final GuiEventListenerList<GuiMouseEvent> mouseMovedEventListenerList = new GuiEventListenerList<>();
+  private final GuiEventListenerList<GuiMouseEvent> mouseEnteredEventListenerList = new GuiEventListenerList<>();
+  private final GuiEventListenerList<GuiMouseEvent> mouseExitedEventListenerList = new GuiEventListenerList<>();
 
   public GuiEventListenerList<GuiKeyEvent> keyPressed() {
     return keyPressedEventListenerList;
@@ -25,5 +27,13 @@ public class GuiElementEvents {
 
   public GuiEventListenerList<GuiMouseEvent> mouseMoved() {
     return mouseMovedEventListenerList;
+  }
+
+  public GuiEventListenerList<GuiMouseEvent> mouseEntered() {
+    return mouseEnteredEventListenerList;
+  }
+
+  public GuiEventListenerList<GuiMouseEvent> mouseExited() {
+    return mouseExitedEventListenerList;
   }
 }

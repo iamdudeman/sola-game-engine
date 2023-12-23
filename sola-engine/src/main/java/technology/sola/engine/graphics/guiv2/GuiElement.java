@@ -205,6 +205,9 @@ public abstract class GuiElement<Style extends BaseStyles> {
   }
 
   void onMouseMoved(GuiMouseEvent event) {
+    // todo add events.mouseEnter()
+    // todo add events.mouseExit()
+
     if (bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
       children.forEach(child -> child.onMouseMoved(event));
 

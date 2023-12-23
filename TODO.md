@@ -8,6 +8,9 @@ Rough order
 5. Add other GuiElements + json blueprints
 6. Switch events to have each child check if it "captures" the event (needed for absolute positioning)
 7. Add "id" to elements and ability to getElementById (and method to add events after loading gui from json)
+    * could also have an "event id -> event function" map that can be used as part of gui doc loading
+    * elements could then add event listeners from this map
+    * ie. (`mousePress` -> `doSomething`)
 8. Make a "cookbook" to play around with properties and elements
 
 Later things
