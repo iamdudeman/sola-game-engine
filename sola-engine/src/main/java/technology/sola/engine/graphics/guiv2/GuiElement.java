@@ -26,7 +26,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
    * Includes border, padding and content size.
    */
   GuiElementBounds bounds;
-  final List<GuiElement<?>> children = new ArrayList<>();
+  protected final List<GuiElement<?>> children = new ArrayList<>();
   boolean isLayoutChanged;
   private GuiElement<?> parent;
   private final GuiElementEvents events = new GuiElementEvents();
@@ -277,6 +277,25 @@ public abstract class GuiElement<Style extends BaseStyles> {
       contentBounds.width() + border.left() + border.right() + padding.left() + padding.right(),
       contentBounds.height() + border.top() + border.bottom() + padding.top() + padding.bottom()
     );
+  }
+
+  void setPosition(int x, int y) {
+    int diffX = x - bounds.x();
+    int diffY = y - bounds.y();
+    setBounds(bounds.setPosition(x, y));
+
+    for (var child : children) {
+      child.setBounds(child.bounds.setPosition(child.bounds.x() + diffX, child.bounds.y() + diffY));
+    }
+  }
+
+  void resizeBounds(int width, int height) {
+    setBounds(bounds.setDimensions(width, height));
+    parent.invalidateLayout();
+  }
+
+  void resizeContent(int width, int height) {
+    setContentBounds(contentBounds.setDimensions(width, height));
   }
 
   GuiDocument getGuiDocument() {

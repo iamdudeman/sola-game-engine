@@ -1,0 +1,32 @@
+{
+  "tag": "Section",
+  "styles": {
+    "backgroundColor": "rgb(255, 255, 255)",
+    "borderColor": "#000000",
+    "direction": "column",
+    "gap": 5,
+    "padding": 5,
+    "crossAxisChildren": "center",
+    "width": "75%"
+  },
+  "children": [
+    {
+      "tag": "Button",
+      "styles": {
+        "borderColor": "#ff0000",
+        "padding": 10
+      },
+      "children": [
+        {
+          "tag": "Text",
+          "props": {
+            "text": "Button"
+          },
+          "styles": {
+
+          }
+        }
+      ]
+    }
+  ]
+}

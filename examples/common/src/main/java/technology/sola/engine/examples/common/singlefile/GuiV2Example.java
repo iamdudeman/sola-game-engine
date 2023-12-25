@@ -6,11 +6,6 @@ import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
-import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.guiv2.elements.SectionGuiElement;
-import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
-import technology.sola.engine.graphics.guiv2.elements.TextStyles;
-import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 
@@ -50,6 +45,9 @@ public class GuiV2Example extends SolaWithDefaults {
       if (keyEvent.keyCode() == Key.FIVE.getCode()) {
         guiDocument.setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("image").getAsset().rootElement());
       }
+      if (keyEvent.keyCode() == Key.SIX.getCode()) {
+        guiDocument.setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("button").getAsset().rootElement());
+      }
     });
   }
 
@@ -61,6 +59,7 @@ public class GuiV2Example extends SolaWithDefaults {
       .addAsset(GuiJsonDocument.class, "column", "assets/gui/test_column.json")
       .addAsset(GuiJsonDocument.class, "text", "assets/gui/test_text.json")
       .addAsset(GuiJsonDocument.class, "image", "assets/gui/test_image.json")
+      .addAsset(GuiJsonDocument.class, "button", "assets/gui/test_button.json")
       .loadAll()
       .onComplete(assets -> {
         if (assets[0] instanceof GuiJsonDocument guiJsonDocument) {

@@ -54,12 +54,13 @@ class LayoutUtil {
       if (position.isAbsolute()) {
         int absoluteX = position.x() == null
           ? child.bounds.x()
-          : position.x().getValue(child.boundConstraints.x() + child.boundConstraints.width());
+          : position.x().getValue(child.bounds.x() + child.bounds.width());
         int absoluteY = position.y() == null
           ? child.bounds.y()
-          : position.y().getValue(child.boundConstraints.y() + child.boundConstraints.height());
+          : position.y().getValue(child.bounds.y() + child.bounds.height());
 
-        child.setBounds(child.bounds.setPosition(absoluteX, absoluteY));
+        child.setPosition(absoluteX, absoluteY);
+//        child.setBounds(child.bounds.setPosition(absoluteX, absoluteY));
       } else {
         switch (direction) {
           case COLUMN, COLUMN_REVERSE: {
@@ -97,10 +98,33 @@ class LayoutUtil {
 
         // If child is position absolute alignment is ignored
         if (!position.isAbsolute()) {
-          child.setBounds(alignmentFunction.apply(child));
+          var temp = alignmentFunction.apply(child);
+
+          child.setPosition(temp.x(), temp.y());
+          child.resizeBounds(temp.width(), temp.height());
+//          child.setBounds(alignmentFunction.apply(child));
+//          child.invalidateLayout();
         }
       }
     }
+
+//    for (int i = 0; i < guiElementChildren.size(); i++) {
+//      int index = startIndex > 0 ? startIndex - i : i;
+//      GuiElement<?> child = guiElementChildren.get(index);
+//
+//      var position = child.getStyles().getPropertyValue(BaseStyles::position, Position.NONE);
+//
+//      if (position.isAbsolute()) {
+//        int absoluteX = position.x() == null
+//          ? child.bounds.x()
+//          : position.x().getValue(child.bounds.x() + child.bounds.width());
+//        int absoluteY = position.y() == null
+//          ? child.bounds.y()
+//          : position.y().getValue(child.bounds.y() + child.bounds.height());
+//
+//        child.setPosition(absoluteX, absoluteY);
+//      }
+//    }
   }
 
   private static GuiElementBounds recalculateBoundConstraints(GuiElement<?> guiElement, int x, int y) {
@@ -127,8 +151,8 @@ class LayoutUtil {
   private static GuiElementBounds calculateRowChildAlignmentBounds(GuiElement<?> child, MainAxisChildren mainAxisChildren, CrossAxisChildren crossAxisChildren, int usedWidth) {
     int xAlignment = switch (mainAxisChildren) {
       case START -> 0;
-      case CENTER -> (child.boundConstraints.width() - usedWidth) / 2;
-      case END -> child.boundConstraints.width() - usedWidth;
+      case CENTER -> (child.bounds.width() - usedWidth) / 2;
+      case END -> child.bounds.width() - usedWidth;
     };
     int yAlignment = switch (crossAxisChildren) {
       case START, STRETCH -> 0;
@@ -156,8 +180,8 @@ class LayoutUtil {
     };
     int yAlignment = switch (mainAxisChildren) {
       case START -> 0;
-      case CENTER -> (child.boundConstraints.height() - usedHeight) / 2;
-      case END -> child.boundConstraints.height() - usedHeight;
+      case CENTER -> (child.bounds.height() - usedHeight) / 2;
+      case END -> child.bounds.height() - usedHeight;
     };
 
     int newX = xAlignment > 0 ? child.bounds.x() + xAlignment : child.bounds.x();
@@ -195,7 +219,29 @@ class LayoutUtil {
         guiElement.getStyles().getPropertyValue(BaseStyles::height) == null ? contentDimensions.height() : guiElement.contentBounds.height()
       );
 
-      guiElement.setContentBounds(guiElement.getContentBounds().setDimensions(contentDimensions));
+      guiElement.resizeContent(contentDimensions.width(), contentDimensions.height());
+
+//      guiElement.setContentBounds(guiElement.getContentBounds().setDimensions(contentDimensions));
+    } else {
+      int gap = guiElement.styleContainer.getPropertyValue(BaseStyles::gap, 0);
+      var direction = guiElement.styleContainer.getPropertyValue(BaseStyles::direction, Direction.COLUMN);
+      var childrenInLayout = guiElement.children.stream().filter(child -> !child.getStyles().getPropertyValue(BaseStyles::position, Position.NONE).isAbsolute()).toList();
+
+      if (direction == Direction.ROW || direction == Direction.ROW_REVERSE) {
+        contentDimensions = new GuiElementDimensions(
+          guiElement.getStyles().getPropertyValue(BaseStyles::width) == null ? childrenInLayout.stream().mapToInt(child -> child.bounds.width()).sum() + gap * childrenInLayout.size() : guiElement.contentBounds.width(),
+          guiElement.getStyles().getPropertyValue(BaseStyles::height) == null ? childrenInLayout.stream().mapToInt(child -> child.bounds.height()).max().orElse(guiElement.contentBounds.height()) : guiElement.contentBounds.height()
+        );
+      } else {
+        contentDimensions = new GuiElementDimensions(
+          guiElement.getStyles().getPropertyValue(BaseStyles::width) == null ? childrenInLayout.stream().mapToInt(child -> child.bounds.width()).max().orElse(guiElement.contentBounds.width()) : guiElement.contentBounds.width(),
+          guiElement.getStyles().getPropertyValue(BaseStyles::height) == null ? childrenInLayout.stream().mapToInt(child -> child.bounds.height()).sum() + gap * childrenInLayout.size() : guiElement.contentBounds.height()
+        );
+      }
+
+      guiElement.resizeContent(contentDimensions.width(), contentDimensions.height());
+//      guiElement.invalidateLayout();
+//      guiElement.setContentBounds(guiElement.getContentBounds().setDimensions(contentDimensions));
     }
   }
 
