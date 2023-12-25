@@ -6,7 +6,6 @@ import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 
-// todo add schema and JSON blueprint for this
 public class ButtonGuiElement extends GuiElement<BaseStyles> {
   // props
   private Runnable onAction = () -> {

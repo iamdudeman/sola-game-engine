@@ -56,5 +56,5 @@ public abstract class GuiElementJsonBlueprint<Styles extends BaseStyles, Element
   /**
    * @return a new StylesBuilder for this blueprint to use
    */
-  abstract StylesBuilder createStylesBuilder();
+  protected abstract StylesBuilder createStylesBuilder();
 }

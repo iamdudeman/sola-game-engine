@@ -1,0 +1,24 @@
+{
+  "$id": "Button.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ButtonGuiElement",
+  "type": "object",
+  "properties": {
+    "tag": {
+      "const": "Button",
+      "description": "The tag of the element."
+    },
+    "props": {
+      "type": "object",
+      "properties": {
+        "disabled": {
+          "type": "boolean",
+          "description": "Whether the button is disabled or not."
+        }
+      }
+    },
+    "styles": {
+      "$ref": "../styles/BaseStyles.schema.json"
+    }
+  }
+}

@@ -22,6 +22,7 @@ import technology.sola.engine.graphics.guiv2.json.GuiJsonDocumentBuilder;
 import technology.sola.engine.graphics.guiv2.json.element.ImageElementJsonBlueprint;
 import technology.sola.engine.graphics.guiv2.json.element.SectionElementJsonBlueprint;
 import technology.sola.engine.graphics.guiv2.json.element.TextElementJsonBlueprint;
+import technology.sola.engine.graphics.guiv2.json.element.input.ButtonElementJsonBlueprint;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.system.LightFlickerSystem;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
@@ -289,7 +290,8 @@ public abstract class SolaWithDefaults extends Sola {
           new GuiJsonDocumentBuilder(List.of(
             new SectionElementJsonBlueprint(),
             new TextElementJsonBlueprint(),
-            new ImageElementJsonBlueprint()
+            new ImageElementJsonBlueprint(),
+            new ButtonElementJsonBlueprint()
           ))
         ));
       }

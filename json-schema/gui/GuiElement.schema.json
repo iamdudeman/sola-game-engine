@@ -12,6 +12,9 @@
     },
     {
       "$ref": "/elements/Image.schema.json"
+    },
+    {
+      "$ref": "/elements/input/Button.schema.json"
     }
   ]
 }
