@@ -3,6 +3,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "GuiElement",
   "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The id of the element."
+    }
+  },
   "oneOf": [
     {
       "$ref": "/elements/Section.schema.json"

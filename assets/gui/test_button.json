@@ -12,6 +12,7 @@
   "children": [
     {
       "tag": "Button",
+      "id": "button",
       "styles": {
         "borderColor": "#ff0000",
         "padding": 10

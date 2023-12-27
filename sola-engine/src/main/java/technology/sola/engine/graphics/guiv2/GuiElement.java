@@ -31,6 +31,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
   private GuiElement<?> parent;
   private final GuiElementEvents events = new GuiElementEvents();
   private boolean isMouseInside = false;
+  private String id;
 
   @SafeVarargs
   public GuiElement(Style... styles) {
@@ -122,6 +123,30 @@ public abstract class GuiElement<Style extends BaseStyles> {
     return contentBounds;
   }
 
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public <T extends GuiElement<?>> T findElementById(String id, Class<T> elementClass) {
+    if (id.equals(this.id)) {
+      return elementClass.cast(this);
+    }
+
+    for (var child : children) {
+      var childElement = child.findElementById(id, elementClass);
+
+      if (childElement != null) {
+        return childElement;
+      }
+    }
+
+    return null;
+  }
+
   public GuiElement<Style> removeChild(GuiElement<?> child) {
     if (children.contains(child)) {
       child.parent = null;
@@ -152,7 +177,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
   }
 
   public boolean isLayoutChanged() {
-    return isLayoutChanged;
+    return isLayoutChanged || children.stream().anyMatch(GuiElement::isLayoutChanged);
   }
 
   public void invalidateLayout() {
@@ -193,14 +218,6 @@ public abstract class GuiElement<Style extends BaseStyles> {
     if (event.isAbleToPropagate() && bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
       events.mousePressed().emit(event);
     }
-
-//    if (bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
-//      children.forEach(child -> child.onMousePressed(event));
-//
-//      if (event.isAbleToPropagate()) {
-//        events.mousePressed().emit(event);
-//      }
-//    }
   }
 
   void onMouseReleased(GuiMouseEvent event) {
@@ -211,14 +228,6 @@ public abstract class GuiElement<Style extends BaseStyles> {
     if (event.isAbleToPropagate() && bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
       events.mouseReleased().emit(event);
     }
-
-//    if (bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
-//      children.forEach(child -> child.onMouseReleased(event));
-//
-//      if (event.isAbleToPropagate()) {
-//        events.mouseReleased().emit(event);
-//      }
-//    }
   }
 
   void onMouseMoved(GuiMouseEvent event) {
@@ -239,14 +248,6 @@ public abstract class GuiElement<Style extends BaseStyles> {
         events.mouseExited().emit(event);
       }
     }
-
-//    if (bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
-//      children.forEach(child -> child.onMouseMoved(event));
-//
-//      if (event.isAbleToPropagate()) {
-//        events.mouseMoved().emit(event);
-//      }
-//    }
   }
 
   void setBounds(GuiElementBounds bounds) {
@@ -265,7 +266,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     );
   }
 
-  void setContentBounds(GuiElementBounds contentBounds) {
+  private void setContentBounds(GuiElementBounds contentBounds) {
     this.contentBounds = contentBounds;
 
     Border border = getStyles().getPropertyValue(BaseStyles::border, Border.NONE);
@@ -285,13 +286,12 @@ public abstract class GuiElement<Style extends BaseStyles> {
     setBounds(bounds.setPosition(x, y));
 
     for (var child : children) {
-      child.setBounds(child.bounds.setPosition(child.bounds.x() + diffX, child.bounds.y() + diffY));
+      child.setPosition(child.bounds.x() + diffX, child.bounds.y() + diffY);
     }
   }
 
   void resizeBounds(int width, int height) {
     setBounds(bounds.setDimensions(width, height));
-    parent.invalidateLayout();
   }
 
   void resizeContent(int width, int height) {

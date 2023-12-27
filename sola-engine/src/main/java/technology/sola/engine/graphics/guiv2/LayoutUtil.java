@@ -43,7 +43,11 @@ class LayoutUtil {
       rebuildLayout(child);
 
       // update bounds after children layouts determined
+      // todo think about this more
+//      var temp = calculateDefaultLayoutBounds(child);
       child.setBounds(calculateDefaultLayoutBounds(child));
+//      child.resizeBounds(temp.width(), temp.height());
+//      child.setPosition(temp.x(), temp.y());
 
       // update content bounds if it should shrink
       updateContentBounds(child);
@@ -60,7 +64,6 @@ class LayoutUtil {
           : position.y().getValue(child.bounds.y() + child.bounds.height());
 
         child.setPosition(absoluteX, absoluteY);
-//        child.setBounds(child.bounds.setPosition(absoluteX, absoluteY));
       } else {
         switch (direction) {
           case COLUMN, COLUMN_REVERSE: {
@@ -100,31 +103,11 @@ class LayoutUtil {
         if (!position.isAbsolute()) {
           var temp = alignmentFunction.apply(child);
 
-          child.setPosition(temp.x(), temp.y());
           child.resizeBounds(temp.width(), temp.height());
-//          child.setBounds(alignmentFunction.apply(child));
-//          child.invalidateLayout();
+          child.setPosition(temp.x(), temp.y());
         }
       }
     }
-
-//    for (int i = 0; i < guiElementChildren.size(); i++) {
-//      int index = startIndex > 0 ? startIndex - i : i;
-//      GuiElement<?> child = guiElementChildren.get(index);
-//
-//      var position = child.getStyles().getPropertyValue(BaseStyles::position, Position.NONE);
-//
-//      if (position.isAbsolute()) {
-//        int absoluteX = position.x() == null
-//          ? child.bounds.x()
-//          : position.x().getValue(child.bounds.x() + child.bounds.width());
-//        int absoluteY = position.y() == null
-//          ? child.bounds.y()
-//          : position.y().getValue(child.bounds.y() + child.bounds.height());
-//
-//        child.setPosition(absoluteX, absoluteY);
-//      }
-//    }
   }
 
   private static GuiElementBounds recalculateBoundConstraints(GuiElement<?> guiElement, int x, int y) {
@@ -220,8 +203,6 @@ class LayoutUtil {
       );
 
       guiElement.resizeContent(contentDimensions.width(), contentDimensions.height());
-
-//      guiElement.setContentBounds(guiElement.getContentBounds().setDimensions(contentDimensions));
     } else {
       int gap = guiElement.styleContainer.getPropertyValue(BaseStyles::gap, 0);
       var direction = guiElement.styleContainer.getPropertyValue(BaseStyles::direction, Direction.COLUMN);
@@ -240,8 +221,6 @@ class LayoutUtil {
       }
 
       guiElement.resizeContent(contentDimensions.width(), contentDimensions.height());
-//      guiElement.invalidateLayout();
-//      guiElement.setContentBounds(guiElement.getContentBounds().setDimensions(contentDimensions));
     }
   }
 

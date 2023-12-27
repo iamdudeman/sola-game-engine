@@ -51,6 +51,8 @@ public class GuiJsonDocumentBuilder {
     GuiElement<?> element = guiElementJsonBlueprint.createElementFromJson(elementJson.getObject(ATTR_PROPS, new JsonObject()));
     BaseStyles styles = guiElementJsonBlueprint.createStylesFromJson(elementJson.getObject(ATTR_STYLES, new JsonObject()));
 
+    element.setId(elementJson.getString("id", null));
+
     ((GuiElement<BaseStyles>) element).setStyle(styles);
 
     elementJson.getArray(ATTR_CHILDREN, new JsonArray()).stream().map(childJson -> buildElement(childJson.asObject())).forEach(element::appendChildren);

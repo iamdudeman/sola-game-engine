@@ -48,19 +48,4 @@ class RootGuiElement extends GuiElement<BaseStyles> {
   void onKeyReleased(GuiKeyEvent event) {
     event.stopPropagation();
   }
-
-  @Override
-  void onMousePressed(GuiMouseEvent event) {
-    event.stopPropagation();
-  }
-
-  @Override
-  void onMouseReleased(GuiMouseEvent event) {
-    event.stopPropagation();
-  }
-
-  @Override
-  void onMouseMoved(GuiMouseEvent event) {
-    event.stopPropagation();
-  }
 }
