@@ -1,58 +1,27 @@
 # sola-game-engine TODO list
 
-Rough order
-1. ~~Text or image implementation to prove out layout basics~~
-2. ~~Load from file implementation (little UI with refresh button from file for easier testing)~~
-3. ~~Finish hooking up layout properties~~
-4. ~~Implement "absolute" positioning where it is relative to parent but otherwise excluded from layout~~
-5. Add other GuiElements + json blueprints
-6. ~~Switch events to have each child check if it "captures" the event (needed for absolute positioning)~~
-7. ~~Add "id" to elements and ability to getElementById (and method to add events after loading gui from json)~~
-    * could also have an "event id -> event function" map that can be used as part of gui doc loading
-    * elements could then add event listeners from this map
-    * ie. (`mousePress` -> `doSomething`)
-8. Make a "cookbook" to play around with properties and elements
-9. hover styles
-10. active styles (mouse pressed or key pressed)
+Remaining v2
+1. Keyboard navigation for SectionGuiElement
+2. active + hover styles
+3. TextInputGuiElement
+4. Cookbook demo of some sort
 
 Later things
 * Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
     * maybe just check for any mouse event list size > 0?
+* consider an event map of some sort for when loading gui documents
+    * could also have an "event id -> event function" map that can be used as part of gui doc loading
+    * elements could then add event listeners from this map
+    * ie. (`mousePress` -> `doSomething`)
 * maybe put default style values in a common place?
 * when should layout be invalidated (can partial invalidations happen for children/parent)
 * ensure transparency stuff is hooked up properly
 * hover properties
 * "active" properties (apply style when clicking for example)
-* split layout and paint styles to prevent extra calculations
-
-* Flex only layouts
-    * no margin
-    * gap
-    * Visibility - none, hidden, visible
-    * Alignment
-        * HorizontalAlignment - left, right, center
-        * VerticalAlignment - top, center, bottom
-        * or alignMainAxis + alignCrossAxis?
-    * direction - row, row-reverse, column, column-reverse
-
-* GUI V2 implementation
-    * "style" attribute
-        * "layout" options
-        * "paint" options
-    * any element can have children passed in (but doesn't have to use them)
-    * inherit styles from parent? (NO)
-    * root "element" of document is full width and height by default and is always defined?
-* ~~Don't force setting props for containers when creating them via gui document~~
+* consider splitting layout and paint styles to prevent extra calculations
 * v1 bugs
     * stopping gui mouse event propagation currently isn't hooked up
         * this needs to be added to `GuiElementContainer#handleMouseEvent`
-* ~~SolaGui~~
-    * ~~Implement a way to load gui stuff from a file~~
-        * ~~possibly use JSON to define gui structure~~
-    * ~~A "post load" callback to add event listeners and such~~
-* gui v2 later
-    * absolute positioning
-    * space-between, space-around, space-evenly
 
 ## Known Bugs List
 
