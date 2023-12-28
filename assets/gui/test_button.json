@@ -11,6 +11,15 @@
   },
   "children": [
     {
+      "tag": "Text",
+      "props": {
+        "text": "Some title"
+      },
+      "styles": {
+          "paddingBottom": 10
+      }
+    },
+    {
       "tag": "Button",
       "id": "button",
       "styles": {
@@ -22,6 +31,44 @@
           "tag": "Text",
           "props": {
             "text": "Button"
+          },
+          "styles": {
+
+          }
+        }
+      ]
+    },
+    {
+      "tag": "Button",
+      "id": "button2",
+      "styles": {
+        "borderColor": "#ff0000",
+        "padding": 10
+      },
+      "children": [
+        {
+          "tag": "Text",
+          "props": {
+            "text": "Button 2"
+          },
+          "styles": {
+
+          }
+        }
+      ]
+    },
+    {
+      "tag": "Button",
+      "id": "button3",
+      "styles": {
+        "borderColor": "#ff0000",
+        "padding": 10
+      },
+      "children": [
+        {
+          "tag": "Text",
+          "props": {
+            "text": "Button 3"
           },
           "styles": {
 

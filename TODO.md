@@ -6,12 +6,14 @@ Rough order
 3. ~~Finish hooking up layout properties~~
 4. ~~Implement "absolute" positioning where it is relative to parent but otherwise excluded from layout~~
 5. Add other GuiElements + json blueprints
-6. Switch events to have each child check if it "captures" the event (needed for absolute positioning)
-7. Add "id" to elements and ability to getElementById (and method to add events after loading gui from json)
+6. ~~Switch events to have each child check if it "captures" the event (needed for absolute positioning)~~
+7. ~~Add "id" to elements and ability to getElementById (and method to add events after loading gui from json)~~
     * could also have an "event id -> event function" map that can be used as part of gui doc loading
     * elements could then add event listeners from this map
     * ie. (`mousePress` -> `doSomething`)
 8. Make a "cookbook" to play around with properties and elements
+9. hover styles
+10. active styles (mouse pressed or key pressed)
 
 Later things
 * Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
@@ -21,6 +23,7 @@ Later things
 * ensure transparency stuff is hooked up properly
 * hover properties
 * "active" properties (apply style when clicking for example)
+* split layout and paint styles to prevent extra calculations
 
 * Flex only layouts
     * no margin
@@ -29,7 +32,7 @@ Later things
     * Alignment
         * HorizontalAlignment - left, right, center
         * VerticalAlignment - top, center, bottom
-        * or alignMainAccess + alignCrossAccess?
+        * or alignMainAxis + alignCrossAxis?
     * direction - row, row-reverse, column, column-reverse
 
 * GUI V2 implementation

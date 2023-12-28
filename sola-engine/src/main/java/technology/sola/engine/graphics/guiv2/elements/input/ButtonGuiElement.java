@@ -35,6 +35,7 @@ public class ButtonGuiElement extends GuiElement<BaseStyles> {
 
     events().mouseReleased().on(mouseEvent -> {
       if (isClicking && isHovered) {
+        requestFocus();
         onAction.run();
       }
 
