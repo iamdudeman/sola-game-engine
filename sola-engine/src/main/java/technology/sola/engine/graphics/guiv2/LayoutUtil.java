@@ -202,17 +202,39 @@ class LayoutUtil {
     if (contentDimensions == null) {
       int gap = styles.getPropertyValue(BaseStyles::gap, 0);
       var direction = styles.getPropertyValue(BaseStyles::direction, Direction.COLUMN);
-      var childrenInLayout = guiElement.children.stream().filter(child -> !child.getStyles().getPropertyValue(BaseStyles::position, Position.NONE).isAbsolute()).toList();
+      var childrenInLayout = guiElement.children.stream()
+        .filter(child -> !child.getStyles().getPropertyValue(BaseStyles::position, Position.NONE).isAbsolute())
+        .toList();
 
       if (direction == Direction.ROW || direction == Direction.ROW_REVERSE) {
         contentDimensions = new GuiElementDimensions(
-          isAutoWidth ? childrenInLayout.stream().mapToInt(child -> child.bounds.width()).sum() + gap * childrenInLayout.size() : guiElement.contentBounds.width(),
-          isAutoHeight ? childrenInLayout.stream().mapToInt(child -> child.bounds.height()).max().orElse(guiElement.contentBounds.height()) : guiElement.contentBounds.height()
+          isAutoWidth
+            ? childrenInLayout.stream().mapToInt(child -> child.bounds.width()).sum() + gap * childrenInLayout.size()
+            : guiElement.contentBounds.width(),
+          isAutoHeight
+            ? childrenInLayout.stream().mapToInt(child -> child.bounds.height()).max().orElse(0)
+            : guiElement.contentBounds.height()
         );
       } else {
         contentDimensions = new GuiElementDimensions(
-          isAutoWidth ? childrenInLayout.stream().mapToInt(child -> child.bounds.width()).max().orElse(guiElement.contentBounds.width()) : guiElement.contentBounds.width(),
-          isAutoHeight ? childrenInLayout.stream().mapToInt(child -> child.bounds.height()).sum() + gap * childrenInLayout.size() : guiElement.contentBounds.height()
+          isAutoWidth
+            ? childrenInLayout.stream().mapToInt(child -> child.bounds.width()).max().orElse(0)
+            : guiElement.contentBounds.width(),
+          isAutoHeight
+            ? childrenInLayout.stream().mapToInt(child -> child.bounds.height()).sum() + gap * childrenInLayout.size()
+            : guiElement.contentBounds.height()
+        );
+      }
+
+      // fill available space if there are no children
+      if (contentDimensions.width() == 0) {
+        contentDimensions = new GuiElementDimensions(
+          guiElement.contentBounds.width(), contentDimensions.height()
+        );
+      }
+      if (contentDimensions.height() == 0) {
+        contentDimensions = new GuiElementDimensions(
+          contentDimensions.width(), guiElement.contentBounds.height()
         );
       }
     } else {

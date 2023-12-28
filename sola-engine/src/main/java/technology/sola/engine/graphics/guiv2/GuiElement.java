@@ -264,27 +264,16 @@ public abstract class GuiElement<Style extends BaseStyles> {
     );
   }
 
-  private void setContentBounds(GuiElementBounds contentBounds) {
-    this.contentBounds = contentBounds;
-
-    Border border = styleContainer.getPropertyValue(BaseStyles::border, Border.NONE);
-    Padding padding = styleContainer.getPropertyValue(BaseStyles::padding, Padding.NONE);
-
-    this.bounds = new GuiElementBounds(
-      contentBounds.x() - border.left() - padding.left(),
-      contentBounds.y() - border.top() - padding.top(),
-      contentBounds.width() + border.left() + border.right() + padding.left() + padding.right(),
-      contentBounds.height() + border.top() + border.bottom() + padding.top() + padding.bottom()
-    );
-  }
-
   void setPosition(int x, int y) {
     int diffX = x - bounds.x();
     int diffY = y - bounds.y();
-    setBounds(bounds.setPosition(x, y));
 
-    for (var child : children) {
-      child.setPosition(child.bounds.x() + diffX, child.bounds.y() + diffY);
+    if (diffX != 0 || diffY != 0) {
+      setBounds(bounds.setPosition(x, y));
+
+      for (var child : children) {
+        child.setPosition(child.bounds.x() + diffX, child.bounds.y() + diffY);
+      }
     }
   }
 
@@ -306,5 +295,19 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
       isLayoutChanged = false;
     }
+  }
+
+  private void setContentBounds(GuiElementBounds contentBounds) {
+    this.contentBounds = contentBounds;
+
+    Border border = styleContainer.getPropertyValue(BaseStyles::border, Border.NONE);
+    Padding padding = styleContainer.getPropertyValue(BaseStyles::padding, Padding.NONE);
+
+    this.bounds = new GuiElementBounds(
+      contentBounds.x() - border.left() - padding.left(),
+      contentBounds.y() - border.top() - padding.top(),
+      contentBounds.width() + border.left() + border.right() + padding.left() + padding.right(),
+      contentBounds.height() + border.top() + border.bottom() + padding.top() + padding.bottom()
+    );
   }
 }
