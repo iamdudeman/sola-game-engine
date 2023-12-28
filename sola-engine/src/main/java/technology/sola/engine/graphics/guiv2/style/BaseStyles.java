@@ -11,8 +11,6 @@ public class BaseStyles {
   private final StyleValue width;
   private final StyleValue height;
   private final Visibility visibility;
-
-  // Layout specific
   private final Integer gap;
   private final Direction direction;
   private final MainAxisChildren mainAxisChildren;

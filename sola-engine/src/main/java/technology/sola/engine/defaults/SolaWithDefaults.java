@@ -23,6 +23,7 @@ import technology.sola.engine.graphics.guiv2.json.element.ImageElementJsonBluepr
 import technology.sola.engine.graphics.guiv2.json.element.SectionElementJsonBlueprint;
 import technology.sola.engine.graphics.guiv2.json.element.TextElementJsonBlueprint;
 import technology.sola.engine.graphics.guiv2.json.element.input.ButtonElementJsonBlueprint;
+import technology.sola.engine.graphics.guiv2.json.element.input.TextInputElementJsonBlueprint;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.system.LightFlickerSystem;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
@@ -291,7 +292,8 @@ public abstract class SolaWithDefaults extends Sola {
             new SectionElementJsonBlueprint(),
             new TextElementJsonBlueprint(),
             new ImageElementJsonBlueprint(),
-            new ButtonElementJsonBlueprint()
+            new ButtonElementJsonBlueprint(),
+            new TextInputElementJsonBlueprint()
           ))
         ));
       }

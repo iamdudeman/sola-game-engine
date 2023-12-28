@@ -47,7 +47,7 @@ public class GuiV2Example extends SolaWithDefaults {
         guiDocument.setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("image").getAsset().rootElement());
       }
       if (keyEvent.keyCode() == Key.SIX.getCode()) {
-        guiDocument.setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("button").getAsset().rootElement());
+        guiDocument.setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("inputs").getAsset().rootElement());
       }
     });
   }
@@ -60,7 +60,7 @@ public class GuiV2Example extends SolaWithDefaults {
       .addAsset(GuiJsonDocument.class, "column", "assets/gui/test_column.json")
       .addAsset(GuiJsonDocument.class, "text", "assets/gui/test_text.json")
       .addAsset(GuiJsonDocument.class, "image", "assets/gui/test_image.json")
-      .addAsset(GuiJsonDocument.class, "button", "assets/gui/test_button.json")
+      .addAsset(GuiJsonDocument.class, "inputs", "assets/gui/test_input.json")
       .loadAll()
       .onComplete(assets -> {
         if (assets[0] instanceof GuiJsonDocument guiJsonDocument) {

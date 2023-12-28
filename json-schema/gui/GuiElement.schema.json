@@ -21,6 +21,9 @@
     },
     {
       "$ref": "/elements/input/Button.schema.json"
+    },
+    {
+      "$ref": "/elements/input/TextInput.schema.json"
     }
   ]
 }

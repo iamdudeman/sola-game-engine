@@ -4,6 +4,7 @@ import technology.sola.engine.graphics.Color;
 
 public record Border(Color color, Integer top, Integer left, Integer bottom, Integer right) implements MergeableProperty<Border> {
   public static final Border NONE = new Border(0, Color.BLACK);
+  public static final Border DEFAULT_FOCUS_OUTLINE = new Border(1, new Color(0 ,150, 255));
 
   public Border(int size, Color color) {
     this(color, size, size, size, size);

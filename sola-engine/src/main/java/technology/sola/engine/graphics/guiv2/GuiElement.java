@@ -87,10 +87,11 @@ public abstract class GuiElement<Style extends BaseStyles> {
     }
 
     if (isFocussed()) {
-      Border outline = styleContainer.getPropertyValue(BaseStyles::outline, Border.NONE);
+      // todo consider not having a default focus outline
+      Border outline = styleContainer.getPropertyValue(BaseStyles::outline, Border.DEFAULT_FOCUS_OUTLINE);
 
       if (outline.bottom() > 0) {
-        renderer.drawRect(x, y, width, height, outline.color());
+        renderer.drawRect(x, y, width - outline.right(), height - outline.bottom(), outline.color());
       }
     }
 

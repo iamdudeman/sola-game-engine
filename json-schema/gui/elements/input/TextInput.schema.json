@@ -1,24 +1,24 @@
 {
-  "$id": "Button.schema.json",
+  "$id": "TextInput.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "ButtonGuiElement",
+  "title": "TextInputGuiElement",
   "type": "object",
   "properties": {
     "tag": {
-      "const": "Button",
+      "const": "TextInput",
       "description": "The tag of the element."
     },
     "props": {
       "type": "object",
       "properties": {
-        "disabled": {
-          "type": "boolean",
-          "description": "Whether the button is disabled or not."
+        "text": {
+          "type": "string",
+          "description": "The text to render."
         }
       }
     },
     "styles": {
-      "$ref": "../../styles/BaseStyles.schema.json"
+      "$ref": "../../styles/TextStyles.schema.json"
     }
   }
 }

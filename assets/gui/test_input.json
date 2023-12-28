@@ -58,6 +58,13 @@
       ]
     },
     {
+      "tag": "TextInput",
+      "styles": {
+        "borderColor": "#ff0000",
+        "padding": 10
+      }
+    },
+    {
       "tag": "Button",
       "id": "button3",
       "styles": {
