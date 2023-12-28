@@ -30,6 +30,7 @@ public class GuiDocument {
     }
 
     root.appendChildren(rootEle);
+    rootEle.requestFocus();
   }
 
   public boolean isFocussed(GuiElement<?> guiElement) {

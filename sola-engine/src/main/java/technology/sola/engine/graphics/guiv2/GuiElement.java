@@ -8,6 +8,7 @@ import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.guiv2.style.StyleContainer;
 import technology.sola.engine.graphics.guiv2.style.property.*;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.input.Key;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,8 @@ public abstract class GuiElement<Style extends BaseStyles> {
   boolean isLayoutChanged;
   private GuiElement<?> parent;
   private final GuiElementEvents events = new GuiElementEvents();
-  private boolean isMouseInside = false;
+  private boolean isHovered = false;
+  private boolean isActive = false;
   private String id;
 
   @SafeVarargs
@@ -93,6 +95,14 @@ public abstract class GuiElement<Style extends BaseStyles> {
     }
 
     renderContent(renderer);
+  }
+
+  public boolean isHovered() {
+    return isHovered;
+  }
+
+  public boolean isActive() {
+    return isActive;
   }
 
   public boolean isFocussed() {
@@ -195,6 +205,9 @@ public abstract class GuiElement<Style extends BaseStyles> {
   }
 
   void onKeyPressed(GuiKeyEvent event) {
+    if (event.getKeyEvent().keyCode() == Key.SPACE.getCode()) {
+      isActive = true;
+    }
     events.keyPressed().emit(event);
 
     if (event.isAbleToPropagate()) {
@@ -204,6 +217,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
   void onKeyReleased(GuiKeyEvent event) {
     events.keyReleased().emit(event);
+    isActive = false;
 
     if (event.isAbleToPropagate()) {
       parent.onKeyReleased(event);
@@ -216,6 +230,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     }
 
     if (event.isAbleToPropagate() && bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
+      isActive = true;
       events.mousePressed().emit(event);
     }
   }
@@ -227,6 +242,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
     if (event.isAbleToPropagate() && bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
       events.mouseReleased().emit(event);
+      isActive = false;
     }
   }
 
@@ -239,12 +255,12 @@ public abstract class GuiElement<Style extends BaseStyles> {
       if (bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
         events.mouseMoved().emit(event);
 
-        if (!isMouseInside) {
-          isMouseInside = true;
+        if (!isHovered) {
+          isHovered = true;
           events.mouseEntered().emit(event);
         }
-      } else if (isMouseInside) {
-        isMouseInside = false;
+      } else if (isHovered) {
+        isHovered = false;
         events.mouseExited().emit(event);
       }
     }
