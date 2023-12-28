@@ -2,7 +2,6 @@ package technology.sola.engine.graphics.guiv2;
 
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.graphics.guiv2.event.GuiKeyEvent;
-import technology.sola.engine.graphics.guiv2.event.GuiMouseEvent;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.renderer.Renderer;
 

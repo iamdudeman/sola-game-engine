@@ -253,8 +253,6 @@ public abstract class GuiElement<Style extends BaseStyles> {
   void setBounds(GuiElementBounds bounds) {
     this.bounds = bounds;
 
-    var styleContainer = getStyles();
-
     Border border = styleContainer.getPropertyValue(BaseStyles::border, Border.NONE);
     Padding padding = styleContainer.getPropertyValue(BaseStyles::padding, Padding.NONE);
 
@@ -269,8 +267,8 @@ public abstract class GuiElement<Style extends BaseStyles> {
   private void setContentBounds(GuiElementBounds contentBounds) {
     this.contentBounds = contentBounds;
 
-    Border border = getStyles().getPropertyValue(BaseStyles::border, Border.NONE);
-    Padding padding = getStyles().getPropertyValue(BaseStyles::padding, Padding.NONE);
+    Border border = styleContainer.getPropertyValue(BaseStyles::border, Border.NONE);
+    Padding padding = styleContainer.getPropertyValue(BaseStyles::padding, Padding.NONE);
 
     this.bounds = new GuiElementBounds(
       contentBounds.x() - border.left() - padding.left(),

@@ -15,16 +15,14 @@ class LayoutUtil {
       return;
     }
 
+    var guiElementChildren = guiElement.children;
+    var styles = guiElement.getStyles();
+    var direction = styles.getPropertyValue(BaseStyles::direction, Direction.COLUMN);
+    int gap = styles.getPropertyValue(BaseStyles::gap, 0);
     int xOffset = guiElement.boundConstraints.x();
     int yOffset = guiElement.boundConstraints.y();
 
-    var styles = guiElement.getStyles();
-
-    Direction direction = styles.getPropertyValue(BaseStyles::direction, Direction.COLUMN);
-    int gap = styles.getPropertyValue(BaseStyles::gap, 0);
-    var guiElementChildren = guiElement.children;
-
-    int startIndex = switch (direction) {
+    final int startIndex = switch (direction) {
       case ROW, COLUMN -> 0;
       case ROW_REVERSE, COLUMN_REVERSE -> guiElementChildren.size() - 1;
     };
@@ -32,6 +30,7 @@ class LayoutUtil {
     int usedWidthAccumulator = 0;
     int usedHeightAccumulator = 0;
 
+    // main layout calculation loop
     for (int i = 0; i < guiElementChildren.size(); i++) {
       int index = startIndex > 0 ? startIndex - i : i;
       GuiElement<?> child = guiElementChildren.get(index);
@@ -43,11 +42,7 @@ class LayoutUtil {
       rebuildLayout(child);
 
       // update bounds after children layouts determined
-      // todo think about this more
-//      var temp = calculateDefaultLayoutBounds(child);
       child.setBounds(calculateDefaultLayoutBounds(child));
-//      child.resizeBounds(temp.width(), temp.height());
-//      child.setPosition(temp.x(), temp.y());
 
       // update content bounds if it should shrink
       updateContentBounds(child);
@@ -78,21 +73,26 @@ class LayoutUtil {
           }
         }
       }
+
+      // child layout bounds have been adjusted
+      child.isLayoutChanged = false;
     }
 
-    // calculate alignment of elements in the flow
-    final int usedWidth = usedWidthAccumulator;
-    final int usedHeight = usedHeightAccumulator;
+    // prepare to calculate alignment adjustments of elements in the flow
     var mainAxisChildren = styles.getPropertyValue(BaseStyles::mainAxisChildren, MainAxisChildren.START);
     var crossAxisChildren = styles.getPropertyValue(BaseStyles::crossAxisChildren, CrossAxisChildren.START);
 
-    AlignmentFunction alignmentFunction = switch (direction) {
-      case ROW, ROW_REVERSE -> child -> calculateRowChildAlignmentBounds(child, mainAxisChildren, crossAxisChildren, usedWidth);
-      case COLUMN, COLUMN_REVERSE -> child -> calculateColumnChildAlignmentBounds(child, mainAxisChildren, crossAxisChildren, usedHeight);
-    };
-
     // only need apply alignment if either axis is not START
     if (mainAxisChildren != MainAxisChildren.START || crossAxisChildren != CrossAxisChildren.START) {
+      final int usedWidth = usedWidthAccumulator;
+      final int usedHeight = usedHeightAccumulator;
+
+      AlignmentFunction alignmentFunction = switch (direction) {
+        case ROW, ROW_REVERSE -> child -> calculateRowChildAlignmentBounds(child, mainAxisChildren, crossAxisChildren, usedWidth);
+        case COLUMN, COLUMN_REVERSE -> child -> calculateColumnChildAlignmentBounds(child, mainAxisChildren, crossAxisChildren, usedHeight);
+      };
+
+      // alignment adjustment loop
       for (int i = 0; i < guiElementChildren.size(); i++) {
         int index = startIndex > 0 ? startIndex - i : i;
         GuiElement<?> child = guiElementChildren.get(index);
@@ -194,34 +194,35 @@ class LayoutUtil {
 
   private static void updateContentBounds(GuiElement<?> guiElement) {
     var contentDimensions = guiElement.calculateContentDimensions();
+    var styles = guiElement.getStyles();
+    boolean isAutoWidth = styles.getPropertyValue(BaseStyles::width) == null;
+    boolean isAutoHeight = styles.getPropertyValue(BaseStyles::height) == null;
 
-    if (contentDimensions != null) {
-      // If a width or height is set those should always "win out"
-      contentDimensions = new GuiElementDimensions(
-        guiElement.getStyles().getPropertyValue(BaseStyles::width) == null ? contentDimensions.width() : guiElement.contentBounds.width(),
-        guiElement.getStyles().getPropertyValue(BaseStyles::height) == null ? contentDimensions.height() : guiElement.contentBounds.height()
-      );
-
-      guiElement.resizeContent(contentDimensions.width(), contentDimensions.height());
-    } else {
-      int gap = guiElement.styleContainer.getPropertyValue(BaseStyles::gap, 0);
-      var direction = guiElement.styleContainer.getPropertyValue(BaseStyles::direction, Direction.COLUMN);
+    // If no custom content dimensions then size based on children
+    if (contentDimensions == null) {
+      int gap = styles.getPropertyValue(BaseStyles::gap, 0);
+      var direction = styles.getPropertyValue(BaseStyles::direction, Direction.COLUMN);
       var childrenInLayout = guiElement.children.stream().filter(child -> !child.getStyles().getPropertyValue(BaseStyles::position, Position.NONE).isAbsolute()).toList();
 
       if (direction == Direction.ROW || direction == Direction.ROW_REVERSE) {
         contentDimensions = new GuiElementDimensions(
-          guiElement.getStyles().getPropertyValue(BaseStyles::width) == null ? childrenInLayout.stream().mapToInt(child -> child.bounds.width()).sum() + gap * childrenInLayout.size() : guiElement.contentBounds.width(),
-          guiElement.getStyles().getPropertyValue(BaseStyles::height) == null ? childrenInLayout.stream().mapToInt(child -> child.bounds.height()).max().orElse(guiElement.contentBounds.height()) : guiElement.contentBounds.height()
+          isAutoWidth ? childrenInLayout.stream().mapToInt(child -> child.bounds.width()).sum() + gap * childrenInLayout.size() : guiElement.contentBounds.width(),
+          isAutoHeight ? childrenInLayout.stream().mapToInt(child -> child.bounds.height()).max().orElse(guiElement.contentBounds.height()) : guiElement.contentBounds.height()
         );
       } else {
         contentDimensions = new GuiElementDimensions(
-          guiElement.getStyles().getPropertyValue(BaseStyles::width) == null ? childrenInLayout.stream().mapToInt(child -> child.bounds.width()).max().orElse(guiElement.contentBounds.width()) : guiElement.contentBounds.width(),
-          guiElement.getStyles().getPropertyValue(BaseStyles::height) == null ? childrenInLayout.stream().mapToInt(child -> child.bounds.height()).sum() + gap * childrenInLayout.size() : guiElement.contentBounds.height()
+          isAutoWidth ? childrenInLayout.stream().mapToInt(child -> child.bounds.width()).max().orElse(guiElement.contentBounds.width()) : guiElement.contentBounds.width(),
+          isAutoHeight ? childrenInLayout.stream().mapToInt(child -> child.bounds.height()).sum() + gap * childrenInLayout.size() : guiElement.contentBounds.height()
         );
       }
-
-      guiElement.resizeContent(contentDimensions.width(), contentDimensions.height());
+    } else {
+      contentDimensions = new GuiElementDimensions(
+        isAutoWidth ? contentDimensions.width() : guiElement.contentBounds.width(),
+        isAutoHeight ? contentDimensions.height() : guiElement.contentBounds.height()
+      );
     }
+
+    guiElement.resizeContent(contentDimensions.width(), contentDimensions.height());
   }
 
   @FunctionalInterface
