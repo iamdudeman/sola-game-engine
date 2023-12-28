@@ -7,6 +7,8 @@ Remaining v2
 4. Cookbook demo of some sort
 
 Later things
+* allow \n TextGuiElement new line wrapping
+* delete reference html files
 * Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
     * maybe just check for any mouse event list size > 0?
 * consider an event map of some sort for when loading gui documents
@@ -41,8 +43,8 @@ Later things
 * add "getId" to Asset
 * update to Java 21
     * teavm 0.9.0 has support
+* delete gui v1 code and move "v2" to gui package
 * JSON schema files for
-    * GuiV2 stuff
     * font stuff
     * spritesheet stuff
 * Consider array list for possible SpacialHashMap performance boost
