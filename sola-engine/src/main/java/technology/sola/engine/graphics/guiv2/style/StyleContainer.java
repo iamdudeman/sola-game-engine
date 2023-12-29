@@ -13,22 +13,39 @@ public class StyleContainer<Style extends BaseStyles> {
   private final Map<Function<Style, ?>, Object> computedCache = new HashMap<>();
   private final GuiElement<Style> guiElement;
   private List<ConditionalStyle<Style>> conditionalStyles;
+  private boolean[] conditionsArray;
 
   public StyleContainer(GuiElement<Style> guiElement) {
     this.guiElement = guiElement;
     conditionalStyles = new ArrayList<>();
+    conditionsArray = new boolean[0];
   }
 
   public void invalidate() {
-    // todo make this smarter by keeping track of conditions met
     // todo should this also invalidate layout???
-    computedCache.clear();
+    boolean hasChanged = false;
+
+    for (int i = 0; i < this.conditionalStyles.size(); i++) {
+      if (conditionsArray[i] != conditionalStyles.get(i).condition().apply(guiElement)) {
+        hasChanged = true;
+        break;
+      }
+    }
+
+    if (hasChanged) {
+      computedCache.clear();
+
+      for (int i = 0; i < this.conditionalStyles.size(); i++) {
+        conditionsArray[i] = conditionalStyles.get(i).condition().apply(guiElement);
+      }
+    }
   }
 
   public final void setStyles(List<ConditionalStyle<Style>> styles) {
     computedCache.clear();
 
     this.conditionalStyles = styles == null ? new ArrayList<>() : styles;
+    conditionsArray = styles == null ? new boolean[0] : new boolean[styles.size()];
   }
 
   public <R> R getPropertyValue(Function<Style, R> propertySupplier) {

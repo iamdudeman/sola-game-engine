@@ -20,8 +20,15 @@ public abstract class BaseInputGuiElement<Style extends BaseStyles> extends GuiE
   }
 
   public void setDisabled(boolean disabled) {
-    isDisabled = disabled;
-    styleContainer.invalidate();
+    if (this.isDisabled != disabled) {
+      isDisabled = disabled;
+      styleContainer.invalidate();
+    }
+  }
+
+  @Override
+  public boolean isFocusable() {
+    return super.isFocusable() && !isDisabled;
   }
 
   @Override

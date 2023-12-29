@@ -94,6 +94,10 @@ public abstract class GuiElement<Style extends BaseStyles> {
   }
 
   public boolean isActive() {
+    if (!isFocussed()) {
+      setActive(false);
+    }
+
     return isActive;
   }
 
