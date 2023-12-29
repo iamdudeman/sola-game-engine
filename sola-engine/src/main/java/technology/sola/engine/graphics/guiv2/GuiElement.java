@@ -5,12 +5,14 @@ import technology.sola.engine.graphics.guiv2.event.GuiElementEvents;
 import technology.sola.engine.graphics.guiv2.event.GuiKeyEvent;
 import technology.sola.engine.graphics.guiv2.event.GuiMouseEvent;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
+import technology.sola.engine.graphics.guiv2.style.ConditionalStyle;
 import technology.sola.engine.graphics.guiv2.style.StyleContainer;
 import technology.sola.engine.graphics.guiv2.style.property.*;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class GuiElement<Style extends BaseStyles> {
@@ -46,7 +48,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
   @SafeVarargs
   public final void setStyle(Style... styles) {
-    styleContainer.setStyles(styles);
+    styleContainer.setStyles(Arrays.stream(styles).map(ConditionalStyle::always).toList());
     isLayoutChanged = true;
   }
 
