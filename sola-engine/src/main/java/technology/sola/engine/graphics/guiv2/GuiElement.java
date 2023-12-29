@@ -164,6 +164,20 @@ public abstract class GuiElement<Style extends BaseStyles> {
     return null;
   }
 
+  public <T extends GuiElement<?>> List<T> findElementsByType(Class<T> elementClass) {
+    List<T> elements = new ArrayList<>();
+
+    if (this.getClass().equals(elementClass)) {
+      elements.add((T) this);
+    }
+
+    for (var child : children) {
+      elements.addAll(child.findElementsByType(elementClass));
+    }
+
+    return elements;
+  }
+
   public GuiElement<Style> removeChild(GuiElement<?> child) {
     if (children.contains(child)) {
       child.parent = null;

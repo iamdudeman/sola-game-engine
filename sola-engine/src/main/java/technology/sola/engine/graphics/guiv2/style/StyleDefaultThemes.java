@@ -12,72 +12,138 @@ import technology.sola.engine.graphics.guiv2.elements.input.TextInputStyles;
 import java.util.HashMap;
 import java.util.Map;
 
-// todo finish implementing this concept
-
 public class StyleDefaultThemes {
   public static class Light {
-    public static Map<Class<? extends GuiElement<?>>, BaseStyles.Builder<?>> createTheme() {
-      Map<Class<? extends GuiElement<?>>, BaseStyles.Builder<?>> styleMap = new HashMap<>();
+    public static Map<Class<? extends GuiElement<?>>, ConditionalStyle<?>[]> create() {
+      Map<Class<? extends GuiElement<?>>, ConditionalStyle<?>[]> styleMap = new HashMap<>();
 
       Color backgroundColor = Color.WHITE;
       Color textColor = Color.BLACK;
 
-      styleMap.put(SectionGuiElement.class, BaseStyles.create()
-        .setBackgroundColor(backgroundColor)
+      styleMap.put(SectionGuiElement.class, new ConditionalStyle[]{
+        ConditionalStyle.always(
+          BaseStyles.create()
+            .setBackgroundColor(backgroundColor)
+            .build()
+        )
+      });
+      styleMap.put(TextGuiElement.class, new ConditionalStyle[]{
+        ConditionalStyle.always(
+          TextStyles.create()
+            .setTextColor(textColor)
+            .setBackgroundColor(backgroundColor)
+            .build()
+        )
+      });
+      styleMap.put(ButtonGuiElement.class, new ConditionalStyle[]{
+          ConditionalStyle.always(
+            BaseStyles.create()
+              .setBorderColor(Color.BLACK)
+              .setOutlineColor(Color.BLACK)
+              .setBackgroundColor(backgroundColor)
+              .build()
+          ),
+          ConditionalStyle.hover(
+            BaseStyles.create()
+              .setBackgroundColor(backgroundColor.shade(0.1f))
+              .build()
+          ),
+          ConditionalStyle.disabled(
+            BaseStyles.create()
+              .setBackgroundColor(backgroundColor.shade(0.18f))
+              .build()
+          )
+        }
       );
-      styleMap.put(TextGuiElement.class, TextStyles.create()
-        .setTextColor(textColor)
-        .setBackgroundColor(backgroundColor)
-      );
-      styleMap.put(ButtonGuiElement.class, BaseStyles.create()
-        .setBorderColor(Color.BLACK)
-        .setOutlineColor(Color.BLACK)
-        .setBackgroundColor(backgroundColor)
-      );
-      styleMap.put(TextInputGuiElement.class, TextInputStyles.create()
-        .setPlaceholderColor(textColor.tint(0.5f))
-        .setTextColor(textColor)
-        .setBorderColor(Color.BLACK)
-        .setOutlineColor(Color.BLACK)
-        .setBackgroundColor(backgroundColor)
-      );
-
-      // todo input disabled - colorBackground.shade(0.18f)
-      // todo input hover - colorBackground.shade(0.1f)
+      styleMap.put(TextInputGuiElement.class, new ConditionalStyle[]{
+        ConditionalStyle.always(
+          TextInputStyles.create()
+            .setPlaceholderColor(textColor.tint(0.5f))
+            .setTextColor(textColor)
+            .setBorderColor(Color.BLACK)
+            .setOutlineColor(Color.BLACK)
+            .setBackgroundColor(backgroundColor)
+            .build()
+        ),
+        ConditionalStyle.hover(
+          BaseStyles.create()
+            .setBackgroundColor(backgroundColor.shade(0.1f))
+            .build()
+        ),
+        ConditionalStyle.disabled(
+          BaseStyles.create()
+            .setBackgroundColor(backgroundColor.shade(0.18f))
+            .build()
+        )
+      });
 
       return styleMap;
     }
   }
 
   public static class Dark {
-    public static Map<Class<? extends GuiElement<?>>, BaseStyles.Builder<?>> createTheme() {
-      Map<Class<? extends GuiElement<?>>, BaseStyles.Builder<?>> styleMap = new HashMap<>();
+    public static Map<Class<? extends GuiElement<?>>, ConditionalStyle<?>[]> create() {
+      Map<Class<? extends GuiElement<?>>, ConditionalStyle<?>[]> styleMap = new HashMap<>();
 
       Color backgroundColor = Color.BLACK;
       Color textColor = Color.WHITE;
 
-      styleMap.put(SectionGuiElement.class, BaseStyles.create()
-        .setBackgroundColor(backgroundColor)
+      styleMap.put(SectionGuiElement.class, new ConditionalStyle[]{
+        ConditionalStyle.always(
+          BaseStyles.create()
+            .setBackgroundColor(backgroundColor)
+            .build()
+        )
+      });
+      styleMap.put(TextGuiElement.class, new ConditionalStyle[]{
+        ConditionalStyle.always(
+          TextStyles.create()
+            .setTextColor(textColor)
+            .setBackgroundColor(backgroundColor)
+            .build()
+        )
+      });
+      styleMap.put(ButtonGuiElement.class, new ConditionalStyle[]{
+          ConditionalStyle.always(
+            BaseStyles.create()
+              .setBorderColor(Color.WHITE)
+              .setOutlineColor(Color.WHITE)
+              .setBackgroundColor(backgroundColor)
+              .build()
+          ),
+          ConditionalStyle.hover(
+            BaseStyles.create()
+              .setBackgroundColor(backgroundColor.shade(0.1f))
+              .build()
+          ),
+          ConditionalStyle.disabled(
+            BaseStyles.create()
+              .setBackgroundColor(backgroundColor.shade(0.18f))
+              .build()
+          )
+        }
       );
-      styleMap.put(TextGuiElement.class, TextStyles.create()
-        .setTextColor(textColor)
-        .setBackgroundColor(backgroundColor)
-      );
-      styleMap.put(ButtonGuiElement.class, BaseStyles.create()
-        .setBorderColor(Color.WHITE)
-        .setOutlineColor(Color.WHITE)
-        .setBackgroundColor(backgroundColor)
-      );
-      styleMap.put(TextInputGuiElement.class, TextInputStyles.create()
-        .setPlaceholderColor(textColor.shade(0.2f))
-        .setTextColor(textColor)
-        .setBorderColor(Color.WHITE)
-        .setOutlineColor(Color.WHITE)
-        .setBackgroundColor(backgroundColor)
-      );
-
-      // todo input disabled - colorBackground.tint(0.18f)
-      // todo input hover - colorBackground.tint(0.25f)
+      styleMap.put(TextInputGuiElement.class, new ConditionalStyle[]{
+        ConditionalStyle.always(
+          TextInputStyles.create()
+            .setPlaceholderColor(textColor.shade(0.2f))
+            .setTextColor(textColor)
+            .setBorderColor(Color.WHITE)
+            .setOutlineColor(Color.WHITE)
+            .setBackgroundColor(backgroundColor)
+            .build()
+        ),
+        ConditionalStyle.hover(
+          BaseStyles.create()
+            .setBackgroundColor(backgroundColor.tint(0.25f))
+            .build()
+        ),
+        ConditionalStyle.disabled(
+          BaseStyles.create()
+            .setBackgroundColor(backgroundColor.tint(0.18f))
+            .build()
+        )
+      });
 
       return styleMap;
     }
