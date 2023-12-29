@@ -29,8 +29,8 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
   private List<String> lines = new ArrayList<>();
   private String text;
 
-  public TextInputGuiElement(TextInputStyles... styles) {
-    super(styles);
+  public TextInputGuiElement() {
+    super();
 
     events().keyReleased().on(keyEvent -> {
       if (keyEvent.getKeyEvent().keyCode() == Key.SHIFT.getCode()) {

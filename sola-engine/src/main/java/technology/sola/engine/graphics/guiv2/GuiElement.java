@@ -37,19 +37,19 @@ public abstract class GuiElement<Style extends BaseStyles> {
   private boolean isActive = false;
   private String id;
 
-  @SafeVarargs
-  public GuiElement(Style... styles) {
+  public GuiElement() {
     styleContainer = new StyleContainer<>(this);
     boundConstraints = new GuiElementBounds(0, 0, 0, 0);
     bounds = boundConstraints;
     contentBounds = bounds;
-    setStyle(styles);
   }
 
   @SafeVarargs
-  public final void setStyle(Style... styles) {
+  public final GuiElement<Style> setStyle(Style... styles) {
     styleContainer.setStyles(Arrays.stream(styles).map(ConditionalStyle::always).toList());
     isLayoutChanged = true;
+
+    return this;
   }
 
   public abstract void renderContent(Renderer renderer);

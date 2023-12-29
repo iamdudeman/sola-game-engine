@@ -21,10 +21,6 @@ public class TextGuiElement extends GuiElement<TextStyles> {
   private int lineHeight = 1;
   private List<String> lines = new ArrayList<>();
 
-  public TextGuiElement(TextStyles... styles) {
-    super(styles);
-  }
-
   @Override
   public void renderContent(Renderer renderer) {
     Color textColor = getStyles().getPropertyValue(TextStyles::textColor, Color.BLACK);

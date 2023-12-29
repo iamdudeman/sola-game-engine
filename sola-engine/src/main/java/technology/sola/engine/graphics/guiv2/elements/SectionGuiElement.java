@@ -8,8 +8,8 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 
 public class SectionGuiElement extends GuiElement<BaseStyles> {
-  public SectionGuiElement(BaseStyles... styles) {
-    super(styles);
+  public SectionGuiElement() {
+    super();
 
     events().keyPressed().on(keyEvent -> {
       int keyCode = keyEvent.getKeyEvent().keyCode();

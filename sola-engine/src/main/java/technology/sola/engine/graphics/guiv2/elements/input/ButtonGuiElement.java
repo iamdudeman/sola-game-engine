@@ -10,8 +10,8 @@ public class ButtonGuiElement extends BaseInputGuiElement<BaseStyles> {
   private Runnable onAction = () -> {
   };
 
-  public ButtonGuiElement(BaseStyles... styles) {
-    super(styles);
+  public ButtonGuiElement() {
+    super();
 
     events().mousePressed().on(mouseEvent -> {
       if (!isDisabled()) {

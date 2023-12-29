@@ -7,10 +7,7 @@ public abstract class BaseInputGuiElement<Style extends BaseStyles> extends GuiE
   // props
   private boolean isDisabled;
 
-  @SafeVarargs
-  public BaseInputGuiElement(Style... styles) {
-    super(styles);
-
+  public BaseInputGuiElement() {
     events().mousePressed().on(mouseEvent -> {
       if (!isDisabled) {
         requestFocus();
