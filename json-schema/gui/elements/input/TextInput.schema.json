@@ -27,7 +27,10 @@
       }
     },
     "styles": {
-      "$ref": "../../styles/TextInputStyles.schema.json"
+      "type": "array",
+      "items": {
+        "$ref": "../../styles/TextInputStyles.schema.json"
+      }
     }
   }
 }

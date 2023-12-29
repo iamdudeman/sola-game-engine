@@ -9,7 +9,10 @@
       "description": "The tag of the element."
     },
     "styles": {
-      "$ref": "../styles/BaseStyles.schema.json"
+      "type": "array",
+      "items": {
+        "$ref": "../styles/BaseStyles.schema.json"
+      }
     },
     "children": {
       "type": "array",

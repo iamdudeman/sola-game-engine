@@ -25,7 +25,7 @@ public class StyleDefaultThemes {
           BaseStyles.create()
             .setBackgroundColor(backgroundColor)
             .build()
-        )
+        ),
       });
       styleMap.put(TextGuiElement.class, new ConditionalStyle[]{
         ConditionalStyle.always(
@@ -33,7 +33,7 @@ public class StyleDefaultThemes {
             .setTextColor(textColor)
             .setBackgroundColor(backgroundColor)
             .build()
-        )
+        ),
       });
       styleMap.put(ButtonGuiElement.class, new ConditionalStyle[]{
         ConditionalStyle.always(
@@ -56,7 +56,7 @@ public class StyleDefaultThemes {
           BaseStyles.create()
             .setBackgroundColor(backgroundColor.shade(0.18f))
             .build()
-        )
+        ),
       });
       styleMap.put(TextInputGuiElement.class, new ConditionalStyle[]{
         ConditionalStyle.always(
@@ -81,7 +81,7 @@ public class StyleDefaultThemes {
           BaseStyles.create()
             .setBackgroundColor(backgroundColor.shade(0.18f))
             .build()
-        )
+        ),
       });
 
       return styleMap;
@@ -100,7 +100,7 @@ public class StyleDefaultThemes {
           BaseStyles.create()
             .setBackgroundColor(backgroundColor)
             .build()
-        )
+        ),
       });
       styleMap.put(TextGuiElement.class, new ConditionalStyle[]{
         ConditionalStyle.always(
@@ -108,7 +108,7 @@ public class StyleDefaultThemes {
             .setTextColor(textColor)
             .setBackgroundColor(backgroundColor)
             .build()
-        )
+        ),
       });
       styleMap.put(ButtonGuiElement.class, new ConditionalStyle[]{
         ConditionalStyle.always(
@@ -131,7 +131,7 @@ public class StyleDefaultThemes {
           BaseStyles.create()
             .setBackgroundColor(backgroundColor.shade(0.18f))
             .build()
-        )
+        ),
       });
       styleMap.put(TextInputGuiElement.class, new ConditionalStyle[]{
         ConditionalStyle.always(
@@ -156,7 +156,7 @@ public class StyleDefaultThemes {
           BaseStyles.create()
             .setBackgroundColor(backgroundColor.tint(0.18f))
             .build()
-        )
+        ),
       });
 
       return styleMap;

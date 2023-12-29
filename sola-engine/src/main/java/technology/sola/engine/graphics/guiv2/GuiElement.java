@@ -12,7 +12,6 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public abstract class GuiElement<Style extends BaseStyles> {
@@ -44,9 +43,8 @@ public abstract class GuiElement<Style extends BaseStyles> {
     contentBounds = bounds;
   }
 
-  @SafeVarargs
-  public final GuiElement<Style> setStyle(Style... styles) {
-    styleContainer.setStyles(Arrays.stream(styles).map(ConditionalStyle::always).toList());
+  public final GuiElement<Style> setStyle(List<ConditionalStyle<Style>> styles) {
+    styleContainer.setStyles(styles);
     isLayoutChanged = true;
 
     return this;

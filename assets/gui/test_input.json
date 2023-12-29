@@ -1,39 +1,46 @@
 {
   "tag": "Section",
-  "styles": {
-    "backgroundColor": "rgb(255, 255, 255)",
-    "borderColor": "#000000",
-    "direction": "column",
-    "gap": 5,
-    "padding": 5,
-    "crossAxisChildren": "center",
-    "width": "75%"
-  },
+  "styles": [
+    {
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderColor": "#000000",
+      "direction": "column",
+      "gap": 5,
+      "padding": 5,
+      "crossAxisChildren": "center",
+      "width": "75%"
+    }
+  ],
   "children": [
     {
       "tag": "Text",
       "props": {
         "text": "Some title"
       },
-      "styles": {
+      "styles": [
+        {
           "paddingBottom": 10
-      }
+        }
+      ]
     },
     {
       "tag": "Button",
       "id": "button",
-      "styles": {
-        "borderColor": "#ff0000",
-        "padding": 10
-      },
+      "styles": [
+        {
+          "borderColor": "#ff0000",
+          "padding": 10
+        },
+        {
+          "@condition": ":hover",
+          "backgroundColor": "#ff0000"
+        }
+      ],
       "children": [
         {
           "tag": "Text",
           "props": {
             "text": "Button"
-          },
-          "styles": {
-
           }
         }
       ]
@@ -41,18 +48,17 @@
     {
       "tag": "Button",
       "id": "button2",
-      "styles": {
-        "borderColor": "#ff0000",
-        "padding": 10
-      },
+      "styles": [
+        {
+          "borderColor": "#ff0000",
+          "padding": 10
+        }
+      ],
       "children": [
         {
           "tag": "Text",
           "props": {
             "text": "Button 2"
-          },
-          "styles": {
-
           }
         }
       ]
@@ -64,27 +70,28 @@
         "placeholder": "placeholder",
         "maxLength": 10
       },
-      "styles": {
-        "borderColor": "#ff0000",
-        "padding": 10,
-        "placeholderColor": "#c7c7c7"
-      }
+      "styles": [
+        {
+          "borderColor": "#ff0000",
+          "padding": 10,
+          "placeholderColor": "#c7c7c7"
+        }
+      ]
     },
     {
       "tag": "Button",
       "id": "button3",
-      "styles": {
-        "borderColor": "#ff0000",
-        "padding": 10
-      },
+      "styles": [
+        {
+          "borderColor": "#ff0000",
+          "padding": 10
+        }
+      ],
       "children": [
         {
           "tag": "Text",
           "props": {
             "text": "Button 3"
-          },
-          "styles": {
-
           }
         }
       ]

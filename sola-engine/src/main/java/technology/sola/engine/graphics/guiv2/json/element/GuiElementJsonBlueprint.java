@@ -3,6 +3,7 @@ package technology.sola.engine.graphics.guiv2.json.element;
 import technology.sola.engine.graphics.guiv2.json.styles.StylesJsonValueParser;
 import technology.sola.engine.graphics.guiv2.GuiElement;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
+import technology.sola.engine.graphics.guiv2.style.ConditionalStyle;
 import technology.sola.json.JsonObject;
 
 /**
@@ -37,14 +38,22 @@ public abstract class GuiElementJsonBlueprint<Styles extends BaseStyles, Element
    * @return the Styles instance with properties set
    */
   @SuppressWarnings("unchecked")
-  public Styles createStylesFromJson(JsonObject stylesJson) {
+  public ConditionalStyle<Styles> createStylesFromJson(JsonObject stylesJson) {
     StylesBuilder stylesBuilder = createStylesBuilder();
 
-    // todo get "condition" from stylesJson to know what ConditionalStyle to build
+    String condition = stylesJson.getString("@condition", "");
 
     stylesJson.forEach((key, value) -> stylesJsonValueParser.setPropertyFromJson(stylesBuilder, key, value));
 
-    return (Styles) stylesBuilder.build();
+    var style = (Styles) stylesBuilder.build();
+
+    return switch (condition) {
+      case ":active" -> ConditionalStyle.active(style);
+      case ":disabled" -> ConditionalStyle.disabled(style);
+      case ":focus" -> ConditionalStyle.focus(style);
+      case ":hover" -> ConditionalStyle.hover(style);
+      default -> ConditionalStyle.always(style);
+    };
   }
 
   /**

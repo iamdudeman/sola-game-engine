@@ -18,7 +18,10 @@
       }
     },
     "styles": {
-      "$ref": "../styles/TextStyles.schema.json"
+      "type": "array",
+      "items": {
+        "$ref": "../styles/TextStyles.schema.json"
+      }
     }
   }
 }

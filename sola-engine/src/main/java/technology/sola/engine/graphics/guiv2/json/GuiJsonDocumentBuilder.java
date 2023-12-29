@@ -5,6 +5,7 @@ import technology.sola.engine.graphics.guiv2.json.element.GuiElementJsonBlueprin
 import technology.sola.engine.graphics.guiv2.GuiElement;
 import technology.sola.engine.graphics.guiv2.json.exception.MissingGuiElementJsonBlueprintException;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
+import technology.sola.engine.graphics.guiv2.style.ConditionalStyle;
 import technology.sola.json.JsonArray;
 import technology.sola.json.JsonObject;
 
@@ -49,7 +50,9 @@ public class GuiJsonDocumentBuilder {
       .orElseThrow(() -> new MissingGuiElementJsonBlueprintException(elementTag));
 
     GuiElement<?> element = guiElementJsonBlueprint.createElementFromJson(elementJson.getObject(ATTR_PROPS, new JsonObject()));
-    BaseStyles styles = guiElementJsonBlueprint.createStylesFromJson(elementJson.getObject(ATTR_STYLES, new JsonObject()));
+    var stylesJsonArray = elementJson.getArray(ATTR_STYLES, new JsonArray());
+
+    var styles = stylesJsonArray.stream().map(styleObject -> (ConditionalStyle<BaseStyles>) guiElementJsonBlueprint.createStylesFromJson(styleObject.asObject())).toList();
 
     element.setId(elementJson.getString("id", null));
 

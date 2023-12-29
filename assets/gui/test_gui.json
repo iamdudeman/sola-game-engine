@@ -1,58 +1,70 @@
 {
   "tag": "Section",
-  "styles": {
-    "backgroundColor": "#ffffffff",
-    "borderColor": "rgb(169, 169, 169)",
-    "padding": 10,
-    "gap": 10
-  },
+  "styles": [
+    {
+      "backgroundColor": "#ffffffff",
+      "borderColor": "rgb(169, 169, 169)",
+      "padding": 10,
+      "gap": 10
+    }
+  ],
   "children": [
     {
       "tag": "Section",
-      "styles": {
-        "backgroundColor": "argb(255, 0, 0, 255)",
-        "borderColor": "#ffff0000",
-        "height": "50%",
-        "gap": 5,
-        "paddingHorizontal": 5
-      },
+      "styles": [
+        {
+          "backgroundColor": "argb(255, 0, 0, 255)",
+          "borderColor": "#ffff0000",
+          "height": "50%",
+          "gap": 5,
+          "paddingHorizontal": 5
+        }
+      ],
       "children": [
         {
           "tag": "Text",
           "props": {
             "text": "Hello world"
           },
-          "styles": {
-            "borderColor": "rgb(0, 255, 0)",
-            "padding": 5,
-            "textColor": "rgb(255, 255, 0)"
-          }
+          "styles": [
+            {
+              "borderColor": "rgb(0, 255, 0)",
+              "padding": 5,
+              "textColor": "rgb(255, 255, 0)"
+            }
+          ]
         },
         {
           "tag": "Section",
-          "styles": {
-            "backgroundColor": "rgb(255, 255, 0)",
-            "borderColor": "rgb(169, 169, 169)",
-            "height": 30
-          }
+          "styles": [
+            {
+              "backgroundColor": "rgb(255, 255, 0)",
+              "borderColor": "rgb(169, 169, 169)",
+              "height": 30
+            }
+          ]
         }
       ]
     },
     {
       "tag": "Section",
-      "styles": {
-        "backgroundColor": "#ff00ff00",
-        "height": 60,
-        "padding": 5
-      },
+      "styles": [
+        {
+          "backgroundColor": "#ff00ff00",
+          "height": 60,
+          "padding": 5
+        }
+      ],
       "children": [
         {
           "tag": "Section",
-          "styles": {
-            "backgroundColor": "#ffff0000",
-            "borderColor": "#ff000000",
-            "height": "50%"
-          }
+          "styles": [
+            {
+              "backgroundColor": "#ffff0000",
+              "borderColor": "#ff000000",
+              "height": "50%"
+            }
+          ]
         }
       ]
     }

@@ -1,46 +1,56 @@
 {
   "tag": "Section",
-  "styles": {
-    "backgroundColor": "rgb(255, 255, 255)",
-    "mainAxisChildren": "center",
-    "crossAxisChildren": "center",
-    "direction": "row",
-    "height": "50%",
-    "gap": 5,
-    "padding": 5
-  },
+  "styles": [
+    {
+      "backgroundColor": "rgb(255, 255, 255)",
+      "mainAxisChildren": "center",
+      "crossAxisChildren": "center",
+      "direction": "row",
+      "height": "50%",
+      "gap": 5,
+      "padding": 5
+    }
+  ],
   "children": [
     {
       "tag": "Section",
-      "styles": {
-        "backgroundColor": "rgb(255, 0, 0)",
-        "width": 50
-      }
+      "styles": [
+        {
+          "backgroundColor": "rgb(255, 0, 0)",
+          "width": 50
+        }
+      ]
     },
     {
       "tag": "Section",
-      "styles": {
-        "backgroundColor": "rgb(0, 0, 0)",
-        "positionX": "75%",
-        "positionY": "0",
-        "height": "50%",
-        "width": 50
-      }
+      "styles": [
+        {
+          "backgroundColor": "rgb(0, 0, 0)",
+          "positionX": "75%",
+          "positionY": "0",
+          "height": "50%",
+          "width": 50
+        }
+      ]
     },
     {
       "tag": "Section",
-      "styles": {
-        "backgroundColor": "rgb(0, 255, 0)",
-        "height": "50%",
-        "width": 50
-      }
+      "styles": [
+        {
+          "backgroundColor": "rgb(0, 255, 0)",
+          "height": "50%",
+          "width": 50
+        }
+      ]
     },
     {
       "tag": "Section",
-      "styles": {
-        "backgroundColor": "rgb(0, 0, 255)",
-        "width": 50
-      }
+      "styles": [
+        {
+          "backgroundColor": "rgb(0, 0, 255)",
+          "width": 50
+        }
+      ]
     }
   ]
 }

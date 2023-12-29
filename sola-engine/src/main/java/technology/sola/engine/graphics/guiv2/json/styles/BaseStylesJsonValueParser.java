@@ -12,6 +12,9 @@ public class BaseStylesJsonValueParser implements StylesJsonValueParser<BaseStyl
   @Override
   public void setPropertyFromJson(BaseStyles.Builder<?> stylesBuilder, String propertyKey, JsonElement value) {
     switch (propertyKey) {
+      case "@condition" -> {
+        // @condition is a valid property but does not apply to stylesBuilder
+      }
       case "backgroundColor" -> stylesBuilder.setBackgroundColor(StylesJsonBlueprintUtils.parseColor(value));
       case "borderColor" -> stylesBuilder.setBorderColor(StylesJsonBlueprintUtils.parseColor(value));
       case "crossAxisChildren" -> stylesBuilder.setCrossAxisChildren(parseCrossAxisChildren(value));
