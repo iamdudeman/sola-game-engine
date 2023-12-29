@@ -7,8 +7,6 @@ import technology.sola.engine.graphics.guiv2.style.property.Direction;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 
-import java.util.List;
-
 public class SectionGuiElement extends GuiElement<BaseStyles> {
   public SectionGuiElement(BaseStyles... styles) {
     super(styles);
@@ -26,21 +24,19 @@ public class SectionGuiElement extends GuiElement<BaseStyles> {
       };
 
       if (keyCode == nextKeyCode) {
-        int nextFocussedIndex = findFocussedChild(children) + 1;
+        var focusableChildren = getFocusableChildren();
+        int nextFocussedIndex = findFocussedChildIndex(focusableChildren) + 1;
 
-        // todo should only be focusable children
-        if (nextFocussedIndex < children.size()) {
-          // todo should only be focusable children
-          children.get(nextFocussedIndex).requestFocus();
+        if (nextFocussedIndex < focusableChildren.size()) {
+          focusableChildren.get(nextFocussedIndex).requestFocus();
           keyEvent.stopPropagation();
         }
       } else if (keyCode == previousKeyCode) {
-        // todo should only be focusable children
-        int nextFocussedIndex = findFocussedChild(children) - 1;
+        var focusableChildren = getFocusableChildren();
+        int nextFocussedIndex = findFocussedChildIndex(focusableChildren) - 1;
 
         if (nextFocussedIndex >= 0) {
-          // todo should only be focusable children
-          children.get(nextFocussedIndex).requestFocus();
+          focusableChildren.get(nextFocussedIndex).requestFocus();
           keyEvent.stopPropagation();
         }
       }
@@ -59,25 +55,12 @@ public class SectionGuiElement extends GuiElement<BaseStyles> {
 
   @Override
   public void requestFocus() {
-    if (children.isEmpty()) {
+    var focussedChildren = getFocusableChildren();
+
+    if (focussedChildren.isEmpty()) {
       super.requestFocus();
     } else {
-      children.get(0).requestFocus();
+      focussedChildren.get(0).requestFocus();
     }
-  }
-
-  // todo does this work if there is a nested focus?
-  private int findFocussedChild(List<GuiElement<?>> children) {
-    int focussedIndex = 0;
-
-    for (var child : children) {
-      if (child.isFocussed()) {
-        return focussedIndex;
-      }
-
-      focussedIndex++;
-    }
-
-    return -1;
   }
 }

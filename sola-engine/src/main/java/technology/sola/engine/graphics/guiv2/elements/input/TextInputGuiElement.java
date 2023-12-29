@@ -60,6 +60,11 @@ public class TextInputGuiElement extends TextGuiElement {
     });
   }
 
+  @Override
+  public boolean isFocusable() {
+    return true;
+  }
+
   public String getPlaceholder() {
     return placeholder;
   }

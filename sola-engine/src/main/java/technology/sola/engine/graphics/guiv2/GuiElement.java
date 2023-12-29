@@ -111,7 +111,13 @@ public abstract class GuiElement<Style extends BaseStyles> {
   }
 
   public void requestFocus() {
-    getGuiDocument().requestFocus(this);
+    if (isFocusable()) {
+      getGuiDocument().requestFocus(this);
+    }
+  }
+
+  public boolean isFocusable() {
+    return styleContainer.getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE) == Visibility.VISIBLE;
   }
 
   public GuiElementEvents events() {
@@ -201,8 +207,32 @@ public abstract class GuiElement<Style extends BaseStyles> {
     }
   }
 
+  protected List<GuiElement<?>> getFocusableChildren() {
+    return children.stream().filter(GuiElement::isFocusable).toList();
+  }
+
   protected AssetLoaderProvider getAssetLoaderProvider() {
     return this.parent.getAssetLoaderProvider();
+  }
+
+  protected int findFocussedChildIndex(List<GuiElement<?>> children) {
+    int focussedIndex = 0;
+
+    for (var child : children) {
+      if (child.isFocussed()) {
+        return focussedIndex;
+      }
+
+      int nestedChildValue = findFocussedChildIndex(child.children);
+
+      if (nestedChildValue > -1) {
+        return focussedIndex;
+      }
+
+      focussedIndex++;
+    }
+
+    return -1;
   }
 
   void onKeyPressed(GuiKeyEvent event) {

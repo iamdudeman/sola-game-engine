@@ -1,10 +1,11 @@
 # sola-game-engine TODO list
 
 Remaining v2
-1. Keyboard navigation for SectionGuiElement
-2. active + hover styles (note: might be handled by conditional styles concept instead!)
-3. TextInputGuiElement
-4. Cookbook demo of some sort
+1. ~~Keyboard navigation for SectionGuiElement~~
+2. ~~isFocusable method in GuiElement (and focusableChildren and what not)~~
+3. active + hover styles (note: might be handled by conditional styles concept instead!)
+4. TextInputGuiElement
+5. Cookbook demo of some sort
 
 Later things
 * allow \n TextGuiElement new line wrapping

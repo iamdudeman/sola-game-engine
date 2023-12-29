@@ -44,6 +44,11 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
     return new GuiElementDimensions(0, 0);
   }
 
+  @Override
+  public boolean isFocusable() {
+    return false;
+  }
+
   public String getAssetId() {
     return assetId;
   }

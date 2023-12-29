@@ -25,6 +25,7 @@ public class GuiDocument {
   }
 
   public void setRootElement(GuiElement<?> rootEle) {
+    focussedElement = null;
     for (var child : root.children.stream().toList()) {
       root.removeChild(child);
     }
@@ -38,7 +39,9 @@ public class GuiDocument {
   }
 
   public void requestFocus(GuiElement<?> guiElement) {
-    this.focussedElement = guiElement;
+    if (guiElement.isFocusable()) {
+      this.focussedElement = guiElement;
+    }
   }
 
   public void render(Renderer renderer) {
@@ -46,11 +49,15 @@ public class GuiDocument {
   }
 
   private void onKeyPressed(KeyEvent keyEvent) {
-    focussedElement.onKeyPressed(new GuiKeyEvent(keyEvent));
+    if (focussedElement != null) {
+      focussedElement.onKeyPressed(new GuiKeyEvent(keyEvent));
+    }
   }
 
   private void onKeyReleased(KeyEvent keyEvent) {
-    focussedElement.onKeyReleased(new GuiKeyEvent(keyEvent));
+    if (focussedElement != null) {
+      focussedElement.onKeyReleased(new GuiKeyEvent(keyEvent));
+    }
   }
 
   private void onMousePressed(MouseEvent mouseEvent) {

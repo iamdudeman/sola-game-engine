@@ -98,6 +98,11 @@ public class TextGuiElement extends GuiElement<TextStyles> {
     return new GuiElementDimensions(textWidth, textHeight);
   }
 
+  @Override
+  public boolean isFocusable() {
+    return false;
+  }
+
   public String getText() {
     return text;
   }
