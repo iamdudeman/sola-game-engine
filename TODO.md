@@ -2,7 +2,7 @@
 
 Remaining v2
 1. Keyboard navigation for SectionGuiElement
-2. active + hover styles
+2. active + hover styles (note: might be handled by conditional styles concept instead!)
 3. TextInputGuiElement
 4. Cookbook demo of some sort
 

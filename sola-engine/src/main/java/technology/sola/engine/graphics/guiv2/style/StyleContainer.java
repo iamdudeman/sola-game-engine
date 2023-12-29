@@ -9,6 +9,10 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
+// todo consider instead of array of styles an array of conditional styles where function is determiner of it being active
+//   or not, guiElement -> guiElement.isHover() for example, styles merge from top to bottom
+//   can probably cache the result until invalidated by the owning element
+
 public class StyleContainer<Style extends BaseStyles> {
   private final Map<Function<Style, ?>, Object> computedCache = new HashMap<>();
   private List<Style> styles;
