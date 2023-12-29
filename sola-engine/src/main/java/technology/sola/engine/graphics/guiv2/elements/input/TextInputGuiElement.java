@@ -1,12 +1,16 @@
 package technology.sola.engine.graphics.guiv2.elements.input;
 
+import technology.sola.engine.graphics.guiv2.GuiElement;
+import technology.sola.engine.graphics.guiv2.GuiElementDimensions;
 import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.KeyboardLayout;
 
-// todo placeholder text styling
+// todo placeholder text styling isn't hooked up
+//   and composed TextGuiElement might not be proper implementation
 
-public class TextInputGuiElement extends TextGuiElement {
+public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
   // props
   private String placeholder = "";
   private Integer maxLength;
@@ -15,9 +19,13 @@ public class TextInputGuiElement extends TextGuiElement {
   private String value = "";
   private final StringBuilder valueBuilder = new StringBuilder();
   private boolean isShiftDown = false;
+  private TextGuiElement textGuiElement;
 
-  public TextInputGuiElement() {
-    setText(value.isEmpty() ? " " : value);
+  public TextInputGuiElement(TextInputStyles... styles) {
+    textGuiElement = new TextGuiElement(styles);
+    textGuiElement.setText(value.isEmpty() ? " " : value);
+
+    super.appendChildren(textGuiElement);
 
     events().keyReleased().on(keyEvent -> {
       if (keyEvent.getKeyEvent().keyCode() == Key.SHIFT.getCode()) {
@@ -61,8 +69,23 @@ public class TextInputGuiElement extends TextGuiElement {
   }
 
   @Override
+  public void renderContent(Renderer renderer) {
+    renderChildren(renderer);
+  }
+
+  @Override
+  public GuiElementDimensions calculateContentDimensions() {
+    return null;
+  }
+
+  @Override
   public boolean isFocusable() {
     return true;
+  }
+
+  @Override
+  public GuiElement<TextInputStyles> appendChildren(GuiElement<?>... children) {
+    return this;
   }
 
   public String getPlaceholder() {
@@ -73,7 +96,7 @@ public class TextInputGuiElement extends TextGuiElement {
     this.placeholder = placeholder;
 
     if (value.isEmpty()) {
-      setText(placeholder);
+      textGuiElement.setText(placeholder);
     }
   }
 
@@ -110,9 +133,9 @@ public class TextInputGuiElement extends TextGuiElement {
 
   private void updateText() {
     if (value.isEmpty()) {
-      setText(placeholder.isEmpty() ? " " : placeholder);
+      textGuiElement.setText(placeholder.isEmpty() ? " " : placeholder);
     } else {
-      setText(value);
+      textGuiElement.setText(value);
     }
   }
 }

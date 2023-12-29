@@ -14,7 +14,7 @@ public class TextStylesJsonValueParser implements StylesJsonValueParser<TextStyl
     switch (propertyKey) {
       case "fontAssetId" -> stylesBuilder.setFontAssetId(StylesJsonBlueprintUtils.parseString(value));
       case "textColor" -> stylesBuilder.setTextColor(StylesJsonBlueprintUtils.parseColor(value));
-      case "textAlignment" -> stylesBuilder.setTextColor(parseTextAlignment(value));
+      case "textAlignment" -> stylesBuilder.setTextAlignment(parseTextAlignment(value));
       default -> baseStylesJsonDefinition.setPropertyFromJson(stylesBuilder, propertyKey, value);
     }
   }

@@ -51,7 +51,7 @@ public class TextStyles extends BaseStyles {
     }
 
     @SuppressWarnings("unchecked")
-    public Self setTextColor(TextAlignment textAlignment) {
+    public Self setTextAlignment(TextAlignment textAlignment) {
       this.textAlignment = textAlignment;
       return (Self) this;
     }

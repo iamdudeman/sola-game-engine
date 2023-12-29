@@ -27,7 +27,7 @@
       }
     },
     "styles": {
-      "$ref": "../../styles/TextStyles.schema.json"
+      "$ref": "../../styles/TextInputStyles.schema.json"
     }
   }
 }

@@ -42,6 +42,7 @@ module technology.sola.engine {
   exports technology.sola.engine.graphics.guiv2.json.element;
   exports technology.sola.engine.graphics.guiv2.json.element.input;
   exports technology.sola.engine.graphics.guiv2.json.styles;
+  exports technology.sola.engine.graphics.guiv2.json.styles.input;
   exports technology.sola.engine.graphics.guiv2.style;
   exports technology.sola.engine.graphics.guiv2.style.property;
   exports technology.sola.engine.graphics.renderer;

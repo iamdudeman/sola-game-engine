@@ -1,0 +1,17 @@
+{
+  "$id": "TextInputStyles.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TextInputStyles",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "./TextStyles.schema.json"
+    }
+  ],
+  "properties": {
+    "placeholderColor": {
+      "$ref": "./BaseStyles.schema.json#/$defs/color",
+      "description": "The color of the rendered placeholder text."
+    }
+  }
+}

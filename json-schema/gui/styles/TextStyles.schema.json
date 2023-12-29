@@ -1,7 +1,7 @@
 {
-  "$id": "BaseStyles.schema.json",
+  "$id": "TextStyles.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "BaseStyles",
+  "title": "TextStyles",
   "type": "object",
   "allOf": [
     {

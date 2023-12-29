@@ -1,22 +1,20 @@
 package technology.sola.engine.graphics.guiv2.json.element.input;
 
-import technology.sola.engine.graphics.guiv2.elements.TextStyles;
 import technology.sola.engine.graphics.guiv2.elements.input.TextInputGuiElement;
+import technology.sola.engine.graphics.guiv2.elements.input.TextInputStyles;
 import technology.sola.engine.graphics.guiv2.json.element.GuiElementJsonBlueprint;
-import technology.sola.engine.graphics.guiv2.json.styles.TextStylesJsonValueParser;
+import technology.sola.engine.graphics.guiv2.json.styles.input.TextInputStylesJsonValueParser;
 import technology.sola.json.JsonObject;
-
-// todo probably needs its own styles and props instead of reusing Text
 
 /**
  * A {@link GuiElementJsonBlueprint} for {@link TextInputGuiElement}.
  */
-public class TextInputElementJsonBlueprint extends GuiElementJsonBlueprint<TextStyles, TextInputGuiElement, TextStyles.Builder<?>> {
+public class TextInputElementJsonBlueprint extends GuiElementJsonBlueprint<TextInputStyles, TextInputGuiElement, TextInputStyles.Builder<?>> {
   /**
    * Creates an instance of this {@link GuiElementJsonBlueprint}.
    */
   public TextInputElementJsonBlueprint() {
-    super(new TextStylesJsonValueParser());
+    super(new TextInputStylesJsonValueParser());
   }
 
   @Override
@@ -36,7 +34,7 @@ public class TextInputElementJsonBlueprint extends GuiElementJsonBlueprint<TextS
   }
 
   @Override
-  protected TextStyles.Builder<?> createStylesBuilder() {
-    return TextStyles.create();
+  protected TextInputStyles.Builder<?> createStylesBuilder() {
+    return TextInputStyles.create();
   }
 }
