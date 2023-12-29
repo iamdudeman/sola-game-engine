@@ -87,8 +87,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     }
 
     if (isFocussed()) {
-      // todo consider not having a default focus outline
-      Border outline = styleContainer.getPropertyValue(BaseStyles::outline, Border.DEFAULT_FOCUS_OUTLINE);
+      Border outline = styleContainer.getPropertyValue(BaseStyles::outline, Border.NONE);
 
       if (outline.bottom() > 0) {
         renderer.drawRect(x, y, width - outline.right(), height - outline.bottom(), outline.color());

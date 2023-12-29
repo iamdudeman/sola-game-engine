@@ -36,25 +36,29 @@ public class StyleDefaultThemes {
         )
       });
       styleMap.put(ButtonGuiElement.class, new ConditionalStyle[]{
-          ConditionalStyle.always(
-            BaseStyles.create()
-              .setBorderColor(Color.BLACK)
-              .setOutlineColor(Color.BLACK)
-              .setBackgroundColor(backgroundColor)
-              .build()
-          ),
-          ConditionalStyle.hover(
-            BaseStyles.create()
-              .setBackgroundColor(backgroundColor.shade(0.1f))
-              .build()
-          ),
-          ConditionalStyle.disabled(
-            BaseStyles.create()
-              .setBackgroundColor(backgroundColor.shade(0.18f))
-              .build()
-          )
-        }
-      );
+        ConditionalStyle.always(
+          BaseStyles.create()
+            .setBorderColor(Color.BLACK)
+            .setOutlineColor(Color.BLACK)
+            .setBackgroundColor(backgroundColor)
+            .build()
+        ),
+        ConditionalStyle.focus(
+          BaseStyles.create()
+            .setBorderColor(new Color(0 ,150, 255))
+            .build()
+        ),
+        ConditionalStyle.hover(
+          BaseStyles.create()
+            .setBackgroundColor(backgroundColor.shade(0.1f))
+            .build()
+        ),
+        ConditionalStyle.disabled(
+          BaseStyles.create()
+            .setBackgroundColor(backgroundColor.shade(0.18f))
+            .build()
+        )
+      });
       styleMap.put(TextInputGuiElement.class, new ConditionalStyle[]{
         ConditionalStyle.always(
           TextInputStyles.create()
@@ -63,6 +67,11 @@ public class StyleDefaultThemes {
             .setBorderColor(Color.BLACK)
             .setOutlineColor(Color.BLACK)
             .setBackgroundColor(backgroundColor)
+            .build()
+        ),
+        ConditionalStyle.focus(
+          BaseStyles.create()
+            .setBorderColor(new Color(0 ,150, 255))
             .build()
         ),
         ConditionalStyle.hover(
@@ -104,25 +113,29 @@ public class StyleDefaultThemes {
         )
       });
       styleMap.put(ButtonGuiElement.class, new ConditionalStyle[]{
-          ConditionalStyle.always(
-            BaseStyles.create()
-              .setBorderColor(Color.WHITE)
-              .setOutlineColor(Color.WHITE)
-              .setBackgroundColor(backgroundColor)
-              .build()
-          ),
-          ConditionalStyle.hover(
-            BaseStyles.create()
-              .setBackgroundColor(backgroundColor.shade(0.1f))
-              .build()
-          ),
-          ConditionalStyle.disabled(
-            BaseStyles.create()
-              .setBackgroundColor(backgroundColor.shade(0.18f))
-              .build()
-          )
-        }
-      );
+        ConditionalStyle.always(
+          BaseStyles.create()
+            .setBorderColor(Color.WHITE)
+            .setOutlineColor(Color.WHITE)
+            .setBackgroundColor(backgroundColor)
+            .build()
+        ),
+        ConditionalStyle.focus(
+          BaseStyles.create()
+            .setBorderColor(new Color(0 ,150, 255))
+            .build()
+        ),
+        ConditionalStyle.hover(
+          BaseStyles.create()
+            .setBackgroundColor(backgroundColor.shade(0.1f))
+            .build()
+        ),
+        ConditionalStyle.disabled(
+          BaseStyles.create()
+            .setBackgroundColor(backgroundColor.shade(0.18f))
+            .build()
+        )
+      });
       styleMap.put(TextInputGuiElement.class, new ConditionalStyle[]{
         ConditionalStyle.always(
           TextInputStyles.create()
@@ -131,6 +144,11 @@ public class StyleDefaultThemes {
             .setBorderColor(Color.WHITE)
             .setOutlineColor(Color.WHITE)
             .setBackgroundColor(backgroundColor)
+            .build()
+        ),
+        ConditionalStyle.focus(
+          BaseStyles.create()
+            .setBorderColor(new Color(0 ,150, 255))
             .build()
         ),
         ConditionalStyle.hover(

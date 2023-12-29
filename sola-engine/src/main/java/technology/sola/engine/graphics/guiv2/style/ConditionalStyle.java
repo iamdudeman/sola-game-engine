@@ -12,6 +12,7 @@ public record ConditionalStyle<Style extends BaseStyles>(
   public static final Function<GuiElement<?>, Boolean> ALWAYS = guiElement -> true;
   public static final Function<GuiElement<?>, Boolean> ACTIVE = GuiElement::isActive;
   public static final Function<GuiElement<?>, Boolean> HOVER = GuiElement::isHovered;
+  public static final Function<GuiElement<?>, Boolean> FOCUS = GuiElement::isFocussed;
   public static final Function<GuiElement<?>, Boolean> DISABLED = guiElement -> {
     if (guiElement instanceof BaseInputGuiElement<?> inputGuiElement) {
       return inputGuiElement.isDisabled();
@@ -37,6 +38,13 @@ public record ConditionalStyle<Style extends BaseStyles>(
   public static <Style extends BaseStyles> ConditionalStyle<Style> hover(Style style) {
     return new ConditionalStyle(
       HOVER,
+      style
+    );
+  }
+
+  public static <Style extends BaseStyles> ConditionalStyle<Style> focus(Style style) {
+    return new ConditionalStyle(
+      FOCUS,
       style
     );
   }

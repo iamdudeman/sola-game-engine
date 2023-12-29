@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Stream;
 
 // todo consider instead of array of styles an array of conditional styles where function is determiner of it being active
 //   or not, guiElement -> guiElement.isHover() for example, styles merge from top to bottom
@@ -34,18 +33,6 @@ public class StyleContainer<Style extends BaseStyles> {
       this.styles = new ArrayList<>();
     } else {
       this.styles = List.of(styles);
-    }
-  }
-
-  @SafeVarargs
-  @SuppressWarnings("unchecked")
-  public final <StyleBuilder extends BaseStyles.Builder<?>> void setStyles(StyleBuilder... styleBuilders) {
-    computedCache.clear();
-
-    if (styles == null) {
-      this.styles = new ArrayList<>();
-    } else {
-      this.styles = (List<Style>) Stream.of(styleBuilders).map(builder -> builder.build()).toList();
     }
   }
 

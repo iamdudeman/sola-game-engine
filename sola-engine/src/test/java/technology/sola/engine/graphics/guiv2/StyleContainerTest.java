@@ -20,8 +20,8 @@ public class StyleContainerTest {
     assertEquals(Color.BLUE, styleContainer.getPropertyValue(TextStyles::textColor));
 
     styleContainer.setStyles(
-      TextStyles.create().setBackgroundColor(Color.WHITE),
-      TextStyles.create().setTextColor(Color.RED)
+      TextStyles.create().setBackgroundColor(Color.WHITE).build(),
+      TextStyles.create().setTextColor(Color.RED).build()
     );
 
     assertEquals(Color.WHITE, styleContainer.getPropertyValue(TextStyles::background).color());
