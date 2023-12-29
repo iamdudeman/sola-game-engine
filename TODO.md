@@ -1,28 +1,23 @@
 # sola-game-engine TODO list
 
 Remaining v2
-1. ~~Keyboard navigation for SectionGuiElement~~
-2. ~~isFocusable method in GuiElement (and focusableChildren and what not)~~
-3. active + hover styles (note: might be handled by conditional styles concept instead!)
-4. ~~TextInputGuiElement~~
-5. Cookbook demo of some sort
+* active + hover styles (note: might be handled by conditional styles concept instead!)
+* Cookbook demo of some sort
 
 Later things
-* allow \n TextGuiElement new line wrapping (might not be needed with new layout stuff)
 * delete reference html files
-* Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
-    * maybe just check for any mouse event list size > 0?
-* consider an event map of some sort for when loading gui documents
-    * could also have an "event id -> event function" map that can be used as part of gui doc loading
-    * elements could then add event listeners from this map
-    * ie. (`mousePress` -> `doSomething`)
-* maybe put default style values in a common place?
-* when should layout be invalidated (can partial invalidations happen for children/parent)
 * ensure transparency stuff is hooked up properly
-* hover properties
-* "active" properties (apply style when clicking for example)
+* allow \n TextGuiElement new line wrapping (might not be needed with new layout stuff)
+* Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
+      * maybe just check for any mouse event list size > 0?
+* consider an event map of some sort for when loading gui documents
+      * could also have an "event id -> event function" map that can be used as part of gui doc loading
+      * elements could then add event listeners from this map
+      * ie. (`mousePress` -> `doSomething`)
+* maybe put default style values in a common place (like Direction.Column)?
+* when should layout be invalidated (can partial invalidations happen for children/parent)
 * consider splitting layout and paint styles to prevent extra calculations
-* v1 bugs
+* verify v1 bugs don't exist anymore
     * stopping gui mouse event propagation currently isn't hooked up
         * this needs to be added to `GuiElementContainer#handleMouseEvent`
 
