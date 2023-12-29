@@ -11,19 +11,19 @@
   },
   "oneOf": [
     {
-      "$ref": "/elements/Section.schema.json"
+      "$ref": "./elements/Section.schema.json"
     },
     {
-      "$ref": "/elements/Text.schema.json"
+      "$ref": "./elements/Text.schema.json"
     },
     {
-      "$ref": "/elements/Image.schema.json"
+      "$ref": "./elements/Image.schema.json"
     },
     {
-      "$ref": "/elements/input/Button.schema.json"
+      "$ref": "./elements/input/Button.schema.json"
     },
     {
-      "$ref": "/elements/input/TextInput.schema.json"
+      "$ref": "./elements/input/TextInput.schema.json"
     }
   ]
 }

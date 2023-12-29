@@ -40,6 +40,8 @@ public abstract class GuiElementJsonBlueprint<Styles extends BaseStyles, Element
   public Styles createStylesFromJson(JsonObject stylesJson) {
     StylesBuilder stylesBuilder = createStylesBuilder();
 
+    // todo get "condition" from stylesJson to know what ConditionalStyle to build
+
     stylesJson.forEach((key, value) -> stylesJsonValueParser.setPropertyFromJson(stylesBuilder, key, value));
 
     return (Styles) stylesBuilder.build();

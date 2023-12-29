@@ -1,7 +1,9 @@
 package technology.sola.engine.graphics.guiv2;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
 import technology.sola.engine.graphics.guiv2.style.StyleContainer;
 import technology.sola.engine.graphics.guiv2.elements.TextStyles;
 
@@ -10,7 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StyleContainerTest {
   @Test
   void test() {
-    var styleContainer = new StyleContainer<>(
+    var guiElement = Mockito.mock(TextGuiElement.class);
+    var styleContainer = new StyleContainer<>(guiElement);
+
+    styleContainer.setStyles(
       TextStyles.create().setBackgroundColor(Color.WHITE).build(),
       TextStyles.create().setTextColor(Color.RED).build(),
       TextStyles.create().setTextColor(Color.BLUE).setBackgroundColor(Color.BLACK).build()

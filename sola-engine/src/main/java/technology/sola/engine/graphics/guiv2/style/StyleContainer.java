@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.guiv2.style;
 
+import technology.sola.engine.graphics.guiv2.GuiElement;
 import technology.sola.engine.graphics.guiv2.style.property.MergeableProperty;
 
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 // todo consider instead of array of styles an array of conditional styles where function is determiner of it being active
 //   or not, guiElement -> guiElement.isHover() for example, styles merge from top to bottom
@@ -14,15 +16,12 @@ import java.util.function.Function;
 
 public class StyleContainer<Style extends BaseStyles> {
   private final Map<Function<Style, ?>, Object> computedCache = new HashMap<>();
-  private List<Style> styles;
+  private final GuiElement<Style> guiElement;
+  private List<ConditionalStyle<Style>> styles;
 
-  public StyleContainer() {
+  public StyleContainer(GuiElement<Style> guiElement) {
+    this.guiElement = guiElement;
     styles = new ArrayList<>();
-  }
-
-  @SafeVarargs
-  public StyleContainer(Style... styles) {
-    setStyles(styles);
   }
 
   @SafeVarargs
@@ -32,7 +31,7 @@ public class StyleContainer<Style extends BaseStyles> {
     if (styles == null) {
       this.styles = new ArrayList<>();
     } else {
-      this.styles = List.of(styles);
+      this.styles = Stream.of(styles).map(ConditionalStyle::always).toList();
     }
   }
 
@@ -48,11 +47,13 @@ public class StyleContainer<Style extends BaseStyles> {
 
     R value = defaultValue;
 
-    for (Style style : styles) {
-      R tempValue = propertySupplier.apply(style);
+    for (var style : styles) {
+      if (style.condition().apply(guiElement)) {
+        R tempValue = propertySupplier.apply(style.style());
 
-      if (tempValue != null) {
-        value = tempValue;
+        if (tempValue != null) {
+          value = tempValue;
+        }
       }
     }
 
@@ -69,13 +70,15 @@ public class StyleContainer<Style extends BaseStyles> {
 
     R value = defaultValue;
 
-    for (Style style : styles) {
-      R tempValue = propertySupplier.apply(style);
+    for (var style : styles) {
+      if (style.condition().apply(guiElement)) {
+        R tempValue = propertySupplier.apply(style.style());
 
-      if (value == null) {
-        value = tempValue;
-      } else {
-        value = value.mergeWith(tempValue);
+        if (value == null) {
+          value = tempValue;
+        } else {
+          value = value.mergeWith(tempValue);
+        }
       }
     }
 

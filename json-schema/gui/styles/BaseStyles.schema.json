@@ -4,6 +4,16 @@
   "title": "BaseStyles",
   "type": "object",
   "properties": {
+    "@condition": {
+      "type": "string",
+      "description": "The condition for when this style is applied to the element",
+      "enum": [
+        ":active",
+        ":disabled",
+        ":focus",
+        ":hover"
+      ]
+    },
     "backgroundColor": {
       "$ref": "#/$defs/color",
       "description": "Background color of the element."

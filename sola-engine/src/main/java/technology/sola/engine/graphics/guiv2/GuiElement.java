@@ -37,7 +37,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
   @SafeVarargs
   public GuiElement(Style... styles) {
-    styleContainer = new StyleContainer<>();
+    styleContainer = new StyleContainer<>(this);
     boundConstraints = new GuiElementBounds(0, 0, 0, 0);
     bounds = boundConstraints;
     contentBounds = bounds;
