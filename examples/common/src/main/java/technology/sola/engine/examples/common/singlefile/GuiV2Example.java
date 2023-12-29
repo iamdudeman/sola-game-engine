@@ -10,6 +10,10 @@ import technology.sola.engine.graphics.guiv2.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 
+/**
+ * GuiV2Example is a {@link technology.sola.engine.core.Sola} that shows an example custom gui using various
+ * {@link technology.sola.engine.graphics.guiv2.GuiElement}s.
+ */
 public class GuiV2Example extends SolaWithDefaults {
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.

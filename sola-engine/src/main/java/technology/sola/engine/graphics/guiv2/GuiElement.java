@@ -15,6 +15,7 @@ import java.util.List;
 
 public abstract class GuiElement<Style extends BaseStyles> {
   protected final StyleContainer<Style> styleContainer;
+  protected final List<GuiElement<?>> children = new ArrayList<>();
   /**
    * Includes only content size. Do not manually update this unless you know what you are doing!
    */
@@ -27,7 +28,6 @@ public abstract class GuiElement<Style extends BaseStyles> {
    * Includes border, padding and content size.
    */
   GuiElementBounds bounds;
-  protected final List<GuiElement<?>> children = new ArrayList<>();
   boolean isLayoutChanged;
   private GuiElement<?> parent;
   private final GuiElementEvents events = new GuiElementEvents();

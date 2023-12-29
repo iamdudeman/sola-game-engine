@@ -87,6 +87,7 @@ Later things
             * Switch JsMouseUtils to mouse events instead of pointer events
 * Android Platform
     * Implement
+* Investigate possible Steam CloudSave integration
 * Consider adding a "debug console" option
     * While open can toggle things like render debug outlines and debug spacial hashmap stuff
     * Could also maybe allow adding custom commands
