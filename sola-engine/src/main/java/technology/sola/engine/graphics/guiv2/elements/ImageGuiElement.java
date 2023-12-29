@@ -49,6 +49,11 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
     return false;
   }
 
+  @Override
+  public GuiElement<BaseStyles> appendChildren(GuiElement<?>... children) {
+    return this;
+  }
+
   public String getAssetId() {
     return assetId;
   }

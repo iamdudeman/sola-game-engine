@@ -103,6 +103,11 @@ public class TextGuiElement extends GuiElement<TextStyles> {
     return false;
   }
 
+  @Override
+  public GuiElement<TextStyles> appendChildren(GuiElement<?>... children) {
+    return this;
+  }
+
   public String getText() {
     return text;
   }
