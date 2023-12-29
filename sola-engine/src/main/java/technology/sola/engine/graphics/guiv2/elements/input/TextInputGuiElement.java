@@ -8,7 +8,7 @@ import technology.sola.engine.input.KeyboardLayout;
 
 public class TextInputGuiElement extends TextGuiElement {
   // props
-  private String placeHolderText = "";
+  private String placeholder = "";
   private Integer maxLength;
 
   // internals
@@ -60,12 +60,16 @@ public class TextInputGuiElement extends TextGuiElement {
     });
   }
 
-  public String getPlaceHolderText() {
-    return placeHolderText;
+  public String getPlaceholder() {
+    return placeholder;
   }
 
-  public void setPlaceHolderText(String placeHolderText) {
-    this.placeHolderText = placeHolderText;
+  public void setPlaceholder(String placeholder) {
+    this.placeholder = placeholder;
+
+    if (value.isEmpty()) {
+      setText(placeholder);
+    }
   }
 
   public Integer getMaxLength() {
@@ -74,6 +78,12 @@ public class TextInputGuiElement extends TextGuiElement {
 
   public void setMaxLength(Integer maxLength) {
     this.maxLength = maxLength;
+
+    if (maxLength != null && valueBuilder.length() > maxLength) {
+      valueBuilder.delete(maxLength, valueBuilder.length());
+      value = valueBuilder.toString();
+      updateText();
+    }
   }
 
   public String getValue() {
@@ -81,13 +91,21 @@ public class TextInputGuiElement extends TextGuiElement {
   }
 
   public void setValue(String value) {
-    this.value = value;
+    valueBuilder.delete(0, valueBuilder.length());
+
+    if (maxLength != null && maxLength < value.length()) {
+      valueBuilder.append(value, 0, maxLength);
+    } else {
+      valueBuilder.append(value);
+    }
+
+    this.value = valueBuilder.toString();
     updateText();
   }
 
   private void updateText() {
     if (value.isEmpty()) {
-      setText(placeHolderText.isEmpty() ? " " : placeHolderText);
+      setText(placeholder.isEmpty() ? " " : placeholder);
     } else {
       setText(value);
     }

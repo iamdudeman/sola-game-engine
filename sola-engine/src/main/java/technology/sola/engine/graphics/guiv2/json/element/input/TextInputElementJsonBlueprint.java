@@ -26,11 +26,13 @@ public class TextInputElementJsonBlueprint extends GuiElementJsonBlueprint<TextS
 
   @Override
   public TextInputGuiElement createElementFromJson(JsonObject propsJson) {
-    TextInputGuiElement textGuiElement = new TextInputGuiElement();
+    TextInputGuiElement textInputGuiElement = new TextInputGuiElement();
 
-    textGuiElement.setText(propsJson.getString("text", null));
+    textInputGuiElement.setValue(propsJson.getString("value", ""));
+    textInputGuiElement.setMaxLength(propsJson.getInt("maxLength", null));
+    textInputGuiElement.setPlaceholder(propsJson.getString("placeholder", ""));
 
-    return textGuiElement;
+    return textInputGuiElement;
   }
 
   @Override

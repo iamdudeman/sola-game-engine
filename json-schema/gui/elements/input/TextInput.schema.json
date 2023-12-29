@@ -11,9 +11,18 @@
     "props": {
       "type": "object",
       "properties": {
-        "text": {
+        "value": {
           "type": "string",
-          "description": "The text to render."
+          "description": "The initial value of the input."
+        },
+        "placeholder": {
+          "type": "string",
+          "description": "The text string rendered when no value is present."
+        },
+        "maxLength": {
+          "type": "integer",
+          "description": "The maximum number of characters for the input.",
+          "minimum": 1
         }
       }
     },

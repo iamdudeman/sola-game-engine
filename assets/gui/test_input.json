@@ -59,6 +59,11 @@
     },
     {
       "tag": "TextInput",
+      "props": {
+        "value": "initial",
+        "placeholder": "placeholder",
+        "maxLength": 10
+      },
       "styles": {
         "borderColor": "#ff0000",
         "padding": 10
