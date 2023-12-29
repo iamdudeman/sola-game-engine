@@ -4,11 +4,11 @@ Remaining v2
 1. ~~Keyboard navigation for SectionGuiElement~~
 2. ~~isFocusable method in GuiElement (and focusableChildren and what not)~~
 3. active + hover styles (note: might be handled by conditional styles concept instead!)
-4. TextInputGuiElement
+4. ~~TextInputGuiElement~~
 5. Cookbook demo of some sort
 
 Later things
-* allow \n TextGuiElement new line wrapping
+* allow \n TextGuiElement new line wrapping (might not be needed with new layout stuff)
 * delete reference html files
 * Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
     * maybe just check for any mouse event list size > 0?

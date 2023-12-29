@@ -33,7 +33,7 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
         .executeWhenLoaded(solaImage -> {
           this.solaImage = solaImage;
           this.currentAssetId = assetId;
-          getParent().invalidateLayout();
+          invalidateLayout();
         });
     }
 
