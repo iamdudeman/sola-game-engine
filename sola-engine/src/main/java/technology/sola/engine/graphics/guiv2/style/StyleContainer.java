@@ -20,6 +20,8 @@ public class StyleContainer<Style extends BaseStyles> {
   }
 
   public void invalidate() {
+    // todo make this smarter by keeping track of conditions met
+    // todo should this also invalidate layout???
     computedCache.clear();
   }
 

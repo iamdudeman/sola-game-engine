@@ -242,7 +242,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
   void onKeyPressed(GuiKeyEvent event) {
     if (event.getKeyEvent().keyCode() == Key.SPACE.getCode()) {
-      isActive = true;
+      setActive(true);
     }
     events.keyPressed().emit(event);
 
@@ -253,7 +253,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
   void onKeyReleased(GuiKeyEvent event) {
     events.keyReleased().emit(event);
-    isActive = false;
+    setActive(false);
 
     if (event.isAbleToPropagate()) {
       parent.onKeyReleased(event);
@@ -266,7 +266,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     }
 
     if (event.isAbleToPropagate() && bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
-      isActive = true;
+      setActive(true);
       events.mousePressed().emit(event);
     }
   }
@@ -278,8 +278,9 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
     if (event.isAbleToPropagate() && bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
       events.mouseReleased().emit(event);
-      isActive = false;
     }
+
+    setActive(false);
   }
 
   void onMouseMoved(GuiMouseEvent event) {
@@ -292,11 +293,11 @@ public abstract class GuiElement<Style extends BaseStyles> {
         events.mouseMoved().emit(event);
 
         if (!isHovered) {
-          isHovered = true;
+          setHovered(true);
           events.mouseEntered().emit(event);
         }
       } else if (isHovered) {
-        isHovered = false;
+        setHovered(false);
         events.mouseExited().emit(event);
       }
     }
@@ -361,5 +362,21 @@ public abstract class GuiElement<Style extends BaseStyles> {
       contentBounds.width() + border.left() + border.right() + padding.left() + padding.right(),
       contentBounds.height() + border.top() + border.bottom() + padding.top() + padding.bottom()
     );
+  }
+
+  private void setActive(boolean isActive) {
+    if (this.isActive != isActive) {
+      this.isActive = isActive;
+
+      styleContainer.invalidate();
+    }
+  }
+
+  private void setHovered(boolean isHovered) {
+    if (this.isHovered != isHovered) {
+      this.isHovered = isHovered;
+
+      styleContainer.invalidate();
+    }
   }
 }

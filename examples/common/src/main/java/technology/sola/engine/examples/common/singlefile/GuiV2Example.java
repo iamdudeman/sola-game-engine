@@ -74,6 +74,7 @@ public class GuiV2Example extends SolaWithDefaults {
         if (assets[5] instanceof GuiJsonDocument guiJsonDocument) {
           guiJsonDocument.rootElement().findElementById("button", ButtonGuiElement.class).setOnAction(() -> {
             System.out.println("Test click");
+            guiJsonDocument.rootElement().findElementById("button", ButtonGuiElement.class).setDisabled(true);
           });
         }
 

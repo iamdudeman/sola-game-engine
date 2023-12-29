@@ -1,7 +1,7 @@
 # sola-game-engine TODO list
 
 Remaining v2
-* active + hover styles (note: might be handled by conditional styles concept instead!)
+* ~~active + hover styles (note: might be handled by conditional styles concept instead!)~~
 * Cookbook demo of some sort
 
 Later things

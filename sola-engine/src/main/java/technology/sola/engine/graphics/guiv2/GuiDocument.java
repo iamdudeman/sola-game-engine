@@ -40,7 +40,13 @@ public class GuiDocument {
 
   public void requestFocus(GuiElement<?> guiElement) {
     if (guiElement.isFocusable()) {
+      var previousElement = this.focussedElement;
       this.focussedElement = guiElement;
+
+      if (previousElement != null) {
+        previousElement.styleContainer.invalidate();
+      }
+      guiElement.styleContainer.invalidate();
     }
   }
 

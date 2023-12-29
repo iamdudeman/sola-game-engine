@@ -21,6 +21,7 @@ public abstract class BaseInputGuiElement<Style extends BaseStyles> extends GuiE
 
   public void setDisabled(boolean disabled) {
     isDisabled = disabled;
+    styleContainer.invalidate();
   }
 
   @Override

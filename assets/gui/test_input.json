@@ -34,6 +34,18 @@
         {
           "@condition": ":hover",
           "backgroundColor": "#ff0000"
+        },
+        {
+          "@condition": ":focus",
+          "backgroundColor": "#00ff00"
+        },
+        {
+          "@condition": ":active",
+          "backgroundColor": "#0000ff"
+        },
+        {
+          "@condition": ":disabled",
+          "backgroundColor": "#ff00ff"
         }
       ],
       "children": [
@@ -52,6 +64,22 @@
         {
           "borderColor": "#ff0000",
           "padding": 10
+        },
+        {
+          "@condition": ":hover",
+          "backgroundColor": "#ff0000"
+        },
+        {
+          "@condition": ":focus",
+          "backgroundColor": "#00ff00"
+        },
+        {
+          "@condition": ":active",
+          "backgroundColor": "#0000ff"
+        },
+        {
+          "@condition": ":disabled",
+          "backgroundColor": "#ff00ff"
         }
       ],
       "children": [
@@ -75,6 +103,23 @@
           "borderColor": "#ff0000",
           "padding": 10,
           "placeholderColor": "#c7c7c7"
+        },
+        {
+          "@condition": ":hover",
+          "backgroundColor": "#ff0000"
+        },
+        {
+          "@condition": ":focus",
+          "backgroundColor": "#00ff00",
+          "placeholderColor": "#ff0000"
+        },
+        {
+          "@condition": ":active",
+          "backgroundColor": "#0000ff"
+        },
+        {
+          "@condition": ":disabled",
+          "backgroundColor": "#ff00ff"
         }
       ]
     },
@@ -85,6 +130,22 @@
         {
           "borderColor": "#ff0000",
           "padding": 10
+        },
+        {
+          "@condition": ":hover",
+          "backgroundColor": "#ff0000"
+        },
+        {
+          "@condition": ":focus",
+          "backgroundColor": "#00ff00"
+        },
+        {
+          "@condition": ":active",
+          "backgroundColor": "#0000ff"
+        },
+        {
+          "@condition": ":disabled",
+          "backgroundColor": "#ff00ff"
         }
       ],
       "children": [
