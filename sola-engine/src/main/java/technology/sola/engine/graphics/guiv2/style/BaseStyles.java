@@ -6,7 +6,6 @@ import technology.sola.engine.graphics.guiv2.style.property.*;
 public class BaseStyles {
   private final Background background;
   private final Border border;
-  private final Border outline;
   private final Padding padding;
   private final StyleValue width;
   private final StyleValue height;
@@ -20,7 +19,6 @@ public class BaseStyles {
   public BaseStyles(Builder<?> builder) {
     this.background = builder.background;
     this.border = builder.border;
-    this.outline = builder.outline;
     this.padding = builder.padding;
     this.width = builder.width;
     this.height = builder.height;
@@ -43,10 +41,6 @@ public class BaseStyles {
 
   public Border border() {
     return border;
-  }
-
-  public Border outline() {
-    return outline;
   }
 
   public Padding padding() {
@@ -88,7 +82,6 @@ public class BaseStyles {
   public static class Builder<Self extends Builder<Self>> {
     private Background background;
     private Border border;
-    private Border outline;
     private Padding padding = new Padding();
     private StyleValue width;
     private StyleValue height;
@@ -115,12 +108,6 @@ public class BaseStyles {
     @SuppressWarnings("unchecked")
     public Self setBorderColor(Color borderColor) {
       this.border = borderColor == null ? null : new Border(1, borderColor);
-      return (Self) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    public Self setOutlineColor(Color outlineColor) {
-      this.outline = outlineColor == null ? null : new Border(1, outlineColor);
       return (Self) this;
     }
 

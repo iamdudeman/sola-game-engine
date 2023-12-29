@@ -19,7 +19,6 @@ public class BaseStylesJsonValueParser implements StylesJsonValueParser<BaseStyl
       case "gap" -> stylesBuilder.setGap(StylesJsonBlueprintUtils.parseInteger(value));
       case "height" -> stylesBuilder.setHeight(StylesJsonBlueprintUtils.parseStyleValueAsString(value));
       case "mainAxisChildren" -> stylesBuilder.setMainAxisChildren(parseMainAxisChildren(value));
-      case "outlineColor" -> stylesBuilder.setOutlineColor(StylesJsonBlueprintUtils.parseColor(value));
       case "padding" -> stylesBuilder.setPadding(StylesJsonBlueprintUtils.parseInteger(value));
       case "paddingBottom" -> stylesBuilder.setPaddingBottom(StylesJsonBlueprintUtils.parseInteger(value));
       case "paddingHorizontal" -> stylesBuilder.setPaddingHorizontal(StylesJsonBlueprintUtils.parseInteger(value));

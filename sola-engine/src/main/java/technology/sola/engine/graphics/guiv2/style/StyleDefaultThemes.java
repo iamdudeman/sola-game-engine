@@ -39,7 +39,6 @@ public class StyleDefaultThemes {
         ConditionalStyle.always(
           BaseStyles.create()
             .setBorderColor(Color.BLACK)
-            .setOutlineColor(Color.BLACK)
             .setBackgroundColor(backgroundColor)
             .build()
         ),
@@ -65,7 +64,6 @@ public class StyleDefaultThemes {
             .setPlaceholderColor(textColor.tint(0.5f))
             .setTextColor(textColor)
             .setBorderColor(Color.BLACK)
-            .setOutlineColor(Color.BLACK)
             .setBackgroundColor(backgroundColor)
             .build()
         ),
@@ -116,7 +114,6 @@ public class StyleDefaultThemes {
         ConditionalStyle.always(
           BaseStyles.create()
             .setBorderColor(Color.WHITE)
-            .setOutlineColor(Color.WHITE)
             .setBackgroundColor(backgroundColor)
             .build()
         ),
@@ -142,7 +139,6 @@ public class StyleDefaultThemes {
             .setPlaceholderColor(textColor.shade(0.2f))
             .setTextColor(textColor)
             .setBorderColor(Color.WHITE)
-            .setOutlineColor(Color.WHITE)
             .setBackgroundColor(backgroundColor)
             .build()
         ),

@@ -86,14 +86,6 @@ public abstract class GuiElement<Style extends BaseStyles> {
       renderer.drawRect(x, y, width - border.right(), height - border.bottom(), border.color());
     }
 
-    if (isFocussed()) {
-      Border outline = styleContainer.getPropertyValue(BaseStyles::outline, Border.NONE);
-
-      if (outline.bottom() > 0) {
-        renderer.drawRect(x, y, width - outline.right(), height - outline.bottom(), outline.color());
-      }
-    }
-
     renderContent(renderer);
   }
 

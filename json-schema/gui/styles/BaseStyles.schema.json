@@ -50,10 +50,6 @@
         "end"
       ]
     },
-    "outlineColor": {
-      "$ref": "#/$defs/color",
-      "description": "Outline color of the element when it has focus."
-    },
     "padding": {
       "type": "integer",
       "description": "The top, right, bottom and left padding of the element.",
