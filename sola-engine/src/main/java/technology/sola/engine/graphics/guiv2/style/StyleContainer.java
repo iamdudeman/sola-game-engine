@@ -22,30 +22,25 @@ public class StyleContainer<Style extends BaseStyles> {
   }
 
   public void invalidate() {
-    // todo should this also invalidate layout???
     boolean hasChanged = false;
 
     for (int i = 0; i < this.conditionalStyles.size(); i++) {
       if (conditionsArray[i] != conditionalStyles.get(i).condition().apply(guiElement)) {
+        conditionsArray[i] = conditionalStyles.get(i).condition().apply(guiElement);
         hasChanged = true;
-        break;
       }
     }
 
     if (hasChanged) {
       computedCache.clear();
-
-      for (int i = 0; i < this.conditionalStyles.size(); i++) {
-        conditionsArray[i] = conditionalStyles.get(i).condition().apply(guiElement);
-      }
+      // todo should this also invalidate layout???
     }
   }
 
   public final void setStyles(List<ConditionalStyle<Style>> styles) {
-    computedCache.clear();
-
     this.conditionalStyles = styles == null ? new ArrayList<>() : styles;
     conditionsArray = styles == null ? new boolean[0] : new boolean[styles.size()];
+    computedCache.clear();
   }
 
   public <R> R getPropertyValue(Function<Style, R> propertySupplier) {
