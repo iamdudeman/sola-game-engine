@@ -3,6 +3,7 @@
 Remaining v2
 * ~~active + hover styles (note: might be handled by conditional styles concept instead!)~~
 * implement a better way to do "defaults/themes"
+* consider adding a way in JSON to define "styles" that can be reused instead of copy+pasta duplication
 * Cookbook demo of some sort
 
 Later things
