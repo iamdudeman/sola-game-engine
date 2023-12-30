@@ -19,6 +19,7 @@ import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.graphics.guiv2.GuiDocument;
 import technology.sola.engine.graphics.guiv2.json.GuiJsonDocumentBuilder;
+import technology.sola.engine.graphics.guiv2.json.element.GuiElementJsonBlueprint;
 import technology.sola.engine.graphics.guiv2.json.element.ImageElementJsonBlueprint;
 import technology.sola.engine.graphics.guiv2.json.element.SectionElementJsonBlueprint;
 import technology.sola.engine.graphics.guiv2.json.element.TextElementJsonBlueprint;
@@ -31,6 +32,7 @@ import technology.sola.engine.physics.system.CollisionDetectionSystem;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 /**
  * SolaWithDefaults extends {@link Sola} with some default behaviors that many games will find useful, such as default
@@ -274,14 +276,17 @@ public abstract class SolaWithDefaults extends Sola {
     }
 
     // todo javadoc
-    // todo pass in Json definition list (but also provide default list)
     public DefaultsConfigurator useGuiV2() {
       return useGuiV2(GuiTheme.getDefaultLightTheme());
     }
 
     // todo javadoc
-    // todo pass in Json definition list (but also provide default list)
     public DefaultsConfigurator useGuiV2(GuiTheme guiTheme) {
+      return useGuiV2(guiTheme, List.of());
+    }
+
+    // todo javadoc
+    public DefaultsConfigurator useGuiV2(GuiTheme guiTheme, List<GuiElementJsonBlueprint<?, ?, ?>> additionalGuiElementJsonBlueprints) {
       if (guiDocument == null) {
         guiDocument = new GuiDocument(platform, assetLoaderProvider);
         rebuildRenderFunction();
@@ -293,15 +298,20 @@ public abstract class SolaWithDefaults extends Sola {
           fontAssetLoader.addAsset(DefaultFont.ASSET_ID, DefaultFont.get());
         }
 
-        assetLoaderProvider.add(new GuiJsonDocumentAssetLoader(
-          assetLoaderProvider.get(JsonElementAsset.class),
-          new GuiJsonDocumentBuilder(guiTheme, List.of(
+        List<GuiElementJsonBlueprint<?, ?, ?>> guiElementJsonBlueprints = Stream.concat(
+          Stream.of(
             new SectionElementJsonBlueprint(),
             new TextElementJsonBlueprint(),
             new ImageElementJsonBlueprint(),
             new ButtonElementJsonBlueprint(),
             new TextInputElementJsonBlueprint()
-          ))
+          ),
+          additionalGuiElementJsonBlueprints.stream()
+        ).toList();
+
+        assetLoaderProvider.add(new GuiJsonDocumentAssetLoader(
+          assetLoaderProvider.get(JsonElementAsset.class),
+          new GuiJsonDocumentBuilder(guiTheme, guiElementJsonBlueprints)
         ));
       }
 
