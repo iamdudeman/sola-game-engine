@@ -20,8 +20,10 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
     if (solaImage != null) {
       SolaImage transformedImage = solaImage.resize(contentBounds.width(), contentBounds.height());
 
+      var currentBlendFunction = renderer.getBlendFunction();
       renderer.setBlendFunction(BlendMode.MASK);
       renderer.drawImage(transformedImage, contentBounds.x(), contentBounds.y());
+      renderer.setBlendFunction(currentBlendFunction);
     }
   }
 

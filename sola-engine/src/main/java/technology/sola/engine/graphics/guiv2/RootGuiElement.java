@@ -3,6 +3,7 @@ package technology.sola.engine.graphics.guiv2;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.graphics.guiv2.event.GuiKeyEvent;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
+import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 
 class RootGuiElement extends GuiElement<BaseStyles> {
@@ -20,7 +21,11 @@ class RootGuiElement extends GuiElement<BaseStyles> {
 
   @Override
   public void renderContent(Renderer renderer) {
+    var currentBlendFunction = renderer.getBlendFunction();
+
+    renderer.setBlendFunction(BlendMode.NORMAL);
     renderChildren(renderer);
+    renderer.setBlendFunction(currentBlendFunction);
   }
 
   @Override

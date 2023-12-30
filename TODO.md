@@ -3,12 +3,12 @@
 Remaining v2
 * ~~active + hover styles (note: might be handled by conditional styles concept instead!)~~
 * implement a better way to do "defaults/themes"
+* ~~ensure transparency stuff is hooked up properly~~
 * consider adding a way in JSON to define "styles" that can be reused instead of copy+pasta duplication
 * Cookbook demo of some sort
 
 Later things
 * delete reference html files
-* ensure transparency stuff is hooked up properly
 * allow \n TextGuiElement new line wrapping (might not be needed with new layout stuff)
 * Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
       * maybe just check for any mouse event list size > 0?
@@ -42,6 +42,8 @@ Later things
 * update to Java 21
     * teavm 0.9.0 has support
 * delete gui v1 code and move "v2" to gui package
+* implement "Style sheet" JSON concept
+    * gui json documents can reference these for use
 * JSON schema files for
     * font stuff
     * spritesheet stuff
