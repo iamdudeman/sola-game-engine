@@ -6,19 +6,23 @@ import technology.sola.engine.graphics.guiv2.GuiElement;
 import technology.sola.engine.graphics.guiv2.json.exception.MissingGuiElementJsonBlueprintException;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.guiv2.style.ConditionalStyle;
+import technology.sola.engine.graphics.guiv2.style.theme.GuiTheme;
 import technology.sola.json.JsonArray;
 import technology.sola.json.JsonObject;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * GuiJsonDocumentBuilder handles building {@link GuiJsonDocument} instances from a {@link JsonObject}.
  */
 public class GuiJsonDocumentBuilder {
   private static final String ATTR_TAG = "tag";
+  private static final String ATTR_ID = "id";
   private static final String ATTR_CHILDREN = "children";
   private static final String ATTR_PROPS = "props";
   private static final String ATTR_STYLES = "styles";
+  private final GuiTheme guiTheme;
   private final List<GuiElementJsonBlueprint<?, ?, ?>> guiElementJsonBlueprints;
 
   /**
@@ -26,7 +30,8 @@ public class GuiJsonDocumentBuilder {
    *
    * @param guiElementJsonBlueprints the list of definitions to build from
    */
-  public GuiJsonDocumentBuilder(List<GuiElementJsonBlueprint<?, ?, ?>> guiElementJsonBlueprints) {
+  public GuiJsonDocumentBuilder(GuiTheme guiTheme, List<GuiElementJsonBlueprint<?, ?, ?>> guiElementJsonBlueprints) {
+    this.guiTheme = guiTheme;
     this.guiElementJsonBlueprints = guiElementJsonBlueprints;
   }
 
@@ -52,11 +57,12 @@ public class GuiJsonDocumentBuilder {
     GuiElement<?> element = guiElementJsonBlueprint.createElementFromJson(elementJson.getObject(ATTR_PROPS, new JsonObject()));
     var stylesJsonArray = elementJson.getArray(ATTR_STYLES, new JsonArray());
 
+    var themeStyles = guiTheme.getForElement(element);
     var styles = stylesJsonArray.stream().map(styleObject -> (ConditionalStyle<BaseStyles>) guiElementJsonBlueprint.createStylesFromJson(styleObject.asObject())).toList();
 
-    element.setId(elementJson.getString("id", null));
+    element.setId(elementJson.getString(ATTR_ID, null));
 
-    ((GuiElement<BaseStyles>) element).setStyle(styles);
+    ((GuiElement) element).setStyle(Stream.concat(themeStyles.stream(), styles.stream()).toList());
 
     elementJson.getArray(ATTR_CHILDREN, new JsonArray()).stream().map(childJson -> buildElement(childJson.asObject())).forEach(element::appendChildren);
 

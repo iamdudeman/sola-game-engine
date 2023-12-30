@@ -24,6 +24,7 @@ import technology.sola.engine.graphics.guiv2.json.element.SectionElementJsonBlue
 import technology.sola.engine.graphics.guiv2.json.element.TextElementJsonBlueprint;
 import technology.sola.engine.graphics.guiv2.json.element.input.ButtonElementJsonBlueprint;
 import technology.sola.engine.graphics.guiv2.json.element.input.TextInputElementJsonBlueprint;
+import technology.sola.engine.graphics.guiv2.style.theme.GuiTheme;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.system.LightFlickerSystem;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
@@ -275,6 +276,12 @@ public abstract class SolaWithDefaults extends Sola {
     // todo javadoc
     // todo pass in Json definition list (but also provide default list)
     public DefaultsConfigurator useGuiV2() {
+      return useGuiV2(GuiTheme.getDefaultLightTheme());
+    }
+
+    // todo javadoc
+    // todo pass in Json definition list (but also provide default list)
+    public DefaultsConfigurator useGuiV2(GuiTheme guiTheme) {
       if (guiDocument == null) {
         guiDocument = new GuiDocument(platform, assetLoaderProvider);
         rebuildRenderFunction();
@@ -288,7 +295,7 @@ public abstract class SolaWithDefaults extends Sola {
 
         assetLoaderProvider.add(new GuiJsonDocumentAssetLoader(
           assetLoaderProvider.get(JsonElementAsset.class),
-          new GuiJsonDocumentBuilder(List.of(
+          new GuiJsonDocumentBuilder(guiTheme, List.of(
             new SectionElementJsonBlueprint(),
             new TextElementJsonBlueprint(),
             new ImageElementJsonBlueprint(),
