@@ -50,16 +50,7 @@ class LayoutUtil {
       // calculate where in the layout flow the element should go or if it is outside the flow
       var position = child.getStyles().getPropertyValue(BaseStyles::position, Position.NONE);
 
-      if (position.isAbsolute()) {
-        int absoluteX = position.x() == null
-          ? child.bounds.x()
-          : position.x().getValue(child.bounds.x() + child.bounds.width());
-        int absoluteY = position.y() == null
-          ? child.bounds.y()
-          : position.y().getValue(child.bounds.y() + child.bounds.height());
-
-        child.setPosition(absoluteX, absoluteY);
-      } else {
+      if (!position.isAbsolute()) {
         switch (direction) {
           case COLUMN, COLUMN_REVERSE: {
             yOffset += child.getBounds().height() + gap;
@@ -108,6 +99,23 @@ class LayoutUtil {
         }
       }
     }
+  }
+
+  static void updateAbsolute(GuiElement<?> guiElement) {
+    var position = guiElement.getStyles().getPropertyValue(BaseStyles::position, Position.NONE);
+
+    if (position.isAbsolute()) {
+      int absoluteX = position.x() == null
+        ? guiElement.getParent().bounds.x()
+        : position.x().getValue(guiElement.getParent().bounds.width());
+      int absoluteY = position.y() == null
+        ? guiElement.getParent().bounds.y()
+        : position.y().getValue(guiElement.getParent().bounds.height());
+
+      guiElement.setPosition(absoluteX, absoluteY);
+    }
+
+    guiElement.children.forEach(LayoutUtil::updateAbsolute);
   }
 
   private static GuiElementBounds recalculateBoundConstraints(GuiElement<?> guiElement, int x, int y) {

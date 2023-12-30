@@ -1,6 +1,9 @@
 # sola-game-engine TODO list
 
 Remaining v2
+* bugs
+    * ~~absolute positioning not quite right~~
+    * pressing key always focuses first element
 * ~~active + hover styles (note: might be handled by conditional styles concept instead!)~~
 * implement a better way to do "defaults/themes"
 * ~~ensure transparency stuff is hooked up properly~~

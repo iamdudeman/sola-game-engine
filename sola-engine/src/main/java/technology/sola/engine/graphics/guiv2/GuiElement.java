@@ -349,6 +349,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
   private void recalculateLayout() {
     if (isLayoutChanged()) {
       LayoutUtil.rebuildLayout(this);
+      LayoutUtil.updateAbsolute(this);
 
       isLayoutChanged = false;
     }
