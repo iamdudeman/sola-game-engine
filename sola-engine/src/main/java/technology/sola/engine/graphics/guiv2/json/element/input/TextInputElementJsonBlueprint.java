@@ -29,6 +29,7 @@ public class TextInputElementJsonBlueprint extends GuiElementJsonBlueprint<TextI
     textInputGuiElement.setValue(propsJson.getString("value", ""));
     textInputGuiElement.setMaxLength(propsJson.getInt("maxLength", null));
     textInputGuiElement.setPlaceholder(propsJson.getString("placeholder", ""));
+    textInputGuiElement.setDisabled(propsJson.getBoolean("disabled", false));
 
     return textInputGuiElement;
   }

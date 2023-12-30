@@ -15,7 +15,9 @@ import java.util.List;
 class DefaultThemeBuilder {
   static GuiTheme buildLightTheme() {
     Color inputBackgroundColor = Color.WHITE;
-    Color inputBorderColor = Color.BLACK;
+    Color inputBorderColor = new Color(118, 118, 118);
+    Color inputFocusBorderColor = Color.BLACK;
+    Color buttonBackgroundColor = new Color(240, 240, 240);
     Color textColor = Color.BLACK;
 
     return new GuiTheme()
@@ -31,22 +33,28 @@ class DefaultThemeBuilder {
         ConditionalStyle.always(
           BaseStyles.create()
             .setBorderColor(inputBorderColor)
-            .setBackgroundColor(inputBackgroundColor)
+            .setBackgroundColor(buttonBackgroundColor)
             .build()
         ),
         ConditionalStyle.focus(
           BaseStyles.create()
-            .setBorderColor(new Color(0 ,150, 255))
+            .setBorderColor(inputFocusBorderColor)
             .build()
         ),
         ConditionalStyle.hover(
           BaseStyles.create()
-            .setBackgroundColor(inputBackgroundColor.shade(0.1f))
+            .setBackgroundColor(buttonBackgroundColor.shade(0.1f))
+            .build()
+        ),
+        ConditionalStyle.active(
+          BaseStyles.create()
+            .setBorderColor(inputBorderColor)
+            .setBackgroundColor(inputBackgroundColor)
             .build()
         ),
         ConditionalStyle.disabled(
           BaseStyles.create()
-            .setBackgroundColor(inputBorderColor.shade(0.18f))
+            .setBackgroundColor(buttonBackgroundColor.shade(0.18f))
             .build()
         )
       ))
@@ -61,17 +69,17 @@ class DefaultThemeBuilder {
         ),
         ConditionalStyle.focus(
           TextInputStyles.create()
-            .setBorderColor(new Color(0 ,150, 255))
+            .setBorderColor(inputFocusBorderColor)
             .build()
         ),
         ConditionalStyle.hover(
           TextInputStyles.create()
-            .setBackgroundColor(inputBackgroundColor.shade(0.1f))
+            .setBackgroundColor(buttonBackgroundColor.shade(0.1f))
             .build()
         ),
         ConditionalStyle.disabled(
           TextInputStyles.create()
-            .setBackgroundColor(inputBorderColor.shade(0.18f))
+            .setBackgroundColor(inputBackgroundColor.shade(0.18f))
             .build()
         )
       ))
@@ -79,9 +87,13 @@ class DefaultThemeBuilder {
   }
 
   static GuiTheme buildDarkTheme() {
-    Color inputBackgroundColor = Color.BLACK;
-    Color inputBorderColor = Color.WHITE;
+    Color inputBackgroundColor = new Color(59, 59, 59);
+    Color inputBorderColor = new Color(133, 133, 133);
     Color textColor = Color.WHITE;
+    Color inputFocusBorderColor = Color.WHITE;
+    Color buttonBackgroundColor = new Color(107, 107, 107);
+
+
 
     return new GuiTheme()
       .addStyle(SectionGuiElement.class, List.of())
@@ -96,22 +108,28 @@ class DefaultThemeBuilder {
         ConditionalStyle.always(
           BaseStyles.create()
             .setBorderColor(inputBorderColor)
-            .setBackgroundColor(inputBackgroundColor)
+            .setBackgroundColor(buttonBackgroundColor)
             .build()
         ),
         ConditionalStyle.focus(
           BaseStyles.create()
-            .setBorderColor(new Color(0 ,150, 255))
+            .setBorderColor(inputFocusBorderColor)
             .build()
         ),
         ConditionalStyle.hover(
           BaseStyles.create()
-            .setBackgroundColor(inputBackgroundColor.tint(0.25f))
+            .setBackgroundColor(buttonBackgroundColor.tint(0.25f))
+            .build()
+        ),
+        ConditionalStyle.active(
+          BaseStyles.create()
+            .setBorderColor(inputBorderColor)
+            .setBackgroundColor(inputBackgroundColor)
             .build()
         ),
         ConditionalStyle.disabled(
           BaseStyles.create()
-            .setBackgroundColor(inputBorderColor.tint(0.18f))
+            .setBackgroundColor(buttonBackgroundColor.tint(0.18f))
             .build()
         )
       ))
@@ -126,7 +144,7 @@ class DefaultThemeBuilder {
         ),
         ConditionalStyle.focus(
           TextInputStyles.create()
-            .setBorderColor(new Color(0 ,150, 255))
+            .setBorderColor(inputFocusBorderColor)
             .build()
         ),
         ConditionalStyle.hover(
@@ -136,7 +154,7 @@ class DefaultThemeBuilder {
         ),
         ConditionalStyle.disabled(
           TextInputStyles.create()
-            .setBackgroundColor(inputBorderColor.tint(0.18f))
+            .setBackgroundColor(inputBackgroundColor.tint(0.18f))
             .build()
         )
       ))

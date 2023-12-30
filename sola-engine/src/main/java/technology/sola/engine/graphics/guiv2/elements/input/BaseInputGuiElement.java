@@ -21,7 +21,7 @@ public abstract class BaseInputGuiElement<Style extends BaseStyles> extends GuiE
 
   public void setDisabled(boolean disabled) {
     if (this.isDisabled != disabled) {
-      boolean shouldRefocusParent = disabled && isFocussed();
+      boolean shouldRefocusParent = disabled && getParent() != null && isFocussed();
 
       isDisabled = disabled;
       styleContainer.invalidate();
