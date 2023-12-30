@@ -1,30 +1,9 @@
 # sola-game-engine TODO list
 
 Remaining v2
-* ~~bugs~~
-    * ~~absolute positioning not quite right~~
-    * ~~pressing key always focuses first element~~
-* ~~active + hover styles (note: might be handled by conditional styles concept instead!)~~
-* implement a better way to do "defaults/themes"
-* ~~ensure transparency stuff is hooked up properly~~
-* consider adding a way in JSON to define "styles" that can be reused instead of copy+pasta duplication
 * Cookbook demo of some sort
-
-Later things
+* package-info files + JavaDocs :D
 * delete reference html files
-* allow \n TextGuiElement new line wrapping (might not be needed with new layout stuff)
-* Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
-      * maybe just check for any mouse event list size > 0?
-* consider an event map of some sort for when loading gui documents
-      * could also have an "event id -> event function" map that can be used as part of gui doc loading
-      * elements could then add event listeners from this map
-      * ie. (`mousePress` -> `doSomething`)
-* maybe put default style values in a common place (like Direction.Column)?
-* when should layout be invalidated (can partial invalidations happen for children/parent)
-* consider splitting layout and paint styles to prevent extra calculations
-* verify v1 bugs don't exist anymore
-    * stopping gui mouse event propagation currently isn't hooked up
-        * this needs to be added to `GuiElementContainer#handleMouseEvent`
 
 ## Known Bugs List
 
@@ -45,11 +24,22 @@ Later things
 * update to Java 21
     * teavm 0.9.0 has support
 * delete gui v1 code and move "v2" to gui package
-* implement "Style sheet" JSON concept
-    * gui json documents can reference these for use
 * JSON schema files for
     * font stuff
     * spritesheet stuff
+* GuiV2 improvements
+    * allow \n TextGuiElement new line wrapping (might not be needed with new layout stuff)
+    * implement "Style sheet" JSON concept
+        * gui json documents can reference these for use
+    * Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
+        * maybe just check for any mouse event list size > 0?
+    * consider an event map of some sort for when loading gui documents
+        * could also have an "event id -> event function" map that can be used as part of gui doc loading
+        * elements could then add event listeners from this map
+        * ie. (`mousePress` -> `doSomething`)
+    * maybe put default style values in a common place (like Direction.Column)?
+    * when should layout be invalidated (can partial invalidations happen for children/parent)
+    * consider splitting layout and paint styles to prevent extra calculations
 * Consider array list for possible SpacialHashMap performance boost
 * Consider "stopping" AudioClip when it is finished by default, so it can be immediately played again?
 * Move custom build "distribution" tasks to a gradle plugin
