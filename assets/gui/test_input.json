@@ -20,6 +20,14 @@
       "styles": [
         {
           "paddingBottom": 10
+        },
+        {
+          "@condition": ":hover",
+          "backgroundColor": "#aa00aa",
+          "textColor": "#000ff0",
+          "width": "50%",
+          "paddingRight": 10,
+          "textAlignment": "end"
         }
       ]
     },

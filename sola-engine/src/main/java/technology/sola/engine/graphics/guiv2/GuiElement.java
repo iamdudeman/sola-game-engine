@@ -270,8 +270,8 @@ public abstract class GuiElement<Style extends BaseStyles> {
     }
 
     if (event.isAbleToPropagate() && bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
-      setActive(true);
       events.mousePressed().emit(event);
+      setActive(true);
     }
   }
 

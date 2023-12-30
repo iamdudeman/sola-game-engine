@@ -33,7 +33,8 @@ public class StyleContainer<Style extends BaseStyles> {
 
     if (hasChanged) {
       computedCache.clear();
-      // todo should this also invalidate layout???
+      // todo keep an eye on this for if this is a performance issue
+      guiElement.invalidateLayout();
     }
   }
 
