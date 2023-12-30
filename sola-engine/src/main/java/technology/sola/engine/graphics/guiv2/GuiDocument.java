@@ -25,7 +25,14 @@ public class GuiDocument {
   }
 
   public void setRootElement(GuiElement<?> rootEle) {
-    focussedElement = null;
+    var previousElement = this.focussedElement;
+
+    focussedElement = root;
+
+    if (previousElement != root) {
+      previousElement.styleContainer.invalidate();
+    }
+
     for (var child : root.children.stream().toList()) {
       root.removeChild(child);
     }
