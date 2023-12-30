@@ -2,6 +2,7 @@
 
 Remaining v2
 * ~~active + hover styles (note: might be handled by conditional styles concept instead!)~~
+* implement a better way to do "defaults/themes"
 * Cookbook demo of some sort
 
 Later things
