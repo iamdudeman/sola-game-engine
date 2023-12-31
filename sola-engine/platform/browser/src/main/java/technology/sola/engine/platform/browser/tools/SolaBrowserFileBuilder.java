@@ -9,7 +9,6 @@ import technology.sola.engine.platform.browser.javascript.JsCanvasUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URLClassLoader;
 import java.nio.file.Files;
 
 /**
@@ -62,7 +61,7 @@ public class SolaBrowserFileBuilder {
    * @param obfuscate whether to obfuscate the js bundle or not
    */
   public void transpileSolaJar(String jarPath, String mainClass, boolean obfuscate) {
-    InProcessBuildStrategy buildStrategy = new InProcessBuildStrategy(URLClassLoader::new);
+    InProcessBuildStrategy buildStrategy = new InProcessBuildStrategy();
 
     buildStrategy.init();
 
@@ -88,7 +87,6 @@ public class SolaBrowserFileBuilder {
     buildStrategy.setMaxHeapSize(128);
     buildStrategy.setShortFileNames(false);
     buildStrategy.setMaxTopLevelNames(10000);
-    buildStrategy.setLongjmpSupported(true);
 
     BuildResult buildResult;
     try {
