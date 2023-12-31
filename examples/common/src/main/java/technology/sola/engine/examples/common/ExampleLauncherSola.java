@@ -9,16 +9,7 @@ import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.examples.common.guicookbook.GuiCookbook;
 import technology.sola.engine.examples.common.minesweeper.MinesweeperExample;
 import technology.sola.engine.examples.common.networking.NetworkingExample;
-import technology.sola.engine.examples.common.singlefile.AnimationExample;
-import technology.sola.engine.examples.common.singlefile.AudioExample;
-import technology.sola.engine.examples.common.singlefile.GuiExample;
-import technology.sola.engine.examples.common.singlefile.LightingExample;
-import technology.sola.engine.examples.common.singlefile.MouseAndCameraExample;
-import technology.sola.engine.examples.common.singlefile.ParticleExample;
-import technology.sola.engine.examples.common.singlefile.RenderingExample;
-import technology.sola.engine.examples.common.singlefile.SimplePlatformerExample;
-import technology.sola.engine.examples.common.singlefile.StressTestPhysicsExample;
-import technology.sola.engine.examples.common.singlefile.StressTestRenderingExample;
+import technology.sola.engine.examples.common.singlefile.*;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
@@ -74,6 +65,7 @@ public class ExampleLauncherSola extends SolaWithDefaults {
         buildExampleLaunchButton("Animation", AnimationExample::new),
         buildExampleLaunchButton("Audio", AudioExample::new),
         buildExampleLaunchButton("Gui", GuiExample::new),
+        buildExampleLaunchButton("GuiV2", GuiV2Example::new),
         buildExampleLaunchButton("Lighting", LightingExample::new),
         buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new),
         buildExampleLaunchButton("Particle", ParticleExample::new),

@@ -1,9 +1,5 @@
 # sola-game-engine TODO list
 
-Remaining v2
-* package-info files + JavaDocs :D
-* delete reference html files
-
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -28,6 +24,7 @@ Remaining v2
     * font stuff
     * spritesheet stuff
 * GuiV2 improvements
+    * lots of JavaDocs missing
     * allow \n TextGuiElement new line wrapping (might not be needed with new layout stuff)
     * implement "Style sheet" JSON concept
         * gui json documents can reference these for use

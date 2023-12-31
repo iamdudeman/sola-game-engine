@@ -275,17 +275,33 @@ public abstract class SolaWithDefaults extends Sola {
       return useGui(new GuiPropertyDefaults());
     }
 
-    // todo javadoc
+    /**
+     * Initializes the {@link GuiDocument} instance with a light {@link GuiTheme}.
+     *
+     * @return this
+     */
     public DefaultsConfigurator useGuiV2() {
       return useGuiV2(GuiTheme.getDefaultLightTheme());
     }
 
-    // todo javadoc
+    /**
+     * Initializes the {@link GuiDocument} instance with a desired {@link GuiTheme}.
+     *
+     * @param guiTheme the theme to use
+     * @return this
+     */
     public DefaultsConfigurator useGuiV2(GuiTheme guiTheme) {
       return useGuiV2(guiTheme, List.of());
     }
 
-    // todo javadoc
+    /**
+     * Initializes the {@link GuiDocument} instance with a desired {@link GuiTheme}. Also registers additional
+     * {@link GuiElementJsonBlueprint}s for parsing different kinds of elements as JSON.
+     *
+     * @param guiTheme the theme to use
+     * @param additionalGuiElementJsonBlueprints addition gui element json blueprints to register for parsing
+     * @return this
+     */
     public DefaultsConfigurator useGuiV2(GuiTheme guiTheme, List<GuiElementJsonBlueprint<?, ?, ?>> additionalGuiElementJsonBlueprints) {
       if (guiDocument == null) {
         guiDocument = new GuiDocument(platform, assetLoaderProvider);

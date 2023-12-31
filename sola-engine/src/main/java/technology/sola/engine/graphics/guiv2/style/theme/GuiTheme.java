@@ -13,7 +13,7 @@ import java.util.List;
 public class GuiTheme {
   private static GuiTheme defaultLightTheme;
   private static GuiTheme defaultDarkTheme;
-  private final List<ThemeElementDefinition> definitions = new ArrayList<>();
+  private final List<ThemeElementDefinition<?>> definitions = new ArrayList<>();
 
   public static GuiTheme getDefaultLightTheme() {
     if (defaultLightTheme == null) {
@@ -31,39 +31,43 @@ public class GuiTheme {
     return defaultDarkTheme;
   }
 
-  public <T extends BaseStyles> void applyToTree(GuiElement<T> guiElement) {
+  @SuppressWarnings("unchecked")
+  public <Style extends BaseStyles> void applyToTree(GuiElement<Style> guiElement) {
     definitions.forEach(definition -> {
-      for (var child : guiElement.findElementsByType((Class<? extends GuiElement<?>>) definition.elementClass)) {
-        child.setStyle(definition.styles);
+      for (var child : guiElement.findElementsByType((Class<? extends GuiElement<Style>>) definition.elementClass)) {
+        child.setStyle(((ThemeElementDefinition<Style>) definition).styles);
       }
     });
   }
 
-  public void applyToElement(GuiElement<?> guiElement) {
+  @SuppressWarnings("unchecked")
+  public <Style extends BaseStyles> void applyToElement(GuiElement<Style> guiElement) {
     for (var definition : definitions) {
       if (definition.elementClass.equals(guiElement.getClass())) {
-        guiElement.setStyle(definition.styles);
+        guiElement.setStyle(((ThemeElementDefinition<Style>) definition).styles);
         break;
       }
     }
   }
 
-  public List<ConditionalStyle<?>> getForElement(GuiElement<?> guiElement) {
+  @SuppressWarnings("unchecked")
+  public <Style extends BaseStyles> List<ConditionalStyle<Style>> getForElement(GuiElement<Style> guiElement) {
     for (var definition : definitions) {
       if (definition.elementClass.equals(guiElement.getClass())) {
-        return definition.styles;
+        return ((ThemeElementDefinition<Style>) definition).styles;
       }
     }
 
     return new ArrayList<>();
   }
 
+  @SuppressWarnings("unchecked")
   public <Style extends BaseStyles> GuiTheme addStyle(Class<? extends GuiElement<Style>> elementClass, List<ConditionalStyle<Style>> styles) {
     boolean isExisting = false;
 
     for (var definition : definitions) {
       if (definition.elementClass.equals(elementClass)) {
-        definition.styles.addAll(styles);
+        ((ThemeElementDefinition<Style>) definition).styles.addAll(styles);
         isExisting = true;
         break;
       }
