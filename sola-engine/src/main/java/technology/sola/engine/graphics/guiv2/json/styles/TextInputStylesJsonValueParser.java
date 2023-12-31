@@ -1,10 +1,7 @@
-package technology.sola.engine.graphics.guiv2.json.styles.input;
+package technology.sola.engine.graphics.guiv2.json.styles;
 
 import technology.sola.engine.graphics.guiv2.elements.TextStyles;
 import technology.sola.engine.graphics.guiv2.elements.input.TextInputStyles;
-import technology.sola.engine.graphics.guiv2.json.styles.StylesJsonBlueprintUtils;
-import technology.sola.engine.graphics.guiv2.json.styles.StylesJsonValueParser;
-import technology.sola.engine.graphics.guiv2.json.styles.TextStylesJsonValueParser;
 import technology.sola.json.JsonElement;
 
 /**

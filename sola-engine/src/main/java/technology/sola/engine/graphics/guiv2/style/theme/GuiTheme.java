@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GuiTheme {
-  private final List<ThemeElementDefinition> definitions = new ArrayList<>();
   private static GuiTheme defaultLightTheme;
   private static GuiTheme defaultDarkTheme;
+  private final List<ThemeElementDefinition> definitions = new ArrayList<>();
 
   public static GuiTheme getDefaultLightTheme() {
     if (defaultLightTheme == null) {

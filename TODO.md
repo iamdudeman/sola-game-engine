@@ -1,7 +1,6 @@
 # sola-game-engine TODO list
 
 Remaining v2
-* Cookbook demo of some sort
 * package-info files + JavaDocs :D
 * delete reference html files
 
@@ -24,6 +23,7 @@ Remaining v2
 * update to Java 21
     * teavm 0.9.0 has support
 * delete gui v1 code and move "v2" to gui package
+    * rebuild cookbook in v2
 * JSON schema files for
     * font stuff
     * spritesheet stuff

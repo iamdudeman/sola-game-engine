@@ -1,7 +1,6 @@
-package technology.sola.engine.graphics.guiv2.json.element.input;
+package technology.sola.engine.graphics.guiv2.json.element;
 
 import technology.sola.engine.graphics.guiv2.elements.input.ButtonGuiElement;
-import technology.sola.engine.graphics.guiv2.json.element.GuiElementJsonBlueprint;
 import technology.sola.engine.graphics.guiv2.json.styles.BaseStylesJsonValueParser;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.json.JsonObject;

@@ -23,8 +23,8 @@ import technology.sola.engine.graphics.guiv2.json.element.GuiElementJsonBlueprin
 import technology.sola.engine.graphics.guiv2.json.element.ImageElementJsonBlueprint;
 import technology.sola.engine.graphics.guiv2.json.element.SectionElementJsonBlueprint;
 import technology.sola.engine.graphics.guiv2.json.element.TextElementJsonBlueprint;
-import technology.sola.engine.graphics.guiv2.json.element.input.ButtonElementJsonBlueprint;
-import technology.sola.engine.graphics.guiv2.json.element.input.TextInputElementJsonBlueprint;
+import technology.sola.engine.graphics.guiv2.json.element.ButtonElementJsonBlueprint;
+import technology.sola.engine.graphics.guiv2.json.element.TextInputElementJsonBlueprint;
 import technology.sola.engine.graphics.guiv2.style.theme.GuiTheme;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.system.LightFlickerSystem;
