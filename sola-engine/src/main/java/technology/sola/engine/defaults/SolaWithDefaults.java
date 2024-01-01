@@ -349,7 +349,11 @@ public abstract class SolaWithDefaults extends Sola {
               solaGuiDocument.render(renderer);
             }
           } else {
-            layers.get(layers.size() - 1).add(solaGuiDocument::render, ScreenSpaceLightMapGraphicsModule.ORDER + 1);
+            if (solaGuiDocument == null) {
+              layers.get(layers.size() - 1).add(guiDocument::render, ScreenSpaceLightMapGraphicsModule.ORDER + 1);
+            } else {
+              layers.get(layers.size() - 1).add(solaGuiDocument::render, ScreenSpaceLightMapGraphicsModule.ORDER + 1);
+            }
           }
         };
       } else if (solaGraphics != null) {
