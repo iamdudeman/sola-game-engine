@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
+import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.guiv2.style.ConditionalStyle;
 import technology.sola.engine.graphics.guiv2.style.StyleContainer;
 import technology.sola.engine.graphics.guiv2.elements.TextStyles;
@@ -45,5 +46,24 @@ public class StyleContainerTest {
     styleContainer.invalidate();
     assertEquals(Color.WHITE, styleContainer.getPropertyValue(TextStyles::background).color());
     assertEquals(Color.WHITE, styleContainer.getPropertyValue(TextStyles::textColor));
+  }
+
+  @Test
+  void addRemove() {
+    var guiElement = Mockito.mock(TextGuiElement.class);
+    var styleContainer = new StyleContainer<>(guiElement);
+
+    styleContainer.setStyles(
+      List.of(
+        ConditionalStyle.always(TextStyles.create().setBackgroundColor(Color.WHITE).build())
+      )
+    );
+
+    var newStyle = ConditionalStyle.always(TextStyles.create().setBackgroundColor(Color.BLACK).build());
+    styleContainer.addStyle(newStyle);
+    assertEquals(Color.BLACK, styleContainer.getPropertyValue(BaseStyles::background).color());
+
+    styleContainer.removeStyle(newStyle);
+    assertEquals(Color.WHITE, styleContainer.getPropertyValue(BaseStyles::background).color());
   }
 }

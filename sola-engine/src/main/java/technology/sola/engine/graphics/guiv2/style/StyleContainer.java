@@ -44,6 +44,20 @@ public class StyleContainer<Style extends BaseStyles> {
     computedCache.clear();
   }
 
+  public void addStyle(ConditionalStyle<Style> style) {
+    List<ConditionalStyle<Style>> combined = new ArrayList<>(conditionalStyles);
+
+    combined.add(style);
+    setStyles(combined);
+  }
+
+  public void removeStyle(ConditionalStyle<Style> style) {
+    List<ConditionalStyle<Style>> reduced = new ArrayList<>(conditionalStyles);
+
+    reduced.remove(style);
+    setStyles(reduced);
+  }
+
   public <R> R getPropertyValue(Function<Style, R> propertySupplier) {
     return getPropertyValue(propertySupplier, null);
   }
