@@ -159,6 +159,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     return null;
   }
 
+  @SuppressWarnings("unchecked")
   public <T extends GuiElement<?>> List<T> findElementsByType(Class<T> elementClass) {
     List<T> elements = new ArrayList<>();
 

@@ -21,6 +21,7 @@ public record ConditionalStyle<Style extends BaseStyles>(
     return false;
   };
 
+  @SuppressWarnings("unchecked")
   public static <Style extends BaseStyles> ConditionalStyle<Style> always(Style style) {
     return new ConditionalStyle(
       ALWAYS,
@@ -28,6 +29,7 @@ public record ConditionalStyle<Style extends BaseStyles>(
     );
   }
 
+  @SuppressWarnings("unchecked")
   public static <Style extends BaseStyles> ConditionalStyle<Style> active(Style style) {
     return new ConditionalStyle(
       ACTIVE,
@@ -35,6 +37,7 @@ public record ConditionalStyle<Style extends BaseStyles>(
     );
   }
 
+  @SuppressWarnings("unchecked")
   public static <Style extends BaseStyles> ConditionalStyle<Style> hover(Style style) {
     return new ConditionalStyle(
       HOVER,
@@ -42,6 +45,7 @@ public record ConditionalStyle<Style extends BaseStyles>(
     );
   }
 
+  @SuppressWarnings("unchecked")
   public static <Style extends BaseStyles> ConditionalStyle<Style> focus(Style style) {
     return new ConditionalStyle(
       FOCUS,
@@ -49,6 +53,7 @@ public record ConditionalStyle<Style extends BaseStyles>(
     );
   }
 
+  @SuppressWarnings("unchecked")
   public static <Style extends BaseStyles> ConditionalStyle<Style> disabled(Style style) {
     return new ConditionalStyle(
       DISABLED,

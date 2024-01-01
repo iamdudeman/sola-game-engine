@@ -54,16 +54,19 @@ public class GuiJsonDocumentBuilder {
       .findFirst()
       .orElseThrow(() -> new MissingGuiElementJsonBlueprintException(elementTag));
 
+    // build element with props
     GuiElement<?> element = guiElementJsonBlueprint.createElementFromJson(elementJson.getObject(ATTR_PROPS, new JsonObject()));
-    var stylesJsonArray = elementJson.getArray(ATTR_STYLES, new JsonArray());
-
-    var themeStyles = guiTheme.getForElement(element);
-    var styles = stylesJsonArray.stream().map(styleObject -> (ConditionalStyle<BaseStyles>) guiElementJsonBlueprint.createStylesFromJson(styleObject.asObject())).toList();
 
     element.setId(elementJson.getString(ATTR_ID, null));
 
+    // build and set element styles
+    var stylesJsonArray = elementJson.getArray(ATTR_STYLES, new JsonArray());
+    var themeStyles = guiTheme.getForElement(element);
+    var styles = stylesJsonArray.stream().map(styleObject -> (ConditionalStyle<BaseStyles>) guiElementJsonBlueprint.createStylesFromJson(styleObject.asObject())).toList();
+
     ((GuiElement) element).setStyle(Stream.concat(themeStyles.stream(), styles.stream()).toList());
 
+    // build all children as well
     elementJson.getArray(ATTR_CHILDREN, new JsonArray()).stream().map(childJson -> buildElement(childJson.asObject())).forEach(element::appendChildren);
 
     return element;
