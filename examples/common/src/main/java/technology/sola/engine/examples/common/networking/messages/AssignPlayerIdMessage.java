@@ -21,7 +21,7 @@ public class AssignPlayerIdMessage extends SocketMessage {
   /**
    * Parses a {@link SocketMessage} as a {@link AssignPlayerIdMessage}.
    *
-   * @param socketMessage the message to build
+   * @param socketMessage the message to parse
    * @return the parsed AssignPlayerIdMessage
    */
   public static AssignPlayerIdMessage parse(SocketMessage socketMessage) {

@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 
 /**
  * SolaGuiDocument is a container for {@link GuiElement}s. It also contains several utility methods for creating
- * instances of gui elements, setting the rootElement element of a tree, and searching for elements in the tree.
+ * instances of gui elements, setting the root element of a tree, and searching for elements in the tree.
  */
 public class SolaGuiDocument {
   public final GuiPropertyDefaults propertyDefaults;
@@ -38,7 +38,7 @@ public class SolaGuiDocument {
   }
 
   /**
-   * Renders the rootElement {@link GuiElement} and its children.
+   * Renders the root {@link GuiElement} and its children.
    *
    * @param renderer the {@link Renderer} instance
    */

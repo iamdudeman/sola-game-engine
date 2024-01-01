@@ -21,7 +21,7 @@ public class PlayerRemovedMessage extends SocketMessage {
   /**
    * Parses a {@link SocketMessage} as a {@link PlayerRemovedMessage}.
    *
-   * @param socketMessage the message to build
+   * @param socketMessage the message to parse
    * @return the parsed PlayerRemovedMessage
    */
   public static PlayerRemovedMessage parse(SocketMessage socketMessage) {

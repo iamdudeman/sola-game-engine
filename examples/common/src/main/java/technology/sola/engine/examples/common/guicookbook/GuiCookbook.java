@@ -46,7 +46,7 @@ public class GuiCookbook extends SolaWithDefaults {
   private GuiElement<?> buildGui() {
     return solaGuiDocument.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(10).padding.set(10).setWidth(platform.getRenderer().getWidth()).setHeight(platform.getRenderer().getHeight()).setId("rootElement"),
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(10).padding.set(10).setWidth(platform.getRenderer().getWidth()).setHeight(platform.getRenderer().getHeight()).setId("root"),
       solaGuiDocument.createElement(
         StreamGuiElementContainer::new,
         p -> p.setGap(5),
@@ -66,7 +66,7 @@ public class GuiCookbook extends SolaWithDefaults {
       ButtonGuiElement::new,
       p -> p.setText(elementGroup.getTitle())
     ).setOnAction(() -> {
-      var rootEle = solaGuiDocument.getElementById("rootElement", StreamGuiElementContainer.class);
+      var rootEle = solaGuiDocument.getElementById("root", StreamGuiElementContainer.class);
 
       rootEle.removeChild(solaGuiDocument.getElementById("category"));
       rootEle.addChild(elementGroup.build());
