@@ -105,12 +105,14 @@ class LayoutUtil {
     var position = guiElement.getStyles().getPropertyValue(BaseStyles::position, Position.NONE);
 
     if (position.isAbsolute()) {
+      var parentElement = guiElement.getParent();
+
       int absoluteX = position.x() == null
-        ? guiElement.getParent().bounds.x()
-        : position.x().getValue(guiElement.getParent().bounds.width());
+        ? parentElement.contentBounds.x()
+        : parentElement.bounds.x() + position.x().getValue(parentElement.bounds.width());
       int absoluteY = position.y() == null
-        ? guiElement.getParent().bounds.y()
-        : position.y().getValue(guiElement.getParent().bounds.height());
+        ? parentElement.contentBounds.y()
+        : parentElement.bounds.y() + position.y().getValue(parentElement.bounds.height());
 
       guiElement.setPosition(absoluteX, absoluteY);
     }
