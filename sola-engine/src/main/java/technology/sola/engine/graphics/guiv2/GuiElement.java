@@ -349,8 +349,10 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
   private void recalculateLayout() {
     if (isLayoutChanged()) {
+      // layouts must be built first before absolute positioning or alignment is applied
       LayoutUtil.rebuildLayout(this);
       LayoutUtil.updateAbsolute(this);
+      LayoutUtil.updateAlignment(this);
 
       isLayoutChanged = false;
     }

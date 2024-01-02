@@ -20,13 +20,6 @@
       }
     },
     {
-      "tag": "TextInput",
-      "props": {
-        "placeholder": "Your name",
-        "maxLength": 20
-      }
-    },
-    {
       "tag": "Button",
       "children": [
         {
@@ -36,6 +29,13 @@
           }
         }
       ]
+    },
+    {
+      "tag": "TextInput",
+      "props": {
+        "placeholder": "Your name",
+        "maxLength": 20
+      }
     }
   ]
 }

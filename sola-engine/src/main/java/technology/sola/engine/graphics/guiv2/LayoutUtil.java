@@ -27,9 +27,6 @@ class LayoutUtil {
       case ROW_REVERSE, COLUMN_REVERSE -> guiElementChildren.size() - 1;
     };
 
-    int usedWidthAccumulator = 0;
-    int usedHeightAccumulator = 0;
-
     // main layout calculation loop
     for (int i = 0; i < guiElementChildren.size(); i++) {
       int index = startIndex > 0 ? startIndex - i : i;
@@ -54,12 +51,10 @@ class LayoutUtil {
         switch (direction) {
           case COLUMN, COLUMN_REVERSE: {
             yOffset += child.getBounds().height() + gap;
-            usedHeightAccumulator = yOffset;
             break;
           }
           case ROW, ROW_REVERSE: {
             xOffset += child.getBounds().width() + gap;
-            usedWidthAccumulator = xOffset;
             break;
           }
         }
@@ -67,37 +62,6 @@ class LayoutUtil {
 
       // child layout bounds have been adjusted
       child.isLayoutChanged = false;
-    }
-
-    // prepare to calculate alignment adjustments of elements in the flow
-    var mainAxisChildren = styles.getPropertyValue(BaseStyles::mainAxisChildren, MainAxisChildren.START);
-    var crossAxisChildren = styles.getPropertyValue(BaseStyles::crossAxisChildren, CrossAxisChildren.START);
-
-    // only need apply alignment if either axis is not START
-    if (mainAxisChildren != MainAxisChildren.START || crossAxisChildren != CrossAxisChildren.START) {
-      final int usedWidth = usedWidthAccumulator;
-      final int usedHeight = usedHeightAccumulator;
-
-      AlignmentFunction alignmentFunction = switch (direction) {
-        case ROW, ROW_REVERSE -> child -> calculateRowChildAlignmentBounds(child, mainAxisChildren, crossAxisChildren, usedWidth);
-        case COLUMN, COLUMN_REVERSE -> child -> calculateColumnChildAlignmentBounds(child, mainAxisChildren, crossAxisChildren, usedHeight);
-      };
-
-      // alignment adjustment loop
-      for (int i = 0; i < guiElementChildren.size(); i++) {
-        int index = startIndex > 0 ? startIndex - i : i;
-        GuiElement<?> child = guiElementChildren.get(index);
-
-        var position = child.getStyles().getPropertyValue(BaseStyles::position, Position.NONE);
-
-        // If child is position absolute alignment is ignored
-        if (!position.isAbsolute()) {
-          var temp = alignmentFunction.apply(child);
-
-          child.resizeBounds(temp.width(), temp.height());
-          child.setPosition(temp.x(), temp.y());
-        }
-      }
     }
   }
 
@@ -118,6 +82,52 @@ class LayoutUtil {
     }
 
     guiElement.children.forEach(LayoutUtil::updateAbsolute);
+  }
+
+  static void updateAlignment(GuiElement<?> guiElement) {
+    var styles = guiElement.getStyles();
+
+    // prepare to calculate alignment adjustments of elements in the flow
+    var direction = styles.getPropertyValue(BaseStyles::direction, Direction.COLUMN);
+    var mainAxisChildren = styles.getPropertyValue(BaseStyles::mainAxisChildren, MainAxisChildren.START);
+    var crossAxisChildren = styles.getPropertyValue(BaseStyles::crossAxisChildren, CrossAxisChildren.START);
+
+    // only need apply alignment if either axis is not START
+    if (mainAxisChildren != MainAxisChildren.START || crossAxisChildren != CrossAxisChildren.START) {
+      var guiElementChildrenInFlow = guiElement.children.stream()
+        .filter(child -> !child.styleContainer.getPropertyValue(BaseStyles::position, Position.NONE).isAbsolute())
+        .toList();
+
+      AlignmentFunction alignmentFunction = switch (direction) {
+        case ROW, ROW_REVERSE -> child -> {
+          final int usedWidth = guiElementChildrenInFlow.stream().mapToInt(childInFlow -> childInFlow.bounds.width()).sum();
+
+          return calculateRowChildAlignmentBounds(child, mainAxisChildren, crossAxisChildren, usedWidth);
+        };
+        case COLUMN, COLUMN_REVERSE -> child -> {
+          final int usedHeight = guiElementChildrenInFlow.stream().mapToInt(childInFlow -> childInFlow.bounds.height()).sum();
+
+          return calculateColumnChildAlignmentBounds(child, mainAxisChildren, crossAxisChildren, usedHeight);
+        };
+      };
+
+      final int startIndex = switch (direction) {
+        case ROW, COLUMN -> 0;
+        case ROW_REVERSE, COLUMN_REVERSE -> guiElementChildrenInFlow.size() - 1;
+      };
+
+      // alignment adjustment loop
+      for (int i = 0; i < guiElementChildrenInFlow.size(); i++) {
+        int index = startIndex > 0 ? startIndex - i : i;
+        GuiElement<?> child = guiElementChildrenInFlow.get(index);
+        var boundsAfterAlignment = alignmentFunction.apply(child);
+
+        child.resizeBounds(boundsAfterAlignment.width(), boundsAfterAlignment.height());
+        child.setPosition(boundsAfterAlignment.x(), boundsAfterAlignment.y());
+      }
+    }
+
+    guiElement.children.forEach(LayoutUtil::updateAlignment);
   }
 
   private static GuiElementBounds recalculateBoundConstraints(GuiElement<?> guiElement, int x, int y) {
@@ -144,8 +154,8 @@ class LayoutUtil {
   private static GuiElementBounds calculateRowChildAlignmentBounds(GuiElement<?> child, MainAxisChildren mainAxisChildren, CrossAxisChildren crossAxisChildren, int usedWidth) {
     int xAlignment = switch (mainAxisChildren) {
       case START -> 0;
-      case CENTER -> (child.bounds.width() - usedWidth) / 2;
-      case END -> child.bounds.width() - usedWidth;
+      case CENTER -> (child.getParent().contentBounds.width() - usedWidth) / 2;
+      case END -> child.getParent().contentBounds.width() - usedWidth;
     };
     int yAlignment = switch (crossAxisChildren) {
       case START, STRETCH -> 0;
@@ -173,8 +183,8 @@ class LayoutUtil {
     };
     int yAlignment = switch (mainAxisChildren) {
       case START -> 0;
-      case CENTER -> (child.bounds.height() - usedHeight) / 2;
-      case END -> child.bounds.height() - usedHeight;
+      case CENTER -> (child.getParent().contentBounds.height() - usedHeight) / 2;
+      case END -> child.getParent().contentBounds.height() - usedHeight;
     };
 
     int newX = xAlignment > 0 ? child.bounds.x() + xAlignment : child.bounds.x();
