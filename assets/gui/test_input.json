@@ -1,0 +1,169 @@
+{
+  "tag": "Section",
+  "styles": [
+    {
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderColor": "#000000",
+      "direction": "column",
+      "gap": 5,
+      "padding": 5,
+      "crossAxisChildren": "center",
+      "width": "75%"
+    }
+  ],
+  "children": [
+    {
+      "tag": "Text",
+      "props": {
+        "text": "Some title"
+      },
+      "styles": [
+        {
+          "paddingBottom": 10
+        },
+        {
+          "@condition": ":hover",
+          "backgroundColor": "#aa00aa",
+          "textColor": "#000ff0",
+          "width": "50%",
+          "paddingRight": 10,
+          "textAlignment": "end"
+        }
+      ]
+    },
+    {
+      "tag": "Button",
+      "id": "button",
+      "styles": [
+        {
+          "borderColor": "#ff0000",
+          "padding": 10
+        },
+        {
+          "@condition": ":hover",
+          "backgroundColor": "#ff0000"
+        },
+        {
+          "@condition": ":focus",
+          "backgroundColor": "#00ff00"
+        },
+        {
+          "@condition": ":active",
+          "backgroundColor": "#0000ff"
+        },
+        {
+          "@condition": ":disabled",
+          "backgroundColor": "#ff00ff"
+        }
+      ],
+      "children": [
+        {
+          "tag": "Text",
+          "props": {
+            "text": "Button"
+          }
+        }
+      ]
+    },
+    {
+      "tag": "Button",
+      "id": "button2",
+      "styles": [
+        {
+          "borderColor": "#ff0000",
+          "padding": 10
+        },
+        {
+          "@condition": ":hover",
+          "backgroundColor": "#ff0000"
+        },
+        {
+          "@condition": ":focus",
+          "backgroundColor": "#00ff00"
+        },
+        {
+          "@condition": ":active",
+          "backgroundColor": "#0000ff"
+        },
+        {
+          "@condition": ":disabled",
+          "backgroundColor": "#ff00ff"
+        }
+      ],
+      "children": [
+        {
+          "tag": "Text",
+          "props": {
+            "text": "Button 2"
+          }
+        }
+      ]
+    },
+    {
+      "tag": "TextInput",
+      "props": {
+        "value": "initial",
+        "placeholder": "placeholder",
+        "maxLength": 10
+      },
+      "styles": [
+        {
+          "borderColor": "#ff0000",
+          "padding": 10,
+          "placeholderColor": "#c7c7c7"
+        },
+        {
+          "@condition": ":hover",
+          "backgroundColor": "#ff0000"
+        },
+        {
+          "@condition": ":focus",
+          "backgroundColor": "#00ff00",
+          "placeholderColor": "#ff0000"
+        },
+        {
+          "@condition": ":active",
+          "backgroundColor": "#0000ff"
+        },
+        {
+          "@condition": ":disabled",
+          "backgroundColor": "#ff00ff"
+        }
+      ]
+    },
+    {
+      "tag": "Button",
+      "id": "button3",
+      "styles": [
+        {
+          "borderColor": "#ff0000",
+          "padding": 10
+        },
+        {
+          "@condition": ":hover",
+          "backgroundColor": "#ff0000"
+        },
+        {
+          "@condition": ":focus",
+          "backgroundColor": "#00ff00"
+        },
+        {
+          "@condition": ":active",
+          "backgroundColor": "#0000ff"
+        },
+        {
+          "@condition": ":disabled",
+          "backgroundColor": "#ff00ff"
+        }
+      ],
+      "children": [
+        {
+          "tag": "Text",
+          "props": {
+            "text": "Button 3"
+          }
+        }
+      ]
+    }
+  ]
+}

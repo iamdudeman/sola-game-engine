@@ -2,15 +2,10 @@
 
 ## Known Bugs List
 
-* stopping gui mouse event propagation currently isn't hooked up
-    * this needs to be added to `GuiElementContainer#handleMouseEvent`
-
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Planned Cleanup List
 
-* Change `SolaEntityGraphicsModule<View1Entry<SomeComponent>>` to just `SolaEntityGraphicsModule<SomeComponent>` if possible
-* Don't force setting props for containers when creating them via gui document
 * Unit Testing
     * Add lots of missing tests :)
 * JavaDocs
@@ -20,13 +15,29 @@
 
 ## TODO List
 
-* GUI V2 implementation
-    * "style" attribute
-        * "layout" options
-        * "paint" options
-    * any element can have children passed in (but doesn't have to use them)
-    * inherit styles from parent?
-    * root "element" of document is full width and height by default and is always defined?
+* add "getId" to Asset
+* update to Java 21
+    * teavm 0.9.0 has support
+* delete gui v1 code and move "v2" to gui package
+    * rebuild cookbook in v2
+* JSON schema files for
+    * font stuff
+    * spritesheet stuff
+* GuiV2 improvements
+    * lots of JavaDocs missing
+    * allow \n TextGuiElement new line wrapping (might not be needed with new layout stuff)
+    * implement "Style sheet" JSON concept
+        * gui json documents can reference these for use
+    * Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
+        * maybe just check for any mouse event list size > 0?
+    * consider an event map of some sort for when loading gui documents
+        * could also have an "event id -> event function" map that can be used as part of gui doc loading
+        * elements could then add event listeners from this map
+        * ie. (`mousePress` -> `doSomething`)
+    * maybe put default style values in a common place (like Direction.Column)?
+    * when should layout be invalidated (can partial invalidations happen for children/parent)
+    * consider splitting layout and paint styles to prevent extra calculations
+* Consider array list for possible SpacialHashMap performance boost
 * Consider "stopping" AudioClip when it is finished by default, so it can be immediately played again?
 * Move custom build "distribution" tasks to a gradle plugin
     * sola game template should use these plugins as well
@@ -49,10 +60,6 @@
     * consider some sort of "swaying" for non-linear particles
     * consider ability to spawn particles in a radius away from center
         * probably want the ability to make particles go to and from center for this
-* SolaGui
-    * Implement a way to load gui stuff from a file
-        * possibly use JSON to define gui structure
-    * A "post load" callback to add event listeners and such
 * Consider adding rotation to TransformComponent
     * Would need to update rendering stuff
     * Would need to update physics stuff
@@ -70,6 +77,7 @@
             * Switch JsMouseUtils to mouse events instead of pointer events
 * Android Platform
     * Implement
+* Investigate possible Steam CloudSave integration
 * Consider adding a "debug console" option
     * While open can toggle things like render debug outlines and debug spacial hashmap stuff
     * Could also maybe allow adding custom commands

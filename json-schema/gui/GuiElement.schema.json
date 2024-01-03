@@ -1,0 +1,29 @@
+{
+  "$id": "GuiElement.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GuiElement",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The id of the element."
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "./elements/Section.schema.json"
+    },
+    {
+      "$ref": "./elements/Text.schema.json"
+    },
+    {
+      "$ref": "./elements/Image.schema.json"
+    },
+    {
+      "$ref": "./elements/input/Button.schema.json"
+    },
+    {
+      "$ref": "./elements/input/TextInput.schema.json"
+    }
+  ]
+}

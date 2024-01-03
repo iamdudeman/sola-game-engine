@@ -1,0 +1,36 @@
+{
+  "$id": "TextInput.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TextInputGuiElement",
+  "type": "object",
+  "properties": {
+    "tag": {
+      "const": "TextInput",
+      "description": "The tag of the element."
+    },
+    "props": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The initial value of the input."
+        },
+        "placeholder": {
+          "type": "string",
+          "description": "The text string rendered when no value is present."
+        },
+        "maxLength": {
+          "type": "integer",
+          "description": "The maximum number of characters for the input.",
+          "minimum": 1
+        }
+      }
+    },
+    "styles": {
+      "type": "array",
+      "items": {
+        "$ref": "../../styles/TextInputStyles.schema.json"
+      }
+    }
+  }
+}

@@ -10,6 +10,7 @@ import java.util.Map;
 public final class KeyboardLayout {
   private static Map<Character, Character> shiftMap;
   private static Type type = Type.Qwerty;
+  private static HasShiftFunction hasShiftFunction;
 
   static {
     setType(Type.Qwerty);
@@ -21,6 +22,10 @@ public final class KeyboardLayout {
 
   public static char shift(char character) {
     return shiftMap.get(character);
+  }
+
+  public static boolean hasShift(int keyCode) {
+    return hasShiftFunction.hasShift(keyCode);
   }
 
   public static Type getType() {
@@ -52,9 +57,20 @@ public final class KeyboardLayout {
       shiftMap.put(',', '<');
       shiftMap.put('.', '>');
       shiftMap.put('/', '?');
+
+      hasShiftFunction = (int keyCode) ->
+        (keyCode >= Key.COMMA.getCode() && keyCode <= Key.NINE.getCode())
+          || keyCode == Key.SEMI_COLON.getCode()
+          || keyCode == Key.EQUALS.getCode()
+          || (keyCode >= Key.LEFT_BRACKET.getCode() && keyCode <= Key.RIGHT_BRACKET.getCode());
     }
   }
 
   private KeyboardLayout() {
+  }
+
+  @FunctionalInterface
+  private interface HasShiftFunction {
+    boolean hasShift(int keyCode);
   }
 }

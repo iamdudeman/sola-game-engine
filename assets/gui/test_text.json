@@ -1,0 +1,66 @@
+{
+  "tag": "Section",
+  "styles": [
+    {
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderColor": "#000000",
+      "direction": "column",
+      "gap": 5,
+      "padding": 5,
+      "width": "75%"
+    }
+  ],
+  "children": [
+    {
+      "tag": "Text",
+      "props": {
+        "text": "This is a test string"
+      },
+      "styles": [
+        {
+          "borderColor": "#000000",
+          "padding": 10,
+          "textAlignment": "end",
+          "width": 500
+        }
+      ]
+    },
+    {
+      "tag": "Section",
+      "styles": [
+        {
+          "backgroundColor": "rgb(0, 0, 0)",
+          "height": 50,
+          "width": "50%"
+        }
+      ]
+    },
+    {
+      "tag": "Text",
+      "props": {
+        "text": "This is a longer test string that should wrap. It has a second sentence which is why it wraps."
+      },
+      "styles": [
+        {
+          "borderColor": "#000000",
+          "padding": 10,
+          "textColor": "#0000ff",
+          "textAlignment": "center"
+        }
+      ]
+    },
+    {
+      "tag": "Text",
+      "props": {
+        "text": "Test with a different font."
+      },
+      "styles": [
+        {
+          "fontAssetId": "times_NORMAL_18",
+          "borderColor": "#000000",
+          "padding": 10
+        }
+      ]
+    }
+  ]
+}

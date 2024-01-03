@@ -1,0 +1,41 @@
+{
+  "tag": "Section",
+  "styles": [
+    {
+      "backgroundColor": "#ffffff",
+      "borderColor": "#ffff00",
+      "crossAxisChildren": "center",
+      "gap": 10,
+      "padding": 10,
+      "positionX": "15%",
+      "height": "50%",
+      "width": "70%"
+    }
+  ],
+  "children": [
+    {
+      "tag": "Text",
+      "props": {
+        "text": "Title"
+      }
+    },
+    {
+      "tag": "Button",
+      "children": [
+        {
+          "tag": "Text",
+          "props": {
+            "text": "Click me!"
+          }
+        }
+      ]
+    },
+    {
+      "tag": "TextInput",
+      "props": {
+        "placeholder": "Your name",
+        "maxLength": 20
+      }
+    }
+  ]
+}

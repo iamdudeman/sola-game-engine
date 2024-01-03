@@ -1,0 +1,27 @@
+{
+  "$id": "Text.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TextGuiElement",
+  "type": "object",
+  "properties": {
+    "tag": {
+      "const": "Text",
+      "description": "The tag of the element."
+    },
+    "props": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text to render."
+        }
+      }
+    },
+    "styles": {
+      "type": "array",
+      "items": {
+        "$ref": "../styles/TextStyles.schema.json"
+      }
+    }
+  }
+}

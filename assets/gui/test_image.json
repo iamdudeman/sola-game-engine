@@ -1,0 +1,63 @@
+{
+  "tag": "Section",
+  "styles": [
+    {
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderColor": "#000000",
+      "direction": "column",
+      "gap": 5,
+      "padding": 5,
+      "width": "75%"
+    }
+  ],
+  "children": [
+    {
+      "tag": "Image",
+      "props": {
+        "assetId": "test_tiles"
+      },
+      "styles": [
+        {
+          "borderColor": "#000000",
+          "padding": 10
+        }
+      ]
+    },
+    {
+      "tag": "Section",
+      "styles": [
+        {
+          "backgroundColor": "rgb(0, 0, 0)",
+          "height": 50,
+          "width": "50%"
+        }
+      ]
+    },
+    {
+      "tag": "Image",
+      "props": {
+        "assetId": "test_tiles"
+      },
+      "styles": [
+        {
+          "borderColor": "#000000",
+          "padding": 10,
+          "width": "25%"
+        }
+      ]
+    },
+    {
+      "tag": "Image",
+      "props": {
+        "assetId": "test_tiles"
+      },
+      "styles": [
+        {
+          "borderColor": "#000000",
+          "padding": 10,
+          "height": "25%"
+        }
+      ]
+    }
+  ]
+}

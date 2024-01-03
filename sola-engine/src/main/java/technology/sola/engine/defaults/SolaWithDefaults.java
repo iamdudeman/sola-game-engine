@@ -4,6 +4,8 @@ import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
+import technology.sola.engine.assets.graphics.gui.GuiJsonDocumentAssetLoader;
+import technology.sola.engine.assets.json.JsonElementAsset;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.graphics.modules.CircleEntityGraphicsModule;
@@ -15,11 +17,22 @@ import technology.sola.engine.defaults.graphics.modules.SpriteEntityGraphicsModu
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
+import technology.sola.engine.graphics.guiv2.GuiDocument;
+import technology.sola.engine.graphics.guiv2.json.GuiJsonDocumentBuilder;
+import technology.sola.engine.graphics.guiv2.json.element.GuiElementJsonBlueprint;
+import technology.sola.engine.graphics.guiv2.json.element.ImageElementJsonBlueprint;
+import technology.sola.engine.graphics.guiv2.json.element.SectionElementJsonBlueprint;
+import technology.sola.engine.graphics.guiv2.json.element.TextElementJsonBlueprint;
+import technology.sola.engine.graphics.guiv2.json.element.ButtonElementJsonBlueprint;
+import technology.sola.engine.graphics.guiv2.json.element.TextInputElementJsonBlueprint;
+import technology.sola.engine.graphics.guiv2.style.theme.GuiTheme;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.system.LightFlickerSystem;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
 
+import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 /**
  * SolaWithDefaults extends {@link Sola} with some default behaviors that many games will find useful, such as default
@@ -47,6 +60,7 @@ public abstract class SolaWithDefaults extends Sola {
    * called.
    */
   protected SolaGuiDocument solaGuiDocument;
+  protected GuiDocument guiDocument;
   private Consumer<Renderer> renderFunction = renderer -> {
   };
   private Color backgroundColor = Color.BLACK;
@@ -261,8 +275,67 @@ public abstract class SolaWithDefaults extends Sola {
       return useGui(new GuiPropertyDefaults());
     }
 
+    /**
+     * Initializes the {@link GuiDocument} instance with a light {@link GuiTheme}.
+     *
+     * @return this
+     */
+    public DefaultsConfigurator useGuiV2() {
+      return useGuiV2(GuiTheme.getDefaultLightTheme());
+    }
+
+    /**
+     * Initializes the {@link GuiDocument} instance with a desired {@link GuiTheme}.
+     *
+     * @param guiTheme the theme to use
+     * @return this
+     */
+    public DefaultsConfigurator useGuiV2(GuiTheme guiTheme) {
+      return useGuiV2(guiTheme, List.of());
+    }
+
+    /**
+     * Initializes the {@link GuiDocument} instance with a desired {@link GuiTheme}. Also registers additional
+     * {@link GuiElementJsonBlueprint}s for parsing different kinds of elements as JSON.
+     *
+     * @param guiTheme the theme to use
+     * @param additionalGuiElementJsonBlueprints addition gui element json blueprints to register for parsing
+     * @return this
+     */
+    public DefaultsConfigurator useGuiV2(GuiTheme guiTheme, List<GuiElementJsonBlueprint<?, ?, ?>> additionalGuiElementJsonBlueprints) {
+      if (guiDocument == null) {
+        guiDocument = new GuiDocument(platform, assetLoaderProvider);
+        rebuildRenderFunction();
+
+        // Prepare default font
+        AssetLoader<Font> fontAssetLoader = assetLoaderProvider.get(Font.class);
+
+        if (!fontAssetLoader.hasAssetMapping(DefaultFont.ASSET_ID)) {
+          fontAssetLoader.addAsset(DefaultFont.ASSET_ID, DefaultFont.get());
+        }
+
+        List<GuiElementJsonBlueprint<?, ?, ?>> guiElementJsonBlueprints = Stream.concat(
+          Stream.of(
+            new SectionElementJsonBlueprint(),
+            new TextElementJsonBlueprint(),
+            new ImageElementJsonBlueprint(),
+            new ButtonElementJsonBlueprint(),
+            new TextInputElementJsonBlueprint()
+          ),
+          additionalGuiElementJsonBlueprints.stream()
+        ).toList();
+
+        assetLoaderProvider.add(new GuiJsonDocumentAssetLoader(
+          assetLoaderProvider.get(JsonElementAsset.class),
+          new GuiJsonDocumentBuilder(guiTheme, guiElementJsonBlueprints)
+        ));
+      }
+
+      return this;
+    }
+
     private void rebuildRenderFunction() {
-      if (solaGraphics != null && solaGuiDocument != null) {
+      if (solaGraphics != null && (solaGuiDocument != null || guiDocument != null)) {
         renderFunction = renderer -> {
           renderer.clear(backgroundColor);
           solaGraphics.render(renderer);
@@ -270,9 +343,17 @@ public abstract class SolaWithDefaults extends Sola {
           var layers = renderer.getLayers();
 
           if (layers.isEmpty()) {
-            solaGuiDocument.render(renderer);
+            if (solaGuiDocument == null) {
+              guiDocument.render(renderer);
+            } else {
+              solaGuiDocument.render(renderer);
+            }
           } else {
-            layers.get(layers.size() - 1).add(solaGuiDocument::render, ScreenSpaceLightMapGraphicsModule.ORDER + 1);
+            if (solaGuiDocument == null) {
+              layers.get(layers.size() - 1).add(guiDocument::render, ScreenSpaceLightMapGraphicsModule.ORDER + 1);
+            } else {
+              layers.get(layers.size() - 1).add(solaGuiDocument::render, ScreenSpaceLightMapGraphicsModule.ORDER + 1);
+            }
           }
         };
       } else if (solaGraphics != null) {
@@ -280,10 +361,14 @@ public abstract class SolaWithDefaults extends Sola {
           renderer.clear(backgroundColor);
           solaGraphics.render(renderer);
         };
-      } else if (solaGuiDocument != null) {
+      } else if (solaGuiDocument != null || guiDocument != null) {
         renderFunction = renderer -> {
           renderer.clear(backgroundColor);
-          solaGuiDocument.render(renderer);
+          if (solaGuiDocument == null) {
+            guiDocument.render(renderer);
+          } else {
+            solaGuiDocument.render(renderer);
+          }
         };
       }
     }

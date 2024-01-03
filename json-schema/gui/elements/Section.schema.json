@@ -1,0 +1,24 @@
+{
+  "$id": "Section.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SectionGuiElement",
+  "type": "object",
+  "properties": {
+    "tag": {
+      "const": "Section",
+      "description": "The tag of the element."
+    },
+    "styles": {
+      "type": "array",
+      "items": {
+        "$ref": "../styles/BaseStyles.schema.json"
+      }
+    },
+    "children": {
+      "type": "array",
+      "items": {
+        "$ref": "../GuiElement.schema.json"
+      }
+    }
+  }
+}
