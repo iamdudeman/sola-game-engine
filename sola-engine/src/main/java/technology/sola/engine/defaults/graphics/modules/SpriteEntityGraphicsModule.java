@@ -8,6 +8,7 @@ import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -46,6 +47,11 @@ public class SpriteEntityGraphicsModule extends SolaEntityGraphicsModule<View2En
 
       if (cameraModifiedEntityTransform.getScaleX() != 1 || cameraModifiedEntityTransform.getScaleY() != 1) {
         spriteImage = sprite.scale(cameraModifiedEntityTransform.getScaleX(), cameraModifiedEntityTransform.getScaleY());
+      }
+
+      boolean hasBlendMode = viewEntry.entity().hasComponent(BlendModeComponent.class);
+
+      if (!hasBlendMode) {
         renderer.setBlendFunction(BlendMode.MASK);
       }
 
