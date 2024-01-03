@@ -5,16 +5,6 @@ import technology.sola.engine.graphics.guiv2.style.property.*;
 
 class LayoutUtil {
   static void rebuildLayout(GuiElement<?> guiElement) {
-    Visibility visibility = guiElement.getStyles().getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE);
-
-    // If no visibility then clear out all bounds so no layout space is taken
-    if (visibility == Visibility.NONE) {
-      guiElement.boundConstraints = new GuiElementBounds(0, 0, 0, 0);
-      guiElement.bounds = guiElement.boundConstraints;
-      guiElement.contentBounds = guiElement.bounds;
-      return;
-    }
-
     var guiElementChildren = guiElement.children;
     var styles = guiElement.getStyles();
     var direction = styles.getPropertyValue(BaseStyles::direction, Direction.COLUMN);
@@ -31,6 +21,16 @@ class LayoutUtil {
     for (int i = 0; i < guiElementChildren.size(); i++) {
       int index = startIndex > 0 ? startIndex - i : i;
       GuiElement<?> child = guiElementChildren.get(index);
+
+      Visibility visibility = child.getStyles().getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE);
+
+      // If no visibility then clear out all bounds so no layout space is taken
+      if (visibility == Visibility.NONE) {
+        child.boundConstraints = new GuiElementBounds(0, 0, 0, 0);
+        child.bounds = child.boundConstraints;
+        child.contentBounds = child.bounds;
+        continue;
+      }
 
       // calculate constraints
       child.boundConstraints = recalculateBoundConstraints(child, xOffset, yOffset);
@@ -128,6 +128,12 @@ class LayoutUtil {
     }
 
     guiElement.children.forEach(LayoutUtil::updateAlignment);
+  }
+
+  static void clearChildLayoutChanged(GuiElement<?> guiElement) {
+    guiElement.isLayoutChanged = false;
+
+    guiElement.children.forEach(LayoutUtil::clearChildLayoutChanged);
   }
 
   private static GuiElementBounds recalculateBoundConstraints(GuiElement<?> guiElement, int x, int y) {

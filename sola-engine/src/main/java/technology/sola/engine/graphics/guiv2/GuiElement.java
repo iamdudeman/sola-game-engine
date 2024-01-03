@@ -349,12 +349,21 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
   private void recalculateLayout() {
     if (isLayoutChanged()) {
-      // layouts must be built first before absolute positioning or alignment is applied
-      LayoutUtil.rebuildLayout(this);
-      LayoutUtil.updateAbsolute(this);
-      LayoutUtil.updateAlignment(this);
+      Visibility visibility = getStyles().getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE);
 
-      isLayoutChanged = false;
+      // If no visibility then clear out all bounds so no layout space is taken
+      if (visibility == Visibility.NONE) {
+        boundConstraints = new GuiElementBounds(0, 0, 0, 0);
+        bounds = boundConstraints;
+        contentBounds = bounds;
+        LayoutUtil.clearChildLayoutChanged(this);
+      } else {
+        // layouts must be built first before absolute positioning or alignment is applied
+        LayoutUtil.rebuildLayout(this);
+        LayoutUtil.updateAbsolute(this);
+        LayoutUtil.updateAlignment(this);
+        isLayoutChanged = false;
+      }
     }
   }
 
