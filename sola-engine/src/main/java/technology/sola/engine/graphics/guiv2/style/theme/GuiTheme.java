@@ -74,7 +74,9 @@ public class GuiTheme {
     }
 
     if (!isExisting) {
-      definitions.add(new ThemeElementDefinition<>(elementClass, styles));
+      List<ConditionalStyle<Style>> initialStyles = new ArrayList<>(styles);
+
+      definitions.add(new ThemeElementDefinition<>(elementClass, initialStyles));
     }
 
     return this;
