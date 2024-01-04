@@ -15,7 +15,6 @@
 
 ## TODO List
 
-* add "getId" to Asset
 * update to Java 21
     * teavm 0.9.0 has support
 * delete gui v1 code and move "v2" to gui package
@@ -53,6 +52,15 @@
         * javafx/swing impl
         * browser impl
     * simple rest server
+* Figure out how to handle TouchInput (probably at the same time as AndroidPlatform implementation)
+    * Primarily for browser but also could be supported in JavaFX
+    * touchstart and touchend all hard coded to MouseButton.Primary currently
+        * implement touchmove
+            * Figure out TouchInput API
+        * How to handle multitouch
+            * Switch JsMouseUtils to mouse events instead of pointer events
+* Android Platform
+    * Implement
 * Lighting
     * implement more light types other than just point lights
 * Particle System
@@ -68,15 +76,6 @@
         * Polygon x AABB
         * Polygon x Circle
         * Polygon x Polygon
-* Figure out how to handle TouchInput (probably at the same time as AndroidPlatform implementation)
-    * Primarily for browser but also could be supported in JavaFX
-    * touchstart and touchend all hard coded to MouseButton.Primary currently
-        * implement touchmove
-            * Figure out TouchInput API
-        * How to handle multitouch
-            * Switch JsMouseUtils to mouse events instead of pointer events
-* Android Platform
-    * Implement
 * Investigate possible Steam CloudSave integration
 * Consider adding a "debug console" option
     * While open can toggle things like render debug outlines and debug spacial hashmap stuff
