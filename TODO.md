@@ -15,6 +15,8 @@
 
 ## TODO List
 
+* Consider array list for possible SpacialHashMap performance boost
+    * Consider BVH implementation (bounded volume hierarchy which is a type of quadtree)
 * update to Java 21
     * teavm 0.9.0 has support
 * delete gui v1 code and move "v2" to gui package
@@ -24,9 +26,6 @@
     * spritesheet stuff
 * GuiV2 improvements
     * lots of JavaDocs missing
-    * allow \n TextGuiElement new line wrapping (might not be needed with new layout stuff)
-    * implement "Style sheet" JSON concept
-        * gui json documents can reference these for use
     * Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
         * maybe just check for any mouse event list size > 0?
     * consider an event map of some sort for when loading gui documents
@@ -36,7 +35,8 @@
     * maybe put default style values in a common place (like Direction.Column)?
     * when should layout be invalidated (can partial invalidations happen for children/parent)
     * consider splitting layout and paint styles to prevent extra calculations
-* Consider array list for possible SpacialHashMap performance boost
+    * implement "Style sheet" JSON concept
+        * gui json documents can reference these for use
 * Consider "stopping" AudioClip when it is finished by default, so it can be immediately played again?
 * Move custom build "distribution" tasks to a gradle plugin
     * sola game template should use these plugins as well

@@ -12,38 +12,42 @@ import java.util.List;
 
 public class TextRenderUtils {
   public static TextRenderDetails calculateRenderDetails(Font font, String text, GuiElementBounds contentBounds) {
-    List<String> lines;
-    var textDimensions = font.getDimensionsForText(text);
-    int lineHeight = textDimensions.height();
-    int textHeight = lineHeight;
-    int textWidth = textDimensions.width();
+    List<String> lines = new ArrayList<>();
+    int lineHeight = 0;
+    int textWidth = 0;
+    String[] newLines = text.split("\n");
 
-    if (contentBounds.width() < textWidth) {
-      textWidth = contentBounds.width();
-      lines = new ArrayList<>();
-      String[] words = text.split(" ");
-      String sentence = words.length > 0 ? words[0] : " ";
+    for (String newLine : newLines) {
+      var textDimensions = font.getDimensionsForText(newLine);
+      lineHeight = textDimensions.height();
+      textWidth = Math.max(textWidth, textDimensions.width());
 
-      for (int i = 1; i < words.length; i++) {
-        String word = words[i];
-        String tempSentence = sentence + " " + word;
-        Font.TextDimensions sentenceDimensions = font.getDimensionsForText(tempSentence);
+      if (contentBounds.width() < textWidth) {
+        textWidth = contentBounds.width();
+        String[] words = newLine.split(" ");
+        String sentence = words.length > 0 ? words[0] : " ";
 
-        if (sentenceDimensions.width() < contentBounds.width()) {
-          sentence = tempSentence;
-        } else {
-          // Start next line with current word
-          lines.add(sentence);
-          sentence = word;
+        for (int i = 1; i < words.length; i++) {
+          String word = words[i];
+          String tempSentence = sentence + " " + word;
+          Font.TextDimensions sentenceDimensions = font.getDimensionsForText(tempSentence);
+
+          if (sentenceDimensions.width() < contentBounds.width()) {
+            sentence = tempSentence;
+          } else {
+            // Start next line with current word
+            lines.add(sentence);
+            sentence = word;
+          }
         }
-      }
 
-      lines.add(sentence);
-      textHeight = lineHeight * lines.size();
-    } else {
-      lines = new ArrayList<>(1);
-      lines.add(text);
+        lines.add(sentence);
+      } else {
+        lines.add(newLine);
+      }
     }
+
+    int textHeight = lineHeight * lines.size();
 
     return new TextRenderDetails(
       lineHeight, lines, new GuiElementDimensions(textWidth, textHeight)
