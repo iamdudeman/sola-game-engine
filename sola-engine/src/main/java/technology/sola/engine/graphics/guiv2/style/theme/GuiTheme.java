@@ -42,7 +42,7 @@ public class GuiTheme {
    * Applies this theme to a {@link GuiElement} and all its children.
    *
    * @param guiElement the parent element of the tree to apply the theme to
-   * @param <Style> the {@link BaseStyles} type the element uses
+   * @param <Style>    the {@link BaseStyles} type the element uses
    */
   @SuppressWarnings("unchecked")
   public <Style extends BaseStyles> void applyToTree(GuiElement<Style> guiElement) {
@@ -59,7 +59,7 @@ public class GuiTheme {
    * Applies this theme to a {@link GuiElement}..
    *
    * @param guiElement the element to apply the theme to
-   * @param <Style> the {@link BaseStyles} type the element uses
+   * @param <Style>    the {@link BaseStyles} type the element uses
    */
   @SuppressWarnings("unchecked")
   public <Style extends BaseStyles> void applyToElement(GuiElement<Style> guiElement) {
@@ -77,7 +77,7 @@ public class GuiTheme {
    * Gets a {@link List} of {@link ConditionalStyle} from the theme for the {@link GuiElement}.
    *
    * @param guiElement the element to get theme styles for
-   * @param <Style> the {@link BaseStyles} type the element uses
+   * @param <Style>    the {@link BaseStyles} type the element uses
    */
   @SuppressWarnings("unchecked")
   public <Style extends BaseStyles> List<ConditionalStyle<Style>> getForElement(GuiElement<Style> guiElement) {
@@ -96,9 +96,9 @@ public class GuiTheme {
    * Adds a {@link List} of {@link ConditionalStyle}s for a {@link GuiElement} type to the theme.
    *
    * @param elementClass the class of the element to add style definitions for
-   * @param styles the styles to add
+   * @param styles       the styles to add
+   * @param <Style>      the {@link BaseStyles} type the element uses
    * @return this
-   * @param <Style> the {@link BaseStyles} type the element uses
    */
   @SuppressWarnings("unchecked")
   public <Style extends BaseStyles> GuiTheme addStyle(Class<? extends GuiElement<Style>> elementClass, List<ConditionalStyle<Style>> styles) {

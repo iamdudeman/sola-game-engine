@@ -10,7 +10,18 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TextRenderUtils contains methods useful for rendering text for a GUI.
+ */
 public class TextRenderUtils {
+  /**
+   * Calculates {@link TextRenderDetails} for the text based on the content bounds available on current {@link Font}.
+   *
+   * @param font          the font to render with
+   * @param text          the text to render
+   * @param contentBounds the bounds to render the text within
+   * @return the details needed to render the text
+   */
   public static TextRenderDetails calculateRenderDetails(Font font, String text, GuiElementBounds contentBounds) {
     List<String> lines = new ArrayList<>();
     int lineHeight = 0;
@@ -54,8 +65,18 @@ public class TextRenderUtils {
     );
   }
 
-  public static void renderLines(Renderer renderer, List<String> lines, TextStyles.TextAlignment textAlignment, GuiElementBounds contentBounds, int lineHeight, Color textColor) {
+  /**
+   * Handles rendering lines of GUI text to a {@link Renderer}.
+   *
+   * @param renderer          the {@code Renderer} instance
+   * @param textRenderDetails the {@link TextRenderDetails}
+   * @param textAlignment     the {@link TextStyles.TextAlignment} for rendering
+   * @param contentBounds     the {@link technology.sola.engine.graphics.guiv2.GuiElement}'s content {@link GuiElementBounds}
+   * @param textColor         the {@link Color} of the lines of text
+   */
+  public static void renderLines(Renderer renderer, TextRenderDetails textRenderDetails, TextStyles.TextAlignment textAlignment, GuiElementBounds contentBounds, Color textColor) {
     var font = renderer.getFont();
+    var lines = textRenderDetails.lines();
 
     for (int i = 0; i < lines.size(); i++) {
       int leadingSpace = font.getFontInfo().leading() * i;
@@ -76,11 +97,8 @@ public class TextRenderUtils {
         }
       }
 
-      renderer.drawString(lines.get(i), contentBounds.x() + xAdjustment, contentBounds.y() + leadingSpace + lineHeight * i, textColor);
+      renderer.drawString(lines.get(i), contentBounds.x() + xAdjustment, contentBounds.y() + leadingSpace + textRenderDetails.lineHeight() * i, textColor);
     }
-  }
-
-  public record TextRenderDetails(int lineHeight, List<String> lines, GuiElementDimensions dimensions) {
   }
 
   private TextRenderUtils() {
