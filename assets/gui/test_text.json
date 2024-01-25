@@ -61,6 +61,32 @@
           "padding": 10
         }
       ]
+    },
+    {
+      "tag": "Text",
+      "props": {
+        "text": "Test with a new line.\nActually two!\nThird line."
+      },
+      "styles": [
+        {
+          "textAlignment": "center",
+          "borderColor": "#000000",
+          "padding": 10
+        }
+      ]
+    },
+    {
+      "tag": "Text",
+      "props": {
+        "text": "This is a longer test string that should wrap. It has a second sentence which is why it wraps.\nAnd it has a newline."
+      },
+      "styles": [
+        {
+          "borderColor": "#000000",
+          "padding": 10,
+          "textColor": "#0000ff"
+        }
+      ]
     }
   ]
 }

@@ -13,6 +13,7 @@ import java.util.Map;
  * has been rasterized into an image.
  */
 public class Font implements Asset {
+  private static final SolaImage INVISIBLE_GLYPH = new SolaImage(0, 0);
   private final FontInfo fontInfo;
   private final Map<Color, Map<Character, SolaImage>> colorToGlyphsMap = new HashMap<>();
   private final Map<Character, SolaImage> blackCharacterToGlyphMap = new HashMap<>();
@@ -50,6 +51,11 @@ public class Font implements Asset {
    * @return the image for the character's glyph in desired color
    */
   public SolaImage getGlyph(char character, Color color) {
+    // check for invisible characters which should be 0x0
+    if (character == '\n') {
+      return INVISIBLE_GLYPH;
+    }
+
     if (color.equals(Color.BLACK)) {
       return getBaseGlyph(character);
     }
