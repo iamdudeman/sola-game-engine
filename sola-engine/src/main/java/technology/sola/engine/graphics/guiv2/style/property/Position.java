@@ -1,24 +1,40 @@
 package technology.sola.engine.graphics.guiv2.style.property;
 
+/**
+ * Position contains the properties for absolutely positioning a {@link technology.sola.engine.graphics.guiv2.GuiElement}
+ * within its container. If x and y are both null then the element is not considered absolutely positioned.
+ *
+ * @param x the x position of the element
+ * @param y the y position of the element
+ */
 public record Position(StyleValue x, StyleValue y) implements MergeableProperty<Position> {
+  /**
+   * Position with x and y not set.
+   */
   public static final Position NONE = new Position();
 
+  /**
+   * Creates a new Position instance with x and y not set.
+   */
   public Position() {
     this((String) null, null);
   }
 
+  /**
+   * Creates a new Position instance with x and y set.
+   *
+   * @param x the x position of the element
+   * @param y the y position of the element
+   */
   public Position(String x, String y) {
     this(StyleValue.of(x), StyleValue.of(y));
   }
 
-  public static Position x(String value) {
-    return new Position(value, null);
-  }
-
-  public static Position y(String value) {
-    return new Position(null, value);
-  }
-
+  /**
+   * Checks if this Position is absolute or not. Position is considered absolute if x or y is not null.
+   *
+   * @return true if absolute
+   */
   public boolean isAbsolute() {
     return x != null || y != null;
   }

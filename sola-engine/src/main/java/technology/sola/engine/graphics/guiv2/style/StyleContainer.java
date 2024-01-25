@@ -25,8 +25,10 @@ public class StyleContainer<Style extends BaseStyles> {
     boolean hasChanged = false;
 
     for (int i = 0; i < this.conditionalStyles.size(); i++) {
-      if (conditionsArray[i] != conditionalStyles.get(i).condition().apply(guiElement)) {
-        conditionsArray[i] = conditionalStyles.get(i).condition().apply(guiElement);
+      boolean result = conditionalStyles.get(i).condition().apply(guiElement);
+
+      if (conditionsArray[i] != result) {
+        conditionsArray[i] = result;
         hasChanged = true;
       }
     }
