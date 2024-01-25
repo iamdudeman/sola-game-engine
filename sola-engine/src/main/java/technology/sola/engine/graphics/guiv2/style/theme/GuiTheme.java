@@ -1,20 +1,24 @@
 package technology.sola.engine.graphics.guiv2.style.theme;
 
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.guiv2.GuiElement;
-import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
-import technology.sola.engine.graphics.guiv2.elements.TextStyles;
 import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.guiv2.style.ConditionalStyle;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * GuiTheme instances contain {@link GuiElement} to {@link BaseStyles} mappings that can be applied to a specific
+ * element or an element and all its children.
+ */
 public class GuiTheme {
   private static GuiTheme defaultLightTheme;
   private static GuiTheme defaultDarkTheme;
   private final List<ThemeElementDefinition<?>> definitions = new ArrayList<>();
 
+  /**
+   * @return a default light {@link GuiTheme}
+   */
   public static GuiTheme getDefaultLightTheme() {
     if (defaultLightTheme == null) {
       defaultLightTheme = DefaultThemeBuilder.buildLightTheme();
@@ -23,6 +27,9 @@ public class GuiTheme {
     return defaultLightTheme;
   }
 
+  /**
+   * @return a default dark {@link GuiTheme}
+   */
   public static GuiTheme getDefaultDarkTheme() {
     if (defaultDarkTheme == null) {
       defaultDarkTheme = DefaultThemeBuilder.buildDarkTheme();
@@ -31,43 +38,77 @@ public class GuiTheme {
     return defaultDarkTheme;
   }
 
+  /**
+   * Applies this theme to a {@link GuiElement} and all its children.
+   *
+   * @param guiElement the parent element of the tree to apply the theme to
+   * @param <Style> the {@link BaseStyles} type the element uses
+   */
   @SuppressWarnings("unchecked")
   public <Style extends BaseStyles> void applyToTree(GuiElement<Style> guiElement) {
     definitions.forEach(definition -> {
       for (var child : guiElement.findElementsByType((Class<? extends GuiElement<Style>>) definition.elementClass)) {
-        child.setStyle(((ThemeElementDefinition<Style>) definition).styles);
+        var castedDefinition = (ThemeElementDefinition<Style>) definition;
+
+        child.setStyle(castedDefinition.styles);
       }
     });
   }
 
+  /**
+   * Applies this theme to a {@link GuiElement}..
+   *
+   * @param guiElement the element to apply the theme to
+   * @param <Style> the {@link BaseStyles} type the element uses
+   */
   @SuppressWarnings("unchecked")
   public <Style extends BaseStyles> void applyToElement(GuiElement<Style> guiElement) {
     for (var definition : definitions) {
       if (definition.elementClass.equals(guiElement.getClass())) {
-        guiElement.setStyle(((ThemeElementDefinition<Style>) definition).styles);
+        var castedDefinition = (ThemeElementDefinition<Style>) definition;
+
+        guiElement.setStyle(castedDefinition.styles);
         break;
       }
     }
   }
 
+  /**
+   * Gets a {@link List} of {@link ConditionalStyle} from the theme for the {@link GuiElement}.
+   *
+   * @param guiElement the element to get theme styles for
+   * @param <Style> the {@link BaseStyles} type the element uses
+   */
   @SuppressWarnings("unchecked")
   public <Style extends BaseStyles> List<ConditionalStyle<Style>> getForElement(GuiElement<Style> guiElement) {
     for (var definition : definitions) {
       if (definition.elementClass.equals(guiElement.getClass())) {
-        return ((ThemeElementDefinition<Style>) definition).styles;
+        var castedDefinition = (ThemeElementDefinition<Style>) definition;
+
+        return castedDefinition.styles;
       }
     }
 
     return new ArrayList<>();
   }
 
+  /**
+   * Adds a {@link List} of {@link ConditionalStyle}s for a {@link GuiElement} type to the theme.
+   *
+   * @param elementClass the class of the element to add style definitions for
+   * @param styles the styles to add
+   * @return this
+   * @param <Style> the {@link BaseStyles} type the element uses
+   */
   @SuppressWarnings("unchecked")
   public <Style extends BaseStyles> GuiTheme addStyle(Class<? extends GuiElement<Style>> elementClass, List<ConditionalStyle<Style>> styles) {
     boolean isExisting = false;
 
     for (var definition : definitions) {
       if (definition.elementClass.equals(elementClass)) {
-        ((ThemeElementDefinition<Style>) definition).styles.addAll(styles);
+        var castedDefinition = (ThemeElementDefinition<Style>) definition;
+
+        castedDefinition.styles.addAll(styles);
         isExisting = true;
         break;
       }
@@ -86,16 +127,5 @@ public class GuiTheme {
     Class<? extends GuiElement<Style>> elementClass,
     List<ConditionalStyle<Style>> styles
   ) {
-  }
-
-  static {
-    new GuiTheme()
-      .addStyle(TextGuiElement.class, List.of(
-        ConditionalStyle.always(
-          TextStyles.create()
-            .setBackgroundColor(Color.WHITE)
-            .build()
-        )
-      ));
   }
 }
