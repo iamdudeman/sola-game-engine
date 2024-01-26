@@ -16,7 +16,7 @@ public class BaseStyles {
   private final CrossAxisChildren crossAxisChildren;
   private final Position position;
 
-  public BaseStyles(Builder<?> builder) {
+  protected BaseStyles(Builder<?> builder) {
     this.background = builder.background;
     this.border = builder.border;
     this.padding = builder.padding;
@@ -91,9 +91,6 @@ public class BaseStyles {
     private CrossAxisChildren crossAxisChildren;
     private Direction direction;
     private Position position = new Position();
-
-    protected Builder() {
-    }
 
     public BaseStyles build() {
       return new BaseStyles(this);

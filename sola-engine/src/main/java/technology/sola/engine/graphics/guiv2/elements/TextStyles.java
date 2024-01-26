@@ -8,7 +8,7 @@ public class TextStyles extends BaseStyles {
   private final TextAlignment textAlignment;
   private final String fontAssetId;
 
-  public TextStyles(Builder<?> builder) {
+  protected TextStyles(Builder<?> builder) {
     super(builder);
     this.textColor = builder.textColor;
     this.textAlignment = builder.textAlignment;
@@ -35,9 +35,6 @@ public class TextStyles extends BaseStyles {
     private Color textColor;
     private String fontAssetId;
     private TextAlignment textAlignment;
-
-    protected Builder() {
-    }
 
     @Override
     public TextStyles build() {
