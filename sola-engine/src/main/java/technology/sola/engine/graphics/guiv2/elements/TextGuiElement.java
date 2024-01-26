@@ -11,6 +11,9 @@ import technology.sola.engine.graphics.renderer.Renderer;
 
 import java.util.List;
 
+/**
+ * TextGuiElement is a {@link GuiElement} that renders text for a GUI. It does not render child elements.
+ */
 public class TextGuiElement extends GuiElement<TextStyles> {
   // properties
   private String text;
@@ -45,20 +48,40 @@ public class TextGuiElement extends GuiElement<TextStyles> {
     return textRenderDetails.dimensions();
   }
 
+  /**
+   * TextGuiElement is not focusable so this will return false.
+   *
+   * @return false
+   */
   @Override
   public boolean isFocusable() {
     return false;
   }
 
+  /**
+   * TextGuiElement does not render children so this method will do nothing.
+   *
+   * @param children the child elements to add
+   * @return this
+   */
   @Override
   public GuiElement<TextStyles> appendChildren(GuiElement<?>... children) {
     return this;
   }
 
+  /**
+   * @return the text that will be rendered
+   */
   public String getText() {
     return text;
   }
 
+  /**
+   * Sets the text that will be rendered.
+   *
+   * @param text the new text to be rendered
+   * @return this
+   */
   public TextGuiElement setText(String text) {
     this.text = text;
     invalidateLayout();

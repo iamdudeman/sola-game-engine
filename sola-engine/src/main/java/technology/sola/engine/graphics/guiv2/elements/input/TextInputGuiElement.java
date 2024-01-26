@@ -14,6 +14,9 @@ import technology.sola.engine.input.KeyboardLayout;
 
 import java.util.List;
 
+/**
+ * TextInputGuiElement is a {@link BaseInputGuiElement} that allows users to interact via typing text into the field.
+ */
 public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
   // props
   private String placeholder = "";
@@ -28,6 +31,9 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
   private TextRenderDetails textRenderDetails;
   private String text;
 
+  /**
+   * Creates an instance of TextInputGuiElement registering default event listeners for typing characters into the field.
+   */
   public TextInputGuiElement() {
     super();
 
@@ -102,20 +108,29 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
     return textRenderDetails.dimensions();
   }
 
-  @Override
-  public boolean isFocusable() {
-    return true;
-  }
-
+  /**
+   * TextInputGuiElement does not render children so this method will do nothing.
+   *
+   * @param children the child elements to add
+   * @return this
+   */
   @Override
   public GuiElement<TextInputStyles> appendChildren(GuiElement<?>... children) {
     return this;
   }
 
+  /**
+   * @return the placeholder when no user value is entered
+   */
   public String getPlaceholder() {
     return placeholder;
   }
 
+  /**
+   * Sets the placeholder text for when no user value is entered.
+   *
+   * @param placeholder the new placeholder text
+   */
   public void setPlaceholder(String placeholder) {
     this.placeholder = placeholder;
 
@@ -124,10 +139,19 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
     }
   }
 
+  /**
+   * @return the maximum number of characters allowed for the input
+   */
   public Integer getMaxLength() {
     return maxLength;
   }
 
+  /**
+   * Sets the maximum number of characters allowed for the input. If the new length is smaller than the entered value
+   * it will be truncated down to the new max length.
+   *
+   * @param maxLength the new max length
+   */
   public void setMaxLength(Integer maxLength) {
     this.maxLength = maxLength;
 
@@ -138,10 +162,18 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
     }
   }
 
+  /**
+   * @return the user entered value in the input
+   */
   public String getValue() {
     return value;
   }
 
+  /**
+   * Programmatically sets the user entered value of the input.
+   *
+   * @param value the new value of the input
+   */
   public void setValue(String value) {
     valueBuilder.delete(0, valueBuilder.length());
 

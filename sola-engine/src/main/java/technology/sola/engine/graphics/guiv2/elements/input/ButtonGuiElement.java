@@ -5,11 +5,19 @@ import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 
+/**
+ * ButtonGuiElement is a {@link BaseInputGuiElement} that allows users to interact via clicking the button or using
+ * keyboard shortcuts.
+ */
 public class ButtonGuiElement extends BaseInputGuiElement<BaseStyles> {
   // props
   private Runnable onAction = () -> {
   };
 
+  /**
+   * Creates a ButtonGuiElement and adds default event listeners for handling disabled states and when the {@link Key#SPACE}
+   * key is pressed.
+   */
   public ButtonGuiElement() {
     super();
 
@@ -46,6 +54,11 @@ public class ButtonGuiElement extends BaseInputGuiElement<BaseStyles> {
     return null;
   }
 
+  /**
+   * Sets the action that fires when the button is interacted with.
+   *
+   * @param onAction the action to execute on button interaction
+   */
   public void setOnAction(Runnable onAction) {
     this.onAction = onAction;
   }

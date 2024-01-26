@@ -15,7 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class GuiElement<Style extends BaseStyles> {
+  /**
+   * The {@link StyleContainer} for the element.
+   */
   protected final StyleContainer<Style> styleContainer;
+  /**
+   * The list of children {@link GuiElement}s.
+   */
   protected final List<GuiElement<?>> children = new ArrayList<>();
   /**
    * Includes only content size. Do not manually update this unless you know what you are doing!
@@ -184,6 +190,12 @@ public abstract class GuiElement<Style extends BaseStyles> {
     return this;
   }
 
+  /**
+   * Adds child {@link GuiElement}s to this element. How or if they will be rendered depends on the implementing element.
+   *
+   * @param children the child elements to add
+   * @return this
+   */
   public GuiElement<Style> appendChildren(GuiElement<?>... children) {
     if (children != null) {
       for (GuiElement<?> child : children) {
