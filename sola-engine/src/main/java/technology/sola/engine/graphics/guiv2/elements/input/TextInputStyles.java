@@ -4,13 +4,13 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.guiv2.elements.TextStyles;
 
 /**
- * TextInputStyles extends {@link TextStyles} adding in extra properties specifically for {@link TextInputGuiElement}.
+ * TextInputStyles extends {@link TextStyles} properties adding in extra properties for text input.
  */
 public class TextInputStyles extends TextStyles {
   private final Color placeholderColor;
 
   /**
-   * Creates an instance of TextInputStyles from its {@link Builder}.
+   * Populates {@link TextInputStyles} properties from its {@link TextInputStyles.Builder}.
    *
    * @param builder the builder to build styles from
    */
@@ -20,7 +20,7 @@ public class TextInputStyles extends TextStyles {
   }
 
   /**
-   * Convenience method for creating a new {@link Builder}.
+   * Convenience method for creating a new {@link TextInputStyles.Builder}.
    *
    * @return a new builder instance
    */
@@ -38,7 +38,7 @@ public class TextInputStyles extends TextStyles {
   /**
    * Builder class for {@link TextInputStyles}.
    *
-   * @param <Self> this type
+   * @param <Self> this builder type
    */
   public static class Builder<Self extends Builder<Self>> extends TextStyles.Builder<Self> {
     private Color placeholderColor;
