@@ -2,6 +2,9 @@ package technology.sola.engine.physics;
 
 import java.util.Objects;
 
+/**
+ * Material represents a physical material for physics simulations.
+ */
 public class Material {
   /**
    * Material with mass set to 1, restitution set to 0.01 and friction set to 0.
