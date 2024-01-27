@@ -1,4 +1,5 @@
 package technology.sola.engine.networking.rest;
 
-public interface HttpResponse {
+// todo make public later once implemented
+interface HttpResponse {
 }

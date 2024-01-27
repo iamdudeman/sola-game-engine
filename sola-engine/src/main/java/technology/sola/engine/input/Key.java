@@ -123,10 +123,16 @@ public enum Key {
     this.name = name;
   }
 
+  /**
+   * @return the ASCII code of the Key
+   */
   public int getCode() {
     return code;
   }
 
+  /**
+   * @return the display name of the Key
+   */
   public String getName() {
     return name;
   }
