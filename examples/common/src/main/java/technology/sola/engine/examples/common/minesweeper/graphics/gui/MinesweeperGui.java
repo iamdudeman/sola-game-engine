@@ -4,12 +4,12 @@ import technology.sola.engine.event.EventHub;
 import technology.sola.engine.examples.common.minesweeper.event.FlagEvent;
 import technology.sola.engine.examples.common.minesweeper.event.GameOverEvent;
 import technology.sola.engine.examples.common.minesweeper.event.NewGameEvent;
-import technology.sola.engine.graphics.guiv2.GuiElement;
-import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
-import technology.sola.engine.graphics.guiv2.elements.TextStyles;
-import technology.sola.engine.graphics.guiv2.elements.input.ButtonGuiElement;
-import technology.sola.engine.graphics.guiv2.style.ConditionalStyle;
-import technology.sola.engine.graphics.guiv2.style.property.Visibility;
+import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.elements.TextGuiElement;
+import technology.sola.engine.graphics.gui.elements.TextStyles;
+import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.style.ConditionalStyle;
+import technology.sola.engine.graphics.gui.style.property.Visibility;
 
 import java.text.DecimalFormat;
 

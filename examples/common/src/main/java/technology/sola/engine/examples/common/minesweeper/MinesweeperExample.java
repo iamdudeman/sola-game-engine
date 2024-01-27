@@ -9,10 +9,10 @@ import technology.sola.engine.examples.common.minesweeper.graphics.gui.Minesweep
 import technology.sola.engine.examples.common.minesweeper.system.GameOverSystem;
 import technology.sola.engine.examples.common.minesweeper.system.MinefieldSystem;
 import technology.sola.engine.examples.common.minesweeper.system.PlayerInputSystem;
-import technology.sola.engine.graphics.guiv2.elements.input.ButtonGuiElement;
-import technology.sola.engine.graphics.guiv2.style.BaseStyles;
-import technology.sola.engine.graphics.guiv2.style.ConditionalStyle;
-import technology.sola.engine.graphics.guiv2.style.theme.GuiTheme;
+import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.style.BaseStyles;
+import technology.sola.engine.graphics.gui.style.ConditionalStyle;
+import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
 import technology.sola.engine.graphics.screen.AspectMode;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public class MinesweeperExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGuiV2(
+    defaultsConfigurator.useGui(
       GuiTheme.getDefaultLightTheme()
         .addStyle(ButtonGuiElement.class, List.of(
           ConditionalStyle.always(BaseStyles.create().setPadding(5).build())

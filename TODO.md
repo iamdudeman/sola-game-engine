@@ -22,7 +22,7 @@
 * JSON schema files for
     * font stuff
     * spritesheet stuff
-* GuiV2 improvements
+* Gui improvements
     * lots of JavaDocs missing
     * Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
         * maybe just check for any mouse event list size > 0?

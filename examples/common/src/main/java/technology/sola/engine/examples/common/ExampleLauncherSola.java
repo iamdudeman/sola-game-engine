@@ -10,17 +10,17 @@ import technology.sola.engine.examples.common.minesweeper.MinesweeperExample;
 import technology.sola.engine.examples.common.networking.NetworkingExample;
 import technology.sola.engine.examples.common.singlefile.*;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.guiv2.GuiElement;
-import technology.sola.engine.graphics.guiv2.elements.SectionGuiElement;
-import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
-import technology.sola.engine.graphics.guiv2.elements.TextStyles;
-import technology.sola.engine.graphics.guiv2.elements.input.ButtonGuiElement;
-import technology.sola.engine.graphics.guiv2.style.BaseStyles;
-import technology.sola.engine.graphics.guiv2.style.ConditionalStyle;
-import technology.sola.engine.graphics.guiv2.style.property.CrossAxisChildren;
-import technology.sola.engine.graphics.guiv2.style.property.Direction;
-import technology.sola.engine.graphics.guiv2.style.property.MainAxisChildren;
-import technology.sola.engine.graphics.guiv2.style.theme.GuiTheme;
+import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
+import technology.sola.engine.graphics.gui.elements.TextGuiElement;
+import technology.sola.engine.graphics.gui.elements.TextStyles;
+import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.style.BaseStyles;
+import technology.sola.engine.graphics.gui.style.ConditionalStyle;
+import technology.sola.engine.graphics.gui.style.property.CrossAxisChildren;
+import technology.sola.engine.graphics.gui.style.property.Direction;
+import technology.sola.engine.graphics.gui.style.property.MainAxisChildren;
+import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -44,7 +44,7 @@ public class ExampleLauncherSola extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGuiV2().useBackgroundColor(Color.WHITE);
+    defaultsConfigurator.useGui().useBackgroundColor(Color.WHITE);
 
     var guiRoot = buildGui();
 

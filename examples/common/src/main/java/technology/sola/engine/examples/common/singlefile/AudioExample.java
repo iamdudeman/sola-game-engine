@@ -6,16 +6,16 @@ import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.guiv2.GuiElement;
-import technology.sola.engine.graphics.guiv2.elements.SectionGuiElement;
-import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
-import technology.sola.engine.graphics.guiv2.elements.TextStyles;
-import technology.sola.engine.graphics.guiv2.elements.input.ButtonGuiElement;
-import technology.sola.engine.graphics.guiv2.style.BaseStyles;
-import technology.sola.engine.graphics.guiv2.style.ConditionalStyle;
-import technology.sola.engine.graphics.guiv2.style.property.CrossAxisChildren;
-import technology.sola.engine.graphics.guiv2.style.property.Direction;
-import technology.sola.engine.graphics.guiv2.style.theme.GuiTheme;
+import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
+import technology.sola.engine.graphics.gui.elements.TextGuiElement;
+import technology.sola.engine.graphics.gui.elements.TextStyles;
+import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.style.BaseStyles;
+import technology.sola.engine.graphics.gui.style.ConditionalStyle;
+import technology.sola.engine.graphics.gui.style.property.CrossAxisChildren;
+import technology.sola.engine.graphics.gui.style.property.Direction;
+import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
 import technology.sola.engine.graphics.screen.AspectMode;
 
 import java.util.List;
@@ -49,7 +49,7 @@ public class AudioExample extends SolaWithDefaults {
       )))
     ;
 
-    defaultsConfigurator.useGuiV2(guiTheme);
+    defaultsConfigurator.useGui(guiTheme);
 
     platform.getViewport().setAspectMode(AspectMode.STRETCH);
   }

@@ -6,13 +6,13 @@ import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
-import technology.sola.engine.graphics.guiv2.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 
 /**
  * GuiExample is a {@link technology.sola.engine.core.Sola} that shows an example custom gui using various
- * {@link technology.sola.engine.graphics.guiv2.GuiElement}s.
+ * {@link technology.sola.engine.graphics.gui.GuiElement}s.
  */
 public class GuiExample extends SolaWithDefaults {
   /**
@@ -25,7 +25,7 @@ public class GuiExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGuiV2();
+    defaultsConfigurator.useGui();
 
     assetLoaderProvider.get(SolaImage.class)
       .addAssetMapping("test_tiles", "assets/test_tiles.png");
