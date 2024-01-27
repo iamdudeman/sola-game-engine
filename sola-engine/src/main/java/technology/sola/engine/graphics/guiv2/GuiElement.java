@@ -145,8 +145,10 @@ public abstract class GuiElement<Style extends BaseStyles> {
     return id;
   }
 
-  public void setId(String id) {
+  public GuiElement<Style> setId(String id) {
     this.id = id;
+
+    return this;
   }
 
   public <T extends GuiElement<?>> T findElementById(String id, Class<T> elementClass) {

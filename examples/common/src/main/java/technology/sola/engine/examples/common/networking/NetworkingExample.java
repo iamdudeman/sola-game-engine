@@ -15,15 +15,18 @@ import technology.sola.engine.examples.common.networking.messages.RequestTimeMes
 import technology.sola.engine.examples.common.networking.messages.UpdateTimeMessage;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
-import technology.sola.engine.graphics.gui.GuiElement;
-import technology.sola.engine.graphics.gui.elements.TextGuiElement;
-import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
-import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
-import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
+import technology.sola.engine.graphics.guiv2.GuiElement;
+import technology.sola.engine.graphics.guiv2.elements.SectionGuiElement;
+import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
+import technology.sola.engine.graphics.guiv2.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.guiv2.style.BaseStyles;
+import technology.sola.engine.graphics.guiv2.style.ConditionalStyle;
+import technology.sola.engine.graphics.guiv2.style.theme.GuiTheme;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.networking.socket.SocketMessage;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * NetworkingExample is a {@link technology.sola.engine.core.Sola} that demos a simple socket based game. This requires
@@ -41,31 +44,17 @@ public class NetworkingExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGui(GuiPropertyDefaults.defaultDarkTheme()).useGraphics().useDebug();
+    defaultsConfigurator.useGuiV2().useGraphics().useDebug();
 
     solaEcs.setWorld(new World(50));
     solaEcs.addSystems(new NetworkQueueSystem(), new PlayerSystem());
-    solaGuiDocument.setGuiRoot(buildGui());
 
-    ButtonGuiElement updateTimeButton = solaGuiDocument.getElementById("updateTime", ButtonGuiElement.class);
-    ButtonGuiElement connectButton = solaGuiDocument.getElementById("connect", ButtonGuiElement.class);
-    ButtonGuiElement disconnectButton = solaGuiDocument.getElementById("disconnect", ButtonGuiElement.class);
-    connectButton.setOnAction(() -> {
-      platform.getSocketClient().connect("127.0.0.1", 1380);
-      connectButton.properties().setDisabled(true);
-      disconnectButton.properties().setDisabled(false);
-      updateTimeButton.properties().setDisabled(false);
-    });
-    disconnectButton.setOnAction(() -> {
-      platform.getSocketClient().disconnect();
-      connectButton.properties().setDisabled(false);
-      disconnectButton.properties().setDisabled(true);
-      updateTimeButton.properties().setDisabled(true);
-      solaEcs.setWorld(new World(50));
-    });
-    updateTimeButton.setOnAction(() -> {
-      platform.getSocketClient().sendMessage(new RequestTimeMessage());
-    });
+    var rootElement = buildGui();
+
+    GuiTheme.getDefaultDarkTheme()
+      .applyToTree(rootElement);
+
+    guiDocument.setRootElement(rootElement);
   }
 
   private class PlayerSystem extends EcsSystem {
@@ -109,7 +98,9 @@ public class NetworkingExample extends SolaWithDefaults {
           case UPDATE_TIME -> {
             UpdateTimeMessage updateTimeMessage = UpdateTimeMessage.parse(socketMessage);
 
-            solaGuiDocument.getElementById("time", TextGuiElement.class).properties()
+            guiDocument.findElementById("updateTimeButton", ButtonGuiElement.class)
+              .findElementsByType(TextGuiElement.class)
+              .get(0)
               .setText(new Date(updateTimeMessage.getTime()).toString());
           }
           case ASSIGN_PLAYER_ID -> {
@@ -155,29 +146,60 @@ public class NetworkingExample extends SolaWithDefaults {
   }
 
   private GuiElement<?> buildGui() {
-    return solaGuiDocument.createElement(
-      StreamGuiElementContainer::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(5).padding.set(5),
-      solaGuiDocument.createElement(
-        TextGuiElement::new,
-        p -> p.setText("Networking Example")
-      ),
-      solaGuiDocument.createElement(
-        TextGuiElement::new,
-        p -> p.setText("").setId("time")
-      ),
-      solaGuiDocument.createElement(
-        ButtonGuiElement::new,
-        p -> p.setText("Connect").setId("connect").setWidth(200).padding.set(15)
-      ),
-      solaGuiDocument.createElement(
-        ButtonGuiElement::new,
-        p -> p.setDisabled(true).setText("Update Time").setId("updateTime").setWidth(200).padding.set(15)
-      ),
-      solaGuiDocument.createElement(
-        ButtonGuiElement::new,
-        p -> p.setDisabled(true).setText("Disconnect").setId("disconnect").setWidth(200).padding.set(15)
-      )
+    SectionGuiElement sectionGuiElement = new SectionGuiElement();
+
+    sectionGuiElement.setStyle(List.of(ConditionalStyle.always(
+      BaseStyles.create()
+        .setGap(5)
+        .setPadding(5)
+        .build()
+    )));
+
+    sectionGuiElement.appendChildren(
+      new TextGuiElement().setText("Networking Example"),
+      new TextGuiElement().setText("").setId("time"),
+      buildButton("connectButton", "Connect", () -> {
+        platform.getSocketClient().connect("127.0.0.1", 1380);
+
+        sectionGuiElement.findElementById("connectButton", ButtonGuiElement.class).setDisabled(true);
+        sectionGuiElement.findElementById("disconnectButton", ButtonGuiElement.class).setDisabled(false);
+        sectionGuiElement.findElementById("updateTimeButton", ButtonGuiElement.class).setDisabled(false);
+      }, false),
+      buildButton("updateTimeButton", "Update Time", () -> {
+        platform.getSocketClient().sendMessage(new RequestTimeMessage());
+      }, true),
+      buildButton("disconnectButton", "Disconnect", () -> {
+        platform.getSocketClient().disconnect();
+
+        sectionGuiElement.findElementById("connectButton", ButtonGuiElement.class).setDisabled(false);
+        sectionGuiElement.findElementById("disconnectButton", ButtonGuiElement.class).setDisabled(true);
+        sectionGuiElement.findElementById("updateTimeButton", ButtonGuiElement.class).setDisabled(true);
+
+        solaEcs.setWorld(new World(50));
+      }, true)
     );
+
+    return sectionGuiElement;
+  }
+
+  private GuiElement<?> buildButton(String id, String text, Runnable onAction, boolean isDisabled) {
+    ButtonGuiElement buttonGuiElement = new ButtonGuiElement();
+
+    buttonGuiElement.setStyle(List.of(ConditionalStyle.always(
+      BaseStyles.create()
+        .setWidth(200)
+        .setPadding(15)
+        .build()
+    )));
+
+    buttonGuiElement.setId(id);
+    buttonGuiElement.setDisabled(isDisabled);
+    buttonGuiElement.setOnAction(onAction);
+
+    buttonGuiElement.appendChildren(
+      new TextGuiElement().setText(text)
+    );
+
+    return buttonGuiElement;
   }
 }
