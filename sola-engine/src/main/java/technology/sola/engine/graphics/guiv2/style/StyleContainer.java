@@ -53,6 +53,13 @@ public class StyleContainer<Style extends BaseStyles> {
     setStyles(combined);
   }
 
+  public void addStyles(List<ConditionalStyle<Style>> styles) {
+    List<ConditionalStyle<Style>> combined = new ArrayList<>(conditionalStyles);
+
+    combined.addAll(styles);
+    setStyles(combined);
+  }
+
   public void removeStyle(ConditionalStyle<Style> style) {
     List<ConditionalStyle<Style>> reduced = new ArrayList<>(conditionalStyles);
 
