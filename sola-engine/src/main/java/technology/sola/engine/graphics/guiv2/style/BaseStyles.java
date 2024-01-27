@@ -134,8 +134,20 @@ public class BaseStyles {
     }
 
     @SuppressWarnings("unchecked")
+    public Self setWidth(int width) {
+      this.width = new StyleValue(width);
+      return (Self) this;
+    }
+
+    @SuppressWarnings("unchecked")
     public Self setHeight(String height) {
       this.height = StyleValue.of(height);
+      return (Self) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Self setHeight(int height) {
+      this.height = new StyleValue(height);
       return (Self) this;
     }
 

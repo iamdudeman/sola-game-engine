@@ -10,12 +10,20 @@ import technology.sola.engine.examples.common.guicookbook.GuiCookbook;
 import technology.sola.engine.examples.common.minesweeper.MinesweeperExample;
 import technology.sola.engine.examples.common.networking.NetworkingExample;
 import technology.sola.engine.examples.common.singlefile.*;
-import technology.sola.engine.graphics.gui.GuiElement;
-import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
-import technology.sola.engine.graphics.gui.elements.TextGuiElement;
-import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
-import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.guiv2.GuiElement;
+import technology.sola.engine.graphics.guiv2.elements.SectionGuiElement;
+import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
+import technology.sola.engine.graphics.guiv2.elements.TextStyles;
+import technology.sola.engine.graphics.guiv2.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.guiv2.style.BaseStyles;
+import technology.sola.engine.graphics.guiv2.style.ConditionalStyle;
+import technology.sola.engine.graphics.guiv2.style.property.CrossAxisChildren;
+import technology.sola.engine.graphics.guiv2.style.property.Direction;
+import technology.sola.engine.graphics.guiv2.style.property.MainAxisChildren;
+import technology.sola.engine.graphics.guiv2.style.theme.GuiTheme;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 /**
@@ -37,63 +45,107 @@ public class ExampleLauncherSola extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGui();
+    defaultsConfigurator.useGuiV2().useBackgroundColor(Color.WHITE);
 
     var guiRoot = buildGui();
 
-    solaGuiDocument.setGuiRoot(guiRoot);
+    GuiTheme.getDefaultLightTheme().applyToTree(guiRoot);
+
+    guiDocument.setRootElement(guiRoot);
 
     guiRoot.requestFocus();
   }
 
   private GuiElement<?> buildGui() {
-    return solaGuiDocument.createElement(
-      StreamGuiElementContainer::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.HORIZONTAL).setGap(5)
-        .setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.CENTER)
-        .setVerticalAlignment(StreamGuiElementContainer.VerticalAlignment.CENTER)
-        .padding.set(5).setWidth(800).setHeight(580),
-      solaGuiDocument.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(5)
-          .setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.CENTER)
-          .setVerticalAlignment(StreamGuiElementContainer.VerticalAlignment.CENTER),
-        solaGuiDocument.createElement(
-          TextGuiElement::new,
-          p -> p.setText("Single file examples").margin.setBottom(15)
-        ),
-        buildExampleLaunchButton("Animation", AnimationExample::new),
-        buildExampleLaunchButton("Audio", AudioExample::new),
-        buildExampleLaunchButton("Gui", GuiExample::new),
-        buildExampleLaunchButton("Lighting", LightingExample::new),
-        buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new),
-        buildExampleLaunchButton("Particle", ParticleExample::new),
-        buildExampleLaunchButton("Rendering", RenderingExample::new),
-        buildExampleLaunchButton("Simple Platformer", SimplePlatformerExample::new),
-        buildExampleLaunchButton("Stress Test - Physics", () -> new StressTestPhysicsExample(500)),
-        buildExampleLaunchButton("Stress Test - Rendering", StressTestRenderingExample::new)
-      ),
-      solaGuiDocument.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setGap(5)
-          .setHorizontalAlignment(StreamGuiElementContainer.HorizontalAlignment.CENTER)
-          .setVerticalAlignment(StreamGuiElementContainer.VerticalAlignment.CENTER),
-        solaGuiDocument.createElement(
-          TextGuiElement::new,
-          p -> p.setText("Larger examples").margin.setBottom(15)
-        ),
-        buildExampleLaunchButton("Gui Cookbook", GuiCookbook::new),
-        buildExampleLaunchButton("Networking", NetworkingExample::new),
-        buildExampleLaunchButton("Minesweeper", MinesweeperExample::new)
-      )
+    SectionGuiElement sectionGuiElement = new SectionGuiElement();
+
+    sectionGuiElement.setStyle(List.of(ConditionalStyle.always(
+      BaseStyles.create()
+        .setWidth("100%")
+        .setDirection(Direction.ROW)
+        .setMainAxisChildren(MainAxisChildren.CENTER)
+        .setGap(10)
+        .setPadding(10)
+        .build()
+    )));
+
+    sectionGuiElement.appendChildren(
+      buildSingleFileSection(),
+      buildLargerExamplesSection()
     );
+
+    return sectionGuiElement;
+  }
+
+  private GuiElement<?> buildSingleFileSection() {
+    SectionGuiElement sectionGuiElement = new SectionGuiElement();
+
+    sectionGuiElement.setStyle(List.of(ConditionalStyle.always(
+      BaseStyles.create()
+        .setGap(5)
+        .setCrossAxisChildren(CrossAxisChildren.CENTER)
+        .build())
+    ));
+
+    sectionGuiElement.appendChildren(
+      buildSectionTitle("Single file examples"),
+      buildExampleLaunchButton("Animation", AnimationExample::new),
+      buildExampleLaunchButton("Audio", AudioExample::new),
+      buildExampleLaunchButton("Gui", GuiExample::new),
+      buildExampleLaunchButton("Lighting", LightingExample::new),
+      buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new),
+      buildExampleLaunchButton("Particle", ParticleExample::new),
+      buildExampleLaunchButton("Rendering", RenderingExample::new),
+      buildExampleLaunchButton("Simple Platformer", SimplePlatformerExample::new),
+      buildExampleLaunchButton("Stress Test - Physics", () -> new StressTestPhysicsExample(500)),
+      buildExampleLaunchButton("Stress Test - Rendering", StressTestRenderingExample::new)
+    );
+
+    return sectionGuiElement;
+  }
+
+  private GuiElement<?> buildLargerExamplesSection() {
+    SectionGuiElement sectionGuiElement = new SectionGuiElement();
+
+    sectionGuiElement.setStyle(List.of(ConditionalStyle.always(
+      BaseStyles.create()
+        .setGap(5)
+        .setCrossAxisChildren(CrossAxisChildren.CENTER)
+        .build())
+    ));
+
+    sectionGuiElement.appendChildren(
+      buildSectionTitle("Larger examples"),
+      buildExampleLaunchButton("Gui Cookbook", GuiCookbook::new),
+      buildExampleLaunchButton("Networking", NetworkingExample::new),
+      buildExampleLaunchButton("Minesweeper", MinesweeperExample::new)
+    );
+
+    return sectionGuiElement;
+  }
+
+  private GuiElement<?> buildSectionTitle(String title) {
+    return new TextGuiElement()
+      .setText(title)
+      .setStyle(List.of(ConditionalStyle.always(
+        TextStyles.create()
+          .setPaddingBottom(15)
+          .build()
+      )));
   }
 
   private GuiElement<?> buildExampleLaunchButton(String text, Supplier<Sola> solaSupplier) {
-    return solaGuiDocument.createElement(
-      ButtonGuiElement::new,
-      p -> p.setText(text).setTextAlign(BaseTextGuiElement.TextAlign.CENTER).padding.set(10).setWidth(300)
-    ).setOnAction(() -> {
+    ButtonGuiElement buttonGuiElement = new ButtonGuiElement();
+
+    buttonGuiElement.setStyle(List.of(ConditionalStyle.always(
+      BaseStyles.create()
+        .setCrossAxisChildren(CrossAxisChildren.CENTER)
+        .setWidth("300")
+        .setPadding(10)
+        .build()
+    )));
+
+    buttonGuiElement.setOnAction(() -> {
       eventHub.add(GameLoopEvent.class, event -> {
         if (event.state() == GameLoopState.STOPPED) {
           solaPlatform.play(solaSupplier.get());
@@ -102,5 +154,11 @@ public class ExampleLauncherSola extends SolaWithDefaults {
 
       eventHub.emit(new GameLoopEvent(GameLoopState.STOP));
     });
+
+    buttonGuiElement.appendChildren(
+      new TextGuiElement().setText(text)
+    );
+
+    return buttonGuiElement;
   }
 }

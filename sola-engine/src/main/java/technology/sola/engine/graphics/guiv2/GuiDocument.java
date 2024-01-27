@@ -41,6 +41,10 @@ public class GuiDocument {
     rootEle.requestFocus();
   }
 
+  public <T extends GuiElement<?>> T findElementById(String id, Class<T> elementClass) {
+    return root.findElementById(id, elementClass);
+  }
+
   public boolean isFocussed(GuiElement<?> guiElement) {
     return this.focussedElement == guiElement;
   }

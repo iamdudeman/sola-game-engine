@@ -28,6 +28,7 @@ import java.util.List;
  * </ul>
  */
 public class AudioExample extends SolaWithDefaults {
+  private static final String FONT_ASSET_ID = "arial_NORMAL_16";
   private GuiTheme guiTheme;
 
   /**
@@ -41,7 +42,7 @@ public class AudioExample extends SolaWithDefaults {
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     guiTheme = GuiTheme.getDefaultLightTheme()
       .addStyle(TextGuiElement.class, List.of(ConditionalStyle.always(
-        TextStyles.create().setFontAssetId("arial_NORMAL_16").setTextColor(Color.BLUE).build()
+        TextStyles.create().setFontAssetId(FONT_ASSET_ID).setTextColor(Color.BLUE).build()
       )))
       .addStyle(SectionGuiElement.class, List.of(ConditionalStyle.always(
         BaseStyles.create().setBackgroundColor(Color.WHITE).build()
@@ -56,7 +57,7 @@ public class AudioExample extends SolaWithDefaults {
   @Override
   protected void onAsyncInit(Runnable completeAsyncInit) {
     new BulkAssetLoader(assetLoaderProvider)
-      .addAsset(Font.class, "arial_NORMAL_16", "assets/arial_NORMAL_16.json")
+      .addAsset(Font.class, FONT_ASSET_ID, "assets/arial_NORMAL_16.json")
       .addAsset(AudioClip.class, "test_song", "assets/asgaseg.wav")
       .loadAll()
       .onComplete(assets -> {

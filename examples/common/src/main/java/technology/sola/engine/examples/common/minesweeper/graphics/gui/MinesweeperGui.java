@@ -44,6 +44,12 @@ public class MinesweeperGui {
   private static int difficultyIndex = 0;
   private static long timeStarted;
 
+  /**
+   * Initialize event handlers for the various GUI elements for sola minesweeper
+   *
+   * @param rootElement the root {@link GuiElement}
+   * @param eventHub    the {@link EventHub}
+   */
   public static void initializeEvents(GuiElement<?> rootElement, EventHub eventHub) {
     rootElement.findElementById("buttonNewGame", ButtonGuiElement.class).setOnAction(() -> newGame(eventHub));
     rootElement.findElementById("buttonSize", ButtonGuiElement.class).setOnAction(() -> {
@@ -57,12 +63,12 @@ public class MinesweeperGui {
 
     eventHub.add(FlagEvent.class, flagEvent -> {
       mineCount += flagEvent.isAddingFlag() ? -1 : 1;
-      rootElement.findElementById("title", TextGuiElement.class).setText("sola Minesweeper - " + mineCount);
+      rootElement.findElementById("title", TextGuiElement.class).setText("sola minesweeper - " + mineCount);
     });
 
     eventHub.add(NewGameEvent.class, newGameEvent -> {
       mineCount = newGameEvent.totalMines();
-      rootElement.findElementById("title", TextGuiElement.class).setText("sola Minesweeper - " + mineCount);
+      rootElement.findElementById("title", TextGuiElement.class).setText("sola minesweeper - " + mineCount);
       rootElement.findElementById("victoryMessage", TextGuiElement.class).getStyles().removeStyle(VISIBLE_STYLE);
       rootElement.findElementById("textSize", TextGuiElement.class).setText(newGameEvent.rows() + "x" + newGameEvent.columns());
 
