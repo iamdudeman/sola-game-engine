@@ -15,13 +15,13 @@ import technology.sola.engine.examples.common.networking.messages.RequestTimeMes
 import technology.sola.engine.examples.common.networking.messages.UpdateTimeMessage;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
-import technology.sola.engine.graphics.guiv2.GuiElement;
-import technology.sola.engine.graphics.guiv2.elements.SectionGuiElement;
-import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
-import technology.sola.engine.graphics.guiv2.elements.input.ButtonGuiElement;
-import technology.sola.engine.graphics.guiv2.style.BaseStyles;
-import technology.sola.engine.graphics.guiv2.style.ConditionalStyle;
-import technology.sola.engine.graphics.guiv2.style.theme.GuiTheme;
+import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
+import technology.sola.engine.graphics.gui.elements.TextGuiElement;
+import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.style.BaseStyles;
+import technology.sola.engine.graphics.gui.style.ConditionalStyle;
+import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.networking.socket.SocketMessage;
 
@@ -44,7 +44,7 @@ public class NetworkingExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGuiV2().useGraphics().useDebug();
+    defaultsConfigurator.useGui().useGraphics().useDebug();
 
     solaEcs.setWorld(new World(50));
     solaEcs.addSystems(new NetworkQueueSystem(), new PlayerSystem());
