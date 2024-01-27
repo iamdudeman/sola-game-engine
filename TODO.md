@@ -23,7 +23,6 @@
     * font stuff
     * spritesheet stuff
 * Gui improvements
-    * lots of JavaDocs missing
     * Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
         * maybe just check for any mouse event list size > 0?
     * consider an event map of some sort for when loading gui documents
