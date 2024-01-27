@@ -15,8 +15,6 @@ import technology.sola.engine.defaults.graphics.modules.ScreenSpaceLightMapGraph
 import technology.sola.engine.defaults.graphics.modules.SolaEntityGraphicsModule;
 import technology.sola.engine.defaults.graphics.modules.SpriteEntityGraphicsModule;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.gui.SolaGuiDocument;
-import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.graphics.guiv2.GuiDocument;
 import technology.sola.engine.graphics.guiv2.json.GuiJsonDocumentBuilder;
 import technology.sola.engine.graphics.guiv2.json.element.GuiElementJsonBlueprint;
@@ -41,7 +39,7 @@ import java.util.stream.Stream;
  * <ul>
  *   <li>{@link SolaWithDefaults#solaPhysics}</li>
  *   <li>{@link SolaWithDefaults#solaGraphics}</li>
- *   <li>{@link SolaWithDefaults#solaGuiDocument}</li>
+ *   <li>{@link SolaWithDefaults#guiDocument}</li>
  * </ul>
  */
 public abstract class SolaWithDefaults extends Sola {
@@ -56,10 +54,9 @@ public abstract class SolaWithDefaults extends Sola {
    */
   protected SolaPhysics solaPhysics;
   /**
-   * The {@link SolaGuiDocument} instance for this Sola. This is null until {@link DefaultsConfigurator#useGui()} is
+   * The {@link GuiDocument} instance for this Sola. This is null until {@link DefaultsConfigurator#useGuiV2()} is
    * called.
    */
-  protected SolaGuiDocument solaGuiDocument;
   protected GuiDocument guiDocument;
   private Consumer<Renderer> renderFunction = renderer -> {
   };
@@ -244,38 +241,6 @@ public abstract class SolaWithDefaults extends Sola {
     }
 
     /**
-     * Initializes the {@link SolaGuiDocument} instance.
-     *
-     * @param propertyDefaults the {@link GuiPropertyDefaults} to use
-     * @return this
-     */
-    public DefaultsConfigurator useGui(GuiPropertyDefaults propertyDefaults) {
-      if (solaGuiDocument == null) {
-        solaGuiDocument = new SolaGuiDocument(assetLoaderProvider, eventHub, propertyDefaults);
-        solaGuiDocument.registerEventListeners(platform);
-        rebuildRenderFunction();
-
-        // Prepare default font
-        AssetLoader<Font> fontAssetLoader = assetLoaderProvider.get(Font.class);
-
-        if (!fontAssetLoader.hasAssetMapping(DefaultFont.ASSET_ID)) {
-          fontAssetLoader.addAsset(DefaultFont.ASSET_ID, DefaultFont.get());
-        }
-      }
-
-      return this;
-    }
-
-    /**
-     * Initializes the {@link SolaGuiDocument} instance with light themed {@link GuiPropertyDefaults}.
-     *
-     * @return this
-     */
-    public DefaultsConfigurator useGui() {
-      return useGui(new GuiPropertyDefaults());
-    }
-
-    /**
      * Initializes the {@link GuiDocument} instance with a light {@link GuiTheme}.
      *
      * @return this
@@ -298,7 +263,7 @@ public abstract class SolaWithDefaults extends Sola {
      * Initializes the {@link GuiDocument} instance with a desired {@link GuiTheme}. Also registers additional
      * {@link GuiElementJsonBlueprint}s for parsing different kinds of elements as JSON.
      *
-     * @param guiTheme the theme to use
+     * @param guiTheme                           the theme to use
      * @param additionalGuiElementJsonBlueprints addition gui element json blueprints to register for parsing
      * @return this
      */
@@ -335,7 +300,7 @@ public abstract class SolaWithDefaults extends Sola {
     }
 
     private void rebuildRenderFunction() {
-      if (solaGraphics != null && (solaGuiDocument != null || guiDocument != null)) {
+      if (solaGraphics != null && guiDocument != null) {
         renderFunction = renderer -> {
           renderer.clear(backgroundColor);
           solaGraphics.render(renderer);
@@ -343,17 +308,9 @@ public abstract class SolaWithDefaults extends Sola {
           var layers = renderer.getLayers();
 
           if (layers.isEmpty()) {
-            if (solaGuiDocument == null) {
-              guiDocument.render(renderer);
-            } else {
-              solaGuiDocument.render(renderer);
-            }
+            guiDocument.render(renderer);
           } else {
-            if (solaGuiDocument == null) {
-              layers.get(layers.size() - 1).add(guiDocument::render, ScreenSpaceLightMapGraphicsModule.ORDER + 1);
-            } else {
-              layers.get(layers.size() - 1).add(solaGuiDocument::render, ScreenSpaceLightMapGraphicsModule.ORDER + 1);
-            }
+            layers.get(layers.size() - 1).add(guiDocument::render, ScreenSpaceLightMapGraphicsModule.ORDER + 1);
           }
         };
       } else if (solaGraphics != null) {
@@ -361,14 +318,10 @@ public abstract class SolaWithDefaults extends Sola {
           renderer.clear(backgroundColor);
           solaGraphics.render(renderer);
         };
-      } else if (solaGuiDocument != null || guiDocument != null) {
+      } else if (guiDocument != null) {
         renderFunction = renderer -> {
           renderer.clear(backgroundColor);
-          if (solaGuiDocument == null) {
-            guiDocument.render(renderer);
-          } else {
-            solaGuiDocument.render(renderer);
-          }
+          guiDocument.render(renderer);
         };
       }
     }

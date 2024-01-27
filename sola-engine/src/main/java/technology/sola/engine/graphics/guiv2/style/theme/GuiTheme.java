@@ -78,6 +78,7 @@ public class GuiTheme {
    *
    * @param guiElement the element to get theme styles for
    * @param <Style>    the {@link BaseStyles} type the element uses
+   * @return the styles for the element
    */
   @SuppressWarnings("unchecked")
   public <Style extends BaseStyles> List<ConditionalStyle<Style>> getForElement(GuiElement<Style> guiElement) {

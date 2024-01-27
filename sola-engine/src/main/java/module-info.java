@@ -28,12 +28,6 @@ module technology.sola.engine {
   exports technology.sola.engine.graphics;
   exports technology.sola.engine.graphics.components;
   exports technology.sola.engine.graphics.components.animation;
-  exports technology.sola.engine.graphics.gui;
-  exports technology.sola.engine.graphics.gui.elements;
-  exports technology.sola.engine.graphics.gui.elements.container;
-  exports technology.sola.engine.graphics.gui.elements.input;
-  exports technology.sola.engine.graphics.gui.event;
-  exports technology.sola.engine.graphics.gui.properties;
   exports technology.sola.engine.graphics.guiv2;
   exports technology.sola.engine.graphics.guiv2.elements;
   exports technology.sola.engine.graphics.guiv2.elements.input;
