@@ -2,6 +2,9 @@ package technology.sola.engine.input;
 
 import java.io.Serial;
 
+/**
+ * KeyboardInputException is an exception thrown when a key event is triggered with an unrecognized key code.
+ */
 public class KeyboardInputException extends RuntimeException {
   @Serial
   private static final long serialVersionUID = -5667198620006914560L;
