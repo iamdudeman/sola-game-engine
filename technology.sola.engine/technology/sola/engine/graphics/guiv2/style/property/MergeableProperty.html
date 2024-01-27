@@ -73,11 +73,16 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>P</code> - the type of data to merge with</dd>
+</dl>
+<dl class="notes">
 <dt>All Known Implementing Classes:</dt>
 <dd><code><a href="Background.html" title="class in technology.sola.engine.graphics.guiv2.style.property">Background</a></code>, <code><a href="Border.html" title="class in technology.sola.engine.graphics.guiv2.style.property">Border</a></code>, <code><a href="Padding.html" title="class in technology.sola.engine.graphics.guiv2.style.property">Padding</a></code>, <code><a href="Position.html" title="class in technology.sola.engine.graphics.guiv2.style.property">Position</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">MergeableProperty&lt;P extends MergeableProperty&lt;?&gt;&gt;</span></div>
+<div class="block">MergeableProperty defines the contract for a style property that can be merged with another like type property.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -94,7 +99,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="MergeableProperty.html" title="type parameter in MergeableProperty">P</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#mergeWith(P)" class="member-name-link">mergeWith</a><wbr>(<a href="MergeableProperty.html" title="type parameter in MergeableProperty">P</a>&nbsp;otherProperty)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns a new instance of the property with the resulting values being a merge of the right on top of the left.</div>
+</div>
 </div>
 </div>
 </div>
@@ -113,6 +120,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="mergeWith(P)">
 <h3 id="mergeWith(technology.sola.engine.graphics.guiv2.style.property.MergeableProperty)">mergeWith</h3>
 <div class="member-signature"><span class="return-type"><a href="MergeableProperty.html" title="type parameter in MergeableProperty">P</a></span>&nbsp;<span class="element-name">mergeWith</span><wbr><span class="parameters">(<a href="MergeableProperty.html" title="type parameter in MergeableProperty">P</a>&nbsp;otherProperty)</span></div>
+<div class="block">Returns a new instance of the property with the resulting values being a merge of the right on top of the left.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>otherProperty</code> - the other property object to merge values on top of this one</dd>
+<dt>Returns:</dt>
+<dd>a new instance with the merged properties</dd>
+</dl>
 </section>
 </li>
 </ul>

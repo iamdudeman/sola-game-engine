@@ -78,6 +78,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">StyleValue</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">StyleValue holds a numeric value that can be represented as an absolute value or a relative percentage value.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -92,10 +93,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static final <a href="StyleValue.html" title="class in technology.sola.engine.graphics.guiv2.style.property">StyleValue</a></code></div>
 <div class="col-second even-row-color"><code><a href="#FULL" class="member-name-link">FULL</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">StyleValue constant for the value of 100%.</div>
+</div>
 <div class="col-first odd-row-color"><code>static final <a href="StyleValue.html" title="class in technology.sola.engine.graphics.guiv2.style.property">StyleValue</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#ZERO" class="member-name-link">ZERO</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">StyleValue constant for the value of 0.</div>
+</div>
 </div>
 </section>
 </li>
@@ -108,9 +113,13 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int)" class="member-name-link">StyleValue</a><wbr>(int&nbsp;pixelValue)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a StyleValue that is an absolute pixel value.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">StyleValue</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;value)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Creates a StyleValue from a string that can be a pixel value or percentage.</div>
+</div>
 </div>
 </section>
 </li>
@@ -130,13 +139,20 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getValue(int)" class="member-name-link">getValue</a><wbr>(int&nbsp;parentValue)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Gets the resolved value based on a parent's dimension.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="StyleValue.html" title="class in technology.sola.engine.graphics.guiv2.style.property">StyleValue</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(java.lang.String)" class="member-name-link">of</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;value)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isPercentage()" class="member-name-link">isPercentage</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="StyleValue.html" title="class in technology.sola.engine.graphics.guiv2.style.property">StyleValue</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(java.lang.String)" class="member-name-link">of</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;value)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Creates a StyleValue from the parsed String.</div>
+</div>
 </div>
 </div>
 </div>
@@ -158,12 +174,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="ZERO">
 <h3>ZERO</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="StyleValue.html" title="class in technology.sola.engine.graphics.guiv2.style.property">StyleValue</a></span>&nbsp;<span class="element-name">ZERO</span></div>
+<div class="block">StyleValue constant for the value of 0.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="FULL">
 <h3>FULL</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="StyleValue.html" title="class in technology.sola.engine.graphics.guiv2.style.property">StyleValue</a></span>&nbsp;<span class="element-name">FULL</span></div>
+<div class="block">StyleValue constant for the value of 100%.</div>
 </section>
 </li>
 </ul>
@@ -178,12 +196,27 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(int)">
 <h3>StyleValue</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">StyleValue</span><wbr><span class="parameters">(int&nbsp;pixelValue)</span></div>
+<div class="block">Creates a StyleValue that is an absolute pixel value.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>pixelValue</code> - the pixel value</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>StyleValue</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">StyleValue</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;value)</span></div>
+<div class="block">Creates a StyleValue from a string that can be a pixel value or percentage.
+ <ul>
+   <li>ends with '%' - percentage</li>
+   <li>ends with 'px' - pixel</li>
+   <li>default - pixel</li>
+ </ul></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>value</code> - the value to parse into a StyleValue</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -198,12 +231,36 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="of(java.lang.String)">
 <h3>of</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="StyleValue.html" title="class in technology.sola.engine.graphics.guiv2.style.property">StyleValue</a></span>&nbsp;<span class="element-name">of</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;value)</span></div>
+<div class="block">Creates a StyleValue from the parsed String. Returns null if value is null</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>value</code> - the String to parse</dd>
+<dt>Returns:</dt>
+<dd>the StyleValue or null</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getValue(int)">
 <h3>getValue</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getValue</span><wbr><span class="parameters">(int&nbsp;parentValue)</span></div>
+<div class="block">Gets the resolved value based on a parent's dimension.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>parentValue</code> - the parent's value to be relative to if percentage</dd>
+<dt>Returns:</dt>
+<dd>the resolved value</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isPercentage()">
+<h3>isPercentage</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isPercentage</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if this StyleValue is a relative percentage value</dd>
+</dl>
 </section>
 </li>
 <li>

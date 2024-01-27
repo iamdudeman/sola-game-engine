@@ -78,12 +78,18 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>Style</code> - the style type</dd>
+</dl>
+<dl class="notes">
 <dt>Direct Known Subclasses:</dt>
 <dd><code><a href="ButtonGuiElement.html" title="class in technology.sola.engine.graphics.guiv2.elements.input">ButtonGuiElement</a></code>, <code><a href="TextInputGuiElement.html" title="class in technology.sola.engine.graphics.guiv2.elements.input">TextInputGuiElement</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">BaseInputGuiElement&lt;Style extends <a href="../../style/BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;</span>
 <span class="extends-implements">extends <a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;Style&gt;</span></div>
+<div class="block">BaseInputGuiElement provides basic functionality for <a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2"><code>GuiElement</code></a>s that allow users to interact with them via
+ keyboard or mouse events.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -105,7 +111,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">BaseInputGuiElement</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a new BaseInputGuiElement instance registering a mouse event for focussing the element when pressed.</div>
+</div>
 </div>
 </section>
 </li>
@@ -125,7 +133,9 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isDisabled()" class="member-name-link">isDisabled</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">A disabled input cannot be focussed, hovered or active.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isFocusable()" class="member-name-link">isFocusable</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -134,7 +144,9 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDisabled(boolean)" class="member-name-link">setDisabled</a><wbr>(boolean&nbsp;disabled)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Updates the disabled state of the input.</div>
+</div>
 </div>
 </div>
 </div>
@@ -159,6 +171,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>BaseInputGuiElement</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">BaseInputGuiElement</span>()</div>
+<div class="block">Creates a new BaseInputGuiElement instance registering a mouse event for focussing the element when pressed.</div>
 </section>
 </li>
 </ul>
@@ -173,12 +186,22 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="isDisabled()">
 <h3>isDisabled</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isDisabled</span>()</div>
+<div class="block">A disabled input cannot be focussed, hovered or active.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if the input is disabled</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setDisabled(boolean)">
 <h3>setDisabled</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setDisabled</span><wbr><span class="parameters">(boolean&nbsp;disabled)</span></div>
+<div class="block">Updates the disabled state of the input. If the input is currently focussed then focus will return to its parent.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>disabled</code> - the new disabled state</dd>
+</dl>
 </section>
 </li>
 <li>

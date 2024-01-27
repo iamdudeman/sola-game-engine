@@ -80,6 +80,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SectionGuiElement</span>
 <span class="extends-implements">extends <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;<a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;</span></div>
+<div class="block">SectionGuiElement is a <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2"><code>GuiElement</code></a> that is simply a container for its children elements. It has various
+ keyboard shortcuts for navigating its children.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -101,7 +103,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">SectionGuiElement</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a new SectionGuiElement instance and registers key pressed events for navigating its children.</div>
+</div>
 </div>
 </section>
 </li>
@@ -151,6 +155,21 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>SectionGuiElement</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SectionGuiElement</span>()</div>
+<div class="block">Creates a new SectionGuiElement instance and registers key pressed events for navigating its children.
+
+ <p>
+ Direction: row, row-reverse
+ <ul>
+   <li><a href="../../../input/Key.html#RIGHT"><code>Key.RIGHT</code></a> - next element</li>
+   <li><a href="../../../input/Key.html#LEFT"><code>Key.LEFT</code></a> - previous element</li>
+ </ul>
+
+ <p>
+ Direction: column, column-reverse
+ <ul>
+   <li><a href="../../../input/Key.html#DOWN"><code>Key.DOWN</code></a> - next element</li>
+   <li><a href="../../../input/Key.html#UP"><code>Key.UP</code></a> - previous element</li>
+ </ul></div>
 </section>
 </li>
 </ul>

@@ -82,6 +82,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">TextInputGuiElement</span>
 <span class="extends-implements">extends <a href="BaseInputGuiElement.html" title="class in technology.sola.engine.graphics.guiv2.elements.input">BaseInputGuiElement</a>&lt;<a href="TextInputStyles.html" title="class in technology.sola.engine.graphics.guiv2.elements.input">TextInputStyles</a>&gt;</span></div>
+<div class="block">TextInputGuiElement is a <a href="BaseInputGuiElement.html" title="class in technology.sola.engine.graphics.guiv2.elements.input"><code>BaseInputGuiElement</code></a> that allows users to interact via typing text into the field.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -103,7 +104,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">TextInputGuiElement</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates an instance of TextInputGuiElement registering default event listeners for typing characters into the field.</div>
+</div>
 </div>
 </section>
 </li>
@@ -120,7 +123,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;<a href="TextInputStyles.html" title="class in technology.sola.engine.graphics.guiv2.elements.input">TextInputStyles</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#appendChildren(technology.sola.engine.graphics.guiv2.GuiElement...)" class="member-name-link">appendChildren</a><wbr>(<a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;?&gt;...&nbsp;children)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">TextInputGuiElement does not render children so this method will do nothing.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../GuiElementDimensions.html" title="class in technology.sola.engine.graphics.guiv2">GuiElementDimensions</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculateContentDimensions()" class="member-name-link">calculateContentDimensions</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -135,27 +140,30 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getValue()" class="member-name-link">getValue</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isFocusable()" class="member-name-link">isFocusable</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#renderContent(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">renderContent</a><wbr>(<a href="../../../renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#renderContent(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">renderContent</a><wbr>(<a href="../../../renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMaxLength(java.lang.Integer)" class="member-name-link">setMaxLength</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;maxLength)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the maximum number of characters allowed for the input.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMaxLength(java.lang.Integer)" class="member-name-link">setMaxLength</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;maxLength)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPlaceholder(java.lang.String)" class="member-name-link">setPlaceholder</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;placeholder)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the placeholder text for when no user value is entered.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPlaceholder(java.lang.String)" class="member-name-link">setPlaceholder</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;placeholder)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setValue(java.lang.String)" class="member-name-link">setValue</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;value)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setValue(java.lang.String)" class="member-name-link">setValue</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;value)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Programmatically sets the user entered value of the input.</div>
+</div>
 </div>
 </div>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-technology.sola.engine.graphics.guiv2.elements.input.BaseInputGuiElement">Methods inherited from class&nbsp;technology.sola.engine.graphics.guiv2.elements.input.<a href="BaseInputGuiElement.html" title="class in technology.sola.engine.graphics.guiv2.elements.input">BaseInputGuiElement</a></h3>
-<code><a href="BaseInputGuiElement.html#isActive()">isActive</a>, <a href="BaseInputGuiElement.html#isDisabled()">isDisabled</a>, <a href="BaseInputGuiElement.html#isHovered()">isHovered</a>, <a href="BaseInputGuiElement.html#setDisabled(boolean)">setDisabled</a></code></div>
+<code><a href="BaseInputGuiElement.html#isActive()">isActive</a>, <a href="BaseInputGuiElement.html#isDisabled()">isDisabled</a>, <a href="BaseInputGuiElement.html#isFocusable()">isFocusable</a>, <a href="BaseInputGuiElement.html#isHovered()">isHovered</a>, <a href="BaseInputGuiElement.html#setDisabled(boolean)">setDisabled</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-technology.sola.engine.graphics.guiv2.GuiElement">Methods inherited from class&nbsp;technology.sola.engine.graphics.guiv2.<a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a></h3>
 <code><a href="../../GuiElement.html#events()">events</a>, <a href="../../GuiElement.html#findElementById(java.lang.String,java.lang.Class)">findElementById</a>, <a href="../../GuiElement.html#findElementsByType(java.lang.Class)">findElementsByType</a>, <a href="../../GuiElement.html#findFocussedChildIndex(java.util.List)">findFocussedChildIndex</a>, <a href="../../GuiElement.html#getAssetLoaderProvider()">getAssetLoaderProvider</a>, <a href="../../GuiElement.html#getBounds()">getBounds</a>, <a href="../../GuiElement.html#getContentBounds()">getContentBounds</a>, <a href="../../GuiElement.html#getFocusableChildren()">getFocusableChildren</a>, <a href="../../GuiElement.html#getId()">getId</a>, <a href="../../GuiElement.html#getParent()">getParent</a>, <a href="../../GuiElement.html#getStyles()">getStyles</a>, <a href="../../GuiElement.html#invalidateLayout()">invalidateLayout</a>, <a href="../../GuiElement.html#isFocussed()">isFocussed</a>, <a href="../../GuiElement.html#isLayoutChanged()">isLayoutChanged</a>, <a href="../../GuiElement.html#removeChild(technology.sola.engine.graphics.guiv2.GuiElement)">removeChild</a>, <a href="../../GuiElement.html#render(technology.sola.engine.graphics.renderer.Renderer)">render</a>, <a href="../../GuiElement.html#renderChildren(technology.sola.engine.graphics.renderer.Renderer)">renderChildren</a>, <a href="../../GuiElement.html#requestFocus()">requestFocus</a>, <a href="../../GuiElement.html#setId(java.lang.String)">setId</a>, <a href="../../GuiElement.html#setStyle(java.util.List)">setStyle</a></code></div>
@@ -177,6 +185,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>TextInputGuiElement</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">TextInputGuiElement</span>()</div>
+<div class="block">Creates an instance of TextInputGuiElement registering default event listeners for typing characters into the field.</div>
 </section>
 </li>
 </ul>
@@ -213,22 +222,17 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="isFocusable()">
-<h3>isFocusable</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isFocusable</span>()</div>
-<dl class="notes">
-<dt>Overrides:</dt>
-<dd><code><a href="BaseInputGuiElement.html#isFocusable()">isFocusable</a></code>&nbsp;in class&nbsp;<code><a href="BaseInputGuiElement.html" title="class in technology.sola.engine.graphics.guiv2.elements.input">BaseInputGuiElement</a>&lt;<a href="TextInputStyles.html" title="class in technology.sola.engine.graphics.guiv2.elements.input">TextInputStyles</a>&gt;</code></dd>
-</dl>
-</section>
-</li>
-<li>
 <section class="detail" id="appendChildren(technology.sola.engine.graphics.guiv2.GuiElement...)">
 <h3>appendChildren</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;<a href="TextInputStyles.html" title="class in technology.sola.engine.graphics.guiv2.elements.input">TextInputStyles</a>&gt;</span>&nbsp;<span class="element-name">appendChildren</span><wbr><span class="parameters">(<a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;?&gt;...&nbsp;children)</span></div>
+<div class="block">TextInputGuiElement does not render children so this method will do nothing.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="../../GuiElement.html#appendChildren(technology.sola.engine.graphics.guiv2.GuiElement...)">appendChildren</a></code>&nbsp;in class&nbsp;<code><a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;<a href="TextInputStyles.html" title="class in technology.sola.engine.graphics.guiv2.elements.input">TextInputStyles</a>&gt;</code></dd>
+<dt>Parameters:</dt>
+<dd><code>children</code> - the child elements to add</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
 </dl>
 </section>
 </li>
@@ -236,36 +240,64 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getPlaceholder()">
 <h3>getPlaceholder</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getPlaceholder</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the placeholder when no user value is entered</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setPlaceholder(java.lang.String)">
 <h3>setPlaceholder</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setPlaceholder</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;placeholder)</span></div>
+<div class="block">Sets the placeholder text for when no user value is entered.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>placeholder</code> - the new placeholder text</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getMaxLength()">
 <h3>getMaxLength</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">getMaxLength</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the maximum number of characters allowed for the input</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setMaxLength(java.lang.Integer)">
 <h3>setMaxLength</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setMaxLength</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;maxLength)</span></div>
+<div class="block">Sets the maximum number of characters allowed for the input. If the new length is smaller than the entered value
+ it will be truncated down to the new max length.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>maxLength</code> - the new max length</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getValue()">
 <h3>getValue</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getValue</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the user entered value in the input</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setValue(java.lang.String)">
 <h3>setValue</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setValue</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;value)</span></div>
+<div class="block">Programmatically sets the user entered value of the input.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>value</code> - the new value of the input</dd>
+</dl>
 </section>
 </li>
 </ul>

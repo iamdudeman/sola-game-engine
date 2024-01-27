@@ -84,6 +84,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">TextStyles</span>
 <span class="extends-implements">extends <a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a></span></div>
+<div class="block">TextStyles extends <a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style"><code>BaseStyles</code></a> properties by adding extra properties for rendering text.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -98,10 +99,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static class&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="TextStyles.Builder.html" class="type-name-link" title="class in technology.sola.engine.graphics.guiv2.elements">TextStyles.Builder</a>&lt;<a href="TextStyles.Builder.html" title="type parameter in TextStyles.Builder">Self</a> extends <a href="TextStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.elements">TextStyles.Builder</a>&lt;<a href="TextStyles.Builder.html" title="type parameter in TextStyles.Builder">Self</a>&gt;&gt;</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Builder class for <a href="TextStyles.html" title="class in technology.sola.engine.graphics.guiv2.elements"><code>TextStyles</code></a>.</div>
+</div>
 <div class="col-first odd-row-color"><code>static enum&nbsp;</code></div>
 <div class="col-second odd-row-color"><code><a href="TextStyles.TextAlignment.html" class="type-name-link" title="enum class in technology.sola.engine.graphics.guiv2.elements">TextStyles.TextAlignment</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">TextAlignment informs where text should be rendered within its available rendering space.</div>
+</div>
 </div>
 </section>
 </li>
@@ -110,11 +115,15 @@ loadScripts(document, 'script');</script>
 <section class="constructor-summary" id="constructor-summary">
 <h2>Constructor Summary</h2>
 <div class="caption"><span>Constructors</span></div>
-<div class="summary-table two-column-summary">
-<div class="table-header col-first">Constructor</div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier</div>
+<div class="table-header col-second">Constructor</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>protected </code></div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.guiv2.elements.TextStyles.Builder)" class="member-name-link">TextStyles</a><wbr>(<a href="TextStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.elements">TextStyles.Builder</a>&lt;?&gt;&nbsp;builder)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Populates <a href="TextStyles.html" title="class in technology.sola.engine.graphics.guiv2.elements"><code>TextStyles</code></a> properties from its <a href="TextStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.elements"><code>TextStyles.Builder</code></a>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -131,7 +140,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="TextStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.elements">TextStyles.Builder</a>&lt;?&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#create()" class="member-name-link">create</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Convenience method for creating a new <a href="TextStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.elements"><code>TextStyles.Builder</code></a>.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#fontAssetId()" class="member-name-link">fontAssetId</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -164,7 +175,12 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(technology.sola.engine.graphics.guiv2.elements.TextStyles.Builder)">
 <h3>TextStyles</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">TextStyles</span><wbr><span class="parameters">(<a href="TextStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.elements">TextStyles.Builder</a>&lt;?&gt;&nbsp;builder)</span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">TextStyles</span><wbr><span class="parameters">(<a href="TextStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.elements">TextStyles.Builder</a>&lt;?&gt;&nbsp;builder)</span></div>
+<div class="block">Populates <a href="TextStyles.html" title="class in technology.sola.engine.graphics.guiv2.elements"><code>TextStyles</code></a> properties from its <a href="TextStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.elements"><code>TextStyles.Builder</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>builder</code> - the builder to build styles from</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -179,24 +195,41 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="create()">
 <h3>create</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="TextStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.elements">TextStyles.Builder</a>&lt;?&gt;</span>&nbsp;<span class="element-name">create</span>()</div>
+<div class="block">Convenience method for creating a new <a href="TextStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.elements"><code>TextStyles.Builder</code></a>.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>a new builder instance</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="textColor()">
 <h3>textColor</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">textColor</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the <a href="../../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the text to be rendered</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getTextAlignment()">
 <h3>getTextAlignment</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="TextStyles.TextAlignment.html" title="enum class in technology.sola.engine.graphics.guiv2.elements">TextStyles.TextAlignment</a></span>&nbsp;<span class="element-name">getTextAlignment</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the <a href="TextStyles.TextAlignment.html" title="enum class in technology.sola.engine.graphics.guiv2.elements"><code>TextStyles.TextAlignment</code></a> of the text</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="fontAssetId()">
 <h3>fontAssetId</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">fontAssetId</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the id of the <a href="../../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a> asset used for rendering</dd>
+</dl>
 </section>
 </li>
 </ul>

@@ -80,6 +80,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ImageGuiElement</span>
 <span class="extends-implements">extends <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;<a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;</span></div>
+<div class="block">ImageGuiElement is a <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2"><code>GuiElement</code></a> that renders a <a href="../../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> in a GUI. It does not render child elements.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -118,7 +119,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;<a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#appendChildren(technology.sola.engine.graphics.guiv2.GuiElement...)" class="member-name-link">appendChildren</a><wbr>(<a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;?&gt;...&nbsp;children)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">ImageGuiElement does not render children so this method will do nothing.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../GuiElementDimensions.html" title="class in technology.sola.engine.graphics.guiv2">GuiElementDimensions</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculateContentDimensions()" class="member-name-link">calculateContentDimensions</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -129,13 +132,17 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isFocusable()" class="member-name-link">isFocusable</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">ImageGuiElement is not focusable so this will return false.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#renderContent(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">renderContent</a><wbr>(<a href="../../renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setAssetId(java.lang.String)" class="member-name-link">setAssetId</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;assetId)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the id of the <a href="../../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> asset to be rendered.</div>
+</div>
 </div>
 </div>
 </div>
@@ -199,9 +206,12 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="isFocusable()">
 <h3>isFocusable</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isFocusable</span>()</div>
+<div class="block">ImageGuiElement is not focusable so this will return false.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="../GuiElement.html#isFocusable()">isFocusable</a></code>&nbsp;in class&nbsp;<code><a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;<a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;</code></dd>
+<dt>Returns:</dt>
+<dd>false</dd>
 </dl>
 </section>
 </li>
@@ -209,9 +219,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="appendChildren(technology.sola.engine.graphics.guiv2.GuiElement...)">
 <h3>appendChildren</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;<a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;</span>&nbsp;<span class="element-name">appendChildren</span><wbr><span class="parameters">(<a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;?&gt;...&nbsp;children)</span></div>
+<div class="block">ImageGuiElement does not render children so this method will do nothing.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="../GuiElement.html#appendChildren(technology.sola.engine.graphics.guiv2.GuiElement...)">appendChildren</a></code>&nbsp;in class&nbsp;<code><a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;<a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;</code></dd>
+<dt>Parameters:</dt>
+<dd><code>children</code> - the child elements to add</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
 </dl>
 </section>
 </li>
@@ -219,12 +234,21 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getAssetId()">
 <h3>getAssetId</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getAssetId</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the id of the <a href="../../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> asset to be rendered</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setAssetId(java.lang.String)">
 <h3>setAssetId</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setAssetId</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;assetId)</span></div>
+<div class="block">Sets the id of the <a href="../../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> asset to be rendered.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>assetId</code> - the new asset id of the image</dd>
+</dl>
 </section>
 </li>
 </ul>

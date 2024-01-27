@@ -82,6 +82,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ButtonGuiElement</span>
 <span class="extends-implements">extends <a href="BaseInputGuiElement.html" title="class in technology.sola.engine.graphics.guiv2.elements.input">BaseInputGuiElement</a>&lt;<a href="../../style/BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;</span></div>
+<div class="block">ButtonGuiElement is a <a href="BaseInputGuiElement.html" title="class in technology.sola.engine.graphics.guiv2.elements.input"><code>BaseInputGuiElement</code></a> that allows users to interact via clicking the button or using
+ keyboard shortcuts.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -103,7 +105,10 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">ButtonGuiElement</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a ButtonGuiElement and adds default event listeners for handling disabled states and when the <a href="../../../../input/Key.html#SPACE"><code>Key.SPACE</code></a>
+ key is pressed.</div>
+</div>
 </div>
 </section>
 </li>
@@ -128,7 +133,9 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOnAction(java.lang.Runnable)" class="member-name-link">setOnAction</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;onAction)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the action that fires when the button is interacted with.</div>
+</div>
 </div>
 </div>
 </div>
@@ -156,6 +163,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>ButtonGuiElement</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ButtonGuiElement</span>()</div>
+<div class="block">Creates a ButtonGuiElement and adds default event listeners for handling disabled states and when the <a href="../../../../input/Key.html#SPACE"><code>Key.SPACE</code></a>
+ key is pressed.</div>
 </section>
 </li>
 </ul>
@@ -195,6 +204,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="setOnAction(java.lang.Runnable)">
 <h3>setOnAction</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setOnAction</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;onAction)</span></div>
+<div class="block">Sets the action that fires when the button is interacted with.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>onAction</code> - the action to execute on button interaction</dd>
+</dl>
 </section>
 </li>
 </ul>

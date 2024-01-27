@@ -82,6 +82,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">BaseStyles</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">BaseStyles contains properties that are common to all <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2"><code>GuiElement</code></a> to use
+ as part of rendering.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -96,7 +98,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static class&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="BaseStyles.Builder.html" class="type-name-link" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles.Builder</a>&lt;<a href="BaseStyles.Builder.html" title="type parameter in BaseStyles.Builder">Self</a> extends <a href="BaseStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles.Builder</a>&lt;<a href="BaseStyles.Builder.html" title="type parameter in BaseStyles.Builder">Self</a>&gt;&gt;</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Builder class for <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style"><code>BaseStyles</code></a>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -105,11 +109,15 @@ loadScripts(document, 'script');</script>
 <section class="constructor-summary" id="constructor-summary">
 <h2>Constructor Summary</h2>
 <div class="caption"><span>Constructors</span></div>
-<div class="summary-table two-column-summary">
-<div class="table-header col-first">Constructor</div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier</div>
+<div class="table-header col-second">Constructor</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>protected </code></div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.guiv2.style.BaseStyles.Builder)" class="member-name-link">BaseStyles</a><wbr>(<a href="BaseStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles.Builder</a>&lt;?&gt;&nbsp;builder)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Populates <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style"><code>BaseStyles</code></a> properties its <a href="BaseStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.style"><code>BaseStyles.Builder</code></a>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -132,7 +140,9 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="BaseStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles.Builder</a>&lt;?&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#create()" class="member-name-link">create</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Convenience method for creating a new <a href="BaseStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.style"><code>BaseStyles.Builder</code></a>.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="property/CrossAxisChildren.html" title="enum class in technology.sola.engine.graphics.guiv2.style.property">CrossAxisChildren</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#crossAxisChildren()" class="member-name-link">crossAxisChildren</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -180,7 +190,12 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(technology.sola.engine.graphics.guiv2.style.BaseStyles.Builder)">
 <h3>BaseStyles</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">BaseStyles</span><wbr><span class="parameters">(<a href="BaseStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles.Builder</a>&lt;?&gt;&nbsp;builder)</span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">BaseStyles</span><wbr><span class="parameters">(<a href="BaseStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles.Builder</a>&lt;?&gt;&nbsp;builder)</span></div>
+<div class="block">Populates <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style"><code>BaseStyles</code></a> properties its <a href="BaseStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.style"><code>BaseStyles.Builder</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>builder</code> - the builder to build styles from</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -195,6 +210,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="create()">
 <h3>create</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="BaseStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles.Builder</a>&lt;?&gt;</span>&nbsp;<span class="element-name">create</span>()</div>
+<div class="block">Convenience method for creating a new <a href="BaseStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.style"><code>BaseStyles.Builder</code></a>.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>a new builder instance</dd>
+</dl>
 </section>
 </li>
 <li>

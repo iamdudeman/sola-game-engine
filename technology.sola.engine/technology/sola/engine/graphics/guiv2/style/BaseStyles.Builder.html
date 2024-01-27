@@ -76,6 +76,10 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>Self</code> - this builder type</dd>
+</dl>
+<dl class="notes">
 <dt>Direct Known Subclasses:</dt>
 <dd><code><a href="../elements/TextStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.elements">TextStyles.Builder</a></code></dd>
 </dl>
@@ -86,6 +90,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public static class </span><span class="element-name type-name-label">BaseStyles.Builder&lt;Self extends BaseStyles.Builder&lt;Self&gt;&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Builder class for <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style"><code>BaseStyles</code></a>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -94,11 +99,9 @@ loadScripts(document, 'script');</script>
 <section class="constructor-summary" id="constructor-summary">
 <h2>Constructor Summary</h2>
 <div class="caption"><span>Constructors</span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">Modifier</div>
-<div class="table-header col-second">Constructor</div>
+<div class="summary-table two-column-summary">
+<div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>protected </code></div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">Builder</a>()</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
@@ -174,7 +177,9 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="BaseStyles.Builder.html" title="type parameter in BaseStyles.Builder">Self</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setVisibility(technology.sola.engine.graphics.guiv2.style.property.Visibility)" class="member-name-link">setVisibility</a><wbr>(<a href="property/Visibility.html" title="enum class in technology.sola.engine.graphics.guiv2.style.property">Visibility</a>&nbsp;visibility)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the <code>BaseStyles.visibility</code>.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="BaseStyles.Builder.html" title="type parameter in BaseStyles.Builder">Self</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setWidth(java.lang.String)" class="member-name-link">setWidth</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;width)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -198,7 +203,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;()">
 <h3>Builder</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">Builder</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Builder</span>()</div>
 </section>
 </li>
 </ul>
@@ -243,6 +248,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="setVisibility(technology.sola.engine.graphics.guiv2.style.property.Visibility)">
 <h3>setVisibility</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="BaseStyles.Builder.html" title="type parameter in BaseStyles.Builder">Self</a></span>&nbsp;<span class="element-name">setVisibility</span><wbr><span class="parameters">(<a href="property/Visibility.html" title="enum class in technology.sola.engine.graphics.guiv2.style.property">Visibility</a>&nbsp;visibility)</span></div>
+<div class="block">Sets the <code>BaseStyles.visibility</code>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>visibility</code> - the <a href="property/Visibility.html" title="enum class in technology.sola.engine.graphics.guiv2.style.property"><code>Visibility</code></a> of the element</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>

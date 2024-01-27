@@ -44,13 +44,13 @@ loadScripts(document, 'script');</script>
 <ul class="sub-nav-list">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li><a href="#field-summary">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor-summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-summary">Method</a></li>
 </ul>
 <ul class="sub-nav-list">
 <li>Detail:&nbsp;</li>
-<li><a href="#field-detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor-detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-detail">Method</a></li>
 </ul>
@@ -77,39 +77,20 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>Style</code> - the style type</dd>
+<dt>Record Components:</dt>
+<dd><code><span id="param-condition">condition</span></code> - the condition for when the style should be applied</dd>
+<dd><code><span id="param-style">style</span></code> - the style instance</dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">ConditionalStyle&lt;Style extends <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;</span>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;<a href="ConditionalStyle.html" title="type parameter in ConditionalStyle">Style</a> extends <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;&nbsp;condition, <a href="ConditionalStyle.html" title="type parameter in ConditionalStyle">Style</a> extends <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&nbsp;style)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
+<div class="block">ConditionalStyle holds a <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style"><code>BaseStyles</code></a> instance and a condition for when it should be applied.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
-<!-- =========== FIELD SUMMARY =========== -->
-<li>
-<section class="field-summary" id="field-summary">
-<h2>Field Summary</h2>
-<div class="caption"><span>Fields</span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">Modifier and Type</div>
-<div class="table-header col-second">Field</div>
-<div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;?&gt;,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</code></div>
-<div class="col-second even-row-color"><code><a href="#ACTIVE" class="member-name-link">ACTIVE</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;?&gt;,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</code></div>
-<div class="col-second odd-row-color"><code><a href="#ALWAYS" class="member-name-link">ALWAYS</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;?&gt;,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</code></div>
-<div class="col-second even-row-color"><code><a href="#DISABLED" class="member-name-link">DISABLED</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;?&gt;,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</code></div>
-<div class="col-second odd-row-color"><code><a href="#FOCUS" class="member-name-link">FOCUS</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;?&gt;,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</code></div>
-<div class="col-second even-row-color"><code><a href="#HOVER" class="member-name-link">HOVER</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-</div>
-</section>
-</li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <li>
 <section class="constructor-summary" id="constructor-summary">
@@ -139,18 +120,24 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;Style extends <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;<br><a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.guiv2.style">ConditionalStyle</a>&lt;Style&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#active(Style)" class="member-name-link">active</a><wbr>(Style&nbsp;style)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Creates a ConditionalStyle instance for a style that will be applied when the <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2"><code>GuiElement</code></a> is active.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;Style extends <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;<br><a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.guiv2.style">ConditionalStyle</a>&lt;Style&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#always(Style)" class="member-name-link">always</a><wbr>(Style&nbsp;style)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Creates a ConditionalStyle instance for a style that will always be applied.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;<a href="ConditionalStyle.html" title="type parameter in ConditionalStyle">Style</a>&gt;,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#condition()" class="member-name-link">condition</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>condition</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-condition"><code>condition</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;Style extends <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;<br><a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.guiv2.style">ConditionalStyle</a>&lt;Style&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#disabled(Style)" class="member-name-link">disabled</a><wbr>(Style&nbsp;style)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Creates a ConditionalStyle instance for a style that will be applied when the <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2"><code>GuiElement</code></a> is disabled.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -158,7 +145,9 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;Style extends <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;<br><a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.guiv2.style">ConditionalStyle</a>&lt;Style&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#focus(Style)" class="member-name-link">focus</a><wbr>(Style&nbsp;style)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Creates a ConditionalStyle instance for a style that will be applied when the <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2"><code>GuiElement</code></a> is focussed.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -166,11 +155,13 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;Style extends <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;<br><a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.guiv2.style">ConditionalStyle</a>&lt;Style&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#hover(Style)" class="member-name-link">hover</a><wbr>(Style&nbsp;style)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Creates a ConditionalStyle instance for a style that will be applied when the <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2"><code>GuiElement</code></a> is hovered.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ConditionalStyle.html" title="type parameter in ConditionalStyle">Style</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#style()" class="member-name-link">style</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>style</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-style"><code>style</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -189,44 +180,6 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="details">
 <ul class="details-list">
-<!-- ============ FIELD DETAIL =========== -->
-<li>
-<section class="field-details" id="field-detail">
-<h2>Field Details</h2>
-<ul class="member-list">
-<li>
-<section class="detail" id="ALWAYS">
-<h3>ALWAYS</h3>
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;?&gt;,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</span>&nbsp;<span class="element-name">ALWAYS</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="ACTIVE">
-<h3>ACTIVE</h3>
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;?&gt;,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</span>&nbsp;<span class="element-name">ACTIVE</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="HOVER">
-<h3>HOVER</h3>
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;?&gt;,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</span>&nbsp;<span class="element-name">HOVER</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="FOCUS">
-<h3>FOCUS</h3>
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;?&gt;,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</span>&nbsp;<span class="element-name">FOCUS</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="DISABLED">
-<h3>DISABLED</h3>
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;?&gt;,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</span>&nbsp;<span class="element-name">DISABLED</span></div>
-</section>
-</li>
-</ul>
-</section>
-</li>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <li>
 <section class="constructor-details" id="constructor-detail">
@@ -240,8 +193,8 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates an instance of a <code>ConditionalStyle</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>condition</code> - the value for the <code>condition</code> record component</dd>
-<dd><code>style</code> - the value for the <code>style</code> record component</dd>
+<dd><code>condition</code> - the value for the <a href="#param-condition"><code>condition</code></a> record component</dd>
+<dd><code>style</code> - the value for the <a href="#param-style"><code>style</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -258,6 +211,15 @@ loadScripts(document, 'script');</script>
 <h3 id="always(technology.sola.engine.graphics.guiv2.style.BaseStyles)">always</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;Style extends <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;</span>
 <span class="return-type"><a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.guiv2.style">ConditionalStyle</a>&lt;Style&gt;</span>&nbsp;<span class="element-name">always</span><wbr><span class="parameters">(Style&nbsp;style)</span></div>
+<div class="block">Creates a ConditionalStyle instance for a style that will always be applied.</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>Style</code> - the style type</dd>
+<dt>Parameters:</dt>
+<dd><code>style</code> - the style to apply</dd>
+<dt>Returns:</dt>
+<dd>a ConditionalStyle instance</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -265,6 +227,15 @@ loadScripts(document, 'script');</script>
 <h3 id="active(technology.sola.engine.graphics.guiv2.style.BaseStyles)">active</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;Style extends <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;</span>
 <span class="return-type"><a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.guiv2.style">ConditionalStyle</a>&lt;Style&gt;</span>&nbsp;<span class="element-name">active</span><wbr><span class="parameters">(Style&nbsp;style)</span></div>
+<div class="block">Creates a ConditionalStyle instance for a style that will be applied when the <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2"><code>GuiElement</code></a> is active.</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>Style</code> - the style type</dd>
+<dt>Parameters:</dt>
+<dd><code>style</code> - the style to apply</dd>
+<dt>Returns:</dt>
+<dd>a ConditionalStyle instance</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -272,6 +243,15 @@ loadScripts(document, 'script');</script>
 <h3 id="hover(technology.sola.engine.graphics.guiv2.style.BaseStyles)">hover</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;Style extends <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;</span>
 <span class="return-type"><a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.guiv2.style">ConditionalStyle</a>&lt;Style&gt;</span>&nbsp;<span class="element-name">hover</span><wbr><span class="parameters">(Style&nbsp;style)</span></div>
+<div class="block">Creates a ConditionalStyle instance for a style that will be applied when the <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2"><code>GuiElement</code></a> is hovered.</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>Style</code> - the style type</dd>
+<dt>Parameters:</dt>
+<dd><code>style</code> - the style to apply</dd>
+<dt>Returns:</dt>
+<dd>a ConditionalStyle instance</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -279,6 +259,15 @@ loadScripts(document, 'script');</script>
 <h3 id="focus(technology.sola.engine.graphics.guiv2.style.BaseStyles)">focus</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;Style extends <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;</span>
 <span class="return-type"><a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.guiv2.style">ConditionalStyle</a>&lt;Style&gt;</span>&nbsp;<span class="element-name">focus</span><wbr><span class="parameters">(Style&nbsp;style)</span></div>
+<div class="block">Creates a ConditionalStyle instance for a style that will be applied when the <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2"><code>GuiElement</code></a> is focussed.</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>Style</code> - the style type</dd>
+<dt>Parameters:</dt>
+<dd><code>style</code> - the style to apply</dd>
+<dt>Returns:</dt>
+<dd>a ConditionalStyle instance</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -286,6 +275,16 @@ loadScripts(document, 'script');</script>
 <h3 id="disabled(technology.sola.engine.graphics.guiv2.style.BaseStyles)">disabled</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;Style extends <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles</a>&gt;</span>
 <span class="return-type"><a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.guiv2.style">ConditionalStyle</a>&lt;Style&gt;</span>&nbsp;<span class="element-name">disabled</span><wbr><span class="parameters">(Style&nbsp;style)</span></div>
+<div class="block">Creates a ConditionalStyle instance for a style that will be applied when the <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2"><code>GuiElement</code></a> is disabled. This
+ can only apply to elements that extend <a href="../elements/input/BaseInputGuiElement.html" title="class in technology.sola.engine.graphics.guiv2.elements.input"><code>BaseInputGuiElement</code></a>.</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>Style</code> - the style type</dd>
+<dt>Parameters:</dt>
+<dd><code>style</code> - the style to apply</dd>
+<dt>Returns:</dt>
+<dd>a ConditionalStyle instance</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -333,10 +332,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="condition()">
 <h3>condition</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2">GuiElement</a>&lt;<a href="ConditionalStyle.html" title="type parameter in ConditionalStyle">Style</a>&gt;,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</span>&nbsp;<span class="element-name">condition</span>()</div>
-<div class="block">Returns the value of the <code>condition</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-condition"><code>condition</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>condition</code> record component</dd>
+<dd>the value of the <a href="#param-condition"><code>condition</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -344,10 +343,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="style()">
 <h3>style</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ConditionalStyle.html" title="type parameter in ConditionalStyle">Style</a></span>&nbsp;<span class="element-name">style</span>()</div>
-<div class="block">Returns the value of the <code>style</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-style"><code>style</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>style</code> record component</dd>
+<dd>the value of the <a href="#param-style"><code>style</code></a> record component</dd>
 </dl>
 </section>
 </li>

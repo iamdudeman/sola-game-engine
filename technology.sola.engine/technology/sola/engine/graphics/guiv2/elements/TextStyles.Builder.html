@@ -78,6 +78,10 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>Self</code> - this builder type</dd>
+</dl>
+<dl class="notes">
 <dt>Direct Known Subclasses:</dt>
 <dd><code><a href="input/TextInputStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.elements.input">TextInputStyles.Builder</a></code></dd>
 </dl>
@@ -88,6 +92,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public static class </span><span class="element-name type-name-label">TextStyles.Builder&lt;Self extends TextStyles.Builder&lt;Self&gt;&gt;</span>
 <span class="extends-implements">extends <a href="../style/BaseStyles.Builder.html" title="class in technology.sola.engine.graphics.guiv2.style">BaseStyles.Builder</a>&lt;Self&gt;</span></div>
+<div class="block">Builder class for <a href="TextStyles.html" title="class in technology.sola.engine.graphics.guiv2.elements"><code>TextStyles</code></a>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -96,11 +101,9 @@ loadScripts(document, 'script');</script>
 <section class="constructor-summary" id="constructor-summary">
 <h2>Constructor Summary</h2>
 <div class="caption"><span>Constructors</span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">Modifier</div>
-<div class="table-header col-second">Constructor</div>
+<div class="summary-table two-column-summary">
+<div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>protected </code></div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">Builder</a>()</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
@@ -122,13 +125,19 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="TextStyles.Builder.html" title="type parameter in TextStyles.Builder">Self</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setFontAssetId(java.lang.String)" class="member-name-link">setFontAssetId</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fontAssetId)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the <code>TextStyles.fontAssetId</code>.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="TextStyles.Builder.html" title="type parameter in TextStyles.Builder">Self</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTextAlignment(technology.sola.engine.graphics.guiv2.elements.TextStyles.TextAlignment)" class="member-name-link">setTextAlignment</a><wbr>(<a href="TextStyles.TextAlignment.html" title="enum class in technology.sola.engine.graphics.guiv2.elements">TextStyles.TextAlignment</a>&nbsp;textAlignment)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the <code>TextStyles.textAlignment</code>.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="TextStyles.Builder.html" title="type parameter in TextStyles.Builder">Self</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTextColor(technology.sola.engine.graphics.Color)" class="member-name-link">setTextColor</a><wbr>(<a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;textColor)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the <code>TextStyles.textColor</code>.</div>
+</div>
 </div>
 </div>
 </div>
@@ -152,7 +161,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;()">
 <h3>Builder</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">Builder</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Builder</span>()</div>
 </section>
 </li>
 </ul>
@@ -177,18 +186,39 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="setTextColor(technology.sola.engine.graphics.Color)">
 <h3>setTextColor</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="TextStyles.Builder.html" title="type parameter in TextStyles.Builder">Self</a></span>&nbsp;<span class="element-name">setTextColor</span><wbr><span class="parameters">(<a href="../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;textColor)</span></div>
+<div class="block">Sets the <code>TextStyles.textColor</code>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>textColor</code> - the <a href="../../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the text</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setTextAlignment(technology.sola.engine.graphics.guiv2.elements.TextStyles.TextAlignment)">
 <h3>setTextAlignment</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="TextStyles.Builder.html" title="type parameter in TextStyles.Builder">Self</a></span>&nbsp;<span class="element-name">setTextAlignment</span><wbr><span class="parameters">(<a href="TextStyles.TextAlignment.html" title="enum class in technology.sola.engine.graphics.guiv2.elements">TextStyles.TextAlignment</a>&nbsp;textAlignment)</span></div>
+<div class="block">Sets the <code>TextStyles.textAlignment</code>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>textAlignment</code> - the <a href="TextStyles.TextAlignment.html" title="enum class in technology.sola.engine.graphics.guiv2.elements"><code>TextStyles.TextAlignment</code></a> of the text</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setFontAssetId(java.lang.String)">
 <h3>setFontAssetId</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="TextStyles.Builder.html" title="type parameter in TextStyles.Builder">Self</a></span>&nbsp;<span class="element-name">setFontAssetId</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fontAssetId)</span></div>
+<div class="block">Sets the <code>TextStyles.fontAssetId</code>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>fontAssetId</code> - the id of the <a href="../../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a> asset</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 </ul>

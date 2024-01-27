@@ -78,6 +78,13 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
+<dt>Record Components:</dt>
+<dd><code><span id="param-top">top</span></code> - the top padding for the element</dd>
+<dd><code><span id="param-left">left</span></code> - the left padding for the element</dd>
+<dd><code><span id="param-bottom">bottom</span></code> - the bottom padding for the element</dd>
+<dd><code><span id="param-right">right</span></code> - the right padding for the element</dd>
+</dl>
+<dl class="notes">
 <dt>All Implemented Interfaces:</dt>
 <dd><code><a href="MergeableProperty.html" title="interface in technology.sola.engine.graphics.guiv2.style.property">MergeableProperty</a>&lt;<a href="Padding.html" title="class in technology.sola.engine.graphics.guiv2.style.property">Padding</a>&gt;</code></dd>
 </dl>
@@ -85,6 +92,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">Padding</span>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;top, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;right, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;bottom, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;left)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a>
 implements <a href="MergeableProperty.html" title="interface in technology.sola.engine.graphics.guiv2.style.property">MergeableProperty</a>&lt;<a href="Padding.html" title="class in technology.sola.engine.graphics.guiv2.style.property">Padding</a>&gt;</span></div>
+<div class="block">Padding contains the properties for a <a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.guiv2"><code>GuiElement</code></a>'s padding.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -99,7 +107,9 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static final <a href="Padding.html" title="class in technology.sola.engine.graphics.guiv2.style.property">Padding</a></code></div>
 <div class="col-second even-row-color"><code><a href="#NONE" class="member-name-link">NONE</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Padding with all values set to 0.</div>
+</div>
 </div>
 </section>
 </li>
@@ -112,16 +122,24 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">Padding</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a new Padding instance with no values set.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.Integer)" class="member-name-link">Padding</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;size)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Creates a new Padding instance with all values set to the same.</div>
+</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.Integer,java.lang.Integer)" class="member-name-link">Padding</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;topAndBottom,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;leftAndRight)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a new Padding instance with vertical and horizontal values set.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.Integer,java.lang.Integer,java.lang.Integer)" class="member-name-link">Padding</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;top,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;leftAndRight,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;bottom)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Creates a new Padding instance with top, horizontal, and bottom values set.</div>
+</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.Integer,java.lang.Integer,java.lang.Integer,java.lang.Integer)" class="member-name-link">Padding</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;top,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;right,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;bottom,
@@ -146,7 +164,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#bottom()" class="member-name-link">bottom</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>bottom</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-bottom"><code>bottom</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
@@ -161,20 +179,22 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#left()" class="member-name-link">left</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>left</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-left"><code>left</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Padding.html" title="class in technology.sola.engine.graphics.guiv2.style.property">Padding</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mergeWith(technology.sola.engine.graphics.guiv2.style.property.Padding)" class="member-name-link">mergeWith</a><wbr>(<a href="Padding.html" title="class in technology.sola.engine.graphics.guiv2.style.property">Padding</a>&nbsp;otherProperty)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns a new instance of the property with the resulting values being a merge of the right on top of the left.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#right()" class="member-name-link">right</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>right</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-right"><code>right</code></a> record component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#top()" class="member-name-link">top</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>top</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-top"><code>top</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -202,6 +222,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <section class="detail" id="NONE">
 <h3>NONE</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="Padding.html" title="class in technology.sola.engine.graphics.guiv2.style.property">Padding</a></span>&nbsp;<span class="element-name">NONE</span></div>
+<div class="block">Padding with all values set to 0.</div>
 </section>
 </li>
 </ul>
@@ -216,6 +237,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <section class="detail" id="&lt;init&gt;()">
 <h3>Padding</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Padding</span>()</div>
+<div class="block">Creates a new Padding instance with no values set.</div>
 </section>
 </li>
 <li>
@@ -224,6 +246,13 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Padding</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;top,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;leftAndRight,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;bottom)</span></div>
+<div class="block">Creates a new Padding instance with top, horizontal, and bottom values set.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>top</code> - the top padding for the element</dd>
+<dd><code>leftAndRight</code> - the left and right padding for the element</dd>
+<dd><code>bottom</code> - the bottom padding for the element</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -231,12 +260,23 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <h3>Padding</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Padding</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;topAndBottom,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;leftAndRight)</span></div>
+<div class="block">Creates a new Padding instance with vertical and horizontal values set.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>topAndBottom</code> - the top and bottom padding for the element</dd>
+<dd><code>leftAndRight</code> - the left and right padding for the element</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(java.lang.Integer)">
 <h3>Padding</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Padding</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;size)</span></div>
+<div class="block">Creates a new Padding instance with all values set to the same.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>size</code> - the value for each side of the padding</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -249,10 +289,10 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <div class="block">Creates an instance of a <code>Padding</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>top</code> - the value for the <code>top</code> record component</dd>
-<dd><code>right</code> - the value for the <code>right</code> record component</dd>
-<dd><code>bottom</code> - the value for the <code>bottom</code> record component</dd>
-<dd><code>left</code> - the value for the <code>left</code> record component</dd>
+<dd><code>top</code> - the value for the <a href="#param-top"><code>top</code></a> record component</dd>
+<dd><code>right</code> - the value for the <a href="#param-right"><code>right</code></a> record component</dd>
+<dd><code>bottom</code> - the value for the <a href="#param-bottom"><code>bottom</code></a> record component</dd>
+<dd><code>left</code> - the value for the <a href="#param-left"><code>left</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -268,9 +308,15 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <section class="detail" id="mergeWith(technology.sola.engine.graphics.guiv2.style.property.Padding)">
 <h3>mergeWith</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Padding.html" title="class in technology.sola.engine.graphics.guiv2.style.property">Padding</a></span>&nbsp;<span class="element-name">mergeWith</span><wbr><span class="parameters">(<a href="Padding.html" title="class in technology.sola.engine.graphics.guiv2.style.property">Padding</a>&nbsp;otherProperty)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="MergeableProperty.html#mergeWith(P)">MergeableProperty</a></code></span></div>
+<div class="block">Returns a new instance of the property with the resulting values being a merge of the right on top of the left.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="MergeableProperty.html#mergeWith(P)">mergeWith</a></code>&nbsp;in interface&nbsp;<code><a href="MergeableProperty.html" title="interface in technology.sola.engine.graphics.guiv2.style.property">MergeableProperty</a>&lt;<a href="Padding.html" title="class in technology.sola.engine.graphics.guiv2.style.property">Padding</a>&gt;</code></dd>
+<dt>Parameters:</dt>
+<dd><code>otherProperty</code> - the other property object to merge values on top of this one</dd>
+<dt>Returns:</dt>
+<dd>a new instance with the merged properties</dd>
 </dl>
 </section>
 </li>
@@ -319,10 +365,10 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <section class="detail" id="top()">
 <h3>top</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">top</span>()</div>
-<div class="block">Returns the value of the <code>top</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-top"><code>top</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>top</code> record component</dd>
+<dd>the value of the <a href="#param-top"><code>top</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -330,10 +376,10 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <section class="detail" id="right()">
 <h3>right</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">right</span>()</div>
-<div class="block">Returns the value of the <code>right</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-right"><code>right</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>right</code> record component</dd>
+<dd>the value of the <a href="#param-right"><code>right</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -341,10 +387,10 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <section class="detail" id="bottom()">
 <h3>bottom</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">bottom</span>()</div>
-<div class="block">Returns the value of the <code>bottom</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-bottom"><code>bottom</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>bottom</code> record component</dd>
+<dd>the value of the <a href="#param-bottom"><code>bottom</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -352,10 +398,10 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <section class="detail" id="left()">
 <h3>left</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">left</span>()</div>
-<div class="block">Returns the value of the <code>left</code> record component.</div>
+<div class="block">Returns the value of the <a href="#param-left"><code>left</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <code>left</code> record component</dd>
+<dd>the value of the <a href="#param-left"><code>left</code></a> record component</dd>
 </dl>
 </section>
 </li>

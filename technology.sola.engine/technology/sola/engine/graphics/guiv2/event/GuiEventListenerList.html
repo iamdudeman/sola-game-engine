@@ -75,9 +75,14 @@ loadScripts(document, 'script');</script>
 <div class="inheritance">technology.sola.engine.graphics.guiv2.event.GuiEventListenerList&lt;E&gt;</div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>E</code> - the GuiEvent type</dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">GuiEventListenerList&lt;E extends <a href="GuiEvent.html" title="class in technology.sola.engine.graphics.guiv2.event">GuiEvent</a>&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">GuiEventListenerList is a data structure that holds <a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.guiv2.event"><code>GuiEventListener</code></a>s for a particular kind of <a href="GuiEvent.html" title="class in technology.sola.engine.graphics.guiv2.event"><code>GuiEvent</code></a>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -107,16 +112,24 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#emit(E)" class="member-name-link">emit</a><wbr>(<a href="GuiEventListenerList.html" title="type parameter in GuiEventListenerList">E</a>&nbsp;event)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Emits a <a href="GuiEvent.html" title="class in technology.sola.engine.graphics.guiv2.event"><code>GuiEvent</code></a> that all registered <a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.guiv2.event"><code>GuiEventListener</code></a>s with respond to.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#off()" class="member-name-link">off</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Removes all <a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.guiv2.event"><code>GuiEventListener</code></a>s that have been added.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GuiEventSubscription.html" title="interface in technology.sola.engine.graphics.guiv2.event">GuiEventSubscription</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#on(technology.sola.engine.graphics.guiv2.event.GuiEventListener)" class="member-name-link">on</a><wbr>(<a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.guiv2.event">GuiEventListener</a>&lt;<a href="GuiEventListenerList.html" title="type parameter in GuiEventListenerList">E</a>&gt;&nbsp;eventListener)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Add a <a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.guiv2.event"><code>GuiEventListener</code></a> that fires every time a <a href="GuiEvent.html" title="class in technology.sola.engine.graphics.guiv2.event"><code>GuiEvent</code></a> is <a href="#emit(E)"><code>emit(GuiEvent)</code></a>.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GuiEventSubscription.html" title="interface in technology.sola.engine.graphics.guiv2.event">GuiEventSubscription</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#once(technology.sola.engine.graphics.guiv2.event.GuiEventListener)" class="member-name-link">once</a><wbr>(<a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.guiv2.event">GuiEventListener</a>&lt;<a href="GuiEventListenerList.html" title="type parameter in GuiEventListenerList">E</a>&gt;&nbsp;eventListener)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Add a <a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.guiv2.event"><code>GuiEventListener</code></a> that fires one time a <a href="GuiEvent.html" title="class in technology.sola.engine.graphics.guiv2.event"><code>GuiEvent</code></a> is <a href="#emit(E)"><code>emit(GuiEvent)</code></a>.</div>
+</div>
 </div>
 </div>
 </div>
@@ -152,24 +165,44 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="on(technology.sola.engine.graphics.guiv2.event.GuiEventListener)">
 <h3>on</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="GuiEventSubscription.html" title="interface in technology.sola.engine.graphics.guiv2.event">GuiEventSubscription</a></span>&nbsp;<span class="element-name">on</span><wbr><span class="parameters">(<a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.guiv2.event">GuiEventListener</a>&lt;<a href="GuiEventListenerList.html" title="type parameter in GuiEventListenerList">E</a>&gt;&nbsp;eventListener)</span></div>
+<div class="block">Add a <a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.guiv2.event"><code>GuiEventListener</code></a> that fires every time a <a href="GuiEvent.html" title="class in technology.sola.engine.graphics.guiv2.event"><code>GuiEvent</code></a> is <a href="#emit(E)"><code>emit(GuiEvent)</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>eventListener</code> - the listener to add</dd>
+<dt>Returns:</dt>
+<dd>a <a href="GuiEventSubscription.html" title="interface in technology.sola.engine.graphics.guiv2.event"><code>GuiEventSubscription</code></a> handle</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="once(technology.sola.engine.graphics.guiv2.event.GuiEventListener)">
 <h3>once</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="GuiEventSubscription.html" title="interface in technology.sola.engine.graphics.guiv2.event">GuiEventSubscription</a></span>&nbsp;<span class="element-name">once</span><wbr><span class="parameters">(<a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.guiv2.event">GuiEventListener</a>&lt;<a href="GuiEventListenerList.html" title="type parameter in GuiEventListenerList">E</a>&gt;&nbsp;eventListener)</span></div>
+<div class="block">Add a <a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.guiv2.event"><code>GuiEventListener</code></a> that fires one time a <a href="GuiEvent.html" title="class in technology.sola.engine.graphics.guiv2.event"><code>GuiEvent</code></a> is <a href="#emit(E)"><code>emit(GuiEvent)</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>eventListener</code> - the listener to add</dd>
+<dt>Returns:</dt>
+<dd>a <a href="GuiEventSubscription.html" title="interface in technology.sola.engine.graphics.guiv2.event"><code>GuiEventSubscription</code></a> handle</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="off()">
 <h3>off</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">off</span>()</div>
+<div class="block">Removes all <a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.guiv2.event"><code>GuiEventListener</code></a>s that have been added.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="emit(E)">
 <h3 id="emit(technology.sola.engine.graphics.guiv2.event.GuiEvent)">emit</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">emit</span><wbr><span class="parameters">(<a href="GuiEventListenerList.html" title="type parameter in GuiEventListenerList">E</a>&nbsp;event)</span></div>
+<div class="block">Emits a <a href="GuiEvent.html" title="class in technology.sola.engine.graphics.guiv2.event"><code>GuiEvent</code></a> that all registered <a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.guiv2.event"><code>GuiEventListener</code></a>s with respond to.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>event</code> - the event emitted</dd>
+</dl>
 </section>
 </li>
 </ul>
