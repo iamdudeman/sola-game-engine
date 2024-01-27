@@ -195,6 +195,10 @@ loadScripts(document, 'script');</script>
 <h3>ImpulseCollisionResolutionSystem</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ImpulseCollisionResolutionSystem</span><wbr><span class="parameters">(<a href="../../event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a>&nbsp;eventHub)</span></div>
 <div class="block">Creates an instance with recommended settings.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>eventHub</code> - the <a href="../../event/EventHub.html" title="class in technology.sola.engine.event"><code>EventHub</code></a> instance</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -205,6 +209,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates an instance with custom iterations and recommended penetrationSlack and linearProjectionPercentage settings.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
+<dd><code>eventHub</code> - the <a href="../../event/EventHub.html" title="class in technology.sola.engine.event"><code>EventHub</code></a> instance</dd>
 <dd><code>iterations</code> - number of impulse resolution calculation iterations, larger is more accurate (1-20 is recommended)</dd>
 </dl>
 </section>
@@ -219,6 +224,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates an instance with custom settings.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
+<dd><code>eventHub</code> - the <a href="../../event/EventHub.html" title="class in technology.sola.engine.event"><code>EventHub</code></a> instance</dd>
 <dd><code>iterations</code> - number of impulse resolution calculation iterations, larger is more accurate (1-20 is recommended)</dd>
 <dd><code>penetrationSlack</code> - smaller number is more accurate but causes more jittering (0.01-0.1 recommended)</dd>
 <dd><code>linearProjectionPercentage</code> - how much positional correction to apply, small value allows objects to penetrate more with less jittering (0.2-0.8 recommended)</dd>
