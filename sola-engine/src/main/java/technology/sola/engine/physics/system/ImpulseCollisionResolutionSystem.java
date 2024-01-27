@@ -38,6 +38,8 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
 
   /**
    * Creates an instance with recommended settings.
+   *
+   * @param eventHub the {@link EventHub} instance
    */
   public ImpulseCollisionResolutionSystem(EventHub eventHub) {
     this(eventHub, 5);
@@ -46,6 +48,7 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
   /**
    * Creates an instance with custom iterations and recommended penetrationSlack and linearProjectionPercentage settings.
    *
+   * @param eventHub   the {@link EventHub} instance
    * @param iterations number of impulse resolution calculation iterations, larger is more accurate (1-20 is recommended)
    */
   public ImpulseCollisionResolutionSystem(EventHub eventHub, int iterations) {
@@ -55,6 +58,7 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
   /**
    * Creates an instance with custom settings.
    *
+   * @param eventHub                   the {@link EventHub} instance
    * @param iterations                 number of impulse resolution calculation iterations, larger is more accurate (1-20 is recommended)
    * @param penetrationSlack           smaller number is more accurate but causes more jittering (0.01-0.1 recommended)
    * @param linearProjectionPercentage how much positional correction to apply, small value allows objects to penetrate more with less jittering (0.2-0.8 recommended)

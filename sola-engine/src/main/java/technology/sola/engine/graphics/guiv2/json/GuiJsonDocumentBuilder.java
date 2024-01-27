@@ -28,6 +28,7 @@ public class GuiJsonDocumentBuilder {
   /**
    * Creates an instance of GuiJsonDocumentBuilder with desired {@link GuiElementJsonBlueprint}s.
    *
+   * @param guiTheme                 the {@link GuiTheme} to apply to elements parsed from JSON
    * @param guiElementJsonBlueprints the list of definitions to build from
    */
   public GuiJsonDocumentBuilder(GuiTheme guiTheme, List<GuiElementJsonBlueprint<?, ?, ?>> guiElementJsonBlueprints) {
