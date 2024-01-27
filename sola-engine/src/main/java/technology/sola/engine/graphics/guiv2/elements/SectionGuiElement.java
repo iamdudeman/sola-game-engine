@@ -7,7 +7,28 @@ import technology.sola.engine.graphics.guiv2.style.property.Direction;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 
+/**
+ * SectionGuiElement is a {@link GuiElement} that is simply a container for its children elements. It has various
+ * keyboard shortcuts for navigating its children.
+ */
 public class SectionGuiElement extends GuiElement<BaseStyles> {
+  /**
+   * Creates a new SectionGuiElement instance and registers key pressed events for navigating its children.
+   *
+   * <p>
+   * Direction: row, row-reverse
+   * <ul>
+   *   <li>{@link Key#RIGHT} - next element</li>
+   *   <li>{@link Key#LEFT} - previous element</li>
+   * </ul>
+   *
+   * <p>
+   * Direction: column, column-reverse
+   * <ul>
+   *   <li>{@link Key#DOWN} - next element</li>
+   *   <li>{@link Key#UP} - previous element</li>
+   * </ul>
+   */
   public SectionGuiElement() {
     super();
 

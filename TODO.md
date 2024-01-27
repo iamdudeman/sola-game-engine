@@ -21,6 +21,7 @@
     * teavm 0.9.0 has support
 * delete gui v1 code and move "v2" to gui package
     * rebuild cookbook in v2
+    * cleanup SolaWithDefaults after
 * JSON schema files for
     * font stuff
     * spritesheet stuff

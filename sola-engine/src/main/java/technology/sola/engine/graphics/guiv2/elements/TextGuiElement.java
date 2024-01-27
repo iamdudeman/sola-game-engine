@@ -5,12 +5,15 @@ import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.guiv2.GuiElement;
 import technology.sola.engine.graphics.guiv2.GuiElementDimensions;
+import technology.sola.engine.graphics.guiv2.util.TextRenderDetails;
 import technology.sola.engine.graphics.guiv2.util.TextRenderUtils;
 import technology.sola.engine.graphics.renderer.Renderer;
 
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TextGuiElement is a {@link GuiElement} that renders text for a GUI. It does not render child elements.
+ */
 public class TextGuiElement extends GuiElement<TextStyles> {
   // properties
   private String text;
@@ -18,8 +21,7 @@ public class TextGuiElement extends GuiElement<TextStyles> {
   // internals
   private Font font = DefaultFont.get();
   private String currentFontId = DefaultFont.ASSET_ID;
-  private int lineHeight = 1;
-  private List<String> lines = new ArrayList<>();
+  private TextRenderDetails textRenderDetails;
 
   @Override
   public void renderContent(Renderer renderer) {
@@ -28,7 +30,7 @@ public class TextGuiElement extends GuiElement<TextStyles> {
 
     var textAlignment = styleContainer.getPropertyValue(TextStyles::getTextAlignment, TextStyles.TextAlignment.START);
 
-    TextRenderUtils.renderLines(renderer, lines, textAlignment, contentBounds, lineHeight, textColor);
+    TextRenderUtils.renderLines(renderer, textRenderDetails, textAlignment, contentBounds, textColor);
   }
 
   @Override
@@ -37,31 +39,49 @@ public class TextGuiElement extends GuiElement<TextStyles> {
 
     // If text is null then no reason to take up layout space
     if (text == null || text.isEmpty()) {
-      return new GuiElementDimensions(0, 0);
+      textRenderDetails = new TextRenderDetails(0, List.of(), new GuiElementDimensions(0, 0));
+      return textRenderDetails.dimensions();
     }
 
-    var renderDetails = TextRenderUtils.calculateRenderDetails(font, text, contentBounds);
+    textRenderDetails = TextRenderUtils.calculateRenderDetails(font, text, contentBounds);
 
-    lineHeight = renderDetails.lineHeight();
-    lines = renderDetails.lines();
-
-    return renderDetails.dimensions();
+    return textRenderDetails.dimensions();
   }
 
+  /**
+   * TextGuiElement is not focusable so this will return false.
+   *
+   * @return false
+   */
   @Override
   public boolean isFocusable() {
     return false;
   }
 
+  /**
+   * TextGuiElement does not render children so this method will do nothing.
+   *
+   * @param children the child elements to add
+   * @return this
+   */
   @Override
   public GuiElement<TextStyles> appendChildren(GuiElement<?>... children) {
     return this;
   }
 
+  /**
+   * @return the text that will be rendered
+   */
   public String getText() {
     return text;
   }
 
+  /**
+   * Sets the text that will be rendered.
+   *
+   * @param text the new text to be rendered
+   * @return this
+   */
   public TextGuiElement setText(String text) {
     this.text = text;
     invalidateLayout();

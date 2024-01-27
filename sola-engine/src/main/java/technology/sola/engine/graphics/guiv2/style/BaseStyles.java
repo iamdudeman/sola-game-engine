@@ -3,6 +3,10 @@ package technology.sola.engine.graphics.guiv2.style;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.guiv2.style.property.*;
 
+/**
+ * BaseStyles contains properties that are common to all {@link technology.sola.engine.graphics.guiv2.GuiElement} to use
+ * as part of rendering.
+ */
 public class BaseStyles {
   private final Background background;
   private final Border border;
@@ -16,7 +20,12 @@ public class BaseStyles {
   private final CrossAxisChildren crossAxisChildren;
   private final Position position;
 
-  public BaseStyles(Builder<?> builder) {
+  /**
+   * Populates {@link BaseStyles} properties its {@link Builder}.
+   *
+   * @param builder the builder to build styles from
+   */
+  protected BaseStyles(Builder<?> builder) {
     this.background = builder.background;
     this.border = builder.border;
     this.padding = builder.padding;
@@ -31,6 +40,11 @@ public class BaseStyles {
     this.position = builder.position;
   }
 
+  /**
+   * Convenience method for creating a new {@link BaseStyles.Builder}.
+   *
+   * @return a new builder instance
+   */
   public static Builder<?> create() {
     return new Builder<>();
   }
@@ -79,6 +93,11 @@ public class BaseStyles {
     return visibility;
   }
 
+  /**
+   * Builder class for {@link BaseStyles}.
+   *
+   * @param <Self> this builder type
+   */
   public static class Builder<Self extends Builder<Self>> {
     private Background background;
     private Border border;
@@ -91,9 +110,6 @@ public class BaseStyles {
     private CrossAxisChildren crossAxisChildren;
     private Direction direction;
     private Position position = new Position();
-
-    protected Builder() {
-    }
 
     public BaseStyles build() {
       return new BaseStyles(this);
@@ -123,6 +139,12 @@ public class BaseStyles {
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#visibility}.
+     *
+     * @param visibility the {@link Visibility} of the element
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setVisibility(Visibility visibility) {
       this.visibility = visibility;

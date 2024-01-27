@@ -6,14 +6,17 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.guiv2.GuiElement;
 import technology.sola.engine.graphics.guiv2.GuiElementDimensions;
 import technology.sola.engine.graphics.guiv2.elements.TextStyles;
+import technology.sola.engine.graphics.guiv2.util.TextRenderDetails;
 import technology.sola.engine.graphics.guiv2.util.TextRenderUtils;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.KeyboardLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TextInputGuiElement is a {@link BaseInputGuiElement} that allows users to interact via typing text into the field.
+ */
 public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
   // props
   private String placeholder = "";
@@ -25,10 +28,12 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
   private boolean isShiftDown = false;
   private Font font = DefaultFont.get();
   private String currentFontId = DefaultFont.ASSET_ID;
-  private int lineHeight = 1;
-  private List<String> lines = new ArrayList<>();
+  private TextRenderDetails textRenderDetails;
   private String text;
 
+  /**
+   * Creates an instance of TextInputGuiElement registering default event listeners for typing characters into the field.
+   */
   public TextInputGuiElement() {
     super();
 
@@ -85,7 +90,7 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
 
     var textAlignment = styleContainer.getPropertyValue(TextStyles::getTextAlignment, TextStyles.TextAlignment.START);
 
-    TextRenderUtils.renderLines(renderer, lines, textAlignment, contentBounds, lineHeight, textColor);
+    TextRenderUtils.renderLines(renderer, textRenderDetails, textAlignment, contentBounds, textColor);
   }
 
   @Override
@@ -94,31 +99,38 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
 
     // If text is null then no reason to take up layout space
     if (text == null || text.isEmpty()) {
-      return new GuiElementDimensions(0, 0);
+      textRenderDetails = new TextRenderDetails(0, List.of(), new GuiElementDimensions(0, 0));
+      return textRenderDetails.dimensions();
     }
 
-    var renderDetails = TextRenderUtils.calculateRenderDetails(font, text, contentBounds);
+    textRenderDetails = TextRenderUtils.calculateRenderDetails(font, text, contentBounds);
 
-    lineHeight = renderDetails.lineHeight();
-    lines = renderDetails.lines();
-
-    return renderDetails.dimensions();
+    return textRenderDetails.dimensions();
   }
 
-  @Override
-  public boolean isFocusable() {
-    return true;
-  }
-
+  /**
+   * TextInputGuiElement does not render children so this method will do nothing.
+   *
+   * @param children the child elements to add
+   * @return this
+   */
   @Override
   public GuiElement<TextInputStyles> appendChildren(GuiElement<?>... children) {
     return this;
   }
 
+  /**
+   * @return the placeholder when no user value is entered
+   */
   public String getPlaceholder() {
     return placeholder;
   }
 
+  /**
+   * Sets the placeholder text for when no user value is entered.
+   *
+   * @param placeholder the new placeholder text
+   */
   public void setPlaceholder(String placeholder) {
     this.placeholder = placeholder;
 
@@ -127,10 +139,19 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
     }
   }
 
+  /**
+   * @return the maximum number of characters allowed for the input
+   */
   public Integer getMaxLength() {
     return maxLength;
   }
 
+  /**
+   * Sets the maximum number of characters allowed for the input. If the new length is smaller than the entered value
+   * it will be truncated down to the new max length.
+   *
+   * @param maxLength the new max length
+   */
   public void setMaxLength(Integer maxLength) {
     this.maxLength = maxLength;
 
@@ -141,10 +162,18 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
     }
   }
 
+  /**
+   * @return the user entered value in the input
+   */
   public String getValue() {
     return value;
   }
 
+  /**
+   * Programmatically sets the user entered value of the input.
+   *
+   * @param value the new value of the input
+   */
   public void setValue(String value) {
     valueBuilder.delete(0, valueBuilder.length());
 

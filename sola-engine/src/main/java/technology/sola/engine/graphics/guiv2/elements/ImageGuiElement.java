@@ -7,6 +7,9 @@ import technology.sola.engine.graphics.guiv2.style.BaseStyles;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 
+/**
+ * ImageGuiElement is a {@link GuiElement} that renders a {@link SolaImage} in a GUI. It does not render child elements.
+ */
 public class ImageGuiElement extends GuiElement<BaseStyles> {
   // props
   private String assetId;
@@ -46,20 +49,39 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
     return new GuiElementDimensions(0, 0);
   }
 
+  /**
+   * ImageGuiElement is not focusable so this will return false.
+   *
+   * @return false
+   */
   @Override
   public boolean isFocusable() {
     return false;
   }
 
+  /**
+   * ImageGuiElement does not render children so this method will do nothing.
+   *
+   * @param children the child elements to add
+   * @return this
+   */
   @Override
   public GuiElement<BaseStyles> appendChildren(GuiElement<?>... children) {
     return this;
   }
 
+  /**
+   * @return the id of the {@link SolaImage} asset to be rendered
+   */
   public String getAssetId() {
     return assetId;
   }
 
+  /**
+   * Sets the id of the {@link SolaImage} asset to be rendered.
+   *
+   * @param assetId the new asset id of the image
+   */
   public void setAssetId(String assetId) {
     this.assetId = assetId;
     invalidateLayout();
