@@ -36,7 +36,7 @@ public class MinesweeperGui {
     16,
     20,
   };
-  private static final ConditionalStyle<TextStyles> visible = ConditionalStyle.always(
+  private static final ConditionalStyle<TextStyles> VISIBLE_STYLE = ConditionalStyle.always(
     TextStyles.create().setVisibility(Visibility.VISIBLE).build()
   );
   private static int mineCount = 0;
@@ -63,7 +63,7 @@ public class MinesweeperGui {
     eventHub.add(NewGameEvent.class, newGameEvent -> {
       mineCount = newGameEvent.totalMines();
       rootElement.findElementById("title", TextGuiElement.class).setText("sola Minesweeper - " + mineCount);
-      rootElement.findElementById("victoryMessage", TextGuiElement.class).getStyles().removeStyle(visible);
+      rootElement.findElementById("victoryMessage", TextGuiElement.class).getStyles().removeStyle(VISIBLE_STYLE);
       rootElement.findElementById("textSize", TextGuiElement.class).setText(newGameEvent.rows() + "x" + newGameEvent.columns());
 
       String difficulty = switch (difficultyIndex) {
@@ -85,7 +85,7 @@ public class MinesweeperGui {
 
         rootElement.findElementById("victoryMessage", TextGuiElement.class)
           .setText("You won in " + decimalFormat.format(secondsTaken) + " seconds")
-          .getStyles().addStyle(visible);
+          .getStyles().addStyle(VISIBLE_STYLE);
       }
     });
   }
