@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.minesweeper;
 
+import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.examples.common.minesweeper.event.NewGameEvent;
@@ -8,7 +9,13 @@ import technology.sola.engine.examples.common.minesweeper.graphics.gui.Minesweep
 import technology.sola.engine.examples.common.minesweeper.system.GameOverSystem;
 import technology.sola.engine.examples.common.minesweeper.system.MinefieldSystem;
 import technology.sola.engine.examples.common.minesweeper.system.PlayerInputSystem;
+import technology.sola.engine.graphics.guiv2.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.guiv2.style.BaseStyles;
+import technology.sola.engine.graphics.guiv2.style.ConditionalStyle;
+import technology.sola.engine.graphics.guiv2.style.theme.GuiTheme;
 import technology.sola.engine.graphics.screen.AspectMode;
+
+import java.util.List;
 
 /**
  * MinesweeperExample is a {@link technology.sola.engine.core.Sola} for a simple implementation of Minesweeper using
@@ -24,11 +31,15 @@ public class MinesweeperExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGui().useGraphics();
+    defaultsConfigurator.useGuiV2(
+      GuiTheme.getDefaultLightTheme()
+        .addStyle(ButtonGuiElement.class, List.of(
+          ConditionalStyle.always(BaseStyles.create().setPadding(5).build())
+        ))
+    ).useGraphics();
 
     // graphics
     solaGraphics.addGraphicsModules(new MinesweeperSquareEntityGraphicsModule());
-    solaGuiDocument.setGuiRoot(MinesweeperGui.build(solaGuiDocument, eventHub), 2, 2);
     platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
 
     // systems
@@ -45,10 +56,22 @@ public class MinesweeperExample extends SolaWithDefaults {
     minefieldSystem.registerEvents(eventHub);
     gameOverSystem.registerEvents(eventHub);
     playerInputSystem.registerEvents();
+  }
 
-    eventHub.emit(new NewGameEvent(
-      MinesweeperGui.SIZE_OPTIONS[0].rows(), MinesweeperGui.SIZE_OPTIONS[0].columns(),
-      MinesweeperGui.DIFFICULTY_OPTIONS[0]
-    ));
+  @Override
+  protected void onAsyncInit(Runnable completeAsyncInit) {
+    assetLoaderProvider.get(GuiJsonDocument.class)
+      .getNewAsset("gui", "assets/gui/minesweeper_gui.json")
+      .executeWhenLoaded(guiJsonDocument -> {
+        MinesweeperGui.initializeEvents(guiJsonDocument.rootElement(), eventHub);
+        guiDocument.setRootElement(guiJsonDocument.rootElement());
+
+        eventHub.emit(new NewGameEvent(
+          MinesweeperGui.SIZE_OPTIONS[0].rows(), MinesweeperGui.SIZE_OPTIONS[0].columns(),
+          MinesweeperGui.DIFFICULTY_OPTIONS[0]
+        ));
+
+        completeAsyncInit.run();
+      });
   }
 }

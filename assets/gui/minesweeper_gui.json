@@ -1,0 +1,81 @@
+{
+  "tag": "Section",
+  "styles": [
+    {
+      "backgroundColor": "#ffffff",
+      "direction": "row",
+      "gap": 5,
+      "padding": 5
+    }
+  ],
+  "children": [
+    {
+      "tag": "Section",
+      "styles": [
+        {
+          "direction": "column",
+          "gap": 3
+        }
+      ],
+      "children": [
+        {
+          "tag": "Text",
+          "id": "title",
+          "props": {
+            "text": "sola minesweeper"
+          }
+        },
+        {
+          "tag": "Text",
+          "id": "victoryMessage",
+          "props": {
+            "text": "You won in 0 seconds"
+          },
+          "styles": [
+            {
+              "visibility": "hidden"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "Button",
+      "id": "buttonNewGame",
+      "children": [
+        {
+          "tag": "Text",
+          "props": {
+            "text": "New game"
+          }
+        }
+      ]
+    },
+    {
+      "tag": "Button",
+      "id": "buttonSize",
+      "children": [
+        {
+          "tag": "Text",
+          "id": "textSize",
+          "props": {
+            "text": "10x10"
+          }
+        }
+      ]
+    },
+    {
+      "tag": "Button",
+      "id": "buttonDifficulty",
+      "children": [
+        {
+          "tag": "Text",
+          "id": "textDifficulty",
+          "props": {
+            "text": "Easy"
+          }
+        }
+      ]
+    }
+  ]
+}
