@@ -65,7 +65,6 @@ public class ExampleLauncherSola extends SolaWithDefaults {
         buildExampleLaunchButton("Animation", AnimationExample::new),
         buildExampleLaunchButton("Audio", AudioExample::new),
         buildExampleLaunchButton("Gui", GuiExample::new),
-        buildExampleLaunchButton("GuiV2", GuiV2Example::new),
         buildExampleLaunchButton("Lighting", LightingExample::new),
         buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new),
         buildExampleLaunchButton("Particle", ParticleExample::new),

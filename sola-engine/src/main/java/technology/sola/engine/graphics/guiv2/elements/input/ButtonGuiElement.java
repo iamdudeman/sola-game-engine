@@ -58,8 +58,11 @@ public class ButtonGuiElement extends BaseInputGuiElement<BaseStyles> {
    * Sets the action that fires when the button is interacted with.
    *
    * @param onAction the action to execute on button interaction
+   * @return this
    */
-  public void setOnAction(Runnable onAction) {
+  public ButtonGuiElement setOnAction(Runnable onAction) {
     this.onAction = onAction;
+
+    return this;
   }
 }

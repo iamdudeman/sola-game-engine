@@ -45,7 +45,7 @@ public class GuiJsonDocumentBuilder {
     return new GuiJsonDocument(buildElement(elementJson));
   }
 
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({"unchecked", "rawtypes"})
   private GuiElement<?> buildElement(JsonObject elementJson) {
     String elementTag = elementJson.getString(ATTR_TAG);
 

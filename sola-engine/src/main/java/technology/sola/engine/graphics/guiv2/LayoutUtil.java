@@ -157,7 +157,9 @@ class LayoutUtil {
     return new GuiElementBounds(xConstraint, yConstraint, widthConstraint, heightConstraint);
   }
 
-  private static GuiElementBounds calculateRowChildAlignmentBounds(GuiElement<?> child, MainAxisChildren mainAxisChildren, CrossAxisChildren crossAxisChildren, int usedWidth) {
+  private static GuiElementBounds calculateRowChildAlignmentBounds(
+    GuiElement<?> child, MainAxisChildren mainAxisChildren, CrossAxisChildren crossAxisChildren, int usedWidth
+  ) {
     int xAlignment = switch (mainAxisChildren) {
       case START -> 0;
       case CENTER -> (child.getParent().contentBounds.width() - usedWidth) / 2;
@@ -165,8 +167,8 @@ class LayoutUtil {
     };
     int yAlignment = switch (crossAxisChildren) {
       case START, STRETCH -> 0;
-      case CENTER -> (child.boundConstraints.height() - child.bounds.height()) / 2;
-      case END -> child.boundConstraints.height() - child.bounds.height();
+      case CENTER -> (child.getParent().contentBounds.height() - child.bounds.height()) / 2;
+      case END -> child.getParent().contentBounds.height() - child.bounds.height();
     };
 
     int newX = xAlignment > 0 ? child.bounds.x() + xAlignment : child.bounds.x();
@@ -181,11 +183,13 @@ class LayoutUtil {
     return result;
   }
 
-  private static GuiElementBounds calculateColumnChildAlignmentBounds(GuiElement<?> child, MainAxisChildren mainAxisChildren, CrossAxisChildren crossAxisChildren, int usedHeight) {
+  private static GuiElementBounds calculateColumnChildAlignmentBounds(
+    GuiElement<?> child, MainAxisChildren mainAxisChildren, CrossAxisChildren crossAxisChildren, int usedHeight
+  ) {
     int xAlignment = switch (crossAxisChildren) {
       case START, STRETCH -> 0;
-      case CENTER -> (child.boundConstraints.width() - child.bounds.width()) / 2;
-      case END -> child.boundConstraints.width() - child.bounds.width();
+      case CENTER -> (child.getParent().contentBounds.width() - child.bounds.width()) / 2;
+      case END -> child.getParent().contentBounds.width() - child.bounds.width();
     };
     int yAlignment = switch (mainAxisChildren) {
       case START -> 0;
