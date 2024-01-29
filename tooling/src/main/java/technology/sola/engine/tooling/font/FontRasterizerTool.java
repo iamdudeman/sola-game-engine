@@ -88,7 +88,7 @@ public class FontRasterizerTool implements Tool {
    * See {@link FontListTool} to view what font families are available.
    *
    * @param fontFamily the font family to generate asset for
-   * @param fontStyle  the font style [NORMAL, ITALIC, BOLD]
+   * @param fontStyle  the font style [NORMAL, ITALIC, BOLD, BOLD_ITALIC]
    * @param fontSize   the font size
    * @return the path to the font info file that was generated
    */

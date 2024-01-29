@@ -1,0 +1,74 @@
+{
+  "$id": "Font.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Font",
+  "type": "object",
+  "required": [
+    "fontGlyphFile",
+    "fontFamily",
+    "fontStyle",
+    "fontSize",
+    "leading",
+    "glyphs"
+  ],
+  "properties": {
+    "fontGlyphFile": {
+      "type": "string",
+      "description": "The relative path to the font glyph file."
+    },
+    "fontFamily": {
+      "type": "string",
+      "description": "The family of the font."
+    },
+    "fontStyle": {
+      "type": "string",
+      "description": "The style of the font.",
+      "enum": ["NORMAL", "ITALIC", "BOLD", "BOLD_ITALIC"]
+    },
+    "fontSize": {
+      "type": "integer",
+      "description": "The size of the font.",
+      "minimum": 1
+    },
+    "leading": {
+      "type": "integer",
+      "description": "The leading of the font.",
+      "minimum": 0
+    },
+    "glyphs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "glyph",
+          "x",
+          "y",
+          "width",
+          "height"
+        ],
+        "properties": {
+          "glyph": {
+            "type": "string",
+            "description": "The character of the glyph"
+          },
+          "x": {
+            "type": "integer",
+            "description": "The left coordinate of the glyph"
+          },
+          "y": {
+            "type": "integer",
+            "description": "The top coordinate of the glyph"
+          },
+          "width": {
+            "type": "integer",
+            "description": "The width of the glyph"
+          },
+          "height": {
+            "type": "integer",
+            "description": "The height of the glyph"
+          }
+        }
+      }
+    }
+  }
+}

@@ -24,7 +24,7 @@ class FontInformation {
     this.fontStyle = fontStyle.name();
     this.fontSize = fontSize;
     this.fontFileName = fontFamily + "_" + fontStyle + "_" + fontSize + ".png";
-    this.fontInfoFileName = fontFamily + "_" + fontStyle + "_" + fontSize + ".json";
+    this.fontInfoFileName = fontFamily + "_" + fontStyle + "_" + fontSize + ".font.json";
 
     int fontStyleCode = switch (fontStyle) {
       case NORMAL -> Font.PLAIN;
