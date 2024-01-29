@@ -1,16 +1,5 @@
 # sola-game-engine TODO list
 
-* JSON schema files for
-    * spritesheet stuff
-        * sprites.json
-    * font stuff
-        * font.json
-    * gui
-        * gui.json
-        * move GuiDocument schema file to root
-        * add missing required props!
-
-
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------

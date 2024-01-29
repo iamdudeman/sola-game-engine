@@ -61,7 +61,7 @@ public class MinesweeperExample extends SolaWithDefaults {
   @Override
   protected void onAsyncInit(Runnable completeAsyncInit) {
     assetLoaderProvider.get(GuiJsonDocument.class)
-      .getNewAsset("gui", "assets/gui/minesweeper_gui.json")
+      .getNewAsset("gui", "assets/gui/minesweeper.gui.json")
       .executeWhenLoaded(guiJsonDocument -> {
         MinesweeperGui.initializeEvents(guiJsonDocument.rootElement(), eventHub);
         guiDocument.setRootElement(guiJsonDocument.rootElement());
