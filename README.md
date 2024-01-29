@@ -136,3 +136,19 @@ Your users will not need to have Java installed.
 ```
 
 4. Output will be in the `build/jpackage` directory
+
+
+## JSON Schema
+
+[JSON schema files](json-schema) are provided for various asset types. These can assist you in creating valid assets for
+the sola game engine to load when manually creating or updating them.
+
+### IntelliJ setup
+
+1. Open settings
+2. Go to `Languages & Frameworks | Schemas and DTDs | JSON Schema Mappings`
+3. Click `+` and select the schema file to add
+4. Add by file path pattern (recommendations below)
+    * SpriteSheet.schema.json -> *.sprites.json
+    * Font.schema.json -> *.font.json
+    * GuiDocument.schema.json -> *.gui.json

@@ -15,13 +15,13 @@
 
 ## TODO List
 
-* Consider array list for possible SpacialHashMap performance boost
-    * Consider BVH implementation (bounded volume hierarchy which is a type of quadtree)
+* Move custom build "distribution" tasks to a gradle plugin
+    * sola game template should use these plugins as well
+    * maybe have all distributable files go to the same parent folder for convenience?
 * update to Java 21
     * teavm 0.9.0 has support
-* JSON schema files for
-    * font stuff
-    * spritesheet stuff
+* Consider array list for possible SpacialHashMap performance boost
+    * Consider BVH implementation (bounded volume hierarchy which is a type of quadtree)
 * Gui improvements
     * Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
         * maybe just check for any mouse event list size > 0?
@@ -35,9 +35,6 @@
     * implement "Style sheet" JSON concept
         * gui json documents can reference these for use
 * Consider "stopping" AudioClip when it is finished by default, so it can be immediately played again?
-* Move custom build "distribution" tasks to a gradle plugin
-    * sola game template should use these plugins as well
-    * maybe have all distributable files go to the same parent folder for convenience?
 * Consider mechanism to "batch" together SolaGraphics entity draws when they are in the same layer
     * Currently, it does each one individually
 * Rendering

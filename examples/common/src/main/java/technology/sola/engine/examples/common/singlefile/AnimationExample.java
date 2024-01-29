@@ -44,7 +44,7 @@ public class AnimationExample extends SolaWithDefaults {
   @Override
   protected void onAsyncInit(Runnable completeAsyncInit) {
     assetLoaderProvider.get(SpriteSheet.class)
-      .getNewAsset("test", "assets/test_tiles_spritesheet.json")
+      .getNewAsset("test", "assets/sprites/test_tiles.sprites.json")
       .executeWhenLoaded(spriteSheet -> completeAsyncInit.run());
   }
 

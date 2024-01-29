@@ -57,7 +57,7 @@ public class AudioExample extends SolaWithDefaults {
   @Override
   protected void onAsyncInit(Runnable completeAsyncInit) {
     new BulkAssetLoader(assetLoaderProvider)
-      .addAsset(Font.class, FONT_ASSET_ID, "assets/arial_NORMAL_16.json")
+      .addAsset(Font.class, FONT_ASSET_ID, "assets/font/arial_NORMAL_16.font.json")
       .addAsset(AudioClip.class, "test_song", "assets/asgaseg.wav")
       .loadAll()
       .onComplete(assets -> {

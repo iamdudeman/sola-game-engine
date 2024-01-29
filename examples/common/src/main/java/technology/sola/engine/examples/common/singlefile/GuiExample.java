@@ -19,18 +19,17 @@ public class GuiExample extends SolaWithDefaults {
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public GuiExample() {
-    super(SolaConfiguration.build("Gui V2 Example", 800, 700).withTargetUpdatesPerSecond(30));
+    super(SolaConfiguration.build("Gui Example", 800, 700).withTargetUpdatesPerSecond(30));
   }
-
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     defaultsConfigurator.useGui();
 
     assetLoaderProvider.get(SolaImage.class)
-      .addAssetMapping("test_tiles", "assets/test_tiles.png");
+      .addAssetMapping("test_tiles", "assets/duck.png");
     assetLoaderProvider.get(Font.class)
-      .addAssetMapping("times_NORMAL_18", "assets/times_NORMAL_18.json");
+      .addAssetMapping("times_NORMAL_18", "assets/font/times_NORMAL_18.font.json");
 
     platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
 
@@ -62,13 +61,13 @@ public class GuiExample extends SolaWithDefaults {
   @Override
   protected void onAsyncInit(Runnable completeAsyncInit) {
     new BulkAssetLoader(assetLoaderProvider)
-      .addAsset(GuiJsonDocument.class, "gui", "assets/gui/test_gui.json")
-      .addAsset(GuiJsonDocument.class, "row", "assets/gui/test_row.json")
-      .addAsset(GuiJsonDocument.class, "column", "assets/gui/test_column.json")
-      .addAsset(GuiJsonDocument.class, "text", "assets/gui/test_text.json")
-      .addAsset(GuiJsonDocument.class, "image", "assets/gui/test_image.json")
-      .addAsset(GuiJsonDocument.class, "inputs", "assets/gui/test_input.json")
-      .addAsset(GuiJsonDocument.class, "theme", "assets/gui/test_theme.json")
+      .addAsset(GuiJsonDocument.class, "gui", "assets/gui/test.gui.json")
+      .addAsset(GuiJsonDocument.class, "row", "assets/gui/test_row.gui.json")
+      .addAsset(GuiJsonDocument.class, "column", "assets/gui/test_column.gui.json")
+      .addAsset(GuiJsonDocument.class, "text", "assets/gui/test_text.gui.json")
+      .addAsset(GuiJsonDocument.class, "image", "assets/gui/test_image.gui.json")
+      .addAsset(GuiJsonDocument.class, "inputs", "assets/gui/test_input.gui.json")
+      .addAsset(GuiJsonDocument.class, "theme", "assets/gui/test_theme.gui.json")
       .loadAll()
       .onComplete(assets -> {
         if (assets[0] instanceof GuiJsonDocument guiJsonDocument) {
@@ -77,7 +76,6 @@ public class GuiExample extends SolaWithDefaults {
 
         if (assets[5] instanceof GuiJsonDocument guiJsonDocument) {
           guiJsonDocument.rootElement().findElementById("button", ButtonGuiElement.class).setOnAction(() -> {
-            System.out.println("Test click");
             guiJsonDocument.rootElement().findElementById("button", ButtonGuiElement.class).setDisabled(true);
           });
         }
