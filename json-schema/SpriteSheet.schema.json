@@ -1,0 +1,51 @@
+{
+  "$id": "SpriteSheet.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SpriteSheet",
+  "type": "object",
+  "required": [
+    "spriteSheet",
+    "sprites"
+  ],
+  "properties": {
+    "spriteSheet": {
+      "type": "string",
+      "description": "The relative path to the sprite sheet image."
+    },
+    "sprites": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "x",
+          "y",
+          "w",
+          "h"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the sprite"
+          },
+          "x": {
+            "type": "integer",
+            "description": "The left coordinate of the sprite"
+          },
+          "y": {
+            "type": "integer",
+            "description": "The top coordinate of the sprite"
+          },
+          "w": {
+            "type": "integer",
+            "description": "The width of the sprite"
+          },
+          "h": {
+            "type": "integer",
+            "description": "The height of the sprite"
+          }
+        }
+      }
+    }
+  }
+}

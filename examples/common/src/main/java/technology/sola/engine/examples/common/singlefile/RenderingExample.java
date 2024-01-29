@@ -68,7 +68,7 @@ public class RenderingExample extends Sola {
     assetLoaderProvider.get(SolaImage.class)
       .addAssetMapping("test", "assets/test_tiles.png");
     assetLoaderProvider.get(SpriteSheet.class)
-      .addAssetMapping("test", "assets/test_tiles_spritesheet.json");
+      .addAssetMapping("test", "assets/test_tiles.sprites.json");
   }
 
   @Override
