@@ -53,7 +53,7 @@ public class LightingExample extends SolaWithDefaults {
   @Override
   protected void onAsyncInit(Runnable completeAsyncInit) {
     assetLoaderProvider.get(SpriteSheet.class)
-      .getNewAsset("forest", "assets/forest_spritesheet.json")
+      .getNewAsset("forest", "assets/sprites/forest.sprites.json")
       .executeWhenLoaded(spriteSheet -> completeAsyncInit.run());
   }
 
