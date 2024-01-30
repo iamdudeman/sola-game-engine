@@ -21,5 +21,10 @@ gradlePlugin {
       id = "technology.sola.sola-web-distribution"
       implementationClass = "SolaWebDistributionPlugin"
     }
+
+    create("sola-publishing") {
+      id = "technology.sola.sola-publishing"
+      implementationClass = "SolaPublishingPlugin"
+    }
   }
 }
