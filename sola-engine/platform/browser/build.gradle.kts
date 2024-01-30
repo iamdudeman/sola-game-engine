@@ -1,5 +1,6 @@
 plugins {
   id("sola.platform-conventions")
+  id("technology.sola.sola-publishing")
 }
 
 dependencies {
@@ -8,13 +9,6 @@ dependencies {
   implementation("org.teavm:teavm-extras-slf4j:0.9.0")
 }
 
-publishing {
-  publications {
-    create<MavenPublication>("maven") {
-      group = "technology.sola.engine"
-      artifactId = "platform-browser"
-
-      from(components["java"])
-    }
-  }
+solaPublishing {
+  artifactId = "platform-browser"
 }

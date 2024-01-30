@@ -1,5 +1,6 @@
 plugins {
   id("sola.platform-conventions")
+  id("technology.sola.sola-publishing")
   id("org.openjfx.javafxplugin") version "0.0.13"
 }
 
@@ -8,13 +9,6 @@ javafx {
   version = "17.0.2"
 }
 
-publishing {
-  publications {
-    create<MavenPublication>("maven") {
-      group = "technology.sola.engine"
-      artifactId = "platform-javafx"
-
-      from(components["java"])
-    }
-  }
+solaPublishing {
+  artifactId = "platform-javafx"
 }

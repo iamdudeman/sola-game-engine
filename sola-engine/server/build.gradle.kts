@@ -1,14 +1,8 @@
 plugins {
   id("sola.platform-conventions")
+  id("technology.sola.sola-publishing")
 }
 
-publishing {
-  publications {
-    create<MavenPublication>("maven") {
-      group = "technology.sola.engine"
-      artifactId = "server"
-
-      from(components["java"])
-    }
-  }
+solaPublishing {
+  artifactId = "server"
 }
