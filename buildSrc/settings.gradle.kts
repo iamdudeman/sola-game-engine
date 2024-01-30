@@ -1,1 +1,1 @@
-rootProject.name="sola-conventions"
+rootProject.name="sola-gradle-build-src"
