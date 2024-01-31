@@ -12,16 +12,6 @@ dependencies {
 
 gradlePlugin {
   plugins {
-    create("sola-java-distribution") {
-      id = "technology.sola.sola-java-distribution"
-      implementationClass = "SolaJavaDistributionPlugin"
-    }
-
-    create("sola-web-distribution") {
-      id = "technology.sola.sola-web-distribution"
-      implementationClass = "SolaWebDistributionPlugin"
-    }
-
     create("sola-publishing") {
       id = "technology.sola.sola-publishing"
       implementationClass = "SolaPublishingPlugin"

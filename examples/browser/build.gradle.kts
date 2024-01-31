@@ -1,6 +1,6 @@
 plugins {
   id("sola.java-conventions")
-  id("technology.sola.sola-web-distribution")
+  id("technology.sola.plugins.sola-web-distribution")
 }
 
 dependencies {
