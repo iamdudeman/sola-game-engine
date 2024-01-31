@@ -1,10 +1,9 @@
 import java.util.*
 
-// todo probably need publishing stuff as well
-
 plugins {
   `kotlin-dsl`
   `java-gradle-plugin`
+  `maven-publish`
 }
 
 val props = Properties()
@@ -32,6 +31,16 @@ gradlePlugin {
     create("sola-web-distribution") {
       id = "technology.sola.plugins.sola-web-distribution"
       implementationClass = "technology.sola.plugins.SolaWebDistributionPlugin"
+    }
+  }
+}
+
+publishing {
+  publications {
+    create<MavenPublication>("maven") {
+      artifactId = "sola-gradle-plugins"
+
+      from(components["java"])
     }
   }
 }
