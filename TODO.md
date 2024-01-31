@@ -1,9 +1,5 @@
 # sola-game-engine TODO list
 
-* ~~Move custom build "distribution" tasks to a gradle plugin~~
-    * ~~maybe have all distributable files go to the same parent folder for convenience?~~
-* ~~apply distribution plugin to tooling project as well if possible~~
-
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -23,7 +19,6 @@
     * Make distribution gradle plugins available for use through jitpack if possible instead of copying to project local buildSrc
         * maybe `:tooling:plugins`?
         * https://docs.gradle.org/current/userguide/custom_plugins.html#sec:custom_plugins_standalone_project
-    * make "publishing" into a local buildSrc plugin for reuse across platform, tooling and engine code
 * Tooling
     * make an "interactive mode" available for when no command line arguments are passed in
 * update to Java 21
