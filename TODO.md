@@ -15,10 +15,14 @@
 
 ## TODO List
 
-* update to Java 21
-    * teavm 0.9.0 has support
-* Consider array list for possible SpacialHashMap performance boost
+* research possible benefits of updating to Java 21
+    * teavm 0.9.0 has support now
+* optimize collision detection broad phase
+    * Consider array list for possible SpacialHashMap performance boost
     * Consider BVH implementation (bounded volume hierarchy which is a type of quadtree)
+* Consider "stopping" AudioClip when it is finished by default, so it can be immediately played again?
+* Consider mechanism to "batch" together SolaGraphics entity draws when they are in the same layer
+    * Currently, it does each one individually
 * Gui improvements
     * Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
         * maybe just check for any mouse event list size > 0?
@@ -31,16 +35,15 @@
     * consider splitting layout and paint styles to prevent extra calculations
     * implement "Style sheet" JSON concept
         * gui json documents can reference these for use
-* Consider "stopping" AudioClip when it is finished by default, so it can be immediately played again?
-* Consider mechanism to "batch" together SolaGraphics entity draws when they are in the same layer
-    * Currently, it does each one individually
 * Rendering
     * Ability to change line width when drawing
     * Add a way to do gradients?
         * maybe just linear at first?
+        * maybe just a convenience method for generating gradient SolaImages?
 * networking
     * rest client interface
-        * javafx/swing impl
+        * javafx impl
+        * swing impl
         * browser impl
     * simple rest server
 * Figure out how to handle TouchInput (probably at the same time as AndroidPlatform implementation)
@@ -52,6 +55,7 @@
             * Switch JsMouseUtils to mouse events instead of pointer events
 * Android Platform
     * Implement
+* Investigate possible Steam CloudSave integration
 * Lighting
     * implement more light types other than just point lights
 * Particle System
@@ -67,7 +71,6 @@
         * Polygon x AABB
         * Polygon x Circle
         * Polygon x Polygon
-* Investigate possible Steam CloudSave integration
 * Consider adding a "debug console" option
     * While open can toggle things like render debug outlines and debug spacial hashmap stuff
     * Could also maybe allow adding custom commands
