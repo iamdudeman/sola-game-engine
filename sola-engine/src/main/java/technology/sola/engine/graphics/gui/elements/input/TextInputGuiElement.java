@@ -50,10 +50,10 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
 
       if (keyCode == Key.SHIFT.getCode()) {
         isShiftDown = true;
-      }
-
-      if (keyCode == Key.BACKSPACE.getCode() && length > 0) {
-        valueBuilder.deleteCharAt(length - 1);
+      } else if (keyCode == Key.BACKSPACE.getCode()) {
+        if (length > 0) {
+          valueBuilder.deleteCharAt(length - 1);
+        }
       } else if (isLessThanMaxLength) {
         char character = (char) keyCode;
 
@@ -63,14 +63,14 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
           } else {
             valueBuilder.append((char) (keyCode + 32));
           }
+        } else if (keyCode == Key.SPACE.getCode()) {
+          valueBuilder.append(character);
         } else if (KeyboardLayout.hasShift(keyCode)) {
           if (isShiftDown) {
             valueBuilder.append(KeyboardLayout.shift(character));
           } else {
             valueBuilder.append(character);
           }
-        } else if (keyCode == Key.SPACE.getCode()) {
-          valueBuilder.append(character);
         }
       }
 

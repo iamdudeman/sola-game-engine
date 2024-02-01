@@ -69,6 +69,16 @@ public class Font implements Asset {
   }
 
   /**
+   * Checks to see if this Font has a glyph registered for rendering.
+   *
+   * @param character the character to check for a glyph
+   * @return true if the Font has a glyph for the character
+   */
+  public boolean hasGlyph(char character) {
+    return blackCharacterToGlyphMap.containsKey(character);
+  }
+
+  /**
    * Calculates and returns the {@link TextDimensions} for a string of text that would be rendered with this font.
    *
    * @param text the string of text
