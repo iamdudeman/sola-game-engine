@@ -9,6 +9,6 @@ dependencies {
 }
 
 solaJavaDist {
-  mainClass = "${project.properties["basePackage"]}.${project.name}.SwingMain"
+  mainClass = "${project.properties["basePackage"]}.${project.name}.JavaFxMain"
   useJavaFx = true
 }
