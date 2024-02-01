@@ -75,7 +75,7 @@ public class MouseAndCameraExample extends SolaWithDefaults {
       var camera = world.findEntityByName("camera");
       var cameraTransform = camera.getComponent(TransformComponent.class);
 
-      if (mouseInput.isMouseClicked(MouseButton.PRIMARY)) {
+      if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
         Vector2D mousePosition = mouseInput.getMousePosition();
         Vector2D worldPosition = solaGraphics.screenToWorldCoordinate(mousePosition);
 
@@ -84,7 +84,7 @@ public class MouseAndCameraExample extends SolaWithDefaults {
           .addComponent(new RectangleRendererComponent(colors[colorIndex]));
       }
 
-      if (mouseInput.isMouseClicked(MouseButton.SECONDARY)) {
+      if (mouseInput.isMousePressed(MouseButton.SECONDARY)) {
         colorIndex = colorIndex == colors.length - 1 ? 0 : colorIndex + 1;
       }
 

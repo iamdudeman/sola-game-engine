@@ -17,7 +17,7 @@ class KeyboardInputTest {
 
   @Test
   void whenUnrecognizedKeyPressed_shouldThrowException() {
-    assertThrows(KeyboardInputException.class, () -> keyboardInput.keyPressed(createMockKeyEvent(-1)));
+    assertThrows(KeyboardInputException.class, () -> keyboardInput.onKeyPressed(createMockKeyEvent(-1)));
   }
 
   @Test
@@ -27,7 +27,7 @@ class KeyboardInputTest {
 
   @Test
   void whenKeyPressed_withOneUpdate_shouldShowKeyAsPressedButNotHeld() {
-    keyboardInput.keyPressed(createMockKeyEvent(Key.A));
+    keyboardInput.onKeyPressed(createMockKeyEvent(Key.A));
     keyboardInput.updateStatusOfKeys();
 
     assertTrue(keyboardInput.isKeyPressed(Key.A));
@@ -36,7 +36,7 @@ class KeyboardInputTest {
 
   @Test
   void whenKeyPressed_withTwoUpdates_shouldShowKeyAsHeldButNotPressed() {
-    keyboardInput.keyPressed(createMockKeyEvent(Key.A));
+    keyboardInput.onKeyPressed(createMockKeyEvent(Key.A));
     keyboardInput.updateStatusOfKeys();
     keyboardInput.updateStatusOfKeys();
 
@@ -46,7 +46,7 @@ class KeyboardInputTest {
 
   @Test
   void whenKeyPressedThenReleased_shouldShowKeyNotHeldOrPressed() {
-    keyboardInput.keyPressed(createMockKeyEvent(Key.B));
+    keyboardInput.onKeyPressed(createMockKeyEvent(Key.B));
     keyboardInput.updateStatusOfKeys();
     keyboardInput.keyReleased(createMockKeyEvent(Key.B));
     keyboardInput.updateStatusOfKeys();
