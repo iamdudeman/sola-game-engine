@@ -78,6 +78,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">MouseInput</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">MouseInput contains information about user interaction with the mouse.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -109,23 +110,35 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMousePosition()" class="member-name-link">getMousePosition</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isMouseClicked(technology.sola.engine.input.MouseButton)" class="member-name-link">isMouseClicked</a><wbr>(<a href="MouseButton.html" title="enum class in technology.sola.engine.input">MouseButton</a>&nbsp;buttonName)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isMouseDragged(technology.sola.engine.input.MouseButton)" class="member-name-link">isMouseDragged</a><wbr>(<a href="MouseButton.html" title="enum class in technology.sola.engine.input">MouseButton</a>&nbsp;mouseButton)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks if a <a href="MouseButton.html" title="enum class in technology.sola.engine.input"><code>MouseButton</code></a> is being dragged or not.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isMouseDragged(technology.sola.engine.input.MouseButton)" class="member-name-link">isMouseDragged</a><wbr>(<a href="MouseButton.html" title="enum class in technology.sola.engine.input">MouseButton</a>&nbsp;buttonName)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isMousePressed(technology.sola.engine.input.MouseButton)" class="member-name-link">isMousePressed</a><wbr>(<a href="MouseButton.html" title="enum class in technology.sola.engine.input">MouseButton</a>&nbsp;mouseButton)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks if a <a href="MouseButton.html" title="enum class in technology.sola.engine.input"><code>MouseButton</code></a> is pressed or not.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onMouseMoved(technology.sola.engine.input.MouseEvent)" class="member-name-link">onMouseMoved</a><wbr>(<a href="MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&nbsp;mouseEvent)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Called on move of the mouse.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onMousePressed(technology.sola.engine.input.MouseEvent)" class="member-name-link">onMousePressed</a><wbr>(<a href="MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&nbsp;mouseEvent)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Called on press of a mouse button.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onMouseReleased(technology.sola.engine.input.MouseEvent)" class="member-name-link">onMouseReleased</a><wbr>(<a href="MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&nbsp;mouseEvent)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Called on release of a mouse button.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateStatusOfMouse()" class="member-name-link">updateStatusOfMouse</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Called once per frame to update the current status of the mouse based on the user's interaction.</div>
+</div>
 </div>
 </div>
 </div>
@@ -158,45 +171,79 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="isMouseClicked(technology.sola.engine.input.MouseButton)">
-<h3>isMouseClicked</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isMouseClicked</span><wbr><span class="parameters">(<a href="MouseButton.html" title="enum class in technology.sola.engine.input">MouseButton</a>&nbsp;buttonName)</span></div>
+<section class="detail" id="isMousePressed(technology.sola.engine.input.MouseButton)">
+<h3>isMousePressed</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isMousePressed</span><wbr><span class="parameters">(<a href="MouseButton.html" title="enum class in technology.sola.engine.input">MouseButton</a>&nbsp;mouseButton)</span></div>
+<div class="block">Checks if a <a href="MouseButton.html" title="enum class in technology.sola.engine.input"><code>MouseButton</code></a> is pressed or not.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>mouseButton</code> - the button to check</dd>
+<dt>Returns:</dt>
+<dd>true if mouse button is pressed</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isMouseDragged(technology.sola.engine.input.MouseButton)">
 <h3>isMouseDragged</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isMouseDragged</span><wbr><span class="parameters">(<a href="MouseButton.html" title="enum class in technology.sola.engine.input">MouseButton</a>&nbsp;buttonName)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isMouseDragged</span><wbr><span class="parameters">(<a href="MouseButton.html" title="enum class in technology.sola.engine.input">MouseButton</a>&nbsp;mouseButton)</span></div>
+<div class="block">Checks if a <a href="MouseButton.html" title="enum class in technology.sola.engine.input"><code>MouseButton</code></a> is being dragged or not.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>mouseButton</code> - the button to check</dd>
+<dt>Returns:</dt>
+<dd>true if mouse button is being dragged</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getMousePosition()">
 <h3>getMousePosition</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">getMousePosition</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the current position of the mouse on screen</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="updateStatusOfMouse()">
 <h3>updateStatusOfMouse</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateStatusOfMouse</span>()</div>
+<div class="block">Called once per frame to update the current status of the mouse based on the user's interaction.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="onMouseMoved(technology.sola.engine.input.MouseEvent)">
 <h3>onMouseMoved</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onMouseMoved</span><wbr><span class="parameters">(<a href="MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&nbsp;mouseEvent)</span></div>
+<div class="block">Called on move of the mouse.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>mouseEvent</code> - the <a href="MouseEvent.html" title="class in technology.sola.engine.input"><code>MouseEvent</code></a></dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="onMousePressed(technology.sola.engine.input.MouseEvent)">
 <h3>onMousePressed</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onMousePressed</span><wbr><span class="parameters">(<a href="MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&nbsp;mouseEvent)</span></div>
+<div class="block">Called on press of a mouse button.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>mouseEvent</code> - the <a href="MouseEvent.html" title="class in technology.sola.engine.input"><code>MouseEvent</code></a></dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="onMouseReleased(technology.sola.engine.input.MouseEvent)">
 <h3>onMouseReleased</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onMouseReleased</span><wbr><span class="parameters">(<a href="MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&nbsp;mouseEvent)</span></div>
+<div class="block">Called on release of a mouse button.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>mouseEvent</code> - the <a href="MouseEvent.html" title="class in technology.sola.engine.input"><code>MouseEvent</code></a></dd>
+</dl>
 </section>
 </li>
 </ul>

@@ -79,7 +79,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">KeyboardLayout</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">KeyboardLayout contains information for the current keyboard layout. This includes things like
- what characters should render when shift is pressed.</div>
+ what characters should render when shift is pressed. Defaults to <a href="KeyboardLayout.Type.html#QWERTY"><code>KeyboardLayout.Type.QWERTY</code></a>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -94,7 +94,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static enum&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="KeyboardLayout.Type.html" class="type-name-link" title="enum class in technology.sola.engine.input">KeyboardLayout.Type</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">The type of keyboard.</div>
+</div>
 </div>
 </section>
 </li>
@@ -114,13 +116,19 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#hasShift(int)" class="member-name-link">hasShift</a><wbr>(int&nbsp;keyCode)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Checks to see if a keyCode has a shifted variant character or not.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#setType(technology.sola.engine.input.KeyboardLayout.Type)" class="member-name-link">setType</a><wbr>(<a href="KeyboardLayout.Type.html" title="enum class in technology.sola.engine.input">KeyboardLayout.Type</a>&nbsp;type)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Sets the <a href="KeyboardLayout.Type.html" title="enum class in technology.sola.engine.input"><code>KeyboardLayout.Type</code></a> of keyboard in use.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static char</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#shift(char)" class="member-name-link">shift</a><wbr>(char&nbsp;character)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Returns the shifted variant of the character for the current keyboard type.</div>
+</div>
 </div>
 </div>
 </div>
@@ -142,24 +150,48 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="shift(char)">
 <h3>shift</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">char</span>&nbsp;<span class="element-name">shift</span><wbr><span class="parameters">(char&nbsp;character)</span></div>
+<div class="block">Returns the shifted variant of the character for the current keyboard type. If there is no shifted variant then
+ the original character will return.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>character</code> - the character to get the shift variant for</dd>
+<dt>Returns:</dt>
+<dd>the shifted variant or the original character if there is no shifted variant</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="hasShift(int)">
 <h3>hasShift</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasShift</span><wbr><span class="parameters">(int&nbsp;keyCode)</span></div>
+<div class="block">Checks to see if a keyCode has a shifted variant character or not.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>keyCode</code> - the key code to check</dd>
+<dt>Returns:</dt>
+<dd>true if it has a shifted variant for the current keyboard type</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getType()">
 <h3>getType</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="KeyboardLayout.Type.html" title="enum class in technology.sola.engine.input">KeyboardLayout.Type</a></span>&nbsp;<span class="element-name">getType</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the current <a href="KeyboardLayout.Type.html" title="enum class in technology.sola.engine.input"><code>KeyboardLayout.Type</code></a> of keyboard in use</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setType(technology.sola.engine.input.KeyboardLayout.Type)">
 <h3>setType</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setType</span><wbr><span class="parameters">(<a href="KeyboardLayout.Type.html" title="enum class in technology.sola.engine.input">KeyboardLayout.Type</a>&nbsp;type)</span></div>
+<div class="block">Sets the <a href="KeyboardLayout.Type.html" title="enum class in technology.sola.engine.input"><code>KeyboardLayout.Type</code></a> of keyboard in use.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>type</code> - the new type of keyboard in use</dd>
+</dl>
 </section>
 </li>
 </ul>

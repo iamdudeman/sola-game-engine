@@ -78,6 +78,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">KeyboardInput</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">KeyboardInput contains information about user interaction with the keyboard.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -90,7 +91,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">KeyboardInput</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a KeyboardInput instance initializing the state of all keys to be released.</div>
+</div>
 </div>
 </section>
 </li>
@@ -107,25 +110,39 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isKeyHeld(int)" class="member-name-link">isKeyHeld</a><wbr>(int&nbsp;keyCode)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks if a key is held based on its keycode.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isKeyHeld(technology.sola.engine.input.Key)" class="member-name-link">isKeyHeld</a><wbr>(<a href="Key.html" title="enum class in technology.sola.engine.input">Key</a>&nbsp;key)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks if a <a href="Key.html" title="enum class in technology.sola.engine.input"><code>Key</code></a> is held.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isKeyPressed(int)" class="member-name-link">isKeyPressed</a><wbr>(int&nbsp;keyCode)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks if a key is pressed based on its keycode.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isKeyPressed(technology.sola.engine.input.Key)" class="member-name-link">isKeyPressed</a><wbr>(<a href="Key.html" title="enum class in technology.sola.engine.input">Key</a>&nbsp;key)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks if a <a href="Key.html" title="enum class in technology.sola.engine.input"><code>Key</code></a> is pressed.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#keyPressed(technology.sola.engine.input.KeyEvent)" class="member-name-link">keyPressed</a><wbr>(<a href="KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&nbsp;keyEvent)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#keyReleased(technology.sola.engine.input.KeyEvent)" class="member-name-link">keyReleased</a><wbr>(<a href="KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&nbsp;keyEvent)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Called on release of a key.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#keyReleased(technology.sola.engine.input.KeyEvent)" class="member-name-link">keyReleased</a><wbr>(<a href="KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&nbsp;keyEvent)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onKeyPressed(technology.sola.engine.input.KeyEvent)" class="member-name-link">onKeyPressed</a><wbr>(<a href="KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&nbsp;keyEvent)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Called on press of a key.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateStatusOfKeys()" class="member-name-link">updateStatusOfKeys</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Called once per frame to update the current status of the keyboard based on the user's interaction.</div>
+</div>
 </div>
 </div>
 </div>
@@ -147,6 +164,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>KeyboardInput</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">KeyboardInput</span>()</div>
+<div class="block">Creates a KeyboardInput instance initializing the state of all keys to be released.</div>
 </section>
 </li>
 </ul>
@@ -161,42 +179,81 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="isKeyPressed(int)">
 <h3>isKeyPressed</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isKeyPressed</span><wbr><span class="parameters">(int&nbsp;keyCode)</span></div>
+<div class="block">Checks if a key is pressed based on its keycode.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>keyCode</code> - the code of the key to check</dd>
+<dt>Returns:</dt>
+<dd>true if key is pressed</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isKeyPressed(technology.sola.engine.input.Key)">
 <h3>isKeyPressed</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isKeyPressed</span><wbr><span class="parameters">(<a href="Key.html" title="enum class in technology.sola.engine.input">Key</a>&nbsp;key)</span></div>
+<div class="block">Checks if a <a href="Key.html" title="enum class in technology.sola.engine.input"><code>Key</code></a> is pressed.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>key</code> - the key to check</dd>
+<dt>Returns:</dt>
+<dd>true if key is pressed</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isKeyHeld(int)">
 <h3>isKeyHeld</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isKeyHeld</span><wbr><span class="parameters">(int&nbsp;keyCode)</span></div>
+<div class="block">Checks if a key is held based on its keycode.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>keyCode</code> - the code of the key to check</dd>
+<dt>Returns:</dt>
+<dd>true if key is held</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isKeyHeld(technology.sola.engine.input.Key)">
 <h3>isKeyHeld</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isKeyHeld</span><wbr><span class="parameters">(<a href="Key.html" title="enum class in technology.sola.engine.input">Key</a>&nbsp;key)</span></div>
+<div class="block">Checks if a <a href="Key.html" title="enum class in technology.sola.engine.input"><code>Key</code></a> is held.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>key</code> - the key to check</dd>
+<dt>Returns:</dt>
+<dd>true if key is held</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="updateStatusOfKeys()">
 <h3>updateStatusOfKeys</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateStatusOfKeys</span>()</div>
+<div class="block">Called once per frame to update the current status of the keyboard based on the user's interaction.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="keyPressed(technology.sola.engine.input.KeyEvent)">
-<h3>keyPressed</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">keyPressed</span><wbr><span class="parameters">(<a href="KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&nbsp;keyEvent)</span></div>
+<section class="detail" id="onKeyPressed(technology.sola.engine.input.KeyEvent)">
+<h3>onKeyPressed</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onKeyPressed</span><wbr><span class="parameters">(<a href="KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&nbsp;keyEvent)</span></div>
+<div class="block">Called on press of a key.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>keyEvent</code> - the <a href="KeyEvent.html" title="class in technology.sola.engine.input"><code>KeyEvent</code></a></dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="keyReleased(technology.sola.engine.input.KeyEvent)">
 <h3>keyReleased</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">keyReleased</span><wbr><span class="parameters">(<a href="KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&nbsp;keyEvent)</span></div>
+<div class="block">Called on release of a key.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>keyEvent</code> - the <a href="KeyEvent.html" title="class in technology.sola.engine.input"><code>KeyEvent</code></a></dd>
+</dl>
 </section>
 </li>
 </ul>

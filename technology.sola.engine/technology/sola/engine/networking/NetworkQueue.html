@@ -75,9 +75,14 @@ loadScripts(document, 'script');</script>
 <div class="inheritance">technology.sola.engine.networking.NetworkQueue&lt;T&gt;</div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>T</code> - the type of the data</dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">NetworkQueue&lt;T&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">NetworkQueue is a data structure for holding network messages in a first in first out basis.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -107,13 +112,19 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addFirst(T)" class="member-name-link">addFirst</a><wbr>(<a href="NetworkQueue.html" title="type parameter in NetworkQueue">T</a>&nbsp;item)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Adds message to the front of the queue.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addLast(T)" class="member-name-link">addLast</a><wbr>(<a href="NetworkQueue.html" title="type parameter in NetworkQueue">T</a>&nbsp;item)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Adds a message to the end of the queue.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#clear()" class="member-name-link">clear</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Clears all messages from the queue.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="NetworkQueue.html" title="type parameter in NetworkQueue">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFirst()" class="member-name-link">getFirst</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -125,10 +136,14 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="NetworkQueue.html" title="type parameter in NetworkQueue">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeFirst()" class="member-name-link">removeFirst</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Removes the first message from the queue and returns it.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="NetworkQueue.html" title="type parameter in NetworkQueue">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeLast()" class="member-name-link">removeLast</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Removes the last message from the queue and returns it.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#size()" class="member-name-link">size</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -167,54 +182,91 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="isEmpty()">
 <h3>isEmpty</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isEmpty</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if there are no messages</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="size()">
 <h3>size</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">size</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the number of messages in the queue</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getFirst()">
 <h3>getFirst</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="NetworkQueue.html" title="type parameter in NetworkQueue">T</a></span>&nbsp;<span class="element-name">getFirst</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the first message in the queue</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getLast()">
 <h3>getLast</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="NetworkQueue.html" title="type parameter in NetworkQueue">T</a></span>&nbsp;<span class="element-name">getLast</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the last message in the queue</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="addFirst(T)">
 <h3 id="addFirst(java.lang.Object)">addFirst</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addFirst</span><wbr><span class="parameters">(<a href="NetworkQueue.html" title="type parameter in NetworkQueue">T</a>&nbsp;item)</span></div>
+<div class="block">Adds message to the front of the queue.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>item</code> - the message to add</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="addLast(T)">
 <h3 id="addLast(java.lang.Object)">addLast</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addLast</span><wbr><span class="parameters">(<a href="NetworkQueue.html" title="type parameter in NetworkQueue">T</a>&nbsp;item)</span></div>
+<div class="block">Adds a message to the end of the queue.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>item</code> - the message to add</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="clear()">
 <h3>clear</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">clear</span>()</div>
+<div class="block">Clears all messages from the queue.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="removeFirst()">
 <h3>removeFirst</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="NetworkQueue.html" title="type parameter in NetworkQueue">T</a></span>&nbsp;<span class="element-name">removeFirst</span>()</div>
+<div class="block">Removes the first message from the queue and returns it.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the first message in the queue</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="removeLast()">
 <h3>removeLast</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="NetworkQueue.html" title="type parameter in NetworkQueue">T</a></span>&nbsp;<span class="element-name">removeLast</span>()</div>
+<div class="block">Removes the last message from the queue and returns it.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the last message in the queue</dd>
+</dl>
 </section>
 </li>
 </ul>
