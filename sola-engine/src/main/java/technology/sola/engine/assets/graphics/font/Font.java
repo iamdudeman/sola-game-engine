@@ -75,6 +75,11 @@ public class Font implements Asset {
    * @return true if the Font has a glyph for the character
    */
   public boolean hasGlyph(char character) {
+    // check for invisible characters
+    if (character == '\n') {
+      return true;
+    }
+
     return blackCharacterToGlyphMap.containsKey(character);
   }
 

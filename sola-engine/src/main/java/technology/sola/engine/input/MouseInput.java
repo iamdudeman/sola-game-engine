@@ -12,7 +12,7 @@ public class MouseInput {
   private Vector2D currentMousePosition = null;
 
   public boolean isMouseClicked(MouseButton buttonName) {
-    return mouseStatusMap.get(buttonName) == ButtonState.CLICKED;
+    return mouseStatusMap.get(buttonName) == ButtonState.PRESSED;
   }
 
   public boolean isMouseDragged(MouseButton buttonName) {
@@ -30,10 +30,10 @@ public class MouseInput {
       if (isDown) {
         ButtonState buttonState = mouseStatusMap.getOrDefault(mouseButton, ButtonState.RELEASED);
 
-        if (buttonState == ButtonState.CLICKED) {
+        if (buttonState == ButtonState.PRESSED) {
           mouseStatusMap.put(mouseButton, ButtonState.DRAGGED);
         } else if (buttonState == ButtonState.RELEASED) {
-          mouseStatusMap.put(mouseButton, ButtonState.CLICKED);
+          mouseStatusMap.put(mouseButton, ButtonState.PRESSED);
         }
       } else {
         mouseStatusMap.put(mouseButton, ButtonState.RELEASED);
@@ -61,7 +61,7 @@ public class MouseInput {
 
   private enum ButtonState {
     DRAGGED,
-    CLICKED,
+    PRESSED,
     RELEASED
   }
 }
