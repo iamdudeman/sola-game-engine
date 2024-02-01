@@ -102,7 +102,7 @@ public abstract class Sola {
   void initializeForPlatform(SolaPlatform platform, Runnable completeAsyncInit) {
     this.platform = platform;
 
-    platform.onKeyPressed(event -> keyboardInput.keyPressed(event));
+    platform.onKeyPressed(event -> keyboardInput.onKeyPressed(event));
     platform.onKeyReleased(event -> keyboardInput.keyReleased(event));
     platform.onMouseMoved(event -> mouseInput.onMouseMoved(event));
     platform.onMousePressed(event -> mouseInput.onMousePressed(event));

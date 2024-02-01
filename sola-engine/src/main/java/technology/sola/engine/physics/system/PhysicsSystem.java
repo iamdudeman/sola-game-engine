@@ -12,6 +12,9 @@ import technology.sola.math.linear.Vector2D;
  * unless it is kinematic. Then it will update the translation based on the velocity scaled to deltaTime.
  */
 public class PhysicsSystem extends EcsSystem {
+  /**
+   * The order of this system.
+   */
   public static final int ORDER = 10;
 
   @Override

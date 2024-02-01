@@ -55,7 +55,7 @@ public class PlayerInputSystem extends EcsSystem {
 
   @Override
   public void update(World world, float deltaTime) {
-    if (mouseInput.isMouseClicked(MouseButton.PRIMARY) || mouseInput.isMouseClicked(MouseButton.SECONDARY)) {
+    if (mouseInput.isMousePressed(MouseButton.PRIMARY) || mouseInput.isMousePressed(MouseButton.SECONDARY)) {
       Vector2D worldMousePosition = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
 
       var entries = world.createView().of(TransformComponent.class, MinesweeperSquareComponent.class).getEntries();
@@ -68,7 +68,7 @@ public class PlayerInputSystem extends EcsSystem {
         MinesweeperSquareComponent square = entry.c2();
 
         if (squareBounds.contains(worldMousePosition)) {
-          if (mouseInput.isMouseClicked(MouseButton.PRIMARY)) {
+          if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
             handleReveal(entries, square);
           } else {
             handleFlag(square);

@@ -27,10 +27,20 @@ public class Matrix3D {
     IDENTITY_MATRIX.matrix[2][2] = 1f;
   }
 
+  /**
+   * @return the identity matrix instance
+   */
   public static Matrix3D identity() {
     return IDENTITY_MATRIX;
   }
 
+  /**
+   * Creates a new translation matrix for the desired x,y values.
+   *
+   * @param tx the x translate
+   * @param ty the y translate
+   * @return new translation matrix
+   */
   public static Matrix3D translate(float tx, float ty) {
     Matrix3D result = new Matrix3D();
 
@@ -49,6 +59,13 @@ public class Matrix3D {
     return result;
   }
 
+  /**
+   * Creates a new scale matrix for the desired x-axis and y-axis values.
+   *
+   * @param sx the x-axis scale
+   * @param sy the y-axis scale
+   * @return new scale matrix
+   */
   public static Matrix3D scale(float sx, float sy) {
     if (sx == 1 && sy == 1) {
       return IDENTITY_MATRIX;
@@ -71,6 +88,12 @@ public class Matrix3D {
     return result;
   }
 
+  /**
+   * Creates a new rotation matrix for the desired radians value.
+   *
+   * @param radians the radians for the rotation
+   * @return new rotation matrix
+   */
   public static Matrix3D rotate(float radians) {
     Matrix3D result = new Matrix3D();
 
@@ -89,6 +112,13 @@ public class Matrix3D {
     return result;
   }
 
+  /**
+   * Creates a new sheer matrix for the desired x,y values.
+   *
+   * @param sx the x sheer
+   * @param sy the y sheer
+   * @return new sheer matrix
+   */
   public static Matrix3D sheer(float sx, float sy) {
     Matrix3D result = new Matrix3D();
 
@@ -107,7 +137,12 @@ public class Matrix3D {
     return result;
   }
 
-
+  /**
+   * Multiplies two matrices together returning a new instance as the result.
+   *
+   * @param matrix3D the matrix to multiply with
+   * @return new matrix with the multiplied result
+   */
   public Matrix3D multiply(Matrix3D matrix3D) {
     Matrix3D result = new Matrix3D();
 
@@ -174,6 +209,13 @@ public class Matrix3D {
     return result;
   }
 
+  /**
+   * Returns a bounding box for this matrix transform applied to a rectangle with width and height.
+   *
+   * @param width  the original width of the rectangle
+   * @param height the original height of the rectangle
+   * @return the bounding box after matrix transform is applied
+   */
   public Rectangle getBoundingBoxForTransform(int width, int height) {
     // top left
     Vector2D point = multiply(0, 0);

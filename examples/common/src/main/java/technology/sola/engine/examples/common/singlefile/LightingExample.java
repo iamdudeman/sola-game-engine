@@ -132,7 +132,7 @@ public class LightingExample extends SolaWithDefaults {
         transformComponent.setX(transformComponent.getX() + speed);
       }
 
-      if (mouseInput.isMouseClicked(MouseButton.PRIMARY)) {
+      if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
         Random random = new Random();
         Vector2D coordinate = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
         float radius = random.nextFloat(8f, 32f);

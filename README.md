@@ -17,11 +17,11 @@ You can view a collection of demos built with the sola game engine running in yo
 You can use the [Sola Game Template repo](https://github.com/iamdudeman/sola-game-template) as a template to start
 your repo using the sola game engine.
 
-The general structure of a Sola project is to create an instance
-of [Sola](sola-engine/src/main/java/technology/sola/engine/core/Sola.java)
-and then choose an implementation
+The general structure of a Sola project is to first create an instance
+of [Sola](sola-engine/src/main/java/technology/sola/engine/core/Sola.java). This is where all your amazing game code
+goes! Then you choose an implementation
 of [SolaPlatform](sola-engine/src/main/java/technology/sola/engine/core/SolaPlatform.java)
-to "play" the Sola.
+that has all the bindings for your desired platform to actually "play" the Sola.
 
 ```java
 public class Main {

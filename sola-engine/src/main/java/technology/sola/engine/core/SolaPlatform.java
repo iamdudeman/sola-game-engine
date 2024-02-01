@@ -238,6 +238,10 @@ public abstract class SolaPlatform {
   protected record MouseCoordinate(int x, int y) {
   }
 
+  /**
+   * GameLoopProvider is a {@link FunctionalInterface} defining the contract for providing a {@link GameLoop}
+   * implementation for the sola game engine to use.
+   */
   @FunctionalInterface
   protected interface GameLoopProvider {
     /**
@@ -252,6 +256,10 @@ public abstract class SolaPlatform {
     GameLoop create(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond);
   }
 
+  /**
+   * SolaPlatformInitialization is a {@link FunctionalInterface} defining the contract for finishing initialization
+   * of a {@link SolaPlatform}.
+   */
   @FunctionalInterface
   protected interface SolaPlatformInitialization {
     /**
