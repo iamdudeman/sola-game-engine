@@ -1,6 +1,6 @@
 plugins {
   id("sola.java-conventions")
-  id("technology.sola.sola-java-distribution")
+  id("technology.sola.plugins.sola-java-distribution")
 }
 
 dependencies {
@@ -9,6 +9,6 @@ dependencies {
 }
 
 solaJavaDist {
-  mainClass = "${project.properties["basePackage"]}.${project.name}.SwingMain"
+  mainClass = "${project.properties["basePackage"]}.${project.name}.JavaFxMain"
   useJavaFx = true
 }

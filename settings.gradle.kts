@@ -1,5 +1,9 @@
 rootProject.name = "sola-game-engine"
 
+pluginManagement {
+  includeBuild("sola-gradle-plugins")
+}
+
 include(
   "sola-engine",
   "sola-engine:server",

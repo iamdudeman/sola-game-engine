@@ -1,4 +1,5 @@
-import gradle.kotlin.dsl.accessors._562f70a48f5f023984edc1e4e0911628.runtimeClasspath
+package technology.sola.plugins
+
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.CopySpec
@@ -50,7 +51,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
           attributes["Main-Class"] = solaJavaDistributionPluginExtension.mainClass
         }
 
-        val dependencies = configurations.runtimeClasspath.get().map(::zipTree)
+        val dependencies = configurations.getByName("runtimeClasspath").map(::zipTree)
 
         from(dependencies)
         from("${project.rootDir}/assets") {
@@ -58,7 +59,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
         }
         with(project.tasks.getByName("jar", CopySpec::class))
         destinationDirectory.set(file("${project.rootDir}/dist/${project.name}"))
-        dependsOn(configurations.runtimeClasspath)
+        dependsOn(configurations.getByName("runtimeClasspath"))
       }
 
       project.task("prepareJPackage", Delete::class) {

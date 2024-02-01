@@ -1,6 +1,6 @@
 plugins {
   id("sola.java-conventions")
-  id("technology.sola.sola-java-distribution")
+  id("technology.sola.plugins.sola-java-distribution")
   id("technology.sola.sola-publishing")
 }
 
