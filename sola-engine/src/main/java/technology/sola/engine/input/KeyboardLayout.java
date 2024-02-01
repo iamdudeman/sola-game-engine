@@ -9,15 +9,21 @@ import java.util.Map;
  */
 public final class KeyboardLayout {
   private static Map<Character, Character> shiftMap;
-  private static Type type = Type.Qwerty;
+  private static Type type = Type.QWERTY;
   private static HasShiftFunction hasShiftFunction;
 
   static {
-    setType(Type.Qwerty);
+    setType(Type.QWERTY);
   }
 
+  /**
+   * The type of keyboard.
+   */
   public enum Type {
-    Qwerty
+    /**
+     * Standard QWERTY layout.
+     */
+    QWERTY
   }
 
   public static char shift(char character) {
@@ -36,7 +42,7 @@ public final class KeyboardLayout {
     KeyboardLayout.type = type;
     shiftMap = new HashMap<>();
 
-    if (type == Type.Qwerty) {
+    if (type == Type.QWERTY) {
       shiftMap.put('1', '!');
       shiftMap.put('2', '@');
       shiftMap.put('3', '#');
