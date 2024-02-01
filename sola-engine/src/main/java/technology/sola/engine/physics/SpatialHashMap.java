@@ -155,6 +155,12 @@ public class SpatialHashMap {
     return maxWidthOrHeight;
   }
 
+  /**
+   * BucketId holds the top, left coordinate that identifies a bucket.
+   *
+   * @param x the left coordinate value
+   * @param y the y coordinate value
+   */
   public record BucketId(int x, int y) {
   }
 }

@@ -30,6 +30,7 @@ public record SolaConfiguration(
    * @param title          the title for the {@link Sola}.
    * @param rendererWidth  the width of the {@link technology.sola.engine.graphics.renderer.Renderer}
    * @param rendererHeight the height of the {@link technology.sola.engine.graphics.renderer.Renderer}
+   * @return a new {@link Builder} instance
    */
   public static Builder build(String title, int rendererWidth, int rendererHeight) {
     return new Builder(title, rendererWidth, rendererHeight);
