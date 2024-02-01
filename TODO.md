@@ -15,8 +15,6 @@
 
 ## TODO List
 
-* Tooling
-    * make an "interactive mode" available for when no command line arguments are passed in
 * update to Java 21
     * teavm 0.9.0 has support
 * Consider array list for possible SpacialHashMap performance boost
