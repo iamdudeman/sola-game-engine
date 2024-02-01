@@ -35,15 +35,3 @@ gradlePlugin {
     }
   }
 }
-
-publishing {
-  publications {
-    create<MavenPublication>("maven") {
-      groupId = "technology.sola.plugins"
-      artifactId = "sola-gradle-plugins"
-      version = props.getProperty("version")
-
-      from(components["java"])
-    }
-  }
-}
