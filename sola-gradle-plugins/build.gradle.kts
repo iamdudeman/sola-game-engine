@@ -4,6 +4,7 @@ plugins {
   `kotlin-dsl`
   `java-gradle-plugin`
   `maven-publish`
+  id("com.gradle.plugin-publish") version "1.2.1"
 }
 
 val props = Properties()
@@ -38,7 +39,9 @@ gradlePlugin {
 publishing {
   publications {
     create<MavenPublication>("maven") {
+      groupId = "technology.sola.plugins"
       artifactId = "sola-gradle-plugins"
+      version = props.getProperty("version")
 
       from(components["java"])
     }
