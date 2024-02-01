@@ -1,11 +1,5 @@
 # sola-game-engine TODO list
 
-* gradle stuff
-    * Make distribution gradle plugins available for use through jitpack if possible instead of copying to project local buildSrc
-        * maybe `:tooling:plugins`?
-        * https://docs.gradle.org/current/userguide/custom_plugins.html#sec:custom_plugins_standalone_project
-        * https://github.com/jitpack/jitpack.io/issues/1459
-
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
