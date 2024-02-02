@@ -743,7 +743,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Includes only content size.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/animation/SpriteAnimatorComponent.html#CONTINUOUS" class="member-name-link">CONTINUOUS</a> - Static variable in class technology.sola.engine.graphics.components.animation.<a href="technology.sola.engine/technology/sola/engine/graphics/components/animation/SpriteAnimatorComponent.html" title="class in technology.sola.engine.graphics.components.animation">SpriteAnimatorComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constant for telling the <a href="technology.sola.engine/technology/sola/engine/graphics/components/animation/SpriteAnimatorComponent.html" title="class in technology.sola.engine.graphics.components.animation"><code>SpriteAnimatorComponent</code></a> to continuously loop the animation.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/audio/AudioClip.html#CONTINUOUS_LOOPING" class="member-name-link">CONTINUOUS_LOOPING</a> - Static variable in interface technology.sola.engine.assets.audio.<a href="technology.sola.engine/technology/sola/engine/assets/audio/AudioClip.html" title="interface in technology.sola.engine.assets.audio">AudioClip</a></dt>
 <dd>
 <div class="block">Constant used in <a href="technology.sola.engine/technology/sola/engine/assets/audio/AudioClip.html#loop(int)"><code>AudioClip.loop(int)</code></a> to loop until <a href="technology.sola.engine/technology/sola/engine/assets/audio/AudioClip.html#stop()"><code>AudioClip.stop()</code></a> is called.</div>
@@ -972,6 +974,11 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#drawToLayer(java.lang.String,technology.sola.engine.graphics.renderer.DrawItem)" class="member-name-link">drawToLayer(String, DrawItem)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
 <dd>
 <div class="block">Adds a <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> to a layer at default order.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteKeyFrame.html#DURATION_FREEZE" class="member-name-link">DURATION_FREEZE</a> - Static variable in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a></dt>
+<dd>
+<div class="block">This duration value informs the <a href="technology.sola.engine/technology/sola/engine/graphics/system/SpriteAnimatorSystem.html" title="class in technology.sola.engine.graphics.system"><code>SpriteAnimatorSystem</code></a> to not tick
+ the duration of the sprite, so it will continue to render on this frame.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/DynamicBodyComponent.html" class="type-name-link" title="class in technology.sola.engine.physics.component">DynamicBodyComponent</a> - Class in <a href="technology.sola.engine/technology/sola/engine/physics/component/package-summary.html">technology.sola.engine.physics.component</a></dt>
 <dd>
@@ -2225,8 +2232,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Element will not render, but it will continue to take up its space in the layout.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteKeyFrame.html#HOLD" class="member-name-link">HOLD</a> - Static variable in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#HOME" class="member-name-link">HOME</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
 <dd>
 <div class="block">Home key.</div>
@@ -3305,11 +3310,17 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/RectangleEntityGraphicsModule.html#%3Cinit%3E()" class="member-name-link">RectangleEntityGraphicsModule()</a> - Constructor for class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/RectangleEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">RectangleEntityGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html" class="type-name-link" title="class in technology.sola.engine.graphics.components">RectangleRendererComponent</a> - Class in <a href="technology.sola.engine/technology/sola/engine/graphics/components/package-summary.html">technology.sola.engine.graphics.components</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">RectangleRendererComponent is a <code>Component</code> containing data for rendering 2d rectangles.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html#%3Cinit%3E(technology.sola.engine.graphics.Color)" class="member-name-link">RectangleRendererComponent(Color)</a> - Constructor for class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html" title="class in technology.sola.engine.graphics.components">RectangleRendererComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a RectangleRendererComponent of desired color that is filled.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html#%3Cinit%3E(technology.sola.engine.graphics.Color,boolean)" class="member-name-link">RectangleRendererComponent(Color, boolean)</a> - Constructor for class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html" title="class in technology.sola.engine.graphics.components">RectangleRendererComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a RectangleRendererComponent of desired color that is either filled or not filled.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/Color.html#RED" class="member-name-link">RED</a> - Static variable in class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/Color.html" title="class in technology.sola.engine.graphics">Color</a></dt>
 <dd>
 <div class="block">Color constant - rgb(255, 0, 0).</div>
@@ -3635,6 +3646,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Sets the <a href="technology.sola.engine/technology/sola/engine/graphics/Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the light.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html#setColor(technology.sola.engine.graphics.Color)" class="member-name-link">setColor(Color)</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html" title="class in technology.sola.engine.graphics.components">RectangleRendererComponent</a></dt>
+<dd>
+<div class="block">Sets the <a href="technology.sola.engine/technology/sola/engine/graphics/Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> for rendering.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/BaseStyles.Builder.html#setCrossAxisChildren(technology.sola.engine.graphics.gui.style.property.CrossAxisChildren)" class="member-name-link">setCrossAxisChildren(CrossAxisChildren)</a> - Method in class technology.sola.engine.graphics.gui.style.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/BaseStyles.Builder.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles.Builder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElementBounds.html#setDimensions(int,int)" class="member-name-link">setDimensions(int, int)</a> - Method in record class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElementBounds.html" title="class in technology.sola.engine.graphics.gui">GuiElementBounds</a></dt>
@@ -3650,6 +3665,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/CircleRendererComponent.html#setFilled(boolean)" class="member-name-link">setFilled(boolean)</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/CircleRendererComponent.html" title="class in technology.sola.engine.graphics.components">CircleRendererComponent</a></dt>
 <dd>
 <div class="block">Sets whether the circle should be filled or not.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html#setFilled(boolean)" class="member-name-link">setFilled(boolean)</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html" title="class in technology.sola.engine.graphics.components">RectangleRendererComponent</a></dt>
+<dd>
+<div class="block">Sets whether the rectangle should be filled or not.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#setFont(technology.sola.engine.assets.graphics.font.Font)" class="member-name-link">setFont(Font)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
 <dd>
@@ -4179,15 +4198,25 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates an instance of SpriteEntityGraphicsModule.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteKeyFrame.html" class="type-name-link" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a> - Class in <a href="technology.sola.engine/technology/sola/engine/graphics/components/package-summary.html">technology.sola.engine.graphics.components</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">SpriteKeyFrame holds information about how long a particular sprite should be rendered as part of an animation.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteKeyFrame.html#%3Cinit%3E(java.lang.String,java.lang.String)" class="member-name-link">SpriteKeyFrame(String, String)</a> - Constructor for class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a new sprite key frame from desired <a href="technology.sola.engine/technology/sola/engine/assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics"><code>SpriteSheet</code></a> id and sprite id.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteKeyFrame.html#%3Cinit%3E(java.lang.String,java.lang.String,long)" class="member-name-link">SpriteKeyFrame(String, String, long)</a> - Constructor for class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a new sprite key frame from desired <a href="technology.sola.engine/technology/sola/engine/assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics"><code>SpriteSheet</code></a> id, sprite id, and duration.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteKeyFrame.html#%3Cinit%3E(technology.sola.engine.assets.graphics.SolaImage)" class="member-name-link">SpriteKeyFrame(SolaImage)</a> - Constructor for class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a new sprite key frame from desired <a href="technology.sola.engine/technology/sola/engine/assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a>.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteKeyFrame.html#%3Cinit%3E(technology.sola.engine.assets.graphics.SolaImage,long)" class="member-name-link">SpriteKeyFrame(SolaImage, long)</a> - Constructor for class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a new sprite key frame from desired <a href="technology.sola.engine/technology/sola/engine/assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> and duration.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/SpriteSheet.html" class="type-name-link" title="class in technology.sola.engine.assets.graphics">SpriteSheet</a> - Class in <a href="technology.sola.engine/technology/sola/engine/assets/graphics/package-summary.html">technology.sola.engine.assets.graphics</a></dt>
 <dd>
 <div class="block">SpriteSheet is an <a href="technology.sola.engine/technology/sola/engine/assets/Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> for a collection of sprites.</div>

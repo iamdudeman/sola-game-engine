@@ -200,12 +200,12 @@ loadScripts(document, 'script');</script>
  <a href="SolaEntityGraphicsModule.html" title="type parameter in SolaEntityGraphicsModule">V</a>&nbsp;viewEntry,
  <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;cameraModifiedEntityTransform)</span></div>
 <div class="block">Called on each <code>Entity</code> to render it. A <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> instance with the camera's transform
- applied is provided for each entity.</div>
+ applied is provided for each entity. If an entity has a <a href="../../../graphics/components/LayerComponent.html" title="class in technology.sola.engine.graphics.components"><code>LayerComponent</code></a> it will be rendered to its layer.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>renderer</code> - tbe <a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> instance</dd>
 <dd><code>viewEntry</code> - the <code>ViewEntry</code> containing the <code>Entity</code> to render</dd>
-<dd><code>cameraModifiedEntityTransform</code> - a <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> with the camera's transform applied to the entity's</dd>
+<dd><code>cameraModifiedEntityTransform</code> - a <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> with the camera's transform applied to the entity's transform</dd>
 </dl>
 </section>
 </li>

@@ -78,6 +78,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SpriteKeyFrame</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">SpriteKeyFrame holds information about how long a particular sprite should be rendered as part of an animation.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -91,8 +92,11 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static final long</code></div>
-<div class="col-second even-row-color"><code><a href="#HOLD" class="member-name-link">HOLD</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-second even-row-color"><code><a href="#DURATION_FREEZE" class="member-name-link">DURATION_FREEZE</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">This duration value informs the <a href="../system/SpriteAnimatorSystem.html" title="class in technology.sola.engine.graphics.system"><code>SpriteAnimatorSystem</code></a> to not tick
+ the duration of the sprite, so it will continue to render on this frame.</div>
+</div>
 </div>
 </section>
 </li>
@@ -106,16 +110,24 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,java.lang.String)" class="member-name-link">SpriteKeyFrame</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;spriteSheetId,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;spriteId)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a new sprite key frame from desired <a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics"><code>SpriteSheet</code></a> id and sprite id.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String,java.lang.String,long)" class="member-name-link">SpriteKeyFrame</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;spriteSheetId,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;spriteId,
  long&nbsp;duration)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Creates a new sprite key frame from desired <a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics"><code>SpriteSheet</code></a> id, sprite id, and duration.</div>
+</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.assets.graphics.SolaImage)" class="member-name-link">SpriteKeyFrame</a><wbr>(<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;spriteImage)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a new sprite key frame from desired <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a>.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.assets.graphics.SolaImage,long)" class="member-name-link">SpriteKeyFrame</a><wbr>(<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;spriteImage,
  long&nbsp;duration)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Creates a new sprite key frame from desired <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> and duration.</div>
+</div>
 </div>
 </section>
 </li>
@@ -157,14 +169,16 @@ loadScripts(document, 'script');</script>
 <h2>Field Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="HOLD">
-<h3>HOLD</h3>
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">HOLD</span></div>
+<section class="detail" id="DURATION_FREEZE">
+<h3>DURATION_FREEZE</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">DURATION_FREEZE</span></div>
+<div class="block">This duration value informs the <a href="../system/SpriteAnimatorSystem.html" title="class in technology.sola.engine.graphics.system"><code>SpriteAnimatorSystem</code></a> to not tick
+ the duration of the sprite, so it will continue to render on this frame.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list">
-<li><a href="../../../../../../constant-values.html#technology.sola.engine.graphics.components.SpriteKeyFrame.HOLD">Constant Field Values</a></li>
+<li><a href="../../../../../../constant-values.html#technology.sola.engine.graphics.components.SpriteKeyFrame.DURATION_FREEZE">Constant Field Values</a></li>
 </ul>
 </dd>
 </dl>
@@ -183,6 +197,13 @@ loadScripts(document, 'script');</script>
 <h3>SpriteKeyFrame</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SpriteKeyFrame</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;spriteSheetId,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;spriteId)</span></div>
+<div class="block">Creates a new sprite key frame from desired <a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics"><code>SpriteSheet</code></a> id and sprite id. Defaults the duration to
+ <a href="#DURATION_FREEZE"><code>DURATION_FREEZE</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>spriteSheetId</code> - the SpriteSheet asset id</dd>
+<dd><code>spriteId</code> - the sprite id</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -191,12 +212,25 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SpriteKeyFrame</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;spriteSheetId,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;spriteId,
  long&nbsp;duration)</span></div>
+<div class="block">Creates a new sprite key frame from desired <a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics"><code>SpriteSheet</code></a> id, sprite id, and duration.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>spriteSheetId</code> - the SpriteSheet asset id</dd>
+<dd><code>spriteId</code> - the sprite id</dd>
+<dd><code>duration</code> - the duration of rendering for this frame in the animation sequence</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(technology.sola.engine.assets.graphics.SolaImage)">
 <h3>SpriteKeyFrame</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SpriteKeyFrame</span><wbr><span class="parameters">(<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;spriteImage)</span></div>
+<div class="block">Creates a new sprite key frame from desired <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a>. Defaults the duration to
+ <a href="#DURATION_FREEZE"><code>DURATION_FREEZE</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>spriteImage</code> - the image of the sprite</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -204,6 +238,12 @@ loadScripts(document, 'script');</script>
 <h3>SpriteKeyFrame</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SpriteKeyFrame</span><wbr><span class="parameters">(<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;spriteImage,
  long&nbsp;duration)</span></div>
+<div class="block">Creates a new sprite key frame from desired <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> and duration.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>spriteImage</code> - the image of the sprite</dd>
+<dd><code>duration</code> - the duration of rendering for this frame in the animation sequence</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -218,18 +258,30 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getSpriteSheetId()">
 <h3>getSpriteSheetId</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getSpriteSheetId</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the <a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics"><code>SpriteSheet</code></a> asset id</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getSpriteId()">
 <h3>getSpriteId</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getSpriteId</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the sprite id in the <a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics"><code>SpriteSheet</code></a></dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getDuration()">
 <h3>getDuration</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getDuration</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the duration of this frame in the animation</dd>
+</dl>
 </section>
 </li>
 </ul>

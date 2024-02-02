@@ -83,6 +83,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">RectangleRendererComponent</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements technology.sola.ecs.Component</span></div>
+<div class="block">RectangleRendererComponent is a <code>Component</code> containing data for rendering 2d rectangles.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -95,10 +96,14 @@ implements technology.sola.ecs.Component</span></div>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.Color)" class="member-name-link">RectangleRendererComponent</a><wbr>(<a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a RectangleRendererComponent of desired color that is filled.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.Color,boolean)" class="member-name-link">RectangleRendererComponent</a><wbr>(<a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color,
  boolean&nbsp;isFilled)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Creates a RectangleRendererComponent of desired color that is either filled or not filled.</div>
+</div>
 </div>
 </section>
 </li>
@@ -119,6 +124,16 @@ implements technology.sola.ecs.Component</span></div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isFilled()" class="member-name-link">isFilled</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setColor(technology.sola.engine.graphics.Color)" class="member-name-link">setColor</a><wbr>(<a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> for rendering.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setFilled(boolean)" class="member-name-link">setFilled</a><wbr>(boolean&nbsp;filled)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets whether the rectangle should be filled or not.</div>
+</div>
 </div>
 </div>
 </div>
@@ -143,6 +158,11 @@ implements technology.sola.ecs.Component</span></div>
 <section class="detail" id="&lt;init&gt;(technology.sola.engine.graphics.Color)">
 <h3>RectangleRendererComponent</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">RectangleRendererComponent</span><wbr><span class="parameters">(<a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</span></div>
+<div class="block">Creates a RectangleRendererComponent of desired color that is filled.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>color</code> - the <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the rectangle</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -150,6 +170,12 @@ implements technology.sola.ecs.Component</span></div>
 <h3>RectangleRendererComponent</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">RectangleRendererComponent</span><wbr><span class="parameters">(<a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color,
  boolean&nbsp;isFilled)</span></div>
+<div class="block">Creates a RectangleRendererComponent of desired color that is either filled or not filled.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>color</code> - the <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the rectangle</dd>
+<dd><code>isFilled</code> - whether the circle should be filled or not</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -164,12 +190,42 @@ implements technology.sola.ecs.Component</span></div>
 <section class="detail" id="getColor()">
 <h3>getColor</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">getColor</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the rectangle</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isFilled()">
 <h3>isFilled</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isFilled</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if the rectangle should be filled when rendered</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setColor(technology.sola.engine.graphics.Color)">
+<h3>setColor</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setColor</span><wbr><span class="parameters">(<a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</span></div>
+<div class="block">Sets the <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> for rendering.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>color</code> - the new color</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setFilled(boolean)">
+<h3>setFilled</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setFilled</span><wbr><span class="parameters">(boolean&nbsp;filled)</span></div>
+<div class="block">Sets whether the rectangle should be filled or not.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>filled</code> - the new filled status</dd>
+</dl>
 </section>
 </li>
 </ul>
