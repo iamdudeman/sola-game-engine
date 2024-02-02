@@ -1,5 +1,9 @@
 # sola-game-engine TODO list
 
+* Consider mechanism to "batch" together SolaGraphics entity draws when they are in the same layer
+    * Currently, it does each one individually
+
+
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -20,9 +24,6 @@
 * optimize collision detection broad phase
     * Consider array list for possible SpacialHashMap performance boost
     * Consider BVH implementation (bounded volume hierarchy which is a type of quadtree)
-* Consider "stopping" AudioClip when it is finished by default, so it can be immediately played again?
-* Consider mechanism to "batch" together SolaGraphics entity draws when they are in the same layer
-    * Currently, it does each one individually
 * Gui improvements
     * Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
         * maybe just check for any mouse event list size > 0?
