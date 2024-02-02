@@ -131,4 +131,39 @@ public class ParticleEmitterComponent implements Component {
   public ParticleEmitterComponent setParticleSize(float size) {
     return setParticleSizeBounds(size, size);
   }
+
+  private class Particle {
+    private final Color baseColor;
+    private final float size;
+    private final float maxLifespan;
+    private final float inverseMaxLifespan;
+    private final Vector2D velocity;
+    private Vector2D position;
+    private float remainingLifespan;
+
+    public Particle(Color baseColor, float size, float maxLifespan, float inverseMaxLifespan, Vector2D velocity) {
+      this.baseColor = baseColor;
+      this.size = size;
+      this.maxLifespan = maxLifespan;
+      this.inverseMaxLifespan = inverseMaxLifespan;
+      this.velocity = velocity;
+
+      inverseMaxLifespan = 1 / maxLifespan;
+    }
+
+    public void reduceLifespan(float amount) {
+      this.remainingLifespan -= amount;
+    }
+
+    public Color getColorForRendering() {
+      int alpha = Math.max((int) ((255 * remainingLifespan * inverseMaxLifespan) + 0.5f), 0);
+
+      return new Color(
+        alpha,
+        baseColor.getRed(),
+        baseColor.getGreen(),
+        baseColor.getBlue()
+      );
+    }
+  }
 }
