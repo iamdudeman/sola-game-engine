@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SpriteAnimatorComponent implements Component {
+  /**
+   * Constant for telling the {@link SpriteAnimatorComponent} to continuously loop the animation.
+   */
   public static final int CONTINUOUS = -1;
 
   private final Map<String, SpriteKeyFrame[]> animationMap = new HashMap<>();
@@ -49,7 +52,7 @@ public class SpriteAnimatorComponent implements Component {
   public void tickAnimation(float deltaTime) {
     long duration = activeFrame.getDuration();
 
-    if (duration == SpriteKeyFrame.HOLD) {
+    if (duration == SpriteKeyFrame.DURATION_FREEZE) {
       return;
     }
 
