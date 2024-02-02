@@ -27,11 +27,11 @@ public abstract class SolaEntityGraphicsModule<V extends ViewEntry> extends Sola
 
   /**
    * Called on each {@link Entity} to render it. A {@link TransformComponent} instance with the camera's transform
-   * applied is provided for each entity.
+   * applied is provided for each entity. If an entity has a {@link LayerComponent} it will be rendered to its layer.
    *
    * @param renderer                      tbe {@link Renderer} instance
    * @param viewEntry                     the {@link ViewEntry} containing the {@link Entity} to render
-   * @param cameraModifiedEntityTransform a {@link TransformComponent} with the camera's transform applied to the entity's
+   * @param cameraModifiedEntityTransform a {@link TransformComponent} with the camera's transform applied to the entity's transform
    */
   public abstract void renderMethod(Renderer renderer, V viewEntry, TransformComponent cameraModifiedEntityTransform);
 
@@ -40,23 +40,15 @@ public abstract class SolaEntityGraphicsModule<V extends ViewEntry> extends Sola
     for (var entry : getViewToRender(world).getEntries()) {
       Entity entity = entry.entity();
       LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
-      BlendModeComponent blendModeComponent = entity.getComponent(BlendModeComponent.class);
-      TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
-      TransformComponent transformWithCameraComponent = getTransformForAppliedCamera(transformComponent, cameraScaleTransform, cameraTranslationTransform);
-
-      var previousBlendFunction = renderer.getBlendFunction();
-      var blendFunction = blendModeComponent == null ? previousBlendFunction : blendModeComponent.getBlendFunction();
 
       if (layerComponent == null) {
-        renderer.setBlendFunction(blendFunction);
-        renderMethod(renderer, entry, transformWithCameraComponent);
-        renderer.setBlendFunction(previousBlendFunction);
+        renderEntity(renderer, entry, cameraScaleTransform, cameraTranslationTransform);
       } else {
-        renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getOrder(), r2 -> {
-          renderer.setBlendFunction(blendFunction);
-          renderMethod(renderer, entry, transformWithCameraComponent);
-          renderer.setBlendFunction(previousBlendFunction);
-        });
+        renderer.drawToLayer(
+          layerComponent.getLayer(),
+          layerComponent.getOrder(),
+          r2 -> renderEntity(r2, entry, cameraScaleTransform, cameraTranslationTransform)
+        );
       }
     }
   }
@@ -76,5 +68,19 @@ public abstract class SolaEntityGraphicsModule<V extends ViewEntry> extends Sola
     return new TransformComponent(
       entityTranslation.x(), entityTranslation.y(), entityScale.x(), entityScale.y()
     );
+  }
+
+  private void renderEntity(Renderer renderer, V entry, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
+    Entity entity = entry.entity();
+    BlendModeComponent blendModeComponent = entity.getComponent(BlendModeComponent.class);
+    TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
+    TransformComponent transformWithCameraComponent = getTransformForAppliedCamera(transformComponent, cameraScaleTransform, cameraTranslationTransform);
+
+    var previousBlendFunction = renderer.getBlendFunction();
+    var blendFunction = blendModeComponent == null ? previousBlendFunction : blendModeComponent.getBlendFunction();
+
+    renderer.setBlendFunction(blendFunction);
+    renderMethod(renderer, entry, transformWithCameraComponent);
+    renderer.setBlendFunction(previousBlendFunction);
   }
 }
