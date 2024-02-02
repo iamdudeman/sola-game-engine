@@ -27,11 +27,11 @@ public abstract class SolaEntityGraphicsModule<V extends ViewEntry> extends Sola
 
   /**
    * Called on each {@link Entity} to render it. A {@link TransformComponent} instance with the camera's transform
-   * applied is provided for each entity.
+   * applied is provided for each entity. If an entity has a {@link LayerComponent} it will be rendered to its layer.
    *
    * @param renderer                      tbe {@link Renderer} instance
    * @param viewEntry                     the {@link ViewEntry} containing the {@link Entity} to render
-   * @param cameraModifiedEntityTransform a {@link TransformComponent} with the camera's transform applied to the entity's
+   * @param cameraModifiedEntityTransform a {@link TransformComponent} with the camera's transform applied to the entity's transform
    */
   public abstract void renderMethod(Renderer renderer, V viewEntry, TransformComponent cameraModifiedEntityTransform);
 
@@ -44,9 +44,11 @@ public abstract class SolaEntityGraphicsModule<V extends ViewEntry> extends Sola
       if (layerComponent == null) {
         renderEntity(renderer, entry, cameraScaleTransform, cameraTranslationTransform);
       } else {
-        renderer.drawToLayer(layerComponent.getLayer(), layerComponent.getOrder(), r2 -> {
-          renderEntity(renderer, entry, cameraScaleTransform, cameraTranslationTransform);
-        });
+        renderer.drawToLayer(
+          layerComponent.getLayer(),
+          layerComponent.getOrder(),
+          r2 -> renderEntity(r2, entry, cameraScaleTransform, cameraTranslationTransform)
+        );
       }
     }
   }
