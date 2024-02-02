@@ -1,9 +1,5 @@
 # sola-game-engine TODO list
 
-* Consider mechanism to "batch" together SolaGraphics entity draws when they are in the same layer
-    * Currently, it does each one individually
-
-
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
