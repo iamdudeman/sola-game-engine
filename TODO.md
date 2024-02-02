@@ -52,8 +52,6 @@
             * Switch JsMouseUtils to mouse events instead of pointer events
 * Android Platform
     * Implement
-* Keep an eye on Cheerpj for the future of browser stuff (it doesn't support Java 17+ yet)
-    * https://labs.leaningtech.com/cheerpj3/getting-started/Java-app
 * Investigate possible Steam CloudSave integration
 * Lighting
     * implement more light types other than just point lights
@@ -76,6 +74,8 @@
     * Should probably always use a "default font" if it is implemented
     * Possibly also have ability to show light maps if lighting is enabled
 * Browser Platform
+    * Keep an eye on Cheerpj for the future of browser stuff (it doesn't support Java 17+ yet)
+        * https://labs.leaningtech.com/cheerpj3/getting-started/Java-app
     * modularize (requires figuring out how to modularize parts of teavm needed)
         * ensure `SimpleSolaBrowserFileServer` and `SolaBrowserFileBuilder` in `tools` is exposed as well
     * Improve performance (StressTestExample can't handle a lot of objects)
