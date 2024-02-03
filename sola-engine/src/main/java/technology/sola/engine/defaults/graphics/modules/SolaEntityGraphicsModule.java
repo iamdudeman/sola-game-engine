@@ -35,6 +35,10 @@ public abstract class SolaEntityGraphicsModule<V extends ViewEntry> extends Sola
    */
   public abstract void renderMethod(Renderer renderer, V viewEntry, TransformComponent cameraModifiedEntityTransform);
 
+  public void renderMethod(Renderer renderer, V viewEntry, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform, TransformComponent cameraModifiedEntityTransform) {
+    renderMethod(renderer, viewEntry, cameraModifiedEntityTransform);
+  }
+
   @Override
   public void renderMethod(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
     for (var entry : getViewToRender(world).getEntries()) {
@@ -80,7 +84,7 @@ public abstract class SolaEntityGraphicsModule<V extends ViewEntry> extends Sola
     var blendFunction = blendModeComponent == null ? previousBlendFunction : blendModeComponent.getBlendFunction();
 
     renderer.setBlendFunction(blendFunction);
-    renderMethod(renderer, entry, transformWithCameraComponent);
+    renderMethod(renderer, entry, cameraScaleTransform, cameraTranslationTransform, transformWithCameraComponent);
     renderer.setBlendFunction(previousBlendFunction);
   }
 }

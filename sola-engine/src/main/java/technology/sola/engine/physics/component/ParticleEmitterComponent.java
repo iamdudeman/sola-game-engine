@@ -6,9 +6,19 @@ import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.blend.BlendFunction;
 import technology.sola.math.linear.Vector2D;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+
+// todo clean up this file!
+
 public class ParticleEmitterComponent implements Component {
+  private List<Particle> particleList = new ArrayList<>();
+  private Random random = new Random();
+
+
   private Color particleColor = Color.WHITE;
-  private BlendFunction particleBlendFunction = BlendMode.NORMAL;
   private float particleMinLife = 1f;
   private float particleMaxLife = 2f;
   private Vector2D particleMinVelocity = new Vector2D(-50, -100);
@@ -28,13 +38,32 @@ public class ParticleEmitterComponent implements Component {
     this.particleEmissionDelay = particleEmissionDelay;
   }
 
-  public void emitIfAble(float delta, Runnable runnable) {
+  public void emitIfAble(float delta) {
     timeSinceLastEmission += delta;
 
     if (timeSinceLastEmission > particleEmissionDelay) {
-      runnable.run();
+      Vector2D minVel = getParticleMinVelocity();
+      Vector2D maxVel = getParticleMaxVelocity();
+
+      for (int i = 0; i < getParticlesPerEmit(); i++) {
+        float xVel = getRandomFloat(minVel.x(), maxVel.x());
+        float yVel = getRandomFloat(minVel.y(), maxVel.y());
+        float size = getRandomFloat(getParticleMinSize(), getParticleMaxSize());
+        float life = getRandomFloat(getParticleMinLife(), getParticleMaxLife());
+
+        Particle particle = new Particle(
+          getParticleColor(), size, life, new Vector2D(0, 0), new Vector2D(xVel, yVel)
+        );
+
+        particleList.add(particle);
+      }
+
       timeSinceLastEmission = 0;
     }
+  }
+
+  public Iterator<Particle> emittedParticleIterator() {
+    return particleList.iterator();
   }
 
   public ParticleEmitterComponent setParticleEmissionDelay(float particleEmissionDelay) {
@@ -59,16 +88,6 @@ public class ParticleEmitterComponent implements Component {
 
   public ParticleEmitterComponent setParticleColor(Color particleColor) {
     this.particleColor = particleColor;
-
-    return this;
-  }
-
-  public BlendFunction getParticleBlendFunction() {
-    return particleBlendFunction;
-  }
-
-  public ParticleEmitterComponent setParticleBlendFunction(BlendFunction blendMode) {
-    this.particleBlendFunction = blendMode;
 
     return this;
   }
@@ -132,38 +151,53 @@ public class ParticleEmitterComponent implements Component {
     return setParticleSizeBounds(size, size);
   }
 
-  private class Particle {
+  private float getRandomFloat(float min, float max) {
+    if (Float.compare(min, max) == 0) {
+      return min;
+    }
+
+    return random.nextFloat(min, max);
+  }
+
+  public static class Particle {
     private final Color baseColor;
     private final float size;
-    private final float maxLifespan;
     private final float inverseMaxLifespan;
     private final Vector2D velocity;
     private Vector2D position;
     private float remainingLifespan;
 
-    public Particle(Color baseColor, float size, float maxLifespan, float inverseMaxLifespan, Vector2D velocity) {
+    public Particle(Color baseColor, float size, float maxLifespan, Vector2D position, Vector2D velocity) {
       this.baseColor = baseColor;
       this.size = size;
-      this.maxLifespan = maxLifespan;
-      this.inverseMaxLifespan = inverseMaxLifespan;
+      this.position = position;
       this.velocity = velocity;
 
+      remainingLifespan = maxLifespan;
       inverseMaxLifespan = 1 / maxLifespan;
     }
 
-    public void reduceLifespan(float amount) {
-      this.remainingLifespan -= amount;
+    public void update(float delta) {
+      position = position.add(velocity.scalar(delta));
+      remainingLifespan -= delta;
     }
 
     public Color getColorForRendering() {
       int alpha = Math.max((int) ((255 * remainingLifespan * inverseMaxLifespan) + 0.5f), 0);
 
-      return new Color(
-        alpha,
-        baseColor.getRed(),
-        baseColor.getGreen(),
-        baseColor.getBlue()
-      );
+      return baseColor.updateAlpha(alpha);
+    }
+
+    public float getRemainingLifespan() {
+      return remainingLifespan;
+    }
+
+    public Vector2D getPosition() {
+      return position;
+    }
+
+    public float getSize() {
+      return size;
     }
   }
 }
