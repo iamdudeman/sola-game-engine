@@ -58,12 +58,12 @@ public abstract class SolaEntityGraphicsModule<V extends ViewEntry> extends Sola
       LayerComponent layerComponent = entity.getComponent(LayerComponent.class);
 
       if (layerComponent == null) {
-        renderEntity(renderer, entry, cameraScaleTransform, cameraTranslationTransform);
+        renderEntityWithTransform(renderer, entry, cameraScaleTransform, cameraTranslationTransform);
       } else {
         renderer.drawToLayer(
           layerComponent.getLayer(),
           layerComponent.getOrder(),
-          r2 -> renderEntity(r2, entry, cameraScaleTransform, cameraTranslationTransform)
+          r2 -> renderEntityWithTransform(r2, entry, cameraScaleTransform, cameraTranslationTransform)
         );
       }
     }
@@ -86,7 +86,7 @@ public abstract class SolaEntityGraphicsModule<V extends ViewEntry> extends Sola
     );
   }
 
-  private void renderEntity(Renderer renderer, V entry, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
+  private void renderEntityWithTransform(Renderer renderer, V entry, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
     Entity entity = entry.entity();
     BlendModeComponent blendModeComponent = entity.getComponent(BlendModeComponent.class);
     TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
