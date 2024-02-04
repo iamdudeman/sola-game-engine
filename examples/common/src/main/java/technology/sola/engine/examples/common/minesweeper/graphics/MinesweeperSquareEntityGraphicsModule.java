@@ -21,7 +21,7 @@ public class MinesweeperSquareEntityGraphicsModule extends SolaEntityGraphicsMod
   }
 
   @Override
-  public void renderMethod(Renderer renderer, View2Entry<TransformComponent, MinesweeperSquareComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
+  public void renderEntity(Renderer renderer, View2Entry<TransformComponent, MinesweeperSquareComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
     MinesweeperSquareComponent square = viewEntry.c2();
     float x = cameraModifiedEntityTransform.getX();
     float y = cameraModifiedEntityTransform.getY();

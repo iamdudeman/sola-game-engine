@@ -19,7 +19,7 @@ public class CircleEntityGraphicsModule extends SolaEntityGraphicsModule<View2En
   }
 
   @Override
-  public void renderMethod(Renderer renderer, View2Entry<CircleRendererComponent, TransformComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
+  public void renderEntity(Renderer renderer, View2Entry<CircleRendererComponent, TransformComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
     var circleRenderer = viewEntry.c1();
     float radius = Math.max(cameraModifiedEntityTransform.getScaleX(), cameraModifiedEntityTransform.getScaleY()) * 0.5f;
 

@@ -15,7 +15,7 @@ public class ParticleEmitterEntityGraphicsModule extends SolaEntityGraphicsModul
   }
 
   @Override
-  public void renderMethod(Renderer renderer, View2Entry<ParticleEmitterComponent, TransformComponent> viewEntry, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform, TransformComponent cameraModifiedEntityTransform) {
+  public void renderEntity(Renderer renderer, View2Entry<ParticleEmitterComponent, TransformComponent> viewEntry, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform, TransformComponent cameraModifiedEntityTransform) {
     var particleIter = viewEntry.c1().emittedParticleIterator();
 
     while (particleIter.hasNext()) {
@@ -27,13 +27,13 @@ public class ParticleEmitterEntityGraphicsModule extends SolaEntityGraphicsModul
         position.x(),
         position.y(),
         size.x() * 0.5f,
-        particle.getColorForRendering()
+        particle.getColor()
       );
     }
   }
 
   @Override
-  public void renderMethod(Renderer renderer, View2Entry<ParticleEmitterComponent, TransformComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
+  public void renderEntity(Renderer renderer, View2Entry<ParticleEmitterComponent, TransformComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
     // Not used since camera translate and scale transforms are needed
   }
 }

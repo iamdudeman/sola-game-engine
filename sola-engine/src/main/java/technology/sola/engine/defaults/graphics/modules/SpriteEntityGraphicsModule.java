@@ -35,7 +35,7 @@ public class SpriteEntityGraphicsModule extends SolaEntityGraphicsModule<View2En
   }
 
   @Override
-  public void renderMethod(Renderer renderer, View2Entry<SpriteComponent, TransformComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
+  public void renderEntity(Renderer renderer, View2Entry<SpriteComponent, TransformComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
     SpriteComponent spriteComponent = viewEntry.c1();
 
     if (spriteComponent.getSpriteId() == null) {

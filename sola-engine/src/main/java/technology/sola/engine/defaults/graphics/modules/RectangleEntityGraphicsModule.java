@@ -19,7 +19,7 @@ public class RectangleEntityGraphicsModule extends SolaEntityGraphicsModule<View
   }
 
   @Override
-  public void renderMethod(Renderer renderer, View2Entry<RectangleRendererComponent, TransformComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
+  public void renderEntity(Renderer renderer, View2Entry<RectangleRendererComponent, TransformComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
     var rectangleRenderer = viewEntry.c1();
 
     if (rectangleRenderer.isFilled()) {

@@ -18,10 +18,10 @@ public class ParticleSystem extends EcsSystem {
         while (particleIter.hasNext()) {
           var particle = particleIter.next();
 
-          if (particle.getRemainingLifespan() <= 0) {
-            particleIter.remove();
-          } else {
+          if (particle.isAlive()) {
             particle.update(delta);
+          } else {
+            particleIter.remove();
           }
         }
 

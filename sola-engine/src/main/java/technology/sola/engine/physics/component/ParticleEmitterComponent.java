@@ -2,8 +2,6 @@ package technology.sola.engine.physics.component;
 
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.renderer.BlendMode;
-import technology.sola.engine.graphics.renderer.blend.BlendFunction;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.ArrayList;
@@ -11,13 +9,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-// todo clean up this file!
-
 public class ParticleEmitterComponent implements Component {
-  private List<Particle> particleList = new ArrayList<>();
-  private Random random = new Random();
-
-
+  private final List<Particle> particleList = new ArrayList<>();
+  private final Random random = new Random();
   private Color particleColor = Color.WHITE;
   private float particleMinLife = 1f;
   private float particleMaxLife = 2f;
@@ -182,16 +176,16 @@ public class ParticleEmitterComponent implements Component {
       remainingLifespan -= delta;
     }
 
-    public Color getColorForRendering() {
+    public boolean isAlive() {
+      return remainingLifespan > 0;
+    }
+
+    public Color getColor() {
       int alpha = Math.max((int) ((255 * remainingLifespan * inverseMaxLifespan) + 0.5f), 0);
 
       return baseColor.updateAlpha(alpha);
     }
-
-    public float getRemainingLifespan() {
-      return remainingLifespan;
-    }
-
+    
     public Vector2D getPosition() {
       return position;
     }
