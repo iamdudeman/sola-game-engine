@@ -131,7 +131,7 @@ public class ParticleEmitterComponent implements Component {
   }
 
   /**
-   * Updates the lifespan for newly emitted particles to be a fixed value.
+   * Updates the lifespan for newly emitted {@link Particle}s to be a fixed value.
    *
    * @param life the lifespan for new particles
    * @return this
@@ -140,6 +140,13 @@ public class ParticleEmitterComponent implements Component {
     return setParticleLifeBounds(life, life);
   }
 
+  /**
+   * Updates the minimum and maximum velocities for newly emitted {@link Particle}s.
+   *
+   * @param particleMinVelocity the minimum velocity for new particles
+   * @param particleMaxVelocity the maximum velocity for new particles
+   * @return this
+   */
   public ParticleEmitterComponent setParticleVelocityBounds(Vector2D particleMinVelocity, Vector2D particleMaxVelocity) {
     this.particleMinVelocity = particleMinVelocity;
     this.particleMaxVelocity = particleMaxVelocity;
@@ -147,12 +154,25 @@ public class ParticleEmitterComponent implements Component {
     return this;
   }
 
+  /**
+   * Updates the velocity for newly emitted {@link Particle}s to be a fixed value.
+   *
+   * @param velocity the velocity for new particles
+   * @return this
+   */
   public ParticleEmitterComponent setParticleVelocity(Vector2D velocity) {
     setParticleVelocityBounds(velocity, velocity);
 
     return this;
   }
 
+  /**
+   * Updates the minimum and maximum size values for newly emitted {@link Particle}s.
+   *
+   * @param particleMinSize the minimum size for new particles
+   * @param particleMaxSize the maximum size for new particles
+   * @return this
+   */
   public ParticleEmitterComponent setParticleSizeBounds(float particleMinSize, float particleMaxSize) {
     this.particleMinSize = particleMinSize;
     this.particleMaxSize = particleMaxSize;
@@ -160,6 +180,12 @@ public class ParticleEmitterComponent implements Component {
     return this;
   }
 
+  /**
+   * Updates the size for newly emitted {@link Particle}s to be a fixed value.
+   *
+   * @param size the size for new particles
+   * @return this
+   */
   public ParticleEmitterComponent setParticleSize(float size) {
     return setParticleSizeBounds(size, size);
   }
