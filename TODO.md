@@ -1,7 +1,5 @@
 # sola-game-engine TODO list
 
-* consider particle emitter keeping track of its particles rather than creating new entities
-
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
