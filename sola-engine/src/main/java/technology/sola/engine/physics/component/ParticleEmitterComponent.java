@@ -28,10 +28,18 @@ public class ParticleEmitterComponent implements Component {
 
   private float timeSinceLastEmission;
 
+  /**
+   * Creates a ParticleEmitterComponent instance with default settings.
+   */
   public ParticleEmitterComponent() {
     this(0.1f);
   }
 
+  /**
+   * Creates a ParticleEmitterComponent instance with default settings and a custom particle emission delay.
+   *
+   * @param particleEmissionDelay the desired particle emission delay
+   */
   public ParticleEmitterComponent(float particleEmissionDelay) {
     this.particleEmissionDelay = particleEmissionDelay;
   }
@@ -45,17 +53,17 @@ public class ParticleEmitterComponent implements Component {
     timeSinceLastEmission += delta;
 
     if (timeSinceLastEmission > particleEmissionDelay) {
-      Vector2D minVel = getParticleMinVelocity();
-      Vector2D maxVel = getParticleMaxVelocity();
+      Vector2D minVel = particleMinVelocity;
+      Vector2D maxVel = particleMaxVelocity;
 
-      for (int i = 0; i < getParticlesPerEmit(); i++) {
+      for (int i = 0; i < particlesPerEmit; i++) {
         float xVel = getRandomFloat(minVel.x(), maxVel.x());
         float yVel = getRandomFloat(minVel.y(), maxVel.y());
-        float size = getRandomFloat(getParticleMinSize(), getParticleMaxSize());
-        float life = getRandomFloat(getParticleMinLife(), getParticleMaxLife());
+        float size = getRandomFloat(particleMinSize, particleMaxSize);
+        float life = getRandomFloat(particleMinLife, particleMaxLife);
 
         Particle particle = new Particle(
-          getParticleColor(), size, life, new Vector2D(0, 0), new Vector2D(xVel, yVel)
+          particleColor, size, life, new Vector2D(0, 0), new Vector2D(xVel, yVel)
         );
 
         particleList.add(particle);
@@ -72,40 +80,49 @@ public class ParticleEmitterComponent implements Component {
     return particleList.iterator();
   }
 
+  /**
+   * Updates the delay between each particle emission.
+   *
+   * @param particleEmissionDelay the new particle emission delay
+   * @return this
+   */
   public ParticleEmitterComponent setParticleEmissionDelay(float particleEmissionDelay) {
     this.particleEmissionDelay = particleEmissionDelay;
 
     return this;
   }
 
-  public int getParticlesPerEmit() {
-    return particlesPerEmit;
-  }
-
+  /**
+   * Updates the number of particles to emit per emission.
+   *
+   * @param particlesPerEmit the new number of particles to emit
+   * @return this
+   */
   public ParticleEmitterComponent setParticlesPerEmit(int particlesPerEmit) {
     this.particlesPerEmit = particlesPerEmit;
 
     return this;
   }
 
-  public Color getParticleColor() {
-    return particleColor;
-  }
-
+  /**
+   * Updates the base {@link Color} of each new {@link Particle}.
+   *
+   * @param particleColor the new color for newly emitted particles
+   * @return this
+   */
   public ParticleEmitterComponent setParticleColor(Color particleColor) {
     this.particleColor = particleColor;
 
     return this;
   }
 
-  public float getParticleMinLife() {
-    return particleMinLife;
-  }
-
-  public float getParticleMaxLife() {
-    return particleMaxLife;
-  }
-
+  /**
+   * Updates the minimum and maximum lifespans for newly emitted {@link Particle}s.
+   *
+   * @param particleMinLife the minimum lifespan for a new particle
+   * @param particleMaxLife the maximum lifespan for a new particle
+   * @return this
+   */
   public ParticleEmitterComponent setParticleLifeBounds(float particleMinLife, float particleMaxLife) {
     this.particleMinLife = particleMinLife;
     this.particleMaxLife = particleMaxLife;
@@ -113,16 +130,14 @@ public class ParticleEmitterComponent implements Component {
     return this;
   }
 
+  /**
+   * Updates the lifespan for newly emitted particles to be a fixed value.
+   *
+   * @param life the lifespan for new particles
+   * @return this
+   */
   public ParticleEmitterComponent setParticleLife(float life) {
     return setParticleLifeBounds(life, life);
-  }
-
-  public Vector2D getParticleMinVelocity() {
-    return particleMinVelocity;
-  }
-
-  public Vector2D getParticleMaxVelocity() {
-    return particleMaxVelocity;
   }
 
   public ParticleEmitterComponent setParticleVelocityBounds(Vector2D particleMinVelocity, Vector2D particleMaxVelocity) {
@@ -136,14 +151,6 @@ public class ParticleEmitterComponent implements Component {
     setParticleVelocityBounds(velocity, velocity);
 
     return this;
-  }
-
-  public float getParticleMinSize() {
-    return particleMinSize;
-  }
-
-  public float getParticleMaxSize() {
-    return particleMaxSize;
   }
 
   public ParticleEmitterComponent setParticleSizeBounds(float particleMinSize, float particleMaxSize) {
