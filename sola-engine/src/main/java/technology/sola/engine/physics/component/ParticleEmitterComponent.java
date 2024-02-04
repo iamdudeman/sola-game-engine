@@ -9,6 +9,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * ParticleEmitterComponent is a {@link Component} that contains data for emitting {@link Particle}s as well as data for
+ * its emitted particles.
+ */
 public class ParticleEmitterComponent implements Component {
   private final List<Particle> particleList = new ArrayList<>();
   private final Random random = new Random();
@@ -32,6 +36,11 @@ public class ParticleEmitterComponent implements Component {
     this.particleEmissionDelay = particleEmissionDelay;
   }
 
+  /**
+   * Emits new particles if enough time has elapsed based on the set properties for emission.
+   *
+   * @param delta the elapsed delta time
+   */
   public void emitIfAble(float delta) {
     timeSinceLastEmission += delta;
 
@@ -56,6 +65,9 @@ public class ParticleEmitterComponent implements Component {
     }
   }
 
+  /**
+   * @return the {@link Iterator} for {@link Particle}s
+   */
   public Iterator<Particle> emittedParticleIterator() {
     return particleList.iterator();
   }
@@ -153,6 +165,9 @@ public class ParticleEmitterComponent implements Component {
     return random.nextFloat(min, max);
   }
 
+  /**
+   * Particle contains properties that represent a particle that has been emitted from a {@link ParticleEmitterComponent}.
+   */
   public static class Particle {
     private final Color baseColor;
     private final float size;
@@ -161,7 +176,7 @@ public class ParticleEmitterComponent implements Component {
     private Vector2D position;
     private float remainingLifespan;
 
-    public Particle(Color baseColor, float size, float maxLifespan, Vector2D position, Vector2D velocity) {
+    private Particle(Color baseColor, float size, float maxLifespan, Vector2D position, Vector2D velocity) {
       this.baseColor = baseColor;
       this.size = size;
       this.position = position;
@@ -171,25 +186,42 @@ public class ParticleEmitterComponent implements Component {
       inverseMaxLifespan = 1 / maxLifespan;
     }
 
+    /**
+     * Updates the position and lifespan of a particle based on the elapsed delta.
+     *
+     * @param delta the elapsed delta time
+     */
     public void update(float delta) {
       position = position.add(velocity.scalar(delta));
       remainingLifespan -= delta;
     }
 
+    /**
+     * @return true if the particle has any remaining lifespan
+     */
     public boolean isAlive() {
       return remainingLifespan > 0;
     }
 
+    /**
+     * @return the current {@link Color} of the particle based on its origin base color and remaining lifespan
+     */
     public Color getColor() {
       int alpha = Math.max((int) ((255 * remainingLifespan * inverseMaxLifespan) + 0.5f), 0);
 
       return baseColor.updateAlpha(alpha);
     }
-    
+
+    /**
+     * @return the current position of the particle
+     */
     public Vector2D getPosition() {
       return position;
     }
 
+    /**
+     * @return the size of the particle
+     */
     public float getSize() {
       return size;
     }
