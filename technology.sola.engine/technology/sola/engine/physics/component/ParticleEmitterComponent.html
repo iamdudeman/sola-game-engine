@@ -43,7 +43,7 @@ loadScripts(document, 'script');</script>
 <div>
 <ul class="sub-nav-list">
 <li>Summary:&nbsp;</li>
-<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#nested-class-summary">Nested</a>&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor-summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-summary">Method</a></li>
@@ -83,9 +83,28 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ParticleEmitterComponent</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements technology.sola.ecs.Component</span></div>
+<div class="block">ParticleEmitterComponent is a <code>Component</code> that contains data for emitting <a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s as well as data for
+ its emitted particles.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+<li>
+<section class="nested-class-summary" id="nested-class-summary">
+<h2>Nested Class Summary</h2>
+<div class="caption"><span>Nested Classes</span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Class</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>static class&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="ParticleEmitterComponent.Particle.html" class="type-name-link" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent.Particle</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">Particle contains properties that represent a particle that has been emitted from a <a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent</code></a>.</div>
+</div>
+</div>
+</section>
+</li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <li>
 <section class="constructor-summary" id="constructor-summary">
@@ -95,9 +114,13 @@ implements technology.sola.ecs.Component</span></div>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">ParticleEmitterComponent</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a ParticleEmitterComponent instance with default settings.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(float)" class="member-name-link">ParticleEmitterComponent</a><wbr>(float&nbsp;particleEmissionDelay)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Creates a ParticleEmitterComponent instance with default settings and a custom particle emission delay.</div>
+</div>
 </div>
 </section>
 </li>
@@ -113,69 +136,61 @@ implements technology.sola.ecs.Component</span></div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#emitIfAble(float,java.lang.Runnable)" class="member-name-link">emitIfAble</a><wbr>(float&nbsp;delta,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;runnable)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../graphics/renderer/blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend">BlendFunction</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParticleBlendFunction()" class="member-name-link">getParticleBlendFunction</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../graphics/Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParticleColor()" class="member-name-link">getParticleColor</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParticleMaxLife()" class="member-name-link">getParticleMaxLife</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParticleMaxSize()" class="member-name-link">getParticleMaxSize</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParticleMaxVelocity()" class="member-name-link">getParticleMaxVelocity</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParticleMinLife()" class="member-name-link">getParticleMinLife</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParticleMinSize()" class="member-name-link">getParticleMinSize</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParticleMinVelocity()" class="member-name-link">getParticleMinVelocity</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParticlesPerEmit()" class="member-name-link">getParticlesPerEmit</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#emitIfAble(float)" class="member-name-link">emitIfAble</a><wbr>(float&nbsp;delta)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Emits new particles if enough time has elapsed based on the set properties for emission.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Iterator.html" title="class or interface in java.util" class="external-link">Iterator</a>&lt;<a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent.Particle</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#emittedParticleIterator()" class="member-name-link">emittedParticleIterator</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleBlendFunction(technology.sola.engine.graphics.renderer.blend.BlendFunction)" class="member-name-link">setParticleBlendFunction</a><wbr>(<a href="../../graphics/renderer/blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend">BlendFunction</a>&nbsp;blendMode)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleColor(technology.sola.engine.graphics.Color)" class="member-name-link">setParticleColor</a><wbr>(<a href="../../graphics/Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;particleColor)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Updates the base <a href="../../graphics/Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of each new <a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleColor(technology.sola.engine.graphics.Color)" class="member-name-link">setParticleColor</a><wbr>(<a href="../../graphics/Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;particleColor)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleEmissionDelay(float)" class="member-name-link">setParticleEmissionDelay</a><wbr>(float&nbsp;particleEmissionDelay)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Updates the delay between each particle emission.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleEmissionDelay(float)" class="member-name-link">setParticleEmissionDelay</a><wbr>(float&nbsp;particleEmissionDelay)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleLife(float)" class="member-name-link">setParticleLife</a><wbr>(float&nbsp;life)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Updates the lifespan for newly emitted <a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s to be a fixed value.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleLife(float)" class="member-name-link">setParticleLife</a><wbr>(float&nbsp;life)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleLifeBounds(float,float)" class="member-name-link">setParticleLifeBounds</a><wbr>(float&nbsp;particleMinLife,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleLifeBounds(float,float)" class="member-name-link">setParticleLifeBounds</a><wbr>(float&nbsp;particleMinLife,
  float&nbsp;particleMaxLife)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleSize(float)" class="member-name-link">setParticleSize</a><wbr>(float&nbsp;size)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Updates the minimum and maximum lifespans for newly emitted <a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleSizeBounds(float,float)" class="member-name-link">setParticleSizeBounds</a><wbr>(float&nbsp;particleMinSize,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleSize(float)" class="member-name-link">setParticleSize</a><wbr>(float&nbsp;size)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Updates the size for newly emitted <a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s to be a fixed value.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleSizeBounds(float,float)" class="member-name-link">setParticleSizeBounds</a><wbr>(float&nbsp;particleMinSize,
  float&nbsp;particleMaxSize)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticlesPerEmit(int)" class="member-name-link">setParticlesPerEmit</a><wbr>(int&nbsp;particlesPerEmit)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Updates the minimum and maximum size values for newly emitted <a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleVelocity(technology.sola.math.linear.Vector2D)" class="member-name-link">setParticleVelocity</a><wbr>(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;velocity)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticlesPerEmit(int)" class="member-name-link">setParticlesPerEmit</a><wbr>(int&nbsp;particlesPerEmit)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Updates the number of particles to emit per emission.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleVelocityBounds(technology.sola.math.linear.Vector2D,technology.sola.math.linear.Vector2D)" class="member-name-link">setParticleVelocityBounds</a><wbr>(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;particleMinVelocity,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleVelocity(technology.sola.math.linear.Vector2D)" class="member-name-link">setParticleVelocity</a><wbr>(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;velocity)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Updates the velocity for newly emitted <a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s to be a fixed value.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setParticleVelocityBounds(technology.sola.math.linear.Vector2D,technology.sola.math.linear.Vector2D)" class="member-name-link">setParticleVelocityBounds</a><wbr>(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;particleMinVelocity,
  <a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;particleMaxVelocity)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Updates the minimum and maximum velocities for newly emitted <a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s.</div>
+</div>
 </div>
 </div>
 </div>
@@ -200,12 +215,18 @@ implements technology.sola.ecs.Component</span></div>
 <section class="detail" id="&lt;init&gt;()">
 <h3>ParticleEmitterComponent</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ParticleEmitterComponent</span>()</div>
+<div class="block">Creates a ParticleEmitterComponent instance with default settings.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(float)">
 <h3>ParticleEmitterComponent</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ParticleEmitterComponent</span><wbr><span class="parameters">(float&nbsp;particleEmissionDelay)</span></div>
+<div class="block">Creates a ParticleEmitterComponent instance with default settings and a custom particle emission delay.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>particleEmissionDelay</code> - the desired particle emission delay</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -217,64 +238,63 @@ implements technology.sola.ecs.Component</span></div>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="emitIfAble(float,java.lang.Runnable)">
+<section class="detail" id="emitIfAble(float)">
 <h3>emitIfAble</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">emitIfAble</span><wbr><span class="parameters">(float&nbsp;delta,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;runnable)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">emitIfAble</span><wbr><span class="parameters">(float&nbsp;delta)</span></div>
+<div class="block">Emits new particles if enough time has elapsed based on the set properties for emission.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>delta</code> - the elapsed delta time</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="emittedParticleIterator()">
+<h3>emittedParticleIterator</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Iterator.html" title="class or interface in java.util" class="external-link">Iterator</a>&lt;<a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent.Particle</a>&gt;</span>&nbsp;<span class="element-name">emittedParticleIterator</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Iterator.html" title="class or interface in java.util" class="external-link"><code>Iterator</code></a> for <a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setParticleEmissionDelay(float)">
 <h3>setParticleEmissionDelay</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></span>&nbsp;<span class="element-name">setParticleEmissionDelay</span><wbr><span class="parameters">(float&nbsp;particleEmissionDelay)</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="getParticlesPerEmit()">
-<h3>getParticlesPerEmit</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getParticlesPerEmit</span>()</div>
+<div class="block">Updates the delay between each particle emission.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>particleEmissionDelay</code> - the new particle emission delay</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setParticlesPerEmit(int)">
 <h3>setParticlesPerEmit</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></span>&nbsp;<span class="element-name">setParticlesPerEmit</span><wbr><span class="parameters">(int&nbsp;particlesPerEmit)</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="getParticleColor()">
-<h3>getParticleColor</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../graphics/Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">getParticleColor</span>()</div>
+<div class="block">Updates the number of particles to emit per emission.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>particlesPerEmit</code> - the new number of particles to emit</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setParticleColor(technology.sola.engine.graphics.Color)">
 <h3>setParticleColor</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></span>&nbsp;<span class="element-name">setParticleColor</span><wbr><span class="parameters">(<a href="../../graphics/Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;particleColor)</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="getParticleBlendFunction()">
-<h3>getParticleBlendFunction</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../graphics/renderer/blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend">BlendFunction</a></span>&nbsp;<span class="element-name">getParticleBlendFunction</span>()</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setParticleBlendFunction(technology.sola.engine.graphics.renderer.blend.BlendFunction)">
-<h3>setParticleBlendFunction</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></span>&nbsp;<span class="element-name">setParticleBlendFunction</span><wbr><span class="parameters">(<a href="../../graphics/renderer/blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend">BlendFunction</a>&nbsp;blendMode)</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="getParticleMinLife()">
-<h3>getParticleMinLife</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getParticleMinLife</span>()</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getParticleMaxLife()">
-<h3>getParticleMaxLife</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getParticleMaxLife</span>()</div>
+<div class="block">Updates the base <a href="../../graphics/Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of each new <a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>particleColor</code> - the new color for newly emitted particles</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -282,24 +302,27 @@ implements technology.sola.ecs.Component</span></div>
 <h3>setParticleLifeBounds</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></span>&nbsp;<span class="element-name">setParticleLifeBounds</span><wbr><span class="parameters">(float&nbsp;particleMinLife,
  float&nbsp;particleMaxLife)</span></div>
+<div class="block">Updates the minimum and maximum lifespans for newly emitted <a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>particleMinLife</code> - the minimum lifespan for a new particle</dd>
+<dd><code>particleMaxLife</code> - the maximum lifespan for a new particle</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setParticleLife(float)">
 <h3>setParticleLife</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></span>&nbsp;<span class="element-name">setParticleLife</span><wbr><span class="parameters">(float&nbsp;life)</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="getParticleMinVelocity()">
-<h3>getParticleMinVelocity</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">getParticleMinVelocity</span>()</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getParticleMaxVelocity()">
-<h3>getParticleMaxVelocity</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">getParticleMaxVelocity</span>()</div>
+<div class="block">Updates the lifespan for newly emitted <a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s to be a fixed value.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>life</code> - the lifespan for new particles</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -307,24 +330,27 @@ implements technology.sola.ecs.Component</span></div>
 <h3>setParticleVelocityBounds</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></span>&nbsp;<span class="element-name">setParticleVelocityBounds</span><wbr><span class="parameters">(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;particleMinVelocity,
  <a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;particleMaxVelocity)</span></div>
+<div class="block">Updates the minimum and maximum velocities for newly emitted <a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>particleMinVelocity</code> - the minimum velocity for new particles</dd>
+<dd><code>particleMaxVelocity</code> - the maximum velocity for new particles</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setParticleVelocity(technology.sola.math.linear.Vector2D)">
 <h3>setParticleVelocity</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></span>&nbsp;<span class="element-name">setParticleVelocity</span><wbr><span class="parameters">(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;velocity)</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="getParticleMinSize()">
-<h3>getParticleMinSize</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getParticleMinSize</span>()</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getParticleMaxSize()">
-<h3>getParticleMaxSize</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getParticleMaxSize</span>()</div>
+<div class="block">Updates the velocity for newly emitted <a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s to be a fixed value.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>velocity</code> - the velocity for new particles</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -332,12 +358,27 @@ implements technology.sola.ecs.Component</span></div>
 <h3>setParticleSizeBounds</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></span>&nbsp;<span class="element-name">setParticleSizeBounds</span><wbr><span class="parameters">(float&nbsp;particleMinSize,
  float&nbsp;particleMaxSize)</span></div>
+<div class="block">Updates the minimum and maximum size values for newly emitted <a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>particleMinSize</code> - the minimum size for new particles</dd>
+<dd><code>particleMaxSize</code> - the maximum size for new particles</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setParticleSize(float)">
 <h3>setParticleSize</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></span>&nbsp;<span class="element-name">setParticleSize</span><wbr><span class="parameters">(float&nbsp;size)</span></div>
+<div class="block">Updates the size for newly emitted <a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s to be a fixed value.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>size</code> - the size for new particles</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 </ul>

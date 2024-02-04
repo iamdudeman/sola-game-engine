@@ -1052,7 +1052,11 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Sends an <a href="technology.sola.engine/technology/sola/engine/event/Event.html" title="interface in technology.sola.engine.event"><code>Event</code></a> to all <a href="technology.sola.engine/technology/sola/engine/event/EventListener.html" title="interface in technology.sola.engine.event"><code>EventListener</code></a>s that have been added for that event type.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#emitIfAble(float,java.lang.Runnable)" class="member-name-link">emitIfAble(float, Runnable)</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#emitIfAble(float)" class="member-name-link">emitIfAble(float)</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
+<dd>
+<div class="block">Emits new particles if enough time has elapsed based on the set properties for emission.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#emittedParticleIterator()" class="member-name-link">emittedParticleIterator()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketMessageEncoder.html#encodeForRaw(technology.sola.engine.networking.socket.SocketMessage)" class="member-name-link">encodeForRaw(SocketMessage)</a> - Method in class technology.sola.engine.networking.socket.<a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketMessageEncoder.html" title="class in technology.sola.engine.networking.socket">SocketMessageEncoder</a></dt>
 <dd>
@@ -1526,8 +1530,6 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html#getAssetLoaderProvider()" class="member-name-link">getAssetLoaderProvider()</a> - Method in class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleComponent.html#getBaseColor()" class="member-name-link">getBaseColor()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleComponent.html" title="class in technology.sola.engine.physics.component">ParticleComponent</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/BlendModeComponent.html#getBlendFunction()" class="member-name-link">getBlendFunction()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/BlendModeComponent.html" title="class in technology.sola.engine.graphics.components">BlendModeComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#getBlendFunction()" class="member-name-link">getBlendFunction()</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
@@ -1579,6 +1581,8 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/LightComponent.html#getColor()" class="member-name-link">getColor()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/LightComponent.html" title="class in technology.sola.engine.graphics.components">LightComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html#getColor()" class="member-name-link">getColor()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html" title="class in technology.sola.engine.graphics.components">RectangleRendererComponent</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html#getColor()" class="member-name-link">getColor()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent.Particle</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html#getContentBounds()" class="member-name-link">getContentBounds()</a> - Method in class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a></dt>
 <dd>&nbsp;</dd>
@@ -1654,8 +1658,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Gets the inverse mass (1 / mass).</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleComponent.html#getInverseMaxLifespan()" class="member-name-link">getInverseMaxLifespan()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleComponent.html" title="class in technology.sola.engine.physics.component">ParticleComponent</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiKeyEvent.html#getKeyEvent()" class="member-name-link">getKeyEvent()</a> - Method in class technology.sola.engine.graphics.gui.event.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiKeyEvent.html" title="class in technology.sola.engine.graphics.gui.event">GuiKeyEvent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/networking/NetworkQueue.html#getLast()" class="member-name-link">getLast()</a> - Method in class technology.sola.engine.networking.<a href="technology.sola.engine/technology/sola/engine/networking/NetworkQueue.html" title="class in technology.sola.engine.networking">NetworkQueue</a></dt>
@@ -1679,8 +1681,6 @@ loadScripts(document, 'script');</script>
 <div class="block">Gets the <a href="technology.sola.engine/technology/sola/engine/physics/Material.html" title="class in technology.sola.engine.physics"><code>Material</code></a> of this DynamicBodyComponent.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/input/TextInputGuiElement.html#getMaxLength()" class="member-name-link">getMaxLength()</a> - Method in class technology.sola.engine.graphics.gui.elements.input.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/input/TextInputGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">TextInputGuiElement</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleComponent.html#getMaxLifespan()" class="member-name-link">getMaxLifespan()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleComponent.html" title="class in technology.sola.engine.physics.component">ParticleComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiMouseEvent.html#getMouseEvent()" class="member-name-link">getMouseEvent()</a> - Method in class technology.sola.engine.graphics.gui.event.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiMouseEvent.html" title="class in technology.sola.engine.graphics.gui.event">GuiMouseEvent</a></dt>
 <dd>&nbsp;</dd>
@@ -1737,24 +1737,6 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html#getParentUniqueId()" class="member-name-link">getParentUniqueId()</a> - Method in class technology.sola.engine.core.component.<a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#getParticleBlendFunction()" class="member-name-link">getParticleBlendFunction()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#getParticleColor()" class="member-name-link">getParticleColor()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#getParticleMaxLife()" class="member-name-link">getParticleMaxLife()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#getParticleMaxSize()" class="member-name-link">getParticleMaxSize()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#getParticleMaxVelocity()" class="member-name-link">getParticleMaxVelocity()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#getParticleMinLife()" class="member-name-link">getParticleMinLife()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#getParticleMinSize()" class="member-name-link">getParticleMinSize()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#getParticleMinVelocity()" class="member-name-link">getParticleMinVelocity()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#getParticlesPerEmit()" class="member-name-link">getParticlesPerEmit()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/SolaPhysics.html#getParticleSystem()" class="member-name-link">getParticleSystem()</a> - Method in class technology.sola.engine.defaults.<a href="technology.sola.engine/technology/sola/engine/defaults/SolaPhysics.html" title="class in technology.sola.engine.defaults">SolaPhysics</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/SolaPhysics.html#getPhysicsSystem()" class="member-name-link">getPhysicsSystem()</a> - Method in class technology.sola.engine.defaults.<a href="technology.sola.engine/technology/sola/engine/defaults/SolaPhysics.html" title="class in technology.sola.engine.defaults">SolaPhysics</a></dt>
@@ -1771,6 +1753,8 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/input/TextInputGuiElement.html#getPlaceholder()" class="member-name-link">getPlaceholder()</a> - Method in class technology.sola.engine.graphics.gui.elements.input.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/input/TextInputGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">TextInputGuiElement</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html#getPosition()" class="member-name-link">getPosition()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent.Particle</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/CameraComponent.html#getPriority()" class="member-name-link">getPriority()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/CameraComponent.html" title="class in technology.sola.engine.graphics.components">CameraComponent</a></dt>
 <dd>
 <div class="block">The camera with the lowest priority value will be used during rendering.</div>
@@ -1782,8 +1766,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/LightComponent.html#getRadius()" class="member-name-link">getRadius()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/LightComponent.html" title="class in technology.sola.engine.graphics.components">LightComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/Color.html#getRed()" class="member-name-link">getRed()</a> - Method in class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/Color.html" title="class in technology.sola.engine.graphics">Color</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleComponent.html#getRemainingLifespan()" class="member-name-link">getRemainingLifespan()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleComponent.html" title="class in technology.sola.engine.physics.component">ParticleComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#getRenderer()" class="member-name-link">getRenderer()</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
 <dd>&nbsp;</dd>
@@ -1798,6 +1780,8 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html#getScaleX()" class="member-name-link">getScaleX()</a> - Method in class technology.sola.engine.core.component.<a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html#getScaleY()" class="member-name-link">getScaleY()</a> - Method in class technology.sola.engine.core.component.<a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html#getSize()" class="member-name-link">getSize()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent.Particle</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#getSocketClient()" class="member-name-link">getSocketClient()</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
 <dd>&nbsp;</dd>
@@ -1867,20 +1851,20 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/DynamicBodyComponent.html#getVelocity()" class="member-name-link">getVelocity()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/DynamicBodyComponent.html" title="class in technology.sola.engine.physics.component">DynamicBodyComponent</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleComponent.html#getVelocity()" class="member-name-link">getVelocity()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleComponent.html" title="class in technology.sola.engine.physics.component">ParticleComponent</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#getViewport()" class="member-name-link">getViewport()</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/CircleEntityGraphicsModule.html#getViewToRender(technology.sola.ecs.World)" class="member-name-link">getViewToRender(World)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/CircleEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">CircleEntityGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html#getViewToRender(technology.sola.ecs.World)" class="member-name-link">getViewToRender(World)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugEntityGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/ParticleEmitterEntityGraphicsModule.html#getViewToRender(technology.sola.ecs.World)" class="member-name-link">getViewToRender(World)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/ParticleEmitterEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">ParticleEmitterEntityGraphicsModule</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/RectangleEntityGraphicsModule.html#getViewToRender(technology.sola.ecs.World)" class="member-name-link">getViewToRender(World)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/RectangleEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">RectangleEntityGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html#getViewToRender(technology.sola.ecs.World)" class="member-name-link">getViewToRender(World)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaEntityGraphicsModule</a></dt>
 <dd>
 <div class="block">Returns a <code>View</code> of <code>Entity</code> that need to be rendered via
- <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html#renderMethod(technology.sola.engine.graphics.renderer.Renderer,V,technology.sola.engine.core.component.TransformComponent)"><code>SolaEntityGraphicsModule.renderMethod(Renderer, V, TransformComponent)</code></a></div>
+ <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html#renderEntity(technology.sola.engine.graphics.renderer.Renderer,V,technology.sola.engine.core.component.TransformComponent)"><code>SolaEntityGraphicsModule.renderEntity(Renderer, V, TransformComponent)</code></a></div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SpriteEntityGraphicsModule.html#getViewToRender(technology.sola.ecs.World)" class="member-name-link">getViewToRender(World)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SpriteEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SpriteEntityGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
@@ -2322,6 +2306,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Return if this layer is active or not.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html#isAlive()" class="member-name-link">isAlive()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent.Particle</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketClient.html#isConnected()" class="member-name-link">isConnected()</a> - Method in interface technology.sola.engine.networking.socket.<a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket">SocketClient</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/input/BaseInputGuiElement.html#isDisabled()" class="member-name-link">isDisabled()</a> - Method in class technology.sola.engine.graphics.gui.elements.input.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/input/BaseInputGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">BaseInputGuiElement</a></dt>
@@ -3179,18 +3165,35 @@ loadScripts(document, 'script');</script>
 <div class="block">Parses a valid <a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/property/StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property"><code>StyleValue</code></a> value as a string or null
  from a <code>JsonElement</code>.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleComponent.html" class="type-name-link" title="class in technology.sola.engine.physics.component">ParticleComponent</a> - Class in <a href="technology.sola.engine/technology/sola/engine/physics/component/package-summary.html">technology.sola.engine.physics.component</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleComponent.html#%3Cinit%3E(technology.sola.engine.graphics.Color,float,technology.sola.math.linear.Vector2D)" class="member-name-link">ParticleComponent(Color, float, Vector2D)</a> - Constructor for class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleComponent.html" title="class in technology.sola.engine.physics.component">ParticleComponent</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" class="type-name-link" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a> - Class in <a href="technology.sola.engine/technology/sola/engine/physics/component/package-summary.html">technology.sola.engine.physics.component</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">ParticleEmitterComponent is a <code>Component</code> that contains data for emitting <a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s as well as data for
+ its emitted particles.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#%3Cinit%3E()" class="member-name-link">ParticleEmitterComponent()</a> - Constructor for class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a ParticleEmitterComponent instance with default settings.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#%3Cinit%3E(float)" class="member-name-link">ParticleEmitterComponent(float)</a> - Constructor for class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
+<dd>
+<div class="block">Creates a ParticleEmitterComponent instance with default settings and a custom particle emission delay.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html" class="type-name-link" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent.Particle</a> - Class in <a href="technology.sola.engine/technology/sola/engine/physics/component/package-summary.html">technology.sola.engine.physics.component</a></dt>
+<dd>
+<div class="block">Particle contains properties that represent a particle that has been emitted from a <a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent</code></a>.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/ParticleEmitterEntityGraphicsModule.html" class="type-name-link" title="class in technology.sola.engine.defaults.graphics.modules">ParticleEmitterEntityGraphicsModule</a> - Class in <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/package-summary.html">technology.sola.engine.defaults.graphics.modules</a></dt>
+<dd>
+<div class="block">ParticleEmitterEntityGraphicsModule is a <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaEntityGraphicsModule</code></a> implementation for rendering <code>Entity</code>
+ that have a <a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> and <a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent</code></a>.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/ParticleEmitterEntityGraphicsModule.html#%3Cinit%3E()" class="member-name-link">ParticleEmitterEntityGraphicsModule()</a> - Constructor for class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/ParticleEmitterEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">ParticleEmitterEntityGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/system/ParticleSystem.html" class="type-name-link" title="class in technology.sola.engine.physics.system">ParticleSystem</a> - Class in <a href="technology.sola.engine/technology/sola/engine/physics/system/package-summary.html">technology.sola.engine.physics.system</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">ParticleSystem is an <code>EcsSystem</code> that handles updating <code>Entity</code> with a
+ <a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> and <a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent</code></a>.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/system/ParticleSystem.html#%3Cinit%3E()" class="member-name-link">ParticleSystem()</a> - Constructor for class technology.sola.engine.physics.system.<a href="technology.sola.engine/technology/sola/engine/physics/system/ParticleSystem.html" title="class in technology.sola.engine.physics.system">ParticleSystem</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/audio/AudioClip.html#pause()" class="member-name-link">pause()</a> - Method in interface technology.sola.engine.assets.audio.<a href="technology.sola.engine/technology/sola/engine/assets/audio/AudioClip.html" title="interface in technology.sola.engine.assets.audio">AudioClip</a></dt>
@@ -3325,8 +3328,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Color constant - rgb(255, 0, 0).</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleComponent.html#reduceLifespan(float)" class="member-name-link">reduceLifespan(float)</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleComponent.html" title="class in technology.sola.engine.physics.component">ParticleComponent</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/event/EventHub.html#remove(java.lang.Class,technology.sola.engine.event.EventListener)" class="member-name-link">remove(Class&lt;T&gt;, EventListener&lt;T&gt;)</a> - Method in class technology.sola.engine.event.<a href="technology.sola.engine/technology/sola/engine/event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a></dt>
 <dd>
 <div class="block">Removes an <a href="technology.sola.engine/technology/sola/engine/event/EventListener.html" title="interface in technology.sola.engine.event"><code>EventListener</code></a> that is listening to events of desired type.</div>
@@ -3373,6 +3374,26 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html#renderContent(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">renderContent(Renderer)</a> - Method in class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/CircleEntityGraphicsModule.html#renderEntity(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderEntity(Renderer, View2Entry&lt;CircleRendererComponent, TransformComponent&gt;, TransformComponent)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/CircleEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">CircleEntityGraphicsModule</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/RectangleEntityGraphicsModule.html#renderEntity(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderEntity(Renderer, View2Entry&lt;RectangleRendererComponent, TransformComponent&gt;, TransformComponent)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/RectangleEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">RectangleEntityGraphicsModule</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SpriteEntityGraphicsModule.html#renderEntity(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderEntity(Renderer, View2Entry&lt;SpriteComponent, TransformComponent&gt;, TransformComponent)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SpriteEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SpriteEntityGraphicsModule</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html#renderEntity(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderEntity(Renderer, View2Entry&lt;ColliderComponent, TransformComponent&gt;, TransformComponent)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugEntityGraphicsModule</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/ParticleEmitterEntityGraphicsModule.html#renderEntity(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderEntity(Renderer, View2Entry&lt;ParticleEmitterComponent, TransformComponent&gt;, TransformComponent)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/ParticleEmitterEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">ParticleEmitterEntityGraphicsModule</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/ParticleEmitterEntityGraphicsModule.html#renderEntity(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderEntity(Renderer, View2Entry&lt;ParticleEmitterComponent, TransformComponent&gt;, Matrix3D, Matrix3D, TransformComponent)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/ParticleEmitterEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">ParticleEmitterEntityGraphicsModule</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html#renderEntity(technology.sola.engine.graphics.renderer.Renderer,V,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderEntity(Renderer, V, TransformComponent)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaEntityGraphicsModule</a></dt>
+<dd>
+<div class="block">Called on each <code>Entity</code> to render it.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html#renderEntity(technology.sola.engine.graphics.renderer.Renderer,V,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderEntity(Renderer, V, Matrix3D, Matrix3D, TransformComponent)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaEntityGraphicsModule</a></dt>
+<dd>
+<div class="block">Called on each <code>Entity</code> to render it.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#renderer" class="member-name-link">renderer</a> - Variable in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
 <dd>
 <div class="block">The <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> for the platform.</div>
@@ -3397,14 +3418,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Method to call each render frame.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/CircleEntityGraphicsModule.html#renderMethod(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderMethod(Renderer, View2Entry&lt;CircleRendererComponent, TransformComponent&gt;, TransformComponent)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/CircleEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">CircleEntityGraphicsModule</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/RectangleEntityGraphicsModule.html#renderMethod(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderMethod(Renderer, View2Entry&lt;RectangleRendererComponent, TransformComponent&gt;, TransformComponent)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/RectangleEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">RectangleEntityGraphicsModule</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SpriteEntityGraphicsModule.html#renderMethod(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderMethod(Renderer, View2Entry&lt;SpriteComponent, TransformComponent&gt;, TransformComponent)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SpriteEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SpriteEntityGraphicsModule</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html#renderMethod(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderMethod(Renderer, View2Entry&lt;ColliderComponent, TransformComponent&gt;, TransformComponent)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugEntityGraphicsModule</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/ScreenSpaceLightMapGraphicsModule.html#renderMethod(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.World,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)" class="member-name-link">renderMethod(Renderer, World, Matrix3D, Matrix3D)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/ScreenSpaceLightMapGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">ScreenSpaceLightMapGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html#renderMethod(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.World,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)" class="member-name-link">renderMethod(Renderer, World, Matrix3D, Matrix3D)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaEntityGraphicsModule</a></dt>
@@ -3412,10 +3425,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaGraphicsModule.html#renderMethod(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.World,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)" class="member-name-link">renderMethod(Renderer, World, Matrix3D, Matrix3D)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaGraphicsModule</a></dt>
 <dd>
 <div class="block">The specific render method for a graphics module that is called once per frame if active.</div>
-</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html#renderMethod(technology.sola.engine.graphics.renderer.Renderer,V,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderMethod(Renderer, V, TransformComponent)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaEntityGraphicsModule</a></dt>
-<dd>
-<div class="block">Called on each <code>Entity</code> to render it.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/SectionGuiElement.html#requestFocus()" class="member-name-link">requestFocus()</a> - Method in class technology.sola.engine.graphics.gui.elements.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/SectionGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements">SectionGuiElement</a></dt>
 <dd>&nbsp;</dd>
@@ -3762,26 +3771,42 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Sets the parent of this TransformComponent.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#setParticleBlendFunction(technology.sola.engine.graphics.renderer.blend.BlendFunction)" class="member-name-link">setParticleBlendFunction(BlendFunction)</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#setParticleColor(technology.sola.engine.graphics.Color)" class="member-name-link">setParticleColor(Color)</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Updates the base <a href="technology.sola.engine/technology/sola/engine/graphics/Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of each new <a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#setParticleEmissionDelay(float)" class="member-name-link">setParticleEmissionDelay(float)</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Updates the delay between each particle emission.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#setParticleLife(float)" class="member-name-link">setParticleLife(float)</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Updates the lifespan for newly emitted <a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s to be a fixed value.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#setParticleLifeBounds(float,float)" class="member-name-link">setParticleLifeBounds(float, float)</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Updates the minimum and maximum lifespans for newly emitted <a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#setParticleSize(float)" class="member-name-link">setParticleSize(float)</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Updates the size for newly emitted <a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s to be a fixed value.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#setParticleSizeBounds(float,float)" class="member-name-link">setParticleSizeBounds(float, float)</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Updates the minimum and maximum size values for newly emitted <a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#setParticlesPerEmit(int)" class="member-name-link">setParticlesPerEmit(int)</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Updates the number of particles to emit per emission.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#setParticleVelocity(technology.sola.math.linear.Vector2D)" class="member-name-link">setParticleVelocity(Vector2D)</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Updates the velocity for newly emitted <a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s to be a fixed value.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html#setParticleVelocityBounds(technology.sola.math.linear.Vector2D,technology.sola.math.linear.Vector2D)" class="member-name-link">setParticleVelocityBounds(Vector2D, Vector2D)</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Updates the minimum and maximum velocities for newly emitted <a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent.Particle</code></a>s.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#setPixel(int,int,int)" class="member-name-link">setPixel(int, int, int)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
 <dd>
 <div class="block">Sets the <a href="technology.sola.engine/technology/sola/engine/graphics/Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of a pixel at coordinate.</div>
@@ -4875,6 +4900,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Up key.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html#update(float)" class="member-name-link">update(float)</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent.Particle</a></dt>
+<dd>
+<div class="block">Updates the position and lifespan of a particle based on the elapsed delta.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/system/LightFlickerSystem.html#update(technology.sola.ecs.World,float)" class="member-name-link">update(World, float)</a> - Method in class technology.sola.engine.graphics.system.<a href="technology.sola.engine/technology/sola/engine/graphics/system/LightFlickerSystem.html" title="class in technology.sola.engine.graphics.system">LightFlickerSystem</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/system/SpriteAnimatorSystem.html#update(technology.sola.ecs.World,float)" class="member-name-link">update(World, float)</a> - Method in class technology.sola.engine.graphics.system.<a href="technology.sola.engine/technology/sola/engine/graphics/system/SpriteAnimatorSystem.html" title="class in technology.sola.engine.graphics.system">SpriteAnimatorSystem</a></dt>
@@ -5277,7 +5306,9 @@ the order they are declared.</div>
 <div class="block">StyleValue constant for the value of 0.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/math/linear/Vector2D.html#ZERO_VECTOR" class="member-name-link">ZERO_VECTOR</a> - Static variable in record class technology.sola.math.linear.<a href="technology.sola.engine/technology/sola/math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">A <a href="technology.sola.engine/technology/sola/math/linear/Vector2D.html" title="class in technology.sola.math.linear"><code>Vector2D</code></a> with 0 for the x and y.</div>
+</dd>
 </dl>
 <a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:J">J</a>&nbsp;<a href="#I:K">K</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:Q">Q</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<a href="#I:W">W</a>&nbsp;<a href="#I:X">X</a>&nbsp;<a href="#I:Y">Y</a>&nbsp;<a href="#I:Z">Z</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a><span class="vertical-separator">|</span><a href="constant-values.html">Constant&nbsp;Field&nbsp;Values</a><span class="vertical-separator">|</span><a href="serialized-form.html">Serialized&nbsp;Form</a></main>
 </div>

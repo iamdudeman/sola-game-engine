@@ -80,6 +80,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ParticleSystem</span>
 <span class="extends-implements">extends technology.sola.ecs.EcsSystem</span></div>
+<div class="block">ParticleSystem is an <code>EcsSystem</code> that handles updating <code>Entity</code> with a
+ <a href="../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> and <a href="../component/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent</code></a>. It will update each particle that is alive, destroy
+ any particle that is no longer alive, and emit new particles as it is able to.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
