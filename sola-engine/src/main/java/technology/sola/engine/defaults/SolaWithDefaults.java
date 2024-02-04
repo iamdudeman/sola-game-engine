@@ -8,12 +8,7 @@ import technology.sola.engine.assets.graphics.gui.GuiJsonDocumentAssetLoader;
 import technology.sola.engine.assets.json.JsonElementAsset;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
-import technology.sola.engine.defaults.graphics.modules.CircleEntityGraphicsModule;
-import technology.sola.engine.defaults.graphics.modules.DebugEntityGraphicsModule;
-import technology.sola.engine.defaults.graphics.modules.RectangleEntityGraphicsModule;
-import technology.sola.engine.defaults.graphics.modules.ScreenSpaceLightMapGraphicsModule;
-import technology.sola.engine.defaults.graphics.modules.SolaEntityGraphicsModule;
-import technology.sola.engine.defaults.graphics.modules.SpriteEntityGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.*;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiDocument;
 import technology.sola.engine.graphics.gui.json.GuiJsonDocumentBuilder;
@@ -194,7 +189,8 @@ public abstract class SolaWithDefaults extends Sola {
         solaGraphics.addGraphicsModules(
           new CircleEntityGraphicsModule(),
           new RectangleEntityGraphicsModule(),
-          new SpriteEntityGraphicsModule(spriteSheetAssetLoader)
+          new SpriteEntityGraphicsModule(spriteSheetAssetLoader),
+          new ParticleEmitterEntityGraphicsModule()
         );
 
         if (ambientColor != null) {

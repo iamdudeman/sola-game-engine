@@ -19,6 +19,8 @@ import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
+import technology.sola.engine.physics.component.ParticleEmitterComponent;
+import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.Random;
@@ -45,6 +47,7 @@ public class LightingExample extends SolaWithDefaults {
     defaultsConfigurator.useGraphics().useLighting(new Color(10, 10, 10)).useBackgroundColor(Color.WHITE);
 
     solaEcs.addSystem(new PlayerSystem());
+    solaEcs.addSystem(new ParticleSystem());
     solaEcs.setWorld(buildWorld());
     platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
     platform.getRenderer().createLayers("objects");
@@ -138,7 +141,7 @@ public class LightingExample extends SolaWithDefaults {
         float radius = random.nextFloat(8f, 32f);
         int intensity = random.nextInt(25, 220);
 
-        world.createEntity(
+        var entity = world.createEntity(
           new TransformComponent(coordinate.x(), coordinate.y()),
           new SpriteComponent("forest", "torch"),
           new BlendModeComponent(BlendMode.MASK),
@@ -147,7 +150,27 @@ public class LightingExample extends SolaWithDefaults {
             .setOffset(1.5f, 3)
             .setLightFlicker(new LightFlicker(0.2f, .8f))
         );
+
+        world.createEntity(
+          new TransformComponent(entity),
+          buildFireParticleEmitterComponent(),
+          new BlendModeComponent(BlendMode.LINEAR_DODGE),
+          new LayerComponent("objects", 2)
+        );
       }
     }
+  }
+
+  private static ParticleEmitterComponent buildFireParticleEmitterComponent() {
+    ParticleEmitterComponent fireParticleEmitterComponent = new ParticleEmitterComponent();
+
+    fireParticleEmitterComponent.setParticleColor(new Color(230, 40, 45));
+    fireParticleEmitterComponent.setParticleSizeBounds(1, 3);
+    fireParticleEmitterComponent.setParticleLife(1);
+    fireParticleEmitterComponent.setParticleVelocityBounds(new Vector2D(-1.2f, -3f), new Vector2D(1.2f, 0));
+    fireParticleEmitterComponent.setParticleEmissionDelay(0.1f);
+    fireParticleEmitterComponent.setParticlesPerEmit(2);
+
+    return fireParticleEmitterComponent;
   }
 }

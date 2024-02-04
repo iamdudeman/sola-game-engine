@@ -7,6 +7,9 @@ package technology.sola.math.linear;
  * @param y the y coordinate
  */
 public record Vector2D(float x, float y) {
+  /**
+   * A {@link Vector2D} with 0 for the x and y.
+   */
   public static final Vector2D ZERO_VECTOR = new Vector2D(0, 0);
 
   /**

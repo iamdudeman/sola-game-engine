@@ -15,7 +15,6 @@
 
 ## TODO List
 
-* consider particle emitter keeping track of its particles rather than creating new entities
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
 * optimize collision detection broad phase

@@ -59,7 +59,7 @@ public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Ent
   }
 
   @Override
-  public void renderMethod(Renderer renderer, View2Entry<ColliderComponent, TransformComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
+  public void renderEntity(Renderer renderer, View2Entry<ColliderComponent, TransformComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
     Vector2D transform = cameraModifiedEntityTransform.getTranslate();
     ColliderComponent colliderComponent = viewEntry.c1();
 
