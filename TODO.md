@@ -6,11 +6,6 @@
 
 ## Planned Cleanup List
 
-* Unit Testing
-    * Add lots of missing tests :)
-* JavaDocs
-    * add missing JavaDocs
-
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
@@ -52,6 +47,8 @@
             * Switch JsMouseUtils to mouse events instead of pointer events
 * Android Platform
     * Implement
+* Unit Testing
+    * Add lots of missing tests :)
 * Investigate possible Steam CloudSave integration
 * Lighting
     * implement more light types other than just point lights
