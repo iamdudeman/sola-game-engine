@@ -49,46 +49,105 @@ public class BaseStyles {
     return new Builder<>();
   }
 
+  /**
+   * Describes how the background of the {@link technology.sola.engine.graphics.gui.GuiElement} should render.
+   *
+   * @return the {@link Background}
+   */
   public Background background() {
     return background;
   }
 
+  /**
+   * Describes how the border of the {@link technology.sola.engine.graphics.gui.GuiElement} should render.
+   *
+   * @return the {@link Border}
+   */
   public Border border() {
     return border;
   }
 
+  /**
+   * Contains the padding values between the content and border of the {@link technology.sola.engine.graphics.gui.GuiElement}.
+   *
+   * @return the {@link Padding}
+   */
   public Padding padding() {
     return padding;
   }
 
+  /**
+   * Defines the preferred width of the {@link technology.sola.engine.graphics.gui.GuiElement}. This will cause it to
+   * not resize based on its children for its width.
+   *
+   * @return the width of the element
+   */
   public StyleValue width() {
     return width;
   }
 
+  /**
+   * Defines the preferred height of the {@link technology.sola.engine.graphics.gui.GuiElement}. This will cause it to
+   * not resize based on its children for its height.
+   *
+   * @return the height of the element
+   */
   public StyleValue height() {
     return height;
   }
 
+  /**
+   * Defines the space between each child {@link technology.sola.engine.graphics.gui.GuiElement} of this element.
+   *
+   * @return the gap between child elements
+   */
   public Integer gap() {
     return gap;
   }
 
+  /**
+   * Defines the {@link Direction} child elements flow.
+   *
+   * @return the direction child elements flow
+   */
   public Direction direction() {
     return direction;
   }
 
+  /**
+   * Defines how child elements will align on the main axis (based on the {@link BaseStyles#direction()}).
+   *
+   * @return the {@link MainAxisChildren}
+   */
   public MainAxisChildren mainAxisChildren() {
     return mainAxisChildren;
   }
 
+  /**
+   * Defines how child elements will align on the cross axis (based on the {@link BaseStyles#direction()}).
+   *
+   * @return the {@link CrossAxisChildren}
+   */
   public CrossAxisChildren crossAxisChildren() {
     return crossAxisChildren;
   }
 
+  /**
+   * Defines whether this {@link technology.sola.engine.graphics.gui.GuiElement} is positioned absolutely or relatively.
+   * Absolutely positioned elements are not considered part of the flow of its parent but instead position based on its
+   * parent's {@link technology.sola.engine.graphics.gui.GuiElement#getBounds()}.
+   *
+   * @return the {@link Position}
+   */
   public Position position() {
     return position;
   }
 
+  /**
+   * Defines the visibility of the {@link technology.sola.engine.graphics.gui.GuiElement}.
+   *
+   * @return the {@link Visibility}
+   */
   public Visibility visibility() {
     return visibility;
   }
@@ -276,48 +335,99 @@ public class BaseStyles {
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#padding()} to have values for top, right, bottom and left.
+     *
+     * @param top    the top padding
+     * @param right  the right padding
+     * @param bottom the bottom padding
+     * @param left   the left padding
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setPadding(Integer top, Integer right, Integer bottom, Integer left) {
       padding = new Padding(top, right, bottom, left);
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#padding()} to have the same value for top, right, bottom and left.
+     *
+     * @param size the padding value for all sides
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setPadding(Integer size) {
       padding = new Padding(size);
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#padding()} to have the same value for top and bottom. Left and right remain unchanged.
+     *
+     * @param topBottom the padding value for top and bottom
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setPaddingVertical(Integer topBottom) {
       padding = new Padding(topBottom, padding.left(), topBottom, padding.right());
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#padding()} to have the same value for left and right. Top and bottom remain unchanged.
+     *
+     * @param leftRight the padding value for left and right
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setPaddingHorizontal(Integer leftRight) {
       padding = new Padding(padding.top(), leftRight, padding.bottom(), leftRight);
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#padding()} top value only.
+     *
+     * @param top the top padding value
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setPaddingTop(Integer top) {
       padding = new Padding(top, padding.right(), padding.bottom(), padding.left());
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#padding()} right value only.
+     *
+     * @param right the right padding value
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setPaddingRight(Integer right) {
       padding = new Padding(padding.top(), right, padding.bottom(), padding.left());
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#padding()} bottom value only.
+     *
+     * @param bottom the bottom padding value
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setPaddingBottom(Integer bottom) {
       padding = new Padding(padding.top(), padding.right(), bottom, padding.left());
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#padding()} left value only.
+     *
+     * @param left the left padding value
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setPaddingLeft(Integer left) {
       padding = new Padding(padding.top(), padding.right(), padding.bottom(), left);
