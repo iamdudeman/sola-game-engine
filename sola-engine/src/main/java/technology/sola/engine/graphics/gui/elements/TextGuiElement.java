@@ -28,7 +28,7 @@ public class TextGuiElement extends GuiElement<TextStyles> {
     Color textColor = getStyles().getPropertyValue(TextStyles::textColor, Color.BLACK);
     renderer.setFont(font);
 
-    var textAlignment = styleContainer.getPropertyValue(TextStyles::getTextAlignment, TextStyles.TextAlignment.START);
+    var textAlignment = styleContainer.getPropertyValue(TextStyles::textAlignment, TextStyles.TextAlignment.START);
 
     TextRenderUtils.renderLines(renderer, textRenderDetails, textAlignment, contentBounds, textColor);
   }

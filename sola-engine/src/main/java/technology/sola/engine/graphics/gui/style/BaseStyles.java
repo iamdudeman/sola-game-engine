@@ -111,40 +111,81 @@ public class BaseStyles {
     private Direction direction;
     private Position position = new Position();
 
+    /**
+     * Builds a new styles instance based on the builder properties that were set.
+     *
+     * @return the new styles instance
+     */
     public BaseStyles build() {
       return new BaseStyles(this);
     }
 
+    /**
+     * Sets the {@link BaseStyles#background()} to be the color provided.
+     *
+     * @param backgroundColor the {@link Color} of the background
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setBackgroundColor(Color backgroundColor) {
       this.background = backgroundColor == null ? null : new Background(backgroundColor);
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#border()} to be the color provided with a 1px sizing.
+     *
+     * @param borderColor the {@link Color} of the border
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setBorderColor(Color borderColor) {
       this.border = borderColor == null ? null : new Border(1, borderColor);
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#width()}.
+     *
+     * @param width the width of the element
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setWidth(String width) {
       this.width = StyleValue.of(width);
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#width()}.
+     *
+     * @param width the width of the element
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setWidth(int width) {
       this.width = new StyleValue(width);
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#height()}.
+     *
+     * @param height the height of the element
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setHeight(String height) {
       this.height = StyleValue.of(height);
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#height()}.
+     *
+     * @param height the height of the element
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setHeight(int height) {
       this.height = new StyleValue(height);
@@ -152,7 +193,7 @@ public class BaseStyles {
     }
 
     /**
-     * Sets the {@link BaseStyles#visibility}.
+     * Sets the {@link BaseStyles#visibility()}.
      *
      * @param visibility the {@link Visibility} of the element
      * @return this
@@ -163,36 +204,72 @@ public class BaseStyles {
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#gap()}.
+     *
+     * @param gap the gap between child elements
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setGap(Integer gap) {
       this.gap = gap;
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#direction()}.
+     *
+     * @param direction the {@link Direction} children elements flow
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setDirection(Direction direction) {
       this.direction = direction;
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#mainAxisChildren()}.
+     *
+     * @param mainAxisChildren the {@link MainAxisChildren} of the element
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setMainAxisChildren(MainAxisChildren mainAxisChildren) {
       this.mainAxisChildren = mainAxisChildren;
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#crossAxisChildren()}.
+     *
+     * @param crossAxisChildren the {@link CrossAxisChildren} of the element
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setCrossAxisChildren(CrossAxisChildren crossAxisChildren) {
       this.crossAxisChildren = crossAxisChildren;
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#position()} to have an absolute value for x (y value remains unchanged).
+     *
+     * @param x the absolute x position
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setPositionX(String x) {
       this.position = new Position(StyleValue.of(x), position.y());
       return (Self) this;
     }
 
+    /**
+     * Sets the {@link BaseStyles#position()} to have an absolute value for y (x value remains unchanged).
+     *
+     * @param y the absolute y position
+     * @return this
+     */
     @SuppressWarnings("unchecked")
     public Self setPositionY(String y) {
       this.position = new Position(position.x(), StyleValue.of(y));

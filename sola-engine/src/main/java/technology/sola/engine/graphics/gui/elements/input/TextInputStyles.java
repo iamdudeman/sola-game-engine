@@ -49,7 +49,7 @@ public class TextInputStyles extends TextStyles {
     }
 
     /**
-     * Sets the {@link TextInputStyles#placeholderColor}.
+     * Sets the {@link TextInputStyles#placeholderColor()}.
      *
      * @param placeholderColor the {@link Color} of the placeholder
      * @return this

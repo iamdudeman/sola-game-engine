@@ -42,7 +42,7 @@ public class TextStyles extends BaseStyles {
   /**
    * @return the {@link TextAlignment} of the text
    */
-  public TextAlignment getTextAlignment() {
+  public TextAlignment textAlignment() {
     return textAlignment;
   }
 
@@ -69,7 +69,7 @@ public class TextStyles extends BaseStyles {
     }
 
     /**
-     * Sets the {@link TextStyles#textColor}.
+     * Sets the {@link TextStyles#textColor()}.
      *
      * @param textColor the {@link Color} of the text
      * @return this
@@ -81,7 +81,7 @@ public class TextStyles extends BaseStyles {
     }
 
     /**
-     * Sets the {@link TextStyles#textAlignment}.
+     * Sets the {@link TextStyles#textAlignment()}.
      *
      * @param textAlignment the {@link TextAlignment} of the text
      * @return this
@@ -93,7 +93,7 @@ public class TextStyles extends BaseStyles {
     }
 
     /**
-     * Sets the {@link TextStyles#fontAssetId}.
+     * Sets the {@link TextStyles#fontAssetId()}.
      *
      * @param fontAssetId the id of the {@link technology.sola.engine.assets.graphics.font.Font} asset
      * @return this
