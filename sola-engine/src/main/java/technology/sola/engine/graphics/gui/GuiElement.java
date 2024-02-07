@@ -57,10 +57,14 @@ public abstract class GuiElement<Style extends BaseStyles> {
     contentBounds = bounds;
   }
 
-  // todo consider removing this in favor of interacting directly with styles container
+  /**
+   * Convenience method that calls {@link StyleContainer#setStyles(List)} for this element's {@link StyleContainer}.
+   *
+   * @param styles the styles to set
+   * @return this
+   */
   public final GuiElement<Style> setStyle(List<ConditionalStyle<Style>> styles) {
     styleContainer.setStyles(styles);
-    isLayoutChanged = true;
 
     return this;
   }
@@ -168,7 +172,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
   /**
    * @return the {@link StyleContainer} for the element
    */
-  public StyleContainer<Style> getStyles() {
+  public StyleContainer<Style> styles() {
     return styleContainer;
   }
 
@@ -220,10 +224,10 @@ public abstract class GuiElement<Style extends BaseStyles> {
   /**
    * Searches the element tree for an element with the desired id. Returns null if not found.
    *
-   * @param id the id of the element to search for
+   * @param id           the id of the element to search for
    * @param elementClass the class of the element being searched
+   * @param <T>          the element type
    * @return the element with the desired id or null if not found
-   * @param <T> the element type
    */
   public <T extends GuiElement<?>> T findElementById(String id, Class<T> elementClass) {
     if (id.equals(this.id)) {
@@ -245,8 +249,8 @@ public abstract class GuiElement<Style extends BaseStyles> {
    * Searches the element tree for elements with the desired type.
    *
    * @param elementClass the class of the elements being searched
+   * @param <T>          the element type
    * @return the list of elements with the desired type
-   * @param <T> the element type
    */
   @SuppressWarnings("unchecked")
   public <T extends GuiElement<?>> List<T> findElementsByType(Class<T> elementClass) {
@@ -473,7 +477,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
   private void recalculateLayout() {
     if (isLayoutChanged()) {
-      Visibility visibility = getStyles().getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE);
+      Visibility visibility = styles().getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE);
 
       // If no visibility then clear out all bounds so no layout space is taken
       if (visibility == Visibility.NONE) {

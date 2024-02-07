@@ -62,6 +62,7 @@ public class StyleContainer<Style extends BaseStyles> {
     this.conditionalStyles = styles == null ? new ArrayList<>() : styles;
     conditionsArray = styles == null ? new boolean[0] : new boolean[styles.size()];
     computedCache.clear();
+    guiElement.invalidateLayout();
   }
 
   /**

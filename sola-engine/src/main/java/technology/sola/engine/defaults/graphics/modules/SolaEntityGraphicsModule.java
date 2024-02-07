@@ -90,13 +90,13 @@ public abstract class SolaEntityGraphicsModule<V extends ViewEntry> extends Sola
     Entity entity = entry.entity();
     BlendModeComponent blendModeComponent = entity.getComponent(BlendModeComponent.class);
     TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
-    TransformComponent transformWithCameraComponent = getTransformForAppliedCamera(transformComponent, cameraScaleTransform, cameraTranslationTransform);
+    TransformComponent cameraModifiedEntityTransform = getTransformForAppliedCamera(transformComponent, cameraScaleTransform, cameraTranslationTransform);
 
     var previousBlendFunction = renderer.getBlendFunction();
     var blendFunction = blendModeComponent == null ? previousBlendFunction : blendModeComponent.getBlendFunction();
 
     renderer.setBlendFunction(blendFunction);
-    renderEntity(renderer, entry, cameraScaleTransform, cameraTranslationTransform, transformWithCameraComponent);
+    renderEntity(renderer, entry, cameraScaleTransform, cameraTranslationTransform, cameraModifiedEntityTransform);
     renderer.setBlendFunction(previousBlendFunction);
   }
 }

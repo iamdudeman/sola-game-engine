@@ -34,7 +34,7 @@ public class SectionGuiElement extends GuiElement<BaseStyles> {
 
     events().keyPressed().on(keyEvent -> {
       int keyCode = keyEvent.getKeyEvent().keyCode();
-      var direction = getStyles().getPropertyValue(BaseStyles::direction, Direction.COLUMN);
+      var direction = styles().getPropertyValue(BaseStyles::direction, Direction.COLUMN);
       int nextKeyCode = switch (direction) {
         case ROW, ROW_REVERSE -> Key.RIGHT.getCode();
         case COLUMN, COLUMN_REVERSE -> Key.DOWN.getCode();

@@ -21,6 +21,7 @@ import technology.sola.engine.graphics.gui.style.property.CrossAxisChildren;
 import technology.sola.engine.graphics.gui.style.property.Direction;
 import technology.sola.engine.graphics.gui.style.property.MainAxisChildren;
 import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
+import technology.sola.engine.graphics.screen.AspectMode;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -45,6 +46,8 @@ public class ExampleLauncherSola extends SolaWithDefaults {
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     defaultsConfigurator.useGui().useBackgroundColor(Color.WHITE);
+
+    solaPlatform.getViewport().setAspectMode(AspectMode.MAINTAIN);
 
     var guiRoot = buildGui();
 
