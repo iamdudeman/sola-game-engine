@@ -50,7 +50,7 @@ public class GuiTheme {
       for (var child : guiElement.findElementsByType((Class<? extends GuiElement<Style>>) definition.elementClass)) {
         var castedDefinition = (ThemeElementDefinition<Style>) definition;
 
-        child.getStyles().addStyles(castedDefinition.styles);
+        child.styles().addStyles(castedDefinition.styles);
       }
     });
   }
@@ -67,7 +67,7 @@ public class GuiTheme {
       if (definition.elementClass.equals(guiElement.getClass())) {
         var castedDefinition = (ThemeElementDefinition<Style>) definition;
 
-        guiElement.getStyles().addStyles(castedDefinition.styles);
+        guiElement.styles().addStyles(castedDefinition.styles);
         break;
       }
     }

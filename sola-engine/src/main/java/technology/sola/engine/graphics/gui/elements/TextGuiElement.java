@@ -25,10 +25,10 @@ public class TextGuiElement extends GuiElement<TextStyles> {
 
   @Override
   public void renderContent(Renderer renderer) {
-    Color textColor = getStyles().getPropertyValue(TextStyles::textColor, Color.BLACK);
+    Color textColor = styles().getPropertyValue(TextStyles::textColor, Color.BLACK);
     renderer.setFont(font);
 
-    var textAlignment = styleContainer.getPropertyValue(TextStyles::getTextAlignment, TextStyles.TextAlignment.START);
+    var textAlignment = styleContainer.getPropertyValue(TextStyles::textAlignment, TextStyles.TextAlignment.START);
 
     TextRenderUtils.renderLines(renderer, textRenderDetails, textAlignment, contentBounds, textColor);
   }
@@ -90,7 +90,7 @@ public class TextGuiElement extends GuiElement<TextStyles> {
   }
 
   private void checkAndHandleAssetIdChange() {
-    String fontAssetId = getStyles().getPropertyValue(TextStyles::fontAssetId, DefaultFont.ASSET_ID);
+    String fontAssetId = styles().getPropertyValue(TextStyles::fontAssetId, DefaultFont.ASSET_ID);
 
     if (!fontAssetId.equals(currentFontId)) {
       var fontAssetHandle = getAssetLoaderProvider().get(Font.class).get(fontAssetId);

@@ -69,7 +69,7 @@ public class MinesweeperGui {
     eventHub.add(NewGameEvent.class, newGameEvent -> {
       mineCount = newGameEvent.totalMines();
       rootElement.findElementById("title", TextGuiElement.class).setText("sola minesweeper - " + mineCount);
-      rootElement.findElementById("victoryMessage", TextGuiElement.class).getStyles().removeStyle(VISIBLE_STYLE);
+      rootElement.findElementById("victoryMessage", TextGuiElement.class).styles().removeStyle(VISIBLE_STYLE);
       rootElement.findElementById("textSize", TextGuiElement.class).setText(newGameEvent.rows() + "x" + newGameEvent.columns());
 
       String difficulty = switch (difficultyIndex) {
@@ -91,7 +91,7 @@ public class MinesweeperGui {
 
         rootElement.findElementById("victoryMessage", TextGuiElement.class)
           .setText("You won in " + decimalFormat.format(secondsTaken) + " seconds")
-          .getStyles().addStyle(VISIBLE_STYLE);
+          .styles().addStyle(VISIBLE_STYLE);
       }
     });
   }

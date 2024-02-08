@@ -6,11 +6,6 @@
 
 ## Planned Cleanup List
 
-* Unit Testing
-    * Add lots of missing tests :)
-* JavaDocs
-    * add missing JavaDocs
-
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
@@ -21,15 +16,15 @@
     * Consider array list for possible SpacialHashMap performance boost
     * Consider BVH implementation (bounded volume hierarchy which is a type of quadtree)
 * Gui improvements
+    * when should layout be invalidated (can partial invalidations happen for children/parent)
+    * consider splitting layout and paint styles to prevent extra calculations
+    * maybe put default style values in a common place (like Direction.Column)?
     * Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
         * maybe just check for any mouse event list size > 0?
     * consider an event map of some sort for when loading gui documents
         * could also have an "event id -> event function" map that can be used as part of gui doc loading
         * elements could then add event listeners from this map
         * ie. (`mousePress` -> `doSomething`)
-    * maybe put default style values in a common place (like Direction.Column)?
-    * when should layout be invalidated (can partial invalidations happen for children/parent)
-    * consider splitting layout and paint styles to prevent extra calculations
     * implement "Style sheet" JSON concept
         * gui json documents can reference these for use
 * Rendering
@@ -52,6 +47,8 @@
             * Switch JsMouseUtils to mouse events instead of pointer events
 * Android Platform
     * Implement
+* Unit Testing
+    * Add lots of missing tests :)
 * Investigate possible Steam CloudSave integration
 * Lighting
     * implement more light types other than just point lights

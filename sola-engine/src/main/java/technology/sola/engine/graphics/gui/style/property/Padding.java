@@ -1,7 +1,8 @@
 package technology.sola.engine.graphics.gui.style.property;
 
 /**
- * Padding contains the properties for a {@link technology.sola.engine.graphics.gui.GuiElement}'s padding.
+ * Padding contains the properties for a {@link technology.sola.engine.graphics.gui.GuiElement}'s padding which is the
+ * space between the element's border and content.
  *
  * @param top    the top padding for the element
  * @param left   the left padding for the element

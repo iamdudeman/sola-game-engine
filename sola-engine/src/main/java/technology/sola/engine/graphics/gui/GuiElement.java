@@ -14,6 +14,11 @@ import technology.sola.engine.input.Key;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * GuiElement is the base class for all elements that can be rendered in a {@link GuiDocument}.
+ *
+ * @param <Style> the style type for the element
+ */
 public abstract class GuiElement<Style extends BaseStyles> {
   /**
    * The {@link StyleContainer} for the element.
@@ -42,20 +47,33 @@ public abstract class GuiElement<Style extends BaseStyles> {
   private boolean isActive = false;
   private String id;
 
-  public GuiElement() {
+  /**
+   * Creates and initializes a new GuiElement instance.
+   */
+  protected GuiElement() {
     styleContainer = new StyleContainer<>(this);
     boundConstraints = new GuiElementBounds(0, 0, 0, 0);
     bounds = boundConstraints;
     contentBounds = bounds;
   }
 
+  /**
+   * Convenience method that calls {@link StyleContainer#setStyles(List)} for this element's {@link StyleContainer}.
+   *
+   * @param styles the styles to set
+   * @return this
+   */
   public final GuiElement<Style> setStyle(List<ConditionalStyle<Style>> styles) {
     styleContainer.setStyles(styles);
-    isLayoutChanged = true;
 
     return this;
   }
 
+  /**
+   * Method to render the main content of the gui element (not borders, backgrounds, etc.).
+   *
+   * @param renderer the {@link Renderer} instance
+   */
   public abstract void renderContent(Renderer renderer);
 
   /**
@@ -66,6 +84,12 @@ public abstract class GuiElement<Style extends BaseStyles> {
    */
   public abstract GuiElementDimensions calculateContentDimensions();
 
+  /**
+   * Method to render the gui element. It handles rendering the background and border before then calling the
+   * {@link GuiElement#renderContent(Renderer)} method.
+   *
+   * @param renderer the {@link Renderer} instance
+   */
   public void render(Renderer renderer) {
     recalculateLayout();
 
@@ -95,10 +119,18 @@ public abstract class GuiElement<Style extends BaseStyles> {
     renderContent(renderer);
   }
 
+  /**
+   * @return true if the element is currently hovered
+   */
   public boolean isHovered() {
     return isHovered;
   }
 
+  /**
+   * The active state is for when an element is being interacted with (space key press or mouse pressed).
+   *
+   * @return true if element is currently active
+   */
   public boolean isActive() {
     if (!isFocussed()) {
       setActive(false);
@@ -107,50 +139,96 @@ public abstract class GuiElement<Style extends BaseStyles> {
     return isActive;
   }
 
+  /**
+   * @return true if element currently has keyboard focus
+   */
   public boolean isFocussed() {
     return getGuiDocument().isFocussed(this);
   }
 
+  /**
+   * Focuses this element if it is able to have focus.
+   */
   public void requestFocus() {
     if (isFocusable()) {
       getGuiDocument().requestFocus(this);
     }
   }
 
+  /**
+   * @return true if the element is currently focusable
+   */
   public boolean isFocusable() {
     return styleContainer.getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE) == Visibility.VISIBLE;
   }
 
+  /**
+   * @return the {@link GuiElementEvents} for the element
+   */
   public GuiElementEvents events() {
     return events;
   }
 
-  public StyleContainer<Style> getStyles() {
+  /**
+   * @return the {@link StyleContainer} for the element
+   */
+  public StyleContainer<Style> styles() {
     return styleContainer;
   }
 
+  /**
+   * @return the parent element
+   */
   public GuiElement<?> getParent() {
     return parent;
   }
 
+  /**
+   * Gets the {@link GuiElementBounds} that contains the top, left and full width and height of the element.
+   *
+   * @return the bounds of the element
+   */
   public GuiElementBounds getBounds() {
     return bounds;
   }
 
+  /**
+   * Gets the {@link GuiElementBounds} that contains the top, left of where the content area begins and the width and
+   * height of the content area.
+   *
+   * @return the content bounds of the element
+   */
   public GuiElementBounds getContentBounds() {
     return contentBounds;
   }
 
+  /**
+   * @return the id of the element
+   */
   public String getId() {
     return id;
   }
 
+  /**
+   * Sets the id of the element.
+   *
+   * @param id the new id
+   * @return this
+   */
   public GuiElement<Style> setId(String id) {
     this.id = id;
 
     return this;
   }
 
+  /**
+   * Searches the element tree for an element with the desired id. Returns null if not found.
+   *
+   * @param id           the id of the element to search for
+   * @param elementClass the class of the element being searched
+   * @param <T>          the element type
+   * @return the element with the desired id or null if not found
+   */
   public <T extends GuiElement<?>> T findElementById(String id, Class<T> elementClass) {
     if (id.equals(this.id)) {
       return elementClass.cast(this);
@@ -167,6 +245,13 @@ public abstract class GuiElement<Style extends BaseStyles> {
     return null;
   }
 
+  /**
+   * Searches the element tree for elements with the desired type.
+   *
+   * @param elementClass the class of the elements being searched
+   * @param <T>          the element type
+   * @return the list of elements with the desired type
+   */
   @SuppressWarnings("unchecked")
   public <T extends GuiElement<?>> List<T> findElementsByType(Class<T> elementClass) {
     List<T> elements = new ArrayList<>();
@@ -182,6 +267,12 @@ public abstract class GuiElement<Style extends BaseStyles> {
     return elements;
   }
 
+  /**
+   * Removes a child element from this element.
+   *
+   * @param child the child element to remove
+   * @return this
+   */
   public GuiElement<Style> removeChild(GuiElement<?> child) {
     if (children.contains(child)) {
       child.parent = null;
@@ -217,28 +308,51 @@ public abstract class GuiElement<Style extends BaseStyles> {
     return this;
   }
 
+  /**
+   * @return true if the layout of this element has been changed
+   */
   public boolean isLayoutChanged() {
     return isLayoutChanged || children.stream().anyMatch(GuiElement::isLayoutChanged);
   }
 
+  /**
+   * Invalidates the layout for this element so that it will be recalculated next frame.
+   */
   public void invalidateLayout() {
     isLayoutChanged = true;
   }
 
+  /**
+   * Renders all the element's children.
+   *
+   * @param renderer the {@link Renderer} instance
+   */
   protected void renderChildren(Renderer renderer) {
     for (var child : children) {
       child.render(renderer);
     }
   }
 
+  /**
+   * @return the list of child elements that are focusable
+   */
   protected List<GuiElement<?>> getFocusableChildren() {
     return children.stream().filter(GuiElement::isFocusable).toList();
   }
 
+  /**
+   * @return the {@link AssetLoaderProvider} instance
+   */
   protected AssetLoaderProvider getAssetLoaderProvider() {
     return this.parent.getAssetLoaderProvider();
   }
 
+  /**
+   * Utility method to search an array of elements for which one currently has focus and get its index.
+   *
+   * @param children the list of elements to search
+   * @return the index of the element with focus or -1 if not found
+   */
   protected int findFocussedChildIndex(List<GuiElement<?>> children) {
     int focussedIndex = 0;
 
@@ -363,7 +477,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
   private void recalculateLayout() {
     if (isLayoutChanged()) {
-      Visibility visibility = getStyles().getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE);
+      Visibility visibility = styles().getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE);
 
       // If no visibility then clear out all bounds so no layout space is taken
       if (visibility == Visibility.NONE) {

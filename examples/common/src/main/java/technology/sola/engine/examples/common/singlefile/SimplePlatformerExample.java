@@ -71,11 +71,11 @@ public class SimplePlatformerExample extends SolaWithDefaults {
   }
 
   private World buildWorld() {
-    World world = new World(100);
+    World world = new World(15);
 
     world.createEntity()
       .addComponent(new CameraComponent())
-      .addComponent(new TransformComponent(0, 0, 1, 1));
+      .addComponent(new TransformComponent(0, 0, 0.75f, 0.75f));
 
     world.createEntity()
       .addComponent(new PlayerComponent())
@@ -134,6 +134,7 @@ public class SimplePlatformerExample extends SolaWithDefaults {
     world.createEntity()
       .setName("confetti")
       .addComponent(particleEmitterComponent)
+      .addComponent(new BlendModeComponent(BlendMode.NORMAL))
       .addComponent(new TransformComponent(25, 0, finalBlock))
       .setDisabled(true);
 
@@ -241,13 +242,13 @@ public class SimplePlatformerExample extends SolaWithDefaults {
         var cameraTransform = camera.getComponent(TransformComponent.class);
         var playerTransform = player.getComponent(TransformComponent.class);
 
-        float dx = playerTransform.getX() - cameraTransform.getX();
+        float dx = playerTransform.getX() * cameraTransform.getScaleX() - cameraTransform.getX();
 
         if (dx > 200) {
           cameraTransform.setX(cameraTransform.getX() + (dx / 100));
         }
 
-        float dy = playerTransform.getY() - cameraTransform.getY();
+        float dy = playerTransform.getY() * cameraTransform.getScaleY() - cameraTransform.getY();
 
         if (dy < 250) {
           cameraTransform.setY(cameraTransform.getY() - 0.05f);

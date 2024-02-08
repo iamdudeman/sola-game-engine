@@ -6,7 +6,7 @@ import technology.sola.engine.graphics.gui.style.property.*;
 class LayoutUtil {
   static void rebuildLayout(GuiElement<?> guiElement) {
     var guiElementChildren = guiElement.children;
-    var styles = guiElement.getStyles();
+    var styles = guiElement.styles();
     var direction = styles.getPropertyValue(BaseStyles::direction, Direction.COLUMN);
     int gap = styles.getPropertyValue(BaseStyles::gap, 0);
     int xOffset = guiElement.boundConstraints.x();
@@ -22,7 +22,7 @@ class LayoutUtil {
       int index = startIndex > 0 ? startIndex - i : i;
       GuiElement<?> child = guiElementChildren.get(index);
 
-      Visibility visibility = child.getStyles().getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE);
+      Visibility visibility = child.styles().getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE);
 
       // If no visibility then clear out all bounds so no layout space is taken
       if (visibility == Visibility.NONE) {
@@ -45,7 +45,7 @@ class LayoutUtil {
       updateContentBounds(child);
 
       // calculate where in the layout flow the element should go or if it is outside the flow
-      var position = child.getStyles().getPropertyValue(BaseStyles::position, Position.NONE);
+      var position = child.styles().getPropertyValue(BaseStyles::position, Position.NONE);
 
       if (!position.isAbsolute()) {
         switch (direction) {
@@ -66,7 +66,7 @@ class LayoutUtil {
   }
 
   static void updateAbsolute(GuiElement<?> guiElement) {
-    var position = guiElement.getStyles().getPropertyValue(BaseStyles::position, Position.NONE);
+    var position = guiElement.styles().getPropertyValue(BaseStyles::position, Position.NONE);
 
     if (position.isAbsolute()) {
       var parentElement = guiElement.getParent();
@@ -85,7 +85,7 @@ class LayoutUtil {
   }
 
   static void updateAlignment(GuiElement<?> guiElement) {
-    var styles = guiElement.getStyles();
+    var styles = guiElement.styles();
 
     // prepare to calculate alignment adjustments of elements in the flow
     var direction = styles.getPropertyValue(BaseStyles::direction, Direction.COLUMN);
@@ -137,7 +137,7 @@ class LayoutUtil {
   }
 
   private static GuiElementBounds recalculateBoundConstraints(GuiElement<?> guiElement, int x, int y) {
-    var parentStyleContainer = guiElement.getParent().getStyles();
+    var parentStyleContainer = guiElement.getParent().styles();
     var parentBorder = parentStyleContainer.getPropertyValue(BaseStyles::border, Border.NONE);
     var parentPadding = parentStyleContainer.getPropertyValue(BaseStyles::padding, Padding.NONE);
 
@@ -210,7 +210,7 @@ class LayoutUtil {
   }
 
   private static GuiElementBounds calculateDefaultLayoutBounds(GuiElement<?> guiElement) {
-    var styles = guiElement.getStyles();
+    var styles = guiElement.styles();
     var boundConstraints = guiElement.boundConstraints;
 
     final int width = styles.getPropertyValue(BaseStyles::width, StyleValue.FULL).getValue(boundConstraints.width());
@@ -224,7 +224,7 @@ class LayoutUtil {
 
   private static void updateContentBounds(GuiElement<?> guiElement) {
     var contentDimensions = guiElement.calculateContentDimensions();
-    var styles = guiElement.getStyles();
+    var styles = guiElement.styles();
     boolean isAutoWidth = styles.getPropertyValue(BaseStyles::width) == null;
     boolean isAutoHeight = styles.getPropertyValue(BaseStyles::height) == null;
 
@@ -233,7 +233,7 @@ class LayoutUtil {
       int gap = styles.getPropertyValue(BaseStyles::gap, 0);
       var direction = styles.getPropertyValue(BaseStyles::direction, Direction.COLUMN);
       var childrenInLayout = guiElement.children.stream()
-        .filter(child -> !child.getStyles().getPropertyValue(BaseStyles::position, Position.NONE).isAbsolute())
+        .filter(child -> !child.styles().getPropertyValue(BaseStyles::position, Position.NONE).isAbsolute())
         .toList();
 
       if (direction == Direction.ROW || direction == Direction.ROW_REVERSE) {

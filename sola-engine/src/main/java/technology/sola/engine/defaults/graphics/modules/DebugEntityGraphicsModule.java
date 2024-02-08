@@ -63,14 +63,17 @@ public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Ent
     Vector2D transform = cameraModifiedEntityTransform.getTranslate();
     ColliderComponent colliderComponent = viewEntry.c1();
 
-    if (ColliderComponent.ColliderType.CIRCLE.equals(colliderComponent.getColliderType())) {
-      Circle circle = colliderComponent.asCircle(cameraModifiedEntityTransform);
+    switch (colliderComponent.getColliderType()) {
+      case CIRCLE -> {
+        Circle circle = colliderComponent.asCircle(cameraModifiedEntityTransform);
 
-      renderer.drawCircle(transform.x() + colliderComponent.getOffsetX(), transform.y() + colliderComponent.getOffsetY(), circle.radius(), Color.RED);
-    } else {
-      Rectangle rectangle = colliderComponent.asRectangle(cameraModifiedEntityTransform);
+        renderer.drawCircle(transform.x() + colliderComponent.getOffsetX(), transform.y() + colliderComponent.getOffsetY(), circle.radius(), Color.RED);
+      }
+      case AABB -> {
+        Rectangle rectangle = colliderComponent.asRectangle(cameraModifiedEntityTransform);
 
-      renderer.drawRect(rectangle.min().x(), rectangle.min().y(), rectangle.getWidth(), rectangle.getHeight(), Color.RED);
+        renderer.drawRect(rectangle.min().x(), rectangle.min().y(), rectangle.getWidth(), rectangle.getHeight(), Color.RED);
+      }
     }
   }
 
