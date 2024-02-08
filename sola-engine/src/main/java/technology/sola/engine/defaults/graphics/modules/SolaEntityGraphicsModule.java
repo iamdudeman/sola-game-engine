@@ -36,18 +36,20 @@ public abstract class SolaEntityGraphicsModule<V extends ViewEntry> extends Sola
   public abstract void renderEntity(Renderer renderer, V viewEntry, TransformComponent cameraModifiedEntityTransform);
 
   /**
-   * Called on each {@link Entity} to render it. A {@link TransformComponent} instance with the camera's transform
-   * applied is provided for each entity. This method also passes the camera scale and translation transforms that were
-   * used to calculate the camera modified entity transform. If an entity has a {@link LayerComponent} it will be
-   * rendered to its layer.
+   * Called on each {@link Entity} to render it. It calculates a {@link TransformComponent} instance with the camera's
+   * transform applied which is then passed into the
+   * {@link SolaEntityGraphicsModule#renderEntity(Renderer, ViewEntry, TransformComponent)} method. If an entity has
+   * a {@link LayerComponent} it will be rendered to its layer.
    *
-   * @param renderer                      tbe {@link Renderer} instance
-   * @param viewEntry                     the {@link ViewEntry} containing the {@link Entity} to render
-   * @param cameraModifiedEntityTransform a {@link TransformComponent} with the camera's transform applied to the entity's transform
-   * @param cameraScaleTransform          the camera's scale
-   * @param cameraTranslationTransform    the camera's translation
+   * @param renderer                   tbe {@link Renderer} instance
+   * @param viewEntry                  the {@link ViewEntry} containing the {@link Entity} to render
+   * @param cameraScaleTransform       the camera's scale
+   * @param cameraTranslationTransform the camera's translation
    */
-  public void renderEntity(Renderer renderer, V viewEntry, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform, TransformComponent cameraModifiedEntityTransform) {
+  public void renderEntity(Renderer renderer, V viewEntry, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
+    TransformComponent transformComponent = viewEntry.entity().getComponent(TransformComponent.class);
+    TransformComponent cameraModifiedEntityTransform = getTransformForAppliedCamera(transformComponent, cameraScaleTransform, cameraTranslationTransform);
+
     renderEntity(renderer, viewEntry, cameraModifiedEntityTransform);
   }
 
@@ -89,14 +91,12 @@ public abstract class SolaEntityGraphicsModule<V extends ViewEntry> extends Sola
   private void renderEntityWithTransform(Renderer renderer, V entry, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
     Entity entity = entry.entity();
     BlendModeComponent blendModeComponent = entity.getComponent(BlendModeComponent.class);
-    TransformComponent transformComponent = entity.getComponent(TransformComponent.class);
-    TransformComponent cameraModifiedEntityTransform = getTransformForAppliedCamera(transformComponent, cameraScaleTransform, cameraTranslationTransform);
 
     var previousBlendFunction = renderer.getBlendFunction();
     var blendFunction = blendModeComponent == null ? previousBlendFunction : blendModeComponent.getBlendFunction();
 
     renderer.setBlendFunction(blendFunction);
-    renderEntity(renderer, entry, cameraScaleTransform, cameraTranslationTransform, cameraModifiedEntityTransform);
+    renderEntity(renderer, entry, cameraScaleTransform, cameraTranslationTransform);
     renderer.setBlendFunction(previousBlendFunction);
   }
 }

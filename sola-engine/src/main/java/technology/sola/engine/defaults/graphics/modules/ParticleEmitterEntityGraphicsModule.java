@@ -20,18 +20,19 @@ public class ParticleEmitterEntityGraphicsModule extends SolaEntityGraphicsModul
   }
 
   @Override
-  public void renderEntity(Renderer renderer, View2Entry<ParticleEmitterComponent, TransformComponent> viewEntry, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform, TransformComponent cameraModifiedEntityTransform) {
+  public void renderEntity(Renderer renderer, View2Entry<ParticleEmitterComponent, TransformComponent> viewEntry, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
     var particleIter = viewEntry.c1().emittedParticleIterator();
 
     while (particleIter.hasNext()) {
       var particle = particleIter.next();
-      var position = cameraModifiedEntityTransform.getTranslate().add(cameraTranslationTransform.multiply(particle.getPosition()));
-      var size = cameraScaleTransform.multiply(particle.getSize(), particle.getSize());
+      var particleTranslate = viewEntry.c2().getTranslate().add(particle.getPosition());
+      var positionAfterCameraTransform = cameraTranslationTransform.multiply(particleTranslate);
+      var sizeAfterCameraTransform = cameraScaleTransform.multiply(particle.getSize(), particle.getSize());
 
       renderer.fillCircle(
-        position.x(),
-        position.y(),
-        size.x() * 0.5f,
+        positionAfterCameraTransform.x(),
+        positionAfterCameraTransform.y(),
+        sizeAfterCameraTransform.x() * 0.5f,
         particle.getColor()
       );
     }
