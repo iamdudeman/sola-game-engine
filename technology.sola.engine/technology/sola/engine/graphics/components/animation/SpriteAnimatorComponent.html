@@ -83,6 +83,9 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SpriteAnimatorComponent</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements technology.sola.ecs.Component</span></div>
+<div class="block">SpritesAnimatorComponent is a <code>Component</code> that contains data for controlling how a
+ <a href="../SpriteComponent.html" title="class in technology.sola.engine.graphics.components"><code>SpriteComponent</code></a> animates between frames. Multiple different
+ animations can be added and played as needed.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -97,7 +100,10 @@ implements technology.sola.ecs.Component</span></div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static interface&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="SpriteAnimatorComponent.AnimationCompleteCallback.html" class="type-name-link" title="interface in technology.sola.engine.graphics.components.animation">SpriteAnimatorComponent.AnimationCompleteCallback</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">AnimationCompleteCallback is a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link"><code>FunctionalInterface</code></a> for defining functionality that happens when an
+ animation completes.</div>
+</div>
 </div>
 </section>
 </li>
@@ -129,10 +135,14 @@ implements technology.sola.ecs.Component</span></div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,int,technology.sola.engine.graphics.components.SpriteKeyFrame...)" class="member-name-link">SpriteAnimatorComponent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;activeAnimationId,
  int&nbsp;loops,
  <a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a>...&nbsp;activeAnimationKeyFrames)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a SpriteAnimatorComponent with animation id and an array of key frames.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String,technology.sola.engine.graphics.components.SpriteKeyFrame...)" class="member-name-link">SpriteAnimatorComponent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;activeAnimationId,
  <a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a>...&nbsp;activeAnimationKeyFrames)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Creates a SpriteAnimatorComponent with animation id and an array of key frames.</div>
+</div>
 </div>
 </section>
 </li>
@@ -151,11 +161,15 @@ implements technology.sola.ecs.Component</span></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addAnimation(java.lang.String,int,technology.sola.engine.graphics.components.SpriteKeyFrame...)" class="member-name-link">addAnimation</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  int&nbsp;loops,
  <a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a>...&nbsp;spriteKeyFrames)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Adds a new animation with animation id and an array of key frames.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SpriteAnimatorComponent.html" title="class in technology.sola.engine.graphics.components.animation">SpriteAnimatorComponent</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addAnimation(java.lang.String,technology.sola.engine.graphics.components.SpriteKeyFrame...)" class="member-name-link">addAnimation</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  <a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a>...&nbsp;spriteKeyFrames)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Adds a new animation with animation id and an array of key frames.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getActiveAnimationId()" class="member-name-link">getActiveAnimationId</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -164,16 +178,24 @@ implements technology.sola.ecs.Component</span></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#playAnimation(java.lang.String)" class="member-name-link">playAnimation</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Starts playing the animation with desired id.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#restart()" class="member-name-link">restart</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Restarts the current animation.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SpriteAnimatorComponent.html" title="class in technology.sola.engine.graphics.components.animation">SpriteAnimatorComponent</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setAnimationCompleteCallback(technology.sola.engine.graphics.components.animation.SpriteAnimatorComponent.AnimationCompleteCallback)" class="member-name-link">setAnimationCompleteCallback</a><wbr>(<a href="SpriteAnimatorComponent.AnimationCompleteCallback.html" title="interface in technology.sola.engine.graphics.components.animation">SpriteAnimatorComponent.AnimationCompleteCallback</a>&nbsp;animationCompleteCallback)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the <a href="SpriteAnimatorComponent.AnimationCompleteCallback.html" title="interface in technology.sola.engine.graphics.components.animation"><code>SpriteAnimatorComponent.AnimationCompleteCallback</code></a> that happens when an animation finishes playing.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#tickAnimation(float)" class="member-name-link">tickAnimation</a><wbr>(float&nbsp;deltaTime)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Ticks the animation state by a delta time.</div>
+</div>
 </div>
 </div>
 </div>
@@ -222,6 +244,13 @@ implements technology.sola.ecs.Component</span></div>
 <h3>SpriteAnimatorComponent</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SpriteAnimatorComponent</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;activeAnimationId,
  <a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a>...&nbsp;activeAnimationKeyFrames)</span></div>
+<div class="block">Creates a SpriteAnimatorComponent with animation id and an array of key frames. The animation will
+ loop <a href="#CONTINUOUS"><code>CONTINUOUS</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>activeAnimationId</code> - the animation id that starts as active</dd>
+<dd><code>activeAnimationKeyFrames</code> - the <a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components"><code>SpriteKeyFrame</code></a> array</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -230,6 +259,14 @@ implements technology.sola.ecs.Component</span></div>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SpriteAnimatorComponent</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;activeAnimationId,
  int&nbsp;loops,
  <a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a>...&nbsp;activeAnimationKeyFrames)</span></div>
+<div class="block">Creates a SpriteAnimatorComponent with animation id and an array of key frames. The animation will
+ loop the desired amount of times.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>activeAnimationId</code> - the animation id that starts as active</dd>
+<dd><code>loops</code> - the number of loops</dd>
+<dd><code>activeAnimationKeyFrames</code> - the <a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components"><code>SpriteKeyFrame</code></a> array</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -245,6 +282,15 @@ implements technology.sola.ecs.Component</span></div>
 <h3>addAnimation</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SpriteAnimatorComponent.html" title="class in technology.sola.engine.graphics.components.animation">SpriteAnimatorComponent</a></span>&nbsp;<span class="element-name">addAnimation</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  <a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a>...&nbsp;spriteKeyFrames)</span></div>
+<div class="block">Adds a new animation with animation id and an array of key frames. The animation will
+ loop <a href="#CONTINUOUS"><code>CONTINUOUS</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>id</code> - the animation id</dd>
+<dd><code>spriteKeyFrames</code> - the <a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components"><code>SpriteKeyFrame</code></a> array</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -253,42 +299,78 @@ implements technology.sola.ecs.Component</span></div>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SpriteAnimatorComponent.html" title="class in technology.sola.engine.graphics.components.animation">SpriteAnimatorComponent</a></span>&nbsp;<span class="element-name">addAnimation</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  int&nbsp;loops,
  <a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a>...&nbsp;spriteKeyFrames)</span></div>
+<div class="block">Adds a new animation with animation id and an array of key frames. The animation will
+ loop the desired amount of times.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>id</code> - the animation id</dd>
+<dd><code>loops</code> - the number of loops</dd>
+<dd><code>spriteKeyFrames</code> - the <a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components"><code>SpriteKeyFrame</code></a> array</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setAnimationCompleteCallback(technology.sola.engine.graphics.components.animation.SpriteAnimatorComponent.AnimationCompleteCallback)">
 <h3>setAnimationCompleteCallback</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SpriteAnimatorComponent.html" title="class in technology.sola.engine.graphics.components.animation">SpriteAnimatorComponent</a></span>&nbsp;<span class="element-name">setAnimationCompleteCallback</span><wbr><span class="parameters">(<a href="SpriteAnimatorComponent.AnimationCompleteCallback.html" title="interface in technology.sola.engine.graphics.components.animation">SpriteAnimatorComponent.AnimationCompleteCallback</a>&nbsp;animationCompleteCallback)</span></div>
+<div class="block">Sets the <a href="SpriteAnimatorComponent.AnimationCompleteCallback.html" title="interface in technology.sola.engine.graphics.components.animation"><code>SpriteAnimatorComponent.AnimationCompleteCallback</code></a> that happens when an animation finishes playing.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>animationCompleteCallback</code> - the animation complete callback</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="tickAnimation(float)">
 <h3>tickAnimation</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">tickAnimation</span><wbr><span class="parameters">(float&nbsp;deltaTime)</span></div>
+<div class="block">Ticks the animation state by a delta time.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>deltaTime</code> - the time elapsed since previous update</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="playAnimation(java.lang.String)">
 <h3>playAnimation</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">playAnimation</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</span></div>
+<div class="block">Starts playing the animation with desired id.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>id</code> - the id of the animation to play</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="restart()">
 <h3>restart</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">restart</span>()</div>
+<div class="block">Restarts the current animation.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="getCurrentFrame()">
 <h3>getCurrentFrame</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a></span>&nbsp;<span class="element-name">getCurrentFrame</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the currently active <a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components"><code>SpriteKeyFrame</code></a></dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getActiveAnimationId()">
 <h3>getActiveAnimationId</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getActiveAnimationId</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the currently active animation id</dd>
+</dl>
 </section>
 </li>
 </ul>

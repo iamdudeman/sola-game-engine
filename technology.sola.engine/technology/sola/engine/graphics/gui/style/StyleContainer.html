@@ -75,9 +75,14 @@ loadScripts(document, 'script');</script>
 <div class="inheritance">technology.sola.engine.graphics.gui.style.StyleContainer&lt;Style&gt;</div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>Style</code> - the <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style"><code>BaseStyles</code></a> type</dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">StyleContainer&lt;Style extends <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">StyleContainer is a container for <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s that apply to a <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -90,7 +95,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">StyleContainer</a><wbr>(<a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>&gt;&nbsp;guiElement)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a StyleContainer instance for a <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -107,26 +114,40 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addStyle(technology.sola.engine.graphics.gui.style.ConditionalStyle)" class="member-name-link">addStyle</a><wbr>(<a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style">ConditionalStyle</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>&gt;&nbsp;style)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Appends another <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a> to the current list of styles.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addStyles(java.util.List)" class="member-name-link">addStyles</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style">ConditionalStyle</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>&gt;&gt;&nbsp;styles)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Appends a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> of <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s to the current list of styles.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;R&gt;&nbsp;R</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPropertyValue(java.util.function.Function)" class="member-name-link">getPropertyValue</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>,<wbr>R&gt;&nbsp;propertySupplier)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Gets the computer property value based on the <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s currently applied to the <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;R&gt;&nbsp;R</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPropertyValue(java.util.function.Function,R)" class="member-name-link">getPropertyValue</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>,<wbr>R&gt;&nbsp;propertySupplier,
  R&nbsp;defaultValue)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Gets the computer property value based on the <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s currently applied to the <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#invalidate()" class="member-name-link">invalidate</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Invalidates the cached condition evaluations if a change has happened.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeStyle(technology.sola.engine.graphics.gui.style.ConditionalStyle)" class="member-name-link">removeStyle</a><wbr>(<a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style">ConditionalStyle</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>&gt;&nbsp;style)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Removes a <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a> from the current list of styles.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setStyles(java.util.List)" class="member-name-link">setStyles</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style">ConditionalStyle</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>&gt;&gt;&nbsp;styles)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Replaces the current internal <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> of <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s with a new one.</div>
+</div>
 </div>
 </div>
 </div>
@@ -148,6 +169,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(technology.sola.engine.graphics.gui.GuiElement)">
 <h3>StyleContainer</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">StyleContainer</span><wbr><span class="parameters">(<a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>&gt;&nbsp;guiElement)</span></div>
+<div class="block">Creates a StyleContainer instance for a <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>guiElement</code> - the gui element</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -162,36 +188,67 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="invalidate()">
 <h3>invalidate</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">invalidate</span>()</div>
+<div class="block">Invalidates the cached condition evaluations if a change has happened.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="setStyles(java.util.List)">
 <h3>setStyles</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setStyles</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style">ConditionalStyle</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>&gt;&gt;&nbsp;styles)</span></div>
+<div class="block">Replaces the current internal <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> of <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s with a new one.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>styles</code> - the new list of styles</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="addStyle(technology.sola.engine.graphics.gui.style.ConditionalStyle)">
 <h3>addStyle</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addStyle</span><wbr><span class="parameters">(<a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style">ConditionalStyle</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>&gt;&nbsp;style)</span></div>
+<div class="block">Appends another <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a> to the current list of styles.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>style</code> - the new style to add</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="addStyles(java.util.List)">
 <h3>addStyles</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addStyles</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style">ConditionalStyle</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>&gt;&gt;&nbsp;styles)</span></div>
+<div class="block">Appends a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> of <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s to the current list of styles.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>styles</code> - the styles to add</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="removeStyle(technology.sola.engine.graphics.gui.style.ConditionalStyle)">
 <h3>removeStyle</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">removeStyle</span><wbr><span class="parameters">(<a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style">ConditionalStyle</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>&gt;&nbsp;style)</span></div>
+<div class="block">Removes a <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a> from the current list of styles.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>style</code> - the style to remove</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getPropertyValue(java.util.function.Function)">
 <h3>getPropertyValue</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;R&gt;</span>&nbsp;<span class="return-type">R</span>&nbsp;<span class="element-name">getPropertyValue</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>,<wbr>R&gt;&nbsp;propertySupplier)</span></div>
+<div class="block">Gets the computer property value based on the <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s currently applied to the <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>.
+ If no value is present in any of the styles then null is returned.</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>R</code> - the return value type</dd>
+<dt>Parameters:</dt>
+<dd><code>propertySupplier</code> - the method that supplies the property from <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style"><code>BaseStyles</code></a> classes</dd>
+<dt>Returns:</dt>
+<dd>the calculated style or null</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -199,6 +256,17 @@ loadScripts(document, 'script');</script>
 <h3 id="getPropertyValue(java.util.function.Function,java.lang.Object)">getPropertyValue</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;R&gt;</span>&nbsp;<span class="return-type">R</span>&nbsp;<span class="element-name">getPropertyValue</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>,<wbr>R&gt;&nbsp;propertySupplier,
  R&nbsp;defaultValue)</span></div>
+<div class="block">Gets the computer property value based on the <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s currently applied to the <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>.
+ If no value is present in any of the styles then the default value is returned.</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>R</code> - the return value type</dd>
+<dt>Parameters:</dt>
+<dd><code>propertySupplier</code> - the method that supplies the property from <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style"><code>BaseStyles</code></a> classes</dd>
+<dd><code>defaultValue</code> - the default value to return if no style provides a value</dd>
+<dt>Returns:</dt>
+<dd>the calculated style or default value</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -206,6 +274,18 @@ loadScripts(document, 'script');</script>
 <h3 id="getPropertyValue(java.util.function.Function,technology.sola.engine.graphics.gui.style.property.MergeableProperty)">getPropertyValue</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;R extends <a href="property/MergeableProperty.html" title="interface in technology.sola.engine.graphics.gui.style.property">MergeableProperty</a>&lt;R&gt;&gt;</span>&nbsp;<span class="return-type">R</span>&nbsp;<span class="element-name">getPropertyValue</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>,<wbr>R&gt;&nbsp;propertySupplier,
  R&nbsp;defaultValue)</span></div>
+<div class="block">Gets the computer property value based on the <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s currently applied to the <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>.
+ If no value is present in any of the styles then the default value is returned. Properties defined in multiple
+ styles will be merged based on their <a href="property/MergeableProperty.html#mergeWith(P)"><code>MergeableProperty.mergeWith(MergeableProperty)</code></a> definition.</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>R</code> - the return value type</dd>
+<dt>Parameters:</dt>
+<dd><code>propertySupplier</code> - the method that supplies the property from <a href="BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style"><code>BaseStyles</code></a> classes</dd>
+<dd><code>defaultValue</code> - the default value to return if no style provides a value</dd>
+<dt>Returns:</dt>
+<dd>the calculated style or default value</dd>
+</dl>
 </section>
 </li>
 </ul>

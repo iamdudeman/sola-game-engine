@@ -138,11 +138,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Called on each <code>Entity</code> to render it.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#renderEntity(technology.sola.engine.graphics.renderer.Renderer,V,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderEntity</a><wbr>(<a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#renderEntity(technology.sola.engine.graphics.renderer.Renderer,V,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)" class="member-name-link">renderEntity</a><wbr>(<a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
  <a href="SolaEntityGraphicsModule.html" title="type parameter in SolaEntityGraphicsModule">V</a>&nbsp;viewEntry,
  <a href="../../../../math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a>&nbsp;cameraScaleTransform,
- <a href="../../../../math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a>&nbsp;cameraTranslationTransform,
- <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;cameraModifiedEntityTransform)</code></div>
+ <a href="../../../../math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a>&nbsp;cameraTranslationTransform)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Called on each <code>Entity</code> to render it.</div>
 </div>
@@ -219,22 +218,20 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="renderEntity(technology.sola.engine.graphics.renderer.Renderer,V,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D,technology.sola.engine.core.component.TransformComponent)">
-<h3 id="renderEntity(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.ViewEntry,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D,technology.sola.engine.core.component.TransformComponent)">renderEntity</h3>
+<section class="detail" id="renderEntity(technology.sola.engine.graphics.renderer.Renderer,V,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)">
+<h3 id="renderEntity(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.ViewEntry,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)">renderEntity</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">renderEntity</span><wbr><span class="parameters">(<a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
  <a href="SolaEntityGraphicsModule.html" title="type parameter in SolaEntityGraphicsModule">V</a>&nbsp;viewEntry,
  <a href="../../../../math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a>&nbsp;cameraScaleTransform,
- <a href="../../../../math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a>&nbsp;cameraTranslationTransform,
- <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;cameraModifiedEntityTransform)</span></div>
-<div class="block">Called on each <code>Entity</code> to render it. A <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> instance with the camera's transform
- applied is provided for each entity. This method also passes the camera scale and translation transforms that were
- used to calculate the camera modified entity transform. If an entity has a <a href="../../../graphics/components/LayerComponent.html" title="class in technology.sola.engine.graphics.components"><code>LayerComponent</code></a> it will be
- rendered to its layer.</div>
+ <a href="../../../../math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a>&nbsp;cameraTranslationTransform)</span></div>
+<div class="block">Called on each <code>Entity</code> to render it. It calculates a <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> instance with the camera's
+ transform applied which is then passed into the
+ <a href="#renderEntity(technology.sola.engine.graphics.renderer.Renderer,V,technology.sola.engine.core.component.TransformComponent)"><code>renderEntity(Renderer, ViewEntry, TransformComponent)</code></a> method. If an entity has
+ a <a href="../../../graphics/components/LayerComponent.html" title="class in technology.sola.engine.graphics.components"><code>LayerComponent</code></a> it will be rendered to its layer.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>renderer</code> - tbe <a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> instance</dd>
 <dd><code>viewEntry</code> - the <code>ViewEntry</code> containing the <code>Entity</code> to render</dd>
-<dd><code>cameraModifiedEntityTransform</code> - a <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> with the camera's transform applied to the entity's transform</dd>
 <dd><code>cameraScaleTransform</code> - the camera's scale</dd>
 <dd><code>cameraTranslationTransform</code> - the camera's translation</dd>
 </dl>
