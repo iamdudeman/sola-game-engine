@@ -1,4 +1,4 @@
-package technology.sola.engine.physics;
+package technology.sola.engine.physics.utils;
 
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;

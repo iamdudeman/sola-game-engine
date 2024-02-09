@@ -5,11 +5,11 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.physics.CollisionManifold;
-import technology.sola.engine.physics.CollisionUtils;
-import technology.sola.engine.physics.SpatialHashMap;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.physics.event.SensorEvent;
+import technology.sola.engine.physics.utils.CollisionUtils;
+import technology.sola.engine.physics.utils.SpatialHashMap;
 
 import java.util.HashSet;
 import java.util.List;
