@@ -4,7 +4,6 @@ import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
-import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.event.CollisionEvent;
@@ -12,7 +11,6 @@ import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.engine.physics.system.collision.CollisionDetectionBroadPhase;
 import technology.sola.engine.physics.utils.CollisionUtils;
 import technology.sola.engine.physics.system.collision.SpacialHashMapCollisionDetectionBroadPhase;
-import technology.sola.math.linear.Matrix3D;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,27 +27,26 @@ public class CollisionDetectionSystem extends EcsSystem {
    */
   public static final int ORDER = PhysicsSystem.ORDER + 1;
   private final EventHub eventHub;
-  private final CollisionDetectionBroadPhase collisionDetectionBroadPhase;
+  private CollisionDetectionBroadPhase collisionDetectionBroadPhase;
 
   /**
-   * Creates a CollisionDetectionSystem that allows the internal spacial hash map to determine a good cell size based on
-   * the entities.
+   * Creates a CollisionDetectionSystem that uses a {@link SpacialHashMapCollisionDetectionBroadPhase}.
    *
    * @param eventHub {@link EventHub} instance
    */
   public CollisionDetectionSystem(EventHub eventHub) {
-    this(eventHub, null);
+    this(eventHub, new SpacialHashMapCollisionDetectionBroadPhase(null));
   }
 
   /**
-   * Creates a CollisionDetectionSystem with custom spacial hash map cell sizing.
+   * Creates a CollisionDetectionSystem with custom {@link CollisionDetectionBroadPhase} algorithm.
    *
-   * @param eventHub               {@link EventHub} instance
-   * @param spatialHashMapCellSize the cell size of the internal spacial hash map
+   * @param eventHub                     the {@link EventHub} instance
+   * @param collisionDetectionBroadPhase the {@link CollisionDetectionBroadPhase} algorithm
    */
-  public CollisionDetectionSystem(EventHub eventHub, Integer spatialHashMapCellSize) {
+  public CollisionDetectionSystem(EventHub eventHub, CollisionDetectionBroadPhase collisionDetectionBroadPhase) {
     this.eventHub = eventHub;
-    this.collisionDetectionBroadPhase = new SpacialHashMapCollisionDetectionBroadPhase(spatialHashMapCellSize);
+    this.collisionDetectionBroadPhase = collisionDetectionBroadPhase;
   }
 
   @Override
@@ -72,7 +69,7 @@ public class CollisionDetectionSystem extends EcsSystem {
       for (var viewEntryB : collisionDetectionBroadPhase.query(viewEntryA)) {
         ColliderComponent colliderB = viewEntryB.c1();
 
-        if (shouldIgnoreCollision(colliderA, colliderB)) {
+        if (shouldIgnoreCollision(colliderA, colliderB) || viewEntryA.entity() == viewEntryB.entity()) {
           continue;
         }
 
@@ -95,8 +92,20 @@ public class CollisionDetectionSystem extends EcsSystem {
     collisionsThisIteration.forEach(collisionManifold -> eventHub.emit(new CollisionEvent(collisionManifold)));
   }
 
-  public void renderDebug(Renderer renderer, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
-    collisionDetectionBroadPhase.renderDebug(renderer, cameraScaleTransform, cameraTranslationTransform);
+  /**
+   * @return the {@link CollisionDetectionBroadPhase} currently being used
+   */
+  public CollisionDetectionBroadPhase getCollisionDetectionBroadPhase() {
+    return collisionDetectionBroadPhase;
+  }
+
+  /**
+   * Sets the {@link CollisionDetectionBroadPhase} algorithm used for collision detection.
+   *
+   * @param collisionDetectionBroadPhase the new broad phase algorithm to use
+   */
+  public void setCollisionDetectionBroadPhase(CollisionDetectionBroadPhase collisionDetectionBroadPhase) {
+    this.collisionDetectionBroadPhase = collisionDetectionBroadPhase;
   }
 
   private boolean shouldIgnoreCollision(ColliderComponent colliderA, ColliderComponent colliderB) {

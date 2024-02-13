@@ -93,8 +93,8 @@ public class StressTestPhysicsExample extends SolaWithDefaults {
     }
 
     for (int i = 0; i < objectCount; i++) {
-      float x = random.nextFloat() * (zoomedWidth - CIRCLE_RADIUS) + CIRCLE_RADIUS;
-      float y = random.nextFloat() * (zoomedHeight - CIRCLE_RADIUS) + CIRCLE_RADIUS;
+      float x = random.nextFloat() * (zoomedWidth - 4 * CIRCLE_RADIUS) + 2 * CIRCLE_RADIUS;
+      float y = random.nextFloat() * (zoomedHeight - 4 * CIRCLE_RADIUS) + 2 * CIRCLE_RADIUS;
       boolean isKinematic = random.nextFloat() > 0.9f;
 
       world.createEntity()

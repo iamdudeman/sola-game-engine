@@ -1,5 +1,9 @@
 # sola-game-engine TODO list
 
+* optimize collision detection broad phase
+    * Consider array list for possible SpacialHashMap performance boost
+    * Consider BVH implementation (bounded volume hierarchy which is a type of quadtree)
+
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -12,9 +16,6 @@
 
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
-* optimize collision detection broad phase
-    * Consider array list for possible SpacialHashMap performance boost
-    * Consider BVH implementation (bounded volume hierarchy which is a type of quadtree)
 * Gui improvements
     * when should layout be invalidated (can partial invalidations happen for children/parent)
     * consider splitting layout and paint styles to prevent extra calculations

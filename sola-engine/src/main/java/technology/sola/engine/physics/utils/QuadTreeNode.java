@@ -11,18 +11,23 @@ import java.util.*;
 // todo study these: https://stackoverflow.com/questions/41946007/efficient-and-well-explained-implementation-of-a-quadtree-for-2d-collision-det
 
 public class QuadTreeNode {
-  private static final int MAX_DEPTH = 5;
-  private static final int MAX_ENTITIES_PER_NODE = 15;
-
+  private final int maxDepth;
+  private final int maxEntitiesPerNode;
   private final Rectangle nodeBounds;
   private final List<QuadTreeNode> children = new ArrayList<>();
   private final List<QuadTreeData> contents = new ArrayList<>();
   private int currentDepth;
 
   public QuadTreeNode(Rectangle nodeBounds) {
+    this(nodeBounds, 5, 8);
+  }
+
+  public QuadTreeNode(Rectangle nodeBounds, int maxDepth, int maxEntitiesPerNode) {
     this.nodeBounds = nodeBounds;
 
     this.currentDepth = 0;
+    this.maxDepth = maxDepth;
+    this.maxEntitiesPerNode = maxEntitiesPerNode;
   }
 
   public boolean isLeaf() {
@@ -72,7 +77,7 @@ public class QuadTreeNode {
     }
 
     if (isLeaf()) {
-      if (contents.size() + 1 > MAX_ENTITIES_PER_NODE) {
+      if (contents.size() + 1 > maxEntitiesPerNode) {
         split();
       }
 
@@ -118,7 +123,7 @@ public class QuadTreeNode {
 
       if (entityCount == 0) {
         children.clear();
-      } else if (entityCount < MAX_ENTITIES_PER_NODE) {
+      } else if (entityCount < maxEntitiesPerNode) {
         Deque<QuadTreeNode> process = new ArrayDeque<>();
 
         process.push(this);
@@ -143,7 +148,7 @@ public class QuadTreeNode {
   }
 
   public void split() {
-    if (currentDepth + 1 >= MAX_DEPTH) {
+    if (currentDepth + 1 >= maxDepth) {
       return;
     }
 
@@ -159,7 +164,7 @@ public class QuadTreeNode {
     };
 
     for (int i = 0; i < 4; i++) {
-      children.add(new QuadTreeNode(childAreas[i]));
+      children.add(new QuadTreeNode(childAreas[i], this.maxDepth, this.maxEntitiesPerNode));
       children.get(i).currentDepth = currentDepth + 1;
 
       for (int j = 0, size = contents.size(); j < size; j++) {
@@ -212,10 +217,6 @@ public class QuadTreeNode {
     return children;
   }
 
-  public List<QuadTreeData> getContents() {
-    return contents;
-  }
-
   public int getCurrentDepth() {
     return currentDepth;
   }
@@ -231,20 +232,7 @@ public class QuadTreeNode {
     }
 
     public static QuadTreeData fromView(View2Entry<ColliderComponent, TransformComponent> view) {
-      var transformComponent = view.c2();
-      var colliderComponent = view.c1();
-      var min = transformComponent.getTranslate().add(new Vector2D(colliderComponent.getOffsetX(), colliderComponent.getOffsetY()));
-      var boundingRectangle = new Rectangle(
-        min,
-        min.add(
-          new Vector2D(
-            colliderComponent.getBoundingWidth(transformComponent.getScaleX()),
-            colliderComponent.getBoundingHeight(transformComponent.getScaleY())
-          )
-        )
-      );
-
-      return new QuadTreeData(view, boundingRectangle);
+      return new QuadTreeData(view, view.c1().getBoundingRectangle(view.c2()));
     }
   }
 }

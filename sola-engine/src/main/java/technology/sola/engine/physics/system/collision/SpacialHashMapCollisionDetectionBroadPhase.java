@@ -15,6 +15,13 @@ public class SpacialHashMapCollisionDetectionBroadPhase implements CollisionDete
   private SpatialHashMap spatialHashMap;
   private final Integer spatialHashMapCellSize;
 
+  /**
+   * Creates an instance that allows the internal spacial hash map to determine a good cell size based on the entities.
+   */
+  public SpacialHashMapCollisionDetectionBroadPhase() {
+    this(null);
+  }
+
   public SpacialHashMapCollisionDetectionBroadPhase(Integer spatialHashMapCellSize) {
     this.spatialHashMapCellSize = spatialHashMapCellSize;
   }

@@ -44,7 +44,7 @@ public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Ent
     super.render(renderer, world, cameraScaleTransform, cameraTranslationTransform);
 
     if (collisionDetectionSystem != null) {
-      collisionDetectionSystem.renderDebug(renderer, cameraScaleTransform, cameraTranslationTransform);
+      collisionDetectionSystem.getCollisionDetectionBroadPhase().renderDebug(renderer, cameraScaleTransform, cameraTranslationTransform);
     }
   }
 
