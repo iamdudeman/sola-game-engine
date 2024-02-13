@@ -8,6 +8,8 @@ import technology.sola.math.linear.Vector2D;
 
 import java.util.*;
 
+// todo study these: https://stackoverflow.com/questions/41946007/efficient-and-well-explained-implementation-of-a-quadtree-for-2d-collision-det
+
 public class QuadTreeNode {
   private static final int MAX_DEPTH = 5;
   private static final int MAX_ENTITIES_PER_NODE = 15;
@@ -159,10 +161,10 @@ public class QuadTreeNode {
     for (int i = 0; i < 4; i++) {
       children.add(new QuadTreeNode(childAreas[i]));
       children.get(i).currentDepth = currentDepth + 1;
-    }
 
-    for (int i = 0, size = contents.size(); i < size; i++) {
-      children.get(i).insert(contents.get(i));
+      for (int j = 0, size = contents.size(); j < size; j++) {
+        children.get(i).insert(contents.get(j));
+      }
     }
 
     contents.clear();
@@ -180,8 +182,8 @@ public class QuadTreeNode {
     }
   }
 
-  public List<QuadTreeData> query(Rectangle area) {
-    List<QuadTreeData> result = new ArrayList<>();
+  public List<View2Entry<ColliderComponent, TransformComponent>> query(Rectangle area) {
+    List<View2Entry<ColliderComponent, TransformComponent>> result = new ArrayList<>();
 
     if (!area.intersects(nodeBounds)) {
       return result;
@@ -190,7 +192,7 @@ public class QuadTreeNode {
     if (isLeaf()) {
       for (int i = 0, size = contents.size(); i < size; i++) {
         if (contents.get(i).entityBoundingRectangle.intersects(area)) {
-          result.add(contents.get(i));
+          result.add(contents.get(i).entityView);
         }
       }
     } else {
@@ -200,6 +202,22 @@ public class QuadTreeNode {
     }
 
     return result;
+  }
+
+  public Rectangle getNodeBounds() {
+    return nodeBounds;
+  }
+
+  public List<QuadTreeNode> getChildren() {
+    return children;
+  }
+
+  public List<QuadTreeData> getContents() {
+    return contents;
+  }
+
+  public int getCurrentDepth() {
+    return currentDepth;
   }
 
   public static class QuadTreeData {
@@ -212,15 +230,17 @@ public class QuadTreeNode {
       this.entityBoundingRectangle = entityBoundingRectangle;
     }
 
-    public QuadTreeData fromView(View2Entry<ColliderComponent, TransformComponent> view) {
+    public static QuadTreeData fromView(View2Entry<ColliderComponent, TransformComponent> view) {
       var transformComponent = view.c2();
       var colliderComponent = view.c1();
+      var min = transformComponent.getTranslate().add(new Vector2D(colliderComponent.getOffsetX(), colliderComponent.getOffsetY()));
       var boundingRectangle = new Rectangle(
-        transformComponent.getTranslate()
-          .add(new Vector2D(colliderComponent.getOffsetX(), colliderComponent.getOffsetY())),
-        new Vector2D(
-          colliderComponent.getBoundingWidth(transformComponent.getScaleX()),
-          colliderComponent.getBoundingHeight(transformComponent.getScaleY())
+        min,
+        min.add(
+          new Vector2D(
+            colliderComponent.getBoundingWidth(transformComponent.getScaleX()),
+            colliderComponent.getBoundingHeight(transformComponent.getScaleY())
+          )
         )
       );
 
