@@ -7,10 +7,21 @@ import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
+import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
+import technology.sola.engine.graphics.gui.elements.TextGuiElement;
+import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.style.BaseStyles;
+import technology.sola.engine.graphics.gui.style.ConditionalStyle;
+import technology.sola.engine.graphics.gui.style.property.Direction;
+import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
 import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
+import technology.sola.engine.physics.system.collision.QuadTreeCollisionDetectionBroadPhase;
+import technology.sola.engine.physics.system.collision.SpacialHashMapCollisionDetectionBroadPhase;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -29,8 +40,9 @@ import java.util.Random;
 public class StressTestPhysicsExample extends SolaWithDefaults {
   private static final float CAMERA_SCALE = 1.5f;
   private static final float CIRCLE_RADIUS = 10f;
-  private final Random random;
   private final int objectCount;
+  private Random random;
+  private boolean useFixedSeed;
 
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
@@ -50,17 +62,103 @@ public class StressTestPhysicsExample extends SolaWithDefaults {
   public StressTestPhysicsExample(int objectCount, boolean useFixedSeed) {
     super(new SolaConfiguration("Stress Test - Physics", 1200, 800));
     this.objectCount = objectCount;
+    this.useFixedSeed = useFixedSeed;
     this.random = useFixedSeed ? new Random(123456789) : new Random();
   }
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGraphics().usePhysics().useDebug();
+    defaultsConfigurator.useGraphics().usePhysics().useDebug().useGui();
 
-    solaEcs.setWorld(buildWorld());
+    solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
+      new QuadTreeCollisionDetectionBroadPhase()
+    );
+
+    solaEcs.setWorld(buildQuadTreeOptimizedWorld());
+
+    guiDocument.setRootElement(buildGui());
   }
 
-  private World buildWorld() {
+  private GuiElement<?> buildGui() {
+    SectionGuiElement sectionGuiElement = new SectionGuiElement();
+
+    sectionGuiElement.setStyle(List.of(
+      ConditionalStyle.always(BaseStyles.create().setDirection(Direction.ROW).setPadding(5).setGap(5).build())
+    ));
+
+    sectionGuiElement.appendChildren(
+      new ButtonGuiElement()
+        .setOnAction(() -> {
+          solaPhysics.getCollisionDetectionSystem().setActive(false);
+          this.random = useFixedSeed ? new Random(123456789) : new Random();
+          solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
+            new SpacialHashMapCollisionDetectionBroadPhase()
+          );
+          solaEcs.setWorld(buildSpacialHashMapOptimizedWorld());
+          solaPhysics.getCollisionDetectionSystem().setActive(true);
+        })
+        .setStyle(List.of(ConditionalStyle.always(BaseStyles.create().setPadding(5).build())))
+        .appendChildren(new TextGuiElement().setText("SpacialHashMap")),
+      new ButtonGuiElement()
+        .setOnAction(() -> {
+          solaPhysics.getCollisionDetectionSystem().setActive(false);
+          this.random = useFixedSeed ? new Random(123456789) : new Random();
+          solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
+            new QuadTreeCollisionDetectionBroadPhase()
+          );
+          solaEcs.setWorld(buildQuadTreeOptimizedWorld());
+          solaPhysics.getCollisionDetectionSystem().setActive(true);
+        })
+        .setStyle(List.of(ConditionalStyle.always(BaseStyles.create().setPadding(5).build())))
+        .appendChildren(new TextGuiElement().setText("QuadTree"))
+    );
+
+    GuiTheme.getDefaultLightTheme().applyToTree(sectionGuiElement);
+
+    return sectionGuiElement;
+  }
+
+  private World buildQuadTreeOptimizedWorld() {
+    Material circleMaterial = new Material(1, 0.8f);
+    float zoomedWidth = configuration.rendererWidth() / CAMERA_SCALE;
+    float zoomedHeight = configuration.rendererHeight() / CAMERA_SCALE;
+    float squareSide = CIRCLE_RADIUS;
+
+    World world = new World(objectCount + 4);
+
+    world.createEntity()
+      .addComponent(new TransformComponent(0, 0, CAMERA_SCALE, CAMERA_SCALE))
+      .addComponent(new CameraComponent());
+
+    world.createEntity(
+      new TransformComponent(0, 0, squareSide, zoomedHeight),
+      ColliderComponent.aabb()
+    );
+    world.createEntity(
+      new TransformComponent(zoomedWidth - squareSide, 0, squareSide, zoomedHeight),
+      ColliderComponent.aabb()
+    );
+    world.createEntity(
+      new TransformComponent(0, zoomedHeight - squareSide, zoomedWidth, squareSide),
+      ColliderComponent.aabb()
+    );
+
+    for (int i = 0; i < objectCount; i++) {
+      float x = random.nextFloat() * (zoomedWidth - 4 * CIRCLE_RADIUS) + 2 * CIRCLE_RADIUS;
+      float y = random.nextFloat() * (zoomedHeight - 4 * CIRCLE_RADIUS) + 2 * CIRCLE_RADIUS;
+      boolean isKinematic = random.nextFloat() > 0.9f;
+
+      world.createEntity()
+        .addComponent(new TransformComponent(x, y, CIRCLE_RADIUS))
+        .addComponent(new DynamicBodyComponent(circleMaterial, isKinematic))
+        .addComponent(new CircleRendererComponent(isKinematic ? Color.WHITE : Color.BLUE, true))
+        .addComponent(ColliderComponent.circle());
+    }
+
+    return world;
+  }
+
+  private World buildSpacialHashMapOptimizedWorld() {
     Material circleMaterial = new Material(1, 0.8f);
     float zoomedWidth = configuration.rendererWidth() / CAMERA_SCALE;
     float zoomedHeight = configuration.rendererHeight() / CAMERA_SCALE;
