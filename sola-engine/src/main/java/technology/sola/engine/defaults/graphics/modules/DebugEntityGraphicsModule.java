@@ -9,7 +9,6 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
-import technology.sola.engine.physics.utils.SpatialHashMap;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Matrix3D;
@@ -45,16 +44,7 @@ public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Ent
     super.render(renderer, world, cameraScaleTransform, cameraTranslationTransform);
 
     if (collisionDetectionSystem != null) {
-      int cellSize = collisionDetectionSystem.getSpacialHashMapCellSize();
-
-      for (SpatialHashMap.BucketId bucketId : collisionDetectionSystem.getSpacialHashMapBucketIds()) {
-        Vector2D topLeftPoint = new Vector2D(bucketId.x(), bucketId.y()).scalar(cellSize);
-        TransformComponent useThis = getTransformForAppliedCamera(
-          new TransformComponent(topLeftPoint.x(), topLeftPoint.y(), cellSize, cellSize), cameraScaleTransform, cameraTranslationTransform
-        );
-
-        renderer.drawRect(useThis.getX(), useThis.getY(), useThis.getScaleX(), useThis.getScaleY(), Color.GREEN);
-      }
+      collisionDetectionSystem.renderDebug(renderer, cameraScaleTransform, cameraTranslationTransform);
     }
   }
 

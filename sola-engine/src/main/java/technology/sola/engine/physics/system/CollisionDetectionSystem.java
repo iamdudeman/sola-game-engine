@@ -4,15 +4,17 @@ import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.physics.event.SensorEvent;
+import technology.sola.engine.physics.system.collision.CollisionDetectionBroadPhase;
 import technology.sola.engine.physics.utils.CollisionUtils;
-import technology.sola.engine.physics.utils.SpatialHashMap;
+import technology.sola.engine.physics.system.collision.SpacialHashMapCollisionDetectionBroadPhase;
+import technology.sola.math.linear.Matrix3D;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -27,8 +29,7 @@ public class CollisionDetectionSystem extends EcsSystem {
    */
   public static final int ORDER = PhysicsSystem.ORDER + 1;
   private final EventHub eventHub;
-  private SpatialHashMap spatialHashMap;
-  private final Integer spatialHashMapCellSize;
+  private final CollisionDetectionBroadPhase collisionDetectionBroadPhase;
 
   /**
    * Creates a CollisionDetectionSystem that allows the internal spacial hash map to determine a good cell size based on
@@ -48,24 +49,7 @@ public class CollisionDetectionSystem extends EcsSystem {
    */
   public CollisionDetectionSystem(EventHub eventHub, Integer spatialHashMapCellSize) {
     this.eventHub = eventHub;
-    this.spatialHashMapCellSize = spatialHashMapCellSize;
-    this.spatialHashMap = spatialHashMapCellSize == null
-      ? new SpatialHashMap(List.of())
-      : new SpatialHashMap(List.of(), spatialHashMapCellSize);
-  }
-
-  /**
-   * @return the size of the internal {@link SpatialHashMap} cell size
-   */
-  public int getSpacialHashMapCellSize() {
-    return spatialHashMap.getCellSize();
-  }
-
-  /**
-   * @return the set of the internal {@link SpatialHashMap.BucketId}s
-   */
-  public Set<SpatialHashMap.BucketId> getSpacialHashMapBucketIds() {
-    return spatialHashMap.getBucketIds();
+    this.collisionDetectionBroadPhase = new SpacialHashMapCollisionDetectionBroadPhase(spatialHashMapCellSize);
   }
 
   @Override
@@ -80,13 +64,12 @@ public class CollisionDetectionSystem extends EcsSystem {
 
     var viewEntries = world.createView().of(ColliderComponent.class, TransformComponent.class).getEntries();
 
-    // TODO consider some sort of clear method for SpatialHashMap
-    spatialHashMap = spatialHashMapCellSize == null ? new SpatialHashMap(viewEntries) : new SpatialHashMap(viewEntries, spatialHashMapCellSize);
+    collisionDetectionBroadPhase.populate(viewEntries);
 
     for (var viewEntryA : viewEntries) {
       ColliderComponent colliderA = viewEntryA.c1();
 
-      for (var viewEntryB : spatialHashMap.getNearbyViewEntries(viewEntryA)) {
+      for (var viewEntryB : collisionDetectionBroadPhase.query(viewEntryA)) {
         ColliderComponent colliderB = viewEntryB.c1();
 
         if (shouldIgnoreCollision(colliderA, colliderB)) {
@@ -110,6 +93,10 @@ public class CollisionDetectionSystem extends EcsSystem {
     // By emitting only events from the set we do not send duplicates
     sensorDetectionsThisIteration.forEach(collisionManifold -> eventHub.emit(new SensorEvent(collisionManifold)));
     collisionsThisIteration.forEach(collisionManifold -> eventHub.emit(new CollisionEvent(collisionManifold)));
+  }
+
+  public void renderDebug(Renderer renderer, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
+    collisionDetectionBroadPhase.renderDebug(renderer, cameraScaleTransform, cameraTranslationTransform);
   }
 
   private boolean shouldIgnoreCollision(ColliderComponent colliderA, ColliderComponent colliderB) {
