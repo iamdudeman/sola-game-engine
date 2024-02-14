@@ -12,9 +12,6 @@ import technology.sola.math.linear.Vector2D;
 
 import java.util.List;
 
-// todo implement a dynamic option that calculates screenBounds based on current entities in scene
-//   should be added to the populate method
-
 public class QuadTreeCollisionDetectionBroadPhase implements CollisionDetectionBroadPhase {
   private final Rectangle screenBounds;
   private QuadTreeNode quadTreeNode;
