@@ -63,18 +63,15 @@ public class StressTestPhysicsExample extends SolaWithDefaults {
     super(new SolaConfiguration("Stress Test - Physics", 1200, 800));
     this.objectCount = objectCount;
     this.useFixedSeed = useFixedSeed;
-    this.random = useFixedSeed ? new Random(123456789) : new Random();
+
+    resetRandom();
   }
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     defaultsConfigurator.useGraphics().usePhysics().useDebug().useGui();
 
-    solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
-      new QuadTreeCollisionDetectionBroadPhase()
-    );
-
-    solaEcs.setWorld(buildQuadTreeOptimizedWorld());
+    solaEcs.setWorld(buildSpacialHashMapOptimizedWorld());
 
     guiDocument.setRootElement(buildGui());
   }
@@ -86,31 +83,37 @@ public class StressTestPhysicsExample extends SolaWithDefaults {
       ConditionalStyle.always(BaseStyles.create().setDirection(Direction.ROW).setPadding(5).setGap(5).build())
     ));
 
+    TextGuiElement randomSeedText = new TextGuiElement().setText("Random seed");
+
     sectionGuiElement.appendChildren(
       new ButtonGuiElement()
         .setOnAction(() -> {
-          solaPhysics.getCollisionDetectionSystem().setActive(false);
-          this.random = useFixedSeed ? new Random(123456789) : new Random();
+          resetRandom();
           solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
             new SpacialHashMapCollisionDetectionBroadPhase()
           );
           solaEcs.setWorld(buildSpacialHashMapOptimizedWorld());
-          solaPhysics.getCollisionDetectionSystem().setActive(true);
         })
         .setStyle(List.of(ConditionalStyle.always(BaseStyles.create().setPadding(5).build())))
         .appendChildren(new TextGuiElement().setText("SpacialHashMap")),
       new ButtonGuiElement()
         .setOnAction(() -> {
-          solaPhysics.getCollisionDetectionSystem().setActive(false);
-          this.random = useFixedSeed ? new Random(123456789) : new Random();
+          resetRandom();
           solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
             new QuadTreeCollisionDetectionBroadPhase()
           );
           solaEcs.setWorld(buildQuadTreeOptimizedWorld());
-          solaPhysics.getCollisionDetectionSystem().setActive(true);
         })
         .setStyle(List.of(ConditionalStyle.always(BaseStyles.create().setPadding(5).build())))
-        .appendChildren(new TextGuiElement().setText("QuadTree"))
+        .appendChildren(new TextGuiElement().setText("QuadTree")),
+      // todo consider using text input for seed and button to randomize it
+      new ButtonGuiElement()
+        .setOnAction(() -> {
+          useFixedSeed = !useFixedSeed;
+          randomSeedText.setText(useFixedSeed ? "Fixed seed" : "Random seed");
+        })
+        .setStyle(List.of(ConditionalStyle.always(BaseStyles.create().setPadding(5).build())))
+        .appendChildren(randomSeedText)
     );
 
     GuiTheme.getDefaultLightTheme().applyToTree(sectionGuiElement);
@@ -203,5 +206,9 @@ public class StressTestPhysicsExample extends SolaWithDefaults {
     }
 
     return world;
+  }
+
+  private void resetRandom() {
+    this.random = useFixedSeed ? new Random(123456789) : new Random();
   }
 }
