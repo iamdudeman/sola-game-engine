@@ -12,20 +12,40 @@ import technology.sola.math.linear.Vector2D;
 
 import java.util.List;
 
+/**
+ * QuadTreeCollisionDetectionBroadPhase is a {@link CollisionDetectionBroadPhase} implementation using a
+ * {@link QuadTreeNode} internally.
+ */
 public class QuadTreeCollisionDetectionBroadPhase implements CollisionDetectionBroadPhase {
   private final Rectangle screenBounds;
   private QuadTreeNode quadTreeNode;
   private final int maxDepth;
   private final int maxEntitiesPerNode;
 
+  /**
+   * Creates an instance with bounds being auto calculated based on entries in the world, maxDepth set to 5, and
+   * maxEntitiesPerNode set to 8.
+   */
   public QuadTreeCollisionDetectionBroadPhase() {
     this(null, 5, 8);
   }
 
+  /**
+   * Creates an instance with desired fixed bounds, maxDepth set to 5, and maxEntitiesPerNode set to 8.
+   *
+   * @param screenBounds the bounds of the quad tree
+   */
   public QuadTreeCollisionDetectionBroadPhase(Rectangle screenBounds) {
     this(screenBounds, 5, 8);
   }
 
+  /**
+   * Creates an instance with desired fixed bounds, maxDepth, and maxEntitiesPerNode.
+   *
+   * @param screenBounds the bounds of the quad tree
+   * @param maxDepth the maximum depth of the quad tree
+   * @param maxEntitiesPerNode the max number of entities per node
+   */
   public QuadTreeCollisionDetectionBroadPhase(Rectangle screenBounds, int maxDepth, int maxEntitiesPerNode) {
     this.screenBounds = screenBounds;
     this.maxDepth = maxDepth;

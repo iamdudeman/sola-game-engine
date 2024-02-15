@@ -11,6 +11,10 @@ import technology.sola.math.linear.Vector2D;
 
 import java.util.List;
 
+/**
+ * SpatialHashMapCollisionDetectionBroadPhase is a {@link CollisionDetectionBroadPhase} implementation utilizing a
+ * {@link SpatialHashMap} internally.
+ */
 public class SpatialHashMapCollisionDetectionBroadPhase implements CollisionDetectionBroadPhase {
   private SpatialHashMap spatialHashMap;
   private final Integer spatialHashMapCellSize;
