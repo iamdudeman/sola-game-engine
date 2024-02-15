@@ -11,10 +11,13 @@ import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.elements.input.TextInputGuiElement;
+import technology.sola.engine.graphics.gui.elements.input.TextInputStyles;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
 import technology.sola.engine.graphics.gui.style.property.Direction;
 import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
+import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
@@ -38,38 +41,28 @@ import java.util.Random;
  * </ul>
  */
 public class StressTestPhysicsExample extends SolaWithDefaults {
-  private static final float CAMERA_SCALE = 1.5f;
+  private static final float CAMERA_SCALE = 1.2f;
   private static final float CIRCLE_RADIUS = 10f;
   private final int objectCount;
   private Random random;
-  private boolean useFixedSeed;
-
-  /**
-   * Creates an instance of this {@link technology.sola.engine.core.Sola}.
-   *
-   * @param objectCount the count of physics objects to create
-   */
-  public StressTestPhysicsExample(int objectCount) {
-    this(objectCount, false);
-  }
 
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    *
    * @param objectCount  the count of physics objects to create
-   * @param useFixedSeed causes the same random seed to be used each run for consistency
    */
-  public StressTestPhysicsExample(int objectCount, boolean useFixedSeed) {
+  public StressTestPhysicsExample(int objectCount) {
     super(new SolaConfiguration("Stress Test - Physics", 1200, 800));
     this.objectCount = objectCount;
-    this.useFixedSeed = useFixedSeed;
 
-    resetRandom();
+    resetRandom("123456789");
   }
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     defaultsConfigurator.useGraphics().usePhysics().useDebug().useGui();
+
+    platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
 
     solaEcs.setWorld(buildSpacialHashMapOptimizedWorld());
 
@@ -83,12 +76,14 @@ public class StressTestPhysicsExample extends SolaWithDefaults {
       ConditionalStyle.always(BaseStyles.create().setDirection(Direction.ROW).setPadding(5).setGap(5).build())
     ));
 
-    TextGuiElement randomSeedText = new TextGuiElement().setText("Random seed");
+    TextInputGuiElement randomSeedInput = new TextInputGuiElement().setValue("123456789").setPlaceholder("Random");
+
+    randomSeedInput.setStyle(List.of(ConditionalStyle.always(TextInputStyles.create().setPadding(5).build())));
 
     sectionGuiElement.appendChildren(
       new ButtonGuiElement()
         .setOnAction(() -> {
-          resetRandom();
+          resetRandom(randomSeedInput.getValue());
           solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
             new SpacialHashMapCollisionDetectionBroadPhase()
           );
@@ -98,7 +93,7 @@ public class StressTestPhysicsExample extends SolaWithDefaults {
         .appendChildren(new TextGuiElement().setText("SpacialHashMap")),
       new ButtonGuiElement()
         .setOnAction(() -> {
-          resetRandom();
+          resetRandom(randomSeedInput.getValue());
           solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
             new QuadTreeCollisionDetectionBroadPhase()
           );
@@ -106,14 +101,13 @@ public class StressTestPhysicsExample extends SolaWithDefaults {
         })
         .setStyle(List.of(ConditionalStyle.always(BaseStyles.create().setPadding(5).build())))
         .appendChildren(new TextGuiElement().setText("QuadTree")),
-      // todo consider using text input for seed and button to randomize it
       new ButtonGuiElement()
         .setOnAction(() -> {
-          useFixedSeed = !useFixedSeed;
-          randomSeedText.setText(useFixedSeed ? "Fixed seed" : "Random seed");
+          randomSeedInput.setValue("" + new Random().nextLong());
         })
         .setStyle(List.of(ConditionalStyle.always(BaseStyles.create().setPadding(5).build())))
-        .appendChildren(randomSeedText)
+        .appendChildren(new TextGuiElement().setText("New seed")),
+      randomSeedInput
     );
 
     GuiTheme.getDefaultLightTheme().applyToTree(sectionGuiElement);
@@ -133,6 +127,18 @@ public class StressTestPhysicsExample extends SolaWithDefaults {
       .addComponent(new TransformComponent(0, 0, CAMERA_SCALE, CAMERA_SCALE))
       .addComponent(new CameraComponent());
 
+    for (int i = 0; i < objectCount; i++) {
+      float x = random.nextFloat() * (zoomedWidth - 4 * CIRCLE_RADIUS) + 2 * CIRCLE_RADIUS;
+      float y = random.nextFloat() * (zoomedHeight - 4 * CIRCLE_RADIUS) + 2 * CIRCLE_RADIUS;
+      boolean isKinematic = random.nextFloat() > 0.9f;
+
+      world.createEntity()
+        .addComponent(new TransformComponent(x, y, CIRCLE_RADIUS))
+        .addComponent(new DynamicBodyComponent(circleMaterial, isKinematic))
+        .addComponent(new CircleRendererComponent(isKinematic ? Color.WHITE : Color.BLUE, true))
+        .addComponent(ColliderComponent.circle());
+    }
+
     world.createEntity(
       new TransformComponent(0, 0, squareSide, zoomedHeight),
       ColliderComponent.aabb()
@@ -145,18 +151,6 @@ public class StressTestPhysicsExample extends SolaWithDefaults {
       new TransformComponent(0, zoomedHeight - squareSide, zoomedWidth, squareSide),
       ColliderComponent.aabb()
     );
-
-    for (int i = 0; i < objectCount; i++) {
-      float x = random.nextFloat() * (zoomedWidth - 4 * CIRCLE_RADIUS) + 2 * CIRCLE_RADIUS;
-      float y = random.nextFloat() * (zoomedHeight - 4 * CIRCLE_RADIUS) + 2 * CIRCLE_RADIUS;
-      boolean isKinematic = random.nextFloat() > 0.9f;
-
-      world.createEntity()
-        .addComponent(new TransformComponent(x, y, CIRCLE_RADIUS))
-        .addComponent(new DynamicBodyComponent(circleMaterial, isKinematic))
-        .addComponent(new CircleRendererComponent(isKinematic ? Color.WHITE : Color.BLUE, true))
-        .addComponent(ColliderComponent.circle());
-    }
 
     return world;
   }
@@ -174,6 +168,18 @@ public class StressTestPhysicsExample extends SolaWithDefaults {
     world.createEntity()
       .addComponent(new TransformComponent(0, 0, CAMERA_SCALE, CAMERA_SCALE))
       .addComponent(new CameraComponent());
+
+    for (int i = 0; i < objectCount; i++) {
+      float x = random.nextFloat() * (zoomedWidth - 4 * CIRCLE_RADIUS) + 2 * CIRCLE_RADIUS;
+      float y = random.nextFloat() * (zoomedHeight - 4 * CIRCLE_RADIUS) + 2 * CIRCLE_RADIUS;
+      boolean isKinematic = random.nextFloat() > 0.9f;
+
+      world.createEntity()
+        .addComponent(new TransformComponent(x, y, CIRCLE_RADIUS))
+        .addComponent(new DynamicBodyComponent(circleMaterial, isKinematic))
+        .addComponent(new CircleRendererComponent(isKinematic ? Color.WHITE : Color.BLUE, true))
+        .addComponent(ColliderComponent.circle());
+    }
 
     for (int i = 0; i < zoomedHeight; i += squareSide) {
       world.createEntity()
@@ -193,22 +199,10 @@ public class StressTestPhysicsExample extends SolaWithDefaults {
         .addComponent(ColliderComponent.aabb());
     }
 
-    for (int i = 0; i < objectCount; i++) {
-      float x = random.nextFloat() * (zoomedWidth - 4 * CIRCLE_RADIUS) + 2 * CIRCLE_RADIUS;
-      float y = random.nextFloat() * (zoomedHeight - 4 * CIRCLE_RADIUS) + 2 * CIRCLE_RADIUS;
-      boolean isKinematic = random.nextFloat() > 0.9f;
-
-      world.createEntity()
-        .addComponent(new TransformComponent(x, y, CIRCLE_RADIUS))
-        .addComponent(new DynamicBodyComponent(circleMaterial, isKinematic))
-        .addComponent(new CircleRendererComponent(isKinematic ? Color.WHITE : Color.BLUE, true))
-        .addComponent(ColliderComponent.circle());
-    }
-
     return world;
   }
 
-  private void resetRandom() {
-    this.random = useFixedSeed ? new Random(123456789) : new Random();
+  private void resetRandom(String randomSeed) {
+    this.random = randomSeed.isEmpty() ? new Random() : new Random(Long.parseLong(randomSeed));
   }
 }
