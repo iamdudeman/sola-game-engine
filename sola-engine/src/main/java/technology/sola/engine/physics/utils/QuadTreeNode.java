@@ -8,8 +8,6 @@ import technology.sola.math.linear.Vector2D;
 
 import java.util.*;
 
-// todo study these: https://stackoverflow.com/questions/41946007/efficient-and-well-explained-implementation-of-a-quadtree-for-2d-collision-det
-
 public class QuadTreeNode {
   private final int maxDepth;
   private final int maxEntitiesPerNode;
@@ -28,10 +26,6 @@ public class QuadTreeNode {
     this.currentDepth = 0;
     this.maxDepth = maxDepth;
     this.maxEntitiesPerNode = maxEntitiesPerNode;
-  }
-
-  public boolean isLeaf() {
-    return children.isEmpty();
   }
 
   public int entityCount() {
@@ -83,10 +77,15 @@ public class QuadTreeNode {
 
       contents.add(data);
     } else {
-      for (int i = 0, size = children.size(); i < size; i++) {
-        children.get(i).insert(data);
+      for (QuadTreeNode child : children) {
+        child.insert(data);
       }
     }
+  }
+
+  public void update(QuadTreeData data) {
+    remove(data);
+    insert(data);
   }
 
   public void remove(QuadTreeData data) {
@@ -104,20 +103,53 @@ public class QuadTreeNode {
         contents.remove(removeIndex);
       }
     } else {
-      for (int i = 0, size = children.size(); i < size; i++) {
-        children.get(i).remove(data);
+      for (QuadTreeNode child : children) {
+        child.remove(data);
       }
     }
 
     shake();
   }
 
-  public void update(QuadTreeData data) {
-    remove(data);
-    insert(data);
+  public List<View2Entry<ColliderComponent, TransformComponent>> query(Rectangle area) {
+    List<View2Entry<ColliderComponent, TransformComponent>> result = new ArrayList<>();
+
+    if (!area.intersects(nodeBounds)) {
+      return result;
+    }
+
+    if (isLeaf()) {
+      for (QuadTreeData content : contents) {
+        if (content.entityBoundingRectangle.intersects(area)) {
+          result.add(content.entityView);
+        }
+      }
+    } else {
+      for (QuadTreeNode child : children) {
+        result.addAll(child.query(area));
+      }
+    }
+
+    return result;
   }
 
-  public void shake() {
+  public Rectangle getNodeBounds() {
+    return nodeBounds;
+  }
+
+  public List<QuadTreeNode> getChildren() {
+    return children;
+  }
+
+  public int getCurrentDepth() {
+    return currentDepth;
+  }
+
+  private boolean isLeaf() {
+    return children.isEmpty();
+  }
+
+  private void shake() {
     if (!isLeaf()) {
       int entityCount = entityCount();
 
@@ -147,7 +179,7 @@ public class QuadTreeNode {
     }
   }
 
-  public void split() {
+  private void split() {
     if (currentDepth + 1 >= maxDepth) {
       return;
     }
@@ -167,15 +199,15 @@ public class QuadTreeNode {
       children.add(new QuadTreeNode(childAreas[i], this.maxDepth, this.maxEntitiesPerNode));
       children.get(i).currentDepth = currentDepth + 1;
 
-      for (int j = 0, size = contents.size(); j < size; j++) {
-        children.get(i).insert(contents.get(j));
+      for (QuadTreeData content : contents) {
+        children.get(i).insert(content);
       }
     }
 
     contents.clear();
   }
 
-  public void reset() {
+  private void reset() {
     if (isLeaf()) {
       for (var content : contents) {
         content.flag = false;
@@ -187,52 +219,14 @@ public class QuadTreeNode {
     }
   }
 
-  public List<View2Entry<ColliderComponent, TransformComponent>> query(Rectangle area) {
-    List<View2Entry<ColliderComponent, TransformComponent>> result = new ArrayList<>();
-
-    if (!area.intersects(nodeBounds)) {
-      return result;
-    }
-
-    if (isLeaf()) {
-      for (int i = 0, size = contents.size(); i < size; i++) {
-        if (contents.get(i).entityBoundingRectangle.intersects(area)) {
-          result.add(contents.get(i).entityView);
-        }
-      }
-    } else {
-      for (int i = 0, size = children.size(); i < size; i++) {
-        result.addAll(children.get(i).query(area));
-      }
-    }
-
-    return result;
-  }
-
-  public Rectangle getNodeBounds() {
-    return nodeBounds;
-  }
-
-  public List<QuadTreeNode> getChildren() {
-    return children;
-  }
-
-  public int getCurrentDepth() {
-    return currentDepth;
-  }
-
   public static class QuadTreeData {
     private final View2Entry<ColliderComponent, TransformComponent> entityView;
     private final Rectangle entityBoundingRectangle;
     private boolean flag;
 
-    private QuadTreeData(View2Entry<ColliderComponent, TransformComponent> entityView, Rectangle entityBoundingRectangle) {
+    public QuadTreeData(View2Entry<ColliderComponent, TransformComponent> entityView, Rectangle entityBoundingRectangle) {
       this.entityView = entityView;
       this.entityBoundingRectangle = entityBoundingRectangle;
-    }
-
-    public static QuadTreeData fromView(View2Entry<ColliderComponent, TransformComponent> view) {
-      return new QuadTreeData(view, view.c1().getBoundingRectangle(view.c2()));
     }
   }
 }

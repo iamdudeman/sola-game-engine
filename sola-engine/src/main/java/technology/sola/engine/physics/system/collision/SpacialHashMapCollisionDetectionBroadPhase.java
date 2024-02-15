@@ -43,10 +43,10 @@ public class SpacialHashMapCollisionDetectionBroadPhase implements CollisionDete
     for (SpatialHashMap.BucketId bucketId : spatialHashMap.getBucketIds()) {
       Vector2D topLeftPoint = new Vector2D(bucketId.x(), bucketId.y()).scalar(cellSize);
 
-      var tempName = cameraTranslationTransform.multiply(topLeftPoint);
-      var tempCell = cameraScaleTransform.multiply(cellSize, cellSize).x();
+      var cameraModifiedTranslate = cameraTranslationTransform.multiply(topLeftPoint);
+      var cameraModifiedWidthHeight = cameraScaleTransform.multiply(cellSize, cellSize).x();
 
-      renderer.drawRect(tempName.x(), tempName.y(), tempCell, tempCell, Color.GREEN);
+      renderer.drawRect(cameraModifiedTranslate.x(), cameraModifiedTranslate.y(), cameraModifiedWidthHeight, cameraModifiedWidthHeight, Color.GREEN);
     }
   }
 }

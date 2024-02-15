@@ -130,13 +130,16 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
    * Sets the placeholder text for when no user value is entered.
    *
    * @param placeholder the new placeholder text
+   * @return this
    */
-  public void setPlaceholder(String placeholder) {
+  public TextInputGuiElement setPlaceholder(String placeholder) {
     this.placeholder = placeholder;
 
     if (value.isEmpty()) {
       setText(placeholder);
     }
+
+    return this;
   }
 
   /**
@@ -151,8 +154,9 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
    * it will be truncated down to the new max length.
    *
    * @param maxLength the new max length
+   * @return this
    */
-  public void setMaxLength(Integer maxLength) {
+  public TextInputGuiElement setMaxLength(Integer maxLength) {
     this.maxLength = maxLength;
 
     if (maxLength != null && valueBuilder.length() > maxLength) {
@@ -160,6 +164,8 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
       value = valueBuilder.toString();
       updateText();
     }
+
+    return this;
   }
 
   /**
@@ -173,8 +179,9 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
    * Programmatically sets the user entered value of the input.
    *
    * @param value the new value of the input
+   * @return this
    */
-  public void setValue(String value) {
+  public TextInputGuiElement setValue(String value) {
     valueBuilder.delete(0, valueBuilder.length());
 
     if (maxLength != null && maxLength < value.length()) {
@@ -185,6 +192,8 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
 
     this.value = valueBuilder.toString();
     updateText();
+
+    return this;
   }
 
   private void updateText() {

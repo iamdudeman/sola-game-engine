@@ -74,7 +74,9 @@ public class QuadTreeCollisionDetectionBroadPhase implements CollisionDetectionB
     quadTreeNode = new QuadTreeNode(bounds, maxDepth, maxEntitiesPerNode);
 
     for (var view : views) {
-      quadTreeNode.insert(QuadTreeNode.QuadTreeData.fromView(view));
+      var boundingRectangle = view.c1().getBoundingRectangle(view.c2());
+
+      quadTreeNode.insert(new QuadTreeNode.QuadTreeData(view, boundingRectangle));
     }
   }
 
@@ -93,10 +95,13 @@ public class QuadTreeCollisionDetectionBroadPhase implements CollisionDetectionB
   private void renderDebugNode(Renderer renderer, QuadTreeNode node, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
     var bounds = node.getNodeBounds();
 
-    var tempName = cameraTranslationTransform.multiply(bounds.min());
-    var tempCell = cameraScaleTransform.multiply(bounds.getWidth(), bounds.getHeight());
+    var cameraModifiedTranslate = cameraTranslationTransform.multiply(bounds.min());
+    var cameraModifiedWidthHeight = cameraScaleTransform.multiply(bounds.getWidth(), bounds.getHeight());
+    var textDimensions = renderer.getFont().getDimensionsForText("" + node.getCurrentDepth());
 
-    renderer.drawRect(tempName.x(), tempName.y(), tempCell.x(), tempCell.y(), Color.GREEN);
+    renderer.fillRect(cameraModifiedTranslate.x() + 1, cameraModifiedTranslate.y() + 1, textDimensions.width(), textDimensions.height(), Color.BLACK);
+    renderer.drawString("" + node.getCurrentDepth(), cameraModifiedTranslate.x() + 1, cameraModifiedTranslate.y() + 1, Color.GREEN);
+    renderer.drawRect(cameraModifiedTranslate.x(), cameraModifiedTranslate.y(), cameraModifiedWidthHeight.x(), cameraModifiedWidthHeight.y(), Color.GREEN);
 
     node.getChildren().forEach(child -> {
       renderDebugNode(renderer, child, cameraScaleTransform, cameraTranslationTransform);
