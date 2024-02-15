@@ -100,7 +100,7 @@ public abstract class SolaWithDefaults extends Sola {
     private boolean isDebug = false;
 
     /**
-     * Enables debug rendering. This includes collider outlines and spacial hashmap boundaries.
+     * Enables debug rendering. This includes collider outlines and broad phase debug information.
      *
      * @return this
      */

@@ -152,6 +152,19 @@ public class ColliderComponent implements Component {
   }
 
   /**
+   * Returns the bounding rectangle for this ColliderComponent.
+   *
+   * @param transformComponent the {@link TransformComponent} of the {@link technology.sola.ecs.Entity}
+   * @return the bounding rectangle
+   */
+  public Rectangle getBoundingRectangle(TransformComponent transformComponent) {
+    var min = transformComponent.getTranslate().add(new Vector2D(offsetX, offsetY));
+    var widthHeight = new Vector2D(getBoundingWidth(transformComponent.getScaleX()), getBoundingHeight(transformComponent.getScaleY()));
+
+    return new Rectangle(min, min.add(widthHeight));
+  }
+
+  /**
    * A collider that is a sensor will not respond to collision resolution but will emit collision events if an
    * {@link technology.sola.ecs.Entity} with a {@link DynamicBodyComponent} collides.
    *

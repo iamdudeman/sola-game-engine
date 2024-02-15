@@ -1,4 +1,4 @@
-package technology.sola.engine.physics;
+package technology.sola.engine.physics.utils;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

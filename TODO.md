@@ -12,9 +12,6 @@
 
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
-* optimize collision detection broad phase
-    * Consider array list for possible SpacialHashMap performance boost
-    * Consider BVH implementation (bounded volume hierarchy which is a type of quadtree)
 * Gui improvements
     * when should layout be invalidated (can partial invalidations happen for children/parent)
     * consider splitting layout and paint styles to prevent extra calculations
@@ -66,7 +63,7 @@
         * Polygon x Circle
         * Polygon x Polygon
 * Consider adding a "debug console" option
-    * While open can toggle things like render debug outlines and debug spacial hashmap stuff
+    * While open can toggle things like render debug outlines and debug spatial hashmap stuff
     * Could also maybe allow adding custom commands
     * Should probably always use a "default font" if it is implemented
     * Possibly also have ability to show light maps if lighting is enabled

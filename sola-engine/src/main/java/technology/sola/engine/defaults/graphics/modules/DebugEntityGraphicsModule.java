@@ -7,7 +7,6 @@ import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
-import technology.sola.engine.physics.SpatialHashMap;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
 import technology.sola.math.geometry.Circle;
@@ -17,7 +16,7 @@ import technology.sola.math.linear.Vector2D;
 
 /**
  * DebugEntityGraphicsModule is a {@link SolaEntityGraphicsModule} implementation for rendering debug information for a {@link World}.
- * It will render spacial hashmap boundaries and colliders for {@link Entity} that have a {@link ColliderComponent}.
+ * It will render broad phase debug information and colliders for {@link Entity} that have a {@link ColliderComponent}.
  */
 public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Entry<ColliderComponent, TransformComponent>> {
   /**
@@ -45,16 +44,7 @@ public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Ent
     super.render(renderer, world, cameraScaleTransform, cameraTranslationTransform);
 
     if (collisionDetectionSystem != null) {
-      int cellSize = collisionDetectionSystem.getSpacialHashMapCellSize();
-
-      for (SpatialHashMap.BucketId bucketId : collisionDetectionSystem.getSpacialHashMapBucketIds()) {
-        Vector2D topLeftPoint = new Vector2D(bucketId.x(), bucketId.y()).scalar(cellSize);
-        TransformComponent useThis = getTransformForAppliedCamera(
-          new TransformComponent(topLeftPoint.x(), topLeftPoint.y(), cellSize, cellSize), cameraScaleTransform, cameraTranslationTransform
-        );
-
-        renderer.drawRect(useThis.getX(), useThis.getY(), useThis.getScaleX(), useThis.getScaleY(), Color.GREEN);
-      }
+      collisionDetectionSystem.getCollisionDetectionBroadPhase().renderDebug(renderer, cameraScaleTransform, cameraTranslationTransform);
     }
   }
 
