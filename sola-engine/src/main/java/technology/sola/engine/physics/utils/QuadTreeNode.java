@@ -8,6 +8,9 @@ import technology.sola.math.linear.Vector2D;
 
 import java.util.*;
 
+/**
+ * QuadTreeNode is a quad tree implementation for collidable {@link technology.sola.ecs.Entity}.
+ */
 public class QuadTreeNode {
   private final int maxDepth;
   private final int maxEntitiesPerNode;
@@ -16,10 +19,23 @@ public class QuadTreeNode {
   private final List<QuadTreeData> contents = new ArrayList<>();
   private int currentDepth;
 
+  /**
+   * Creates a QuadTreeNode with desired bounds. The maxDepth is defaulted to 5 and the maxEntitiesPerNode is defaulted
+   * to 8.
+   *
+   * @param nodeBounds the bounds of this node
+   */
   public QuadTreeNode(Rectangle nodeBounds) {
     this(nodeBounds, 5, 8);
   }
 
+  /**
+   * Creates a QuadTreeNode with desired bounds, maxDepth and maxEntitiesPerNode.
+   *
+   * @param nodeBounds         the bounds of this node
+   * @param maxDepth           the max depth of the tree
+   * @param maxEntitiesPerNode the max entities per node in the tree
+   */
   public QuadTreeNode(Rectangle nodeBounds, int maxDepth, int maxEntitiesPerNode) {
     this.nodeBounds = nodeBounds;
 
@@ -28,7 +44,121 @@ public class QuadTreeNode {
     this.maxEntitiesPerNode = maxEntitiesPerNode;
   }
 
-  public int entityCount() {
+  /**
+   * Inserts an entry into the quad tree.
+   *
+   * @param data the entry to insert
+   */
+  public void insert(QuadTreeData data) {
+    if (!data.entityBoundingRectangle.intersects(nodeBounds)) {
+      return;
+    }
+
+    if (isLeaf()) {
+      if (contents.size() + 1 > maxEntitiesPerNode) {
+        split();
+      }
+
+      contents.add(data);
+    } else {
+      for (QuadTreeNode child : children) {
+        child.insert(data);
+      }
+    }
+  }
+
+  /**
+   * Updates an entry in the quad tree.
+   *
+   * @param data the entry to update
+   */
+  public void update(QuadTreeData data) {
+    remove(data);
+    insert(data);
+  }
+
+  /**
+   * Removes an entry from the quad tree.
+   *
+   * @param data the entry to remove
+   */
+  public void remove(QuadTreeData data) {
+    if (isLeaf()) {
+      int removeIndex = -1;
+
+      for (int i = 0, size = contents.size(); i < size; i++) {
+        if (contents.get(0).entityView.entity() == data.entityView.entity()) {
+          removeIndex = i;
+          break;
+        }
+      }
+
+      if (removeIndex != -1) {
+        contents.remove(removeIndex);
+      }
+    } else {
+      for (QuadTreeNode child : children) {
+        child.remove(data);
+      }
+    }
+
+    shake();
+  }
+
+  /**
+   * Searches an area for all collidable entities within it.
+   *
+   * @param area the area to search
+   * @return the list of collidable entities in the area
+   */
+  public List<View2Entry<ColliderComponent, TransformComponent>> query(Rectangle area) {
+    List<View2Entry<ColliderComponent, TransformComponent>> result = new ArrayList<>();
+
+    if (!area.intersects(nodeBounds)) {
+      return result;
+    }
+
+    if (isLeaf()) {
+      for (QuadTreeData content : contents) {
+        if (content.entityBoundingRectangle.intersects(area)) {
+          result.add(content.entityView);
+        }
+      }
+    } else {
+      for (QuadTreeNode child : children) {
+        result.addAll(child.query(area));
+      }
+    }
+
+    return result;
+  }
+
+  /**
+   * @return the bounds of this node
+   */
+  public Rectangle getNodeBounds() {
+    return nodeBounds;
+  }
+
+  /**
+   * @return the child nodes of this node
+   */
+  public List<QuadTreeNode> getChildren() {
+    return children;
+  }
+
+  /**
+   * @return the current depth of this node
+   */
+  public int getCurrentDepth() {
+    return currentDepth;
+  }
+
+  private boolean isLeaf() {
+    return children.isEmpty();
+  }
+
+  private int entityCount() {
     reset();
 
     int entityCount = contents.size();
@@ -63,90 +193,6 @@ public class QuadTreeNode {
     reset();
 
     return entityCount;
-  }
-
-  public void insert(QuadTreeData data) {
-    if (!data.entityBoundingRectangle.intersects(nodeBounds)) {
-      return;
-    }
-
-    if (isLeaf()) {
-      if (contents.size() + 1 > maxEntitiesPerNode) {
-        split();
-      }
-
-      contents.add(data);
-    } else {
-      for (QuadTreeNode child : children) {
-        child.insert(data);
-      }
-    }
-  }
-
-  public void update(QuadTreeData data) {
-    remove(data);
-    insert(data);
-  }
-
-  public void remove(QuadTreeData data) {
-    if (isLeaf()) {
-      int removeIndex = -1;
-
-      for (int i = 0, size = contents.size(); i < size; i++) {
-        if (contents.get(0).entityView.entity() == data.entityView.entity()) {
-          removeIndex = i;
-          break;
-        }
-      }
-
-      if (removeIndex != -1) {
-        contents.remove(removeIndex);
-      }
-    } else {
-      for (QuadTreeNode child : children) {
-        child.remove(data);
-      }
-    }
-
-    shake();
-  }
-
-  public List<View2Entry<ColliderComponent, TransformComponent>> query(Rectangle area) {
-    List<View2Entry<ColliderComponent, TransformComponent>> result = new ArrayList<>();
-
-    if (!area.intersects(nodeBounds)) {
-      return result;
-    }
-
-    if (isLeaf()) {
-      for (QuadTreeData content : contents) {
-        if (content.entityBoundingRectangle.intersects(area)) {
-          result.add(content.entityView);
-        }
-      }
-    } else {
-      for (QuadTreeNode child : children) {
-        result.addAll(child.query(area));
-      }
-    }
-
-    return result;
-  }
-
-  public Rectangle getNodeBounds() {
-    return nodeBounds;
-  }
-
-  public List<QuadTreeNode> getChildren() {
-    return children;
-  }
-
-  public int getCurrentDepth() {
-    return currentDepth;
-  }
-
-  private boolean isLeaf() {
-    return children.isEmpty();
   }
 
   private void shake() {
@@ -219,14 +265,22 @@ public class QuadTreeNode {
     }
   }
 
+  /**
+   * QuadTreeData holds data that can be inserted into a {@link QuadTreeNode}.
+   */
   public static class QuadTreeData {
     private final View2Entry<ColliderComponent, TransformComponent> entityView;
     private final Rectangle entityBoundingRectangle;
     private boolean flag;
 
-    public QuadTreeData(View2Entry<ColliderComponent, TransformComponent> entityView, Rectangle entityBoundingRectangle) {
+    /**
+     * Creates a new QuadTreeData instance for a collidable entity.
+     *
+     * @param entityView the collidable entity
+     */
+    public QuadTreeData(View2Entry<ColliderComponent, TransformComponent> entityView) {
       this.entityView = entityView;
-      this.entityBoundingRectangle = entityBoundingRectangle;
+      this.entityBoundingRectangle = entityView.c1().getBoundingRectangle(entityView.c2());
     }
   }
 }

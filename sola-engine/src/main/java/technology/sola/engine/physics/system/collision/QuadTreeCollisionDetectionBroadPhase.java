@@ -94,9 +94,7 @@ public class QuadTreeCollisionDetectionBroadPhase implements CollisionDetectionB
     quadTreeNode = new QuadTreeNode(bounds, maxDepth, maxEntitiesPerNode);
 
     for (var view : views) {
-      var boundingRectangle = view.c1().getBoundingRectangle(view.c2());
-
-      quadTreeNode.insert(new QuadTreeNode.QuadTreeData(view, boundingRectangle));
+      quadTreeNode.insert(new QuadTreeNode.QuadTreeData(view));
     }
   }
 
