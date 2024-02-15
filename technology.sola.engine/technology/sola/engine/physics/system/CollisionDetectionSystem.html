@@ -114,13 +114,12 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.event.EventHub)" class="member-name-link">CollisionDetectionSystem</a><wbr>(<a href="../../event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a>&nbsp;eventHub)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Creates a CollisionDetectionSystem that allows the internal spacial hash map to determine a good cell size based on
- the entities.</div>
+<div class="block">Creates a CollisionDetectionSystem that uses a <a href="collision/SpatialHashMapCollisionDetectionBroadPhase.html" title="class in technology.sola.engine.physics.system.collision"><code>SpatialHashMapCollisionDetectionBroadPhase</code></a>.</div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.event.EventHub,java.lang.Integer)" class="member-name-link">CollisionDetectionSystem</a><wbr>(<a href="../../event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a>&nbsp;eventHub,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;spatialHashMapCellSize)</code></div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.event.EventHub,technology.sola.engine.physics.system.collision.CollisionDetectionBroadPhase)" class="member-name-link">CollisionDetectionSystem</a><wbr>(<a href="../../event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a>&nbsp;eventHub,
+ <a href="collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision">CollisionDetectionBroadPhase</a>&nbsp;collisionDetectionBroadPhase)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Creates a CollisionDetectionSystem with custom spacial hash map cell sizing.</div>
+<div class="block">Creates a CollisionDetectionSystem with custom <a href="collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision"><code>CollisionDetectionBroadPhase</code></a> algorithm.</div>
 </div>
 </div>
 </section>
@@ -136,15 +135,17 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrder()" class="member-name-link">getOrder</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision">CollisionDetectionBroadPhase</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCollisionDetectionBroadPhase()" class="member-name-link">getCollisionDetectionBroadPhase</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../SpatialHashMap.BucketId.html" title="class in technology.sola.engine.physics">SpatialHashMap.BucketId</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSpacialHashMapBucketIds()" class="member-name-link">getSpacialHashMapBucketIds</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrder()" class="member-name-link">getOrder</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSpacialHashMapCellSize()" class="member-name-link">getSpacialHashMapCellSize</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCollisionDetectionBroadPhase(technology.sola.engine.physics.system.collision.CollisionDetectionBroadPhase)" class="member-name-link">setCollisionDetectionBroadPhase</a><wbr>(<a href="collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision">CollisionDetectionBroadPhase</a>&nbsp;collisionDetectionBroadPhase)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the <a href="collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision"><code>CollisionDetectionBroadPhase</code></a> algorithm used for collision detection.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#update(technology.sola.ecs.World,float)" class="member-name-link">update</a><wbr>(technology.sola.ecs.World&nbsp;world,
  float&nbsp;deltaTime)</code></div>
@@ -196,8 +197,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(technology.sola.engine.event.EventHub)">
 <h3>CollisionDetectionSystem</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CollisionDetectionSystem</span><wbr><span class="parameters">(<a href="../../event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a>&nbsp;eventHub)</span></div>
-<div class="block">Creates a CollisionDetectionSystem that allows the internal spacial hash map to determine a good cell size based on
- the entities.</div>
+<div class="block">Creates a CollisionDetectionSystem that uses a <a href="collision/SpatialHashMapCollisionDetectionBroadPhase.html" title="class in technology.sola.engine.physics.system.collision"><code>SpatialHashMapCollisionDetectionBroadPhase</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>eventHub</code> - <a href="../../event/EventHub.html" title="class in technology.sola.engine.event"><code>EventHub</code></a> instance</dd>
@@ -205,15 +205,15 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="&lt;init&gt;(technology.sola.engine.event.EventHub,java.lang.Integer)">
+<section class="detail" id="&lt;init&gt;(technology.sola.engine.event.EventHub,technology.sola.engine.physics.system.collision.CollisionDetectionBroadPhase)">
 <h3>CollisionDetectionSystem</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CollisionDetectionSystem</span><wbr><span class="parameters">(<a href="../../event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a>&nbsp;eventHub,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;spatialHashMapCellSize)</span></div>
-<div class="block">Creates a CollisionDetectionSystem with custom spacial hash map cell sizing.</div>
+ <a href="collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision">CollisionDetectionBroadPhase</a>&nbsp;collisionDetectionBroadPhase)</span></div>
+<div class="block">Creates a CollisionDetectionSystem with custom <a href="collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision"><code>CollisionDetectionBroadPhase</code></a> algorithm.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>eventHub</code> - <a href="../../event/EventHub.html" title="class in technology.sola.engine.event"><code>EventHub</code></a> instance</dd>
-<dd><code>spatialHashMapCellSize</code> - the cell size of the internal spacial hash map</dd>
+<dd><code>eventHub</code> - the <a href="../../event/EventHub.html" title="class in technology.sola.engine.event"><code>EventHub</code></a> instance</dd>
+<dd><code>collisionDetectionBroadPhase</code> - the <a href="collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision"><code>CollisionDetectionBroadPhase</code></a> algorithm</dd>
 </dl>
 </section>
 </li>
@@ -225,26 +225,6 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
-<li>
-<section class="detail" id="getSpacialHashMapCellSize()">
-<h3>getSpacialHashMapCellSize</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getSpacialHashMapCellSize</span>()</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>the size of the internal <a href="../SpatialHashMap.html" title="class in technology.sola.engine.physics"><code>SpatialHashMap</code></a> cell size</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getSpacialHashMapBucketIds()">
-<h3>getSpacialHashMapBucketIds</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../SpatialHashMap.BucketId.html" title="class in technology.sola.engine.physics">SpatialHashMap.BucketId</a>&gt;</span>&nbsp;<span class="element-name">getSpacialHashMapBucketIds</span>()</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>the set of the internal <a href="../SpatialHashMap.BucketId.html" title="class in technology.sola.engine.physics"><code>SpatialHashMap.BucketId</code></a>s</dd>
-</dl>
-</section>
-</li>
 <li>
 <section class="detail" id="getOrder()">
 <h3>getOrder</h3>
@@ -263,6 +243,27 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code>update</code>&nbsp;in class&nbsp;<code>technology.sola.ecs.EcsSystem</code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getCollisionDetectionBroadPhase()">
+<h3>getCollisionDetectionBroadPhase</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision">CollisionDetectionBroadPhase</a></span>&nbsp;<span class="element-name">getCollisionDetectionBroadPhase</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the <a href="collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision"><code>CollisionDetectionBroadPhase</code></a> currently being used</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setCollisionDetectionBroadPhase(technology.sola.engine.physics.system.collision.CollisionDetectionBroadPhase)">
+<h3>setCollisionDetectionBroadPhase</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setCollisionDetectionBroadPhase</span><wbr><span class="parameters">(<a href="collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision">CollisionDetectionBroadPhase</a>&nbsp;collisionDetectionBroadPhase)</span></div>
+<div class="block">Sets the <a href="collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision"><code>CollisionDetectionBroadPhase</code></a> algorithm used for collision detection.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>collisionDetectionBroadPhase</code> - the new broad phase algorithm to use</dd>
 </dl>
 </section>
 </li>
