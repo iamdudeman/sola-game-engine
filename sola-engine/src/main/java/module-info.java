@@ -49,6 +49,7 @@ module technology.sola.engine {
   exports technology.sola.engine.physics.component;
   exports technology.sola.engine.physics.event;
   exports technology.sola.engine.physics.system;
+  exports technology.sola.engine.physics.system.collision;
   exports technology.sola.engine.physics.utils;
 
   exports technology.sola.engine.networking;
@@ -59,5 +60,4 @@ module technology.sola.engine {
   exports technology.sola.math;
   exports technology.sola.math.geometry;
   exports technology.sola.math.linear;
-    exports technology.sola.engine.physics.system.collision;
 }
