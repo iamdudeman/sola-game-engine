@@ -1,9 +1,5 @@
 # sola-game-engine TODO list
 
-* optimize collision detection broad phase
-    * Consider array list for possible SpacialHashMap performance boost
-    * Consider BVH implementation (bounded volume hierarchy which is a type of quadtree)
-
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -67,7 +63,7 @@
         * Polygon x Circle
         * Polygon x Polygon
 * Consider adding a "debug console" option
-    * While open can toggle things like render debug outlines and debug spacial hashmap stuff
+    * While open can toggle things like render debug outlines and debug spatial hashmap stuff
     * Could also maybe allow adding custom commands
     * Should probably always use a "default font" if it is implemented
     * Possibly also have ability to show light maps if lighting is enabled

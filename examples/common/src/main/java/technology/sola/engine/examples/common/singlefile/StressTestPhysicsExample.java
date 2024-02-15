@@ -22,7 +22,7 @@ import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.system.collision.QuadTreeCollisionDetectionBroadPhase;
-import technology.sola.engine.physics.system.collision.SpacialHashMapCollisionDetectionBroadPhase;
+import technology.sola.engine.physics.system.collision.SpatialHashMapCollisionDetectionBroadPhase;
 
 import java.util.List;
 import java.util.Random;
@@ -64,7 +64,7 @@ public class StressTestPhysicsExample extends SolaWithDefaults {
 
     platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
 
-    solaEcs.setWorld(buildSpacialHashMapOptimizedWorld());
+    solaEcs.setWorld(buildSpatialHashMapOptimizedWorld());
 
     guiDocument.setRootElement(buildGui());
   }
@@ -85,12 +85,12 @@ public class StressTestPhysicsExample extends SolaWithDefaults {
         .setOnAction(() -> {
           resetRandom(randomSeedInput.getValue());
           solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
-            new SpacialHashMapCollisionDetectionBroadPhase()
+            new SpatialHashMapCollisionDetectionBroadPhase()
           );
-          solaEcs.setWorld(buildSpacialHashMapOptimizedWorld());
+          solaEcs.setWorld(buildSpatialHashMapOptimizedWorld());
         })
         .setStyle(List.of(ConditionalStyle.always(BaseStyles.create().setPadding(5).build())))
-        .appendChildren(new TextGuiElement().setText("SpacialHashMap")),
+        .appendChildren(new TextGuiElement().setText("SpatialHashMap")),
       new ButtonGuiElement()
         .setOnAction(() -> {
           resetRandom(randomSeedInput.getValue());
@@ -155,7 +155,7 @@ public class StressTestPhysicsExample extends SolaWithDefaults {
     return world;
   }
 
-  private World buildSpacialHashMapOptimizedWorld() {
+  private World buildSpatialHashMapOptimizedWorld() {
     Material circleMaterial = new Material(1, 0.8f);
     float zoomedWidth = configuration.rendererWidth() / CAMERA_SCALE;
     float zoomedHeight = configuration.rendererHeight() / CAMERA_SCALE;

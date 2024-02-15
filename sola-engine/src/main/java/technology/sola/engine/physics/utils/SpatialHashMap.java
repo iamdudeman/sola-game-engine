@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * The SpacialHashMap class is a spacial hashmap implementation that maps {@link technology.sola.ecs.Entity} into a
+ * The SpatialHashMap class is a spatial hashmap implementation that maps {@link technology.sola.ecs.Entity} into a
  * bucket with other entities based on its 2D coordinate. This helps reduce the number of collision checks that are
  * needed during broad phase collision detection.
  */
@@ -52,7 +52,7 @@ public class SpatialHashMap {
   }
 
   /**
-   * @return the current cell size of this spacial hashmap
+   * @return the current cell size of this spatial hashmap
    */
   public int getCellSize() {
     return cellSize;

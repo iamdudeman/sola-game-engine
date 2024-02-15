@@ -11,18 +11,23 @@ import technology.sola.math.linear.Vector2D;
 
 import java.util.List;
 
-public class SpacialHashMapCollisionDetectionBroadPhase implements CollisionDetectionBroadPhase {
+public class SpatialHashMapCollisionDetectionBroadPhase implements CollisionDetectionBroadPhase {
   private SpatialHashMap spatialHashMap;
   private final Integer spatialHashMapCellSize;
 
   /**
-   * Creates an instance that allows the internal spacial hash map to determine a good cell size based on the entities.
+   * Creates an instance that allows the internal spatial hash map to determine a good cell size based on the entities.
    */
-  public SpacialHashMapCollisionDetectionBroadPhase() {
+  public SpatialHashMapCollisionDetectionBroadPhase() {
     this(null);
   }
 
-  public SpacialHashMapCollisionDetectionBroadPhase(Integer spatialHashMapCellSize) {
+  /**
+   * Creates an instance with fixed cell size for the internal spatial hash map.
+   *
+   * @param spatialHashMapCellSize the cell size for the spatial hash map
+   */
+  public SpatialHashMapCollisionDetectionBroadPhase(Integer spatialHashMapCellSize) {
     this.spatialHashMapCellSize = spatialHashMapCellSize;
   }
 

@@ -16,7 +16,7 @@ import technology.sola.math.linear.Vector2D;
 
 /**
  * DebugEntityGraphicsModule is a {@link SolaEntityGraphicsModule} implementation for rendering debug information for a {@link World}.
- * It will render spacial hashmap boundaries and colliders for {@link Entity} that have a {@link ColliderComponent}.
+ * It will render broad phase debug information and colliders for {@link Entity} that have a {@link ColliderComponent}.
  */
 public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Entry<ColliderComponent, TransformComponent>> {
   /**
