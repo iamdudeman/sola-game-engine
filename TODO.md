@@ -24,6 +24,8 @@
         * ie. (`mousePress` -> `doSomething`)
     * implement "Style sheet" JSON concept
         * gui json documents can reference these for use
+* research why browser collision detection performance is so much worse
+* consider making QuadTreeBroadPhase the default
 * Rendering
     * Ability to change line width when drawing
     * Add a way to do gradients?
