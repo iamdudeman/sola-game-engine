@@ -6,6 +6,7 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementDimensions;
 import technology.sola.engine.graphics.gui.elements.TextStyles;
+import technology.sola.engine.graphics.gui.style.DefaultStyleValues;
 import technology.sola.engine.graphics.gui.util.TextRenderDetails;
 import technology.sola.engine.graphics.gui.util.TextRenderUtils;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -80,7 +81,7 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
 
   @Override
   public void renderContent(Renderer renderer) {
-    Color textColor = styles().getPropertyValue(TextStyles::textColor, Color.BLACK);
+    Color textColor = styles().getPropertyValue(TextStyles::textColor, DefaultStyleValues.TEXT_COLOR);
     renderer.setFont(font);
 
     // Use placeholder color if present
@@ -88,7 +89,7 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
       textColor = styles().getPropertyValue(TextInputStyles::placeholderColor, textColor);
     }
 
-    var textAlignment = styleContainer.getPropertyValue(TextStyles::textAlignment, TextStyles.TextAlignment.START);
+    var textAlignment = styleContainer.getPropertyValue(TextStyles::textAlignment, DefaultStyleValues.TEXT_ALIGNMENT);
 
     TextRenderUtils.renderLines(renderer, textRenderDetails, textAlignment, contentBounds, textColor);
   }
@@ -210,7 +211,7 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
   }
 
   private void checkAndHandleAssetIdChange() {
-    String fontAssetId = styles().getPropertyValue(TextStyles::fontAssetId, DefaultFont.ASSET_ID);
+    String fontAssetId = styles().getPropertyValue(TextStyles::fontAssetId, DefaultStyleValues.FONT_ASSET_ID);
 
     if (!fontAssetId.equals(currentFontId)) {
       var fontAssetHandle = getAssetLoaderProvider().get(Font.class).get(fontAssetId);

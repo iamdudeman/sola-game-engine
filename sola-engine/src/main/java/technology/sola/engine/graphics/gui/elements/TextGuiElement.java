@@ -5,6 +5,7 @@ import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementDimensions;
+import technology.sola.engine.graphics.gui.style.DefaultStyleValues;
 import technology.sola.engine.graphics.gui.util.TextRenderDetails;
 import technology.sola.engine.graphics.gui.util.TextRenderUtils;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -25,10 +26,10 @@ public class TextGuiElement extends GuiElement<TextStyles> {
 
   @Override
   public void renderContent(Renderer renderer) {
-    Color textColor = styles().getPropertyValue(TextStyles::textColor, Color.BLACK);
+    Color textColor = styles().getPropertyValue(TextStyles::textColor, DefaultStyleValues.TEXT_COLOR);
     renderer.setFont(font);
 
-    var textAlignment = styleContainer.getPropertyValue(TextStyles::textAlignment, TextStyles.TextAlignment.START);
+    var textAlignment = styleContainer.getPropertyValue(TextStyles::textAlignment, DefaultStyleValues.TEXT_ALIGNMENT);
 
     TextRenderUtils.renderLines(renderer, textRenderDetails, textAlignment, contentBounds, textColor);
   }
@@ -90,7 +91,7 @@ public class TextGuiElement extends GuiElement<TextStyles> {
   }
 
   private void checkAndHandleAssetIdChange() {
-    String fontAssetId = styles().getPropertyValue(TextStyles::fontAssetId, DefaultFont.ASSET_ID);
+    String fontAssetId = styles().getPropertyValue(TextStyles::fontAssetId, DefaultStyleValues.FONT_ASSET_ID);
 
     if (!fontAssetId.equals(currentFontId)) {
       var fontAssetHandle = getAssetLoaderProvider().get(Font.class).get(fontAssetId);

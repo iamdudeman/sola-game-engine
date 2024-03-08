@@ -9,12 +9,12 @@ package technology.sola.engine.graphics.gui.style.property;
  */
 public record Position(StyleValue x, StyleValue y) implements MergeableProperty<Position> {
   /**
-   * Position with x and y not set.
+   * Position with x and y not set. Element will be relatively positioned in the flow.
    */
   public static final Position NONE = new Position();
 
   /**
-   * Creates a new Position instance with x and y not set.
+   * Creates a new Position instance with x and y not set. Element will be relatively positioned in the flow.
    */
   public Position() {
     this((String) null, null);

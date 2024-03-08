@@ -15,7 +15,6 @@
 * Gui improvements
     * when should layout be invalidated (can partial invalidations happen for children/parent)
     * consider splitting layout and paint styles to prevent extra calculations
-    * maybe put default style values in a common place (like Direction.Column)?
     * Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
         * maybe just check for any mouse event list size > 0?
     * consider an event map of some sort for when loading gui documents
