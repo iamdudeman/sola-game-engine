@@ -15,8 +15,6 @@
 * Gui improvements
     * when should layout be invalidated (can partial invalidations happen for children/parent)
     * consider splitting layout and paint styles to prevent extra calculations
-    * Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
-        * maybe just check for any mouse event list size > 0?
     * consider an event map of some sort for when loading gui documents
         * could also have an "event id -> event function" map that can be used as part of gui doc loading
         * elements could then add event listeners from this map

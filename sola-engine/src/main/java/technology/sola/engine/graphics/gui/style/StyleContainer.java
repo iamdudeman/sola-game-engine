@@ -19,6 +19,8 @@ public class StyleContainer<Style extends BaseStyles> {
   private final GuiElement<Style> guiElement;
   private List<ConditionalStyle<Style>> conditionalStyles;
   private boolean[] conditionsArray;
+  private boolean hasHoverCondition = false;
+  private boolean hasActiveCondition = false;
 
   /**
    * Creates a StyleContainer instance for a {@link GuiElement}.
@@ -62,6 +64,7 @@ public class StyleContainer<Style extends BaseStyles> {
     this.conditionalStyles = styles == null ? new ArrayList<>() : styles;
     conditionsArray = styles == null ? new boolean[0] : new boolean[styles.size()];
     computedCache.clear();
+    recalculateConditions();
     guiElement.invalidateLayout();
   }
 
@@ -179,5 +182,30 @@ public class StyleContainer<Style extends BaseStyles> {
     computedCache.put(propertySupplier, value);
 
     return value;
+  }
+
+  /**
+   * @return true if any of the styles contain a {@link GuiElement#isHovered()} condition
+   */
+  public boolean hasHoverCondition() {
+    return hasHoverCondition;
+  }
+
+  /**
+   * @return true if any of the styles contain a {@link GuiElement#isActive()} condition
+   */
+  public boolean hasActiveCondition() {
+    return hasActiveCondition;
+  }
+
+  private void recalculateConditions() {
+    for (var conditionalStyle : conditionalStyles) {
+      if (conditionalStyle.isHoverStyle()) {
+        hasHoverCondition = true;
+      }
+      if (conditionalStyle.isActiveStyle()) {
+        hasActiveCondition = true;
+      }
+    }
   }
 }

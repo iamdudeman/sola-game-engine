@@ -378,6 +378,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     if (event.getKeyEvent().keyCode() == Key.SPACE.getCode()) {
       setActive(true);
     }
+
     events.keyPressed().emit(event);
 
     if (event.isAbleToPropagate()) {
@@ -399,7 +400,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
       child.onMousePressed(event);
     }
 
-    if (event.isAbleToPropagate() && bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
+    if (event.isAbleToPropagate() && shouldHandleMousePressedEvents() && bounds.contains(event.getMouseEvent())) {
       events.mousePressed().emit(event);
       setActive(true);
     }
@@ -410,7 +411,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
       child.onMouseReleased(event);
     }
 
-    if (event.isAbleToPropagate() && bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
+    if (event.isAbleToPropagate() && shouldHandleMouseReleasedEvents() && bounds.contains(event.getMouseEvent())) {
       events.mouseReleased().emit(event);
     }
 
@@ -423,7 +424,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     }
 
     if (event.isAbleToPropagate()) {
-      if (bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
+      if (shouldHandleMouseMoveEvents() && bounds.contains(event.getMouseEvent())) {
         events.mouseMoved().emit(event);
 
         if (!isHovered) {
@@ -524,5 +525,17 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
       styleContainer.invalidate();
     }
+  }
+
+  private boolean shouldHandleMouseMoveEvents() {
+    return styleContainer.hasHoverCondition() || events.mouseMoved().hasListeners() || events.mouseEntered().hasListeners() || events.mouseExited().hasListeners();
+  }
+
+  private boolean shouldHandleMousePressedEvents() {
+    return styleContainer.hasActiveCondition() || events().mousePressed().hasListeners();
+  }
+
+  private boolean shouldHandleMouseReleasedEvents() {
+    return styleContainer.hasActiveCondition() || events().mouseReleased().hasListeners();
   }
 }

@@ -17,6 +17,7 @@ public record ConditionalStyle<Style extends BaseStyles>(
   Style style
 ) {
   private static final Function<GuiElement<?>, Boolean> ALWAYS = guiElement -> true;
+  private static final Function<GuiElement<?>, Boolean> ACTIVE = GuiElement::isActive;
   private static final Function<GuiElement<?>, Boolean> DISABLED = guiElement -> {
     if (guiElement instanceof BaseInputGuiElement<?> inputGuiElement) {
       return inputGuiElement.isDisabled();
@@ -24,6 +25,7 @@ public record ConditionalStyle<Style extends BaseStyles>(
 
     return false;
   };
+  private static final Function<GuiElement<?>, Boolean> HOVER = GuiElement::isHovered;
 
   /**
    * Creates a ConditionalStyle instance for a style that will always be applied.
@@ -47,9 +49,10 @@ public record ConditionalStyle<Style extends BaseStyles>(
    * @param <Style> the style type
    * @return a ConditionalStyle instance
    */
+  @SuppressWarnings({"unchecked", "rawtypes"})
   public static <Style extends BaseStyles> ConditionalStyle<Style> active(Style style) {
-    return new ConditionalStyle<>(
-      GuiElement::isActive,
+    return new ConditionalStyle(
+      ACTIVE,
       style
     );
   }
@@ -61,9 +64,10 @@ public record ConditionalStyle<Style extends BaseStyles>(
    * @param <Style> the style type
    * @return a ConditionalStyle instance
    */
+  @SuppressWarnings({"unchecked", "rawtypes"})
   public static <Style extends BaseStyles> ConditionalStyle<Style> hover(Style style) {
-    return new ConditionalStyle<>(
-      GuiElement::isHovered,
+    return new ConditionalStyle(
+      HOVER,
       style
     );
   }
@@ -96,5 +100,19 @@ public record ConditionalStyle<Style extends BaseStyles>(
       DISABLED,
       style
     );
+  }
+
+  /**
+   * @return true if the condition of this style is {@link GuiElement#isActive()}
+   */
+  public boolean isActiveStyle() {
+    return condition.equals(ACTIVE);
+  }
+
+  /**
+   * @return true if the condition of this style is {@link GuiElement#isHovered()}
+   */
+  public boolean isHoverStyle() {
+    return condition.equals(HOVER);
   }
 }
