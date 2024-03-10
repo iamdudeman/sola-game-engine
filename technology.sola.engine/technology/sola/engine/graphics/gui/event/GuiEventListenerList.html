@@ -115,19 +115,22 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Emits a <a href="GuiEvent.html" title="class in technology.sola.engine.graphics.gui.event"><code>GuiEvent</code></a> that all registered <a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.gui.event"><code>GuiEventListener</code></a>s with respond to.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#off()" class="member-name-link">off</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasListeners()" class="member-name-link">hasListeners</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#off()" class="member-name-link">off</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Removes all <a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.gui.event"><code>GuiEventListener</code></a>s that have been added.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GuiEventSubscription.html" title="interface in technology.sola.engine.graphics.gui.event">GuiEventSubscription</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#on(technology.sola.engine.graphics.gui.event.GuiEventListener)" class="member-name-link">on</a><wbr>(<a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.gui.event">GuiEventListener</a>&lt;<a href="GuiEventListenerList.html" title="type parameter in GuiEventListenerList">E</a>&gt;&nbsp;eventListener)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GuiEventSubscription.html" title="interface in technology.sola.engine.graphics.gui.event">GuiEventSubscription</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#on(technology.sola.engine.graphics.gui.event.GuiEventListener)" class="member-name-link">on</a><wbr>(<a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.gui.event">GuiEventListener</a>&lt;<a href="GuiEventListenerList.html" title="type parameter in GuiEventListenerList">E</a>&gt;&nbsp;eventListener)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Add a <a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.gui.event"><code>GuiEventListener</code></a> that fires every time a <a href="GuiEvent.html" title="class in technology.sola.engine.graphics.gui.event"><code>GuiEvent</code></a> is <a href="#emit(E)"><code>emit(GuiEvent)</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GuiEventSubscription.html" title="interface in technology.sola.engine.graphics.gui.event">GuiEventSubscription</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#once(technology.sola.engine.graphics.gui.event.GuiEventListener)" class="member-name-link">once</a><wbr>(<a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.gui.event">GuiEventListener</a>&lt;<a href="GuiEventListenerList.html" title="type parameter in GuiEventListenerList">E</a>&gt;&nbsp;eventListener)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GuiEventSubscription.html" title="interface in technology.sola.engine.graphics.gui.event">GuiEventSubscription</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#once(technology.sola.engine.graphics.gui.event.GuiEventListener)" class="member-name-link">once</a><wbr>(<a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.gui.event">GuiEventListener</a>&lt;<a href="GuiEventListenerList.html" title="type parameter in GuiEventListenerList">E</a>&gt;&nbsp;eventListener)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Add a <a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.gui.event"><code>GuiEventListener</code></a> that fires one time a <a href="GuiEvent.html" title="class in technology.sola.engine.graphics.gui.event"><code>GuiEvent</code></a> is <a href="#emit(E)"><code>emit(GuiEvent)</code></a>.</div>
 </div>
 </div>
@@ -202,6 +205,16 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>event</code> - the event emitted</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="hasListeners()">
+<h3>hasListeners</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasListeners</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if there is at least one <a href="GuiEventListener.html" title="interface in technology.sola.engine.graphics.gui.event"><code>GuiEventListener</code></a> registered</dd>
 </dl>
 </section>
 </li>

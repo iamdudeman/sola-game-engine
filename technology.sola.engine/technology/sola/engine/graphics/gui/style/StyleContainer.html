@@ -133,6 +133,12 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gets the computer property value based on the <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s currently applied to the <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>.</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasActiveCondition()" class="member-name-link">hasActiveCondition</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasHoverCondition()" class="member-name-link">hasHoverCondition</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#invalidate()" class="member-name-link">invalidate</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -285,6 +291,26 @@ loadScripts(document, 'script');</script>
 <dd><code>defaultValue</code> - the default value to return if no style provides a value</dd>
 <dt>Returns:</dt>
 <dd>the calculated style or default value</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="hasHoverCondition()">
+<h3>hasHoverCondition</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasHoverCondition</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if any of the styles contain a <a href="../GuiElement.html#isHovered()"><code>GuiElement.isHovered()</code></a> condition</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="hasActiveCondition()">
+<h3>hasActiveCondition</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasActiveCondition</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if any of the styles contain a <a href="../GuiElement.html#isActive()"><code>GuiElement.isActive()</code></a> condition</dd>
 </dl>
 </section>
 </li>
