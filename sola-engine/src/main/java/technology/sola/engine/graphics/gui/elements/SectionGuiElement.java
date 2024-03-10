@@ -3,7 +3,7 @@ package technology.sola.engine.graphics.gui.elements;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementDimensions;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
-import technology.sola.engine.graphics.gui.style.property.Direction;
+import technology.sola.engine.graphics.gui.style.DefaultStyleValues;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 
@@ -34,7 +34,7 @@ public class SectionGuiElement extends GuiElement<BaseStyles> {
 
     events().keyPressed().on(keyEvent -> {
       int keyCode = keyEvent.getKeyEvent().keyCode();
-      var direction = styles().getPropertyValue(BaseStyles::direction, Direction.COLUMN);
+      var direction = styles().getPropertyValue(BaseStyles::direction, DefaultStyleValues.DIRECTION);
       int nextKeyCode = switch (direction) {
         case ROW, ROW_REVERSE -> Key.RIGHT.getCode();
         case COLUMN, COLUMN_REVERSE -> Key.DOWN.getCode();

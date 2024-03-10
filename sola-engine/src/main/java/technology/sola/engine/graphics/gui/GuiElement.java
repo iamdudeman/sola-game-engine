@@ -6,6 +6,7 @@ import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.graphics.gui.event.GuiMouseEvent;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
+import technology.sola.engine.graphics.gui.style.DefaultStyleValues;
 import technology.sola.engine.graphics.gui.style.StyleContainer;
 import technology.sola.engine.graphics.gui.style.property.*;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -93,7 +94,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
   public void render(Renderer renderer) {
     recalculateLayout();
 
-    if (styleContainer.getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE) != Visibility.VISIBLE) {
+    if (styleContainer.getPropertyValue(BaseStyles::visibility, DefaultStyleValues.VISIBILITY) != Visibility.VISIBLE) {
       return;
     }
 
@@ -109,7 +110,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     }
 
     // border
-    Border border = styleContainer.getPropertyValue(BaseStyles::border, Border.NONE);
+    Border border = styleContainer.getPropertyValue(BaseStyles::border, DefaultStyleValues.BORDER);
 
     // checking any border size for now since they will all be 0 or 1
     if (border.bottom() > 0) {
@@ -159,7 +160,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
    * @return true if the element is currently focusable
    */
   public boolean isFocusable() {
-    return styleContainer.getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE) == Visibility.VISIBLE;
+    return styleContainer.getPropertyValue(BaseStyles::visibility, DefaultStyleValues.VISIBILITY) == Visibility.VISIBLE;
   }
 
   /**
@@ -377,6 +378,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     if (event.getKeyEvent().keyCode() == Key.SPACE.getCode()) {
       setActive(true);
     }
+
     events.keyPressed().emit(event);
 
     if (event.isAbleToPropagate()) {
@@ -398,7 +400,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
       child.onMousePressed(event);
     }
 
-    if (event.isAbleToPropagate() && bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
+    if (event.isAbleToPropagate() && shouldHandleMousePressedEvents() && bounds.contains(event.getMouseEvent())) {
       events.mousePressed().emit(event);
       setActive(true);
     }
@@ -409,7 +411,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
       child.onMouseReleased(event);
     }
 
-    if (event.isAbleToPropagate() && bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
+    if (event.isAbleToPropagate() && shouldHandleMouseReleasedEvents() && bounds.contains(event.getMouseEvent())) {
       events.mouseReleased().emit(event);
     }
 
@@ -422,7 +424,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     }
 
     if (event.isAbleToPropagate()) {
-      if (bounds.contains(event.getMouseEvent().x(), event.getMouseEvent().y())) {
+      if (shouldHandleMouseMoveEvents() && bounds.contains(event.getMouseEvent())) {
         events.mouseMoved().emit(event);
 
         if (!isHovered) {
@@ -439,8 +441,8 @@ public abstract class GuiElement<Style extends BaseStyles> {
   void setBounds(GuiElementBounds bounds) {
     this.bounds = bounds;
 
-    Border border = styleContainer.getPropertyValue(BaseStyles::border, Border.NONE);
-    Padding padding = styleContainer.getPropertyValue(BaseStyles::padding, Padding.NONE);
+    Border border = styleContainer.getPropertyValue(BaseStyles::border, DefaultStyleValues.BORDER);
+    Padding padding = styleContainer.getPropertyValue(BaseStyles::padding, DefaultStyleValues.PADDING);
 
     this.contentBounds = new GuiElementBounds(
       bounds.x() + border.left() + padding.left(),
@@ -477,7 +479,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
   private void recalculateLayout() {
     if (isLayoutChanged()) {
-      Visibility visibility = styles().getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE);
+      Visibility visibility = styles().getPropertyValue(BaseStyles::visibility, DefaultStyleValues.VISIBILITY);
 
       // If no visibility then clear out all bounds so no layout space is taken
       if (visibility == Visibility.NONE) {
@@ -498,8 +500,8 @@ public abstract class GuiElement<Style extends BaseStyles> {
   private void setContentBounds(GuiElementBounds contentBounds) {
     this.contentBounds = contentBounds;
 
-    Border border = styleContainer.getPropertyValue(BaseStyles::border, Border.NONE);
-    Padding padding = styleContainer.getPropertyValue(BaseStyles::padding, Padding.NONE);
+    Border border = styleContainer.getPropertyValue(BaseStyles::border, DefaultStyleValues.BORDER);
+    Padding padding = styleContainer.getPropertyValue(BaseStyles::padding, DefaultStyleValues.PADDING);
 
     this.bounds = new GuiElementBounds(
       contentBounds.x() - border.left() - padding.left(),
@@ -523,5 +525,17 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
       styleContainer.invalidate();
     }
+  }
+
+  private boolean shouldHandleMouseMoveEvents() {
+    return styleContainer.hasHoverCondition() || events.mouseMoved().hasListeners() || events.mouseEntered().hasListeners() || events.mouseExited().hasListeners();
+  }
+
+  private boolean shouldHandleMousePressedEvents() {
+    return styleContainer.hasActiveCondition() || events().mousePressed().hasListeners();
+  }
+
+  private boolean shouldHandleMouseReleasedEvents() {
+    return styleContainer.hasActiveCondition() || events().mouseReleased().hasListeners();
   }
 }

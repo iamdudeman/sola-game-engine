@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.gui;
 
+import technology.sola.engine.input.MouseEvent;
+
 /**
  * GuiElementBounds holds the information for the bounding box for part of {@link GuiElement}.
  *
@@ -42,5 +44,15 @@ public record GuiElementBounds(int x, int y, int width, int height) {
    */
   public boolean contains(int x, int y) {
     return x >= this.x && x <= this.x + width && y >= this.y && y <= this.y + height;
+  }
+
+  /**
+   * Checks to see if a {@link MouseEvent} is within bounds.
+   *
+   * @param mouseEvent the mouse event
+   * @return true if the mouse event is within the bounds
+   */
+  public boolean contains(MouseEvent mouseEvent) {
+    return contains(mouseEvent.x(), mouseEvent.y());
   }
 }

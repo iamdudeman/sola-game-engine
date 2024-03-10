@@ -12,23 +12,23 @@
 
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
-* Gui improvements
+* research why browser collision detection performance is so much worse
+* consider making QuadTreeBroadPhase the default
+* Gui performance improvements
     * when should layout be invalidated (can partial invalidations happen for children/parent)
     * consider splitting layout and paint styles to prevent extra calculations
-    * maybe put default style values in a common place (like Direction.Column)?
-    * Consider event filters for elements to eliminate unneeded "bound" checks (mostly for mouse events)
-        * maybe just check for any mouse event list size > 0?
+* Rendering
+    * Ability to change line width when drawing
+    * Add a way to do gradients?
+        * maybe just linear at first?
+        * maybe just a convenience method for generating gradient SolaImages?
+* Gui json features
     * consider an event map of some sort for when loading gui documents
         * could also have an "event id -> event function" map that can be used as part of gui doc loading
         * elements could then add event listeners from this map
         * ie. (`mousePress` -> `doSomething`)
     * implement "Style sheet" JSON concept
         * gui json documents can reference these for use
-* Rendering
-    * Ability to change line width when drawing
-    * Add a way to do gradients?
-        * maybe just linear at first?
-        * maybe just a convenience method for generating gradient SolaImages?
 * networking
     * rest client interface
         * javafx impl

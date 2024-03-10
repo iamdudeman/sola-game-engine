@@ -53,6 +53,13 @@ public class GuiEventListenerList<E extends GuiEvent> {
     }
   }
 
+  /**
+   * @return true if there is at least one {@link GuiEventListener} registered
+   */
+  public boolean hasListeners() {
+    return !eventListeners.isEmpty();
+  }
+
   private class OneTimeEventListener implements GuiEventListener<E> {
     private final GuiEventListener<E> original;
 

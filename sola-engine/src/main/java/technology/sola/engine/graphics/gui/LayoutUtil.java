@@ -1,13 +1,14 @@
 package technology.sola.engine.graphics.gui;
 
 import technology.sola.engine.graphics.gui.style.BaseStyles;
+import technology.sola.engine.graphics.gui.style.DefaultStyleValues;
 import technology.sola.engine.graphics.gui.style.property.*;
 
 class LayoutUtil {
   static void rebuildLayout(GuiElement<?> guiElement) {
     var guiElementChildren = guiElement.children;
     var styles = guiElement.styles();
-    var direction = styles.getPropertyValue(BaseStyles::direction, Direction.COLUMN);
+    var direction = styles.getPropertyValue(BaseStyles::direction, DefaultStyleValues.DIRECTION);
     int gap = styles.getPropertyValue(BaseStyles::gap, 0);
     int xOffset = guiElement.boundConstraints.x();
     int yOffset = guiElement.boundConstraints.y();
@@ -22,7 +23,7 @@ class LayoutUtil {
       int index = startIndex > 0 ? startIndex - i : i;
       GuiElement<?> child = guiElementChildren.get(index);
 
-      Visibility visibility = child.styles().getPropertyValue(BaseStyles::visibility, Visibility.VISIBLE);
+      Visibility visibility = child.styles().getPropertyValue(BaseStyles::visibility, DefaultStyleValues.VISIBILITY);
 
       // If no visibility then clear out all bounds so no layout space is taken
       if (visibility == Visibility.NONE) {
@@ -45,7 +46,7 @@ class LayoutUtil {
       updateContentBounds(child);
 
       // calculate where in the layout flow the element should go or if it is outside the flow
-      var position = child.styles().getPropertyValue(BaseStyles::position, Position.NONE);
+      var position = child.styles().getPropertyValue(BaseStyles::position, DefaultStyleValues.POSITION);
 
       if (!position.isAbsolute()) {
         switch (direction) {
@@ -66,7 +67,7 @@ class LayoutUtil {
   }
 
   static void updateAbsolute(GuiElement<?> guiElement) {
-    var position = guiElement.styles().getPropertyValue(BaseStyles::position, Position.NONE);
+    var position = guiElement.styles().getPropertyValue(BaseStyles::position, DefaultStyleValues.POSITION);
 
     if (position.isAbsolute()) {
       var parentElement = guiElement.getParent();
@@ -88,14 +89,14 @@ class LayoutUtil {
     var styles = guiElement.styles();
 
     // prepare to calculate alignment adjustments of elements in the flow
-    var direction = styles.getPropertyValue(BaseStyles::direction, Direction.COLUMN);
-    var mainAxisChildren = styles.getPropertyValue(BaseStyles::mainAxisChildren, MainAxisChildren.START);
-    var crossAxisChildren = styles.getPropertyValue(BaseStyles::crossAxisChildren, CrossAxisChildren.START);
+    var direction = styles.getPropertyValue(BaseStyles::direction, DefaultStyleValues.DIRECTION);
+    var mainAxisChildren = styles.getPropertyValue(BaseStyles::mainAxisChildren, DefaultStyleValues.MAIN_AXIS_CHILDREN);
+    var crossAxisChildren = styles.getPropertyValue(BaseStyles::crossAxisChildren, DefaultStyleValues.CROSS_AXIS_CHILDREN);
 
     // only need apply alignment if either axis is not START
     if (mainAxisChildren != MainAxisChildren.START || crossAxisChildren != CrossAxisChildren.START) {
       var guiElementChildrenInFlow = guiElement.children.stream()
-        .filter(child -> !child.styleContainer.getPropertyValue(BaseStyles::position, Position.NONE).isAbsolute())
+        .filter(child -> !child.styleContainer.getPropertyValue(BaseStyles::position, DefaultStyleValues.POSITION).isAbsolute())
         .toList();
 
       AlignmentFunction alignmentFunction = switch (direction) {
@@ -138,16 +139,16 @@ class LayoutUtil {
 
   private static GuiElementBounds recalculateBoundConstraints(GuiElement<?> guiElement, int x, int y) {
     var parentStyleContainer = guiElement.getParent().styles();
-    var parentBorder = parentStyleContainer.getPropertyValue(BaseStyles::border, Border.NONE);
-    var parentPadding = parentStyleContainer.getPropertyValue(BaseStyles::padding, Padding.NONE);
+    var parentBorder = parentStyleContainer.getPropertyValue(BaseStyles::border, DefaultStyleValues.BORDER);
+    var parentPadding = parentStyleContainer.getPropertyValue(BaseStyles::padding, DefaultStyleValues.PADDING);
 
     // x + y constraints
     final int xConstraint = x + parentBorder.left() + parentPadding.left();
     final int yConstraint = y + parentBorder.top() + parentPadding.top();
 
     var parentBoundConstraints = guiElement.getParent().boundConstraints;
-    var parentWidth = parentStyleContainer.getPropertyValue(BaseStyles::width, StyleValue.FULL);
-    var parentHeight = parentStyleContainer.getPropertyValue(BaseStyles::height, StyleValue.FULL);
+    var parentWidth = parentStyleContainer.getPropertyValue(BaseStyles::width, DefaultStyleValues.WIDTH);
+    var parentHeight = parentStyleContainer.getPropertyValue(BaseStyles::height, DefaultStyleValues.HEIGHT);
 
     // max width + height constraints
     final int widthConstraint = parentWidth.getValue(parentBoundConstraints.width()) - parentBorder.left() - parentBorder.right() - parentPadding.left() - parentPadding.right();
@@ -213,10 +214,10 @@ class LayoutUtil {
     var styles = guiElement.styles();
     var boundConstraints = guiElement.boundConstraints;
 
-    final int width = styles.getPropertyValue(BaseStyles::width, StyleValue.FULL).getValue(boundConstraints.width());
+    final int width = styles.getPropertyValue(BaseStyles::width, DefaultStyleValues.WIDTH).getValue(boundConstraints.width());
     final int widthBound = Math.min(width, boundConstraints.width());
 
-    final int height = styles.getPropertyValue(BaseStyles::height, StyleValue.FULL).getValue(boundConstraints.height());
+    final int height = styles.getPropertyValue(BaseStyles::height, DefaultStyleValues.HEIGHT).getValue(boundConstraints.height());
     final int heightBound = Math.min(height, boundConstraints.height());
 
     return new GuiElementBounds(boundConstraints.x(), boundConstraints.y(), widthBound, heightBound);
@@ -231,9 +232,9 @@ class LayoutUtil {
     // If no custom content dimensions then size based on children
     if (contentDimensions == null) {
       int gap = styles.getPropertyValue(BaseStyles::gap, 0);
-      var direction = styles.getPropertyValue(BaseStyles::direction, Direction.COLUMN);
+      var direction = styles.getPropertyValue(BaseStyles::direction, DefaultStyleValues.DIRECTION);
       var childrenInLayout = guiElement.children.stream()
-        .filter(child -> !child.styles().getPropertyValue(BaseStyles::position, Position.NONE).isAbsolute())
+        .filter(child -> !child.styles().getPropertyValue(BaseStyles::position, DefaultStyleValues.POSITION).isAbsolute())
         .toList();
 
       if (direction == Direction.ROW || direction == Direction.ROW_REVERSE) {
