@@ -11,7 +11,6 @@ import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.SolaPlatformIdentifier;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
@@ -111,22 +110,17 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   @Override
   protected void onRender(Renderer renderer) {
-    int[] pixels = ((SoftwareRenderer) renderer).getPixels();
-    int[] pixelDataForCanvas = new int[pixels.length * 4];
-    int index = 0;
+    if (useSoftwareRendering) {
+      AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
 
-    for (int current : pixels) {
-      Color color = new Color(current);
-
-      pixelDataForCanvas[index++] = color.getRed();
-      pixelDataForCanvas[index++] = color.getGreen();
-      pixelDataForCanvas[index++] = color.getBlue();
-      pixelDataForCanvas[index++] = color.getAlpha();
+      JsCanvasUtils.renderToCanvas(
+        ((SoftwareRenderer) renderer).getPixels(),
+        renderer.getWidth(), renderer.getHeight(),
+        aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height()
+      );
+    } else {
+      throw new UnsupportedOperationException("Only software rendering is implemented currently");
     }
-
-    AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
-
-    JsCanvasUtils.renderToCanvas(pixelDataForCanvas, renderer.getWidth(), renderer.getHeight(), aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height());
   }
 
   @Override
