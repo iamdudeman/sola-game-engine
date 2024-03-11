@@ -24,10 +24,10 @@ public class JsCanvasUtils {
   public static native void canvasInit(String anchorId, int width, int height);
 
   /**
-   * Renders the renderData array to a canvas. This utilizes ImageData and Canvas#drawImage and is affected by the
+   * Renders the rendererData array to a canvas. This utilizes ImageData and Canvas#drawImage and is affected by the
    * viewport's {@link technology.sola.engine.graphics.screen.AspectRatioSizing}.
    *
-   * @param rendererData   the data to render
+   * @param rendererData   the data to render (array of pixels)
    * @param width          the width of the renderer
    * @param height         the height of the renderer
    * @param viewportX      the x coordinate of the viewport
@@ -139,8 +139,25 @@ public class JsCanvasUtils {
       window.addEventListener("resize", onWindowResize);
       """;
 
+    // manually converting pixel array into Uint8ClampedArray since it is much more performant
     private static final String RENDER = """
-      var imageData = new ImageData(Uint8ClampedArray.from(rendererData), width, height);
+      var pixelData = new Uint8ClampedArray(rendererData.length * 4);
+      var pixelDataIndex = 0;
+
+      for (var i = 0; i < rendererData.length; i++) {
+        var argb = rendererData[i];
+        var r = (argb >> 16) & 0xFF;
+        var g = (argb >> 8) & 0xFF;
+        var b = argb & 0xFF;
+        var alpha = (argb >> 24) & 0xFF;
+
+        pixelData[pixelDataIndex++] = r;
+        pixelData[pixelDataIndex++] = g;
+        pixelData[pixelDataIndex++] = b;
+        pixelData[pixelDataIndex++] = alpha;
+      }
+
+      var imageData = new ImageData(pixelData, width, height);
 
       var tempCanvas = document.createElement("canvas");
 

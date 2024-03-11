@@ -99,7 +99,7 @@ public class ExampleLauncherSola extends SolaWithDefaults {
       buildExampleLaunchButton("Particle", ParticleExample::new),
       buildExampleLaunchButton("Rendering", RenderingExample::new),
       buildExampleLaunchButton("Simple Platformer", SimplePlatformerExample::new),
-      buildExampleLaunchButton("Stress Test - Physics", () -> new StressTestPhysicsExample(500)),
+      buildExampleLaunchButton("Stress Test - Physics", () -> new StressTestPhysicsExample(1337)),
       buildExampleLaunchButton("Stress Test - Rendering", StressTestRenderingExample::new)
     );
 

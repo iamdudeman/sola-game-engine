@@ -12,8 +12,8 @@
 
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
-* research why browser collision detection performance is so much worse
 * consider making QuadTreeBroadPhase the default
+    * ensure StressTestPhysicsExample doesn't spawn circles outside the bounds
 * Gui performance improvements
     * when should layout be invalidated (can partial invalidations happen for children/parent)
     * consider splitting layout and paint styles to prevent extra calculations
