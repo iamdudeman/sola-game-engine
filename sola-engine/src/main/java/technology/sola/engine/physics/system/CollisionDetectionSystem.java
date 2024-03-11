@@ -9,8 +9,8 @@ import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.engine.physics.system.collision.CollisionDetectionBroadPhase;
+import technology.sola.engine.physics.system.collision.QuadTreeCollisionDetectionBroadPhase;
 import technology.sola.engine.physics.utils.CollisionUtils;
-import technology.sola.engine.physics.system.collision.SpatialHashMapCollisionDetectionBroadPhase;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,12 +30,12 @@ public class CollisionDetectionSystem extends EcsSystem {
   private CollisionDetectionBroadPhase collisionDetectionBroadPhase;
 
   /**
-   * Creates a CollisionDetectionSystem that uses a {@link SpatialHashMapCollisionDetectionBroadPhase}.
+   * Creates a CollisionDetectionSystem that uses an auto sizing {@link QuadTreeCollisionDetectionBroadPhase}.
    *
    * @param eventHub {@link EventHub} instance
    */
   public CollisionDetectionSystem(EventHub eventHub) {
-    this(eventHub, new SpatialHashMapCollisionDetectionBroadPhase(null));
+    this(eventHub, new QuadTreeCollisionDetectionBroadPhase(null));
   }
 
   /**
