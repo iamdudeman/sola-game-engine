@@ -8,6 +8,7 @@ import technology.sola.engine.examples.common.networking.messages.UpdateTimeMess
 import technology.sola.engine.networking.socket.SocketMessage;
 import technology.sola.engine.server.ClientConnection;
 import technology.sola.engine.server.SolaServer;
+import technology.sola.json.JsonObject;
 
 /**
  * Runs the example server listening on port 60000.
@@ -21,7 +22,7 @@ public class ServerMain {
   public static void main(String[] args) {
     SolaServer solaServer = new ExampleSolaServer();
 
-    solaServer.start(1380);
+    solaServer.start();
   }
 
   private static class ExampleSolaServer extends SolaServer {
@@ -31,7 +32,20 @@ public class ServerMain {
 
     @Override
     public void initialize() {
+      // todo better test routes
+      solaRouter.addRoute("GET", "/", requestParameters -> {
+        return new JsonObject();
+      });
+    }
 
+    @Override
+    public int getRestPort() {
+      return 1381;
+    }
+
+    @Override
+    public int getSocketPort() {
+      return 1380;
     }
 
     @Override
