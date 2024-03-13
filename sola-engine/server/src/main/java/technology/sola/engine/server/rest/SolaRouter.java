@@ -20,9 +20,9 @@ public class SolaRouter {
     return addRoute("GET", path, routeHandler);
   }
 
-  public JsonElement handleRequest(HttpExchange httpExchange) {
+  public SolaResponse handleRequest(HttpExchange httpExchange) {
     // todo iterate through routes to find a match
-    return new JsonElement(new JsonObject());
+    return new SolaResponse(200, new JsonObject());
   }
 
   private record Route(String method, String path, RouteHandler routeHandler) {

@@ -128,17 +128,14 @@ public abstract class SolaServer {
         try {
           HttpServer httpServer = HttpServer.create(new InetSocketAddress(restPort), 0);
 
-          // todo populate routes
           httpServer.createContext("/", exchange -> {
-            // todo do the things
-            System.out.println("Test a roo " + exchange.getRequestMethod());
-            JsonElement response = solaRouter.handleRequest(exchange);
+            var response = solaRouter.handleRequest(exchange);
 
             exchange.getResponseHeaders().set("Content-Type", "application/json");
-            exchange.sendResponseHeaders(200, 0);
+            exchange.sendResponseHeaders(response.status(), 0);
 
             try (PrintStream printStream = new PrintStream(exchange.getResponseBody())) {
-              printStream.print(response.toString());
+              printStream.print(response.body().toString());
             }
           });
 
