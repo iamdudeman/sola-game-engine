@@ -8,7 +8,6 @@ import technology.sola.engine.core.GameLoop;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.networking.socket.SocketMessage;
 import technology.sola.engine.server.rest.SolaRouter;
-import technology.sola.json.JsonElement;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -37,6 +36,7 @@ public abstract class SolaServer {
   protected final SolaRouter solaRouter = new SolaRouter();
   private final Map<Long, ClientConnection> clientConnectionMap = new HashMap<>();
   private long clientCount = 0;
+  private HttpServer httpServer;
   private ServerSocket serverSocket;
   private boolean isAcceptingConnections = true;
   private boolean isStarted = false;
@@ -112,71 +112,15 @@ public abstract class SolaServer {
    * Starts the server.
    */
   public void start() {
-    int restPort = getRestPort();
-    int socketPort = getSocketPort();
-
     initialize();
 
     isStarted = true;
 
-    // game loop thread
     new Thread(gameLoop).start();
 
-    // rest thread
-    if (restPort != -1) {
-      new Thread(() -> {
-        try {
-          HttpServer httpServer = HttpServer.create(new InetSocketAddress(restPort), 0);
+    startRestThreadIfEnabled();
 
-          httpServer.createContext("/", exchange -> {
-            var response = solaRouter.handleRequest(exchange);
-
-            exchange.getResponseHeaders().set("Content-Type", "application/json");
-            exchange.sendResponseHeaders(response.status(), 0);
-
-            try (PrintStream printStream = new PrintStream(exchange.getResponseBody())) {
-              printStream.print(response.body().toString());
-            }
-          });
-
-          httpServer.setExecutor(Executors.newCachedThreadPool());
-          httpServer.start();
-          LOGGER.info("Started REST server on port " + restPort);
-        } catch (IOException ex) {
-          // todo handle this
-          ex.printStackTrace();
-        }
-      }).start();
-    }
-
-    // socket thread
-    if (socketPort != -1) {
-      new Thread(() -> {
-        try {
-          serverSocket = new ServerSocket(socketPort);
-
-          do {
-            LOGGER.info("Waiting for connection...");
-            ClientConnection jointClientConnection = new ClientConnectionImpl(
-              serverSocket.accept(), nextClientId(), this::onConnectionEstablished, this::handleDisconnect, this::onMessage
-            );
-
-            clientConnectionMap.put(jointClientConnection.getClientId(), jointClientConnection);
-
-            if (isAllowedConnection(jointClientConnection)) {
-              LOGGER.info("Client {} accepted", jointClientConnection.getClientId());
-              new Thread(jointClientConnection).start();
-            } else {
-              LOGGER.info("Client {} rejected", jointClientConnection.getClientId());
-              clientConnectionMap.remove(jointClientConnection.getClientId()).close();
-            }
-
-          } while (isAcceptingConnections);
-        } catch (IOException ex) {
-          LOGGER.error(ex.getMessage(), ex);
-        }
-      }).start();
-    }
+    startSocketThreadIfEnabled();
   }
 
   /**
@@ -190,6 +134,10 @@ public abstract class SolaServer {
     try {
       LOGGER.info("Stopping server");
       isAcceptingConnections = false;
+
+      if (httpServer != null) {
+        httpServer.stop(10);
+      }
 
       if (serverSocket != null) {
         serverSocket.close();
@@ -274,6 +222,70 @@ public abstract class SolaServer {
       clientConnectionMap.remove(clientConnection.getClientId()).close();
     } catch (IOException ex) {
       throw new RuntimeException(ex);
+    }
+  }
+
+  private void startSocketThreadIfEnabled() {
+    int socketPort = getSocketPort();
+
+    if (socketPort != -1) {
+      new Thread(() -> {
+        try {
+          serverSocket = new ServerSocket(socketPort);
+
+          do {
+            LOGGER.info("Waiting for connection...");
+            ClientConnection jointClientConnection = new ClientConnectionImpl(
+              serverSocket.accept(), nextClientId(), this::onConnectionEstablished, this::handleDisconnect, this::onMessage
+            );
+
+            clientConnectionMap.put(jointClientConnection.getClientId(), jointClientConnection);
+
+            if (isAllowedConnection(jointClientConnection)) {
+              LOGGER.info("Client {} accepted", jointClientConnection.getClientId());
+              new Thread(jointClientConnection).start();
+            } else {
+              LOGGER.info("Client {} rejected", jointClientConnection.getClientId());
+              clientConnectionMap.remove(jointClientConnection.getClientId()).close();
+            }
+
+          } while (isAcceptingConnections);
+        } catch (IOException ex) {
+          LOGGER.error(ex.getMessage(), ex);
+        }
+      }).start();
+    }
+  }
+
+  private void startRestThreadIfEnabled() {
+    int restPort = getRestPort();
+
+    if (restPort != -1) {
+      new Thread(() -> {
+        try {
+          httpServer = HttpServer.create(new InetSocketAddress(restPort), 0);
+
+          httpServer.createContext("/", exchange -> {
+            // todo better logging for this
+            LOGGER.info("{} {}", exchange.getRequestMethod(), exchange.getRequestURI().toString());
+
+            var response = solaRouter.handleRequest(exchange);
+
+            exchange.getResponseHeaders().set("Content-Type", "application/json");
+            exchange.sendResponseHeaders(response.status(), 0);
+
+            try (PrintStream printStream = new PrintStream(exchange.getResponseBody())) {
+              printStream.print(response.body().toString());
+            }
+          });
+
+          httpServer.setExecutor(Executors.newCachedThreadPool());
+          httpServer.start();
+          LOGGER.info("Started REST server on port " + restPort);
+        } catch (IOException ex) {
+          LOGGER.error(ex.getMessage(), ex);
+        }
+      }).start();
     }
   }
 }
