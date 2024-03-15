@@ -1,5 +1,6 @@
 # sola-game-engine TODO list
 
+
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -10,6 +11,12 @@
 
 ## TODO List
 
+* networking
+    * rest client interface
+        * javafx impl
+        * swing impl
+        * browser impl
+    * update `ServerMain` to work with NetworkingExample when this is implemented
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
 * Gui performance improvements
@@ -27,12 +34,6 @@
         * ie. (`mousePress` -> `doSomething`)
     * implement "Style sheet" JSON concept
         * gui json documents can reference these for use
-* networking
-    * rest client interface
-        * javafx impl
-        * swing impl
-        * browser impl
-    * simple rest server
 * Figure out how to handle TouchInput (probably at the same time as AndroidPlatform implementation)
     * Primarily for browser but also could be supported in JavaFX
     * touchstart and touchend all hard coded to MouseButton.Primary currently

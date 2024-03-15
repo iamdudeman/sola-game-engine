@@ -8,6 +8,8 @@ import technology.sola.engine.examples.common.networking.messages.UpdateTimeMess
 import technology.sola.engine.networking.socket.SocketMessage;
 import technology.sola.engine.server.ClientConnection;
 import technology.sola.engine.server.SolaServer;
+import technology.sola.engine.server.rest.SolaResponse;
+import technology.sola.json.JsonObject;
 
 /**
  * Runs the example server listening on port 60000.
@@ -21,7 +23,7 @@ public class ServerMain {
   public static void main(String[] args) {
     SolaServer solaServer = new ExampleSolaServer();
 
-    solaServer.start(1380);
+    solaServer.start();
   }
 
   private static class ExampleSolaServer extends SolaServer {
@@ -31,7 +33,35 @@ public class ServerMain {
 
     @Override
     public void initialize() {
+      solaRouter.get( "/", solaRequest -> new SolaResponse(200, new JsonObject()));
 
+      solaRouter.get("/test", solaRequest -> {
+        JsonObject jsonObject = new JsonObject();
+
+        jsonObject.put("test", solaRequest.queryParameters().getOrDefault("test", "missing"));
+
+        return new SolaResponse(200, jsonObject);
+      });
+
+      solaRouter.get("/test/{myTestParam}", solaRequest -> {
+        JsonObject jsonObject = new JsonObject();
+
+        jsonObject.put("myTestParam", solaRequest.pathParameters().get("myTestParam"));
+
+        return new SolaResponse(200, jsonObject);
+      });
+
+      solaRouter.post("/test", solaRequest -> new SolaResponse(200, solaRequest.body()));
+    }
+
+    @Override
+    public int getRestPort() {
+      return 1381;
+    }
+
+    @Override
+    public int getSocketPort() {
+      return 1380;
     }
 
     @Override
