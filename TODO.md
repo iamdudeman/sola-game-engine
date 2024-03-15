@@ -10,6 +10,9 @@
         * probably need to expose headers from exchange?
         * cookie stuff
         * set response headers?
+    * client
+        * ability to send headers
+        * ability to read response headers
 
 ## Known Bugs List
 

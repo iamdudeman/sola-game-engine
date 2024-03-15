@@ -1,5 +1,10 @@
 package technology.sola.engine.networking.rest;
 
-// todo make public later once implemented
-public interface HttpResponse {
+import technology.sola.json.JsonElement;
+
+public record HttpResponse(
+  int status,
+  // todo response headers
+  JsonElement body
+) {
 }
