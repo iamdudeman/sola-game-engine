@@ -53,8 +53,7 @@ module technology.sola.engine {
   exports technology.sola.engine.physics.utils;
 
   exports technology.sola.engine.networking;
-  // todo expose rest when it is ready
-  // exports technology.sola.engine.networking.rest;
+  exports technology.sola.engine.networking.rest;
   exports technology.sola.engine.networking.socket;
 
   exports technology.sola.math;
