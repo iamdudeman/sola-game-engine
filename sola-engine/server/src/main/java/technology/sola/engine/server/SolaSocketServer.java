@@ -1,5 +1,8 @@
 package technology.sola.engine.server;
 
+/**
+ * SolaSocketServer is a {@link SolaServer} without REST capabilities enabled.
+ */
 public abstract class SolaSocketServer extends SolaServer {
   /**
    * Creates an instance of this SolaSocketServer.

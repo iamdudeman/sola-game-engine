@@ -2,6 +2,9 @@ package technology.sola.engine.server;
 
 import technology.sola.engine.networking.socket.SocketMessage;
 
+/**
+ * SolaRestServer is a {@link SolaServer} without socket capabilities enabled.
+ */
 public abstract class SolaRestServer extends SolaServer {
   /**
    * Creates an instance of this SolaServer.

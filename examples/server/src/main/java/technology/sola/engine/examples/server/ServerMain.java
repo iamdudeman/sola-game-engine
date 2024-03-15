@@ -33,9 +33,7 @@ public class ServerMain {
 
     @Override
     public void initialize() {
-      solaRouter.route("GET", "/", requestParameters -> {
-        return new SolaResponse(200, new JsonObject());
-      });
+      solaRouter.route("GET", "/", requestParameters -> new SolaResponse(200, new JsonObject()));
 
       // todo test route for path params
 
@@ -47,9 +45,7 @@ public class ServerMain {
         return new SolaResponse(200, jsonObject);
       });
 
-      solaRouter.route("POST", "/test", requestParameters -> {
-        return new SolaResponse(200, requestParameters.body());
-      });
+      solaRouter.route("POST", "/test", requestParameters -> new SolaResponse(200, requestParameters.body()));
     }
 
     @Override
