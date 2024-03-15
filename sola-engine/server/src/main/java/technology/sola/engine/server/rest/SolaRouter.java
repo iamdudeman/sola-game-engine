@@ -7,31 +7,82 @@ import technology.sola.json.SolaJson;
 
 import java.util.*;
 
+/**
+ * SolaRouter handles {@link HttpExchange}s to the server via routes it has registered. If no route matches the method
+ * and path from the exchange then a 404 {@link SolaResponse} will be returned.
+ */
 public class SolaRouter {
   private final List<Route> routes = new ArrayList<>();
 
+  /**
+   * Registers a route for desired method and path. If a path fragment is wrapped in curly braces it will be treated as
+   * a path parameter (ie /{myParamName})
+   *
+   * @param method       the HTTP method for the route
+   * @param path         the path to match for this route
+   * @param routeHandler the {@link RouteHandler} called when matched
+   * @return this
+   */
   public SolaRouter route(String method, String path, RouteHandler routeHandler) {
     routes.add(new Route(method, path.split("/"), routeHandler));
 
     return this;
   }
 
+  /**
+   * Convenience method for {@link SolaRouter#route(String, String, RouteHandler)} with "GET" as the method.
+   * If a path fragment is wrapped in curly braces it will be treated as a path parameter (ie /{myParamName})
+   *
+   * @param path         the path to match for this route
+   * @param routeHandler the {@link RouteHandler} called when matched
+   * @return this
+   */
   public SolaRouter get(String path, RouteHandler routeHandler) {
     return route("GET", path, routeHandler);
   }
 
+  /**
+   * Convenience method for {@link SolaRouter#route(String, String, RouteHandler)} with "POST" as the method.
+   * If a path fragment is wrapped in curly braces it will be treated as a path parameter (ie /{myParamName})
+   *
+   * @param path         the path to match for this route
+   * @param routeHandler the {@link RouteHandler} called when matched
+   * @return this
+   */
   public SolaRouter post(String path, RouteHandler routeHandler) {
     return route("POST", path, routeHandler);
   }
 
+  /**
+   * Convenience method for {@link SolaRouter#route(String, String, RouteHandler)} with "PUT" as the method.
+   * If a path fragment is wrapped in curly braces it will be treated as a path parameter (ie /{myParamName})
+   *
+   * @param path         the path to match for this route
+   * @param routeHandler the {@link RouteHandler} called when matched
+   * @return this
+   */
   public SolaRouter put(String path, RouteHandler routeHandler) {
     return route("PUT", path, routeHandler);
   }
 
+  /**
+   * Convenience method for {@link SolaRouter#route(String, String, RouteHandler)} with "DELETE" as the method.
+   * If a path fragment is wrapped in curly braces it will be treated as a path parameter (ie /{myParamName})
+   *
+   * @param path         the path to match for this route
+   * @param routeHandler the {@link RouteHandler} called when matched
+   * @return this
+   */
   public SolaRouter delete(String path, RouteHandler routeHandler) {
     return route("DELETE", path, routeHandler);
   }
 
+  /**
+   * Method that handles an {@link HttpExchange} using routes that have been registered.
+   *
+   * @param httpExchange the {@code HttpExchange} to handle
+   * @return the {@link SolaResponse} after the exchange was handled
+   */
   public SolaResponse handleHttpExchange(HttpExchange httpExchange) {
     return routes.stream()
       .filter(route -> isRouteMatch(route, httpExchange))

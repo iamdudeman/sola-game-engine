@@ -1,11 +1,5 @@
 # sola-game-engine TODO list
 
-* networking
-    * rest client interface
-        * javafx impl
-        * swing impl
-        * browser impl
-    * simple rest server
 
 ## Known Bugs List
 
@@ -17,6 +11,11 @@
 
 ## TODO List
 
+* networking
+    * rest client interface
+        * javafx impl
+        * swing impl
+        * browser impl
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
 * Gui performance improvements
