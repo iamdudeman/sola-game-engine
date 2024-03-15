@@ -33,19 +33,25 @@ public class ServerMain {
 
     @Override
     public void initialize() {
-      solaRouter.get( "/", requestParameters -> new SolaResponse(200, new JsonObject()));
+      solaRouter.get( "/", solaRequest -> new SolaResponse(200, new JsonObject()));
 
-      // todo test route for path params
-
-      solaRouter.get("/test", requestParameters -> {
+      solaRouter.get("/test", solaRequest -> {
         JsonObject jsonObject = new JsonObject();
 
-        jsonObject.put("test", requestParameters.queryParameters().getOrDefault("test", "missing"));
+        jsonObject.put("test", solaRequest.queryParameters().getOrDefault("test", "missing"));
 
         return new SolaResponse(200, jsonObject);
       });
 
-      solaRouter.post("/test", requestParameters -> new SolaResponse(200, requestParameters.body()));
+      solaRouter.get("/test/{myTestParam}", solaRequest -> {
+        JsonObject jsonObject = new JsonObject();
+
+        jsonObject.put("myTestParam", solaRequest.pathParameters().get("myTestParam"));
+
+        return new SolaResponse(200, jsonObject);
+      });
+
+      solaRouter.post("/test", solaRequest -> new SolaResponse(200, solaRequest.body()));
     }
 
     @Override

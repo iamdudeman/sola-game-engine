@@ -11,7 +11,7 @@ public class SolaRouter {
   private final List<Route> routes = new ArrayList<>();
 
   public SolaRouter route(String method, String path, RouteHandler routeHandler) {
-    routes.add(new Route(method, path, routeHandler));
+    routes.add(new Route(method, path.split("/"), routeHandler));
 
     return this;
   }
@@ -36,31 +36,61 @@ public class SolaRouter {
     return routes.stream()
       .filter(route -> isRouteMatch(route, httpExchange))
       .findFirst()
-      .map(route -> route.routeHandler)
-      .orElse(solaRequest -> new SolaResponse(404, new JsonObject()))
-      .handleRoute(buildRequestParameters(httpExchange));
+      .map(route -> route.routeHandler.handleRoute(buildRequestParameters(httpExchange, route)))
+      .orElse(new SolaResponse(404, new JsonObject()));
   }
 
   private boolean isRouteMatch(Route route, HttpExchange exchange) {
     String method = exchange.getRequestMethod();
-    String path = exchange.getRequestURI().getPath();
 
-    // todo handle path param check later
-    return route.method.equalsIgnoreCase(method) && route.path.equalsIgnoreCase(path);
+    if (!route.method.equalsIgnoreCase(method)) {
+      return false;
+    }
+
+    String path = exchange.getRequestURI().getPath();
+    String[] pathParts = path.split("/");
+
+    if (pathParts.length != route.pathParts.length) {
+      return false;
+    }
+
+    for (int i = 0; i < pathParts.length; i++) {
+      String routePartToMatch = route.pathParts[i];
+
+      // path param so anything matches
+      if (routePartToMatch.startsWith("{") && routePartToMatch.endsWith("}")) {
+        continue;
+      }
+
+      if (!pathParts[i].equals(routePartToMatch)) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
-  private SolaRequest buildRequestParameters(HttpExchange exchange) {
+  private SolaRequest buildRequestParameters(HttpExchange exchange, Route route) {
     return new SolaRequest(
-      parsePathParams(exchange),
+      parsePathParams(exchange, route),
       parseQueryParams(exchange),
       parseBody(exchange)
     );
   }
 
-  private Map<String, String> parsePathParams(HttpExchange exchange) {
-    // todo implement path params
+  private Map<String, String> parsePathParams(HttpExchange exchange, Route route) {
     String path = exchange.getRequestURI().getPath();
     Map<String, String> pathParameters = new HashMap<>();
+
+    String[] pathParts = path.split("/");
+
+    for (int i = 0; i < pathParts.length; i++) {
+      String routePartToMatch = route.pathParts[i];
+
+      if (routePartToMatch.startsWith("{") && routePartToMatch.endsWith("}")) {
+        pathParameters.put(routePartToMatch.replace("{", "").replace("}", ""), pathParts[i]);
+      }
+    }
 
     return pathParameters;
   }
@@ -75,7 +105,7 @@ public class SolaRouter {
       for (var queryPair : queryPairs) {
         var keyValuePair = queryPair.split("=");
 
-        queryParameters.put(keyValuePair[0], keyValuePair[1]);
+        queryParameters.put(keyValuePair[0], keyValuePair.length == 2 ? keyValuePair[1] : null);
       }
     }
 
@@ -94,6 +124,6 @@ public class SolaRouter {
     return jsonStringBody.isEmpty() ? new JsonElement(new JsonObject()) : new SolaJson().parse(jsonStringBody.toString());
   }
 
-  private record Route(String method, String path, RouteHandler routeHandler) {
+  private record Route(String method, String[] pathParts, RouteHandler routeHandler) {
   }
 }
