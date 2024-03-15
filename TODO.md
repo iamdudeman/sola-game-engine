@@ -1,5 +1,12 @@
 # sola-game-engine TODO list
 
+* networking
+    * rest client interface
+        * javafx impl
+        * swing impl
+        * browser impl
+    * simple rest server
+
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -27,12 +34,6 @@
         * ie. (`mousePress` -> `doSomething`)
     * implement "Style sheet" JSON concept
         * gui json documents can reference these for use
-* networking
-    * rest client interface
-        * javafx impl
-        * swing impl
-        * browser impl
-    * simple rest server
 * Figure out how to handle TouchInput (probably at the same time as AndroidPlatform implementation)
     * Primarily for browser but also could be supported in JavaFX
     * touchstart and touchend all hard coded to MouseButton.Primary currently

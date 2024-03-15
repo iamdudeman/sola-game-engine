@@ -6,12 +6,12 @@ import technology.sola.json.JsonObject;
 
 import java.util.Map;
 
-public record RequestParameters(
+public record SolaRequest(
   Map<String, String> pathParameters,
   Map<String, String> queryParameters,
   JsonElement body
 ) {
-  public RequestParameters(
+  public SolaRequest(
     Map<String, String> pathParameters,
     Map<String, String> queryParameters,
     JsonObject body
@@ -19,7 +19,7 @@ public record RequestParameters(
     this(pathParameters, queryParameters, new JsonElement(body));
   }
 
-  public RequestParameters(
+  public SolaRequest(
     Map<String, String> pathParameters,
     Map<String, String> queryParameters,
     JsonArray body

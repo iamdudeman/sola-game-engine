@@ -37,7 +37,7 @@ public class SolaRouter {
       .filter(route -> isRouteMatch(route, httpExchange))
       .findFirst()
       .map(route -> route.routeHandler)
-      .orElse(requestParameters -> new SolaResponse(404, new JsonObject()))
+      .orElse(solaRequest -> new SolaResponse(404, new JsonObject()))
       .handleRoute(buildRequestParameters(httpExchange));
   }
 
@@ -49,8 +49,8 @@ public class SolaRouter {
     return route.method.equalsIgnoreCase(method) && route.path.equalsIgnoreCase(path);
   }
 
-  private RequestParameters buildRequestParameters(HttpExchange exchange) {
-    return new RequestParameters(
+  private SolaRequest buildRequestParameters(HttpExchange exchange) {
+    return new SolaRequest(
       parsePathParams(exchange),
       parseQueryParams(exchange),
       parseBody(exchange)

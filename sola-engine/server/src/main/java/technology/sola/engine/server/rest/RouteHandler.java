@@ -6,11 +6,10 @@ package technology.sola.engine.server.rest;
 @FunctionalInterface
 public interface RouteHandler {
   /**
-   * Method called when handling an HTTP request. {@link RequestParameters} are given to the handler and is expected to
-   * produce a {@link SolaResponse}.
+   * Method called when handling an HTTP request to produce an HTTP response.
    *
-   * @param requestParameters the parameters from the request
+   * @param solaRequest the {@link SolaRequest}
    * @return the HTTP response data
    */
-  SolaResponse handleRoute(RequestParameters requestParameters);
+  SolaResponse handleRoute(SolaRequest solaRequest);
 }
