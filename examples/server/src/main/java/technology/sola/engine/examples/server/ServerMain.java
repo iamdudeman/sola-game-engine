@@ -8,6 +8,7 @@ import technology.sola.engine.examples.common.networking.messages.UpdateTimeMess
 import technology.sola.engine.networking.socket.SocketMessage;
 import technology.sola.engine.server.ClientConnection;
 import technology.sola.engine.server.SolaServer;
+import technology.sola.engine.server.rest.SolaResponse;
 import technology.sola.json.JsonObject;
 
 /**
@@ -32,9 +33,22 @@ public class ServerMain {
 
     @Override
     public void initialize() {
-      // todo better test routes
-      solaRouter.addRoute("GET", "/", requestParameters -> {
-        return new JsonObject();
+      solaRouter.route("GET", "/", requestParameters -> {
+        return new SolaResponse(200, new JsonObject());
+      });
+
+      // todo test route for path params
+
+      solaRouter.route("GET", "/test", requestParameters -> {
+        JsonObject jsonObject = new JsonObject();
+
+        jsonObject.put("test", requestParameters.queryParameters().getOrDefault("test", "missing"));
+
+        return new SolaResponse(200, jsonObject);
+      });
+
+      solaRouter.route("POST", "/test", requestParameters -> {
+        return new SolaResponse(200, requestParameters.body());
       });
     }
 

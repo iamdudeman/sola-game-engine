@@ -4,5 +4,5 @@ import technology.sola.json.JsonObject;
 
 @FunctionalInterface
 public interface RouteHandler {
-  JsonObject handleRoute(RequestParameters requestParameters);
+  SolaResponse handleRoute(RequestParameters requestParameters);
 }

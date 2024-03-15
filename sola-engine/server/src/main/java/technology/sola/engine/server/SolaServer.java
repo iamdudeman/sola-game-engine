@@ -33,6 +33,9 @@ public abstract class SolaServer {
    * {@link EventHub} instance used by the server's game loop.
    */
   protected final EventHub eventHub;
+  /**
+   * {@link SolaRouter} for registering REST routes for the server.
+   */
   protected final SolaRouter solaRouter = new SolaRouter();
   private final Map<Long, ClientConnection> clientConnectionMap = new HashMap<>();
   private long clientCount = 0;
@@ -266,10 +269,9 @@ public abstract class SolaServer {
           httpServer = HttpServer.create(new InetSocketAddress(restPort), 0);
 
           httpServer.createContext("/", exchange -> {
-            // todo better logging for this
-            LOGGER.info("{} {}", exchange.getRequestMethod(), exchange.getRequestURI().toString());
+            var response = solaRouter.handleHttpExchange(exchange);
 
-            var response = solaRouter.handleRequest(exchange);
+            LOGGER.info("{} {} {}", response.status(), exchange.getRequestMethod(), exchange.getRequestURI().toString());
 
             exchange.getResponseHeaders().set("Content-Type", "application/json");
             exchange.sendResponseHeaders(response.status(), 0);
