@@ -16,6 +16,7 @@
         * javafx impl
         * swing impl
         * browser impl
+    * update `ServerMain` to work with NetworkingExample when this is implemented
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
 * Gui performance improvements
