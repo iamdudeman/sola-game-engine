@@ -26,6 +26,16 @@ class SolaWebDistributionPlugin : Plugin<Project> {
         solaWebDistributionPluginExtension.generateFilesMainClass
       }
 
+      project.task("cleanDist") {
+        group = "distribution"
+
+        doFirst {
+          delete("${project.rootDir}/dist")
+        }
+      }
+
+      project.tasks.getByName("clean").dependsOn("cleanDist")
+
       project.task("generateWebHtmlAndJs", JavaExec::class) {
         group = "build"
 

@@ -42,6 +42,16 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
       }
 
+      project.task("cleanDist") {
+        group = "distribution"
+
+        doFirst {
+          delete("${project.rootDir}/dist")
+        }
+      }
+
+      project.tasks.getByName("clean").dependsOn("cleanDist")
+
       project.task("distFatJar", Jar::class) {
         group = "distribution"
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
