@@ -47,6 +47,10 @@ public class SpatialHashMapCollisionDetectionBroadPhase implements CollisionDete
 
   @Override
   public void renderDebug(Renderer renderer, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
+    if (spatialHashMap == null) {
+      return;
+    }
+
     int cellSize = spatialHashMap.getCellSize();
 
     for (SpatialHashMap.BucketId bucketId : spatialHashMap.getBucketIds()) {
