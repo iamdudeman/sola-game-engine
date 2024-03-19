@@ -11,6 +11,7 @@ import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.graphics.screen.Viewport;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.networking.rest.RestClient;
 import technology.sola.engine.networking.socket.SocketClient;
 
 import java.util.function.Consumer;
@@ -43,6 +44,10 @@ public abstract class SolaPlatform {
    * The {@link SocketClient} for the platform.
    */
   protected SocketClient socketClient;
+  /**
+   * The {@link RestClient} for the platform.
+   */
+  protected RestClient restClient;
 
   /**
    * Main entry point for starting a {@link Sola}.
@@ -78,6 +83,13 @@ public abstract class SolaPlatform {
    */
   public SocketClient getSocketClient() {
     return socketClient;
+  }
+
+  /**
+   * @return the platform's {@link RestClient}
+   */
+  public RestClient getRestClient() {
+    return restClient;
   }
 
   /**

@@ -28,6 +28,7 @@ import technology.sola.engine.platform.javafx.assets.audio.JavaFxAudioClipAssetL
 import technology.sola.engine.platform.javafx.assets.JavaFxJsonAssetLoader;
 import technology.sola.engine.platform.javafx.assets.graphics.JavaFxSolaImageAssetLoader;
 import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
+import technology.sola.engine.platform.javafx.core.JavaFxRestClient;
 import technology.sola.engine.platform.javafx.core.JavaFxSocketClient;
 
 import java.util.function.Consumer;
@@ -61,6 +62,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       JavaFxSolaPlatform.isPlatformStartupNeeded = isPlatformStartupNeeded;
     }
     socketClient = new JavaFxSocketClient();
+    restClient = new JavaFxRestClient();
   }
 
   /**
