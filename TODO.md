@@ -11,6 +11,7 @@
 
 ## TODO List
 
+* improve FixedUpdateGameLoop so it doesn't waste renders
 * networking
     * rest client interface
         * javafx impl
