@@ -11,7 +11,7 @@ class FixedUpdateGameLoop extends GameLoop {
 
   FixedUpdateGameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond) {
     super(eventHub, updateMethod, renderMethod, targetUpdatesPerSecond);
-    this.timeBetweenUpdates = 1000000000f / targetUpdatesPerSecond;
+    this.timeBetweenUpdates = 1_000_000_000f / targetUpdatesPerSecond;
   }
 
   @Override
