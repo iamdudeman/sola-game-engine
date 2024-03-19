@@ -24,8 +24,6 @@ import technology.sola.engine.graphics.gui.style.ConditionalStyle;
 import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.networking.socket.SocketMessage;
-import technology.sola.json.JsonElement;
-import technology.sola.json.JsonObject;
 
 import java.util.Date;
 import java.util.List;
@@ -176,7 +174,6 @@ public class NetworkingExample extends SolaWithDefaults {
             .findElementsByType(TextGuiElement.class)
             .get(0)
             .setText(new Date(response.body().asObject().getLong("time")).toString());
-
         });
       }, false),
       buildButton("disconnectButton", "Disconnect", () -> {

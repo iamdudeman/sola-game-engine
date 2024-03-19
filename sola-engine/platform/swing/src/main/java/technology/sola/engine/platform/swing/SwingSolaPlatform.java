@@ -20,6 +20,7 @@ import technology.sola.engine.platform.swing.assets.audio.SwingAudioClipAssetLoa
 import technology.sola.engine.platform.swing.assets.SwingJsonAssetLoader;
 import technology.sola.engine.platform.swing.assets.graphics.SwingSolaImageAssetLoader;
 import technology.sola.engine.platform.swing.core.Graphics2dRenderer;
+import technology.sola.engine.platform.swing.core.SwingRestClient;
 import technology.sola.engine.platform.swing.core.SwingSocketClient;
 
 import javax.swing.*;
@@ -65,6 +66,7 @@ public class SwingSolaPlatform extends SolaPlatform {
   public SwingSolaPlatform(boolean useSoftwareRendering) {
     this.useSoftwareRendering = useSoftwareRendering;
     socketClient = new SwingSocketClient();
+    restClient = new SwingRestClient();
   }
 
   /**

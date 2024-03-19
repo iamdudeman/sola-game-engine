@@ -1,12 +1,5 @@
 # sola-game-engine TODO list
 
-* networking
-    * rest client interface
-        * javafx impl
-        * swing impl
-        * browser impl
-    * update `ServerMain` to work with NetworkingExample when this is implemented
-
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -27,6 +20,8 @@
     * Add a way to do gradients?
         * maybe just linear at first?
         * maybe just a convenience method for generating gradient SolaImages?
+* REST client + server
+    * ability to send and process Authorization header
 * Gui json features
     * consider an event map of some sort for when loading gui documents
         * could also have an "event id -> event function" map that can be used as part of gui doc loading

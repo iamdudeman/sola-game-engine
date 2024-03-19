@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.javafx.core;
+package technology.sola.engine.platform.swing.core;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,10 +17,10 @@ import java.util.Scanner;
 import java.util.function.Consumer;
 
 /**
- * The {@link technology.sola.engine.platform.javafx.JavaFxSolaPlatform} implementation of {@link RestClient}.
+ * The {@link technology.sola.engine.platform.swing.SwingSolaPlatform} implementation of {@link RestClient}.
  */
-public class JavaFxRestClient implements RestClient {
-  private static final Logger LOGGER = LoggerFactory.getLogger(JavaFxRestClient.class);
+public class SwingRestClient implements RestClient {
+  private static final Logger LOGGER = LoggerFactory.getLogger(SwingRestClient.class);
 
   @Override
   public void request(String method, String path, JsonElement body, Consumer<HttpResponse> httpResponseSupplier) {
