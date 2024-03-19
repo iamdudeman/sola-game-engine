@@ -4,7 +4,6 @@ import technology.sola.json.JsonElement;
 
 public record HttpResponse(
   int status,
-  // todo response headers
   JsonElement body
 ) {
 }

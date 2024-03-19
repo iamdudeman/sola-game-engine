@@ -52,7 +52,8 @@ public class JavaFxRestClient implements RestClient {
           httpResponseSupplier.accept(new HttpResponse(status, new SolaJson().parse(response)));
         }
       } catch (IOException ex) {
-
+        // todo handle this
+        ex.printStackTrace();
       }
     } catch (MalformedURLException ex) {
       // todo

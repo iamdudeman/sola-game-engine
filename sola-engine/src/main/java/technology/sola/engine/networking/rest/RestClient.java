@@ -5,7 +5,6 @@ import technology.sola.json.JsonObject;
 
 import java.util.function.Consumer;
 
-// todo ability to set headers
 public interface RestClient {
   void request(String method, String path, JsonElement body, Consumer<HttpResponse> httpResponseSupplier);
 

@@ -6,13 +6,6 @@
         * swing impl
         * browser impl
     * update `ServerMain` to work with NetworkingExample when this is implemented
-    * server
-        * probably need to expose headers from exchange?
-        * cookie stuff
-        * set response headers?
-    * client
-        * ability to send headers
-        * ability to read response headers
 
 ## Known Bugs List
 

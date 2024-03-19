@@ -24,6 +24,8 @@ import technology.sola.engine.graphics.gui.style.ConditionalStyle;
 import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.networking.socket.SocketMessage;
+import technology.sola.json.JsonElement;
+import technology.sola.json.JsonObject;
 
 import java.util.Date;
 import java.util.List;
@@ -166,6 +168,15 @@ public class NetworkingExample extends SolaWithDefaults {
         sectionGuiElement.findElementById("updateTimeButton", ButtonGuiElement.class).setDisabled(false);
       }, false),
       buildButton("updateTimeButton", "Update Time", () -> {
+        // todo remove temporary rest stuff here
+        JsonObject body = new JsonObject();
+        body.put("test", "test");
+        platform.getRestClient().post("http://localhost:1381/test", new JsonElement(body), response -> {
+          System.out.println("response " + response.body()
+            .asObject()
+            .getString("test"));
+        });
+
         platform.getSocketClient().sendMessage(new RequestTimeMessage());
       }, true),
       buildButton("disconnectButton", "Disconnect", () -> {
