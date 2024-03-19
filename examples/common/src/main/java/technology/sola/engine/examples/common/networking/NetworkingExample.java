@@ -165,9 +165,17 @@ public class NetworkingExample extends SolaWithDefaults {
         sectionGuiElement.findElementById("disconnectButton", ButtonGuiElement.class).setDisabled(false);
         sectionGuiElement.findElementById("updateTimeButton", ButtonGuiElement.class).setDisabled(false);
       }, false),
-      buildButton("updateTimeButton", "Update Time", () -> {
+      buildButton("updateTimeButton", "Update Time via Socket", () -> {
         platform.getSocketClient().sendMessage(new RequestTimeMessage());
       }, true),
+      buildButton("updateTimeButtonRest", "Update Time via Rest", () -> {
+        platform.getRestClient().get("http://localhost:1381/time", response -> {
+          guiDocument.findElementById("updateTimeButtonRest", ButtonGuiElement.class)
+            .findElementsByType(TextGuiElement.class)
+            .get(0)
+            .setText(new Date(response.body().asObject().getLong("time")).toString());
+        });
+      }, false),
       buildButton("disconnectButton", "Disconnect", () -> {
         platform.getSocketClient().disconnect();
 

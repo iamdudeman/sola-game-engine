@@ -34,6 +34,13 @@ public interface AudioClip extends Asset {
   void stop();
 
   /**
+   * Continues playing the AudioClip until pause or stop is called.
+   */
+  default void loop() {
+    loop(CONTINUOUS_LOOPING);
+  }
+
+  /**
    * Continues playing the AudioClip for a number of times or until pause or stop is called.
    * If times is set to {@link AudioClip#CONTINUOUS_LOOPING} it will play until pause or stop is called.
    *

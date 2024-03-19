@@ -43,6 +43,14 @@ public class ServerMain {
         return new SolaResponse(200, jsonObject);
       });
 
+      solaRouter.get("/time", solaRequest -> {
+        JsonObject jsonObject = new JsonObject();
+
+        jsonObject.put("time", System.currentTimeMillis());
+
+        return new SolaResponse(200, jsonObject);
+      });
+
       solaRouter.get("/test/{myTestParam}", solaRequest -> {
         JsonObject jsonObject = new JsonObject();
 

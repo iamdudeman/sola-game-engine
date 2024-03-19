@@ -21,6 +21,7 @@ import technology.sola.engine.platform.browser.assets.audio.BrowserAudioClipAsse
 import technology.sola.engine.platform.browser.assets.graphics.BrowserSolaImageAssetLoader;
 import technology.sola.engine.platform.browser.core.BrowserCanvasRenderer;
 import technology.sola.engine.platform.browser.core.BrowserGameLoop;
+import technology.sola.engine.platform.browser.core.BrowserRestClient;
 import technology.sola.engine.platform.browser.core.BrowserSocketClient;
 import technology.sola.engine.platform.browser.javascript.JsCanvasUtils;
 import technology.sola.engine.platform.browser.javascript.JsKeyboardUtils;
@@ -52,6 +53,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
   public BrowserSolaPlatform(boolean useSoftwareRendering) {
     this.useSoftwareRendering = useSoftwareRendering;
     this.socketClient = new BrowserSocketClient();
+    this.restClient = new BrowserRestClient();
   }
 
   @Override

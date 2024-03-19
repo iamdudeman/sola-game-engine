@@ -1,5 +1,15 @@
 package technology.sola.engine.networking.rest;
 
-// todo make public later once implemented
-interface HttpResponse {
+import technology.sola.json.JsonElement;
+
+/**
+ * HttpResponse contains details from the server's response to an http request.
+ *
+ * @param status the status code of the response
+ * @param body   the json response body
+ */
+public record HttpResponse(
+  int status,
+  JsonElement body
+) {
 }

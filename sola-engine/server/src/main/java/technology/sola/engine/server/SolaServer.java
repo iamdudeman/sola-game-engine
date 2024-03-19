@@ -269,6 +269,18 @@ public abstract class SolaServer {
           httpServer = HttpServer.create(new InetSocketAddress(restPort), 0);
 
           httpServer.createContext("/", exchange -> {
+            // handle CORS
+            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type, charset, accept");
+
+            // handle CORS options requests
+            if (exchange.getRequestMethod().equalsIgnoreCase("OPTIONS")) {
+              LOGGER.info("{} {}", exchange.getRequestMethod(), exchange.getRequestURI().toString());
+              exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "*");
+              exchange.sendResponseHeaders(204, -1);
+              return;
+            }
+
             var response = solaRouter.handleHttpExchange(exchange);
 
             LOGGER.info("{} {} {}", response.status(), exchange.getRequestMethod(), exchange.getRequestURI().toString());
