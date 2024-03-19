@@ -6,14 +6,21 @@ import technology.sola.json.JsonObject;
 import java.util.function.Consumer;
 
 public interface RestClient {
+  /**
+   * todo
+   *
+   * <p>
+   * Note: body is ignored when method is "GET"
+   *
+   * @param method
+   * @param path
+   * @param body
+   * @param httpResponseSupplier
+   */
   void request(String method, String path, JsonElement body, Consumer<HttpResponse> httpResponseSupplier);
 
   default void get(String path, Consumer<HttpResponse> httpResponseSupplier) {
-    get(path, new JsonElement(new JsonObject()), httpResponseSupplier);
-  }
-
-  default void get(String path, JsonElement body, Consumer<HttpResponse> httpResponseSupplier) {
-    request("GET", path, body, httpResponseSupplier);
+    request("GET", path, new JsonElement(new JsonObject()), httpResponseSupplier);
   }
 
   default void post(String path, Consumer<HttpResponse> httpResponseSupplier) {

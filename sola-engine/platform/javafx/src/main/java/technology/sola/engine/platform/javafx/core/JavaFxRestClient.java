@@ -22,18 +22,22 @@ public class JavaFxRestClient implements RestClient {
 
       try {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        byte[] bodyBytes = body.toString().getBytes(StandardCharsets.UTF_8);
 
-        connection.setDoOutput(true);
         connection.setInstanceFollowRedirects(false);
         connection.setRequestMethod(method);
         connection.setRequestProperty("accept", "application/json");
         connection.setRequestProperty("charset", "utf-8");
-        connection.setRequestProperty("Content-Length", Integer.toString(bodyBytes.length));
         connection.setUseCaches(false);
 
-        try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
-          wr.write(bodyBytes);
+        if (!method.equalsIgnoreCase("GET")) {
+          byte[] bodyBytes = body.toString().getBytes(StandardCharsets.UTF_8);
+
+          connection.setDoOutput(true);
+          connection.setRequestProperty("Content-Length", Integer.toString(bodyBytes.length));
+
+          try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
+            wr.write(bodyBytes);
+          }
         }
 
         // send the request and get a response
