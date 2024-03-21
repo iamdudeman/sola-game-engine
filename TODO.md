@@ -1,8 +1,5 @@
 # sola-game-engine TODO list
 
-* improve FixedUpdateGameLoop so it doesn't waste cycles
-* improve ServerGameLoop so it doesn't waste cycles
-
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------

@@ -8,6 +8,8 @@ import technology.sola.engine.event.EventHub;
 import java.util.function.Consumer;
 
 class ServerGameLoop extends GameLoop {
+  private static final float INVERSE_MICROSECONDS = 1 / 1e9f;
+
   ServerGameLoop(EventHub eventHub, Consumer<Float> updateMethod, int targetUpdatesPerSecond) {
     super(eventHub, updateMethod, null, targetUpdatesPerSecond, false);
   }
@@ -16,7 +18,7 @@ class ServerGameLoop extends GameLoop {
   protected void startLoop() {
     while (isRunning()) {
       long loopStart = System.nanoTime();
-      float delta = (loopStart - previousLoopStartNanos) / 1e9f;
+      float delta = (loopStart - previousLoopStartNanos) * INVERSE_MICROSECONDS;
       boolean hasUpdate = false;
 
       previousLoopStartNanos = loopStart;
