@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class QuadTreeCollisionDetectionBroadPhase implements CollisionDetectionBroadPhase {
   private final Rectangle screenBounds;
-  private QuadTreeNode quadTreeNode;
+  private QuadTreeNode quadTreeNode = new QuadTreeNode(new Rectangle(new Vector2D(0, 0), new Vector2D(1, 1)));
   private final int maxDepth;
   private final int maxEntitiesPerNode;
 
@@ -107,9 +107,7 @@ public class QuadTreeCollisionDetectionBroadPhase implements CollisionDetectionB
 
   @Override
   public void renderDebug(Renderer renderer, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
-    if (quadTreeNode != null) {
-      renderDebugNode(renderer, quadTreeNode, cameraScaleTransform, cameraTranslationTransform);
-    }
+    renderDebugNode(renderer, quadTreeNode, cameraScaleTransform, cameraTranslationTransform);
   }
 
   private void renderDebugNode(Renderer renderer, QuadTreeNode node, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
