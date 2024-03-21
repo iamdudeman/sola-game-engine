@@ -1,9 +1,11 @@
 package technology.sola.engine.examples.server;
 
 import technology.sola.ecs.EcsSystem;
+import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaPhysics;
+import technology.sola.engine.event.Event;
 import technology.sola.engine.examples.common.networking.LevelBuilder;
 import technology.sola.engine.examples.common.networking.NetworkingExample;
 import technology.sola.engine.examples.common.networking.PlayerComponent;
@@ -15,7 +17,10 @@ import technology.sola.engine.server.ClientConnection;
 import technology.sola.engine.server.SolaServer;
 import technology.sola.engine.server.rest.SolaResponse;
 import technology.sola.json.JsonObject;
+import technology.sola.math.linear.Vector2D;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -48,6 +53,7 @@ public class ServerMain {
 
       solaEcs.addSystems(solaPhysics.getSystems());
       solaEcs.addSystem(new ClientUpdateSystem());
+      solaEcs.addSystem(new PlayerMovementSystem());
       solaEcs.setWorld(LevelBuilder.createWorld(NetworkingExample.MAX_PLAYERS));
     }
 
@@ -69,8 +75,6 @@ public class ServerMain {
     @Override
     public void onConnectionEstablished(ClientConnection clientConnection) {
       message(clientConnection.getClientId(), new UpdateTimeMessage(System.currentTimeMillis()));
-      message(clientConnection.getClientId(), new AssignPlayerIdMessage(clientConnection.getClientId()));
-      broadcast(new PlayerAddedMessage(clientConnection.getClientId()));
 
       solaEcs.getWorld().createEntity(
         String.valueOf(clientConnection.getClientId()),
@@ -88,6 +92,7 @@ public class ServerMain {
 
       solaEcs.getWorld()
         .findEntityByUniqueId(String.valueOf(clientConnection.getClientId()))
+        .setDisabled(true)
         .destroy();
 
       broadcast(new PlayerRemovedMessage(clientConnection.getClientId()), clientConnection.getClientId());
@@ -99,10 +104,57 @@ public class ServerMain {
 
       switch (messageType) {
         case REQUEST_TIME -> message(clientConnection.getClientId(), new UpdateTimeMessage(System.currentTimeMillis()));
-        case PLAYER_UPDATE -> broadcast(socketMessage, clientConnection.getClientId());
+        case PLAYER_MOVE -> {
+          PlayerMoveMessage playerMoveMessage = PlayerMoveMessage.parse(socketMessage);
+
+          eventHub.emit(new PlayerMoveEvent(String.valueOf(clientConnection.getClientId()), playerMoveMessage.getDirection()));
+        }
       }
 
       return true;
+    }
+
+    private record PlayerMoveEvent(String playerId, int direction) implements Event {
+    }
+
+    private class PlayerMovementSystem extends EcsSystem {
+      private final Map<String, Integer> directionMap = new HashMap<>();
+
+      private PlayerMovementSystem() {
+        eventHub.add(PlayerMoveEvent.class, event -> {
+          directionMap.put(event.playerId, event.direction);
+        });
+      }
+
+      @Override
+      public void update(World world, float v) {
+        var iter = directionMap.entrySet().iterator();
+
+        while (iter.hasNext()) {
+          var entry = iter.next();
+          Entity entity = world.findEntityByUniqueId(entry.getKey());
+
+          if (entity != null) {
+            DynamicBodyComponent dynamicBodyComponent = entity.getComponent(DynamicBodyComponent.class);
+            Vector2D velocity = dynamicBodyComponent.getVelocity();
+
+            if (entry.getValue() == 0) {
+              dynamicBodyComponent.setVelocity(new Vector2D(0, velocity.y()));
+            } else if (entry.getValue() == 1) {
+              dynamicBodyComponent.setVelocity(new Vector2D(-25, velocity.y()));
+            } else if (entry.getValue() == 2) {
+              dynamicBodyComponent.setVelocity(new Vector2D(25, velocity.y()));
+            }
+          }
+
+          iter.remove();
+        }
+      }
+
+      @Override
+      public int getOrder() {
+        return -999;
+      }
     }
 
     private class ClientUpdateSystem extends EcsSystem {

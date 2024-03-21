@@ -14,19 +14,11 @@ public enum MessageType {
    */
   REQUEST_TIME,
   /**
-   * Message to assign a player their id.
-   */
-  ASSIGN_PLAYER_ID,
-  /**
-   * Message to notify a player was added.
-   */
-  @Deprecated
-  PLAYER_ADDED,
-  /**
    * Message to notify a player was removed.
    */
   PLAYER_REMOVED,
   PLAYER_POSITION_UPDATES,
+  PLAYER_MOVE,
   /**
    * Message to notify a player's position changed.
    */
