@@ -6,13 +6,7 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaWithDefaults;
-import technology.sola.engine.examples.common.networking.messages.AssignPlayerIdMessage;
-import technology.sola.engine.examples.common.networking.messages.MessageType;
-import technology.sola.engine.examples.common.networking.messages.PlayerAddedMessage;
-import technology.sola.engine.examples.common.networking.messages.PlayerRemovedMessage;
-import technology.sola.engine.examples.common.networking.messages.PlayerUpdateMessage;
-import technology.sola.engine.examples.common.networking.messages.RequestTimeMessage;
-import technology.sola.engine.examples.common.networking.messages.UpdateTimeMessage;
+import technology.sola.engine.examples.common.networking.messages.*;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.gui.GuiElement;
@@ -33,7 +27,10 @@ import java.util.List;
  * that examples:server:ServerMain is running.
  */
 public class NetworkingExample extends SolaWithDefaults {
-  private long clientPlayerId = -1;
+  /**
+   * The maximum number of players that can connect.
+   */
+  public static final int MAX_PLAYERS = 10;
 
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
@@ -46,7 +43,7 @@ public class NetworkingExample extends SolaWithDefaults {
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     defaultsConfigurator.useGui().useGraphics().useDebug();
 
-    solaEcs.setWorld(new World(50));
+    solaEcs.setWorld(LevelBuilder.createWorld(MAX_PLAYERS));
     solaEcs.addSystems(new NetworkQueueSystem(), new PlayerSystem());
 
     var rootElement = buildGui();
@@ -58,31 +55,19 @@ public class NetworkingExample extends SolaWithDefaults {
   }
 
   private class PlayerSystem extends EcsSystem {
-    private static final int MOVEMENT = 10;
-
     @Override
     public void update(World world, float deltaTime) {
-      Entity clientPlayerEntity = world.findEntityByUniqueId(String.valueOf(clientPlayerId));
+      int direction = 0;
 
-      if (clientPlayerEntity != null) {
-        TransformComponent transformComponent = clientPlayerEntity.getComponent(TransformComponent.class);
+      if (keyboardInput.isKeyHeld(Key.A)) {
+        direction = 1;
+      }
+      if (keyboardInput.isKeyHeld(Key.D)) {
+        direction = 2;
+      }
 
-        if (keyboardInput.isKeyHeld(Key.W)) {
-          transformComponent.setY(transformComponent.getY() - MOVEMENT);
-        }
-        if (keyboardInput.isKeyHeld(Key.S)) {
-          transformComponent.setY(transformComponent.getY() + MOVEMENT);
-        }
-        if (keyboardInput.isKeyHeld(Key.A)) {
-          transformComponent.setX(transformComponent.getX() - MOVEMENT);
-        }
-        if (keyboardInput.isKeyHeld(Key.D)) {
-          transformComponent.setX(transformComponent.getX() + MOVEMENT);
-        }
-
-        if (platform.getSocketClient().isConnected()) {
-          platform.getSocketClient().sendMessage(new PlayerUpdateMessage(clientPlayerId, transformComponent.getTranslate()));
-        }
+      if (platform.getSocketClient().isConnected()) {
+        platform.getSocketClient().sendMessage(new PlayerMoveMessage(direction));
       }
     }
   }
@@ -90,7 +75,7 @@ public class NetworkingExample extends SolaWithDefaults {
   private class NetworkQueueSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
-      while (!platform.getSocketClient().getNetworkQueue().isEmpty()) {
+      while (!platform.getSocketClient().getNetworkQueue().isEmpty() && platform.getSocketClient().isConnected()) {
         SocketMessage socketMessage = platform.getSocketClient().getNetworkQueue().removeFirst();
         MessageType messageType = MessageType.values()[socketMessage.getType()];
 
@@ -103,20 +88,6 @@ public class NetworkingExample extends SolaWithDefaults {
               .get(0)
               .setText(new Date(updateTimeMessage.getTime()).toString());
           }
-          case ASSIGN_PLAYER_ID -> {
-            AssignPlayerIdMessage assignPlayerIdMessage = AssignPlayerIdMessage.parse(socketMessage);
-
-            clientPlayerId = assignPlayerIdMessage.getClientPlayerId();
-          }
-          case PLAYER_ADDED -> {
-            PlayerAddedMessage playerAddedMessage = PlayerAddedMessage.parse(socketMessage);
-
-            solaEcs.getWorld().createEntity(
-              String.valueOf(playerAddedMessage.getClientPlayerId()), "player-" + playerAddedMessage.getClientPlayerId(),
-              new TransformComponent(400, 400, 25),
-              new CircleRendererComponent(Color.WHITE, true)
-            );
-          }
           case PLAYER_REMOVED -> {
             PlayerRemovedMessage playerRemovedMessage = PlayerRemovedMessage.parse(socketMessage);
             Entity playerEntity = solaEcs.getWorld().findEntityByUniqueId(String.valueOf(playerRemovedMessage.getClientPlayerId()));
@@ -125,20 +96,24 @@ public class NetworkingExample extends SolaWithDefaults {
               playerEntity.destroy();
             }
           }
-          case PLAYER_UPDATE -> {
-            PlayerUpdateMessage playerUpdateMessage = PlayerUpdateMessage.parse(socketMessage);
-            String playerId = String.valueOf(playerUpdateMessage.getClientPlayerId());
-            Entity playerEntity = solaEcs.getWorld().findEntityByUniqueId(playerId);
+          case PLAYER_POSITION_UPDATES -> {
+            PlayerPositionUpdatesMessage playerPositionUpdatesMessage = PlayerPositionUpdatesMessage.parse(socketMessage);
 
-            if (playerEntity == null) {
-              solaEcs.getWorld().createEntity(
-                playerId, "player-" + playerId,
-                new TransformComponent(playerUpdateMessage.getPosition().x(), playerUpdateMessage.getPosition().y(), 25),
-                new CircleRendererComponent(Color.WHITE, true)
-              );
-            } else {
-              playerEntity.getComponent(TransformComponent.class).setTranslate(playerUpdateMessage.getPosition());
-            }
+            playerPositionUpdatesMessage.getPlayerPositions().forEach(playerPosition -> {
+              Entity entity = solaEcs.getWorld().findEntityByUniqueId(playerPosition.id());
+
+              if (entity == null) {
+                solaEcs.getWorld().createEntity(
+                  String.valueOf(playerPosition.id()),
+                  "player-" + playerPosition.id(),
+                  new TransformComponent(playerPosition.translate().x(), playerPosition.translate().y(), 25),
+                  new CircleRendererComponent(Color.WHITE, true),
+                  new PlayerComponent()
+                );
+              } else {
+                entity.getComponent(TransformComponent.class).setTranslate(playerPosition.translate());
+              }
+            });
           }
         }
       }
@@ -179,11 +154,11 @@ public class NetworkingExample extends SolaWithDefaults {
       buildButton("disconnectButton", "Disconnect", () -> {
         platform.getSocketClient().disconnect();
 
+        solaEcs.setWorld(LevelBuilder.createWorld(MAX_PLAYERS));
+
         sectionGuiElement.findElementById("connectButton", ButtonGuiElement.class).setDisabled(false);
         sectionGuiElement.findElementById("disconnectButton", ButtonGuiElement.class).setDisabled(true);
         sectionGuiElement.findElementById("updateTimeButton", ButtonGuiElement.class).setDisabled(true);
-
-        solaEcs.setWorld(new World(50));
       }, true)
     );
 

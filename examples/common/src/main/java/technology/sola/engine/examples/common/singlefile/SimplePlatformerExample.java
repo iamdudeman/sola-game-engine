@@ -159,7 +159,7 @@ public class SimplePlatformerExample extends SolaWithDefaults {
         .getEntries()
         .forEach(view -> {
           MovingPlatformComponent movingPlatformComponent = view.c1();
-          DynamicBodyComponent velocityComponent = view.c2();
+          DynamicBodyComponent dynamicBodyComponent = view.c2();
 
           movingPlatformComponent.counter += deltaTime;
 
@@ -168,7 +168,7 @@ public class SimplePlatformerExample extends SolaWithDefaults {
             movingPlatformComponent.isGoingUp = !movingPlatformComponent.isGoingUp;
           }
 
-          velocityComponent.setVelocity(new Vector2D(0, movingPlatformComponent.isGoingUp ? -25 : 25));
+          dynamicBodyComponent.setVelocity(new Vector2D(0, movingPlatformComponent.isGoingUp ? -25 : 25));
         });
     }
 
