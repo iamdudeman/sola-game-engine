@@ -8,19 +8,18 @@ import technology.sola.engine.event.EventHub;
 import java.util.function.Consumer;
 
 class ServerGameLoop extends GameLoop {
-  private final float timeBetweenUpdates;
+  private static final float INVERSE_MICROSECONDS = 1 / 1e9f;
 
   ServerGameLoop(EventHub eventHub, Consumer<Float> updateMethod, int targetUpdatesPerSecond) {
     super(eventHub, updateMethod, null, targetUpdatesPerSecond, false);
-    this.timeBetweenUpdates = 1000000000f / targetUpdatesPerSecond;
   }
 
   @Override
   protected void startLoop() {
     while (isRunning()) {
       long loopStart = System.nanoTime();
-      float delta = (loopStart - previousLoopStartNanos) / 1e9f;
-      int updatesThisFrame = 0;
+      float delta = (loopStart - previousLoopStartNanos) * INVERSE_MICROSECONDS;
+      boolean hasUpdate = false;
 
       previousLoopStartNanos = loopStart;
       updateCatchUpAccumulator += delta;
@@ -30,28 +29,21 @@ class ServerGameLoop extends GameLoop {
         fpsTracker.tickUpdate();
 
         updateCatchUpAccumulator -= deltaTime;
-        updatesThisFrame++;
+        hasUpdate = true;
       }
 
-      if (updatesThisFrame <= 1) {
-        shortRest(loopStart);
+      if (!hasUpdate) {
+        shortRest();
       }
     }
 
     eventHub.emit(new GameLoopEvent(GameLoopState.STOPPED));
   }
 
-  private void shortRest(long loopStartTime) {
-    double endTime = loopStartTime + timeBetweenUpdates;
-
-    while (System.nanoTime() < endTime) {
-      Thread.yield();
-
-      try {
-        Thread.sleep(1);
-      } catch (InterruptedException ex) {
-        break;
-      }
+  private void shortRest() {
+    try {
+      Thread.sleep(1);
+    } catch (InterruptedException ignored) {
     }
   }
 }

@@ -7,19 +7,18 @@ import technology.sola.engine.event.EventHub;
 import java.util.function.Consumer;
 
 class FixedUpdateGameLoop extends GameLoop {
-  private final float timeBetweenUpdates;
+  private static final float INVERSE_MICROSECONDS = 1 / 1e9f;
 
   FixedUpdateGameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond) {
     super(eventHub, updateMethod, renderMethod, targetUpdatesPerSecond);
-    this.timeBetweenUpdates = 1_000_000_000f / targetUpdatesPerSecond;
   }
 
   @Override
   protected void startLoop() {
     while (isRunning()) {
       long loopStart = System.nanoTime();
-      float delta = (loopStart - previousLoopStartNanos) / 1e9f;
-      int updatesThisFrame = 0;
+      float delta = (loopStart - previousLoopStartNanos) * INVERSE_MICROSECONDS;
+      boolean hasUpdate = false;
 
       previousLoopStartNanos = loopStart;
       updateCatchUpAccumulator += delta;
@@ -29,31 +28,24 @@ class FixedUpdateGameLoop extends GameLoop {
         fpsTracker.tickUpdate();
 
         updateCatchUpAccumulator -= deltaTime;
-        updatesThisFrame++;
+        hasUpdate = true;
       }
 
-      renderMethod.run();
-      fpsTracker.tickFrames();
-
-      if (updatesThisFrame <= 1) {
-        shortRest(loopStart);
+      if (hasUpdate) {
+        renderMethod.run();
+        fpsTracker.tickFrames();
+      } else {
+        shortRest();
       }
     }
 
     eventHub.emit(new GameLoopEvent(GameLoopState.STOPPED));
   }
 
-  private void shortRest(long loopStartTime) {
-    double endTime = loopStartTime + timeBetweenUpdates;
-
-    while (System.nanoTime() < endTime) {
-      Thread.yield();
-
-      try {
-        Thread.sleep(1);
-      } catch (InterruptedException ex) {
-        break;
-      }
+  private void shortRest() {
+    try {
+      Thread.sleep(1);
+    } catch (InterruptedException ignored) {
     }
   }
 }

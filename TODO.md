@@ -10,7 +10,6 @@
 
 ## TODO List
 
-* improve FixedUpdateGameLoop so it doesn't waste renders
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
 * Gui performance improvements

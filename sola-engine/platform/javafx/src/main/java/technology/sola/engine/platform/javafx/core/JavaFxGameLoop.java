@@ -12,6 +12,8 @@ import java.util.function.Consumer;
  * A {@link GameLoop} implementation for JavaFX.
  */
 public class JavaFxGameLoop extends GameLoop {
+  private static final float INVERSE_MICROSECONDS = 1 / 1e9f;
+
   /**
    * Creates a JavaFxGameLoop with desired update and render logic at target updates per second.
    *
@@ -38,7 +40,7 @@ public class JavaFxGameLoop extends GameLoop {
         return;
       }
 
-      float delta = (newNanoTime - previousLoopStartNanos) / 1e9f;
+      float delta = (newNanoTime - previousLoopStartNanos) * INVERSE_MICROSECONDS;
 
       previousLoopStartNanos = newNanoTime;
       updateCatchUpAccumulator += delta;

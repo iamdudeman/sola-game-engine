@@ -9,6 +9,7 @@ import technology.sola.engine.physics.utils.SpatialHashMap;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
  * {@link SpatialHashMap} internally.
  */
 public class SpatialHashMapCollisionDetectionBroadPhase implements CollisionDetectionBroadPhase {
-  private SpatialHashMap spatialHashMap;
+  private SpatialHashMap spatialHashMap = new SpatialHashMap(new ArrayList<>(), 1);
   private final Integer spatialHashMapCellSize;
 
   /**
@@ -47,10 +48,6 @@ public class SpatialHashMapCollisionDetectionBroadPhase implements CollisionDete
 
   @Override
   public void renderDebug(Renderer renderer, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
-    if (spatialHashMap == null) {
-      return;
-    }
-
     int cellSize = spatialHashMap.getCellSize();
 
     for (SpatialHashMap.BucketId bucketId : spatialHashMap.getBucketIds()) {

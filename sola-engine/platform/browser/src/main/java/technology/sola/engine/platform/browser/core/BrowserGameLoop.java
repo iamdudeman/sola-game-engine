@@ -12,6 +12,8 @@ import java.util.function.Consumer;
  * A {@link GameLoop} implementation for web browsers.
  */
 public class BrowserGameLoop extends GameLoop implements JsUtils.Function {
+  private static final float INVERSE_MICROSECONDS = 1 / 1e9f;
+
   /**
    * Creates a new BrowserGameLoop instance. This currently caps target updates per second to 30.
    *
@@ -39,7 +41,7 @@ public class BrowserGameLoop extends GameLoop implements JsUtils.Function {
       }
 
       long loopStart = System.nanoTime();
-      float delta = (loopStart - previousLoopStartNanos) / 1e9f;
+      float delta = (loopStart - previousLoopStartNanos) * INVERSE_MICROSECONDS;
 
       previousLoopStartNanos = loopStart;
       updateCatchUpAccumulator += delta;
