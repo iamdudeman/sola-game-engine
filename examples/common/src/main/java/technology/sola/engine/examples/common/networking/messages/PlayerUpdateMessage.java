@@ -6,6 +6,7 @@ import technology.sola.math.linear.Vector2D;
 /**
  * {@link SocketMessage} for notifying that a player's position was updated.
  */
+@Deprecated
 public class PlayerUpdateMessage extends SocketMessage {
   private final long clientPlayerId;
   private final Vector2D position;

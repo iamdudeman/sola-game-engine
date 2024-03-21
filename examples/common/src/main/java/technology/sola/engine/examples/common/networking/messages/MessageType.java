@@ -20,11 +20,13 @@ public enum MessageType {
   /**
    * Message to notify a player was added.
    */
+  @Deprecated
   PLAYER_ADDED,
   /**
    * Message to notify a player was removed.
    */
   PLAYER_REMOVED,
+  PLAYER_POSITION_UPDATES,
   /**
    * Message to notify a player's position changed.
    */

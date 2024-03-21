@@ -1,20 +1,29 @@
 package technology.sola.engine.examples.server;
 
-import technology.sola.engine.examples.common.networking.messages.AssignPlayerIdMessage;
-import technology.sola.engine.examples.common.networking.messages.MessageType;
-import technology.sola.engine.examples.common.networking.messages.PlayerAddedMessage;
-import technology.sola.engine.examples.common.networking.messages.PlayerRemovedMessage;
-import technology.sola.engine.examples.common.networking.messages.UpdateTimeMessage;
+import technology.sola.ecs.EcsSystem;
+import technology.sola.ecs.World;
+import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.defaults.SolaPhysics;
+import technology.sola.engine.examples.common.networking.LevelBuilder;
+import technology.sola.engine.examples.common.networking.NetworkingExample;
+import technology.sola.engine.examples.common.networking.PlayerComponent;
+import technology.sola.engine.examples.common.networking.messages.*;
 import technology.sola.engine.networking.socket.SocketMessage;
+import technology.sola.engine.physics.component.ColliderComponent;
+import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.server.ClientConnection;
 import technology.sola.engine.server.SolaServer;
 import technology.sola.engine.server.rest.SolaResponse;
 import technology.sola.json.JsonObject;
 
+import java.util.stream.Collectors;
+
 /**
  * Runs the example server listening on port 60000.
  */
 public class ServerMain {
+  private static final int MAX_PLAYERS = 10;
+
   /**
    * Entry point for Server example.
    *
@@ -33,6 +42,88 @@ public class ServerMain {
 
     @Override
     public void initialize() {
+      registerRestRoutes();
+
+      SolaPhysics solaPhysics = new SolaPhysics(eventHub);
+
+      solaEcs.addSystems(solaPhysics.getSystems());
+      solaEcs.addSystem(new ClientUpdateSystem());
+      solaEcs.setWorld(LevelBuilder.createWorld(NetworkingExample.MAX_PLAYERS));
+    }
+
+    @Override
+    public int getRestPort() {
+      return 1381;
+    }
+
+    @Override
+    public int getSocketPort() {
+      return 1380;
+    }
+
+    @Override
+    public boolean isAllowedConnection(ClientConnection clientConnection) {
+      return getClientConnectionMap().size() < MAX_PLAYERS;
+    }
+
+    @Override
+    public void onConnectionEstablished(ClientConnection clientConnection) {
+      message(clientConnection.getClientId(), new UpdateTimeMessage(System.currentTimeMillis()));
+      message(clientConnection.getClientId(), new AssignPlayerIdMessage(clientConnection.getClientId()));
+      broadcast(new PlayerAddedMessage(clientConnection.getClientId()));
+
+      solaEcs.getWorld().createEntity(
+        String.valueOf(clientConnection.getClientId()),
+        "player-" + clientConnection.getClientId(),
+        new TransformComponent(400, 400, 25),
+        new DynamicBodyComponent(),
+        ColliderComponent.circle(),
+        new PlayerComponent()
+      );
+    }
+
+    @Override
+    public void onDisconnect(ClientConnection clientConnection) {
+      System.out.println("Disconnected - " + clientConnection.getClientId());
+
+      solaEcs.getWorld()
+        .findEntityByUniqueId(String.valueOf(clientConnection.getClientId()))
+        .destroy();
+
+      broadcast(new PlayerRemovedMessage(clientConnection.getClientId()), clientConnection.getClientId());
+    }
+
+    @Override
+    public boolean onMessage(ClientConnection clientConnection, SocketMessage socketMessage) {
+      MessageType messageType = MessageType.values()[socketMessage.getType()];
+
+      switch (messageType) {
+        case REQUEST_TIME -> message(clientConnection.getClientId(), new UpdateTimeMessage(System.currentTimeMillis()));
+        case PLAYER_UPDATE -> broadcast(socketMessage, clientConnection.getClientId());
+      }
+
+      return true;
+    }
+
+    private class ClientUpdateSystem extends EcsSystem {
+      @Override
+      public void update(World world, float v) {
+        broadcast(new PlayerPositionUpdatesMessage(
+          world.createView().of(TransformComponent.class, PlayerComponent.class)
+            .getEntries()
+            .stream()
+            .map(entry -> new PlayerPositionUpdatesMessage.PlayerPosition(entry.entity().getUniqueId(), entry.c1().getTranslate()))
+            .collect(Collectors.toList())
+        ));
+      }
+
+      @Override
+      public int getOrder() {
+        return 999;
+      }
+    }
+
+    private void registerRestRoutes() {
       solaRouter.get( "/", solaRequest -> new SolaResponse(200, new JsonObject()));
 
       solaRouter.get("/test", solaRequest -> {
@@ -60,47 +151,6 @@ public class ServerMain {
       });
 
       solaRouter.post("/test", solaRequest -> new SolaResponse(200, solaRequest.body()));
-    }
-
-    @Override
-    public int getRestPort() {
-      return 1381;
-    }
-
-    @Override
-    public int getSocketPort() {
-      return 1380;
-    }
-
-    @Override
-    public boolean isAllowedConnection(ClientConnection clientConnection) {
-      return true;
-    }
-
-    @Override
-    public void onConnectionEstablished(ClientConnection clientConnection) {
-      message(clientConnection.getClientId(), new UpdateTimeMessage(System.currentTimeMillis()));
-      message(clientConnection.getClientId(), new AssignPlayerIdMessage(clientConnection.getClientId()));
-      broadcast(new PlayerAddedMessage(clientConnection.getClientId()));
-    }
-
-    @Override
-    public void onDisconnect(ClientConnection clientConnection) {
-      System.out.println("Disconnected - " + clientConnection.getClientId());
-
-      broadcast(new PlayerRemovedMessage(clientConnection.getClientId()), clientConnection.getClientId());
-    }
-
-    @Override
-    public boolean onMessage(ClientConnection clientConnection, SocketMessage socketMessage) {
-      MessageType messageType = MessageType.values()[socketMessage.getType()];
-
-      switch (messageType) {
-        case REQUEST_TIME -> message(clientConnection.getClientId(), new UpdateTimeMessage(System.currentTimeMillis()));
-        case PLAYER_UPDATE -> broadcast(socketMessage, clientConnection.getClientId());
-      }
-
-      return true;
     }
   }
 }
