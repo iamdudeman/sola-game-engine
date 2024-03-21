@@ -27,6 +27,9 @@ import java.util.List;
  * that examples:server:ServerMain is running.
  */
 public class NetworkingExample extends SolaWithDefaults {
+  /**
+   * The maximum number of players that can connect.
+   */
   public static final int MAX_PLAYERS = 10;
 
   /**

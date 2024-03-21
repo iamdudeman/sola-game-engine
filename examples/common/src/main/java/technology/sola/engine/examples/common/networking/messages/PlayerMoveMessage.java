@@ -1,12 +1,15 @@
 package technology.sola.engine.examples.common.networking.messages;
 
 import technology.sola.engine.networking.socket.SocketMessage;
-import technology.sola.math.linear.Vector2D;
 
+/**
+ * PlayerMoveMessage is a {@link SocketMessage} for telling the server where the player desired to move.
+ */
 public class PlayerMoveMessage extends SocketMessage {
   private final int direction;
 
   /**
+   * Creates a {@link SocketMessage} telling the server where the player wants to move.
    *
    * @param direction STOP - 0, LEFT - 1, RIGHT - 2
    */
@@ -25,6 +28,11 @@ public class PlayerMoveMessage extends SocketMessage {
     return new PlayerMoveMessage(Integer.parseInt(socketMessage.getBody()));
   }
 
+  /**
+   * The direction the player is moving in.
+   *
+   * @return STOP - 0, LEFT - 1, RIGHT - 2
+   */
   public int getDirection() {
     return direction;
   }

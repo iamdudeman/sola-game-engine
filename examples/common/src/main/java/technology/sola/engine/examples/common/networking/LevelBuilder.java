@@ -6,7 +6,16 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
 
+/**
+ * LevelBuilder contains utilities for building a {@link World} that both server and client can use.
+ */
 public class LevelBuilder {
+  /**
+   * Creates the {@link World} for client and server to use.
+   *
+   * @param maxPlayers the maximum number of players that can be in the world
+   * @return the world
+   */
   public static World createWorld(int maxPlayers) {
     World world = new World(maxPlayers + 1);
 
