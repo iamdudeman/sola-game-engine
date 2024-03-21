@@ -12,23 +12,6 @@
 
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
-* Gui performance improvements
-    * when should layout be invalidated (can partial invalidations happen for children/parent)
-    * consider splitting layout and paint styles to prevent extra calculations
-* Rendering
-    * Ability to change line width when drawing
-    * Add a way to do gradients?
-        * maybe just linear at first?
-        * maybe just a convenience method for generating gradient SolaImages?
-* REST client + server
-    * ability to send and process Authorization header
-* Gui json features
-    * consider an event map of some sort for when loading gui documents
-        * could also have an "event id -> event function" map that can be used as part of gui doc loading
-        * elements could then add event listeners from this map
-        * ie. (`mousePress` -> `doSomething`)
-    * implement "Style sheet" JSON concept
-        * gui json documents can reference these for use
 * Figure out how to handle TouchInput (probably at the same time as AndroidPlatform implementation)
     * Primarily for browser but also could be supported in JavaFX
     * touchstart and touchend all hard coded to MouseButton.Primary currently
@@ -38,9 +21,17 @@
             * Switch JsMouseUtils to mouse events instead of pointer events
 * Android Platform
     * Implement
-* Unit Testing
-    * Add lots of missing tests :)
 * Investigate possible Steam CloudSave integration
+* Rendering
+    * Ability to change line width when drawing
+    * Add a way to do gradients?
+        * maybe just linear at first?
+        * maybe just a convenience method for generating gradient SolaImages?
+* Gui performance improvements
+    * when should layout be invalidated (can partial invalidations happen for children/parent)
+    * consider splitting layout and paint styles to prevent extra calculations
+* REST client + server
+    * ability to send and process Authorization header
 * Lighting
     * implement more light types other than just point lights
 * Particle System
@@ -48,6 +39,13 @@
     * consider some sort of "swaying" for non-linear particles
     * consider ability to spawn particles in a radius away from center
         * probably want the ability to make particles go to and from center for this
+* Gui json features
+    * consider an event map of some sort for when loading gui documents
+        * could also have an "event id -> event function" map that can be used as part of gui doc loading
+        * elements could then add event listeners from this map
+        * ie. (`mousePress` -> `doSomething`)
+    * implement "Style sheet" JSON concept
+        * gui json documents can reference these for use
 * Consider adding rotation to TransformComponent
     * Would need to update rendering stuff
     * Would need to update physics stuff
