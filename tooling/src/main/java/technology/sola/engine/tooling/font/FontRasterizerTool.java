@@ -25,7 +25,6 @@ public class FontRasterizerTool implements Tool {
    */
   public static final String DEFAULT_CHARACTERS = "abcdefghijklmnopqrstuvwxyz{|}~ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`";
   private final File parentDirectory;
-  private final String characters;
 
   /**
    * Creates a FontRasterizerTool using the current directory as the output directory and {@link FontRasterizerTool#DEFAULT_CHARACTERS} characters
@@ -40,18 +39,7 @@ public class FontRasterizerTool implements Tool {
    * @param parentDirectory the directory to output the generated files to
    */
   public FontRasterizerTool(File parentDirectory) {
-    this(parentDirectory, DEFAULT_CHARACTERS);
-  }
-
-  /**
-   * Creates a FontRasterizerTool using desired parentDirectory as output and desired characters included.
-   *
-   * @param parentDirectory the directory to output the generated files to
-   * @param characters      the characters to include in the font assets
-   */
-  public FontRasterizerTool(File parentDirectory, String characters) {
     this.parentDirectory = parentDirectory;
-    this.characters = characters;
   }
 
   @Override
@@ -65,7 +53,8 @@ public class FontRasterizerTool implements Tool {
       *arg1 - Font family ["monospaced", "arial", "times"]
       *arg2 - Font size ["16", "24"]
       arg3  - Font style ["NORMAL", "ITALIC", "BOLD", "BOLD_ITALIC"] defaults to NORMAL
-      """;
+      arg4  - Characters ["abcdefg123"] defaults to %s
+      """.formatted(DEFAULT_CHARACTERS);
   }
 
   @Override
@@ -74,8 +63,9 @@ public class FontRasterizerTool implements Tool {
       String fontFamily = args[0];
       int fontSize = Integer.parseInt(args[1]);
       String fontStyle = args.length > 2 ? args[2].toUpperCase() : "NORMAL";
+      String characters = args.length > 3 ? args[3] : DEFAULT_CHARACTERS;
 
-      String fileCreated = rasterizeFont(fontFamily, fontStyle, fontSize);
+      String fileCreated = rasterizeFont(fontFamily, fontStyle, fontSize, characters);
 
       return "New font info successfully created at [" + fileCreated + "]";
     } else {
@@ -84,19 +74,21 @@ public class FontRasterizerTool implements Tool {
   }
 
   /**
-   * Generates a font info and font image file for the desired font family with a font style and size.
+   * Generates a font info and font image file for the desired font family with a font style and size for desired
+   * characters.
    * See {@link FontListTool} to view what font families are available.
    *
    * @param fontFamily the font family to generate asset for
    * @param fontStyle  the font style [NORMAL, ITALIC, BOLD, BOLD_ITALIC]
    * @param fontSize   the font size
+   * @param characters the characters to rasterize
    * @return the path to the font info file that was generated
    */
-  public String rasterizeFont(String fontFamily, String fontStyle, int fontSize) {
+  public String rasterizeFont(String fontFamily, String fontStyle, int fontSize, String characters) {
     var fontInformation = new FontInformation(fontFamily, FontStyle.valueOf(fontStyle), fontSize);
 
-    try (var fontCanvas = prepareFontCanvas(fontInformation)) {
-      var fontInfo = prepareFontInfo(fontInformation, fontCanvas);
+    try (var fontCanvas = prepareFontCanvas(fontInformation, characters)) {
+      var fontInfo = prepareFontInfo(fontInformation, fontCanvas, characters);
 
       File fontImageFile = new File(parentDirectory, fontInformation.getFontFileName());
       File fontInfoFile = new File(parentDirectory, fontInformation.getFontInfoFileName());
@@ -111,7 +103,21 @@ public class FontRasterizerTool implements Tool {
     }
   }
 
-  private FontCanvas prepareFontCanvas(FontInformation fontInformation) {
+  /**
+   * Generates a font info and font image file for the desired font family with a font style and size. The characters
+   * rasterized are {@link FontRasterizerTool#DEFAULT_CHARACTERS}.
+   * See {@link FontListTool} to view what font families are available.
+   *
+   * @param fontFamily the font family to generate asset for
+   * @param fontStyle  the font style [NORMAL, ITALIC, BOLD, BOLD_ITALIC]
+   * @param fontSize   the font size
+   * @return the path to the font info file that was generated
+   */
+  public String rasterizeFont(String fontFamily, String fontStyle, int fontSize) {
+    return rasterizeFont(fontFamily, fontStyle, fontSize, DEFAULT_CHARACTERS);
+  }
+
+  private FontCanvas prepareFontCanvas(FontInformation fontInformation, String characters) {
     Rectangle2D fullBounds = fontInformation.getStringBounds(characters);
     int imageWidth = (int) fullBounds.getWidth() / 2;
     int imageHeight = (int) fullBounds.getHeight() * 5;
@@ -119,7 +125,7 @@ public class FontRasterizerTool implements Tool {
     return new FontCanvas(fontInformation, imageWidth, imageHeight);
   }
 
-  private FontInfo prepareFontInfo(FontInformation fontInformation, FontCanvas fontCanvas) {
+  private FontInfo prepareFontInfo(FontInformation fontInformation, FontCanvas fontCanvas, String characters) {
     List<FontGlyph> fontGlyphsWithPositions = fontCanvas.drawFontGlyphs(characters);
 
     return new FontInfo(
