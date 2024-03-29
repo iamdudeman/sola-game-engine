@@ -35,7 +35,7 @@ public class PongGame extends SolaWithDefaults {
 
     solaPhysics.getGravitySystem().setGravityConstant(0);
 
-    solaEcs.addSystem(new PlayerSystem());
+    solaEcs.addSystems(new PlayerSystem(), new ComputerSystem());
 
     solaEcs.setWorld(buildWorld());
 
@@ -91,9 +91,8 @@ public class PongGame extends SolaWithDefaults {
   }
 
   private class PlayerSystem extends EcsSystem {
-
     @Override
-    public void update(World world, float v) {
+    public void update(World world, float deltaTime) {
       var playerEntity = world.findEntityByName("player");
       TransformComponent transformComponent = playerEntity.getComponent(TransformComponent.class);
       DynamicBodyComponent dynamicBodyComponent = playerEntity.getComponent(DynamicBodyComponent.class);
@@ -101,6 +100,30 @@ public class PongGame extends SolaWithDefaults {
       if ((keyboardInput.isKeyHeld(Key.W) || keyboardInput.isKeyPressed(Key.W)) && transformComponent.getY() > 0) {
         dynamicBodyComponent.setVelocity(new Vector2D(0, -PADDLE_SPEED));
       } else if ((keyboardInput.isKeyHeld(Key.S) || keyboardInput.isKeyPressed(Key.S)) && transformComponent.getY() < configuration.rendererHeight() - (BALL_SIZE * 6)) {
+        dynamicBodyComponent.setVelocity(new Vector2D(0, PADDLE_SPEED));
+      } else {
+        dynamicBodyComponent.setVelocity(Vector2D.ZERO_VECTOR);
+      }
+    }
+  }
+
+  private class ComputerSystem extends EcsSystem {
+    @Override
+    public void update(World world, float deltaTime) {
+      var computerEntity = world.findEntityByName("computer");
+      var transformComponent = computerEntity.getComponent(TransformComponent.class);
+      var dynamicBodyComponent = computerEntity.getComponent(DynamicBodyComponent.class);
+      var ballEntity = world.findEntityByName("ball");
+      var ballTransform = ballEntity.getComponent(TransformComponent.class);
+      var ballVelocity = ballEntity.getComponent(DynamicBodyComponent.class).getVelocity();
+
+      // todo calculate movement better
+      boolean goUp = transformComponent.getY() - ballTransform.getY() > BALL_SIZE;
+      boolean goDown = ballTransform.getY() - transformComponent.getY() > BALL_SIZE;
+
+      if (goUp && transformComponent.getY() > 0) {
+        dynamicBodyComponent.setVelocity(new Vector2D(0, -PADDLE_SPEED));
+      } else if (goDown && transformComponent.getY() < configuration.rendererHeight() - (BALL_SIZE * 6)) {
         dynamicBodyComponent.setVelocity(new Vector2D(0, PADDLE_SPEED));
       } else {
         dynamicBodyComponent.setVelocity(Vector2D.ZERO_VECTOR);
@@ -140,7 +163,7 @@ public class PongGame extends SolaWithDefaults {
       new RectangleRendererComponent(Color.WHITE, true),
       new DynamicBodyComponent(paddleMaterial, true),
       ColliderComponent.aabb()
-    );
+    ).setName("computer");
 
     // boundaries
     var boundaryMaterial = new Material(1, SPEED_INCREASE, 0);
