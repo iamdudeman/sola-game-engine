@@ -25,4 +25,14 @@ public record Circle(float radius, Vector2D center) {
       throw new IllegalArgumentException("center cannot be null");
     }
   }
+
+  /**
+   * Checks if this Circle contains a point.
+   *
+   * @param point the point to check
+   * @return true if this circle contains the point
+   */
+  public boolean contains(Vector2D point) {
+    return center.subtract(point).magnitudeSq() < radius * radius;
+  }
 }
