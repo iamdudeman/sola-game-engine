@@ -29,14 +29,14 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 /**
- * SimplePlatformerExample is a {@link technology.sola.engine.core.Sola} that demos a simple platformer created with
+ * SimplePlatformerGame is a {@link technology.sola.engine.core.Sola} that demos a simple platformer created with
  * the sola game engine.
  */
-public class SimplePlatformerExample extends SolaWithDefaults {
+public class SimplePlatformerGame extends SolaWithDefaults {
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
-  public SimplePlatformerExample() {
+  public SimplePlatformerGame() {
     super(SolaConfiguration.build("Simple Platformer", 800, 600).withTargetUpdatesPerSecond(30));
   }
 

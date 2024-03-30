@@ -20,17 +20,17 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * CirclePop is a {@link technology.sola.engine.core.Sola} for stress testing rendering for the sola
+ * CirclePop is a {@link technology.sola.engine.core.Sola} little game that also stress tests rendering for the sola
  * game engine.
  */
-public class CirclePop extends SolaWithDefaults {
+public class CirclePopGame extends SolaWithDefaults {
   private final TextGuiElement scoreGuiElement = new TextGuiElement().setText("0");
   private int score = 0;
 
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
-  public CirclePop() {
+  public CirclePopGame() {
     super(SolaConfiguration.build("Circle Pop", 800, 600).withTargetUpdatesPerSecond(30));
   }
 

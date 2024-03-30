@@ -17,6 +17,10 @@ import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.math.linear.Vector2D;
 
+/**
+ * PongGame is a {@link technology.sola.engine.core.Sola} for a simple implementation of Pong using
+ * the sola game engine.
+ */
 public class PongGame extends SolaWithDefaults {
   private static final int PADDLE_SPEED = 200;
   private static final float BALL_SIZE = 10;
@@ -25,6 +29,9 @@ public class PongGame extends SolaWithDefaults {
   private int playerScore = 0;
   private int computerScore = 0;
 
+  /**
+   * Creates an instance of this {@link technology.sola.engine.core.Sola}.
+   */
   public PongGame() {
     super(SolaConfiguration.build("Pong", 858, 525).withTargetUpdatesPerSecond(60));
   }

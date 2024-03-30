@@ -7,10 +7,10 @@ import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.examples.common.features.*;
-import technology.sola.engine.examples.common.games.CirclePop;
+import technology.sola.engine.examples.common.games.CirclePopGame;
 import technology.sola.engine.examples.common.games.PongGame;
-import technology.sola.engine.examples.common.games.SimplePlatformerExample;
-import technology.sola.engine.examples.common.games.minesweeper.MinesweeperExample;
+import technology.sola.engine.examples.common.games.SimplePlatformerGame;
+import technology.sola.engine.examples.common.games.minesweeper.MinesweeperGame;
 import technology.sola.engine.examples.common.features.networking.NetworkingExample;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
@@ -120,10 +120,10 @@ public class ExampleLauncherSola extends SolaWithDefaults {
 
     sectionGuiElement.appendChildren(
       buildSectionTitle("Games"),
-      buildExampleLaunchButton("Circle Pop", CirclePop::new),
-      buildExampleLaunchButton("Minesweeper", MinesweeperExample::new),
+      buildExampleLaunchButton("Circle Pop", CirclePopGame::new),
+      buildExampleLaunchButton("Minesweeper", MinesweeperGame::new),
       buildExampleLaunchButton("Pong", PongGame::new),
-      buildExampleLaunchButton("Simple Platformer", SimplePlatformerExample::new)
+      buildExampleLaunchButton("Simple Platformer", SimplePlatformerGame::new)
     );
 
     return sectionGuiElement;

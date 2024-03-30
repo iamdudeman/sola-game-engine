@@ -18,14 +18,14 @@ import technology.sola.engine.graphics.screen.AspectMode;
 import java.util.List;
 
 /**
- * MinesweeperExample is a {@link technology.sola.engine.core.Sola} for a simple implementation of Minesweeper using
+ * MinesweeperGame is a {@link technology.sola.engine.core.Sola} for a simple implementation of Minesweeper using
  * the sola game engine.
  */
-public class MinesweeperExample extends SolaWithDefaults {
+public class MinesweeperGame extends SolaWithDefaults {
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
-  public MinesweeperExample() {
+  public MinesweeperGame() {
     super(SolaConfiguration.build("Minesweeper", 801, 686).withTargetUpdatesPerSecond(30));
   }
 
