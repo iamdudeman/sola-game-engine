@@ -1,4 +1,4 @@
-package technology.sola.engine.examples.common.networking;
+package technology.sola.engine.examples.common.features.networking;
 
 import technology.sola.ecs.Component;
 

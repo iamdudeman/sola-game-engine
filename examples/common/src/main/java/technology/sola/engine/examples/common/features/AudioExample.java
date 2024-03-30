@@ -1,4 +1,4 @@
-package technology.sola.engine.examples.common.singlefile;
+package technology.sola.engine.examples.common.features;
 
 import technology.sola.engine.assets.BulkAssetLoader;
 import technology.sola.engine.assets.audio.AudioClip;

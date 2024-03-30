@@ -1,4 +1,4 @@
-package technology.sola.engine.examples.common.networking;
+package technology.sola.engine.examples.common.features.networking;
 
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
@@ -6,7 +6,7 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaWithDefaults;
-import technology.sola.engine.examples.common.networking.messages.*;
+import technology.sola.engine.examples.common.features.networking.messages.*;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.gui.GuiElement;

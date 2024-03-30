@@ -1,4 +1,4 @@
-package technology.sola.engine.examples.common.networking.messages;
+package technology.sola.engine.examples.common.features.networking.messages;
 
 import technology.sola.engine.networking.socket.SocketMessage;
 
