@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * StressTestPhysicsExample is a {@link technology.sola.engine.core.Sola} for demoing and stress testing physics for the
+ * PhysicsExample is a {@link technology.sola.engine.core.Sola} for demoing and stress testing physics for the
  * sola game engine.
  *
  * <ul>
@@ -40,7 +40,7 @@ import java.util.Random;
  *   <li>{@link DynamicBodyComponent}</li>
  * </ul>
  */
-public class StressTestPhysicsExample extends SolaWithDefaults {
+public class PhysicsExample extends SolaWithDefaults {
   private static final float CAMERA_SCALE = 1.2f;
   private static final float CIRCLE_RADIUS = 10f;
   private final int objectCount;
@@ -51,7 +51,7 @@ public class StressTestPhysicsExample extends SolaWithDefaults {
    *
    * @param objectCount  the count of physics objects to create
    */
-  public StressTestPhysicsExample(int objectCount) {
+  public PhysicsExample(int objectCount) {
     super(new SolaConfiguration("Stress Test - Physics", 1200, 800));
     this.objectCount = objectCount;
 

@@ -100,8 +100,8 @@ public class ExampleLauncherSola extends SolaWithDefaults {
       buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new),
       buildExampleLaunchButton("Networking", NetworkingExample::new),
       buildExampleLaunchButton("Particle", ParticleExample::new),
+      buildExampleLaunchButton("Physics", () -> new PhysicsExample(1337)),
       buildExampleLaunchButton("Rendering", RenderingExample::new),
-      buildExampleLaunchButton("Stress Test - Physics", () -> new StressTestPhysicsExample(1337)),
       buildExampleLaunchButton("Stress Test - Rendering", StressTestRenderingExample::new)
     );
 
