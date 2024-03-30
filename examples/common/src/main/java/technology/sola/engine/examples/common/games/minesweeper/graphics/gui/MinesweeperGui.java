@@ -1,9 +1,9 @@
-package technology.sola.engine.examples.common.minesweeper.graphics.gui;
+package technology.sola.engine.examples.common.games.minesweeper.graphics.gui;
 
 import technology.sola.engine.event.EventHub;
-import technology.sola.engine.examples.common.minesweeper.event.FlagEvent;
-import technology.sola.engine.examples.common.minesweeper.event.GameOverEvent;
-import technology.sola.engine.examples.common.minesweeper.event.NewGameEvent;
+import technology.sola.engine.examples.common.games.minesweeper.event.FlagEvent;
+import technology.sola.engine.examples.common.games.minesweeper.event.GameOverEvent;
+import technology.sola.engine.examples.common.games.minesweeper.event.NewGameEvent;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextStyles;

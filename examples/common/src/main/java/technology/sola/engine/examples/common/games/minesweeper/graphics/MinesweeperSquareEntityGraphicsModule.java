@@ -1,11 +1,11 @@
-package technology.sola.engine.examples.common.minesweeper.graphics;
+package technology.sola.engine.examples.common.games.minesweeper.graphics;
 
 import technology.sola.ecs.World;
 import technology.sola.ecs.view.View;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.graphics.modules.SolaEntityGraphicsModule;
-import technology.sola.engine.examples.common.minesweeper.components.MinesweeperSquareComponent;
+import technology.sola.engine.examples.common.games.minesweeper.components.MinesweeperSquareComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
 

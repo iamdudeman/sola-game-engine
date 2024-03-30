@@ -1,14 +1,14 @@
-package technology.sola.engine.examples.common.minesweeper;
+package technology.sola.engine.examples.common.games.minesweeper;
 
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
-import technology.sola.engine.examples.common.minesweeper.event.NewGameEvent;
-import technology.sola.engine.examples.common.minesweeper.graphics.MinesweeperSquareEntityGraphicsModule;
-import technology.sola.engine.examples.common.minesweeper.graphics.gui.MinesweeperGui;
-import technology.sola.engine.examples.common.minesweeper.system.GameOverSystem;
-import technology.sola.engine.examples.common.minesweeper.system.MinefieldSystem;
-import technology.sola.engine.examples.common.minesweeper.system.PlayerInputSystem;
+import technology.sola.engine.examples.common.games.minesweeper.event.NewGameEvent;
+import technology.sola.engine.examples.common.games.minesweeper.graphics.MinesweeperSquareEntityGraphicsModule;
+import technology.sola.engine.examples.common.games.minesweeper.graphics.gui.MinesweeperGui;
+import technology.sola.engine.examples.common.games.minesweeper.system.GameOverSystem;
+import technology.sola.engine.examples.common.games.minesweeper.system.MinefieldSystem;
+import technology.sola.engine.examples.common.games.minesweeper.system.PlayerInputSystem;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;

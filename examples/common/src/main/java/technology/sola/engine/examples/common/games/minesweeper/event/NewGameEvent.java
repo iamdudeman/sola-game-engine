@@ -1,4 +1,4 @@
-package technology.sola.engine.examples.common.minesweeper.event;
+package technology.sola.engine.examples.common.games.minesweeper.event;
 
 import technology.sola.engine.event.Event;
 

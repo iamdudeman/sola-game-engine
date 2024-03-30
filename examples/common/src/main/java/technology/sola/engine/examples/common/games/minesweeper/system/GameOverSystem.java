@@ -1,11 +1,11 @@
-package technology.sola.engine.examples.common.minesweeper.system;
+package technology.sola.engine.examples.common.games.minesweeper.system;
 
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
-import technology.sola.engine.examples.common.minesweeper.components.MinesweeperSquareComponent;
-import technology.sola.engine.examples.common.minesweeper.event.GameOverEvent;
+import technology.sola.engine.examples.common.games.minesweeper.components.MinesweeperSquareComponent;
+import technology.sola.engine.examples.common.games.minesweeper.event.GameOverEvent;
 
 /**
  * {@link EcsSystem} for handling a game over revealing all bomb squares if the player lost.

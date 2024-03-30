@@ -1,12 +1,12 @@
-package technology.sola.engine.examples.common.minesweeper.system;
+package technology.sola.engine.examples.common.games.minesweeper.system;
 
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
-import technology.sola.engine.examples.common.minesweeper.components.MinesweeperSquareComponent;
-import technology.sola.engine.examples.common.minesweeper.event.NewGameEvent;
+import technology.sola.engine.examples.common.games.minesweeper.components.MinesweeperSquareComponent;
+import technology.sola.engine.examples.common.games.minesweeper.event.NewGameEvent;
 
 import java.util.ArrayList;
 import java.util.List;

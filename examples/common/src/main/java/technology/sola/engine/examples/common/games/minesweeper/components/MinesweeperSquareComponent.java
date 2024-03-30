@@ -1,4 +1,4 @@
-package technology.sola.engine.examples.common.minesweeper.components;
+package technology.sola.engine.examples.common.games.minesweeper.components;
 
 import technology.sola.ecs.Component;
 
