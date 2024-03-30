@@ -6,9 +6,12 @@ import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.defaults.SolaWithDefaults;
-import technology.sola.engine.examples.common.minesweeper.MinesweeperExample;
-import technology.sola.engine.examples.common.networking.NetworkingExample;
-import technology.sola.engine.examples.common.singlefile.*;
+import technology.sola.engine.examples.common.features.*;
+import technology.sola.engine.examples.common.games.CirclePopGame;
+import technology.sola.engine.examples.common.games.PongGame;
+import technology.sola.engine.examples.common.games.SimplePlatformerGame;
+import technology.sola.engine.examples.common.games.minesweeper.MinesweeperGame;
+import technology.sola.engine.examples.common.features.networking.NetworkingExample;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
@@ -72,14 +75,14 @@ public class ExampleLauncherSola extends SolaWithDefaults {
     )));
 
     sectionGuiElement.appendChildren(
-      buildSingleFileSection(),
-      buildLargerExamplesSection()
+      buildFeatureDemoSection(),
+      buildGameSection()
     );
 
     return sectionGuiElement;
   }
 
-  private GuiElement<?> buildSingleFileSection() {
+  private GuiElement<?> buildFeatureDemoSection() {
     SectionGuiElement sectionGuiElement = new SectionGuiElement();
 
     sectionGuiElement.setStyle(List.of(ConditionalStyle.always(
@@ -90,23 +93,22 @@ public class ExampleLauncherSola extends SolaWithDefaults {
     ));
 
     sectionGuiElement.appendChildren(
-      buildSectionTitle("Single file examples"),
+      buildSectionTitle("Feature demos"),
       buildExampleLaunchButton("Animation", AnimationExample::new),
       buildExampleLaunchButton("Audio", AudioExample::new),
       buildExampleLaunchButton("Gui", GuiExample::new),
       buildExampleLaunchButton("Lighting", LightingExample::new),
       buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new),
+      buildExampleLaunchButton("Networking", NetworkingExample::new),
       buildExampleLaunchButton("Particle", ParticleExample::new),
-      buildExampleLaunchButton("Rendering", RenderingExample::new),
-      buildExampleLaunchButton("Simple Platformer", SimplePlatformerExample::new),
-      buildExampleLaunchButton("Stress Test - Physics", () -> new StressTestPhysicsExample(1337)),
-      buildExampleLaunchButton("Stress Test - Rendering", StressTestRenderingExample::new)
+      buildExampleLaunchButton("Physics", () -> new PhysicsExample(1337)),
+      buildExampleLaunchButton("Rendering", RenderingExample::new)
     );
 
     return sectionGuiElement;
   }
 
-  private GuiElement<?> buildLargerExamplesSection() {
+  private GuiElement<?> buildGameSection() {
     SectionGuiElement sectionGuiElement = new SectionGuiElement();
 
     sectionGuiElement.setStyle(List.of(ConditionalStyle.always(
@@ -117,9 +119,11 @@ public class ExampleLauncherSola extends SolaWithDefaults {
     ));
 
     sectionGuiElement.appendChildren(
-      buildSectionTitle("Larger examples"),
-      buildExampleLaunchButton("Networking", NetworkingExample::new),
-      buildExampleLaunchButton("Minesweeper", MinesweeperExample::new)
+      buildSectionTitle("Games"),
+      buildExampleLaunchButton("Circle Pop", CirclePopGame::new),
+      buildExampleLaunchButton("Minesweeper", MinesweeperGame::new),
+      buildExampleLaunchButton("Pong", PongGame::new),
+      buildExampleLaunchButton("Simple Platformer", SimplePlatformerGame::new)
     );
 
     return sectionGuiElement;

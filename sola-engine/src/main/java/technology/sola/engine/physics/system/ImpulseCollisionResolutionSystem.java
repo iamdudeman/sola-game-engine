@@ -189,6 +189,7 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
   }
 
   private static class CollisionResolutionEntityData {
+    private static final Material NULL_MATERIAL = new Material(0, 1, 1);
     private final Vector2D velocity;
     private final TransformComponent transformComponent;
     private final DynamicBodyComponent dynamicBodyComponent;
@@ -200,19 +201,12 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
       transformComponent = entity.getComponent(TransformComponent.class);
       dynamicBodyComponent = entity.getComponent(DynamicBodyComponent.class);
 
-      velocity = dynamicBodyComponent == null ? new Vector2D(0, 0) : dynamicBodyComponent.getVelocity();
+      Material material = dynamicBodyComponent == null ? NULL_MATERIAL : dynamicBodyComponent.getMaterial();
 
-      if (dynamicBodyComponent == null || dynamicBodyComponent.isKinematic()) {
-        inverseMass = 0;
-        restitution = 1;
-        friction = 1;
-      } else {
-        Material material = dynamicBodyComponent.getMaterial();
-
-        inverseMass = material.getInverseMass();
-        restitution = material.getRestitution();
-        friction = material.getFriction();
-      }
+      velocity = dynamicBodyComponent == null ? Vector2D.ZERO_VECTOR : dynamicBodyComponent.getVelocity();
+      inverseMass = dynamicBodyComponent != null && dynamicBodyComponent.isKinematic() ? 0 : material.getInverseMass();
+      restitution = material.getRestitution();
+      friction = material.getFriction();
     }
   }
 }
