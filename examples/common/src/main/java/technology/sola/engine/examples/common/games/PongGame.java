@@ -18,7 +18,7 @@ import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.math.linear.Vector2D;
 
 public class PongGame extends SolaWithDefaults {
-  private static final int PADDLE_SPEED = 150;
+  private static final int PADDLE_SPEED = 200;
   private static final float BALL_SIZE = 10;
   private static final float INITIAL_BALL_SPEED = 100;
   private static final float SPEED_INCREASE = 1.1f;
@@ -88,6 +88,12 @@ public class PongGame extends SolaWithDefaults {
 
     renderer.drawString("" + playerScore, 50, 5, Color.WHITE);
     renderer.drawString("" + computerScore, configuration.rendererWidth() - dimensions.width() - 50, 5, Color.WHITE);
+
+    float halfPoint = configuration.rendererWidth() / 2f + 3;
+
+    for (int i = 0; i < 9; i++) {
+      renderer.fillRect(halfPoint, i * 60 + 15, 6, 20, Color.WHITE);
+    }
   }
 
   private class PlayerSystem extends EcsSystem {
@@ -117,16 +123,41 @@ public class PongGame extends SolaWithDefaults {
       var ballTransform = ballEntity.getComponent(TransformComponent.class);
       var ballVelocity = ballEntity.getComponent(DynamicBodyComponent.class).getVelocity();
 
-      // todo calculate movement better
-      boolean goUp = transformComponent.getY() - ballTransform.getY() > BALL_SIZE;
-      boolean goDown = ballTransform.getY() - transformComponent.getY() > BALL_SIZE;
+      boolean goUp = false;
+      boolean goDown = false;
 
-      if (goUp && transformComponent.getY() > 0) {
+      if (ballVelocity.x() < 0) {
+        var halfHeight = configuration.rendererHeight() / 2f - (BALL_SIZE * 3);
+
+        if (transformComponent.getY() < halfHeight - 5) {
+          goDown = true;
+        }
+
+        if (transformComponent.getY() > halfHeight + 5) {
+          goUp = true;
+        }
+      } else {
+        if (transformComponent.getY() - ballTransform.getY() > BALL_SIZE * 2) {
+          goUp = true;
+        }
+        if (ballTransform.getY() - transformComponent.getY() > BALL_SIZE * 2) {
+          goDown = true;
+        }
+      }
+
+      if (goUp && transformComponent.getY() > BALL_SIZE * 2 - 1) {
         dynamicBodyComponent.setVelocity(new Vector2D(0, -PADDLE_SPEED));
-      } else if (goDown && transformComponent.getY() < configuration.rendererHeight() - (BALL_SIZE * 6)) {
+      } else if (goDown && transformComponent.getY() < configuration.rendererHeight() - (BALL_SIZE * 6 + BALL_SIZE * 2 - 1)) {
         dynamicBodyComponent.setVelocity(new Vector2D(0, PADDLE_SPEED));
       } else {
         dynamicBodyComponent.setVelocity(Vector2D.ZERO_VECTOR);
+      }
+
+      if (ballTransform.getY() > configuration.rendererHeight() + 100 || ballTransform.getY() < -100) {
+        ballTransform
+          .setTranslate(configuration.rendererWidth() / 2f, configuration.rendererHeight() / 2f);
+        ballEntity.getComponent(DynamicBodyComponent.class)
+          .setVelocity(new Vector2D(-INITIAL_BALL_SPEED, -INITIAL_BALL_SPEED));
       }
     }
   }
@@ -142,7 +173,7 @@ public class PongGame extends SolaWithDefaults {
 
     dynamicBodyComponent.setVelocity(new Vector2D(-INITIAL_BALL_SPEED, -INITIAL_BALL_SPEED));
 
-    var paddleMaterial = new Material(1, SPEED_INCREASE, 0.1f);
+    var paddleMaterial = new Material(1, SPEED_INCREASE, 0.6f);
 
     world.createEntity(
       new TransformComponent(configuration.rendererWidth() / 2f, configuration.rendererHeight() / 2f, BALL_SIZE),
@@ -167,24 +198,25 @@ public class PongGame extends SolaWithDefaults {
 
     // boundaries
     var boundaryMaterial = new Material(1, SPEED_INCREASE, 0);
+    var boundarySize = BALL_SIZE * 10;
 
     world.createEntity(
-      new TransformComponent(0, -BALL_SIZE, configuration.rendererWidth(), BALL_SIZE),
+      new TransformComponent(0, -boundarySize, configuration.rendererWidth(), boundarySize),
       new DynamicBodyComponent(boundaryMaterial, true),
       ColliderComponent.aabb()
     );
     world.createEntity(
-      new TransformComponent(0, configuration.rendererHeight(), configuration.rendererWidth(), BALL_SIZE),
+      new TransformComponent(0, configuration.rendererHeight(), configuration.rendererWidth(), boundarySize),
       new DynamicBodyComponent(boundaryMaterial, true),
       ColliderComponent.aabb()
     );
     world.createEntity(
-      new TransformComponent(-BALL_SIZE, 0, BALL_SIZE, configuration.rendererHeight()),
+      new TransformComponent(-boundarySize, 0, boundarySize, configuration.rendererHeight()),
       new DynamicBodyComponent(boundaryMaterial, true),
       ColliderComponent.aabb().setSensor(true)
     ).setName("playerGoal");
     world.createEntity(
-      new TransformComponent(configuration.rendererWidth(), 0, BALL_SIZE, configuration.rendererHeight()),
+      new TransformComponent(configuration.rendererWidth(), 0, boundarySize, configuration.rendererHeight()),
       new DynamicBodyComponent(boundaryMaterial, true),
       ColliderComponent.aabb().setSensor(true)
     ).setName("computerGoal");
