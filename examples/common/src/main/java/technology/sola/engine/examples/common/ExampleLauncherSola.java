@@ -38,6 +38,12 @@ import java.util.function.Supplier;
 public class ExampleLauncherSola extends SolaWithDefaults {
   private final SolaPlatform solaPlatform;
 
+  /**
+   * Registers a key event to launch the {@link ExampleLauncherSola} from another example {@link Sola}.
+   *
+   * @param solaPlatform the current {@link SolaPlatform}
+   * @param eventHub     the {@link EventHub} instance for the {@code Sola}
+   */
   public static void addReturnToLauncherKeyEvent(SolaPlatform solaPlatform, EventHub eventHub) {
     eventHub.add(GameLoopEvent.class, event -> {
       if (event.state() == GameLoopState.STOPPED) {
