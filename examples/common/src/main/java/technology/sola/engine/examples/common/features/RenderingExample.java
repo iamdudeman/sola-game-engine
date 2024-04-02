@@ -13,6 +13,7 @@ import technology.sola.engine.defaults.SolaGraphics;
 import technology.sola.engine.defaults.graphics.modules.CircleEntityGraphicsModule;
 import technology.sola.engine.defaults.graphics.modules.RectangleEntityGraphicsModule;
 import technology.sola.engine.defaults.graphics.modules.SpriteEntityGraphicsModule;
+import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
@@ -53,6 +54,8 @@ public class RenderingExample extends Sola {
 
   @Override
   protected void onInit() {
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+
     solaGraphics.addGraphicsModules(
       new CircleEntityGraphicsModule(),
       new RectangleEntityGraphicsModule(),

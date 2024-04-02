@@ -5,6 +5,7 @@ import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
@@ -40,6 +41,8 @@ public class AudioExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+
     guiTheme = GuiTheme.getDefaultLightTheme()
       .addStyle(TextGuiElement.class, List.of(ConditionalStyle.always(
         TextStyles.create().setFontAssetId(FONT_ASSET_ID).setTextColor(Color.BLUE).build()

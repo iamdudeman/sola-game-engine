@@ -6,6 +6,7 @@ import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.event.EventHub;
 import technology.sola.engine.examples.common.features.*;
 import technology.sola.engine.examples.common.games.CirclePopGame;
 import technology.sola.engine.examples.common.games.PongGame;
@@ -25,6 +26,7 @@ import technology.sola.engine.graphics.gui.style.property.Direction;
 import technology.sola.engine.graphics.gui.style.property.MainAxisChildren;
 import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
 import technology.sola.engine.graphics.screen.AspectMode;
+import technology.sola.engine.input.Key;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -35,6 +37,20 @@ import java.util.function.Supplier;
  */
 public class ExampleLauncherSola extends SolaWithDefaults {
   private final SolaPlatform solaPlatform;
+
+  public static void addReturnToLauncherKeyEvent(SolaPlatform solaPlatform, EventHub eventHub) {
+    eventHub.add(GameLoopEvent.class, event -> {
+      if (event.state() == GameLoopState.STOPPED) {
+        solaPlatform.play(new ExampleLauncherSola(solaPlatform));
+      }
+    });
+
+    solaPlatform.onKeyPressed(keyEvent -> {
+      if (keyEvent.keyCode() == Key.ESCAPE.getCode()) {
+        eventHub.emit(new GameLoopEvent(GameLoopState.STOP));
+      }
+    });
+  }
 
   /**
    * Creates an instance of this {@link Sola}

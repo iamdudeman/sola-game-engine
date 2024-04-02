@@ -6,6 +6,7 @@ import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
@@ -35,6 +36,8 @@ public class AnimationExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+
     defaultsConfigurator.useGraphics().useBackgroundColor(Color.WHITE);
 
     solaEcs.setWorld(buildWorld());

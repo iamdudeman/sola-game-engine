@@ -9,6 +9,7 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.event.EventListener;
+import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.CameraComponent;
@@ -42,6 +43,8 @@ public class SimplePlatformerGame extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+
     defaultsConfigurator.useGraphics().usePhysics().useDebug();
 
     solaEcs.addSystems(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem(), new GlassSystem(eventHub));

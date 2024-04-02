@@ -4,6 +4,7 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
@@ -60,6 +61,8 @@ public class PhysicsExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+
     defaultsConfigurator.useGraphics().usePhysics().useDebug().useGui();
 
     platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
