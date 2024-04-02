@@ -3,6 +3,7 @@ package technology.sola.engine.examples.common.games.minesweeper;
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.examples.common.games.minesweeper.event.NewGameEvent;
 import technology.sola.engine.examples.common.games.minesweeper.graphics.MinesweeperSquareEntityGraphicsModule;
 import technology.sola.engine.examples.common.games.minesweeper.graphics.gui.MinesweeperGui;
@@ -31,6 +32,8 @@ public class MinesweeperGame extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+
     defaultsConfigurator.useGui(
       GuiTheme.getDefaultLightTheme()
         .addStyle(ButtonGuiElement.class, List.of(
