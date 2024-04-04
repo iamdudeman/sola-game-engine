@@ -16,6 +16,7 @@ import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
 import technology.sola.engine.graphics.gui.style.property.CrossAxisChildren;
 import technology.sola.engine.graphics.gui.style.property.Direction;
+import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
 import technology.sola.engine.graphics.screen.AspectMode;
 
@@ -43,7 +44,7 @@ public class AudioExample extends SolaWithDefaults {
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
 
-    guiTheme = GuiTheme.getDefaultLightTheme()
+    guiTheme = DefaultThemeBuilder.buildLightTheme()
       .addStyle(TextGuiElement.class, List.of(ConditionalStyle.always(
         TextStyles.create().setFontAssetId(FONT_ASSET_ID).setTextColor(Color.BLUE).build()
       )))

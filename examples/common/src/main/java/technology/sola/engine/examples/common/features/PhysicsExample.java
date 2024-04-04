@@ -17,7 +17,7 @@ import technology.sola.engine.graphics.gui.elements.input.TextInputStyles;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
 import technology.sola.engine.graphics.gui.style.property.Direction;
-import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
+import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.component.ColliderComponent;
@@ -113,7 +113,7 @@ public class PhysicsExample extends SolaWithDefaults {
       randomSeedInput
     );
 
-    GuiTheme.getDefaultLightTheme().applyToTree(sectionGuiElement);
+    DefaultThemeBuilder.buildLightTheme().applyToTree(sectionGuiElement);
 
     return sectionGuiElement;
   }
