@@ -12,8 +12,16 @@ import technology.sola.engine.graphics.gui.style.ConditionalStyle;
 
 import java.util.List;
 
-class DefaultThemeBuilder {
-  static GuiTheme buildLightTheme() {
+/**
+ * DefaultThemeBuilder contains methods for creating default {@link GuiTheme}s that can then be further customized.
+ */
+public class DefaultThemeBuilder {
+  /**
+   * Builds a new {@link GuiTheme} instance that has lighter colors.
+   *
+   * @return a default light theme
+   */
+  public static GuiTheme buildLightTheme() {
     Color inputBackgroundColor = Color.WHITE;
     Color inputBorderColor = new Color(118, 118, 118);
     Color inputFocusBorderColor = Color.BLACK;
@@ -86,7 +94,12 @@ class DefaultThemeBuilder {
       ;
   }
 
-  static GuiTheme buildDarkTheme() {
+  /**
+   * Builds a new {@link GuiTheme} instance that has darker colors.
+   *
+   * @return a default dark theme
+   */
+  public static GuiTheme buildDarkTheme() {
     Color inputBackgroundColor = new Color(59, 59, 59);
     Color inputBorderColor = new Color(133, 133, 133);
     Color textColor = Color.WHITE;
@@ -159,5 +172,8 @@ class DefaultThemeBuilder {
         )
       ))
       ;
+  }
+
+  private DefaultThemeBuilder() {
   }
 }

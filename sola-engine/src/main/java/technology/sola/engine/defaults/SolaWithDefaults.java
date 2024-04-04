@@ -18,6 +18,7 @@ import technology.sola.engine.graphics.gui.json.element.SectionElementJsonBluepr
 import technology.sola.engine.graphics.gui.json.element.TextElementJsonBlueprint;
 import technology.sola.engine.graphics.gui.json.element.ButtonElementJsonBlueprint;
 import technology.sola.engine.graphics.gui.json.element.TextInputElementJsonBlueprint;
+import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.system.LightFlickerSystem;
@@ -242,7 +243,7 @@ public abstract class SolaWithDefaults extends Sola {
      * @return this
      */
     public DefaultsConfigurator useGui() {
-      return useGui(GuiTheme.getDefaultLightTheme());
+      return useGui(DefaultThemeBuilder.buildLightTheme());
     }
 
     /**

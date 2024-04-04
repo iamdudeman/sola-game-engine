@@ -12,31 +12,7 @@ import java.util.List;
  * element or an element and all its children.
  */
 public class GuiTheme {
-  private static GuiTheme defaultLightTheme;
-  private static GuiTheme defaultDarkTheme;
   private final List<ThemeElementDefinition<?>> definitions = new ArrayList<>();
-
-  /**
-   * @return a default light {@link GuiTheme}
-   */
-  public static GuiTheme getDefaultLightTheme() {
-    if (defaultLightTheme == null) {
-      defaultLightTheme = DefaultThemeBuilder.buildLightTheme();
-    }
-
-    return defaultLightTheme;
-  }
-
-  /**
-   * @return a default dark {@link GuiTheme}
-   */
-  public static GuiTheme getDefaultDarkTheme() {
-    if (defaultDarkTheme == null) {
-      defaultDarkTheme = DefaultThemeBuilder.buildDarkTheme();
-    }
-
-    return defaultDarkTheme;
-  }
 
   /**
    * Applies this theme to a {@link GuiElement} and all its children.

@@ -24,7 +24,7 @@ import technology.sola.engine.graphics.gui.style.ConditionalStyle;
 import technology.sola.engine.graphics.gui.style.property.CrossAxisChildren;
 import technology.sola.engine.graphics.gui.style.property.Direction;
 import technology.sola.engine.graphics.gui.style.property.MainAxisChildren;
-import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
+import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 
@@ -45,14 +45,14 @@ public class ExampleLauncherSola extends SolaWithDefaults {
    * @param eventHub     the {@link EventHub} instance for the {@code Sola}
    */
   public static void addReturnToLauncherKeyEvent(SolaPlatform solaPlatform, EventHub eventHub) {
-    eventHub.add(GameLoopEvent.class, event -> {
-      if (event.state() == GameLoopState.STOPPED) {
-        solaPlatform.play(new ExampleLauncherSola(solaPlatform));
-      }
-    });
-
     solaPlatform.onKeyPressed(keyEvent -> {
       if (keyEvent.keyCode() == Key.ESCAPE.getCode()) {
+        eventHub.add(GameLoopEvent.class, event -> {
+          if (event.state() == GameLoopState.STOPPED) {
+            solaPlatform.play(new ExampleLauncherSola(solaPlatform));
+          }
+        });
+
         eventHub.emit(new GameLoopEvent(GameLoopState.STOP));
       }
     });
@@ -76,7 +76,7 @@ public class ExampleLauncherSola extends SolaWithDefaults {
 
     var guiRoot = buildGui();
 
-    GuiTheme.getDefaultLightTheme().applyToTree(guiRoot);
+    DefaultThemeBuilder.buildLightTheme().applyToTree(guiRoot);
 
     guiDocument.setRootElement(guiRoot);
 

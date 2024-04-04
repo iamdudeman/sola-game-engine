@@ -13,7 +13,7 @@ import technology.sola.engine.examples.common.games.minesweeper.system.PlayerInp
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
-import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
+import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.screen.AspectMode;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public class MinesweeperGame extends SolaWithDefaults {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
 
     defaultsConfigurator.useGui(
-      GuiTheme.getDefaultLightTheme()
+      DefaultThemeBuilder.buildLightTheme()
         .addStyle(ButtonGuiElement.class, List.of(
           ConditionalStyle.always(BaseStyles.create().setPadding(5).build())
         ))

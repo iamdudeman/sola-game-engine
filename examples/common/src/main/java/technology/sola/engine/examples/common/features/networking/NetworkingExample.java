@@ -16,7 +16,7 @@ import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
-import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
+import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.networking.socket.SocketMessage;
 
@@ -51,7 +51,7 @@ public class NetworkingExample extends SolaWithDefaults {
 
     var rootElement = buildGui();
 
-    GuiTheme.getDefaultDarkTheme()
+    DefaultThemeBuilder.buildDarkTheme()
       .applyToTree(rootElement);
 
     guiDocument.setRootElement(rootElement);
