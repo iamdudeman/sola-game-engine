@@ -1,5 +1,5 @@
 dependencies {
-  api("com.github.iamdudeman:sola-ecs:2.1.4")
+  api("com.github.iamdudeman:sola-ecs:2.1.5")
 }
 
 publishing {
