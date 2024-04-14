@@ -28,7 +28,7 @@ this could be populated by a controls.input.json file or something like that
 
 public class SolaInput {
   private static final Logger LOGGER = LoggerFactory.getLogger(SolaInput.class);
-  private final Map<String, Control> controlMap = new HashMap<>();
+  private final Map<String, List<List<Input<?>>>> controlMap = new HashMap<>();
   private final KeyboardInput keyboardInput;
   private final MouseInput mouseInput;
 
@@ -38,14 +38,14 @@ public class SolaInput {
   }
 
   public boolean isActive(String controlId) {
-    var control = controlMap.get(controlId);
+    var inputGroups = controlMap.get(controlId);
 
-    if (control == null) {
+    if (inputGroups == null) {
       LOGGER.warn("Control with id {} not found", controlId);
       return false;
     }
 
-    for (var inputs : control.inputs) {
+    for (var inputs : inputGroups) {
       boolean isInputActive = true;
 
       for (var input : inputs) {
@@ -63,14 +63,16 @@ public class SolaInput {
     return false;
   }
 
-  public void setControl(String id, Control control) {
-    controlMap.put(id, control);
+  // todo ability to update one control
+  // todo convenience method to not need list of list
+
+  public SolaInput setControl(String id, List<List<Input<?>>> inputs) {
+    controlMap.put(id, inputs);
+
+    return this;
   }
 
-  public record Control(String id, List<List<Input<?>>> inputs) {
-  }
-
-  interface Input<T> {
+  public interface Input<T> {
     T state();
 
     boolean isActive(KeyboardInput keyboardInput, MouseInput mouseInput);
