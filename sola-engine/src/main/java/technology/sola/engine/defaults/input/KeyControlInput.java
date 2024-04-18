@@ -15,7 +15,7 @@ public record KeyControlInput(Key key, State state) implements ControlInput<KeyC
   }
 
   public enum State {
+    HELD,
     PRESSED,
-    HELD
   }
 }

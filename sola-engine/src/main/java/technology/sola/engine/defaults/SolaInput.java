@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import technology.sola.engine.defaults.input.ControlInput;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
+import technology.sola.math.linear.Vector2D;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,11 @@ public class SolaInput {
   public SolaInput(KeyboardInput keyboardInput, MouseInput mouseInput) {
     this.keyboardInput = keyboardInput;
     this.mouseInput = mouseInput;
+  }
+
+  // todo how does this work when touch input is added
+  public Vector2D getMousePosition() {
+    return mouseInput.getMousePosition();
   }
 
   public boolean isActive(String controlId) {

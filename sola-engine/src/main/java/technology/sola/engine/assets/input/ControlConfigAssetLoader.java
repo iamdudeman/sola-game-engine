@@ -22,7 +22,7 @@ public class ControlConfigAssetLoader extends AssetLoader<ControlConfig> {
 
     jsonElementAssetAssetLoader.getNewAsset(path, path)
       .executeWhenLoaded(jsonElementAsset -> {
-        var mapper = new ControlConfig.InputConfigJsonMapper();
+        var mapper = new ControlConfig.ControlConfigJsonMapper();
 
         inputConfigAssetHandle.setAsset(
           mapper.toObject(jsonElementAsset.asObject())
