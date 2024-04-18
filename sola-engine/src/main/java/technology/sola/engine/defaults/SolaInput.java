@@ -10,25 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/*
-todo
-this could be populated by a controls.input.json file or something like that
-[
-  {
-    "id": "jump",
-    "inputs": [
-      [{ "type": "key", "key": "A", "state": "PRESSED" }, { "type": "key", "key": "SHIFT", "state": "PRESSED" }]
-    ]
-  },
-  {
-    "id": "jump",
-    "inputs": [
-      { "type": "mouse", "button": "PRIMARY", "state": "PRESSED" }
-    ]
-  }
-]
- */
-
 public class SolaInput {
   private static final Logger LOGGER = LoggerFactory.getLogger(SolaInput.class);
   private final Map<String, List<List<ControlInput<?>>>> controlMap = new HashMap<>();
@@ -67,6 +48,7 @@ public class SolaInput {
   }
 
   // todo ability to update one control
+
   // todo convenience method to not need list of list
 
   public SolaInput setControl(String id, List<List<ControlInput<?>>> inputs) {
