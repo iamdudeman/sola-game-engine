@@ -22,6 +22,7 @@ module technology.sola.engine {
 
   exports technology.sola.engine.defaults;
   exports technology.sola.engine.defaults.graphics.modules;
+  exports technology.sola.engine.defaults.input;
 
   exports technology.sola.engine.event;
 

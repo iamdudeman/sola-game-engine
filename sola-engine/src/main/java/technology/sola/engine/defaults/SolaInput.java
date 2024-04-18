@@ -1,7 +1,10 @@
-package technology.sola.engine.input;
+package technology.sola.engine.defaults;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import technology.sola.engine.defaults.input.ControlInput;
+import technology.sola.engine.input.KeyboardInput;
+import technology.sola.engine.input.MouseInput;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +31,7 @@ this could be populated by a controls.input.json file or something like that
 
 public class SolaInput {
   private static final Logger LOGGER = LoggerFactory.getLogger(SolaInput.class);
-  private final Map<String, List<List<Input<?>>>> controlMap = new HashMap<>();
+  private final Map<String, List<List<ControlInput<?>>>> controlMap = new HashMap<>();
   private final KeyboardInput keyboardInput;
   private final MouseInput mouseInput;
 
@@ -66,47 +69,9 @@ public class SolaInput {
   // todo ability to update one control
   // todo convenience method to not need list of list
 
-  public SolaInput setControl(String id, List<List<Input<?>>> inputs) {
+  public SolaInput setControl(String id, List<List<ControlInput<?>>> inputs) {
     controlMap.put(id, inputs);
 
     return this;
-  }
-
-  public interface Input<T> {
-    T state();
-
-    boolean isActive(KeyboardInput keyboardInput, MouseInput mouseInput);
-  }
-
-  public record KeyInput(Key key, KeyState state) implements Input<KeyState> {
-    @Override
-    public boolean isActive(KeyboardInput keyboardInput, MouseInput mouseInput) {
-      if (state == KeyState.PRESSED) {
-        return keyboardInput.isKeyPressed(key);
-      } else {
-        return keyboardInput.isKeyHeld(key);
-      }
-    }
-  }
-
-  public enum KeyState {
-    PRESSED,
-    HELD
-  }
-
-  public record MouseButtonInput(MouseButton button, MouseState state) implements Input<MouseState> {
-    @Override
-    public boolean isActive(KeyboardInput keyboardInput, MouseInput mouseInput) {
-      if (state == MouseState.PRESSED) {
-        return mouseInput.isMousePressed(button);
-      } else {
-        return mouseInput.isMouseDragged(button);
-      }
-    }
-  }
-
-  public enum MouseState {
-    PRESSED,
-    DRAGGED
   }
 }
