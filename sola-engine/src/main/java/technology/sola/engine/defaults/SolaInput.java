@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class SolaInput {
   private static final Logger LOGGER = LoggerFactory.getLogger(SolaInput.class);
-  private final Map<String, List<List<ControlInput<?>>>> controlMap = new HashMap<>();
+  private final Map<String, List<List<ControlInput<?>>>> controls = new HashMap<>();
   private final KeyboardInput keyboardInput;
   private final MouseInput mouseInput;
 
@@ -22,7 +22,7 @@ public class SolaInput {
   }
 
   public boolean isActive(String controlId) {
-    var inputGroups = controlMap.get(controlId);
+    var inputGroups = controls.get(controlId);
 
     if (inputGroups == null) {
       LOGGER.warn("Control with id {} not found", controlId);
@@ -47,12 +47,12 @@ public class SolaInput {
     return false;
   }
 
-  // todo ability to update one control
+  // todo ability to update inputs of one control
 
   // todo convenience method to not need list of list
 
   public SolaInput setControl(String id, List<List<ControlInput<?>>> inputs) {
-    controlMap.put(id, inputs);
+    controls.put(id, inputs);
 
     return this;
   }

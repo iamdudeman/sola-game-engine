@@ -13,7 +13,7 @@ import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.FontAssetLoader;
 import technology.sola.engine.assets.graphics.SpriteSheetAssetLoader;
-import technology.sola.engine.assets.input.InputConfigAssetLoader;
+import technology.sola.engine.assets.input.ControlConfigAssetLoader;
 import technology.sola.engine.assets.json.JsonElementAsset;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
@@ -211,7 +211,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     assetLoaderProvider.add(new SpriteSheetAssetLoader(
       jsonElementAssetAssetLoader, solaImageAssetLoader
     ));
-    assetLoaderProvider.add(new InputConfigAssetLoader(
+    assetLoaderProvider.add(new ControlConfigAssetLoader(
       jsonElementAssetAssetLoader
     ));
   }
