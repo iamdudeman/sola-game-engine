@@ -4,7 +4,7 @@ import technology.sola.ecs.Component;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
-import technology.sola.engine.assets.input.ControlConfig;
+import technology.sola.engine.assets.input.ControlsConfig;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaWithDefaults;
@@ -54,10 +54,10 @@ public class SimplePlatformerGame extends SolaWithDefaults {
 
   @Override
   protected void onAsyncInit(Runnable completeAsyncInit) {
-    assetLoaderProvider.get(ControlConfig.class)
+    assetLoaderProvider.get(ControlsConfig.class)
       .getNewAsset("controls", "assets/input/simple_platformer.controls.json")
-      .executeWhenLoaded(controlConfig -> {
-        solaInput.setControls(controlConfig);
+      .executeWhenLoaded(controlsConfig -> {
+        solaControls.setControls(controlsConfig);
         completeAsyncInit.run();
       });
   }
@@ -223,15 +223,15 @@ public class SimplePlatformerGame extends SolaWithDefaults {
         .forEach(view -> {
           DynamicBodyComponent dynamicBodyComponent = view.c2();
 
-          if (solaInput.isActive("RIGHT") && dynamicBodyComponent.getVelocity().x() < 150) {
+          if (solaControls.isActive("RIGHT") && dynamicBodyComponent.getVelocity().x() < 150) {
             dynamicBodyComponent.applyForce(150, 0);
           }
 
-          if (solaInput.isActive("LEFT") && dynamicBodyComponent.getVelocity().x() > -150) {
+          if (solaControls.isActive("LEFT") && dynamicBodyComponent.getVelocity().x() > -150) {
             dynamicBodyComponent.applyForce(-150, 0);
           }
 
-          if (dynamicBodyComponent.isGrounded() && solaInput.isActive("JUMP")) {
+          if (dynamicBodyComponent.isGrounded() && solaControls.isActive("JUMP")) {
             dynamicBodyComponent.applyForce(0, -3000);
           } else if (dynamicBodyComponent.getVelocity().y() > 0) {
             dynamicBodyComponent.applyForce(0, 1.5f * solaPhysics.getGravitySystem().getGravityConstant() * dynamicBodyComponent.getMaterial().getMass());

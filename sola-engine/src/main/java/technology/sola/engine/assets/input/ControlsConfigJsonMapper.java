@@ -1,8 +1,8 @@
 package technology.sola.engine.assets.input;
 
-import technology.sola.engine.defaults.input.ControlInput;
-import technology.sola.engine.defaults.input.KeyControlInput;
-import technology.sola.engine.defaults.input.MouseButtonControlInput;
+import technology.sola.engine.defaults.controls.ControlInput;
+import technology.sola.engine.defaults.controls.KeyControlInput;
+import technology.sola.engine.defaults.controls.MouseButtonControlInput;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.json.JsonArray;
@@ -15,19 +15,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * ControlConfigJsonMapper is a {@link JsonMapper} implementation for {@link ControlConfig}.
+ * ControlsConfigJsonMapper is a {@link JsonMapper} implementation for {@link ControlsConfig}.
  */
-public class ControlConfigJsonMapper implements JsonMapper<ControlConfig> {
+public class ControlsConfigJsonMapper implements JsonMapper<ControlsConfig> {
   @Override
-  public Class<ControlConfig> getObjectClass() {
-    return ControlConfig.class;
+  public Class<ControlsConfig> getObjectClass() {
+    return ControlsConfig.class;
   }
 
   @Override
-  public JsonObject toJson(ControlConfig controlConfig) {
+  public JsonObject toJson(ControlsConfig controlsConfig) {
     JsonArray controlsJson = new JsonArray();
 
-    for (var controlEntry : controlConfig.controls().entrySet()) {
+    for (var controlEntry : controlsConfig.controls().entrySet()) {
       JsonArray controlInputsJson = new JsonArray();
 
       for (var controlInputs : controlEntry.getValue()) {
@@ -51,7 +51,7 @@ public class ControlConfigJsonMapper implements JsonMapper<ControlConfig> {
   }
 
   @Override
-  public ControlConfig toObject(JsonObject jsonObject) {
+  public ControlsConfig toObject(JsonObject jsonObject) {
     Map<String, List<List<ControlInput<?>>>> controls = new HashMap<>();
     JsonArray controlsJson = jsonObject.getArray("controls");
 
@@ -73,7 +73,7 @@ public class ControlConfigJsonMapper implements JsonMapper<ControlConfig> {
       controls.put(id, controlInputs);
     }
 
-    return new ControlConfig(controls);
+    return new ControlsConfig(controls);
   }
 
   private ControlInput<?> jsonToControlInput(JsonObject jsonObject) {

@@ -2,8 +2,8 @@ package technology.sola.engine.defaults;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import technology.sola.engine.assets.input.ControlConfig;
-import technology.sola.engine.defaults.input.ControlInput;
+import technology.sola.engine.assets.input.ControlsConfig;
+import technology.sola.engine.defaults.controls.ControlInput;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
 
@@ -11,13 +11,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SolaInput {
-  private static final Logger LOGGER = LoggerFactory.getLogger(SolaInput.class);
+public class SolaControls {
+  private static final Logger LOGGER = LoggerFactory.getLogger(SolaControls.class);
   private final Map<String, List<List<ControlInput<?>>>> controls = new HashMap<>();
   private final KeyboardInput keyboardInput;
   private final MouseInput mouseInput;
 
-  public SolaInput(KeyboardInput keyboardInput, MouseInput mouseInput) {
+  public SolaControls(KeyboardInput keyboardInput, MouseInput mouseInput) {
     this.keyboardInput = keyboardInput;
     this.mouseInput = mouseInput;
   }
@@ -48,15 +48,15 @@ public class SolaInput {
     return false;
   }
 
-  public SolaInput addControl(String id, List<List<ControlInput<?>>> inputs) {
+  public SolaControls addControl(String id, List<List<ControlInput<?>>> inputs) {
     controls.put(id, inputs);
 
     return this;
   }
 
-  public SolaInput setControls(ControlConfig controlConfig) {
+  public SolaControls setControls(ControlsConfig controlsConfig) {
     controls.clear();
-    controlConfig.controls().forEach(this::addControl);
+    controlsConfig.controls().forEach(this::addControl);
 
     return this;
   }

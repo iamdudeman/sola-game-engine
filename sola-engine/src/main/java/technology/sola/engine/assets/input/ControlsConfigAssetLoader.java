@@ -5,9 +5,9 @@ import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.json.JsonElementAsset;
 
 /**
- * ControlConfigAssetLoader is an {@link AssetLoader} implementation for {@link ControlConfig}s.
+ * ControlsConfigAssetLoader is an {@link AssetLoader} implementation for {@link ControlsConfig}s.
  */
-public class ControlConfigAssetLoader extends AssetLoader<ControlConfig> {
+public class ControlsConfigAssetLoader extends AssetLoader<ControlsConfig> {
   private final AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader;
 
   /**
@@ -15,22 +15,22 @@ public class ControlConfigAssetLoader extends AssetLoader<ControlConfig> {
    *
    * @param jsonElementAssetAssetLoader the {@link JsonElementAsset} {@link AssetLoader} to use internally
    */
-  public ControlConfigAssetLoader(AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader) {
+  public ControlsConfigAssetLoader(AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader) {
     this.jsonElementAssetAssetLoader = jsonElementAssetAssetLoader;
   }
 
   @Override
-  public Class<ControlConfig> getAssetClass() {
-    return ControlConfig.class;
+  public Class<ControlsConfig> getAssetClass() {
+    return ControlsConfig.class;
   }
 
   @Override
-  protected AssetHandle<ControlConfig> loadAsset(String path) {
-    AssetHandle<ControlConfig> inputConfigAssetHandle = new AssetHandle<>();
+  protected AssetHandle<ControlsConfig> loadAsset(String path) {
+    AssetHandle<ControlsConfig> inputConfigAssetHandle = new AssetHandle<>();
 
     jsonElementAssetAssetLoader.getNewAsset(path, path)
       .executeWhenLoaded(jsonElementAsset -> {
-        var mapper = new ControlConfigJsonMapper();
+        var mapper = new ControlsConfigJsonMapper();
 
         inputConfigAssetHandle.setAsset(
           mapper.toObject(jsonElementAsset.asObject())

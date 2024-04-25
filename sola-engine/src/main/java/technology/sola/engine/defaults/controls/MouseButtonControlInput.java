@@ -1,4 +1,4 @@
-package technology.sola.engine.defaults.input;
+package technology.sola.engine.defaults.controls;
 
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseButton;
