@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class SolaControls {
   private static final Logger LOGGER = LoggerFactory.getLogger(SolaControls.class);
-  private final Map<String, List<List<ControlInput<?>>>> controls = new HashMap<>();
+  private final Map<String, List<ControlInput>> controls = new HashMap<>();
   private final KeyboardInput keyboardInput;
   private final MouseInput mouseInput;
 
@@ -33,8 +33,8 @@ public class SolaControls {
     for (var inputs : inputGroups) {
       boolean isInputActive = true;
 
-      for (var input : inputs) {
-        if (!input.isActive(keyboardInput, mouseInput)) {
+      for (var condition : inputs.conditions()) {
+        if (!condition.isActive(keyboardInput, mouseInput)) {
           isInputActive = false;
           break;
         }
@@ -48,8 +48,14 @@ public class SolaControls {
     return false;
   }
 
-  public SolaControls addControl(String id, List<List<ControlInput<?>>> inputs) {
-    controls.put(id, inputs);
+  public SolaControls addControl(String id, ControlInput controlInput) {
+    controls.put(id, List.of(controlInput));
+
+    return this;
+  }
+
+  public SolaControls addControl(String id, List<ControlInput> controlInputs) {
+    controls.put(id, controlInputs);
 
     return this;
   }

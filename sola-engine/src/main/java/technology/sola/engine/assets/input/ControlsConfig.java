@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public record ControlsConfig(
-  Map<String, List<List<ControlInput<?>>>> controls
+  Map<String, List<ControlInput>> controls
 ) implements Asset {
 }

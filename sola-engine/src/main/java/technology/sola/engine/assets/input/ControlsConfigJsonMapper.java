@@ -1,8 +1,9 @@
 package technology.sola.engine.assets.input;
 
 import technology.sola.engine.defaults.controls.ControlInput;
-import technology.sola.engine.defaults.controls.KeyControlInput;
-import technology.sola.engine.defaults.controls.MouseButtonControlInput;
+import technology.sola.engine.defaults.controls.ControlInputCondition;
+import technology.sola.engine.defaults.controls.KeyControlInputCondition;
+import technology.sola.engine.defaults.controls.MouseButtonControlInputCondition;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.json.JsonArray;
@@ -31,13 +32,13 @@ public class ControlsConfigJsonMapper implements JsonMapper<ControlsConfig> {
       JsonArray controlInputsJson = new JsonArray();
 
       for (var controlInputs : controlEntry.getValue()) {
-        JsonArray controlInputJson = new JsonArray();
+        JsonArray controlInputConditionsJson = new JsonArray();
 
-        for (var controlInput : controlInputs) {
-          controlInputJson.add(controlInputToJson(controlInput));
+        for (var controlInputCondition : controlInputs.conditions()) {
+          controlInputConditionsJson.add(controlInputConditionToJson(controlInputCondition));
         }
 
-        controlInputsJson.add(controlInputJson);
+        controlInputsJson.add(controlInputConditionsJson);
       }
 
       controlsJson.add(
@@ -52,22 +53,22 @@ public class ControlsConfigJsonMapper implements JsonMapper<ControlsConfig> {
 
   @Override
   public ControlsConfig toObject(JsonObject jsonObject) {
-    Map<String, List<List<ControlInput<?>>>> controls = new HashMap<>();
+    Map<String, List<ControlInput>> controls = new HashMap<>();
     JsonArray controlsJson = jsonObject.getArray("controls");
 
     for (var controlJsonElement : controlsJson) {
       var controlJson = controlJsonElement.asObject();
       String id = controlJson.getString("id");
-      List<List<ControlInput<?>>> controlInputs = new ArrayList<>();
+      List<ControlInput> controlInputs = new ArrayList<>();
 
       for (var controlInputsJsonElement : controlJson.getArray("inputs")) {
-        List<ControlInput<?>> controlInput = new ArrayList<>();
+        List<ControlInputCondition<?>> controlInputConditions = new ArrayList<>();
 
-        for (var controlInputJsonElement : controlInputsJsonElement.asArray()) {
-          controlInput.add(jsonToControlInput(controlInputJsonElement.asObject()));
+        for (var controlInputConditionJsonElement : controlInputsJsonElement.asArray()) {
+          controlInputConditions.add(jsonToControlInputCondition(controlInputConditionJsonElement.asObject()));
         }
 
-        controlInputs.add(controlInput);
+        controlInputs.add(new ControlInput(controlInputConditions));
       }
 
       controls.put(id, controlInputs);
@@ -76,35 +77,35 @@ public class ControlsConfigJsonMapper implements JsonMapper<ControlsConfig> {
     return new ControlsConfig(controls);
   }
 
-  private ControlInput<?> jsonToControlInput(JsonObject jsonObject) {
+  private ControlInputCondition<?> jsonToControlInputCondition(JsonObject jsonObject) {
     String type = jsonObject.getString("type");
 
     return switch (type) {
-      case "key" -> new KeyControlInput(
+      case "key" -> new KeyControlInputCondition(
         Key.valueOf(jsonObject.getString("key")),
-        KeyControlInput.State.valueOf(jsonObject.getString("state"))
+        KeyControlInputCondition.State.valueOf(jsonObject.getString("state"))
       );
-      case "mouse" -> new MouseButtonControlInput(
+      case "mouse" -> new MouseButtonControlInputCondition(
         MouseButton.valueOf(jsonObject.getString("button")),
-        MouseButtonControlInput.State.valueOf(jsonObject.getString("state"))
+        MouseButtonControlInputCondition.State.valueOf(jsonObject.getString("state"))
       );
       default -> throw new IllegalArgumentException("Input type " + type + " not supported");
     };
   }
 
-  private JsonObject controlInputToJson(ControlInput<?> controlInput) {
-    if (controlInput instanceof KeyControlInput keyControlCondition) {
+  private JsonObject controlInputConditionToJson(ControlInputCondition<?> controlInputCondition) {
+    if (controlInputCondition instanceof KeyControlInputCondition keyControlCondition) {
       return new JsonObject()
         .put("type", "key")
         .put("key", keyControlCondition.key().name())
         .put("state", keyControlCondition.state().name());
-    } else if (controlInput instanceof MouseButtonControlInput mouseButtonControlCondition) {
+    } else if (controlInputCondition instanceof MouseButtonControlInputCondition mouseButtonControlCondition) {
       return new JsonObject()
         .put("type", "mouse")
         .put("button", mouseButtonControlCondition.button().name())
         .put("state", mouseButtonControlCondition.state().name());
     } else {
-      throw new IllegalArgumentException("ControlInput " + controlInput.getClass() + " not supported");
+      throw new IllegalArgumentException("ControlInput " + controlInputCondition.getClass() + " not supported");
     }
   }
 }

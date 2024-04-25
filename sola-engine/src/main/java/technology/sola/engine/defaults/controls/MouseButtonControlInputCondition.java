@@ -4,10 +4,10 @@ import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.engine.input.MouseInput;
 
-public record MouseButtonControlInput(
+public record MouseButtonControlInputCondition(
   MouseButton button,
   State state
-) implements ControlInput<MouseButtonControlInput.State> {
+) implements ControlInputCondition<MouseButtonControlInputCondition.State> {
   @Override
   public boolean isActive(KeyboardInput keyboardInput, MouseInput mouseInput) {
     if (state == State.PRESSED) {

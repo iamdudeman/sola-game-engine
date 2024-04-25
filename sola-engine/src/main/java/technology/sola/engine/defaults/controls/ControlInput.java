@@ -1,10 +1,8 @@
 package technology.sola.engine.defaults.controls;
 
-import technology.sola.engine.input.KeyboardInput;
-import technology.sola.engine.input.MouseInput;
+import java.util.List;
 
-public interface ControlInput<T> {
-  T state();
-
-  boolean isActive(KeyboardInput keyboardInput, MouseInput mouseInput);
+public record ControlInput(
+  List<ControlInputCondition<?>> conditions
+) {
 }
