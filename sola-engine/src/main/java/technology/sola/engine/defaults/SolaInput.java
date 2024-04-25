@@ -2,10 +2,10 @@ package technology.sola.engine.defaults;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import technology.sola.engine.assets.input.ControlConfig;
 import technology.sola.engine.defaults.input.ControlInput;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
-import technology.sola.math.linear.Vector2D;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,11 +20,6 @@ public class SolaInput {
   public SolaInput(KeyboardInput keyboardInput, MouseInput mouseInput) {
     this.keyboardInput = keyboardInput;
     this.mouseInput = mouseInput;
-  }
-
-  // todo how does this work when touch input is added
-  public Vector2D getMousePosition() {
-    return mouseInput.getMousePosition();
   }
 
   public boolean isActive(String controlId) {
@@ -53,12 +48,15 @@ public class SolaInput {
     return false;
   }
 
-  // todo ability to update inputs of one control
-
-  // todo convenience method to not need list of list
-
-  public SolaInput setControl(String id, List<List<ControlInput<?>>> inputs) {
+  public SolaInput addControl(String id, List<List<ControlInput<?>>> inputs) {
     controls.put(id, inputs);
+
+    return this;
+  }
+
+  public SolaInput setControls(ControlConfig controlConfig) {
+    controls.clear();
+    controlConfig.controls().forEach(this::addControl);
 
     return this;
   }
