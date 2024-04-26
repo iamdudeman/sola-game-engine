@@ -7,11 +7,13 @@ technology.sola.engine.assets.graphics.font
 technology.sola.engine.assets.graphics.font.exception
 technology.sola.engine.assets.graphics.font.mapper
 technology.sola.engine.assets.graphics.gui
+technology.sola.engine.assets.input
 technology.sola.engine.assets.json
 technology.sola.engine.core
 technology.sola.engine.core.component
 technology.sola.engine.core.event
 technology.sola.engine.defaults
+technology.sola.engine.defaults.controls
 technology.sola.engine.defaults.graphics.modules
 technology.sola.engine.event
 technology.sola.engine.graphics
