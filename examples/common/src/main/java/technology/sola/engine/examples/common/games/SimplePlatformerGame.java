@@ -4,6 +4,7 @@ import technology.sola.ecs.Component;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
+import technology.sola.engine.assets.input.ControlsConfig;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaWithDefaults;
@@ -15,7 +16,6 @@ import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
-import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
@@ -50,6 +50,16 @@ public class SimplePlatformerGame extends SolaWithDefaults {
     solaEcs.addSystems(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem(), new GlassSystem(eventHub));
     solaEcs.setWorld(buildWorld());
     eventHub.add(CollisionEvent.class, new GameDoneEventListener());
+  }
+
+  @Override
+  protected void onAsyncInit(Runnable completeAsyncInit) {
+    assetLoaderProvider.get(ControlsConfig.class)
+      .getNewAsset("controls", "assets/input/simple_platformer.controls.json")
+      .executeWhenLoaded(controlsConfig -> {
+        solaControls.addControls(controlsConfig);
+        completeAsyncInit.run();
+      });
   }
 
   private class GameDoneEventListener implements EventListener<CollisionEvent> {
@@ -213,13 +223,15 @@ public class SimplePlatformerGame extends SolaWithDefaults {
         .forEach(view -> {
           DynamicBodyComponent dynamicBodyComponent = view.c2();
 
-          if (keyboardInput.isKeyHeld(Key.D) && dynamicBodyComponent.getVelocity().x() < 150) {
+          if (solaControls.isActive("RIGHT") && dynamicBodyComponent.getVelocity().x() < 150) {
             dynamicBodyComponent.applyForce(150, 0);
           }
-          if (keyboardInput.isKeyHeld(Key.A) && dynamicBodyComponent.getVelocity().x() > -150) {
+
+          if (solaControls.isActive("LEFT") && dynamicBodyComponent.getVelocity().x() > -150) {
             dynamicBodyComponent.applyForce(-150, 0);
           }
-          if (dynamicBodyComponent.isGrounded() && keyboardInput.isKeyHeld(Key.SPACE)) {
+
+          if (dynamicBodyComponent.isGrounded() && solaControls.isActive("JUMP")) {
             dynamicBodyComponent.applyForce(0, -3000);
           } else if (dynamicBodyComponent.getVelocity().y() > 0) {
             dynamicBodyComponent.applyForce(0, 1.5f * solaPhysics.getGravitySystem().getGravityConstant() * dynamicBodyComponent.getMaterial().getMass());

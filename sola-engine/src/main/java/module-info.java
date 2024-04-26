@@ -14,6 +14,7 @@ module technology.sola.engine {
   exports technology.sola.engine.assets.graphics.font.exception;
   exports technology.sola.engine.assets.graphics.font.mapper;
   exports technology.sola.engine.assets.graphics.gui;
+  exports technology.sola.engine.assets.input;
   exports technology.sola.engine.assets.json;
 
   exports technology.sola.engine.core;
@@ -22,6 +23,7 @@ module technology.sola.engine {
 
   exports technology.sola.engine.defaults;
   exports technology.sola.engine.defaults.graphics.modules;
+  exports technology.sola.engine.defaults.controls;
 
   exports technology.sola.engine.event;
 

@@ -1,0 +1,36 @@
+{
+  "$id": "MouseControlInput.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MouseControlInput",
+  "type": "object",
+  "required": [
+    "type",
+    "button",
+    "state"
+  ],
+  "properties": {
+    "type": {
+      "const": "mouse",
+      "description": "The type of the control input."
+    },
+    "button": {
+      "type": "string",
+      "description": "The mouse button to check if active. Use values from MouseButton.java enum",
+      "enum": [
+        "PRIMARY",
+        "MIDDLE",
+        "SECONDARY",
+        "BACK",
+        "FORWARD"
+      ]
+    },
+    "state": {
+      "type": "string",
+      "description": "The state the mouse button must be in to be considered active.",
+      "enum": [
+        "PRESSED",
+        "DRAGGED"
+      ]
+    }
+  }
+}

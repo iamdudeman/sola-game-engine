@@ -54,6 +54,11 @@ public abstract class SolaWithDefaults extends Sola {
    * called.
    */
   protected GuiDocument guiDocument;
+  /**
+   * The {@link SolaControls} instance for this Sola. It can be used in place of other input related objects for
+   * convenience.
+   */
+  protected final SolaControls solaControls;
   private Consumer<Renderer> renderFunction = renderer -> {
   };
   private Color backgroundColor = Color.BLACK;
@@ -65,6 +70,7 @@ public abstract class SolaWithDefaults extends Sola {
    */
   protected SolaWithDefaults(SolaConfiguration.Builder solaConfigurationBuilder) {
     super(solaConfigurationBuilder);
+    this.solaControls = new SolaControls(keyboardInput, mouseInput);
   }
 
   /**
@@ -74,6 +80,7 @@ public abstract class SolaWithDefaults extends Sola {
    */
   protected SolaWithDefaults(SolaConfiguration configuration) {
     super(configuration);
+    this.solaControls = new SolaControls(keyboardInput, mouseInput);
   }
 
   /**
