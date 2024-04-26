@@ -55,11 +55,13 @@ public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Ent
 
     switch (colliderComponent.getColliderType()) {
       case CIRCLE -> {
+        // todo sprite bounds need to be applied here
         Circle circle = colliderComponent.asCircle(cameraModifiedEntityTransform);
 
         renderer.drawCircle(transform.x() + colliderComponent.getOffsetX(), transform.y() + colliderComponent.getOffsetY(), circle.radius(), Color.RED);
       }
       case AABB -> {
+        // todo sprite bounds need to be applied here
         Rectangle rectangle = colliderComponent.asRectangle(cameraModifiedEntityTransform);
 
         renderer.drawRect(rectangle.min().x(), rectangle.min().y(), rectangle.getWidth(), rectangle.getHeight(), Color.RED);

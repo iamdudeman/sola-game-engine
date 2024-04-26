@@ -27,7 +27,9 @@ public final class CollisionUtils {
   ) {
     Entity entityA = viewEntryA.entity();
     Entity entityB = viewEntryB.entity();
+    // todo sprite bounds need to be applied here
     TransformComponent transformA = viewEntryA.c2();
+    // todo sprite bounds need to be applied here
     TransformComponent transformB = viewEntryB.c2();
     ColliderComponent colliderA = viewEntryA.c1();
     ColliderComponent colliderB = viewEntryB.c1();
