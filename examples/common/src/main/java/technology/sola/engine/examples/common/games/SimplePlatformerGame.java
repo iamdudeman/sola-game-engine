@@ -57,7 +57,7 @@ public class SimplePlatformerGame extends SolaWithDefaults {
     assetLoaderProvider.get(ControlsConfig.class)
       .getNewAsset("controls", "assets/input/simple_platformer.controls.json")
       .executeWhenLoaded(controlsConfig -> {
-        solaControls.setControls(controlsConfig);
+        solaControls.addControls(controlsConfig);
         completeAsyncInit.run();
       });
   }
