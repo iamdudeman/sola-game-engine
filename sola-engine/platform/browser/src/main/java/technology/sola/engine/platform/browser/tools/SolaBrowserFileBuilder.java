@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.browser.tools;
 
+import org.teavm.backend.javascript.JSModuleType;
 import org.teavm.tooling.TeaVMTargetType;
 import org.teavm.tooling.builder.BuildException;
 import org.teavm.tooling.builder.BuildResult;
@@ -68,6 +69,7 @@ public class SolaBrowserFileBuilder {
     // Configurable
     buildStrategy.setMainClass(mainClass);
     buildStrategy.addSourcesJar(jarPath);
+    buildStrategy.setOptimizationLevel(obfuscate ? TeaVMOptimizationLevel.ADVANCED : TeaVMOptimizationLevel.SIMPLE);
     buildStrategy.setObfuscated(obfuscate);
 
     // Non-configurable
@@ -75,13 +77,13 @@ public class SolaBrowserFileBuilder {
     buildStrategy.setTargetFileName(OUTPUT_FILE_JS);
     buildStrategy.setTargetDirectory(buildDirectory);
     buildStrategy.setTargetType(TeaVMTargetType.JAVASCRIPT);
+    buildStrategy.setJsModuleType(JSModuleType.NONE);
 
     buildStrategy.setStrict(false);
     buildStrategy.setDebugInformationGenerated(false);
     buildStrategy.setSourceMapsFileGenerated(false);
     buildStrategy.setSourceFilesCopied(false);
     buildStrategy.setIncremental(false);
-    buildStrategy.setOptimizationLevel(TeaVMOptimizationLevel.SIMPLE);
     buildStrategy.setCacheDirectory("build/teavm-cache");
     buildStrategy.setMinHeapSize(4);
     buildStrategy.setMaxHeapSize(128);
@@ -94,8 +96,6 @@ public class SolaBrowserFileBuilder {
     } catch (BuildException ex) {
       throw new RuntimeException(ex);
     }
-
-    buildResult.getGeneratedFiles().forEach(System.out::println);
 
     if (!buildResult.getProblems().getSevereProblems().isEmpty()) {
       buildResult.getProblems().getSevereProblems().forEach(problem -> {

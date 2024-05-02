@@ -2,6 +2,8 @@
 
 ## Known Bugs List
 
+* obfuscation causes rendering to not work for browser platform :(
+
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Planned Cleanup List
@@ -10,6 +12,7 @@
 
 ## TODO List
 
+* add new dist and build task for generating dev/prod web stuff
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
 * default collider sizing to size of sprite if that is used
