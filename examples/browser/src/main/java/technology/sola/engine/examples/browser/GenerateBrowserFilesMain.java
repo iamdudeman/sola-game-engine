@@ -6,8 +6,6 @@ import technology.sola.engine.platform.browser.tools.SolaBrowserFileBuilder;
  * Uses {@link SolaBrowserFileBuilder} to generate HTML and JS from {@link BrowserMain}.
  */
 public class GenerateBrowserFilesMain {
-  public static final boolean IS_PROD_BUILD = false;
-
   /**
    * Entry point for program that starts Browser example transpiling.
    *
@@ -16,16 +14,16 @@ public class GenerateBrowserFilesMain {
   public static void main(String[] args) {
     String buildDirectory = getCommandLineArg(args, 0, "examples/browser/build");
     String jarFile = getCommandLineArg(args, 1, "browser-0.0.1.jar");
-    String buildTypeString = IS_PROD_BUILD ? "prod" : "dev";
+    boolean isDebug = getCommandLineArg(args, 2, "").equals("debug");
 
-    System.out.println("Generating " + buildTypeString + " html and js for BrowserMain using [build/libs/" + jarFile + "]");
+    System.out.println("Generating" + (isDebug ? " debug" : "") + " html and js for BrowserMain using [build/libs/" + jarFile + "]");
 
     SolaBrowserFileBuilder solaBrowserFileBuilder = new SolaBrowserFileBuilder(buildDirectory);
 
     solaBrowserFileBuilder.transpileSolaJar(
       "build/libs/" + jarFile,
       BrowserMain.class.getName(),
-      IS_PROD_BUILD
+      !isDebug
     );
 
     solaBrowserFileBuilder.createIndexHtmlWithOverlay();
