@@ -141,25 +141,25 @@ public class JsCanvasUtils {
 
     // manually converting pixel array into Uint8ClampedArray since it is much more performant
     private static final String RENDER = """
-      var pixelData = new Uint8ClampedArray(rendererData.length * 4);
-      var pixelDataIndex = 0;
+      const pixelData = new Uint8ClampedArray(rendererData.length * 4);
+      let pixelDataIndex = 0;
 
-      for (var i = 0; i < rendererData.length; i++) {
-        var argb = rendererData[i];
-        var r = (argb >> 16) & 0xFF;
-        var g = (argb >> 8) & 0xFF;
-        var b = argb & 0xFF;
-        var alpha = (argb >> 24) & 0xFF;
+      for (let index = 0; index < rendererData.length; index++) {
+        const argb = rendererData[index];
+        const red = (argb >> 16) & 0xFF;
+        const green = (argb >> 8) & 0xFF;
+        const blue = argb & 0xFF;
+        const alpha = (argb >> 24) & 0xFF;
 
-        pixelData[pixelDataIndex++] = r;
-        pixelData[pixelDataIndex++] = g;
-        pixelData[pixelDataIndex++] = b;
+        pixelData[pixelDataIndex++] = red;
+        pixelData[pixelDataIndex++] = green;
+        pixelData[pixelDataIndex++] = blue;
         pixelData[pixelDataIndex++] = alpha;
       }
 
-      var imageData = new ImageData(pixelData, width, height);
+      const imageData = new ImageData(pixelData, width, height);
 
-      var tempCanvas = document.createElement("canvas");
+      const tempCanvas = document.createElement("canvas");
 
       tempCanvas.width = width;
       tempCanvas.height = height;
