@@ -2,8 +2,6 @@
 
 ## Known Bugs List
 
-* obfuscation causes rendering to not work for browser platform :(
-
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Planned Cleanup List

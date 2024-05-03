@@ -85,10 +85,7 @@ public class SolaBrowserFileBuilder {
     buildStrategy.setSourceFilesCopied(false);
     buildStrategy.setIncremental(false);
     buildStrategy.setCacheDirectory("build/teavm-cache");
-    buildStrategy.setMinHeapSize(4);
-    buildStrategy.setMaxHeapSize(128);
     buildStrategy.setShortFileNames(false);
-    buildStrategy.setMaxTopLevelNames(10000);
 
     BuildResult buildResult;
     try {
