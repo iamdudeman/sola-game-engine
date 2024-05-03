@@ -8,6 +8,7 @@ import org.gradle.api.tasks.bundling.Zip
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.task
+import org.gradle.kotlin.dsl.withType
 
 interface SolaWebDistributionPluginExtension {
   var generateFilesMainClass: String?
@@ -46,6 +47,18 @@ class SolaWebDistributionPlugin : Plugin<Project> {
         inputs.file("build/libs/${project.name}-${project.version}.jar")
         outputs.file("build/sola.js")
         mainClass.set(generateFilesMainClass)
+      }
+
+      project.task("generateDebugWebHtmlAndJs") {
+        group = "build"
+
+        doFirst {
+          project.tasks.withType<JavaExec> {
+            setArgsString("build ${project.name}-${project.version}.jar debug")
+          }
+        }
+
+        finalizedBy(project.tasks.getByPath("generateWebHtmlAndJs"))
       }
 
       project.task("distWebZip", Zip::class) {

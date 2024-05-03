@@ -12,20 +12,25 @@ public class GenerateBrowserFilesMain {
    * @param args command line args
    */
   public static void main(String[] args) {
-    String buildDirectory = args.length > 0 ? args[0] : "examples/browser/build";
-    String jarFile = args.length > 1 ? args[1] : "browser-0.0.1.jar";
+    String buildDirectory = getCommandLineArg(args, 0, "examples/browser/build");
+    String jarFile = getCommandLineArg(args, 1, "browser-0.0.1.jar");
+    boolean isDebug = getCommandLineArg(args, 2, "").equals("debug");
 
-    System.out.println("Generating html and js for BrowserMain using [build/libs/" + jarFile + "]");
-    System.out.println("Output at:");
+    System.out.println("Generating" + (isDebug ? " debug" : "") + " html and js for BrowserMain using [build/libs/" + jarFile + "]");
 
     SolaBrowserFileBuilder solaBrowserFileBuilder = new SolaBrowserFileBuilder(buildDirectory);
 
     solaBrowserFileBuilder.transpileSolaJar(
       "build/libs/" + jarFile,
       BrowserMain.class.getName(),
-      false
+      !isDebug
     );
 
     solaBrowserFileBuilder.createIndexHtmlWithOverlay();
+    System.out.println("Successfully generated html and js");
+  }
+
+  private static String getCommandLineArg(String[] args, int index, String defaultValue) {
+    return args.length > index ? args[index] : defaultValue;
   }
 }

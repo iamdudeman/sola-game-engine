@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 public class BrowserRestClient implements RestClient {
   @Override
   public void request(String method, String path, JsonElement body, Consumer<HttpResponse> httpResponseSupplier) {
-    XMLHttpRequest request = XMLHttpRequest.create();
+    XMLHttpRequest request = new XMLHttpRequest();
 
     request.open(method, path, true);
     request.setRequestHeader("accept", "application/json");

@@ -115,9 +115,10 @@ public class BrowserSolaPlatform extends SolaPlatform {
   protected void onRender(Renderer renderer) {
     if (useSoftwareRendering) {
       AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+      var pixels = ((SoftwareRenderer) renderer).getPixels();
 
       JsCanvasUtils.renderToCanvas(
-        ((SoftwareRenderer) renderer).getPixels(),
+        pixels,
         renderer.getWidth(), renderer.getHeight(),
         aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height()
       );
