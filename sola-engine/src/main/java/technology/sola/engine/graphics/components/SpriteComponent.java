@@ -6,6 +6,8 @@ import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 
+import java.util.function.Consumer;
+
 /**
  * SpriteCOmponent is a {@link Component} that contains data for rendering 2d sprites for an
  * {@link technology.sola.ecs.Entity}.
@@ -72,5 +74,10 @@ public class SpriteComponent implements Component {
    */
   public AssetHandle<SolaImage> getSprite(AssetLoader<SpriteSheet> spriteSheetAssetLoader) {
     return spriteKeyFrame.getSprite(spriteSheetAssetLoader);
+  }
+
+  public void addSpriteLoadedEvent(AssetLoader<SpriteSheet> spriteSheetAssetLoader, Consumer<SolaImage> onSpriteLoaded) {
+    spriteKeyFrame.getSprite(spriteSheetAssetLoader)
+      .executeWhenLoaded(onSpriteLoaded);
   }
 }

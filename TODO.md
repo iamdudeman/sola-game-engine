@@ -1,5 +1,11 @@
 # sola-game-engine TODO list
 
+* ~~default collider sizing to size of sprite if that is used~~
+* maybe a util that creates a collider based on sprite
+    * at that time can decide shape and if offset or what not is needed
+    * maybe put in ColliderComponent
+    * probably need SpriteComponent onLoadedSprite listener of some sort
+
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -12,7 +18,6 @@
 
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
-* default collider sizing to size of sprite if that is used
 * Figure out how to handle TouchInput (probably at the same time as AndroidPlatform implementation)
     * Primarily for browser but also could be supported in JavaFX
     * touchstart and touchend all hard coded to MouseButton.Primary currently

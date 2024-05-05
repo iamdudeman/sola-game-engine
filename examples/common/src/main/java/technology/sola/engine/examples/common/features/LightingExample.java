@@ -46,7 +46,7 @@ public class LightingExample extends SolaWithDefaults {
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
-    
+
     defaultsConfigurator.useGraphics().useLighting(new Color(10, 10, 10)).useBackgroundColor(Color.WHITE);
 
     solaEcs.addSystem(new PlayerSystem());
@@ -61,6 +61,10 @@ public class LightingExample extends SolaWithDefaults {
     assetLoaderProvider.get(SpriteSheet.class)
       .getNewAsset("forest", "assets/sprites/forest.sprites.json")
       .executeWhenLoaded(spriteSheet -> completeAsyncInit.run());
+  }
+
+  private void hmm() {
+
   }
 
   private World buildWorld() {
