@@ -20,7 +20,7 @@ public class ColliderUtils {
    * @param spriteSheetAssetLoader the {@link AssetLoader} for {@link SpriteSheet}
    * @return the entity
    */
-  public static Entity autoSizeColliderUsingSprite(Entity entity, AssetLoader<SpriteSheet> spriteSheetAssetLoader) {
+  public static Entity autoSizeColliderToSprite(Entity entity, AssetLoader<SpriteSheet> spriteSheetAssetLoader) {
     var transformComponent = entity.getComponent(TransformComponent.class);
     var colliderComponent = entity.getComponent(ColliderComponent.class);
     var spriteComponent = entity.getComponent(SpriteComponent.class);
