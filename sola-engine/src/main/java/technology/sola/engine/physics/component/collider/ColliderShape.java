@@ -1,14 +1,12 @@
 package technology.sola.engine.physics.component.collider;
 
-import technology.sola.engine.physics.component.ColliderComponent;
-
 public interface ColliderShape {
   /**
-   * Gets the {@link ColliderComponent.ColliderType} of this collider.
+   * Gets the {@link ColliderType} of this collider.
    *
    * @return the {@code ColliderType} of this collider
    */
-  ColliderComponent.ColliderType type();
+  ColliderType type();
 
   /**
    * Gets the width of the bounding box around this collider.

@@ -2,6 +2,8 @@ package technology.sola.engine.physics.component;
 
 import technology.sola.ecs.Component;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.physics.component.collider.ColliderTag;
+import technology.sola.engine.physics.component.collider.ColliderType;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
@@ -10,8 +12,8 @@ import technology.sola.math.linear.Vector2D;
  * ColliderComponent is a {@link Component} that contains collision data for an {@link technology.sola.ecs.Entity}.
  * The currently supported collider types are:
  * <ul>
- *   <li>{@link ColliderComponent.ColliderType#AABB}</li>
- *   <li>{@link ColliderComponent.ColliderType#CIRCLE}</li>
+ *   <li>{@link ColliderType#AABB}</li>
+ *   <li>{@link ColliderType#CIRCLE}</li>
  * </ul>
  */
 public class ColliderComponent implements Component {
@@ -310,25 +312,5 @@ public class ColliderComponent implements Component {
   }
 
   private ColliderComponent() {
-  }
-
-  /**
-   * Available collider types.
-   */
-  public enum ColliderType {
-    /**
-     * Axis Aligned Bounding Box
-     */
-    AABB,
-    /**
-     * Circle
-     */
-    CIRCLE
-  }
-
-  /**
-   * Identifier tag for this collider. Can be used to ignore collisions with other colliders with various tags.
-   */
-  public interface ColliderTag {
   }
 }

@@ -20,6 +20,7 @@ import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
+import technology.sola.engine.physics.component.collider.ColliderTag;
 import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.math.linear.Vector2D;
@@ -277,7 +278,7 @@ public class SimplePlatformerGame extends SolaWithDefaults {
     }
   }
 
-  private enum ColliderTags implements ColliderComponent.ColliderTag {
+  private enum ColliderTags implements ColliderTag {
     IGNORE
   }
 }

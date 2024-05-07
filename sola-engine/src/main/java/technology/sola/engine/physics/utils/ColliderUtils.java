@@ -6,6 +6,7 @@ import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
+import technology.sola.engine.physics.component.collider.ColliderType;
 
 /**
  * ColliderUtils is a collection of utility methods for configuring {@link ColliderComponent}.
@@ -38,12 +39,12 @@ public class ColliderUtils {
       var width = sprite.getWidth();
       var height = sprite.getHeight();
 
-      if (colliderType == ColliderComponent.ColliderType.AABB) {
+      if (colliderType == ColliderType.AABB) {
         entity.addComponent(ColliderComponent.aabb(
           colliderComponent.getOffsetX(), colliderComponent.getOffsetY(),
           width, height
         ));
-      } else if (colliderType == ColliderComponent.ColliderType.CIRCLE) {
+      } else if (colliderType == ColliderType.CIRCLE) {
         float additionalOffsetX = 0;
         float additionalOffsetY = 0;
         float radius = width * 0.5f;

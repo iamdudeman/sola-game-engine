@@ -1,11 +1,9 @@
 package technology.sola.engine.physics.component.collider;
 
-import technology.sola.engine.physics.component.ColliderComponent;
-
 public record CircleColliderShape(float radius) implements ColliderShape {
   @Override
-  public ColliderComponent.ColliderType type() {
-    return ColliderComponent.ColliderType.CIRCLE;
+  public ColliderType type() {
+    return ColliderType.CIRCLE;
   }
 
   @Override

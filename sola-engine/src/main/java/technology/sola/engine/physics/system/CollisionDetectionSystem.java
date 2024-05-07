@@ -6,6 +6,7 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.ColliderComponent;
+import technology.sola.engine.physics.component.collider.ColliderTag;
 import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.engine.physics.system.collision.CollisionDetectionBroadPhase;
@@ -109,13 +110,13 @@ public class CollisionDetectionSystem extends EcsSystem {
   }
 
   private boolean shouldIgnoreCollision(ColliderComponent colliderA, ColliderComponent colliderB) {
-    for (ColliderComponent.ColliderTag colliderTag : colliderA.getTags()) {
+    for (ColliderTag colliderTag : colliderA.getTags()) {
       if (colliderB.hasIgnoreColliderTag(colliderTag)) {
         return true;
       }
     }
 
-    for (ColliderComponent.ColliderTag colliderTag : colliderB.getTags()) {
+    for (ColliderTag colliderTag : colliderB.getTags()) {
       if (colliderA.hasIgnoreColliderTag(colliderTag)) {
         return true;
       }
