@@ -31,9 +31,21 @@ public class ColliderUtils {
           width, height
         ));
       } else if (colliderType == ColliderComponent.ColliderType.CIRCLE) {
+        float additionalOffsetX = 0;
+        float additionalOffsetY = 0;
+        float radius = width * 0.5f;
+
+        if (width > height) {
+          additionalOffsetY = height * 0.5f;
+        } else if (width < height) {
+          additionalOffsetX = width * 0.5f;
+          radius = height * 0.5f;
+        }
+
         entity.addComponent(ColliderComponent.circle(
-          colliderComponent.getOffsetX(), colliderComponent.getOffsetY(),
-          Math.max(width, height) * 0.5f
+          colliderComponent.getOffsetX() - additionalOffsetX,
+          colliderComponent.getOffsetY() - additionalOffsetY,
+          radius
         ));
       } else {
         throw new RuntimeException("Nope");
