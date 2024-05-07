@@ -3,8 +3,6 @@ package technology.sola.engine.examples.common.features;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
-import technology.sola.engine.assets.AssetLoader;
-import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
@@ -22,7 +20,6 @@ import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
-import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.math.linear.Vector2D;
@@ -182,39 +179,5 @@ public class LightingExample extends SolaWithDefaults {
     fireParticleEmitterComponent.setParticlesPerEmit(2);
 
     return fireParticleEmitterComponent;
-  }
-
-  // todo a utility method like this maybe could be used to auto size collider based on sprite size
-  private static void findAPlaceForThis(Entity entity, AssetLoader<SpriteSheet> spriteSheetAssetLoader) {
-    var colliderComponent = entity.getComponent(ColliderComponent.class);
-    var spriteComponent = entity.getComponent(SpriteComponent.class);
-
-    if (colliderComponent == null) {
-      throw new RuntimeException("Required");
-    }
-
-    if (spriteComponent == null) {
-      throw new RuntimeException("Required");
-    }
-
-    spriteComponent.addSpriteLoadedEvent(spriteSheetAssetLoader, sprite -> {
-      var colliderType = colliderComponent.getColliderType();
-      var width = sprite.getWidth();
-      var height = sprite.getHeight();
-
-      if (colliderType == ColliderComponent.ColliderType.AABB) {
-        entity.addComponent(ColliderComponent.aabb(
-          colliderComponent.getOffsetX(), colliderComponent.getOffsetY(),
-          width, height
-        ));
-      } else if (colliderType == ColliderComponent.ColliderType.CIRCLE) {
-        entity.addComponent(ColliderComponent.circle(
-          colliderComponent.getOffsetX(), colliderComponent.getOffsetY(),
-          Math.max(width, height) * 0.5f
-        ));
-      } else {
-        throw new RuntimeException("Nope");
-      }
-    });
   }
 }
