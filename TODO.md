@@ -1,11 +1,5 @@
 # sola-game-engine TODO list
 
-* ~~default collider sizing to size of sprite if that is used~~
-* maybe a util that creates a collider based on sprite
-    * at that time can decide shape and if offset or what not is needed
-    * maybe put in ColliderComponent
-    * probably need SpriteComponent onLoadedSprite listener of some sort
-
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
