@@ -33,7 +33,7 @@ public class ColliderUtils {
       throw new IllegalStateException("entity must have a SpriteComponent");
     }
 
-    spriteComponent.addSpriteLoadedEvent(spriteSheetAssetLoader, sprite -> {
+    spriteComponent.executeWhenLoaded(spriteSheetAssetLoader, sprite -> {
       var colliderType = colliderComponent.getColliderType();
       var width = sprite.getWidth();
       var height = sprite.getHeight();

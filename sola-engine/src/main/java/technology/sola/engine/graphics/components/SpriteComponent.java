@@ -76,7 +76,14 @@ public class SpriteComponent implements Component {
     return spriteKeyFrame.getSprite(spriteSheetAssetLoader);
   }
 
-  public void addSpriteLoadedEvent(AssetLoader<SpriteSheet> spriteSheetAssetLoader, Consumer<SolaImage> onSpriteLoaded) {
+  /**
+   * Executes the provided consumer asynchronously once the sprite for this {@link SpriteComponent} has been loaded.
+   * This will execute immediately if the sprite is already loaded.
+   *
+   * @param spriteSheetAssetLoader the {@link AssetLoader} for {@link SpriteSheet}s
+   * @param onSpriteLoaded         the function to execute if the asset is loaded
+   */
+  public void executeWhenLoaded(AssetLoader<SpriteSheet> spriteSheetAssetLoader, Consumer<SolaImage> onSpriteLoaded) {
     spriteKeyFrame.getSprite(spriteSheetAssetLoader)
       .executeWhenLoaded(onSpriteLoaded);
   }
