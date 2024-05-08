@@ -2,8 +2,8 @@ package technology.sola.engine.physics.component;
 
 import technology.sola.ecs.Component;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.physics.component.collider.ColliderTag;
-import technology.sola.engine.physics.component.collider.ColliderType;
+import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.physics.component.collider.*;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
@@ -17,20 +17,22 @@ import technology.sola.math.linear.Vector2D;
  * </ul>
  */
 public class ColliderComponent implements Component {
-  // Properties for all
-  private ColliderType colliderType;
+  private final ColliderShape<?> colliderShape;
   private float offsetX;
   private float offsetY;
   private boolean isSensor = false;
   private ColliderTag[] tags = new ColliderTag[0];
   private ColliderTag[] ignoreTags = new ColliderTag[0];
 
-  // Properties for circle
-  private Float radius = null;
+  public ColliderComponent(ColliderShape<?> colliderShape) {
+    this(colliderShape, 0f, 0f);
+  }
 
-  // Properties for rectangle
-  private Float width = null;
-  private Float height = null;
+  public ColliderComponent(ColliderShape<?> colliderShape, float offsetX, float offsetY) {
+    this.colliderShape = colliderShape;
+    this.offsetX = offsetX;
+    this.offsetY = offsetY;
+  }
 
   /**
    * Creates a rectangle {@link ColliderComponent} with a width and height of 1.
@@ -63,13 +65,10 @@ public class ColliderComponent implements Component {
    * @return a rectangle {@code ColliderComponent}
    */
   public static ColliderComponent aabb(float offsetX, float offsetY, float width, float height) {
-    ColliderComponent colliderComponent = new ColliderComponent();
+    ColliderComponent colliderComponent = new ColliderComponent(new AABBColliderShape(width, height));
 
     colliderComponent.offsetX = offsetX;
     colliderComponent.offsetY = offsetY;
-    colliderComponent.colliderType = ColliderType.AABB;
-    colliderComponent.width = width;
-    colliderComponent.height = height;
 
     return colliderComponent;
   }
@@ -103,12 +102,10 @@ public class ColliderComponent implements Component {
    * @return a circle {@code ColliderComponent}
    */
   public static ColliderComponent circle(float offsetX, float offsetY, float radius) {
-    ColliderComponent colliderComponent = new ColliderComponent();
+    ColliderComponent colliderComponent = new ColliderComponent(new CircleColliderShape(radius));
 
     colliderComponent.offsetX = offsetX;
     colliderComponent.offsetY = offsetY;
-    colliderComponent.colliderType = ColliderType.CIRCLE;
-    colliderComponent.radius = radius;
 
     return colliderComponent;
   }
@@ -134,10 +131,7 @@ public class ColliderComponent implements Component {
    * @return the bounding box width of this collider
    */
   public float getBoundingWidth(float transformScaleX) {
-    return switch (colliderType) {
-      case AABB -> width * transformScaleX;
-      case CIRCLE -> radius * 2 * transformScaleX;
-    };
+    return colliderShape.getBoundingWidth(transformScaleX);
   }
 
   /**
@@ -147,10 +141,7 @@ public class ColliderComponent implements Component {
    * @return the bounding box height of this collider
    */
   public float getBoundingHeight(float transformScaleY) {
-    return switch (colliderType) {
-      case AABB -> height * transformScaleY;
-      case CIRCLE -> radius * 2 * transformScaleY;
-    };
+    return colliderShape.getBoundingHeight(transformScaleY);
   }
 
   /**
@@ -264,19 +255,11 @@ public class ColliderComponent implements Component {
    * @return the {@code Circle} representation of this collider
    */
   public Circle asCircle(TransformComponent transformComponent) {
-    if (!ColliderType.CIRCLE.equals(colliderType)) {
-      throw new ColliderComponentException(colliderType, ColliderType.CIRCLE);
+    if (!ColliderType.CIRCLE.equals(getColliderType())) {
+      throw new ColliderComponentException(getColliderType(), ColliderType.CIRCLE);
     }
 
-    float transformScale = Math.max(transformComponent.getScaleX(), transformComponent.getScaleY());
-    float radiusWithTransform = radius * transformScale;
-
-    Vector2D center = new Vector2D(
-      transformComponent.getX() + radiusWithTransform + offsetX,
-      transformComponent.getY() + radiusWithTransform + offsetY
-    );
-
-    return new Circle(radiusWithTransform, center);
+    return (Circle) colliderShape.getShape(transformComponent, offsetX, offsetY);
   }
 
   /**
@@ -286,20 +269,15 @@ public class ColliderComponent implements Component {
    * @return the {@code Rectangle} representation of  this collider
    */
   public Rectangle asRectangle(TransformComponent transformComponent) {
-    if (!ColliderType.AABB.equals(colliderType)) {
-      throw new ColliderComponentException(colliderType, ColliderType.AABB);
+    if (!ColliderType.AABB.equals(getColliderType())) {
+      throw new ColliderComponentException(getColliderType(), ColliderType.AABB);
     }
 
-    Vector2D min = new Vector2D(
-      transformComponent.getX() + offsetX,
-      transformComponent.getY() + offsetY
-    );
-    Vector2D max = new Vector2D(
-      min.x() + transformComponent.getScaleX() * width,
-      min.y() + transformComponent.getScaleY() * height
-    );
+    return (Rectangle) colliderShape.getShape(transformComponent, offsetX, offsetY);
+  }
 
-    return new Rectangle(min, max);
+  public void debugRender(Renderer renderer, TransformComponent transformComponent) {
+    colliderShape.debugRender(renderer, transformComponent, offsetX, offsetY);
   }
 
   /**
@@ -308,9 +286,6 @@ public class ColliderComponent implements Component {
    * @return the {@code ColliderType} of this collider
    */
   public ColliderType getColliderType() {
-    return colliderType;
-  }
-
-  private ColliderComponent() {
+    return colliderShape.type();
   }
 }

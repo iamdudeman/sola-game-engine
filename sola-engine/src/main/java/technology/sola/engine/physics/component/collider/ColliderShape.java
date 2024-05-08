@@ -1,6 +1,9 @@
 package technology.sola.engine.physics.component.collider;
 
-public interface ColliderShape {
+import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.graphics.renderer.Renderer;
+
+public interface ColliderShape<T> {
   /**
    * Gets the {@link ColliderType} of this collider.
    *
@@ -23,4 +26,8 @@ public interface ColliderShape {
    * @return the bounding box height of this collider
    */
   float getBoundingHeight(float transformScaleY);
+
+  T getShape(TransformComponent transformComponent, float offsetX, float offsetY);
+
+  void debugRender(Renderer renderer, TransformComponent transformComponent, float offsetX, float offsetY);
 }
