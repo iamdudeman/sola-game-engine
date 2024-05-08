@@ -65,7 +65,7 @@ public class ColliderComponent implements Component {
    * @return a rectangle {@code ColliderComponent}
    */
   public static ColliderComponent aabb(float offsetX, float offsetY, float width, float height) {
-    ColliderComponent colliderComponent = new ColliderComponent(new AABBColliderShape(width, height));
+    ColliderComponent colliderComponent = new ColliderComponent(new ColliderShapeAABB(width, height));
 
     colliderComponent.offsetX = offsetX;
     colliderComponent.offsetY = offsetY;
@@ -102,7 +102,7 @@ public class ColliderComponent implements Component {
    * @return a circle {@code ColliderComponent}
    */
   public static ColliderComponent circle(float offsetX, float offsetY, float radius) {
-    ColliderComponent colliderComponent = new ColliderComponent(new CircleColliderShape(radius));
+    ColliderComponent colliderComponent = new ColliderComponent(new ColliderShapeCircle(radius));
 
     colliderComponent.offsetX = offsetX;
     colliderComponent.offsetY = offsetY;

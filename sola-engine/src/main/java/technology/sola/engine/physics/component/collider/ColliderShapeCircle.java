@@ -6,10 +6,10 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.linear.Vector2D;
 
-public record CircleColliderShape(
+public record ColliderShapeCircle(
   float radius
 ) implements ColliderShape<Circle> {
-  public CircleColliderShape() {
+  public ColliderShapeCircle() {
     this(0.5f);
   }
 

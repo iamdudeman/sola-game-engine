@@ -6,11 +6,11 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
-public record AABBColliderShape(
+public record ColliderShapeAABB(
   float width,
   float height
 ) implements ColliderShape<Rectangle> {
-  public AABBColliderShape() {
+  public ColliderShapeAABB() {
     this(1, 1);
   }
 
