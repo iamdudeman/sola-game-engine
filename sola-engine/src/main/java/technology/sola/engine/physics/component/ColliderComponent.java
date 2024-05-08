@@ -74,43 +74,6 @@ public class ColliderComponent implements Component {
   }
 
   /**
-   * Creates a circle {@link ColliderComponent} with a radius of 0.5.
-   *
-   * @return a circle {@code ColliderComponent}
-   */
-  public static ColliderComponent circle() {
-    return circle(0.5f);
-  }
-
-  /**
-   * Creates a circle {@link ColliderComponent} with defined radius.
-   *
-   * @param radius the radius of the collider
-   * @return a circle {@code ColliderComponent}
-   */
-  public static ColliderComponent circle(float radius) {
-    return circle(0, 0, radius);
-  }
-
-  /**
-   * Creates a circle {@link ColliderComponent} with defined radius. Its top, left coordinate is offset  from the
-   * top, left coordinate of the Transform.
-   *
-   * @param offsetX the x coordinate offset
-   * @param offsetY the y coordinate offset
-   * @param radius  the radius of the collider
-   * @return a circle {@code ColliderComponent}
-   */
-  public static ColliderComponent circle(float offsetX, float offsetY, float radius) {
-    ColliderComponent colliderComponent = new ColliderComponent(new ColliderShapeCircle(radius));
-
-    colliderComponent.offsetX = offsetX;
-    colliderComponent.offsetY = offsetY;
-
-    return colliderComponent;
-  }
-
-  /**
    * @return the x offset from the transform
    */
   public float getOffsetX() {

@@ -15,6 +15,8 @@ import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
+import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
+import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
 import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.math.linear.Vector2D;
 
@@ -189,21 +191,21 @@ public class PongGame extends SolaWithDefaults {
       new TransformComponent(configuration.rendererWidth() / 2f, configuration.rendererHeight() / 2f, BALL_SIZE),
       new CircleRendererComponent(Color.WHITE, true),
       dynamicBodyComponent,
-      ColliderComponent.circle()
+      new ColliderComponent(new ColliderShapeCircle())
     ).setName("ball");
 
     world.createEntity(
       new TransformComponent(5, configuration.rendererHeight() / 2f - BALL_SIZE / 2f, BALL_SIZE, BALL_SIZE * 6),
       new DynamicBodyComponent(paddleMaterial, true),
       new RectangleRendererComponent(Color.WHITE, true),
-      ColliderComponent.aabb()
+      new ColliderComponent(new ColliderShapeAABB())
     ).setName("player");
 
     world.createEntity(
       new TransformComponent(configuration.rendererWidth() - BALL_SIZE - 5, configuration.rendererHeight() / 2f - BALL_SIZE / 2f, BALL_SIZE, BALL_SIZE * 6),
       new RectangleRendererComponent(Color.WHITE, true),
       new DynamicBodyComponent(paddleMaterial, true),
-      ColliderComponent.aabb()
+      new ColliderComponent(new ColliderShapeAABB())
     ).setName("computer");
 
     // boundaries
@@ -213,22 +215,22 @@ public class PongGame extends SolaWithDefaults {
     world.createEntity(
       new TransformComponent(0, -boundarySize, configuration.rendererWidth(), boundarySize),
       new DynamicBodyComponent(boundaryMaterial, true),
-      ColliderComponent.aabb()
+      new ColliderComponent(new ColliderShapeAABB())
     );
     world.createEntity(
       new TransformComponent(0, configuration.rendererHeight(), configuration.rendererWidth(), boundarySize),
       new DynamicBodyComponent(boundaryMaterial, true),
-      ColliderComponent.aabb()
+      new ColliderComponent(new ColliderShapeAABB())
     );
     world.createEntity(
       new TransformComponent(-boundarySize, 0, boundarySize, configuration.rendererHeight()),
       new DynamicBodyComponent(boundaryMaterial, true),
-      ColliderComponent.aabb().setSensor(true)
+      new ColliderComponent(new ColliderShapeAABB()).setSensor(true)
     ).setName("playerGoal");
     world.createEntity(
       new TransformComponent(configuration.rendererWidth(), 0, boundarySize, configuration.rendererHeight()),
       new DynamicBodyComponent(boundaryMaterial, true),
-      ColliderComponent.aabb().setSensor(true)
+      new ColliderComponent(new ColliderShapeAABB()).setSensor(true)
     ).setName("computerGoal");
 
     return world;

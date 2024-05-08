@@ -22,6 +22,8 @@ import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
+import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
+import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
 import technology.sola.engine.physics.system.collision.QuadTreeCollisionDetectionBroadPhase;
 import technology.sola.engine.physics.system.collision.SpatialHashMapCollisionDetectionBroadPhase;
 
@@ -139,20 +141,20 @@ public class PhysicsExample extends SolaWithDefaults {
         .addComponent(new TransformComponent(x, y, CIRCLE_RADIUS))
         .addComponent(new DynamicBodyComponent(circleMaterial, isKinematic))
         .addComponent(new CircleRendererComponent(isKinematic ? Color.WHITE : Color.BLUE, true))
-        .addComponent(ColliderComponent.circle());
+        .addComponent(new ColliderComponent(new ColliderShapeCircle()));
     }
 
     world.createEntity(
       new TransformComponent(0, 0, squareSide, zoomedHeight),
-      ColliderComponent.aabb()
+      new ColliderComponent(new ColliderShapeAABB())
     );
     world.createEntity(
       new TransformComponent(zoomedWidth - squareSide, 0, squareSide, zoomedHeight),
-      ColliderComponent.aabb()
+      new ColliderComponent(new ColliderShapeAABB())
     );
     world.createEntity(
       new TransformComponent(0, zoomedHeight - squareSide, zoomedWidth, squareSide),
-      ColliderComponent.aabb()
+      new ColliderComponent(new ColliderShapeAABB())
     );
 
     return world;
@@ -181,25 +183,25 @@ public class PhysicsExample extends SolaWithDefaults {
         .addComponent(new TransformComponent(x, y, CIRCLE_RADIUS))
         .addComponent(new DynamicBodyComponent(circleMaterial, isKinematic))
         .addComponent(new CircleRendererComponent(isKinematic ? Color.WHITE : Color.BLUE, true))
-        .addComponent(ColliderComponent.circle());
+        .addComponent(new ColliderComponent(new ColliderShapeCircle()));
     }
 
     for (int i = 0; i < zoomedHeight; i += squareSide) {
       world.createEntity()
         .addComponent(new TransformComponent(0, i, squareSide, squareSide))
-        .addComponent(ColliderComponent.aabb());
+        .addComponent(new ColliderComponent(new ColliderShapeAABB()));
     }
 
     for (int i = 0; i < zoomedHeight; i += squareSide) {
       world.createEntity()
         .addComponent(new TransformComponent(zoomedWidth - squareSide, i, squareSide, squareSide))
-        .addComponent(ColliderComponent.aabb());
+        .addComponent(new ColliderComponent(new ColliderShapeAABB()));
     }
 
     for (int i = 0; i < zoomedWidth; i += squareSide) {
       world.createEntity()
         .addComponent(new TransformComponent(i, zoomedHeight - squareSide, squareSide, squareSide))
-        .addComponent(ColliderComponent.aabb());
+        .addComponent(new ColliderComponent(new ColliderShapeAABB()));
     }
 
     return world;

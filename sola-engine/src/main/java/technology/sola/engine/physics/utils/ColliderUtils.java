@@ -6,6 +6,7 @@ import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
+import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
 import technology.sola.engine.physics.component.collider.ColliderType;
 
 /**
@@ -56,10 +57,10 @@ public class ColliderUtils {
           radius = height * 0.5f;
         }
 
-        entity.addComponent(ColliderComponent.circle(
+        entity.addComponent(new ColliderComponent(
+          new ColliderShapeCircle(radius),
           colliderComponent.getOffsetX() - additionalOffsetX,
-          colliderComponent.getOffsetY() - additionalOffsetY,
-          radius
+          colliderComponent.getOffsetY() - additionalOffsetY
         ));
       } else {
         throw new IllegalStateException("Unsupported collider type: " + colliderType);
