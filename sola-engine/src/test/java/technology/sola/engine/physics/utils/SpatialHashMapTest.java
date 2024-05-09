@@ -6,6 +6,7 @@ import technology.sola.ecs.Entity;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
+import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
 
 import java.util.Collections;
 import java.util.List;
@@ -105,13 +106,12 @@ class SpatialHashMapTest {
 
   private List<View2Entry<ColliderComponent, TransformComponent>> createTestView() {
     return List.of(
-      new View2Entry<>(Mockito.mock(Entity.class), ColliderComponent.aabb(10, 10), new TransformComponent(0, 0)),
-      new View2Entry<>(Mockito.mock(Entity.class), ColliderComponent.aabb(20, 20), new TransformComponent(25, 25)),
-      new View2Entry<>(Mockito.mock(Entity.class), ColliderComponent.aabb(15, 15), new TransformComponent(55, 55)),
-      new View2Entry<>(Mockito.mock(Entity.class), ColliderComponent.aabb(10, 10), new TransformComponent(25, 35)),
-      new View2Entry<>(Mockito.mock(Entity.class), ColliderComponent.aabb(10, 10), new TransformComponent(45, 35))
+      new View2Entry<>(Mockito.mock(Entity.class), new ColliderComponent(new ColliderShapeAABB(10, 10)), new TransformComponent(0, 0)),
+      new View2Entry<>(Mockito.mock(Entity.class), new ColliderComponent(new ColliderShapeAABB(20, 20)), new TransformComponent(25, 25)),
+      new View2Entry<>(Mockito.mock(Entity.class), new ColliderComponent(new ColliderShapeAABB(15, 15)), new TransformComponent(55, 55)),
+      new View2Entry<>(Mockito.mock(Entity.class), new ColliderComponent(new ColliderShapeAABB(10, 10)), new TransformComponent(25, 35)),
+      new View2Entry<>(Mockito.mock(Entity.class), new ColliderComponent(new ColliderShapeAABB(10, 10)), new TransformComponent(45, 35))
     );
   }
-
 }
 

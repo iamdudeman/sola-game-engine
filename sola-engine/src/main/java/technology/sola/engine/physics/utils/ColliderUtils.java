@@ -6,6 +6,9 @@ import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
+import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
+import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
+import technology.sola.engine.physics.component.collider.ColliderType;
 
 /**
  * ColliderUtils is a collection of utility methods for configuring {@link ColliderComponent}.
@@ -38,12 +41,12 @@ public class ColliderUtils {
       var width = sprite.getWidth();
       var height = sprite.getHeight();
 
-      if (colliderType == ColliderComponent.ColliderType.AABB) {
-        entity.addComponent(ColliderComponent.aabb(
-          colliderComponent.getOffsetX(), colliderComponent.getOffsetY(),
-          width, height
+      if (colliderType == ColliderType.AABB) {
+        entity.addComponent(new ColliderComponent(
+          new ColliderShapeAABB(width, height),
+          colliderComponent.getOffsetX(), colliderComponent.getOffsetY()
         ));
-      } else if (colliderType == ColliderComponent.ColliderType.CIRCLE) {
+      } else if (colliderType == ColliderType.CIRCLE) {
         float additionalOffsetX = 0;
         float additionalOffsetY = 0;
         float radius = width * 0.5f;
@@ -55,10 +58,10 @@ public class ColliderUtils {
           radius = height * 0.5f;
         }
 
-        entity.addComponent(ColliderComponent.circle(
+        entity.addComponent(new ColliderComponent(
+          new ColliderShapeCircle(radius),
           colliderComponent.getOffsetX() - additionalOffsetX,
-          colliderComponent.getOffsetY() - additionalOffsetY,
-          radius
+          colliderComponent.getOffsetY() - additionalOffsetY
         ));
       } else {
         throw new IllegalStateException("Unsupported collider type: " + colliderType);

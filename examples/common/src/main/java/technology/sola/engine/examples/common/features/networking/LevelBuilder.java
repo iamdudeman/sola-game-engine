@@ -5,6 +5,7 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
+import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
 
 /**
  * LevelBuilder contains utilities for building a {@link World} that both server and client can use.
@@ -22,7 +23,7 @@ public class LevelBuilder {
     world.createEntity(
       new TransformComponent(0, 500, 800, 80),
       new RectangleRendererComponent(Color.WHITE),
-      ColliderComponent.aabb()
+      new ColliderComponent(new ColliderShapeAABB())
     );
 
     return world;

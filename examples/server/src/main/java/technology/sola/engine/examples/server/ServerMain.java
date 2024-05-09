@@ -13,6 +13,7 @@ import technology.sola.engine.examples.common.features.networking.messages.*;
 import technology.sola.engine.networking.socket.SocketMessage;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
+import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
 import technology.sola.engine.server.ClientConnection;
 import technology.sola.engine.server.SolaServer;
 import technology.sola.engine.server.rest.SolaResponse;
@@ -81,7 +82,7 @@ public class ServerMain {
         "player-" + clientConnection.getClientId(),
         new TransformComponent(400, 400, 25),
         new DynamicBodyComponent(),
-        ColliderComponent.circle(),
+        new ColliderComponent(new ColliderShapeCircle()),
         new PlayerComponent()
       );
     }

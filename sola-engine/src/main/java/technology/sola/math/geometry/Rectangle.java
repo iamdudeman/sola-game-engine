@@ -8,7 +8,7 @@ import technology.sola.math.linear.Vector2D;
  * @param min the top, left point of the rectangle
  * @param max the bottom, right point of the rectangle
  */
-public record Rectangle(Vector2D min, Vector2D max) {
+public record Rectangle(Vector2D min, Vector2D max) implements Shape {
   /**
    * Creates a rectangle by min and max points.
    * <p>
@@ -28,6 +28,11 @@ public record Rectangle(Vector2D min, Vector2D max) {
     }
   }
 
+  @Override
+  public boolean contains(Vector2D point) {
+    return point.x() >= min.x() && point.x() <= max.x() && point.y() >= min.y() && point.y() <= max.y();
+  }
+
   /**
    * Gets the width of the rectangle.
    *
@@ -44,16 +49,6 @@ public record Rectangle(Vector2D min, Vector2D max) {
    */
   public float getHeight() {
     return max.subtract(min).y();
-  }
-
-  /**
-   * Checks if this Rectangle contains a point.
-   *
-   * @param point the point to check
-   * @return true if this rectangle contains the point
-   */
-  public boolean contains(Vector2D point) {
-    return point.x() >= min.x() && point.x() <= max.x() && point.y() >= min.y() && point.y() <= max.y();
   }
 
   /**
