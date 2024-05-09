@@ -8,7 +8,7 @@ import technology.sola.math.linear.Vector2D;
  * @param radius the radius of the circle
  * @param center the center point of the circle
  */
-public record Circle(float radius, Vector2D center) {
+public record Circle(float radius, Vector2D center) implements Shape {
   /**
    * Creates a circle with defined radius and center. If the radius provided is zero then a degenerate circle will be
    * created.
@@ -26,12 +26,7 @@ public record Circle(float radius, Vector2D center) {
     }
   }
 
-  /**
-   * Checks if this Circle contains a point.
-   *
-   * @param point the point to check
-   * @return true if this circle contains the point
-   */
+  @Override
   public boolean contains(Vector2D point) {
     return center.subtract(point).magnitudeSq() < radius * radius;
   }

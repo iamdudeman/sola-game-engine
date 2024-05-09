@@ -10,67 +10,40 @@ import technology.sola.math.linear.Vector2D;
 
 /**
  * ColliderComponent is a {@link Component} that contains collision data for an {@link technology.sola.ecs.Entity}.
- * The currently supported collider types are:
+ * The currently supported {@link ColliderShape}s are:
  * <ul>
- *   <li>{@link ColliderType#AABB}</li>
- *   <li>{@link ColliderType#CIRCLE}</li>
+ *   <li>{@link ColliderShapeAABB}</li>
+ *   <li>{@link ColliderShapeCircle}</li>
  * </ul>
  */
 public class ColliderComponent implements Component {
   private final ColliderShape<?> colliderShape;
-  private float offsetX;
-  private float offsetY;
+  private final float offsetX;
+  private final float offsetY;
   private boolean isSensor = false;
   private ColliderTag[] tags = new ColliderTag[0];
   private ColliderTag[] ignoreTags = new ColliderTag[0];
 
+  /**
+   * Creates a ColliderComponent instance with specified {@link ColliderShape}.
+   *
+   * @param colliderShape the {@link ColliderShape}
+   */
   public ColliderComponent(ColliderShape<?> colliderShape) {
     this(colliderShape, 0f, 0f);
   }
 
+  /**
+   * Creates a ColliderComponent instance with specified {@link ColliderShape} and collider offset.
+   *
+   * @param colliderShape the {@link ColliderShape}
+   * @param offsetX       the collider x-axis offset
+   * @param offsetY       the collider y-axis offset
+   */
   public ColliderComponent(ColliderShape<?> colliderShape, float offsetX, float offsetY) {
     this.colliderShape = colliderShape;
     this.offsetX = offsetX;
     this.offsetY = offsetY;
-  }
-
-  /**
-   * Creates a rectangle {@link ColliderComponent} with a width and height of 1.
-   *
-   * @return a rectangle {@code ColliderComponent}
-   */
-  public static ColliderComponent aabb() {
-    return aabb(1, 1);
-  }
-
-  /**
-   * Creates a rectangle {@link ColliderComponent} with defined width and height.
-   *
-   * @param width  the width of the collision box
-   * @param height the height of the collision box
-   * @return a rectangle {@code ColliderComponent}
-   */
-  public static ColliderComponent aabb(float width, float height) {
-    return aabb(0, 0, width, height);
-  }
-
-  /**
-   * Creates a rectangle {@link ColliderComponent} with defined width and height. Its top, left coordinate is offset
-   * from the top, left coordinate of the Transform.
-   *
-   * @param offsetX the x coordinate offset
-   * @param offsetY the y coordinate offset
-   * @param width   the width of the collision box
-   * @param height  the height of the collision box
-   * @return a rectangle {@code ColliderComponent}
-   */
-  public static ColliderComponent aabb(float offsetX, float offsetY, float width, float height) {
-    ColliderComponent colliderComponent = new ColliderComponent(new ColliderShapeAABB(width, height));
-
-    colliderComponent.offsetX = offsetX;
-    colliderComponent.offsetY = offsetY;
-
-    return colliderComponent;
   }
 
   /**
@@ -115,7 +88,10 @@ public class ColliderComponent implements Component {
    */
   public Rectangle getBoundingRectangle(TransformComponent transformComponent) {
     var min = transformComponent.getTranslate().add(new Vector2D(offsetX, offsetY));
-    var widthHeight = new Vector2D(getBoundingWidth(transformComponent.getScaleX()), getBoundingHeight(transformComponent.getScaleY()));
+    var widthHeight = new Vector2D(
+      getBoundingWidth(transformComponent.getScaleX()),
+      getBoundingHeight(transformComponent.getScaleY())
+    );
 
     return new Rectangle(min, min.add(widthHeight));
   }
@@ -222,7 +198,7 @@ public class ColliderComponent implements Component {
       throw new ColliderComponentException(getColliderType(), ColliderType.CIRCLE);
     }
 
-    return (Circle) colliderShape.getShape(transformComponent, offsetX, offsetY);
+    return (Circle) colliderShape.getGeometry(transformComponent, offsetX, offsetY);
   }
 
   /**
@@ -236,9 +212,15 @@ public class ColliderComponent implements Component {
       throw new ColliderComponentException(getColliderType(), ColliderType.AABB);
     }
 
-    return (Rectangle) colliderShape.getShape(transformComponent, offsetX, offsetY);
+    return (Rectangle) colliderShape.getGeometry(transformComponent, offsetX, offsetY);
   }
 
+  /**
+   * Renders a debug overlay over the collider.
+   *
+   * @param renderer           the {@link Renderer}
+   * @param transformComponent the {@link technology.sola.ecs.Entity}'s {@link TransformComponent}
+   */
   public void debugRender(Renderer renderer, TransformComponent transformComponent) {
     colliderShape.debugRender(renderer, transformComponent, offsetX, offsetY);
   }

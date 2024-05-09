@@ -6,10 +6,20 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
+/**
+ * ColliderShapeAABB is a {@link ColliderShape} implementation for Axis-Aligned Bounding Boxes which utilize a
+ * {@link Rectangle} for its geometric shape representation.
+ *
+ * @param width  the width of the axis-aligned bounding box
+ * @param height the height of the axis-aligned bounding box
+ */
 public record ColliderShapeAABB(
   float width,
   float height
 ) implements ColliderShape<Rectangle> {
+  /**
+   * Creates an instance with height and width both set to 1.
+   */
   public ColliderShapeAABB() {
     this(1, 1);
   }
@@ -30,7 +40,7 @@ public record ColliderShapeAABB(
   }
 
   @Override
-  public Rectangle getShape(TransformComponent transformComponent, float offsetX, float offsetY) {
+  public Rectangle getGeometry(TransformComponent transformComponent, float offsetX, float offsetY) {
     Vector2D min = new Vector2D(
       transformComponent.getX() + offsetX,
       transformComponent.getY() + offsetY
@@ -45,7 +55,7 @@ public record ColliderShapeAABB(
 
   @Override
   public void debugRender(Renderer renderer, TransformComponent transformComponent, float offsetX, float offsetY) {
-    Rectangle rectangle = getShape(transformComponent, offsetX, offsetY);
+    Rectangle rectangle = getGeometry(transformComponent, offsetX, offsetY);
 
     renderer.drawRect(rectangle.min().x(), rectangle.min().y(), rectangle.getWidth(), rectangle.getHeight(), Color.RED);
   }

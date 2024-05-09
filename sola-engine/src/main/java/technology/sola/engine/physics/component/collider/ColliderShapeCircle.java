@@ -6,9 +6,18 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.linear.Vector2D;
 
+/**
+ * ColliderShapeCircle is a {@link ColliderShape} implementation for a circle which utilize a
+ * {@link Circle} for its geometric shape representation.
+ *
+ * @param radius the radius of the circle
+ */
 public record ColliderShapeCircle(
   float radius
 ) implements ColliderShape<Circle> {
+  /**
+   * Creates an instance with radius set to 0.5f.
+   */
   public ColliderShapeCircle() {
     this(0.5f);
   }
@@ -29,7 +38,7 @@ public record ColliderShapeCircle(
   }
 
   @Override
-  public Circle getShape(TransformComponent transformComponent, float offsetX, float offsetY) {
+  public Circle getGeometry(TransformComponent transformComponent, float offsetX, float offsetY) {
     float transformScale = Math.max(transformComponent.getScaleX(), transformComponent.getScaleY());
     float radiusWithTransform = radius * transformScale;
 
@@ -43,7 +52,7 @@ public record ColliderShapeCircle(
 
   @Override
   public void debugRender(Renderer renderer, TransformComponent transformComponent, float offsetX, float offsetY) {
-    Circle circle = getShape(transformComponent, offsetX, offsetY);
+    Circle circle = getGeometry(transformComponent, offsetX, offsetY);
 
     renderer.drawCircle(circle.center().x() - circle.radius(), circle.center().y() - circle.radius(), circle.radius(), Color.RED);
   }

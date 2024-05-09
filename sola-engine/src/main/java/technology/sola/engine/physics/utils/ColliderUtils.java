@@ -6,6 +6,7 @@ import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
+import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
 import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
 import technology.sola.engine.physics.component.collider.ColliderType;
 
@@ -41,9 +42,9 @@ public class ColliderUtils {
       var height = sprite.getHeight();
 
       if (colliderType == ColliderType.AABB) {
-        entity.addComponent(ColliderComponent.aabb(
-          colliderComponent.getOffsetX(), colliderComponent.getOffsetY(),
-          width, height
+        entity.addComponent(new ColliderComponent(
+          new ColliderShapeAABB(width, height),
+          colliderComponent.getOffsetX(), colliderComponent.getOffsetY()
         ));
       } else if (colliderType == ColliderType.CIRCLE) {
         float additionalOffsetX = 0;

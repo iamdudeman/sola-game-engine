@@ -20,6 +20,7 @@ import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
+import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
 import technology.sola.engine.physics.component.collider.ColliderTag;
 import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.physics.event.SensorEvent;
@@ -95,7 +96,7 @@ public class SimplePlatformerGame extends SolaWithDefaults {
       .addComponent(new PlayerComponent())
       .addComponent(new TransformComponent(200, 300, 50, 50))
       .addComponent(new RectangleRendererComponent(Color.BLUE))
-      .addComponent(ColliderComponent.aabb().setIgnoreTags(ColliderTags.IGNORE))
+      .addComponent(new ColliderComponent(new ColliderShapeAABB()).setIgnoreTags(ColliderTags.IGNORE))
       .addComponent(new DynamicBodyComponent())
       .setName("player");
 
@@ -103,39 +104,39 @@ public class SimplePlatformerGame extends SolaWithDefaults {
       .addComponent(new TransformComponent(300, 250, 50, 150f))
       .addComponent(new RectangleRendererComponent(new Color(120, 173, 216, 230)))
       .addComponent(new GlassComponent())
-      .addComponent(ColliderComponent.aabb().setSensor(true));
+      .addComponent(new ColliderComponent(new ColliderShapeAABB()).setSensor(true));
 
     world.createEntity()
       .addComponent(new TransformComponent(150, 400, 200, 75f))
       .addComponent(new RectangleRendererComponent(Color.WHITE))
-      .addComponent(ColliderComponent.aabb());
+      .addComponent(new ColliderComponent(new ColliderShapeAABB()));
 
     world.createEntity()
       .addComponent(new TransformComponent(400, 430, 100, 35f))
       .addComponent(new MovingPlatformComponent())
       .addComponent(new DynamicBodyComponent(true))
       .addComponent(new RectangleRendererComponent(Color.WHITE))
-      .addComponent(ColliderComponent.aabb());
+      .addComponent(new ColliderComponent(new ColliderShapeAABB()));
 
     world.createEntity()
       .addComponent(new TransformComponent(550, 200, 200, 75f))
       .addComponent(new RectangleRendererComponent(Color.WHITE))
-      .addComponent(ColliderComponent.aabb());
+      .addComponent(new ColliderComponent(new ColliderShapeAABB()));
 
     world.createEntity()
       .addComponent(new TransformComponent(950, 190, 200, 75f))
       .addComponent(new RectangleRendererComponent(Color.WHITE))
-      .addComponent(ColliderComponent.aabb());
+      .addComponent(new ColliderComponent(new ColliderShapeAABB()));
 
     world.createEntity()
       .addComponent(new TransformComponent(1500, 320, 100, 50f))
       .addComponent(new RectangleRendererComponent(Color.WHITE))
-      .addComponent(ColliderComponent.aabb());
+      .addComponent(new ColliderComponent(new ColliderShapeAABB()));
 
     Entity finalBlock = world.createEntity()
       .addComponent(new TransformComponent(1750, 280, 50, 50f))
       .addComponent(new RectangleRendererComponent(Color.YELLOW))
-      .addComponent(ColliderComponent.aabb())
+      .addComponent(new ColliderComponent(new ColliderShapeAABB()))
       .setName("finalBlock");
 
     ParticleEmitterComponent particleEmitterComponent = new ParticleEmitterComponent();
