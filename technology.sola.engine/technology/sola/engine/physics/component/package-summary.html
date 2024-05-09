@@ -15,11 +15,7 @@
 <script type="text/javascript" src="../../../../../../script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="package-declaration-page">
-<script type="text/javascript">var evenRowColor = "even-row-color";
-var oddRowColor = "odd-row-color";
-var tableTab = "table-tab";
-var activeTableTab = "active-table-tab";
-var pathtoroot = "../../../../../../";
+<script type="text/javascript">var pathtoroot = "../../../../../../";
 loadScripts(document, 'script');</script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -79,16 +75,20 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">
 <div class="block">This package provides classes for simulating physics.</div>
 </div>
-<div class="col-first odd-row-color"><a href="../event/package-summary.html">technology.sola.engine.physics.event</a></div>
+<div class="col-first odd-row-color"><a href="collider/package-summary.html">technology.sola.engine.physics.component.collider</a></div>
 <div class="col-last odd-row-color">
+<div class="block">This package provides various functionality for <a href="ColliderComponent.html" title="class in technology.sola.engine.physics.component"><code>ColliderComponent</code></a>.</div>
+</div>
+<div class="col-first even-row-color"><a href="../event/package-summary.html">technology.sola.engine.physics.event</a></div>
+<div class="col-last even-row-color">
 <div class="block">This package provides <a href="../../event/Event.html" title="interface in technology.sola.engine.event"><code>Event</code></a>s related to physics operations.</div>
 </div>
-<div class="col-first even-row-color"><a href="../system/package-summary.html">technology.sola.engine.physics.system</a></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><a href="../system/package-summary.html">technology.sola.engine.physics.system</a></div>
+<div class="col-last odd-row-color">
 <div class="block">This package provides various <code>EcsSystem</code>s for simulating physics.</div>
 </div>
-<div class="col-first odd-row-color"><a href="../utils/package-summary.html">technology.sola.engine.physics.utils</a></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><a href="../utils/package-summary.html">technology.sola.engine.physics.utils</a></div>
+<div class="col-last even-row-color">
 <div class="block">This package contains various utilities for helping in physics related calculations.</div>
 </div>
 </div>
@@ -96,22 +96,13 @@ loadScripts(document, 'script');</script>
 </li>
 <li>
 <div id="class-summary">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="class-summary-tab0" role="tab" aria-selected="true" aria-controls="class-summary.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary', 2)" class="active-table-tab">All Classes and Interfaces</button><button id="class-summary-tab1" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab1', 2)" class="table-tab">Interfaces</button><button id="class-summary-tab2" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab2', 2)" class="table-tab">Classes</button><button id="class-summary-tab3" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab3', 2)" class="table-tab">Enum Classes</button></div>
-<div id="class-summary.tabpanel" role="tabpanel">
-<div class="summary-table two-column-summary" aria-labelledby="class-summary-tab0">
+<div class="caption"><span>Classes</span></div>
+<div class="summary-table two-column-summary">
 <div class="table-header col-first">Class</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">ColliderComponent is a <code>Component</code> that contains collision data for an <code>Entity</code>.</div>
-</div>
-<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="ColliderComponent.ColliderTag.html" title="interface in technology.sola.engine.physics.component">ColliderComponent.ColliderTag</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab1">
-<div class="block">Identifier tag for this collider.</div>
-</div>
-<div class="col-first even-row-color class-summary class-summary-tab3"><a href="ColliderComponent.ColliderType.html" title="enum class in technology.sola.engine.physics.component">ColliderComponent.ColliderType</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab3">
-<div class="block">Available collider types.</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="DynamicBodyComponent.html" title="class in technology.sola.engine.physics.component">DynamicBodyComponent</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
@@ -126,7 +117,6 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent.Particle</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Particle contains properties that represent a particle that has been emitted from a <a href="ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component"><code>ParticleEmitterComponent</code></a>.</div>
-</div>
 </div>
 </div>
 </div>

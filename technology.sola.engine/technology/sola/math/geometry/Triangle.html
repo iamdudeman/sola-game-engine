@@ -79,13 +79,18 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>Record Components:</dt>
-<dd><code><span id="param-edgeA">edgeA</span></code> - first side of triangle</dd>
-<dd><code><span id="param-edgeB">edgeB</span></code> - second side of triangle</dd>
-<dd><code><span id="param-edgeC">edgeC</span></code> - third side of triangle</dd>
+<dd><code><span id="param-p1">p1</span></code> - first point of triangle</dd>
+<dd><code><span id="param-p2">p2</span></code> - second point of triangle</dd>
+<dd><code><span id="param-p3">p3</span></code> - third point of triangle</dd>
+</dl>
+<dl class="notes">
+<dt>All Implemented Interfaces:</dt>
+<dd><code><a href="Shape.html" title="interface in technology.sola.math.geometry">Shape</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">Triangle</span>(<a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;edgeA, <a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;edgeB, <a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;edgeC)
-<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
+<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">Triangle</span>(<a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;p1, <a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;p2, <a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;p3)
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a>
+implements <a href="Shape.html" title="interface in technology.sola.math.geometry">Shape</a></span></div>
 <div class="block">Triangle represents a geometric triangle.</div>
 </section>
 <section class="summary">
@@ -98,9 +103,9 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.math.linear.Vector2D,technology.sola.math.linear.Vector2D,technology.sola.math.linear.Vector2D)" class="member-name-link">Triangle</a><wbr>(<a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;edgeA,
- <a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;edgeB,
- <a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;edgeC)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.math.linear.Vector2D,technology.sola.math.linear.Vector2D,technology.sola.math.linear.Vector2D)" class="member-name-link">Triangle</a><wbr>(<a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;p1,
+ <a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;p2,
+ <a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;p3)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates an instance of a <code>Triangle</code> record class.</div>
 </div>
@@ -118,20 +123,10 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#edgeA()" class="member-name-link">edgeA</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#contains(technology.sola.math.linear.Vector2D)" class="member-name-link">contains</a><wbr>(<a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;point)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <a href="#param-edgeA"><code>edgeA</code></a> record component.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#edgeB()" class="member-name-link">edgeB</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <a href="#param-edgeB"><code>edgeB</code></a> record component.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#edgeC()" class="member-name-link">edgeC</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <a href="#param-edgeC"><code>edgeC</code></a> record component.</div>
+<div class="block">Checks if this Shape contains a point.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
@@ -148,9 +143,24 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a hash code value for this object.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#p1()" class="member-name-link">p1</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the value of the <a href="#param-p1"><code>p1</code></a> record component.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#p2()" class="member-name-link">p2</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the value of the <a href="#param-p2"><code>p2</code></a> record component.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#p3()" class="member-name-link">p3</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the value of the <a href="#param-p3"><code>p3</code></a> record component.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a string representation of this record class.</div>
 </div>
 </div>
@@ -173,15 +183,15 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(technology.sola.math.linear.Vector2D,technology.sola.math.linear.Vector2D,technology.sola.math.linear.Vector2D)">
 <h3>Triangle</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Triangle</span><wbr><span class="parameters">(<a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;edgeA,
- <a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;edgeB,
- <a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;edgeC)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Triangle</span><wbr><span class="parameters">(<a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;p1,
+ <a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;p2,
+ <a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;p3)</span></div>
 <div class="block">Creates an instance of a <code>Triangle</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>edgeA</code> - the value for the <a href="#param-edgeA"><code>edgeA</code></a> record component</dd>
-<dd><code>edgeB</code> - the value for the <a href="#param-edgeB"><code>edgeB</code></a> record component</dd>
-<dd><code>edgeC</code> - the value for the <a href="#param-edgeC"><code>edgeC</code></a> record component</dd>
+<dd><code>p1</code> - the value for the <a href="#param-p1"><code>p1</code></a> record component</dd>
+<dd><code>p2</code> - the value for the <a href="#param-p2"><code>p2</code></a> record component</dd>
+<dd><code>p3</code> - the value for the <a href="#param-p3"><code>p3</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -193,6 +203,22 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="contains(technology.sola.math.linear.Vector2D)">
+<h3>contains</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">contains</span><wbr><span class="parameters">(<a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;point)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Shape.html#contains(technology.sola.math.linear.Vector2D)">Shape</a></code></span></div>
+<div class="block">Checks if this Shape contains a point.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="Shape.html#contains(technology.sola.math.linear.Vector2D)">contains</a></code>&nbsp;in interface&nbsp;<code><a href="Shape.html" title="interface in technology.sola.math.geometry">Shape</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>point</code> - the point to check</dd>
+<dt>Returns:</dt>
+<dd>true if this shape contains the point</dd>
+</dl>
+</section>
+</li>
 <li>
 <section class="detail" id="getArea()">
 <h3>getArea</h3>
@@ -246,35 +272,35 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="edgeA()">
-<h3>edgeA</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">edgeA</span>()</div>
-<div class="block">Returns the value of the <a href="#param-edgeA"><code>edgeA</code></a> record component.</div>
+<section class="detail" id="p1()">
+<h3>p1</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">p1</span>()</div>
+<div class="block">Returns the value of the <a href="#param-p1"><code>p1</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <a href="#param-edgeA"><code>edgeA</code></a> record component</dd>
+<dd>the value of the <a href="#param-p1"><code>p1</code></a> record component</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="edgeB()">
-<h3>edgeB</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">edgeB</span>()</div>
-<div class="block">Returns the value of the <a href="#param-edgeB"><code>edgeB</code></a> record component.</div>
+<section class="detail" id="p2()">
+<h3>p2</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">p2</span>()</div>
+<div class="block">Returns the value of the <a href="#param-p2"><code>p2</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <a href="#param-edgeB"><code>edgeB</code></a> record component</dd>
+<dd>the value of the <a href="#param-p2"><code>p2</code></a> record component</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="edgeC()">
-<h3>edgeC</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">edgeC</span>()</div>
-<div class="block">Returns the value of the <a href="#param-edgeC"><code>edgeC</code></a> record component.</div>
+<section class="detail" id="p3()">
+<h3>p3</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">p3</span>()</div>
+<div class="block">Returns the value of the <a href="#param-p3"><code>p3</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <a href="#param-edgeC"><code>edgeC</code></a> record component</dd>
+<dd>the value of the <a href="#param-p3"><code>p3</code></a> record component</dd>
 </dl>
 </section>
 </li>

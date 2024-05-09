@@ -41,6 +41,7 @@ technology.sola.engine.networking.rest
 technology.sola.engine.networking.socket
 technology.sola.engine.physics
 technology.sola.engine.physics.component
+technology.sola.engine.physics.component.collider
 technology.sola.engine.physics.event
 technology.sola.engine.physics.system
 technology.sola.engine.physics.system.collision
