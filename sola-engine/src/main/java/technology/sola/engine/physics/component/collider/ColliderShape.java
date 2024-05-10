@@ -41,7 +41,7 @@ public interface ColliderShape<T extends Shape> {
    * @param offsetY            the y offset of the collider
    * @return the geometric {@link Shape}
    */
-  T getGeometry(TransformComponent transformComponent, float offsetX, float offsetY);
+  T getShape(TransformComponent transformComponent, float offsetX, float offsetY);
 
   /**
    * Renders debug information for the collider shape.

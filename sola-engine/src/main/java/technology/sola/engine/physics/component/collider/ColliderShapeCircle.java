@@ -38,7 +38,7 @@ public record ColliderShapeCircle(
   }
 
   @Override
-  public Circle getGeometry(TransformComponent transformComponent, float offsetX, float offsetY) {
+  public Circle getShape(TransformComponent transformComponent, float offsetX, float offsetY) {
     float transformScale = Math.max(transformComponent.getScaleX(), transformComponent.getScaleY());
     float radiusWithTransform = radius * transformScale;
 
@@ -52,7 +52,7 @@ public record ColliderShapeCircle(
 
   @Override
   public void debugRender(Renderer renderer, TransformComponent transformComponent, float offsetX, float offsetY) {
-    Circle circle = getGeometry(transformComponent, offsetX, offsetY);
+    Circle circle = getShape(transformComponent, offsetX, offsetY);
 
     renderer.drawCircle(circle.center().x() - circle.radius(), circle.center().y() - circle.radius(), circle.radius(), Color.RED);
   }

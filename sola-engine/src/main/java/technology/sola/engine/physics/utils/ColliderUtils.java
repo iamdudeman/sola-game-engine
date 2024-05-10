@@ -37,7 +37,7 @@ public class ColliderUtils {
     }
 
     spriteComponent.executeWhenLoaded(spriteSheetAssetLoader, sprite -> {
-      var colliderType = colliderComponent.getColliderType();
+      var colliderType = colliderComponent.getType();
       var width = sprite.getWidth();
       var height = sprite.getHeight();
 
