@@ -40,7 +40,7 @@ public record ColliderShapeAABB(
   }
 
   @Override
-  public Rectangle getGeometry(TransformComponent transformComponent, float offsetX, float offsetY) {
+  public Rectangle getShape(TransformComponent transformComponent, float offsetX, float offsetY) {
     Vector2D min = new Vector2D(
       transformComponent.getX() + offsetX,
       transformComponent.getY() + offsetY
@@ -55,7 +55,7 @@ public record ColliderShapeAABB(
 
   @Override
   public void debugRender(Renderer renderer, TransformComponent transformComponent, float offsetX, float offsetY) {
-    Rectangle rectangle = getGeometry(transformComponent, offsetX, offsetY);
+    Rectangle rectangle = getShape(transformComponent, offsetX, offsetY);
 
     renderer.drawRect(rectangle.min().x(), rectangle.min().y(), rectangle.getWidth(), rectangle.getHeight(), Color.RED);
   }

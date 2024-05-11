@@ -32,18 +32,22 @@ public final class CollisionUtils {
     ColliderComponent colliderA = viewEntryA.c1();
     ColliderComponent colliderB = viewEntryB.c1();
 
-    return switch (colliderA.getColliderType()) {
-      case AABB -> switch (colliderB.getColliderType()) {
-        case AABB ->
-          calculateAABBVsAABB(entityA, entityB, colliderA.asRectangle(transformA), colliderB.asRectangle(transformB));
-        case CIRCLE ->
-          calculateAABBVsCircle(entityA, entityB, colliderA.asRectangle(transformA), colliderB.asCircle(transformB));
+    return switch (colliderA.getType()) {
+      case AABB -> switch (colliderB.getType()) {
+        case AABB -> calculateAABBVsAABB(
+          entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
+        );
+        case CIRCLE -> calculateAABBVsCircle(
+          entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
+        );
       };
-      case CIRCLE -> switch (colliderB.getColliderType()) {
-        case AABB ->
-          calculateAABBVsCircle(entityB, entityA, colliderB.asRectangle(transformB), colliderA.asCircle(transformA));
-        case CIRCLE ->
-          calculateCircleVsCircle(entityA, entityB, colliderA.asCircle(transformA), colliderB.asCircle(transformB));
+      case CIRCLE -> switch (colliderB.getType()) {
+        case AABB -> calculateAABBVsCircle(
+          entityB, entityA, colliderB.getShape(transformB), colliderA.getShape(transformA)
+        );
+        case CIRCLE -> calculateCircleVsCircle(
+          entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
+        );
       };
     };
   }

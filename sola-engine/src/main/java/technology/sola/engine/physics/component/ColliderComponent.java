@@ -4,8 +4,8 @@ import technology.sola.ecs.Component;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.component.collider.*;
-import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
+import technology.sola.math.geometry.Shape;
 import technology.sola.math.linear.Vector2D;
 
 /**
@@ -188,31 +188,15 @@ public class ColliderComponent implements Component {
   }
 
   /**
-   * Calculates the {@link Circle} representation of this collider based on the position.
+   * Gets the geometric {@link Shape} representation of the collider for collision calculations.
    *
-   * @param transformComponent the transform of the {@link technology.sola.ecs.Entity}
-   * @return the {@code Circle} representation of this collider
+   * @param transformComponent the {@link technology.sola.ecs.Entity}'s current {@link TransformComponent}
+   * @param <T>                the type of the {@link Shape}
+   * @return the {@link Shape} of the collider
    */
-  public Circle asCircle(TransformComponent transformComponent) {
-    if (!ColliderType.CIRCLE.equals(getColliderType())) {
-      throw new ColliderComponentException(getColliderType(), ColliderType.CIRCLE);
-    }
-
-    return (Circle) colliderShape.getGeometry(transformComponent, offsetX, offsetY);
-  }
-
-  /**
-   * Calculates the {@link Rectangle} representation of this collider based on the position.
-   *
-   * @param transformComponent the transform of the {@link technology.sola.ecs.Entity}
-   * @return the {@code Rectangle} representation of  this collider
-   */
-  public Rectangle asRectangle(TransformComponent transformComponent) {
-    if (!ColliderType.AABB.equals(getColliderType())) {
-      throw new ColliderComponentException(getColliderType(), ColliderType.AABB);
-    }
-
-    return (Rectangle) colliderShape.getGeometry(transformComponent, offsetX, offsetY);
+  @SuppressWarnings("unchecked")
+  public <T extends Shape> T getShape(TransformComponent transformComponent) {
+    return (T) colliderShape.getShape(transformComponent, offsetX, offsetY);
   }
 
   /**
@@ -230,7 +214,7 @@ public class ColliderComponent implements Component {
    *
    * @return the {@code ColliderType} of this collider
    */
-  public ColliderType getColliderType() {
+  public ColliderType getType() {
     return colliderShape.type();
   }
 }
