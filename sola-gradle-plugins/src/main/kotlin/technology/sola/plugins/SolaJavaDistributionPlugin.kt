@@ -83,6 +83,9 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
 
         executable("jpackage")
 
+        // todo icon
+        // todo copyright
+
         args(
           "--name", "${project.properties["gameName"]}-${project.version}",
           "--app-version", "${project.version}",

@@ -14,6 +14,9 @@ interface SolaWebDistributionPluginExtension {
   var generateFilesMainClass: String?
 }
 
+// todo use icon as favicon maybe?
+// todo nest copyright and vendor, app version info somewhere
+
 class SolaWebDistributionPlugin : Plugin<Project> {
   override fun apply(project: Project) {
     val solaWebDistributionPluginExtension = project.extensions.create<SolaWebDistributionPluginExtension>("solaWebDist")
