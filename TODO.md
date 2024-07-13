@@ -51,9 +51,14 @@
     * Would need to update physics stuff
 * Physics
     * Collision Detection
-        * Polygon x AABB
-        * Polygon x Circle
-        * Polygon x Polygon
+        * Triangle
+            * x AABB
+            * x Circle
+            * x Triangle
+        * Polygon
+            * x AABB
+            * x Circle
+            * x Polygon
 * Consider adding a "debug console" option
     * While open can toggle things like render debug outlines and debug spatial hashmap stuff
     * Could also maybe allow adding custom commands
