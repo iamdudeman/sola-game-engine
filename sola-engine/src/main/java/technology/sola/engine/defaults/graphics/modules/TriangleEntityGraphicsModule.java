@@ -22,9 +22,9 @@ public class TriangleEntityGraphicsModule extends SolaEntityGraphicsModule<View2
   @Override
   public void renderEntity(Renderer renderer, View2Entry<TriangleRendererComponent, TransformComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
     var triangleRenderer = viewEntry.c1();
-    Vector2D point1 = cameraModifiedEntityTransform.getTranslate();
-    Vector2D point2 = point1.add(triangleRenderer.getPoint2());
-    Vector2D point3 = point1.add(triangleRenderer.getPoint3());
+    Vector2D firstPoint = cameraModifiedEntityTransform.getTranslate();
+    Vector2D secondPoint = cameraModifiedEntityTransform.getTranslate().add(new Vector2D(cameraModifiedEntityTransform.getScaleX(), 0));
+    Vector2D thirdPoint = firstPoint.add(new Vector2D(cameraModifiedEntityTransform.getScaleX() / 2, cameraModifiedEntityTransform.getScaleY()));
 
     // cameraModifiedEntityTransform.getX(), cameraModifiedEntityTransform.getY(), cameraModifiedEntityTransform.getScaleX(), cameraModifiedEntityTransform.getScaleY()
 
@@ -34,9 +34,9 @@ public class TriangleEntityGraphicsModule extends SolaEntityGraphicsModule<View2
 //      renderer.fillRect(cameraModifiedEntityTransform.getX(), cameraModifiedEntityTransform.getY(), cameraModifiedEntityTransform.getScaleX(), cameraModifiedEntityTransform.getScaleY(), rectangleRenderer.getColor());
     } else {
       renderer.drawTriangle(
-        point1.x(), point1.y(),
-        point2.x(), point2.y(),
-        point3.x(), point3.y(),
+        firstPoint.x(), firstPoint.y(),
+        secondPoint.x(), secondPoint.y(),
+        thirdPoint.x(), thirdPoint.y(),
         triangleRenderer.getColor()
       );
     }

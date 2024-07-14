@@ -238,12 +238,12 @@ public class RenderingExample extends Sola {
 
     world.createEntity()
       .addComponent(new LayerComponent("background"))
-      .addComponent(new TransformComponent(600, 100, 60, 80))
-      .addComponent(new TriangleRendererComponent(new Vector2D(1, -1), new Vector2D(2, 0), Color.GREEN));
+      .addComponent(new TransformComponent(600, 200, 60, 80))
+      .addComponent(new TriangleRendererComponent(Color.GREEN));
     world.createEntity()
       .addComponent(new LayerComponent("background"))
-      .addComponent(new TransformComponent(600, 100, 60, 80))
-      .addComponent(new TriangleRendererComponent(new Vector2D(1, -1), new Vector2D(2, 0), Color.RED, false));
+      .addComponent(new TransformComponent(600, 200, 60, 80))
+      .addComponent(new TriangleRendererComponent(Color.RED, false));
 
     world.createEntity()
       .addComponent(new LayerComponent("background"))
