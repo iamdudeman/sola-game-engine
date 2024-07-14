@@ -83,8 +83,8 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
 
         executable("jpackage")
 
-        // todo icon
-        // todo copyright
+        // todo icon https://docs.oracle.com/en/java/javase/17/docs/specs/man/jpackage.html
+        // todo copyright https://docs.oracle.com/en/java/javase/17/docs/specs/man/jpackage.html
 
         args(
           "--name", "${project.properties["gameName"]}-${project.version}",

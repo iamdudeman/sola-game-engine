@@ -51,7 +51,7 @@
     * Would need to update physics stuff
 * Physics
     * Collision Detection
-        * Triangle
+        * Triangle (rendering reference https://github.com/joshb/triangleraster/blob/main/Rasterizer.cpp)
             * x AABB
             * x Circle
             * x Triangle
