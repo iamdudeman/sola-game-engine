@@ -8,6 +8,7 @@ import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.math.SolaMath;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
+import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Vector2D;
 
 /**
@@ -40,12 +41,29 @@ public final class CollisionUtils {
         case CIRCLE -> calculateAABBVsCircle(
           entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
+        case TRIANGLE -> calculateAABBVsTriangle(
+          entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
+        );
       };
       case CIRCLE -> switch (colliderB.getType()) {
         case AABB -> calculateAABBVsCircle(
           entityB, entityA, colliderB.getShape(transformB), colliderA.getShape(transformA)
         );
         case CIRCLE -> calculateCircleVsCircle(
+          entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
+        );
+        case TRIANGLE -> calculateCircleVsTriangle(
+          entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
+        );
+      };
+      case TRIANGLE -> switch (colliderB.getType()) {
+        case AABB -> calculateAABBVsTriangle(
+          entityB, entityA, colliderB.getShape(transformB), colliderA.getShape(transformA)
+        );
+        case CIRCLE -> calculateAABBVsCircle(
+          entityB, entityA, colliderB.getShape(transformB), colliderA.getShape(transformA)
+        );
+        case TRIANGLE -> calculateTriangleVsTriangle(
           entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
       };
@@ -163,6 +181,30 @@ public final class CollisionUtils {
     Vector2D normal = posB.subtract(posA).normalize();
 
     return new CollisionManifold(entityA, entityB, normal, penetration);
+  }
+
+  private static CollisionManifold calculateAABBVsTriangle(
+    Entity entityA, Entity entityB,
+    Rectangle rectangle, Triangle triangle
+  ) {
+    // todo implement
+    throw new RuntimeException("not yet implemented");
+  }
+
+  private static CollisionManifold calculateCircleVsTriangle(
+    Entity entityA, Entity entityB,
+    Circle circle, Triangle triangle
+  ) {
+    // todo implement
+    throw new RuntimeException("not yet implemented");
+  }
+
+  private static CollisionManifold calculateTriangleVsTriangle(
+    Entity entityA, Entity entityB,
+    Triangle triangleA, Triangle triangleB
+  ) {
+    // todo implement
+    throw new RuntimeException("not yet implemented");
   }
 
   private CollisionUtils() {
