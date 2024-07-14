@@ -10,6 +10,7 @@ import technology.sola.math.linear.Vector2D;
 public class TriangleRendererComponent implements Component {
   private Color color;
   private boolean isFilled;
+  private float verticalPointXOffset = 0;
 
   /**
    * Creates a TriangleRendererComponent of desired color that is filled.
@@ -20,6 +21,10 @@ public class TriangleRendererComponent implements Component {
     this(color, true);
   }
 
+  public TriangleRendererComponent(Color color, float verticalPointXOffset) {
+    this(color, true, verticalPointXOffset);
+  }
+
   /**
    * Creates a TriangleRendererComponent of desired color that is either filled or not filled.
    *
@@ -27,8 +32,20 @@ public class TriangleRendererComponent implements Component {
    * @param isFilled whether the triangle should be filled or not
    */
   public TriangleRendererComponent(Color color, boolean isFilled) {
+    this(color, isFilled, 0);
+  }
+
+  /**
+   * Creates a TriangleRendererComponent of desired color that is either filled or not filled.
+   *
+   * @param color    the {@link Color} of the triangle
+   * @param isFilled whether the triangle should be filled or not
+   * @param verticalPointXOffset
+   */
+  public TriangleRendererComponent(Color color, boolean isFilled, float verticalPointXOffset) {
     this.color = color;
     this.isFilled = isFilled;
+    this.verticalPointXOffset = verticalPointXOffset;
   }
 
   /**
@@ -61,5 +78,9 @@ public class TriangleRendererComponent implements Component {
    */
   public void setFilled(boolean filled) {
     isFilled = filled;
+  }
+
+  public float getVerticalPointXOffset() {
+    return verticalPointXOffset;
   }
 }

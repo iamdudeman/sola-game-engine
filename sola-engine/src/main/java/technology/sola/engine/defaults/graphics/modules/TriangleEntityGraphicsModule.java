@@ -23,11 +23,14 @@ public class TriangleEntityGraphicsModule extends SolaEntityGraphicsModule<View2
   public void renderEntity(Renderer renderer, View2Entry<TriangleRendererComponent, TransformComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
     var triangleRenderer = viewEntry.c1();
     Vector2D firstPoint = cameraModifiedEntityTransform.getTranslate();
-    Vector2D secondPoint = cameraModifiedEntityTransform.getTranslate().add(new Vector2D(cameraModifiedEntityTransform.getScaleX(), 0));
-    Vector2D thirdPoint = firstPoint.add(new Vector2D(cameraModifiedEntityTransform.getScaleX() / 2, cameraModifiedEntityTransform.getScaleY()));
-
-    // cameraModifiedEntityTransform.getX(), cameraModifiedEntityTransform.getY(), cameraModifiedEntityTransform.getScaleX(), cameraModifiedEntityTransform.getScaleY()
-
+    Vector2D secondPoint = cameraModifiedEntityTransform.getTranslate().add(new Vector2D(
+      cameraModifiedEntityTransform.getScaleX(),
+      0
+    ));
+    Vector2D thirdPoint = firstPoint.add(new Vector2D(
+      cameraModifiedEntityTransform.getScaleX() / 2 + triangleRenderer.getVerticalPointXOffset(),
+      cameraModifiedEntityTransform.getScaleY()
+    ));
 
     if (triangleRenderer.isFilled()) {
       // todo need to implement still
