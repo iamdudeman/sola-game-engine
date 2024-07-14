@@ -1,8 +1,5 @@
 # sola-game-engine TODO list
 
-* Rendering
-    * draw triangle
-    * fill triangle (reference https://github.com/joshb/triangleraster/blob/main/Rasterizer.cpp)
 * Physics
     * Collision Detection
         * Triangle

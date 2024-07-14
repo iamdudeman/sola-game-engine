@@ -7,9 +7,9 @@ import technology.sola.engine.graphics.Color;
  * TriangleRendererComponent is a {@link Component} containing data for rendering 2d triangles.
  */
 public class TriangleRendererComponent implements Component {
+  private final float verticalPointXOffset;
   private Color color;
   private boolean isFilled;
-  private float verticalPointXOffset = 0;
 
   /**
    * Creates a TriangleRendererComponent of desired color that is filled.
