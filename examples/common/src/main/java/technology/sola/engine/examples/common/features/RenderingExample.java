@@ -247,6 +247,15 @@ public class RenderingExample extends Sola {
 
     world.createEntity()
       .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(600, 290, 60, 80))
+      .addComponent(new TriangleRendererComponent(Color.GREEN));
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(600, 290, 60, 80))
+      .addComponent(new TriangleRendererComponent(Color.RED, false));
+
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
       .addComponent(new TransformComponent(300, 150, 5f, 5f))
       .addComponent(new RectangleRendererComponent(Color.GREEN, false));
 

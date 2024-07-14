@@ -233,11 +233,35 @@ public interface Renderer {
    */
   void fillCircle(float x, float y, float radius, Color color);
 
+  /**
+   * Draws a triangle.
+   *
+   * @param x1 x coordinate for the first point
+   * @param y1 y coordinate for the first point
+   * @param x2 x coordinate for the second point
+   * @param y2 y coordinate for the second point
+   * @param x3 x coordinate for the third point
+   * @param y3 y coordinate for the third point
+   * @param color {@link Color} of the triangle
+   */
   default void drawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, Color color) {
     drawLine(x1, y1, x2, y2, color);
     drawLine(x2, y2, x3, y3, color);
     drawLine(x3, y3, x1, y1, color);
   }
+
+  /**
+   * Draws a filled triangle.
+   *
+   * @param x1 x coordinate for the first point
+   * @param y1 y coordinate for the first point
+   * @param x2 x coordinate for the second point
+   * @param y2 y coordinate for the second point
+   * @param x3 x coordinate for the third point
+   * @param y3 y coordinate for the third point
+   * @param color {@link Color} of the triangle
+   */
+  void fillTriangle(float x1, float y1, float x2, float y2, float x3, float y3, Color color);
 
   /**
    * Draws a {@link SolaImage} at desired coordinate. The coordinate will be the top-left of the image drawn.

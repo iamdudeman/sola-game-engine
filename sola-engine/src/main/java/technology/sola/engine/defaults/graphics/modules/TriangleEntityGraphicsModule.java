@@ -10,8 +10,8 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.math.linear.Vector2D;
 
 /**
- * TriangleEntityGraphicsModule is a {@link SolaEntityGraphicsModule} implementation for rendering {@link Entity} that have a
- * {@link TransformComponent} and {@link TriangleRendererComponent}.
+ * TriangleEntityGraphicsModule is a {@link SolaEntityGraphicsModule} implementation for rendering {@link Entity} that
+ * have a {@link TransformComponent} and {@link TriangleRendererComponent}.
  */
 public class TriangleEntityGraphicsModule extends SolaEntityGraphicsModule<View2Entry<TriangleRendererComponent, TransformComponent>> {
   @Override
@@ -33,8 +33,12 @@ public class TriangleEntityGraphicsModule extends SolaEntityGraphicsModule<View2
     ));
 
     if (triangleRenderer.isFilled()) {
-      // todo need to implement still
-//      renderer.fillRect(cameraModifiedEntityTransform.getX(), cameraModifiedEntityTransform.getY(), cameraModifiedEntityTransform.getScaleX(), cameraModifiedEntityTransform.getScaleY(), rectangleRenderer.getColor());
+      renderer.fillTriangle(
+        firstPoint.x(), firstPoint.y(),
+        secondPoint.x(), secondPoint.y(),
+        thirdPoint.x(), thirdPoint.y(),
+        triangleRenderer.getColor()
+      );
     } else {
       renderer.drawTriangle(
         firstPoint.x(), firstPoint.y(),

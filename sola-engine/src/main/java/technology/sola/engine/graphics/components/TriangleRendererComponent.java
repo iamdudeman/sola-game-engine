@@ -2,7 +2,6 @@ package technology.sola.engine.graphics.components;
 
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
-import technology.sola.math.linear.Vector2D;
 
 /**
  * TriangleRendererComponent is a {@link Component} containing data for rendering 2d triangles.
