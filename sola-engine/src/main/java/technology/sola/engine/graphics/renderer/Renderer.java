@@ -233,6 +233,12 @@ public interface Renderer {
    */
   void fillCircle(float x, float y, float radius, Color color);
 
+  default void drawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, Color color) {
+    drawLine(x1, y1, x2, y2, color);
+    drawLine(x2, y2, x3, y3, color);
+    drawLine(x3, y3, x1, y1, color);
+  }
+
   /**
    * Draws a {@link SolaImage} at desired coordinate. The coordinate will be the top-left of the image drawn.
    *

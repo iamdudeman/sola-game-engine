@@ -197,6 +197,7 @@ public abstract class SolaWithDefaults extends Sola {
         solaGraphics.addGraphicsModules(
           new CircleEntityGraphicsModule(),
           new RectangleEntityGraphicsModule(),
+          new TriangleEntityGraphicsModule(),
           new SpriteEntityGraphicsModule(spriteSheetAssetLoader),
           new ParticleEmitterEntityGraphicsModule()
         );

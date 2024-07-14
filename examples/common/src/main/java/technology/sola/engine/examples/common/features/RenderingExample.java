@@ -13,13 +13,10 @@ import technology.sola.engine.defaults.SolaGraphics;
 import technology.sola.engine.defaults.graphics.modules.CircleEntityGraphicsModule;
 import technology.sola.engine.defaults.graphics.modules.RectangleEntityGraphicsModule;
 import technology.sola.engine.defaults.graphics.modules.SpriteEntityGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.TriangleEntityGraphicsModule;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.components.BlendModeComponent;
-import technology.sola.engine.graphics.components.CircleRendererComponent;
-import technology.sola.engine.graphics.components.LayerComponent;
-import technology.sola.engine.graphics.components.RectangleRendererComponent;
-import technology.sola.engine.graphics.components.SpriteComponent;
+import technology.sola.engine.graphics.components.*;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Layer;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -59,6 +56,7 @@ public class RenderingExample extends Sola {
     solaGraphics.addGraphicsModules(
       new CircleEntityGraphicsModule(),
       new RectangleEntityGraphicsModule(),
+      new TriangleEntityGraphicsModule(),
       new SpriteEntityGraphicsModule(assetLoaderProvider.get(SpriteSheet.class))
     );
 
@@ -237,6 +235,15 @@ public class RenderingExample extends Sola {
       .addComponent(new LayerComponent("background"))
       .addComponent(new TransformComponent(100, 100, 60, 80))
       .addComponent(new RectangleRendererComponent(Color.RED, false));
+
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(600, 100, 60, 80))
+      .addComponent(new TriangleRendererComponent(new Vector2D(1, -1), new Vector2D(2, 0), Color.GREEN));
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(600, 100, 60, 80))
+      .addComponent(new TriangleRendererComponent(new Vector2D(1, -1), new Vector2D(2, 0), Color.RED, false));
 
     world.createEntity()
       .addComponent(new LayerComponent("background"))
