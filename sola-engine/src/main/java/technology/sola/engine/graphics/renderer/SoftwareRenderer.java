@@ -193,8 +193,77 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
   @Override
   public void fillTriangle(float x1, float y1, float x2, float y2, float x3, float y3, Color color) {
-    // todo
+    TriangleEdge[] edges = new TriangleEdge[] {
+      new TriangleEdge(x1, y1, x2, y2),
+      new TriangleEdge(x2, y2, x3, y3),
+      new TriangleEdge(x3, y3, x1, y1),
+    };
+    float maxLength = 0;
+    int longEdgeIndex = 0;
+
+    for (int i = 0; i < edges.length; i++) {
+      TriangleEdge edge = edges[i];
+      float length = edge.y2 - edge.y1;
+
+      if (length > maxLength) {
+        maxLength = length;
+        longEdgeIndex = i;
+      }
+    }
+
+    int shortEdgeIndex1 = (longEdgeIndex + 1) % 3;
+    int shortEdgeIndex2 = (longEdgeIndex + 2) % 3;
+
+    drawTriangleSpansBetweenEdges(edges[longEdgeIndex], edges[shortEdgeIndex1], color);
+    drawTriangleSpansBetweenEdges(edges[longEdgeIndex], edges[shortEdgeIndex2], color);
   }
+
+  private void drawTriangleSpansBetweenEdges(TriangleEdge edge1, TriangleEdge edge2, Color color) {
+    float diffYEdge1 = edge1.y2 - edge1.y1;
+
+    if (diffYEdge1 == 0) {
+      return;
+    }
+
+    float diffYEdge2 = edge2.y2 - edge2.y1;
+
+    if (diffYEdge2 == 0) {
+      return;
+    }
+
+    float diffXEdge1 = edge1.x2 - edge1.x1;
+    float diffXEdge2 = edge2.x2 - edge2.x1;
+    float factor1 = (edge2.y1 - edge1.y1) / diffYEdge1;
+    float factorStep1 = 1.0f / diffYEdge1;
+    float factor2 = 0.0f;
+    float factorStep2 = 1.0f / diffYEdge2;
+
+    for (int y = (int) edge2.y1; y < edge2.y2; y++) {
+      float x1 = edge1.x1 + (diffXEdge1 * factor1);
+      float x2 = edge2.x1 + (diffXEdge2 * factor2);
+
+      drawLine(x1, y, x2, y, color);
+
+      factor1 += factorStep1;
+      factor2 += factorStep2;
+    }
+  }
+
+  private record TriangleEdge(float x1, float y1, float x2, float y2) {
+      private TriangleEdge(float x1, float y1, float x2, float y2) {
+        if (y1 < y2) {
+          this.x1 = x1;
+          this.x2 = x2;
+          this.y1 = y1;
+          this.y2 = y2;
+        } else {
+          this.x1 = x2;
+          this.x2 = x1;
+          this.y1 = y2;
+          this.y2 = y1;
+        }
+      }
+    }
 
   @Override
   public void drawImage(SolaImage solaImage, float x, float y) {
