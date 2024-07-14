@@ -1,5 +1,15 @@
 # sola-game-engine TODO list
 
+* Rendering
+    * draw triangle
+    * fill triangle (reference https://github.com/joshb/triangleraster/blob/main/Rasterizer.cpp)
+* Physics
+    * Collision Detection
+        * Triangle
+            * x AABB
+            * x Circle
+            * x Triangle
+
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -49,11 +59,6 @@
 * Consider adding rotation to TransformComponent
     * Would need to update rendering stuff
     * Would need to update physics stuff
-* Physics
-    * Collision Detection
-        * Polygon x AABB
-        * Polygon x Circle
-        * Polygon x Polygon
 * Consider adding a "debug console" option
     * While open can toggle things like render debug outlines and debug spatial hashmap stuff
     * Could also maybe allow adding custom commands
