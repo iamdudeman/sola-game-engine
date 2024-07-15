@@ -60,7 +60,7 @@ public final class CollisionUtils {
         case AABB -> calculateAABBVsTriangle(
           entityB, entityA, colliderB.getShape(transformB), colliderA.getShape(transformA)
         );
-        case CIRCLE -> calculateAABBVsCircle(
+        case CIRCLE -> calculateCircleVsTriangle(
           entityB, entityA, colliderB.getShape(transformB), colliderA.getShape(transformA)
         );
         case TRIANGLE -> calculateTriangleVsTriangle(
