@@ -24,6 +24,7 @@ import technology.sola.engine.physics.component.collider.ColliderShapeTriangle;
 import technology.sola.engine.physics.component.collider.ColliderTag;
 import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.physics.event.SensorEvent;
+import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.ArrayList;
@@ -129,9 +130,11 @@ public class SimplePlatformerGame extends SolaWithDefaults {
       .addComponent(new CircleRendererComponent(Color.GREEN))
       .addComponent(new ColliderComponent(new ColliderShapeCircle()));
 
+    Triangle triangle = new Triangle(new Vector2D(0, 0), new Vector2D(50, -40), new Vector2D(100, 0));
+
     world.createEntity()
-      .addComponent(new TransformComponent(610, 200, 100, -40))
-      .addComponent(new TriangleRendererComponent(Color.WHITE))
+      .addComponent(new TransformComponent(610, 200, 1))
+      .addComponent(new TriangleRendererComponent(Color.WHITE, triangle))
       .addComponent(new ColliderComponent(new ColliderShapeTriangle()));
 
     world.createEntity()

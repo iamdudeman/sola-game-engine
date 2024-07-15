@@ -7,7 +7,7 @@ import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.components.TriangleRendererComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
-import technology.sola.math.linear.Vector2D;
+import technology.sola.math.linear.Matrix3D;
 
 /**
  * TriangleEntityGraphicsModule is a {@link SolaEntityGraphicsModule} implementation for rendering {@link Entity} that
@@ -22,15 +22,11 @@ public class TriangleEntityGraphicsModule extends SolaEntityGraphicsModule<View2
   @Override
   public void renderEntity(Renderer renderer, View2Entry<TriangleRendererComponent, TransformComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
     var triangleRenderer = viewEntry.c1();
-    Vector2D firstPoint = cameraModifiedEntityTransform.getTranslate();
-    Vector2D secondPoint = cameraModifiedEntityTransform.getTranslate().add(new Vector2D(
-      cameraModifiedEntityTransform.getScaleX(),
-      0
-    ));
-    Vector2D thirdPoint = firstPoint.add(new Vector2D(
-      cameraModifiedEntityTransform.getScaleX() * triangleRenderer.getVerticalPointOffsetPercentage(),
-      cameraModifiedEntityTransform.getScaleY()
-    ));
+    var matrix = Matrix3D.translate(cameraModifiedEntityTransform.getX(), cameraModifiedEntityTransform.getY())
+      .multiply(Matrix3D.scale(cameraModifiedEntityTransform.getScaleX(), cameraModifiedEntityTransform.getScaleY()));
+    var firstPoint = matrix.multiply(triangleRenderer.getTriangle().p1());
+    var secondPoint = matrix.multiply(triangleRenderer.getTriangle().p2());
+    var thirdPoint = matrix.multiply(triangleRenderer.getTriangle().p3());
 
     if (triangleRenderer.isFilled()) {
       renderer.fillTriangle(

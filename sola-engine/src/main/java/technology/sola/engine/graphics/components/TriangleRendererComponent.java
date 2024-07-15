@@ -2,22 +2,24 @@ package technology.sola.engine.graphics.components;
 
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
+import technology.sola.math.geometry.Triangle;
 
 /**
  * TriangleRendererComponent is a {@link Component} containing data for rendering 2d triangles.
  */
 public class TriangleRendererComponent implements Component {
-  private final float verticalPointOffsetPercentage;
   private Color color;
   private boolean isFilled;
+  private final Triangle triangle;
 
   /**
    * Creates a TriangleRendererComponent of desired color that is filled.
    *
-   * @param color the {@link Color} of the triangle
+   * @param color    the {@link Color} of the triangle
+   * @param triangle the shape of the triangle to be rendered
    */
-  public TriangleRendererComponent(Color color) {
-    this(color, true);
+  public TriangleRendererComponent(Color color, Triangle triangle) {
+    this(color, true, triangle);
   }
 
   /**
@@ -25,28 +27,12 @@ public class TriangleRendererComponent implements Component {
    *
    * @param color    the {@link Color} of the triangle
    * @param isFilled whether the triangle should be filled or not
+   * @param triangle the shape of the triangle to be rendered
    */
-  public TriangleRendererComponent(Color color, boolean isFilled) {
-    this(color, isFilled, 0.5f);
-  }
-
-  /**
-   * Creates a TriangleRendererComponent of desired color that is either filled or not filled. A vertical point offset
-   * percentage can be set which modifies where it appears on the horizontal access. 0.5 is midway, 0 and 1 is all the
-   * way left or right respectively creating a right triangle.
-   *
-   * @param color                         the {@link Color} of the triangle
-   * @param isFilled                      whether the triangle should be filled or not
-   * @param verticalPointOffsetPercentage the offset percentage of the vertical most point
-   */
-  public TriangleRendererComponent(Color color, boolean isFilled, float verticalPointOffsetPercentage) {
+  public TriangleRendererComponent(Color color, boolean isFilled, Triangle triangle) {
     this.color = color;
     this.isFilled = isFilled;
-    this.verticalPointOffsetPercentage = verticalPointOffsetPercentage;
-
-    if (verticalPointOffsetPercentage < 0 || verticalPointOffsetPercentage > 1) {
-      throw new IllegalArgumentException("verticalPointOffsetPercentage must be between 0 and 1");
-    }
+    this.triangle = triangle;
   }
 
   /**
@@ -82,12 +68,9 @@ public class TriangleRendererComponent implements Component {
   }
 
   /**
-   * The offset percentage of the vertical point. This modifies where it appears on the horizontal access. 0.5 is
-   * midway, 0 and 1 is all the way left or right respectively creating a right triangle.
-   *
-   * @return the vertical point offset percentage
+   * @return the shape of the triangle to be rendered
    */
-  public float getVerticalPointOffsetPercentage() {
-    return verticalPointOffsetPercentage;
+  public Triangle getTriangle() {
+    return triangle;
   }
 }
