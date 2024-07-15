@@ -12,19 +12,19 @@ import technology.sola.math.linear.Vector2D;
  *
  * @param width
  * @param height
- * @param verticalPointOffset
+ * @param verticalPointOffsetPercentage
  */
 public record ColliderShapeTriangle(
   float width,
   float height,
-  float verticalPointOffset
+  float verticalPointOffsetPercentage
 ) implements ColliderShape<Triangle> {
   public ColliderShapeTriangle() {
-    this(1, 1, 0);
+    this(1, 1, 0.5f);
   }
 
   public ColliderShapeTriangle(float width, float height) {
-    this(width, height, 0);
+    this(width, height, 0.5f);
   }
 
   @Override
@@ -34,14 +34,12 @@ public record ColliderShapeTriangle(
 
   @Override
   public float getBoundingWidth(float transformScaleX) {
-    float offsetAdditionalWidth = Math.abs(verticalPointOffset * 2) - width;
-
-    return (width + Math.max(offsetAdditionalWidth, 0)) * transformScaleX;
+    return width;
   }
 
   @Override
   public float getBoundingHeight(float transformScaleY) {
-    return height * transformScaleY;
+    return height;
   }
 
   @Override
@@ -52,7 +50,7 @@ public record ColliderShapeTriangle(
       0
     ));
     Vector2D thirdPoint = firstPoint.add(new Vector2D(
-      transformComponent.getScaleX() / 2 + verticalPointOffset,
+      transformComponent.getScaleX() * verticalPointOffsetPercentage,
       transformComponent.getScaleY()
     ));
 

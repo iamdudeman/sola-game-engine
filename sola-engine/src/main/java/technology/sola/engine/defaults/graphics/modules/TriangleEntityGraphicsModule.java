@@ -28,7 +28,7 @@ public class TriangleEntityGraphicsModule extends SolaEntityGraphicsModule<View2
       0
     ));
     Vector2D thirdPoint = firstPoint.add(new Vector2D(
-      cameraModifiedEntityTransform.getScaleX() / 2 + triangleRenderer.getVerticalPointXOffset(),
+      cameraModifiedEntityTransform.getScaleX() * triangleRenderer.getVerticalPointOffsetPercentage(),
       cameraModifiedEntityTransform.getScaleY()
     ));
 
