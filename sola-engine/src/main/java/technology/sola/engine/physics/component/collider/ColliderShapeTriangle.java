@@ -4,38 +4,23 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.math.geometry.Triangle;
+import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
 /**
  * ColliderShapeTriangle is a {@link ColliderShape} implementation for a triangle which utilize a
- * {@link Triangle} for its geometric shape representation. The offset percentage of the vertical point. This modifies
- * where it appears on the horizontal access. 0.5 is midway, 0 and 1 is all the way left or right respectively creating
- * a right triangle.
+ * {@link Triangle} for its geometric shape representation.
  *
- * @param width                         the width of the triangle
- * @param height                        the height of the triangle
- * @param verticalPointOffsetPercentage the vertical point offset percentage
+ * @param shape the triangle shape of this collider
  */
 public record ColliderShapeTriangle(
-  float width,
-  float height,
-  float verticalPointOffsetPercentage
+  Triangle shape
 ) implements ColliderShape<Triangle> {
   /**
-   * Creates a triangle with width of 1, height of 1 and vertical point offset percentage of 0.5.
+   * Creates a "unit triangle" collider shape with uniform side lengths of 1.
    */
   public ColliderShapeTriangle() {
-    this(1, 1, 0.5f);
-  }
-
-  /**
-   * Creates a triangle with desired width and height and vertical point offset percentage of 0.5.
-   *
-   * @param width  the width of the triangle
-   * @param height the height of the triangle
-   */
-  public ColliderShapeTriangle(float width, float height) {
-    this(width, height, 0.5f);
+    this(new Triangle(new Vector2D(0, 0), new Vector2D(0.5f, 1), new Vector2D(1, 0)));
   }
 
   @Override
@@ -45,27 +30,42 @@ public record ColliderShapeTriangle(
 
   @Override
   public float getBoundingWidth(float transformScaleX) {
-    return width;
+    float minX = shape.p1().x();
+    float maxX = minX;
+
+    minX = Math.min(minX, shape.p2().x());
+    maxX = Math.max(maxX, shape.p2().x());
+
+    minX = Math.min(minX, shape.p3().x());
+    maxX = Math.max(maxX, shape.p3().x());
+
+    return (maxX - minX) * transformScaleX;
   }
 
   @Override
   public float getBoundingHeight(float transformScaleY) {
-    return height;
+    float minY = shape.p1().y();
+    float maxY = minY;
+
+    minY = Math.min(minY, shape.p2().y());
+    maxY = Math.max(maxY, shape.p2().y());
+
+    minY = Math.min(minY, shape.p3().y());
+    maxY = Math.max(maxY, shape.p3().y());
+
+    return (maxY - minY) * transformScaleY;
   }
 
   @Override
   public Triangle getShape(TransformComponent transformComponent, float offsetX, float offsetY) {
-    Vector2D firstPoint = transformComponent.getTranslate();
-    Vector2D secondPoint = transformComponent.getTranslate().add(new Vector2D(
-      transformComponent.getScaleX(),
-      0
-    ));
-    Vector2D thirdPoint = firstPoint.add(new Vector2D(
-      transformComponent.getScaleX() * verticalPointOffsetPercentage,
-      transformComponent.getScaleY()
-    ));
+    var matrix = Matrix3D.translate(transformComponent.getX() + offsetX, transformComponent.getY() + offsetY)
+      .multiply(Matrix3D.scale(transformComponent.getScaleX(), transformComponent.getScaleY()));
 
-    return new Triangle(firstPoint, secondPoint, thirdPoint);
+    return new Triangle(
+      matrix.multiply(shape.p1()),
+      matrix.multiply(shape.p2()),
+      matrix.multiply(shape.p3())
+    );
   }
 
   @Override

@@ -135,7 +135,7 @@ public class SimplePlatformerGame extends SolaWithDefaults {
     world.createEntity()
       .addComponent(new TransformComponent(610, 200, 1))
       .addComponent(new TriangleRendererComponent(Color.WHITE, triangle))
-      .addComponent(new ColliderComponent(new ColliderShapeTriangle()));
+      .addComponent(new ColliderComponent(new ColliderShapeTriangle(triangle)));
 
     world.createEntity()
       .addComponent(new TransformComponent(950, 190, 200, 75f))
