@@ -10,9 +10,9 @@ import technology.sola.math.linear.Vector2D;
  * @param p3 third point of triangle
  */
 public record Triangle(Vector2D p1, Vector2D p2, Vector2D p3) implements Shape {
-  // Note: implementation from https://stackoverflow.com/a/2049593
   @Override
   public boolean contains(Vector2D point) {
+    // Note: implementation from https://stackoverflow.com/a/2049593
     float d1 = sign(point, p1, p2);
     float d2 = sign(point, p2, p3);
     float d3 = sign(point, p3, p1);
@@ -35,6 +35,11 @@ public record Triangle(Vector2D p1, Vector2D p2, Vector2D p3) implements Shape {
     ) * 0.5f;
   }
 
+  /**
+   * Calculates and returns the centroid of the triangle.
+   *
+   * @return the centroid
+   */
   public Vector2D getCentroid() {
     float x = (p1.x() + p2.x() + p3.x()) / 3;
     float y = (p1.y() + p2.y() + p3.y()) / 3;

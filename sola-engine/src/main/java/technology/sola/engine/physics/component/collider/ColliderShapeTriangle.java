@@ -8,21 +8,32 @@ import technology.sola.math.linear.Vector2D;
 
 /**
  * ColliderShapeTriangle is a {@link ColliderShape} implementation for a triangle which utilize a
- * {@link Triangle} for its geometric shape representation.
+ * {@link Triangle} for its geometric shape representation. The offset percentage of the vertical point. This modifies
+ * where it appears on the horizontal access. 0.5 is midway, 0 and 1 is all the way left or right respectively creating
+ * a right triangle.
  *
- * @param width
- * @param height
- * @param verticalPointOffsetPercentage
+ * @param width                         the width of the triangle
+ * @param height                        the height of the triangle
+ * @param verticalPointOffsetPercentage the vertical point offset percentage
  */
 public record ColliderShapeTriangle(
   float width,
   float height,
   float verticalPointOffsetPercentage
 ) implements ColliderShape<Triangle> {
+  /**
+   * Creates a triangle with width of 1, height of 1 and vertical point offset percentage of 0.5.
+   */
   public ColliderShapeTriangle() {
     this(1, 1, 0.5f);
   }
 
+  /**
+   * Creates a triangle with desired width and height and vertical point offset percentage of 0.5.
+   *
+   * @param width  the width of the triangle
+   * @param height the height of the triangle
+   */
   public ColliderShapeTriangle(float width, float height) {
     this(width, height, 0.5f);
   }

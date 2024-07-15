@@ -31,10 +31,13 @@ public class TriangleRendererComponent implements Component {
   }
 
   /**
-   * Creates a TriangleRendererComponent of desired color that is either filled or not filled.
+   * Creates a TriangleRendererComponent of desired color that is either filled or not filled. A vertical point offset
+   * percentage can be set which modifies where it appears on the horizontal access. 0.5 is midway, 0 and 1 is all the
+   * way left or right respectively creating a right triangle.
    *
-   * @param color    the {@link Color} of the triangle
-   * @param isFilled whether the triangle should be filled or not
+   * @param color                         the {@link Color} of the triangle
+   * @param isFilled                      whether the triangle should be filled or not
+   * @param verticalPointOffsetPercentage the offset percentage of the vertical most point
    */
   public TriangleRendererComponent(Color color, boolean isFilled, float verticalPointOffsetPercentage) {
     this.color = color;
@@ -78,6 +81,12 @@ public class TriangleRendererComponent implements Component {
     isFilled = filled;
   }
 
+  /**
+   * The offset percentage of the vertical point. This modifies where it appears on the horizontal access. 0.5 is
+   * midway, 0 and 1 is all the way left or right respectively creating a right triangle.
+   *
+   * @return the vertical point offset percentage
+   */
   public float getVerticalPointOffsetPercentage() {
     return verticalPointOffsetPercentage;
   }

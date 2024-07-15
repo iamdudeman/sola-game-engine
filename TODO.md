@@ -1,5 +1,8 @@
 # sola-game-engine TODO list
 
+* Change triangle renderer and collider shape to using 3 points
+    * translation just moves them
+    * scaling enlarges/shrinks
 * Physics
     * Collision Detection
         * Triangle
@@ -12,6 +15,8 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Planned Cleanup List
+
+* ColliderUtils#autoSizeColliderToSprite feels weird as a util method
 
 -----------------------------------------------------------------------------------------------------------------------
 
