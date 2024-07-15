@@ -183,20 +183,76 @@ public final class CollisionUtils {
     return new CollisionManifold(entityA, entityB, normal, penetration);
   }
 
+  // todo consider doing line line intersection
+  //   might be able to use this for penetration and normal as well
+
   private static CollisionManifold calculateAABBVsTriangle(
     Entity entityA, Entity entityB,
     Rectangle rectangle, Triangle triangle
   ) {
     // todo implement
-    throw new RuntimeException("not yet implemented");
+//    throw new RuntimeException("not yet implemented");
+    return null;
   }
 
   private static CollisionManifold calculateCircleVsTriangle(
     Entity entityA, Entity entityB,
     Circle circle, Triangle triangle
   ) {
+
+    // todo consider https://www.phatcode.net/articles.php?id=459
+    //  vertex test (any triangle point in circle)
+    //  circle within triangle test
+    //  edge test (what is partially implemented below)
+
+    /*
+    todo also consider
+    First, calculate the lengths between each point on the triangle to the circle's centre.
+    Second, find which length is shortest.
+    Third, if this length is greater than the radius of the circle, there is no collision.
+     */
+
+    // todo also consider SAT https://www.codezealot.org/archives/55/
+
+    var circleCenter = circle.center();
+    var triangleCenter = triangle.getCentroid();
+
+    int intersectionEdge = 0;
+    var intersection = calculateLineLineIntersection(circleCenter, triangleCenter, triangle.p1(), triangle.p2());
+
+    if (intersection == null) {
+      intersection = calculateLineLineIntersection(circleCenter, triangleCenter, triangle.p2(), triangle.p3());
+      intersectionEdge = 1;
+    }
+
+    if (intersection == null) {
+      intersection = calculateLineLineIntersection(circleCenter, triangleCenter, triangle.p3(), triangle.p1());
+      intersectionEdge = 2;
+    }
+
+    if (intersection == null) {
+      return null;
+    }
+
+    Vector2D normal = new Vector2D(0, 0);
+
+    if (intersectionEdge == 0) {
+      normal = new Vector2D(-triangle.p2().x() + triangle.p1().x(), triangle.p2().y() - triangle.p1().y()).normalize();
+    } else if (intersectionEdge == 1) {
+      normal = new Vector2D(-triangle.p3().x() + triangle.p2().x(), triangle.p3().y() - triangle.p2().y()).normalize();
+    } else if (intersectionEdge == 2) {
+      normal = new Vector2D(-triangle.p1().x() + triangle.p3().x(), triangle.p1().y() - triangle.p3().y()).normalize();
+    }
+
+    System.out.println(intersectionEdge + " " + normal + " " + (circleCenter.distance(triangleCenter) - intersection.distance(circleCenter)));
+
+    // normal is negative reciprocal
+
     // todo implement
-    throw new RuntimeException("not yet implemented");
+//    throw new RuntimeException("not yet implemented");
+    return new CollisionManifold(
+      entityA, entityB, normal.scalar(-1), (circleCenter.distance(triangleCenter) - intersection.distance(circleCenter)) / 2
+    );
   }
 
   private static CollisionManifold calculateTriangleVsTriangle(
@@ -207,7 +263,27 @@ public final class CollisionUtils {
     throw new RuntimeException("not yet implemented");
   }
 
+  private static Vector2D calculateLineLineIntersection(Vector2D start1, Vector2D end1, Vector2D start2, Vector2D end2) {
+    float a1 = end1.y() - start1.y();
+    float b1 = start1.x() - end1.x();
+    float c1 = a1 * start1.x() + b1 * start1.y();
+
+    float a2 = end2.y() - start2.y();
+    float b2 = start2.x() - end2.x();
+    float c2 = a2 * start2.x() + b2 * start2.y();
+
+    float determinant = a1 * b2 - a2 * b1;
+
+    if (Float.compare(determinant, 0.0f) == 0) {
+      return null;
+    }
+
+    float x = (b2 * c1 - b1 * c2) / determinant;
+    float y = (a1 * c2 - a2 * c1) / determinant;
+
+    return new Vector2D(x, y);
+  }
+
   private CollisionUtils() {
   }
 }
-

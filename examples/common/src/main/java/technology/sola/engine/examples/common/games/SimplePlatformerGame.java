@@ -12,15 +12,15 @@ import technology.sola.engine.event.EventHub;
 import technology.sola.engine.event.EventListener;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.components.BlendModeComponent;
-import technology.sola.engine.graphics.components.CameraComponent;
-import technology.sola.engine.graphics.components.RectangleRendererComponent;
+import technology.sola.engine.graphics.components.*;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
+import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
+import technology.sola.engine.physics.component.collider.ColliderShapeTriangle;
 import technology.sola.engine.physics.component.collider.ColliderTag;
 import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.physics.event.SensorEvent;
@@ -119,9 +119,21 @@ public class SimplePlatformerGame extends SolaWithDefaults {
       .addComponent(new ColliderComponent(new ColliderShapeAABB()));
 
     world.createEntity()
-      .addComponent(new TransformComponent(550, 200, 200, 75f))
+      .addComponent(new TransformComponent(550, 200, 250, 75f))
       .addComponent(new RectangleRendererComponent(Color.WHITE))
       .addComponent(new ColliderComponent(new ColliderShapeAABB()));
+
+    world.createEntity()
+      .addComponent(new TransformComponent(590, -200, 50))
+      .addComponent(new DynamicBodyComponent())
+      .addComponent(new CircleRendererComponent(Color.GREEN))
+      .addComponent(new ColliderComponent(new ColliderShapeCircle()));
+
+    world.createEntity()
+      .addComponent(new TransformComponent(610, 200, 100, -40))
+      .addComponent(new TriangleRendererComponent(Color.WHITE))
+      .addComponent(new ColliderComponent(new ColliderShapeTriangle()))
+    ;
 
     world.createEntity()
       .addComponent(new TransformComponent(950, 190, 200, 75f))
