@@ -112,6 +112,7 @@ public class SolaBrowserFileBuilder {
     String template = """
       <html>
       <head>
+          <link rel="icon" type="image/x-icon" href="/assets/icon.ico">
           <script type="text/javascript" charset="utf-8" src="%s"></script>
           <style>
             body {
@@ -153,6 +154,7 @@ public class SolaBrowserFileBuilder {
     String template = """
       <html>
       <head>
+        <link rel="icon" type="image/x-icon" href="/assets/icon.ico">
         <script type="text/javascript" charset="utf-8" src="%s"></script>
         <style>
           body {
