@@ -88,7 +88,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
           "--name", "${project.properties["gameName"]}-${project.version}",
           "--app-version", "${project.version}",
           "--vendor", project.properties["vendor"],
-          "--icon", "${project.rootDir}/resources/icon.ico",
+          "--icon", "${project.rootDir}/assets/icon.ico",
           "--copyright", "©${Calendar.getInstance().get(Calendar.YEAR)} ${project.properties["vendor"]}. All rights reserved.",
           "--dest", "$buildDir/jpackage",
           "--input", "${project.rootDir}/dist/${project.name}",
