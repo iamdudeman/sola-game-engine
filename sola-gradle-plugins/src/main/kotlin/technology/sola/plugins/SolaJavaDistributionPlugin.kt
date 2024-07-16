@@ -10,6 +10,7 @@ import org.gradle.api.tasks.bundling.Jar
 import org.gradle.api.tasks.bundling.Tar
 import org.gradle.api.tasks.bundling.Zip
 import org.gradle.kotlin.dsl.*
+import java.util.Calendar
 
 interface SolaJavaDistributionPluginExtension {
   var mainClass: String?
@@ -83,13 +84,12 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
 
         executable("jpackage")
 
-        // todo icon https://docs.oracle.com/en/java/javase/17/docs/specs/man/jpackage.html
-        // todo copyright https://docs.oracle.com/en/java/javase/17/docs/specs/man/jpackage.html
-
         args(
           "--name", "${project.properties["gameName"]}-${project.version}",
           "--app-version", "${project.version}",
           "--vendor", project.properties["vendor"],
+          "--icon", "${project.rootDir}/resources/icon.ico",
+          "--copyright", "©${Calendar.getInstance().get(Calendar.YEAR)} ${project.properties["vendor"]}. All rights reserved.",
           "--dest", "$buildDir/jpackage",
           "--input", "${project.rootDir}/dist/${project.name}",
           "--main-jar", "${project.properties["gameName"]}-${project.name}${osClassifierWithDash}-${project.version}.jar",
