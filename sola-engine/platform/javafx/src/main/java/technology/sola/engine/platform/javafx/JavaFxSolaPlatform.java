@@ -5,6 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.image.PixelFormat;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
@@ -25,6 +26,7 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
 import technology.sola.engine.platform.javafx.assets.audio.JavaFxAudioClipAssetLoader;
 import technology.sola.engine.platform.javafx.assets.JavaFxJsonAssetLoader;
 import technology.sola.engine.platform.javafx.assets.graphics.JavaFxSolaImageAssetLoader;
@@ -32,6 +34,7 @@ import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
 import technology.sola.engine.platform.javafx.core.JavaFxRestClient;
 import technology.sola.engine.platform.javafx.core.JavaFxSocketClient;
 
+import java.io.IOException;
 import java.util.function.Consumer;
 
 /**
@@ -135,6 +138,8 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       int rendererHeight = solaConfiguration.rendererHeight();
       final Scene scene = new Scene(root, rendererWidth, rendererHeight);
 
+      setApplicationIcon(stage);
+
       this.canvas = new Canvas(rendererWidth, rendererHeight);
       root.getChildren().add(canvas);
 
@@ -229,5 +234,13 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     MouseCoordinate adjusted = adjustMouseForViewport((int) fxMouseEvent.getX(), (int) fxMouseEvent.getY());
 
     return new MouseEvent(fxMouseEvent.getButton().ordinal(), adjusted.x(), adjusted.y());
+  }
+
+  private void setApplicationIcon(Stage stage) {
+    try {
+      stage.getIcons().add(new Image(JavaFxPathUtils.asUrl("assets/icon.jpg").openStream()));
+    } catch (IOException ex) {
+      // no worries
+    }
   }
 }

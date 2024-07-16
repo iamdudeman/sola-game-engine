@@ -17,6 +17,7 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.platform.swing.assets.SwingPathUtils;
 import technology.sola.engine.platform.swing.assets.audio.SwingAudioClipAssetLoader;
 import technology.sola.engine.platform.swing.assets.SwingJsonAssetLoader;
 import technology.sola.engine.platform.swing.assets.graphics.SwingSolaImageAssetLoader;
@@ -35,6 +36,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.IOException;
 import java.util.function.Consumer;
 
 /**
@@ -190,6 +192,8 @@ public class SwingSolaPlatform extends SolaPlatform {
     canvas.requestFocus();
     jFrame.setVisible(true);
 
+    setApplicationIcon(jFrame);
+
     solaPlatformInitialization.finish();
   }
 
@@ -281,5 +285,13 @@ public class SwingSolaPlatform extends SolaPlatform {
     MouseCoordinate adjusted = adjustMouseForViewport(swingMouseEvent.getX(), swingMouseEvent.getY());
 
     return new MouseEvent(swingMouseEvent.getButton(), adjusted.x(), adjusted.y());
+  }
+
+  private void setApplicationIcon(JFrame jFrame) {
+    try {
+      jFrame.setIconImage(new ImageIcon(SwingPathUtils.asUrl("assets/icon.jpg")).getImage());
+    } catch (IOException ex) {
+      // no worries
+    }
   }
 }
