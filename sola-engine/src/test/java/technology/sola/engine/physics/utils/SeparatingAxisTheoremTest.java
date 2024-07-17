@@ -9,13 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SeparatingAxisTheoremTest {
-  private Vector2D[] createAABB(Vector2D topLeft, float width, float height) {
-    return new Vector2D[] {
-      topLeft, topLeft.add(new Vector2D(width, 0)),
-      topLeft.add(new Vector2D(0, height)), topLeft.add(new Vector2D(width, height))
-    };
-  }
-
   @Nested
   class calculateAABBVsAABB {
     private final Vector2D[] aabbShape = createAABB(new Vector2D(0, 0), 5, 5);
@@ -124,5 +117,14 @@ class SeparatingAxisTheoremTest {
       assertNotNull(collisionManifold);
       assertEquals(new Vector2D(-1, 0), collisionManifold.normal());
     }
+  }
+
+  private Vector2D[] createAABB(Vector2D topLeft, float width, float height) {
+    return new Vector2D[] {
+      topLeft,
+      topLeft.add(new Vector2D(width, 0)),
+      topLeft.add(new Vector2D(width, height)),
+      topLeft.add(new Vector2D(0, height))
+    };
   }
 }
