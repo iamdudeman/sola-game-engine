@@ -31,7 +31,7 @@ public class SeparatingAxisTheorem {
       }
     }
 
-    return new MinimumTranslationVector(smallestAxis.normalize(), smallestOverlap);
+    return new MinimumTranslationVector(smallestAxis, smallestOverlap);
   }
 
   // todo return normal + penetration or null
@@ -69,7 +69,7 @@ public class SeparatingAxisTheorem {
       // perpendicular line
       Vector2D normal = new Vector2D(-edge.y(), edge.x());
 
-      axes[i] = normal;
+      axes[i] = normal.normalize();
     }
 
     return axes;
