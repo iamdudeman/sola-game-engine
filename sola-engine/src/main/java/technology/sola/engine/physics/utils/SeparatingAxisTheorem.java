@@ -7,37 +7,35 @@ import technology.sola.math.linear.Vector2D;
  * SeparatingAxisTheorem contains methods for checking whether two convex polygons are colliding or not.
  */
 public class SeparatingAxisTheorem {
-  // todo return normal + penetration or null
-  public static CollisionInfo checkCollision(Vector2D[] shapeA, Vector2D[] shapeB) {
-    Vector2D[] axesA = getAxes(shapeA);
-    Vector2D[] axesB = getAxes(shapeB);
+  public static MinimumTranslationVector checkCollision(Vector2D[] shapeA, Vector2D[] shapeB) {
+    float smallestOverlap = Float.MAX_VALUE;
+    Vector2D smallestAxis = null;
+    Vector2D[] axes = new Vector2D[shapeA.length + shapeB.length];
 
-    for (int i = 0; i < axesA.length; i++) {
-      Vector2D axis = axesA[i];
+    System.arraycopy(getAxes(shapeA), 0, axes, 0, shapeA.length);
+    System.arraycopy(getAxes(shapeB), 0, axes, shapeA.length, shapeB.length);
+
+    for (Vector2D axis : axes) {
       Projection p1 = projectShapeToAxis(shapeA, axis);
       Projection p2 = projectShapeToAxis(shapeB, axis);
 
-      if (!p1.isOverlapping(p2)) {
+      if (p1.isOverlapping(p2)) {
+        float overlap = p1.getOverlap(p2);
+
+        if (overlap < smallestOverlap) {
+          smallestOverlap = overlap;
+          smallestAxis = axis;
+        }
+      } else {
         return null;
       }
     }
 
-    for (int i = 0; i < axesB.length; i++) {
-      Vector2D axis = axesB[i];
-      Projection p1 = projectShapeToAxis(shapeA, axis);
-      Projection p2 = projectShapeToAxis(shapeB, axis);
-
-      if (!p1.isOverlapping(p2)) {
-        return null;
-      }
-    }
-
-    // todo real normal and penetration
-    return new CollisionInfo(new Vector2D(0, 0), 0);
+    return new MinimumTranslationVector(smallestAxis.normalize(), smallestOverlap);
   }
 
   // todo return normal + penetration or null
-  public static CollisionInfo checkCollision(Vector2D[] shape, Circle circle) {
+  public static MinimumTranslationVector checkCollision(Vector2D[] shape, Circle circle) {
     // todo implement
 
     return null;
@@ -71,19 +69,22 @@ public class SeparatingAxisTheorem {
       // perpendicular line
       Vector2D normal = new Vector2D(-edge.y(), edge.x());
 
-      // todo might need to normalize so we can get collision info later
       axes[i] = normal;
     }
 
     return axes;
   }
 
-  public record CollisionInfo(Vector2D normal, float penetration) {
+  public record MinimumTranslationVector(Vector2D normal, float penetration) {
   }
 
   private record Projection(float min, float max) {
     boolean isOverlapping(Projection projection) {
-      return projection.min <= max && max <= projection.max;
+      return projection.max >= min && max >= projection.min;
+    }
+
+    float getOverlap(Projection projection) {
+      return Math.max(0, Math.min(max, projection.max) - Math.max(min, projection.min));
     }
   }
 }
