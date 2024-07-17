@@ -6,10 +6,15 @@
 
 ## Planned Cleanup List
 
+* Change TransformAnimatorComponent from builder pattern if possible
+    * otherwise include setAnimationCompleteCallback in Builder
+* ColliderUtils#autoSizeColliderToSprite feels weird as a util method
+
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
 
+* Add ability to "reset" TransformAnimatorComponent, so it can be used again
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
 * Figure out how to handle TouchInput (probably at the same time as AndroidPlatform implementation)
