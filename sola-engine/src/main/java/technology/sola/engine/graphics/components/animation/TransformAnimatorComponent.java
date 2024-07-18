@@ -131,9 +131,13 @@ public class TransformAnimatorComponent implements Component {
 
   /**
    * Resets the elapsed time of the animation back to 0.
+   *
+   * @return this
    */
-  public void reset() {
+  public TransformAnimatorComponent reset() {
     elapsedTime = 0;
+
+    return this;
   }
 
   /**
