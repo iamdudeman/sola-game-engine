@@ -6,8 +6,6 @@
 
 ## Planned Cleanup List
 
-* Change TransformAnimatorComponent from builder pattern if possible
-    * otherwise include setAnimationCompleteCallback in Builder
 * ColliderUtils#autoSizeColliderToSprite feels weird as a util method
 
 -----------------------------------------------------------------------------------------------------------------------

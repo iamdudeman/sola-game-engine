@@ -99,22 +99,26 @@ public class AnimationExample extends SolaWithDefaults {
     world.createEntity(
       new TransformComponent(5, 70, 15),
       new CircleRendererComponent(Color.RED, true),
-      new TransformAnimatorComponent.Builder(EasingFunction.LINEAR, 4000).withTranslateX(180).build()
+      new TransformAnimatorComponent(EasingFunction.LINEAR, 4000)
+        .setTranslateX(180)
     );
 
     world.createEntity(
       new TransformComponent(5, 90, 15),
       new CircleRendererComponent(Color.GREEN, true),
-      new TransformAnimatorComponent.Builder(EasingFunction.EASE_IN, 4000).withTranslateX(180).build()
+      new TransformAnimatorComponent(EasingFunction.EASE_IN, 4000)
+        .setTranslateX(180)
     );
 
     world.createEntity(
       new TransformComponent(5, 110, 15),
       new CircleRendererComponent(Color.BLUE, true),
-      new TransformAnimatorComponent.Builder(EasingFunction.EASE_OUT, 4000).withTranslateX(180).build()
+      new TransformAnimatorComponent(EasingFunction.EASE_OUT, 4000)
+        .setTranslateX(180)
     );
 
-    TransformAnimatorComponent smoothTransformAnimator = new TransformAnimatorComponent.Builder(EasingFunction.SMOOTH_STEP, 4000).withTranslateX(180).build();
+    TransformAnimatorComponent smoothTransformAnimator = new TransformAnimatorComponent(EasingFunction.SMOOTH_STEP, 4000)
+      .setTranslateX(180);
 
     final Entity smoothStepAnimationEntity = world.createEntity(
       new TransformComponent(5, 130, 15),
@@ -123,9 +127,13 @@ public class AnimationExample extends SolaWithDefaults {
     );
 
     smoothTransformAnimator.setAnimationCompleteCallback((transformAnimatorComponent) -> smoothStepAnimationEntity.addComponent(
-      new TransformAnimatorComponent.Builder(EasingFunction.SMOOTH_STEP, 4000).withTranslateX(0).build()
+      new TransformAnimatorComponent(EasingFunction.SMOOTH_STEP, 4000)
+        .setTranslateX(0)
         .setAnimationCompleteCallback((transformAnimatorComponent2) -> smoothStepAnimationEntity.addComponent(
-          new TransformAnimatorComponent.Builder(EasingFunction.SMOOTH_STEP, 3000).withTranslateX(90).withScale(5).build().setAnimationCompleteCallback(TransformAnimatorComponent::reset))
+          new TransformAnimatorComponent(EasingFunction.SMOOTH_STEP, 3000)
+            .setTranslateX(90)
+            .setScale(5)
+            .setAnimationCompleteCallback(TransformAnimatorComponent::reset))
         )
     ));
 
