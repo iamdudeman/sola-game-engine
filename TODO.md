@@ -6,8 +6,6 @@
 
 ## Planned Cleanup List
 
-* ColliderUtils#autoSizeColliderToSprite feels weird as a util method
-
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
