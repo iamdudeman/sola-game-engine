@@ -37,6 +37,13 @@ public class TransformAnimatorComponent implements Component {
   }
 
   /**
+   * Resets the elapsed time of the animation back to 0.
+   */
+  public void reset() {
+    elapsedTime = 0;
+  }
+
+  /**
    * Ticks the animation state by a delta time updating the desired {@link TransformComponent}.
    *
    * @param transformComponent the {@code TransformComponent} to update
@@ -62,7 +69,7 @@ public class TransformAnimatorComponent implements Component {
     }
 
     if (elapsedTime >= duration && animationCompleteCallback != null) {
-      animationCompleteCallback.onComplete();
+      animationCompleteCallback.onComplete(this);
     }
   }
 
@@ -91,8 +98,10 @@ public class TransformAnimatorComponent implements Component {
   public interface AnimationCompleteCallback {
     /**
      * Method called when a {@link TransformAnimatorComponent} animation completes.
+     *
+     * @param transformAnimatorComponent the animator that finished animating
      */
-    void onComplete();
+    void onComplete(TransformAnimatorComponent transformAnimatorComponent);
   }
 
   /**

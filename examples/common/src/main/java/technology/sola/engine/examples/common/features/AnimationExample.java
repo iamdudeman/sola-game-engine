@@ -122,10 +122,10 @@ public class AnimationExample extends SolaWithDefaults {
       smoothTransformAnimator
     );
 
-    smoothTransformAnimator.setAnimationCompleteCallback(() -> smoothStepAnimationEntity.addComponent(
+    smoothTransformAnimator.setAnimationCompleteCallback((transformAnimatorComponent) -> smoothStepAnimationEntity.addComponent(
       new TransformAnimatorComponent.Builder(EasingFunction.SMOOTH_STEP, 4000).withTranslateX(0).build()
-        .setAnimationCompleteCallback(() -> smoothStepAnimationEntity.addComponent(
-          new TransformAnimatorComponent.Builder(EasingFunction.SMOOTH_STEP, 3000).withTranslateX(90).withScale(5).build())
+        .setAnimationCompleteCallback((transformAnimatorComponent2) -> smoothStepAnimationEntity.addComponent(
+          new TransformAnimatorComponent.Builder(EasingFunction.SMOOTH_STEP, 3000).withTranslateX(90).withScale(5).build().setAnimationCompleteCallback(TransformAnimatorComponent::reset))
         )
     ));
 
