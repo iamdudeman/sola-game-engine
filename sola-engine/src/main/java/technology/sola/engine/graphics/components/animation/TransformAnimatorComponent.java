@@ -150,16 +150,16 @@ public class TransformAnimatorComponent implements Component {
     if (!isInit) {
       initialize(transformComponent);
       isInit = true;
-    } else {
-      elapsedTime += deltaTime * 1000;
-
-      float percent = Math.min(elapsedTime / duration, 1);
-
-      transformComponent.setX(easingFunction.ease(percent, startingTranslateX, endingTranslateX));
-      transformComponent.setY(easingFunction.ease(percent, startingTranslateY, endingTranslateY));
-      transformComponent.setScaleX(easingFunction.ease(percent, startingScaleX, endingScaleX));
-      transformComponent.setScaleY(easingFunction.ease(percent, startingScaleY, endingScaleY));
     }
+
+    elapsedTime += deltaTime * 1000;
+
+    float percent = Math.min(elapsedTime / duration, 1);
+
+    transformComponent.setX(easingFunction.ease(percent, startingTranslateX, endingTranslateX));
+    transformComponent.setY(easingFunction.ease(percent, startingTranslateY, endingTranslateY));
+    transformComponent.setScaleX(easingFunction.ease(percent, startingScaleX, endingScaleX));
+    transformComponent.setScaleY(easingFunction.ease(percent, startingScaleY, endingScaleY));
 
     if (elapsedTime >= duration && animationCompleteCallback != null) {
       animationCompleteCallback.onComplete(this);
