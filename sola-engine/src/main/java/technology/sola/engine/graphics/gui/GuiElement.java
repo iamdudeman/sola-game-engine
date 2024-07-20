@@ -286,7 +286,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
   }
 
   /**
-   * @return an unmodifiable list of children GuiElements
+   * @return an immutable list of children GuiElements
    */
   public List<GuiElement<?>> getChildren() {
     return Collections.unmodifiableList(children);
