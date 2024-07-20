@@ -71,6 +71,27 @@ public class TextGuiElement extends GuiElement<TextStyles> {
   }
 
   /**
+   * TextGuiElement does not render children so this method will do nothing.
+   *
+   * @param child the child element that will not be removed
+   * @return this
+   */
+  @Override
+  public GuiElement<TextStyles> removeChild(GuiElement<?> child) {
+    return this;
+  }
+
+  /**
+   * TextGuiElement does not render children so this method will return an empty List.
+   *
+   * @return empty List
+   */
+  @Override
+  public List<GuiElement<?>> getChildren() {
+    return List.of();
+  }
+
+  /**
    * @return the text that will be rendered
    */
   public String getText() {

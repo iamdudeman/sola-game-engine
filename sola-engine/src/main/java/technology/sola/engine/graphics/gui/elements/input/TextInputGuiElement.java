@@ -121,6 +121,27 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
   }
 
   /**
+   * TextInputGuiElement does not render children so this method will do nothing.
+   *
+   * @param child the child element that will not be removed
+   * @return this
+   */
+  @Override
+  public GuiElement<TextInputStyles> removeChild(GuiElement<?> child) {
+    return this;
+  }
+
+  /**
+   * TextInputGuiElement does not render children so this method will return an empty List.
+   *
+   * @return empty List
+   */
+  @Override
+  public List<GuiElement<?>> getChildren() {
+    return List.of();
+  }
+
+  /**
    * @return the placeholder when no user value is entered
    */
   public String getPlaceholder() {
