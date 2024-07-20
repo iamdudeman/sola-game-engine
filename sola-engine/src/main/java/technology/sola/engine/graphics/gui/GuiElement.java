@@ -13,6 +13,7 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -282,6 +283,13 @@ public abstract class GuiElement<Style extends BaseStyles> {
     }
 
     return this;
+  }
+
+  /**
+   * @return an immutable list of children GuiElements
+   */
+  public List<GuiElement<?>> getChildren() {
+    return Collections.unmodifiableList(children);
   }
 
   /**
