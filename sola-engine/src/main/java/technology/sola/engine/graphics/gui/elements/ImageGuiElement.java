@@ -68,7 +68,7 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
    * @return this
    */
   @Override
-  public ImageGuiElement appendChildren(GuiElement<?>... children) {
+  public GuiElement<BaseStyles> appendChildren(GuiElement<?>... children) {
     return this;
   }
 
@@ -79,7 +79,7 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
    * @return this
    */
   @Override
-  public ImageGuiElement removeChild(GuiElement<?> child) {
+  public GuiElement<BaseStyles> removeChild(GuiElement<?> child) {
     return this;
   }
 
@@ -109,13 +109,6 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
   public ImageGuiElement setAssetId(String assetId) {
     this.assetId = assetId;
     invalidateLayout();
-
-    return this;
-  }
-
-  @Override
-  public ImageGuiElement setId(String id) {
-    super.setId(id);
 
     return this;
   }
