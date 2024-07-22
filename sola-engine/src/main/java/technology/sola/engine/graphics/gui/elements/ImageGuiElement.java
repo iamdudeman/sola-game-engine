@@ -68,7 +68,7 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
    * @return this
    */
   @Override
-  public GuiElement<BaseStyles> appendChildren(GuiElement<?>... children) {
+  public ImageGuiElement appendChildren(GuiElement<?>... children) {
     return this;
   }
 
@@ -79,7 +79,7 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
    * @return this
    */
   @Override
-  public GuiElement<BaseStyles> removeChild(GuiElement<?> child) {
+  public ImageGuiElement removeChild(GuiElement<?> child) {
     return this;
   }
 
@@ -104,9 +104,19 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
    * Sets the id of the {@link SolaImage} asset to be rendered.
    *
    * @param assetId the new asset id of the image
+   * @return this
    */
-  public void setAssetId(String assetId) {
+  public ImageGuiElement setAssetId(String assetId) {
     this.assetId = assetId;
     invalidateLayout();
+
+    return this;
+  }
+
+  @Override
+  public ImageGuiElement setId(String id) {
+    super.setId(id);
+
+    return this;
   }
 }
