@@ -20,10 +20,13 @@ at javafx.base/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(Ev
 
 ## Planned Cleanup List
 
+* Figure out a way for methods like GuiElement#setId to return the current type rather than GuiElement<?> for convenience
+
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
 
+* Add a way to batch GUI updates before layout invalidation
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
 * Figure out how to handle TouchInput (probably at the same time as AndroidPlatform implementation)
