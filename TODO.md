@@ -1,5 +1,19 @@
 # sola-game-engine TODO list
 
+Exception in thread "JavaFX Application Thread" java.lang.NullPointerException: Cannot invoke "technology.sola.engine.graphics.gui.GuiElement.onKeyPressed(technology.sola.engine.graphics.gui.event.GuiKeyEvent)" because "this.parent" is null
+at technology.sola.engine/technology.sola.engine.graphics.gui.GuiElement.onKeyPressed(GuiElement.java:393)
+at technology.sola.engine/technology.sola.engine.graphics.gui.GuiElement.onKeyPressed(GuiElement.java:393)
+at technology.sola.engine/technology.sola.engine.graphics.gui.GuiElement.onKeyPressed(GuiElement.java:393)
+at technology.sola.engine/technology.sola.engine.graphics.gui.GuiElement.onKeyPressed(GuiElement.java:393)
+at technology.sola.engine/technology.sola.engine.graphics.gui.GuiElement.onKeyPressed(GuiElement.java:393)
+at technology.sola.engine/technology.sola.engine.graphics.gui.GuiElement.onKeyPressed(GuiElement.java:393)
+at technology.sola.engine/technology.sola.engine.graphics.gui.GuiDocument.onKeyPressed(GuiDocument.java:112)
+at technology.sola.engine.platform.javafx@0.8.1/technology.sola.engine.platform.javafx.JavaFxSolaPlatform.lambda$onKeyPressed$0(JavaFxSolaPlatform.java:88)
+at javafx.base/com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:247)
+at javafx.base/com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+at javafx.base/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234)
+
+
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
