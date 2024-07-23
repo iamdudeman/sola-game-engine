@@ -6,6 +6,7 @@
     * consider creating a new RootGuiElement when changing roots instead of clearing out root children
         * if this works then can remove parent == null checks
 * If a GuiTheme is set in sola defaults apply it somehow to UI that are manually created as well
+* hover state is not updated when gui document root is updated
 
 -----------------------------------------------------------------------------------------------------------------------
 

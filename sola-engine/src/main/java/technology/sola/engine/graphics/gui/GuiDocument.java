@@ -55,6 +55,8 @@ public class GuiDocument {
 
     root.appendChildren(rootEle);
     rootEle.requestFocus();
+    // todo manually trigger mouse moved maybe?
+//    rootEle.onMouseMoved(new GuiMouseEvent());
   }
 
   /**
