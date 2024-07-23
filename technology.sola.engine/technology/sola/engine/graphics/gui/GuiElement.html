@@ -69,22 +69,23 @@ loadScripts(document, 'script');</script>
 <div class="header">
 <div class="sub-title"><span class="module-label-in-type">Module</span>&nbsp;<a href="../../../../../module-summary.html">technology.sola.engine</a></div>
 <div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">technology.sola.engine.graphics.gui</a></div>
-<h1 title="Class GuiElement" class="title">Class GuiElement&lt;Style extends <a href="style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>&gt;</h1>
+<h1 title="Class GuiElement" class="title">Class GuiElement&lt;Style extends <a href="style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>,<wbr>ElementType extends GuiElement&lt;Style,<wbr>ElementType&gt;&gt;</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">technology.sola.engine.graphics.gui.GuiElement&lt;Style&gt;</div>
+<div class="inheritance">technology.sola.engine.graphics.gui.GuiElement&lt;Style,<wbr>ElementType&gt;</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>Type Parameters:</dt>
 <dd><code>Style</code> - the style type for the element</dd>
+<dd><code>ElementType</code> - this element's type, so it can be used for method chaining</dd>
 </dl>
 <dl class="notes">
 <dt>Direct Known Subclasses:</dt>
 <dd><code><a href="elements/input/BaseInputGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">BaseInputGuiElement</a></code>, <code><a href="elements/ImageGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements">ImageGuiElement</a></code>, <code><a href="elements/SectionGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements">SectionGuiElement</a></code>, <code><a href="elements/TextGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements">TextGuiElement</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">GuiElement&lt;Style extends <a href="style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>&gt;</span>
+<div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">GuiElement&lt;Style extends <a href="style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>,<wbr>ElementType extends GuiElement&lt;Style,<wbr>ElementType&gt;&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">GuiElement is the base class for all elements that can be rendered in a <a href="GuiDocument.html" title="class in technology.sola.engine.graphics.gui"><code>GuiDocument</code></a>.</div>
 </section>
@@ -99,7 +100,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&gt;</code></div>
+<div class="col-first even-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;&gt;</code></div>
 <div class="col-second even-row-color"><code><a href="#children" class="member-name-link">children</a></code></div>
 <div class="col-last even-row-color">
 <div class="block">The list of children <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>s.</div>
@@ -145,8 +146,8 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="GuiElement.html" title="type parameter in GuiElement">Style</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#appendChildren(technology.sola.engine.graphics.gui.GuiElement...)" class="member-name-link">appendChildren</a><wbr>(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;...&nbsp;children)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GuiElement.html" title="type parameter in GuiElement">ElementType</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#appendChildren(technology.sola.engine.graphics.gui.GuiElement...)" class="member-name-link">appendChildren</a><wbr>(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;...&nbsp;children)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Adds child <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>s to this element.</div>
 </div>
@@ -158,19 +159,21 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="event/GuiElementEvents.html" title="class in technology.sola.engine.graphics.gui.event">GuiElementEvents</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#events()" class="member-name-link">events</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&gt;<br>T</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>
+?&gt;&gt;<br>T</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findElementById(java.lang.String,java.lang.Class)" class="member-name-link">findElementById</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;elementClass)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Searches the element tree for an element with the desired id.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&gt;<br><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>
+?&gt;&gt;<br><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findElementsByType(java.lang.Class)" class="member-name-link">findElementsByType</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;elementClass)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Searches the element tree for elements with the desired type.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findFocussedChildIndex(java.util.List)" class="member-name-link">findFocussedChildIndex</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&gt;&nbsp;children)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findFocussedChildIndex(java.util.List)" class="member-name-link">findFocussedChildIndex</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;&gt;&nbsp;children)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Utility method to search an array of elements for which one currently has focus and get its index.</div>
 </div>
@@ -182,7 +185,7 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gets the <a href="GuiElementBounds.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElementBounds</code></a> that contains the top, left and full width and height of the element.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getChildren()" class="member-name-link">getChildren</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GuiElementBounds.html" title="class in technology.sola.engine.graphics.gui">GuiElementBounds</a></code></div>
@@ -191,13 +194,13 @@ loadScripts(document, 'script');</script>
 <div class="block">Gets the <a href="GuiElementBounds.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElementBounds</code></a> that contains the top, left of where the content area begins and the width and
  height of the content area.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFocusableChildren()" class="member-name-link">getFocusableChildren</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getId()" class="member-name-link">getId</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParent()" class="member-name-link">getParent</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
@@ -222,8 +225,8 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isLayoutChanged()" class="member-name-link">isLayoutChanged</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="GuiElement.html" title="type parameter in GuiElement">Style</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeChild(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">removeChild</a><wbr>(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&nbsp;child)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GuiElement.html" title="type parameter in GuiElement">ElementType</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeChild(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">removeChild</a><wbr>(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;&nbsp;child)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Removes a child element from this element.</div>
 </div>
@@ -247,12 +250,12 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Focuses this element if it is able to have focus.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="GuiElement.html" title="type parameter in GuiElement">Style</a>&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GuiElement.html" title="type parameter in GuiElement">ElementType</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setId(java.lang.String)" class="member-name-link">setId</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the id of the element.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="GuiElement.html" title="type parameter in GuiElement">Style</a>&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="GuiElement.html" title="type parameter in GuiElement">ElementType</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setStyle(java.util.List)" class="member-name-link">setStyle</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="style/ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style">ConditionalStyle</a>&lt;<a href="GuiElement.html" title="type parameter in GuiElement">Style</a>&gt;&gt;&nbsp;styles)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Convenience method that calls <a href="style/StyleContainer.html#setStyles(java.util.List)"><code>StyleContainer.setStyles(List)</code></a> for this element's <a href="style/StyleContainer.html" title="class in technology.sola.engine.graphics.gui.style"><code>StyleContainer</code></a>.</div>
@@ -287,7 +290,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="children">
 <h3>children</h3>
-<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&gt;</span>&nbsp;<span class="element-name">children</span></div>
+<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;&gt;</span>&nbsp;<span class="element-name">children</span></div>
 <div class="block">The list of children <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>s.</div>
 </section>
 </li>
@@ -324,7 +327,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="setStyle(java.util.List)">
 <h3>setStyle</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="GuiElement.html" title="type parameter in GuiElement">Style</a>&gt;</span>&nbsp;<span class="element-name">setStyle</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="style/ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style">ConditionalStyle</a>&lt;<a href="GuiElement.html" title="type parameter in GuiElement">Style</a>&gt;&gt;&nbsp;styles)</span></div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="GuiElement.html" title="type parameter in GuiElement">ElementType</a></span>&nbsp;<span class="element-name">setStyle</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="style/ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style">ConditionalStyle</a>&lt;<a href="GuiElement.html" title="type parameter in GuiElement">Style</a>&gt;&gt;&nbsp;styles)</span></div>
 <div class="block">Convenience method that calls <a href="style/StyleContainer.html#setStyles(java.util.List)"><code>StyleContainer.setStyles(List)</code></a> for this element's <a href="style/StyleContainer.html" title="class in technology.sola.engine.graphics.gui.style"><code>StyleContainer</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -440,7 +443,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getParent()">
 <h3>getParent</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;</span>&nbsp;<span class="element-name">getParent</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;</span>&nbsp;<span class="element-name">getParent</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the parent element</dd>
@@ -483,7 +486,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="setId(java.lang.String)">
 <h3>setId</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="GuiElement.html" title="type parameter in GuiElement">Style</a>&gt;</span>&nbsp;<span class="element-name">setId</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="GuiElement.html" title="type parameter in GuiElement">ElementType</a></span>&nbsp;<span class="element-name">setId</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</span></div>
 <div class="block">Sets the id of the element.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -496,7 +499,8 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="findElementById(java.lang.String,java.lang.Class)">
 <h3>findElementById</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name">findElementById</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>
+?&gt;&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name">findElementById</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;elementClass)</span></div>
 <div class="block">Searches the element tree for an element with the desired id. Returns null if not found.</div>
 <dl class="notes">
@@ -513,7 +517,8 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="findElementsByType(java.lang.Class)">
 <h3>findElementsByType</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;</span>&nbsp;<span class="element-name">findElementsByType</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;elementClass)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>
+?&gt;&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;</span>&nbsp;<span class="element-name">findElementsByType</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;elementClass)</span></div>
 <div class="block">Searches the element tree for elements with the desired type.</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
@@ -528,7 +533,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="removeChild(technology.sola.engine.graphics.gui.GuiElement)">
 <h3>removeChild</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="GuiElement.html" title="type parameter in GuiElement">Style</a>&gt;</span>&nbsp;<span class="element-name">removeChild</span><wbr><span class="parameters">(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&nbsp;child)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="GuiElement.html" title="type parameter in GuiElement">ElementType</a></span>&nbsp;<span class="element-name">removeChild</span><wbr><span class="parameters">(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;&nbsp;child)</span></div>
 <div class="block">Removes a child element from this element.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -541,7 +546,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getChildren()">
 <h3>getChildren</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&gt;</span>&nbsp;<span class="element-name">getChildren</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;&gt;</span>&nbsp;<span class="element-name">getChildren</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>an immutable list of children GuiElements</dd>
@@ -551,7 +556,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="appendChildren(technology.sola.engine.graphics.gui.GuiElement...)">
 <h3>appendChildren</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="GuiElement.html" title="type parameter in GuiElement">Style</a>&gt;</span>&nbsp;<span class="element-name">appendChildren</span><wbr><span class="parameters">(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;...&nbsp;children)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="GuiElement.html" title="type parameter in GuiElement">ElementType</a></span>&nbsp;<span class="element-name">appendChildren</span><wbr><span class="parameters">(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;...&nbsp;children)</span></div>
 <div class="block">Adds child <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>s to this element. How or if they will be rendered depends on the implementing element.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -592,7 +597,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getFocusableChildren()">
 <h3>getFocusableChildren</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&gt;</span>&nbsp;<span class="element-name">getFocusableChildren</span>()</div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;&gt;</span>&nbsp;<span class="element-name">getFocusableChildren</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the list of child elements that are focusable</dd>
@@ -612,7 +617,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="findFocussedChildIndex(java.util.List)">
 <h3>findFocussedChildIndex</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">findFocussedChildIndex</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?&gt;&gt;&nbsp;children)</span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">findFocussedChildIndex</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;&gt;&nbsp;children)</span></div>
 <div class="block">Utility method to search an array of elements for which one currently has focus and get its index.</div>
 <dl class="notes">
 <dt>Parameters:</dt>

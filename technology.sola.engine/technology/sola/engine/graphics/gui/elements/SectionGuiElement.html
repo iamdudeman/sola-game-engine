@@ -72,14 +72,14 @@ loadScripts(document, 'script');</script>
 <h1 title="Class SectionGuiElement" class="title">Class SectionGuiElement</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance"><a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui">technology.sola.engine.graphics.gui.GuiElement</a>&lt;<a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>&gt;
+<div class="inheritance"><a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui">technology.sola.engine.graphics.gui.GuiElement</a>&lt;<a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>,<wbr><a href="SectionGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements">SectionGuiElement</a>&gt;
 <div class="inheritance">technology.sola.engine.graphics.gui.elements.SectionGuiElement</div>
 </div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SectionGuiElement</span>
-<span class="extends-implements">extends <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>&gt;</span></div>
+<span class="extends-implements">extends <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>,<wbr><a href="SectionGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements">SectionGuiElement</a>&gt;</span></div>
 <div class="block">SectionGuiElement is a <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a> that is simply a container for its children elements. It has various
  keyboard shortcuts for navigating its children.</div>
 </section>
@@ -195,7 +195,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Method to render the main content of the gui element (not borders, backgrounds, etc.).</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../GuiElement.html#renderContent(technology.sola.engine.graphics.renderer.Renderer)">renderContent</a></code>&nbsp;in class&nbsp;<code><a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>&gt;</code></dd>
+<dd><code><a href="../GuiElement.html#renderContent(technology.sola.engine.graphics.renderer.Renderer)">renderContent</a></code>&nbsp;in class&nbsp;<code><a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>,<wbr><a href="SectionGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements">SectionGuiElement</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>renderer</code> - the <a href="../../renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> instance</dd>
 </dl>
@@ -210,7 +210,7 @@ loadScripts(document, 'script');</script>
  children then it should return null.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../GuiElement.html#calculateContentDimensions()">calculateContentDimensions</a></code>&nbsp;in class&nbsp;<code><a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>&gt;</code></dd>
+<dd><code><a href="../GuiElement.html#calculateContentDimensions()">calculateContentDimensions</a></code>&nbsp;in class&nbsp;<code><a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>,<wbr><a href="SectionGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements">SectionGuiElement</a>&gt;</code></dd>
 <dt>Returns:</dt>
 <dd>the dimensions of the content of this element or null if only children dimensions matter</dd>
 </dl>
@@ -222,7 +222,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isFocusable</span>()</div>
 <dl class="notes">
 <dt>Overrides:</dt>
-<dd><code><a href="../GuiElement.html#isFocusable()">isFocusable</a></code>&nbsp;in class&nbsp;<code><a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>&gt;</code></dd>
+<dd><code><a href="../GuiElement.html#isFocusable()">isFocusable</a></code>&nbsp;in class&nbsp;<code><a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>,<wbr><a href="SectionGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements">SectionGuiElement</a>&gt;</code></dd>
 <dt>Returns:</dt>
 <dd>true if the element is currently focusable</dd>
 </dl>
@@ -236,7 +236,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Focuses this element if it is able to have focus.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
-<dd><code><a href="../GuiElement.html#requestFocus()">requestFocus</a></code>&nbsp;in class&nbsp;<code><a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>&gt;</code></dd>
+<dd><code><a href="../GuiElement.html#requestFocus()">requestFocus</a></code>&nbsp;in class&nbsp;<code><a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>,<wbr><a href="SectionGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements">SectionGuiElement</a>&gt;</code></dd>
 </dl>
 </section>
 </li>

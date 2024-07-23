@@ -72,8 +72,8 @@ loadScripts(document, 'script');</script>
 <h1 title="Class ButtonGuiElement" class="title">Class ButtonGuiElement</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance"><a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.gui">technology.sola.engine.graphics.gui.GuiElement</a>&lt;Style&gt;
-<div class="inheritance"><a href="BaseInputGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">technology.sola.engine.graphics.gui.elements.input.BaseInputGuiElement</a>&lt;<a href="../../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>&gt;
+<div class="inheritance"><a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.gui">technology.sola.engine.graphics.gui.GuiElement</a>&lt;Style,<wbr>ElementType&gt;
+<div class="inheritance"><a href="BaseInputGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">technology.sola.engine.graphics.gui.elements.input.BaseInputGuiElement</a>&lt;<a href="../../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>,<wbr><a href="ButtonGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">ButtonGuiElement</a>&gt;
 <div class="inheritance">technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement</div>
 </div>
 </div>
@@ -81,7 +81,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ButtonGuiElement</span>
-<span class="extends-implements">extends <a href="BaseInputGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">BaseInputGuiElement</a>&lt;<a href="../../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>&gt;</span></div>
+<span class="extends-implements">extends <a href="BaseInputGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">BaseInputGuiElement</a>&lt;<a href="../../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>,<wbr><a href="ButtonGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">ButtonGuiElement</a>&gt;</span></div>
 <div class="block">ButtonGuiElement is a <a href="BaseInputGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input"><code>BaseInputGuiElement</code></a> that allows users to interact via clicking the button or using
  keyboard shortcuts.</div>
 </section>
@@ -185,7 +185,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Method to render the main content of the gui element (not borders, backgrounds, etc.).</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../../GuiElement.html#renderContent(technology.sola.engine.graphics.renderer.Renderer)">renderContent</a></code>&nbsp;in class&nbsp;<code><a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="../../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>&gt;</code></dd>
+<dd><code><a href="../../GuiElement.html#renderContent(technology.sola.engine.graphics.renderer.Renderer)">renderContent</a></code>&nbsp;in class&nbsp;<code><a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="../../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>,<wbr><a href="ButtonGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">ButtonGuiElement</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>renderer</code> - the <a href="../../../renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> instance</dd>
 </dl>
@@ -200,7 +200,7 @@ loadScripts(document, 'script');</script>
  children then it should return null.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../../GuiElement.html#calculateContentDimensions()">calculateContentDimensions</a></code>&nbsp;in class&nbsp;<code><a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="../../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>&gt;</code></dd>
+<dd><code><a href="../../GuiElement.html#calculateContentDimensions()">calculateContentDimensions</a></code>&nbsp;in class&nbsp;<code><a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;<a href="../../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>,<wbr><a href="ButtonGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">ButtonGuiElement</a>&gt;</code></dd>
 <dt>Returns:</dt>
 <dd>the dimensions of the content of this element or null if only children dimensions matter</dd>
 </dl>
