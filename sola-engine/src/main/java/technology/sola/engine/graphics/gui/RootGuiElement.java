@@ -6,7 +6,7 @@ import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 
-class RootGuiElement extends GuiElement<BaseStyles> {
+class RootGuiElement extends GuiElement<BaseStyles, RootGuiElement> {
   // internals
   private final GuiDocument guiDocument;
   private final AssetLoaderProvider assetLoaderProvider;

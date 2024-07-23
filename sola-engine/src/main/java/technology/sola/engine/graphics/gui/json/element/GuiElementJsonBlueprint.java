@@ -14,7 +14,7 @@ import technology.sola.json.JsonObject;
  * @param <Element>       the gui element type
  * @param <StylesBuilder> the styles builder type
  */
-public abstract class GuiElementJsonBlueprint<Styles extends BaseStyles, Element extends GuiElement<Styles>, StylesBuilder extends BaseStyles.Builder<?>> {
+public abstract class GuiElementJsonBlueprint<Styles extends BaseStyles, Element extends GuiElement<Styles, ?>, StylesBuilder extends BaseStyles.Builder<?>> {
   private final StylesJsonValueParser<StylesBuilder> stylesJsonValueParser;
 
   /**

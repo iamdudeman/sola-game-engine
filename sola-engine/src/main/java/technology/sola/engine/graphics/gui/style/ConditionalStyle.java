@@ -13,19 +13,19 @@ import java.util.function.Function;
  * @param <Style>   the style type
  */
 public record ConditionalStyle<Style extends BaseStyles>(
-  Function<GuiElement<Style>, Boolean> condition,
+  Function<GuiElement<Style, ?>, Boolean> condition,
   Style style
 ) {
-  private static final Function<GuiElement<?>, Boolean> ALWAYS = guiElement -> true;
-  private static final Function<GuiElement<?>, Boolean> ACTIVE = GuiElement::isActive;
-  private static final Function<GuiElement<?>, Boolean> DISABLED = guiElement -> {
-    if (guiElement instanceof BaseInputGuiElement<?> inputGuiElement) {
+  private static final Function<GuiElement<?, ?>, Boolean> ALWAYS = guiElement -> true;
+  private static final Function<GuiElement<?, ?>, Boolean> ACTIVE = GuiElement::isActive;
+  private static final Function<GuiElement<?, ?>, Boolean> DISABLED = guiElement -> {
+    if (guiElement instanceof BaseInputGuiElement<?, ?> inputGuiElement) {
       return inputGuiElement.isDisabled();
     }
 
     return false;
   };
-  private static final Function<GuiElement<?>, Boolean> HOVER = GuiElement::isHovered;
+  private static final Function<GuiElement<?, ?>, Boolean> HOVER = GuiElement::isHovered;
 
   /**
    * Creates a ConditionalStyle instance for a style that will always be applied.

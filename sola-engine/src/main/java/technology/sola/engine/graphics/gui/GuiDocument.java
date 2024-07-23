@@ -14,7 +14,7 @@ import technology.sola.engine.input.MouseEvent;
  */
 public class GuiDocument {
   private final RootGuiElement root;
-  private GuiElement<?> focussedElement;
+  private GuiElement<?, ?> focussedElement;
 
   /**
    * Creates a new GuiDocument instance, registering listeners for key and mouse related events.
@@ -40,7 +40,7 @@ public class GuiDocument {
    *
    * @param rootEle the new root element
    */
-  public void setRootElement(GuiElement<?> rootEle) {
+  public void setRootElement(GuiElement<?, ?> rootEle) {
     var previousElement = this.focussedElement;
 
     focussedElement = root;
@@ -65,7 +65,7 @@ public class GuiDocument {
    * @param <T>          the type of the element
    * @return the element
    */
-  public <T extends GuiElement<?>> T findElementById(String id, Class<T> elementClass) {
+  public <T extends GuiElement<?, ?>> T findElementById(String id, Class<T> elementClass) {
     return root.findElementById(id, elementClass);
   }
 
@@ -75,7 +75,7 @@ public class GuiDocument {
    * @param guiElement the element to check
    * @return true if the element is currently focussed
    */
-  public boolean isFocussed(GuiElement<?> guiElement) {
+  public boolean isFocussed(GuiElement<?, ?> guiElement) {
     return this.focussedElement == guiElement;
   }
 
@@ -84,7 +84,7 @@ public class GuiDocument {
    *
    * @param guiElement the new element to be focussed
    */
-  public void requestFocus(GuiElement<?> guiElement) {
+  public void requestFocus(GuiElement<?, ?> guiElement) {
     if (guiElement.isFocusable()) {
       var previousElement = this.focussedElement;
 

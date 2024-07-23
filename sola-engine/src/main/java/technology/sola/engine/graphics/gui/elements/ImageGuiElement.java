@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * ImageGuiElement is a {@link GuiElement} that renders a {@link SolaImage} in a GUI. It does not render child elements.
  */
-public class ImageGuiElement extends GuiElement<BaseStyles> {
+public class ImageGuiElement extends GuiElement<BaseStyles, ImageGuiElement> {
   // props
   private String assetId;
 
@@ -68,7 +68,7 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
    * @return this
    */
   @Override
-  public GuiElement<BaseStyles> appendChildren(GuiElement<?>... children) {
+  public ImageGuiElement appendChildren(GuiElement<?, ?>... children) {
     return this;
   }
 
@@ -79,7 +79,7 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
    * @return this
    */
   @Override
-  public GuiElement<BaseStyles> removeChild(GuiElement<?> child) {
+  public ImageGuiElement removeChild(GuiElement<?, ?> child) {
     return this;
   }
 
@@ -89,7 +89,7 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
    * @return empty List
    */
   @Override
-  public List<GuiElement<?>> getChildren() {
+  public List<GuiElement<?, ?>> getChildren() {
     return List.of();
   }
 

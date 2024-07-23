@@ -123,7 +123,7 @@ public class NetworkingExample extends SolaWithDefaults {
     }
   }
 
-  private GuiElement<?> buildGui() {
+  private GuiElement<?, ?> buildGui() {
     SectionGuiElement sectionGuiElement = new SectionGuiElement();
 
     sectionGuiElement.setStyle(List.of(ConditionalStyle.always(
@@ -168,24 +168,18 @@ public class NetworkingExample extends SolaWithDefaults {
     return sectionGuiElement;
   }
 
-  private GuiElement<?> buildButton(String id, String text, Runnable onAction, boolean isDisabled) {
-    ButtonGuiElement buttonGuiElement = new ButtonGuiElement();
-
-    buttonGuiElement.setStyle(List.of(ConditionalStyle.always(
-      BaseStyles.create()
-        .setWidth(200)
-        .setPadding(15)
-        .build()
-    )));
-
-    buttonGuiElement.setId(id);
-    buttonGuiElement.setDisabled(isDisabled);
-    buttonGuiElement.setOnAction(onAction);
-
-    buttonGuiElement.appendChildren(
-      new TextGuiElement().setText(text)
-    );
-
-    return buttonGuiElement;
+  private GuiElement<?, ?> buildButton(String id, String text, Runnable onAction, boolean isDisabled) {
+    return new ButtonGuiElement()
+      .setId(id)
+      .setDisabled(isDisabled)
+      .setOnAction(onAction)
+      .setStyle(List.of(ConditionalStyle.always(
+        BaseStyles.create()
+          .setWidth(200)
+          .setPadding(15)
+          .build()
+      ))).appendChildren(
+        new TextGuiElement().setText(text)
+      );
   }
 }

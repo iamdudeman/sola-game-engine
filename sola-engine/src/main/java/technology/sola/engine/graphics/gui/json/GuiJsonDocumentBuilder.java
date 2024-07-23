@@ -47,7 +47,7 @@ public class GuiJsonDocumentBuilder {
   }
 
   @SuppressWarnings({"unchecked", "rawtypes"})
-  private GuiElement<?> buildElement(JsonObject elementJson) {
+  private GuiElement<?, ?> buildElement(JsonObject elementJson) {
     String elementTag = elementJson.getString(ATTR_TAG);
 
     GuiElementJsonBlueprint<?, ?, ?> guiElementJsonBlueprint = guiElementJsonBlueprints.stream()
@@ -56,7 +56,7 @@ public class GuiJsonDocumentBuilder {
       .orElseThrow(() -> new MissingGuiElementJsonBlueprintException(elementTag));
 
     // build element with props
-    GuiElement<?> element = guiElementJsonBlueprint.createElementFromJson(elementJson.getObject(ATTR_PROPS, new JsonObject()));
+    GuiElement<?, ?> element = guiElementJsonBlueprint.createElementFromJson(elementJson.getObject(ATTR_PROPS, new JsonObject()));
 
     element.setId(elementJson.getString(ATTR_ID, null));
 

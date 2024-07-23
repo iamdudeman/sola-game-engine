@@ -2,17 +2,21 @@
 
 ## Known Bugs List
 
+* GuiElement parent undefined when changing roots
+    * consider creating a new RootGuiElement when changing roots instead of clearing out root children
+        * if this works then can remove parent == null checks
+* If a GuiTheme is set in sola defaults apply it somehow to UI that are manually created as well
+
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Planned Cleanup List
 
-* Figure out a way for methods like GuiElement#setId to return the current type rather than GuiElement<?> for convenience
+* Improve default dark theme
 
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
 
-* Add a way to batch GUI updates before layout invalidation
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
 * Figure out how to handle TouchInput (probably at the same time as AndroidPlatform implementation)
