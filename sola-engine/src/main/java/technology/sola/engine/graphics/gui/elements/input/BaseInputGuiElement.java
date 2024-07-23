@@ -8,8 +8,9 @@ import technology.sola.engine.graphics.gui.style.BaseStyles;
  * keyboard or mouse events.
  *
  * @param <Style> the style type
+ * @param <ElementType> this element's type, so it can be used for method chaining
  */
-public abstract class BaseInputGuiElement<Style extends BaseStyles> extends GuiElement<Style> {
+public abstract class BaseInputGuiElement<Style extends BaseStyles, ElementType extends GuiElement<Style, ElementType>> extends GuiElement<Style, ElementType> {
   // props
   private boolean isDisabled;
 
@@ -37,8 +38,10 @@ public abstract class BaseInputGuiElement<Style extends BaseStyles> extends GuiE
    * Updates the disabled state of the input. If the input is currently focussed then focus will return to its parent.
    *
    * @param disabled the new disabled state
+   * @return this
    */
-  public void setDisabled(boolean disabled) {
+  @SuppressWarnings("unchecked")
+  public ElementType setDisabled(boolean disabled) {
     if (this.isDisabled != disabled) {
       boolean shouldRefocusParent = disabled && getParent() != null && isFocussed();
 
@@ -49,6 +52,8 @@ public abstract class BaseInputGuiElement<Style extends BaseStyles> extends GuiE
         getParent().requestFocus();
       }
     }
+
+    return (ElementType) this;
   }
 
   @Override

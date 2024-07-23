@@ -11,7 +11,7 @@ import technology.sola.engine.input.Key;
  * SectionGuiElement is a {@link GuiElement} that is simply a container for its children elements. It has various
  * keyboard shortcuts for navigating its children.
  */
-public class SectionGuiElement extends GuiElement<BaseStyles> {
+public class SectionGuiElement extends GuiElement<BaseStyles, SectionGuiElement> {
   /**
    * Creates a new SectionGuiElement instance and registers key pressed events for navigating its children.
    *

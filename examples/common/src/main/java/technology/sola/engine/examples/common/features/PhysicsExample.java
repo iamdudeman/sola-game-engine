@@ -74,7 +74,7 @@ public class PhysicsExample extends SolaWithDefaults {
     guiDocument.setRootElement(buildGui());
   }
 
-  private GuiElement<?> buildGui() {
+  private GuiElement<?, ?> buildGui() {
     SectionGuiElement sectionGuiElement = new SectionGuiElement();
 
     sectionGuiElement.setStyle(List.of(

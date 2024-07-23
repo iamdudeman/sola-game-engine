@@ -21,9 +21,9 @@ public class GuiTheme {
    * @param <Style>    the {@link BaseStyles} type the element uses
    */
   @SuppressWarnings("unchecked")
-  public <Style extends BaseStyles> void applyToTree(GuiElement<Style> guiElement) {
+  public <Style extends BaseStyles> void applyToTree(GuiElement<Style, ?> guiElement) {
     definitions.forEach(definition -> {
-      for (var child : guiElement.findElementsByType((Class<? extends GuiElement<Style>>) definition.elementClass)) {
+      for (var child : guiElement.findElementsByType((Class<? extends GuiElement<Style, ?>>) definition.elementClass)) {
         var castedDefinition = (ThemeElementDefinition<Style>) definition;
 
         child.styles().addStyles(castedDefinition.styles);
@@ -38,7 +38,7 @@ public class GuiTheme {
    * @param <Style>    the {@link BaseStyles} type the element uses
    */
   @SuppressWarnings("unchecked")
-  public <Style extends BaseStyles> void applyToElement(GuiElement<Style> guiElement) {
+  public <Style extends BaseStyles> void applyToElement(GuiElement<Style, ?> guiElement) {
     for (var definition : definitions) {
       if (definition.elementClass.equals(guiElement.getClass())) {
         var castedDefinition = (ThemeElementDefinition<Style>) definition;
@@ -57,7 +57,7 @@ public class GuiTheme {
    * @return the styles for the element
    */
   @SuppressWarnings("unchecked")
-  public <Style extends BaseStyles> List<ConditionalStyle<Style>> getForElement(GuiElement<Style> guiElement) {
+  public <Style extends BaseStyles> List<ConditionalStyle<Style>> getForElement(GuiElement<Style, ?> guiElement) {
     for (var definition : definitions) {
       if (definition.elementClass.equals(guiElement.getClass())) {
         var castedDefinition = (ThemeElementDefinition<Style>) definition;
@@ -78,7 +78,7 @@ public class GuiTheme {
    * @return this
    */
   @SuppressWarnings("unchecked")
-  public <Style extends BaseStyles> GuiTheme addStyle(Class<? extends GuiElement<Style>> elementClass, List<ConditionalStyle<Style>> styles) {
+  public <Style extends BaseStyles> GuiTheme addStyle(Class<? extends GuiElement<Style, ?>> elementClass, List<ConditionalStyle<Style>> styles) {
     boolean isExisting = false;
 
     for (var definition : definitions) {
@@ -101,7 +101,7 @@ public class GuiTheme {
   }
 
   private record ThemeElementDefinition<Style extends BaseStyles>(
-    Class<? extends GuiElement<Style>> elementClass,
+    Class<? extends GuiElement<Style, ?>> elementClass,
     List<ConditionalStyle<Style>> styles
   ) {
   }

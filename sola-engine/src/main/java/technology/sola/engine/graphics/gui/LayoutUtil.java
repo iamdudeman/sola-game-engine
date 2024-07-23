@@ -5,7 +5,7 @@ import technology.sola.engine.graphics.gui.style.DefaultStyleValues;
 import technology.sola.engine.graphics.gui.style.property.*;
 
 class LayoutUtil {
-  static void rebuildLayout(GuiElement<?> guiElement) {
+  static void rebuildLayout(GuiElement<?, ?> guiElement) {
     var guiElementChildren = guiElement.children;
     var styles = guiElement.styles();
     var direction = styles.getPropertyValue(BaseStyles::direction, DefaultStyleValues.DIRECTION);
@@ -21,7 +21,7 @@ class LayoutUtil {
     // main layout calculation loop
     for (int i = 0; i < guiElementChildren.size(); i++) {
       int index = startIndex > 0 ? startIndex - i : i;
-      GuiElement<?> child = guiElementChildren.get(index);
+      GuiElement<?, ?> child = guiElementChildren.get(index);
 
       Visibility visibility = child.styles().getPropertyValue(BaseStyles::visibility, DefaultStyleValues.VISIBILITY);
 
@@ -66,7 +66,7 @@ class LayoutUtil {
     }
   }
 
-  static void updateAbsolute(GuiElement<?> guiElement) {
+  static void updateAbsolute(GuiElement<?, ?> guiElement) {
     var position = guiElement.styles().getPropertyValue(BaseStyles::position, DefaultStyleValues.POSITION);
 
     if (position.isAbsolute()) {
@@ -85,7 +85,7 @@ class LayoutUtil {
     guiElement.children.forEach(LayoutUtil::updateAbsolute);
   }
 
-  static void updateAlignment(GuiElement<?> guiElement) {
+  static void updateAlignment(GuiElement<?, ?> guiElement) {
     var styles = guiElement.styles();
 
     // prepare to calculate alignment adjustments of elements in the flow
@@ -120,7 +120,7 @@ class LayoutUtil {
       // alignment adjustment loop
       for (int i = 0; i < guiElementChildrenInFlow.size(); i++) {
         int index = startIndex > 0 ? startIndex - i : i;
-        GuiElement<?> child = guiElementChildrenInFlow.get(index);
+        GuiElement<?, ?> child = guiElementChildrenInFlow.get(index);
         var boundsAfterAlignment = alignmentFunction.apply(child);
 
         child.resizeBounds(boundsAfterAlignment.width(), boundsAfterAlignment.height());
@@ -131,13 +131,13 @@ class LayoutUtil {
     guiElement.children.forEach(LayoutUtil::updateAlignment);
   }
 
-  static void clearChildLayoutChanged(GuiElement<?> guiElement) {
+  static void clearChildLayoutChanged(GuiElement<?, ?> guiElement) {
     guiElement.isLayoutChanged = false;
 
     guiElement.children.forEach(LayoutUtil::clearChildLayoutChanged);
   }
 
-  private static GuiElementBounds recalculateBoundConstraints(GuiElement<?> guiElement, int x, int y) {
+  private static GuiElementBounds recalculateBoundConstraints(GuiElement<?, ?> guiElement, int x, int y) {
     var parentStyleContainer = guiElement.getParent().styles();
     var parentBorder = parentStyleContainer.getPropertyValue(BaseStyles::border, DefaultStyleValues.BORDER);
     var parentPadding = parentStyleContainer.getPropertyValue(BaseStyles::padding, DefaultStyleValues.PADDING);
@@ -159,7 +159,7 @@ class LayoutUtil {
   }
 
   private static GuiElementBounds calculateRowChildAlignmentBounds(
-    GuiElement<?> child, MainAxisChildren mainAxisChildren, CrossAxisChildren crossAxisChildren, int usedWidth
+    GuiElement<?, ?> child, MainAxisChildren mainAxisChildren, CrossAxisChildren crossAxisChildren, int usedWidth
   ) {
     int xAlignment = switch (mainAxisChildren) {
       case START -> 0;
@@ -185,7 +185,7 @@ class LayoutUtil {
   }
 
   private static GuiElementBounds calculateColumnChildAlignmentBounds(
-    GuiElement<?> child, MainAxisChildren mainAxisChildren, CrossAxisChildren crossAxisChildren, int usedHeight
+    GuiElement<?, ?> child, MainAxisChildren mainAxisChildren, CrossAxisChildren crossAxisChildren, int usedHeight
   ) {
     int xAlignment = switch (crossAxisChildren) {
       case START, STRETCH -> 0;
@@ -210,7 +210,7 @@ class LayoutUtil {
     return result;
   }
 
-  private static GuiElementBounds calculateDefaultLayoutBounds(GuiElement<?> guiElement) {
+  private static GuiElementBounds calculateDefaultLayoutBounds(GuiElement<?, ?> guiElement) {
     var styles = guiElement.styles();
     var boundConstraints = guiElement.boundConstraints;
 
@@ -223,7 +223,7 @@ class LayoutUtil {
     return new GuiElementBounds(boundConstraints.x(), boundConstraints.y(), widthBound, heightBound);
   }
 
-  private static void updateContentBounds(GuiElement<?> guiElement) {
+  private static void updateContentBounds(GuiElement<?, ?> guiElement) {
     var contentDimensions = guiElement.calculateContentDimensions();
     var styles = guiElement.styles();
     boolean isAutoWidth = styles.getPropertyValue(BaseStyles::width) == null;
@@ -280,6 +280,6 @@ class LayoutUtil {
 
   @FunctionalInterface
   interface AlignmentFunction {
-    GuiElementBounds apply(GuiElement<?> child);
+    GuiElementBounds apply(GuiElement<?, ?> child);
   }
 }
