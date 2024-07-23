@@ -389,7 +389,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
     events.keyPressed().emit(event);
 
-    if (event.isAbleToPropagate()) {
+    if (event.isAbleToPropagate() && parent != null) {
       parent.onKeyPressed(event);
     }
   }
@@ -398,7 +398,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     events.keyReleased().emit(event);
     setActive(false);
 
-    if (event.isAbleToPropagate()) {
+    if (event.isAbleToPropagate() && parent != null) {
       parent.onKeyReleased(event);
     }
   }

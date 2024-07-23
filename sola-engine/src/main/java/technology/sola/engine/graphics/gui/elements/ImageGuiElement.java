@@ -104,9 +104,12 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
    * Sets the id of the {@link SolaImage} asset to be rendered.
    *
    * @param assetId the new asset id of the image
+   * @return this
    */
-  public void setAssetId(String assetId) {
+  public ImageGuiElement setAssetId(String assetId) {
     this.assetId = assetId;
     invalidateLayout();
+
+    return this;
   }
 }
