@@ -75,6 +75,20 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   }
 
   /**
+   * Convenience method that calls {@link StyleContainer#addStyles(List)} for this
+   * element's {@link StyleContainer}.
+   *
+   * @param styles the styles to add
+   * @return this
+   */
+  @SuppressWarnings("unchecked")
+  public final ElementType addStyles(List<ConditionalStyle<Style>> styles) {
+    styleContainer.addStyles(styles);
+
+    return (ElementType) this;
+  }
+
+  /**
    * Method to render the main content of the gui element (not borders, backgrounds, etc.).
    *
    * @param renderer the {@link Renderer} instance
