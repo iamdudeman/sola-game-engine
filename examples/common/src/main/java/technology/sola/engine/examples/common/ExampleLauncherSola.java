@@ -28,7 +28,6 @@ import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 /**
@@ -85,7 +84,7 @@ public class ExampleLauncherSola extends SolaWithDefaults {
 
   private GuiElement<?, ?> buildGui() {
     return new SectionGuiElement()
-      .setStyle(List.of(ConditionalStyle.always(
+      .addStyle(ConditionalStyle.always(
         BaseStyles.create()
           .setWidth("100%")
           .setDirection(Direction.ROW)
@@ -93,7 +92,7 @@ public class ExampleLauncherSola extends SolaWithDefaults {
           .setGap(10)
           .setPadding(10)
           .build()
-      )))
+      ))
       .appendChildren(
         buildFeatureDemoSection(),
         buildGameSection()
@@ -102,12 +101,12 @@ public class ExampleLauncherSola extends SolaWithDefaults {
 
   private GuiElement<?, ?> buildFeatureDemoSection() {
     return new SectionGuiElement()
-      .setStyle(List.of(ConditionalStyle.always(
+      .addStyle(ConditionalStyle.always(
         BaseStyles.create()
           .setGap(5)
           .setCrossAxisChildren(CrossAxisChildren.CENTER)
           .build())
-      ))
+      )
       .appendChildren(
         buildSectionTitle("Feature demos"),
         buildExampleLaunchButton("Animation", AnimationExample::new),
@@ -124,12 +123,12 @@ public class ExampleLauncherSola extends SolaWithDefaults {
 
   private GuiElement<?, ?> buildGameSection() {
     return new SectionGuiElement()
-      .setStyle(List.of(ConditionalStyle.always(
+      .addStyle(ConditionalStyle.always(
         BaseStyles.create()
           .setGap(5)
           .setCrossAxisChildren(CrossAxisChildren.CENTER)
           .build())
-      ))
+      )
       .appendChildren(
         buildSectionTitle("Games"),
         buildExampleLaunchButton("Circle Pop", CirclePopGame::new),
@@ -142,22 +141,22 @@ public class ExampleLauncherSola extends SolaWithDefaults {
   private GuiElement<?, ?> buildSectionTitle(String title) {
     return new TextGuiElement()
       .setText(title)
-      .setStyle(List.of(ConditionalStyle.always(
+      .addStyle(ConditionalStyle.always(
         TextStyles.create()
           .setPaddingBottom(15)
           .build()
-      )));
+      ));
   }
 
   private GuiElement<?, ?> buildExampleLaunchButton(String text, Supplier<Sola> solaSupplier) {
     return new ButtonGuiElement()
-      .setStyle(List.of(ConditionalStyle.always(
+      .addStyle(ConditionalStyle.always(
         BaseStyles.create()
           .setCrossAxisChildren(CrossAxisChildren.CENTER)
           .setWidth("300")
           .setPadding(10)
           .build()
-      )))
+      ))
       .setOnAction(() -> {
         eventHub.add(GameLoopEvent.class, event -> {
           if (event.state() == GameLoopState.STOPPED) {

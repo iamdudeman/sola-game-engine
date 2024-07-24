@@ -80,18 +80,18 @@ public class AudioExample extends SolaWithDefaults {
 
   private GuiElement<?, ?> buildGui(AudioClip audioClip) {
     return new SectionGuiElement()
-      .setStyle(List.of(
+      .addStyle(
         ConditionalStyle.always(BaseStyles.create()
           .setDirection(Direction.COLUMN)
           .setCrossAxisChildren(CrossAxisChildren.CENTER)
           .setGap(8)
           .setPadding(10)
           .build())
-      ))
+      )
       .appendChildren(
-        new TextGuiElement().setText("Play a Song").setStyle(List.of(
+        new TextGuiElement().setText("Play a Song").addStyle(
           ConditionalStyle.always(TextStyles.create().setPadding(5).build())
-        )),
+        ),
         buildControlsContainer(audioClip),
         buildVolumeContainer(audioClip)
       );
@@ -102,7 +102,7 @@ public class AudioExample extends SolaWithDefaults {
       .setText(formatAudioVolume(audioClip.getVolume()));
 
     return new SectionGuiElement()
-      .setStyle(List.of(
+      .addStyle(
         ConditionalStyle.always(
           BaseStyles.create()
             .setDirection(Direction.ROW)
@@ -111,7 +111,7 @@ public class AudioExample extends SolaWithDefaults {
             .setPadding(5)
             .build()
         )
-      ))
+      )
       .appendChildren(
         createButton("Vol Up", () -> {
           float newVolume = audioClip.getVolume() + 0.05f;
@@ -139,8 +139,8 @@ public class AudioExample extends SolaWithDefaults {
 
   private GuiElement<?, ?> buildControlsContainer(AudioClip audioClip) {
     return new SectionGuiElement()
-      .setStyle(List.of(
-        ConditionalStyle.always(BaseStyles.create().setDirection(Direction.ROW).setGap(5).setPadding(5).build())
+      .addStyle(ConditionalStyle.always(
+        BaseStyles.create().setDirection(Direction.ROW).setGap(5).setPadding(5).build()
       ))
       .appendChildren(
         createButton("Loop", () -> audioClip.loop(AudioClip.CONTINUOUS_LOOPING)),
@@ -152,10 +152,8 @@ public class AudioExample extends SolaWithDefaults {
 
   private ButtonGuiElement createButton(String text, Runnable action) {
     return new ButtonGuiElement()
-      .setStyle(List.of(
-        ConditionalStyle.always(
+      .addStyle(ConditionalStyle.always(
           BaseStyles.create().setPadding(5).build()
-        )
       ))
       .appendChildren(
         new TextGuiElement().setText(text)
