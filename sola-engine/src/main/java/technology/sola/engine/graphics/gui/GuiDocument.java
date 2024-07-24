@@ -6,7 +6,9 @@ import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.graphics.gui.event.GuiMouseEvent;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.KeyEvent;
+import technology.sola.engine.input.MouseButton;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.input.MouseInput;
 
 /**
  * GuiDocument is a container for {@link GuiElement} that also handles passing various key and mouse events to the
@@ -15,16 +17,19 @@ import technology.sola.engine.input.MouseEvent;
 public class GuiDocument {
   private final RootGuiElement root;
   private GuiElement<?, ?> focussedElement;
+  private final MouseInput mouseInput;
 
   /**
    * Creates a new GuiDocument instance, registering listeners for key and mouse related events.
    *
    * @param platform            the {@link SolaPlatform}
    * @param assetLoaderProvider the {@link AssetLoaderProvider}
+   * @param mouseInput          the {@link MouseInput}
    */
-  public GuiDocument(SolaPlatform platform, AssetLoaderProvider assetLoaderProvider) {
+  public GuiDocument(SolaPlatform platform, AssetLoaderProvider assetLoaderProvider, MouseInput mouseInput) {
     root = new RootGuiElement(this, assetLoaderProvider, platform.getRenderer().getWidth(), platform.getRenderer().getHeight());
     focussedElement = root;
+    this.mouseInput = mouseInput;
 
     // register listeners
     platform.onKeyPressed(this::onKeyPressed);
@@ -55,8 +60,12 @@ public class GuiDocument {
 
     root.appendChildren(rootEle);
     rootEle.requestFocus();
-    // todo manually trigger mouse moved maybe?
-//    rootEle.onMouseMoved(new GuiMouseEvent());
+
+    var position = mouseInput.getMousePosition();
+
+    if (position != null) {
+      rootEle.onMouseMoved(new GuiMouseEvent(new MouseEvent(MouseButton.NONE, (int) position.x(), (int) position.y())));
+    }
   }
 
   /**
