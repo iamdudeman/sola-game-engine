@@ -17,7 +17,6 @@ import technology.sola.engine.physics.system.PhysicsSystem;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.linear.Vector2D;
 
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -44,8 +43,12 @@ public class CirclePopGame extends SolaWithDefaults {
     solaEcs.addSystems(new PhysicsSystem(), new PlayerInputSystem());
     solaEcs.setWorld(buildWorld());
 
-    scoreGuiElement.setStyle(List.of(
-      ConditionalStyle.always(TextStyles.create().setBackgroundColor(Color.WHITE).setPadding(5).setTextColor(Color.BLACK).build())
+    scoreGuiElement.addStyle(ConditionalStyle.always(
+      TextStyles.create()
+        .setBackgroundColor(Color.WHITE)
+        .setPadding(5)
+        .setTextColor(Color.BLACK)
+        .build()
     ));
 
     guiDocument.setRootElement(scoreGuiElement);

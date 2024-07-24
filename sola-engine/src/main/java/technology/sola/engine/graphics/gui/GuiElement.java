@@ -61,14 +61,15 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   }
 
   /**
-   * Convenience method that calls {@link StyleContainer#setStyles(List)} for this element's {@link StyleContainer}.
+   * Convenience method that calls {@link StyleContainer#addStyle(ConditionalStyle)} for this
+   * element's {@link StyleContainer}.
    *
-   * @param styles the styles to set
+   * @param style the style to add
    * @return this
    */
   @SuppressWarnings("unchecked")
-  public final ElementType setStyle(List<ConditionalStyle<Style>> styles) {
-    styleContainer.setStyles(styles);
+  public final ElementType addStyle(ConditionalStyle<Style> style) {
+    styleContainer.addStyle(style);
 
     return (ElementType) this;
   }

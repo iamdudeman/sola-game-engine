@@ -21,7 +21,6 @@ import technology.sola.engine.input.Key;
 import technology.sola.engine.networking.socket.SocketMessage;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * NetworkingExample is a {@link technology.sola.engine.core.Sola} that demos a simple socket based game. This requires
@@ -126,12 +125,12 @@ public class NetworkingExample extends SolaWithDefaults {
   private GuiElement<?, ?> buildGui() {
     SectionGuiElement sectionGuiElement = new SectionGuiElement();
 
-    sectionGuiElement.setStyle(List.of(ConditionalStyle.always(
+    sectionGuiElement.addStyle(ConditionalStyle.always(
       BaseStyles.create()
         .setGap(5)
         .setPadding(5)
         .build()
-    )));
+    ));
 
     sectionGuiElement.appendChildren(
       new TextGuiElement().setText("Networking Example"),
@@ -173,12 +172,13 @@ public class NetworkingExample extends SolaWithDefaults {
       .setId(id)
       .setDisabled(isDisabled)
       .setOnAction(onAction)
-      .setStyle(List.of(ConditionalStyle.always(
+      .addStyle(ConditionalStyle.always(
         BaseStyles.create()
           .setWidth(200)
           .setPadding(15)
           .build()
-      ))).appendChildren(
+      ))
+      .appendChildren(
         new TextGuiElement().setText(text)
       );
   }
