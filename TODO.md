@@ -2,7 +2,7 @@
 
 ## Known Bugs List
 
-* GuiElement parent undefined when changing roots
+* (verify if still bug) GuiElement parent undefined when changing roots
     * consider creating a new RootGuiElement when changing roots instead of clearing out root children
         * if this works then can remove parent == null checks
 * If a GuiTheme is set in sola defaults apply it somehow to UI that are manually created as well
