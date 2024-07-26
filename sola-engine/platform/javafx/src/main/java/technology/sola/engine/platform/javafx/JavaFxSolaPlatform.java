@@ -36,6 +36,7 @@ import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
 import technology.sola.engine.platform.javafx.core.JavaFxRestClient;
 import technology.sola.engine.platform.javafx.core.JavaFxSocketClient;
 
+import java.io.IOException;
 import java.util.function.Consumer;
 
 /**
@@ -240,8 +241,14 @@ public class JavaFxSolaPlatform extends SolaPlatform {
 
   private void setApplicationIcon(Stage stage) {
     try {
-      stage.getIcons().add(new Image(JavaFxPathUtils.asUrl("assets/icon.jpg").openStream()));
-    } catch (Exception ex) {
+      var url = JavaFxPathUtils.asUrl("assets/icon.jpg");
+
+      if (url == null) {
+        LOGGER.warn("Icon not found");
+      } else {
+        stage.getIcons().add(new Image(url.openStream()));
+      }
+    } catch (IOException ex) {
       LOGGER.error("Failed to load icon", ex);
     }
   }

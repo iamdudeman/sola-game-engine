@@ -38,6 +38,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.IOException;
 import java.util.function.Consumer;
 
 /**
@@ -291,8 +292,14 @@ public class SwingSolaPlatform extends SolaPlatform {
 
   private void setApplicationIcon(JFrame jFrame) {
     try {
-      jFrame.setIconImage(new ImageIcon(SwingPathUtils.asUrl("assets/icon.jpg")).getImage());
-    } catch (Exception ex) {
+      var url = SwingPathUtils.asUrl("assets/icon.jpg");
+
+      if (url == null) {
+        LOGGER.warn("Icon not found");
+      } else {
+        jFrame.setIconImage(new ImageIcon(url).getImage());
+      }
+    } catch (IOException ex) {
       LOGGER.error("Failed to load icon", ex);
     }
   }
