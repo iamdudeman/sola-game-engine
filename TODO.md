@@ -17,6 +17,10 @@
 
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
+* File Storage API
+    * Load and save JSON content (maybe other content too)
+    * Browser implementation could open file dialog
+    * Desktop could go straight to file or open file dialog
 * Figure out how to handle TouchInput (probably at the same time as AndroidPlatform implementation)
     * Primarily for browser but also could be supported in JavaFX
     * touchstart and touchend all hard coded to MouseButton.Primary currently
