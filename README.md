@@ -1,4 +1,4 @@
-# sola game engine
+# [<img src="/sola-logo.jpg" width="64"/>](/sola-logo.jpg) sola game engine
 
 sola game engine is a zero external dependency game engine (other than teavm for transpiling to JavaScript) that has
 been a hobby project for a long time. Two larger pieces of this project were broken into separate repositories for

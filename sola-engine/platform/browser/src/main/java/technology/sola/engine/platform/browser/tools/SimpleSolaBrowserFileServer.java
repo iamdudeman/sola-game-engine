@@ -95,6 +95,7 @@ public class SimpleSolaBrowserFileServer {
     return switch (extension) {
       case "html" -> "text/html";
       case "js" -> "application/javascript";
+      case "ico" -> "image/x-icon";
       case "json" -> "application/json";
       case "png" -> "image/png";
       case "wav" -> "audio/wave";
