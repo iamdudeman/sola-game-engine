@@ -78,105 +78,87 @@ public class AudioExample extends SolaWithDefaults {
       });
   }
 
-  private GuiElement<?> buildGui(AudioClip audioClip) {
-    SectionGuiElement sectionGuiElement = new SectionGuiElement();
-
-    sectionGuiElement.setStyle(List.of(
-      ConditionalStyle.always(BaseStyles.create()
-        .setDirection(Direction.COLUMN)
-        .setCrossAxisChildren(CrossAxisChildren.CENTER)
-        .setGap(8)
-        .setPadding(10)
-        .build())
-    ));
-
-    sectionGuiElement.appendChildren(
-      new TextGuiElement().setText("Play a Song").setStyle(List.of(
-        ConditionalStyle.always(TextStyles.create().setPadding(5).build())
-      )),
-      buildControlsContainer(audioClip),
-      buildVolumeContainer(audioClip)
-    );
-
-    return sectionGuiElement;
+  private GuiElement<?, ?> buildGui(AudioClip audioClip) {
+    return new SectionGuiElement()
+      .addStyle(
+        ConditionalStyle.always(BaseStyles.create()
+          .setDirection(Direction.COLUMN)
+          .setCrossAxisChildren(CrossAxisChildren.CENTER)
+          .setGap(8)
+          .setPadding(10)
+          .build())
+      )
+      .appendChildren(
+        new TextGuiElement().setText("Play a Song").addStyle(
+          ConditionalStyle.always(TextStyles.create().setPadding(5).build())
+        ),
+        buildControlsContainer(audioClip),
+        buildVolumeContainer(audioClip)
+      );
   }
 
-  private GuiElement<?> buildVolumeContainer(AudioClip audioClip) {
+  private GuiElement<?, ?> buildVolumeContainer(AudioClip audioClip) {
     TextGuiElement volumeTextGuiElement = new TextGuiElement()
       .setText(formatAudioVolume(audioClip.getVolume()));
-    SectionGuiElement sectionGuiElement = new SectionGuiElement();
 
-    sectionGuiElement.setStyle(List.of(
-      ConditionalStyle.always(
-        BaseStyles.create()
-          .setDirection(Direction.ROW)
-          .setCrossAxisChildren(CrossAxisChildren.CENTER)
-          .setGap(5)
-          .setPadding(5)
-          .build()
+    return new SectionGuiElement()
+      .addStyle(
+        ConditionalStyle.always(
+          BaseStyles.create()
+            .setDirection(Direction.ROW)
+            .setCrossAxisChildren(CrossAxisChildren.CENTER)
+            .setGap(5)
+            .setPadding(5)
+            .build()
+        )
       )
-    ));
+      .appendChildren(
+        createButton("Vol Up", () -> {
+          float newVolume = audioClip.getVolume() + 0.05f;
 
-    sectionGuiElement.appendChildren(
-      createButton("Vol Up", () -> {
-        float newVolume = audioClip.getVolume() + 0.05f;
+          if (newVolume > 1) {
+            newVolume = 1;
+          }
 
-        if (newVolume > 1) {
-          newVolume = 1;
-        }
+          audioClip.setVolume(newVolume);
+          volumeTextGuiElement.setText(formatAudioVolume(newVolume));
+        }),
+        createButton("Vol Down", () -> {
+          float newVolume = audioClip.getVolume() - 0.05f;
 
-        audioClip.setVolume(newVolume);
-        volumeTextGuiElement.setText(formatAudioVolume(newVolume));
-      }),
-      createButton("Vol Down", () -> {
-        float newVolume = audioClip.getVolume() - 0.05f;
+          if (newVolume < 0) {
+            newVolume = 0;
+          }
 
-        if (newVolume < 0) {
-          newVolume = 0;
-        }
-
-        audioClip.setVolume(newVolume);
-        volumeTextGuiElement.setText(formatAudioVolume(newVolume));
-      }),
-      volumeTextGuiElement
-    );
-
-    return sectionGuiElement;
+          audioClip.setVolume(newVolume);
+          volumeTextGuiElement.setText(formatAudioVolume(newVolume));
+        }),
+        volumeTextGuiElement
+      );
   }
 
-  private GuiElement<?> buildControlsContainer(AudioClip audioClip) {
-    SectionGuiElement sectionGuiElement = new SectionGuiElement();
-
-    sectionGuiElement.setStyle(List.of(
-      ConditionalStyle.always(BaseStyles.create().setDirection(Direction.ROW).setGap(5).setPadding(5).build())
-    ));
-
-    sectionGuiElement.appendChildren(
-      createButton("Loop", () -> audioClip.loop(AudioClip.CONTINUOUS_LOOPING)),
-      createButton("Play Once", audioClip::play),
-      createButton("Pause", audioClip::pause),
-      createButton("Stop", audioClip::stop)
-    );
-
-    return sectionGuiElement;
+  private GuiElement<?, ?> buildControlsContainer(AudioClip audioClip) {
+    return new SectionGuiElement()
+      .addStyle(ConditionalStyle.always(
+        BaseStyles.create().setDirection(Direction.ROW).setGap(5).setPadding(5).build()
+      ))
+      .appendChildren(
+        createButton("Loop", () -> audioClip.loop(AudioClip.CONTINUOUS_LOOPING)),
+        createButton("Play Once", audioClip::play),
+        createButton("Pause", audioClip::pause),
+        createButton("Stop", audioClip::stop)
+      );
   }
 
   private ButtonGuiElement createButton(String text, Runnable action) {
-    ButtonGuiElement buttonGuiElement = new ButtonGuiElement();
-
-    buttonGuiElement.setStyle(List.of(
-      ConditionalStyle.always(
-        BaseStyles.create().setPadding(5).build()
+    return new ButtonGuiElement()
+      .addStyle(ConditionalStyle.always(
+          BaseStyles.create().setPadding(5).build()
+      ))
+      .appendChildren(
+        new TextGuiElement().setText(text)
       )
-    ));
-
-    buttonGuiElement.appendChildren(
-      new TextGuiElement().setText(text)
-    );
-
-    buttonGuiElement.setOnAction(action);
-
-    return buttonGuiElement;
+      .setOnAction(action);
   }
 
   private String formatAudioVolume(float volume) {

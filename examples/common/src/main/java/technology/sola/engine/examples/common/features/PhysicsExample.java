@@ -27,7 +27,6 @@ import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
 import technology.sola.engine.physics.system.collision.QuadTreeCollisionDetectionBroadPhase;
 import technology.sola.engine.physics.system.collision.SpatialHashMapCollisionDetectionBroadPhase;
 
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -74,16 +73,16 @@ public class PhysicsExample extends SolaWithDefaults {
     guiDocument.setRootElement(buildGui());
   }
 
-  private GuiElement<?> buildGui() {
+  private GuiElement<?, ?> buildGui() {
     SectionGuiElement sectionGuiElement = new SectionGuiElement();
 
-    sectionGuiElement.setStyle(List.of(
+    sectionGuiElement.addStyle(
       ConditionalStyle.always(BaseStyles.create().setDirection(Direction.ROW).setPadding(5).setGap(5).build())
-    ));
+    );
 
     TextInputGuiElement randomSeedInput = new TextInputGuiElement().setValue("123456789").setPlaceholder("Random");
 
-    randomSeedInput.setStyle(List.of(ConditionalStyle.always(TextInputStyles.create().setPadding(5).build())));
+    randomSeedInput.addStyle(ConditionalStyle.always(TextInputStyles.create().setPadding(5).build()));
 
     sectionGuiElement.appendChildren(
       new ButtonGuiElement()
@@ -94,7 +93,7 @@ public class PhysicsExample extends SolaWithDefaults {
           );
           solaEcs.setWorld(buildSpatialHashMapOptimizedWorld());
         })
-        .setStyle(List.of(ConditionalStyle.always(BaseStyles.create().setPadding(5).build())))
+        .addStyle(ConditionalStyle.always(BaseStyles.create().setPadding(5).build()))
         .appendChildren(new TextGuiElement().setText("SpatialHashMap")),
       new ButtonGuiElement()
         .setOnAction(() -> {
@@ -104,13 +103,13 @@ public class PhysicsExample extends SolaWithDefaults {
           );
           solaEcs.setWorld(buildQuadTreeOptimizedWorld());
         })
-        .setStyle(List.of(ConditionalStyle.always(BaseStyles.create().setPadding(5).build())))
+        .addStyle(ConditionalStyle.always(BaseStyles.create().setPadding(5).build()))
         .appendChildren(new TextGuiElement().setText("QuadTree")),
       new ButtonGuiElement()
         .setOnAction(() -> {
           randomSeedInput.setValue("" + new Random().nextLong());
         })
-        .setStyle(List.of(ConditionalStyle.always(BaseStyles.create().setPadding(5).build())))
+        .addStyle(ConditionalStyle.always(BaseStyles.create().setPadding(5).build()))
         .appendChildren(new TextGuiElement().setText("New seed")),
       randomSeedInput
     );

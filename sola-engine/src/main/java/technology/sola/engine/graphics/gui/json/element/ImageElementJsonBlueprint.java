@@ -23,11 +23,8 @@ public class ImageElementJsonBlueprint extends GuiElementJsonBlueprint<BaseStyle
 
   @Override
   public ImageGuiElement createElementFromJson(JsonObject propsJson) {
-    ImageGuiElement imageGuiElement = new ImageGuiElement();
-
-    imageGuiElement.setAssetId(propsJson.getString("assetId", null));
-
-    return imageGuiElement;
+    return new ImageGuiElement()
+      .setAssetId(propsJson.getString("assetId", null));
   }
 
   @Override

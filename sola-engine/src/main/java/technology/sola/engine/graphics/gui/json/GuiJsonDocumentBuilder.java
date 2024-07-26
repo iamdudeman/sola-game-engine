@@ -47,7 +47,7 @@ public class GuiJsonDocumentBuilder {
   }
 
   @SuppressWarnings({"unchecked", "rawtypes"})
-  private GuiElement<?> buildElement(JsonObject elementJson) {
+  private GuiElement<?, ?> buildElement(JsonObject elementJson) {
     String elementTag = elementJson.getString(ATTR_TAG);
 
     GuiElementJsonBlueprint<?, ?, ?> guiElementJsonBlueprint = guiElementJsonBlueprints.stream()
@@ -56,7 +56,7 @@ public class GuiJsonDocumentBuilder {
       .orElseThrow(() -> new MissingGuiElementJsonBlueprintException(elementTag));
 
     // build element with props
-    GuiElement<?> element = guiElementJsonBlueprint.createElementFromJson(elementJson.getObject(ATTR_PROPS, new JsonObject()));
+    GuiElement<?, ?> element = guiElementJsonBlueprint.createElementFromJson(elementJson.getObject(ATTR_PROPS, new JsonObject()));
 
     element.setId(elementJson.getString(ATTR_ID, null));
 
@@ -65,7 +65,9 @@ public class GuiJsonDocumentBuilder {
     var themeStyles = guiTheme.getForElement(element);
     var styles = stylesJsonArray.stream().map(styleObject -> (ConditionalStyle<BaseStyles>) guiElementJsonBlueprint.createStylesFromJson(styleObject.asObject())).toList();
 
-    ((GuiElement) element).setStyle(Stream.concat(themeStyles.stream(), styles.stream()).toList());
+    ((GuiElement) element).styles().setStyles(
+      Stream.concat(themeStyles.stream(), styles.stream()).toList()
+    );
 
     // build all children as well
     elementJson.getArray(ATTR_CHILDREN, new JsonArray()).stream().map(childJson -> buildElement(childJson.asObject())).forEach(element::appendChildren);

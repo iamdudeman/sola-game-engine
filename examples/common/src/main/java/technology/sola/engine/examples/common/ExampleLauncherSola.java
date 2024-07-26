@@ -28,7 +28,6 @@ import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 /**
@@ -83,109 +82,92 @@ public class ExampleLauncherSola extends SolaWithDefaults {
     guiRoot.requestFocus();
   }
 
-  private GuiElement<?> buildGui() {
-    SectionGuiElement sectionGuiElement = new SectionGuiElement();
-
-    sectionGuiElement.setStyle(List.of(ConditionalStyle.always(
-      BaseStyles.create()
-        .setWidth("100%")
-        .setDirection(Direction.ROW)
-        .setMainAxisChildren(MainAxisChildren.CENTER)
-        .setGap(10)
-        .setPadding(10)
-        .build()
-    )));
-
-    sectionGuiElement.appendChildren(
-      buildFeatureDemoSection(),
-      buildGameSection()
-    );
-
-    return sectionGuiElement;
+  private GuiElement<?, ?> buildGui() {
+    return new SectionGuiElement()
+      .addStyle(ConditionalStyle.always(
+        BaseStyles.create()
+          .setWidth("100%")
+          .setDirection(Direction.ROW)
+          .setMainAxisChildren(MainAxisChildren.CENTER)
+          .setGap(10)
+          .setPadding(10)
+          .build()
+      ))
+      .appendChildren(
+        buildFeatureDemoSection(),
+        buildGameSection()
+      );
   }
 
-  private GuiElement<?> buildFeatureDemoSection() {
-    SectionGuiElement sectionGuiElement = new SectionGuiElement();
-
-    sectionGuiElement.setStyle(List.of(ConditionalStyle.always(
-      BaseStyles.create()
-        .setGap(5)
-        .setCrossAxisChildren(CrossAxisChildren.CENTER)
-        .build())
-    ));
-
-    sectionGuiElement.appendChildren(
-      buildSectionTitle("Feature demos"),
-      buildExampleLaunchButton("Animation", AnimationExample::new),
-      buildExampleLaunchButton("Audio", AudioExample::new),
-      buildExampleLaunchButton("Gui", GuiExample::new),
-      buildExampleLaunchButton("Lighting", LightingExample::new),
-      buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new),
-      buildExampleLaunchButton("Networking", NetworkingExample::new),
-      buildExampleLaunchButton("Particle", ParticleExample::new),
-      buildExampleLaunchButton("Physics", () -> new PhysicsExample(1337)),
-      buildExampleLaunchButton("Rendering", RenderingExample::new)
-    );
-
-    return sectionGuiElement;
+  private GuiElement<?, ?> buildFeatureDemoSection() {
+    return new SectionGuiElement()
+      .addStyle(ConditionalStyle.always(
+        BaseStyles.create()
+          .setGap(5)
+          .setCrossAxisChildren(CrossAxisChildren.CENTER)
+          .build())
+      )
+      .appendChildren(
+        buildSectionTitle("Feature demos"),
+        buildExampleLaunchButton("Animation", AnimationExample::new),
+        buildExampleLaunchButton("Audio", AudioExample::new),
+        buildExampleLaunchButton("Gui", GuiExample::new),
+        buildExampleLaunchButton("Lighting", LightingExample::new),
+        buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new),
+        buildExampleLaunchButton("Networking", NetworkingExample::new),
+        buildExampleLaunchButton("Particle", ParticleExample::new),
+        buildExampleLaunchButton("Physics", () -> new PhysicsExample(1337)),
+        buildExampleLaunchButton("Rendering", RenderingExample::new)
+      );
   }
 
-  private GuiElement<?> buildGameSection() {
-    SectionGuiElement sectionGuiElement = new SectionGuiElement();
-
-    sectionGuiElement.setStyle(List.of(ConditionalStyle.always(
-      BaseStyles.create()
-        .setGap(5)
-        .setCrossAxisChildren(CrossAxisChildren.CENTER)
-        .build())
-    ));
-
-    sectionGuiElement.appendChildren(
-      buildSectionTitle("Games"),
-      buildExampleLaunchButton("Circle Pop", CirclePopGame::new),
-      buildExampleLaunchButton("Minesweeper", MinesweeperGame::new),
-      buildExampleLaunchButton("Pong", PongGame::new),
-      buildExampleLaunchButton("Simple Platformer", SimplePlatformerGame::new)
-    );
-
-    return sectionGuiElement;
+  private GuiElement<?, ?> buildGameSection() {
+    return new SectionGuiElement()
+      .addStyle(ConditionalStyle.always(
+        BaseStyles.create()
+          .setGap(5)
+          .setCrossAxisChildren(CrossAxisChildren.CENTER)
+          .build())
+      )
+      .appendChildren(
+        buildSectionTitle("Games"),
+        buildExampleLaunchButton("Circle Pop", CirclePopGame::new),
+        buildExampleLaunchButton("Minesweeper", MinesweeperGame::new),
+        buildExampleLaunchButton("Pong", PongGame::new),
+        buildExampleLaunchButton("Simple Platformer", SimplePlatformerGame::new)
+      );
   }
 
-  private GuiElement<?> buildSectionTitle(String title) {
+  private GuiElement<?, ?> buildSectionTitle(String title) {
     return new TextGuiElement()
       .setText(title)
-      .setStyle(List.of(ConditionalStyle.always(
+      .addStyle(ConditionalStyle.always(
         TextStyles.create()
           .setPaddingBottom(15)
           .build()
-      )));
+      ));
   }
 
-  private GuiElement<?> buildExampleLaunchButton(String text, Supplier<Sola> solaSupplier) {
-    ButtonGuiElement buttonGuiElement = new ButtonGuiElement();
+  private GuiElement<?, ?> buildExampleLaunchButton(String text, Supplier<Sola> solaSupplier) {
+    return new ButtonGuiElement()
+      .addStyle(ConditionalStyle.always(
+        BaseStyles.create()
+          .setCrossAxisChildren(CrossAxisChildren.CENTER)
+          .setWidth("300")
+          .setPadding(10)
+          .build()
+      ))
+      .setOnAction(() -> {
+        eventHub.add(GameLoopEvent.class, event -> {
+          if (event.state() == GameLoopState.STOPPED) {
+            solaPlatform.play(solaSupplier.get());
+          }
+        });
 
-    buttonGuiElement.setStyle(List.of(ConditionalStyle.always(
-      BaseStyles.create()
-        .setCrossAxisChildren(CrossAxisChildren.CENTER)
-        .setWidth("300")
-        .setPadding(10)
-        .build()
-    )));
-
-    buttonGuiElement.setOnAction(() -> {
-      eventHub.add(GameLoopEvent.class, event -> {
-        if (event.state() == GameLoopState.STOPPED) {
-          solaPlatform.play(solaSupplier.get());
-        }
-      });
-
-      eventHub.emit(new GameLoopEvent(GameLoopState.STOP));
-    });
-
-    buttonGuiElement.appendChildren(
-      new TextGuiElement().setText(text)
-    );
-
-    return buttonGuiElement;
+        eventHub.emit(new GameLoopEvent(GameLoopState.STOP));
+      })
+      .appendChildren(
+        new TextGuiElement().setText(text)
+      );
   }
 }

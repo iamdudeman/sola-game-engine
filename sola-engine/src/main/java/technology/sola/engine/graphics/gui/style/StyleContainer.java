@@ -16,7 +16,7 @@ import java.util.function.Function;
  */
 public class StyleContainer<Style extends BaseStyles> {
   private final Map<Function<Style, ?>, Object> computedCache = new HashMap<>();
-  private final GuiElement<Style> guiElement;
+  private final GuiElement<Style, ?> guiElement;
   private List<ConditionalStyle<Style>> conditionalStyles;
   private boolean[] conditionsArray;
   private boolean hasHoverCondition = false;
@@ -27,7 +27,7 @@ public class StyleContainer<Style extends BaseStyles> {
    *
    * @param guiElement the gui element
    */
-  public StyleContainer(GuiElement<Style> guiElement) {
+  public StyleContainer(GuiElement<Style, ?> guiElement) {
     this.guiElement = guiElement;
     conditionalStyles = new ArrayList<>();
     conditionsArray = new boolean[0];

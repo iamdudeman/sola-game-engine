@@ -9,7 +9,7 @@ import technology.sola.engine.input.Key;
  * ButtonGuiElement is a {@link BaseInputGuiElement} that allows users to interact via clicking the button or using
  * keyboard shortcuts.
  */
-public class ButtonGuiElement extends BaseInputGuiElement<BaseStyles> {
+public class ButtonGuiElement extends BaseInputGuiElement<BaseStyles, ButtonGuiElement> {
   // props
   private Runnable onAction = () -> {
   };

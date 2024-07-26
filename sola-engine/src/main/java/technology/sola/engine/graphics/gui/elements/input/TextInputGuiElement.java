@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * TextInputGuiElement is a {@link BaseInputGuiElement} that allows users to interact via typing text into the field.
  */
-public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
+public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, TextInputGuiElement> {
   // props
   private String placeholder = "";
   private Integer maxLength;
@@ -116,8 +116,29 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles> {
    * @return this
    */
   @Override
-  public GuiElement<TextInputStyles> appendChildren(GuiElement<?>... children) {
+  public TextInputGuiElement appendChildren(GuiElement<?, ?>... children) {
     return this;
+  }
+
+  /**
+   * TextInputGuiElement does not render children so this method will do nothing.
+   *
+   * @param child the child element that will not be removed
+   * @return this
+   */
+  @Override
+  public TextInputGuiElement removeChild(GuiElement<?, ?> child) {
+    return this;
+  }
+
+  /**
+   * TextInputGuiElement does not render children so this method will return an empty List.
+   *
+   * @return empty List
+   */
+  @Override
+  public List<GuiElement<?, ?>> getChildren() {
+    return List.of();
   }
 
   /**

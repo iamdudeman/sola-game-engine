@@ -273,7 +273,7 @@ public abstract class SolaWithDefaults extends Sola {
      */
     public DefaultsConfigurator useGui(GuiTheme guiTheme, List<GuiElementJsonBlueprint<?, ?, ?>> additionalGuiElementJsonBlueprints) {
       if (guiDocument == null) {
-        guiDocument = new GuiDocument(platform, assetLoaderProvider);
+        guiDocument = new GuiDocument(platform, assetLoaderProvider, mouseInput);
         rebuildRenderFunction();
 
         // Prepare default font

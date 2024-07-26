@@ -50,7 +50,7 @@ public class MinesweeperGui {
    * @param rootElement the root {@link GuiElement}
    * @param eventHub    the {@link EventHub}
    */
-  public static void initializeEvents(GuiElement<?> rootElement, EventHub eventHub) {
+  public static void initializeEvents(GuiElement<?, ?> rootElement, EventHub eventHub) {
     rootElement.findElementById("buttonNewGame", ButtonGuiElement.class).setOnAction(() -> newGame(eventHub));
     rootElement.findElementById("buttonSize", ButtonGuiElement.class).setOnAction(() -> {
       sizeIndex = (sizeIndex + 1) % SIZE_OPTIONS.length;
