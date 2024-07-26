@@ -149,7 +149,7 @@ the sola game engine to load when manually creating or updating them.
 2. Go to `Languages & Frameworks | Schemas and DTDs | JSON Schema Mappings`
 3. Click `+` and select the schema file to add
 4. Add by file path pattern (recommendations below)
-    * SpriteSheet.schema.json -> *.sprites.json
-    * Font.schema.json -> *.font.json
-    * GuiDocument.schema.json -> *.gui.json
-    * ControlConfig.schema.json -> *.controls.json
+    * [SpriteSheet.schema.json](json-schema/SpriteSheet.schema.json) -> *.sprites.json
+    * [Font.schema.json](json-schema/Font.schema.json) -> *.font.json
+    * [GuiDocument.schema.json](json-schema/GuiDocument.schema.json) -> *.gui.json
+    * [ControlConfig.schema.json](json-schema/ControlConfig.schema.json) -> *.controls.json
