@@ -9,6 +9,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.PixelFormat;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
@@ -34,7 +36,6 @@ import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
 import technology.sola.engine.platform.javafx.core.JavaFxRestClient;
 import technology.sola.engine.platform.javafx.core.JavaFxSocketClient;
 
-import java.io.IOException;
 import java.util.function.Consumer;
 
 /**
@@ -42,6 +43,7 @@ import java.util.function.Consumer;
  * a JavaFX powered window.
  */
 public class JavaFxSolaPlatform extends SolaPlatform {
+  private static final Logger LOGGER = LoggerFactory.getLogger(JavaFxSolaPlatform.class);
   private static boolean isPlatformStartupNeeded = true;
   private Canvas canvas;
   private GraphicsContext graphicsContext;
@@ -239,8 +241,8 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   private void setApplicationIcon(Stage stage) {
     try {
       stage.getIcons().add(new Image(JavaFxPathUtils.asUrl("assets/icon.jpg").openStream()));
-    } catch (IOException ex) {
-      // no worries
+    } catch (Exception ex) {
+      LOGGER.error("Failed to load icon", ex);
     }
   }
 }
