@@ -295,6 +295,10 @@ public class SwingSolaPlatform extends SolaPlatform {
       var url = SwingPathUtils.asUrl("assets/icon.jpg");
 
       if (url == null) {
+        url = SwingPathUtils.asUrl("assets/icon.png");
+      }
+
+      if (url == null) {
         LOGGER.warn("Icon not found");
       } else {
         jFrame.setIconImage(new ImageIcon(url).getImage());
