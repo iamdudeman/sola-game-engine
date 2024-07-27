@@ -104,7 +104,7 @@ Run the following gradle command
 .\gradlew.bat distWebZip
 ```
 
-The output will be at `examples/browser/build/examples-browser-<version>.zip`.
+The output will be at `dist/browser/examples-browser-<version>.zip`.
 This can be deployed to places like `itch.io` when using the "HTML" project type.
 
 ### Swing + JavaFx fat jar
@@ -115,10 +115,10 @@ Run the following gradle command
 .\gradlew.bat distFatJar
 ```
 
-The output will be at `examples/swing/build/swing-<version>.jar` and `examples/javafx/build/javafx-<os>-<version>.jar`.
+The output will be at `dist/swing/examples-swing-<version>.jar` and `dist/javafx/examples-javafx-<os>-<version>.jar`.
 Your users will need to have Java 17 installed to run the jar.
 
-### Swing + JavaFx .exe
+### JavaFx .exe
 
 You also have the option to use [jpackage](
 https://docs.oracle.com/en/java/javase/17/jpackage/packaging-overview.html) to create an executable exe file.
@@ -132,10 +132,10 @@ Your users will not need to have Java installed.
 3. Run the following gradle command
 
 ```shell
-.\gradlew.bat distFatJarZip
+.\gradlew.bat distWinJPackageZip
 ```
 
-4. Output will be in the `build/jpackage` directory
+4. Output will be in the `dist/javafx` directory
 
 
 ## JSON Schema
