@@ -93,6 +93,9 @@ will have to be downloaded and executed separately.
 3. re;memory [OLC CodeJam 2023](https://itch.io/jam/olc-codejam-2023/entries)
     * Play it on its [itch.io page](https://iamdudeman.itch.io/rememory)
     * Check out its [GitHub repo](https://github.com/iamdudeman/re-memory)
+4. Vile [Pirate Software Game Jam 15](https://itch.io/jam/pirate/rate/2848192)
+    * Play it on its [itch.io page](https://iamdudeman.itch.io/vile)
+    * Check out its [GitHub repo](https://github.com/iamdudeman/vile)
 
 ## Packaging for release
 
