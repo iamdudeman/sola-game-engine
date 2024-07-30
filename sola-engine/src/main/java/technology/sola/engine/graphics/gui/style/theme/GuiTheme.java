@@ -15,7 +15,8 @@ public class GuiTheme {
   private final List<ThemeElementDefinition<?>> definitions = new ArrayList<>();
 
   /**
-   * Applies this theme to a {@link GuiElement} and all its children.
+   * Applies this theme to a {@link GuiElement} and all its children. Theme styles are prepended to element's existing
+   * styles.
    *
    * @param guiElement the parent element of the tree to apply the theme to
    * @param <Style>    the {@link BaseStyles} type the element uses
@@ -26,13 +27,13 @@ public class GuiTheme {
       for (var child : guiElement.findElementsByType((Class<? extends GuiElement<Style, ?>>) definition.elementClass)) {
         var castedDefinition = (ThemeElementDefinition<Style>) definition;
 
-        child.styles().addStyles(castedDefinition.styles);
+        child.styles().addStyles(castedDefinition.styles, true);
       }
     });
   }
 
   /**
-   * Applies this theme to a {@link GuiElement}..
+   * Applies this theme to a {@link GuiElement}. Theme styles are prepended to element's existing styles.
    *
    * @param guiElement the element to apply the theme to
    * @param <Style>    the {@link BaseStyles} type the element uses
@@ -43,7 +44,7 @@ public class GuiTheme {
       if (definition.elementClass.equals(guiElement.getClass())) {
         var castedDefinition = (ThemeElementDefinition<Style>) definition;
 
-        guiElement.styles().addStyles(castedDefinition.styles);
+        guiElement.styles().addStyles(castedDefinition.styles, true);
         break;
       }
     }

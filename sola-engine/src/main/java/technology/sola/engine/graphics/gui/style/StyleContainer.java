@@ -86,9 +86,22 @@ public class StyleContainer<Style extends BaseStyles> {
    * @param styles the styles to add
    */
   public void addStyles(List<ConditionalStyle<Style>> styles) {
-    List<ConditionalStyle<Style>> combined = new ArrayList<>(conditionalStyles);
+    addStyles(styles, false);
+  }
 
-    combined.addAll(styles);
+  /**
+   * Appends or prepends a {@link List} of {@link ConditionalStyle}s to the current list of styles.
+   *
+   * @param styles  the styles to add
+   * @param prepend whether to prepend the styles or not
+   */
+  public void addStyles(List<ConditionalStyle<Style>> styles, boolean prepend) {
+    var firstList = prepend ? styles : conditionalStyles;
+    var secondList = prepend ? conditionalStyles : styles;
+
+    List<ConditionalStyle<Style>> combined = new ArrayList<>(firstList);
+
+    combined.addAll(secondList);
     setStyles(combined);
   }
 
