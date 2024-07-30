@@ -245,7 +245,8 @@ public abstract class SolaWithDefaults extends Sola {
     }
 
     /**
-     * Initializes the {@link GuiDocument} instance with a light {@link GuiTheme}.
+     * Initializes the {@link GuiDocument} instance with a light {@link GuiTheme}. The theme will only be applied to
+     * {@link technology.sola.engine.graphics.gui.GuiElement}s that are loaded via JSON files.
      *
      * @return this
      */
@@ -254,7 +255,8 @@ public abstract class SolaWithDefaults extends Sola {
     }
 
     /**
-     * Initializes the {@link GuiDocument} instance with a desired {@link GuiTheme}.
+     * Initializes the {@link GuiDocument} instance with a desired {@link GuiTheme}.The theme will only be applied to
+     * {@link technology.sola.engine.graphics.gui.GuiElement}s that are loaded via JSON files.
      *
      * @param guiTheme the theme to use
      * @return this
@@ -265,7 +267,8 @@ public abstract class SolaWithDefaults extends Sola {
 
     /**
      * Initializes the {@link GuiDocument} instance with a desired {@link GuiTheme}. Also registers additional
-     * {@link GuiElementJsonBlueprint}s for parsing different kinds of elements as JSON.
+     * {@link GuiElementJsonBlueprint}s for parsing different kinds of elements as JSON. The theme will only be applied
+     * to {@link technology.sola.engine.graphics.gui.GuiElement}s that are loaded via JSON files.
      *
      * @param guiTheme                           the theme to use
      * @param additionalGuiElementJsonBlueprints addition gui element json blueprints to register for parsing
