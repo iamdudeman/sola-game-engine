@@ -244,6 +244,10 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       var url = JavaFxPathUtils.asUrl("assets/icon.jpg");
 
       if (url == null) {
+        url = JavaFxPathUtils.asUrl("assets/icon.png");
+      }
+
+      if (url == null) {
         LOGGER.warn("Icon not found");
       } else {
         stage.getIcons().add(new Image(url.openStream()));
