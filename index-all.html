@@ -158,6 +158,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Appends a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> of <a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s to the current list of styles.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/StyleContainer.html#addStyles(java.util.List,boolean)" class="member-name-link">addStyles(List&lt;ConditionalStyle&lt;Style&gt;&gt;, boolean)</a> - Method in class technology.sola.engine.graphics.gui.style.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/StyleContainer.html" title="class in technology.sola.engine.graphics.gui.style">StyleContainer</a></dt>
+<dd>
+<div class="block">Appends or prepends a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> of <a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s to the current list of styles.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#adjustMouseForViewport(int,int)" class="member-name-link">adjustMouseForViewport(int, int)</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
 <dd>
 <div class="block">Convenience method for calculating adjusted mouse coordinate considering the current
@@ -213,7 +217,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/theme/GuiTheme.html#applyToElement(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">applyToElement(GuiElement&lt;Style, ?&gt;)</a> - Method in class technology.sola.engine.graphics.gui.style.theme.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/theme/GuiTheme.html" title="class in technology.sola.engine.graphics.gui.style.theme">GuiTheme</a></dt>
 <dd>
-<div class="block">Applies this theme to a <a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>..</div>
+<div class="block">Applies this theme to a <a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/theme/GuiTheme.html#applyToTree(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">applyToTree(GuiElement&lt;Style, ?&gt;)</a> - Method in class technology.sola.engine.graphics.gui.style.theme.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/theme/GuiTheme.html" title="class in technology.sola.engine.graphics.gui.style.theme">GuiTheme</a></dt>
 <dd>
@@ -5793,7 +5797,8 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/SolaWithDefaults.DefaultsConfigurator.html#useGui(technology.sola.engine.graphics.gui.style.theme.GuiTheme)" class="member-name-link">useGui(GuiTheme)</a> - Method in class technology.sola.engine.defaults.<a href="technology.sola.engine/technology/sola/engine/defaults/SolaWithDefaults.DefaultsConfigurator.html" title="class in technology.sola.engine.defaults">SolaWithDefaults.DefaultsConfigurator</a></dt>
 <dd>
-<div class="block">Initializes the <a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiDocument.html" title="class in technology.sola.engine.graphics.gui"><code>GuiDocument</code></a> instance with a desired <a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/theme/GuiTheme.html" title="class in technology.sola.engine.graphics.gui.style.theme"><code>GuiTheme</code></a>.</div>
+<div class="block">Initializes the <a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiDocument.html" title="class in technology.sola.engine.graphics.gui"><code>GuiDocument</code></a> instance with a desired <a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/theme/GuiTheme.html" title="class in technology.sola.engine.graphics.gui.style.theme"><code>GuiTheme</code></a>.The theme will only be applied to
+ <a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>s that are loaded via JSON files.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/SolaWithDefaults.DefaultsConfigurator.html#useGui(technology.sola.engine.graphics.gui.style.theme.GuiTheme,java.util.List)" class="member-name-link">useGui(GuiTheme, List&lt;GuiElementJsonBlueprint&lt;?, ?, ?&gt;&gt;)</a> - Method in class technology.sola.engine.defaults.<a href="technology.sola.engine/technology/sola/engine/defaults/SolaWithDefaults.DefaultsConfigurator.html" title="class in technology.sola.engine.defaults">SolaWithDefaults.DefaultsConfigurator</a></dt>
 <dd>

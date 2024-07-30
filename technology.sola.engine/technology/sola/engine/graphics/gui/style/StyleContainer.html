@@ -122,36 +122,42 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Appends a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> of <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s to the current list of styles.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;R&gt;&nbsp;R</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPropertyValue(java.util.function.Function)" class="member-name-link">getPropertyValue</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>,<wbr>R&gt;&nbsp;propertySupplier)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addStyles(java.util.List,boolean)" class="member-name-link">addStyles</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style">ConditionalStyle</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>&gt;&gt;&nbsp;styles,
+ boolean&nbsp;prepend)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Gets the computer property value based on the <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s currently applied to the <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>.</div>
+<div class="block">Appends or prepends a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> of <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s to the current list of styles.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;R&gt;&nbsp;R</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPropertyValue(java.util.function.Function,R)" class="member-name-link">getPropertyValue</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>,<wbr>R&gt;&nbsp;propertySupplier,
- R&nbsp;defaultValue)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPropertyValue(java.util.function.Function)" class="member-name-link">getPropertyValue</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>,<wbr>R&gt;&nbsp;propertySupplier)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gets the computer property value based on the <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s currently applied to the <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasActiveCondition()" class="member-name-link">hasActiveCondition</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasHoverCondition()" class="member-name-link">hasHoverCondition</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#invalidate()" class="member-name-link">invalidate</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;R&gt;&nbsp;R</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPropertyValue(java.util.function.Function,R)" class="member-name-link">getPropertyValue</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>,<wbr>R&gt;&nbsp;propertySupplier,
+ R&nbsp;defaultValue)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Gets the computer property value based on the <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s currently applied to the <a href="../GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasActiveCondition()" class="member-name-link">hasActiveCondition</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasHoverCondition()" class="member-name-link">hasHoverCondition</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#invalidate()" class="member-name-link">invalidate</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Invalidates the cached condition evaluations if a change has happened.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeStyle(technology.sola.engine.graphics.gui.style.ConditionalStyle)" class="member-name-link">removeStyle</a><wbr>(<a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style">ConditionalStyle</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>&gt;&nbsp;style)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeStyle(technology.sola.engine.graphics.gui.style.ConditionalStyle)" class="member-name-link">removeStyle</a><wbr>(<a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style">ConditionalStyle</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>&gt;&nbsp;style)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Removes a <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a> from the current list of styles.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setStyles(java.util.List)" class="member-name-link">setStyles</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style">ConditionalStyle</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>&gt;&gt;&nbsp;styles)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setStyles(java.util.List)" class="member-name-link">setStyles</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style">ConditionalStyle</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>&gt;&gt;&nbsp;styles)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Replaces the current internal <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> of <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s with a new one.</div>
 </div>
 </div>
@@ -227,6 +233,19 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>styles</code> - the styles to add</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="addStyles(java.util.List,boolean)">
+<h3>addStyles</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addStyles</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style">ConditionalStyle</a>&lt;<a href="StyleContainer.html" title="type parameter in StyleContainer">Style</a>&gt;&gt;&nbsp;styles,
+ boolean&nbsp;prepend)</span></div>
+<div class="block">Appends or prepends a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> of <a href="ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s to the current list of styles.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>styles</code> - the styles to add</dd>
+<dd><code>prepend</code> - whether to prepend the styles or not</dd>
 </dl>
 </section>
 </li>
