@@ -93,6 +93,9 @@ will have to be downloaded and executed separately.
 3. re;memory [OLC CodeJam 2023](https://itch.io/jam/olc-codejam-2023/entries)
     * Play it on its [itch.io page](https://iamdudeman.itch.io/rememory)
     * Check out its [GitHub repo](https://github.com/iamdudeman/re-memory)
+4. Vile [Pirate Software Game Jam 15](https://itch.io/jam/pirate/rate/2848192)
+    * Play it on its [itch.io page](https://iamdudeman.itch.io/vile)
+    * Check out its [GitHub repo](https://github.com/iamdudeman/vile)
 
 ## Packaging for release
 
@@ -104,7 +107,7 @@ Run the following gradle command
 .\gradlew.bat distWebZip
 ```
 
-The output will be at `examples/browser/build/examples-browser-<version>.zip`.
+The output will be at `dist/browser/examples-browser-<version>.zip`.
 This can be deployed to places like `itch.io` when using the "HTML" project type.
 
 ### Swing + JavaFx fat jar
@@ -115,10 +118,10 @@ Run the following gradle command
 .\gradlew.bat distFatJar
 ```
 
-The output will be at `examples/swing/build/swing-<version>.jar` and `examples/javafx/build/javafx-<os>-<version>.jar`.
+The output will be at `dist/swing/examples-swing-<version>.jar` and `dist/javafx/examples-javafx-<os>-<version>.jar`.
 Your users will need to have Java 17 installed to run the jar.
 
-### Swing + JavaFx .exe
+### JavaFx .exe
 
 You also have the option to use [jpackage](
 https://docs.oracle.com/en/java/javase/17/jpackage/packaging-overview.html) to create an executable exe file.
@@ -132,10 +135,10 @@ Your users will not need to have Java installed.
 3. Run the following gradle command
 
 ```shell
-.\gradlew.bat distFatJarZip
+.\gradlew.bat distWinJPackageZip
 ```
 
-4. Output will be in the `build/jpackage` directory
+4. Output will be in the `dist/javafx` directory
 
 
 ## JSON Schema
@@ -149,7 +152,7 @@ the sola game engine to load when manually creating or updating them.
 2. Go to `Languages & Frameworks | Schemas and DTDs | JSON Schema Mappings`
 3. Click `+` and select the schema file to add
 4. Add by file path pattern (recommendations below)
-    * SpriteSheet.schema.json -> *.sprites.json
-    * Font.schema.json -> *.font.json
-    * GuiDocument.schema.json -> *.gui.json
-    * ControlConfig.schema.json -> *.controls.json
+    * [SpriteSheet.schema.json](json-schema/SpriteSheet.schema.json) -> *.sprites.json
+    * [Font.schema.json](json-schema/Font.schema.json) -> *.font.json
+    * [GuiDocument.schema.json](json-schema/GuiDocument.schema.json) -> *.gui.json
+    * [ControlConfig.schema.json](json-schema/ControlConfig.schema.json) -> *.controls.json
