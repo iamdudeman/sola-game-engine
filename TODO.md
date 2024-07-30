@@ -1,7 +1,5 @@
 # sola-game-engine TODO list
 
-* add support for png icon for desktop
-
 ## Known Bugs List
 
 * (verify if still bug) GuiElement parent undefined when changing roots
