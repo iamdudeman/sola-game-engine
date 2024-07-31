@@ -20,6 +20,7 @@ public class BrowserAudioClip implements AudioClip {
   private final AudioBuffer audioBuffer;
   private final List<Consumer<AudioClip>> finishListenerCallbacks = new ArrayList<>();
   private AudioBufferSourceNode audioBufferSourceNode;
+  private GainNode gainNode;
   private boolean isPlaying = false;
   private double startedAt = 0;
   private double pausedAt = 0;
@@ -53,7 +54,7 @@ public class BrowserAudioClip implements AudioClip {
       finishListenerCallbacks.forEach(callback -> callback.accept(this));
     });
     audioBufferSourceNode.setBuffer(audioBuffer);
-    GainNode gainNode = audioContext.createGain();
+    gainNode = audioContext.createGain();
     gainNode.connect(audioContext.getDestination());
     gainNode.getGain().setValue(volume);
     audioBufferSourceNode.connect(gainNode);
@@ -100,16 +101,10 @@ public class BrowserAudioClip implements AudioClip {
 
   @Override
   public void setVolume(float volume) {
-    boolean wasPlaying = isPlaying;
-
-    if (isPlaying) {
-      pause();
-    }
-
     this.volume = volume;
 
-    if (wasPlaying) {
-      play();
+    if (gainNode != null) {
+      gainNode.getGain().setValue(volume);
     }
   }
 
