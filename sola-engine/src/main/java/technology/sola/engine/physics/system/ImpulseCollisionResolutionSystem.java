@@ -104,7 +104,7 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
         if (inverseMassSum <= 0) continue;
 
         Vector2D relativeVelocity = entityB.velocity.subtract(entityA.velocity);
-        Vector2D relativeNormal = collisionManifold.normal().normalize();
+        Vector2D relativeNormal = collisionManifold.normal();
 
         // Moving away so we're done here
         if (relativeVelocity.normalize().dot(relativeNormal) > 0) continue;
