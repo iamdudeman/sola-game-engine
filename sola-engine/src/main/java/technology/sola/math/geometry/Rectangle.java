@@ -33,6 +33,18 @@ public record Rectangle(Vector2D min, Vector2D max) implements Shape {
     return point.x() >= min.x() && point.x() <= max.x() && point.y() >= min.y() && point.y() <= max.y();
   }
 
+  @Override
+  public Vector2D[] getPoints() {
+    Vector2D[] points = new Vector2D[4];
+
+    points[0] = min();
+    points[1] = new Vector2D(min().x() + getWidth(), min().y());
+    points[2] = max();
+    points[3] = new Vector2D(min().x(), min().y() + getHeight());
+
+    return points;
+  }
+
   /**
    * Gets the width of the rectangle.
    *

@@ -13,4 +13,9 @@ public interface Shape {
    * @return true if this shape contains the point
    */
   boolean contains(Vector2D point);
+
+  /**
+   * @return the array of points making up this shape
+   */
+  Vector2D[] getPoints();
 }

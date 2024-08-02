@@ -30,4 +30,9 @@ public record Circle(float radius, Vector2D center) implements Shape {
   public boolean contains(Vector2D point) {
     return center.subtract(point).magnitudeSq() < radius * radius;
   }
+
+  @Override
+  public Vector2D[] getPoints() {
+    return new Vector2D[0];
+  }
 }
