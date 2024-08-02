@@ -18,4 +18,32 @@ public interface Shape {
    * @return the array of points making up this shape
    */
   Vector2D[] getPoints();
+
+  /**
+   * Calculates and returns the centroid of the {@link Shape}.
+   *
+   * @param shape the shape
+   * @return the centroid
+   */
+  static Vector2D calculateCentroid(Shape shape) {
+    return calculateCentroid(shape.getPoints());
+  }
+
+  /**
+   * Calculates and returns the centroid of the shape represented by the array of points.
+   *
+   * @param points the points of the shape
+   * @return the centroid
+   */
+  static Vector2D calculateCentroid(Vector2D[] points) {
+    float xSum = 0;
+    float ySum = 0;
+
+    for (Vector2D point : points) {
+      xSum += point.x();
+      ySum += point.y();
+    }
+
+    return new Vector2D(xSum / points.length, ySum / points.length);
+  }
 }

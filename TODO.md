@@ -1,5 +1,10 @@
 # sola-game-engine TODO list
 
+* Figure out Circles + SAT
+* Implement a StaticCollisionResolutionSystem
+* Figure out how to make ImpulseCollisionResolutionSystem work better with Triangles
+
+
 * Change triangle renderer and collider shape to using 3 points
     * translation just moves them
     * scaling enlarges/shrinks

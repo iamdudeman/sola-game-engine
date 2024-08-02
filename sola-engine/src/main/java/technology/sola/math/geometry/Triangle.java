@@ -45,18 +45,6 @@ public record Triangle(Vector2D p1, Vector2D p2, Vector2D p3) implements Shape {
     ) * 0.5f;
   }
 
-  /**
-   * Calculates and returns the centroid of the triangle.
-   *
-   * @return the centroid
-   */
-  public Vector2D getCentroid() {
-    float x = (p1.x() + p2.x() + p3.x()) / 3;
-    float y = (p1.y() + p2.y() + p3.y()) / 3;
-
-    return new Vector2D(x, y);
-  }
-
   private float sign(Vector2D p1, Vector2D p2, Vector2D p3) {
     return (p1.x() - p3.x()) * (p2.y() - p3.y()) - (p2.x() - p3.x()) * (p1.y() - p3.y());
   }
