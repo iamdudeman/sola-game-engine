@@ -8,6 +8,14 @@ import technology.sola.math.linear.Vector2D;
  * SeparatingAxisTheorem contains methods for checking whether two convex polygons are colliding or not.
  */
 public class SeparatingAxisTheorem {
+  /**
+   * Checks for collisions between to shapes. If a collision is detected the {@link MinimumTranslationVector} will be
+   * returned. If no collision is found then null will be returned.
+   *
+   * @param shapeA the first array of points of a shape to check collisions with
+   * @param shapeB the second array of points of a shape to check collisions with
+   * @return the {@code MinimumTranslationVector} if a collision was found or else null
+   */
   public static MinimumTranslationVector checkCollision(Vector2D[] shapeA, Vector2D[] shapeB) {
     float smallestOverlap = Float.MAX_VALUE;
     Vector2D smallestAxis = null;
