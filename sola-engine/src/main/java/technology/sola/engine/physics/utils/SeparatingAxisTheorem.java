@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.utils;
 
+import technology.sola.math.SolaMath;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Shape;
 import technology.sola.math.linear.Vector2D;
@@ -50,22 +51,52 @@ public class SeparatingAxisTheorem {
     return new MinimumTranslationVector(smallestAxis, smallestOverlap);
   }
 
-  /*
-  todo try this algorithm to see if it works for shapeXcircle
-  1. You get the closest point from the circle center to the polygon
-  2. Get the distance from the closest point to the circle center
-  3. Normalize that distance to get the unit vector
-  4. Get the signed distance to the edge/vertex and take the radius into account
-  5. Multiply your unit vector by the signed distance and you get the minimum translation vector
+  /**
+   * Checks for collisions between a shape and a {@link Circle}. If a collision is detected
+   * the {@link MinimumTranslationVector} will be returned. If no collision is found then null will be returned.
+   *
+   * @param shape the array of points of a shape to check collisions with
+   * @param circle the circle to check collisions with
+   * @return the {@code MinimumTranslationVector} if a collision was found or else null
    */
-
-  // todo return normal + penetration or null
   public static MinimumTranslationVector checkCollision(Vector2D[] shape, Circle circle) {
-    // todo implement
     var circleCenter = circle.center();
-    var shapeCentroid = Shape.calculateCentroid(shape);
+    boolean isCircleCenterInside = true;
+    Vector2D closestPointOnShape = null;
 
-    return null;
+    for (int i = 0; i < shape.length; i++) {
+      var p1 = shape[i];
+      var p2 = i + 1 == shape.length ? shape[0] : shape[i + 1];
+      var min = new Vector2D(Math.min(p1.x(), p2.x()), Math.min(p1.y(), p2.y()));
+      var max = new Vector2D(Math.max(p1.x(), p2.x()), Math.max(p1.y(), p2.y()));
+      Vector2D closestPointOnEdge = SolaMath.clamp(min, max, circleCenter);
+
+      if (isCircleCenterInside && closestPointOnEdge.subtract(circleCenter).magnitudeSq() < circle.radius() * circle.radius()) {
+        isCircleCenterInside = false;
+      }
+
+      if (closestPointOnShape == null) {
+        closestPointOnShape = closestPointOnEdge;
+      } else if (closestPointOnEdge.subtract(circleCenter).magnitudeSq() < closestPointOnShape.subtract(circleCenter).magnitudeSq()) {
+        closestPointOnShape = closestPointOnEdge;
+      }
+    }
+
+    Vector2D diff = closestPointOnShape.subtract(circleCenter);
+
+    if (!isCircleCenterInside && diff.magnitudeSq() > circle.radius() * circle.radius()) {
+      return null;
+    }
+
+    float penetration = circle.radius() - closestPointOnShape.distance(circleCenter);
+    Vector2D normal = diff.normalize();
+
+    // If not inside
+    if (!isCircleCenterInside) {
+      normal = normal.scalar(-1);
+    }
+
+    return new MinimumTranslationVector(normal, penetration);
   }
 
   private static Projection projectShapeToAxis(Vector2D[] shape, Vector2D axis) {

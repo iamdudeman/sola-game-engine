@@ -100,22 +100,24 @@ class SeparatingAxisTheoremTest {
     void whenCircleCenterOutsideRectangle_shouldHaveCorrectNormal() {
       var collisionManifold = SeparatingAxisTheorem.checkCollision(
         createAABB(new Vector2D(0, 0), 5, 3),
-        new Circle( 3, new Vector2D(-4, -4))
+        new Circle( 3, new Vector2D(-1, -1))
       );
 
       assertNotNull(collisionManifold);
       assertEquals(new Vector2D(-0.70710677f, -0.70710677f), collisionManifold.normal());
+      assertEquals(1.5857865f, collisionManifold.penetration());
     }
 
     @Test
     void whenCircleCenterInsideRectangle_shouldHaveCorrectNormal() {
       var collisionManifold = SeparatingAxisTheorem.checkCollision(
         createAABB(new Vector2D(0, 0), 50, 30),
-        new Circle( 3, new Vector2D(10, 10))
+        new Circle( 3, new Vector2D(13, 14))
       );
 
       assertNotNull(collisionManifold);
       assertEquals(new Vector2D(-1, 0), collisionManifold.normal());
+      assertEquals(-10.0, collisionManifold.penetration());
     }
   }
 

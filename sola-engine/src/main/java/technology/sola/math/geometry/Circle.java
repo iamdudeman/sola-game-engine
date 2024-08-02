@@ -37,6 +37,11 @@ public record Circle(float radius, Vector2D center) implements Shape {
   }
 
   @Override
+  public Vector2D getCentroid() {
+    return center();
+  }
+
+  @Override
   public float getArea() {
     return (float) (Math.PI * radius * radius);
   }
