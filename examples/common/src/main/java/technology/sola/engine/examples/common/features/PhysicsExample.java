@@ -8,7 +8,6 @@ import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
-import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.components.TriangleRendererComponent;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
