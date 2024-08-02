@@ -13,14 +13,16 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * GuiElement is the base class for all elements that can be rendered in a {@link GuiDocument}.
  *
  * @param <Style> the style type for the element
+ * @param <ElementType> this element's type, so it can be used for method chaining
  */
-public abstract class GuiElement<Style extends BaseStyles> {
+public abstract class GuiElement<Style extends BaseStyles, ElementType extends GuiElement<Style, ElementType>> {
   /**
    * The {@link StyleContainer} for the element.
    */
@@ -28,7 +30,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
   /**
    * The list of children {@link GuiElement}s.
    */
-  protected final List<GuiElement<?>> children = new ArrayList<>();
+  protected final List<GuiElement<?, ?>> children = new ArrayList<>();
   /**
    * Includes only content size. Do not manually update this unless you know what you are doing!
    */
@@ -42,7 +44,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
    */
   GuiElementBounds bounds;
   boolean isLayoutChanged;
-  private GuiElement<?> parent;
+  private GuiElement<?, ?> parent;
   private final GuiElementEvents events = new GuiElementEvents();
   private boolean isHovered = false;
   private boolean isActive = false;
@@ -59,15 +61,31 @@ public abstract class GuiElement<Style extends BaseStyles> {
   }
 
   /**
-   * Convenience method that calls {@link StyleContainer#setStyles(List)} for this element's {@link StyleContainer}.
+   * Convenience method that calls {@link StyleContainer#addStyle(ConditionalStyle)} for this
+   * element's {@link StyleContainer}.
    *
-   * @param styles the styles to set
+   * @param style the style to add
    * @return this
    */
-  public final GuiElement<Style> setStyle(List<ConditionalStyle<Style>> styles) {
-    styleContainer.setStyles(styles);
+  @SuppressWarnings("unchecked")
+  public final ElementType addStyle(ConditionalStyle<Style> style) {
+    styleContainer.addStyle(style);
 
-    return this;
+    return (ElementType) this;
+  }
+
+  /**
+   * Convenience method that calls {@link StyleContainer#addStyles(List)} for this
+   * element's {@link StyleContainer}.
+   *
+   * @param styles the styles to add
+   * @return this
+   */
+  @SuppressWarnings("unchecked")
+  public final ElementType addStyles(List<ConditionalStyle<Style>> styles) {
+    styleContainer.addStyles(styles);
+
+    return (ElementType) this;
   }
 
   /**
@@ -180,7 +198,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
   /**
    * @return the parent element
    */
-  public GuiElement<?> getParent() {
+  public GuiElement<?, ?> getParent() {
     return parent;
   }
 
@@ -216,10 +234,11 @@ public abstract class GuiElement<Style extends BaseStyles> {
    * @param id the new id
    * @return this
    */
-  public GuiElement<Style> setId(String id) {
+  @SuppressWarnings("unchecked")
+  public ElementType setId(String id) {
     this.id = id;
 
-    return this;
+    return (ElementType) this;
   }
 
   /**
@@ -230,7 +249,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
    * @param <T>          the element type
    * @return the element with the desired id or null if not found
    */
-  public <T extends GuiElement<?>> T findElementById(String id, Class<T> elementClass) {
+  public <T extends GuiElement<?, ?>> T findElementById(String id, Class<T> elementClass) {
     if (id.equals(this.id)) {
       return elementClass.cast(this);
     }
@@ -254,7 +273,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
    * @return the list of elements with the desired type
    */
   @SuppressWarnings("unchecked")
-  public <T extends GuiElement<?>> List<T> findElementsByType(Class<T> elementClass) {
+  public <T extends GuiElement<?, ?>> List<T> findElementsByType(Class<T> elementClass) {
     List<T> elements = new ArrayList<>();
 
     if (this.getClass().equals(elementClass)) {
@@ -274,14 +293,22 @@ public abstract class GuiElement<Style extends BaseStyles> {
    * @param child the child element to remove
    * @return this
    */
-  public GuiElement<Style> removeChild(GuiElement<?> child) {
+  @SuppressWarnings("unchecked")
+  public ElementType removeChild(GuiElement<?, ?> child) {
     if (children.contains(child)) {
       child.parent = null;
       children.remove(child);
       invalidateLayout();
     }
 
-    return this;
+    return (ElementType) this;
+  }
+
+  /**
+   * @return an immutable list of children GuiElements
+   */
+  public List<GuiElement<?, ?>> getChildren() {
+    return Collections.unmodifiableList(children);
   }
 
   /**
@@ -290,9 +317,10 @@ public abstract class GuiElement<Style extends BaseStyles> {
    * @param children the child elements to add
    * @return this
    */
-  public GuiElement<Style> appendChildren(GuiElement<?>... children) {
+  @SuppressWarnings("unchecked")
+  public ElementType appendChildren(GuiElement<?, ?>... children) {
     if (children != null) {
-      for (GuiElement<?> child : children) {
+      for (GuiElement<?, ?> child : children) {
         if (child.parent != null) {
           child.parent.children.remove(child);
           child.parent.invalidateLayout();
@@ -306,7 +334,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
       this.invalidateLayout();
     }
 
-    return this;
+    return (ElementType) this;
   }
 
   /**
@@ -337,7 +365,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
   /**
    * @return the list of child elements that are focusable
    */
-  protected List<GuiElement<?>> getFocusableChildren() {
+  protected List<GuiElement<?, ?>> getFocusableChildren() {
     return children.stream().filter(GuiElement::isFocusable).toList();
   }
 
@@ -354,7 +382,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
    * @param children the list of elements to search
    * @return the index of the element with focus or -1 if not found
    */
-  protected int findFocussedChildIndex(List<GuiElement<?>> children) {
+  protected int findFocussedChildIndex(List<GuiElement<?, ?>> children) {
     int focussedIndex = 0;
 
     for (var child : children) {
@@ -381,7 +409,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
 
     events.keyPressed().emit(event);
 
-    if (event.isAbleToPropagate()) {
+    if (event.isAbleToPropagate() && parent != null) {
       parent.onKeyPressed(event);
     }
   }
@@ -390,7 +418,7 @@ public abstract class GuiElement<Style extends BaseStyles> {
     events.keyReleased().emit(event);
     setActive(false);
 
-    if (event.isAbleToPropagate()) {
+    if (event.isAbleToPropagate() && parent != null) {
       parent.onKeyReleased(event);
     }
   }

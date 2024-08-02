@@ -25,6 +25,17 @@ public class TransformAnimatorComponent implements Component {
   private float elapsedTime = 0;
 
   /**
+   * Creates a new {@link TransformAnimatorComponent} with required parameters set.
+   *
+   * @param easingFunction the {@link EasingFunction}
+   * @param duration       the duration of the animation
+   */
+  public TransformAnimatorComponent(EasingFunction easingFunction, long duration) {
+    this.easingFunction = easingFunction;
+    this.duration = duration;
+  }
+
+  /**
    * Sets the {@link AnimationCompleteCallback} for this {@link TransformAnimatorComponent}.
    *
    * @param animationCompleteCallback the callback for when the animation finishes
@@ -32,6 +43,99 @@ public class TransformAnimatorComponent implements Component {
    */
   public TransformAnimatorComponent setAnimationCompleteCallback(AnimationCompleteCallback animationCompleteCallback) {
     this.animationCompleteCallback = animationCompleteCallback;
+
+    return this;
+  }
+
+  /**
+   * Sets the x value to animate to.
+   *
+   * @param x the x value to animate to
+   * @return this
+   */
+  public TransformAnimatorComponent setTranslateX(float x) {
+    endingTranslateX = x;
+    return this;
+  }
+
+  /**
+   * Sets the y value to animate to.
+   *
+   * @param y the y value to animate to
+   * @return this
+   */
+  public TransformAnimatorComponent setTranslateY(float y) {
+    endingTranslateY = y;
+    return this;
+  }
+
+  /**
+   * Sets the x and y values to animate to.
+   *
+   * @param x the x value to animate to
+   * @param y the y value to animate to
+   * @return this
+   */
+  public TransformAnimatorComponent setTranslate(float x, float y) {
+    endingTranslateX = x;
+    endingTranslateY = y;
+    return this;
+  }
+
+  /**
+   * Sets the scale x value to animate to.
+   *
+   * @param x the scale x value to animate to
+   * @return this
+   */
+  public TransformAnimatorComponent setScaleX(float x) {
+    endingScaleX = x;
+    return this;
+  }
+
+  /**
+   * Sets the scale y value to animate to.
+   *
+   * @param y the scale y value to animate to
+   * @return this
+   */
+  public TransformAnimatorComponent setScaleY(float y) {
+    endingScaleY = y;
+    return this;
+  }
+
+  /**
+   * Sets the x and y scale values to animate to.
+   *
+   * @param scale the scale value to animate to
+   * @return this
+   */
+  public TransformAnimatorComponent setScale(float scale) {
+    endingScaleX = scale;
+    endingScaleY = scale;
+    return this;
+  }
+
+  /**
+   * Sets the scale x and scale y values to animate to.
+   *
+   * @param x the scale x value to animate to
+   * @param y the scale y value to animate to
+   * @return this
+   */
+  public TransformAnimatorComponent setScale(float x, float y) {
+    endingScaleX = x;
+    endingScaleY = y;
+    return this;
+  }
+
+  /**
+   * Resets the elapsed time of the animation back to 0.
+   *
+   * @return this
+   */
+  public TransformAnimatorComponent reset() {
+    elapsedTime = 0;
 
     return this;
   }
@@ -50,19 +154,19 @@ public class TransformAnimatorComponent implements Component {
     if (!isInit) {
       initialize(transformComponent);
       isInit = true;
-    } else {
-      elapsedTime += deltaTime * 1000;
-
-      float percent = Math.min(elapsedTime / duration, 1);
-
-      transformComponent.setX(easingFunction.ease(percent, startingTranslateX, endingTranslateX));
-      transformComponent.setY(easingFunction.ease(percent, startingTranslateY, endingTranslateY));
-      transformComponent.setScaleX(easingFunction.ease(percent, startingScaleX, endingScaleX));
-      transformComponent.setScaleY(easingFunction.ease(percent, startingScaleY, endingScaleY));
     }
 
+    elapsedTime += deltaTime * 1000;
+
+    float percent = Math.min(elapsedTime / duration, 1);
+
+    transformComponent.setX(easingFunction.ease(percent, startingTranslateX, endingTranslateX));
+    transformComponent.setY(easingFunction.ease(percent, startingTranslateY, endingTranslateY));
+    transformComponent.setScaleX(easingFunction.ease(percent, startingScaleX, endingScaleX));
+    transformComponent.setScaleY(easingFunction.ease(percent, startingScaleY, endingScaleY));
+
     if (elapsedTime >= duration && animationCompleteCallback != null) {
-      animationCompleteCallback.onComplete();
+      animationCompleteCallback.onComplete(this);
     }
   }
 
@@ -78,11 +182,6 @@ public class TransformAnimatorComponent implements Component {
     if (endingScaleY == null) endingScaleY = startingScaleY;
   }
 
-  private TransformAnimatorComponent(EasingFunction easingFunction, long duration) {
-    this.easingFunction = easingFunction;
-    this.duration = duration;
-  }
-
   /**
    * AnimationCompleteCallback is a {@link FunctionalInterface} for defining functionality that happens when a
    * {@link TransformAnimatorComponent} animation completes.
@@ -91,128 +190,9 @@ public class TransformAnimatorComponent implements Component {
   public interface AnimationCompleteCallback {
     /**
      * Method called when a {@link TransformAnimatorComponent} animation completes.
-     */
-    void onComplete();
-  }
-
-  /**
-   * Builder class for {@link TransformAnimatorComponent}s.
-   */
-  public static class Builder {
-    private final EasingFunction easingFunction;
-    private final long duration;
-    private Float endingTranslateX;
-    private Float endingTranslateY;
-    private Float endingScaleX;
-    private Float endingScaleY;
-
-    /**
-     * Creates a new {@link TransformAnimatorComponent} builder with required parameters set.
      *
-     * @param easingFunction the {@link EasingFunction}
-     * @param duration       the duration of the animation
+     * @param transformAnimatorComponent the animator that finished animating
      */
-    public Builder(EasingFunction easingFunction, long duration) {
-      this.easingFunction = easingFunction;
-      this.duration = duration;
-    }
-
-    /**
-     * Sets the x value to animate to.
-     *
-     * @param x the x value to animate to
-     * @return this
-     */
-    public Builder withTranslateX(float x) {
-      endingTranslateX = x;
-      return this;
-    }
-
-    /**
-     * Sets the y value to animate to.
-     *
-     * @param y the y value to animate to
-     * @return this
-     */
-    public Builder withTranslateY(float y) {
-      endingTranslateY = y;
-      return this;
-    }
-
-    /**
-     * Sets the x and y values to animate to.
-     *
-     * @param x the x value to animate to
-     * @param y the y value to animate to
-     * @return this
-     */
-    public Builder withTranslate(float x, float y) {
-      endingTranslateX = x;
-      endingTranslateY = y;
-      return this;
-    }
-
-    /**
-     * Sets the scale x value to animate to.
-     *
-     * @param x the scale x value to animate to
-     * @return this
-     */
-    public Builder withScaleX(float x) {
-      endingScaleX = x;
-      return this;
-    }
-
-    /**
-     * Sets the scale y value to animate to.
-     *
-     * @param y the scale y value to animate to
-     * @return this
-     */
-    public Builder withScaleY(float y) {
-      endingScaleY = y;
-      return this;
-    }
-
-    /**
-     * Sets the x and y scale values to animate to.
-     *
-     * @param scale the scale value to animate to
-     * @return this
-     */
-    public Builder withScale(float scale) {
-      endingScaleX = scale;
-      endingScaleY = scale;
-      return this;
-    }
-
-    /**
-     * Sets the scale x and scale y values to animate to.
-     *
-     * @param x the scale x value to animate to
-     * @param y the scale y value to animate to
-     * @return this
-     */
-    public Builder withScale(float x, float y) {
-      endingScaleX = x;
-      endingScaleY = y;
-      return this;
-    }
-
-    /**
-     * Builds and return the new {@link TransformAnimatorComponent} instance.
-     *
-     * @return the new {@code TransformAnimatorComponent} instance
-     */
-    public TransformAnimatorComponent build() {
-      TransformAnimatorComponent transformAnimatorComponent = new TransformAnimatorComponent(easingFunction, duration);
-
-      transformAnimatorComponent.endingTranslateX = endingTranslateX;
-      transformAnimatorComponent.endingTranslateY = endingTranslateY;
-      transformAnimatorComponent.endingScaleX = endingScaleX;
-      transformAnimatorComponent.endingScaleY = endingScaleY;
-
-      return transformAnimatorComponent;
-    }
+    void onComplete(TransformAnimatorComponent transformAnimatorComponent);
   }
 }

@@ -1,5 +1,7 @@
 package technology.sola.engine.platform.swing;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
@@ -17,6 +19,7 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.platform.swing.assets.SwingPathUtils;
 import technology.sola.engine.platform.swing.assets.audio.SwingAudioClipAssetLoader;
 import technology.sola.engine.platform.swing.assets.SwingJsonAssetLoader;
 import technology.sola.engine.platform.swing.assets.graphics.SwingSolaImageAssetLoader;
@@ -35,6 +38,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.IOException;
 import java.util.function.Consumer;
 
 /**
@@ -42,6 +46,7 @@ import java.util.function.Consumer;
  * a Swing powered window.
  */
 public class SwingSolaPlatform extends SolaPlatform {
+  private static final Logger LOGGER = LoggerFactory.getLogger(SwingSolaPlatform.class);
   private final boolean useSoftwareRendering;
   private Canvas canvas;
   private Consumer<Renderer> beforeRender;
@@ -190,6 +195,8 @@ public class SwingSolaPlatform extends SolaPlatform {
     canvas.requestFocus();
     jFrame.setVisible(true);
 
+    setApplicationIcon(jFrame);
+
     solaPlatformInitialization.finish();
   }
 
@@ -281,5 +288,23 @@ public class SwingSolaPlatform extends SolaPlatform {
     MouseCoordinate adjusted = adjustMouseForViewport(swingMouseEvent.getX(), swingMouseEvent.getY());
 
     return new MouseEvent(swingMouseEvent.getButton(), adjusted.x(), adjusted.y());
+  }
+
+  private void setApplicationIcon(JFrame jFrame) {
+    try {
+      var url = SwingPathUtils.asUrl("assets/icon.jpg");
+
+      if (url == null) {
+        url = SwingPathUtils.asUrl("assets/icon.png");
+      }
+
+      if (url == null) {
+        LOGGER.warn("Icon not found");
+      } else {
+        jFrame.setIconImage(new ImageIcon(url).getImage());
+      }
+    } catch (IOException ex) {
+      LOGGER.error("Failed to load icon", ex);
+    }
   }
 }

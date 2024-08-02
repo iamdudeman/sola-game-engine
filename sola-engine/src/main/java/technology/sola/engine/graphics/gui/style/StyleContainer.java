@@ -16,7 +16,7 @@ import java.util.function.Function;
  */
 public class StyleContainer<Style extends BaseStyles> {
   private final Map<Function<Style, ?>, Object> computedCache = new HashMap<>();
-  private final GuiElement<Style> guiElement;
+  private final GuiElement<Style, ?> guiElement;
   private List<ConditionalStyle<Style>> conditionalStyles;
   private boolean[] conditionsArray;
   private boolean hasHoverCondition = false;
@@ -27,7 +27,7 @@ public class StyleContainer<Style extends BaseStyles> {
    *
    * @param guiElement the gui element
    */
-  public StyleContainer(GuiElement<Style> guiElement) {
+  public StyleContainer(GuiElement<Style, ?> guiElement) {
     this.guiElement = guiElement;
     conditionalStyles = new ArrayList<>();
     conditionsArray = new boolean[0];
@@ -86,9 +86,22 @@ public class StyleContainer<Style extends BaseStyles> {
    * @param styles the styles to add
    */
   public void addStyles(List<ConditionalStyle<Style>> styles) {
-    List<ConditionalStyle<Style>> combined = new ArrayList<>(conditionalStyles);
+    addStyles(styles, false);
+  }
 
-    combined.addAll(styles);
+  /**
+   * Appends or prepends a {@link List} of {@link ConditionalStyle}s to the current list of styles.
+   *
+   * @param styles  the styles to add
+   * @param prepend whether to prepend the styles or not
+   */
+  public void addStyles(List<ConditionalStyle<Style>> styles, boolean prepend) {
+    var firstList = prepend ? styles : conditionalStyles;
+    var secondList = prepend ? conditionalStyles : styles;
+
+    List<ConditionalStyle<Style>> combined = new ArrayList<>(firstList);
+
+    combined.addAll(secondList);
     setStyles(combined);
   }
 

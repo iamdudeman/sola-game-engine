@@ -8,5 +8,5 @@ import technology.sola.engine.graphics.gui.GuiElement;
  *
  * @param rootElement the rootElement {@code GuiElement}
  */
-public record GuiJsonDocument(GuiElement<?> rootElement) implements Asset {
+public record GuiJsonDocument(GuiElement<?, ?> rootElement) implements Asset {
 }

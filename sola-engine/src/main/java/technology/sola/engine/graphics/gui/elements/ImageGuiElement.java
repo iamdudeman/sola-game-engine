@@ -7,10 +7,12 @@ import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 
+import java.util.List;
+
 /**
  * ImageGuiElement is a {@link GuiElement} that renders a {@link SolaImage} in a GUI. It does not render child elements.
  */
-public class ImageGuiElement extends GuiElement<BaseStyles> {
+public class ImageGuiElement extends GuiElement<BaseStyles, ImageGuiElement> {
   // props
   private String assetId;
 
@@ -62,12 +64,33 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
   /**
    * ImageGuiElement does not render children so this method will do nothing.
    *
-   * @param children the child elements to add
+   * @param children the child elements that will not be added
    * @return this
    */
   @Override
-  public GuiElement<BaseStyles> appendChildren(GuiElement<?>... children) {
+  public ImageGuiElement appendChildren(GuiElement<?, ?>... children) {
     return this;
+  }
+
+  /**
+   * ImageGuiElement does not render children so this method will do nothing.
+   *
+   * @param child the child element that will not be removed
+   * @return this
+   */
+  @Override
+  public ImageGuiElement removeChild(GuiElement<?, ?> child) {
+    return this;
+  }
+
+  /**
+   * ImageGuiElement does not render children so this method will return an empty List.
+   *
+   * @return empty List
+   */
+  @Override
+  public List<GuiElement<?, ?>> getChildren() {
+    return List.of();
   }
 
   /**
@@ -81,9 +104,12 @@ public class ImageGuiElement extends GuiElement<BaseStyles> {
    * Sets the id of the {@link SolaImage} asset to be rendered.
    *
    * @param assetId the new asset id of the image
+   * @return this
    */
-  public void setAssetId(String assetId) {
+  public ImageGuiElement setAssetId(String assetId) {
     this.assetId = assetId;
     invalidateLayout();
+
+    return this;
   }
 }

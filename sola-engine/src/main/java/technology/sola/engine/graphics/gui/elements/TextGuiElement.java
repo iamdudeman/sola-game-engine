@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * TextGuiElement is a {@link GuiElement} that renders text for a GUI. It does not render child elements.
  */
-public class TextGuiElement extends GuiElement<TextStyles> {
+public class TextGuiElement extends GuiElement<TextStyles, TextGuiElement> {
   // properties
   private String text;
 
@@ -66,8 +66,29 @@ public class TextGuiElement extends GuiElement<TextStyles> {
    * @return this
    */
   @Override
-  public GuiElement<TextStyles> appendChildren(GuiElement<?>... children) {
+  public TextGuiElement appendChildren(GuiElement<?, ?>... children) {
     return this;
+  }
+
+  /**
+   * TextGuiElement does not render children so this method will do nothing.
+   *
+   * @param child the child element that will not be removed
+   * @return this
+   */
+  @Override
+  public TextGuiElement removeChild(GuiElement<?, ?> child) {
+    return this;
+  }
+
+  /**
+   * TextGuiElement does not render children so this method will return an empty List.
+   *
+   * @return empty List
+   */
+  @Override
+  public List<GuiElement<?, ?>> getChildren() {
+    return List.of();
   }
 
   /**
