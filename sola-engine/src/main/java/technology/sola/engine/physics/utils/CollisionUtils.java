@@ -250,7 +250,7 @@ public final class CollisionUtils {
     // normal is negative reciprocal
 
     // todo implement
-//    throw new RuntimeException("not yet implemented");
+    // throw new RuntimeException("not yet implemented");
     return new CollisionManifold(
       entityA, entityB, normal.scalar(-1), (circleCenter.distance(triangleCenter) - intersection.distance(circleCenter)) / 2
     );
