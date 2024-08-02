@@ -1,19 +1,7 @@
 # sola-game-engine TODO list
 
 * Figure out Circles + SAT
-* Implement a StaticCollisionResolutionSystem
 * Figure out how to make ImpulseCollisionResolutionSystem work better with Triangles
-
-
-* Change triangle renderer and collider shape to using 3 points
-    * translation just moves them
-    * scaling enlarges/shrinks
-* Physics
-    * Collision Detection
-        * Triangle
-            * x AABB
-            * x Circle
-            * x Triangle
 
 ## Known Bugs List
 
@@ -26,11 +14,13 @@
 ## Planned Cleanup List
 
 * ColliderUtils#autoSizeColliderToSprite feels weird as a util method
+* MinimumTranslationVector could be a separate file and used by CollisionManifold and SeparatingAxisTheorem
 
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
 
+* Implement a StaticCollisionResolutionSystem
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
 * File Storage API

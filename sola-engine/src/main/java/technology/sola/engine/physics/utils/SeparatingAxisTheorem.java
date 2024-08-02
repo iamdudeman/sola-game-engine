@@ -54,6 +54,8 @@ public class SeparatingAxisTheorem {
   // todo return normal + penetration or null
   public static MinimumTranslationVector checkCollision(Vector2D[] shape, Circle circle) {
     // todo implement
+    var circleCenter = circle.center();
+    var shapeCentroid = Shape.calculateCentroid(shape);
 
     return null;
   }

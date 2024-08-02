@@ -8,6 +8,7 @@ import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.math.SolaMath;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
+import technology.sola.math.geometry.Shape;
 import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Vector2D;
 
@@ -41,7 +42,7 @@ public final class CollisionUtils {
         case CIRCLE -> calculateAABBVsCircle(
           entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
-        case TRIANGLE -> calculateAABBVsTriangle(
+        case TRIANGLE -> calculateSAT(
           entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
       };
@@ -57,14 +58,11 @@ public final class CollisionUtils {
         );
       };
       case TRIANGLE -> switch (colliderB.getType()) {
-        case AABB -> calculateAABBVsTriangle(
-          entityB, entityA, colliderB.getShape(transformB), colliderA.getShape(transformA)
+        case AABB, TRIANGLE -> calculateSAT(
+          entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
         case CIRCLE -> calculateCircleVsTriangle(
           entityB, entityA, colliderB.getShape(transformB), colliderA.getShape(transformA)
-        );
-        case TRIANGLE -> calculateTriangleVsTriangle(
-          entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
       };
     };
@@ -183,11 +181,11 @@ public final class CollisionUtils {
     return new CollisionManifold(entityA, entityB, normal, penetration);
   }
 
-  private static CollisionManifold calculateAABBVsTriangle(
+  private static CollisionManifold calculateSAT(
     Entity entityA, Entity entityB,
-    Rectangle rectangle, Triangle triangle
+    Shape shapeA, Shape shapeB
   ) {
-    var minimumTranslationVector = SeparatingAxisTheorem.checkCollision(rectangle.getPoints(), triangle.getPoints());
+    var minimumTranslationVector = SeparatingAxisTheorem.checkCollision(shapeA.getPoints(), shapeB.getPoints());
 
     if (minimumTranslationVector == null) {
       return null;
@@ -254,19 +252,6 @@ public final class CollisionUtils {
     return new CollisionManifold(
       entityA, entityB, normal.scalar(-1), (circleCenter.distance(triangleCenter) - intersection.distance(circleCenter)) / 2
     );
-  }
-
-  private static CollisionManifold calculateTriangleVsTriangle(
-    Entity entityA, Entity entityB,
-    Triangle triangleA, Triangle triangleB
-  ) {
-    var minimumTranslationVector = SeparatingAxisTheorem.checkCollision(triangleA.getPoints(), triangleB.getPoints());
-
-    if (minimumTranslationVector == null) {
-      return null;
-    }
-
-    return new CollisionManifold(entityA, entityB, minimumTranslationVector.normal(), minimumTranslationVector.penetration());
   }
 
   private static Vector2D calculateLineLineIntersection(Vector2D start1, Vector2D end1, Vector2D start2, Vector2D end2) {
