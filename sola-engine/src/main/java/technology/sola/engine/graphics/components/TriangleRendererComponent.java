@@ -3,6 +3,7 @@ package technology.sola.engine.graphics.components;
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
 import technology.sola.math.geometry.Triangle;
+import technology.sola.math.linear.Vector2D;
 
 /**
  * TriangleRendererComponent is a {@link Component} containing data for rendering 2d triangles.
@@ -11,6 +12,15 @@ public class TriangleRendererComponent implements Component {
   private Color color;
   private boolean isFilled;
   private final Triangle triangle;
+
+  /**
+   * Creates a "unit triangle" renderer with uniform side lengths of 1.
+   *
+   * @param color the {@link Color} of the triangle
+   */
+  public TriangleRendererComponent(Color color) {
+    this(color, new Triangle(new Vector2D(0, 0), new Vector2D(0.5f, 1), new Vector2D(1, 0)));
+  }
 
   /**
    * Creates a TriangleRendererComponent of desired color that is filled.
