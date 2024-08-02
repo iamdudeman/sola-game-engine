@@ -124,7 +124,7 @@ class SeparatingAxisTheoremTest {
       topLeft,
       topLeft.add(new Vector2D(width, 0)),
       topLeft.add(new Vector2D(width, height)),
-      topLeft.add(new Vector2D(0, height))
+      topLeft.add(new Vector2D(0, height)),
     };
   }
 }

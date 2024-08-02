@@ -31,6 +31,13 @@ public class SeparatingAxisTheorem {
       }
     }
 
+    Vector2D centroidA = calculateCentroid(shapeA);
+    Vector2D centroidB = calculateCentroid(shapeB);
+
+    if (centroidB.subtract(centroidA).dot(smallestAxis) < 0) {
+      smallestAxis = smallestAxis.scalar(-1);
+    }
+
     return new MinimumTranslationVector(smallestAxis, smallestOverlap);
   }
 
@@ -76,6 +83,18 @@ public class SeparatingAxisTheorem {
   }
 
   public record MinimumTranslationVector(Vector2D normal, float penetration) {
+  }
+
+  private static Vector2D calculateCentroid(Vector2D[] points) {
+    float xSum = 0;
+    float ySum = 0;
+
+    for (Vector2D point : points) {
+      xSum += point.x();
+      ySum += point.y();
+    }
+
+    return new Vector2D(xSum / points.length, ySum / points.length);
   }
 
   private record Projection(float min, float max) {

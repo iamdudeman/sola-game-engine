@@ -26,7 +26,9 @@ public record Triangle(Vector2D p1, Vector2D p2, Vector2D p3) implements Shape {
   @Override
   public Vector2D[] getPoints() {
     return new Vector2D[] {
-      p1, p2, p3
+      p1,
+      p2,
+      p3,
     };
   }
 
