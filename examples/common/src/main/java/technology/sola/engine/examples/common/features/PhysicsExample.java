@@ -8,6 +8,7 @@ import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
+import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.components.TriangleRendererComponent;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
@@ -129,7 +130,7 @@ public class PhysicsExample extends SolaWithDefaults {
     float zoomedHeight = configuration.rendererHeight() / CAMERA_SCALE;
     float squareSide = CIRCLE_RADIUS;
 
-    World world = new World(objectCount + 4);
+    World world = new World(objectCount + 4 + 5);
 
     world.createEntity()
       .addComponent(new TransformComponent(0, 0, CAMERA_SCALE, CAMERA_SCALE))
@@ -158,6 +159,39 @@ public class PhysicsExample extends SolaWithDefaults {
     world.createEntity(
       new TransformComponent(0, zoomedHeight - squareSide, zoomedWidth, squareSide),
       new ColliderComponent(new ColliderShapeAABB())
+    );
+
+    // triangles
+    var triangleShape = new Triangle(new Vector2D(0, 0), new Vector2D(0.5f, -1), new Vector2D(1, 0));
+
+    world.createEntity(
+      new TransformComponent(100, 600, 50, 50),
+      new TriangleRendererComponent(Color.GREEN, triangleShape),
+      new ColliderComponent(new ColliderShapeTriangle(triangleShape))
+    );
+
+    world.createEntity(
+      new TransformComponent(300, 600, 50),
+      new TriangleRendererComponent(Color.GREEN),
+      new ColliderComponent(new ColliderShapeTriangle())
+    );
+
+    world.createEntity(
+      new TransformComponent(500, 600, 25, 50),
+      new TriangleRendererComponent(Color.GREEN),
+      new ColliderComponent(new ColliderShapeTriangle())
+    );
+
+    world.createEntity(
+      new TransformComponent(700, 600, 50, 20),
+      new TriangleRendererComponent(Color.GREEN),
+      new ColliderComponent(new ColliderShapeTriangle())
+    );
+
+    world.createEntity(
+      new TransformComponent(900, 600, 50, 20),
+      new TriangleRendererComponent(Color.GREEN, triangleShape),
+      new ColliderComponent(new ColliderShapeTriangle(triangleShape))
     );
 
     return world;
@@ -233,7 +267,6 @@ public class PhysicsExample extends SolaWithDefaults {
       new TriangleRendererComponent(Color.GREEN),
       new ColliderComponent(new ColliderShapeTriangle())
     );
-
 
     world.createEntity(
       new TransformComponent(900, 600, 50, 20),
