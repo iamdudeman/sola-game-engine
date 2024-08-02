@@ -20,6 +20,13 @@ public interface Shape {
   Vector2D[] getPoints();
 
   /**
+   * Calculates the area of this shape and return it.
+   *
+   * @return the area of this shape
+   */
+  float getArea();
+
+  /**
    * Calculates and returns the centroid of the {@link Shape}.
    *
    * @param shape the shape

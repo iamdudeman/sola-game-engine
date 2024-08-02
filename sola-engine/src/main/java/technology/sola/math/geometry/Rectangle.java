@@ -34,6 +34,11 @@ public record Rectangle(Vector2D min, Vector2D max) implements Shape {
   }
 
   @Override
+  public float getArea() {
+    return getWidth() * getHeight();
+  }
+
+  @Override
   public Vector2D[] getPoints() {
     Vector2D[] points = new Vector2D[4];
 

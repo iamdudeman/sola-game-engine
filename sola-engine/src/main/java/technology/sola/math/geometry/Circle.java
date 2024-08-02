@@ -35,4 +35,9 @@ public record Circle(float radius, Vector2D center) implements Shape {
   public Vector2D[] getPoints() {
     return new Vector2D[0];
   }
+
+  @Override
+  public float getArea() {
+    return (float) (Math.PI * radius * radius);
+  }
 }

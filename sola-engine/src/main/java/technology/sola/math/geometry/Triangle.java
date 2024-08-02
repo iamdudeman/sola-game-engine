@@ -32,11 +32,7 @@ public record Triangle(Vector2D p1, Vector2D p2, Vector2D p3) implements Shape {
     };
   }
 
-  /**
-   * Calculates the area of this triangle and return it.
-   *
-   * @return the area of this triangle
-   */
+  @Override
   public float getArea() {
     return Math.abs(
       (p2.x() * p1.y() - p1.x() * p2.y())
