@@ -125,10 +125,18 @@ public class SimplePlatformerGame extends SolaWithDefaults {
       .addComponent(new ColliderComponent(new ColliderShapeAABB()));
 
     world.createEntity()
-      .addComponent(new TransformComponent(590, -200, 50))
+      .addComponent(new TransformComponent(590, -800, 50))
       .addComponent(new DynamicBodyComponent())
       .addComponent(new CircleRendererComponent(Color.GREEN))
       .addComponent(new ColliderComponent(new ColliderShapeCircle()));
+
+    Triangle fallingTriangle = new Triangle(new Vector2D(0, 0), new Vector2D(50, -40), new Vector2D(80, 0));
+
+    world.createEntity()
+      .addComponent(new TransformComponent(580, -200, 1f))
+      .addComponent(new DynamicBodyComponent())
+      .addComponent(new TriangleRendererComponent(Color.GREEN, fallingTriangle))
+      .addComponent(new ColliderComponent(new ColliderShapeTriangle(fallingTriangle)));
 
     Triangle triangle = new Triangle(new Vector2D(0, 0), new Vector2D(50, -40), new Vector2D(100, 0));
 

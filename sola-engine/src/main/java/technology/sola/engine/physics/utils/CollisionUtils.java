@@ -260,8 +260,13 @@ public final class CollisionUtils {
     Entity entityA, Entity entityB,
     Triangle triangleA, Triangle triangleB
   ) {
-    // todo implement
-    throw new RuntimeException("not yet implemented");
+    var minimumTranslationVector = SeparatingAxisTheorem.checkCollision(triangleA.getPoints(), triangleB.getPoints());
+
+    if (minimumTranslationVector == null) {
+      return null;
+    }
+
+    return new CollisionManifold(entityA, entityB, minimumTranslationVector.normal(), minimumTranslationVector.penetration());
   }
 
   private static Vector2D calculateLineLineIntersection(Vector2D start1, Vector2D end1, Vector2D start2, Vector2D end2) {
