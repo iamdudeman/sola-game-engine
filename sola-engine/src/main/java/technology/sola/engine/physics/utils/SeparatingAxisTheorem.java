@@ -42,6 +42,15 @@ public class SeparatingAxisTheorem {
     return new MinimumTranslationVector(smallestAxis, smallestOverlap);
   }
 
+  /*
+  todo try this algorithm to see if it works for shapeXcircle
+  1. You get the closest point from the circle center to the polygon
+  2. Get the distance from the closest point to the circle center
+  3. Normalize that distance to get the unit vector
+  4. Get the signed distance to the edge/vertex and take the radius into account
+  5. Multiply your unit vector by the signed distance and you get the minimum translation vector
+   */
+
   // todo return normal + penetration or null
   public static MinimumTranslationVector checkCollision(Vector2D[] shape, Circle circle) {
     // todo implement

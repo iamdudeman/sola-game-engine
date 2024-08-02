@@ -183,16 +183,17 @@ public final class CollisionUtils {
     return new CollisionManifold(entityA, entityB, normal, penetration);
   }
 
-  // todo consider doing line line intersection
-  //   might be able to use this for penetration and normal as well
-
   private static CollisionManifold calculateAABBVsTriangle(
     Entity entityA, Entity entityB,
     Rectangle rectangle, Triangle triangle
   ) {
-    // todo implement
-//    throw new RuntimeException("not yet implemented");
-    return null;
+    var minimumTranslationVector = SeparatingAxisTheorem.checkCollision(rectangle.getPoints(), triangle.getPoints());
+
+    if (minimumTranslationVector == null) {
+      return null;
+    }
+
+    return new CollisionManifold(entityA, entityB, minimumTranslationVector.normal(), minimumTranslationVector.penetration());
   }
 
   private static CollisionManifold calculateCircleVsTriangle(
