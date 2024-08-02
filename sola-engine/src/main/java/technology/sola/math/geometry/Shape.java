@@ -27,13 +27,12 @@ public interface Shape {
   float getArea();
 
   /**
-   * Calculates and returns the centroid of the {@link Shape}.
+   * Calculates and returns the centroid of this {@link Shape}.
    *
-   * @param shape the shape
    * @return the centroid
    */
-  static Vector2D calculateCentroid(Shape shape) {
-    return calculateCentroid(shape.getPoints());
+  default Vector2D getCentroid() {
+    return calculateCentroid(getPoints());
   }
 
   /**
