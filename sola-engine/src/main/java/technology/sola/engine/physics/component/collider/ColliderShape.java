@@ -2,6 +2,7 @@ package technology.sola.engine.physics.component.collider;
 
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.geometry.Shape;
 
 /**
@@ -18,20 +19,14 @@ public interface ColliderShape<T extends Shape> {
   ColliderType type();
 
   /**
-   * Gets the width of the bounding box around this collider.
+   * Returns the bounding box for this {@link ColliderShape}.
    *
-   * @param transformScaleX the x-axis scale of the transform
-   * @return the bounding box width of this collider
+   * @param transformComponent the {@link TransformComponent} of the entity
+   * @param offsetX the x offset of the collider
+   * @param offsetY the y offset of the collider
+   * @return the bounding box
    */
-  float getBoundingWidth(float transformScaleX);
-
-  /**
-   * Gets the height of the bounding box around this collider.
-   *
-   * @param transformScaleY the y-axis scale of the transform
-   * @return the bounding box height of this collider
-   */
-  float getBoundingHeight(float transformScaleY);
+  Rectangle getBoundingBox(TransformComponent transformComponent, float offsetX, float offsetY);
 
   /**
    * Gets the geometric {@link Shape} for this collider shape.

@@ -3,6 +3,7 @@ package technology.sola.engine.physics.component.collider;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
@@ -29,7 +30,7 @@ public record ColliderShapeTriangle(
   }
 
   @Override
-  public float getBoundingWidth(float transformScaleX) {
+  public Rectangle getBoundingBox(TransformComponent transformComponent, float offsetX, float offsetY) {
     float minX = shape.p1().x();
     float maxX = minX;
 
@@ -39,11 +40,8 @@ public record ColliderShapeTriangle(
     minX = Math.min(minX, shape.p3().x());
     maxX = Math.max(maxX, shape.p3().x());
 
-    return (maxX - minX) * transformScaleX;
-  }
+    float width = (maxX - minX) * transformComponent.getScaleX();
 
-  @Override
-  public float getBoundingHeight(float transformScaleY) {
     float minY = shape.p1().y();
     float maxY = minY;
 
@@ -53,7 +51,14 @@ public record ColliderShapeTriangle(
     minY = Math.min(minY, shape.p3().y());
     maxY = Math.max(maxY, shape.p3().y());
 
-    return (maxY - minY) * transformScaleY;
+    float height = (maxY - minY) * transformComponent.getScaleY();
+
+    var min = transformComponent.getTranslate().add(new Vector2D(offsetX + minX, offsetY + minY));
+
+    return new Rectangle(
+      min,
+      min.add(new Vector2D(width, height))
+    );
   }
 
   @Override

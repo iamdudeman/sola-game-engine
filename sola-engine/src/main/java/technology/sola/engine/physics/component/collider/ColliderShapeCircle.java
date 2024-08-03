@@ -4,6 +4,7 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.math.geometry.Circle;
+import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
 /**
@@ -28,13 +29,16 @@ public record ColliderShapeCircle(
   }
 
   @Override
-  public float getBoundingWidth(float transformScaleX) {
-    return radius * 2 * transformScaleX;
-  }
+  public Rectangle getBoundingBox(TransformComponent transformComponent, float offsetX, float offsetY) {
+    var min = transformComponent.getTranslate().add(new Vector2D(offsetX, offsetY));
 
-  @Override
-  public float getBoundingHeight(float transformScaleY) {
-    return radius * 2 * transformScaleY;
+    return new Rectangle(
+      min,
+      min.add(new Vector2D(
+        radius * 2 * transformComponent.getScaleX(),
+        radius * 2 * transformComponent.getScaleY()
+      ))
+    );
   }
 
   @Override
