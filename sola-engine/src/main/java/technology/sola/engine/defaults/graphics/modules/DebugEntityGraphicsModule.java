@@ -47,8 +47,6 @@ public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Ent
 
   @Override
   public void renderEntity(Renderer renderer, View2Entry<ColliderComponent, TransformComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
-    viewEntry.c1().debugRender(renderer, cameraModifiedEntityTransform);
-
     // render bounding rect
     var boundingRect = viewEntry.c1()
       .getBoundingBox(cameraModifiedEntityTransform);
@@ -60,6 +58,8 @@ public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Ent
       boundingRect.getHeight(),
       Color.BLUE
     );
+
+    viewEntry.c1().debugRender(renderer, cameraModifiedEntityTransform);
   }
 
   @Override
