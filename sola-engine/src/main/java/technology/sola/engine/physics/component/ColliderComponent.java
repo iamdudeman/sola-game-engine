@@ -60,12 +60,12 @@ public class ColliderComponent implements Component {
   }
 
   /**
-   * Returns the bounding rectangle for this ColliderComponent.
+   * Returns the bounding box for this ColliderComponent.
    *
    * @param transformComponent the {@link TransformComponent} of the {@link technology.sola.ecs.Entity}
-   * @return the bounding rectangle
+   * @return the bounding box
    */
-  public Rectangle getBoundingRectangle(TransformComponent transformComponent) {
+  public Rectangle getBoundingBox(TransformComponent transformComponent) {
     return colliderShape.getBoundingBox(transformComponent, offsetX, offsetY);
   }
 

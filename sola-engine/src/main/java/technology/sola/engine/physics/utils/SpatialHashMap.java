@@ -95,7 +95,7 @@ public class SpatialHashMap {
 
     if (transformComponent == null || colliderComponent == null) return EMPTY_BUCKET_IDS;
 
-    Rectangle boundingBox = colliderComponent.getBoundingRectangle(transformComponent);
+    Rectangle boundingBox = colliderComponent.getBoundingBox(transformComponent);
 
     float x = boundingBox.min().x();
     float y = boundingBox.min().y();
@@ -134,7 +134,7 @@ public class SpatialHashMap {
     for (var viewEntry : viewEntries) {
       ColliderComponent colliderComponent = viewEntry.c1();
       TransformComponent transformComponent = viewEntry.c2();
-      var boundingBox = colliderComponent.getBoundingRectangle(transformComponent);
+      var boundingBox = colliderComponent.getBoundingBox(transformComponent);
 
       float newValue = Math.max(
         boundingBox.getWidth(),

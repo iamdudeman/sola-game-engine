@@ -31,6 +31,10 @@ public record ColliderShapeTriangle(
 
   @Override
   public Rectangle getBoundingBox(TransformComponent transformComponent, float offsetX, float offsetY) {
+    // todo optimize this method
+
+    var shape = getShape(transformComponent, offsetX, offsetY);
+
     float minX = shape.p1().x();
     float maxX = minX;
 
@@ -40,7 +44,7 @@ public record ColliderShapeTriangle(
     minX = Math.min(minX, shape.p3().x());
     maxX = Math.max(maxX, shape.p3().x());
 
-    float width = (maxX - minX) * transformComponent.getScaleX();
+    float width = (maxX - minX);
 
     float minY = shape.p1().y();
     float maxY = minY;
@@ -51,9 +55,9 @@ public record ColliderShapeTriangle(
     minY = Math.min(minY, shape.p3().y());
     maxY = Math.max(maxY, shape.p3().y());
 
-    float height = (maxY - minY) * transformComponent.getScaleY();
+    float height = (maxY - minY);
 
-    var min = transformComponent.getTranslate().add(new Vector2D(offsetX + minX, offsetY + minY));
+    var min = new Vector2D(minX, minY);
 
     return new Rectangle(
       min,
