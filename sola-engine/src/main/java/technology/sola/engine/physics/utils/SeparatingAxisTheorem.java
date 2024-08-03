@@ -61,19 +61,20 @@ public class SeparatingAxisTheorem {
    */
   public static MinimumTranslationVector checkCollision(Vector2D[] shape, Circle circle) {
     var circleCenter = circle.center();
-    boolean isCircleCenterInside = true;
+    boolean isCircleCenterInside = false; // todo figure out this condition
     Vector2D closestPointOnShape = null;
+
+    // todo need to test circles inside of shape and reverse
 
     for (int i = 0; i < shape.length; i++) {
       var p1 = shape[i];
       var p2 = i + 1 == shape.length ? shape[0] : shape[i + 1];
-      var min = new Vector2D(Math.min(p1.x(), p2.x()), Math.min(p1.y(), p2.y()));
-      var max = new Vector2D(Math.max(p1.x(), p2.x()), Math.max(p1.y(), p2.y()));
-      Vector2D closestPointOnEdge = SolaMath.clamp(min, max, circleCenter);
+      Vector2D closestPointOnEdge = calculateClosestPointOnLine(p1, p2, circleCenter);
 
-      if (isCircleCenterInside && closestPointOnEdge.subtract(circleCenter).magnitudeSq() < circle.radius() * circle.radius()) {
-        isCircleCenterInside = false;
-      }
+      // todo this isn't working :(
+      // if (isCircleCenterInside && closestPointOnEdge.subtract(circleCenter).magnitudeSq() < circle.radius() * circle.radius()) {
+      //   isCircleCenterInside = false;
+      // }
 
       if (closestPointOnShape == null) {
         closestPointOnShape = closestPointOnEdge;
@@ -97,6 +98,17 @@ public class SeparatingAxisTheorem {
     }
 
     return new MinimumTranslationVector(normal, penetration);
+  }
+
+  private static Vector2D calculateClosestPointOnLine(Vector2D origin, Vector2D end, Vector2D point) {
+    Vector2D heading = end.subtract(origin);
+    float magnitudeMax = heading.magnitude();
+
+    heading = heading.normalize();
+
+    float projectedLength = SolaMath.clamp( 0f, magnitudeMax, point.subtract(origin).dot(heading));
+
+    return origin.add(heading.scalar(projectedLength));
   }
 
   private static Projection projectShapeToAxis(Vector2D[] shape, Vector2D axis) {

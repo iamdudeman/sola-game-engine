@@ -121,6 +121,49 @@ class SeparatingAxisTheoremTest {
     }
   }
 
+  @Nested
+  class calculateCircleVsTriangle {
+    Vector2D[] triangle = new Vector2D[] {
+      new Vector2D(0, 0),
+      new Vector2D(3, 5),
+      new Vector2D(6, 0),
+    };
+
+    @Test
+    void whenCircleOutsideTriangle_shouldNotBeColliding() {
+      var collisionManifold = SeparatingAxisTheorem.checkCollision(
+        triangle,
+        new Circle( 1, new Vector2D(0, 3))
+      );
+
+      assertNull(collisionManifold);
+    }
+
+    @Test
+    void whenCircleOverlappingTriangle_shouldBeColliding() {
+      var collisionManifold = SeparatingAxisTheorem.checkCollision(
+        triangle,
+        new Circle( 1, new Vector2D(1, 3))
+      );
+
+      assertNotNull(collisionManifold);
+      assertEquals(new Vector2D(-0.8574933f, 0.51449513f), collisionManifold.normal());
+      assertEquals(0.31400555f, collisionManifold.penetration());
+    }
+
+    @Test
+    void whenCircleFullyInsideTriangle_shouldBeColliding() {
+      var collisionManifold = SeparatingAxisTheorem.checkCollision(
+        triangle,
+        new Circle( 0.5f, new Vector2D(2, 1))
+      );
+
+      assertNotNull(collisionManifold);
+      assertEquals(new Vector2D(0, -1), collisionManifold.normal());
+      assertEquals(1f, collisionManifold.penetration());
+    }
+  }
+
   private Vector2D[] createAABB(Vector2D topLeft, float width, float height) {
     return new Vector2D[] {
       topLeft,
