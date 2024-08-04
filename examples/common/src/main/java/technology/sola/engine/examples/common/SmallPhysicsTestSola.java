@@ -7,6 +7,7 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
+import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.components.TriangleRendererComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
@@ -32,6 +33,8 @@ public class SmallPhysicsTestSola extends SolaWithDefaults {
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     defaultsConfigurator.useGraphics().usePhysics().useDebug();
 
+    platform.getRenderer().createLayers("inside");
+
     World world = new World(10);
 
     world.createEntity()
@@ -50,6 +53,7 @@ public class SmallPhysicsTestSola extends SolaWithDefaults {
       .addComponent(new TransformComponent(230, 270, 10))
       .addComponent(new DynamicBodyComponent())
       .addComponent(new RectangleRendererComponent(Color.GREEN))
+      .addComponent(new LayerComponent("inside"))
       .addComponent(new ColliderComponent(new ColliderShapeAABB()));
 
     world.createEntity()
@@ -76,6 +80,7 @@ public class SmallPhysicsTestSola extends SolaWithDefaults {
       .addComponent(new TransformComponent(550, 210, 10))
       .addComponent(new DynamicBodyComponent())
       .addComponent(new CircleRendererComponent(Color.GREEN))
+      .addComponent(new LayerComponent("inside"))
       .addComponent(new ColliderComponent(new ColliderShapeCircle()));
 
     world.createEntity()
