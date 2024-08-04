@@ -41,7 +41,7 @@ public final class CollisionUtils {
         case CIRCLE -> calculateAABBVsCircle(
           entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
-        case TRIANGLE -> calculateSAT(
+        case TRIANGLE -> calculateShapeVsShapeSAT(
           entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
       };
@@ -52,15 +52,15 @@ public final class CollisionUtils {
         case CIRCLE -> calculateCircleVsCircle(
           entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
-        case TRIANGLE -> calculateCircleVsShape(
+        case TRIANGLE -> calculateCircleVsShapeSAT(
           entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
       };
       case TRIANGLE -> switch (colliderB.getType()) {
-        case AABB, TRIANGLE -> calculateSAT(
+        case AABB, TRIANGLE -> calculateShapeVsShapeSAT(
           entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
-        case CIRCLE -> calculateCircleVsShape(
+        case CIRCLE -> calculateCircleVsShapeSAT(
           entityB, entityA, colliderB.getShape(transformB), colliderA.getShape(transformA)
         );
       };
@@ -180,7 +180,7 @@ public final class CollisionUtils {
     return new CollisionManifold(entityA, entityB, normal, penetration);
   }
 
-  private static CollisionManifold calculateSAT(
+  private static CollisionManifold calculateShapeVsShapeSAT(
     Entity entityA, Entity entityB,
     Shape shapeA, Shape shapeB
   ) {
@@ -193,7 +193,7 @@ public final class CollisionUtils {
     return new CollisionManifold(entityA, entityB, minimumTranslationVector.normal(), minimumTranslationVector.penetration());
   }
 
-  private static CollisionManifold calculateCircleVsShape(
+  private static CollisionManifold calculateCircleVsShapeSAT(
     Entity entityA, Entity entityB,
     Circle circle, Shape shape
   ) {
