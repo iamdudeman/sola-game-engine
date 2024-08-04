@@ -1,7 +1,6 @@
 # sola-game-engine TODO list
 
-* Figure out Circles + SAT
-* Figure out how to make ImpulseCollisionResolutionSystem work better with Triangles
+* Performance testing for new collision code introduced!
 
 ## Known Bugs List
 
@@ -20,7 +19,6 @@
 
 ## TODO List
 
-* Implement a StaticCollisionResolutionSystem
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
 * File Storage API
