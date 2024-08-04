@@ -3,6 +3,7 @@ package technology.sola.engine.physics.utils;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
+import technology.sola.math.SolaMath;
 import technology.sola.math.geometry.Rectangle;
 
 import java.util.ArrayList;
@@ -150,7 +151,7 @@ public class SpatialHashMap {
   }
 
   private int calculateAppropriateCellSizeForViewEntries(List<View2Entry<ColliderComponent, TransformComponent>> viewEntries) {
-    int maxWidthOrHeight = calculateMinCellSizeForViewEntries(viewEntries) * 2;
+    int maxWidthOrHeight = SolaMath.fastRound(calculateMinCellSizeForViewEntries(viewEntries) * 1.5f);
 
     if (maxWidthOrHeight == 0) {
       return Integer.MAX_VALUE;
