@@ -38,13 +38,13 @@ class SpatialHashMapTest {
   void whenCreatedWithoutCellSize_shouldUseLargestEntityWidthOrHeight() {
     SpatialHashMap spatialHashMap = new SpatialHashMap(createTestView());
 
-    assertEquals(40, spatialHashMap.getCellSize());
+    assertEquals(30, spatialHashMap.getCellSize());
   }
 
   @Test
   void whenEntitiesRegistered_shouldProperlyPlaceInBuckets() {
     var testView = createTestView();
-    SpatialHashMap spatialHashMap = new SpatialHashMap(testView);
+    SpatialHashMap spatialHashMap = new SpatialHashMap(testView, 40);
 
     SpatialHashMap.BucketId[] bucketIds = spatialHashMap.getBucketIdsForViewEntry(testView.get(0));
     assertEquals(new SpatialHashMap.BucketId(0, 0), bucketIds[0]);
@@ -80,7 +80,7 @@ class SpatialHashMapTest {
   @Test
   void whenEntitiesRegistered_shouldHaveProperNearbyEntities() {
     var testView = createTestView();
-    SpatialHashMap spatialHashMap = new SpatialHashMap(testView);
+    SpatialHashMap spatialHashMap = new SpatialHashMap(testView, 40);
 
     var nearbyEntities = spatialHashMap.getNearbyViewEntries(testView.get(0));
     assertTrue(nearbyEntities.contains(testView.get(1)));
