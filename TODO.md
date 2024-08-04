@@ -1,6 +1,7 @@
 # sola-game-engine TODO list
 
 * Performance testing for new collision code introduced!
+* Major performance issue in PhysicsExample when switching from Spatial->QuadTree->Spatial
 
 ## Known Bugs List
 
