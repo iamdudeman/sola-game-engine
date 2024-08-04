@@ -65,7 +65,7 @@ public class SmallPhysicsTestSola extends SolaWithDefaults {
     Triangle staticTriangle = new Triangle(new Vector2D(0, -30), new Vector2D(60, -80), new Vector2D(120, 0));
 
     world.createEntity()
-      .addComponent(new TransformComponent(490, 100, 50))
+      .addComponent(new TransformComponent(500, 100, 50))
       .addComponent(new DynamicBodyComponent())
       .addComponent(new CircleRendererComponent(Color.GREEN))
       .addComponent(new ColliderComponent(new ColliderShapeCircle()));

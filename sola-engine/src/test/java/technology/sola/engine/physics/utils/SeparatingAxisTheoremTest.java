@@ -105,11 +105,11 @@ class SeparatingAxisTheoremTest {
 
       assertNotNull(collisionManifold);
       assertEquals(new Vector2D(-0.70710677f, -0.70710677f), collisionManifold.normal());
-      assertEquals(1.5857865f, collisionManifold.penetration());
+      assertEquals(1.5857862f, collisionManifold.penetration());
     }
 
     @Test
-    void whenCircleCenterInsideRectangle_shouldHaveCorrectNormal() {
+    void whenCircleFullyInsideRectangle_shouldHaveCorrectNormal() {
       var collisionManifold = SeparatingAxisTheorem.checkCollision(
         createAABB(new Vector2D(0, 0), 50, 30),
         new Circle( 3, new Vector2D(13, 14))
@@ -117,7 +117,7 @@ class SeparatingAxisTheoremTest {
 
       assertNotNull(collisionManifold);
       assertEquals(new Vector2D(-1, 0), collisionManifold.normal());
-      assertEquals(-10.0, collisionManifold.penetration());
+      assertEquals(16, collisionManifold.penetration());
     }
   }
 
@@ -147,8 +147,8 @@ class SeparatingAxisTheoremTest {
       );
 
       assertNotNull(collisionManifold);
-      assertEquals(new Vector2D(-0.8574933f, 0.51449513f), collisionManifold.normal());
-      assertEquals(0.31400555f, collisionManifold.penetration());
+      assertEquals(new Vector2D(-0.857493f, 0.5144958f), collisionManifold.normal());
+      assertEquals(0.31400573f, collisionManifold.penetration());
     }
 
     @Test
@@ -159,8 +159,8 @@ class SeparatingAxisTheoremTest {
       );
 
       assertNotNull(collisionManifold);
-      assertEquals(new Vector2D(0, -1), collisionManifold.normal());
-      assertEquals(1f, collisionManifold.penetration());
+      assertEquals(new Vector2D(0, -1f), collisionManifold.normal());
+      assertEquals(1.5f, collisionManifold.penetration());
     }
   }
 
