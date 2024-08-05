@@ -43,7 +43,7 @@ loadScripts(document, 'script');</script>
 <div>
 <ul class="sub-nav-list">
 <li>Summary:&nbsp;</li>
-<li><a href="#nested-class-summary">Nested</a>&nbsp;|&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor-summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-summary">Method</a></li>
@@ -82,23 +82,6 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="summary">
 <ul class="summary-list">
-<!-- ======== NESTED CLASS SUMMARY ======== -->
-<li>
-<section class="nested-class-summary" id="nested-class-summary">
-<h2>Nested Class Summary</h2>
-<div class="caption"><span>Nested Classes</span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">Modifier and Type</div>
-<div class="table-header col-second">Class</div>
-<div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>static final record&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="SeparatingAxisTheorem.MinimumTranslationVector.html" class="type-name-link" title="class in technology.sola.engine.physics.utils">SeparatingAxisTheorem.MinimumTranslationVector</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">The minimum translation vector contains the information needed to resolve a collision.</div>
-</div>
-</div>
-</section>
-</li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <li>
 <section class="constructor-summary" id="constructor-summary">
@@ -123,17 +106,18 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="SeparatingAxisTheorem.MinimumTranslationVector.html" title="class in technology.sola.engine.physics.utils">SeparatingAxisTheorem.MinimumTranslationVector</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkCollision(technology.sola.math.linear.Vector2D%5B%5D,technology.sola.math.geometry.Circle)" class="member-name-link">checkCollision</a><wbr>(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;shape,
- <a href="../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a>&nbsp;circle)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Checks for collisions between a shape and a <a href="../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry"><code>Circle</code></a>.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="SeparatingAxisTheorem.MinimumTranslationVector.html" title="class in technology.sola.engine.physics.utils">SeparatingAxisTheorem.MinimumTranslationVector</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkCollision(technology.sola.math.linear.Vector2D%5B%5D,technology.sola.math.linear.Vector2D%5B%5D)" class="member-name-link">checkCollision</a><wbr>(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;shapeA,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkCollision(technology.sola.math.linear.Vector2D%5B%5D,technology.sola.math.linear.Vector2D%5B%5D)" class="member-name-link">checkCollision</a><wbr>(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;shapeA,
  <a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;shapeB)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Checks for collisions between to shapes.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkCollision(technology.sola.math.linear.Vector2D%5B%5D,technology.sola.math.linear.Vector2D,float)" class="member-name-link">checkCollision</a><wbr>(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;shape,
+ <a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;circleCenter,
+ float&nbsp;radius)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Checks for collisions between a shape and a circle.</div>
 </div>
 </div>
 </div>
@@ -169,9 +153,9 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="checkCollision(technology.sola.math.linear.Vector2D[],technology.sola.math.linear.Vector2D[])">
 <h3>checkCollision</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="SeparatingAxisTheorem.MinimumTranslationVector.html" title="class in technology.sola.engine.physics.utils">SeparatingAxisTheorem.MinimumTranslationVector</a></span>&nbsp;<span class="element-name">checkCollision</span><wbr><span class="parameters">(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;shapeA,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></span>&nbsp;<span class="element-name">checkCollision</span><wbr><span class="parameters">(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;shapeA,
  <a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;shapeB)</span></div>
-<div class="block">Checks for collisions between to shapes. If a collision is detected the <a href="SeparatingAxisTheorem.MinimumTranslationVector.html" title="class in technology.sola.engine.physics.utils"><code>SeparatingAxisTheorem.MinimumTranslationVector</code></a> will be
+<div class="block">Checks for collisions between to shapes. If a collision is detected the <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics"><code>MinimumTranslationVector</code></a> will be
  returned. If no collision is found then null will be returned.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -183,16 +167,18 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="checkCollision(technology.sola.math.linear.Vector2D[],technology.sola.math.geometry.Circle)">
+<section class="detail" id="checkCollision(technology.sola.math.linear.Vector2D[],technology.sola.math.linear.Vector2D,float)">
 <h3>checkCollision</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="SeparatingAxisTheorem.MinimumTranslationVector.html" title="class in technology.sola.engine.physics.utils">SeparatingAxisTheorem.MinimumTranslationVector</a></span>&nbsp;<span class="element-name">checkCollision</span><wbr><span class="parameters">(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;shape,
- <a href="../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a>&nbsp;circle)</span></div>
-<div class="block">Checks for collisions between a shape and a <a href="../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry"><code>Circle</code></a>. If a collision is detected
- the <a href="SeparatingAxisTheorem.MinimumTranslationVector.html" title="class in technology.sola.engine.physics.utils"><code>SeparatingAxisTheorem.MinimumTranslationVector</code></a> will be returned. If no collision is found then null will be returned.</div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></span>&nbsp;<span class="element-name">checkCollision</span><wbr><span class="parameters">(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;shape,
+ <a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;circleCenter,
+ float&nbsp;radius)</span></div>
+<div class="block">Checks for collisions between a shape and a circle. If a collision is detected
+ the <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics"><code>MinimumTranslationVector</code></a> will be returned. If no collision is found then null will be returned.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>shape</code> - the array of points of a shape to check collisions with</dd>
-<dd><code>circle</code> - the circle to check collisions with</dd>
+<dd><code>circleCenter</code> - the circle center to check collisions with</dd>
+<dd><code>radius</code> - the circle radius to check collisions with</dd>
 <dt>Returns:</dt>
 <dd>the <code>MinimumTranslationVector</code> if a collision was found or else null</dd>
 </dl>
