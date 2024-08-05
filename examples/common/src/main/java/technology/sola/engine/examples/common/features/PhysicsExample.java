@@ -72,7 +72,7 @@ public class PhysicsExample extends SolaWithDefaults {
 
     platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
 
-    solaEcs.setWorld(buildSpatialHashMapOptimizedWorld());
+    solaEcs.setWorld(buildQuadTreeOptimizedWorld());
 
     guiDocument.setRootElement(buildGui());
   }

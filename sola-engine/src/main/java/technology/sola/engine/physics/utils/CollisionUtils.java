@@ -192,20 +192,20 @@ public final class CollisionUtils {
       return null;
     }
 
-    return new CollisionManifold(entityA, entityB, minimumTranslationVector.normal(), minimumTranslationVector.penetration());
+    return new CollisionManifold(entityA, entityB, minimumTranslationVector);
   }
 
   private static CollisionManifold calculateCircleVsShapeSAT(
     Entity entityA, Entity entityB,
     Circle circle, Shape shape
   ) {
-    var minimumTranslationVector = SeparatingAxisTheorem.checkCollision(shape.getPoints(), circle);
+    var minimumTranslationVector = SeparatingAxisTheorem.checkCollision(shape.getPoints(), circle.center(), circle.radius());
 
     if (minimumTranslationVector == null) {
       return null;
     }
 
-    return new CollisionManifold(entityB, entityA, minimumTranslationVector.normal(), minimumTranslationVector.penetration());
+    return new CollisionManifold(entityB, entityA, minimumTranslationVector);
   }
 
   private CollisionUtils() {

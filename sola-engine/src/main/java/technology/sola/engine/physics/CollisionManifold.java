@@ -19,6 +19,17 @@ public record CollisionManifold(
   Entity entityA, Entity entityB, Vector2D normal, float penetration
 ) {
   /**
+   * Creates a CollisionManifoldEventMessage for two entities.
+   *
+   * @param entityA                  the first {@link Entity} in the collision
+   * @param entityB                  the second {@link Entity} in the collision
+   * @param minimumTranslationVector the {@link MinimumTranslationVector} for the collision
+   */
+  public CollisionManifold(Entity entityA, Entity entityB, MinimumTranslationVector minimumTranslationVector) {
+    this(entityA, entityB, minimumTranslationVector.normal(), minimumTranslationVector.penetration());
+  }
+
+  /**
    * Calls the collision resolve callback if both entity collision condition checks return true.
    *
    * @param entityOneCollisionCondition the first entity collision condition
