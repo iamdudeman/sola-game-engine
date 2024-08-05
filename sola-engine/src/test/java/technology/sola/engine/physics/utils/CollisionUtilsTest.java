@@ -120,7 +120,7 @@ class CollisionUtilsTest {
     }
 
     @Test
-    void whenCircleCenterInsideRectangle_shouldHaveCorrectNormal() {
+    void whenCircleFullyInsideRectangle_shouldHaveCorrectNormal() {
       var viewEntryA = new View2Entry<>(mockEntityA, new ColliderComponent(new ColliderShapeAABB(50, 30)), new TransformComponent(0, 0));
       var viewEntryB = new View2Entry<>(mockEntityB, new ColliderComponent(new ColliderShapeCircle(3)), new TransformComponent(10, 11));
 
@@ -128,7 +128,7 @@ class CollisionUtilsTest {
 
       assertNotNull(collisionManifold);
       assertEquals(new Vector2D(-1, 0), collisionManifold.normal());
-      assertEquals(-10.0, collisionManifold.penetration());
+      assertEquals(16.0, collisionManifold.penetration());
     }
   }
 

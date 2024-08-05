@@ -100,11 +100,13 @@ public final class CollisionUtils {
       return null;
     }
 
-    float penetration = circle.radius() - closestPointOnRectangle.distance(circleCenter);
+    float distance = closestPointOnRectangle.distance(circleCenter);
+    float penetration = circle.radius() - distance;
     Vector2D normal = diff.normalize();
 
-    // If not inside
-    if (!isCircleCenterInsideRectangle) {
+    if (isCircleCenterInsideRectangle) {
+      penetration = circle.radius() + distance;
+    } else {
       normal = normal.scalar(-1);
     }
 
