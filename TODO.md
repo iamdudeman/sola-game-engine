@@ -5,10 +5,13 @@
 * (verify if still bug) GuiElement parent undefined when changing roots
     * consider creating a new RootGuiElement when changing roots instead of clearing out root children
         * if this works then can remove parent == null checks
+* padding might not be applied correctly when 100% height, with direction column + gap + MainAxisChildren END
 
 -----------------------------------------------------------------------------------------------------------------------
 
 ## Planned Cleanup List
+
+* Switch SolaConfiguration from not using Builder pattern
 
 -----------------------------------------------------------------------------------------------------------------------
 
