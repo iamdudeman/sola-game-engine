@@ -130,20 +130,10 @@ implements technology.sola.ecs.Component</span></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Renders a debug overlay over the collider.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBoundingHeight(float)" class="member-name-link">getBoundingHeight</a><wbr>(float&nbsp;transformScaleY)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBoundingBox(technology.sola.engine.core.component.TransformComponent)" class="member-name-link">getBoundingBox</a><wbr>(<a href="../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Gets the height of the bounding box around this collider.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBoundingRectangle(technology.sola.engine.core.component.TransformComponent)" class="member-name-link">getBoundingRectangle</a><wbr>(<a href="../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the bounding rectangle for this ColliderComponent.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBoundingWidth(float)" class="member-name-link">getBoundingWidth</a><wbr>(float&nbsp;transformScaleX)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Gets the width of the bounding box around this collider.</div>
+<div class="block">Returns the bounding box for this ColliderComponent.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="collider/ColliderTag.html" title="interface in technology.sola.engine.physics.component.collider">ColliderTag</a>[]</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getIgnoreTags()" class="member-name-link">getIgnoreTags</a>()</code></div>
@@ -273,41 +263,15 @@ implements technology.sola.ecs.Component</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="getBoundingWidth(float)">
-<h3>getBoundingWidth</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getBoundingWidth</span><wbr><span class="parameters">(float&nbsp;transformScaleX)</span></div>
-<div class="block">Gets the width of the bounding box around this collider.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>transformScaleX</code> - the x-axis scale of the transform</dd>
-<dt>Returns:</dt>
-<dd>the bounding box width of this collider</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getBoundingHeight(float)">
-<h3>getBoundingHeight</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getBoundingHeight</span><wbr><span class="parameters">(float&nbsp;transformScaleY)</span></div>
-<div class="block">Gets the height of the bounding box around this collider.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>transformScaleY</code> - the y-axis scale of the transform</dd>
-<dt>Returns:</dt>
-<dd>the bounding box height of this collider</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getBoundingRectangle(technology.sola.engine.core.component.TransformComponent)">
-<h3>getBoundingRectangle</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></span>&nbsp;<span class="element-name">getBoundingRectangle</span><wbr><span class="parameters">(<a href="../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent)</span></div>
-<div class="block">Returns the bounding rectangle for this ColliderComponent.</div>
+<section class="detail" id="getBoundingBox(technology.sola.engine.core.component.TransformComponent)">
+<h3>getBoundingBox</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></span>&nbsp;<span class="element-name">getBoundingBox</span><wbr><span class="parameters">(<a href="../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent)</span></div>
+<div class="block">Returns the bounding box for this ColliderComponent.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>transformComponent</code> - the <a href="../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> of the <code>Entity</code></dd>
 <dt>Returns:</dt>
-<dd>the bounding rectangle</dd>
+<dd>the bounding box</dd>
 </dl>
 </section>
 </li>

@@ -90,7 +90,9 @@ loadScripts(document, 'script');</script>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a>
 implements <a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a>&gt;</span></div>
 <div class="block">ColliderShapeCircle is a <a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider"><code>ColliderShape</code></a> implementation for a circle which utilize a
- <a href="../../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry"><code>Circle</code></a> for its geometric shape representation.</div>
+ <a href="../../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry"><code>Circle</code></a> for its geometric shape representation.
+ <br>
+ Note: only <a href="../../../core/component/TransformComponent.html#getScaleX()"><code>TransformComponent.getScaleX()</code></a> is used for size of collider</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -137,41 +139,38 @@ implements <a href="ColliderShape.html" title="interface in technology.sola.engi
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBoundingHeight(float)" class="member-name-link">getBoundingHeight</a><wbr>(float&nbsp;transformScaleY)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Gets the height of the bounding box around this collider.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBoundingWidth(float)" class="member-name-link">getBoundingWidth</a><wbr>(float&nbsp;transformScaleX)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Gets the width of the bounding box around this collider.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getShape(technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">getShape</a><wbr>(<a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBoundingBox(technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">getBoundingBox</a><wbr>(<a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent,
  float&nbsp;offsetX,
  float&nbsp;offsetY)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the bounding box for this <a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider"><code>ColliderShape</code></a>.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getShape(technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">getShape</a><wbr>(<a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent,
+ float&nbsp;offsetX,
+ float&nbsp;offsetY)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gets the geometric <a href="../../../../math/geometry/Shape.html" title="interface in technology.sola.math.geometry"><code>Shape</code></a> for this collider shape.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a hash code value for this object.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#radius()" class="member-name-link">radius</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#radius()" class="member-name-link">radius</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-radius"><code>radius</code></a> record component.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a string representation of this record class.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ColliderType.html" title="enum class in technology.sola.engine.physics.component.collider">ColliderType</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#type()" class="member-name-link">type</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ColliderType.html" title="enum class in technology.sola.engine.physics.component.collider">ColliderType</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#type()" class="member-name-link">type</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gets the <a href="ColliderType.html" title="enum class in technology.sola.engine.physics.component.collider"><code>ColliderType</code></a> of this collider.</div>
 </div>
 </div>
@@ -232,34 +231,22 @@ implements <a href="ColliderShape.html" title="interface in technology.sola.engi
 </section>
 </li>
 <li>
-<section class="detail" id="getBoundingWidth(float)">
-<h3>getBoundingWidth</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getBoundingWidth</span><wbr><span class="parameters">(float&nbsp;transformScaleX)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="ColliderShape.html#getBoundingWidth(float)">ColliderShape</a></code></span></div>
-<div class="block">Gets the width of the bounding box around this collider.</div>
+<section class="detail" id="getBoundingBox(technology.sola.engine.core.component.TransformComponent,float,float)">
+<h3>getBoundingBox</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></span>&nbsp;<span class="element-name">getBoundingBox</span><wbr><span class="parameters">(<a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent,
+ float&nbsp;offsetX,
+ float&nbsp;offsetY)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="ColliderShape.html#getBoundingBox(technology.sola.engine.core.component.TransformComponent,float,float)">ColliderShape</a></code></span></div>
+<div class="block">Returns the bounding box for this <a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider"><code>ColliderShape</code></a>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ColliderShape.html#getBoundingWidth(float)">getBoundingWidth</a></code>&nbsp;in interface&nbsp;<code><a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a>&gt;</code></dd>
+<dd><code><a href="ColliderShape.html#getBoundingBox(technology.sola.engine.core.component.TransformComponent,float,float)">getBoundingBox</a></code>&nbsp;in interface&nbsp;<code><a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a>&gt;</code></dd>
 <dt>Parameters:</dt>
-<dd><code>transformScaleX</code> - the x-axis scale of the transform</dd>
+<dd><code>transformComponent</code> - the <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> of the entity</dd>
+<dd><code>offsetX</code> - the x offset of the collider</dd>
+<dd><code>offsetY</code> - the y offset of the collider</dd>
 <dt>Returns:</dt>
-<dd>the bounding box width of this collider</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getBoundingHeight(float)">
-<h3>getBoundingHeight</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getBoundingHeight</span><wbr><span class="parameters">(float&nbsp;transformScaleY)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="ColliderShape.html#getBoundingHeight(float)">ColliderShape</a></code></span></div>
-<div class="block">Gets the height of the bounding box around this collider.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="ColliderShape.html#getBoundingHeight(float)">getBoundingHeight</a></code>&nbsp;in interface&nbsp;<code><a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a>&gt;</code></dd>
-<dt>Parameters:</dt>
-<dd><code>transformScaleY</code> - the y-axis scale of the transform</dd>
-<dt>Returns:</dt>
-<dd>the bounding box height of this collider</dd>
+<dd>the bounding box</dd>
 </dl>
 </section>
 </li>

@@ -87,17 +87,35 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab3" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" class="table-tab">Abstract Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab3" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" class="table-tab">Abstract Methods</button><button id="method-summary-table-tab5" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab5', 3)" class="table-tab">Default Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#contains(technology.sola.math.linear.Vector2D)" class="member-name-link">contains</a><wbr>(<a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;point)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1"><code>static <a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1"><code><a href="#calculateCentroid(technology.sola.math.linear.Vector2D%5B%5D)" class="member-name-link">calculateCentroid</a><wbr>(<a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;points)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1">
+<div class="block">Calculates and returns the centroid of the shape represented by the array of points.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#contains(technology.sola.math.linear.Vector2D)" class="member-name-link">contains</a><wbr>(<a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;point)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Checks if this Shape contains a point.</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>float</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getArea()" class="member-name-link">getArea</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Calculates the area of this shape and return it.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getCentroid()" class="member-name-link">getCentroid</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Calculates and returns the centroid of this <a href="Shape.html" title="interface in technology.sola.math.geometry"><code>Shape</code></a>.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getPoints()" class="member-name-link">getPoints</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -122,6 +140,51 @@ loadScripts(document, 'script');</script>
 <dd><code>point</code> - the point to check</dd>
 <dt>Returns:</dt>
 <dd>true if this shape contains the point</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getPoints()">
+<h3>getPoints</h3>
+<div class="member-signature"><span class="return-type"><a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]</span>&nbsp;<span class="element-name">getPoints</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the array of points making up this shape</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getArea()">
+<h3>getArea</h3>
+<div class="member-signature"><span class="return-type">float</span>&nbsp;<span class="element-name">getArea</span>()</div>
+<div class="block">Calculates the area of this shape and return it.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the area of this shape</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getCentroid()">
+<h3>getCentroid</h3>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">getCentroid</span>()</div>
+<div class="block">Calculates and returns the centroid of this <a href="Shape.html" title="interface in technology.sola.math.geometry"><code>Shape</code></a>.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the centroid</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="calculateCentroid(technology.sola.math.linear.Vector2D[])">
+<h3>calculateCentroid</h3>
+<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type"><a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">calculateCentroid</span><wbr><span class="parameters">(<a href="../linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;points)</span></div>
+<div class="block">Calculates and returns the centroid of the shape represented by the array of points.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>points</code> - the points of the shape</dd>
+<dt>Returns:</dt>
+<dd>the centroid</dd>
 </dl>
 </section>
 </li>

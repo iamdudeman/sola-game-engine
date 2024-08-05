@@ -183,22 +183,44 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Adds a <a href="DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> to a layer at default order.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#fillCircle(float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">fillCircle</a><wbr>(float&nbsp;x,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#drawTriangle(float,float,float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">drawTriangle</a><wbr>(float&nbsp;x1,
+ float&nbsp;y1,
+ float&nbsp;x2,
+ float&nbsp;y2,
+ float&nbsp;x3,
+ float&nbsp;y3,
+ <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Draws a triangle.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#fillCircle(float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">fillCircle</a><wbr>(float&nbsp;x,
  float&nbsp;y,
  float&nbsp;radius,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Draws a filled circle.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#fillRect(float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">fillRect</a><wbr>(float&nbsp;x,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#fillRect(float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">fillRect</a><wbr>(float&nbsp;x,
  float&nbsp;y,
  float&nbsp;width,
  float&nbsp;height,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Draws a filled rectangle.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#fillTriangle(float,float,float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">fillTriangle</a><wbr>(float&nbsp;x1,
+ float&nbsp;y1,
+ float&nbsp;x2,
+ float&nbsp;y2,
+ float&nbsp;x3,
+ float&nbsp;y3,
+ <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Draws a filled triangle.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend">BlendFunction</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getBlendFunction()" class="member-name-link">getBlendFunction</a>()</code></div>
@@ -585,6 +607,52 @@ loadScripts(document, 'script');</script>
 <dd><code>y</code> - top left coordinate y</dd>
 <dd><code>radius</code> - radius of the circle</dd>
 <dd><code>color</code> - <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the circle</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="drawTriangle(float,float,float,float,float,float,technology.sola.engine.graphics.Color)">
+<h3>drawTriangle</h3>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">drawTriangle</span><wbr><span class="parameters">(float&nbsp;x1,
+ float&nbsp;y1,
+ float&nbsp;x2,
+ float&nbsp;y2,
+ float&nbsp;x3,
+ float&nbsp;y3,
+ <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</span></div>
+<div class="block">Draws a triangle.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>x1</code> - x coordinate for the first point</dd>
+<dd><code>y1</code> - y coordinate for the first point</dd>
+<dd><code>x2</code> - x coordinate for the second point</dd>
+<dd><code>y2</code> - y coordinate for the second point</dd>
+<dd><code>x3</code> - x coordinate for the third point</dd>
+<dd><code>y3</code> - y coordinate for the third point</dd>
+<dd><code>color</code> - <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the triangle</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="fillTriangle(float,float,float,float,float,float,technology.sola.engine.graphics.Color)">
+<h3>fillTriangle</h3>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">fillTriangle</span><wbr><span class="parameters">(float&nbsp;x1,
+ float&nbsp;y1,
+ float&nbsp;x2,
+ float&nbsp;y2,
+ float&nbsp;x3,
+ float&nbsp;y3,
+ <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</span></div>
+<div class="block">Draws a filled triangle.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>x1</code> - x coordinate for the first point</dd>
+<dd><code>y1</code> - y coordinate for the first point</dd>
+<dd><code>x2</code> - x coordinate for the second point</dd>
+<dd><code>y2</code> - y coordinate for the second point</dd>
+<dd><code>x3</code> - x coordinate for the third point</dd>
+<dd><code>y3</code> - y coordinate for the third point</dd>
+<dd><code>color</code> - <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the triangle</dd>
 </dl>
 </section>
 </li>
