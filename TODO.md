@@ -10,13 +10,13 @@
 
 ## Planned Cleanup List
 
-* ColliderUtils#autoSizeColliderToSprite feels weird as a util method
 * MinimumTranslationVector could be a separate file and used by CollisionManifold and SeparatingAxisTheorem
 
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
 
+* Consider generalizing Triangle renderer and collider to "Polygon" instead
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
 * File Storage API
