@@ -31,13 +31,6 @@ public class SeparatingAxisTheorem {
       if (p1.isOverlapping(p2)) {
         float overlap = p1.getOverlap(p2);
 
-        if (p1.contains(p2) || p2.contains(p1)) {
-          float minS = Math.abs(p1.min - p2.min);
-          float maxS = Math.abs(p1.max - p2.max);
-
-          overlap += Math.min(minS, maxS);
-        }
-
         if (overlap < smallestOverlap) {
           smallestOverlap = overlap;
           smallestAxis = axis;
@@ -79,13 +72,6 @@ public class SeparatingAxisTheorem {
 
       if (p1.isOverlapping(p2)) {
         float overlap = p1.getOverlap(p2);
-
-        if (p1.contains(p2) || p2.contains(p1)) {
-          float minS = Math.abs(p1.min - p2.min);
-          float maxS = Math.abs(p1.max - p2.max);
-
-          overlap += Math.min(minS, maxS);
-        }
 
         if (overlap < smallestOverlap) {
           smallestOverlap = overlap;
@@ -190,7 +176,16 @@ public class SeparatingAxisTheorem {
     }
 
     float getOverlap(Projection projection) {
-      return Math.max(0, Math.min(max, projection.max) - Math.max(min, projection.min));
+      float overlap = Math.max(0, Math.min(max, projection.max) - Math.max(min, projection.min));
+
+      if (contains(projection) || projection.contains(this)) {
+        float minS = Math.abs(this.min - projection.min);
+        float maxS = Math.abs(this.max - projection.max);
+
+        overlap += Math.min(minS, maxS);
+      }
+
+      return overlap;
     }
 
     boolean contains(Projection projection) {
