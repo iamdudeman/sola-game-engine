@@ -99,7 +99,8 @@ class SeparatingAxisTheoremTest {
     void whenCircleCenterOutsideRectangle_shouldHaveCorrectNormal() {
       var collisionManifold = SeparatingAxisTheorem.checkCollision(
         createAABB(new Vector2D(0, 0), 5, 3),
-        new Vector2D(-1, -1), 3
+        new Vector2D(-1, -1),
+        3
       );
 
       assertNotNull(collisionManifold);
@@ -111,7 +112,8 @@ class SeparatingAxisTheoremTest {
     void whenCircleFullyInsideRectangle_shouldHaveCorrectNormal() {
       var collisionManifold = SeparatingAxisTheorem.checkCollision(
         createAABB(new Vector2D(0, 0), 50, 30),
-        new Vector2D(13, 14), 3
+        new Vector2D(13, 14),
+        3
       );
 
       assertNotNull(collisionManifold);
@@ -132,7 +134,8 @@ class SeparatingAxisTheoremTest {
     void whenCircleOutsideTriangle_shouldNotBeColliding() {
       var collisionManifold = SeparatingAxisTheorem.checkCollision(
         triangle,
-        new Vector2D(0, 3), 1
+        new Vector2D(0, 3),
+        1
       );
 
       assertNull(collisionManifold);
@@ -142,7 +145,8 @@ class SeparatingAxisTheoremTest {
     void whenCircleOverlappingTriangle_shouldBeColliding() {
       var collisionManifold = SeparatingAxisTheorem.checkCollision(
         triangle,
-        new Vector2D(1, 3), 1
+        new Vector2D(1, 3),
+        1
       );
 
       assertNotNull(collisionManifold);
@@ -154,7 +158,8 @@ class SeparatingAxisTheoremTest {
     void whenCircleFullyInsideTriangle_shouldBeColliding() {
       var collisionManifold = SeparatingAxisTheorem.checkCollision(
         triangle,
-        new Vector2D(2, 1), 0.5f
+        new Vector2D(2, 1),
+        0.5f
       );
 
       assertNotNull(collisionManifold);

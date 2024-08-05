@@ -163,11 +163,11 @@ public class SeparatingAxisTheorem {
   }
 
   private record Projection(float min, float max) {
-    boolean isOverlapping(Projection projection) {
+    public boolean isOverlapping(Projection projection) {
       return projection.max >= min && max >= projection.min;
     }
 
-    float getOverlap(Projection projection) {
+    public float getOverlap(Projection projection) {
       float overlap = Math.max(0, Math.min(max, projection.max) - Math.max(min, projection.min));
 
       if (contains(projection) || projection.contains(this)) {
@@ -180,7 +180,7 @@ public class SeparatingAxisTheorem {
       return overlap;
     }
 
-    boolean contains(Projection projection) {
+    private boolean contains(Projection projection) {
       return min <= projection.min && projection.min <= max && min <= projection.max && projection.max <= max;
     }
   }
