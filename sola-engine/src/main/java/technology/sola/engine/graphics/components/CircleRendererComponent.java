@@ -5,6 +5,9 @@ import technology.sola.engine.graphics.Color;
 
 /**
  * CircleRendererComponent is a {@link Component} containing data for rendering 2d circles.
+ *
+ * <br>
+ * Note: only {@link technology.sola.engine.core.component.TransformComponent#getScaleX()} is used for size of collider
  */
 public class CircleRendererComponent implements Component {
   private Color color;
