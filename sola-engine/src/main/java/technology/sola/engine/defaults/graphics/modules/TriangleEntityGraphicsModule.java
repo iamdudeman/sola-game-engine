@@ -7,6 +7,7 @@ import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.components.TriangleRendererComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Matrix3D;
 
 /**
@@ -24,22 +25,23 @@ public class TriangleEntityGraphicsModule extends SolaEntityGraphicsModule<View2
     var triangleRenderer = viewEntry.c1();
     var matrix = Matrix3D.translate(cameraModifiedEntityTransform.getX(), cameraModifiedEntityTransform.getY())
       .multiply(Matrix3D.scale(cameraModifiedEntityTransform.getScaleX(), cameraModifiedEntityTransform.getScaleY()));
-    var firstPoint = matrix.multiply(triangleRenderer.getTriangle().p1());
-    var secondPoint = matrix.multiply(triangleRenderer.getTriangle().p2());
-    var thirdPoint = matrix.multiply(triangleRenderer.getTriangle().p3());
+    var triangle = triangleRenderer.getTriangle();
+    var transformedP1 = matrix.multiply(triangle.p1());
+    var transformedP2 = matrix.multiply(triangle.p2());
+    var transformedP3 = matrix.multiply(triangle.p3());
 
     if (triangleRenderer.isFilled()) {
       renderer.fillTriangle(
-        firstPoint.x(), firstPoint.y(),
-        secondPoint.x(), secondPoint.y(),
-        thirdPoint.x(), thirdPoint.y(),
+        transformedP1.x(), transformedP1.y(),
+        transformedP2.x(), transformedP2.y(),
+        transformedP3.x(), transformedP3.y(),
         triangleRenderer.getColor()
       );
     } else {
       renderer.drawTriangle(
-        firstPoint.x(), firstPoint.y(),
-        secondPoint.x(), secondPoint.y(),
-        thirdPoint.x(), thirdPoint.y(),
+        transformedP1.x(), transformedP1.y(),
+        transformedP2.x(), transformedP2.y(),
+        transformedP3.x(), transformedP3.y(),
         triangleRenderer.getColor()
       );
     }
