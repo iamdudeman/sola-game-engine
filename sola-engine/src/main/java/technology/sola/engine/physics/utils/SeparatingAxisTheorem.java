@@ -150,7 +150,7 @@ public class SeparatingAxisTheorem {
     float minDistance = Float.MAX_VALUE;
 
     for (Vector2D point : shape) {
-      float distance = point.subtract(circleCenter).magnitudeSq();
+      float distance = point.distanceSq(circleCenter);
 
       if (distance < minDistance) {
         minDistance = distance;

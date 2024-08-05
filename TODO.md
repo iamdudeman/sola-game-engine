@@ -1,7 +1,5 @@
 # sola-game-engine TODO list
 
-* Performance testing for new collision code introduced!
-
 ## Known Bugs List
 
 * (verify if still bug) GuiElement parent undefined when changing roots
