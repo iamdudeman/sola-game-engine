@@ -23,7 +23,7 @@ public class RectangleRendererComponent implements Component {
    * Creates a RectangleRendererComponent of desired color that is either filled or not filled.
    *
    * @param color    the {@link Color} of the rectangle
-   * @param isFilled whether the circle should be filled or not
+   * @param isFilled whether the rectangle should be filled or not
    */
   public RectangleRendererComponent(Color color, boolean isFilled) {
     this.color = color;

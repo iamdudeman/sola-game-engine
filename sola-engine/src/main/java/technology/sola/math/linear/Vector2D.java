@@ -94,6 +94,17 @@ public record Vector2D(float x, float y) {
   }
 
   /**
+   * Calculates the distance squared between two vectors. This is faster than calculating the distance since a sqrt call
+   * is not made.
+   *
+   * @param vector2D the vector to get the distance squared between
+   * @return the distance squared between the vectors
+   */
+  public float distanceSq(Vector2D vector2D) {
+    return this.subtract(vector2D).magnitudeSq();
+  }
+
+  /**
    * Calculates the normalized vector (where the vector has a length of one).
    *
    * @return the normalized vector as a new object

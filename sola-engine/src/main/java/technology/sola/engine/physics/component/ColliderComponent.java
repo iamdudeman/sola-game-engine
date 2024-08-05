@@ -6,7 +6,6 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.component.collider.*;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.geometry.Shape;
-import technology.sola.math.linear.Vector2D;
 
 /**
  * ColliderComponent is a {@link Component} that contains collision data for an {@link technology.sola.ecs.Entity}.
@@ -61,39 +60,13 @@ public class ColliderComponent implements Component {
   }
 
   /**
-   * Gets the width of the bounding box around this collider.
-   *
-   * @param transformScaleX the x-axis scale of the transform
-   * @return the bounding box width of this collider
-   */
-  public float getBoundingWidth(float transformScaleX) {
-    return colliderShape.getBoundingWidth(transformScaleX);
-  }
-
-  /**
-   * Gets the height of the bounding box around this collider.
-   *
-   * @param transformScaleY the y-axis scale of the transform
-   * @return the bounding box height of this collider
-   */
-  public float getBoundingHeight(float transformScaleY) {
-    return colliderShape.getBoundingHeight(transformScaleY);
-  }
-
-  /**
-   * Returns the bounding rectangle for this ColliderComponent.
+   * Returns the bounding box for this ColliderComponent.
    *
    * @param transformComponent the {@link TransformComponent} of the {@link technology.sola.ecs.Entity}
-   * @return the bounding rectangle
+   * @return the bounding box
    */
-  public Rectangle getBoundingRectangle(TransformComponent transformComponent) {
-    var min = transformComponent.getTranslate().add(new Vector2D(offsetX, offsetY));
-    var widthHeight = new Vector2D(
-      getBoundingWidth(transformComponent.getScaleX()),
-      getBoundingHeight(transformComponent.getScaleY())
-    );
-
-    return new Rectangle(min, min.add(widthHeight));
+  public Rectangle getBoundingBox(TransformComponent transformComponent) {
+    return colliderShape.getBoundingBox(transformComponent, offsetX, offsetY);
   }
 
   /**

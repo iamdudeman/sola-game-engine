@@ -5,6 +5,7 @@ import technology.sola.ecs.World;
 import technology.sola.ecs.view.View;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
@@ -46,6 +47,18 @@ public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Ent
 
   @Override
   public void renderEntity(Renderer renderer, View2Entry<ColliderComponent, TransformComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
+    // render bounding rect
+    var boundingRect = viewEntry.c1()
+      .getBoundingBox(cameraModifiedEntityTransform);
+
+    renderer.drawRect(
+      boundingRect.min().x(),
+      boundingRect.min().y(),
+      boundingRect.getWidth(),
+      boundingRect.getHeight(),
+      Color.BLUE
+    );
+
     viewEntry.c1().debugRender(renderer, cameraModifiedEntityTransform);
   }
 

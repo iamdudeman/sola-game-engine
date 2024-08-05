@@ -11,5 +11,9 @@ public enum ColliderType {
   /**
    * Circle
    */
-  CIRCLE
+  CIRCLE,
+  /**
+   * Triangle
+   */
+  TRIANGLE,
 }

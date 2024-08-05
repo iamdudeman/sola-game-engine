@@ -4,11 +4,14 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.math.geometry.Circle;
+import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
 /**
  * ColliderShapeCircle is a {@link ColliderShape} implementation for a circle which utilize a
  * {@link Circle} for its geometric shape representation.
+ * <br>
+ * Note: only {@link TransformComponent#getScaleX()} is used for size of collider
  *
  * @param radius the radius of the circle
  */
@@ -28,18 +31,19 @@ public record ColliderShapeCircle(
   }
 
   @Override
-  public float getBoundingWidth(float transformScaleX) {
-    return radius * 2 * transformScaleX;
-  }
+  public Rectangle getBoundingBox(TransformComponent transformComponent, float offsetX, float offsetY) {
+    var min = transformComponent.getTranslate().add(new Vector2D(offsetX, offsetY));
+    float sideLength = radius * 2 * transformComponent.getScaleX();
 
-  @Override
-  public float getBoundingHeight(float transformScaleY) {
-    return radius * 2 * transformScaleY;
+    return new Rectangle(
+      min,
+      min.add(new Vector2D(sideLength, sideLength))
+    );
   }
 
   @Override
   public Circle getShape(TransformComponent transformComponent, float offsetX, float offsetY) {
-    float transformScale = Math.max(transformComponent.getScaleX(), transformComponent.getScaleY());
+    float transformScale = transformComponent.getScaleX();
     float radiusWithTransform = radius * transformScale;
 
     Vector2D center = new Vector2D(

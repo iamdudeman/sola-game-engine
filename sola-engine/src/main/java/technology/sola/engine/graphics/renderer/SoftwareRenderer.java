@@ -11,6 +11,7 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.blend.BlendFunction;
 import technology.sola.math.SolaMath;
 import technology.sola.math.geometry.Rectangle;
+import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.ArrayList;
@@ -186,6 +187,48 @@ public class SoftwareRenderer extends Canvas implements Renderer {
       for (int j = -radiusInt; j <= radius; j++) {
         if (j * j + i * i <= radiusSquaredInt) {
           setPixel(xInt + j, yInt + i, color);
+        }
+      }
+    }
+  }
+
+  @Override
+  public void fillTriangle(float x1, float y1, float x2, float y2, float x3, float y3, Color color) {
+    float minX = x1;
+    float minY = y1;
+    float maxX = x1;
+    float maxY = y1;
+
+    if (x2 < minX) {
+      minX = x2;
+    } else if (x2 > maxX) {
+      maxX = x2;
+    }
+
+    if (x3 < minX) {
+      minX = x3;
+    } else if (x3 > maxX) {
+      maxX = x3;
+    }
+
+    if (y2 < minY) {
+      minY = y2;
+    } else if (y2 > maxY) {
+      maxY = y2;
+    }
+
+    if (y3 < minY) {
+      minY = y3;
+    } else if (y3 > maxY) {
+      maxY = y3;
+    }
+
+    Triangle triangle = new Triangle(new Vector2D(x1, y1), new Vector2D(x2, y2), new Vector2D(x3, y3));
+
+    for (int x = SolaMath.fastRound(minX); x <= maxX; x++) {
+      for (int y = SolaMath.fastRound(minY); y <= maxY; y++) {
+        if (triangle.contains(new Vector2D(x, y))) {
+          setPixel(x, y, color);
         }
       }
     }

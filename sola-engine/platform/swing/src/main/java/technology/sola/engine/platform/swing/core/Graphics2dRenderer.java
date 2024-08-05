@@ -139,6 +139,11 @@ public class Graphics2dRenderer implements Renderer {
   }
 
   @Override
+  public void fillTriangle(float x1, float y1, float x2, float y2, float x3, float y3, Color color) {
+    throw new NotYetImplementedException();
+  }
+
+  @Override
   public void drawImage(SolaImage solaImage, float x, float y) {
     throw new NotYetImplementedException();
   }

@@ -280,7 +280,7 @@ public class QuadTreeNode {
      */
     public QuadTreeData(View2Entry<ColliderComponent, TransformComponent> entityView) {
       this.entityView = entityView;
-      this.entityBoundingRectangle = entityView.c1().getBoundingRectangle(entityView.c2());
+      this.entityBoundingRectangle = entityView.c1().getBoundingBox(entityView.c2());
     }
   }
 }

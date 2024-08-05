@@ -10,9 +10,9 @@ import technology.sola.math.linear.Vector2D;
  * @param p3 third point of triangle
  */
 public record Triangle(Vector2D p1, Vector2D p2, Vector2D p3) implements Shape {
-  // Note: implementation from https://stackoverflow.com/a/2049593
   @Override
   public boolean contains(Vector2D point) {
+    // Note: implementation from https://stackoverflow.com/a/2049593
     float d1 = sign(point, p1, p2);
     float d2 = sign(point, p2, p3);
     float d3 = sign(point, p3, p1);
@@ -22,11 +22,17 @@ public record Triangle(Vector2D p1, Vector2D p2, Vector2D p3) implements Shape {
     return !(hasNegative && hasPositive);
   }
 
-  /**
-   * Calculates the area of this triangle and return it.
-   *
-   * @return the area of this triangle
-   */
+
+  @Override
+  public Vector2D[] getPoints() {
+    return new Vector2D[] {
+      p1,
+      p2,
+      p3,
+    };
+  }
+
+  @Override
   public float getArea() {
     return Math.abs(
       (p2.x() * p1.y() - p1.x() * p2.y())

@@ -117,6 +117,14 @@ class Vector2DTest {
       assertEquals(10, vector1.distance(vector2));
     }
 
+    @Test
+    void distanceSq() {
+      Vector2D vector1 = new Vector2D(-3, -4);
+      Vector2D vector2 = new Vector2D(3, 4);
+
+      assertEquals(100, vector1.distanceSq(vector2));
+    }
+
     @Nested
     class normalize {
       @Test

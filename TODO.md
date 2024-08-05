@@ -10,10 +10,13 @@
 
 ## Planned Cleanup List
 
+* MinimumTranslationVector could be a separate file and used by CollisionManifold and SeparatingAxisTheorem
+
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
 
+* Consider generalizing Triangle renderer and collider to "Polygon" instead
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
 * File Storage API
@@ -57,16 +60,6 @@
 * Consider adding rotation to TransformComponent
     * Would need to update rendering stuff
     * Would need to update physics stuff
-* Physics
-    * Collision Detection
-        * Triangle (rendering reference https://github.com/joshb/triangleraster/blob/main/Rasterizer.cpp)
-            * x AABB
-            * x Circle
-            * x Triangle
-        * Polygon
-            * x AABB
-            * x Circle
-            * x Polygon
 * Consider adding a "debug console" option
     * While open can toggle things like render debug outlines and debug spatial hashmap stuff
     * Could also maybe allow adding custom commands

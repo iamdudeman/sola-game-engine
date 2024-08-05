@@ -30,13 +30,16 @@ public record ColliderShapeAABB(
   }
 
   @Override
-  public float getBoundingWidth(float transformScaleX) {
-    return width * transformScaleX;
-  }
+  public Rectangle getBoundingBox(TransformComponent transformComponent, float offsetX, float offsetY) {
+    Vector2D min = transformComponent.getTranslate().add(new Vector2D(offsetX, offsetY));
 
-  @Override
-  public float getBoundingHeight(float transformScaleY) {
-    return height * transformScaleY;
+    return new Rectangle(
+      min,
+      min.add(new Vector2D(
+        width * transformComponent.getScaleX(),
+        height * transformComponent.getScaleY()
+      ))
+    );
   }
 
   @Override

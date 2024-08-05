@@ -8,6 +8,7 @@ import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.math.SolaMath;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
+import technology.sola.math.geometry.Shape;
 import technology.sola.math.linear.Vector2D;
 
 /**
@@ -40,6 +41,9 @@ public final class CollisionUtils {
         case CIRCLE -> calculateAABBVsCircle(
           entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
+        case TRIANGLE -> calculateShapeVsShapeSAT(
+          entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
+        );
       };
       case CIRCLE -> switch (colliderB.getType()) {
         case AABB -> calculateAABBVsCircle(
@@ -47,6 +51,17 @@ public final class CollisionUtils {
         );
         case CIRCLE -> calculateCircleVsCircle(
           entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
+        );
+        case TRIANGLE -> calculateCircleVsShapeSAT(
+          entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
+        );
+      };
+      case TRIANGLE -> switch (colliderB.getType()) {
+        case AABB, TRIANGLE -> calculateShapeVsShapeSAT(
+          entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
+        );
+        case CIRCLE -> calculateCircleVsShapeSAT(
+          entityB, entityA, colliderB.getShape(transformB), colliderA.getShape(transformA)
         );
       };
     };
@@ -85,11 +100,13 @@ public final class CollisionUtils {
       return null;
     }
 
-    float penetration = circle.radius() - closestPointOnRectangle.distance(circleCenter);
+    float distance = closestPointOnRectangle.distance(circleCenter);
+    float penetration = circle.radius() - distance;
     Vector2D normal = diff.normalize();
 
-    // If not inside
-    if (!isCircleCenterInsideRectangle) {
+    if (isCircleCenterInsideRectangle) {
+      penetration = circle.radius() + distance;
+    } else {
       normal = normal.scalar(-1);
     }
 
@@ -165,7 +182,32 @@ public final class CollisionUtils {
     return new CollisionManifold(entityA, entityB, normal, penetration);
   }
 
+  private static CollisionManifold calculateShapeVsShapeSAT(
+    Entity entityA, Entity entityB,
+    Shape shapeA, Shape shapeB
+  ) {
+    var minimumTranslationVector = SeparatingAxisTheorem.checkCollision(shapeA.getPoints(), shapeB.getPoints());
+
+    if (minimumTranslationVector == null) {
+      return null;
+    }
+
+    return new CollisionManifold(entityA, entityB, minimumTranslationVector.normal(), minimumTranslationVector.penetration());
+  }
+
+  private static CollisionManifold calculateCircleVsShapeSAT(
+    Entity entityA, Entity entityB,
+    Circle circle, Shape shape
+  ) {
+    var minimumTranslationVector = SeparatingAxisTheorem.checkCollision(shape.getPoints(), circle);
+
+    if (minimumTranslationVector == null) {
+      return null;
+    }
+
+    return new CollisionManifold(entityB, entityA, minimumTranslationVector.normal(), minimumTranslationVector.penetration());
+  }
+
   private CollisionUtils() {
   }
 }
-

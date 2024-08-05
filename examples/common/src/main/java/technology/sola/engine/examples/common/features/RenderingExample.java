@@ -13,18 +13,16 @@ import technology.sola.engine.defaults.SolaGraphics;
 import technology.sola.engine.defaults.graphics.modules.CircleEntityGraphicsModule;
 import technology.sola.engine.defaults.graphics.modules.RectangleEntityGraphicsModule;
 import technology.sola.engine.defaults.graphics.modules.SpriteEntityGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.TriangleEntityGraphicsModule;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.components.BlendModeComponent;
-import technology.sola.engine.graphics.components.CircleRendererComponent;
-import technology.sola.engine.graphics.components.LayerComponent;
-import technology.sola.engine.graphics.components.RectangleRendererComponent;
-import technology.sola.engine.graphics.components.SpriteComponent;
+import technology.sola.engine.graphics.components.*;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Layer;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
+import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.List;
@@ -59,6 +57,7 @@ public class RenderingExample extends Sola {
     solaGraphics.addGraphicsModules(
       new CircleEntityGraphicsModule(),
       new RectangleEntityGraphicsModule(),
+      new TriangleEntityGraphicsModule(),
       new SpriteEntityGraphicsModule(assetLoaderProvider.get(SpriteSheet.class))
     );
 
@@ -237,6 +236,37 @@ public class RenderingExample extends Sola {
       .addComponent(new LayerComponent("background"))
       .addComponent(new TransformComponent(100, 100, 60, 80))
       .addComponent(new RectangleRendererComponent(Color.RED, false));
+
+    Triangle triangle1 = new Triangle(new Vector2D(0, 0), new Vector2D(5, 10), new Vector2D(10, 0));
+    Triangle triangle2 = new Triangle(new Vector2D(0, 0), new Vector2D(0, 10), new Vector2D(10, 0));
+    Triangle triangle3 = new Triangle(new Vector2D(0, 0), new Vector2D(10, 0), new Vector2D(10, 10));
+
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(640, 200, 6, 8))
+      .addComponent(new TriangleRendererComponent(Color.GREEN, true, triangle1));
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(640, 200, 6, 8))
+      .addComponent(new TriangleRendererComponent(Color.RED, false, triangle1));
+
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(600, 290, 6, 8))
+      .addComponent(new TriangleRendererComponent(Color.RED, false, triangle2));
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(600, 290, 6, 8))
+      .addComponent(new TriangleRendererComponent(Color.GREEN, true, triangle2));
+
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(680, 290, 6, 8))
+      .addComponent(new TriangleRendererComponent(Color.GREEN, true, triangle3));
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(680, 290, 6, 8))
+      .addComponent(new TriangleRendererComponent(Color.RED, false, triangle3));
 
     world.createEntity()
       .addComponent(new LayerComponent("background"))
