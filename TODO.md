@@ -10,8 +10,6 @@
 
 ## Planned Cleanup List
 
-* MinimumTranslationVector could be a separate file and used by CollisionManifold and SeparatingAxisTheorem
-
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List

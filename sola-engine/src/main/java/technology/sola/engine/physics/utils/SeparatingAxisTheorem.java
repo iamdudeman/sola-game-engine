@@ -1,6 +1,6 @@
 package technology.sola.engine.physics.utils;
 
-import technology.sola.math.geometry.Circle;
+import technology.sola.engine.physics.MinimumTranslationVector;
 import technology.sola.math.geometry.Shape;
 import technology.sola.math.linear.Vector2D;
 
@@ -51,24 +51,25 @@ public class SeparatingAxisTheorem {
   }
 
   /**
-   * Checks for collisions between a shape and a {@link Circle}. If a collision is detected
+   * Checks for collisions between a shape and a circle. If a collision is detected
    * the {@link MinimumTranslationVector} will be returned. If no collision is found then null will be returned.
    *
-   * @param shape the array of points of a shape to check collisions with
-   * @param circle the circle to check collisions with
+   * @param shape        the array of points of a shape to check collisions with
+   * @param circleCenter the circle center to check collisions with
+   * @param radius       the circle radius to check collisions with
    * @return the {@code MinimumTranslationVector} if a collision was found or else null
    */
-  public static MinimumTranslationVector checkCollision(Vector2D[] shape, Circle circle) {
+  public static MinimumTranslationVector checkCollision(Vector2D[] shape, Vector2D circleCenter, float radius) {
     float smallestOverlap = Float.MAX_VALUE;
     Vector2D smallestAxis = null;
     Vector2D[] axes = new Vector2D[shape.length + 1];
 
     System.arraycopy(getAxes(shape), 0, axes, 0, shape.length);
-    axes[shape.length] = getClosestPointOnShapeAxis(circle.center(), shape);
+    axes[shape.length] = getClosestPointOnShapeAxis(circleCenter, shape);
 
     for (Vector2D axis : axes) {
       Projection p1 = projectShapeToAxis(shape, axis);
-      Projection p2 = projectCircleToAxis(circle, axis);
+      Projection p2 = projectCircleToAxis(circleCenter, radius, axis);
 
       if (p1.isOverlapping(p2)) {
         float overlap = p1.getOverlap(p2);
@@ -83,7 +84,7 @@ public class SeparatingAxisTheorem {
     }
 
     Vector2D centroidA = Shape.calculateCentroid(shape);
-    Vector2D centroidB = circle.getCentroid();
+    Vector2D centroidB = circleCenter;
 
     if (centroidB.subtract(centroidA).dot(smallestAxis) < 0) {
       smallestAxis = smallestAxis.scalar(-1);
@@ -92,11 +93,11 @@ public class SeparatingAxisTheorem {
     return new MinimumTranslationVector(smallestAxis, smallestOverlap);
   }
 
-  private static Projection projectCircleToAxis(Circle circle, Vector2D axis) {
-    Vector2D directionAndRadius = axis.scalar(circle.radius());
+  private static Projection projectCircleToAxis(Vector2D circleCenter, float radius, Vector2D axis) {
+    Vector2D directionAndRadius = axis.scalar(radius);
 
-    Vector2D p1 = circle.center().add(directionAndRadius);
-    Vector2D p2 = circle.center().subtract(directionAndRadius);
+    Vector2D p1 = circleCenter.add(directionAndRadius);
+    Vector2D p2 = circleCenter.subtract(directionAndRadius);
 
     float min = p1.dot(axis);
     float max = p2.dot(axis);
@@ -161,21 +162,12 @@ public class SeparatingAxisTheorem {
     return closestPoint.subtract(circleCenter).normalize();
   }
 
-  /**
-   * The minimum translation vector contains the information needed to resolve a collision.
-   *
-   * @param normal      the collision normal
-   * @param penetration the penetration of the collision
-   */
-  public record MinimumTranslationVector(Vector2D normal, float penetration) {
-  }
-
   private record Projection(float min, float max) {
-    boolean isOverlapping(Projection projection) {
+    public boolean isOverlapping(Projection projection) {
       return projection.max >= min && max >= projection.min;
     }
 
-    float getOverlap(Projection projection) {
+    public float getOverlap(Projection projection) {
       float overlap = Math.max(0, Math.min(max, projection.max) - Math.max(min, projection.min));
 
       if (contains(projection) || projection.contains(this)) {
@@ -188,7 +180,7 @@ public class SeparatingAxisTheorem {
       return overlap;
     }
 
-    boolean contains(Projection projection) {
+    private boolean contains(Projection projection) {
       return min <= projection.min && projection.min <= max && min <= projection.max && projection.max <= max;
     }
   }
