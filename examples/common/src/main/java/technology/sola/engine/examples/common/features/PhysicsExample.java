@@ -93,22 +93,22 @@ public class PhysicsExample extends SolaWithDefaults {
         .setOnAction(() -> {
           resetRandom(randomSeedInput.getValue());
           solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
-            new SpatialHashMapCollisionDetectionBroadPhase()
-          );
-          solaEcs.setWorld(buildSpatialHashMapOptimizedWorld());
-        })
-        .addStyle(ConditionalStyle.always(BaseStyles.create().setPadding(5).build()))
-        .appendChildren(new TextGuiElement().setText("SpatialHashMap")),
-      new ButtonGuiElement()
-        .setOnAction(() -> {
-          resetRandom(randomSeedInput.getValue());
-          solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
             new QuadTreeCollisionDetectionBroadPhase()
           );
           solaEcs.setWorld(buildQuadTreeOptimizedWorld());
         })
         .addStyle(ConditionalStyle.always(BaseStyles.create().setPadding(5).build()))
         .appendChildren(new TextGuiElement().setText("QuadTree")),
+      new ButtonGuiElement()
+        .setOnAction(() -> {
+          resetRandom(randomSeedInput.getValue());
+          solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
+            new SpatialHashMapCollisionDetectionBroadPhase()
+          );
+          solaEcs.setWorld(buildSpatialHashMapOptimizedWorld());
+        })
+        .addStyle(ConditionalStyle.always(BaseStyles.create().setPadding(5).build()))
+        .appendChildren(new TextGuiElement().setText("SpatialHashMap")),
       new ButtonGuiElement()
         .setOnAction(() -> {
           randomSeedInput.setValue("" + new Random().nextLong());
@@ -124,29 +124,14 @@ public class PhysicsExample extends SolaWithDefaults {
   }
 
   private World buildQuadTreeOptimizedWorld() {
-    Material circleMaterial = new Material(1, 0.8f);
     float zoomedWidth = configuration.rendererWidth() / CAMERA_SCALE;
     float zoomedHeight = configuration.rendererHeight() / CAMERA_SCALE;
     float squareSide = CIRCLE_RADIUS;
 
-    World world = new World(objectCount + 4 + 5);
+    int entityCount = objectCount + 4 + 5;
+    World world = buildWorld(entityCount, zoomedWidth, zoomedHeight);
 
-    world.createEntity()
-      .addComponent(new TransformComponent(0, 0, CAMERA_SCALE, CAMERA_SCALE))
-      .addComponent(new CameraComponent());
-
-    for (int i = 0; i < objectCount; i++) {
-      float x = random.nextFloat() * (zoomedWidth - 5 * CIRCLE_RADIUS) + 2 * CIRCLE_RADIUS;
-      float y = random.nextFloat() * (zoomedHeight - 5 * CIRCLE_RADIUS) + 2 * CIRCLE_RADIUS;
-      boolean isKinematic = random.nextFloat() > 0.9f;
-
-      world.createEntity()
-        .addComponent(new TransformComponent(x, y, CIRCLE_RADIUS))
-        .addComponent(new DynamicBodyComponent(circleMaterial, isKinematic))
-        .addComponent(new CircleRendererComponent(isKinematic ? Color.WHITE : Color.BLUE, true))
-        .addComponent(new ColliderComponent(new ColliderShapeCircle()));
-    }
-
+    // squares
     world.createEntity(
       new TransformComponent(0, 0, squareSide, zoomedHeight),
       new ColliderComponent(new ColliderShapeAABB())
@@ -160,68 +145,21 @@ public class PhysicsExample extends SolaWithDefaults {
       new ColliderComponent(new ColliderShapeAABB())
     );
 
-    // triangles
-    var triangleShape = new Triangle(new Vector2D(0, 0), new Vector2D(0.5f, -1), new Vector2D(1, 0));
-
-    world.createEntity(
-      new TransformComponent(100, 600, 50, 50),
-      new TriangleRendererComponent(Color.GREEN, triangleShape),
-      new ColliderComponent(new ColliderShapeTriangle(triangleShape))
-    );
-
-    world.createEntity(
-      new TransformComponent(300, 600, 50),
-      new TriangleRendererComponent(Color.GREEN),
-      new ColliderComponent(new ColliderShapeTriangle())
-    );
-
-    world.createEntity(
-      new TransformComponent(500, 600, 25, 50),
-      new TriangleRendererComponent(Color.GREEN),
-      new ColliderComponent(new ColliderShapeTriangle())
-    );
-
-    world.createEntity(
-      new TransformComponent(700, 600, 50, 20),
-      new TriangleRendererComponent(Color.GREEN),
-      new ColliderComponent(new ColliderShapeTriangle())
-    );
-
-    world.createEntity(
-      new TransformComponent(900, 600, 50, 20),
-      new TriangleRendererComponent(Color.GREEN, triangleShape),
-      new ColliderComponent(new ColliderShapeTriangle(triangleShape))
-    );
-
     return world;
   }
 
   private World buildSpatialHashMapOptimizedWorld() {
-    Material circleMaterial = new Material(1, 0.8f);
     float zoomedWidth = configuration.rendererWidth() / CAMERA_SCALE;
     float zoomedHeight = configuration.rendererHeight() / CAMERA_SCALE;
     float squareSide = CIRCLE_RADIUS;
     int bottomPlatformEntityCount = Math.round(zoomedWidth / squareSide) + 1;
     int sidePlatformEntityCount = Math.round(zoomedHeight / squareSide) * 2 + 2;
 
-    World world = new World(objectCount + bottomPlatformEntityCount + sidePlatformEntityCount + 1 + 5);
+    int entityCount = objectCount + bottomPlatformEntityCount + sidePlatformEntityCount + 1 + 5;
 
-    world.createEntity()
-      .addComponent(new TransformComponent(0, 0, CAMERA_SCALE, CAMERA_SCALE))
-      .addComponent(new CameraComponent());
+    World world = buildWorld(entityCount, zoomedWidth, zoomedHeight);
 
-    for (int i = 0; i < objectCount; i++) {
-      float x = random.nextFloat() * (zoomedWidth - 5 * CIRCLE_RADIUS) + 2 * CIRCLE_RADIUS;
-      float y = random.nextFloat() * (zoomedHeight - 5 * CIRCLE_RADIUS) + 2 * CIRCLE_RADIUS;
-      boolean isKinematic = random.nextFloat() > 0.9f;
-
-      world.createEntity()
-        .addComponent(new TransformComponent(x, y, CIRCLE_RADIUS))
-        .addComponent(new DynamicBodyComponent(circleMaterial, isKinematic))
-        .addComponent(new CircleRendererComponent(isKinematic ? Color.WHITE : Color.BLUE, true))
-        .addComponent(new ColliderComponent(new ColliderShapeCircle()));
-    }
-
+    // squares
     for (int i = 0; i < zoomedHeight; i += squareSide) {
       world.createEntity()
         .addComponent(new TransformComponent(0, i, squareSide, squareSide))
@@ -238,6 +176,30 @@ public class PhysicsExample extends SolaWithDefaults {
       world.createEntity()
         .addComponent(new TransformComponent(i, zoomedHeight - squareSide, squareSide, squareSide))
         .addComponent(new ColliderComponent(new ColliderShapeAABB()));
+    }
+
+    return world;
+  }
+
+  private World buildWorld(int entityCount, float zoomedWidth, float zoomedHeight) {
+    Material circleMaterial = new Material(1, 0.8f);
+    World world = new World(entityCount);
+
+    world.createEntity()
+      .addComponent(new TransformComponent(0, 0, CAMERA_SCALE, CAMERA_SCALE))
+      .addComponent(new CameraComponent());
+
+    // circles
+    for (int i = 0; i < objectCount; i++) {
+      float x = random.nextFloat() * (zoomedWidth - 5 * CIRCLE_RADIUS) + 2 * CIRCLE_RADIUS;
+      float y = random.nextFloat() * (zoomedHeight - 5 * CIRCLE_RADIUS) + 2 * CIRCLE_RADIUS;
+      boolean isKinematic = random.nextFloat() > 0.9f;
+
+      world.createEntity()
+        .addComponent(new TransformComponent(x, y, CIRCLE_RADIUS))
+        .addComponent(new DynamicBodyComponent(circleMaterial, isKinematic))
+        .addComponent(new CircleRendererComponent(isKinematic ? Color.WHITE : Color.BLUE, true))
+        .addComponent(new ColliderComponent(new ColliderShapeCircle()));
     }
 
     // triangles
