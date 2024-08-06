@@ -6,7 +6,7 @@
       "direction": "column",
       "gap": 10,
       "padding": 10,
-      "crossAxisChildren": "end",
+      "mainAxisChildren": "end",
       "height": "100%",
       "width": "100%"
     }

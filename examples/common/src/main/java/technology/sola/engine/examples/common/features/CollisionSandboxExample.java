@@ -3,6 +3,7 @@ package technology.sola.engine.examples.common.features;
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
@@ -28,6 +29,8 @@ public class CollisionSandboxExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+
     var guiTheme = DefaultThemeBuilder.buildDarkTheme()
         .addStyle(ButtonGuiElement.class, List.of(ConditionalStyle.always(
           BaseStyles.create()
