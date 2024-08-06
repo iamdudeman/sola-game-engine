@@ -494,7 +494,9 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   }
 
   void resizeBounds(int width, int height) {
-    setBounds(bounds.setDimensions(width, height));
+    if (bounds.width() != width || bounds.height() != height) {
+      setBounds(bounds.setDimensions(width, height));
+    }
   }
 
   void resizeContent(int width, int height) {
