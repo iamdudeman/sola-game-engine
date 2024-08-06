@@ -11,6 +11,7 @@ import technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
+import technology.sola.engine.graphics.components.TriangleRendererComponent;
 import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
@@ -24,6 +25,8 @@ import technology.sola.engine.input.MouseButton;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
+import technology.sola.engine.physics.component.collider.ColliderShapeTriangle;
+import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
@@ -92,7 +95,7 @@ public class CollisionSandboxExample extends SolaWithDefaults {
         return;
       }
 
-      Vector2D firstPoint = createShapeSystem.firstPoint;
+      Vector2D firstPoint = createShapeSystem.firstPoint == null ? null : cameraTranslationTransform.multiply(createShapeSystem.firstPoint);
 
       if (firstPoint == null) {
         return;
@@ -108,7 +111,14 @@ public class CollisionSandboxExample extends SolaWithDefaults {
 
         renderer.drawCircle(firstPoint.x(), firstPoint.y(), radius, color);
       } else if (currentMode == InteractionMode.CREATE_TRIANGLE) {
-        // todo
+        var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
+
+        if (secondPoint == null) {
+          renderer.drawLine(firstPoint.x(), firstPoint.y(), point.x(), point.y(), color);
+        } else {
+          renderer.drawLine(firstPoint.x(), firstPoint.y(), secondPoint.x(), secondPoint.y(), color);
+          renderer.drawLine(secondPoint.x(), secondPoint.y(), point.x(), point.y(), color);
+        }
       } else if (currentMode == InteractionMode.CREATE_AABB) {
         // todo
       }
@@ -148,7 +158,19 @@ public class CollisionSandboxExample extends SolaWithDefaults {
           );
           reset();
         } else if (currentMode == InteractionMode.CREATE_TRIANGLE) {
-          // todo
+          if (secondPoint == null) {
+            secondPoint = point;
+          } else {
+            Triangle triangle = new Triangle(firstPoint, secondPoint, point);
+
+            world.createEntity(
+              new TransformComponent(0, 0),
+              new TriangleRendererComponent(Color.BLUE, triangle),
+              new DynamicBodyComponent(),
+              new ColliderComponent(new ColliderShapeTriangle(triangle))
+            );
+            reset();
+          }
         } else if (currentMode == InteractionMode.CREATE_AABB) {
           // todo
         }
