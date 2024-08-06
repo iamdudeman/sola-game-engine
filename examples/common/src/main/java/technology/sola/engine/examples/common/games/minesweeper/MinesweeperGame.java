@@ -27,7 +27,7 @@ public class MinesweeperGame extends SolaWithDefaults {
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public MinesweeperGame() {
-    super(SolaConfiguration.build("Minesweeper", 801, 686).withTargetUpdatesPerSecond(30));
+    super(new SolaConfiguration("Minesweeper", 801, 686, 30));
   }
 
   @Override

@@ -41,15 +41,6 @@ public abstract class Sola {
   protected AssetLoaderProvider assetLoaderProvider;
 
   /**
-   * Creates a Sola instance with desired {@link SolaConfiguration} from a {@link SolaConfiguration.Builder}.
-   *
-   * @param solaConfigurationBuilder the configuration builder
-   */
-  protected Sola(SolaConfiguration.Builder solaConfigurationBuilder) {
-    this(solaConfigurationBuilder.build());
-  }
-
-  /**
    * Creates a Sola instance with desired {@link SolaConfiguration}.
    *
    * @param configuration the configuration for the Sola

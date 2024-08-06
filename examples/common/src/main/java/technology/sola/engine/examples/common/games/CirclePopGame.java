@@ -31,7 +31,7 @@ public class CirclePopGame extends SolaWithDefaults {
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public CirclePopGame() {
-    super(SolaConfiguration.build("Circle Pop", 800, 600).withTargetUpdatesPerSecond(30));
+    super(new SolaConfiguration("Circle Pop", 800, 600, 30));
   }
 
   @Override

@@ -26,7 +26,7 @@ public class SmallPhysicsTestSola extends SolaWithDefaults {
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public SmallPhysicsTestSola() {
-    super(SolaConfiguration.build("Small Physics Test", 800, 600).build());
+    super(new SolaConfiguration("Small Physics Test", 800, 600));
   }
 
   @Override

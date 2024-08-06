@@ -36,7 +36,7 @@ public class NetworkingExample extends SolaWithDefaults {
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public NetworkingExample() {
-    super(SolaConfiguration.build("Networking Example", 800, 600).withTargetUpdatesPerSecond(30));
+    super(new SolaConfiguration("Networking Example", 800, 600, 30));
   }
 
   @Override

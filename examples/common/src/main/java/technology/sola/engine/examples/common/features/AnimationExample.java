@@ -29,9 +29,7 @@ public class AnimationExample extends SolaWithDefaults {
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public AnimationExample() {
-    super(
-      SolaConfiguration.build("Animation Example", 210, 200).withTargetUpdatesPerSecond(30)
-    );
+    super(new SolaConfiguration("Animation Example", 210, 200, 30));
   }
 
   @Override

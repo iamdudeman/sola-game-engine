@@ -20,7 +20,7 @@ public class GuiExample extends SolaWithDefaults {
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public GuiExample() {
-    super(SolaConfiguration.build("Gui Example", 800, 700).withTargetUpdatesPerSecond(30));
+    super(new SolaConfiguration("Gui Example", 800, 700, 30));
   }
 
   @Override

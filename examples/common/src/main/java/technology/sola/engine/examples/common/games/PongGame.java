@@ -36,7 +36,7 @@ public class PongGame extends SolaWithDefaults {
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public PongGame() {
-    super(SolaConfiguration.build("Pong", 858, 525).withTargetUpdatesPerSecond(60));
+    super(new SolaConfiguration("Pong", 858, 525));
   }
 
   @Override
