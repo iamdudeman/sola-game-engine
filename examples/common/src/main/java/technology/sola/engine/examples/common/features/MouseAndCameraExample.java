@@ -31,7 +31,7 @@ public class MouseAndCameraExample extends SolaWithDefaults {
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public MouseAndCameraExample() {
-    super(SolaConfiguration.build("Mouse and Camera", 800, 600).withTargetUpdatesPerSecond(30));
+    super(new SolaConfiguration("Mouse and Camera", 800, 600, 30));
   }
 
   @Override

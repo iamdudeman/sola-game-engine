@@ -64,16 +64,6 @@ public abstract class SolaWithDefaults extends Sola {
   private Color backgroundColor = Color.BLACK;
 
   /**
-   * Creates a SolaWithDefaults instance with desired {@link SolaConfiguration} from a {@link SolaConfiguration.Builder}.
-   *
-   * @param solaConfigurationBuilder the configuration builder
-   */
-  protected SolaWithDefaults(SolaConfiguration.Builder solaConfigurationBuilder) {
-    super(solaConfigurationBuilder);
-    this.solaControls = new SolaControls(keyboardInput, mouseInput);
-  }
-
-  /**
    * Creates a SolaWithDefaults instance with desired {@link SolaConfiguration}.
    *
    * @param configuration the configuration for the Sola

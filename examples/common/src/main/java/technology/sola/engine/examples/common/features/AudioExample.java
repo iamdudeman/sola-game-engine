@@ -37,7 +37,7 @@ public class AudioExample extends SolaWithDefaults {
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public AudioExample() {
-    super(SolaConfiguration.build("Audio Example", 600, 400).withTargetUpdatesPerSecond(30));
+    super(new SolaConfiguration("Audio Example", 600, 400, 30));
   }
 
   @Override

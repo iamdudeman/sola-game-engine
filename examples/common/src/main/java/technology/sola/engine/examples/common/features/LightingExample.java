@@ -40,7 +40,7 @@ public class LightingExample extends SolaWithDefaults {
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public LightingExample() {
-    super(SolaConfiguration.build("Lighting", 256, 240).withTargetUpdatesPerSecond(30));
+    super(new SolaConfiguration("Lighting", 256, 240, 30));
   }
 
   @Override

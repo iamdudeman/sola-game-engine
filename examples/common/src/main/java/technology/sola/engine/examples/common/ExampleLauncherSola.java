@@ -64,7 +64,7 @@ public class ExampleLauncherSola extends SolaWithDefaults {
    * @param solaPlatform the {@link SolaPlatform} that will launch the examples
    */
   public ExampleLauncherSola(SolaPlatform solaPlatform) {
-    super(SolaConfiguration.build("Example Launcher", 800, 600).withTargetUpdatesPerSecond(30));
+    super(new SolaConfiguration("Example Launcher", 800, 600, 30));
     this.solaPlatform = solaPlatform;
   }
 

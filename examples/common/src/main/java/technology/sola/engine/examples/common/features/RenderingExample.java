@@ -45,7 +45,7 @@ public class RenderingExample extends Sola {
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public RenderingExample() {
-    super(SolaConfiguration.build("Rendering Example", 800, 600).withTargetUpdatesPerSecond(30));
+    super(new SolaConfiguration("Rendering Example", 800, 600, 30));
 
     solaGraphics = new SolaGraphics(solaEcs);
   }

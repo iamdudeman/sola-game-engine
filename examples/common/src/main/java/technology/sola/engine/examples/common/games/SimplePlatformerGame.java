@@ -41,7 +41,7 @@ public class SimplePlatformerGame extends SolaWithDefaults {
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public SimplePlatformerGame() {
-    super(SolaConfiguration.build("Simple Platformer", 800, 600).withTargetUpdatesPerSecond(30));
+    super(new SolaConfiguration("Simple Platformer", 800, 600, 30));
   }
 
   @Override
