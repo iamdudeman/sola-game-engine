@@ -10,8 +10,6 @@
 
 ## Planned Cleanup List
 
-* Switch SolaConfiguration from not using Builder pattern
-
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
