@@ -107,9 +107,11 @@ public class CollisionSandboxExample extends SolaWithDefaults {
 
       if (currentMode == InteractionMode.CREATE_CIRCLE) {
         var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
-        var radius = firstPoint.distance(point) * 0.5f;
+        var min = new Vector2D(Math.min(firstPoint.x(), point.x()), Math.min(firstPoint.y(), point.y()));
+        var max = new Vector2D(Math.max(firstPoint.x(), point.x()), Math.max(firstPoint.y(), point.y()));
+        float radius = max.distance(min) / 2f;
 
-        renderer.drawCircle(firstPoint.x(), firstPoint.y(), radius, color);
+        renderer.drawCircle(min.x(), min.y(), radius, color);
       } else if (currentMode == InteractionMode.CREATE_TRIANGLE) {
         var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
 
@@ -151,7 +153,10 @@ public class CollisionSandboxExample extends SolaWithDefaults {
         }
 
         if (currentMode == InteractionMode.CREATE_CIRCLE) {
-          float radius = firstPoint.distance(point);
+          var min = new Vector2D(Math.min(firstPoint.x(), point.x()), Math.min(firstPoint.y(), point.y()));
+          var max = new Vector2D(Math.max(firstPoint.x(), point.x()), Math.max(firstPoint.y(), point.y()));
+
+          float radius = max.distance(min);
 
           world.createEntity(
             new TransformComponent(firstPoint.x(), firstPoint.y(), radius),
