@@ -11,6 +11,7 @@ import technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
+import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.components.TriangleRendererComponent;
 import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
@@ -24,6 +25,7 @@ import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
+import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
 import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
 import technology.sola.engine.physics.component.collider.ColliderShapeTriangle;
 import technology.sola.math.geometry.Triangle;
@@ -120,7 +122,14 @@ public class CollisionSandboxExample extends SolaWithDefaults {
           renderer.drawLine(secondPoint.x(), secondPoint.y(), point.x(), point.y(), color);
         }
       } else if (currentMode == InteractionMode.CREATE_AABB) {
-        // todo
+        var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
+
+        if (secondPoint == null) {
+          renderer.drawLine(firstPoint.x(), firstPoint.y(), point.x(), firstPoint.y(), color);
+        } else {
+          renderer.drawLine(firstPoint.x(), firstPoint.y(), secondPoint.x(), secondPoint.y(), color);
+          renderer.drawLine(secondPoint.x(), secondPoint.y(), secondPoint.x(), point.y(), color);
+        }
       }
     }
   }
@@ -165,14 +174,35 @@ public class CollisionSandboxExample extends SolaWithDefaults {
 
             world.createEntity(
               new TransformComponent(0, 0),
-              new TriangleRendererComponent(Color.BLUE, triangle),
+              new TriangleRendererComponent(Color.BLUE, false, triangle),
               new DynamicBodyComponent(),
               new ColliderComponent(new ColliderShapeTriangle(triangle))
             );
             reset();
           }
         } else if (currentMode == InteractionMode.CREATE_AABB) {
-          // todo
+          if (secondPoint == null) {
+            secondPoint = new Vector2D(point.x(), firstPoint.y());
+          } else if (thirdPoint == null) {
+            thirdPoint = new Vector2D(secondPoint.x(), point.y());
+
+            var min = new Vector2D(
+              Math.min(firstPoint.x(), secondPoint.x()),
+              Math.min(firstPoint.y(), thirdPoint.y())
+            );
+            var max = new Vector2D(
+              Math.max(firstPoint.x(), secondPoint.x()),
+              Math.max(firstPoint.y(), thirdPoint.y())
+            );
+
+            world.createEntity(
+              new TransformComponent(min.x(), min.y(), max.x() - min.x(), max.y() - min.y()),
+              new RectangleRendererComponent(Color.BLUE, false),
+              new DynamicBodyComponent(),
+              new ColliderComponent(new ColliderShapeAABB())
+            );
+            reset();
+          }
         }
       }
     }
