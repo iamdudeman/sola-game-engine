@@ -242,6 +242,9 @@ public class CollisionSandboxExample extends SolaWithDefaults {
       if (keyboardInput.isKeyHeld(Key.D)) {
         controlledView.c2().applyForce(force, 0);
       }
+      if (keyboardInput.isKeyPressed(Key.DELETE)) {
+        controlledView.entity().destroy();
+      }
     }
   }
 
