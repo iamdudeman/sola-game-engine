@@ -7,18 +7,25 @@ import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
+import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
 import technology.sola.engine.graphics.gui.style.property.Visibility;
 import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
+import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
+import technology.sola.math.linear.Matrix3D;
+import technology.sola.math.linear.Vector2D;
 
 import java.util.List;
 
@@ -30,6 +37,7 @@ public class CollisionSandboxExample extends SolaWithDefaults {
       .build()
   );
   private InteractionMode currentMode = InteractionMode.SELECT;
+  private int currentStep = 0;
 
   public CollisionSandboxExample() {
     super(new SolaConfiguration("Collision Sandbox", 800, 600));
@@ -52,8 +60,12 @@ public class CollisionSandboxExample extends SolaWithDefaults {
 
     solaPhysics.getGravitySystem().setActive(false);
 
-    solaEcs.addSystem(new ControlledShapeSystem());
+    CreateShapeSystem createShapeSystem = new CreateShapeSystem();
+
+    solaEcs.addSystems(new ControlledShapeSystem(), createShapeSystem);
     solaEcs.setWorld(new World(100));
+
+    solaGraphics.addGraphicsModules(new CreateShapeGraphicsModule(createShapeSystem));
   }
 
   @Override
@@ -67,9 +79,93 @@ public class CollisionSandboxExample extends SolaWithDefaults {
       });
   }
 
+  private class CreateShapeGraphicsModule extends SolaGraphicsModule {
+    private final CreateShapeSystem createShapeSystem;
+
+    public CreateShapeGraphicsModule(CreateShapeSystem createShapeSystem) {
+      this.createShapeSystem = createShapeSystem;
+    }
+
+    @Override
+    public void renderMethod(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
+      if (currentMode == InteractionMode.SELECT) {
+        return;
+      }
+
+      Vector2D firstPoint = createShapeSystem.firstPoint;
+
+      if (firstPoint == null) {
+        return;
+      }
+
+      Vector2D secondPoint = createShapeSystem.secondPoint == null ? null : cameraTranslationTransform.multiply(createShapeSystem.secondPoint);
+      Vector2D thirdPoint = createShapeSystem.thirdPoint == null ? null : cameraTranslationTransform.multiply(createShapeSystem.thirdPoint);
+      Color color = Color.GREEN;
+
+      if (currentMode == InteractionMode.CREATE_CIRCLE) {
+        var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
+        var radius = firstPoint.distance(point) * 0.5f;
+
+        renderer.drawCircle(firstPoint.x(), firstPoint.y(), radius, color);
+      } else if (currentMode == InteractionMode.CREATE_TRIANGLE) {
+        // todo
+      } else if (currentMode == InteractionMode.CREATE_AABB) {
+        // todo
+      }
+    }
+  }
+
+  private class CreateShapeSystem extends EcsSystem {
+    Vector2D firstPoint;
+    Vector2D secondPoint;
+    Vector2D thirdPoint;
+
+    @Override
+    public void update(World world, float deltaTime) {
+      if (currentMode == InteractionMode.SELECT) {
+        reset();
+        return;
+      }
+
+      if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
+        var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
+
+        currentStep++;
+
+        if (firstPoint == null) {
+          firstPoint = point;
+          return;
+        }
+
+        if (currentMode == InteractionMode.CREATE_CIRCLE) {
+          float radius = firstPoint.distance(point);
+
+          world.createEntity(
+            new TransformComponent(firstPoint.x(), firstPoint.y(), radius),
+            new CircleRendererComponent(Color.BLUE, false),
+            new DynamicBodyComponent(),
+            new ColliderComponent(new ColliderShapeCircle())
+          );
+          reset();
+        } else if (currentMode == InteractionMode.CREATE_TRIANGLE) {
+          // todo
+        } else if (currentMode == InteractionMode.CREATE_AABB) {
+          // todo
+        }
+      }
+    }
+
+    private void reset() {
+      currentStep = 0;
+      firstPoint = null;
+      secondPoint = null;
+      thirdPoint = null;
+    }
+  }
+
   private class ControlledShapeSystem extends EcsSystem {
     @Override
-    public void update(World world, float v) {
+    public void update(World world, float deltaTime) {
       var controlledViews = world.createView().of(ControlledComponent.class, DynamicBodyComponent.class)
         .getEntries();
 
@@ -137,7 +233,9 @@ public class CollisionSandboxExample extends SolaWithDefaults {
 
   private void registerButtonAction(String id, Key key, Runnable action) {
     guiDocument.findElementById(id, ButtonGuiElement.class)
-      .setOnAction(action)
+      .setOnAction(action);
+
+    guiDocument.findElementById("root", SectionGuiElement.class)
       .events()
       .keyPressed()
       .on(event -> {
@@ -148,10 +246,8 @@ public class CollisionSandboxExample extends SolaWithDefaults {
   }
 
   private Runnable buildCreateShapeAction(InteractionMode interactionMode) {
-    // todo
-
     return () -> {
-      // todo
+      currentStep = 0;
       currentMode = interactionMode;
     };
   }
