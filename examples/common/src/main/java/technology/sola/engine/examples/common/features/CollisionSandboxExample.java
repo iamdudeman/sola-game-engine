@@ -24,7 +24,7 @@ public class CollisionSandboxExample extends SolaWithDefaults {
   );
 
   public CollisionSandboxExample() {
-    super(SolaConfiguration.build("Collision Sandbox", 800, 600).withTargetUpdatesPerSecond(60).build());
+    super(new SolaConfiguration("Collision Sandbox", 800, 600));
   }
 
   @Override
