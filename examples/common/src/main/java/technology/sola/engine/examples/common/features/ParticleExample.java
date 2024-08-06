@@ -25,7 +25,7 @@ public class ParticleExample extends SolaWithDefaults {
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public ParticleExample() {
-    super(SolaConfiguration.build("Particle Example", 800, 600).withTargetUpdatesPerSecond(30));
+    super(new SolaConfiguration("Particle Example", 800, 600, 30));
   }
 
   @Override
