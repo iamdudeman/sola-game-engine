@@ -42,7 +42,6 @@ public class CollisionSandboxExample extends SolaWithDefaults {
       .build()
   );
   private InteractionMode currentMode = InteractionMode.SELECT;
-  private int currentStep = 0;
 
   public CollisionSandboxExample() {
     super(new SolaConfiguration("Collision Sandbox", 800, 600));
@@ -104,8 +103,7 @@ public class CollisionSandboxExample extends SolaWithDefaults {
       }
 
       Vector2D secondPoint = createShapeSystem.secondPoint == null ? null : cameraTranslationTransform.multiply(createShapeSystem.secondPoint);
-      Vector2D thirdPoint = createShapeSystem.thirdPoint == null ? null : cameraTranslationTransform.multiply(createShapeSystem.thirdPoint);
-      Color color = Color.GREEN;
+      Color color = Color.WHITE;
 
       if (currentMode == InteractionMode.CREATE_CIRCLE) {
         var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
@@ -124,12 +122,10 @@ public class CollisionSandboxExample extends SolaWithDefaults {
       } else if (currentMode == InteractionMode.CREATE_AABB) {
         var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
 
-        if (secondPoint == null) {
-          renderer.drawLine(firstPoint.x(), firstPoint.y(), point.x(), firstPoint.y(), color);
-        } else {
-          renderer.drawLine(firstPoint.x(), firstPoint.y(), secondPoint.x(), secondPoint.y(), color);
-          renderer.drawLine(secondPoint.x(), secondPoint.y(), secondPoint.x(), point.y(), color);
-        }
+        var min = new Vector2D(Math.min(firstPoint.x(), point.x()), Math.min(firstPoint.y(), point.y()));
+        var max = new Vector2D(Math.max(firstPoint.x(), point.x()), Math.max(firstPoint.y(), point.y()));
+
+        renderer.drawRect(min.x(), min.y(), max.x() - min.x(), max.y() - min.y(), color);
       }
     }
   }
@@ -137,7 +133,6 @@ public class CollisionSandboxExample extends SolaWithDefaults {
   private class CreateShapeSystem extends EcsSystem {
     Vector2D firstPoint;
     Vector2D secondPoint;
-    Vector2D thirdPoint;
 
     @Override
     public void update(World world, float deltaTime) {
@@ -149,7 +144,6 @@ public class CollisionSandboxExample extends SolaWithDefaults {
       if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
         var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
 
-        currentStep++;
 
         if (firstPoint == null) {
           firstPoint = point;
@@ -181,37 +175,23 @@ public class CollisionSandboxExample extends SolaWithDefaults {
             reset();
           }
         } else if (currentMode == InteractionMode.CREATE_AABB) {
-          if (secondPoint == null) {
-            secondPoint = new Vector2D(point.x(), firstPoint.y());
-          } else if (thirdPoint == null) {
-            thirdPoint = new Vector2D(secondPoint.x(), point.y());
+          var min = new Vector2D(Math.min(firstPoint.x(), point.x()), Math.min(firstPoint.y(), point.y()));
+          var max = new Vector2D(Math.max(firstPoint.x(), point.x()), Math.max(firstPoint.y(), point.y()));
 
-            var min = new Vector2D(
-              Math.min(firstPoint.x(), secondPoint.x()),
-              Math.min(firstPoint.y(), thirdPoint.y())
-            );
-            var max = new Vector2D(
-              Math.max(firstPoint.x(), secondPoint.x()),
-              Math.max(firstPoint.y(), thirdPoint.y())
-            );
-
-            world.createEntity(
-              new TransformComponent(min.x(), min.y(), max.x() - min.x(), max.y() - min.y()),
-              new RectangleRendererComponent(Color.BLUE, false),
-              new DynamicBodyComponent(),
-              new ColliderComponent(new ColliderShapeAABB())
-            );
-            reset();
-          }
+          world.createEntity(
+            new TransformComponent(min.x(), min.y(), max.x() - min.x(), max.y() - min.y()),
+            new RectangleRendererComponent(Color.BLUE, false),
+            new DynamicBodyComponent(),
+            new ColliderComponent(new ColliderShapeAABB())
+          );
+          reset();
         }
       }
     }
 
     private void reset() {
-      currentStep = 0;
       firstPoint = null;
       secondPoint = null;
-      thirdPoint = null;
     }
   }
 
@@ -299,7 +279,6 @@ public class CollisionSandboxExample extends SolaWithDefaults {
 
   private Runnable buildCreateShapeAction(InteractionMode interactionMode) {
     return () -> {
-      currentStep = 0;
       currentMode = interactionMode;
     };
   }
