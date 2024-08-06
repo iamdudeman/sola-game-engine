@@ -30,6 +30,7 @@ class LayoutUtil {
         child.boundConstraints = new GuiElementBounds(0, 0, 0, 0);
         child.bounds = child.boundConstraints;
         child.contentBounds = child.bounds;
+        child.isLayoutChanged = false;
         continue;
       }
 
@@ -90,6 +91,7 @@ class LayoutUtil {
 
     // prepare to calculate alignment adjustments of elements in the flow
     var direction = styles.getPropertyValue(BaseStyles::direction, DefaultStyleValues.DIRECTION);
+    var gap = styles.getPropertyValue(BaseStyles::gap, 0);
     var mainAxisChildren = styles.getPropertyValue(BaseStyles::mainAxisChildren, DefaultStyleValues.MAIN_AXIS_CHILDREN);
     var crossAxisChildren = styles.getPropertyValue(BaseStyles::crossAxisChildren, DefaultStyleValues.CROSS_AXIS_CHILDREN);
 
@@ -101,12 +103,14 @@ class LayoutUtil {
 
       AlignmentFunction alignmentFunction = switch (direction) {
         case ROW, ROW_REVERSE -> child -> {
-          final int usedWidth = guiElementChildrenInFlow.stream().mapToInt(childInFlow -> childInFlow.bounds.width()).sum();
+          int gapSpace = guiElementChildrenInFlow.size() * gap;
+          final int usedWidth = gapSpace + guiElementChildrenInFlow.stream().mapToInt(childInFlow -> childInFlow.bounds.width()).sum();
 
           return calculateRowChildAlignmentBounds(child, mainAxisChildren, crossAxisChildren, usedWidth);
         };
         case COLUMN, COLUMN_REVERSE -> child -> {
-          final int usedHeight = guiElementChildrenInFlow.stream().mapToInt(childInFlow -> childInFlow.bounds.height()).sum();
+          int gapSpace = guiElementChildrenInFlow.size() * gap;
+          final int usedHeight = gapSpace + guiElementChildrenInFlow.stream().mapToInt(childInFlow -> childInFlow.bounds.height()).sum();
 
           return calculateColumnChildAlignmentBounds(child, mainAxisChildren, crossAxisChildren, usedHeight);
         };
