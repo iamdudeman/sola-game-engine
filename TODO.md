@@ -1,5 +1,10 @@
 # sola-game-engine TODO list
 
+* Unsupported JavaFX configuration: classes were loaded from 'unnamed module @47c62251'
+    * https://stackoverflow.com/questions/67854139/javafx-warning-unsupported-javafx-configuration-classes-were-loaded-from-unna
+* ensure JavaFx configured properly in distribution (fat jar + jpackage)
+    * https://stackoverflow.com/questions/76155054/javafx-installation
+
 ## Known Bugs List
 
 * (verify if still bug) GuiElement parent undefined when changing roots
