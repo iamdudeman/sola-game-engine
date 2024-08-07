@@ -30,9 +30,9 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
       }
 
       if (solaJavaDistributionPluginExtension.useJavaFx == true) {
-        project.dependencies.add("runtimeOnly", "org.openjfx:javafx-base:17.0.2:${osClassifier}")
-        project.dependencies.add("runtimeOnly", "org.openjfx:javafx-controls:17.0.2:${osClassifier}")
-        project.dependencies.add("runtimeOnly", "org.openjfx:javafx-graphics:17.0.2:${osClassifier}")
+        project.dependencies.add("runtimeOnly", "org.openjfx:javafx-base:${project.properties["javaFxVersion"]}:${osClassifier}")
+        project.dependencies.add("runtimeOnly", "org.openjfx:javafx-controls:${project.properties["javaFxVersion"]}:${osClassifier}")
+        project.dependencies.add("runtimeOnly", "org.openjfx:javafx-graphics:${project.properties["javaFxVersion"]}:${osClassifier}")
       }
 
       project.tasks.withType<Zip> {
