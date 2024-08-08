@@ -40,6 +40,11 @@ public class CollidersExample extends SolaWithDefaults {
       .setTextColor(Color.YELLOW)
       .build()
   );
+  private final ConditionalStyle<TextStyles> debugOffTextStyle = ConditionalStyle.always(
+    TextStyles.create()
+      .setTextColor(Color.WHITE)
+      .build()
+  );
   private InteractionMode currentMode = InteractionMode.CREATE_CIRCLE;
   private TextGuiElement currentlySelectedText = null;
 
@@ -78,10 +83,6 @@ public class CollidersExample extends SolaWithDefaults {
         guiDocument.setRootElement(guiJsonDocument.rootElement());
         currentlySelectedText = guiDocument.findElementById("modeCircle", TextGuiElement.class);
         currentlySelectedText.styles().addStyle(selectedTextStyle);
-
-        guiDocument.findElementById("debugShape", TextGuiElement.class).styles().addStyle(selectedTextStyle);
-        guiDocument.findElementById("debugBoundingBox", TextGuiElement.class).styles().addStyle(selectedTextStyle);
-        guiDocument.findElementById("debugBroadPhase", TextGuiElement.class).styles().addStyle(selectedTextStyle);
 
         completeAsyncInit.run();
       });
@@ -230,9 +231,9 @@ public class CollidersExample extends SolaWithDefaults {
       var textElement = guiDocument.findElementById(id, TextGuiElement.class);
 
       if (isEnabled) {
-        textElement.styles().addStyle(selectedTextStyle);
+        textElement.styles().removeStyle(debugOffTextStyle);
       } else {
-        textElement.styles().removeStyle(selectedTextStyle);
+        textElement.styles().addStyle(debugOffTextStyle);
       }
     }
 

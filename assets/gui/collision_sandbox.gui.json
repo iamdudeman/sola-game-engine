@@ -57,21 +57,36 @@
           "id": "debugShape",
           "props": {
             "text": "(A) Debug shape"
-          }
+          },
+          "styles": [
+            {
+              "textColor": "#ff0000"
+            }
+          ]
         },
         {
           "tag": "Text",
           "id": "debugBoundingBox",
           "props": {
             "text": "(S) Debug bounding box"
-          }
+          },
+          "styles": [
+            {
+              "textColor": "#0000ff"
+            }
+          ]
         },
         {
           "tag": "Text",
           "id": "debugBroadPhase",
           "props": {
             "text": "(D) Debug broad phase"
-          }
+          },
+          "styles": [
+            {
+              "textColor": "#00ff00"
+            }
+          ]
         }
       ]
     }
