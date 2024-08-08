@@ -1,37 +1,79 @@
 {
   "tag": "Section",
-  "id": "root",
   "styles": [
     {
-      "direction": "row",
+      "direction": "column",
       "gap": 10,
       "padding": 10,
-      "crossAxisChildren": "end",
+      "mainAxisChildren": "end",
       "height": "100%",
       "width": "100%"
     }
   ],
   "children": [
     {
-      "tag": "Text",
-      "id": "modeCircle",
-      "props": {
-        "text": "(1) Create circle"
-      }
+      "tag": "Section",
+      "styles": [
+        {
+          "direction": "row",
+          "gap": 10
+        }
+      ],
+      "children": [
+        {
+          "tag": "Text",
+          "id": "modeCircle",
+          "props": {
+            "text": "(1) Create circle"
+          }
+        },
+        {
+          "tag": "Text",
+          "id": "modeAABB",
+          "props": {
+            "text": "(2) Create AABB"
+          }
+        },
+        {
+          "tag": "Text",
+          "id": "modeTriangle",
+          "props": {
+            "text": "(3) Create Triangle"
+          }
+        }
+      ]
     },
     {
-      "tag": "Text",
-      "id": "modeAABB",
-      "props": {
-        "text": "(2) Create AABB"
-      }
-    },
-    {
-      "tag": "Text",
-      "id": "modeTriangle",
-      "props": {
-        "text": "(3) Create Triangle"
-      }
+      "tag": "Section",
+      "styles": [
+        {
+          "direction": "row",
+          "gap": 10
+        }
+      ],
+      "children": [
+        {
+          "tag": "Text",
+          "id": "debugShape",
+          "props": {
+            "text": "(A) Debug shape"
+          }
+        },
+        {
+          "tag": "Text",
+          "id": "debugBoundingBox",
+          "props": {
+            "text": "(S) Debug bounding box"
+          }
+        },
+        {
+          "tag": "Text",
+          "id": "debugBroadPhase",
+          "props": {
+            "text": "(D) Debug broad phase"
+          }
+        }
+      ]
     }
   ]
 }
