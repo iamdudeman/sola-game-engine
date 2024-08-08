@@ -145,20 +145,52 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a <code>View</code> of <code>Entity</code> that need to be rendered via
  <a href="SolaEntityGraphicsModule.html#renderEntity(technology.sola.engine.graphics.renderer.Renderer,V,technology.sola.engine.core.component.TransformComponent)"><code>SolaEntityGraphicsModule.renderEntity(Renderer, V, TransformComponent)</code></a></div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.World,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)" class="member-name-link">render</a><wbr>(<a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isRenderingBoundingBoxes()" class="member-name-link">isRenderingBoundingBoxes</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Whether <a href="../../../physics/component/ColliderComponent.html#getBoundingBox(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getBoundingBox(TransformComponent)</code></a> debug rendering is enabled or not.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isRenderingBroadPhase()" class="member-name-link">isRenderingBroadPhase</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Whether <a href="../../../physics/system/collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision"><code>CollisionDetectionBroadPhase</code></a> debug rendering is
+ enabled or not.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isRenderingColliders()" class="member-name-link">isRenderingColliders</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Whether <a href="../../../physics/component/ColliderComponent.html#getShape(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getShape(TransformComponent)</code></a> debug rendering is enabled or not.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.World,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)" class="member-name-link">render</a><wbr>(<a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
  technology.sola.ecs.World&nbsp;world,
  <a href="../../../../math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a>&nbsp;cameraScaleTransform,
  <a href="../../../../math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a>&nbsp;cameraTranslationTransform)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The main render method for a graphics module that is called once per frame.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#renderEntity(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderEntity</a><wbr>(<a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#renderEntity(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderEntity</a><wbr>(<a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
  technology.sola.ecs.view.View2Entry&lt;<a href="../../../physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&nbsp;viewEntry,
  <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;cameraModifiedEntityTransform)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Called on each <code>Entity</code> to render it.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRenderingBoundingBoxes(boolean)" class="member-name-link">setRenderingBoundingBoxes</a><wbr>(boolean&nbsp;isEnabled)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Enable or disable <a href="../../../physics/component/ColliderComponent.html#getBoundingBox(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getBoundingBox(TransformComponent)</code></a> debug rendering.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRenderingBroadPhase(boolean)" class="member-name-link">setRenderingBroadPhase</a><wbr>(boolean&nbsp;isEnabled)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Enable or disable <a href="../../../physics/system/collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision"><code>CollisionDetectionBroadPhase</code></a> debug
+ rendering.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRenderingColliders(boolean)" class="member-name-link">setRenderingColliders</a><wbr>(boolean&nbsp;isEnabled)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Enabled or disable <a href="../../../physics/component/ColliderComponent.html#getShape(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getShape(TransformComponent)</code></a> debug rendering.</div>
 </div>
 </div>
 </div>
@@ -293,6 +325,74 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="SolaGraphicsModule.html#getOrder()">getOrder</a></code>&nbsp;in class&nbsp;<code><a href="SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaGraphicsModule</a></code></dd>
 <dt>Returns:</dt>
 <dd>the order of this graphics module</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isRenderingColliders()">
+<h3>isRenderingColliders</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isRenderingColliders</span>()</div>
+<div class="block">Whether <a href="../../../physics/component/ColliderComponent.html#getShape(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getShape(TransformComponent)</code></a> debug rendering is enabled or not.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if collider debug rendering is enabled</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setRenderingColliders(boolean)">
+<h3>setRenderingColliders</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setRenderingColliders</span><wbr><span class="parameters">(boolean&nbsp;isEnabled)</span></div>
+<div class="block">Enabled or disable <a href="../../../physics/component/ColliderComponent.html#getShape(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getShape(TransformComponent)</code></a> debug rendering.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>isEnabled</code> - new collider debug rendering enabled state</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isRenderingBoundingBoxes()">
+<h3>isRenderingBoundingBoxes</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isRenderingBoundingBoxes</span>()</div>
+<div class="block">Whether <a href="../../../physics/component/ColliderComponent.html#getBoundingBox(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getBoundingBox(TransformComponent)</code></a> debug rendering is enabled or not.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if collider bounding box debug rendering is enabled</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setRenderingBoundingBoxes(boolean)">
+<h3>setRenderingBoundingBoxes</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setRenderingBoundingBoxes</span><wbr><span class="parameters">(boolean&nbsp;isEnabled)</span></div>
+<div class="block">Enable or disable <a href="../../../physics/component/ColliderComponent.html#getBoundingBox(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getBoundingBox(TransformComponent)</code></a> debug rendering.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>isEnabled</code> - new collider bounding box debug rendering enabled state</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isRenderingBroadPhase()">
+<h3>isRenderingBroadPhase</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isRenderingBroadPhase</span>()</div>
+<div class="block">Whether <a href="../../../physics/system/collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision"><code>CollisionDetectionBroadPhase</code></a> debug rendering is
+ enabled or not.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if collision detection broad phase debug rendering is enabled</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setRenderingBroadPhase(boolean)">
+<h3>setRenderingBroadPhase</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setRenderingBroadPhase</span><wbr><span class="parameters">(boolean&nbsp;isEnabled)</span></div>
+<div class="block">Enable or disable <a href="../../../physics/system/collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision"><code>CollisionDetectionBroadPhase</code></a> debug
+ rendering.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>isEnabled</code> - new collision detection broad phase debug rendering enabled state</dd>
 </dl>
 </section>
 </li>
