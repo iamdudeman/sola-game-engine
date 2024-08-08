@@ -13,7 +13,7 @@ import technology.sola.engine.examples.common.games.PongGame;
 import technology.sola.engine.examples.common.games.SimplePlatformerGame;
 import technology.sola.engine.examples.common.games.minesweeper.MinesweeperGame;
 import technology.sola.engine.examples.common.features.networking.NetworkingExample;
-import technology.sola.engine.examples.common.features.CollisionSandboxExample;
+import technology.sola.engine.examples.common.features.CollidersExample;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
@@ -112,7 +112,7 @@ public class ExampleLauncherSola extends SolaWithDefaults {
         buildSectionTitle("Feature demos"),
         buildExampleLaunchButton("Animation", AnimationExample::new),
         buildExampleLaunchButton("Audio", AudioExample::new),
-        buildExampleLaunchButton("Collision Sandbox", CollisionSandboxExample::new),
+        buildExampleLaunchButton("Colliders", CollidersExample::new),
         buildExampleLaunchButton("Gui", GuiExample::new),
         buildExampleLaunchButton("Lighting", LightingExample::new),
         buildExampleLaunchButton("Mouse and Camera", MouseAndCameraExample::new),

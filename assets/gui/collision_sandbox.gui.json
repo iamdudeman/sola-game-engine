@@ -3,74 +3,35 @@
   "id": "root",
   "styles": [
     {
-      "direction": "column",
+      "direction": "row",
       "gap": 10,
       "padding": 10,
-      "mainAxisChildren": "end",
+      "crossAxisChildren": "end",
       "height": "100%",
       "width": "100%"
     }
   ],
   "children": [
     {
-      "tag": "Button",
-      "id": "buttonHide",
-      "children": [
-        {
-          "tag": "Text",
-          "props": {
-            "text": "(h) Toggle UI visibility"
-          }
-        }
-      ]
+      "tag": "Text",
+      "id": "modeCircle",
+      "props": {
+        "text": "(1) Create circle"
+      }
     },
     {
-      "tag": "Button",
-      "id": "buttonSelect",
-      "children": [
-        {
-          "tag": "Text",
-          "props": {
-            "text": "(1) Select shape to control"
-          }
-        }
-      ]
+      "tag": "Text",
+      "id": "modeAABB",
+      "props": {
+        "text": "(2) Create AABB"
+      }
     },
     {
-      "tag": "Button",
-      "id": "buttonCircle",
-      "children": [
-        {
-          "tag": "Text",
-          "props": {
-            "text": "(2) Create circle"
-          }
-        }
-      ]
-    },
-    {
-      "tag": "Button",
-      "id": "buttonAABB",
-      "children": [
-        {
-          "tag": "Text",
-          "props": {
-            "text": "(3) Create AABB"
-          }
-        }
-      ]
-    },
-    {
-      "tag": "Button",
-      "id": "buttonTriangle",
-      "children": [
-        {
-          "tag": "Text",
-          "props": {
-            "text": "(4) Create Triangle"
-          }
-        }
-      ]
+      "tag": "Text",
+      "id": "modeTriangle",
+      "props": {
+        "text": "(3) Create Triangle"
+      }
     }
   ]
 }

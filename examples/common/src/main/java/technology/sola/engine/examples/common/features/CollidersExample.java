@@ -1,6 +1,5 @@
 package technology.sola.engine.examples.common.features;
 
-import technology.sola.ecs.Component;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
@@ -13,11 +12,9 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.components.TriangleRendererComponent;
-import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
-import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
-import technology.sola.engine.graphics.gui.style.BaseStyles;
+import technology.sola.engine.graphics.gui.elements.TextGuiElement;
+import technology.sola.engine.graphics.gui.elements.TextStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
-import technology.sola.engine.graphics.gui.style.property.Visibility;
 import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
@@ -32,31 +29,24 @@ import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
-import java.util.List;
-
-public class CollisionSandboxExample extends SolaWithDefaults {
-  private boolean isHidingUi = false;
-  private final ConditionalStyle<BaseStyles> visibilityNone = ConditionalStyle.always(
-    BaseStyles.create()
-      .setVisibility(Visibility.NONE)
-      .build()
+public class CollidersExample extends SolaWithDefaults {
+  private final ConditionalStyle<TextStyles> selectedTextStyle = ConditionalStyle.always(
+          TextStyles.create()
+                  .setTextColor(Color.YELLOW)
+                  .build()
   );
-  private InteractionMode currentMode = InteractionMode.SELECT;
+  private InteractionMode currentMode = InteractionMode.CREATE_CIRCLE;
+  private TextGuiElement currentlySelectedText = null;
 
-  public CollisionSandboxExample() {
-    super(new SolaConfiguration("Collision Sandbox", 800, 600));
+  public CollidersExample() {
+    super(new SolaConfiguration("Colliders", 800, 600));
   }
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
 
-    var guiTheme = DefaultThemeBuilder.buildDarkTheme()
-        .addStyle(ButtonGuiElement.class, List.of(ConditionalStyle.always(
-          BaseStyles.create()
-            .setPadding(5)
-            .build()
-        )));
+    var guiTheme = DefaultThemeBuilder.buildDarkTheme();
 
     defaultsConfigurator.useGraphics().useDebug().usePhysics().useGui(guiTheme);
 
@@ -66,7 +56,7 @@ public class CollisionSandboxExample extends SolaWithDefaults {
 
     CreateShapeSystem createShapeSystem = new CreateShapeSystem();
 
-    solaEcs.addSystems(new ControlledShapeSystem(), createShapeSystem);
+    solaEcs.addSystems(createShapeSystem);
     solaEcs.setWorld(new World(100));
 
     solaGraphics.addGraphicsModules(new CreateShapeGraphicsModule(createShapeSystem));
@@ -78,7 +68,8 @@ public class CollisionSandboxExample extends SolaWithDefaults {
       .getNewAsset("gui", "assets/gui/collision_sandbox.gui.json")
       .executeWhenLoaded(guiJsonDocument -> {
         guiDocument.setRootElement(guiJsonDocument.rootElement());
-        initGuiEvents();
+        currentlySelectedText = guiDocument.findElementById("modeCircle", TextGuiElement.class);
+        currentlySelectedText.styles().addStyle(selectedTextStyle);
         completeAsyncInit.run();
       });
   }
@@ -92,10 +83,6 @@ public class CollisionSandboxExample extends SolaWithDefaults {
 
     @Override
     public void renderMethod(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
-      if (currentMode == InteractionMode.SELECT) {
-        return;
-      }
-
       Vector2D firstPoint = createShapeSystem.firstPoint == null ? null : cameraTranslationTransform.multiply(createShapeSystem.firstPoint);
 
       if (firstPoint == null) {
@@ -104,16 +91,15 @@ public class CollisionSandboxExample extends SolaWithDefaults {
 
       Vector2D secondPoint = createShapeSystem.secondPoint == null ? null : cameraTranslationTransform.multiply(createShapeSystem.secondPoint);
       Color color = Color.WHITE;
+      var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
 
       if (currentMode == InteractionMode.CREATE_CIRCLE) {
-        var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
         var min = new Vector2D(Math.min(firstPoint.x(), point.x()), Math.min(firstPoint.y(), point.y()));
         var max = new Vector2D(Math.max(firstPoint.x(), point.x()), Math.max(firstPoint.y(), point.y()));
         float radius = max.distance(min) / 2f;
 
         renderer.drawCircle(min.x(), min.y(), radius, color);
       } else if (currentMode == InteractionMode.CREATE_TRIANGLE) {
-        var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
 
         if (secondPoint == null) {
           renderer.drawLine(firstPoint.x(), firstPoint.y(), point.x(), point.y(), color);
@@ -122,8 +108,6 @@ public class CollisionSandboxExample extends SolaWithDefaults {
           renderer.drawLine(secondPoint.x(), secondPoint.y(), point.x(), point.y(), color);
         }
       } else if (currentMode == InteractionMode.CREATE_AABB) {
-        var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
-
         var min = new Vector2D(Math.min(firstPoint.x(), point.x()), Math.min(firstPoint.y(), point.y()));
         var max = new Vector2D(Math.max(firstPoint.x(), point.x()), Math.max(firstPoint.y(), point.y()));
 
@@ -136,11 +120,22 @@ public class CollisionSandboxExample extends SolaWithDefaults {
     Vector2D firstPoint;
     Vector2D secondPoint;
 
+    private void changeMode(InteractionMode newMode, String guiElementId) {
+      currentMode = newMode;
+      currentlySelectedText.styles().removeStyle(selectedTextStyle);
+      currentlySelectedText = guiDocument.findElementById(guiElementId, TextGuiElement.class);
+      currentlySelectedText.styles().addStyle(selectedTextStyle);
+      reset();
+    }
+
     @Override
     public void update(World world, float deltaTime) {
-      if (currentMode == InteractionMode.SELECT) {
-        reset();
-        return;
+      if (keyboardInput.isKeyPressed(Key.ONE)) {
+        changeMode(InteractionMode.CREATE_CIRCLE, "modeCircle");
+      } else if (keyboardInput.isKeyPressed(Key.TWO)) {
+        changeMode(InteractionMode.CREATE_AABB, "modeAABB");
+      } else if (keyboardInput.isKeyPressed(Key.THREE)) {
+        changeMode(InteractionMode.CREATE_TRIANGLE, "modeTriangle");
       }
 
       if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
@@ -200,99 +195,7 @@ public class CollisionSandboxExample extends SolaWithDefaults {
     }
   }
 
-  private class ControlledShapeSystem extends EcsSystem {
-    @Override
-    public void update(World world, float deltaTime) {
-      var controlledViews = world.createView().of(ControlledComponent.class, DynamicBodyComponent.class)
-        .getEntries();
-
-      if (currentMode == InteractionMode.SELECT && mouseInput.isMousePressed(MouseButton.PRIMARY)) {
-        var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
-
-        world.createView().of(TransformComponent.class, ColliderComponent.class)
-          .getEntries()
-          .stream()
-          .filter(view -> view.c2().getShape(view.c1()).contains(point))
-          .findFirst()
-          .ifPresent(newViewToControl -> {
-            controlledViews.forEach(controlledView -> {
-              controlledView.entity().removeComponent(ControlledComponent.class);
-            });
-
-            newViewToControl.entity().addComponent(new ControlledComponent());
-          });
-      }
-
-      if (controlledViews.isEmpty()) {
-        return;
-      }
-
-      final float force = 10f;
-      var controlledView = controlledViews.get(0);
-
-      if (keyboardInput.isKeyHeld(Key.W)) {
-        controlledView.c2().applyForce(0, -force);
-      }
-      if (keyboardInput.isKeyHeld(Key.S)) {
-        controlledView.c2().applyForce(0, force);
-      }
-      if (keyboardInput.isKeyHeld(Key.A)) {
-        controlledView.c2().applyForce(-force, 0);
-      }
-      if (keyboardInput.isKeyHeld(Key.D)) {
-        controlledView.c2().applyForce(force, 0);
-      }
-      if (keyboardInput.isKeyPressed(Key.DELETE)) {
-        controlledView.entity().destroy();
-      }
-    }
-  }
-
-  private record ControlledComponent() implements Component {
-  }
-
-  private void initGuiEvents() {
-    Runnable toggleHide = () -> {
-      var rootSection = guiDocument.findElementById("root", SectionGuiElement.class);
-
-      if (isHidingUi) {
-        rootSection.styles().removeStyle(visibilityNone);
-      } else {
-        rootSection.styles().addStyle(visibilityNone);
-      }
-
-      isHidingUi = !isHidingUi;
-    };
-
-    registerButtonAction("buttonHide", Key.H, toggleHide);
-    registerButtonAction("buttonSelect", Key.ONE, buildCreateShapeAction(InteractionMode.SELECT));
-    registerButtonAction("buttonCircle", Key.TWO, buildCreateShapeAction(InteractionMode.CREATE_CIRCLE));
-    registerButtonAction("buttonAABB", Key.THREE, buildCreateShapeAction(InteractionMode.CREATE_AABB));
-    registerButtonAction("buttonTriangle", Key.FOUR, buildCreateShapeAction(InteractionMode.CREATE_TRIANGLE));
-  }
-
-  private void registerButtonAction(String id, Key key, Runnable action) {
-    guiDocument.findElementById(id, ButtonGuiElement.class)
-      .setOnAction(action);
-
-    guiDocument.findElementById("root", SectionGuiElement.class)
-      .events()
-      .keyPressed()
-      .on(event -> {
-        if (event.getKeyEvent().keyCode() == key.getCode()) {
-          action.run();
-        }
-      });
-  }
-
-  private Runnable buildCreateShapeAction(InteractionMode interactionMode) {
-    return () -> {
-      currentMode = interactionMode;
-    };
-  }
-
   private enum InteractionMode {
-    SELECT,
     CREATE_CIRCLE,
     CREATE_AABB,
     CREATE_TRIANGLE
