@@ -1,5 +1,7 @@
 # sola-game-engine TODO list
 
+* penetration is incorrect for AABB inside another AABB
+
 ## Known Bugs List
 
 * (verify if still bug) GuiElement parent undefined when changing roots
