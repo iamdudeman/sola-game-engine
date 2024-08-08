@@ -1,0 +1,94 @@
+{
+  "tag": "Section",
+  "styles": [
+    {
+      "direction": "column",
+      "gap": 10,
+      "padding": 10,
+      "mainAxisChildren": "end",
+      "height": "100%",
+      "width": "100%"
+    }
+  ],
+  "children": [
+    {
+      "tag": "Section",
+      "styles": [
+        {
+          "direction": "row",
+          "gap": 10
+        }
+      ],
+      "children": [
+        {
+          "tag": "Text",
+          "id": "modeCircle",
+          "props": {
+            "text": "(1) Create circle"
+          }
+        },
+        {
+          "tag": "Text",
+          "id": "modeAABB",
+          "props": {
+            "text": "(2) Create AABB"
+          }
+        },
+        {
+          "tag": "Text",
+          "id": "modeTriangle",
+          "props": {
+            "text": "(3) Create Triangle"
+          }
+        }
+      ]
+    },
+    {
+      "tag": "Section",
+      "styles": [
+        {
+          "direction": "row",
+          "gap": 10
+        }
+      ],
+      "children": [
+        {
+          "tag": "Text",
+          "id": "debugShape",
+          "props": {
+            "text": "(A) Debug shape"
+          },
+          "styles": [
+            {
+              "textColor": "#ff0000"
+            }
+          ]
+        },
+        {
+          "tag": "Text",
+          "id": "debugBoundingBox",
+          "props": {
+            "text": "(S) Debug bounding box"
+          },
+          "styles": [
+            {
+              "textColor": "#0000ff"
+            }
+          ]
+        },
+        {
+          "tag": "Text",
+          "id": "debugBroadPhase",
+          "props": {
+            "text": "(D) Debug broad phase"
+          },
+          "styles": [
+            {
+              "textColor": "#00ff00"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
