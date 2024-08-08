@@ -6,6 +6,7 @@ import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.defaults.graphics.modules.DebugEntityGraphicsModule;
 import technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
@@ -29,15 +30,22 @@ import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
+/**
+ * CollidersExample is a {@link technology.sola.engine.core.Sola} for demoing various {@link ColliderComponent}
+ * {@link technology.sola.engine.physics.component.collider.ColliderShape}s.
+ */
 public class CollidersExample extends SolaWithDefaults {
   private final ConditionalStyle<TextStyles> selectedTextStyle = ConditionalStyle.always(
-          TextStyles.create()
-                  .setTextColor(Color.YELLOW)
-                  .build()
+    TextStyles.create()
+      .setTextColor(Color.YELLOW)
+      .build()
   );
   private InteractionMode currentMode = InteractionMode.CREATE_CIRCLE;
   private TextGuiElement currentlySelectedText = null;
 
+  /**
+   * Creates an instance of this {@link technology.sola.engine.core.Sola}.
+   */
   public CollidersExample() {
     super(new SolaConfiguration("Colliders", 800, 600));
   }
@@ -138,6 +146,22 @@ public class CollidersExample extends SolaWithDefaults {
         changeMode(InteractionMode.CREATE_TRIANGLE, "modeTriangle");
       }
 
+      if (keyboardInput.isKeyPressed(Key.A)) {
+        var debugGraphicsModule = solaGraphics.getGraphicsModule(DebugEntityGraphicsModule.class);
+
+        debugGraphicsModule.setRenderingColliders(!debugGraphicsModule.isRenderingColliders());
+      }
+      if (keyboardInput.isKeyPressed(Key.S)) {
+        var debugGraphicsModule = solaGraphics.getGraphicsModule(DebugEntityGraphicsModule.class);
+
+        debugGraphicsModule.setRenderingBoundingBoxes(!debugGraphicsModule.isRenderingBoundingBoxes());
+      }
+      if (keyboardInput.isKeyPressed(Key.D)) {
+        var debugGraphicsModule = solaGraphics.getGraphicsModule(DebugEntityGraphicsModule.class);
+
+        debugGraphicsModule.setRenderingBroadPhase(!debugGraphicsModule.isRenderingBroadPhase());
+      }
+
       if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
         var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
 
@@ -155,7 +179,7 @@ public class CollidersExample extends SolaWithDefaults {
 
           world.createEntity(
             new TransformComponent(firstPoint.x(), firstPoint.y(), radius),
-            new CircleRendererComponent(Color.BLUE, false),
+            new CircleRendererComponent(Color.YELLOW, false),
             new DynamicBodyComponent(),
             new ColliderComponent(new ColliderShapeCircle())
           );
@@ -168,7 +192,7 @@ public class CollidersExample extends SolaWithDefaults {
 
             world.createEntity(
               new TransformComponent(0, 0),
-              new TriangleRendererComponent(Color.BLUE, false, triangle),
+              new TriangleRendererComponent(Color.YELLOW, false, triangle),
               new DynamicBodyComponent(),
               new ColliderComponent(new ColliderShapeTriangle(triangle))
             );
@@ -180,7 +204,7 @@ public class CollidersExample extends SolaWithDefaults {
 
           world.createEntity(
             new TransformComponent(min.x(), min.y(), max.x() - min.x(), max.y() - min.y()),
-            new RectangleRendererComponent(Color.BLUE, false),
+            new RectangleRendererComponent(Color.YELLOW, false),
             new DynamicBodyComponent(),
             new ColliderComponent(new ColliderShapeAABB())
           );
