@@ -96,12 +96,12 @@ class SeparatingAxisTheoremTest {
     void whenFullyInside_shouldReturnCorrectManifold() {
       var collisionManifold = SeparatingAxisTheorem.checkCollision(
         aabbShape,
-        createAABB(new Vector2D(1, 2), 2, 2)
+        createAABB(new Vector2D(1, 1), 2, 1)
       );
 
       assertNotNull(collisionManifold);
-      assertEquals(new Vector2D(0, 1), collisionManifold.normal());
-      assertEquals(3, collisionManifold.penetration());
+      assertEquals(new Vector2D(0, -1), collisionManifold.normal());
+      assertEquals(2, collisionManifold.penetration());
     }
   }
 
