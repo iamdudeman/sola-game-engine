@@ -107,12 +107,12 @@ class CollisionUtilsTest {
     @Test
     void whenFullyInside_shouldReturnCorrectManifold() {
       var viewEntryA = new View2Entry<>(mockEntityA, aabbColliderComponent, new TransformComponent(0, 0));
-      var viewEntryB = new View2Entry<>(mockEntityB, new ColliderComponent(new ColliderShapeAABB(2, 1)), new TransformComponent(1, 1));
+      var viewEntryB = new View2Entry<>(mockEntityB, new ColliderComponent(new ColliderShapeAABB(2, 1)), new TransformComponent(1, 3));
 
       CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(viewEntryA, viewEntryB);
 
       assertNotNull(collisionManifold);
-      assertEquals(new Vector2D(0, -1), collisionManifold.normal());
+      assertEquals(new Vector2D(0, 1), collisionManifold.normal());
       assertEquals(2, collisionManifold.penetration());
     }
   }

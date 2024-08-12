@@ -35,13 +35,10 @@ public final class CollisionUtils {
 
     return switch (colliderA.getType()) {
       case AABB -> switch (colliderB.getType()) {
-        case AABB -> calculateAABBVsAABB(
+        case AABB, TRIANGLE -> calculateShapeVsShapeSAT(
           entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
         case CIRCLE -> calculateAABBVsCircle(
-          entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
-        );
-        case TRIANGLE -> calculateShapeVsShapeSAT(
           entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
       };
@@ -113,6 +110,10 @@ public final class CollisionUtils {
     return new CollisionManifold(rectEntity, circeEntity, normal, penetration);
   }
 
+  /**
+   * This should not be used until penetration bug is fixed. Penetration and normal are incorrect when AABB are
+   * inside each other
+   */
   private static CollisionManifold calculateAABBVsAABB(
     Entity entityA, Entity entityB,
     Rectangle rectangleA, Rectangle rectangleB
@@ -145,7 +146,7 @@ public final class CollisionUtils {
 
     // Collision found, calculate normal and penetration
     final Vector2D normal;
-    final float penetration;
+    float penetration;
 
     if (xAxisOverlap < yAxisOverlap) {
       penetration = xAxisOverlap;
@@ -160,6 +161,8 @@ public final class CollisionUtils {
       else
         normal = new Vector2D(0, -1);
     }
+
+    // todo fix bug where penetration and normal are incorrect when AABB are inside each other
 
     return new CollisionManifold(entityA, entityB, normal, penetration);
   }
