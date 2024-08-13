@@ -10,6 +10,8 @@ import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
 import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
+import technology.sola.math.geometry.Circle;
+import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -121,10 +123,10 @@ class CollisionUtilsTest {
   class calculateAABBVsCircle {
     @Test
     void whenCircleCenterOutsideRectangle_shouldHaveCorrectNormal() {
-      var viewEntryA = new View2Entry<>(mockEntityA, new ColliderComponent(new ColliderShapeAABB(5, 3)), new TransformComponent(0, 0));
-      var viewEntryB = new View2Entry<>(mockEntityB, new ColliderComponent(new ColliderShapeCircle(3)), new TransformComponent(-4, -4));
+      Rectangle rectangle = new Rectangle(new Vector2D(0, 0), new Vector2D(5, 3));
+      Circle circle = new Circle(3, new Vector2D(-1,-1));
 
-      CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(viewEntryA, viewEntryB);
+      var collisionManifold = CollisionUtils.calculateAABBVsCircle(rectangle, circle);
 
       assertNotNull(collisionManifold);
       assertEquals(new Vector2D(-0.70710677f, -0.70710677f), collisionManifold.normal());
@@ -133,10 +135,10 @@ class CollisionUtilsTest {
 
     @Test
     void whenCircleFullyInsideRectangle_shouldHaveCorrectNormal() {
-      var viewEntryA = new View2Entry<>(mockEntityA, new ColliderComponent(new ColliderShapeAABB(50, 30)), new TransformComponent(0, 0));
-      var viewEntryB = new View2Entry<>(mockEntityB, new ColliderComponent(new ColliderShapeCircle(3)), new TransformComponent(10, 11));
+      Rectangle rectangle = new Rectangle(new Vector2D(0, 0), new Vector2D(50, 30));
+      Circle circle = new Circle(3, new Vector2D(13, 14));
 
-      CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(viewEntryA, viewEntryB);
+      var collisionManifold = CollisionUtils.calculateAABBVsCircle(rectangle, circle);
 
       assertNotNull(collisionManifold);
       assertEquals(new Vector2D(-1, 0), collisionManifold.normal());
@@ -148,20 +150,19 @@ class CollisionUtilsTest {
   class calculateCircleVsCircle {
     @Test
     void whenNotOverlapping_shouldReturnNull() {
-      var viewEntryA = new View2Entry<>(mockEntityA, new ColliderComponent(new ColliderShapeCircle(5f)), new TransformComponent(0, 0));
-      var viewEntryB = new View2Entry<>(mockEntityB, new ColliderComponent(new ColliderShapeCircle(5f)), new TransformComponent(10, 0));
+      var circleA = new Circle(5, new Vector2D(0, 0));
+      var circleB = new Circle(5, new Vector2D(10, 0));
 
-      CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(viewEntryA, viewEntryB);
+      var collisionManifold = CollisionUtils.calculateCircleVsCircle(circleA, circleB);
 
       assertNull(collisionManifold);
     }
 
     @Test
     void whenOverlapping_shouldReturnCollisionManifold() {
-      var viewEntryA = new View2Entry<>(mockEntityA, new ColliderComponent(new ColliderShapeCircle(5f)), new TransformComponent(0, 0));
-      var viewEntryB = new View2Entry<>(mockEntityB, new ColliderComponent(new ColliderShapeCircle(5f)), new TransformComponent(5, 5));
-
-      CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(viewEntryA, viewEntryB);
+      var circleA = new Circle(5, new Vector2D(0, 0));
+      var circleB = new Circle(5, new Vector2D(5, 5));
+      var collisionManifold = CollisionUtils.calculateCircleVsCircle(circleA, circleB);
 
       assertNotNull(collisionManifold);
       assertEquals(2.9289322f, collisionManifold.penetration());
