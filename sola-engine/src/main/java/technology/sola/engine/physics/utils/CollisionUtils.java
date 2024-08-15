@@ -85,9 +85,15 @@ public final class CollisionUtils {
     return new CollisionManifold(entityA, entityB, mtv.normal(), mtv.penetration());
   }
 
-  public static MinimumTranslationVector calculateAABBVsCircle(
-    Rectangle rectangle, Circle circle
-  ) {
+  /**
+   * Calculates a {@link MinimumTranslationVector} for a collision between an axis aligned {@link Rectangle} and
+   * {@link Circle}.
+   *
+   * @param rectangle the rectangle
+   * @param circle the circle
+   * @return the {@link MinimumTranslationVector} if there is a collision or else null
+   */
+  public static MinimumTranslationVector calculateAABBVsCircle(Rectangle rectangle, Circle circle) {
     Vector2D circleCenter = circle.center();
     Vector2D closestPointOnRectangle = SolaMath.clamp(rectangle.min(), rectangle.max(), circleCenter);
     boolean isCircleCenterInsideRectangle = circleCenter.equals(closestPointOnRectangle);
@@ -131,13 +137,16 @@ public final class CollisionUtils {
   }
 
   /**
-   * This should not be used until penetration bug is fixed. Penetration and normal are incorrect when AABB are
+   * Calculates a {@link MinimumTranslationVector} for a collision between two axis aligned {@link Rectangle}s.
+   * <br />
+   * Note: This should not be used until penetration bug is fixed. Penetration and normal are incorrect when AABB are
    * inside each other
+   *
+   * @param rectangleA the first rectangle
+   * @param rectangleB the second rectangle
+   * @return the {@link MinimumTranslationVector} if there is a collision or else null
    */
-  private static CollisionManifold calculateAABBVsAABB(
-    Entity entityA, Entity entityB,
-    Rectangle rectangleA, Rectangle rectangleB
-  ) {
+  public static MinimumTranslationVector calculateAABBVsAABB(Rectangle rectangleA, Rectangle rectangleB) {
     Vector2D aBoxMin = rectangleA.min();
     Vector2D aBoxMax = rectangleA.max();
     Vector2D bBoxMin = rectangleB.min();
@@ -184,12 +193,17 @@ public final class CollisionUtils {
 
     // todo fix bug where penetration and normal are incorrect when AABB are inside each other
 
-    return new CollisionManifold(entityA, entityB, normal, penetration);
+    return new MinimumTranslationVector(normal, penetration);
   }
 
-  public static MinimumTranslationVector calculateCircleVsCircle(
-    Circle circleA, Circle circleB
-  ) {
+  /**
+   * Calculates a {@link MinimumTranslationVector} for a collision between two {@link Circle}s.
+   *
+   * @param circleA the first circle
+   * @param circleB the second circle
+   * @return the {@link MinimumTranslationVector} if there is a collision or else null
+   */
+  public static MinimumTranslationVector calculateCircleVsCircle(Circle circleA, Circle circleB) {
     Vector2D posA = circleA.center();
     Vector2D posB = circleB.center();
     float distance = posA.distance(posB);
@@ -204,9 +218,7 @@ public final class CollisionUtils {
     return new MinimumTranslationVector(normal, penetration);
   }
 
-  private static MinimumTranslationVector calculateCircleVsShapeSAT(
-    Circle circle, Shape shape
-  ) {
+  private static MinimumTranslationVector calculateCircleVsShapeSAT(Circle circle, Shape shape) {
     return SeparatingAxisTheorem.checkCollision(shape.getPoints(), circle.center(), circle.radius());
   }
 
