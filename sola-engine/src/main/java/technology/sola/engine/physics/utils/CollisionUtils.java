@@ -4,6 +4,7 @@ import technology.sola.ecs.Entity;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.physics.CollisionManifold;
+import technology.sola.engine.physics.MinimumTranslationVector;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.math.SolaMath;
 import technology.sola.math.geometry.Circle;
@@ -32,42 +33,67 @@ public final class CollisionUtils {
     TransformComponent transformB = viewEntryB.c2();
     ColliderComponent colliderA = viewEntryA.c1();
     ColliderComponent colliderB = viewEntryB.c1();
+    boolean isReversed = false;
 
-    return switch (colliderA.getType()) {
+    var mtv = switch (colliderA.getType()) {
       case AABB -> switch (colliderB.getType()) {
-        case AABB, TRIANGLE -> calculateShapeVsShapeSAT(
-          entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
+        case AABB, TRIANGLE -> SeparatingAxisTheorem.checkCollision(
+          colliderA.getShape(transformA).getPoints(), colliderB.getShape(transformB).getPoints()
         );
         case CIRCLE -> calculateAABBVsCircle(
-          entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
+          colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
       };
       case CIRCLE -> switch (colliderB.getType()) {
-        case AABB -> calculateAABBVsCircle(
-          entityB, entityA, colliderB.getShape(transformB), colliderA.getShape(transformA)
-        );
+        case AABB -> {
+          isReversed = true;
+          yield calculateAABBVsCircle(
+            colliderB.getShape(transformB), colliderA.getShape(transformA)
+          );
+        }
         case CIRCLE -> calculateCircleVsCircle(
-          entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
+          colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
-        case TRIANGLE -> calculateCircleVsShapeSAT(
-          entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
-        );
+        case TRIANGLE -> {
+          isReversed = true;
+          yield calculateCircleVsShapeSAT(
+            colliderA.getShape(transformA), colliderB.getShape(transformB)
+          );
+        }
       };
       case TRIANGLE -> switch (colliderB.getType()) {
-        case AABB, TRIANGLE -> calculateShapeVsShapeSAT(
-          entityA, entityB, colliderA.getShape(transformA), colliderB.getShape(transformB)
+        case AABB, TRIANGLE -> SeparatingAxisTheorem.checkCollision(
+          colliderA.getShape(transformA).getPoints(), colliderB.getShape(transformB).getPoints()
         );
         case CIRCLE -> calculateCircleVsShapeSAT(
-          entityB, entityA, colliderB.getShape(transformB), colliderA.getShape(transformA)
+          colliderB.getShape(transformB), colliderA.getShape(transformA)
         );
       };
     };
+
+    if (mtv == null) {
+      return null;
+    }
+
+    if (isReversed) {
+      var temp = entityA;
+
+      entityA = entityB;
+      entityB = temp;
+    }
+
+    return new CollisionManifold(entityA, entityB, mtv.normal(), mtv.penetration());
   }
 
-  private static CollisionManifold calculateAABBVsCircle(
-    Entity rectEntity, Entity circeEntity,
-    Rectangle rectangle, Circle circle
-  ) {
+  /**
+   * Calculates a {@link MinimumTranslationVector} for a collision between an axis aligned {@link Rectangle} and
+   * {@link Circle}.
+   *
+   * @param rectangle the rectangle
+   * @param circle the circle
+   * @return the {@link MinimumTranslationVector} if there is a collision or else null
+   */
+  public static MinimumTranslationVector calculateAABBVsCircle(Rectangle rectangle, Circle circle) {
     Vector2D circleCenter = circle.center();
     Vector2D closestPointOnRectangle = SolaMath.clamp(rectangle.min(), rectangle.max(), circleCenter);
     boolean isCircleCenterInsideRectangle = circleCenter.equals(closestPointOnRectangle);
@@ -107,17 +133,20 @@ public final class CollisionUtils {
       normal = normal.scalar(-1);
     }
 
-    return new CollisionManifold(rectEntity, circeEntity, normal, penetration);
+    return new MinimumTranslationVector(normal, penetration);
   }
 
   /**
-   * This should not be used until penetration bug is fixed. Penetration and normal are incorrect when AABB are
+   * Calculates a {@link MinimumTranslationVector} for a collision between two axis aligned {@link Rectangle}s.
+   * <br />
+   * Note: This should not be used until penetration bug is fixed. Penetration and normal are incorrect when AABB are
    * inside each other
+   *
+   * @param rectangleA the first rectangle
+   * @param rectangleB the second rectangle
+   * @return the {@link MinimumTranslationVector} if there is a collision or else null
    */
-  private static CollisionManifold calculateAABBVsAABB(
-    Entity entityA, Entity entityB,
-    Rectangle rectangleA, Rectangle rectangleB
-  ) {
+  public static MinimumTranslationVector calculateAABBVsAABB(Rectangle rectangleA, Rectangle rectangleB) {
     Vector2D aBoxMin = rectangleA.min();
     Vector2D aBoxMax = rectangleA.max();
     Vector2D bBoxMin = rectangleB.min();
@@ -164,13 +193,17 @@ public final class CollisionUtils {
 
     // todo fix bug where penetration and normal are incorrect when AABB are inside each other
 
-    return new CollisionManifold(entityA, entityB, normal, penetration);
+    return new MinimumTranslationVector(normal, penetration);
   }
 
-  private static CollisionManifold calculateCircleVsCircle(
-    Entity entityA, Entity entityB,
-    Circle circleA, Circle circleB
-  ) {
+  /**
+   * Calculates a {@link MinimumTranslationVector} for a collision between two {@link Circle}s.
+   *
+   * @param circleA the first circle
+   * @param circleB the second circle
+   * @return the {@link MinimumTranslationVector} if there is a collision or else null
+   */
+  public static MinimumTranslationVector calculateCircleVsCircle(Circle circleA, Circle circleB) {
     Vector2D posA = circleA.center();
     Vector2D posB = circleB.center();
     float distance = posA.distance(posB);
@@ -182,33 +215,11 @@ public final class CollisionUtils {
 
     Vector2D normal = posB.subtract(posA).normalize();
 
-    return new CollisionManifold(entityA, entityB, normal, penetration);
+    return new MinimumTranslationVector(normal, penetration);
   }
 
-  private static CollisionManifold calculateShapeVsShapeSAT(
-    Entity entityA, Entity entityB,
-    Shape shapeA, Shape shapeB
-  ) {
-    var minimumTranslationVector = SeparatingAxisTheorem.checkCollision(shapeA.getPoints(), shapeB.getPoints());
-
-    if (minimumTranslationVector == null) {
-      return null;
-    }
-
-    return new CollisionManifold(entityA, entityB, minimumTranslationVector);
-  }
-
-  private static CollisionManifold calculateCircleVsShapeSAT(
-    Entity entityA, Entity entityB,
-    Circle circle, Shape shape
-  ) {
-    var minimumTranslationVector = SeparatingAxisTheorem.checkCollision(shape.getPoints(), circle.center(), circle.radius());
-
-    if (minimumTranslationVector == null) {
-      return null;
-    }
-
-    return new CollisionManifold(entityB, entityA, minimumTranslationVector);
+  private static MinimumTranslationVector calculateCircleVsShapeSAT(Circle circle, Shape shape) {
+    return SeparatingAxisTheorem.checkCollision(shape.getPoints(), circle.center(), circle.radius());
   }
 
   private CollisionUtils() {
