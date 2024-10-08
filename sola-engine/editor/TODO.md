@@ -8,54 +8,46 @@
 
 -----------------------------------------------------------------------------------------------------------------------
 
+## Editor TODO Notes
 
-## Editor TODO List
+Comes with default configuration for built-in components and systems
 
-Creates json files to assets directory
-
-Composable editor pieces
-* Component GUI
-* Systems GUI
-* Game UI GUI
-
-Comes with default pieces and can extend them
-
-* setup
+* Editor instance configuration (composable)
     1. Register all EcsSystems
-        1. UI for configuration them
+        1. UI for configuring them
     2. Register all Components
+        * Has some sort of ui metadata to generate fields for updating the components on an entity
     3. Register all Graphics modules
-    4. Register all GuiElements
+        * UI for configuring them
+
+* assets tooling
+    * create and edit font assets
+    * create and edit controls assets
+    * file browser in main UI to see assets
+        * can maybe be used to update components' values later that consume asset ids
+    * create and edit materials
+    * create and edit spritesheets
+    * create and edit GUIs
+        * maybe a WYSIWYG editor?
 
 * Scene composition
+    * UI Overview
+        * Left pane is list of entities
+        * Center is preview of entities
+        * Right is info about selected entity
+        * Bottom is assets maybe?
     * EcsSystems initially enabled
     * Graphics modules initially enabled
+    * Way to view various EventListeners?
     * World of initial entities
     * Initial GuiElement root
-
-* GuiElement stuff
-* Add more component controllers
-    * SpriteAnimator
-* editor camera improvements
-    * add new entities to center of editor camera
-    * better camera controls than WSAD
-    * option to focus editor camera on selected entity?
-    * option to copy camera's transform for editor preview of it?
-* Way to view all Systems and Components available
-* Way to view various EventListeners?
-* Allow Material assets to be updated
-* Add sprite sheets by image ui
-    * Ability to update them later to add new sprite ids
-* maybe show collider outline when collider component is active in editor?
-    * if not this a toggle to view all collider outlines
-* build for platform
-    * JavaFx
-        * maybe include JRE
-    * Swing
-        * maybe include JRE
-    * Browser
-* Create child + parent relationships for the entities?
-* load additional components, systems and engine ui from external JAR
-    * maybe generate a gradle file to build the jar from inside the engine?
+    * editor camera improvements
+        * add new entities to center of editor camera
+        * better camera controls than WSAD
+        * option to focus editor camera on selected entity?
+        * option to copy camera's transform for editor preview of it?
+        * maybe show collider outline when collider component is active in editor?
+            * if not this a toggle to view all collider outlines
+    * Create child + parent relationships for the entities?
 
 -----------------------------------------------------------------------------------------------------------------------
