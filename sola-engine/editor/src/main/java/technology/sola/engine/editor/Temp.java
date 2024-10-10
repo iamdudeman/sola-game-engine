@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import technology.sola.engine.platform.javafx.SolaJavaFx;
 import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class Temp {
   private static final Logger LOGGER = LoggerFactory.getLogger(Temp.class);
 
   public void run() {
-    Platform.startup(() -> {
+    SolaJavaFx.startOnApplicationThread(() -> {
       Stage primaryStage = new Stage();
 
       Scene scene = new Scene(mainPain());
