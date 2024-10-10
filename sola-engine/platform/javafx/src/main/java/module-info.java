@@ -8,4 +8,5 @@ module technology.sola.engine.platform.javafx {
   requires transitive technology.sola.engine;
 
   exports technology.sola.engine.platform.javafx;
+  exports technology.sola.engine.platform.javafx.assets;
 }
