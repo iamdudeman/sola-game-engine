@@ -1,6 +1,5 @@
 package technology.sola.engine.editor;
 
-import javafx.application.Platform;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Scene;

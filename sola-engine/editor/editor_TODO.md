@@ -12,6 +12,9 @@
 
 Comes with default configuration for built-in components and systems
 
+* Ability to increase/decrease font size across the program
+* Ability to easily open/close panels as needed based on selected tool
+
 * Editor instance configuration (composable)
     1. Register all EcsSystems
         1. UI for configuring them
