@@ -51,7 +51,7 @@ tasks.test {
 tasks.jacocoTestReport {
   reports {
     html.required.set(true)
-    html.outputLocation.set(file("$buildDir/reports/coverage"))
+    html.outputLocation.set(file(layout.buildDirectory.file("reports/coverage")))
   }
 }
 
