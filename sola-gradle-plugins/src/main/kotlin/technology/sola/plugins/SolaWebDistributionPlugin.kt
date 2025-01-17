@@ -71,8 +71,8 @@ class SolaWebDistributionPlugin : Plugin<Project> {
         from("${project.rootDir}/assets") {
           into("assets")
         }
-        from("${project.buildDir}/index.html")
-        from("${project.buildDir}/sola.js")
+        from("${layout.buildDirectory}/index.html")
+        from("${layout.buildDirectory}/sola.js")
       }
 
       project.tasks.getByName("assemble").finalizedBy(project.tasks.getByName("generateWebHtmlAndJs"))

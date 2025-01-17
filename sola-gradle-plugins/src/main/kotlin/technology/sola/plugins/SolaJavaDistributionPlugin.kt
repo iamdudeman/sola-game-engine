@@ -74,7 +74,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
       }
 
       project.task("prepareJPackage", Delete::class) {
-        delete("$buildDir/jpackage")
+        delete("${layout.buildDirectory}/jpackage")
       }
 
       project.task("distWinJPackage", Exec::class) {
@@ -90,7 +90,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
           "--vendor", project.properties["vendor"],
           "--icon", "${project.rootDir}/assets/icon.ico",
           "--copyright", "©${Calendar.getInstance().get(Calendar.YEAR)} ${project.properties["vendor"]}. All rights reserved.",
-          "--dest", "$buildDir/jpackage",
+          "--dest", "${layout.buildDirectory}/jpackage",
           "--input", "${project.rootDir}/dist/${project.name}",
           "--main-jar", "${project.properties["gameName"]}-${project.name}${osClassifierWithDash}-${project.version}.jar",
           "--type", "app-image"
@@ -104,7 +104,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
 
         dependsOn(tasks.getByName("distWinJPackage"))
 
-        from("${buildDir}/jpackage/${project.properties["gameName"]}-${project.version}")
+        from("${layout.buildDirectory}/jpackage/${project.properties["gameName"]}-${project.version}")
       }
     }
   }
