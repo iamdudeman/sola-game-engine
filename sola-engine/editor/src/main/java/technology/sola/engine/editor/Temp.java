@@ -22,7 +22,7 @@ public class Temp {
     SolaJavaFx.startOnApplicationThread(() -> {
       Stage primaryStage = new Stage();
 
-      Scene scene = new Scene(mainPain());
+      Scene scene = new Scene(mainPane());
 
       setApplicationIcon(primaryStage);
       primaryStage.setScene(scene);
@@ -32,7 +32,7 @@ public class Temp {
     });
   }
 
-  private SplitPane mainPain() {
+  private SplitPane mainPane() {
     SplitPane splitPane = new SplitPane();
 
     splitPane.orientationProperty().set(Orientation.VERTICAL);
