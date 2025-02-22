@@ -1,0 +1,31 @@
+{
+  "$id": "Sprite.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SpriteGuiElement",
+  "type": "object",
+  "properties": {
+    "tag": {
+      "const": "Sprite",
+      "description": "The tag of the element."
+    },
+    "props": {
+      "type": "object",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "The asset id for the SpriteSheet to render."
+        },
+        "spriteId": {
+          "type": "string",
+          "description": "The id of the sprite in the SpriteSheet to render."
+        }
+      }
+    },
+    "styles": {
+      "type": "array",
+      "items": {
+        "$ref": "../styles/BaseStyles.schema.json"
+      }
+    }
+  }
+}
