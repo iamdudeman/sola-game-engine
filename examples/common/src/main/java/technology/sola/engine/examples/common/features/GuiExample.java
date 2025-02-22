@@ -2,6 +2,7 @@ package technology.sola.engine.examples.common.features;
 
 import technology.sola.engine.assets.BulkAssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.SolaConfiguration;
@@ -31,6 +32,8 @@ public class GuiExample extends SolaWithDefaults {
 
     assetLoaderProvider.get(SolaImage.class)
       .addAssetMapping("test_tiles", "assets/duck.png");
+    assetLoaderProvider.get(SpriteSheet.class)
+        .addAssetMapping("forest", "assets/sprites/forest.sprites.json");
     assetLoaderProvider.get(Font.class)
       .addAssetMapping("times_NORMAL_18", "assets/font/times_NORMAL_18.font.json");
 
