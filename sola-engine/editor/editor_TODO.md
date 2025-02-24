@@ -24,6 +24,11 @@ Comes with default configuration for built-in components and systems
         * UI for configuring them
 
 * assets tooling
+    * main window could preview asset
+        * maybe `font` shows all characters rendered
+        * maybe `sprites` show outlines with hover for id of sprite
+        * maybe `audio` shows a little media player to preview it
+        * not sure for `input`
     * create and edit font assets
     * create and edit controls assets
     * file browser in main UI to see assets
