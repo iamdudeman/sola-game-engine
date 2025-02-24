@@ -105,16 +105,16 @@ public class StyleContainer<Style extends BaseStyles> {
     setStyles(combined);
   }
 
-
   /**
-   * Removes a {@link ConditionalStyle} from the current list of styles.
+   * Removes all instances of {@link ConditionalStyle} from the current list of styles.
    *
    * @param style the style to remove
    */
   public void removeStyle(ConditionalStyle<Style> style) {
-    List<ConditionalStyle<Style>> reduced = new ArrayList<>(conditionalStyles);
+    List<ConditionalStyle<Style>> reduced = conditionalStyles.stream()
+      .filter(existing -> !existing.equals(style))
+      .toList();
 
-    reduced.remove(style);
     setStyles(reduced);
   }
 

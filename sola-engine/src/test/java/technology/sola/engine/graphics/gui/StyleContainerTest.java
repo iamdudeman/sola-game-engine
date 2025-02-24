@@ -61,6 +61,7 @@ public class StyleContainerTest {
 
     var newStyle = ConditionalStyle.always(TextStyles.create().setBackgroundColor(Color.BLACK).build());
     styleContainer.addStyle(newStyle);
+    styleContainer.addStyle(newStyle);
     assertEquals(Color.BLACK, styleContainer.getPropertyValue(BaseStyles::background).color());
 
     styleContainer.removeStyle(newStyle);
