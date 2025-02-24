@@ -12,12 +12,7 @@ import technology.sola.engine.defaults.graphics.modules.*;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiDocument;
 import technology.sola.engine.graphics.gui.json.GuiJsonDocumentBuilder;
-import technology.sola.engine.graphics.gui.json.element.GuiElementJsonBlueprint;
-import technology.sola.engine.graphics.gui.json.element.ImageElementJsonBlueprint;
-import technology.sola.engine.graphics.gui.json.element.SectionElementJsonBlueprint;
-import technology.sola.engine.graphics.gui.json.element.TextElementJsonBlueprint;
-import technology.sola.engine.graphics.gui.json.element.ButtonElementJsonBlueprint;
-import technology.sola.engine.graphics.gui.json.element.TextInputElementJsonBlueprint;
+import technology.sola.engine.graphics.gui.json.element.*;
 import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -282,6 +277,7 @@ public abstract class SolaWithDefaults extends Sola {
             new SectionElementJsonBlueprint(),
             new TextElementJsonBlueprint(),
             new ImageElementJsonBlueprint(),
+            new SpriteElementJsonBlueprint(),
             new ButtonElementJsonBlueprint(),
             new TextInputElementJsonBlueprint()
           ),
