@@ -18,6 +18,8 @@
 
 ## TODO List
 
+* Add ability to modify what is rendered on each pixel
+    * Think "shader" but in software instead of GPU
 * Consider generalizing Triangle renderer and collider to "Polygon" instead
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
