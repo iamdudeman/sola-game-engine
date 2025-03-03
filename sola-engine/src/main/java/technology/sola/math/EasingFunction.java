@@ -48,21 +48,4 @@ public interface EasingFunction {
    * @return the eased value
    */
   float ease(float x);
-
-  /**
-   * Eases between a min and max value. A value of 0 for x will return min.
-   * A value of 1 for x will return max.
-   *
-   * @param x   the input value
-   * @param min the minimum value to return
-   * @param max the maximum value to return
-   * @return the eased value clamped between min and max
-   */
-  default float ease(float x, float min, float max) {
-    if (min == max) {
-      return min;
-    }
-
-    return min + (max - min) * ease(x);
-  }
 }
