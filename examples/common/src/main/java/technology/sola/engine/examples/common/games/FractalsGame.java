@@ -43,6 +43,9 @@ public class FractalsGame extends Sola {
     triangles = sierpinski();
     triangles = sierpinski();
     triangles = sierpinski();
+    triangles = sierpinski();
+    triangles = sierpinski();
+    triangles = sierpinski();
   }
 
   private List<Triangle> sierpinski() {
@@ -54,15 +57,14 @@ public class FractalsGame extends Sola {
         new Vector2D(triangle.p1().x() * 0.5f, triangle.p1().y() * 0.5f)
       );
       var sideLength = newTriangle.p2().y() - newTriangle.p1().y();
+      var halfSideLength = sideLength * 0.5f;
 
+      newTriangles.add(newTriangle);
       newTriangles.add(
-        translateTriangle(newTriangle, new Vector2D(-sideLength * 0.5f + sideLength * 0.5f, 0))
+        translateTriangle(newTriangle, new Vector2D(-halfSideLength, sideLength))
       );
       newTriangles.add(
-        translateTriangle(newTriangle, new Vector2D(-sideLength * 0.5f, sideLength))
-      );
-      newTriangles.add(
-        translateTriangle(newTriangle, new Vector2D(-sideLength * 0.5f + sideLength, sideLength))
+        translateTriangle(newTriangle, new Vector2D(-halfSideLength + sideLength, sideLength))
       );
     }
 
