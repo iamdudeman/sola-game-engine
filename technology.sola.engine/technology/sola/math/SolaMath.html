@@ -112,6 +112,36 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Rounds a positive float value to the nearest integer quickly.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#lerp(float,float,float)" class="member-name-link">lerp</a><wbr>(float&nbsp;start,
+ float&nbsp;end,
+ float&nbsp;percent)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Linearly interpolates a value between start and end.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#lerp(float,float,float,technology.sola.math.EasingFunction)" class="member-name-link">lerp</a><wbr>(float&nbsp;start,
+ float&nbsp;end,
+ float&nbsp;percent,
+ <a href="EasingFunction.html" title="interface in technology.sola.math">EasingFunction</a>&nbsp;easingFunction)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Interpolates a value between start and end via desired <a href="EasingFunction.html" title="interface in technology.sola.math"><code>EasingFunction</code></a>.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#lerp(technology.sola.math.linear.Vector2D,technology.sola.math.linear.Vector2D,float)" class="member-name-link">lerp</a><wbr>(<a href="linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;start,
+ <a href="linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;end,
+ float&nbsp;percent)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Linearly interpolates a <a href="linear/Vector2D.html" title="class in technology.sola.math.linear"><code>Vector2D</code></a> value between start and end.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#lerp(technology.sola.math.linear.Vector2D,technology.sola.math.linear.Vector2D,float,technology.sola.math.EasingFunction)" class="member-name-link">lerp</a><wbr>(<a href="linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;start,
+ <a href="linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;end,
+ float&nbsp;percent,
+ <a href="EasingFunction.html" title="interface in technology.sola.math">EasingFunction</a>&nbsp;easingFunction)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Interpolates a <a href="linear/Vector2D.html" title="class in technology.sola.math.linear"><code>Vector2D</code></a> value between start and end via desired <a href="EasingFunction.html" title="interface in technology.sola.math"><code>EasingFunction</code></a>.</div>
+</div>
 </div>
 </div>
 </div>
@@ -129,6 +159,78 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="lerp(float,float,float)">
+<h3>lerp</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">lerp</span><wbr><span class="parameters">(float&nbsp;start,
+ float&nbsp;end,
+ float&nbsp;percent)</span></div>
+<div class="block">Linearly interpolates a value between start and end.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>start</code> - the minimum value to return</dd>
+<dd><code>end</code> - the maximum value to return</dd>
+<dd><code>percent</code> - the "progress" towards the end value</dd>
+<dt>Returns:</dt>
+<dd>the linearly interpolated value clamped between start and end</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="lerp(float,float,float,technology.sola.math.EasingFunction)">
+<h3>lerp</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">lerp</span><wbr><span class="parameters">(float&nbsp;start,
+ float&nbsp;end,
+ float&nbsp;percent,
+ <a href="EasingFunction.html" title="interface in technology.sola.math">EasingFunction</a>&nbsp;easingFunction)</span></div>
+<div class="block">Interpolates a value between start and end via desired <a href="EasingFunction.html" title="interface in technology.sola.math"><code>EasingFunction</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>start</code> - the minimum value to return</dd>
+<dd><code>end</code> - the maximum value to return</dd>
+<dd><code>percent</code> - the "progress" towards the end value</dd>
+<dd><code>easingFunction</code> - the <a href="EasingFunction.html" title="interface in technology.sola.math"><code>EasingFunction</code></a> used during interpolation</dd>
+<dt>Returns:</dt>
+<dd>the interpolated value clamped between start and end</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="lerp(technology.sola.math.linear.Vector2D,technology.sola.math.linear.Vector2D,float)">
+<h3>lerp</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">lerp</span><wbr><span class="parameters">(<a href="linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;start,
+ <a href="linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;end,
+ float&nbsp;percent)</span></div>
+<div class="block">Linearly interpolates a <a href="linear/Vector2D.html" title="class in technology.sola.math.linear"><code>Vector2D</code></a> value between start and end.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>start</code> - the minimum value to return</dd>
+<dd><code>end</code> - the maximum value to return</dd>
+<dd><code>percent</code> - the "progress" towards the end value</dd>
+<dt>Returns:</dt>
+<dd>the linearly interpolated vector clamped between start and end</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="lerp(technology.sola.math.linear.Vector2D,technology.sola.math.linear.Vector2D,float,technology.sola.math.EasingFunction)">
+<h3>lerp</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></span>&nbsp;<span class="element-name">lerp</span><wbr><span class="parameters">(<a href="linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;start,
+ <a href="linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;end,
+ float&nbsp;percent,
+ <a href="EasingFunction.html" title="interface in technology.sola.math">EasingFunction</a>&nbsp;easingFunction)</span></div>
+<div class="block">Interpolates a <a href="linear/Vector2D.html" title="class in technology.sola.math.linear"><code>Vector2D</code></a> value between start and end via desired <a href="EasingFunction.html" title="interface in technology.sola.math"><code>EasingFunction</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>start</code> - the minimum value to return</dd>
+<dd><code>end</code> - the maximum value to return</dd>
+<dd><code>percent</code> - the "progress" towards the end value</dd>
+<dd><code>easingFunction</code> - the <a href="EasingFunction.html" title="interface in technology.sola.math"><code>EasingFunction</code></a> used during interpolation</dd>
+<dt>Returns:</dt>
+<dd>the interpolated vector clamped between start and end</dd>
+</dl>
+</section>
+</li>
 <li>
 <section class="detail" id="clamp(float,float,float)">
 <h3>clamp</h3>
