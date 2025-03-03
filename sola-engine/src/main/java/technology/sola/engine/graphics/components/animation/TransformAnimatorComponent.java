@@ -3,6 +3,7 @@ package technology.sola.engine.graphics.components.animation;
 import technology.sola.ecs.Component;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.math.EasingFunction;
+import technology.sola.math.SolaMath;
 
 /**
  * TransformAnimatorComponent is a {@link Component} that contains properties for defining an animation that is applied
@@ -160,10 +161,10 @@ public class TransformAnimatorComponent implements Component {
 
     float percent = Math.min(elapsedTime / duration, 1);
 
-    transformComponent.setX(easingFunction.ease(percent, startingTranslateX, endingTranslateX));
-    transformComponent.setY(easingFunction.ease(percent, startingTranslateY, endingTranslateY));
-    transformComponent.setScaleX(easingFunction.ease(percent, startingScaleX, endingScaleX));
-    transformComponent.setScaleY(easingFunction.ease(percent, startingScaleY, endingScaleY));
+    transformComponent.setX(SolaMath.lerp(startingTranslateX, endingTranslateX, percent, easingFunction));
+    transformComponent.setY(SolaMath.lerp(startingTranslateY, endingTranslateY, percent, easingFunction));
+    transformComponent.setScaleX(SolaMath.lerp(startingScaleX, endingScaleX, percent, easingFunction));
+    transformComponent.setScaleY(SolaMath.lerp(startingScaleY, endingScaleY, percent, easingFunction));
 
     if (elapsedTime >= duration && animationCompleteCallback != null) {
       animationCompleteCallback.onComplete(this);
