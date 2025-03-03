@@ -36,6 +36,34 @@ public final class SolaMath {
   }
 
   /**
+   * Linearly interpolates a {@link Vector2D} value between start and end.
+   *
+   * @param start   the minimum value to return
+   * @param end     the maximum value to return
+   * @param percent the "progress" towards the end value
+   * @return the linearly interpolated vector clamped between start and end
+   */
+  public static Vector2D lerp(Vector2D start, Vector2D end, float percent) {
+    return lerp(start, end, percent, EasingFunction.LINEAR);
+  }
+
+  /**
+   * Interpolates a {@link Vector2D} value between start and end via desired {@link EasingFunction}.
+   *
+   * @param start          the minimum value to return
+   * @param end            the maximum value to return
+   * @param percent        the "progress" towards the end value
+   * @param easingFunction the {@link EasingFunction} used during interpolation
+   * @return the interpolated vector clamped between start and end
+   */
+  public static Vector2D lerp(Vector2D start, Vector2D end, float percent, EasingFunction easingFunction) {
+    var x = lerp(start.x(), end.x(), percent, easingFunction);
+    var y = lerp(start.y(), end.y(), percent, easingFunction);
+
+    return new Vector2D(x, y);
+  }
+
+  /**
    * Clamps a float value between a min and max.
    *
    * @param min   the minimum value
