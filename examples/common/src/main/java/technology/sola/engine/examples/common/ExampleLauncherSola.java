@@ -9,6 +9,7 @@ import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.examples.common.features.*;
 import technology.sola.engine.examples.common.games.CirclePopGame;
+import technology.sola.engine.examples.common.games.FractalsGame;
 import technology.sola.engine.examples.common.games.PongGame;
 import technology.sola.engine.examples.common.games.SimplePlatformerGame;
 import technology.sola.engine.examples.common.games.minesweeper.MinesweeperGame;
@@ -134,6 +135,7 @@ public class ExampleLauncherSola extends SolaWithDefaults {
       .appendChildren(
         buildSectionTitle("Games"),
         buildExampleLaunchButton("Circle Pop", CirclePopGame::new),
+        buildExampleLaunchButton("Fractals", FractalsGame::new),
         buildExampleLaunchButton("Minesweeper", MinesweeperGame::new),
         buildExampleLaunchButton("Pong", PongGame::new),
         buildExampleLaunchButton("Simple Platformer", SimplePlatformerGame::new)
