@@ -2,9 +2,11 @@ package technology.sola.engine.examples.common.games;
 
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
+import technology.sola.engine.input.MouseButton;
 import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Vector2D;
 
@@ -13,6 +15,7 @@ import java.util.List;
 
 public class FractalsGame extends Sola {
   private List<Triangle> triangles = new ArrayList<>();
+  private int depth = 0;
 
   public FractalsGame() {
     super(new SolaConfiguration("Fractals", 800, 800, 30));
@@ -21,6 +24,8 @@ public class FractalsGame extends Sola {
   @Override
   protected void onRender(Renderer renderer) {
     renderer.clear(Color.BLACK);
+
+    renderer.drawString("Depth: " + depth, 0, 0, Color.WHITE);
 
     for (var triangle : triangles) {
       renderer.fillTriangle(
@@ -34,18 +39,20 @@ public class FractalsGame extends Sola {
 
   @Override
   protected void onInit() {
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+
     platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
 
     var original = scaleTriangle(unitEquilateralTriangle(), 800);
 
     triangles.add(original);
 
-    triangles = sierpinski();
-    triangles = sierpinski();
-    triangles = sierpinski();
-    triangles = sierpinski();
-    triangles = sierpinski();
-    triangles = sierpinski();
+    platform.onMouseReleased(event -> {
+      if (event.button() == MouseButton.PRIMARY && depth < 9) {
+        triangles = sierpinski();
+        depth++;
+      }
+    });
   }
 
   private List<Triangle> sierpinski() {
