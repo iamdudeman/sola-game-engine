@@ -42,10 +42,10 @@ public interface EasingFunction {
   EasingFunction SMOOTH_STEP = x -> (x * x) * (3 - 2 * x);
 
   /**
-   * Eases a value. A value of 0 for x should return 0. A value of 1 for x should return 1.
+   * Eases a value between 0 and 1. A value of 0 should return 0. A value of 1 should return 1.
    *
-   * @param x the input value
+   * @param value the input value
    * @return the eased value
    */
-  float ease(float x);
+  float ease(float value);
 }
