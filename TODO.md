@@ -18,6 +18,10 @@
 
 ## TODO List
 
+* Implement more MainAxisChildren options
+    * space-between
+    * space-evenly
+    * space-around
 * Add in ScrollEvent
     * JavaFX : `canvas.addEventHandler(ScrollEvent.SCROLL, event -> {});`
 * Consider generalizing Triangle renderer and collider to "Polygon" instead
@@ -45,6 +49,8 @@
 * Gui performance improvements
     * when should layout be invalidated (can partial invalidations happen for children/parent)
     * consider splitting layout and paint styles to prevent extra calculations
+* Implement "grow" concept for GuiElement children
+    * grow and shrink
 * REST client + server
     * ability to send and process Authorization header
 * Lighting
