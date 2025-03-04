@@ -18,6 +18,14 @@
 
 ## TODO List
 
+* Implement more MainAxisChildren options
+    * space-between
+    * space-evenly
+    * space-around
+* Add in ScrollEvent
+    * JavaFX : `canvas.addEventHandler(ScrollEvent.SCROLL, event -> {});`
+* Consider adding ability to modify what is rendered on each pixel
+    * Think "shader" but probably in software instead of GPU (might be a bad idea in general)
 * Consider generalizing Triangle renderer and collider to "Polygon" instead
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
@@ -43,6 +51,8 @@
 * Gui performance improvements
     * when should layout be invalidated (can partial invalidations happen for children/parent)
     * consider splitting layout and paint styles to prevent extra calculations
+* Implement "grow" concept for GuiElement children
+    * grow and shrink
 * REST client + server
     * ability to send and process Authorization header
 * Lighting
