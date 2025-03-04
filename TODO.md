@@ -24,6 +24,8 @@
     * space-around
 * Add in ScrollEvent
     * JavaFX : `canvas.addEventHandler(ScrollEvent.SCROLL, event -> {});`
+* Consider adding ability to modify what is rendered on each pixel
+    * Think "shader" but probably in software instead of GPU (might be a bad idea in general)
 * Consider generalizing Triangle renderer and collider to "Polygon" instead
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
