@@ -18,6 +18,8 @@
 
 ## TODO List
 
+* Add in ScrollEvent
+    * JavaFX : `canvas.addEventHandler(ScrollEvent.SCROLL, event -> {});`
 * Consider generalizing Triangle renderer and collider to "Polygon" instead
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
