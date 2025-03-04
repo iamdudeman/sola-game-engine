@@ -13,6 +13,9 @@ import technology.sola.math.linear.Vector2D;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Inspired from: https://www.youtube.com/watch?v=hjhMh0R9T1Y&ab_channel=wye
+ */
 public class FractalsGame extends Sola {
   private List<Triangle> triangles = new ArrayList<>();
   private int depth = 0;
