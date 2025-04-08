@@ -1,11 +1,15 @@
-package technology.sola.engine.editor;
+package technology.sola.engine.editor.core;
 
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
@@ -15,10 +19,10 @@ import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
 
 import java.io.IOException;
 
-public class Temp {
-  private static final Logger LOGGER = LoggerFactory.getLogger(Temp.class);
+public class EditorWindow {
+  private static final Logger LOGGER = LoggerFactory.getLogger(EditorWindow.class);
 
-  public void run() {
+  public void show() {
     SolaJavaFx.startOnApplicationThread(() -> {
       Stage primaryStage = new Stage();
 
@@ -32,14 +36,38 @@ public class Temp {
     });
   }
 
-  private SplitPane mainPane() {
+  private Parent mainPane() {
     SplitPane splitPane = new SplitPane();
 
     splitPane.orientationProperty().set(Orientation.VERTICAL);
 
+    // todo icon bar on the left which controls content in panes
+    //  one per asset type?
+
     splitPane.getItems().addAll(topPane(), bottomPane());
 
-    return splitPane;
+    var parent = new HBox(toolbar(), splitPane);
+
+    parent.setPrefHeight(600);
+    parent.setPrefWidth(800);
+
+    splitPane.prefWidthProperty().bind(parent.widthProperty());
+    splitPane.prefHeightProperty().bind(parent.heightProperty());
+
+    return parent;
+  }
+
+  private Node toolbar() {
+    ToolBar toolBar = new ToolBar();
+
+    toolBar.setOrientation(Orientation.VERTICAL);
+
+    Button buttonOne = new Button("First");
+    Button buttonTwo = new Button("Second");
+
+    toolBar.getItems().addAll(buttonOne, buttonTwo);
+
+    return toolBar;
   }
 
   private Node topPane() {

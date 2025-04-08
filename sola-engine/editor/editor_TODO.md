@@ -12,8 +12,11 @@
 
 Comes with default configuration for built-in components and systems
 
-* Ability to increase/decrease font size across the program
-* Ability to easily open/close panels as needed based on selected tool
+* UX
+    * Ability to increase/decrease font size across the program
+    * Ability to easily open/close panels as needed based on selected tool
+    * Remember panel sizing per "tool"
+        * Save on tool switch or close?
 
 * Editor instance configuration (composable)
     1. Register all EcsSystems

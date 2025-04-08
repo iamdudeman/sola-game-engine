@@ -8,4 +8,5 @@ module technology.sola.engine.editor {
   requires javafx.controls;
 
   exports technology.sola.engine.editor;
+  exports technology.sola.engine.editor.core;
 }
