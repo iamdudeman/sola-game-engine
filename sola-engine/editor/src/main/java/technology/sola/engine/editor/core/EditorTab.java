@@ -1,9 +1,7 @@
 package technology.sola.engine.editor.core;
 
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import technology.sola.engine.editor.core.components.EditorPanel;
+import technology.sola.engine.editor.core.components.PlaceholderPanel;
 import technology.sola.engine.editor.core.components.TabbedPanel;
 
 public record EditorTab(
@@ -16,12 +14,12 @@ public record EditorTab(
   // todo for early development
   @Deprecated
   public EditorTab(String label) {
-    this(label, new EditorPanel(new VBox(new Text("Blank"))), new TabbedPanel(), new EditorPanel(new VBox(new Text("Blank"))), new EditorPanel(new VBox(new Text("Blank"))));
+    this(label, new PlaceholderPanel(), new TabbedPanel(), new PlaceholderPanel(), new PlaceholderPanel());
   }
 
   // todo for early development
   @Deprecated
   public EditorTab(String label, Region leftPanel) {
-    this(label, leftPanel, new TabbedPanel(), new EditorPanel(new VBox(new Text("Blank"))), new EditorPanel(new VBox(new Text("Blank"))));
+    this(label, leftPanel, new TabbedPanel(), new PlaceholderPanel(), new PlaceholderPanel());
   }
 }

@@ -1,5 +1,6 @@
 package technology.sola.engine.editor.core;
 
+import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -19,6 +20,8 @@ import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
 
 import java.io.IOException;
 import java.util.List;
+
+// todo load and save panel sizing per EditorTab configuration
 
 public class EditorWindow {
   private static final Logger LOGGER = LoggerFactory.getLogger(EditorWindow.class);
@@ -91,17 +94,20 @@ public class EditorWindow {
     var toolbarItems = toolBar.getItems();
 
     editorTabs.forEach(editorTab -> {
-      toolbarItems.add(createEditorTabButton(editorTab));
+      toolbarItems.add(createEditorTabButton(editorTab, toolbarItems));
     });
 
+    toolbarItems.get(0).setDisable(true);
 
     return toolBar;
   }
 
-  private Button createEditorTabButton(EditorTab editorTab) {
+  private Button createEditorTabButton(EditorTab editorTab, ObservableList<Node> toolbarItems) {
     Button button = new Button(editorTab.label());
 
     button.setOnAction((event) -> {
+      toolbarItems.forEach(toolbarItem -> toolbarItem.setDisable(false));
+      button.setDisable(true);
       switchTab(editorTab);
     });
 
