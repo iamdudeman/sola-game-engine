@@ -77,8 +77,8 @@ public class EditorWindow {
     var parent = new HBox(toolbar(), mainPane);
 
     // todo hook up "remembered" size from a config file
-    parent.setPrefHeight(600);
-    parent.setPrefWidth(800);
+    parent.setPrefHeight(800);
+    parent.setPrefWidth(1200);
 
     mainPane.prefWidthProperty().bind(parent.widthProperty());
     mainPane.prefHeightProperty().bind(parent.heightProperty());
@@ -122,10 +122,10 @@ public class EditorWindow {
     var newBottomPanel = editorTab.bottomPanel();
 
     // todo hook up values from a config file here
-    newLeftPanel.setPrefWidth(200);
-    newCenterPanel.setMinWidth(400);
+    newLeftPanel.setPrefWidth(400);
+    newCenterPanel.setMinWidth(600);
     newCenterPanel.setMinHeight(400);
-    newRightPanel.setPrefWidth(200);
+    newRightPanel.setPrefWidth(100);
 
     if (leftPanel == null) {
       items.add(0, newLeftPanel);
