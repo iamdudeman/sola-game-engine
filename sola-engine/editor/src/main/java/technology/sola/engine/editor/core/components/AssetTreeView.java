@@ -52,8 +52,31 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
     ));
   }
 
+  public void selectAssetItem(String id) {
+    var foundItem = findAssetItem(id, getRoot());
+
+    if (foundItem != null) {
+      getSelectionModel().select(foundItem);
+    }
+  }
+
+  private TreeItem<AssetTreeItem> findAssetItem(String id, TreeItem<AssetTreeItem> parent) {
+    for (var child : parent.getChildren()) {
+      if (child.getValue().id.equals(id)) {
+        return child;
+      } else {
+        for (var nestedChild : child.getChildren()) {
+          return findAssetItem(id, nestedChild);
+        }
+      }
+    }
+
+    return null;
+  }
+
   private static TreeItem<AssetTreeItem> buildParentNode(AssetType assetType) {
-    var root = new TreeItem<>(new AssetTreeItem(assetType.title, new File("assets/" + assetType.path)));
+    var file = new File("assets/" + assetType.path);
+    var root = new TreeItem<>(new AssetTreeItem(file.getAbsolutePath(), assetType.title, file));
 
     root.setExpanded(true);
 
@@ -81,7 +104,7 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
         .forEach(file -> {
           if (file.isDirectory()) {
             var nestedFile = new File(parentFolder, file.getName());
-            var nestedParent = new TreeItem<>(new AssetTreeItem(file.getName(), nestedFile));
+            var nestedParent = new TreeItem<>(new AssetTreeItem(nestedFile.getAbsolutePath(), file.getName(), nestedFile));
 
             populateParent(assetType, nestedParent);
 
@@ -89,7 +112,7 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
           } else {
             if (file.getName().endsWith(assetType.extension)) {
               var nestedFile = new File(parentFolder, file.getName());
-              var assetFile = new TreeItem<>(new AssetTreeItem(file.getName().replace(assetType.extension, ""), nestedFile));
+              var assetFile = new TreeItem<>(new AssetTreeItem(nestedFile.getAbsolutePath(), file.getName().replace(assetType.extension, ""), nestedFile));
 
               parent.getChildren().add(assetFile);
             }
@@ -106,7 +129,7 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
   private void registerSelectAction(ActionConfiguration actionConfiguration) {
     getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue != null && !newValue.getValue().file().isDirectory()) {
-        actionConfiguration.select(newValue.getValue().file());
+        actionConfiguration.select(newValue.getValue());
       }
     });
   }
@@ -130,8 +153,8 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
           );
 
           if (shouldDelete) {
-            recursiveDelete(getSelectionModel().getSelectedItem().getValue().file());
-            refreshTree(assetType);
+            deleteFilesRecursively(getSelectionModel().getSelectedItem().getValue().file());
+            getSelectionModel().getSelectedItem().getParent().getChildren().remove(getSelectionModel().getSelectedItem());
           }
         }
       } else {
@@ -142,28 +165,12 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
 
         if (shouldDelete) {
           if (getSelectionModel().getSelectedItem().getValue().file().delete()) {
-            actionConfiguration.delete(getSelectionModel().getSelectedItem().getValue().file());
-            refreshTree(assetType);
+            actionConfiguration.delete(getSelectionModel().getSelectedItem().getValue());
+            getSelectionModel().getSelectedItem().getParent().getChildren().remove(getSelectionModel().getSelectedItem());
           }
         }
       }
     });
-  }
-
-  private void recursiveDelete(File file) {
-    if (file.isDirectory()) {
-      var files = file.listFiles();
-
-      if (files != null) {
-        for (var childFile : files) {
-          if (childFile.isDirectory()) {
-            recursiveDelete(childFile);
-          }
-        }
-      }
-    }
-
-    file.delete();
   }
 
   private void registerRenameMenuAction(MenuItem menuItem, AssetType assetType, ActionConfiguration actionConfiguration) {
@@ -175,10 +182,14 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
 
       @Override
       public AssetTreeItem fromString(String string) {
-        if (new File(p.getEditingItem().getValue().file.getParent(), string).exists()) {
-          return p.getEditingItem().getValue();
+        var editingItem = p.getEditingItem().getValue();
+        var editingFile = editingItem.file();
+        var newFile = new File(editingFile.getParent(), string + assetType.extension);
+
+        if (newFile.exists()) {
+          return editingItem;
         } else {
-          return new AssetTreeItem(string, p.getEditingItem().getValue().file());
+          return new AssetTreeItem(newFile.getAbsolutePath(), string, newFile);
         }
       }
     }));
@@ -190,13 +201,13 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
         : event.getNewValue().label + assetType.extension;
       var newFile = new File(item.getValue().file().getParent(), newName);
 
-      item.getValue().file.renameTo(newFile);
+      event.getOldValue().file().renameTo(newFile);
 
       edit(null);
       setEditable(false);
 
       if (!newFile.isDirectory()) {
-        actionConfiguration.rename(newFile, event.getOldValue().label);
+        actionConfiguration.rename(event.getOldValue(), event.getNewValue());
       }
     });
 
@@ -229,6 +240,22 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
     });
   }
 
+  private void deleteFilesRecursively(File file) {
+    if (file.isDirectory()) {
+      var files = file.listFiles();
+
+      if (files != null) {
+        for (var childFile : files) {
+          if (childFile.isDirectory()) {
+            deleteFilesRecursively(childFile);
+          }
+        }
+      }
+    }
+
+    file.delete();
+  }
+
   public enum AssetType {
     FONT("font", ".font.json", "Fonts", "font"),
     SPRITES("sprites", ".sprites.json", "Sprites", "spritesheet"),
@@ -248,14 +275,14 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
   }
 
   public interface ActionConfiguration {
-    void select(File file);
+    void select(AssetTreeItem item);
 
-    void rename(File renamedFile, String oldName);
+    void rename(AssetTreeItem oldItem, AssetTreeItem newItem);
 
-    void delete(File deletedFile);
+    void delete(AssetTreeItem item);
   }
 
-  public record AssetTreeItem(String label, File file) {
+  public record AssetTreeItem(String id, String label, File file) {
     @Override
     public String toString() {
       return label;

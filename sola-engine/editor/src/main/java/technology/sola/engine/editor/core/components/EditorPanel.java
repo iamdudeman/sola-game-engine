@@ -8,6 +8,10 @@ import technology.sola.engine.editor.core.Css;
  * EditorPanel is a wrapper component that adds some default styling for editor panels.
  */
 public class EditorPanel extends VBox {
+  public EditorPanel() {
+    super();
+  }
+
   /**
    * Creates an instance with desired content
    *
@@ -17,5 +21,10 @@ public class EditorPanel extends VBox {
     super(node);
 
     getStyleClass().add(Css.Util.PADDING_5X);
+  }
+
+  public void setChild(Node node) {
+    getChildren().clear();
+    getChildren().add(node);
   }
 }
