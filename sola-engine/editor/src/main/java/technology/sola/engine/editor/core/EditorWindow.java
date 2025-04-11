@@ -14,7 +14,6 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import technology.sola.engine.editor.font.FontLeftPanel;
 import technology.sola.engine.platform.javafx.SolaJavaFx;
 import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
 
@@ -38,7 +37,7 @@ public class EditorWindow {
 
   public void show() {
     SolaJavaFx.startOnApplicationThread(() -> {
-      editorTabs = buildTabs();
+      editorTabs = EditorTabs.build();
 
       Stage primaryStage = new Stage();
 
@@ -54,15 +53,6 @@ public class EditorWindow {
 
       primaryStage.show();
     });
-  }
-
-  private List<EditorTab> buildTabs() {
-    return List.of(
-      new EditorTab(
-        "Font", new FontLeftPanel()
-      ),
-      new EditorTab("Blah")
-    );
   }
 
   private Parent mainPane() {

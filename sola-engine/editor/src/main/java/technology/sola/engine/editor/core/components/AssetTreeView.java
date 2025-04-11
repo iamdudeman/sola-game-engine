@@ -4,6 +4,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTreeCell;
 import javafx.scene.input.MouseButton;
 import javafx.util.StringConverter;
+import technology.sola.engine.editor.core.notifications.ConfirmationDialog;
 
 import java.io.File;
 import java.util.Arrays;
@@ -14,7 +15,7 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
 
     var deleteMenuItem = new MenuItem("Delete");
     var renameMenuItem = new MenuItem("Rename");
-    var newMenuItem = new MenuItem("New " + assetType.newLabel);
+    var newMenuItem = new MenuItem("New " + assetType.singleAssetLabel);
     var newFolderMenuItem = new MenuItem("New folder");
     var refreshMenuItem = new MenuItem("Refresh");
 
@@ -22,6 +23,7 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
     setEditable(false);
 
     // register actions
+    registerSelectAction(actionConfiguration);
     registerDeleteMenuAction(deleteMenuItem, assetType, actionConfiguration);
     registerRenameMenuAction(renameMenuItem, assetType, actionConfiguration);
     // todo new asset
@@ -66,35 +68,47 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
     var files = parentFolder.listFiles();
 
     if (files != null) {
-      Arrays.stream(files).sorted((a, b) -> {
-        if (a.isDirectory()) {
-          return b.isDirectory() ? a.getName().compareTo(b.getName()) : -1;
-        }
+      Arrays.stream(files)
+        .sorted((a, b) -> {
+          int nameComparison = a.getName().compareTo(b.getName());
 
-        return b.isDirectory() ? 1 : a.getName().compareTo(b.getName());
-      }).forEach(file -> {
-        if (file.isDirectory()) {
-          var nestedFile = new File(parentFolder, file.getName());
-          var nestedParent = new TreeItem<>(new AssetTreeItem(file.getName(), nestedFile));
-
-          populateParent(assetType, nestedParent);
-
-          parent.getChildren().add(nestedParent);
-        } else {
-          if (file.getName().endsWith(assetType.extension)) {
-            var nestedFile = new File(parentFolder, file.getName());
-            var assetFile = new TreeItem<>(new AssetTreeItem(file.getName().replace(assetType.extension, ""), nestedFile));
-
-            parent.getChildren().add(assetFile);
+          if (a.isDirectory()) {
+            return b.isDirectory() ? nameComparison : -1;
           }
-        }
-      });
+
+          return b.isDirectory() ? 1 : nameComparison;
+        })
+        .forEach(file -> {
+          if (file.isDirectory()) {
+            var nestedFile = new File(parentFolder, file.getName());
+            var nestedParent = new TreeItem<>(new AssetTreeItem(file.getName(), nestedFile));
+
+            populateParent(assetType, nestedParent);
+
+            parent.getChildren().add(nestedParent);
+          } else {
+            if (file.getName().endsWith(assetType.extension)) {
+              var nestedFile = new File(parentFolder, file.getName());
+              var assetFile = new TreeItem<>(new AssetTreeItem(file.getName().replace(assetType.extension, ""), nestedFile));
+
+              parent.getChildren().add(assetFile);
+            }
+          }
+        });
     }
   }
 
   private void refreshTree(AssetType assetType) {
     getRoot().getChildren().clear();
     populateParent(assetType, getRoot());
+  }
+
+  private void registerSelectAction(ActionConfiguration actionConfiguration) {
+    getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue != null && !newValue.getValue().file().isDirectory()) {
+        actionConfiguration.select(newValue.getValue().file());
+      }
+    });
   }
 
   private void registerDeleteMenuAction(MenuItem menuItem, AssetType assetType, ActionConfiguration actionConfiguration) {
@@ -110,12 +124,46 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
             getSelectionModel().getSelectedItem().getParent().getChildren().remove(getSelectionModel().getSelectedItem());
           }
         } else {
-          // todo dialog for deleting folder with multiple children
+          boolean shouldDelete = ConfirmationDialog.warning(
+            "Delete " + assetType.singleAssetLabel + " folder?",
+            "Are you sure you want to delete all " + assetType.singleAssetLabel + " assets within the " + getSelectionModel().getSelectedItem().getValue().label() + " folder?"
+          );
+
+          if (shouldDelete) {
+            recursiveDelete(getSelectionModel().getSelectedItem().getValue().file());
+            refreshTree(assetType);
+          }
         }
       } else {
-        // todo dialog for deleting a file asset
+        boolean shouldDelete = ConfirmationDialog.warning(
+          "Delete " + assetType.singleAssetLabel + "?",
+          "Are you sure you want to delete the " + getSelectionModel().getSelectedItem().getValue().label() + " " + assetType.singleAssetLabel + "?"
+        );
+
+        if (shouldDelete) {
+          if (getSelectionModel().getSelectedItem().getValue().file().delete()) {
+            actionConfiguration.delete(getSelectionModel().getSelectedItem().getValue().file());
+            refreshTree(assetType);
+          }
+        }
       }
     });
+  }
+
+  private void recursiveDelete(File file) {
+    if (file.isDirectory()) {
+      var files = file.listFiles();
+
+      if (files != null) {
+        for (var childFile : files) {
+          if (childFile.isDirectory()) {
+            recursiveDelete(childFile);
+          }
+        }
+      }
+    }
+
+    file.delete();
   }
 
   private void registerRenameMenuAction(MenuItem menuItem, AssetType assetType, ActionConfiguration actionConfiguration) {
@@ -148,7 +196,7 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
       setEditable(false);
 
       if (!newFile.isDirectory()) {
-        actionConfiguration.renameAction.rename(newFile, event.getOldValue().label);
+        actionConfiguration.rename(newFile, event.getOldValue().label);
       }
     });
 
@@ -189,23 +237,22 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
     private final String path;
     private final String extension;
     private final String title;
-    private final String newLabel;
+    private final String singleAssetLabel;
 
-    AssetType(String path, String extension, String title, String newLabel) {
+    AssetType(String path, String extension, String title, String singleAssetLabel) {
       this.path = path;
       this.extension = extension;
       this.title = title;
-      this.newLabel = newLabel;
+      this.singleAssetLabel = singleAssetLabel;
     }
   }
 
-  public record ActionConfiguration(
-    RenameAction renameAction
-  ) {
-  }
+  public interface ActionConfiguration {
+    void select(File file);
 
-  public interface RenameAction {
     void rename(File renamedFile, String oldName);
+
+    void delete(File deletedFile);
   }
 
   public record AssetTreeItem(String label, File file) {
