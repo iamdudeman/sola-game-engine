@@ -18,7 +18,11 @@ public class FontLeftPanel extends EditorPanel {
     setChild(assetTreeView);
 
     centerPanel.setSelectedTabListener(tab -> {
-      assetTreeView.selectAssetItem(tab.getId());
+      if (tab == null) {
+        assetTreeView.deselectAssetItem();
+      } else {
+        assetTreeView.selectAssetItem(tab.getId());
+      }
     });
   }
 

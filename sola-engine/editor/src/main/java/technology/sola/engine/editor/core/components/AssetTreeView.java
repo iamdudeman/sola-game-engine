@@ -52,6 +52,10 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
     ));
   }
 
+  public void deselectAssetItem() {
+    getSelectionModel().select(null);
+  }
+
   public void selectAssetItem(String id) {
     var foundItem = findAssetItem(id, getRoot());
 

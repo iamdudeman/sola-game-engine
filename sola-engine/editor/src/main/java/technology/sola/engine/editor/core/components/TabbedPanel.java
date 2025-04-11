@@ -14,7 +14,7 @@ public class TabbedPanel extends TabPane {
     setTabDragPolicy(TabDragPolicy.REORDER);
 
     selectionModelProperty().get().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-      if (selectedTabListener != null && newValue != null) {
+      if (selectedTabListener != null) {
         selectedTabListener.accept(newValue);
       }
     });
