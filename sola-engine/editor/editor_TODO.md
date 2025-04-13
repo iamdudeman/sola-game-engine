@@ -1,7 +1,6 @@
 # Editor TODO List
 
 WIP initial list
-* hook up toasts for at least errors (when things fail to delete or rename, etc.)
 * finish font panel
     * ability to create needed still
 * save sizing and restore when opened

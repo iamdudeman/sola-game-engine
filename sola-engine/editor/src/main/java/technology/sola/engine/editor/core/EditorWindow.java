@@ -14,6 +14,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import technology.sola.engine.editor.core.notifications.Toast;
 import technology.sola.engine.platform.javafx.SolaJavaFx;
 import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
 
@@ -50,6 +51,8 @@ public class EditorWindow {
       setApplicationIcon(primaryStage);
       primaryStage.setScene(scene);
       primaryStage.setTitle("sola editor");
+
+      Toast.initialize(primaryStage);
 
       primaryStage.show();
     });

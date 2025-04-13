@@ -5,6 +5,7 @@ import javafx.scene.control.cell.TextFieldTreeCell;
 import javafx.scene.input.MouseButton;
 import javafx.util.StringConverter;
 import technology.sola.engine.editor.core.notifications.ConfirmationDialog;
+import technology.sola.engine.editor.core.notifications.Toast;
 
 import java.io.File;
 import java.util.Arrays;
@@ -188,9 +189,14 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
       public AssetTreeItem fromString(String string) {
         var editingItem = p.getEditingItem().getValue();
         var editingFile = editingItem.file();
-        var newFile = new File(editingFile.getParent(), string + assetType.extension);
+        var extension = editingFile.isDirectory() ? "" : assetType.extension;
+        var newFile = new File(editingFile.getParent(), string + extension);
 
         if (newFile.exists()) {
+          var itemLabel = editingFile.isDirectory() ? "Folder" : "File";
+
+          Toast.warn(itemLabel + " with the name " + string + " already exists.");
+
           return editingItem;
         } else {
           return new AssetTreeItem(newFile.getAbsolutePath(), string, newFile);
@@ -205,14 +211,14 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
         : event.getNewValue().label + assetType.extension;
       var newFile = new File(item.getValue().file().getParent(), newName);
 
-      event.getOldValue().file().renameTo(newFile);
+      if (event.getOldValue().file().renameTo(newFile)) {
+        if (!newFile.isDirectory()) {
+          actionConfiguration.rename(event.getOldValue(), event.getNewValue());
+        }
+      }
 
       edit(null);
       setEditable(false);
-
-      if (!newFile.isDirectory()) {
-        actionConfiguration.rename(event.getOldValue(), event.getNewValue());
-      }
     });
 
     setOnEditCancel(event -> {
