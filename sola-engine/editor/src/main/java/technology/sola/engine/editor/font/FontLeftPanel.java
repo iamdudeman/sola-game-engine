@@ -2,15 +2,14 @@ package technology.sola.engine.editor.font;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import technology.sola.engine.editor.core.utils.FileUtils;
 import technology.sola.engine.editor.core.components.AssetTreeView;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.components.TabbedPanel;
 import technology.sola.engine.editor.core.notifications.Toast;
-import technology.sola.json.SolaJson;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 
 public class FontLeftPanel extends EditorPanel {
   private static final Logger LOGGER = LoggerFactory.getLogger(FontLeftPanel.class);
@@ -54,18 +53,18 @@ public class FontLeftPanel extends EditorPanel {
 
     @Override
     public void rename(AssetTreeView.AssetTreeItem oldItem, AssetTreeView.AssetTreeItem newItem) {
-      var parentFile = newItem.file().getParentFile();
+      var newItemFile = newItem.file();
+      var parentFile = newItemFile.getParentFile();
       var imageAsset = new File(parentFile, oldItem.label() + ".png");
-      var newImageAsset = newItem.file().getName().replace(".font.json", "") + ".png";
+      var newImageAsset = newItemFile.getName().replace(".font.json", "") + ".png";
 
       try {
-        var jsonFileString = Files.readString(newItem.file().toPath());
-        var jsonObject = new SolaJson().parse(jsonFileString).asObject();
+        var jsonObject = FileUtils.readJson(newItemFile).asObject();
 
         jsonObject.put("fontGlyphFile", newImageAsset);
 
         if (imageAsset.renameTo(new File(parentFile, newImageAsset))) {
-          Files.writeString(newItem.file().toPath(), jsonObject.toString());
+          FileUtils.writeJson(newItemFile, jsonObject);
 
           centerPanel.renameTab(oldItem.id(), newItem.label(), newItem.id());
         }

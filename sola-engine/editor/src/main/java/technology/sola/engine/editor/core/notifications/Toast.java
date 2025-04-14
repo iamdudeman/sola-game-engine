@@ -17,9 +17,9 @@ import java.util.List;
 
 public class Toast {
   public static Stage primaryStage;
-  private static final List<QueuedToast> queuedToastList = new LinkedList<>();
+  private static final List<QueuedToast> QUEUED_TOASTS = new LinkedList<>();
+  private static final AnimationConfig DEFAULT_CONFIG = new AnimationConfig(200, 2000, 200);
   private static boolean isPlaying = false;
-  private static final AnimationConfig defaultConfig = new AnimationConfig(200, 2000, 200);
 
   public static void initialize(Stage primaryStage) {
     Toast.primaryStage = primaryStage;
@@ -39,7 +39,7 @@ public class Toast {
 
   private static void toast(String text, ToastType toastType) {
     if (isPlaying) {
-      queuedToastList.add(new QueuedToast(text, toastType, defaultConfig));
+      QUEUED_TOASTS.add(new QueuedToast(text, toastType, DEFAULT_CONFIG));
       return;
     }
 
@@ -47,7 +47,7 @@ public class Toast {
 
     var toastStage = buildToast(text, toastType);
 
-    playToastAnimation(toastStage, defaultConfig);
+    playToastAnimation(toastStage, DEFAULT_CONFIG);
   }
 
   private static Stage buildToast(String message, ToastType toastType) {
@@ -99,10 +99,10 @@ public class Toast {
     sequentialTransition.setOnFinished(event -> {
       toastStage.close();
 
-      if (queuedToastList.isEmpty()) {
+      if (QUEUED_TOASTS.isEmpty()) {
         isPlaying = false;
       } else {
-        var next = queuedToastList.remove(0);
+        var next = QUEUED_TOASTS.remove(0);
 
         playToastAnimation(buildToast(next.text, next.toastType), next.config);
       }

@@ -2,6 +2,8 @@ package technology.sola.engine.editor.core.components;
 
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTreeCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.util.StringConverter;
 import technology.sola.engine.editor.core.notifications.ConfirmationDialog;
@@ -9,10 +11,14 @@ import technology.sola.engine.editor.core.notifications.Toast;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
   public AssetTreeView(AssetType assetType, ActionConfiguration actionConfiguration) {
     super(buildParentNode(assetType));
+
+    setShowRoot(false);
+    setEditable(false);
 
     var deleteMenuItem = new MenuItem("Delete");
     var renameMenuItem = new MenuItem("Rename");
@@ -20,16 +26,13 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
     var newFolderMenuItem = new MenuItem("New folder");
     var refreshMenuItem = new MenuItem("Refresh");
 
-    setShowRoot(false);
-    setEditable(false);
-
     // register actions
-    registerSelectAction(actionConfiguration);
     registerDeleteMenuAction(deleteMenuItem, assetType, actionConfiguration);
     registerRenameMenuAction(renameMenuItem, assetType, actionConfiguration);
-    // todo new asset
+    registerNewMenuAction(newMenuItem, assetType, actionConfiguration);
     registerNewFolderMenuAction(newFolderMenuItem, assetType);
     refreshMenuItem.setOnAction(event -> refreshTree(assetType));
+    registerSelectAction(actionConfiguration);
 
     // hide menu items that require selection
     deleteMenuItem.setVisible(false);
@@ -71,7 +74,11 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
         return child;
       } else {
         for (var nestedChild : child.getChildren()) {
-          return findAssetItem(id, nestedChild);
+          var result = findAssetItem(id, nestedChild);
+
+          if (result != null) {
+            return result;
+          }
         }
       }
     }
@@ -110,6 +117,11 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
           if (file.isDirectory()) {
             var nestedFile = new File(parentFolder, file.getName());
             var nestedParent = new TreeItem<>(new AssetTreeItem(nestedFile.getAbsolutePath(), file.getName(), nestedFile));
+            var folderIconImage = new Image(Objects.requireNonNull(
+              AssetTreeView.class.getResourceAsStream("/icons/folder.png")
+            ));
+
+            nestedParent.setGraphic(new ImageView(folderIconImage));
 
             populateParent(assetType, nestedParent);
 
@@ -230,6 +242,10 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
 
       edit(getSelectionModel().getSelectedItem());
     });
+  }
+
+  private void registerNewMenuAction(MenuItem menuItem, AssetType assetType, ActionConfiguration actionConfiguration) {
+    // todo implement
   }
 
   private void registerNewFolderMenuAction(MenuItem menuItem, AssetType assetType) {
