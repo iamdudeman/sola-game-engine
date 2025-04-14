@@ -10,8 +10,8 @@ class EditorTabs {
   static List<EditorTab> build() {
     return List.of(
       buildFontTab(),
-      buildPlaceholderTab(),
-      buildPlaceholderTab()
+      buildPlaceholderTab("p1"),
+      buildPlaceholderTab("p2")
     );
   }
 
@@ -19,12 +19,12 @@ class EditorTabs {
     var centerPanel = new TabbedPanel();
     var leftPanel = new FontLeftPanel(centerPanel);
 
-    return new EditorTab("Font", leftPanel, centerPanel, new PlaceholderPanel(), new PlaceholderPanel());
+    return new EditorTab("font", "Font", leftPanel, centerPanel, new PlaceholderPanel(), new PlaceholderPanel());
   }
 
   // todo just for early development
   @Deprecated
-  private static EditorTab buildPlaceholderTab() {
-    return new EditorTab("Placeholder", new PlaceholderPanel(), new TabbedPanel(), new PlaceholderPanel(), new PlaceholderPanel());
+  private static EditorTab buildPlaceholderTab(String id) {
+    return new EditorTab(id, "Placeholder", new PlaceholderPanel(), new TabbedPanel(), new PlaceholderPanel(), new PlaceholderPanel());
   }
 }

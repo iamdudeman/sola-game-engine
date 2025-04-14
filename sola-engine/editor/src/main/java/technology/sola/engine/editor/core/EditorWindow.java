@@ -14,10 +14,15 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import technology.sola.engine.editor.core.config.EditorConfig;
+import technology.sola.engine.editor.core.config.EditorConfigJsonMapper;
+import technology.sola.engine.editor.core.config.WindowBounds;
 import technology.sola.engine.editor.core.notifications.Toast;
+import technology.sola.engine.editor.core.utils.FileUtils;
 import technology.sola.engine.platform.javafx.SolaJavaFx;
 import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -25,6 +30,7 @@ import java.util.List;
 
 public class EditorWindow {
   private static final Logger LOGGER = LoggerFactory.getLogger(EditorWindow.class);
+  private EditorConfig editorConfig;
   private SplitPane mainPane;
 
   private SplitPane topPane;
@@ -41,6 +47,8 @@ public class EditorWindow {
       editorTabs = EditorTabs.build();
 
       Stage primaryStage = new Stage();
+
+      initializeEditorConfigurationEvents(primaryStage);
 
       Scene scene = new Scene(mainPane());
 
@@ -68,10 +76,6 @@ public class EditorWindow {
     mainPane.getItems().addAll(topPane);
 
     var parent = new HBox(toolbar(), mainPane);
-
-    // todo hook up "remembered" size from a config file
-    parent.setPrefHeight(800);
-    parent.setPrefWidth(1200);
 
     mainPane.prefWidthProperty().bind(parent.widthProperty());
     mainPane.prefHeightProperty().bind(parent.heightProperty());
@@ -115,10 +119,10 @@ public class EditorWindow {
     var newBottomPanel = editorTab.bottomPanel();
 
     // todo hook up values from a config file here
-    newLeftPanel.setPrefWidth(400);
-    newCenterPanel.setMinWidth(600);
-    newCenterPanel.setMinHeight(400);
-    newRightPanel.setPrefWidth(100);
+    //    newLeftPanel.setPrefWidth(400);
+    //    newCenterPanel.setMinWidth(600);
+    //    newCenterPanel.setMinHeight(400);
+    //    newRightPanel.setPrefWidth(100);
 
     if (leftPanel == null) {
       items.add(0, newLeftPanel);
@@ -148,6 +152,51 @@ public class EditorWindow {
     centerPanel = newCenterPanel;
     rightPanel = newRightPanel;
     bottomPanel = newBottomPanel;
+  }
+
+  private void initializeEditorConfigurationEvents(Stage primaryStage) {
+    editorConfig = readConfigFile();
+
+    primaryStage.setX(editorConfig.window().x());
+    primaryStage.setY(editorConfig.window().y());
+    primaryStage.setWidth(editorConfig.window().width());
+    primaryStage.setHeight(editorConfig.window().height());
+
+    primaryStage.setOnCloseRequest(event -> updateConfigFile(primaryStage));
+  }
+
+  private EditorConfig readConfigFile() {
+    File file = new File("sola-editor.config.json");
+
+    if (file.exists()) {
+      try {
+        var json = FileUtils.readJson(file);
+
+        return new EditorConfigJsonMapper().toObject(json.asObject());
+      } catch (IOException ex) {
+        LOGGER.error(ex.getMessage(), ex);
+      }
+    }
+
+    return new EditorConfig(new WindowBounds(
+      12,
+      12,
+      1200,
+      800
+    ));
+  }
+
+  private void updateConfigFile(Stage primaryStage) {
+    try {
+      var windowBounds = new WindowBounds(
+        (int) primaryStage.getX(), (int) primaryStage.getY(),
+        (int) primaryStage.getWidth(), (int) primaryStage.getHeight()
+      );
+
+      FileUtils.writeJson(new File("sola-editor.config.json"), new EditorConfigJsonMapper().toJson(new EditorConfig(windowBounds)));
+    } catch (IOException ex) {
+      LOGGER.error(ex.getMessage(), ex);
+    }
   }
 
   private void setApplicationIcon(Stage stage) {

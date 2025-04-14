@@ -21,3 +21,4 @@ dependency-reduced-pom.xml
 temp.mp3
 *.log*
 _editor_sandbox
+sola-editor.config.json
