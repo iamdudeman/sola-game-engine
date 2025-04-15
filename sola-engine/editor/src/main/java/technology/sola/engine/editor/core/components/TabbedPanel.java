@@ -4,6 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public class TabbedPanel extends TabPane {
@@ -22,6 +23,16 @@ public class TabbedPanel extends TabPane {
 
   public void setSelectedTabListener(Consumer<Tab> selectedTabListener) {
     this.selectedTabListener = selectedTabListener;
+  }
+
+  public String getSelectedId() {
+    return getSelectionModel().getSelectedItem() == null ? null : getSelectionModel().getSelectedItem().getId();
+  }
+
+  public List<String> getOpenedTabIds() {
+    return getTabs().stream()
+      .map(Tab::getId)
+      .toList();
   }
 
   public void addTab(String id, String title, Node content) {

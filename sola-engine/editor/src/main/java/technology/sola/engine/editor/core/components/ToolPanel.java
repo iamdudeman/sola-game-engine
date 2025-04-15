@@ -2,10 +2,9 @@ package technology.sola.engine.editor.core.components;
 
 import javafx.scene.control.SplitPane;
 import technology.sola.engine.editor.core.config.EditorConfig;
+import technology.sola.json.JsonObject;
 
-// todo add ability to save/load configuration from EditorConfig per tool
-
-public abstract class ToolPanel extends SplitPane {
+public abstract class ToolPanel<T> extends SplitPane {
   protected final EditorConfig editorConfig;
 
   public ToolPanel(EditorConfig editorConfig) {
@@ -17,4 +16,8 @@ public abstract class ToolPanel extends SplitPane {
   public abstract String getToolLabel();
 
   public abstract String getToolId();
+
+  public abstract JsonObject buildToolConfigForSaving();
+
+  protected abstract T buildToolConfigFromEditorConfig(EditorConfig editorConfig);
 }

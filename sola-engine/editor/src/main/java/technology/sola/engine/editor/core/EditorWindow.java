@@ -14,7 +14,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import technology.sola.engine.editor.core.components.PlaceholderToolPanel;
 import technology.sola.engine.editor.core.components.ToolPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.engine.editor.core.config.WindowBounds;
@@ -22,9 +21,12 @@ import technology.sola.engine.editor.core.notifications.Toast;
 import technology.sola.engine.editor.font.FontToolPanel;
 import technology.sola.engine.platform.javafx.SolaJavaFx;
 import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
+import technology.sola.json.JsonObject;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EditorWindow {
   private static final Logger LOGGER = LoggerFactory.getLogger(EditorWindow.class);
@@ -105,7 +107,7 @@ public class EditorWindow {
     return toolBar;
   }
 
-  private Button createEditorTabButton(ToolPanel toolPanel, ObservableList<Node> toolbarItems) {
+  private Button createEditorTabButton(ToolPanel<?> toolPanel, ObservableList<Node> toolbarItems) {
     Button button = new Button(toolPanel.getToolLabel());
 
     button.setOnAction((event) -> {
@@ -117,7 +119,7 @@ public class EditorWindow {
     return button;
   }
 
-  private void switchTab(ToolPanel toolPanel) {
+  private void switchTab(ToolPanel<?> toolPanel) {
     toolPanel.setPrefHeight(toolContent.getHeight());
     toolPanel.setPrefWidth(toolContent.getWidth());
 
@@ -132,16 +134,24 @@ public class EditorWindow {
     primaryStage.setHeight(editorConfig.window().height());
 
     primaryStage.setOnCloseRequest(event -> {
+      // window size
       var windowBounds = new WindowBounds(
         (int) primaryStage.getX(), (int) primaryStage.getY(),
         (int) primaryStage.getWidth(), (int) primaryStage.getHeight()
       );
 
+      // selected tool
       String selectedId = toolContent.getChildren().get(0).getId();
 
-      // todo get config for each tool panel and save it
+      // tool specific configurations
+      Map<String, JsonObject> toolConfigs = new HashMap<>();
 
-      EditorConfig.writeConfigFile(new EditorConfig(windowBounds, selectedId));
+      editorToolPanels.forEach(toolPanel -> {
+        toolConfigs.put(toolPanel.getToolId(), toolPanel.buildToolConfigForSaving());
+      });
+
+      // save it all
+      EditorConfig.writeConfigFile(new EditorConfig(windowBounds, selectedId, toolConfigs));
     });
   }
 

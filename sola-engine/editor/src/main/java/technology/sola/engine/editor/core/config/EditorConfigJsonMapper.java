@@ -3,7 +3,10 @@ package technology.sola.engine.editor.core.config;
 import technology.sola.json.JsonObject;
 import technology.sola.json.mapper.JsonMapper;
 
-public class EditorConfigJsonMapper implements JsonMapper<EditorConfig> {
+import java.util.HashMap;
+import java.util.Map;
+
+class EditorConfigJsonMapper implements JsonMapper<EditorConfig> {
   private final WindowBoundsJsonMapper windowBoundsJsonMapper = new WindowBoundsJsonMapper();
 
   @Override
@@ -14,18 +17,30 @@ public class EditorConfigJsonMapper implements JsonMapper<EditorConfig> {
   @Override
   public JsonObject toJson(EditorConfig editorConfig) {
     JsonObject object = new JsonObject();
+    JsonObject tools = new JsonObject();
+
+    editorConfig.toolConfigurations().forEach(tools::put);
 
     object.put("window", windowBoundsJsonMapper.toJson(editorConfig.window()));
     object.put("selectedTool", editorConfig.selectedTool());
+    object.put("tools", tools);
 
     return object;
   }
 
   @Override
   public EditorConfig toObject(JsonObject jsonObject) {
+    Map<String, JsonObject> toolConfigs = new HashMap<>();
+    JsonObject tools = jsonObject.getObject("tools", null);
+
+    if (tools != null) {
+      tools.forEach((key, value) -> toolConfigs.put(key, value.asObject()));
+    }
+
     return new EditorConfig(
       windowBoundsJsonMapper.toObject(jsonObject.getObject("window")),
-      jsonObject.getString("selectedTool", null)
+      jsonObject.getString("selectedTool", null),
+      toolConfigs
     );
   }
 }

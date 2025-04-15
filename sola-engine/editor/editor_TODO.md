@@ -3,10 +3,6 @@
 WIP initial list
 * finish font panel
     * ability to create needed still
-* save sizing and restore when opened
-    * Ability to easily open/close panels as needed based on selected tool
-    * Remember panel sizing per "tool"
-        * Save on tool switch or close?
 * create and edit font assets
   * maybe `font` shows all characters rendered
 

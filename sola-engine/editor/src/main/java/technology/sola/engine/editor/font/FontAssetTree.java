@@ -10,14 +10,16 @@ import technology.sola.engine.editor.core.notifications.Toast;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class FontAssetTree extends EditorPanel {
   private static final Logger LOGGER = LoggerFactory.getLogger(FontAssetTree.class);
+  private final AssetTreeView assetTreeView;
 
   public FontAssetTree(TabbedPanel centerPanel) {
     super();
 
-    var assetTreeView = new AssetTreeView(
+    assetTreeView = new AssetTreeView(
       AssetTreeView.AssetType.FONT,
       new FontActionConfiguration(centerPanel)
     );
@@ -31,6 +33,14 @@ public class FontAssetTree extends EditorPanel {
         assetTreeView.selectAssetItem(tab.getId());
       }
     });
+  }
+
+  public void restoreOpenedFilesAndSelection(List<String> ids, String selectedId) {
+    ids.forEach(assetTreeView::selectAssetItem);
+
+    if (selectedId != null) {
+      assetTreeView.selectAssetItem(selectedId);
+    }
   }
 
   private record FontActionConfiguration(

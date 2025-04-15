@@ -3,13 +3,16 @@ package technology.sola.engine.editor.core.config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import technology.sola.engine.editor.core.utils.FileUtils;
+import technology.sola.json.JsonObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 public record EditorConfig(
   WindowBounds window,
-  String selectedTool
+  String selectedTool,
+  Map<String, JsonObject> toolConfigurations
 ) {
   private static final Logger LOGGER = LoggerFactory.getLogger(EditorConfig.class);
 
@@ -26,12 +29,7 @@ public record EditorConfig(
       }
     }
 
-    return new EditorConfig(new WindowBounds(
-      12,
-      12,
-      1200,
-      800
-    ), null);
+    return new EditorConfig(new WindowBounds(), null, Map.of());
   }
 
   public static void writeConfigFile(EditorConfig editorConfig) {
