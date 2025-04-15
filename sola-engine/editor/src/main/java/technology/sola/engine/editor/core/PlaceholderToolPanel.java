@@ -12,7 +12,7 @@ import technology.sola.json.JsonObject;
 
 @Deprecated
 class PlaceholderToolPanel extends ToolPanel<PlaceholderToolPanel.Config> {
-  public PlaceholderToolPanel(EditorConfig editorConfig) {
+  PlaceholderToolPanel(EditorConfig editorConfig) {
     super(editorConfig);
 
     orientationProperty().set(Orientation.VERTICAL);
@@ -56,11 +56,11 @@ class PlaceholderToolPanel extends ToolPanel<PlaceholderToolPanel.Config> {
   }
 
   @Deprecated
-  public record Config() {
+  record Config() {
   }
 
   @Deprecated
-  public static class PlaceholderPanel extends EditorPanel {
+  static class PlaceholderPanel extends EditorPanel {
     @Deprecated
     public PlaceholderPanel() {
       super(new VBox(new ThemedText("Placeholder")));
