@@ -2,7 +2,7 @@ package technology.sola.engine.editor.core.components;
 
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
-import technology.sola.engine.editor.core.Css;
+import technology.sola.engine.editor.core.styles.Css;
 
 /**
  * EditorPanel is a wrapper component that adds some default styling for editor panels.

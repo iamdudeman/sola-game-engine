@@ -6,53 +6,47 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import technology.sola.engine.editor.core.components.PlaceholderToolPanel;
+import technology.sola.engine.editor.core.components.ToolPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
-import technology.sola.engine.editor.core.config.EditorConfigJsonMapper;
 import technology.sola.engine.editor.core.config.WindowBounds;
 import technology.sola.engine.editor.core.notifications.Toast;
-import technology.sola.engine.editor.core.utils.FileUtils;
+import technology.sola.engine.editor.font.FontToolPanel;
 import technology.sola.engine.platform.javafx.SolaJavaFx;
 import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-// todo load and save panel sizing per EditorTab configuration
 
 public class EditorWindow {
   private static final Logger LOGGER = LoggerFactory.getLogger(EditorWindow.class);
   private EditorConfig editorConfig;
-  private SplitPane mainPane;
+  private VBox toolContent;
 
-  private SplitPane topPane;
-  private Region leftPanel;
-  private Region centerPanel;
-  private Region rightPanel;
-
-  private Region bottomPanel;
-
-  private List<EditorTab> editorTabs;
+  private List<ToolPanel> editorToolPanels;
 
   public void show() {
     SolaJavaFx.startOnApplicationThread(() -> {
-      editorTabs = EditorTabs.build();
+      editorConfig = EditorConfig.readConfigFile();
+
+      editorToolPanels = List.of(
+        new FontToolPanel(editorConfig),
+        new PlaceholderToolPanel(editorConfig)
+      );
 
       Stage primaryStage = new Stage();
 
       initializeEditorConfigurationEvents(primaryStage);
 
       Scene scene = new Scene(mainPane());
-
-      switchTab(editorTabs.get(0));
 
       scene.getStylesheets().add("utility-styles.css");
 
@@ -67,18 +61,26 @@ public class EditorWindow {
   }
 
   private Parent mainPane() {
-    mainPane = new SplitPane();
+    toolContent = new VBox();
 
-    mainPane.orientationProperty().set(Orientation.VERTICAL);
+    var parent = new HBox(toolbar(), toolContent);
 
-    topPane = new SplitPane();
+    toolContent.prefWidthProperty().bind(parent.widthProperty());
+    toolContent.prefHeightProperty().bind(parent.heightProperty());
 
-    mainPane.getItems().addAll(topPane);
+    var selectedTool = editorToolPanels.stream()
+      .filter(toolPanel -> toolPanel.getToolId().equals(editorConfig.selectedTool()))
+      .findFirst()
+      .orElse(editorToolPanels.get(0));
 
-    var parent = new HBox(toolbar(), mainPane);
+    toolContent.widthProperty().addListener((observable, oldValue, newValue) -> {
+      ((Region) toolContent.getChildren().get(0)).setPrefWidth(newValue.doubleValue());
+    });
+    toolContent.heightProperty().addListener((observable, oldValue, newValue) -> {
+      ((Region) toolContent.getChildren().get(0)).setPrefHeight(newValue.doubleValue());
+    });
 
-    mainPane.prefWidthProperty().bind(parent.widthProperty());
-    mainPane.prefHeightProperty().bind(parent.heightProperty());
+    switchTab(selectedTool);
 
     return parent;
   }
@@ -90,113 +92,57 @@ public class EditorWindow {
 
     var toolbarItems = toolBar.getItems();
 
-    editorTabs.forEach(editorTab -> {
-      toolbarItems.add(createEditorTabButton(editorTab, toolbarItems));
-    });
+    editorToolPanels.forEach(toolPanel -> {
+      var button = createEditorTabButton(toolPanel, toolbarItems);
 
-    toolbarItems.get(0).setDisable(true);
+      button.setDisable(
+        toolPanel.getToolId().equals(editorConfig.selectedTool())
+      );
+
+      toolbarItems.add(button);
+    });
 
     return toolBar;
   }
 
-  private Button createEditorTabButton(EditorTab editorTab, ObservableList<Node> toolbarItems) {
-    Button button = new Button(editorTab.label());
+  private Button createEditorTabButton(ToolPanel toolPanel, ObservableList<Node> toolbarItems) {
+    Button button = new Button(toolPanel.getToolLabel());
 
     button.setOnAction((event) -> {
       toolbarItems.forEach(toolbarItem -> toolbarItem.setDisable(false));
       button.setDisable(true);
-      switchTab(editorTab);
+      switchTab(toolPanel);
     });
 
     return button;
   }
 
-  private void switchTab(EditorTab editorTab) {
-    var items = topPane.getItems();
-    var newLeftPanel = editorTab.leftPanel();
-    var newCenterPanel = editorTab.centerPanel();
-    var newRightPanel = editorTab.rightPanel();
-    var newBottomPanel = editorTab.bottomPanel();
+  private void switchTab(ToolPanel toolPanel) {
+    toolPanel.setPrefHeight(toolContent.getHeight());
+    toolPanel.setPrefWidth(toolContent.getWidth());
 
-    // todo hook up values from a config file here
-    //    newLeftPanel.setPrefWidth(400);
-    //    newCenterPanel.setMinWidth(600);
-    //    newCenterPanel.setMinHeight(400);
-    //    newRightPanel.setPrefWidth(100);
-
-    if (leftPanel == null) {
-      items.add(0, newLeftPanel);
-    } else {
-      items.set(items.indexOf(leftPanel), newLeftPanel);
-    }
-
-    if (centerPanel == null) {
-      items.add(1, newCenterPanel);
-    } else {
-      items.set(items.indexOf(centerPanel), newCenterPanel);
-    }
-
-    if (rightPanel == null) {
-      items.add(2, newRightPanel);
-    } else {
-      items.set(items.indexOf(rightPanel), newRightPanel);
-    }
-
-    if (bottomPanel == null) {
-      mainPane.getItems().add(1, newBottomPanel);
-    } else {
-      mainPane.getItems().set(mainPane.getItems().indexOf(bottomPanel), newBottomPanel);
-    }
-
-    leftPanel = newLeftPanel;
-    centerPanel = newCenterPanel;
-    rightPanel = newRightPanel;
-    bottomPanel = newBottomPanel;
+    toolContent.getChildren().clear();
+    toolContent.getChildren().add(toolPanel);
   }
 
   private void initializeEditorConfigurationEvents(Stage primaryStage) {
-    editorConfig = readConfigFile();
-
     primaryStage.setX(editorConfig.window().x());
     primaryStage.setY(editorConfig.window().y());
     primaryStage.setWidth(editorConfig.window().width());
     primaryStage.setHeight(editorConfig.window().height());
 
-    primaryStage.setOnCloseRequest(event -> updateConfigFile(primaryStage));
-  }
-
-  private EditorConfig readConfigFile() {
-    File file = new File("sola-editor.config.json");
-
-    if (file.exists()) {
-      try {
-        var json = FileUtils.readJson(file);
-
-        return new EditorConfigJsonMapper().toObject(json.asObject());
-      } catch (IOException ex) {
-        LOGGER.error(ex.getMessage(), ex);
-      }
-    }
-
-    return new EditorConfig(new WindowBounds(
-      12,
-      12,
-      1200,
-      800
-    ));
-  }
-
-  private void updateConfigFile(Stage primaryStage) {
-    try {
+    primaryStage.setOnCloseRequest(event -> {
       var windowBounds = new WindowBounds(
         (int) primaryStage.getX(), (int) primaryStage.getY(),
         (int) primaryStage.getWidth(), (int) primaryStage.getHeight()
       );
 
-      FileUtils.writeJson(new File("sola-editor.config.json"), new EditorConfigJsonMapper().toJson(new EditorConfig(windowBounds)));
-    } catch (IOException ex) {
-      LOGGER.error(ex.getMessage(), ex);
-    }
+      String selectedId = toolContent.getChildren().get(0).getId();
+
+      // todo get config for each tool panel and save it
+
+      EditorConfig.writeConfigFile(new EditorConfig(windowBounds, selectedId));
+    });
   }
 
   private void setApplicationIcon(Stage stage) {

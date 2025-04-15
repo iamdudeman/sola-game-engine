@@ -11,10 +11,10 @@ import technology.sola.engine.editor.core.notifications.Toast;
 import java.io.File;
 import java.io.IOException;
 
-public class FontLeftPanel extends EditorPanel {
-  private static final Logger LOGGER = LoggerFactory.getLogger(FontLeftPanel.class);
+public class FontAssetTree extends EditorPanel {
+  private static final Logger LOGGER = LoggerFactory.getLogger(FontAssetTree.class);
 
-  public FontLeftPanel(TabbedPanel centerPanel) {
+  public FontAssetTree(TabbedPanel centerPanel) {
     super();
 
     var assetTreeView = new AssetTreeView(

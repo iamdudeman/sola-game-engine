@@ -4,6 +4,11 @@ WIP initial list
 * finish font panel
     * ability to create needed still
 * save sizing and restore when opened
+    * Ability to easily open/close panels as needed based on selected tool
+    * Remember panel sizing per "tool"
+        * Save on tool switch or close?
+* create and edit font assets
+  * maybe `font` shows all characters rendered
 
 ## Known Bugs List
 
@@ -19,9 +24,6 @@ Comes with default configuration for built-in components and systems
 
 * UX
     * Ability to increase/decrease font size across the program
-    * Ability to easily open/close panels as needed based on selected tool
-    * Remember panel sizing per "tool"
-        * Save on tool switch or close?
 
 * Editor instance configuration (composable)
     1. Register all EcsSystems
@@ -33,11 +35,9 @@ Comes with default configuration for built-in components and systems
 
 * assets tooling
     * main window could preview asset
-        * maybe `font` shows all characters rendered
         * maybe `sprites` show outlines with hover for id of sprite
         * maybe `audio` shows a little media player to preview it
         * not sure for `input`
-    * create and edit font assets
     * create and edit controls assets
     * file browser in main UI to see assets
         * can maybe be used to update components' values later that consume asset ids

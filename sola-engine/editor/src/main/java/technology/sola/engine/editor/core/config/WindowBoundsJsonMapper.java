@@ -3,7 +3,7 @@ package technology.sola.engine.editor.core.config;
 import technology.sola.json.JsonObject;
 import technology.sola.json.mapper.JsonMapper;
 
-public class WindowBoundsJsonMapper implements JsonMapper<WindowBounds> {
+class WindowBoundsJsonMapper implements JsonMapper<WindowBounds> {
   @Override
   public Class<WindowBounds> getObjectClass() {
     return WindowBounds.class;

@@ -16,6 +16,7 @@ public class EditorConfigJsonMapper implements JsonMapper<EditorConfig> {
     JsonObject object = new JsonObject();
 
     object.put("window", windowBoundsJsonMapper.toJson(editorConfig.window()));
+    object.put("selectedTool", editorConfig.selectedTool());
 
     return object;
   }
@@ -23,7 +24,8 @@ public class EditorConfigJsonMapper implements JsonMapper<EditorConfig> {
   @Override
   public EditorConfig toObject(JsonObject jsonObject) {
     return new EditorConfig(
-      windowBoundsJsonMapper.toObject(jsonObject.getObject("window"))
+      windowBoundsJsonMapper.toObject(jsonObject.getObject("window")),
+      jsonObject.getString("selectedTool", null)
     );
   }
 }

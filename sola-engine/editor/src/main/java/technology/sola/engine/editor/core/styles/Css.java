@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.core;
+package technology.sola.engine.editor.core.styles;
 
 /**
  * Contains constants to various CSS classes.
