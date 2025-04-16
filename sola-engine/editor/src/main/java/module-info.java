@@ -6,6 +6,7 @@ module technology.sola.engine.editor {
   requires org.slf4j;
   requires java.desktop;
   requires javafx.controls;
+    requires technology.sola.engine.tooling;
 
-  exports technology.sola.engine.editor;
+    exports technology.sola.engine.editor;
 }

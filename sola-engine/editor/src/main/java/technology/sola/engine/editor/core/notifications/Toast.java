@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import technology.sola.engine.editor.core.EditorScene;
 import technology.sola.engine.editor.core.components.ThemedText;
 
 import java.util.LinkedList;
@@ -26,15 +27,27 @@ public class Toast {
   }
 
   public static void info(String text) {
+    assertInitialized();
+
     toast(text, ToastType.INFO);
   }
 
   public static void warn(String text) {
+    assertInitialized();
+
     toast(text, ToastType.WARNING);
   }
 
   public static void error(String text) {
+    assertInitialized();
+
     toast(text, ToastType.ERROR);
+  }
+
+  private static void assertInitialized() {
+    if (primaryStage == null) {
+      throw new IllegalStateException("Toast has not been initialized.");
+    }
   }
 
   private static void toast(String text, ToastType toastType) {
@@ -72,7 +85,8 @@ public class Toast {
         break;
     }
 
-    final Scene scene = new Scene(root);
+    Scene scene = new EditorScene(root);
+
     scene.setFill(Color.TRANSPARENT);
     toastStage.setScene(scene);
 

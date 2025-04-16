@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import technology.sola.engine.editor.core.components.ToolPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.engine.editor.core.config.WindowBounds;
+import technology.sola.engine.editor.core.notifications.CustomDialog;
 import technology.sola.engine.editor.core.notifications.Toast;
 import technology.sola.engine.editor.font.FontToolPanel;
 import technology.sola.engine.platform.javafx.SolaJavaFx;
@@ -48,15 +49,14 @@ public class EditorWindow {
 
       initializeEditorConfigurationEvents(primaryStage);
 
-      Scene scene = new Scene(mainPane());
-
-      scene.getStylesheets().add("utility-styles.css");
+      Scene scene = new EditorScene(mainPane());
 
       setApplicationIcon(primaryStage);
       primaryStage.setScene(scene);
       primaryStage.setTitle("sola editor");
 
       Toast.initialize(primaryStage);
+      CustomDialog.initialize(primaryStage);
 
       primaryStage.show();
     });

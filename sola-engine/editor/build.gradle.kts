@@ -11,6 +11,7 @@ javafx {
 
 dependencies {
   implementation(project(":sola-engine:platform:javafx"))
+  implementation(project(":tooling"))
 }
 
 solaPublishing {
