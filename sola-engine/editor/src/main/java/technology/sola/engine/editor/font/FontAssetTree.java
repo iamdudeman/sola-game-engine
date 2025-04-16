@@ -2,6 +2,7 @@ package technology.sola.engine.editor.font;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import technology.sola.engine.editor.core.notifications.CustomDialog;
 import technology.sola.engine.editor.core.utils.FileUtils;
 import technology.sola.engine.editor.core.components.AssetTreeView;
 import technology.sola.engine.editor.core.components.EditorPanel;
@@ -63,7 +64,7 @@ public class FontAssetTree extends EditorPanel {
 
     @Override
     public void create(File parentFolder) {
-      new NewFontDialog(parentFolder).show();
+      CustomDialog.show("New Font", new NewFontDialogContent(parentFolder));
     }
 
     @Override

@@ -1,29 +1,21 @@
 package technology.sola.engine.editor.font;
 
 import javafx.collections.FXCollections;
-import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import technology.sola.engine.assets.graphics.font.FontStyle;
-import technology.sola.engine.editor.core.EditorScene;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.components.control.IntegerSpinner;
-import technology.sola.engine.editor.core.notifications.CustomDialog;
 import technology.sola.engine.tooling.font.FontListTool;
 import technology.sola.engine.tooling.font.FontRasterizerTool;
 
 import java.io.File;
 import java.util.Arrays;
 
-public class NewFontDialog extends CustomDialog {
-  public NewFontDialog(File parentFolder) {
-    super();
-
-    setTitle("New Font");
-
-    VBox vBox = new VBox();
-    EditorPanel root = new EditorPanel(vBox);
-
-    vBox.setSpacing(8);
+public class NewFontDialogContent extends EditorPanel {
+  public NewFontDialogContent(File parentFolder) {
+    setSpacing(8);
 
     var fonts = new FontListTool().execute().split("\n");
 
@@ -41,7 +33,7 @@ public class NewFontDialog extends CustomDialog {
 
     characters.setText(FontRasterizerTool.DEFAULT_CHARACTERS);
 
-    vBox.getChildren().addAll(
+    getChildren().addAll(
       fontChoice,
       styleChoice,
       size,
@@ -49,7 +41,5 @@ public class NewFontDialog extends CustomDialog {
       new Button("Cancel"),
       new Button("Create")
     );
-
-    setScene(new EditorScene(root));
   }
 }
