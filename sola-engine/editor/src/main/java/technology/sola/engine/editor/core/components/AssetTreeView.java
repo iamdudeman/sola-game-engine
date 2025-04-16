@@ -49,10 +49,12 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
     });
 
     setContextMenu(new ContextMenu(
+      // generic menu items
+      newMenuItem, newFolderMenuItem,
       // selection specific menu items
       renameMenuItem, deleteMenuItem,
-      // generic menu items
-      newMenuItem, newFolderMenuItem, refreshMenuItem
+      // generic, but least important
+      refreshMenuItem
     ));
   }
 
@@ -245,7 +247,24 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
   }
 
   private void registerNewMenuAction(MenuItem menuItem, AssetType assetType, ActionConfiguration actionConfiguration) {
-    // todo implement
+    menuItem.setOnAction(event -> {
+      var selectedItem = getSelectionModel().getSelectedItem();
+      File parentFolder;
+
+      if (selectedItem == null) {
+        parentFolder = getRoot().getValue().file();
+      } else {
+        var selectedFile = selectedItem.getValue().file();
+
+        if (selectedFile.isDirectory()) {
+          parentFolder = selectedFile;
+        } else {
+          parentFolder = selectedFile.getParentFile();
+        }
+      }
+
+      actionConfiguration.create(parentFolder);
+    });
   }
 
   private void registerNewFolderMenuAction(MenuItem menuItem, AssetType assetType) {
@@ -302,6 +321,8 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
 
   public interface ActionConfiguration {
     void select(AssetTreeItem item);
+
+    void create(File parentFolder);
 
     void rename(AssetTreeItem oldItem, AssetTreeItem newItem);
 

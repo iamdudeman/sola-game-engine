@@ -62,6 +62,11 @@ public class FontAssetTree extends EditorPanel {
     }
 
     @Override
+    public void create(File parentFolder) {
+      new NewFontDialog(parentFolder).show();
+    }
+
+    @Override
     public void rename(AssetTreeView.AssetTreeItem oldItem, AssetTreeView.AssetTreeItem newItem) {
       var newItemFile = newItem.file();
       var parentFile = newItemFile.getParentFile();
