@@ -7,7 +7,16 @@ import javafx.util.converter.IntegerStringConverter;
 
 import java.util.regex.Pattern;
 
+/**
+ * IntegerSpinner is a {@link Spinner} that is set for integers only.
+ */
 public class IntegerSpinner extends Spinner<Integer> {
+  /**
+   * Creates an integer spinner with desired min and max values.
+   *
+   * @param min the minimum value
+   * @param max the maximum value
+   */
   public IntegerSpinner(int min, int max) {
     setEditable(true);
 
