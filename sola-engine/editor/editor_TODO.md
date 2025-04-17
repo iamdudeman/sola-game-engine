@@ -1,11 +1,5 @@
 # Editor TODO List
 
-WIP initial list
-* finish font panel
-    * ability to create needed still
-* create and edit font assets
-  * maybe `font` shows all characters rendered
-
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
