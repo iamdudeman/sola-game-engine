@@ -6,8 +6,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.util.StringConverter;
-import technology.sola.engine.editor.core.notifications.ConfirmationDialog;
-import technology.sola.engine.editor.core.notifications.Toast;
+import technology.sola.engine.editor.core.notifications.DialogService;
+import technology.sola.engine.editor.core.notifications.ToastService;
 
 import java.io.File;
 import java.util.Arrays;
@@ -71,17 +71,15 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
   }
 
   private TreeItem<AssetTreeItem> findAssetItem(String id, TreeItem<AssetTreeItem> parent) {
-    for (var child : parent.getChildren()) {
-      if (child.getValue().id.equals(id)) {
-        return child;
-      } else {
-        for (var nestedChild : child.getChildren()) {
-          var result = findAssetItem(id, nestedChild);
+    if (parent.getValue().id().equals(id)) {
+      return parent;
+    }
 
-          if (result != null) {
-            return result;
-          }
-        }
+    for (var child : parent.getChildren()) {
+      var result = findAssetItem(id, child);
+
+      if (result != null) {
+        return result;
       }
     }
 
@@ -166,18 +164,18 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
             getSelectionModel().getSelectedItem().getParent().getChildren().remove(getSelectionModel().getSelectedItem());
           }
         } else {
-          boolean shouldDelete = ConfirmationDialog.warning(
+          boolean shouldDelete = DialogService.warningConfirmation(
             "Delete " + assetType.singleAssetLabel + " folder?",
             "Are you sure you want to delete all " + assetType.singleAssetLabel + " assets within the " + getSelectionModel().getSelectedItem().getValue().label() + " folder?"
           );
 
           if (shouldDelete) {
-            deleteFilesRecursively(getSelectionModel().getSelectedItem().getValue().file());
+            deleteFilesRecursively(file);
             getSelectionModel().getSelectedItem().getParent().getChildren().remove(getSelectionModel().getSelectedItem());
           }
         }
       } else {
-        boolean shouldDelete = ConfirmationDialog.warning(
+        boolean shouldDelete = DialogService.warningConfirmation(
           "Delete " + assetType.singleAssetLabel + "?",
           "Are you sure you want to delete the " + getSelectionModel().getSelectedItem().getValue().label() + " " + assetType.singleAssetLabel + "?"
         );
@@ -209,7 +207,7 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
         if (newFile.exists()) {
           var itemLabel = editingFile.isDirectory() ? "Folder" : "File";
 
-          Toast.warn(itemLabel + " with the name " + string + " already exists.");
+          ToastService.warn(itemLabel + " with the name " + string + " already exists.");
 
           return editingItem;
         } else {
@@ -263,7 +261,13 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
         }
       }
 
-      actionConfiguration.create(parentFolder);
+      actionConfiguration.create(parentFolder, () -> {
+        refreshTree(assetType);
+
+        if (selectedItem != null) {
+          selectAssetItem(selectedItem.getValue().id());
+        }
+      });
     });
   }
 
@@ -291,9 +295,7 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
 
       if (files != null) {
         for (var childFile : files) {
-          if (childFile.isDirectory()) {
-            deleteFilesRecursively(childFile);
-          }
+          deleteFilesRecursively(childFile);
         }
       }
     }
@@ -322,7 +324,7 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
   public interface ActionConfiguration {
     void select(AssetTreeItem item);
 
-    void create(File parentFolder);
+    void create(File parentFolder, Runnable onAfterCreate);
 
     void rename(AssetTreeItem oldItem, AssetTreeItem newItem);
 

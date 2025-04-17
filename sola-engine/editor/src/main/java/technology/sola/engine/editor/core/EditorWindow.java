@@ -17,8 +17,8 @@ import org.slf4j.LoggerFactory;
 import technology.sola.engine.editor.core.components.ToolPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.engine.editor.core.config.WindowBounds;
-import technology.sola.engine.editor.core.notifications.CustomDialog;
-import technology.sola.engine.editor.core.notifications.Toast;
+import technology.sola.engine.editor.core.notifications.DialogService;
+import technology.sola.engine.editor.core.notifications.ToastService;
 import technology.sola.engine.editor.font.FontToolPanel;
 import technology.sola.engine.platform.javafx.SolaJavaFx;
 import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
@@ -55,8 +55,8 @@ public class EditorWindow {
       primaryStage.setScene(scene);
       primaryStage.setTitle("sola editor");
 
-      Toast.initialize(primaryStage);
-      CustomDialog.initialize(primaryStage);
+      ToastService.initialize(primaryStage);
+      DialogService.initialize(primaryStage);
 
       primaryStage.show();
     });

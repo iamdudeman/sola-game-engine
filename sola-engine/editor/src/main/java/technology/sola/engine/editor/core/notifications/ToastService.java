@@ -15,15 +15,19 @@ import technology.sola.engine.editor.core.components.ThemedText;
 import java.util.LinkedList;
 import java.util.List;
 
-
-public class Toast {
-  public static Stage primaryStage;
+public class ToastService {
   private static final List<QueuedToast> QUEUED_TOASTS = new LinkedList<>();
   private static final AnimationConfig DEFAULT_CONFIG = new AnimationConfig(200, 2000, 200);
+  private static Stage primaryStage;
   private static boolean isPlaying = false;
 
+  /**
+   * Initializes the ToastService so toasts will behave properly when created later.
+   *
+   * @param primaryStage the {@link Stage} that owns the toasts
+   */
   public static void initialize(Stage primaryStage) {
-    Toast.primaryStage = primaryStage;
+    ToastService.primaryStage = primaryStage;
   }
 
   public static void info(String text) {
@@ -142,6 +146,6 @@ public class Toast {
     ERROR
   }
 
-  private Toast() {
+  private ToastService() {
   }
 }

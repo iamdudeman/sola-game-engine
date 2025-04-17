@@ -33,6 +33,10 @@ class PlaceholderToolPanel extends ToolPanel<PlaceholderToolPanel.Config> {
       topPane,
       new PlaceholderPanel()
     );
+
+    topPane.getDividers().get(0).setPosition(0.2);
+    topPane.getDividers().get(1).setPosition(0.8);
+    getDividers().get(0).setPosition(0.75);
   }
 
   @Override

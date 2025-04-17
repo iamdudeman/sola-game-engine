@@ -2,12 +2,12 @@ package technology.sola.engine.editor.font;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import technology.sola.engine.editor.core.notifications.CustomDialog;
+import technology.sola.engine.editor.core.notifications.DialogService;
 import technology.sola.engine.editor.core.utils.FileUtils;
 import technology.sola.engine.editor.core.components.AssetTreeView;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.components.TabbedPanel;
-import technology.sola.engine.editor.core.notifications.Toast;
+import technology.sola.engine.editor.core.notifications.ToastService;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,9 +20,11 @@ public class FontAssetTree extends EditorPanel {
   public FontAssetTree(TabbedPanel centerPanel) {
     super();
 
+    var actionConfiguration = new FontActionConfiguration(centerPanel);
+
     assetTreeView = new AssetTreeView(
       AssetTreeView.AssetType.FONT,
-      new FontActionConfiguration(centerPanel)
+      actionConfiguration
     );
 
     setChild(assetTreeView);
@@ -63,8 +65,8 @@ public class FontAssetTree extends EditorPanel {
     }
 
     @Override
-    public void create(File parentFolder) {
-      CustomDialog.show("New Font", new NewFontDialogContent(parentFolder));
+    public void create(File parentFolder, Runnable onAfterCreate) {
+      DialogService.custom("New Font", new NewFontDialogContent(parentFolder, onAfterCreate));
     }
 
     @Override
@@ -85,7 +87,7 @@ public class FontAssetTree extends EditorPanel {
           centerPanel.renameTab(oldItem.id(), newItem.label(), newItem.id());
         }
       } catch (IOException ex) {
-        Toast.error(ex.getMessage());
+        ToastService.error(ex.getMessage());
         LOGGER.error(ex.getMessage(), ex);
       }
     }

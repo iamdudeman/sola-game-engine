@@ -2,6 +2,7 @@ package technology.sola.engine.editor.core.components;
 
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import technology.sola.engine.editor.core.styles.Css;
 
 /**
@@ -36,5 +37,14 @@ public class EditorPanel extends VBox {
   public void setChild(Node node) {
     getChildren().clear();
     getChildren().add(node);
+  }
+
+  /**
+   * Closes the parent stage.
+   */
+  public void closeParentStage() {
+    Stage stage = (Stage) getScene().getWindow();
+
+    stage.close();
   }
 }
