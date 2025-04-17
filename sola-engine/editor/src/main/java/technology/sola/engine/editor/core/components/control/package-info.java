@@ -1,4 +1,4 @@
 /**
- * Package containing control ui components for the editor.
+ * Package containing ui components the user inputs values with for the editor.
  */
 package technology.sola.engine.editor.core.components.control;
