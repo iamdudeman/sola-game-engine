@@ -15,6 +15,9 @@ import technology.sola.engine.editor.core.components.ThemedText;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * ToastService contains methods for showing various kinds of toast messages.
+ */
 public class ToastService {
   private static final List<QueuedToast> QUEUED_TOASTS = new LinkedList<>();
   private static final AnimationConfig DEFAULT_CONFIG = new AnimationConfig(200, 2000, 200);
@@ -30,22 +33,37 @@ public class ToastService {
     ToastService.primaryStage = primaryStage;
   }
 
+  /**
+   * Creates a toast message with info styling.
+   *
+   * @param text the message for the toast
+   */
   public static void info(String text) {
     assertInitialized();
 
-    toast(text, ToastType.INFO);
+    toast(text, ToastType.INFO, DEFAULT_CONFIG);
   }
 
+  /**
+   * Creates a toast message with warn styling.
+   *
+   * @param text the message for the toast
+   */
   public static void warn(String text) {
     assertInitialized();
 
-    toast(text, ToastType.WARNING);
+    toast(text, ToastType.WARNING, DEFAULT_CONFIG);
   }
 
+  /**
+   * Creates a toast message with error styling.
+   *
+   * @param text the message for the toast
+   */
   public static void error(String text) {
     assertInitialized();
 
-    toast(text, ToastType.ERROR);
+    toast(text, ToastType.ERROR, DEFAULT_CONFIG);
   }
 
   private static void assertInitialized() {
@@ -54,9 +72,9 @@ public class ToastService {
     }
   }
 
-  private static void toast(String text, ToastType toastType) {
+  private static void toast(String text, ToastType toastType, AnimationConfig animationConfig) {
     if (isPlaying) {
-      QUEUED_TOASTS.add(new QueuedToast(text, toastType, DEFAULT_CONFIG));
+      QUEUED_TOASTS.add(new QueuedToast(text, toastType, animationConfig));
       return;
     }
 
@@ -64,7 +82,7 @@ public class ToastService {
 
     var toastStage = buildToast(text, toastType);
 
-    playToastAnimation(toastStage, DEFAULT_CONFIG);
+    playToastAnimation(toastStage, animationConfig);
   }
 
   private static Stage buildToast(String message, ToastType toastType) {
@@ -134,7 +152,7 @@ public class ToastService {
     toastStage.setY(primaryStage.getY() + 4);
   }
 
-  public record AnimationConfig(int fadeInDelay, int duration, int fadeOutDelay) {
+  private record AnimationConfig(int fadeInDelay, int duration, int fadeOutDelay) {
   }
 
   private record QueuedToast(String text, ToastType toastType, AnimationConfig config) {
