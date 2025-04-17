@@ -29,20 +29,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * EditorWindow initializes the primary JavaFX {@link Stage} used by the sola editor. It also reads the editor
+ * configuration and initializes the various editor tools.
+ */
 public class EditorWindow {
   private static final Logger LOGGER = LoggerFactory.getLogger(EditorWindow.class);
   private EditorConfig editorConfig;
   private VBox toolContent;
 
-  private List<ToolPanel> editorToolPanels;
+  private List<ToolPanel<?>> editorToolPanels;
 
+  /**
+   * Configures and shows the main editor window.
+   */
   public void show() {
     SolaJavaFx.startOnApplicationThread(() -> {
       editorConfig = EditorConfig.readConfigFile();
 
       editorToolPanels = List.of(
         new FontToolPanel(editorConfig),
-        new PlaceholderToolPanel(editorConfig)
+        new PlaceholderToolPanel(editorConfig) // todo remove later when more tools are added
       );
 
       Stage primaryStage = new Stage();
