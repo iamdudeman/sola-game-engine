@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.core.components;
+package technology.sola.engine.editor.tools;
 
 import javafx.scene.control.SplitPane;
 import technology.sola.engine.editor.core.config.EditorConfig;

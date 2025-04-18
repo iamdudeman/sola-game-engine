@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.font;
+package technology.sola.engine.editor.tools.font;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

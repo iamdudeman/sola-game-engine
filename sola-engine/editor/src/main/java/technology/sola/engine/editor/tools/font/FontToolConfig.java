@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.font;
+package technology.sola.engine.editor.tools.font;
 
 import technology.sola.json.JsonArray;
 import technology.sola.json.JsonObject;

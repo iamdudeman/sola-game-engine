@@ -1,8 +1,8 @@
-package technology.sola.engine.editor.font;
+package technology.sola.engine.editor.tools.font;
 
 import javafx.application.Platform;
 import technology.sola.engine.editor.core.components.TabbedPanel;
-import technology.sola.engine.editor.core.components.ToolPanel;
+import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.json.JsonObject;
 

@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.font;
+package technology.sola.engine.editor.tools.font;
 
 import javafx.scene.Node;
 import javafx.scene.image.Image;

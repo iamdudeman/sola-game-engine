@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.font;
+package technology.sola.engine.editor.tools.font;
 
 import javafx.collections.FXCollections;
 import javafx.scene.Parent;
@@ -11,7 +11,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import technology.sola.engine.assets.graphics.font.FontStyle;
 import technology.sola.engine.editor.core.components.EditorPanel;
-import technology.sola.engine.editor.core.components.control.IntegerSpinner;
+import technology.sola.engine.editor.core.components.input.IntegerSpinner;
 import technology.sola.engine.tooling.font.FontListTool;
 import technology.sola.engine.tooling.font.FontRasterizerTool;
 

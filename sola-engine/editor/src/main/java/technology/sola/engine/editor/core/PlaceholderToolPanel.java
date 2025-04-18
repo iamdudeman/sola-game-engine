@@ -6,7 +6,7 @@ import javafx.scene.layout.VBox;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.components.TabbedPanel;
 import technology.sola.engine.editor.core.components.ThemedText;
-import technology.sola.engine.editor.core.components.ToolPanel;
+import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.json.JsonObject;
 

@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.core.components.control;
+package technology.sola.engine.editor.core.components.input;
 
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;

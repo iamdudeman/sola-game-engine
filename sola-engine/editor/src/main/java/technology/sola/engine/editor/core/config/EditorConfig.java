@@ -2,6 +2,7 @@ package technology.sola.engine.editor.core.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.engine.editor.core.utils.FileUtils;
 import technology.sola.json.JsonObject;
 
@@ -14,7 +15,7 @@ import java.util.Map;
  *
  * @param window             the {@link WindowBounds} properties
  * @param selectedTool       the tool that was selected when the editor last closed
- * @param toolConfigurations the configurations for each {@link technology.sola.engine.editor.core.components.ToolPanel}
+ * @param toolConfigurations the configurations for each {@link ToolPanel}
  */
 public record EditorConfig(
   WindowBounds window,
