@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.core.components;
+package technology.sola.engine.editor.core.components.assets;
 
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTreeCell;
@@ -13,8 +13,19 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
-  public AssetTreeView(AssetType assetType, ActionConfiguration actionConfiguration) {
+/**
+ * AssetTreeView is an extension of {@link TreeView} that is customized for working with sola file assets. It provides
+ * context menu options to create assets and folders, delete assets and rename assets.
+ */
+public class AssetTreeView extends TreeView<AssetTreeItem> {
+  /**
+   * Creates a new instance of AssetTreeView for desired {@link AssetType}. This initializes all context menu actions
+   * utilizing the provided {@link AssetActionConfiguration}.
+   *
+   * @param assetType           the {@link AssetType} for this AssetTreeView
+   * @param assetActionConfiguration the {@link AssetActionConfiguration} for the context menu to utilize
+   */
+  public AssetTreeView(AssetType assetType, AssetActionConfiguration assetActionConfiguration) {
     super(buildParentNode(assetType));
 
     setShowRoot(false);
@@ -27,12 +38,12 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
     var refreshMenuItem = new MenuItem("Refresh");
 
     // register actions
-    registerDeleteMenuAction(deleteMenuItem, assetType, actionConfiguration);
-    registerRenameMenuAction(renameMenuItem, assetType, actionConfiguration);
-    registerNewMenuAction(newMenuItem, assetType, actionConfiguration);
+    registerDeleteMenuAction(deleteMenuItem, assetType, assetActionConfiguration);
+    registerRenameMenuAction(renameMenuItem, assetType, assetActionConfiguration);
+    registerNewMenuAction(newMenuItem, assetType, assetActionConfiguration);
     registerNewFolderMenuAction(newFolderMenuItem, assetType);
     refreshMenuItem.setOnAction(event -> refreshTree(assetType));
-    registerSelectAction(actionConfiguration);
+    registerSelectAction(assetActionConfiguration);
 
     // hide menu items that require selection
     deleteMenuItem.setVisible(false);
@@ -58,10 +69,18 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
     ));
   }
 
+  /**
+   * Clears selection of an asset or folder.
+   */
   public void deselectAssetItem() {
     getSelectionModel().select(null);
   }
 
+  /**
+   * Selects an asset or folder by id.
+   *
+   * @param id the id of the asset or folder
+   */
   public void selectAssetItem(String id) {
     var foundItem = findAssetItem(id, getRoot());
 
@@ -99,7 +118,7 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
 
   private static void populateParent(AssetType assetType, TreeItem<AssetTreeItem> parent) {
     var parentAssetItem = parent.getValue();
-    var parentFolder = parentAssetItem.file;
+    var parentFolder = parentAssetItem.file();
     var files = parentFolder.listFiles();
 
     if (files != null) {
@@ -143,18 +162,18 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
     populateParent(assetType, getRoot());
   }
 
-  private void registerSelectAction(ActionConfiguration actionConfiguration) {
+  private void registerSelectAction(AssetActionConfiguration assetActionConfiguration) {
     getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue != null && !newValue.getValue().file().isDirectory()) {
-        actionConfiguration.select(newValue.getValue());
+        assetActionConfiguration.select(newValue.getValue());
       }
     });
   }
 
-  private void registerDeleteMenuAction(MenuItem menuItem, AssetType assetType, ActionConfiguration actionConfiguration) {
+  private void registerDeleteMenuAction(MenuItem menuItem, AssetType assetType, AssetActionConfiguration assetActionConfiguration) {
     menuItem.setOnAction(event -> {
       var item = getSelectionModel().getSelectedItem();
-      var file = item.getValue().file;
+      var file = item.getValue().file();
 
       if (file.isDirectory()) {
         var files = file.listFiles();
@@ -182,7 +201,7 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
 
         if (shouldDelete) {
           if (getSelectionModel().getSelectedItem().getValue().file().delete()) {
-            actionConfiguration.delete(getSelectionModel().getSelectedItem().getValue());
+            assetActionConfiguration.delete(getSelectionModel().getSelectedItem().getValue());
             getSelectionModel().getSelectedItem().getParent().getChildren().remove(getSelectionModel().getSelectedItem());
           }
         }
@@ -190,11 +209,11 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
     });
   }
 
-  private void registerRenameMenuAction(MenuItem menuItem, AssetType assetType, ActionConfiguration actionConfiguration) {
+  private void registerRenameMenuAction(MenuItem menuItem, AssetType assetType, AssetActionConfiguration assetActionConfiguration) {
     setCellFactory(p -> new TextFieldTreeCell<>(new StringConverter<>() {
       @Override
       public String toString(AssetTreeItem object) {
-        return object.label;
+        return object.label();
       }
 
       @Override
@@ -218,14 +237,14 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
 
     setOnEditCommit(event -> {
       var item = event.getTreeItem();
-      var newName = item.getValue().file.isDirectory()
-        ? event.getNewValue().label
-        : event.getNewValue().label + assetType.extension;
+      var newName = item.getValue().file().isDirectory()
+        ? event.getNewValue().label()
+        : event.getNewValue().label() + assetType.extension;
       var newFile = new File(item.getValue().file().getParent(), newName);
 
       if (event.getOldValue().file().renameTo(newFile)) {
         if (!newFile.isDirectory()) {
-          actionConfiguration.rename(event.getOldValue(), event.getNewValue());
+          assetActionConfiguration.rename(event.getOldValue(), event.getNewValue());
         }
       }
 
@@ -244,7 +263,7 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
     });
   }
 
-  private void registerNewMenuAction(MenuItem menuItem, AssetType assetType, ActionConfiguration actionConfiguration) {
+  private void registerNewMenuAction(MenuItem menuItem, AssetType assetType, AssetActionConfiguration assetActionConfiguration) {
     menuItem.setOnAction(event -> {
       var selectedItem = getSelectionModel().getSelectedItem();
       File parentFolder;
@@ -261,7 +280,7 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
         }
       }
 
-      actionConfiguration.create(parentFolder, () -> {
+      assetActionConfiguration.create(parentFolder, () -> {
         refreshTree(assetType);
 
         if (selectedItem != null) {
@@ -301,40 +320,5 @@ public class AssetTreeView extends TreeView<AssetTreeView.AssetTreeItem> {
     }
 
     file.delete();
-  }
-
-  public enum AssetType {
-    FONT("font", ".font.json", "Fonts", "font"),
-    SPRITES("sprites", ".sprites.json", "Sprites", "spritesheet"),
-    ;
-
-    private final String path;
-    private final String extension;
-    private final String title;
-    private final String singleAssetLabel;
-
-    AssetType(String path, String extension, String title, String singleAssetLabel) {
-      this.path = path;
-      this.extension = extension;
-      this.title = title;
-      this.singleAssetLabel = singleAssetLabel;
-    }
-  }
-
-  public interface ActionConfiguration {
-    void select(AssetTreeItem item);
-
-    void create(File parentFolder, Runnable onAfterCreate);
-
-    void rename(AssetTreeItem oldItem, AssetTreeItem newItem);
-
-    void delete(AssetTreeItem item);
-  }
-
-  public record AssetTreeItem(String id, String label, File file) {
-    @Override
-    public String toString() {
-      return label;
-    }
   }
 }

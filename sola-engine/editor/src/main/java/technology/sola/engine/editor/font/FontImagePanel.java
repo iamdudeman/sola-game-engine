@@ -11,7 +11,7 @@ import java.io.File;
 /**
  * FontImagePanel is an {@link EditorPanel} for viewing a font asset's rasterized image.
  */
-public class FontImagePanel extends EditorPanel {
+class FontImagePanel extends EditorPanel {
   /**
    * Creates an instance for desire image {@link File}
    *

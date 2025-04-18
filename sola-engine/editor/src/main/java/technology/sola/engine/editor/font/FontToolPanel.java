@@ -4,17 +4,20 @@ import javafx.application.Platform;
 import technology.sola.engine.editor.core.components.TabbedPanel;
 import technology.sola.engine.editor.core.components.ToolPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
-import technology.sola.json.JsonArray;
 import technology.sola.json.JsonObject;
-import technology.sola.json.mapper.JsonMapper;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class FontToolPanel extends ToolPanel<FontToolPanel.Config> {
+/**
+ * FontToolConfig is a {@link ToolPanel} for managing font assets.
+ */
+public class FontToolPanel extends ToolPanel<FontToolConfig> {
   private final TabbedPanel tabbedPanel;
   private final FontAssetTree fontAssetTree;
 
+  /**
+   * Creates an instance of FontToolPanel initialized via the {@link EditorConfig}.
+   *
+   * @param editorConfig the {@link EditorConfig} instance
+   */
   public FontToolPanel(EditorConfig editorConfig) {
     super(editorConfig);
     var items = getItems();
@@ -22,14 +25,12 @@ public class FontToolPanel extends ToolPanel<FontToolPanel.Config> {
     tabbedPanel = new TabbedPanel();
     fontAssetTree = new FontAssetTree(tabbedPanel);
 
-    var config = buildToolConfigFromEditorConfig(editorConfig);
-
     items.addAll(fontAssetTree, tabbedPanel);
 
     Platform.runLater(() -> {
-      fontAssetTree.restoreOpenedFilesAndSelection(config.openedFileIds(), config.openId());
+      fontAssetTree.restoreOpenedFilesAndSelection(toolConfig.openedFileIds(), toolConfig.openId());
 
-      setDividerPositions(config.dividerPosition());
+      setDividerPositions(toolConfig.dividerPosition());
     });
   }
 
@@ -45,73 +46,23 @@ public class FontToolPanel extends ToolPanel<FontToolPanel.Config> {
 
   @Override
   public JsonObject buildToolConfigForSaving() {
-    var config = new Config(
+    var config = new FontToolConfig(
       tabbedPanel.getOpenedTabIds(),
       getDividers().get(0).getPosition(),
       tabbedPanel.getSelectedId()
     );
 
-    return new ConfigJsonMapper().toJson(config);
+    return new FontToolConfig.ConfigJsonMapper().toJson(config);
   }
 
   @Override
-  protected Config buildToolConfigFromEditorConfig(EditorConfig editorConfig) {
+  protected FontToolConfig buildToolConfigFromEditorConfig(EditorConfig editorConfig) {
     var toolConfigJson = editorConfig.toolConfigurations().get(getToolId());
 
     if (toolConfigJson == null) {
-      return new Config();
+      return new FontToolConfig();
     }
 
-    return new ConfigJsonMapper().toObject(toolConfigJson);
-  }
-
-  public record Config(
-    List<String> openedFileIds,
-    double dividerPosition,
-    String openId
-  ) {
-    public Config() {
-      this(List.of(), 0.2, null);
-    }
-  }
-
-  public static class ConfigJsonMapper implements JsonMapper<Config> {
-    @Override
-    public Class<Config> getObjectClass() {
-      return Config.class;
-    }
-
-    @Override
-    public JsonObject toJson(Config config) {
-      JsonObject json = new JsonObject();
-      JsonArray openedFiles = new JsonArray();
-
-      config.openedFileIds.forEach(openedFiles::add);
-
-      json.put("openedFiles", openedFiles);
-      json.put("dividerPosition", config.dividerPosition());
-      if (config.openId == null) {
-        json.putNull("openId");
-      } else {
-        json.put("openId", config.openId());
-      }
-
-      return json;
-    }
-
-    @Override
-    public Config toObject(JsonObject jsonObject) {
-      List<String> openedFileIds = new ArrayList<>();
-
-      jsonObject.getArray("openedFiles").forEach(jsonElement -> {
-        openedFileIds.add(jsonElement.asString());
-      });
-
-      return new Config(
-        openedFileIds,
-        jsonObject.getDouble("dividerPosition"),
-        jsonObject.getString("openId", null)
-      );
-    }
+    return new FontToolConfig.ConfigJsonMapper().toObject(toolConfigJson);
   }
 }

@@ -1,6 +1,7 @@
 package technology.sola.engine.editor.font;
 
 import javafx.collections.FXCollections;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
@@ -17,6 +18,10 @@ import technology.sola.engine.tooling.font.FontRasterizerTool;
 import java.io.File;
 import java.util.Arrays;
 
+/**
+ * NewFontDialogContent is a form for creating a new font asset that can be easily nested in
+ * a {@link technology.sola.engine.editor.core.notifications.DialogService#custom(String, Parent)}.
+ */
 public class NewFontDialogContent extends EditorPanel {
   private final ComboBox<String> fontChoice;
   private final ComboBox<String> styleChoice;
@@ -25,6 +30,13 @@ public class NewFontDialogContent extends EditorPanel {
   private final Button cancelButton;
   private final Button createButton;
 
+  /**
+   * Creates a new instance. The parentFolder specified is where the new font asset will be created if the create
+   * button is clicked. After a new font is created the onAfterCreate {@link Runnable} will fire.
+   *
+   * @param parentFolder  the parent {@link File} to create the font asset in
+   * @param onAfterCreate the callback to run after font creation completes
+   */
   public NewFontDialogContent(File parentFolder, Runnable onAfterCreate) {
     setSpacing(8);
 

@@ -2,9 +2,12 @@ package technology.sola.engine.editor.font;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import technology.sola.engine.editor.core.components.assets.AssetTreeItem;
+import technology.sola.engine.editor.core.components.assets.AssetType;
+import technology.sola.engine.editor.core.components.assets.AssetActionConfiguration;
 import technology.sola.engine.editor.core.notifications.DialogService;
 import technology.sola.engine.editor.core.utils.FileUtils;
-import technology.sola.engine.editor.core.components.AssetTreeView;
+import technology.sola.engine.editor.core.components.assets.AssetTreeView;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.components.TabbedPanel;
 import technology.sola.engine.editor.core.notifications.ToastService;
@@ -13,17 +16,17 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class FontAssetTree extends EditorPanel {
+class FontAssetTree extends EditorPanel {
   private static final Logger LOGGER = LoggerFactory.getLogger(FontAssetTree.class);
   private final AssetTreeView assetTreeView;
 
   public FontAssetTree(TabbedPanel centerPanel) {
     super();
 
-    var actionConfiguration = new FontActionConfiguration(centerPanel);
+    var actionConfiguration = new FontAssetActionConfiguration(centerPanel);
 
     assetTreeView = new AssetTreeView(
-      AssetTreeView.AssetType.FONT,
+      AssetType.FONT,
       actionConfiguration
     );
 
@@ -46,16 +49,17 @@ public class FontAssetTree extends EditorPanel {
     }
   }
 
-  private record FontActionConfiguration(
+  private record FontAssetActionConfiguration(
     TabbedPanel centerPanel
-  ) implements AssetTreeView.ActionConfiguration {
+  ) implements AssetActionConfiguration {
     @Override
-    public void select(AssetTreeView.AssetTreeItem item) {
+    public void select(AssetTreeItem item) {
       var file = item.file();
       var id = item.id();
       var parentFile = file.getParentFile();
-      var imageAsset = file.getName().replace(".font.json", "") + ".png";
-      var title = file.getName().replace(".font.json", "");
+      var extension = AssetType.FONT.extension;
+      var imageAsset = file.getName().replace(extension, "") + ".png";
+      var title = file.getName().replace(extension, "");
 
       centerPanel.addTab(
         id,
@@ -70,11 +74,12 @@ public class FontAssetTree extends EditorPanel {
     }
 
     @Override
-    public void rename(AssetTreeView.AssetTreeItem oldItem, AssetTreeView.AssetTreeItem newItem) {
+    public void rename(AssetTreeItem oldItem, AssetTreeItem newItem) {
       var newItemFile = newItem.file();
       var parentFile = newItemFile.getParentFile();
       var imageAsset = new File(parentFile, oldItem.label() + ".png");
-      var newImageAsset = newItemFile.getName().replace(".font.json", "") + ".png";
+      var extension = AssetType.FONT.extension;
+      var newImageAsset = newItemFile.getName().replace(extension, "") + ".png";
 
       try {
         var jsonObject = FileUtils.readJson(newItemFile).asObject();
@@ -93,11 +98,12 @@ public class FontAssetTree extends EditorPanel {
     }
 
     @Override
-    public void delete(AssetTreeView.AssetTreeItem item) {
+    public void delete(AssetTreeItem item) {
       var id = item.id();
       var deletedFile = item.file();
       var parentFile = deletedFile.getParentFile();
-      var imageAsset = deletedFile.getName().replace(".font.json", "") + ".png";
+      var extension = AssetType.FONT.extension;
+      var imageAsset = deletedFile.getName().replace(extension, "") + ".png";
 
       centerPanel.closeTab(id);
       new File(parentFile, imageAsset).delete();
