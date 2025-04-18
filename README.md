@@ -82,6 +82,7 @@ will have to be downloaded and executed separately.
       [DevBrowserFileServerMain](examples/browser/src/main/java/technology/sola/engine/examples/browser/DevBrowserFileServerMain.java)
       acts as a simple http server for the files
 * [Server example](examples/server)
+* [Editor example](examples/editor)
 
 ## Games using sola game engine
 
