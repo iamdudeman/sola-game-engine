@@ -6,8 +6,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.util.StringConverter;
-import technology.sola.engine.editor.core.notifications.DialogService;
-import technology.sola.engine.editor.core.notifications.ToastService;
+import technology.sola.engine.editor.core.utils.DialogService;
+import technology.sola.engine.editor.core.utils.ToastService;
 
 import java.io.File;
 import java.util.Arrays;

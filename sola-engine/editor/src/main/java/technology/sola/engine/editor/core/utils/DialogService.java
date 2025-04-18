@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.core.notifications;
+package technology.sola.engine.editor.core.utils;
 
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
