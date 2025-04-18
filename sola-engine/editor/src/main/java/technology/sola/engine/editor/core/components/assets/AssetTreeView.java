@@ -140,6 +140,7 @@ public class AssetTreeView extends TreeView<AssetTreeItem> {
               AssetTreeView.class.getResourceAsStream("/icons/folder.png")
             ));
 
+            nestedParent.setExpanded(true);
             nestedParent.setGraphic(new ImageView(folderIconImage));
 
             populateParent(assetType, nestedParent);
