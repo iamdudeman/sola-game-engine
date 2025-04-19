@@ -1,0 +1,19 @@
+.padding-1x {
+  -fx-padding: 2;
+}
+.padding-2x {
+  -fx-padding: 4;
+}
+.padding-3x {
+  -fx-padding: 6;
+}
+.padding-4x {
+  -fx-padding: 8;
+}
+.padding-5x {
+  -fx-padding: 10;
+}
+
+.text-paragraph {
+  -fx-font-size: 12;
+}

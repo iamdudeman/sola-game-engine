@@ -1,6 +1,5 @@
 package technology.sola.engine.platform.javafx;
 
-import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -45,7 +44,6 @@ import java.util.function.Consumer;
  */
 public class JavaFxSolaPlatform extends SolaPlatform {
   private static final Logger LOGGER = LoggerFactory.getLogger(JavaFxSolaPlatform.class);
-  private static boolean isPlatformStartupNeeded = true;
   private Canvas canvas;
   private GraphicsContext graphicsContext;
   private WritableImage writableImage;
@@ -56,18 +54,6 @@ public class JavaFxSolaPlatform extends SolaPlatform {
    * Creates a JavaFxSolaPlatform instance.
    */
   public JavaFxSolaPlatform() {
-    this(true);
-  }
-
-  /**
-   * Creates a JavaFxSolaPlatform instance.
-   *
-   * @param isPlatformStartupNeeded whether JavaFX platform startup is still needed or not
-   */
-  public JavaFxSolaPlatform(boolean isPlatformStartupNeeded) {
-    if (JavaFxSolaPlatform.isPlatformStartupNeeded) {
-      JavaFxSolaPlatform.isPlatformStartupNeeded = isPlatformStartupNeeded;
-    }
     socketClient = new JavaFxSocketClient();
     restClient = new JavaFxRestClient();
   }
@@ -128,13 +114,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
 
   @Override
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
-    if (isPlatformStartupNeeded) {
-      Platform.startup(() -> {
-      });
-      isPlatformStartupNeeded = false;
-    }
-
-    Platform.runLater(() -> {
+    SolaJavaFx.startOnApplicationThread(() -> {
       final Stage stage = new Stage();
       final Group root = new Group();
       int rendererWidth = solaConfiguration.rendererWidth();

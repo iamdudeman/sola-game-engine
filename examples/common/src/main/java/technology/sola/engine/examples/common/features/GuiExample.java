@@ -31,7 +31,7 @@ public class GuiExample extends SolaWithDefaults {
     defaultsConfigurator.useGui();
 
     assetLoaderProvider.get(SolaImage.class)
-      .addAssetMapping("test_tiles", "assets/duck.png");
+      .addAssetMapping("test_tiles", "assets/images/duck.png");
     assetLoaderProvider.get(SpriteSheet.class)
         .addAssetMapping("forest", "assets/sprites/forest.sprites.json");
     assetLoaderProvider.get(Font.class)
