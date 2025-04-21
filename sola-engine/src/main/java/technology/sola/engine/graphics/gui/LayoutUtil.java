@@ -176,7 +176,7 @@ class LayoutUtil {
       case END -> child.getParent().contentBounds.width() - usedWidth;
       case SPACE_BETWEEN -> {
         if (childIndex == 0) {
-          yield  0;
+          yield 0;
         }
 
         if (childIndex == childrenInFlow - 1) {
@@ -225,7 +225,7 @@ class LayoutUtil {
       case END -> child.getParent().contentBounds.height() - usedHeight;
       case SPACE_BETWEEN -> {
         if (childIndex == 0) {
-          yield  0;
+          yield 0;
         }
 
         if (childIndex == childrenInFlow - 1) {
