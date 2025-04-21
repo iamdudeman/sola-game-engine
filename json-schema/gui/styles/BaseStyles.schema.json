@@ -57,7 +57,8 @@
       "enum": [
         "start",
         "center",
-        "end"
+        "end",
+        "space-between"
       ]
     },
     "padding": {

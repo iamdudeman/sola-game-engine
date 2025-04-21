@@ -17,4 +17,9 @@ public enum MainAxisChildren {
    * Children are aligned to the end of the axis.
    */
   END,
+  /**
+   * Children are evenly distributed with spacing between each pair of adjacent items being the same. The first item
+   * is flush with the start of the axis and the last item is flush with the end of the axis.
+   */
+  SPACE_BETWEEN,
 }
