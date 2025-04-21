@@ -13,7 +13,6 @@ import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
-import technology.sola.engine.graphics.gui.style.ConditionalStyle;
 import technology.sola.engine.graphics.gui.style.property.Direction;
 import technology.sola.engine.graphics.gui.style.property.MainAxisChildren;
 import technology.sola.engine.graphics.screen.AspectMode;
@@ -142,15 +141,15 @@ public class GuiExample extends SolaWithDefaults {
       buildContainer(3, mainAxisChildren),
       buildContainer(2, mainAxisChildren),
       buildContainer(1, mainAxisChildren)
-    ).addStyle(ConditionalStyle.always(BaseStyles.create()
+    ).addStyle(BaseStyles.create()
       .setDirection(direction == Direction.ROW || direction == Direction.ROW_REVERSE ? Direction.COLUMN : Direction.ROW)
-      .build()));
+      .build());
   }
 
   private SectionGuiElement buildContainer(int squares, MainAxisChildren mainAxisChildren) {
     var height = direction == Direction.COLUMN || direction == Direction.COLUMN_REVERSE ? 500 : 100;
     var width = direction == Direction.ROW || direction == Direction.ROW_REVERSE ? 500 : 100;
-    var container = new SectionGuiElement().addStyle(ConditionalStyle.always(
+    var container = new SectionGuiElement().addStyle(
       BaseStyles.create()
         .setHeight(height)
         .setWidth(width)
@@ -159,7 +158,7 @@ public class GuiExample extends SolaWithDefaults {
         .setDirection(direction)
         .setBorderColor(Color.WHITE)
         .build()
-    ));
+    );
 
     for (int i = 0; i < squares; i++) {
       if (i == 1) {
@@ -174,19 +173,19 @@ public class GuiExample extends SolaWithDefaults {
 
   private GuiElement<?, ?> buildSquare() {
     return new SectionGuiElement()
-      .addStyle(ConditionalStyle.always(BaseStyles.create()
+      .addStyle(BaseStyles.create()
           .setBackgroundColor(Color.BLUE)
           .setHeight(50)
           .setWidth(50)
-        .build()));
+        .build());
   }
 
   private GuiElement<?, ?> buildBiggerSquare() {
     return new SectionGuiElement()
-      .addStyle(ConditionalStyle.always(BaseStyles.create()
+      .addStyle(BaseStyles.create()
         .setBackgroundColor(Color.YELLOW)
         .setHeight(80)
         .setWidth(80)
-        .build()));
+        .build());
   }
 }
