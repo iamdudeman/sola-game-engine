@@ -48,6 +48,7 @@ public class BaseStylesJsonValueParser implements StylesJsonValueParser<BaseStyl
       case "start" -> MainAxisChildren.START;
       case "center" -> MainAxisChildren.CENTER;
       case "end" -> MainAxisChildren.END;
+      case "space-between" -> MainAxisChildren.SPACE_BETWEEN;
       default -> throw new IllegalArgumentException("Unrecognized mainAxisChildren [" + mainAxisChildrenString + "]");
     };
   }

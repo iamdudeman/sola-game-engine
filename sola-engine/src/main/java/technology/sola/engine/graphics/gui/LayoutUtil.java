@@ -102,17 +102,17 @@ class LayoutUtil {
         .toList();
 
       AlignmentFunction alignmentFunction = switch (direction) {
-        case ROW, ROW_REVERSE -> child -> {
+        case ROW, ROW_REVERSE -> (child, childIndex) -> {
           int gapSpace = (guiElementChildrenInFlow.size() - 1) * gap;
           final int usedWidth = gapSpace + guiElementChildrenInFlow.stream().mapToInt(childInFlow -> childInFlow.bounds.width()).sum();
 
-          return calculateRowChildAlignmentBounds(child, mainAxisChildren, crossAxisChildren, usedWidth);
+          return calculateRowChildAlignmentBounds(child, childIndex, guiElementChildrenInFlow.size(), mainAxisChildren, crossAxisChildren, usedWidth);
         };
-        case COLUMN, COLUMN_REVERSE -> child -> {
+        case COLUMN, COLUMN_REVERSE -> (child, childIndex) -> {
           int gapSpace = (guiElementChildrenInFlow.size() - 1) * gap;
           final int usedHeight = gapSpace + guiElementChildrenInFlow.stream().mapToInt(childInFlow -> childInFlow.bounds.height()).sum();
 
-          return calculateColumnChildAlignmentBounds(child, mainAxisChildren, crossAxisChildren, usedHeight);
+          return calculateColumnChildAlignmentBounds(child, childIndex, guiElementChildrenInFlow.size(), mainAxisChildren, crossAxisChildren, usedHeight);
         };
       };
 
@@ -125,7 +125,7 @@ class LayoutUtil {
       for (int i = 0; i < guiElementChildrenInFlow.size(); i++) {
         int index = startIndex > 0 ? startIndex - i : i;
         GuiElement<?, ?> child = guiElementChildrenInFlow.get(index);
-        var boundsAfterAlignment = alignmentFunction.apply(child);
+        var boundsAfterAlignment = alignmentFunction.apply(child, i);
 
         child.resizeBounds(boundsAfterAlignment.width(), boundsAfterAlignment.height());
         child.setPosition(boundsAfterAlignment.x(), boundsAfterAlignment.y());
@@ -163,12 +163,30 @@ class LayoutUtil {
   }
 
   private static GuiElementBounds calculateRowChildAlignmentBounds(
-    GuiElement<?, ?> child, MainAxisChildren mainAxisChildren, CrossAxisChildren crossAxisChildren, int usedWidth
+    GuiElement<?, ?> child,
+    int childIndex,
+    int childrenInFlow,
+    MainAxisChildren mainAxisChildren,
+    CrossAxisChildren crossAxisChildren,
+    int usedWidth
   ) {
     int xAlignment = switch (mainAxisChildren) {
       case START -> 0;
       case CENTER -> (child.getParent().contentBounds.width() - usedWidth) / 2;
       case END -> child.getParent().contentBounds.width() - usedWidth;
+      case SPACE_BETWEEN -> {
+        if (childIndex == 0) {
+          yield 0;
+        }
+
+        if (childIndex == childrenInFlow - 1) {
+          yield child.getParent().contentBounds.width() - usedWidth;
+        }
+
+        int availableWidth = child.getParent().contentBounds.width() - usedWidth;
+
+        yield (int) (availableWidth / (float) (childrenInFlow - 1)) * childIndex;
+      }
     };
     int yAlignment = switch (crossAxisChildren) {
       case START, STRETCH -> 0;
@@ -189,7 +207,12 @@ class LayoutUtil {
   }
 
   private static GuiElementBounds calculateColumnChildAlignmentBounds(
-    GuiElement<?, ?> child, MainAxisChildren mainAxisChildren, CrossAxisChildren crossAxisChildren, int usedHeight
+    GuiElement<?, ?> child,
+    int childIndex,
+    int childrenInFlow,
+    MainAxisChildren mainAxisChildren,
+    CrossAxisChildren crossAxisChildren,
+    int usedHeight
   ) {
     int xAlignment = switch (crossAxisChildren) {
       case START, STRETCH -> 0;
@@ -200,6 +223,19 @@ class LayoutUtil {
       case START -> 0;
       case CENTER -> (child.getParent().contentBounds.height() - usedHeight) / 2;
       case END -> child.getParent().contentBounds.height() - usedHeight;
+      case SPACE_BETWEEN -> {
+        if (childIndex == 0) {
+          yield 0;
+        }
+
+        if (childIndex == childrenInFlow - 1) {
+          yield child.getParent().contentBounds.height() - usedHeight;
+        }
+
+        int availableHeight = child.getParent().contentBounds.height() - usedHeight;
+
+        yield (int) (availableHeight / (float) (childrenInFlow - 1)) * childIndex;
+      }
     };
 
     int newX = xAlignment > 0 ? child.bounds.x() + xAlignment : child.bounds.x();
@@ -284,6 +320,6 @@ class LayoutUtil {
 
   @FunctionalInterface
   interface AlignmentFunction {
-    GuiElementBounds apply(GuiElement<?, ?> child);
+    GuiElementBounds apply(GuiElement<?, ?> child, int childIndex);
   }
 }

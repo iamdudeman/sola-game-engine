@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * GuiElement is the base class for all elements that can be rendered in a {@link GuiDocument}.
  *
- * @param <Style> the style type for the element
+ * @param <Style>       the style type for the element
  * @param <ElementType> this element's type, so it can be used for method chaining
  */
 public abstract class GuiElement<Style extends BaseStyles, ElementType extends GuiElement<Style, ElementType>> {
@@ -58,6 +58,17 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
     boundConstraints = new GuiElementBounds(0, 0, 0, 0);
     bounds = boundConstraints;
     contentBounds = bounds;
+  }
+
+  /**
+   * Convenience method that calls {@link StyleContainer#addStyle(ConditionalStyle)} for this
+   * element's {@link StyleContainer} wrapping the provided style in a {@link ConditionalStyle#always(BaseStyles)}.
+   *
+   * @param style the style to add
+   * @return this
+   */
+  public final ElementType addStyle(Style style) {
+    return addStyle(ConditionalStyle.always(style));
   }
 
   /**

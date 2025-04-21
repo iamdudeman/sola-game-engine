@@ -19,7 +19,6 @@
 ## TODO List
 
 * Implement more MainAxisChildren options
-    * space-between
     * space-evenly
     * space-around
 * Add in ScrollEvent
