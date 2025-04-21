@@ -103,13 +103,13 @@ class LayoutUtil {
 
       AlignmentFunction alignmentFunction = switch (direction) {
         case ROW, ROW_REVERSE -> (child, childIndex) -> {
-          int gapSpace = (guiElementChildrenInFlow.size() - 1) * gap; // todo split into bug fix commit
+          int gapSpace = (guiElementChildrenInFlow.size() - 1) * gap;
           final int usedWidth = gapSpace + guiElementChildrenInFlow.stream().mapToInt(childInFlow -> childInFlow.bounds.width()).sum();
 
           return calculateRowChildAlignmentBounds(child, childIndex, guiElementChildrenInFlow.size(), mainAxisChildren, crossAxisChildren, usedWidth);
         };
         case COLUMN, COLUMN_REVERSE -> (child, childIndex) -> {
-          int gapSpace = (guiElementChildrenInFlow.size() - 1) * gap; // todo split into bug fix commit
+          int gapSpace = (guiElementChildrenInFlow.size() - 1) * gap;
           final int usedHeight = gapSpace + guiElementChildrenInFlow.stream().mapToInt(childInFlow -> childInFlow.bounds.height()).sum();
 
           return calculateColumnChildAlignmentBounds(child, childIndex, guiElementChildrenInFlow.size(), mainAxisChildren, crossAxisChildren, usedHeight);
