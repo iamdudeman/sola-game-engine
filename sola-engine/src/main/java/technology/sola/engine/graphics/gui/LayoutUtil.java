@@ -187,6 +187,31 @@ class LayoutUtil {
 
         yield (int) (availableWidth / (float) (childrenInFlow - 1)) * childIndex;
       }
+      case SPACE_AROUND -> {
+        int availableWidth = child.getParent().contentBounds.width() - usedWidth;
+
+        if (childrenInFlow == 1) {
+          yield (int) (availableWidth / 2f);
+        }
+
+        int spaceBetween = (int) (availableWidth / (float) (childrenInFlow));
+
+        if (childIndex == 0) {
+          yield (int) (spaceBetween / 2f);
+        }
+
+        if (childIndex == childrenInFlow - 1) {
+          yield (int) (child.getParent().contentBounds.width() - usedWidth - (spaceBetween / 2f));
+        }
+
+        yield (int) (spaceBetween * childIndex + (spaceBetween / 2f));
+      }
+      case SPACE_EVENLY -> {
+        int availableWidth = child.getParent().contentBounds.width() - usedWidth;
+        int spaceBetween = (int) (availableWidth / (float) (childrenInFlow + 1));
+
+        yield spaceBetween * (childIndex + 1);
+      }
     };
     int yAlignment = switch (crossAxisChildren) {
       case START, STRETCH -> 0;
@@ -235,6 +260,31 @@ class LayoutUtil {
         int availableHeight = child.getParent().contentBounds.height() - usedHeight;
 
         yield (int) (availableHeight / (float) (childrenInFlow - 1)) * childIndex;
+      }
+      case SPACE_AROUND -> {
+        int availableHeight = child.getParent().contentBounds.height() - usedHeight;
+
+        if (childrenInFlow == 1) {
+          yield (int) (availableHeight / 2f);
+        }
+
+        int spaceBetween = (int) (availableHeight / (float) (childrenInFlow));
+
+        if (childIndex == 0) {
+          yield (int) (spaceBetween / 2f);
+        }
+
+        if (childIndex == childrenInFlow - 1) {
+          yield (int) (child.getParent().contentBounds.height() - usedHeight - (spaceBetween / 2f));
+        }
+
+        yield (int) (spaceBetween * childIndex + (spaceBetween / 2f));
+      }
+      case SPACE_EVENLY -> {
+        int availableHeight = child.getParent().contentBounds.height() - usedHeight;
+        int spaceBetween = (int) (availableHeight / (float) (childrenInFlow + 1));
+
+        yield spaceBetween * (childIndex + 1);
       }
     };
 

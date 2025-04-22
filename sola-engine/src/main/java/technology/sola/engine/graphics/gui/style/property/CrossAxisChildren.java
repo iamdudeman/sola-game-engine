@@ -9,14 +9,17 @@ public enum CrossAxisChildren {
    * Children are stretched across the axis.
    */
   STRETCH,
+
   /**
    * Children are aligned to the start of the axis.
    */
   START,
+
   /**
    * Children are aligned to the center of the axis.
    */
   CENTER,
+
   /**
    * Children are aligned to the end of the axis.
    */

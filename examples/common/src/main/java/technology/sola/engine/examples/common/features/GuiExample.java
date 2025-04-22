@@ -90,7 +90,9 @@ public class GuiExample extends SolaWithDefaults {
             case START -> MainAxisChildren.CENTER;
             case CENTER -> MainAxisChildren.END;
             case END -> MainAxisChildren.SPACE_BETWEEN;
-            case SPACE_BETWEEN -> MainAxisChildren.START;
+            case SPACE_BETWEEN -> MainAxisChildren.SPACE_AROUND;
+            case SPACE_AROUND -> MainAxisChildren.SPACE_EVENLY;
+            case SPACE_EVENLY -> MainAxisChildren.START;
           };
 
           guiDocument.setRootElement(buildMainAxisContentExample());
