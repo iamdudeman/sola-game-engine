@@ -58,7 +58,9 @@
         "start",
         "center",
         "end",
-        "space-between"
+        "space-between",
+        "space-around",
+        "space-evenly"
       ]
     },
     "padding": {

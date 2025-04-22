@@ -25,4 +25,17 @@ public enum MainAxisChildren {
    * is flush with the start of the axis and the last item is flush with the end of the axis.
    */
   SPACE_BETWEEN,
+
+  /**
+   * Children are evenly distributed along the axis with the space between each adjacent item being the same. The space
+   * before the first and after the last item is half the space between each item. If only one item is present it will
+   * be centered.
+   */
+  SPACE_AROUND,
+
+  /**
+   * Children are evenly distributed along the axis with the space between each adjacent item being the same. The space
+   * before the first and after the last item is also the same.
+   */
+  SPACE_EVENLY,
 }
