@@ -114,9 +114,17 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color">
 <div class="block">Children are aligned to the end of the axis.</div>
 </div>
-<div class="col-first even-row-color"><code><a href="#SPACE_BETWEEN" class="member-name-link">SPACE_BETWEEN</a></code></div>
+<div class="col-first even-row-color"><code><a href="#SPACE_AROUND" class="member-name-link">SPACE_AROUND</a></code></div>
 <div class="col-last even-row-color">
+<div class="block">Children are evenly distributed along the axis with the space between each adjacent item being the same.</div>
+</div>
+<div class="col-first odd-row-color"><code><a href="#SPACE_BETWEEN" class="member-name-link">SPACE_BETWEEN</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Children are evenly distributed with spacing between each pair of adjacent items being the same.</div>
+</div>
+<div class="col-first even-row-color"><code><a href="#SPACE_EVENLY" class="member-name-link">SPACE_EVENLY</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">Children are evenly distributed along the axis with the space between each adjacent item being the same.</div>
 </div>
 <div class="col-first odd-row-color"><code><a href="#START" class="member-name-link">START</a></code></div>
 <div class="col-last odd-row-color">
@@ -194,6 +202,23 @@ the order they are declared.</div>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="MainAxisChildren.html" title="enum class in technology.sola.engine.graphics.gui.style.property">MainAxisChildren</a></span>&nbsp;<span class="element-name">SPACE_BETWEEN</span></div>
 <div class="block">Children are evenly distributed with spacing between each pair of adjacent items being the same. The first item
  is flush with the start of the axis and the last item is flush with the end of the axis.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="SPACE_AROUND">
+<h3>SPACE_AROUND</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="MainAxisChildren.html" title="enum class in technology.sola.engine.graphics.gui.style.property">MainAxisChildren</a></span>&nbsp;<span class="element-name">SPACE_AROUND</span></div>
+<div class="block">Children are evenly distributed along the axis with the space between each adjacent item being the same. The space
+ before the first and after the last item is half the space between each item. If only one item is present it will
+ be centered.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="SPACE_EVENLY">
+<h3>SPACE_EVENLY</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="MainAxisChildren.html" title="enum class in technology.sola.engine.graphics.gui.style.property">MainAxisChildren</a></span>&nbsp;<span class="element-name">SPACE_EVENLY</span></div>
+<div class="block">Children are evenly distributed along the axis with the space between each adjacent item being the same. The space
+ before the first and after the last item is also the same.</div>
 </section>
 </li>
 </ul>
