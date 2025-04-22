@@ -3,6 +3,7 @@
  */
 module technology.sola.engine {
   requires org.slf4j;
+  requires java.logging;
   requires transitive technology.sola.json;
   requires transitive technology.sola.ecs;
 
