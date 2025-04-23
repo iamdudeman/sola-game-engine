@@ -2,7 +2,6 @@
  * Defines the sola-game-engine API.
  */
 module technology.sola.engine {
-  requires org.slf4j;
   requires java.logging;
   requires transitive technology.sola.json;
   requires transitive technology.sola.ecs;
@@ -59,6 +58,8 @@ module technology.sola.engine {
   exports technology.sola.engine.networking;
   exports technology.sola.engine.networking.rest;
   exports technology.sola.engine.networking.socket;
+
+  exports technology.sola.logging;
 
   exports technology.sola.math;
   exports technology.sola.math.geometry;

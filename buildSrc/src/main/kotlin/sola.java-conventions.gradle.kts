@@ -26,10 +26,6 @@ repositories {
 }
 
 dependencies {
-  // Logging
-  implementation("org.slf4j:slf4j-api:2.0.12")
-  implementation("org.slf4j:slf4j-reload4j:2.0.12")
-
   // Test
   testImplementation("org.mockito:mockito-inline:5.2.0")
   testImplementation("org.mockito:mockito-junit-jupiter:5.11.0")

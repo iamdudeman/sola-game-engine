@@ -8,8 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.PixelFormat;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
@@ -34,6 +32,7 @@ import technology.sola.engine.platform.javafx.assets.graphics.JavaFxSolaImageAss
 import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
 import technology.sola.engine.platform.javafx.core.JavaFxRestClient;
 import technology.sola.engine.platform.javafx.core.JavaFxSocketClient;
+import technology.sola.logging.SolaLogger;
 
 import java.io.IOException;
 import java.util.function.Consumer;
@@ -43,7 +42,7 @@ import java.util.function.Consumer;
  * a JavaFX powered window.
  */
 public class JavaFxSolaPlatform extends SolaPlatform {
-  private static final Logger LOGGER = LoggerFactory.getLogger(JavaFxSolaPlatform.class);
+  private static final SolaLogger LOGGER = SolaLogger.of(JavaFxSolaPlatform.class);
   private Canvas canvas;
   private GraphicsContext graphicsContext;
   private WritableImage writableImage;
@@ -228,7 +227,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       }
 
       if (url == null) {
-        LOGGER.warn("Icon not found");
+        LOGGER.warning("Icon not found");
       } else {
         stage.getIcons().add(new Image(url.openStream()));
       }

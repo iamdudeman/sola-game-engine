@@ -1,12 +1,11 @@
 package technology.sola.engine.platform.javafx.core;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import technology.sola.engine.networking.NetworkQueue;
 import technology.sola.engine.networking.socket.SocketClient;
 import technology.sola.engine.networking.socket.SocketMessage;
 import technology.sola.engine.networking.socket.SocketMessageDecoder;
 import technology.sola.engine.networking.socket.SocketMessageEncoder;
+import technology.sola.logging.SolaLogger;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -21,7 +20,7 @@ import java.net.SocketException;
  * A JavaFX implementation of {@link SocketClient}.
  */
 public class JavaFxSocketClient implements SocketClient {
-  private static final Logger LOGGER = LoggerFactory.getLogger(JavaFxSocketClient.class);
+  private static final SolaLogger LOGGER = SolaLogger.of(JavaFxSocketClient.class);
   private boolean isConnected = false;
   private BufferedReader bufferedReader;
   private PrintWriter printWriter;
@@ -40,7 +39,7 @@ public class JavaFxSocketClient implements SocketClient {
   @Override
   public void sendMessage(SocketMessage socketMessage) {
     if (!isConnected()) {
-      LOGGER.warn("Connect send message when not connected");
+      LOGGER.warning("Connect send message when not connected");
       return;
     }
 
@@ -58,7 +57,7 @@ public class JavaFxSocketClient implements SocketClient {
   @Override
   public void connect(String host, int port) {
     if (isConnected()) {
-      LOGGER.warn("Already connected to {}", socket.getInetAddress().toString());
+      LOGGER.warning("Already connected to %s", socket.getInetAddress().toString());
       return;
     }
 
@@ -100,7 +99,7 @@ public class JavaFxSocketClient implements SocketClient {
     }
 
     try {
-      LOGGER.info("Stopping connection to {}", socket.getInetAddress().toString());
+      LOGGER.info("Stopping connection to %s", socket.getInetAddress().toString());
       isConnected = false;
       if (socket != null) {
         socket.close();

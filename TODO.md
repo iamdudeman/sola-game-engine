@@ -18,10 +18,6 @@
 
 ## TODO List
 
-* Add config for logger to set log level inside engine code
-    * maybe also change default away from info?
-    * ensure browser then does not log to console when applied
-    * consider replacing with simple native Java logging if it works nicely with teavm
 * Add in ScrollEvent
     * JavaFX : `canvas.addEventHandler(ScrollEvent.SCROLL, event -> {});`
 * Consider adding ability to modify what is rendered on each pixel

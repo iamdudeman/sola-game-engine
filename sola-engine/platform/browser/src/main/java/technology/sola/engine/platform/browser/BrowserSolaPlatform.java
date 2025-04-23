@@ -20,14 +20,12 @@ import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.platform.browser.assets.BrowserJsonElementAssetLoader;
 import technology.sola.engine.platform.browser.assets.audio.BrowserAudioClipAssetLoader;
 import technology.sola.engine.platform.browser.assets.graphics.BrowserSolaImageAssetLoader;
-import technology.sola.engine.platform.browser.core.BrowserCanvasRenderer;
-import technology.sola.engine.platform.browser.core.BrowserGameLoop;
-import technology.sola.engine.platform.browser.core.BrowserRestClient;
-import technology.sola.engine.platform.browser.core.BrowserSocketClient;
+import technology.sola.engine.platform.browser.core.*;
 import technology.sola.engine.platform.browser.javascript.JsCanvasUtils;
 import technology.sola.engine.platform.browser.javascript.JsKeyboardUtils;
 import technology.sola.engine.platform.browser.javascript.JsMouseUtils;
 import technology.sola.engine.platform.browser.javascript.JsUtils;
+import technology.sola.logging.SolaLogger;
 
 import java.util.function.Consumer;
 
@@ -36,6 +34,7 @@ import java.util.function.Consumer;
  * a web browser.
  */
 public class BrowserSolaPlatform extends SolaPlatform {
+  private static final SolaLogger LOGGER = SolaLogger.of(BrowserSolaPlatform.class);
   private final boolean useSoftwareRendering;
 
   /**
@@ -154,7 +153,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   @Override
   protected Renderer buildRenderer(SolaConfiguration solaConfiguration) {
-    LOGGER.info("Using {} rendering", useSoftwareRendering ? "Software" : "Canvas");
+    LOGGER.info("Using %s rendering", useSoftwareRendering ? "Software" : "Canvas");
 
     return useSoftwareRendering
       ? super.buildRenderer(solaConfiguration)

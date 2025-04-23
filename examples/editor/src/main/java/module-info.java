@@ -4,4 +4,5 @@
 module technology.sola.engine.examples.editor {
   requires technology.sola.engine.examples.common;
   requires technology.sola.engine.editor;
+    requires technology.sola.engine;
 }

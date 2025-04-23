@@ -4,11 +4,18 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.platform.javafx.JavaFxSolaPlatform;
+import technology.sola.logging.JavaSolaLoggerFactory;
+import technology.sola.logging.SolaLogLevel;
+import technology.sola.logging.SolaLogger;
 
 /**
  * Runs the {@link ExampleLauncherSola} on the {@link JavaFxSolaPlatform}.
  */
 public class JavaFxMain {
+  static {
+    SolaLogger.initialize(SolaLogLevel.WARNING, new JavaSolaLoggerFactory());
+  }
+
   /**
    * Entry point for JavaFX example.
    *

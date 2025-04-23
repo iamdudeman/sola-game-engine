@@ -12,8 +12,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.engine.editor.core.config.WindowBounds;
@@ -23,6 +21,7 @@ import technology.sola.engine.editor.tools.font.FontToolPanel;
 import technology.sola.engine.platform.javafx.SolaJavaFx;
 import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
 import technology.sola.json.JsonObject;
+import technology.sola.logging.SolaLogger;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -34,7 +33,7 @@ import java.util.Map;
  * configuration and initializes the various editor tools.
  */
 public class EditorWindow {
-  private static final Logger LOGGER = LoggerFactory.getLogger(EditorWindow.class);
+  private static final SolaLogger LOGGER = SolaLogger.of(EditorWindow.class);
   private EditorConfig editorConfig;
   private VBox toolContent;
 
@@ -171,7 +170,7 @@ public class EditorWindow {
       }
 
       if (url == null) {
-        LOGGER.warn("Icon not found");
+        LOGGER.warning("Icon not found");
       } else {
         stage.getIcons().add(new Image(url.openStream()));
       }

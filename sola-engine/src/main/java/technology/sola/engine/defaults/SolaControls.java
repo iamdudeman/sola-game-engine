@@ -1,11 +1,10 @@
 package technology.sola.engine.defaults;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import technology.sola.engine.assets.input.ControlsConfig;
 import technology.sola.engine.defaults.controls.ControlInput;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
+import technology.sola.logging.SolaLogger;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.Map;
  * will be considered active.
  */
 public class SolaControls {
-  private static final Logger LOGGER = LoggerFactory.getLogger(SolaControls.class);
+  private static final SolaLogger LOGGER = SolaLogger.of(SolaControls.class);
   private final Map<String, List<ControlInput>> controls = new HashMap<>();
   private final KeyboardInput keyboardInput;
   private final MouseInput mouseInput;
@@ -43,7 +42,7 @@ public class SolaControls {
     var inputGroups = controls.get(controlId);
 
     if (inputGroups == null) {
-      LOGGER.warn("Control with id {} not found", controlId);
+      LOGGER.warning("Control with id %s not found", controlId);
       return false;
     }
 
