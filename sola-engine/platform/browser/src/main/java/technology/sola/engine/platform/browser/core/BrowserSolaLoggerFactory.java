@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 /**
  * BrowserSolaLoggerFactory is a {@link SolaLoggerFactory} implementation for
- * the {@link technology.sola.engine.platform.browser.BrowserSolaPlatform}.
+ * the {@link technology.sola.engine.platform.browser.BrowserSolaPlatform}. It will only write to the browser console.
  */
 public class BrowserSolaLoggerFactory implements SolaLoggerFactory {
   @Override

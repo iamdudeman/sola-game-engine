@@ -10,7 +10,7 @@ import technology.sola.logging.SolaLogger;
  */
 public class EditorMain {
   static {
-    SolaLogger.initialize(SolaLogLevel.INFO, new JavaSolaLoggerFactory());
+    SolaLogger.configure(SolaLogLevel.INFO, new JavaSolaLoggerFactory());
   }
 
   /**

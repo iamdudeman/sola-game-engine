@@ -13,7 +13,7 @@ import technology.sola.logging.SolaLogger;
  */
 public class BrowserMain {
   static {
-    SolaLogger.initialize(SolaLogLevel.WARNING, new BrowserSolaLoggerFactory());
+    SolaLogger.configure(SolaLogLevel.WARNING, new BrowserSolaLoggerFactory());
   }
 
   /**

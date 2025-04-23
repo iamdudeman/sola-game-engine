@@ -9,19 +9,19 @@ public class SolaLogger {
   private SolaLogLevel loggerLevel = SolaLogLevel.ERROR;
   private final Logger logger;
 
-  public static void initialize(SolaLogLevel level, SolaLoggerFactory solaLoggerFactory) {
+  public static void configure(SolaLogLevel level, SolaLoggerFactory solaLoggerFactory) {
     SolaLogger.DEFAULT_LEVEL = level;
     SolaLogger.solaLoggerFactory = solaLoggerFactory;
   }
 
-  public static void initialize(SolaLogLevel level) {
+  public static void configure(SolaLogLevel level) {
     SolaLogger.DEFAULT_LEVEL = level;
     SolaLogger.solaLoggerFactory = new JavaSolaLoggerFactory();
   }
 
   public static SolaLogger of(Class<?> clazz) {
     if (solaLoggerFactory == null) {
-      throw new IllegalStateException("SolaLogger not initialized. Call SolaLogger.initialize() statically in file with main method.");
+      throw new IllegalStateException("SolaLogger has not been configured. Call SolaLogger.configure() statically in file with main method.");
     }
 
     var logger = solaLoggerFactory.getLogger(clazz);
@@ -33,7 +33,7 @@ public class SolaLogger {
 
   public static SolaLogger of(Class<?> clazz, String logFile) {
     if (solaLoggerFactory == null) {
-      throw new IllegalStateException("SolaLogger not initialized. Call SolaLogger.initialize() statically in file with main method.");
+      throw new IllegalStateException("SolaLogger has not been configured. Call SolaLogger.configure() statically in file with main method.");
     }
 
     var logger = solaLoggerFactory.getLogger(clazz, logFile);

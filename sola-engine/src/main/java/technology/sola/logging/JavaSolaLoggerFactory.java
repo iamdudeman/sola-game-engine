@@ -2,6 +2,7 @@ package technology.sola.logging;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +11,10 @@ import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Logger;
 
+/**
+ * JavaSolaLoggerFactory is a {@link SolaLoggerFactory} implementation for desktop platforms (JavaFX and Swing). It will
+ * write to the console as well as log files.
+ */
 public class JavaSolaLoggerFactory implements SolaLoggerFactory {
   private static final Map<String, FileHandler> FILE_HANDLER_MAP = new HashMap<>();
 
@@ -27,7 +32,6 @@ public class JavaSolaLoggerFactory implements SolaLoggerFactory {
   }
 
   private static FileHandler buildFileHandler(String logFile) throws IOException {
-    // todo change to sola.log
     FileHandler fileHandler = new FileHandler(logFile, 0, 1, true);
 
     fileHandler.setFormatter(new SolaLogMessageFormatter());
@@ -39,9 +43,10 @@ public class JavaSolaLoggerFactory implements SolaLoggerFactory {
     Logger logger = Logger.getLogger(clazz.getName());
 
     try {
-      // todo confirm if this is needed or not
-      if (!Files.exists(Paths.get("logs"))) {
-        Files.createDirectory(Paths.get("logs"));
+      Path logs = Paths.get("logs");
+
+      if (!Files.exists(logs)) {
+        Files.createDirectory(logs);
       }
 
       var fileHandler = FILE_HANDLER_MAP.get(logFile);

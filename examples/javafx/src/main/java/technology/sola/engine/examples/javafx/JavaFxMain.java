@@ -13,7 +13,7 @@ import technology.sola.logging.SolaLogger;
  */
 public class JavaFxMain {
   static {
-    SolaLogger.initialize(SolaLogLevel.WARNING, new JavaSolaLoggerFactory());
+    SolaLogger.configure(SolaLogLevel.WARNING, new JavaSolaLoggerFactory());
   }
 
   /**
