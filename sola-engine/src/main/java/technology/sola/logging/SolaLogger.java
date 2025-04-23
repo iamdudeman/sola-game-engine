@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public class SolaLogger {
   private static SolaLogLevel DEFAULT_LEVEL = SolaLogLevel.WARNING;
   private static SolaLoggerFactory solaLoggerFactory;
-  private SolaLogLevel loggerLevel = SolaLogLevel.ERROR;
+  private final SolaLogLevel loggerLevel;
   private final Logger logger;
 
   /**
@@ -38,11 +38,7 @@ public class SolaLogger {
       throw new IllegalStateException("SolaLogger has not been configured. Call SolaLogger.configure() statically in file with main method.");
     }
 
-    var logger = solaLoggerFactory.getLogger(clazz);
-
-    logger.loggerLevel = DEFAULT_LEVEL;
-
-    return logger;
+    return solaLoggerFactory.getLogger(clazz);
   }
 
   /**
@@ -59,11 +55,7 @@ public class SolaLogger {
       throw new IllegalStateException("SolaLogger has not been configured. Call SolaLogger.configure() statically in file with main method.");
     }
 
-    var logger = solaLoggerFactory.getLogger(clazz, logFile);
-
-    logger.loggerLevel = DEFAULT_LEVEL;
-
-    return logger;
+    return solaLoggerFactory.getLogger(clazz, logFile);
   }
 
   /**
@@ -79,30 +71,73 @@ public class SolaLogger {
     loggerLevel = DEFAULT_LEVEL;
   }
 
+  /**
+   * Logs a message at {@link SolaLogLevel#INFO}.
+   *
+   * @param message the message to log
+   */
   public void info(String message) {
     log(SolaLevel.INFO, message);
   }
 
+  /**
+   * Logs a message at {@link SolaLogLevel#INFO}. This uses {@link String#format(String, Object...)} to format the log
+   * message.
+   *
+   * @param message the message to log
+   * @param params the additional params for the log message
+   */
   public void info(String message, Object... params) {
     log(SolaLevel.INFO, message, params);
   }
 
+  /**
+   * Logs a message at {@link SolaLogLevel#WARNING}.
+   *
+   * @param message the message to log
+   */
   public void warning(String message) {
     log(SolaLevel.WARNING, message);
   }
 
+  /**
+   * Logs a message at {@link SolaLogLevel#WARNING}. This uses {@link String#format(String, Object...)} to format the
+   * log message.
+   *
+   * @param message the message to log
+   * @param params the additional params for the log message
+   */
   public void warning(String message, Object... params) {
     log(SolaLevel.WARNING, message, params);
   }
 
+  /**
+   * Logs a message at {@link SolaLogLevel#ERROR}.
+   *
+   * @param message the message to log
+   */
   public void error(String message) {
     log(SolaLevel.ERROR, message);
   }
 
+  /**
+   * Logs a message at {@link SolaLogLevel#ERROR}. Additionally, the passed {@link Throwable} will be logged.
+   *
+   * @param message the message to log
+   * @param throwable the exception that should be logged
+   */
   public void error(String message, Throwable throwable) {
     log(SolaLevel.ERROR, message, throwable);
   }
 
+  /**
+   * Logs a message at {@link SolaLogLevel#ERROR}. This uses {@link String#format(String, Object...)} to format the
+   * log message. Additionally, the passed {@link Throwable} will be logged.
+   *
+   * @param message the message to log
+   * @param throwable the exception that should be logged
+   * @param params the additional params for the log message
+   */
   public void error(String message, Throwable throwable, Object... params) {
     log(SolaLevel.ERROR, message, throwable, params);
   }
