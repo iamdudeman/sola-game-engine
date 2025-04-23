@@ -3,22 +3,36 @@ package technology.sola.logging;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * SolaLogger instances are used to log messages to the console and/or files. SolaLogger must be configured via
+ * {@link SolaLogger#configure(SolaLogLevel, SolaLoggerFactory)} before instances can be created via
+ * {@link SolaLogger#of(Class)}. The log level of all logger instances will be the same based on how SolaLogger was
+ * configured.
+ */
 public class SolaLogger {
   private static SolaLogLevel DEFAULT_LEVEL = SolaLogLevel.WARNING;
   private static SolaLoggerFactory solaLoggerFactory;
   private SolaLogLevel loggerLevel = SolaLogLevel.ERROR;
   private final Logger logger;
 
+  /**
+   * Configures all resulting SolaLoggers to have desired {@link SolaLogLevel} and to be created via desired
+   * {@link SolaLoggerFactory}.
+   *
+   * @param level             the log level for all logger instances
+   * @param solaLoggerFactory the factory used to create new logger instances
+   */
   public static void configure(SolaLogLevel level, SolaLoggerFactory solaLoggerFactory) {
     SolaLogger.DEFAULT_LEVEL = level;
     SolaLogger.solaLoggerFactory = solaLoggerFactory;
   }
 
-  public static void configure(SolaLogLevel level) {
-    SolaLogger.DEFAULT_LEVEL = level;
-    SolaLogger.solaLoggerFactory = new JavaSolaLoggerFactory();
-  }
-
+  /**
+   * Utilizes the configured {@link SolaLoggerFactory} to create a new {@link SolaLogger} instance for desired class.
+   *
+   * @param clazz the class to create a logger for
+   * @return new logger instance
+   */
   public static SolaLogger of(Class<?> clazz) {
     if (solaLoggerFactory == null) {
       throw new IllegalStateException("SolaLogger has not been configured. Call SolaLogger.configure() statically in file with main method.");
@@ -31,6 +45,15 @@ public class SolaLogger {
     return logger;
   }
 
+  /**
+   * Utilizes the configured {@link SolaLoggerFactory} to create a new {@link SolaLogger} instance for desired class.
+   * If the {@link SolaLoggerFactory} creates instances that support writing to a file then the provided log file will
+   * be used to write to.
+   *
+   * @param clazz   the class to create a logger for
+   * @param logFile the log file to write to
+   * @return new logger instance
+   */
   public static SolaLogger of(Class<?> clazz, String logFile) {
     if (solaLoggerFactory == null) {
       throw new IllegalStateException("SolaLogger has not been configured. Call SolaLogger.configure() statically in file with main method.");
@@ -43,8 +66,17 @@ public class SolaLogger {
     return logger;
   }
 
+  /**
+   * Manually creates a SolaLogger instance. It will use the configured default {@link SolaLogLevel}. It is recommended
+   * to instead utilize the {@link SolaLogger#of(Class)} methods which use the configured {@link SolaLoggerFactory} to
+   * create new instances.
+   *
+   * @param logger the {@link Logger} that powers this SolaLogger
+   */
   public SolaLogger(Logger logger) {
     this.logger = logger;
+
+    loggerLevel = DEFAULT_LEVEL;
   }
 
   public void info(String message) {
