@@ -97,6 +97,7 @@ loadScripts(document, 'script');</script>
 <li><a href="technology.sola.engine/technology/sola/engine/physics/system/package-tree.html">technology.sola.engine.physics.system</a>, </li>
 <li><a href="technology.sola.engine/technology/sola/engine/physics/system/collision/package-tree.html">technology.sola.engine.physics.system.collision</a>, </li>
 <li><a href="technology.sola.engine/technology/sola/engine/physics/utils/package-tree.html">technology.sola.engine.physics.utils</a>, </li>
+<li><a href="technology.sola.engine/technology/sola/logging/package-tree.html">technology.sola.logging</a>, </li>
 <li><a href="technology.sola.engine/technology/sola/math/package-tree.html">technology.sola.math</a>, </li>
 <li><a href="technology.sola.engine/technology/sola/math/geometry/package-tree.html">technology.sola.math.geometry</a>, </li>
 <li><a href="technology.sola.engine/technology/sola/math/linear/package-tree.html">technology.sola.math.linear</a></li>
@@ -174,6 +175,15 @@ loadScripts(document, 'script');</script>
 <li class="circle">technology.sola.engine.assets.graphics.font.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/Font.html" class="type-name-link" title="class in technology.sola.engine.assets.graphics.font">Font</a> (implements technology.sola.engine.assets.<a href="technology.sola.engine/technology/sola/engine/assets/Asset.html" title="interface in technology.sola.engine.assets">Asset</a>)</li>
 <li class="circle">technology.sola.engine.assets.graphics.font.mapper.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/mapper/FontGlyphJsonMapper.html" class="type-name-link" title="class in technology.sola.engine.assets.graphics.font.mapper">FontGlyphJsonMapper</a> (implements technology.sola.json.mapper.JsonMapper&lt;T&gt;)</li>
 <li class="circle">technology.sola.engine.assets.graphics.font.mapper.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/mapper/FontInfoJsonMapper.html" class="type-name-link" title="class in technology.sola.engine.assets.graphics.font.mapper">FontInfoJsonMapper</a> (implements technology.sola.json.mapper.JsonMapper&lt;T&gt;)</li>
+<li class="circle">java.util.logging.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.logging/java/util/logging/Formatter.html" class="type-name-link external-link" title="class or interface in java.util.logging">Formatter</a>
+<ul>
+<li class="circle">java.util.logging.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.logging/java/util/logging/SimpleFormatter.html" class="type-name-link external-link" title="class or interface in java.util.logging">SimpleFormatter</a>
+<ul>
+<li class="circle">technology.sola.logging.<a href="technology.sola.engine/technology/sola/logging/SolaLogMessageFormatter.html" class="type-name-link" title="class in technology.sola.logging">SolaLogMessageFormatter</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="circle">technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html" class="type-name-link" title="class in technology.sola.engine.core">GameLoop</a> (implements java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>)</li>
 <li class="circle">technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/GameLoop.FpsTracker.html" class="type-name-link" title="class in technology.sola.engine.core">GameLoop.FpsTracker</a></li>
 <li class="circle">technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiDocument.html" class="type-name-link" title="class in technology.sola.engine.graphics.gui">GuiDocument</a></li>
@@ -211,6 +221,7 @@ loadScripts(document, 'script');</script>
 <li class="circle">technology.sola.engine.graphics.gui.event.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiEventListenerList.html" class="type-name-link" title="class in technology.sola.engine.graphics.gui.event">GuiEventListenerList</a>&lt;E&gt;</li>
 <li class="circle">technology.sola.engine.graphics.gui.json.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/json/GuiJsonDocumentBuilder.html" class="type-name-link" title="class in technology.sola.engine.graphics.gui.json">GuiJsonDocumentBuilder</a></li>
 <li class="circle">technology.sola.engine.graphics.gui.style.theme.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/theme/GuiTheme.html" class="type-name-link" title="class in technology.sola.engine.graphics.gui.style.theme">GuiTheme</a></li>
+<li class="circle">technology.sola.logging.<a href="technology.sola.engine/technology/sola/logging/JavaSolaLoggerFactory.html" class="type-name-link" title="class in technology.sola.logging">JavaSolaLoggerFactory</a> (implements technology.sola.logging.<a href="technology.sola.engine/technology/sola/logging/SolaLoggerFactory.html" title="interface in technology.sola.logging">SolaLoggerFactory</a>)</li>
 <li class="circle">technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/KeyboardInput.html" class="type-name-link" title="class in technology.sola.engine.input">KeyboardInput</a></li>
 <li class="circle">technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/KeyboardLayout.html" class="type-name-link" title="class in technology.sola.engine.input">KeyboardLayout</a></li>
 <li class="circle">technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Layer.html" class="type-name-link" title="class in technology.sola.engine.graphics.renderer">Layer</a></li>
@@ -302,6 +313,11 @@ loadScripts(document, 'script');</script>
 </li>
 </ul>
 </li>
+<li class="circle">technology.sola.logging.<a href="technology.sola.engine/technology/sola/logging/SolaLogger.html" class="type-name-link" title="class in technology.sola.logging">SolaLogger</a>
+<ul>
+<li class="circle">technology.sola.logging.<a href="technology.sola.engine/technology/sola/logging/JavaSolaLogger.html" class="type-name-link" title="class in technology.sola.logging">JavaSolaLogger</a></li>
+</ul>
+</li>
 <li class="circle">technology.sola.math.<a href="technology.sola.engine/technology/sola/math/SolaMath.html" class="type-name-link" title="class in technology.sola.math">SolaMath</a></li>
 <li class="circle">technology.sola.engine.defaults.<a href="technology.sola.engine/technology/sola/engine/defaults/SolaPhysics.html" class="type-name-link" title="class in technology.sola.engine.defaults">SolaPhysics</a></li>
 <li class="circle">technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" class="type-name-link" title="class in technology.sola.engine.core">SolaPlatform</a></li>
@@ -369,6 +385,7 @@ loadScripts(document, 'script');</script>
 <li class="circle">technology.sola.engine.networking.rest.<a href="technology.sola.engine/technology/sola/engine/networking/rest/RestClient.html" class="type-name-link" title="interface in technology.sola.engine.networking.rest">RestClient</a></li>
 <li class="circle">technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Shape.html" class="type-name-link" title="interface in technology.sola.math.geometry">Shape</a></li>
 <li class="circle">technology.sola.engine.networking.socket.<a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketClient.html" class="type-name-link" title="interface in technology.sola.engine.networking.socket">SocketClient</a></li>
+<li class="circle">technology.sola.logging.<a href="technology.sola.engine/technology/sola/logging/SolaLoggerFactory.html" class="type-name-link" title="interface in technology.sola.logging">SolaLoggerFactory</a></li>
 <li class="circle">technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.GameLoopProvider.html" class="type-name-link" title="interface in technology.sola.engine.core">SolaPlatform.GameLoopProvider</a></li>
 <li class="circle">technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.SolaPlatformInitialization.html" class="type-name-link" title="interface in technology.sola.engine.core">SolaPlatform.SolaPlatformInitialization</a></li>
 <li class="circle">technology.sola.engine.graphics.components.animation.<a href="technology.sola.engine/technology/sola/engine/graphics/components/animation/SpriteAnimatorComponent.AnimationCompleteCallback.html" class="type-name-link" title="interface in technology.sola.engine.graphics.components.animation">SpriteAnimatorComponent.AnimationCompleteCallback</a></li>
@@ -396,6 +413,7 @@ loadScripts(document, 'script');</script>
 <li class="circle">technology.sola.engine.graphics.gui.style.property.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/property/MainAxisChildren.html" class="type-name-link" title="enum class in technology.sola.engine.graphics.gui.style.property">MainAxisChildren</a></li>
 <li class="circle">technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/MouseButton.html" class="type-name-link" title="enum class in technology.sola.engine.input">MouseButton</a></li>
 <li class="circle">technology.sola.engine.defaults.controls.<a href="technology.sola.engine/technology/sola/engine/defaults/controls/MouseButtonControlInputCondition.State.html" class="type-name-link" title="enum class in technology.sola.engine.defaults.controls">MouseButtonControlInputCondition.State</a></li>
+<li class="circle">technology.sola.logging.<a href="technology.sola.engine/technology/sola/logging/SolaLogLevel.html" class="type-name-link" title="enum class in technology.sola.logging">SolaLogLevel</a></li>
 <li class="circle">technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatformType.html" class="type-name-link" title="enum class in technology.sola.engine.core">SolaPlatformType</a></li>
 <li class="circle">technology.sola.engine.graphics.gui.elements.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/TextStyles.TextAlignment.html" class="type-name-link" title="enum class in technology.sola.engine.graphics.gui.elements">TextStyles.TextAlignment</a></li>
 <li class="circle">technology.sola.engine.graphics.gui.style.property.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/property/Visibility.html" class="type-name-link" title="enum class in technology.sola.engine.graphics.gui.style.property">Visibility</a></li>
