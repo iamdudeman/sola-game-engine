@@ -1,10 +1,9 @@
 package technology.sola.engine.editor.core.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.engine.editor.core.utils.FileUtils;
 import technology.sola.json.JsonObject;
+import technology.sola.logging.SolaLogger;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +21,7 @@ public record EditorConfig(
   String selectedTool,
   Map<String, JsonObject> toolConfigurations
 ) {
-  private static final Logger LOGGER = LoggerFactory.getLogger(EditorConfig.class);
+  private static final SolaLogger LOGGER = SolaLogger.of(EditorConfig.class);
 
   /**
    * Reads an {@link EditorConfig} instance from a configuration file.

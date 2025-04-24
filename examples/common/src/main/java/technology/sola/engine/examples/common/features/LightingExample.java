@@ -63,10 +63,6 @@ public class LightingExample extends SolaWithDefaults {
       .executeWhenLoaded(spriteSheet -> completeAsyncInit.run());
   }
 
-  private void hmm() {
-
-  }
-
   private World buildWorld() {
     Random random = new Random();
     World world = new World(1500);

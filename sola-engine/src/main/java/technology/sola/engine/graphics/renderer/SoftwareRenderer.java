@@ -1,7 +1,5 @@
 package technology.sola.engine.graphics.renderer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
@@ -9,6 +7,7 @@ import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Canvas;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.blend.BlendFunction;
+import technology.sola.logging.SolaLogger;
 import technology.sola.math.SolaMath;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.geometry.Triangle;
@@ -24,7 +23,7 @@ import java.util.List;
  * implementation.
  */
 public class SoftwareRenderer extends Canvas implements Renderer {
-  private static final Logger LOGGER = LoggerFactory.getLogger(SoftwareRenderer.class);
+  private static final SolaLogger LOGGER = SolaLogger.of(SoftwareRenderer.class);
   private final List<Layer> layers = new ArrayList<>();
   private BlendFunction blendFunction;
   private Font font;
@@ -69,7 +68,7 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   @Override
   public Font getFont() {
     if (font == null) {
-      LOGGER.warn("No font is currently set. Using DefaultFont as a backup.");
+      LOGGER.warning("No font is currently set. Using DefaultFont as a backup.");
       font = DefaultFont.get();
     }
 

@@ -1,13 +1,12 @@
 package technology.sola.engine.server;
 
 import com.sun.net.httpserver.HttpServer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.core.GameLoop;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.networking.socket.SocketMessage;
 import technology.sola.engine.server.rest.SolaRouter;
+import technology.sola.logging.SolaLogger;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -24,7 +23,7 @@ import java.util.concurrent.Executors;
  * SolaServer handles network traffic to and from many client connections.
  */
 public abstract class SolaServer {
-  private static final Logger LOGGER = LoggerFactory.getLogger(SolaServer.class);
+  private static final SolaLogger LOGGER = SolaLogger.of(SolaServer.class);
   /**
    * {@link SolaEcs} instance used by the server's game loop.
    */
@@ -164,7 +163,7 @@ public abstract class SolaServer {
     ClientConnection clientConnection = clientConnectionMap.get(id);
 
     if (clientConnection == null) {
-      LOGGER.warn("ClientConnection with id {} does not exist", id);
+      LOGGER.warning("ClientConnection with id %s does not exist", id);
     } else {
       if (!messageClient(clientConnection, socketMessage)) {
         onDisconnect(clientConnection);
@@ -206,10 +205,10 @@ public abstract class SolaServer {
     try {
       clientConnection.sendMessage(socketMessage);
     } catch (SocketException ex) {
-      LOGGER.error("Error sending message to {}", clientConnection.getClientId(), ex);
+      LOGGER.error("Error sending message to %s", ex, clientConnection.getClientId());
       return false;
     } catch (IOException ex) {
-      LOGGER.error("Error sending message to {}", clientConnection.getClientId(), ex);
+      LOGGER.error("Error sending message to %s", ex, clientConnection.getClientId());
     }
 
     return true;
@@ -245,10 +244,10 @@ public abstract class SolaServer {
             clientConnectionMap.put(jointClientConnection.getClientId(), jointClientConnection);
 
             if (isAllowedConnection(jointClientConnection)) {
-              LOGGER.info("Client {} accepted", jointClientConnection.getClientId());
+              LOGGER.info("Client %s accepted", jointClientConnection.getClientId());
               new Thread(jointClientConnection).start();
             } else {
-              LOGGER.info("Client {} rejected", jointClientConnection.getClientId());
+              LOGGER.info("Client %s rejected", jointClientConnection.getClientId());
               clientConnectionMap.remove(jointClientConnection.getClientId()).close();
             }
 
@@ -275,7 +274,7 @@ public abstract class SolaServer {
 
             // handle CORS options requests
             if (exchange.getRequestMethod().equalsIgnoreCase("OPTIONS")) {
-              LOGGER.info("{} {}", exchange.getRequestMethod(), exchange.getRequestURI().toString());
+              LOGGER.info("%s %s", exchange.getRequestMethod(), exchange.getRequestURI().toString());
               exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "*");
               exchange.sendResponseHeaders(204, -1);
               return;
@@ -283,7 +282,7 @@ public abstract class SolaServer {
 
             var response = solaRouter.handleHttpExchange(exchange);
 
-            LOGGER.info("{} {} {}", response.status(), exchange.getRequestMethod(), exchange.getRequestURI().toString());
+            LOGGER.info("%s %s %s", response.status(), exchange.getRequestMethod(), exchange.getRequestURI().toString());
 
             exchange.getResponseHeaders().set("Content-Type", "application/json");
             exchange.sendResponseHeaders(response.status(), 0);

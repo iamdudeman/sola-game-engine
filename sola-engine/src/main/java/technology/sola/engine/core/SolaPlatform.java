@@ -1,7 +1,5 @@
 package technology.sola.engine.core;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Layer;
@@ -13,6 +11,7 @@ import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.networking.rest.RestClient;
 import technology.sola.engine.networking.socket.SocketClient;
+import technology.sola.logging.SolaLogger;
 
 import java.util.function.Consumer;
 
@@ -20,10 +19,7 @@ import java.util.function.Consumer;
  * SolaPlatform defines the API for a platform to run {@link Sola}.
  */
 public abstract class SolaPlatform {
-  /**
-   * The {@link Logger} instance for the platform.
-   */
-  protected static final Logger LOGGER = LoggerFactory.getLogger(SolaPlatform.class);
+  private static final SolaLogger LOGGER = SolaLogger.of(SolaPlatform.class);
   /**
    * The {@link Renderer} for the platform.
    */
@@ -55,7 +51,7 @@ public abstract class SolaPlatform {
    * @param sola the {@code Sola} to start
    */
   public void play(Sola sola) {
-    LOGGER.info("Using platform [{}]", this.getClass().getName());
+    LOGGER.info("Using platform [%s]", this.getClass().getName());
 
     this.solaEventHub = sola.eventHub;
     this.viewport = buildViewport(sola.configuration);

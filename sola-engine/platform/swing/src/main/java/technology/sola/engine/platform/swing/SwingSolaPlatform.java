@@ -1,7 +1,5 @@
 package technology.sola.engine.platform.swing;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
@@ -26,6 +24,7 @@ import technology.sola.engine.platform.swing.assets.graphics.SwingSolaImageAsset
 import technology.sola.engine.platform.swing.core.Graphics2dRenderer;
 import technology.sola.engine.platform.swing.core.SwingRestClient;
 import technology.sola.engine.platform.swing.core.SwingSocketClient;
+import technology.sola.logging.SolaLogger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,7 +45,7 @@ import java.util.function.Consumer;
  * a Swing powered window.
  */
 public class SwingSolaPlatform extends SolaPlatform {
-  private static final Logger LOGGER = LoggerFactory.getLogger(SwingSolaPlatform.class);
+  private static final SolaLogger LOGGER = SolaLogger.of(SwingSolaPlatform.class);
   private final boolean useSoftwareRendering;
   private Canvas canvas;
   private Consumer<Renderer> beforeRender;
@@ -232,7 +231,7 @@ public class SwingSolaPlatform extends SolaPlatform {
 
   @Override
   protected Renderer buildRenderer(SolaConfiguration solaConfiguration) {
-    LOGGER.info("Using {} rendering", useSoftwareRendering ? "Software" : "Graphics2D");
+    LOGGER.info("Using %s rendering", useSoftwareRendering ? "Software" : "Graphics2D");
 
     return useSoftwareRendering
       ? super.buildRenderer(solaConfiguration)
@@ -299,7 +298,7 @@ public class SwingSolaPlatform extends SolaPlatform {
       }
 
       if (url == null) {
-        LOGGER.warn("Icon not found");
+        LOGGER.warning("Icon not found");
       } else {
         jFrame.setIconImage(new ImageIcon(url).getImage());
       }

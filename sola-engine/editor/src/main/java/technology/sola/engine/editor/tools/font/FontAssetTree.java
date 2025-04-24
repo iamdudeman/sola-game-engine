@@ -1,7 +1,5 @@
 package technology.sola.engine.editor.tools.font;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import technology.sola.engine.editor.core.components.assets.AssetTreeItem;
 import technology.sola.engine.editor.core.components.assets.AssetType;
 import technology.sola.engine.editor.core.components.assets.AssetActionConfiguration;
@@ -11,13 +9,14 @@ import technology.sola.engine.editor.core.components.assets.AssetTreeView;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.components.TabbedPanel;
 import technology.sola.engine.editor.core.utils.ToastService;
+import technology.sola.logging.SolaLogger;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 class FontAssetTree extends EditorPanel {
-  private static final Logger LOGGER = LoggerFactory.getLogger(FontAssetTree.class);
+  private static final SolaLogger LOGGER = SolaLogger.of(FontAssetTree.class);
   private final AssetTreeView assetTreeView;
 
   public FontAssetTree(TabbedPanel centerPanel) {

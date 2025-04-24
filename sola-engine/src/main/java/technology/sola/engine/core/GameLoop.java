@@ -1,9 +1,8 @@
 package technology.sola.engine.core;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.event.EventHub;
+import technology.sola.logging.SolaLogger;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -13,7 +12,7 @@ import java.util.function.Consumer;
  * GameLoop handles running a sequence of update and render commands at a target rate.
  */
 public abstract class GameLoop implements Runnable {
-  private static final Logger LOGGER = LoggerFactory.getLogger(GameLoop.class);
+  private static final SolaLogger LOGGER = SolaLogger.of(GameLoop.class);
   /**
    * The {@link EventHub} instance.
    */
@@ -161,7 +160,7 @@ public abstract class GameLoop implements Runnable {
     }
 
     private void logStats() {
-      LOGGER.info("ups: {} fps: {}", updatesThisSecond, framesThisSecond);
+      LOGGER.info("ups: %s fps: %s", updatesThisSecond, framesThisSecond);
       updatesThisSecond = 0;
       framesThisSecond = 0;
     }

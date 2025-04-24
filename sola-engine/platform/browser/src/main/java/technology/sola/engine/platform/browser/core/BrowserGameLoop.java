@@ -35,7 +35,6 @@ public class BrowserGameLoop extends GameLoop implements JsUtils.Function {
     @Override
     public void run() {
       if (!isRunning()) {
-        stop();
         eventHub.emit(new GameLoopEvent(GameLoopState.STOPPED));
         return;
       }

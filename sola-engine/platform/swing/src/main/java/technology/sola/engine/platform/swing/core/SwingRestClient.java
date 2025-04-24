@@ -1,11 +1,10 @@
 package technology.sola.engine.platform.swing.core;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import technology.sola.engine.networking.rest.HttpResponse;
 import technology.sola.engine.networking.rest.RestClient;
 import technology.sola.json.JsonElement;
 import technology.sola.json.SolaJson;
+import technology.sola.logging.SolaLogger;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -20,7 +19,7 @@ import java.util.function.Consumer;
  * The {@link technology.sola.engine.platform.swing.SwingSolaPlatform} implementation of {@link RestClient}.
  */
 public class SwingRestClient implements RestClient {
-  private static final Logger LOGGER = LoggerFactory.getLogger(SwingRestClient.class);
+  private static final SolaLogger LOGGER = SolaLogger.of(SwingRestClient.class);
 
   @Override
   public void request(String method, String path, JsonElement body, Consumer<HttpResponse> httpResponseSupplier) {
@@ -63,10 +62,10 @@ public class SwingRestClient implements RestClient {
           httpResponseSupplier.accept(new HttpResponse(status, new SolaJson().parse(response)));
         }
       } catch (IOException ex) {
-        LOGGER.error("Request {} {} failed", method, path, ex);
+        LOGGER.error("Request %s %s failed", ex, method, path);
       }
     } catch (MalformedURLException ex) {
-      LOGGER.error("Invalid url: {} ", path, ex);
+      LOGGER.error("Invalid url: %s ", ex, path);
     }
   }
 }

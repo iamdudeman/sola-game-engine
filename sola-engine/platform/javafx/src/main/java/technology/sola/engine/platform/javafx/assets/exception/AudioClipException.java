@@ -1,7 +1,6 @@
 package technology.sola.engine.platform.javafx.assets.exception;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import technology.sola.logging.SolaLogger;
 
 import java.io.Serial;
 
@@ -10,7 +9,7 @@ import java.io.Serial;
  * to load.
  */
 public class AudioClipException extends RuntimeException {
-  private static final Logger LOGGER = LoggerFactory.getLogger(AudioClipException.class);
+  private static final SolaLogger LOGGER = SolaLogger.of(AudioClipException.class);
   @Serial
   private static final long serialVersionUID = -3588454095968360166L;
 

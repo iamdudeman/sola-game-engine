@@ -11,6 +11,7 @@ import technology.sola.engine.platform.browser.javascript.JsCanvasUtils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Arrays;
 
 /**
  * SolaBrowserFileBuilder is a wrapper around {@link org.teavm.vm.TeaVM} for generating the "sola.js" bundle for a
@@ -96,7 +97,13 @@ public class SolaBrowserFileBuilder {
 
     if (!buildResult.getProblems().getSevereProblems().isEmpty()) {
       buildResult.getProblems().getSevereProblems().forEach(problem -> {
-        System.out.println(problem.getText());
+        if (problem.getParams() != null && problem.getParams().length > 0) {
+          System.out.print(problem.getText() + " ");
+          System.out.println(Arrays.toString(problem.getParams()));
+        } else {
+          System.out.println(problem.getText());
+        }
+
         System.out.println(problem.getLocation().getSourceLocation());
       });
 
