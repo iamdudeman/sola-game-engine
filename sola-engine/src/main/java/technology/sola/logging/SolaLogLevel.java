@@ -9,24 +9,32 @@ public enum SolaLogLevel {
   /**
    * OFF is a special level that can be used to turn off logging.
    */
-  OFF(SolaLogger.SolaLevel.OFF),
+  OFF(SolaLevel.OFF),
   /**
    * INFO is a message level for general information that may or may not be useful depending on the context.
    */
-  INFO(SolaLogger.SolaLevel.INFO),
+  INFO(SolaLevel.INFO),
   /**
    * WARNING is a message level indicating a potential problem.
    */
-  WARNING(SolaLogger.SolaLevel.WARNING),
+  WARNING(SolaLevel.WARNING),
   /**
    * ERROR is a message level indicating a serious failure.
    */
-  ERROR(SolaLogger.SolaLevel.ERROR),
+  ERROR(SolaLevel.ERROR),
   ;
 
-  final int value;
+  final Level level;
 
   SolaLogLevel(Level level) {
-    this.value = level.intValue();
+    this.level = level;
+  }
+
+  private static class SolaLevel extends Level {
+    static final SolaLevel ERROR = new SolaLevel("ERROR", Level.SEVERE.intValue());
+
+    protected SolaLevel(String name, int value) {
+      super(name, value);
+    }
   }
 }

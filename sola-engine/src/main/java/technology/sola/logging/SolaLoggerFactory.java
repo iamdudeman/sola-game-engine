@@ -6,6 +6,11 @@ package technology.sola.logging;
  */
 public interface SolaLoggerFactory {
   /**
+   * The default log file to use if not provided.
+   */
+  String DEFAULT_LOG_FILE = "logs/sola.log";
+
+  /**
    * Creates a new {@link SolaLogger} for desired {@link Class}. The logs for the class will be in desired logFile.
    *
    * @param clazz   the class the logger is for
@@ -15,12 +20,13 @@ public interface SolaLoggerFactory {
   SolaLogger getLogger(Class<?> clazz, String logFile);
 
   /**
-   * Creates a new {@link SolaLogger} for desired {@link Class}. The default log file will be used.
+   * Creates a new {@link SolaLogger} for desired {@link Class}. The default log
+   * file {@link SolaLoggerFactory#DEFAULT_LOG_FILE} will be used.
    *
    * @param clazz the class the logger is for
    * @return new logger instance
    */
   default SolaLogger getLogger(Class<?> clazz) {
-    return getLogger(clazz, "logs/sola.log");
+    return getLogger(clazz, DEFAULT_LOG_FILE);
   }
 }

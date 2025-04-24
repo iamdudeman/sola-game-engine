@@ -6,10 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.FileHandler;
-import java.util.logging.Handler;
-import java.util.logging.Logger;
+import java.util.logging.*;
 
 /**
  * JavaSolaLoggerFactory is a {@link SolaLoggerFactory} implementation for desktop platforms (JavaFX and Swing). It will
@@ -20,7 +17,7 @@ public class JavaSolaLoggerFactory implements SolaLoggerFactory {
 
   @Override
   public SolaLogger getLogger(Class<?> clazz, String logFile) {
-    return new SolaLogger(initLogger(clazz, logFile));
+    return new JavaSolaLogger(initLogger(clazz, logFile));
   }
 
   private static Handler buildConsoleHandler() {
@@ -60,7 +57,7 @@ public class JavaSolaLoggerFactory implements SolaLoggerFactory {
       logger.addHandler(buildConsoleHandler());
       logger.setUseParentHandlers(false);
     } catch (IOException ex) {
-      logger.log(SolaLogger.SolaLevel.ERROR, ex, ex::getMessage);
+      logger.log(Level.SEVERE, ex, ex::getMessage);
     }
 
     return logger;

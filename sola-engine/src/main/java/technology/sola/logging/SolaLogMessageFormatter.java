@@ -15,7 +15,8 @@ public class SolaLogMessageFormatter extends SimpleFormatter {
 
   @Override
   public synchronized String format(LogRecord logRecord) {
-    return String.format(LOG_FORMAT,
+    return String.format(
+      LOG_FORMAT,
       DATE_FORMAT.format(new Date(logRecord.getMillis())),
       logRecord.getLevel().getName(),
       logRecord.getLoggerName(),

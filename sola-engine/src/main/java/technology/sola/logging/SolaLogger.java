@@ -1,19 +1,15 @@
 package technology.sola.logging;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * SolaLogger instances are used to log messages to the console and/or files. SolaLogger must be configured via
  * {@link SolaLogger#configure(SolaLogLevel, SolaLoggerFactory)} before instances can be created via
  * {@link SolaLogger#of(Class)}. The log level of all logger instances will be the same based on how SolaLogger was
  * configured.
  */
-public class SolaLogger {
-  private static SolaLogLevel DEFAULT_LEVEL = SolaLogLevel.WARNING;
+public abstract class SolaLogger {
+  private static SolaLogLevel defaultLoggerLevel = SolaLogLevel.WARNING;
   private static SolaLoggerFactory solaLoggerFactory;
-  private final SolaLogLevel loggerLevel;
-  private final Logger logger;
+  private final SolaLogLevel loggerLevel = defaultLoggerLevel;
 
   /**
    * Configures all resulting SolaLoggers to have desired {@link SolaLogLevel} and to be created via desired
@@ -23,7 +19,7 @@ public class SolaLogger {
    * @param solaLoggerFactory the factory used to create new logger instances
    */
   public static void configure(SolaLogLevel level, SolaLoggerFactory solaLoggerFactory) {
-    SolaLogger.DEFAULT_LEVEL = level;
+    SolaLogger.defaultLoggerLevel = level;
     SolaLogger.solaLoggerFactory = solaLoggerFactory;
   }
 
@@ -59,25 +55,14 @@ public class SolaLogger {
   }
 
   /**
-   * Manually creates a SolaLogger instance. It will use the configured default {@link SolaLogLevel}. It is recommended
-   * to instead utilize the {@link SolaLogger#of(Class)} methods which use the configured {@link SolaLoggerFactory} to
-   * create new instances.
-   *
-   * @param logger the {@link Logger} that powers this SolaLogger
-   */
-  public SolaLogger(Logger logger) {
-    this.logger = logger;
-
-    loggerLevel = DEFAULT_LEVEL;
-  }
-
-  /**
    * Logs a message at {@link SolaLogLevel#INFO}.
    *
    * @param message the message to log
    */
   public void info(String message) {
-    log(SolaLevel.INFO, message);
+    if (isLoggable(SolaLogLevel.INFO)) {
+      log(SolaLogLevel.INFO, message, null);
+    }
   }
 
   /**
@@ -85,10 +70,12 @@ public class SolaLogger {
    * message.
    *
    * @param message the message to log
-   * @param params the additional params for the log message
+   * @param params  the additional params for the log message
    */
   public void info(String message, Object... params) {
-    log(SolaLevel.INFO, message, params);
+    if (isLoggable(SolaLogLevel.INFO)) {
+      log(SolaLogLevel.INFO, message, null, params);
+    }
   }
 
   /**
@@ -97,7 +84,9 @@ public class SolaLogger {
    * @param message the message to log
    */
   public void warning(String message) {
-    log(SolaLevel.WARNING, message);
+    if (isLoggable(SolaLogLevel.WARNING)) {
+      log(SolaLogLevel.WARNING, message, null);
+    }
   }
 
   /**
@@ -105,10 +94,12 @@ public class SolaLogger {
    * log message.
    *
    * @param message the message to log
-   * @param params the additional params for the log message
+   * @param params  the additional params for the log message
    */
   public void warning(String message, Object... params) {
-    log(SolaLevel.WARNING, message, params);
+    if (isLoggable(SolaLogLevel.WARNING)) {
+      log(SolaLogLevel.WARNING, message, null, params);
+    }
   }
 
   /**
@@ -117,70 +108,51 @@ public class SolaLogger {
    * @param message the message to log
    */
   public void error(String message) {
-    log(SolaLevel.ERROR, message);
+    if (isLoggable(SolaLogLevel.ERROR)) {
+      log(SolaLogLevel.ERROR, message, null);
+    }
   }
 
   /**
    * Logs a message at {@link SolaLogLevel#ERROR}. Additionally, the passed {@link Throwable} will be logged.
    *
-   * @param message the message to log
+   * @param message   the message to log
    * @param throwable the exception that should be logged
    */
   public void error(String message, Throwable throwable) {
-    log(SolaLevel.ERROR, message, throwable);
+    if (isLoggable(SolaLogLevel.ERROR)) {
+      log(SolaLogLevel.ERROR, message, throwable);
+    }
   }
 
   /**
    * Logs a message at {@link SolaLogLevel#ERROR}. This uses {@link String#format(String, Object...)} to format the
    * log message. Additionally, the passed {@link Throwable} will be logged.
    *
-   * @param message the message to log
+   * @param message   the message to log
    * @param throwable the exception that should be logged
-   * @param params the additional params for the log message
+   * @param params    the additional params for the log message
    */
   public void error(String message, Throwable throwable, Object... params) {
-    log(SolaLevel.ERROR, message, throwable, params);
-  }
-
-  private void log(Level level, String message, Object... params) {
-    if (isNotLoggable(level)) {
-      return;
-    }
-
-    logger.log(level, () -> String.format(message, params));
-  }
-
-  private void log(Level level, String message) {
-    if (isNotLoggable(level)) {
-      return;
-    }
-
-    logger.log(level, message);
-  }
-
-  private void log(Level level, String message, Throwable throwable, Object... params) {
-    if (isNotLoggable(level)) {
-      return;
-    }
-
-    if (throwable == null) {
-      logger.log(level, () -> String.format(message, params));
-    } else {
-      logger.log(level, throwable, () -> String.format(message, params));
+    if (isLoggable(SolaLogLevel.ERROR)) {
+      log(SolaLogLevel.ERROR, message, throwable, params);
     }
   }
 
-  private boolean isNotLoggable(Level level) {
-    int levelValue = this.loggerLevel.value;
+  /**
+   * Logs a message at desired {@link SolaLogLevel}. This uses {@link String#format(String, Object...)} to format the
+   * log message. Additionally, the passed {@link Throwable} will be logged if provided.
+   *
+   * @param level     the {@link SolaLogLevel} to log at
+   * @param message   the message to log
+   * @param throwable the exception that should be logged
+   * @param params    the additional params for the log message
+   */
+  protected abstract void log(SolaLogLevel level, String message, Throwable throwable, Object... params);
 
-    return level.intValue() < levelValue || levelValue == SolaLogLevel.OFF.value;
-  }
+  private boolean isLoggable(SolaLogLevel logRecordLevel) {
+    int levelValue = loggerLevel.level.intValue();
 
-  static class SolaLevel extends Level {
-    static final SolaLevel ERROR = new SolaLevel("ERROR", Level.SEVERE.intValue());
-
-    protected SolaLevel(String name, int value) {
-      super(name, value);
-    }
+    return logRecordLevel.level.intValue() >= levelValue && levelValue != SolaLogLevel.OFF.level.intValue();
   }
 }
