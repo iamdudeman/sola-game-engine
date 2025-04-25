@@ -46,41 +46,32 @@ import java.util.function.Consumer;
 public class JavaFxSolaPlatform extends SolaPlatform {
   private static final SolaLogger LOGGER = SolaLogger.of(JavaFxSolaPlatform.class);
   private final boolean useSoftwareRendering;
+  private final Double initialWindowWidth;
+  private final Double initialWindowHeight;
   private Canvas canvas;
   private GraphicsContext graphicsContext;
   private WritableImage writableImage;
-  private Double windowWidth;
-  private Double windowHeight;
   private Affine originalTransform;
 
   /**
-   * Creates a JavaFxSolaPlatform instance using software rendering.
+   * Creates a JavaFxSolaPlatform instance with default {@link JavaFxSolaPlatformConfig}.
    */
   public JavaFxSolaPlatform() {
-    this(true);
+    this(new JavaFxSolaPlatformConfig());
   }
 
   /**
-   * Creates a SwingSolaPlatform instance with the ability to turn off software rendering in favor of
-   * {@link JavaFxRenderer}.
+   * Creates a SwingSolaPlatform instance with desired configuration.
    *
-   * @param useSoftwareRendering whether to use software rendering or not
+   * @param platformConfig the {@link JavaFxSolaPlatformConfig}
    */
-  public JavaFxSolaPlatform(boolean useSoftwareRendering) {
-    this.useSoftwareRendering = useSoftwareRendering;
+  public JavaFxSolaPlatform(JavaFxSolaPlatformConfig platformConfig) {
+    this.useSoftwareRendering = platformConfig.useSoftwareRendering();
+    this.initialWindowWidth = platformConfig.initialWindowWidth();
+    this.initialWindowHeight = platformConfig.initialWindowHeight();
+
     socketClient = new JavaFxSocketClient();
     restClient = new JavaFxRestClient();
-  }
-
-  /**
-   * Sets the initial window size when a {@link technology.sola.engine.core.Sola} is played.
-   *
-   * @param width  the width of the window
-   * @param height the height of the window
-   */
-  public void setWindowSize(int width, int height) {
-    windowWidth = (double) width;
-    windowHeight = (double) height;
   }
 
   @Override
@@ -169,11 +160,11 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       stage.setOnCloseRequest(event -> solaEventHub.emit(new GameLoopEvent(GameLoopState.STOP)));
       stage.setTitle(solaConfiguration.title());
       stage.setScene(scene);
-      if (windowWidth != null) {
-        stage.setWidth(windowWidth);
+      if (initialWindowWidth != null) {
+        stage.setWidth(initialWindowWidth);
       }
-      if (windowHeight != null) {
-        stage.setHeight(windowHeight);
+      if (initialWindowHeight != null) {
+        stage.setHeight(initialWindowHeight);
       }
       stage.show();
 
