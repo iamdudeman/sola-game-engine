@@ -100,7 +100,8 @@ public class JavaFxRenderer implements Renderer {
 
   @Override
   public void clear(Color color) {
-    logMethodNotImplemented("clear"); // todo implement
+    setFillColor(color);
+    graphicsContext.fillRect(0, 0, getWidth(), getHeight());
   }
 
   @Override
@@ -168,7 +169,7 @@ public class JavaFxRenderer implements Renderer {
     }
 
     currentFillColor = color;
-    graphicsContext.setFill(new javafx.scene.paint.Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha()));
+    graphicsContext.setFill(javafx.scene.paint.Color.rgb(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha() / 255f));
   }
 
   private void setStrokeColor(Color color) {
@@ -177,7 +178,7 @@ public class JavaFxRenderer implements Renderer {
     }
 
     currentStrokeColor = color;
-    graphicsContext.setStroke(new javafx.scene.paint.Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha()));
+    graphicsContext.setStroke(javafx.scene.paint.Color.rgb(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha() / 255f));
   }
 
   private void logMethodNotImplemented(String method) {
