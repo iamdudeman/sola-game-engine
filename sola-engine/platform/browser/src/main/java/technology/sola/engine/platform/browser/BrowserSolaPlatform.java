@@ -50,10 +50,10 @@ public class BrowserSolaPlatform extends SolaPlatform {
   /**
    * Creates a BrowserSolaPlatform instance with desired configuration.
    *
-   * @param browserSolaPlatformConfig the {@link BrowserSolaPlatformConfig}
+   * @param platformConfig the {@link BrowserSolaPlatformConfig}
    */
-  public BrowserSolaPlatform(BrowserSolaPlatformConfig browserSolaPlatformConfig) {
-    this.useSoftwareRendering = browserSolaPlatformConfig.useSoftwareRendering();
+  public BrowserSolaPlatform(BrowserSolaPlatformConfig platformConfig) {
+    this.useSoftwareRendering = platformConfig.useSoftwareRendering();
     this.socketClient = new BrowserSocketClient();
     this.restClient = new BrowserRestClient();
   }
