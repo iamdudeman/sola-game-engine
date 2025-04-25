@@ -43,6 +43,7 @@ import java.util.function.Consumer;
  */
 public class JavaFxSolaPlatform extends SolaPlatform {
   private static final SolaLogger LOGGER = SolaLogger.of(JavaFxSolaPlatform.class);
+  private final boolean useSoftwareRendering;
   private Canvas canvas;
   private GraphicsContext graphicsContext;
   private WritableImage writableImage;
@@ -50,9 +51,20 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   private Double windowHeight;
 
   /**
-   * Creates a JavaFxSolaPlatform instance.
+   * Creates a JavaFxSolaPlatform instance using software rendering.
    */
   public JavaFxSolaPlatform() {
+    this(false);
+  }
+
+  /**
+   * Creates a SwingSolaPlatform instance with the ability to turn off software rendering in favor of
+   * {@link JavaFxRenderer}.
+   *
+   * @param useSoftwareRendering whether to use software rendering or not
+   */
+  public JavaFxSolaPlatform(boolean useSoftwareRendering) {
+    this.useSoftwareRendering = useSoftwareRendering;
     socketClient = new JavaFxSocketClient();
     restClient = new JavaFxRestClient();
   }
