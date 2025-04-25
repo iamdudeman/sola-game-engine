@@ -11,7 +11,6 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.blend.BlendFunction;
 import technology.sola.logging.SolaLogger;
 
-import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +25,8 @@ public class BrowserCanvasRenderer implements Renderer {
   private final List<Layer> layers = new ArrayList<>();
   private final int width;
   private final int height;
-  private Color currentColor;
+  private Color currentStrokeColor;
+  private Color currentFillColor;
   private Font font;
 
   /**
@@ -97,7 +97,7 @@ public class BrowserCanvasRenderer implements Renderer {
 
   @Override
   public void clear(Color color) {
-    setColor(color);
+    setFillColor(color);
     CanvasRenderScripts.fillRect(0, 0, width, height);
   }
 
@@ -118,12 +118,13 @@ public class BrowserCanvasRenderer implements Renderer {
 
   @Override
   public void drawRect(float x, float y, float width, float height, Color color) {
-    logMethodNotImplemented("drawRect"); // todo implement
+    setStrokeColor(color);
+    CanvasRenderScripts.strokeRect(x, y, width, height);
   }
 
   @Override
   public void fillRect(float x, float y, float width, float height, Color color) {
-    setColor(color);
+    setFillColor(color);
     CanvasRenderScripts.fillRect(x, y, width, height);
   }
 
@@ -157,17 +158,31 @@ public class BrowserCanvasRenderer implements Renderer {
     logMethodNotImplemented("drawImage"); // todo implement
   }
 
-  private void setColor(Color color) {
-    if (color == currentColor) {
+  private void setFillColor(Color color) {
+    if (color == currentFillColor) {
       return;
     }
 
-    currentColor = color;
+    currentFillColor = color;
 
     if (color.getAlpha() == 255) {
       CanvasRenderScripts.setFillStyle(color.getRed(), color.getGreen(), color.getBlue());
     } else {
       CanvasRenderScripts.setFillStyle(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha() * Color.ONE_DIV_255);
+    }
+  }
+
+  private void setStrokeColor(Color color) {
+    if (color == currentStrokeColor) {
+      return;
+    }
+
+    currentStrokeColor = color;
+
+    if (color.getAlpha() == 255) {
+      CanvasRenderScripts.setStrokeStyle(color.getRed(), color.getGreen(), color.getBlue());
+    } else {
+      CanvasRenderScripts.setStrokeStyle(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha() * Color.ONE_DIV_255);
     }
   }
 
@@ -180,14 +195,34 @@ public class BrowserCanvasRenderer implements Renderer {
       "var color = 'rgb(' + r + ',' + g + ',' + b + ')';" +
       "window.solaContext2d.fillStyle = color;";
 
+    private static final String STROKE_STYLE_ALPHA_SCRIPT =
+      "var color = 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';" +
+        "window.solaContext2d.strokeStyle = color;";
+
+    private static final String STROKE_STYLE_SCRIPT =
+      "var color = 'rgb(' + r + ',' + g + ',' + b + ')';" +
+        "window.solaContext2d.strokeStyle = color;";
+
+    private static final String STROKE_RECT_SCRIPT =
+      "window.solaContext2d.strokeRect(x, y, w, h);";
+
     private static final String FILL_RECT_SCRIPT =
       "window.solaContext2d.fillRect(x, y, w, h);";
+
+    @JSBody(params = { "r", "g", "b", "a" }, script = STROKE_STYLE_ALPHA_SCRIPT)
+    public static native void setStrokeStyle(int r, int g, int b, float a);
+
+    @JSBody(params = { "r", "g", "b" }, script = STROKE_STYLE_SCRIPT)
+    public static native void setStrokeStyle(int r, int g, int b);
 
     @JSBody(params = { "r", "g", "b", "a" }, script = FILL_STYLE_ALPHA_SCRIPT)
     public static native void setFillStyle(int r, int g, int b, float a);
 
     @JSBody(params = { "r", "g", "b" }, script = FILL_STYLE_SCRIPT)
     public static native void setFillStyle(int r, int g, int b);
+
+    @JSBody(params = { "x", "y", "w", "h" }, script = STROKE_RECT_SCRIPT)
+    public static native void strokeRect(float x, float y, float w, float h);
 
     @JSBody(params = { "x", "y", "w", "h" }, script = FILL_RECT_SCRIPT)
     public static native void fillRect(float x, float y, float w, float h);

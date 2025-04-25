@@ -111,6 +111,15 @@ public class BrowserSolaPlatform extends SolaPlatform {
   @Override
   protected void beforeRender(Renderer renderer) {
     JsCanvasUtils.clearRect();
+
+    if (!useSoftwareRendering) {
+      AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+
+      JsCanvasUtils.updateAspectRato(
+        aspectRatioSizing.x(), aspectRatioSizing.y(),
+        aspectRatioSizing.width() / (float) renderer.getWidth(), aspectRatioSizing.height() / (float) renderer.getHeight()
+      );
+    }
   }
 
   @Override
@@ -124,8 +133,6 @@ public class BrowserSolaPlatform extends SolaPlatform {
         renderer.getWidth(), renderer.getHeight(),
         aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height()
       );
-    } else {
-      throw new UnsupportedOperationException("Only software rendering is implemented currently");
     }
   }
 
