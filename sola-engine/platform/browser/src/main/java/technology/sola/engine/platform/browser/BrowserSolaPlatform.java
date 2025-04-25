@@ -41,20 +41,19 @@ public class BrowserSolaPlatform extends SolaPlatform {
   private final boolean useSoftwareRendering;
 
   /**
-   * Creates a BrowserSolaPlatform instance using software rendering.
+   * Creates a BrowserSolaPlatform instance using default {@link BrowserSolaPlatformConfig}.
    */
   public BrowserSolaPlatform() {
-    this(true);
+    this(new BrowserSolaPlatformConfig());
   }
 
   /**
-   * Creates a BrowserSolaPlatform instance with the ability to turn off software rendering in favor of
-   * Canvas.
+   * Creates a BrowserSolaPlatform instance with desired configuration.
    *
-   * @param useSoftwareRendering whether to use software rendering or not
+   * @param browserSolaPlatformConfig the {@link BrowserSolaPlatformConfig}
    */
-  public BrowserSolaPlatform(boolean useSoftwareRendering) {
-    this.useSoftwareRendering = useSoftwareRendering;
+  public BrowserSolaPlatform(BrowserSolaPlatformConfig browserSolaPlatformConfig) {
+    this.useSoftwareRendering = browserSolaPlatformConfig.useSoftwareRendering();
     this.socketClient = new BrowserSocketClient();
     this.restClient = new BrowserRestClient();
   }
