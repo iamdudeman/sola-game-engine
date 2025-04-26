@@ -18,6 +18,9 @@
     },
     {
       "$ref": "./MouseControlInput.schema.json"
+    },
+    {
+      "$ref": "./MouseWheelControlInput.schema.json"
     }
   ]
 }

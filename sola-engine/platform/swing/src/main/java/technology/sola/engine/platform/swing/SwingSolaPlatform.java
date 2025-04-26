@@ -28,13 +28,7 @@ import technology.sola.logging.SolaLogger;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.io.IOException;
@@ -127,6 +121,20 @@ public class SwingSolaPlatform extends SolaPlatform {
       public void mouseReleased(java.awt.event.MouseEvent mouseEvent) {
         mouseEventConsumer.accept(swingToSola(mouseEvent));
       }
+    });
+  }
+
+  @Override
+  public void onMouseWheel(Consumer<technology.sola.engine.input.MouseWheelEvent> mouseWheelEventConsumer) {
+    canvas.addMouseWheelListener(event -> {
+      boolean isHorizontal = event.isShiftDown();
+
+      boolean isUp = !isHorizontal && event.getWheelRotation() < 0;
+      boolean isDown = !isHorizontal && event.getWheelRotation() > 0;
+      boolean isLeft = isHorizontal && event.getWheelRotation() > 0;
+      boolean isRight = isHorizontal && event.getWheelRotation() < 0;
+
+      mouseWheelEventConsumer.accept(new technology.sola.engine.input.MouseWheelEvent(isUp, isDown, isLeft, isRight));
     });
   }
 

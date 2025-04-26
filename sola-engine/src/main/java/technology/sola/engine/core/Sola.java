@@ -98,6 +98,7 @@ public abstract class Sola {
     platform.onMouseMoved(event -> mouseInput.onMouseMoved(event));
     platform.onMousePressed(event -> mouseInput.onMousePressed(event));
     platform.onMouseReleased(event -> mouseInput.onMouseReleased(event));
+    platform.onMouseWheel(event -> mouseInput.onMouseWheel(event));
 
     onInit();
     onAsyncInit(completeAsyncInit);

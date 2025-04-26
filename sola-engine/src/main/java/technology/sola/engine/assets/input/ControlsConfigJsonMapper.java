@@ -1,9 +1,6 @@
 package technology.sola.engine.assets.input;
 
-import technology.sola.engine.defaults.controls.ControlInput;
-import technology.sola.engine.defaults.controls.ControlInputCondition;
-import technology.sola.engine.defaults.controls.KeyControlInputCondition;
-import technology.sola.engine.defaults.controls.MouseButtonControlInputCondition;
+import technology.sola.engine.defaults.controls.*;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.json.JsonArray;
@@ -89,6 +86,9 @@ public class ControlsConfigJsonMapper implements JsonMapper<ControlsConfig> {
         MouseButton.valueOf(jsonObject.getString("button")),
         MouseButtonControlInputCondition.State.valueOf(jsonObject.getString("state"))
       );
+      case "wheel" -> new MouseWheelControlInputCondition(
+        MouseWheelControlInputCondition.State.valueOf(jsonObject.getString("state"))
+      );
       default -> throw new IllegalArgumentException("Input type " + type + " not supported");
     };
   }
@@ -104,6 +104,10 @@ public class ControlsConfigJsonMapper implements JsonMapper<ControlsConfig> {
         .put("type", "mouse")
         .put("button", mouseButtonControlCondition.button().name())
         .put("state", mouseButtonControlCondition.state().name());
+    } else if (controlInputCondition instanceof MouseWheelControlInputCondition mouseWheelControlInputCondition) {
+      return new JsonObject()
+        .put("type", "wheel")
+        .put("state", mouseWheelControlInputCondition.state().name());
     } else {
       throw new IllegalArgumentException("ControlInput " + controlInputCondition.getClass() + " not supported");
     }

@@ -17,6 +17,7 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.input.MouseWheelEvent;
 import technology.sola.engine.platform.browser.assets.BrowserJsonElementAssetLoader;
 import technology.sola.engine.platform.browser.assets.audio.BrowserAudioClipAssetLoader;
 import technology.sola.engine.platform.browser.assets.graphics.BrowserSolaImageAssetLoader;
@@ -75,17 +76,26 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   @Override
   public void onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
-    JsMouseUtils.mouseEventListener("mousemove", (which, x, y) -> mouseEventConsumer.accept(browserToSola(which, x, y)));
+    JsMouseUtils.mouseEventListener("mousemove", (which, x, y) ->
+      mouseEventConsumer.accept(browserToSola(which, x, y)));
   }
 
   @Override
   public void onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
-    JsMouseUtils.mouseEventListener("mousedown", (which, x, y) -> mouseEventConsumer.accept(browserToSola(which, x, y)));
+    JsMouseUtils.mouseEventListener("mousedown", (which, x, y) ->
+      mouseEventConsumer.accept(browserToSola(which, x, y)));
   }
 
   @Override
   public void onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
-    JsMouseUtils.mouseEventListener("mouseup", (which, x, y) -> mouseEventConsumer.accept(browserToSola(which, x, y)));
+    JsMouseUtils.mouseEventListener("mouseup", (which, x, y) ->
+      mouseEventConsumer.accept(browserToSola(which, x, y)));
+  }
+
+  @Override
+  public void onMouseWheel(Consumer<MouseWheelEvent> mouseWheelEventConsumer) {
+    JsMouseUtils.mouseWheelEventListener((isUp, isDown, isLeft, isRight) ->
+      mouseWheelEventConsumer.accept(new MouseWheelEvent(isUp, isDown, isLeft, isRight)));
   }
 
   @Override

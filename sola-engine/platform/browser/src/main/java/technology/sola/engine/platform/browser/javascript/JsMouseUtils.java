@@ -24,6 +24,14 @@ public class JsMouseUtils {
   public static native void mouseEventListener(String eventName, MouseEventCallback callback);
 
   /**
+   * Adds a mouse wheel event listener.
+   *
+   * @param callback the callback for the event
+   */
+  @JSBody(params = {"callback"}, script = Scripts.MOUSE_WHEEL_EVENT)
+  public static native void mouseWheelEventListener(MouseWheelEventCallback callback);
+
+  /**
    * Callback definition for when an event for the mouse happens.
    */
   @JSFunctor
@@ -36,6 +44,22 @@ public class JsMouseUtils {
      * @param y     the y coordinate of the mouse when the event happened
      */
     void call(int which, int x, int y);
+  }
+
+  /**
+   * Callback definition for when an event for the mouse wheel happens.
+   */
+  @JSFunctor
+  public interface MouseWheelEventCallback extends JSObject {
+    /**
+     * Called when a mouse wheel event happens.
+     *
+     * @param isUp    true if the mouse wheel was moved up
+     * @param isDown  true if the mouse wheel was moved down
+     * @param isLeft  true if the mouse wheel was moved left
+     * @param isRight true if the mouse wheel was moved right
+     */
+    void call(boolean isUp, boolean isDown, boolean isLeft, boolean isRight);
   }
 
   private JsMouseUtils() {
@@ -70,10 +94,28 @@ public class JsMouseUtils {
       solaCanvas.addEventListener("pointerdown", function (event) {
         handleMouseEvent(event, "mousedown");
       }, false);
+
+      window.mouseWheelListeners = [];
+
+      solaCanvas.addEventListener("wheel", function (event) {
+        if (event.target === window.solaCanvas) {
+          var isUp = event.deltaY < 0;
+          var isDown = event.deltaY > 0;
+          var isLeft = event.deltaX > 0;
+          var isRight = event.deltaX < 0;
+
+          window.mouseWheelListeners.forEach(function(callback) {
+            callback(isUp, isDown, isLeft, isRight);
+          });
+        }
+      }, { passive: true });
       """;
 
     private static final String MOUSE_EVENT = """
       window.mouseListeners[eventName].push(callback);
+      """;
+    private static final String MOUSE_WHEEL_EVENT = """
+      window.mouseWheelListeners.push(callback);
       """;
   }
 }
