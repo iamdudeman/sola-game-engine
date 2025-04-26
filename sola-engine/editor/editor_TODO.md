@@ -1,5 +1,8 @@
 # Editor TODO List
 
+* maybe `sprites` show outlines with hover for id of sprite
+* create and edit spritesheets
+
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -25,14 +28,12 @@ Comes with default configuration for built-in components and systems
 
 * assets tooling
     * main window could preview asset
-        * maybe `sprites` show outlines with hover for id of sprite
         * maybe `audio` shows a little media player to preview it
         * not sure for `input`
     * create and edit controls assets
     * file browser in main UI to see assets
         * can maybe be used to update components' values later that consume asset ids
     * create and edit materials
-    * create and edit spritesheets
     * create and edit GUIs
         * maybe a WYSIWYG editor?
 
