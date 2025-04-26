@@ -91,12 +91,12 @@ public class MouseAndCameraExample extends SolaWithDefaults {
         colorIndex = colorIndex == colors.length - 1 ? 0 : colorIndex + 1;
       }
 
-      if (keyboardInput.isKeyPressed(Key.Z)) {
+      if (keyboardInput.isKeyPressed(Key.Z) || mouseInput.getMouseWheel().isUp()) {
         cameraTransform.setScaleX(cameraTransform.getScaleX() + 0.1f);
         cameraTransform.setScaleY(cameraTransform.getScaleY() + 0.1f);
       }
 
-      if (keyboardInput.isKeyPressed(Key.X)) {
+      if (keyboardInput.isKeyPressed(Key.X) || mouseInput.getMouseWheel().isDown()) {
         cameraTransform.setScaleX(cameraTransform.getScaleX() - 0.1f);
         cameraTransform.setScaleY(cameraTransform.getScaleY() - 0.1f);
       }

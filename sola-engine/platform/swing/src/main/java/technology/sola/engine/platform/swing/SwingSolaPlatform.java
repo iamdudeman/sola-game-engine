@@ -122,7 +122,10 @@ public class SwingSolaPlatform extends SolaPlatform {
         mouseEventConsumer.accept(swingToSola(mouseEvent));
       }
     });
+  }
 
+  @Override
+  public void onMouseWheel(Consumer<technology.sola.engine.input.MouseWheelEvent> mouseWheelEventConsumer) {
     // todo just notes for now
     canvas.addMouseWheelListener(new MouseWheelListener() {
       @Override

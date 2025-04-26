@@ -13,6 +13,8 @@ public class MouseInput {
   private final Map<MouseButton, ButtonState> mouseStatusMap = new EnumMap<>(MouseButton.class);
   private Vector2D lastEventPosition = new Vector2D(0, 0);
   private Vector2D currentMousePosition = null;
+  private MouseWheelEvent lastMouseWheelEvent = MouseWheelEvent.NONE;
+  private MouseWheelEvent currentMouseWheelEvent = MouseWheelEvent.NONE;
 
   /**
    * Checks if a {@link MouseButton} is pressed or not.
@@ -42,11 +44,27 @@ public class MouseInput {
   }
 
   /**
+   * Returns the last {@link MouseWheelEvent} that was received. Defaults to {@link MouseWheelEvent#NONE} if there was
+   * no mouse wheel event this frame.
+   *
+   * @return the last mouse wheel event
+   */
+  public MouseWheelEvent getMouseWheel() {
+    return currentMouseWheelEvent;
+  }
+
+  /**
    * Called once per frame to update the current status of the mouse based on the user's interaction.
    */
   public void updateStatusOfMouse() {
+    // update mouse position
     currentMousePosition = lastEventPosition;
 
+    // update mouse wheel
+    currentMouseWheelEvent = lastMouseWheelEvent;
+    lastMouseWheelEvent = MouseWheelEvent.NONE;
+
+    // update mouse button states
     mouseDownMap.forEach((mouseButton, isDown) -> {
       if (isDown) {
         ButtonState buttonState = mouseStatusMap.getOrDefault(mouseButton, ButtonState.RELEASED);
@@ -89,6 +107,15 @@ public class MouseInput {
   public void onMouseReleased(MouseEvent mouseEvent) {
     updateMousePosition(mouseEvent);
     mouseDownMap.put(mouseEvent.button(), false);
+  }
+
+  /**
+   * Captures the last {@link MouseWheelEvent} that happened.
+   *
+   * @param mouseWheelEvent the last mouse wheel event that happened
+   */
+  public void onMouseWheel(MouseWheelEvent mouseWheelEvent) {
+    lastMouseWheelEvent = mouseWheelEvent;
   }
 
   private void updateMousePosition(MouseEvent mouseEvent) {

@@ -26,6 +26,7 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.input.MouseWheelEvent;
 import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
 import technology.sola.engine.platform.javafx.assets.audio.JavaFxAudioClipAssetLoader;
 import technology.sola.engine.platform.javafx.assets.JavaFxJsonAssetLoader;
@@ -115,15 +116,17 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     canvas.addEventHandler(
       javafx.scene.input.MouseEvent.MOUSE_RELEASED, mouseEvent -> mouseEventConsumer.accept(fxToSola(mouseEvent))
     );
+  }
 
-    // todo just notes for now
+  @Override
+  public void onMouseWheel(Consumer<MouseWheelEvent> mouseWheelEventConsumer) {
     canvas.addEventHandler(javafx.scene.input.ScrollEvent.SCROLL, scrollEvent -> {
-      // todo deltaX for horizontal (positive is right) (negative is left)
-      // todo deltaY for vertical (positive is up) (negative is down)
+      boolean isUp = scrollEvent.getDeltaY() > 0;
+      boolean isDown = scrollEvent.getDeltaY() < 0;
+      boolean isLeft = scrollEvent.getDeltaX() < 0;
+      boolean isRight = scrollEvent.getDeltaX() > 0;
 
-      // todo figure out why value is 40/-40
-
-      System.out.println(scrollEvent.toString());
+      mouseWheelEventConsumer.accept(new MouseWheelEvent(isUp, isDown, isLeft, isRight));
     });
   }
 
