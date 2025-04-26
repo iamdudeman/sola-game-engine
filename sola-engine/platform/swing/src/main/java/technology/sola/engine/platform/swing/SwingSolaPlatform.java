@@ -28,13 +28,7 @@ import technology.sola.logging.SolaLogger;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.io.IOException;
@@ -126,6 +120,24 @@ public class SwingSolaPlatform extends SolaPlatform {
       @Override
       public void mouseReleased(java.awt.event.MouseEvent mouseEvent) {
         mouseEventConsumer.accept(swingToSola(mouseEvent));
+      }
+    });
+
+    // todo just notes for now
+    canvas.addMouseWheelListener(new MouseWheelListener() {
+      @Override
+      public void mouseWheelMoved(MouseWheelEvent event) {
+
+        // todo shift modifier is present for horizontal scroll
+//        event.getModifiersEx(); MouseWheelEvent.SHIFT_DOWN_MASK
+
+        // todo wheelRotation 1 for down, -1 for up
+        // todo wheelRotation -1 for right, 1 for left
+
+        // todo why is scrollAmount always 3?
+
+//        System.out.println(event.getScrollAmount() + " ---- " + event.getWheelRotation() + " ---- " + event.getUnitsToScroll());
+        System.out.println(event.toString());
       }
     });
   }

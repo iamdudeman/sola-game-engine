@@ -115,6 +115,16 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     canvas.addEventHandler(
       javafx.scene.input.MouseEvent.MOUSE_RELEASED, mouseEvent -> mouseEventConsumer.accept(fxToSola(mouseEvent))
     );
+
+    // todo just notes for now
+    canvas.addEventHandler(javafx.scene.input.ScrollEvent.SCROLL, scrollEvent -> {
+      // todo deltaX for horizontal (positive is right) (negative is left)
+      // todo deltaY for vertical (positive is up) (negative is down)
+
+      // todo figure out why value is 40/-40
+
+      System.out.println(scrollEvent.toString());
+    });
   }
 
   @Override
