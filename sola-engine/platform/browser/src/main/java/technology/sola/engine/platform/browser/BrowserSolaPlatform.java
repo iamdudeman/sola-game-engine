@@ -76,22 +76,26 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   @Override
   public void onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
-    JsMouseUtils.mouseEventListener("mousemove", (which, x, y) -> mouseEventConsumer.accept(browserToSola(which, x, y)));
+    JsMouseUtils.mouseEventListener("mousemove", (which, x, y) ->
+      mouseEventConsumer.accept(browserToSola(which, x, y)));
   }
 
   @Override
   public void onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
-    JsMouseUtils.mouseEventListener("mousedown", (which, x, y) -> mouseEventConsumer.accept(browserToSola(which, x, y)));
+    JsMouseUtils.mouseEventListener("mousedown", (which, x, y) ->
+      mouseEventConsumer.accept(browserToSola(which, x, y)));
   }
 
   @Override
   public void onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
-    JsMouseUtils.mouseEventListener("mouseup", (which, x, y) -> mouseEventConsumer.accept(browserToSola(which, x, y)));
+    JsMouseUtils.mouseEventListener("mouseup", (which, x, y) ->
+      mouseEventConsumer.accept(browserToSola(which, x, y)));
   }
 
   @Override
   public void onMouseWheel(Consumer<MouseWheelEvent> mouseWheelEventConsumer) {
-    // todo addEventListener("wheel", event => console.log(event), { passive: true })
+    JsMouseUtils.mouseWheelEventListener((isUp, isDown, isLeft, isRight) ->
+      mouseWheelEventConsumer.accept(new MouseWheelEvent(isUp, isDown, isLeft, isRight)));
   }
 
   @Override
