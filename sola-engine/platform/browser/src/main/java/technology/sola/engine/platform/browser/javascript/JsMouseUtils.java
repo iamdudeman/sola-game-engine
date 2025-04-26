@@ -111,12 +111,6 @@ public class JsMouseUtils {
       }, { passive: true });
       """;
 
-    // todo just notes for now
-    //   addEventListener("wheel", event => console.log(event), { passive: true })
-    //   event.deltaY -> scroll down is (100) scroll up is (-100)
-    //   event.deltaX -> scroll left is (100) scroll right is (-100)
-
-
     private static final String MOUSE_EVENT = """
       window.mouseListeners[eventName].push(callback);
       """;
