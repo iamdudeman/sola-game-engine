@@ -61,6 +61,17 @@ public class JsCanvasUtils {
   public static native void clearRect();
 
   /**
+   * Updates the aspect ratio for the canvas.
+   *
+   * @param tx the amount on the x-axis to translate to adjust for aspect ratio
+   * @param ty the amount on the y-axis to translate to adjust for aspect ratio
+   * @param sx the amount on the x-axis to scale to adjust for aspect ratio
+   * @param sy the amount on the y-axis to scale to adjust for aspect ratio
+   */
+  @JSBody(params = {"tx", "ty", "sx", "sy"}, script = Scripts.UPDATE_ASPECT_RATIO)
+  public static native void updateAspectRato(float tx, float ty, float sx, float sy);
+
+  /**
    * Callback definition for when the canvas resizes.
    */
   @JSFunctor
@@ -122,6 +133,12 @@ public class JsCanvasUtils {
 
     private static final String CLEAR_CANVAS = """
       window.solaContext2d.clearRect(0, 0, window.solaCanvas.width, window.solaCanvas.height);
+      """;
+
+    private static final String UPDATE_ASPECT_RATIO = """
+      window.solaContext2d.resetTransform();
+      window.solaContext2d.translate(tx, ty);
+      window.solaContext2d.scale(sx, sy);
       """;
 
     private static final String RESIZE = """

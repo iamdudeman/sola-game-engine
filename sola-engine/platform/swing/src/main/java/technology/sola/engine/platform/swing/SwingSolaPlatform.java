@@ -47,41 +47,32 @@ import java.util.function.Consumer;
 public class SwingSolaPlatform extends SolaPlatform {
   private static final SolaLogger LOGGER = SolaLogger.of(SwingSolaPlatform.class);
   private final boolean useSoftwareRendering;
+  private final Dimension initialWindowSize;
   private Canvas canvas;
   private Consumer<Renderer> beforeRender;
   private Consumer<Renderer> onRender;
-  private Dimension windowSize = null;
 
   // For Graphics2d rendering
   private Graphics2D graphics2D;
 
   /**
-   * Creates a SwingSolaPlatform instance using software rendering.
+   * Creates a SwingSolaPlatform instance with default {@link SwingSolaPlatformConfig}.
    */
   public SwingSolaPlatform() {
-    this(true);
+    this(new SwingSolaPlatformConfig());
   }
 
   /**
-   * Creates a SwingSolaPlatform instance with the ability to turn off software rendering in favor of
-   * {@link Graphics2dRenderer}.
+   * Creates a SwingSolaPlatformConfig instance with desired configuration.
    *
-   * @param useSoftwareRendering whether to use software rendering or not
+   * @param platformConfig the {@link SwingSolaPlatformConfig}
    */
-  public SwingSolaPlatform(boolean useSoftwareRendering) {
-    this.useSoftwareRendering = useSoftwareRendering;
+  public SwingSolaPlatform(SwingSolaPlatformConfig platformConfig) {
+    this.useSoftwareRendering = platformConfig.useSoftwareRendering();
+    this.initialWindowSize = platformConfig.initialWindowSize();
+
     socketClient = new SwingSocketClient();
     restClient = new SwingRestClient();
-  }
-
-  /**
-   * Sets the initial window size when a {@link technology.sola.engine.core.Sola} is played.
-   *
-   * @param width  the width of the window
-   * @param height the height of the window
-   */
-  public void setWindowSize(int width, int height) {
-    this.windowSize = new Dimension(width, height);
   }
 
   @Override
@@ -145,11 +136,11 @@ public class SwingSolaPlatform extends SolaPlatform {
     canvas = new Canvas();
     canvas.setPreferredSize(new Dimension(solaConfiguration.rendererWidth(), solaConfiguration.rendererHeight()));
     jFrame.getContentPane().add(canvas);
-    if (windowSize != null) {
-      jFrame.setPreferredSize(windowSize);
+    if (initialWindowSize != null) {
+      jFrame.setPreferredSize(initialWindowSize);
     }
     jFrame.pack();
-    if (windowSize != null) {
+    if (initialWindowSize != null) {
       viewport.resize(canvas.getWidth(), canvas.getHeight());
     }
 

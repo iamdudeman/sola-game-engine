@@ -7,6 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelFormat;
 import javafx.scene.image.WritableImage;
+import javafx.scene.transform.Affine;
 import javafx.stage.Stage;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.AssetLoaderProvider;
@@ -30,6 +31,7 @@ import technology.sola.engine.platform.javafx.assets.audio.JavaFxAudioClipAssetL
 import technology.sola.engine.platform.javafx.assets.JavaFxJsonAssetLoader;
 import technology.sola.engine.platform.javafx.assets.graphics.JavaFxSolaImageAssetLoader;
 import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
+import technology.sola.engine.platform.javafx.core.JavaFxRenderer;
 import technology.sola.engine.platform.javafx.core.JavaFxRestClient;
 import technology.sola.engine.platform.javafx.core.JavaFxSocketClient;
 import technology.sola.logging.SolaLogger;
@@ -43,29 +45,33 @@ import java.util.function.Consumer;
  */
 public class JavaFxSolaPlatform extends SolaPlatform {
   private static final SolaLogger LOGGER = SolaLogger.of(JavaFxSolaPlatform.class);
+  private final boolean useSoftwareRendering;
+  private final Double initialWindowWidth;
+  private final Double initialWindowHeight;
   private Canvas canvas;
   private GraphicsContext graphicsContext;
   private WritableImage writableImage;
-  private Double windowWidth;
-  private Double windowHeight;
+  private Affine originalTransform;
 
   /**
-   * Creates a JavaFxSolaPlatform instance.
+   * Creates a JavaFxSolaPlatform instance with default {@link JavaFxSolaPlatformConfig}.
    */
   public JavaFxSolaPlatform() {
-    socketClient = new JavaFxSocketClient();
-    restClient = new JavaFxRestClient();
+    this(new JavaFxSolaPlatformConfig());
   }
 
   /**
-   * Sets the initial window size when a {@link technology.sola.engine.core.Sola} is played.
+   * Creates a SwingSolaPlatform instance with desired configuration.
    *
-   * @param width  the width of the window
-   * @param height the height of the window
+   * @param platformConfig the {@link JavaFxSolaPlatformConfig}
    */
-  public void setWindowSize(int width, int height) {
-    windowWidth = (double) width;
-    windowHeight = (double) height;
+  public JavaFxSolaPlatform(JavaFxSolaPlatformConfig platformConfig) {
+    this.useSoftwareRendering = platformConfig.useSoftwareRendering();
+    this.initialWindowWidth = platformConfig.initialWindowWidth();
+    this.initialWindowHeight = platformConfig.initialWindowHeight();
+
+    socketClient = new JavaFxSocketClient();
+    restClient = new JavaFxRestClient();
   }
 
   @Override
@@ -131,6 +137,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       canvas.heightProperty().addListener((obs, oldVal, newVal) -> viewport.resize((int) canvas.getWidth(), newVal.intValue()));
 
       graphicsContext = canvas.getGraphicsContext2D();
+      originalTransform = graphicsContext.getTransform();
       writableImage = new WritableImage(rendererWidth, rendererHeight);
 
       solaEventHub.add(GameLoopEvent.class, event -> {
@@ -153,11 +160,11 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       stage.setOnCloseRequest(event -> solaEventHub.emit(new GameLoopEvent(GameLoopState.STOP)));
       stage.setTitle(solaConfiguration.title());
       stage.setScene(scene);
-      if (windowWidth != null) {
-        stage.setWidth(windowWidth);
+      if (initialWindowWidth != null) {
+        stage.setWidth(initialWindowWidth);
       }
-      if (windowHeight != null) {
-        stage.setHeight(windowHeight);
+      if (initialWindowHeight != null) {
+        stage.setHeight(initialWindowHeight);
       }
       stage.show();
 
@@ -167,20 +174,32 @@ public class JavaFxSolaPlatform extends SolaPlatform {
 
   @Override
   protected void beforeRender(Renderer renderer) {
-    // Nothing to do here
+    graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+    if (!useSoftwareRendering) {
+      graphicsContext.setTransform(originalTransform);
+
+      AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+
+      graphicsContext.translate(aspectRatioSizing.x(), aspectRatioSizing.y());
+      graphicsContext.scale(aspectRatioSizing.width() / (double) renderer.getWidth(), aspectRatioSizing.height() / (double) renderer.getHeight());
+    }
   }
 
   @Override
   protected void onRender(Renderer renderer) {
-    int[] pixels = ((SoftwareRenderer) renderer).getPixels();
-    writableImage.getPixelWriter().setPixels(
-      0, 0, renderer.getWidth(), renderer.getHeight(),
-      PixelFormat.getIntArgbInstance(), pixels, 0, renderer.getWidth()
-    );
+    if (useSoftwareRendering) {
+      int[] pixels = ((SoftwareRenderer) renderer).getPixels();
 
-    AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
-    graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-    graphicsContext.drawImage(writableImage, aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height());
+      writableImage.getPixelWriter().setPixels(
+        0, 0, renderer.getWidth(), renderer.getHeight(),
+        PixelFormat.getIntArgbInstance(), pixels, 0, renderer.getWidth()
+      );
+
+      AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+
+      graphicsContext.drawImage(writableImage, aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height());
+    }
   }
 
   @Override
@@ -201,6 +220,15 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     assetLoaderProvider.add(new ControlsConfigAssetLoader(
       jsonElementAssetAssetLoader
     ));
+  }
+
+  @Override
+  protected Renderer buildRenderer(SolaConfiguration solaConfiguration) {
+    LOGGER.info("Using %s rendering", useSoftwareRendering ? "Software" : "GraphicsContext");
+
+    return useSoftwareRendering
+      ? super.buildRenderer(solaConfiguration)
+      : new JavaFxRenderer(graphicsContext, solaConfiguration.rendererWidth(), solaConfiguration.rendererHeight());
   }
 
   @Override
