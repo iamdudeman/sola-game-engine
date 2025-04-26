@@ -126,22 +126,15 @@ public class SwingSolaPlatform extends SolaPlatform {
 
   @Override
   public void onMouseWheel(Consumer<technology.sola.engine.input.MouseWheelEvent> mouseWheelEventConsumer) {
-    // todo just notes for now
-    canvas.addMouseWheelListener(new MouseWheelListener() {
-      @Override
-      public void mouseWheelMoved(MouseWheelEvent event) {
+    canvas.addMouseWheelListener(event -> {
+      boolean isHorizontal = event.isShiftDown();
 
-        // todo shift modifier is present for horizontal scroll
-//        event.getModifiersEx(); MouseWheelEvent.SHIFT_DOWN_MASK
+      boolean isUp = !isHorizontal && event.getWheelRotation() < 0;
+      boolean isDown = !isHorizontal && event.getWheelRotation() > 0;
+      boolean isLeft = isHorizontal && event.getWheelRotation() > 0;
+      boolean isRight = isHorizontal && event.getWheelRotation() < 0;
 
-        // todo wheelRotation 1 for down, -1 for up
-        // todo wheelRotation -1 for right, 1 for left
-
-        // todo why is scrollAmount always 3?
-
-//        System.out.println(event.getScrollAmount() + " ---- " + event.getWheelRotation() + " ---- " + event.getUnitsToScroll());
-        System.out.println(event.toString());
-      }
+      mouseWheelEventConsumer.accept(new technology.sola.engine.input.MouseWheelEvent(isUp, isDown, isLeft, isRight));
     });
   }
 

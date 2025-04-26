@@ -101,11 +101,11 @@ public class MouseAndCameraExample extends SolaWithDefaults {
         cameraTransform.setScaleY(cameraTransform.getScaleY() - 0.1f);
       }
 
-      if (keyboardInput.isKeyHeld(Key.A)) {
+      if (keyboardInput.isKeyHeld(Key.A) || mouseInput.getMouseWheel().isLeft()) {
         cameraTransform.setX(cameraTransform.getX() - 3f);
       }
 
-      if (keyboardInput.isKeyHeld(Key.D)) {
+      if (keyboardInput.isKeyHeld(Key.D) || mouseInput.getMouseWheel().isRight()) {
         cameraTransform.setX(cameraTransform.getX() + 3);
       }
 
