@@ -245,19 +245,24 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Registers an on mouse released listener.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onRender(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">onRender</a><wbr>(<a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMouseWheel(java.util.function.Consumer)" class="member-name-link">onMouseWheel</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/MouseWheelEvent.html" title="class in technology.sola.engine.input">MouseWheelEvent</a>&gt;&nbsp;mouseWheelEventConsumer)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Registers an on mouse wheel listener.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onRender(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">onRender</a><wbr>(<a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Main render frame method.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#play(technology.sola.engine.core.Sola)" class="member-name-link">play</a><wbr>(<a href="Sola.html" title="class in technology.sola.engine.core">Sola</a>&nbsp;sola)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#play(technology.sola.engine.core.Sola)" class="member-name-link">play</a><wbr>(<a href="Sola.html" title="class in technology.sola.engine.core">Sola</a>&nbsp;sola)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Main entry point for starting a <a href="Sola.html" title="class in technology.sola.engine.core"><code>Sola</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#populateAssetLoaderProvider(technology.sola.engine.assets.AssetLoaderProvider)" class="member-name-link">populateAssetLoaderProvider</a><wbr>(<a href="../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#populateAssetLoaderProvider(technology.sola.engine.assets.AssetLoaderProvider)" class="member-name-link">populateAssetLoaderProvider</a><wbr>(<a href="../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Method to populate the <a href="SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> <a href="../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets"><code>AssetLoaderProvider</code></a> with
  <a href="../assets/AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a>s that <a href="Sola.html" title="class in technology.sola.engine.core"><code>Sola</code></a> will be able to utilize.</div>
 </div>
@@ -455,6 +460,17 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>mouseEventConsumer</code> - the method called when mouse is released</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="onMouseWheel(java.util.function.Consumer)">
+<h3>onMouseWheel</h3>
+<div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onMouseWheel</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/MouseWheelEvent.html" title="class in technology.sola.engine.input">MouseWheelEvent</a>&gt;&nbsp;mouseWheelEventConsumer)</span></div>
+<div class="block">Registers an on mouse wheel listener.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>mouseWheelEventConsumer</code> - the method called when a mouse wheel interaction takes place</dd>
 </dl>
 </section>
 </li>
