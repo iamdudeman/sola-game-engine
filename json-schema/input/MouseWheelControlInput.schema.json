@@ -1,0 +1,26 @@
+{
+  "$id": "MouseWheelControlInput.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MouseWheelControlInput",
+  "type": "object",
+  "required": [
+    "type",
+    "state"
+  ],
+  "properties": {
+    "type": {
+      "const": "wheel",
+      "description": "The type of the control input."
+    },
+    "state": {
+      "type": "string",
+      "description": "The state the mouse wheel must be in to be considered active.",
+      "enum": [
+        "UP",
+        "DOWN",
+        "LEFT",
+        "RIGHT"
+      ]
+    }
+  }
+}
