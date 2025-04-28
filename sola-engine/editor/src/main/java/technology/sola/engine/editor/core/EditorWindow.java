@@ -18,6 +18,7 @@ import technology.sola.engine.editor.core.config.WindowBounds;
 import technology.sola.engine.editor.core.utils.DialogService;
 import technology.sola.engine.editor.core.utils.ToastService;
 import technology.sola.engine.editor.tools.font.FontToolPanel;
+import technology.sola.engine.editor.tools.sprites.SpritesToolPanel;
 import technology.sola.engine.platform.javafx.SolaJavaFx;
 import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
 import technology.sola.json.JsonObject;
@@ -48,6 +49,7 @@ public class EditorWindow {
 
       editorToolPanels = List.of(
         new FontToolPanel(editorConfig),
+        new SpritesToolPanel(editorConfig),
         new PlaceholderToolPanel(editorConfig) // todo remove later when more tools are added
       );
 
