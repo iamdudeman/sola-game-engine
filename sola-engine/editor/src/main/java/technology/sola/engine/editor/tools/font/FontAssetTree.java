@@ -1,5 +1,6 @@
 package technology.sola.engine.editor.tools.font;
 
+import technology.sola.engine.editor.core.components.ImagePanel;
 import technology.sola.engine.editor.core.components.assets.AssetTreeItem;
 import technology.sola.engine.editor.core.components.assets.AssetType;
 import technology.sola.engine.editor.core.components.assets.AssetActionConfiguration;
@@ -63,7 +64,7 @@ class FontAssetTree extends EditorPanel {
       centerPanel.addTab(
         id,
         title,
-        new FontImagePanel(new File(parentFile, imageAsset))
+        new ImagePanel(new File(parentFile, imageAsset))
       );
     }
 

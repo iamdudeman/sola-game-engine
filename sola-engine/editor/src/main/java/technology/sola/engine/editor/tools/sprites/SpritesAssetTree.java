@@ -1,6 +1,7 @@
 package technology.sola.engine.editor.tools.sprites;
 
 import technology.sola.engine.editor.core.components.EditorPanel;
+import technology.sola.engine.editor.core.components.ImagePanel;
 import technology.sola.engine.editor.core.components.TabbedPanel;
 import technology.sola.engine.editor.core.components.assets.AssetActionConfiguration;
 import technology.sola.engine.editor.core.components.assets.AssetTreeItem;
@@ -60,13 +61,13 @@ class SpritesAssetTree extends EditorPanel {
       centerPanel.addTab(
         id,
         title,
-        new SpriteSheetImagePanel(new File(parentFile, imageAsset))
+        new ImagePanel(new File(parentFile, imageAsset))
       );
     }
 
     @Override
     public void create(File parentFolder, Runnable onAfterCreate) {
-      DialogService.custom("New Spritesheet", new NewSpriteSheetDialogContent(parentFolder, onAfterCreate));
+      DialogService.custom("New SpriteSheet", new NewSpriteSheetDialogContent(parentFolder, onAfterCreate));
     }
 
     @Override
