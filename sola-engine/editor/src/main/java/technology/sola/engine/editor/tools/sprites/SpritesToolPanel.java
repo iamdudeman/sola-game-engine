@@ -6,6 +6,10 @@ import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.json.JsonObject;
 
+/**
+ * SpritesToolPanel is a {@link ToolPanel} for managing {@link technology.sola.engine.assets.graphics.SpriteSheet}
+ * assets.
+ */
 public class SpritesToolPanel extends ToolPanel<SpritesToolConfig> {
   private final TabbedPanel tabbedPanel;
   private final SpritesAssetTree spritesAssetTree;

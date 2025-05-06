@@ -8,7 +8,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
@@ -18,6 +17,9 @@ import java.io.File;
 // todo "edit mode"
 // todo "reset transform" button
 
+/**
+ * ImagePanel is a component for viewing an image with the ability to zoom in and out on it.
+ */
 public class ImagePanel extends EditorPanel {
   private Double startX;
   private Double startY;

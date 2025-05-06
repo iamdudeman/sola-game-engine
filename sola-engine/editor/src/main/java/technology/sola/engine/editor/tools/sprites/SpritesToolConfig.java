@@ -7,7 +7,7 @@ import technology.sola.json.mapper.JsonMapper;
 import java.util.ArrayList;
 import java.util.List;
 
-public record SpritesToolConfig(
+record SpritesToolConfig(
   List<String> openedFileIds,
   double dividerPosition,
   String openId

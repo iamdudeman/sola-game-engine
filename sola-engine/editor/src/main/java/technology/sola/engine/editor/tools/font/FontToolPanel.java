@@ -7,7 +7,7 @@ import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.json.JsonObject;
 
 /**
- * FontToolConfig is a {@link ToolPanel} for managing font assets.
+ * FontToolConfig is a {@link ToolPanel} for managing {@link technology.sola.engine.assets.graphics.font.Font} assets.
  */
 public class FontToolPanel extends ToolPanel<FontToolConfig> {
   private final TabbedPanel tabbedPanel;
