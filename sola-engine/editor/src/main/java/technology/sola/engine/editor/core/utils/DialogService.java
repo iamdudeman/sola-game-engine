@@ -3,9 +3,12 @@ package technology.sola.engine.editor.core.utils;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import technology.sola.engine.editor.core.EditorScene;
+
+import java.io.File;
 
 /**
  * DialogService contains methods for showing various types of dialogs.
@@ -69,6 +72,25 @@ public class DialogService {
     var result = alert.showAndWait();
 
     return result.isPresent() && result.get() == ButtonType.YES;
+  }
+
+  /**
+   * Shows a file picker dialog with desired title and extension filter. The selected {@link File} will be returned if
+   * the user confirms selection otherwise null will be returned if the user cancels.
+   *
+   * @param title           the title of the dialog
+   * @param extensionFilter the {@link javafx.stage.FileChooser.ExtensionFilter}
+   * @return the file or null
+   */
+  public static File filePicker(String title, FileChooser.ExtensionFilter extensionFilter) {
+    FileChooser fileChooser = new FileChooser();
+
+    fileChooser.setTitle(title);
+    fileChooser.setInitialDirectory(new File("./"));
+    fileChooser.getExtensionFilters().add(extensionFilter);
+    fileChooser.setSelectedExtensionFilter(extensionFilter);
+
+    return fileChooser.showOpenDialog(parentStage);
   }
 
   private static void assertInitialized() {

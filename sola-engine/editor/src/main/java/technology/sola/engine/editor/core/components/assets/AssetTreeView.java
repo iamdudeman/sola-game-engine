@@ -201,9 +201,12 @@ public class AssetTreeView extends TreeView<AssetTreeItem> {
         );
 
         if (shouldDelete) {
-          if (getSelectionModel().getSelectedItem().getValue().file().delete()) {
-            assetActionConfiguration.delete(getSelectionModel().getSelectedItem().getValue());
-            getSelectionModel().getSelectedItem().getParent().getChildren().remove(getSelectionModel().getSelectedItem());
+          var selectedItem = getSelectionModel().getSelectedItem();
+
+          assetActionConfiguration.delete(selectedItem.getValue());
+
+          if (selectedItem.getValue().file().delete()) {
+            selectedItem.getParent().getChildren().remove(selectedItem);
           }
         }
       }

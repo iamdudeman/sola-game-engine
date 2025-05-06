@@ -34,7 +34,7 @@ import java.util.Map;
  * configuration and initializes the various editor tools.
  */
 public class EditorWindow {
-  private static final SolaLogger LOGGER = SolaLogger.of(EditorWindow.class);
+  private static final SolaLogger LOGGER = SolaLogger.of(EditorWindow.class, "logs/sola-editor.log");
   private EditorConfig editorConfig;
   private VBox toolContent;
 

@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 class FontAssetTree extends EditorPanel {
-  private static final SolaLogger LOGGER = SolaLogger.of(FontAssetTree.class);
+  private static final SolaLogger LOGGER = SolaLogger.of(FontAssetTree.class, "logs/sola-editor.log");
   private final AssetTreeView assetTreeView;
 
   public FontAssetTree(TabbedPanel centerPanel) {
