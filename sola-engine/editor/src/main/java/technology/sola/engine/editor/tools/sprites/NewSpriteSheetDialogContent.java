@@ -5,12 +5,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
+import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
+import technology.sola.engine.assets.graphics.spritesheet.mapper.SpriteSheetInfoJsonMapper;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.utils.DialogService;
 import technology.sola.engine.editor.core.utils.FileUtils;
 import technology.sola.engine.editor.core.utils.ToastService;
-import technology.sola.json.JsonArray;
-import technology.sola.json.JsonObject;
 import technology.sola.logging.SolaLogger;
 
 import java.io.File;
@@ -92,10 +92,8 @@ public class NewSpriteSheetDialogContent extends EditorPanel {
         Files.copy(imageFile.toPath(), new File(parentFolder, newImageName).toPath(), StandardCopyOption.REPLACE_EXISTING);
 
         // create SpriteSheet json
-        JsonObject jsonObject = new JsonObject();
-
-        jsonObject.put("spriteSheet", newImageName);
-        jsonObject.put("sprites", new JsonArray());
+        var spriteSheetInfo = new SpriteSheetInfo(newImageName, List.of());
+        var jsonObject = new SpriteSheetInfoJsonMapper().toJson(spriteSheetInfo);
 
         FileUtils.writeJson(new File(parentFolder, spriteSheetNameTextField.getText() + ".sprites.json"), jsonObject);
 

@@ -1,5 +1,7 @@
 package technology.sola.engine.editor.tools.sprites;
 
+import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
+import technology.sola.engine.assets.graphics.spritesheet.mapper.SpriteSheetInfoJsonMapper;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.components.ImagePanel;
 import technology.sola.engine.editor.core.components.TabbedPanel;
@@ -60,13 +62,14 @@ class SpritesAssetTree extends EditorPanel {
       var extension = AssetType.SPRITES.extension;
 
       try {
-        var imageAsset = FileUtils.readJson(file).asObject().getString("spriteSheet");
+        var spriteSheetJsonObject = FileUtils.readJson(file).asObject();
+        var spriteSheetInfo = new SpriteSheetInfoJsonMapper().toObject(spriteSheetJsonObject);
         var title = file.getName().replace(extension, "");
 
         centerPanel.addTab(
           id,
           title,
-          new ImagePanel(new File(parentFile, imageAsset))
+          new ImagePanel(new File(parentFile, spriteSheetInfo.spriteSheet()))
         );
       } catch (IOException ex) {
         ToastService.error("Error opening SpriteSheet");
@@ -85,16 +88,18 @@ class SpritesAssetTree extends EditorPanel {
       var parentFile = newItemFile.getParentFile();
 
       try {
-        var jsonObject = FileUtils.readJson(newItemFile).asObject();
-        var imageAsset = jsonObject.getString("spriteSheet");
+        var spriteSheetJsonObject = FileUtils.readJson(newItemFile).asObject();
+        var spriteSheetInfoJsonMapper = new SpriteSheetInfoJsonMapper();
+        var spriteSheetInfo = spriteSheetInfoJsonMapper.toObject(spriteSheetJsonObject);
+        var imageAsset = spriteSheetInfo.spriteSheet();
+
         var extension = AssetType.SPRITES.extension;
         var parts = imageAsset.split("\\.");
         var newImageAsset = newItemFile.getName().replace(extension, "") + "." + parts[1];
-
-        jsonObject.put("spriteSheet", newImageAsset);
+        var newSpriteSheetInfo = new SpriteSheetInfo(newImageAsset, spriteSheetInfo.sprites());
 
         if (new File(parentFile, imageAsset).renameTo(new File(parentFile, newImageAsset))) {
-          FileUtils.writeJson(newItemFile, jsonObject);
+          FileUtils.writeJson(newItemFile, spriteSheetInfoJsonMapper.toJson(newSpriteSheetInfo));
 
           centerPanel.renameTab(oldItem.id(), newItem.label(), newItem.id());
         }
@@ -111,10 +116,11 @@ class SpritesAssetTree extends EditorPanel {
       var parentFile = deletedFile.getParentFile();
 
       try {
-        var imageAsset = FileUtils.readJson(deletedFile).asObject().getString("spriteSheet");
+        var spriteSheetJsonObject = FileUtils.readJson(deletedFile).asObject();
+        var spriteSheetInfo = new SpriteSheetInfoJsonMapper().toObject(spriteSheetJsonObject);
 
         centerPanel.closeTab(id);
-        new File(parentFile, imageAsset).delete();
+        new File(parentFile, spriteSheetInfo.spriteSheet()).delete();
       } catch (IOException ex) {
         ToastService.error("Error deleting SpriteSheet");
         LOGGER.error(ex.getMessage(), ex);
