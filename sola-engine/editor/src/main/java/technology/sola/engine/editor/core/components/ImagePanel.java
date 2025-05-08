@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -23,16 +24,15 @@ import java.util.function.Consumer;
  * ImagePanel is a component for viewing an image with the ability to zoom in and out on it.
  */
 public class ImagePanel extends VBox {
-  private Double startX;
-  private Double startY;
-
-  private Canvas canvas;
-  private Button resetButton;
+  private final Property<Boolean> hasChangedProperty = new SimpleBooleanProperty(false);
 
   private GraphicsContext graphicsContext;
   private Image image;
-  private Property<Boolean> hasChangedProperty = new SimpleBooleanProperty(false);
   private Consumer<GraphicsContext> overlayRenderer;
+
+  private Canvas canvas;
+  private Button resetButton;
+  private ToggleButton toggleOverlayButton;
 
   /**
    * Creates an instance for desire image {@link File}
@@ -61,6 +61,7 @@ public class ImagePanel extends VBox {
 
   public void setOverlayRenderer(Consumer<GraphicsContext> overlayRenderer) {
     this.overlayRenderer = overlayRenderer;
+    toggleOverlayButton.setVisible(true);
 
     update();
   }
@@ -69,13 +70,20 @@ public class ImagePanel extends VBox {
     renderTransparencyGrid(image, graphicsContext);
     graphicsContext.drawImage(image, 0, 0);
 
-    if (overlayRenderer != null) {
+    if (overlayRenderer != null && toggleOverlayButton.isSelected()) {
       overlayRenderer.accept(graphicsContext);
     }
   }
 
   private ToolBar buildToolbar() {
     ToolBar toolbar = new ToolBar();
+
+    toggleOverlayButton = new ToggleButton("Toggle overlay");
+    toggleOverlayButton.setVisible(false);
+    toggleOverlayButton.setSelected(true);
+    toggleOverlayButton.setOnAction(event -> {
+      update();
+    });
 
     resetButton = new Button("Reset");
     resetButton.visibleProperty().bind(hasChangedProperty);
@@ -85,7 +93,7 @@ public class ImagePanel extends VBox {
       hasChangedProperty.setValue(false);
     });
 
-    toolbar.getItems().addAll(resetButton);
+    toolbar.getItems().addAll(toggleOverlayButton, resetButton);
 
     return toolbar;
   }
@@ -110,15 +118,6 @@ public class ImagePanel extends VBox {
     });
 
     update();
-
-//    imageWrapper.setOnMousePressed(event -> {
-//      startX = event.getX();
-//      startY = event.getY();
-//    });
-//    imageWrapper.setOnMouseDragged(event -> {
-//      imageWrapper.setTranslateX(imageWrapper.getTranslateX() + event.getX() - startX);
-//      imageWrapper.setTranslateY(imageWrapper.getTranslateY() + event.getY() - startY);
-//    });
 
     return imageWrapper;
   }

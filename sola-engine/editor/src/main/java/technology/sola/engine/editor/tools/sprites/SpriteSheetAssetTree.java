@@ -1,5 +1,6 @@
 package technology.sola.engine.editor.tools.sprites;
 
+import javafx.scene.paint.Color;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfoJsonMapper;
 import technology.sola.engine.editor.core.components.EditorPanel;
@@ -65,12 +66,16 @@ class SpriteSheetAssetTree extends EditorPanel {
         var spriteSheetJsonObject = FileUtils.readJson(file).asObject();
         var spriteSheetInfo = new SpriteSheetInfoJsonMapper().toObject(spriteSheetJsonObject);
         var title = file.getName().replace(extension, "");
+        var imagePanel = new ImagePanel(new File(parentFile, spriteSheetInfo.spriteSheet()));
 
-        centerPanel.addTab(
-          id,
-          title,
-          new ImagePanel(new File(parentFile, spriteSheetInfo.spriteSheet()))
-        );
+        imagePanel.setOverlayRenderer(graphicsContext -> {
+          spriteSheetInfo.sprites().forEach(spriteInfo -> {
+            graphicsContext.setStroke(Color.BLACK);
+            graphicsContext.strokeRect(spriteInfo.x(), spriteInfo.y(), spriteInfo.width(), spriteInfo.height());
+          });
+        });
+
+        centerPanel.addTab(id, title, imagePanel);
       } catch (IOException ex) {
         ToastService.error("Error opening SpriteSheet");
         LOGGER.error(ex.getMessage(), ex);
