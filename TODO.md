@@ -52,6 +52,7 @@
 * Lighting
     * implement more light types other than just point lights
 * Particle System
+    * consider researching how other engines do particle systems to maybe create an easier to use api
     * consider adding acceleration
     * consider some sort of "swaying" for non-linear particles
     * consider ability to spawn particles in a radius away from center
