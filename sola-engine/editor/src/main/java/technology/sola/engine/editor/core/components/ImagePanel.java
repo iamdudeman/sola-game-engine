@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
 import java.io.File;
+import java.util.function.Consumer;
 
 // todo "view mode"
 // todo "edit mode"
@@ -26,7 +27,11 @@ public class ImagePanel extends EditorPanel {
 
   private Canvas canvas;
   private Button resetButton;
+
+  private GraphicsContext graphicsContext;
+  private Image image;
   private Property<Boolean> hasChangedProperty = new SimpleBooleanProperty(false);
+  private Consumer<GraphicsContext> overlayRenderer;
 
   /**
    * Creates an instance for desire image {@link File}
@@ -53,6 +58,21 @@ public class ImagePanel extends EditorPanel {
     });
   }
 
+  public void setOverlayRenderer(Consumer<GraphicsContext> overlayRenderer) {
+    this.overlayRenderer = overlayRenderer;
+
+    update();
+  }
+
+  public void update() {
+    renderTransparencyGrid(image, graphicsContext);
+    graphicsContext.drawImage(image, 0, 0);
+
+    if (overlayRenderer != null) {
+      overlayRenderer.accept(graphicsContext);
+    }
+  }
+
   private ToolBar buildToolbar() {
     ToolBar toolbar = new ToolBar();
 
@@ -70,23 +90,23 @@ public class ImagePanel extends EditorPanel {
   }
 
   private Node buildContent(File file) {
-    var image = new Image(file.toURI().toString());
+    image = new Image(file.toURI().toString());
     canvas = new Canvas(image.getWidth(), image.getHeight());
-    var imageWrapper = new BorderPane(canvas);
-    var graphicsContext = canvas.getGraphicsContext2D();
+    graphicsContext = canvas.getGraphicsContext2D();
 
-    renderTransparencyGrid(image, graphicsContext);
-    graphicsContext.drawImage(image, 0, 0);
+    var imageWrapper = new BorderPane(canvas);
 
     imageWrapper.prefWidthProperty().bind(widthProperty());
     imageWrapper.prefHeightProperty().bind(heightProperty());
 
     imageWrapper.widthProperty().addListener((observable, oldValue, newValue) -> {
-      graphicsContext.drawImage(image, 0, 0);
+      update();
     });
     imageWrapper.heightProperty().addListener((observable, oldValue, newValue) -> {
-      graphicsContext.drawImage(image, 0, 0);
+      update();
     });
+
+    update();
 
 //    imageWrapper.setOnMousePressed(event -> {
 //      startX = event.getX();
