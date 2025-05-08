@@ -18,11 +18,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-class SpritesAssetTree extends EditorPanel {
-  private static final SolaLogger LOGGER = SolaLogger.of(SpritesAssetTree.class, "logs/sola-editor.log");
+class SpriteSheetAssetTree extends EditorPanel {
+  private static final SolaLogger LOGGER = SolaLogger.of(SpriteSheetAssetTree.class, "logs/sola-editor.log");
   private final AssetTreeView assetTreeView;
 
-  public SpritesAssetTree(TabbedPanel centerPanel) {
+  public SpriteSheetAssetTree(TabbedPanel centerPanel) {
     super();
 
     var actionConfiguration = new FontAssetActionConfiguration(centerPanel);

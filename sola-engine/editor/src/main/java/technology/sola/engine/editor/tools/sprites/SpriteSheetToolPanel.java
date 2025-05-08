@@ -8,12 +8,11 @@ import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.json.JsonObject;
 
 /**
- * SpritesToolPanel is a {@link ToolPanel} for managing {@link SpriteSheet}
- * assets.
+ * SpriteSheetToolPanel is a {@link ToolPanel} for managing {@link SpriteSheet} assets.
  */
-public class SpritesToolPanel extends ToolPanel<SpritesToolConfig> {
+public class SpriteSheetToolPanel extends ToolPanel<SpriteSheetToolConfig> {
   private final TabbedPanel tabbedPanel;
-  private final SpritesAssetTree spritesAssetTree;
+  private final SpriteSheetAssetTree spriteSheetAssetTree;
 
 
   /**
@@ -21,19 +20,19 @@ public class SpritesToolPanel extends ToolPanel<SpritesToolConfig> {
    *
    * @param editorConfig the {@link EditorConfig} instance
    */
-  public SpritesToolPanel(EditorConfig editorConfig) {
+  public SpriteSheetToolPanel(EditorConfig editorConfig) {
     super(editorConfig);
 
     tabbedPanel = new TabbedPanel();
-    spritesAssetTree = new SpritesAssetTree(tabbedPanel);
+    spriteSheetAssetTree = new SpriteSheetAssetTree(tabbedPanel);
 
     getItems().addAll(
-      spritesAssetTree,
+      spriteSheetAssetTree,
       tabbedPanel
     );
 
     Platform.runLater(() -> {
-      spritesAssetTree.restoreOpenedFilesAndSelection(toolConfig.openedFileIds(), toolConfig.openId());
+      spriteSheetAssetTree.restoreOpenedFilesAndSelection(toolConfig.openedFileIds(), toolConfig.openId());
 
       setDividerPositions(toolConfig.dividerPosition());
     });
@@ -41,33 +40,33 @@ public class SpritesToolPanel extends ToolPanel<SpritesToolConfig> {
 
   @Override
   public String getToolLabel() {
-    return "Sprites";
+    return "Spritesheet";
   }
 
   @Override
   public String getToolId() {
-    return "sprites";
+    return "spritesheet";
   }
 
   @Override
   public JsonObject buildToolConfigForSaving() {
-    var config = new SpritesToolConfig(
+    var config = new SpriteSheetToolConfig(
       tabbedPanel.getOpenedTabIds(),
       getDividers().get(0).getPosition(),
       tabbedPanel.getSelectedId()
     );
 
-    return new SpritesToolConfig.ConfigJsonMapper().toJson(config);
+    return new SpriteSheetToolConfig.ConfigJsonMapper().toJson(config);
   }
 
   @Override
-  protected SpritesToolConfig buildToolConfigFromEditorConfig(EditorConfig editorConfig) {
+  protected SpriteSheetToolConfig buildToolConfigFromEditorConfig(EditorConfig editorConfig) {
     var toolConfigJson = editorConfig.toolConfigurations().get(getToolId());
 
     if (toolConfigJson == null) {
-      return new SpritesToolConfig();
+      return new SpriteSheetToolConfig();
     }
 
-    return new SpritesToolConfig.ConfigJsonMapper().toObject(toolConfigJson);
+    return new SpriteSheetToolConfig.ConfigJsonMapper().toObject(toolConfigJson);
   }
 }

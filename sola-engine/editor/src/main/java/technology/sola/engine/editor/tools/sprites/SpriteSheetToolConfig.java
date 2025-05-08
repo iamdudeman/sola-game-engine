@@ -7,23 +7,33 @@ import technology.sola.json.mapper.JsonMapper;
 import java.util.ArrayList;
 import java.util.List;
 
-record SpritesToolConfig(
+/**
+ * SpriteSheetToolConfig contains the configuration for the spritesheet tool.
+ *
+ * @param openedFileIds   the previously opened file ids
+ * @param dividerPosition the position of the divider in the window
+ * @param openId          the previously selected file id
+ */
+public record SpriteSheetToolConfig(
   List<String> openedFileIds,
   double dividerPosition,
   String openId
 ) {
-  public SpritesToolConfig() {
+  /**
+   * Creates a SpriteSheetToolConfig with default values (no previously opened files).
+   */
+  public SpriteSheetToolConfig() {
     this(List.of(), 0.2, null);
   }
 
-  static class ConfigJsonMapper implements JsonMapper<SpritesToolConfig> {
+  static class ConfigJsonMapper implements JsonMapper<SpriteSheetToolConfig> {
     @Override
-    public Class<SpritesToolConfig> getObjectClass() {
-      return SpritesToolConfig.class;
+    public Class<SpriteSheetToolConfig> getObjectClass() {
+      return SpriteSheetToolConfig.class;
     }
 
     @Override
-    public JsonObject toJson(SpritesToolConfig config) {
+    public JsonObject toJson(SpriteSheetToolConfig config) {
       JsonObject json = new JsonObject();
       JsonArray openedFiles = new JsonArray();
 
@@ -41,14 +51,14 @@ record SpritesToolConfig(
     }
 
     @Override
-    public SpritesToolConfig toObject(JsonObject jsonObject) {
+    public SpriteSheetToolConfig toObject(JsonObject jsonObject) {
       List<String> openedFileIds = new ArrayList<>();
 
       jsonObject.getArray("openedFiles").forEach(jsonElement -> {
         openedFileIds.add(jsonElement.asString());
       });
 
-      return new SpritesToolConfig(
+      return new SpriteSheetToolConfig(
         openedFileIds,
         jsonObject.getDouble("dividerPosition"),
         jsonObject.getString("openId", null)
