@@ -1,7 +1,7 @@
 package technology.sola.engine.editor.tools.sprites;
 
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
-import technology.sola.engine.assets.graphics.spritesheet.mapper.SpriteSheetInfoJsonMapper;
+import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfoJsonMapper;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.components.ImagePanel;
 import technology.sola.engine.editor.core.components.TabbedPanel;

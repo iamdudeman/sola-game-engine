@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
-import technology.sola.engine.assets.graphics.spritesheet.mapper.SpriteSheetInfoJsonMapper;
+import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfoJsonMapper;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.utils.DialogService;
 import technology.sola.engine.editor.core.utils.FileUtils;

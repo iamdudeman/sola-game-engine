@@ -1,9 +1,8 @@
-package technology.sola.engine.assets.graphics;
+package technology.sola.engine.assets.graphics.spritesheet;
 
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
-import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
-import technology.sola.engine.assets.graphics.spritesheet.mapper.SpriteSheetInfoJsonMapper;
+import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.json.JsonElementAsset;
 
 /**

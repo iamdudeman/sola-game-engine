@@ -1,7 +1,7 @@
-package technology.sola.engine.assets.graphics;
+package technology.sola.engine.assets.graphics.spritesheet;
 
 import technology.sola.engine.assets.Asset;
-import technology.sola.engine.assets.graphics.spritesheet.SpriteInfo;
+import technology.sola.engine.assets.graphics.SolaImage;
 
 import java.util.HashMap;
 import java.util.Map;

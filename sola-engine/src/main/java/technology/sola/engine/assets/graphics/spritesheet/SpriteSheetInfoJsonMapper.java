@@ -1,7 +1,5 @@
-package technology.sola.engine.assets.graphics.spritesheet.mapper;
+package technology.sola.engine.assets.graphics.spritesheet;
 
-import technology.sola.engine.assets.graphics.spritesheet.SpriteInfo;
-import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
 import technology.sola.json.JsonArray;
 import technology.sola.json.JsonObject;
 import technology.sola.json.mapper.JsonMapper;

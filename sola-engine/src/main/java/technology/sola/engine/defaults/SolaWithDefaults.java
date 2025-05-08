@@ -1,7 +1,7 @@
 package technology.sola.engine.defaults;
 
 import technology.sola.engine.assets.AssetLoader;
-import technology.sola.engine.assets.graphics.SpriteSheet;
+import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocumentAssetLoader;

@@ -1,13 +1,14 @@
 package technology.sola.engine.editor.tools.sprites;
 
 import javafx.application.Platform;
+import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.editor.core.components.TabbedPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.json.JsonObject;
 
 /**
- * SpritesToolPanel is a {@link ToolPanel} for managing {@link technology.sola.engine.assets.graphics.SpriteSheet}
+ * SpritesToolPanel is a {@link ToolPanel} for managing {@link SpriteSheet}
  * assets.
  */
 public class SpritesToolPanel extends ToolPanel<SpritesToolConfig> {
