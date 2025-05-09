@@ -12,13 +12,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import technology.sola.engine.editor.core.styles.Css;
 
 import java.io.File;
 import java.util.function.Consumer;
-
-// todo "view mode"
-// todo "edit mode"
 
 /**
  * ImagePanel is a component for viewing an image with the ability to zoom in and out on it.
@@ -29,6 +27,8 @@ public class ImagePanel extends VBox {
   private GraphicsContext graphicsContext;
   private Image image;
   private Consumer<GraphicsContext> overlayRenderer;
+  private Double startTranslateX;
+  private Double startTranslateY;
 
   private Canvas canvas;
   private Button resetButton;
@@ -43,19 +43,29 @@ public class ImagePanel extends VBox {
     getChildren().addAll(buildToolbar(), buildContent(imageFile));
 
     setOnScroll(event -> {
-      if (event.isControlDown()) {
-        if (event.getDeltaY() > 0) {
-          canvas.setScaleX(canvas.getScaleX() + 0.1f);
-          canvas.setScaleY(canvas.getScaleY() + 0.1f);
-          hasChangedProperty.setValue(true);
-        }
-
-        if (event.getDeltaY() < 0) {
-          canvas.setScaleX(canvas.getScaleX() - 0.1f);
-          canvas.setScaleY(canvas.getScaleY() - 0.1f);
-          hasChangedProperty.setValue(true);
-        }
+      if (event.getDeltaY() > 0) {
+        canvas.setScaleX(canvas.getScaleX() + 0.1f);
+        canvas.setScaleY(canvas.getScaleY() + 0.1f);
+        hasChangedProperty.setValue(true);
       }
+
+      if (event.getDeltaY() < 0) {
+        canvas.setScaleX(canvas.getScaleX() - 0.1f);
+        canvas.setScaleY(canvas.getScaleY() - 0.1f);
+        hasChangedProperty.setValue(true);
+      }
+    });
+
+    canvas.setOnMousePressed(event -> {
+      startTranslateX = event.getX();
+      startTranslateY = event.getY();
+      hasChangedProperty.setValue(true);
+    });
+
+    canvas.setOnMouseDragged(event -> {
+      canvas.setTranslateX(canvas.getTranslateX() + event.getX() - startTranslateX);
+      canvas.setTranslateY(canvas.getTranslateY() + event.getY() - startTranslateY);
+      hasChangedProperty.setValue(true);
     });
   }
 
@@ -80,16 +90,18 @@ public class ImagePanel extends VBox {
 
     toggleOverlayButton = new ToggleButton("Toggle overlay");
     toggleOverlayButton.setVisible(false);
+    toggleOverlayButton.managedProperty().bind(toggleOverlayButton.visibleProperty());
     toggleOverlayButton.setSelected(true);
-    toggleOverlayButton.setOnAction(event -> {
-      update();
-    });
+    toggleOverlayButton.setOnAction(event -> update());
 
     resetButton = new Button("Reset");
     resetButton.visibleProperty().bind(hasChangedProperty);
+    resetButton.managedProperty().bind(resetButton.visibleProperty());
     resetButton.setOnAction(event -> {
       canvas.setScaleX(1.0);
       canvas.setScaleY(1.0);
+      canvas.setTranslateX(0.0f);
+      canvas.setTranslateY(0.0f);
       hasChangedProperty.setValue(false);
     });
 
@@ -111,9 +123,11 @@ public class ImagePanel extends VBox {
     imageWrapper.prefHeightProperty().bind(heightProperty());
 
     imageWrapper.widthProperty().addListener((observable, oldValue, newValue) -> {
+      imageWrapper.setClip(new Rectangle(newValue.intValue(), (int) imageWrapper.getHeight()));
       update();
     });
     imageWrapper.heightProperty().addListener((observable, oldValue, newValue) -> {
+      imageWrapper.setClip(new Rectangle((int) imageWrapper.getWidth(), newValue.intValue()));
       update();
     });
 
