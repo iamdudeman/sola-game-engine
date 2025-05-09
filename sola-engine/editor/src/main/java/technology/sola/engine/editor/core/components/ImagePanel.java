@@ -114,6 +114,7 @@ public class ImagePanel extends VBox {
     image = new Image(file.toURI().toString());
     canvas = new Canvas(image.getWidth(), image.getHeight());
     graphicsContext = canvas.getGraphicsContext2D();
+    graphicsContext.setImageSmoothing(false);
 
     var imageWrapper = new BorderPane(canvas);
 
