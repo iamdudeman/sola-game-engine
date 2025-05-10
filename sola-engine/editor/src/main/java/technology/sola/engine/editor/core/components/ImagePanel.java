@@ -96,7 +96,6 @@ public class ImagePanel extends VBox {
 
     resetButton = new Button("Reset");
     resetButton.visibleProperty().bind(hasChangedProperty);
-    resetButton.managedProperty().bind(resetButton.visibleProperty());
     resetButton.setOnAction(event -> {
       canvas.setScaleX(1.0);
       canvas.setScaleY(1.0);

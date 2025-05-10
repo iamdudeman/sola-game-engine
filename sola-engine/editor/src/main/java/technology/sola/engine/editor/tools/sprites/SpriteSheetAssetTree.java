@@ -1,9 +1,9 @@
 package technology.sola.engine.editor.tools.sprites;
 
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfoJsonMapper;
-import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.components.ImagePanel;
 import technology.sola.engine.editor.core.components.TabbedPanel;
 import technology.sola.engine.editor.core.components.assets.AssetActionConfiguration;
@@ -19,7 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-class SpriteSheetAssetTree extends EditorPanel {
+class SpriteSheetAssetTree extends VBox {
   private static final SolaLogger LOGGER = SolaLogger.of(SpriteSheetAssetTree.class, "logs/sola-editor.log");
   private final AssetTreeView assetTreeView;
 
@@ -33,7 +33,8 @@ class SpriteSheetAssetTree extends EditorPanel {
       actionConfiguration
     );
 
-    setChild(assetTreeView);
+
+    getChildren().add(assetTreeView);
 
     centerPanel.setSelectedTabListener(tab -> {
       if (tab == null) {
