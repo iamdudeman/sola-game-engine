@@ -1,6 +1,8 @@
 package technology.sola.engine.editor.tools.sprites;
 
 import javafx.application.Platform;
+import javafx.geometry.Orientation;
+import javafx.scene.control.SplitPane;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.editor.core.components.TabbedPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
@@ -11,9 +13,9 @@ import technology.sola.json.JsonObject;
  * SpriteSheetToolPanel is a {@link ToolPanel} for managing {@link SpriteSheet} assets.
  */
 public class SpriteSheetToolPanel extends ToolPanel<SpriteSheetToolConfig> {
-  private final TabbedPanel tabbedPanel;
-  private final SpriteSheetAssetTree spriteSheetAssetTree;
-
+  private TabbedPanel tabbedPanel;
+  private SpriteSheetAssetTree spriteSheetAssetTree;
+  private SplitPane topPane;
 
   /**
    * Initializes the tool panel instance.
@@ -23,18 +25,19 @@ public class SpriteSheetToolPanel extends ToolPanel<SpriteSheetToolConfig> {
   public SpriteSheetToolPanel(EditorConfig editorConfig) {
     super(editorConfig);
 
-    tabbedPanel = new TabbedPanel();
-    spriteSheetAssetTree = new SpriteSheetAssetTree(tabbedPanel);
+    orientationProperty().set(Orientation.VERTICAL);
 
-    getItems().addAll(
-      spriteSheetAssetTree,
-      tabbedPanel
-    );
+    buildTopPane();
+
+    var selectedSpriteInfoPanel = new SelectedSpriteInfoPanel();
+
+    getItems().addAll(topPane, selectedSpriteInfoPanel);
 
     Platform.runLater(() -> {
       spriteSheetAssetTree.restoreOpenedFilesAndSelection(toolConfig.openedFileIds(), toolConfig.openId());
 
-      setDividerPositions(toolConfig.dividerPosition());
+      setDividerPositions(toolConfig.topBottomDivider());
+      topPane.setDividerPositions(toolConfig.leftDivider(), toolConfig.rightDivider());
     });
   }
 
@@ -52,6 +55,8 @@ public class SpriteSheetToolPanel extends ToolPanel<SpriteSheetToolConfig> {
   public JsonObject buildToolConfigForSaving() {
     var config = new SpriteSheetToolConfig(
       tabbedPanel.getOpenedTabIds(),
+      topPane.getDividers().get(0).getPosition(),
+      topPane.getDividers().get(1).getPosition(),
       getDividers().get(0).getPosition(),
       tabbedPanel.getSelectedId()
     );
@@ -68,5 +73,22 @@ public class SpriteSheetToolPanel extends ToolPanel<SpriteSheetToolConfig> {
     }
 
     return new SpriteSheetToolConfig.ConfigJsonMapper().toObject(toolConfigJson);
+  }
+
+  private void buildTopPane() {
+    topPane = new SplitPane();
+
+    tabbedPanel = new TabbedPanel();
+    spriteSheetAssetTree = new SpriteSheetAssetTree(tabbedPanel);
+    var spriteAssetTreeView = new SpriteAssetTreeView();
+
+    spriteSheetAssetTree.setMinWidth(200);
+    spriteAssetTreeView.setMinWidth(200);
+
+    topPane.getItems().addAll(
+      spriteSheetAssetTree,
+      tabbedPanel,
+      spriteAssetTreeView
+    );
   }
 }

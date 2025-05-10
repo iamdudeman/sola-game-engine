@@ -10,20 +10,24 @@ import java.util.List;
 /**
  * SpriteSheetToolConfig contains the configuration for the spritesheet tool.
  *
- * @param openedFileIds   the previously opened file ids
- * @param dividerPosition the position of the divider in the window
- * @param openId          the previously selected file id
+ * @param openedFileIds    the previously opened file ids
+ * @param leftDivider      the position of the left divider in the top pane
+ * @param rightDivider     the position of the right divider in the top pane
+ * @param topBottomDivider the position of the top and bottom divider in the window
+ * @param openId           the previously selected file id
  */
 public record SpriteSheetToolConfig(
   List<String> openedFileIds,
-  double dividerPosition,
+  double leftDivider,
+  double rightDivider,
+  double topBottomDivider,
   String openId
 ) {
   /**
    * Creates a SpriteSheetToolConfig with default values (no previously opened files).
    */
   public SpriteSheetToolConfig() {
-    this(List.of(), 0.2, null);
+    this(List.of(), 0.2, 0.8, 0.8, null);
   }
 
   static class ConfigJsonMapper implements JsonMapper<SpriteSheetToolConfig> {
@@ -40,7 +44,10 @@ public record SpriteSheetToolConfig(
       config.openedFileIds.forEach(openedFiles::add);
 
       json.put("openedFiles", openedFiles);
-      json.put("dividerPosition", config.dividerPosition());
+      json.put("leftDivider", config.leftDivider());
+      json.put("rightDivider", config.rightDivider());
+      json.put("topBottomDivider", config.topBottomDivider());
+
       if (config.openId == null) {
         json.putNull("openId");
       } else {
@@ -54,13 +61,14 @@ public record SpriteSheetToolConfig(
     public SpriteSheetToolConfig toObject(JsonObject jsonObject) {
       List<String> openedFileIds = new ArrayList<>();
 
-      jsonObject.getArray("openedFiles").forEach(jsonElement -> {
-        openedFileIds.add(jsonElement.asString());
-      });
+      jsonObject.getArray("openedFiles", new JsonArray())
+        .forEach(jsonElement -> openedFileIds.add(jsonElement.asString()));
 
       return new SpriteSheetToolConfig(
         openedFileIds,
-        jsonObject.getDouble("dividerPosition"),
+        jsonObject.getDouble("leftDivider", 0.2),
+        jsonObject.getDouble("rightDivider", 0.8),
+        jsonObject.getDouble("topBottomDivider", 0.9),
         jsonObject.getString("openId", null)
       );
     }
