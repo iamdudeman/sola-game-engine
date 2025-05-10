@@ -4,18 +4,21 @@ package technology.sola.engine.platform.javafx;
  * Configuration for the {@link JavaFxSolaPlatform}.
  *
  * @param useSoftwareRendering whether software rendering should be used instead of native {@link technology.sola.engine.platform.javafx.core.JavaFxRenderer} rendering
+ * @param useImageSmoothing    whether image smoothing which uses higher quality filtering when scaling images rendered on the internal {@link javafx.scene.canvas.Canvas}
  * @param initialWindowWidth   the initial window width when the {@link technology.sola.engine.core.Sola} starts
  * @param initialWindowHeight  the initial window height when the {@link technology.sola.engine.core.Sola} starts
  */
 public record JavaFxSolaPlatformConfig(
   boolean useSoftwareRendering,
+  boolean useImageSmoothing,
   Double initialWindowWidth,
   Double initialWindowHeight
 ) {
   /**
-   * Default configuration with useSoftwareRendering set to true and no initial window size set.
+   * Default configuration with useSoftwareRendering set to true and no initial window size set. Image smoothing is set
+   * to smooth.
    */
   public JavaFxSolaPlatformConfig() {
-    this(true, null, null);
+    this(true, true, null, null);
   }
 }

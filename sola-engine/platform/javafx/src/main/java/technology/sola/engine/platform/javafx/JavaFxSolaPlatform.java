@@ -47,6 +47,7 @@ import java.util.function.Consumer;
 public class JavaFxSolaPlatform extends SolaPlatform {
   private static final SolaLogger LOGGER = SolaLogger.of(JavaFxSolaPlatform.class);
   private final boolean useSoftwareRendering;
+  private final boolean useImageSmoothing;
   private final Double initialWindowWidth;
   private final Double initialWindowHeight;
   private Canvas canvas;
@@ -68,6 +69,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
    */
   public JavaFxSolaPlatform(JavaFxSolaPlatformConfig platformConfig) {
     this.useSoftwareRendering = platformConfig.useSoftwareRendering();
+    this.useImageSmoothing = platformConfig.useImageSmoothing();
     this.initialWindowWidth = platformConfig.initialWindowWidth();
     this.initialWindowHeight = platformConfig.initialWindowHeight();
 
@@ -150,6 +152,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       canvas.heightProperty().addListener((obs, oldVal, newVal) -> viewport.resize((int) canvas.getWidth(), newVal.intValue()));
 
       graphicsContext = canvas.getGraphicsContext2D();
+      graphicsContext.setImageSmoothing(useImageSmoothing);
       originalTransform = graphicsContext.getTransform();
       writableImage = new WritableImage(rendererWidth, rendererHeight);
 
