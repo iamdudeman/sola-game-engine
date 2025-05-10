@@ -25,6 +25,8 @@ public class FontToolPanel extends ToolPanel<FontToolConfig> {
     tabbedPanel = new TabbedPanel();
     fontAssetTree = new FontAssetTree(tabbedPanel);
 
+    fontAssetTree.setMinWidth(200);
+
     items.addAll(fontAssetTree, tabbedPanel);
 
     Platform.runLater(() -> {
