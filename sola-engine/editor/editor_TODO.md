@@ -1,7 +1,14 @@
 # Editor TODO List
 
-* maybe `sprites` show outlines with hover for id of sprite
-* create and edit spritesheets
+* on selected sprite in right panel add yellow highlight
+    * also show sprite properties in bottom panel
+    * and option to delete sprite
+* add button for adding new sprite
+    * defaults id and properties
+* add button for triggering "splicing tool" or better name that allows for setting values to auto populate
+    * padding before first sprite
+    * margin between sprites
+    * sprite width + height
 
 ## Known Bugs List
 
@@ -15,27 +22,20 @@
 
 Comes with default configuration for built-in components and systems
 
-* UX
-    * Ability to increase/decrease font size across the program
+* assets tooling
+    * maybe `audio` shows a little media player to preview it
+    * create and edit controls assets
+    * create and edit materials
+    * create and edit GUIs
+        * maybe a WYSIWYG editor?
 
-* Editor instance configuration (composable)
+* Editor instance configuration (composable) (goes with Scene composition)
     1. Register all EcsSystems
         1. UI for configuring them
     2. Register all Components
         * Has some sort of ui metadata to generate fields for updating the components on an entity
     3. Register all Graphics modules
         * UI for configuring them
-
-* assets tooling
-    * main window could preview asset
-        * maybe `audio` shows a little media player to preview it
-        * not sure for `input`
-    * create and edit controls assets
-    * file browser in main UI to see assets
-        * can maybe be used to update components' values later that consume asset ids
-    * create and edit materials
-    * create and edit GUIs
-        * maybe a WYSIWYG editor?
 
 * Scene composition
     * UI Overview
