@@ -2,7 +2,6 @@ package technology.sola.engine.editor.tools.sprites;
 
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import technology.sola.engine.assets.graphics.spritesheet.SpriteInfo;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
 
 public class SpriteAssetTreeView extends TreeView<String> {
@@ -12,10 +11,22 @@ public class SpriteAssetTreeView extends TreeView<String> {
   }
 
   public void setSpriteSheetInfo(SpriteSheetInfo spriteSheetInfo) {
-    getRoot().getChildren().clear();
+    var root = new TreeItem<>(spriteSheetInfo.spriteSheet());
 
-    spriteSheetInfo.sprites().forEach(spriteInfo -> {
-      getRoot().getChildren().add(new TreeItem<>(spriteInfo.id()));
-    });
+    setRoot(root);
+
+    root.getChildren().clear();
+
+    spriteSheetInfo.sprites()
+      .forEach(spriteInfo -> root.getChildren().add(new TreeItem<>(spriteInfo.id())));
+  }
+
+  public void removeSprite(String id) {
+    for (var child : getRoot().getChildren()) {
+      if (child.getValue().equals(id)) {
+        child.getParent().getChildren().remove(child);
+        break;
+      }
+    }
   }
 }
