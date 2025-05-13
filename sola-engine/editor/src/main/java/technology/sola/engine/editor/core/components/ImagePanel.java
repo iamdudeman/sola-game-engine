@@ -69,6 +69,20 @@ public class ImagePanel extends VBox {
     });
   }
 
+  /**
+   * @return the width of the loaded image
+   */
+  public double getImageWidth() {
+    return image.getWidth();
+  }
+
+  /**
+   * @return the height of the loaded image
+   */
+  public double getImageHeight() {
+    return image.getHeight();
+  }
+
   public void setOverlayRenderer(Consumer<GraphicsContext> overlayRenderer) {
     this.overlayRenderer = overlayRenderer;
     toggleOverlayButton.setVisible(true);

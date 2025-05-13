@@ -22,17 +22,17 @@ import java.util.List;
 class SpriteSheetAssetTree extends VBox {
   private static final SolaLogger LOGGER = SolaLogger.of(SpriteSheetAssetTree.class, "logs/sola-editor.log");
   private final AssetTreeView assetTreeView;
+  private ImagePanel selectedImagePanel;
 
-  public SpriteSheetAssetTree(TabbedPanel centerPanel) {
+  public SpriteSheetAssetTree(TabbedPanel centerPanel, SpritesTreeView spritesTreeView) {
     super();
 
-    var actionConfiguration = new FontAssetActionConfiguration(centerPanel);
+    var actionConfiguration = new SpriteSheetAssetActionConfiguration(centerPanel, spritesTreeView);
 
     assetTreeView = new AssetTreeView(
       AssetType.SPRITES,
       actionConfiguration
     );
-
 
     getChildren().add(assetTreeView);
 
@@ -41,6 +41,14 @@ class SpriteSheetAssetTree extends VBox {
         assetTreeView.deselectAssetItem();
       } else {
         assetTreeView.selectAssetItem(tab.getId());
+        selectedImagePanel = (ImagePanel) tab.getContent();
+        selectedImagePanel.update();
+      }
+    });
+
+    spritesTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+      if (selectedImagePanel != null) {
+        selectedImagePanel.update();
       }
     });
   }
@@ -53,84 +61,94 @@ class SpriteSheetAssetTree extends VBox {
     }
   }
 
-  private record FontAssetActionConfiguration(
-    TabbedPanel centerPanel
+  private record SpriteSheetAssetActionConfiguration(
+    TabbedPanel centerPanel,
+    SpritesTreeView spritesTreeView
   ) implements AssetActionConfiguration {
     @Override
-    public void select(AssetTreeItem item) {
-      var file = item.file();
-      var id = item.id();
-      var parentFile = file.getParentFile();
-      var extension = AssetType.SPRITES.extension;
-
-      try {
-        var spriteSheetJsonObject = FileUtils.readJson(file).asObject();
-        var spriteSheetInfo = new SpriteSheetInfoJsonMapper().toObject(spriteSheetJsonObject);
-        var title = file.getName().replace(extension, "");
-        var imagePanel = new ImagePanel(new File(parentFile, spriteSheetInfo.spriteSheet()));
-
-        imagePanel.setOverlayRenderer(graphicsContext -> {
-          spriteSheetInfo.sprites().forEach(spriteInfo -> {
-            graphicsContext.setStroke(Color.BLACK);
-            graphicsContext.strokeRect(spriteInfo.x(), spriteInfo.y(), spriteInfo.width(), spriteInfo.height());
-          });
-        });
-
-        centerPanel.addTab(id, title, imagePanel);
-      } catch (IOException ex) {
-        ToastService.error("Error opening SpriteSheet");
-        LOGGER.error(ex.getMessage(), ex);
-      }
-    }
-
-    @Override
-    public void create(File parentFolder, Runnable onAfterCreate) {
-      DialogService.custom("New SpriteSheet", new NewSpriteSheetDialogContent(parentFolder, onAfterCreate));
-    }
-
-    @Override
-    public void rename(AssetTreeItem oldItem, AssetTreeItem newItem) {
-      var newItemFile = newItem.file();
-      var parentFile = newItemFile.getParentFile();
-
-      try {
-        var spriteSheetJsonObject = FileUtils.readJson(newItemFile).asObject();
-        var spriteSheetInfoJsonMapper = new SpriteSheetInfoJsonMapper();
-        var spriteSheetInfo = spriteSheetInfoJsonMapper.toObject(spriteSheetJsonObject);
-        var imageAsset = spriteSheetInfo.spriteSheet();
-
+      public void select(AssetTreeItem item) {
+        var file = item.file();
+        var id = item.id();
+        var parentFile = file.getParentFile();
         var extension = AssetType.SPRITES.extension;
-        var parts = imageAsset.split("\\.");
-        var newImageAsset = newItemFile.getName().replace(extension, "") + "." + parts[1];
-        var newSpriteSheetInfo = new SpriteSheetInfo(newImageAsset, spriteSheetInfo.sprites());
 
-        if (new File(parentFile, imageAsset).renameTo(new File(parentFile, newImageAsset))) {
-          FileUtils.writeJson(newItemFile, spriteSheetInfoJsonMapper.toJson(newSpriteSheetInfo));
+        try {
+          var spriteSheetJsonObject = FileUtils.readJson(file).asObject();
+          var spriteSheetInfo = new SpriteSheetInfoJsonMapper().toObject(spriteSheetJsonObject);
+          var title = file.getName().replace(extension, "");
+          var imagePanel = new ImagePanel(new File(parentFile, spriteSheetInfo.spriteSheet()));
 
-          centerPanel.renameTab(oldItem.id(), newItem.label(), newItem.id());
+          imagePanel.setOverlayRenderer(graphicsContext -> {
+            var selectedItem = spritesTreeView.getSelectionModel().getSelectedItem();
+            var selectedSprite = selectedItem == null ? null : selectedItem.getValue();
+
+            spriteSheetInfo.sprites().forEach(spriteInfo -> {
+              graphicsContext.setStroke(spriteInfo.id().equals(selectedSprite) ? Color.YELLOW : Color.BLACK);
+              graphicsContext.strokeRect(spriteInfo.x(), spriteInfo.y(), spriteInfo.width(), spriteInfo.height());
+            });
+          });
+
+          centerPanel.addTab(id, title, imagePanel);
+
+          spritesTreeView.setSpriteSheetInfo(spriteSheetInfo, imagePanel.getImageWidth(), imagePanel.getImageHeight());
+        } catch (IOException ex) {
+          ToastService.error("Error opening SpriteSheet");
+          LOGGER.error(ex.getMessage(), ex);
         }
-      } catch (IOException ex) {
-        ToastService.error(ex.getMessage());
-        LOGGER.error(ex.getMessage(), ex);
+      }
+
+      @Override
+      public void create(File parentFolder, Runnable onAfterCreate) {
+        DialogService.custom("New SpriteSheet", new NewSpriteSheetDialogContent(parentFolder, onAfterCreate));
+      }
+
+      @Override
+      public void rename(AssetTreeItem oldItem, AssetTreeItem newItem) {
+        var newItemFile = newItem.file();
+        var parentFile = newItemFile.getParentFile();
+
+        try {
+          var spriteSheetJsonObject = FileUtils.readJson(newItemFile).asObject();
+          var spriteSheetInfoJsonMapper = new SpriteSheetInfoJsonMapper();
+          var spriteSheetInfo = spriteSheetInfoJsonMapper.toObject(spriteSheetJsonObject);
+          var imageAsset = spriteSheetInfo.spriteSheet();
+
+          var extension = AssetType.SPRITES.extension;
+          var parts = imageAsset.split("\\.");
+          var newImageAsset = newItemFile.getName().replace(extension, "") + "." + parts[1];
+          var newSpriteSheetInfo = new SpriteSheetInfo(newImageAsset, spriteSheetInfo.sprites());
+
+          if (new File(parentFile, imageAsset).renameTo(new File(parentFile, newImageAsset))) {
+            FileUtils.writeJson(newItemFile, spriteSheetInfoJsonMapper.toJson(newSpriteSheetInfo));
+
+            centerPanel.renameTab(oldItem.id(), newItem.label(), newItem.id());
+          }
+        } catch (IOException ex) {
+          ToastService.error(ex.getMessage());
+          LOGGER.error(ex.getMessage(), ex);
+        }
+      }
+
+      @Override
+      public void delete(AssetTreeItem item) {
+        var id = item.id();
+        var deletedFile = item.file();
+        var parentFile = deletedFile.getParentFile();
+
+        try {
+          var spriteSheetJsonObject = FileUtils.readJson(deletedFile).asObject();
+          var spriteSheetInfo = new SpriteSheetInfoJsonMapper().toObject(spriteSheetJsonObject);
+
+          centerPanel.closeTab(id);
+          new File(parentFile, spriteSheetInfo.spriteSheet()).delete();
+
+          if (centerPanel.getOpenedTabIds().isEmpty()) {
+            spritesTreeView.clear();
+          }
+        } catch (IOException ex) {
+          ToastService.error("Error deleting SpriteSheet");
+          LOGGER.error(ex.getMessage(), ex);
+        }
       }
     }
-
-    @Override
-    public void delete(AssetTreeItem item) {
-      var id = item.id();
-      var deletedFile = item.file();
-      var parentFile = deletedFile.getParentFile();
-
-      try {
-        var spriteSheetJsonObject = FileUtils.readJson(deletedFile).asObject();
-        var spriteSheetInfo = new SpriteSheetInfoJsonMapper().toObject(spriteSheetJsonObject);
-
-        centerPanel.closeTab(id);
-        new File(parentFile, spriteSheetInfo.spriteSheet()).delete();
-      } catch (IOException ex) {
-        ToastService.error("Error deleting SpriteSheet");
-        LOGGER.error(ex.getMessage(), ex);
-      }
-    }
-  }
 }

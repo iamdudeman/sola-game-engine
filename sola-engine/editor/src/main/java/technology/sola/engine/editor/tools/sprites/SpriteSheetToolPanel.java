@@ -27,9 +27,9 @@ public class SpriteSheetToolPanel extends ToolPanel<SpriteSheetToolConfig> {
 
     orientationProperty().set(Orientation.VERTICAL);
 
-    buildTopPane();
-
     var selectedSpriteInfoPanel = new SelectedSpriteInfoPanel();
+
+    buildTopPane(selectedSpriteInfoPanel);
 
     getItems().addAll(topPane, selectedSpriteInfoPanel);
 
@@ -75,20 +75,20 @@ public class SpriteSheetToolPanel extends ToolPanel<SpriteSheetToolConfig> {
     return new SpriteSheetToolConfig.ConfigJsonMapper().toObject(toolConfigJson);
   }
 
-  private void buildTopPane() {
+  private void buildTopPane(SelectedSpriteInfoPanel selectedSpriteInfoPanel) {
     topPane = new SplitPane();
 
     tabbedPanel = new TabbedPanel();
-    spriteSheetAssetTree = new SpriteSheetAssetTree(tabbedPanel);
-    var spriteAssetTreeView = new SpriteAssetTreeView();
+    var spritesTreeView = new SpritesTreeView(selectedSpriteInfoPanel);
+    spriteSheetAssetTree = new SpriteSheetAssetTree(tabbedPanel, spritesTreeView);
 
     spriteSheetAssetTree.setMinWidth(200);
-    spriteAssetTreeView.setMinWidth(200);
+    spritesTreeView.setMinWidth(200);
 
     topPane.getItems().addAll(
       spriteSheetAssetTree,
       tabbedPanel,
-      spriteAssetTreeView
+      spritesTreeView
     );
   }
 }
