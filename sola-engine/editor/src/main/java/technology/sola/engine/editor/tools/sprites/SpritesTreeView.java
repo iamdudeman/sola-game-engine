@@ -7,6 +7,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseButton;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteInfo;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
+import technology.sola.engine.editor.core.utils.DialogService;
 
 class SpritesTreeView extends TreeView<String> {
   private final SpriteSheetState spriteSheetState;
@@ -111,6 +112,14 @@ class SpritesTreeView extends TreeView<String> {
         });
     });
 
+    var spliceToolMenuItem = new MenuItem("Splice spritesheet");
+
+    spliceToolMenuItem.setOnAction(event -> {
+      DialogService.custom("Splice spritesheet", new SpriteSheetSplicerDialogContent(imageWidth.intValue(), imageHeight.intValue(), spriteInfoList -> {
+        // todo handle list
+      }));
+    });
+
     var deleteMenuItem = new MenuItem("Delete sprite");
 
     deleteMenuItem.setOnAction(event -> {
@@ -132,7 +141,7 @@ class SpritesTreeView extends TreeView<String> {
     duplicateMenuItem.setVisible(false);
     deleteMenuItem.setVisible(false);
 
-    setContextMenu(new ContextMenu(newMenuItem, duplicateMenuItem, deleteMenuItem));
+    setContextMenu(new ContextMenu(newMenuItem, duplicateMenuItem, spliceToolMenuItem, deleteMenuItem));
   }
 
   private String getUniqueSpriteId(int count) {
