@@ -5,6 +5,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseButton;
+import technology.sola.engine.assets.graphics.spritesheet.SpriteInfo;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
 
 class SpritesTreeView extends TreeView<String> {
@@ -72,7 +73,6 @@ class SpritesTreeView extends TreeView<String> {
 
   private void buildContextMenu() {
     var deleteMenuItem = new MenuItem("Delete sprite");
-    var newMenuItem = new MenuItem("New sprite");
 
     deleteMenuItem.setVisible(false);
 
@@ -83,7 +83,22 @@ class SpritesTreeView extends TreeView<String> {
       spriteSheetState.setCurrentSpriteSheetInfo(spriteSheetInfo);
     });
 
-    // todo new sprite logic
+    var newMenuItem = new MenuItem("New sprite");
+
+    newMenuItem.setOnAction(event -> {
+      var spriteInfo = new SpriteInfo(
+        getUniqueSpriteId(0), 0, 0, 1, 1
+      );
+      var updatedSpriteSheetInfo = spriteSheetInfo.addSprite(spriteInfo);
+      var newItem = new TreeItem<>(spriteInfo.id());
+
+      getRoot().getChildren().add(newItem);
+
+      spriteSheetInfo = updatedSpriteSheetInfo;
+      spriteSheetState.setCurrentSpriteSheetInfo( updatedSpriteSheetInfo);
+
+      getSelectionModel().select(newItem);
+    });
 
     setOnMouseClicked(event -> {
       if (event.getButton() == MouseButton.SECONDARY) {
@@ -93,6 +108,18 @@ class SpritesTreeView extends TreeView<String> {
       }
     });
 
-    setContextMenu(new ContextMenu(deleteMenuItem, newMenuItem));
+    setContextMenu(new ContextMenu(newMenuItem, deleteMenuItem));
+  }
+
+  private String getUniqueSpriteId(int count) {
+    String potentialId = count == 0 ? "sprite" : "sprite" + count;
+
+    for (var spriteInfo : spriteSheetInfo.sprites()) {
+      if (spriteInfo.id().equals(potentialId)) {
+        return getUniqueSpriteId(count + 1);
+      }
+    }
+
+    return potentialId;
   }
 }
