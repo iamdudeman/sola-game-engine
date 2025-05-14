@@ -1,30 +1,40 @@
 package technology.sola.engine.editor.tools.sprites;
 
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.input.MouseButton;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
 
 class SpritesTreeView extends TreeView<String> {
+  private final SpriteSheetState spriteSheetState;
   private SpriteSheetInfo spriteSheetInfo;
   private Double imageWidth;
   private Double imageHeight;
 
-  SpritesTreeView(SelectedSpriteInfoPanel selectedSpriteInfoPanel) {
+  SpritesTreeView(SpriteSheetState spriteSheetState, SelectedSpriteInfoPanel selectedSpriteInfoPanel) {
+    this.spriteSheetState = spriteSheetState;
+
     setEditable(false);
     setShowRoot(false);
 
     getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue != null) {
+      if (newValue == null) {
+        selectedSpriteInfoPanel.clear();
+      } else {
         spriteSheetInfo.sprites().stream().filter(spriteInfo -> spriteInfo.id().equals(newValue.getValue()))
           .findFirst()
           .ifPresent(spriteInfo -> {
-            selectedSpriteInfoPanel.setSpriteInfo(spriteInfo, imageWidth.intValue(), imageHeight.intValue());
+            selectedSpriteInfoPanel.setSpriteInfo(this, spriteInfo, imageWidth.intValue(), imageHeight.intValue());
           });
       }
     });
+
+    buildContextMenu();
   }
 
-  void setSpriteSheetInfo(SpriteSheetInfo spriteSheetInfo, Double imageWidth, Double imageHeight) {
+  void rebuildTreeViewForSpriteSheetInfo(SpriteSheetInfo spriteSheetInfo, Double imageWidth, Double imageHeight) {
     this.spriteSheetInfo = spriteSheetInfo;
     this.imageWidth = imageWidth;
     this.imageHeight = imageHeight;
@@ -38,8 +48,21 @@ class SpritesTreeView extends TreeView<String> {
     spriteSheetInfo.sprites()
       .forEach(spriteInfo -> root.getChildren().add(new TreeItem<>(spriteInfo.id())));
 
-    if (!spriteSheetInfo.sprites().isEmpty()) {
+    if (spriteSheetInfo.sprites().isEmpty()) {
+      getSelectionModel().clearSelection();
+    } else {
       getSelectionModel().select(0);
+    }
+  }
+
+  public void updateSingleSpriteSpriteSheetInfo(String id, String newId, SpriteSheetInfo spriteSheetInfo) {
+    this.spriteSheetInfo = spriteSheetInfo;
+
+    for (var child : getRoot().getChildren()) {
+      if (child.getValue().equals(id)) {
+        child.setValue(newId);
+        break;
+      }
     }
   }
 
@@ -47,12 +70,29 @@ class SpritesTreeView extends TreeView<String> {
     setRoot(null);
   }
 
-  public void removeSprite(String id) {
-    for (var child : getRoot().getChildren()) {
-      if (child.getValue().equals(id)) {
-        child.getParent().getChildren().remove(child);
-        break;
+  private void buildContextMenu() {
+    var deleteMenuItem = new MenuItem("Delete sprite");
+    var newMenuItem = new MenuItem("New sprite");
+
+    deleteMenuItem.setVisible(false);
+
+    deleteMenuItem.setOnAction(event -> {
+      var spriteId = getSelectionModel().getSelectedItem().getValue();
+
+      rebuildTreeViewForSpriteSheetInfo(spriteSheetInfo.removeSprite(spriteId), imageWidth, imageHeight);
+      spriteSheetState.setCurrentSpriteSheetInfo(spriteSheetInfo);
+    });
+
+    // todo new sprite logic
+
+    setOnMouseClicked(event -> {
+      if (event.getButton() == MouseButton.SECONDARY) {
+        var item = getSelectionModel().getSelectedItem();
+
+        deleteMenuItem.setVisible(item != null);
       }
-    }
+    });
+
+    setContextMenu(new ContextMenu(deleteMenuItem, newMenuItem));
   }
 }

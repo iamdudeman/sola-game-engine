@@ -13,6 +13,7 @@ import technology.sola.json.JsonObject;
  * SpriteSheetToolPanel is a {@link ToolPanel} for managing {@link SpriteSheet} assets.
  */
 public class SpriteSheetToolPanel extends ToolPanel<SpriteSheetToolConfig> {
+  private final SpriteSheetState spriteSheetState = new SpriteSheetState();
   private TabbedPanel tabbedPanel;
   private SpriteSheetAssetTree spriteSheetAssetTree;
   private SplitPane topPane;
@@ -27,7 +28,7 @@ public class SpriteSheetToolPanel extends ToolPanel<SpriteSheetToolConfig> {
 
     orientationProperty().set(Orientation.VERTICAL);
 
-    var selectedSpriteInfoPanel = new SelectedSpriteInfoPanel();
+    var selectedSpriteInfoPanel = new SelectedSpriteInfoPanel(spriteSheetState);
 
     buildTopPane(selectedSpriteInfoPanel);
 
@@ -79,8 +80,8 @@ public class SpriteSheetToolPanel extends ToolPanel<SpriteSheetToolConfig> {
     topPane = new SplitPane();
 
     tabbedPanel = new TabbedPanel();
-    var spritesTreeView = new SpritesTreeView(selectedSpriteInfoPanel);
-    spriteSheetAssetTree = new SpriteSheetAssetTree(tabbedPanel, spritesTreeView);
+    var spritesTreeView = new SpritesTreeView(spriteSheetState, selectedSpriteInfoPanel);
+    spriteSheetAssetTree = new SpriteSheetAssetTree(spriteSheetState, tabbedPanel, spritesTreeView);
 
     spriteSheetAssetTree.setMinWidth(200);
     spritesTreeView.setMinWidth(200);

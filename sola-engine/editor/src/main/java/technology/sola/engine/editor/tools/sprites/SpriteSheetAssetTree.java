@@ -24,10 +24,10 @@ class SpriteSheetAssetTree extends VBox {
   private final AssetTreeView assetTreeView;
   private ImagePanel selectedImagePanel;
 
-  public SpriteSheetAssetTree(TabbedPanel centerPanel, SpritesTreeView spritesTreeView) {
+  public SpriteSheetAssetTree(SpriteSheetState spriteSheetState, TabbedPanel centerPanel, SpritesTreeView spritesTreeView) {
     super();
 
-    var actionConfiguration = new SpriteSheetAssetActionConfiguration(centerPanel, spritesTreeView);
+    var actionConfiguration = new SpriteSheetAssetActionConfiguration(spriteSheetState, centerPanel, spritesTreeView);
 
     assetTreeView = new AssetTreeView(
       AssetType.SPRITES,
@@ -51,6 +51,20 @@ class SpriteSheetAssetTree extends VBox {
         selectedImagePanel.update();
       }
     });
+
+    spriteSheetState.addListener(spriteSheetInfo -> {
+      if (selectedImagePanel != null) {
+        selectedImagePanel.setOverlayRenderer(graphicsContext -> {
+          var selectedItem = spritesTreeView.getSelectionModel().getSelectedItem();
+          var selectedSprite = selectedItem == null ? null : selectedItem.getValue();
+
+          spriteSheetInfo.sprites().forEach(spriteInfo -> {
+            graphicsContext.setStroke(spriteInfo.id().equals(selectedSprite) ? Color.YELLOW : Color.BLACK);
+            graphicsContext.strokeRect(spriteInfo.x(), spriteInfo.y(), spriteInfo.width(), spriteInfo.height());
+          });
+        });
+      }
+    });
   }
 
   public void restoreOpenedFilesAndSelection(List<String> ids, String selectedId) {
@@ -62,6 +76,7 @@ class SpriteSheetAssetTree extends VBox {
   }
 
   private record SpriteSheetAssetActionConfiguration(
+    SpriteSheetState spriteSheetState,
     TabbedPanel centerPanel,
     SpritesTreeView spritesTreeView
   ) implements AssetActionConfiguration {
@@ -72,25 +87,18 @@ class SpriteSheetAssetTree extends VBox {
         var parentFile = file.getParentFile();
         var extension = AssetType.SPRITES.extension;
 
+        spriteSheetState.setCurrentSpriteFile(file);
+
         try {
           var spriteSheetJsonObject = FileUtils.readJson(file).asObject();
           var spriteSheetInfo = new SpriteSheetInfoJsonMapper().toObject(spriteSheetJsonObject);
           var title = file.getName().replace(extension, "");
           var imagePanel = new ImagePanel(new File(parentFile, spriteSheetInfo.spriteSheet()));
 
-          imagePanel.setOverlayRenderer(graphicsContext -> {
-            var selectedItem = spritesTreeView.getSelectionModel().getSelectedItem();
-            var selectedSprite = selectedItem == null ? null : selectedItem.getValue();
-
-            spriteSheetInfo.sprites().forEach(spriteInfo -> {
-              graphicsContext.setStroke(spriteInfo.id().equals(selectedSprite) ? Color.YELLOW : Color.BLACK);
-              graphicsContext.strokeRect(spriteInfo.x(), spriteInfo.y(), spriteInfo.width(), spriteInfo.height());
-            });
-          });
-
           centerPanel.addTab(id, title, imagePanel);
 
-          spritesTreeView.setSpriteSheetInfo(spriteSheetInfo, imagePanel.getImageWidth(), imagePanel.getImageHeight());
+          spriteSheetState.setCurrentSpriteSheetWithoutSave(spriteSheetInfo);
+          spritesTreeView.rebuildTreeViewForSpriteSheetInfo(spriteSheetInfo, imagePanel.getImageWidth(), imagePanel.getImageHeight());
         } catch (IOException ex) {
           ToastService.error("Error opening SpriteSheet");
           LOGGER.error(ex.getMessage(), ex);
@@ -122,6 +130,9 @@ class SpriteSheetAssetTree extends VBox {
             FileUtils.writeJson(newItemFile, spriteSheetInfoJsonMapper.toJson(newSpriteSheetInfo));
 
             centerPanel.renameTab(oldItem.id(), newItem.label(), newItem.id());
+
+            spriteSheetState.setCurrentSpriteFile(newItemFile);
+            spriteSheetState.setCurrentSpriteSheetWithoutSave(newSpriteSheetInfo);
           }
         } catch (IOException ex) {
           ToastService.error(ex.getMessage());

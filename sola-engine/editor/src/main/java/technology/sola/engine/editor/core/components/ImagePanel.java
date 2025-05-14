@@ -83,6 +83,11 @@ public class ImagePanel extends VBox {
     return image.getHeight();
   }
 
+  /**
+   * Sets the overlay renderer that renders content on top of the image.
+   *
+   * @param overlayRenderer the overlay renderer
+   */
   public void setOverlayRenderer(Consumer<GraphicsContext> overlayRenderer) {
     this.overlayRenderer = overlayRenderer;
     toggleOverlayButton.setVisible(true);
@@ -90,6 +95,9 @@ public class ImagePanel extends VBox {
     update();
   }
 
+  /**
+   * Updates the rendered image with any updates that may have happened to the set overlay renderer.
+   */
   public void update() {
     renderTransparencyGrid(image, graphicsContext);
     graphicsContext.drawImage(image, 0, 0);
@@ -100,8 +108,6 @@ public class ImagePanel extends VBox {
   }
 
   private ToolBar buildToolbar() {
-    ToolBar toolbar = new ToolBar();
-
     toggleOverlayButton = new ToggleButton("Toggle overlay");
     toggleOverlayButton.setVisible(false);
     toggleOverlayButton.managedProperty().bind(toggleOverlayButton.visibleProperty());
@@ -117,6 +123,8 @@ public class ImagePanel extends VBox {
       canvas.setTranslateY(0.0f);
       hasChangedProperty.setValue(false);
     });
+
+    ToolBar toolbar = new ToolBar();
 
     toolbar.getItems().addAll(toggleOverlayButton, resetButton);
 
