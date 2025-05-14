@@ -72,17 +72,6 @@ class SpritesTreeView extends TreeView<String> {
   }
 
   private void buildContextMenu() {
-    var deleteMenuItem = new MenuItem("Delete sprite");
-
-    deleteMenuItem.setVisible(false);
-
-    deleteMenuItem.setOnAction(event -> {
-      var spriteId = getSelectionModel().getSelectedItem().getValue();
-
-      rebuildTreeViewForSpriteSheetInfo(spriteSheetInfo.removeSprite(spriteId), imageWidth, imageHeight);
-      spriteSheetState.setCurrentSpriteSheetInfo(spriteSheetInfo);
-    });
-
     var newMenuItem = new MenuItem("New sprite");
 
     newMenuItem.setOnAction(event -> {
@@ -95,20 +84,55 @@ class SpritesTreeView extends TreeView<String> {
       getRoot().getChildren().add(newItem);
 
       spriteSheetInfo = updatedSpriteSheetInfo;
-      spriteSheetState.setCurrentSpriteSheetInfo( updatedSpriteSheetInfo);
+      spriteSheetState.setCurrentSpriteSheetInfo(updatedSpriteSheetInfo);
 
       getSelectionModel().select(newItem);
+    });
+
+    var duplicateMenuItem = new MenuItem("Duplicate sprite");
+
+    duplicateMenuItem.setOnAction(event -> {
+      spriteSheetInfo.sprites().stream()
+        .filter(spriteInfo -> spriteInfo.id().equals(getSelectionModel().getSelectedItem().getValue()))
+        .findFirst()
+        .ifPresent(spriteInfo -> {
+          var newSpriteInfo = new SpriteInfo(
+            getUniqueSpriteId(0), spriteInfo.x(), spriteInfo.y(), spriteInfo.width(), spriteInfo.height()
+          );
+          var updatedSpriteSheetInfo = spriteSheetInfo.addSprite(newSpriteInfo);
+          var newItem = new TreeItem<>(newSpriteInfo.id());
+
+          getRoot().getChildren().add(newItem);
+
+          spriteSheetInfo = updatedSpriteSheetInfo;
+          spriteSheetState.setCurrentSpriteSheetInfo(updatedSpriteSheetInfo);
+
+          getSelectionModel().select(newItem);
+        });
+    });
+
+    var deleteMenuItem = new MenuItem("Delete sprite");
+
+    deleteMenuItem.setOnAction(event -> {
+      var spriteId = getSelectionModel().getSelectedItem().getValue();
+
+      rebuildTreeViewForSpriteSheetInfo(spriteSheetInfo.removeSprite(spriteId), imageWidth, imageHeight);
+      spriteSheetState.setCurrentSpriteSheetInfo(spriteSheetInfo);
     });
 
     setOnMouseClicked(event -> {
       if (event.getButton() == MouseButton.SECONDARY) {
         var item = getSelectionModel().getSelectedItem();
 
+        duplicateMenuItem.setVisible(item != null);
         deleteMenuItem.setVisible(item != null);
       }
     });
 
-    setContextMenu(new ContextMenu(newMenuItem, deleteMenuItem));
+    duplicateMenuItem.setVisible(false);
+    deleteMenuItem.setVisible(false);
+
+    setContextMenu(new ContextMenu(newMenuItem, duplicateMenuItem, deleteMenuItem));
   }
 
   private String getUniqueSpriteId(int count) {
