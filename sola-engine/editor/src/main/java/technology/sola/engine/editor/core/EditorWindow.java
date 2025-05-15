@@ -49,8 +49,7 @@ public class EditorWindow {
 
       editorToolPanels = List.of(
         new FontToolPanel(editorConfig),
-        new SpriteSheetToolPanel(editorConfig),
-        new PlaceholderToolPanel(editorConfig) // todo remove later when more tools are added
+        new SpriteSheetToolPanel(editorConfig)
       );
 
       Stage primaryStage = new Stage();
