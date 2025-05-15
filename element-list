@@ -7,6 +7,7 @@ technology.sola.engine.assets.graphics.font
 technology.sola.engine.assets.graphics.font.exception
 technology.sola.engine.assets.graphics.font.mapper
 technology.sola.engine.assets.graphics.gui
+technology.sola.engine.assets.graphics.spritesheet
 technology.sola.engine.assets.input
 technology.sola.engine.assets.json
 technology.sola.engine.core

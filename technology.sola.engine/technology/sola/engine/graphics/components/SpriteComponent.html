@@ -124,13 +124,13 @@ implements technology.sola.ecs.Component</span></div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#executeWhenLoaded(technology.sola.engine.assets.AssetLoader,java.util.function.Consumer)" class="member-name-link">executeWhenLoaded</a><wbr>(<a href="../../assets/AssetLoader.html" title="class in technology.sola.engine.assets">AssetLoader</a>&lt;<a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics">SpriteSheet</a>&gt;&nbsp;spriteSheetAssetLoader,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#executeWhenLoaded(technology.sola.engine.assets.AssetLoader,java.util.function.Consumer)" class="member-name-link">executeWhenLoaded</a><wbr>(<a href="../../assets/AssetLoader.html" title="class in technology.sola.engine.assets">AssetLoader</a>&lt;<a href="../../assets/graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheet</a>&gt;&nbsp;spriteSheetAssetLoader,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&gt;&nbsp;onSpriteLoaded)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Executes the provided consumer asynchronously once the sprite for this <a href="SpriteComponent.html" title="class in technology.sola.engine.graphics.components"><code>SpriteComponent</code></a> has been loaded.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../assets/AssetHandle.html" title="class in technology.sola.engine.assets">AssetHandle</a>&lt;<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSprite(technology.sola.engine.assets.AssetLoader)" class="member-name-link">getSprite</a><wbr>(<a href="../../assets/AssetLoader.html" title="class in technology.sola.engine.assets">AssetLoader</a>&lt;<a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics">SpriteSheet</a>&gt;&nbsp;spriteSheetAssetLoader)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSprite(technology.sola.engine.assets.AssetLoader)" class="member-name-link">getSprite</a><wbr>(<a href="../../assets/AssetLoader.html" title="class in technology.sola.engine.assets">AssetLoader</a>&lt;<a href="../../assets/graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheet</a>&gt;&nbsp;spriteSheetAssetLoader)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns an <a href="../../assets/AssetHandle.html" title="class in technology.sola.engine.assets"><code>AssetHandle</code></a> for the <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> of the sprite.</div>
 </div>
@@ -173,7 +173,7 @@ implements technology.sola.ecs.Component</span></div>
 <div class="block">Creates a SpriteComponent for a sprite sheet and sprite id.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>spriteSheetId</code> - the id for the <a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics"><code>SpriteSheet</code></a> asset</dd>
+<dd><code>spriteSheetId</code> - the id for the <a href="../../assets/graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet"><code>SpriteSheet</code></a> asset</dd>
 <dd><code>spriteId</code> - the id for the sprite</dd>
 </dl>
 </section>
@@ -214,7 +214,7 @@ implements technology.sola.ecs.Component</span></div>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getSpriteSheetId</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the id of the <a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics"><code>SpriteSheet</code></a> this sprite is in</dd>
+<dd>the id of the <a href="../../assets/graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet"><code>SpriteSheet</code></a> this sprite is in</dd>
 </dl>
 </section>
 </li>
@@ -242,11 +242,11 @@ implements technology.sola.ecs.Component</span></div>
 <li>
 <section class="detail" id="getSprite(technology.sola.engine.assets.AssetLoader)">
 <h3>getSprite</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../assets/AssetHandle.html" title="class in technology.sola.engine.assets">AssetHandle</a>&lt;<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&gt;</span>&nbsp;<span class="element-name">getSprite</span><wbr><span class="parameters">(<a href="../../assets/AssetLoader.html" title="class in technology.sola.engine.assets">AssetLoader</a>&lt;<a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics">SpriteSheet</a>&gt;&nbsp;spriteSheetAssetLoader)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../assets/AssetHandle.html" title="class in technology.sola.engine.assets">AssetHandle</a>&lt;<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&gt;</span>&nbsp;<span class="element-name">getSprite</span><wbr><span class="parameters">(<a href="../../assets/AssetLoader.html" title="class in technology.sola.engine.assets">AssetLoader</a>&lt;<a href="../../assets/graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheet</a>&gt;&nbsp;spriteSheetAssetLoader)</span></div>
 <div class="block">Returns an <a href="../../assets/AssetHandle.html" title="class in technology.sola.engine.assets"><code>AssetHandle</code></a> for the <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> of the sprite.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>spriteSheetAssetLoader</code> - the <a href="../../assets/AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a> for <a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics"><code>SpriteSheet</code></a>s</dd>
+<dd><code>spriteSheetAssetLoader</code> - the <a href="../../assets/AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a> for <a href="../../assets/graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet"><code>SpriteSheet</code></a>s</dd>
 <dt>Returns:</dt>
 <dd>the <code>AssetHandle</code> for the sprite</dd>
 </dl>
@@ -255,13 +255,13 @@ implements technology.sola.ecs.Component</span></div>
 <li>
 <section class="detail" id="executeWhenLoaded(technology.sola.engine.assets.AssetLoader,java.util.function.Consumer)">
 <h3>executeWhenLoaded</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">executeWhenLoaded</span><wbr><span class="parameters">(<a href="../../assets/AssetLoader.html" title="class in technology.sola.engine.assets">AssetLoader</a>&lt;<a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics">SpriteSheet</a>&gt;&nbsp;spriteSheetAssetLoader,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">executeWhenLoaded</span><wbr><span class="parameters">(<a href="../../assets/AssetLoader.html" title="class in technology.sola.engine.assets">AssetLoader</a>&lt;<a href="../../assets/graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheet</a>&gt;&nbsp;spriteSheetAssetLoader,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&gt;&nbsp;onSpriteLoaded)</span></div>
 <div class="block">Executes the provided consumer asynchronously once the sprite for this <a href="SpriteComponent.html" title="class in technology.sola.engine.graphics.components"><code>SpriteComponent</code></a> has been loaded.
  This will execute immediately if the sprite is already loaded.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>spriteSheetAssetLoader</code> - the <a href="../../assets/AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a> for <a href="../../assets/graphics/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics"><code>SpriteSheet</code></a>s</dd>
+<dd><code>spriteSheetAssetLoader</code> - the <a href="../../assets/AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a> for <a href="../../assets/graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet"><code>SpriteSheet</code></a>s</dd>
 <dd><code>onSpriteLoaded</code> - the function to execute if the asset is loaded</dd>
 </dl>
 </section>
