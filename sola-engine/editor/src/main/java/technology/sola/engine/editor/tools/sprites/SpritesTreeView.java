@@ -60,7 +60,7 @@ class SpritesTreeView extends TreeView<String> {
     }
   }
 
-  public void updateSingleSpriteSpriteSheetInfo(String id, String newId, SpriteSheetInfo spriteSheetInfo) {
+  void updateSingleSpriteSpriteSheetInfo(String id, String newId, SpriteSheetInfo spriteSheetInfo) {
     this.spriteSheetInfo = spriteSheetInfo;
 
     for (var child : getRoot().getChildren()) {
@@ -71,7 +71,7 @@ class SpritesTreeView extends TreeView<String> {
     }
   }
 
-  public void clear() {
+  void clear() {
     setRoot(null);
   }
 
@@ -118,7 +118,7 @@ class SpritesTreeView extends TreeView<String> {
     var spliceToolMenuItem = new MenuItem("Splice spritesheet");
 
     spliceToolMenuItem.setOnAction(event -> {
-      DialogService.custom("Splice spritesheet", new SpriteSheetSplicerDialogContent(spriteSheetState.getSpriteSheetImageFile(), spriteSheetInfo, imageWidth.intValue(), imageHeight.intValue(), newSprites -> {
+      DialogService.custom("Splice spritesheet", new SpriteSheetSplicerDialogContent(spriteSheetState, newSprites -> {
         if (newSprites.isEmpty()) {
           return;
         }

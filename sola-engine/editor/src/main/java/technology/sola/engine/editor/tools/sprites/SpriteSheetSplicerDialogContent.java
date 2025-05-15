@@ -25,9 +25,12 @@ class SpriteSheetSplicerDialogContent extends EditorPanel {
   private final IntegerSpinner heightSpinner;
   private int counter = 0;
 
-  SpriteSheetSplicerDialogContent(File spriteImageFile, SpriteSheetInfo spriteSheetInfo, int imageWidth, int imageHeight, Consumer<List<SpriteInfo>> splicedSpritesConsumer) {
+  SpriteSheetSplicerDialogContent(SpriteSheetState spriteSheetState, Consumer<List<SpriteInfo>> splicedSpritesConsumer) {
+    var spriteImageFile = spriteSheetState.getSpriteSheetImageFile();
+    var spriteSheetInfo = spriteSheetState.getCurrentSpriteSheetInfo();
     var imagePanel = new ImagePanel(spriteImageFile);
-
+    var imageWidth = (int) imagePanel.getImageWidth();
+    var imageHeight = (int) imagePanel.getImageHeight();
     var maxValue = Math.max(imageHeight, imageWidth);
 
     paddingSpinner = new IntegerSpinner(0, maxValue);
