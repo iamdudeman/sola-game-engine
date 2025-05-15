@@ -16,4 +16,13 @@ public record SpriteInfo(
   int width,
   int height
 ) {
+  /**
+   * Checks to see if this sprite info has the same boundaries that another sprite does.
+   *
+   * @param other the other {@link SpriteInfo} to compare bounds with
+   * @return true if they have the same bounds
+   */
+  public boolean hasSameBounds(final SpriteInfo other) {
+    return x == other.x && y == other.y && width == other.width && height == other.height;
+  }
 }

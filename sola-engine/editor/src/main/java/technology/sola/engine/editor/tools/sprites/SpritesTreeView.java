@@ -9,6 +9,9 @@ import technology.sola.engine.assets.graphics.spritesheet.SpriteInfo;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
 import technology.sola.engine.editor.core.utils.DialogService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class SpritesTreeView extends TreeView<String> {
   private final SpriteSheetState spriteSheetState;
   private SpriteSheetInfo spriteSheetInfo;
@@ -115,8 +118,23 @@ class SpritesTreeView extends TreeView<String> {
     var spliceToolMenuItem = new MenuItem("Splice spritesheet");
 
     spliceToolMenuItem.setOnAction(event -> {
-      DialogService.custom("Splice spritesheet", new SpriteSheetSplicerDialogContent(imageWidth.intValue(), imageHeight.intValue(), spriteInfoList -> {
-        // todo handle list
+      DialogService.custom("Splice spritesheet", new SpriteSheetSplicerDialogContent(spriteSheetInfo, imageWidth.intValue(), imageHeight.intValue(), newSprites -> {
+        if (newSprites.isEmpty()) {
+          return;
+        }
+
+        List<SpriteInfo> updatedSprites = new ArrayList<>(spriteSheetInfo.sprites());
+
+        updatedSprites.addAll(newSprites);
+
+        getRoot().getChildren().addAll(
+          newSprites.stream()
+            .map(spriteInfo -> new TreeItem<>(spriteInfo.id()))
+            .toList()
+        );
+
+        spriteSheetInfo = new SpriteSheetInfo(spriteSheetInfo.spriteSheet(), updatedSprites);
+        spriteSheetState.setCurrentSpriteSheetInfo(spriteSheetInfo);
       }));
     });
 
