@@ -21,7 +21,7 @@ public record EditorConfig(
   String selectedTool,
   Map<String, JsonObject> toolConfigurations
 ) {
-  private static final SolaLogger LOGGER = SolaLogger.of(EditorConfig.class);
+  private static final SolaLogger LOGGER = SolaLogger.of(EditorConfig.class, "logs/sola-editor.log");
 
   /**
    * Reads an {@link EditorConfig} instance from a configuration file.

@@ -3,7 +3,7 @@ package technology.sola.engine.graphics.components;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
-import technology.sola.engine.assets.graphics.SpriteSheet;
+import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 
 /**
  * SpriteKeyFrame holds information about how long a particular sprite should be rendered as part of an animation.

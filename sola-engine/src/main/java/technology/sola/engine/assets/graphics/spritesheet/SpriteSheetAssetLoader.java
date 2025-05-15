@@ -1,9 +1,9 @@
-package technology.sola.engine.assets.graphics;
+package technology.sola.engine.assets.graphics.spritesheet;
 
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
+import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.json.JsonElementAsset;
-import technology.sola.json.JsonObject;
 
 /**
  * SpriteSheetAssetLoader is an {@link AssetLoader} implementation for {@link SpriteSheet}s.
@@ -34,23 +34,13 @@ public class SpriteSheetAssetLoader extends AssetLoader<SpriteSheet> {
 
     jsonElementAssetAssetLoader.getNewAsset(path, path)
       .executeWhenLoaded(jsonElementAsset -> {
-        JsonObject spriteSheetJson = jsonElementAsset.jsonElement().asObject();
+        SpriteSheetInfo spriteSheetInfo = new SpriteSheetInfoJsonMapper().toObject(jsonElementAsset.asObject());
+        String spriteImageName = spriteSheetInfo.spriteSheet();
 
-        String spriteImageName = spriteSheetJson.getString("spriteSheet");
         solaImageAssetLoader.getNewAsset(spriteImageName, path.substring(0, path.lastIndexOf("/")) + "/" + spriteImageName).executeWhenLoaded(solaImage -> {
           SpriteSheet spriteSheet = new SpriteSheet(solaImage);
 
-          spriteSheetJson.getArray("sprites").forEach(spritesJsonEntry -> {
-            JsonObject spriteJson = spritesJsonEntry.asObject();
-
-            spriteSheet.addSpriteDefinition(
-              spriteJson.getString("id"),
-              spriteJson.getInt("x"),
-              spriteJson.getInt("y"),
-              spriteJson.getInt("w"),
-              spriteJson.getInt("h")
-            );
-          });
+          spriteSheetInfo.sprites().forEach(spriteSheet::addSpriteDefinition);
 
           spriteSheetAssetHandle.setAsset(spriteSheet);
         });

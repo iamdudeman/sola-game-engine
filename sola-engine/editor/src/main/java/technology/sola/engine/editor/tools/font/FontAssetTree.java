@@ -1,12 +1,13 @@
 package technology.sola.engine.editor.tools.font;
 
+import javafx.scene.layout.VBox;
+import technology.sola.engine.editor.core.components.ImagePanel;
 import technology.sola.engine.editor.core.components.assets.AssetTreeItem;
 import technology.sola.engine.editor.core.components.assets.AssetType;
 import technology.sola.engine.editor.core.components.assets.AssetActionConfiguration;
 import technology.sola.engine.editor.core.utils.DialogService;
 import technology.sola.engine.editor.core.utils.FileUtils;
 import technology.sola.engine.editor.core.components.assets.AssetTreeView;
-import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.components.TabbedPanel;
 import technology.sola.engine.editor.core.utils.ToastService;
 import technology.sola.logging.SolaLogger;
@@ -15,8 +16,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-class FontAssetTree extends EditorPanel {
-  private static final SolaLogger LOGGER = SolaLogger.of(FontAssetTree.class);
+class FontAssetTree extends VBox {
+  private static final SolaLogger LOGGER = SolaLogger.of(FontAssetTree.class, "logs/sola-editor.log");
   private final AssetTreeView assetTreeView;
 
   public FontAssetTree(TabbedPanel centerPanel) {
@@ -29,7 +30,7 @@ class FontAssetTree extends EditorPanel {
       actionConfiguration
     );
 
-    setChild(assetTreeView);
+    getChildren().add(assetTreeView);
 
     centerPanel.setSelectedTabListener(tab -> {
       if (tab == null) {
@@ -63,7 +64,7 @@ class FontAssetTree extends EditorPanel {
       centerPanel.addTab(
         id,
         title,
-        new FontImagePanel(new File(parentFile, imageAsset))
+        new ImagePanel(new File(parentFile, imageAsset))
       );
     }
 

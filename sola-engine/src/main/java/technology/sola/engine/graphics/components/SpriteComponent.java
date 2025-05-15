@@ -4,7 +4,7 @@ import technology.sola.ecs.Component;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
-import technology.sola.engine.assets.graphics.SpriteSheet;
+import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 
 import java.util.function.Consumer;
 

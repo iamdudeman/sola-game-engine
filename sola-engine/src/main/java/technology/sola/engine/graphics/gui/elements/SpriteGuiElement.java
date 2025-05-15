@@ -1,7 +1,7 @@
 package technology.sola.engine.graphics.gui.elements;
 
 import technology.sola.engine.assets.graphics.SolaImage;
-import technology.sola.engine.assets.graphics.SpriteSheet;
+import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementDimensions;
 import technology.sola.engine.graphics.gui.style.BaseStyles;

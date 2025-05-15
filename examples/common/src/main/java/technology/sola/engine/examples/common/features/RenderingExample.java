@@ -5,7 +5,7 @@ import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.graphics.SolaImage;
-import technology.sola.engine.assets.graphics.SpriteSheet;
+import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;

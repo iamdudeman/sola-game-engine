@@ -3,7 +3,7 @@ package technology.sola.engine.examples.common.features;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
-import technology.sola.engine.assets.graphics.SpriteSheet;
+import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaWithDefaults;

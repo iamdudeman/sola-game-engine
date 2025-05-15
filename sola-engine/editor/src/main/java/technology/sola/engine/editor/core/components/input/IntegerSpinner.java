@@ -28,4 +28,14 @@ public class IntegerSpinner extends Spinner<Integer> {
       c -> Pattern.matches("\\d*", c.getText()) ? c : null)
     );
   }
+
+  /**
+   * Updates the value set in the spinner.
+   *
+   * @param value the new value
+   */
+  public void setValue(int value) {
+    editorProperty().getValue().setText(Integer.toString(value));
+    commitValue();
+  }
 }

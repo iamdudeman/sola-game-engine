@@ -18,6 +18,7 @@ import technology.sola.engine.editor.core.config.WindowBounds;
 import technology.sola.engine.editor.core.utils.DialogService;
 import technology.sola.engine.editor.core.utils.ToastService;
 import technology.sola.engine.editor.tools.font.FontToolPanel;
+import technology.sola.engine.editor.tools.sprites.SpriteSheetToolPanel;
 import technology.sola.engine.platform.javafx.SolaJavaFx;
 import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
 import technology.sola.json.JsonObject;
@@ -33,7 +34,7 @@ import java.util.Map;
  * configuration and initializes the various editor tools.
  */
 public class EditorWindow {
-  private static final SolaLogger LOGGER = SolaLogger.of(EditorWindow.class);
+  private static final SolaLogger LOGGER = SolaLogger.of(EditorWindow.class, "logs/sola-editor.log");
   private EditorConfig editorConfig;
   private VBox toolContent;
 
@@ -48,7 +49,7 @@ public class EditorWindow {
 
       editorToolPanels = List.of(
         new FontToolPanel(editorConfig),
-        new PlaceholderToolPanel(editorConfig) // todo remove later when more tools are added
+        new SpriteSheetToolPanel(editorConfig)
       );
 
       Stage primaryStage = new Stage();

@@ -6,7 +6,7 @@ import technology.sola.ecs.view.View;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
-import technology.sola.engine.assets.graphics.SpriteSheet;
+import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;

@@ -2,7 +2,7 @@ package technology.sola.engine.physics.utils;
 
 import technology.sola.ecs.Entity;
 import technology.sola.engine.assets.AssetLoader;
-import technology.sola.engine.assets.graphics.SpriteSheet;
+import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.physics.component.ColliderComponent;

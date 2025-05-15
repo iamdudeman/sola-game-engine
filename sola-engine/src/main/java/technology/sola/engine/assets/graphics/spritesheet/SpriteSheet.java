@@ -1,6 +1,7 @@
-package technology.sola.engine.assets.graphics;
+package technology.sola.engine.assets.graphics.spritesheet;
 
 import technology.sola.engine.assets.Asset;
+import technology.sola.engine.assets.graphics.SolaImage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +39,19 @@ public class SpriteSheet implements Asset {
     spriteIdMap.put(id, solaImage.getSubImage(x, y, width, height));
 
     return sprite;
+  }
+
+  /**
+   * Adds a sprite definition to the sprite sheet. This will be a sub-image of the source image that can be retrieved
+   * layer by id.
+   *
+   * @param spriteInfo - the {@link SpriteInfo} for the sprite to add
+   * @return the sprite's {@link SolaImage}
+   */
+  public SolaImage addSpriteDefinition(SpriteInfo spriteInfo) {
+    return addSpriteDefinition(
+      spriteInfo.id(), spriteInfo.x(), spriteInfo.y(), spriteInfo.width(), spriteInfo.height()
+    );
   }
 
   /**

@@ -12,29 +12,20 @@
 
 Comes with default configuration for built-in components and systems
 
-* UX
-    * Ability to increase/decrease font size across the program
+* assets tooling
+    * maybe `audio` shows a little media player to preview it
+    * create and edit controls assets
+    * create and edit materials
+    * create and edit GUIs
+        * maybe a WYSIWYG editor?
 
-* Editor instance configuration (composable)
+* Editor instance configuration (composable) (goes with Scene composition)
     1. Register all EcsSystems
         1. UI for configuring them
     2. Register all Components
         * Has some sort of ui metadata to generate fields for updating the components on an entity
     3. Register all Graphics modules
         * UI for configuring them
-
-* assets tooling
-    * main window could preview asset
-        * maybe `sprites` show outlines with hover for id of sprite
-        * maybe `audio` shows a little media player to preview it
-        * not sure for `input`
-    * create and edit controls assets
-    * file browser in main UI to see assets
-        * can maybe be used to update components' values later that consume asset ids
-    * create and edit materials
-    * create and edit spritesheets
-    * create and edit GUIs
-        * maybe a WYSIWYG editor?
 
 * Scene composition
     * UI Overview

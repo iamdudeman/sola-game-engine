@@ -54,13 +54,12 @@ public record FontToolConfig(
     public FontToolConfig toObject(JsonObject jsonObject) {
       List<String> openedFileIds = new ArrayList<>();
 
-      jsonObject.getArray("openedFiles").forEach(jsonElement -> {
-        openedFileIds.add(jsonElement.asString());
-      });
+      jsonObject.getArray("openedFiles", new JsonArray())
+        .forEach(jsonElement -> openedFileIds.add(jsonElement.asString()));
 
       return new FontToolConfig(
         openedFileIds,
-        jsonObject.getDouble("dividerPosition"),
+        jsonObject.getDouble("dividerPosition", 0.2),
         jsonObject.getString("openId", null)
       );
     }
