@@ -1,15 +1,13 @@
 package technology.sola.engine.editor.tools.sprites;
 
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteInfo;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.components.input.IntegerSpinner;
+import technology.sola.engine.editor.core.components.input.LabelWrapper;
 import technology.sola.engine.editor.core.utils.ToastService;
 
 class SelectedSpriteInfoPanel extends EditorPanel {
@@ -55,6 +53,25 @@ class SelectedSpriteInfoPanel extends EditorPanel {
     ySpinner = new IntegerSpinner(0, spriteSheetHeight);
     widthSpinner = new IntegerSpinner(1, spriteSheetWidth - 1);
     heightSpinner = new IntegerSpinner(1, spriteSheetHeight - 1);
+
+    HBox container = new HBox();
+
+    container.setSpacing(8);
+    container.setAlignment(Pos.CENTER_LEFT);
+    container.getChildren().addAll(
+      LabelWrapper.vertical(idField, "id"),
+      LabelWrapper.vertical(xSpinner, "x"),
+      LabelWrapper.vertical(ySpinner, "y"),
+      LabelWrapper.vertical(widthSpinner, "width"),
+      LabelWrapper.vertical(heightSpinner, "height"),
+      buildUpdateButton(originalSpriteId)
+    );
+
+    getChildren().clear();
+    getChildren().add(container);
+  }
+
+  private Button buildUpdateButton(String originalSpriteId) {
     var updateButton = new Button("Update");
 
     updateButton.setOnAction(event -> {
@@ -82,31 +99,6 @@ class SelectedSpriteInfoPanel extends EditorPanel {
       }
     });
 
-    HBox container = new HBox();
-
-    container.setSpacing(8);
-    container.setAlignment(Pos.CENTER_LEFT);
-    container.getChildren().addAll(
-      wrapWithLabel(idField, "id"),
-      wrapWithLabel(xSpinner, "x"),
-      wrapWithLabel(ySpinner, "y"),
-      wrapWithLabel(widthSpinner, "width"),
-      wrapWithLabel(heightSpinner, "height"),
-      updateButton
-    );
-
-    getChildren().clear();
-    getChildren().add(container);
-  }
-
-  private Node wrapWithLabel(Node node, String label) {
-    var vbox = new VBox();
-    var labelNode = new Label(label + ":");
-
-    labelNode.setLabelFor(node);
-
-    vbox.getChildren().addAll(labelNode, node);
-
-    return vbox;
+    return updateButton;
   }
 }

@@ -4,6 +4,7 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteInfo;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
@@ -28,11 +29,18 @@ class SpritesTreeView extends TreeView<String> {
       if (newValue == null) {
         selectedSpriteInfoPanel.clear();
       } else {
-        spriteSheetInfo.sprites().stream().filter(spriteInfo -> spriteInfo.id().equals(newValue.getValue()))
+        spriteSheetInfo.sprites().stream()
+          .filter(spriteInfo -> spriteInfo.id().equals(newValue.getValue()))
           .findFirst()
           .ifPresent(spriteInfo -> {
             selectedSpriteInfoPanel.setSpriteInfo(this, spriteInfo, imageWidth.intValue(), imageHeight.intValue());
           });
+      }
+    });
+
+    setOnKeyPressed(event -> {
+      if (event.getCode() == KeyCode.DELETE) {
+        deleteSelectedSprite();
       }
     });
 
@@ -75,24 +83,21 @@ class SpritesTreeView extends TreeView<String> {
     setRoot(null);
   }
 
+  private void removeSprite(String id) {
+    for (var child : getRoot().getChildren()) {
+      if (child.getValue().equals(id)) {
+        var parentChildren = child.getParent().getChildren();
+        var index = parentChildren.indexOf(child);
+        var nextIndex = Math.max(0, index - 1);
+
+        parentChildren.remove(index);
+        getSelectionModel().select(nextIndex);
+        break;
+      }
+    }
+  }
+
   private void buildContextMenu() {
-    var newMenuItem = new MenuItem("New sprite");
-
-    newMenuItem.setOnAction(event -> {
-      var spriteInfo = new SpriteInfo(
-        getUniqueSpriteId(0), 0, 0, 1, 1
-      );
-      var updatedSpriteSheetInfo = spriteSheetInfo.addSprite(spriteInfo);
-      var newItem = new TreeItem<>(spriteInfo.id());
-
-      getRoot().getChildren().add(newItem);
-
-      spriteSheetInfo = updatedSpriteSheetInfo;
-      spriteSheetState.setCurrentSpriteSheetInfo(updatedSpriteSheetInfo);
-
-      getSelectionModel().select(newItem);
-    });
-
     var duplicateMenuItem = new MenuItem("Duplicate sprite");
 
     duplicateMenuItem.setOnAction(event -> {
@@ -115,6 +120,52 @@ class SpritesTreeView extends TreeView<String> {
         });
     });
 
+    var deleteMenuItem = new MenuItem("Delete sprite");
+
+    deleteMenuItem.setOnAction(event -> deleteSelectedSprite());
+
+    setOnMouseClicked(event -> {
+      if (event.getButton() == MouseButton.SECONDARY) {
+        var item = getSelectionModel().getSelectedItem();
+
+        duplicateMenuItem.setVisible(item != null);
+        deleteMenuItem.setVisible(item != null);
+      }
+    });
+
+    duplicateMenuItem.setVisible(false);
+    deleteMenuItem.setVisible(false);
+
+    setContextMenu(new ContextMenu(
+      buildNewMenuItem(),
+      duplicateMenuItem,
+      buildSpliceToolMenuItem(),
+      deleteMenuItem
+    ));
+  }
+
+  private MenuItem buildNewMenuItem() {
+    var newMenuItem = new MenuItem("New sprite");
+
+    newMenuItem.setOnAction(event -> {
+      var spriteInfo = new SpriteInfo(
+        getUniqueSpriteId(0), 0, 0, 1, 1
+      );
+      var updatedSpriteSheetInfo = spriteSheetInfo.addSprite(spriteInfo);
+      var newItem = new TreeItem<>(spriteInfo.id());
+
+      getRoot().getChildren().add(newItem);
+
+      spriteSheetInfo = updatedSpriteSheetInfo;
+      spriteSheetState.setCurrentSpriteSheetInfo(updatedSpriteSheetInfo);
+
+      getSelectionModel().select(newItem);
+    });
+
+    return newMenuItem;
+  }
+
+  private MenuItem buildSpliceToolMenuItem() {
     var spliceToolMenuItem = new MenuItem("Splice spritesheet");
 
     spliceToolMenuItem.setOnAction(event -> {
@@ -138,28 +189,19 @@ class SpritesTreeView extends TreeView<String> {
       }));
     });
 
-    var deleteMenuItem = new MenuItem("Delete sprite");
+    return spliceToolMenuItem;
+  }
 
-    deleteMenuItem.setOnAction(event -> {
-      var spriteId = getSelectionModel().getSelectedItem().getValue();
+  private void deleteSelectedSprite() {
+    var selectedItem = getSelectionModel().getSelectedItem();
 
-      rebuildTreeViewForSpriteSheetInfo(spriteSheetInfo.removeSprite(spriteId), imageWidth, imageHeight);
+    if (selectedItem != null) {
+      var spriteId = selectedItem.getValue();
+
+      removeSprite(spriteId);
+      spriteSheetInfo = spriteSheetInfo.removeSprite(spriteId);
       spriteSheetState.setCurrentSpriteSheetInfo(spriteSheetInfo);
-    });
-
-    setOnMouseClicked(event -> {
-      if (event.getButton() == MouseButton.SECONDARY) {
-        var item = getSelectionModel().getSelectedItem();
-
-        duplicateMenuItem.setVisible(item != null);
-        deleteMenuItem.setVisible(item != null);
-      }
-    });
-
-    duplicateMenuItem.setVisible(false);
-    deleteMenuItem.setVisible(false);
-
-    setContextMenu(new ContextMenu(newMenuItem, duplicateMenuItem, spliceToolMenuItem, deleteMenuItem));
+    }
   }
 
   private String getUniqueSpriteId(int count) {

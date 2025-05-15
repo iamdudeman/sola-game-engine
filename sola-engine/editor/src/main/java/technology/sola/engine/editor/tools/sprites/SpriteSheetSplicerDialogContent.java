@@ -2,9 +2,7 @@ package technology.sola.engine.editor.tools.sprites;
 
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteInfo;
@@ -12,8 +10,8 @@ import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.components.ImagePanel;
 import technology.sola.engine.editor.core.components.input.IntegerSpinner;
+import technology.sola.engine.editor.core.components.input.LabelWrapper;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -27,7 +25,6 @@ class SpriteSheetSplicerDialogContent extends EditorPanel {
 
   SpriteSheetSplicerDialogContent(SpriteSheetState spriteSheetState, Consumer<List<SpriteInfo>> splicedSpritesConsumer) {
     var spriteImageFile = spriteSheetState.getSpriteSheetImageFile();
-    var spriteSheetInfo = spriteSheetState.getCurrentSpriteSheetInfo();
     var imagePanel = new ImagePanel(spriteImageFile);
     var imageWidth = (int) imagePanel.getImageWidth();
     var imageHeight = (int) imagePanel.getImageHeight();
@@ -37,6 +34,11 @@ class SpriteSheetSplicerDialogContent extends EditorPanel {
     spacingSpinner = new IntegerSpinner(0, maxValue);
     widthSpinner = new IntegerSpinner(1, maxValue);
     heightSpinner = new IntegerSpinner(1, maxValue);
+
+    widthSpinner.setValue(10);
+    heightSpinner.setValue(10);
+
+    var spriteSheetInfo = spriteSheetState.getCurrentSpriteSheetInfo();
 
     ChangeListener<Integer> updateOverlayListener = (observable, oldValue, newValue) -> {
       var sprites = spliceSprites(spriteSheetInfo, imageWidth, imageHeight);
@@ -71,21 +73,23 @@ class SpriteSheetSplicerDialogContent extends EditorPanel {
     buttonContainer.getChildren().addAll(cancelButton, spliceButton);
 
     setSpacing(8);
-    setMinWidth(300);
-    setMinHeight(300);
+    setMinWidth(imageWidth + 200);
+    setMinHeight(imageHeight + 300);
     setAlignment(Pos.CENTER);
 
     getChildren().addAll(
       imagePanel,
-      wrapWithLabel(widthSpinner, "Width"),
-      wrapWithLabel(heightSpinner, "Height"),
-      wrapWithLabel(spacingSpinner, "Spacing"),
-      wrapWithLabel(paddingSpinner, "Padding"),
+      LabelWrapper.horizontal(widthSpinner, "Width"),
+      LabelWrapper.horizontal(heightSpinner, "Height"),
+      LabelWrapper.horizontal(spacingSpinner, "Spacing"),
+      LabelWrapper.horizontal(paddingSpinner, "Padding"),
       buttonContainer
     );
   }
 
   private List<SpriteInfo> spliceSprites(SpriteSheetInfo spriteSheetInfo, int imageWidth, int imageHeight) {
+    counter = 0;
+
     List<SpriteInfo> splicedSprites = new ArrayList<>();
     int padding = paddingSpinner.getValue();
     int spacing = spacingSpinner.getValue();
@@ -115,16 +119,5 @@ class SpriteSheetSplicerDialogContent extends EditorPanel {
     }
 
     return id;
-  }
-
-  private Node wrapWithLabel(Node node, String label) {
-    var container = new HBox();
-    var labelNode = new Label(label + ":");
-
-    labelNode.setLabelFor(node);
-
-    container.getChildren().addAll(labelNode, node);
-
-    return container;
   }
 }

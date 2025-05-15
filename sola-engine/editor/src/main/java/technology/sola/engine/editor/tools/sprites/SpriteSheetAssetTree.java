@@ -54,26 +54,7 @@ class SpriteSheetAssetTree extends VBox {
 
     spriteSheetState.addListener(spriteSheetInfo -> {
       if (selectedImagePanel != null) {
-        selectedImagePanel.setOverlayRenderer(graphicsContext -> {
-          var selectedItem = spritesTreeView.getSelectionModel().getSelectedItem();
-          var selectedSprite = selectedItem == null ? null : selectedItem.getValue();
-
-          spriteSheetInfo.sprites().stream()
-            .sorted((a, b) -> {
-              // ensure that selected sprite border always renders on top of others
-              if (a.id().equals(selectedSprite)) {
-                return 1;
-              } else if (b.id().equals(selectedSprite)) {
-                return -1;
-              }
-
-              return 0;
-            })
-            .forEach(spriteInfo -> {
-              graphicsContext.setStroke(spriteInfo.id().equals(selectedSprite) ? Color.YELLOW : Color.BLACK);
-              graphicsContext.strokeRect(spriteInfo.x(), spriteInfo.y(), spriteInfo.width(), spriteInfo.height());
-            });
-        });
+        selectedImagePanel.update();
       }
     });
   }
@@ -113,6 +94,27 @@ class SpriteSheetAssetTree extends VBox {
 
         spriteSheetState.setCurrentSpriteSheetWithoutSave(spriteSheetInfo);
         spritesTreeView.rebuildTreeViewForSpriteSheetInfo(spriteSheetInfo, imagePanel.getImageWidth(), imagePanel.getImageHeight());
+
+        imagePanel.setOverlayRenderer(graphicsContext -> {
+          var selectedItem = spritesTreeView.getSelectionModel().getSelectedItem();
+          var selectedSprite = selectedItem == null ? null : selectedItem.getValue();
+
+          spriteSheetState.getCurrentSpriteSheetInfo().sprites().stream()
+            .sorted((a, b) -> {
+              // ensure that selected sprite border always renders on top of others
+              if (a.id().equals(selectedSprite)) {
+                return 1;
+              } else if (b.id().equals(selectedSprite)) {
+                return -1;
+              }
+
+              return 0;
+            })
+            .forEach(spriteInfo -> {
+              graphicsContext.setStroke(spriteInfo.id().equals(selectedSprite) ? Color.YELLOW : Color.BLACK);
+              graphicsContext.strokeRect(spriteInfo.x(), spriteInfo.y(), spriteInfo.width(), spriteInfo.height());
+            });
+        });
       } catch (IOException ex) {
         ToastService.error("Error opening SpriteSheet");
         LOGGER.error(ex.getMessage(), ex);

@@ -23,7 +23,7 @@ import java.util.List;
  * SpritesFontDialogContent is a form for creating a new sprites asset that can be easily nested in
  * a {@link DialogService#custom(String, Parent)}.
  */
-public class NewSpriteSheetDialogContent extends EditorPanel {
+class NewSpriteSheetDialogContent extends EditorPanel {
   private static final SolaLogger LOGGER = SolaLogger.of(NewSpriteSheetDialogContent.class, "logs/sola-editor.log");
   private final Button chooseFileButton;
   private final TextField spriteSheetNameTextField;
