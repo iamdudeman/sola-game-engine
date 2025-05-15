@@ -118,7 +118,7 @@ class SpritesTreeView extends TreeView<String> {
     var spliceToolMenuItem = new MenuItem("Splice spritesheet");
 
     spliceToolMenuItem.setOnAction(event -> {
-      DialogService.custom("Splice spritesheet", new SpriteSheetSplicerDialogContent(spriteSheetInfo, imageWidth.intValue(), imageHeight.intValue(), newSprites -> {
+      DialogService.custom("Splice spritesheet", new SpriteSheetSplicerDialogContent(spriteSheetState.getSpriteSheetImageFile(), spriteSheetInfo, imageWidth.intValue(), imageHeight.intValue(), newSprites -> {
         if (newSprites.isEmpty()) {
           return;
         }

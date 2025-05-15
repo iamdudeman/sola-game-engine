@@ -93,7 +93,10 @@ class SpriteSheetAssetTree extends VBox {
           var spriteSheetJsonObject = FileUtils.readJson(file).asObject();
           var spriteSheetInfo = new SpriteSheetInfoJsonMapper().toObject(spriteSheetJsonObject);
           var title = file.getName().replace(extension, "");
-          var imagePanel = new ImagePanel(new File(parentFile, spriteSheetInfo.spriteSheet()));
+          var spriteSheetImageFile = new File(parentFile, spriteSheetInfo.spriteSheet());
+          var imagePanel = new ImagePanel(spriteSheetImageFile);
+
+          spriteSheetState.setCurrentSpriteSheetImageFile(spriteSheetImageFile);
 
           centerPanel.addTab(id, title, imagePanel);
 
@@ -125,13 +128,15 @@ class SpriteSheetAssetTree extends VBox {
           var parts = imageAsset.split("\\.");
           var newImageAsset = newItemFile.getName().replace(extension, "") + "." + parts[1];
           var newSpriteSheetInfo = new SpriteSheetInfo(newImageAsset, spriteSheetInfo.sprites());
+          var newImageFile = new File(parentFile, newImageAsset);
 
-          if (new File(parentFile, imageAsset).renameTo(new File(parentFile, newImageAsset))) {
+          if (new File(parentFile, imageAsset).renameTo(newImageFile)) {
             FileUtils.writeJson(newItemFile, spriteSheetInfoJsonMapper.toJson(newSpriteSheetInfo));
 
             centerPanel.renameTab(oldItem.id(), newItem.label(), newItem.id());
 
             spriteSheetState.setCurrentSpriteFile(newItemFile);
+            spriteSheetState.setCurrentSpriteSheetImageFile(newImageFile);
             spriteSheetState.setCurrentSpriteSheetWithoutSave(newSpriteSheetInfo);
           }
         } catch (IOException ex) {

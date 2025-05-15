@@ -17,13 +17,22 @@ class SpriteSheetState {
   private final List<Consumer<SpriteSheetInfo>> spriteSheetInfoConsumers = new ArrayList<>();
   private SpriteSheetInfo spriteSheetInfo;
   private File spriteSheetFile;
+  private File spriteSheetImageFile;
 
   SpriteSheetInfo getCurrentSpriteSheetInfo() {
     return spriteSheetInfo;
   }
 
+  File getSpriteSheetImageFile() {
+    return spriteSheetImageFile;
+  }
+
   void setCurrentSpriteFile(File file) {
     this.spriteSheetFile = file;
+  }
+
+  void setCurrentSpriteSheetImageFile(File file) {
+    this.spriteSheetImageFile = file;
   }
 
   void setCurrentSpriteSheetWithoutSave(SpriteSheetInfo spriteSheetInfo) {

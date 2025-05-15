@@ -1,20 +1,22 @@
 package technology.sola.engine.editor.tools.sprites;
 
+import javafx.beans.value.ChangeListener;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteInfo;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
 import technology.sola.engine.editor.core.components.EditorPanel;
+import technology.sola.engine.editor.core.components.ImagePanel;
 import technology.sola.engine.editor.core.components.input.IntegerSpinner;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-
-// todo consider showing image here with overlay of grid on top as it is editing
 
 class SpriteSheetSplicerDialogContent extends EditorPanel {
   private final IntegerSpinner paddingSpinner;
@@ -23,13 +25,32 @@ class SpriteSheetSplicerDialogContent extends EditorPanel {
   private final IntegerSpinner heightSpinner;
   private int counter = 0;
 
-  SpriteSheetSplicerDialogContent(SpriteSheetInfo spriteSheetInfo, int imageWidth, int imageHeight, Consumer<List<SpriteInfo>> splicedSpritesConsumer) {
+  SpriteSheetSplicerDialogContent(File spriteImageFile, SpriteSheetInfo spriteSheetInfo, int imageWidth, int imageHeight, Consumer<List<SpriteInfo>> splicedSpritesConsumer) {
+    var imagePanel = new ImagePanel(spriteImageFile);
+
     var maxValue = Math.max(imageHeight, imageWidth);
 
     paddingSpinner = new IntegerSpinner(0, maxValue);
     spacingSpinner = new IntegerSpinner(0, maxValue);
     widthSpinner = new IntegerSpinner(1, maxValue);
     heightSpinner = new IntegerSpinner(1, maxValue);
+
+    ChangeListener<Integer> updateOverlayListener = (observable, oldValue, newValue) -> {
+      var sprites = spliceSprites(spriteSheetInfo, imageWidth, imageHeight);
+
+      imagePanel.setOverlayRenderer(graphicsContext -> {
+        sprites.forEach(spriteInfo -> {
+          graphicsContext.setStroke(Color.BLACK);
+          graphicsContext.strokeRect(spriteInfo.x(), spriteInfo.y(), spriteInfo.width(), spriteInfo.height());
+        });
+      });
+    };
+
+    paddingSpinner.valueProperty().addListener(updateOverlayListener);
+    spacingSpinner.valueProperty().addListener(updateOverlayListener);
+    widthSpinner.valueProperty().addListener(updateOverlayListener);
+    heightSpinner.valueProperty().addListener(updateOverlayListener);
+
     HBox buttonContainer = new HBox();
 
     Button cancelButton = new Button("Cancel");
@@ -52,10 +73,11 @@ class SpriteSheetSplicerDialogContent extends EditorPanel {
     setAlignment(Pos.CENTER);
 
     getChildren().addAll(
-      wrapWithLabel(paddingSpinner, "Padding"),
-      wrapWithLabel(spacingSpinner, "Spacing"),
+      imagePanel,
       wrapWithLabel(widthSpinner, "Width"),
       wrapWithLabel(heightSpinner, "Height"),
+      wrapWithLabel(spacingSpinner, "Spacing"),
+      wrapWithLabel(paddingSpinner, "Padding"),
       buttonContainer
     );
   }
