@@ -1,16 +1,5 @@
 # Editor TODO List
 
-* ~~on selected sprite in right panel add yellow highlight~~
-    * ~~also show sprite properties in bottom panel~~
-* ~~add option to delete sprite~~
-* ~~add ability to update sprite info in lower panel~~
-* ~~add button for adding new sprite~~
-    * ~~defaults id and properties~~
-* add button for triggering "splicing tool" or better name that allows for setting values to auto populate
-    * padding before first sprite
-    * margin between sprites
-    * sprite width + height
-
 ## Known Bugs List
 
 -----------------------------------------------------------------------------------------------------------------------
