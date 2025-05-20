@@ -1,11 +1,14 @@
 package technology.sola.math.linear;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * The Vector2D class is an implementation of a linear algebra vector.
  *
  * @param x the x coordinate
  * @param y the y coordinate
  */
+@NullMarked
 public record Vector2D(float x, float y) {
   /**
    * A {@link Vector2D} with 0 for the x and y.
