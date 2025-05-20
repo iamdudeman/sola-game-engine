@@ -173,6 +173,35 @@ class Vector2DTest {
       assertEquals(1, rotation.y());
     }
 
+    @Test
+    void reflect() {
+      Vector2D vector2D = new Vector2D(2, 5);
+
+      var result = vector2D.reflect(new Vector2D(1, 0).normalize());
+      assertEquals(-2, result.x());
+      assertEquals(5, result.y());
+
+      result = vector2D.reflect(new Vector2D(0, 1).normalize());
+      assertEquals(2, result.x());
+      assertEquals(-5, result.y());
+
+      result = vector2D.reflect(new Vector2D(-1, 0).normalize());
+      assertEquals(-2, result.x());
+      assertEquals(5, result.y());
+
+      result = vector2D.reflect(new Vector2D(0, -1).normalize());
+      assertEquals(2, result.x());
+      assertEquals(-5, result.y());
+
+      result = vector2D.reflect(new Vector2D(0.5f, 0.5f).normalize());
+      assertEquals(-5, result.x());
+      assertEquals(-2, result.y());
+
+      result = vector2D.reflect(new Vector2D(-0.5f, -0.5f).normalize());
+      assertEquals(-5, result.x());
+      assertEquals(-2, result.y());
+    }
+
     @Nested
     class equals {
       @Test

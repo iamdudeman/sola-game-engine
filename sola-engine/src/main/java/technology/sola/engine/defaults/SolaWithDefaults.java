@@ -31,6 +31,7 @@ import java.util.stream.Stream;
  *   <li>{@link SolaWithDefaults#solaPhysics}</li>
  *   <li>{@link SolaWithDefaults#solaGraphics}</li>
  *   <li>{@link SolaWithDefaults#guiDocument}</li>
+ *   <li>{@link SolaWithDefaults#solaControls}</li>
  * </ul>
  */
 public abstract class SolaWithDefaults extends Sola {
@@ -160,13 +161,17 @@ public abstract class SolaWithDefaults extends Sola {
      * <ul>
      *   <li>{@link CircleEntityGraphicsModule}</li>
      *   <li>{@link RectangleEntityGraphicsModule}</li>
+     *   <li>{@link TriangleEntityGraphicsModule}</li>
      *   <li>{@link SpriteEntityGraphicsModule}</li>
+     *   <li>{@link ParticleEmitterEntityGraphicsModule}</li>
+     *   <li>{@link ScreenSpaceLightMapGraphicsModule}</li>
      * </ul>
      * <p>
      * EcsSystems added
      * <ul>
      *   <li>{@link technology.sola.engine.graphics.system.SpriteAnimatorSystem}</li>
      *   <li>{@link technology.sola.engine.graphics.system.TransformAnimatorSystem}</li>
+     *   <li>{@link technology.sola.engine.graphics.system.LightFlickerSystem}</li>
      * </ul>
      *
      * @return this

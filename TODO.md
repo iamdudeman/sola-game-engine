@@ -18,8 +18,7 @@
 
 ## TODO List
 
-* Consider adding ability to modify what is rendered on each pixel
-    * Think "shader" but probably in software instead of GPU (might be a bad idea in general)
+* Add convenient ability to change entity render order based on Y position (or some other condition other than layers)
 * Consider generalizing Triangle renderer and collider to "Polygon" instead
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
@@ -51,7 +50,11 @@
     * ability to send and process Authorization header
 * Lighting
     * implement more light types other than just point lights
+    * https://www.redblobgames.com/articles/visibility/
+    * https://www.roguebasin.com/index.php?title=Field_of_Vision
 * Particle System
+    * consider ability to add fix number of particle spawns (4 at a time in different directions for example)
+    * consider ability to change particle shape (instead of only circle maybe square)
     * consider researching how other engines do particle systems to maybe create an easier to use api
     * consider adding acceleration
     * consider some sort of "swaying" for non-linear particles

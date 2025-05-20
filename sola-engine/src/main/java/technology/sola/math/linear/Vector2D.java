@@ -140,6 +140,16 @@ public record Vector2D(float x, float y) {
     return new Vector2D(rotX, rotY);
   }
 
+  /**
+   * Calculates the reflected vector off of desired {@link Vector2D} normal.
+   *
+   * @param normal the normal to reflect off of
+   * @return the reflected vector
+   */
+  public Vector2D reflect(Vector2D normal) {
+    return subtract(normal.scalar(2 * normal.dot(this)));
+  }
+
   @Override
   public String toString() {
     return "V(" + this.x + ", " + this.y + ")";
