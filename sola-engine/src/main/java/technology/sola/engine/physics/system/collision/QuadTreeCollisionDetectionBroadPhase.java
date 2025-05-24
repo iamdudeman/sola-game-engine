@@ -10,7 +10,7 @@ import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * QuadTreeCollisionDetectionBroadPhase is a {@link CollisionDetectionBroadPhase} implementation using a
@@ -53,7 +53,7 @@ public class QuadTreeCollisionDetectionBroadPhase implements CollisionDetectionB
   }
 
   @Override
-  public void populate(List<View2Entry<ColliderComponent, TransformComponent>> views) {
+  public void populate(Collection<View2Entry<ColliderComponent, TransformComponent>> views) {
     Rectangle bounds = screenBounds;
 
     if (bounds == null) {
@@ -61,7 +61,7 @@ public class QuadTreeCollisionDetectionBroadPhase implements CollisionDetectionB
       Vector2D max;
 
       if (!views.isEmpty()) {
-        var firstView = views.get(0);
+        var firstView = views.iterator().next();
         var boundingRectangle = firstView.c1().getBoundingBox(firstView.c2());
 
         min = boundingRectangle.min();
@@ -99,7 +99,7 @@ public class QuadTreeCollisionDetectionBroadPhase implements CollisionDetectionB
   }
 
   @Override
-  public List<View2Entry<ColliderComponent, TransformComponent>> query(View2Entry<ColliderComponent, TransformComponent> searchEntry) {
+  public Collection<View2Entry<ColliderComponent, TransformComponent>> query(View2Entry<ColliderComponent, TransformComponent> searchEntry) {
     Rectangle rectangle = searchEntry.c1().getBoundingBox(searchEntry.c2());
 
     return quadTreeNode.query(rectangle);

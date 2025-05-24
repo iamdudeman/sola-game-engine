@@ -10,7 +10,7 @@ import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * SpatialHashMapCollisionDetectionBroadPhase is a {@link CollisionDetectionBroadPhase} implementation utilizing a
@@ -37,12 +37,12 @@ public class SpatialHashMapCollisionDetectionBroadPhase implements CollisionDete
   }
 
   @Override
-  public void populate(List<View2Entry<ColliderComponent, TransformComponent>> views) {
+  public void populate(Collection<View2Entry<ColliderComponent, TransformComponent>> views) {
     spatialHashMap = spatialHashMapCellSize == null ? new SpatialHashMap(views) : new SpatialHashMap(views, spatialHashMapCellSize);
   }
 
   @Override
-  public List<View2Entry<ColliderComponent, TransformComponent>> query(View2Entry<ColliderComponent, TransformComponent> searchEntry) {
+  public Collection<View2Entry<ColliderComponent, TransformComponent>> query(View2Entry<ColliderComponent, TransformComponent> searchEntry) {
     return spatialHashMap.getNearbyViewEntries(searchEntry);
   }
 

@@ -15,6 +15,7 @@ import technology.sola.engine.input.MouseInput;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -78,7 +79,7 @@ public class PlayerInputSystem extends EcsSystem {
     }
   }
 
-  private void handleReveal(List<View2Entry<TransformComponent, MinesweeperSquareComponent>> entries, MinesweeperSquareComponent squareComponent) {
+  private void handleReveal(Collection<View2Entry<TransformComponent, MinesweeperSquareComponent>> entries, MinesweeperSquareComponent squareComponent) {
     if (!squareComponent.isFlagged()) {
       squareComponent.reveal();
 
@@ -101,7 +102,7 @@ public class PlayerInputSystem extends EcsSystem {
     }
   }
 
-  private void revealForZero(List<View2Entry<TransformComponent, MinesweeperSquareComponent>> entries, int rowIndex, int columnIndex) {
+  private void revealForZero(Collection<View2Entry<TransformComponent, MinesweeperSquareComponent>> entries, int rowIndex, int columnIndex) {
     // left and corners
     revealIfFound(entries, rowIndex, columnIndex - 1);
     revealIfFound(entries, rowIndex - 1, columnIndex - 1);
@@ -123,7 +124,7 @@ public class PlayerInputSystem extends EcsSystem {
     revealIfFound(entries, rowIndex + 1, columnIndex + 1);
   }
 
-  private void revealIfFound(List<View2Entry<TransformComponent, MinesweeperSquareComponent>> entries, int rowIndex, int columnIndex) {
+  private void revealIfFound(Collection<View2Entry<TransformComponent, MinesweeperSquareComponent>> entries, int rowIndex, int columnIndex) {
     MinesweeperSquareComponent nextSquare = findByRowColumn(entries, rowIndex, columnIndex);
 
     if (nextSquare != null && !nextSquare.isRevealed()) {
@@ -135,7 +136,7 @@ public class PlayerInputSystem extends EcsSystem {
     }
   }
 
-  private MinesweeperSquareComponent findByRowColumn(List<View2Entry<TransformComponent, MinesweeperSquareComponent>> entries, int rowIndex, int columnIndex) {
+  private MinesweeperSquareComponent findByRowColumn(Collection<View2Entry<TransformComponent, MinesweeperSquareComponent>> entries, int rowIndex, int columnIndex) {
     if (rowIndex < 0 || columnIndex < 0) {
       return null;
     }
