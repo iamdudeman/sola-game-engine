@@ -16,7 +16,6 @@ import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * {@link EcsSystem} that handles player input. Left-clicking reveals a tile and right-clicking marks a square as
