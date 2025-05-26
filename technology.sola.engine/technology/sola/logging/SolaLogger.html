@@ -80,7 +80,8 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="JavaSolaLogger.html" title="class in technology.sola.logging">JavaSolaLogger</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">SolaLogger</span>
+<div class="type-signature"><span class="annotations">@NullMarked
+</span><span class="modifiers">public abstract class </span><span class="element-name type-name-label">SolaLogger</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">SolaLogger instances are used to log messages to the console and/or files. SolaLogger must be configured via
  <a href="#configure(technology.sola.logging.SolaLogLevel,technology.sola.logging.SolaLoggerFactory)"><code>configure(SolaLogLevel, SolaLoggerFactory)</code></a> before instances can be created via
@@ -152,7 +153,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#log(technology.sola.logging.SolaLogLevel,java.lang.String,java.lang.Throwable,java.lang.Object...)" class="member-name-link">log</a><wbr>(<a href="SolaLogLevel.html" title="enum class in technology.sola.logging">SolaLogLevel</a>&nbsp;level,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Throwable.html" title="class or interface in java.lang" class="external-link">Throwable</a>&nbsp;throwable,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Throwable.html" title="class or interface in java.lang" class="external-link">Throwable</a>&nbsp;throwable,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;params)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Logs a message at desired <a href="SolaLogLevel.html" title="enum class in technology.sola.logging"><code>SolaLogLevel</code></a>.</div>
@@ -349,7 +350,7 @@ loadScripts(document, 'script');</script>
 <h3>log</h3>
 <div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">log</span><wbr><span class="parameters">(<a href="SolaLogLevel.html" title="enum class in technology.sola.logging">SolaLogLevel</a>&nbsp;level,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Throwable.html" title="class or interface in java.lang" class="external-link">Throwable</a>&nbsp;throwable,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Throwable.html" title="class or interface in java.lang" class="external-link">Throwable</a>&nbsp;throwable,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>...&nbsp;params)</span></div>
 <div class="block">Logs a message at desired <a href="SolaLogLevel.html" title="enum class in technology.sola.logging"><code>SolaLogLevel</code></a>. This uses <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html#format(java.lang.String,java.lang.Object...)" title="class or interface in java.lang" class="external-link"><code>String.format(String, Object...)</code></a> to format the
  log message. Additionally, the passed <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Throwable.html" title="class or interface in java.lang" class="external-link"><code>Throwable</code></a> will be logged if provided.</div>
