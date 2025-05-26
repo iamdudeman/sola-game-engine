@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.component;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
 import technology.sola.math.linear.Vector2D;
@@ -13,6 +14,7 @@ import java.util.Random;
  * ParticleEmitterComponent is a {@link Component} that contains data for emitting {@link Particle}s as well as data for
  * its emitted particles.
  */
+@NullMarked
 public class ParticleEmitterComponent implements Component {
   private final List<Particle> particleList = new ArrayList<>();
   private final Random random = new Random();
