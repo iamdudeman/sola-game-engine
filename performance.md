@@ -1,5 +1,7 @@
 # Performance numbers
 
+Execute benchmark view gradle task `jmhBenchmark` in verification category.
+
 ## SoftwareRenderer
 
 ```markdown

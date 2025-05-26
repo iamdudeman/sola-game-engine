@@ -1,5 +1,6 @@
 package technology.sola.engine.assets.graphics.spritesheet;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
@@ -8,6 +9,7 @@ import technology.sola.engine.assets.json.JsonElementAsset;
 /**
  * SpriteSheetAssetLoader is an {@link AssetLoader} implementation for {@link SpriteSheet}s.
  */
+@NullMarked
 public class SpriteSheetAssetLoader extends AssetLoader<SpriteSheet> {
   private final AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader;
   private final AssetLoader<SolaImage> solaImageAssetLoader;

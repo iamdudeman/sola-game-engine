@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.javafx.assets;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.json.JsonElementAsset;
@@ -11,6 +12,7 @@ import java.io.IOException;
 /**
  * A JavaFX implementation of the {@link JsonElementAsset} {@link AssetLoader}.
  */
+@NullMarked
 public class JavaFxJsonAssetLoader extends AssetLoader<JsonElementAsset> {
   @Override
   public Class<JsonElementAsset> getAssetClass() {

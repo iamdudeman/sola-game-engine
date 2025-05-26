@@ -1,5 +1,6 @@
 package technology.sola.engine.assets.input;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.json.JsonElementAsset;
@@ -7,6 +8,7 @@ import technology.sola.engine.assets.json.JsonElementAsset;
 /**
  * ControlsConfigAssetLoader is an {@link AssetLoader} implementation for {@link ControlsConfig}s.
  */
+@NullMarked
 public class ControlsConfigAssetLoader extends AssetLoader<ControlsConfig> {
   private final AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader;
 

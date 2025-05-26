@@ -1,5 +1,6 @@
 package technology.sola.engine.assets;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.exception.MissingAssetLoaderException;
 
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.Map;
 /**
  * The AssetLoaderProvider class holds instances of {@link AssetLoader}s for various {@link Asset} types.
  */
+@NullMarked
 public class AssetLoaderProvider {
   private final Map<Class<? extends Asset>, AssetLoader<?>> assetLoaderMap = new HashMap<>();
 

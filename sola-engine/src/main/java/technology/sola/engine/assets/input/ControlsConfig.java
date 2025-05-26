@@ -1,5 +1,6 @@
 package technology.sola.engine.assets.input;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.Asset;
 import technology.sola.engine.defaults.controls.ControlInput;
 
@@ -12,6 +13,7 @@ import java.util.Map;
  *
  * @param controls the Map of control ids to controls
  */
+@NullMarked
 public record ControlsConfig(
   Map<String, List<ControlInput>> controls
 ) implements Asset {

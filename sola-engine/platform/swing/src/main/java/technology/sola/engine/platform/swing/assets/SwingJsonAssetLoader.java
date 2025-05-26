@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.swing.assets;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.json.JsonElementAsset;
@@ -11,6 +12,7 @@ import java.io.IOException;
 /**
  * A Swing implementation of the {@link JsonElementAsset} {@link AssetLoader}.
  */
+@NullMarked
 public class SwingJsonAssetLoader extends AssetLoader<JsonElementAsset> {
   @Override
   public Class<JsonElementAsset> getAssetClass() {

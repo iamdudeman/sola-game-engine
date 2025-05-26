@@ -1,5 +1,6 @@
 package technology.sola.engine.assets.graphics.font;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
@@ -9,6 +10,7 @@ import technology.sola.engine.assets.json.JsonElementAsset;
 /**
  * FontAssetLoader is an {@link AssetLoader} implementation for {@link Font}s.
  */
+@NullMarked
 public class FontAssetLoader extends AssetLoader<Font> {
   private final AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader;
   private final AssetLoader<SolaImage> solaImageAssetLoader;

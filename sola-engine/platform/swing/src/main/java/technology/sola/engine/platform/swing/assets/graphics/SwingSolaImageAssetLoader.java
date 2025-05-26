@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.swing.assets.graphics;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
@@ -13,6 +14,7 @@ import java.io.IOException;
 /**
  * A Swing implementation of the {@link SolaImage} {@link AssetLoader}.
  */
+@NullMarked
 public class SwingSolaImageAssetLoader extends AssetLoader<SolaImage> {
   @Override
   public Class<SolaImage> getAssetClass() {
