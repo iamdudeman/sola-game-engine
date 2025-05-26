@@ -1,5 +1,7 @@
 package technology.sola.engine.event;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.Map;
  * EventHub handles distribution of {@link Event}s that are emitted to their respective {@link EventListener}s that have
  * been added.
  */
+@NullMarked
 public class EventHub {
   @SuppressWarnings("rawtypes")
   private final Map<Class<? extends Event>, List<EventListener>> eventListenersMap = new HashMap<>();
