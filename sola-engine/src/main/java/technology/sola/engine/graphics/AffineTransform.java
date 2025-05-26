@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
@@ -7,6 +8,7 @@ import technology.sola.math.linear.Vector2D;
 /**
  * AffineTransform represents an affine transformation.
  */
+@NullMarked
 public class AffineTransform {
   private Matrix3D matrix3D = Matrix3D.identity();
   private Matrix3D invertedMatrix3D = Matrix3D.identity();

@@ -1,10 +1,13 @@
 package technology.sola.engine.graphics;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.util.Objects;
 
 /**
  * The Color class represents an argb color that can be used for rendering.
  */
+@NullMarked
 public class Color {
   /**
    * Color constant - rgb(0, 0, 0).

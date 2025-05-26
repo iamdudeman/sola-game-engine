@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.renderer;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -96,6 +98,7 @@ public class Layer {
     return name;
   }
 
+  @NullMarked
   private record OrdererDrawItem(
     DrawItem drawItem,
     int order

@@ -1,8 +1,11 @@
 package technology.sola.engine.graphics;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * Canvas is an array of pixels with a width and height defined.
  */
+@NullMarked
 public class Canvas {
   /**
    * The width of the canvas.

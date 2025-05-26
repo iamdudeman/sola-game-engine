@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.renderer;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.AffineTransform;
@@ -12,6 +13,7 @@ import java.util.List;
  * Renderer defines the API for a sola game engine renderer. {@link SoftwareRenderer} is the default implementation but
  * each {@link technology.sola.engine.core.SolaPlatform} can implement their own as well to take advantage of the GPU.
  */
+@NullMarked
 public interface Renderer {
   /**
    * Sets the {@link BlendFunction} that should be used.

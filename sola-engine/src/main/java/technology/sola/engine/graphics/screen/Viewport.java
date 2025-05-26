@@ -1,9 +1,12 @@
 package technology.sola.engine.graphics.screen;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * Viewport contains various information about the current viewport used. This is primarily used to keep track of the
  * correct {@link AspectRatioSizing} based on the current {@link AspectMode} and screen width and height.
  */
+@NullMarked
 public class Viewport {
   private final int canvasWidth;
   private final int canvasHeight;
@@ -24,6 +27,7 @@ public class Viewport {
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
 
+    aspectRatioSizing = new AspectRatioSizing(0, 0, canvasWidth, canvasHeight);
     resize(canvasWidth, canvasHeight);
   }
 
