@@ -54,7 +54,7 @@ class Vector2DTest {
       assertNotEquals(vector, result);
       assertNotEquals(vector2, result);
 
-      // Ensure reversing the subtract has a different result
+      // Ensure reversing the subtract operation has a different result
       Vector2D reverseResult = vector2.subtract(vector);
       assertNotEquals(result, reverseResult);
     }
