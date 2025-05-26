@@ -1,5 +1,8 @@
 package technology.sola.engine.assets;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -9,9 +12,11 @@ import java.util.function.Consumer;
  *
  * @param <T> the type of the asset
  */
+@NullMarked
 public class AssetHandle<T extends Asset> {
+  private final List<Consumer<T>> onLoadSubscribers;
+  @Nullable
   private T asset;
-  private List<Consumer<T>> onLoadSubscribers;
 
   /**
    * Creates an empty AssetHandle with an empty list of onLoadSubscribers. Listeners will be notified when
@@ -26,7 +31,8 @@ public class AssetHandle<T extends Asset> {
    *
    * @param asset the preloaded asset
    */
-  public AssetHandle(T asset) {
+  public AssetHandle(@Nullable T asset) {
+    this();
     this.asset = asset;
   }
 
@@ -42,6 +48,7 @@ public class AssetHandle<T extends Asset> {
    *
    * @return the loaded asset
    */
+  @Nullable
   public T getAsset() {
     if (isLoading()) {
       throw new RuntimeException("AssetHandle has not had its Asset loaded yet.");
@@ -59,7 +66,7 @@ public class AssetHandle<T extends Asset> {
     if (this.asset == null) {
       this.asset = asset;
       onLoadSubscribers.forEach(consumer -> consumer.accept(asset));
-      onLoadSubscribers = null;
+      onLoadSubscribers.clear();
     }
   }
 
@@ -70,7 +77,7 @@ public class AssetHandle<T extends Asset> {
    * @param consumer the function to execute if the asset is loaded
    */
   public void executeWhenLoaded(Consumer<T> consumer) {
-    if (isLoading()) {
+    if (isLoading() || asset == null) {
       onLoadSubscribers.add(consumer);
     } else {
       consumer.accept(asset);
@@ -84,7 +91,7 @@ public class AssetHandle<T extends Asset> {
    * @param consumer the function to execute if the asset is loaded
    */
   public void executeIfLoaded(Consumer<T> consumer) {
-    if (!isLoading()) {
+    if (!isLoading() && asset != null) {
       consumer.accept(asset);
     }
   }

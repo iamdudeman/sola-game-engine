@@ -1,5 +1,6 @@
 package technology.sola.engine.assets.graphics.font.mapper;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.font.FontGlyph;
 import technology.sola.json.JsonObject;
 import technology.sola.json.mapper.JsonMapper;
@@ -7,6 +8,7 @@ import technology.sola.json.mapper.JsonMapper;
 /**
  * FontGlyphJsonMapper is a {@link JsonMapper} implementation for {@link FontGlyph}s.
  */
+@NullMarked
 public class FontGlyphJsonMapper implements JsonMapper<FontGlyph> {
   @Override
   public Class<FontGlyph> getObjectClass() {

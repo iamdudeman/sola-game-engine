@@ -1,5 +1,6 @@
 package technology.sola.engine.assets.json;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.Asset;
 import technology.sola.json.JsonArray;
 import technology.sola.json.JsonElement;
@@ -10,6 +11,7 @@ import technology.sola.json.JsonObject;
  *
  * @param jsonElement the loaded and parsed JSON file as a {@link JsonElement}
  */
+@NullMarked
 public record JsonElementAsset(JsonElement jsonElement) implements Asset {
   /**
    * @return the {@link JsonElement#asObject()}

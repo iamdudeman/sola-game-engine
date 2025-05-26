@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.browser.assets.graphics;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
@@ -9,6 +10,7 @@ import technology.sola.engine.platform.browser.javascript.JsImageUtils;
 /**
  * A browser implementation of the {@link SolaImage} {@link AssetLoader}.
  */
+@NullMarked
 public class BrowserSolaImageAssetLoader extends AssetLoader<SolaImage> {
   @Override
   public Class<SolaImage> getAssetClass() {
@@ -24,13 +26,9 @@ public class BrowserSolaImageAssetLoader extends AssetLoader<SolaImage> {
     return solaImageAssetHandle;
   }
 
-  private static class ImageLoadCallbackImpl implements JsImageUtils.ImageLoadCallback {
-    private final AssetHandle<SolaImage> solaImageAssetHandle;
-
-    public ImageLoadCallbackImpl(AssetHandle<SolaImage> solaImageAssetHandle) {
-      this.solaImageAssetHandle = solaImageAssetHandle;
-    }
-
+  private record ImageLoadCallbackImpl(
+    AssetHandle<SolaImage> solaImageAssetHandle
+  ) implements JsImageUtils.ImageLoadCallback {
     @Override
     public void call(int width, int height, int[] uInt8Pixels) {
       int[] pixels = new int[width * height];

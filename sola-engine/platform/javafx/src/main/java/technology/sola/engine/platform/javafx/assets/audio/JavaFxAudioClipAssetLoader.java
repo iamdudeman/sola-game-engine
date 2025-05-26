@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.javafx.assets.audio;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.audio.AudioClip;
@@ -15,6 +16,7 @@ import java.io.IOException;
 /**
  * A JavaFX implementation of the {@link AudioClip} {@link AssetLoader}.
  */
+@NullMarked
 public class JavaFxAudioClipAssetLoader extends AssetLoader<AudioClip> {
   @Override
   public Class<AudioClip> getAssetClass() {

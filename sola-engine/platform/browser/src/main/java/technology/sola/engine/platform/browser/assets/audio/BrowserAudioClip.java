@@ -1,5 +1,7 @@
 package technology.sola.engine.platform.browser.assets.audio;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.teavm.jso.webaudio.AudioBuffer;
 import org.teavm.jso.webaudio.AudioBufferSourceNode;
 import org.teavm.jso.webaudio.AudioContext;
@@ -15,11 +17,14 @@ import java.util.function.Consumer;
  *
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a>
  */
+@NullMarked
 public class BrowserAudioClip implements AudioClip {
   private final AudioContext audioContext;
   private final AudioBuffer audioBuffer;
   private final List<Consumer<AudioClip>> finishListenerCallbacks = new ArrayList<>();
+  @Nullable
   private AudioBufferSourceNode audioBufferSourceNode;
+  @Nullable
   private GainNode gainNode;
   private boolean isPlaying = false;
   private double startedAt = 0;
@@ -88,9 +93,13 @@ public class BrowserAudioClip implements AudioClip {
   @Override
   public void loop(int times) {
     play();
-    audioBufferSourceNode.setLoop(true);
-    if (times > 0) {
-      audioBufferSourceNode.stop(audioContext.getCurrentTime() + audioBuffer.getDuration() * times);
+
+    if (audioBufferSourceNode != null) {
+      audioBufferSourceNode.setLoop(true);
+
+      if (times > 0) {
+        audioBufferSourceNode.stop(audioContext.getCurrentTime() + audioBuffer.getDuration() * times);
+      }
     }
   }
 

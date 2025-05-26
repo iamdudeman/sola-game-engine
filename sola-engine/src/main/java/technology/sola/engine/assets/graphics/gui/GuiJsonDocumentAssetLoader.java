@@ -1,5 +1,6 @@
 package technology.sola.engine.assets.graphics.gui;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.json.JsonElementAsset;
@@ -8,6 +9,7 @@ import technology.sola.engine.graphics.gui.json.GuiJsonDocumentBuilder;
 /**
  * GuiJsonDocumentAssetLoader is an {@link AssetLoader} for {@link GuiJsonDocument}s.
  */
+@NullMarked
 public class GuiJsonDocumentAssetLoader extends AssetLoader<GuiJsonDocument> {
   private final AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader;
   private final GuiJsonDocumentBuilder guiJsonDocumentBuilder;

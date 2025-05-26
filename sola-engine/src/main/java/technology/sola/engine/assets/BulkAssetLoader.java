@@ -1,5 +1,8 @@
 package technology.sola.engine.assets;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -8,6 +11,7 @@ import java.util.function.Consumer;
  * BulkAssetLoader handles loading a collection of various {@link Asset}s proving a handle for the collection with
  * callbacks for when all the assets have finished loading.
  */
+@NullMarked
 public class BulkAssetLoader {
   private final AssetLoaderProvider assetLoaderProvider;
   private final List<BulkAssetDescription> bulkAssetDescriptionList = new ArrayList<>();
@@ -76,7 +80,7 @@ public class BulkAssetLoader {
    */
   public static class BulkAssetHandle {
     private final List<Consumer<Asset[]>> onCompleteCallbacks = new ArrayList<>();
-    private Asset[] assets;
+    private Asset @Nullable[] assets;
 
     /**
      * Method called when bulk asset loading has completed. The array of {@link Asset}s that were loaded are passed

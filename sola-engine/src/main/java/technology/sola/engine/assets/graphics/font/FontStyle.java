@@ -1,9 +1,12 @@
 package technology.sola.engine.assets.graphics.font;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * FontStyle is an enum of possible {@link Font} style options. These are based on the
  * <a href="https://docs.oracle.com/javase/8/docs/api/java/awt/Font.html">java.awt.Font</a> style options.
  */
+@NullMarked
 public enum FontStyle {
   /**
    * Normal/plain styling.

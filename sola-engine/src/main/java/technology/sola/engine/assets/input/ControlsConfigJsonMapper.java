@@ -1,5 +1,6 @@
 package technology.sola.engine.assets.input;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.defaults.controls.*;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
@@ -15,6 +16,7 @@ import java.util.Map;
 /**
  * ControlsConfigJsonMapper is a {@link JsonMapper} implementation for {@link ControlsConfig}.
  */
+@NullMarked
 public class ControlsConfigJsonMapper implements JsonMapper<ControlsConfig> {
   @Override
   public Class<ControlsConfig> getObjectClass() {

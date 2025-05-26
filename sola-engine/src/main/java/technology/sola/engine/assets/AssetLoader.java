@@ -1,5 +1,6 @@
 package technology.sola.engine.assets;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.exception.MissingAssetException;
 
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.Map;
  *
  * @param <T> the {@link Asset} type
  */
+@NullMarked
 public abstract class AssetLoader<T extends Asset> {
   private final Map<String, AssetHandle<T>> cachedAssets = new HashMap<>();
   private final Map<String, String> assetIdToPathMap = new HashMap<>();

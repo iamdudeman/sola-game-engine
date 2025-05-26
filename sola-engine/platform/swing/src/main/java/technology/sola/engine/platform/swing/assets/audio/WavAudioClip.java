@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.swing.assets.audio;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.audio.AudioClip;
 
 import javax.sound.sampled.AudioInputStream;
@@ -13,6 +14,7 @@ import java.util.function.Consumer;
 /**
  * The WavAudioClip class is a {@link AudioClip} implementation for .wav files.
  */
+@NullMarked
 public class WavAudioClip implements AudioClip {
   private final Clip clip;
 
