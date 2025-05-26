@@ -1,5 +1,7 @@
 package technology.sola.engine.physics.system.collision;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
@@ -16,7 +18,9 @@ import java.util.Collection;
  * QuadTreeCollisionDetectionBroadPhase is a {@link CollisionDetectionBroadPhase} implementation using a
  * {@link QuadTreeNode} internally.
  */
+@NullMarked
 public class QuadTreeCollisionDetectionBroadPhase implements CollisionDetectionBroadPhase {
+  @Nullable
   private final Rectangle screenBounds;
   private QuadTreeNode quadTreeNode = new QuadTreeNode(new Rectangle(new Vector2D(0, 0), new Vector2D(1, 1)));
   private final int maxDepth;
@@ -35,7 +39,7 @@ public class QuadTreeCollisionDetectionBroadPhase implements CollisionDetectionB
    *
    * @param screenBounds the bounds of the quad tree
    */
-  public QuadTreeCollisionDetectionBroadPhase(Rectangle screenBounds) {
+  public QuadTreeCollisionDetectionBroadPhase(@Nullable Rectangle screenBounds) {
     this(screenBounds, 5, 8);
   }
 
@@ -46,7 +50,7 @@ public class QuadTreeCollisionDetectionBroadPhase implements CollisionDetectionB
    * @param maxDepth the maximum depth of the quad tree
    * @param maxEntitiesPerNode the max number of entities per node
    */
-  public QuadTreeCollisionDetectionBroadPhase(Rectangle screenBounds, int maxDepth, int maxEntitiesPerNode) {
+  public QuadTreeCollisionDetectionBroadPhase(@Nullable Rectangle screenBounds, int maxDepth, int maxEntitiesPerNode) {
     this.screenBounds = screenBounds;
     this.maxDepth = maxDepth;
     this.maxEntitiesPerNode = maxEntitiesPerNode;

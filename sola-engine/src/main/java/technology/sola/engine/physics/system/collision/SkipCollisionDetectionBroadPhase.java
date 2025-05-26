@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.system.collision;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -7,13 +8,15 @@ import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.math.linear.Matrix3D;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * SkipCollisionDetectionBroadPhase is a {@link CollisionDetectionBroadPhase} implementation that skips the broad phase
  * check if a game does not require it.
  */
+@NullMarked
 public class SkipCollisionDetectionBroadPhase implements CollisionDetectionBroadPhase {
-  private Collection<View2Entry<ColliderComponent, TransformComponent>> views;
+  private Collection<View2Entry<ColliderComponent, TransformComponent>> views = List.of();
 
   @Override
   public void populate(Collection<View2Entry<ColliderComponent, TransformComponent>> views) {

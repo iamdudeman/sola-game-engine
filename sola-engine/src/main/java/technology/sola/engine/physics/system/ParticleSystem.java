@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.system;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
@@ -10,6 +11,7 @@ import technology.sola.engine.physics.component.ParticleEmitterComponent;
  * {@link TransformComponent} and {@link ParticleEmitterComponent}. It will update each particle that is alive, destroy
  * any particle that is no longer alive, and emit new particles as it is able to.
  */
+@NullMarked
 public class ParticleSystem extends EcsSystem {
   @Override
   public void update(World world, float delta) {

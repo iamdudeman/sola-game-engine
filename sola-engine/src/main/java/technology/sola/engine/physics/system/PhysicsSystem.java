@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.system;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
@@ -11,6 +12,7 @@ import technology.sola.math.linear.Vector2D;
  * {@link TransformComponent} and {@link DynamicBodyComponent}. It will update the velocity based on its applied force
  * unless it is kinematic. Then it will update the translation based on the velocity scaled to deltaTime.
  */
+@NullMarked
 public class PhysicsSystem extends EcsSystem {
   /**
    * The order of this system.

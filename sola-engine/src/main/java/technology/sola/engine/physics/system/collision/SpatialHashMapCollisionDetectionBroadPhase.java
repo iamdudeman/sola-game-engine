@@ -1,5 +1,7 @@
 package technology.sola.engine.physics.system.collision;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
@@ -16,8 +18,10 @@ import java.util.Collection;
  * SpatialHashMapCollisionDetectionBroadPhase is a {@link CollisionDetectionBroadPhase} implementation utilizing a
  * {@link SpatialHashMap} internally.
  */
+@NullMarked
 public class SpatialHashMapCollisionDetectionBroadPhase implements CollisionDetectionBroadPhase {
   private SpatialHashMap spatialHashMap = new SpatialHashMap(new ArrayList<>(), 1);
+  @Nullable
   private final Integer spatialHashMapCellSize;
 
   /**
@@ -32,7 +36,7 @@ public class SpatialHashMapCollisionDetectionBroadPhase implements CollisionDete
    *
    * @param spatialHashMapCellSize the cell size for the spatial hash map
    */
-  public SpatialHashMapCollisionDetectionBroadPhase(Integer spatialHashMapCellSize) {
+  public SpatialHashMapCollisionDetectionBroadPhase(@Nullable Integer spatialHashMapCellSize) {
     this.spatialHashMapCellSize = spatialHashMapCellSize;
   }
 

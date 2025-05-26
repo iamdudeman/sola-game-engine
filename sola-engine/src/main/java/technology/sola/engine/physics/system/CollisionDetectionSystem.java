@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.system;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
@@ -22,6 +23,7 @@ import java.util.Set;
  * collision is detected either a {@link SensorEvent} or a {@link CollisionEvent} will be emitted depending on if either
  * collider {@link ColliderComponent#isSensor()} or not.
  */
+@NullMarked
 public class CollisionDetectionSystem extends EcsSystem {
   /**
    * Collision detection order is one after the {@link PhysicsSystem#ORDER}.
