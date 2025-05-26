@@ -3,9 +3,9 @@
  */
 module technology.sola.engine {
   requires java.logging;
+  requires org.jspecify;
   requires transitive technology.sola.json;
   requires transitive technology.sola.ecs;
-  requires org.jspecify;
 
   exports technology.sola.engine.assets;
   exports technology.sola.engine.assets.audio;
