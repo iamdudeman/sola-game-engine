@@ -1,10 +1,13 @@
 package technology.sola.engine.input;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.util.Arrays;
 
 /**
  * KeyboardInput contains information about user interaction with the keyboard.
  */
+@NullMarked
 public class KeyboardInput {
   static final int KEY_COUNT = 256;
 

@@ -1,8 +1,11 @@
 package technology.sola.engine.input;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * Key enum contains information about keyboard keys.
  */
+@NullMarked
 public enum Key {
   // spacer for missing keys
 

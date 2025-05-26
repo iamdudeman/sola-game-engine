@@ -1,5 +1,7 @@
 package technology.sola.engine.input;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * MouseEvent contains data for a mouse related event.
  *
@@ -7,6 +9,7 @@ package technology.sola.engine.input;
  * @param x      the x coordinate of the event
  * @param y      the y coordinate of the event
  */
+@NullMarked
 public record MouseEvent(MouseButton button, int x, int y) {
   /**
    * Creates a MouseEvent via the {@link MouseButton#getCode()}.

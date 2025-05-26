@@ -1,10 +1,13 @@
 package technology.sola.engine.input;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.util.Arrays;
 
 /**
  * MouseButton enum contains information about mouse buttons.
  */
+@NullMarked
 public enum MouseButton {
   /**
    * Represents no button.
