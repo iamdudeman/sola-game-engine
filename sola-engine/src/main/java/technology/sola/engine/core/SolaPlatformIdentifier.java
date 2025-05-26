@@ -1,5 +1,7 @@
 package technology.sola.engine.core;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * SolaPlatformIdentifier is a unique identifier for a {@link SolaPlatform} implementation. This can be used in
  * conditional checks for platform specific logic (or {@link SolaPlatformType} specific logic).
@@ -7,6 +9,7 @@ package technology.sola.engine.core;
  * @param name the unique name for the platform
  * @param type the type of platform
  */
+@NullMarked
 public record SolaPlatformIdentifier(String name, SolaPlatformType type) {
   /**
    * Identifier for the Swing {@link SolaPlatform} implementation.

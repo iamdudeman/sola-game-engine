@@ -1,5 +1,6 @@
 package technology.sola.engine.server;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.core.GameLoop;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
@@ -7,6 +8,7 @@ import technology.sola.engine.event.EventHub;
 
 import java.util.function.Consumer;
 
+@NullMarked
 class ServerGameLoop extends GameLoop {
   private static final float INVERSE_MICROSECONDS = 1 / 1e9f;
 

@@ -1,5 +1,6 @@
 package technology.sola.engine.core.event;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.event.Event;
 
 /**
@@ -7,5 +8,6 @@ import technology.sola.engine.event.Event;
  *
  * @param state the new {@link GameLoopState} of the GameLoop
  */
+@NullMarked
 public record GameLoopEvent(GameLoopState state) implements Event {
 }

@@ -1,5 +1,6 @@
 package technology.sola.engine.core;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.event.EventHub;
 import technology.sola.logging.SolaLogger;
@@ -11,6 +12,7 @@ import java.util.function.Consumer;
 /**
  * GameLoop handles running a sequence of update and render commands at a target rate.
  */
+@NullMarked
 public abstract class GameLoop implements Runnable {
   private static final SolaLogger LOGGER = SolaLogger.of(GameLoop.class);
   /**
