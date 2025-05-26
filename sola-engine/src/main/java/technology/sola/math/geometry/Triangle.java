@@ -1,5 +1,6 @@
 package technology.sola.math.geometry;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.math.linear.Vector2D;
 
 /**
@@ -9,6 +10,7 @@ import technology.sola.math.linear.Vector2D;
  * @param p2 second point of triangle
  * @param p3 third point of triangle
  */
+@NullMarked
 public record Triangle(Vector2D p1, Vector2D p2, Vector2D p3) implements Shape {
   @Override
   public boolean contains(Vector2D point) {

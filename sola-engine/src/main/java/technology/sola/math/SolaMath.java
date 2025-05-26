@@ -1,10 +1,12 @@
 package technology.sola.math;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.math.linear.Vector2D;
 
 /**
  * SolaMath is a collection of static math functions.
  */
+@NullMarked
 public final class SolaMath {
   /**
    * Linearly interpolates a value between start and end.

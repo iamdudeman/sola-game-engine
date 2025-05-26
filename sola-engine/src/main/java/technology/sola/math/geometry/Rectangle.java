@@ -1,5 +1,6 @@
 package technology.sola.math.geometry;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.math.linear.Vector2D;
 
 /**
@@ -8,6 +9,7 @@ import technology.sola.math.linear.Vector2D;
  * @param min the top, left point of the rectangle
  * @param max the bottom, right point of the rectangle
  */
+@NullMarked
 public record Rectangle(Vector2D min, Vector2D max) implements Shape {
   /**
    * Creates a rectangle by min and max points.

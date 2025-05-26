@@ -6,11 +6,7 @@ import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.math.SolaMath;
 import technology.sola.math.geometry.Rectangle;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * The SpatialHashMap class is a spatial hashmap implementation that maps {@link technology.sola.ecs.Entity} into a
@@ -28,7 +24,7 @@ public class SpatialHashMap {
    *
    * @param viewEntries the list of {@link technology.sola.ecs.view.View2Entry} of {@link ColliderComponent} and {@link TransformComponent}
    */
-  public SpatialHashMap(List<View2Entry<ColliderComponent, TransformComponent>> viewEntries) {
+  public SpatialHashMap(Collection<View2Entry<ColliderComponent, TransformComponent>> viewEntries) {
     this.cellSize = calculateAppropriateCellSizeForViewEntries(viewEntries);
     this.inverseCellSize = 1f / this.cellSize;
 
@@ -42,7 +38,7 @@ public class SpatialHashMap {
    * @param viewEntries the list of {@link technology.sola.ecs.view.View2Entry} of {@link ColliderComponent} and {@link TransformComponent}
    * @param cellSize    the cell size of the SpatialHashMap
    */
-  public SpatialHashMap(List<View2Entry<ColliderComponent, TransformComponent>> viewEntries, int cellSize) {
+  public SpatialHashMap(Collection<View2Entry<ColliderComponent, TransformComponent>> viewEntries, int cellSize) {
     int minimumCellSize = calculateMinCellSizeForViewEntries(viewEntries);
 
     if (cellSize < minimumCellSize)
@@ -129,7 +125,7 @@ public class SpatialHashMap {
     return buckets.computeIfAbsent(bucketId, key -> new ArrayList<>());
   }
 
-  private int calculateMinCellSizeForViewEntries(List<View2Entry<ColliderComponent, TransformComponent>> viewEntries) {
+  private int calculateMinCellSizeForViewEntries(Collection<View2Entry<ColliderComponent, TransformComponent>> viewEntries) {
     int minSize = 0;
 
     for (var viewEntry : viewEntries) {
@@ -150,7 +146,7 @@ public class SpatialHashMap {
     return minSize;
   }
 
-  private int calculateAppropriateCellSizeForViewEntries(List<View2Entry<ColliderComponent, TransformComponent>> viewEntries) {
+  private int calculateAppropriateCellSizeForViewEntries(Collection<View2Entry<ColliderComponent, TransformComponent>> viewEntries) {
     int maxWidthOrHeight = SolaMath.fastRound(calculateMinCellSizeForViewEntries(viewEntries) * 1.5f);
 
     if (maxWidthOrHeight == 0) {

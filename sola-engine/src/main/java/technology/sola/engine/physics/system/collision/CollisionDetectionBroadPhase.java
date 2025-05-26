@@ -6,7 +6,7 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.math.linear.Matrix3D;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * CollisionDetectionBroadPhase defines the contract for a broad phase collision detection algorithm to be used by
@@ -18,7 +18,7 @@ public interface CollisionDetectionBroadPhase {
    *
    * @param views the list of collidable entities
    */
-  void populate(List<View2Entry<ColliderComponent, TransformComponent>> views);
+  void populate(Collection<View2Entry<ColliderComponent, TransformComponent>> views);
 
   /**
    * Searches for collidable entities that are near the search entity.
@@ -26,7 +26,7 @@ public interface CollisionDetectionBroadPhase {
    * @param searchEntry the entity to search for possible collisions for
    * @return the list of nearby collidable entities
    */
-  List<View2Entry<ColliderComponent, TransformComponent>> query(View2Entry<ColliderComponent, TransformComponent> searchEntry);
+  Collection<View2Entry<ColliderComponent, TransformComponent>> query(View2Entry<ColliderComponent, TransformComponent> searchEntry);
 
   /**
    * Renders debug information about this broad phase algorithm.

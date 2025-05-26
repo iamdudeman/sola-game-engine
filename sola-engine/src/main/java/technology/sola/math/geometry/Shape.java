@@ -1,10 +1,12 @@
 package technology.sola.math.geometry;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.math.linear.Vector2D;
 
 /**
  * Shape is a common interface for geometric shapes.
  */
+@NullMarked
 public interface Shape {
   /**
    * Checks if this Shape contains a point.

@@ -26,7 +26,10 @@ repositories {
 }
 
 dependencies {
-  // Test
+  // nullability annotations
+  api("org.jspecify:jspecify:1.0.0")
+
+  // unit testing
   testImplementation("org.mockito:mockito-inline:5.2.0")
   testImplementation("org.mockito:mockito-junit-jupiter:5.11.0")
   testImplementation(platform("org.junit:junit-bom:5.10.1"))
