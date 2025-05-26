@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui;
 
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.graphics.gui.event.GuiElementEvents;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
@@ -112,6 +113,7 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    *
    * @return the dimensions of the content of this element or null if only children dimensions matter
    */
+  @Nullable
   public abstract GuiElementDimensions calculateContentDimensions();
 
   /**

@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui.util;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.gui.GuiElementDimensions;
 
 import java.util.List;
@@ -11,5 +12,6 @@ import java.util.List;
  * @param lines      the string of text in each line
  * @param dimensions the dimensions of the text for rendering
  */
+@NullMarked
 public record TextRenderDetails(int lineHeight, List<String> lines, GuiElementDimensions dimensions) {
 }
