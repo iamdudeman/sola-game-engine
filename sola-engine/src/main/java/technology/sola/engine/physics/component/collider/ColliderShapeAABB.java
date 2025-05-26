@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.component.collider;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -13,6 +14,7 @@ import technology.sola.math.linear.Vector2D;
  * @param width  the width of the axis-aligned bounding box
  * @param height the height of the axis-aligned bounding box
  */
+@NullMarked
 public record ColliderShapeAABB(
   float width,
   float height

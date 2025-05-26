@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.component.collider;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -14,6 +15,7 @@ import technology.sola.math.linear.Vector2D;
  *
  * @param shape the triangle shape of this collider
  */
+@NullMarked
 public record ColliderShapeTriangle(
   Triangle shape
 ) implements ColliderShape<Triangle> {

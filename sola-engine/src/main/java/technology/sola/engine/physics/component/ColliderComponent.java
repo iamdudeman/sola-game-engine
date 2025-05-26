@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.component;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -15,6 +16,7 @@ import technology.sola.math.geometry.Shape;
  *   <li>{@link ColliderShapeCircle}</li>
  * </ul>
  */
+@NullMarked
 public class ColliderComponent implements Component {
   private final ColliderShape<?> colliderShape;
   private final float offsetX;
