@@ -1,6 +1,7 @@
 package technology.sola.logging;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.logging.Logger;
 
@@ -21,7 +22,7 @@ public class JavaSolaLogger extends SolaLogger {
   }
 
   @Override
-  protected void log(SolaLogLevel level, String message, Throwable throwable, Object... params) {
+  protected void log(SolaLogLevel level, String message, @Nullable Throwable throwable, Object... params) {
     logger.log(level.level, throwable, () -> String.format(message, params));
   }
 }
