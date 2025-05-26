@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.browser.core;
 
+import org.jspecify.annotations.NullMarked;
 import org.teavm.jso.ajax.XMLHttpRequest;
 import technology.sola.engine.networking.rest.HttpResponse;
 import technology.sola.engine.networking.rest.RestClient;
@@ -11,6 +12,7 @@ import java.util.function.Consumer;
 /**
  * The {@link technology.sola.engine.platform.browser.BrowserSolaPlatform} implementation of {@link RestClient}.
  */
+@NullMarked
 public class BrowserRestClient implements RestClient {
   @Override
   public void request(String method, String path, JsonElement body, Consumer<HttpResponse> httpResponseSupplier) {

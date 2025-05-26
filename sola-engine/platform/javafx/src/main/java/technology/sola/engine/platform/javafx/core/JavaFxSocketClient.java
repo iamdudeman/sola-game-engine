@@ -1,5 +1,7 @@
 package technology.sola.engine.platform.javafx.core;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.networking.NetworkQueue;
 import technology.sola.engine.networking.socket.SocketClient;
 import technology.sola.engine.networking.socket.SocketMessage;
@@ -19,13 +21,19 @@ import java.net.SocketException;
 /**
  * A JavaFX implementation of {@link SocketClient}.
  */
+@NullMarked
 public class JavaFxSocketClient implements SocketClient {
   private static final SolaLogger LOGGER = SolaLogger.of(JavaFxSocketClient.class);
   private boolean isConnected = false;
+  @Nullable
   private BufferedReader bufferedReader;
+  @Nullable
   private PrintWriter printWriter;
+  @Nullable
   private BufferedInputStream bufferedInputStream;
+  @Nullable
   private BufferedOutputStream bufferedOutputStream;
+  @Nullable
   private Socket socket;
   private final NetworkQueue<SocketMessage> networkQueue = new NetworkQueue<>();
   private final SocketMessageDecoder socketMessageDecoder = new SocketMessageDecoder();

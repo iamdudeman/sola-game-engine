@@ -1,5 +1,7 @@
 package technology.sola.engine.networking.socket;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.Random;
 /**
  * SocketMessageEncoder is responsible for encoding {@link SocketMessage}s for transmission over sockets.
  */
+@NullMarked
 public class SocketMessageEncoder {
   private final Random random = new Random();
 

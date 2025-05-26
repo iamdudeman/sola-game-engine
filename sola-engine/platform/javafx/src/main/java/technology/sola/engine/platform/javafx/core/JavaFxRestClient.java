@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.javafx.core;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.networking.rest.HttpResponse;
 import technology.sola.engine.networking.rest.RestClient;
 import technology.sola.json.JsonElement;
@@ -18,6 +19,7 @@ import java.util.function.Consumer;
 /**
  * The {@link technology.sola.engine.platform.javafx.JavaFxSolaPlatform} implementation of {@link RestClient}.
  */
+@NullMarked
 public class JavaFxRestClient implements RestClient {
   private static final SolaLogger LOGGER = SolaLogger.of(JavaFxRestClient.class);
 

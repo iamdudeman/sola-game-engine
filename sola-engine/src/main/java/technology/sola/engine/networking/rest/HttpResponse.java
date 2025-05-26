@@ -1,5 +1,6 @@
 package technology.sola.engine.networking.rest;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.json.JsonElement;
 
 /**
@@ -8,6 +9,7 @@ import technology.sola.json.JsonElement;
  * @param status the status code of the response
  * @param body   the json response body
  */
+@NullMarked
 public record HttpResponse(
   int status,
   JsonElement body
