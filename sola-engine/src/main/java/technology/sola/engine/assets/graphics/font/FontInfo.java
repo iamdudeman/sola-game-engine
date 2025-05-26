@@ -1,5 +1,7 @@
 package technology.sola.engine.assets.graphics.font;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.util.List;
 
 /**
@@ -12,6 +14,7 @@ import java.util.List;
  * @param leading       the logical amount of space to be reserved between the descent of one line of text and the ascent of the next line.
  * @param glyphs        the {@link List} of {@link FontGlyph}s
  */
+@NullMarked
 public record FontInfo(
   String fontGlyphFile, String fontFamily,
   FontStyle fontStyle, int fontSize, int leading,

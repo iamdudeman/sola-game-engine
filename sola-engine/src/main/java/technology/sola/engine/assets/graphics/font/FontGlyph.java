@@ -1,5 +1,7 @@
 package technology.sola.engine.assets.graphics.font;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * FontGlyph holds information on a glyph's placement in the rasterized {@link Font}
  *
@@ -9,5 +11,6 @@ package technology.sola.engine.assets.graphics.font;
  * @param width  the width of the glyph
  * @param height the height of the glyph
  */
+@NullMarked
 public record FontGlyph(char glyph, int x, int y, int width, int height) {
 }

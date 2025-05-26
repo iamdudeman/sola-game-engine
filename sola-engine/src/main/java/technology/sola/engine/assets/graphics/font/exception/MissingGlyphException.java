@@ -1,5 +1,6 @@
 package technology.sola.engine.assets.graphics.font.exception;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.font.FontInfo;
 
 import java.io.Serial;
@@ -8,6 +9,7 @@ import java.io.Serial;
  * Exception thrown when attempting to render a {@link technology.sola.engine.assets.graphics.font.FontGlyph} that is
  * not present in the rasterized {@link technology.sola.engine.assets.graphics.font.Font}.
  */
+@NullMarked
 public class MissingGlyphException extends RuntimeException {
   @Serial
   private static final long serialVersionUID = 2280054643044235363L;

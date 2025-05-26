@@ -1,5 +1,7 @@
 package technology.sola.engine.assets.graphics.font;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.mapper.FontInfoJsonMapper;
 import technology.sola.engine.graphics.Color;
@@ -9,11 +11,13 @@ import technology.sola.json.SolaJson;
  * The DefaultFont class contains a utility method for creating the default font instance for sola-game-engine. This
  * default font is a 16 point Monospaced font.
  */
+@NullMarked
 public class DefaultFont {
   /**
    * {@link technology.sola.engine.assets.Asset} id for the default {@link Font} that is always available for use.
    */
   public static final String ASSET_ID = "monospaced_NORMAL_16";
+  @Nullable
   private static Font font;
 
   /**

@@ -26,13 +26,9 @@ public class BrowserSolaImageAssetLoader extends AssetLoader<SolaImage> {
     return solaImageAssetHandle;
   }
 
-  private static class ImageLoadCallbackImpl implements JsImageUtils.ImageLoadCallback {
-    private final AssetHandle<SolaImage> solaImageAssetHandle;
-
-    public ImageLoadCallbackImpl(AssetHandle<SolaImage> solaImageAssetHandle) {
-      this.solaImageAssetHandle = solaImageAssetHandle;
-    }
-
+  private record ImageLoadCallbackImpl(
+    AssetHandle<SolaImage> solaImageAssetHandle
+  ) implements JsImageUtils.ImageLoadCallback {
     @Override
     public void call(int width, int height, int[] uInt8Pixels) {
       int[] pixels = new int[width * height];

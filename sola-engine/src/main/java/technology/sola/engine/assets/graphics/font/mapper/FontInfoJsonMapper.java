@@ -1,5 +1,6 @@
 package technology.sola.engine.assets.graphics.font.mapper;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.font.FontGlyph;
 import technology.sola.engine.assets.graphics.font.FontInfo;
 import technology.sola.engine.assets.graphics.font.FontStyle;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * FontInfoJsonMapper is a {@link JsonMapper} implementation for {@link FontInfo}.
  */
+@NullMarked
 public class FontInfoJsonMapper implements JsonMapper<FontInfo> {
   private final FontGlyphJsonMapper fontGlyphJsonMapper = new FontGlyphJsonMapper();
 

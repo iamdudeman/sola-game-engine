@@ -1,5 +1,6 @@
 package technology.sola.engine.assets.graphics.font;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.Asset;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.exception.MissingGlyphException;
@@ -12,6 +13,7 @@ import java.util.Map;
  * Font is an {@link Asset} containing the information required to render strings of text for a particular font that
  * has been rasterized into an image.
  */
+@NullMarked
 public class Font implements Asset {
   private static final SolaImage INVISIBLE_GLYPH = new SolaImage(0, 0);
   private final FontInfo fontInfo;
