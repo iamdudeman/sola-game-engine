@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.utils;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
@@ -11,6 +12,7 @@ import java.util.*;
 /**
  * QuadTreeNode is a quad tree implementation for collidable {@link technology.sola.ecs.Entity}.
  */
+@NullMarked
 public class QuadTreeNode {
   private final int maxDepth;
   private final int maxEntitiesPerNode;

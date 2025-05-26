@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.utils;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Entity;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
@@ -13,6 +14,7 @@ import technology.sola.engine.physics.component.collider.ColliderType;
 /**
  * ColliderUtils is a collection of utility methods for configuring {@link ColliderComponent}.
  */
+@NullMarked
 public class ColliderUtils {
   /**
    * Auto sizes an {@link Entity}'s {@link ColliderComponent} using its {@link SpriteComponent}. This replaces the
@@ -27,6 +29,10 @@ public class ColliderUtils {
     var transformComponent = entity.getComponent(TransformComponent.class);
     var colliderComponent = entity.getComponent(ColliderComponent.class);
     var spriteComponent = entity.getComponent(SpriteComponent.class);
+
+    if (transformComponent == null) {
+      throw new IllegalArgumentException("entity must have a TransformComponent");
+    }
 
     if (colliderComponent == null) {
       throw new IllegalArgumentException("entity must have a ColliderComponent");

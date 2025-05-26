@@ -1,5 +1,7 @@
 package technology.sola.engine.physics.utils;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.physics.MinimumTranslationVector;
 import technology.sola.math.geometry.Shape;
 import technology.sola.math.linear.Vector2D;
@@ -7,6 +9,7 @@ import technology.sola.math.linear.Vector2D;
 /**
  * SeparatingAxisTheorem contains methods for checking whether two convex polygons are colliding or not.
  */
+@NullMarked
 public class SeparatingAxisTheorem {
   /**
    * Checks for collisions between to shapes. If a collision is detected the {@link MinimumTranslationVector} will be
@@ -16,6 +19,7 @@ public class SeparatingAxisTheorem {
    * @param shapeB the second array of points of a shape to check collisions with
    * @return the {@code MinimumTranslationVector} if a collision was found or else null
    */
+  @Nullable
   public static MinimumTranslationVector checkCollision(Vector2D[] shapeA, Vector2D[] shapeB) {
     float smallestOverlap = Float.MAX_VALUE;
     Vector2D smallestAxis = null;
@@ -59,6 +63,7 @@ public class SeparatingAxisTheorem {
    * @param radius       the circle radius to check collisions with
    * @return the {@code MinimumTranslationVector} if a collision was found or else null
    */
+  @Nullable
   public static MinimumTranslationVector checkCollision(Vector2D[] shape, Vector2D circleCenter, float radius) {
     float smallestOverlap = Float.MAX_VALUE;
     Vector2D smallestAxis = null;

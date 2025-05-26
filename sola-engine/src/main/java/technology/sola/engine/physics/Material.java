@@ -1,10 +1,13 @@
 package technology.sola.engine.physics;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.util.Objects;
 
 /**
  * Material represents a physical material for physics simulations.
  */
+@NullMarked
 public class Material {
   /**
    * Material with mass set to 1, restitution set to 0.01 and friction set to 0.

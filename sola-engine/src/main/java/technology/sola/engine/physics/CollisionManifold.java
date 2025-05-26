@@ -1,5 +1,6 @@
 package technology.sola.engine.physics;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Entity;
 import technology.sola.math.linear.Vector2D;
 
@@ -15,6 +16,7 @@ import java.util.function.Function;
  * @param normal      the collision normal
  * @param penetration the penetration of the collision
  */
+@NullMarked
 public record CollisionManifold(
   Entity entityA, Entity entityB, Vector2D normal, float penetration
 ) {
