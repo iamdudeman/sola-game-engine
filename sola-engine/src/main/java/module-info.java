@@ -3,7 +3,7 @@
  */
 module technology.sola.engine {
   requires java.logging;
-  requires org.jspecify;
+  requires transitive org.jspecify;
   requires transitive technology.sola.json;
   requires transitive technology.sola.ecs;
 
