@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.browser.core;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.logging.SolaLogger;
 import technology.sola.logging.SolaLoggerFactory;
 import technology.sola.logging.JavaSolaLogger;
@@ -10,6 +11,7 @@ import java.util.logging.Logger;
  * BrowserSolaLoggerFactory is a {@link SolaLoggerFactory} implementation for
  * the {@link technology.sola.engine.platform.browser.BrowserSolaPlatform}. It will only write to the browser console.
  */
+@NullMarked
 public class BrowserSolaLoggerFactory implements SolaLoggerFactory {
   @Override
   public SolaLogger getLogger(Class<?> clazz, String logFile) {

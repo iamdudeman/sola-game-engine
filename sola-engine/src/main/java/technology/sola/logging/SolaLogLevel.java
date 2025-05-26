@@ -1,10 +1,13 @@
 package technology.sola.logging;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.util.logging.Level;
 
 /**
  * SolaLogLevel defines the available sola engine logging levels.
  */
+@NullMarked
 public enum SolaLogLevel {
   /**
    * OFF is a special level that can be used to turn off logging.

@@ -1,9 +1,12 @@
 package technology.sola.logging;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * SolaLoggerFactory is an interface for defining the api for creating new {@link SolaLogger} instances for a target
  * {@link technology.sola.engine.core.SolaPlatform}.
  */
+@NullMarked
 public interface SolaLoggerFactory {
   /**
    * The default log file to use if not provided.

@@ -1,10 +1,13 @@
 package technology.sola.logging;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.util.logging.Logger;
 
 /**
  * JavaSolaLogger is a {@link SolaLogger} implementation powered by {@link java.util.logging.Logger}.
  */
+@NullMarked
 public class JavaSolaLogger extends SolaLogger {
   private final Logger logger;
 

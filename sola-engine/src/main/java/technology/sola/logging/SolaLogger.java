@@ -1,13 +1,18 @@
 package technology.sola.logging;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 /**
  * SolaLogger instances are used to log messages to the console and/or files. SolaLogger must be configured via
  * {@link SolaLogger#configure(SolaLogLevel, SolaLoggerFactory)} before instances can be created via
  * {@link SolaLogger#of(Class)}. The log level of all logger instances will be the same based on how SolaLogger was
  * configured.
  */
+@NullMarked
 public abstract class SolaLogger {
   private static SolaLogLevel defaultLoggerLevel = SolaLogLevel.WARNING;
+  @Nullable
   private static SolaLoggerFactory solaLoggerFactory;
   private final SolaLogLevel loggerLevel = defaultLoggerLevel;
 
@@ -148,7 +153,7 @@ public abstract class SolaLogger {
    * @param throwable the exception that should be logged
    * @param params    the additional params for the log message
    */
-  protected abstract void log(SolaLogLevel level, String message, Throwable throwable, Object... params);
+  protected abstract void log(SolaLogLevel level, String message, @Nullable Throwable throwable, Object... params);
 
   private boolean isLoggable(SolaLogLevel logRecordLevel) {
     int levelValue = loggerLevel.level.intValue();

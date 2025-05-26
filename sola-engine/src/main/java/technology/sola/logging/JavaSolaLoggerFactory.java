@@ -1,5 +1,7 @@
 package technology.sola.logging;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,6 +14,7 @@ import java.util.logging.*;
  * JavaSolaLoggerFactory is a {@link SolaLoggerFactory} implementation for desktop platforms (JavaFX and Swing). It will
  * write to the console as well as log files.
  */
+@NullMarked
 public class JavaSolaLoggerFactory implements SolaLoggerFactory {
   private static final Map<String, FileHandler> FILE_HANDLER_MAP = new HashMap<>();
 

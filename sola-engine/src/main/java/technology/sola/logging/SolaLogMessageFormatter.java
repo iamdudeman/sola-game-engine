@@ -1,5 +1,7 @@
 package technology.sola.logging;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.LogRecord;
@@ -8,6 +10,7 @@ import java.util.logging.SimpleFormatter;
 /**
  * SolaLogMessageFormatter is a {@link SimpleFormatter} implementation for sola engine log messages.
  */
+@NullMarked
 public class SolaLogMessageFormatter extends SimpleFormatter {
   private static final String LOG_FORMAT = "[%s] [%-7s] [%s] %s %n";
   private static final String TIMESTAMP_FORMAT = "yyyy-MM-dd HH:mm:ss";
