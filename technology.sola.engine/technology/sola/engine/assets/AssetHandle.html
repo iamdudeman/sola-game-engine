@@ -80,7 +80,8 @@ loadScripts(document, 'script');</script>
 <dd><code>T</code> - the type of the asset</dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">AssetHandle&lt;T extends <a href="Asset.html" title="interface in technology.sola.engine.assets">Asset</a>&gt;</span>
+<div class="type-signature"><span class="annotations">@NullMarked
+</span><span class="modifiers">public class </span><span class="element-name type-name-label">AssetHandle&lt;T extends <a href="Asset.html" title="interface in technology.sola.engine.assets">Asset</a>&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">AssetHandle is a handle to an <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> that may or may not be loaded yet.</div>
 </section>
@@ -98,7 +99,7 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">
 <div class="block">Creates an empty AssetHandle with an empty list of onLoadSubscribers.</div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(T)" class="member-name-link">AssetHandle</a><wbr>(<a href="AssetHandle.html" title="type parameter in AssetHandle">T</a>&nbsp;asset)</code></div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(T)" class="member-name-link">AssetHandle</a><wbr>(@Nullable <a href="AssetHandle.html" title="type parameter in AssetHandle">T</a>&nbsp;asset)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Creates an AssetHandle instance with a preloaded <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a>.</div>
 </div>
@@ -126,7 +127,7 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Executes the provided consumer asynchronously once the <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> for this handle has been loaded.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="AssetHandle.html" title="type parameter in AssetHandle">T</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="AssetHandle.html" title="type parameter in AssetHandle">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAsset()" class="member-name-link">getAsset</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gets the loaded <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> immediately, but throws a runtime exception if it is not yet loaded.</div>
@@ -167,7 +168,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(T)">
 <h3 id="&lt;init&gt;(technology.sola.engine.assets.Asset)">AssetHandle</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">AssetHandle</span><wbr><span class="parameters">(<a href="AssetHandle.html" title="type parameter in AssetHandle">T</a>&nbsp;asset)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">AssetHandle</span><wbr><span class="parameters">(@Nullable <a href="AssetHandle.html" title="type parameter in AssetHandle">T</a>&nbsp;asset)</span></div>
 <div class="block">Creates an AssetHandle instance with a preloaded <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -196,7 +197,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getAsset()">
 <h3>getAsset</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="AssetHandle.html" title="type parameter in AssetHandle">T</a></span>&nbsp;<span class="element-name">getAsset</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="AssetHandle.html" title="type parameter in AssetHandle">T</a></span>&nbsp;<span class="element-name">getAsset</span>()</div>
 <div class="block">Gets the loaded <a href="Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> immediately, but throws a runtime exception if it is not yet loaded.</div>
 <dl class="notes">
 <dt>Returns:</dt>

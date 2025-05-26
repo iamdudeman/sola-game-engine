@@ -86,7 +86,8 @@ loadScripts(document, 'script');</script>
 <dd><code><span id="param-height">height</span></code> - the height of the glyph</dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">FontGlyph</span>(char&nbsp;glyph, int&nbsp;x, int&nbsp;y, int&nbsp;width, int&nbsp;height)
+<div class="type-signature"><span class="annotations">@NullMarked
+</span><span class="modifiers">public record </span><span class="element-name type-name-label">FontGlyph</span>(char&nbsp;glyph, int&nbsp;x, int&nbsp;y, int&nbsp;width, int&nbsp;height)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
 <div class="block">FontGlyph holds information on a glyph's placement in the rasterized <a href="Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a></div>
 </section>
