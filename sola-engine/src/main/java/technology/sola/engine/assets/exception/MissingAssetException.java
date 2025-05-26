@@ -1,11 +1,14 @@
 package technology.sola.engine.assets.exception;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.io.Serial;
 
 /**
  * Exception thrown when a {@link technology.sola.engine.assets.Asset} is requested but has not been registered with
  * an {@link technology.sola.engine.assets.AssetLoader}.
  */
+@NullMarked
 public class MissingAssetException extends RuntimeException {
   @Serial
   private static final long serialVersionUID = -9018242929183264139L;

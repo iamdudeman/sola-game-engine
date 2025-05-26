@@ -1,5 +1,6 @@
 package technology.sola.engine.assets.audio;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.Asset;
 
 import java.util.function.Consumer;
@@ -7,6 +8,7 @@ import java.util.function.Consumer;
 /**
  * AudioClip defines the api for audio {@link Asset}s.
  */
+@NullMarked
 public interface AudioClip extends Asset {
   /**
    * Constant used in {@link AudioClip#loop(int)} to loop until {@link AudioClip#stop()} is called.
