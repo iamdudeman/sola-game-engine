@@ -1,5 +1,17 @@
 # sola-game-engine TODO list
 
+## Nullability stuff
+
+* core - Sola, SolaPlatform
+* defaults stuff
+* gui - GuiElement, GuiDocument, BaseStyles
+* gui event stuff
+* gui elements stuff
+* gui json stuff
+* gui components stuff
+* all platforms
+* all example code
+
 ## Known Bugs List
 
 * (verify if still bug) GuiElement parent undefined when changing roots

@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui.style;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.elements.TextStyles;
@@ -9,6 +10,7 @@ import technology.sola.engine.graphics.gui.style.property.*;
  * Class containing constants for default style values for various properties used
  * by {@link technology.sola.engine.graphics.gui.GuiElement} for rendering and layout calculations.
  */
+@NullMarked
 public final class DefaultStyleValues {
   /**
    * Default layout value for {@link BaseStyles#direction()}.

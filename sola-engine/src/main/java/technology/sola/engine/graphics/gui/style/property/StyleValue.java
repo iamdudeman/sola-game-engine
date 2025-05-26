@@ -1,10 +1,14 @@
 package technology.sola.engine.graphics.gui.style.property;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 import java.util.Objects;
 
 /**
  * StyleValue holds a numeric value that can be represented as an absolute value or a relative percentage value.
  */
+@NullMarked
 public class StyleValue {
   /**
    * StyleValue constant for the value of 0.
@@ -14,8 +18,10 @@ public class StyleValue {
    * StyleValue constant for the value of 100%.
    */
   public static final StyleValue FULL = new StyleValue("100%");
-  private final boolean isPercentage;
+
+  @Nullable
   private Integer pixelValue;
+  @Nullable
   private Float percentageValue;
 
   /**
@@ -25,7 +31,6 @@ public class StyleValue {
    */
   public StyleValue(int pixelValue) {
     this.pixelValue = pixelValue;
-    isPercentage = false;
   }
 
   /**
@@ -41,20 +46,18 @@ public class StyleValue {
   public StyleValue(String value) {
     if (value.endsWith("%")) {
       this.percentageValue = Float.parseFloat(value.replace("%", "")) / 100f;
-      this.isPercentage = true;
     } else {
       this.pixelValue = Integer.parseInt(value.replace("px", ""));
-      this.isPercentage = false;
     }
   }
 
   /**
-   * Creates a StyleValue from the parsed String. Returns null if value is null
+   * Creates a StyleValue from the parsed String. Returns null if value is null.
    *
    * @param value the String to parse
    * @return the StyleValue or null
    */
-  public static StyleValue of(String value) {
+  public static @Nullable StyleValue of(@Nullable String value) {
     return value == null ? null : new StyleValue(value);
   }
 
@@ -65,14 +68,14 @@ public class StyleValue {
    * @return the resolved value
    */
   public int getValue(int parentValue) {
-    return isPercentage ? (int) (percentageValue * parentValue) : pixelValue;
+    return isPercentage() ? (int) (percentageValue * parentValue) : pixelValue;
   }
 
   /**
    * @return true if this StyleValue is a relative percentage value
    */
   public boolean isPercentage() {
-    return isPercentage;
+    return percentageValue != null;
   }
 
   @Override
@@ -82,8 +85,8 @@ public class StyleValue {
 
     StyleValue that = (StyleValue) o;
 
-    if (isPercentage == that.isPercentage) {
-      return isPercentage ? Objects.equals(percentageValue, that.percentageValue) : Objects.equals(pixelValue, that.pixelValue);
+    if (isPercentage() == that.isPercentage()) {
+      return isPercentage() ? Objects.equals(percentageValue, that.percentageValue) : Objects.equals(pixelValue, that.pixelValue);
     }
 
     return false;
@@ -91,7 +94,7 @@ public class StyleValue {
 
   @Override
   public int hashCode() {
-    if (isPercentage) {
+    if (isPercentage()) {
       return (percentageValue != null ? percentageValue.hashCode() : 0);
     } else {
       return (pixelValue != null ? pixelValue.hashCode() : 0);

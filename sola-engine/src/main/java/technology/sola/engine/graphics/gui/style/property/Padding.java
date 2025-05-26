@@ -1,5 +1,8 @@
 package technology.sola.engine.graphics.gui.style.property;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 /**
  * Padding contains the properties for a {@link technology.sola.engine.graphics.gui.GuiElement}'s padding which is the
  * space between the element's border and content.
@@ -9,7 +12,13 @@ package technology.sola.engine.graphics.gui.style.property;
  * @param bottom the bottom padding for the element
  * @param right  the right padding for the element
  */
-public record Padding(Integer top, Integer right, Integer bottom, Integer left) implements MergeableProperty<Padding> {
+@NullMarked
+public record Padding(
+  @Nullable Integer top,
+  @Nullable Integer right,
+  @Nullable Integer bottom,
+  @Nullable Integer left
+) implements MergeableProperty<Padding> {
   /**
    * Padding with all values set to 0.
    */
@@ -53,7 +62,7 @@ public record Padding(Integer top, Integer right, Integer bottom, Integer left) 
   }
 
   @Override
-  public Padding mergeWith(Padding otherProperty) {
+  public Padding mergeWith(@Nullable Padding otherProperty) {
     if (otherProperty == null) {
       return this;
     }

@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.gui.style.property;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.graphics.Color;
 
 /**
@@ -7,9 +9,10 @@ import technology.sola.engine.graphics.Color;
  *
  * @param color the {@link Color} of the element's background
  */
-public record Background(Color color) implements MergeableProperty<Background> {
+@NullMarked
+public record Background(@Nullable Color color) implements MergeableProperty<Background> {
   @Override
-  public Background mergeWith(Background otherProperty) {
+  public Background mergeWith(@Nullable Background otherProperty) {
     if (otherProperty == null) {
       return this;
     }

@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.gui.style.property;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.graphics.Color;
 
 /**
@@ -11,12 +13,13 @@ import technology.sola.engine.graphics.Color;
  * @param bottom the width of the bottom part of the border
  * @param right  the width of the right part of the border
  */
+@NullMarked
 public record Border(
-  Color color,
-  Integer top,
-  Integer left,
-  Integer bottom,
-  Integer right
+  @Nullable Color color,
+  @Nullable Integer top,
+  @Nullable Integer left,
+  @Nullable Integer bottom,
+  @Nullable Integer right
 ) implements MergeableProperty<Border> {
   /**
    * Border with 0 width.
@@ -34,7 +37,7 @@ public record Border(
   }
 
   @Override
-  public Border mergeWith(Border otherProperty) {
+  public Border mergeWith(@Nullable Border otherProperty) {
     if (otherProperty == null) {
       return this;
     }

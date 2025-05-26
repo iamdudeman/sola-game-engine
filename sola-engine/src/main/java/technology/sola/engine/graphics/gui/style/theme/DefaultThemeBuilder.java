@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui.style.theme;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
@@ -15,6 +16,7 @@ import java.util.List;
 /**
  * DefaultThemeBuilder contains methods for creating default {@link GuiTheme}s that can then be further customized.
  */
+@NullMarked
 public class DefaultThemeBuilder {
   /**
    * Builds a new {@link GuiTheme} instance that has lighter colors.
