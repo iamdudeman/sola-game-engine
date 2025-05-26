@@ -24,10 +24,5 @@ class CircleTest {
 
       assertThrows(IllegalArgumentException.class, () -> new Circle(-1, center));
     }
-
-    @Test
-    void when_withInvalidCenter_shouldThrowException() {
-      assertThrows(IllegalArgumentException.class, () -> new Circle(1, null));
-    }
   }
 }

@@ -1,5 +1,6 @@
 package technology.sola.math.linear;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.math.geometry.Rectangle;
 
 /**
@@ -8,6 +9,7 @@ import technology.sola.math.geometry.Rectangle;
  * @see <a href="https://github.com/OneLoneCoder/olcPixelGameEngine/blob/master/Videos/OneLoneCoder_PGE_SpriteTransforms.cpp">Video</a>
  * @see <a href="https://www.youtube.com/watch?v=zxwLN2blwbQ&ab_channel=javidx9">Channel</a>
  */
+@NullMarked
 @SuppressWarnings("checkstyle:OneStatementPerLine")
 public class Matrix3D {
   private static final Matrix3D IDENTITY_MATRIX = new Matrix3D();
