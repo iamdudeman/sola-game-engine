@@ -90,7 +90,8 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="MergeableProperty.html" title="interface in technology.sola.engine.graphics.gui.style.property">MergeableProperty</a>&lt;<a href="Border.html" title="class in technology.sola.engine.graphics.gui.style.property">Border</a>&gt;</code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">Border</span>(<a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;top, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;left, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;bottom, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;right)
+<div class="type-signature"><span class="annotations">@NullMarked
+</span><span class="modifiers">public record </span><span class="element-name type-name-label">Border</span>(@Nullable <a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color, @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;top, @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;left, @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;bottom, @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;right)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a>
 implements <a href="MergeableProperty.html" title="interface in technology.sola.engine.graphics.gui.style.property">MergeableProperty</a>&lt;<a href="Border.html" title="class in technology.sola.engine.graphics.gui.style.property">Border</a>&gt;</span></div>
 <div class="block">Border contains the properties for a <a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>'s border.</div>
@@ -127,11 +128,11 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <div class="col-last even-row-color">
 <div class="block">Creates a border with all sides the same size.</div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.Color,java.lang.Integer,java.lang.Integer,java.lang.Integer,java.lang.Integer)" class="member-name-link">Border</a><wbr>(<a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;top,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;left,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;bottom,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;right)</code></div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.Color,java.lang.Integer,java.lang.Integer,java.lang.Integer,java.lang.Integer)" class="member-name-link">Border</a><wbr>(@Nullable <a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;top,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;left,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;bottom,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;right)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Creates an instance of a <code>Border</code> record class.</div>
 </div>
@@ -149,12 +150,12 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#bottom()" class="member-name-link">bottom</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-bottom"><code>bottom</code></a> record component.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#color()" class="member-name-link">color</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-color"><code>color</code></a> record component.</div>
@@ -169,22 +170,22 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a hash code value for this object.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#left()" class="member-name-link">left</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-left"><code>left</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Border.html" title="class in technology.sola.engine.graphics.gui.style.property">Border</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mergeWith(technology.sola.engine.graphics.gui.style.property.Border)" class="member-name-link">mergeWith</a><wbr>(<a href="Border.html" title="class in technology.sola.engine.graphics.gui.style.property">Border</a>&nbsp;otherProperty)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mergeWith(technology.sola.engine.graphics.gui.style.property.Border)" class="member-name-link">mergeWith</a><wbr>(@Nullable <a href="Border.html" title="class in technology.sola.engine.graphics.gui.style.property">Border</a>&nbsp;otherProperty)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a new instance of the property with the resulting values being a merge of the right on top of the left.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#right()" class="member-name-link">right</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-right"><code>right</code></a> record component.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#top()" class="member-name-link">top</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-top"><code>top</code></a> record component.</div>
@@ -242,11 +243,11 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <li>
 <section class="detail" id="&lt;init&gt;(technology.sola.engine.graphics.Color,java.lang.Integer,java.lang.Integer,java.lang.Integer,java.lang.Integer)">
 <h3>Border</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Border</span><wbr><span class="parameters">(<a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;top,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;left,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;bottom,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;right)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Border</span><wbr><span class="parameters">(@Nullable <a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;top,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;left,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;bottom,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;right)</span></div>
 <div class="block">Creates an instance of a <code>Border</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -269,7 +270,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <li>
 <section class="detail" id="mergeWith(technology.sola.engine.graphics.gui.style.property.Border)">
 <h3>mergeWith</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Border.html" title="class in technology.sola.engine.graphics.gui.style.property">Border</a></span>&nbsp;<span class="element-name">mergeWith</span><wbr><span class="parameters">(<a href="Border.html" title="class in technology.sola.engine.graphics.gui.style.property">Border</a>&nbsp;otherProperty)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Border.html" title="class in technology.sola.engine.graphics.gui.style.property">Border</a></span>&nbsp;<span class="element-name">mergeWith</span><wbr><span class="parameters">(@Nullable <a href="Border.html" title="class in technology.sola.engine.graphics.gui.style.property">Border</a>&nbsp;otherProperty)</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="MergeableProperty.html#mergeWith(P)">MergeableProperty</a></code></span></div>
 <div class="block">Returns a new instance of the property with the resulting values being a merge of the right on top of the left.</div>
 <dl class="notes">
@@ -326,7 +327,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <li>
 <section class="detail" id="color()">
 <h3>color</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">color</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">color</span>()</div>
 <div class="block">Returns the value of the <a href="#param-color"><code>color</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -337,7 +338,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <li>
 <section class="detail" id="top()">
 <h3>top</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">top</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">top</span>()</div>
 <div class="block">Returns the value of the <a href="#param-top"><code>top</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -348,7 +349,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <li>
 <section class="detail" id="left()">
 <h3>left</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">left</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">left</span>()</div>
 <div class="block">Returns the value of the <a href="#param-left"><code>left</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -359,7 +360,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <li>
 <section class="detail" id="bottom()">
 <h3>bottom</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">bottom</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">bottom</span>()</div>
 <div class="block">Returns the value of the <a href="#param-bottom"><code>bottom</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -370,7 +371,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <li>
 <section class="detail" id="right()">
 <h3>right</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">right</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">right</span>()</div>
 <div class="block">Returns the value of the <a href="#param-right"><code>right</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>

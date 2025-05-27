@@ -76,7 +76,8 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <hr>
-<div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">CollisionUtils</span>
+<div class="type-signature"><span class="annotations">@NullMarked
+</span><span class="modifiers">public final class </span><span class="element-name type-name-label">CollisionUtils</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">The CollisionUtils class is a collection of various methods that help in collision detection and resolution.</div>
 </section>
@@ -93,26 +94,26 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#calculateAABBVsAABB(technology.sola.math.geometry.Rectangle,technology.sola.math.geometry.Rectangle)" class="member-name-link">calculateAABBVsAABB</a><wbr>(<a href="../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a>&nbsp;rectangleA,
  <a href="../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a>&nbsp;rectangleB)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Calculates a <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics"><code>MinimumTranslationVector</code></a> for a collision between two axis aligned <a href="../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry"><code>Rectangle</code></a>s.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#calculateAABBVsCircle(technology.sola.math.geometry.Rectangle,technology.sola.math.geometry.Circle)" class="member-name-link">calculateAABBVsCircle</a><wbr>(<a href="../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a>&nbsp;rectangle,
  <a href="../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a>&nbsp;circle)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Calculates a <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics"><code>MinimumTranslationVector</code></a> for a collision between an axis aligned <a href="../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry"><code>Rectangle</code></a> and
  <a href="../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry"><code>Circle</code></a>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#calculateCircleVsCircle(technology.sola.math.geometry.Circle,technology.sola.math.geometry.Circle)" class="member-name-link">calculateCircleVsCircle</a><wbr>(<a href="../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a>&nbsp;circleA,
  <a href="../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a>&nbsp;circleB)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Calculates a <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics"><code>MinimumTranslationVector</code></a> for a collision between two <a href="../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry"><code>Circle</code></a>s.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../CollisionManifold.html" title="class in technology.sola.engine.physics">CollisionManifold</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="../CollisionManifold.html" title="class in technology.sola.engine.physics">CollisionManifold</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#calculateCollisionManifold(technology.sola.ecs.view.View2Entry,technology.sola.ecs.view.View2Entry)" class="member-name-link">calculateCollisionManifold</a><wbr>(technology.sola.ecs.view.View2Entry&lt;<a href="../component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&nbsp;viewEntryA,
  technology.sola.ecs.view.View2Entry&lt;<a href="../component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&nbsp;viewEntryB)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
@@ -138,7 +139,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="calculateCollisionManifold(technology.sola.ecs.view.View2Entry,technology.sola.ecs.view.View2Entry)">
 <h3>calculateCollisionManifold</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../CollisionManifold.html" title="class in technology.sola.engine.physics">CollisionManifold</a></span>&nbsp;<span class="element-name">calculateCollisionManifold</span><wbr><span class="parameters">(technology.sola.ecs.view.View2Entry&lt;<a href="../component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&nbsp;viewEntryA,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">@Nullable <a href="../CollisionManifold.html" title="class in technology.sola.engine.physics">CollisionManifold</a></span>&nbsp;<span class="element-name">calculateCollisionManifold</span><wbr><span class="parameters">(technology.sola.ecs.view.View2Entry&lt;<a href="../component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&nbsp;viewEntryA,
  technology.sola.ecs.view.View2Entry&lt;<a href="../component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&nbsp;viewEntryB)</span></div>
 <div class="block">Calculates a <a href="../CollisionManifold.html" title="class in technology.sola.engine.physics"><code>CollisionManifold</code></a> for two <code>Entity</code> that collided.</div>
 <dl class="notes">
@@ -153,7 +154,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="calculateAABBVsCircle(technology.sola.math.geometry.Rectangle,technology.sola.math.geometry.Circle)">
 <h3>calculateAABBVsCircle</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></span>&nbsp;<span class="element-name">calculateAABBVsCircle</span><wbr><span class="parameters">(<a href="../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a>&nbsp;rectangle,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">@Nullable <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></span>&nbsp;<span class="element-name">calculateAABBVsCircle</span><wbr><span class="parameters">(<a href="../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a>&nbsp;rectangle,
  <a href="../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a>&nbsp;circle)</span></div>
 <div class="block">Calculates a <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics"><code>MinimumTranslationVector</code></a> for a collision between an axis aligned <a href="../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry"><code>Rectangle</code></a> and
  <a href="../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry"><code>Circle</code></a>.</div>
@@ -169,7 +170,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="calculateAABBVsAABB(technology.sola.math.geometry.Rectangle,technology.sola.math.geometry.Rectangle)">
 <h3>calculateAABBVsAABB</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></span>&nbsp;<span class="element-name">calculateAABBVsAABB</span><wbr><span class="parameters">(<a href="../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a>&nbsp;rectangleA,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">@Nullable <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></span>&nbsp;<span class="element-name">calculateAABBVsAABB</span><wbr><span class="parameters">(<a href="../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a>&nbsp;rectangleA,
  <a href="../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a>&nbsp;rectangleB)</span></div>
 <div class="block">Calculates a <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics"><code>MinimumTranslationVector</code></a> for a collision between two axis aligned <a href="../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry"><code>Rectangle</code></a>s.
  <br/>
@@ -187,7 +188,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="calculateCircleVsCircle(technology.sola.math.geometry.Circle,technology.sola.math.geometry.Circle)">
 <h3>calculateCircleVsCircle</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></span>&nbsp;<span class="element-name">calculateCircleVsCircle</span><wbr><span class="parameters">(<a href="../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a>&nbsp;circleA,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">@Nullable <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></span>&nbsp;<span class="element-name">calculateCircleVsCircle</span><wbr><span class="parameters">(<a href="../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a>&nbsp;circleA,
  <a href="../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a>&nbsp;circleB)</span></div>
 <div class="block">Calculates a <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics"><code>MinimumTranslationVector</code></a> for a collision between two <a href="../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry"><code>Circle</code></a>s.</div>
 <dl class="notes">

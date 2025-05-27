@@ -83,7 +83,8 @@ loadScripts(document, 'script');</script>
 <dd><code><span id="param-body">body</span></code> - the json response body</dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">HttpResponse</span>(int&nbsp;status, technology.sola.json.JsonElement&nbsp;body)
+<div class="type-signature"><span class="annotations">@NullMarked
+</span><span class="modifiers">public record </span><span class="element-name type-name-label">HttpResponse</span>(int&nbsp;status, technology.sola.json.JsonElement&nbsp;body)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
 <div class="block">HttpResponse contains details from the server's response to an http request.</div>
 </section>

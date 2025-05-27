@@ -76,7 +76,8 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SeparatingAxisTheorem</span>
+<div class="type-signature"><span class="annotations">@NullMarked
+</span><span class="modifiers">public class </span><span class="element-name type-name-label">SeparatingAxisTheorem</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">SeparatingAxisTheorem contains methods for checking whether two convex polygons are colliding or not.</div>
 </section>
@@ -106,13 +107,13 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkCollision(technology.sola.math.linear.Vector2D%5B%5D,technology.sola.math.linear.Vector2D%5B%5D)" class="member-name-link">checkCollision</a><wbr>(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;shapeA,
  <a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;shapeB)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Checks for collisions between to shapes.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkCollision(technology.sola.math.linear.Vector2D%5B%5D,technology.sola.math.linear.Vector2D,float)" class="member-name-link">checkCollision</a><wbr>(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;shape,
  <a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;circleCenter,
  float&nbsp;radius)</code></div>
@@ -153,7 +154,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="checkCollision(technology.sola.math.linear.Vector2D[],technology.sola.math.linear.Vector2D[])">
 <h3>checkCollision</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></span>&nbsp;<span class="element-name">checkCollision</span><wbr><span class="parameters">(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;shapeA,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">@Nullable <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></span>&nbsp;<span class="element-name">checkCollision</span><wbr><span class="parameters">(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;shapeA,
  <a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;shapeB)</span></div>
 <div class="block">Checks for collisions between to shapes. If a collision is detected the <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics"><code>MinimumTranslationVector</code></a> will be
  returned. If no collision is found then null will be returned.</div>
@@ -169,7 +170,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="checkCollision(technology.sola.math.linear.Vector2D[],technology.sola.math.linear.Vector2D,float)">
 <h3>checkCollision</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></span>&nbsp;<span class="element-name">checkCollision</span><wbr><span class="parameters">(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;shape,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">@Nullable <a href="../MinimumTranslationVector.html" title="class in technology.sola.engine.physics">MinimumTranslationVector</a></span>&nbsp;<span class="element-name">checkCollision</span><wbr><span class="parameters">(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;shape,
  <a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;circleCenter,
  float&nbsp;radius)</span></div>
 <div class="block">Checks for collisions between a shape and a circle. If a collision is detected

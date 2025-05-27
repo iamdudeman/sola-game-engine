@@ -87,7 +87,8 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="MergeableProperty.html" title="interface in technology.sola.engine.graphics.gui.style.property">MergeableProperty</a>&lt;<a href="Position.html" title="class in technology.sola.engine.graphics.gui.style.property">Position</a>&gt;</code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">Position</span>(<a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a>&nbsp;x, <a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a>&nbsp;y)
+<div class="type-signature"><span class="annotations">@NullMarked
+</span><span class="modifiers">public record </span><span class="element-name type-name-label">Position</span>(@Nullable <a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a>&nbsp;x, @Nullable <a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a>&nbsp;y)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a>
 implements <a href="MergeableProperty.html" title="interface in technology.sola.engine.graphics.gui.style.property">MergeableProperty</a>&lt;<a href="Position.html" title="class in technology.sola.engine.graphics.gui.style.property">Position</a>&gt;</span></div>
 <div class="block">Position contains the properties for absolutely positioning a <a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>
@@ -124,13 +125,13 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <div class="col-last even-row-color">
 <div class="block">Creates a new Position instance with x and y not set.</div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String,java.lang.String)" class="member-name-link">Position</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;x,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;y)</code></div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String,java.lang.String)" class="member-name-link">Position</a><wbr>(@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;x,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;y)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Creates a new Position instance with x and y set.</div>
 </div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.gui.style.property.StyleValue,technology.sola.engine.graphics.gui.style.property.StyleValue)" class="member-name-link">Position</a><wbr>(<a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a>&nbsp;x,
- <a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a>&nbsp;y)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.gui.style.property.StyleValue,technology.sola.engine.graphics.gui.style.property.StyleValue)" class="member-name-link">Position</a><wbr>(@Nullable <a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a>&nbsp;x,
+ @Nullable <a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a>&nbsp;y)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates an instance of a <code>Position</code> record class.</div>
 </div>
@@ -164,7 +165,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <div class="block">Checks if this Position is absolute or not.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Position.html" title="class in technology.sola.engine.graphics.gui.style.property">Position</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mergeWith(technology.sola.engine.graphics.gui.style.property.Position)" class="member-name-link">mergeWith</a><wbr>(<a href="Position.html" title="class in technology.sola.engine.graphics.gui.style.property">Position</a>&nbsp;otherProperty)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mergeWith(technology.sola.engine.graphics.gui.style.property.Position)" class="member-name-link">mergeWith</a><wbr>(@Nullable <a href="Position.html" title="class in technology.sola.engine.graphics.gui.style.property">Position</a>&nbsp;otherProperty)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a new instance of the property with the resulting values being a merge of the right on top of the left.</div>
 </div>
@@ -173,12 +174,12 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a string representation of this record class.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#x()" class="member-name-link">x</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-x"><code>x</code></a> record component.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#y()" class="member-name-link">y</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-y"><code>y</code></a> record component.</div>
@@ -225,8 +226,8 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <li>
 <section class="detail" id="&lt;init&gt;(java.lang.String,java.lang.String)">
 <h3>Position</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Position</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;x,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;y)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Position</span><wbr><span class="parameters">(@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;x,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;y)</span></div>
 <div class="block">Creates a new Position instance with x and y set.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -238,8 +239,8 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <li>
 <section class="detail" id="&lt;init&gt;(technology.sola.engine.graphics.gui.style.property.StyleValue,technology.sola.engine.graphics.gui.style.property.StyleValue)">
 <h3>Position</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Position</span><wbr><span class="parameters">(<a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a>&nbsp;x,
- <a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a>&nbsp;y)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Position</span><wbr><span class="parameters">(@Nullable <a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a>&nbsp;x,
+ @Nullable <a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a>&nbsp;y)</span></div>
 <div class="block">Creates an instance of a <code>Position</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -270,7 +271,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <li>
 <section class="detail" id="mergeWith(technology.sola.engine.graphics.gui.style.property.Position)">
 <h3>mergeWith</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Position.html" title="class in technology.sola.engine.graphics.gui.style.property">Position</a></span>&nbsp;<span class="element-name">mergeWith</span><wbr><span class="parameters">(<a href="Position.html" title="class in technology.sola.engine.graphics.gui.style.property">Position</a>&nbsp;otherProperty)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Position.html" title="class in technology.sola.engine.graphics.gui.style.property">Position</a></span>&nbsp;<span class="element-name">mergeWith</span><wbr><span class="parameters">(@Nullable <a href="Position.html" title="class in technology.sola.engine.graphics.gui.style.property">Position</a>&nbsp;otherProperty)</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="MergeableProperty.html#mergeWith(P)">MergeableProperty</a></code></span></div>
 <div class="block">Returns a new instance of the property with the resulting values being a merge of the right on top of the left.</div>
 <dl class="notes">
@@ -327,7 +328,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <li>
 <section class="detail" id="x()">
 <h3>x</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a></span>&nbsp;<span class="element-name">x</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a></span>&nbsp;<span class="element-name">x</span>()</div>
 <div class="block">Returns the value of the <a href="#param-x"><code>x</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -338,7 +339,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <li>
 <section class="detail" id="y()">
 <h3>y</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a></span>&nbsp;<span class="element-name">y</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a></span>&nbsp;<span class="element-name">y</span>()</div>
 <div class="block">Returns the value of the <a href="#param-y"><code>y</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>

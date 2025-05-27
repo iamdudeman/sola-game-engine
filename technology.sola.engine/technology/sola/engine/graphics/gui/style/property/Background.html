@@ -86,7 +86,8 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="MergeableProperty.html" title="interface in technology.sola.engine.graphics.gui.style.property">MergeableProperty</a>&lt;<a href="Background.html" title="class in technology.sola.engine.graphics.gui.style.property">Background</a>&gt;</code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">Background</span>(<a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)
+<div class="type-signature"><span class="annotations">@NullMarked
+</span><span class="modifiers">public record </span><span class="element-name type-name-label">Background</span>(@Nullable <a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a>
 implements <a href="MergeableProperty.html" title="interface in technology.sola.engine.graphics.gui.style.property">MergeableProperty</a>&lt;<a href="Background.html" title="class in technology.sola.engine.graphics.gui.style.property">Background</a>&gt;</span></div>
 <div class="block">Background contains the properties for a <a href="../../GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>'s background.</div>
@@ -101,7 +102,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.Color)" class="member-name-link">Background</a><wbr>(<a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.Color)" class="member-name-link">Background</a><wbr>(@Nullable <a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates an instance of a <code>Background</code> record class.</div>
 </div>
@@ -119,7 +120,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#color()" class="member-name-link">color</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-color"><code>color</code></a> record component.</div>
@@ -135,7 +136,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <div class="block">Returns a hash code value for this object.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Background.html" title="class in technology.sola.engine.graphics.gui.style.property">Background</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mergeWith(technology.sola.engine.graphics.gui.style.property.Background)" class="member-name-link">mergeWith</a><wbr>(<a href="Background.html" title="class in technology.sola.engine.graphics.gui.style.property">Background</a>&nbsp;otherProperty)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mergeWith(technology.sola.engine.graphics.gui.style.property.Background)" class="member-name-link">mergeWith</a><wbr>(@Nullable <a href="Background.html" title="class in technology.sola.engine.graphics.gui.style.property">Background</a>&nbsp;otherProperty)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a new instance of the property with the resulting values being a merge of the right on top of the left.</div>
 </div>
@@ -164,7 +165,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <li>
 <section class="detail" id="&lt;init&gt;(technology.sola.engine.graphics.Color)">
 <h3>Background</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Background</span><wbr><span class="parameters">(<a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Background</span><wbr><span class="parameters">(@Nullable <a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</span></div>
 <div class="block">Creates an instance of a <code>Background</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -183,7 +184,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <li>
 <section class="detail" id="mergeWith(technology.sola.engine.graphics.gui.style.property.Background)">
 <h3>mergeWith</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Background.html" title="class in technology.sola.engine.graphics.gui.style.property">Background</a></span>&nbsp;<span class="element-name">mergeWith</span><wbr><span class="parameters">(<a href="Background.html" title="class in technology.sola.engine.graphics.gui.style.property">Background</a>&nbsp;otherProperty)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Background.html" title="class in technology.sola.engine.graphics.gui.style.property">Background</a></span>&nbsp;<span class="element-name">mergeWith</span><wbr><span class="parameters">(@Nullable <a href="Background.html" title="class in technology.sola.engine.graphics.gui.style.property">Background</a>&nbsp;otherProperty)</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="MergeableProperty.html#mergeWith(P)">MergeableProperty</a></code></span></div>
 <div class="block">Returns a new instance of the property with the resulting values being a merge of the right on top of the left.</div>
 <dl class="notes">
@@ -240,7 +241,7 @@ implements <a href="MergeableProperty.html" title="interface in technology.sola.
 <li>
 <section class="detail" id="color()">
 <h3>color</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">color</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">color</span>()</div>
 <div class="block">Returns the value of the <a href="#param-color"><code>color</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>

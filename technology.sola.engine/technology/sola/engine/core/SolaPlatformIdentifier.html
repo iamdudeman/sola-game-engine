@@ -83,7 +83,8 @@ loadScripts(document, 'script');</script>
 <dd><code><span id="param-type">type</span></code> - the type of platform</dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">SolaPlatformIdentifier</span>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name, <a href="SolaPlatformType.html" title="enum class in technology.sola.engine.core">SolaPlatformType</a>&nbsp;type)
+<div class="type-signature"><span class="annotations">@NullMarked
+</span><span class="modifiers">public record </span><span class="element-name type-name-label">SolaPlatformIdentifier</span>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name, <a href="SolaPlatformType.html" title="enum class in technology.sola.engine.core">SolaPlatformType</a>&nbsp;type)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
 <div class="block">SolaPlatformIdentifier is a unique identifier for a <a href="SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> implementation. This can be used in
  conditional checks for platform specific logic (or <a href="SolaPlatformType.html" title="enum class in technology.sola.engine.core"><code>SolaPlatformType</code></a> specific logic).</div>

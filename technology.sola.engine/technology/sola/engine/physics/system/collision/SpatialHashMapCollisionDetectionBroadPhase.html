@@ -80,7 +80,8 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision">CollisionDetectionBroadPhase</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SpatialHashMapCollisionDetectionBroadPhase</span>
+<div class="type-signature"><span class="annotations">@NullMarked
+</span><span class="modifiers">public class </span><span class="element-name type-name-label">SpatialHashMapCollisionDetectionBroadPhase</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision">CollisionDetectionBroadPhase</a></span></div>
 <div class="block">SpatialHashMapCollisionDetectionBroadPhase is a <a href="CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision"><code>CollisionDetectionBroadPhase</code></a> implementation utilizing a
@@ -100,7 +101,7 @@ implements <a href="CollisionDetectionBroadPhase.html" title="interface in techn
 <div class="col-last even-row-color">
 <div class="block">Creates an instance that allows the internal spatial hash map to determine a good cell size based on the entities.</div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.Integer)" class="member-name-link">SpatialHashMapCollisionDetectionBroadPhase</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;spatialHashMapCellSize)</code></div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.Integer)" class="member-name-link">SpatialHashMapCollisionDetectionBroadPhase</a><wbr>(@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;spatialHashMapCellSize)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Creates an instance with fixed cell size for the internal spatial hash map.</div>
 </div>
@@ -162,7 +163,7 @@ implements <a href="CollisionDetectionBroadPhase.html" title="interface in techn
 <li>
 <section class="detail" id="&lt;init&gt;(java.lang.Integer)">
 <h3>SpatialHashMapCollisionDetectionBroadPhase</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SpatialHashMapCollisionDetectionBroadPhase</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;spatialHashMapCellSize)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SpatialHashMapCollisionDetectionBroadPhase</span><wbr><span class="parameters">(@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;spatialHashMapCellSize)</span></div>
 <div class="block">Creates an instance with fixed cell size for the internal spatial hash map.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
