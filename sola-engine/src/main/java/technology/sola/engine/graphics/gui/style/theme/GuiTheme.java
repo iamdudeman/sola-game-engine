@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui.style.theme;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
@@ -11,6 +12,7 @@ import java.util.List;
  * GuiTheme instances contain {@link GuiElement} to {@link BaseStyles} mappings that can be applied to a specific
  * element or an element and all its children.
  */
+@NullMarked
 public class GuiTheme {
   private final List<ThemeElementDefinition<?>> definitions = new ArrayList<>();
 

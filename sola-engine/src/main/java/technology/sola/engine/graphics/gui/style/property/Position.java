@@ -1,5 +1,8 @@
 package technology.sola.engine.graphics.gui.style.property;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 /**
  * Position contains the properties for absolutely positioning a {@link technology.sola.engine.graphics.gui.GuiElement}
  * within its container. If x and y are both null then the element is not considered absolutely positioned.
@@ -7,7 +10,11 @@ package technology.sola.engine.graphics.gui.style.property;
  * @param x the x position of the element
  * @param y the y position of the element
  */
-public record Position(StyleValue x, StyleValue y) implements MergeableProperty<Position> {
+@NullMarked
+public record Position(
+  @Nullable StyleValue x,
+  @Nullable StyleValue y
+) implements MergeableProperty<Position> {
   /**
    * Position with x and y not set. Element will be relatively positioned in the flow.
    */
@@ -26,7 +33,7 @@ public record Position(StyleValue x, StyleValue y) implements MergeableProperty<
    * @param x the x position of the element
    * @param y the y position of the element
    */
-  public Position(String x, String y) {
+  public Position(@Nullable String x, @Nullable String y) {
     this(StyleValue.of(x), StyleValue.of(y));
   }
 
@@ -40,7 +47,7 @@ public record Position(StyleValue x, StyleValue y) implements MergeableProperty<
   }
 
   @Override
-  public Position mergeWith(Position otherProperty) {
+  public Position mergeWith(@Nullable Position otherProperty) {
     if (otherProperty == null) {
       return this;
     }

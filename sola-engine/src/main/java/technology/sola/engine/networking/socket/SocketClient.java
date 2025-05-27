@@ -1,10 +1,12 @@
 package technology.sola.engine.networking.socket;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.networking.NetworkQueue;
 
 /**
  * SocketClient defines the api for interacting with a socket server.
  */
+@NullMarked
 public interface SocketClient {
   /**
    * @return the queue of messages from the server

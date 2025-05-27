@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.browser.core;
 
+import org.jspecify.annotations.NullMarked;
 import org.teavm.jso.JSBody;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.DefaultFont;
@@ -19,6 +20,7 @@ import java.util.List;
  * <p>
  * <strong>todo: Not yet fully implemented</strong>
  */
+@NullMarked
 public class BrowserCanvasRenderer implements Renderer {
   private static final SolaLogger LOGGER = SolaLogger.of(BrowserCanvasRenderer.class);
   private static final List<String> LOGGED_METHODS = new ArrayList<>();

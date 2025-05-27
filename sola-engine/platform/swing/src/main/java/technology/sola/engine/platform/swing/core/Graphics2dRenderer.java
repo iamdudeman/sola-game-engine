@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.swing.core;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
@@ -19,6 +20,7 @@ import java.util.List;
  * <p>
  * <strong>todo: Not yet fully implemented</strong>
  */
+@NullMarked
 public class Graphics2dRenderer implements Renderer {
   private static final SolaLogger LOGGER = SolaLogger.of(Graphics2dRenderer.class);
   private static final List<String> LOGGED_METHODS = new ArrayList<>();

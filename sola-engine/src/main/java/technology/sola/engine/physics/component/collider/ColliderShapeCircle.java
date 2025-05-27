@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.component.collider;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -15,6 +16,7 @@ import technology.sola.math.linear.Vector2D;
  *
  * @param radius the radius of the circle
  */
+@NullMarked
 public record ColliderShapeCircle(
   float radius
 ) implements ColliderShape<Circle> {

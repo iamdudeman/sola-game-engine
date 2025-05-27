@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.component;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
 import technology.sola.engine.physics.Material;
 import technology.sola.math.linear.Vector2D;
@@ -8,6 +9,7 @@ import technology.sola.math.linear.Vector2D;
  * ColliderComponent is a {@link Component} that contains dynamic body physics data for an
  * {@link technology.sola.ecs.Entity}.
  */
+@NullMarked
 public class DynamicBodyComponent implements Component {
   private float forceX = 0.0f;
   private float forceY = 0.0f;
@@ -175,9 +177,6 @@ public class DynamicBodyComponent implements Component {
    * @param material the new {@code Material}
    */
   public void setMaterial(Material material) {
-    if (material == null) {
-      throw new IllegalArgumentException("material cannot be null");
-    }
     this.material = material;
   }
 }

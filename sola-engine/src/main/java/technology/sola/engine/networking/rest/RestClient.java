@@ -1,5 +1,6 @@
 package technology.sola.engine.networking.rest;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.json.JsonArray;
 import technology.sola.json.JsonElement;
 import technology.sola.json.JsonObject;
@@ -9,6 +10,7 @@ import java.util.function.Consumer;
 /**
  * RestClient defines the api for creating rest client implementations for sending HTTP requests.
  */
+@NullMarked
 public interface RestClient {
   /**
    * Creates and sends an HTTP request. The {@link HttpResponse} from the server as provided in a callback.

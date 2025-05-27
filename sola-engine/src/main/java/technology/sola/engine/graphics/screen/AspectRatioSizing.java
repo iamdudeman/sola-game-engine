@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.screen;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * AspectRatioSizing contains the top, left coordinate for where rendering will begin as well as the width and height
  * of the space to render in.
@@ -9,5 +11,6 @@ package technology.sola.engine.graphics.screen;
  * @param width  the width to render within
  * @param height the height to render within
  */
+@NullMarked
 public record AspectRatioSizing(int x, int y, int width, int height) {
 }

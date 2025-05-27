@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui.util;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElementBounds;
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * TextRenderUtils contains methods useful for rendering text for a GUI.
  */
+@NullMarked
 public class TextRenderUtils {
   /**
    * Calculates {@link TextRenderDetails} for the text based on the content bounds available on current {@link Font}.

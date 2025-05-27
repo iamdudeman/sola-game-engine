@@ -1,10 +1,12 @@
 package technology.sola.engine.graphics.renderer.blend;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.Color;
 
 /**
  * Takes the max value of each channel for the destination pixel; alpha, red, green, blue.
  */
+@NullMarked
 public class LightenBlendFunction implements BlendFunction {
   @Override
   public void set(int[] pixels, int pixelIndex, Color color) {

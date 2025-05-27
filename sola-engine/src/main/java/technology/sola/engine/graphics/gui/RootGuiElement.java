@@ -1,11 +1,14 @@
 package technology.sola.engine.graphics.gui;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 
+@NullMarked
 class RootGuiElement extends GuiElement<BaseStyles, RootGuiElement> {
   // internals
   private final GuiDocument guiDocument;
@@ -29,6 +32,7 @@ class RootGuiElement extends GuiElement<BaseStyles, RootGuiElement> {
   }
 
   @Override
+  @Nullable
   public GuiElementDimensions calculateContentDimensions() {
     return null;
   }

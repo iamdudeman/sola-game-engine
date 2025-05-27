@@ -1,5 +1,7 @@
 package technology.sola.engine.core;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * Creates a {@link SolaConfiguration}.
  *
@@ -8,6 +10,7 @@ package technology.sola.engine.core;
  * @param rendererHeight         the height of the {@link technology.sola.engine.graphics.renderer.Renderer}
  * @param targetUpdatesPerSecond the target updates per second for the game loop
  */
+@NullMarked
 public record SolaConfiguration(
   String title,
   int rendererWidth,

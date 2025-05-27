@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.gui.style;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.style.property.MergeableProperty;
 
@@ -14,8 +16,9 @@ import java.util.function.Function;
  *
  * @param <Style> the {@link BaseStyles} type
  */
+@NullMarked
 public class StyleContainer<Style extends BaseStyles> {
-  private final Map<Function<Style, ?>, Object> computedCache = new HashMap<>();
+  private final Map<Function<Style, ?>, @Nullable Object> computedCache = new HashMap<>();
   private final GuiElement<Style, ?> guiElement;
   private List<ConditionalStyle<Style>> conditionalStyles;
   private boolean[] conditionsArray;
@@ -61,8 +64,8 @@ public class StyleContainer<Style extends BaseStyles> {
    * @param styles the new list of styles
    */
   public final void setStyles(List<ConditionalStyle<Style>> styles) {
-    this.conditionalStyles = styles == null ? new ArrayList<>() : styles;
-    conditionsArray = styles == null ? new boolean[0] : new boolean[styles.size()];
+    this.conditionalStyles = styles;
+    conditionsArray = new boolean[styles.size()];
     computedCache.clear();
     recalculateConditions();
     guiElement.invalidateLayout();
@@ -126,7 +129,7 @@ public class StyleContainer<Style extends BaseStyles> {
    * @param <R>              the return value type
    * @return the calculated style or null
    */
-  public <R> R getPropertyValue(Function<Style, R> propertySupplier) {
+  public <R> @Nullable R getPropertyValue(Function<Style, R> propertySupplier) {
     return getPropertyValue(propertySupplier, null);
   }
 
@@ -140,7 +143,7 @@ public class StyleContainer<Style extends BaseStyles> {
    * @return the calculated style or default value
    */
   @SuppressWarnings("unchecked")
-  public <R> R getPropertyValue(Function<Style, R> propertySupplier, R defaultValue) {
+  public <R> @Nullable R getPropertyValue(Function<Style, @Nullable R> propertySupplier, @Nullable R defaultValue) {
     if (computedCache.containsKey(propertySupplier)) {
       return (R) computedCache.get(propertySupplier);
     }
@@ -173,7 +176,7 @@ public class StyleContainer<Style extends BaseStyles> {
    * @return the calculated style or default value
    */
   @SuppressWarnings("unchecked")
-  public <R extends MergeableProperty<R>> R getPropertyValue(Function<Style, R> propertySupplier, R defaultValue) {
+  public <R extends MergeableProperty<R>> @Nullable R getPropertyValue(Function<Style, @Nullable R> propertySupplier, @Nullable R defaultValue) {
     if (computedCache.containsKey(propertySupplier)) {
       return (R) computedCache.get(propertySupplier);
     }

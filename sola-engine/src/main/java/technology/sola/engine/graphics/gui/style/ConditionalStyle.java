@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui.style;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.input.BaseInputGuiElement;
 
@@ -12,6 +13,7 @@ import java.util.function.Function;
  * @param style     the style instance
  * @param <Style>   the style type
  */
+@NullMarked
 public record ConditionalStyle<Style extends BaseStyles>(
   Function<GuiElement<Style, ?>, Boolean> condition,
   Style style

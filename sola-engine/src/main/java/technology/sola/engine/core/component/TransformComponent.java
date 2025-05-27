@@ -1,5 +1,7 @@
 package technology.sola.engine.core.component;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.Component;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
@@ -8,12 +10,15 @@ import technology.sola.math.linear.Vector2D;
 /**
  * TransformComponent is a {@link Component} containing translate and scale data for an {@link Entity}.
  */
+@NullMarked
 public class TransformComponent implements Component {
   private float x;
   private float y;
   private float scaleX;
   private float scaleY;
+  @Nullable
   private String parentUniqueId = null;
+  @Nullable
   private TransformComponent parentTransformComponent = null;
 
   /**
@@ -194,6 +199,7 @@ public class TransformComponent implements Component {
   /**
    * @return the parent's unique id or null if no parent
    */
+  @Nullable
   public String getParentUniqueId() {
     return parentUniqueId;
   }
@@ -243,7 +249,7 @@ public class TransformComponent implements Component {
    * @param entity the parent {@link Entity} or null if no parent
    * @return this
    */
-  public TransformComponent setParent(Entity entity) {
+  public TransformComponent setParent(@Nullable Entity entity) {
     if (entity == null) {
       parentUniqueId = null;
       parentTransformComponent = null;

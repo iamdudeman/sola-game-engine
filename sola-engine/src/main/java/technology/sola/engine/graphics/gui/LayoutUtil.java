@@ -1,9 +1,11 @@
 package technology.sola.engine.graphics.gui;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.DefaultStyleValues;
 import technology.sola.engine.graphics.gui.style.property.*;
 
+@NullMarked
 class LayoutUtil {
   static void rebuildLayout(GuiElement<?, ?> guiElement) {
     var guiElementChildren = guiElement.children;

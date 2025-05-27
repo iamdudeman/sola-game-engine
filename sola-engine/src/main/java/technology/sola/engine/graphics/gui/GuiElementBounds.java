@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.input.MouseEvent;
 
 /**
@@ -10,6 +11,7 @@ import technology.sola.engine.input.MouseEvent;
  * @param width  the width
  * @param height the height
  */
+@NullMarked
 public record GuiElementBounds(int x, int y, int width, int height) {
   /**
    * Creates a new {@link GuiElementBounds} instance with position set to the desired x and y. The width and height

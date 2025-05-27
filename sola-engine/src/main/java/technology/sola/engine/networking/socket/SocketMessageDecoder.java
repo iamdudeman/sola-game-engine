@@ -1,5 +1,8 @@
 package technology.sola.engine.networking.socket;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -7,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * SocketMessageDecoder is responsible for decoding {@link SocketMessage}s from payloads received over sockets.
  */
+@NullMarked
 public class SocketMessageDecoder {
   /**
    * Decodes a raw socket encoded message from the client. Note, this is a blocking operation.
@@ -15,6 +19,7 @@ public class SocketMessageDecoder {
    * @return the decoded message or null if disconnected
    * @throws IOException if an I/O error occurs
    */
+  @Nullable
   public SocketMessage decodeForRaw(BufferedInputStream bufferedInputStream) throws IOException {
     byte[] lengthBytes = bufferedInputStream.readNBytes(2);
 
@@ -40,6 +45,7 @@ public class SocketMessageDecoder {
    * @return the decoded message or null if disconnected
    * @throws IOException if an I/O error occurs
    */
+  @Nullable
   public SocketMessage decodeForWeb(BufferedInputStream bufferedInputStream) throws IOException {
     // first byte is op code and second is length
     byte[] starterBytes = bufferedInputStream.readNBytes(2);

@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.component.collider;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.math.geometry.Rectangle;
@@ -10,6 +11,7 @@ import technology.sola.math.geometry.Shape;
  *
  * @param <T> the type of {@link Shape}
  */
+@NullMarked
 public interface ColliderShape<T extends Shape> {
   /**
    * Gets the {@link ColliderType} of this collider.

@@ -1,6 +1,7 @@
 package technology.sola.engine.platform.javafx.core;
 
 import javafx.animation.AnimationTimer;
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.core.GameLoop;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
@@ -11,6 +12,7 @@ import java.util.function.Consumer;
 /**
  * A {@link GameLoop} implementation for JavaFX.
  */
+@NullMarked
 public class JavaFxGameLoop extends GameLoop {
   private static final float INVERSE_MICROSECONDS = 1 / 1e9f;
 

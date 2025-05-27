@@ -1,5 +1,7 @@
 package technology.sola.engine.physics.utils;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
@@ -15,6 +17,7 @@ import technology.sola.math.linear.Vector2D;
 /**
  * The CollisionUtils class is a collection of various methods that help in collision detection and resolution.
  */
+@NullMarked
 public final class CollisionUtils {
   /**
    * Calculates a {@link CollisionManifold} for two {@link Entity} that collided.
@@ -23,6 +26,7 @@ public final class CollisionUtils {
    * @param viewEntryB the second Entity in a {@link technology.sola.ecs.view.View2Entry} of {@link ColliderComponent} and {@link TransformComponent}
    * @return the resulting {@code CollisionManifold}
    */
+  @Nullable
   public static CollisionManifold calculateCollisionManifold(
     View2Entry<ColliderComponent, TransformComponent> viewEntryA,
     View2Entry<ColliderComponent, TransformComponent> viewEntryB
@@ -93,6 +97,7 @@ public final class CollisionUtils {
    * @param circle the circle
    * @return the {@link MinimumTranslationVector} if there is a collision or else null
    */
+  @Nullable
   public static MinimumTranslationVector calculateAABBVsCircle(Rectangle rectangle, Circle circle) {
     Vector2D circleCenter = circle.center();
     Vector2D closestPointOnRectangle = SolaMath.clamp(rectangle.min(), rectangle.max(), circleCenter);
@@ -146,6 +151,7 @@ public final class CollisionUtils {
    * @param rectangleB the second rectangle
    * @return the {@link MinimumTranslationVector} if there is a collision or else null
    */
+  @Nullable
   public static MinimumTranslationVector calculateAABBVsAABB(Rectangle rectangleA, Rectangle rectangleB) {
     Vector2D aBoxMin = rectangleA.min();
     Vector2D aBoxMax = rectangleA.max();
@@ -203,6 +209,7 @@ public final class CollisionUtils {
    * @param circleB the second circle
    * @return the {@link MinimumTranslationVector} if there is a collision or else null
    */
+  @Nullable
   public static MinimumTranslationVector calculateCircleVsCircle(Circle circleA, Circle circleB) {
     Vector2D posA = circleA.center();
     Vector2D posB = circleB.center();
@@ -218,6 +225,7 @@ public final class CollisionUtils {
     return new MinimumTranslationVector(normal, penetration);
   }
 
+  @Nullable
   private static MinimumTranslationVector calculateCircleVsShapeSAT(Circle circle, Shape shape) {
     return SeparatingAxisTheorem.checkCollision(shape.getPoints(), circle.center(), circle.radius());
   }

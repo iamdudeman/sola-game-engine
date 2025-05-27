@@ -1,5 +1,7 @@
 package technology.sola.engine.physics.system;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
@@ -19,6 +21,7 @@ import java.util.List;
  * ImpulseCollisionResolutionSystem is an {@link EcsSystem} that responds to {@link CollisionEvent}s applying an
  * impulse to resolve collisions so that they will no longer overlap.
  */
+@NullMarked
 public class ImpulseCollisionResolutionSystem extends EcsSystem {
   /**
    * The order for this system which is one after the {@link CollisionDetectionSystem#ORDER}.
@@ -192,6 +195,7 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
     private static final Material NULL_MATERIAL = new Material(0, 1, 1);
     private final Vector2D velocity;
     private final TransformComponent transformComponent;
+    @Nullable
     private final DynamicBodyComponent dynamicBodyComponent;
     private final float inverseMass;
     private final float restitution;

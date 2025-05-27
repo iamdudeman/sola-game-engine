@@ -1,5 +1,7 @@
 package technology.sola.engine.input;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,10 +9,11 @@ import java.util.Map;
  * KeyboardLayout contains information for the current keyboard layout. This includes things like
  * what characters should render when shift is pressed. Defaults to {@link Type#QWERTY}.
  */
+@NullMarked
 public final class KeyboardLayout {
-  private static Map<Character, Character> shiftMap;
+  private static Map<Character, Character> shiftMap = new HashMap<>();
   private static Type type = Type.QWERTY;
-  private static HasShiftFunction hasShiftFunction;
+  private static HasShiftFunction hasShiftFunction = (keyCode) -> false;
 
   static {
     setType(Type.QWERTY);

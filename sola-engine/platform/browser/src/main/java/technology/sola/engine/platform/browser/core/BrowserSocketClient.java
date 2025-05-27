@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.browser.core;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.networking.NetworkQueue;
 import technology.sola.engine.networking.socket.SocketClient;
 import technology.sola.engine.networking.socket.SocketMessage;
@@ -8,6 +9,7 @@ import technology.sola.engine.platform.browser.javascript.JsNetworkUtils;
 /**
  * A browser implementation of {@link SocketClient}.
  */
+@NullMarked
 public class BrowserSocketClient implements SocketClient {
   private final NetworkQueue<SocketMessage> networkQueue = new NetworkQueue<>();
   private boolean isConnected = false;

@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.system;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.event.EventHub;
@@ -11,6 +12,7 @@ import technology.sola.engine.physics.event.CollisionEvent;
  * GravitySystem is an {@link EcsSystem} that applies a gravity constant of force to all
  * {@link technology.sola.ecs.Entity} that have a {@link DynamicBodyComponent}, are not kinematic and not grounded.
  */
+@NullMarked
 public class GravitySystem extends EcsSystem {
   /**
    * The order for this system which is one before the {@link PhysicsSystem#ORDER}.

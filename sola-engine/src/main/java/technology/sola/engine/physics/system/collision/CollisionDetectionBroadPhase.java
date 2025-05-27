@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.system.collision;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -12,6 +13,7 @@ import java.util.Collection;
  * CollisionDetectionBroadPhase defines the contract for a broad phase collision detection algorithm to be used by
  * {@link technology.sola.engine.physics.system.CollisionDetectionSystem}.
  */
+@NullMarked
 public interface CollisionDetectionBroadPhase {
   /**
    * Populates the underlying data structure from the list of collidable entities.

@@ -1,5 +1,7 @@
 package technology.sola.engine.input;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.EnumMap;
@@ -8,10 +10,12 @@ import java.util.Map;
 /**
  * MouseInput contains information about user interaction with the mouse.
  */
+@NullMarked
 public class MouseInput {
   private final Map<MouseButton, Boolean> mouseDownMap = new EnumMap<>(MouseButton.class);
   private final Map<MouseButton, ButtonState> mouseStatusMap = new EnumMap<>(MouseButton.class);
   private Vector2D lastEventPosition = new Vector2D(0, 0);
+  @Nullable
   private Vector2D currentMousePosition = null;
   private MouseWheelEvent lastMouseWheelEvent = MouseWheelEvent.NONE;
   private MouseWheelEvent currentMouseWheelEvent = MouseWheelEvent.NONE;
@@ -39,6 +43,7 @@ public class MouseInput {
   /**
    * @return the current position of the mouse on screen
    */
+  @Nullable
   public Vector2D getMousePosition() {
     return currentMousePosition;
   }

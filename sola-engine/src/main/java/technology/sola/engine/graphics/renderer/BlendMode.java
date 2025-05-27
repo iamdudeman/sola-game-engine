@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.renderer;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.blend.BlendFunction;
 import technology.sola.engine.graphics.renderer.blend.DissolveBlendFunction;
@@ -13,6 +14,7 @@ import technology.sola.engine.graphics.renderer.blend.NormalBlendFunction;
 /**
  * BlendMode is an enum of several prebuilt {@link BlendFunction}s.
  */
+@NullMarked
 public enum BlendMode implements BlendFunction {
   /**
    * No blending happens. Top pixel is used.

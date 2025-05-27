@@ -1,5 +1,7 @@
 package technology.sola.engine.networking;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -8,6 +10,7 @@ import java.util.Deque;
  *
  * @param <T> the type of the data
  */
+@NullMarked
 public class NetworkQueue<T> {
   private final Deque<T> queue = new ArrayDeque<>();
 

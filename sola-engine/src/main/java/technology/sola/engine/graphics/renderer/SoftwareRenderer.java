@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.renderer;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
@@ -22,10 +24,12 @@ import java.util.List;
  * is portable across {@link technology.sola.engine.core.SolaPlatform}s but will be less performant than a GPU based
  * implementation.
  */
+@NullMarked
 public class SoftwareRenderer extends Canvas implements Renderer {
   private static final SolaLogger LOGGER = SolaLogger.of(SoftwareRenderer.class);
   private final List<Layer> layers = new ArrayList<>();
-  private BlendFunction blendFunction;
+  private BlendFunction blendFunction = BlendMode.NO_BLENDING;
+  @Nullable
   private Font font;
   private int clampX;
   private int clampY;
@@ -40,7 +44,6 @@ public class SoftwareRenderer extends Canvas implements Renderer {
    */
   public SoftwareRenderer(int width, int height) {
     super(width, height);
-    setBlendFunction(BlendMode.NO_BLENDING);
     resetClamp();
   }
 

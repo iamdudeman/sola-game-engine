@@ -1,5 +1,6 @@
 package technology.sola.engine.physics.utils;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
@@ -13,8 +14,8 @@ import java.util.*;
  * bucket with other entities based on its 2D coordinate. This helps reduce the number of collision checks that are
  * needed during broad phase collision detection.
  */
+@NullMarked
 public class SpatialHashMap {
-  private static final BucketId[] EMPTY_BUCKET_IDS = new BucketId[0];
   private final int cellSize;
   private final float inverseCellSize;
   private final Map<BucketId, List<View2Entry<ColliderComponent, TransformComponent>>> buckets = new HashMap<>();
@@ -89,9 +90,6 @@ public class SpatialHashMap {
   BucketId[] getBucketIdsForViewEntry(View2Entry<ColliderComponent, TransformComponent> entry) {
     TransformComponent transformComponent = entry.c2();
     ColliderComponent colliderComponent = entry.c1();
-
-    if (transformComponent == null || colliderComponent == null) return EMPTY_BUCKET_IDS;
-
     Rectangle boundingBox = colliderComponent.getBoundingBox(transformComponent);
 
     float x = boundingBox.min().x();

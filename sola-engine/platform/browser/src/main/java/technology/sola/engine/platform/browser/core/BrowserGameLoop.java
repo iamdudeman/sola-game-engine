@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.browser.core;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.core.GameLoop;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
@@ -11,6 +12,7 @@ import java.util.function.Consumer;
 /**
  * A {@link GameLoop} implementation for web browsers.
  */
+@NullMarked
 public class BrowserGameLoop extends GameLoop implements JsUtils.Function {
   private static final float INVERSE_MICROSECONDS = 1 / 1e9f;
 

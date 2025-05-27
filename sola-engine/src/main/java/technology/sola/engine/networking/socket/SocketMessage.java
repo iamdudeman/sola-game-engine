@@ -1,8 +1,11 @@
 package technology.sola.engine.networking.socket;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * SocketMessage contains data transmitted between a server and client.
  */
+@NullMarked
 public class SocketMessage {
   private static final String SEPARATOR = "~";
   private final int type;
