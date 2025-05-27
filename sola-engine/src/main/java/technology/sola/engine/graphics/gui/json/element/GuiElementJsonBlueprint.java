@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui.json.element;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.gui.json.styles.StylesJsonValueParser;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
@@ -14,6 +15,7 @@ import technology.sola.json.JsonObject;
  * @param <Element>       the gui element type
  * @param <StylesBuilder> the styles builder type
  */
+@NullMarked
 public abstract class GuiElementJsonBlueprint<Styles extends BaseStyles, Element extends GuiElement<Styles, ?>, StylesBuilder extends BaseStyles.Builder<?>> {
   private final StylesJsonValueParser<StylesBuilder> stylesJsonValueParser;
 

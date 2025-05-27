@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.gui.elements.input;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.Color;
@@ -18,9 +20,11 @@ import java.util.List;
 /**
  * TextInputGuiElement is a {@link BaseInputGuiElement} that allows users to interact via typing text into the field.
  */
+@NullMarked
 public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, TextInputGuiElement> {
   // props
   private String placeholder = "";
+  @Nullable
   private Integer maxLength;
 
   // internals
@@ -29,7 +33,9 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, Te
   private boolean isShiftDown = false;
   private Font font = DefaultFont.get();
   private String currentFontId = DefaultFont.ASSET_ID;
+  @Nullable
   private TextRenderDetails textRenderDetails;
+  @Nullable
   private String text;
 
   /**
@@ -167,6 +173,7 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, Te
   /**
    * @return the maximum number of characters allowed for the input
    */
+  @Nullable
   public Integer getMaxLength() {
     return maxLength;
   }
@@ -178,7 +185,7 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, Te
    * @param maxLength the new max length
    * @return this
    */
-  public TextInputGuiElement setMaxLength(Integer maxLength) {
+  public TextInputGuiElement setMaxLength(@Nullable Integer maxLength) {
     this.maxLength = maxLength;
 
     if (maxLength != null && valueBuilder.length() > maxLength) {

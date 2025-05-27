@@ -1,11 +1,13 @@
 package technology.sola.engine.graphics.components;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.renderer.Layer;
 
 /**
  * LayerComponent is a {@link Component} that contains data for a 2d rendering layers for an {@link technology.sola.ecs.Entity}.
  */
+@NullMarked
 public class LayerComponent implements Component {
   private String layer;
   private int order;

@@ -1,5 +1,6 @@
 package technology.sola.engine.server;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.networking.NetworkQueue;
 import technology.sola.engine.networking.socket.SocketMessage;
 
@@ -9,6 +10,7 @@ import java.io.IOException;
 /**
  * ClientConnection is a handle to the client's connection to the server.
  */
+@NullMarked
 public interface ClientConnection extends Runnable, Closeable {
   /**
    * @return the id for the client

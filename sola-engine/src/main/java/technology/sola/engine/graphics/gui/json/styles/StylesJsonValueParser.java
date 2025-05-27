@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui.json.styles;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.json.JsonElement;
 
@@ -8,6 +9,7 @@ import technology.sola.json.JsonElement;
  *
  * @param <Builder> the builder type extending {@link BaseStyles}
  */
+@NullMarked
 @FunctionalInterface
 public interface StylesJsonValueParser<Builder extends BaseStyles.Builder<?>> {
   /**

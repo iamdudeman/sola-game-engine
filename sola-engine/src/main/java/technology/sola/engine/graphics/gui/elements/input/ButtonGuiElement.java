@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.gui.elements.input;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.graphics.gui.GuiElementDimensions;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -9,6 +11,7 @@ import technology.sola.engine.input.Key;
  * ButtonGuiElement is a {@link BaseInputGuiElement} that allows users to interact via clicking the button or using
  * keyboard shortcuts.
  */
+@NullMarked
 public class ButtonGuiElement extends BaseInputGuiElement<BaseStyles, ButtonGuiElement> {
   // props
   private Runnable onAction = () -> {
@@ -50,6 +53,7 @@ public class ButtonGuiElement extends BaseInputGuiElement<BaseStyles, ButtonGuiE
   }
 
   @Override
+  @Nullable
   public GuiElementDimensions calculateContentDimensions() {
     return null;
   }

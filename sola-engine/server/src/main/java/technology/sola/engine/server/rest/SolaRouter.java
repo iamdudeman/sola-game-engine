@@ -1,6 +1,8 @@
 package technology.sola.engine.server.rest;
 
 import com.sun.net.httpserver.HttpExchange;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.json.JsonElement;
 import technology.sola.json.JsonObject;
 import technology.sola.json.SolaJson;
@@ -11,6 +13,7 @@ import java.util.*;
  * SolaRouter handles {@link HttpExchange}s to the server via routes it has registered. If no route matches the method
  * and path from the exchange then a 404 {@link SolaResponse} will be returned.
  */
+@NullMarked
 public class SolaRouter {
   private final List<Route> routes = new ArrayList<>();
 
@@ -146,9 +149,9 @@ public class SolaRouter {
     return pathParameters;
   }
 
-  private Map<String, String> parseQueryParams(HttpExchange exchange) {
+  private Map<String, @Nullable String> parseQueryParams(HttpExchange exchange) {
     String query = exchange.getRequestURI().getQuery();
-    Map<String, String> queryParameters = new HashMap<>();
+    Map<String, @Nullable String> queryParameters = new HashMap<>();
 
     if (query != null) {
       var queryPairs = query.split("&");

@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.gui.json;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.graphics.gui.json.element.GuiElementJsonBlueprint;
 import technology.sola.engine.graphics.gui.GuiElement;
@@ -16,6 +18,7 @@ import java.util.stream.Stream;
 /**
  * GuiJsonDocumentBuilder handles building {@link GuiJsonDocument} instances from a {@link JsonObject}.
  */
+@NullMarked
 public class GuiJsonDocumentBuilder {
   private static final String ATTR_TAG = "tag";
   private static final String ATTR_ID = "id";
@@ -63,7 +66,9 @@ public class GuiJsonDocumentBuilder {
     // build and set element styles
     var stylesJsonArray = elementJson.getArray(ATTR_STYLES, new JsonArray());
     var themeStyles = guiTheme.getForElement(element);
-    var styles = stylesJsonArray.stream().map(styleObject -> (ConditionalStyle<BaseStyles>) guiElementJsonBlueprint.createStylesFromJson(styleObject.asObject())).toList();
+    var styles = stylesJsonArray.stream()
+      .map(styleObject -> (ConditionalStyle<@NonNull BaseStyles>) guiElementJsonBlueprint.createStylesFromJson(styleObject.asObject()))
+      .toList();
 
     ((GuiElement) element).styles().setStyles(
       Stream.concat(themeStyles.stream(), styles.stream()).toList()

@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.gui.elements;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.graphics.gui.GuiElement;
@@ -14,14 +16,20 @@ import java.util.List;
  * SpriteGuiElement is a {@link GuiElement} that renders a sprite from a {@link SpriteSheet} in a GUI. It does not
  * render child elements.
  */
+@NullMarked
 public class SpriteGuiElement extends GuiElement<BaseStyles, SpriteGuiElement> {
   // props
+  @Nullable
   private String assetId;
+  @Nullable
   private String spriteId;
 
   // internals
+  @Nullable
   private SolaImage solaImage;
+  @Nullable
   private String currentAssetId;
+  @Nullable
   private String currentSpriteId;
 
   @Override
@@ -37,6 +45,7 @@ public class SpriteGuiElement extends GuiElement<BaseStyles, SpriteGuiElement> {
   }
 
   @Override
+  @Nullable
   public GuiElementDimensions calculateContentDimensions() {
     if ((assetId != null && !assetId.equals(currentAssetId)) || (spriteId != null && !spriteId.equals(currentSpriteId))) {
       getAssetLoaderProvider().get(SpriteSheet.class)
@@ -101,6 +110,7 @@ public class SpriteGuiElement extends GuiElement<BaseStyles, SpriteGuiElement> {
   /**
    * @return the id of the {@link SpriteSheet} asset to be rendered
    */
+  @Nullable
   public String getAssetId() {
     return assetId;
   }
@@ -121,6 +131,7 @@ public class SpriteGuiElement extends GuiElement<BaseStyles, SpriteGuiElement> {
   /**
    * @return the id of the sprite within the {@link SpriteSheet} to be rendered.
    */
+  @Nullable
   public String getSpriteId() {
     return spriteId;
   }

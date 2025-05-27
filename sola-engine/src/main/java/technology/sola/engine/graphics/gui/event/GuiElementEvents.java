@@ -1,9 +1,12 @@
 package technology.sola.engine.graphics.gui.event;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * GuiElementEvents is a container for the {@link GuiEventListenerList}s for various event types
  * for {@link technology.sola.engine.graphics.gui.GuiElement}s.
  */
+@NullMarked
 public class GuiElementEvents {
   private final GuiEventListenerList<GuiKeyEvent> keyPressedEventListenerList = new GuiEventListenerList<>();
   private final GuiEventListenerList<GuiKeyEvent> keyReleasedEventListenerList = new GuiEventListenerList<>();

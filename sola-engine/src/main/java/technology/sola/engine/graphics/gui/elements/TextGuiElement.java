@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.gui.elements;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.Color;
@@ -15,13 +17,16 @@ import java.util.List;
 /**
  * TextGuiElement is a {@link GuiElement} that renders text for a GUI. It does not render child elements.
  */
+@NullMarked
 public class TextGuiElement extends GuiElement<TextStyles, TextGuiElement> {
   // properties
+  @Nullable
   private String text;
 
   // internals
   private Font font = DefaultFont.get();
   private String currentFontId = DefaultFont.ASSET_ID;
+  @Nullable
   private TextRenderDetails textRenderDetails;
 
   @Override
@@ -94,6 +99,7 @@ public class TextGuiElement extends GuiElement<TextStyles, TextGuiElement> {
   /**
    * @return the text that will be rendered
    */
+  @Nullable
   public String getText() {
     return text;
   }

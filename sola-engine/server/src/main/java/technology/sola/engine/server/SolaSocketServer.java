@@ -1,8 +1,11 @@
 package technology.sola.engine.server;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * SolaSocketServer is a {@link SolaServer} without REST capabilities enabled.
  */
+@NullMarked
 public abstract class SolaSocketServer extends SolaServer {
   /**
    * Creates an instance of this SolaSocketServer.

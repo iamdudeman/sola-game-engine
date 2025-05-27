@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui.elements.input;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 
@@ -10,6 +11,7 @@ import technology.sola.engine.graphics.gui.style.BaseStyles;
  * @param <Style> the style type
  * @param <ElementType> this element's type, so it can be used for method chaining
  */
+@NullMarked
 public abstract class BaseInputGuiElement<Style extends BaseStyles, ElementType extends GuiElement<Style, ElementType>> extends GuiElement<Style, ElementType> {
   // props
   private boolean isDisabled;

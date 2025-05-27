@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.server;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
@@ -27,6 +28,7 @@ import java.util.stream.Collectors;
 /**
  * Runs the example server listening on port 60000.
  */
+@NullMarked
 public class ServerMain {
   private static final int MAX_PLAYERS = 10;
 

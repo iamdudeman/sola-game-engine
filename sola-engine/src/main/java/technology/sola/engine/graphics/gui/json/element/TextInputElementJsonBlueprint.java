@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui.json.element;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.gui.elements.input.TextInputGuiElement;
 import technology.sola.engine.graphics.gui.elements.input.TextInputStyles;
 import technology.sola.engine.graphics.gui.json.styles.TextInputStylesJsonValueParser;
@@ -8,6 +9,7 @@ import technology.sola.json.JsonObject;
 /**
  * A {@link GuiElementJsonBlueprint} for {@link TextInputGuiElement}.
  */
+@NullMarked
 public class TextInputElementJsonBlueprint extends GuiElementJsonBlueprint<TextInputStyles, TextInputGuiElement, TextInputStyles.Builder<?>> {
   /**
    * Creates an instance of this {@link GuiElementJsonBlueprint}.

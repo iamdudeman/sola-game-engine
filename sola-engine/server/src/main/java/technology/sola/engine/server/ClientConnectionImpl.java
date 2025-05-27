@@ -1,5 +1,6 @@
 package technology.sola.engine.server;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.networking.NetworkQueue;
 import technology.sola.engine.networking.socket.SocketMessage;
 import technology.sola.engine.networking.socket.SocketMessageDecoder;
@@ -17,6 +18,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.function.Consumer;
 
+@NullMarked
 class ClientConnectionImpl implements ClientConnection {
   private final NetworkQueue<SocketMessage> networkQueue = new NetworkQueue<>();
   private final Socket socket;
@@ -106,21 +108,11 @@ class ClientConnectionImpl implements ClientConnection {
   public void close() throws IOException {
     isConnected = false;
 
-    if (socket != null) {
-      socket.close();
-    }
-    if (printWriter != null) {
-      printWriter.close();
-    }
-    if (bufferedReader != null) {
-      bufferedReader.close();
-    }
-    if (bufferedOutputStream != null) {
-      bufferedOutputStream.close();
-    }
-    if (bufferedInputStream != null) {
-      bufferedInputStream.close();
-    }
+    socket.close();
+    printWriter.close();
+    bufferedReader.close();
+    bufferedOutputStream.close();
+    bufferedInputStream.close();
   }
 
   private void handshake() throws IOException {

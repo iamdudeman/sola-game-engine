@@ -1,8 +1,11 @@
 package technology.sola.engine.graphics.gui.event;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * GuiEvent defines the general api for gui specific events.
  */
+@NullMarked
 public abstract class GuiEvent {
   private boolean isAbleToPropagate = true;
 

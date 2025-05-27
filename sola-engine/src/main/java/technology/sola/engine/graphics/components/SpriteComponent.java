@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.components;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
@@ -9,9 +10,10 @@ import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import java.util.function.Consumer;
 
 /**
- * SpriteCOmponent is a {@link Component} that contains data for rendering 2d sprites for an
+ * SpriteComponent is a {@link Component} that contains data for rendering 2d sprites for an
  * {@link technology.sola.ecs.Entity}.
  */
+@NullMarked
 public class SpriteComponent implements Component {
   private SpriteKeyFrame spriteKeyFrame;
 

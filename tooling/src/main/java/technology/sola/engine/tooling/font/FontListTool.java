@@ -1,5 +1,6 @@
 package technology.sola.engine.tooling.font;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.tooling.Tool;
 
 import java.awt.*;
@@ -11,6 +12,7 @@ import java.util.stream.Collectors;
 /**
  * {@link Tool} that lists available font families that can be used in the {@link FontRasterizerTool}.
  */
+@NullMarked
 public class FontListTool implements Tool {
   @Override
   public String getName() {

@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.gui.style;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.style.property.*;
 
@@ -7,16 +9,26 @@ import technology.sola.engine.graphics.gui.style.property.*;
  * BaseStyles contains properties that are common to all {@link technology.sola.engine.graphics.gui.GuiElement} to use
  * as part of rendering.
  */
+@NullMarked
 public class BaseStyles {
+  @Nullable
   private final Background background;
+  @Nullable
   private final Border border;
   private final Padding padding;
+  @Nullable
   private final StyleValue width;
+  @Nullable
   private final StyleValue height;
+  @Nullable
   private final Visibility visibility;
+  @Nullable
   private final Integer gap;
+  @Nullable
   private final Direction direction;
+  @Nullable
   private final MainAxisChildren mainAxisChildren;
+  @Nullable
   private final CrossAxisChildren crossAxisChildren;
   private final Position position;
 
@@ -54,6 +66,7 @@ public class BaseStyles {
    *
    * @return the {@link Background}
    */
+  @Nullable
   public Background background() {
     return background;
   }
@@ -63,6 +76,7 @@ public class BaseStyles {
    *
    * @return the {@link Border}
    */
+  @Nullable
   public Border border() {
     return border;
   }
@@ -82,6 +96,7 @@ public class BaseStyles {
    *
    * @return the width of the element
    */
+  @Nullable
   public StyleValue width() {
     return width;
   }
@@ -92,6 +107,7 @@ public class BaseStyles {
    *
    * @return the height of the element
    */
+  @Nullable
   public StyleValue height() {
     return height;
   }
@@ -101,6 +117,7 @@ public class BaseStyles {
    *
    * @return the gap between child elements
    */
+  @Nullable
   public Integer gap() {
     return gap;
   }
@@ -110,6 +127,7 @@ public class BaseStyles {
    *
    * @return the direction child elements flow
    */
+  @Nullable
   public Direction direction() {
     return direction;
   }
@@ -119,6 +137,7 @@ public class BaseStyles {
    *
    * @return the {@link MainAxisChildren}
    */
+  @Nullable
   public MainAxisChildren mainAxisChildren() {
     return mainAxisChildren;
   }
@@ -128,6 +147,7 @@ public class BaseStyles {
    *
    * @return the {@link CrossAxisChildren}
    */
+  @Nullable
   public CrossAxisChildren crossAxisChildren() {
     return crossAxisChildren;
   }
@@ -148,6 +168,7 @@ public class BaseStyles {
    *
    * @return the {@link Visibility}
    */
+  @Nullable
   public Visibility visibility() {
     return visibility;
   }
@@ -157,16 +178,26 @@ public class BaseStyles {
    *
    * @param <Self> this builder type
    */
+  @NullMarked
   public static class Builder<Self extends Builder<Self>> {
+    @Nullable
     private Background background;
+    @Nullable
     private Border border;
     private Padding padding = new Padding();
+    @Nullable
     private StyleValue width;
+    @Nullable
     private StyleValue height;
+    @Nullable
     private Visibility visibility;
+    @Nullable
     private Integer gap;
+    @Nullable
     private MainAxisChildren mainAxisChildren;
+    @Nullable
     private CrossAxisChildren crossAxisChildren;
+    @Nullable
     private Direction direction;
     private Position position = new Position();
 
@@ -186,7 +217,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setBackgroundColor(Color backgroundColor) {
+    public Self setBackgroundColor(@Nullable Color backgroundColor) {
       this.background = backgroundColor == null ? null : new Background(backgroundColor);
       return (Self) this;
     }
@@ -198,7 +229,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setBorderColor(Color borderColor) {
+    public Self setBorderColor(@Nullable Color borderColor) {
       this.border = borderColor == null ? null : new Border(1, borderColor);
       return (Self) this;
     }
@@ -210,7 +241,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setWidth(String width) {
+    public Self setWidth(@Nullable String width) {
       this.width = StyleValue.of(width);
       return (Self) this;
     }
@@ -234,7 +265,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setHeight(String height) {
+    public Self setHeight(@Nullable String height) {
       this.height = StyleValue.of(height);
       return (Self) this;
     }
@@ -258,7 +289,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setVisibility(Visibility visibility) {
+    public Self setVisibility(@Nullable Visibility visibility) {
       this.visibility = visibility;
       return (Self) this;
     }
@@ -270,7 +301,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setGap(Integer gap) {
+    public Self setGap(@Nullable Integer gap) {
       this.gap = gap;
       return (Self) this;
     }
@@ -282,7 +313,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setDirection(Direction direction) {
+    public Self setDirection(@Nullable Direction direction) {
       this.direction = direction;
       return (Self) this;
     }
@@ -294,7 +325,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setMainAxisChildren(MainAxisChildren mainAxisChildren) {
+    public Self setMainAxisChildren(@Nullable MainAxisChildren mainAxisChildren) {
       this.mainAxisChildren = mainAxisChildren;
       return (Self) this;
     }
@@ -306,7 +337,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setCrossAxisChildren(CrossAxisChildren crossAxisChildren) {
+    public Self setCrossAxisChildren(@Nullable CrossAxisChildren crossAxisChildren) {
       this.crossAxisChildren = crossAxisChildren;
       return (Self) this;
     }
@@ -318,7 +349,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setPositionX(String x) {
+    public Self setPositionX(@Nullable String x) {
       this.position = new Position(StyleValue.of(x), position.y());
       return (Self) this;
     }
@@ -330,7 +361,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setPositionY(String y) {
+    public Self setPositionY(@Nullable String y) {
       this.position = new Position(position.x(), StyleValue.of(y));
       return (Self) this;
     }
@@ -345,7 +376,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setPadding(Integer top, Integer right, Integer bottom, Integer left) {
+    public Self setPadding(@Nullable Integer top, @Nullable Integer right, @Nullable Integer bottom, @Nullable Integer left) {
       padding = new Padding(top, right, bottom, left);
       return (Self) this;
     }
@@ -357,7 +388,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setPadding(Integer size) {
+    public Self setPadding(@Nullable Integer size) {
       padding = new Padding(size);
       return (Self) this;
     }
@@ -369,7 +400,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setPaddingVertical(Integer topBottom) {
+    public Self setPaddingVertical(@Nullable Integer topBottom) {
       padding = new Padding(topBottom, padding.left(), topBottom, padding.right());
       return (Self) this;
     }
@@ -381,7 +412,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setPaddingHorizontal(Integer leftRight) {
+    public Self setPaddingHorizontal(@Nullable Integer leftRight) {
       padding = new Padding(padding.top(), leftRight, padding.bottom(), leftRight);
       return (Self) this;
     }
@@ -393,7 +424,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setPaddingTop(Integer top) {
+    public Self setPaddingTop(@Nullable Integer top) {
       padding = new Padding(top, padding.right(), padding.bottom(), padding.left());
       return (Self) this;
     }
@@ -405,7 +436,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setPaddingRight(Integer right) {
+    public Self setPaddingRight(@Nullable Integer right) {
       padding = new Padding(padding.top(), right, padding.bottom(), padding.left());
       return (Self) this;
     }
@@ -417,7 +448,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setPaddingBottom(Integer bottom) {
+    public Self setPaddingBottom(@Nullable Integer bottom) {
       padding = new Padding(padding.top(), padding.right(), bottom, padding.left());
       return (Self) this;
     }
@@ -429,7 +460,7 @@ public class BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setPaddingLeft(Integer left) {
+    public Self setPaddingLeft(@Nullable Integer left) {
       padding = new Padding(padding.top(), padding.right(), padding.bottom(), left);
       return (Self) this;
     }
