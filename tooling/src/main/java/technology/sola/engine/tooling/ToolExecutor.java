@@ -1,5 +1,7 @@
 package technology.sola.engine.tooling;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -7,6 +9,7 @@ import java.util.Scanner;
 /**
  * ToolExecutor parses command line arguments and executes a {@link Tool} based on the input.
  */
+@NullMarked
 public class ToolExecutor {
   private final Tool[] tools;
 

@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.components.animation;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.components.SpriteKeyFrame;
 
@@ -11,6 +13,7 @@ import java.util.Map;
  * {@link technology.sola.engine.graphics.components.SpriteComponent} animates between frames. Multiple different
  * animations can be added and played as needed.
  */
+@NullMarked
 public class SpriteAnimatorComponent implements Component {
   /**
    * Constant for telling the {@link SpriteAnimatorComponent} to continuously loop the animation.
@@ -20,11 +23,14 @@ public class SpriteAnimatorComponent implements Component {
   private final Map<String, SpriteKeyFrame[]> animationMap = new HashMap<>();
   private final Map<String, Integer> animationLoopsMap = new HashMap<>();
   private int keyFrameIndex = 0;
+  @Nullable
   private String activeAnimationId = null;
   private int activeAnimationLoops;
+  @Nullable
   private SpriteKeyFrame activeFrame;
   private SpriteKeyFrame[] activeAnimationKeyFrames;
   private boolean animationCompleteCalled = false;
+  @Nullable
   private AnimationCompleteCallback animationCompleteCallback;
   private float elapsedAnimationTime = 0;
   private float elapsedLoops = 0;
@@ -154,6 +160,7 @@ public class SpriteAnimatorComponent implements Component {
   /**
    * @return the currently active {@link SpriteKeyFrame}
    */
+  @Nullable
   public SpriteKeyFrame getCurrentFrame() {
     return activeFrame;
   }
@@ -161,6 +168,7 @@ public class SpriteAnimatorComponent implements Component {
   /**
    * @return the currently active animation id
    */
+  @Nullable
   public String getActiveAnimationId() {
     return activeAnimationId;
   }

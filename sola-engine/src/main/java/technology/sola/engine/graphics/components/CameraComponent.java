@@ -1,10 +1,12 @@
 package technology.sola.engine.graphics.components;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
 
 /**
  * CameraComponent is a {@link Component} that contains data for a 2d camera for an {@link technology.sola.ecs.Entity}.
  */
+@NullMarked
 public class CameraComponent implements Component {
   private int priority = 0;
 

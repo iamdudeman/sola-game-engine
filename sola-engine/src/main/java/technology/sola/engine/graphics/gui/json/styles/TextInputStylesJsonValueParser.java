@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui.json.styles;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.gui.elements.TextStyles;
 import technology.sola.engine.graphics.gui.elements.input.TextInputStyles;
 import technology.sola.json.JsonElement;
@@ -7,6 +8,7 @@ import technology.sola.json.JsonElement;
 /**
  * A {@link StylesJsonValueParser} implementation for {@link TextStyles.Builder}.
  */
+@NullMarked
 public class TextInputStylesJsonValueParser implements StylesJsonValueParser<TextInputStyles.Builder<?>> {
   private final TextStylesJsonValueParser textStylesJsonValueParser = new TextStylesJsonValueParser();
 

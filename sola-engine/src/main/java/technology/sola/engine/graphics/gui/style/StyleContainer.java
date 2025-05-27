@@ -129,7 +129,7 @@ public class StyleContainer<Style extends BaseStyles> {
    * @param <R>              the return value type
    * @return the calculated style or null
    */
-  public <R> @Nullable R getPropertyValue(Function<Style, R> propertySupplier) {
+  public <R> @Nullable R getPropertyValue(Function<Style, @Nullable R> propertySupplier) {
     return getPropertyValue(propertySupplier, null);
   }
 

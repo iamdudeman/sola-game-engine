@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui;
 
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.graphics.gui.event.GuiElementEvents;
@@ -23,6 +24,7 @@ import java.util.List;
  * @param <Style>       the style type for the element
  * @param <ElementType> this element's type, so it can be used for method chaining
  */
+@NullMarked
 public abstract class GuiElement<Style extends BaseStyles, ElementType extends GuiElement<Style, ElementType>> {
   /**
    * The {@link StyleContainer} for the element.
@@ -45,10 +47,12 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    */
   GuiElementBounds bounds;
   boolean isLayoutChanged;
+  @Nullable
   private GuiElement<?, ?> parent;
   private final GuiElementEvents events = new GuiElementEvents();
   private boolean isHovered = false;
   private boolean isActive = false;
+  @Nullable
   private String id;
 
   /**
@@ -211,6 +215,7 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   /**
    * @return the parent element
    */
+  @Nullable
   public GuiElement<?, ?> getParent() {
     return parent;
   }
@@ -237,6 +242,7 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   /**
    * @return the id of the element
    */
+  @Nullable
   public String getId() {
     return id;
   }
@@ -262,13 +268,14 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @param <T>          the element type
    * @return the element with the desired id or null if not found
    */
+  @Nullable
   public <T extends GuiElement<?, ?>> T findElementById(String id, Class<T> elementClass) {
     if (id.equals(this.id)) {
       return elementClass.cast(this);
     }
 
     for (var child : children) {
-      var childElement = child.findElementById(id, elementClass);
+      T childElement = child.findElementById(id, elementClass);
 
       if (childElement != null) {
         return childElement;
@@ -332,20 +339,18 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    */
   @SuppressWarnings("unchecked")
   public ElementType appendChildren(GuiElement<?, ?>... children) {
-    if (children != null) {
-      for (GuiElement<?, ?> child : children) {
-        if (child.parent != null) {
-          child.parent.children.remove(child);
-          child.parent.invalidateLayout();
-        }
-
-        child.parent = this;
-        child.invalidateLayout();
-        this.children.add(child);
+    for (GuiElement<?, ?> child : children) {
+      if (child.parent != null) {
+        child.parent.children.remove(child);
+        child.parent.invalidateLayout();
       }
 
-      this.invalidateLayout();
+      child.parent = this;
+      child.invalidateLayout();
+      this.children.add(child);
     }
+
+    this.invalidateLayout();
 
     return (ElementType) this;
   }

@@ -1,12 +1,16 @@
 package technology.sola.engine.graphics.gui.elements.input;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.elements.TextStyles;
 
 /**
  * TextInputStyles extends {@link TextStyles} properties adding in extra properties for text input.
  */
+@NullMarked
 public class TextInputStyles extends TextStyles {
+  @Nullable
   private final Color placeholderColor;
 
   /**
@@ -31,6 +35,7 @@ public class TextInputStyles extends TextStyles {
   /**
    * @return the {@link Color} of the placeholder text
    */
+  @Nullable
   public Color placeholderColor() {
     return placeholderColor;
   }
@@ -41,6 +46,7 @@ public class TextInputStyles extends TextStyles {
    * @param <Self> this builder type
    */
   public static class Builder<Self extends Builder<Self>> extends TextStyles.Builder<Self> {
+    @Nullable
     private Color placeholderColor;
 
     @Override
@@ -55,7 +61,7 @@ public class TextInputStyles extends TextStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setPlaceholderColor(Color placeholderColor) {
+    public Self setPlaceholderColor(@Nullable Color placeholderColor) {
       this.placeholderColor = placeholderColor;
       return (Self) this;
     }

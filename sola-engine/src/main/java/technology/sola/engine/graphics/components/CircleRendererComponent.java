@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.components;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
 
@@ -9,6 +10,7 @@ import technology.sola.engine.graphics.Color;
  * <br>
  * Note: only {@link technology.sola.engine.core.component.TransformComponent#getScaleX()} is used for size of collider
  */
+@NullMarked
 public class CircleRendererComponent implements Component {
   private Color color;
   private boolean isFilled;

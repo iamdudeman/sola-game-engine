@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.components.animation;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.Component;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.math.EasingFunction;
@@ -9,13 +11,19 @@ import technology.sola.math.SolaMath;
  * TransformAnimatorComponent is a {@link Component} that contains properties for defining an animation that is applied
  * to an {@link technology.sola.ecs.Entity}s {@link TransformComponent}.
  */
+@NullMarked
 public class TransformAnimatorComponent implements Component {
   private final EasingFunction easingFunction;
   private final long duration;
+  @Nullable
   private Float endingTranslateX;
+  @Nullable
   private Float endingTranslateY;
+  @Nullable
   private Float endingScaleX;
+  @Nullable
   private Float endingScaleY;
+  @Nullable
   private AnimationCompleteCallback animationCompleteCallback;
 
   private boolean isInit = false;

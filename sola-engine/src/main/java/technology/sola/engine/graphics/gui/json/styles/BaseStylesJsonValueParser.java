@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.gui.json.styles;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.graphics.gui.json.exception.UnsupportedStylesPropertyException;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.property.*;
@@ -8,6 +10,7 @@ import technology.sola.json.JsonElement;
 /**
  * A {@link StylesJsonValueParser} implementation for {@link BaseStyles.Builder}.
  */
+@NullMarked
 public class BaseStylesJsonValueParser implements StylesJsonValueParser<BaseStyles.Builder<?>> {
   @Override
   public void setPropertyFromJson(BaseStyles.Builder<?> stylesBuilder, String propertyKey, JsonElement value) {
@@ -37,7 +40,8 @@ public class BaseStylesJsonValueParser implements StylesJsonValueParser<BaseStyl
     }
   }
 
-  private MainAxisChildren parseMainAxisChildren(JsonElement value) {
+  @Nullable
+  private static MainAxisChildren parseMainAxisChildren(JsonElement value) {
     if (value.isNull()) {
       return null;
     }
@@ -55,7 +59,8 @@ public class BaseStylesJsonValueParser implements StylesJsonValueParser<BaseStyl
     };
   }
 
-  private CrossAxisChildren parseCrossAxisChildren(JsonElement value) {
+  @Nullable
+  private static CrossAxisChildren parseCrossAxisChildren(JsonElement value) {
     if (value.isNull()) {
       return null;
     }
@@ -71,7 +76,8 @@ public class BaseStylesJsonValueParser implements StylesJsonValueParser<BaseStyl
     };
   }
 
-  private Direction parseDirection(JsonElement value) {
+  @Nullable
+  private static Direction parseDirection(JsonElement value) {
     if (value.isNull()) {
       return null;
     }
@@ -87,7 +93,8 @@ public class BaseStylesJsonValueParser implements StylesJsonValueParser<BaseStyl
     };
   }
 
-  private Visibility parseVisibility(JsonElement value) {
+  @Nullable
+  private static Visibility parseVisibility(JsonElement value) {
     if (value.isNull()) {
       return null;
     }

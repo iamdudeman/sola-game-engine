@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.components;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
@@ -8,6 +10,7 @@ import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 /**
  * SpriteKeyFrame holds information about how long a particular sprite should be rendered as part of an animation.
  */
+@NullMarked
 public class SpriteKeyFrame {
   /**
    * This duration value informs the {@link technology.sola.engine.graphics.system.SpriteAnimatorSystem} to not tick
@@ -15,7 +18,9 @@ public class SpriteKeyFrame {
    */
   public static final long DURATION_FREEZE = -1L;
 
+  @Nullable
   private final String spriteSheetId;
+  @Nullable
   private final String spriteId;
   private final long duration;
   private final AssetHandle<SolaImage> cachedSpriteHandle = new AssetHandle<>();
@@ -73,6 +78,7 @@ public class SpriteKeyFrame {
   /**
    * @return the {@link SpriteSheet} asset id
    */
+  @Nullable
   public String getSpriteSheetId() {
     return spriteSheetId;
   }
@@ -80,6 +86,7 @@ public class SpriteKeyFrame {
   /**
    * @return the sprite id in the {@link SpriteSheet}
    */
+  @Nullable
   public String getSpriteId() {
     return spriteId;
   }

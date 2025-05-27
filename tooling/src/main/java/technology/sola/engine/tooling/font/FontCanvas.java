@@ -1,5 +1,6 @@
 package technology.sola.engine.tooling.font;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.font.FontGlyph;
 
 import java.awt.*;
@@ -7,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+@NullMarked
 class FontCanvas implements AutoCloseable {
   private final BufferedImage bufferedImage;
   private final Graphics2D graphics2D;

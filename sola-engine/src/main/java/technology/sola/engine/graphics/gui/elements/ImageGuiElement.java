@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.gui.elements;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementDimensions;
@@ -12,12 +14,16 @@ import java.util.List;
 /**
  * ImageGuiElement is a {@link GuiElement} that renders a {@link SolaImage} in a GUI. It does not render child elements.
  */
+@NullMarked
 public class ImageGuiElement extends GuiElement<BaseStyles, ImageGuiElement> {
   // props
+  @Nullable
   private String assetId;
 
   // internals
+  @Nullable
   private SolaImage solaImage;
+  @Nullable
   private String currentAssetId;
 
   @Override
@@ -96,6 +102,7 @@ public class ImageGuiElement extends GuiElement<BaseStyles, ImageGuiElement> {
   /**
    * @return the id of the {@link SolaImage} asset to be rendered
    */
+  @Nullable
   public String getAssetId() {
     return assetId;
   }

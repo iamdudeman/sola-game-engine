@@ -1,5 +1,6 @@
 package technology.sola.engine.tooling.font;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.font.FontGlyph;
 import technology.sola.engine.assets.graphics.font.FontInfo;
 import technology.sola.engine.assets.graphics.font.FontStyle;
@@ -19,6 +20,7 @@ import java.util.List;
 /**
  * FontRasterizerTool generates a font json and font png file that can be used by the sola game engine.
  */
+@NullMarked
 public class FontRasterizerTool implements Tool {
   /**
    * Default characters used in the font rasterizer tool.

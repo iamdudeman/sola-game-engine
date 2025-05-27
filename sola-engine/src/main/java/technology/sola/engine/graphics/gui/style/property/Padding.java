@@ -38,7 +38,7 @@ public record Padding(
    * @param leftAndRight the left and right padding for the element
    * @param bottom       the bottom padding for the element
    */
-  public Padding(Integer top, Integer leftAndRight, Integer bottom) {
+  public Padding(@Nullable Integer top, @Nullable Integer leftAndRight, @Nullable Integer bottom) {
     this(top, leftAndRight, bottom, leftAndRight);
   }
 
@@ -48,7 +48,7 @@ public record Padding(
    * @param topAndBottom the top and bottom padding for the element
    * @param leftAndRight the left and right padding for the element
    */
-  public Padding(Integer topAndBottom, Integer leftAndRight) {
+  public Padding(@Nullable Integer topAndBottom, @Nullable Integer leftAndRight) {
     this(topAndBottom, leftAndRight, topAndBottom, leftAndRight);
   }
 
@@ -57,7 +57,7 @@ public record Padding(
    *
    * @param size the value for each side of the padding
    */
-  public Padding(Integer size) {
+  public Padding(@Nullable Integer size) {
     this(size, size);
   }
 

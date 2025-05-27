@@ -1,11 +1,14 @@
 package technology.sola.engine.graphics.gui.json.styles;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.graphics.Color;
 import technology.sola.json.JsonElement;
 
 /**
  * A collection of common {@link JsonElement }parsing methods for use by {@link StylesJsonValueParser}s.
  */
+@NullMarked
 public class StylesJsonBlueprintUtils {
   /**
    * Parses a String or null value from a {@link JsonElement}.
@@ -13,6 +16,7 @@ public class StylesJsonBlueprintUtils {
    * @param value the {@code JsonElement} to parse
    * @return the parsed String or null
    */
+  @Nullable
   public static String parseString(JsonElement value) {
     return value.isNull() ? null : value.asString();
   }
@@ -23,6 +27,7 @@ public class StylesJsonBlueprintUtils {
    * @param value the {@code JsonElement} to parse
    * @return the parsed Integer or null
    */
+  @Nullable
   public static Integer parseInteger(JsonElement value) {
     return value.isNull() ? null : value.asInt();
   }
@@ -34,6 +39,7 @@ public class StylesJsonBlueprintUtils {
    * @param value the {@code JsonElement} to parse
    * @return a valid {@link technology.sola.engine.graphics.gui.style.property.StyleValue} as a string or null
    */
+  @Nullable
   public static String parseStyleValueAsString(JsonElement value) {
     return switch (value.getType()) {
       case NULL -> null;
@@ -57,6 +63,7 @@ public class StylesJsonBlueprintUtils {
    * @param value the {@code JsonElement} to parse
    * @return the parsed Color or null
    */
+  @Nullable
   public static Color parseColor(JsonElement value) {
     if (value.isNull()) {
       return null;

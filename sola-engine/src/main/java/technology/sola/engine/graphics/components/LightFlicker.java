@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.components;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * LightFlicker
  *
@@ -8,6 +10,7 @@ package technology.sola.engine.graphics.components;
  * @param rate              the rate which flickering happens between 0 and 1
  * @param smoothingFunction function applied to smooth current intensity and next intensity value
  */
+@NullMarked
 public record LightFlicker(
   float min,
   float max,

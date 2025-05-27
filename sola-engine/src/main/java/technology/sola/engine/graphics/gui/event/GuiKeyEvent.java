@@ -1,10 +1,12 @@
 package technology.sola.engine.graphics.gui.event;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.input.KeyEvent;
 
 /**
  * GuiKeyEvent is a {@link GuiEvent} implementation for {@link KeyEvent}s.
  */
+@NullMarked
 public class GuiKeyEvent extends GuiEvent {
   private final KeyEvent keyEvent;
 

@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
@@ -14,6 +15,7 @@ import technology.sola.engine.input.MouseInput;
  * GuiDocument is a container for {@link GuiElement} that also handles passing various key and mouse events to the
  * currently active root element set via {@link GuiDocument#setRootElement(GuiElement)}.
  */
+@NullMarked
 public class GuiDocument {
   private final RootGuiElement root;
   private GuiElement<?, ?> focussedElement;
@@ -101,9 +103,7 @@ public class GuiDocument {
 
       this.focussedElement = guiElement;
 
-      if (previousElement != null) {
-        previousElement.styleContainer.invalidate();
-      }
+      previousElement.styleContainer.invalidate();
 
       guiElement.styleContainer.invalidate();
     }
@@ -119,15 +119,11 @@ public class GuiDocument {
   }
 
   private void onKeyPressed(KeyEvent keyEvent) {
-    if (focussedElement != null) {
-      focussedElement.onKeyPressed(new GuiKeyEvent(keyEvent));
-    }
+    focussedElement.onKeyPressed(new GuiKeyEvent(keyEvent));
   }
 
   private void onKeyReleased(KeyEvent keyEvent) {
-    if (focussedElement != null) {
-      focussedElement.onKeyReleased(new GuiKeyEvent(keyEvent));
-    }
+    focussedElement.onKeyReleased(new GuiKeyEvent(keyEvent));
   }
 
   private void onMousePressed(MouseEvent mouseEvent) {

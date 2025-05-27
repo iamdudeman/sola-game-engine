@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.gui.json.element;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.gui.json.styles.TextStylesJsonValueParser;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextStyles;
@@ -8,6 +9,7 @@ import technology.sola.json.JsonObject;
 /**
  * A {@link GuiElementJsonBlueprint} for {@link TextGuiElement}.
  */
+@NullMarked
 public class TextElementJsonBlueprint extends GuiElementJsonBlueprint<TextStyles, TextGuiElement, TextStyles.Builder<?>> {
   /**
    * Creates an instance of this {@link GuiElementJsonBlueprint}.

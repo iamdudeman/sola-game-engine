@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.gui.elements;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementDimensions;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
@@ -11,6 +13,7 @@ import technology.sola.engine.input.Key;
  * SectionGuiElement is a {@link GuiElement} that is simply a container for its children elements. It has various
  * keyboard shortcuts for navigating its children.
  */
+@NullMarked
 public class SectionGuiElement extends GuiElement<BaseStyles, SectionGuiElement> {
   /**
    * Creates a new SectionGuiElement instance and registers key pressed events for navigating its children.
@@ -70,6 +73,7 @@ public class SectionGuiElement extends GuiElement<BaseStyles, SectionGuiElement>
   }
 
   @Override
+  @Nullable
   public GuiElementDimensions calculateContentDimensions() {
     return null;
   }

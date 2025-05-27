@@ -1,11 +1,13 @@
 package technology.sola.engine.graphics.gui.json.styles;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.gui.elements.TextStyles;
 import technology.sola.json.JsonElement;
 
 /**
  * A {@link StylesJsonValueParser} implementation for {@link TextStyles.Builder}.
  */
+@NullMarked
 public class TextStylesJsonValueParser implements StylesJsonValueParser<TextStyles.Builder<?>> {
   private final BaseStylesJsonValueParser baseStylesJsonDefinition = new BaseStylesJsonValueParser();
 

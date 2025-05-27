@@ -1,5 +1,6 @@
 package technology.sola.engine.tooling.font;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.font.FontGlyph;
 import technology.sola.engine.assets.graphics.font.FontStyle;
 
@@ -9,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+@NullMarked
 class FontInformation {
   private final String fontFamily;
   private final String fontStyle;

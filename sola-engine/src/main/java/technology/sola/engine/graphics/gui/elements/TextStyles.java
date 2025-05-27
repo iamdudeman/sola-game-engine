@@ -1,14 +1,20 @@
 package technology.sola.engine.graphics.gui.elements;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 
 /**
  * TextStyles extends {@link BaseStyles} properties by adding extra properties for rendering text.
  */
+@NullMarked
 public class TextStyles extends BaseStyles {
+  @Nullable
   private final Color textColor;
+  @Nullable
   private final TextAlignment textAlignment;
+  @Nullable
   private final String fontAssetId;
 
   /**
@@ -35,6 +41,7 @@ public class TextStyles extends BaseStyles {
   /**
    * @return the {@link Color} of the text to be rendered
    */
+  @Nullable
   public Color textColor() {
     return textColor;
   }
@@ -42,6 +49,7 @@ public class TextStyles extends BaseStyles {
   /**
    * @return the {@link TextAlignment} of the text
    */
+  @Nullable
   public TextAlignment textAlignment() {
     return textAlignment;
   }
@@ -49,6 +57,7 @@ public class TextStyles extends BaseStyles {
   /**
    * @return the id of the {@link technology.sola.engine.assets.graphics.font.Font} asset used for rendering
    */
+  @Nullable
   public String fontAssetId() {
     return fontAssetId;
   }
@@ -59,8 +68,11 @@ public class TextStyles extends BaseStyles {
    * @param <Self> this builder type
    */
   public static class Builder<Self extends Builder<Self>> extends BaseStyles.Builder<Self> {
+    @Nullable
     private Color textColor;
+    @Nullable
     private String fontAssetId;
+    @Nullable
     private TextAlignment textAlignment;
 
     @Override
@@ -75,7 +87,7 @@ public class TextStyles extends BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setTextColor(Color textColor) {
+    public Self setTextColor(@Nullable Color textColor) {
       this.textColor = textColor;
       return (Self) this;
     }
@@ -87,7 +99,7 @@ public class TextStyles extends BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setTextAlignment(TextAlignment textAlignment) {
+    public Self setTextAlignment(@Nullable TextAlignment textAlignment) {
       this.textAlignment = textAlignment;
       return (Self) this;
     }
@@ -99,7 +111,7 @@ public class TextStyles extends BaseStyles {
      * @return this
      */
     @SuppressWarnings("unchecked")
-    public Self setFontAssetId(String fontAssetId) {
+    public Self setFontAssetId(@Nullable String fontAssetId) {
       this.fontAssetId = fontAssetId;
       return (Self) this;
     }

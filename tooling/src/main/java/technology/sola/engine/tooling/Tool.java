@@ -1,8 +1,11 @@
 package technology.sola.engine.tooling;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * Tools can be executed from the command line to provide some useful functionality for building games.
  */
+@NullMarked
 public interface Tool {
   /**
    * @return the name of the Tool

@@ -1,5 +1,6 @@
 package technology.sola.engine.graphics.components;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.blend.BlendFunction;
@@ -8,6 +9,7 @@ import technology.sola.engine.graphics.renderer.blend.BlendFunction;
  * BlendModeComponent is a {@link Component} that modifies the {@link BlendFunction} used when rendering this
  * {@link technology.sola.ecs.Entity}
  */
+@NullMarked
 public class BlendModeComponent implements Component {
   private BlendFunction blendFunction;
 

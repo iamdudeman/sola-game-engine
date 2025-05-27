@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.components;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
 import technology.sola.math.SolaMath;
@@ -9,10 +11,12 @@ import java.util.Random;
 /**
  * LightComponent is a {@link Component} containing data for rendering lights.
  */
+@NullMarked
 public class LightComponent implements Component {
   private final Random random = new Random();
   private float radius;
   private Color color;
+  @Nullable
   private LightFlicker lightFlicker;
   private float offsetX;
   private float offsetY;
@@ -156,7 +160,7 @@ public class LightComponent implements Component {
    * @param lightFlicker the new light flicker behavior
    * @return this
    */
-  public LightComponent setLightFlicker(LightFlicker lightFlicker) {
+  public LightComponent setLightFlicker(@Nullable LightFlicker lightFlicker) {
     this.lightFlicker = lightFlicker;
 
     return this;

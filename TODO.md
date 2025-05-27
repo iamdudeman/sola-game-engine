@@ -4,12 +4,11 @@
 
 * core - Sola, SolaPlatform
 * defaults stuff
-* gui - GuiElement, GuiDocument, BaseStyles
-* gui event stuff
-* gui elements stuff
-* gui json stuff
-* gui components stuff
+* editor
 * all platforms
+    * browser
+    * swing
+    * JavFX
 * all example code
 
 ## Known Bugs List
@@ -30,6 +29,7 @@
 
 ## TODO List
 
+* Add ability to zoom and pan for Minesweeper example
 * Add convenient ability to change entity render order based on Y position (or some other condition other than layers)
 * Consider generalizing Triangle renderer and collider to "Polygon" instead
 * research possible benefits of updating to Java 21

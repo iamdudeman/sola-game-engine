@@ -1,5 +1,7 @@
 package technology.sola.engine.graphics.gui.event;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import java.util.List;
  *
  * @param <E> the GuiEvent type
  */
+@NullMarked
 public class GuiEventListenerList<E extends GuiEvent> {
   private final List<GuiEventListener<E>> eventListeners = new ArrayList<>();
 

@@ -1,6 +1,8 @@
 package technology.sola.engine.server;
 
 import com.sun.net.httpserver.HttpServer;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.core.GameLoop;
 import technology.sola.engine.event.EventHub;
@@ -22,6 +24,7 @@ import java.util.concurrent.Executors;
 /**
  * SolaServer handles network traffic to and from many client connections.
  */
+@NullMarked
 public abstract class SolaServer {
   private static final SolaLogger LOGGER = SolaLogger.of(SolaServer.class);
   /**
@@ -38,7 +41,9 @@ public abstract class SolaServer {
   protected final SolaRouter solaRouter = new SolaRouter();
   private final Map<Long, ClientConnection> clientConnectionMap = new HashMap<>();
   private long clientCount = 0;
+  @Nullable
   private HttpServer httpServer;
+  @Nullable
   private ServerSocket serverSocket;
   private boolean isAcceptingConnections = true;
   private boolean isStarted = false;
@@ -178,7 +183,7 @@ public abstract class SolaServer {
    * @param socketMessage the {@link SocketMessage} to send
    * @param ignoreClients the client ids to ignore sending the message to
    */
-  public void broadcast(SocketMessage socketMessage, long... ignoreClients) {
+  public void broadcast(SocketMessage socketMessage, long @Nullable... ignoreClients) {
     List<Long> ignoreIds = new ArrayList<>();
 
     if (ignoreClients != null) {

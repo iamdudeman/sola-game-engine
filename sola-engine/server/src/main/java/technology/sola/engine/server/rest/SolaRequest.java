@@ -1,5 +1,7 @@
 package technology.sola.engine.server.rest;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.json.JsonArray;
 import technology.sola.json.JsonElement;
 import technology.sola.json.JsonObject;
@@ -14,9 +16,10 @@ import java.util.Map;
  * @param queryParameters the query parameters from the request
  * @param body            the {@link JsonElement} body from the request
  */
+@NullMarked
 public record SolaRequest(
   Map<String, String> pathParameters,
-  Map<String, String> queryParameters,
+  Map<String, @Nullable String> queryParameters,
   JsonElement body
 ) {
   /**
