@@ -80,7 +80,8 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">TextInputGuiElement</span>
+<div class="type-signature"><span class="annotations">@NullMarked
+</span><span class="modifiers">public class </span><span class="element-name type-name-label">TextInputGuiElement</span>
 <span class="extends-implements">extends <a href="BaseInputGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">BaseInputGuiElement</a>&lt;<a href="TextInputStyles.html" title="class in technology.sola.engine.graphics.gui.elements.input">TextInputStyles</a>,<wbr><a href="TextInputGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">TextInputGuiElement</a>&gt;</span></div>
 <div class="block">TextInputGuiElement is a <a href="BaseInputGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input"><code>BaseInputGuiElement</code></a> that allows users to interact via typing text into the field.</div>
 </section>
@@ -136,7 +137,7 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">TextInputGuiElement does not render children so this method will return an empty List.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMaxLength()" class="member-name-link">getMaxLength</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
@@ -156,7 +157,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Method to render the main content of the gui element (not borders, backgrounds, etc.).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="TextInputGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">TextInputGuiElement</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMaxLength(java.lang.Integer)" class="member-name-link">setMaxLength</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;maxLength)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMaxLength(java.lang.Integer)" class="member-name-link">setMaxLength</a><wbr>(@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;maxLength)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the maximum number of characters allowed for the input.</div>
 </div>
@@ -306,7 +307,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getMaxLength()">
 <h3>getMaxLength</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">getMaxLength</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">getMaxLength</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the maximum number of characters allowed for the input</dd>
@@ -316,7 +317,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="setMaxLength(java.lang.Integer)">
 <h3>setMaxLength</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="TextInputGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">TextInputGuiElement</a></span>&nbsp;<span class="element-name">setMaxLength</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;maxLength)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="TextInputGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">TextInputGuiElement</a></span>&nbsp;<span class="element-name">setMaxLength</span><wbr><span class="parameters">(@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;maxLength)</span></div>
 <div class="block">Sets the maximum number of characters allowed for the input. If the new length is smaller than the entered value
  it will be truncated down to the new max length.</div>
 <dl class="notes">

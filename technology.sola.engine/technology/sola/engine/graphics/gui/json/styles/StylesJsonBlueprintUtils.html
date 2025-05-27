@@ -76,7 +76,8 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">StylesJsonBlueprintUtils</span>
+<div class="type-signature"><span class="annotations">@NullMarked
+</span><span class="modifiers">public class </span><span class="element-name type-name-label">StylesJsonBlueprintUtils</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">A collection of common <code>JsonElement</code>parsing methods for use by <a href="StylesJsonValueParser.html" title="interface in technology.sola.engine.graphics.gui.json.styles"><code>StylesJsonValueParser</code></a>s.</div>
 </section>
@@ -93,22 +94,22 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseColor(technology.sola.json.JsonElement)" class="member-name-link">parseColor</a><wbr>(technology.sola.json.JsonElement&nbsp;value)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Parses a <a href="../../../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> from a <code>JsonElement</code>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseInteger(technology.sola.json.JsonElement)" class="member-name-link">parseInteger</a><wbr>(technology.sola.json.JsonElement&nbsp;value)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Parses an Integer or null value from a <code>JsonElement</code>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseString(technology.sola.json.JsonElement)" class="member-name-link">parseString</a><wbr>(technology.sola.json.JsonElement&nbsp;value)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Parses a String or null value from a <code>JsonElement</code>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseStyleValueAsString(technology.sola.json.JsonElement)" class="member-name-link">parseStyleValueAsString</a><wbr>(technology.sola.json.JsonElement&nbsp;value)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Parses a valid <a href="../../style/property/StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property"><code>StyleValue</code></a> value as a string or null
@@ -134,7 +135,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="parseString(technology.sola.json.JsonElement)">
 <h3>parseString</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">parseString</span><wbr><span class="parameters">(technology.sola.json.JsonElement&nbsp;value)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">parseString</span><wbr><span class="parameters">(technology.sola.json.JsonElement&nbsp;value)</span></div>
 <div class="block">Parses a String or null value from a <code>JsonElement</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -147,7 +148,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="parseInteger(technology.sola.json.JsonElement)">
 <h3>parseInteger</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">parseInteger</span><wbr><span class="parameters">(technology.sola.json.JsonElement&nbsp;value)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">parseInteger</span><wbr><span class="parameters">(technology.sola.json.JsonElement&nbsp;value)</span></div>
 <div class="block">Parses an Integer or null value from a <code>JsonElement</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -160,7 +161,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="parseStyleValueAsString(technology.sola.json.JsonElement)">
 <h3>parseStyleValueAsString</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">parseStyleValueAsString</span><wbr><span class="parameters">(technology.sola.json.JsonElement&nbsp;value)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">parseStyleValueAsString</span><wbr><span class="parameters">(technology.sola.json.JsonElement&nbsp;value)</span></div>
 <div class="block">Parses a valid <a href="../../style/property/StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property"><code>StyleValue</code></a> value as a string or null
  from a <code>JsonElement</code>.</div>
 <dl class="notes">
@@ -174,7 +175,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="parseColor(technology.sola.json.JsonElement)">
 <h3>parseColor</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">parseColor</span><wbr><span class="parameters">(technology.sola.json.JsonElement&nbsp;value)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">@Nullable <a href="../../../Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">parseColor</span><wbr><span class="parameters">(technology.sola.json.JsonElement&nbsp;value)</span></div>
 <div class="block">Parses a <a href="../../../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> from a <code>JsonElement</code>.
  <p>
  Valid formats:

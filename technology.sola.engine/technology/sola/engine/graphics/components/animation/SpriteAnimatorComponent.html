@@ -80,7 +80,8 @@ loadScripts(document, 'script');</script>
 <dd><code>technology.sola.ecs.Component</code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SpriteAnimatorComponent</span>
+<div class="type-signature"><span class="annotations">@NullMarked
+</span><span class="modifiers">public class </span><span class="element-name type-name-label">SpriteAnimatorComponent</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements technology.sola.ecs.Component</span></div>
 <div class="block">SpritesAnimatorComponent is a <code>Component</code> that contains data for controlling how a
@@ -170,10 +171,10 @@ implements technology.sola.ecs.Component</span></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Adds a new animation with animation id and an array of key frames.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getActiveAnimationId()" class="member-name-link">getActiveAnimationId</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCurrentFrame()" class="member-name-link">getCurrentFrame</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
@@ -356,7 +357,7 @@ implements technology.sola.ecs.Component</span></div>
 <li>
 <section class="detail" id="getCurrentFrame()">
 <h3>getCurrentFrame</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a></span>&nbsp;<span class="element-name">getCurrentFrame</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a></span>&nbsp;<span class="element-name">getCurrentFrame</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the currently active <a href="../SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components"><code>SpriteKeyFrame</code></a></dd>
@@ -366,7 +367,7 @@ implements technology.sola.ecs.Component</span></div>
 <li>
 <section class="detail" id="getActiveAnimationId()">
 <h3>getActiveAnimationId</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getActiveAnimationId</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getActiveAnimationId</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the currently active animation id</dd>

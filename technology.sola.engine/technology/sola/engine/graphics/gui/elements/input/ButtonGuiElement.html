@@ -80,7 +80,8 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ButtonGuiElement</span>
+<div class="type-signature"><span class="annotations">@NullMarked
+</span><span class="modifiers">public class </span><span class="element-name type-name-label">ButtonGuiElement</span>
 <span class="extends-implements">extends <a href="BaseInputGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">BaseInputGuiElement</a>&lt;<a href="../../style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a>,<wbr><a href="ButtonGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">ButtonGuiElement</a>&gt;</span></div>
 <div class="block">ButtonGuiElement is a <a href="BaseInputGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input"><code>BaseInputGuiElement</code></a> that allows users to interact via clicking the button or using
  keyboard shortcuts.</div>
@@ -123,7 +124,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../GuiElementDimensions.html" title="class in technology.sola.engine.graphics.gui">GuiElementDimensions</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../../GuiElementDimensions.html" title="class in technology.sola.engine.graphics.gui">GuiElementDimensions</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculateContentDimensions()" class="member-name-link">calculateContentDimensions</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Calculates content dimensions for this element.</div>
@@ -194,7 +195,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="calculateContentDimensions()">
 <h3>calculateContentDimensions</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../GuiElementDimensions.html" title="class in technology.sola.engine.graphics.gui">GuiElementDimensions</a></span>&nbsp;<span class="element-name">calculateContentDimensions</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="../../GuiElementDimensions.html" title="class in technology.sola.engine.graphics.gui">GuiElementDimensions</a></span>&nbsp;<span class="element-name">calculateContentDimensions</span>()</div>
 <div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="../../GuiElement.html#calculateContentDimensions()">GuiElement</a></code></span></div>
 <div class="block">Calculates content dimensions for this element. If its dimensions are derived from only its
  children then it should return null.</div>
