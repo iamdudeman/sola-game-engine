@@ -1,9 +1,5 @@
 # sola-game-engine TODO list
 
-## Nullability stuff
-
-* all example code
-
 ## Known Bugs List
 
 * (verify if still bug) GuiElement parent undefined when changing roots
