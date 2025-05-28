@@ -1,5 +1,6 @@
 package technology.sola.engine.assets.graphics.spritesheet;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.json.JsonArray;
 import technology.sola.json.JsonObject;
 import technology.sola.json.mapper.JsonMapper;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * SpriteSheetInfoJsonMapper is a {@link JsonMapper} implementation for {@link SpriteSheetInfo}.
  */
+@NullMarked
 public class SpriteSheetInfoJsonMapper implements JsonMapper<SpriteSheetInfo> {
   @Override
   public Class<SpriteSheetInfo> getObjectClass() {

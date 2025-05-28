@@ -1,5 +1,6 @@
 package technology.sola.engine.assets.graphics.spritesheet;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.Asset;
 import technology.sola.engine.assets.graphics.SolaImage;
 
@@ -9,6 +10,7 @@ import java.util.Map;
 /**
  * SpriteSheet is an {@link Asset} for a collection of sprites.
  */
+@NullMarked
 public class SpriteSheet implements Asset {
   private final SolaImage solaImage;
   private final Map<String, SolaImage> spriteIdMap = new HashMap<>();
