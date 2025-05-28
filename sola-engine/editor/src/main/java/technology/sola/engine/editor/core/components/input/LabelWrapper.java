@@ -4,10 +4,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * LabelWrapper contains helper methods for wrapping a {@link Node} with a {@link Label}.
  */
+@NullMarked
 public class LabelWrapper {
   /**
    * Wraps a node with a label placed above it.

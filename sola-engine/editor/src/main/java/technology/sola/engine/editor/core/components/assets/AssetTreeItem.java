@@ -1,5 +1,7 @@
 package technology.sola.engine.editor.core.components.assets;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.io.File;
 
 /**
@@ -9,6 +11,7 @@ import java.io.File;
  * @param label the display label for the tree item
  * @param file  the {@link File} for the asset or folder
  */
+@NullMarked
 public record AssetTreeItem(
   String id,
   String label,

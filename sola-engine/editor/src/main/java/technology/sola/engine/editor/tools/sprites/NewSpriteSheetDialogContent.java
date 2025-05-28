@@ -5,6 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfoJsonMapper;
 import technology.sola.engine.editor.core.components.EditorPanel;
@@ -23,6 +25,7 @@ import java.util.List;
  * SpritesFontDialogContent is a form for creating a new sprites asset that can be easily nested in
  * a {@link DialogService#custom(String, Parent)}.
  */
+@NullMarked
 class NewSpriteSheetDialogContent extends EditorPanel {
   private static final SolaLogger LOGGER = SolaLogger.of(NewSpriteSheetDialogContent.class, "logs/sola-editor.log");
   private final Button chooseFileButton;
@@ -30,6 +33,7 @@ class NewSpriteSheetDialogContent extends EditorPanel {
   private final TextField extensionTextField;
   private final Button cancelButton;
   private final Button createButton;
+  @Nullable
   private File imageFile;
 
   /**

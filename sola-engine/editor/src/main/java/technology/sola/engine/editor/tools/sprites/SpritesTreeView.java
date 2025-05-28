@@ -6,6 +6,8 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteInfo;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
 import technology.sola.engine.editor.core.utils.DialogService;
@@ -13,10 +15,14 @@ import technology.sola.engine.editor.core.utils.DialogService;
 import java.util.ArrayList;
 import java.util.List;
 
+@NullMarked
 class SpritesTreeView extends TreeView<String> {
   private final SpriteSheetState spriteSheetState;
+  @Nullable
   private SpriteSheetInfo spriteSheetInfo;
+  @Nullable
   private Double imageWidth;
+  @Nullable
   private Double imageHeight;
 
   SpritesTreeView(SpriteSheetState spriteSheetState, SelectedSpriteInfoPanel selectedSpriteInfoPanel) {

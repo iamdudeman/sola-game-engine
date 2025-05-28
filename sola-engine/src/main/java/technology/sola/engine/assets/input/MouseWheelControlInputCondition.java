@@ -1,5 +1,6 @@
-package technology.sola.engine.defaults.controls;
+package technology.sola.engine.assets.input;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
 
@@ -8,6 +9,7 @@ import technology.sola.engine.input.MouseInput;
  *
  * @param state the {@link MouseWheelControlInputCondition.State} needed to be considered active
  */
+@NullMarked
 public record MouseWheelControlInputCondition(
   State state
 ) implements ControlInputCondition<MouseWheelControlInputCondition.State> {

@@ -33,7 +33,7 @@ public class SmallPhysicsTestSola extends SolaWithDefaults {
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     defaultsConfigurator.useGraphics().usePhysics().useDebug();
 
-    platform.getRenderer().createLayers("inside");
+    platform().getRenderer().createLayers("inside");
 
     World world = new World(10);
 

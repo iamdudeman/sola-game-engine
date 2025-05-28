@@ -30,7 +30,7 @@ public class ParticleExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
     defaultsConfigurator.useGraphics();
 

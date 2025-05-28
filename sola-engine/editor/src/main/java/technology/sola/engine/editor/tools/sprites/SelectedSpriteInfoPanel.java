@@ -4,19 +4,28 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteInfo;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.components.input.IntegerSpinner;
 import technology.sola.engine.editor.core.components.input.LabelWrapper;
 import technology.sola.engine.editor.core.utils.ToastService;
 
+@NullMarked
 class SelectedSpriteInfoPanel extends EditorPanel {
   private final SpriteSheetState spriteSheetState;
+  @Nullable
   private SpritesTreeView spritesTreeView;
+  @Nullable
   private TextField idField;
+  @Nullable
   private IntegerSpinner xSpinner;
+  @Nullable
   private IntegerSpinner ySpinner;
+  @Nullable
   private IntegerSpinner widthSpinner;
+  @Nullable
   private IntegerSpinner heightSpinner;
 
   SelectedSpriteInfoPanel(SpriteSheetState spriteSheetState) {

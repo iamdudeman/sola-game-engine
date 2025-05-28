@@ -1,5 +1,7 @@
 package technology.sola.engine.examples.common.features;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
@@ -34,6 +36,7 @@ import technology.sola.math.linear.Vector2D;
  * CollidersExample is a {@link technology.sola.engine.core.Sola} for demoing various {@link ColliderComponent}
  * {@link technology.sola.engine.physics.component.collider.ColliderShape}s.
  */
+@NullMarked
 public class CollidersExample extends SolaWithDefaults {
   private final ConditionalStyle<TextStyles> selectedTextStyle = ConditionalStyle.always(
     TextStyles.create()
@@ -46,6 +49,7 @@ public class CollidersExample extends SolaWithDefaults {
       .build()
   );
   private InteractionMode currentMode = InteractionMode.CREATE_CIRCLE;
+  @Nullable
   private TextGuiElement currentlySelectedText = null;
 
   /**
@@ -57,22 +61,22 @@ public class CollidersExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
     var guiTheme = DefaultThemeBuilder.buildDarkTheme();
 
     defaultsConfigurator.useGraphics().useDebug().usePhysics().useGui(guiTheme);
 
-    platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
+    platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
 
-    solaPhysics.getGravitySystem().setActive(false);
+    solaPhysics().getGravitySystem().setActive(false);
 
     CreateShapeSystem createShapeSystem = new CreateShapeSystem();
 
     solaEcs.addSystems(createShapeSystem);
     solaEcs.setWorld(new World(100));
 
-    solaGraphics.addGraphicsModules(new CreateShapeGraphicsModule(createShapeSystem));
+    solaGraphics().addGraphicsModules(new CreateShapeGraphicsModule(createShapeSystem));
   }
 
   @Override
@@ -80,14 +84,15 @@ public class CollidersExample extends SolaWithDefaults {
     assetLoaderProvider.get(GuiJsonDocument.class)
       .getNewAsset("gui", "assets/gui/collision_sandbox.gui.json")
       .executeWhenLoaded(guiJsonDocument -> {
-        guiDocument.setRootElement(guiJsonDocument.rootElement());
-        currentlySelectedText = guiDocument.findElementById("modeCircle", TextGuiElement.class);
+        guiDocument().setRootElement(guiJsonDocument.rootElement());
+        currentlySelectedText = guiDocument().findElementById("modeCircle", TextGuiElement.class);
         currentlySelectedText.styles().addStyle(selectedTextStyle);
 
         completeAsyncInit.run();
       });
   }
 
+  @NullMarked
   private class CreateShapeGraphicsModule extends SolaGraphicsModule {
     private final CreateShapeSystem createShapeSystem;
 
@@ -105,7 +110,7 @@ public class CollidersExample extends SolaWithDefaults {
 
       Vector2D secondPoint = createShapeSystem.secondPoint == null ? null : cameraTranslationTransform.multiply(createShapeSystem.secondPoint);
       Color color = Color.WHITE;
-      var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
+      var point = solaGraphics().screenToWorldCoordinate(mouseInput.getMousePosition());
 
       if (currentMode == InteractionMode.CREATE_CIRCLE) {
         var min = new Vector2D(Math.min(firstPoint.x(), point.x()), Math.min(firstPoint.y(), point.y()));
@@ -130,8 +135,11 @@ public class CollidersExample extends SolaWithDefaults {
     }
   }
 
+  @NullMarked
   private class CreateShapeSystem extends EcsSystem {
+    @Nullable
     Vector2D firstPoint;
+    @Nullable
     Vector2D secondPoint;
 
     @Override
@@ -145,27 +153,26 @@ public class CollidersExample extends SolaWithDefaults {
       }
 
       if (keyboardInput.isKeyPressed(Key.A)) {
-        var debugGraphicsModule = solaGraphics.getGraphicsModule(DebugEntityGraphicsModule.class);
+        var debugGraphicsModule = solaGraphics().getGraphicsModule(DebugEntityGraphicsModule.class);
 
         debugGraphicsModule.setRenderingColliders(!debugGraphicsModule.isRenderingColliders());
         updateDebugGui("debugShape", debugGraphicsModule.isRenderingColliders());
       }
       if (keyboardInput.isKeyPressed(Key.S)) {
-        var debugGraphicsModule = solaGraphics.getGraphicsModule(DebugEntityGraphicsModule.class);
+        var debugGraphicsModule = solaGraphics().getGraphicsModule(DebugEntityGraphicsModule.class);
 
         debugGraphicsModule.setRenderingBoundingBoxes(!debugGraphicsModule.isRenderingBoundingBoxes());
         updateDebugGui("debugBoundingBox", debugGraphicsModule.isRenderingBoundingBoxes());
       }
       if (keyboardInput.isKeyPressed(Key.D)) {
-        var debugGraphicsModule = solaGraphics.getGraphicsModule(DebugEntityGraphicsModule.class);
+        var debugGraphicsModule = solaGraphics().getGraphicsModule(DebugEntityGraphicsModule.class);
 
         debugGraphicsModule.setRenderingBroadPhase(!debugGraphicsModule.isRenderingBroadPhase());
         updateDebugGui("debugBroadPhase", debugGraphicsModule.isRenderingBroadPhase());
       }
 
       if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
-        var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
-
+        var point = solaGraphics().screenToWorldCoordinate(mouseInput.getMousePosition());
 
         if (firstPoint == null) {
           firstPoint = point;
@@ -179,7 +186,7 @@ public class CollidersExample extends SolaWithDefaults {
           float radius = max.distance(min);
 
           world.createEntity(
-            new TransformComponent(firstPoint.x(), firstPoint.y(), radius),
+            new TransformComponent(min.x(), min.y(), radius),
             new CircleRendererComponent(Color.YELLOW, false),
             new DynamicBodyComponent(),
             new ColliderComponent(new ColliderShapeCircle())
@@ -222,13 +229,13 @@ public class CollidersExample extends SolaWithDefaults {
     private void changeMode(InteractionMode newMode, String guiElementId) {
       currentMode = newMode;
       currentlySelectedText.styles().removeStyle(selectedTextStyle);
-      currentlySelectedText = guiDocument.findElementById(guiElementId, TextGuiElement.class);
+      currentlySelectedText = guiDocument().findElementById(guiElementId, TextGuiElement.class);
       currentlySelectedText.styles().addStyle(selectedTextStyle);
       reset();
     }
 
     private void updateDebugGui(String id, boolean isEnabled) {
-      var textElement = guiDocument.findElementById(id, TextGuiElement.class);
+      var textElement = guiDocument().findElementById(id, TextGuiElement.class);
 
       if (isEnabled) {
         textElement.styles().removeStyle(debugOffTextStyle);

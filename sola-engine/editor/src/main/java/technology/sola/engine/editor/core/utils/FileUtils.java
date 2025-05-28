@@ -1,5 +1,6 @@
 package technology.sola.engine.editor.core.utils;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.json.JsonElement;
 import technology.sola.json.JsonObject;
 import technology.sola.json.SolaJson;
@@ -11,6 +12,7 @@ import java.nio.file.Files;
 /**
  * FileUtils contains utility methods for reading and writing file content.
  */
+@NullMarked
 public class FileUtils {
   /**
    * Reads a {@link JsonElement} from desired {@link File}.

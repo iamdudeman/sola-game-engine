@@ -1,5 +1,6 @@
 package technology.sola.engine.defaults.graphics.modules;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.World;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.math.linear.Matrix3D;
@@ -7,6 +8,7 @@ import technology.sola.math.linear.Matrix3D;
 /**
  * SolaGraphicsModule adds additional rendering functionality to {@link technology.sola.engine.defaults.SolaGraphics}.
  */
+@NullMarked
 public abstract class SolaGraphicsModule implements Comparable<SolaGraphicsModule> {
   private boolean isActive = true;
 

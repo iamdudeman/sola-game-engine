@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteInfo;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
 import technology.sola.engine.editor.core.components.EditorPanel;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+@NullMarked
 class SpriteSheetSplicerDialogContent extends EditorPanel {
   private final IntegerSpinner paddingSpinner;
   private final IntegerSpinner spacingSpinner;

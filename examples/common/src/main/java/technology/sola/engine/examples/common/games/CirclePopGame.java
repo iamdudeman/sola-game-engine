@@ -36,7 +36,7 @@ public class CirclePopGame extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
     defaultsConfigurator.useGraphics().useGui();
 
@@ -51,14 +51,14 @@ public class CirclePopGame extends SolaWithDefaults {
         .build()
     ));
 
-    guiDocument.setRootElement(scoreGuiElement);
+    guiDocument().setRootElement(scoreGuiElement);
   }
 
   private class PlayerInputSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
       if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
-        var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
+        var point = solaGraphics().screenToWorldCoordinate(mouseInput.getMousePosition());
 
         for (var entry : world.createView().of(TransformComponent.class).getEntries()) {
           var radius = entry.c1().getScaleX() * 0.5f;

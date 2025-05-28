@@ -1,6 +1,7 @@
 package technology.sola.engine.graphics.components;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.Component;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
@@ -48,6 +49,7 @@ public class SpriteComponent implements Component {
   /**
    * @return the id of the {@link SpriteSheet} this sprite is in
    */
+  @Nullable
   public String getSpriteSheetId() {
     return spriteKeyFrame.getSpriteSheetId();
   }
@@ -55,6 +57,7 @@ public class SpriteComponent implements Component {
   /**
    * @return the id for the sprite
    */
+  @Nullable
   public String getSpriteId() {
     return spriteKeyFrame.getSpriteId();
   }

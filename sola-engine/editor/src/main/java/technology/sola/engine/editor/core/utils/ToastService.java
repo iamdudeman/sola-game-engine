@@ -9,6 +9,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.editor.core.EditorScene;
 import technology.sola.engine.editor.core.components.ThemedText;
 
@@ -18,9 +20,11 @@ import java.util.List;
 /**
  * ToastService contains methods for showing various kinds of toast messages.
  */
+@NullMarked
 public class ToastService {
   private static final List<QueuedToast> QUEUED_TOASTS = new LinkedList<>();
   private static final AnimationConfig DEFAULT_CONFIG = new AnimationConfig(200, 2000, 200);
+  @Nullable
   private static Stage primaryStage;
   private static boolean isPlaying = false;
 

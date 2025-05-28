@@ -4,12 +4,14 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextFormatter;
 import javafx.util.converter.IntegerStringConverter;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.regex.Pattern;
 
 /**
  * IntegerSpinner is a {@link Spinner} that is set for integers only.
  */
+@NullMarked
 public class IntegerSpinner extends Spinner<Integer> {
   /**
    * Creates an integer spinner with desired min and max values.

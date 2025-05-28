@@ -1,5 +1,7 @@
 package technology.sola.engine.defaults;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.assets.graphics.font.DefaultFont;
@@ -17,6 +19,7 @@ import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.system.LightFlickerSystem;
+import technology.sola.engine.input.SolaControls;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
 
 import java.util.List;
@@ -34,27 +37,19 @@ import java.util.stream.Stream;
  *   <li>{@link SolaWithDefaults#solaControls}</li>
  * </ul>
  */
+@NullMarked
 public abstract class SolaWithDefaults extends Sola {
-  /**
-   * The {@link SolaGraphics} instance for this Sola. This is null until {@link DefaultsConfigurator#useGraphics()} is
-   * called.
-   */
-  protected SolaGraphics solaGraphics;
-  /**
-   * The {@link SolaPhysics} instance for this Sola. This is null until {@link DefaultsConfigurator#usePhysics()} is
-   * called.
-   */
-  protected SolaPhysics solaPhysics;
-  /**
-   * The {@link GuiDocument} instance for this Sola. This is null until {@link DefaultsConfigurator#useGui()} is
-   * called.
-   */
-  protected GuiDocument guiDocument;
   /**
    * The {@link SolaControls} instance for this Sola. It can be used in place of other input related objects for
    * convenience.
    */
   protected final SolaControls solaControls;
+  @Nullable
+  private SolaGraphics solaGraphics;
+  @Nullable
+  private SolaPhysics solaPhysics;
+  @Nullable
+  private GuiDocument guiDocument;
   private Consumer<Renderer> renderFunction = renderer -> {
   };
   private Color backgroundColor = Color.BLACK;
@@ -87,9 +82,49 @@ public abstract class SolaWithDefaults extends Sola {
   }
 
   /**
+   * The {@link SolaGraphics} instance for this Sola. Call {@link DefaultsConfigurator#useGraphics()} to configure.
+   *
+   * @return {@link SolaGraphics} instance
+   */
+  protected SolaGraphics solaGraphics() {
+    if (solaGraphics == null) {
+      throw new IllegalStateException("SolaGraphics not initialized. Call DefaultsConfigurator.useGraphics first.");
+    }
+
+    return solaGraphics;
+  }
+
+  /**
+   * The {@link SolaPhysics} instance for this Sola. Call {@link DefaultsConfigurator#usePhysics()} to configure.
+   *
+   * @return {@link SolaPhysics} instance
+   */
+  protected SolaPhysics solaPhysics() {
+    if (solaPhysics == null) {
+      throw new IllegalStateException("SolaPhysics not initialized. Call DefaultsConfigurator.usePhysics first.");
+    }
+
+    return solaPhysics;
+  }
+
+  /**
+   * The {@link GuiDocument} instance for this Sola. Call {@link DefaultsConfigurator#useGui()} to configure.
+   *
+   * @return {@link GuiDocument} instance
+   */
+  protected GuiDocument guiDocument() {
+    if (guiDocument == null) {
+      throw new IllegalStateException("GuiDocument not initialized. Call DefaultsConfigurator.useGui first.");
+    }
+
+    return guiDocument;
+  }
+
+  /**
    * DefaultsConfigurator provides methods for enabling various default functionality.
    */
   public class DefaultsConfigurator {
+    @Nullable
     private Color ambientColor = null;
     private boolean isDebug = false;
 
@@ -267,7 +302,7 @@ public abstract class SolaWithDefaults extends Sola {
      */
     public DefaultsConfigurator useGui(GuiTheme guiTheme, List<GuiElementJsonBlueprint<?, ?, ?>> additionalGuiElementJsonBlueprints) {
       if (guiDocument == null) {
-        guiDocument = new GuiDocument(platform, assetLoaderProvider, mouseInput);
+        guiDocument = new GuiDocument(platform(), assetLoaderProvider, mouseInput);
         rebuildRenderFunction();
 
         // Prepare default font

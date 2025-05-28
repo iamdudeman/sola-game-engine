@@ -3,11 +3,13 @@ package technology.sola.engine.editor.core.components;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.editor.core.styles.Css;
 
 /**
  * EditorPanel is a wrapper component that adds some default styling for editor panels.
  */
+@NullMarked
 public class EditorPanel extends VBox {
   /**
    * Creates an empty editor panel.

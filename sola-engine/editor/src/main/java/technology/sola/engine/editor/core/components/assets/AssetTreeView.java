@@ -6,6 +6,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.util.StringConverter;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.editor.core.utils.DialogService;
 import technology.sola.engine.editor.core.utils.ToastService;
 
@@ -17,6 +19,7 @@ import java.util.Objects;
  * AssetTreeView is an extension of {@link TreeView} that is customized for working with sola file assets. It provides
  * context menu options to create assets and folders, delete assets and rename assets.
  */
+@NullMarked
 public class AssetTreeView extends TreeView<AssetTreeItem> {
   /**
    * Creates a new instance of AssetTreeView for desired {@link AssetType}. This initializes all context menu actions
@@ -89,6 +92,7 @@ public class AssetTreeView extends TreeView<AssetTreeItem> {
     }
   }
 
+  @Nullable
   private TreeItem<AssetTreeItem> findAssetItem(String id, TreeItem<AssetTreeItem> parent) {
     if (parent.getValue().id().equals(id)) {
       return parent;

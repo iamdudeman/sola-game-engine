@@ -1,5 +1,7 @@
 package technology.sola.engine.editor.tools.sprites;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfoJsonMapper;
 import technology.sola.engine.editor.core.utils.FileUtils;
@@ -12,17 +14,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+@NullMarked
 class SpriteSheetState {
   private static final SolaLogger LOGGER = SolaLogger.of(SpriteSheetState.class, "logs/sola-editor.log");
   private final List<Consumer<SpriteSheetInfo>> spriteSheetInfoConsumers = new ArrayList<>();
+  @Nullable
   private SpriteSheetInfo spriteSheetInfo;
+  @Nullable
   private File spriteSheetFile;
+  @Nullable
   private File spriteSheetImageFile;
 
+  @Nullable
   SpriteSheetInfo getCurrentSpriteSheetInfo() {
     return spriteSheetInfo;
   }
 
+  @Nullable
   File getSpriteSheetImageFile() {
     return spriteSheetImageFile;
   }

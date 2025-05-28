@@ -1,5 +1,6 @@
 package technology.sola.engine.defaults;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
@@ -11,6 +12,7 @@ import technology.sola.engine.physics.system.PhysicsSystem;
 /**
  * SolaPhysics configures several physics systems in a default configuration.
  */
+@NullMarked
 public class SolaPhysics {
   private final GravitySystem gravitySystem;
   private final PhysicsSystem physicsSystem;

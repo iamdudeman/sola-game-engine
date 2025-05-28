@@ -1,4 +1,6 @@
-package technology.sola.engine.defaults.controls;
+package technology.sola.engine.assets.input;
+
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 
@@ -8,6 +10,7 @@ import java.util.List;
  *
  * @param conditions the list of {@link ControlInputCondition}
  */
+@NullMarked
 public record ControlInput(
   List<ControlInputCondition<?>> conditions
 ) {

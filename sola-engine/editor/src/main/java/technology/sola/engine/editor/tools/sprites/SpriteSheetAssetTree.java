@@ -2,6 +2,8 @@ package technology.sola.engine.editor.tools.sprites;
 
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfoJsonMapper;
 import technology.sola.engine.editor.core.components.ImagePanel;
@@ -19,9 +21,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+@NullMarked
 class SpriteSheetAssetTree extends VBox {
   private static final SolaLogger LOGGER = SolaLogger.of(SpriteSheetAssetTree.class, "logs/sola-editor.log");
   private final AssetTreeView assetTreeView;
+  @Nullable
   private ImagePanel selectedImagePanel;
 
   public SpriteSheetAssetTree(SpriteSheetState spriteSheetState, TabbedPanel centerPanel, SpritesTreeView spritesTreeView) {

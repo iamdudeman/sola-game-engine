@@ -41,11 +41,11 @@ public class PongGame extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
     defaultsConfigurator.useGraphics().usePhysics();
 
-    solaPhysics.getGravitySystem().setGravityConstant(0);
+    solaPhysics().getGravitySystem().setGravityConstant(0);
 
     solaEcs.addSystems(new PlayerSystem(), new ComputerSystem());
 
@@ -87,7 +87,7 @@ public class PongGame extends SolaWithDefaults {
     assetLoaderProvider.get(Font.class)
       .getNewAsset("font", "assets/font/monospaced_NORMAL_48_digits.font.json")
       .executeWhenLoaded(font -> {
-        platform.getRenderer().setFont(font);
+        platform().getRenderer().setFont(font);
         completeAsyncInit.run();
       });
   }

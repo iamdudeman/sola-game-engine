@@ -1,5 +1,6 @@
 package technology.sola.engine.defaults.graphics.modules;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.core.component.TransformComponent;
@@ -18,6 +19,7 @@ import java.util.List;
  * ScreenSpaceLightMapGraphicsModule is a {@link SolaGraphicsModule} that handles drawing lighting for
  * {@link technology.sola.ecs.Entity} that have {@link LightComponent}s.
  */
+@NullMarked
 public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
   /**
    * The render order for this graphics module.

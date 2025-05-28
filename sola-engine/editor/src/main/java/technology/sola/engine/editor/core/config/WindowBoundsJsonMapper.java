@@ -1,8 +1,10 @@
 package technology.sola.engine.editor.core.config;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.json.JsonObject;
 import technology.sola.json.mapper.JsonMapper;
 
+@NullMarked
 class WindowBoundsJsonMapper implements JsonMapper<WindowBounds> {
   @Override
   public Class<WindowBounds> getObjectClass() {

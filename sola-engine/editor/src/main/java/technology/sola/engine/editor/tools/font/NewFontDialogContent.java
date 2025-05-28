@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.font.FontStyle;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.components.input.IntegerSpinner;
@@ -23,6 +24,7 @@ import java.util.Arrays;
  * NewFontDialogContent is a form for creating a new font asset that can be easily nested in
  * a {@link DialogService#custom(String, Parent)}.
  */
+@NullMarked
 public class NewFontDialogContent extends EditorPanel {
   private final ComboBox<String> fontChoice;
   private final ComboBox<String> styleChoice;

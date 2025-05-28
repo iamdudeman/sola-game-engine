@@ -36,7 +36,7 @@ public class GuiExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
     defaultsConfigurator.useGui();
 
@@ -47,41 +47,41 @@ public class GuiExample extends SolaWithDefaults {
     assetLoaderProvider.get(Font.class)
       .addAssetMapping("times_NORMAL_18", "assets/font/times_NORMAL_18.font.json");
 
-    platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
+    platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
 
-    platform.onKeyPressed(keyEvent -> {
+    platform().onKeyPressed(keyEvent -> {
       if (keyEvent.keyCode() == Key.ONE.getCode()) {
         selectedExample = 1;
-        guiDocument.setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("gui").getAsset().rootElement());
+        guiDocument().setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("gui").getAsset().rootElement());
       }
       if (keyEvent.keyCode() == Key.TWO.getCode()) {
         selectedExample = 2;
-        guiDocument.setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("row").getAsset().rootElement());
+        guiDocument().setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("row").getAsset().rootElement());
       }
       if (keyEvent.keyCode() == Key.THREE.getCode()) {
         selectedExample = 3;
-        guiDocument.setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("column").getAsset().rootElement());
+        guiDocument().setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("column").getAsset().rootElement());
       }
       if (keyEvent.keyCode() == Key.FOUR.getCode()) {
         selectedExample = 4;
-        guiDocument.setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("text").getAsset().rootElement());
+        guiDocument().setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("text").getAsset().rootElement());
       }
       if (keyEvent.keyCode() == Key.FIVE.getCode()) {
         selectedExample = 5;
-        guiDocument.setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("image").getAsset().rootElement());
+        guiDocument().setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("image").getAsset().rootElement());
       }
       if (keyEvent.keyCode() == Key.SIX.getCode()) {
         selectedExample = 6;
-        guiDocument.setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("inputs").getAsset().rootElement());
+        guiDocument().setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("inputs").getAsset().rootElement());
       }
       if (keyEvent.keyCode() == Key.SEVEN.getCode()) {
         selectedExample = 7;
-        guiDocument.setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("theme").getAsset().rootElement());
+        guiDocument().setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("theme").getAsset().rootElement());
       }
       if (keyEvent.keyCode() == Key.EIGHT.getCode()) {
         selectedExample = 8;
 
-        guiDocument.setRootElement(buildMainAxisContentExample());
+        guiDocument().setRootElement(buildMainAxisContentExample());
       }
 
       if (selectedExample == 8) {
@@ -95,7 +95,7 @@ public class GuiExample extends SolaWithDefaults {
             case SPACE_EVENLY -> MainAxisChildren.START;
           };
 
-          guiDocument.setRootElement(buildMainAxisContentExample());
+          guiDocument().setRootElement(buildMainAxisContentExample());
         }
         if (keyEvent.keyCode() == Key.DOWN.getCode()) {
           direction = switch (direction) {
@@ -104,7 +104,7 @@ public class GuiExample extends SolaWithDefaults {
             case COLUMN -> Direction.COLUMN_REVERSE;
             case COLUMN_REVERSE -> Direction.ROW;
           };
-          guiDocument.setRootElement(buildMainAxisContentExample());
+          guiDocument().setRootElement(buildMainAxisContentExample());
         }
       }
     });
@@ -123,7 +123,7 @@ public class GuiExample extends SolaWithDefaults {
       .loadAll()
       .onComplete(assets -> {
         if (assets[0] instanceof GuiJsonDocument guiJsonDocument) {
-          guiDocument.setRootElement(guiJsonDocument.rootElement());
+          guiDocument().setRootElement(guiJsonDocument.rootElement());
         }
 
         if (assets[5] instanceof GuiJsonDocument guiJsonDocument) {

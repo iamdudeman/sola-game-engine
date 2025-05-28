@@ -1,6 +1,7 @@
 package technology.sola.engine.editor.tools.font;
 
 import javafx.application.Platform;
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.editor.core.components.TabbedPanel;
 import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
@@ -9,6 +10,7 @@ import technology.sola.json.JsonObject;
 /**
  * FontToolPanel is a {@link ToolPanel} for managing {@link technology.sola.engine.assets.graphics.font.Font} assets.
  */
+@NullMarked
 public class FontToolPanel extends ToolPanel<FontToolConfig> {
   private final TabbedPanel tabbedPanel;
   private final FontAssetTree fontAssetTree;

@@ -1,8 +1,11 @@
 package technology.sola.engine.editor.core.styles;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * Contains constants to various CSS classes.
  */
+@NullMarked
 public class Css {
   /**
    * From utility-styles.css in resources.

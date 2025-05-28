@@ -66,15 +66,15 @@ public class PhysicsExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
     defaultsConfigurator.useGraphics().usePhysics().useDebug().useGui();
 
-    platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
+    platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
 
     solaEcs.setWorld(buildQuadTreeOptimizedWorld());
 
-    guiDocument.setRootElement(buildGui());
+    guiDocument().setRootElement(buildGui());
   }
 
   private GuiElement<?, ?> buildGui() {
@@ -92,7 +92,7 @@ public class PhysicsExample extends SolaWithDefaults {
       new ButtonGuiElement()
         .setOnAction(() -> {
           resetRandom(randomSeedInput.getValue());
-          solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
+          solaPhysics().getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
             new QuadTreeCollisionDetectionBroadPhase()
           );
           solaEcs.setWorld(buildQuadTreeOptimizedWorld());
@@ -102,7 +102,7 @@ public class PhysicsExample extends SolaWithDefaults {
       new ButtonGuiElement()
         .setOnAction(() -> {
           resetRandom(randomSeedInput.getValue());
-          solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
+          solaPhysics().getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
             new SpatialHashMapCollisionDetectionBroadPhase()
           );
           solaEcs.setWorld(buildSpatialHashMapOptimizedWorld());

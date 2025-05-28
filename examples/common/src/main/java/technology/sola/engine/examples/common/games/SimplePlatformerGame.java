@@ -46,7 +46,7 @@ public class SimplePlatformerGame extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
     defaultsConfigurator.useGraphics().usePhysics().useDebug();
 
@@ -60,7 +60,7 @@ public class SimplePlatformerGame extends SolaWithDefaults {
     assetLoaderProvider.get(ControlsConfig.class)
       .getNewAsset("controls", "assets/input/simple_platformer.controls.json")
       .executeWhenLoaded(controlsConfig -> {
-        solaControls.addControls(controlsConfig);
+        solaControls.setControls(controlsConfig);
         completeAsyncInit.run();
       });
   }
@@ -258,7 +258,7 @@ public class SimplePlatformerGame extends SolaWithDefaults {
           if (dynamicBodyComponent.isGrounded() && solaControls.isActive("JUMP")) {
             dynamicBodyComponent.applyForce(0, -3000);
           } else if (dynamicBodyComponent.getVelocity().y() > 0) {
-            dynamicBodyComponent.applyForce(0, 1.5f * solaPhysics.getGravitySystem().getGravityConstant() * dynamicBodyComponent.getMaterial().getMass());
+            dynamicBodyComponent.applyForce(0, 1.5f * solaPhysics().getGravitySystem().getGravityConstant() * dynamicBodyComponent.getMaterial().getMass());
           }
         });
     }

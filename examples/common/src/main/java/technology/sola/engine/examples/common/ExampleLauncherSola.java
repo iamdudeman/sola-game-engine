@@ -78,7 +78,7 @@ public class ExampleLauncherSola extends SolaWithDefaults {
 
     DefaultThemeBuilder.buildLightTheme().applyToTree(guiRoot);
 
-    guiDocument.setRootElement(guiRoot);
+    guiDocument().setRootElement(guiRoot);
 
     guiRoot.requestFocus();
   }

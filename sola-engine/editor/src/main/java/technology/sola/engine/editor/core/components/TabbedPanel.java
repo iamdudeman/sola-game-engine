@@ -3,6 +3,8 @@ package technology.sola.engine.editor.core.components;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -10,7 +12,9 @@ import java.util.function.Consumer;
 /**
  * TabbedPanel is an extension of {@link TabPane} with convenience methods for adding, renaming, and closing tabs.
  */
+@NullMarked
 public class TabbedPanel extends TabPane {
+  @Nullable
   private Consumer<Tab> selectedTabListener = null;
 
   /**
@@ -41,6 +45,7 @@ public class TabbedPanel extends TabPane {
   /**
    * @return the id of the selected tab or else null if there is no selected tab
    */
+  @Nullable
   public String getSelectedId() {
     return getSelectionModel().getSelectedItem() == null
       ? null
