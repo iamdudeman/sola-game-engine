@@ -45,15 +45,15 @@ public class LightingExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
     defaultsConfigurator.useGraphics().useLighting(new Color(10, 10, 10)).useBackgroundColor(Color.WHITE);
 
     solaEcs.addSystem(new PlayerSystem());
     solaEcs.addSystem(new ParticleSystem());
     solaEcs.setWorld(buildWorld());
-    platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
-    platform.getRenderer().createLayers("objects");
+    platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
+    platform().getRenderer().createLayers("objects");
   }
 
   @Override
@@ -67,8 +67,8 @@ public class LightingExample extends SolaWithDefaults {
     Random random = new Random();
     World world = new World(1500);
 
-    for (int i = 0; i < platform.getRenderer().getWidth(); i += 8) {
-      for (int j = 0; j < platform.getRenderer().getHeight(); j += 8) {
+    for (int i = 0; i < platform().getRenderer().getWidth(); i += 8) {
+      for (int j = 0; j < platform().getRenderer().getHeight(); j += 8) {
         int grassTileIndex = random.nextInt(3) + 1;
         String grassSprite = "grass_" + grassTileIndex;
 
@@ -80,8 +80,8 @@ public class LightingExample extends SolaWithDefaults {
     }
 
     for (int i = 0; i < 200; i++) {
-      int x = random.nextInt(platform.getRenderer().getWidth() - 20) + 10;
-      int y = random.nextInt(platform.getRenderer().getHeight() - 20) + 10;
+      int x = random.nextInt(platform().getRenderer().getWidth() - 20) + 10;
+      int y = random.nextInt(platform().getRenderer().getHeight() - 20) + 10;
 
       world.createEntity(
         new TransformComponent(x, y),
@@ -92,7 +92,7 @@ public class LightingExample extends SolaWithDefaults {
     }
 
     world.createEntity(
-      new TransformComponent(platform.getRenderer().getWidth() / 2f, platform.getRenderer().getHeight() / 2f),
+      new TransformComponent(platform().getRenderer().getWidth() / 2f, platform().getRenderer().getHeight() / 2f),
       new SpriteComponent("forest", "player"),
       new BlendModeComponent(BlendMode.MASK),
       new LayerComponent("objects", 2),
@@ -110,8 +110,8 @@ public class LightingExample extends SolaWithDefaults {
       TransformComponent transformComponent = playerEntity.getComponent(TransformComponent.class);
 
       if (keyboardInput.isKeyPressed(Key.SPACE)) {
-        ScreenSpaceLightMapGraphicsModule screenSpaceLightMapGraphicsModule = solaGraphics.getGraphicsModule(ScreenSpaceLightMapGraphicsModule.class);
-        SpriteEntityGraphicsModule spriteEntityGraphicsModule = solaGraphics.getGraphicsModule(SpriteEntityGraphicsModule.class);
+        ScreenSpaceLightMapGraphicsModule screenSpaceLightMapGraphicsModule = solaGraphics().getGraphicsModule(ScreenSpaceLightMapGraphicsModule.class);
+        SpriteEntityGraphicsModule spriteEntityGraphicsModule = solaGraphics().getGraphicsModule(SpriteEntityGraphicsModule.class);
 
         if (spriteEntityGraphicsModule.isActive() && screenSpaceLightMapGraphicsModule.isActive()) {
           screenSpaceLightMapGraphicsModule.setActive(false);
@@ -140,7 +140,7 @@ public class LightingExample extends SolaWithDefaults {
 
       if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
         Random random = new Random();
-        Vector2D coordinate = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
+        Vector2D coordinate = solaGraphics().screenToWorldCoordinate(mouseInput.getMousePosition());
         float radius = random.nextFloat(8f, 32f);
         int intensity = random.nextInt(25, 220);
 

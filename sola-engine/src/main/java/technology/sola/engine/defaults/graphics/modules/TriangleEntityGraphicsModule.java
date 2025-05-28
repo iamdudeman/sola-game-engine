@@ -1,5 +1,6 @@
 package technology.sola.engine.defaults.graphics.modules;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.ecs.view.View;
@@ -13,6 +14,7 @@ import technology.sola.math.linear.Matrix3D;
  * TriangleEntityGraphicsModule is a {@link SolaEntityGraphicsModule} implementation for rendering {@link Entity} that
  * have a {@link TransformComponent} and {@link TriangleRendererComponent}.
  */
+@NullMarked
 public class TriangleEntityGraphicsModule extends SolaEntityGraphicsModule<View2Entry<TriangleRendererComponent, TransformComponent>> {
   @Override
   public View<View2Entry<TriangleRendererComponent, TransformComponent>> getViewToRender(World world) {

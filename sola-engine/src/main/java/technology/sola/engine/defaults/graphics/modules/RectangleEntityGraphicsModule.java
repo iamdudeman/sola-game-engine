@@ -1,5 +1,6 @@
 package technology.sola.engine.defaults.graphics.modules;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.ecs.view.View;
@@ -12,6 +13,7 @@ import technology.sola.engine.graphics.renderer.Renderer;
  * RectangleEntityGraphicsModule is a {@link SolaEntityGraphicsModule} implementation for rendering {@link Entity} that have a
  * {@link TransformComponent} and {@link RectangleRendererComponent}.
  */
+@NullMarked
 public class RectangleEntityGraphicsModule extends SolaEntityGraphicsModule<View2Entry<RectangleRendererComponent, TransformComponent>> {
   @Override
   public View<View2Entry<RectangleRendererComponent, TransformComponent>> getViewToRender(World world) {

@@ -1,5 +1,7 @@
 package technology.sola.engine.defaults.graphics.modules;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.ecs.view.View;
@@ -15,11 +17,13 @@ import technology.sola.math.linear.Matrix3D;
  * DebugEntityGraphicsModule is a {@link SolaEntityGraphicsModule} implementation for rendering debug information for a {@link World}.
  * It will render broad phase debug information and colliders for {@link Entity} that have a {@link ColliderComponent}.
  */
+@NullMarked
 public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Entry<ColliderComponent, TransformComponent>> {
   /**
    * The render order for the DebugEntityGraphicsModule.
    */
   public static final int ORDER = 999;
+  @Nullable
   private final CollisionDetectionSystem collisionDetectionSystem;
   private boolean isRenderingColliders = true;
   private boolean isRenderingBoundingBoxes = true;
@@ -30,7 +34,7 @@ public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Ent
    *
    * @param collisionDetectionSystem the {@link CollisionDetectionSystem} instance
    */
-  public DebugEntityGraphicsModule(CollisionDetectionSystem collisionDetectionSystem) {
+  public DebugEntityGraphicsModule(@Nullable CollisionDetectionSystem collisionDetectionSystem) {
     this.collisionDetectionSystem = collisionDetectionSystem;
   }
 

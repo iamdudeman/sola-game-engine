@@ -1,6 +1,7 @@
 package technology.sola.engine.editor.tools;
 
 import javafx.scene.control.SplitPane;
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.json.JsonObject;
 
@@ -9,6 +10,7 @@ import technology.sola.json.JsonObject;
  *
  * @param <T> the tool's configuration object type
  */
+@NullMarked
 public abstract class ToolPanel<T> extends SplitPane {
   /**
    * The configuration for this tool.

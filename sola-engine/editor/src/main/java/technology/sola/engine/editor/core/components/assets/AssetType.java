@@ -1,8 +1,11 @@
 package technology.sola.engine.editor.core.components.assets;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * AssetType holds the different asset types that sola editor is capable of managing.
  */
+@NullMarked
 public enum AssetType {
   /**
    * Font assets.

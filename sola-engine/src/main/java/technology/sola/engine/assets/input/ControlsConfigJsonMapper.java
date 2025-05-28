@@ -1,7 +1,6 @@
 package technology.sola.engine.assets.input;
 
 import org.jspecify.annotations.NullMarked;
-import technology.sola.engine.defaults.controls.*;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.json.JsonArray;

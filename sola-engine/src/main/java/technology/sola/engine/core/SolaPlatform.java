@@ -179,7 +179,7 @@ public abstract class SolaPlatform {
   }
 
   /**
-   * Builds the {@link GameLoop} for this platform. Default implmentation will utilize the {@link FixedUpdateGameLoop}
+   * Builds the {@link GameLoop} for this platform. Default implementation will utilize the {@link FixedUpdateGameLoop}
    * implementation.
    *
    * @return the built {@code GameLoop}

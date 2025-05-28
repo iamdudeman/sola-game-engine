@@ -1,5 +1,7 @@
 package technology.sola.engine.editor.tools.font;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.json.JsonArray;
 import technology.sola.json.JsonObject;
 import technology.sola.json.mapper.JsonMapper;
@@ -14,10 +16,11 @@ import java.util.List;
  * @param dividerPosition the position of the divider in the window
  * @param openId          the previously selected file id
  */
+@NullMarked
 public record FontToolConfig(
   List<String> openedFileIds,
   double dividerPosition,
-  String openId
+  @Nullable String openId
 ) {
   /**
    * Creates a FontToolConfig with default values (no previously opened files).

@@ -1,5 +1,7 @@
 package technology.sola.engine.core;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.event.EventHub;
@@ -10,15 +12,12 @@ import technology.sola.engine.input.MouseInput;
 /**
  * Sola contains the core functionality needed to make a game. It is played via {@link SolaPlatform}.
  */
+@NullMarked
 public abstract class Sola {
   /**
    * The configuration for this Sola
    */
   protected final SolaConfiguration configuration;
-  /**
-   * The {@link SolaPlatform} running this Sola
-   */
-  protected SolaPlatform platform;
   /**
    * The {@link SolaEcs} instance used by this Sola
    */
@@ -39,6 +38,8 @@ public abstract class Sola {
    * Used to load assets for the Sola to use.
    */
   protected AssetLoaderProvider assetLoaderProvider;
+  @Nullable
+  private SolaPlatform platform;
 
   /**
    * Creates a Sola instance with desired {@link SolaConfiguration}.
@@ -74,6 +75,17 @@ public abstract class Sola {
    */
   protected void onAsyncInit(Runnable completeAsyncInit) {
     completeAsyncInit.run();
+  }
+
+  /**
+   * @return the {@link SolaPlatform} running this Sola.
+   */
+  protected SolaPlatform platform() {
+    if (platform == null) {
+      throw new IllegalStateException("Platform has not initialized. This is done through SolaPlatform#play(Sola)");
+    }
+
+    return platform;
   }
 
   /**

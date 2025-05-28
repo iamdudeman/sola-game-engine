@@ -1,5 +1,6 @@
-package technology.sola.engine.defaults.controls;
+package technology.sola.engine.assets.input;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
 
@@ -8,6 +9,7 @@ import technology.sola.engine.input.MouseInput;
  *
  * @param <T> the type for the state of the input condition (ie pressed, held)
  */
+@NullMarked
 public interface ControlInputCondition<T> {
   /**
    * The state the input needs to be in to be considered active.

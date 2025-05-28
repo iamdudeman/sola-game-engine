@@ -3,6 +3,7 @@ package technology.sola.engine.editor.tools.sprites;
 import javafx.application.Platform;
 import javafx.geometry.Orientation;
 import javafx.scene.control.SplitPane;
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.editor.core.components.TabbedPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
@@ -12,6 +13,7 @@ import technology.sola.json.JsonObject;
 /**
  * SpriteSheetToolPanel is a {@link ToolPanel} for managing {@link SpriteSheet} assets.
  */
+@NullMarked
 public class SpriteSheetToolPanel extends ToolPanel<SpriteSheetToolConfig> {
   private final SpriteSheetState spriteSheetState = new SpriteSheetState();
   private TabbedPanel tabbedPanel;

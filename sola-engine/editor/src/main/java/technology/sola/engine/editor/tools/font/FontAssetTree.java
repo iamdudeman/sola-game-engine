@@ -1,6 +1,7 @@
 package technology.sola.engine.editor.tools.font;
 
 import javafx.scene.layout.VBox;
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.editor.core.components.ImagePanel;
 import technology.sola.engine.editor.core.components.assets.AssetTreeItem;
 import technology.sola.engine.editor.core.components.assets.AssetType;
@@ -16,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+@NullMarked
 class FontAssetTree extends VBox {
   private static final SolaLogger LOGGER = SolaLogger.of(FontAssetTree.class, "logs/sola-editor.log");
   private final AssetTreeView assetTreeView;

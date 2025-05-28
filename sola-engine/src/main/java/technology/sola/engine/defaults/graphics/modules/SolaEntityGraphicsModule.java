@@ -1,5 +1,6 @@
 package technology.sola.engine.defaults.graphics.modules;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.ecs.view.View;
@@ -15,6 +16,7 @@ import technology.sola.math.linear.Vector2D;
  * SolaEntityGraphicsModule adds rendering functionality to {@link technology.sola.engine.defaults.SolaGraphics} for
  * rendering {@link Entity} that have specified {@link technology.sola.ecs.Component}s.
  */
+@NullMarked
 public abstract class SolaEntityGraphicsModule<V extends ViewEntry> extends SolaGraphicsModule {
   /**
    * Returns a {@link View} of {@link Entity} that need to be rendered via

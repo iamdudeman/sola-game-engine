@@ -1,5 +1,6 @@
 package technology.sola.engine.defaults.graphics.modules;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.ecs.view.View;
@@ -12,6 +13,7 @@ import technology.sola.engine.graphics.renderer.Renderer;
  * CircleEntityGraphicsModule is a {@link SolaEntityGraphicsModule} implementation for rendering {@link Entity} that have a
  * {@link TransformComponent} and {@link CircleRendererComponent}.
  */
+@NullMarked
 public class CircleEntityGraphicsModule extends SolaEntityGraphicsModule<View2Entry<CircleRendererComponent, TransformComponent>> {
   @Override
   public View<View2Entry<CircleRendererComponent, TransformComponent>> getViewToRender(World world) {

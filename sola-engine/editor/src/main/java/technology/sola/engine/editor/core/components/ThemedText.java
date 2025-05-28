@@ -1,11 +1,13 @@
 package technology.sola.engine.editor.core.components;
 
 import javafx.scene.text.Text;
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.editor.core.styles.Css;
 
 /**
  * ThemedText is an extension of {@link Text} that provides a consistent text theming across the editor.
  */
+@NullMarked
 public class ThemedText extends Text {
   /**
    * Creates an instance with default kind {@link Kind#PARAGRAPH}.

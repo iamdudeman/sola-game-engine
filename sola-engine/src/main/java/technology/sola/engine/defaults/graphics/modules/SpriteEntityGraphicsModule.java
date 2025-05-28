@@ -1,5 +1,6 @@
 package technology.sola.engine.defaults.graphics.modules;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.ecs.view.View;
@@ -17,6 +18,7 @@ import technology.sola.engine.graphics.renderer.Renderer;
  * SpriteEntityGraphicsModule is a {@link SolaEntityGraphicsModule} implementation for rendering {@link Entity} that have a
  * {@link TransformComponent} and {@link SpriteComponent}.
  */
+@NullMarked
 public class SpriteEntityGraphicsModule extends SolaEntityGraphicsModule<View2Entry<SpriteComponent, TransformComponent>> {
   private final AssetLoader<SpriteSheet> spriteSheetAssetLoader;
 

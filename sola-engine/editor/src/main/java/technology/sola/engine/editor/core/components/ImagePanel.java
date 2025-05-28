@@ -13,6 +13,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.editor.core.styles.Css;
 
 import java.io.File;
@@ -21,18 +23,19 @@ import java.util.function.Consumer;
 /**
  * ImagePanel is a component for viewing an image with the ability to zoom in and out on it.
  */
+@NullMarked
 public class ImagePanel extends VBox {
   private final Property<Boolean> hasChangedProperty = new SimpleBooleanProperty(false);
 
-  private GraphicsContext graphicsContext;
-  private Image image;
+  private final GraphicsContext graphicsContext;
+  private final Image image;
+  private final Canvas canvas;
+  private final Button resetButton;
+  private final ToggleButton toggleOverlayButton;
+  @Nullable
   private Consumer<GraphicsContext> overlayRenderer;
-  private Double startTranslateX;
-  private Double startTranslateY;
-
-  private Canvas canvas;
-  private Button resetButton;
-  private ToggleButton toggleOverlayButton;
+  private Double startTranslateX = 0d;
+  private Double startTranslateY = 0d;
 
   /**
    * Creates an instance for desire image {@link File}
@@ -40,7 +43,14 @@ public class ImagePanel extends VBox {
    * @param imageFile the image file
    */
   public ImagePanel(File imageFile) {
-    getChildren().addAll(buildToolbar(), buildContent(imageFile));
+    image = new Image(imageFile.toURI().toString());
+    canvas = new Canvas(image.getWidth(), image.getHeight());
+    graphicsContext = canvas.getGraphicsContext2D();
+    graphicsContext.setImageSmoothing(false);
+    toggleOverlayButton = new ToggleButton("Toggle overlay");
+    resetButton = new Button("Reset");
+
+    getChildren().addAll(buildToolbar(), buildContent());
 
     setOnScroll(event -> {
       if (event.getDeltaY() > 0) {
@@ -108,13 +118,11 @@ public class ImagePanel extends VBox {
   }
 
   private ToolBar buildToolbar() {
-    toggleOverlayButton = new ToggleButton("Toggle overlay");
     toggleOverlayButton.setVisible(false);
     toggleOverlayButton.managedProperty().bind(toggleOverlayButton.visibleProperty());
     toggleOverlayButton.setSelected(true);
     toggleOverlayButton.setOnAction(event -> update());
 
-    resetButton = new Button("Reset");
     resetButton.visibleProperty().bind(hasChangedProperty);
     resetButton.setOnAction(event -> {
       canvas.setScaleX(1.0);
@@ -131,12 +139,7 @@ public class ImagePanel extends VBox {
     return toolbar;
   }
 
-  private Node buildContent(File file) {
-    image = new Image(file.toURI().toString());
-    canvas = new Canvas(image.getWidth(), image.getHeight());
-    graphicsContext = canvas.getGraphicsContext2D();
-    graphicsContext.setImageSmoothing(false);
-
+  private Node buildContent() {
     var imageWrapper = new BorderPane(canvas);
 
     imageWrapper.getStyleClass().add(Css.Util.PADDING_5X);

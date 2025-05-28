@@ -1,11 +1,13 @@
 package technology.sola.engine.editor.core.config;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.json.JsonObject;
 import technology.sola.json.mapper.JsonMapper;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@NullMarked
 class EditorConfigJsonMapper implements JsonMapper<EditorConfig> {
   private final WindowBoundsJsonMapper windowBoundsJsonMapper = new WindowBoundsJsonMapper();
 

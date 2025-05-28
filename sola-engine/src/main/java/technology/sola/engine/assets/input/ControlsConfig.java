@@ -2,7 +2,6 @@ package technology.sola.engine.assets.input;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.Asset;
-import technology.sola.engine.defaults.controls.ControlInput;
 
 import java.util.List;
 import java.util.Map;

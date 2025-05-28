@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.games.minesweeper.graphics;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.World;
 import technology.sola.ecs.view.View;
 import technology.sola.ecs.view.View2Entry;
@@ -12,6 +13,7 @@ import technology.sola.engine.graphics.renderer.Renderer;
 /**
  * {@link SolaEntityGraphicsModule} for rendering {@link technology.sola.ecs.Entity} with {@link MinesweeperSquareComponent}.
  */
+@NullMarked
 public class MinesweeperSquareEntityGraphicsModule extends SolaEntityGraphicsModule<View2Entry<TransformComponent, MinesweeperSquareComponent>> {
   private static final int FONT_OFFSET = 5;
 

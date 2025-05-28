@@ -1,5 +1,7 @@
 package technology.sola.engine.editor.tools.sprites;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.json.JsonArray;
 import technology.sola.json.JsonObject;
 import technology.sola.json.mapper.JsonMapper;
@@ -16,12 +18,13 @@ import java.util.List;
  * @param topBottomDivider the position of the top and bottom divider in the window
  * @param openId           the previously selected file id
  */
+@NullMarked
 public record SpriteSheetToolConfig(
   List<String> openedFileIds,
   double leftDivider,
   double rightDivider,
   double topBottomDivider,
-  String openId
+  @Nullable String openId
 ) {
   /**
    * Creates a SpriteSheetToolConfig with default values (no previously opened files).

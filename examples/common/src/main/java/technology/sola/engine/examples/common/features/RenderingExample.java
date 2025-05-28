@@ -52,7 +52,7 @@ public class RenderingExample extends Sola {
 
   @Override
   protected void onInit() {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
     solaGraphics.addGraphicsModules(
       new CircleEntityGraphicsModule(),
@@ -65,7 +65,7 @@ public class RenderingExample extends Sola {
     solaEcs.addSystems(solaGraphics.getSystems());
     solaEcs.setWorld(createWorld());
 
-    platform.getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
+    platform().getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
 
     assetLoaderProvider.get(SolaImage.class)
       .addAssetMapping("test", "assets/sprites/test_tiles.png");
@@ -133,11 +133,11 @@ public class RenderingExample extends Sola {
         });
 
       if (keyboardInput.isKeyPressed(Key.ONE)) {
-        platform.getViewport().setAspectMode(AspectMode.IGNORE_RESIZING);
+        platform().getViewport().setAspectMode(AspectMode.IGNORE_RESIZING);
       } else if (keyboardInput.isKeyPressed(Key.TWO)) {
-        platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
+        platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
       } else if (keyboardInput.isKeyPressed(Key.THREE)) {
-        platform.getViewport().setAspectMode(AspectMode.STRETCH);
+        platform().getViewport().setAspectMode(AspectMode.STRETCH);
       }
 
       final float scalingSpeed = 1f;
@@ -169,10 +169,10 @@ public class RenderingExample extends Sola {
       }
 
       if (keyboardInput.isKeyPressed(Key.H)) {
-        Layer blockLayer = platform.getRenderer().getLayer("blocks");
+        Layer blockLayer = platform().getRenderer().getLayer("blocks");
         blockLayer.setActive(!blockLayer.isActive());
 
-        Layer backgroundLayer = platform.getRenderer().getLayer("background");
+        Layer backgroundLayer = platform().getRenderer().getLayer("background");
         backgroundLayer.setActive(!backgroundLayer.isActive());
       }
     }

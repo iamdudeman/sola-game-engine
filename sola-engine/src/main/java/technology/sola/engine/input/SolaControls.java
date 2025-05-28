@@ -1,9 +1,8 @@
-package technology.sola.engine.defaults;
+package technology.sola.engine.input;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.input.ControlsConfig;
-import technology.sola.engine.defaults.controls.ControlInput;
-import technology.sola.engine.input.KeyboardInput;
-import technology.sola.engine.input.MouseInput;
+import technology.sola.engine.assets.input.ControlInput;
 import technology.sola.logging.SolaLogger;
 
 import java.util.HashMap;
@@ -15,6 +14,7 @@ import java.util.Map;
  * added can have multiple {@link ControlInput}s. If any {@link ControlInput} is in an active state then the control
  * will be considered active.
  */
+@NullMarked
 public class SolaControls {
   private static final SolaLogger LOGGER = SolaLogger.of(SolaControls.class);
   private final Map<String, List<ControlInput>> controls = new HashMap<>();
@@ -97,6 +97,18 @@ public class SolaControls {
    * @return this
    */
   public SolaControls addControls(ControlsConfig controlsConfig) {
+    controlsConfig.controls().forEach(this::addControl);
+
+    return this;
+  }
+
+  /**
+   * Clears any existing controls and adds all controls from a {@link ControlsConfig}.
+   *
+   * @param controlsConfig the {@link ControlsConfig}
+   * @return this
+   */
+  public SolaControls setControls(ControlsConfig controlsConfig) {
     controls.clear();
     controlsConfig.controls().forEach(this::addControl);
 

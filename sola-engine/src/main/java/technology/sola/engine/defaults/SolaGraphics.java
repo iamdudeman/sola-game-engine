@@ -71,7 +71,7 @@ public class SolaGraphics {
       }
     }
 
-    return null;
+    throw new IllegalStateException("No graphicsModule found for " + solaGraphicsModuleClass);
   }
 
   /**

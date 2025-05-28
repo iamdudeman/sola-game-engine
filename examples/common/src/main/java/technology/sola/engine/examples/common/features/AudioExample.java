@@ -42,7 +42,7 @@ public class AudioExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
     guiTheme = DefaultThemeBuilder.buildLightTheme()
       .addStyle(TextGuiElement.class, List.of(ConditionalStyle.always(
@@ -55,7 +55,7 @@ public class AudioExample extends SolaWithDefaults {
 
     defaultsConfigurator.useGui(guiTheme);
 
-    platform.getViewport().setAspectMode(AspectMode.STRETCH);
+    platform().getViewport().setAspectMode(AspectMode.STRETCH);
   }
 
   @Override
@@ -70,7 +70,7 @@ public class AudioExample extends SolaWithDefaults {
 
           var guiRoot = buildGui(audioClip);
 
-          guiDocument.setRootElement(guiRoot);
+          guiDocument().setRootElement(guiRoot);
           guiTheme.applyToTree(guiRoot);
         }
 

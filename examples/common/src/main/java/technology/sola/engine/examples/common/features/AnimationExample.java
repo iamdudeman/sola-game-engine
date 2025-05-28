@@ -34,12 +34,12 @@ public class AnimationExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
     defaultsConfigurator.useGraphics().useBackgroundColor(Color.WHITE);
 
     solaEcs.setWorld(buildWorld());
-    platform.getViewport().setAspectMode(AspectMode.STRETCH);
+    platform().getViewport().setAspectMode(AspectMode.STRETCH);
   }
 
   @Override

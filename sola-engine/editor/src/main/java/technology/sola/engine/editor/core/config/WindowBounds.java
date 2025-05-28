@@ -1,5 +1,7 @@
 package technology.sola.engine.editor.core.config;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * WindowBounds contains the top, left coordinate of the editor window and its width and height.
  *
@@ -8,6 +10,7 @@ package technology.sola.engine.editor.core.config;
  * @param width  the width of the window
  * @param height the height of the window
  */
+@NullMarked
 public record WindowBounds(int x, int y, int width, int height) {
   /**
    * Creates an instance with default values set.

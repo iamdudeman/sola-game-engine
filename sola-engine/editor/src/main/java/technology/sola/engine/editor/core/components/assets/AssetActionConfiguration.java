@@ -1,11 +1,14 @@
 package technology.sola.engine.editor.core.components.assets;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.io.File;
 
 /**
  * AssetActionConfiguration is the interface for tools to add custom asset management capabilities to
  * an {@link AssetTreeView} context menu.
  */
+@NullMarked
 public interface AssetActionConfiguration {
   /**
    * Called when an asset is selected.

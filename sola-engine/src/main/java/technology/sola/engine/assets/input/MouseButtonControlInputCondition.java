@@ -1,5 +1,6 @@
-package technology.sola.engine.defaults.controls;
+package technology.sola.engine.assets.input;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.engine.input.MouseInput;
@@ -10,6 +11,7 @@ import technology.sola.engine.input.MouseInput;
  * @param button the {@link MouseButton} to check
  * @param state  the {@link State} needed to be considered active
  */
+@NullMarked
 public record MouseButtonControlInputCondition(
   MouseButton button,
   State state

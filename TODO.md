@@ -2,9 +2,7 @@
 
 ## Nullability stuff
 
-* core - Sola, SolaPlatform
-* defaults stuff
-* editor
+* core - SolaPlatform
 * all platforms
     * browser
     * swing

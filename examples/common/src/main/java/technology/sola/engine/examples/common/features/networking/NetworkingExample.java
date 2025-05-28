@@ -41,7 +41,7 @@ public class NetworkingExample extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform, eventHub);
+    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
     defaultsConfigurator.useGui().useGraphics().useDebug();
 
@@ -53,7 +53,7 @@ public class NetworkingExample extends SolaWithDefaults {
     DefaultThemeBuilder.buildDarkTheme()
       .applyToTree(rootElement);
 
-    guiDocument.setRootElement(rootElement);
+    guiDocument().setRootElement(rootElement);
   }
 
   private class PlayerSystem extends EcsSystem {
@@ -68,8 +68,8 @@ public class NetworkingExample extends SolaWithDefaults {
         direction = 2;
       }
 
-      if (platform.getSocketClient().isConnected()) {
-        platform.getSocketClient().sendMessage(new PlayerMoveMessage(direction));
+      if (platform().getSocketClient().isConnected()) {
+        platform().getSocketClient().sendMessage(new PlayerMoveMessage(direction));
       }
     }
   }
@@ -77,15 +77,15 @@ public class NetworkingExample extends SolaWithDefaults {
   private class NetworkQueueSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
-      while (!platform.getSocketClient().getNetworkQueue().isEmpty() && platform.getSocketClient().isConnected()) {
-        SocketMessage socketMessage = platform.getSocketClient().getNetworkQueue().removeFirst();
+      while (!platform().getSocketClient().getNetworkQueue().isEmpty() && platform().getSocketClient().isConnected()) {
+        SocketMessage socketMessage = platform().getSocketClient().getNetworkQueue().removeFirst();
         MessageType messageType = MessageType.values()[socketMessage.getType()];
 
         switch (messageType) {
           case UPDATE_TIME -> {
             UpdateTimeMessage updateTimeMessage = UpdateTimeMessage.parse(socketMessage);
 
-            guiDocument.findElementById("updateTimeButton", ButtonGuiElement.class)
+            guiDocument().findElementById("updateTimeButton", ButtonGuiElement.class)
               .findElementsByType(TextGuiElement.class)
               .get(0)
               .setText(new Date(updateTimeMessage.getTime()).toString());
@@ -136,25 +136,25 @@ public class NetworkingExample extends SolaWithDefaults {
       new TextGuiElement().setText("Networking Example"),
       new TextGuiElement().setText("").setId("time"),
       buildButton("connectButton", "Connect", () -> {
-        platform.getSocketClient().connect("127.0.0.1", 1380);
+        platform().getSocketClient().connect("127.0.0.1", 1380);
 
         sectionGuiElement.findElementById("connectButton", ButtonGuiElement.class).setDisabled(true);
         sectionGuiElement.findElementById("disconnectButton", ButtonGuiElement.class).setDisabled(false);
         sectionGuiElement.findElementById("updateTimeButton", ButtonGuiElement.class).setDisabled(false);
       }, false),
       buildButton("updateTimeButton", "Update Time via Socket", () -> {
-        platform.getSocketClient().sendMessage(new RequestTimeMessage());
+        platform().getSocketClient().sendMessage(new RequestTimeMessage());
       }, true),
       buildButton("updateTimeButtonRest", "Update Time via Rest", () -> {
-        platform.getRestClient().get("http://localhost:1381/time", response -> {
-          guiDocument.findElementById("updateTimeButtonRest", ButtonGuiElement.class)
+        platform().getRestClient().get("http://localhost:1381/time", response -> {
+          guiDocument().findElementById("updateTimeButtonRest", ButtonGuiElement.class)
             .findElementsByType(TextGuiElement.class)
             .get(0)
             .setText(new Date(response.body().asObject().getLong("time")).toString());
         });
       }, false),
       buildButton("disconnectButton", "Disconnect", () -> {
-        platform.getSocketClient().disconnect();
+        platform().getSocketClient().disconnect();
 
         solaEcs.setWorld(LevelBuilder.createWorld(MAX_PLAYERS));
 

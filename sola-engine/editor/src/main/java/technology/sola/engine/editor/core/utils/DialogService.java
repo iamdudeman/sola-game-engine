@@ -6,6 +6,8 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.editor.core.EditorScene;
 
 import java.io.File;
@@ -13,7 +15,9 @@ import java.io.File;
 /**
  * DialogService contains methods for showing various types of dialogs.
  */
+@NullMarked
 public class DialogService {
+  @Nullable
   private static Stage parentStage;
 
   /**

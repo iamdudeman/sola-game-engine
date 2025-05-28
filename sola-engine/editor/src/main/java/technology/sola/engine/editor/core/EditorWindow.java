@@ -12,6 +12,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.engine.editor.core.config.WindowBounds;
@@ -33,11 +35,15 @@ import java.util.Map;
  * EditorWindow initializes the primary JavaFX {@link Stage} used by the sola editor. It also reads the editor
  * configuration and initializes the various editor tools.
  */
+@NullMarked
 public class EditorWindow {
   private static final SolaLogger LOGGER = SolaLogger.of(EditorWindow.class, "logs/sola-editor.log");
+  @Nullable
   private EditorConfig editorConfig;
+  @Nullable
   private VBox toolContent;
 
+  @Nullable
   private List<ToolPanel<?>> editorToolPanels;
 
   /**
