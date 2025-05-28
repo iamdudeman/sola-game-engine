@@ -3,6 +3,7 @@ package technology.sola.engine.platform.browser.tools;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+import org.jspecify.annotations.NullMarked;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,6 +18,7 @@ import java.util.function.Function;
  * SimpleSolaBrowserFileServer is a simple static asset server implementation that can be used to serve browser platform
  * index.html, sola.js and game assets.
  */
+@NullMarked
 public class SimpleSolaBrowserFileServer {
   private final String indexHtmlDirectoryPath;
   private final String solaJsDirectoryPath;
