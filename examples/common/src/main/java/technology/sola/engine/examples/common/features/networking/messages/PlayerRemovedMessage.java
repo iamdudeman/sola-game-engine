@@ -1,10 +1,12 @@
 package technology.sola.engine.examples.common.features.networking.messages;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.networking.socket.SocketMessage;
 
 /**
  * {@link SocketMessage} for notifying that a player was removed.
  */
+@NullMarked
 public class PlayerRemovedMessage extends SocketMessage {
   private final long clientPlayerId;
 

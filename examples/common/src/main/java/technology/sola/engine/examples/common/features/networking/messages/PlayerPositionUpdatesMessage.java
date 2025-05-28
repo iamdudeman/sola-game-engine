@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.features.networking.messages;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.networking.socket.SocketMessage;
 import technology.sola.math.linear.Vector2D;
 
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 /**
  * {@link SocketMessage} to let clients know the positions of all connected players.
  */
+@NullMarked
 public class PlayerPositionUpdatesMessage extends SocketMessage {
   private final List<PlayerPosition> playerPositions;
 
