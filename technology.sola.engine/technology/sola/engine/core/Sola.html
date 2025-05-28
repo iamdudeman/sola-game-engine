@@ -80,7 +80,8 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="../defaults/SolaWithDefaults.html" title="class in technology.sola.engine.defaults">SolaWithDefaults</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">Sola</span>
+<div class="type-signature"><span class="annotations">@NullMarked
+</span><span class="modifiers">public abstract class </span><span class="element-name type-name-label">Sola</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Sola contains the core functionality needed to make a game. It is played via <a href="SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a>.</div>
 </section>
@@ -120,14 +121,9 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">
 <div class="block">Used to check current state of mouse input.</div>
 </div>
-<div class="col-first odd-row-color"><code>protected <a href="SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#platform" class="member-name-link">platform</a></code></div>
+<div class="col-first odd-row-color"><code>protected technology.sola.ecs.SolaEcs</code></div>
+<div class="col-second odd-row-color"><code><a href="#solaEcs" class="member-name-link">solaEcs</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">The <a href="SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> running this Sola</div>
-</div>
-<div class="col-first even-row-color"><code>protected technology.sola.ecs.SolaEcs</code></div>
-<div class="col-second even-row-color"><code><a href="#solaEcs" class="member-name-link">solaEcs</a></code></div>
-<div class="col-last even-row-color">
 <div class="block">The <code>SolaEcs</code> instance used by this Sola</div>
 </div>
 </div>
@@ -181,6 +177,9 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Method called every frame to update the input and world state.</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#platform()" class="member-name-link">platform</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -203,13 +202,6 @@ loadScripts(document, 'script');</script>
 <h3>configuration</h3>
 <div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="SolaConfiguration.html" title="class in technology.sola.engine.core">SolaConfiguration</a></span>&nbsp;<span class="element-name">configuration</span></div>
 <div class="block">The configuration for this Sola</div>
-</section>
-</li>
-<li>
-<section class="detail" id="platform">
-<h3>platform</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></span>&nbsp;<span class="element-name">platform</span></div>
-<div class="block">The <a href="SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> running this Sola</div>
 </section>
 </li>
 <li>
@@ -301,6 +293,16 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>completeAsyncInit</code> - the callback to notify the hosting platform initialization is complete</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="platform()">
+<h3>platform</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></span>&nbsp;<span class="element-name">platform</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the <a href="SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> running this Sola.</dd>
 </dl>
 </section>
 </li>

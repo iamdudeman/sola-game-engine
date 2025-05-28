@@ -100,11 +100,19 @@ loadScripts(document, 'script');</script>
 </li>
 <li>
 <div id="class-summary">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="class-summary-tab0" role="tab" aria-selected="true" aria-controls="class-summary.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary', 2)" class="active-table-tab">All Classes and Interfaces</button><button id="class-summary-tab2" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab2', 2)" class="table-tab">Classes</button><button id="class-summary-tab4" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab4', 2)" class="table-tab">Record Classes</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="class-summary-tab0" role="tab" aria-selected="true" aria-controls="class-summary.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary', 2)" class="active-table-tab">All Classes and Interfaces</button><button id="class-summary-tab1" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab1', 2)" class="table-tab">Interfaces</button><button id="class-summary-tab2" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab2', 2)" class="table-tab">Classes</button><button id="class-summary-tab3" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab3', 2)" class="table-tab">Enum Classes</button><button id="class-summary-tab4" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab4', 2)" class="table-tab">Record Classes</button></div>
 <div id="class-summary.tabpanel" role="tabpanel" aria-labelledby="class-summary-tab0">
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Class</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color class-summary class-summary-tab4"><a href="ControlInput.html" title="class in technology.sola.engine.assets.input">ControlInput</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab4">
+<div class="block">A ControlInput is composed of a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> of conditions.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="ControlInputCondition.html" title="interface in technology.sola.engine.assets.input">ControlInputCondition</a>&lt;T&gt;</div>
+<div class="col-last odd-row-color class-summary class-summary-tab1">
+<div class="block">ControlInputCondition indicates whether a condition for a <a href="ControlInput.html" title="class in technology.sola.engine.assets.input"><code>ControlInput</code></a> is active or not.</div>
+</div>
 <div class="col-first even-row-color class-summary class-summary-tab4"><a href="ControlsConfig.html" title="class in technology.sola.engine.assets.input">ControlsConfig</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab4">
 <div class="block">ControlsConfig is an <a href="../Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> for control configurations.</div>
@@ -116,6 +124,30 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="ControlsConfigJsonMapper.html" title="class in technology.sola.engine.assets.input">ControlsConfigJsonMapper</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">ControlsConfigJsonMapper is a <code>JsonMapper</code> implementation for <a href="ControlsConfig.html" title="class in technology.sola.engine.assets.input"><code>ControlsConfig</code></a>.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab4"><a href="KeyControlInputCondition.html" title="class in technology.sola.engine.assets.input">KeyControlInputCondition</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab4">
+<div class="block">KeyControlInputCondition is a <a href="ControlInputCondition.html" title="interface in technology.sola.engine.assets.input"><code>ControlInputCondition</code></a> to check if a <a href="../../input/Key.html" title="enum class in technology.sola.engine.input"><code>Key</code></a> is in an active state.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab3"><a href="KeyControlInputCondition.State.html" title="enum class in technology.sola.engine.assets.input">KeyControlInputCondition.State</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab3">
+<div class="block">The possible states for <a href="KeyControlInputCondition.html" title="class in technology.sola.engine.assets.input"><code>KeyControlInputCondition</code></a>.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab4"><a href="MouseButtonControlInputCondition.html" title="class in technology.sola.engine.assets.input">MouseButtonControlInputCondition</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab4">
+<div class="block">MouseButtonInputCondition is a <a href="ControlInputCondition.html" title="interface in technology.sola.engine.assets.input"><code>ControlInputCondition</code></a> to check if a <a href="../../input/MouseButton.html" title="enum class in technology.sola.engine.input"><code>MouseButton</code></a> is in an active state.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab3"><a href="MouseButtonControlInputCondition.State.html" title="enum class in technology.sola.engine.assets.input">MouseButtonControlInputCondition.State</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab3">
+<div class="block">The possible states for <a href="MouseButtonControlInputCondition.html" title="class in technology.sola.engine.assets.input"><code>MouseButtonControlInputCondition</code></a>.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab4"><a href="MouseWheelControlInputCondition.html" title="class in technology.sola.engine.assets.input">MouseWheelControlInputCondition</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab4">
+<div class="block">MouseWheelControlInputCondition is a <a href="ControlInputCondition.html" title="interface in technology.sola.engine.assets.input"><code>ControlInputCondition</code></a> to check if the mouse wheel is in an active state.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab3"><a href="MouseWheelControlInputCondition.State.html" title="enum class in technology.sola.engine.assets.input">MouseWheelControlInputCondition.State</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab3">
+<div class="block">The possible states for <a href="MouseWheelControlInputCondition.html" title="class in technology.sola.engine.assets.input"><code>MouseWheelControlInputCondition</code></a>.</div>
 </div>
 </div>
 </div>

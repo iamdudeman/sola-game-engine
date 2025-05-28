@@ -5,7 +5,7 @@
 <title>SolaControls (sola-engine 0.11.0 API)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="declaration: module: technology.sola.engine, package: technology.sola.engine.defaults, class: SolaControls">
+<meta name="description" content="declaration: module: technology.sola.engine, package: technology.sola.engine.input, class: SolaControls">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -68,18 +68,19 @@ loadScripts(document, 'script');</script>
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="sub-title"><span class="module-label-in-type">Module</span>&nbsp;<a href="../../../../module-summary.html">technology.sola.engine</a></div>
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">technology.sola.engine.defaults</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">technology.sola.engine.input</a></div>
 <h1 title="Class SolaControls" class="title">Class SolaControls</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">technology.sola.engine.defaults.SolaControls</div>
+<div class="inheritance">technology.sola.engine.input.SolaControls</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SolaControls</span>
+<div class="type-signature"><span class="annotations">@NullMarked
+</span><span class="modifiers">public class </span><span class="element-name type-name-label">SolaControls</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">SolaControls contains control definitions for a <a href="../core/Sola.html" title="class in technology.sola.engine.core"><code>Sola</code></a> to use. Each control that is
- added can have multiple <a href="controls/ControlInput.html" title="class in technology.sola.engine.defaults.controls"><code>ControlInput</code></a>s. If any <a href="controls/ControlInput.html" title="class in technology.sola.engine.defaults.controls"><code>ControlInput</code></a> is in an active state then the control
+ added can have multiple <a href="../assets/input/ControlInput.html" title="class in technology.sola.engine.assets.input"><code>ControlInput</code></a>s. If any <a href="../assets/input/ControlInput.html" title="class in technology.sola.engine.assets.input"><code>ControlInput</code></a> is in an active state then the control
  will be considered active.</div>
 </section>
 <section class="summary">
@@ -92,8 +93,8 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.input.KeyboardInput,technology.sola.engine.input.MouseInput)" class="member-name-link">SolaControls</a><wbr>(<a href="../input/KeyboardInput.html" title="class in technology.sola.engine.input">KeyboardInput</a>&nbsp;keyboardInput,
- <a href="../input/MouseInput.html" title="class in technology.sola.engine.input">MouseInput</a>&nbsp;mouseInput)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.input.KeyboardInput,technology.sola.engine.input.MouseInput)" class="member-name-link">SolaControls</a><wbr>(<a href="KeyboardInput.html" title="class in technology.sola.engine.input">KeyboardInput</a>&nbsp;keyboardInput,
+ <a href="MouseInput.html" title="class in technology.sola.engine.input">MouseInput</a>&nbsp;mouseInput)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates a SolaControls instance wrapping all supported input devices.</div>
 </div>
@@ -111,19 +112,19 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SolaControls.html" title="class in technology.sola.engine.defaults">SolaControls</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SolaControls.html" title="class in technology.sola.engine.input">SolaControls</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addControl(java.lang.String,java.util.List)" class="member-name-link">addControl</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="controls/ControlInput.html" title="class in technology.sola.engine.defaults.controls">ControlInput</a>&gt;&nbsp;controlInputs)</code></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../assets/input/ControlInput.html" title="class in technology.sola.engine.assets.input">ControlInput</a>&gt;&nbsp;controlInputs)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Adds a control with specified <a href="controls/ControlInput.html" title="class in technology.sola.engine.defaults.controls"><code>ControlInput</code></a>s.</div>
+<div class="block">Adds a control with specified <a href="../assets/input/ControlInput.html" title="class in technology.sola.engine.assets.input"><code>ControlInput</code></a>s.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SolaControls.html" title="class in technology.sola.engine.defaults">SolaControls</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addControl(java.lang.String,technology.sola.engine.defaults.controls.ControlInput)" class="member-name-link">addControl</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
- <a href="controls/ControlInput.html" title="class in technology.sola.engine.defaults.controls">ControlInput</a>&nbsp;controlInput)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SolaControls.html" title="class in technology.sola.engine.input">SolaControls</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addControl(java.lang.String,technology.sola.engine.assets.input.ControlInput)" class="member-name-link">addControl</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
+ <a href="../assets/input/ControlInput.html" title="class in technology.sola.engine.assets.input">ControlInput</a>&nbsp;controlInput)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Adds a control with only a single specified <a href="controls/ControlInput.html" title="class in technology.sola.engine.defaults.controls"><code>ControlInput</code></a>.</div>
+<div class="block">Adds a control with only a single specified <a href="../assets/input/ControlInput.html" title="class in technology.sola.engine.assets.input"><code>ControlInput</code></a>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SolaControls.html" title="class in technology.sola.engine.defaults">SolaControls</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SolaControls.html" title="class in technology.sola.engine.input">SolaControls</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addControls(technology.sola.engine.assets.input.ControlsConfig)" class="member-name-link">addControls</a><wbr>(<a href="../assets/input/ControlsConfig.html" title="class in technology.sola.engine.assets.input">ControlsConfig</a>&nbsp;controlsConfig)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Adds all controls from a <a href="../assets/input/ControlsConfig.html" title="class in technology.sola.engine.assets.input"><code>ControlsConfig</code></a>.</div>
@@ -132,6 +133,11 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isActive(java.lang.String)" class="member-name-link">isActive</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;controlId)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Checks to see if specified control is currently active.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SolaControls.html" title="class in technology.sola.engine.input">SolaControls</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setControls(technology.sola.engine.assets.input.ControlsConfig)" class="member-name-link">setControls</a><wbr>(<a href="../assets/input/ControlsConfig.html" title="class in technology.sola.engine.assets.input">ControlsConfig</a>&nbsp;controlsConfig)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Clears any existing controls and adds all controls from a <a href="../assets/input/ControlsConfig.html" title="class in technology.sola.engine.assets.input"><code>ControlsConfig</code></a>.</div>
 </div>
 </div>
 </div>
@@ -153,13 +159,13 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(technology.sola.engine.input.KeyboardInput,technology.sola.engine.input.MouseInput)">
 <h3>SolaControls</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SolaControls</span><wbr><span class="parameters">(<a href="../input/KeyboardInput.html" title="class in technology.sola.engine.input">KeyboardInput</a>&nbsp;keyboardInput,
- <a href="../input/MouseInput.html" title="class in technology.sola.engine.input">MouseInput</a>&nbsp;mouseInput)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SolaControls</span><wbr><span class="parameters">(<a href="KeyboardInput.html" title="class in technology.sola.engine.input">KeyboardInput</a>&nbsp;keyboardInput,
+ <a href="MouseInput.html" title="class in technology.sola.engine.input">MouseInput</a>&nbsp;mouseInput)</span></div>
 <div class="block">Creates a SolaControls instance wrapping all supported input devices.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>keyboardInput</code> - the <a href="../input/KeyboardInput.html" title="class in technology.sola.engine.input"><code>KeyboardInput</code></a></dd>
-<dd><code>mouseInput</code> - the <a href="../input/MouseInput.html" title="class in technology.sola.engine.input"><code>MouseInput</code></a></dd>
+<dd><code>keyboardInput</code> - the <a href="KeyboardInput.html" title="class in technology.sola.engine.input"><code>KeyboardInput</code></a></dd>
+<dd><code>mouseInput</code> - the <a href="MouseInput.html" title="class in technology.sola.engine.input"><code>MouseInput</code></a></dd>
 </dl>
 </section>
 </li>
@@ -185,15 +191,15 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="addControl(java.lang.String,technology.sola.engine.defaults.controls.ControlInput)">
+<section class="detail" id="addControl(java.lang.String,technology.sola.engine.assets.input.ControlInput)">
 <h3>addControl</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SolaControls.html" title="class in technology.sola.engine.defaults">SolaControls</a></span>&nbsp;<span class="element-name">addControl</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
- <a href="controls/ControlInput.html" title="class in technology.sola.engine.defaults.controls">ControlInput</a>&nbsp;controlInput)</span></div>
-<div class="block">Adds a control with only a single specified <a href="controls/ControlInput.html" title="class in technology.sola.engine.defaults.controls"><code>ControlInput</code></a>.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SolaControls.html" title="class in technology.sola.engine.input">SolaControls</a></span>&nbsp;<span class="element-name">addControl</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
+ <a href="../assets/input/ControlInput.html" title="class in technology.sola.engine.assets.input">ControlInput</a>&nbsp;controlInput)</span></div>
+<div class="block">Adds a control with only a single specified <a href="../assets/input/ControlInput.html" title="class in technology.sola.engine.assets.input"><code>ControlInput</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>id</code> - the control id</dd>
-<dd><code>controlInput</code> - the <a href="controls/ControlInput.html" title="class in technology.sola.engine.defaults.controls"><code>ControlInput</code></a> for the control</dd>
+<dd><code>controlInput</code> - the <a href="../assets/input/ControlInput.html" title="class in technology.sola.engine.assets.input"><code>ControlInput</code></a> for the control</dd>
 <dt>Returns:</dt>
 <dd>this</dd>
 </dl>
@@ -202,13 +208,13 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="addControl(java.lang.String,java.util.List)">
 <h3>addControl</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SolaControls.html" title="class in technology.sola.engine.defaults">SolaControls</a></span>&nbsp;<span class="element-name">addControl</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="controls/ControlInput.html" title="class in technology.sola.engine.defaults.controls">ControlInput</a>&gt;&nbsp;controlInputs)</span></div>
-<div class="block">Adds a control with specified <a href="controls/ControlInput.html" title="class in technology.sola.engine.defaults.controls"><code>ControlInput</code></a>s.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SolaControls.html" title="class in technology.sola.engine.input">SolaControls</a></span>&nbsp;<span class="element-name">addControl</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../assets/input/ControlInput.html" title="class in technology.sola.engine.assets.input">ControlInput</a>&gt;&nbsp;controlInputs)</span></div>
+<div class="block">Adds a control with specified <a href="../assets/input/ControlInput.html" title="class in technology.sola.engine.assets.input"><code>ControlInput</code></a>s.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>id</code> - the control id</dd>
-<dd><code>controlInputs</code> - the <a href="controls/ControlInput.html" title="class in technology.sola.engine.defaults.controls"><code>ControlInput</code></a>s for the control</dd>
+<dd><code>controlInputs</code> - the <a href="../assets/input/ControlInput.html" title="class in technology.sola.engine.assets.input"><code>ControlInput</code></a>s for the control</dd>
 <dt>Returns:</dt>
 <dd>this</dd>
 </dl>
@@ -217,8 +223,21 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="addControls(technology.sola.engine.assets.input.ControlsConfig)">
 <h3>addControls</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SolaControls.html" title="class in technology.sola.engine.defaults">SolaControls</a></span>&nbsp;<span class="element-name">addControls</span><wbr><span class="parameters">(<a href="../assets/input/ControlsConfig.html" title="class in technology.sola.engine.assets.input">ControlsConfig</a>&nbsp;controlsConfig)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SolaControls.html" title="class in technology.sola.engine.input">SolaControls</a></span>&nbsp;<span class="element-name">addControls</span><wbr><span class="parameters">(<a href="../assets/input/ControlsConfig.html" title="class in technology.sola.engine.assets.input">ControlsConfig</a>&nbsp;controlsConfig)</span></div>
 <div class="block">Adds all controls from a <a href="../assets/input/ControlsConfig.html" title="class in technology.sola.engine.assets.input"><code>ControlsConfig</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>controlsConfig</code> - the <a href="../assets/input/ControlsConfig.html" title="class in technology.sola.engine.assets.input"><code>ControlsConfig</code></a></dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setControls(technology.sola.engine.assets.input.ControlsConfig)">
+<h3>setControls</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SolaControls.html" title="class in technology.sola.engine.input">SolaControls</a></span>&nbsp;<span class="element-name">setControls</span><wbr><span class="parameters">(<a href="../assets/input/ControlsConfig.html" title="class in technology.sola.engine.assets.input">ControlsConfig</a>&nbsp;controlsConfig)</span></div>
+<div class="block">Clears any existing controls and adds all controls from a <a href="../assets/input/ControlsConfig.html" title="class in technology.sola.engine.assets.input"><code>ControlsConfig</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>controlsConfig</code> - the <a href="../assets/input/ControlsConfig.html" title="class in technology.sola.engine.assets.input"><code>ControlsConfig</code></a></dd>

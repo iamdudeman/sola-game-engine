@@ -84,7 +84,8 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;<a href="SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaGraphicsModule</a>&gt;</code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">DebugEntityGraphicsModule</span>
+<div class="type-signature"><span class="annotations">@NullMarked
+</span><span class="modifiers">public class </span><span class="element-name type-name-label">DebugEntityGraphicsModule</span>
 <span class="extends-implements">extends <a href="SolaEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaEntityGraphicsModule</a>&lt;technology.sola.ecs.view.View2Entry&lt;<a href="../../../physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a>,<wbr><a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&gt;&gt;</span></div>
 <div class="block">DebugEntityGraphicsModule is a <a href="SolaEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaEntityGraphicsModule</code></a> implementation for rendering debug information for a <code>World</code>.
  It will render broad phase debug information and colliders for <code>Entity</code> that have a <a href="../../../physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component"><code>ColliderComponent</code></a>.</div>
@@ -116,7 +117,7 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.physics.system.CollisionDetectionSystem)" class="member-name-link">DebugEntityGraphicsModule</a><wbr>(<a href="../../../physics/system/CollisionDetectionSystem.html" title="class in technology.sola.engine.physics.system">CollisionDetectionSystem</a>&nbsp;collisionDetectionSystem)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.physics.system.CollisionDetectionSystem)" class="member-name-link">DebugEntityGraphicsModule</a><wbr>(@Nullable <a href="../../../physics/system/CollisionDetectionSystem.html" title="class in technology.sola.engine.physics.system">CollisionDetectionSystem</a>&nbsp;collisionDetectionSystem)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates an instance of DebugEntityGraphicsModule.</div>
 </div>
@@ -241,7 +242,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(technology.sola.engine.physics.system.CollisionDetectionSystem)">
 <h3>DebugEntityGraphicsModule</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">DebugEntityGraphicsModule</span><wbr><span class="parameters">(<a href="../../../physics/system/CollisionDetectionSystem.html" title="class in technology.sola.engine.physics.system">CollisionDetectionSystem</a>&nbsp;collisionDetectionSystem)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">DebugEntityGraphicsModule</span><wbr><span class="parameters">(@Nullable <a href="../../../physics/system/CollisionDetectionSystem.html" title="class in technology.sola.engine.physics.system">CollisionDetectionSystem</a>&nbsp;collisionDetectionSystem)</span></div>
 <div class="block">Creates an instance of DebugEntityGraphicsModule.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
