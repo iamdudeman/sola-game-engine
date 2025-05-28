@@ -1,10 +1,12 @@
 package technology.sola.engine.platform.javafx;
 
 import javafx.application.Platform;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * SolaJavaFx is a JavaFx class holding utility methods for working with JavaFx.
  */
+@NullMarked
 public class SolaJavaFx {
   private static boolean isPlatformStartupNeeded = true;
 
