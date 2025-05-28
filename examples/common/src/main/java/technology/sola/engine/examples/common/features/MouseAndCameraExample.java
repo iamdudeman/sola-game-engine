@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.features;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.SolaConfiguration;
@@ -24,6 +25,7 @@ import technology.sola.math.linear.Vector2D;
  *   <li>{@link CameraComponent}</li>
  * </ul>
  */
+@NullMarked
 public class MouseAndCameraExample extends SolaWithDefaults {
   private ClickCreateEntitySystem clickCreateEntitySystem;
 
@@ -116,11 +118,6 @@ public class MouseAndCameraExample extends SolaWithDefaults {
       if (keyboardInput.isKeyHeld(Key.S)) {
         cameraTransform.setY(cameraTransform.getY() + 3);
       }
-    }
-
-    @Override
-    public int getOrder() {
-      return 0;
     }
   }
 }

@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
@@ -21,6 +22,7 @@ import technology.sola.math.linear.Vector2D;
 /**
  * SmallPhysicsTestSola is a {@link Sola} for isolated testing of various physics things.
  */
+@NullMarked
 public class SmallPhysicsTestSola extends SolaWithDefaults {
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.

@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.features;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.BulkAssetLoader;
 import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.assets.graphics.font.Font;
@@ -29,6 +30,7 @@ import java.util.List;
  *   <li>{@link AudioClip}</li>
  * </ul>
  */
+@NullMarked
 public class AudioExample extends SolaWithDefaults {
   private static final String FONT_ASSET_ID = "arial_NORMAL_16";
   private GuiTheme guiTheme;

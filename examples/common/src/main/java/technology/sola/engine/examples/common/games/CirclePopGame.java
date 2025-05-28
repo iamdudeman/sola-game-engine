@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.games;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.SolaConfiguration;
@@ -23,6 +24,7 @@ import java.util.Random;
  * CirclePop is a {@link technology.sola.engine.core.Sola} little game that also stress tests rendering for the sola
  * game engine.
  */
+@NullMarked
 public class CirclePopGame extends SolaWithDefaults {
   private final TextGuiElement scoreGuiElement = new TextGuiElement().setText("0");
   private int score = 0;
