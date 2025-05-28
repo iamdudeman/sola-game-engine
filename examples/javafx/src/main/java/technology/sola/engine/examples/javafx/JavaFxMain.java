@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.javafx;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
@@ -11,6 +12,7 @@ import technology.sola.logging.SolaLogger;
 /**
  * Runs the {@link ExampleLauncherSola} on the {@link JavaFxSolaPlatform}.
  */
+@NullMarked
 public class JavaFxMain {
   static {
     SolaLogger.configure(SolaLogLevel.WARNING, new JavaSolaLoggerFactory());

@@ -2,11 +2,6 @@
 
 ## Nullability stuff
 
-* core - SolaPlatform
-* all platforms
-    * browser
-    * swing
-    * JavFX
 * all example code
 
 ## Known Bugs List

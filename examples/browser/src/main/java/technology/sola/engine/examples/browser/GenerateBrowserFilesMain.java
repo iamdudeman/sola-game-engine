@@ -1,10 +1,12 @@
 package technology.sola.engine.examples.browser;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.platform.browser.tools.SolaBrowserFileBuilder;
 
 /**
  * Uses {@link SolaBrowserFileBuilder} to generate HTML and JS from {@link BrowserMain}.
  */
+@NullMarked
 public class GenerateBrowserFilesMain {
   /**
    * Entry point for program that starts Browser example transpiling.
