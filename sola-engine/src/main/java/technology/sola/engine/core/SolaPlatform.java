@@ -1,5 +1,6 @@
 package technology.sola.engine.core;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Layer;
@@ -19,6 +20,7 @@ import java.util.function.Consumer;
 /**
  * SolaPlatform defines the API for a platform to run {@link Sola}.
  */
+@NullMarked
 public abstract class SolaPlatform {
   private static final SolaLogger LOGGER = SolaLogger.of(SolaPlatform.class);
   /**

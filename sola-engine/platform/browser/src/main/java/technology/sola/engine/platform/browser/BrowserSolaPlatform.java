@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.browser;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
@@ -37,6 +38,7 @@ import java.util.function.Consumer;
  * BrowserSolaPlatform is a {@link SolaPlatform} implementation for running a {@link technology.sola.engine.core.Sola} in
  * a web browser.
  */
+@NullMarked
 public class BrowserSolaPlatform extends SolaPlatform {
   private static final SolaLogger LOGGER = SolaLogger.of(BrowserSolaPlatform.class);
   private final boolean useSoftwareRendering;
