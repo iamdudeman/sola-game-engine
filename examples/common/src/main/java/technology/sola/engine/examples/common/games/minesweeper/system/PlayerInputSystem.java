@@ -1,5 +1,7 @@
 package technology.sola.engine.examples.common.games.minesweeper.system;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.ecs.view.View2Entry;
@@ -21,6 +23,7 @@ import java.util.Collection;
  * {@link EcsSystem} that handles player input. Left-clicking reveals a tile and right-clicking marks a square as
  * possibly a bomb.
  */
+@NullMarked
 public class PlayerInputSystem extends EcsSystem {
   private final SolaGraphics solaGraphics;
   private final MouseInput mouseInput;
@@ -135,6 +138,7 @@ public class PlayerInputSystem extends EcsSystem {
     }
   }
 
+  @Nullable
   private MinesweeperSquareComponent findByRowColumn(Collection<View2Entry<TransformComponent, MinesweeperSquareComponent>> entries, int rowIndex, int columnIndex) {
     if (rowIndex < 0 || columnIndex < 0) {
       return null;

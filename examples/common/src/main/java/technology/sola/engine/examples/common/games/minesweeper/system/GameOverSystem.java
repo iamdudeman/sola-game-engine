@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.games.minesweeper.system;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
@@ -10,6 +11,7 @@ import technology.sola.engine.examples.common.games.minesweeper.event.GameOverEv
 /**
  * {@link EcsSystem} for handling a game over revealing all bomb squares if the player lost.
  */
+@NullMarked
 public class GameOverSystem extends EcsSystem {
   /**
    * Creates a GameOverSystem instance and sets it to inactive.

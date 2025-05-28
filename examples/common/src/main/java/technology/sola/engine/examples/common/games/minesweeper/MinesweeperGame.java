@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.games.minesweeper;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
@@ -22,6 +23,7 @@ import java.util.List;
  * MinesweeperGame is a {@link technology.sola.engine.core.Sola} for a simple implementation of Minesweeper using
  * the sola game engine.
  */
+@NullMarked
 public class MinesweeperGame extends SolaWithDefaults {
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
