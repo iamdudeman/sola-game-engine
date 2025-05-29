@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.browser;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
@@ -11,6 +12,7 @@ import technology.sola.logging.SolaLogger;
 /**
  * Runs the {@link ExampleLauncherSola} on the {@link BrowserSolaPlatform}.
  */
+@NullMarked
 public class BrowserMain {
   static {
     SolaLogger.configure(SolaLogLevel.WARNING, new BrowserSolaLoggerFactory());

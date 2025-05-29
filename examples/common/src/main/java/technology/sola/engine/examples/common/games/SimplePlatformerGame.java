@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.games;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
@@ -36,6 +37,7 @@ import java.util.function.Function;
  * SimplePlatformerGame is a {@link technology.sola.engine.core.Sola} that demos a simple platformer created with
  * the sola game engine.
  */
+@NullMarked
 public class SimplePlatformerGame extends SolaWithDefaults {
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
@@ -208,11 +210,6 @@ public class SimplePlatformerGame extends SolaWithDefaults {
           dynamicBodyComponent.setVelocity(new Vector2D(0, movingPlatformComponent.isGoingUp ? -25 : 25));
         });
     }
-
-    @Override
-    public int getOrder() {
-      return 0;
-    }
   }
 
   private static class GlassSystem extends EcsSystem {
@@ -261,11 +258,6 @@ public class SimplePlatformerGame extends SolaWithDefaults {
             dynamicBodyComponent.applyForce(0, 1.5f * solaPhysics().getGravitySystem().getGravityConstant() * dynamicBodyComponent.getMaterial().getMass());
           }
         });
-    }
-
-    @Override
-    public int getOrder() {
-      return 0;
     }
   }
 

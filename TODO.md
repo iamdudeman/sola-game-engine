@@ -1,14 +1,5 @@
 # sola-game-engine TODO list
 
-## Nullability stuff
-
-* core - SolaPlatform
-* all platforms
-    * browser
-    * swing
-    * JavFX
-* all example code
-
 ## Known Bugs List
 
 * (verify if still bug) GuiElement parent undefined when changing roots

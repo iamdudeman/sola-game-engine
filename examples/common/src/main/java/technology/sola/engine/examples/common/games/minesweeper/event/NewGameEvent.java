@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.games.minesweeper.event;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.event.Event;
 
 /**
@@ -9,6 +10,7 @@ import technology.sola.engine.event.Event;
  * @param columns      number of columns for the new game
  * @param percentMines percentage of mines for the new game
  */
+@NullMarked
 public record NewGameEvent(int rows, int columns, int percentMines) implements Event {
   /**
    * @return the total number of mines for the new game

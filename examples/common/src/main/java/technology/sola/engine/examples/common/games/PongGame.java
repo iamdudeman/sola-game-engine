@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.games;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.graphics.font.Font;
@@ -24,6 +25,7 @@ import technology.sola.math.linear.Vector2D;
  * PongGame is a {@link technology.sola.engine.core.Sola} for a simple implementation of Pong using
  * the sola game engine.
  */
+@NullMarked
 public class PongGame extends SolaWithDefaults {
   private static final int PADDLE_SPEED = 200;
   private static final float BALL_SIZE = 10;

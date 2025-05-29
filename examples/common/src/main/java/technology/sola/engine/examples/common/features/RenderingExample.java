@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.features;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
@@ -38,6 +39,7 @@ import java.util.List;
  *   <li>{@link LayerComponent}</li>
  * </ul>
  */
+@NullMarked
 public class RenderingExample extends Sola {
   private final SolaGraphics solaGraphics;
 

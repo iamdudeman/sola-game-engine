@@ -9,6 +9,8 @@ import javafx.scene.image.PixelFormat;
 import javafx.scene.image.WritableImage;
 import javafx.scene.transform.Affine;
 import javafx.stage.Stage;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
@@ -44,11 +46,14 @@ import java.util.function.Consumer;
  * JavaFxSolaPlatform is a {@link SolaPlatform} implementation for running a {@link technology.sola.engine.core.Sola} in
  * a JavaFX powered window.
  */
+@NullMarked
 public class JavaFxSolaPlatform extends SolaPlatform {
   private static final SolaLogger LOGGER = SolaLogger.of(JavaFxSolaPlatform.class);
   private final boolean useSoftwareRendering;
   private final boolean useImageSmoothing;
+  @Nullable
   private final Double initialWindowWidth;
+  @Nullable
   private final Double initialWindowHeight;
   private Canvas canvas;
   private GraphicsContext graphicsContext;

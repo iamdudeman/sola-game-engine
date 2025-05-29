@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.features;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
@@ -20,6 +21,7 @@ import technology.sola.math.linear.Vector2D;
  *   <li>{@link ParticleEmitterComponent}</li>
  * </ul>
  */
+@NullMarked
 public class ParticleExample extends SolaWithDefaults {
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.

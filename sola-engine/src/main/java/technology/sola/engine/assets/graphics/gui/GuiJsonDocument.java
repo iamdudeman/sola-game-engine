@@ -1,5 +1,6 @@
 package technology.sola.engine.assets.graphics.gui;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.Asset;
 import technology.sola.engine.graphics.gui.GuiElement;
 
@@ -8,5 +9,6 @@ import technology.sola.engine.graphics.gui.GuiElement;
  *
  * @param rootElement the rootElement {@code GuiElement}
  */
+@NullMarked
 public record GuiJsonDocument(GuiElement<?, ?> rootElement) implements Asset {
 }

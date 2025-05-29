@@ -1,5 +1,7 @@
 package technology.sola.engine.examples.common.games.minesweeper.system;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.World;
@@ -15,9 +17,11 @@ import java.util.Random;
 /**
  * {@link EcsSystem} for handling creating minefields when a new game is started.
  */
+@NullMarked
 public class MinefieldSystem extends EcsSystem {
   private static final int MINE_INDICATOR = -1;
   private final SolaEcs solaEcs;
+  @Nullable
   private NewGameEvent newGameEvent;
 
   /**

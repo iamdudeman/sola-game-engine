@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.games.minesweeper.graphics.gui;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.examples.common.games.minesweeper.event.FlagEvent;
 import technology.sola.engine.examples.common.games.minesweeper.event.GameOverEvent;
@@ -16,6 +17,7 @@ import java.text.DecimalFormat;
 /**
  * MinesweeperGui contains the functionality needed to build the Minesweeper GUI.
  */
+@NullMarked
 public class MinesweeperGui {
   /**
    * The valid minefield size options.

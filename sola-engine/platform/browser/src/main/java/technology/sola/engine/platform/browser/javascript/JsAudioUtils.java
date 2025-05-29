@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.browser.javascript;
 
+import org.jspecify.annotations.NullMarked;
 import org.teavm.jso.JSBody;
 import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;
@@ -9,6 +10,7 @@ import org.teavm.jso.webaudio.AudioContext;
 /**
  * A collection of Java wrapper functions around JavaScript audio utility functions.
  */
+@NullMarked
 public class JsAudioUtils {
   /**
    * Loads audio from a path async.

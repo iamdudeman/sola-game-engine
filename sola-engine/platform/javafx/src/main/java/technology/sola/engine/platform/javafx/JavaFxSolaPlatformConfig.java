@@ -1,5 +1,8 @@
 package technology.sola.engine.platform.javafx;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 /**
  * Configuration for the {@link JavaFxSolaPlatform}.
  *
@@ -8,11 +11,12 @@ package technology.sola.engine.platform.javafx;
  * @param initialWindowWidth   the initial window width when the {@link technology.sola.engine.core.Sola} starts
  * @param initialWindowHeight  the initial window height when the {@link technology.sola.engine.core.Sola} starts
  */
+@NullMarked
 public record JavaFxSolaPlatformConfig(
   boolean useSoftwareRendering,
   boolean useImageSmoothing,
-  Double initialWindowWidth,
-  Double initialWindowHeight
+  @Nullable Double initialWindowWidth,
+  @Nullable Double initialWindowHeight
 ) {
   /**
    * Default configuration with useSoftwareRendering set to true and no initial window size set. Image smoothing is set

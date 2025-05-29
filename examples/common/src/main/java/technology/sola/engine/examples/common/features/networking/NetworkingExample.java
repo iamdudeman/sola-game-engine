@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.features.networking;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
@@ -26,6 +27,7 @@ import java.util.Date;
  * NetworkingExample is a {@link technology.sola.engine.core.Sola} that demos a simple socket based game. This requires
  * that examples:server:ServerMain is running.
  */
+@NullMarked
 public class NetworkingExample extends SolaWithDefaults {
   /**
    * The maximum number of players that can connect.

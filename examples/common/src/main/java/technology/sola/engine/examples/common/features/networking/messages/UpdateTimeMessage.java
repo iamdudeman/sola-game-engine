@@ -1,10 +1,12 @@
 package technology.sola.engine.examples.common.features.networking.messages;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.networking.socket.SocketMessage;
 
 /**
  * {@link SocketMessage} for sending the updated time.
  */
+@NullMarked
 public class UpdateTimeMessage extends SocketMessage {
   private final long time;
 

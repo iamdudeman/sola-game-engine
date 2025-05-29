@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.features;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.BulkAssetLoader;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
@@ -22,6 +23,7 @@ import technology.sola.engine.input.Key;
  * GuiExample is a {@link technology.sola.engine.core.Sola} that shows an example custom gui using various
  * {@link technology.sola.engine.graphics.gui.GuiElement}s.
  */
+@NullMarked
 public class GuiExample extends SolaWithDefaults {
   private MainAxisChildren mainAxisChildren = MainAxisChildren.START;
   private Direction direction = Direction.ROW;

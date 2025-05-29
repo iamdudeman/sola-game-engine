@@ -1,10 +1,12 @@
 package technology.sola.engine.examples.common.features.networking.messages;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.networking.socket.SocketMessage;
 
 /**
  * PlayerMoveMessage is a {@link SocketMessage} for telling the server where the player desired to move.
  */
+@NullMarked
 public class PlayerMoveMessage extends SocketMessage {
   private final int direction;
 

@@ -1,5 +1,7 @@
 package technology.sola.engine.assets.graphics.spritesheet;
 
+import org.jspecify.annotations.NullMarked;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import java.util.List;
  * @param spriteSheet the path to the spritesheet's image
  * @param sprites     the {@link SpriteInfo} definitions within the spritesheet
  */
+@NullMarked
 public record SpriteSheetInfo(
   String spriteSheet,
   List<SpriteInfo> sprites

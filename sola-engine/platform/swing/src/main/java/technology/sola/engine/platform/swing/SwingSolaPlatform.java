@@ -1,5 +1,7 @@
 package technology.sola.engine.platform.swing;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
@@ -38,9 +40,11 @@ import java.util.function.Consumer;
  * SwingSolaPlatform is a {@link SolaPlatform} implementation for running a {@link technology.sola.engine.core.Sola} in
  * a Swing powered window.
  */
+@NullMarked
 public class SwingSolaPlatform extends SolaPlatform {
   private static final SolaLogger LOGGER = SolaLogger.of(SwingSolaPlatform.class);
   private final boolean useSoftwareRendering;
+  @Nullable
   private final Dimension initialWindowSize;
   private Canvas canvas;
   private Consumer<Renderer> beforeRender;

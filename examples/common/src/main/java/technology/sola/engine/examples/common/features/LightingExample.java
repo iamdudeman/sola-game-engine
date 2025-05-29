@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.features;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
@@ -35,6 +36,7 @@ import java.util.Random;
  *   <li>{@link ScreenSpaceLightMapGraphicsModule}</li>
  * </ul>
  */
+@NullMarked
 public class LightingExample extends SolaWithDefaults {
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.

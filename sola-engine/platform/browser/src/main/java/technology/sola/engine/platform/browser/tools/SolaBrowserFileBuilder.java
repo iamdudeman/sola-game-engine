@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.browser.tools;
 
+import org.jspecify.annotations.NullMarked;
 import org.teavm.backend.javascript.JSModuleType;
 import org.teavm.tooling.TeaVMTargetType;
 import org.teavm.tooling.builder.BuildException;
@@ -29,6 +30,7 @@ import java.util.Arrays;
  * solaBrowserFileBuilder.createIndexHtmlWithOverlay();
  * </pre>
  */
+@NullMarked
 public class SolaBrowserFileBuilder {
   private static final String OUTPUT_FILE_JS = "sola.js";
   private static final String OUTPUT_FILE_HTML = "index.html";

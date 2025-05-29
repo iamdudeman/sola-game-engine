@@ -1,10 +1,13 @@
 package technology.sola.engine.examples.common.games.minesweeper.components;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.Component;
 
 /**
  * {@link Component} that contains data for a minefield square.
  */
+@NullMarked
 public class MinesweeperSquareComponent implements Component {
   /**
    * The size in pixels of a square.
@@ -12,6 +15,7 @@ public class MinesweeperSquareComponent implements Component {
   public static final int SQUARE_SIZE = 20;
   private final int rowIndex;
   private final int columnIndex;
+  @Nullable
   private final Integer adjacentCount;
   private boolean isRevealed;
   private boolean isFlagged;
@@ -23,7 +27,7 @@ public class MinesweeperSquareComponent implements Component {
    * @param columnIndex   the column the square is in
    * @param adjacentCount the number of bombs adjacent to this square (or null if it is a bomb)
    */
-  public MinesweeperSquareComponent(int rowIndex, int columnIndex, Integer adjacentCount) {
+  public MinesweeperSquareComponent(int rowIndex, int columnIndex, @Nullable Integer adjacentCount) {
     this.rowIndex = rowIndex;
     this.columnIndex = columnIndex;
     this.adjacentCount = adjacentCount;
@@ -46,6 +50,7 @@ public class MinesweeperSquareComponent implements Component {
   /**
    * @return the adjacent bomb count or null if it is a bomb
    */
+  @Nullable
   public Integer getAdjacentCount() {
     return adjacentCount;
   }

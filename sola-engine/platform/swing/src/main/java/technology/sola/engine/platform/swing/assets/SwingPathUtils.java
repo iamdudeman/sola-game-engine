@@ -1,5 +1,8 @@
 package technology.sola.engine.platform.swing.assets;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -9,6 +12,7 @@ import java.util.Scanner;
 /**
  * General path utilities for Swing.
  */
+@NullMarked
 public class SwingPathUtils {
   /**
    * Returns a path as a {@link URL}.
@@ -17,6 +21,7 @@ public class SwingPathUtils {
    * @return the path as a URL
    * @throws MalformedURLException if the path is not a valid URL
    */
+  @Nullable
   public static URL asUrl(String path) throws MalformedURLException {
     File file = new File(path);
 

@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.features.networking;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
@@ -10,6 +11,7 @@ import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
 /**
  * LevelBuilder contains utilities for building a {@link World} that both server and client can use.
  */
+@NullMarked
 public class LevelBuilder {
   /**
    * Creates the {@link World} for client and server to use.

@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common.features;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
@@ -24,6 +25,7 @@ import technology.sola.math.EasingFunction;
  *   <li>{@link TransformAnimatorComponent}</li>
  * </ul>
  */
+@NullMarked
 public class AnimationExample extends SolaWithDefaults {
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.

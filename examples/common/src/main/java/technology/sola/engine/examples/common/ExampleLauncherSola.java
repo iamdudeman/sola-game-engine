@@ -1,5 +1,6 @@
 package technology.sola.engine.examples.common;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
@@ -35,6 +36,7 @@ import java.util.function.Supplier;
  * ExampleLauncherSola is a {@link Sola} that provides buttons to launch various example {@code Sola} showing off
  * various parts of the sola game engine.
  */
+@NullMarked
 public class ExampleLauncherSola extends SolaWithDefaults {
   private final SolaPlatform solaPlatform;
 

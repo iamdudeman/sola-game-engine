@@ -1,5 +1,7 @@
 package technology.sola.engine.assets.graphics.spritesheet;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * Contains information about a sprite within a spritesheet.
  *
@@ -9,6 +11,7 @@ package technology.sola.engine.assets.graphics.spritesheet;
  * @param width  the width of the sprite
  * @param height the height of the sprite
  */
+@NullMarked
 public record SpriteInfo(
   String id,
   int x,

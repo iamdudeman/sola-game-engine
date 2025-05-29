@@ -1,5 +1,8 @@
 package technology.sola.engine.platform.swing;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 import java.awt.*;
 
 /**
@@ -8,9 +11,10 @@ import java.awt.*;
  * @param useSoftwareRendering whether software rendering should be used instead of native {@link technology.sola.engine.platform.swing.core.Graphics2dRenderer} rendering
  * @param initialWindowSize    the initial window size when the {@link technology.sola.engine.core.Sola} starts
  */
+@NullMarked
 public record SwingSolaPlatformConfig(
   boolean useSoftwareRendering,
-  Dimension initialWindowSize
+  @Nullable Dimension initialWindowSize
 ) {
   /**
    * Configuration for the {@link SwingSolaPlatform}.
