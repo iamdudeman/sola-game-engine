@@ -8,6 +8,7 @@ import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.examples.common.games.minesweeper.event.NewGameEvent;
 import technology.sola.engine.examples.common.games.minesweeper.graphics.MinesweeperSquareEntityGraphicsModule;
 import technology.sola.engine.examples.common.games.minesweeper.graphics.gui.MinesweeperGui;
+import technology.sola.engine.examples.common.games.minesweeper.system.CameraSystem;
 import technology.sola.engine.examples.common.games.minesweeper.system.GameOverSystem;
 import technology.sola.engine.examples.common.games.minesweeper.system.MinefieldSystem;
 import technology.sola.engine.examples.common.games.minesweeper.system.PlayerInputSystem;
@@ -54,7 +55,8 @@ public class MinesweeperGame extends SolaWithDefaults {
     solaEcs.addSystems(
       minefieldSystem,
       playerInputSystem,
-      gameOverSystem
+      gameOverSystem,
+      new CameraSystem(mouseInput)
     );
 
     // events

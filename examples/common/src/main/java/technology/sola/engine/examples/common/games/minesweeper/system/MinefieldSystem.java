@@ -9,6 +9,7 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.examples.common.games.minesweeper.components.MinesweeperSquareComponent;
 import technology.sola.engine.examples.common.games.minesweeper.event.NewGameEvent;
+import technology.sola.engine.graphics.components.CameraComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.Random;
 public class MinefieldSystem extends EcsSystem {
   private static final int MINE_INDICATOR = -1;
   private final SolaEcs solaEcs;
+  private final TransformComponent cameraTransform = new TransformComponent();
   @Nullable
   private NewGameEvent newGameEvent;
 
@@ -62,7 +64,7 @@ public class MinefieldSystem extends EcsSystem {
   }
 
   private World buildWorld(int rows, int columns, int mines) {
-    World world = new World(rows * columns);
+    World world = new World(rows * columns + 1);
     int[][] minefield = generateMinefield(rows, columns, mines);
 
     for (int rowIndex = 0; rowIndex < minefield.length; rowIndex++) {
@@ -77,6 +79,8 @@ public class MinefieldSystem extends EcsSystem {
         );
       }
     }
+
+    world.createEntity("camera", new CameraComponent(), cameraTransform);
 
     return world;
   }

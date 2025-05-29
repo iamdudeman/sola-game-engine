@@ -7,6 +7,7 @@ import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.graphics.modules.SolaEntityGraphicsModule;
 import technology.sola.engine.examples.common.games.minesweeper.components.MinesweeperSquareComponent;
+import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
 
@@ -27,17 +28,25 @@ public class MinesweeperSquareEntityGraphicsModule extends SolaEntityGraphicsMod
     MinesweeperSquareComponent square = viewEntry.c2();
     float x = cameraModifiedEntityTransform.getX();
     float y = cameraModifiedEntityTransform.getY();
-    float squareSize = MinesweeperSquareComponent.SQUARE_SIZE;
+    float squareSize = MinesweeperSquareComponent.SQUARE_SIZE * cameraModifiedEntityTransform.getScaleX();
 
     if (square.isRevealed()) {
       if (square.isBomb()) {
+        var affineTransform = new AffineTransform()
+          .translate(x + FONT_OFFSET, y)
+          .scale(cameraModifiedEntityTransform.getScaleX(), cameraModifiedEntityTransform.getScaleY());
+
         renderer.fillRect(x, y, squareSize, squareSize, Color.RED);
-        renderer.drawString("X", x + FONT_OFFSET, y, Color.BLACK);
+        renderer.drawString("X", affineTransform, Color.BLACK);
       } else if (square.getAdjacentCount() == 0) {
         renderer.fillRect(x, y, squareSize, squareSize, Color.LIGHT_GRAY);
       } else {
+        var affineTransform = new AffineTransform()
+          .translate(x + FONT_OFFSET, y)
+          .scale(cameraModifiedEntityTransform.getScaleX(), cameraModifiedEntityTransform.getScaleY());
+
         renderer.fillRect(x, y, squareSize, squareSize, Color.LIGHT_GRAY);
-        renderer.drawString(String.valueOf(square.getAdjacentCount()), x + FONT_OFFSET, y, Color.BLACK);
+        renderer.drawString(String.valueOf(square.getAdjacentCount()), affineTransform, Color.BLACK);
       }
     } else if (square.isFlagged()) {
       renderer.fillRect(x, y, squareSize, squareSize, Color.GREEN);
