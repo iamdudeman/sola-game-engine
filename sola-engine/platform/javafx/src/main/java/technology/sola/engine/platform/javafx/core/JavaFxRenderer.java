@@ -117,6 +117,11 @@ public class JavaFxRenderer implements Renderer {
   }
 
   @Override
+  public void drawString(String text, AffineTransform affineTransform, Color color) {
+    logMethodNotImplemented("drawString"); // todo implement
+  }
+
+  @Override
   public void drawLine(float x, float y, float x2, float y2, Color color) {
     logMethodNotImplemented("drawLine"); // todo implement
   }
