@@ -183,6 +183,31 @@ public interface Renderer {
   }
 
   /**
+   * Draws a string of text using the current {@link Font} and applies the desired {@link AffineTransform} to the
+   * rendered string.
+   *
+   * @param text            the text to draw
+   * @param affineTransform the transform to apply
+   * @param color           the {@link Color} of the text
+   */
+  default void drawString(String text, AffineTransform affineTransform, Color color) {
+    var previousBlendFunction = getBlendFunction();
+    setBlendFunction(BlendMode.MASK);
+
+    int xOffset = 0;
+    Font font = getFont();
+
+    for (char character : text.toCharArray()) {
+      SolaImage glyphImage = font.getGlyph(character, color);
+
+      drawImage(glyphImage, affineTransform.translate(xOffset, 0));
+      xOffset += glyphImage.getWidth();
+    }
+
+    setBlendFunction(previousBlendFunction);
+  }
+
+  /**
    * Draws a line.
    *
    * @param x     the x coordinate of the first point
