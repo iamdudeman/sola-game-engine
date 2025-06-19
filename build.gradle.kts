@@ -1,5 +1,5 @@
 subprojects {
-  configure(allprojects - project(":examples:android")) {
+  configure(allprojects - project(":examples:android") - project(":sola-engine:platform:android")) {
     apply(plugin = "sola.java-conventions")
   }
 

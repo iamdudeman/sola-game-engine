@@ -1,5 +1,17 @@
 # sola-game-engine TODO list
 
+* get platform distribution (maven stuff) set up for android-platform module
+* cleanup build files
+* confirm if Android specific logger is needed
+* delete any unneeded .xml or .pro files
+* create new task for building an APK in dist folder (distAndroid)
+* nullability annotations
+* JavaDocs + package-info.java files
+* implement Android platform fully
+    * asset stuff
+    * input stuff
+    * implement TouchInput stuff
+
 ## Known Bugs List
 
 * (verify if still bug) GuiElement parent undefined when changing roots
