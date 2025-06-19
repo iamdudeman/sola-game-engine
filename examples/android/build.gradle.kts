@@ -4,6 +4,7 @@ plugins {
 //  checkstyle
 //  jacoco
 
+  id("technology.sola.plugins.sola-android")
   id("com.android.application") version "8.10.1" apply true
 }
 
@@ -14,20 +15,10 @@ plugins {
 dependencies {
   implementation(project(":sola-engine:platform:android"))
   implementation(project(":examples:common"))
+}
 
-  // nullability annotations
-  implementation("org.jspecify:jspecify:1.0.0")
+solaAndroid {
 
-  // unit testing
-  testImplementation("org.mockito:mockito-inline:5.2.0")
-  testImplementation("org.mockito:mockito-junit-jupiter:5.11.0")
-  testImplementation(platform("org.junit:junit-bom:5.10.1"))
-  testImplementation("org.junit.jupiter:junit-jupiter")
-
-   implementation("androidx.appcompat:appcompat:1.6.1")
-   implementation("com.google.android.material:material:1.10.0")
-   implementation("androidx.activity:activity:1.8.0")
-   implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 }
 
 //solaJavaDist {
@@ -69,11 +60,3 @@ android {
   }
 }
 
-repositories {
-  mavenCentral()
-  google()
-
-  maven {
-    url = uri("https://jitpack.io")
-  }
-}

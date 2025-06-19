@@ -1,17 +1,16 @@
 plugins {
   // id("technology.sola.sola-publishing")
 
+  id("technology.sola.plugins.sola-android")
   id("com.android.library") version "8.10.1" apply true
 }
 
 dependencies {
   api(project(":sola-engine"))
+}
 
-  // nullability annotations
-  implementation("org.jspecify:jspecify:1.0.0")
-
-  implementation("androidx.appcompat:appcompat:1.7.0")
-  implementation("com.google.android.material:material:1.12.0")
+solaAndroid {
+  isLibrary = true
 }
 
 // todo
@@ -43,11 +42,3 @@ android {
   }
 }
 
-repositories {
-  mavenCentral()
-  google()
-
-  maven {
-    url = uri("https://jitpack.io")
-  }
-}
