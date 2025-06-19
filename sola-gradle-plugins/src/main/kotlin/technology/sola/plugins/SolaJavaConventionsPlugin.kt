@@ -12,25 +12,24 @@ import org.gradle.testing.jacoco.tasks.JacocoCoverageVerification
 import org.gradle.testing.jacoco.tasks.JacocoReport
 
 interface SolaJavaConventionsPluginExtension {
+  var disableCheckstyle: Boolean?
+  var disableCoverage: Boolean?
 }
 
 class SolaJavaConventionsPlugin : Plugin<Project> {
   override fun apply(project: Project) {
-    val solaJavaConventionsPluginExtension = project.extensions.create<SolaJavaDistributionPluginExtension>("solaJavaConventions")
+   val solaJavaConventionsPluginExtension = project.extensions.create<SolaJavaConventionsPluginExtension>("solaJavaConventions")
+
+    project.pluginManager.apply("java-library")
 
     project.afterEvaluate {
-      apply(plugin = "java-library")
-      apply(plugin = "checkstyle")
-      apply(plugin = "jacoco")
-
       // nullability annotations
       project.dependencies.add("api", "org.jspecify:jspecify:1.0.0")
 
       // unit testing
       project.dependencies.add("testImplementation", "org.mockito:mockito-inline:5.2.0")
       project.dependencies.add("testImplementation", "org.mockito:mockito-junit-jupiter:5.11.0")
-      // project.dependencies.add("testImplementation", platform("org.junit:junit-bom:5.10.1"))
-      project.dependencies.add("testImplementation", "org.junit.jupiter:junit-jupiter")
+      project.dependencies.add("testImplementation", "org.junit.jupiter:junit-jupiter:5.11.0")
     }
 
     project.repositories {
@@ -50,14 +49,6 @@ class SolaJavaConventionsPlugin : Plugin<Project> {
       withJavadocJar()
     }
 
-    project.extensions.configure<CheckstyleExtension> {
-      configFile = project.file(project.rootDir.toString() + "/checkstyle.xml")
-    }
-
-    project.extensions.configure<JacocoPluginExtension> {
-      toolVersion = "0.8.8"
-    }
-
     project.tasks.withType<Test> {
       useJUnitPlatform()
       testLogging {
@@ -65,18 +56,36 @@ class SolaJavaConventionsPlugin : Plugin<Project> {
       }
     }
 
-    project.tasks.withType<JacocoReport> {
-      reports {
-        html.required.set(true)
-        html.outputLocation.set(project.file(project.layout.buildDirectory.file("reports/coverage")))
-      }
-    }
+    project.afterEvaluate {
+      if (solaJavaConventionsPluginExtension.disableCheckstyle != true) {
+        project.pluginManager.apply("checkstyle")
 
-    project.tasks.withType<JacocoCoverageVerification> {
-      violationRules {
-        rule {
-          limit {
-            minimum = "0.8".toBigDecimal()
+        project.extensions.configure<CheckstyleExtension> {
+          configFile = project.file(project.rootDir.toString() + "/checkstyle.xml")
+        }
+      }
+
+      if (solaJavaConventionsPluginExtension.disableCoverage != true) {
+        project.pluginManager.apply("jacoco")
+
+        project.extensions.configure<JacocoPluginExtension> {
+          toolVersion = "0.8.8"
+        }
+
+        project.tasks.withType<JacocoReport> {
+          reports {
+            html.required.set(true)
+            html.outputLocation.set(project.file(project.layout.buildDirectory.file("reports/coverage")))
+          }
+        }
+
+        project.tasks.withType<JacocoCoverageVerification> {
+          violationRules {
+            rule {
+              limit {
+                minimum = "0.8".toBigDecimal()
+              }
+            }
           }
         }
       }

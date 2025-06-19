@@ -1,3 +1,7 @@
+plugins {
+  id("technology.sola.plugins.sola-java-conventions")
+}
+
 dependencies {
   api("com.github.iamdudeman:sola-ecs:2.2.0")
   api("com.github.iamdudeman:sola-json:4.0.1")
