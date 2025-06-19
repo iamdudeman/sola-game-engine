@@ -1,5 +1,8 @@
 subprojects {
-  apply(plugin = "sola.java-conventions")
+  configure(allprojects - project(":examples:android")) {
+    apply(plugin = "sola.java-conventions")
+  }
+
   apply(plugin = "maven-publish")
 
   val publishTask = project.tasks.getByName("publishToMavenLocal")

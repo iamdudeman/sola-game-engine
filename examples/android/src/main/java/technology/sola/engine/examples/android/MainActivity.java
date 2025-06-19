@@ -1,4 +1,4 @@
 package technology.sola.engine.examples.android;
 
-public class MainActivity {
+public class MainActivity extends TempActivity {
 }
