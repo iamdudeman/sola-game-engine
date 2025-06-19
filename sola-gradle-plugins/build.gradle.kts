@@ -24,6 +24,11 @@ dependencies {
 
 gradlePlugin {
   plugins {
+    create("sola-java-conventions") {
+      id = "technology.sola.plugins.sola-java-conventions"
+      implementationClass = "technology.sola.plugins.SolaJavaConventionsPlugin"
+    }
+
     create("sola-java-distribution") {
       id = "technology.sola.plugins.sola-java-distribution"
       implementationClass = "technology.sola.plugins.SolaJavaDistributionPlugin"
