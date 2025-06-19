@@ -47,7 +47,7 @@ android {
   compileSdk = 34
 
   defaultConfig {
-    applicationId = "cotechnology.sola.engine.examples.android"
+    applicationId = "technology.sola.engine.examples.android"
     minSdk = 34
     targetSdk = 34
     versionCode = 1
@@ -62,6 +62,7 @@ android {
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
   }
+
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
