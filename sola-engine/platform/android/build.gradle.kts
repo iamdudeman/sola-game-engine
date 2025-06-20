@@ -1,7 +1,4 @@
 plugins {
-  // todo figure out how to publish this platform for sola game template to use
-  // id("technology.sola.sola-publishing")
-
   id("technology.sola.plugins.sola-android-conventions")
   id("com.android.library")
 }
@@ -11,11 +8,6 @@ apply(plugin = "com.android.library")
 dependencies {
   api(project(":sola-engine"))
 }
-
-// todo
-//solaPublishing {
-//  artifactId = "platform-android"
-//}
 
 android {
   namespace = "technology.sola.engine.platform.android"
@@ -39,5 +31,24 @@ android {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
   }
+
+  publishing {
+    singleVariant("release") {
+      withSourcesJar()
+      withJavadocJar()
+    }
+  }
 }
 
+publishing {
+  publications {
+    register<MavenPublication>("maven") {
+      group = "technology.sola.engine"
+      artifactId = "platform-android"
+
+      afterEvaluate {
+        from(components["release"])
+      }
+    }
+  }
+}
