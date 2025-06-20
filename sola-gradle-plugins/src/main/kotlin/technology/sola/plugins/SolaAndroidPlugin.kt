@@ -1,5 +1,8 @@
 package technology.sola.plugins
 
+import com.android.build.gradle.api.AndroidBasePlugin
+import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
+import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
@@ -32,13 +35,33 @@ class SolaAndroidPlugin : Plugin<Project> {
       }
     }
 
-//    project.afterEvaluate {
-//      if (solaAndroidPluginExtension.isLibrary == true) {
-//        project.pluginManager.apply("com.android.library:8.10.1")
-//      } else {
-//        project.pluginManager.apply("com.android.application:8.10.1")
-//      }
-//    }
+    if (solaAndroidPluginExtension.isLibrary == true) {
+      project.pluginManager.apply("com.android.library")
+    } else {
+      project.pluginManager.apply("com.android.application")
+    }
+
+    project.extensions.configure<BaseAppModuleExtension> {
+      compileSdk = 35
+
+      defaultConfig {
+        minSdk = 34
+        targetSdk = 35
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+      }
+
+      buildTypes {
+        release {
+          isMinifyEnabled = false
+          proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+      }
+
+      compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+      }
+    }
 
     project.afterEvaluate {
       // nullability annotations

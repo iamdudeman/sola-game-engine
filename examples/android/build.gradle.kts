@@ -3,7 +3,6 @@ plugins {
   // id("technology.sola.plugins.sola-java-distribution")
 
   id("technology.sola.plugins.sola-android")
-  id("com.android.application") version "8.10.1" apply true
 }
 
 dependencies {
@@ -20,29 +19,12 @@ solaAndroid {
 //}
 
 android {
-  namespace = "technology.sola.engine.examples.android"
-  compileSdk = 34
+  namespace = "${project.properties["basePackage"]}.${project.name}"
 
   defaultConfig {
-    applicationId = "technology.sola.engine.examples.android"
-    minSdk = 34
-    targetSdk = 34
-    versionCode = 1
-    versionName = "1.0"
-
-    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-  }
-
-  buildTypes {
-    release {
-      isMinifyEnabled = false
-      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-    }
-  }
-
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    applicationId = "${project.properties["basePackage"]}.${project.name}"
+    versionCode = project.properties["androidVersionCode"].toString().toInt()
+    versionName = "${project.properties["version"]}"
   }
 }
 
