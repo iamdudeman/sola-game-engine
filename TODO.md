@@ -1,15 +1,15 @@
 # sola-game-engine TODO list
 
-* confirm if Android specific logger is needed
 * delete any unneeded .xml or .pro files
-* create new task for building an APK in dist folder (distAndroid)
-    * should include all things from assets as well
+* confirm if Android specific logger is needed
 * nullability annotations
 * JavaDocs + package-info.java files
 * implement Android platform fully
     * asset stuff
     * input stuff
     * implement TouchInput stuff
+* release and release signed dist tasks
+    * ensure assets are all included in the apk!
 
 ## Known Bugs List
 
