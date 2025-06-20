@@ -35,6 +35,8 @@ android {
   publishing {
     singleVariant("release") {
       withSourcesJar()
+      // note: this causes issue with publish for some reason
+      // withJavadocJar()
     }
   }
 }
