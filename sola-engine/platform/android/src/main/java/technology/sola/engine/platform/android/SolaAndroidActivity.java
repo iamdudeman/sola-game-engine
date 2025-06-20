@@ -12,9 +12,18 @@ import androidx.core.view.WindowInsetsCompat;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.platform.android.core.DrawView;
 
+/**
+ * The base {@link android.app.Activity} class for a sola game to run on Android.
+ */
 public abstract class SolaAndroidActivity extends AppCompatActivity {
+  /**
+   * Reference to the {@link SolaAndroidPlatform} instance running within this activity.
+   */
   protected final SolaAndroidPlatform platform = new SolaAndroidPlatform();
 
+  /**
+   * @return the {@link Sola} instance that starts running with this activity is created
+   */
   public abstract Sola getInitialSola();
 
   @Override
