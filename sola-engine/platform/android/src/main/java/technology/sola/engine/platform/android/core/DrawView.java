@@ -11,11 +11,11 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 
 public class DrawView extends View {
+  int width = 100;
+  int height = 100;
   private final Paint paint = new Paint();
   private Bitmap bitmap;
   private final SoftwareRenderer softwareRenderer;
-  int width = 100;
-  int height = 100;
 
 
   public DrawView(Context context) {

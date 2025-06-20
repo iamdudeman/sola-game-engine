@@ -10,7 +10,7 @@ dependencies {
 }
 
 solaAndroid {
-  isLibrary = true
+//  isLibrary = true
 }
 
 // todo

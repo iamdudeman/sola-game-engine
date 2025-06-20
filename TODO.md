@@ -1,8 +1,12 @@
 # sola-game-engine TODO list
 
+* get jacoco working
+* cleanup build files
+    * migrate more properties to plugin
+    * ensure namespace is properly configurable?
+    * defaults for compileSdk and what not
 * update dependencies as needed
 * get platform distribution (maven stuff) set up for android-platform module
-* cleanup build files
 * confirm if Android specific logger is needed
 * delete any unneeded .xml or .pro files
 * create new task for building an APK in dist folder (distAndroid)

@@ -3,7 +3,9 @@ package technology.sola.plugins
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.api.plugins.quality.Checkstyle
 import org.gradle.api.plugins.quality.CheckstyleExtension
+import org.gradle.api.plugins.quality.CheckstylePlugin
 import org.gradle.api.tasks.testing.Test
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.kotlin.dsl.*
@@ -54,34 +56,35 @@ class SolaAndroidPlugin : Plugin<Project> {
       project.dependencies.add("implementation", "androidx.constraintlayout:constraintlayout:2.1.4")
     }
 
-//    project.pluginManager.apply("java-library")
-//
-//
-//    project.extensions.configure<JavaPluginExtension> {
-//      toolchain {
-//        languageVersion.set(JavaLanguageVersion.of(17))
-//      }
-//
-//      withSourcesJar()
-//      withJavadocJar()
-//    }
-//
-//    project.tasks.withType<Test> {
-//      useJUnitPlatform()
-//      testLogging {
-//        events("passed", "skipped", "failed")
-//      }
-//    }
-//
-//    project.afterEvaluate {
-//      if (solaAndroidPluginExtension.disableCheckstyle != true) {
-//        project.pluginManager.apply("checkstyle")
-//
-//        project.extensions.configure<CheckstyleExtension> {
-//          configFile = project.file(project.rootDir.toString() + "/checkstyle.xml")
-//        }
-//      }
-//
+    project.tasks.withType<Test> {
+      useJUnitPlatform()
+      testLogging {
+        events("passed", "skipped", "failed")
+      }
+    }
+
+    project.afterEvaluate {
+      if (solaAndroidPluginExtension.disableCheckstyle != true) {
+        project.pluginManager.apply(CheckstylePlugin::class.java)
+
+        project.extensions.configure<CheckstyleExtension> {
+          configFile = project.file(project.rootDir.toString() + "/checkstyle.xml")
+        }
+
+        project.task("checkstyleMain", Checkstyle::class) {
+          group = "verification"
+
+          configFile = project.file(project.rootDir.toString() + "/checkstyle.xml")
+          source("src")
+          include("**/*.java")
+          exclude("**/gen/**")
+          classpath = files()
+        }
+
+        project.tasks.getByName("check").dependsOn("checkstyleMain")
+      }
+    }
+
 //      if (solaAndroidPluginExtension.disableCoverage != true) {
 //        project.pluginManager.apply("jacoco")
 //
