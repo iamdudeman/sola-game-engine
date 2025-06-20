@@ -2,7 +2,8 @@ plugins {
   // todo figure out how to create apk (signed and unsigned??)
   // id("technology.sola.plugins.sola-java-distribution")
 
-  id("technology.sola.plugins.sola-android")
+  id("technology.sola.plugins.sola-android-conventions")
+  id("technology.sola.plugins.sola-android-app")
 }
 
 dependencies {
@@ -10,21 +11,10 @@ dependencies {
   implementation(project(":examples:common"))
 }
 
-solaAndroid {
+solaAndroidApp {
 
 }
 
 //solaJavaDist {
 //  mainClass = "${project.properties["basePackage"]}.${project.name}.AndroidMain"
 //}
-
-android {
-  namespace = "${project.properties["basePackage"]}.${project.name}"
-
-  defaultConfig {
-    applicationId = "${project.properties["basePackage"]}.${project.name}"
-    versionCode = project.properties["androidVersionCode"].toString().toInt()
-    versionName = "${project.properties["version"]}"
-  }
-}
-

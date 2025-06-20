@@ -1,9 +1,5 @@
 # sola-game-engine TODO list
 
-* cleanup build files
-    * migrate more properties to plugin
-    * ensure namespace is properly configurable?
-    * defaults for compileSdk and what not
 * update dependencies as needed
 * get platform distribution (maven stuff) set up for android-platform module
 * confirm if Android specific logger is needed
