@@ -11,10 +11,6 @@ dependencies {
   implementation(project(":examples:common"))
 }
 
-solaAndroidApp {
-
-}
-
 //solaJavaDist {
 //  mainClass = "${project.properties["basePackage"]}.${project.name}.AndroidMain"
 //}

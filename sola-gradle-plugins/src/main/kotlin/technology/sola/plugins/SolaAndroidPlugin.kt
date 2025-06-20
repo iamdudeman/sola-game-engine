@@ -12,7 +12,8 @@ interface SolaAndroidAppPluginExtension {
 
 class SolaAndroidAppPlugin : Plugin<Project> {
   override fun apply(project: Project) {
-    val solaAndroidPluginAppExtension = project.extensions.create<SolaAndroidConventionsPluginExtension>("solaAndroidApp")
+    // uncomment if configuration is needed later
+    // val solaAndroidPluginAppExtension = project.extensions.create<SolaAndroidConventionsPluginExtension>("solaAndroidApp")
 
     project.repositories {
       mavenCentral()

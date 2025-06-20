@@ -19,7 +19,7 @@ dependencies {
 
 android {
   namespace = "technology.sola.engine.platform.android"
-  compileSdk = 34
+  compileSdk = 35
 
   defaultConfig {
     minSdk = 34
