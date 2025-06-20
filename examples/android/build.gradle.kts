@@ -1,16 +1,10 @@
 plugins {
-  // id("sola.java-conventions")
+  // todo figure out how to create apk (signed and unsigned??)
   // id("technology.sola.plugins.sola-java-distribution")
-//  checkstyle
-//  jacoco
 
   id("technology.sola.plugins.sola-android")
   id("com.android.application") version "8.10.1" apply true
 }
-
-// todo missing checkstyle
-// todo missing jacoco
-// todo missing junit test stuff
 
 dependencies {
   implementation(project(":sola-engine:platform:android"))
@@ -23,14 +17,6 @@ solaAndroid {
 
 //solaJavaDist {
 //  mainClass = "${project.properties["basePackage"]}.${project.name}.AndroidMain"
-//}
-
-//checkstyle {
-//  configFile = file("$rootDir/checkstyle.xml")
-//}
-
-//jacoco {
-//  toolVersion = "0.8.8"
 //}
 
 android {
