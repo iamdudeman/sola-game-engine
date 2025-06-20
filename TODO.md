@@ -1,6 +1,5 @@
 # sola-game-engine TODO list
 
-* get jacoco working
 * cleanup build files
     * migrate more properties to plugin
     * ensure namespace is properly configurable?

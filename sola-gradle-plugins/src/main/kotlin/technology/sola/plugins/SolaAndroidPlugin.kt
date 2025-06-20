@@ -83,33 +83,32 @@ class SolaAndroidPlugin : Plugin<Project> {
 
         project.tasks.getByName("check").dependsOn("checkstyleMain")
       }
-    }
 
-//      if (solaAndroidPluginExtension.disableCoverage != true) {
-//        project.pluginManager.apply("jacoco")
-//
-//        project.extensions.configure<JacocoPluginExtension> {
-//          toolVersion = "0.8.8"
-//        }
-//
-//        project.tasks.withType<JacocoReport> {
-//          reports {
-//            html.required.set(true)
-//            html.outputLocation.set(project.file(project.layout.buildDirectory.file("reports/coverage")))
-//          }
-//        }
-//
-//        project.tasks.withType<JacocoCoverageVerification> {
-//          violationRules {
-//            rule {
-//              limit {
-//                minimum = "0.8".toBigDecimal()
-//              }
-//            }
-//          }
-//        }
-//      }
-//    }
+      if (solaAndroidPluginExtension.disableCoverage != true) {
+        project.pluginManager.apply("jacoco")
+
+        project.extensions.configure<JacocoPluginExtension> {
+          toolVersion = "0.8.8"
+        }
+
+        project.tasks.withType<JacocoReport> {
+          reports {
+            html.required.set(true)
+            html.outputLocation.set(project.file(project.layout.buildDirectory.file("reports/coverage")))
+          }
+        }
+
+        project.tasks.withType<JacocoCoverageVerification> {
+          violationRules {
+            rule {
+              limit {
+                minimum = "0.8".toBigDecimal()
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
