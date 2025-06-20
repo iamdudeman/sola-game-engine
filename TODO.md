@@ -1,6 +1,5 @@
 # sola-game-engine TODO list
 
-* update dependencies as needed
 * get platform distribution (maven stuff) set up for android-platform module
 * confirm if Android specific logger is needed
 * delete any unneeded .xml or .pro files

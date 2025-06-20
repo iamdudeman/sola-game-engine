@@ -39,10 +39,10 @@ class SolaAndroidConventionsPlugin : Plugin<Project> {
       project.dependencies.add("testImplementation", "org.junit.jupiter:junit-jupiter:5.11.0")
 
       // android
-      project.dependencies.add("implementation", "androidx.appcompat:appcompat:1.6.1")
-      project.dependencies.add("implementation", "com.google.android.material:material:1.10.0")
-      project.dependencies.add("implementation", "androidx.activity:activity:1.8.0")
-      project.dependencies.add("implementation", "androidx.constraintlayout:constraintlayout:2.1.4")
+      project.dependencies.add("implementation", "androidx.appcompat:appcompat:1.7.1")
+      project.dependencies.add("implementation", "com.google.android.material:material:1.12.0")
+      project.dependencies.add("implementation", "androidx.activity:activity:1.10.1")
+      project.dependencies.add("implementation", "androidx.constraintlayout:constraintlayout:2.2.1")
     }
 
     project.tasks.withType<Test> {
