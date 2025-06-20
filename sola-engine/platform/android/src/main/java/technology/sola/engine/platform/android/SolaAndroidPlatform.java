@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.android;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
@@ -11,10 +12,11 @@ import technology.sola.engine.input.MouseWheelEvent;
 
 import java.util.function.Consumer;
 
+@NullMarked
 public class SolaAndroidPlatform extends SolaPlatform {
   @Override
   public SolaPlatformIdentifier getIdentifier() {
-    return null;
+    return SolaPlatformIdentifier.ANDROID;
   }
 
   @Override

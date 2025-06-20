@@ -1,6 +1,5 @@
 # sola-game-engine TODO list
 
-* delete any unneeded .xml or .pro files
 * confirm if Android specific logger is needed
 * nullability annotations
 * JavaDocs + package-info.java files

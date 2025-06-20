@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.android;
 
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -8,14 +9,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import technology.sola.engine.core.Sola;
+import technology.sola.engine.platform.android.config.Orientation;
 import technology.sola.engine.platform.android.core.DrawView;
+import technology.sola.engine.platform.android.core.SolaAndroidPlatformConfig;
 
 /**
  * The base {@link android.app.Activity} class for a sola game to run on Android.
  */
 public abstract class SolaAndroidActivity extends AppCompatActivity {
+  private final SolaAndroidPlatformConfig solaAndroidPlatformConfig;
+
+  public SolaAndroidActivity(SolaAndroidPlatformConfig solaAndroidPlatformConfig) {
+    super();
+    this.solaAndroidPlatformConfig = solaAndroidPlatformConfig;
+  }
+
   /**
    * Reference to the {@link SolaAndroidPlatform} instance running within this activity.
    */
@@ -44,6 +56,12 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
       return insets;
     });
 
+    if (solaAndroidPlatformConfig.orientation() == Orientation.PORTRAIT) {
+      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    } else {
+      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    }
+
     platform.play(getInitialSola());
   }
 
@@ -58,14 +76,12 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
 
   private void hideSystemUi() {
     View decorView = getWindow().getDecorView();
-    decorView.setSystemUiVisibility(
-      View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-        | View.SYSTEM_UI_FLAG_FULLSCREEN
-    );
+
+    var windowInsetsController = WindowCompat.getInsetsController(getWindow(), decorView);
+
+    windowInsetsController.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+
+    windowInsetsController.hide(WindowInsetsCompat.Type.statusBars());
   }
 
   private View buildRootView() {
