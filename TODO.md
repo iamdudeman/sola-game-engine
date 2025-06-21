@@ -13,6 +13,8 @@
         * AudioClip
     * "mouse" input
     * keyboard input
+    * SocketClient
+    * RestClient
     * touch input???? (see below todo item)
 * JavaDocs + package-info.java files
 * release and release signed dist tasks
