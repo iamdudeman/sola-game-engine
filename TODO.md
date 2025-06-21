@@ -1,9 +1,19 @@
 # sola-game-engine TODO list
 
 * implement Android platform fully
-    * asset stuff
-    * input stuff
-    * implement TouchInput stuff
+    * GameLoopEvent stopped
+    * GameLoopEvent Pause and Resume on minify app
+    * Set title of app from Sola configuration???
+    * GameLoop (custom vs built in usage)
+    * Software rendering with asset ratio stuff
+    * "Platform rendering" stub like other platforms
+    * AssetProviders
+        * SolaImage
+        * Json
+        * AudioClip
+    * "mouse" input
+    * keyboard input
+    * touch input???? (see below todo item)
 * JavaDocs + package-info.java files
 * release and release signed dist tasks
     * ensure assets are all included in the apk!
