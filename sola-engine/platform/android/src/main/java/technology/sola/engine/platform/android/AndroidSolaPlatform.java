@@ -12,6 +12,7 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.input.MouseWheelEvent;
+import technology.sola.engine.platform.android.core.AndroidRenderer;
 import technology.sola.engine.platform.android.core.AndroidRestClient;
 import technology.sola.engine.platform.android.core.AndroidSocketClient;
 import technology.sola.engine.platform.android.core.AndroidSolaPlatformConfig;
@@ -23,11 +24,14 @@ import java.util.function.Consumer;
 public class AndroidSolaPlatform extends SolaPlatform {
   private static final SolaLogger LOGGER = SolaLogger.of(AndroidSolaPlatform.class);
   private final AppCompatActivity hostActivity;
+  private final boolean useSoftwareRendering;
 
   public AndroidSolaPlatform(AndroidSolaPlatformConfig androidSolaPlatformConfig, AppCompatActivity hostActivity) {
     this.hostActivity = hostActivity;
     socketClient = new AndroidSocketClient();
     restClient = new AndroidRestClient();
+
+    useSoftwareRendering = androidSolaPlatformConfig.useSoftwareRendering();
   }
 
   @Override
@@ -91,5 +95,20 @@ public class AndroidSolaPlatform extends SolaPlatform {
   @Override
   protected void populateAssetLoaderProvider(AssetLoaderProvider assetLoaderProvider) {
 
+  }
+
+  @Override
+  protected Renderer buildRenderer(SolaConfiguration solaConfiguration) {
+    LOGGER.info("Using %s rendering", useSoftwareRendering ? "Software" : "Android native");
+
+    return useSoftwareRendering
+      ? super.buildRenderer(solaConfiguration)
+      : new AndroidRenderer();
+  }
+
+  @Override
+  protected GameLoopProvider buildGameLoop() {
+    // todo probably need a custom loop
+    return super.buildGameLoop();
   }
 }
