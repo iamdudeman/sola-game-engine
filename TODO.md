@@ -1,11 +1,10 @@
 # sola-game-engine TODO list
 
-* nullability annotations
-* JavaDocs + package-info.java files
 * implement Android platform fully
     * asset stuff
     * input stuff
     * implement TouchInput stuff
+* JavaDocs + package-info.java files
 * release and release signed dist tasks
     * ensure assets are all included in the apk!
 

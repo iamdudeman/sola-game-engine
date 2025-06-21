@@ -17,7 +17,6 @@ public class DrawView extends View {
   private Bitmap bitmap;
   private final SoftwareRenderer softwareRenderer;
 
-
   public DrawView(Context context) {
     super(context);
 
@@ -28,8 +27,6 @@ public class DrawView extends View {
 
     softwareRenderer = new SoftwareRenderer(width, height);
   }
-
-
 
   @Override
   protected void onSizeChanged(int w, int h, int oldw, int oldh) {
