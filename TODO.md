@@ -8,6 +8,15 @@
 * release and release signed dist tasks
     * ensure assets are all included in the apk!
 
+* Figure out how to handle TouchInput (probably at the same time as AndroidPlatform implementation)
+    * Primarily for browser but also could be supported in JavaFX
+    * touchstart and touchend all hard coded to MouseButton.Primary currently
+        * implement touchmove
+            * Figure out TouchInput API
+        * How to handle multitouch
+            * Switch JsMouseUtils to mouse events instead of pointer events
+
+
 ## Known Bugs List
 
 * (verify if still bug) GuiElement parent undefined when changing roots
@@ -34,15 +43,6 @@
     * Load and save JSON content (maybe other content too)
     * Browser implementation could open file dialog
     * Desktop could go straight to file or open file dialog
-* Figure out how to handle TouchInput (probably at the same time as AndroidPlatform implementation)
-    * Primarily for browser but also could be supported in JavaFX
-    * touchstart and touchend all hard coded to MouseButton.Primary currently
-        * implement touchmove
-            * Figure out TouchInput API
-        * How to handle multitouch
-            * Switch JsMouseUtils to mouse events instead of pointer events
-* Android Platform
-    * Implement
 * Investigate possible Steam CloudSave integration
 * Rendering
     * Ability to change line width when drawing
