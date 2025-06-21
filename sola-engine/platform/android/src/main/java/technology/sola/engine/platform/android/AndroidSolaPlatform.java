@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.android;
 
+import androidx.appcompat.app.AppCompatActivity;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.core.SolaConfiguration;
@@ -21,8 +22,10 @@ import java.util.function.Consumer;
 @NullMarked
 public class AndroidSolaPlatform extends SolaPlatform {
   private static final SolaLogger LOGGER = SolaLogger.of(AndroidSolaPlatform.class);
+  private final AppCompatActivity hostActivity;
 
-  public AndroidSolaPlatform(AndroidSolaPlatformConfig androidSolaPlatformConfig) {
+  public AndroidSolaPlatform(AndroidSolaPlatformConfig androidSolaPlatformConfig, AppCompatActivity hostActivity) {
+    this.hostActivity = hostActivity;
     socketClient = new AndroidSocketClient();
     restClient = new AndroidRestClient();
   }
@@ -64,6 +67,7 @@ public class AndroidSolaPlatform extends SolaPlatform {
 
   @Override
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
+    hostActivity.setTitle(solaConfiguration.title());
 
     solaEventHub.add(GameLoopEvent.class, event -> {
       if (event.state() == GameLoopState.STOPPED) {
@@ -72,7 +76,6 @@ public class AndroidSolaPlatform extends SolaPlatform {
         }
       }
     });
-
   }
 
   @Override

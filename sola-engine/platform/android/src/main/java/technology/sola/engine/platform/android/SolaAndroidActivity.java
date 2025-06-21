@@ -34,9 +34,10 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
    */
   public SolaAndroidActivity(AndroidSolaPlatformConfig androidSolaPlatformConfig) {
     super();
+
     this.androidSolaPlatformConfig = androidSolaPlatformConfig;
 
-    this.platform = new AndroidSolaPlatform(androidSolaPlatformConfig);
+    this.platform = new AndroidSolaPlatform(androidSolaPlatformConfig, this);
   }
 
   /**
@@ -81,12 +82,11 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
   }
 
   private void hideSystemUi() {
-    View decorView = getWindow().getDecorView();
-
-    var windowInsetsController = WindowCompat.getInsetsController(getWindow(), decorView);
+    var window = getWindow();
+    var decorView = window.getDecorView();
+    var windowInsetsController = WindowCompat.getInsetsController(window, decorView);
 
     windowInsetsController.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
-
     windowInsetsController.hide(WindowInsetsCompat.Type.statusBars());
   }
 
