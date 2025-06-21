@@ -1,6 +1,5 @@
 # sola-game-engine TODO list
 
-* confirm if Android specific logger is needed
 * nullability annotations
 * JavaDocs + package-info.java files
 * implement Android platform fully

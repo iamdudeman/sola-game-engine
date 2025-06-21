@@ -29,9 +29,9 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
   }
 
   /**
-   * Reference to the {@link SolaAndroidPlatform} instance running within this activity.
+   * Reference to the {@link AndroidSolaPlatform} instance running within this activity.
    */
-  protected final SolaAndroidPlatform platform = new SolaAndroidPlatform();
+  protected final AndroidSolaPlatform platform = new AndroidSolaPlatform();
 
   /**
    * @return the {@link Sola} instance that starts running with this activity is created

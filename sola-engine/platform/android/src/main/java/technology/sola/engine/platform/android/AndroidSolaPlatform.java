@@ -9,11 +9,14 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.input.MouseWheelEvent;
+import technology.sola.logging.SolaLogger;
 
 import java.util.function.Consumer;
 
 @NullMarked
-public class SolaAndroidPlatform extends SolaPlatform {
+public class AndroidSolaPlatform extends SolaPlatform {
+  private static final SolaLogger LOGGER = SolaLogger.of(AndroidSolaPlatform.class);
+
   @Override
   public SolaPlatformIdentifier getIdentifier() {
     return SolaPlatformIdentifier.ANDROID;
