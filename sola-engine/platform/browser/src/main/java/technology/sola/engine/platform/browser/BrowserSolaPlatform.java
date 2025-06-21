@@ -116,6 +116,12 @@ public class BrowserSolaPlatform extends SolaPlatform {
       }
     });
 
+    solaEventHub.add(GameLoopEvent.class, event -> {
+      if (event.state() == GameLoopState.STOPPED) {
+        socketClient.disconnect();
+      }
+    });
+
     solaPlatformInitialization.finish();
   }
 

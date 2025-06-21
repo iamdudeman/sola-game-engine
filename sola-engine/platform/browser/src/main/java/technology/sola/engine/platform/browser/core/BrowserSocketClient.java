@@ -5,12 +5,14 @@ import technology.sola.engine.networking.NetworkQueue;
 import technology.sola.engine.networking.socket.SocketClient;
 import technology.sola.engine.networking.socket.SocketMessage;
 import technology.sola.engine.platform.browser.javascript.JsNetworkUtils;
+import technology.sola.logging.SolaLogger;
 
 /**
  * A browser implementation of {@link SocketClient}.
  */
 @NullMarked
 public class BrowserSocketClient implements SocketClient {
+  private static final SolaLogger LOGGER = SolaLogger.of(BrowserSocketClient.class);
   private final NetworkQueue<SocketMessage> networkQueue = new NetworkQueue<>();
   private boolean isConnected = false;
 
@@ -36,6 +38,11 @@ public class BrowserSocketClient implements SocketClient {
 
   @Override
   public void disconnect() {
+    if (!isConnected()) {
+      LOGGER.info("No connection active to disconnect");
+      return;
+    }
+
     JsNetworkUtils.disconnect();
     isConnected = false;
   }
