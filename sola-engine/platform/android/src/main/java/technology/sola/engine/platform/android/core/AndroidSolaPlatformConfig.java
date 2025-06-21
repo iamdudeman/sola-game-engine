@@ -9,13 +9,13 @@ import technology.sola.engine.platform.android.config.Orientation;
  * @param orientation the {@link Orientation} of the app
  */
 @NullMarked
-public record SolaAndroidPlatformConfig(
+public record AndroidSolaPlatformConfig(
   Orientation orientation
 ) {
   /**
    * Creates an instance with default options. Orientation is set to {@link Orientation#PORTRAIT}.
    */
-  public SolaAndroidPlatformConfig() {
+  public AndroidSolaPlatformConfig() {
     this(Orientation.PORTRAIT);
   }
 }

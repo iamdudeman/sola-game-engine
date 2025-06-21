@@ -15,23 +15,29 @@ import androidx.core.view.WindowInsetsControllerCompat;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.platform.android.config.Orientation;
 import technology.sola.engine.platform.android.core.DrawView;
-import technology.sola.engine.platform.android.core.SolaAndroidPlatformConfig;
+import technology.sola.engine.platform.android.core.AndroidSolaPlatformConfig;
 
 /**
  * The base {@link android.app.Activity} class for a sola game to run on Android.
  */
 public abstract class SolaAndroidActivity extends AppCompatActivity {
-  private final SolaAndroidPlatformConfig solaAndroidPlatformConfig;
-
-  public SolaAndroidActivity(SolaAndroidPlatformConfig solaAndroidPlatformConfig) {
-    super();
-    this.solaAndroidPlatformConfig = solaAndroidPlatformConfig;
-  }
-
   /**
    * Reference to the {@link AndroidSolaPlatform} instance running within this activity.
    */
-  protected final AndroidSolaPlatform platform = new AndroidSolaPlatform();
+  protected final AndroidSolaPlatform platform;
+  private final AndroidSolaPlatformConfig androidSolaPlatformConfig;
+
+  /**
+   * Creates an instance of this activity with desired configuration for the underlying {@link AndroidSolaPlatform}.
+   *
+   * @param androidSolaPlatformConfig the {@link AndroidSolaPlatformConfig}
+   */
+  public SolaAndroidActivity(AndroidSolaPlatformConfig androidSolaPlatformConfig) {
+    super();
+    this.androidSolaPlatformConfig = androidSolaPlatformConfig;
+
+    this.platform = new AndroidSolaPlatform(androidSolaPlatformConfig);
+  }
 
   /**
    * @return the {@link Sola} instance that starts running with this activity is created
@@ -56,7 +62,7 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
       return insets;
     });
 
-    if (solaAndroidPlatformConfig.orientation() == Orientation.PORTRAIT) {
+    if (androidSolaPlatformConfig.orientation() == Orientation.PORTRAIT) {
       setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     } else {
       setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);

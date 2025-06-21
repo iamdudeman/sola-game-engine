@@ -1,10 +1,9 @@
 # sola-game-engine TODO list
 
 * implement Android platform fully
-    * GameLoopEvent stopped
-    * GameLoopEvent Pause and Resume on minify app
     * Set title of app from Sola configuration???
     * GameLoop (custom vs built in usage)
+    * GameLoopEvent Pause and Resume on minify app
     * Software rendering with asset ratio stuff
     * "Platform rendering" stub like other platforms
     * AssetProviders

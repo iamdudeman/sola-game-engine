@@ -5,7 +5,7 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.platform.android.SolaAndroidActivity;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.platform.android.core.AndroidSolaLoggerFactory;
-import technology.sola.engine.platform.android.core.SolaAndroidPlatformConfig;
+import technology.sola.engine.platform.android.core.AndroidSolaPlatformConfig;
 import technology.sola.logging.SolaLogLevel;
 import technology.sola.logging.SolaLogger;
 
@@ -23,7 +23,7 @@ public class MainActivity extends SolaAndroidActivity {
    * Creates an instance of the activity.
    */
   public MainActivity() {
-    super(new SolaAndroidPlatformConfig());
+    super(new AndroidSolaPlatformConfig());
   }
 
   @Override
