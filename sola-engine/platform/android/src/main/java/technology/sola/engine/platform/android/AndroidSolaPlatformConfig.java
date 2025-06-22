@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.android.core;
+package technology.sola.engine.platform.android;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.platform.android.config.Orientation;

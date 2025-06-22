@@ -1,6 +1,5 @@
 package technology.sola.engine.platform.android;
 
-import androidx.appcompat.app.AppCompatActivity;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.core.SolaConfiguration;
@@ -9,13 +8,13 @@ import technology.sola.engine.core.SolaPlatformIdentifier;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.input.MouseWheelEvent;
 import technology.sola.engine.platform.android.core.AndroidRenderer;
 import technology.sola.engine.platform.android.core.AndroidRestClient;
 import technology.sola.engine.platform.android.core.AndroidSocketClient;
-import technology.sola.engine.platform.android.core.AndroidSolaPlatformConfig;
 import technology.sola.logging.SolaLogger;
 
 import java.util.function.Consumer;
@@ -23,10 +22,10 @@ import java.util.function.Consumer;
 @NullMarked
 public class AndroidSolaPlatform extends SolaPlatform {
   private static final SolaLogger LOGGER = SolaLogger.of(AndroidSolaPlatform.class);
-  private final AppCompatActivity hostActivity;
+  private final SolaAndroidActivity hostActivity;
   private final boolean useSoftwareRendering;
 
-  public AndroidSolaPlatform(AndroidSolaPlatformConfig androidSolaPlatformConfig, AppCompatActivity hostActivity) {
+  public AndroidSolaPlatform(AndroidSolaPlatformConfig androidSolaPlatformConfig, SolaAndroidActivity hostActivity) {
     this.hostActivity = hostActivity;
     socketClient = new AndroidSocketClient();
     restClient = new AndroidRestClient();
@@ -80,16 +79,26 @@ public class AndroidSolaPlatform extends SolaPlatform {
         }
       }
     });
+
+    hostActivity.getSolaSurfaceView().setViewport(viewport);
+
+    solaPlatformInitialization.finish();
   }
 
   @Override
   protected void beforeRender(Renderer renderer) {
-
+    hostActivity.getSolaSurfaceView().startDrawing();
   }
 
   @Override
   protected void onRender(Renderer renderer) {
+    if (useSoftwareRendering) {
+      SoftwareRenderer softwareRenderer = (SoftwareRenderer) renderer;
 
+      hostActivity.getSolaSurfaceView().drawFromSoftwareRenderer(softwareRenderer, viewport.getAspectRatioSizing());
+    }
+
+    hostActivity.getSolaSurfaceView().finishDrawing();
   }
 
   @Override

@@ -14,8 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.platform.android.config.Orientation;
-import technology.sola.engine.platform.android.core.DrawView;
-import technology.sola.engine.platform.android.core.AndroidSolaPlatformConfig;
+import technology.sola.engine.platform.android.core.SolaSurfaceView;
 
 /**
  * The base {@link android.app.Activity} class for a sola game to run on Android.
@@ -26,6 +25,7 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
    */
   protected final AndroidSolaPlatform platform;
   private final AndroidSolaPlatformConfig androidSolaPlatformConfig;
+  private SolaSurfaceView solaSurfaceView;
 
   /**
    * Creates an instance of this activity with desired configuration for the underlying {@link AndroidSolaPlatform}.
@@ -45,11 +45,17 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
    */
   public abstract Sola getInitialSola();
 
+  public SolaSurfaceView getSolaSurfaceView() {
+    return solaSurfaceView;
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
     EdgeToEdge.enable(this);
+
+    this.solaSurfaceView = new SolaSurfaceView(this);
 
     var rootView = buildRootView();
 
@@ -99,7 +105,7 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
     ));
     rootView.setBackgroundColor(Color.GRAY);
 
-    rootView.addView(new DrawView(this));
+    rootView.addView(solaSurfaceView);
 
     return rootView;
   }
