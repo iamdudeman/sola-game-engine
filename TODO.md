@@ -1,7 +1,6 @@
 # sola-game-engine TODO list
 
 * implement Android platform fully
-    * GameLoopEvent Pause and Resume on minify app
     * AssetProviders
         * SolaImage
         * Json

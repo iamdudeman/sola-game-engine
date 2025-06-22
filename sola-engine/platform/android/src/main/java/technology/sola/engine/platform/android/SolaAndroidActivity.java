@@ -76,6 +76,15 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
     }
 
     platform.play(getInitialSola());
+
+    getLifecycle().addObserver(platform);
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+
+    getLifecycle().removeObserver(platform);
   }
 
   @Override

@@ -1,5 +1,9 @@
 package technology.sola.engine.platform.android;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleOwner;
+import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.core.SolaConfiguration;
@@ -21,7 +25,7 @@ import technology.sola.logging.SolaLogger;
 import java.util.function.Consumer;
 
 @NullMarked
-public class AndroidSolaPlatform extends SolaPlatform {
+public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventObserver {
   private static final SolaLogger LOGGER = SolaLogger.of(AndroidSolaPlatform.class);
   private final SolaAndroidActivity hostActivity;
   private final boolean useSoftwareRendering;
@@ -119,5 +123,14 @@ public class AndroidSolaPlatform extends SolaPlatform {
   @Override
   protected GameLoopProvider buildGameLoop() {
     return AndroidGameLoop::new;
+  }
+
+  @Override
+  public void onStateChanged(@NotNull LifecycleOwner lifecycleOwner, @NotNull Lifecycle.Event event) {
+    if (event == Lifecycle.Event.ON_RESUME) {
+      solaEventHub.emit(new GameLoopEvent(GameLoopState.RESUME));
+    } else if (event == Lifecycle.Event.ON_PAUSE) {
+      solaEventHub.emit(new GameLoopEvent(GameLoopState.PAUSE));
+    }
   }
 }
