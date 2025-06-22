@@ -12,6 +12,7 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.input.MouseWheelEvent;
+import technology.sola.engine.platform.android.core.AndroidGameLoop;
 import technology.sola.engine.platform.android.core.AndroidRenderer;
 import technology.sola.engine.platform.android.core.AndroidRestClient;
 import technology.sola.engine.platform.android.core.AndroidSocketClient;
@@ -117,7 +118,6 @@ public class AndroidSolaPlatform extends SolaPlatform {
 
   @Override
   protected GameLoopProvider buildGameLoop() {
-    // todo probably need a custom loop
-    return super.buildGameLoop();
+    return AndroidGameLoop::new;
   }
 }

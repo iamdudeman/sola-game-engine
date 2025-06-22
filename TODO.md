@@ -1,13 +1,12 @@
 # sola-game-engine TODO list
 
 * implement Android platform fully
-    * GameLoop (custom vs built in usage)
     * GameLoopEvent Pause and Resume on minify app
-    * "Platform rendering" stub like other platforms
     * AssetProviders
         * SolaImage
         * Json
         * AudioClip
+    * "Platform rendering" stub like other platforms
     * "mouse" input
     * keyboard input
     * SocketClient
