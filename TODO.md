@@ -1,8 +1,6 @@
 # sola-game-engine TODO list
 
 * implement Android platform fully
-    * Software rendering with asset ratio stuff
-    * viewport resizing needed!
     * GameLoop (custom vs built in usage)
     * GameLoopEvent Pause and Resume on minify app
     * "Platform rendering" stub like other platforms

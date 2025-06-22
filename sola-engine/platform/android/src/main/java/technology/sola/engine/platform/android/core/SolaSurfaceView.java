@@ -54,7 +54,12 @@ public class SolaSurfaceView extends SurfaceView {
     bitmap.setPixels(softwareRenderer.getPixels(), 0, softwareRenderer.getWidth(), 0, 0, softwareRenderer.getWidth(), softwareRenderer.getHeight());
 
     Rect src = new Rect(0, 0, softwareRenderer.getWidth(), softwareRenderer.getHeight());
-    Rect dest = new Rect(aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height());
+    Rect dest = new Rect(
+      aspectRatioSizing.x(),
+      aspectRatioSizing.y(),
+      aspectRatioSizing.width() + aspectRatioSizing.x(),
+      aspectRatioSizing.height() + aspectRatioSizing.y()
+    );
 
     canvas.drawBitmap(bitmap, src, dest, paint);
   }
