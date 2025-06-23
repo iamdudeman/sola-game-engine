@@ -102,6 +102,7 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
 
     windowInsetsController.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
     windowInsetsController.hide(WindowInsetsCompat.Type.statusBars());
+    windowInsetsController.hide(WindowInsetsCompat.Type.navigationBars());
   }
 
   private View buildRootView() {

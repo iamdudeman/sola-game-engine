@@ -126,9 +126,9 @@ public abstract class GameLoop implements Runnable {
   }
 
   private void startFpsTrackerThread() {
-    Timer timer = new Timer();
+    final Timer timer = new Timer();
 
-    timer.scheduleAtFixedRate(new TimerTask() {
+    timer.schedule(new TimerTask() {
       @Override
       public void run() {
         if (isRunning()) {

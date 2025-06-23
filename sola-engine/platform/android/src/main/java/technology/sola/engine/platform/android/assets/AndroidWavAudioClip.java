@@ -1,7 +1,6 @@
 package technology.sola.engine.platform.android.assets;
 
 import android.media.MediaPlayer;
-import android.util.Log;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.audio.AudioClip;
 
@@ -14,21 +13,21 @@ public class AndroidWavAudioClip implements AudioClip {
   private final MediaPlayer mediaPlayer;
   private final List<Consumer<AudioClip>> finishListeners = new ArrayList<>();
   private int loopCount = AudioClip.CONTINUOUS_LOOPING;
-  private float volume = 1f;
+  private float volume = 0.5f;
 
   public AndroidWavAudioClip(MediaPlayer mediaPlayer) {
     this.mediaPlayer = mediaPlayer;
 
-//    mediaPlayer.setVolume(volume, volume);
+    mediaPlayer.setVolume(volume, volume);
 
     mediaPlayer.setOnCompletionListener((mp) -> {
-      Log.d("wav", "onCompletion " + loopCount);
       if (loopCount != AudioClip.CONTINUOUS_LOOPING) {
         loopCount--;
 
-        if (loopCount == 0) {
+        if (loopCount <= 0) {
           loopCount = AudioClip.CONTINUOUS_LOOPING;
-          stop();
+        } else {
+          mediaPlayer.start();
         }
       }
 
@@ -43,8 +42,6 @@ public class AndroidWavAudioClip implements AudioClip {
 
   @Override
   public void play() {
-    Log.d("wav", "play ");
-
     if (isPlaying()) {
       return;
     }
@@ -60,13 +57,12 @@ public class AndroidWavAudioClip implements AudioClip {
   @Override
   public void stop() {
     mediaPlayer.stop();
-    mediaPlayer.setLooping(false);
+    loopCount = AudioClip.CONTINUOUS_LOOPING;
   }
 
   @Override
   public void loop(int times) {
     loopCount = times;
-    mediaPlayer.setLooping(true);
 
     if (!mediaPlayer.isPlaying()) {
       mediaPlayer.start();
@@ -86,7 +82,7 @@ public class AndroidWavAudioClip implements AudioClip {
 
   @Override
   public void dispose() {
-    // Nothing to dispose of
+    mediaPlayer.release();
   }
 
   @Override

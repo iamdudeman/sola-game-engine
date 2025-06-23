@@ -2,16 +2,15 @@
 
 * implement Android platform fully
     * bugs
-        * fix lagging in RenderingExample (gameloop probably not running at 60fps for real)
-        * fix issue with starting in portrait and going to landscape re-playing the sola
-        * fix issue with AndroidWavAudioClip looping not working (finish listener never fires)
-        * fix issue with volume controls not working for AndroidWavAudioClip
-    * "Platform rendering" stub like other platforms
-    * "mouse" input
-    * keyboard input
-    * SocketClient
-    * RestClient
-    * touch input???? (see below todo item)
+        * fix lagging in RenderingExample (gameloop probably not running at 60fps for real) (AndroidGameLoop is bad, probably delete it)
+    * must haves
+        * "mouse" input
+        * keyboard input
+        * touch input???? (see below todo item)
+    * nice to haves
+        * "Platform rendering" stub like other platforms
+        * SocketClient
+        * RestClient
 * JavaDocs + package-info.java files
 * release and release signed dist tasks
     * ensure assets are all included in the apk!
