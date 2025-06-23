@@ -28,7 +28,7 @@ public class AndroidSolaImageLoader extends AssetLoader<SolaImage> {
     AssetHandle<SolaImage> solaImageAssetHandle = new AssetHandle<>();
 
     new Thread(() -> {
-      try (InputStream inputStream = assetManager.open(path.replace("assets/", ""))) {
+      try (InputStream inputStream = assetManager.open(AndroidAssetUtils.sanitizeAssetPath(path))) {
         var bitMap = BitmapFactory.decodeStream(inputStream);
         int width = bitMap.getWidth();
         int height = bitMap.getHeight();

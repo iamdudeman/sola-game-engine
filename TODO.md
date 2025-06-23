@@ -1,7 +1,11 @@
 # sola-game-engine TODO list
 
 * implement Android platform fully
-    * AssetProvider - AudioClip
+    * bugs
+        * fix lagging in RenderingExample (gameloop probably not running at 60fps for real)
+        * fix issue with starting in portrait and going to landscape re-playing the sola
+        * fix issue with AndroidWavAudioClip looping not working (finish listener never fires)
+        * fix issue with volume controls not working for AndroidWavAudioClip
     * "Platform rendering" stub like other platforms
     * "mouse" input
     * keyboard input

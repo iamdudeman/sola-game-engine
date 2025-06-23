@@ -29,7 +29,7 @@ public class AndroidJsonAssetLoader extends AssetLoader<JsonElementAsset> {
 
     new Thread(() -> {
       try (
-        var inputStream = assetManager.open(path.replace("assets/", ""));
+        var inputStream = assetManager.open(AndroidAssetUtils.sanitizeAssetPath(path));
         Scanner scanner = new Scanner(inputStream).useDelimiter("\\A");
       ) {
         String jsonString = scanner.next();

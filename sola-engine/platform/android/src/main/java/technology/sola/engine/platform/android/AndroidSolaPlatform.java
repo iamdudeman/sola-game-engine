@@ -123,7 +123,7 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
 
     assetLoaderProvider.add(solaImageAssetLoader);
     assetLoaderProvider.add(jsonElementAssetAssetLoader);
-    assetLoaderProvider.add(new AndroidAudioClipAssetLoader());
+    assetLoaderProvider.add(new AndroidAudioClipAssetLoader(assetManager));
 
     assetLoaderProvider.add(new FontAssetLoader(
       jsonElementAssetAssetLoader, solaImageAssetLoader
