@@ -51,16 +51,12 @@ public class AndroidSolaLoggerFactory implements SolaLoggerFactory {
         tag = tag.substring(tag.lastIndexOf(".") + 1);
       }
 
-      try {
-        int level = getAndroidLevel(record.getLevel());
+      int level = getAndroidLevel(record.getLevel());
 
-        Log.println(level, tag, record.getMessage());
+      Log.println(level, tag, record.getMessage());
 
-        if (record.getThrown() != null) {
-          Log.println(level, tag, Log.getStackTraceString(record.getThrown()));
-        }
-      } catch (RuntimeException e) {
-        Log.e("AndroidLoggingHandler", "Error logging message.", e);
+      if (record.getThrown() != null) {
+        Log.println(level, tag, Log.getStackTraceString(record.getThrown()));
       }
     }
 
