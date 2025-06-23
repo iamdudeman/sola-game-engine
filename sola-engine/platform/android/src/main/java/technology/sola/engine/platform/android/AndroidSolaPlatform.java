@@ -25,7 +25,6 @@ import technology.sola.engine.input.MouseWheelEvent;
 import technology.sola.engine.platform.android.assets.AndroidAudioClipAssetLoader;
 import technology.sola.engine.platform.android.assets.AndroidJsonAssetLoader;
 import technology.sola.engine.platform.android.assets.AndroidSolaImageLoader;
-import technology.sola.engine.platform.android.core.AndroidGameLoop;
 import technology.sola.engine.platform.android.core.AndroidRenderer;
 import technology.sola.engine.platform.android.core.AndroidRestClient;
 import technology.sola.engine.platform.android.core.AndroidSocketClient;
@@ -143,11 +142,6 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
     return useSoftwareRendering
       ? super.buildRenderer(solaConfiguration)
       : new AndroidRenderer();
-  }
-
-  @Override
-  protected GameLoopProvider buildGameLoop() {
-    return AndroidGameLoop::new;
   }
 
   @Override

@@ -1,8 +1,6 @@
 # sola-game-engine TODO list
 
 * implement Android platform fully
-    * bugs
-        * fix lagging in RenderingExample (gameloop probably not running at 60fps for real) (AndroidGameLoop is bad, probably delete it)
     * must haves
         * "mouse" input
         * keyboard input
