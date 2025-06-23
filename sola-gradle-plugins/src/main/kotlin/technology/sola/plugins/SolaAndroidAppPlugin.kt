@@ -53,6 +53,12 @@ class SolaAndroidAppPlugin : Plugin<Project> {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
       }
+
+      sourceSets {
+        getByName("main") {
+          assets.srcDir("${project.rootDir}/assets")
+        }
+      }
     }
 
     project.task("distAndroid", Copy::class) {

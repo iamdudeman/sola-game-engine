@@ -5,7 +5,13 @@ import androidx.lifecycle.LifecycleEventObserver;
 import androidx.lifecycle.LifecycleOwner;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NullMarked;
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.AssetLoaderProvider;
+import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.assets.graphics.font.FontAssetLoader;
+import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetAssetLoader;
+import technology.sola.engine.assets.input.ControlsConfigAssetLoader;
+import technology.sola.engine.assets.json.JsonElementAsset;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.SolaPlatformIdentifier;
@@ -16,6 +22,9 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.input.MouseWheelEvent;
+import technology.sola.engine.platform.android.assets.AndroidAudioClipAssetLoader;
+import technology.sola.engine.platform.android.assets.AndroidJsonAssetLoader;
+import technology.sola.engine.platform.android.assets.AndroidSolaImageLoader;
 import technology.sola.engine.platform.android.core.AndroidGameLoop;
 import technology.sola.engine.platform.android.core.AndroidRenderer;
 import technology.sola.engine.platform.android.core.AndroidRestClient;
@@ -108,7 +117,23 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
 
   @Override
   protected void populateAssetLoaderProvider(AssetLoaderProvider assetLoaderProvider) {
+    var assetManager = hostActivity.getAssets();
+    AssetLoader<SolaImage> solaImageAssetLoader = new AndroidSolaImageLoader(assetManager);
+    AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader = new AndroidJsonAssetLoader(assetManager);
 
+    assetLoaderProvider.add(solaImageAssetLoader);
+    assetLoaderProvider.add(jsonElementAssetAssetLoader);
+    assetLoaderProvider.add(new AndroidAudioClipAssetLoader());
+
+    assetLoaderProvider.add(new FontAssetLoader(
+      jsonElementAssetAssetLoader, solaImageAssetLoader
+    ));
+    assetLoaderProvider.add(new SpriteSheetAssetLoader(
+      jsonElementAssetAssetLoader, solaImageAssetLoader
+    ));
+    assetLoaderProvider.add(new ControlsConfigAssetLoader(
+      jsonElementAssetAssetLoader
+    ));
   }
 
   @Override

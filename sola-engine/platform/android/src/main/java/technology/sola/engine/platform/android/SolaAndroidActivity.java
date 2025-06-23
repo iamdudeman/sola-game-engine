@@ -75,9 +75,9 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
       setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 
-    platform.play(getInitialSola());
-
     getLifecycle().addObserver(platform);
+
+    platform.play(getInitialSola());
   }
 
   @Override

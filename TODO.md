@@ -1,10 +1,7 @@
 # sola-game-engine TODO list
 
 * implement Android platform fully
-    * AssetProviders
-        * SolaImage
-        * Json
-        * AudioClip
+    * AssetProvider - AudioClip
     * "Platform rendering" stub like other platforms
     * "mouse" input
     * keyboard input
