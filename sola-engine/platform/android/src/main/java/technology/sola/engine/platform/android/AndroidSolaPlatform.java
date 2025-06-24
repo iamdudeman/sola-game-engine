@@ -188,11 +188,11 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
       case MotionEvent.ACTION_DOWN -> mousePressedConsumers;
       case MotionEvent.ACTION_UP -> mouseReleasedConsumers;
       case MotionEvent.ACTION_MOVE -> mouseMovedConsumers;
-      case MotionEvent.ACTION_POINTER_DOWN ->  {
+      case MotionEvent.ACTION_POINTER_DOWN -> {
         isSimulatedSecondary = true;
         yield mousePressedConsumers;
       }
-      case MotionEvent.ACTION_POINTER_UP ->  {
+      case MotionEvent.ACTION_POINTER_UP -> {
         isSimulatedSecondary = true;
         yield mouseReleasedConsumers;
       }

@@ -10,7 +10,7 @@ import java.util.Random;
  */
 @NullMarked
 public class SolaRandom {
-  private static final Random random = new Random();
+  private static final Random RANDOM = new Random();
 
   /**
    * Sets the seed for random number generation.
@@ -18,14 +18,14 @@ public class SolaRandom {
    * @param seed the seed
    */
   public static void setSeed(long seed) {
-    random.setSeed(seed);
+    RANDOM.setSeed(seed);
   }
 
   /**
    * @return the next pseudorandom, uniformly distributed boolean value
    */
   public static boolean nextBoolean() {
-    return random.nextBoolean();
+    return RANDOM.nextBoolean();
   }
 
   /**
@@ -35,7 +35,7 @@ public class SolaRandom {
    * @return the random int value
    */
   public static int nextInt(int bound) {
-    return random.nextInt(bound);
+    return RANDOM.nextInt(bound);
   }
 
   /**
@@ -50,14 +50,14 @@ public class SolaRandom {
       return min;
     }
 
-    return random.nextInt(max - min + 1) + min;
+    return RANDOM.nextInt(max - min + 1) + min;
   }
 
   /**
    * @return the next pseudorandom, uniformly distributed float value between 0.0 and 1.
    */
   public static float nextFloat() {
-    return random.nextFloat();
+    return RANDOM.nextFloat();
   }
 
   /**
@@ -72,7 +72,7 @@ public class SolaRandom {
       return min;
     }
 
-    return min + random.nextFloat() * (max - min);
+    return min + RANDOM.nextFloat() * (max - min);
   }
 
   private SolaRandom() {
