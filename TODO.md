@@ -2,7 +2,6 @@
 
 * implement Android platform fully
     * must haves
-        * "mouse" input (maybe this can be "single touch" input simulation?)
         * touch input???? (see below todo item) (how to handle multitouch)
     * nice to haves
         * "Platform rendering" stub like other platforms
