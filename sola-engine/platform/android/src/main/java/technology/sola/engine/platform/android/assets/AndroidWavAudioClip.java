@@ -12,7 +12,7 @@ import java.util.function.Consumer;
 public class AndroidWavAudioClip implements AudioClip {
   private final MediaPlayer mediaPlayer;
   private final List<Consumer<AudioClip>> finishListeners = new ArrayList<>();
-  private int loopCount = AudioClip.CONTINUOUS_LOOPING;
+  private int loopCount = 0;
   private float volume = 0.5f;
 
   public AndroidWavAudioClip(MediaPlayer mediaPlayer) {
@@ -21,14 +21,12 @@ public class AndroidWavAudioClip implements AudioClip {
     mediaPlayer.setVolume(volume, volume);
 
     mediaPlayer.setOnCompletionListener((mp) -> {
-      if (loopCount != AudioClip.CONTINUOUS_LOOPING) {
+      if (loopCount > 0) {
         loopCount--;
+      }
 
-        if (loopCount <= 0) {
-          loopCount = AudioClip.CONTINUOUS_LOOPING;
-        } else {
-          mediaPlayer.start();
-        }
+      if (loopCount == AudioClip.CONTINUOUS_LOOPING ||  loopCount > 0) {
+        mp.start();
       }
 
       finishListeners.forEach(audioClipConsumer -> audioClipConsumer.accept(this));
@@ -51,13 +49,18 @@ public class AndroidWavAudioClip implements AudioClip {
 
   @Override
   public void pause() {
+    if (!isPlaying()) {
+      return;
+    }
+
     mediaPlayer.pause();
   }
 
   @Override
   public void stop() {
-    mediaPlayer.stop();
-    loopCount = AudioClip.CONTINUOUS_LOOPING;
+    mediaPlayer.pause();
+    mediaPlayer.seekTo(0);
+    loopCount = 0;
   }
 
   @Override
