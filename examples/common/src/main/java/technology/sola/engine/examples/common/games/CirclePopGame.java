@@ -12,6 +12,7 @@ import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
+import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.system.PhysicsSystem;
@@ -53,6 +54,8 @@ public class CirclePopGame extends SolaWithDefaults {
     ));
 
     guiDocument().setRootElement(scoreGuiElement);
+
+    platform().getViewport().setAspectMode(AspectMode.STRETCH);
   }
 
   private class PlayerInputSystem extends EcsSystem {

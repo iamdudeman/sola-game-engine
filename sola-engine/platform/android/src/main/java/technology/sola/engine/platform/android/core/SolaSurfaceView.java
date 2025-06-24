@@ -1,10 +1,7 @@
 package technology.sola.engine.platform.android.core;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Rect;
+import android.graphics.*;
 import android.view.SurfaceView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
@@ -61,6 +58,7 @@ public class SolaSurfaceView extends SurfaceView {
       aspectRatioSizing.height() + aspectRatioSizing.y()
     );
 
+    canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
     canvas.drawBitmap(bitmap, src, dest, paint);
   }
 
