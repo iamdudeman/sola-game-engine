@@ -19,6 +19,7 @@ import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
+import technology.sola.engine.input.Key;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.input.MouseWheelEvent;
@@ -30,6 +31,8 @@ import technology.sola.engine.platform.android.core.AndroidRestClient;
 import technology.sola.engine.platform.android.core.AndroidSocketClient;
 import technology.sola.logging.SolaLogger;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 @NullMarked
@@ -37,6 +40,8 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
   private static final SolaLogger LOGGER = SolaLogger.of(AndroidSolaPlatform.class);
   private final SolaAndroidActivity hostActivity;
   private final boolean useSoftwareRendering;
+  private final List<Consumer<KeyEvent>> keyPressedConsumers = new ArrayList<>();
+  private final List<Consumer<KeyEvent>> keyReleasedConsumers = new ArrayList<>();
 
   public AndroidSolaPlatform(AndroidSolaPlatformConfig androidSolaPlatformConfig, SolaAndroidActivity hostActivity) {
     this.hostActivity = hostActivity;
@@ -53,12 +58,12 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
 
   @Override
   public void onKeyPressed(Consumer<KeyEvent> consumer) {
-
+    keyPressedConsumers.add(consumer);
   }
 
   @Override
   public void onKeyReleased(Consumer<KeyEvent> consumer) {
-
+    keyReleasedConsumers.add(consumer);
   }
 
   @Override
@@ -83,8 +88,6 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
 
   @Override
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
-    hostActivity.setTitle(solaConfiguration.title());
-
     solaEventHub.add(GameLoopEvent.class, event -> {
       if (event.state() == GameLoopState.STOPPED) {
         if (socketClient.isConnected()) {
@@ -151,5 +154,47 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
     } else if (event == Lifecycle.Event.ON_PAUSE) {
       solaEventHub.emit(new GameLoopEvent(GameLoopState.PAUSE));
     }
+  }
+
+  void emitAndroidKeyDown(android.view.KeyEvent event) {
+    var keyEvent = new KeyEvent(mapKeyCode(event.getKeyCode()));
+
+    for (var consumer : keyPressedConsumers) {
+      consumer.accept(keyEvent);
+    }
+  }
+
+  void emitAndroidKeyUp(android.view.KeyEvent event) {
+    var keyEvent = new KeyEvent(mapKeyCode(event.getKeyCode()));
+
+    for (var consumer : keyReleasedConsumers) {
+      consumer.accept(keyEvent);
+    }
+  }
+
+  private int mapKeyCode(int androidKeyCode) {
+    if (androidKeyCode == android.view.KeyEvent.KEYCODE_DPAD_UP) {
+      return Key.UP.getCode();
+    } else if (androidKeyCode == android.view.KeyEvent.KEYCODE_DPAD_DOWN) {
+      return Key.DOWN.getCode();
+    } else if (androidKeyCode == android.view.KeyEvent.KEYCODE_DPAD_LEFT) {
+      return Key.LEFT.getCode();
+    } else if (androidKeyCode == android.view.KeyEvent.KEYCODE_DPAD_RIGHT) {
+      return Key.RIGHT.getCode();
+    } else if (androidKeyCode == android.view.KeyEvent.KEYCODE_SPACE) {
+      return Key.SPACE.getCode();
+    } else if (androidKeyCode == android.view.KeyEvent.KEYCODE_ENTER) {
+      return Key.ENTER.getCode();
+    }
+
+    if (androidKeyCode >= android.view.KeyEvent.KEYCODE_0 && androidKeyCode <= android.view.KeyEvent.KEYCODE_9) {
+      // Handle number keys
+      return (androidKeyCode + 41);
+    } else if (androidKeyCode >= android.view.KeyEvent.KEYCODE_A && androidKeyCode <= android.view.KeyEvent.KEYCODE_Z) {
+      // Handle alphabet keys
+      return (androidKeyCode + 36);
+    }
+
+    throw new UnsupportedOperationException("Unsupported Android key code: " + androidKeyCode);
   }
 }

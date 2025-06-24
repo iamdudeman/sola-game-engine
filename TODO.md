@@ -1,14 +1,17 @@
 # sola-game-engine TODO list
 
 * implement Android platform fully
+    * bugs
+        * ParticleExample - No virtual method nextFloat(FF)F in class Ljava/util/Random; or its super classes
     * must haves
-        * "mouse" input
-        * keyboard input
-        * touch input???? (see below todo item)
+        * "mouse" input (maybe this can be "single touch" input simulation?)
+        * touch input???? (see below todo item) (how to handle multitouch)
     * nice to haves
         * "Platform rendering" stub like other platforms
         * SocketClient
         * RestClient
+        * keyboard input not fully implemented
+            * AndroidSolaPlatform#mapKeyCode does not support all key codes!
 * JavaDocs + package-info.java files
 * release and release signed dist tasks
     * ensure assets are all included in the apk!

@@ -3,6 +3,7 @@ package technology.sola.engine.platform.android;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -93,6 +94,20 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
     if (hasFocus) {
       hideSystemUi();
     }
+  }
+
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    platform.emitAndroidKeyDown(event);
+
+    return super.onKeyDown(keyCode, event);
+  }
+
+  @Override
+  public boolean onKeyUp(int keyCode, KeyEvent event) {
+    platform.emitAndroidKeyUp(event);
+
+    return super.onKeyUp(keyCode, event);
   }
 
   private void hideSystemUi() {
