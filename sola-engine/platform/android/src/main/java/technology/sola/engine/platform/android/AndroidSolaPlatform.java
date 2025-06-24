@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.android;
 
+import android.view.MotionEvent;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleEventObserver;
 import androidx.lifecycle.LifecycleOwner;
@@ -19,10 +20,7 @@ import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
-import technology.sola.engine.input.Key;
-import technology.sola.engine.input.KeyEvent;
-import technology.sola.engine.input.MouseEvent;
-import technology.sola.engine.input.MouseWheelEvent;
+import technology.sola.engine.input.*;
 import technology.sola.engine.platform.android.assets.AndroidAudioClipAssetLoader;
 import technology.sola.engine.platform.android.assets.AndroidJsonAssetLoader;
 import technology.sola.engine.platform.android.assets.AndroidSolaImageLoader;
@@ -30,6 +28,7 @@ import technology.sola.engine.platform.android.core.AndroidRenderer;
 import technology.sola.engine.platform.android.core.AndroidRestClient;
 import technology.sola.engine.platform.android.core.AndroidSocketClient;
 import technology.sola.logging.SolaLogger;
+import technology.sola.math.SolaMath;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +41,9 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
   private final boolean useSoftwareRendering;
   private final List<Consumer<KeyEvent>> keyPressedConsumers = new ArrayList<>();
   private final List<Consumer<KeyEvent>> keyReleasedConsumers = new ArrayList<>();
+  private final List<Consumer<MouseEvent>> mouseMovedConsumers = new ArrayList<>();
+  private final List<Consumer<MouseEvent>> mousePressedConsumers = new ArrayList<>();
+  private final List<Consumer<MouseEvent>> mouseReleasedConsumers = new ArrayList<>();
 
   public AndroidSolaPlatform(AndroidSolaPlatformConfig androidSolaPlatformConfig, SolaAndroidActivity hostActivity) {
     this.hostActivity = hostActivity;
@@ -68,17 +70,17 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
 
   @Override
   public void onMouseMoved(Consumer<MouseEvent> consumer) {
-
+    mouseMovedConsumers.add(consumer);
   }
 
   @Override
   public void onMousePressed(Consumer<MouseEvent> consumer) {
-
+    mousePressedConsumers.add(consumer);
   }
 
   @Override
   public void onMouseReleased(Consumer<MouseEvent> consumer) {
-
+    mouseReleasedConsumers.add(consumer);
   }
 
   @Override
@@ -157,6 +159,10 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
   }
 
   void emitAndroidKeyDown(android.view.KeyEvent event) {
+    if (isKnownUnsupportedKeyCode(event.getKeyCode())) {
+      return;
+    }
+
     var keyEvent = new KeyEvent(mapKeyCode(event.getKeyCode()));
 
     for (var consumer : keyPressedConsumers) {
@@ -165,10 +171,51 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
   }
 
   void emitAndroidKeyUp(android.view.KeyEvent event) {
+    if (isKnownUnsupportedKeyCode(event.getKeyCode())) {
+      return;
+    }
+
     var keyEvent = new KeyEvent(mapKeyCode(event.getKeyCode()));
 
     for (var consumer : keyReleasedConsumers) {
       consumer.accept(keyEvent);
+    }
+  }
+
+  void emitAndroidSimulatedMouseEvent(MotionEvent event) {
+    boolean isSimulatedSecondary = false;
+    List<Consumer<MouseEvent>> consumers = switch (event.getActionMasked()) {
+      case MotionEvent.ACTION_DOWN -> mousePressedConsumers;
+      case MotionEvent.ACTION_UP -> mouseReleasedConsumers;
+      case MotionEvent.ACTION_MOVE -> mouseMovedConsumers;
+      case MotionEvent.ACTION_POINTER_DOWN ->  {
+        isSimulatedSecondary = true;
+        yield mousePressedConsumers;
+      }
+      case MotionEvent.ACTION_POINTER_UP ->  {
+        isSimulatedSecondary = true;
+        yield mouseReleasedConsumers;
+      }
+      default -> List.of();
+    };
+
+    if (consumers.isEmpty()) {
+      return;
+    }
+
+    MouseCoordinate adjusted = adjustMouseForViewport(
+      SolaMath.fastRound(event.getX()),
+      SolaMath.fastRound(event.getY())
+    );
+
+    var mouseEvent = new MouseEvent(
+      isSimulatedSecondary ? MouseButton.SECONDARY : MouseButton.PRIMARY,
+      adjusted.x(),
+      adjusted.y()
+    );
+
+    for (var consumer : consumers) {
+      consumer.accept(mouseEvent);
     }
   }
 
@@ -196,5 +243,9 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
     }
 
     throw new UnsupportedOperationException("Unsupported Android key code: " + androidKeyCode);
+  }
+
+  private boolean isKnownUnsupportedKeyCode(int keyCode) {
+    return keyCode == 4;
   }
 }

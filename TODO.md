@@ -17,7 +17,7 @@
     * ensure assets are all included in the apk!
 
 * Figure out how to handle TouchInput (probably at the same time as AndroidPlatform implementation)
-    * Primarily for browser but also could be supported in JavaFX
+    * Primarily for browser and Android but also could be supported in JavaFX
     * touchstart and touchend all hard coded to MouseButton.Primary currently
         * implement touchmove
             * Figure out TouchInput API

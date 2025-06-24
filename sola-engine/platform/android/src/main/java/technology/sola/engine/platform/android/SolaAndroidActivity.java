@@ -4,6 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -108,6 +109,13 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
     platform.emitAndroidKeyUp(event);
 
     return super.onKeyUp(keyCode, event);
+  }
+
+  @Override
+  public boolean onTouchEvent(MotionEvent event) {
+    platform.emitAndroidSimulatedMouseEvent(event);
+
+    return super.onTouchEvent(event);
   }
 
   private void hideSystemUi() {
