@@ -3,12 +3,12 @@ package technology.sola.engine.physics.component;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.utils.SolaRandom;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 /**
  * ParticleEmitterComponent is a {@link Component} that contains data for emitting {@link Particle}s as well as data for
@@ -17,7 +17,6 @@ import java.util.Random;
 @NullMarked
 public class ParticleEmitterComponent implements Component {
   private final List<Particle> particleList = new ArrayList<>();
-  private final Random random = new Random();
   private Color particleColor = Color.WHITE;
   private float particleMinLife = 1f;
   private float particleMaxLife = 2f;
@@ -59,10 +58,10 @@ public class ParticleEmitterComponent implements Component {
       Vector2D maxVel = particleMaxVelocity;
 
       for (int i = 0; i < particlesPerEmit; i++) {
-        float xVel = getRandomFloat(minVel.x(), maxVel.x());
-        float yVel = getRandomFloat(minVel.y(), maxVel.y());
-        float size = getRandomFloat(particleMinSize, particleMaxSize);
-        float life = getRandomFloat(particleMinLife, particleMaxLife);
+        float xVel = SolaRandom.nextFloat(minVel.x(), maxVel.x());
+        float yVel = SolaRandom.nextFloat(minVel.y(), maxVel.y());
+        float size = SolaRandom.nextFloat(particleMinSize, particleMaxSize);
+        float life = SolaRandom.nextFloat(particleMinLife, particleMaxLife);
 
         Particle particle = new Particle(
           particleColor, size, life, new Vector2D(0, 0), new Vector2D(xVel, yVel)
@@ -190,14 +189,6 @@ public class ParticleEmitterComponent implements Component {
    */
   public ParticleEmitterComponent setParticleSize(float size) {
     return setParticleSizeBounds(size, size);
-  }
-
-  private float getRandomFloat(float min, float max) {
-    if (Float.compare(min, max) == 0) {
-      return min;
-    }
-
-    return random.nextFloat(min, max);
   }
 
   /**

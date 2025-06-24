@@ -1,8 +1,6 @@
 # sola-game-engine TODO list
 
 * implement Android platform fully
-    * bugs
-        * ParticleExample - No virtual method nextFloat(FF)F in class Ljava/util/Random; or its super classes
     * must haves
         * "mouse" input (maybe this can be "single touch" input simulation?)
         * touch input???? (see below todo item) (how to handle multitouch)
