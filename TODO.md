@@ -25,7 +25,7 @@
     * RestClient
     * keyboard input not fully implemented
         * AndroidSolaPlatform#mapKeyCode does not support all key codes!
-    * release and release signed dist tasks
+    * SolaAndroidAppPlugin task for a signed release dist
 * Figure out how to handle TouchInput
     * Primarily for browser and Android but also could be supported in JavaFX
     * touchstart and touchend all hard coded to MouseButton.Primary currently
