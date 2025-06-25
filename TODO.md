@@ -1,26 +1,6 @@
 # sola-game-engine TODO list
 
-* implement Android platform fully
-    * must haves
-        * touch input???? (see below todo item) (how to handle multitouch)
-    * nice to haves
-        * "Platform rendering" stub like other platforms
-        * SocketClient
-        * RestClient
-        * keyboard input not fully implemented
-            * AndroidSolaPlatform#mapKeyCode does not support all key codes!
 * JavaDocs + package-info.java files
-* release and release signed dist tasks
-    * ensure assets are all included in the apk!
-
-* Figure out how to handle TouchInput (probably at the same time as AndroidPlatform implementation)
-    * Primarily for browser and Android but also could be supported in JavaFX
-    * touchstart and touchend all hard coded to MouseButton.Primary currently
-        * implement touchmove
-            * Figure out TouchInput API
-        * How to handle multitouch
-            * Switch JsMouseUtils to mouse events instead of pointer events
-
 
 ## Known Bugs List
 
@@ -40,6 +20,21 @@
 
 ## TODO List
 
+* Update examples to work off of mouse/touch only
+* implement Android platform fully
+    * "Platform rendering" stub like other platforms
+    * SocketClient
+    * RestClient
+    * keyboard input not fully implemented
+        * AndroidSolaPlatform#mapKeyCode does not support all key codes!
+    * release and release signed dist tasks
+* Figure out how to handle TouchInput
+    * Primarily for browser and Android but also could be supported in JavaFX
+    * touchstart and touchend all hard coded to MouseButton.Primary currently
+        * implement touchmove
+            * Figure out TouchInput API
+        * How to handle multitouch
+            * Switch JsMouseUtils to mouse events instead of pointer events
 * Add convenient ability to change entity render order based on Y position (or some other condition other than layers)
 * Consider generalizing Triangle renderer and collider to "Polygon" instead
 * research possible benefits of updating to Java 21
