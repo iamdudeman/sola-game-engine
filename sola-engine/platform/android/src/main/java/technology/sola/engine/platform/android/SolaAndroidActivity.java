@@ -16,7 +16,6 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.platform.android.config.Orientation;
-import technology.sola.engine.platform.android.core.SolaSurfaceView;
 
 /**
  * The base {@link android.app.Activity} class for a sola game to run on Android.
@@ -47,7 +46,7 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
    */
   public abstract Sola getInitialSola();
 
-  public SolaSurfaceView getSolaSurfaceView() {
+  SolaSurfaceView getSolaSurfaceView() {
     return solaSurfaceView;
   }
 

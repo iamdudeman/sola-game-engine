@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.android.core;
+package technology.sola.engine.platform.android;
 
 import android.content.Context;
 import android.graphics.*;
@@ -8,12 +8,12 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.graphics.screen.Viewport;
 
-public class SolaSurfaceView extends SurfaceView {
+class SolaSurfaceView extends SurfaceView {
   private final Paint paint = new Paint();
   private Canvas canvas;
   private Viewport viewport;
 
-  public SolaSurfaceView(Context context) {
+  SolaSurfaceView(Context context) {
     super(context);
 
     this.setLayoutParams(new ConstraintLayout.LayoutParams(
@@ -31,17 +31,17 @@ public class SolaSurfaceView extends SurfaceView {
     }
   }
 
-  public void setViewport(Viewport viewport) {
+  void setViewport(Viewport viewport) {
     this.viewport = viewport;
 
     viewport.resize(getWidth(), getHeight());
   }
 
-  public void startDrawing() {
+  void startDrawing() {
     canvas = getHolder().lockCanvas();
   }
 
-  public void drawFromSoftwareRenderer(SoftwareRenderer softwareRenderer, AspectRatioSizing aspectRatioSizing) {
+  void drawFromSoftwareRenderer(SoftwareRenderer softwareRenderer, AspectRatioSizing aspectRatioSizing) {
     if (canvas == null) {
       return;
     }
@@ -62,7 +62,7 @@ public class SolaSurfaceView extends SurfaceView {
     canvas.drawBitmap(bitmap, src, dest, paint);
   }
 
-  public void finishDrawing() {
+  void finishDrawing() {
     if (canvas == null) {
       return;
     }

@@ -34,6 +34,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * AndroidSolaPlatform is a {@link SolaPlatform} implementation for running a {@link technology.sola.engine.core.Sola}
+ * in an Android app. It requires a host {@link SolaAndroidActivity} to run in.
+ */
 @NullMarked
 public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventObserver {
   private static final SolaLogger LOGGER = SolaLogger.of(AndroidSolaPlatform.class);
@@ -45,6 +49,12 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
   private final List<Consumer<MouseEvent>> mousePressedConsumers = new ArrayList<>();
   private final List<Consumer<MouseEvent>> mouseReleasedConsumers = new ArrayList<>();
 
+  /**
+   * Creates an AndroidSolaPlatform instance with desired configuration for a host activity.
+   *
+   * @param androidSolaPlatformConfig the {@link AndroidSolaPlatformConfig}
+   * @param hostActivity              the host {@link SolaAndroidActivity}
+   */
   public AndroidSolaPlatform(AndroidSolaPlatformConfig androidSolaPlatformConfig, SolaAndroidActivity hostActivity) {
     this.hostActivity = hostActivity;
     socketClient = new AndroidSocketClient();

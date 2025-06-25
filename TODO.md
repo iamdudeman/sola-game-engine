@@ -1,7 +1,5 @@
 # sola-game-engine TODO list
 
-* JavaDocs + package-info.java files
-
 ## Known Bugs List
 
 * (verify if still bug) GuiElement parent undefined when changing roots
