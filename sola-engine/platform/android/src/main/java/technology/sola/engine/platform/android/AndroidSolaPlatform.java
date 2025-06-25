@@ -21,7 +21,7 @@ import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.input.*;
-import technology.sola.engine.platform.android.assets.AndroidAudioClipAssetLoader;
+import technology.sola.engine.platform.android.assets.audio.AndroidAudioClipAssetLoader;
 import technology.sola.engine.platform.android.assets.AndroidJsonAssetLoader;
 import technology.sola.engine.platform.android.assets.AndroidSolaImageLoader;
 import technology.sola.engine.platform.android.core.AndroidRenderer;

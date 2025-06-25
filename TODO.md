@@ -39,6 +39,7 @@
 * Consider generalizing Triangle renderer and collider to "Polygon" instead
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
+* Support .mp3 audio files for all platforms
 * File Storage API
     * Load and save JSON content (maybe other content too)
     * Browser implementation could open file dialog

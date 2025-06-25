@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.android.assets;
+package technology.sola.engine.platform.android.assets.audio;
 
 import android.content.res.AssetManager;
 import android.media.MediaPlayer;
@@ -6,13 +6,22 @@ import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.audio.AudioClip;
+import technology.sola.engine.platform.android.assets.AndroidAssetUtils;
 
 import java.io.IOException;
 
+/**
+ * An Android implementation of the {@link AudioClip} {@link technology.sola.engine.assets.AssetLoader}.
+ */
 @NullMarked
 public class AndroidAudioClipAssetLoader extends AssetLoader<AudioClip> {
   private final AssetManager assetManager;
 
+  /**
+   * Creates an instance of the asset loader.
+   *
+   * @param assetManager the Android {@link AssetManager}
+   */
   public AndroidAudioClipAssetLoader(AssetManager assetManager) {
     this.assetManager = assetManager;
   }

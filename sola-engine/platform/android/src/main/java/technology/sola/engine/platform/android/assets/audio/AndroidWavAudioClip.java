@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.android.assets;
+package technology.sola.engine.platform.android.assets.audio;
 
 import android.media.MediaPlayer;
 import org.jspecify.annotations.NullMarked;
@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * An Android implementation of {@link AudioClip}.
+ */
 @NullMarked
 public class AndroidWavAudioClip implements AudioClip {
   private final MediaPlayer mediaPlayer;
@@ -15,6 +18,11 @@ public class AndroidWavAudioClip implements AudioClip {
   private int loopCount = 0;
   private float volume = 0.5f;
 
+  /**
+   * Creates an instance of the audio clip wrapping an Android media player.
+   *
+   * @param mediaPlayer the {@link MediaPlayer} for the audio clip
+   */
   public AndroidWavAudioClip(MediaPlayer mediaPlayer) {
     this.mediaPlayer = mediaPlayer;
 
@@ -25,7 +33,7 @@ public class AndroidWavAudioClip implements AudioClip {
         loopCount--;
       }
 
-      if (loopCount == AudioClip.CONTINUOUS_LOOPING ||  loopCount > 0) {
+      if (loopCount == AudioClip.CONTINUOUS_LOOPING || loopCount > 0) {
         mp.start();
       }
 

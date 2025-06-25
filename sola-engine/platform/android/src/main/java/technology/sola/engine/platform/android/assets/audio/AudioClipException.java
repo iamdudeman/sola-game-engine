@@ -1,4 +1,4 @@
-package technology.sola.engine.platform.android.assets;
+package technology.sola.engine.platform.android.assets.audio;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.logging.SolaLogger;

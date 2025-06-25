@@ -10,10 +10,18 @@ import technology.sola.engine.assets.graphics.SolaImage;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * An Android implementation of the {@link SolaImage} {@link technology.sola.engine.assets.AssetLoader}.
+ */
 @NullMarked
 public class AndroidSolaImageLoader extends AssetLoader<SolaImage> {
   private final AssetManager assetManager;
 
+  /**
+   * Creates an instance of this asset loader.
+   *
+   * @param assetManager the Android {@link AssetManager}
+   */
   public AndroidSolaImageLoader(AssetManager assetManager) {
     this.assetManager = assetManager;
   }

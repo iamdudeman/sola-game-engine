@@ -10,10 +10,18 @@ import technology.sola.json.SolaJson;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * An Android implementation of the {@link JsonElementAsset} {@link technology.sola.engine.assets.AssetLoader}.
+ */
 @NullMarked
 public class AndroidJsonAssetLoader extends AssetLoader<JsonElementAsset> {
   private final AssetManager assetManager;
 
+  /**
+   * Creates an instance of this asset loader.
+   *
+   * @param assetManager the Android {@link AssetManager}
+   */
   public AndroidJsonAssetLoader(AssetManager assetManager) {
     this.assetManager = assetManager;
   }
