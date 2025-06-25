@@ -68,9 +68,10 @@ class SolaAndroidAppPlugin : Plugin<Project> {
         rename { "${project.name}-${project.version}-debug.apk" }
       }
 
-      from(project.file("build/outputs/apk/release/android-release-unsigned.apk")) {
-        rename { "${project.name}-${project.version}-release-unsigned.apk" }
-      }
+      // todo this doesn't work properly yet
+      // from(project.file("build/outputs/apk/release/android-release-unsigned.apk")) {
+      //  rename { "${project.name}-${project.version}-release-unsigned.apk" }
+      // }
 
       // todo need release signed as well
 

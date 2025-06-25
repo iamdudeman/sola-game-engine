@@ -45,6 +45,6 @@ public class AndroidSocketClient implements SocketClient {
   @Override
   public boolean isConnected() {
     // todo implement
-    throw new UnsupportedOperationException("Not supported yet.");
+    return false;
   }
 }
