@@ -28,7 +28,6 @@ public class AndroidSolaLoggerFactory implements SolaLoggerFactory {
     return logger;
   }
 
-
   private static class AndroidLoggingHandler extends Handler {
     @Override
     public void close() {
@@ -40,8 +39,9 @@ public class AndroidSolaLoggerFactory implements SolaLoggerFactory {
 
     @Override
     public void publish(LogRecord record) {
-      if (!super.isLoggable(record))
+      if (!super.isLoggable(record)) {
         return;
+      }
 
       String name = record.getLoggerName();
       int maxLength = 30;

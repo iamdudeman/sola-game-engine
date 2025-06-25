@@ -146,7 +146,7 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
 
     return useSoftwareRendering
       ? super.buildRenderer(solaConfiguration)
-      : new AndroidRenderer();
+      : new AndroidRenderer(solaConfiguration.rendererWidth(), solaConfiguration.rendererHeight());
   }
 
   @Override
