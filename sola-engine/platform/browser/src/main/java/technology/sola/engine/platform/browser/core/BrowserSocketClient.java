@@ -45,6 +45,7 @@ public class BrowserSocketClient implements SocketClient {
 
     JsNetworkUtils.disconnect();
     isConnected = false;
+    networkQueue.clear();
   }
 
   @Override
