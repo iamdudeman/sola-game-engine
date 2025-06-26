@@ -1,8 +1,6 @@
-package technology.sola.engine.platform.javafx.core;
+package technology.sola.engine.networking.rest;
 
 import org.jspecify.annotations.NullMarked;
-import technology.sola.engine.networking.rest.HttpResponse;
-import technology.sola.engine.networking.rest.RestClient;
 import technology.sola.json.JsonElement;
 import technology.sola.json.SolaJson;
 import technology.sola.logging.SolaLogger;
@@ -17,11 +15,11 @@ import java.util.Scanner;
 import java.util.function.Consumer;
 
 /**
- * The {@link technology.sola.engine.platform.javafx.JavaFxSolaPlatform} implementation of {@link RestClient}.
+ * The Java-based implementation of {@link RestClient} utilizing {@link HttpURLConnection}.
  */
 @NullMarked
-public class JavaFxRestClient implements RestClient {
-  private static final SolaLogger LOGGER = SolaLogger.of(JavaFxRestClient.class);
+public class JavaRestClient implements RestClient {
+  private static final SolaLogger LOGGER = SolaLogger.of(JavaRestClient.class);
 
   @Override
   public void request(String method, String path, JsonElement body, Consumer<HttpResponse> httpResponseSupplier) {
