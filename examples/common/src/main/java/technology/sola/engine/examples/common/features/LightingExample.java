@@ -23,9 +23,8 @@ import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.physics.system.ParticleSystem;
+import technology.sola.engine.utils.SolaRandom;
 import technology.sola.math.linear.Vector2D;
-
-import java.util.Random;
 
 /**
  * LightingExample is a {@link technology.sola.engine.core.Sola} for demoing lighting for the sola game engine.
@@ -66,12 +65,11 @@ public class LightingExample extends SolaWithDefaults {
   }
 
   private World buildWorld() {
-    Random random = new Random();
     World world = new World(1500);
 
     for (int i = 0; i < platform().getRenderer().getWidth(); i += 8) {
       for (int j = 0; j < platform().getRenderer().getHeight(); j += 8) {
-        int grassTileIndex = random.nextInt(3) + 1;
+        int grassTileIndex = SolaRandom.nextInt(3) + 1;
         String grassSprite = "grass_" + grassTileIndex;
 
         world.createEntity(
@@ -82,8 +80,8 @@ public class LightingExample extends SolaWithDefaults {
     }
 
     for (int i = 0; i < 200; i++) {
-      int x = random.nextInt(platform().getRenderer().getWidth() - 20) + 10;
-      int y = random.nextInt(platform().getRenderer().getHeight() - 20) + 10;
+      int x = SolaRandom.nextInt(platform().getRenderer().getWidth() - 20) + 10;
+      int y = SolaRandom.nextInt(platform().getRenderer().getHeight() - 20) + 10;
 
       world.createEntity(
         new TransformComponent(x, y),
@@ -141,10 +139,9 @@ public class LightingExample extends SolaWithDefaults {
       }
 
       if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
-        Random random = new Random();
         Vector2D coordinate = solaGraphics().screenToWorldCoordinate(mouseInput.getMousePosition());
-        float radius = random.nextFloat(8f, 32f);
-        int intensity = random.nextInt(25, 220);
+        float radius = SolaRandom.nextFloat(8f, 32f);
+        int intensity = SolaRandom.nextInt(25, 220);
 
         var entity = world.createEntity(
           new TransformComponent(coordinate.x(), coordinate.y()),

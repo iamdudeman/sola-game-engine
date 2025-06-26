@@ -4,16 +4,14 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.utils.SolaRandom;
 import technology.sola.math.SolaMath;
-
-import java.util.Random;
 
 /**
  * LightComponent is a {@link Component} containing data for rendering lights.
  */
 @NullMarked
 public class LightComponent implements Component {
-  private final Random random = new Random();
   private float radius;
   private Color color;
   @Nullable
@@ -51,8 +49,8 @@ public class LightComponent implements Component {
    */
   public void tickFlicker(float deltaTime) {
     if (lightFlicker != null) {
-      if (random.nextFloat() < lightFlicker.rate()) {
-        int nextValue = SolaMath.fastRound(255 * random.nextFloat(lightFlicker.min(), lightFlicker.max()));
+      if (SolaRandom.nextFloat() < lightFlicker.rate()) {
+        int nextValue = SolaMath.fastRound(255 * SolaRandom.nextFloat(lightFlicker.min(), lightFlicker.max()));
         int smoothedValue = lightFlicker.smoothingFunction().apply(color.getAlpha(), nextValue, deltaTime);
 
         setColor(color.updateAlpha(smoothedValue));

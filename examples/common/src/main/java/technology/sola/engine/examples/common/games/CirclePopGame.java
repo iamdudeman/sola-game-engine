@@ -12,13 +12,13 @@ import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
+import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.system.PhysicsSystem;
+import technology.sola.engine.utils.SolaRandom;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.linear.Vector2D;
-
-import java.util.Random;
 
 /**
  * CirclePop is a {@link technology.sola.engine.core.Sola} little game that also stress tests rendering for the sola
@@ -54,6 +54,8 @@ public class CirclePopGame extends SolaWithDefaults {
     ));
 
     guiDocument().setRootElement(scoreGuiElement);
+
+    platform().getViewport().setAspectMode(AspectMode.STRETCH);
   }
 
   private class PlayerInputSystem extends EcsSystem {
@@ -81,21 +83,20 @@ public class CirclePopGame extends SolaWithDefaults {
   }
 
   private World buildWorld() {
-    Random random = new Random();
     World world = new World(10000);
 
     for (int i = 0; i < world.getMaxEntityCount(); i++) {
-      int x = random.nextInt(0, 800);
-      int y = random.nextInt(0, 600);
-      int scale = random.nextInt(3, 20);
+      int x = SolaRandom.nextInt(0, 800);
+      int y = SolaRandom.nextInt(0, 600);
+      int scale = SolaRandom.nextInt(3, 20);
 
-      int red = random.nextInt(0, 256);
-      int green = random.nextInt(0, 256);
-      int blue = random.nextInt(0, 256);
-      boolean filled = random.nextBoolean();
+      int red = SolaRandom.nextInt(0, 256);
+      int green = SolaRandom.nextInt(0, 256);
+      int blue = SolaRandom.nextInt(0, 256);
+      boolean filled = SolaRandom.nextBoolean();
 
-      float velX = random.nextFloat(-50, 50);
-      float velY = random.nextFloat(-50, 50);
+      float velX = SolaRandom.nextFloat(-50, 50);
+      float velY = SolaRandom.nextFloat(-50, 50);
 
       DynamicBodyComponent dynamicBodyComponent = new DynamicBodyComponent(true);
 
