@@ -31,7 +31,7 @@ public class ButtonGuiElement extends BaseInputGuiElement<BaseStyles, ButtonGuiE
     });
 
     events().mouseReleased().on(mouseEvent -> {
-      if (isHovered() && isActive()) {
+      if (isFocussed() && isActive()) {
         onAction.run();
       }
     });

@@ -69,6 +69,8 @@ public class RenderingExample extends Sola {
 
     platform().getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
 
+    platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
+
     assetLoaderProvider.get(SolaImage.class)
       .addAssetMapping("test", "assets/sprites/test_tiles.png");
     assetLoaderProvider.get(SpriteSheet.class)
