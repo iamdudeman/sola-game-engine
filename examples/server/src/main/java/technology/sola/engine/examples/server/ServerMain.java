@@ -19,6 +19,9 @@ import technology.sola.engine.server.ClientConnection;
 import technology.sola.engine.server.SolaServer;
 import technology.sola.engine.server.rest.SolaResponse;
 import technology.sola.json.JsonObject;
+import technology.sola.logging.JavaSolaLoggerFactory;
+import technology.sola.logging.SolaLogLevel;
+import technology.sola.logging.SolaLogger;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.HashMap;
@@ -31,6 +34,10 @@ import java.util.stream.Collectors;
 @NullMarked
 public class ServerMain {
   private static final int MAX_PLAYERS = 10;
+
+  static {
+    SolaLogger.configure(SolaLogLevel.WARNING, new JavaSolaLoggerFactory());
+  }
 
   /**
    * Entry point for Server example.
