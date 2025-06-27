@@ -42,15 +42,7 @@ public class JavaSocketClient implements SocketClient {
       return;
     }
 
-    try {
-      bufferedOutputStream.write(socketMessageEncoder.encodeForRaw(socketMessage));
-      bufferedOutputStream.flush();
-    } catch (SocketException ex) {
-      LOGGER.error("Something happened with the connection", ex);
-      disconnect();
-    } catch (IOException ex) {
-      throw new RuntimeException(ex);
-    }
+    new Thread(new SendMessageRunnable(socketMessage)).start();
   }
 
   @Override
@@ -60,34 +52,7 @@ public class JavaSocketClient implements SocketClient {
       return;
     }
 
-    try {
-      socket = new Socket(host, port);
-
-      new Thread(() -> {
-        try {
-          bufferedOutputStream = new BufferedOutputStream(socket.getOutputStream());
-          bufferedInputStream = new BufferedInputStream(socket.getInputStream());
-          bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-          printWriter = new PrintWriter(socket.getOutputStream());
-          isConnected = true;
-
-          printWriter.write("hello\r\n");
-          printWriter.flush();
-
-          while (isConnected) {
-            SocketMessage socketMessage = socketMessageDecoder.decodeForRaw(bufferedInputStream);
-
-            networkQueue.addLast(socketMessage);
-          }
-        } catch (SocketException ex) {
-          // this happens when a disconnect happens
-        } catch (IOException ex) {
-          throw new RuntimeException(ex);
-        }
-      }).start();
-    } catch (IOException ex) {
-      throw new RuntimeException(ex);
-    }
+    new Thread(new ConnectRunnable(host, port)).start();
   }
 
   @Override
@@ -97,33 +62,103 @@ public class JavaSocketClient implements SocketClient {
       return;
     }
 
-    try {
-      LOGGER.info("Stopping connection to %s", socket.getInetAddress().toString());
-      isConnected = false;
-      if (socket != null) {
-        socket.close();
-      }
-      if (bufferedReader != null) {
-        bufferedReader.close();
-      }
-      if (printWriter != null) {
-        printWriter.close();
-      }
-      if (bufferedInputStream != null) {
-        bufferedInputStream.close();
-      }
-      if (bufferedOutputStream != null) {
-        bufferedOutputStream.close();
-      }
-    } catch (IOException ex) {
-      LOGGER.error(ex.getMessage(), ex);
-    }
-
-    networkQueue.clear();
+    new Thread(new DisconnectRunnable()).start();
   }
 
   @Override
   public boolean isConnected() {
     return isConnected;
+  }
+
+  private class SendMessageRunnable implements Runnable {
+    private final SocketMessage socketMessage;
+
+    public SendMessageRunnable(SocketMessage socketMessage) {
+      this.socketMessage = socketMessage;
+    }
+
+    @Override
+    public void run() {
+      try {
+        bufferedOutputStream.write(socketMessageEncoder.encodeForRaw(socketMessage));
+        bufferedOutputStream.flush();
+      } catch (SocketException ex) {
+        LOGGER.error("Something happened with the connection", ex);
+        disconnect();
+      } catch (IOException ex) {
+        throw new RuntimeException(ex);
+      }
+    }
+  }
+
+  private class ConnectRunnable implements Runnable {
+    private final String host;
+    private final int port;
+
+    public ConnectRunnable(String host, int port) {
+      this.host = host;
+      this.port = port;
+    }
+
+    @Override
+    public void run() {
+      try {
+        socket = new Socket(host, port);
+
+        new Thread(() -> {
+          try {
+            bufferedOutputStream = new BufferedOutputStream(socket.getOutputStream());
+            bufferedInputStream = new BufferedInputStream(socket.getInputStream());
+            bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            printWriter = new PrintWriter(socket.getOutputStream());
+            isConnected = true;
+
+            printWriter.write("hello\r\n");
+            printWriter.flush();
+
+            while (isConnected) {
+              SocketMessage socketMessage = socketMessageDecoder.decodeForRaw(bufferedInputStream);
+
+              networkQueue.addLast(socketMessage);
+            }
+          } catch (SocketException ex) {
+            // this happens when a disconnect happens
+          } catch (IOException ex) {
+            throw new RuntimeException(ex);
+          }
+        }).start();
+      } catch (IOException ex) {
+        throw new RuntimeException(ex);
+      }
+    }
+  }
+
+  private class DisconnectRunnable implements Runnable {
+    @Override
+    public void run() {
+      try {
+        LOGGER.info("Stopping connection to %s", socket.getInetAddress().toString());
+        isConnected = false;
+        if (socket != null) {
+          socket.close();
+        }
+        if (bufferedReader != null) {
+          bufferedReader.close();
+        }
+        if (printWriter != null) {
+          printWriter.close();
+        }
+        if (bufferedInputStream != null) {
+          bufferedInputStream.close();
+        }
+        if (bufferedOutputStream != null) {
+          bufferedOutputStream.close();
+        }
+      } catch (IOException ex) {
+        LOGGER.error(ex.getMessage(), ex);
+      }
+
+      networkQueue.clear();
+    }
   }
 }

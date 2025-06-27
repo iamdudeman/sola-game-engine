@@ -18,6 +18,7 @@ import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
 import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
+import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.networking.socket.SocketMessage;
 
@@ -56,6 +57,8 @@ public class NetworkingExample extends SolaWithDefaults {
       .applyToTree(rootElement);
 
     guiDocument().setRootElement(rootElement);
+
+    platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
   }
 
   private class PlayerSystem extends EcsSystem {

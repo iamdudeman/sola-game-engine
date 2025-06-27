@@ -23,49 +23,59 @@ public class JavaRestClient implements RestClient {
 
   @Override
   public void request(String method, String path, JsonElement body, Consumer<HttpResponse> httpResponseSupplier) {
-    try {
-      URL url = new URL(path);
+    new Thread(new RequestRunnable(method, path, body, httpResponseSupplier)).start();
+  }
 
+  private record RequestRunnable(
+    String method,
+    String path,
+    JsonElement body,
+    Consumer<HttpResponse> httpResponseSupplier
+  ) implements Runnable {
+    @Override
+    public void run() {
       try {
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        URL url = new URL(path);
 
-        connection.setInstanceFollowRedirects(false);
-        connection.setRequestMethod(method);
-        connection.setRequestProperty("accept", "application/json");
-        connection.setRequestProperty("charset", "utf-8");
-        connection.setUseCaches(false);
+        try {
+          HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-        if (!method.equalsIgnoreCase("GET")) {
-          byte[] bodyBytes = body.toString().getBytes(StandardCharsets.UTF_8);
+          connection.setInstanceFollowRedirects(false);
+          connection.setRequestMethod(method);
+          connection.setRequestProperty("accept", "application/json");
+          connection.setRequestProperty("charset", "utf-8");
+          connection.setUseCaches(false);
 
-          connection.setDoOutput(true);
-          connection.setRequestProperty("Content-Length", Integer.toString(bodyBytes.length));
+          if (!method.equalsIgnoreCase("GET")) {
+            byte[] bodyBytes = body.toString().getBytes(StandardCharsets.UTF_8);
 
-          try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
-            wr.write(bodyBytes);
-          }
-        }
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Content-Length", Integer.toString(bodyBytes.length));
 
-        // send the request and get a response
-        try (Scanner scanner = new Scanner(connection.getInputStream())) {
-          StringBuilder stringBuilder = new StringBuilder();
-
-          while (scanner.hasNext()) {
-            stringBuilder.append(scanner.next());
+            try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
+              wr.write(bodyBytes);
+            }
           }
 
-          int status = connection.getResponseCode();
-          String response = stringBuilder.toString();
+          // send the request and get a response
+          try (Scanner scanner = new Scanner(connection.getInputStream())) {
+            StringBuilder stringBuilder = new StringBuilder();
 
-          System.out.println(status + " " + response);
+            while (scanner.hasNext()) {
+              stringBuilder.append(scanner.next());
+            }
 
-          httpResponseSupplier.accept(new HttpResponse(status, new SolaJson().parse(response)));
+            int status = connection.getResponseCode();
+            String response = stringBuilder.toString();
+
+            httpResponseSupplier.accept(new HttpResponse(status, new SolaJson().parse(response)));
+          }
+        } catch (IOException ex) {
+          LOGGER.error("Request %s %s failed", ex, method, path);
         }
-      } catch (IOException ex) {
-        LOGGER.error("Request %s %s failed", ex, method, path);
+      } catch (MalformedURLException ex) {
+        LOGGER.error("Invalid url: %s", ex, path);
       }
-    } catch (MalformedURLException ex) {
-      LOGGER.error("Invalid url: %s", ex, path);
     }
   }
 }
