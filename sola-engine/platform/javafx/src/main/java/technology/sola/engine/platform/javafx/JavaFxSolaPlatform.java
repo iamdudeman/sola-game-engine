@@ -29,14 +29,14 @@ import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.input.MouseWheelEvent;
+import technology.sola.engine.networking.rest.JavaRestClient;
+import technology.sola.engine.networking.socket.JavaSocketClient;
 import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
 import technology.sola.engine.platform.javafx.assets.audio.JavaFxAudioClipAssetLoader;
 import technology.sola.engine.platform.javafx.assets.JavaFxJsonAssetLoader;
 import technology.sola.engine.platform.javafx.assets.graphics.JavaFxSolaImageAssetLoader;
 import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
 import technology.sola.engine.platform.javafx.core.JavaFxRenderer;
-import technology.sola.engine.platform.javafx.core.JavaFxRestClient;
-import technology.sola.engine.platform.javafx.core.JavaFxSocketClient;
 import technology.sola.logging.SolaLogger;
 
 import java.io.IOException;
@@ -78,8 +78,8 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     this.initialWindowWidth = platformConfig.initialWindowWidth();
     this.initialWindowHeight = platformConfig.initialWindowHeight();
 
-    socketClient = new JavaFxSocketClient();
-    restClient = new JavaFxRestClient();
+    socketClient = new JavaSocketClient();
+    restClient = new JavaRestClient();
   }
 
   @Override

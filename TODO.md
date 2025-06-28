@@ -19,13 +19,11 @@
 ## TODO List
 
 * Update examples to work off of mouse/touch only
-* implement Android platform fully
+* implement the Android platform fully
     * "Platform rendering" stub like other platforms
-    * SocketClient
-    * RestClient
-    * keyboard input not fully implemented
+    * keyboard input is not fully implemented
         * AndroidSolaPlatform#mapKeyCode does not support all key codes!
-    * SolaAndroidAppPlugin task for a unsigned release dist (current is bugged with bad package)
+    * SolaAndroidAppPlugin task for an unsigned release dist (current is bugged with bad package)
     * SolaAndroidAppPlugin task for a signed release dist
 * Figure out how to handle TouchInput
     * Primarily for browser and Android but also could be supported in JavaFX

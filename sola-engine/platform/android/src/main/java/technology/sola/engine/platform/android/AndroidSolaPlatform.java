@@ -21,12 +21,12 @@ import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.input.*;
+import technology.sola.engine.networking.rest.JavaRestClient;
+import technology.sola.engine.networking.socket.JavaSocketClient;
 import technology.sola.engine.platform.android.assets.audio.AndroidAudioClipAssetLoader;
 import technology.sola.engine.platform.android.assets.AndroidJsonAssetLoader;
 import technology.sola.engine.platform.android.assets.AndroidSolaImageLoader;
 import technology.sola.engine.platform.android.core.AndroidRenderer;
-import technology.sola.engine.platform.android.core.AndroidRestClient;
-import technology.sola.engine.platform.android.core.AndroidSocketClient;
 import technology.sola.logging.SolaLogger;
 import technology.sola.math.SolaMath;
 
@@ -50,15 +50,15 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
   private final List<Consumer<MouseEvent>> mouseReleasedConsumers = new ArrayList<>();
 
   /**
-   * Creates an AndroidSolaPlatform instance with desired configuration for a host activity.
+   * Creates an AndroidSolaPlatform instance with the desired configuration for a host activity.
    *
    * @param androidSolaPlatformConfig the {@link AndroidSolaPlatformConfig}
    * @param hostActivity              the host {@link SolaAndroidActivity}
    */
   public AndroidSolaPlatform(AndroidSolaPlatformConfig androidSolaPlatformConfig, SolaAndroidActivity hostActivity) {
     this.hostActivity = hostActivity;
-    socketClient = new AndroidSocketClient();
-    restClient = new AndroidRestClient();
+    socketClient = new JavaSocketClient();
+    restClient = new JavaRestClient();
 
     useSoftwareRendering = androidSolaPlatformConfig.useSoftwareRendering();
   }
@@ -95,7 +95,7 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
 
   @Override
   public void onMouseWheel(Consumer<MouseWheelEvent> consumer) {
-
+    // todo
   }
 
   @Override
