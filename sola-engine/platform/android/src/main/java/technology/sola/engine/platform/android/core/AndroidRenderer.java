@@ -1,5 +1,7 @@
 package technology.sola.engine.platform.android.core;
 
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.DefaultFont;
@@ -26,17 +28,32 @@ public class AndroidRenderer implements Renderer {
   private final List<Layer> layers = new ArrayList<>();
   private final int width;
   private final int height;
+  private final Paint fillPaint = new Paint();
+  private final Paint strokePaint = new Paint();
+  private Canvas canvas = new Canvas();
   private Font font;
 
   /**
    * Creates an AndroidRenderer instance.
    *
-   * @param width width of the renderer
+   * @param width  width of the renderer
    * @param height height of the renderer
    */
   public AndroidRenderer(int width, int height) {
     this.width = width;
     this.height = height;
+
+    fillPaint.setStyle(Paint.Style.FILL);
+    strokePaint.setStyle(Paint.Style.STROKE);
+  }
+
+  /**
+   * Sets the {@link Canvas} that is used for drawing.
+   *
+   * @param canvas the {@link Canvas} instance
+   */
+  public void setCanvas(Canvas canvas) {
+    this.canvas = canvas;
   }
 
   @Override
@@ -93,7 +110,9 @@ public class AndroidRenderer implements Renderer {
 
   @Override
   public void clear(Color color) {
-    logMethodNotImplemented("clear"); // todo implement
+    fillPaint.setColor(color.hexInt());
+
+    canvas.drawRect(0, 0, width, height, fillPaint);
   }
 
   @Override
@@ -118,22 +137,30 @@ public class AndroidRenderer implements Renderer {
 
   @Override
   public void drawRect(float x, float y, float width, float height, Color color) {
-    logMethodNotImplemented("drawRect"); // todo implement
+    strokePaint.setColor(color.hexInt());
+
+    canvas.drawRect(x, y, x + width, y + height, strokePaint);
   }
 
   @Override
   public void fillRect(float x, float y, float width, float height, Color color) {
-    logMethodNotImplemented("fillRect"); // todo implement
+    fillPaint.setColor(color.hexInt());
+
+    canvas.drawRect(x, y, x + width, y + height, fillPaint);
   }
 
   @Override
   public void drawCircle(float x, float y, float radius, Color color) {
-    logMethodNotImplemented("drawCircle"); // todo implement
+    strokePaint.setColor(color.hexInt());
+
+    canvas.drawCircle(x, y, radius, strokePaint);
   }
 
   @Override
   public void fillCircle(float x, float y, float radius, Color color) {
-    logMethodNotImplemented("fillCircle"); // todo implement
+    fillPaint.setColor(color.hexInt());
+
+    canvas.drawCircle(x, y, radius, fillPaint);
   }
 
   @Override

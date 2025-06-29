@@ -20,7 +20,7 @@
 
 * Update examples to work off of mouse/touch only
 * implement the Android platform fully
-    * "Platform rendering" stub like other platforms
+    * Stabilize game loop (ensure performance is good)
     * keyboard input is not fully implemented
         * AndroidSolaPlatform#mapKeyCode does not support all key codes!
     * SolaAndroidAppPlugin task for an unsigned release dist (current is bugged with bad package)

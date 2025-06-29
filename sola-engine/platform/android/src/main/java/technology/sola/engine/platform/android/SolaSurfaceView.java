@@ -37,8 +37,10 @@ class SolaSurfaceView extends SurfaceView {
     viewport.resize(getWidth(), getHeight());
   }
 
-  void startDrawing() {
+  Canvas startDrawing() {
     canvas = getHolder().lockCanvas();
+
+    return canvas;
   }
 
   void drawFromSoftwareRenderer(SoftwareRenderer softwareRenderer, AspectRatioSizing aspectRatioSizing) {
@@ -58,7 +60,6 @@ class SolaSurfaceView extends SurfaceView {
       aspectRatioSizing.height() + aspectRatioSizing.y()
     );
 
-    canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
     canvas.drawBitmap(bitmap, src, dest, paint);
   }
 

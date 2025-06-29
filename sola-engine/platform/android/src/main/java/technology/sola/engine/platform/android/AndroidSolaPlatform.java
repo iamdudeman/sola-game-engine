@@ -1,5 +1,8 @@
 package technology.sola.engine.platform.android;
 
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.view.MotionEvent;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleEventObserver;
@@ -20,6 +23,7 @@ import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
+import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.*;
 import technology.sola.engine.networking.rest.JavaRestClient;
 import technology.sola.engine.networking.socket.JavaSocketClient;
@@ -115,7 +119,22 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
 
   @Override
   protected void beforeRender(Renderer renderer) {
-    hostActivity.getSolaSurfaceView().startDrawing();
+    Canvas canvas = hostActivity.getSolaSurfaceView().startDrawing();
+
+    if (canvas == null) {
+      return;
+    }
+
+    canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+
+    if (!useSoftwareRendering) {
+      AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+
+      canvas.translate(aspectRatioSizing.x(), aspectRatioSizing.y());
+      canvas.scale(aspectRatioSizing.width() / (float) renderer.getWidth(), aspectRatioSizing.height() / (float) renderer.getHeight());
+
+      ((AndroidRenderer) renderer).setCanvas(canvas);
+    }
   }
 
   @Override
