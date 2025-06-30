@@ -30,6 +30,7 @@ import technology.sola.engine.networking.socket.JavaSocketClient;
 import technology.sola.engine.platform.android.assets.audio.AndroidAudioClipAssetLoader;
 import technology.sola.engine.platform.android.assets.AndroidJsonAssetLoader;
 import technology.sola.engine.platform.android.assets.AndroidSolaImageLoader;
+import technology.sola.engine.platform.android.core.AndroidGameLoop;
 import technology.sola.engine.platform.android.core.AndroidRenderer;
 import technology.sola.logging.SolaLogger;
 import technology.sola.math.SolaMath;
@@ -176,6 +177,11 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
     return useSoftwareRendering
       ? super.buildRenderer(solaConfiguration)
       : new AndroidRenderer(solaConfiguration.rendererWidth(), solaConfiguration.rendererHeight());
+  }
+
+  @Override
+  protected GameLoopProvider buildGameLoop() {
+    return AndroidGameLoop::new;
   }
 
   @Override
