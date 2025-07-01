@@ -20,11 +20,9 @@
 
 * Update examples to work off of mouse/touch only
 * implement the Android platform fully
-    * Stabilize game loop (ensure performance is good)
     * keyboard input is not fully implemented
         * AndroidSolaPlatform#mapKeyCode does not support all key codes!
-    * SolaAndroidAppPlugin task for an unsigned release dist (current is bugged with bad package)
-    * SolaAndroidAppPlugin task for a signed release dist
+    * SolaAndroidAppPlugin task for a signed release dist (possibly provide steps for Play App Signing)
 * Figure out how to handle TouchInput
     * Primarily for browser and Android but also could be supported in JavaFX
     * touchstart and touchend all hard coded to MouseButton.Primary currently

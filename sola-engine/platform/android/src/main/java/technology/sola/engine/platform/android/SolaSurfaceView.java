@@ -4,14 +4,25 @@ import android.content.Context;
 import android.graphics.*;
 import android.view.SurfaceView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.graphics.screen.Viewport;
 
+@NullMarked
 class SolaSurfaceView extends SurfaceView {
   private final Paint paint = new Paint();
+  @Nullable
   private Canvas canvas;
+  @Nullable
   private Viewport viewport;
+  @Nullable
+  private Bitmap softwareRendererBitmap;
+  @Nullable
+  private Rect softwareRendererSrcRect;
+  @Nullable
+  private SoftwareRenderer softwareRenderer;
 
   SolaSurfaceView(Context context) {
     super(context);
@@ -23,11 +34,11 @@ class SolaSurfaceView extends SurfaceView {
   }
 
   @Override
-  protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-    super.onSizeChanged(w, h, oldw, oldh);
+  protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
+    super.onSizeChanged(width, height, oldWidth, oldHeight);
 
     if (viewport != null) {
-      viewport.resize(w, h);
+      viewport.resize(width, height);
     }
   }
 
@@ -37,8 +48,9 @@ class SolaSurfaceView extends SurfaceView {
     viewport.resize(getWidth(), getHeight());
   }
 
+  @Nullable
   Canvas startDrawing() {
-    canvas = getHolder().lockCanvas();
+    canvas = getHolder().lockHardwareCanvas();
 
     return canvas;
   }
@@ -48,11 +60,17 @@ class SolaSurfaceView extends SurfaceView {
       return;
     }
 
-    var bitmap = Bitmap.createBitmap(softwareRenderer.getWidth(), softwareRenderer.getHeight(), Bitmap.Config.ARGB_8888);
+    int rendererWidth = softwareRenderer.getWidth();
+    int rendererHeight = softwareRenderer.getHeight();
 
-    bitmap.setPixels(softwareRenderer.getPixels(), 0, softwareRenderer.getWidth(), 0, 0, softwareRenderer.getWidth(), softwareRenderer.getHeight());
+    if (softwareRendererBitmap == null || this.softwareRenderer != softwareRenderer) {
+      this.softwareRenderer = softwareRenderer;
+      softwareRendererSrcRect = new Rect(0, 0, rendererWidth, rendererHeight);
+      softwareRendererBitmap = Bitmap.createBitmap(rendererWidth, rendererHeight, Bitmap.Config.ARGB_8888);
+    }
 
-    Rect src = new Rect(0, 0, softwareRenderer.getWidth(), softwareRenderer.getHeight());
+    softwareRendererBitmap.setPixels(softwareRenderer.getPixels(), 0, rendererWidth, 0, 0, rendererWidth, rendererHeight);
+
     Rect dest = new Rect(
       aspectRatioSizing.x(),
       aspectRatioSizing.y(),
@@ -60,7 +78,7 @@ class SolaSurfaceView extends SurfaceView {
       aspectRatioSizing.height() + aspectRatioSizing.y()
     );
 
-    canvas.drawBitmap(bitmap, src, dest, paint);
+    canvas.drawBitmap(softwareRendererBitmap, softwareRendererSrcRect, dest, paint);
   }
 
   void finishDrawing() {
