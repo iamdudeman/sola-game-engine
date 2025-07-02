@@ -16,7 +16,7 @@ public class AndroidGameLoop extends FixedUpdateGameLoop {
    * @param eventHub               the {@link EventHub} instance
    * @param updateMethod           the update method to run at target updates per second
    * @param renderMethod           the render method to run whenever there is an update
-   * @param targetUpdatesPerSecond the target updates per second (update per second is capped at a max of 30)
+   * @param targetUpdatesPerSecond the target updates per second (this is currently capped at 30 updates per second)
    */
   public AndroidGameLoop(EventHub eventHub, Consumer<Float> updateMethod, Runnable renderMethod, int targetUpdatesPerSecond) {
     super(eventHub, updateMethod, renderMethod, Math.min(30, targetUpdatesPerSecond));

@@ -19,10 +19,13 @@
 ## TODO List
 
 * Update examples to work off of mouse/touch only
+    * cleanup logic in `ExampleLauncherSola#addReturnToLauncherKeyEvent`
 * implement the Android platform fully
     * keyboard input is not fully implemented
         * AndroidSolaPlatform#mapKeyCode does not support all key codes!
     * SolaAndroidAppPlugin task for a signed release dist (possibly provide steps for Play App Signing)
+        * Consider Debug apk task for dev (ensure dist task has proper dependencies)
+        * Consider App Bundle task for release deployment to defer APK generation and signing to Google Play
 * Figure out how to handle TouchInput
     * Primarily for browser and Android but also could be supported in JavaFX
     * touchstart and touchend all hard coded to MouseButton.Primary currently

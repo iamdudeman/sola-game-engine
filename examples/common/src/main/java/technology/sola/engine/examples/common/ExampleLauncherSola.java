@@ -58,6 +58,19 @@ public class ExampleLauncherSola extends SolaWithDefaults {
         eventHub.emit(new GameLoopEvent(GameLoopState.STOP));
       }
     });
+
+    // todo cleanup this temporary solution for touch devices
+    solaPlatform.onMouseReleased(mouseEvent -> {
+      if (mouseEvent.x() > solaPlatform.getRenderer().getWidth() - 50 && mouseEvent.y() > solaPlatform.getRenderer().getHeight() - 50) {
+        eventHub.add(GameLoopEvent.class, event -> {
+          if (event.state() == GameLoopState.STOPPED) {
+            solaPlatform.play(new ExampleLauncherSola(solaPlatform));
+          }
+        });
+
+        eventHub.emit(new GameLoopEvent(GameLoopState.STOP));
+      }
+    });
   }
 
   /**
