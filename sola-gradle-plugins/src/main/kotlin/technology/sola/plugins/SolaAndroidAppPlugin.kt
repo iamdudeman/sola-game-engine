@@ -59,19 +59,24 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       }
     }
 
-    project.tasks.register("distAndroid", Copy::class) {
+    project.tasks.register("distAndroidDebugApk", Copy::class) {
       group = "distribution"
 
       from(project.file("build/outputs/apk/debug/android-debug.apk")) {
         rename { "${project.name}-${project.version}-debug.apk" }
       }
 
-      // todo this doesn't work properly yet
-      // from(project.file("build/outputs/apk/release/android-release-unsigned.apk")) {
-      //  rename { "${project.name}-${project.version}-release-unsigned.apk" }
-      // }
+      into(project.file("${project.rootDir}/dist/${project.name}"))
+    }
 
-      // todo need release signed as well
+    project.tasks.register("distAndroidReleaseBundle", Copy::class) {
+      group = "distribution"
+
+      dependsOn(project.tasks.named("bundleRelease"))
+
+      from(project.file("build/outputs/bundle/release/android-release.aab")) {
+        rename { "${project.name}-${project.version}-release.aab" }
+      }
 
       into(project.file("${project.rootDir}/dist/${project.name}"))
     }
