@@ -57,8 +57,13 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       }
 
       buildTypes {
-        release {
+        debug {
           isMinifyEnabled = false
+          isDebuggable = true
+        }
+
+        release {
+          isMinifyEnabled = true
           proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
           signingConfig = signingConfigs.getByName("release")
           isDebuggable = false
