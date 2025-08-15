@@ -1,5 +1,6 @@
 package technology.sola.plugins
 
+import com.android.build.gradle.internal.tasks.factory.dependsOn
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.CopySpec
@@ -51,9 +52,9 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
         }
       }
 
-      project.tasks.getByName("clean").dependsOn("cleanDist")
+      project.tasks.named("clean").dependsOn("cleanDist")
 
-      project.task("distFatJar", Jar::class) {
+      project.tasks.register("distFatJar", Jar::class) {
         group = "distribution"
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         archiveBaseName.set("${project.properties["gameName"]}-${project.name}${osClassifierWithDash}")
@@ -62,7 +63,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
           attributes["Main-Class"] = solaJavaDistributionPluginExtension.mainClass
         }
 
-        val dependencies = configurations.getByName("runtimeClasspath").map(::zipTree)
+        val dependencies = configurations.named("runtimeClasspath").map(::zipTree)
 
         from(dependencies)
         from("${project.rootDir}/assets") {
@@ -70,7 +71,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
         }
         with(project.tasks.getByName("jar", CopySpec::class))
         destinationDirectory.set(file("${project.rootDir}/dist/${project.name}"))
-        dependsOn(configurations.getByName("runtimeClasspath"))
+        dependsOn(configurations.named("runtimeClasspath"))
       }
 
       project.tasks.register("prepareJPackage", Delete::class) {
@@ -79,8 +80,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
 
       project.tasks.register("distWinJPackage", Exec::class) {
         group = "distribution"
-        dependsOn(tasks.getByName("prepareJPackage"))
-        dependsOn(tasks.getByName("distFatJar"))
+        dependsOn(tasks.named("prepareJPackage"), tasks.named("distFatJar"))
 
         executable("jpackage")
 
@@ -102,7 +102,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
         destinationDirectory.set(file("${project.rootDir}/dist/${project.name}"))
         archiveBaseName.set("${project.properties["gameName"]}-${project.name}-win")
 
-        dependsOn(tasks.getByName("distWinJPackage"))
+        dependsOn(tasks.named("distWinJPackage"))
 
         from(layout.buildDirectory.dir("jpackage/${project.properties["gameName"]}-${project.version}"))
       }
