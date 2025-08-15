@@ -4,7 +4,7 @@ plugins {
   `kotlin-dsl`
   `java-gradle-plugin`
   `maven-publish`
-  id("com.gradle.plugin-publish") version "1.2.1"
+  id("com.gradle.plugin-publish") version "1.3.1"
 }
 
 val props = Properties()
@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-  implementation("com.android.tools.build:gradle:8.10.1")
+  implementation("com.android.tools.build:gradle:8.11.1")
 }
 
 gradlePlugin {

@@ -5,9 +5,7 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.Copy
-import org.gradle.api.tasks.Delete
 import org.gradle.kotlin.dsl.*
-import org.gradle.kotlin.dsl.task
 
 
 interface SolaAndroidAppPluginExtension {
@@ -61,7 +59,7 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       }
     }
 
-    project.task("distAndroid", Copy::class) {
+    project.tasks.register("distAndroid", Copy::class) {
       group = "distribution"
 
       from(project.file("build/outputs/apk/debug/android-debug.apk")) {

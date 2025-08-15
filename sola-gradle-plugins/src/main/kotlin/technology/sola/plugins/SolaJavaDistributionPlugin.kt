@@ -1,5 +1,6 @@
 package technology.sola.plugins
 
+import com.android.build.gradle.internal.tasks.factory.dependsOn
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.CopySpec
@@ -43,7 +44,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
       }
 
-      project.task("cleanDist") {
+      project.tasks.register("cleanDist") {
         group = "distribution"
 
         doFirst {
@@ -51,7 +52,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
         }
       }
 
-      project.tasks.getByName("clean").dependsOn("cleanDist")
+      project.tasks.named("clean").dependsOn("cleanDist")
 
       project.task("distFatJar", Jar::class) {
         group = "distribution"
@@ -62,6 +63,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
           attributes["Main-Class"] = solaJavaDistributionPluginExtension.mainClass
         }
 
+        // todo this getByName call is the reason this task can't be migrated to project.tasks.register yet
         val dependencies = configurations.getByName("runtimeClasspath").map(::zipTree)
 
         from(dependencies)
@@ -70,17 +72,16 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
         }
         with(project.tasks.getByName("jar", CopySpec::class))
         destinationDirectory.set(file("${project.rootDir}/dist/${project.name}"))
-        dependsOn(configurations.getByName("runtimeClasspath"))
+        dependsOn(configurations.named("runtimeClasspath"))
       }
 
-      project.task("prepareJPackage", Delete::class) {
+      project.tasks.register("prepareJPackage", Delete::class) {
         delete(layout.buildDirectory.dir("jpackage"))
       }
 
-      project.task("distWinJPackage", Exec::class) {
+      project.tasks.register("distWinJPackage", Exec::class) {
         group = "distribution"
-        dependsOn(tasks.getByName("prepareJPackage"))
-        dependsOn(tasks.getByName("distFatJar"))
+        dependsOn(tasks.named("prepareJPackage"), tasks.named("distFatJar"))
 
         executable("jpackage")
 
@@ -97,12 +98,12 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
         )
       }
 
-      project.task("distWinJPackageZip", Zip::class) {
+      project.tasks.register("distWinJPackageZip", Zip::class) {
         group = "distribution"
         destinationDirectory.set(file("${project.rootDir}/dist/${project.name}"))
         archiveBaseName.set("${project.properties["gameName"]}-${project.name}-win")
 
-        dependsOn(tasks.getByName("distWinJPackage"))
+        dependsOn(tasks.named("distWinJPackage"))
 
         from(layout.buildDirectory.dir("jpackage/${project.properties["gameName"]}-${project.version}"))
       }

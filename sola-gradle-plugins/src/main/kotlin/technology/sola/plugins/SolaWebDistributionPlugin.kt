@@ -7,7 +7,6 @@ import org.gradle.api.tasks.JavaExec
 import org.gradle.api.tasks.bundling.Zip
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.getByType
-import org.gradle.kotlin.dsl.task
 import org.gradle.kotlin.dsl.withType
 
 interface SolaWebDistributionPluginExtension {
@@ -27,7 +26,7 @@ class SolaWebDistributionPlugin : Plugin<Project> {
         solaWebDistributionPluginExtension.generateFilesMainClass
       }
 
-      project.task("cleanDist") {
+      project.tasks.register("cleanDist") {
         group = "distribution"
 
         doFirst {
@@ -37,7 +36,7 @@ class SolaWebDistributionPlugin : Plugin<Project> {
 
       project.tasks.getByName("clean").dependsOn("cleanDist")
 
-      project.task("generateWebHtmlAndJs", JavaExec::class) {
+      project.tasks.register("generateWebHtmlAndJs", JavaExec::class.java) {
         group = "build"
 
         dependsOn(project.tasks.getByPath("assemble"))
@@ -49,7 +48,7 @@ class SolaWebDistributionPlugin : Plugin<Project> {
         mainClass.set(generateFilesMainClass)
       }
 
-      project.task("generateDebugWebHtmlAndJs") {
+      project.tasks.register("generateDebugWebHtmlAndJs") {
         group = "build"
 
         doFirst {
@@ -61,7 +60,7 @@ class SolaWebDistributionPlugin : Plugin<Project> {
         finalizedBy(project.tasks.getByPath("generateWebHtmlAndJs"))
       }
 
-      project.task("distWebZip", Zip::class) {
+      project.tasks.register("distWebZip", Zip::class.java) {
         group = "distribution"
         destinationDirectory.set(project.file("${project.rootDir}/dist/${project.name}"))
         archiveBaseName.set("${project.properties["gameName"]}-${project.name}")

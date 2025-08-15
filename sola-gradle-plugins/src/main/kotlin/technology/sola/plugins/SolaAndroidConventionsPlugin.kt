@@ -37,6 +37,7 @@ class SolaAndroidConventionsPlugin : Plugin<Project> {
       project.dependencies.add("testImplementation", "org.mockito:mockito-inline:5.2.0")
       project.dependencies.add("testImplementation", "org.mockito:mockito-junit-jupiter:5.11.0")
       project.dependencies.add("testImplementation", "org.junit.jupiter:junit-jupiter:5.11.0")
+      project.dependencies.add("testRuntimeOnly", "org.junit.platform:junit-platform-launcher")
 
       // android
       project.dependencies.add("implementation", "androidx.appcompat:appcompat:1.7.1")
@@ -60,7 +61,7 @@ class SolaAndroidConventionsPlugin : Plugin<Project> {
           configFile = project.file(project.rootDir.toString() + "/checkstyle.xml")
         }
 
-        project.task("checkstyleMain", Checkstyle::class) {
+        project.tasks.register("checkstyleMain", Checkstyle::class) {
           group = "verification"
 
           configFile = project.file(project.rootDir.toString() + "/checkstyle.xml")
