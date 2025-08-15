@@ -6,6 +6,8 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.Copy
 import org.gradle.kotlin.dsl.*
+import java.io.FileInputStream
+import java.util.Properties
 
 
 interface SolaAndroidAppPluginExtension {
@@ -27,6 +29,11 @@ class SolaAndroidAppPlugin : Plugin<Project> {
 
     project.pluginManager.apply("com.android.application")
 
+    val keystorePropertiesFile = project.rootProject.file("keystore.properties")
+    val keystoreProperties = Properties()
+
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+
     project.extensions.configure<BaseAppModuleExtension> {
       namespace = "${project.properties["basePackage"]}.${project.name}"
       compileSdk = 35
@@ -40,10 +47,21 @@ class SolaAndroidAppPlugin : Plugin<Project> {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
       }
 
+      signingConfigs {
+        register("release") {
+          keyAlias = keystoreProperties["keyAlias"] as String
+          keyPassword = keystoreProperties["keyPassword"] as String
+          storeFile = project.file(keystoreProperties["storeFile"] as String)
+          storePassword = keystoreProperties["storePassword"] as String
+        }
+      }
+
       buildTypes {
         release {
           isMinifyEnabled = false
           proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+          signingConfig = signingConfigs.getByName("release")
+          isDebuggable = false
         }
       }
 

@@ -17,6 +17,7 @@ build/
 target/
 dependency-reduced-pom.xml
 .gradle
+keystore.properties
 
 # Engine
 *.log*
