@@ -51,7 +51,7 @@ class SolaAndroidAppPlugin : Plugin<Project> {
         register("release") {
           keyAlias = keystoreProperties["keyAlias"] as String
           keyPassword = keystoreProperties["keyPassword"] as String
-          storeFile = project.file(keystoreProperties["storeFile"] as String)
+          storeFile = java.io.File(keystoreProperties["storeFile"] as String)
           storePassword = keystoreProperties["storePassword"] as String
         }
       }
