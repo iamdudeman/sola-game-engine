@@ -93,7 +93,7 @@ class SolaAndroidAppPlugin : Plugin<Project> {
 
     project.extensions.configure<ApplicationAndroidComponentsExtension> {
       beforeVariants { variantBuilder ->
-        // Note: disable release variant for JITPACK CI builds
+        // Note: disable release variant for JITPACK CI builds since we don't want signing there
         if (System.getenv("JITPACK") == "true" && variantBuilder.buildType == "release") {
           variantBuilder.enable = false
         }
