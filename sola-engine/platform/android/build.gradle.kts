@@ -1,6 +1,7 @@
 plugins {
   id("technology.sola.plugins.sola-android-conventions")
   id("com.android.library")
+  id("maven-publish")
 }
 
 apply(plugin = "com.android.library")
