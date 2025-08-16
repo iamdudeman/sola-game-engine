@@ -1,6 +1,5 @@
 package technology.sola.plugins
 
-import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
@@ -56,12 +55,16 @@ class SolaAndroidAppPlugin : Plugin<Project> {
         System.err.println("Warning: 'storeFile' not found in 'keystore.properties'. Release build for Android will fail.")
       }
 
+      val isSigningDisabled = System.getenv("JITPACK") == "true"
+
       signingConfigs {
-        register("release") {
-          keyAlias = keystoreProperties["keyAlias"] as String?
-          keyPassword = keystoreProperties["keyPassword"] as String?
-          storeFile = if (storeFilePath == null) null else java.io.File(storeFilePath)
-          storePassword = keystoreProperties["storePassword"] as String?
+        if (!isSigningDisabled) {
+          register("release") {
+            keyAlias = keystoreProperties["keyAlias"] as String?
+            keyPassword = keystoreProperties["keyPassword"] as String?
+            storeFile = if (storeFilePath == null) null else java.io.File(storeFilePath)
+            storePassword = keystoreProperties["storePassword"] as String?
+          }
         }
       }
 
@@ -74,7 +77,7 @@ class SolaAndroidAppPlugin : Plugin<Project> {
         release {
           isMinifyEnabled = true
           proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-          signingConfig = signingConfigs.getByName("release")
+          signingConfig = if (isSigningDisabled) null else signingConfigs.getByName("release")
           isDebuggable = false
         }
       }
@@ -87,15 +90,6 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       sourceSets {
         getByName("main") {
           assets.srcDir("${project.rootDir}/assets")
-        }
-      }
-    }
-
-    project.extensions.configure<ApplicationAndroidComponentsExtension> {
-      beforeVariants { variantBuilder ->
-        // Note: disabling release variant for JITPACK CI builds
-        if (System.getenv("JITPACK") == "true" && variantBuilder.buildType == "release") {
-          variantBuilder.enable = false
         }
       }
     }
