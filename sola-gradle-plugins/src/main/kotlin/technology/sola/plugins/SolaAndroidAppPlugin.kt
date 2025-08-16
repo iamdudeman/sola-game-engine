@@ -1,6 +1,6 @@
 package technology.sola.plugins
 
-import com.android.build.api.variant.AndroidComponentsExtension
+import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
@@ -91,7 +91,7 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       }
     }
 
-    project.extensions.configure<AndroidComponentsExtension<*, *, *>> {
+    project.extensions.configure<ApplicationAndroidComponentsExtension> {
       beforeVariants { variantBuilder ->
         // Note: disable release variant for JITPACK CI builds
         if (System.getenv("JITPACK") == "true" && variantBuilder.buildType == "release") {
