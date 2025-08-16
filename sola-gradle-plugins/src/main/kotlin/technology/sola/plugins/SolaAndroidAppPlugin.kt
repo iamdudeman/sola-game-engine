@@ -1,5 +1,6 @@
 package technology.sola.plugins
 
+import com.android.build.api.variant.AndroidComponentsExtension
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
@@ -86,6 +87,15 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       sourceSets {
         getByName("main") {
           assets.srcDir("${project.rootDir}/assets")
+        }
+      }
+    }
+
+    project.extensions.configure<AndroidComponentsExtension<*, *, *>> {
+      beforeVariants { variantBuilder ->
+        // disable release variant for JITPACK CI builds
+        if (System.getenv("JITPACK") == "true" && variantBuilder.buildType == "release") {
+          variantBuilder.enable = false
         }
       }
     }
