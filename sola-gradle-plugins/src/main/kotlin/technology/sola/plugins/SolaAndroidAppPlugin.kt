@@ -52,15 +52,19 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       val storeFilePath = keystoreProperties["storeFile"] as String?
 
       if (storeFilePath == null) {
-        System.err.println("Warning: 'storeFile' not found in 'keystore.properties'. Release build for Android will fail.")
+        System.err.println("Warning: 'storeFile' not found in 'keystore.properties'. Release build for Android will fail since it cannot sign the bundle.")
       }
 
+      val isSigningDisabled = System.getenv("JITPACK") == "true"
+
       signingConfigs {
-        register("release") {
-          keyAlias = keystoreProperties["keyAlias"] as String?
-          keyPassword = keystoreProperties["keyPassword"] as String?
-          storeFile = if (storeFilePath == null) null else java.io.File(storeFilePath)
-          storePassword = keystoreProperties["storePassword"] as String?
+        if (!isSigningDisabled) {
+          register("release") {
+            keyAlias = keystoreProperties["keyAlias"] as String?
+            keyPassword = keystoreProperties["keyPassword"] as String?
+            storeFile = if (storeFilePath == null) null else java.io.File(storeFilePath)
+            storePassword = keystoreProperties["storePassword"] as String?
+          }
         }
       }
 
@@ -73,7 +77,7 @@ class SolaAndroidAppPlugin : Plugin<Project> {
         release {
           isMinifyEnabled = true
           proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-          signingConfig = signingConfigs.getByName("release")
+          signingConfig = if (isSigningDisabled) null else signingConfigs.getByName("release")
           isDebuggable = false
         }
       }
