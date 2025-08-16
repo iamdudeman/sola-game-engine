@@ -52,7 +52,7 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       val storeFilePath = keystoreProperties["storeFile"] as String?
 
       if (storeFilePath == null) {
-        System.err.println("Warning: 'storeFile' not found in 'keystore.properties'. Release build for Android will fail.")
+        System.err.println("Warning: 'storeFile' not found in 'keystore.properties'. Release build for Android will fail since it cannot sign the bundle.")
       }
 
       val isSigningDisabled = System.getenv("JITPACK") == "true"
