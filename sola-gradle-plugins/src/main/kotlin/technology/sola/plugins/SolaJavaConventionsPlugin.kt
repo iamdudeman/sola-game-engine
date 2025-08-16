@@ -58,6 +58,12 @@ class SolaJavaConventionsPlugin : Plugin<Project> {
     }
 
     project.afterEvaluate {
+      project.tasks.register("ciBuild") {
+        group = "build"
+
+        dependsOn(project.tasks.named("build"))
+      }
+
       if (solaJavaConventionsPluginExtension.disableCheckstyle != true) {
         project.pluginManager.apply("checkstyle")
 

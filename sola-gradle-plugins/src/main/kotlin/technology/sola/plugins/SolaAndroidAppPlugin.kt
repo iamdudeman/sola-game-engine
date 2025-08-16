@@ -32,7 +32,9 @@ class SolaAndroidAppPlugin : Plugin<Project> {
     val keystorePropertiesFile = project.rootProject.file("keystore.properties")
     val keystoreProperties = Properties()
 
-    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+    if (keystorePropertiesFile.exists()) {
+      keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+    }
 
     project.extensions.configure<BaseAppModuleExtension> {
       namespace = "${project.properties["basePackage"]}.${project.name}"
@@ -47,12 +49,18 @@ class SolaAndroidAppPlugin : Plugin<Project> {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
       }
 
+      val storeFilePath = keystoreProperties["storeFile"] as String?
+
+      if (storeFilePath == null) {
+        System.err.println("Warning: 'storeFile' not found in 'keystore.properties'. Release build for Android will fail.")
+      }
+
       signingConfigs {
         register("release") {
-          keyAlias = keystoreProperties["keyAlias"] as String
-          keyPassword = keystoreProperties["keyPassword"] as String
-          storeFile = java.io.File(keystoreProperties["storeFile"] as String)
-          storePassword = keystoreProperties["storePassword"] as String
+          keyAlias = keystoreProperties["keyAlias"] as String?
+          keyPassword = keystoreProperties["keyPassword"] as String?
+          storeFile = if (storeFilePath == null) null else java.io.File(storeFilePath)
+          storePassword = keystoreProperties["storePassword"] as String?
         }
       }
 
@@ -82,6 +90,12 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       }
     }
 
+    project.tasks.register("ciBuild") {
+      group = "build"
+
+      dependsOn(project.tasks.named("assembleDebug"))
+    }
+
     project.tasks.register("distAndroidDebugApk", Copy::class) {
       group = "distribution"
 
@@ -90,6 +104,8 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       }
 
       into(project.file("${project.rootDir}/dist/${project.name}"))
+
+      dependsOn(project.tasks.named("assembleDebug"))
     }
 
     project.tasks.register("distAndroidReleaseBundle", Copy::class) {
