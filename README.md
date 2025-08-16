@@ -141,6 +141,27 @@ Your users will not need to have Java installed.
 
 4. Output will be in the `dist/javafx` directory
 
+### Android
+
+#### Debug
+
+1. Run the following gradle command
+
+```shell
+.\gradlew.bat distAndroidDebugApk
+```
+
+#### Release
+
+1. Create an upload keystore file
+   1. https://developer.android.com/studio/publish/app-signing#sign_release
+2. Create a copy of [keystore.example.properties](keystore.example.properties) as `keystore.properties`
+3. Update the `keystore.properties` file with your keystore information
+4. Run the following gradle command
+
+```shell
+.\gradlew.bat distAndroidReleaseBundle
+```
 
 ## JSON Schema
 

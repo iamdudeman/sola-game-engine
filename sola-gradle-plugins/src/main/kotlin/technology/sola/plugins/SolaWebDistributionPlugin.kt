@@ -36,6 +36,8 @@ class SolaWebDistributionPlugin : Plugin<Project> {
 
       project.tasks.getByName("clean").dependsOn("cleanDist")
 
+      project.tasks.getByName("ciBuild").dependsOn("generateWebHtmlAndJs")
+
       project.tasks.register("generateWebHtmlAndJs", JavaExec::class.java) {
         group = "build"
 

@@ -6,6 +6,8 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.Copy
 import org.gradle.kotlin.dsl.*
+import java.io.FileInputStream
+import java.util.Properties
 
 
 interface SolaAndroidAppPluginExtension {
@@ -27,6 +29,13 @@ class SolaAndroidAppPlugin : Plugin<Project> {
 
     project.pluginManager.apply("com.android.application")
 
+    val keystorePropertiesFile = project.rootProject.file("keystore.properties")
+    val keystoreProperties = Properties()
+
+    if (keystorePropertiesFile.exists()) {
+      keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+    }
+
     project.extensions.configure<BaseAppModuleExtension> {
       namespace = "${project.properties["basePackage"]}.${project.name}"
       compileSdk = 35
@@ -40,10 +49,32 @@ class SolaAndroidAppPlugin : Plugin<Project> {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
       }
 
+      val storeFilePath = keystoreProperties["storeFile"] as String?
+
+      if (storeFilePath == null) {
+        System.err.println("Warning: 'storeFile' not found in 'keystore.properties'. Release build for Android will fail.")
+      }
+
+      signingConfigs {
+        register("release") {
+          keyAlias = keystoreProperties["keyAlias"] as String?
+          keyPassword = keystoreProperties["keyPassword"] as String?
+          storeFile = if (storeFilePath == null) null else java.io.File(storeFilePath)
+          storePassword = keystoreProperties["storePassword"] as String?
+        }
+      }
+
       buildTypes {
-        release {
+        debug {
           isMinifyEnabled = false
+          isDebuggable = true
+        }
+
+        release {
+          isMinifyEnabled = true
           proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+          signingConfig = signingConfigs.getByName("release")
+          isDebuggable = false
         }
       }
 
@@ -59,19 +90,32 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       }
     }
 
-    project.tasks.register("distAndroid", Copy::class) {
+    project.tasks.register("ciBuild") {
+      group = "build"
+
+      dependsOn(project.tasks.named("assembleDebug"))
+    }
+
+    project.tasks.register("distAndroidDebugApk", Copy::class) {
       group = "distribution"
 
       from(project.file("build/outputs/apk/debug/android-debug.apk")) {
         rename { "${project.name}-${project.version}-debug.apk" }
       }
 
-      // todo this doesn't work properly yet
-      // from(project.file("build/outputs/apk/release/android-release-unsigned.apk")) {
-      //  rename { "${project.name}-${project.version}-release-unsigned.apk" }
-      // }
+      into(project.file("${project.rootDir}/dist/${project.name}"))
 
-      // todo need release signed as well
+      dependsOn(project.tasks.named("assembleDebug"))
+    }
+
+    project.tasks.register("distAndroidReleaseBundle", Copy::class) {
+      group = "distribution"
+
+      dependsOn(project.tasks.named("bundleRelease"))
+
+      from(project.file("build/outputs/bundle/release/android-release.aab")) {
+        rename { "${project.name}-${project.version}-release.aab" }
+      }
 
       into(project.file("${project.rootDir}/dist/${project.name}"))
     }
