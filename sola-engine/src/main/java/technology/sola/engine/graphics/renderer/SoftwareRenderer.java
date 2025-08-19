@@ -152,7 +152,56 @@ public class SoftwareRenderer extends Canvas implements Renderer {
       return;
     }
 
-    throw new RuntimeException("Not yet implemented");
+    float centerX = x + width / 2;
+    float centerY = y + height / 2;
+    float a = width / 2;  // semi-major axis
+    float b = height / 2; // semi-minor axis
+
+    if (a <= 0 || b <= 0) {
+      return; // Degenerate ellipse
+    }
+
+    int xStart = SolaMath.fastRound(x);
+    int yStart = SolaMath.fastRound(y);
+    int xEnd = SolaMath.fastRound(x + width);
+    int yEnd = SolaMath.fastRound(y + height);
+
+    float aSquared = a * a;
+    float bSquared = b * b;
+
+    // Iterate through the bounding rectangle
+    for (int pixelX = xStart; pixelX < xEnd; pixelX++) {
+      for (int pixelY = yStart; pixelY < yEnd; pixelY++) {
+        // Calculate relative position from the center
+        float dx = pixelX - centerX;
+        float dy = pixelY - centerY;
+
+        float ellipseValue = (dx * dx / aSquared) + (dy * dy / bSquared);
+
+        // Check if this pixel is on the boundary (inside ellipse but adjacent pixels are outside)
+        if (ellipseValue <= 1.0f) {
+          boolean isBoundary = false;
+
+          // Check 4-connected neighbors to see if any are outside the ellipse
+          float[] neighborOffsets = {-1, 0, 1, 0, 0, -1, 0, 1};
+          for (int i = 0; i < 8; i += 2) {
+            float ndx = (pixelX + neighborOffsets[i]) - centerX;
+            float ndy = (pixelY + neighborOffsets[i + 1]) - centerY;
+            float neighborValue = (ndx * ndx / aSquared) + (ndy * ndy / bSquared);
+
+            if (neighborValue > 1.0f) {
+              isBoundary = true;
+              break;
+            }
+          }
+
+          if (isBoundary) {
+            setPixel(pixelX, pixelY, color);
+          }
+        }
+      }
+    }
+
   }
 
   @Override
