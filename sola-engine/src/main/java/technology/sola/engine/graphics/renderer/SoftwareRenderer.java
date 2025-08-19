@@ -147,6 +147,54 @@ public class SoftwareRenderer extends Canvas implements Renderer {
   }
 
   @Override
+  public void drawEllipse(float x, float y, float width, float height, Color color) {
+    if (shouldSkipDrawCall(x, y, width, height)) {
+      return;
+    }
+
+    throw new RuntimeException("Not yet implemented");
+  }
+
+  @Override
+  public void fillEllipse(float x, float y, float width, float height, Color color) {
+    if (shouldSkipDrawCall(x, y, width, height)) {
+      return;
+    }
+
+    float centerX = x + width / 2;
+    float centerY = y + height / 2;
+    float a = width / 2;  // semi-major axis
+    float b = height / 2; // semi-minor axis
+
+    if (a <= 0 || b <= 0) {
+      return; // Degenerate ellipse
+    }
+
+    int xStart = SolaMath.fastRound(x);
+    int yStart = SolaMath.fastRound(y);
+    int xEnd = SolaMath.fastRound(x + width);
+    int yEnd = SolaMath.fastRound(y + height);
+
+    float aSquared = a * a;
+    float bSquared = b * b;
+
+    // Iterate through the bounding rectangle
+    for (int pixelX = xStart; pixelX < xEnd; pixelX++) {
+      for (int pixelY = yStart; pixelY < yEnd; pixelY++) {
+        // Calculate relative position from the center
+        float dx = pixelX - centerX;
+        float dy = pixelY - centerY;
+
+        // Check if point is inside ellipse using the ellipse equation:
+        // (dx^2 / a^2) + (dy^2 / b^2) <= 1
+        if ((dx * dx / aSquared) + (dy * dy / bSquared) <= 1.0f) {
+          setPixel(pixelX, pixelY, color);
+        }
+      }
+    }
+  }
+
+  @Override
   public void drawCircle(float x, float y, float radius, Color color) {
     if (shouldSkipDrawCall(x, y, radius)) {
       return;

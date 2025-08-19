@@ -146,6 +146,16 @@ public class BrowserCanvasRenderer implements Renderer {
   }
 
   @Override
+  public void drawEllipse(float x, float y, float width, float height, Color color) {
+    logMethodNotImplemented("drawEllipse"); // todo implement
+  }
+
+  @Override
+  public void fillEllipse(float x, float y, float width, float height, Color color) {
+    logMethodNotImplemented("fillEllipse"); // todo implement
+  }
+
+  @Override
   public void fillTriangle(float x1, float y1, float x2, float y2, float x3, float y3, Color color) {
     logMethodNotImplemented("fillTriangle"); // todo implement
   }

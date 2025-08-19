@@ -261,6 +261,28 @@ public interface Renderer {
   void fillCircle(float x, float y, float radius, Color color);
 
   /**
+   * Draws an unfilled ellipse.
+   *
+   * @param x      top left coordinate x
+   * @param y      top left coordinate y
+   * @param width  width of the ellipse
+   * @param height height of the ellipse
+   * @param color  {@link Color} of the ellipse
+   */
+  void drawEllipse(float x, float y, float width, float height, Color color);
+
+  /**
+   * Draws a filled ellipse.
+   *
+   * @param x      top left coordinate x
+   * @param y      top left coordinate y
+   * @param width  width of the ellipse
+   * @param height height of the ellipse
+   * @param color  {@link Color} of the ellipse
+   */
+  void fillEllipse(float x, float y, float width, float height, Color color);
+
+  /**
    * Draws a triangle.
    *
    * @param x1 x coordinate for the first point
