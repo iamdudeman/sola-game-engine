@@ -19,6 +19,9 @@
 
 ## TODO List
 
+* Implement rendering and collision for ellipse entities
+    * CircleRendererComponent should use draw/fill ellipse if width+height not equal
+    * ColliderComponent shape CIRCLE should use ellipse collision if width+height not equal
 * Update examples to work off of mouse/touch only
     * cleanup logic in `ExampleLauncherSola#addReturnToLauncherKeyEvent`
 * implement the Android platform fully
