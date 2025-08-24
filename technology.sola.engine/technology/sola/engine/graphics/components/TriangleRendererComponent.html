@@ -98,17 +98,22 @@ implements technology.sola.ecs.Component</span></div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.Color)" class="member-name-link">TriangleRendererComponent</a><wbr>(<a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
 <div class="col-last even-row-color">
+<div class="block">Creates a "unit triangle" renderer with uniform side lengths of 1 that is filled.</div>
+</div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.Color,boolean)" class="member-name-link">TriangleRendererComponent</a><wbr>(<a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color,
+ boolean&nbsp;isFilled)</code></div>
+<div class="col-last odd-row-color">
 <div class="block">Creates a "unit triangle" renderer with uniform side lengths of 1.</div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.Color,boolean,technology.sola.math.geometry.Triangle)" class="member-name-link">TriangleRendererComponent</a><wbr>(<a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.Color,boolean,technology.sola.math.geometry.Triangle)" class="member-name-link">TriangleRendererComponent</a><wbr>(<a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color,
  boolean&nbsp;isFilled,
  <a href="../../../math/geometry/Triangle.html" title="class in technology.sola.math.geometry">Triangle</a>&nbsp;triangle)</code></div>
-<div class="col-last odd-row-color">
+<div class="col-last even-row-color">
 <div class="block">Creates a TriangleRendererComponent of desired color that is either filled or not filled.</div>
 </div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.Color,technology.sola.math.geometry.Triangle)" class="member-name-link">TriangleRendererComponent</a><wbr>(<a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color,
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.graphics.Color,technology.sola.math.geometry.Triangle)" class="member-name-link">TriangleRendererComponent</a><wbr>(<a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color,
  <a href="../../../math/geometry/Triangle.html" title="class in technology.sola.math.geometry">Triangle</a>&nbsp;triangle)</code></div>
-<div class="col-last even-row-color">
+<div class="col-last odd-row-color">
 <div class="block">Creates a TriangleRendererComponent of desired color that is filled.</div>
 </div>
 </div>
@@ -168,10 +173,23 @@ implements technology.sola.ecs.Component</span></div>
 <section class="detail" id="&lt;init&gt;(technology.sola.engine.graphics.Color)">
 <h3>TriangleRendererComponent</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">TriangleRendererComponent</span><wbr><span class="parameters">(<a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</span></div>
+<div class="block">Creates a "unit triangle" renderer with uniform side lengths of 1 that is filled.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>color</code> - the <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the triangle</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(technology.sola.engine.graphics.Color,boolean)">
+<h3>TriangleRendererComponent</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">TriangleRendererComponent</span><wbr><span class="parameters">(<a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color,
+ boolean&nbsp;isFilled)</span></div>
 <div class="block">Creates a "unit triangle" renderer with uniform side lengths of 1.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>color</code> - the <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the triangle</dd>
+<dd><code>isFilled</code> - whether the triangle should be filled or not</dd>
 </dl>
 </section>
 </li>
