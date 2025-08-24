@@ -16,12 +16,22 @@ public class TriangleRendererComponent implements Component {
   private final Triangle triangle;
 
   /**
-   * Creates a "unit triangle" renderer with uniform side lengths of 1.
+   * Creates a "unit triangle" renderer with uniform side lengths of 1 that is filled.
    *
    * @param color the {@link Color} of the triangle
    */
   public TriangleRendererComponent(Color color) {
-    this(color, new Triangle(new Vector2D(0, 0), new Vector2D(0.5f, 1), new Vector2D(1, 0)));
+    this(color, true);
+  }
+
+  /**
+   * Creates a "unit triangle" renderer with uniform side lengths of 1.
+   *
+   * @param color    the {@link Color} of the triangle
+   * @param isFilled whether the triangle should be filled or not
+   */
+  public TriangleRendererComponent(Color color, boolean isFilled) {
+    this(color, isFilled, new Triangle(new Vector2D(0, 0), new Vector2D(0.5f, 1), new Vector2D(1, 0)));
   }
 
   /**
