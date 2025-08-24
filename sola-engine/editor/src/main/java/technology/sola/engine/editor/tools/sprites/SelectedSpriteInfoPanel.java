@@ -27,6 +27,8 @@ class SelectedSpriteInfoPanel extends EditorPanel {
   private IntegerSpinner widthSpinner;
   @Nullable
   private IntegerSpinner heightSpinner;
+  @Nullable
+  private String originalSpriteId;
 
   SelectedSpriteInfoPanel(SpriteSheetState spriteSheetState) {
     this.spriteSheetState = spriteSheetState;
@@ -62,6 +64,7 @@ class SelectedSpriteInfoPanel extends EditorPanel {
     ySpinner = new IntegerSpinner(0, spriteSheetHeight);
     widthSpinner = new IntegerSpinner(1, spriteSheetWidth - 1);
     heightSpinner = new IntegerSpinner(1, spriteSheetHeight - 1);
+    this.originalSpriteId = originalSpriteId;
 
     HBox container = new HBox();
 
@@ -73,14 +76,14 @@ class SelectedSpriteInfoPanel extends EditorPanel {
       LabelWrapper.vertical(ySpinner, "y"),
       LabelWrapper.vertical(widthSpinner, "width"),
       LabelWrapper.vertical(heightSpinner, "height"),
-      buildUpdateButton(originalSpriteId)
+      buildUpdateButton()
     );
 
     getChildren().clear();
     getChildren().add(container);
   }
 
-  private Button buildUpdateButton(String originalSpriteId) {
+  private Button buildUpdateButton() {
     var updateButton = new Button("Update");
 
     updateButton.setOnAction(event -> {
@@ -105,6 +108,8 @@ class SelectedSpriteInfoPanel extends EditorPanel {
         spritesTreeView.updateSingleSpriteSpriteSheetInfo(originalSpriteId, newSpriteInfo.id(), updatedSpriteSheetInfo);
 
         spriteSheetState.setCurrentSpriteSheetInfo(updatedSpriteSheetInfo);
+
+        originalSpriteId = newSpriteInfo.id();
       }
     });
 
