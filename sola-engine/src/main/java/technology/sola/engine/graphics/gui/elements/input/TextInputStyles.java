@@ -24,15 +24,6 @@ public class TextInputStyles extends TextStyles {
   }
 
   /**
-   * Convenience method for creating a new {@link TextInputStyles.Builder}.
-   *
-   * @return a new builder instance
-   */
-  public static Builder<?> create() {
-    return new Builder<>();
-  }
-
-  /**
    * @return the {@link Color} of the placeholder text
    */
   @Nullable

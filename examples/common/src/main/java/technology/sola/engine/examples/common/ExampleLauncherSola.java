@@ -101,7 +101,7 @@ public class ExampleLauncherSola extends SolaWithDefaults {
   private GuiElement<?, ?> buildGui() {
     return new SectionGuiElement()
       .addStyle(ConditionalStyle.always(
-        BaseStyles.create()
+        new BaseStyles.Builder<>()
           .setWidth("100%")
           .setDirection(Direction.ROW)
           .setMainAxisChildren(MainAxisChildren.CENTER)
@@ -118,7 +118,7 @@ public class ExampleLauncherSola extends SolaWithDefaults {
   private GuiElement<?, ?> buildFeatureDemoSection() {
     return new SectionGuiElement()
       .addStyle(ConditionalStyle.always(
-        BaseStyles.create()
+        new BaseStyles.Builder<>()
           .setGap(5)
           .setCrossAxisChildren(CrossAxisChildren.CENTER)
           .build())
@@ -141,7 +141,7 @@ public class ExampleLauncherSola extends SolaWithDefaults {
   private GuiElement<?, ?> buildGameSection() {
     return new SectionGuiElement()
       .addStyle(ConditionalStyle.always(
-        BaseStyles.create()
+        new BaseStyles.Builder<>()
           .setGap(5)
           .setCrossAxisChildren(CrossAxisChildren.CENTER)
           .build())
@@ -159,7 +159,7 @@ public class ExampleLauncherSola extends SolaWithDefaults {
     return new TextGuiElement()
       .setText(title)
       .addStyle(ConditionalStyle.always(
-        TextStyles.create()
+        new TextStyles.Builder<>()
           .setPaddingBottom(15)
           .build()
       ));
@@ -168,7 +168,7 @@ public class ExampleLauncherSola extends SolaWithDefaults {
   private GuiElement<?, ?> buildExampleLaunchButton(String text, Supplier<Sola> solaSupplier) {
     return new ButtonGuiElement()
       .addStyle(ConditionalStyle.always(
-        BaseStyles.create()
+        new BaseStyles.Builder<>()
           .setCrossAxisChildren(CrossAxisChildren.CENTER)
           .setWidth("300")
           .setPadding(10)

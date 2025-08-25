@@ -31,6 +31,6 @@ public class ImageElementJsonBlueprint extends GuiElementJsonBlueprint<BaseStyle
 
   @Override
   protected BaseStyles.Builder<?> createStylesBuilder() {
-    return BaseStyles.create();
+    return new BaseStyles.Builder<>();
   }
 }

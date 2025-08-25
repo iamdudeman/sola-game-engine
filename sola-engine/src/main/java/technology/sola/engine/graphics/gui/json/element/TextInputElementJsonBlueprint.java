@@ -37,6 +37,6 @@ public class TextInputElementJsonBlueprint extends GuiElementJsonBlueprint<TextI
 
   @Override
   protected TextInputStyles.Builder<?> createStylesBuilder() {
-    return TextInputStyles.create();
+    return new TextInputStyles.Builder<>();
   }
 }

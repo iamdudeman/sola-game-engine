@@ -34,6 +34,6 @@ public class TextElementJsonBlueprint extends GuiElementJsonBlueprint<TextStyles
 
   @Override
   protected TextStyles.Builder<?> createStylesBuilder() {
-    return TextStyles.create();
+    return new TextStyles.Builder<>();
   }
 }

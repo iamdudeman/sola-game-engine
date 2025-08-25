@@ -21,8 +21,8 @@ import technology.sola.math.geometry.Circle;
 import technology.sola.math.linear.Vector2D;
 
 /**
- * CirclePop is a {@link technology.sola.engine.core.Sola} little game that also stress tests rendering for the sola
- * game engine.
+ * CirclePop is a {@link technology.sola.engine.core.Sola} little game that also does a rendering stress test for the
+ * sola game engine.
  */
 @NullMarked
 public class CirclePopGame extends SolaWithDefaults {
@@ -46,7 +46,7 @@ public class CirclePopGame extends SolaWithDefaults {
     solaEcs.setWorld(buildWorld());
 
     scoreGuiElement.addStyle(ConditionalStyle.always(
-      TextStyles.create()
+      new TextStyles.Builder<>()
         .setBackgroundColor(Color.WHITE)
         .setPadding(5)
         .setTextColor(Color.BLACK)

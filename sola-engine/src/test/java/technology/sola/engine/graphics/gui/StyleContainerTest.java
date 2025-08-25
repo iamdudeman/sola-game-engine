@@ -21,9 +21,9 @@ public class StyleContainerTest {
 
     styleContainer.setStyles(
       List.of(
-        ConditionalStyle.always(TextStyles.create().setBackgroundColor(Color.WHITE).build()),
-        ConditionalStyle.always(TextStyles.create().setTextColor(Color.RED).build()),
-        ConditionalStyle.always(TextStyles.create().setTextColor(Color.BLUE).setBackgroundColor(Color.BLACK).build())
+        ConditionalStyle.always(new TextStyles.Builder<>().setBackgroundColor(Color.WHITE).build()),
+        ConditionalStyle.always(new TextStyles.Builder<>().setTextColor(Color.RED).build()),
+        ConditionalStyle.always(new TextStyles.Builder<>().setTextColor(Color.BLUE).setBackgroundColor(Color.BLACK).build())
       )
     );
 
@@ -32,9 +32,9 @@ public class StyleContainerTest {
 
     styleContainer.setStyles(
       List.of(
-        ConditionalStyle.always(TextStyles.create().setBackgroundColor(Color.WHITE).build()),
-        ConditionalStyle.always(TextStyles.create().setTextColor(Color.RED).build()),
-        ConditionalStyle.hover(TextStyles.create().setTextColor(Color.WHITE).build())
+        ConditionalStyle.always(new TextStyles.Builder<>().setBackgroundColor(Color.WHITE).build()),
+        ConditionalStyle.always(new TextStyles.Builder<>().setTextColor(Color.RED).build()),
+        ConditionalStyle.hover(new TextStyles.Builder<>().setTextColor(Color.WHITE).build())
       )
     );
 
@@ -55,11 +55,11 @@ public class StyleContainerTest {
 
     styleContainer.setStyles(
       List.of(
-        ConditionalStyle.always(TextStyles.create().setBackgroundColor(Color.WHITE).build())
+        ConditionalStyle.always(new TextStyles.Builder<>().setBackgroundColor(Color.WHITE).build())
       )
     );
 
-    var newStyle = ConditionalStyle.always(TextStyles.create().setBackgroundColor(Color.BLACK).build());
+    var newStyle = ConditionalStyle.always(new TextStyles.Builder<>().setBackgroundColor(Color.BLACK).build());
     styleContainer.addStyle(newStyle);
     styleContainer.addStyle(newStyle);
     assertEquals(Color.BLACK, styleContainer.getPropertyValue(BaseStyles::background).color());

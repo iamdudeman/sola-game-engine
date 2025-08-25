@@ -30,15 +30,6 @@ public class TextStyles extends BaseStyles {
   }
 
   /**
-   * Convenience method for creating a new {@link TextStyles.Builder}.
-   *
-   * @return a new builder instance
-   */
-  public static Builder<?> create() {
-    return new Builder<>();
-  }
-
-  /**
    * @return the {@link Color} of the text to be rendered
    */
   @Nullable

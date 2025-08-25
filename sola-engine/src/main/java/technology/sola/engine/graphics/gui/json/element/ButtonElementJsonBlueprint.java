@@ -34,6 +34,6 @@ public class ButtonElementJsonBlueprint extends GuiElementJsonBlueprint<BaseStyl
 
   @Override
   protected BaseStyles.Builder<?> createStylesBuilder() {
-    return BaseStyles.create();
+    return new BaseStyles.Builder<>();
   }
 }

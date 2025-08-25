@@ -39,7 +39,7 @@ public class MinesweeperGui {
     20,
   };
   private static final ConditionalStyle<TextStyles> VISIBLE_STYLE = ConditionalStyle.always(
-    TextStyles.create().setVisibility(Visibility.VISIBLE).build()
+    new TextStyles.Builder<>().setVisibility(Visibility.VISIBLE).build()
   );
   private static int mineCount = 0;
   private static int sizeIndex = 0;

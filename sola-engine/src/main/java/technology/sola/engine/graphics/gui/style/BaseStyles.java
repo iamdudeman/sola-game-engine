@@ -53,15 +53,6 @@ public class BaseStyles {
   }
 
   /**
-   * Convenience method for creating a new {@link BaseStyles.Builder}.
-   *
-   * @return a new builder instance
-   */
-  public static Builder<?> create() {
-    return new Builder<>();
-  }
-
-  /**
    * Describes how the background of the {@link technology.sola.engine.graphics.gui.GuiElement} should render.
    *
    * @return the {@link Background}

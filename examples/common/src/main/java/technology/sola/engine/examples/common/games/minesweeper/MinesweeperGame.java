@@ -40,7 +40,7 @@ public class MinesweeperGame extends SolaWithDefaults {
     defaultsConfigurator.useGui(
       DefaultThemeBuilder.buildLightTheme()
         .addStyle(ButtonGuiElement.class, List.of(
-          ConditionalStyle.always(BaseStyles.create().setPadding(5).build())
+          ConditionalStyle.always(new BaseStyles.Builder<>().setPadding(5).build())
         ))
     ).useGraphics();
 
