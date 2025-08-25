@@ -48,10 +48,10 @@ public class AudioExample extends SolaWithDefaults {
 
     guiTheme = DefaultThemeBuilder.buildLightTheme()
       .addStyle(TextGuiElement.class, List.of(ConditionalStyle.always(
-        TextStyles.create().setFontAssetId(FONT_ASSET_ID).setTextColor(Color.BLUE).build()
+        new TextStyles.Builder<>().setFontAssetId(FONT_ASSET_ID).setTextColor(Color.BLUE).build()
       )))
       .addStyle(SectionGuiElement.class, List.of(ConditionalStyle.always(
-        BaseStyles.create().setBackgroundColor(Color.WHITE).build()
+        new BaseStyles.Builder<>().setBackgroundColor(Color.WHITE).build()
       )))
     ;
 
@@ -83,7 +83,7 @@ public class AudioExample extends SolaWithDefaults {
   private GuiElement<?, ?> buildGui(AudioClip audioClip) {
     return new SectionGuiElement()
       .addStyle(
-        ConditionalStyle.always(BaseStyles.create()
+        ConditionalStyle.always(new BaseStyles.Builder<>()
           .setDirection(Direction.COLUMN)
           .setCrossAxisChildren(CrossAxisChildren.CENTER)
           .setGap(8)
@@ -92,7 +92,7 @@ public class AudioExample extends SolaWithDefaults {
       )
       .appendChildren(
         new TextGuiElement().setText("Play a Song").addStyle(
-          ConditionalStyle.always(TextStyles.create().setPadding(5).build())
+          ConditionalStyle.always(new TextStyles.Builder<>().setPadding(5).build())
         ),
         buildControlsContainer(audioClip),
         buildVolumeContainer(audioClip)
@@ -106,7 +106,7 @@ public class AudioExample extends SolaWithDefaults {
     return new SectionGuiElement()
       .addStyle(
         ConditionalStyle.always(
-          BaseStyles.create()
+          new BaseStyles.Builder<>()
             .setDirection(Direction.ROW)
             .setCrossAxisChildren(CrossAxisChildren.CENTER)
             .setGap(5)
@@ -142,7 +142,7 @@ public class AudioExample extends SolaWithDefaults {
   private GuiElement<?, ?> buildControlsContainer(AudioClip audioClip) {
     return new SectionGuiElement()
       .addStyle(ConditionalStyle.always(
-        BaseStyles.create().setDirection(Direction.ROW).setGap(5).setPadding(5).build()
+        new BaseStyles.Builder<>().setDirection(Direction.ROW).setGap(5).setPadding(5).build()
       ))
       .appendChildren(
         createButton("Loop", () -> audioClip.loop(AudioClip.CONTINUOUS_LOOPING)),
@@ -155,7 +155,7 @@ public class AudioExample extends SolaWithDefaults {
   private ButtonGuiElement createButton(String text, Runnable action) {
     return new ButtonGuiElement()
       .addStyle(ConditionalStyle.always(
-          BaseStyles.create().setPadding(5).build()
+          new BaseStyles.Builder<>().setPadding(5).build()
       ))
       .appendChildren(
         new TextGuiElement().setText(text)

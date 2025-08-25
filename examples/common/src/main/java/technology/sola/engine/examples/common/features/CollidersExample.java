@@ -39,12 +39,12 @@ import technology.sola.math.linear.Vector2D;
 @NullMarked
 public class CollidersExample extends SolaWithDefaults {
   private final ConditionalStyle<TextStyles> selectedTextStyle = ConditionalStyle.always(
-    TextStyles.create()
+    new TextStyles.Builder<>()
       .setTextColor(Color.YELLOW)
       .build()
   );
   private final ConditionalStyle<TextStyles> debugOffTextStyle = ConditionalStyle.always(
-    TextStyles.create()
+    new TextStyles.Builder<>()
       .setTextColor(Color.WHITE)
       .build()
   );

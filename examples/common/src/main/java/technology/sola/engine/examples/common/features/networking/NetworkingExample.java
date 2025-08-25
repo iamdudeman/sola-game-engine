@@ -131,7 +131,7 @@ public class NetworkingExample extends SolaWithDefaults {
     SectionGuiElement sectionGuiElement = new SectionGuiElement();
 
     sectionGuiElement.addStyle(ConditionalStyle.always(
-      BaseStyles.create()
+      new BaseStyles.Builder<>()
         .setGap(5)
         .setPadding(5)
         .build()
@@ -178,7 +178,7 @@ public class NetworkingExample extends SolaWithDefaults {
       .setDisabled(isDisabled)
       .setOnAction(onAction)
       .addStyle(ConditionalStyle.always(
-        BaseStyles.create()
+        new BaseStyles.Builder<>()
           .setWidth(200)
           .setPadding(15)
           .build()

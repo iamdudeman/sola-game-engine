@@ -145,7 +145,7 @@ public class GuiExample extends SolaWithDefaults {
       buildContainer(3, mainAxisChildren),
       buildContainer(2, mainAxisChildren),
       buildContainer(1, mainAxisChildren)
-    ).addStyle(BaseStyles.create()
+    ).addStyle(new BaseStyles.Builder<>()
       .setDirection(direction == Direction.ROW || direction == Direction.ROW_REVERSE ? Direction.COLUMN : Direction.ROW)
       .build());
   }
@@ -154,7 +154,7 @@ public class GuiExample extends SolaWithDefaults {
     var height = direction == Direction.COLUMN || direction == Direction.COLUMN_REVERSE ? 500 : 100;
     var width = direction == Direction.ROW || direction == Direction.ROW_REVERSE ? 500 : 100;
     var container = new SectionGuiElement().addStyle(
-      BaseStyles.create()
+      new BaseStyles.Builder<>()
         .setHeight(height)
         .setWidth(width)
         .setGap(10)
@@ -177,7 +177,7 @@ public class GuiExample extends SolaWithDefaults {
 
   private GuiElement<?, ?> buildSquare() {
     return new SectionGuiElement()
-      .addStyle(BaseStyles.create()
+      .addStyle(new BaseStyles.Builder<>()
           .setBackgroundColor(Color.BLUE)
           .setHeight(50)
           .setWidth(50)
@@ -186,7 +186,7 @@ public class GuiExample extends SolaWithDefaults {
 
   private GuiElement<?, ?> buildBiggerSquare() {
     return new SectionGuiElement()
-      .addStyle(BaseStyles.create()
+      .addStyle(new BaseStyles.Builder<>()
         .setBackgroundColor(Color.YELLOW)
         .setHeight(80)
         .setWidth(80)

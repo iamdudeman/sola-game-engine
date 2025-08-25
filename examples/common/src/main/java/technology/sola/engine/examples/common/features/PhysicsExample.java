@@ -83,12 +83,12 @@ public class PhysicsExample extends SolaWithDefaults {
     SectionGuiElement sectionGuiElement = new SectionGuiElement();
 
     sectionGuiElement.addStyle(
-      ConditionalStyle.always(BaseStyles.create().setDirection(Direction.ROW).setPadding(5).setGap(5).build())
+      ConditionalStyle.always(new BaseStyles.Builder<>().setDirection(Direction.ROW).setPadding(5).setGap(5).build())
     );
 
     TextInputGuiElement randomSeedInput = new TextInputGuiElement().setValue("123456789").setPlaceholder("Random");
 
-    randomSeedInput.addStyle(ConditionalStyle.always(TextInputStyles.create().setPadding(5).build()));
+    randomSeedInput.addStyle(ConditionalStyle.always(new TextInputStyles.Builder<>().setPadding(5).build()));
 
     sectionGuiElement.appendChildren(
       new ButtonGuiElement()
@@ -99,7 +99,7 @@ public class PhysicsExample extends SolaWithDefaults {
           );
           solaEcs.setWorld(buildQuadTreeOptimizedWorld());
         })
-        .addStyle(ConditionalStyle.always(BaseStyles.create().setPadding(5).build()))
+        .addStyle(ConditionalStyle.always(new BaseStyles.Builder<>().setPadding(5).build()))
         .appendChildren(new TextGuiElement().setText("QuadTree")),
       new ButtonGuiElement()
         .setOnAction(() -> {
@@ -109,13 +109,13 @@ public class PhysicsExample extends SolaWithDefaults {
           );
           solaEcs.setWorld(buildSpatialHashMapOptimizedWorld());
         })
-        .addStyle(ConditionalStyle.always(BaseStyles.create().setPadding(5).build()))
+        .addStyle(ConditionalStyle.always(new BaseStyles.Builder<>().setPadding(5).build()))
         .appendChildren(new TextGuiElement().setText("SpatialHashMap")),
       new ButtonGuiElement()
         .setOnAction(() -> {
           randomSeedInput.setValue("" + new Random().nextLong());
         })
-        .addStyle(ConditionalStyle.always(BaseStyles.create().setPadding(5).build()))
+        .addStyle(ConditionalStyle.always(new BaseStyles.Builder<>().setPadding(5).build()))
         .appendChildren(new TextGuiElement().setText("New seed")),
       randomSeedInput
     );
