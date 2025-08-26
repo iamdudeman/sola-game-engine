@@ -12,6 +12,17 @@ import technology.sola.math.linear.Vector2D;
  */
 @NullMarked
 public record Triangle(Vector2D p1, Vector2D p2, Vector2D p3) implements Shape {
+  /**
+   * Creates a unit triangle with a width and height of 1.
+   */
+  public Triangle() {
+    this(
+      new Vector2D(0, 1),
+      new Vector2D(0.5f, 0),
+      new Vector2D(1, 1)
+    );
+  }
+
   @Override
   public boolean contains(Vector2D point) {
     // Note: implementation from https://stackoverflow.com/a/2049593

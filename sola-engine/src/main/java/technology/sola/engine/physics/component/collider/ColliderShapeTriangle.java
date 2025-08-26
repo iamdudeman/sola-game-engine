@@ -23,7 +23,7 @@ public record ColliderShapeTriangle(
    * Creates a "unit triangle" collider shape with uniform side lengths of 1.
    */
   public ColliderShapeTriangle() {
-    this(new Triangle(new Vector2D(0, 0), new Vector2D(0.5f, 1), new Vector2D(1, 0)));
+    this(new Triangle());
   }
 
   @Override

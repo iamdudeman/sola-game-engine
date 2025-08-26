@@ -4,7 +4,6 @@ import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
 import technology.sola.math.geometry.Triangle;
-import technology.sola.math.linear.Vector2D;
 
 /**
  * TriangleRendererComponent is a {@link Component} containing data for rendering 2d triangles.
@@ -31,7 +30,7 @@ public class TriangleRendererComponent implements Component {
    * @param isFilled whether the triangle should be filled or not
    */
   public TriangleRendererComponent(Color color, boolean isFilled) {
-    this(color, isFilled, new Triangle(new Vector2D(0, 0), new Vector2D(0.5f, 1), new Vector2D(1, 0)));
+    this(color, isFilled, new Triangle());
   }
 
   /**
