@@ -17,7 +17,6 @@
 
 ## Planned Cleanup List
 
-* Add `public abstract ElementType self();` to GuiElement to cleanup unchecked annotations
 
 -----------------------------------------------------------------------------------------------------------------------
 

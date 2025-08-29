@@ -115,6 +115,11 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, Te
     return textRenderDetails.dimensions();
   }
 
+  @Override
+  public TextInputGuiElement self() {
+    return this;
+  }
+
   /**
    * TextInputGuiElement does not render children so this method will do nothing.
    *

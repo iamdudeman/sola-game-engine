@@ -57,6 +57,11 @@ public class ImageGuiElement extends GuiElement<BaseStyles, ImageGuiElement> {
     return new GuiElementDimensions(0, 0);
   }
 
+  @Override
+  public ImageGuiElement self() {
+    return this;
+  }
+
   /**
    * ImageGuiElement is not focusable so this will return false.
    *

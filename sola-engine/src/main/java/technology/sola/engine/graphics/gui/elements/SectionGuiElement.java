@@ -79,6 +79,11 @@ public class SectionGuiElement extends GuiElement<BaseStyles, SectionGuiElement>
   }
 
   @Override
+  public SectionGuiElement self() {
+    return this;
+  }
+
+  @Override
   public boolean isFocusable() {
     return super.isFocusable() && !getFocusableChildren().isEmpty();
   }

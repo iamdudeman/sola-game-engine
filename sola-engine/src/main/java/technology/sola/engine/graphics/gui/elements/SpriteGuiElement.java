@@ -65,6 +65,11 @@ public class SpriteGuiElement extends GuiElement<BaseStyles, SpriteGuiElement> {
     return new GuiElementDimensions(0, 0);
   }
 
+  @Override
+  public SpriteGuiElement self() {
+    return this;
+  }
+
   /**
    * ImageGuiElement is not focusable so this will return false.
    *

@@ -58,6 +58,11 @@ public class ButtonGuiElement extends BaseInputGuiElement<BaseStyles, ButtonGuiE
     return null;
   }
 
+  @Override
+  public ButtonGuiElement self() {
+    return this;
+  }
+
   /**
    * Sets the action that fires when the button is interacted with.
    *

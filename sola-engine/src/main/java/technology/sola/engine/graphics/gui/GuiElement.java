@@ -83,11 +83,10 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @param style the style to add
    * @return this
    */
-  @SuppressWarnings("unchecked")
   public final ElementType addStyle(ConditionalStyle<Style> style) {
     styleContainer.addStyle(style);
 
-    return (ElementType) this;
+    return self();
   }
 
   /**
@@ -97,11 +96,10 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @param styles the styles to add
    * @return this
    */
-  @SuppressWarnings("unchecked")
   public final ElementType addStyles(List<ConditionalStyle<Style>> styles) {
     styleContainer.addStyles(styles);
 
-    return (ElementType) this;
+    return self();
   }
 
   /**
@@ -119,6 +117,11 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    */
   @Nullable
   public abstract GuiElementDimensions calculateContentDimensions();
+
+  /**
+   * @return A correctly typed reference to this {@link GuiElement}
+   */
+  public abstract ElementType self();
 
   /**
    * Method to render the gui element. It handles rendering the background and border before then calling the
@@ -253,11 +256,10 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @param id the new id
    * @return this
    */
-  @SuppressWarnings("unchecked")
   public ElementType setId(String id) {
     this.id = id;
 
-    return (ElementType) this;
+    return self();
   }
 
   /**
@@ -292,12 +294,11 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @param <T>          the element type
    * @return the list of elements with the desired type
    */
-  @SuppressWarnings("unchecked")
   public <T extends GuiElement<?, ?>> List<T> findElementsByType(Class<T> elementClass) {
     List<T> elements = new ArrayList<>();
 
     if (this.getClass().equals(elementClass)) {
-      elements.add((T) this);
+      elements.add(elementClass.cast(this));
     }
 
     for (var child : children) {
@@ -313,7 +314,6 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @param child the child element to remove
    * @return this
    */
-  @SuppressWarnings("unchecked")
   public ElementType removeChild(GuiElement<?, ?> child) {
     if (children.contains(child)) {
       child.parent = null;
@@ -321,7 +321,7 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
       invalidateLayout();
     }
 
-    return (ElementType) this;
+    return self();
   }
 
   /**
@@ -337,7 +337,6 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @param children the child elements to add
    * @return this
    */
-  @SuppressWarnings("unchecked")
   public ElementType appendChildren(GuiElement<?, ?>... children) {
     for (GuiElement<?, ?> child : children) {
       if (child.parent != null) {
@@ -352,7 +351,7 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
 
     this.invalidateLayout();
 
-    return (ElementType) this;
+    return self();
   }
 
   /**
