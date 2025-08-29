@@ -2,6 +2,8 @@
 
 ## Known Bugs List
 
+* Fix default dark theme button disabled color
+* When GUI direction is row or column reverse then the keyboard shortcuts should also be reversed
 * UI flicker on Android. Might be related to not having hover in and out. Seems like it sometimes gets stuck in a layout update.
 * (verify if still bug) GuiElement parent undefined when changing roots
     * consider creating a new RootGuiElement when changing roots instead of clearing out root children
@@ -15,10 +17,17 @@
 
 ## Planned Cleanup List
 
+* Add `public abstract ElementType self();` to GuiElement to cleanup unchecked annotations
+
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
 
+* Add ability to toggle to hide all GUI
+* Maybe add a concept some sort of "navigation" for Gui stuff?
+    * include a "navigate" method where a "payload" of some sort can be passed in
+    * `navigate<T>(String path, T payload)`
+    * add interface for `NavTarget<Payload>` with a `String path()` method and `onNavigate(Payload payload)`
 * Update examples to work off of mouse/touch only
     * cleanup logic in `ExampleLauncherSola#addReturnToLauncherKeyEvent`
 * implement the Android platform fully

@@ -1,6 +1,7 @@
 package technology.sola.engine.graphics.gui;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
@@ -42,8 +43,8 @@ public class GuiDocument {
   }
 
   /**
-   * Sets the current root element that is used for rendering and receiving events to the desired {@link GuiElement}.
-   * Also updates the currently focussed element.
+   * Sets the current root element used for rendering and receiving events to the desired {@link GuiElement}.
+   * Also updates the currently focused element.
    *
    * @param rootEle the new root element
    */
@@ -78,6 +79,7 @@ public class GuiDocument {
    * @param <T>          the type of the element
    * @return the element
    */
+  @Nullable
   public <T extends GuiElement<?, ?>> T findElementById(String id, Class<T> elementClass) {
     return root.findElementById(id, elementClass);
   }
