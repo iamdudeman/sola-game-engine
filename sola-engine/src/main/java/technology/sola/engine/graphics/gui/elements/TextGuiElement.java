@@ -54,6 +54,11 @@ public class TextGuiElement extends GuiElement<TextStyles, TextGuiElement> {
     return textRenderDetails.dimensions();
   }
 
+  @Override
+  public TextGuiElement self() {
+    return this;
+  }
+
   /**
    * TextGuiElement is not focusable so this will return false.
    *

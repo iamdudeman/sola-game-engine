@@ -38,6 +38,11 @@ class RootGuiElement extends GuiElement<BaseStyles, RootGuiElement> {
   }
 
   @Override
+  public RootGuiElement self() {
+    return this;
+  }
+
+  @Override
   GuiDocument getGuiDocument() {
     return guiDocument;
   }
