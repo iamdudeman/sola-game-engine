@@ -113,7 +113,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T extends <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>
-?&gt;&gt;<br>T</code></div>
+?&gt;&gt;<br>@Nullable T</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findElementById(java.lang.String,java.lang.Class)" class="member-name-link">findElementById</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;elementClass)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -137,7 +137,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRootElement(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">setRootElement</a><wbr>(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;&nbsp;rootEle)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Sets the current root element that is used for rendering and receiving events to the desired <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>.</div>
+<div class="block">Sets the current root element used for rendering and receiving events to the desired <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>.</div>
 </div>
 </div>
 </div>
@@ -183,8 +183,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="setRootElement(technology.sola.engine.graphics.gui.GuiElement)">
 <h3>setRootElement</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setRootElement</span><wbr><span class="parameters">(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;&nbsp;rootEle)</span></div>
-<div class="block">Sets the current root element that is used for rendering and receiving events to the desired <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>.
- Also updates the currently focussed element.</div>
+<div class="block">Sets the current root element used for rendering and receiving events to the desired <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>.
+ Also updates the currently focused element.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>rootEle</code> - the new root element</dd>
@@ -195,7 +195,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="findElementById(java.lang.String,java.lang.Class)">
 <h3>findElementById</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>
-?&gt;&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name">findElementById</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
+?&gt;&gt;</span>&nbsp;<span class="return-type">@Nullable T</span>&nbsp;<span class="element-name">findElementById</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;elementClass)</span></div>
 <div class="block">Searches the document for a <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a> with the desired id.</div>
 <dl class="notes">
