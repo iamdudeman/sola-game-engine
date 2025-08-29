@@ -124,20 +124,28 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Checks to see if a <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a> currently has focus.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">render</a><wbr>(<a href="../renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isVisible()" class="member-name-link">isVisible</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">render</a><wbr>(<a href="../renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Renders the root element to the <a href="../renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#requestFocus(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">requestFocus</a><wbr>(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;&nbsp;guiElement)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#requestFocus(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">requestFocus</a><wbr>(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;&nbsp;guiElement)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gives the desired <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a> focus.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRootElement(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">setRootElement</a><wbr>(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;&nbsp;rootEle)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRootElement(technology.sola.engine.graphics.gui.GuiElement)" class="member-name-link">setRootElement</a><wbr>(<a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a>&lt;?,<wbr>?&gt;&nbsp;rootEle)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the current root element used for rendering and receiving events to the desired <a href="GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a>.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setVisible(boolean)" class="member-name-link">setVisible</a><wbr>(boolean&nbsp;isVisible)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets whether the <a href="GuiDocument.html" title="class in technology.sola.engine.graphics.gui"><code>GuiDocument</code></a> will render or not.</div>
 </div>
 </div>
 </div>
@@ -179,6 +187,27 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="isVisible()">
+<h3>isVisible</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isVisible</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>Whether the <a href="GuiDocument.html" title="class in technology.sola.engine.graphics.gui"><code>GuiDocument</code></a> will render or not</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setVisible(boolean)">
+<h3>setVisible</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setVisible</span><wbr><span class="parameters">(boolean&nbsp;isVisible)</span></div>
+<div class="block">Sets whether the <a href="GuiDocument.html" title="class in technology.sola.engine.graphics.gui"><code>GuiDocument</code></a> will render or not.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>isVisible</code> - the new visible state</dd>
+</dl>
+</section>
+</li>
 <li>
 <section class="detail" id="setRootElement(technology.sola.engine.graphics.gui.GuiElement)">
 <h3>setRootElement</h3>
