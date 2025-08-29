@@ -6,6 +6,7 @@ import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.GuiElementDimensions;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.DefaultStyleValues;
+import technology.sola.engine.graphics.gui.style.property.Direction;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 
@@ -39,12 +40,16 @@ public class SectionGuiElement extends GuiElement<BaseStyles, SectionGuiElement>
       int keyCode = keyEvent.getKeyEvent().keyCode();
       var direction = styles().getPropertyValue(BaseStyles::direction, DefaultStyleValues.DIRECTION);
       int nextKeyCode = switch (direction) {
-        case ROW, ROW_REVERSE -> Key.RIGHT.getCode();
-        case COLUMN, COLUMN_REVERSE -> Key.DOWN.getCode();
+        case ROW -> Key.RIGHT.getCode();
+        case ROW_REVERSE -> Key.LEFT.getCode();
+        case COLUMN -> Key.DOWN.getCode();
+        case COLUMN_REVERSE -> Key.UP.getCode();
       };
       int previousKeyCode = switch (direction) {
-        case ROW, ROW_REVERSE -> Key.LEFT.getCode();
-        case COLUMN, COLUMN_REVERSE -> Key.UP.getCode();
+        case ROW -> Key.LEFT.getCode();
+        case ROW_REVERSE -> Key.RIGHT.getCode();
+        case COLUMN -> Key.UP.getCode();
+        case COLUMN_REVERSE -> Key.DOWN.getCode();
       };
 
       if (keyCode == nextKeyCode) {
@@ -95,7 +100,13 @@ public class SectionGuiElement extends GuiElement<BaseStyles, SectionGuiElement>
     if (focussedChildren.isEmpty()) {
       super.requestFocus();
     } else {
-      focussedChildren.get(0).requestFocus();
+      var direction = styles().getPropertyValue(BaseStyles::direction, DefaultStyleValues.DIRECTION);
+
+      if (direction == Direction.COLUMN_REVERSE || direction == Direction.ROW_REVERSE) {
+        focussedChildren.get(focussedChildren.size() - 1).requestFocus();
+      } else {
+        focussedChildren.get(0).requestFocus();
+      }
     }
   }
 }
