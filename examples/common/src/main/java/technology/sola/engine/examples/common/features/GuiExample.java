@@ -52,6 +52,10 @@ public class GuiExample extends SolaWithDefaults {
     platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
 
     platform().onKeyPressed(keyEvent -> {
+      if (keyEvent.keyCode() == Key.H.getCode()) {
+        guiDocument().setVisible(!guiDocument().isVisible());
+      }
+
       if (keyEvent.keyCode() == Key.ONE.getCode()) {
         selectedExample = 1;
         guiDocument().setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("gui").getAsset().rootElement());
