@@ -2,7 +2,6 @@
 
 ## Known Bugs List
 
-* Fix default dark theme button disabled color
 * When GUI direction is row or column reverse then the keyboard shortcuts should also be reversed
 * UI flicker on Android. Might be related to not having hover in and out. Seems like it sometimes gets stuck in a layout update.
 * (verify if still bug) GuiElement parent undefined when changing roots

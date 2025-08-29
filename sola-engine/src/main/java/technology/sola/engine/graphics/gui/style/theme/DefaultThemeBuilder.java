@@ -169,7 +169,7 @@ public class DefaultThemeBuilder {
         ),
         ConditionalStyle.disabled(
           new TextInputStyles.Builder<>()
-            .setBackgroundColor(inputBackgroundColor.tint(0.18f))
+            .setBackgroundColor(inputBackgroundColor.tint(0.38f))
             .build()
         )
       ))
