@@ -23,7 +23,6 @@
 
 ## TODO List
 
-* Add ability to toggle to hide all GUI
 * Maybe add a concept some sort of "navigation" for Gui stuff?
     * include a "navigate" method where a "payload" of some sort can be passed in
     * `navigate<T>(String path, T payload)`

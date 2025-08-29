@@ -19,8 +19,9 @@ import technology.sola.engine.input.MouseInput;
 @NullMarked
 public class GuiDocument {
   private final RootGuiElement root;
-  private GuiElement<?, ?> focussedElement;
   private final MouseInput mouseInput;
+  private GuiElement<?, ?> focussedElement;
+  private boolean isVisible = true;
 
   /**
    * Creates a new GuiDocument instance, registering listeners for key and mouse related events.
@@ -40,6 +41,22 @@ public class GuiDocument {
     platform.onMouseMoved(this::onMouseMoved);
     platform.onMousePressed(this::onMousePressed);
     platform.onMouseReleased(this::onMouseReleased);
+  }
+
+  /**
+   * @return Whether the {@link GuiDocument} will render or not
+   */
+  public boolean isVisible() {
+    return isVisible;
+  }
+
+  /**
+   * Sets whether the {@link GuiDocument} will render or not.
+   *
+   * @param isVisible the new visible state
+   */
+  public void setVisible(boolean isVisible) {
+    this.isVisible = isVisible;
   }
 
   /**
@@ -117,26 +134,50 @@ public class GuiDocument {
    * @param renderer the renderer
    */
   public void render(Renderer renderer) {
+    if (!isVisible) {
+      return;
+    }
+
     root.render(renderer);
   }
 
   private void onKeyPressed(KeyEvent keyEvent) {
+    if (!isVisible) {
+      return;
+    }
+
     focussedElement.onKeyPressed(new GuiKeyEvent(keyEvent));
   }
 
   private void onKeyReleased(KeyEvent keyEvent) {
+    if (!isVisible) {
+      return;
+    }
+
     focussedElement.onKeyReleased(new GuiKeyEvent(keyEvent));
   }
 
   private void onMousePressed(MouseEvent mouseEvent) {
+    if (!isVisible) {
+      return;
+    }
+
     root.onMousePressed(new GuiMouseEvent(mouseEvent));
   }
 
   private void onMouseReleased(MouseEvent mouseEvent) {
+    if (!isVisible) {
+      return;
+    }
+
     root.onMouseReleased(new GuiMouseEvent(mouseEvent));
   }
 
   private void onMouseMoved(MouseEvent mouseEvent) {
+    if (!isVisible) {
+      return;
+    }
+
     root.onMouseMoved(new GuiMouseEvent(mouseEvent));
   }
 }
