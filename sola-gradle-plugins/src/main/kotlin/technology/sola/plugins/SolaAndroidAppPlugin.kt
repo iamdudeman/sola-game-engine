@@ -104,7 +104,7 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       group = "distribution"
 
       from(project.file("build/outputs/apk/debug/android-debug.apk")) {
-        rename { "${project.name}-${project.version}-debug.apk" }
+        rename { "${project.properties["gameName"]}-${project.version}-debug.apk" }
       }
 
       into(project.file("${project.rootDir}/dist/${project.name}"))
@@ -118,7 +118,7 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       dependsOn(project.tasks.named("bundleRelease"))
 
       from(project.file("build/outputs/bundle/release/android-release.aab")) {
-        rename { "${project.name}-${project.version}-release.aab" }
+        rename { "${project.properties["gameName"]}-${project.version}-release.aab" }
       }
 
       into(project.file("${project.rootDir}/dist/${project.name}"))
