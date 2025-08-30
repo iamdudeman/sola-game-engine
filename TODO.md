@@ -3,7 +3,7 @@
 ## Known Bugs List
 
 * UI flicker on Android. Might be related to not having hover in and out. Seems like it sometimes gets stuck in a layout update.
-* (verify if still bug) GuiElement parent undefined when changing roots
+* (confirmed still bug) GuiElement parent undefined when changing roots
     * consider creating a new RootGuiElement when changing roots instead of clearing out root children
         * if this works then can remove parent == null checks
 * (warning) Unsupported JavaFX configuration: classes were loaded from 'unnamed module @47c62251'

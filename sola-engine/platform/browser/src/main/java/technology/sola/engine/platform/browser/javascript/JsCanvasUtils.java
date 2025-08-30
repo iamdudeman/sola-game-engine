@@ -111,7 +111,9 @@ public class JsCanvasUtils {
       canvasEle.width = window.innerWidth;
       canvasEle.height = window.innerHeight;
       canvasEle.oncontextmenu = function(e) {
-        e.preventDefault(); e.stopPropagation();
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
       };
 
       var anchorEle = document.getElementById(anchorId);
