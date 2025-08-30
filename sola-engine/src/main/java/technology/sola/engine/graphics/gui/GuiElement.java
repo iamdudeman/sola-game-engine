@@ -182,7 +182,13 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @return true if element currently has keyboard focus
    */
   public boolean isFocussed() {
-    return getGuiDocument().isFocussed(this);
+    var guiDocument = getGuiDocument();
+
+    if (guiDocument == null) {
+      return false;
+    }
+
+    return guiDocument.isFocussed(this);
   }
 
   /**
@@ -190,7 +196,13 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    */
   public void requestFocus() {
     if (isFocusable()) {
-      getGuiDocument().requestFocus(this);
+      var guiDocument = getGuiDocument();
+
+      if (guiDocument == null) {
+        return;
+      }
+
+      guiDocument.requestFocus(this);;
     }
   }
 
@@ -520,7 +532,12 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
     setContentBounds(contentBounds.setDimensions(width, height));
   }
 
+  @Nullable
   GuiDocument getGuiDocument() {
+    if (this.parent == null) {
+      return null;
+    }
+
     return this.parent.getGuiDocument();
   }
 
