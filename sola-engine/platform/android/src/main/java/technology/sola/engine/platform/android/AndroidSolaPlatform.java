@@ -7,7 +7,6 @@ import android.view.MotionEvent;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleEventObserver;
 import androidx.lifecycle.LifecycleOwner;
-import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.AssetLoaderProvider;
@@ -185,7 +184,7 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
   }
 
   @Override
-  public void onStateChanged(@NotNull LifecycleOwner lifecycleOwner, @NotNull Lifecycle.Event event) {
+  public void onStateChanged(LifecycleOwner lifecycleOwner, Lifecycle.Event event) {
     if (event == Lifecycle.Event.ON_RESUME) {
       solaEventHub.emit(new GameLoopEvent(GameLoopState.RESUME));
     } else if (event == Lifecycle.Event.ON_PAUSE) {
