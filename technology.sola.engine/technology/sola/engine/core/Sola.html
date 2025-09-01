@@ -289,7 +289,9 @@ loadScripts(document, 'script');</script>
 <h3>onAsyncInit</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onAsyncInit</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;completeAsyncInit)</span></div>
 <div class="block">Method called if any asynchronous initialization is needed. Call completeAsyncInit.run() when completed to continue
- starting the Sola.</div>
+ starting the Sola.
+ <p>
+ Note: No render calls will happen until this async initialization has completed, so be careful!</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>completeAsyncInit</code> - the callback to notify the hosting platform initialization is complete</dd>
@@ -313,7 +315,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Method called every frame to update the input and world state.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>deltaTime</code> - the time since last update</dd>
+<dd><code>deltaTime</code> - the time since the last update</dd>
 </dl>
 </section>
 </li>
