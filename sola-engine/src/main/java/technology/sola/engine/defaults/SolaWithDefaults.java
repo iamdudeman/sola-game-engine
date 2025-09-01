@@ -13,6 +13,7 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.graphics.modules.*;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiDocument;
+import technology.sola.engine.graphics.gui.GuiDocumentSystem;
 import technology.sola.engine.graphics.gui.json.GuiJsonDocumentBuilder;
 import technology.sola.engine.graphics.gui.json.element.*;
 import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
@@ -328,6 +329,8 @@ public abstract class SolaWithDefaults extends Sola {
           assetLoaderProvider.get(JsonElementAsset.class),
           new GuiJsonDocumentBuilder(guiTheme, guiElementJsonBlueprints)
         ));
+
+        solaEcs.addSystem(new GuiDocumentSystem(guiDocument));
       }
 
       return this;

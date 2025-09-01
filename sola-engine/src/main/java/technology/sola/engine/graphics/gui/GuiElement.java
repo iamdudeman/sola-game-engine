@@ -129,8 +129,6 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @param renderer the {@link Renderer} instance
    */
   public void render(Renderer renderer) {
-    recalculateLayout();
-
     if (styleContainer.getPropertyValue(BaseStyles::visibility, DefaultStyleValues.VISIBILITY) != Visibility.VISIBLE) {
       return;
     }
@@ -167,7 +165,7 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   /**
    * The active state is for when an element is being interacted with (space key press or mouse pressed).
    *
-   * @return true if element is currently active
+   * @return true if this element is currently active
    */
   public boolean isActive() {
     if (!isFocussed()) {
@@ -178,7 +176,7 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   }
 
   /**
-   * @return true if element currently has keyboard focus
+   * @return true if this element currently has keyboard focus
    */
   public boolean isFocussed() {
     return getGuiDocument().isFocussed(this);
@@ -398,7 +396,7 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @return the {@link AssetLoaderProvider} instance
    */
   protected AssetLoaderProvider getAssetLoaderProvider() {
-    return this.parent.getAssetLoaderProvider();
+    return getParent().getAssetLoaderProvider();
   }
 
   /**
@@ -532,11 +530,11 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
     return getParent().getGuiDocument();
   }
 
-  private void recalculateLayout() {
+  void recalculateLayout() {
     if (isLayoutChanged()) {
       Visibility visibility = styles().getPropertyValue(BaseStyles::visibility, DefaultStyleValues.VISIBILITY);
 
-      // If no visibility then clear out all bounds so no layout space is taken
+      // If no visibility, then clear out all bounds so no layout space is taken
       if (visibility == Visibility.NONE) {
         boundConstraints = new GuiElementBounds(0, 0, 0, 0);
         bounds = boundConstraints;

@@ -124,6 +124,14 @@ public class GuiDocument {
   }
 
   /**
+   * Updates the GuiDocument's layout state. This is usually called via {@link GuiDocumentSystem} and should not be
+   * called manually.
+   */
+  public void update() {
+    root.recalculateLayout();
+  }
+
+  /**
    * Renders the root element to the {@link Renderer}.
    *
    * @param renderer the renderer
