@@ -9,6 +9,9 @@ import technology.sola.ecs.World;
  */
 @NullMarked
 public class GuiDocumentSystem extends EcsSystem {
+  /**
+   * The order of the system.
+   */
   public static final int ORDER = 99;
   private final GuiDocument guiDocument;
 

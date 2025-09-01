@@ -124,8 +124,8 @@ public class GuiDocument {
   }
 
   /**
-   * Updates the GuiDocument's layout state. This is usually called via {@link GuiDocumentSystem)} and should not be
-   * called manually..
+   * Updates the GuiDocument's layout state. This is usually called via {@link GuiDocumentSystem} and should not be
+   * called manually.
    */
   public void update() {
     root.recalculateLayout();
