@@ -15,7 +15,6 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -218,8 +217,11 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   /**
    * @return the parent element
    */
-  @Nullable
   public GuiElement<?, ?> getParent() {
+    if (parent == null) {
+      throw new IllegalStateException(getClass().getSimpleName() + " has not been attached to a document yet so it has no parent.");
+    }
+
     return parent;
   }
 
@@ -325,13 +327,6 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   }
 
   /**
-   * @return an immutable list of children GuiElements
-   */
-  public List<GuiElement<?, ?>> getChildren() {
-    return Collections.unmodifiableList(children);
-  }
-
-  /**
    * Adds child {@link GuiElement}s to this element. How or if they will be rendered depends on the implementing element.
    *
    * @param children the child elements to add
@@ -366,6 +361,19 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    */
   public void invalidateLayout() {
     isLayoutChanged = true;
+  }
+
+  /**
+   * Checks to see if this {@link GuiElement} is currently attached to the {@link GuiDocument} and is part of rendering.
+   *
+   * @return true if attached
+   */
+  public boolean isAttached() {
+    if (parent == null) {
+      return false;
+    }
+
+    return getParent().isAttached();
   }
 
   /**
@@ -521,7 +529,7 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   }
 
   GuiDocument getGuiDocument() {
-    return this.parent.getGuiDocument();
+    return getParent().getGuiDocument();
   }
 
   private void recalculateLayout() {

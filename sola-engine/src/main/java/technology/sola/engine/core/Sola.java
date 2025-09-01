@@ -27,11 +27,11 @@ public abstract class Sola {
    */
   protected EventHub eventHub;
   /**
-   * Used to check current state of keyboard input.
+   * Used to check the current state of keyboard input.
    */
   protected KeyboardInput keyboardInput;
   /**
-   * Used to check current state of mouse input.
+   * Used to check the current state of mouse input.
    */
   protected MouseInput mouseInput;
   /**
@@ -97,7 +97,7 @@ public abstract class Sola {
     keyboardInput.updateStatusOfKeys();
     mouseInput.updateStatusOfMouse();
 
-    if (!platform.gameLoop.isPaused()) {
+    if (!platform().gameLoop.isPaused()) {
       solaEcs.updateWorld(deltaTime);
     }
   }

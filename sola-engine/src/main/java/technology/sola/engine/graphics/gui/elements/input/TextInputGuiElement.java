@@ -128,7 +128,7 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, Te
    */
   @Override
   public TextInputGuiElement appendChildren(GuiElement<?, ?>... children) {
-    return this;
+    throw new UnsupportedOperationException("TextInputGuiElement does not render children");
   }
 
   /**
@@ -139,17 +139,7 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, Te
    */
   @Override
   public TextInputGuiElement removeChild(GuiElement<?, ?> child) {
-    return this;
-  }
-
-  /**
-   * TextInputGuiElement does not render children so this method will return an empty List.
-   *
-   * @return empty List
-   */
-  @Override
-  public List<GuiElement<?, ?>> getChildren() {
-    return List.of();
+    throw new UnsupportedOperationException("TextInputGuiElement does not render children");
   }
 
   /**

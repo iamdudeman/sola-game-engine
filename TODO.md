@@ -3,9 +3,6 @@
 ## Known Bugs List
 
 * UI flicker on Android. Might be related to not having hover in and out. Seems like it sometimes gets stuck in a layout update.
-* (verify if still bug) GuiElement parent undefined when changing roots
-    * consider creating a new RootGuiElement when changing roots instead of clearing out root children
-        * if this works then can remove parent == null checks
 * (warning) Unsupported JavaFX configuration: classes were loaded from 'unnamed module @47c62251'
     * https://stackoverflow.com/questions/67854139/javafx-warning-unsupported-javafx-configuration-classes-were-loaded-from-unna
     * https://stackoverflow.com/questions/76155054/javafx-installation
@@ -15,12 +12,15 @@
 
 ## Planned Cleanup List
 
-* Remove `GuiElement#getChildren` from being public
 
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
 
+* Add aspect ratio styling for ImageGuiElement
+* Add the ability to render something while loading
+    * onRender is not called until async init is completed
+* Add ability to set "borders" for aspect mode MAINTAIN
 * Maybe add a concept some sort of "navigation" for Gui stuff?
     * include a "navigate" method where a "payload" of some sort can be passed in
     * `navigate<T>(String path, T payload)`
@@ -37,8 +37,8 @@
             * Figure out TouchInput API
         * How to handle multitouch
             * Switch JsMouseUtils to mouse events instead of pointer events
-* Add convenient ability to change entity render order based on Y position (or some other condition other than layers)
 * Consider generalizing Triangle renderer and collider to "Polygon" instead
+* Add convenient ability to change entity render order based on Y position (or some other condition other than layers)
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
 * Support .mp3 audio files for all platforms
