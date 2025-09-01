@@ -143,16 +143,6 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, Te
   }
 
   /**
-   * TextInputGuiElement does not render children so this method will return an empty List.
-   *
-   * @return empty List
-   */
-  @Override
-  public List<GuiElement<?, ?>> getChildren() {
-    return List.of();
-  }
-
-  /**
    * @return the placeholder when no user value is entered
    */
   public String getPlaceholder() {

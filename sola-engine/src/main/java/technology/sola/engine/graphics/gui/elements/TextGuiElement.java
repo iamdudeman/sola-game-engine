@@ -92,16 +92,6 @@ public class TextGuiElement extends GuiElement<TextStyles, TextGuiElement> {
   }
 
   /**
-   * TextGuiElement does not render children so this method will return an empty List.
-   *
-   * @return empty List
-   */
-  @Override
-  public List<GuiElement<?, ?>> getChildren() {
-    return List.of();
-  }
-
-  /**
    * @return the text that will be rendered
    */
   @Nullable

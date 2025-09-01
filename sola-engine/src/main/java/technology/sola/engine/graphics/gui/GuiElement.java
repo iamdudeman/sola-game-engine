@@ -15,7 +15,6 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -202,7 +201,7 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
         return;
       }
 
-      guiDocument.requestFocus(this);;
+      guiDocument.requestFocus(this);
     }
   }
 
@@ -334,13 +333,6 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
     }
 
     return self();
-  }
-
-  /**
-   * @return an immutable list of children GuiElements
-   */
-  public List<GuiElement<?, ?>> getChildren() {
-    return Collections.unmodifiableList(children);
   }
 
   /**
