@@ -78,7 +78,7 @@ public class ImageGuiElement extends GuiElement<BaseStyles, ImageGuiElement> {
    */
   @Override
   public ImageGuiElement appendChildren(GuiElement<?, ?>... children) {
-    return this;
+    throw new UnsupportedOperationException("ImageGuiElement does not render children");
   }
 
   /**
@@ -89,7 +89,7 @@ public class ImageGuiElement extends GuiElement<BaseStyles, ImageGuiElement> {
    */
   @Override
   public ImageGuiElement removeChild(GuiElement<?, ?> child) {
-    return this;
+    throw new UnsupportedOperationException("ImageGuiElement does not render children");
   }
 
   /**

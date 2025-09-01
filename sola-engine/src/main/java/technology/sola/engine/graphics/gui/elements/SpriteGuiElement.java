@@ -86,7 +86,7 @@ public class SpriteGuiElement extends GuiElement<BaseStyles, SpriteGuiElement> {
    */
   @Override
   public SpriteGuiElement appendChildren(GuiElement<?, ?>... children) {
-    return this;
+    throw new UnsupportedOperationException("SpriteGuiElement does not render children");
   }
 
   /**
@@ -97,7 +97,7 @@ public class SpriteGuiElement extends GuiElement<BaseStyles, SpriteGuiElement> {
    */
   @Override
   public SpriteGuiElement removeChild(GuiElement<?, ?> child) {
-    return this;
+    throw new UnsupportedOperationException("SpriteGuiElement does not render children");
   }
 
   /**

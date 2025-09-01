@@ -77,7 +77,7 @@ public class TextGuiElement extends GuiElement<TextStyles, TextGuiElement> {
    */
   @Override
   public TextGuiElement appendChildren(GuiElement<?, ?>... children) {
-    return this;
+    throw new UnsupportedOperationException("TextGuiElement does not render children");
   }
 
   /**
@@ -88,7 +88,7 @@ public class TextGuiElement extends GuiElement<TextStyles, TextGuiElement> {
    */
   @Override
   public TextGuiElement removeChild(GuiElement<?, ?> child) {
-    return this;
+    throw new UnsupportedOperationException("TextGuiElement does not render children");
   }
 
   /**

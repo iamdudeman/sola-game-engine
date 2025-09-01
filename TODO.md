@@ -24,6 +24,7 @@
 
 ## TODO List
 
+* Add aspect ratio styling for ImageGuiElement
 * Add the ability to render something while loading
     * onRender is not called until async init is completed
 * Add ability to set "borders" for aspect mode MAINTAIN
