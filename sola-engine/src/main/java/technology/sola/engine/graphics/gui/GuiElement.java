@@ -369,6 +369,10 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @return true if attached
    */
   public boolean isAttached() {
+    if (parent == null) {
+      return false;
+    }
+
     return getParent().isAttached();
   }
 

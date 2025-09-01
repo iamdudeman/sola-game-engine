@@ -28,7 +28,7 @@ public abstract class BaseInputGuiElement<Style extends BaseStyles, ElementType 
   }
 
   /**
-   * A disabled input cannot be focussed, hovered or active.
+   * A disabled input cannot be focused, hovered or active.
    *
    * @return true if the input is disabled
    */
@@ -37,15 +37,14 @@ public abstract class BaseInputGuiElement<Style extends BaseStyles, ElementType 
   }
 
   /**
-   * Updates the disabled state of the input. If the input is currently focussed then focus will return to its parent.
+   * Updates the disabled state of the input. If the input is currently focused, then focus will return to its parent.
    *
    * @param disabled the new disabled state
    * @return this
    */
-  @SuppressWarnings("unchecked")
   public ElementType setDisabled(boolean disabled) {
     if (this.isDisabled != disabled) {
-      boolean shouldRefocusParent = disabled && getParent() != null && isFocussed();
+      boolean shouldRefocusParent = disabled && isAttached() && isFocussed();
 
       isDisabled = disabled;
       styleContainer.invalidate();
@@ -55,7 +54,7 @@ public abstract class BaseInputGuiElement<Style extends BaseStyles, ElementType 
       }
     }
 
-    return (ElementType) this;
+    return self();
   }
 
   @Override
