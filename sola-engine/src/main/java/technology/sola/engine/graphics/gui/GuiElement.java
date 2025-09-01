@@ -129,8 +129,6 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @param renderer the {@link Renderer} instance
    */
   public void render(Renderer renderer) {
-    recalculateLayout();
-
     if (styleContainer.getPropertyValue(BaseStyles::visibility, DefaultStyleValues.VISIBILITY) != Visibility.VISIBLE) {
       return;
     }
@@ -532,11 +530,11 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
     return getParent().getGuiDocument();
   }
 
-  private void recalculateLayout() {
+  void recalculateLayout() {
     if (isLayoutChanged()) {
       Visibility visibility = styles().getPropertyValue(BaseStyles::visibility, DefaultStyleValues.VISIBILITY);
 
-      // If no visibility then clear out all bounds so no layout space is taken
+      // If no visibility, then clear out all bounds so no layout space is taken
       if (visibility == Visibility.NONE) {
         boundConstraints = new GuiElementBounds(0, 0, 0, 0);
         bounds = boundConstraints;

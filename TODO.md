@@ -2,7 +2,6 @@
 
 ## Known Bugs List
 
-* UI flicker on Android. Might be related to not having hover in and out. Seems like it sometimes gets stuck in a layout update.
 * (warning) Unsupported JavaFX configuration: classes were loaded from 'unnamed module @47c62251'
     * https://stackoverflow.com/questions/67854139/javafx-warning-unsupported-javafx-configuration-classes-were-loaded-from-unna
     * https://stackoverflow.com/questions/76155054/javafx-installation
