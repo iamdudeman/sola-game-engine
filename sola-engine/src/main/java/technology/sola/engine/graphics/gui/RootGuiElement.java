@@ -43,6 +43,16 @@ class RootGuiElement extends GuiElement<BaseStyles, RootGuiElement> {
   }
 
   @Override
+  public GuiElement<?, ?> getParent() {
+    return this;
+  }
+
+  @Override
+  public boolean isAttached() {
+    return guiDocument.root == this;
+  }
+
+  @Override
   GuiDocument getGuiDocument() {
     return guiDocument;
   }

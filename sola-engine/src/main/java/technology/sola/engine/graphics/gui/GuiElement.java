@@ -181,13 +181,7 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @return true if element currently has keyboard focus
    */
   public boolean isFocussed() {
-    var guiDocument = getGuiDocument();
-
-    if (guiDocument == null) {
-      return false;
-    }
-
-    return guiDocument.isFocussed(this);
+    return getGuiDocument().isFocussed(this);
   }
 
   /**
@@ -195,13 +189,7 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    */
   public void requestFocus() {
     if (isFocusable()) {
-      var guiDocument = getGuiDocument();
-
-      if (guiDocument == null) {
-        return;
-      }
-
-      guiDocument.requestFocus(this);
+      getGuiDocument().requestFocus(this);
     }
   }
 
@@ -229,8 +217,11 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   /**
    * @return the parent element
    */
-  @Nullable
   public GuiElement<?, ?> getParent() {
+    if (parent == null) {
+      throw new IllegalStateException(getClass().getSimpleName() + " has not been attached to a document yet so it has no parent.");
+    }
+
     return parent;
   }
 
@@ -370,6 +361,15 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    */
   public void invalidateLayout() {
     isLayoutChanged = true;
+  }
+
+  /**
+   * Checks to see if this {@link GuiElement} is currently attached to the {@link GuiDocument} and is part of rendering.
+   *
+   * @return true if attached
+   */
+  public boolean isAttached() {
+    return getParent().isAttached();
   }
 
   /**
@@ -524,13 +524,8 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
     setContentBounds(contentBounds.setDimensions(width, height));
   }
 
-  @Nullable
   GuiDocument getGuiDocument() {
-    if (this.parent == null) {
-      return null;
-    }
-
-    return this.parent.getGuiDocument();
+    return getParent().getGuiDocument();
   }
 
   private void recalculateLayout() {

@@ -18,7 +18,9 @@ import technology.sola.engine.input.MouseInput;
  */
 @NullMarked
 public class GuiDocument {
-  private final RootGuiElement root;
+  RootGuiElement root;
+  private final SolaPlatform platform;
+  private final AssetLoaderProvider assetLoaderProvider;
   private final MouseInput mouseInput;
   private GuiElement<?, ?> focussedElement;
   private boolean isVisible = true;
@@ -31,9 +33,11 @@ public class GuiDocument {
    * @param mouseInput          the {@link MouseInput}
    */
   public GuiDocument(SolaPlatform platform, AssetLoaderProvider assetLoaderProvider, MouseInput mouseInput) {
+    this.platform = platform;
+    this.assetLoaderProvider = assetLoaderProvider;
+    this.mouseInput = mouseInput;
     root = new RootGuiElement(this, assetLoaderProvider, platform.getRenderer().getWidth(), platform.getRenderer().getHeight());
     focussedElement = root;
-    this.mouseInput = mouseInput;
 
     // register listeners
     platform.onKeyPressed(this::onKeyPressed);
@@ -66,17 +70,8 @@ public class GuiDocument {
    * @param rootEle the new root element
    */
   public void setRootElement(GuiElement<?, ?> rootEle) {
-    var previousElement = this.focussedElement;
-
+    root = new RootGuiElement(this, assetLoaderProvider, platform.getRenderer().getWidth(), platform.getRenderer().getHeight());
     focussedElement = root;
-
-    if (previousElement != root) {
-      previousElement.styleContainer.invalidate();
-    }
-
-    for (var child : root.children.stream().toList()) {
-      root.removeChild(child);
-    }
 
     root.appendChildren(rootEle);
     rootEle.requestFocus();
