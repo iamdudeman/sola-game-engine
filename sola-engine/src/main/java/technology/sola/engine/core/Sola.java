@@ -70,6 +70,8 @@ public abstract class Sola {
   /**
    * Method called if any asynchronous initialization is needed. Call completeAsyncInit.run() when completed to continue
    * starting the Sola.
+   * <p>
+   * Note: No render calls will happen until this async initialization has completed, so be careful!
    *
    * @param completeAsyncInit the callback to notify the hosting platform initialization is complete
    */
@@ -91,7 +93,7 @@ public abstract class Sola {
   /**
    * Method called every frame to update the input and world state.
    *
-   * @param deltaTime the time since last update
+   * @param deltaTime the time since the last update
    */
   protected void onUpdate(float deltaTime) {
     keyboardInput.updateStatusOfKeys();

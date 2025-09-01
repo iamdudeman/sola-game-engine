@@ -17,8 +17,6 @@
 ## TODO List
 
 * Add aspect ratio styling for ImageGuiElement
-* Add the ability to render something while loading
-    * onRender is not called until async init is completed
 * Add ability to set "borders" for aspect mode MAINTAIN
 * Maybe add a concept some sort of "navigation" for Gui stuff?
     * include a "navigate" method where a "payload" of some sort can be passed in
