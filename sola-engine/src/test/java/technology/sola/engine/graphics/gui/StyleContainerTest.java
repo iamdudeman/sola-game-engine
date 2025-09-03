@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class StyleContainerTest {
+class StyleContainerTest {
   @Test
   void test() {
     var guiElement = Mockito.mock(TextGuiElement.class);

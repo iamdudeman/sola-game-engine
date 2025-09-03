@@ -18,13 +18,10 @@
 
 * Add aspect ratio styling for ImageGuiElement
 * Add ability to set "borders" for aspect mode MAINTAIN
-* Maybe add a concept some sort of "navigation" for Gui stuff?
-    * include a "navigate" method where a "payload" of some sort can be passed in
-    * `navigate<T>(String path, T payload)`
-    * add interface for `NavTarget<Payload>` with a `String path()` method and `onNavigate(Payload payload)`
 * Update examples to work off of mouse/touch only
     * cleanup logic in `ExampleLauncherSola#addReturnToLauncherKeyEvent`
 * implement the Android platform fully
+    * add the ability to platforms to "request keyboard" for things like TextInputGuiElement
     * keyboard input is not fully implemented
         * AndroidSolaPlatform#mapKeyCode does not support all key codes!
 * Figure out how to handle TouchInput
@@ -43,7 +40,9 @@
     * Load and save JSON content (maybe other content too)
     * Browser implementation could open file dialog
     * Desktop could go straight to file or open file dialog
-* Investigate possible Steam CloudSave integration
+* Investigate possible Steam integrations
+    * CloudSave integration
+    * Controls integration
 * Rendering
     * Ability to change line width when drawing
     * Add a way to do gradients?
