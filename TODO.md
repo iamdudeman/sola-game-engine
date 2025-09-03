@@ -1,5 +1,8 @@
 # sola-game-engine TODO list
 
+WIP:
+* Add ability to set "borders" for aspect mode MAINTAIN
+
 ## Known Bugs List
 
 * (warning) Unsupported JavaFX configuration: classes were loaded from 'unnamed module @47c62251'
@@ -17,7 +20,6 @@
 ## TODO List
 
 * Add aspect ratio styling for ImageGuiElement
-* Add ability to set "borders" for aspect mode MAINTAIN
 * Update examples to work off of mouse/touch only
     * cleanup logic in `ExampleLauncherSola#addReturnToLauncherKeyEvent`
 * implement the Android platform fully
