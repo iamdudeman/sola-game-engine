@@ -1,8 +1,5 @@
 # sola-game-engine TODO list
 
-WIP:
-* Add ability to set "borders" for aspect mode MAINTAIN
-
 ## Known Bugs List
 
 * (warning) Unsupported JavaFX configuration: classes were loaded from 'unnamed module @47c62251'
