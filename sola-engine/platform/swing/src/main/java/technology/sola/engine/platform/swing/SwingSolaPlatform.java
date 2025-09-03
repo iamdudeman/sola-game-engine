@@ -46,6 +46,7 @@ public class SwingSolaPlatform extends SolaPlatform {
   private final boolean useSoftwareRendering;
   @Nullable
   private final Dimension initialWindowSize;
+  private final Color backgroundColor;
   private Canvas canvas;
   private Consumer<Renderer> beforeRender;
   private Consumer<Renderer> onRender;
@@ -71,6 +72,13 @@ public class SwingSolaPlatform extends SolaPlatform {
 
     socketClient = new JavaSocketClient();
     restClient = new JavaRestClient();
+
+    backgroundColor = new Color(
+      platformConfig.backgroundColor().getRed(),
+      platformConfig.backgroundColor().getGreen(),
+      platformConfig.backgroundColor().getBlue(),
+      platformConfig.backgroundColor().getAlpha()
+    );
   }
 
   @Override
@@ -259,7 +267,8 @@ public class SwingSolaPlatform extends SolaPlatform {
 
       AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
 
-      graphics.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+      graphics.setColor(backgroundColor);
+      graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
       graphics.drawImage(bufferedImage, aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height(), null);
       graphics.dispose();
 
@@ -273,7 +282,8 @@ public class SwingSolaPlatform extends SolaPlatform {
     beforeRender = renderer -> {
       graphics2D = (Graphics2D) canvas.getBufferStrategy().getDrawGraphics();
       ((Graphics2dRenderer) renderer).updateGraphics2D(graphics2D);
-      graphics2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+      graphics2D.setColor(backgroundColor);
+      graphics2D.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
       AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
       graphics2D.translate(aspectRatioSizing.x(), aspectRatioSizing.y());
