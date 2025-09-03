@@ -19,12 +19,12 @@ public interface GuiNavigatorScreenWithoutPayload<Element extends GuiElement<?, 
   void onNavigate(Element element);
 
   @Override
-  default Class<Void> getPayloadType() {
-    return Void.class;
+  default void onNavigate(Element element, Void unused) {
+    onNavigate(element);
   }
 
   @Override
-  default void onNavigate(Element element, Void unused) {
-    onNavigate(element);
+  default Class<Void> getPayloadType() {
+    return Void.class;
   }
 }
