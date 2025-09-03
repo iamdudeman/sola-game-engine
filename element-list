@@ -27,6 +27,7 @@ technology.sola.engine.graphics.gui.json
 technology.sola.engine.graphics.gui.json.element
 technology.sola.engine.graphics.gui.json.exception
 technology.sola.engine.graphics.gui.json.styles
+technology.sola.engine.graphics.gui.navigation
 technology.sola.engine.graphics.gui.style
 technology.sola.engine.graphics.gui.style.property
 technology.sola.engine.graphics.gui.style.theme
