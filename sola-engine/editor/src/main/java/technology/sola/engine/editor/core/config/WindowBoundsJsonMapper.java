@@ -7,11 +7,6 @@ import technology.sola.json.mapper.JsonMapper;
 @NullMarked
 class WindowBoundsJsonMapper implements JsonMapper<WindowBounds> {
   @Override
-  public Class<WindowBounds> getObjectClass() {
-    return WindowBounds.class;
-  }
-
-  @Override
   public JsonObject toJson(WindowBounds windowBounds) {
     JsonObject json = new JsonObject();
 

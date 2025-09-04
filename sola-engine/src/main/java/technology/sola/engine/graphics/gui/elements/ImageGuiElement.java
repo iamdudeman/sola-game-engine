@@ -61,7 +61,7 @@ public class ImageGuiElement extends GuiElement<BaseStyles, ImageGuiElement> {
   }
 
   /**
-   * ImageGuiElement is not focusable so this will return false.
+   * ImageGuiElement is not focusable, so this will return false.
    *
    * @return false
    */
@@ -71,7 +71,7 @@ public class ImageGuiElement extends GuiElement<BaseStyles, ImageGuiElement> {
   }
 
   /**
-   * ImageGuiElement does not render children so this method will do nothing.
+   * ImageGuiElement does not render children, so this method will do nothing.
    *
    * @param children the child elements that will not be added
    * @return this
@@ -82,7 +82,7 @@ public class ImageGuiElement extends GuiElement<BaseStyles, ImageGuiElement> {
   }
 
   /**
-   * ImageGuiElement does not render children so this method will do nothing.
+   * ImageGuiElement does not render children, so this method will do nothing.
    *
    * @param child the child element that will not be removed
    * @return this

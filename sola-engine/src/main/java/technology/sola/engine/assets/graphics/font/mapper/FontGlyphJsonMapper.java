@@ -11,11 +11,6 @@ import technology.sola.json.mapper.JsonMapper;
 @NullMarked
 public class FontGlyphJsonMapper implements JsonMapper<FontGlyph> {
   @Override
-  public Class<FontGlyph> getObjectClass() {
-    return FontGlyph.class;
-  }
-
-  @Override
   public JsonObject toJson(FontGlyph fontGlyph) {
     JsonObject jsonObject = new JsonObject();
 

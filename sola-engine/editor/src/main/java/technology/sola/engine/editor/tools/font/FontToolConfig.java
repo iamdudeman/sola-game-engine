@@ -31,11 +31,6 @@ public record FontToolConfig(
 
   static class ConfigJsonMapper implements JsonMapper<FontToolConfig> {
     @Override
-    public Class<FontToolConfig> getObjectClass() {
-      return FontToolConfig.class;
-    }
-
-    @Override
     public JsonObject toJson(FontToolConfig config) {
       JsonObject json = new JsonObject();
       JsonArray openedFiles = new JsonArray();
