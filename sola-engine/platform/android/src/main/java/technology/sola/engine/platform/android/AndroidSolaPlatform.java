@@ -2,7 +2,6 @@ package technology.sola.engine.platform.android;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.view.MotionEvent;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleEventObserver;
@@ -47,6 +46,7 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
   private static final SolaLogger LOGGER = SolaLogger.of(AndroidSolaPlatform.class);
   private final SolaAndroidActivity hostActivity;
   private final boolean useSoftwareRendering;
+  private final int backgroundColor;
   private final List<Consumer<KeyEvent>> keyPressedConsumers = new ArrayList<>();
   private final List<Consumer<KeyEvent>> keyReleasedConsumers = new ArrayList<>();
   private final List<Consumer<MouseEvent>> mouseMovedConsumers = new ArrayList<>();
@@ -65,6 +65,13 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
     restClient = new JavaRestClient();
 
     useSoftwareRendering = androidSolaPlatformConfig.useSoftwareRendering();
+
+    backgroundColor = Color.valueOf(
+      androidSolaPlatformConfig.backgroundColor().getRed() / 255f,
+      androidSolaPlatformConfig.backgroundColor().getGreen() / 255f,
+      androidSolaPlatformConfig.backgroundColor().getBlue() / 255f,
+      androidSolaPlatformConfig.backgroundColor().getAlpha() / 255f
+    ).toArgb();
   }
 
   @Override
@@ -125,7 +132,7 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
       return;
     }
 
-    canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+    canvas.drawColor(backgroundColor);
 
     if (!useSoftwareRendering) {
       AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();

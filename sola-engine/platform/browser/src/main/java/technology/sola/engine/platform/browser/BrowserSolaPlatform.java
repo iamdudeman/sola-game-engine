@@ -32,6 +32,7 @@ import technology.sola.engine.platform.browser.javascript.JsMouseUtils;
 import technology.sola.engine.platform.browser.javascript.JsUtils;
 import technology.sola.logging.SolaLogger;
 
+import java.util.Locale;
 import java.util.function.Consumer;
 
 /**
@@ -42,6 +43,7 @@ import java.util.function.Consumer;
 public class BrowserSolaPlatform extends SolaPlatform {
   private static final SolaLogger LOGGER = SolaLogger.of(BrowserSolaPlatform.class);
   private final boolean useSoftwareRendering;
+  private final String backgroundColor;
 
   /**
    * Creates a BrowserSolaPlatform instance using default {@link BrowserSolaPlatformConfig}.
@@ -51,7 +53,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
   }
 
   /**
-   * Creates a BrowserSolaPlatform instance with desired configuration.
+   * Creates a BrowserSolaPlatform instance with the desired configuration.
    *
    * @param platformConfig the {@link BrowserSolaPlatformConfig}
    */
@@ -59,6 +61,13 @@ public class BrowserSolaPlatform extends SolaPlatform {
     this.useSoftwareRendering = platformConfig.useSoftwareRendering();
     this.socketClient = new BrowserSocketClient();
     this.restClient = new BrowserRestClient();
+
+    backgroundColor = String.format(Locale.US, "rgba(%d, %d, %d, %f",
+      platformConfig.backgroundColor().getRed(),
+      platformConfig.backgroundColor().getGreen(),
+      platformConfig.backgroundColor().getBlue(),
+      platformConfig.backgroundColor().getAlpha() / 255f
+    );
   }
 
   @Override
@@ -127,7 +136,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   @Override
   protected void beforeRender(Renderer renderer) {
-    JsCanvasUtils.clearRect();
+    JsCanvasUtils.clearRect(backgroundColor);
 
     if (!useSoftwareRendering) {
       AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();

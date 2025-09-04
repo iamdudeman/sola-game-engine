@@ -7,6 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelFormat;
 import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
 import javafx.scene.transform.Affine;
 import javafx.stage.Stage;
 import org.jspecify.annotations.NullMarked;
@@ -55,6 +56,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   private final Double initialWindowWidth;
   @Nullable
   private final Double initialWindowHeight;
+  private final Color backgroundColor;
   private Canvas canvas;
   private GraphicsContext graphicsContext;
   private WritableImage writableImage;
@@ -68,7 +70,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   }
 
   /**
-   * Creates a SwingSolaPlatform instance with desired configuration.
+   * Creates a SwingSolaPlatform instance with the desired configuration.
    *
    * @param platformConfig the {@link JavaFxSolaPlatformConfig}
    */
@@ -77,6 +79,13 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     this.useImageSmoothing = platformConfig.useImageSmoothing();
     this.initialWindowWidth = platformConfig.initialWindowWidth();
     this.initialWindowHeight = platformConfig.initialWindowHeight();
+
+    backgroundColor = new Color(
+      platformConfig.backgroundColor().getRed() / 255d,
+      platformConfig.backgroundColor().getGreen() / 255d,
+      platformConfig.backgroundColor().getBlue() / 255d,
+      platformConfig.backgroundColor().getAlpha() / 255d
+    );
 
     socketClient = new JavaSocketClient();
     restClient = new JavaRestClient();
@@ -195,7 +204,8 @@ public class JavaFxSolaPlatform extends SolaPlatform {
 
   @Override
   protected void beforeRender(Renderer renderer) {
-    graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    graphicsContext.setFill(backgroundColor);
+    graphicsContext.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
     if (!useSoftwareRendering) {
       graphicsContext.setTransform(originalTransform);
