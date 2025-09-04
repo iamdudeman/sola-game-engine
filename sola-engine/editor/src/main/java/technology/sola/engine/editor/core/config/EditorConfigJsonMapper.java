@@ -12,6 +12,11 @@ class EditorConfigJsonMapper implements JsonMapper<EditorConfig> {
   private final WindowBoundsJsonMapper windowBoundsJsonMapper = new WindowBoundsJsonMapper();
 
   @Override
+  public Class<EditorConfig> getObjectClass() {
+    return EditorConfig.class;
+  }
+
+  @Override
   public JsonObject toJson(EditorConfig editorConfig) {
     JsonObject object = new JsonObject();
     JsonObject tools = new JsonObject();

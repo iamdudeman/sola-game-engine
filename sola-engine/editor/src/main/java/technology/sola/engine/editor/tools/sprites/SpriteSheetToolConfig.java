@@ -35,6 +35,11 @@ public record SpriteSheetToolConfig(
 
   static class ConfigJsonMapper implements JsonMapper<SpriteSheetToolConfig> {
     @Override
+    public Class<SpriteSheetToolConfig> getObjectClass() {
+      return SpriteSheetToolConfig.class;
+    }
+
+    @Override
     public JsonObject toJson(SpriteSheetToolConfig config) {
       JsonObject json = new JsonObject();
       JsonArray openedFiles = new JsonArray();

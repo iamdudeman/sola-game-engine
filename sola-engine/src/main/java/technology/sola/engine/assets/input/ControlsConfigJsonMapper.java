@@ -18,6 +18,11 @@ import java.util.Map;
 @NullMarked
 public class ControlsConfigJsonMapper implements JsonMapper<ControlsConfig> {
   @Override
+  public Class<ControlsConfig> getObjectClass() {
+    return ControlsConfig.class;
+  }
+
+  @Override
   public JsonObject toJson(ControlsConfig controlsConfig) {
     JsonArray controlsJson = new JsonArray();
 

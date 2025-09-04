@@ -18,6 +18,11 @@ public class FontInfoJsonMapper implements JsonMapper<FontInfo> {
   private final FontGlyphJsonMapper fontGlyphJsonMapper = new FontGlyphJsonMapper();
 
   @Override
+  public Class<FontInfo> getObjectClass() {
+    return FontInfo.class;
+  }
+
+  @Override
   public JsonObject toJson(FontInfo fontInfo) {
     JsonArray glyphs = fontGlyphJsonMapper.toJson(fontInfo.glyphs());
     JsonObject jsonObject = new JsonObject();

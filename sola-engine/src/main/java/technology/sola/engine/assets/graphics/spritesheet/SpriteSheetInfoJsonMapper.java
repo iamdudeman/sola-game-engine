@@ -14,6 +14,11 @@ import java.util.List;
 @NullMarked
 public class SpriteSheetInfoJsonMapper implements JsonMapper<SpriteSheetInfo> {
   @Override
+  public Class<SpriteSheetInfo> getObjectClass() {
+    return SpriteSheetInfo.class;
+  }
+
+  @Override
   public JsonObject toJson(SpriteSheetInfo spriteSheetInfo) {
     JsonObject jsonObject = new JsonObject();
 

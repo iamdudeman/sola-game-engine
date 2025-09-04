@@ -4,7 +4,7 @@ plugins {
 
 dependencies {
   api("com.github.iamdudeman:sola-ecs:2.2.0")
-  api("com.github.iamdudeman:sola-json:4.0.2")
+  api("com.github.iamdudeman:sola-json:4.0.1")
 
   // performance testing dependencies
   testImplementation("org.openjdk.jmh:jmh-core:1.37")
