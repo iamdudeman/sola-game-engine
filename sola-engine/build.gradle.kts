@@ -3,7 +3,8 @@ plugins {
 }
 
 dependencies {
-  api("com.github.iamdudeman:sola-ecs:2.2.0")
+  // can also point to git branch via commit (ex. 8d601c3cca)
+  api("com.github.iamdudeman:sola-ecs:8d601c3cca") // todo real version
   api("com.github.iamdudeman:sola-json:4.0.3")
 
   // performance testing dependencies
