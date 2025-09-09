@@ -85,7 +85,7 @@ public class CirclePopGame extends SolaWithDefaults {
   private World buildWorld() {
     World world = new World(10000);
 
-    for (int i = 0; i < world.getMaxEntityCount(); i++) {
+    for (int i = 0; i < world.getCurrentCapacity(); i++) {
       int x = SolaRandom.nextInt(0, 800);
       int y = SolaRandom.nextInt(0, 600);
       int scale = SolaRandom.nextInt(3, 20);

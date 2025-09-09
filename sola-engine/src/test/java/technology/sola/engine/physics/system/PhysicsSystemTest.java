@@ -23,6 +23,7 @@ class PhysicsSystemTest {
       world.createEntity()
         .addComponent(transformComponent)
         .addComponent(dynamicBodyComponent);
+      world.update();
 
       PhysicsSystem physicsSystem = new PhysicsSystem();
 
@@ -50,6 +51,7 @@ class PhysicsSystemTest {
       world.createEntity()
         .addComponent(transformComponent)
         .addComponent(dynamicBodyComponent);
+      world.update();
 
       PhysicsSystem physicsSystem = new PhysicsSystem();
 
