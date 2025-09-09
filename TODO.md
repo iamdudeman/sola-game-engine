@@ -2,6 +2,10 @@
 
 ## Known Bugs List
 
+* fix bug where penetration and normal are incorrect when AABB are inside each other
+
+### Low-priority bugs
+
 * (warning) Unsupported JavaFX configuration: classes were loaded from 'unnamed module @47c62251'
     * https://stackoverflow.com/questions/67854139/javafx-warning-unsupported-javafx-configuration-classes-were-loaded-from-unna
     * https://stackoverflow.com/questions/76155054/javafx-installation
@@ -16,13 +20,10 @@
 
 ## TODO List
 
-* Add aspect ratio styling for ImageGuiElement
-* Update examples to work off of mouse/touch only
-    * cleanup logic in `ExampleLauncherSola#addReturnToLauncherKeyEvent`
-* implement the Android platform fully
-    * add the ability to platforms to "request keyboard" for things like TextInputGuiElement
-    * keyboard input is not fully implemented
-        * AndroidSolaPlatform#mapKeyCode does not support all key codes!
+* More debug render info
+    * Add the number of entities out of max number of entities
+    * Add FPS and UPS
+    * maybe also a way to toggle debug everywhere if it is enabled ("~" perhaps?)
 * Figure out how to handle TouchInput
     * Primarily for browser and Android but also could be supported in JavaFX
     * touchstart and touchend all hard coded to MouseButton.Primary currently
@@ -30,6 +31,12 @@
             * Figure out TouchInput API
         * How to handle multitouch
             * Switch JsMouseUtils to mouse events instead of pointer events
+* implement the Android platform fully
+    * add the ability to platforms to "request keyboard" for things like TextInputGuiElement
+    * keyboard input is not fully implemented
+        * AndroidSolaPlatform#mapKeyCode does not support all key codes!
+* Update examples to work off of mouse/touch only
+    * cleanup logic in `ExampleLauncherSola#addReturnToLauncherKeyEvent`
 * Consider generalizing Triangle renderer and collider to "Polygon" instead
 * Add convenient ability to change entity render order based on Y position (or some other condition other than layers)
 * research possible benefits of updating to Java 21
@@ -39,25 +46,10 @@
     * Load and save JSON content (maybe other content too)
     * Browser implementation could open file dialog
     * Desktop could go straight to file or open file dialog
-* Investigate possible Steam integrations
-    * CloudSave integration
-    * Controls integration
-* Rendering
-    * Ability to change line width when drawing
-    * Add a way to do gradients?
-        * maybe just linear at first?
-        * maybe just a convenience method for generating gradient SolaImages?
 * Gui performance improvements
-    * when should layout be invalidated (can partial invalidations happen for children/parent)
     * consider splitting layout and paint styles to prevent extra calculations
-* Implement "grow" concept for GuiElement children
-    * grow and shrink
-* REST client + server
-    * ability to send and process Authorization header
-* Lighting
-    * implement more light types other than just point lights
-    * https://www.redblobgames.com/articles/visibility/
-    * https://www.roguebasin.com/index.php?title=Field_of_Vision
+        * changing background color doesn't affect layout
+        * changing border color doesn't affect layout `if a border is already set`
 * Particle System
     * consider ability to add fix number of particle spawns (4 at a time in different directions for example)
     * consider ability to change particle shape (instead of only circle maybe square)
@@ -66,6 +58,21 @@
     * consider some sort of "swaying" for non-linear particles
     * consider ability to spawn particles in a radius away from center
         * probably want the ability to make particles go to and from center for this
+* Consider adding rotation to TransformComponent
+    * Would need to update rendering stuff
+    * Would need to update physics stuff
+        * Not just colliders, but also impulse collision resolution potentially
+* Research Virtual File System
+    * ability to mount archives of some sort
+        * possible example, instead of png use different file format that many can be compressed into one larger file
+            * path /test
+            * contents 100 100 ffffffff 00ff00ff
+* Investigate possible Steam integrations
+    * CloudSave integration
+    * Controls integration
+
+### Low priority (not ordered)
+
 * Gui json features
     * consider an event map of some sort for when loading gui documents
         * could also have an "event id -> event function" map that can be used as part of gui doc loading
@@ -73,9 +80,19 @@
         * ie. (`mousePress` -> `doSomething`)
     * implement "Style sheet" JSON concept
         * gui json documents can reference these for use
-* Consider adding rotation to TransformComponent
-    * Would need to update rendering stuff
-    * Would need to update physics stuff
+* Rendering
+    * Ability to change line width when drawing
+    * Add a way to do gradients?
+        * maybe just linear at first?
+        * maybe just a convenience method for generating gradient SolaImages?
+* Implement "grow" concept for GuiElement children
+    * grow and shrink
+* REST client + server
+    * ability to send and process Authorization header
+* Lighting
+    * implement more light types other than just point lights
+    * https://www.redblobgames.com/articles/visibility/
+    * https://www.roguebasin.com/index.php?title=Field_of_Vision
 * Consider adding a "debug console" option
     * While open can toggle things like render debug outlines and debug spatial hashmap stuff
     * Could also maybe allow adding custom commands
@@ -93,11 +110,6 @@
         * mouse and key events sent to worker
         * worker sends ImageData to main thread to render
         * (this approach may improve performance for StressTestExample to work better)
-* Research Virtual File System
-    * ability to mount archives of some sort
-        * possible example, instead of png use different file format that many can be compressed into one larger file
-            * path /test
-            * contents 100 100 ffffffff 00ff00ff
 * Scripting language
     * How will that work with browser implementation?
     * Maybe a custom Domain Specific Language?
