@@ -139,7 +139,7 @@ public abstract class SolaWithDefaults extends Sola {
         this.isDebug = true;
 
         if (solaGraphics != null && solaPhysics != null) {
-          solaGraphics.addGraphicsModules(new DebugEntityGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
+          solaGraphics.addGraphicsModules(new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
         }
       }
 
@@ -181,7 +181,7 @@ public abstract class SolaWithDefaults extends Sola {
         solaEcs.addSystems(solaPhysics.getSystems());
 
         if (isDebug && solaGraphics != null) {
-          solaGraphics.addGraphicsModules(new DebugEntityGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
+          solaGraphics.addGraphicsModules(new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
         }
       }
 
@@ -234,7 +234,7 @@ public abstract class SolaWithDefaults extends Sola {
         }
 
         if (isDebug && solaPhysics != null) {
-          solaGraphics.addGraphicsModules(new DebugEntityGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
+          solaGraphics.addGraphicsModules(new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
         }
 
         rebuildRenderFunction();

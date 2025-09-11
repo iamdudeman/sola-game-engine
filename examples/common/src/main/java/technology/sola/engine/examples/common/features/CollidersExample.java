@@ -8,7 +8,7 @@ import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaWithDefaults;
-import technology.sola.engine.defaults.graphics.modules.DebugEntityGraphicsModule;
+import technology.sola.engine.defaults.graphics.modules.DebugGraphicsModule;
 import technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
@@ -74,7 +74,7 @@ public class CollidersExample extends SolaWithDefaults {
     CreateShapeSystem createShapeSystem = new CreateShapeSystem();
 
     solaEcs.addSystems(createShapeSystem);
-    solaEcs.setWorld(new World(100));
+    solaEcs.setWorld(new World(10));
 
     solaGraphics().addGraphicsModules(new CreateShapeGraphicsModule(createShapeSystem));
   }
@@ -153,19 +153,19 @@ public class CollidersExample extends SolaWithDefaults {
       }
 
       if (keyboardInput.isKeyPressed(Key.A)) {
-        var debugGraphicsModule = solaGraphics().getGraphicsModule(DebugEntityGraphicsModule.class);
+        var debugGraphicsModule = solaGraphics().getGraphicsModule(DebugGraphicsModule.class);
 
         debugGraphicsModule.setRenderingColliders(!debugGraphicsModule.isRenderingColliders());
         updateDebugGui("debugShape", debugGraphicsModule.isRenderingColliders());
       }
       if (keyboardInput.isKeyPressed(Key.S)) {
-        var debugGraphicsModule = solaGraphics().getGraphicsModule(DebugEntityGraphicsModule.class);
+        var debugGraphicsModule = solaGraphics().getGraphicsModule(DebugGraphicsModule.class);
 
         debugGraphicsModule.setRenderingBoundingBoxes(!debugGraphicsModule.isRenderingBoundingBoxes());
         updateDebugGui("debugBoundingBox", debugGraphicsModule.isRenderingBoundingBoxes());
       }
       if (keyboardInput.isKeyPressed(Key.D)) {
-        var debugGraphicsModule = solaGraphics().getGraphicsModule(DebugEntityGraphicsModule.class);
+        var debugGraphicsModule = solaGraphics().getGraphicsModule(DebugGraphicsModule.class);
 
         debugGraphicsModule.setRenderingBroadPhase(!debugGraphicsModule.isRenderingBroadPhase());
         updateDebugGui("debugBroadPhase", debugGraphicsModule.isRenderingBroadPhase());

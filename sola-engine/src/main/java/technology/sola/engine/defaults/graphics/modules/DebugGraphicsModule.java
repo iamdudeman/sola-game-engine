@@ -18,7 +18,7 @@ import technology.sola.math.linear.Matrix3D;
  * It will render broad phase debug information and colliders for {@link Entity} that have a {@link ColliderComponent}.
  */
 @NullMarked
-public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Entry<ColliderComponent, TransformComponent>> {
+public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<ColliderComponent, TransformComponent>> {
   /**
    * The render order for the DebugEntityGraphicsModule.
    */
@@ -34,7 +34,7 @@ public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Ent
    *
    * @param collisionDetectionSystem the {@link CollisionDetectionSystem} instance
    */
-  public DebugEntityGraphicsModule(@Nullable CollisionDetectionSystem collisionDetectionSystem) {
+  public DebugGraphicsModule(@Nullable CollisionDetectionSystem collisionDetectionSystem) {
     this.collisionDetectionSystem = collisionDetectionSystem;
   }
 
@@ -50,6 +50,8 @@ public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Ent
     if (isRenderingBroadPhase && collisionDetectionSystem != null) {
       collisionDetectionSystem.getCollisionDetectionBroadPhase().renderDebug(renderer, cameraScaleTransform, cameraTranslationTransform);
     }
+
+    renderer.drawString(world.getEntityCount() + "/" + world.getCurrentCapacity(), 2, 2, Color.WHITE);
   }
 
   @Override

@@ -60,7 +60,7 @@ public abstract class GameLoop implements Runnable {
   }
 
   /**
-   * Creates a game loop instance with desired update and render logic at target updates per second.
+   * Creates a game loop instance with the desired update and render logic at target updates per second.
    *
    * @param eventHub               the {@link EventHub} instance
    * @param updateMethod           the update method that is called each frame
@@ -115,6 +115,20 @@ public abstract class GameLoop implements Runnable {
   public void stop() {
     isRunning = false;
     LOGGER.info("----------Sola is stopping----------");
+  }
+
+  /**
+   * @return the number of frames rendered per second
+   */
+  public int getFramesPerSecond() {
+    return fpsTracker.framesThisSecond;
+  }
+
+  /**
+   * @return the number of game logic updates per second
+   */
+  public int getUpdatesPerSecond() {
+    return fpsTracker.updatesThisSecond;
   }
 
   private void onGameLoopEvent(GameLoopEvent event) {
