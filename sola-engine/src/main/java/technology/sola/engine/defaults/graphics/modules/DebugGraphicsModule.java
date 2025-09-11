@@ -28,6 +28,7 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
   private boolean isRenderingColliders = true;
   private boolean isRenderingBoundingBoxes = true;
   private boolean isRenderingBroadPhase = true;
+  private boolean isRenderingEntityCounts = true;
 
   /**
    * Creates an instance of DebugEntityGraphicsModule.
@@ -51,7 +52,9 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
       collisionDetectionSystem.getCollisionDetectionBroadPhase().renderDebug(renderer, cameraScaleTransform, cameraTranslationTransform);
     }
 
-    renderer.drawString(world.getEntityCount() + "/" + world.getCurrentCapacity(), 2, 2, Color.WHITE);
+    if (isRenderingEntityCounts) {
+      renderer.drawString(world.getEntityCount() + "/" + world.getCurrentCapacity(), 2, 2, Color.WHITE);
+    }
   }
 
   @Override
@@ -133,5 +136,21 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
    */
   public void setRenderingBroadPhase(boolean isEnabled) {
     this.isRenderingBroadPhase = isEnabled;
+  }
+
+  /**
+   * @return true if entity count debug rendering is enabled
+   */
+  public boolean isRenderingEntityCounts() {
+    return isRenderingEntityCounts;
+  }
+
+  /**
+   * Enable or disable entity count debug rendering.
+   *
+   * @param renderingEntityCounts new entity count debug rendering enabled state
+   */
+  public void setRenderingEntityCounts(boolean renderingEntityCounts) {
+    isRenderingEntityCounts = renderingEntityCounts;
   }
 }

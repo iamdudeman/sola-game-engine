@@ -87,6 +87,7 @@ public final class KeyboardLayout {
       shiftMap.put(',', '<');
       shiftMap.put('.', '>');
       shiftMap.put('/', '?');
+      shiftMap.put('`', '~');
 
       hasShiftFunction = (int keyCode) ->
         (keyCode >= Key.COMMA.getCode() && keyCode <= Key.NINE.getCode())

@@ -22,9 +22,7 @@ public abstract class SolaGraphicsModule implements Comparable<SolaGraphicsModul
    * @param cameraTranslationTransform the camera's translation
    */
   public void render(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
-    if (isActive()) {
-      renderMethod(renderer, world, cameraScaleTransform, cameraTranslationTransform);
-    }
+    renderMethod(renderer, world, cameraScaleTransform, cameraTranslationTransform);
   }
 
   /**
