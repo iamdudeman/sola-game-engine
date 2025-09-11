@@ -122,6 +122,7 @@ public abstract class SolaWithDefaults extends Sola {
     return guiDocument;
   }
 
+  // todo refactor how this applies onto a Sola to avoid duplicate and confusing logic
   /**
    * DefaultsConfigurator provides methods for enabling various default functionality.
    */
@@ -140,7 +141,7 @@ public abstract class SolaWithDefaults extends Sola {
         this.isDebug = true;
 
         if (solaGraphics != null && solaPhysics != null) {
-          var debugGraphicsModule = new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class));
+          var debugGraphicsModule = new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class), eventHub);
 
           solaGraphics.addGraphicsModules(debugGraphicsModule);
           solaEcs.addSystem(new DebugControlSystem(keyboardInput, debugGraphicsModule));
@@ -185,7 +186,7 @@ public abstract class SolaWithDefaults extends Sola {
         solaEcs.addSystems(solaPhysics.getSystems());
 
         if (isDebug && solaGraphics != null) {
-          var debugGraphicsModule = new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class));
+          var debugGraphicsModule = new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class), eventHub);
 
           solaGraphics.addGraphicsModules(debugGraphicsModule);
           solaEcs.addSystem(new DebugControlSystem(keyboardInput, debugGraphicsModule));
@@ -241,7 +242,7 @@ public abstract class SolaWithDefaults extends Sola {
         }
 
         if (isDebug && solaPhysics != null) {
-          var debugGraphicsModule = new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class));
+          var debugGraphicsModule = new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class), eventHub);
 
           solaGraphics.addGraphicsModules(debugGraphicsModule);
           solaEcs.addSystem(new DebugControlSystem(keyboardInput, debugGraphicsModule));

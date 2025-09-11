@@ -7,6 +7,8 @@ import technology.sola.ecs.World;
 import technology.sola.ecs.view.View;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.core.event.FpsEvent;
+import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.component.ColliderComponent;
@@ -29,14 +31,22 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
   private boolean isRenderingBoundingBoxes = true;
   private boolean isRenderingBroadPhase = true;
   private boolean isRenderingEntityCounts = true;
+  private boolean isRenderingFps = true;
+  private int fps = 0;
+  private int ups = 0;
 
   /**
    * Creates an instance of DebugEntityGraphicsModule.
    *
    * @param collisionDetectionSystem the {@link CollisionDetectionSystem} instance
    */
-  public DebugGraphicsModule(@Nullable CollisionDetectionSystem collisionDetectionSystem) {
+  public DebugGraphicsModule(@Nullable CollisionDetectionSystem collisionDetectionSystem, EventHub eventHub) {
     this.collisionDetectionSystem = collisionDetectionSystem;
+
+    eventHub.add(FpsEvent.class, event -> {
+      fps = event.fps();
+      ups = event.ups();
+    });
   }
 
   @Override
@@ -48,12 +58,18 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
   public void render(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
     super.render(renderer, world, cameraScaleTransform, cameraTranslationTransform);
 
+    // todo render little menu showing what is active and what isn't with (1) next to it to show how to toggle
+
     if (isRenderingBroadPhase && collisionDetectionSystem != null) {
       collisionDetectionSystem.getCollisionDetectionBroadPhase().renderDebug(renderer, cameraScaleTransform, cameraTranslationTransform);
     }
 
     if (isRenderingEntityCounts) {
       renderer.drawString(world.getEntityCount() + "/" + world.getCurrentCapacity(), 2, 2, Color.WHITE);
+    }
+
+    if (isRenderingFps) {
+      renderer.drawString("Fps: " + fps + ", Ups:" + ups, 2, 12, Color.WHITE);
     }
   }
 

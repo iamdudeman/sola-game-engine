@@ -1,6 +1,7 @@
 package technology.sola.engine.core;
 
 import org.jspecify.annotations.NullMarked;
+import technology.sola.engine.core.event.FpsEvent;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.event.EventHub;
 import technology.sola.logging.SolaLogger;
@@ -22,7 +23,7 @@ public abstract class GameLoop implements Runnable {
   /**
    * The {@link FpsTracker} instance.
    */
-  protected final FpsTracker fpsTracker = new FpsTracker();
+  protected final FpsTracker fpsTracker;
   /**
    * Method to call each update. The delta time is passed into the {@link Consumer}.
    */
@@ -48,7 +49,7 @@ public abstract class GameLoop implements Runnable {
   private boolean isPaused = false;
 
   /**
-   * Creates a game loop instance with desired update and render logic at target updates per second.
+   * Creates a game loop instance with the desired update and render logic at target updates per second.
    *
    * @param eventHub               the {@link EventHub} instance
    * @param updateMethod           the update method that is called each frame
@@ -74,6 +75,8 @@ public abstract class GameLoop implements Runnable {
     this.renderMethod = renderMethod;
     this.deltaTime = 1f / targetUpdatesPerSecond;
     this.trackFps = logFps;
+
+    fpsTracker = new FpsTracker(eventHub);
 
     eventHub.add(GameLoopEvent.class, this::onGameLoopEvent);
   }
@@ -117,20 +120,6 @@ public abstract class GameLoop implements Runnable {
     LOGGER.info("----------Sola is stopping----------");
   }
 
-  /**
-   * @return the number of frames rendered per second
-   */
-  public int getFramesPerSecond() {
-    return fpsTracker.framesThisSecond;
-  }
-
-  /**
-   * @return the number of game logic updates per second
-   */
-  public int getUpdatesPerSecond() {
-    return fpsTracker.updatesThisSecond;
-  }
-
   private void onGameLoopEvent(GameLoopEvent event) {
     switch (event.state()) {
       case STOP -> this.stop();
@@ -158,8 +147,13 @@ public abstract class GameLoop implements Runnable {
    * FpsTracker is a simple class for tracking update and frame ticks.
    */
   protected static class FpsTracker {
+    private final EventHub eventHub;
     private int updatesThisSecond = 0;
     private int framesThisSecond = 0;
+
+    public FpsTracker(EventHub eventHub) {
+      this.eventHub = eventHub;
+    }
 
     /**
      * Signals an update tick happened.
@@ -177,6 +171,7 @@ public abstract class GameLoop implements Runnable {
 
     private void logStats() {
       LOGGER.info("ups: %s fps: %s", updatesThisSecond, framesThisSecond);
+      eventHub.emit(new FpsEvent(framesThisSecond, updatesThisSecond));
       updatesThisSecond = 0;
       framesThisSecond = 0;
     }
