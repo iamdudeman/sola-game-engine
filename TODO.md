@@ -2,6 +2,8 @@
 
 ## Known Bugs List
 
+* underscore not rendering from drawString
+* back tick and single quote not rendering in TextInputGuiElement
 * fix bug where penetration and normal are incorrect when AABB are inside each other
 
 ### Low-priority bugs

@@ -30,7 +30,7 @@ public final class KeyboardLayout {
   }
 
   /**
-   * Returns the shifted variant of the character for the current keyboard type. If there is no shifted variant then
+   * Returns the shifted variant of the character for the current keyboard type. If there is no shifted variant, then
    * the original character will return.
    *
    * @param character the character to get the shift variant for
@@ -93,6 +93,9 @@ public final class KeyboardLayout {
         (keyCode >= Key.COMMA.getCode() && keyCode <= Key.NINE.getCode())
           || keyCode == Key.SEMI_COLON.getCode()
           || keyCode == Key.EQUALS.getCode()
+          || keyCode == Key.BACK_QUOTE.getCode()
+          || keyCode == Key.SINGLE_QUOTE.getCode()
+          || keyCode == Key.FORWARD_SLASH.getCode()
           || (keyCode >= Key.LEFT_BRACKET.getCode() && keyCode <= Key.RIGHT_BRACKET.getCode());
     }
   }
