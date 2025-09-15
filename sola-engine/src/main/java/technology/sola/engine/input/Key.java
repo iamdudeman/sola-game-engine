@@ -32,7 +32,7 @@ public enum Key {
   // spacer for missing keys
 
   /**
-   * Shift key.
+   * "Shift" key.
    */
   SHIFT(16, "Shift"),
   /**
@@ -159,7 +159,7 @@ public enum Key {
   // spacer for missing keys
 
   /**
-   * Semi Colon key.
+   * Semi-colon key.
    */
   SEMI_COLON(59, "Semi Colon"),
 
@@ -406,7 +406,7 @@ public enum Key {
   // spacer for missing keys
 
   /**
-   * Delete key.
+   * "Delete" key.
    */
   DELETE(127, "Delete"),
 
@@ -417,7 +417,17 @@ public enum Key {
    */
   NUM_LOCK(144, "Num Lock"),
 
+  /**
+   * Scroll Lock key.
+   */
+  SCROLL_LOCK(145, "Scroll Lock"),
+
   // spacer for missing keys
+
+  /**
+   * Print Screen key.
+   */
+  PRINT_SCREEN(154, "Print Screen"),
 
   /**
    * Insert key.
@@ -437,6 +447,13 @@ public enum Key {
    * Single Quote key.
    */
   SINGLE_QUOTE(222, "Single Quote"),
+
+  // spacer for missing keys
+
+  /**
+   * Windows key.
+   */
+  WINDOWS(524, "Windows"),
   ;
 
   private final int code;
