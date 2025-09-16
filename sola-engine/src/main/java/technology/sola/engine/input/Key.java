@@ -277,17 +277,17 @@ public enum Key {
    */
   Z(90, "Z"),
   /**
-   * Left Bracket key.
+   * "Open Bracket" key.
    */
-  LEFT_BRACKET(91, "Left Bracket"),
+  OPEN_BRACKET(91, "Open Bracket"),
   /**
    * Backslash key.
    */
   BACKSLASH(92, "Backslash"),
   /**
-   * Right Bracket key.
+   * "Close Bracket" key.
    */
-  RIGHT_BRACKET(93, "Right Bracket"),
+  CLOSE_BRACKET(93, "Close Bracket"),
 
   // spacer for missing keys
 

@@ -96,7 +96,7 @@ public final class KeyboardLayout {
           || keyCode == Key.BACK_QUOTE.getCode()
           || keyCode == Key.SINGLE_QUOTE.getCode()
           || keyCode == Key.FORWARD_SLASH.getCode()
-          || (keyCode >= Key.LEFT_BRACKET.getCode() && keyCode <= Key.RIGHT_BRACKET.getCode());
+          || (keyCode >= Key.OPEN_BRACKET.getCode() && keyCode <= Key.CLOSE_BRACKET.getCode());
     }
   }
 
