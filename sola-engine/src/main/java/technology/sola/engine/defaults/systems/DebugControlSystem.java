@@ -35,10 +35,6 @@ public class DebugControlSystem extends EcsSystem {
       if (keyboardInput.isKeyPressed(Key.THREE) || keyboardInput.isKeyPressed(Key.NUM_THREE)) {
         debugGraphicsModule.setRenderingColliders(!debugGraphicsModule.isRenderingColliders());
       }
-
-      if (keyboardInput.isKeyPressed(Key.FOUR) || keyboardInput.isKeyPressed(Key.NUM_FOUR)) {
-        debugGraphicsModule.setRenderingEntityCounts(!debugGraphicsModule.isRenderingEntityCounts());
-      }
     }
   }
 }
