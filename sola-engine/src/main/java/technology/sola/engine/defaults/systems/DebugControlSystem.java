@@ -7,11 +7,20 @@ import technology.sola.engine.defaults.graphics.modules.DebugGraphicsModule;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.KeyboardInput;
 
+/**
+ * DebugControlSystem is an {@link EcsSystem} that handles updating the debug state of {@link DebugGraphicsModule}.
+ */
 @NullMarked
 public class DebugControlSystem extends EcsSystem {
   private final KeyboardInput keyboardInput;
   private final DebugGraphicsModule debugGraphicsModule;
 
+  /**
+   * Creates an instance of this system.
+   *
+   * @param keyboardInput       the {@link KeyboardInput} instance
+   * @param debugGraphicsModule the {@link DebugGraphicsModule} instance to update
+   */
   public DebugControlSystem(KeyboardInput keyboardInput, DebugGraphicsModule debugGraphicsModule) {
     this.keyboardInput = keyboardInput;
     this.debugGraphicsModule = debugGraphicsModule;
@@ -24,15 +33,15 @@ public class DebugControlSystem extends EcsSystem {
     }
 
     if (debugGraphicsModule.isActive()) {
-      if (keyboardInput.isKeyPressed(Key.ONE) || keyboardInput.isKeyPressed(Key.NUM_ONE)) {
+      if (keyboardInput.isKeyPressed(DebugGraphicsModule.KEY_BROAD_PHASE)) {
         debugGraphicsModule.setRenderingBroadPhase(!debugGraphicsModule.isRenderingBroadPhase());
       }
 
-      if (keyboardInput.isKeyPressed(Key.TWO) || keyboardInput.isKeyPressed(Key.NUM_TWO)) {
+      if (keyboardInput.isKeyPressed(DebugGraphicsModule.KEY_BOUNDING_BOX)) {
         debugGraphicsModule.setRenderingBoundingBoxes(!debugGraphicsModule.isRenderingBoundingBoxes());
       }
 
-      if (keyboardInput.isKeyPressed(Key.THREE) || keyboardInput.isKeyPressed(Key.NUM_THREE)) {
+      if (keyboardInput.isKeyPressed(DebugGraphicsModule.KEY_COLLIDER)) {
         debugGraphicsModule.setRenderingColliders(!debugGraphicsModule.isRenderingColliders());
       }
     }

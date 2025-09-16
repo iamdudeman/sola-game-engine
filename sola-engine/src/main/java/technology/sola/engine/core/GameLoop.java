@@ -151,6 +151,11 @@ public abstract class GameLoop implements Runnable {
     private int updatesThisSecond = 0;
     private int framesThisSecond = 0;
 
+    /**
+     * Creates an instance of the FpsTracker.
+     *
+     * @param eventHub the {@link EventHub} instance
+     */
     public FpsTracker(EventHub eventHub) {
       this.eventHub = eventHub;
     }
