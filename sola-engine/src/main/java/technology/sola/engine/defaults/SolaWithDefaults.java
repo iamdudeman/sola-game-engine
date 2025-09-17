@@ -11,6 +11,7 @@ import technology.sola.engine.assets.json.JsonElementAsset;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.graphics.modules.*;
+import technology.sola.engine.defaults.systems.DebugControlSystem;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiDocument;
 import technology.sola.engine.graphics.gui.GuiDocumentSystem;
@@ -121,6 +122,7 @@ public abstract class SolaWithDefaults extends Sola {
     return guiDocument;
   }
 
+  // todo refactor how this applies onto a Sola to avoid duplicate and confusing logic
   /**
    * DefaultsConfigurator provides methods for enabling various default functionality.
    */
@@ -139,7 +141,10 @@ public abstract class SolaWithDefaults extends Sola {
         this.isDebug = true;
 
         if (solaGraphics != null && solaPhysics != null) {
-          solaGraphics.addGraphicsModules(new DebugEntityGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
+          var debugGraphicsModule = new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class), eventHub);
+
+          solaGraphics.addGraphicsModules(debugGraphicsModule);
+          solaEcs.addSystem(new DebugControlSystem(keyboardInput, debugGraphicsModule));
         }
       }
 
@@ -181,7 +186,10 @@ public abstract class SolaWithDefaults extends Sola {
         solaEcs.addSystems(solaPhysics.getSystems());
 
         if (isDebug && solaGraphics != null) {
-          solaGraphics.addGraphicsModules(new DebugEntityGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
+          var debugGraphicsModule = new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class), eventHub);
+
+          solaGraphics.addGraphicsModules(debugGraphicsModule);
+          solaEcs.addSystem(new DebugControlSystem(keyboardInput, debugGraphicsModule));
         }
       }
 
@@ -234,7 +242,10 @@ public abstract class SolaWithDefaults extends Sola {
         }
 
         if (isDebug && solaPhysics != null) {
-          solaGraphics.addGraphicsModules(new DebugEntityGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class)));
+          var debugGraphicsModule = new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class), eventHub);
+
+          solaGraphics.addGraphicsModules(debugGraphicsModule);
+          solaEcs.addSystem(new DebugControlSystem(keyboardInput, debugGraphicsModule));
         }
 
         rebuildRenderFunction();

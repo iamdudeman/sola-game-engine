@@ -15,15 +15,12 @@
 
 ## Planned Cleanup List
 
+* consider moving SolaWithDefaults default configurator logic to its own thing and remove need for SolaWithDefaults
 
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
 
-* More debug render info
-    * Add the number of entities out of max number of entities
-    * Add FPS and UPS
-    * maybe also a way to toggle debug everywhere if it is enabled ("~" perhaps?)
 * Figure out how to handle TouchInput
     * Primarily for browser and Android but also could be supported in JavaFX
     * touchstart and touchend all hard coded to MouseButton.Primary currently

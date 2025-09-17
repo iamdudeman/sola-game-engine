@@ -98,7 +98,9 @@ public class SolaGraphics {
     World world = solaEcs.getWorld();
 
     for (var graphicsModule : graphicsModuleList) {
-      graphicsModule.render(renderer, world, cameraScaleTransform, cameraTranslationTransform);
+      if (graphicsModule.isActive()) {
+        graphicsModule.render(renderer, world, cameraScaleTransform, cameraTranslationTransform);
+      }
     }
   }
 

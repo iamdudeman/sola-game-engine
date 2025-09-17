@@ -50,8 +50,9 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, Te
       }
     });
 
-    events().keyPressed().on(keyEvent -> {
-      int keyCode = keyEvent.getKeyEvent().keyCode();
+    events().keyPressed().on(guiKeyEvent -> {
+      var keyEvent = guiKeyEvent.getKeyEvent();
+      int keyCode = keyEvent.keyCode();
       int length = valueBuilder.length();
       boolean isLessThanMaxLength = maxLength == null || length < maxLength;
 
@@ -62,7 +63,7 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, Te
           valueBuilder.deleteCharAt(length - 1);
         }
       } else if (isLessThanMaxLength) {
-        char character = (char) keyCode;
+        char character = keyEvent.keyChar();
 
         if (keyCode >= Key.A.getCode() && keyCode <= Key.Z.getCode()) {
           if (isShiftDown) {

@@ -8,7 +8,6 @@ import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaWithDefaults;
-import technology.sola.engine.defaults.graphics.modules.DebugEntityGraphicsModule;
 import technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
@@ -43,11 +42,6 @@ public class CollidersExample extends SolaWithDefaults {
       .setTextColor(Color.YELLOW)
       .build()
   );
-  private final ConditionalStyle<TextStyles> debugOffTextStyle = ConditionalStyle.always(
-    new TextStyles.Builder<>()
-      .setTextColor(Color.WHITE)
-      .build()
-  );
   private InteractionMode currentMode = InteractionMode.CREATE_CIRCLE;
   @Nullable
   private TextGuiElement currentlySelectedText = null;
@@ -74,7 +68,7 @@ public class CollidersExample extends SolaWithDefaults {
     CreateShapeSystem createShapeSystem = new CreateShapeSystem();
 
     solaEcs.addSystems(createShapeSystem);
-    solaEcs.setWorld(new World(100));
+    solaEcs.setWorld(new World(10));
 
     solaGraphics().addGraphicsModules(new CreateShapeGraphicsModule(createShapeSystem));
   }
@@ -152,25 +146,6 @@ public class CollidersExample extends SolaWithDefaults {
         changeMode(InteractionMode.CREATE_TRIANGLE, "modeTriangle");
       }
 
-      if (keyboardInput.isKeyPressed(Key.A)) {
-        var debugGraphicsModule = solaGraphics().getGraphicsModule(DebugEntityGraphicsModule.class);
-
-        debugGraphicsModule.setRenderingColliders(!debugGraphicsModule.isRenderingColliders());
-        updateDebugGui("debugShape", debugGraphicsModule.isRenderingColliders());
-      }
-      if (keyboardInput.isKeyPressed(Key.S)) {
-        var debugGraphicsModule = solaGraphics().getGraphicsModule(DebugEntityGraphicsModule.class);
-
-        debugGraphicsModule.setRenderingBoundingBoxes(!debugGraphicsModule.isRenderingBoundingBoxes());
-        updateDebugGui("debugBoundingBox", debugGraphicsModule.isRenderingBoundingBoxes());
-      }
-      if (keyboardInput.isKeyPressed(Key.D)) {
-        var debugGraphicsModule = solaGraphics().getGraphicsModule(DebugEntityGraphicsModule.class);
-
-        debugGraphicsModule.setRenderingBroadPhase(!debugGraphicsModule.isRenderingBroadPhase());
-        updateDebugGui("debugBroadPhase", debugGraphicsModule.isRenderingBroadPhase());
-      }
-
       if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
         var point = solaGraphics().screenToWorldCoordinate(mouseInput.getMousePosition());
 
@@ -233,17 +208,6 @@ public class CollidersExample extends SolaWithDefaults {
       currentlySelectedText.styles().addStyle(selectedTextStyle);
       reset();
     }
-
-    private void updateDebugGui(String id, boolean isEnabled) {
-      var textElement = guiDocument().findElementById(id, TextGuiElement.class);
-
-      if (isEnabled) {
-        textElement.styles().removeStyle(debugOffTextStyle);
-      } else {
-        textElement.styles().addStyle(debugOffTextStyle);
-      }
-    }
-
   }
 
   private enum InteractionMode {

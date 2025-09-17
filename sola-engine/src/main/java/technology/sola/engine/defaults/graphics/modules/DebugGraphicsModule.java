@@ -6,9 +6,14 @@ import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.ecs.view.View;
 import technology.sola.ecs.view.View2Entry;
+import technology.sola.engine.assets.graphics.font.DefaultFont;
+import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.core.event.FpsEvent;
+import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
 import technology.sola.math.linear.Matrix3D;
@@ -18,24 +23,43 @@ import technology.sola.math.linear.Matrix3D;
  * It will render broad phase debug information and colliders for {@link Entity} that have a {@link ColliderComponent}.
  */
 @NullMarked
-public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Entry<ColliderComponent, TransformComponent>> {
+public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<ColliderComponent, TransformComponent>> {
   /**
    * The render order for the DebugEntityGraphicsModule.
    */
   public static final int ORDER = 999;
+  /**
+   * The {@link Key} that toggles broad phase debug rendering.
+   */
+  public static final Key KEY_BROAD_PHASE = Key.F1;
+  /**
+   * The {@link Key} that toggles bounding box debug rendering.
+   */
+  public static final Key KEY_BOUNDING_BOX = Key.F2;
+  /**
+   * The {@link Key} that toggles collider debug rendering.
+   */
+  public static final Key KEY_COLLIDER = Key.F3;
+
   @Nullable
   private final CollisionDetectionSystem collisionDetectionSystem;
+  private final Color backgroundColor = new Color(80, 40, 40, 40);
+  private Font.@Nullable TextDimensions textDimensions = null;
   private boolean isRenderingColliders = true;
   private boolean isRenderingBoundingBoxes = true;
   private boolean isRenderingBroadPhase = true;
+  private int fps = 0;
 
   /**
    * Creates an instance of DebugEntityGraphicsModule.
    *
    * @param collisionDetectionSystem the {@link CollisionDetectionSystem} instance
+   * @param eventHub                 the {@link EventHub} instance
    */
-  public DebugEntityGraphicsModule(@Nullable CollisionDetectionSystem collisionDetectionSystem) {
+  public DebugGraphicsModule(@Nullable CollisionDetectionSystem collisionDetectionSystem, EventHub eventHub) {
     this.collisionDetectionSystem = collisionDetectionSystem;
+
+    eventHub.add(FpsEvent.class, event -> fps = event.fps());
   }
 
   @Override
@@ -50,6 +74,34 @@ public class DebugEntityGraphicsModule extends SolaEntityGraphicsModule<View2Ent
     if (isRenderingBroadPhase && collisionDetectionSystem != null) {
       collisionDetectionSystem.getCollisionDetectionBroadPhase().renderDebug(renderer, cameraScaleTransform, cameraTranslationTransform);
     }
+
+    var font = DefaultFont.get();
+    var boundingBoxString = "(" + KEY_BOUNDING_BOX.getName() + ") Bounding Box";
+
+    if (textDimensions == null) {
+      textDimensions = font.getDimensionsForText(boundingBoxString);
+    }
+
+    var height = textDimensions.height();
+    final int lines = 5;
+
+    renderer.setFont(font);
+    renderer.fillRect(0, 0, textDimensions.width() + 4, height * lines + 4, backgroundColor);
+
+    // line 1
+    renderer.drawString(world.getEntityCount() + "/" + world.getCurrentCapacity(), 2, 2, Color.WHITE);
+    // line 2
+    renderer.drawString("FPS: " + fps, 2, 2 + height, Color.WHITE);
+    // line 3
+    var broadPhaseString = "(" + KEY_BROAD_PHASE.getName() + ") Broad Phase";
+
+    renderer.drawString(broadPhaseString, 2, 2 + height * 2, isRenderingBroadPhase ? Color.GREEN : Color.WHITE);
+    // line 4
+    renderer.drawString(boundingBoxString, 2, 2 + height * 3, isRenderingBoundingBoxes ? Color.BLUE : Color.WHITE);
+    // line 5
+    var colliderString = "(" + KEY_COLLIDER.getName() + ") Collider";
+
+    renderer.drawString(colliderString, 2, 2 + height * 4, isRenderingColliders ? Color.RED : Color.WHITE);
   }
 
   @Override
