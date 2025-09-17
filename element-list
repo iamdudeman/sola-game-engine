@@ -15,6 +15,7 @@ technology.sola.engine.core.component
 technology.sola.engine.core.event
 technology.sola.engine.defaults
 technology.sola.engine.defaults.graphics.modules
+technology.sola.engine.defaults.systems
 technology.sola.engine.event
 technology.sola.engine.graphics
 technology.sola.engine.graphics.components

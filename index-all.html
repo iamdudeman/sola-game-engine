@@ -682,6 +682,10 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html#clear(technology.sola.engine.graphics.Color)" class="member-name-link">clear(Color)</a> - Method in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer">SoftwareRenderer</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#CLOSE_BRACKET" class="member-name-link">CLOSE_BRACKET</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
+<dd>
+<div class="block">"Close Bracket" key.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/math/geometry/Line.html#closestPointOnLine(technology.sola.math.linear.Vector2D)" class="member-name-link">closestPointOnLine(Vector2D)</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Line.html" title="class in technology.sola.math.geometry">Line</a></dt>
 <dd>
 <div class="block">Calculates the closest point on this line to the desired target point.</div>
@@ -1025,11 +1029,19 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Color constant - rgb(169, 169, 169).</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html" class="type-name-link" title="class in technology.sola.engine.defaults.graphics.modules">DebugEntityGraphicsModule</a> - Class in <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/package-summary.html">technology.sola.engine.defaults.graphics.modules</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/systems/DebugControlSystem.html" class="type-name-link" title="class in technology.sola.engine.defaults.systems">DebugControlSystem</a> - Class in <a href="technology.sola.engine/technology/sola/engine/defaults/systems/package-summary.html">technology.sola.engine.defaults.systems</a></dt>
+<dd>
+<div class="block">DebugControlSystem is an <code>EcsSystem</code> that handles updating the debug state of <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>DebugGraphicsModule</code></a>.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/systems/DebugControlSystem.html#%3Cinit%3E(technology.sola.engine.input.KeyboardInput,technology.sola.engine.defaults.graphics.modules.DebugGraphicsModule)" class="member-name-link">DebugControlSystem(KeyboardInput, DebugGraphicsModule)</a> - Constructor for class technology.sola.engine.defaults.systems.<a href="technology.sola.engine/technology/sola/engine/defaults/systems/DebugControlSystem.html" title="class in technology.sola.engine.defaults.systems">DebugControlSystem</a></dt>
+<dd>
+<div class="block">Creates an instance of this system.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html" class="type-name-link" title="class in technology.sola.engine.defaults.graphics.modules">DebugGraphicsModule</a> - Class in <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/package-summary.html">technology.sola.engine.defaults.graphics.modules</a></dt>
 <dd>
 <div class="block">DebugEntityGraphicsModule is a <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaEntityGraphicsModule</code></a> implementation for rendering debug information for a <code>World</code>.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html#%3Cinit%3E(technology.sola.engine.physics.system.CollisionDetectionSystem)" class="member-name-link">DebugEntityGraphicsModule(CollisionDetectionSystem)</a> - Constructor for class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugEntityGraphicsModule</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html#%3Cinit%3E(technology.sola.engine.physics.system.CollisionDetectionSystem,technology.sola.engine.event.EventHub)" class="member-name-link">DebugGraphicsModule(CollisionDetectionSystem, EventHub)</a> - Constructor for class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugGraphicsModule</a></dt>
 <dd>
 <div class="block">Creates an instance of DebugEntityGraphicsModule.</div>
 </dd>
@@ -1096,7 +1108,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#DELETE" class="member-name-link">DELETE</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
 <dd>
-<div class="block">Delete key.</div>
+<div class="block">"Delete" key.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html#deltaTime" class="member-name-link">deltaTime</a> - Variable in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html" title="class in technology.sola.engine.core">GameLoop</a></dt>
 <dd>
@@ -1391,6 +1403,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/json/JsonElementAsset.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class technology.sola.engine.assets.json.<a href="technology.sola.engine/technology/sola/engine/assets/json/JsonElementAsset.html" title="class in technology.sola.engine.assets.json">JsonElementAsset</a></dt>
+<dd>
+<div class="block">Indicates whether some other object is "equal to" this one.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/event/FpsEvent.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class technology.sola.engine.core.event.<a href="technology.sola.engine/technology/sola/engine/core/event/FpsEvent.html" title="class in technology.sola.engine.core.event">FpsEvent</a></dt>
 <dd>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </dd>
@@ -1788,12 +1804,26 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">4 key.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/event/FpsEvent.html#fps()" class="member-name-link">fps()</a> - Method in record class technology.sola.engine.core.event.<a href="technology.sola.engine/technology/sola/engine/core/event/FpsEvent.html" title="class in technology.sola.engine.core.event">FpsEvent</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/core/event/FpsEvent.html#param-fps"><code>fps</code></a> record component.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/event/FpsEvent.html" class="type-name-link" title="class in technology.sola.engine.core.event">FpsEvent</a> - Record Class in <a href="technology.sola.engine/technology/sola/engine/core/event/package-summary.html">technology.sola.engine.core.event</a></dt>
+<dd>
+<div class="block">Event fired whenever from the <a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html" title="class in technology.sola.engine.core"><code>GameLoop</code></a> with FPS and UPS stats.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/event/FpsEvent.html#%3Cinit%3E(int,int)" class="member-name-link">FpsEvent(int, int)</a> - Constructor for record class technology.sola.engine.core.event.<a href="technology.sola.engine/technology/sola/engine/core/event/FpsEvent.html" title="class in technology.sola.engine.core.event">FpsEvent</a></dt>
+<dd>
+<div class="block">Creates an instance of a <code>FpsEvent</code> record class.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html#fpsTracker" class="member-name-link">fpsTracker</a> - Variable in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html" title="class in technology.sola.engine.core">GameLoop</a></dt>
 <dd>
 <div class="block">The <a href="technology.sola.engine/technology/sola/engine/core/GameLoop.FpsTracker.html" title="class in technology.sola.engine.core"><code>GameLoop.FpsTracker</code></a> instance.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/GameLoop.FpsTracker.html#%3Cinit%3E()" class="member-name-link">FpsTracker()</a> - Constructor for class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/GameLoop.FpsTracker.html" title="class in technology.sola.engine.core">GameLoop.FpsTracker</a></dt>
-<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/GameLoop.FpsTracker.html#%3Cinit%3E(technology.sola.engine.event.EventHub)" class="member-name-link">FpsTracker(EventHub)</a> - Constructor for class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/GameLoop.FpsTracker.html" title="class in technology.sola.engine.core">GameLoop.FpsTracker</a></dt>
+<dd>
+<div class="block">Creates an instance of the FpsTracker.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/property/StyleValue.html#FULL" class="member-name-link">FULL</a> - Static variable in class technology.sola.engine.graphics.gui.style.property.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/property/StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a></dt>
 <dd>
 <div class="block">StyleValue constant for the value of 100%.</div>
@@ -1815,11 +1845,11 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html#%3Cinit%3E(technology.sola.engine.event.EventHub,java.util.function.Consumer,java.lang.Runnable,int)" class="member-name-link">GameLoop(EventHub, Consumer&lt;Float&gt;, Runnable, int)</a> - Constructor for class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html" title="class in technology.sola.engine.core">GameLoop</a></dt>
 <dd>
-<div class="block">Creates a game loop instance with desired update and render logic at target updates per second.</div>
+<div class="block">Creates a game loop instance with the desired update and render logic at target updates per second.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html#%3Cinit%3E(technology.sola.engine.event.EventHub,java.util.function.Consumer,java.lang.Runnable,int,boolean)" class="member-name-link">GameLoop(EventHub, Consumer&lt;Float&gt;, Runnable, int, boolean)</a> - Constructor for class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html" title="class in technology.sola.engine.core">GameLoop</a></dt>
 <dd>
-<div class="block">Creates a game loop instance with desired update and render logic at target updates per second.</div>
+<div class="block">Creates a game loop instance with the desired update and render logic at target updates per second.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/GameLoop.FpsTracker.html" class="type-name-link" title="class in technology.sola.engine.core">GameLoop.FpsTracker</a> - Class in <a href="technology.sola.engine/technology/sola/engine/core/package-summary.html">technology.sola.engine.core</a></dt>
 <dd>
@@ -2123,7 +2153,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html#getOffsetY()" class="member-name-link">getOffsetY()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component">ColliderComponent</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html#getOrder()" class="member-name-link">getOrder()</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugEntityGraphicsModule</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html#getOrder()" class="member-name-link">getOrder()</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/ScreenSpaceLightMapGraphicsModule.html#getOrder()" class="member-name-link">getOrder()</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/ScreenSpaceLightMapGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">ScreenSpaceLightMapGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
@@ -2299,7 +2329,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/CircleEntityGraphicsModule.html#getViewToRender(technology.sola.ecs.World)" class="member-name-link">getViewToRender(World)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/CircleEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">CircleEntityGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html#getViewToRender(technology.sola.ecs.World)" class="member-name-link">getViewToRender(World)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugEntityGraphicsModule</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html#getViewToRender(technology.sola.ecs.World)" class="member-name-link">getViewToRender(World)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/ParticleEmitterEntityGraphicsModule.html#getViewToRender(technology.sola.ecs.World)" class="member-name-link">getViewToRender(World)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/ParticleEmitterEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">ParticleEmitterEntityGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
@@ -2567,6 +2597,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/json/JsonElementAsset.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class technology.sola.engine.assets.json.<a href="technology.sola.engine/technology/sola/engine/assets/json/JsonElementAsset.html" title="class in technology.sola.engine.assets.json">JsonElementAsset</a></dt>
+<dd>
+<div class="block">Returns a hash code value for this object.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/event/FpsEvent.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class technology.sola.engine.core.event.<a href="technology.sola.engine/technology/sola/engine/core/event/FpsEvent.html" title="class in technology.sola.engine.core.event">FpsEvent</a></dt>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
@@ -3020,16 +3054,16 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/audio/AudioClip.html#isPlaying()" class="member-name-link">isPlaying()</a> - Method in interface technology.sola.engine.assets.audio.<a href="technology.sola.engine/technology/sola/engine/assets/audio/AudioClip.html" title="interface in technology.sola.engine.assets.audio">AudioClip</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html#isRenderingBoundingBoxes()" class="member-name-link">isRenderingBoundingBoxes()</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugEntityGraphicsModule</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html#isRenderingBoundingBoxes()" class="member-name-link">isRenderingBoundingBoxes()</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugGraphicsModule</a></dt>
 <dd>
 <div class="block">Whether <a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html#getBoundingBox(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getBoundingBox(TransformComponent)</code></a> debug rendering is enabled or not.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html#isRenderingBroadPhase()" class="member-name-link">isRenderingBroadPhase()</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugEntityGraphicsModule</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html#isRenderingBroadPhase()" class="member-name-link">isRenderingBroadPhase()</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugGraphicsModule</a></dt>
 <dd>
 <div class="block">Whether <a href="technology.sola.engine/technology/sola/engine/physics/system/collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision"><code>CollisionDetectionBroadPhase</code></a> debug rendering is
  enabled or not.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html#isRenderingColliders()" class="member-name-link">isRenderingColliders()</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugEntityGraphicsModule</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html#isRenderingColliders()" class="member-name-link">isRenderingColliders()</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugGraphicsModule</a></dt>
 <dd>
 <div class="block">Whether <a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html#getShape(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getShape(TransformComponent)</code></a> debug rendering is enabled or not.</div>
 </dd>
@@ -3118,6 +3152,18 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Key enum contains information about keyboard keys.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html#KEY_BOUNDING_BOX" class="member-name-link">KEY_BOUNDING_BOX</a> - Static variable in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugGraphicsModule</a></dt>
+<dd>
+<div class="block">The <a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input"><code>Key</code></a> that toggles bounding box debug rendering.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html#KEY_BROAD_PHASE" class="member-name-link">KEY_BROAD_PHASE</a> - Static variable in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugGraphicsModule</a></dt>
+<dd>
+<div class="block">The <a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input"><code>Key</code></a> that toggles broad phase debug rendering.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html#KEY_COLLIDER" class="member-name-link">KEY_COLLIDER</a> - Static variable in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugGraphicsModule</a></dt>
+<dd>
+<div class="block">The <a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input"><code>Key</code></a> that toggles collider debug rendering.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/Sola.html#keyboardInput" class="member-name-link">keyboardInput</a> - Variable in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/Sola.html" title="class in technology.sola.engine.core">Sola</a></dt>
 <dd>
 <div class="block">Used to check the current state of keyboard input.</div>
@@ -3142,6 +3188,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">The type of keyboard.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/KeyEvent.html#keyChar()" class="member-name-link">keyChar()</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/KeyEvent.html#keyCode()" class="member-name-link">keyCode()</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a></dt>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/input/KeyEvent.html#param-keyCode"><code>keyCode</code></a> record component.</div>
@@ -3160,7 +3208,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/KeyEvent.html" class="type-name-link" title="class in technology.sola.engine.input">KeyEvent</a> - Record Class in <a href="technology.sola.engine/technology/sola/engine/input/package-summary.html">technology.sola.engine.input</a></dt>
 <dd>
-<div class="block">KeyEvent contains data for a keyboard related event.</div>
+<div class="block">KeyEvent contains data for a keyboard-related event.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/KeyEvent.html#%3Cinit%3E(int)" class="member-name-link">KeyEvent(int)</a> - Constructor for record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a></dt>
 <dd>
@@ -3220,10 +3268,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#LEFT" class="member-name-link">LEFT</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
 <dd>
 <div class="block">Left key.</div>
-</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#LEFT_BRACKET" class="member-name-link">LEFT_BRACKET</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
-<dd>
-<div class="block">Left Bracket key.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/math/SolaMath.html#lerp(float,float,float)" class="member-name-link">lerp(float, float, float)</a> - Static method in class technology.sola.math.<a href="technology.sola.engine/technology/sola/math/SolaMath.html" title="class in technology.sola.math">SolaMath</a></dt>
 <dd>
@@ -3924,11 +3968,15 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Method called every frame to update the input and world state.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#OPEN_BRACKET" class="member-name-link">OPEN_BRACKET</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
+<dd>
+<div class="block">"Open Bracket" key.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/Color.html#ORANGE" class="member-name-link">ORANGE</a> - Static variable in class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/Color.html" title="class in technology.sola.engine.graphics">Color</a></dt>
 <dd>
 <div class="block">Color constant - rgb(255, 165, 0).</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html#ORDER" class="member-name-link">ORDER</a> - Static variable in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugEntityGraphicsModule</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html#ORDER" class="member-name-link">ORDER</a> - Static variable in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugGraphicsModule</a></dt>
 <dd>
 <div class="block">The render order for the DebugEntityGraphicsModule.</div>
 </dd>
@@ -4195,6 +4243,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Represents primary (button 1, usually the left) mouse button.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#PRINT_SCREEN" class="member-name-link">PRINT_SCREEN</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
+<dd>
+<div class="block">Print Screen key.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/networking/rest/RestClient.html#put(java.lang.String,java.util.function.Consumer)" class="member-name-link">put(String, Consumer&lt;HttpResponse&gt;)</a> - Method in interface technology.sola.engine.networking.rest.<a href="technology.sola.engine/technology/sola/engine/networking/rest/RestClient.html" title="interface in technology.sola.engine.networking.rest">RestClient</a></dt>
 <dd>
 <div class="block">Convenience method around <a href="technology.sola.engine/technology/sola/engine/networking/rest/RestClient.html#request(java.lang.String,java.lang.String,technology.sola.json.JsonElement,java.util.function.Consumer)"><code>RestClient.request(String, String, JsonElement, Consumer)</code></a> for making a PUT request.</div>
@@ -4388,7 +4440,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Method to render the gui element.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html#render(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.World,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)" class="member-name-link">render(Renderer, World, Matrix3D, Matrix3D)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugEntityGraphicsModule</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html#render(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.World,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)" class="member-name-link">render(Renderer, World, Matrix3D, Matrix3D)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaGraphicsModule.html#render(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.World,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)" class="member-name-link">render(Renderer, World, Matrix3D, Matrix3D)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">SolaGraphicsModule</a></dt>
 <dd>
@@ -4432,7 +4484,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/TriangleEntityGraphicsModule.html#renderEntity(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderEntity(Renderer, View2Entry&lt;TriangleRendererComponent, TransformComponent&gt;, TransformComponent)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/TriangleEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">TriangleEntityGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html#renderEntity(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderEntity(Renderer, View2Entry&lt;ColliderComponent, TransformComponent&gt;, TransformComponent)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugEntityGraphicsModule</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html#renderEntity(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderEntity(Renderer, View2Entry&lt;ColliderComponent, TransformComponent&gt;, TransformComponent)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/ParticleEmitterEntityGraphicsModule.html#renderEntity(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderEntity(Renderer, View2Entry&lt;ParticleEmitterComponent, TransformComponent&gt;, TransformComponent)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/ParticleEmitterEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">ParticleEmitterEntityGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
@@ -4546,10 +4598,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Right key.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#RIGHT_BRACKET" class="member-name-link">RIGHT_BRACKET</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
-<dd>
-<div class="block">Right Bracket key.</div>
-</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/gui/GuiJsonDocument.html#rootElement()" class="member-name-link">rootElement()</a> - Method in record class technology.sola.engine.assets.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/gui/GuiJsonDocument.html" title="class in technology.sola.engine.assets.graphics.gui">GuiJsonDocument</a></dt>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/assets/graphics/gui/GuiJsonDocument.html#param-rootElement"><code>rootElement</code></a> record component.</div>
@@ -4619,6 +4667,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Using the camera's transform, this method calculates the <code>World</code> coordinate based on the screen's coordinate
  system.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#SCROLL_LOCK" class="member-name-link">SCROLL_LOCK</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
+<dd>
+<div class="block">Scroll Lock key.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/MouseButton.html#SECONDARY" class="member-name-link">SECONDARY</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/MouseButton.html" title="enum class in technology.sola.engine.input">MouseButton</a></dt>
 <dd>
 <div class="block">Represents secondary (button 3, usually the right) mouse button.</div>
@@ -4655,7 +4707,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#SEMI_COLON" class="member-name-link">SEMI_COLON</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
 <dd>
-<div class="block">Semi Colon key.</div>
+<div class="block">Semi-colon key.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/networking/socket/JavaSocketClient.html#sendMessage(technology.sola.engine.networking.socket.SocketMessage)" class="member-name-link">sendMessage(SocketMessage)</a> - Method in class technology.sola.engine.networking.socket.<a href="technology.sola.engine/technology/sola/engine/networking/socket/JavaSocketClient.html" title="class in technology.sola.engine.networking.socket">JavaSocketClient</a></dt>
 <dd>&nbsp;</dd>
@@ -5019,16 +5071,16 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Sets the radius of the light.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html#setRenderingBoundingBoxes(boolean)" class="member-name-link">setRenderingBoundingBoxes(boolean)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugEntityGraphicsModule</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html#setRenderingBoundingBoxes(boolean)" class="member-name-link">setRenderingBoundingBoxes(boolean)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugGraphicsModule</a></dt>
 <dd>
 <div class="block">Enable or disable <a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html#getBoundingBox(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getBoundingBox(TransformComponent)</code></a> debug rendering.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html#setRenderingBroadPhase(boolean)" class="member-name-link">setRenderingBroadPhase(boolean)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugEntityGraphicsModule</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html#setRenderingBroadPhase(boolean)" class="member-name-link">setRenderingBroadPhase(boolean)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugGraphicsModule</a></dt>
 <dd>
 <div class="block">Enable or disable <a href="technology.sola.engine/technology/sola/engine/physics/system/collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision"><code>CollisionDetectionBroadPhase</code></a> debug
  rendering.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html#setRenderingColliders(boolean)" class="member-name-link">setRenderingColliders(boolean)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugEntityGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugEntityGraphicsModule</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html#setRenderingColliders(boolean)" class="member-name-link">setRenderingColliders(boolean)</a> - Method in class technology.sola.engine.defaults.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/DebugGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules">DebugGraphicsModule</a></dt>
 <dd>
 <div class="block">Enabled or disable <a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html#getShape(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getShape(TransformComponent)</code></a> debug rendering.</div>
 </dd>
@@ -5194,7 +5246,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#SHIFT" class="member-name-link">SHIFT</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
 <dd>
-<div class="block">Shift key.</div>
+<div class="block">"Shift" key.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#SINGLE_QUOTE" class="member-name-link">SINGLE_QUOTE</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
 <dd>
@@ -5806,6 +5858,8 @@ loadScripts(document, 'script');</script>
 <div class="block">This package provides various default implementation of <a href="technology.sola.engine/technology/sola/engine/defaults/graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.defaults.graphics.modules"><code>SolaGraphicsModule</code></a>
  to be used in <a href="technology.sola.engine/technology/sola/engine/defaults/SolaGraphics.html" title="class in technology.sola.engine.defaults"><code>SolaGraphics</code></a>.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/systems/package-summary.html">technology.sola.engine.defaults.systems</a> - package technology.sola.engine.defaults.systems</dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/event/package-summary.html">technology.sola.engine.event</a> - package technology.sola.engine.event</dt>
 <dd>
 <div class="block">This package provides classes to handle <a href="technology.sola.engine/technology/sola/engine/event/Event.html" title="interface in technology.sola.engine.event"><code>Event</code></a>s for sola-game-engine.</div>
@@ -6159,6 +6213,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a string representation of this record class.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/event/FpsEvent.html#toString()" class="member-name-link">toString()</a> - Method in record class technology.sola.engine.core.event.<a href="technology.sola.engine/technology/sola/engine/core/event/FpsEvent.html" title="class in technology.sola.engine.core.event">FpsEvent</a></dt>
+<dd>
+<div class="block">Returns a string representation of this record class.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/event/GameLoopEvent.html#toString()" class="member-name-link">toString()</a> - Method in record class technology.sola.engine.core.event.<a href="technology.sola.engine/technology/sola/engine/core/event/GameLoopEvent.html" title="class in technology.sola.engine.core.event">GameLoopEvent</a></dt>
 <dd>
 <div class="block">Returns a string representation of this record class.</div>
@@ -6454,6 +6512,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Updates the position and lifespan of a particle based on the elapsed delta.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/defaults/systems/DebugControlSystem.html#update(technology.sola.ecs.World,float)" class="member-name-link">update(World, float)</a> - Method in class technology.sola.engine.defaults.systems.<a href="technology.sola.engine/technology/sola/engine/defaults/systems/DebugControlSystem.html" title="class in technology.sola.engine.defaults.systems">DebugControlSystem</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiDocumentSystem.html#update(technology.sola.ecs.World,float)" class="member-name-link">update(World, float)</a> - Method in class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiDocumentSystem.html" title="class in technology.sola.engine.graphics.gui">GuiDocumentSystem</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/system/LightFlickerSystem.html#update(technology.sola.ecs.World,float)" class="member-name-link">update(World, float)</a> - Method in class technology.sola.engine.graphics.system.<a href="technology.sola.engine/technology/sola/engine/graphics/system/LightFlickerSystem.html" title="class in technology.sola.engine.graphics.system">LightFlickerSystem</a></dt>
@@ -6499,6 +6559,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/MouseInput.html#updateStatusOfMouse()" class="member-name-link">updateStatusOfMouse()</a> - Method in class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/MouseInput.html" title="class in technology.sola.engine.input">MouseInput</a></dt>
 <dd>
 <div class="block">Called once per frame to update the current status of the mouse based on the user's interaction.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/event/FpsEvent.html#ups()" class="member-name-link">ups()</a> - Method in record class technology.sola.engine.core.event.<a href="technology.sola.engine/technology/sola/engine/core/event/FpsEvent.html" title="class in technology.sola.engine.core.event">FpsEvent</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/core/event/FpsEvent.html#param-ups"><code>ups</code></a> record component.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/defaults/SolaWithDefaults.DefaultsConfigurator.html#useBackgroundColor(technology.sola.engine.graphics.Color)" class="member-name-link">useBackgroundColor(Color)</a> - Method in class technology.sola.engine.defaults.<a href="technology.sola.engine/technology/sola/engine/defaults/SolaWithDefaults.DefaultsConfigurator.html" title="class in technology.sola.engine.defaults">SolaWithDefaults.DefaultsConfigurator</a></dt>
 <dd>
@@ -6822,6 +6886,10 @@ the order they are declared.</div>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/DefaultStyleValues.html#WIDTH" class="member-name-link">WIDTH</a> - Static variable in class technology.sola.engine.graphics.gui.style.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/DefaultStyleValues.html" title="class in technology.sola.engine.graphics.gui.style">DefaultStyleValues</a></dt>
 <dd>
 <div class="block">Default layout value for <a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/BaseStyles.html#width()"><code>BaseStyles.width()</code></a>.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#WINDOWS" class="member-name-link">WINDOWS</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
+<dd>
+<div class="block">Windows key.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:X">X</h2>
