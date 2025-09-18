@@ -59,8 +59,8 @@ public class ServerMain {
     public void initialize() {
       registerRestRoutes();
 
-      new SolaPhysics.Builder()
-        .buildAndInitialize(solaEcs, eventHub);
+      new SolaPhysics.Builder(solaEcs)
+        .buildAndInitialize(eventHub);
 
       solaEcs.addSystem(new ClientUpdateSystem());
       solaEcs.addSystem(new PlayerMovementSystem());

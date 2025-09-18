@@ -3,6 +3,7 @@ package technology.sola.engine.defaults;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.World;
+import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.graphics.modules.DebugGraphicsModule;
 import technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule;
@@ -95,18 +96,6 @@ public class SolaGraphics {
   }
 
   /**
-   * Initializes SolaGraphics by adding all related {@link EcsSystem}s to the provided {@link SolaEcs}.
-   *
-   * @param solaEcs the {@link SolaEcs} instance
-   */
-  public void init(SolaEcs solaEcs) {
-    solaEcs.addSystems(
-      spriteAnimatorSystem,
-      transformAnimatorSystem
-    );
-  }
-
-  /**
    * Renders all {@link SolaGraphicsModule}s that have been added. Passes each the current camera's translation and
    * scale.
    *
@@ -179,18 +168,29 @@ public class SolaGraphics {
       : cameraViews.get(0).c1();
   }
 
-  public class Builder {
+  public static class Builder {
+    private final SolaEcs solaEcs;
     private Color backgroundColor = Color.BLACK;
     private boolean withLighting = false;
     private Color ambientLightColor = Color.BLACK;
+    private boolean withDefaultGraphicsModules = true;
     private GuiTheme guiTheme = null;
     private List<GuiElementJsonBlueprint<?, ?, ?>> additionalGuiElementJsonBlueprints = null;
     private SolaPhysics solaPhysics = null;
     private boolean withDebug = false;
     private Consumer<SolaGraphics> applyDebug;
 
+    public Builder(SolaEcs solaEcs) {
+      this.solaEcs = solaEcs;
+    }
+
     public Builder withBackgroundColor(Color backgroundColor) {
       this.backgroundColor = backgroundColor;
+      return this;
+    }
+
+    public Builder withDefaultGraphicsModules(boolean withDefaultGraphicsModules) {
+      this.withDefaultGraphicsModules = withDefaultGraphicsModules;
       return this;
     }
 
@@ -220,10 +220,10 @@ public class SolaGraphics {
       return this;
     }
 
-    public SolaGraphics buildAndInitialize() {
+    public SolaGraphics buildAndInitialize(AssetLoaderProvider assetLoaderProvider) {
       SolaGraphics solaGraphics = new SolaGraphics(solaEcs);
 
-      //
+      // todo lots more stuff
 
       if (withDebug) {
         applyDebug.accept(solaGraphics);

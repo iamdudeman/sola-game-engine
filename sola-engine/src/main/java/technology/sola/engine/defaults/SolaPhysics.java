@@ -83,8 +83,13 @@ public class SolaPhysics {
   }
 
   public static class Builder {
+    private final SolaEcs solaEcs;
     private boolean withParticleSystem = true;
     private boolean withCollisionDetection = true;
+
+    public Builder(SolaEcs solaEcs) {
+      this.solaEcs = solaEcs;
+    }
 
     public Builder withParticleSystem(boolean withParticleSystem) {
       this.withParticleSystem = withParticleSystem;
@@ -96,7 +101,7 @@ public class SolaPhysics {
       return this;
     }
 
-    public SolaPhysics buildAndInitialize(SolaEcs solaEcs, EventHub eventHub) {
+    public SolaPhysics buildAndInitialize(EventHub eventHub) {
       SolaPhysics solaPhysics = new SolaPhysics(eventHub);
 
       solaEcs.addSystems(
