@@ -4,11 +4,19 @@ import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.defaults.graphics.modules.DebugGraphicsModule;
 import technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule;
+import technology.sola.engine.defaults.systems.DebugControlSystem;
+import technology.sola.engine.event.EventHub;
+import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CameraComponent;
+import technology.sola.engine.graphics.gui.json.element.GuiElementJsonBlueprint;
+import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.system.SpriteAnimatorSystem;
 import technology.sola.engine.graphics.system.TransformAnimatorSystem;
+import technology.sola.engine.input.KeyboardInput;
+import technology.sola.engine.physics.system.CollisionDetectionSystem;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
@@ -16,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * SolaGraphics provides default rendering capabilities while also allowing for adding new rendering
@@ -85,6 +95,18 @@ public class SolaGraphics {
   }
 
   /**
+   * Initializes SolaGraphics by adding all related {@link EcsSystem}s to the provided {@link SolaEcs}.
+   *
+   * @param solaEcs the {@link SolaEcs} instance
+   */
+  public void init(SolaEcs solaEcs) {
+    solaEcs.addSystems(
+      spriteAnimatorSystem,
+      transformAnimatorSystem
+    );
+  }
+
+  /**
    * Renders all {@link SolaGraphicsModule}s that have been added. Passes each the current camera's translation and
    * scale.
    *
@@ -130,6 +152,20 @@ public class SolaGraphics {
     return cachedScreenToWorldMatrix.multiply(screenCoordinate);
   }
 
+  /**
+   * @return the {@link SpriteAnimatorSystem}
+   */
+  public SpriteAnimatorSystem getSpriteAnimatorSystem() {
+    return spriteAnimatorSystem;
+  }
+
+  /**
+   * @return the {@link TransformAnimatorSystem}
+   */
+  public TransformAnimatorSystem getTransformAnimatorSystem() {
+    return transformAnimatorSystem;
+  }
+
   private TransformComponent getCameraTransform() {
     var cameraViews = solaEcs.getWorld()
       .createView().of(TransformComponent.class, CameraComponent.class)
@@ -141,5 +177,59 @@ public class SolaGraphics {
     return cameraViews.isEmpty()
       ? DEFAULT_CAMERA_TRANSFORM
       : cameraViews.get(0).c1();
+  }
+
+  public class Builder {
+    private Color backgroundColor = Color.BLACK;
+    private boolean withLighting = false;
+    private Color ambientLightColor = Color.BLACK;
+    private GuiTheme guiTheme = null;
+    private List<GuiElementJsonBlueprint<?, ?, ?>> additionalGuiElementJsonBlueprints = null;
+    private SolaPhysics solaPhysics = null;
+    private boolean withDebug = false;
+    private Consumer<SolaGraphics> applyDebug;
+
+    public Builder withBackgroundColor(Color backgroundColor) {
+      this.backgroundColor = backgroundColor;
+      return this;
+    }
+
+    public Builder withLighting(boolean withLighting, Color ambienLightColor) {
+      this.withLighting = withLighting;
+      this.ambientLightColor = ambienLightColor;
+      return this;
+    }
+
+    public Builder withGui(GuiTheme guiTheme, List<GuiElementJsonBlueprint<?, ?, ?>> additionalGuiElementJsonBlueprints) {
+      this.guiTheme = guiTheme;
+      this.additionalGuiElementJsonBlueprints = additionalGuiElementJsonBlueprints;
+      return this;
+    }
+
+    public Builder withDebug(SolaPhysics solaPhysics, EventHub eventHub, KeyboardInput keyboardInput) {
+      withDebug = true;
+      this.solaPhysics = solaPhysics;
+
+      applyDebug = (solaGraphics) -> {
+        var debugGraphicsModule = new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class), eventHub);
+
+        solaGraphics.addGraphicsModules(debugGraphicsModule);
+        solaEcs.addSystem(new DebugControlSystem(keyboardInput, debugGraphicsModule));
+      };
+
+      return this;
+    }
+
+    public SolaGraphics buildAndInitialize() {
+      SolaGraphics solaGraphics = new SolaGraphics(solaEcs);
+
+      //
+
+      if (withDebug) {
+        applyDebug.accept(solaGraphics);
+      }
+
+      return solaGraphics;
+    }
   }
 }

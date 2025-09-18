@@ -59,9 +59,9 @@ public class ServerMain {
     public void initialize() {
       registerRestRoutes();
 
-      SolaPhysics solaPhysics = new SolaPhysics(eventHub);
+      new SolaPhysics.Builder()
+        .buildAndInitialize(solaEcs, eventHub);
 
-      solaEcs.addSystems(solaPhysics.getSystems());
       solaEcs.addSystem(new ClientUpdateSystem());
       solaEcs.addSystem(new PlayerMovementSystem());
       solaEcs.setWorld(LevelBuilder.createWorld(NetworkingExample.MAX_PLAYERS));

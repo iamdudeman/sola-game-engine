@@ -2,6 +2,7 @@ package technology.sola.engine.defaults;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
+import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
 import technology.sola.engine.physics.system.GravitySystem;
@@ -79,5 +80,42 @@ public class SolaPhysics {
    */
   public ParticleSystem getParticleSystem() {
     return particleSystem;
+  }
+
+  public static class Builder {
+    private boolean withParticleSystem = true;
+    private boolean withCollisionDetection = true;
+
+    public Builder withParticleSystem(boolean withParticleSystem) {
+      this.withParticleSystem = withParticleSystem;
+      return this;
+    }
+
+    public Builder withCollisionDetection(boolean withCollisionDetection) {
+      this.withCollisionDetection = withCollisionDetection;
+      return this;
+    }
+
+    public SolaPhysics buildAndInitialize(SolaEcs solaEcs, EventHub eventHub) {
+      SolaPhysics solaPhysics = new SolaPhysics(eventHub);
+
+      solaEcs.addSystems(
+        solaPhysics.gravitySystem,
+        solaPhysics.physicsSystem
+      );
+
+      if (withCollisionDetection) {
+        solaEcs.addSystems(
+          solaPhysics.collisionDetectionSystem,
+          solaPhysics.impulseCollisionResolutionSystem
+        );
+      }
+
+      if (withParticleSystem) {
+        solaEcs.addSystem(solaPhysics.particleSystem);
+      }
+
+      return solaPhysics;
+    }
   }
 }
