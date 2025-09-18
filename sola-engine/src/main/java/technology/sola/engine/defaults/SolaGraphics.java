@@ -17,6 +17,7 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.system.SpriteAnimatorSystem;
 import technology.sola.engine.graphics.system.TransformAnimatorSystem;
 import technology.sola.engine.input.KeyboardInput;
+import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
@@ -26,7 +27,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 /**
  * SolaGraphics provides default rendering capabilities while also allowing for adding new rendering
@@ -194,9 +194,9 @@ public class SolaGraphics {
       return this;
     }
 
-    public Builder withLighting(boolean withLighting, Color ambienLightColor) {
+    public Builder withLighting(boolean withLighting, Color ambientLightColor) {
       this.withLighting = withLighting;
-      this.ambientLightColor = ambienLightColor;
+      this.ambientLightColor = ambientLightColor;
       return this;
     }
 

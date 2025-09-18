@@ -26,7 +26,7 @@ public class GuiDocument {
   private boolean isVisible = true;
 
   /**
-   * Creates a new GuiDocument instance, registering listeners for key and mouse related events.
+   * Creates a new GuiDocument instance, registering listeners for key and mouse-related events.
    *
    * @param platform            the {@link SolaPlatform}
    * @param assetLoaderProvider the {@link AssetLoaderProvider}

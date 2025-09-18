@@ -5,7 +5,7 @@ import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaPhysics;
+import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.event.Event;
 import technology.sola.engine.examples.common.features.networking.LevelBuilder;
 import technology.sola.engine.examples.common.features.networking.NetworkingExample;

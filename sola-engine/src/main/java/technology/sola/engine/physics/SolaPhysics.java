@@ -1,7 +1,6 @@
-package technology.sola.engine.defaults;
+package technology.sola.engine.physics;
 
 import org.jspecify.annotations.NullMarked;
-import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
@@ -20,32 +19,6 @@ public class SolaPhysics {
   private final CollisionDetectionSystem collisionDetectionSystem;
   private final ImpulseCollisionResolutionSystem impulseCollisionResolutionSystem;
   private final ParticleSystem particleSystem;
-
-  /**
-   * Creates a SolaPhysics instance using an {@link EventHub}.
-   *
-   * @param eventHub the {@code EventHub} to use
-   */
-  public SolaPhysics(EventHub eventHub) {
-    gravitySystem = new GravitySystem(eventHub);
-    physicsSystem = new PhysicsSystem();
-    collisionDetectionSystem = new CollisionDetectionSystem(eventHub);
-    impulseCollisionResolutionSystem = new ImpulseCollisionResolutionSystem(eventHub);
-    particleSystem = new ParticleSystem();
-  }
-
-  /**
-   * @return an array of all physics related {@link EcsSystem}s
-   */
-  public EcsSystem[] getSystems() {
-    return new EcsSystem[]{
-      gravitySystem,
-      physicsSystem,
-      collisionDetectionSystem,
-      impulseCollisionResolutionSystem,
-      particleSystem,
-    };
-  }
 
   /**
    * @return the {@link GravitySystem}
@@ -82,25 +55,57 @@ public class SolaPhysics {
     return particleSystem;
   }
 
+  private SolaPhysics(EventHub eventHub) {
+    gravitySystem = new GravitySystem(eventHub);
+    physicsSystem = new PhysicsSystem();
+    collisionDetectionSystem = new CollisionDetectionSystem(eventHub);
+    impulseCollisionResolutionSystem = new ImpulseCollisionResolutionSystem(eventHub);
+    particleSystem = new ParticleSystem();
+  }
+
+  /**
+   * A builder for {@link SolaPhysics}.
+   */
   public static class Builder {
     private final SolaEcs solaEcs;
     private boolean withParticleSystem = true;
     private boolean withCollisionDetection = true;
 
+    /**
+     * Creates an instance of the builder.
+     *
+     * @param solaEcs the {@link SolaEcs} instance to attach systems to
+     */
     public Builder(SolaEcs solaEcs) {
       this.solaEcs = solaEcs;
     }
 
-    public Builder withParticleSystem(boolean withParticleSystem) {
-      this.withParticleSystem = withParticleSystem;
+    /**
+     * Turns off particle systems.
+     *
+     * @return this
+     */
+    public Builder withoutParticles() {
+      this.withParticleSystem = false;
       return this;
     }
 
-    public Builder withCollisionDetection(boolean withCollisionDetection) {
-      this.withCollisionDetection = withCollisionDetection;
+    /**
+     * Turns off collision detection systems.
+     *
+     * @return this
+     */
+    public Builder withoutCollisionDetection() {
+      this.withCollisionDetection = false;
       return this;
     }
 
+    /**
+     * Builds and initializes the {@link SolaPhysics} instance.
+     *
+     * @param eventHub the {@link EventHub} instance to attach systems to
+     * @return the {@link SolaPhysics} instance
+     */
     public SolaPhysics buildAndInitialize(EventHub eventHub) {
       SolaPhysics solaPhysics = new SolaPhysics(eventHub);
 

@@ -39,7 +39,7 @@ import java.util.Random;
  * sola game engine.
  *
  * <ul>
- *   <li>{@link technology.sola.engine.defaults.SolaPhysics}</li>
+ *   <li>{@link technology.sola.engine.physics.SolaPhysics}</li>
  *   <li>{@link technology.sola.engine.physics.system.PhysicsSystem}</li>
  *   <li>{@link technology.sola.engine.physics.system.GravitySystem}</li>
  *   <li>{@link technology.sola.engine.physics.system.CollisionDetectionSystem}</li>

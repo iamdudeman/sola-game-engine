@@ -22,6 +22,7 @@ import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.system.LightFlickerSystem;
 import technology.sola.engine.input.SolaControls;
+import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
 
 import java.util.List;
@@ -181,9 +182,8 @@ public abstract class SolaWithDefaults extends Sola {
      */
     public DefaultsConfigurator usePhysics() {
       if (solaPhysics == null) {
-        solaPhysics = new SolaPhysics(eventHub);
-
-        solaEcs.addSystems(solaPhysics.getSystems());
+        solaPhysics = new SolaPhysics.Builder(solaEcs)
+          .buildAndInitialize(eventHub);
 
         if (isDebug && solaGraphics != null) {
           var debugGraphicsModule = new DebugGraphicsModule(solaEcs.getSystem(CollisionDetectionSystem.class), eventHub);
