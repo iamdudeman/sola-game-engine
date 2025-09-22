@@ -68,7 +68,8 @@ public class SolaGraphics {
    *
    * @param solaEcs the {@link SolaEcs} instance
    */
-  public SolaGraphics(SolaEcs solaEcs) {
+  // todo make private
+  SolaGraphics(SolaEcs solaEcs) {
     this.solaEcs = solaEcs;
     spriteAnimatorSystem = new SpriteAnimatorSystem();
     transformAnimatorSystem = new TransformAnimatorSystem();
@@ -267,9 +268,12 @@ public class SolaGraphics {
       return this;
     }
 
-    public Builder withDebug(SolaPhysics solaPhysics, EventHub eventHub, KeyboardInput keyboardInput) {
+    public Builder withDebug(@Nullable SolaPhysics solaPhysics, EventHub eventHub, KeyboardInput keyboardInput) {
       applyDebug = (solaGraphics) -> {
-        var debugGraphicsModule = new DebugGraphicsModule(solaPhysics.getCollisionDetectionSystem(), eventHub);
+        var debugGraphicsModule = new DebugGraphicsModule(
+          solaPhysics == null ? null : solaPhysics.getCollisionDetectionSystem(),
+          eventHub
+        );
 
         solaGraphics.addGraphicsModules(debugGraphicsModule);
         solaEcs.addSystem(new DebugControlSystem(keyboardInput, debugGraphicsModule));
