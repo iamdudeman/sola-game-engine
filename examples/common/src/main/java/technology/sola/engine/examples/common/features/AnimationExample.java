@@ -4,8 +4,10 @@ import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.defaults.SolaGraphics;
 import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
@@ -14,6 +16,7 @@ import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.components.SpriteKeyFrame;
 import technology.sola.engine.graphics.components.animation.SpriteAnimatorComponent;
 import technology.sola.engine.graphics.components.animation.TransformAnimatorComponent;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.math.EasingFunction;
 
@@ -26,7 +29,9 @@ import technology.sola.math.EasingFunction;
  * </ul>
  */
 @NullMarked
-public class AnimationExample extends SolaWithDefaults {
+public class AnimationExample extends Sola {
+  private SolaGraphics solaGraphics;
+
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
@@ -35,10 +40,12 @@ public class AnimationExample extends SolaWithDefaults {
   }
 
   @Override
-  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+  protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
-    defaultsConfigurator.useGraphics().useBackgroundColor(Color.WHITE);
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs, mouseInput)
+      .withBackgroundColor(Color.WHITE)
+      .buildAndInitialize(assetLoaderProvider);
 
     solaEcs.setWorld(buildWorld());
     platform().getViewport().setAspectMode(AspectMode.STRETCH);
@@ -49,6 +56,11 @@ public class AnimationExample extends SolaWithDefaults {
     assetLoaderProvider.get(SpriteSheet.class)
       .getNewAsset("test", "assets/sprites/test_tiles.sprites.json")
       .executeWhenLoaded(spriteSheet -> completeAsyncInit.run());
+  }
+
+  @Override
+  protected void onRender(Renderer renderer) {
+    solaGraphics.render(renderer);
   }
 
   private World buildWorld() {

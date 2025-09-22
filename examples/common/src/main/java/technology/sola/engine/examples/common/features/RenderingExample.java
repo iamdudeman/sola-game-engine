@@ -29,7 +29,7 @@ import technology.sola.math.linear.Vector2D;
 import java.util.List;
 
 /**
- * RenderingExample is a {@link Sola} for demoing various graphics related things for the sola game engine.
+ * RenderingExample is a {@link Sola} for demoing various graphics-related things for the sola game engine.
  *
  * <ul>
  *   <li>{@link Renderer}</li>
@@ -41,20 +41,22 @@ import java.util.List;
  */
 @NullMarked
 public class RenderingExample extends Sola {
-  private final SolaGraphics solaGraphics;
+  private SolaGraphics solaGraphics;
 
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public RenderingExample() {
     super(new SolaConfiguration("Rendering Example", 800, 600, 30));
-
-    solaGraphics = new SolaGraphics(solaEcs);
   }
 
   @Override
   protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
+
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs, mouseInput)
+      .withoutDefaultGraphicsModules()
+      .buildAndInitialize(assetLoaderProvider);
 
     solaGraphics.addGraphicsModules(
       new CircleEntityGraphicsModule(),
@@ -64,7 +66,6 @@ public class RenderingExample extends Sola {
     );
 
     solaEcs.addSystem(new TestSystem());
-    solaEcs.addSystems(solaGraphics.getSystems());
     solaEcs.setWorld(createWorld());
 
     platform().getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");

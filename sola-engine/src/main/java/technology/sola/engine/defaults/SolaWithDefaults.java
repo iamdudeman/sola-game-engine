@@ -41,6 +41,7 @@ import java.util.stream.Stream;
  * </ul>
  */
 @NullMarked
+@Deprecated
 public abstract class SolaWithDefaults extends Sola {
   /**
    * The {@link SolaControls} instance for this Sola. It can be used in place of other input related objects for
