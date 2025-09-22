@@ -2,8 +2,9 @@ package technology.sola.engine.examples.common.games.minesweeper;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
-import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.defaults.SolaGraphics;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.examples.common.games.minesweeper.event.NewGameEvent;
 import technology.sola.engine.examples.common.games.minesweeper.graphics.MinesweeperSquareEntityGraphicsModule;
@@ -16,6 +17,7 @@ import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
 import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 
 import java.util.List;
@@ -25,7 +27,9 @@ import java.util.List;
  * the sola game engine.
  */
 @NullMarked
-public class MinesweeperGame extends SolaWithDefaults {
+public class MinesweeperGame extends Sola {
+  private SolaGraphics solaGraphics;
+
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
@@ -34,24 +38,27 @@ public class MinesweeperGame extends SolaWithDefaults {
   }
 
   @Override
-  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+  protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
-    defaultsConfigurator.useGui(
-      DefaultThemeBuilder.buildLightTheme()
-        .addStyle(ButtonGuiElement.class, List.of(
-          ConditionalStyle.always(new BaseStyles.Builder<>().setPadding(5).build())
-        ))
-    ).useGraphics();
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs, mouseInput)
+      .withGui(
+        DefaultThemeBuilder.buildLightTheme()
+          .addStyle(ButtonGuiElement.class, List.of(
+            ConditionalStyle.always(new BaseStyles.Builder<>().setPadding(5).build())
+          ))
+      )
+      .buildAndInitialize(assetLoaderProvider);
+
 
     // graphics
-    solaGraphics().addGraphicsModules(new MinesweeperSquareEntityGraphicsModule());
+    solaGraphics.addGraphicsModules(new MinesweeperSquareEntityGraphicsModule());
     platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
 
     // systems
     MinefieldSystem minefieldSystem = new MinefieldSystem(solaEcs);
     GameOverSystem gameOverSystem = new GameOverSystem();
-    PlayerInputSystem playerInputSystem = new PlayerInputSystem(solaGraphics(), mouseInput, eventHub);
+    PlayerInputSystem playerInputSystem = new PlayerInputSystem(solaGraphics, mouseInput, eventHub);
     solaEcs.addSystems(
       minefieldSystem,
       playerInputSystem,
@@ -71,7 +78,7 @@ public class MinesweeperGame extends SolaWithDefaults {
       .getNewAsset("gui", "assets/gui/minesweeper.gui.json")
       .executeWhenLoaded(guiJsonDocument -> {
         MinesweeperGui.initializeEvents(guiJsonDocument.rootElement(), eventHub);
-        guiDocument().setRootElement(guiJsonDocument.rootElement());
+        solaGraphics.guiDocument().setRootElement(guiJsonDocument.rootElement());
 
         eventHub.emit(new NewGameEvent(
           MinesweeperGui.SIZE_OPTIONS[0].rows(), MinesweeperGui.SIZE_OPTIONS[0].columns(),
@@ -80,5 +87,10 @@ public class MinesweeperGame extends SolaWithDefaults {
 
         completeAsyncInit.run();
       });
+  }
+
+  @Override
+  protected void onRender(Renderer renderer) {
+    solaGraphics.render(renderer);
   }
 }

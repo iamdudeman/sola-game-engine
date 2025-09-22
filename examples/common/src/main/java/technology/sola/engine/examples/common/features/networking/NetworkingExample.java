@@ -8,7 +8,6 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.defaults.SolaGraphics;
-import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.examples.common.features.networking.messages.*;
 import technology.sola.engine.graphics.Color;

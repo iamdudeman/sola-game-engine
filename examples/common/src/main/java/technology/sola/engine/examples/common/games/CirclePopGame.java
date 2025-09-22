@@ -3,15 +3,17 @@ package technology.sola.engine.examples.common.games;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.defaults.SolaGraphics;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
@@ -25,9 +27,10 @@ import technology.sola.math.linear.Vector2D;
  * sola game engine.
  */
 @NullMarked
-public class CirclePopGame extends SolaWithDefaults {
+public class CirclePopGame extends Sola {
   private final TextGuiElement scoreGuiElement = new TextGuiElement().setText("0");
   private int score = 0;
+  private SolaGraphics solaGraphics;
 
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
@@ -37,10 +40,12 @@ public class CirclePopGame extends SolaWithDefaults {
   }
 
   @Override
-  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+  protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
-    defaultsConfigurator.useGraphics().useGui();
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs, mouseInput)
+      .withGui()
+      .buildAndInitialize(assetLoaderProvider);
 
     solaEcs.addSystems(new PhysicsSystem(), new PlayerInputSystem());
     solaEcs.setWorld(buildWorld());
@@ -53,16 +58,21 @@ public class CirclePopGame extends SolaWithDefaults {
         .build()
     ));
 
-    guiDocument().setRootElement(scoreGuiElement);
+    solaGraphics.guiDocument().setRootElement(scoreGuiElement);
 
     platform().getViewport().setAspectMode(AspectMode.STRETCH);
+  }
+
+  @Override
+  protected void onRender(Renderer renderer) {
+    solaGraphics.render(renderer);
   }
 
   private class PlayerInputSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
       if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
-        var point = solaGraphics().screenToWorldCoordinate(mouseInput.getMousePosition());
+        var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
 
         for (var entry : world.createView().of(TransformComponent.class).getEntries()) {
           var radius = entry.c1().getScaleX() * 0.5f;
