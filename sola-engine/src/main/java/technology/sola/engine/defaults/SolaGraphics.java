@@ -135,17 +135,6 @@ public class SolaGraphics {
         graphicsModule.render(renderer, world, cameraScaleTransform, cameraTranslationTransform);
       }
     }
-
-    // render gui stuff
-    if (guiDocument != null) {
-      var layers = renderer.getLayers();
-
-      if (layers.isEmpty()) {
-        guiDocument.render(renderer);
-      } else {
-        layers.get(layers.size() - 1).add(guiDocument::render, ScreenSpaceLightMapGraphicsModule.ORDER + 1);
-      }
-    }
   }
 
   /**
@@ -323,6 +312,8 @@ public class SolaGraphics {
         if (!fontAssetLoader.hasAssetMapping(DefaultFont.ASSET_ID)) {
           fontAssetLoader.addAsset(DefaultFont.ASSET_ID, DefaultFont.get());
         }
+
+        solaGraphics.addGraphicsModules(new GuiDocumentGraphicsModule(solaGraphics.guiDocument));
 
         List<GuiElementJsonBlueprint<?, ?, ?>> guiElementJsonBlueprints = Stream.concat(
           Stream.of(

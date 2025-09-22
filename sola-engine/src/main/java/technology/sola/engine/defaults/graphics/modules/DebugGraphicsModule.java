@@ -59,9 +59,9 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
   public DebugGraphicsModule(@Nullable CollisionDetectionSystem collisionDetectionSystem, EventHub eventHub) {
     this.collisionDetectionSystem = collisionDetectionSystem;
 
-    isRenderingColliders = collisionDetectionSystem == null;
-    isRenderingBoundingBoxes = collisionDetectionSystem == null;
-    isRenderingBroadPhase = collisionDetectionSystem == null;
+    isRenderingColliders = collisionDetectionSystem != null;
+    isRenderingBoundingBoxes = collisionDetectionSystem != null;
+    isRenderingBroadPhase = collisionDetectionSystem != null;
 
     eventHub.add(FpsEvent.class, event -> fps = event.fps());
   }
@@ -73,41 +73,14 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
 
   @Override
   public void render(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
-    super.render(renderer, world, cameraScaleTransform, cameraTranslationTransform);
+    var layers = renderer.getLayers();
 
-    if (isRenderingBroadPhase && collisionDetectionSystem != null) {
-      collisionDetectionSystem.getCollisionDetectionBroadPhase().renderDebug(renderer, cameraScaleTransform, cameraTranslationTransform);
-    }
-
-    var font = DefaultFont.get();
-    var boundingBoxString = "(" + KEY_BOUNDING_BOX.getName() + ") Bounding Box";
-
-    if (textDimensions == null) {
-      textDimensions = font.getDimensionsForText(boundingBoxString);
-    }
-
-    var height = textDimensions.height();
-    final int lines = collisionDetectionSystem == null ? 2 : 5;
-
-    renderer.setFont(font);
-    renderer.fillRect(0, 0, textDimensions.width() + 4, height * lines + 4, backgroundColor);
-
-    // line 1
-    renderer.drawString(world.getEntityCount() + "/" + world.getCurrentCapacity(), 2, 2, Color.WHITE);
-    // line 2
-    renderer.drawString("FPS: " + fps, 2, 2 + height, Color.WHITE);
-
-    if (collisionDetectionSystem != null) {
-      // line 3
-      var broadPhaseString = "(" + KEY_BROAD_PHASE.getName() + ") Broad Phase";
-
-      renderer.drawString(broadPhaseString, 2, 2 + height * 2, isRenderingBroadPhase ? Color.GREEN : Color.WHITE);
-      // line 4
-      renderer.drawString(boundingBoxString, 2, 2 + height * 3, isRenderingBoundingBoxes ? Color.BLUE : Color.WHITE);
-      // line 5
-      var colliderString = "(" + KEY_COLLIDER.getName() + ") Collider";
-
-      renderer.drawString(colliderString, 2, 2 + height * 4, isRenderingColliders ? Color.RED : Color.WHITE);
+    if (layers.isEmpty()) {
+      renderDebugInfo(renderer, world, cameraScaleTransform, cameraTranslationTransform);
+    } else {
+      layers.get(layers.size() - 1).add(r -> {
+        renderDebugInfo(r, world, cameraScaleTransform, cameraTranslationTransform);
+      }, ScreenSpaceLightMapGraphicsModule.ORDER + 1);
     }
   }
 
@@ -195,6 +168,45 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
   public void setRenderingBroadPhase(boolean isEnabled) {
     if (collisionDetectionSystem != null) {
       this.isRenderingBroadPhase = isEnabled;
+    }
+  }
+
+  private void renderDebugInfo(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
+    super.render(renderer, world, cameraScaleTransform, cameraTranslationTransform);
+
+    if (isRenderingBroadPhase && collisionDetectionSystem != null) {
+      collisionDetectionSystem.getCollisionDetectionBroadPhase().renderDebug(renderer, cameraScaleTransform, cameraTranslationTransform);
+    }
+
+    var font = DefaultFont.get();
+    var boundingBoxString = "(" + KEY_BOUNDING_BOX.getName() + ") Bounding Box";
+
+    if (textDimensions == null) {
+      textDimensions = font.getDimensionsForText(boundingBoxString);
+    }
+
+    var height = textDimensions.height();
+    final int lines = collisionDetectionSystem == null ? 2 : 5;
+
+    renderer.setFont(font);
+    renderer.fillRect(0, 0, textDimensions.width() + 4, height * lines + 4, backgroundColor);
+
+    // line 1
+    renderer.drawString(world.getEntityCount() + "/" + world.getCurrentCapacity(), 2, 2, Color.WHITE);
+    // line 2
+    renderer.drawString("FPS: " + fps, 2, 2 + height, Color.WHITE);
+
+    if (collisionDetectionSystem != null) {
+      // line 3
+      var broadPhaseString = "(" + KEY_BROAD_PHASE.getName() + ") Broad Phase";
+
+      renderer.drawString(broadPhaseString, 2, 2 + height * 2, isRenderingBroadPhase ? Color.GREEN : Color.WHITE);
+      // line 4
+      renderer.drawString(boundingBoxString, 2, 2 + height * 3, isRenderingBoundingBoxes ? Color.BLUE : Color.WHITE);
+      // line 5
+      var colliderString = "(" + KEY_COLLIDER.getName() + ") Collider";
+
+      renderer.drawString(colliderString, 2, 2 + height * 4, isRenderingColliders ? Color.RED : Color.WHITE);
     }
   }
 }

@@ -4,8 +4,10 @@ import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.defaults.SolaGraphics;
 import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.examples.common.features.networking.messages.*;
@@ -18,6 +20,7 @@ import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
 import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.networking.socket.SocketMessage;
@@ -25,15 +28,16 @@ import technology.sola.engine.networking.socket.SocketMessage;
 import java.util.Date;
 
 /**
- * NetworkingExample is a {@link technology.sola.engine.core.Sola} that demos a simple socket based game. This requires
- * that examples:server:ServerMain is running.
+ * NetworkingExample is a {@link technology.sola.engine.core.Sola} that demos a simple socket-based game. This requires
+ * that <b>examples:server:ServerMain</b> is running.
  */
 @NullMarked
-public class NetworkingExample extends SolaWithDefaults {
+public class NetworkingExample extends Sola {
   /**
    * The maximum number of players that can connect.
    */
   public static final int MAX_PLAYERS = 10;
+  private SolaGraphics solaGraphics;
 
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
@@ -43,10 +47,13 @@ public class NetworkingExample extends SolaWithDefaults {
   }
 
   @Override
-  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+  protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
-    defaultsConfigurator.useGui().useGraphics().useDebug();
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs, mouseInput)
+      .withGui()
+      .withDebug(null, eventHub, keyboardInput)
+      .buildAndInitialize(assetLoaderProvider);
 
     solaEcs.setWorld(LevelBuilder.createWorld(MAX_PLAYERS));
     solaEcs.addSystems(new NetworkQueueSystem(), new PlayerSystem());
@@ -56,9 +63,15 @@ public class NetworkingExample extends SolaWithDefaults {
     DefaultThemeBuilder.buildDarkTheme()
       .applyToTree(rootElement);
 
-    guiDocument().setRootElement(rootElement);
+    solaGraphics.guiDocument().setRootElement(rootElement);
 
     platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
+
+  }
+
+  @Override
+  protected void onRender(Renderer renderer) {
+    solaGraphics.render(renderer);
   }
 
   private class PlayerSystem extends EcsSystem {
@@ -90,7 +103,7 @@ public class NetworkingExample extends SolaWithDefaults {
           case UPDATE_TIME -> {
             UpdateTimeMessage updateTimeMessage = UpdateTimeMessage.parse(socketMessage);
 
-            guiDocument().findElementById("updateTimeButton", ButtonGuiElement.class)
+            solaGraphics.guiDocument().findElementById("updateTimeButton", ButtonGuiElement.class)
               .findElementsByType(TextGuiElement.class)
               .get(0)
               .setText(new Date(updateTimeMessage.getTime()).toString());
@@ -152,7 +165,7 @@ public class NetworkingExample extends SolaWithDefaults {
       }, true),
       buildButton("updateTimeButtonRest", "Update Time via Rest", () -> {
         platform().getRestClient().get("http://localhost:1381/time", response -> {
-          guiDocument().findElementById("updateTimeButtonRest", ButtonGuiElement.class)
+          solaGraphics.guiDocument().findElementById("updateTimeButtonRest", ButtonGuiElement.class)
             .findElementsByType(TextGuiElement.class)
             .get(0)
             .setText(new Date(response.body().asObject().getLong("time")).toString());
