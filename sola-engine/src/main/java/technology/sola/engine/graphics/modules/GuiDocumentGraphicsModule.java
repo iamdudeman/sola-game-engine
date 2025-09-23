@@ -1,4 +1,4 @@
-package technology.sola.engine.defaults.graphics.modules;
+package technology.sola.engine.graphics.modules;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.World;
@@ -12,6 +12,9 @@ import technology.sola.math.linear.Matrix3D;
  */
 @NullMarked
 public class GuiDocumentGraphicsModule extends SolaGraphicsModule {
+  /**
+   * The render order for this graphics module.
+   */
   public static final int ORDER = 10;
   private final GuiDocument guiDocument;
 

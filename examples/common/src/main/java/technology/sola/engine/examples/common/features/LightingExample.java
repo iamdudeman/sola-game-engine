@@ -5,11 +5,12 @@ import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaWithDefaults;
-import technology.sola.engine.defaults.graphics.modules.ScreenSpaceLightMapGraphicsModule;
-import technology.sola.engine.defaults.graphics.modules.SpriteEntityGraphicsModule;
+import technology.sola.engine.graphics.SolaGraphics;
+import technology.sola.engine.graphics.modules.ScreenSpaceLightMapGraphicsModule;
+import technology.sola.engine.graphics.modules.SpriteEntityGraphicsModule;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
@@ -18,6 +19,7 @@ import technology.sola.engine.graphics.components.LightComponent;
 import technology.sola.engine.graphics.components.LightFlicker;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
@@ -36,7 +38,9 @@ import technology.sola.math.linear.Vector2D;
  * </ul>
  */
 @NullMarked
-public class LightingExample extends SolaWithDefaults {
+public class LightingExample extends Sola {
+  private SolaGraphics solaGraphics;
+
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
@@ -45,10 +49,13 @@ public class LightingExample extends SolaWithDefaults {
   }
 
   @Override
-  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+  protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
-    defaultsConfigurator.useGraphics().useLighting(new Color(10, 10, 10)).useBackgroundColor(Color.WHITE);
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withLighting(new Color(10, 10, 10))
+      .withBackgroundColor(Color.WHITE)
+      .buildAndInitialize(assetLoaderProvider);
 
     solaEcs.addSystem(new PlayerSystem());
     solaEcs.addSystem(new ParticleSystem());
@@ -62,6 +69,11 @@ public class LightingExample extends SolaWithDefaults {
     assetLoaderProvider.get(SpriteSheet.class)
       .getNewAsset("forest", "assets/sprites/forest.sprites.json")
       .executeWhenLoaded(spriteSheet -> completeAsyncInit.run());
+  }
+
+  @Override
+  protected void onRender(Renderer renderer) {
+    solaGraphics.render(renderer);
   }
 
   private World buildWorld() {
@@ -110,8 +122,8 @@ public class LightingExample extends SolaWithDefaults {
       TransformComponent transformComponent = playerEntity.getComponent(TransformComponent.class);
 
       if (keyboardInput.isKeyPressed(Key.SPACE)) {
-        ScreenSpaceLightMapGraphicsModule screenSpaceLightMapGraphicsModule = solaGraphics().getGraphicsModule(ScreenSpaceLightMapGraphicsModule.class);
-        SpriteEntityGraphicsModule spriteEntityGraphicsModule = solaGraphics().getGraphicsModule(SpriteEntityGraphicsModule.class);
+        ScreenSpaceLightMapGraphicsModule screenSpaceLightMapGraphicsModule = solaGraphics.getGraphicsModule(ScreenSpaceLightMapGraphicsModule.class);
+        SpriteEntityGraphicsModule spriteEntityGraphicsModule = solaGraphics.getGraphicsModule(SpriteEntityGraphicsModule.class);
 
         if (spriteEntityGraphicsModule.isActive() && screenSpaceLightMapGraphicsModule.isActive()) {
           screenSpaceLightMapGraphicsModule.setActive(false);
@@ -139,7 +151,7 @@ public class LightingExample extends SolaWithDefaults {
       }
 
       if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
-        Vector2D coordinate = solaGraphics().screenToWorldCoordinate(mouseInput.getMousePosition());
+        Vector2D coordinate = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
         float radius = SolaRandom.nextFloat(8f, 32f);
         int intensity = SolaRandom.nextInt(25, 220);
 

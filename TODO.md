@@ -15,7 +15,7 @@
 
 ## Planned Cleanup List
 
-* consider moving SolaWithDefaults default configurator logic to its own thing and remove need for SolaWithDefaults
+*
 
 -----------------------------------------------------------------------------------------------------------------------
 

@@ -4,7 +4,7 @@ import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
-import technology.sola.engine.defaults.SolaGraphics;
+import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.examples.common.games.minesweeper.event.NewGameEvent;
 import technology.sola.engine.examples.common.games.minesweeper.graphics.MinesweeperSquareEntityGraphicsModule;
@@ -41,8 +41,9 @@ public class MinesweeperGame extends Sola {
   protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
-    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs, mouseInput)
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
       .withGui(
+        mouseInput,
         DefaultThemeBuilder.buildLightTheme()
           .addStyle(ButtonGuiElement.class, List.of(
             ConditionalStyle.always(new BaseStyles.Builder<>().setPadding(5).build())

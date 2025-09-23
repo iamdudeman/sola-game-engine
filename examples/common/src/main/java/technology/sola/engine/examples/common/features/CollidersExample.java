@@ -8,8 +8,8 @@ import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaGraphics;
-import technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule;
+import technology.sola.engine.graphics.SolaGraphics;
+import technology.sola.engine.graphics.modules.SolaGraphicsModule;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
@@ -67,8 +67,8 @@ public class CollidersExample extends Sola {
 
     solaPhysics.getGravitySystem().setActive(false);
 
-    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs, mouseInput)
-      .withGui(guiTheme)
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withGui(mouseInput, guiTheme)
       .withDebug(solaPhysics, eventHub, keyboardInput)
       .buildAndInitialize(assetLoaderProvider);
 

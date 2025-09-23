@@ -6,7 +6,7 @@ import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
-import technology.sola.engine.defaults.SolaGraphics;
+import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
@@ -58,8 +58,8 @@ public class AudioExample extends Sola {
       )))
     ;
 
-    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs, mouseInput)
-      .withGui(guiTheme)
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withGui(mouseInput, guiTheme)
       .buildAndInitialize(assetLoaderProvider);
 
     platform().getViewport().setAspectMode(AspectMode.STRETCH);

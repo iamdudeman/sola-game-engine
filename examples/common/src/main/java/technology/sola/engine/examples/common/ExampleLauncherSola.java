@@ -6,7 +6,7 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
-import technology.sola.engine.defaults.SolaGraphics;
+import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.examples.common.features.*;
 import technology.sola.engine.examples.common.games.CirclePopGame;
@@ -87,9 +87,9 @@ public class ExampleLauncherSola extends Sola {
 
   @Override
   protected void onInit() {
-    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs, mouseInput)
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
       .withBackgroundColor(Color.WHITE)
-      .withGui()
+      .withGui(mouseInput)
       .buildAndInitialize(assetLoaderProvider);
 
     solaPlatform.getViewport().setAspectMode(AspectMode.MAINTAIN);

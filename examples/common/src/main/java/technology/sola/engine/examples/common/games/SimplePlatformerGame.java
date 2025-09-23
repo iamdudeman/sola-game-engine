@@ -6,16 +6,20 @@ import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.input.ControlsConfig;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.event.EventListener;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.*;
 import technology.sola.engine.graphics.renderer.BlendMode;
+import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.input.SolaControls;
 import technology.sola.engine.physics.CollisionManifold;
+import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
@@ -38,19 +42,30 @@ import java.util.function.Function;
  * the sola game engine.
  */
 @NullMarked
-public class SimplePlatformerGame extends SolaWithDefaults {
+public class SimplePlatformerGame extends Sola {
+  private SolaPhysics solaPhysics;
+  private SolaGraphics solaGraphics;
+  private SolaControls solaControls;
+
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public SimplePlatformerGame() {
     super(new SolaConfiguration("Simple Platformer", 800, 600, 30));
+
+    solaControls = new SolaControls(keyboardInput, mouseInput);
   }
 
   @Override
-  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+  protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
-    defaultsConfigurator.useGraphics().usePhysics().useDebug();
+    solaPhysics = new SolaPhysics.Builder(solaEcs)
+      .buildAndInitialize(eventHub);
+
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withDebug(solaPhysics, eventHub, keyboardInput)
+      .buildAndInitialize(assetLoaderProvider);
 
     solaEcs.addSystems(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem(), new GlassSystem(eventHub));
     solaEcs.setWorld(buildWorld());
@@ -65,6 +80,11 @@ public class SimplePlatformerGame extends SolaWithDefaults {
         solaControls.setControls(controlsConfig);
         completeAsyncInit.run();
       });
+  }
+
+  @Override
+  protected void onRender(Renderer renderer) {
+    solaGraphics.render(renderer);
   }
 
   private class GameDoneEventListener implements EventListener<CollisionEvent> {
@@ -255,7 +275,7 @@ public class SimplePlatformerGame extends SolaWithDefaults {
           if (dynamicBodyComponent.isGrounded() && solaControls.isActive("JUMP")) {
             dynamicBodyComponent.applyForce(0, -3000);
           } else if (dynamicBodyComponent.getVelocity().y() > 0) {
-            dynamicBodyComponent.applyForce(0, 1.5f * solaPhysics().getGravitySystem().getGravityConstant() * dynamicBodyComponent.getMaterial().getMass());
+            dynamicBodyComponent.applyForce(0, 1.5f * solaPhysics.getGravitySystem().getGravityConstant() * dynamicBodyComponent.getMaterial().getMass());
           }
         });
     }

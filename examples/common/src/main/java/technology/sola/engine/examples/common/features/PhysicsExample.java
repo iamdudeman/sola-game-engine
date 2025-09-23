@@ -5,7 +5,7 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaGraphics;
+import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CameraComponent;
@@ -78,8 +78,8 @@ public class PhysicsExample extends Sola {
       .withoutParticles()
       .buildAndInitialize(eventHub);
 
-    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs, mouseInput)
-      .withGui()
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withGui(mouseInput)
       .withDebug(solaPhysics, eventHub, keyboardInput)
       .buildAndInitialize(assetLoaderProvider);
 

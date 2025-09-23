@@ -4,9 +4,10 @@ import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.graphics.font.Font;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
@@ -14,6 +15,7 @@ import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.Material;
+import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
@@ -26,13 +28,14 @@ import technology.sola.math.linear.Vector2D;
  * the sola game engine.
  */
 @NullMarked
-public class PongGame extends SolaWithDefaults {
+public class PongGame extends Sola {
   private static final int PADDLE_SPEED = 200;
   private static final float BALL_SIZE = 10;
   private static final float INITIAL_BALL_SPEED = 100;
   private static final float SPEED_INCREASE = 1.1f;
   private int playerScore = 0;
   private int computerScore = 0;
+  private SolaGraphics solaGraphics;
 
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
@@ -42,12 +45,16 @@ public class PongGame extends SolaWithDefaults {
   }
 
   @Override
-  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+  protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
-    defaultsConfigurator.useGraphics().usePhysics();
+    SolaPhysics solaPhysics = new SolaPhysics.Builder(solaEcs)
+      .buildAndInitialize(eventHub);
 
-    solaPhysics().getGravitySystem().setGravityConstant(0);
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .buildAndInitialize(assetLoaderProvider);
+
+    solaPhysics.getGravitySystem().setGravityConstant(0);
 
     solaEcs.addSystems(new PlayerSystem(), new ComputerSystem());
 
@@ -96,7 +103,7 @@ public class PongGame extends SolaWithDefaults {
 
   @Override
   protected void onRender(Renderer renderer) {
-    super.onRender(renderer);
+    solaGraphics.render(renderer);
 
     var dimensions = renderer.getFont().getDimensionsForText("" + computerScore);
 

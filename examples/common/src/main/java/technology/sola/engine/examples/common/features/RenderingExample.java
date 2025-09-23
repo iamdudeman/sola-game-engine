@@ -10,11 +10,12 @@ import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaGraphics;
-import technology.sola.engine.defaults.graphics.modules.CircleEntityGraphicsModule;
-import technology.sola.engine.defaults.graphics.modules.RectangleEntityGraphicsModule;
-import technology.sola.engine.defaults.graphics.modules.SpriteEntityGraphicsModule;
-import technology.sola.engine.defaults.graphics.modules.TriangleEntityGraphicsModule;
+import technology.sola.engine.graphics.SolaGraphics;
+import technology.sola.engine.graphics.modules.CircleEntityGraphicsModule;
+import technology.sola.engine.graphics.modules.RectangleEntityGraphicsModule;
+import technology.sola.engine.graphics.modules.SolaEntityGraphicsModule;
+import technology.sola.engine.graphics.modules.SpriteEntityGraphicsModule;
+import technology.sola.engine.graphics.modules.TriangleEntityGraphicsModule;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.*;
@@ -34,7 +35,7 @@ import java.util.List;
  * <ul>
  *   <li>{@link Renderer}</li>
  *   <li>{@link SolaGraphics}</li>
- *   <li>{@link technology.sola.engine.defaults.graphics.modules.SolaEntityGraphicsModule}</li>
+ *   <li>{@link SolaEntityGraphicsModule}</li>
  *   <li>{@link SolaImage}</li>
  *   <li>{@link LayerComponent}</li>
  * </ul>
@@ -54,7 +55,7 @@ public class RenderingExample extends Sola {
   protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
-    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs, mouseInput)
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
       .withoutDefaultGraphicsModules()
       .buildAndInitialize(assetLoaderProvider);
 

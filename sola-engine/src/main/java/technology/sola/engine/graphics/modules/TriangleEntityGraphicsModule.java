@@ -1,4 +1,4 @@
-package technology.sola.engine.defaults.graphics.modules;
+package technology.sola.engine.graphics.modules;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Entity;

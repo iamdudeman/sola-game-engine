@@ -1,4 +1,4 @@
-package technology.sola.engine.defaults;
+package technology.sola.engine.graphics;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -14,10 +14,9 @@ import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.assets.json.JsonElementAsset;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.graphics.modules.*;
-import technology.sola.engine.defaults.systems.DebugControlSystem;
+import technology.sola.engine.debug.DebugGraphicsModule;
+import technology.sola.engine.debug.DebugControlSystem;
 import technology.sola.engine.event.EventHub;
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.gui.GuiDocument;
 import technology.sola.engine.graphics.gui.GuiDocumentSystem;
@@ -25,6 +24,7 @@ import technology.sola.engine.graphics.gui.json.GuiJsonDocumentBuilder;
 import technology.sola.engine.graphics.gui.json.element.*;
 import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
+import technology.sola.engine.graphics.modules.*;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.system.LightFlickerSystem;
 import technology.sola.engine.graphics.system.SpriteAnimatorSystem;
@@ -64,18 +64,6 @@ public class SolaGraphics {
   private GuiDocument guiDocument;
 
   /**
-   * Creates a SolaGraphics instance.
-   *
-   * @param solaEcs the {@link SolaEcs} instance
-   */
-  // todo make private
-  SolaGraphics(SolaEcs solaEcs) {
-    this.solaEcs = solaEcs;
-    spriteAnimatorSystem = new SpriteAnimatorSystem();
-    transformAnimatorSystem = new TransformAnimatorSystem();
-  }
-
-  /**
    * Adds {@link SolaGraphicsModule}s to be rendered.
    *
    * @param graphicsModules the modules to add
@@ -101,16 +89,6 @@ public class SolaGraphics {
     }
 
     throw new IllegalStateException("No graphicsModule found for " + solaGraphicsModuleClass);
-  }
-
-  /**
-   * @return an array of all graphics related {@link EcsSystem}s
-   */
-  public EcsSystem[] getSystems() {
-    return new EcsSystem[]{
-      spriteAnimatorSystem,
-      transformAnimatorSystem,
-    };
   }
 
   /**
@@ -164,7 +142,7 @@ public class SolaGraphics {
   }
 
   /**
-   * The {@link GuiDocument} instance for this Sola. Call {@link Builder#withGui()} to configure.
+   * The {@link GuiDocument} instance for this Sola. Call {@link Builder#withGui(MouseInput)} to configure.
    *
    * @return {@link GuiDocument} instance
    */
@@ -190,6 +168,12 @@ public class SolaGraphics {
     return transformAnimatorSystem;
   }
 
+  private SolaGraphics(SolaEcs solaEcs) {
+    this.solaEcs = solaEcs;
+    spriteAnimatorSystem = new SpriteAnimatorSystem();
+    transformAnimatorSystem = new TransformAnimatorSystem();
+  }
+
   private TransformComponent getCameraTransform() {
     var cameraViews = solaEcs.getWorld()
       .createView().of(TransformComponent.class, CameraComponent.class)
@@ -203,60 +187,137 @@ public class SolaGraphics {
       : cameraViews.get(0).c1();
   }
 
+  /**
+   * Builder for {@link SolaGraphics}.
+   */
   public static class Builder {
     private final SolaEcs solaEcs;
     private final SolaPlatform platform;
-    private final MouseInput mouseInput;
     private Color backgroundColor = Color.BLACK;
     private boolean withDefaultGraphicsModules = true;
     @Nullable
     private Consumer<SolaGraphics> applyDebug;
     @Nullable
     private Color ambientLightColor;
-
+    @Nullable
+    private MouseInput mouseInput;
     @Nullable
     private GuiTheme guiTheme = null;
     private List<GuiElementJsonBlueprint<?, ?, ?>> additionalGuiElementJsonBlueprints = new ArrayList<>();
 
-    public Builder(SolaPlatform platform, SolaEcs solaEcs, MouseInput mouseInput) {
+    /**
+     * Creates a new {@link Builder} instance.
+     *
+     * @param platform the {@link SolaPlatform} instance
+     * @param solaEcs  the {@link SolaEcs} instance to attach systems to
+     */
+    public Builder(SolaPlatform platform, SolaEcs solaEcs) {
       this.platform = platform;
       this.solaEcs = solaEcs;
-      this.mouseInput = mouseInput;
     }
 
+    /**
+     * Sets the background {@link Color} cleared to each frame.
+     *
+     * @param backgroundColor the {@link Color} to clear to (defaults to {@link Color#BLACK}
+     * @return this
+     */
     public Builder withBackgroundColor(Color backgroundColor) {
       this.backgroundColor = backgroundColor;
       return this;
     }
 
+    /**
+     * Sets the builder to not add the default {@link SolaGraphicsModule}s when initializing the {@link SolaGraphics}
+     * instance.
+     *
+     * <ul>
+     *   <li>{@link CircleEntityGraphicsModule}</li>
+     *   <li>{@link RectangleEntityGraphicsModule}</li>
+     *   <li>{@link TriangleEntityGraphicsModule}</li>
+     *   <li>{@link SpriteEntityGraphicsModule}</li>
+     *   <li>{@link ParticleEmitterEntityGraphicsModule}</li>
+     * </ul>
+     *
+     * @return this
+     */
     public Builder withoutDefaultGraphicsModules() {
       this.withDefaultGraphicsModules = false;
       return this;
     }
 
+    /**
+     * Sets the builder to add lighting related graphics modules and systems. Sets the ambient light color
+     * to {@link Color#BLACK}.
+     *
+     * @return this
+     */
     public Builder withLighting() {
       return withLighting(Color.BLACK);
     }
 
+    /**
+     * Sets the builder to add lighting related graphics modules and systems. Sets the ambient light color
+     * to the desired color.
+     *
+     * @param ambientLightColor the color to set the ambient light to
+     * @return this
+     */
     public Builder withLighting(Color ambientLightColor) {
       this.ambientLightColor = ambientLightColor;
       return this;
     }
 
-    public Builder withGui() {
-      return withGui(DefaultThemeBuilder.buildLightTheme());
+    /**
+     * Sets the builder to add a {@link GuiDocument} and related systems.
+     * Uses {@link DefaultThemeBuilder#buildLightTheme()} for the theme.
+     *
+     * @param mouseInput the {@link MouseInput} instance to use for the {@link GuiDocument}
+     * @return this
+     */
+    public Builder withGui(MouseInput mouseInput) {
+      return withGui(mouseInput, DefaultThemeBuilder.buildLightTheme());
     }
 
-    public Builder withGui(GuiTheme guiTheme) {
-      return withGui(guiTheme, List.of());
+    /**
+     * Sets the builder to add a {@link GuiDocument} and related systems. Uses desired {@link GuiTheme}.
+     *
+     * @param mouseInput the {@link MouseInput} instance to use for the {@link GuiDocument}
+     * @param guiTheme   the {@link GuiTheme} to use for the {@link GuiDocument}
+     * @return this
+     */
+    public Builder withGui(MouseInput mouseInput, GuiTheme guiTheme) {
+      return withGui(mouseInput, guiTheme, List.of());
     }
 
-    public Builder withGui(GuiTheme guiTheme, List<GuiElementJsonBlueprint<?, ?, ?>> additionalGuiElementJsonBlueprints) {
+    /**
+     * Sets the builder to add a {@link GuiDocument} and related systems. Uses desired {@link GuiTheme}. Also registers
+     * additional {@link GuiElementJsonBlueprint}s.
+     *
+     * @param mouseInput                         the {@link MouseInput} instance to use for the {@link GuiDocument}
+     * @param guiTheme                           the {@link GuiTheme} to use for the {@link GuiDocument}
+     * @param additionalGuiElementJsonBlueprints additional {@link GuiElementJsonBlueprint}s to add to the {@link GuiDocument}
+     * @return this
+     */
+    public Builder withGui(
+      MouseInput mouseInput,
+      GuiTheme guiTheme,
+      List<GuiElementJsonBlueprint<?, ?, ?>> additionalGuiElementJsonBlueprints
+    ) {
+      this.mouseInput = mouseInput;
       this.guiTheme = guiTheme;
       this.additionalGuiElementJsonBlueprints = additionalGuiElementJsonBlueprints;
       return this;
     }
 
+    /**
+     * Enables debug rendering. If {@link SolaPhysics} is provided then collision debug rendering will also be present.
+     *
+     * @param solaPhysics   the optional {@link SolaPhysics} instance to attach to
+     * @param eventHub      the {@link EventHub} to add listeners to
+     * @param keyboardInput the {@link KeyboardInput} to control debug rendering state
+     * @return this
+     */
     public Builder withDebug(@Nullable SolaPhysics solaPhysics, EventHub eventHub, KeyboardInput keyboardInput) {
       applyDebug = (solaGraphics) -> {
         var debugGraphicsModule = new DebugGraphicsModule(
@@ -271,6 +332,13 @@ public class SolaGraphics {
       return this;
     }
 
+    /**
+     * Builds and initializes the {@link SolaGraphics} instance. This will add required {@link EcsSystem}s,
+     * {@link AssetLoader}s, a {@link DefaultFont} and {@link SolaGraphicsModule}s.
+     *
+     * @param assetLoaderProvider the {@link AssetLoaderProvider}
+     * @return the initialized {@link SolaGraphics} instance
+     */
     public SolaGraphics buildAndInitialize(AssetLoaderProvider assetLoaderProvider) {
       SolaGraphics solaGraphics = new SolaGraphics(solaEcs);
 
@@ -303,7 +371,7 @@ public class SolaGraphics {
       }
 
       // set up gui stuff
-      if (guiTheme != null) {
+      if (guiTheme != null && mouseInput != null) {
         solaGraphics.guiDocument = new GuiDocument(platform, assetLoaderProvider, mouseInput);
 
         // Prepare default font

@@ -1,9 +1,8 @@
-package technology.sola.engine.defaults.systems;
+package technology.sola.engine.debug;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
-import technology.sola.engine.defaults.graphics.modules.DebugGraphicsModule;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.KeyboardInput;
 

@@ -6,7 +6,7 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaGraphics;
+import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
@@ -43,8 +43,8 @@ public class CirclePopGame extends Sola {
   protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
-    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs, mouseInput)
-      .withGui()
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withGui(mouseInput)
       .buildAndInitialize(assetLoaderProvider);
 
     solaEcs.addSystems(new PhysicsSystem(), new PlayerInputSystem());
