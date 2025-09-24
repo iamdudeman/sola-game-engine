@@ -1,6 +1,5 @@
 package technology.sola.engine.physics.utils;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -201,16 +200,23 @@ class CollisionUtilsTest {
     }
 
     @Test
-    @Disabled("This test should be re-enabled once bug is fixed")
     void whenFullyInside_shouldReturnCorrectManifold() {
-      Rectangle rectangleA = new Rectangle(new Vector2D(0, 0), new Vector2D(5, 5));
-      Rectangle rectangleB = new Rectangle(new Vector2D(2, 1), new Vector2D(3, 2));
+      Rectangle rectangleA = new Rectangle(new Vector2D(0, 0), new Vector2D(50, 50));
+      Rectangle rectangleB = new Rectangle(new Vector2D(5, 10), new Vector2D(15, 20));
 
       var minimumTranslationVector = CollisionUtils.calculateAABBVsAABB(rectangleA, rectangleB);
 
       assertNotNull(minimumTranslationVector);
-      assertEquals(new Vector2D(0, 1), minimumTranslationVector.normal());
-      assertEquals(2, minimumTranslationVector.penetration());
+      assertEquals(new Vector2D(-1, 0), minimumTranslationVector.normal());
+      assertEquals(15, minimumTranslationVector.penetration());
+
+      rectangleB = new Rectangle(new Vector2D(10, 5), new Vector2D(20, 15));
+
+      minimumTranslationVector = CollisionUtils.calculateAABBVsAABB(rectangleA, rectangleB);
+
+      assertNotNull(minimumTranslationVector);
+      assertEquals(new Vector2D(0, -1), minimumTranslationVector.normal());
+      assertEquals(15, minimumTranslationVector.penetration());
     }
   }
 
