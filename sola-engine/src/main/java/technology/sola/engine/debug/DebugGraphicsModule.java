@@ -75,6 +75,8 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
 
   @Override
   public void render(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
+    super.render(renderer, world, cameraScaleTransform, cameraTranslationTransform);
+
     var layers = renderer.getLayers();
 
     if (layers.isEmpty()) {
@@ -174,8 +176,6 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
   }
 
   private void renderDebugInfo(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
-    super.render(renderer, world, cameraScaleTransform, cameraTranslationTransform);
-
     if (isRenderingBroadPhase && collisionDetectionSystem != null) {
       collisionDetectionSystem.getCollisionDetectionBroadPhase().renderDebug(renderer, cameraScaleTransform, cameraTranslationTransform);
     }
