@@ -75,10 +75,6 @@ loadScripts(document, 'script');</script>
 <div class="inheritance">technology.sola.engine.core.Sola</div>
 </div>
 <section class="class-description" id="class-description">
-<dl class="notes">
-<dt>Direct Known Subclasses:</dt>
-<dd><code><a href="../defaults/SolaWithDefaults.html" title="class in technology.sola.engine.defaults">SolaWithDefaults</a></code></dd>
-</dl>
 <hr>
 <div class="type-signature"><span class="annotations">@NullMarked
 </span><span class="modifiers">public abstract class </span><span class="element-name type-name-label">Sola</span>
@@ -267,17 +263,6 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="onRender(technology.sola.engine.graphics.renderer.Renderer)">
-<h3>onRender</h3>
-<div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onRender</span><wbr><span class="parameters">(<a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</span></div>
-<div class="block">Method called every frame to render the world.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>renderer</code> - the <a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> instance</dd>
-</dl>
-</section>
-</li>
-<li>
 <section class="detail" id="onInit()">
 <h3>onInit</h3>
 <div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onInit</span>()</div>
@@ -295,6 +280,17 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>completeAsyncInit</code> - the callback to notify the hosting platform initialization is complete</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="onRender(technology.sola.engine.graphics.renderer.Renderer)">
+<h3>onRender</h3>
+<div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onRender</span><wbr><span class="parameters">(<a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</span></div>
+<div class="block">Method called every frame to render the world.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>renderer</code> - the <a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> instance</dd>
 </dl>
 </section>
 </li>

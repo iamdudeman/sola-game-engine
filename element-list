@@ -13,9 +13,7 @@ technology.sola.engine.assets.json
 technology.sola.engine.core
 technology.sola.engine.core.component
 technology.sola.engine.core.event
-technology.sola.engine.defaults
-technology.sola.engine.defaults.graphics.modules
-technology.sola.engine.defaults.systems
+technology.sola.engine.debug
 technology.sola.engine.event
 technology.sola.engine.graphics
 technology.sola.engine.graphics.components
@@ -33,6 +31,7 @@ technology.sola.engine.graphics.gui.style
 technology.sola.engine.graphics.gui.style.property
 technology.sola.engine.graphics.gui.style.theme
 technology.sola.engine.graphics.gui.util
+technology.sola.engine.graphics.modules
 technology.sola.engine.graphics.renderer
 technology.sola.engine.graphics.renderer.blend
 technology.sola.engine.graphics.screen
