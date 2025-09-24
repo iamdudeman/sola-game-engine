@@ -5,12 +5,14 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.components.TriangleRendererComponent;
+import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
@@ -23,7 +25,9 @@ import technology.sola.math.linear.Vector2D;
  * SmallPhysicsTestSola is a {@link Sola} for isolated testing of various physics things.
  */
 @NullMarked
-public class SmallPhysicsTestSola extends SolaWithDefaults {
+public class SmallPhysicsTestSola extends Sola {
+  private SolaGraphics solaGraphics;
+
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
@@ -32,8 +36,13 @@ public class SmallPhysicsTestSola extends SolaWithDefaults {
   }
 
   @Override
-  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGraphics().usePhysics().useDebug();
+  protected void onInit() {
+    SolaPhysics solaPhysics = new SolaPhysics.Builder(solaEcs)
+      .buildAndInitialize(eventHub);
+
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withDebug(solaPhysics, eventHub, keyboardInput)
+      .buildAndInitialize(assetLoaderProvider);
 
     platform().getRenderer().createLayers("inside");
 
@@ -92,5 +101,10 @@ public class SmallPhysicsTestSola extends SolaWithDefaults {
 
 
     solaEcs.setWorld(world);
+  }
+
+  @Override
+  protected void onRender(Renderer renderer) {
+    solaGraphics.render(renderer);
   }
 }

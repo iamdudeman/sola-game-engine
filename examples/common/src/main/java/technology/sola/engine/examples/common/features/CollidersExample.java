@@ -5,10 +5,11 @@ import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaWithDefaults;
-import technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule;
+import technology.sola.engine.graphics.SolaGraphics;
+import technology.sola.engine.graphics.modules.SolaGraphicsModule;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
@@ -22,6 +23,7 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
+import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
@@ -36,7 +38,7 @@ import technology.sola.math.linear.Vector2D;
  * {@link technology.sola.engine.physics.component.collider.ColliderShape}s.
  */
 @NullMarked
-public class CollidersExample extends SolaWithDefaults {
+public class CollidersExample extends Sola {
   private final ConditionalStyle<TextStyles> selectedTextStyle = ConditionalStyle.always(
     new TextStyles.Builder<>()
       .setTextColor(Color.YELLOW)
@@ -45,6 +47,7 @@ public class CollidersExample extends SolaWithDefaults {
   private InteractionMode currentMode = InteractionMode.CREATE_CIRCLE;
   @Nullable
   private TextGuiElement currentlySelectedText = null;
+  private SolaGraphics solaGraphics;
 
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
@@ -54,23 +57,29 @@ public class CollidersExample extends SolaWithDefaults {
   }
 
   @Override
-  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+  protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
     var guiTheme = DefaultThemeBuilder.buildDarkTheme();
 
-    defaultsConfigurator.useGraphics().useDebug().usePhysics().useGui(guiTheme);
+    SolaPhysics solaPhysics = new SolaPhysics.Builder(solaEcs)
+      .buildAndInitialize(eventHub);
+
+    solaPhysics.getGravitySystem().setActive(false);
+
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withGui(mouseInput, guiTheme)
+      .withDebug(solaPhysics, eventHub, keyboardInput)
+      .buildAndInitialize(assetLoaderProvider);
 
     platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
-
-    solaPhysics().getGravitySystem().setActive(false);
 
     CreateShapeSystem createShapeSystem = new CreateShapeSystem();
 
     solaEcs.addSystems(createShapeSystem);
     solaEcs.setWorld(new World(10));
 
-    solaGraphics().addGraphicsModules(new CreateShapeGraphicsModule(createShapeSystem));
+    solaGraphics.addGraphicsModules(new CreateShapeGraphicsModule(createShapeSystem));
   }
 
   @Override
@@ -78,12 +87,17 @@ public class CollidersExample extends SolaWithDefaults {
     assetLoaderProvider.get(GuiJsonDocument.class)
       .getNewAsset("gui", "assets/gui/collision_sandbox.gui.json")
       .executeWhenLoaded(guiJsonDocument -> {
-        guiDocument().setRootElement(guiJsonDocument.rootElement());
-        currentlySelectedText = guiDocument().findElementById("modeCircle", TextGuiElement.class);
+        solaGraphics.guiDocument().setRootElement(guiJsonDocument.rootElement());
+        currentlySelectedText = solaGraphics.guiDocument().findElementById("modeCircle", TextGuiElement.class);
         currentlySelectedText.styles().addStyle(selectedTextStyle);
 
         completeAsyncInit.run();
       });
+  }
+
+  @Override
+  protected void onRender(Renderer renderer) {
+    solaGraphics.render(renderer);
   }
 
   @NullMarked
@@ -104,7 +118,7 @@ public class CollidersExample extends SolaWithDefaults {
 
       Vector2D secondPoint = createShapeSystem.secondPoint == null ? null : cameraTranslationTransform.multiply(createShapeSystem.secondPoint);
       Color color = Color.WHITE;
-      var point = solaGraphics().screenToWorldCoordinate(mouseInput.getMousePosition());
+      var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
 
       if (currentMode == InteractionMode.CREATE_CIRCLE) {
         var min = new Vector2D(Math.min(firstPoint.x(), point.x()), Math.min(firstPoint.y(), point.y()));
@@ -147,7 +161,7 @@ public class CollidersExample extends SolaWithDefaults {
       }
 
       if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
-        var point = solaGraphics().screenToWorldCoordinate(mouseInput.getMousePosition());
+        var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
 
         if (firstPoint == null) {
           firstPoint = point;
@@ -204,7 +218,7 @@ public class CollidersExample extends SolaWithDefaults {
     private void changeMode(InteractionMode newMode, String guiElementId) {
       currentMode = newMode;
       currentlySelectedText.styles().removeStyle(selectedTextStyle);
-      currentlySelectedText = guiDocument().findElementById(guiElementId, TextGuiElement.class);
+      currentlySelectedText = solaGraphics.guiDocument().findElementById(guiElementId, TextGuiElement.class);
       currentlySelectedText.styles().addStyle(selectedTextStyle);
       reset();
     }

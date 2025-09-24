@@ -6,16 +6,19 @@ import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
-import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.gui.GuiDocument;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.property.Direction;
 import technology.sola.engine.graphics.gui.style.property.MainAxisChildren;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 
@@ -24,10 +27,11 @@ import technology.sola.engine.input.Key;
  * {@link technology.sola.engine.graphics.gui.GuiElement}s.
  */
 @NullMarked
-public class GuiExample extends SolaWithDefaults {
+public class GuiExample extends Sola {
   private MainAxisChildren mainAxisChildren = MainAxisChildren.START;
   private Direction direction = Direction.ROW;
   private int selectedExample = 1;
+  private SolaGraphics solaGraphics;
 
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
@@ -37,10 +41,12 @@ public class GuiExample extends SolaWithDefaults {
   }
 
   @Override
-  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+  protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
-    defaultsConfigurator.useGui();
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withGui(mouseInput)
+      .buildAndInitialize(assetLoaderProvider);
 
     assetLoaderProvider.get(SolaImage.class)
       .addAssetMapping("test_tiles", "assets/images/duck.png");
@@ -142,6 +148,11 @@ public class GuiExample extends SolaWithDefaults {
       });
   }
 
+  @Override
+  protected void onRender(Renderer renderer) {
+    solaGraphics.render(renderer);
+  }
+
   private GuiElement<?, ?> buildMainAxisContentExample() {
     return new SectionGuiElement().appendChildren(
       buildContainer(5, mainAxisChildren),
@@ -195,5 +206,9 @@ public class GuiExample extends SolaWithDefaults {
         .setHeight(80)
         .setWidth(80)
         .build());
+  }
+
+  private GuiDocument guiDocument() {
+    return solaGraphics.guiDocument();
   }
 }

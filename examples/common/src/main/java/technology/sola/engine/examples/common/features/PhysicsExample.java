@@ -2,9 +2,10 @@ package technology.sola.engine.examples.common.features;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.World;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CameraComponent;
@@ -20,8 +21,10 @@ import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
 import technology.sola.engine.graphics.gui.style.property.Direction;
 import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.Material;
+import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
@@ -39,7 +42,7 @@ import java.util.Random;
  * sola game engine.
  *
  * <ul>
- *   <li>{@link technology.sola.engine.defaults.SolaPhysics}</li>
+ *   <li>{@link technology.sola.engine.physics.SolaPhysics}</li>
  *   <li>{@link technology.sola.engine.physics.system.PhysicsSystem}</li>
  *   <li>{@link technology.sola.engine.physics.system.GravitySystem}</li>
  *   <li>{@link technology.sola.engine.physics.system.CollisionDetectionSystem}</li>
@@ -48,10 +51,11 @@ import java.util.Random;
  * </ul>
  */
 @NullMarked
-public class PhysicsExample extends SolaWithDefaults {
+public class PhysicsExample extends Sola {
   private static final float CAMERA_SCALE = 1.2f;
   private static final float CIRCLE_RADIUS = 10f;
   private final int objectCount;
+  private SolaGraphics solaGraphics;
   private Random random;
 
   /**
@@ -67,19 +71,31 @@ public class PhysicsExample extends SolaWithDefaults {
   }
 
   @Override
-  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+  protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
-    defaultsConfigurator.useGraphics().usePhysics().useDebug().useGui();
+    SolaPhysics solaPhysics = new SolaPhysics.Builder(solaEcs)
+      .withoutParticles()
+      .buildAndInitialize(eventHub);
+
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withGui(mouseInput)
+      .withDebug(solaPhysics, eventHub, keyboardInput)
+      .buildAndInitialize(assetLoaderProvider);
 
     platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
 
     solaEcs.setWorld(buildQuadTreeOptimizedWorld());
 
-    guiDocument().setRootElement(buildGui());
+    solaGraphics.guiDocument().setRootElement(buildGui(solaPhysics));
   }
 
-  private GuiElement<?, ?> buildGui() {
+  @Override
+  protected void onRender(Renderer renderer) {
+    solaGraphics.render(renderer);
+  }
+
+  private GuiElement<?, ?> buildGui(SolaPhysics solaPhysics) {
     SectionGuiElement sectionGuiElement = new SectionGuiElement();
 
     sectionGuiElement.addStyle(
@@ -94,7 +110,7 @@ public class PhysicsExample extends SolaWithDefaults {
       new ButtonGuiElement()
         .setOnAction(() -> {
           resetRandom(randomSeedInput.getValue());
-          solaPhysics().getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
+          solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
             new QuadTreeCollisionDetectionBroadPhase()
           );
           solaEcs.setWorld(buildQuadTreeOptimizedWorld());
@@ -104,7 +120,7 @@ public class PhysicsExample extends SolaWithDefaults {
       new ButtonGuiElement()
         .setOnAction(() -> {
           resetRandom(randomSeedInput.getValue());
-          solaPhysics().getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
+          solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
             new SpatialHashMapCollisionDetectionBroadPhase()
           );
           solaEcs.setWorld(buildSpatialHashMapOptimizedWorld());

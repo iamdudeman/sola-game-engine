@@ -4,8 +4,9 @@ import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.BulkAssetLoader;
 import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.assets.graphics.font.Font;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
-import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
@@ -19,6 +20,7 @@ import technology.sola.engine.graphics.gui.style.property.CrossAxisChildren;
 import technology.sola.engine.graphics.gui.style.property.Direction;
 import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 
 import java.util.List;
@@ -31,9 +33,10 @@ import java.util.List;
  * </ul>
  */
 @NullMarked
-public class AudioExample extends SolaWithDefaults {
+public class AudioExample extends Sola {
   private static final String FONT_ASSET_ID = "arial_NORMAL_16";
   private GuiTheme guiTheme;
+  private SolaGraphics solaGraphics;
 
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
@@ -43,7 +46,7 @@ public class AudioExample extends SolaWithDefaults {
   }
 
   @Override
-  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+  protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
     guiTheme = DefaultThemeBuilder.buildLightTheme()
@@ -55,7 +58,9 @@ public class AudioExample extends SolaWithDefaults {
       )))
     ;
 
-    defaultsConfigurator.useGui(guiTheme);
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withGui(mouseInput, guiTheme)
+      .buildAndInitialize(assetLoaderProvider);
 
     platform().getViewport().setAspectMode(AspectMode.STRETCH);
   }
@@ -72,12 +77,17 @@ public class AudioExample extends SolaWithDefaults {
 
           var guiRoot = buildGui(audioClip);
 
-          guiDocument().setRootElement(guiRoot);
+          solaGraphics.guiDocument().setRootElement(guiRoot);
           guiTheme.applyToTree(guiRoot);
         }
 
         completeAsyncInit.run();
       });
+  }
+
+  @Override
+  protected void onRender(Renderer renderer) {
+    solaGraphics.render(renderer);
   }
 
   private GuiElement<?, ?> buildGui(AudioClip audioClip) {

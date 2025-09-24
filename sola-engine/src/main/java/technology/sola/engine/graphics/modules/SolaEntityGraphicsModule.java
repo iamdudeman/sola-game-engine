@@ -1,4 +1,4 @@
-package technology.sola.engine.defaults.graphics.modules;
+package technology.sola.engine.graphics.modules;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Entity;
@@ -6,6 +6,7 @@ import technology.sola.ecs.World;
 import technology.sola.ecs.view.View;
 import technology.sola.ecs.view.ViewEntry;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -13,7 +14,7 @@ import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
 /**
- * SolaEntityGraphicsModule adds rendering functionality to {@link technology.sola.engine.defaults.SolaGraphics} for
+ * SolaEntityGraphicsModule adds rendering functionality to {@link SolaGraphics} for
  * rendering {@link Entity} that have specified {@link technology.sola.ecs.Component}s.
  */
 @NullMarked

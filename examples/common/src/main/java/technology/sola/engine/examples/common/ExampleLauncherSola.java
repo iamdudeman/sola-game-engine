@@ -6,7 +6,7 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
-import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.examples.common.features.*;
 import technology.sola.engine.examples.common.games.CirclePopGame;
@@ -27,6 +27,7 @@ import technology.sola.engine.graphics.gui.style.property.CrossAxisChildren;
 import technology.sola.engine.graphics.gui.style.property.Direction;
 import technology.sola.engine.graphics.gui.style.property.MainAxisChildren;
 import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 
@@ -37,8 +38,9 @@ import java.util.function.Supplier;
  * various parts of the sola game engine.
  */
 @NullMarked
-public class ExampleLauncherSola extends SolaWithDefaults {
+public class ExampleLauncherSola extends Sola {
   private final SolaPlatform solaPlatform;
+  private SolaGraphics solaGraphics;
 
   /**
    * Registers a key event to launch the {@link ExampleLauncherSola} from another example {@link Sola}.
@@ -84,8 +86,11 @@ public class ExampleLauncherSola extends SolaWithDefaults {
   }
 
   @Override
-  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
-    defaultsConfigurator.useGui().useBackgroundColor(Color.WHITE);
+  protected void onInit() {
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withBackgroundColor(Color.WHITE)
+      .withGui(mouseInput)
+      .buildAndInitialize(assetLoaderProvider);
 
     solaPlatform.getViewport().setAspectMode(AspectMode.MAINTAIN);
 
@@ -93,9 +98,14 @@ public class ExampleLauncherSola extends SolaWithDefaults {
 
     DefaultThemeBuilder.buildLightTheme().applyToTree(guiRoot);
 
-    guiDocument().setRootElement(guiRoot);
+    solaGraphics.guiDocument().setRootElement(guiRoot);
 
     guiRoot.requestFocus();
+  }
+
+  @Override
+  protected void onRender(Renderer renderer) {
+    solaGraphics.render(renderer);
   }
 
   private GuiElement<?, ?> buildGui() {

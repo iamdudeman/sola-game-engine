@@ -56,13 +56,6 @@ public abstract class Sola {
   }
 
   /**
-   * Method called every frame to render the world.
-   *
-   * @param renderer the {@link Renderer} instance
-   */
-  protected abstract void onRender(Renderer renderer);
-
-  /**
    * Method called to initialize the Sola.
    */
   protected abstract void onInit();
@@ -78,6 +71,13 @@ public abstract class Sola {
   protected void onAsyncInit(Runnable completeAsyncInit) {
     completeAsyncInit.run();
   }
+
+  /**
+   * Method called every frame to render the world.
+   *
+   * @param renderer the {@link Renderer} instance
+   */
+  protected abstract void onRender(Renderer renderer);
 
   /**
    * @return the {@link SolaPlatform} running this Sola.

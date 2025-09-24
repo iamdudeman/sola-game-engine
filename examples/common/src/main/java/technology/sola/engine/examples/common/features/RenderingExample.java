@@ -10,11 +10,12 @@ import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaGraphics;
-import technology.sola.engine.defaults.graphics.modules.CircleEntityGraphicsModule;
-import technology.sola.engine.defaults.graphics.modules.RectangleEntityGraphicsModule;
-import technology.sola.engine.defaults.graphics.modules.SpriteEntityGraphicsModule;
-import technology.sola.engine.defaults.graphics.modules.TriangleEntityGraphicsModule;
+import technology.sola.engine.graphics.SolaGraphics;
+import technology.sola.engine.graphics.modules.CircleEntityGraphicsModule;
+import technology.sola.engine.graphics.modules.RectangleEntityGraphicsModule;
+import technology.sola.engine.graphics.modules.SolaEntityGraphicsModule;
+import technology.sola.engine.graphics.modules.SpriteEntityGraphicsModule;
+import technology.sola.engine.graphics.modules.TriangleEntityGraphicsModule;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.*;
@@ -29,32 +30,34 @@ import technology.sola.math.linear.Vector2D;
 import java.util.List;
 
 /**
- * RenderingExample is a {@link Sola} for demoing various graphics related things for the sola game engine.
+ * RenderingExample is a {@link Sola} for demoing various graphics-related things for the sola game engine.
  *
  * <ul>
  *   <li>{@link Renderer}</li>
  *   <li>{@link SolaGraphics}</li>
- *   <li>{@link technology.sola.engine.defaults.graphics.modules.SolaEntityGraphicsModule}</li>
+ *   <li>{@link SolaEntityGraphicsModule}</li>
  *   <li>{@link SolaImage}</li>
  *   <li>{@link LayerComponent}</li>
  * </ul>
  */
 @NullMarked
 public class RenderingExample extends Sola {
-  private final SolaGraphics solaGraphics;
+  private SolaGraphics solaGraphics;
 
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public RenderingExample() {
     super(new SolaConfiguration("Rendering Example", 800, 600, 30));
-
-    solaGraphics = new SolaGraphics(solaEcs);
   }
 
   @Override
   protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
+
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withoutDefaultGraphicsModules()
+      .buildAndInitialize(assetLoaderProvider);
 
     solaGraphics.addGraphicsModules(
       new CircleEntityGraphicsModule(),
@@ -64,7 +67,6 @@ public class RenderingExample extends Sola {
     );
 
     solaEcs.addSystem(new TestSystem());
-    solaEcs.addSystems(solaGraphics.getSystems());
     solaEcs.setWorld(createWorld());
 
     platform().getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");

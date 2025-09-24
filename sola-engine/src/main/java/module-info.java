@@ -23,8 +23,7 @@ module technology.sola.engine {
   exports technology.sola.engine.core.component;
   exports technology.sola.engine.core.event;
 
-  exports technology.sola.engine.defaults;
-  exports technology.sola.engine.defaults.graphics.modules;
+  exports technology.sola.engine.debug;
 
   exports technology.sola.engine.event;
 
@@ -41,6 +40,7 @@ module technology.sola.engine {
   exports technology.sola.engine.graphics.gui.style;
   exports technology.sola.engine.graphics.gui.style.property;
   exports technology.sola.engine.graphics.gui.style.theme;
+  exports technology.sola.engine.graphics.modules;
   exports technology.sola.engine.graphics.renderer;
   exports technology.sola.engine.graphics.renderer.blend;
   exports technology.sola.engine.graphics.screen;

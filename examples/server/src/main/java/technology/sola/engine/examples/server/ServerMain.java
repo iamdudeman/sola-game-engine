@@ -5,7 +5,7 @@ import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaPhysics;
+import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.event.Event;
 import technology.sola.engine.examples.common.features.networking.LevelBuilder;
 import technology.sola.engine.examples.common.features.networking.NetworkingExample;
@@ -59,9 +59,9 @@ public class ServerMain {
     public void initialize() {
       registerRestRoutes();
 
-      SolaPhysics solaPhysics = new SolaPhysics(eventHub);
+      new SolaPhysics.Builder(solaEcs)
+        .buildAndInitialize(eventHub);
 
-      solaEcs.addSystems(solaPhysics.getSystems());
       solaEcs.addSystem(new ClientUpdateSystem());
       solaEcs.addSystem(new PlayerMovementSystem());
       solaEcs.setWorld(LevelBuilder.createWorld(NetworkingExample.MAX_PLAYERS));
