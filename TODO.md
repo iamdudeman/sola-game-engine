@@ -2,7 +2,7 @@
 
 ## Known Bugs List
 
-* fix bug where penetration and normal are incorrect when AABB are inside each other
+*
 
 ### Low-priority bugs
 
