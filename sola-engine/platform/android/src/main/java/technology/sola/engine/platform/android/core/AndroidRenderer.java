@@ -12,6 +12,7 @@ import technology.sola.engine.graphics.renderer.Layer;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.blend.BlendFunction;
 import technology.sola.logging.SolaLogger;
+import technology.sola.math.linear.Vector2D;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -166,6 +167,11 @@ public class AndroidRenderer implements Renderer {
   @Override
   public void fillTriangle(float x1, float y1, float x2, float y2, float x3, float y3, Color color) {
     logMethodNotImplemented("fillTriangle"); // todo implement
+  }
+
+  @Override
+  public void fillPolygon(Vector2D[] points, Color color) {
+    logMethodNotImplemented("fillPolygon"); // todo implement
   }
 
   @Override

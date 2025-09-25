@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * SoftwareRenderer is a {@link Renderer} implementation that draws on an in memory array of pixels using the CPU. This
- * is portable across {@link technology.sola.engine.core.SolaPlatform}s but will be less performant than a GPU based
+ * is portable across {@link technology.sola.engine.core.SolaPlatform}s but will be less performant than a GPU-based
  * implementation.
  */
 @NullMarked
@@ -234,6 +234,11 @@ public class SoftwareRenderer extends Canvas implements Renderer {
         }
       }
     }
+  }
+
+  @Override
+  public void fillPolygon(Vector2D[] points, Color color) {
+    // todo
   }
 
   @Override

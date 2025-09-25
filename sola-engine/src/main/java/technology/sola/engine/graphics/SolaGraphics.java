@@ -359,6 +359,7 @@ public class SolaGraphics {
           new CircleEntityGraphicsModule(),
           new RectangleEntityGraphicsModule(),
           new TriangleEntityGraphicsModule(),
+          new ConvexPolygonEntityGraphicsModule(),
           new SpriteEntityGraphicsModule(spriteSheetAssetLoader),
           new ParticleEmitterEntityGraphicsModule()
         );

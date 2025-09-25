@@ -6,6 +6,7 @@ import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.blend.BlendFunction;
+import technology.sola.math.linear.Vector2D;
 
 import java.util.List;
 
@@ -289,6 +290,14 @@ public interface Renderer {
    * @param color {@link Color} of the triangle
    */
   void fillTriangle(float x1, float y1, float x2, float y2, float x3, float y3, Color color);
+
+  default void drawPolygon(Vector2D[] points, Color color) {
+    for (int i = 1; i < points.length; i++) {
+      drawLine(points[i - 1].x(), points[i - 1].y(), points[i].x(), points[i].y(), color);
+    }
+  }
+
+  void fillPolygon(Vector2D[] points, Color color);
 
   /**
    * Draws a {@link SolaImage} at desired coordinate. The coordinate will be the top-left of the image drawn.

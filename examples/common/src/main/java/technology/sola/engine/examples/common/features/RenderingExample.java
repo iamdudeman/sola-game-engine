@@ -11,11 +11,7 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.SolaGraphics;
-import technology.sola.engine.graphics.modules.CircleEntityGraphicsModule;
-import technology.sola.engine.graphics.modules.RectangleEntityGraphicsModule;
-import technology.sola.engine.graphics.modules.SolaEntityGraphicsModule;
-import technology.sola.engine.graphics.modules.SpriteEntityGraphicsModule;
-import technology.sola.engine.graphics.modules.TriangleEntityGraphicsModule;
+import technology.sola.engine.graphics.modules.*;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.*;
@@ -63,6 +59,7 @@ public class RenderingExample extends Sola {
       new CircleEntityGraphicsModule(),
       new RectangleEntityGraphicsModule(),
       new TriangleEntityGraphicsModule(),
+      new ConvexPolygonEntityGraphicsModule(),
       new SpriteEntityGraphicsModule(assetLoaderProvider.get(SpriteSheet.class))
     );
 

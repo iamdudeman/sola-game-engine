@@ -1,5 +1,12 @@
 # sola-game-engine TODO list
 
+WIP:
+* Consider generalizing Triangle renderer and collider to "Polygon" instead
+* drawPolygon
+* fillPolygon
+* convexPolygon shape
+* convexPolygon collider shape
+
 ## Known Bugs List
 
 *
@@ -34,7 +41,6 @@
         * AndroidSolaPlatform#mapKeyCode does not support all key codes!
 * Update examples to work off of mouse/touch only
     * cleanup logic in `ExampleLauncherSola#addReturnToLauncherKeyEvent`
-* Consider generalizing Triangle renderer and collider to "Polygon" instead
 * Add convenient ability to change entity render order based on Y position (or some other condition other than layers)
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
