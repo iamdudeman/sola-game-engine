@@ -7,7 +7,6 @@ import technology.sola.ecs.view.View;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.components.ConvexPolygonRendererComponent;
-import technology.sola.engine.graphics.components.TriangleRendererComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;

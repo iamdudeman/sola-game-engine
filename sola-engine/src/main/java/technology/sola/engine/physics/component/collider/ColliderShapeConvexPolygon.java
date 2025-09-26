@@ -6,7 +6,6 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.math.geometry.ConvexPolygon;
 import technology.sola.math.geometry.Rectangle;
-import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
@@ -28,29 +27,28 @@ public record ColliderShapeConvexPolygon(
   @Override
   public Rectangle getBoundingBox(TransformComponent transformComponent, float offsetX, float offsetY) {
     var shape = getShape(transformComponent, offsetX, offsetY);
+    var points = shape.points();
 
     // find width and minX
-    float minX = shape.p1().x();
+    float minX = points[0].x();
     float maxX = minX;
 
-    minX = Math.min(minX, shape.p2().x());
-    maxX = Math.max(maxX, shape.p2().x());
-
-    minX = Math.min(minX, shape.p3().x());
-    maxX = Math.max(maxX, shape.p3().x());
-
-    float width = (maxX - minX);
-
     // find height and minY
-    float minY = shape.p1().y();
+    float minY = points[0].y();
     float maxY = minY;
 
-    minY = Math.min(minY, shape.p2().y());
-    maxY = Math.max(maxY, shape.p2().y());
 
-    minY = Math.min(minY, shape.p3().y());
-    maxY = Math.max(maxY, shape.p3().y());
+    for (int i = 1; i < points.length; i++) {
+      var currentPoint = points[i];
 
+      minX = Math.min(minX, currentPoint.x());
+      maxX = Math.max(maxX, currentPoint.x());
+
+      minY = Math.min(minY, currentPoint.y());
+      maxY = Math.max(maxY, currentPoint.y());
+    }
+
+    float width = (maxX - minX);
     float height = (maxY - minY);
 
     // build Rectangle
