@@ -11,6 +11,7 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.blend.BlendFunction;
 import technology.sola.logging.SolaLogger;
 import technology.sola.math.SolaMath;
+import technology.sola.math.geometry.ConvexPolygon;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Vector2D;
@@ -238,7 +239,34 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
   @Override
   public void fillPolygon(Vector2D[] points, Color color) {
-    // todo
+    // find width and minX
+    float minX = points[0].x();
+    float maxX = minX;
+
+    // find height and minY
+    float minY = points[0].y();
+    float maxY = minY;
+
+
+    for (int i = 1; i < points.length; i++) {
+      var currentPoint = points[i];
+
+      minX = Math.min(minX, currentPoint.x());
+      maxX = Math.max(maxX, currentPoint.x());
+
+      minY = Math.min(minY, currentPoint.y());
+      maxY = Math.max(maxY, currentPoint.y());
+    }
+
+    ConvexPolygon convexPolygon = new ConvexPolygon(points);
+
+    for (int x = SolaMath.fastRound(minX); x <= maxX; x++) {
+      for (int y = SolaMath.fastRound(minY); y <= maxY; y++) {
+        if (convexPolygon.contains(new Vector2D(x, y))) {
+          setPixel(x, y, color);
+        }
+      }
+    }
   }
 
   @Override
