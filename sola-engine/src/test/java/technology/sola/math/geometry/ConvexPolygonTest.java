@@ -4,8 +4,22 @@ import org.junit.jupiter.api.Test;
 import technology.sola.math.linear.Vector2D;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ConvexPolygonTest {
+  @Test
+  void constructor() {
+    Vector2D[] points = new Vector2D[] {
+      new Vector2D(0, 0),    // bottom left
+      new Vector2D(10, 0),   // bottom right
+      new Vector2D(5, 3),    // inward point (creates concavity)
+      new Vector2D(8, 8),    // top right
+      new Vector2D(2, 8)     // top left
+    };
+
+    assertThrows(IllegalArgumentException.class, () -> new ConvexPolygon(points));
+  }
+
   @Test
   void contains() {
     Rectangle rectangle = new Rectangle(new Vector2D(0, 0), new Vector2D(10, 10));
