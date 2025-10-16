@@ -14,7 +14,7 @@ class ConvexPolygonTest {
       new Vector2D(10, 0),   // bottom right
       new Vector2D(5, 3),    // inward point (creates concavity)
       new Vector2D(8, 8),    // top right
-      new Vector2D(2, 8)     // top left
+      new Vector2D(2, 8),    // top left
     };
 
     assertThrows(IllegalArgumentException.class, () -> new ConvexPolygon(points));

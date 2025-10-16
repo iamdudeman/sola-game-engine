@@ -291,12 +291,24 @@ public interface Renderer {
    */
   void fillTriangle(float x1, float y1, float x2, float y2, float x3, float y3, Color color);
 
+  /**
+   * Draws a polygon.
+   *
+   * @param points the points of the polygon
+   * @param color the {@link Color} of the polygon
+   */
   default void drawPolygon(Vector2D[] points, Color color) {
     for (int i = 1; i < points.length; i++) {
       drawLine(points[i - 1].x(), points[i - 1].y(), points[i].x(), points[i].y(), color);
     }
   }
 
+  /**
+   * Draws a filled polygon.
+   *
+   * @param points the points of the polygon
+   * @param color the {@link Color} of the polygon
+   */
   void fillPolygon(Vector2D[] points, Color color);
 
   /**

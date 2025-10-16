@@ -3,10 +3,52 @@ package technology.sola.math.geometry;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.math.linear.Vector2D;
 
+/**
+ * ConvexPolygon represents a convex polygon.
+ *
+ * @param points the points of the convex polygon
+ */
 @NullMarked
 public record ConvexPolygon(Vector2D[] points) implements Shape {
+  /**
+   * Creates a convex polygon from the provided points.
+   *
+   * @param points the points of the convex polygon
+   * @throws IllegalArgumentException if the provided points do not form a convex polygon
+   */
   public ConvexPolygon {
-    // todo validate it is a convex polygon
+    if (points.length < 3) {
+      throw new IllegalArgumentException("A polygon must have at least 3 points");
+    }
+
+    // Check if the polygon is convex by verifying all cross-products have the same sign
+    Boolean isPositive = null;
+
+    for (int i = 0; i < points.length; i++) {
+      Vector2D current = points[i];
+      Vector2D next = points[(i + 1) % points.length];
+      Vector2D nextNext = points[(i + 2) % points.length];
+
+      // Calculate vectors for consecutive edges
+      Vector2D edge1 = next.subtract(current);
+      Vector2D edge2 = nextNext.subtract(next);
+
+      // Calculate cross-product (z-component of 3D cross-product)
+      float crossProduct = edge1.x() * edge2.y() - edge1.y() * edge2.x();
+
+      // Skip zero cross products (collinear points)
+      if (Math.abs(crossProduct) < 1e-9f) {
+        continue;
+      }
+
+      // Check if this cross-product has the same sign as previous ones
+      boolean currentIsPositive = crossProduct > 0;
+      if (isPositive == null) {
+        isPositive = currentIsPositive;
+      } else if (isPositive != currentIsPositive) {
+        throw new IllegalArgumentException("The provided points do not form a convex polygon");
+      }
+    }
   }
 
   @Override
