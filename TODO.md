@@ -1,12 +1,5 @@
 # sola-game-engine TODO list
 
-WIP:
-* Consider generalizing Triangle renderer and collider to "Polygon" instead
-* drawPolygon
-* fillPolygon
-* convexPolygon shape
-* convexPolygon collider shape
-
 ## Known Bugs List
 
 *
