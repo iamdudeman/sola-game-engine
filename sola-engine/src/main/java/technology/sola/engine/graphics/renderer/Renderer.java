@@ -301,6 +301,8 @@ public interface Renderer {
     for (int i = 1; i < points.length; i++) {
       drawLine(points[i - 1].x(), points[i - 1].y(), points[i].x(), points[i].y(), color);
     }
+
+    drawLine(points[points.length - 1].x(), points[points.length - 1].y(), points[0].x(), points[0].y(), color);
   }
 
   /**
