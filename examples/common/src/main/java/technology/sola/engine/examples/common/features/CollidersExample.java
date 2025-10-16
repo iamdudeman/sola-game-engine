@@ -9,6 +9,7 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.SolaGraphics;
+import technology.sola.engine.graphics.components.ConvexPolygonRendererComponent;
 import technology.sola.engine.graphics.modules.SolaGraphicsModule;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
@@ -28,10 +29,15 @@ import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
 import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
+import technology.sola.engine.physics.component.collider.ColliderShapeConvexPolygon;
 import technology.sola.engine.physics.component.collider.ColliderShapeTriangle;
+import technology.sola.math.geometry.ConvexPolygon;
 import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * CollidersExample is a {@link technology.sola.engine.core.Sola} for demoing various {@link ColliderComponent}
@@ -139,6 +145,18 @@ public class CollidersExample extends Sola {
         var max = new Vector2D(Math.max(firstPoint.x(), point.x()), Math.max(firstPoint.y(), point.y()));
 
         renderer.drawRect(min.x(), min.y(), max.x() - min.x(), max.y() - min.y(), color);
+      } else if (currentMode == InteractionMode.CREATE_POLYGON) {
+        var points = createShapeSystem.points;
+
+        if (points.isEmpty()) {
+          return;
+        }
+
+        for (int i = 0; i < points.size() - 1; i++) {
+          renderer.drawLine(points.get(i).x(), points.get(i).y(), points.get(i + 1).x(), points.get(i + 1).y(), color);
+        }
+
+        renderer.drawLine(points.get(points.size() - 1).x(), points.get(points.size() - 1).y(), point.x(), point.y(), color);
       }
     }
   }
@@ -149,6 +167,7 @@ public class CollidersExample extends Sola {
     Vector2D firstPoint;
     @Nullable
     Vector2D secondPoint;
+    List<Vector2D> points = new ArrayList<>();
 
     @Override
     public void update(World world, float deltaTime) {
@@ -158,6 +177,24 @@ public class CollidersExample extends Sola {
         changeMode(InteractionMode.CREATE_AABB, "modeAABB");
       } else if (keyboardInput.isKeyPressed(Key.THREE)) {
         changeMode(InteractionMode.CREATE_TRIANGLE, "modeTriangle");
+      } else if (keyboardInput.isKeyPressed(Key.FOUR)) {
+        changeMode(InteractionMode.CREATE_POLYGON, "modePolygon");
+      }
+
+      if (mouseInput.isMousePressed(MouseButton.SECONDARY)) {
+        if (points.size() < 3) {
+          return;
+        }
+
+        ConvexPolygon convexPolygon = new ConvexPolygon(points.toArray(Vector2D[]::new));
+
+        world.createEntity(
+          new TransformComponent(0, 0),
+          new ConvexPolygonRendererComponent(Color.YELLOW, false, convexPolygon),
+          new DynamicBodyComponent(),
+          new ColliderComponent(new ColliderShapeConvexPolygon(convexPolygon))
+        );
+        reset();
       }
 
       if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
@@ -165,6 +202,7 @@ public class CollidersExample extends Sola {
 
         if (firstPoint == null) {
           firstPoint = point;
+          points.add(point);
           return;
         }
 
@@ -206,6 +244,8 @@ public class CollidersExample extends Sola {
             new ColliderComponent(new ColliderShapeAABB())
           );
           reset();
+        } else if (currentMode == InteractionMode.CREATE_POLYGON) {
+          points.add(point);
         }
       }
     }
@@ -213,6 +253,7 @@ public class CollidersExample extends Sola {
     private void reset() {
       firstPoint = null;
       secondPoint = null;
+      points.clear();
     }
 
     private void changeMode(InteractionMode newMode, String guiElementId) {
@@ -227,6 +268,7 @@ public class CollidersExample extends Sola {
   private enum InteractionMode {
     CREATE_CIRCLE,
     CREATE_AABB,
-    CREATE_TRIANGLE
+    CREATE_TRIANGLE,
+    CREATE_POLYGON
   }
 }
