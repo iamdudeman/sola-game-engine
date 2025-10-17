@@ -748,6 +748,15 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates an instance of a <code>ColliderShapeCircle</code> record class.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html" class="type-name-link" title="class in technology.sola.engine.physics.component.collider">ColliderShapeConvexPolygon</a> - Record Class in <a href="technology.sola.engine/technology/sola/engine/physics/component/collider/package-summary.html">technology.sola.engine.physics.component.collider</a></dt>
+<dd>
+<div class="block">ColliderShapeConvexPolygon is a <a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider"><code>ColliderShape</code></a> implementation for a convex polygon which utilize a
+ <a href="technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html" title="class in technology.sola.math.geometry"><code>ConvexPolygon</code></a> for its geometric shape representation.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html#%3Cinit%3E(technology.sola.math.geometry.ConvexPolygon)" class="member-name-link">ColliderShapeConvexPolygon(ConvexPolygon)</a> - Constructor for record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeConvexPolygon</a></dt>
+<dd>
+<div class="block">Creates an instance of a <code>ColliderShapeConvexPolygon</code> record class.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeTriangle.html" class="type-name-link" title="class in technology.sola.engine.physics.component.collider">ColliderShapeTriangle</a> - Record Class in <a href="technology.sola.engine/technology/sola/engine/physics/component/collider/package-summary.html">technology.sola.engine.physics.component.collider</a></dt>
 <dd>
 <div class="block">ColliderShapeTriangle is a <a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider"><code>ColliderShape</code></a> implementation for a triangle which utilize a
@@ -906,6 +915,8 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/math/geometry/Circle.html#contains(technology.sola.math.linear.Vector2D)" class="member-name-link">contains(Vector2D)</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html#contains(technology.sola.math.linear.Vector2D)" class="member-name-link">contains(Vector2D)</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html" title="class in technology.sola.math.geometry">ConvexPolygon</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/math/geometry/Rectangle.html#contains(technology.sola.math.linear.Vector2D)" class="member-name-link">contains(Vector2D)</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/math/geometry/Shape.html#contains(technology.sola.math.linear.Vector2D)" class="member-name-link">contains(Vector2D)</a> - Method in interface technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Shape.html" title="interface in technology.sola.math.geometry">Shape</a></dt>
@@ -968,6 +979,33 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/input/ControlsConfigJsonMapper.html#%3Cinit%3E()" class="member-name-link">ControlsConfigJsonMapper()</a> - Constructor for class technology.sola.engine.assets.input.<a href="technology.sola.engine/technology/sola/engine/assets/input/ControlsConfigJsonMapper.html" title="class in technology.sola.engine.assets.input">ControlsConfigJsonMapper</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderType.html#CONVEX_POLYGON" class="member-name-link">CONVEX_POLYGON</a> - Enum constant in enum class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderType.html" title="enum class in technology.sola.engine.physics.component.collider">ColliderType</a></dt>
+<dd>
+<div class="block">Convex Polygon</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html" class="type-name-link" title="class in technology.sola.math.geometry">ConvexPolygon</a> - Record Class in <a href="technology.sola.engine/technology/sola/math/geometry/package-summary.html">technology.sola.math.geometry</a></dt>
+<dd>
+<div class="block">ConvexPolygon represents a convex polygon.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html#%3Cinit%3E(technology.sola.math.linear.Vector2D%5B%5D)" class="member-name-link">ConvexPolygon(Vector2D[])</a> - Constructor for record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html" title="class in technology.sola.math.geometry">ConvexPolygon</a></dt>
+<dd>
+<div class="block">Creates a convex polygon from the provided points.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/ConvexPolygonEntityGraphicsModule.html" class="type-name-link" title="class in technology.sola.engine.graphics.modules">ConvexPolygonEntityGraphicsModule</a> - Class in <a href="technology.sola.engine/technology/sola/engine/graphics/modules/package-summary.html">technology.sola.engine.graphics.modules</a></dt>
+<dd>
+<div class="block">ConvexPolygonEntityGraphicsModule is a <a href="technology.sola.engine/technology/sola/engine/graphics/modules/SolaEntityGraphicsModule.html" title="class in technology.sola.engine.graphics.modules"><code>SolaEntityGraphicsModule</code></a> implementation for rendering <code>Entity</code> that
+ have a <a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> and <a href="technology.sola.engine/technology/sola/engine/graphics/components/ConvexPolygonRendererComponent.html" title="class in technology.sola.engine.graphics.components"><code>ConvexPolygonRendererComponent</code></a>.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/ConvexPolygonEntityGraphicsModule.html#%3Cinit%3E()" class="member-name-link">ConvexPolygonEntityGraphicsModule()</a> - Constructor for class technology.sola.engine.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/graphics/modules/ConvexPolygonEntityGraphicsModule.html" title="class in technology.sola.engine.graphics.modules">ConvexPolygonEntityGraphicsModule</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/ConvexPolygonRendererComponent.html" class="type-name-link" title="class in technology.sola.engine.graphics.components">ConvexPolygonRendererComponent</a> - Class in <a href="technology.sola.engine/technology/sola/engine/graphics/components/package-summary.html">technology.sola.engine.graphics.components</a></dt>
+<dd>
+<div class="block">ConvexPolygonRendererComponent is a <code>Component</code> containing data for rendering 2d convex polygons.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/ConvexPolygonRendererComponent.html#%3Cinit%3E(technology.sola.engine.graphics.Color,boolean,technology.sola.math.geometry.ConvexPolygon)" class="member-name-link">ConvexPolygonRendererComponent(Color, boolean, ConvexPolygon)</a> - Constructor for class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/ConvexPolygonRendererComponent.html" title="class in technology.sola.engine.graphics.components">ConvexPolygonRendererComponent</a></dt>
+<dd>
+<div class="block">Creates a ConvexPolygonRendererComponent of desired color that is either filled or not filled.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.GameLoopProvider.html#create(technology.sola.engine.event.EventHub,java.util.function.Consumer,java.lang.Runnable,int)" class="member-name-link">create(EventHub, Consumer&lt;Float&gt;, Runnable, int)</a> - Method in interface technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.GameLoopProvider.html" title="interface in technology.sola.engine.core">SolaPlatform.GameLoopProvider</a></dt>
 <dd>
 <div class="block">Creates a new <a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html" title="class in technology.sola.engine.core"><code>GameLoop</code></a> instance</div>
@@ -1072,6 +1110,8 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeAABB.html#debugRender(technology.sola.engine.graphics.renderer.Renderer,technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">debugRender(Renderer, TransformComponent, float, float)</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeAABB.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeAABB</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeCircle.html#debugRender(technology.sola.engine.graphics.renderer.Renderer,technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">debugRender(Renderer, TransformComponent, float, float)</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeCircle.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeCircle</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html#debugRender(technology.sola.engine.graphics.renderer.Renderer,technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">debugRender(Renderer, TransformComponent, float, float)</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeConvexPolygon</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeTriangle.html#debugRender(technology.sola.engine.graphics.renderer.Renderer,technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">debugRender(Renderer, TransformComponent, float, float)</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeTriangle.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeTriangle</a></dt>
 <dd>&nbsp;</dd>
@@ -1238,6 +1278,10 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html#drawLine(float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">drawLine(float, float, float, float, Color)</a> - Method in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer">SoftwareRenderer</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#drawPolygon(technology.sola.math.linear.Vector2D%5B%5D,technology.sola.engine.graphics.Color)" class="member-name-link">drawPolygon(Vector2D[], Color)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
+<dd>
+<div class="block">Draws a polygon.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#drawRect(float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">drawRect(float, float, float, float, Color)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
 <dd>
 <div class="block">Draws an unfilled rectangle.</div>
@@ -1512,6 +1556,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeConvexPolygon</a></dt>
+<dd>
+<div class="block">Indicates whether some other object is "equal to" this one.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeTriangle.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeTriangle.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeTriangle</a></dt>
 <dd>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
@@ -1535,6 +1583,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/math/geometry/Circle.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a></dt>
+<dd>
+<div class="block">Indicates whether some other object is "equal to" this one.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html" title="class in technology.sola.math.geometry">ConvexPolygon</a></dt>
 <dd>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </dd>
@@ -1679,6 +1731,12 @@ loadScripts(document, 'script');</script>
 <div class="block">Draws a filled circle.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html#fillCircle(float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">fillCircle(float, float, float, Color)</a> - Method in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer">SoftwareRenderer</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#fillPolygon(technology.sola.math.linear.Vector2D%5B%5D,technology.sola.engine.graphics.Color)" class="member-name-link">fillPolygon(Vector2D[], Color)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
+<dd>
+<div class="block">Draws a filled polygon.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html#fillPolygon(technology.sola.math.linear.Vector2D%5B%5D,technology.sola.engine.graphics.Color)" class="member-name-link">fillPolygon(Vector2D[], Color)</a> - Method in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer">SoftwareRenderer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#fillRect(float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">fillRect(float, float, float, float, Color)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
 <dd>
@@ -1909,6 +1967,8 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/math/geometry/Circle.html#getArea()" class="member-name-link">getArea()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html#getArea()" class="member-name-link">getArea()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html" title="class in technology.sola.math.geometry">ConvexPolygon</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/math/geometry/Rectangle.html#getArea()" class="member-name-link">getArea()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/math/geometry/Shape.html#getArea()" class="member-name-link">getArea()</a> - Method in interface technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Shape.html" title="interface in technology.sola.math.geometry">Shape</a></dt>
@@ -1963,6 +2023,8 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeCircle.html#getBoundingBox(technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">getBoundingBox(TransformComponent, float, float)</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeCircle.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeCircle</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html#getBoundingBox(technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">getBoundingBox(TransformComponent, float, float)</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeConvexPolygon</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeTriangle.html#getBoundingBox(technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">getBoundingBox(TransformComponent, float, float)</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeTriangle.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeTriangle</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/AffineTransform.html#getBoundingBoxForTransform(int,int)" class="member-name-link">getBoundingBoxForTransform(int, int)</a> - Method in class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/AffineTransform.html" title="class in technology.sola.engine.graphics">AffineTransform</a></dt>
@@ -2005,6 +2067,8 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/CircleRendererComponent.html#getColor()" class="member-name-link">getColor()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/CircleRendererComponent.html" title="class in technology.sola.engine.graphics.components">CircleRendererComponent</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/ConvexPolygonRendererComponent.html#getColor()" class="member-name-link">getColor()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/ConvexPolygonRendererComponent.html" title="class in technology.sola.engine.graphics.components">ConvexPolygonRendererComponent</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/LightComponent.html#getColor()" class="member-name-link">getColor()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/LightComponent.html" title="class in technology.sola.engine.graphics.components">LightComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html#getColor()" class="member-name-link">getColor()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html" title="class in technology.sola.engine.graphics.components">RectangleRendererComponent</a></dt>
@@ -2018,6 +2082,8 @@ loadScripts(document, 'script');</script>
 <div class="block">Gets the <a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElementBounds.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElementBounds</code></a> that contains the top, left of where the content area begins and the width and
  height of the content area.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/ConvexPolygonRendererComponent.html#getConvexPolygon()" class="member-name-link">getConvexPolygon()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/ConvexPolygonRendererComponent.html" title="class in technology.sola.engine.graphics.components">ConvexPolygonRendererComponent</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/utils/QuadTreeNode.html#getCurrentDepth()" class="member-name-link">getCurrentDepth()</a> - Method in class technology.sola.engine.physics.utils.<a href="technology.sola.engine/technology/sola/engine/physics/utils/QuadTreeNode.html" title="class in technology.sola.engine.physics.utils">QuadTreeNode</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/animation/SpriteAnimatorComponent.html#getCurrentFrame()" class="member-name-link">getCurrentFrame()</a> - Method in class technology.sola.engine.graphics.components.animation.<a href="technology.sola.engine/technology/sola/engine/graphics/components/animation/SpriteAnimatorComponent.html" title="class in technology.sola.engine.graphics.components.animation">SpriteAnimatorComponent</a></dt>
@@ -2213,14 +2279,6 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/input/TextInputGuiElement.html#getPlaceholder()" class="member-name-link">getPlaceholder()</a> - Method in class technology.sola.engine.graphics.gui.elements.input.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/input/TextInputGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements.input">TextInputGuiElement</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/math/geometry/Circle.html#getPoints()" class="member-name-link">getPoints()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/math/geometry/Rectangle.html#getPoints()" class="member-name-link">getPoints()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/math/geometry/Shape.html#getPoints()" class="member-name-link">getPoints()</a> - Method in interface technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Shape.html" title="interface in technology.sola.math.geometry">Shape</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/math/geometry/Triangle.html#getPoints()" class="member-name-link">getPoints()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Triangle.html" title="class in technology.sola.math.geometry">Triangle</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html#getPosition()" class="member-name-link">getPosition()</a> - Method in class technology.sola.engine.physics.component.<a href="technology.sola.engine/technology/sola/engine/physics/component/ParticleEmitterComponent.Particle.html" title="class in technology.sola.engine.physics.component">ParticleEmitterComponent.Particle</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/CameraComponent.html#getPriority()" class="member-name-link">getPriority()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/CameraComponent.html" title="class in technology.sola.engine.graphics.components">CameraComponent</a></dt>
@@ -2266,6 +2324,8 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeAABB.html#getShape(technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">getShape(TransformComponent, float, float)</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeAABB.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeAABB</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeCircle.html#getShape(technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">getShape(TransformComponent, float, float)</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeCircle.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeCircle</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html#getShape(technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">getShape(TransformComponent, float, float)</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeConvexPolygon</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeTriangle.html#getShape(technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">getShape(TransformComponent, float, float)</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeTriangle.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeTriangle</a></dt>
 <dd>&nbsp;</dd>
@@ -2346,6 +2406,8 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/debug/DebugGraphicsModule.html#getViewToRender(technology.sola.ecs.World)" class="member-name-link">getViewToRender(World)</a> - Method in class technology.sola.engine.debug.<a href="technology.sola.engine/technology/sola/engine/debug/DebugGraphicsModule.html" title="class in technology.sola.engine.debug">DebugGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/CircleEntityGraphicsModule.html#getViewToRender(technology.sola.ecs.World)" class="member-name-link">getViewToRender(World)</a> - Method in class technology.sola.engine.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/graphics/modules/CircleEntityGraphicsModule.html" title="class in technology.sola.engine.graphics.modules">CircleEntityGraphicsModule</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/ConvexPolygonEntityGraphicsModule.html#getViewToRender(technology.sola.ecs.World)" class="member-name-link">getViewToRender(World)</a> - Method in class technology.sola.engine.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/graphics/modules/ConvexPolygonEntityGraphicsModule.html" title="class in technology.sola.engine.graphics.modules">ConvexPolygonEntityGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/ParticleEmitterEntityGraphicsModule.html#getViewToRender(technology.sola.ecs.World)" class="member-name-link">getViewToRender(World)</a> - Method in class technology.sola.engine.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/graphics/modules/ParticleEmitterEntityGraphicsModule.html" title="class in technology.sola.engine.graphics.modules">ParticleEmitterEntityGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
@@ -2716,6 +2778,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeConvexPolygon</a></dt>
+<dd>
+<div class="block">Returns a hash code value for this object.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeTriangle.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeTriangle.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeTriangle</a></dt>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
@@ -2739,6 +2805,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/math/geometry/Circle.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a></dt>
+<dd>
+<div class="block">Returns a hash code value for this object.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html" title="class in technology.sola.math.geometry">ConvexPolygon</a></dt>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
@@ -2997,6 +3067,8 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/networking/NetworkQueue.html#isEmpty()" class="member-name-link">isEmpty()</a> - Method in class technology.sola.engine.networking.<a href="technology.sola.engine/technology/sola/engine/networking/NetworkQueue.html" title="class in technology.sola.engine.networking">NetworkQueue</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/CircleRendererComponent.html#isFilled()" class="member-name-link">isFilled()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/CircleRendererComponent.html" title="class in technology.sola.engine.graphics.components">CircleRendererComponent</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/ConvexPolygonRendererComponent.html#isFilled()" class="member-name-link">isFilled()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/ConvexPolygonRendererComponent.html" title="class in technology.sola.engine.graphics.components">ConvexPolygonRendererComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html#isFilled()" class="member-name-link">isFilled()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html" title="class in technology.sola.engine.graphics.components">RectangleRendererComponent</a></dt>
 <dd>&nbsp;</dd>
@@ -4191,6 +4263,18 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Starts playing the animation with desired id.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/math/geometry/Circle.html#points()" class="member-name-link">points()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html#points()" class="member-name-link">points()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html" title="class in technology.sola.math.geometry">ConvexPolygon</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html#param-points"><code>points</code></a> record component.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/math/geometry/Rectangle.html#points()" class="member-name-link">points()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/math/geometry/Shape.html#points()" class="member-name-link">points()</a> - Method in interface technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Shape.html" title="interface in technology.sola.math.geometry">Shape</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/math/geometry/Triangle.html#points()" class="member-name-link">points()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Triangle.html" title="class in technology.sola.math.geometry">Triangle</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/system/collision/CollisionDetectionBroadPhase.html#populate(java.util.Collection)" class="member-name-link">populate(Collection&lt;View2Entry&lt;ColliderComponent, TransformComponent&gt;&gt;)</a> - Method in interface technology.sola.engine.physics.system.collision.<a href="technology.sola.engine/technology/sola/engine/physics/system/collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision">CollisionDetectionBroadPhase</a></dt>
 <dd>
 <div class="block">Populates the underlying data structure from the list of collidable entities.</div>
@@ -4497,6 +4581,8 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/system/collision/SpatialHashMapCollisionDetectionBroadPhase.html#renderDebug(technology.sola.engine.graphics.renderer.Renderer,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)" class="member-name-link">renderDebug(Renderer, Matrix3D, Matrix3D)</a> - Method in class technology.sola.engine.physics.system.collision.<a href="technology.sola.engine/technology/sola/engine/physics/system/collision/SpatialHashMapCollisionDetectionBroadPhase.html" title="class in technology.sola.engine.physics.system.collision">SpatialHashMapCollisionDetectionBroadPhase</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/CircleEntityGraphicsModule.html#renderEntity(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderEntity(Renderer, View2Entry&lt;CircleRendererComponent, TransformComponent&gt;, TransformComponent)</a> - Method in class technology.sola.engine.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/graphics/modules/CircleEntityGraphicsModule.html" title="class in technology.sola.engine.graphics.modules">CircleEntityGraphicsModule</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/ConvexPolygonEntityGraphicsModule.html#renderEntity(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderEntity(Renderer, View2Entry&lt;ConvexPolygonRendererComponent, TransformComponent&gt;, TransformComponent)</a> - Method in class technology.sola.engine.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/graphics/modules/ConvexPolygonEntityGraphicsModule.html" title="class in technology.sola.engine.graphics.modules">ConvexPolygonEntityGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/RectangleEntityGraphicsModule.html#renderEntity(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.view.View2Entry,technology.sola.engine.core.component.TransformComponent)" class="member-name-link">renderEntity(Renderer, View2Entry&lt;RectangleRendererComponent, TransformComponent&gt;, TransformComponent)</a> - Method in class technology.sola.engine.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/graphics/modules/RectangleEntityGraphicsModule.html" title="class in technology.sola.engine.graphics.modules">RectangleEntityGraphicsModule</a></dt>
 <dd>&nbsp;</dd>
@@ -4843,6 +4929,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Sets the <a href="technology.sola.engine/technology/sola/engine/graphics/Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> for rendering.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/ConvexPolygonRendererComponent.html#setColor(technology.sola.engine.graphics.Color)" class="member-name-link">setColor(Color)</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/ConvexPolygonRendererComponent.html" title="class in technology.sola.engine.graphics.components">ConvexPolygonRendererComponent</a></dt>
+<dd>
+<div class="block">Sets the <a href="technology.sola.engine/technology/sola/engine/graphics/Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> for rendering.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/LightComponent.html#setColor(technology.sola.engine.graphics.Color)" class="member-name-link">setColor(Color)</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/LightComponent.html" title="class in technology.sola.engine.graphics.components">LightComponent</a></dt>
 <dd>
 <div class="block">Sets the <a href="technology.sola.engine/technology/sola/engine/graphics/Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the light.</div>
@@ -4878,6 +4968,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/CircleRendererComponent.html#setFilled(boolean)" class="member-name-link">setFilled(boolean)</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/CircleRendererComponent.html" title="class in technology.sola.engine.graphics.components">CircleRendererComponent</a></dt>
 <dd>
 <div class="block">Sets whether the circle should be filled or not.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/ConvexPolygonRendererComponent.html#setFilled(boolean)" class="member-name-link">setFilled(boolean)</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/ConvexPolygonRendererComponent.html" title="class in technology.sola.engine.graphics.components">ConvexPolygonRendererComponent</a></dt>
+<dd>
+<div class="block">Sets whether the convex polygon should be filled or not.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html#setFilled(boolean)" class="member-name-link">setFilled(boolean)</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/RectangleRendererComponent.html" title="class in technology.sola.engine.graphics.components">RectangleRendererComponent</a></dt>
 <dd>
@@ -5245,6 +5339,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/Color.html#shade(float)" class="member-name-link">shade(float)</a> - Method in class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/Color.html" title="class in technology.sola.engine.graphics">Color</a></dt>
 <dd>
 <div class="block">Creates a new Color that is a shade of this Color.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html#shape()" class="member-name-link">shape()</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeConvexPolygon</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html#param-shape"><code>shape</code></a> record component.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeTriangle.html#shape()" class="member-name-link">shape()</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeTriangle.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeTriangle</a></dt>
 <dd>
@@ -6301,6 +6399,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a string representation of this record class.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html#toString()" class="member-name-link">toString()</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeConvexPolygon</a></dt>
+<dd>
+<div class="block">Returns a string representation of this record class.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeTriangle.html#toString()" class="member-name-link">toString()</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeTriangle.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeTriangle</a></dt>
 <dd>
 <div class="block">Returns a string representation of this record class.</div>
@@ -6322,6 +6424,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a string representation of this record class.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/math/geometry/Circle.html#toString()" class="member-name-link">toString()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a></dt>
+<dd>
+<div class="block">Returns a string representation of this record class.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html#toString()" class="member-name-link">toString()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html" title="class in technology.sola.math.geometry">ConvexPolygon</a></dt>
 <dd>
 <div class="block">Returns a string representation of this record class.</div>
 </dd>
@@ -6464,6 +6570,8 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeAABB.html#type()" class="member-name-link">type()</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeAABB.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeAABB</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeCircle.html#type()" class="member-name-link">type()</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeCircle.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeCircle</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html#type()" class="member-name-link">type()</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeConvexPolygon.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeConvexPolygon</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeTriangle.html#type()" class="member-name-link">type()</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeTriangle.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeTriangle</a></dt>
 <dd>&nbsp;</dd>

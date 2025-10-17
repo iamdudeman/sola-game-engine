@@ -87,7 +87,7 @@ loadScripts(document, 'script');</script>
 <span class="extends-implements">extends <a href="../Canvas.html" title="class in technology.sola.engine.graphics">Canvas</a>
 implements <a href="Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></span></div>
 <div class="block">SoftwareRenderer is a <a href="Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> implementation that draws on an in memory array of pixels using the CPU. This
- is portable across <a href="../../core/SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a>s but will be less performant than a GPU based
+ is portable across <a href="../../core/SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a>s but will be less performant than a GPU-based
  implementation.</div>
 </section>
 <section class="summary">
@@ -195,57 +195,63 @@ implements <a href="Renderer.html" title="interface in technology.sola.engine.gr
 <div class="block">Draws a filled circle.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#fillRect(float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">fillRect</a><wbr>(float&nbsp;x,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#fillPolygon(technology.sola.math.linear.Vector2D%5B%5D,technology.sola.engine.graphics.Color)" class="member-name-link">fillPolygon</a><wbr>(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;points,
+ <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Draws a filled polygon.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#fillRect(float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">fillRect</a><wbr>(float&nbsp;x,
  float&nbsp;y,
  float&nbsp;width,
  float&nbsp;height,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Draws a filled rectangle.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#fillTriangle(float,float,float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">fillTriangle</a><wbr>(float&nbsp;x1,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#fillTriangle(float,float,float,float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">fillTriangle</a><wbr>(float&nbsp;x1,
  float&nbsp;y1,
  float&nbsp;x2,
  float&nbsp;y2,
  float&nbsp;x3,
  float&nbsp;y3,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Draws a filled triangle.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend">BlendFunction</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBlendFunction()" class="member-name-link">getBlendFunction</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFont()" class="member-name-link">getFont</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend">BlendFunction</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBlendFunction()" class="member-name-link">getBlendFunction</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Layer.html" title="class in technology.sola.engine.graphics.renderer">Layer</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLayers()" class="member-name-link">getLayers</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFont()" class="member-name-link">getFont</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setBlendFunction(technology.sola.engine.graphics.renderer.blend.BlendFunction)" class="member-name-link">setBlendFunction</a><wbr>(<a href="blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend">BlendFunction</a>&nbsp;blendFunction)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Layer.html" title="class in technology.sola.engine.graphics.renderer">Layer</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLayers()" class="member-name-link">getLayers</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setBlendFunction(technology.sola.engine.graphics.renderer.blend.BlendFunction)" class="member-name-link">setBlendFunction</a><wbr>(<a href="blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend">BlendFunction</a>&nbsp;blendFunction)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the <a href="blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend"><code>BlendFunction</code></a> that should be used.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setClamp(int,int,int,int)" class="member-name-link">setClamp</a><wbr>(int&nbsp;x,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setClamp(int,int,int,int)" class="member-name-link">setClamp</a><wbr>(int&nbsp;x,
  int&nbsp;y,
  int&nbsp;width,
  int&nbsp;height)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Restricts rendering of pixels within a rectangle.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setFont(technology.sola.engine.assets.graphics.font.Font)" class="member-name-link">setFont</a><wbr>(<a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a>&nbsp;font)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setFont(technology.sola.engine.assets.graphics.font.Font)" class="member-name-link">setFont</a><wbr>(<a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a>&nbsp;font)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the <a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a> to use when drawing text.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPixel(int,int,technology.sola.engine.graphics.Color)" class="member-name-link">setPixel</a><wbr>(int&nbsp;x,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPixel(int,int,technology.sola.engine.graphics.Color)" class="member-name-link">setPixel</a><wbr>(int&nbsp;x,
  int&nbsp;y,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of a pixel at coordinate.</div>
 </div>
 </div>
@@ -259,7 +265,7 @@ implements <a href="Renderer.html" title="interface in technology.sola.engine.gr
 <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-technology.sola.engine.graphics.renderer.Renderer">Methods inherited from interface&nbsp;technology.sola.engine.graphics.renderer.<a href="Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></h3>
-<code><a href="Renderer.html#clear()">clear</a>, <a href="Renderer.html#createLayers(java.lang.String...)">createLayers</a>, <a href="Renderer.html#drawString(java.lang.String,float,float,technology.sola.engine.graphics.Color)">drawString</a>, <a href="Renderer.html#drawString(java.lang.String,technology.sola.engine.graphics.AffineTransform,technology.sola.engine.graphics.Color)">drawString</a>, <a href="Renderer.html#drawToLayer(java.lang.String,int,technology.sola.engine.graphics.renderer.DrawItem)">drawToLayer</a>, <a href="Renderer.html#drawToLayer(java.lang.String,technology.sola.engine.graphics.renderer.DrawItem)">drawToLayer</a>, <a href="Renderer.html#drawTriangle(float,float,float,float,float,float,technology.sola.engine.graphics.Color)">drawTriangle</a>, <a href="Renderer.html#getHeight()">getHeight</a>, <a href="Renderer.html#getLayer(java.lang.String)">getLayer</a>, <a href="Renderer.html#getWidth()">getWidth</a>, <a href="Renderer.html#resetClamp()">resetClamp</a>, <a href="Renderer.html#setPixel(int,int,int)">setPixel</a></code></div>
+<code><a href="Renderer.html#clear()">clear</a>, <a href="Renderer.html#createLayers(java.lang.String...)">createLayers</a>, <a href="Renderer.html#drawPolygon(technology.sola.math.linear.Vector2D%5B%5D,technology.sola.engine.graphics.Color)">drawPolygon</a>, <a href="Renderer.html#drawString(java.lang.String,float,float,technology.sola.engine.graphics.Color)">drawString</a>, <a href="Renderer.html#drawString(java.lang.String,technology.sola.engine.graphics.AffineTransform,technology.sola.engine.graphics.Color)">drawString</a>, <a href="Renderer.html#drawToLayer(java.lang.String,int,technology.sola.engine.graphics.renderer.DrawItem)">drawToLayer</a>, <a href="Renderer.html#drawToLayer(java.lang.String,technology.sola.engine.graphics.renderer.DrawItem)">drawToLayer</a>, <a href="Renderer.html#drawTriangle(float,float,float,float,float,float,technology.sola.engine.graphics.Color)">drawTriangle</a>, <a href="Renderer.html#getHeight()">getHeight</a>, <a href="Renderer.html#getLayer(java.lang.String)">getLayer</a>, <a href="Renderer.html#getWidth()">getWidth</a>, <a href="Renderer.html#resetClamp()">resetClamp</a>, <a href="Renderer.html#setPixel(int,int,int)">setPixel</a></code></div>
 </section>
 </li>
 </ul>
@@ -541,6 +547,22 @@ implements <a href="Renderer.html" title="interface in technology.sola.engine.gr
 <dd><code>x3</code> - x coordinate for the third point</dd>
 <dd><code>y3</code> - y coordinate for the third point</dd>
 <dd><code>color</code> - <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the triangle</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="fillPolygon(technology.sola.math.linear.Vector2D[],technology.sola.engine.graphics.Color)">
+<h3>fillPolygon</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">fillPolygon</span><wbr><span class="parameters">(<a href="../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>[]&nbsp;points,
+ <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Renderer.html#fillPolygon(technology.sola.math.linear.Vector2D%5B%5D,technology.sola.engine.graphics.Color)">Renderer</a></code></span></div>
+<div class="block">Draws a filled polygon.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="Renderer.html#fillPolygon(technology.sola.math.linear.Vector2D%5B%5D,technology.sola.engine.graphics.Color)">fillPolygon</a></code>&nbsp;in interface&nbsp;<code><a href="Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>points</code> - the points of the polygon</dd>
+<dd><code>color</code> - the <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of the polygon</dd>
 </dl>
 </section>
 </li>
