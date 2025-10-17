@@ -44,11 +44,11 @@ public final class CollisionUtils {
         case AABB -> calculateAABBVsAABB(
           colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
-        case TRIANGLE -> SeparatingAxisTheorem.checkCollision(
-          colliderA.getShape(transformA).getPoints(), colliderB.getShape(transformB).getPoints()
-        );
         case CIRCLE -> calculateAABBVsCircle(
           colliderA.getShape(transformA), colliderB.getShape(transformB)
+        );
+        case TRIANGLE, CONVEX_POLYGON -> SeparatingAxisTheorem.checkCollision(
+          colliderA.getShape(transformA).points(), colliderB.getShape(transformB).points()
         );
       };
       case CIRCLE -> switch (colliderB.getType()) {
@@ -61,16 +61,16 @@ public final class CollisionUtils {
         case CIRCLE -> calculateCircleVsCircle(
           colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
-        case TRIANGLE -> {
+        case TRIANGLE, CONVEX_POLYGON -> {
           isReversed = true;
           yield calculateCircleVsShapeSAT(
             colliderA.getShape(transformA), colliderB.getShape(transformB)
           );
         }
       };
-      case TRIANGLE -> switch (colliderB.getType()) {
-        case AABB, TRIANGLE -> SeparatingAxisTheorem.checkCollision(
-          colliderA.getShape(transformA).getPoints(), colliderB.getShape(transformB).getPoints()
+      case TRIANGLE, CONVEX_POLYGON -> switch (colliderB.getType()) {
+        case AABB, TRIANGLE, CONVEX_POLYGON -> SeparatingAxisTheorem.checkCollision(
+          colliderA.getShape(transformA).points(), colliderB.getShape(transformB).points()
         );
         case CIRCLE -> calculateCircleVsShapeSAT(
           colliderB.getShape(transformB), colliderA.getShape(transformA)
@@ -223,7 +223,7 @@ public final class CollisionUtils {
 
   @Nullable
   private static MinimumTranslationVector calculateCircleVsShapeSAT(Circle circle, Shape shape) {
-    return SeparatingAxisTheorem.checkCollision(shape.getPoints(), circle.center(), circle.radius());
+    return SeparatingAxisTheorem.checkCollision(shape.points(), circle.center(), circle.radius());
   }
 
   private CollisionUtils() {

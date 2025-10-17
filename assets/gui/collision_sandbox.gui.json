@@ -40,6 +40,13 @@
           "props": {
             "text": "(3) Create Triangle"
           }
+        },
+        {
+          "tag": "Text",
+          "id": "modePolygon",
+          "props": {
+            "text": "(4) Create Polygon"
+          }
         }
       ]
     }

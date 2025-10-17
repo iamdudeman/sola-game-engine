@@ -16,4 +16,8 @@ public enum ColliderType {
    * Triangle
    */
   TRIANGLE,
+  /**
+   * Convex Polygon
+   */
+  CONVEX_POLYGON
 }
