@@ -4,7 +4,7 @@ plugins {
   `kotlin-dsl`
   `java-gradle-plugin`
   `maven-publish`
-  id("com.gradle.plugin-publish") version "1.3.1"
+  id("com.gradle.plugin-publish") version "2.0.0"
 }
 
 val props = Properties()
@@ -16,11 +16,11 @@ version = props.getProperty("version")
 
 repositories {
   google()
-  gradlePluginPortal() // so that external plugins can be resolved in dependencies section
+  gradlePluginPortal() // so that external plugins can be resolved in dependencies
 }
 
 dependencies {
-  implementation("com.android.tools.build:gradle:8.11.1")
+  implementation("com.android.tools.build:gradle:8.12.3")
 }
 
 gradlePlugin {
