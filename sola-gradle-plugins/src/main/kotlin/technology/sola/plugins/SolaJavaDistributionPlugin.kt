@@ -54,7 +54,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
 
       project.tasks.named("clean").dependsOn("cleanDist")
 
-      project.task("distFatJar", Jar::class) {
+      project.tasks.register("distFatJar", Jar::class) {
         group = "distribution"
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         archiveBaseName.set("${project.properties["gameName"]}-${project.name}${osClassifierWithDash}")
@@ -63,8 +63,9 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
           attributes["Main-Class"] = solaJavaDistributionPluginExtension.mainClass
         }
 
-        // todo this getByName call is the reason this task can't be migrated to project.tasks.register yet
-        val dependencies = configurations.getByName("runtimeClasspath").map(::zipTree)
+        val dependencies = configurations.named("runtimeClasspath").map { config ->
+          config.map(::zipTree)
+        }
 
         from(dependencies)
         from("${project.rootDir}/assets") {
@@ -88,7 +89,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
         args(
           "--name", "${project.properties["gameName"]}-${project.version}",
           "--app-version", "${project.version}",
-          "--vendor", project.properties["vendor"],
+          "--vendor", "${project.properties["vendor"]}",
           "--icon", "${project.rootDir}/assets/icon.ico",
           "--copyright", "©${Calendar.getInstance().get(Calendar.YEAR)} ${project.properties["vendor"]}. All rights reserved.",
           "--dest", layout.buildDirectory.dir("jpackage").get().asFile.path,
