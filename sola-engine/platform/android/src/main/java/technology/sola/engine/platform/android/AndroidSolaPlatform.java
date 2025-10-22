@@ -32,6 +32,7 @@ import technology.sola.engine.platform.android.core.AndroidGameLoop;
 import technology.sola.engine.platform.android.core.AndroidRenderer;
 import technology.sola.logging.SolaLogger;
 import technology.sola.math.SolaMath;
+import technology.sola.math.linear.Vector2D;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,7 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
   private final List<Consumer<MouseEvent>> mouseMovedConsumers = new ArrayList<>();
   private final List<Consumer<MouseEvent>> mousePressedConsumers = new ArrayList<>();
   private final List<Consumer<MouseEvent>> mouseReleasedConsumers = new ArrayList<>();
+  private final List<Consumer<TouchEvent>> touchConsumers = new ArrayList<>();
 
   /**
    * Creates an AndroidSolaPlatform instance with the desired configuration for a host activity.
@@ -107,6 +109,11 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
   @Override
   public void onMouseWheel(Consumer<MouseWheelEvent> consumer) {
     // todo
+  }
+
+  @Override
+  public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
+    touchConsumers.add(touchEventConsumer);
   }
 
   @Override
@@ -221,6 +228,31 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
     for (var consumer : keyReleasedConsumers) {
       consumer.accept(keyEvent);
     }
+  }
+
+  void emitTouchEvent(MotionEvent event) {
+    TouchPhase touchPhase = switch (event.getActionMasked()) {
+      case MotionEvent.ACTION_DOWN -> TouchPhase.BEGAN;
+      case MotionEvent.ACTION_UP -> TouchPhase.ENDED;
+      case MotionEvent.ACTION_CANCEL -> TouchPhase.CANCELLED;
+      case MotionEvent.ACTION_MOVE -> TouchPhase.MOVED;
+      default -> throw new UnsupportedOperationException("Unsupported Android touch event: " + event.getActionMasked());
+    };
+    int index = event.getActionIndex();
+    int id = event.getPointerId(index);
+
+    TouchEvent touchEvent = new TouchEvent(new Touch(
+      new Vector2D(
+        SolaMath.fastRound(event.getX()),
+        SolaMath.fastRound(event.getY())
+      ),
+      touchPhase,
+      id,
+      index
+    ));
+
+    System.out.println("Touch event: " + touchEvent); // todo delete
+    touchConsumers.forEach(consumer -> consumer.accept(touchEvent));
   }
 
   void emitAndroidSimulatedMouseEvent(MotionEvent event) {

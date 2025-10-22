@@ -11,6 +11,7 @@ import technology.sola.engine.graphics.screen.Viewport;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.input.MouseWheelEvent;
+import technology.sola.engine.input.TouchEvent;
 import technology.sola.engine.networking.rest.RestClient;
 import technology.sola.engine.networking.socket.SocketClient;
 import technology.sola.logging.SolaLogger;
@@ -137,6 +138,13 @@ public abstract class SolaPlatform {
    * @param mouseWheelEventConsumer the method called when a mouse wheel interaction takes place
    */
   public abstract void onMouseWheel(Consumer<MouseWheelEvent> mouseWheelEventConsumer);
+
+  /**
+   * Registers an on touch listener.
+   *
+   * @param touchEventConsumer the method called when a touch interaction takes place
+   */
+  public abstract void onTouch(Consumer<TouchEvent> touchEventConsumer);
 
   /**
    * Method to initialize a {@link SolaPlatform}. This operation can be async. It will provide the configuration

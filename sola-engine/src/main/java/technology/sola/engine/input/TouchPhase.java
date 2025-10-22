@@ -3,7 +3,7 @@ package technology.sola.engine.input;
 public enum TouchPhase {
   BEGAN,
   MOVED,
-  STATIONARY,
+  STATIONARY, // todo might not be needed
   ENDED,
   CANCELLED
 }

@@ -19,6 +19,7 @@ import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.input.MouseWheelEvent;
+import technology.sola.engine.input.TouchEvent;
 import technology.sola.engine.platform.browser.assets.BrowserJsonElementAssetLoader;
 import technology.sola.engine.platform.browser.assets.audio.BrowserAudioClipAssetLoader;
 import technology.sola.engine.platform.browser.assets.graphics.BrowserSolaImageAssetLoader;
@@ -107,6 +108,11 @@ public class BrowserSolaPlatform extends SolaPlatform {
   public void onMouseWheel(Consumer<MouseWheelEvent> mouseWheelEventConsumer) {
     JsMouseUtils.mouseWheelEventListener((isUp, isDown, isLeft, isRight) ->
       mouseWheelEventConsumer.accept(new MouseWheelEvent(isUp, isDown, isLeft, isRight)));
+  }
+
+  @Override
+  public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
+    // todo
   }
 
   @Override

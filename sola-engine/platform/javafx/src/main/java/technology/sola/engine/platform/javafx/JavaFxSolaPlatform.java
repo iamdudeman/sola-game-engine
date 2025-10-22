@@ -30,6 +30,7 @@ import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.input.MouseWheelEvent;
+import technology.sola.engine.input.TouchEvent;
 import technology.sola.engine.networking.rest.JavaRestClient;
 import technology.sola.engine.networking.socket.JavaSocketClient;
 import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
@@ -144,6 +145,11 @@ public class JavaFxSolaPlatform extends SolaPlatform {
 
       mouseWheelEventConsumer.accept(new MouseWheelEvent(isUp, isDown, isLeft, isRight));
     });
+  }
+
+  @Override
+  public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
+    // todo
   }
 
   @Override

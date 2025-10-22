@@ -7,7 +7,9 @@
             * Figure out TouchInput API
         * How to handle multitouch
             * Switch JsMouseUtils to mouse events instead of pointer events
-
+* hook gui stuff up to using touch events as well (Android examples should still work)
+* remove simulated mouse events from Android stuff
+* properly hook up touch events for Browser
 
 ## Known Bugs List
 
@@ -44,10 +46,6 @@
     * Load and save JSON content (maybe other content too)
     * Browser implementation could open file dialog
     * Desktop could go straight to file or open file dialog
-* Gui performance improvements
-    * consider splitting layout and paint styles to prevent extra calculations
-        * changing background color doesn't affect layout
-        * changing border color doesn't affect layout `if a border is already set`
 * Particle System
     * consider ability to add fix number of particle spawns (4 at a time in different directions for example)
     * consider ability to change particle shape (instead of only circle maybe square)
@@ -60,6 +58,13 @@
     * Would need to update rendering stuff
     * Would need to update physics stuff
         * Not just colliders, but also impulse collision resolution potentially
+
+### Low priority (not ordered)
+
+* Gui performance improvements
+    * consider splitting layout and paint styles to prevent extra calculations
+        * changing background color doesn't affect layout
+        * changing border color doesn't affect layout `if a border is already set`
 * Research Virtual File System
     * ability to mount archives of some sort
         * possible example, instead of png use different file format that many can be compressed into one larger file
@@ -68,9 +73,6 @@
 * Investigate possible Steam integrations
     * CloudSave integration
     * Controls integration
-
-### Low priority (not ordered)
-
 * Gui json features
     * consider an event map of some sort for when loading gui documents
         * could also have an "event id -> event function" map that can be used as part of gui doc loading
