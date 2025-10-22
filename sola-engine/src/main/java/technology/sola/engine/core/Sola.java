@@ -8,6 +8,7 @@ import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
+import technology.sola.engine.input.TouchInput;
 
 /**
  * Sola contains the core functionality needed to make a game. It is played via {@link SolaPlatform}.
@@ -35,6 +36,10 @@ public abstract class Sola {
    */
   protected MouseInput mouseInput;
   /**
+   * Used to check the current state of touch input.
+   */
+  protected TouchInput touchInput;
+  /**
    * Used to load assets for the Sola to use.
    */
   protected AssetLoaderProvider assetLoaderProvider;
@@ -52,6 +57,7 @@ public abstract class Sola {
     eventHub = new EventHub();
     keyboardInput = new KeyboardInput();
     mouseInput = new MouseInput();
+    touchInput = new TouchInput();
     assetLoaderProvider = new AssetLoaderProvider();
   }
 
@@ -98,6 +104,7 @@ public abstract class Sola {
   protected void onUpdate(float deltaTime) {
     keyboardInput.updateStatusOfKeys();
     mouseInput.updateStatusOfMouse();
+    // todo update touch input
 
     if (!platform().gameLoop.isPaused()) {
       solaEcs.updateWorld(deltaTime);
@@ -113,6 +120,7 @@ public abstract class Sola {
     platform.onMousePressed(event -> mouseInput.onMousePressed(event));
     platform.onMouseReleased(event -> mouseInput.onMouseReleased(event));
     platform.onMouseWheel(event -> mouseInput.onMouseWheel(event));
+    // todo register platform touch events
 
     onInit();
     onAsyncInit(completeAsyncInit);

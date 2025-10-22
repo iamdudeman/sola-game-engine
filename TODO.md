@@ -1,5 +1,14 @@
 # sola-game-engine TODO list
 
+* Figure out how to handle TouchInput
+    * Primarily for browser and Android but also could be supported in JavaFX
+    * touchstart and touchend all hard coded to MouseButton.Primary currently
+        * implement touchmove
+            * Figure out TouchInput API
+        * How to handle multitouch
+            * Switch JsMouseUtils to mouse events instead of pointer events
+
+
 ## Known Bugs List
 
 *
@@ -21,13 +30,6 @@
 
 ## TODO List
 
-* Figure out how to handle TouchInput
-    * Primarily for browser and Android but also could be supported in JavaFX
-    * touchstart and touchend all hard coded to MouseButton.Primary currently
-        * implement touchmove
-            * Figure out TouchInput API
-        * How to handle multitouch
-            * Switch JsMouseUtils to mouse events instead of pointer events
 * implement the Android platform fully
     * add the ability to platforms to "request keyboard" for things like TextInputGuiElement
     * keyboard input is not fully implemented
