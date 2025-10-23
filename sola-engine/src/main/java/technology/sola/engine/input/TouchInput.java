@@ -25,6 +25,17 @@ public class TouchInput {
     return touches[index];
   }
 
+  @Nullable
+  public Touch getTouchById(int id) {
+    for (var touch : touches) {
+      if (touch != null && touch.id() == id) {
+        return touch;
+      }
+    }
+
+    return null;
+  }
+
   public void updatedStatusOfTouches() {
     System.arraycopy(lastEventTouches, 0, touches, 0, MAX_TOUCHES);
     Arrays.fill(lastEventTouches, null);
@@ -39,6 +50,7 @@ public class TouchInput {
   }
 
   public void onTouchEvent(TouchEvent event) {
-    lastEventTouches[event.touch().index()] = event.touch();
+    // todo should be index or id????? id seems to work better
+    lastEventTouches[event.touch().id()] = event.touch();
   }
 }

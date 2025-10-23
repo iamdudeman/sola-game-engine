@@ -112,14 +112,9 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
 
   @Override
   public boolean onTouchEvent(MotionEvent event) {
-//    event.getActionIndex()
-
-
-    platform.emitAndroidSimulatedMouseEvent(event);
-
     platform.emitTouchEvent(event);
 
-    return super.onTouchEvent(event);
+    return true;
   }
 
   private void hideSystemUi() {

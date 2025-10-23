@@ -149,7 +149,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
 
   @Override
   public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
-    // todo
+    // todo implement
   }
 
   @Override
@@ -278,7 +278,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   }
 
   private MouseEvent fxToSola(javafx.scene.input.MouseEvent fxMouseEvent) {
-    MouseCoordinate adjusted = adjustMouseForViewport((int) fxMouseEvent.getX(), (int) fxMouseEvent.getY());
+    PointerCoordinate adjusted = adjustPointerForViewport((int) fxMouseEvent.getX(), (int) fxMouseEvent.getY());
 
     return new MouseEvent(fxMouseEvent.getButton().ordinal(), adjusted.x(), adjusted.y());
   }

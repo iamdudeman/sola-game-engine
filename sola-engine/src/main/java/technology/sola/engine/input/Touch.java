@@ -1,9 +1,11 @@
 package technology.sola.engine.input;
 
-import technology.sola.math.linear.Vector2D;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public record Touch(
-  Vector2D position,
+  float x,
+  float y,
   TouchPhase phase,
   int id,
   int index

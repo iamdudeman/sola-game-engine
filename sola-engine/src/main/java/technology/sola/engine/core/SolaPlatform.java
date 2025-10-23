@@ -171,14 +171,14 @@ public abstract class SolaPlatform {
 
   /**
    * Method to populate the {@link SolaPlatform} {@link AssetLoaderProvider} with
-   * {@link technology.sola.engine.assets.AssetLoader}s that {@link Sola} will be able to utilize.
+   * {@link technology.sola.engine.assets.AssetLoader}s that {@link Sola} will be able to use.
    *
    * @param assetLoaderProvider the {@link AssetLoaderProvider}
    */
   protected abstract void populateAssetLoaderProvider(AssetLoaderProvider assetLoaderProvider);
 
   /**
-   * Builds the {@link Renderer} for this platform. Default implementation will utilize the {@link SoftwareRenderer}
+   * Builds the {@link Renderer} for this platform. Default implementation will use the {@link SoftwareRenderer}
    * implementation.
    *
    * @param solaConfiguration the {@link SolaConfiguration} for the {@link Sola}
@@ -189,7 +189,7 @@ public abstract class SolaPlatform {
   }
 
   /**
-   * Builds the {@link GameLoop} for this platform. Default implementation will utilize the {@link FixedUpdateGameLoop}
+   * Builds the {@link GameLoop} for this platform. Default implementation will use the {@link FixedUpdateGameLoop}
    * implementation.
    *
    * @return the built {@code GameLoop}
@@ -199,22 +199,22 @@ public abstract class SolaPlatform {
   }
 
   /**
-   * Convenience method for calculating adjusted mouse coordinate considering the current
+   * Convenience method for calculating adjusted pointer coordinate considering the current
    * {@link technology.sola.engine.graphics.screen.AspectMode} of the {@link Viewport}.
    *
-   * @param x the raw x coordinate of the mouse click
-   * @param y the raw y coordinate of the mouse click
-   * @return the viewport adjusted mouse click coordinate
+   * @param x the raw x coordinate of the pointer
+   * @param y the raw y coordinate of the pointer
+   * @return the viewport adjusted pointer coordinate
    */
-  protected MouseCoordinate adjustMouseForViewport(int x, int y) {
+  protected PointerCoordinate adjustPointerForViewport(int x, int y) {
     return switch (viewport.getAspectMode()) {
-      case IGNORE_RESIZING -> new MouseCoordinate(x, y);
+      case IGNORE_RESIZING -> new PointerCoordinate(x, y);
       case STRETCH ->
-        new MouseCoordinate(Math.round(x * viewport.getRendererToAspectRatioX()), Math.round(y * viewport.getRendererToAspectRatioY()));
+        new PointerCoordinate(Math.round(x * viewport.getRendererToAspectRatioX()), Math.round(y * viewport.getRendererToAspectRatioY()));
       case MAINTAIN -> {
         AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
 
-        yield new MouseCoordinate(
+        yield new PointerCoordinate(
           Math.round(x * viewport.getRendererToAspectRatioX() - aspectRatioSizing.x() * viewport.getRendererToAspectRatioX()),
           Math.round(y * viewport.getRendererToAspectRatioY() - aspectRatioSizing.y() * viewport.getRendererToAspectRatioY())
         );
@@ -256,12 +256,12 @@ public abstract class SolaPlatform {
   }
 
   /**
-   * Holds the coordinate of the mouse.
+   * Holds the coordinate of the pointer.
    *
    * @param x the x coordinate
    * @param y the y coordinate
    */
-  protected record MouseCoordinate(int x, int y) {
+  protected record PointerCoordinate(int x, int y) {
   }
 
   /**

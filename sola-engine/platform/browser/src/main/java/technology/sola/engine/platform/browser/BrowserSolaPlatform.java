@@ -112,7 +112,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   @Override
   public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
-    // todo
+    // todo implement
   }
 
   @Override
@@ -203,7 +203,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
   }
 
   private MouseEvent browserToSola(int which, int x, int y) {
-    MouseCoordinate adjusted = adjustMouseForViewport(x, y);
+    PointerCoordinate adjusted = adjustPointerForViewport(x, y);
 
     return new MouseEvent(which, adjusted.x(), adjusted.y());
   }

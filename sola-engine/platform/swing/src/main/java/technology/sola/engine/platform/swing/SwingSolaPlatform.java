@@ -63,7 +63,7 @@ public class SwingSolaPlatform extends SolaPlatform {
   }
 
   /**
-   * Creates a SwingSolaPlatformConfig instance with desired configuration.
+   * Creates a SwingSolaPlatformConfig instance with the desired configuration.
    *
    * @param platformConfig the {@link SwingSolaPlatformConfig}
    */
@@ -151,9 +151,14 @@ public class SwingSolaPlatform extends SolaPlatform {
     });
   }
 
+  /**
+   * Not supported on Swing.
+   *
+   * @param touchEventConsumer the method called when a touch interaction takes place
+   */
   @Override
   public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
-    // todo
+    // not supported on Swing
   }
 
   @Override
@@ -303,7 +308,7 @@ public class SwingSolaPlatform extends SolaPlatform {
   }
 
   private MouseEvent swingToSola(java.awt.event.MouseEvent swingMouseEvent) {
-    MouseCoordinate adjusted = adjustMouseForViewport(swingMouseEvent.getX(), swingMouseEvent.getY());
+    PointerCoordinate adjusted = adjustPointerForViewport(swingMouseEvent.getX(), swingMouseEvent.getY());
 
     return new MouseEvent(swingMouseEvent.getButton(), adjusted.x(), adjusted.y());
   }
