@@ -19,7 +19,14 @@ public class TouchInput {
   }
 
   public Iterator<Touch> activeTouchesIterator() {
-    return Arrays.stream(touches).filter(Objects::nonNull).iterator();
+    return Arrays.stream(touches)
+      .filter(Objects::nonNull)
+      .iterator();
+  }
+
+  @Nullable
+  public Touch getFirstTouch() {
+    return touches[0];
   }
 
   @Nullable
