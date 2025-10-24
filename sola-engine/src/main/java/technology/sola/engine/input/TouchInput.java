@@ -12,9 +12,16 @@ public class TouchInput {
   public static final int MAX_TOUCHES = 10;
   private final @Nullable Touch[] touches = new Touch[MAX_TOUCHES];
   private final @Nullable Touch[] lastEventTouches = new Touch[MAX_TOUCHES];
-  private int touchCount = 0;
 
   public int getTouchCount() {
+    int touchCount = 0;
+
+    for (int i = 0; i < MAX_TOUCHES; i++) {
+      if (touches[i] != null) {
+        touchCount++;
+      }
+    }
+
     return touchCount;
   }
 
@@ -52,14 +59,6 @@ public class TouchInput {
   public void updatedStatusOfTouches() {
     System.arraycopy(lastEventTouches, 0, touches, 0, MAX_TOUCHES);
     Arrays.fill(lastEventTouches, null);
-
-    touchCount = 0;
-
-    for (int i = 0; i < MAX_TOUCHES; i++) {
-      if (touches[i] != null) {
-        touchCount++;
-      }
-    }
   }
 
   public void onTouchEvent(TouchEvent event) {
