@@ -262,8 +262,7 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
           adjusted.x(),
           adjusted.y(),
           TouchPhase.MOVED,
-          event.getPointerId(index),
-          index
+          event.getPointerId(index)
         ));
 
         touchConsumers.forEach(consumer -> consumer.accept(touchEvent));
@@ -290,8 +289,7 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
       adjusted.x(),
       adjusted.y(),
       touchPhase,
-      event.getPointerId(index),
-      index
+      event.getPointerId(index)
     ));
 
     touchConsumers.forEach(consumer -> consumer.accept(touchEvent));

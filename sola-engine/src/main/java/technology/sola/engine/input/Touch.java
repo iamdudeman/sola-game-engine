@@ -7,7 +7,6 @@ public record Touch(
   float x,
   float y,
   TouchPhase phase,
-  int id,
-  int index
+  int id
 ) {
 }

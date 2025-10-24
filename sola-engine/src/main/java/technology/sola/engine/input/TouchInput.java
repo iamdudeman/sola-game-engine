@@ -4,6 +4,8 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Objects;
 
 @NullMarked
 public class TouchInput {
@@ -16,24 +18,28 @@ public class TouchInput {
     return touchCount;
   }
 
-  @Nullable
-  public Touch getTouch(int index) {
-    if (index >= MAX_TOUCHES) {
-      throw new IllegalArgumentException("Touch index must be 0 or less than " + MAX_TOUCHES);
-    }
-
-    return touches[index];
+  public Iterator<Touch> activeTouchesIterator() {
+    return Arrays.stream(touches).filter(Objects::nonNull).iterator();
   }
 
   @Nullable
-  public Touch getTouchById(int id) {
+  public Touch getFirstActiveTouch() {
     for (var touch : touches) {
-      if (touch != null && touch.id() == id) {
+      if (touch != null) {
         return touch;
       }
     }
 
     return null;
+  }
+
+  @Nullable
+  public Touch getTouch(int id) {
+    if (id >= MAX_TOUCHES) {
+      throw new IllegalArgumentException("Touch index must be 0 or less than " + MAX_TOUCHES);
+    }
+
+    return touches[id];
   }
 
   public void updatedStatusOfTouches() {
@@ -50,7 +56,18 @@ public class TouchInput {
   }
 
   public void onTouchEvent(TouchEvent event) {
-    // todo should be index or id????? id seems to work better
-    lastEventTouches[event.touch().id()] = event.touch();
+    var touch = event.touch();
+    var touchId = touch.id();
+    var current = lastEventTouches[touchId];
+
+    // we don't want to lose ENDED or BEGAN events that happen same frame as MOVED
+    if (current == null || current.phase() == TouchPhase.MOVED) {
+      lastEventTouches[touchId] = touch;
+    } else {
+      lastEventTouches[touchId] = new Touch(
+        touch.x(), touch.y(),
+        current.phase(), current.id()
+      );
+    }
   }
 }

@@ -38,6 +38,7 @@ public class TouchInputExample extends Sola {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
     solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withBackgroundColor(Color.DARK_GRAY)
       .buildAndInitialize(assetLoaderProvider);
 
     platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
@@ -52,21 +53,12 @@ public class TouchInputExample extends Sola {
   }
 
   private final class TouchCreateEntitySystem extends EcsSystem {
-    private static final int SIZE = 100;
+    private static final int SIZE = 150;
+    private static final int HALF_SIZE = SIZE / 2;
 
     @Override
     public void update(World world, float deltaTime) {
-      for (int i = 0; i < touchInput.getTouchCount(); i++) {
-        var touch = touchInput.getTouch(i);
-
-        if (touch == null) {
-          continue;
-        }
-
-        if (touch.index() > 0) {
-          System.out.println("touch " + touch);
-        }
-
+      touchInput.activeTouchesIterator().forEachRemaining(touch -> {
         var existingEntity = world.findEntityByName("touch" + touch.id());
 
         if (existingEntity == null) {
@@ -75,7 +67,7 @@ public class TouchInputExample extends Sola {
 
             world.createEntity()
               .setName("touch" + touch.id())
-              .addComponent(new TransformComponent(worldPosition.x(), worldPosition.y(), SIZE))
+              .addComponent(new TransformComponent(worldPosition.x() - HALF_SIZE, worldPosition.y() - HALF_SIZE, SIZE))
               .addComponent(new CircleRendererComponent(Color.GREEN, true));
 
           }
@@ -83,12 +75,12 @@ public class TouchInputExample extends Sola {
           if (touch.phase() == TouchPhase.MOVED) {
             Vector2D worldPosition = solaGraphics.screenToWorldCoordinate(new Vector2D(touch.x(), touch.y()));
 
-            existingEntity.addComponent(new TransformComponent(worldPosition.x(), worldPosition.y(), SIZE));
+            existingEntity.addComponent(new TransformComponent(worldPosition.x() - HALF_SIZE, worldPosition.y() - HALF_SIZE, SIZE));
           } else if (touch.phase() == TouchPhase.ENDED) {
             existingEntity.destroy();
           }
         }
-      }
+      });
     }
   }
 }
