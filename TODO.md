@@ -4,7 +4,7 @@
 * ~~remove simulated mouse events from Android stuff~~
 * ~~implement touch events for Android~~
 * hook gui stuff up to using touch events as well (Android examples should still work)
-* hook up touch events for Swing if applicable
+* ~~hook up touch events for Swing if applicable~~
 * hook up touch events for JavaFx if applicable
 * consider how to hook up for SolaControls
     * if it doesn't make sense, then consider removing SolaControls

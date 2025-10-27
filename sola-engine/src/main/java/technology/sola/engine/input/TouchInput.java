@@ -7,8 +7,14 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
+/**
+ * TouchInput contains information about user interaction with the touch screen.
+ */
 @NullMarked
 public class TouchInput {
+  /**
+   * Max number of simultaneous touches supported.
+   */
   public static final int MAX_TOUCHES = 10;
   private final @Nullable Touch[] touches = new Touch[MAX_TOUCHES];
   private final @Nullable Touch[] lastEventTouches = new Touch[MAX_TOUCHES];
