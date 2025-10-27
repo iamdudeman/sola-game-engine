@@ -496,6 +496,25 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
     }
 
     if (event.isAbleToPropagate()) {
+      var touch = event.getTouchEvent().touch();
+
+      switch (touch.phase()) {
+        case BEGAN -> {
+          if (event.isAbleToPropagate() && shouldHandleTouchStartEvents() && bounds.contains(touch.x(), touch.y())) {
+            events.touchStart().emit(event);
+            setActive(true);
+          }
+        }
+        case ENDED -> {
+          // todo
+        }
+        case MOVED -> {
+          // todo
+        }
+        case CANCELLED -> {
+          // todo
+        }
+      }
       // todo hook up to events.touchStart() etc.
     }
   }
@@ -592,7 +611,8 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   }
 
   private boolean shouldHandleMouseMoveEvents() {
-    return styleContainer.hasHoverCondition() || events.mouseMoved().hasListeners() || events.mouseEntered().hasListeners() || events.mouseExited().hasListeners();
+    return styleContainer.hasHoverCondition() || events.mouseMoved().hasListeners()
+      || events.mouseEntered().hasListeners() || events.mouseExited().hasListeners();
   }
 
   private boolean shouldHandleMousePressedEvents() {
@@ -601,5 +621,18 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
 
   private boolean shouldHandleMouseReleasedEvents() {
     return styleContainer.hasActiveCondition() || events().mouseReleased().hasListeners();
+  }
+
+  private boolean shouldHandleTouchMoveEvents() {
+    return styleContainer.hasHoverCondition() || events.touchMove().hasListeners()
+      || events.touchStart().hasListeners() || events.touchEnd().hasListeners();
+  }
+
+  private boolean shouldHandleTouchStartEvents() {
+    return styleContainer.hasActiveCondition() || events().touchStart().hasListeners();
+  }
+
+  private boolean shouldHandleTouchEndEvents() {
+    return styleContainer.hasActiveCondition() || events().touchEnd().hasListeners();
   }
 }
