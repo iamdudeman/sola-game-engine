@@ -6,11 +6,9 @@ import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.graphics.gui.event.GuiMouseEvent;
+import technology.sola.engine.graphics.gui.event.GuiTouchEvent;
 import technology.sola.engine.graphics.renderer.Renderer;
-import technology.sola.engine.input.KeyEvent;
-import technology.sola.engine.input.MouseButton;
-import technology.sola.engine.input.MouseEvent;
-import technology.sola.engine.input.MouseInput;
+import technology.sola.engine.input.*;
 
 /**
  * GuiDocument is a container for {@link GuiElement} that also handles passing various key and mouse events to the
@@ -45,6 +43,7 @@ public class GuiDocument {
     platform.onMouseMoved(this::onMouseMoved);
     platform.onMousePressed(this::onMousePressed);
     platform.onMouseReleased(this::onMouseReleased);
+    platform.onTouch(this::onTouch);
   }
 
   /**
@@ -182,5 +181,13 @@ public class GuiDocument {
     }
 
     root.onMouseMoved(new GuiMouseEvent(mouseEvent));
+  }
+
+  private void onTouch(TouchEvent touchEvent) {
+    if (!isVisible) {
+      return;
+    }
+
+    root.onTouch(new GuiTouchEvent(touchEvent));
   }
 }

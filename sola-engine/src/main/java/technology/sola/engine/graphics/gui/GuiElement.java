@@ -6,6 +6,7 @@ import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.graphics.gui.event.GuiElementEvents;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.graphics.gui.event.GuiMouseEvent;
+import technology.sola.engine.graphics.gui.event.GuiTouchEvent;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
 import technology.sola.engine.graphics.gui.style.DefaultStyleValues;
@@ -486,6 +487,16 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
         setHovered(false);
         events.mouseExited().emit(event);
       }
+    }
+  }
+
+  void onTouch(GuiTouchEvent event) {
+    for (var child : children) {
+      child.onTouch(event);
+    }
+
+    if (event.isAbleToPropagate()) {
+      // todo hook up to events.touchStart() etc.
     }
   }
 

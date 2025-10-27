@@ -15,6 +15,10 @@ public class GuiElementEvents {
   private final GuiEventListenerList<GuiMouseEvent> mouseMovedEventListenerList = new GuiEventListenerList<>();
   private final GuiEventListenerList<GuiMouseEvent> mouseEnteredEventListenerList = new GuiEventListenerList<>();
   private final GuiEventListenerList<GuiMouseEvent> mouseExitedEventListenerList = new GuiEventListenerList<>();
+  private final GuiEventListenerList<GuiTouchEvent> touchStartEventListenerList = new GuiEventListenerList<>();
+  private final GuiEventListenerList<GuiTouchEvent> touchEndEventListenerList = new GuiEventListenerList<>();
+  private final GuiEventListenerList<GuiTouchEvent> touchMoveEventListenerList = new GuiEventListenerList<>();
+  private final GuiEventListenerList<GuiTouchEvent> touchCancelEventListenerList = new GuiEventListenerList<>();
 
   /**
    * @return the {@link GuiEventListener} for key pressed events
@@ -63,5 +67,33 @@ public class GuiElementEvents {
    */
   public GuiEventListenerList<GuiMouseEvent> mouseExited() {
     return mouseExitedEventListenerList;
+  }
+
+  /**
+   * @return the {@link GuiEventListener} for touch start events
+   */
+  public GuiEventListenerList<GuiTouchEvent> touchStart() {
+    return touchStartEventListenerList;
+  }
+
+  /**
+   * @return the {@link GuiEventListener} for touch end events
+   */
+  public GuiEventListenerList<GuiTouchEvent> touchEnd() {
+    return touchEndEventListenerList;
+  }
+
+  /**
+   * @return the {@link GuiEventListener} for touch move events
+   */
+  public GuiEventListenerList<GuiTouchEvent> touchMove() {
+    return touchMoveEventListenerList;
+  }
+
+  /**
+   * @return the {@link GuiEventListener} for touch cancel events
+   */
+  public GuiEventListenerList<GuiTouchEvent> touchCancel() {
+    return touchCancelEventListenerList;
   }
 }
