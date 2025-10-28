@@ -10,11 +10,13 @@ import org.jspecify.annotations.NullMarked;
 public class GuiElementEvents {
   private final GuiEventListenerList<GuiKeyEvent> keyPressedEventListenerList = new GuiEventListenerList<>();
   private final GuiEventListenerList<GuiKeyEvent> keyReleasedEventListenerList = new GuiEventListenerList<>();
+
   private final GuiEventListenerList<GuiMouseEvent> mousePressedEventListenerList = new GuiEventListenerList<>();
   private final GuiEventListenerList<GuiMouseEvent> mouseReleasedEventListenerList = new GuiEventListenerList<>();
   private final GuiEventListenerList<GuiMouseEvent> mouseMovedEventListenerList = new GuiEventListenerList<>();
   private final GuiEventListenerList<GuiMouseEvent> mouseEnteredEventListenerList = new GuiEventListenerList<>();
   private final GuiEventListenerList<GuiMouseEvent> mouseExitedEventListenerList = new GuiEventListenerList<>();
+
   private final GuiEventListenerList<GuiTouchEvent> touchStartEventListenerList = new GuiEventListenerList<>();
   private final GuiEventListenerList<GuiTouchEvent> touchEndEventListenerList = new GuiEventListenerList<>();
   private final GuiEventListenerList<GuiTouchEvent> touchMoveEventListenerList = new GuiEventListenerList<>();

@@ -36,6 +36,18 @@ public class ButtonGuiElement extends BaseInputGuiElement<BaseStyles, ButtonGuiE
       }
     });
 
+    events().touchStart().on(mouseEvent -> {
+      if (!isDisabled()) {
+        requestFocus();
+      }
+    });
+
+    events().touchEnd().on(mouseEvent -> {
+      if (isFocussed() && isActive()) {
+        onAction.run();
+      }
+    });
+
     events().keyPressed().on(keyEvent -> {
       if (!isDisabled()) {
         int keyCode = keyEvent.getKeyEvent().keyCode();
