@@ -506,7 +506,11 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
           }
         }
         case ENDED -> {
-          // todo
+          if (event.isAbleToPropagate() && shouldHandleTouchEndEvents() && bounds.contains(touch.x(), touch.y())) {
+            events.touchEnd().emit(event);
+          }
+
+          setActive(false);
         }
         case MOVED -> {
           // todo
@@ -515,7 +519,6 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
           // todo
         }
       }
-      // todo hook up to events.touchStart() etc.
     }
   }
 
