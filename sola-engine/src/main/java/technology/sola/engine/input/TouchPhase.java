@@ -22,5 +22,10 @@ public enum TouchPhase {
   /**
    * Touch gesture that had {@link TouchPhase#BEGAN} was not completed.
    */
-  CANCELLED
+  CANCELLED,
+  /**
+   * Touch gesture that had {@link TouchPhase#BEGAN} and is not moving. This may not be used by
+   * all {@link technology.sola.engine.core.SolaPlatform}s.
+   */
+  STATIONARY
 }
