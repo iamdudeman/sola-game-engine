@@ -513,10 +513,24 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
           setActive(false);
         }
         case MOVED -> {
-          // todo
+          if (event.isAbleToPropagate()) {
+            if (shouldHandleTouchMoveEvents() && bounds.contains(touch.x(), touch.y())) {
+              events.touchMove().emit(event);
+
+              if (!isHovered) {
+                setHovered(true);
+              }
+            } else if (isHovered) {
+              setHovered(false);
+            }
+          }
         }
         case CANCELLED -> {
-          // todo
+          if (event.isAbleToPropagate() && shouldHandleTouchCancelEvents() && bounds.contains(touch.x(), touch.y())) {
+            events.touchCancel().emit(event);
+          }
+
+          setActive(false);
         }
       }
     }
@@ -637,5 +651,9 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
 
   private boolean shouldHandleTouchEndEvents() {
     return styleContainer.hasActiveCondition() || events().touchEnd().hasListeners();
+  }
+
+  private boolean shouldHandleTouchCancelEvents() {
+    return styleContainer.hasActiveCondition() || events().touchCancel().hasListeners();
   }
 }
