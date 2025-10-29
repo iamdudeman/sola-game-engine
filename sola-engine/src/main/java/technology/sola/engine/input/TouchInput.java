@@ -19,7 +19,12 @@ public class TouchInput {
   private final @Nullable Touch[] touches = new Touch[MAX_TOUCHES];
   private final @Nullable Touch[] lastEventTouches = new Touch[MAX_TOUCHES];
 
-  public int getTouchCount() {
+  /**
+   * Gets the number of active touches (fingers on the screen).
+   *
+   * @return the active touch count
+   */
+  public int getActiveTouchCount() {
     int touchCount = 0;
 
     for (int i = 0; i < MAX_TOUCHES; i++) {
@@ -31,17 +36,26 @@ public class TouchInput {
     return touchCount;
   }
 
+  /**
+   * @return iterator for all the active touches
+   */
   public Iterator<Touch> activeTouchesIterator() {
     return Arrays.stream(touches)
       .filter(Objects::nonNull)
       .iterator();
   }
 
+  /**
+   * @return the {@link Touch} of the first finger or else null
+   */
   @Nullable
   public Touch getFirstTouch() {
     return touches[0];
   }
 
+  /**
+   * @return the {@link Touch} of the first finger that is still on the screen or else null
+   */
   @Nullable
   public Touch getFirstActiveTouch() {
     for (var touch : touches) {
@@ -53,6 +67,12 @@ public class TouchInput {
     return null;
   }
 
+  /**
+   * Gets the {@link Touch} of the given finger by unique id.
+   *
+   * @param id the id (typically 0-9)
+   * @return the {@link Touch} of the given finger or else null
+   */
   @Nullable
   public Touch getTouch(int id) {
     if (id >= MAX_TOUCHES) {
@@ -62,11 +82,19 @@ public class TouchInput {
     return touches[id];
   }
 
+  /**
+   * Updates the status of changed {@link Touch}es from the previous frame.
+   */
   public void updatedStatusOfTouches() {
     System.arraycopy(lastEventTouches, 0, touches, 0, MAX_TOUCHES);
     Arrays.fill(lastEventTouches, null);
   }
 
+  /**
+   * Called by the {@link technology.sola.engine.core.SolaPlatform} whenever a touch event occurs.
+   *
+   * @param event the {@link TouchEvent}
+   */
   public void onTouchEvent(TouchEvent event) {
     var touch = event.touch();
     var touchId = touch.id();

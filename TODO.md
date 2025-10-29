@@ -40,7 +40,7 @@ document.addEventListener('touchmove', function(event) {
 
 ## Planned Cleanup List
 
-*
+* group "sola" specific gradle tasks under "sola" grouping
 
 -----------------------------------------------------------------------------------------------------------------------
 

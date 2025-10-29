@@ -15,6 +15,7 @@ import technology.sola.engine.input.TouchEvent;
 import technology.sola.engine.networking.rest.RestClient;
 import technology.sola.engine.networking.socket.SocketClient;
 import technology.sola.logging.SolaLogger;
+import technology.sola.math.SolaMath;
 
 import java.util.function.Consumer;
 
@@ -196,6 +197,18 @@ public abstract class SolaPlatform {
    */
   protected GameLoopProvider buildGameLoop() {
     return FixedUpdateGameLoop::new;
+  }
+
+  /**
+   * Convenience method for calculating adjusted pointer coordinate considering the current
+   * {@link technology.sola.engine.graphics.screen.AspectMode} of the {@link Viewport}.
+   *
+   * @param x the raw x coordinate of the pointer
+   * @param y the raw y coordinate of the pointer
+   * @return the viewport adjusted pointer coordinate
+   */
+  protected PointerCoordinate adjustPointerForViewport(float x, float y) {
+    return adjustPointerForViewport(SolaMath.fastRound(x), SolaMath.fastRound(y));
   }
 
   /**

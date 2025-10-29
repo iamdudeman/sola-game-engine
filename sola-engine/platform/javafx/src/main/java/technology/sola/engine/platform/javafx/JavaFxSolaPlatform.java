@@ -149,8 +149,10 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     canvas.addEventHandler(javafx.scene.input.TouchEvent.ANY, touchEvent -> {
       if (touchEvent.getEventType().equals(javafx.scene.input.TouchEvent.TOUCH_MOVED)) {
         for (var touchPoint : touchEvent.getTouchPoints() ) {
+          PointerCoordinate adjusted = adjustPointerForViewport((int) touchPoint.getX(), (int) touchPoint.getY());
+
           touchEventConsumer.accept(new TouchEvent(new Touch(
-            (float) touchPoint.getX(), (float) touchPoint.getY(), TouchPhase.MOVED, touchPoint.getId()
+            adjusted.x(), adjusted.y(), TouchPhase.MOVED, touchPoint.getId()
           )));
         }
 
@@ -166,9 +168,10 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       }
 
       var touchPoint = touchEvent.getTouchPoint();
+      PointerCoordinate adjusted = adjustPointerForViewport((int) touchPoint.getX(), (int) touchPoint.getY());
 
       touchEventConsumer.accept(new TouchEvent(new Touch(
-        (float) touchPoint.getX(), (float) touchPoint.getY(), touchPhase, touchPoint.getId()
+        adjusted.x(), adjusted.y(), touchPhase, touchPoint.getId()
       )));
     });
   }

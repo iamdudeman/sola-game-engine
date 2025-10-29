@@ -16,10 +16,7 @@ import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
-import technology.sola.engine.input.KeyEvent;
-import technology.sola.engine.input.MouseEvent;
-import technology.sola.engine.input.MouseWheelEvent;
-import technology.sola.engine.input.TouchEvent;
+import technology.sola.engine.input.*;
 import technology.sola.engine.platform.browser.assets.BrowserJsonElementAssetLoader;
 import technology.sola.engine.platform.browser.assets.audio.BrowserAudioClipAssetLoader;
 import technology.sola.engine.platform.browser.assets.graphics.BrowserSolaImageAssetLoader;
@@ -27,10 +24,7 @@ import technology.sola.engine.platform.browser.core.BrowserCanvasRenderer;
 import technology.sola.engine.platform.browser.core.BrowserGameLoop;
 import technology.sola.engine.platform.browser.core.BrowserRestClient;
 import technology.sola.engine.platform.browser.core.BrowserSocketClient;
-import technology.sola.engine.platform.browser.javascript.JsCanvasUtils;
-import technology.sola.engine.platform.browser.javascript.JsKeyboardUtils;
-import technology.sola.engine.platform.browser.javascript.JsMouseUtils;
-import technology.sola.engine.platform.browser.javascript.JsUtils;
+import technology.sola.engine.platform.browser.javascript.*;
 import technology.sola.logging.SolaLogger;
 
 import java.util.Locale;
@@ -112,7 +106,34 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   @Override
   public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
-    // todo implement
+    JsTouchUtils.touchEventListener("touchmove", (id, x, y) -> {
+      PointerCoordinate adjusted = adjustPointerForViewport(x, y);
+
+      touchEventConsumer.accept(new TouchEvent(new Touch(
+        adjusted.x(), adjusted.y(), TouchPhase.MOVED, id
+      )));
+    });
+    JsTouchUtils.touchEventListener("touchstart", (id, x, y) -> {
+      PointerCoordinate adjusted = adjustPointerForViewport(x, y);
+
+      touchEventConsumer.accept(new TouchEvent(new Touch(
+        adjusted.x(), adjusted.y(), TouchPhase.BEGAN, id
+      )));
+    });
+    JsTouchUtils.touchEventListener("touchend", (id, x, y) -> {
+      PointerCoordinate adjusted = adjustPointerForViewport(x, y);
+
+      touchEventConsumer.accept(new TouchEvent(new Touch(
+        adjusted.x(), adjusted.y(), TouchPhase.ENDED, id
+      )));
+    });
+    JsTouchUtils.touchEventListener("touchcancel", (id, x, y) -> {
+      PointerCoordinate adjusted = adjustPointerForViewport(x, y);
+
+      touchEventConsumer.accept(new TouchEvent(new Touch(
+        adjusted.x(), adjusted.y(), TouchPhase.CANCELLED, id
+      )));
+    });
   }
 
   @Override
@@ -121,6 +142,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
     JsCanvasUtils.canvasInit(JsCanvasUtils.ID_SOLA_ANCHOR, solaConfiguration.rendererWidth(), solaConfiguration.rendererHeight());
     JsKeyboardUtils.init();
     JsMouseUtils.init();
+    JsTouchUtils.init();
 
     JsCanvasUtils.observeCanvasResize((int width, int height) -> viewport.resize(width, height));
     JsCanvasUtils.observeCanvasFocus(isFocused -> {
