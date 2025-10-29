@@ -183,4 +183,3 @@ the sola game engine to load when manually creating or updating them.
     * [SpriteSheet.schema.json](json-schema/SpriteSheet.schema.json) -> *.sprites.json
     * [Font.schema.json](json-schema/Font.schema.json) -> *.font.json
     * [GuiDocument.schema.json](json-schema/GuiDocument.schema.json) -> *.gui.json
-    * [ControlConfig.schema.json](json-schema/ControlConfig.schema.json) -> *.controls.json
