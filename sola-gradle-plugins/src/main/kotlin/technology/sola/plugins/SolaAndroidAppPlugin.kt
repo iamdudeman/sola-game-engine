@@ -94,7 +94,7 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       }
     }
 
-    project.tasks.register("ciBuild") {
+    project.tasks.register("buildCi") {
       group = "build"
 
       dependsOn(project.tasks.named("assembleDebug"))
