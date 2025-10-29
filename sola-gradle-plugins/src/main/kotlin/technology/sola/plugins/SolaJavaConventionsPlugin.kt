@@ -59,7 +59,7 @@ class SolaJavaConventionsPlugin : Plugin<Project> {
 
     project.afterEvaluate {
       project.tasks.register("buildCi") {
-        group = "build"
+        group = "sola"
 
         dependsOn(project.tasks.named("build"))
       }

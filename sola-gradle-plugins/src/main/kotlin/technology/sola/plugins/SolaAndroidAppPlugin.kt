@@ -95,13 +95,13 @@ class SolaAndroidAppPlugin : Plugin<Project> {
     }
 
     project.tasks.register("buildCi") {
-      group = "build"
+      group = "sola"
 
       dependsOn(project.tasks.named("assembleDebug"))
     }
 
     project.tasks.register("distAndroidDebugApk", Copy::class) {
-      group = "distribution"
+      group = "sola"
 
       from(project.file("build/outputs/apk/debug/android-debug.apk")) {
         rename { "${project.properties["gameName"]}-${project.version}-debug.apk" }
@@ -113,7 +113,7 @@ class SolaAndroidAppPlugin : Plugin<Project> {
     }
 
     project.tasks.register("distAndroidReleaseBundle", Copy::class) {
-      group = "distribution"
+      group = "sola"
 
       dependsOn(project.tasks.named("bundleRelease"))
 

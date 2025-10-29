@@ -62,7 +62,7 @@ class SolaAndroidConventionsPlugin : Plugin<Project> {
         }
 
         project.tasks.register("checkstyleMain", Checkstyle::class) {
-          group = "verification"
+          group = "sola"
 
           configFile = project.file(project.rootDir.toString() + "/checkstyle.xml")
           source("src")

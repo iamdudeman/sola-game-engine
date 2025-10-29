@@ -16,8 +16,7 @@
 
 ## Planned Cleanup List
 
-* group "sola" specific gradle tasks under "sola" grouping
-    * rename "ciBuild" to "buildCi"
+*
 
 -----------------------------------------------------------------------------------------------------------------------
 
