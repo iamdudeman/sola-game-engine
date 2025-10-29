@@ -87,13 +87,13 @@ public class JsMouseUtils {
         }
       }
 
-      solaCanvas.addEventListener("pointermove", function (event) {
+      solaCanvas.addEventListener("mousemove", function (event) {
         handleMouseEvent(event, "mousemove");
       }, false);
-      solaCanvas.addEventListener("pointerup", function (event) {
+      solaCanvas.addEventListener("mouseup", function (event) {
         handleMouseEvent(event, "mouseup");
       }, false);
-      solaCanvas.addEventListener("pointerdown", function (event) {
+      solaCanvas.addEventListener("mousedown", function (event) {
         handleMouseEvent(event, "mousedown");
       }, false);
 

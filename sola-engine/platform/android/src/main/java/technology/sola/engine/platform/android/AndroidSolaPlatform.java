@@ -49,9 +49,7 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
   private final int backgroundColor;
   private final List<Consumer<KeyEvent>> keyPressedConsumers = new ArrayList<>();
   private final List<Consumer<KeyEvent>> keyReleasedConsumers = new ArrayList<>();
-  private final List<Consumer<MouseEvent>> mouseMovedConsumers = new ArrayList<>();
-  private final List<Consumer<MouseEvent>> mousePressedConsumers = new ArrayList<>();
-  private final List<Consumer<MouseEvent>> mouseReleasedConsumers = new ArrayList<>();
+  private final List<Consumer<TouchEvent>> touchConsumers = new ArrayList<>();
 
   /**
    * Creates an AndroidSolaPlatform instance with the desired configuration for a host activity.
@@ -89,24 +87,49 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
     keyReleasedConsumers.add(consumer);
   }
 
+  /**
+   * Not supported on Android.
+   *
+   * @param consumer the method called when mouse is moved
+   */
   @Override
   public void onMouseMoved(Consumer<MouseEvent> consumer) {
-    mouseMovedConsumers.add(consumer);
+    // not supported on Android
   }
 
+  /**
+   * Not supported on Android.
+   *
+   * @param consumer the method called when mouse is pressed
+   */
   @Override
   public void onMousePressed(Consumer<MouseEvent> consumer) {
-    mousePressedConsumers.add(consumer);
+    // not supported on Android
   }
 
+  /**
+   * Not supported on Android.
+   *
+   * @param consumer the method called when mouse is released
+   */
   @Override
   public void onMouseReleased(Consumer<MouseEvent> consumer) {
-    mouseReleasedConsumers.add(consumer);
+    // not supported on Android
+  }
+
+  /**
+   * Not supported on Android.
+   *
+   * @param consumer the method called when a mouse wheel interaction takes place
+   */
+  @Override
+  public void onMouseWheel(Consumer<MouseWheelEvent> consumer) {
+    // not supported on Android
   }
 
   @Override
-  public void onMouseWheel(Consumer<MouseWheelEvent> consumer) {
-    // todo
+  public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
+    touchConsumers.add(touchEventConsumer);
   }
 
   @Override
@@ -223,41 +246,53 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
     }
   }
 
-  void emitAndroidSimulatedMouseEvent(MotionEvent event) {
-    boolean isSimulatedSecondary = false;
-    List<Consumer<MouseEvent>> consumers = switch (event.getActionMasked()) {
-      case MotionEvent.ACTION_DOWN -> mousePressedConsumers;
-      case MotionEvent.ACTION_UP -> mouseReleasedConsumers;
-      case MotionEvent.ACTION_MOVE -> mouseMovedConsumers;
-      case MotionEvent.ACTION_POINTER_DOWN -> {
-        isSimulatedSecondary = true;
-        yield mousePressedConsumers;
-      }
-      case MotionEvent.ACTION_POINTER_UP -> {
-        isSimulatedSecondary = true;
-        yield mouseReleasedConsumers;
-      }
-      default -> List.of();
-    };
+  void emitTouchEvent(MotionEvent event) {
+    if (event.getActionMasked() == MotionEvent.ACTION_MOVE) {
+      int pointerCount = event.getPointerCount();
 
-    if (consumers.isEmpty()) {
+      for (int i = 0; i < pointerCount; i++) {
+        int id = event.getPointerId(i);
+        int index = event.findPointerIndex(id);
+
+        PointerCoordinate adjusted = adjustPointerForViewport(
+          SolaMath.fastRound(event.getX(index)),
+          SolaMath.fastRound(event.getY(index))
+        );
+        TouchEvent touchEvent = new TouchEvent(new Touch(
+          adjusted.x(),
+          adjusted.y(),
+          TouchPhase.MOVED,
+          event.getPointerId(index)
+        ));
+
+        touchConsumers.forEach(consumer -> consumer.accept(touchEvent));
+      }
+
+
       return;
     }
 
-    MouseCoordinate adjusted = adjustMouseForViewport(
+    TouchPhase touchPhase = switch (event.getActionMasked()) {
+      case MotionEvent.ACTION_DOWN, MotionEvent.ACTION_POINTER_DOWN -> TouchPhase.BEGAN;
+      case MotionEvent.ACTION_MOVE -> TouchPhase.MOVED;
+      case MotionEvent.ACTION_UP, MotionEvent.ACTION_POINTER_UP -> TouchPhase.ENDED;
+      case MotionEvent.ACTION_CANCEL -> TouchPhase.CANCELLED;
+      default -> throw new UnsupportedOperationException("Unsupported Android touch event: " + event.getActionMasked());
+    };
+    int index = event.getActionIndex();
+
+    PointerCoordinate adjusted = adjustPointerForViewport(
       SolaMath.fastRound(event.getX()),
       SolaMath.fastRound(event.getY())
     );
-
-    var mouseEvent = new MouseEvent(
-      isSimulatedSecondary ? MouseButton.SECONDARY : MouseButton.PRIMARY,
+    TouchEvent touchEvent = new TouchEvent(new Touch(
       adjusted.x(),
-      adjusted.y()
-    );
+      adjusted.y(),
+      touchPhase,
+      event.getPointerId(index)
+    ));
 
-    for (var consumer : consumers) {
-      consumer.accept(mouseEvent);
-    }
+    touchConsumers.forEach(consumer -> consumer.accept(touchEvent));
   }
 
   private int mapKeyCode(int androidKeyCode) {

@@ -8,6 +8,7 @@ import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
+import technology.sola.engine.input.TouchInput;
 
 /**
  * Sola contains the core functionality needed to make a game. It is played via {@link SolaPlatform}.
@@ -35,6 +36,10 @@ public abstract class Sola {
    */
   protected MouseInput mouseInput;
   /**
+   * Used to check the current state of touch input.
+   */
+  protected TouchInput touchInput;
+  /**
    * Used to load assets for the Sola to use.
    */
   protected AssetLoaderProvider assetLoaderProvider;
@@ -52,6 +57,7 @@ public abstract class Sola {
     eventHub = new EventHub();
     keyboardInput = new KeyboardInput();
     mouseInput = new MouseInput();
+    touchInput = new TouchInput();
     assetLoaderProvider = new AssetLoaderProvider();
   }
 
@@ -98,6 +104,7 @@ public abstract class Sola {
   protected void onUpdate(float deltaTime) {
     keyboardInput.updateStatusOfKeys();
     mouseInput.updateStatusOfMouse();
+    touchInput.updatedStatusOfTouches();
 
     if (!platform().gameLoop.isPaused()) {
       solaEcs.updateWorld(deltaTime);
@@ -107,12 +114,13 @@ public abstract class Sola {
   void initializeForPlatform(SolaPlatform platform, Runnable completeAsyncInit) {
     this.platform = platform;
 
-    platform.onKeyPressed(event -> keyboardInput.onKeyPressed(event));
-    platform.onKeyReleased(event -> keyboardInput.keyReleased(event));
-    platform.onMouseMoved(event -> mouseInput.onMouseMoved(event));
-    platform.onMousePressed(event -> mouseInput.onMousePressed(event));
-    platform.onMouseReleased(event -> mouseInput.onMouseReleased(event));
-    platform.onMouseWheel(event -> mouseInput.onMouseWheel(event));
+    platform.onKeyPressed(keyboardInput::onKeyPressed);
+    platform.onKeyReleased(keyboardInput::keyReleased);
+    platform.onMouseMoved(mouseInput::onMouseMoved);
+    platform.onMousePressed(mouseInput::onMousePressed);
+    platform.onMouseReleased(mouseInput::onMouseReleased);
+    platform.onMouseWheel(mouseInput::onMouseWheel);
+    platform.onTouch(touchInput::onTouchEvent);
 
     onInit();
     onAsyncInit(completeAsyncInit);

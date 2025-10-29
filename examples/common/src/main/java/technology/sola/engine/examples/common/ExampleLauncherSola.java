@@ -144,7 +144,8 @@ public class ExampleLauncherSola extends Sola {
         buildExampleLaunchButton("Networking", NetworkingExample::new),
         buildExampleLaunchButton("Particle", ParticleExample::new),
         buildExampleLaunchButton("Physics", () -> new PhysicsExample(1337)),
-        buildExampleLaunchButton("Rendering", RenderingExample::new)
+        buildExampleLaunchButton("Rendering", RenderingExample::new),
+        buildExampleLaunchButton("Touch Input", TouchInputExample::new)
       );
   }
 

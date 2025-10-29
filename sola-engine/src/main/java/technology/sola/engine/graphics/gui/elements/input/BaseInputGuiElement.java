@@ -25,6 +25,12 @@ public abstract class BaseInputGuiElement<Style extends BaseStyles, ElementType 
         requestFocus();
       }
     });
+
+    events().touchEnd().on(mouseEvent -> {
+      if (!isDisabled) {
+        requestFocus();
+      }
+    });
   }
 
   /**

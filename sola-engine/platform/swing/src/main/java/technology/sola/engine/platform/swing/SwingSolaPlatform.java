@@ -19,6 +19,7 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.input.TouchEvent;
 import technology.sola.engine.networking.rest.JavaRestClient;
 import technology.sola.engine.networking.socket.JavaSocketClient;
 import technology.sola.engine.platform.swing.assets.SwingPathUtils;
@@ -62,7 +63,7 @@ public class SwingSolaPlatform extends SolaPlatform {
   }
 
   /**
-   * Creates a SwingSolaPlatformConfig instance with desired configuration.
+   * Creates a SwingSolaPlatformConfig instance with the desired configuration.
    *
    * @param platformConfig the {@link SwingSolaPlatformConfig}
    */
@@ -148,6 +149,16 @@ public class SwingSolaPlatform extends SolaPlatform {
 
       mouseWheelEventConsumer.accept(new technology.sola.engine.input.MouseWheelEvent(isUp, isDown, isLeft, isRight));
     });
+  }
+
+  /**
+   * Not supported on Swing.
+   *
+   * @param touchEventConsumer the method called when a touch interaction takes place
+   */
+  @Override
+  public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
+    // not supported on Swing
   }
 
   @Override
@@ -297,7 +308,7 @@ public class SwingSolaPlatform extends SolaPlatform {
   }
 
   private MouseEvent swingToSola(java.awt.event.MouseEvent swingMouseEvent) {
-    MouseCoordinate adjusted = adjustMouseForViewport(swingMouseEvent.getX(), swingMouseEvent.getY());
+    PointerCoordinate adjusted = adjustPointerForViewport(swingMouseEvent.getX(), swingMouseEvent.getY());
 
     return new MouseEvent(swingMouseEvent.getButton(), adjusted.x(), adjusted.y());
   }

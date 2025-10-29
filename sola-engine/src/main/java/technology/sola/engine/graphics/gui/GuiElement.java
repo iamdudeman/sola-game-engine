@@ -6,6 +6,7 @@ import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.graphics.gui.event.GuiElementEvents;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.graphics.gui.event.GuiMouseEvent;
+import technology.sola.engine.graphics.gui.event.GuiTouchEvent;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
 import technology.sola.engine.graphics.gui.style.DefaultStyleValues;
@@ -489,6 +490,52 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
     }
   }
 
+  void onTouch(GuiTouchEvent event) {
+    for (var child : children) {
+      child.onTouch(event);
+    }
+
+    if (event.isAbleToPropagate()) {
+      var touch = event.getTouchEvent().touch();
+
+      switch (touch.phase()) {
+        case BEGAN -> {
+          if (event.isAbleToPropagate() && shouldHandleTouchStartEvents() && bounds.contains(touch.x(), touch.y())) {
+            events.touchStart().emit(event);
+            setActive(true);
+          }
+        }
+        case ENDED -> {
+          if (event.isAbleToPropagate() && shouldHandleTouchEndEvents() && bounds.contains(touch.x(), touch.y())) {
+            events.touchEnd().emit(event);
+          }
+
+          setActive(false);
+        }
+        case MOVED -> {
+          if (event.isAbleToPropagate()) {
+            if (shouldHandleTouchMoveEvents() && bounds.contains(touch.x(), touch.y())) {
+              events.touchMove().emit(event);
+
+              if (!isHovered) {
+                setHovered(true);
+              }
+            } else if (isHovered) {
+              setHovered(false);
+            }
+          }
+        }
+        case CANCELLED -> {
+          if (event.isAbleToPropagate() && shouldHandleTouchCancelEvents() && bounds.contains(touch.x(), touch.y())) {
+            events.touchCancel().emit(event);
+          }
+
+          setActive(false);
+        }
+      }
+    }
+  }
+
   void setBounds(GuiElementBounds bounds) {
     this.bounds = bounds;
 
@@ -581,7 +628,8 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   }
 
   private boolean shouldHandleMouseMoveEvents() {
-    return styleContainer.hasHoverCondition() || events.mouseMoved().hasListeners() || events.mouseEntered().hasListeners() || events.mouseExited().hasListeners();
+    return styleContainer.hasHoverCondition() || events.mouseMoved().hasListeners()
+      || events.mouseEntered().hasListeners() || events.mouseExited().hasListeners();
   }
 
   private boolean shouldHandleMousePressedEvents() {
@@ -590,5 +638,22 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
 
   private boolean shouldHandleMouseReleasedEvents() {
     return styleContainer.hasActiveCondition() || events().mouseReleased().hasListeners();
+  }
+
+  private boolean shouldHandleTouchMoveEvents() {
+    return styleContainer.hasHoverCondition() || events.touchMove().hasListeners()
+      || events.touchStart().hasListeners() || events.touchEnd().hasListeners();
+  }
+
+  private boolean shouldHandleTouchStartEvents() {
+    return styleContainer.hasActiveCondition() || events().touchStart().hasListeners();
+  }
+
+  private boolean shouldHandleTouchEndEvents() {
+    return styleContainer.hasActiveCondition() || events().touchEnd().hasListeners();
+  }
+
+  private boolean shouldHandleTouchCancelEvents() {
+    return styleContainer.hasActiveCondition() || events().touchCancel().hasListeners();
   }
 }

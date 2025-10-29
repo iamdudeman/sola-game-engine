@@ -1,5 +1,6 @@
 # sola-game-engine TODO list
 
+
 ## Known Bugs List
 
 *
@@ -15,19 +16,15 @@
 
 ## Planned Cleanup List
 
-*
+* group "sola" specific gradle tasks under "sola" grouping
+* consider how to hook up touch events for SolaControls
+    * if it doesn't make sense, then consider removing SolaControls
+    * also, how to deal with "touch points" and mouse clicks
 
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
 
-* Figure out how to handle TouchInput
-    * Primarily for browser and Android but also could be supported in JavaFX
-    * touchstart and touchend all hard coded to MouseButton.Primary currently
-        * implement touchmove
-            * Figure out TouchInput API
-        * How to handle multitouch
-            * Switch JsMouseUtils to mouse events instead of pointer events
 * implement the Android platform fully
     * add the ability to platforms to "request keyboard" for things like TextInputGuiElement
     * keyboard input is not fully implemented
@@ -42,10 +39,6 @@
     * Load and save JSON content (maybe other content too)
     * Browser implementation could open file dialog
     * Desktop could go straight to file or open file dialog
-* Gui performance improvements
-    * consider splitting layout and paint styles to prevent extra calculations
-        * changing background color doesn't affect layout
-        * changing border color doesn't affect layout `if a border is already set`
 * Particle System
     * consider ability to add fix number of particle spawns (4 at a time in different directions for example)
     * consider ability to change particle shape (instead of only circle maybe square)
@@ -58,6 +51,13 @@
     * Would need to update rendering stuff
     * Would need to update physics stuff
         * Not just colliders, but also impulse collision resolution potentially
+
+### Low priority (not ordered)
+
+* Gui performance improvements
+    * consider splitting layout and paint styles to prevent extra calculations
+        * changing background color doesn't affect layout
+        * changing border color doesn't affect layout `if a border is already set`
 * Research Virtual File System
     * ability to mount archives of some sort
         * possible example, instead of png use different file format that many can be compressed into one larger file
@@ -66,9 +66,6 @@
 * Investigate possible Steam integrations
     * CloudSave integration
     * Controls integration
-
-### Low priority (not ordered)
-
 * Gui json features
     * consider an event map of some sort for when loading gui documents
         * could also have an "event id -> event function" map that can be used as part of gui doc loading

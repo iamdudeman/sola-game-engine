@@ -27,9 +27,7 @@ import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
-import technology.sola.engine.input.KeyEvent;
-import technology.sola.engine.input.MouseEvent;
-import technology.sola.engine.input.MouseWheelEvent;
+import technology.sola.engine.input.*;
 import technology.sola.engine.networking.rest.JavaRestClient;
 import technology.sola.engine.networking.socket.JavaSocketClient;
 import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
@@ -143,6 +141,38 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       boolean isRight = scrollEvent.getDeltaX() > 0;
 
       mouseWheelEventConsumer.accept(new MouseWheelEvent(isUp, isDown, isLeft, isRight));
+    });
+  }
+
+  @Override
+  public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
+    canvas.addEventHandler(javafx.scene.input.TouchEvent.ANY, touchEvent -> {
+      if (touchEvent.getEventType().equals(javafx.scene.input.TouchEvent.TOUCH_MOVED)) {
+        for (var touchPoint : touchEvent.getTouchPoints() ) {
+          PointerCoordinate adjusted = adjustPointerForViewport((int) touchPoint.getX(), (int) touchPoint.getY());
+
+          touchEventConsumer.accept(new TouchEvent(new Touch(
+            adjusted.x(), adjusted.y(), TouchPhase.MOVED, touchPoint.getId()
+          )));
+        }
+
+        return;
+      }
+
+      TouchPhase touchPhase = TouchPhase.STATIONARY;
+
+      if (touchEvent.getEventType().equals(javafx.scene.input.TouchEvent.TOUCH_PRESSED)) {
+        touchPhase = TouchPhase.BEGAN;
+      } else if (touchEvent.getEventType().equals(javafx.scene.input.TouchEvent.TOUCH_RELEASED)) {
+        touchPhase = TouchPhase.ENDED;
+      }
+
+      var touchPoint = touchEvent.getTouchPoint();
+      PointerCoordinate adjusted = adjustPointerForViewport((int) touchPoint.getX(), (int) touchPoint.getY());
+
+      touchEventConsumer.accept(new TouchEvent(new Touch(
+        adjusted.x(), adjusted.y(), touchPhase, touchPoint.getId()
+      )));
     });
   }
 
@@ -272,7 +302,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   }
 
   private MouseEvent fxToSola(javafx.scene.input.MouseEvent fxMouseEvent) {
-    MouseCoordinate adjusted = adjustMouseForViewport((int) fxMouseEvent.getX(), (int) fxMouseEvent.getY());
+    PointerCoordinate adjusted = adjustPointerForViewport((int) fxMouseEvent.getX(), (int) fxMouseEvent.getY());
 
     return new MouseEvent(fxMouseEvent.getButton().ordinal(), adjusted.x(), adjusted.y());
   }
