@@ -5,7 +5,6 @@ import technology.sola.ecs.Component;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
-import technology.sola.engine.assets.input.ControlsConfig;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
@@ -17,7 +16,7 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.*;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
-import technology.sola.engine.input.SolaControls;
+import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
@@ -45,15 +44,12 @@ import java.util.function.Function;
 public class SimplePlatformerGame extends Sola {
   private SolaPhysics solaPhysics;
   private SolaGraphics solaGraphics;
-  private SolaControls solaControls;
 
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public SimplePlatformerGame() {
     super(new SolaConfiguration("Simple Platformer", 800, 600, 30));
-
-    solaControls = new SolaControls(keyboardInput, mouseInput);
   }
 
   @Override
@@ -70,16 +66,6 @@ public class SimplePlatformerGame extends Sola {
     solaEcs.addSystems(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem(), new GlassSystem(eventHub));
     solaEcs.setWorld(buildWorld());
     eventHub.add(CollisionEvent.class, new GameDoneEventListener());
-  }
-
-  @Override
-  protected void onAsyncInit(Runnable completeAsyncInit) {
-    assetLoaderProvider.get(ControlsConfig.class)
-      .getNewAsset("controls", "assets/input/simple_platformer.controls.json")
-      .executeWhenLoaded(controlsConfig -> {
-        solaControls.setControls(controlsConfig);
-        completeAsyncInit.run();
-      });
   }
 
   @Override
@@ -264,15 +250,15 @@ public class SimplePlatformerGame extends Sola {
         .forEach(view -> {
           DynamicBodyComponent dynamicBodyComponent = view.c2();
 
-          if (solaControls.isActive("RIGHT") && dynamicBodyComponent.getVelocity().x() < 150) {
+          if ((keyboardInput.isKeyHeld(Key.D) || keyboardInput.isKeyHeld(Key.RIGHT)) && dynamicBodyComponent.getVelocity().x() < 150) {
             dynamicBodyComponent.applyForce(150, 0);
           }
 
-          if (solaControls.isActive("LEFT") && dynamicBodyComponent.getVelocity().x() > -150) {
+          if ((keyboardInput.isKeyHeld(Key.A) || keyboardInput.isKeyHeld(Key.LEFT)) && dynamicBodyComponent.getVelocity().x() > -150) {
             dynamicBodyComponent.applyForce(-150, 0);
           }
 
-          if (dynamicBodyComponent.isGrounded() && solaControls.isActive("JUMP")) {
+          if (dynamicBodyComponent.isGrounded() && keyboardInput.isKeyHeld(Key.SPACE)) {
             dynamicBodyComponent.applyForce(0, -3000);
           } else if (dynamicBodyComponent.getVelocity().y() > 0) {
             dynamicBodyComponent.applyForce(0, 1.5f * solaPhysics.getGravitySystem().getGravityConstant() * dynamicBodyComponent.getMaterial().getMass());

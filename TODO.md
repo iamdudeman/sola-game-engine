@@ -17,9 +17,7 @@
 ## Planned Cleanup List
 
 * group "sola" specific gradle tasks under "sola" grouping
-* consider how to hook up touch events for SolaControls
-    * if it doesn't make sense, then consider removing SolaControls
-    * also, how to deal with "touch points" and mouse clicks
+    * rename "ciBuild" to "buildCi"
 
 -----------------------------------------------------------------------------------------------------------------------
 
