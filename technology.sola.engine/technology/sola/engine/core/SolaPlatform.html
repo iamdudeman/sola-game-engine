@@ -99,9 +99,9 @@ loadScripts(document, 'script');</script>
  implementation for the sola game engine to use.</div>
 </div>
 <div class="col-first odd-row-color"><code>protected static final record&nbsp;</code></div>
-<div class="col-second odd-row-color"><code><a href="SolaPlatform.MouseCoordinate.html" class="type-name-link" title="class in technology.sola.engine.core">SolaPlatform.MouseCoordinate</a></code></div>
+<div class="col-second odd-row-color"><code><a href="SolaPlatform.PointerCoordinate.html" class="type-name-link" title="class in technology.sola.engine.core">SolaPlatform.PointerCoordinate</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">Holds the coordinate of the mouse.</div>
+<div class="block">Holds the coordinate of the pointer.</div>
 </div>
 <div class="col-first even-row-color"><code>protected static interface&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="SolaPlatform.SolaPlatformInitialization.html" class="type-name-link" title="interface in technology.sola.engine.core">SolaPlatform.SolaPlatformInitialization</a></code></div>
@@ -178,83 +178,95 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="SolaPlatform.MouseCoordinate.html" title="class in technology.sola.engine.core">SolaPlatform.MouseCoordinate</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#adjustMouseForViewport(int,int)" class="member-name-link">adjustMouseForViewport</a><wbr>(int&nbsp;x,
- int&nbsp;y)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="SolaPlatform.PointerCoordinate.html" title="class in technology.sola.engine.core">SolaPlatform.PointerCoordinate</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#adjustPointerForViewport(float,float)" class="member-name-link">adjustPointerForViewport</a><wbr>(float&nbsp;x,
+ float&nbsp;y)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Convenience method for calculating adjusted mouse coordinate considering the current
+<div class="block">Convenience method for calculating adjusted pointer coordinate considering the current
  <a href="../graphics/screen/AspectMode.html" title="enum class in technology.sola.engine.graphics.screen"><code>AspectMode</code></a> of the <a href="../graphics/screen/Viewport.html" title="class in technology.sola.engine.graphics.screen"><code>Viewport</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#beforeRender(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">beforeRender</a><wbr>(<a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Method called before each render frame.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="SolaPlatform.GameLoopProvider.html" title="interface in technology.sola.engine.core">SolaPlatform.GameLoopProvider</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#buildGameLoop()" class="member-name-link">buildGameLoop</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Builds the <a href="GameLoop.html" title="class in technology.sola.engine.core"><code>GameLoop</code></a> for this platform.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#buildRenderer(technology.sola.engine.core.SolaConfiguration)" class="member-name-link">buildRenderer</a><wbr>(<a href="SolaConfiguration.html" title="class in technology.sola.engine.core">SolaConfiguration</a>&nbsp;solaConfiguration)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="SolaPlatform.PointerCoordinate.html" title="class in technology.sola.engine.core">SolaPlatform.PointerCoordinate</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#adjustPointerForViewport(int,int)" class="member-name-link">adjustPointerForViewport</a><wbr>(int&nbsp;x,
+ int&nbsp;y)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Builds the <a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> for this platform.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="SolaPlatformIdentifier.html" title="class in technology.sola.engine.core">SolaPlatformIdentifier</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getIdentifier()" class="member-name-link">getIdentifier</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRenderer()" class="member-name-link">getRenderer</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../networking/rest/RestClient.html" title="interface in technology.sola.engine.networking.rest">RestClient</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRestClient()" class="member-name-link">getRestClient</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket">SocketClient</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSocketClient()" class="member-name-link">getSocketClient</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../graphics/screen/Viewport.html" title="class in technology.sola.engine.graphics.screen">Viewport</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getViewport()" class="member-name-link">getViewport</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#initializePlatform(technology.sola.engine.core.SolaConfiguration,technology.sola.engine.core.SolaPlatform.SolaPlatformInitialization)" class="member-name-link">initializePlatform</a><wbr>(<a href="SolaConfiguration.html" title="class in technology.sola.engine.core">SolaConfiguration</a>&nbsp;solaConfiguration,
- <a href="SolaPlatform.SolaPlatformInitialization.html" title="interface in technology.sola.engine.core">SolaPlatform.SolaPlatformInitialization</a>&nbsp;solaPlatformInitialization)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Method to initialize a <a href="SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a>.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onKeyPressed(java.util.function.Consumer)" class="member-name-link">onKeyPressed</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&gt;&nbsp;keyEventConsumer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Registers an on key pressed listener.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onKeyReleased(java.util.function.Consumer)" class="member-name-link">onKeyReleased</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&gt;&nbsp;keyEventConsumer)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Registers an on key released listener.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMouseMoved(java.util.function.Consumer)" class="member-name-link">onMouseMoved</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&gt;&nbsp;mouseEventConsumer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Registers an on mouse moved listener.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMousePressed(java.util.function.Consumer)" class="member-name-link">onMousePressed</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&gt;&nbsp;mouseEventConsumer)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Registers an on mouse pressed listener.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMouseReleased(java.util.function.Consumer)" class="member-name-link">onMouseReleased</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&gt;&nbsp;mouseEventConsumer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Registers an on mouse released listener.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMouseWheel(java.util.function.Consumer)" class="member-name-link">onMouseWheel</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/MouseWheelEvent.html" title="class in technology.sola.engine.input">MouseWheelEvent</a>&gt;&nbsp;mouseWheelEventConsumer)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Registers an on mouse wheel listener.</div>
+<div class="block">Convenience method for calculating adjusted pointer coordinate considering the current
+ <a href="../graphics/screen/AspectMode.html" title="enum class in technology.sola.engine.graphics.screen"><code>AspectMode</code></a> of the <a href="../graphics/screen/Viewport.html" title="class in technology.sola.engine.graphics.screen"><code>Viewport</code></a>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onRender(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">onRender</a><wbr>(<a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#beforeRender(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">beforeRender</a><wbr>(<a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Method called before each render frame.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="SolaPlatform.GameLoopProvider.html" title="interface in technology.sola.engine.core">SolaPlatform.GameLoopProvider</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#buildGameLoop()" class="member-name-link">buildGameLoop</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Builds the <a href="GameLoop.html" title="class in technology.sola.engine.core"><code>GameLoop</code></a> for this platform.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#buildRenderer(technology.sola.engine.core.SolaConfiguration)" class="member-name-link">buildRenderer</a><wbr>(<a href="SolaConfiguration.html" title="class in technology.sola.engine.core">SolaConfiguration</a>&nbsp;solaConfiguration)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Builds the <a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> for this platform.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="SolaPlatformIdentifier.html" title="class in technology.sola.engine.core">SolaPlatformIdentifier</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getIdentifier()" class="member-name-link">getIdentifier</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRenderer()" class="member-name-link">getRenderer</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../networking/rest/RestClient.html" title="interface in technology.sola.engine.networking.rest">RestClient</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRestClient()" class="member-name-link">getRestClient</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket">SocketClient</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSocketClient()" class="member-name-link">getSocketClient</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../graphics/screen/Viewport.html" title="class in technology.sola.engine.graphics.screen">Viewport</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getViewport()" class="member-name-link">getViewport</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#initializePlatform(technology.sola.engine.core.SolaConfiguration,technology.sola.engine.core.SolaPlatform.SolaPlatformInitialization)" class="member-name-link">initializePlatform</a><wbr>(<a href="SolaConfiguration.html" title="class in technology.sola.engine.core">SolaConfiguration</a>&nbsp;solaConfiguration,
+ <a href="SolaPlatform.SolaPlatformInitialization.html" title="interface in technology.sola.engine.core">SolaPlatform.SolaPlatformInitialization</a>&nbsp;solaPlatformInitialization)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Method to initialize a <a href="SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a>.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onKeyPressed(java.util.function.Consumer)" class="member-name-link">onKeyPressed</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&gt;&nbsp;keyEventConsumer)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Registers an on key pressed listener.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onKeyReleased(java.util.function.Consumer)" class="member-name-link">onKeyReleased</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&gt;&nbsp;keyEventConsumer)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Registers an on key released listener.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMouseMoved(java.util.function.Consumer)" class="member-name-link">onMouseMoved</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&gt;&nbsp;mouseEventConsumer)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Registers an on mouse moved listener.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMousePressed(java.util.function.Consumer)" class="member-name-link">onMousePressed</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&gt;&nbsp;mouseEventConsumer)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Registers an on mouse pressed listener.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMouseReleased(java.util.function.Consumer)" class="member-name-link">onMouseReleased</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&gt;&nbsp;mouseEventConsumer)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Registers an on mouse released listener.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMouseWheel(java.util.function.Consumer)" class="member-name-link">onMouseWheel</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/MouseWheelEvent.html" title="class in technology.sola.engine.input">MouseWheelEvent</a>&gt;&nbsp;mouseWheelEventConsumer)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Registers an on mouse wheel listener.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onRender(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">onRender</a><wbr>(<a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Main render frame method.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onTouch(java.util.function.Consumer)" class="member-name-link">onTouch</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/TouchEvent.html" title="class in technology.sola.engine.input">TouchEvent</a>&gt;&nbsp;touchEventConsumer)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Registers an on touch listener.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#play(technology.sola.engine.core.Sola)" class="member-name-link">play</a><wbr>(<a href="Sola.html" title="class in technology.sola.engine.core">Sola</a>&nbsp;sola)</code></div>
@@ -265,7 +277,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#populateAssetLoaderProvider(technology.sola.engine.assets.AssetLoaderProvider)" class="member-name-link">populateAssetLoaderProvider</a><wbr>(<a href="../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Method to populate the <a href="SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> <a href="../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets"><code>AssetLoaderProvider</code></a> with
- <a href="../assets/AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a>s that <a href="Sola.html" title="class in technology.sola.engine.core"><code>Sola</code></a> will be able to utilize.</div>
+ <a href="../assets/AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a>s that <a href="Sola.html" title="class in technology.sola.engine.core"><code>Sola</code></a> will be able to use.</div>
 </div>
 </div>
 </div>
@@ -476,6 +488,17 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="onTouch(java.util.function.Consumer)">
+<h3>onTouch</h3>
+<div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onTouch</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/TouchEvent.html" title="class in technology.sola.engine.input">TouchEvent</a>&gt;&nbsp;touchEventConsumer)</span></div>
+<div class="block">Registers an on touch listener.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>touchEventConsumer</code> - the method called when a touch interaction takes place</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="initializePlatform(technology.sola.engine.core.SolaConfiguration,technology.sola.engine.core.SolaPlatform.SolaPlatformInitialization)">
 <h3>initializePlatform</h3>
 <div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">initializePlatform</span><wbr><span class="parameters">(<a href="SolaConfiguration.html" title="class in technology.sola.engine.core">SolaConfiguration</a>&nbsp;solaConfiguration,
@@ -516,7 +539,7 @@ loadScripts(document, 'script');</script>
 <h3>populateAssetLoaderProvider</h3>
 <div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">populateAssetLoaderProvider</span><wbr><span class="parameters">(<a href="../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider)</span></div>
 <div class="block">Method to populate the <a href="SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> <a href="../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets"><code>AssetLoaderProvider</code></a> with
- <a href="../assets/AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a>s that <a href="Sola.html" title="class in technology.sola.engine.core"><code>Sola</code></a> will be able to utilize.</div>
+ <a href="../assets/AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a>s that <a href="Sola.html" title="class in technology.sola.engine.core"><code>Sola</code></a> will be able to use.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>assetLoaderProvider</code> - the <a href="../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets"><code>AssetLoaderProvider</code></a></dd>
@@ -527,7 +550,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="buildRenderer(technology.sola.engine.core.SolaConfiguration)">
 <h3>buildRenderer</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></span>&nbsp;<span class="element-name">buildRenderer</span><wbr><span class="parameters">(<a href="SolaConfiguration.html" title="class in technology.sola.engine.core">SolaConfiguration</a>&nbsp;solaConfiguration)</span></div>
-<div class="block">Builds the <a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> for this platform. Default implementation will utilize the <a href="../graphics/renderer/SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer"><code>SoftwareRenderer</code></a>
+<div class="block">Builds the <a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> for this platform. Default implementation will use the <a href="../graphics/renderer/SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer"><code>SoftwareRenderer</code></a>
  implementation.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -541,7 +564,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="buildGameLoop()">
 <h3>buildGameLoop</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="SolaPlatform.GameLoopProvider.html" title="interface in technology.sola.engine.core">SolaPlatform.GameLoopProvider</a></span>&nbsp;<span class="element-name">buildGameLoop</span>()</div>
-<div class="block">Builds the <a href="GameLoop.html" title="class in technology.sola.engine.core"><code>GameLoop</code></a> for this platform. Default implementation will utilize the <a href="FixedUpdateGameLoop.html" title="class in technology.sola.engine.core"><code>FixedUpdateGameLoop</code></a>
+<div class="block">Builds the <a href="GameLoop.html" title="class in technology.sola.engine.core"><code>GameLoop</code></a> for this platform. Default implementation will use the <a href="FixedUpdateGameLoop.html" title="class in technology.sola.engine.core"><code>FixedUpdateGameLoop</code></a>
  implementation.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -550,18 +573,34 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="adjustMouseForViewport(int,int)">
-<h3>adjustMouseForViewport</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="SolaPlatform.MouseCoordinate.html" title="class in technology.sola.engine.core">SolaPlatform.MouseCoordinate</a></span>&nbsp;<span class="element-name">adjustMouseForViewport</span><wbr><span class="parameters">(int&nbsp;x,
- int&nbsp;y)</span></div>
-<div class="block">Convenience method for calculating adjusted mouse coordinate considering the current
+<section class="detail" id="adjustPointerForViewport(float,float)">
+<h3>adjustPointerForViewport</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="SolaPlatform.PointerCoordinate.html" title="class in technology.sola.engine.core">SolaPlatform.PointerCoordinate</a></span>&nbsp;<span class="element-name">adjustPointerForViewport</span><wbr><span class="parameters">(float&nbsp;x,
+ float&nbsp;y)</span></div>
+<div class="block">Convenience method for calculating adjusted pointer coordinate considering the current
  <a href="../graphics/screen/AspectMode.html" title="enum class in technology.sola.engine.graphics.screen"><code>AspectMode</code></a> of the <a href="../graphics/screen/Viewport.html" title="class in technology.sola.engine.graphics.screen"><code>Viewport</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>x</code> - the raw x coordinate of the mouse click</dd>
-<dd><code>y</code> - the raw y coordinate of the mouse click</dd>
+<dd><code>x</code> - the raw x coordinate of the pointer</dd>
+<dd><code>y</code> - the raw y coordinate of the pointer</dd>
 <dt>Returns:</dt>
-<dd>the viewport adjusted mouse click coordinate</dd>
+<dd>the viewport adjusted pointer coordinate</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="adjustPointerForViewport(int,int)">
+<h3>adjustPointerForViewport</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="SolaPlatform.PointerCoordinate.html" title="class in technology.sola.engine.core">SolaPlatform.PointerCoordinate</a></span>&nbsp;<span class="element-name">adjustPointerForViewport</span><wbr><span class="parameters">(int&nbsp;x,
+ int&nbsp;y)</span></div>
+<div class="block">Convenience method for calculating adjusted pointer coordinate considering the current
+ <a href="../graphics/screen/AspectMode.html" title="enum class in technology.sola.engine.graphics.screen"><code>AspectMode</code></a> of the <a href="../graphics/screen/Viewport.html" title="class in technology.sola.engine.graphics.screen"><code>Viewport</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>x</code> - the raw x coordinate of the pointer</dd>
+<dd><code>y</code> - the raw y coordinate of the pointer</dd>
+<dt>Returns:</dt>
+<dd>the viewport adjusted pointer coordinate</dd>
 </dl>
 </section>
 </li>

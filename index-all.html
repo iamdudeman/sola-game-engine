@@ -64,6 +64,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates a ConditionalStyle instance for a style that will be applied when the <a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a> is active.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html#activeTouchesIterator()" class="member-name-link">activeTouchesIterator()</a> - Method in class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html" title="class in technology.sola.engine.input">TouchInput</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/event/EventHub.html#add(java.lang.Class,technology.sola.engine.event.EventListener)" class="member-name-link">add(Class&lt;T&gt;, EventListener&lt;T&gt;)</a> - Method in class technology.sola.engine.event.<a href="technology.sola.engine/technology/sola/engine/event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a></dt>
 <dd>
 <div class="block">Adds an <a href="technology.sola.engine/technology/sola/engine/event/EventListener.html" title="interface in technology.sola.engine.event"><code>EventListener</code></a> that listens to events of desired type.</div>
@@ -175,9 +177,14 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Appends or prepends a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> of <a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/ConditionalStyle.html" title="class in technology.sola.engine.graphics.gui.style"><code>ConditionalStyle</code></a>s to the current list of styles.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#adjustMouseForViewport(int,int)" class="member-name-link">adjustMouseForViewport(int, int)</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#adjustPointerForViewport(float,float)" class="member-name-link">adjustPointerForViewport(float, float)</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
 <dd>
-<div class="block">Convenience method for calculating adjusted mouse coordinate considering the current
+<div class="block">Convenience method for calculating adjusted pointer coordinate considering the current
+ <a href="technology.sola.engine/technology/sola/engine/graphics/screen/AspectMode.html" title="enum class in technology.sola.engine.graphics.screen"><code>AspectMode</code></a> of the <a href="technology.sola.engine/technology/sola/engine/graphics/screen/Viewport.html" title="class in technology.sola.engine.graphics.screen"><code>Viewport</code></a>.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#adjustPointerForViewport(int,int)" class="member-name-link">adjustPointerForViewport(int, int)</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
+<dd>
+<div class="block">Convenience method for calculating adjusted pointer coordinate considering the current
  <a href="technology.sola.engine/technology/sola/engine/graphics/screen/AspectMode.html" title="enum class in technology.sola.engine.graphics.screen"><code>AspectMode</code></a> of the <a href="technology.sola.engine/technology/sola/engine/graphics/screen/Viewport.html" title="class in technology.sola.engine.graphics.screen"><code>Viewport</code></a>.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/AffineTransform.html" class="type-name-link" title="class in technology.sola.engine.graphics">AffineTransform</a> - Class in <a href="technology.sola.engine/technology/sola/engine/graphics/package-summary.html">technology.sola.engine.graphics</a></dt>
@@ -371,6 +378,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#beforeRender(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">beforeRender(Renderer)</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
 <dd>
 <div class="block">Method called before each render frame.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchPhase.html#BEGAN" class="member-name-link">BEGAN</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchPhase.html" title="enum class in technology.sola.engine.input">TouchPhase</a></dt>
+<dd>
+<div class="block">Touch gesture has started by pressing a finger on the screen.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/Color.html#BLACK" class="member-name-link">BLACK</a> - Static variable in class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/Color.html" title="class in technology.sola.engine.graphics">Color</a></dt>
 <dd>
@@ -597,6 +608,10 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/CameraComponent.html#%3Cinit%3E()" class="member-name-link">CameraComponent()</a> - Constructor for class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/CameraComponent.html" title="class in technology.sola.engine.graphics.components">CameraComponent</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchPhase.html#CANCELLED" class="member-name-link">CANCELLED</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchPhase.html" title="enum class in technology.sola.engine.input">TouchPhase</a></dt>
+<dd>
+<div class="block">Touch gesture that had <a href="technology.sola.engine/technology/sola/engine/input/TouchPhase.html#BEGAN"><code>TouchPhase.BEGAN</code></a> was not completed.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/Canvas.html" class="type-name-link" title="class in technology.sola.engine.graphics">Canvas</a> - Class in <a href="technology.sola.engine/technology/sola/engine/graphics/package-summary.html">technology.sola.engine.graphics</a></dt>
 <dd>
 <div class="block">Canvas is an array of pixels with a width and height defined.</div>
@@ -904,6 +919,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketClient.html#connect(java.lang.String,int)" class="member-name-link">connect(String, int)</a> - Method in interface technology.sola.engine.networking.socket.<a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket">SocketClient</a></dt>
 <dd>
 <div class="block">Connects to a server by host and port.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElementBounds.html#contains(float,float)" class="member-name-link">contains(float, float)</a> - Method in record class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElementBounds.html" title="class in technology.sola.engine.graphics.gui">GuiElementBounds</a></dt>
+<dd>
+<div class="block">Checks to see if a point is within bounds.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElementBounds.html#contains(int,int)" class="member-name-link">contains(int, int)</a> - Method in record class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElementBounds.html" title="class in technology.sola.engine.graphics.gui">GuiElementBounds</a></dt>
 <dd>
@@ -1404,6 +1423,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">End key.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchPhase.html#ENDED" class="member-name-link">ENDED</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchPhase.html" title="enum class in technology.sola.engine.input">TouchPhase</a></dt>
+<dd>
+<div class="block">Touch gesture has ended by removing a finger from the screen.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#ENTER" class="member-name-link">ENTER</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
 <dd>
 <div class="block">Enter key.</div>
@@ -1476,7 +1499,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.MouseCoordinate.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.MouseCoordinate.html" title="class in technology.sola.engine.core">SolaPlatform.MouseCoordinate</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.PointerCoordinate.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.PointerCoordinate.html" title="class in technology.sola.engine.core">SolaPlatform.PointerCoordinate</a></dt>
 <dd>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </dd>
@@ -1537,6 +1560,14 @@ loadScripts(document, 'script');</script>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/MouseWheelEvent.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/MouseWheelEvent.html" title="class in technology.sola.engine.input">MouseWheelEvent</a></dt>
+<dd>
+<div class="block">Indicates whether some other object is "equal to" this one.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/Touch.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Touch.html" title="class in technology.sola.engine.input">Touch</a></dt>
+<dd>
+<div class="block">Indicates whether some other object is "equal to" this one.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchEvent.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchEvent.html" title="class in technology.sola.engine.input">TouchEvent</a></dt>
 <dd>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </dd>
@@ -1961,6 +1992,10 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/animation/SpriteAnimatorComponent.html#getActiveAnimationId()" class="member-name-link">getActiveAnimationId()</a> - Method in class technology.sola.engine.graphics.components.animation.<a href="technology.sola.engine/technology/sola/engine/graphics/components/animation/SpriteAnimatorComponent.html" title="class in technology.sola.engine.graphics.components.animation">SpriteAnimatorComponent</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html#getActiveTouchCount()" class="member-name-link">getActiveTouchCount()</a> - Method in class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html" title="class in technology.sola.engine.input">TouchInput</a></dt>
+<dd>
+<div class="block">Gets the number of active touches (fingers on the screen).</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/Color.html#getAlpha()" class="member-name-link">getAlpha()</a> - Method in class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/Color.html" title="class in technology.sola.engine.graphics">Color</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/ScreenSpaceLightMapGraphicsModule.html#getAmbientColor()" class="member-name-link">getAmbientColor()</a> - Method in class technology.sola.engine.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/graphics/modules/ScreenSpaceLightMapGraphicsModule.html" title="class in technology.sola.engine.graphics.modules">ScreenSpaceLightMapGraphicsModule</a></dt>
@@ -2095,6 +2130,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteKeyFrame.html#getDuration()" class="member-name-link">getDuration()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/networking/NetworkQueue.html#getFirst()" class="member-name-link">getFirst()</a> - Method in class technology.sola.engine.networking.<a href="technology.sola.engine/technology/sola/engine/networking/NetworkQueue.html" title="class in technology.sola.engine.networking">NetworkQueue</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html#getFirstActiveTouch()" class="member-name-link">getFirstActiveTouch()</a> - Method in class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html" title="class in technology.sola.engine.input">TouchInput</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html#getFirstTouch()" class="member-name-link">getFirstTouch()</a> - Method in class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html" title="class in technology.sola.engine.input">TouchInput</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html#getFocusableChildren()" class="member-name-link">getFocusableChildren()</a> - Method in class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a></dt>
 <dd>&nbsp;</dd>
@@ -2375,6 +2414,12 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/TextGuiElement.html#getText()" class="member-name-link">getText()</a> - Method in class technology.sola.engine.graphics.gui.elements.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/TextGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements">TextGuiElement</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html#getTouch(int)" class="member-name-link">getTouch(int)</a> - Method in class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html" title="class in technology.sola.engine.input">TouchInput</a></dt>
+<dd>
+<div class="block">Gets the <a href="technology.sola.engine/technology/sola/engine/input/Touch.html" title="class in technology.sola.engine.input"><code>Touch</code></a> of the given finger by unique id.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiTouchEvent.html#getTouchEvent()" class="member-name-link">getTouchEvent()</a> - Method in class technology.sola.engine.graphics.gui.event.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiTouchEvent.html" title="class in technology.sola.engine.graphics.gui.event">GuiTouchEvent</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/SolaGraphics.html#getTransformAnimatorSystem()" class="member-name-link">getTransformAnimatorSystem()</a> - Method in class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/SolaGraphics.html" title="class in technology.sola.engine.graphics">SolaGraphics</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/SolaEntityGraphicsModule.html#getTransformForAppliedCamera(technology.sola.engine.core.component.TransformComponent,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)" class="member-name-link">getTransformForAppliedCamera(TransformComponent, Matrix3D, Matrix3D)</a> - Method in class technology.sola.engine.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/graphics/modules/SolaEntityGraphicsModule.html" title="class in technology.sola.engine.graphics.modules">SolaEntityGraphicsModule</a></dt>
@@ -2619,6 +2664,14 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/theme/GuiTheme.html#%3Cinit%3E()" class="member-name-link">GuiTheme()</a> - Constructor for class technology.sola.engine.graphics.gui.style.theme.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/theme/GuiTheme.html" title="class in technology.sola.engine.graphics.gui.style.theme">GuiTheme</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiTouchEvent.html" class="type-name-link" title="class in technology.sola.engine.graphics.gui.event">GuiTouchEvent</a> - Class in <a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/package-summary.html">technology.sola.engine.graphics.gui.event</a></dt>
+<dd>
+<div class="block">GuiKeyEvent is a <a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiEvent.html" title="class in technology.sola.engine.graphics.gui.event"><code>GuiEvent</code></a> implementation for <a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiTouchEvent.html" title="class in technology.sola.engine.graphics.gui.event"><code>GuiTouchEvent</code></a>s.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiTouchEvent.html#%3Cinit%3E(technology.sola.engine.input.TouchEvent)" class="member-name-link">GuiTouchEvent(TouchEvent)</a> - Constructor for class technology.sola.engine.graphics.gui.event.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiTouchEvent.html" title="class in technology.sola.engine.graphics.gui.event">GuiTouchEvent</a></dt>
+<dd>
+<div class="block">Creates an instance of the event.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:H">H</h2>
 <dl class="index">
@@ -2698,7 +2751,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.MouseCoordinate.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.MouseCoordinate.html" title="class in technology.sola.engine.core">SolaPlatform.MouseCoordinate</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.PointerCoordinate.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.PointerCoordinate.html" title="class in technology.sola.engine.core">SolaPlatform.PointerCoordinate</a></dt>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
@@ -2759,6 +2812,14 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/MouseWheelEvent.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/MouseWheelEvent.html" title="class in technology.sola.engine.input">MouseWheelEvent</a></dt>
+<dd>
+<div class="block">Returns a hash code value for this object.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/Touch.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Touch.html" title="class in technology.sola.engine.input">Touch</a></dt>
+<dd>
+<div class="block">Returns a hash code value for this object.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchEvent.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchEvent.html" title="class in technology.sola.engine.input">TouchEvent</a></dt>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
@@ -2932,6 +2993,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/spritesheet/SpriteInfo.html#id()" class="member-name-link">id()</a> - Method in record class technology.sola.engine.assets.graphics.spritesheet.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/spritesheet/SpriteInfo.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteInfo</a></dt>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/assets/graphics/spritesheet/SpriteInfo.html#param-id"><code>id</code></a> record component.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/Touch.html#id()" class="member-name-link">id()</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Touch.html" title="class in technology.sola.engine.input">Touch</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/input/Touch.html#param-id"><code>id</code></a> record component.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/math/linear/Matrix3D.html#identity()" class="member-name-link">identity()</a> - Static method in class technology.sola.math.linear.<a href="technology.sola.engine/technology/sola/math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a></dt>
 <dd>&nbsp;</dd>
@@ -3566,6 +3631,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/math/geometry/Rectangle.html#param-max"><code>max</code></a> record component.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html#MAX_TOUCHES" class="member-name-link">MAX_TOUCHES</a> - Static variable in class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html" title="class in technology.sola.engine.input">TouchInput</a></dt>
+<dd>
+<div class="block">Max number of simultaneous touches supported.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/property/MergeableProperty.html" class="type-name-link" title="interface in technology.sola.engine.graphics.gui.style.property">MergeableProperty</a>&lt;<a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/property/MergeableProperty.html" title="type parameter in MergeableProperty">P</a> extends <a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/property/MergeableProperty.html" title="interface in technology.sola.engine.graphics.gui.style.property">MergeableProperty</a>&lt;?&gt;&gt; - Interface in <a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/property/package-summary.html">technology.sola.engine.graphics.gui.style.property</a></dt>
 <dd>
 <div class="block">MergeableProperty defines the contract for a style property that can be merged with another like type property.</div>
@@ -3658,10 +3727,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">The possible states for <a href="technology.sola.engine/technology/sola/engine/assets/input/MouseButtonControlInputCondition.html" title="class in technology.sola.engine.assets.input"><code>MouseButtonControlInputCondition</code></a>.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.MouseCoordinate.html#%3Cinit%3E(int,int)" class="member-name-link">MouseCoordinate(int, int)</a> - Constructor for record class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.MouseCoordinate.html" title="class in technology.sola.engine.core">SolaPlatform.MouseCoordinate</a></dt>
-<dd>
-<div class="block">Creates an instance of a <code>MouseCoordinate</code> record class.</div>
-</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiElementEvents.html#mouseEntered()" class="member-name-link">mouseEntered()</a> - Method in class technology.sola.engine.graphics.gui.event.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiElementEvents.html" title="class in technology.sola.engine.graphics.gui.event">GuiElementEvents</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/MouseEvent.html" class="type-name-link" title="class in technology.sola.engine.input">MouseEvent</a> - Record Class in <a href="technology.sola.engine/technology/sola/engine/input/package-summary.html">technology.sola.engine.input</a></dt>
@@ -3713,6 +3778,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/MouseWheelEvent.html#%3Cinit%3E(boolean,boolean,boolean,boolean)" class="member-name-link">MouseWheelEvent(boolean, boolean, boolean, boolean)</a> - Constructor for record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/MouseWheelEvent.html" title="class in technology.sola.engine.input">MouseWheelEvent</a></dt>
 <dd>
 <div class="block">Creates an instance of a <code>MouseWheelEvent</code> record class.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchPhase.html#MOVED" class="member-name-link">MOVED</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchPhase.html" title="enum class in technology.sola.engine.input">TouchPhase</a></dt>
+<dd>
+<div class="block">Touch gesture continues for a finger already on the screen.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/AffineTransform.html#multiply(float,float)" class="member-name-link">multiply(float, float)</a> - Method in class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/AffineTransform.html" title="class in technology.sola.engine.graphics">AffineTransform</a></dt>
 <dd>
@@ -4052,6 +4121,14 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Main render frame method.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#onTouch(java.util.function.Consumer)" class="member-name-link">onTouch(Consumer&lt;TouchEvent&gt;)</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
+<dd>
+<div class="block">Registers an on touch listener.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html#onTouchEvent(technology.sola.engine.input.TouchEvent)" class="member-name-link">onTouchEvent(TouchEvent)</a> - Method in class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html" title="class in technology.sola.engine.input">TouchInput</a></dt>
+<dd>
+<div class="block">Called by the <a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> whenever a touch event occurs.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/Sola.html#onUpdate(float)" class="member-name-link">onUpdate(float)</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/Sola.html" title="class in technology.sola.engine.core">Sola</a></dt>
 <dd>
 <div class="block">Method called every frame to update the input and world state.</div>
@@ -4236,6 +4313,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Period key.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/Touch.html#phase()" class="member-name-link">phase()</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Touch.html" title="class in technology.sola.engine.input">Touch</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/input/Touch.html#param-phase"><code>phase</code></a> record component.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/system/PhysicsSystem.html" class="type-name-link" title="class in technology.sola.engine.physics.system">PhysicsSystem</a> - Class in <a href="technology.sola.engine/technology/sola/engine/physics/system/package-summary.html">technology.sola.engine.physics.system</a></dt>
 <dd>
 <div class="block">PhysicsSystem is an <code>EcsSystem</code> that handles updating <code>Entity</code> with a
@@ -4263,6 +4344,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Starts playing the animation with desired id.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.PointerCoordinate.html#%3Cinit%3E(int,int)" class="member-name-link">PointerCoordinate(int, int)</a> - Constructor for record class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.PointerCoordinate.html" title="class in technology.sola.engine.core">SolaPlatform.PointerCoordinate</a></dt>
+<dd>
+<div class="block">Creates an instance of a <code>PointerCoordinate</code> record class.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/math/geometry/Circle.html#points()" class="member-name-link">points()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html#points()" class="member-name-link">points()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html" title="class in technology.sola.math.geometry">ConvexPolygon</a></dt>
@@ -4288,7 +4373,7 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#populateAssetLoaderProvider(technology.sola.engine.assets.AssetLoaderProvider)" class="member-name-link">populateAssetLoaderProvider(AssetLoaderProvider)</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
 <dd>
 <div class="block">Method to populate the <a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> <a href="technology.sola.engine/technology/sola/engine/assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets"><code>AssetLoaderProvider</code></a> with
- <a href="technology.sola.engine/technology/sola/engine/assets/AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a>s that <a href="technology.sola.engine/technology/sola/engine/core/Sola.html" title="class in technology.sola.engine.core"><code>Sola</code></a> will be able to utilize.</div>
+ <a href="technology.sola.engine/technology/sola/engine/assets/AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a>s that <a href="technology.sola.engine/technology/sola/engine/core/Sola.html" title="class in technology.sola.engine.core"><code>Sola</code></a> will be able to use.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/BaseStyles.html#position()" class="member-name-link">position()</a> - Method in class technology.sola.engine.graphics.gui.style.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/BaseStyles.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles</a></dt>
 <dd>
@@ -5543,9 +5628,9 @@ loadScripts(document, 'script');</script>
 <div class="block">GameLoopProvider is a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link"><code>FunctionalInterface</code></a> defining the contract for providing a <a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html" title="class in technology.sola.engine.core"><code>GameLoop</code></a>
  implementation for the sola game engine to use.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.MouseCoordinate.html" class="type-name-link" title="class in technology.sola.engine.core">SolaPlatform.MouseCoordinate</a> - Record Class in <a href="technology.sola.engine/technology/sola/engine/core/package-summary.html">technology.sola.engine.core</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.PointerCoordinate.html" class="type-name-link" title="class in technology.sola.engine.core">SolaPlatform.PointerCoordinate</a> - Record Class in <a href="technology.sola.engine/technology/sola/engine/core/package-summary.html">technology.sola.engine.core</a></dt>
 <dd>
-<div class="block">Holds the coordinate of the mouse.</div>
+<div class="block">Holds the coordinate of the pointer.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.SolaPlatformInitialization.html" class="type-name-link" title="interface in technology.sola.engine.core">SolaPlatform.SolaPlatformInitialization</a> - Interface in <a href="technology.sola.engine/technology/sola/engine/core/package-summary.html">technology.sola.engine.core</a></dt>
 <dd>
@@ -5786,6 +5871,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/event/GameLoopEvent.html#state()" class="member-name-link">state()</a> - Method in record class technology.sola.engine.core.event.<a href="technology.sola.engine/technology/sola/engine/core/event/GameLoopEvent.html" title="class in technology.sola.engine.core.event">GameLoopEvent</a></dt>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/core/event/GameLoopEvent.html#param-state"><code>state</code></a> record component.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchPhase.html#STATIONARY" class="member-name-link">STATIONARY</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchPhase.html" title="enum class in technology.sola.engine.input">TouchPhase</a></dt>
+<dd>
+<div class="block">Touch gesture that had <a href="technology.sola.engine/technology/sola/engine/input/TouchPhase.html#BEGAN"><code>TouchPhase.BEGAN</code></a> and is not moving.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/networking/rest/HttpResponse.html#status()" class="member-name-link">status()</a> - Method in record class technology.sola.engine.networking.rest.<a href="technology.sola.engine/technology/sola/engine/networking/rest/HttpResponse.html" title="class in technology.sola.engine.networking.rest">HttpResponse</a></dt>
 <dd>
@@ -6317,7 +6406,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a string representation of this record class.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.MouseCoordinate.html#toString()" class="member-name-link">toString()</a> - Method in record class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.MouseCoordinate.html" title="class in technology.sola.engine.core">SolaPlatform.MouseCoordinate</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.PointerCoordinate.html#toString()" class="member-name-link">toString()</a> - Method in record class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.PointerCoordinate.html" title="class in technology.sola.engine.core">SolaPlatform.PointerCoordinate</a></dt>
 <dd>
 <div class="block">Returns a string representation of this record class.</div>
 </dd>
@@ -6378,6 +6467,14 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a string representation of this record class.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/MouseWheelEvent.html#toString()" class="member-name-link">toString()</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/MouseWheelEvent.html" title="class in technology.sola.engine.input">MouseWheelEvent</a></dt>
+<dd>
+<div class="block">Returns a string representation of this record class.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/Touch.html#toString()" class="member-name-link">toString()</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Touch.html" title="class in technology.sola.engine.input">Touch</a></dt>
+<dd>
+<div class="block">Returns a string representation of this record class.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchEvent.html#toString()" class="member-name-link">toString()</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchEvent.html" title="class in technology.sola.engine.input">TouchEvent</a></dt>
 <dd>
 <div class="block">Returns a string representation of this record class.</div>
 </dd>
@@ -6447,6 +6544,48 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a string representation of this record class.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchEvent.html#touch()" class="member-name-link">touch()</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchEvent.html" title="class in technology.sola.engine.input">TouchEvent</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/input/TouchEvent.html#param-touch"><code>touch</code></a> record component.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/Touch.html" class="type-name-link" title="class in technology.sola.engine.input">Touch</a> - Record Class in <a href="technology.sola.engine/technology/sola/engine/input/package-summary.html">technology.sola.engine.input</a></dt>
+<dd>
+<div class="block">Contains the details about the touch interaction.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/Touch.html#%3Cinit%3E(float,float,technology.sola.engine.input.TouchPhase,int)" class="member-name-link">Touch(float, float, TouchPhase, int)</a> - Constructor for record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Touch.html" title="class in technology.sola.engine.input">Touch</a></dt>
+<dd>
+<div class="block">Creates an instance of a <code>Touch</code> record class.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiElementEvents.html#touchCancel()" class="member-name-link">touchCancel()</a> - Method in class technology.sola.engine.graphics.gui.event.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiElementEvents.html" title="class in technology.sola.engine.graphics.gui.event">GuiElementEvents</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiElementEvents.html#touchEnd()" class="member-name-link">touchEnd()</a> - Method in class technology.sola.engine.graphics.gui.event.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiElementEvents.html" title="class in technology.sola.engine.graphics.gui.event">GuiElementEvents</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchEvent.html" class="type-name-link" title="class in technology.sola.engine.input">TouchEvent</a> - Record Class in <a href="technology.sola.engine/technology/sola/engine/input/package-summary.html">technology.sola.engine.input</a></dt>
+<dd>
+<div class="block">TouchEvent contains data for when a <a href="technology.sola.engine/technology/sola/engine/input/Touch.html" title="class in technology.sola.engine.input"><code>Touch</code></a> interaction happens.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchEvent.html#%3Cinit%3E(technology.sola.engine.input.Touch)" class="member-name-link">TouchEvent(Touch)</a> - Constructor for record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchEvent.html" title="class in technology.sola.engine.input">TouchEvent</a></dt>
+<dd>
+<div class="block">Creates an instance of a <code>TouchEvent</code> record class.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/Sola.html#touchInput" class="member-name-link">touchInput</a> - Variable in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/Sola.html" title="class in technology.sola.engine.core">Sola</a></dt>
+<dd>
+<div class="block">Used to check the current state of touch input.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html" class="type-name-link" title="class in technology.sola.engine.input">TouchInput</a> - Class in <a href="technology.sola.engine/technology/sola/engine/input/package-summary.html">technology.sola.engine.input</a></dt>
+<dd>
+<div class="block">TouchInput contains information about user interaction with the touch screen.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html#%3Cinit%3E()" class="member-name-link">TouchInput()</a> - Constructor for class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html" title="class in technology.sola.engine.input">TouchInput</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiElementEvents.html#touchMove()" class="member-name-link">touchMove()</a> - Method in class technology.sola.engine.graphics.gui.event.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiElementEvents.html" title="class in technology.sola.engine.graphics.gui.event">GuiElementEvents</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchPhase.html" class="type-name-link" title="enum class in technology.sola.engine.input">TouchPhase</a> - Enum Class in <a href="technology.sola.engine/technology/sola/engine/input/package-summary.html">technology.sola.engine.input</a></dt>
+<dd>
+<div class="block">TouchPhase enum contains information about the phase of a touch gesture.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiElementEvents.html#touchStart()" class="member-name-link">touchStart()</a> - Method in class technology.sola.engine.graphics.gui.event.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/event/GuiElementEvents.html" title="class in technology.sola.engine.graphics.gui.event">GuiElementEvents</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/animation/TransformAnimatorComponent.html" class="type-name-link" title="class in technology.sola.engine.graphics.components.animation">TransformAnimatorComponent</a> - Class in <a href="technology.sola.engine/technology/sola/engine/graphics/components/animation/package-summary.html">technology.sola.engine.graphics.components.animation</a></dt>
 <dd>
 <div class="block">TransformAnimatorComponent is a <code>Component</code> that contains properties for defining an animation that is applied
@@ -6646,6 +6785,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Holds accumulated lost time when the fixed update loop cannot keep up.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html#updatedStatusOfTouches()" class="member-name-link">updatedStatusOfTouches()</a> - Method in class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchInput.html" title="class in technology.sola.engine.input">TouchInput</a></dt>
+<dd>
+<div class="block">Updates the status of changed <a href="technology.sola.engine/technology/sola/engine/input/Touch.html" title="class in technology.sola.engine.input"><code>Touch</code></a>es from the previous frame.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html#updateMethod" class="member-name-link">updateMethod</a> - Variable in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html" title="class in technology.sola.engine.core">GameLoop</a></dt>
 <dd>
 <div class="block">Method to call each update.</div>
@@ -6745,6 +6888,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchPhase.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchPhase.html" title="enum class in technology.sola.engine.input">TouchPhase</a></dt>
+<dd>
+<div class="block">Returns the enum constant of this class with the specified name.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderType.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderType.html" title="enum class in technology.sola.engine.physics.component.collider">ColliderType</a></dt>
 <dd>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
@@ -6829,6 +6976,11 @@ the order they are declared.</div>
 the order they are declared.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/MouseButton.html#values()" class="member-name-link">values()</a> - Static method in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/MouseButton.html" title="enum class in technology.sola.engine.input">MouseButton</a></dt>
+<dd>
+<div class="block">Returns an array containing the constants of this enum class, in
+the order they are declared.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/TouchPhase.html#values()" class="member-name-link">values()</a> - Static method in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/TouchPhase.html" title="enum class in technology.sola.engine.input">TouchPhase</a></dt>
 <dd>
 <div class="block">Returns an array containing the constants of this enum class, in
 the order they are declared.</div>
@@ -7006,9 +7158,9 @@ the order they are declared.</div>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/assets/graphics/spritesheet/SpriteInfo.html#param-x"><code>x</code></a> record component.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.MouseCoordinate.html#x()" class="member-name-link">x()</a> - Method in record class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.MouseCoordinate.html" title="class in technology.sola.engine.core">SolaPlatform.MouseCoordinate</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.PointerCoordinate.html#x()" class="member-name-link">x()</a> - Method in record class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.PointerCoordinate.html" title="class in technology.sola.engine.core">SolaPlatform.PointerCoordinate</a></dt>
 <dd>
-<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/core/SolaPlatform.MouseCoordinate.html#param-x"><code>x</code></a> record component.</div>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/core/SolaPlatform.PointerCoordinate.html#param-x"><code>x</code></a> record component.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElementBounds.html#x()" class="member-name-link">x()</a> - Method in record class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElementBounds.html" title="class in technology.sola.engine.graphics.gui">GuiElementBounds</a></dt>
 <dd>
@@ -7025,6 +7177,10 @@ the order they are declared.</div>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/MouseEvent.html#x()" class="member-name-link">x()</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a></dt>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/input/MouseEvent.html#param-x"><code>x</code></a> record component.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/Touch.html#x()" class="member-name-link">x()</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Touch.html" title="class in technology.sola.engine.input">Touch</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/input/Touch.html#param-x"><code>x</code></a> record component.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/utils/SpatialHashMap.BucketId.html#x()" class="member-name-link">x()</a> - Method in record class technology.sola.engine.physics.utils.<a href="technology.sola.engine/technology/sola/engine/physics/utils/SpatialHashMap.BucketId.html" title="class in technology.sola.engine.physics.utils">SpatialHashMap.BucketId</a></dt>
 <dd>
@@ -7049,9 +7205,9 @@ the order they are declared.</div>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/assets/graphics/spritesheet/SpriteInfo.html#param-y"><code>y</code></a> record component.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.MouseCoordinate.html#y()" class="member-name-link">y()</a> - Method in record class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.MouseCoordinate.html" title="class in technology.sola.engine.core">SolaPlatform.MouseCoordinate</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.PointerCoordinate.html#y()" class="member-name-link">y()</a> - Method in record class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.PointerCoordinate.html" title="class in technology.sola.engine.core">SolaPlatform.PointerCoordinate</a></dt>
 <dd>
-<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/core/SolaPlatform.MouseCoordinate.html#param-y"><code>y</code></a> record component.</div>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/core/SolaPlatform.PointerCoordinate.html#param-y"><code>y</code></a> record component.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElementBounds.html#y()" class="member-name-link">y()</a> - Method in record class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElementBounds.html" title="class in technology.sola.engine.graphics.gui">GuiElementBounds</a></dt>
 <dd>
@@ -7068,6 +7224,10 @@ the order they are declared.</div>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/MouseEvent.html#y()" class="member-name-link">y()</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a></dt>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/input/MouseEvent.html#param-y"><code>y</code></a> record component.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/input/Touch.html#y()" class="member-name-link">y()</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Touch.html" title="class in technology.sola.engine.input">Touch</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/input/Touch.html#param-y"><code>y</code></a> record component.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/utils/SpatialHashMap.BucketId.html#y()" class="member-name-link">y()</a> - Method in record class technology.sola.engine.physics.utils.<a href="technology.sola.engine/technology/sola/engine/physics/utils/SpatialHashMap.BucketId.html" title="class in technology.sola.engine.physics.utils">SpatialHashMap.BucketId</a></dt>
 <dd>
