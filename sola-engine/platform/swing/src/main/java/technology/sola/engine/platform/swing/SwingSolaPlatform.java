@@ -7,7 +7,6 @@ import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.FontAssetLoader;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetAssetLoader;
-import technology.sola.engine.assets.input.ControlsConfigAssetLoader;
 import technology.sola.engine.assets.json.JsonElementAsset;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
@@ -245,9 +244,6 @@ public class SwingSolaPlatform extends SolaPlatform {
     ));
     assetLoaderProvider.add(new SpriteSheetAssetLoader(
       jsonElementAssetAssetLoader, solaImageAssetLoader
-    ));
-    assetLoaderProvider.add(new ControlsConfigAssetLoader(
-      jsonElementAssetAssetLoader
     ));
   }
 

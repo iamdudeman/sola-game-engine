@@ -14,7 +14,6 @@ Comes with default configuration for built-in components and systems
 
 * assets tooling
     * maybe `audio` shows a little media player to preview it
-    * create and edit controls assets
     * create and edit materials
     * create and edit GUIs
         * maybe a WYSIWYG editor?
