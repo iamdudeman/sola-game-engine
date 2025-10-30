@@ -160,6 +160,16 @@ public class SwingSolaPlatform extends SolaPlatform {
     // not supported on Swing
   }
 
+  /**
+   * Not supported on Swing.
+   *
+   * @param visible whether the virtual keyboard should be visible or not
+   */
+  @Override
+  public void setVirtualKeyboardVisible(boolean visible) {
+    // not supported on Swing
+  }
+
   @Override
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     JFrame jFrame = new JFrame();

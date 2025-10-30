@@ -193,6 +193,15 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   }
 
   /**
+   * Sets the visibility of the virtual keyboard.
+   *
+   * @param visible whether the virtual keyboard should be visible or not
+   */
+  public void setVirtualKeyboardVisible(boolean visible) {
+    getGuiDocument().setVirtualKeyboardVisible(visible);
+  }
+
+  /**
    * @return true if the element is currently focusable
    */
   public boolean isFocusable() {

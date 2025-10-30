@@ -136,6 +136,15 @@ public class BrowserSolaPlatform extends SolaPlatform {
   }
 
   @Override
+  public void setVirtualKeyboardVisible(boolean visible) {
+    if (visible) {
+      JsKeyboardUtils.showVirtualKeyboard();
+    } else {
+      JsKeyboardUtils.hideVirtualKeyboard();
+    }
+  }
+
+  @Override
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     JsUtils.setTitle(solaConfiguration.title());
     JsCanvasUtils.canvasInit(JsCanvasUtils.ID_SOLA_ANCHOR, solaConfiguration.rendererWidth(), solaConfiguration.rendererHeight());

@@ -1,5 +1,11 @@
 # sola-game-engine TODO list
 
+implement the Android platform fully
+
+* ~~add the ability to platforms to "request keyboard" for things like TextInputGuiElement~~
+    * test on browser as well
+* keyboard input is not fully implemented
+    * AndroidSolaPlatform#mapKeyCode does not support all key codes!
 
 ## Known Bugs List
 
@@ -22,10 +28,6 @@
 
 ## TODO List
 
-* implement the Android platform fully
-    * add the ability to platforms to "request keyboard" for things like TextInputGuiElement
-    * keyboard input is not fully implemented
-        * AndroidSolaPlatform#mapKeyCode does not support all key codes!
 * Update examples to work off of mouse/touch only
     * cleanup logic in `ExampleLauncherSola#addReturnToLauncherKeyEvent`
 * Add convenient ability to change entity render order based on Y position (or some other condition other than layers)

@@ -132,6 +132,15 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
   }
 
   @Override
+  public void setVirtualKeyboardVisible(boolean visible) {
+    if (visible) {
+      hostActivity.showVirtualKeyboard();
+    } else {
+      hostActivity.hideVirtualKeyboard();
+    }
+  }
+
+  @Override
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     solaEventHub.add(GameLoopEvent.class, event -> {
       if (event.state() == GameLoopState.STOPPED) {

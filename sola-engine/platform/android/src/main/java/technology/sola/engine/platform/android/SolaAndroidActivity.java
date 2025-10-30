@@ -1,11 +1,13 @@
 package technology.sola.engine.platform.android;
 
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -115,6 +117,18 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
     platform.emitTouchEvent(event);
 
     return true;
+  }
+
+  void showVirtualKeyboard() {
+    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
+    inputMethodManager.showSoftInput(solaSurfaceView, InputMethodManager.SHOW_IMPLICIT);
+  }
+
+  void hideVirtualKeyboard() {
+    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
+    inputMethodManager.hideSoftInputFromWindow(solaSurfaceView.getWindowToken(), 0);
   }
 
   private void hideSystemUi() {
