@@ -45,7 +45,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
       }
 
       project.tasks.register("cleanDist") {
-        group = "distribution"
+        group = "sola"
 
         doFirst {
           delete("${project.rootDir}/dist")
@@ -55,7 +55,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
       project.tasks.named("clean").dependsOn("cleanDist")
 
       project.tasks.register("distFatJar", Jar::class) {
-        group = "distribution"
+        group = "sola"
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         archiveBaseName.set("${project.properties["gameName"]}-${project.name}${osClassifierWithDash}")
 
@@ -81,7 +81,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
       }
 
       project.tasks.register("distWinJPackage", Exec::class) {
-        group = "distribution"
+        group = "sola"
         dependsOn(tasks.named("prepareJPackage"), tasks.named("distFatJar"))
 
         executable("jpackage")
@@ -100,7 +100,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
       }
 
       project.tasks.register("distWinJPackageZip", Zip::class) {
-        group = "distribution"
+        group = "sola"
         destinationDirectory.set(file("${project.rootDir}/dist/${project.name}"))
         archiveBaseName.set("${project.properties["gameName"]}-${project.name}-win")
 

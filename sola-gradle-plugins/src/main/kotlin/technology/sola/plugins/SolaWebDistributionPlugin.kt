@@ -27,7 +27,7 @@ class SolaWebDistributionPlugin : Plugin<Project> {
       }
 
       project.tasks.register("cleanDist") {
-        group = "distribution"
+        group = "sola"
 
         doFirst {
           delete("${project.rootDir}/dist")
@@ -36,10 +36,10 @@ class SolaWebDistributionPlugin : Plugin<Project> {
 
       project.tasks.getByName("clean").dependsOn("cleanDist")
 
-      project.tasks.getByName("ciBuild").dependsOn("generateWebHtmlAndJs")
+      project.tasks.getByName("buildCi").dependsOn("buildWebHtmlAndJs")
 
-      project.tasks.register("generateWebHtmlAndJs", JavaExec::class.java) {
-        group = "build"
+      project.tasks.register("buildWebHtmlAndJs", JavaExec::class.java) {
+        group = "sola"
 
         dependsOn(project.tasks.getByPath("assemble"))
 
@@ -50,8 +50,8 @@ class SolaWebDistributionPlugin : Plugin<Project> {
         mainClass.set(generateFilesMainClass)
       }
 
-      project.tasks.register("generateDebugWebHtmlAndJs") {
-        group = "build"
+      project.tasks.register("buildDebugWebHtmlAndJs") {
+        group = "sola"
 
         doFirst {
           project.tasks.withType<JavaExec> {
@@ -59,15 +59,15 @@ class SolaWebDistributionPlugin : Plugin<Project> {
           }
         }
 
-        finalizedBy(project.tasks.getByPath("generateWebHtmlAndJs"))
+        finalizedBy(project.tasks.getByPath("buildWebHtmlAndJs"))
       }
 
       project.tasks.register("distWebZip", Zip::class.java) {
-        group = "distribution"
+        group = "sola"
         destinationDirectory.set(project.file("${project.rootDir}/dist/${project.name}"))
         archiveBaseName.set("${project.properties["gameName"]}-${project.name}")
 
-        dependsOn(project.tasks.getByName("generateWebHtmlAndJs"))
+        dependsOn(project.tasks.getByName("buildWebHtmlAndJs"))
 
         from("${project.rootDir}/assets") {
           into("assets")
@@ -77,7 +77,7 @@ class SolaWebDistributionPlugin : Plugin<Project> {
         from(layout.buildDirectory.file("sola.js"))
       }
 
-      project.tasks.getByName("assemble").finalizedBy(project.tasks.getByName("generateWebHtmlAndJs"))
+      project.tasks.getByName("assemble").finalizedBy(project.tasks.getByName("buildWebHtmlAndJs"))
     }
   }
 }

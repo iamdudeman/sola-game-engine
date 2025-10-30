@@ -24,7 +24,7 @@ publishing {
 }
 
 tasks.register("jmhBenchmark", JavaExec::class) {
-  group = "verification"
+  group = "sola"
   description = "Execute jmh benchmark comparisons"
   mainClass = "org.openjdk.jmh.Main"
 
