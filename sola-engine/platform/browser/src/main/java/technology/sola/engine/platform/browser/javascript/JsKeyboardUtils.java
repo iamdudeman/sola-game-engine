@@ -17,18 +17,6 @@ public class JsKeyboardUtils {
   public static native void init();
 
   /**
-   * Shows the virtual keyboard.
-   */
-  @JSBody(script = Scripts.SHOW_VIRTUAL_KEYBOARD)
-  public static native void showVirtualKeyboard();
-
-  /**
-   * Hides the virtual keyboard.
-   */
-  @JSBody(script = Scripts.HIDE_VIRTUAL_KEYBOARD)
-  public static native void hideVirtualKeyboard();
-
-  /**
    * Adds a keyboard event listener.
    *
    * @param eventName the event name
@@ -81,15 +69,6 @@ public class JsKeyboardUtils {
 
     private static final String KEY_EVENT = """
       window.keyboardListeners[eventName].push(callback);
-      """;
-
-    private static final String SHOW_VIRTUAL_KEYBOARD = """
-      navigator.virtualKeyboard.overlaysContent = true;
-      navigator.virtualKeyboard.show();
-      """;
-
-    private static final String HIDE_VIRTUAL_KEYBOARD = """
-      navigator.virtualKeyboard.hide();
       """;
   }
 }

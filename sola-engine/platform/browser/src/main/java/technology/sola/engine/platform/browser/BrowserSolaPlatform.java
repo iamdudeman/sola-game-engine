@@ -135,13 +135,14 @@ public class BrowserSolaPlatform extends SolaPlatform {
     });
   }
 
+  /**
+   * Not supported on browser.
+   *
+   * @param visible whether the virtual keyboard should be visible or not
+   */
   @Override
   public void setVirtualKeyboardVisible(boolean visible) {
-    if (visible) {
-      JsKeyboardUtils.showVirtualKeyboard();
-    } else {
-      JsKeyboardUtils.hideVirtualKeyboard();
-    }
+    // Not supported on browser
   }
 
   @Override
