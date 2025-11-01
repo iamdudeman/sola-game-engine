@@ -143,36 +143,24 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     });
   }
 
+  /**
+   * Not supported on JavaFx.
+   *
+   * @param touchEventConsumer the method called when a touch interaction takes place
+   */
   @Override
   public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
-    canvas.addEventHandler(javafx.scene.input.TouchEvent.ANY, touchEvent -> {
-      if (touchEvent.getEventType().equals(javafx.scene.input.TouchEvent.TOUCH_MOVED)) {
-        for (var touchPoint : touchEvent.getTouchPoints() ) {
-          PointerCoordinate adjusted = adjustPointerForViewport((int) touchPoint.getX(), (int) touchPoint.getY());
+    // Not supported on JavaFx
+  }
 
-          touchEventConsumer.accept(new TouchEvent(new Touch(
-            adjusted.x(), adjusted.y(), TouchPhase.MOVED, touchPoint.getId()
-          )));
-        }
-
-        return;
-      }
-
-      TouchPhase touchPhase = TouchPhase.STATIONARY;
-
-      if (touchEvent.getEventType().equals(javafx.scene.input.TouchEvent.TOUCH_PRESSED)) {
-        touchPhase = TouchPhase.BEGAN;
-      } else if (touchEvent.getEventType().equals(javafx.scene.input.TouchEvent.TOUCH_RELEASED)) {
-        touchPhase = TouchPhase.ENDED;
-      }
-
-      var touchPoint = touchEvent.getTouchPoint();
-      PointerCoordinate adjusted = adjustPointerForViewport((int) touchPoint.getX(), (int) touchPoint.getY());
-
-      touchEventConsumer.accept(new TouchEvent(new Touch(
-        adjusted.x(), adjusted.y(), touchPhase, touchPoint.getId()
-      )));
-    });
+  /**
+   * Not supported on JavaFx.
+   *
+   * @param visible whether the virtual keyboard should be visible or not
+   */
+  @Override
+  public void setVirtualKeyboardVisible(boolean visible) {
+    // Not supported on JavaFx
   }
 
   @Override

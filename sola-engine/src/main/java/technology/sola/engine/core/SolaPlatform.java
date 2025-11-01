@@ -148,6 +148,13 @@ public abstract class SolaPlatform {
   public abstract void onTouch(Consumer<TouchEvent> touchEventConsumer);
 
   /**
+   * Sets the visibility of the virtual keyboard.
+   *
+   * @param visible whether the virtual keyboard should be visible or not
+   */
+  public abstract void setVirtualKeyboardVisible(boolean visible);
+
+  /**
    * Method to initialize a {@link SolaPlatform}. This operation can be async. It will provide the configuration
    * from the {@link Sola#configuration )}.
    *

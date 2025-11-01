@@ -31,6 +31,9 @@ class SolaSurfaceView extends SurfaceView {
       ConstraintLayout.LayoutParams.MATCH_PARENT,
       ConstraintLayout.LayoutParams.MATCH_PARENT
     ));
+
+    setFocusable(true);
+    setFocusableInTouchMode(true);
   }
 
   @Override

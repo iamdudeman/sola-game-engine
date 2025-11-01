@@ -132,6 +132,15 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
   }
 
   @Override
+  public void setVirtualKeyboardVisible(boolean visible) {
+    if (visible) {
+      hostActivity.showVirtualKeyboard();
+    } else {
+      hostActivity.hideVirtualKeyboard();
+    }
+  }
+
+  @Override
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     solaEventHub.add(GameLoopEvent.class, event -> {
       if (event.state() == GameLoopState.STOPPED) {
@@ -314,7 +323,22 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
       return (androidKeyCode + 36);
     }
 
-    throw new UnsupportedOperationException("Unsupported Android key code: " + androidKeyCode);
+    return (switch (androidKeyCode) {
+      case android.view.KeyEvent.KEYCODE_SHIFT_LEFT, android.view.KeyEvent.KEYCODE_SHIFT_RIGHT -> Key.SHIFT;
+      case android.view.KeyEvent.KEYCODE_DEL -> Key.BACKSPACE;
+      case android.view.KeyEvent.KEYCODE_COMMA -> Key.COMMA;
+      case android.view.KeyEvent.KEYCODE_PERIOD -> Key.PERIOD;
+      case android.view.KeyEvent.KEYCODE_SEMICOLON -> Key.SEMI_COLON;
+      case android.view.KeyEvent.KEYCODE_APOSTROPHE -> Key.SINGLE_QUOTE;
+      case android.view.KeyEvent.KEYCODE_SLASH -> Key.FORWARD_SLASH;
+      case android.view.KeyEvent.KEYCODE_BACKSLASH -> Key.BACKSLASH;
+      case android.view.KeyEvent.KEYCODE_MINUS -> Key.HYPHEN;
+      case android.view.KeyEvent.KEYCODE_EQUALS -> Key.EQUALS;
+      default -> {
+        LOGGER.warning("Unsupported Android key code: %s", androidKeyCode);
+        yield Key.CONTROL; // todo temporary fallback
+      }
+    }).getCode();
   }
 
   private boolean isKnownUnsupportedKeyCode(int keyCode) {

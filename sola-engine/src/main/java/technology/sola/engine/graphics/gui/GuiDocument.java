@@ -123,6 +123,15 @@ public class GuiDocument {
   }
 
   /**
+   * Sets the visibility of the virtual keyboard.
+   *
+   * @param visible whether the virtual keyboard should be visible or not
+   */
+  public void setVirtualKeyboardVisible(boolean visible) {
+    platform.setVirtualKeyboardVisible(visible);
+  }
+
+  /**
    * Updates the GuiDocument's layout state. This is usually called via {@link GuiDocumentSystem} and should not be
    * called manually.
    */

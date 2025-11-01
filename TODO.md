@@ -1,6 +1,5 @@
 # sola-game-engine TODO list
 
-
 ## Known Bugs List
 
 *
@@ -22,10 +21,6 @@
 
 ## TODO List
 
-* implement the Android platform fully
-    * add the ability to platforms to "request keyboard" for things like TextInputGuiElement
-    * keyboard input is not fully implemented
-        * AndroidSolaPlatform#mapKeyCode does not support all key codes!
 * Update examples to work off of mouse/touch only
     * cleanup logic in `ExampleLauncherSola#addReturnToLauncherKeyEvent`
 * Add convenient ability to change entity render order based on Y position (or some other condition other than layers)
@@ -44,13 +39,13 @@
     * consider some sort of "swaying" for non-linear particles
     * consider ability to spawn particles in a radius away from center
         * probably want the ability to make particles go to and from center for this
+
+### Low priority (not ordered)
+
 * Consider adding rotation to TransformComponent
     * Would need to update rendering stuff
     * Would need to update physics stuff
         * Not just colliders, but also impulse collision resolution potentially
-
-### Low priority (not ordered)
-
 * Gui performance improvements
     * consider splitting layout and paint styles to prevent extra calculations
         * changing background color doesn't affect layout
@@ -110,5 +105,8 @@
     * Needs to be able to assign keyboard press callbacks
 * Camera
     * Possibly allow multiple cameras (think split screen games)
+* Android keyboard input is not fully implemented
+    * AndroidSolaPlatform#mapKeyCode does not support all key codes!
+* Browser platform `setVirtualKeyboardVisible` support would be nice to have
 
 -----------------------------------------------------------------------------------------------------------------------
