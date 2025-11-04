@@ -52,13 +52,13 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
   public void renderMethod(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
     SolaImage lightMapImage = prepareLightmap(renderer, world);
 
-    // Draw lightmap on top of everything else
+    // Draw the lightmap on top of everything else
     List<Layer> layers = renderer.getLayers();
 
     if (layers.isEmpty()) {
       drawLightmap(renderer, lightMapImage);
     } else {
-      // If there are layers ensure lighting is rendered in the last one
+      // If there are layers present, ensure lighting is rendered in the last one
       Layer lastLayer = layers.get(layers.size() - 1);
 
       lastLayer.add(r -> drawLightmap(r, lightMapImage), RenderOrders.SCREEN_SPACE_LIGHT_MAP);

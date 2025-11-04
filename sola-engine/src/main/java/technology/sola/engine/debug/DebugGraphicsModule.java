@@ -11,7 +11,6 @@ import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.event.FpsEvent;
 import technology.sola.engine.graphics.modules.RenderOrders;
-import technology.sola.engine.graphics.modules.ScreenSpaceLightMapGraphicsModule;
 import technology.sola.engine.graphics.modules.SolaEntityGraphicsModule;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Color;

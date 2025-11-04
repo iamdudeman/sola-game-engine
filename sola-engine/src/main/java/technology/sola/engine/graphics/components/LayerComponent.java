@@ -65,12 +65,22 @@ public class LayerComponent implements Component {
     this.order = order;
   }
 
-  public LayerComponent setOrderByVerticalPosition(boolean orderByVerticalPosition) {
-    isOrderByVerticalPosition = orderByVerticalPosition;
+  /**
+   * Sets whether this {@link technology.sola.ecs.Entity} should render based on its vertical position within the layer.
+   * This ignores the order that was set.
+   *
+   * @param isOrderByVerticalPosition whether to render within the layer based on the vertical position
+   * @return this
+   */
+  public LayerComponent setOrderByVerticalPosition(boolean isOrderByVerticalPosition) {
+    this.isOrderByVerticalPosition = isOrderByVerticalPosition;
 
     return this;
   }
 
+  /**
+   * @return whether to render within the layer based on the vertical position
+   */
   public boolean isOrderByVerticalPosition() {
     return isOrderByVerticalPosition;
   }
