@@ -10,6 +10,7 @@ import technology.sola.engine.assets.graphics.font.DefaultFont;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.core.event.FpsEvent;
+import technology.sola.engine.graphics.modules.RenderOrders;
 import technology.sola.engine.graphics.modules.ScreenSpaceLightMapGraphicsModule;
 import technology.sola.engine.graphics.modules.SolaEntityGraphicsModule;
 import technology.sola.engine.event.EventHub;
@@ -26,10 +27,6 @@ import technology.sola.math.linear.Matrix3D;
  */
 @NullMarked
 public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<ColliderComponent, TransformComponent>> {
-  /**
-   * The render order for the DebugEntityGraphicsModule.
-   */
-  public static final int ORDER = 999;
   /**
    * The {@link Key} that toggles broad phase debug rendering.
    */
@@ -84,7 +81,7 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
     } else {
       layers.get(layers.size() - 1).add(r -> {
         renderDebugInfo(r, world, cameraScaleTransform, cameraTranslationTransform);
-      }, ScreenSpaceLightMapGraphicsModule.ORDER + 1);
+      }, RenderOrders.DEBUG);
     }
   }
 
@@ -110,7 +107,7 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
 
   @Override
   public int getOrder() {
-    return ORDER;
+    return RenderOrders.DEBUG;
   }
 
   /**

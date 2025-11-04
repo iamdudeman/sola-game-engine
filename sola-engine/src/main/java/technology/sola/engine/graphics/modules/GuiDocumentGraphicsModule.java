@@ -12,10 +12,6 @@ import technology.sola.math.linear.Matrix3D;
  */
 @NullMarked
 public class GuiDocumentGraphicsModule extends SolaGraphicsModule {
-  /**
-   * The render order for this graphics module.
-   */
-  public static final int ORDER = 10;
   private final GuiDocument guiDocument;
 
   /**
@@ -34,12 +30,12 @@ public class GuiDocumentGraphicsModule extends SolaGraphicsModule {
     if (layers.isEmpty()) {
       guiDocument.render(renderer);
     } else {
-      layers.get(layers.size() - 1).add(guiDocument::render, ScreenSpaceLightMapGraphicsModule.ORDER + 1);
+      layers.get(layers.size() - 1).add(guiDocument::render, RenderOrders.GUI);
     }
   }
 
   @Override
   public int getOrder() {
-    return ORDER;
+    return RenderOrders.GUI;
   }
 }

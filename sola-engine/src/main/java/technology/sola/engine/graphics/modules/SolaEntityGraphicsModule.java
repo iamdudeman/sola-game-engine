@@ -10,6 +10,7 @@ import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.math.SolaMath;
 import technology.sola.math.linear.Matrix3D;
 import technology.sola.math.linear.Vector2D;
 
@@ -65,9 +66,13 @@ public abstract class SolaEntityGraphicsModule<V extends ViewEntry> extends Sola
       if (layerComponent == null) {
         renderEntityWithTransform(renderer, entry, cameraScaleTransform, cameraTranslationTransform);
       } else {
+        int order = layerComponent.isOrderByVerticalPosition()
+          ? SolaMath.fastRound(entry.entity().getComponent(TransformComponent.class).getY())
+          : layerComponent.getOrder();
+
         renderer.drawToLayer(
           layerComponent.getLayer(),
-          layerComponent.getOrder(),
+          order,
           r2 -> renderEntityWithTransform(r2, entry, cameraScaleTransform, cameraTranslationTransform)
         );
       }

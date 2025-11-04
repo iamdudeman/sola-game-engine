@@ -58,7 +58,7 @@ public abstract class SolaGraphicsModule implements Comparable<SolaGraphicsModul
    * @return the order of this graphics module
    */
   public int getOrder() {
-    return 0;
+    return RenderOrders.DEFAULT;
   }
 
   @Override
