@@ -125,15 +125,23 @@ implements technology.sola.ecs.Component</span></div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrder()" class="member-name-link">getOrder</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setLayer(java.lang.String)" class="member-name-link">setLayer</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;layer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isOrderByVerticalPosition()" class="member-name-link">isOrderByVerticalPosition</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setLayer(java.lang.String)" class="member-name-link">setLayer</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;layer)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Updates the layer.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOrder(int)" class="member-name-link">setOrder</a><wbr>(int&nbsp;order)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOrder(int)" class="member-name-link">setOrder</a><wbr>(int&nbsp;order)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Updates the order in the layer.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="LayerComponent.html" title="class in technology.sola.engine.graphics.components">LayerComponent</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOrderByVerticalPosition(boolean)" class="member-name-link">setOrderByVerticalPosition</a><wbr>(boolean&nbsp;isOrderByVerticalPosition)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets whether this <code>Entity</code> should render based on its vertical position within the layer.</div>
 </div>
 </div>
 </div>
@@ -226,6 +234,30 @@ implements technology.sola.ecs.Component</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>order</code> - the new order</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setOrderByVerticalPosition(boolean)">
+<h3>setOrderByVerticalPosition</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="LayerComponent.html" title="class in technology.sola.engine.graphics.components">LayerComponent</a></span>&nbsp;<span class="element-name">setOrderByVerticalPosition</span><wbr><span class="parameters">(boolean&nbsp;isOrderByVerticalPosition)</span></div>
+<div class="block">Sets whether this <code>Entity</code> should render based on its vertical position within the layer.
+ This ignores the order that was set.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>isOrderByVerticalPosition</code> - whether to render within the layer based on the vertical position</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isOrderByVerticalPosition()">
+<h3>isOrderByVerticalPosition</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isOrderByVerticalPosition</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>whether to render within the layer based on the vertical position</dd>
 </dl>
 </section>
 </li>

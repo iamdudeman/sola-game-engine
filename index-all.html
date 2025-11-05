@@ -292,7 +292,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">AudioClip defines the api for audio <a href="technology.sola.engine/technology/sola/engine/assets/Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a>s.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/utils/ColliderUtils.html#autoSizeColliderToSprite(technology.sola.ecs.Entity,technology.sola.engine.assets.AssetLoader)" class="member-name-link">autoSizeColliderToSprite(Entity, AssetLoader&lt;SpriteSheet&gt;)</a> - Static method in class technology.sola.engine.physics.utils.<a href="technology.sola.engine/technology/sola/engine/physics/utils/ColliderUtils.html" title="class in technology.sola.engine.physics.utils">ColliderUtils</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/utils/ColliderUtils.html#autoSizeColliderToSprite(technology.sola.ecs.Entity,technology.sola.engine.assets.graphics.spritesheet.SpriteSheet)" class="member-name-link">autoSizeColliderToSprite(Entity, SpriteSheet)</a> - Static method in class technology.sola.engine.physics.utils.<a href="technology.sola.engine/technology/sola/engine/physics/utils/ColliderUtils.html" title="class in technology.sola.engine.physics.utils">ColliderUtils</a></dt>
 <dd>
 <div class="block">Auto sizes an <code>Entity</code>'s <a href="technology.sola.engine/technology/sola/engine/physics/component/ColliderComponent.html" title="class in technology.sola.engine.physics.component"><code>ColliderComponent</code></a> using its <a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteComponent.html" title="class in technology.sola.engine.graphics.components"><code>SpriteComponent</code></a>.</div>
 </dd>
@@ -1044,6 +1044,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Color constant - rgb(169, 169, 169).</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/RenderOrders.html#DEBUG" class="member-name-link">DEBUG</a> - Static variable in class technology.sola.engine.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/graphics/modules/RenderOrders.html" title="class in technology.sola.engine.graphics.modules">RenderOrders</a></dt>
+<dd>
+<div class="block">The render order for <a href="technology.sola.engine/technology/sola/engine/debug/DebugGraphicsModule.html" title="class in technology.sola.engine.debug"><code>DebugGraphicsModule</code></a>.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/debug/DebugControlSystem.html" class="type-name-link" title="class in technology.sola.engine.debug">DebugControlSystem</a> - Class in <a href="technology.sola.engine/technology/sola/engine/debug/package-summary.html">technology.sola.engine.debug</a></dt>
 <dd>
 <div class="block">DebugControlSystem is an <code>EcsSystem</code> that handles updating the debug state of <a href="technology.sola.engine/technology/sola/engine/debug/DebugGraphicsModule.html" title="class in technology.sola.engine.debug"><code>DebugGraphicsModule</code></a>.</div>
@@ -1083,6 +1087,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketMessageDecoder.html#decodeForWeb(java.io.BufferedInputStream)" class="member-name-link">decodeForWeb(BufferedInputStream)</a> - Method in class technology.sola.engine.networking.socket.<a href="technology.sola.engine/technology/sola/engine/networking/socket/SocketMessageDecoder.html" title="class in technology.sola.engine.networking.socket">SocketMessageDecoder</a></dt>
 <dd>
 <div class="block">Decodes a web socket encoded message from the client.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/RenderOrders.html#DEFAULT" class="member-name-link">DEFAULT</a> - Static variable in class technology.sola.engine.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/graphics/modules/RenderOrders.html" title="class in technology.sola.engine.graphics.modules">RenderOrders</a></dt>
+<dd>
+<div class="block">The default render order for <a href="technology.sola.engine/technology/sola/engine/graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.graphics.modules"><code>SolaGraphicsModule</code></a>s.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/logging/SolaLoggerFactory.html#DEFAULT_LOG_FILE" class="member-name-link">DEFAULT_LOG_FILE</a> - Static variable in interface technology.sola.logging.<a href="technology.sola.engine/technology/sola/logging/SolaLoggerFactory.html" title="interface in technology.sola.logging">SolaLoggerFactory</a></dt>
 <dd>
@@ -2422,6 +2430,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates a grey scale Color using this Color as the base.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/RenderOrders.html#GUI" class="member-name-link">GUI</a> - Static variable in class technology.sola.engine.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/graphics/modules/RenderOrders.html" title="class in technology.sola.engine.graphics.modules">RenderOrders</a></dt>
+<dd>
+<div class="block">The render order for <a href="technology.sola.engine/technology/sola/engine/graphics/modules/GuiDocumentGraphicsModule.html" title="class in technology.sola.engine.graphics.modules"><code>GuiDocumentGraphicsModule</code></a>.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/SolaGraphics.html#guiDocument()" class="member-name-link">guiDocument()</a> - Method in class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/SolaGraphics.html" title="class in technology.sola.engine.graphics">SolaGraphics</a></dt>
 <dd>
 <div class="block">The <a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiDocument.html" title="class in technology.sola.engine.graphics.gui"><code>GuiDocument</code></a> instance for this Sola.</div>
@@ -3081,6 +3093,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Checks if a <a href="technology.sola.engine/technology/sola/engine/input/MouseButton.html" title="enum class in technology.sola.engine.input"><code>MouseButton</code></a> is pressed or not.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html#isOrderByVerticalPosition()" class="member-name-link">isOrderByVerticalPosition()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html" title="class in technology.sola.engine.graphics.components">LayerComponent</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html#isPaused()" class="member-name-link">isPaused()</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html" title="class in technology.sola.engine.core">GameLoop</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/property/StyleValue.html#isPercentage()" class="member-name-link">isPercentage()</a> - Method in class technology.sola.engine.graphics.gui.style.property.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/property/StyleValue.html" title="class in technology.sola.engine.graphics.gui.style.property">StyleValue</a></dt>
@@ -3967,21 +3981,9 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Color constant - rgb(255, 165, 0).</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/debug/DebugGraphicsModule.html#ORDER" class="member-name-link">ORDER</a> - Static variable in class technology.sola.engine.debug.<a href="technology.sola.engine/technology/sola/engine/debug/DebugGraphicsModule.html" title="class in technology.sola.engine.debug">DebugGraphicsModule</a></dt>
-<dd>
-<div class="block">The render order for the DebugEntityGraphicsModule.</div>
-</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiDocumentSystem.html#ORDER" class="member-name-link">ORDER</a> - Static variable in class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiDocumentSystem.html" title="class in technology.sola.engine.graphics.gui">GuiDocumentSystem</a></dt>
 <dd>
 <div class="block">The order of the system.</div>
-</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/GuiDocumentGraphicsModule.html#ORDER" class="member-name-link">ORDER</a> - Static variable in class technology.sola.engine.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/graphics/modules/GuiDocumentGraphicsModule.html" title="class in technology.sola.engine.graphics.modules">GuiDocumentGraphicsModule</a></dt>
-<dd>
-<div class="block">The render order for this graphics module.</div>
-</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/ScreenSpaceLightMapGraphicsModule.html#ORDER" class="member-name-link">ORDER</a> - Static variable in class technology.sola.engine.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/graphics/modules/ScreenSpaceLightMapGraphicsModule.html" title="class in technology.sola.engine.graphics.modules">ScreenSpaceLightMapGraphicsModule</a></dt>
-<dd>
-<div class="block">The render order for this graphics module.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/system/CollisionDetectionSystem.html#ORDER" class="member-name-link">ORDER</a> - Static variable in class technology.sola.engine.physics.system.<a href="technology.sola.engine/technology/sola/engine/physics/system/CollisionDetectionSystem.html" title="class in technology.sola.engine.physics.system">CollisionDetectionSystem</a></dt>
 <dd>
@@ -4541,6 +4543,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">The specific render method for a graphics module that is called once per frame if active.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/RenderOrders.html" class="type-name-link" title="class in technology.sola.engine.graphics.modules">RenderOrders</a> - Class in <a href="technology.sola.engine/technology/sola/engine/graphics/modules/package-summary.html">technology.sola.engine.graphics.modules</a></dt>
+<dd>
+<div class="block">Contains render order constants for <a href="technology.sola.engine/technology/sola/engine/graphics/modules/SolaGraphicsModule.html" title="class in technology.sola.engine.graphics.modules"><code>SolaGraphicsModule</code></a>s.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/networking/rest/JavaRestClient.html#request(java.lang.String,java.lang.String,technology.sola.json.JsonElement,java.util.function.Consumer)" class="member-name-link">request(String, String, JsonElement, Consumer&lt;HttpResponse&gt;)</a> - Method in class technology.sola.engine.networking.rest.<a href="technology.sola.engine/technology/sola/engine/networking/rest/JavaRestClient.html" title="class in technology.sola.engine.networking.rest">JavaRestClient</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/networking/rest/RestClient.html#request(java.lang.String,java.lang.String,technology.sola.json.JsonElement,java.util.function.Consumer)" class="member-name-link">request(String, String, JsonElement, Consumer&lt;HttpResponse&gt;)</a> - Method in interface technology.sola.engine.networking.rest.<a href="technology.sola.engine/technology/sola/engine/networking/rest/RestClient.html" title="interface in technology.sola.engine.networking.rest">RestClient</a></dt>
@@ -4659,6 +4665,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/math/linear/Matrix3D.html#scale(float,float)" class="member-name-link">scale(float, float)</a> - Static method in class technology.sola.math.linear.<a href="technology.sola.engine/technology/sola/math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a></dt>
 <dd>
 <div class="block">Creates a new scale matrix for the desired x-axis and y-axis values.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/RenderOrders.html#SCREEN_SPACE_LIGHT_MAP" class="member-name-link">SCREEN_SPACE_LIGHT_MAP</a> - Static variable in class technology.sola.engine.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/graphics/modules/RenderOrders.html" title="class in technology.sola.engine.graphics.modules">RenderOrders</a></dt>
+<dd>
+<div class="block">The render order for <a href="technology.sola.engine/technology/sola/engine/graphics/modules/ScreenSpaceLightMapGraphicsModule.html" title="class in technology.sola.engine.graphics.modules"><code>ScreenSpaceLightMapGraphicsModule</code></a>.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/ScreenSpaceLightMapGraphicsModule.html" class="type-name-link" title="class in technology.sola.engine.graphics.modules">ScreenSpaceLightMapGraphicsModule</a> - Class in <a href="technology.sola.engine/technology/sola/engine/graphics/modules/package-summary.html">technology.sola.engine.graphics.modules</a></dt>
 <dd>
@@ -4957,6 +4967,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html#setOrder(int)" class="member-name-link">setOrder(int)</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html" title="class in technology.sola.engine.graphics.components">LayerComponent</a></dt>
 <dd>
 <div class="block">Updates the order in the layer.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html#setOrderByVerticalPosition(boolean)" class="member-name-link">setOrderByVerticalPosition(boolean)</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/LayerComponent.html" title="class in technology.sola.engine.graphics.components">LayerComponent</a></dt>
+<dd>
+<div class="block">Sets whether this <code>Entity</code> should render based on its vertical position within the layer.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/BaseStyles.Builder.html#setPadding(java.lang.Integer)" class="member-name-link">setPadding(Integer)</a> - Method in class technology.sola.engine.graphics.gui.style.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/BaseStyles.Builder.html" title="class in technology.sola.engine.graphics.gui.style">BaseStyles.Builder</a></dt>
 <dd>
