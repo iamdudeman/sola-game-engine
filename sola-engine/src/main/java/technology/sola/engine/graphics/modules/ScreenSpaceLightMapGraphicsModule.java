@@ -21,10 +21,6 @@ import java.util.List;
  */
 @NullMarked
 public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
-  /**
-   * The render order for this graphics module.
-   */
-  public static final int ORDER = 99;
   private Color ambientColor;
 
   /**
@@ -56,22 +52,22 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
   public void renderMethod(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
     SolaImage lightMapImage = prepareLightmap(renderer, world);
 
-    // Draw lightmap on top of everything else
+    // Draw the lightmap on top of everything else
     List<Layer> layers = renderer.getLayers();
 
     if (layers.isEmpty()) {
       drawLightmap(renderer, lightMapImage);
     } else {
-      // If there are layers ensure lighting is rendered in the last one
+      // If there are layers present, ensure lighting is rendered in the last one
       Layer lastLayer = layers.get(layers.size() - 1);
 
-      lastLayer.add(r -> drawLightmap(r, lightMapImage), ORDER);
+      lastLayer.add(r -> drawLightmap(r, lightMapImage), RenderOrders.SCREEN_SPACE_LIGHT_MAP);
     }
   }
 
   @Override
   public int getOrder() {
-    return ORDER;
+    return RenderOrders.SCREEN_SPACE_LIGHT_MAP;
   }
 
   private void drawLightmap(Renderer renderer, SolaImage lightMapImage) {
