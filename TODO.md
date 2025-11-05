@@ -23,9 +23,6 @@
 
 * Update examples to work off of mouse/touch only
     * cleanup logic in `ExampleLauncherSola#addReturnToLauncherKeyEvent`
-* research possible benefits of updating to Java 21
-    * teavm 0.9.0 has support now
-    * teavm 0.13 has support for Java 25 now!
 * Support .mp3 audio files for all platforms
 * File Storage API
     * Load and save JSON content (maybe other content too)
@@ -42,6 +39,12 @@
 
 ### Low priority (not ordered)
 
+* research possible benefits of updating to Java 21
+    * teavm 0.9.0 has support now
+    * Android does not have support yet
+* research possible benefits of updating to Java 25
+    * teavm 0.13 has support now
+    * Android does not have support yet
 * Consider adding rotation to TransformComponent
     * Would need to update rendering stuff
     * Would need to update physics stuff
