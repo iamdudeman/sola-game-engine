@@ -46,7 +46,7 @@ public class AndroidAudioClipAssetLoader extends AssetLoader<AudioClip> {
         mediaPlayer.setDataSource(assetFileDescriptor);
         mediaPlayer.prepare();
 
-        audioClipAssetHandle.setAsset(new AndroidWavAudioClip(mediaPlayer));
+        audioClipAssetHandle.setAsset(new AndroidAudioClip(mediaPlayer));
       } catch (IOException ex) {
         throw new AudioClipException("Could not create AudioClip: " + ex.getMessage());
       }
