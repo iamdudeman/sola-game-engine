@@ -26,7 +26,7 @@ public interface AudioClip extends Asset {
   void play();
 
   /**
-   * Pauses playback. AudioClip will resume where it was paused when play is called next.
+   * Pause playback. AudioClip will resume where it was paused when "play" is called next.
    */
   void pause();
 
@@ -44,19 +44,19 @@ public interface AudioClip extends Asset {
 
   /**
    * Continues playing the AudioClip for a number of times or until pause or stop is called.
-   * If times is set to {@link AudioClip#CONTINUOUS_LOOPING} it will play until pause or stop is called.
+   * If {@link AudioClip#CONTINUOUS_LOOPING} is used for the loop count it will play until pause or stop is called.
    *
    * @param times how many times the AudioClip should loop
    */
   void loop(int times);
 
   /**
-   * @return volume where 0 is silent and 1 is full volume
+   * @return volume where 0 is silent and 1 is at full volume
    */
   float getVolume();
 
   /**
-   * Sets the volume where 0 is silent and 1 is full volume.
+   * Sets the volume where 0 is silent and 1 is at full volume.
    *
    * @param volume the new volume
    */

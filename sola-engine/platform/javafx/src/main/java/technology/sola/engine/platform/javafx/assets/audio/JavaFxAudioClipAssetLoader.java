@@ -3,9 +3,10 @@ package technology.sola.engine.platform.javafx.assets.audio;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
+import technology.sola.engine.assets.AssetUtils;
 import technology.sola.engine.assets.audio.AudioClip;
+import technology.sola.engine.assets.audio.AudioClipException;
 import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
-import technology.sola.engine.platform.javafx.assets.exception.AudioClipException;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -25,7 +26,7 @@ public class JavaFxAudioClipAssetLoader extends AssetLoader<AudioClip> {
 
   @Override
   protected AssetHandle<AudioClip> loadAsset(String path) {
-    String fileExtension = JavaFxPathUtils.getExtension(path);
+    String fileExtension = AssetUtils.getExtension(path);
 
     if (".wav".equals(fileExtension)) {
       AssetHandle<AudioClip> audioClipAssetHandle = new AssetHandle<>();

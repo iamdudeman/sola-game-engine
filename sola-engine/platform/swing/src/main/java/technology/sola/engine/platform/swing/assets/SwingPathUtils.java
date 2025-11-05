@@ -44,16 +44,6 @@ public class SwingPathUtils {
     return contents;
   }
 
-  /**
-   * Gets the extension for a path.
-   *
-   * @param path the path to get the extension for
-   * @return the extension
-   */
-  public static String getExtension(String path) {
-    return path.substring(path.lastIndexOf('.')).toLowerCase();
-  }
-
   private SwingPathUtils() {
   }
 }

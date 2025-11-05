@@ -5,7 +5,9 @@ import android.media.MediaPlayer;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
+import technology.sola.engine.assets.AssetUtils;
 import technology.sola.engine.assets.audio.AudioClip;
+import technology.sola.engine.assets.audio.AudioClipException;
 import technology.sola.engine.platform.android.assets.AndroidAssetUtils;
 
 import java.io.IOException;
@@ -33,7 +35,7 @@ public class AndroidAudioClipAssetLoader extends AssetLoader<AudioClip> {
 
   @Override
   protected AssetHandle<AudioClip> loadAsset(String path) {
-    var extension = AndroidAssetUtils.getFileExtension(path);
+    var extension = AssetUtils.getExtension(path);
 
     if (".wav".equals(extension)) {
       AssetHandle<AudioClip> audioClipAssetHandle = new AssetHandle<>();

@@ -3,9 +3,10 @@ package technology.sola.engine.platform.swing.assets.audio;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetHandle;
 import technology.sola.engine.assets.AssetLoader;
+import technology.sola.engine.assets.AssetUtils;
 import technology.sola.engine.assets.audio.AudioClip;
+import technology.sola.engine.assets.audio.AudioClipException;
 import technology.sola.engine.platform.swing.assets.SwingPathUtils;
-import technology.sola.engine.platform.swing.assets.exception.AudioClipException;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -25,7 +26,7 @@ public class SwingAudioClipAssetLoader extends AssetLoader<AudioClip> {
 
   @Override
   protected AssetHandle<AudioClip> loadAsset(String path) {
-    String fileExtension = SwingPathUtils.getExtension(path);
+    String fileExtension = AssetUtils.getExtension(path);
 
     if (".wav".equals(fileExtension)) {
       AssetHandle<AudioClip> audioClipAssetHandle = new AssetHandle<>();

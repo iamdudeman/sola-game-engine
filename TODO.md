@@ -1,5 +1,11 @@
 # sola-game-engine TODO list
 
+* Support .mp3 audio files for all platforms
+    * ~~browser~~
+    * android
+    * javafx
+    * swing
+
 ## Known Bugs List
 
 *
@@ -23,7 +29,6 @@
 
 * Update examples to work off of mouse/touch only
     * cleanup logic in `ExampleLauncherSola#addReturnToLauncherKeyEvent`
-* Support .mp3 audio files for all platforms
 * File Storage API
     * Load and save JSON content (maybe other content too)
     * Browser implementation could open file dialog
@@ -39,6 +44,7 @@
 
 ### Low priority (not ordered)
 
+* ability to render ellipse (and collisions for ellipse)
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
     * Android does not have support yet
