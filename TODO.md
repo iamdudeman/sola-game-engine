@@ -1,7 +1,5 @@
 # sola-game-engine TODO list
 
-* Add convenient ability to change entity render order based on Y position (or some other condition other than layers)
-
 ## Known Bugs List
 
 *

@@ -30,7 +30,6 @@ import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
 import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.engine.physics.utils.ColliderUtils;
-import technology.sola.engine.physics.utils.CollisionUtils;
 import technology.sola.engine.utils.SolaRandom;
 import technology.sola.math.linear.Vector2D;
 
@@ -82,7 +81,7 @@ public class LightingExample extends Sola {
     assetLoaderProvider.get(SpriteSheet.class)
       .getNewAsset("forest", "assets/sprites/forest.sprites.json")
       .executeWhenLoaded(spriteSheet -> {
-        ColliderUtils.autoSizeColliderToSprite(solaEcs.getWorld().findEntityByName("player"), assetLoaderProvider.get(SpriteSheet.class));
+        ColliderUtils.autoSizeColliderToSprite(solaEcs.getWorld().findEntityByName("player"), spriteSheet);
 
         completeAsyncInit.run();
       });
