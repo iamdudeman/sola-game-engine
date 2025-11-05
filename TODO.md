@@ -25,6 +25,7 @@
     * cleanup logic in `ExampleLauncherSola#addReturnToLauncherKeyEvent`
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
+    * teavm 0.13 has support for Java 25 now!
 * Support .mp3 audio files for all platforms
 * File Storage API
     * Load and save JSON content (maybe other content too)
