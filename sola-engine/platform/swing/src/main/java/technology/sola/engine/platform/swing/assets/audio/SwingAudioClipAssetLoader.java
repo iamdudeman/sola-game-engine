@@ -32,7 +32,7 @@ public class SwingAudioClipAssetLoader extends AssetLoader<AudioClip> {
 
     new Thread(() -> {
       try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(SwingPathUtils.asUrl(path))) {
-        audioClipAssetHandle.setAsset(new WavAudioClip(AudioSystem.getClip(), audioInputStream));
+        audioClipAssetHandle.setAsset(new SwingWavAudioClip(AudioSystem.getClip(), audioInputStream));
       } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
         throw new AudioClipException("Could not create AudioClip: " + ex.getMessage());
       }
