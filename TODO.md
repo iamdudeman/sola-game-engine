@@ -1,11 +1,5 @@
 # sola-game-engine TODO list
 
-* Support .mp3 audio files for all platforms
-    * ~~browser~~
-    * ~~android~~
-    * ~~javafx~~
-    * swing
-
 ## Known Bugs List
 
 *
@@ -46,6 +40,7 @@
 
 ### Low priority (not ordered)
 
+* support mp3 on `SwingSolaPlatform`
 * ability to render ellipse (and collisions for ellipse)
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now

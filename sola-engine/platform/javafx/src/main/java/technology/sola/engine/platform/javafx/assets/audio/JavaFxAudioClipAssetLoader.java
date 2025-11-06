@@ -23,9 +23,7 @@ public class JavaFxAudioClipAssetLoader extends AssetLoader<AudioClip> {
 
   @Override
   protected AssetHandle<AudioClip> loadAsset(String path) {
-    var extension = AssetExtension.fromPath(path);
-
-    AssetExtension.assertExtension(extension, AssetExtension.MP3, AssetExtension.WAV);
+    AssetExtension.assertPathExtension(path, AssetExtension.MP3, AssetExtension.WAV);
 
     AssetHandle<AudioClip> audioClipAssetHandle = new AssetHandle<>();
 

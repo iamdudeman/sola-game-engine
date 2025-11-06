@@ -26,7 +26,7 @@ public class SwingAudioClipAssetLoader extends AssetLoader<AudioClip> {
 
   @Override
   protected AssetHandle<AudioClip> loadAsset(String path) {
-    AssetExtension.assertPathExtension(path, AssetExtension.MP3, AssetExtension.WAV);
+    AssetExtension.assertPathExtension(path, AssetExtension.WAV);
 
     AssetHandle<AudioClip> audioClipAssetHandle = new AssetHandle<>();
 

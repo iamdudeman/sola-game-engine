@@ -81,6 +81,10 @@ public enum AssetExtension {
       .map(assetExtension -> assetExtension.extension)
       .collect(Collectors.joining(", "));
 
+    if (allowedExtensions.length() == 1) {
+      throw new IllegalArgumentException("File extension must be " + allowedExtensions);
+    }
+
     throw new IllegalArgumentException("File extension must be one of: " + allowedExtensions);
   }
 }
