@@ -141,7 +141,7 @@ extends <a href="../Asset.html" title="interface in technology.sola.engine.asset
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#pause()" class="member-name-link">pause</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Pauses playback.</div>
+<div class="block">Pause playback.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#play()" class="member-name-link">play</a>()</code></div>
@@ -151,7 +151,7 @@ extends <a href="../Asset.html" title="interface in technology.sola.engine.asset
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setVolume(float)" class="member-name-link">setVolume</a><wbr>(float&nbsp;volume)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Sets the volume where 0 is silent and 1 is full volume.</div>
+<div class="block">Sets the volume where 0 is silent and 1 is at full volume.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#stop()" class="member-name-link">stop</a>()</code></div>
@@ -216,7 +216,7 @@ extends <a href="../Asset.html" title="interface in technology.sola.engine.asset
 <section class="detail" id="pause()">
 <h3>pause</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">pause</span>()</div>
-<div class="block">Pauses playback. AudioClip will resume where it was paused when play is called next.</div>
+<div class="block">Pause playback. AudioClip will resume where it was paused when "play" is called next.</div>
 </section>
 </li>
 <li>
@@ -238,7 +238,7 @@ extends <a href="../Asset.html" title="interface in technology.sola.engine.asset
 <h3>loop</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">loop</span><wbr><span class="parameters">(int&nbsp;times)</span></div>
 <div class="block">Continues playing the AudioClip for a number of times or until pause or stop is called.
- If times is set to <a href="#CONTINUOUS_LOOPING"><code>CONTINUOUS_LOOPING</code></a> it will play until pause or stop is called.</div>
+ If <a href="#CONTINUOUS_LOOPING"><code>CONTINUOUS_LOOPING</code></a> is used for the loop count it will play until pause or stop is called.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>times</code> - how many times the AudioClip should loop</dd>
@@ -251,7 +251,7 @@ extends <a href="../Asset.html" title="interface in technology.sola.engine.asset
 <div class="member-signature"><span class="return-type">float</span>&nbsp;<span class="element-name">getVolume</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>volume where 0 is silent and 1 is full volume</dd>
+<dd>volume where 0 is silent and 1 is at full volume</dd>
 </dl>
 </section>
 </li>
@@ -259,7 +259,7 @@ extends <a href="../Asset.html" title="interface in technology.sola.engine.asset
 <section class="detail" id="setVolume(float)">
 <h3>setVolume</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">setVolume</span><wbr><span class="parameters">(float&nbsp;volume)</span></div>
-<div class="block">Sets the volume where 0 is silent and 1 is full volume.</div>
+<div class="block">Sets the volume where 0 is silent and 1 is at full volume.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>volume</code> - the new volume</dd>
