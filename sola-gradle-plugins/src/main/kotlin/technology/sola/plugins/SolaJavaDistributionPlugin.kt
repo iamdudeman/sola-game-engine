@@ -33,6 +33,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
       if (solaJavaDistributionPluginExtension.useJavaFx == true) {
         project.dependencies.add("runtimeOnly", "org.openjfx:javafx-base:${project.properties["javaFxVersion"]}:${osClassifier}")
         project.dependencies.add("runtimeOnly", "org.openjfx:javafx-controls:${project.properties["javaFxVersion"]}:${osClassifier}")
+        project.dependencies.add("runtimeOnly", "org.openjfx:javafx-media:${project.properties["javaFxVersion"]}:${osClassifier}")
         project.dependencies.add("runtimeOnly", "org.openjfx:javafx-graphics:${project.properties["javaFxVersion"]}:${osClassifier}")
       }
 

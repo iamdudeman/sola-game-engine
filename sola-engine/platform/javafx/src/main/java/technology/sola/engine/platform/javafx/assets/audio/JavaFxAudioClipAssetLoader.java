@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.javafx.assets.audio;
 
+import javafx.scene.media.Media;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetExtension;
 import technology.sola.engine.assets.AssetHandle;
@@ -8,10 +9,6 @@ import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.assets.audio.AudioClipException;
 import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
 /**
@@ -26,14 +23,18 @@ public class JavaFxAudioClipAssetLoader extends AssetLoader<AudioClip> {
 
   @Override
   protected AssetHandle<AudioClip> loadAsset(String path) {
-    AssetExtension.assertPathExtension(path, AssetExtension.MP3, AssetExtension.WAV);
+    var extension = AssetExtension.fromPath(path);
+
+    AssetExtension.assertExtension(extension, AssetExtension.MP3, AssetExtension.WAV);
 
     AssetHandle<AudioClip> audioClipAssetHandle = new AssetHandle<>();
 
     new Thread(() -> {
-      try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(JavaFxPathUtils.asUrl(path))) {
-        audioClipAssetHandle.setAsset(new JavaFxWavAudioClip(AudioSystem.getClip(), audioInputStream));
-      } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+      try {
+        Media media = new Media(JavaFxPathUtils.asUrl(path).toString());
+
+        audioClipAssetHandle.setAsset(new JavaFxAudioClip(media));
+      } catch (IOException ex) {
         throw new AudioClipException("Could not create AudioClip: " + ex.getMessage());
       }
     }).start();

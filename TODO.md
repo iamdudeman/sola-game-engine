@@ -3,7 +3,7 @@
 * Support .mp3 audio files for all platforms
     * ~~browser~~
     * ~~android~~
-    * javafx
+    * ~~javafx~~
     * swing
 
 ## Known Bugs List

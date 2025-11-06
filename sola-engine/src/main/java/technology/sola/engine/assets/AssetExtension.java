@@ -61,8 +61,16 @@ public enum AssetExtension {
    * @param assetExtensions the valid assetExtensions for the file
    */
   public static void assertPathExtension(String path, AssetExtension... assetExtensions) {
-    var extension = fromPath(path);
+    assertExtension(fromPath(path), assetExtensions);
+  }
 
+  /**
+   * Asserts that a file has a given extension.
+   *
+   * @param extension            the extension to test
+   * @param assetExtensions the valid assetExtensions for the file
+   */
+  public static void assertExtension(AssetExtension extension, AssetExtension... assetExtensions) {
     for (var assetExtension : assetExtensions) {
       if (extension == assetExtension) {
         return;

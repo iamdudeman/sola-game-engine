@@ -4,6 +4,7 @@
 module technology.sola.engine.platform.javafx {
   requires java.desktop;
   requires javafx.controls;
+  requires javafx.media;
   requires transitive technology.sola.engine;
 
   exports technology.sola.engine.platform.javafx;
