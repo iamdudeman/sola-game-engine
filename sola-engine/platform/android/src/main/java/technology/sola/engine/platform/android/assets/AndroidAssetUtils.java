@@ -16,14 +16,4 @@ public class AndroidAssetUtils {
   public static String sanitizeAssetPath(String path) {
     return path.replace("assets/", "");
   }
-
-  /**
-   * Gets the file extension for an asset path.
-   *
-   * @param path the sola asset path
-   * @return the file extension including "."
-   */
-  public static String getFileExtension(String path) {
-    return path.substring(path.lastIndexOf('.')).toLowerCase();
-  }
 }

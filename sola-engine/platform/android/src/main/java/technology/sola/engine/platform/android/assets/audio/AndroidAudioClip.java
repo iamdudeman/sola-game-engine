@@ -12,7 +12,7 @@ import java.util.function.Consumer;
  * An Android implementation of {@link AudioClip}.
  */
 @NullMarked
-public class AndroidWavAudioClip implements AudioClip {
+public class AndroidAudioClip implements AudioClip {
   private final MediaPlayer mediaPlayer;
   private final List<Consumer<AudioClip>> finishListeners = new ArrayList<>();
   private int loopCount = 0;
@@ -23,7 +23,7 @@ public class AndroidWavAudioClip implements AudioClip {
    *
    * @param mediaPlayer the {@link MediaPlayer} for the audio clip
    */
-  public AndroidWavAudioClip(MediaPlayer mediaPlayer) {
+  public AndroidAudioClip(MediaPlayer mediaPlayer) {
     this.mediaPlayer = mediaPlayer;
 
     mediaPlayer.setVolume(volume, volume);

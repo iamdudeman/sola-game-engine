@@ -9,7 +9,7 @@ dependencies {
 }
 
 javafx {
-  modules("javafx.controls")
+  modules("javafx.controls", "javafx.media")
   version = "${project.properties["javaFxVersion"]}"
 }
 

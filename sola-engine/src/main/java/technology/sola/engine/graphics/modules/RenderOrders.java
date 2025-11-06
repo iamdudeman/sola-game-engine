@@ -1,8 +1,11 @@
 package technology.sola.engine.graphics.modules;
 
+import org.jspecify.annotations.NullMarked;
+
 /**
  * Contains render order constants for {@link SolaGraphicsModule}s.
  */
+@NullMarked
 public class RenderOrders {
   /**
    * The default render order for {@link SolaGraphicsModule}s.

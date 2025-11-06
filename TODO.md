@@ -15,7 +15,9 @@
 
 ## Planned Cleanup List
 
-*
+* deprecated gradle features `:examples:android`
+    * Declaring dependencies using multi-string notation has been deprecated. This will fail with an error in Gradle 10. Please use single-string notation instead: "com.android.tools.lint:lint-gradle:31.12.3". Consult the upgrading guide for further information: https://docs.gradle.org/9.1.0/userguide/upgrading_version_9.html#dependency_multi_string_notation
+    * Declaring dependencies using multi-string notation has been deprecated. This will fail with an error in Gradle 10. Please use single-string notation instead: "com.android.tools.build:aapt2:8.12.3-13700139:windows". Consult the upgrading guide for further information: https://docs.gradle.org/9.1.0/userguide/upgrading_version_9.html#dependency_multi_string_notation
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -23,7 +25,6 @@
 
 * Update examples to work off of mouse/touch only
     * cleanup logic in `ExampleLauncherSola#addReturnToLauncherKeyEvent`
-* Support .mp3 audio files for all platforms
 * File Storage API
     * Load and save JSON content (maybe other content too)
     * Browser implementation could open file dialog
@@ -39,6 +40,8 @@
 
 ### Low priority (not ordered)
 
+* support mp3 on `SwingSolaPlatform`
+* ability to render ellipse (and collisions for ellipse)
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
     * Android does not have support yet
