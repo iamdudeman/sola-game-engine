@@ -26,6 +26,14 @@ import java.util.function.Consumer;
 public abstract class SolaPlatform {
   private static final SolaLogger LOGGER = SolaLogger.of(SolaPlatform.class);
   /**
+   * The {@link SocketClient} for the platform.
+   */
+  protected final SocketClient socketClient;
+  /**
+   * The {@link RestClient} for the platform.
+   */
+  protected final RestClient restClient;
+  /**
    * The {@link Renderer} for the platform.
    */
   protected Renderer renderer;
@@ -41,14 +49,17 @@ public abstract class SolaPlatform {
    * The {@link EventHub} for the running {@link Sola}.
    */
   protected EventHub solaEventHub;
+
   /**
-   * The {@link SocketClient} for the platform.
+   * Initializes {@link SolaPlatform} internals.
+   *
+   * @param socketClient the {@link SocketClient} for the platform
+   * @param restClient   the {@link RestClient} for the platform
    */
-  protected SocketClient socketClient;
-  /**
-   * The {@link RestClient} for the platform.
-   */
-  protected RestClient restClient;
+  protected SolaPlatform(SocketClient socketClient, RestClient restClient) {
+    this.socketClient = socketClient;
+    this.restClient = restClient;
+  }
 
   /**
    * Main entry point for starting a {@link Sola}.

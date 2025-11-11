@@ -52,9 +52,9 @@ public class BrowserSolaPlatform extends SolaPlatform {
    * @param platformConfig the {@link BrowserSolaPlatformConfig}
    */
   public BrowserSolaPlatform(BrowserSolaPlatformConfig platformConfig) {
+    super(new BrowserSocketClient(), new BrowserRestClient());
+
     this.useSoftwareRendering = platformConfig.useSoftwareRendering();
-    this.socketClient = new BrowserSocketClient();
-    this.restClient = new BrowserRestClient();
 
     backgroundColor = String.format(Locale.US, "rgba(%d, %d, %d, %f",
       platformConfig.backgroundColor().getRed(),

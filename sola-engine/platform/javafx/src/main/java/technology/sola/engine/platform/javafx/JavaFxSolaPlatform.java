@@ -72,6 +72,8 @@ public class JavaFxSolaPlatform extends SolaPlatform {
    * @param platformConfig the {@link JavaFxSolaPlatformConfig}
    */
   public JavaFxSolaPlatform(JavaFxSolaPlatformConfig platformConfig) {
+    super(new JavaSocketClient(), new JavaRestClient());
+
     this.useSoftwareRendering = platformConfig.useSoftwareRendering();
     this.useImageSmoothing = platformConfig.useImageSmoothing();
     this.initialWindowWidth = platformConfig.initialWindowWidth();
@@ -83,9 +85,6 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       platformConfig.backgroundColor().getBlue() / 255d,
       platformConfig.backgroundColor().getAlpha() / 255d
     );
-
-    socketClient = new JavaSocketClient();
-    restClient = new JavaRestClient();
   }
 
   @Override

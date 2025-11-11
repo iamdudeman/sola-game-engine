@@ -57,9 +57,9 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
    * @param hostActivity              the host {@link SolaAndroidActivity}
    */
   public AndroidSolaPlatform(AndroidSolaPlatformConfig androidSolaPlatformConfig, SolaAndroidActivity hostActivity) {
+    super(new JavaSocketClient(), new JavaRestClient());
+
     this.hostActivity = hostActivity;
-    socketClient = new JavaSocketClient();
-    restClient = new JavaRestClient();
 
     useSoftwareRendering = androidSolaPlatformConfig.useSoftwareRendering();
 

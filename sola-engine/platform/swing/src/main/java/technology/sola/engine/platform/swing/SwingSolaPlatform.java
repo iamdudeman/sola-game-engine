@@ -67,11 +67,10 @@ public class SwingSolaPlatform extends SolaPlatform {
    * @param platformConfig the {@link SwingSolaPlatformConfig}
    */
   public SwingSolaPlatform(SwingSolaPlatformConfig platformConfig) {
+    super(new JavaSocketClient(), new JavaRestClient());
+
     this.useSoftwareRendering = platformConfig.useSoftwareRendering();
     this.initialWindowSize = platformConfig.initialWindowSize();
-
-    socketClient = new JavaSocketClient();
-    restClient = new JavaRestClient();
 
     backgroundColor = new Color(
       platformConfig.backgroundColor().getRed(),
