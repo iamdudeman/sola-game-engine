@@ -131,24 +131,29 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color">
 <div class="block">The <a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> for the platform.</div>
 </div>
-<div class="col-first even-row-color"><code>protected <a href="../networking/rest/RestClient.html" title="interface in technology.sola.engine.networking.rest">RestClient</a></code></div>
+<div class="col-first even-row-color"><code>protected final <a href="../networking/rest/RestClient.html" title="interface in technology.sola.engine.networking.rest">RestClient</a></code></div>
 <div class="col-second even-row-color"><code><a href="#restClient" class="member-name-link">restClient</a></code></div>
 <div class="col-last even-row-color">
 <div class="block">The <a href="../networking/rest/RestClient.html" title="interface in technology.sola.engine.networking.rest"><code>RestClient</code></a> for the platform.</div>
 </div>
-<div class="col-first odd-row-color"><code>protected <a href="../networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket">SocketClient</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#socketClient" class="member-name-link">socketClient</a></code></div>
+<div class="col-first odd-row-color"><code>protected final <a href="../storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#saveStorage" class="member-name-link">saveStorage</a></code></div>
 <div class="col-last odd-row-color">
+<div class="block">The <a href="../storage/SaveStorage.html" title="interface in technology.sola.engine.storage"><code>SaveStorage</code></a> for the platform.</div>
+</div>
+<div class="col-first even-row-color"><code>protected final <a href="../networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket">SocketClient</a></code></div>
+<div class="col-second even-row-color"><code><a href="#socketClient" class="member-name-link">socketClient</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">The <a href="../networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket"><code>SocketClient</code></a> for the platform.</div>
 </div>
-<div class="col-first even-row-color"><code>protected <a href="../event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a></code></div>
-<div class="col-second even-row-color"><code><a href="#solaEventHub" class="member-name-link">solaEventHub</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code>protected <a href="../event/EventHub.html" title="class in technology.sola.engine.event">EventHub</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#solaEventHub" class="member-name-link">solaEventHub</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">The <a href="../event/EventHub.html" title="class in technology.sola.engine.event"><code>EventHub</code></a> for the running <a href="Sola.html" title="class in technology.sola.engine.core"><code>Sola</code></a>.</div>
 </div>
-<div class="col-first odd-row-color"><code>protected <a href="../graphics/screen/Viewport.html" title="class in technology.sola.engine.graphics.screen">Viewport</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#viewport" class="member-name-link">viewport</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code>protected <a href="../graphics/screen/Viewport.html" title="class in technology.sola.engine.graphics.screen">Viewport</a></code></div>
+<div class="col-second even-row-color"><code><a href="#viewport" class="member-name-link">viewport</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">The <a href="../graphics/screen/Viewport.html" title="class in technology.sola.engine.graphics.screen"><code>Viewport</code></a> for the platform.</div>
 </div>
 </div>
@@ -159,11 +164,17 @@ loadScripts(document, 'script');</script>
 <section class="constructor-summary" id="constructor-summary">
 <h2>Constructor Summary</h2>
 <div class="caption"><span>Constructors</span></div>
-<div class="summary-table two-column-summary">
-<div class="table-header col-first">Constructor</div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier</div>
+<div class="table-header col-second">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">SolaPlatform</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>protected </code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.engine.networking.socket.SocketClient,technology.sola.engine.networking.rest.RestClient,technology.sola.engine.storage.SaveStorage)" class="member-name-link">SolaPlatform</a><wbr>(<a href="../networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket">SocketClient</a>&nbsp;socketClient,
+ <a href="../networking/rest/RestClient.html" title="interface in technology.sola.engine.networking.rest">RestClient</a>&nbsp;restClient,
+ <a href="../storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a>&nbsp;saveStorage)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Initializes <a href="SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> internals.</div>
+</div>
 </div>
 </section>
 </li>
@@ -216,72 +227,75 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../networking/rest/RestClient.html" title="interface in technology.sola.engine.networking.rest">RestClient</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRestClient()" class="member-name-link">getRestClient</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket">SocketClient</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSocketClient()" class="member-name-link">getSocketClient</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSaveStorage()" class="member-name-link">getSaveStorage</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../graphics/screen/Viewport.html" title="class in technology.sola.engine.graphics.screen">Viewport</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getViewport()" class="member-name-link">getViewport</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket">SocketClient</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSocketClient()" class="member-name-link">getSocketClient</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#initializePlatform(technology.sola.engine.core.SolaConfiguration,technology.sola.engine.core.SolaPlatform.SolaPlatformInitialization)" class="member-name-link">initializePlatform</a><wbr>(<a href="SolaConfiguration.html" title="class in technology.sola.engine.core">SolaConfiguration</a>&nbsp;solaConfiguration,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../graphics/screen/Viewport.html" title="class in technology.sola.engine.graphics.screen">Viewport</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getViewport()" class="member-name-link">getViewport</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#initializePlatform(technology.sola.engine.core.SolaConfiguration,technology.sola.engine.core.SolaPlatform.SolaPlatformInitialization)" class="member-name-link">initializePlatform</a><wbr>(<a href="SolaConfiguration.html" title="class in technology.sola.engine.core">SolaConfiguration</a>&nbsp;solaConfiguration,
  <a href="SolaPlatform.SolaPlatformInitialization.html" title="interface in technology.sola.engine.core">SolaPlatform.SolaPlatformInitialization</a>&nbsp;solaPlatformInitialization)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Method to initialize a <a href="SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onKeyPressed(java.util.function.Consumer)" class="member-name-link">onKeyPressed</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&gt;&nbsp;keyEventConsumer)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onKeyPressed(java.util.function.Consumer)" class="member-name-link">onKeyPressed</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&gt;&nbsp;keyEventConsumer)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Registers an on key pressed listener.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onKeyReleased(java.util.function.Consumer)" class="member-name-link">onKeyReleased</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&gt;&nbsp;keyEventConsumer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onKeyReleased(java.util.function.Consumer)" class="member-name-link">onKeyReleased</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/KeyEvent.html" title="class in technology.sola.engine.input">KeyEvent</a>&gt;&nbsp;keyEventConsumer)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Registers an on key released listener.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMouseMoved(java.util.function.Consumer)" class="member-name-link">onMouseMoved</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&gt;&nbsp;mouseEventConsumer)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMouseMoved(java.util.function.Consumer)" class="member-name-link">onMouseMoved</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&gt;&nbsp;mouseEventConsumer)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Registers an on mouse moved listener.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMousePressed(java.util.function.Consumer)" class="member-name-link">onMousePressed</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&gt;&nbsp;mouseEventConsumer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMousePressed(java.util.function.Consumer)" class="member-name-link">onMousePressed</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&gt;&nbsp;mouseEventConsumer)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Registers an on mouse pressed listener.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMouseReleased(java.util.function.Consumer)" class="member-name-link">onMouseReleased</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&gt;&nbsp;mouseEventConsumer)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMouseReleased(java.util.function.Consumer)" class="member-name-link">onMouseReleased</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/MouseEvent.html" title="class in technology.sola.engine.input">MouseEvent</a>&gt;&nbsp;mouseEventConsumer)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Registers an on mouse released listener.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMouseWheel(java.util.function.Consumer)" class="member-name-link">onMouseWheel</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/MouseWheelEvent.html" title="class in technology.sola.engine.input">MouseWheelEvent</a>&gt;&nbsp;mouseWheelEventConsumer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onMouseWheel(java.util.function.Consumer)" class="member-name-link">onMouseWheel</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/MouseWheelEvent.html" title="class in technology.sola.engine.input">MouseWheelEvent</a>&gt;&nbsp;mouseWheelEventConsumer)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Registers an on mouse wheel listener.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onRender(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">onRender</a><wbr>(<a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onRender(technology.sola.engine.graphics.renderer.Renderer)" class="member-name-link">onRender</a><wbr>(<a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Main render frame method.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onTouch(java.util.function.Consumer)" class="member-name-link">onTouch</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/TouchEvent.html" title="class in technology.sola.engine.input">TouchEvent</a>&gt;&nbsp;touchEventConsumer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onTouch(java.util.function.Consumer)" class="member-name-link">onTouch</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../input/TouchEvent.html" title="class in technology.sola.engine.input">TouchEvent</a>&gt;&nbsp;touchEventConsumer)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Registers an on touch listener.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#play(technology.sola.engine.core.Sola)" class="member-name-link">play</a><wbr>(<a href="Sola.html" title="class in technology.sola.engine.core">Sola</a>&nbsp;sola)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#play(technology.sola.engine.core.Sola)" class="member-name-link">play</a><wbr>(<a href="Sola.html" title="class in technology.sola.engine.core">Sola</a>&nbsp;sola)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Main entry point for starting a <a href="Sola.html" title="class in technology.sola.engine.core"><code>Sola</code></a>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#populateAssetLoaderProvider(technology.sola.engine.assets.AssetLoaderProvider)" class="member-name-link">populateAssetLoaderProvider</a><wbr>(<a href="../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#populateAssetLoaderProvider(technology.sola.engine.assets.AssetLoaderProvider)" class="member-name-link">populateAssetLoaderProvider</a><wbr>(<a href="../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Method to populate the <a href="SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> <a href="../assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets"><code>AssetLoaderProvider</code></a> with
  <a href="../assets/AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a>s that <a href="Sola.html" title="class in technology.sola.engine.core"><code>Sola</code></a> will be able to use.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setVirtualKeyboardVisible(boolean)" class="member-name-link">setVirtualKeyboardVisible</a><wbr>(boolean&nbsp;visible)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setVirtualKeyboardVisible(boolean)" class="member-name-link">setVirtualKeyboardVisible</a><wbr>(boolean&nbsp;visible)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Sets the visibility of the virtual keyboard.</div>
 </div>
 </div>
@@ -301,6 +315,27 @@ loadScripts(document, 'script');</script>
 <section class="field-details" id="field-detail">
 <h2>Field Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="socketClient">
+<h3>socketClient</h3>
+<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="../networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket">SocketClient</a></span>&nbsp;<span class="element-name">socketClient</span></div>
+<div class="block">The <a href="../networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket"><code>SocketClient</code></a> for the platform.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="restClient">
+<h3>restClient</h3>
+<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="../networking/rest/RestClient.html" title="interface in technology.sola.engine.networking.rest">RestClient</a></span>&nbsp;<span class="element-name">restClient</span></div>
+<div class="block">The <a href="../networking/rest/RestClient.html" title="interface in technology.sola.engine.networking.rest"><code>RestClient</code></a> for the platform.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="saveStorage">
+<h3>saveStorage</h3>
+<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="../storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a></span>&nbsp;<span class="element-name">saveStorage</span></div>
+<div class="block">The <a href="../storage/SaveStorage.html" title="interface in technology.sola.engine.storage"><code>SaveStorage</code></a> for the platform.</div>
+</section>
+</li>
 <li>
 <section class="detail" id="renderer">
 <h3>renderer</h3>
@@ -329,20 +364,6 @@ loadScripts(document, 'script');</script>
 <div class="block">The <a href="../event/EventHub.html" title="class in technology.sola.engine.event"><code>EventHub</code></a> for the running <a href="Sola.html" title="class in technology.sola.engine.core"><code>Sola</code></a>.</div>
 </section>
 </li>
-<li>
-<section class="detail" id="socketClient">
-<h3>socketClient</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket">SocketClient</a></span>&nbsp;<span class="element-name">socketClient</span></div>
-<div class="block">The <a href="../networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket"><code>SocketClient</code></a> for the platform.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="restClient">
-<h3>restClient</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../networking/rest/RestClient.html" title="interface in technology.sola.engine.networking.rest">RestClient</a></span>&nbsp;<span class="element-name">restClient</span></div>
-<div class="block">The <a href="../networking/rest/RestClient.html" title="interface in technology.sola.engine.networking.rest"><code>RestClient</code></a> for the platform.</div>
-</section>
-</li>
 </ul>
 </section>
 </li>
@@ -352,9 +373,18 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;()">
+<section class="detail" id="&lt;init&gt;(technology.sola.engine.networking.socket.SocketClient,technology.sola.engine.networking.rest.RestClient,technology.sola.engine.storage.SaveStorage)">
 <h3>SolaPlatform</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SolaPlatform</span>()</div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">SolaPlatform</span><wbr><span class="parameters">(<a href="../networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket">SocketClient</a>&nbsp;socketClient,
+ <a href="../networking/rest/RestClient.html" title="interface in technology.sola.engine.networking.rest">RestClient</a>&nbsp;restClient,
+ <a href="../storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a>&nbsp;saveStorage)</span></div>
+<div class="block">Initializes <a href="SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> internals.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>socketClient</code> - the <a href="../networking/socket/SocketClient.html" title="interface in technology.sola.engine.networking.socket"><code>SocketClient</code></a> for the platform</dd>
+<dd><code>restClient</code> - the <a href="../networking/rest/RestClient.html" title="interface in technology.sola.engine.networking.rest"><code>RestClient</code></a> for the platform</dd>
+<dd><code>saveStorage</code> - the <a href="../storage/SaveStorage.html" title="interface in technology.sola.engine.storage"><code>SaveStorage</code></a> for the platform</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -413,6 +443,16 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the platform's <a href="../networking/rest/RestClient.html" title="interface in technology.sola.engine.networking.rest"><code>RestClient</code></a></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getSaveStorage()">
+<h3>getSaveStorage</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a></span>&nbsp;<span class="element-name">getSaveStorage</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the platform's <a href="../storage/SaveStorage.html" title="interface in technology.sola.engine.storage"><code>SaveStorage</code></a></dd>
 </dl>
 </section>
 </li>

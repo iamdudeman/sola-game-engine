@@ -652,6 +652,12 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Children are aligned to the center of the axis.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/FileSaveStorage.html#changeSaveDirectory(java.lang.String)" class="member-name-link">changeSaveDirectory(String)</a> - Method in class technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/FileSaveStorage.html" title="class in technology.sola.engine.storage">FileSaveStorage</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html#changeSaveDirectory(java.lang.String)" class="member-name-link">changeSaveDirectory(String)</a> - Method in interface technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a></dt>
+<dd>
+<div class="block">Changes the directory in which saves are stored.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/utils/SeparatingAxisTheorem.html#checkCollision(technology.sola.math.linear.Vector2D%5B%5D,technology.sola.math.linear.Vector2D%5B%5D)" class="member-name-link">checkCollision(Vector2D[], Vector2D[])</a> - Static method in class technology.sola.engine.physics.utils.<a href="technology.sola.engine/technology/sola/engine/physics/utils/SeparatingAxisTheorem.html" title="class in technology.sola.engine.physics.utils">SeparatingAxisTheorem</a></dt>
 <dd>
 <div class="block">Checks for collisions between to shapes.</div>
@@ -1120,6 +1126,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">The default order for a <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> that is added to this Layer.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html#DEFAULT_SAVE_DIRECTORY" class="member-name-link">DEFAULT_SAVE_DIRECTORY</a> - Static variable in interface technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a></dt>
+<dd>
+<div class="block">The default save directory.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/DefaultFont.html" class="type-name-link" title="class in technology.sola.engine.assets.graphics.font">DefaultFont</a> - Class in <a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/package-summary.html">technology.sola.engine.assets.graphics.font</a></dt>
 <dd>
 <div class="block">The DefaultFont class contains a utility method for creating the default font instance for sola-game-engine.</div>
@@ -1132,6 +1142,20 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/theme/DefaultThemeBuilder.html" class="type-name-link" title="class in technology.sola.engine.graphics.gui.style.theme">DefaultThemeBuilder</a> - Class in <a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/theme/package-summary.html">technology.sola.engine.graphics.gui.style.theme</a></dt>
 <dd>
 <div class="block">DefaultThemeBuilder contains methods for creating default <a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/theme/GuiTheme.html" title="class in technology.sola.engine.graphics.gui.style.theme"><code>GuiTheme</code></a>s that can then be further customized.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html#delete(java.lang.String)" class="member-name-link">delete(String)</a> - Method in interface technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a></dt>
+<dd>
+<div class="block">Deletes a save.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html#delete(java.lang.String,java.lang.Runnable)" class="member-name-link">delete(String, Runnable)</a> - Method in interface technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a></dt>
+<dd>
+<div class="block">Deletes a save.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/FileSaveStorage.html#delete(java.lang.String,java.lang.Runnable,java.util.function.Consumer)" class="member-name-link">delete(String, Runnable, Consumer&lt;Exception&gt;)</a> - Method in class technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/FileSaveStorage.html" title="class in technology.sola.engine.storage">FileSaveStorage</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html#delete(java.lang.String,java.lang.Runnable,java.util.function.Consumer)" class="member-name-link">delete(String, Runnable, Consumer&lt;Exception&gt;)</a> - Method in interface technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a></dt>
+<dd>
+<div class="block">Deletes a save.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/networking/rest/RestClient.html#delete(java.lang.String,java.util.function.Consumer)" class="member-name-link">delete(String, Consumer&lt;HttpResponse&gt;)</a> - Method in interface technology.sola.engine.networking.rest.<a href="technology.sola.engine/technology/sola/engine/networking/rest/RestClient.html" title="interface in technology.sola.engine.networking.rest">RestClient</a></dt>
 <dd>
@@ -1640,6 +1664,12 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Executes the provided consumer asynchronously once the sprite for this <a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteComponent.html" title="class in technology.sola.engine.graphics.components"><code>SpriteComponent</code></a> has been loaded.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/FileSaveStorage.html#exists(java.lang.String)" class="member-name-link">exists(String)</a> - Method in class technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/FileSaveStorage.html" title="class in technology.sola.engine.storage">FileSaveStorage</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html#exists(java.lang.String)" class="member-name-link">exists(String)</a> - Method in interface technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a></dt>
+<dd>
+<div class="block">Checks if a save exists.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:F">F</h2>
 <dl class="index">
@@ -1699,6 +1729,12 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Rounds a positive float value to the nearest integer quickly.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/FileSaveStorage.html" class="type-name-link" title="class in technology.sola.engine.storage">FileSaveStorage</a> - Class in <a href="technology.sola.engine/technology/sola/engine/storage/package-summary.html">technology.sola.engine.storage</a></dt>
+<dd>
+<div class="block">A <a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html" title="interface in technology.sola.engine.storage"><code>SaveStorage</code></a> implementation that stores saves on the file system.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/FileSaveStorage.html#%3Cinit%3E()" class="member-name-link">FileSaveStorage()</a> - Constructor for class technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/FileSaveStorage.html" title="class in technology.sola.engine.storage">FileSaveStorage</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#fillCircle(float,float,float,technology.sola.engine.graphics.Color)" class="member-name-link">fillCircle(float, float, float, Color)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
 <dd>
 <div class="block">Draws a filled circle.</div>
@@ -2290,6 +2326,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Gets the restitution (bounciness) of the material.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#getSaveStorage()" class="member-name-link">getSaveStorage()</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html#getScaleX()" class="member-name-link">getScaleX()</a> - Method in class technology.sola.engine.core.component.<a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html#getScaleY()" class="member-name-link">getScaleY()</a> - Method in class technology.sola.engine.core.component.<a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a></dt>
@@ -3426,6 +3464,16 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/graphics/gui/util/TextRenderDetails.html#param-lines"><code>lines</code></a> record component.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html#load(java.lang.String,java.util.function.Consumer)" class="member-name-link">load(String, Consumer&lt;String&gt;)</a> - Method in interface technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a></dt>
+<dd>
+<div class="block">Loads a save.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/FileSaveStorage.html#load(java.lang.String,java.util.function.Consumer,java.util.function.Consumer)" class="member-name-link">load(String, Consumer&lt;String&gt;, Consumer&lt;Exception&gt;)</a> - Method in class technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/FileSaveStorage.html" title="class in technology.sola.engine.storage">FileSaveStorage</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html#load(java.lang.String,java.util.function.Consumer,java.util.function.Consumer)" class="member-name-link">load(String, Consumer&lt;String&gt;, Consumer&lt;Exception&gt;)</a> - Method in interface technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a></dt>
+<dd>
+<div class="block">Loads a save.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/BulkAssetLoader.html#loadAll()" class="member-name-link">loadAll()</a> - Method in class technology.sola.engine.assets.<a href="technology.sola.engine/technology/sola/engine/assets/BulkAssetLoader.html" title="class in technology.sola.engine.assets">BulkAssetLoader</a></dt>
 <dd>
 <div class="block">Starts loading all the <a href="technology.sola.engine/technology/sola/engine/assets/Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a>s that have been added returning a <a href="technology.sola.engine/technology/sola/engine/assets/BulkAssetLoader.BulkAssetHandle.html" title="class in technology.sola.engine.assets"><code>BulkAssetLoader.BulkAssetHandle</code></a> where callbacks
@@ -3446,6 +3494,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/logging/SolaLogger.html#log(technology.sola.logging.SolaLogLevel,java.lang.String,java.lang.Throwable,java.lang.Object...)" class="member-name-link">log(SolaLogLevel, String, Throwable, Object...)</a> - Method in class technology.sola.logging.<a href="technology.sola.engine/technology/sola/logging/SolaLogger.html" title="class in technology.sola.logging">SolaLogger</a></dt>
 <dd>
 <div class="block">Logs a message at desired <a href="technology.sola.engine/technology/sola/logging/SolaLogLevel.html" title="enum class in technology.sola.logging"><code>SolaLogLevel</code></a>.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html#LOGGER" class="member-name-link">LOGGER</a> - Static variable in interface technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a></dt>
+<dd>
+<div class="block">A <a href="technology.sola.engine/technology/sola/logging/SolaLogger.html" title="class in technology.sola.logging"><code>SolaLogger</code></a> used for default onFailure handlers.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/audio/AudioClip.html#loop()" class="member-name-link">loop()</a> - Method in interface technology.sola.engine.assets.audio.<a href="technology.sola.engine/technology/sola/engine/assets/audio/AudioClip.html" title="interface in technology.sola.engine.assets.audio">AudioClip</a></dt>
 <dd>
@@ -4690,6 +4742,32 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">S key.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html#save(java.lang.String,java.lang.String)" class="member-name-link">save(String, String)</a> - Method in interface technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a></dt>
+<dd>
+<div class="block">Persists a save.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html#save(java.lang.String,java.lang.String,java.lang.Runnable)" class="member-name-link">save(String, String, Runnable)</a> - Method in interface technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a></dt>
+<dd>
+<div class="block">Persists a save.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/FileSaveStorage.html#save(java.lang.String,java.lang.String,java.lang.Runnable,java.util.function.Consumer)" class="member-name-link">save(String, String, Runnable, Consumer&lt;Exception&gt;)</a> - Method in class technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/FileSaveStorage.html" title="class in technology.sola.engine.storage">FileSaveStorage</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html#save(java.lang.String,java.lang.String,java.lang.Runnable,java.util.function.Consumer)" class="member-name-link">save(String, String, Runnable, Consumer&lt;Exception&gt;)</a> - Method in interface technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a></dt>
+<dd>
+<div class="block">Persists a save.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html#save(java.lang.String,java.lang.String,java.util.function.Consumer)" class="member-name-link">save(String, String, Consumer&lt;Exception&gt;)</a> - Method in interface technology.sola.engine.storage.<a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html" title="interface in technology.sola.engine.storage">SaveStorage</a></dt>
+<dd>
+<div class="block">Persists a save.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#saveStorage" class="member-name-link">saveStorage</a> - Variable in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
+<dd>
+<div class="block">The <a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html" title="interface in technology.sola.engine.storage"><code>SaveStorage</code></a> for the platform.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/SaveStorage.html" class="type-name-link" title="interface in technology.sola.engine.storage">SaveStorage</a> - Interface in <a href="technology.sola.engine/technology/sola/engine/storage/package-summary.html">technology.sola.engine.storage</a></dt>
+<dd>
+<div class="block">SaveStorage defines the API for a storage mechanism for persisting game saves.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/math/linear/Vector2D.html#scalar(float)" class="member-name-link">scalar(float)</a> - Method in record class technology.sola.math.linear.<a href="technology.sola.engine/technology/sola/math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></dt>
 <dd>
 <div class="block">Calculates the scalar of this vector and returns the result as a new vector object.</div>
@@ -5489,8 +5567,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">SolaPlatform defines the API for a platform to run <a href="technology.sola.engine/technology/sola/engine/core/Sola.html" title="class in technology.sola.engine.core"><code>Sola</code></a>.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#%3Cinit%3E()" class="member-name-link">SolaPlatform()</a> - Constructor for class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
-<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#%3Cinit%3E(technology.sola.engine.networking.socket.SocketClient,technology.sola.engine.networking.rest.RestClient,technology.sola.engine.storage.SaveStorage)" class="member-name-link">SolaPlatform(SocketClient, RestClient, SaveStorage)</a> - Constructor for class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
+<dd>
+<div class="block">Initializes <a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> internals.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.GameLoopProvider.html" class="type-name-link" title="interface in technology.sola.engine.core">SolaPlatform.GameLoopProvider</a> - Interface in <a href="technology.sola.engine/technology/sola/engine/core/package-summary.html">technology.sola.engine.core</a></dt>
 <dd>
 <div class="block">GameLoopProvider is a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link"><code>FunctionalInterface</code></a> defining the contract for providing a <a href="technology.sola.engine/technology/sola/engine/core/GameLoop.html" title="class in technology.sola.engine.core"><code>GameLoop</code></a>
@@ -6019,6 +6099,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/utils/package-summary.html">technology.sola.engine.physics.utils</a> - package technology.sola.engine.physics.utils</dt>
 <dd>
 <div class="block">This package contains various utilities for helping in physics related calculations.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/storage/package-summary.html">technology.sola.engine.storage</a> - package technology.sola.engine.storage</dt>
+<dd>
+<div class="block">This package provides functionality for storing and loading save data for a game.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/utils/package-summary.html">technology.sola.engine.utils</a> - package technology.sola.engine.utils</dt>
 <dd>

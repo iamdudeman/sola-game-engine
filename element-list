@@ -46,6 +46,7 @@ technology.sola.engine.physics.event
 technology.sola.engine.physics.system
 technology.sola.engine.physics.system.collision
 technology.sola.engine.physics.utils
+technology.sola.engine.storage
 technology.sola.engine.utils
 technology.sola.logging
 technology.sola.math
