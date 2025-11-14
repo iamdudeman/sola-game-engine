@@ -29,6 +29,8 @@ import technology.sola.engine.platform.android.assets.AndroidJsonAssetLoader;
 import technology.sola.engine.platform.android.assets.AndroidSolaImageLoader;
 import technology.sola.engine.platform.android.core.AndroidGameLoop;
 import technology.sola.engine.platform.android.core.AndroidRenderer;
+import technology.sola.engine.storage.FileSaveStorage;
+import technology.sola.engine.storage.SaveStorage;
 import technology.sola.logging.SolaLogger;
 import technology.sola.math.SolaMath;
 
@@ -57,7 +59,7 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
    * @param hostActivity              the host {@link SolaAndroidActivity}
    */
   public AndroidSolaPlatform(AndroidSolaPlatformConfig androidSolaPlatformConfig, SolaAndroidActivity hostActivity) {
-    super(new JavaSocketClient(), new JavaRestClient());
+    super(new JavaSocketClient(), new JavaRestClient(), new FileSaveStorage());
 
     this.hostActivity = hostActivity;
 
@@ -151,6 +153,8 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
     });
 
     hostActivity.getSolaSurfaceView().setViewport(viewport);
+
+    getSaveStorage().changeSaveDirectory(hostActivity.getApplicationContext().getFileStreamPath(SaveStorage.DEFAULT_SAVE_DIRECTORY).getPath());
 
     solaPlatformInitialization.finish();
   }

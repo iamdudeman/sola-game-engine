@@ -26,6 +26,7 @@ import technology.sola.engine.platform.swing.assets.audio.SwingAudioClipAssetLoa
 import technology.sola.engine.platform.swing.assets.SwingJsonAssetLoader;
 import technology.sola.engine.platform.swing.assets.graphics.SwingSolaImageAssetLoader;
 import technology.sola.engine.platform.swing.core.Graphics2dRenderer;
+import technology.sola.engine.storage.FileSaveStorage;
 import technology.sola.logging.SolaLogger;
 
 import javax.swing.*;
@@ -67,7 +68,7 @@ public class SwingSolaPlatform extends SolaPlatform {
    * @param platformConfig the {@link SwingSolaPlatformConfig}
    */
   public SwingSolaPlatform(SwingSolaPlatformConfig platformConfig) {
-    super(new JavaSocketClient(), new JavaRestClient());
+    super(new JavaSocketClient(), new JavaRestClient(), new FileSaveStorage());
 
     this.useSoftwareRendering = platformConfig.useSoftwareRendering();
     this.initialWindowSize = platformConfig.initialWindowSize();

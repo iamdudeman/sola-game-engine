@@ -5,6 +5,7 @@ import technology.sola.logging.SolaLogger;
 import java.util.function.Consumer;
 
 public interface SaveStorage {
+  String DEFAULT_SAVE_DIRECTORY = "saves";
   SolaLogger LOGGER = SolaLogger.of(SaveStorage.class);
 
   void changeSaveDirectory(String path);
@@ -16,6 +17,10 @@ public interface SaveStorage {
   }
 
   void save(String path, String content, Runnable onSuccess, Consumer<Exception> onFailure);
+
+  default void save(String path, String content, Runnable onSuccess) {
+    save(path, content, onSuccess, ex -> LOGGER.error("Failed to save file", ex));
+  }
 
   default void save(String path, String content, Consumer<Exception> onFailure) {
     save(path, content, () -> {}, onFailure);

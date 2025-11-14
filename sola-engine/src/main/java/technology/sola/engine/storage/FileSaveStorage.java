@@ -1,22 +1,29 @@
 package technology.sola.engine.storage;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.function.Consumer;
 
 public class FileSaveStorage implements SaveStorage {
-  private String saveDirectory = "./"; // todo ensure current working directory
+  private File saveDirectory = new File(DEFAULT_SAVE_DIRECTORY);
 
   @Override
   public void changeSaveDirectory(String path) {
-    this.saveDirectory = path;
+    this.saveDirectory = new File(path);
   }
 
   @Override
   public void load(String path, Consumer<String> onSuccess, Consumer<Exception> onFailure) {
-    try {
-      onSuccess.accept(Files.readString(Path.of(saveDirectory, path)));
+    var file = new File(saveDirectory, path);
+
+    try (FileInputStream fileInputStream = new FileInputStream(file)) {
+      byte[] bytes = new byte[(int) file.length()];
+
+      fileInputStream.read(bytes);
+
+      onSuccess.accept(new String(bytes));
     } catch (IOException ex) {
       onFailure.accept(ex);
     }
@@ -24,8 +31,12 @@ public class FileSaveStorage implements SaveStorage {
 
   @Override
   public void save(String path, String content, Runnable onSuccess, Consumer<Exception> onFailure) {
-    try {
-      Files.writeString(Path.of(saveDirectory, path), content);
+    var file = new File(saveDirectory, path);
+
+    file.getParentFile().mkdirs();
+
+    try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
+      fileOutputStream.write(content.getBytes());
       onSuccess.run();
     } catch (IOException ex) {
       onFailure.accept(ex);
@@ -34,16 +45,11 @@ public class FileSaveStorage implements SaveStorage {
 
   @Override
   public void delete(String path, Runnable onSuccess, Consumer<Exception> onFailure) {
-    try {
-      Files.delete(Path.of(saveDirectory, path));
-      onSuccess.run();
-    } catch (IOException ex) {
-      onFailure.accept(ex);
-    }
+    new File(saveDirectory, path).delete();
   }
 
   @Override
   public boolean exists(String path) {
-    return Files.exists(Path.of(saveDirectory, path));
+    return new File(saveDirectory, path).exists();
   }
 }

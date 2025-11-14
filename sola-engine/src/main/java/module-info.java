@@ -59,6 +59,8 @@ module technology.sola.engine {
   exports technology.sola.engine.networking.rest;
   exports technology.sola.engine.networking.socket;
 
+  exports technology.sola.engine.storage;
+
   exports technology.sola.engine.utils;
 
   exports technology.sola.logging;

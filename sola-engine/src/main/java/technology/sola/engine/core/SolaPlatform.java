@@ -14,6 +14,7 @@ import technology.sola.engine.input.MouseWheelEvent;
 import technology.sola.engine.input.TouchEvent;
 import technology.sola.engine.networking.rest.RestClient;
 import technology.sola.engine.networking.socket.SocketClient;
+import technology.sola.engine.storage.SaveStorage;
 import technology.sola.logging.SolaLogger;
 import technology.sola.math.SolaMath;
 
@@ -33,6 +34,10 @@ public abstract class SolaPlatform {
    * The {@link RestClient} for the platform.
    */
   protected final RestClient restClient;
+  /**
+   * The {@link SaveStorage} for the platform.
+   */
+  protected final SaveStorage saveStorage;
   /**
    * The {@link Renderer} for the platform.
    */
@@ -55,10 +60,12 @@ public abstract class SolaPlatform {
    *
    * @param socketClient the {@link SocketClient} for the platform
    * @param restClient   the {@link RestClient} for the platform
+   * @param saveStorage  the {@link SaveStorage} for the platform
    */
-  protected SolaPlatform(SocketClient socketClient, RestClient restClient) {
+  protected SolaPlatform(SocketClient socketClient, RestClient restClient, SaveStorage saveStorage) {
     this.socketClient = socketClient;
     this.restClient = restClient;
+    this.saveStorage = saveStorage;
   }
 
   /**
@@ -102,6 +109,13 @@ public abstract class SolaPlatform {
    */
   public RestClient getRestClient() {
     return restClient;
+  }
+
+  /**
+   * @return the platform's {@link SaveStorage}
+   */
+  public SaveStorage getSaveStorage() {
+    return saveStorage;
   }
 
   /**

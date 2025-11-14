@@ -1,10 +1,5 @@
 # sola-game-engine TODO list
 
-* File Storage API
-    * Load and save JSON content (maybe other content too)
-    * Browser implementation could open file dialog
-    * Desktop could go straight to file or open file dialog
-
 ## Known Bugs List
 
 *
