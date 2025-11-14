@@ -48,7 +48,11 @@ public class FileSaveStorage implements SaveStorage {
 
   @Override
   public void delete(String path, Runnable onSuccess, Consumer<Exception> onFailure) {
-    new File(saveDirectory, path).delete();
+    if (new File(saveDirectory, path).delete()) {
+      onSuccess.run();
+    } else {
+      onFailure.accept(new RuntimeException("Could not delete save file at path: " + path));
+    }
   }
 
   @Override
