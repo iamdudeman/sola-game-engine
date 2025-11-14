@@ -6,6 +6,9 @@ import technology.sola.engine.storage.SaveStorage;
 
 import java.util.function.Consumer;
 
+/**
+ * A {@link SaveStorage} implementation that stores saves in the browser's localStorage.
+ */
 @NullMarked
 public class LocalStorageSaveStorage implements SaveStorage {
   private String saveDirectory = "saves";

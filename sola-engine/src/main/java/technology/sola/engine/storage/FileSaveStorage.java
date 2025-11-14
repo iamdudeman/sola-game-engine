@@ -6,6 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.function.Consumer;
 
+/**
+ * A {@link SaveStorage} implementation that stores saves on the file system.
+ */
 public class FileSaveStorage implements SaveStorage {
   private File saveDirectory = new File(DEFAULT_SAVE_DIRECTORY);
 
