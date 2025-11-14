@@ -19,10 +19,7 @@ import technology.sola.engine.input.*;
 import technology.sola.engine.platform.browser.assets.BrowserJsonElementAssetLoader;
 import technology.sola.engine.platform.browser.assets.audio.BrowserAudioClipAssetLoader;
 import technology.sola.engine.platform.browser.assets.graphics.BrowserSolaImageAssetLoader;
-import technology.sola.engine.platform.browser.core.BrowserCanvasRenderer;
-import technology.sola.engine.platform.browser.core.BrowserGameLoop;
-import technology.sola.engine.platform.browser.core.BrowserRestClient;
-import technology.sola.engine.platform.browser.core.BrowserSocketClient;
+import technology.sola.engine.platform.browser.core.*;
 import technology.sola.engine.platform.browser.javascript.*;
 import technology.sola.logging.SolaLogger;
 
@@ -52,9 +49,9 @@ public class BrowserSolaPlatform extends SolaPlatform {
    * @param platformConfig the {@link BrowserSolaPlatformConfig}
    */
   public BrowserSolaPlatform(BrowserSolaPlatformConfig platformConfig) {
+    super(new BrowserSocketClient(), new BrowserRestClient(), new LocalStorageSaveStorage());
+
     this.useSoftwareRendering = platformConfig.useSoftwareRendering();
-    this.socketClient = new BrowserSocketClient();
-    this.restClient = new BrowserRestClient();
 
     backgroundColor = String.format(Locale.US, "rgba(%d, %d, %d, %f",
       platformConfig.backgroundColor().getRed(),

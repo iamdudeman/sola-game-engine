@@ -25,10 +25,6 @@
 
 * Update examples to work off of mouse/touch only
     * cleanup logic in `ExampleLauncherSola#addReturnToLauncherKeyEvent`
-* File Storage API
-    * Load and save JSON content (maybe other content too)
-    * Browser implementation could open file dialog
-    * Desktop could go straight to file or open file dialog
 * Particle System
     * consider ability to add fix number of particle spawns (4 at a time in different directions for example)
     * consider ability to change particle shape (instead of only circle maybe square)

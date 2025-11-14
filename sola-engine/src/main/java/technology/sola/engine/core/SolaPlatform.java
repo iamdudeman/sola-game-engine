@@ -14,6 +14,7 @@ import technology.sola.engine.input.MouseWheelEvent;
 import technology.sola.engine.input.TouchEvent;
 import technology.sola.engine.networking.rest.RestClient;
 import technology.sola.engine.networking.socket.SocketClient;
+import technology.sola.engine.storage.SaveStorage;
 import technology.sola.logging.SolaLogger;
 import technology.sola.math.SolaMath;
 
@@ -25,6 +26,18 @@ import java.util.function.Consumer;
 @NullMarked
 public abstract class SolaPlatform {
   private static final SolaLogger LOGGER = SolaLogger.of(SolaPlatform.class);
+  /**
+   * The {@link SocketClient} for the platform.
+   */
+  protected final SocketClient socketClient;
+  /**
+   * The {@link RestClient} for the platform.
+   */
+  protected final RestClient restClient;
+  /**
+   * The {@link SaveStorage} for the platform.
+   */
+  protected final SaveStorage saveStorage;
   /**
    * The {@link Renderer} for the platform.
    */
@@ -41,14 +54,19 @@ public abstract class SolaPlatform {
    * The {@link EventHub} for the running {@link Sola}.
    */
   protected EventHub solaEventHub;
+
   /**
-   * The {@link SocketClient} for the platform.
+   * Initializes {@link SolaPlatform} internals.
+   *
+   * @param socketClient the {@link SocketClient} for the platform
+   * @param restClient   the {@link RestClient} for the platform
+   * @param saveStorage  the {@link SaveStorage} for the platform
    */
-  protected SocketClient socketClient;
-  /**
-   * The {@link RestClient} for the platform.
-   */
-  protected RestClient restClient;
+  protected SolaPlatform(SocketClient socketClient, RestClient restClient, SaveStorage saveStorage) {
+    this.socketClient = socketClient;
+    this.restClient = restClient;
+    this.saveStorage = saveStorage;
+  }
 
   /**
    * Main entry point for starting a {@link Sola}.
@@ -91,6 +109,13 @@ public abstract class SolaPlatform {
    */
   public RestClient getRestClient() {
     return restClient;
+  }
+
+  /**
+   * @return the platform's {@link SaveStorage}
+   */
+  public SaveStorage getSaveStorage() {
+    return saveStorage;
   }
 
   /**
