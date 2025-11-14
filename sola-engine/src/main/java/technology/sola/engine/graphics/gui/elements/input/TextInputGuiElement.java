@@ -50,8 +50,9 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, Te
       }
     });
 
-    events().keyPressed().on(keyEvent -> {
-      int keyCode = keyEvent.getKeyEvent().keyCode();
+    events().keyPressed().on(guiKeyEvent -> {
+      var keyEvent = guiKeyEvent.getKeyEvent();
+      int keyCode = keyEvent.keyCode();
       int length = valueBuilder.length();
       boolean isLessThanMaxLength = maxLength == null || length < maxLength;
 
@@ -62,7 +63,7 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, Te
           valueBuilder.deleteCharAt(length - 1);
         }
       } else if (isLessThanMaxLength) {
-        char character = (char) keyCode;
+        char character = keyEvent.keyChar();
 
         if (keyCode >= Key.A.getCode() && keyCode <= Key.Z.getCode()) {
           if (isShiftDown) {
@@ -82,6 +83,20 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, Te
       }
 
       setValue(valueBuilder.toString());
+    });
+
+    events().mousePressed().on(mouseEvent -> {
+      if (!isDisabled()) {
+        setVirtualKeyboardVisible(true);
+        mouseEvent.stopPropagation();
+      }
+    });
+
+    events().touchEnd().on(touchEvent -> {
+      if (!isDisabled()) {
+        setVirtualKeyboardVisible(true);
+        touchEvent.stopPropagation();
+      }
     });
   }
 
@@ -115,6 +130,11 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, Te
     return textRenderDetails.dimensions();
   }
 
+  @Override
+  public TextInputGuiElement self() {
+    return this;
+  }
+
   /**
    * TextInputGuiElement does not render children so this method will do nothing.
    *
@@ -123,7 +143,7 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, Te
    */
   @Override
   public TextInputGuiElement appendChildren(GuiElement<?, ?>... children) {
-    return this;
+    throw new UnsupportedOperationException("TextInputGuiElement does not render children");
   }
 
   /**
@@ -134,17 +154,7 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, Te
    */
   @Override
   public TextInputGuiElement removeChild(GuiElement<?, ?> child) {
-    return this;
-  }
-
-  /**
-   * TextInputGuiElement does not render children so this method will return an empty List.
-   *
-   * @return empty List
-   */
-  @Override
-  public List<GuiElement<?, ?>> getChildren() {
-    return List.of();
+    throw new UnsupportedOperationException("TextInputGuiElement does not render children");
   }
 
   /**

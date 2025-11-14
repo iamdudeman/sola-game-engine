@@ -9,7 +9,7 @@ import java.util.Arrays;
  */
 @NullMarked
 public class KeyboardInput {
-  static final int KEY_COUNT = 256;
+  static final int KEY_COUNT = 526;
 
   private final boolean[] keysDown = new boolean[KEY_COUNT];
   private final KeyState[] keyStates = new KeyState[KEY_COUNT];
@@ -25,7 +25,7 @@ public class KeyboardInput {
    * Checks if a key is pressed based on its keycode.
    *
    * @param keyCode the code of the key to check
-   * @return true if key is pressed
+   * @return true if the key is pressed
    */
   public boolean isKeyPressed(int keyCode) {
     return KeyState.PRESSED.equals(keyStates[keyCode]);
@@ -35,7 +35,7 @@ public class KeyboardInput {
    * Checks if a {@link Key} is pressed.
    *
    * @param key the key to check
-   * @return true if key is pressed
+   * @return true if the key is pressed
    */
   public boolean isKeyPressed(Key key) {
     return isKeyPressed(key.getCode());
@@ -45,7 +45,7 @@ public class KeyboardInput {
    * Checks if a key is held based on its keycode.
    *
    * @param keyCode the code of the key to check
-   * @return true if key is held
+   * @return true if the key is held
    */
   public boolean isKeyHeld(int keyCode) {
     return KeyState.HELD.equals(keyStates[keyCode]);
@@ -55,7 +55,7 @@ public class KeyboardInput {
    * Checks if a {@link Key} is held.
    *
    * @param key the key to check
-   * @return true if key is held
+   * @return true if the key is held
    */
   public boolean isKeyHeld(Key key) {
     return isKeyHeld(key.getCode());

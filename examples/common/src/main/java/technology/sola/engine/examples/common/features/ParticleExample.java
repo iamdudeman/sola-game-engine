@@ -2,13 +2,15 @@ package technology.sola.engine.examples.common.features;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.World;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.math.linear.Vector2D;
@@ -22,7 +24,9 @@ import technology.sola.math.linear.Vector2D;
  * </ul>
  */
 @NullMarked
-public class ParticleExample extends SolaWithDefaults {
+public class ParticleExample extends Sola {
+  private SolaGraphics solaGraphics;
+
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
@@ -31,13 +35,19 @@ public class ParticleExample extends SolaWithDefaults {
   }
 
   @Override
-  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+  protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
-    defaultsConfigurator.useGraphics();
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .buildAndInitialize(assetLoaderProvider);
 
     solaEcs.setWorld(buildWorld());
     solaEcs.addSystem(new ParticleSystem());
+  }
+
+  @Override
+  protected void onRender(Renderer renderer) {
+    solaGraphics.render(renderer);
   }
 
   private World buildWorld() {

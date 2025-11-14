@@ -1,6 +1,11 @@
+plugins {
+  id("technology.sola.plugins.sola-java-conventions")
+}
+
 dependencies {
-  api("com.github.iamdudeman:sola-ecs:2.2.0")
-  api("com.github.iamdudeman:sola-json:4.0.1")
+  // can also point to git branch via commit (ex. 8d601c3cca)
+  api("com.github.iamdudeman:sola-ecs:2.3.0")
+  api("com.github.iamdudeman:sola-json:4.0.3")
 
   // performance testing dependencies
   testImplementation("org.openjdk.jmh:jmh-core:1.37")
@@ -19,7 +24,7 @@ publishing {
 }
 
 tasks.register("jmhBenchmark", JavaExec::class) {
-  group = "verification"
+  group = "sola"
   description = "Execute jmh benchmark comparisons"
   mainClass = "org.openjdk.jmh.Main"
 

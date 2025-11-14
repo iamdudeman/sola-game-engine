@@ -4,7 +4,7 @@ plugins {
   `kotlin-dsl`
   `java-gradle-plugin`
   `maven-publish`
-  id("com.gradle.plugin-publish") version "1.2.1"
+  id("com.gradle.plugin-publish") version "2.0.0"
 }
 
 val props = Properties()
@@ -15,15 +15,31 @@ group = "technology.sola.plugins"
 version = props.getProperty("version")
 
 repositories {
-  gradlePluginPortal() // so that external plugins can be resolved in dependencies section
+  google()
+  gradlePluginPortal() // so that external plugins can be resolved in dependencies
 }
 
 dependencies {
-  implementation("gradle.plugin.com.github.spotbugs.snom:spotbugs-gradle-plugin:4.7.2")
+  implementation("com.android.tools.build:gradle:8.12.3")
 }
 
 gradlePlugin {
   plugins {
+    create("sola-android-app") {
+      id = "technology.sola.plugins.sola-android-app"
+      implementationClass = "technology.sola.plugins.SolaAndroidAppPlugin"
+    }
+
+    create("sola-android-conventions") {
+      id = "technology.sola.plugins.sola-android-conventions"
+      implementationClass = "technology.sola.plugins.SolaAndroidConventionsPlugin"
+    }
+
+    create("sola-java-conventions") {
+      id = "technology.sola.plugins.sola-java-conventions"
+      implementationClass = "technology.sola.plugins.SolaJavaConventionsPlugin"
+    }
+
     create("sola-java-distribution") {
       id = "technology.sola.plugins.sola-java-distribution"
       implementationClass = "technology.sola.plugins.SolaJavaDistributionPlugin"

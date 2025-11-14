@@ -3,9 +3,10 @@ package technology.sola.engine.examples.common.features;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CameraComponent;
@@ -26,8 +27,9 @@ import technology.sola.math.linear.Vector2D;
  * </ul>
  */
 @NullMarked
-public class MouseAndCameraExample extends SolaWithDefaults {
+public class MouseAndCameraExample extends Sola {
   private ClickCreateEntitySystem clickCreateEntitySystem;
+  private SolaGraphics solaGraphics;
 
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
@@ -37,10 +39,11 @@ public class MouseAndCameraExample extends SolaWithDefaults {
   }
 
   @Override
-  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+  protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
-    defaultsConfigurator.useGraphics();
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .buildAndInitialize(assetLoaderProvider);
 
     platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
 
@@ -51,13 +54,13 @@ public class MouseAndCameraExample extends SolaWithDefaults {
 
   @Override
   protected void onRender(Renderer renderer) {
-    super.onRender(renderer);
+    solaGraphics.render(renderer);
 
     renderer.fillRect(0, 0, 800, 10, clickCreateEntitySystem.colors[clickCreateEntitySystem.colorIndex]);
   }
 
   private World createWorld() {
-    World world = new World(1000);
+    World world = new World(10);
 
     world.createEntity()
       .addComponent(new CameraComponent())
@@ -82,7 +85,7 @@ public class MouseAndCameraExample extends SolaWithDefaults {
 
       if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
         Vector2D mousePosition = mouseInput.getMousePosition();
-        Vector2D worldPosition = solaGraphics().screenToWorldCoordinate(mousePosition);
+        Vector2D worldPosition = solaGraphics.screenToWorldCoordinate(mousePosition);
 
         world.createEntity()
           .addComponent(new TransformComponent(worldPosition.x(), worldPosition.y(), 10, 10))

@@ -10,8 +10,6 @@ import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 
-import java.util.List;
-
 /**
  * SpriteGuiElement is a {@link GuiElement} that renders a sprite from a {@link SpriteSheet} in a GUI. It does not
  * render child elements.
@@ -65,6 +63,11 @@ public class SpriteGuiElement extends GuiElement<BaseStyles, SpriteGuiElement> {
     return new GuiElementDimensions(0, 0);
   }
 
+  @Override
+  public SpriteGuiElement self() {
+    return this;
+  }
+
   /**
    * ImageGuiElement is not focusable so this will return false.
    *
@@ -83,7 +86,7 @@ public class SpriteGuiElement extends GuiElement<BaseStyles, SpriteGuiElement> {
    */
   @Override
   public SpriteGuiElement appendChildren(GuiElement<?, ?>... children) {
-    return this;
+    throw new UnsupportedOperationException("SpriteGuiElement does not render children");
   }
 
   /**
@@ -94,17 +97,7 @@ public class SpriteGuiElement extends GuiElement<BaseStyles, SpriteGuiElement> {
    */
   @Override
   public SpriteGuiElement removeChild(GuiElement<?, ?> child) {
-    return this;
-  }
-
-  /**
-   * ImageGuiElement does not render children so this method will return an empty List.
-   *
-   * @return empty List
-   */
-  @Override
-  public List<GuiElement<?, ?>> getChildren() {
-    return List.of();
+    throw new UnsupportedOperationException("SpriteGuiElement does not render children");
   }
 
   /**

@@ -3,31 +3,34 @@ package technology.sola.engine.examples.common.games;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaWithDefaults;
+import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
+import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.system.PhysicsSystem;
+import technology.sola.engine.utils.SolaRandom;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.linear.Vector2D;
 
-import java.util.Random;
-
 /**
- * CirclePop is a {@link technology.sola.engine.core.Sola} little game that also stress tests rendering for the sola
- * game engine.
+ * CirclePop is a {@link technology.sola.engine.core.Sola} little game that also does a rendering stress test for the
+ * sola game engine.
  */
 @NullMarked
-public class CirclePopGame extends SolaWithDefaults {
+public class CirclePopGame extends Sola {
   private final TextGuiElement scoreGuiElement = new TextGuiElement().setText("0");
   private int score = 0;
+  private SolaGraphics solaGraphics;
 
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
@@ -37,30 +40,39 @@ public class CirclePopGame extends SolaWithDefaults {
   }
 
   @Override
-  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+  protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
-    defaultsConfigurator.useGraphics().useGui();
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withGui(mouseInput)
+      .buildAndInitialize(assetLoaderProvider);
 
     solaEcs.addSystems(new PhysicsSystem(), new PlayerInputSystem());
     solaEcs.setWorld(buildWorld());
 
     scoreGuiElement.addStyle(ConditionalStyle.always(
-      TextStyles.create()
+      new TextStyles.Builder<>()
         .setBackgroundColor(Color.WHITE)
         .setPadding(5)
         .setTextColor(Color.BLACK)
         .build()
     ));
 
-    guiDocument().setRootElement(scoreGuiElement);
+    solaGraphics.guiDocument().setRootElement(scoreGuiElement);
+
+    platform().getViewport().setAspectMode(AspectMode.STRETCH);
+  }
+
+  @Override
+  protected void onRender(Renderer renderer) {
+    solaGraphics.render(renderer);
   }
 
   private class PlayerInputSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
       if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
-        var point = solaGraphics().screenToWorldCoordinate(mouseInput.getMousePosition());
+        var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
 
         for (var entry : world.createView().of(TransformComponent.class).getEntries()) {
           var radius = entry.c1().getScaleX() * 0.5f;
@@ -81,21 +93,20 @@ public class CirclePopGame extends SolaWithDefaults {
   }
 
   private World buildWorld() {
-    Random random = new Random();
     World world = new World(10000);
 
-    for (int i = 0; i < world.getMaxEntityCount(); i++) {
-      int x = random.nextInt(0, 800);
-      int y = random.nextInt(0, 600);
-      int scale = random.nextInt(3, 20);
+    for (int i = 0; i < world.getCurrentCapacity(); i++) {
+      int x = SolaRandom.nextInt(0, 800);
+      int y = SolaRandom.nextInt(0, 600);
+      int scale = SolaRandom.nextInt(3, 20);
 
-      int red = random.nextInt(0, 256);
-      int green = random.nextInt(0, 256);
-      int blue = random.nextInt(0, 256);
-      boolean filled = random.nextBoolean();
+      int red = SolaRandom.nextInt(0, 256);
+      int green = SolaRandom.nextInt(0, 256);
+      int blue = SolaRandom.nextInt(0, 256);
+      boolean filled = SolaRandom.nextBoolean();
 
-      float velX = random.nextFloat(-50, 50);
-      float velY = random.nextFloat(-50, 50);
+      float velX = SolaRandom.nextFloat(-50, 50);
+      float velY = SolaRandom.nextFloat(-50, 50);
 
       DynamicBodyComponent dynamicBodyComponent = new DynamicBodyComponent(true);
 

@@ -7,6 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelFormat;
 import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
 import javafx.scene.transform.Affine;
 import javafx.stage.Stage;
 import org.jspecify.annotations.NullMarked;
@@ -16,7 +17,6 @@ import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.FontAssetLoader;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetAssetLoader;
-import technology.sola.engine.assets.input.ControlsConfigAssetLoader;
 import technology.sola.engine.assets.json.JsonElementAsset;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
@@ -26,17 +26,16 @@ import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
-import technology.sola.engine.input.KeyEvent;
-import technology.sola.engine.input.MouseEvent;
-import technology.sola.engine.input.MouseWheelEvent;
+import technology.sola.engine.input.*;
+import technology.sola.engine.networking.rest.JavaRestClient;
+import technology.sola.engine.networking.socket.JavaSocketClient;
 import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
 import technology.sola.engine.platform.javafx.assets.audio.JavaFxAudioClipAssetLoader;
 import technology.sola.engine.platform.javafx.assets.JavaFxJsonAssetLoader;
 import technology.sola.engine.platform.javafx.assets.graphics.JavaFxSolaImageAssetLoader;
 import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
 import technology.sola.engine.platform.javafx.core.JavaFxRenderer;
-import technology.sola.engine.platform.javafx.core.JavaFxRestClient;
-import technology.sola.engine.platform.javafx.core.JavaFxSocketClient;
+import technology.sola.engine.storage.FileSaveStorage;
 import technology.sola.logging.SolaLogger;
 
 import java.io.IOException;
@@ -55,6 +54,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   private final Double initialWindowWidth;
   @Nullable
   private final Double initialWindowHeight;
+  private final Color backgroundColor;
   private Canvas canvas;
   private GraphicsContext graphicsContext;
   private WritableImage writableImage;
@@ -68,18 +68,24 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   }
 
   /**
-   * Creates a SwingSolaPlatform instance with desired configuration.
+   * Creates a SwingSolaPlatform instance with the desired configuration.
    *
    * @param platformConfig the {@link JavaFxSolaPlatformConfig}
    */
   public JavaFxSolaPlatform(JavaFxSolaPlatformConfig platformConfig) {
+    super(new JavaSocketClient(), new JavaRestClient(), new FileSaveStorage());
+
     this.useSoftwareRendering = platformConfig.useSoftwareRendering();
     this.useImageSmoothing = platformConfig.useImageSmoothing();
     this.initialWindowWidth = platformConfig.initialWindowWidth();
     this.initialWindowHeight = platformConfig.initialWindowHeight();
 
-    socketClient = new JavaFxSocketClient();
-    restClient = new JavaFxRestClient();
+    backgroundColor = new Color(
+      platformConfig.backgroundColor().getRed() / 255d,
+      platformConfig.backgroundColor().getGreen() / 255d,
+      platformConfig.backgroundColor().getBlue() / 255d,
+      platformConfig.backgroundColor().getAlpha() / 255d
+    );
   }
 
   @Override
@@ -135,6 +141,26 @@ public class JavaFxSolaPlatform extends SolaPlatform {
 
       mouseWheelEventConsumer.accept(new MouseWheelEvent(isUp, isDown, isLeft, isRight));
     });
+  }
+
+  /**
+   * Not supported on JavaFx.
+   *
+   * @param touchEventConsumer the method called when a touch interaction takes place
+   */
+  @Override
+  public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
+    // Not supported on JavaFx
+  }
+
+  /**
+   * Not supported on JavaFx.
+   *
+   * @param visible whether the virtual keyboard should be visible or not
+   */
+  @Override
+  public void setVirtualKeyboardVisible(boolean visible) {
+    // Not supported on JavaFx
   }
 
   @Override
@@ -195,7 +221,8 @@ public class JavaFxSolaPlatform extends SolaPlatform {
 
   @Override
   protected void beforeRender(Renderer renderer) {
-    graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    graphicsContext.setFill(backgroundColor);
+    graphicsContext.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
     if (!useSoftwareRendering) {
       graphicsContext.setTransform(originalTransform);
@@ -238,9 +265,6 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     assetLoaderProvider.add(new SpriteSheetAssetLoader(
       jsonElementAssetAssetLoader, solaImageAssetLoader
     ));
-    assetLoaderProvider.add(new ControlsConfigAssetLoader(
-      jsonElementAssetAssetLoader
-    ));
   }
 
   @Override
@@ -262,7 +286,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   }
 
   private MouseEvent fxToSola(javafx.scene.input.MouseEvent fxMouseEvent) {
-    MouseCoordinate adjusted = adjustMouseForViewport((int) fxMouseEvent.getX(), (int) fxMouseEvent.getY());
+    PointerCoordinate adjusted = adjustPointerForViewport((int) fxMouseEvent.getX(), (int) fxMouseEvent.getY());
 
     return new MouseEvent(fxMouseEvent.getButton().ordinal(), adjusted.x(), adjusted.y());
   }

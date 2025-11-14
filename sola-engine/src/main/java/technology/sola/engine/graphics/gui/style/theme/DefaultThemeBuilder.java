@@ -34,43 +34,43 @@ public class DefaultThemeBuilder {
       .addStyle(SectionGuiElement.class, List.of())
       .addStyle(TextGuiElement.class, List.of(
         ConditionalStyle.always(
-          TextStyles.create()
+          new TextStyles.Builder<>()
             .setTextColor(textColor)
             .build()
         )
       ))
       .addStyle(ButtonGuiElement.class, List.of(
         ConditionalStyle.always(
-          BaseStyles.create()
+          new BaseStyles.Builder<>()
             .setBorderColor(inputBorderColor)
             .setBackgroundColor(buttonBackgroundColor)
             .build()
         ),
         ConditionalStyle.focus(
-          BaseStyles.create()
+          new BaseStyles.Builder<>()
             .setBorderColor(inputFocusBorderColor)
             .build()
         ),
         ConditionalStyle.hover(
-          BaseStyles.create()
+          new BaseStyles.Builder<>()
             .setBackgroundColor(buttonBackgroundColor.shade(0.1f))
             .build()
         ),
         ConditionalStyle.active(
-          BaseStyles.create()
+          new BaseStyles.Builder<>()
             .setBorderColor(inputBorderColor)
             .setBackgroundColor(inputBackgroundColor)
             .build()
         ),
         ConditionalStyle.disabled(
-          BaseStyles.create()
+          new BaseStyles.Builder<>()
             .setBackgroundColor(buttonBackgroundColor.shade(0.18f))
             .build()
         )
       ))
       .addStyle(TextInputGuiElement.class, List.of(
         ConditionalStyle.always(
-          TextInputStyles.create()
+          new TextInputStyles.Builder<>()
             .setPlaceholderColor(textColor.tint(0.5f))
             .setTextColor(textColor)
             .setBorderColor(inputBorderColor)
@@ -78,17 +78,17 @@ public class DefaultThemeBuilder {
             .build()
         ),
         ConditionalStyle.focus(
-          TextInputStyles.create()
+          new TextInputStyles.Builder<>()
             .setBorderColor(inputFocusBorderColor)
             .build()
         ),
         ConditionalStyle.hover(
-          TextInputStyles.create()
+          new TextInputStyles.Builder<>()
             .setBackgroundColor(buttonBackgroundColor.shade(0.1f))
             .build()
         ),
         ConditionalStyle.disabled(
-          TextInputStyles.create()
+          new TextInputStyles.Builder<>()
             .setBackgroundColor(inputBackgroundColor.shade(0.18f))
             .build()
         )
@@ -114,43 +114,43 @@ public class DefaultThemeBuilder {
       .addStyle(SectionGuiElement.class, List.of())
       .addStyle(TextGuiElement.class, List.of(
         ConditionalStyle.always(
-          TextStyles.create()
+          new TextStyles.Builder<>()
             .setTextColor(textColor)
             .build()
         )
       ))
       .addStyle(ButtonGuiElement.class, List.of(
         ConditionalStyle.always(
-          BaseStyles.create()
+          new BaseStyles.Builder<>()
             .setBorderColor(inputBorderColor)
             .setBackgroundColor(buttonBackgroundColor)
             .build()
         ),
         ConditionalStyle.focus(
-          BaseStyles.create()
+          new BaseStyles.Builder<>()
             .setBorderColor(inputFocusBorderColor)
             .build()
         ),
         ConditionalStyle.hover(
-          BaseStyles.create()
+          new BaseStyles.Builder<>()
             .setBackgroundColor(buttonBackgroundColor.tint(0.25f))
             .build()
         ),
         ConditionalStyle.active(
-          BaseStyles.create()
+          new BaseStyles.Builder<>()
             .setBorderColor(inputBorderColor)
             .setBackgroundColor(inputBackgroundColor)
             .build()
         ),
         ConditionalStyle.disabled(
-          BaseStyles.create()
+          new BaseStyles.Builder<>()
             .setBackgroundColor(buttonBackgroundColor.tint(0.18f))
             .build()
         )
       ))
       .addStyle(TextInputGuiElement.class, List.of(
         ConditionalStyle.always(
-          TextInputStyles.create()
+          new TextInputStyles.Builder<>()
             .setPlaceholderColor(textColor.shade(0.2f))
             .setTextColor(textColor)
             .setBorderColor(inputBorderColor)
@@ -158,18 +158,18 @@ public class DefaultThemeBuilder {
             .build()
         ),
         ConditionalStyle.focus(
-          TextInputStyles.create()
+          new TextInputStyles.Builder<>()
             .setBorderColor(inputFocusBorderColor)
             .build()
         ),
         ConditionalStyle.hover(
-          TextInputStyles.create()
+          new TextInputStyles.Builder<>()
             .setBackgroundColor(inputBackgroundColor.tint(0.25f))
             .build()
         ),
         ConditionalStyle.disabled(
-          TextInputStyles.create()
-            .setBackgroundColor(inputBackgroundColor.tint(0.18f))
+          new TextInputStyles.Builder<>()
+            .setBackgroundColor(inputBackgroundColor.tint(0.38f))
             .build()
         )
       ))

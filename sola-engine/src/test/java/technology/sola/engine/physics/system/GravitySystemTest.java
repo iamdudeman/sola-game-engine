@@ -20,6 +20,8 @@ class GravitySystemTest {
     DynamicBodyComponent dynamicBodyComponent = new DynamicBodyComponent(new Material(2));
     world.createEntity().addComponent(dynamicBodyComponent);
 
+    world.update();
+
     gravitySystem.update(world, 1f);
 
     assertEquals(0, dynamicBodyComponent.getForceX());

@@ -1,7 +1,7 @@
 plugins {
-  id("sola.platform-conventions")
+  id("technology.sola.plugins.sola-java-conventions")
   id("technology.sola.sola-publishing")
-  id("org.openjfx.javafxplugin") version "0.0.14"
+  id("org.openjfx.javafxplugin") version "0.1.0"
 }
 
 javafx {
@@ -10,6 +10,8 @@ javafx {
 }
 
 dependencies {
+  api(project(":sola-engine"))
+
   implementation(project(":sola-engine:platform:javafx"))
   implementation(project(":tooling"))
 }

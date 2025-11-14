@@ -86,7 +86,7 @@ public class NewFontDialogContent extends EditorPanel {
           fontChoice.getValue(),
           sizeChoice.getValue().toString(),
           styleChoice.getValue(),
-          charactersArea.getText()
+          charactersArea.getText() + " "
         );
 
       onAfterCreate.run();

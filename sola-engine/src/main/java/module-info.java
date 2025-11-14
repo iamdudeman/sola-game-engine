@@ -16,15 +16,13 @@ module technology.sola.engine {
   exports technology.sola.engine.assets.graphics.font.mapper;
   exports technology.sola.engine.assets.graphics.gui;
   exports technology.sola.engine.assets.graphics.spritesheet;
-  exports technology.sola.engine.assets.input;
   exports technology.sola.engine.assets.json;
 
   exports technology.sola.engine.core;
   exports technology.sola.engine.core.component;
   exports technology.sola.engine.core.event;
 
-  exports technology.sola.engine.defaults;
-  exports technology.sola.engine.defaults.graphics.modules;
+  exports technology.sola.engine.debug;
 
   exports technology.sola.engine.event;
 
@@ -41,6 +39,7 @@ module technology.sola.engine {
   exports technology.sola.engine.graphics.gui.style;
   exports technology.sola.engine.graphics.gui.style.property;
   exports technology.sola.engine.graphics.gui.style.theme;
+  exports technology.sola.engine.graphics.modules;
   exports technology.sola.engine.graphics.renderer;
   exports technology.sola.engine.graphics.renderer.blend;
   exports technology.sola.engine.graphics.screen;
@@ -59,6 +58,10 @@ module technology.sola.engine {
   exports technology.sola.engine.networking;
   exports technology.sola.engine.networking.rest;
   exports technology.sola.engine.networking.socket;
+
+  exports technology.sola.engine.storage;
+
+  exports technology.sola.engine.utils;
 
   exports technology.sola.logging;
 

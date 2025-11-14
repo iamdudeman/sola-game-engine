@@ -49,6 +49,17 @@ public record GuiElementBounds(int x, int y, int width, int height) {
   }
 
   /**
+   * Checks to see if a point is within bounds.
+   *
+   * @param x the x of the point to check
+   * @param y the y of the point to check
+   * @return true if the point is within the bounds
+   */
+  public boolean contains(float x, float y) {
+    return x >= this.x && x <= this.x + width && y >= this.y && y <= this.y + height;
+  }
+
+  /**
    * Checks to see if a {@link MouseEvent} is within bounds.
    *
    * @param mouseEvent the mouse event

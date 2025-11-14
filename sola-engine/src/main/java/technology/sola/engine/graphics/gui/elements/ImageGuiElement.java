@@ -9,8 +9,6 @@ import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 
-import java.util.List;
-
 /**
  * ImageGuiElement is a {@link GuiElement} that renders a {@link SolaImage} in a GUI. It does not render child elements.
  */
@@ -57,6 +55,11 @@ public class ImageGuiElement extends GuiElement<BaseStyles, ImageGuiElement> {
     return new GuiElementDimensions(0, 0);
   }
 
+  @Override
+  public ImageGuiElement self() {
+    return this;
+  }
+
   /**
    * ImageGuiElement is not focusable so this will return false.
    *
@@ -75,7 +78,7 @@ public class ImageGuiElement extends GuiElement<BaseStyles, ImageGuiElement> {
    */
   @Override
   public ImageGuiElement appendChildren(GuiElement<?, ?>... children) {
-    return this;
+    throw new UnsupportedOperationException("ImageGuiElement does not render children");
   }
 
   /**
@@ -86,17 +89,7 @@ public class ImageGuiElement extends GuiElement<BaseStyles, ImageGuiElement> {
    */
   @Override
   public ImageGuiElement removeChild(GuiElement<?, ?> child) {
-    return this;
-  }
-
-  /**
-   * ImageGuiElement does not render children so this method will return an empty List.
-   *
-   * @return empty List
-   */
-  @Override
-  public List<GuiElement<?, ?>> getChildren() {
-    return List.of();
+    throw new UnsupportedOperationException("ImageGuiElement does not render children");
   }
 
   /**

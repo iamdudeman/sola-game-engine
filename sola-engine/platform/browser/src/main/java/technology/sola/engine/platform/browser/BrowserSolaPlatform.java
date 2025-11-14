@@ -6,7 +6,6 @@ import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.FontAssetLoader;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetAssetLoader;
-import technology.sola.engine.assets.input.ControlsConfigAssetLoader;
 import technology.sola.engine.assets.json.JsonElementAsset;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
@@ -16,22 +15,15 @@ import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
-import technology.sola.engine.input.KeyEvent;
-import technology.sola.engine.input.MouseEvent;
-import technology.sola.engine.input.MouseWheelEvent;
+import technology.sola.engine.input.*;
 import technology.sola.engine.platform.browser.assets.BrowserJsonElementAssetLoader;
 import technology.sola.engine.platform.browser.assets.audio.BrowserAudioClipAssetLoader;
 import technology.sola.engine.platform.browser.assets.graphics.BrowserSolaImageAssetLoader;
-import technology.sola.engine.platform.browser.core.BrowserCanvasRenderer;
-import technology.sola.engine.platform.browser.core.BrowserGameLoop;
-import technology.sola.engine.platform.browser.core.BrowserRestClient;
-import technology.sola.engine.platform.browser.core.BrowserSocketClient;
-import technology.sola.engine.platform.browser.javascript.JsCanvasUtils;
-import technology.sola.engine.platform.browser.javascript.JsKeyboardUtils;
-import technology.sola.engine.platform.browser.javascript.JsMouseUtils;
-import technology.sola.engine.platform.browser.javascript.JsUtils;
+import technology.sola.engine.platform.browser.core.*;
+import technology.sola.engine.platform.browser.javascript.*;
 import technology.sola.logging.SolaLogger;
 
+import java.util.Locale;
 import java.util.function.Consumer;
 
 /**
@@ -42,6 +34,7 @@ import java.util.function.Consumer;
 public class BrowserSolaPlatform extends SolaPlatform {
   private static final SolaLogger LOGGER = SolaLogger.of(BrowserSolaPlatform.class);
   private final boolean useSoftwareRendering;
+  private final String backgroundColor;
 
   /**
    * Creates a BrowserSolaPlatform instance using default {@link BrowserSolaPlatformConfig}.
@@ -51,14 +44,21 @@ public class BrowserSolaPlatform extends SolaPlatform {
   }
 
   /**
-   * Creates a BrowserSolaPlatform instance with desired configuration.
+   * Creates a BrowserSolaPlatform instance with the desired configuration.
    *
    * @param platformConfig the {@link BrowserSolaPlatformConfig}
    */
   public BrowserSolaPlatform(BrowserSolaPlatformConfig platformConfig) {
+    super(new BrowserSocketClient(), new BrowserRestClient(), new LocalStorageSaveStorage());
+
     this.useSoftwareRendering = platformConfig.useSoftwareRendering();
-    this.socketClient = new BrowserSocketClient();
-    this.restClient = new BrowserRestClient();
+
+    backgroundColor = String.format(Locale.US, "rgba(%d, %d, %d, %f",
+      platformConfig.backgroundColor().getRed(),
+      platformConfig.backgroundColor().getGreen(),
+      platformConfig.backgroundColor().getBlue(),
+      platformConfig.backgroundColor().getAlpha() / 255f
+    );
   }
 
   @Override
@@ -101,11 +101,54 @@ public class BrowserSolaPlatform extends SolaPlatform {
   }
 
   @Override
+  public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
+    JsTouchUtils.touchEventListener("touchmove", (id, x, y) -> {
+      PointerCoordinate adjusted = adjustPointerForViewport(x, y);
+
+      touchEventConsumer.accept(new TouchEvent(new Touch(
+        adjusted.x(), adjusted.y(), TouchPhase.MOVED, id
+      )));
+    });
+    JsTouchUtils.touchEventListener("touchstart", (id, x, y) -> {
+      PointerCoordinate adjusted = adjustPointerForViewport(x, y);
+
+      touchEventConsumer.accept(new TouchEvent(new Touch(
+        adjusted.x(), adjusted.y(), TouchPhase.BEGAN, id
+      )));
+    });
+    JsTouchUtils.touchEventListener("touchend", (id, x, y) -> {
+      PointerCoordinate adjusted = adjustPointerForViewport(x, y);
+
+      touchEventConsumer.accept(new TouchEvent(new Touch(
+        adjusted.x(), adjusted.y(), TouchPhase.ENDED, id
+      )));
+    });
+    JsTouchUtils.touchEventListener("touchcancel", (id, x, y) -> {
+      PointerCoordinate adjusted = adjustPointerForViewport(x, y);
+
+      touchEventConsumer.accept(new TouchEvent(new Touch(
+        adjusted.x(), adjusted.y(), TouchPhase.CANCELLED, id
+      )));
+    });
+  }
+
+  /**
+   * Not supported on browser.
+   *
+   * @param visible whether the virtual keyboard should be visible or not
+   */
+  @Override
+  public void setVirtualKeyboardVisible(boolean visible) {
+    // Not supported on browser
+  }
+
+  @Override
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     JsUtils.setTitle(solaConfiguration.title());
     JsCanvasUtils.canvasInit(JsCanvasUtils.ID_SOLA_ANCHOR, solaConfiguration.rendererWidth(), solaConfiguration.rendererHeight());
     JsKeyboardUtils.init();
     JsMouseUtils.init();
+    JsTouchUtils.init();
 
     JsCanvasUtils.observeCanvasResize((int width, int height) -> viewport.resize(width, height));
     JsCanvasUtils.observeCanvasFocus(isFocused -> {
@@ -116,12 +159,18 @@ public class BrowserSolaPlatform extends SolaPlatform {
       }
     });
 
+    solaEventHub.add(GameLoopEvent.class, event -> {
+      if (event.state() == GameLoopState.STOPPED) {
+        socketClient.disconnect();
+      }
+    });
+
     solaPlatformInitialization.finish();
   }
 
   @Override
   protected void beforeRender(Renderer renderer) {
-    JsCanvasUtils.clearRect();
+    JsCanvasUtils.clearRect(backgroundColor);
 
     if (!useSoftwareRendering) {
       AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
@@ -162,9 +211,6 @@ public class BrowserSolaPlatform extends SolaPlatform {
     assetLoaderProvider.add(new FontAssetLoader(
       jsonElementAssetAssetLoader, solaImageAssetLoader
     ));
-    assetLoaderProvider.add(new ControlsConfigAssetLoader(
-      jsonElementAssetAssetLoader
-    ));
   }
 
   @Override
@@ -182,7 +228,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
   }
 
   private MouseEvent browserToSola(int which, int x, int y) {
-    MouseCoordinate adjusted = adjustMouseForViewport(x, y);
+    PointerCoordinate adjusted = adjustPointerForViewport(x, y);
 
     return new MouseEvent(which, adjusted.x(), adjusted.y());
   }

@@ -5,7 +5,7 @@ import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaPhysics;
+import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.event.Event;
 import technology.sola.engine.examples.common.features.networking.LevelBuilder;
 import technology.sola.engine.examples.common.features.networking.NetworkingExample;
@@ -19,6 +19,9 @@ import technology.sola.engine.server.ClientConnection;
 import technology.sola.engine.server.SolaServer;
 import technology.sola.engine.server.rest.SolaResponse;
 import technology.sola.json.JsonObject;
+import technology.sola.logging.JavaSolaLoggerFactory;
+import technology.sola.logging.SolaLogLevel;
+import technology.sola.logging.SolaLogger;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.HashMap;
@@ -31,6 +34,10 @@ import java.util.stream.Collectors;
 @NullMarked
 public class ServerMain {
   private static final int MAX_PLAYERS = 10;
+
+  static {
+    SolaLogger.configure(SolaLogLevel.WARNING, new JavaSolaLoggerFactory());
+  }
 
   /**
    * Entry point for Server example.
@@ -52,9 +59,9 @@ public class ServerMain {
     public void initialize() {
       registerRestRoutes();
 
-      SolaPhysics solaPhysics = new SolaPhysics(eventHub);
+      new SolaPhysics.Builder(solaEcs)
+        .buildAndInitialize(eventHub);
 
-      solaEcs.addSystems(solaPhysics.getSystems());
       solaEcs.addSystem(new ClientUpdateSystem());
       solaEcs.addSystem(new PlayerMovementSystem());
       solaEcs.setWorld(LevelBuilder.createWorld(NetworkingExample.MAX_PLAYERS));

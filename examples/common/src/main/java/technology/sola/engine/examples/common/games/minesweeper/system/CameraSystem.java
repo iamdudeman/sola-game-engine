@@ -9,12 +9,20 @@ import technology.sola.engine.input.MouseButton;
 import technology.sola.engine.input.MouseInput;
 import technology.sola.math.linear.Vector2D;
 
+/**
+ * {@link EcsSystem} for handling control of the camera.
+ */
 @NullMarked
 public class CameraSystem extends EcsSystem {
   private final MouseInput mouseInput;
   @Nullable
   private Vector2D dragStart;
 
+  /**
+   * Initialize this system.
+   *
+   * @param mouseInput the {@link MouseInput} used to control the camera
+   */
   public CameraSystem(MouseInput mouseInput) {
     this.mouseInput = mouseInput;
   }

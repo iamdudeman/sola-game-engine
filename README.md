@@ -63,6 +63,7 @@ dependencies {
 * [JavaFX](sola-engine/platform/javafx)
 * [Browser](sola-engine/platform/browser)
     * Utilizes [teavm](https://github.com/konsoletyper/teavm) for transpiling to JavaScript
+* [Android](sola-engine/platform/android)
 
 ## Example Code
 
@@ -81,6 +82,8 @@ will have to be downloaded and executed separately.
     * Then
       [DevBrowserFileServerMain](examples/browser/src/main/java/technology/sola/engine/examples/browser/DevBrowserFileServerMain.java)
       acts as a simple http server for the files
+* [Android Platform example](examples/android)
+    * [MainActivity.java](examples/android/src/main/java/technology/sola/engine/examples/android/MainActivity.java) is the entry point
 * [Server example](examples/server)
 * [Editor example](examples/editor)
 
@@ -97,6 +100,9 @@ will have to be downloaded and executed separately.
 4. Vile [Pirate Software Game Jam 15](https://itch.io/jam/pirate/rate/2848192)
     * Play it on its [itch.io page](https://iamdudeman.itch.io/vile)
     * Check out its [GitHub repo](https://github.com/iamdudeman/vile)
+5. Vorm [OLC CodeJam 2025](https://itch.io/jam/olc-codejam-2025/rate/3850158)
+    * Play it on its [itch.io page](https://iamdudeman.itch.io/vorm)
+    * Check out its [GitHub repo](https://github.com/iamdudeman/vorm)
 
 ## Packaging for release
 
@@ -141,6 +147,27 @@ Your users will not need to have Java installed.
 
 4. Output will be in the `dist/javafx` directory
 
+### Android
+
+#### Debug
+
+1. Run the following gradle command
+
+```shell
+.\gradlew.bat distAndroidDebugApk
+```
+
+#### Release
+
+1. Create an upload keystore file
+   1. https://developer.android.com/studio/publish/app-signing#sign_release
+2. Create a copy of [keystore.example.properties](keystore.example.properties) as `keystore.properties`
+3. Update the `keystore.properties` file with your keystore information
+4. Run the following gradle command
+
+```shell
+.\gradlew.bat distAndroidReleaseBundle
+```
 
 ## JSON Schema
 
@@ -156,4 +183,3 @@ the sola game engine to load when manually creating or updating them.
     * [SpriteSheet.schema.json](json-schema/SpriteSheet.schema.json) -> *.sprites.json
     * [Font.schema.json](json-schema/Font.schema.json) -> *.font.json
     * [GuiDocument.schema.json](json-schema/GuiDocument.schema.json) -> *.gui.json
-    * [ControlConfig.schema.json](json-schema/ControlConfig.schema.json) -> *.controls.json

@@ -11,9 +11,12 @@ import technology.sola.engine.graphics.screen.Viewport;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
 import technology.sola.engine.input.MouseWheelEvent;
+import technology.sola.engine.input.TouchEvent;
 import technology.sola.engine.networking.rest.RestClient;
 import technology.sola.engine.networking.socket.SocketClient;
+import technology.sola.engine.storage.SaveStorage;
 import technology.sola.logging.SolaLogger;
+import technology.sola.math.SolaMath;
 
 import java.util.function.Consumer;
 
@@ -23,6 +26,18 @@ import java.util.function.Consumer;
 @NullMarked
 public abstract class SolaPlatform {
   private static final SolaLogger LOGGER = SolaLogger.of(SolaPlatform.class);
+  /**
+   * The {@link SocketClient} for the platform.
+   */
+  protected final SocketClient socketClient;
+  /**
+   * The {@link RestClient} for the platform.
+   */
+  protected final RestClient restClient;
+  /**
+   * The {@link SaveStorage} for the platform.
+   */
+  protected final SaveStorage saveStorage;
   /**
    * The {@link Renderer} for the platform.
    */
@@ -39,14 +54,19 @@ public abstract class SolaPlatform {
    * The {@link EventHub} for the running {@link Sola}.
    */
   protected EventHub solaEventHub;
+
   /**
-   * The {@link SocketClient} for the platform.
+   * Initializes {@link SolaPlatform} internals.
+   *
+   * @param socketClient the {@link SocketClient} for the platform
+   * @param restClient   the {@link RestClient} for the platform
+   * @param saveStorage  the {@link SaveStorage} for the platform
    */
-  protected SocketClient socketClient;
-  /**
-   * The {@link RestClient} for the platform.
-   */
-  protected RestClient restClient;
+  protected SolaPlatform(SocketClient socketClient, RestClient restClient, SaveStorage saveStorage) {
+    this.socketClient = socketClient;
+    this.restClient = restClient;
+    this.saveStorage = saveStorage;
+  }
 
   /**
    * Main entry point for starting a {@link Sola}.
@@ -89,6 +109,13 @@ public abstract class SolaPlatform {
    */
   public RestClient getRestClient() {
     return restClient;
+  }
+
+  /**
+   * @return the platform's {@link SaveStorage}
+   */
+  public SaveStorage getSaveStorage() {
+    return saveStorage;
   }
 
   /**
@@ -139,6 +166,20 @@ public abstract class SolaPlatform {
   public abstract void onMouseWheel(Consumer<MouseWheelEvent> mouseWheelEventConsumer);
 
   /**
+   * Registers an on touch listener.
+   *
+   * @param touchEventConsumer the method called when a touch interaction takes place
+   */
+  public abstract void onTouch(Consumer<TouchEvent> touchEventConsumer);
+
+  /**
+   * Sets the visibility of the virtual keyboard.
+   *
+   * @param visible whether the virtual keyboard should be visible or not
+   */
+  public abstract void setVirtualKeyboardVisible(boolean visible);
+
+  /**
    * Method to initialize a {@link SolaPlatform}. This operation can be async. It will provide the configuration
    * from the {@link Sola#configuration )}.
    *
@@ -163,14 +204,14 @@ public abstract class SolaPlatform {
 
   /**
    * Method to populate the {@link SolaPlatform} {@link AssetLoaderProvider} with
-   * {@link technology.sola.engine.assets.AssetLoader}s that {@link Sola} will be able to utilize.
+   * {@link technology.sola.engine.assets.AssetLoader}s that {@link Sola} will be able to use.
    *
    * @param assetLoaderProvider the {@link AssetLoaderProvider}
    */
   protected abstract void populateAssetLoaderProvider(AssetLoaderProvider assetLoaderProvider);
 
   /**
-   * Builds the {@link Renderer} for this platform. Default implementation will utilize the {@link SoftwareRenderer}
+   * Builds the {@link Renderer} for this platform. Default implementation will use the {@link SoftwareRenderer}
    * implementation.
    *
    * @param solaConfiguration the {@link SolaConfiguration} for the {@link Sola}
@@ -181,7 +222,7 @@ public abstract class SolaPlatform {
   }
 
   /**
-   * Builds the {@link GameLoop} for this platform. Default implementation will utilize the {@link FixedUpdateGameLoop}
+   * Builds the {@link GameLoop} for this platform. Default implementation will use the {@link FixedUpdateGameLoop}
    * implementation.
    *
    * @return the built {@code GameLoop}
@@ -191,22 +232,34 @@ public abstract class SolaPlatform {
   }
 
   /**
-   * Convenience method for calculating adjusted mouse coordinate considering the current
+   * Convenience method for calculating adjusted pointer coordinate considering the current
    * {@link technology.sola.engine.graphics.screen.AspectMode} of the {@link Viewport}.
    *
-   * @param x the raw x coordinate of the mouse click
-   * @param y the raw y coordinate of the mouse click
-   * @return the viewport adjusted mouse click coordinate
+   * @param x the raw x coordinate of the pointer
+   * @param y the raw y coordinate of the pointer
+   * @return the viewport adjusted pointer coordinate
    */
-  protected MouseCoordinate adjustMouseForViewport(int x, int y) {
+  protected PointerCoordinate adjustPointerForViewport(float x, float y) {
+    return adjustPointerForViewport(SolaMath.fastRound(x), SolaMath.fastRound(y));
+  }
+
+  /**
+   * Convenience method for calculating adjusted pointer coordinate considering the current
+   * {@link technology.sola.engine.graphics.screen.AspectMode} of the {@link Viewport}.
+   *
+   * @param x the raw x coordinate of the pointer
+   * @param y the raw y coordinate of the pointer
+   * @return the viewport adjusted pointer coordinate
+   */
+  protected PointerCoordinate adjustPointerForViewport(int x, int y) {
     return switch (viewport.getAspectMode()) {
-      case IGNORE_RESIZING -> new MouseCoordinate(x, y);
+      case IGNORE_RESIZING -> new PointerCoordinate(x, y);
       case STRETCH ->
-        new MouseCoordinate(Math.round(x * viewport.getRendererToAspectRatioX()), Math.round(y * viewport.getRendererToAspectRatioY()));
+        new PointerCoordinate(Math.round(x * viewport.getRendererToAspectRatioX()), Math.round(y * viewport.getRendererToAspectRatioY()));
       case MAINTAIN -> {
         AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
 
-        yield new MouseCoordinate(
+        yield new PointerCoordinate(
           Math.round(x * viewport.getRendererToAspectRatioX() - aspectRatioSizing.x() * viewport.getRendererToAspectRatioX()),
           Math.round(y * viewport.getRendererToAspectRatioY() - aspectRatioSizing.y() * viewport.getRendererToAspectRatioY())
         );
@@ -248,12 +301,12 @@ public abstract class SolaPlatform {
   }
 
   /**
-   * Holds the coordinate of the mouse.
+   * Holds the coordinate of the pointer.
    *
    * @param x the x coordinate
    * @param y the y coordinate
    */
-  protected record MouseCoordinate(int x, int y) {
+  protected record PointerCoordinate(int x, int y) {
   }
 
   /**

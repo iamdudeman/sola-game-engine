@@ -30,7 +30,7 @@ public record Circle(float radius, Vector2D center) implements Shape {
   }
 
   @Override
-  public Vector2D[] getPoints() {
+  public Vector2D[] points() {
     return new Vector2D[0];
   }
 

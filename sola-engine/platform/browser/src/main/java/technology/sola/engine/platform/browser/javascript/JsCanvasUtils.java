@@ -58,9 +58,11 @@ public class JsCanvasUtils {
 
   /**
    * Clears the canvas.
+   *
+   * @param backgroundColor the background color to clear with
    */
-  @JSBody(script = Scripts.CLEAR_CANVAS)
-  public static native void clearRect();
+  @JSBody(script = Scripts.CLEAR_CANVAS, params = {"backgroundColor"})
+  public static native void clearRect(String backgroundColor);
 
   /**
    * Updates the aspect ratio for the canvas.
@@ -111,7 +113,9 @@ public class JsCanvasUtils {
       canvasEle.width = window.innerWidth;
       canvasEle.height = window.innerHeight;
       canvasEle.oncontextmenu = function(e) {
-        e.preventDefault(); e.stopPropagation();
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
       };
 
       var anchorEle = document.getElementById(anchorId);
@@ -134,7 +138,8 @@ public class JsCanvasUtils {
       """;
 
     private static final String CLEAR_CANVAS = """
-      window.solaContext2d.clearRect(0, 0, window.solaCanvas.width, window.solaCanvas.height);
+      window.solaContext2d.fillStyle = backgroundColor;
+      window.solaContext2d.fillRect(0, 0, window.solaCanvas.width, window.solaCanvas.height);
       """;
 
     private static final String UPDATE_ASPECT_RATIO = """

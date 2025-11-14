@@ -19,7 +19,7 @@ public interface Shape {
   /**
    * @return the array of points making up this shape
    */
-  Vector2D[] getPoints();
+  Vector2D[] points();
 
   /**
    * Calculates the area of this shape and return it.
@@ -34,7 +34,7 @@ public interface Shape {
    * @return the centroid
    */
   default Vector2D getCentroid() {
-    return calculateCentroid(getPoints());
+    return calculateCentroid(points());
   }
 
   /**

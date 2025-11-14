@@ -11,6 +11,7 @@ import technology.sola.engine.graphics.renderer.Layer;
 public class LayerComponent implements Component {
   private String layer;
   private int order;
+  private boolean isOrderByVerticalPosition = false;
 
   /**
    * Creates a LayerComponent for the desired layer with default ordering.
@@ -62,5 +63,25 @@ public class LayerComponent implements Component {
    */
   public void setOrder(int order) {
     this.order = order;
+  }
+
+  /**
+   * Sets whether this {@link technology.sola.ecs.Entity} should render based on its vertical position within the layer.
+   * This ignores the order that was set.
+   *
+   * @param isOrderByVerticalPosition whether to render within the layer based on the vertical position
+   * @return this
+   */
+  public LayerComponent setOrderByVerticalPosition(boolean isOrderByVerticalPosition) {
+    this.isOrderByVerticalPosition = isOrderByVerticalPosition;
+
+    return this;
+  }
+
+  /**
+   * @return whether to render within the layer based on the vertical position
+   */
+  public boolean isOrderByVerticalPosition() {
+    return isOrderByVerticalPosition;
   }
 }

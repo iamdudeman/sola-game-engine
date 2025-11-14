@@ -6,6 +6,7 @@ import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.graphics.gui.event.GuiElementEvents;
 import technology.sola.engine.graphics.gui.event.GuiKeyEvent;
 import technology.sola.engine.graphics.gui.event.GuiMouseEvent;
+import technology.sola.engine.graphics.gui.event.GuiTouchEvent;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
 import technology.sola.engine.graphics.gui.style.DefaultStyleValues;
@@ -15,7 +16,6 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -83,11 +83,10 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @param style the style to add
    * @return this
    */
-  @SuppressWarnings("unchecked")
   public final ElementType addStyle(ConditionalStyle<Style> style) {
     styleContainer.addStyle(style);
 
-    return (ElementType) this;
+    return self();
   }
 
   /**
@@ -97,11 +96,10 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @param styles the styles to add
    * @return this
    */
-  @SuppressWarnings("unchecked")
   public final ElementType addStyles(List<ConditionalStyle<Style>> styles) {
     styleContainer.addStyles(styles);
 
-    return (ElementType) this;
+    return self();
   }
 
   /**
@@ -121,14 +119,17 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   public abstract GuiElementDimensions calculateContentDimensions();
 
   /**
+   * @return A correctly typed reference to this {@link GuiElement}
+   */
+  public abstract ElementType self();
+
+  /**
    * Method to render the gui element. It handles rendering the background and border before then calling the
    * {@link GuiElement#renderContent(Renderer)} method.
    *
    * @param renderer the {@link Renderer} instance
    */
   public void render(Renderer renderer) {
-    recalculateLayout();
-
     if (styleContainer.getPropertyValue(BaseStyles::visibility, DefaultStyleValues.VISIBILITY) != Visibility.VISIBLE) {
       return;
     }
@@ -165,7 +166,7 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   /**
    * The active state is for when an element is being interacted with (space key press or mouse pressed).
    *
-   * @return true if element is currently active
+   * @return true if this element is currently active
    */
   public boolean isActive() {
     if (!isFocussed()) {
@@ -176,7 +177,7 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   }
 
   /**
-   * @return true if element currently has keyboard focus
+   * @return true if this element currently has keyboard focus
    */
   public boolean isFocussed() {
     return getGuiDocument().isFocussed(this);
@@ -189,6 +190,15 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
     if (isFocusable()) {
       getGuiDocument().requestFocus(this);
     }
+  }
+
+  /**
+   * Sets the visibility of the virtual keyboard.
+   *
+   * @param visible whether the virtual keyboard should be visible or not
+   */
+  public void setVirtualKeyboardVisible(boolean visible) {
+    getGuiDocument().setVirtualKeyboardVisible(visible);
   }
 
   /**
@@ -215,8 +225,11 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   /**
    * @return the parent element
    */
-  @Nullable
   public GuiElement<?, ?> getParent() {
+    if (parent == null) {
+      throw new IllegalStateException(getClass().getSimpleName() + " has not been attached to a document yet so it has no parent.");
+    }
+
     return parent;
   }
 
@@ -253,11 +266,10 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @param id the new id
    * @return this
    */
-  @SuppressWarnings("unchecked")
   public ElementType setId(String id) {
     this.id = id;
 
-    return (ElementType) this;
+    return self();
   }
 
   /**
@@ -292,12 +304,11 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @param <T>          the element type
    * @return the list of elements with the desired type
    */
-  @SuppressWarnings("unchecked")
   public <T extends GuiElement<?, ?>> List<T> findElementsByType(Class<T> elementClass) {
     List<T> elements = new ArrayList<>();
 
     if (this.getClass().equals(elementClass)) {
-      elements.add((T) this);
+      elements.add(elementClass.cast(this));
     }
 
     for (var child : children) {
@@ -313,7 +324,6 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @param child the child element to remove
    * @return this
    */
-  @SuppressWarnings("unchecked")
   public ElementType removeChild(GuiElement<?, ?> child) {
     if (children.contains(child)) {
       child.parent = null;
@@ -321,14 +331,7 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
       invalidateLayout();
     }
 
-    return (ElementType) this;
-  }
-
-  /**
-   * @return an immutable list of children GuiElements
-   */
-  public List<GuiElement<?, ?>> getChildren() {
-    return Collections.unmodifiableList(children);
+    return self();
   }
 
   /**
@@ -337,7 +340,6 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @param children the child elements to add
    * @return this
    */
-  @SuppressWarnings("unchecked")
   public ElementType appendChildren(GuiElement<?, ?>... children) {
     for (GuiElement<?, ?> child : children) {
       if (child.parent != null) {
@@ -352,7 +354,7 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
 
     this.invalidateLayout();
 
-    return (ElementType) this;
+    return self();
   }
 
   /**
@@ -367,6 +369,19 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    */
   public void invalidateLayout() {
     isLayoutChanged = true;
+  }
+
+  /**
+   * Checks to see if this {@link GuiElement} is currently attached to the {@link GuiDocument} and is part of rendering.
+   *
+   * @return true if attached
+   */
+  public boolean isAttached() {
+    if (parent == null) {
+      return false;
+    }
+
+    return getParent().isAttached();
   }
 
   /**
@@ -391,7 +406,7 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @return the {@link AssetLoaderProvider} instance
    */
   protected AssetLoaderProvider getAssetLoaderProvider() {
-    return this.parent.getAssetLoaderProvider();
+    return getParent().getAssetLoaderProvider();
   }
 
   /**
@@ -484,6 +499,52 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
     }
   }
 
+  void onTouch(GuiTouchEvent event) {
+    for (var child : children) {
+      child.onTouch(event);
+    }
+
+    if (event.isAbleToPropagate()) {
+      var touch = event.getTouchEvent().touch();
+
+      switch (touch.phase()) {
+        case BEGAN -> {
+          if (event.isAbleToPropagate() && shouldHandleTouchStartEvents() && bounds.contains(touch.x(), touch.y())) {
+            events.touchStart().emit(event);
+            setActive(true);
+          }
+        }
+        case ENDED -> {
+          if (event.isAbleToPropagate() && shouldHandleTouchEndEvents() && bounds.contains(touch.x(), touch.y())) {
+            events.touchEnd().emit(event);
+          }
+
+          setActive(false);
+        }
+        case MOVED -> {
+          if (event.isAbleToPropagate()) {
+            if (shouldHandleTouchMoveEvents() && bounds.contains(touch.x(), touch.y())) {
+              events.touchMove().emit(event);
+
+              if (!isHovered) {
+                setHovered(true);
+              }
+            } else if (isHovered) {
+              setHovered(false);
+            }
+          }
+        }
+        case CANCELLED -> {
+          if (event.isAbleToPropagate() && shouldHandleTouchCancelEvents() && bounds.contains(touch.x(), touch.y())) {
+            events.touchCancel().emit(event);
+          }
+
+          setActive(false);
+        }
+      }
+    }
+  }
+
   void setBounds(GuiElementBounds bounds) {
     this.bounds = bounds;
 
@@ -522,14 +583,14 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   }
 
   GuiDocument getGuiDocument() {
-    return this.parent.getGuiDocument();
+    return getParent().getGuiDocument();
   }
 
-  private void recalculateLayout() {
+  void recalculateLayout() {
     if (isLayoutChanged()) {
       Visibility visibility = styles().getPropertyValue(BaseStyles::visibility, DefaultStyleValues.VISIBILITY);
 
-      // If no visibility then clear out all bounds so no layout space is taken
+      // If no visibility, then clear out all bounds so no layout space is taken
       if (visibility == Visibility.NONE) {
         boundConstraints = new GuiElementBounds(0, 0, 0, 0);
         bounds = boundConstraints;
@@ -576,7 +637,8 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   }
 
   private boolean shouldHandleMouseMoveEvents() {
-    return styleContainer.hasHoverCondition() || events.mouseMoved().hasListeners() || events.mouseEntered().hasListeners() || events.mouseExited().hasListeners();
+    return styleContainer.hasHoverCondition() || events.mouseMoved().hasListeners()
+      || events.mouseEntered().hasListeners() || events.mouseExited().hasListeners();
   }
 
   private boolean shouldHandleMousePressedEvents() {
@@ -585,5 +647,22 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
 
   private boolean shouldHandleMouseReleasedEvents() {
     return styleContainer.hasActiveCondition() || events().mouseReleased().hasListeners();
+  }
+
+  private boolean shouldHandleTouchMoveEvents() {
+    return styleContainer.hasHoverCondition() || events.touchMove().hasListeners()
+      || events.touchStart().hasListeners() || events.touchEnd().hasListeners();
+  }
+
+  private boolean shouldHandleTouchStartEvents() {
+    return styleContainer.hasActiveCondition() || events().touchStart().hasListeners();
+  }
+
+  private boolean shouldHandleTouchEndEvents() {
+    return styleContainer.hasActiveCondition() || events().touchEnd().hasListeners();
+  }
+
+  private boolean shouldHandleTouchCancelEvents() {
+    return styleContainer.hasActiveCondition() || events().touchCancel().hasListeners();
   }
 }

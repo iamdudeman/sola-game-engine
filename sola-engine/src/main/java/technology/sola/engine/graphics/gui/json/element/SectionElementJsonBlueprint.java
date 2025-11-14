@@ -30,6 +30,6 @@ public class SectionElementJsonBlueprint extends GuiElementJsonBlueprint<BaseSty
 
   @Override
   protected BaseStyles.Builder<?> createStylesBuilder() {
-    return BaseStyles.create();
+    return new BaseStyles.Builder<>();
   }
 }

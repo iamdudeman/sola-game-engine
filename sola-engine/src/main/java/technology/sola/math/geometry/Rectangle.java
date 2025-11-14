@@ -41,7 +41,7 @@ public record Rectangle(Vector2D min, Vector2D max) implements Shape {
   }
 
   @Override
-  public Vector2D[] getPoints() {
+  public Vector2D[] points() {
     Vector2D[] points = new Vector2D[4];
 
     points[0] = min();

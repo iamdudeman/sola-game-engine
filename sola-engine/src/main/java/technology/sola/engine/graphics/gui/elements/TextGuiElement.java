@@ -54,6 +54,11 @@ public class TextGuiElement extends GuiElement<TextStyles, TextGuiElement> {
     return textRenderDetails.dimensions();
   }
 
+  @Override
+  public TextGuiElement self() {
+    return this;
+  }
+
   /**
    * TextGuiElement is not focusable so this will return false.
    *
@@ -72,7 +77,7 @@ public class TextGuiElement extends GuiElement<TextStyles, TextGuiElement> {
    */
   @Override
   public TextGuiElement appendChildren(GuiElement<?, ?>... children) {
-    return this;
+    throw new UnsupportedOperationException("TextGuiElement does not render children");
   }
 
   /**
@@ -83,17 +88,7 @@ public class TextGuiElement extends GuiElement<TextStyles, TextGuiElement> {
    */
   @Override
   public TextGuiElement removeChild(GuiElement<?, ?> child) {
-    return this;
-  }
-
-  /**
-   * TextGuiElement does not render children so this method will return an empty List.
-   *
-   * @return empty List
-   */
-  @Override
-  public List<GuiElement<?, ?>> getChildren() {
-    return List.of();
+    throw new UnsupportedOperationException("TextGuiElement does not render children");
   }
 
   /**

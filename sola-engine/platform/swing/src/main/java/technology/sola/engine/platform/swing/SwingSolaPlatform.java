@@ -7,7 +7,6 @@ import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.FontAssetLoader;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetAssetLoader;
-import technology.sola.engine.assets.input.ControlsConfigAssetLoader;
 import technology.sola.engine.assets.json.JsonElementAsset;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
@@ -19,13 +18,15 @@ import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
 import technology.sola.engine.input.KeyEvent;
 import technology.sola.engine.input.MouseEvent;
+import technology.sola.engine.input.TouchEvent;
+import technology.sola.engine.networking.rest.JavaRestClient;
+import technology.sola.engine.networking.socket.JavaSocketClient;
 import technology.sola.engine.platform.swing.assets.SwingPathUtils;
 import technology.sola.engine.platform.swing.assets.audio.SwingAudioClipAssetLoader;
 import technology.sola.engine.platform.swing.assets.SwingJsonAssetLoader;
 import technology.sola.engine.platform.swing.assets.graphics.SwingSolaImageAssetLoader;
 import technology.sola.engine.platform.swing.core.Graphics2dRenderer;
-import technology.sola.engine.platform.swing.core.SwingRestClient;
-import technology.sola.engine.platform.swing.core.SwingSocketClient;
+import technology.sola.engine.storage.FileSaveStorage;
 import technology.sola.logging.SolaLogger;
 
 import javax.swing.*;
@@ -46,6 +47,7 @@ public class SwingSolaPlatform extends SolaPlatform {
   private final boolean useSoftwareRendering;
   @Nullable
   private final Dimension initialWindowSize;
+  private final Color backgroundColor;
   private Canvas canvas;
   private Consumer<Renderer> beforeRender;
   private Consumer<Renderer> onRender;
@@ -61,16 +63,22 @@ public class SwingSolaPlatform extends SolaPlatform {
   }
 
   /**
-   * Creates a SwingSolaPlatformConfig instance with desired configuration.
+   * Creates a SwingSolaPlatformConfig instance with the desired configuration.
    *
    * @param platformConfig the {@link SwingSolaPlatformConfig}
    */
   public SwingSolaPlatform(SwingSolaPlatformConfig platformConfig) {
+    super(new JavaSocketClient(), new JavaRestClient(), new FileSaveStorage());
+
     this.useSoftwareRendering = platformConfig.useSoftwareRendering();
     this.initialWindowSize = platformConfig.initialWindowSize();
 
-    socketClient = new SwingSocketClient();
-    restClient = new SwingRestClient();
+    backgroundColor = new Color(
+      platformConfig.backgroundColor().getRed(),
+      platformConfig.backgroundColor().getGreen(),
+      platformConfig.backgroundColor().getBlue(),
+      platformConfig.backgroundColor().getAlpha()
+    );
   }
 
   @Override
@@ -140,6 +148,26 @@ public class SwingSolaPlatform extends SolaPlatform {
 
       mouseWheelEventConsumer.accept(new technology.sola.engine.input.MouseWheelEvent(isUp, isDown, isLeft, isRight));
     });
+  }
+
+  /**
+   * Not supported on Swing.
+   *
+   * @param touchEventConsumer the method called when a touch interaction takes place
+   */
+  @Override
+  public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
+    // not supported on Swing
+  }
+
+  /**
+   * Not supported on Swing.
+   *
+   * @param visible whether the virtual keyboard should be visible or not
+   */
+  @Override
+  public void setVirtualKeyboardVisible(boolean visible) {
+    // not supported on Swing
   }
 
   @Override
@@ -227,9 +255,6 @@ public class SwingSolaPlatform extends SolaPlatform {
     assetLoaderProvider.add(new SpriteSheetAssetLoader(
       jsonElementAssetAssetLoader, solaImageAssetLoader
     ));
-    assetLoaderProvider.add(new ControlsConfigAssetLoader(
-      jsonElementAssetAssetLoader
-    ));
   }
 
   @Override
@@ -259,7 +284,8 @@ public class SwingSolaPlatform extends SolaPlatform {
 
       AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
 
-      graphics.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+      graphics.setColor(backgroundColor);
+      graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
       graphics.drawImage(bufferedImage, aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height(), null);
       graphics.dispose();
 
@@ -273,7 +299,8 @@ public class SwingSolaPlatform extends SolaPlatform {
     beforeRender = renderer -> {
       graphics2D = (Graphics2D) canvas.getBufferStrategy().getDrawGraphics();
       ((Graphics2dRenderer) renderer).updateGraphics2D(graphics2D);
-      graphics2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+      graphics2D.setColor(backgroundColor);
+      graphics2D.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
       AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
       graphics2D.translate(aspectRatioSizing.x(), aspectRatioSizing.y());
@@ -287,7 +314,7 @@ public class SwingSolaPlatform extends SolaPlatform {
   }
 
   private MouseEvent swingToSola(java.awt.event.MouseEvent swingMouseEvent) {
-    MouseCoordinate adjusted = adjustMouseForViewport(swingMouseEvent.getX(), swingMouseEvent.getY());
+    PointerCoordinate adjusted = adjustPointerForViewport(swingMouseEvent.getX(), swingMouseEvent.getY());
 
     return new MouseEvent(swingMouseEvent.getButton(), adjusted.x(), adjusted.y());
   }

@@ -40,53 +40,13 @@
           "props": {
             "text": "(3) Create Triangle"
           }
-        }
-      ]
-    },
-    {
-      "tag": "Section",
-      "styles": [
-        {
-          "direction": "row",
-          "gap": 10
-        }
-      ],
-      "children": [
-        {
-          "tag": "Text",
-          "id": "debugShape",
-          "props": {
-            "text": "(A) Debug shape"
-          },
-          "styles": [
-            {
-              "textColor": "#ff0000"
-            }
-          ]
         },
         {
           "tag": "Text",
-          "id": "debugBoundingBox",
+          "id": "modePolygon",
           "props": {
-            "text": "(S) Debug bounding box"
-          },
-          "styles": [
-            {
-              "textColor": "#0000ff"
-            }
-          ]
-        },
-        {
-          "tag": "Text",
-          "id": "debugBroadPhase",
-          "props": {
-            "text": "(D) Debug broad phase"
-          },
-          "styles": [
-            {
-              "textColor": "#00ff00"
-            }
-          ]
+            "text": "(4) Create Polygon"
+          }
         }
       ]
     }

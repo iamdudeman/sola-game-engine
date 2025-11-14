@@ -41,11 +41,14 @@ public final class CollisionUtils {
 
     var mtv = switch (colliderA.getType()) {
       case AABB -> switch (colliderB.getType()) {
-        case AABB, TRIANGLE -> SeparatingAxisTheorem.checkCollision(
-          colliderA.getShape(transformA).getPoints(), colliderB.getShape(transformB).getPoints()
+        case AABB -> calculateAABBVsAABB(
+          colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
         case CIRCLE -> calculateAABBVsCircle(
           colliderA.getShape(transformA), colliderB.getShape(transformB)
+        );
+        case TRIANGLE, CONVEX_POLYGON -> SeparatingAxisTheorem.checkCollision(
+          colliderA.getShape(transformA).points(), colliderB.getShape(transformB).points()
         );
       };
       case CIRCLE -> switch (colliderB.getType()) {
@@ -58,16 +61,16 @@ public final class CollisionUtils {
         case CIRCLE -> calculateCircleVsCircle(
           colliderA.getShape(transformA), colliderB.getShape(transformB)
         );
-        case TRIANGLE -> {
+        case TRIANGLE, CONVEX_POLYGON -> {
           isReversed = true;
           yield calculateCircleVsShapeSAT(
             colliderA.getShape(transformA), colliderB.getShape(transformB)
           );
         }
       };
-      case TRIANGLE -> switch (colliderB.getType()) {
-        case AABB, TRIANGLE -> SeparatingAxisTheorem.checkCollision(
-          colliderA.getShape(transformA).getPoints(), colliderB.getShape(transformB).getPoints()
+      case TRIANGLE, CONVEX_POLYGON -> switch (colliderB.getType()) {
+        case AABB, TRIANGLE, CONVEX_POLYGON -> SeparatingAxisTheorem.checkCollision(
+          colliderA.getShape(transformA).points(), colliderB.getShape(transformB).points()
         );
         case CIRCLE -> calculateCircleVsShapeSAT(
           colliderB.getShape(transformB), colliderA.getShape(transformA)
@@ -142,10 +145,7 @@ public final class CollisionUtils {
   }
 
   /**
-   * Calculates a {@link MinimumTranslationVector} for a collision between two axis aligned {@link Rectangle}s.
-   * <br />
-   * Note: This should not be used until penetration bug is fixed. Penetration and normal are incorrect when AABB are
-   * inside each other
+   * Calculates a {@link MinimumTranslationVector} for a collision between two axis-aligned {@link Rectangle}s.
    *
    * @param rectangleA the first rectangle
    * @param rectangleB the second rectangle
@@ -153,26 +153,20 @@ public final class CollisionUtils {
    */
   @Nullable
   public static MinimumTranslationVector calculateAABBVsAABB(Rectangle rectangleA, Rectangle rectangleB) {
-    Vector2D aBoxMin = rectangleA.min();
-    Vector2D aBoxMax = rectangleA.max();
-    Vector2D bBoxMin = rectangleB.min();
-    Vector2D bBoxMax = rectangleB.max();
+    var aBoxMin = rectangleA.min();
+    var bBoxMin = rectangleB.min();
+    var centerA = rectangleA.getCenter();
+    var centerB = rectangleB.getCenter();
+    var centerDiff = centerB.subtract(centerA);
 
-    Vector2D posDiffMin = bBoxMin.subtract(aBoxMin);
-    Vector2D posDiffMax = bBoxMax.subtract(aBoxMax);
-
-    float aWidth = aBoxMax.x() - aBoxMin.x();
-    float bWidth = bBoxMax.x() - bBoxMin.x();
-    float xAxisOverlap = (aWidth + bWidth - (Math.abs(posDiffMin.x()) + Math.abs(posDiffMax.x()))) / 2;
+    float xAxisOverlap = (centerB.x() - bBoxMin.x() + centerA.x() - aBoxMin.x()) - Math.abs(centerDiff.x());
 
     // No collision if no x overlap
     if (xAxisOverlap <= 0) {
       return null;
     }
 
-    float aHeight = aBoxMax.y() - aBoxMin.y();
-    float bHeight = bBoxMax.y() - bBoxMin.y();
-    float yAxisOverlap = (aHeight + bHeight - (Math.abs(posDiffMin.y()) + Math.abs(posDiffMax.y()))) / 2;
+    float yAxisOverlap = (centerB.y() - bBoxMin.y() + centerA.y() - aBoxMin.y()) - Math.abs(centerDiff.y());
 
     // No collision if no y overlap
     if (yAxisOverlap <= 0) {
@@ -185,19 +179,21 @@ public final class CollisionUtils {
 
     if (xAxisOverlap < yAxisOverlap) {
       penetration = xAxisOverlap;
-      if (posDiffMin.x() > 0)
+
+      if (centerDiff.x() > 0) {
         normal = new Vector2D(1, 0);
-      else
+      } else {
         normal = new Vector2D(-1, 0);
+      }
     } else {
       penetration = yAxisOverlap;
-      if (posDiffMin.y() > 0)
-        normal = new Vector2D(0, 1);
-      else
-        normal = new Vector2D(0, -1);
-    }
 
-    // todo fix bug where penetration and normal are incorrect when AABB are inside each other
+      if (centerDiff.y() > 0) {
+        normal = new Vector2D(0, 1);
+      } else {
+        normal = new Vector2D(0, -1);
+      }
+    }
 
     return new MinimumTranslationVector(normal, penetration);
   }
@@ -227,7 +223,7 @@ public final class CollisionUtils {
 
   @Nullable
   private static MinimumTranslationVector calculateCircleVsShapeSAT(Circle circle, Shape shape) {
-    return SeparatingAxisTheorem.checkCollision(shape.getPoints(), circle.center(), circle.radius());
+    return SeparatingAxisTheorem.checkCollision(shape.points(), circle.center(), circle.radius());
   }
 
   private CollisionUtils() {

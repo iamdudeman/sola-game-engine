@@ -3,10 +3,20 @@ package technology.sola.engine.input;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * KeyEvent contains data for a keyboard related event.
+ * KeyEvent contains data for a keyboard-related event.
  *
  * @param keyCode the ASCII code of the key for the event
  */
 @NullMarked
 public record KeyEvent(int keyCode) {
+  /**
+   * @return the character associated with the key code
+   */
+  public char keyChar() {
+    if (keyCode == 192) {
+      return '`';
+    }
+
+    return (char) keyCode;
+  }
 }

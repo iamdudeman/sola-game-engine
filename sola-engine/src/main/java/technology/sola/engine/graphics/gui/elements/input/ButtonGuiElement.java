@@ -31,7 +31,19 @@ public class ButtonGuiElement extends BaseInputGuiElement<BaseStyles, ButtonGuiE
     });
 
     events().mouseReleased().on(mouseEvent -> {
-      if (isHovered() && isActive()) {
+      if (isFocussed() && isActive()) {
+        onAction.run();
+      }
+    });
+
+    events().touchStart().on(event -> {
+      if (!isDisabled()) {
+        requestFocus();
+      }
+    });
+
+    events().touchEnd().on(event -> {
+      if (isFocussed() && isActive()) {
         onAction.run();
       }
     });
@@ -56,6 +68,11 @@ public class ButtonGuiElement extends BaseInputGuiElement<BaseStyles, ButtonGuiE
   @Nullable
   public GuiElementDimensions calculateContentDimensions() {
     return null;
+  }
+
+  @Override
+  public ButtonGuiElement self() {
+    return this;
   }
 
   /**

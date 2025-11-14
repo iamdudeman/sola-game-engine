@@ -8,6 +8,7 @@ import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
+import technology.sola.engine.input.TouchInput;
 
 /**
  * Sola contains the core functionality needed to make a game. It is played via {@link SolaPlatform}.
@@ -27,13 +28,17 @@ public abstract class Sola {
    */
   protected EventHub eventHub;
   /**
-   * Used to check current state of keyboard input.
+   * Used to check the current state of keyboard input.
    */
   protected KeyboardInput keyboardInput;
   /**
-   * Used to check current state of mouse input.
+   * Used to check the current state of mouse input.
    */
   protected MouseInput mouseInput;
+  /**
+   * Used to check the current state of touch input.
+   */
+  protected TouchInput touchInput;
   /**
    * Used to load assets for the Sola to use.
    */
@@ -52,15 +57,9 @@ public abstract class Sola {
     eventHub = new EventHub();
     keyboardInput = new KeyboardInput();
     mouseInput = new MouseInput();
+    touchInput = new TouchInput();
     assetLoaderProvider = new AssetLoaderProvider();
   }
-
-  /**
-   * Method called every frame to render the world.
-   *
-   * @param renderer the {@link Renderer} instance
-   */
-  protected abstract void onRender(Renderer renderer);
 
   /**
    * Method called to initialize the Sola.
@@ -70,12 +69,21 @@ public abstract class Sola {
   /**
    * Method called if any asynchronous initialization is needed. Call completeAsyncInit.run() when completed to continue
    * starting the Sola.
+   * <p>
+   * Note: No render calls will happen until this async initialization has completed, so be careful!
    *
    * @param completeAsyncInit the callback to notify the hosting platform initialization is complete
    */
   protected void onAsyncInit(Runnable completeAsyncInit) {
     completeAsyncInit.run();
   }
+
+  /**
+   * Method called every frame to render the world.
+   *
+   * @param renderer the {@link Renderer} instance
+   */
+  protected abstract void onRender(Renderer renderer);
 
   /**
    * @return the {@link SolaPlatform} running this Sola.
@@ -91,13 +99,14 @@ public abstract class Sola {
   /**
    * Method called every frame to update the input and world state.
    *
-   * @param deltaTime the time since last update
+   * @param deltaTime the time since the last update
    */
   protected void onUpdate(float deltaTime) {
     keyboardInput.updateStatusOfKeys();
     mouseInput.updateStatusOfMouse();
+    touchInput.updatedStatusOfTouches();
 
-    if (!platform.gameLoop.isPaused()) {
+    if (!platform().gameLoop.isPaused()) {
       solaEcs.updateWorld(deltaTime);
     }
   }
@@ -105,12 +114,13 @@ public abstract class Sola {
   void initializeForPlatform(SolaPlatform platform, Runnable completeAsyncInit) {
     this.platform = platform;
 
-    platform.onKeyPressed(event -> keyboardInput.onKeyPressed(event));
-    platform.onKeyReleased(event -> keyboardInput.keyReleased(event));
-    platform.onMouseMoved(event -> mouseInput.onMouseMoved(event));
-    platform.onMousePressed(event -> mouseInput.onMousePressed(event));
-    platform.onMouseReleased(event -> mouseInput.onMouseReleased(event));
-    platform.onMouseWheel(event -> mouseInput.onMouseWheel(event));
+    platform.onKeyPressed(keyboardInput::onKeyPressed);
+    platform.onKeyReleased(keyboardInput::keyReleased);
+    platform.onMouseMoved(mouseInput::onMouseMoved);
+    platform.onMousePressed(mouseInput::onMousePressed);
+    platform.onMouseReleased(mouseInput::onMouseReleased);
+    platform.onMouseWheel(mouseInput::onMouseWheel);
+    platform.onTouch(touchInput::onTouchEvent);
 
     onInit();
     onAsyncInit(completeAsyncInit);

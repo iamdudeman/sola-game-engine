@@ -5,11 +5,12 @@ import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
+import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.defaults.SolaWithDefaults;
-import technology.sola.engine.defaults.graphics.modules.ScreenSpaceLightMapGraphicsModule;
-import technology.sola.engine.defaults.graphics.modules.SpriteEntityGraphicsModule;
+import technology.sola.engine.graphics.SolaGraphics;
+import technology.sola.engine.graphics.modules.ScreenSpaceLightMapGraphicsModule;
+import technology.sola.engine.graphics.modules.SpriteEntityGraphicsModule;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
@@ -18,14 +19,19 @@ import technology.sola.engine.graphics.components.LightComponent;
 import technology.sola.engine.graphics.components.LightFlicker;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
+import technology.sola.engine.physics.SolaPhysics;
+import technology.sola.engine.physics.component.ColliderComponent;
+import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
+import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
 import technology.sola.engine.physics.system.ParticleSystem;
+import technology.sola.engine.physics.utils.ColliderUtils;
+import technology.sola.engine.utils.SolaRandom;
 import technology.sola.math.linear.Vector2D;
-
-import java.util.Random;
 
 /**
  * LightingExample is a {@link technology.sola.engine.core.Sola} for demoing lighting for the sola game engine.
@@ -37,7 +43,10 @@ import java.util.Random;
  * </ul>
  */
 @NullMarked
-public class LightingExample extends SolaWithDefaults {
+public class LightingExample extends Sola {
+  private SolaGraphics solaGraphics;
+  private SolaPhysics solaPhysics;
+
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
@@ -46,10 +55,19 @@ public class LightingExample extends SolaWithDefaults {
   }
 
   @Override
-  protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+  protected void onInit() {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
-    defaultsConfigurator.useGraphics().useLighting(new Color(10, 10, 10)).useBackgroundColor(Color.WHITE);
+    solaPhysics = new SolaPhysics.Builder(solaEcs)
+      .withoutParticles()
+      .buildAndInitialize(eventHub);
+
+    solaPhysics.getGravitySystem().setActive(false);
+
+    solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withLighting(new Color(10, 10, 10))
+      .withBackgroundColor(Color.WHITE)
+      .buildAndInitialize(assetLoaderProvider);
 
     solaEcs.addSystem(new PlayerSystem());
     solaEcs.addSystem(new ParticleSystem());
@@ -62,16 +80,24 @@ public class LightingExample extends SolaWithDefaults {
   protected void onAsyncInit(Runnable completeAsyncInit) {
     assetLoaderProvider.get(SpriteSheet.class)
       .getNewAsset("forest", "assets/sprites/forest.sprites.json")
-      .executeWhenLoaded(spriteSheet -> completeAsyncInit.run());
+      .executeWhenLoaded(spriteSheet -> {
+        ColliderUtils.autoSizeColliderToSprite(solaEcs.getWorld().findEntityByName("player"), spriteSheet);
+
+        completeAsyncInit.run();
+      });
+  }
+
+  @Override
+  protected void onRender(Renderer renderer) {
+    solaGraphics.render(renderer);
   }
 
   private World buildWorld() {
-    Random random = new Random();
     World world = new World(1500);
 
     for (int i = 0; i < platform().getRenderer().getWidth(); i += 8) {
       for (int j = 0; j < platform().getRenderer().getHeight(); j += 8) {
-        int grassTileIndex = random.nextInt(3) + 1;
+        int grassTileIndex = SolaRandom.nextInt(3) + 1;
         String grassSprite = "grass_" + grassTileIndex;
 
         world.createEntity(
@@ -82,13 +108,15 @@ public class LightingExample extends SolaWithDefaults {
     }
 
     for (int i = 0; i < 200; i++) {
-      int x = random.nextInt(platform().getRenderer().getWidth() - 20) + 10;
-      int y = random.nextInt(platform().getRenderer().getHeight() - 20) + 10;
+      int x = SolaRandom.nextInt(platform().getRenderer().getWidth() - 20) + 10;
+      int y = SolaRandom.nextInt(platform().getRenderer().getHeight() - 20) + 10;
 
       world.createEntity(
         new TransformComponent(x, y),
         new SpriteComponent("forest", "tree"),
-        new LayerComponent("objects"),
+        new LayerComponent("objects").setOrderByVerticalPosition(true),
+        new ColliderComponent(new ColliderShapeAABB(2, 3), 3, 4),
+        new DynamicBodyComponent(true),
         new BlendModeComponent(BlendMode.MASK)
       );
     }
@@ -97,7 +125,9 @@ public class LightingExample extends SolaWithDefaults {
       new TransformComponent(platform().getRenderer().getWidth() / 2f, platform().getRenderer().getHeight() / 2f),
       new SpriteComponent("forest", "player"),
       new BlendModeComponent(BlendMode.MASK),
-      new LayerComponent("objects", 2),
+      new LayerComponent("objects").setOrderByVerticalPosition(true),
+      new ColliderComponent(new ColliderShapeAABB()),
+      new DynamicBodyComponent(),
       new LightComponent(50, new Color(200, 255, 255, 255)).setOffset(2.5f, 4)
     ).setName("player");
 
@@ -112,8 +142,8 @@ public class LightingExample extends SolaWithDefaults {
       TransformComponent transformComponent = playerEntity.getComponent(TransformComponent.class);
 
       if (keyboardInput.isKeyPressed(Key.SPACE)) {
-        ScreenSpaceLightMapGraphicsModule screenSpaceLightMapGraphicsModule = solaGraphics().getGraphicsModule(ScreenSpaceLightMapGraphicsModule.class);
-        SpriteEntityGraphicsModule spriteEntityGraphicsModule = solaGraphics().getGraphicsModule(SpriteEntityGraphicsModule.class);
+        ScreenSpaceLightMapGraphicsModule screenSpaceLightMapGraphicsModule = solaGraphics.getGraphicsModule(ScreenSpaceLightMapGraphicsModule.class);
+        SpriteEntityGraphicsModule spriteEntityGraphicsModule = solaGraphics.getGraphicsModule(SpriteEntityGraphicsModule.class);
 
         if (spriteEntityGraphicsModule.isActive() && screenSpaceLightMapGraphicsModule.isActive()) {
           screenSpaceLightMapGraphicsModule.setActive(false);
@@ -141,10 +171,9 @@ public class LightingExample extends SolaWithDefaults {
       }
 
       if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
-        Random random = new Random();
-        Vector2D coordinate = solaGraphics().screenToWorldCoordinate(mouseInput.getMousePosition());
-        float radius = random.nextFloat(8f, 32f);
-        int intensity = random.nextInt(25, 220);
+        Vector2D coordinate = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
+        float radius = SolaRandom.nextFloat(8f, 32f);
+        int intensity = SolaRandom.nextInt(25, 220);
 
         var entity = world.createEntity(
           new TransformComponent(coordinate.x(), coordinate.y()),
