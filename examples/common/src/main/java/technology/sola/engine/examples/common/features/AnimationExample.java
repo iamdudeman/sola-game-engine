@@ -7,8 +7,8 @@ import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.examples.common.ExampleUtils;
 import technology.sola.engine.graphics.SolaGraphics;
-import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
@@ -40,13 +40,15 @@ public class AnimationExample extends Sola {
 
   @Override
   protected void onInit() {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
-
     solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
       .withBackgroundColor(Color.WHITE)
+      .withGui(mouseInput)
       .buildAndInitialize(assetLoaderProvider);
 
     solaEcs.setWorld(buildWorld());
+    solaGraphics.guiDocument().setRootElement(
+      ExampleUtils.createReturnToLauncherButton(platform(), eventHub, "0", "0")
+    );
     platform().getViewport().setAspectMode(AspectMode.STRETCH);
   }
 
@@ -65,11 +67,19 @@ public class AnimationExample extends Sola {
   private World buildWorld() {
     World world = new World(50);
 
+    addSpriteAnimatorExamples(world);
+
+    addTransformAnimatorExamples(world);
+
+    return world;
+  }
+
+  private void addSpriteAnimatorExamples(World world) {
     for (int i = 0; i < 10; i++) {
       final boolean showMessage = i == 0;
 
       world.createEntity()
-        .addComponent(new TransformComponent(5 + (i * 20f), 5))
+        .addComponent(new TransformComponent(5 + (i * 20f), 25))
         .addComponent(new SpriteComponent("test", "blue"))
         .addComponent(new SpriteAnimatorComponent(
           "first",
@@ -107,6 +117,23 @@ public class AnimationExample extends Sola {
         new SpriteKeyFrame("test", "orange", 1500)
       ));
 
+    for (int i = 0; i < 10; i++) {
+      world.createEntity()
+        .addComponent(new TransformComponent(5 + (i * 20f), 180))
+        .addComponent(new SpriteComponent("test", "blue"))
+        .addComponent(new SpriteAnimatorComponent(
+          "first",
+          new SpriteKeyFrame("test", "blue", 750),
+          new SpriteKeyFrame("test", "purple", 750),
+          new SpriteKeyFrame("test", "brown", 750),
+          new SpriteKeyFrame("test", "lime", 750),
+          new SpriteKeyFrame("test", "orange", 750),
+          new SpriteKeyFrame("test", "maroon", 750)
+        ));
+    }
+  }
+
+  private void addTransformAnimatorExamples(World world) {
     world.createEntity(
       new TransformComponent(5, 70, 15),
       new CircleRendererComponent(Color.RED, true),
@@ -147,22 +174,5 @@ public class AnimationExample extends Sola {
             .setAnimationCompleteCallback(TransformAnimatorComponent::reset))
         )
     ));
-
-    for (int i = 0; i < 10; i++) {
-      world.createEntity()
-        .addComponent(new TransformComponent(5 + (i * 20f), 180))
-        .addComponent(new SpriteComponent("test", "blue"))
-        .addComponent(new SpriteAnimatorComponent(
-          "first",
-          new SpriteKeyFrame("test", "blue", 750),
-          new SpriteKeyFrame("test", "purple", 750),
-          new SpriteKeyFrame("test", "brown", 750),
-          new SpriteKeyFrame("test", "lime", 750),
-          new SpriteKeyFrame("test", "orange", 750),
-          new SpriteKeyFrame("test", "maroon", 750)
-        ));
-    }
-
-    return world;
   }
 }

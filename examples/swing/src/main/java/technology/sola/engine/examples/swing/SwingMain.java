@@ -25,7 +25,7 @@ public class SwingMain {
    */
   public static void main(String[] args) {
     SolaPlatform solaPlatform = new SwingSolaPlatform();
-    Sola sola = new ExampleLauncherSola(solaPlatform);
+    Sola sola = new ExampleLauncherSola();
 
     solaPlatform.play(sola);
   }

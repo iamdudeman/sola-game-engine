@@ -39,7 +39,6 @@ import java.util.function.Supplier;
  */
 @NullMarked
 public class ExampleLauncherSola extends Sola {
-  private final SolaPlatform solaPlatform;
   private SolaGraphics solaGraphics;
 
   /**
@@ -48,12 +47,13 @@ public class ExampleLauncherSola extends Sola {
    * @param solaPlatform the current {@link SolaPlatform}
    * @param eventHub     the {@link EventHub} instance for the {@code Sola}
    */
+  @Deprecated
   public static void addReturnToLauncherKeyEvent(SolaPlatform solaPlatform, EventHub eventHub) {
     solaPlatform.onKeyPressed(keyEvent -> {
       if (keyEvent.keyCode() == Key.ESCAPE.getCode()) {
         eventHub.add(GameLoopEvent.class, event -> {
           if (event.state() == GameLoopState.STOPPED) {
-            solaPlatform.play(new ExampleLauncherSola(solaPlatform));
+            solaPlatform.play(new ExampleLauncherSola());
           }
         });
 
@@ -66,7 +66,7 @@ public class ExampleLauncherSola extends Sola {
       if (mouseEvent.x() > solaPlatform.getRenderer().getWidth() - 50 && mouseEvent.y() > solaPlatform.getRenderer().getHeight() - 50) {
         eventHub.add(GameLoopEvent.class, event -> {
           if (event.state() == GameLoopState.STOPPED) {
-            solaPlatform.play(new ExampleLauncherSola(solaPlatform));
+            solaPlatform.play(new ExampleLauncherSola());
           }
         });
 
@@ -77,12 +77,9 @@ public class ExampleLauncherSola extends Sola {
 
   /**
    * Creates an instance of this {@link Sola}
-   *
-   * @param solaPlatform the {@link SolaPlatform} that will launch the examples
    */
-  public ExampleLauncherSola(SolaPlatform solaPlatform) {
+  public ExampleLauncherSola() {
     super(new SolaConfiguration("Example Launcher", 800, 600, 30));
-    this.solaPlatform = solaPlatform;
   }
 
   @Override
@@ -92,7 +89,7 @@ public class ExampleLauncherSola extends Sola {
       .withGui(mouseInput)
       .buildAndInitialize(assetLoaderProvider);
 
-    solaPlatform.getViewport().setAspectMode(AspectMode.MAINTAIN);
+    platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
 
     var guiRoot = buildGui();
 
@@ -188,7 +185,7 @@ public class ExampleLauncherSola extends Sola {
       .setOnAction(() -> {
         eventHub.add(GameLoopEvent.class, event -> {
           if (event.state() == GameLoopState.STOPPED) {
-            solaPlatform.play(solaSupplier.get());
+            platform().play(solaSupplier.get());
           }
         });
 
