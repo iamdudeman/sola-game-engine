@@ -5,8 +5,8 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.examples.common.ExampleUtils;
 import technology.sola.engine.graphics.SolaGraphics;
-import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
@@ -36,12 +36,15 @@ public class ParticleExample extends Sola {
 
   @Override
   protected void onInit() {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
-
     solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withGui(mouseInput)
       .buildAndInitialize(assetLoaderProvider);
 
     solaEcs.setWorld(buildWorld());
+    solaGraphics.guiDocument().setRootElement(
+      ExampleUtils.createReturnToLauncherButton(platform(), eventHub, "0", "0")
+    );
+
     solaEcs.addSystem(new ParticleSystem());
   }
 
