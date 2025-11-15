@@ -10,16 +10,16 @@ import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.examples.common.ExampleUtils;
 import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.graphics.modules.*;
-import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.*;
 import technology.sola.engine.graphics.renderer.BlendMode;
-import technology.sola.engine.graphics.renderer.Layer;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
-import technology.sola.engine.input.Key;
+import technology.sola.engine.input.MouseButton;
+import technology.sola.engine.input.TouchPhase;
 import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Vector2D;
 
@@ -49,11 +49,14 @@ public class RenderingExample extends Sola {
 
   @Override
   protected void onInit() {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
-
     solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
       .withoutDefaultGraphicsModules()
+      .withGui(mouseInput)
       .buildAndInitialize(assetLoaderProvider);
+
+    solaGraphics.guiDocument().setRootElement(
+      ExampleUtils.createReturnToLauncherButton(platform(), eventHub, "0", "0")
+    );
 
     solaGraphics.addGraphicsModules(
       new CircleEntityGraphicsModule(),
@@ -63,7 +66,7 @@ public class RenderingExample extends Sola {
       new SpriteEntityGraphicsModule(assetLoaderProvider.get(SpriteSheet.class))
     );
 
-    solaEcs.addSystem(new TestSystem());
+    solaEcs.addSystem(new ChangeAspectModeSystem());
     solaEcs.setWorld(createWorld());
 
     platform().getRenderer().createLayers("background", "moving_stuff", "blocks", "ui");
@@ -123,7 +126,9 @@ public class RenderingExample extends Sola {
   private record MovingComponent() implements Component {
   }
 
-  private class TestSystem extends EcsSystem {
+  private class ChangeAspectModeSystem extends EcsSystem {
+    private int current = 0;
+
     @Override
     public void update(World world, float deltaTime) {
       world.createView().of(TransformComponent.class, MovingComponent.class)
@@ -135,48 +140,26 @@ public class RenderingExample extends Sola {
           transform.setY(transform.getY() + 1);
         });
 
-      if (keyboardInput.isKeyPressed(Key.ONE)) {
-        platform().getViewport().setAspectMode(AspectMode.IGNORE_RESIZING);
-      } else if (keyboardInput.isKeyPressed(Key.TWO)) {
-        platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
-      } else if (keyboardInput.isKeyPressed(Key.THREE)) {
-        platform().getViewport().setAspectMode(AspectMode.STRETCH);
-      }
+      var firstTouchPhase = touchInput.getFirstTouch() != null ? touchInput.getFirstTouch().phase() : null;
 
-      final float scalingSpeed = 1f;
-      final float minSize = 0.1f;
-      final float maxSize = 50;
+      if (mouseInput.isMousePressed(MouseButton.PRIMARY) || firstTouchPhase == TouchPhase.BEGAN) {
+        current++;
 
-      TransformComponent dynamicScalingEntityTransformComponent = world.findEntityByName("dynamicScaling")
-        .getComponent(TransformComponent.class);
+        if (current > 2) {
+          current = 0;
+        }
 
-      if (keyboardInput.isKeyHeld(Key.A)) {
-        float dynamicScale = dynamicScalingEntityTransformComponent.getScaleX() - scalingSpeed;
-        if (dynamicScale < minSize) dynamicScale = minSize;
-        dynamicScalingEntityTransformComponent.setScaleX(dynamicScale);
-      }
-      if (keyboardInput.isKeyHeld(Key.D)) {
-        float dynamicScale = dynamicScalingEntityTransformComponent.getScaleX() + scalingSpeed;
-        if (dynamicScale > maxSize) dynamicScale = maxSize;
-        dynamicScalingEntityTransformComponent.setScaleX(dynamicScale);
-      }
-      if (keyboardInput.isKeyHeld(Key.W)) {
-        float dynamicScale = dynamicScalingEntityTransformComponent.getScaleY() - scalingSpeed;
-        if (dynamicScale < minSize) dynamicScale = minSize;
-        dynamicScalingEntityTransformComponent.setScaleY(dynamicScale);
-      }
-      if (keyboardInput.isKeyHeld(Key.S)) {
-        float dynamicScale = dynamicScalingEntityTransformComponent.getScaleY() + scalingSpeed;
-        if (dynamicScale > maxSize) dynamicScale = maxSize;
-        dynamicScalingEntityTransformComponent.setScaleY(dynamicScale);
-      }
-
-      if (keyboardInput.isKeyPressed(Key.H)) {
-        Layer blockLayer = platform().getRenderer().getLayer("blocks");
-        blockLayer.setActive(!blockLayer.isActive());
-
-        Layer backgroundLayer = platform().getRenderer().getLayer("background");
-        backgroundLayer.setActive(!backgroundLayer.isActive());
+        switch (current) {
+          case 0:
+            platform().getViewport().setAspectMode(AspectMode.IGNORE_RESIZING);
+            break;
+          case 1:
+            platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
+            break;
+          default:
+            platform().getViewport().setAspectMode(AspectMode.STRETCH);
+            break;
+        }
       }
     }
   }
@@ -213,11 +196,6 @@ public class RenderingExample extends Sola {
     world.createEntity()
       .addComponent(new TransformComponent(400, 530, 1, 1))
       .addComponent(new SpriteComponent("test", "blue"));
-    world.createEntity()
-      .addComponent(new LayerComponent("moving_stuff"))
-      .addComponent(new TransformComponent(5, 5, 1, 2))
-      .addComponent(new SpriteComponent("test", "blue"))
-      .setName("dynamicScaling");
 
 
     // static blocks
