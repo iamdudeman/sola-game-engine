@@ -79,7 +79,7 @@ public class AnimationExample extends Sola {
       final boolean showMessage = i == 0;
 
       world.createEntity()
-        .addComponent(new TransformComponent(5 + (i * 20f), 25))
+        .addComponent(new TransformComponent(5 + (i * 20f), 30))
         .addComponent(new SpriteComponent("test", "blue"))
         .addComponent(new SpriteAnimatorComponent(
           "first",
@@ -98,7 +98,7 @@ public class AnimationExample extends Sola {
     }
 
     world.createEntity()
-      .addComponent(new TransformComponent(25, 45))
+      .addComponent(new TransformComponent(25, 50))
       .addComponent(new SpriteComponent("test", "lime"))
       .addComponent(new SpriteAnimatorComponent(
         "stop_light1",
@@ -108,7 +108,7 @@ public class AnimationExample extends Sola {
       ));
 
     world.createEntity()
-      .addComponent(new TransformComponent(95, 45))
+      .addComponent(new TransformComponent(95, 50))
       .addComponent(new SpriteComponent("test", "maroon"))
       .addComponent(new SpriteAnimatorComponent(
         "stop_light2",

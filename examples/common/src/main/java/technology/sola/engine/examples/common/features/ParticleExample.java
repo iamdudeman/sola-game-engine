@@ -40,11 +40,11 @@ public class ParticleExample extends Sola {
       .withGui(mouseInput)
       .buildAndInitialize(assetLoaderProvider);
 
-    solaEcs.setWorld(buildWorld());
     solaGraphics.guiDocument().setRootElement(
       ExampleUtils.createReturnToLauncherButton(platform(), eventHub, "0", "0")
     );
 
+    solaEcs.setWorld(buildWorld());
     solaEcs.addSystem(new ParticleSystem());
   }
 

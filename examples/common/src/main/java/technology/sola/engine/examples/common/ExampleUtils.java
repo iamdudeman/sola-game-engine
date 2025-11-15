@@ -49,6 +49,7 @@ public class ExampleUtils {
         new BaseStyles.Builder<>()
           .setPositionX(x)
           .setPositionY(y)
+          .setPaddingVertical(2)
           .setPaddingHorizontal(4)
           .build()
       ))
