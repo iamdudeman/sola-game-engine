@@ -7,13 +7,14 @@ import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.examples.common.ExampleUtils;
 import technology.sola.engine.graphics.SolaGraphics;
-import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.Key;
+import technology.sola.engine.input.TouchPhase;
 import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
@@ -36,6 +37,7 @@ public class PongGame extends Sola {
   private int playerScore = 0;
   private int computerScore = 0;
   private SolaGraphics solaGraphics;
+  private Font scoreFont;
 
   /**
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
@@ -46,13 +48,16 @@ public class PongGame extends Sola {
 
   @Override
   protected void onInit() {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
-
     SolaPhysics solaPhysics = new SolaPhysics.Builder(solaEcs)
       .buildAndInitialize(eventHub);
 
     solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withGui(mouseInput)
       .buildAndInitialize(assetLoaderProvider);
+
+    solaGraphics.guiDocument().setRootElement(
+      ExampleUtils.createReturnToLauncherButton(platform(), eventHub, "0", "0")
+    );
 
     solaPhysics.getGravitySystem().setGravityConstant(0);
 
@@ -94,9 +99,9 @@ public class PongGame extends Sola {
   @Override
   protected void onAsyncInit(Runnable completeAsyncInit) {
     assetLoaderProvider.get(Font.class)
-      .getNewAsset("font", "assets/font/monospaced_NORMAL_48_digits.font.json")
+      .getNewAsset("score-font", "assets/font/monospaced_NORMAL_48_digits.font.json")
       .executeWhenLoaded(font -> {
-        platform().getRenderer().setFont(font);
+        scoreFont = font;
         completeAsyncInit.run();
       });
   }
@@ -107,6 +112,7 @@ public class PongGame extends Sola {
 
     var dimensions = renderer.getFont().getDimensionsForText("" + computerScore);
 
+    renderer.setFont(scoreFont);
     renderer.drawString("" + playerScore, 50, 5, Color.WHITE);
     renderer.drawString("" + computerScore, configuration.rendererWidth() - dimensions.width() - 50, 5, Color.WHITE);
 
@@ -123,10 +129,39 @@ public class PongGame extends Sola {
       var playerEntity = world.findEntityByName("player");
       TransformComponent transformComponent = playerEntity.getComponent(TransformComponent.class);
       DynamicBodyComponent dynamicBodyComponent = playerEntity.getComponent(DynamicBodyComponent.class);
+      boolean isUp = false;
+      boolean isDown = false;
 
-      if ((keyboardInput.isKeyHeld(Key.W) || keyboardInput.isKeyPressed(Key.W)) && transformComponent.getY() > 0) {
+      if (transformComponent.getY() > 0) {
+        if ((keyboardInput.isKeyHeld(Key.W) || keyboardInput.isKeyPressed(Key.W))) {
+          isUp = true;
+        }
+
+        var touch = touchInput.getFirstTouch();
+
+        if (touch != null && (touch.phase() == TouchPhase.BEGAN || touch.phase() == TouchPhase.MOVED)) {
+          if (touch.x() < configuration.rendererWidth() / 2f) {
+            isUp = true;
+          }
+        }
+      }
+      if (transformComponent.getY() < configuration.rendererHeight() - (BALL_SIZE * 6)) {
+        if ((keyboardInput.isKeyHeld(Key.S) || keyboardInput.isKeyPressed(Key.S))) {
+          isDown = true;
+        }
+
+        var touch = touchInput.getFirstTouch();
+
+        if (touch != null && (touch.phase() == TouchPhase.BEGAN || touch.phase() == TouchPhase.MOVED)) {
+          if (touch.x() > configuration.rendererWidth() / 2f) {
+            isDown = true;
+          }
+        }
+      }
+
+      if (isUp) {
         dynamicBodyComponent.setVelocity(new Vector2D(0, -PADDLE_SPEED));
-      } else if ((keyboardInput.isKeyHeld(Key.S) || keyboardInput.isKeyPressed(Key.S)) && transformComponent.getY() < configuration.rendererHeight() - (BALL_SIZE * 6)) {
+      } else if (isDown) {
         dynamicBodyComponent.setVelocity(new Vector2D(0, PADDLE_SPEED));
       } else {
         dynamicBodyComponent.setVelocity(Vector2D.ZERO_VECTOR);
