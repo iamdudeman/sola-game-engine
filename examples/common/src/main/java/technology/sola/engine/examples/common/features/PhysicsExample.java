@@ -5,8 +5,9 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.debug.DebugGraphicsModule;
+import technology.sola.engine.examples.common.ExampleUtils;
 import technology.sola.engine.graphics.SolaGraphics;
-import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
@@ -23,6 +24,7 @@ import technology.sola.engine.graphics.gui.style.property.Direction;
 import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
+import technology.sola.engine.input.TouchPhase;
 import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
@@ -72,8 +74,6 @@ public class PhysicsExample extends Sola {
 
   @Override
   protected void onInit() {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
-
     SolaPhysics solaPhysics = new SolaPhysics.Builder(solaEcs)
       .withoutParticles()
       .buildAndInitialize(eventHub);
@@ -88,6 +88,14 @@ public class PhysicsExample extends Sola {
     solaEcs.setWorld(buildQuadTreeOptimizedWorld());
 
     solaGraphics.guiDocument().setRootElement(buildGui(solaPhysics));
+
+    platform().onTouch(touchEvent -> {
+      if (touchEvent.touch().phase() == TouchPhase.BEGAN) {
+        var debugGraphicsModule = solaGraphics.getGraphicsModule(DebugGraphicsModule.class);
+
+        debugGraphicsModule.setActive(!debugGraphicsModule.isActive());
+      }
+    });
   }
 
   @Override
@@ -107,6 +115,10 @@ public class PhysicsExample extends Sola {
     randomSeedInput.addStyle(ConditionalStyle.always(new TextInputStyles.Builder<>().setPadding(5).build()));
 
     sectionGuiElement.appendChildren(
+      new ButtonGuiElement()
+        .setOnAction(() -> ExampleUtils.returnToLauncher(platform(), eventHub))
+        .addStyle(ConditionalStyle.always(new BaseStyles.Builder<>().setPadding(5).build()))
+        .appendChildren(new TextGuiElement().setText("Back")),
       new ButtonGuiElement()
         .setOnAction(() -> {
           resetRandom(randomSeedInput.getValue());
