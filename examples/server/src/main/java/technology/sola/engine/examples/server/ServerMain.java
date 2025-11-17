@@ -24,7 +24,9 @@ import technology.sola.logging.SolaLogLevel;
 import technology.sola.logging.SolaLogger;
 import technology.sola.math.linear.Vector2D;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -86,14 +88,7 @@ public class ServerMain {
     public void onConnectionEstablished(ClientConnection clientConnection) {
       message(clientConnection.getClientId(), new UpdateTimeMessage(System.currentTimeMillis()));
 
-      solaEcs.getWorld().createEntity(
-        String.valueOf(clientConnection.getClientId()),
-        "player-" + clientConnection.getClientId(),
-        new TransformComponent(400, 400, 25),
-        new DynamicBodyComponent(),
-        new ColliderComponent(new ColliderShapeCircle()),
-        new PlayerComponent()
-      );
+      eventHub.emit(new NewPlayerEvent(String.valueOf(clientConnection.getClientId())));
     }
 
     @Override
@@ -102,7 +97,6 @@ public class ServerMain {
 
       solaEcs.getWorld()
         .findEntityByUniqueId(String.valueOf(clientConnection.getClientId()))
-        .setDisabled(true)
         .destroy();
 
       broadcast(new PlayerRemovedMessage(clientConnection.getClientId()), clientConnection.getClientId());
@@ -127,12 +121,20 @@ public class ServerMain {
     private record PlayerMoveEvent(String playerId, int direction) implements Event {
     }
 
+    private record NewPlayerEvent(String playerId) implements Event {
+    }
+
     private class PlayerMovementSystem extends EcsSystem {
       private final Map<String, Integer> directionMap = new HashMap<>();
+      private final List<String> newPlayerIds = new ArrayList<>();
 
       private PlayerMovementSystem() {
         eventHub.add(PlayerMoveEvent.class, event -> {
           directionMap.put(event.playerId, event.direction);
+        });
+
+        eventHub.add(NewPlayerEvent.class, event -> {
+          newPlayerIds.add(event.playerId);
         });
       }
 
@@ -159,6 +161,18 @@ public class ServerMain {
 
           iter.remove();
         }
+
+        newPlayerIds.forEach(playerId -> {
+          solaEcs.getWorld().createEntity(
+            playerId,
+            "player-" + playerId,
+            new TransformComponent(400, 400, 25),
+            new DynamicBodyComponent(),
+            new ColliderComponent(new ColliderShapeCircle()),
+            new PlayerComponent()
+          );
+        });
+        newPlayerIds.clear();
       }
 
       @Override
@@ -170,9 +184,14 @@ public class ServerMain {
     private class ClientUpdateSystem extends EcsSystem {
       @Override
       public void update(World world, float v) {
+        var entries = world.createView().of(TransformComponent.class, PlayerComponent.class).getEntries();
+
+        if (entries.isEmpty()) {
+          return;
+        }
+
         broadcast(new PlayerPositionUpdatesMessage(
-          world.createView().of(TransformComponent.class, PlayerComponent.class)
-            .getEntries()
+          entries
             .stream()
             .map(entry -> new PlayerPositionUpdatesMessage.PlayerPosition(entry.entity().getUniqueId(), entry.c1().getTranslate()))
             .collect(Collectors.toList())
