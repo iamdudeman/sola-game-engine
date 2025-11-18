@@ -110,6 +110,11 @@ public class SimplePlatformerGame extends Sola {
       .setName("player");
 
     world.createEntity()
+      .addComponent(new TransformComponent(310, 360, 15, 15f))
+      .addComponent(new RectangleRendererComponent(Color.WHITE))
+      .addComponent(new ColliderComponent(new ColliderShapeAABB()));
+
+    world.createEntity()
       .addComponent(new TransformComponent(300, 250, 50, 150f))
       .addComponent(new RectangleRendererComponent(new Color(120, 173, 216, 230)))
       .addComponent(new GlassComponent())
