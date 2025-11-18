@@ -283,6 +283,7 @@ public class RenderingExample extends Sola {
     world.createEntity()
       .addComponent(new LayerComponent("background"))
       .addComponent(new TransformComponent(210, 430, 50, 50))
+      .addComponent(new BlendModeComponent(BlendMode.NORMAL))
       .addComponent(new CircleRendererComponent(new Color(150, 255, 0, 0)));
 
     world.createEntity()
@@ -292,6 +293,7 @@ public class RenderingExample extends Sola {
     world.createEntity()
       .addComponent(new LayerComponent("background"))
       .addComponent(new TransformComponent(210, 530, 50, 50))
+      .addComponent(new BlendModeComponent(BlendMode.NORMAL))
       .addComponent(new RectangleRendererComponent(new Color(150, 255, 0, 0)));
 
     world.createEntity()
