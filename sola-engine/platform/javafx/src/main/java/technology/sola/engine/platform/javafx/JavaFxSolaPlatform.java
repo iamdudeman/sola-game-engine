@@ -229,6 +229,9 @@ public class JavaFxSolaPlatform extends SolaPlatform {
 
       AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
 
+      graphicsContext.clearRect(
+        aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height()
+      );
       graphicsContext.translate(aspectRatioSizing.x(), aspectRatioSizing.y());
       graphicsContext.scale(aspectRatioSizing.width() / (double) renderer.getWidth(), aspectRatioSizing.height() / (double) renderer.getHeight());
     }
@@ -246,7 +249,12 @@ public class JavaFxSolaPlatform extends SolaPlatform {
 
       AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
 
-      graphicsContext.drawImage(writableImage, aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height());
+      graphicsContext.clearRect(
+        aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height()
+      );
+      graphicsContext.drawImage(
+        writableImage, aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height()
+      );
     }
   }
 
