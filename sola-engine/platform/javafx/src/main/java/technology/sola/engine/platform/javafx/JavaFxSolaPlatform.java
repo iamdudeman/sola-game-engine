@@ -250,7 +250,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
       AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
 
       graphicsContext.clearRect(
-        aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height()
+        aspectRatioSizing.x() + 1, aspectRatioSizing.y() + 1, aspectRatioSizing.width() - 1, aspectRatioSizing.height() - 1
       );
       graphicsContext.drawImage(
         writableImage, aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height()
