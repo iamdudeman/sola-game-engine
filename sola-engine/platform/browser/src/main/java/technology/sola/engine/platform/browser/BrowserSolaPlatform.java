@@ -170,10 +170,14 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   @Override
   protected void beforeRender(Renderer renderer) {
-    JsCanvasUtils.clearRect(backgroundColor);
+    JsCanvasUtils.renderBackground(backgroundColor);
 
     if (!useSoftwareRendering) {
       AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+
+      JsCanvasUtils.clearViewport(
+        aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height()
+      );
 
       JsCanvasUtils.updateAspectRato(
         aspectRatioSizing.x(), aspectRatioSizing.y(),
@@ -188,6 +192,9 @@ public class BrowserSolaPlatform extends SolaPlatform {
       AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
       var pixels = ((SoftwareRenderer) renderer).getPixels();
 
+      JsCanvasUtils.clearViewport(
+        aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height()
+      );
       JsCanvasUtils.renderToCanvas(
         pixels,
         renderer.getWidth(), renderer.getHeight(),

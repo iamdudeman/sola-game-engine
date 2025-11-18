@@ -57,12 +57,23 @@ public class JsCanvasUtils {
   public static native void observeCanvasResize(CanvasResizeCallback callback);
 
   /**
-   * Clears the canvas.
+   * Renders the background color to the canvas.
    *
-   * @param backgroundColor the background color to clear with
+   * @param backgroundColor the background color to
    */
-  @JSBody(script = Scripts.CLEAR_CANVAS, params = {"backgroundColor"})
-  public static native void clearRect(String backgroundColor);
+  @JSBody(script = Scripts.RENDER_BACKGROUND, params = {"backgroundColor"})
+  public static native void renderBackground(String backgroundColor);
+
+  /**
+   * Clears the viewport of the canvas.
+   *
+   * @param x      the x coordinate of the viewport
+   * @param y      the y coordinate of the viewport
+   * @param width  the width of the viewport
+   * @param height the height of the viewport
+   */
+  @JSBody(script = Scripts.CLEAR_VIEWPORT, params = {"x", "y", "width", "height"})
+  public static native void clearViewport(int x, int y, int width, int height);
 
   /**
    * Updates the aspect ratio for the canvas.
@@ -137,7 +148,11 @@ public class JsCanvasUtils {
       }
       """;
 
-    private static final String CLEAR_CANVAS = """
+    private static final String CLEAR_VIEWPORT = """
+      window.solaContext2d.clearRect(x, y, width, height);
+      """;
+
+    private static final String RENDER_BACKGROUND = """
       window.solaContext2d.fillStyle = backgroundColor;
       window.solaContext2d.fillRect(0, 0, window.solaCanvas.width, window.solaCanvas.height);
       """;
