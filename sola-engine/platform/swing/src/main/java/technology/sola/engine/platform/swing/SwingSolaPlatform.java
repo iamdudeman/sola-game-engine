@@ -286,7 +286,12 @@ public class SwingSolaPlatform extends SolaPlatform {
 
       graphics.setColor(backgroundColor);
       graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-      graphics.drawImage(bufferedImage, aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height(), null);
+      graphics.clearRect(
+        aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height()
+      );
+      graphics.drawImage(
+        bufferedImage, aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height(), null
+      );
       graphics.dispose();
 
       canvas.getBufferStrategy().show();
@@ -303,6 +308,9 @@ public class SwingSolaPlatform extends SolaPlatform {
       graphics2D.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
       AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+      graphics2D.clearRect(
+        aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height()
+      );
       graphics2D.translate(aspectRatioSizing.x(), aspectRatioSizing.y());
       graphics2D.scale(aspectRatioSizing.width() / (double) renderer.getWidth(), aspectRatioSizing.height() / (double) renderer.getHeight());
     };

@@ -1,7 +1,6 @@
 package technology.sola.engine.platform.android;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
+import android.graphics.*;
 import android.view.MotionEvent;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleEventObserver;
@@ -51,6 +50,7 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
   private final List<Consumer<KeyEvent>> keyPressedConsumers = new ArrayList<>();
   private final List<Consumer<KeyEvent>> keyReleasedConsumers = new ArrayList<>();
   private final List<Consumer<TouchEvent>> touchConsumers = new ArrayList<>();
+  private final Paint clearPaint = new Paint();
 
   /**
    * Creates an AndroidSolaPlatform instance with the desired configuration for a host activity.
@@ -71,6 +71,10 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
       androidSolaPlatformConfig.backgroundColor().getBlue() / 255f,
       androidSolaPlatformConfig.backgroundColor().getAlpha() / 255f
     ).toArgb();
+
+    clearPaint.setColor(Color.TRANSPARENT);
+    clearPaint.setStyle(Paint.Style.FILL);
+    clearPaint.setXfermode(new android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.CLEAR));
   }
 
   @Override
@@ -172,6 +176,10 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
     if (!useSoftwareRendering) {
       AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
 
+      canvas.drawRect(
+        aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height(),
+        clearPaint
+      );
       canvas.translate(aspectRatioSizing.x(), aspectRatioSizing.y());
       canvas.scale(aspectRatioSizing.width() / (float) renderer.getWidth(), aspectRatioSizing.height() / (float) renderer.getHeight());
 
