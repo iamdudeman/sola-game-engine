@@ -142,6 +142,14 @@ public class RenderingExample extends Sola {
 
       var firstTouchPhase = touchInput.getFirstTouch() != null ? touchInput.getFirstTouch().phase() : null;
 
+      if (firstTouchPhase == TouchPhase.BEGAN && touchInput.getFirstTouch().y() < 50) {
+        return;
+      }
+
+      if (mouseInput.isMousePressed(MouseButton.PRIMARY) && mouseInput.getMousePosition().y() < 50) {
+        return;
+      }
+
       if (mouseInput.isMousePressed(MouseButton.PRIMARY) || firstTouchPhase == TouchPhase.BEGAN) {
         current++;
 
