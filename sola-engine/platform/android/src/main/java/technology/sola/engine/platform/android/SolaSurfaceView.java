@@ -69,7 +69,7 @@ class SolaSurfaceView extends SurfaceView {
     if (softwareRendererBitmap == null || this.softwareRenderer != softwareRenderer) {
       this.softwareRenderer = softwareRenderer;
       softwareRendererSrcRect = new Rect(0, 0, rendererWidth, rendererHeight);
-      softwareRendererBitmap = Bitmap.createBitmap(rendererWidth, rendererHeight, Bitmap.Config.ARGB_8888);
+      softwareRendererBitmap = Bitmap.createBitmap(rendererWidth, rendererHeight, Bitmap.Config.RGB_565);
     }
 
     softwareRendererBitmap.setPixels(softwareRenderer.getPixels(), 0, rendererWidth, 0, 0, rendererWidth, rendererHeight);
