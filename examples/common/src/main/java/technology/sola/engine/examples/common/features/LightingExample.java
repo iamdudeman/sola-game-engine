@@ -28,7 +28,6 @@ import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
-import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.engine.physics.utils.ColliderUtils;
 import technology.sola.engine.utils.SolaRandom;
 import technology.sola.math.linear.Vector2D;
@@ -59,7 +58,6 @@ public class LightingExample extends Sola {
     ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
 
     solaPhysics = new SolaPhysics.Builder(solaEcs)
-      .withoutParticles()
       .buildAndInitialize(eventHub);
 
     solaPhysics.getGravitySystem().setActive(false);
@@ -70,7 +68,6 @@ public class LightingExample extends Sola {
       .buildAndInitialize(assetLoaderProvider);
 
     solaEcs.addSystem(new PlayerSystem());
-    solaEcs.addSystem(new ParticleSystem());
     solaEcs.setWorld(buildWorld());
     platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
     platform().getRenderer().createLayers("objects");
@@ -155,8 +152,8 @@ public class LightingExample extends Sola {
           screenSpaceLightMapGraphicsModule.setActive(true);
           spriteEntityGraphicsModule.setActive(true);
         }
-
       }
+
       if (keyboardInput.isKeyHeld(Key.W)) {
         transformComponent.setY(transformComponent.getY() - speed);
       }

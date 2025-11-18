@@ -186,14 +186,19 @@ public class CollidersExample extends Sola {
           return;
         }
 
-        ConvexPolygon convexPolygon = new ConvexPolygon(points.toArray(Vector2D[]::new));
+        try {
+          ConvexPolygon convexPolygon = new ConvexPolygon(points.toArray(Vector2D[]::new));
 
-        world.createEntity(
-          new TransformComponent(0, 0),
-          new ConvexPolygonRendererComponent(Color.YELLOW, false, convexPolygon),
-          new DynamicBodyComponent(),
-          new ColliderComponent(new ColliderShapeConvexPolygon(convexPolygon))
-        );
+          world.createEntity(
+            new TransformComponent(0, 0),
+            new ConvexPolygonRendererComponent(Color.YELLOW, false, convexPolygon),
+            new DynamicBodyComponent(),
+            new ColliderComponent(new ColliderShapeConvexPolygon(convexPolygon))
+          );
+        } catch (IllegalArgumentException ignored) {
+          // invalid polygon, ignore
+        }
+
         reset();
       }
 
