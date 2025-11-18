@@ -113,6 +113,7 @@ public class SimplePlatformerGame extends Sola {
       .addComponent(new TransformComponent(300, 250, 50, 150f))
       .addComponent(new RectangleRendererComponent(new Color(120, 173, 216, 230)))
       .addComponent(new GlassComponent())
+      .addComponent(new BlendModeComponent(BlendMode.NO_BLENDING))
       .addComponent(new ColliderComponent(new ColliderShapeAABB()).setSensor(true));
 
     world.createEntity()
@@ -235,9 +236,9 @@ public class SimplePlatformerGame extends Sola {
     public void update(World world, float deltaTime) {
       world.createView().of(GlassComponent.class)
         .getEntries()
-        .forEach(view -> view.entity().removeComponent(BlendModeComponent.class));
+        .forEach(view -> view.entity().getComponent(BlendModeComponent.class).setBlendFunction(BlendMode.NO_BLENDING));
 
-      entitiesToMakeTransparent.forEach(entity -> entity.addComponent(new BlendModeComponent(BlendMode.NORMAL)));
+      entitiesToMakeTransparent.forEach(entity -> entity.getComponent(BlendModeComponent.class).setBlendFunction(BlendMode.NORMAL));
       entitiesToMakeTransparent.clear();
     }
   }

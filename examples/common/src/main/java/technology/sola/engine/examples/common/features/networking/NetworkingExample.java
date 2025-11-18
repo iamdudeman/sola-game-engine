@@ -82,10 +82,10 @@ public class NetworkingExample extends Sola {
         ? new Vector2D(touch.x(), touch.y())
         : null;
 
-      if (keyboardInput.isKeyHeld(Key.A) || (touchPosition != null &&touchPosition.x() < configuration.rendererWidth() / 2f)) {
+      if (keyboardInput.isKeyHeld(Key.A) || (touchPosition != null && touchPosition.x() < configuration.rendererWidth() / 2f)) {
         direction = 1;
       }
-      if (keyboardInput.isKeyHeld(Key.D) || (touchPosition != null &&touchPosition.x() > configuration.rendererWidth() / 2f)) {
+      if (keyboardInput.isKeyHeld(Key.D) || (touchPosition != null && touchPosition.x() > configuration.rendererWidth() / 2f)) {
         direction = 2;
       }
 
