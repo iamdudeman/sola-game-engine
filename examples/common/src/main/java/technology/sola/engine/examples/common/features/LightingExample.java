@@ -8,10 +8,18 @@ import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.examples.common.ExampleUtils;
 import technology.sola.engine.graphics.SolaGraphics;
+import technology.sola.engine.graphics.components.animation.TransformAnimatorComponent;
+import technology.sola.engine.graphics.gui.GuiElement;
+import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
+import technology.sola.engine.graphics.gui.elements.TextGuiElement;
+import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.style.BaseStyles;
+import technology.sola.engine.graphics.gui.style.property.Direction;
+import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.modules.ScreenSpaceLightMapGraphicsModule;
 import technology.sola.engine.graphics.modules.SpriteEntityGraphicsModule;
-import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
@@ -21,8 +29,8 @@ import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
-import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
+import technology.sola.engine.input.TouchPhase;
 import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
@@ -30,6 +38,7 @@ import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
 import technology.sola.engine.physics.utils.ColliderUtils;
 import technology.sola.engine.utils.SolaRandom;
+import technology.sola.math.EasingFunction;
 import technology.sola.math.linear.Vector2D;
 
 /**
@@ -55,23 +64,61 @@ public class LightingExample extends Sola {
 
   @Override
   protected void onInit() {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
-
     solaPhysics = new SolaPhysics.Builder(solaEcs)
       .buildAndInitialize(eventHub);
 
     solaPhysics.getGravitySystem().setActive(false);
 
     solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withGui(mouseInput)
       .withLighting(new Color(10, 10, 10))
       .withBackgroundColor(Color.WHITE)
       .buildAndInitialize(assetLoaderProvider);
+
+    solaGraphics.guiDocument().setRootElement(buildGui());
 
     solaEcs.addSystem(new PlayerSystem());
     solaEcs.setWorld(buildWorld());
     platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
     platform().getRenderer().createLayers("objects");
   }
+
+  private GuiElement<?, ?> buildGui() {
+    var section = new SectionGuiElement()
+      .addStyle(new BaseStyles.Builder<>().setDirection(Direction.ROW).setGap(2).build())
+      .appendChildren(
+        new ButtonGuiElement()
+          .setOnAction(() -> ExampleUtils.returnToLauncher(platform(), eventHub))
+          .appendChildren(
+            new TextGuiElement()
+              .setText("Back")
+          ),
+        new ButtonGuiElement()
+          .setOnAction(() -> {
+            ScreenSpaceLightMapGraphicsModule screenSpaceLightMapGraphicsModule = solaGraphics.getGraphicsModule(ScreenSpaceLightMapGraphicsModule.class);
+
+            screenSpaceLightMapGraphicsModule.setActive(!screenSpaceLightMapGraphicsModule.isActive());
+          })
+          .appendChildren(
+            new TextGuiElement()
+              .setText("Light")
+          ),
+        new ButtonGuiElement()
+          .setOnAction(() -> {
+            SpriteEntityGraphicsModule spriteEntityGraphicsModule = solaGraphics.getGraphicsModule(SpriteEntityGraphicsModule.class);
+
+            spriteEntityGraphicsModule.setActive(!spriteEntityGraphicsModule.isActive());
+          })
+          .appendChildren(
+            new TextGuiElement()
+              .setText("Sprites")
+          )
+      );
+
+    DefaultThemeBuilder.buildDarkTheme().applyToTree(section);
+
+    return section;
+  };
 
   @Override
   protected void onAsyncInit(Runnable completeAsyncInit) {
@@ -134,43 +181,32 @@ public class LightingExample extends Sola {
   private class PlayerSystem extends EcsSystem {
     @Override
     public void update(World world, float deltaTime) {
-      final int speed = 2;
-      Entity playerEntity = world.findEntityByName("player");
-      TransformComponent transformComponent = playerEntity.getComponent(TransformComponent.class);
+      Vector2D target = null;
+      var touch = touchInput.getFirstTouch();
 
-      if (keyboardInput.isKeyPressed(Key.SPACE)) {
-        ScreenSpaceLightMapGraphicsModule screenSpaceLightMapGraphicsModule = solaGraphics.getGraphicsModule(ScreenSpaceLightMapGraphicsModule.class);
-        SpriteEntityGraphicsModule spriteEntityGraphicsModule = solaGraphics.getGraphicsModule(SpriteEntityGraphicsModule.class);
-
-        if (spriteEntityGraphicsModule.isActive() && screenSpaceLightMapGraphicsModule.isActive()) {
-          screenSpaceLightMapGraphicsModule.setActive(false);
-          spriteEntityGraphicsModule.setActive(true);
-        } else if (spriteEntityGraphicsModule.isActive() && !screenSpaceLightMapGraphicsModule.isActive()) {
-          screenSpaceLightMapGraphicsModule.setActive(true);
-          spriteEntityGraphicsModule.setActive(false);
-        } else {
-          screenSpaceLightMapGraphicsModule.setActive(true);
-          spriteEntityGraphicsModule.setActive(true);
-        }
+      if (touch != null && touch.phase() == TouchPhase.BEGAN) {
+        target = new Vector2D(touch.x(), touch.y());
       }
-
-      if (keyboardInput.isKeyHeld(Key.W)) {
-        transformComponent.setY(transformComponent.getY() - speed);
-      }
-      if (keyboardInput.isKeyHeld(Key.S)) {
-        transformComponent.setY(transformComponent.getY() + speed);
-      }
-      if (keyboardInput.isKeyHeld(Key.A)) {
-        transformComponent.setX(transformComponent.getX() - speed);
-      }
-      if (keyboardInput.isKeyHeld(Key.D)) {
-        transformComponent.setX(transformComponent.getX() + speed);
-      }
-
       if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
-        Vector2D coordinate = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
+        target = mouseInput.getMousePosition();
+      }
+
+      if (target != null) {
+        Entity playerEntity = world.findEntityByName("player");
+        Vector2D coordinate = solaGraphics.screenToWorldCoordinate(target);
+
+        if (coordinate.y() < 20) {
+          return;
+        }
+
         float radius = SolaRandom.nextFloat(8f, 32f);
         int intensity = SolaRandom.nextInt(25, 220);
+
+        playerEntity.addComponent(
+          new TransformAnimatorComponent(EasingFunction.LINEAR, 3000)
+            .setTranslateX(coordinate.x())
+            .setTranslateY(coordinate.y())
+        );
 
         var entity = world.createEntity(
           new TransformComponent(coordinate.x(), coordinate.y()),
