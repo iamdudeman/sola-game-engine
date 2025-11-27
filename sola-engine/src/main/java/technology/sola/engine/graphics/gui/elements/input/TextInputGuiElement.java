@@ -112,7 +112,9 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, Te
 
     var textAlignment = styleContainer.getPropertyValue(TextStyles::textAlignment, DefaultStyleValues.TEXT_ALIGNMENT);
 
-    TextRenderUtils.renderLines(renderer, textRenderDetails, textAlignment, contentBounds, textColor);
+    if (textRenderDetails != null) {
+      TextRenderUtils.renderLines(renderer, textRenderDetails, textAlignment, contentBounds, textColor);
+    }
   }
 
   @Override
