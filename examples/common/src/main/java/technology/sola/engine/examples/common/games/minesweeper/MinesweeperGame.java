@@ -57,7 +57,7 @@ public class MinesweeperGame extends Sola {
     // systems
     MinefieldSystem minefieldSystem = new MinefieldSystem(solaEcs);
     GameOverSystem gameOverSystem = new GameOverSystem();
-    PlayerInputSystem playerInputSystem = new PlayerInputSystem(solaGraphics, mouseInput, eventHub);
+    PlayerInputSystem playerInputSystem = new PlayerInputSystem(solaGraphics, mouseInput, touchInput, eventHub);
     solaEcs.addSystems(
       minefieldSystem,
       playerInputSystem,

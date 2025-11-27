@@ -74,6 +74,20 @@ public class TouchInput {
   }
 
   /**
+   * @return the {@link Touch} of the last finger that is still on the screen or else null
+   */
+  @Nullable
+  public Touch getLastActiveTouch() {
+    for (int i = MAX_TOUCHES - 1; i >= 0; i--) {
+      if (touches[i] != null) {
+        return touches[i];
+      }
+    }
+
+    return null;
+  }
+
+  /**
    * Gets the {@link Touch} of the given finger by unique id.
    *
    * @param id the id (typically 0-9)
