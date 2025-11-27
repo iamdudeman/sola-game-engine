@@ -107,7 +107,12 @@ public class PhysicsExample extends Sola {
     SectionGuiElement sectionGuiElement = new SectionGuiElement();
 
     sectionGuiElement.addStyle(
-      ConditionalStyle.always(new BaseStyles.Builder<>().setDirection(Direction.ROW).setPadding(5).setGap(5).build())
+      ConditionalStyle.always(new BaseStyles.Builder<>()
+        .setDirection(Direction.ROW)
+        .setPositionX("25%")
+        .setPadding(4)
+        .setGap(2)
+        .build())
     );
 
     TextInputGuiElement randomSeedInput = new TextInputGuiElement().setValue("123456789").setPlaceholder("Random");

@@ -37,7 +37,7 @@ public class TransformAnimatorComponent implements Component {
    * Creates a new {@link TransformAnimatorComponent} with required parameters set.
    *
    * @param easingFunction the {@link EasingFunction}
-   * @param duration       the duration of the animation
+   * @param duration       the duration of the animation in milliseconds
    */
   public TransformAnimatorComponent(EasingFunction easingFunction, long duration) {
     this.easingFunction = easingFunction;
@@ -153,7 +153,7 @@ public class TransformAnimatorComponent implements Component {
    * Ticks the animation state by a delta time updating the desired {@link TransformComponent}.
    *
    * @param transformComponent the {@code TransformComponent} to update
-   * @param deltaTime          the time elapsed since previous update
+   * @param deltaTime          the time elapsed since the previous update
    */
   public void tickAnimation(TransformComponent transformComponent, float deltaTime) {
     if (elapsedTime >= duration) {
