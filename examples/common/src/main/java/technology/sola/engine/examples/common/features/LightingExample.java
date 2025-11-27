@@ -118,7 +118,7 @@ public class LightingExample extends Sola {
     DefaultThemeBuilder.buildDarkTheme().applyToTree(section);
 
     return section;
-  };
+  }
 
   @Override
   protected void onAsyncInit(Runnable completeAsyncInit) {
