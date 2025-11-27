@@ -1,8 +1,5 @@
 # sola-game-engine TODO list
 
-* Update examples to work off of mouse/touch only
-    * cleanup logic in `ExampleLauncherSola#addReturnToLauncherKeyEvent`
-
 ## Known Bugs List
 
 *
