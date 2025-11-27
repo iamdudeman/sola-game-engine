@@ -13,6 +13,7 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.TouchPhase;
 import technology.sola.engine.physics.Material;
@@ -64,6 +65,8 @@ public class PongGame extends Sola {
     solaEcs.addSystems(new PlayerSystem(), new ComputerSystem());
 
     solaEcs.setWorld(buildWorld());
+
+    platform().getViewport().setAspectMode(AspectMode.STRETCH);
 
     eventHub.add(SensorEvent.class, event -> {
       event.collisionManifold().conditionallyResolveCollision(

@@ -11,6 +11,7 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.math.linear.Vector2D;
@@ -43,6 +44,8 @@ public class ParticleExample extends Sola {
     solaGraphics.guiDocument().setRootElement(
       ExampleUtils.createReturnToLauncherButton(platform(), eventHub, "0", "0")
     );
+
+    platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
 
     solaEcs.setWorld(buildWorld());
     solaEcs.addSystem(new ParticleSystem());
