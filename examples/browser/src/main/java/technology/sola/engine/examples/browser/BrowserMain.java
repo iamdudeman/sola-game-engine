@@ -25,7 +25,7 @@ public class BrowserMain {
    */
   public static void main(String[] args) {
     SolaPlatform solaPlatform = new BrowserSolaPlatform();
-    Sola sola = new ExampleLauncherSola(solaPlatform);
+    Sola sola = new ExampleLauncherSola();
 
     solaPlatform.play(sola);
   }

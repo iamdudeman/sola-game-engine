@@ -14,6 +14,8 @@ import technology.sola.engine.examples.common.games.minesweeper.event.GameOverEv
 import technology.sola.engine.examples.common.games.minesweeper.event.NewGameEvent;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.engine.input.MouseInput;
+import technology.sola.engine.input.TouchInput;
+import technology.sola.engine.input.TouchPhase;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
@@ -27,6 +29,7 @@ import java.util.Collection;
 public class PlayerInputSystem extends EcsSystem {
   private final SolaGraphics solaGraphics;
   private final MouseInput mouseInput;
+  private final TouchInput touchInput;
   private final EventHub eventHub;
 
   /**
@@ -34,11 +37,13 @@ public class PlayerInputSystem extends EcsSystem {
    *
    * @param solaGraphics the {@link SolaGraphics}
    * @param mouseInput the {@link MouseInput}
+   * @param touchInput the {@link TouchInput}
    * @param eventHub the {@link EventHub}
    */
-  public PlayerInputSystem(SolaGraphics solaGraphics, MouseInput mouseInput, EventHub eventHub) {
+  public PlayerInputSystem(SolaGraphics solaGraphics, MouseInput mouseInput, TouchInput touchInput, EventHub eventHub) {
     this.solaGraphics = solaGraphics;
     this.mouseInput = mouseInput;
+    this.touchInput = touchInput;
     this.eventHub = eventHub;
   }
 
@@ -58,8 +63,13 @@ public class PlayerInputSystem extends EcsSystem {
 
   @Override
   public void update(World world, float deltaTime) {
-    if (mouseInput.isMousePressed(MouseButton.PRIMARY) || mouseInput.isMousePressed(MouseButton.SECONDARY)) {
-      Vector2D worldMousePosition = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
+    boolean isPrimary = mouseInput.isMousePressed(MouseButton.PRIMARY) || touchInput.getActiveTouchCount() == 1;
+    boolean isSecondary = mouseInput.isMousePressed(MouseButton.SECONDARY) || touchInput.getActiveTouchCount() > 1;
+
+    if (isPrimary || isSecondary) {
+      var touch = touchInput.getLastActiveTouch();
+      var touchPoint = touch != null && touch.phase() == TouchPhase.BEGAN ? new Vector2D(touch.x(), touch.y()) : null;
+      Vector2D worldMousePosition = solaGraphics.screenToWorldCoordinate(touchPoint == null ? mouseInput.getMousePosition() : touchPoint);
 
       var entries = world.createView().of(TransformComponent.class, MinesweeperSquareComponent.class).getEntries();
 
@@ -71,7 +81,7 @@ public class PlayerInputSystem extends EcsSystem {
         MinesweeperSquareComponent square = entry.c2();
 
         if (squareBounds.contains(worldMousePosition)) {
-          if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
+          if (isPrimary) {
             handleReveal(entries, square);
           } else {
             handleFlag(square);

@@ -6,6 +6,7 @@ import org.jspecify.annotations.Nullable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * TouchInput contains information about user interaction with the touch screen.
@@ -18,6 +19,19 @@ public class TouchInput {
   public static final int MAX_TOUCHES = 10;
   private final @Nullable Touch[] touches = new Touch[MAX_TOUCHES];
   private final @Nullable Touch[] lastEventTouches = new Touch[MAX_TOUCHES];
+  @Nullable
+  private TouchGestureHelper touchGestureHelper;
+
+  /**
+   * @return {@link TouchGestureHelper} for convenient handling of touch gestures
+   */
+  public TouchGestureHelper gestures() {
+    if (touchGestureHelper == null) {
+      touchGestureHelper = new TouchGestureHelper(this);
+    }
+
+    return touchGestureHelper;
+  }
 
   /**
    * Gets the number of active touches (fingers on the screen).
@@ -37,12 +51,17 @@ public class TouchInput {
   }
 
   /**
-   * @return iterator for all the active touches
+   * @return {@link Iterator} for all the active touches
    */
   public Iterator<Touch> activeTouchesIterator() {
-    return Arrays.stream(touches)
-      .filter(Objects::nonNull)
-      .iterator();
+    return activeTouches().iterator();
+  }
+
+  /**
+   * @return {@link Stream} of all active touches
+   */
+  public Stream<Touch> activeTouches() {
+    return Arrays.stream(touches).filter(Objects::nonNull);
   }
 
   /**
@@ -61,6 +80,20 @@ public class TouchInput {
     for (var touch : touches) {
       if (touch != null) {
         return touch;
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * @return the {@link Touch} of the last finger that is still on the screen or else null
+   */
+  @Nullable
+  public Touch getLastActiveTouch() {
+    for (int i = MAX_TOUCHES - 1; i >= 0; i--) {
+      if (touches[i] != null) {
+        return touches[i];
       }
     }
 
@@ -88,6 +121,10 @@ public class TouchInput {
   public void updatedStatusOfTouches() {
     System.arraycopy(lastEventTouches, 0, touches, 0, MAX_TOUCHES);
     Arrays.fill(lastEventTouches, null);
+
+    if (touchGestureHelper != null) {
+      touchGestureHelper.update();
+    }
   }
 
   /**

@@ -8,19 +8,21 @@ import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.examples.common.ExampleUtils;
 import technology.sola.engine.graphics.SolaGraphics;
-import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiDocument;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
+import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
 import technology.sola.engine.graphics.gui.style.BaseStyles;
+import technology.sola.engine.graphics.gui.style.property.CrossAxisChildren;
 import technology.sola.engine.graphics.gui.style.property.Direction;
 import technology.sola.engine.graphics.gui.style.property.MainAxisChildren;
+import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
-import technology.sola.engine.input.Key;
 
 /**
  * GuiExample is a {@link technology.sola.engine.core.Sola} that shows an example custom gui using various
@@ -30,7 +32,6 @@ import technology.sola.engine.input.Key;
 public class GuiExample extends Sola {
   private MainAxisChildren mainAxisChildren = MainAxisChildren.START;
   private Direction direction = Direction.ROW;
-  private int selectedExample = 1;
   private SolaGraphics solaGraphics;
 
   /**
@@ -42,8 +43,6 @@ public class GuiExample extends Sola {
 
   @Override
   protected void onInit() {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
-
     solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
       .withGui(mouseInput)
       .buildAndInitialize(assetLoaderProvider);
@@ -56,70 +55,6 @@ public class GuiExample extends Sola {
       .addAssetMapping("times_NORMAL_18", "assets/font/times_NORMAL_18.font.json");
 
     platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
-
-    platform().onKeyPressed(keyEvent -> {
-      if (keyEvent.keyCode() == Key.H.getCode()) {
-        guiDocument().setVisible(!guiDocument().isVisible());
-      }
-
-      if (keyEvent.keyCode() == Key.ONE.getCode()) {
-        selectedExample = 1;
-        guiDocument().setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("gui").getAsset().rootElement());
-      }
-      if (keyEvent.keyCode() == Key.TWO.getCode()) {
-        selectedExample = 2;
-        guiDocument().setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("row").getAsset().rootElement());
-      }
-      if (keyEvent.keyCode() == Key.THREE.getCode()) {
-        selectedExample = 3;
-        guiDocument().setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("column").getAsset().rootElement());
-      }
-      if (keyEvent.keyCode() == Key.FOUR.getCode()) {
-        selectedExample = 4;
-        guiDocument().setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("text").getAsset().rootElement());
-      }
-      if (keyEvent.keyCode() == Key.FIVE.getCode()) {
-        selectedExample = 5;
-        guiDocument().setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("image").getAsset().rootElement());
-      }
-      if (keyEvent.keyCode() == Key.SIX.getCode()) {
-        selectedExample = 6;
-        guiDocument().setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("inputs").getAsset().rootElement());
-      }
-      if (keyEvent.keyCode() == Key.SEVEN.getCode()) {
-        selectedExample = 7;
-        guiDocument().setRootElement(assetLoaderProvider.get(GuiJsonDocument.class).get("theme").getAsset().rootElement());
-      }
-      if (keyEvent.keyCode() == Key.EIGHT.getCode()) {
-        selectedExample = 8;
-
-        guiDocument().setRootElement(buildMainAxisContentExample());
-      }
-
-      if (selectedExample == 8) {
-        if (keyEvent.keyCode() == Key.RIGHT.getCode()) {
-          mainAxisChildren = switch (mainAxisChildren) {
-            case START -> MainAxisChildren.CENTER;
-            case CENTER -> MainAxisChildren.END;
-            case END -> MainAxisChildren.SPACE_BETWEEN;
-            case SPACE_BETWEEN -> MainAxisChildren.SPACE_AROUND;
-            case SPACE_AROUND -> MainAxisChildren.SPACE_EVENLY;
-            case SPACE_EVENLY -> MainAxisChildren.START;
-          };
-
-          guiDocument().setRootElement(buildMainAxisContentExample());
-        }
-        if (keyEvent.keyCode() == Key.DOWN.getCode()) {
-          direction = switch (direction) {
-            case ROW -> Direction.ROW_REVERSE;
-            case ROW_REVERSE -> Direction.COLUMN;
-            case COLUMN -> Direction.COLUMN_REVERSE;
-            case COLUMN_REVERSE -> Direction.ROW;
-          };
-          guiDocument().setRootElement(buildMainAxisContentExample());
-        }
-      }
-    });
   }
 
   @Override
@@ -135,7 +70,7 @@ public class GuiExample extends Sola {
       .loadAll()
       .onComplete(assets -> {
         if (assets[0] instanceof GuiJsonDocument guiJsonDocument) {
-          guiDocument().setRootElement(guiJsonDocument.rootElement());
+          guiDocument().setRootElement(buildOptionBarWithContent(guiJsonDocument.rootElement()));
         }
 
         if (assets[5] instanceof GuiJsonDocument guiJsonDocument) {
@@ -153,16 +88,147 @@ public class GuiExample extends Sola {
     solaGraphics.render(renderer);
   }
 
+  private GuiElement<?, ?> buildOptionBarWithContent(GuiElement<?, ?> content) {
+    var optionBar = new SectionGuiElement()
+      .addStyle(new BaseStyles.Builder<>().setDirection(Direction.ROW).setGap(4).build())
+      .appendChildren(
+        buildOptionBarButton("Back", () -> ExampleUtils.returnToLauncher(platform(), eventHub)),
+        buildOptionBarButton("Basic", () -> {
+          guiDocument().setRootElement(buildOptionBarWithContent(
+            assetLoaderProvider.get(GuiJsonDocument.class).get("gui").getAsset().rootElement())
+          );
+        }),
+        buildOptionBarButton("Row", () -> {
+          guiDocument().setRootElement(buildOptionBarWithContent(
+            assetLoaderProvider.get(GuiJsonDocument.class).get("row").getAsset().rootElement())
+          );
+        }),
+        buildOptionBarButton("Column", () -> {
+          guiDocument().setRootElement(buildOptionBarWithContent(
+            assetLoaderProvider.get(GuiJsonDocument.class).get("column").getAsset().rootElement())
+          );
+        }),
+        buildOptionBarButton("Text", () -> {
+          guiDocument().setRootElement(buildOptionBarWithContent(
+            assetLoaderProvider.get(GuiJsonDocument.class).get("text").getAsset().rootElement())
+          );
+        }),
+        buildOptionBarButton("Image", () -> {
+          guiDocument().setRootElement(buildOptionBarWithContent(
+            assetLoaderProvider.get(GuiJsonDocument.class).get("image").getAsset().rootElement())
+          );
+        }),
+        buildOptionBarButton("Inputs", () -> {
+          guiDocument().setRootElement(buildOptionBarWithContent(
+            assetLoaderProvider.get(GuiJsonDocument.class).get("inputs").getAsset().rootElement())
+          );
+        }),
+        buildOptionBarButton("Theme", () -> {
+          guiDocument().setRootElement(buildOptionBarWithContent(
+            assetLoaderProvider.get(GuiJsonDocument.class).get("theme").getAsset().rootElement())
+          );
+        }),
+        buildOptionBarButton("Flex", () -> {
+          guiDocument().setRootElement(buildOptionBarWithContent(buildMainAxisContentExample()));
+        })
+      );
+
+    DefaultThemeBuilder.buildDarkTheme().applyToTree(optionBar);
+
+    return new SectionGuiElement()
+      .addStyle(new BaseStyles.Builder<>().setDirection(Direction.COLUMN).setWidth("100%").setHeight("100%").setGap(4).build())
+      .appendChildren(
+        optionBar,
+        content
+      );
+  }
+
+  private ButtonGuiElement buildOptionBarButton(String text, Runnable onAction) {
+    final var button = new ButtonGuiElement()
+      .setId(text)
+      .addStyle(new BaseStyles.Builder<>().setPaddingHorizontal(8).setPaddingVertical(4).setCrossAxisChildren(CrossAxisChildren.CENTER).build())
+      .setOnAction(onAction)
+      .appendChildren(new TextGuiElement().setText(text));
+
+    button.setOnAction(() -> {
+      onAction.run();
+
+      guiDocument().findElementById(button.getId(), ButtonGuiElement.class).requestFocus();
+    });
+
+    return button;
+  }
+
   private GuiElement<?, ?> buildMainAxisContentExample() {
     return new SectionGuiElement().appendChildren(
       buildContainer(5, mainAxisChildren),
       buildContainer(4, mainAxisChildren),
       buildContainer(3, mainAxisChildren),
       buildContainer(2, mainAxisChildren),
-      buildContainer(1, mainAxisChildren)
+      buildContainer(1, mainAxisChildren),
+      buildFlexControls()
     ).addStyle(new BaseStyles.Builder<>()
       .setDirection(direction == Direction.ROW || direction == Direction.ROW_REVERSE ? Direction.COLUMN : Direction.ROW)
       .build());
+  }
+
+  private GuiElement<?, ?> buildFlexControls() {
+    var flexControls = new SectionGuiElement()
+      .addStyle(new BaseStyles.Builder<>()
+        .setDirection(direction == Direction.COLUMN || direction == Direction.COLUMN_REVERSE ? Direction.COLUMN : Direction.ROW)
+        .setGap(4)
+        .build()
+      )
+      .appendChildren(
+        new ButtonGuiElement()
+          .setId("main-axis")
+          .addStyle(new BaseStyles.Builder<>()
+            .setPaddingHorizontal(8)
+            .setPaddingVertical(4)
+            .setCrossAxisChildren(CrossAxisChildren.CENTER)
+            .build()
+          )
+          .setOnAction(() -> {
+            mainAxisChildren = switch (mainAxisChildren) {
+              case START -> MainAxisChildren.CENTER;
+              case CENTER -> MainAxisChildren.END;
+              case END -> MainAxisChildren.SPACE_BETWEEN;
+              case SPACE_BETWEEN -> MainAxisChildren.SPACE_AROUND;
+              case SPACE_AROUND -> MainAxisChildren.SPACE_EVENLY;
+              case SPACE_EVENLY -> MainAxisChildren.START;
+            };
+
+            guiDocument().setRootElement(buildOptionBarWithContent(buildMainAxisContentExample()));
+
+            guiDocument().findElementById("main-axis", ButtonGuiElement.class).requestFocus();
+          })
+          .appendChildren(new TextGuiElement().setText("Change MainAxis")),
+        new ButtonGuiElement()
+          .setId("direction")
+          .addStyle(new BaseStyles.Builder<>()
+            .setPaddingHorizontal(8)
+            .setPaddingVertical(4)
+            .setCrossAxisChildren(CrossAxisChildren.CENTER)
+            .build()
+          )
+          .setOnAction(() -> {
+            direction = switch (direction) {
+              case ROW -> Direction.ROW_REVERSE;
+              case ROW_REVERSE -> Direction.COLUMN;
+              case COLUMN -> Direction.COLUMN_REVERSE;
+              case COLUMN_REVERSE -> Direction.ROW;
+            };
+
+            guiDocument().setRootElement(buildOptionBarWithContent(buildMainAxisContentExample()));
+
+            guiDocument().findElementById("direction", ButtonGuiElement.class).requestFocus();
+          })
+          .appendChildren(new TextGuiElement().setText("Change Direction"))
+      );
+
+    DefaultThemeBuilder.buildDarkTheme().applyToTree(flexControls);
+
+    return flexControls;
   }
 
   private SectionGuiElement buildContainer(int squares, MainAxisChildren mainAxisChildren) {

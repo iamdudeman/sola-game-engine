@@ -6,8 +6,8 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.examples.common.ExampleUtils;
 import technology.sola.engine.graphics.SolaGraphics;
-import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
@@ -40,10 +40,13 @@ public class MouseAndCameraExample extends Sola {
 
   @Override
   protected void onInit() {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
-
     solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withGui(mouseInput)
       .buildAndInitialize(assetLoaderProvider);
+
+    solaGraphics.guiDocument().setRootElement(
+      ExampleUtils.createReturnToLauncherButton(platform(), eventHub, "0", "11px")
+    );
 
     platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
 

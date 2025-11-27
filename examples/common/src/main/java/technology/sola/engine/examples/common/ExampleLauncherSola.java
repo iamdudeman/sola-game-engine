@@ -3,11 +3,9 @@ package technology.sola.engine.examples.common;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
-import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
 import technology.sola.engine.graphics.SolaGraphics;
-import technology.sola.engine.event.EventHub;
 import technology.sola.engine.examples.common.features.*;
 import technology.sola.engine.examples.common.games.CirclePopGame;
 import technology.sola.engine.examples.common.games.PongGame;
@@ -29,7 +27,6 @@ import technology.sola.engine.graphics.gui.style.property.MainAxisChildren;
 import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
-import technology.sola.engine.input.Key;
 
 import java.util.function.Supplier;
 
@@ -39,50 +36,13 @@ import java.util.function.Supplier;
  */
 @NullMarked
 public class ExampleLauncherSola extends Sola {
-  private final SolaPlatform solaPlatform;
   private SolaGraphics solaGraphics;
 
   /**
-   * Registers a key event to launch the {@link ExampleLauncherSola} from another example {@link Sola}.
-   *
-   * @param solaPlatform the current {@link SolaPlatform}
-   * @param eventHub     the {@link EventHub} instance for the {@code Sola}
-   */
-  public static void addReturnToLauncherKeyEvent(SolaPlatform solaPlatform, EventHub eventHub) {
-    solaPlatform.onKeyPressed(keyEvent -> {
-      if (keyEvent.keyCode() == Key.ESCAPE.getCode()) {
-        eventHub.add(GameLoopEvent.class, event -> {
-          if (event.state() == GameLoopState.STOPPED) {
-            solaPlatform.play(new ExampleLauncherSola(solaPlatform));
-          }
-        });
-
-        eventHub.emit(new GameLoopEvent(GameLoopState.STOP));
-      }
-    });
-
-    // todo cleanup this temporary solution for touch devices
-    solaPlatform.onMouseReleased(mouseEvent -> {
-      if (mouseEvent.x() > solaPlatform.getRenderer().getWidth() - 50 && mouseEvent.y() > solaPlatform.getRenderer().getHeight() - 50) {
-        eventHub.add(GameLoopEvent.class, event -> {
-          if (event.state() == GameLoopState.STOPPED) {
-            solaPlatform.play(new ExampleLauncherSola(solaPlatform));
-          }
-        });
-
-        eventHub.emit(new GameLoopEvent(GameLoopState.STOP));
-      }
-    });
-  }
-
-  /**
    * Creates an instance of this {@link Sola}
-   *
-   * @param solaPlatform the {@link SolaPlatform} that will launch the examples
    */
-  public ExampleLauncherSola(SolaPlatform solaPlatform) {
+  public ExampleLauncherSola() {
     super(new SolaConfiguration("Example Launcher", 800, 600, 30));
-    this.solaPlatform = solaPlatform;
   }
 
   @Override
@@ -92,7 +52,7 @@ public class ExampleLauncherSola extends Sola {
       .withGui(mouseInput)
       .buildAndInitialize(assetLoaderProvider);
 
-    solaPlatform.getViewport().setAspectMode(AspectMode.MAINTAIN);
+    platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
 
     var guiRoot = buildGui();
 
@@ -188,7 +148,7 @@ public class ExampleLauncherSola extends Sola {
       .setOnAction(() -> {
         eventHub.add(GameLoopEvent.class, event -> {
           if (event.state() == GameLoopState.STOPPED) {
-            solaPlatform.play(solaSupplier.get());
+            platform().play(solaSupplier.get());
           }
         });
 

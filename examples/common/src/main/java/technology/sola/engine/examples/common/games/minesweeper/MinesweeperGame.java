@@ -4,8 +4,8 @@ import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.examples.common.ExampleUtils;
 import technology.sola.engine.graphics.SolaGraphics;
-import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.examples.common.games.minesweeper.event.NewGameEvent;
 import technology.sola.engine.examples.common.games.minesweeper.graphics.MinesweeperSquareEntityGraphicsModule;
 import technology.sola.engine.examples.common.games.minesweeper.graphics.gui.MinesweeperGui;
@@ -39,8 +39,6 @@ public class MinesweeperGame extends Sola {
 
   @Override
   protected void onInit() {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
-
     solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
       .withGui(
         mouseInput,
@@ -59,12 +57,12 @@ public class MinesweeperGame extends Sola {
     // systems
     MinefieldSystem minefieldSystem = new MinefieldSystem(solaEcs);
     GameOverSystem gameOverSystem = new GameOverSystem();
-    PlayerInputSystem playerInputSystem = new PlayerInputSystem(solaGraphics, mouseInput, eventHub);
+    PlayerInputSystem playerInputSystem = new PlayerInputSystem(solaGraphics, mouseInput, touchInput, eventHub);
     solaEcs.addSystems(
       minefieldSystem,
       playerInputSystem,
       gameOverSystem,
-      new CameraSystem(mouseInput)
+      new CameraSystem(mouseInput, touchInput)
     );
 
     // events
@@ -79,7 +77,12 @@ public class MinesweeperGame extends Sola {
       .getNewAsset("gui", "assets/gui/minesweeper.gui.json")
       .executeWhenLoaded(guiJsonDocument -> {
         MinesweeperGui.initializeEvents(guiJsonDocument.rootElement(), eventHub);
-        solaGraphics.guiDocument().setRootElement(guiJsonDocument.rootElement());
+        var rootElement = guiJsonDocument.rootElement();
+
+        rootElement.findElementById("back", ButtonGuiElement.class)
+            .setOnAction(() -> ExampleUtils.returnToLauncher(platform(), eventHub));
+
+        solaGraphics.guiDocument().setRootElement(rootElement);
 
         eventHub.emit(new NewGameEvent(
           MinesweeperGui.SIZE_OPTIONS[0].rows(), MinesweeperGui.SIZE_OPTIONS[0].columns(),

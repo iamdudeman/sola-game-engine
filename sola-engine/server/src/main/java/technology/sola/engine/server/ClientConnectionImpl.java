@@ -98,6 +98,7 @@ class ClientConnectionImpl implements ClientConnection {
           networkQueue.addLast(socketMessage);
         }
       } catch (IOException ex) {
+        isConnected = false;
         onDisconnect.accept(this);
         throw new RuntimeException(ex);
       }

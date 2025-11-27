@@ -53,11 +53,14 @@ public class SpriteEntityGraphicsModule extends SolaEntityGraphicsModule<View2En
 
       boolean hasBlendMode = viewEntry.entity().hasComponent(BlendModeComponent.class);
 
+      var previousBlendFunction = renderer.getBlendFunction();
+
       if (!hasBlendMode) {
         renderer.setBlendFunction(BlendMode.MASK);
       }
 
       renderer.drawImage(spriteImage, cameraModifiedEntityTransform.getX(), cameraModifiedEntityTransform.getY());
+      renderer.setBlendFunction(previousBlendFunction);
     });
   }
 }

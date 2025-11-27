@@ -8,14 +8,20 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.examples.common.ExampleUtils;
 import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.event.EventListener;
-import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.*;
+import technology.sola.engine.graphics.gui.elements.TextGuiElement;
+import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.style.BaseStyles;
+import technology.sola.engine.graphics.gui.style.ConditionalStyle;
+import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.SolaPhysics;
@@ -54,23 +60,52 @@ public class SimplePlatformerGame extends Sola {
 
   @Override
   protected void onInit() {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
-
     solaPhysics = new SolaPhysics.Builder(solaEcs)
       .buildAndInitialize(eventHub);
 
     solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
-      .withDebug(solaPhysics, eventHub, keyboardInput)
+      .withGui(mouseInput)
       .buildAndInitialize(assetLoaderProvider);
+
+    solaGraphics.guiDocument().setRootElement(buildReturnButton());
 
     solaEcs.addSystems(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem(), new GlassSystem(eventHub));
     solaEcs.setWorld(buildWorld());
     eventHub.add(CollisionEvent.class, new GameDoneEventListener());
+
+    platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
   }
 
   @Override
   protected void onRender(Renderer renderer) {
     solaGraphics.render(renderer);
+  }
+
+  private ButtonGuiElement buildReturnButton() {
+    var element = new ButtonGuiElement()
+      .addStyle(ConditionalStyle.always(
+        new BaseStyles.Builder<>()
+          .setPositionX("0")
+          .setPositionY("0")
+          .setPaddingVertical(2)
+          .setPaddingHorizontal(4)
+          .build()
+      ))
+      .setOnAction(() -> ExampleUtils.returnToLauncher(platform(), eventHub))
+      .appendChildren(
+        new TextGuiElement().setText("Back")
+      );
+
+    element.events().keyPressed().off();
+    element.events().keyPressed().on(guiKeyEvent -> {
+      if (guiKeyEvent.getKeyEvent().keyCode() == Key.ESCAPE.getCode()) {
+        ExampleUtils.returnToLauncher(platform(), eventHub);
+      }
+    });
+
+    DefaultThemeBuilder.buildLightTheme().applyToTree(element);
+
+    return element;
   }
 
   private class GameDoneEventListener implements EventListener<CollisionEvent> {
@@ -110,9 +145,15 @@ public class SimplePlatformerGame extends Sola {
       .setName("player");
 
     world.createEntity()
+      .addComponent(new TransformComponent(310, 360, 15, 15f))
+      .addComponent(new RectangleRendererComponent(Color.WHITE))
+      .addComponent(new ColliderComponent(new ColliderShapeAABB()));
+
+    world.createEntity()
       .addComponent(new TransformComponent(300, 250, 50, 150f))
       .addComponent(new RectangleRendererComponent(new Color(120, 173, 216, 230)))
       .addComponent(new GlassComponent())
+      .addComponent(new BlendModeComponent(BlendMode.NO_BLENDING))
       .addComponent(new ColliderComponent(new ColliderShapeAABB()).setSensor(true));
 
     world.createEntity()
@@ -235,9 +276,9 @@ public class SimplePlatformerGame extends Sola {
     public void update(World world, float deltaTime) {
       world.createView().of(GlassComponent.class)
         .getEntries()
-        .forEach(view -> view.entity().removeComponent(BlendModeComponent.class));
+        .forEach(view -> view.entity().getComponent(BlendModeComponent.class).setBlendFunction(BlendMode.NO_BLENDING));
 
-      entitiesToMakeTransparent.forEach(entity -> entity.addComponent(new BlendModeComponent(BlendMode.NORMAL)));
+      entitiesToMakeTransparent.forEach(entity -> entity.getComponent(BlendModeComponent.class).setBlendFunction(BlendMode.NORMAL));
       entitiesToMakeTransparent.clear();
     }
   }
@@ -250,15 +291,37 @@ public class SimplePlatformerGame extends Sola {
         .forEach(view -> {
           DynamicBodyComponent dynamicBodyComponent = view.c2();
 
+          boolean isRight = touchInput.activeTouches()
+            .anyMatch(touch -> touch.y() < platform().getRenderer().getHeight() - 100
+              && touch.x() > platform().getRenderer().getWidth() / 2);
+
           if ((keyboardInput.isKeyHeld(Key.D) || keyboardInput.isKeyHeld(Key.RIGHT)) && dynamicBodyComponent.getVelocity().x() < 150) {
+            isRight = true;
+          }
+
+          if (isRight) {
             dynamicBodyComponent.applyForce(150, 0);
           }
 
+          boolean isLeft = touchInput.activeTouches()
+            .anyMatch(touch -> touch.y() < platform().getRenderer().getHeight() - 100 && touch.x() < platform().getRenderer().getWidth() / 2);
+
           if ((keyboardInput.isKeyHeld(Key.A) || keyboardInput.isKeyHeld(Key.LEFT)) && dynamicBodyComponent.getVelocity().x() > -150) {
+            isLeft = true;
+          }
+
+          if (isLeft) {
             dynamicBodyComponent.applyForce(-150, 0);
           }
 
-          if (dynamicBodyComponent.isGrounded() && keyboardInput.isKeyHeld(Key.SPACE)) {
+          boolean isJump = touchInput.activeTouches()
+            .anyMatch(touch -> touch.y() > platform().getRenderer().getHeight() - 100);
+
+          if (keyboardInput.isKeyHeld(Key.SPACE)) {
+            isJump = true;
+          }
+
+          if (dynamicBodyComponent.isGrounded() && isJump) {
             dynamicBodyComponent.applyForce(0, -3000);
           } else if (dynamicBodyComponent.getVelocity().y() > 0) {
             dynamicBodyComponent.applyForce(0, 1.5f * solaPhysics.getGravitySystem().getGravityConstant() * dynamicBodyComponent.getMaterial().getMass());
