@@ -62,7 +62,7 @@ public class MinesweeperGame extends Sola {
       minefieldSystem,
       playerInputSystem,
       gameOverSystem,
-      new CameraSystem(mouseInput)
+      new CameraSystem(mouseInput, touchInput)
     );
 
     // events
