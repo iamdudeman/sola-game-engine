@@ -22,7 +22,11 @@ public class TouchGestureHelper {
     Touch touch1 = touchInput.getTouch(0);
     Touch touch2 = touchInput.getTouch(1);
 
-    if (initialTouch1 == null || initialTouch2 == null || touch1 == null || touch2 == null ) {
+    if (initialTouch1 == null || initialTouch2 == null || touch1 == null || touch2 == null) {
+      return false;
+    }
+
+    if (touch1.phase() != TouchPhase.MOVED || touch2.phase() != TouchPhase.MOVED) {
       return false;
     }
 
@@ -46,6 +50,10 @@ public class TouchGestureHelper {
     Touch touch2 = touchInput.getTouch(1);
 
     if (initialTouch1 == null || initialTouch2 == null || touch1 == null || touch2 == null ) {
+      return false;
+    }
+
+    if (touch1.phase() != TouchPhase.MOVED || touch2.phase() != TouchPhase.MOVED) {
       return false;
     }
 
