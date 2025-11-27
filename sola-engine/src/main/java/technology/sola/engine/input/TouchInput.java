@@ -19,6 +19,19 @@ public class TouchInput {
   public static final int MAX_TOUCHES = 10;
   private final @Nullable Touch[] touches = new Touch[MAX_TOUCHES];
   private final @Nullable Touch[] lastEventTouches = new Touch[MAX_TOUCHES];
+  @Nullable
+  private TouchGestureHelper touchGestureHelper;
+
+  /**
+   * @return {@link TouchGestureHelper} for convenient handling of touch gestures
+   */
+  public TouchGestureHelper gestures() {
+    if (touchGestureHelper == null) {
+      touchGestureHelper = new TouchGestureHelper(this);
+    }
+
+    return touchGestureHelper;
+  }
 
   /**
    * Gets the number of active touches (fingers on the screen).
@@ -108,6 +121,10 @@ public class TouchInput {
   public void updatedStatusOfTouches() {
     System.arraycopy(lastEventTouches, 0, touches, 0, MAX_TOUCHES);
     Arrays.fill(lastEventTouches, null);
+
+    if (touchGestureHelper != null) {
+      touchGestureHelper.update();
+    }
   }
 
   /**
