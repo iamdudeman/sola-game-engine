@@ -5,10 +5,7 @@ import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.input.MouseButton;
-import technology.sola.engine.input.MouseInput;
-import technology.sola.engine.input.TouchInput;
-import technology.sola.engine.input.TouchPhase;
+import technology.sola.engine.input.*;
 import technology.sola.math.linear.Vector2D;
 
 /**
@@ -36,12 +33,20 @@ public class CameraSystem extends EcsSystem {
   public void update(World world, float deltaTime) {
     var cameraTransform = world.findEntityByName("camera").getComponent(TransformComponent.class);
 
-    if (mouseInput.getMouseWheel().isUp()) {
+    // zoom
+    boolean isZoomIn = mouseInput.getMouseWheel().isUp() || touchInput.gestures().isPinchOut();
+    boolean isZoomOut = mouseInput.getMouseWheel().isDown() || touchInput.gestures().isPinchIn();
+
+    if (isZoomIn) {
       cameraTransform.setScale(cameraTransform.getScaleX() + 0.1f, cameraTransform.getScaleY() + 0.1f);
-    } else if (mouseInput.getMouseWheel().isDown()) {
+
+      return;
+    } else if (isZoomOut) {
       cameraTransform.setScale(cameraTransform.getScaleX() - 0.1f, cameraTransform.getScaleY() - 0.1f);
+      return;
     }
 
+    // translate
     var firstTouch = touchInput.getFirstTouch();
     boolean isMovingCamera = mouseInput.isMouseDragged(MouseButton.PRIMARY)
       || (firstTouch != null && firstTouch.phase() == TouchPhase.MOVED);

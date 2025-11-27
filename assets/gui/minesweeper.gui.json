@@ -41,12 +41,12 @@
     },
     {
       "tag": "Button",
-      "id": "buttonNewGame",
+      "id": "back",
       "children": [
         {
           "tag": "Text",
           "props": {
-            "text": "New game"
+            "text": "Back"
           }
         }
       ]
@@ -79,12 +79,12 @@
     },
     {
       "tag": "Button",
-      "id": "back",
+      "id": "buttonNewGame",
       "children": [
         {
           "tag": "Text",
           "props": {
-            "text": "Back"
+            "text": "New game"
           }
         }
       ]
