@@ -291,15 +291,33 @@ public class SimplePlatformerGame extends Sola {
         .forEach(view -> {
           DynamicBodyComponent dynamicBodyComponent = view.c2();
 
+          boolean isRight = false;
+
           if ((keyboardInput.isKeyHeld(Key.D) || keyboardInput.isKeyHeld(Key.RIGHT)) && dynamicBodyComponent.getVelocity().x() < 150) {
+            isRight = true;
+          }
+
+          if (isRight) {
             dynamicBodyComponent.applyForce(150, 0);
           }
 
+          boolean isLeft = false;
+
           if ((keyboardInput.isKeyHeld(Key.A) || keyboardInput.isKeyHeld(Key.LEFT)) && dynamicBodyComponent.getVelocity().x() > -150) {
+            isLeft = true;
+          }
+
+          if (isLeft) {
             dynamicBodyComponent.applyForce(-150, 0);
           }
 
-          if (dynamicBodyComponent.isGrounded() && keyboardInput.isKeyHeld(Key.SPACE)) {
+          boolean isJump = false;
+
+          if (keyboardInput.isKeyHeld(Key.SPACE)) {
+            isJump = true;
+          }
+
+          if (dynamicBodyComponent.isGrounded() && isJump) {
             dynamicBodyComponent.applyForce(0, -3000);
           } else if (dynamicBodyComponent.getVelocity().y() > 0) {
             dynamicBodyComponent.applyForce(0, 1.5f * solaPhysics.getGravitySystem().getGravityConstant() * dynamicBodyComponent.getMaterial().getMass());
