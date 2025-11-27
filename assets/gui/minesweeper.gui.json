@@ -76,6 +76,18 @@
           }
         }
       ]
+    },
+    {
+      "tag": "Button",
+      "id": "back",
+      "children": [
+        {
+          "tag": "Text",
+          "props": {
+            "text": "Back"
+          }
+        }
+      ]
     }
   ]
 }
