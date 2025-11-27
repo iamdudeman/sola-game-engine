@@ -31,25 +31,23 @@ public class TouchGestureHelper {
   }
 
   void update() {
-    var temp = touchInput.getTouch(0);
+    initialTouch1 = getInitialTouch(0, initialTouch1);
+    initialTouch2 = getInitialTouch(1, initialTouch2);
+  }
 
-    if (temp != null) {
-      if (temp.phase() == TouchPhase.ENDED) {
-        initialTouch1 = null;
-      } else if (temp.phase() == TouchPhase.BEGAN) {
-        initialTouch1 = temp;
+  @Nullable
+  private Touch getInitialTouch(int id, @Nullable Touch currentValue) {
+    var touch = touchInput.getTouch(id);
+
+    if (touch != null) {
+      if (touch.phase() == TouchPhase.ENDED) {
+        return null;
+      } else if (touch.phase() == TouchPhase.BEGAN) {
+        return touch;
       }
     }
 
-    temp = touchInput.getTouch(1);
-
-    if (temp != null) {
-      if (temp.phase() == TouchPhase.ENDED) {
-        initialTouch2 = null;
-      } else if (temp.phase() == TouchPhase.BEGAN) {
-        initialTouch2 = temp;
-      }
-    }
+    return currentValue;
   }
 
   private boolean isPinchGesture(boolean isPinchIn) {
