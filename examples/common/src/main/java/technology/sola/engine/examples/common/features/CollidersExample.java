@@ -80,10 +80,6 @@ public class CollidersExample extends Sola {
 
     solaGraphics.getGraphicsModule(DebugGraphicsModule.class).setActive(false);
 
-    solaGraphics.guiDocument().setRootElement(
-      ExampleUtils.createReturnToLauncherButton(platform(), eventHub, "0", "0")
-    );
-
     platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
 
     CreateShapeSystem createShapeSystem = new CreateShapeSystem();
@@ -99,7 +95,13 @@ public class CollidersExample extends Sola {
     assetLoaderProvider.get(GuiJsonDocument.class)
       .getNewAsset("gui", "assets/gui/collision_sandbox.gui.json")
       .executeWhenLoaded(guiJsonDocument -> {
-        solaGraphics.guiDocument().setRootElement(guiJsonDocument.rootElement());
+        var rootElement = guiJsonDocument.rootElement();
+
+        rootElement.appendChildren(
+          ExampleUtils.createReturnToLauncherButton(platform(), eventHub, "0", "0")
+        );
+
+        solaGraphics.guiDocument().setRootElement(rootElement);
         currentlySelectedText = solaGraphics.guiDocument().findElementById("modeCircle", TextGuiElement.class);
         currentlySelectedText.styles().addStyle(selectedTextStyle);
 
