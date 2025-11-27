@@ -8,14 +8,20 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.examples.common.ExampleUtils;
 import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.event.EventListener;
-import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.*;
+import technology.sola.engine.graphics.gui.elements.TextGuiElement;
+import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.style.BaseStyles;
+import technology.sola.engine.graphics.gui.style.ConditionalStyle;
+import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.SolaPhysics;
@@ -54,23 +60,52 @@ public class SimplePlatformerGame extends Sola {
 
   @Override
   protected void onInit() {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
-
     solaPhysics = new SolaPhysics.Builder(solaEcs)
       .buildAndInitialize(eventHub);
 
     solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
-      .withDebug(solaPhysics, eventHub, keyboardInput)
+      .withGui(mouseInput)
       .buildAndInitialize(assetLoaderProvider);
+
+    solaGraphics.guiDocument().setRootElement(buildReturnButton());
 
     solaEcs.addSystems(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem(), new GlassSystem(eventHub));
     solaEcs.setWorld(buildWorld());
     eventHub.add(CollisionEvent.class, new GameDoneEventListener());
+
+    platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
   }
 
   @Override
   protected void onRender(Renderer renderer) {
     solaGraphics.render(renderer);
+  }
+
+  private ButtonGuiElement buildReturnButton() {
+    var element = new ButtonGuiElement()
+      .addStyle(ConditionalStyle.always(
+        new BaseStyles.Builder<>()
+          .setPositionX("0")
+          .setPositionY("0")
+          .setPaddingVertical(2)
+          .setPaddingHorizontal(4)
+          .build()
+      ))
+      .setOnAction(() -> ExampleUtils.returnToLauncher(platform(), eventHub))
+      .appendChildren(
+        new TextGuiElement().setText("Back")
+      );
+
+    element.events().keyPressed().off();
+    element.events().keyPressed().on(guiKeyEvent -> {
+      if (guiKeyEvent.getKeyEvent().keyCode() == Key.ESCAPE.getCode()) {
+        ExampleUtils.returnToLauncher(platform(), eventHub);
+      }
+    });
+
+    DefaultThemeBuilder.buildLightTheme().applyToTree(element);
+
+    return element;
   }
 
   private class GameDoneEventListener implements EventListener<CollisionEvent> {
