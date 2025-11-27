@@ -291,7 +291,9 @@ public class SimplePlatformerGame extends Sola {
         .forEach(view -> {
           DynamicBodyComponent dynamicBodyComponent = view.c2();
 
-          boolean isRight = false;
+          boolean isRight = touchInput.activeTouches()
+            .anyMatch(touch -> touch.y() < platform().getRenderer().getHeight() - 100
+              && touch.x() > platform().getRenderer().getWidth() / 2);
 
           if ((keyboardInput.isKeyHeld(Key.D) || keyboardInput.isKeyHeld(Key.RIGHT)) && dynamicBodyComponent.getVelocity().x() < 150) {
             isRight = true;
@@ -301,7 +303,8 @@ public class SimplePlatformerGame extends Sola {
             dynamicBodyComponent.applyForce(150, 0);
           }
 
-          boolean isLeft = false;
+          boolean isLeft = touchInput.activeTouches()
+            .anyMatch(touch -> touch.y() < platform().getRenderer().getHeight() - 100 && touch.x() < platform().getRenderer().getWidth() / 2);
 
           if ((keyboardInput.isKeyHeld(Key.A) || keyboardInput.isKeyHeld(Key.LEFT)) && dynamicBodyComponent.getVelocity().x() > -150) {
             isLeft = true;
@@ -311,7 +314,8 @@ public class SimplePlatformerGame extends Sola {
             dynamicBodyComponent.applyForce(-150, 0);
           }
 
-          boolean isJump = false;
+          boolean isJump = touchInput.activeTouches()
+            .anyMatch(touch -> touch.y() > platform().getRenderer().getHeight() - 100);
 
           if (keyboardInput.isKeyHeld(Key.SPACE)) {
             isJump = true;

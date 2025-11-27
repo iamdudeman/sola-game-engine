@@ -6,6 +6,7 @@ import org.jspecify.annotations.Nullable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * TouchInput contains information about user interaction with the touch screen.
@@ -37,12 +38,17 @@ public class TouchInput {
   }
 
   /**
-   * @return iterator for all the active touches
+   * @return {@link Iterator} for all the active touches
    */
   public Iterator<Touch> activeTouchesIterator() {
-    return Arrays.stream(touches)
-      .filter(Objects::nonNull)
-      .iterator();
+    return activeTouches().iterator();
+  }
+
+  /**
+   * @return {@link Stream} of all active touches
+   */
+  public Stream<Touch> activeTouches() {
+    return Arrays.stream(touches).filter(Objects::nonNull);
   }
 
   /**
