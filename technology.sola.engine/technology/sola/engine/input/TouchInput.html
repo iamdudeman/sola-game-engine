@@ -124,8 +124,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Iterator.html" title="class or interface in java.util" class="external-link">Iterator</a>&lt;<a href="Touch.html" title="class in technology.sola.engine.input">Touch</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#activeTouchesIterator()" class="member-name-link">activeTouchesIterator</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;<a href="Touch.html" title="class in technology.sola.engine.input">Touch</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#activeTouches()" class="member-name-link">activeTouches</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Iterator.html" title="class or interface in java.util" class="external-link">Iterator</a>&lt;<a href="Touch.html" title="class in technology.sola.engine.input">Touch</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#activeTouchesIterator()" class="member-name-link">activeTouchesIterator</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="TouchGestureHelper.html" title="class in technology.sola.engine.input">TouchGestureHelper</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gestures()" class="member-name-link">gestures</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getActiveTouchCount()" class="member-name-link">getActiveTouchCount</a>()</code></div>
@@ -139,18 +145,21 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFirstTouch()" class="member-name-link">getFirstTouch</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="Touch.html" title="class in technology.sola.engine.input">Touch</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTouch(int)" class="member-name-link">getTouch</a><wbr>(int&nbsp;id)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLastActiveTouch()" class="member-name-link">getLastActiveTouch</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="Touch.html" title="class in technology.sola.engine.input">Touch</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTouch(int)" class="member-name-link">getTouch</a><wbr>(int&nbsp;id)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gets the <a href="Touch.html" title="class in technology.sola.engine.input"><code>Touch</code></a> of the given finger by unique id.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onTouchEvent(technology.sola.engine.input.TouchEvent)" class="member-name-link">onTouchEvent</a><wbr>(<a href="TouchEvent.html" title="class in technology.sola.engine.input">TouchEvent</a>&nbsp;event)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onTouchEvent(technology.sola.engine.input.TouchEvent)" class="member-name-link">onTouchEvent</a><wbr>(<a href="TouchEvent.html" title="class in technology.sola.engine.input">TouchEvent</a>&nbsp;event)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Called by the <a href="../core/SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> whenever a touch event occurs.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updatedStatusOfTouches()" class="member-name-link">updatedStatusOfTouches</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updatedStatusOfTouches()" class="member-name-link">updatedStatusOfTouches</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Updates the status of changed <a href="Touch.html" title="class in technology.sola.engine.input"><code>Touch</code></a>es from the previous frame.</div>
 </div>
 </div>
@@ -208,6 +217,16 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="gestures()">
+<h3>gestures</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="TouchGestureHelper.html" title="class in technology.sola.engine.input">TouchGestureHelper</a></span>&nbsp;<span class="element-name">gestures</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><a href="TouchGestureHelper.html" title="class in technology.sola.engine.input"><code>TouchGestureHelper</code></a> for convenient handling of touch gestures</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="getActiveTouchCount()">
 <h3>getActiveTouchCount</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getActiveTouchCount</span>()</div>
@@ -224,7 +243,17 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Iterator.html" title="class or interface in java.util" class="external-link">Iterator</a>&lt;<a href="Touch.html" title="class in technology.sola.engine.input">Touch</a>&gt;</span>&nbsp;<span class="element-name">activeTouchesIterator</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>iterator for all the active touches</dd>
+<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Iterator.html" title="class or interface in java.util" class="external-link"><code>Iterator</code></a> for all the active touches</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="activeTouches()">
+<h3>activeTouches</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;<a href="Touch.html" title="class in technology.sola.engine.input">Touch</a>&gt;</span>&nbsp;<span class="element-name">activeTouches</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link"><code>Stream</code></a> of all active touches</dd>
 </dl>
 </section>
 </li>
@@ -245,6 +274,16 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the <a href="Touch.html" title="class in technology.sola.engine.input"><code>Touch</code></a> of the first finger that is still on the screen or else null</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getLastActiveTouch()">
+<h3>getLastActiveTouch</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="Touch.html" title="class in technology.sola.engine.input">Touch</a></span>&nbsp;<span class="element-name">getLastActiveTouch</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the <a href="Touch.html" title="class in technology.sola.engine.input"><code>Touch</code></a> of the last finger that is still on the screen or else null</dd>
 </dl>
 </section>
 </li>
