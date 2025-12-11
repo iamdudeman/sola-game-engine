@@ -15,7 +15,7 @@ import java.util.Calendar
 
 interface SolaJavaDistributionPluginExtension {
   var mainClass: String?
-  var useJavaFx: Boolean?
+  var includeOsClassifier: Boolean?
 }
 
 class SolaJavaDistributionPlugin : Plugin<Project> {
@@ -24,17 +24,10 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
 
     project.afterEvaluate {
       val osClassifier = getOsClassifier()
-      val osClassifierWithDash = if (solaJavaDistributionPluginExtension.useJavaFx != true) {
+      val osClassifierWithDash = if (solaJavaDistributionPluginExtension.includeOsClassifier != true) {
         ""
       } else {
         "-$osClassifier"
-      }
-
-      if (solaJavaDistributionPluginExtension.useJavaFx == true) {
-        project.dependencies.add("runtimeOnly", "org.openjfx:javafx-base:${project.properties["javaFxVersion"]}:${osClassifier}")
-        project.dependencies.add("runtimeOnly", "org.openjfx:javafx-controls:${project.properties["javaFxVersion"]}:${osClassifier}")
-        project.dependencies.add("runtimeOnly", "org.openjfx:javafx-media:${project.properties["javaFxVersion"]}:${osClassifier}")
-        project.dependencies.add("runtimeOnly", "org.openjfx:javafx-graphics:${project.properties["javaFxVersion"]}:${osClassifier}")
       }
 
       project.tasks.withType<Zip> {

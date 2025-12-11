@@ -2,7 +2,7 @@
 
 ## Known Bugs List
 
-*
+* AndroidPlatform request keyboard doesn't seem to work
 
 ### Low-priority bugs
 
@@ -39,6 +39,9 @@
 
 ## TODO List
 
+* Android performance improvements
+    * Example launcher shouldn't use much cpu
+    * PhysicsExample should be able to run better
 * Particle System
     * consider ability to add fix number of particle spawns (4 at a time in different directions for example)
     * consider ability to change particle shape (instead of only circle maybe square)
