@@ -18,20 +18,18 @@ interface SolaJavaConventionsPluginExtension {
 
 class SolaJavaConventionsPlugin : Plugin<Project> {
   override fun apply(project: Project) {
-   val solaJavaConventionsPluginExtension = project.extensions.create<SolaJavaConventionsPluginExtension>("solaJavaConventions")
+    val solaJavaConventionsPluginExtension = project.extensions.create<SolaJavaConventionsPluginExtension>("solaJavaConventions")
 
     project.pluginManager.apply("java-library")
 
-    project.afterEvaluate {
-      // nullability annotations
-      project.dependencies.add("api", "org.jspecify:jspecify:1.0.0")
+    // nullability annotations
+    project.dependencies.add("api", "org.jspecify:jspecify:1.0.0")
 
-      // unit testing
-      project.dependencies.add("testImplementation", "org.mockito:mockito-inline:5.2.0")
-      project.dependencies.add("testImplementation", "org.mockito:mockito-junit-jupiter:5.11.0")
-      project.dependencies.add("testImplementation", "org.junit.jupiter:junit-jupiter:5.11.0")
-      project.dependencies.add("testRuntimeOnly", "org.junit.platform:junit-platform-launcher")
-    }
+    // unit testing
+    project.dependencies.add("testImplementation", "org.mockito:mockito-inline:5.2.0")
+    project.dependencies.add("testImplementation", "org.mockito:mockito-junit-jupiter:5.11.0")
+    project.dependencies.add("testImplementation", "org.junit.jupiter:junit-jupiter:5.11.0")
+    project.dependencies.add("testRuntimeOnly", "org.junit.platform:junit-platform-launcher")
 
     project.repositories {
       mavenCentral()
