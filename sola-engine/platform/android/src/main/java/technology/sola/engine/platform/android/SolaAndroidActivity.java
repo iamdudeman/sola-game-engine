@@ -1,6 +1,5 @@
 package technology.sola.engine.platform.android;
 
-import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -120,15 +119,13 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
   }
 
   void showVirtualKeyboard() {
-    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+    solaSurfaceView.requestFocus();
 
-    inputMethodManager.showSoftInput(solaSurfaceView, InputMethodManager.SHOW_IMPLICIT);
+    getSystemService(InputMethodManager.class).showSoftInput(solaSurfaceView, 0);
   }
 
   void hideVirtualKeyboard() {
-    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-
-    inputMethodManager.hideSoftInputFromWindow(solaSurfaceView.getWindowToken(), 0);
+    getSystemService(InputMethodManager.class).hideSoftInputFromWindow(solaSurfaceView.getWindowToken(), 0);
   }
 
   private void hideSystemUi() {

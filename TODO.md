@@ -2,7 +2,8 @@
 
 ## Known Bugs List
 
-* AndroidPlatform request keyboard doesn't seem to work
+* Need ability to remove event listeners from SolaPlatform
+    * example launcher adds new ones every example click but never cleans up
 
 ### Low-priority bugs
 
@@ -10,22 +11,6 @@
     * https://stackoverflow.com/questions/67854139/javafx-warning-unsupported-javafx-configuration-classes-were-loaded-from-unna
     * https://stackoverflow.com/questions/76155054/javafx-installation
     * https://openjfx.io/openjfx-docs/#gradle
-* Android: Edge-to-edge may not display for all users
-    * > From Android 15, apps targeting SDK 35 will display edge-to-edge by default. Apps targeting SDK 35 should handle insets to make sure that their app displays correctly on Android 15 and later. Investigate this issue and allow time to test edge-to-edge and make the required updates. Alternatively, call enableEdgeToEdge() for Kotlin or EdgeToEdge.enable() for Java for backward compatibility.
-* Android: Your app uses deprecated APIs or parameters for edge-to-edge
-    * > One or more of the APIs you use or parameters that you set for edge-to-edge and window display have been deprecated in Android 15. Your app uses the following deprecated APIs or parameters:
-      > android.view.Window.setStatusBarColor
-      > android.view.Window.setNavigationBarColor
-      > LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
-      > These start in the following places:
-      > androidx.activity.q.a
-      > androidx.activity.p.b
-      > To fix this, migrate away from these APIs or parameters.
-* Android: Remove resizability and orientation restrictions in your game to support large screen devices
-    * > Your game doesn't support all display configurations, and uses resizability and orientation restrictions that may lead to layout issues for your users.
-      > We detected the following resizability and orientation restrictions in your game:
-      > e2.c.onCreate
-      > To improve the user experience of your game, remove these restrictions and check that your game layouts work on various screen sizes and orientations.
 
 -----------------------------------------------------------------------------------------------------------------------
 
