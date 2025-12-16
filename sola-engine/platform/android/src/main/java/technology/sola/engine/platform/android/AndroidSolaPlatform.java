@@ -17,6 +17,7 @@ import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.SolaPlatformIdentifier;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
+import technology.sola.engine.core.event.Unsubscribe;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
@@ -83,13 +84,17 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
   }
 
   @Override
-  public void onKeyPressed(Consumer<KeyEvent> consumer) {
+  public Unsubscribe onKeyPressed(Consumer<KeyEvent> consumer) {
     keyPressedConsumers.add(consumer);
+
+    return () -> keyPressedConsumers.remove(consumer);
   }
 
   @Override
-  public void onKeyReleased(Consumer<KeyEvent> consumer) {
+  public Unsubscribe onKeyReleased(Consumer<KeyEvent> consumer) {
     keyReleasedConsumers.add(consumer);
+
+    return () -> keyReleasedConsumers.remove(consumer);
   }
 
   /**
@@ -98,8 +103,8 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
    * @param consumer the method called when mouse is moved
    */
   @Override
-  public void onMouseMoved(Consumer<MouseEvent> consumer) {
-    // not supported on Android
+  public Unsubscribe onMouseMoved(Consumer<MouseEvent> consumer) {
+    return Unsubscribe.NOT_SUPPORTED;
   }
 
   /**
@@ -108,8 +113,8 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
    * @param consumer the method called when mouse is pressed
    */
   @Override
-  public void onMousePressed(Consumer<MouseEvent> consumer) {
-    // not supported on Android
+  public Unsubscribe onMousePressed(Consumer<MouseEvent> consumer) {
+    return Unsubscribe.NOT_SUPPORTED;
   }
 
   /**
@@ -118,8 +123,8 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
    * @param consumer the method called when mouse is released
    */
   @Override
-  public void onMouseReleased(Consumer<MouseEvent> consumer) {
-    // not supported on Android
+  public Unsubscribe onMouseReleased(Consumer<MouseEvent> consumer) {
+    return Unsubscribe.NOT_SUPPORTED;
   }
 
   /**
@@ -128,13 +133,15 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
    * @param consumer the method called when a mouse wheel interaction takes place
    */
   @Override
-  public void onMouseWheel(Consumer<MouseWheelEvent> consumer) {
-    // not supported on Android
+  public Unsubscribe onMouseWheel(Consumer<MouseWheelEvent> consumer) {
+    return Unsubscribe.NOT_SUPPORTED;
   }
 
   @Override
-  public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
+  public Unsubscribe onTouch(Consumer<TouchEvent> touchEventConsumer) {
     touchConsumers.add(touchEventConsumer);
+
+    return () -> touchConsumers.remove(touchEventConsumer);
   }
 
   @Override

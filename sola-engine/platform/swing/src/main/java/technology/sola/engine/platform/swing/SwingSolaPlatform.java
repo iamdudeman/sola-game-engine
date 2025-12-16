@@ -13,6 +13,7 @@ import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.SolaPlatformIdentifier;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
+import technology.sola.engine.core.event.Unsubscribe;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
@@ -87,7 +88,7 @@ public class SwingSolaPlatform extends SolaPlatform {
   }
 
   @Override
-  public void onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
+  public Unsubscribe onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
     canvas.addKeyListener(new KeyAdapter() {
       @Override
       public void keyPressed(java.awt.event.KeyEvent e) {
@@ -97,7 +98,7 @@ public class SwingSolaPlatform extends SolaPlatform {
   }
 
   @Override
-  public void onKeyReleased(Consumer<KeyEvent> keyEventConsumer) {
+  public Unsubscribe onKeyReleased(Consumer<KeyEvent> keyEventConsumer) {
     canvas.addKeyListener(new KeyAdapter() {
       @Override
       public void keyReleased(java.awt.event.KeyEvent e) {
@@ -107,7 +108,7 @@ public class SwingSolaPlatform extends SolaPlatform {
   }
 
   @Override
-  public void onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
+  public Unsubscribe onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
     canvas.addMouseMotionListener(new MouseMotionAdapter() {
       @Override
       public void mouseMoved(java.awt.event.MouseEvent mouseEvent) {
@@ -117,7 +118,7 @@ public class SwingSolaPlatform extends SolaPlatform {
   }
 
   @Override
-  public void onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
+  public Unsubscribe onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
     canvas.addMouseListener(new MouseAdapter() {
       @Override
       public void mousePressed(java.awt.event.MouseEvent mouseEvent) {
@@ -127,7 +128,7 @@ public class SwingSolaPlatform extends SolaPlatform {
   }
 
   @Override
-  public void onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
+  public Unsubscribe onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
     canvas.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseReleased(java.awt.event.MouseEvent mouseEvent) {
@@ -137,7 +138,7 @@ public class SwingSolaPlatform extends SolaPlatform {
   }
 
   @Override
-  public void onMouseWheel(Consumer<technology.sola.engine.input.MouseWheelEvent> mouseWheelEventConsumer) {
+  public Unsubscribe onMouseWheel(Consumer<technology.sola.engine.input.MouseWheelEvent> mouseWheelEventConsumer) {
     canvas.addMouseWheelListener(event -> {
       boolean isHorizontal = event.isShiftDown();
 
@@ -156,7 +157,7 @@ public class SwingSolaPlatform extends SolaPlatform {
    * @param touchEventConsumer the method called when a touch interaction takes place
    */
   @Override
-  public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
+  public Unsubscribe onTouch(Consumer<TouchEvent> touchEventConsumer) {
     // not supported on Swing
   }
 

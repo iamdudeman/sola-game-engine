@@ -12,6 +12,7 @@ import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.SolaPlatformIdentifier;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
+import technology.sola.engine.core.event.Unsubscribe;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
@@ -67,41 +68,41 @@ public class BrowserSolaPlatform extends SolaPlatform {
   }
 
   @Override
-  public void onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
+  public Unsubscribe onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
     JsKeyboardUtils.keyEventListener("keydown", keyCode -> keyEventConsumer.accept(new KeyEvent(keyCode)));
   }
 
   @Override
-  public void onKeyReleased(Consumer<KeyEvent> keyEventConsumer) {
+  public Unsubscribe onKeyReleased(Consumer<KeyEvent> keyEventConsumer) {
     JsKeyboardUtils.keyEventListener("keyup", keyCode -> keyEventConsumer.accept(new KeyEvent(keyCode)));
   }
 
   @Override
-  public void onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
+  public Unsubscribe onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
     JsMouseUtils.mouseEventListener("mousemove", (which, x, y) ->
       mouseEventConsumer.accept(browserToSola(which, x, y)));
   }
 
   @Override
-  public void onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
+  public Unsubscribe onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
     JsMouseUtils.mouseEventListener("mousedown", (which, x, y) ->
       mouseEventConsumer.accept(browserToSola(which, x, y)));
   }
 
   @Override
-  public void onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
+  public Unsubscribe onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
     JsMouseUtils.mouseEventListener("mouseup", (which, x, y) ->
       mouseEventConsumer.accept(browserToSola(which, x, y)));
   }
 
   @Override
-  public void onMouseWheel(Consumer<MouseWheelEvent> mouseWheelEventConsumer) {
+  public Unsubscribe onMouseWheel(Consumer<MouseWheelEvent> mouseWheelEventConsumer) {
     JsMouseUtils.mouseWheelEventListener((isUp, isDown, isLeft, isRight) ->
       mouseWheelEventConsumer.accept(new MouseWheelEvent(isUp, isDown, isLeft, isRight)));
   }
 
   @Override
-  public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
+  public Unsubscribe onTouch(Consumer<TouchEvent> touchEventConsumer) {
     JsTouchUtils.touchEventListener("touchmove", (id, x, y) -> {
       PointerCoordinate adjusted = adjustPointerForViewport(x, y);
 

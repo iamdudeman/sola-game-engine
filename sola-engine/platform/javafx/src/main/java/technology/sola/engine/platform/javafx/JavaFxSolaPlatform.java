@@ -23,6 +23,7 @@ import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.SolaPlatformIdentifier;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
+import technology.sola.engine.core.event.Unsubscribe;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
@@ -94,21 +95,21 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   }
 
   @Override
-  public void onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
+  public Unsubscribe onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
     canvas.addEventHandler(
       javafx.scene.input.KeyEvent.KEY_PRESSED, keyEvent -> keyEventConsumer.accept(fxToSola(keyEvent))
     );
   }
 
   @Override
-  public void onKeyReleased(Consumer<KeyEvent> keyEventConsumer) {
+  public Unsubscribe onKeyReleased(Consumer<KeyEvent> keyEventConsumer) {
     canvas.addEventHandler(
       javafx.scene.input.KeyEvent.KEY_RELEASED, keyEvent -> keyEventConsumer.accept(fxToSola(keyEvent))
     );
   }
 
   @Override
-  public void onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
+  public Unsubscribe onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
     canvas.addEventHandler(
       javafx.scene.input.MouseEvent.MOUSE_MOVED, mouseEvent -> mouseEventConsumer.accept(fxToSola(mouseEvent))
     );
@@ -118,21 +119,21 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   }
 
   @Override
-  public void onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
+  public Unsubscribe onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
     canvas.addEventHandler(
       javafx.scene.input.MouseEvent.MOUSE_PRESSED, mouseEvent -> mouseEventConsumer.accept(fxToSola(mouseEvent))
     );
   }
 
   @Override
-  public void onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
+  public Unsubscribe onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
     canvas.addEventHandler(
       javafx.scene.input.MouseEvent.MOUSE_RELEASED, mouseEvent -> mouseEventConsumer.accept(fxToSola(mouseEvent))
     );
   }
 
   @Override
-  public void onMouseWheel(Consumer<MouseWheelEvent> mouseWheelEventConsumer) {
+  public Unsubscribe onMouseWheel(Consumer<MouseWheelEvent> mouseWheelEventConsumer) {
     canvas.addEventHandler(javafx.scene.input.ScrollEvent.SCROLL, scrollEvent -> {
       boolean isUp = scrollEvent.getDeltaY() > 0;
       boolean isDown = scrollEvent.getDeltaY() < 0;
@@ -149,7 +150,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
    * @param touchEventConsumer the method called when a touch interaction takes place
    */
   @Override
-  public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
+  public Unsubscribe onTouch(Consumer<TouchEvent> touchEventConsumer) {
     // Not supported on JavaFx
   }
 
