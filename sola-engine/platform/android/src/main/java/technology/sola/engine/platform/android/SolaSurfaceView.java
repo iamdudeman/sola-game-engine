@@ -14,6 +14,7 @@ import technology.sola.engine.graphics.screen.Viewport;
 @NullMarked
 class SolaSurfaceView extends SurfaceView {
   private final Paint paint = new Paint();
+  private final SurfaceHolder holder;
   @Nullable
   private Canvas canvas;
   @Nullable
@@ -22,7 +23,6 @@ class SolaSurfaceView extends SurfaceView {
   private Bitmap softwareRendererBitmap;
   @Nullable
   private SoftwareRenderer softwareRenderer;
-  private SurfaceHolder holder;
 
   SolaSurfaceView(Context context) {
     super(context);
