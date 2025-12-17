@@ -19,7 +19,7 @@ public class TransformComponent implements Component {
   @Nullable
   private String parentUniqueId = null;
   @Nullable
-  private TransformComponent parentTransformComponent = null;
+  private Entity parentEntity = null;
 
   /**
    * Creates a transform with position at (0, 0) and scale set to 1.
@@ -29,7 +29,7 @@ public class TransformComponent implements Component {
   }
 
   /**
-   * Creates a transform with desired position and scale set to 1.
+   * Creates a transform with the desired position and scale set to 1.
    *
    * @param x the x position coordinate
    * @param y the y position coordinate
@@ -39,7 +39,7 @@ public class TransformComponent implements Component {
   }
 
   /**
-   * Creates a transform with desired position and scale set to the desired value.
+   * Creates a transform with the desired position and scale set to the desired value.
    *
    * @param x     the x position coordinate
    * @param y     the y position coordinate
@@ -50,7 +50,7 @@ public class TransformComponent implements Component {
   }
 
   /**
-   * Creates a transform with desired position and scale x and y set to the desired values.
+   * Creates a transform with the desired position and scale x and y set to the desired values.
    *
    * @param x      the x position coordinate
    * @param y      the y position coordinate
@@ -65,8 +65,8 @@ public class TransformComponent implements Component {
   }
 
   /**
-   * Creates a transform that has position based on a parent. It has an offset from the parent (0, 0) and scale set to 1
-   * of its parent's scale.
+   * Creates a transform that has a position based on a parent. It has an offset from the parent (0, 0) and scale set to
+   * 1 of its parent's scale.
    *
    * @param parent the parent {@link Entity} (must also have a {@link TransformComponent})
    */
@@ -75,7 +75,7 @@ public class TransformComponent implements Component {
   }
 
   /**
-   * Creates a transform that has position based on a parent. It has desired offset from the parent and scale set to 1
+   * Creates a transform that has a position based on a parent. It has desired offset from the parent and scale set to 1
    * of its parent's scale.
    *
    * @param x      offset x from parent
@@ -87,8 +87,8 @@ public class TransformComponent implements Component {
   }
 
   /**
-   * Creates a transform that has position based on a parent. It has desired offset from the parent and desired scale
-   * of its parent's scale.
+   * Creates a transform that has a position based on a parent. It has a desired offset from the parent and desired
+   * scale of its parent's scale.
    *
    * @param x      offset x from parent
    * @param y      offset y from parent
@@ -100,8 +100,8 @@ public class TransformComponent implements Component {
   }
 
   /**
-   * Creates a transform that has position based on a parent. It has desired offset from the parent and desired scale
-   * of its parent's scale.
+   * Creates a transform that has a position based on a parent. It has a desired offset from the parent and desired
+   * scale of its parent's scale.
    *
    * @param x      offset x from parent
    * @param y      offset y from parent
@@ -126,14 +126,14 @@ public class TransformComponent implements Component {
    * @return the x coordinate or x offset of parent
    */
   public float getX() {
-    return parentTransformComponent == null ? x : x + parentTransformComponent.getX();
+    return parentEntity == null ? x : x + parentEntity.getComponent(TransformComponent.class).getX();
   }
 
   /**
    * @return the y coordinate or y offset of parent
    */
   public float getY() {
-    return parentTransformComponent == null ? y : y + parentTransformComponent.getY();
+    return parentEntity == null ? y : y + parentEntity.getComponent(TransformComponent.class).getY();
   }
 
   /**
@@ -144,7 +144,7 @@ public class TransformComponent implements Component {
   }
 
   /**
-   * Sets the new translation x or offset x of parent.
+   * Sets the new translation x or offset x of the parent.
    *
    * @param x the new translation x
    */
@@ -186,14 +186,14 @@ public class TransformComponent implements Component {
    * @return the horizontal scale
    */
   public float getScaleX() {
-    return parentTransformComponent == null ? scaleX : scaleX * parentTransformComponent.scaleX;
+    return parentEntity == null ? scaleX : scaleX * parentEntity.getComponent(TransformComponent.class).scaleX;
   }
 
   /**
    * @return the vertical scale
    */
   public float getScaleY() {
-    return parentTransformComponent == null ? scaleY : scaleY * parentTransformComponent.scaleY;
+    return parentEntity == null ? scaleY : scaleY * parentEntity.getComponent(TransformComponent.class).scaleY;
   }
 
   /**
@@ -252,10 +252,10 @@ public class TransformComponent implements Component {
   public TransformComponent setParent(@Nullable Entity entity) {
     if (entity == null) {
       parentUniqueId = null;
-      parentTransformComponent = null;
+      parentEntity = null;
     } else {
       parentUniqueId = entity.getUniqueId();
-      parentTransformComponent = entity.getComponent(TransformComponent.class);
+      parentEntity = entity;
     }
 
     return this;

@@ -82,6 +82,8 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
     SolaImage lightImage = new SolaImage(renderer.getWidth(), renderer.getHeight());
     Renderer lightImageRenderer = renderer.createRendererForImage(lightImage);
 
+    final var previousBlendFunction = renderer.getBlendFunction();
+
     lightImageRenderer.setBlendFunction(BlendMode.LIGHTEN);
     world.createView().of(TransformComponent.class, LightComponent.class)
       .getEntries()
@@ -104,6 +106,7 @@ public class ScreenSpaceLightMapGraphicsModule extends SolaGraphicsModule {
     lightMapRenderer.clear(ambientColor);
     lightMapRenderer.setBlendFunction(BlendMode.NORMAL);
     lightMapRenderer.drawImage(lightImage, 0, 0);
+    lightMapRenderer.setBlendFunction(previousBlendFunction);
 
     return lightMapImage;
   }

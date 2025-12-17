@@ -41,12 +41,12 @@
     },
     {
       "tag": "Button",
-      "id": "buttonNewGame",
+      "id": "back",
       "children": [
         {
           "tag": "Text",
           "props": {
-            "text": "New game"
+            "text": "Back"
           }
         }
       ]
@@ -73,6 +73,18 @@
           "id": "textDifficulty",
           "props": {
             "text": "Easy"
+          }
+        }
+      ]
+    },
+    {
+      "tag": "Button",
+      "id": "buttonNewGame",
+      "children": [
+        {
+          "tag": "Text",
+          "props": {
+            "text": "New game"
           }
         }
       ]

@@ -6,8 +6,8 @@ import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.examples.common.ExampleUtils;
 import technology.sola.engine.graphics.SolaGraphics;
-import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
@@ -18,6 +18,7 @@ import technology.sola.engine.graphics.gui.style.BaseStyles;
 import technology.sola.engine.graphics.gui.style.ConditionalStyle;
 import technology.sola.engine.graphics.gui.style.property.CrossAxisChildren;
 import technology.sola.engine.graphics.gui.style.property.Direction;
+import technology.sola.engine.graphics.gui.style.property.MainAxisChildren;
 import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -42,13 +43,11 @@ public class AudioExample extends Sola {
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public AudioExample() {
-    super(new SolaConfiguration("Audio Example", 600, 400, 30));
+    super(new SolaConfiguration("Audio Example", 300, 200, 30));
   }
 
   @Override
   protected void onInit() {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
-
     guiTheme = DefaultThemeBuilder.buildLightTheme()
       .addStyle(TextGuiElement.class, List.of(ConditionalStyle.always(
         new TextStyles.Builder<>().setFontAssetId(FONT_ASSET_ID).setTextColor(Color.BLUE).build()
@@ -95,14 +94,20 @@ public class AudioExample extends Sola {
       .addStyle(
         ConditionalStyle.always(new BaseStyles.Builder<>()
           .setDirection(Direction.COLUMN)
+          .setMainAxisChildren(MainAxisChildren.CENTER)
           .setCrossAxisChildren(CrossAxisChildren.CENTER)
+            .setWidth("100%")
+            .setHeight("100%")
           .setGap(8)
           .setPadding(10)
           .build())
       )
       .appendChildren(
+        createButton("Back", () -> ExampleUtils.returnToLauncher(platform(), eventHub)).addStyle(
+          ConditionalStyle.always(new BaseStyles.Builder<>().setPositionX("4").build())
+        ),
         new TextGuiElement().setText("Play a Song").addStyle(
-          ConditionalStyle.always(new TextStyles.Builder<>().setPadding(5).build())
+          ConditionalStyle.always(new TextStyles.Builder<>().setTextColor(Color.BLACK).setPadding(5).build())
         ),
         buildControlsContainer(audioClip),
         buildVolumeContainer(audioClip)
@@ -111,6 +116,7 @@ public class AudioExample extends Sola {
 
   private GuiElement<?, ?> buildVolumeContainer(AudioClip audioClip) {
     TextGuiElement volumeTextGuiElement = new TextGuiElement()
+      .addStyle(ConditionalStyle.always(new TextStyles.Builder<>().setTextColor(Color.BLACK).build()))
       .setText(formatAudioVolume(audioClip.getVolume()));
 
     return new SectionGuiElement()
@@ -165,7 +171,7 @@ public class AudioExample extends Sola {
   private ButtonGuiElement createButton(String text, Runnable action) {
     return new ButtonGuiElement()
       .addStyle(ConditionalStyle.always(
-          new BaseStyles.Builder<>().setPadding(5).build()
+        new BaseStyles.Builder<>().setPadding(5).build()
       ))
       .appendChildren(
         new TextGuiElement().setText(text)

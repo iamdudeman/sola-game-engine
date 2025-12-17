@@ -13,6 +13,7 @@ import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.SolaPlatformIdentifier;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
+import technology.sola.engine.core.event.Subscription;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
@@ -87,58 +88,79 @@ public class SwingSolaPlatform extends SolaPlatform {
   }
 
   @Override
-  public void onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
-    canvas.addKeyListener(new KeyAdapter() {
+  public Subscription onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
+    var listener = new KeyAdapter() {
       @Override
       public void keyPressed(java.awt.event.KeyEvent e) {
         keyEventConsumer.accept(new technology.sola.engine.input.KeyEvent(e.getKeyCode()));
       }
-    });
+    };
+
+    canvas.addKeyListener(listener);
+
+    return () -> canvas.removeKeyListener(listener);
   }
 
   @Override
-  public void onKeyReleased(Consumer<KeyEvent> keyEventConsumer) {
-    canvas.addKeyListener(new KeyAdapter() {
+  public Subscription onKeyReleased(Consumer<KeyEvent> keyEventConsumer) {
+    var listener = new KeyAdapter() {
       @Override
       public void keyReleased(java.awt.event.KeyEvent e) {
         keyEventConsumer.accept(new technology.sola.engine.input.KeyEvent(e.getKeyCode()));
       }
-    });
+    };
+
+    canvas.addKeyListener(listener);
+
+    return () -> canvas.removeKeyListener(listener);
+
   }
 
   @Override
-  public void onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
-    canvas.addMouseMotionListener(new MouseMotionAdapter() {
+  public Subscription onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
+    var listener = new MouseMotionAdapter() {
       @Override
       public void mouseMoved(java.awt.event.MouseEvent mouseEvent) {
         mouseEventConsumer.accept(swingToSola(mouseEvent));
       }
-    });
+    };
+
+    canvas.addMouseMotionListener(listener);
+
+    return () -> canvas.removeMouseMotionListener(listener);
   }
 
   @Override
-  public void onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
-    canvas.addMouseListener(new MouseAdapter() {
+  public Subscription onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
+    var listener = new MouseAdapter() {
       @Override
       public void mousePressed(java.awt.event.MouseEvent mouseEvent) {
         mouseEventConsumer.accept(swingToSola(mouseEvent));
       }
-    });
+    };
+
+    canvas.addMouseListener(listener);
+
+    return () -> canvas.removeMouseListener(listener);
   }
 
   @Override
-  public void onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
-    canvas.addMouseListener(new MouseAdapter() {
+  public Subscription onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
+    var listener = new MouseAdapter() {
       @Override
       public void mouseReleased(java.awt.event.MouseEvent mouseEvent) {
         mouseEventConsumer.accept(swingToSola(mouseEvent));
       }
-    });
+    };
+
+    canvas.addMouseListener(listener);
+
+    return () -> canvas.removeMouseListener(listener);
   }
 
   @Override
-  public void onMouseWheel(Consumer<technology.sola.engine.input.MouseWheelEvent> mouseWheelEventConsumer) {
-    canvas.addMouseWheelListener(event -> {
+  public Subscription onMouseWheel(Consumer<technology.sola.engine.input.MouseWheelEvent> mouseWheelEventConsumer) {
+    MouseWheelListener listener = event -> {
       boolean isHorizontal = event.isShiftDown();
 
       boolean isUp = !isHorizontal && event.getWheelRotation() < 0;
@@ -147,17 +169,22 @@ public class SwingSolaPlatform extends SolaPlatform {
       boolean isRight = isHorizontal && event.getWheelRotation() < 0;
 
       mouseWheelEventConsumer.accept(new technology.sola.engine.input.MouseWheelEvent(isUp, isDown, isLeft, isRight));
-    });
+    };
+
+    canvas.addMouseWheelListener(listener);
+
+    return () -> canvas.removeMouseWheelListener(listener);
   }
 
   /**
    * Not supported on Swing.
    *
    * @param touchEventConsumer the method called when a touch interaction takes place
+   * @return a no-op {@link Subscription} instance
    */
   @Override
-  public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
-    // not supported on Swing
+  public Subscription onTouch(Consumer<TouchEvent> touchEventConsumer) {
+    return Subscription.NOT_SUPPORTED;
   }
 
   /**
@@ -286,7 +313,12 @@ public class SwingSolaPlatform extends SolaPlatform {
 
       graphics.setColor(backgroundColor);
       graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-      graphics.drawImage(bufferedImage, aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height(), null);
+      graphics.clearRect(
+        aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height()
+      );
+      graphics.drawImage(
+        bufferedImage, aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height(), null
+      );
       graphics.dispose();
 
       canvas.getBufferStrategy().show();
@@ -303,6 +335,9 @@ public class SwingSolaPlatform extends SolaPlatform {
       graphics2D.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
       AspectRatioSizing aspectRatioSizing = viewport.getAspectRatioSizing();
+      graphics2D.clearRect(
+        aspectRatioSizing.x(), aspectRatioSizing.y(), aspectRatioSizing.width(), aspectRatioSizing.height()
+      );
       graphics2D.translate(aspectRatioSizing.x(), aspectRatioSizing.y());
       graphics2D.scale(aspectRatioSizing.width() / (double) renderer.getWidth(), aspectRatioSizing.height() / (double) renderer.getHeight());
     };

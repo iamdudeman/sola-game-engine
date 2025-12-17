@@ -4,9 +4,11 @@ import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.core.SolaPlatformIdentifier;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.debug.DebugGraphicsModule;
+import technology.sola.engine.examples.common.ExampleUtils;
 import technology.sola.engine.graphics.SolaGraphics;
-import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CameraComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
@@ -23,6 +25,7 @@ import technology.sola.engine.graphics.gui.style.property.Direction;
 import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
+import technology.sola.engine.input.TouchPhase;
 import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
@@ -54,7 +57,7 @@ import java.util.Random;
 public class PhysicsExample extends Sola {
   private static final float CAMERA_SCALE = 1.2f;
   private static final float CIRCLE_RADIUS = 10f;
-  private final int objectCount;
+  private int objectCount;
   private SolaGraphics solaGraphics;
   private Random random;
 
@@ -72,7 +75,9 @@ public class PhysicsExample extends Sola {
 
   @Override
   protected void onInit() {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
+    if (platform().getIdentifier() == SolaPlatformIdentifier.ANDROID) {
+      objectCount = 750;
+    }
 
     SolaPhysics solaPhysics = new SolaPhysics.Builder(solaEcs)
       .withoutParticles()
@@ -88,6 +93,14 @@ public class PhysicsExample extends Sola {
     solaEcs.setWorld(buildQuadTreeOptimizedWorld());
 
     solaGraphics.guiDocument().setRootElement(buildGui(solaPhysics));
+
+    platform().onTouch(touchEvent -> {
+      if (touchEvent.touch().phase() == TouchPhase.BEGAN) {
+        var debugGraphicsModule = solaGraphics.getGraphicsModule(DebugGraphicsModule.class);
+
+        debugGraphicsModule.setActive(!debugGraphicsModule.isActive());
+      }
+    });
   }
 
   @Override
@@ -99,7 +112,12 @@ public class PhysicsExample extends Sola {
     SectionGuiElement sectionGuiElement = new SectionGuiElement();
 
     sectionGuiElement.addStyle(
-      ConditionalStyle.always(new BaseStyles.Builder<>().setDirection(Direction.ROW).setPadding(5).setGap(5).build())
+      ConditionalStyle.always(new BaseStyles.Builder<>()
+        .setDirection(Direction.ROW)
+        .setPositionX("25%")
+        .setPadding(4)
+        .setGap(2)
+        .build())
     );
 
     TextInputGuiElement randomSeedInput = new TextInputGuiElement().setValue("123456789").setPlaceholder("Random");
@@ -107,6 +125,10 @@ public class PhysicsExample extends Sola {
     randomSeedInput.addStyle(ConditionalStyle.always(new TextInputStyles.Builder<>().setPadding(5).build()));
 
     sectionGuiElement.appendChildren(
+      new ButtonGuiElement()
+        .setOnAction(() -> ExampleUtils.returnToLauncher(platform(), eventHub))
+        .addStyle(ConditionalStyle.always(new BaseStyles.Builder<>().setPadding(5).build()))
+        .appendChildren(new TextGuiElement().setText("Back")),
       new ButtonGuiElement()
         .setOnAction(() -> {
           resetRandom(randomSeedInput.getValue());

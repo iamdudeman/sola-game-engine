@@ -40,6 +40,11 @@ gradlePlugin {
       implementationClass = "technology.sola.plugins.SolaJavaConventionsPlugin"
     }
 
+    create("sola-javafx") {
+      id = "technology.sola.plugins.sola-javafx"
+      implementationClass = "technology.sola.plugins.SolaJavaFxPlugin"
+    }
+
     create("sola-java-distribution") {
       id = "technology.sola.plugins.sola-java-distribution"
       implementationClass = "technology.sola.plugins.SolaJavaDistributionPlugin"

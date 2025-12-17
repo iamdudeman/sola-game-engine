@@ -7,8 +7,8 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.examples.common.ExampleUtils;
 import technology.sola.engine.graphics.SolaGraphics;
-import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.examples.common.features.networking.messages.*;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
@@ -22,7 +22,9 @@ import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
+import technology.sola.engine.input.TouchPhase;
 import technology.sola.engine.networking.socket.SocketMessage;
+import technology.sola.math.linear.Vector2D;
 
 import java.util.Date;
 
@@ -47,11 +49,8 @@ public class NetworkingExample extends Sola {
 
   @Override
   protected void onInit() {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
-
     solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
       .withGui(mouseInput)
-      .withDebug(null, eventHub, keyboardInput)
       .buildAndInitialize(assetLoaderProvider);
 
     solaEcs.setWorld(LevelBuilder.createWorld(MAX_PLAYERS));
@@ -78,10 +77,15 @@ public class NetworkingExample extends Sola {
     public void update(World world, float deltaTime) {
       int direction = 0;
 
-      if (keyboardInput.isKeyHeld(Key.A)) {
+      var touch = touchInput.getFirstTouch();
+      Vector2D touchPosition = touch != null && touch.phase() == TouchPhase.MOVED
+        ? new Vector2D(touch.x(), touch.y())
+        : null;
+
+      if (keyboardInput.isKeyHeld(Key.A) || (touchPosition != null && touchPosition.x() < configuration.rendererWidth() / 2f)) {
         direction = 1;
       }
-      if (keyboardInput.isKeyHeld(Key.D)) {
+      if (keyboardInput.isKeyHeld(Key.D) || (touchPosition != null && touchPosition.x() > configuration.rendererWidth() / 2f)) {
         direction = 2;
       }
 
@@ -123,7 +127,7 @@ public class NetworkingExample extends Sola {
 
               if (entity == null) {
                 solaEcs.getWorld().createEntity(
-                  String.valueOf(playerPosition.id()),
+                  playerPosition.id(),
                   "player-" + playerPosition.id(),
                   new TransformComponent(playerPosition.translate().x(), playerPosition.translate().y(), 25),
                   new CircleRendererComponent(Color.WHITE, true),
@@ -152,6 +156,7 @@ public class NetworkingExample extends Sola {
     sectionGuiElement.appendChildren(
       new TextGuiElement().setText("Networking Example"),
       new TextGuiElement().setText("").setId("time"),
+      buildButton("back", "Back", () -> ExampleUtils.returnToLauncher(platform(), eventHub), false),
       buildButton("connectButton", "Connect", () -> {
         platform().getSocketClient().connect("127.0.0.1", 1380);
 

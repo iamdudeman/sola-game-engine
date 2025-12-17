@@ -5,12 +5,13 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.examples.common.ExampleUtils;
 import technology.sola.engine.graphics.SolaGraphics;
-import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.math.linear.Vector2D;
@@ -36,10 +37,15 @@ public class ParticleExample extends Sola {
 
   @Override
   protected void onInit() {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
-
     solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
+      .withGui(mouseInput)
       .buildAndInitialize(assetLoaderProvider);
+
+    solaGraphics.guiDocument().setRootElement(
+      ExampleUtils.createReturnToLauncherButton(platform(), eventHub, "0", "0")
+    );
+
+    platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
 
     solaEcs.setWorld(buildWorld());
     solaEcs.addSystem(new ParticleSystem());

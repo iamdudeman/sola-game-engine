@@ -3,6 +3,7 @@ package technology.sola.engine.platform.browser.javascript;
 import org.teavm.jso.JSBody;
 import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;
+import org.teavm.jso.core.JSFunction;
 
 /**
  * A collection of Java wrapper functions around JavaScript touch utility functions.
@@ -19,9 +20,10 @@ public class JsTouchUtils {
    *
    * @param eventName the event name
    * @param callback  the callback for the event
+   * @return a function that removes the listener
    */
   @JSBody(params = {"eventName", "callback"}, script = Scripts.TOUCH_EVENT)
-  public static native void touchEventListener(String eventName, TouchEventCallback callback);
+  public static native JSFunction touchEventListener(String eventName, TouchEventCallback callback);
 
   /**
    * Callback definition for when an event for touch happens.
@@ -83,6 +85,8 @@ public class JsTouchUtils {
 
     private static final String TOUCH_EVENT = """
       window.touchListeners[eventName].push(callback);
+
+      return () => window.touchListeners[eventName].splice(window.touchListeners[eventName].indexOf(callback), 1);
       """;
   }
 }

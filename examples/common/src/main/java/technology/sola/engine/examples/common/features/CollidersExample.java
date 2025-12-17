@@ -8,10 +8,11 @@ import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.debug.DebugGraphicsModule;
+import technology.sola.engine.examples.common.ExampleUtils;
 import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.graphics.components.ConvexPolygonRendererComponent;
 import technology.sola.engine.graphics.modules.SolaGraphicsModule;
-import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
@@ -24,6 +25,7 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.MouseButton;
+import technology.sola.engine.input.TouchPhase;
 import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
@@ -64,8 +66,6 @@ public class CollidersExample extends Sola {
 
   @Override
   protected void onInit() {
-    ExampleLauncherSola.addReturnToLauncherKeyEvent(platform(), eventHub);
-
     var guiTheme = DefaultThemeBuilder.buildDarkTheme();
 
     SolaPhysics solaPhysics = new SolaPhysics.Builder(solaEcs)
@@ -77,6 +77,8 @@ public class CollidersExample extends Sola {
       .withGui(mouseInput, guiTheme)
       .withDebug(solaPhysics, eventHub, keyboardInput)
       .buildAndInitialize(assetLoaderProvider);
+
+    solaGraphics.getGraphicsModule(DebugGraphicsModule.class).setActive(false);
 
     platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
 
@@ -93,7 +95,13 @@ public class CollidersExample extends Sola {
     assetLoaderProvider.get(GuiJsonDocument.class)
       .getNewAsset("gui", "assets/gui/collision_sandbox.gui.json")
       .executeWhenLoaded(guiJsonDocument -> {
-        solaGraphics.guiDocument().setRootElement(guiJsonDocument.rootElement());
+        var rootElement = guiJsonDocument.rootElement();
+
+        rootElement.appendChildren(
+          ExampleUtils.createReturnToLauncherButton(platform(), eventHub, "0", "0")
+        );
+
+        solaGraphics.guiDocument().setRootElement(rootElement);
         currentlySelectedText = solaGraphics.guiDocument().findElementById("modeCircle", TextGuiElement.class);
         currentlySelectedText.styles().addStyle(selectedTextStyle);
 
@@ -124,7 +132,9 @@ public class CollidersExample extends Sola {
 
       Vector2D secondPoint = createShapeSystem.secondPoint == null ? null : cameraTranslationTransform.multiply(createShapeSystem.secondPoint);
       Color color = Color.WHITE;
-      var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
+      var firstTouch = touchInput.getFirstTouch();
+      var firstTouchPoint = firstTouch != null ? new Vector2D(firstTouch.x(), firstTouch.y()) : null;
+      var point = solaGraphics.screenToWorldCoordinate(firstTouchPoint == null ? mouseInput.getMousePosition() : firstTouchPoint);
 
       if (currentMode == InteractionMode.CREATE_CIRCLE) {
         var min = new Vector2D(Math.min(firstPoint.x(), point.x()), Math.min(firstPoint.y(), point.y()));
@@ -171,34 +181,48 @@ public class CollidersExample extends Sola {
 
     @Override
     public void update(World world, float deltaTime) {
-      if (keyboardInput.isKeyPressed(Key.ONE)) {
+      var firstTouch = touchInput.getFirstTouch();
+      var firstTouchPoint = firstTouch != null && (firstTouch.phase() == TouchPhase.BEGAN) ? new Vector2D(firstTouch.x(), firstTouch.y()) : null;
+      boolean isTouchInBar = firstTouchPoint != null && firstTouchPoint.y() > platform().getRenderer().getHeight() - 30;
+
+      if (keyboardInput.isKeyPressed(Key.ONE) || (isTouchInBar && firstTouchPoint.x() < platform().getRenderer().getWidth() / 4)) {
         changeMode(InteractionMode.CREATE_CIRCLE, "modeCircle");
-      } else if (keyboardInput.isKeyPressed(Key.TWO)) {
+      } else if (keyboardInput.isKeyPressed(Key.TWO) || (isTouchInBar && firstTouchPoint.x() < platform().getRenderer().getWidth() / 2)) {
         changeMode(InteractionMode.CREATE_AABB, "modeAABB");
-      } else if (keyboardInput.isKeyPressed(Key.THREE)) {
+      } else if (keyboardInput.isKeyPressed(Key.THREE) || (isTouchInBar && firstTouchPoint.x() < 3 * platform().getRenderer().getWidth() / 4)) {
         changeMode(InteractionMode.CREATE_TRIANGLE, "modeTriangle");
-      } else if (keyboardInput.isKeyPressed(Key.FOUR)) {
+      } else if (keyboardInput.isKeyPressed(Key.FOUR) || isTouchInBar) {
         changeMode(InteractionMode.CREATE_POLYGON, "modePolygon");
       }
 
-      if (mouseInput.isMousePressed(MouseButton.SECONDARY)) {
+      if (isTouchInBar) {
+        return;
+      }
+
+      if (mouseInput.isMousePressed(MouseButton.SECONDARY) || touchInput.getActiveTouchCount() > 1) {
         if (points.size() < 3) {
           return;
         }
 
-        ConvexPolygon convexPolygon = new ConvexPolygon(points.toArray(Vector2D[]::new));
+        try {
+          ConvexPolygon convexPolygon = new ConvexPolygon(points.toArray(Vector2D[]::new));
 
-        world.createEntity(
-          new TransformComponent(0, 0),
-          new ConvexPolygonRendererComponent(Color.YELLOW, false, convexPolygon),
-          new DynamicBodyComponent(),
-          new ColliderComponent(new ColliderShapeConvexPolygon(convexPolygon))
-        );
+          world.createEntity(
+            new TransformComponent(0, 0),
+            new ConvexPolygonRendererComponent(Color.YELLOW, false, convexPolygon),
+            new DynamicBodyComponent(),
+            new ColliderComponent(new ColliderShapeConvexPolygon(convexPolygon))
+          );
+        } catch (IllegalArgumentException ignored) {
+          // invalid polygon, ignore
+        }
+
         reset();
       }
 
-      if (mouseInput.isMousePressed(MouseButton.PRIMARY)) {
-        var point = solaGraphics.screenToWorldCoordinate(mouseInput.getMousePosition());
+      if (mouseInput.isMousePressed(MouseButton.PRIMARY) || firstTouchPoint != null) {
+        var unadjustedPoint = firstTouchPoint != null ? firstTouchPoint : mouseInput.getMousePosition();
+        var point = solaGraphics.screenToWorldCoordinate(unadjustedPoint);
 
         if (firstPoint == null) {
           firstPoint = point;

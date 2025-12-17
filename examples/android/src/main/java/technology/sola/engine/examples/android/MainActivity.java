@@ -30,6 +30,6 @@ public class MainActivity extends SolaAndroidActivity {
 
   @Override
   public Sola getInitialSola() {
-    return new ExampleLauncherSola(platform);
+    return new ExampleLauncherSola();
   }
 }

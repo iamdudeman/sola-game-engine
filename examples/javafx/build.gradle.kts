@@ -1,5 +1,6 @@
 plugins {
   id("technology.sola.plugins.sola-java-conventions")
+  id("technology.sola.plugins.sola-javafx")
   id("technology.sola.plugins.sola-java-distribution")
 }
 
@@ -10,5 +11,5 @@ dependencies {
 
 solaJavaDist {
   mainClass = "${project.properties["basePackage"]}.${project.name}.JavaFxMain"
-  useJavaFx = true
+  includeOsClassifier = true
 }
