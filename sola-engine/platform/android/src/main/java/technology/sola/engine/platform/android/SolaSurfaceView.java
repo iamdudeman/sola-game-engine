@@ -2,6 +2,7 @@ package technology.sola.engine.platform.android;
 
 import android.content.Context;
 import android.graphics.*;
+import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import org.jspecify.annotations.NullMarked;
@@ -13,14 +14,13 @@ import technology.sola.engine.graphics.screen.Viewport;
 @NullMarked
 class SolaSurfaceView extends SurfaceView {
   private final Paint paint = new Paint();
+  private final SurfaceHolder holder;
   @Nullable
   private Canvas canvas;
   @Nullable
   private Viewport viewport;
   @Nullable
   private Bitmap softwareRendererBitmap;
-  @Nullable
-  private Rect softwareRendererSrcRect;
   @Nullable
   private SoftwareRenderer softwareRenderer;
 
@@ -34,6 +34,8 @@ class SolaSurfaceView extends SurfaceView {
 
     setFocusable(true);
     setFocusableInTouchMode(true);
+
+    holder = getHolder();
   }
 
   @Override
@@ -53,7 +55,7 @@ class SolaSurfaceView extends SurfaceView {
 
   @Nullable
   Canvas startDrawing() {
-    canvas = getHolder().lockHardwareCanvas();
+    canvas = holder.lockHardwareCanvas();
 
     return canvas;
   }
@@ -68,7 +70,11 @@ class SolaSurfaceView extends SurfaceView {
 
     if (softwareRendererBitmap == null || this.softwareRenderer != softwareRenderer) {
       this.softwareRenderer = softwareRenderer;
-      softwareRendererSrcRect = new Rect(0, 0, rendererWidth, rendererHeight);
+
+      if (softwareRendererBitmap != null) {
+        softwareRendererBitmap.recycle();
+      }
+
       softwareRendererBitmap = Bitmap.createBitmap(rendererWidth, rendererHeight, Bitmap.Config.RGB_565);
     }
 
@@ -81,7 +87,7 @@ class SolaSurfaceView extends SurfaceView {
       aspectRatioSizing.height() + aspectRatioSizing.y()
     );
 
-    canvas.drawBitmap(softwareRendererBitmap, softwareRendererSrcRect, dest, paint);
+    canvas.drawBitmap(softwareRendererBitmap, null, dest, paint);
   }
 
   void finishDrawing() {
@@ -89,7 +95,7 @@ class SolaSurfaceView extends SurfaceView {
       return;
     }
 
-    getHolder().unlockCanvasAndPost(canvas);
+    holder.unlockCanvasAndPost(canvas);
     canvas = null;
   }
 }
