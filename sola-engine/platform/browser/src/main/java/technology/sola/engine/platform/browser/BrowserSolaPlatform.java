@@ -24,6 +24,7 @@ import technology.sola.engine.platform.browser.core.*;
 import technology.sola.engine.platform.browser.javascript.*;
 import technology.sola.logging.SolaLogger;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
 
@@ -83,68 +84,70 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   @Override
   public Subscription onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
-    JsMouseUtils.mouseEventListener("mousemove", (which, x, y) ->
+    var subscriptionCallback = JsMouseUtils.mouseEventListener("mousemove", (which, x, y) ->
       mouseEventConsumer.accept(browserToSola(which, x, y)));
 
-    return Subscription.NOT_SUPPORTED; // todo temp
+    return () -> subscriptionCallback.call(this);
   }
 
   @Override
   public Subscription onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
-    JsMouseUtils.mouseEventListener("mousedown", (which, x, y) ->
+    var subscriptionCallback = JsMouseUtils.mouseEventListener("mousedown", (which, x, y) ->
       mouseEventConsumer.accept(browserToSola(which, x, y)));
 
-    return Subscription.NOT_SUPPORTED; // todo temp
+    return () -> subscriptionCallback.call(this);
   }
 
   @Override
   public Subscription onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
-    JsMouseUtils.mouseEventListener("mouseup", (which, x, y) ->
+    var subscriptionCallback = JsMouseUtils.mouseEventListener("mouseup", (which, x, y) ->
       mouseEventConsumer.accept(browserToSola(which, x, y)));
 
-    return Subscription.NOT_SUPPORTED; // todo temp
+    return () -> subscriptionCallback.call(this);
   }
 
   @Override
   public Subscription onMouseWheel(Consumer<MouseWheelEvent> mouseWheelEventConsumer) {
-    JsMouseUtils.mouseWheelEventListener((isUp, isDown, isLeft, isRight) ->
+    var subscriptionCallback = JsMouseUtils.mouseWheelEventListener((isUp, isDown, isLeft, isRight) ->
       mouseWheelEventConsumer.accept(new MouseWheelEvent(isUp, isDown, isLeft, isRight)));
 
-    return Subscription.NOT_SUPPORTED; // todo temp
+    return () -> subscriptionCallback.call(this);
   }
 
   @Override
   public Subscription onTouch(Consumer<TouchEvent> touchEventConsumer) {
-    JsTouchUtils.touchEventListener("touchmove", (id, x, y) -> {
-      PointerCoordinate adjusted = adjustPointerForViewport(x, y);
+    var subscriptionCallbacks = List.of(
+      JsTouchUtils.touchEventListener("touchmove", (id, x, y) -> {
+        PointerCoordinate adjusted = adjustPointerForViewport(x, y);
 
-      touchEventConsumer.accept(new TouchEvent(new Touch(
-        adjusted.x(), adjusted.y(), TouchPhase.MOVED, id
-      )));
-    });
-    JsTouchUtils.touchEventListener("touchstart", (id, x, y) -> {
-      PointerCoordinate adjusted = adjustPointerForViewport(x, y);
+        touchEventConsumer.accept(new TouchEvent(new Touch(
+          adjusted.x(), adjusted.y(), TouchPhase.MOVED, id
+        )));
+      }),
+      JsTouchUtils.touchEventListener("touchstart", (id, x, y) -> {
+        PointerCoordinate adjusted = adjustPointerForViewport(x, y);
 
-      touchEventConsumer.accept(new TouchEvent(new Touch(
-        adjusted.x(), adjusted.y(), TouchPhase.BEGAN, id
-      )));
-    });
-    JsTouchUtils.touchEventListener("touchend", (id, x, y) -> {
-      PointerCoordinate adjusted = adjustPointerForViewport(x, y);
+        touchEventConsumer.accept(new TouchEvent(new Touch(
+          adjusted.x(), adjusted.y(), TouchPhase.BEGAN, id
+        )));
+      }),
+      JsTouchUtils.touchEventListener("touchend", (id, x, y) -> {
+        PointerCoordinate adjusted = adjustPointerForViewport(x, y);
 
-      touchEventConsumer.accept(new TouchEvent(new Touch(
-        adjusted.x(), adjusted.y(), TouchPhase.ENDED, id
-      )));
-    });
-    JsTouchUtils.touchEventListener("touchcancel", (id, x, y) -> {
-      PointerCoordinate adjusted = adjustPointerForViewport(x, y);
+        touchEventConsumer.accept(new TouchEvent(new Touch(
+          adjusted.x(), adjusted.y(), TouchPhase.ENDED, id
+        )));
+      }),
+      JsTouchUtils.touchEventListener("touchcancel", (id, x, y) -> {
+        PointerCoordinate adjusted = adjustPointerForViewport(x, y);
 
-      touchEventConsumer.accept(new TouchEvent(new Touch(
-        adjusted.x(), adjusted.y(), TouchPhase.CANCELLED, id
-      )));
-    });
+        touchEventConsumer.accept(new TouchEvent(new Touch(
+          adjusted.x(), adjusted.y(), TouchPhase.CANCELLED, id
+        )));
+      })
+    );
 
-    return Subscription.NOT_SUPPORTED; // todo temp
+    return () -> subscriptionCallbacks.forEach(callback -> callback.call(this));
   }
 
   /**

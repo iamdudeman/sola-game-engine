@@ -22,6 +22,7 @@ public class JsKeyboardUtils {
    *
    * @param eventName the event name
    * @param callback  the callback for the event
+   * @return a function that removes the listener
    */
   @JSBody(params = {"eventName", "callback"}, script = Scripts.KEY_EVENT)
   public static native JSFunction keyEventListener(String eventName, KeyEventCallback callback);

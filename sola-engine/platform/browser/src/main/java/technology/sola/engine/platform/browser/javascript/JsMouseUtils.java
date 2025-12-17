@@ -4,6 +4,7 @@ import org.jspecify.annotations.NullMarked;
 import org.teavm.jso.JSBody;
 import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;
+import org.teavm.jso.core.JSFunction;
 
 /**
  * A collection of Java wrapper functions around JavaScript mouse utility functions.
@@ -21,17 +22,19 @@ public class JsMouseUtils {
    *
    * @param eventName the event name
    * @param callback  the callback for the event
+   * @return a function that removes the listener
    */
   @JSBody(params = {"eventName", "callback"}, script = Scripts.MOUSE_EVENT)
-  public static native void mouseEventListener(String eventName, MouseEventCallback callback);
+  public static native JSFunction mouseEventListener(String eventName, MouseEventCallback callback);
 
   /**
    * Adds a mouse wheel event listener.
    *
    * @param callback the callback for the event
+   * @return a function that removes the listener
    */
   @JSBody(params = {"callback"}, script = Scripts.MOUSE_WHEEL_EVENT)
-  public static native void mouseWheelEventListener(MouseWheelEventCallback callback);
+  public static native JSFunction mouseWheelEventListener(MouseWheelEventCallback callback);
 
   /**
    * Callback definition for when an event for the mouse happens.
@@ -115,9 +118,13 @@ public class JsMouseUtils {
 
     private static final String MOUSE_EVENT = """
       window.mouseListeners[eventName].push(callback);
+
+      return () => window.mouseListeners[eventName].splice(window.mouseListeners[eventName].indexOf(callback), 1);
       """;
     private static final String MOUSE_WHEEL_EVENT = """
       window.mouseWheelListeners.push(callback);
+
+      return () => window.mouseWheelListeners.splice(window.mouseWheelListeners.indexOf(callback), 1);
       """;
   }
 }
