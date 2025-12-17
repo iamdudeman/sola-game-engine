@@ -4,7 +4,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.assets.AssetLoaderProvider;
-import technology.sola.engine.core.event.Unsubscribe;
+import technology.sola.engine.core.event.Subscription;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.KeyboardInput;
@@ -129,7 +129,7 @@ public abstract class Sola {
       platform.onTouch(touchInput::onTouchEvent)
     );
 
-    onCleanup = () -> subscriptions.forEach(Unsubscribe::unsubscribe);
+    onCleanup = () -> subscriptions.forEach(Subscription::unsubscribe);
 
     onInit();
     onAsyncInit(completeAsyncInit);
