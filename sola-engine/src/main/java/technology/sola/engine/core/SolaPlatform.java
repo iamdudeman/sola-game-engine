@@ -137,6 +137,7 @@ public abstract class SolaPlatform {
    * Registers an on key pressed listener.
    *
    * @param keyEventConsumer the method called when key is pressed
+   * @return an {@link Subscription} instance that can be used to unsubscribe the listener
    */
   public abstract Subscription onKeyPressed(Consumer<KeyEvent> keyEventConsumer);
 
