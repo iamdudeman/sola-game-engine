@@ -4,6 +4,7 @@ import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.core.SolaPlatformIdentifier;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.debug.DebugGraphicsModule;
 import technology.sola.engine.examples.common.ExampleUtils;
@@ -56,7 +57,7 @@ import java.util.Random;
 public class PhysicsExample extends Sola {
   private static final float CAMERA_SCALE = 1.2f;
   private static final float CIRCLE_RADIUS = 10f;
-  private final int objectCount;
+  private int objectCount;
   private SolaGraphics solaGraphics;
   private Random random;
 
@@ -74,6 +75,10 @@ public class PhysicsExample extends Sola {
 
   @Override
   protected void onInit() {
+    if (platform().getIdentifier() == SolaPlatformIdentifier.ANDROID) {
+      objectCount = 750;
+    }
+
     SolaPhysics solaPhysics = new SolaPhysics.Builder(solaEcs)
       .withoutParticles()
       .buildAndInitialize(eventHub);
