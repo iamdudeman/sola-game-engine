@@ -69,36 +69,48 @@ public class BrowserSolaPlatform extends SolaPlatform {
 
   @Override
   public Subscription onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
-    JsKeyboardUtils.keyEventListener("keydown", keyCode -> keyEventConsumer.accept(new KeyEvent(keyCode)));
+    var subscriptionCallback = JsKeyboardUtils.keyEventListener("keydown", keyCode -> keyEventConsumer.accept(new KeyEvent(keyCode)));
+
+    return () -> subscriptionCallback.call(this);
   }
 
   @Override
   public Subscription onKeyReleased(Consumer<KeyEvent> keyEventConsumer) {
-    JsKeyboardUtils.keyEventListener("keyup", keyCode -> keyEventConsumer.accept(new KeyEvent(keyCode)));
+    var subscriptionCallback = JsKeyboardUtils.keyEventListener("keyup", keyCode -> keyEventConsumer.accept(new KeyEvent(keyCode)));
+
+    return () -> subscriptionCallback.call(this);
   }
 
   @Override
   public Subscription onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
     JsMouseUtils.mouseEventListener("mousemove", (which, x, y) ->
       mouseEventConsumer.accept(browserToSola(which, x, y)));
+
+    return Subscription.NOT_SUPPORTED; // todo temp
   }
 
   @Override
   public Subscription onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
     JsMouseUtils.mouseEventListener("mousedown", (which, x, y) ->
       mouseEventConsumer.accept(browserToSola(which, x, y)));
+
+    return Subscription.NOT_SUPPORTED; // todo temp
   }
 
   @Override
   public Subscription onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
     JsMouseUtils.mouseEventListener("mouseup", (which, x, y) ->
       mouseEventConsumer.accept(browserToSola(which, x, y)));
+
+    return Subscription.NOT_SUPPORTED; // todo temp
   }
 
   @Override
   public Subscription onMouseWheel(Consumer<MouseWheelEvent> mouseWheelEventConsumer) {
     JsMouseUtils.mouseWheelEventListener((isUp, isDown, isLeft, isRight) ->
       mouseWheelEventConsumer.accept(new MouseWheelEvent(isUp, isDown, isLeft, isRight)));
+
+    return Subscription.NOT_SUPPORTED; // todo temp
   }
 
   @Override
@@ -131,6 +143,8 @@ public class BrowserSolaPlatform extends SolaPlatform {
         adjusted.x(), adjusted.y(), TouchPhase.CANCELLED, id
       )));
     });
+
+    return Subscription.NOT_SUPPORTED; // todo temp
   }
 
   /**
