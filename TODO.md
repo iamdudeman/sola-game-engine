@@ -2,8 +2,7 @@
 
 ## Known Bugs List
 
-* Need ability to remove event listeners from SolaPlatform
-    * example launcher adds new ones every example click but never cleans up
+*
 
 ### Low-priority bugs
 
