@@ -2,6 +2,7 @@ package technology.sola.engine.platform.browser.javascript;
 
 import org.jspecify.annotations.NullMarked;
 import org.teavm.jso.JSBody;
+import org.teavm.jso.JSByRef;
 import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;
 
@@ -38,7 +39,7 @@ public class JsCanvasUtils {
    * @param viewportHeight the height of the viewport
    */
   @JSBody(params = {"rendererData", "width", "height", "viewportX", "viewportY", "viewportWidth", "viewportHeight"}, script = Scripts.RENDER)
-  public static native void renderToCanvas(int[] rendererData, int width, int height, int viewportX, int viewportY, int viewportWidth, int viewportHeight);
+  public static native void renderToCanvas(@JSByRef int[] rendererData, int width, int height, int viewportX, int viewportY, int viewportWidth, int viewportHeight);
 
   /**
    * Adds a listener to when the canvas focus changes.

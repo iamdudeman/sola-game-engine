@@ -4,11 +4,14 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.assets.AssetLoaderProvider;
+import technology.sola.engine.core.event.Subscription;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.input.MouseInput;
 import technology.sola.engine.input.TouchInput;
+
+import java.util.List;
 
 /**
  * Sola contains the core functionality needed to make a game. It is played via {@link SolaPlatform}.
@@ -45,6 +48,8 @@ public abstract class Sola {
   protected AssetLoaderProvider assetLoaderProvider;
   @Nullable
   private SolaPlatform platform;
+  @Nullable
+  private Runnable onCleanup;
 
   /**
    * Creates a Sola instance with desired {@link SolaConfiguration}.
@@ -114,15 +119,25 @@ public abstract class Sola {
   void initializeForPlatform(SolaPlatform platform, Runnable completeAsyncInit) {
     this.platform = platform;
 
-    platform.onKeyPressed(keyboardInput::onKeyPressed);
-    platform.onKeyReleased(keyboardInput::keyReleased);
-    platform.onMouseMoved(mouseInput::onMouseMoved);
-    platform.onMousePressed(mouseInput::onMousePressed);
-    platform.onMouseReleased(mouseInput::onMouseReleased);
-    platform.onMouseWheel(mouseInput::onMouseWheel);
-    platform.onTouch(touchInput::onTouchEvent);
+    var subscriptions = List.of(
+      platform.onKeyPressed(keyboardInput::onKeyPressed),
+      platform.onKeyReleased(keyboardInput::keyReleased),
+      platform.onMouseMoved(mouseInput::onMouseMoved),
+      platform.onMousePressed(mouseInput::onMousePressed),
+      platform.onMouseReleased(mouseInput::onMouseReleased),
+      platform.onMouseWheel(mouseInput::onMouseWheel),
+      platform.onTouch(touchInput::onTouchEvent)
+    );
+
+    onCleanup = () -> subscriptions.forEach(Subscription::unsubscribe);
 
     onInit();
     onAsyncInit(completeAsyncInit);
+  }
+
+  void cleanup() {
+    if (onCleanup != null) {
+      onCleanup.run();
+    }
   }
 }

@@ -1,5 +1,6 @@
 package technology.sola.engine.platform.javafx;
 
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -23,6 +24,7 @@ import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.SolaPlatformIdentifier;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
+import technology.sola.engine.core.event.Subscription;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
@@ -94,63 +96,80 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   }
 
   @Override
-  public void onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
-    canvas.addEventHandler(
-      javafx.scene.input.KeyEvent.KEY_PRESSED, keyEvent -> keyEventConsumer.accept(fxToSola(keyEvent))
-    );
+  public Subscription onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
+    EventHandler<javafx.scene.input.KeyEvent> listener = keyEvent -> keyEventConsumer.accept(fxToSola(keyEvent));
+
+    canvas.addEventHandler(javafx.scene.input.KeyEvent.KEY_PRESSED, listener);
+
+    return () -> canvas.removeEventHandler(javafx.scene.input.KeyEvent.KEY_PRESSED, listener);
   }
 
   @Override
-  public void onKeyReleased(Consumer<KeyEvent> keyEventConsumer) {
-    canvas.addEventHandler(
-      javafx.scene.input.KeyEvent.KEY_RELEASED, keyEvent -> keyEventConsumer.accept(fxToSola(keyEvent))
-    );
+  public Subscription onKeyReleased(Consumer<KeyEvent> keyEventConsumer) {
+    EventHandler<javafx.scene.input.KeyEvent> listener = keyEvent -> keyEventConsumer.accept(fxToSola(keyEvent));
+
+    canvas.addEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, listener);
+
+    return () -> canvas.removeEventHandler(javafx.scene.input.KeyEvent.KEY_RELEASED, listener);
   }
 
   @Override
-  public void onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
-    canvas.addEventHandler(
-      javafx.scene.input.MouseEvent.MOUSE_MOVED, mouseEvent -> mouseEventConsumer.accept(fxToSola(mouseEvent))
-    );
-    canvas.addEventHandler(
-      javafx.scene.input.MouseEvent.MOUSE_DRAGGED, mouseEvent -> mouseEventConsumer.accept(fxToSola(mouseEvent))
-    );
+  public Subscription onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
+    EventHandler<javafx.scene.input.MouseEvent> listenerMoved = mouseEvent -> mouseEventConsumer.accept(fxToSola(mouseEvent));
+    EventHandler<javafx.scene.input.MouseEvent> listenerDragged = mouseEvent -> mouseEventConsumer.accept(fxToSola(mouseEvent));
+
+    canvas.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_MOVED, listenerMoved);
+    canvas.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_DRAGGED, listenerDragged);
+
+    return () -> {
+      canvas.removeEventHandler(javafx.scene.input.MouseEvent.MOUSE_MOVED, listenerMoved);
+      canvas.removeEventHandler(javafx.scene.input.MouseEvent.MOUSE_DRAGGED, listenerDragged);
+    };
   }
 
   @Override
-  public void onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
-    canvas.addEventHandler(
-      javafx.scene.input.MouseEvent.MOUSE_PRESSED, mouseEvent -> mouseEventConsumer.accept(fxToSola(mouseEvent))
-    );
+  public Subscription onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
+    EventHandler<javafx.scene.input.MouseEvent> listener = mouseEvent -> mouseEventConsumer.accept(fxToSola(mouseEvent));
+
+    canvas.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_PRESSED, listener);
+
+    return () -> canvas.removeEventHandler(javafx.scene.input.MouseEvent.MOUSE_PRESSED, listener);
   }
 
   @Override
-  public void onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
-    canvas.addEventHandler(
-      javafx.scene.input.MouseEvent.MOUSE_RELEASED, mouseEvent -> mouseEventConsumer.accept(fxToSola(mouseEvent))
-    );
+  public Subscription onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
+    EventHandler<javafx.scene.input.MouseEvent> listener = mouseEvent -> mouseEventConsumer.accept(fxToSola(mouseEvent));
+
+    canvas.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_RELEASED, listener);
+
+    return () -> canvas.removeEventHandler(javafx.scene.input.MouseEvent.MOUSE_RELEASED, listener);
   }
 
   @Override
-  public void onMouseWheel(Consumer<MouseWheelEvent> mouseWheelEventConsumer) {
-    canvas.addEventHandler(javafx.scene.input.ScrollEvent.SCROLL, scrollEvent -> {
+  public Subscription onMouseWheel(Consumer<MouseWheelEvent> mouseWheelEventConsumer) {
+    EventHandler<javafx.scene.input.ScrollEvent> listener = scrollEvent -> {
       boolean isUp = scrollEvent.getDeltaY() > 0;
       boolean isDown = scrollEvent.getDeltaY() < 0;
       boolean isLeft = scrollEvent.getDeltaX() < 0;
       boolean isRight = scrollEvent.getDeltaX() > 0;
 
       mouseWheelEventConsumer.accept(new MouseWheelEvent(isUp, isDown, isLeft, isRight));
-    });
+    };
+
+    canvas.addEventHandler(javafx.scene.input.ScrollEvent.SCROLL, listener);
+
+    return () -> canvas.removeEventHandler(javafx.scene.input.ScrollEvent.SCROLL, listener);
   }
 
   /**
    * Not supported on JavaFx.
    *
    * @param touchEventConsumer the method called when a touch interaction takes place
+   * @return a no-op {@link Subscription} instance
    */
   @Override
-  public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
-    // Not supported on JavaFx
+  public Subscription onTouch(Consumer<TouchEvent> touchEventConsumer) {
+    return Subscription.NOT_SUPPORTED;
   }
 
   /**

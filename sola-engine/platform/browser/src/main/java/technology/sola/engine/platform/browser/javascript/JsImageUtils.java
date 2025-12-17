@@ -2,6 +2,7 @@ package technology.sola.engine.platform.browser.javascript;
 
 import org.jspecify.annotations.NullMarked;
 import org.teavm.jso.JSBody;
+import org.teavm.jso.JSByRef;
 import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;
 
@@ -31,7 +32,7 @@ public class JsImageUtils {
      * @param height      the height of the image
      * @param uInt8Pixels the uInt8 pixel data array
      */
-    void call(int width, int height, int[] uInt8Pixels);
+    void call(int width, int height, @JSByRef int[] uInt8Pixels);
   }
 
   private JsImageUtils() {

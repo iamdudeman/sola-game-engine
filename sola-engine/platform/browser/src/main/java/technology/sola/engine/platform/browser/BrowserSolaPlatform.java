@@ -12,6 +12,7 @@ import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.SolaPlatformIdentifier;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
+import technology.sola.engine.core.event.Subscription;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.graphics.screen.AspectRatioSizing;
@@ -23,6 +24,7 @@ import technology.sola.engine.platform.browser.core.*;
 import technology.sola.engine.platform.browser.javascript.*;
 import technology.sola.logging.SolaLogger;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
 
@@ -67,69 +69,85 @@ public class BrowserSolaPlatform extends SolaPlatform {
   }
 
   @Override
-  public void onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
-    JsKeyboardUtils.keyEventListener("keydown", keyCode -> keyEventConsumer.accept(new KeyEvent(keyCode)));
+  public Subscription onKeyPressed(Consumer<KeyEvent> keyEventConsumer) {
+    var subscriptionCallback = JsKeyboardUtils.keyEventListener("keydown", keyCode -> keyEventConsumer.accept(new KeyEvent(keyCode)));
+
+    return () -> subscriptionCallback.call(this);
   }
 
   @Override
-  public void onKeyReleased(Consumer<KeyEvent> keyEventConsumer) {
-    JsKeyboardUtils.keyEventListener("keyup", keyCode -> keyEventConsumer.accept(new KeyEvent(keyCode)));
+  public Subscription onKeyReleased(Consumer<KeyEvent> keyEventConsumer) {
+    var subscriptionCallback = JsKeyboardUtils.keyEventListener("keyup", keyCode -> keyEventConsumer.accept(new KeyEvent(keyCode)));
+
+    return () -> subscriptionCallback.call(this);
   }
 
   @Override
-  public void onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
-    JsMouseUtils.mouseEventListener("mousemove", (which, x, y) ->
+  public Subscription onMouseMoved(Consumer<MouseEvent> mouseEventConsumer) {
+    var subscriptionCallback = JsMouseUtils.mouseEventListener("mousemove", (which, x, y) ->
       mouseEventConsumer.accept(browserToSola(which, x, y)));
+
+    return () -> subscriptionCallback.call(this);
   }
 
   @Override
-  public void onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
-    JsMouseUtils.mouseEventListener("mousedown", (which, x, y) ->
+  public Subscription onMousePressed(Consumer<MouseEvent> mouseEventConsumer) {
+    var subscriptionCallback = JsMouseUtils.mouseEventListener("mousedown", (which, x, y) ->
       mouseEventConsumer.accept(browserToSola(which, x, y)));
+
+    return () -> subscriptionCallback.call(this);
   }
 
   @Override
-  public void onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
-    JsMouseUtils.mouseEventListener("mouseup", (which, x, y) ->
+  public Subscription onMouseReleased(Consumer<MouseEvent> mouseEventConsumer) {
+    var subscriptionCallback = JsMouseUtils.mouseEventListener("mouseup", (which, x, y) ->
       mouseEventConsumer.accept(browserToSola(which, x, y)));
+
+    return () -> subscriptionCallback.call(this);
   }
 
   @Override
-  public void onMouseWheel(Consumer<MouseWheelEvent> mouseWheelEventConsumer) {
-    JsMouseUtils.mouseWheelEventListener((isUp, isDown, isLeft, isRight) ->
+  public Subscription onMouseWheel(Consumer<MouseWheelEvent> mouseWheelEventConsumer) {
+    var subscriptionCallback = JsMouseUtils.mouseWheelEventListener((isUp, isDown, isLeft, isRight) ->
       mouseWheelEventConsumer.accept(new MouseWheelEvent(isUp, isDown, isLeft, isRight)));
+
+    return () -> subscriptionCallback.call(this);
   }
 
   @Override
-  public void onTouch(Consumer<TouchEvent> touchEventConsumer) {
-    JsTouchUtils.touchEventListener("touchmove", (id, x, y) -> {
-      PointerCoordinate adjusted = adjustPointerForViewport(x, y);
+  public Subscription onTouch(Consumer<TouchEvent> touchEventConsumer) {
+    var subscriptionCallbacks = List.of(
+      JsTouchUtils.touchEventListener("touchmove", (id, x, y) -> {
+        PointerCoordinate adjusted = adjustPointerForViewport(x, y);
 
-      touchEventConsumer.accept(new TouchEvent(new Touch(
-        adjusted.x(), adjusted.y(), TouchPhase.MOVED, id
-      )));
-    });
-    JsTouchUtils.touchEventListener("touchstart", (id, x, y) -> {
-      PointerCoordinate adjusted = adjustPointerForViewport(x, y);
+        touchEventConsumer.accept(new TouchEvent(new Touch(
+          adjusted.x(), adjusted.y(), TouchPhase.MOVED, id
+        )));
+      }),
+      JsTouchUtils.touchEventListener("touchstart", (id, x, y) -> {
+        PointerCoordinate adjusted = adjustPointerForViewport(x, y);
 
-      touchEventConsumer.accept(new TouchEvent(new Touch(
-        adjusted.x(), adjusted.y(), TouchPhase.BEGAN, id
-      )));
-    });
-    JsTouchUtils.touchEventListener("touchend", (id, x, y) -> {
-      PointerCoordinate adjusted = adjustPointerForViewport(x, y);
+        touchEventConsumer.accept(new TouchEvent(new Touch(
+          adjusted.x(), adjusted.y(), TouchPhase.BEGAN, id
+        )));
+      }),
+      JsTouchUtils.touchEventListener("touchend", (id, x, y) -> {
+        PointerCoordinate adjusted = adjustPointerForViewport(x, y);
 
-      touchEventConsumer.accept(new TouchEvent(new Touch(
-        adjusted.x(), adjusted.y(), TouchPhase.ENDED, id
-      )));
-    });
-    JsTouchUtils.touchEventListener("touchcancel", (id, x, y) -> {
-      PointerCoordinate adjusted = adjustPointerForViewport(x, y);
+        touchEventConsumer.accept(new TouchEvent(new Touch(
+          adjusted.x(), adjusted.y(), TouchPhase.ENDED, id
+        )));
+      }),
+      JsTouchUtils.touchEventListener("touchcancel", (id, x, y) -> {
+        PointerCoordinate adjusted = adjustPointerForViewport(x, y);
 
-      touchEventConsumer.accept(new TouchEvent(new Touch(
-        adjusted.x(), adjusted.y(), TouchPhase.CANCELLED, id
-      )));
-    });
+        touchEventConsumer.accept(new TouchEvent(new Touch(
+          adjusted.x(), adjusted.y(), TouchPhase.CANCELLED, id
+        )));
+      })
+    );
+
+    return () -> subscriptionCallbacks.forEach(callback -> callback.call(this));
   }
 
   /**

@@ -4,6 +4,7 @@ import org.jspecify.annotations.NullMarked;
 import org.teavm.jso.JSBody;
 import org.teavm.jso.JSFunctor;
 import org.teavm.jso.JSObject;
+import org.teavm.jso.core.JSFunction;
 
 /**
  * A collection of Java wrapper functions around JavaScript keyboard utility functions.
@@ -21,9 +22,10 @@ public class JsKeyboardUtils {
    *
    * @param eventName the event name
    * @param callback  the callback for the event
+   * @return a function that removes the listener
    */
   @JSBody(params = {"eventName", "callback"}, script = Scripts.KEY_EVENT)
-  public static native void keyEventListener(String eventName, KeyEventCallback callback);
+  public static native JSFunction keyEventListener(String eventName, KeyEventCallback callback);
 
   /**
    * Callback definition for when an event for a key happens.
@@ -69,6 +71,8 @@ public class JsKeyboardUtils {
 
     private static final String KEY_EVENT = """
       window.keyboardListeners[eventName].push(callback);
+
+      return () => window.keyboardListeners[eventName].splice(window.keyboardListeners[eventName].indexOf(callback), 1);
       """;
   }
 }

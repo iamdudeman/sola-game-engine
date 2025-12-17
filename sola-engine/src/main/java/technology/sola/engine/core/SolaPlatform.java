@@ -1,7 +1,9 @@
 package technology.sola.engine.core;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.AssetLoaderProvider;
+import technology.sola.engine.core.event.Subscription;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Layer;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -54,6 +56,8 @@ public abstract class SolaPlatform {
    * The {@link EventHub} for the running {@link Sola}.
    */
   protected EventHub solaEventHub;
+  @Nullable
+  private Sola currentSola;
 
   /**
    * Initializes {@link SolaPlatform} internals.
@@ -75,6 +79,12 @@ public abstract class SolaPlatform {
    */
   public void play(Sola sola) {
     LOGGER.info("Using platform [%s]", this.getClass().getName());
+
+    if (currentSola != null) {
+      currentSola.cleanup();
+    }
+
+    currentSola = sola;
 
     this.solaEventHub = sola.eventHub;
     this.viewport = buildViewport(sola.configuration);
@@ -127,50 +137,57 @@ public abstract class SolaPlatform {
    * Registers an on key pressed listener.
    *
    * @param keyEventConsumer the method called when key is pressed
+   * @return an {@link Subscription} instance that can be used to unsubscribe the listener
    */
-  public abstract void onKeyPressed(Consumer<KeyEvent> keyEventConsumer);
+  public abstract Subscription onKeyPressed(Consumer<KeyEvent> keyEventConsumer);
 
   /**
    * Registers an on key released listener.
    *
-   * @param keyEventConsumer the method called when key is released
+   * @param keyEventConsumer the method called when the key is released
+   * @return an {@link Subscription} instance that can be used to unsubscribe the listener
    */
-  public abstract void onKeyReleased(Consumer<KeyEvent> keyEventConsumer);
+  public abstract Subscription onKeyReleased(Consumer<KeyEvent> keyEventConsumer);
 
   /**
    * Registers an on mouse moved listener.
    *
    * @param mouseEventConsumer the method called when mouse is moved
+   * @return an {@link Subscription} instance that can be used to unsubscribe the listener
    */
-  public abstract void onMouseMoved(Consumer<MouseEvent> mouseEventConsumer);
+  public abstract Subscription onMouseMoved(Consumer<MouseEvent> mouseEventConsumer);
 
   /**
    * Registers an on mouse pressed listener.
    *
    * @param mouseEventConsumer the method called when mouse is pressed
+   * @return an {@link Subscription} instance that can be used to unsubscribe the listener
    */
-  public abstract void onMousePressed(Consumer<MouseEvent> mouseEventConsumer);
+  public abstract Subscription onMousePressed(Consumer<MouseEvent> mouseEventConsumer);
 
   /**
    * Registers an on mouse released listener.
    *
    * @param mouseEventConsumer the method called when mouse is released
+   * @return an {@link Subscription} instance that can be used to unsubscribe the listener
    */
-  public abstract void onMouseReleased(Consumer<MouseEvent> mouseEventConsumer);
+  public abstract Subscription onMouseReleased(Consumer<MouseEvent> mouseEventConsumer);
 
   /**
    * Registers an on mouse wheel listener.
    *
    * @param mouseWheelEventConsumer the method called when a mouse wheel interaction takes place
+   * @return an {@link Subscription} instance that can be used to unsubscribe the listener
    */
-  public abstract void onMouseWheel(Consumer<MouseWheelEvent> mouseWheelEventConsumer);
+  public abstract Subscription onMouseWheel(Consumer<MouseWheelEvent> mouseWheelEventConsumer);
 
   /**
    * Registers an on touch listener.
    *
    * @param touchEventConsumer the method called when a touch interaction takes place
+   * @return an {@link Subscription} instance that can be used to unsubscribe the listener
    */
-  public abstract void onTouch(Consumer<TouchEvent> touchEventConsumer);
+  public abstract Subscription onTouch(Consumer<TouchEvent> touchEventConsumer);
 
   /**
    * Sets the visibility of the virtual keyboard.
