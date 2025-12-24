@@ -217,14 +217,13 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
 
   private String getMemoryString() {
     var runtime = Runtime.getRuntime();
-    long current = runtime.totalMemory();
     long free = runtime.freeMemory();
     long total = runtime.totalMemory();
 
     return String.format(
       Locale.US,
       "Memory: %4.1f MB / %4.1f MB",
-      (current - free) * BYTE_TO_MB_RATIO,
+      (total - free) * BYTE_TO_MB_RATIO,
       total * BYTE_TO_MB_RATIO
     );
   }
