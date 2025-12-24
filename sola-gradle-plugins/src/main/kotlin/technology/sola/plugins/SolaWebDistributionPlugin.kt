@@ -50,16 +50,16 @@ class SolaWebDistributionPlugin : Plugin<Project> {
         mainClass.set(generateFilesMainClass)
       }
 
-      project.tasks.register("buildDebugWebHtmlAndJs") {
+      project.tasks.register("buildDebugWebHtmlAndJs", JavaExec::class.java) {
         group = "sola"
 
-        doFirst {
-          project.tasks.withType<JavaExec> {
-            setArgsString("build ${project.name}-${project.version}.jar debug")
-          }
-        }
+        dependsOn(project.tasks.getByPath("assemble"))
 
-        finalizedBy(project.tasks.getByPath("buildWebHtmlAndJs"))
+        classpath = sourceSets.getByName("main").runtimeClasspath
+        setArgsString("build ${project.name}-${project.version}.jar debug")
+        inputs.file("build/libs/${project.name}-${project.version}.jar")
+        outputs.file("build/sola.js")
+        mainClass.set(generateFilesMainClass)
       }
 
       project.tasks.register("distWebZip", Zip::class.java) {
