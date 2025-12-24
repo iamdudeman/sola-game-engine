@@ -37,7 +37,6 @@ public class PhysicsSystem extends EcsSystem {
 
         dynamicBodyComponent.setForceX(0);
         dynamicBodyComponent.setForceY(0);
-//        dynamicBodyComponent.setVelocity(dynamicBodyComponent.getVelocity().add(acceleration.scalar(deltaTime)));
 
         velocity.mutateAdd(acceleration.scalar(deltaTime));
       }

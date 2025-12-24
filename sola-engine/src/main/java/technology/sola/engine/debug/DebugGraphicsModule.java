@@ -20,6 +20,8 @@ import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.system.CollisionDetectionSystem;
 import technology.sola.math.linear.Matrix3D;
 
+import java.util.Locale;
+
 /**
  * DebugEntityGraphicsModule is a {@link SolaEntityGraphicsModule} implementation for rendering debug information for a {@link World}.
  * It will render broad phase debug information and colliders for {@link Entity} that have a {@link ColliderComponent}.
@@ -38,6 +40,7 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
    * The {@link Key} that toggles collider debug rendering.
    */
   public static final Key KEY_COLLIDER = Key.F3;
+  private static final float BYTE_TO_MB_RATIO = 1 / (1024 * 1024f);
 
   @Nullable
   private final CollisionDetectionSystem collisionDetectionSystem;
@@ -178,13 +181,15 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
 
     var font = DefaultFont.get();
     var boundingBoxString = "(" + KEY_BOUNDING_BOX.getName() + ") Bounding Box";
+    var memoryString = getMemoryString();
 
     if (textDimensions == null) {
-      textDimensions = font.getDimensionsForText(boundingBoxString);
+      textDimensions = font.getDimensionsForText(memoryString + "00");
     }
 
     var height = textDimensions.height();
-    final int lines = collisionDetectionSystem == null ? 2 : 5;
+    final int lines = collisionDetectionSystem == null ? 2 : 6;
+    int line = 0;
 
     renderer.setFont(font);
     renderer.fillRect(0, 0, textDimensions.width() + 4, height * lines + 4, backgroundColor);
@@ -192,27 +197,35 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
     // line 1
     renderer.drawString(world.getEntityCount() + "/" + world.getCurrentCapacity(), 2, 2, Color.WHITE);
     // line 2
-    renderer.drawString("FPS: " + fps, 2, 2 + height, Color.WHITE);
+    renderer.drawString("FPS: " + fps, 2, 2 + height * ++line, Color.WHITE);
+    // line 3
+    renderer.drawString(memoryString, 2, 2 + height * ++line, Color.WHITE);
 
     if (collisionDetectionSystem != null) {
-      // line 3
+      // line 4
       var broadPhaseString = "(" + KEY_BROAD_PHASE.getName() + ") Broad Phase";
 
-      renderer.drawString(broadPhaseString, 2, 2 + height * 2, isRenderingBroadPhase ? Color.GREEN : Color.WHITE);
-      // line 4
-      renderer.drawString(boundingBoxString, 2, 2 + height * 3, isRenderingBoundingBoxes ? Color.BLUE : Color.WHITE);
+      renderer.drawString(broadPhaseString, 2, 2 + height * ++line, isRenderingBroadPhase ? Color.GREEN : Color.WHITE);
       // line 5
+      renderer.drawString(boundingBoxString, 2, 2 + height * ++line, isRenderingBoundingBoxes ? Color.BLUE : Color.WHITE);
+      // line 6
       var colliderString = "(" + KEY_COLLIDER.getName() + ") Collider";
 
-      renderer.drawString(colliderString, 2, 2 + height * 4, isRenderingColliders ? Color.RED : Color.WHITE);
+      renderer.drawString(colliderString, 2, 2 + height * ++line, isRenderingColliders ? Color.RED : Color.WHITE);
     }
+  }
 
-    // line 6
+  private String getMemoryString() {
     var runtime = Runtime.getRuntime();
     long current = runtime.totalMemory();
     long free = runtime.freeMemory();
     long total = runtime.totalMemory();
 
-    renderer.drawString("Memory: " + (current - free) / 1024 + " KB / " + total / 1024 + " KB", 2, 2 + height * 5, Color.WHITE);
+    return String.format(
+      Locale.US,
+      "Memory: %4.1f MB / %4.1f MB",
+      (current - free) * BYTE_TO_MB_RATIO,
+      total * BYTE_TO_MB_RATIO
+    );
   }
 }
