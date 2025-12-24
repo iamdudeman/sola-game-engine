@@ -78,9 +78,11 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
 
   @Override
   public void update(World world, float deltaTime) {
-    applyImpulse();
+    var collisionManifolds = this.collisionManifolds;
 
-    adjustForSinking();
+    applyImpulse(collisionManifolds);
+
+    adjustForSinking(collisionManifolds);
 
     collisionManifolds.clear();
   }
@@ -96,7 +98,9 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
     }
   }
 
-  private void applyImpulse() {
+  private void applyImpulse(List<CollisionManifold> collisionManifolds) {
+    var iterations = this.iterations;
+
     for (int i = 0; i < iterations; i++) {
       for (CollisionManifold collisionManifold : collisionManifolds) {
         CollisionResolutionEntityData entityA = new CollisionResolutionEntityData(collisionManifold.entityA());
@@ -164,7 +168,10 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
     }
   }
 
-  private void adjustForSinking() {
+  private void adjustForSinking(List<CollisionManifold> collisionManifolds) {
+    var penetrationSlack = this.penetrationSlack;
+    var linearProjectionPercentage = this.linearProjectionPercentage;
+
     for (CollisionManifold collisionManifold : collisionManifolds) {
       CollisionResolutionEntityData entityA = new CollisionResolutionEntityData(collisionManifold.entityA());
       CollisionResolutionEntityData entityB = new CollisionResolutionEntityData(collisionManifold.entityB());
@@ -207,7 +214,7 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
 
       Material material = dynamicBodyComponent == null ? NULL_MATERIAL : dynamicBodyComponent.getMaterial();
 
-      velocity = dynamicBodyComponent == null ? Vector2D.ZERO_VECTOR : dynamicBodyComponent.getVelocity();
+      velocity = dynamicBodyComponent == null ? Vector2D.zeroVector() : dynamicBodyComponent.getVelocity();
       inverseMass = dynamicBodyComponent != null && dynamicBodyComponent.isKinematic() ? 0 : material.getInverseMass();
       restitution = material.getRestitution();
       friction = material.getFriction();

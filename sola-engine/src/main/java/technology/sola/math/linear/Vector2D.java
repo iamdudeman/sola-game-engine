@@ -10,10 +10,7 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public record Vector2D(float x, float y) {
-  /**
-   * A {@link Vector2D} with 0 for the x and y.
-   */
-  public static final Vector2D ZERO_VECTOR = new Vector2D(0, 0);
+  private static final Vector2D ZERO_VECTOR = new Vector2D(0, 0);
 
   /**
    * Creates a vector from a heading angle.
@@ -23,6 +20,13 @@ public record Vector2D(float x, float y) {
    */
   public static Vector2D headingVectorFromAngle(double angle) {
     return new Vector2D((float) Math.cos(angle), (float) Math.sin(angle));
+  }
+
+  /**
+   * @return A {@link Vector2D} with 0 for the x and y.
+   */
+  public static Vector2D zeroVector() {
+    return ZERO_VECTOR;
   }
 
 
@@ -113,8 +117,10 @@ public record Vector2D(float x, float y) {
    * @return the normalized vector as a new object
    */
   public Vector2D normalize() {
-    if (this.equals(ZERO_VECTOR)) {
-      return ZERO_VECTOR;
+    var zeroVector = zeroVector();
+
+    if (this.equals(zeroVector)) {
+      return zeroVector;
     }
 
     return this.scalar(1 / this.magnitude());

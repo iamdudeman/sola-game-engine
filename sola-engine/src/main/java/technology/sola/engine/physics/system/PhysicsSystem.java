@@ -26,9 +26,9 @@ public class PhysicsSystem extends EcsSystem {
 
   @Override
   public void update(World world, float deltaTime) {
-    for (var view : world.createView().of(TransformComponent.class, DynamicBodyComponent.class).getEntries()) {
-      TransformComponent transformComponent = view.c1();
-      DynamicBodyComponent dynamicBodyComponent = view.c2();
+    for (var entry : world.createView().of(TransformComponent.class, DynamicBodyComponent.class).getEntries()) {
+      TransformComponent transformComponent = entry.c1();
+      DynamicBodyComponent dynamicBodyComponent = entry.c2();
 
       if (!dynamicBodyComponent.isKinematic()) {
         Vector2D acceleration = new Vector2D(dynamicBodyComponent.getForceX(), dynamicBodyComponent.getForceY())

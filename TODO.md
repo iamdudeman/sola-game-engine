@@ -1,5 +1,9 @@
 # sola-game-engine TODO list
 
+* Consider changing `Vector2D` setters to mutate rather than return a new instance
+    * Reduce the number of objects created and cleaned up per frame
+    * `ZERO_VECTOR` would need to become a method that returns a new instance instead
+
 ## Known Bugs List
 
 *
@@ -20,9 +24,6 @@
 
 ## TODO List
 
-* Consider changing `Vector2D` setters to mutate rather than return a new instance
-    * Reduce the number of objects created and cleaned up per frame
-    * `ZERO_VECTOR` would need to become a method that returns a new instance instead
 * Particle System
     * consider ability to add fix number of particle spawns (4 at a time in different directions for example)
     * consider ability to change particle shape (instead of only circle maybe square)
