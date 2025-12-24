@@ -86,6 +86,26 @@ public class Vector2D {
   }
 
   /**
+   * Subtracts the desired vector from this vector.
+   *
+   * @param vector2D the vector to subtract from this vector
+   */
+  public void mutateSubtract(Vector2D vector2D){
+    this.x -= vector2D.x;
+    this.y -= vector2D.y;
+  }
+
+  /**
+   * Multiplies this vector by the desired scalar.
+   *
+   * @param scalar the scalar to multiply this vector by
+   */
+  public void mutateScalar(float scalar){
+    this.x *= scalar;
+    this.y *= scalar;
+  }
+
+  /**
    * Calculates the sum of two vectors and returns the sum as a new vector object.
    *
    * @param vector2D the vector to add to this vector
