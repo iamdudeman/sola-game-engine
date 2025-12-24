@@ -29,6 +29,7 @@ public class PhysicsSystem extends EcsSystem {
     for (var entry : world.createView().of(TransformComponent.class, DynamicBodyComponent.class).getEntries()) {
       TransformComponent transformComponent = entry.c1();
       DynamicBodyComponent dynamicBodyComponent = entry.c2();
+      var velocity = dynamicBodyComponent.getVelocity();
 
       if (!dynamicBodyComponent.isKinematic()) {
         Vector2D acceleration = new Vector2D(dynamicBodyComponent.getForceX(), dynamicBodyComponent.getForceY())
@@ -36,10 +37,12 @@ public class PhysicsSystem extends EcsSystem {
 
         dynamicBodyComponent.setForceX(0);
         dynamicBodyComponent.setForceY(0);
-        dynamicBodyComponent.setVelocity(dynamicBodyComponent.getVelocity().add(acceleration.scalar(deltaTime)));
+//        dynamicBodyComponent.setVelocity(dynamicBodyComponent.getVelocity().add(acceleration.scalar(deltaTime)));
+
+        velocity.mutateAdd(acceleration.scalar(deltaTime));
       }
 
-      transformComponent.setTranslate(transformComponent.getTranslate().add(dynamicBodyComponent.getVelocity().scalar(deltaTime)));
+      transformComponent.setTranslate(transformComponent.getTranslate().add(velocity.scalar(deltaTime)));
     }
   }
 }

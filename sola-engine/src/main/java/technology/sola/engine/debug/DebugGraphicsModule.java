@@ -206,5 +206,13 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
 
       renderer.drawString(colliderString, 2, 2 + height * 4, isRenderingColliders ? Color.RED : Color.WHITE);
     }
+
+    // line 6
+    var runtime = Runtime.getRuntime();
+    long current = runtime.totalMemory();
+    long free = runtime.freeMemory();
+    long total = runtime.totalMemory();
+
+    renderer.drawString("Memory: " + (current - free) / 1024 + " KB / " + total / 1024 + " KB", 2, 2 + height * 5, Color.WHITE);
   }
 }
