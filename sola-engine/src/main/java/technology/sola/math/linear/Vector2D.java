@@ -62,7 +62,7 @@ public class Vector2D {
    *
    * @param x the new x coordinate
    */
-  public void mutateX(float x){
+  public void mutateX(float x) {
     this.x = x;
   }
 
@@ -71,7 +71,7 @@ public class Vector2D {
    *
    * @param y the new y coordinate
    */
-  public void mutateY(float y){
+  public void mutateY(float y) {
     this.y = y;
   }
 
@@ -80,7 +80,7 @@ public class Vector2D {
    *
    * @param vector2D the vector to add to this vector
    */
-  public void mutateAdd(Vector2D vector2D){
+  public void mutateAdd(Vector2D vector2D) {
     this.x += vector2D.x;
     this.y += vector2D.y;
   }
@@ -91,7 +91,7 @@ public class Vector2D {
    * @param x the x value to add
    * @param y the y value to add
    */
-  public void mutateAdd(float x, float y){
+  public void mutateAdd(float x, float y) {
     this.x += x;
     this.y += y;
   }
@@ -101,7 +101,7 @@ public class Vector2D {
    *
    * @param vector2D the vector to subtract from this vector
    */
-  public void mutateSubtract(Vector2D vector2D){
+  public void mutateSubtract(Vector2D vector2D) {
     this.x -= vector2D.x;
     this.y -= vector2D.y;
   }
@@ -112,7 +112,7 @@ public class Vector2D {
    * @param x the x value to subtract
    * @param y the y value to subtract
    */
-  public void mutateSubtract(float x, float y){
+  public void mutateSubtract(float x, float y) {
     this.x -= x;
     this.y -= y;
   }
@@ -122,7 +122,7 @@ public class Vector2D {
    *
    * @param scalar the scalar to multiply this vector by
    */
-  public void mutateScalar(float scalar){
+  public void mutateScalar(float scalar) {
     this.x *= scalar;
     this.y *= scalar;
   }

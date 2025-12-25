@@ -180,8 +180,8 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
     }
 
     var font = DefaultFont.get();
-    var boundingBoxString = "(" + KEY_BOUNDING_BOX.getName() + ") Bounding Box";
-    var memoryString = getMemoryString();
+    final var boundingBoxString = "(" + KEY_BOUNDING_BOX.getName() + ") Bounding Box";
+    final var memoryString = getMemoryString();
 
     if (textDimensions == null) {
       textDimensions = font.getDimensionsForText(memoryString + "00");

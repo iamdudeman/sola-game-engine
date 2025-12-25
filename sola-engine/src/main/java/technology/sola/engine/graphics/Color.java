@@ -61,6 +61,12 @@ public class Color {
   public static final float ONE_DIV_255 = 1 / 255f;
   private static final Map<Integer, Color> COLOR_CACHE = new HashMap<>();
 
+  private final int alpha;
+  private final int r;
+  private final int g;
+  private final int b;
+  private final int hexInt;
+
   /**
    * Creates a color instance from a 4-byte integer. Order of bytes should be [alpha, red, green, blue]. This is backed
    * by an internal cache to reduce duplicate {@code Color} object creation.
@@ -96,12 +102,6 @@ public class Color {
   public static int calculateHexInt(int alpha, int r, int g, int b) {
     return ((0xff & alpha) << 24) | ((0xff & r) << 16) | ((0xff & g) << 8) | (0xff & b);
   }
-
-  private final int alpha;
-  private final int r;
-  private final int g;
-  private final int b;
-  private final int hexInt;
 
   /**
    * Creates a Color instance via rgb values. Alpha is set to 255. Values should be set to between 0 and 255 inclusive.
