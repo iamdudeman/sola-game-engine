@@ -12,7 +12,7 @@ import technology.sola.math.SolaMath;
 public class MultiplyBlendFunction implements BlendFunction {
   @Override
   public void set(int[] pixels, int pixelIndex, Color color) {
-    Color currentColor = new Color(pixels[pixelIndex]);
+    Color currentColor = Color.of(pixels[pixelIndex]);
 
     pixels[pixelIndex] = new Color(
       currentColor.getAlpha(),

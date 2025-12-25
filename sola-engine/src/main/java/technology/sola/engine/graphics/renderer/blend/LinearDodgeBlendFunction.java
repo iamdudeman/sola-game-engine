@@ -10,7 +10,7 @@ import technology.sola.engine.graphics.Color;
 public class LinearDodgeBlendFunction implements BlendFunction {
   @Override
   public void set(int[] pixels, int pixelIndex, Color color) {
-    Color currentColor = new Color(pixels[pixelIndex]);
+    Color currentColor = Color.of(pixels[pixelIndex]);
 
     pixels[pixelIndex] = new Color(
       Math.min(255, currentColor.getRed() + color.getRed()),

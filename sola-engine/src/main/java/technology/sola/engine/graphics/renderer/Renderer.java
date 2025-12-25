@@ -155,7 +155,7 @@ public interface Renderer {
    * @param color the new {@code Color}
    */
   default void setPixel(int x, int y, int color) {
-    setPixel(x, y, new Color(color));
+    setPixel(x, y, Color.of(color));
   }
 
   /**
