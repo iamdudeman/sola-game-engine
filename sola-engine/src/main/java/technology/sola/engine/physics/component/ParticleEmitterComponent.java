@@ -199,7 +199,7 @@ public class ParticleEmitterComponent implements Component {
     private final float size;
     private final float inverseMaxLifespan;
     private final Vector2D velocity;
-    private Vector2D position;
+    private final Vector2D position;
     private float remainingLifespan;
 
     private Particle(Color baseColor, float size, float maxLifespan, Vector2D position, Vector2D velocity) {
@@ -218,7 +218,7 @@ public class ParticleEmitterComponent implements Component {
      * @param delta the elapsed delta time
      */
     public void update(float delta) {
-      position = position.add(velocity.scalar(delta));
+      position.mutateAdd(velocity.scalar(delta));
       remainingLifespan -= delta;
     }
 
