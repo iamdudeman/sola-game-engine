@@ -5,7 +5,6 @@ import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
-import technology.sola.math.linear.Vector2D;
 
 /**
  * PhysicsSystem is an {@link EcsSystem} that handles updating {@link technology.sola.ecs.Entity} with a
@@ -32,13 +31,14 @@ public class PhysicsSystem extends EcsSystem {
       var velocity = dynamicBodyComponent.getVelocity();
 
       if (!dynamicBodyComponent.isKinematic()) {
-        Vector2D acceleration = new Vector2D(dynamicBodyComponent.getForceX(), dynamicBodyComponent.getForceY())
-          .scalar(dynamicBodyComponent.getMaterial().getInverseMass());
+        var modifier = dynamicBodyComponent.getMaterial().getInverseMass() * deltaTime;
+        float accelerationX = dynamicBodyComponent.getForceX() * modifier;
+        float accelerationY = dynamicBodyComponent.getForceY() * modifier;
 
         dynamicBodyComponent.setForceX(0);
         dynamicBodyComponent.setForceY(0);
 
-        velocity.mutateAdd(acceleration.scalar(deltaTime));
+        velocity.mutateAdd(accelerationX, accelerationY);
       }
 
       transformComponent.setTranslate(transformComponent.getTranslate().add(velocity.scalar(deltaTime)));

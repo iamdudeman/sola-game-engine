@@ -86,6 +86,17 @@ public class Vector2D {
   }
 
   /**
+   * Adds the desired x and y values to this vector.
+   *
+   * @param x the x value to add
+   * @param y the y value to add
+   */
+  public void mutateAdd(float x, float y){
+    this.x += x;
+    this.y += y;
+  }
+
+  /**
    * Subtracts the desired vector from this vector.
    *
    * @param vector2D the vector to subtract from this vector
@@ -93,6 +104,17 @@ public class Vector2D {
   public void mutateSubtract(Vector2D vector2D){
     this.x -= vector2D.x;
     this.y -= vector2D.y;
+  }
+
+  /**
+   * Subtracts the desired x and y values from this vector.
+   *
+   * @param x the x value to subtract
+   * @param y the y value to subtract
+   */
+  public void mutateSubtract(float x, float y){
+    this.x -= x;
+    this.y -= y;
   }
 
   /**
