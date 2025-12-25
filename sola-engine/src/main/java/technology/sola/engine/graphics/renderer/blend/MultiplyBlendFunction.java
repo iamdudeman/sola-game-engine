@@ -14,11 +14,11 @@ public class MultiplyBlendFunction implements BlendFunction {
   public void set(int[] pixels, int pixelIndex, Color color) {
     Color currentColor = Color.of(pixels[pixelIndex]);
 
-    pixels[pixelIndex] = new Color(
+    pixels[pixelIndex] = Color.calculateHexInt(
       currentColor.getAlpha(),
       SolaMath.fastRound(currentColor.getRed() * (color.getRed() * Color.ONE_DIV_255)),
       SolaMath.fastRound(currentColor.getGreen() * (color.getGreen() * Color.ONE_DIV_255)),
       SolaMath.fastRound(currentColor.getBlue() * (color.getBlue() * Color.ONE_DIV_255))
-    ).hexInt();
+    );
   }
 }

@@ -19,7 +19,7 @@ public class NormalBlendFunction implements BlendFunction {
       float green = currentColor.getGreen() * oneMinusAlpha + color.getGreen() * alphaMod;
       float blue = currentColor.getBlue() * oneMinusAlpha + color.getBlue() * alphaMod;
 
-      pixels[pixelIndex] = new Color((int) red, (int) green, (int) blue).hexInt();
+      pixels[pixelIndex] = Color.calculateHexInt((int) red, (int) green, (int) blue);
     } else {
       pixels[pixelIndex] = color.hexInt();
     }

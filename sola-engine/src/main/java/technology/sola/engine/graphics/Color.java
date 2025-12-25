@@ -72,6 +72,31 @@ public class Color {
     return COLOR_CACHE.computeIfAbsent(argb, Color::new);
   }
 
+  /**
+   * Calculates a hex int value for a color from its red, green, and blue values.
+   *
+   * @param r the red value
+   * @param g the green value
+   * @param b the blue value
+   * @return the hex int value
+   */
+  public static int calculateHexInt(int r, int g, int b) {
+    return calculateHexInt(255, r, g, b);
+  }
+
+  /**
+   * Calculates a hex int value for a color from its alpha, red, green, and blue values.
+   *
+   * @param alpha the alpha value
+   * @param r the red value
+   * @param g the green value
+   * @param b the blue value
+   * @return the hex int value
+   */
+  public static int calculateHexInt(int alpha, int r, int g, int b) {
+    return ((0xff & alpha) << 24) | ((0xff & r) << 16) | ((0xff & g) << 8) | (0xff & b);
+  }
+
   private final int alpha;
   private final int r;
   private final int g;
@@ -225,9 +250,5 @@ public class Color {
   @Override
   public String toString() {
     return String.format("rgba(%s, %s, %s, %s)", r, g, b, alpha);
-  }
-
-  private static int calculateHexInt(int alpha, int r, int g, int b) {
-    return ((0xff & alpha) << 24) | ((0xff & r) << 16) | ((0xff & g) << 8) | (0xff & b);
   }
 }
