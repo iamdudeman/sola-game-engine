@@ -102,7 +102,7 @@ public class Color {
     this.r = r;
     this.g = g;
     this.b = b;
-    this.hexInt = ((0xff & alpha) << 24) | ((0xff & r) << 16) | ((0xff & g) << 8) | (0xff & b);
+    this.hexInt = calculateHexInt(alpha, r, g, b);
   }
 
   /**
@@ -154,7 +154,7 @@ public class Color {
   }
 
   /**
-   * @return true if alpha value is not 255
+   * @return true if the alpha value is not 255
    */
   public boolean hasAlpha() {
     return alpha != 255;
@@ -225,5 +225,9 @@ public class Color {
   @Override
   public String toString() {
     return String.format("rgba(%s, %s, %s, %s)", r, g, b, alpha);
+  }
+
+  private static int calculateHexInt(int alpha, int r, int g, int b) {
+    return ((0xff & alpha) << 24) | ((0xff & r) << 16) | ((0xff & g) << 8) | (0xff & b);
   }
 }
