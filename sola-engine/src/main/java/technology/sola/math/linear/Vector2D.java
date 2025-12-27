@@ -9,7 +9,6 @@ import java.util.Objects;
  */
 @NullMarked
 public class Vector2D {
-  private static final Vector2D ZERO_VECTOR = new Vector2D(0, 0);
   private float x;
   private float y;
 
@@ -27,7 +26,7 @@ public class Vector2D {
    * @return A {@link Vector2D} with 0 for the x and y.
    */
   public static Vector2D zeroVector() {
-    return ZERO_VECTOR;
+    return new Vector2D(0, 0);
   }
 
 
@@ -202,10 +201,8 @@ public class Vector2D {
    * @return the normalized vector as a new object
    */
   public Vector2D normalize() {
-    var zeroVector = zeroVector();
-
-    if (this.equals(zeroVector)) {
-      return zeroVector;
+    if (Float.compare(x, 0f) == 0 && Float.compare(y, 0f) == 0) {
+      return zeroVector();
     }
 
     return this.scalar(1 / this.magnitude());
