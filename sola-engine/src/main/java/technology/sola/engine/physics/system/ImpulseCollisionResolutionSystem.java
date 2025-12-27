@@ -16,6 +16,7 @@ import technology.sola.math.linear.Vector2D;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * ImpulseCollisionResolutionSystem is an {@link EcsSystem} that responds to {@link CollisionEvent}s applying an
@@ -63,7 +64,7 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
    *
    * @param eventHub                   the {@link EventHub} instance
    * @param iterations                 number of impulse resolution calculation iterations, larger is more accurate (1-20 is recommended)
-   * @param penetrationSlack           smaller number is more accurate but causes more jittering (0.01-0.1 recommended)
+   * @param penetrationSlack           a smaller number is more accurate but causes more jittering (0.01-0.1 recommended)
    * @param linearProjectionPercentage how much positional correction to apply, small value allows objects to penetrate more with less jittering (0.2-0.8 recommended)
    */
   public ImpulseCollisionResolutionSystem(EventHub eventHub, int iterations, float penetrationSlack, float linearProjectionPercentage) {
@@ -79,10 +80,22 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
   @Override
   public void update(World world, float deltaTime) {
     var collisionManifolds = this.collisionManifolds;
+    List<CollisionManifoldWithEntityData> collisionManifoldsWithEntityData = new ArrayList<>(collisionManifolds.size());
 
-    applyImpulse(collisionManifolds);
+    for (CollisionManifold collisionManifold : collisionManifolds) {
+      var entityA = collisionManifold.entityA();
+      var dataA = new CollisionResolutionEntityData(entityA);
+      var entityB = collisionManifold.entityB();
+      var dataB = new CollisionResolutionEntityData(entityB);
 
-    adjustForSinking(collisionManifolds);
+      collisionManifoldsWithEntityData.add(new CollisionManifoldWithEntityData(
+        dataA, dataB, collisionManifold.normal(), collisionManifold.penetration()
+      ));
+    }
+
+    applyImpulse(collisionManifoldsWithEntityData);
+
+    adjustForSinking(collisionManifoldsWithEntityData);
 
     collisionManifolds.clear();
   }
@@ -98,13 +111,13 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
     }
   }
 
-  private void applyImpulse(List<CollisionManifold> collisionManifolds) {
+  private void applyImpulse(List<CollisionManifoldWithEntityData> collisionManifoldWithEntityDataList) {
     var iterations = this.iterations;
 
     for (int i = 0; i < iterations; i++) {
-      for (CollisionManifold collisionManifold : collisionManifolds) {
-        CollisionResolutionEntityData entityA = new CollisionResolutionEntityData(collisionManifold.entityA());
-        CollisionResolutionEntityData entityB = new CollisionResolutionEntityData(collisionManifold.entityB());
+      for (var collisionManifold : collisionManifoldWithEntityDataList) {
+        CollisionResolutionEntityData entityA = collisionManifold.entityA();
+        CollisionResolutionEntityData entityB = collisionManifold.entityB();
 
         final float inverseMassSum = entityA.inverseMass + entityB.inverseMass;
 
@@ -148,33 +161,35 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
     }
   }
 
-  private void applyImpulseToCollisionEntities(CollisionResolutionEntityData entityA, CollisionResolutionEntityData entityB, Vector2D impulse) {
+  private void applyImpulseToCollisionEntities(
+    CollisionResolutionEntityData entityA,
+    CollisionResolutionEntityData entityB,
+    Vector2D impulse
+  ) {
     DynamicBodyComponent dynamicBodyComponentA = entityA.dynamicBodyComponent;
 
     if (dynamicBodyComponentA != null) {
       Vector2D currentVelocity = dynamicBodyComponentA.getVelocity();
-      Vector2D newVelocity = currentVelocity.subtract(impulse.scalar(entityA.inverseMass));
 
-      dynamicBodyComponentA.setVelocity(newVelocity);
+      currentVelocity.mutateSubtract(impulse.scalar(entityA.inverseMass));
     }
 
     DynamicBodyComponent dynamicBodyComponentB = entityB.dynamicBodyComponent;
 
     if (dynamicBodyComponentB != null) {
       Vector2D currentVelocity = dynamicBodyComponentB.getVelocity();
-      Vector2D newVelocity = currentVelocity.add(impulse.scalar(entityB.inverseMass));
 
-      dynamicBodyComponentB.setVelocity(newVelocity);
+      currentVelocity.mutateAdd(impulse.scalar(entityB.inverseMass));
     }
   }
 
-  private void adjustForSinking(List<CollisionManifold> collisionManifolds) {
+  private void adjustForSinking(List<CollisionManifoldWithEntityData> collisionManifoldWithEntityDataList) {
     var penetrationSlack = this.penetrationSlack;
     var linearProjectionPercentage = this.linearProjectionPercentage;
 
-    for (CollisionManifold collisionManifold : collisionManifolds) {
-      CollisionResolutionEntityData entityA = new CollisionResolutionEntityData(collisionManifold.entityA());
-      CollisionResolutionEntityData entityB = new CollisionResolutionEntityData(collisionManifold.entityB());
+    for (var collisionManifold : collisionManifoldWithEntityDataList) {
+      CollisionResolutionEntityData entityA = collisionManifold.entityA();
+      CollisionResolutionEntityData entityB = collisionManifold.entityB();
 
       float inverseMassA = entityA.inverseMass;
       float inverseMassB = entityB.inverseMass;
@@ -209,7 +224,7 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
     private final float friction;
 
     CollisionResolutionEntityData(Entity entity) {
-      transformComponent = entity.getComponent(TransformComponent.class);
+      transformComponent = Objects.requireNonNull(entity.getComponent(TransformComponent.class));
       dynamicBodyComponent = entity.getComponent(DynamicBodyComponent.class);
 
       Material material = dynamicBodyComponent == null ? NULL_MATERIAL : dynamicBodyComponent.getMaterial();
@@ -219,5 +234,13 @@ public class ImpulseCollisionResolutionSystem extends EcsSystem {
       restitution = material.getRestitution();
       friction = material.getFriction();
     }
+  }
+
+  private record CollisionManifoldWithEntityData(
+    CollisionResolutionEntityData entityA,
+    CollisionResolutionEntityData entityB,
+    Vector2D normal,
+    float penetration
+  ) {
   }
 }
