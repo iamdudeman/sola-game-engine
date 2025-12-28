@@ -99,24 +99,20 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
   @Override
   public void setPixel(int x, int y, Color color) {
-    int[] pixels = this.pixels;
-    BlendFunction blendFunction = this.blendFunction;
-
     if (x >= clampX && x < clampMaxX && y >= clampY && y < clampMaxY) {
       int pixelIndex = x + y * width;
 
-      blendFunction.set(pixels, pixelIndex, color);
+      this.blendFunction.set(this.pixels, pixelIndex, color);
     }
   }
 
   @Override
   public void drawLine(float x1, float y1, float x2, float y2, Color color) {
-    int xInt = SolaMath.fastRound(x1);
-    int yInt = SolaMath.fastRound(y1);
-    int x2Int = SolaMath.fastRound(x2);
-    int y2Int = SolaMath.fastRound(y2);
-
-    drawLineInt(xInt, yInt, x2Int, y2Int, color);
+    drawLineInt(
+      SolaMath.fastRound(x1), SolaMath.fastRound(y1),
+      SolaMath.fastRound(x2), SolaMath.fastRound(y2),
+      color
+    );
   }
 
   @Override
