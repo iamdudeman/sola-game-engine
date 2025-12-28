@@ -163,21 +163,17 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int)" class="member-name-link">Color</a><wbr>(int&nbsp;argb)</code></div>
-<div class="col-last even-row-color">
-<div class="block">Creates a color instance from a 4 byte integer.</div>
-</div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(int,int,int)" class="member-name-link">Color</a><wbr>(int&nbsp;r,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int,int)" class="member-name-link">Color</a><wbr>(int&nbsp;r,
  int&nbsp;g,
  int&nbsp;b)</code></div>
-<div class="col-last odd-row-color">
+<div class="col-last even-row-color">
 <div class="block">Creates a Color instance via rgb values.</div>
 </div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int,int,int)" class="member-name-link">Color</a><wbr>(int&nbsp;alpha,
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(int,int,int,int)" class="member-name-link">Color</a><wbr>(int&nbsp;alpha,
  int&nbsp;r,
  int&nbsp;g,
  int&nbsp;b)</code></div>
-<div class="col-last even-row-color">
+<div class="col-last odd-row-color">
 <div class="block">Creates a Color instance via argb values.</div>
 </div>
 </div>
@@ -188,12 +184,27 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#calculateHexInt(int,int,int)" class="member-name-link">calculateHexInt</a><wbr>(int&nbsp;r,
+ int&nbsp;g,
+ int&nbsp;b)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Calculates a hex int value for a color from its red, green, and blue values.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#calculateHexInt(int,int,int,int)" class="member-name-link">calculateHexInt</a><wbr>(int&nbsp;alpha,
+ int&nbsp;r,
+ int&nbsp;g,
+ int&nbsp;b)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Calculates a hex int value for a color from its alpha, red, green, and blue values.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;other)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -223,22 +234,27 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hexInt()" class="member-name-link">hexInt</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#shade(float)" class="member-name-link">shade</a><wbr>(float&nbsp;shadeFactor)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(int)" class="member-name-link">of</a><wbr>(int&nbsp;argb)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Creates a color instance from a 4-byte integer.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#shade(float)" class="member-name-link">shade</a><wbr>(float&nbsp;shadeFactor)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a new Color that is a shade of this Color.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#tint(float)" class="member-name-link">tint</a><wbr>(float&nbsp;tintFactor)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#tint(float)" class="member-name-link">tint</a><wbr>(float&nbsp;tintFactor)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a new Color that is a tint of this Color.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateAlpha(int)" class="member-name-link">updateAlpha</a><wbr>(int&nbsp;alpha)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Color.html" title="class in technology.sola.engine.graphics">Color</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateAlpha(int)" class="member-name-link">updateAlpha</a><wbr>(int&nbsp;alpha)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a new <a href="Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> with updated alpha.</div>
 </div>
 </div>
@@ -390,17 +406,6 @@ loadScripts(document, 'script');</script>
 </dl>
 </section>
 </li>
-<li>
-<section class="detail" id="&lt;init&gt;(int)">
-<h3>Color</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Color</span><wbr><span class="parameters">(int&nbsp;argb)</span></div>
-<div class="block">Creates a color instance from a 4 byte integer. Order of bytes should be [alpha, red, green, blue].</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>argb</code> - the 4 byte integer</dd>
-</dl>
-</section>
-</li>
 </ul>
 </section>
 </li>
@@ -410,12 +415,62 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="of(int)">
+<h3>of</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Color.html" title="class in technology.sola.engine.graphics">Color</a></span>&nbsp;<span class="element-name">of</span><wbr><span class="parameters">(int&nbsp;argb)</span></div>
+<div class="block">Creates a color instance from a 4-byte integer. Order of bytes should be [alpha, red, green, blue]. This is backed
+ by an internal cache to reduce duplicate <code>Color</code> object creation.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>argb</code> - the 4-byte integer</dd>
+<dt>Returns:</dt>
+<dd>a color instance</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="calculateHexInt(int,int,int)">
+<h3>calculateHexInt</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">calculateHexInt</span><wbr><span class="parameters">(int&nbsp;r,
+ int&nbsp;g,
+ int&nbsp;b)</span></div>
+<div class="block">Calculates a hex int value for a color from its red, green, and blue values.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>r</code> - the red value</dd>
+<dd><code>g</code> - the green value</dd>
+<dd><code>b</code> - the blue value</dd>
+<dt>Returns:</dt>
+<dd>the hex int value</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="calculateHexInt(int,int,int,int)">
+<h3>calculateHexInt</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">calculateHexInt</span><wbr><span class="parameters">(int&nbsp;alpha,
+ int&nbsp;r,
+ int&nbsp;g,
+ int&nbsp;b)</span></div>
+<div class="block">Calculates a hex int value for a color from its alpha, red, green, and blue values.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>alpha</code> - the alpha value</dd>
+<dd><code>r</code> - the red value</dd>
+<dd><code>g</code> - the green value</dd>
+<dd><code>b</code> - the blue value</dd>
+<dt>Returns:</dt>
+<dd>the hex int value</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="hexInt()">
 <h3>hexInt</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hexInt</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the color has a 4 byte hex integer</dd>
+<dd>the color has a 4-byte hex integer</dd>
 </dl>
 </section>
 </li>
@@ -465,7 +520,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasAlpha</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>true if alpha value is not 255</dd>
+<dd>true if the alpha value is not 255</dd>
 </dl>
 </section>
 </li>
