@@ -114,25 +114,11 @@ public class QuadTreeNode {
    * @return the list of collidable entities in the area
    */
   public List<View2Entry<ColliderComponent, TransformComponent>> query(Rectangle area) {
-    List<View2Entry<ColliderComponent, TransformComponent>> result = new ArrayList<>();
+    List<View2Entry<ColliderComponent, TransformComponent>> results = new ArrayList<>();
 
-    if (!area.intersects(nodeBounds)) {
-      return result;
-    }
+    recursiveQuery(results, area);
 
-    if (isLeaf()) {
-      for (QuadTreeData content : contents) {
-        if (content.entityBoundingRectangle.intersects(area)) {
-          result.add(content.entityView);
-        }
-      }
-    } else {
-      for (QuadTreeNode child : children) {
-        result.addAll(child.query(area));
-      }
-    }
-
-    return result;
+    return results;
   }
 
   /**
@@ -158,6 +144,24 @@ public class QuadTreeNode {
 
   private boolean isLeaf() {
     return children.isEmpty();
+  }
+
+  private void recursiveQuery(List<View2Entry<ColliderComponent, TransformComponent>> results, Rectangle area) {
+    if (!area.intersects(nodeBounds)) {
+      return;
+    }
+
+    if (isLeaf()) {
+      for (QuadTreeData content : contents) {
+        if (content.entityBoundingRectangle.intersects(area)) {
+          results.add(content.entityView);
+        }
+      }
+    } else {
+      for (QuadTreeNode child : children) {
+        child.recursiveQuery(results, area);
+      }
+    }
   }
 
   private int entityCount() {
