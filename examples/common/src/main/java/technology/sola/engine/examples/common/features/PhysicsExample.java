@@ -76,7 +76,7 @@ public class PhysicsExample extends Sola {
   @Override
   protected void onInit() {
     if (platform().getIdentifier() == SolaPlatformIdentifier.ANDROID) {
-      objectCount = 750;
+      objectCount = 1000;
     }
 
     SolaPhysics solaPhysics = new SolaPhysics.Builder(solaEcs)
@@ -128,27 +128,35 @@ public class PhysicsExample extends Sola {
       new ButtonGuiElement()
         .setOnAction(() -> ExampleUtils.returnToLauncher(platform(), eventHub))
         .addStyle(ConditionalStyle.always(new BaseStyles.Builder<>().setPadding(5).build()))
-        .appendChildren(new TextGuiElement().setText("Back")),
-      new ButtonGuiElement()
-        .setOnAction(() -> {
-          resetRandom(randomSeedInput.getValue());
-          solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
-            new QuadTreeCollisionDetectionBroadPhase()
-          );
-          solaEcs.setWorld(buildQuadTreeOptimizedWorld());
-        })
-        .addStyle(ConditionalStyle.always(new BaseStyles.Builder<>().setPadding(5).build()))
-        .appendChildren(new TextGuiElement().setText("QuadTree")),
-      new ButtonGuiElement()
-        .setOnAction(() -> {
-          resetRandom(randomSeedInput.getValue());
-          solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
-            new SpatialHashMapCollisionDetectionBroadPhase()
-          );
-          solaEcs.setWorld(buildSpatialHashMapOptimizedWorld());
-        })
-        .addStyle(ConditionalStyle.always(new BaseStyles.Builder<>().setPadding(5).build()))
-        .appendChildren(new TextGuiElement().setText("SpatialHashMap")),
+        .appendChildren(new TextGuiElement().setText("Back"))
+    );
+
+    if (platform().getIdentifier() != SolaPlatformIdentifier.ANDROID) {
+      sectionGuiElement.appendChildren(
+        new ButtonGuiElement()
+          .setOnAction(() -> {
+            resetRandom(randomSeedInput.getValue());
+            solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
+              new QuadTreeCollisionDetectionBroadPhase()
+            );
+            solaEcs.setWorld(buildQuadTreeOptimizedWorld());
+          })
+          .addStyle(ConditionalStyle.always(new BaseStyles.Builder<>().setPadding(5).build()))
+          .appendChildren(new TextGuiElement().setText("QuadTree")),
+        new ButtonGuiElement()
+          .setOnAction(() -> {
+            resetRandom(randomSeedInput.getValue());
+            solaPhysics.getCollisionDetectionSystem().setCollisionDetectionBroadPhase(
+              new SpatialHashMapCollisionDetectionBroadPhase()
+            );
+            solaEcs.setWorld(buildSpatialHashMapOptimizedWorld());
+          })
+          .addStyle(ConditionalStyle.always(new BaseStyles.Builder<>().setPadding(5).build()))
+          .appendChildren(new TextGuiElement().setText("SpatialHashMap"))
+      );
+    }
+
+    sectionGuiElement.appendChildren(
       new ButtonGuiElement()
         .setOnAction(() -> {
           randomSeedInput.setValue("" + new Random().nextLong());
