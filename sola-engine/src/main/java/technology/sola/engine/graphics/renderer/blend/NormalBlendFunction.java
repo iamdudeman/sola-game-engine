@@ -11,7 +11,7 @@ public class NormalBlendFunction implements BlendFunction {
   @Override
   public void set(int[] pixels, int pixelIndex, Color color) {
     if (color.hasAlpha()) {
-      Color currentColor = new Color(pixels[pixelIndex]);
+      Color currentColor = Color.of(pixels[pixelIndex]);
       float alphaMod = color.getAlpha() * Color.ONE_DIV_255;
       float oneMinusAlpha = 1 - alphaMod;
 
@@ -19,7 +19,7 @@ public class NormalBlendFunction implements BlendFunction {
       float green = currentColor.getGreen() * oneMinusAlpha + color.getGreen() * alphaMod;
       float blue = currentColor.getBlue() * oneMinusAlpha + color.getBlue() * alphaMod;
 
-      pixels[pixelIndex] = new Color((int) red, (int) green, (int) blue).hexInt();
+      pixels[pixelIndex] = Color.calculateHexInt((int) red, (int) green, (int) blue);
     } else {
       pixels[pixelIndex] = color.hexInt();
     }

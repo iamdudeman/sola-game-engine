@@ -2,6 +2,8 @@ package technology.sola.engine.graphics;
 
 import org.jspecify.annotations.NullMarked;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -57,12 +59,49 @@ public class Color {
    * Constant used to normalize ARGB values to between 0 and 1.
    */
   public static final float ONE_DIV_255 = 1 / 255f;
+  private static final Map<Integer, Color> COLOR_CACHE = new HashMap<>();
 
   private final int alpha;
   private final int r;
   private final int g;
   private final int b;
   private final int hexInt;
+
+  /**
+   * Creates a color instance from a 4-byte integer. Order of bytes should be [alpha, red, green, blue]. This is backed
+   * by an internal cache to reduce duplicate {@code Color} object creation.
+   *
+   * @param argb the 4-byte integer
+   * @return a color instance
+   */
+  public static Color of(int argb) {
+    return COLOR_CACHE.computeIfAbsent(argb, Color::new);
+  }
+
+  /**
+   * Calculates a hex int value for a color from its red, green, and blue values.
+   *
+   * @param r the red value
+   * @param g the green value
+   * @param b the blue value
+   * @return the hex int value
+   */
+  public static int calculateHexInt(int r, int g, int b) {
+    return calculateHexInt(255, r, g, b);
+  }
+
+  /**
+   * Calculates a hex int value for a color from its alpha, red, green, and blue values.
+   *
+   * @param alpha the alpha value
+   * @param r the red value
+   * @param g the green value
+   * @param b the blue value
+   * @return the hex int value
+   */
+  public static int calculateHexInt(int alpha, int r, int g, int b) {
+    return ((0xff & alpha) << 24) | ((0xff & r) << 16) | ((0xff & g) << 8) | (0xff & b);
+  }
 
   /**
    * Creates a Color instance via rgb values. Alpha is set to 255. Values should be set to between 0 and 255 inclusive.
@@ -88,15 +127,15 @@ public class Color {
     this.r = r;
     this.g = g;
     this.b = b;
-    this.hexInt = ((0xff & alpha) << 24) | ((0xff & r) << 16) | ((0xff & g) << 8) | (0xff & b);
+    this.hexInt = calculateHexInt(alpha, r, g, b);
   }
 
   /**
-   * Creates a color instance from a 4 byte integer. Order of bytes should be [alpha, red, green, blue].
+   * Creates a color instance from a 4-byte integer. Order of bytes should be [alpha, red, green, blue].
    *
-   * @param argb the 4 byte integer
+   * @param argb the 4-byte integer
    */
-  public Color(int argb) {
+  private Color(int argb) {
     alpha = (argb >> 24) & 0xFF;
     r = (argb >> 16) & 0xFF;
     g = (argb >> 8) & 0xFF;
@@ -105,7 +144,7 @@ public class Color {
   }
 
   /**
-   * @return the color has a 4 byte hex integer
+   * @return the color has a 4-byte hex integer
    */
   public int hexInt() {
     return hexInt;
@@ -140,7 +179,7 @@ public class Color {
   }
 
   /**
-   * @return true if alpha value is not 255
+   * @return true if the alpha value is not 255
    */
   public boolean hasAlpha() {
     return alpha != 255;

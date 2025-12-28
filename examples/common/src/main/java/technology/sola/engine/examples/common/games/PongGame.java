@@ -167,7 +167,7 @@ public class PongGame extends Sola {
       } else if (isDown) {
         dynamicBodyComponent.setVelocity(new Vector2D(0, PADDLE_SPEED));
       } else {
-        dynamicBodyComponent.setVelocity(Vector2D.ZERO_VECTOR);
+        dynamicBodyComponent.setVelocity(Vector2D.zeroVector());
       }
     }
   }
@@ -209,7 +209,7 @@ public class PongGame extends Sola {
       } else if (goDown && transformComponent.getY() < configuration.rendererHeight() - (BALL_SIZE * 6 + BALL_SIZE * 2 - 1)) {
         dynamicBodyComponent.setVelocity(new Vector2D(0, PADDLE_SPEED));
       } else {
-        dynamicBodyComponent.setVelocity(Vector2D.ZERO_VECTOR);
+        dynamicBodyComponent.setVelocity(Vector2D.zeroVector());
       }
 
       if (ballTransform.getY() > configuration.rendererHeight() + 100 || ballTransform.getY() < -100) {

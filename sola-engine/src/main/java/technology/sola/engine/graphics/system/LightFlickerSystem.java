@@ -12,8 +12,8 @@ import technology.sola.engine.graphics.components.LightComponent;
 public class LightFlickerSystem extends EcsSystem {
   @Override
   public void update(World world, float deltaTime) {
-    world.createView().of(LightComponent.class)
-      .getEntries()
-      .forEach(entry -> entry.c1().tickFlicker(deltaTime));
+    for (var entry : world.createView().of(LightComponent.class).getEntries()) {
+      entry.c1().tickFlicker(deltaTime);
+    }
   }
 }
