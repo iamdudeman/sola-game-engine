@@ -234,7 +234,8 @@ public class LightingExample extends Sola {
     fireParticleEmitterComponent.setParticleColor(new Color(230, 40, 45));
     fireParticleEmitterComponent.setParticleSizeBounds(1, 3);
     fireParticleEmitterComponent.setParticleLife(1);
-    fireParticleEmitterComponent.setParticleVelocityBounds(new Vector2D(-1.2f, -3f), new Vector2D(1.2f, 0));
+    fireParticleEmitterComponent
+      .movement().setVelocityBounds(new Vector2D(-1.2f, -3f), new Vector2D(1.2f, 0));
     fireParticleEmitterComponent.setParticleEmissionDelay(0.1f);
     fireParticleEmitterComponent.setParticlesPerEmit(2);
 

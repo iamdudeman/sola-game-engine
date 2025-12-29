@@ -213,7 +213,7 @@ public class SimplePlatformerGame extends Sola {
     ParticleEmitterComponent particleEmitterComponent = new ParticleEmitterComponent();
 
     particleEmitterComponent.setParticleColor(Color.YELLOW);
-    particleEmitterComponent.setParticleVelocityBounds(new Vector2D(-100, -100), new Vector2D(100, 100));
+    particleEmitterComponent.movement().setVelocityBounds(new Vector2D(-100, -100), new Vector2D(100, 100));
     particleEmitterComponent.setParticlesPerEmit(5);
     particleEmitterComponent.setParticleSizeBounds(4f, 8f);
 

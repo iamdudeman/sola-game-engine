@@ -17,11 +17,10 @@ import java.util.List;
 @NullMarked
 public class ParticleEmitterComponent implements Component {
   private final List<Particle> particleList = new ArrayList<>();
+  private final ParticleMovement movement = new ParticleMovement(this);
   private Color particleColor = Color.WHITE;
   private float particleMinLife = 1f;
   private float particleMaxLife = 2f;
-  private Vector2D particleMinVelocity = new Vector2D(-50, -100);
-  private Vector2D particleMaxVelocity = new Vector2D(50, -0.1f);
   private float particleMinSize = 8f;
   private float particleMaxSize = 8f;
   private int particlesPerEmit = 1;
@@ -54,8 +53,8 @@ public class ParticleEmitterComponent implements Component {
     timeSinceLastEmission += delta;
 
     if (timeSinceLastEmission > particleEmissionDelay) {
-      Vector2D minVel = particleMinVelocity;
-      Vector2D maxVel = particleMaxVelocity;
+      Vector2D minVel = movement.minVelocity();
+      Vector2D maxVel = movement.maxVelocity();
 
       for (int i = 0; i < particlesPerEmit; i++) {
         float xVel = SolaRandom.nextFloat(minVel.x(), maxVel.x());
@@ -79,6 +78,10 @@ public class ParticleEmitterComponent implements Component {
    */
   public Iterator<Particle> emittedParticleIterator() {
     return particleList.iterator();
+  }
+
+  public ParticleMovement movement() {
+    return movement;
   }
 
   /**
@@ -139,32 +142,6 @@ public class ParticleEmitterComponent implements Component {
    */
   public ParticleEmitterComponent setParticleLife(float life) {
     return setParticleLifeBounds(life, life);
-  }
-
-  /**
-   * Updates the minimum and maximum velocities for newly emitted {@link Particle}s.
-   *
-   * @param particleMinVelocity the minimum velocity for new particles
-   * @param particleMaxVelocity the maximum velocity for new particles
-   * @return this
-   */
-  public ParticleEmitterComponent setParticleVelocityBounds(Vector2D particleMinVelocity, Vector2D particleMaxVelocity) {
-    this.particleMinVelocity = particleMinVelocity;
-    this.particleMaxVelocity = particleMaxVelocity;
-
-    return this;
-  }
-
-  /**
-   * Updates the velocity for newly emitted {@link Particle}s to be a fixed value.
-   *
-   * @param velocity the velocity for new particles
-   * @return this
-   */
-  public ParticleEmitterComponent setParticleVelocity(Vector2D velocity) {
-    setParticleVelocityBounds(velocity, velocity);
-
-    return this;
   }
 
   /**
