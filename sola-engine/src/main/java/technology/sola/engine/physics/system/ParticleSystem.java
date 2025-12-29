@@ -4,7 +4,7 @@ import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.physics.component.ParticleEmitterComponent;
+import technology.sola.engine.physics.component.particle.ParticleEmitterComponent;
 
 /**
  * ParticleSystem is an {@link EcsSystem} that handles updating {@link technology.sola.ecs.Entity} with a
