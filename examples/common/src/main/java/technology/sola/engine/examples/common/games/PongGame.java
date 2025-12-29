@@ -33,6 +33,8 @@ import technology.sola.math.linear.Vector2D;
 public class PongGame extends Sola {
   private static final int PADDLE_SPEED = 200;
   private static final float BALL_SIZE = 10;
+  private static final float PADDLE_WIDTH = BALL_SIZE;
+  private static final float PADDLE_HEIGHT = BALL_SIZE * 6;
   private static final float INITIAL_BALL_SPEED = 100;
   private static final float SPEED_INCREASE = 1.1f;
   private int playerScore = 0;
@@ -148,7 +150,7 @@ public class PongGame extends Sola {
           }
         }
       }
-      if (transformComponent.getY() < configuration.rendererHeight() - (BALL_SIZE * 6)) {
+      if (transformComponent.getY() < configuration.rendererHeight() - (PADDLE_HEIGHT)) {
         if ((keyboardInput.isKeyHeld(Key.S) || keyboardInput.isKeyPressed(Key.S))) {
           isDown = true;
         }
@@ -196,17 +198,19 @@ public class PongGame extends Sola {
           goUp = true;
         }
       } else {
-        if (transformComponent.getY() - ballTransform.getY() > BALL_SIZE * 2) {
+        float halfHeight = PADDLE_HEIGHT * 0.5f;
+
+        if ((transformComponent.getY() + halfHeight) - ballTransform.getY() > BALL_SIZE * 2) {
           goUp = true;
         }
-        if (ballTransform.getY() - transformComponent.getY() > BALL_SIZE * 2) {
+        if (ballTransform.getY() - (transformComponent.getY() + halfHeight) > BALL_SIZE * 2) {
           goDown = true;
         }
       }
 
       if (goUp && transformComponent.getY() > BALL_SIZE * 2 - 1) {
         dynamicBodyComponent.setVelocity(new Vector2D(0, -PADDLE_SPEED));
-      } else if (goDown && transformComponent.getY() < configuration.rendererHeight() - (BALL_SIZE * 6 + BALL_SIZE * 2 - 1)) {
+      } else if (goDown && transformComponent.getY() < configuration.rendererHeight() - (PADDLE_HEIGHT + BALL_SIZE * 2 - 1)) {
         dynamicBodyComponent.setVelocity(new Vector2D(0, PADDLE_SPEED));
       } else {
         dynamicBodyComponent.setVelocity(Vector2D.zeroVector());
@@ -242,14 +246,14 @@ public class PongGame extends Sola {
     ).setName("ball");
 
     world.createEntity(
-      new TransformComponent(5, configuration.rendererHeight() / 2f - BALL_SIZE / 2f, BALL_SIZE, BALL_SIZE * 6),
+      new TransformComponent(5, configuration.rendererHeight() / 2f - BALL_SIZE / 2f, PADDLE_WIDTH, PADDLE_HEIGHT),
       new DynamicBodyComponent(paddleMaterial, true),
       new RectangleRendererComponent(Color.WHITE, true),
       new ColliderComponent(new ColliderShapeAABB())
     ).setName("player");
 
     world.createEntity(
-      new TransformComponent(configuration.rendererWidth() - BALL_SIZE - 5, configuration.rendererHeight() / 2f - BALL_SIZE / 2f, BALL_SIZE, BALL_SIZE * 6),
+      new TransformComponent(configuration.rendererWidth() - BALL_SIZE - 5, configuration.rendererHeight() / 2f - BALL_SIZE / 2f, PADDLE_WIDTH, PADDLE_HEIGHT),
       new RectangleRendererComponent(Color.WHITE, true),
       new DynamicBodyComponent(paddleMaterial, true),
       new ColliderComponent(new ColliderShapeAABB())
