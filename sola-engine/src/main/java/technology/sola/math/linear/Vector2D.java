@@ -2,18 +2,15 @@ package technology.sola.math.linear;
 
 import org.jspecify.annotations.NullMarked;
 
+import java.util.Objects;
+
 /**
  * The Vector2D class is an implementation of a linear algebra vector.
- *
- * @param x the x coordinate
- * @param y the y coordinate
  */
 @NullMarked
-public record Vector2D(float x, float y) {
-  /**
-   * A {@link Vector2D} with 0 for the x and y.
-   */
-  public static final Vector2D ZERO_VECTOR = new Vector2D(0, 0);
+public class Vector2D {
+  private float x;
+  private float y;
 
   /**
    * Creates a vector from a heading angle.
@@ -23,6 +20,13 @@ public record Vector2D(float x, float y) {
    */
   public static Vector2D headingVectorFromAngle(double angle) {
     return new Vector2D((float) Math.cos(angle), (float) Math.sin(angle));
+  }
+
+  /**
+   * @return A {@link Vector2D} with 0 for the x and y.
+   */
+  public static Vector2D zeroVector() {
+    return new Vector2D(0, 0);
   }
 
 
@@ -39,9 +43,93 @@ public record Vector2D(float x, float y) {
   }
 
   /**
+   * @return the x coordinate
+   */
+  public float x() {
+    return x;
+  }
+
+  /**
+   * @return the y coordinate
+   */
+  public float y() {
+    return y;
+  }
+
+  /**
+   * Sets the x coordinate of this vector.
+   *
+   * @param x the new x coordinate
+   */
+  public void mutateX(float x) {
+    this.x = x;
+  }
+
+  /**
+   * Sets the y coordinate of this vector.
+   *
+   * @param y the new y coordinate
+   */
+  public void mutateY(float y) {
+    this.y = y;
+  }
+
+  /**
+   * Adds the desired vector to this vector.
+   *
+   * @param vector2D the vector to add to this vector
+   */
+  public void mutateAdd(Vector2D vector2D) {
+    this.x += vector2D.x;
+    this.y += vector2D.y;
+  }
+
+  /**
+   * Adds the desired x and y values to this vector.
+   *
+   * @param x the x value to add
+   * @param y the y value to add
+   */
+  public void mutateAdd(float x, float y) {
+    this.x += x;
+    this.y += y;
+  }
+
+  /**
+   * Subtracts the desired vector from this vector.
+   *
+   * @param vector2D the vector to subtract from this vector
+   */
+  public void mutateSubtract(Vector2D vector2D) {
+    this.x -= vector2D.x;
+    this.y -= vector2D.y;
+  }
+
+  /**
+   * Subtracts the desired x and y values from this vector.
+   *
+   * @param x the x value to subtract
+   * @param y the y value to subtract
+   */
+  public void mutateSubtract(float x, float y) {
+    this.x -= x;
+    this.y -= y;
+  }
+
+  /**
+   * Multiplies this vector by the desired scalar.
+   *
+   * @param scalar the scalar to multiply this vector by
+   */
+  public void mutateScalar(float scalar) {
+    this.x *= scalar;
+    this.y *= scalar;
+  }
+
+  /**
    * Calculates the sum of two vectors and returns the sum as a new vector object.
    *
-   * @param vector2D the vector to add to this vector, not null
+   * @param vector2D the vector to add to this vector
    * @return a new vector with the result of this + vector2D
    */
   public Vector2D add(Vector2D vector2D) {
@@ -51,7 +139,7 @@ public record Vector2D(float x, float y) {
   /**
    * Calculates the difference of two vectors and returns the sum as a new vector object.
    *
-   * @param vector2D the vector to subtract the value of, not null
+   * @param vector2D the vector to subtract the value of
    * @return a new vector with the result of this - vector2D
    */
   public Vector2D subtract(Vector2D vector2D) {
@@ -113,8 +201,8 @@ public record Vector2D(float x, float y) {
    * @return the normalized vector as a new object
    */
   public Vector2D normalize() {
-    if (this.equals(ZERO_VECTOR)) {
-      return ZERO_VECTOR;
+    if (Float.compare(x, 0f) == 0 && Float.compare(y, 0f) == 0) {
+      return zeroVector();
     }
 
     return this.scalar(1 / this.magnitude());
@@ -156,6 +244,22 @@ public record Vector2D(float x, float y) {
   @Override
   public String toString() {
     return "V(" + this.x + ", " + this.y + ")";
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(x, y);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == this) return true;
+
+    if (obj instanceof Vector2D vector2D) {
+      return Float.compare(vector2D.x, x) == 0 && Float.compare(vector2D.y, y) == 0;
+    }
+
+    return false;
   }
 }
 

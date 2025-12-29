@@ -91,10 +91,10 @@ public class StylesJsonBlueprintUtils {
     } else if (colorString.startsWith("#")) {
       // rgb hash
       if (colorString.length() == 7) {
-        return new Color(Long.decode(colorString.replace("#", "0xff")).intValue());
+        return Color.of(Long.decode(colorString.replace("#", "0xff")).intValue());
       }
 
-      return new Color(Long.decode(colorString.replace("#", "0x")).intValue());
+      return Color.of(Long.decode(colorString.replace("#", "0x")).intValue());
     }
 
     throw new IllegalArgumentException("Unrecognized color format [" + colorString + "]");

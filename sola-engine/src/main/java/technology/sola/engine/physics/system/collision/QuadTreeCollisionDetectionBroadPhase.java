@@ -125,8 +125,8 @@ public class QuadTreeCollisionDetectionBroadPhase implements CollisionDetectionB
     renderer.drawString("" + node.getCurrentDepth(), cameraModifiedTranslate.x() + 1, cameraModifiedTranslate.y() + 1, Color.GREEN);
     renderer.drawRect(cameraModifiedTranslate.x(), cameraModifiedTranslate.y(), cameraModifiedWidthHeight.x(), cameraModifiedWidthHeight.y(), Color.GREEN);
 
-    node.getChildren().forEach(child -> {
+    for (var child : node.getChildren()) {
       renderDebugNode(renderer, child, cameraScaleTransform, cameraTranslationTransform);
-    });
+    }
   }
 }

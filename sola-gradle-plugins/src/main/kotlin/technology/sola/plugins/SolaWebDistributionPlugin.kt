@@ -3,10 +3,12 @@ package technology.sola.plugins
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.api.tasks.Delete
 import org.gradle.api.tasks.JavaExec
 import org.gradle.api.tasks.bundling.Zip
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.withType
 
 interface SolaWebDistributionPluginExtension {
@@ -26,12 +28,10 @@ class SolaWebDistributionPlugin : Plugin<Project> {
         solaWebDistributionPluginExtension.generateFilesMainClass
       }
 
-      project.tasks.register("cleanDist") {
+      project.tasks.register("cleanDist", Delete::class) {
         group = "sola"
 
-        doFirst {
-          delete("${project.rootDir}/dist")
-        }
+        delete("${project.rootDir}/dist")
       }
 
       project.tasks.getByName("clean").dependsOn("cleanDist")
@@ -50,16 +50,16 @@ class SolaWebDistributionPlugin : Plugin<Project> {
         mainClass.set(generateFilesMainClass)
       }
 
-      project.tasks.register("buildDebugWebHtmlAndJs") {
+      project.tasks.register("buildDebugWebHtmlAndJs", JavaExec::class.java) {
         group = "sola"
 
-        doFirst {
-          project.tasks.withType<JavaExec> {
-            setArgsString("build ${project.name}-${project.version}.jar debug")
-          }
-        }
+        dependsOn(project.tasks.getByPath("assemble"))
 
-        finalizedBy(project.tasks.getByPath("buildWebHtmlAndJs"))
+        classpath = sourceSets.getByName("main").runtimeClasspath
+        setArgsString("build ${project.name}-${project.version}.jar debug")
+        inputs.file("build/libs/${project.name}-${project.version}.jar")
+        outputs.file("build/sola.js")
+        mainClass.set(generateFilesMainClass)
       }
 
       project.tasks.register("distWebZip", Zip::class.java) {

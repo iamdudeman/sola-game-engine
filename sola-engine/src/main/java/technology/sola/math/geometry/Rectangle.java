@@ -4,7 +4,7 @@ import org.jspecify.annotations.NullMarked;
 import technology.sola.math.linear.Vector2D;
 
 /**
- * Rectangle represents an axis aligned geometric rectangle.
+ * Rectangle represents an axis-aligned geometric rectangle.
  *
  * @param min the top, left point of the rectangle
  * @param max the bottom, right point of the rectangle
@@ -14,8 +14,8 @@ public record Rectangle(Vector2D min, Vector2D max) implements Shape {
   /**
    * Creates a rectangle by min and max points.
    * <p>
-   * The min point's x and y must both be below the max point's x and y. If they are the same then a degenerate rectangle
-   * with width or height of zero will be created.
+   * The min point's x and y must both be below the max point's x and y. If they are the same, then a degenerate
+   * rectangle with a width or height of zero will be created.
    *
    * @param min the top, left point of the rectangle
    * @param max the bottom, right point of the rectangle

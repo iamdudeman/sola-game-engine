@@ -38,12 +38,10 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
       }
 
-      project.tasks.register("cleanDist") {
+      project.tasks.register("cleanDist", Delete::class) {
         group = "sola"
 
-        doFirst {
-          delete("${project.rootDir}/dist")
-        }
+        delete("${project.rootDir}/dist")
       }
 
       project.tasks.named("clean").dependsOn("cleanDist")

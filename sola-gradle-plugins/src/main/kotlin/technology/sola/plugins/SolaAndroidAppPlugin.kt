@@ -4,10 +4,12 @@ import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.file.FileSystemOperations
 import org.gradle.api.tasks.Copy
 import org.gradle.kotlin.dsl.*
 import java.io.FileInputStream
 import java.util.Properties
+import javax.inject.Inject
 
 
 interface SolaAndroidAppPluginExtension {
@@ -103,13 +105,17 @@ class SolaAndroidAppPlugin : Plugin<Project> {
     project.tasks.register("distAndroidDebugApk", Copy::class) {
       group = "sola"
 
-      from(project.file("build/outputs/apk/debug/android-debug.apk")) {
-        rename { "${project.properties["gameName"]}-${project.version}-debug.apk" }
-      }
-
-      into(project.file("${project.rootDir}/dist/${project.name}"))
-
       dependsOn(project.tasks.named("assembleDebug"))
+
+      val injected = project.objects.newInstance<Injected>()
+
+      injected.fs.copy {
+        from("build/outputs/apk/debug/android-debug.apk") {
+          rename { "${project.properties["gameName"]}-${project.version}-debug.apk" }
+        }
+
+        into("${project.rootDir}/dist/${project.name}")
+      }
     }
 
     project.tasks.register("distAndroidReleaseBundle", Copy::class) {
@@ -117,13 +123,20 @@ class SolaAndroidAppPlugin : Plugin<Project> {
 
       dependsOn(project.tasks.named("bundleRelease"))
 
-      from(project.file("build/outputs/bundle/release/android-release.aab")) {
-        rename { "${project.properties["gameName"]}-${project.version}-release.aab" }
-      }
+      val injected = project.objects.newInstance<Injected>()
 
-      into(project.file("${project.rootDir}/dist/${project.name}"))
+      injected.fs.copy {
+        from("build/outputs/bundle/release/android-release.aab") {
+          rename { "${project.properties["gameName"]}-${project.version}-release.aab" }
+        }
+
+        into("${project.rootDir}/dist/${project.name}")
+      }
     }
   }
 }
 
-
+interface Injected {
+  @get:Inject
+  val fs: FileSystemOperations
+}
