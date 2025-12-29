@@ -1,7 +1,9 @@
 package technology.sola.engine.physics.component.particle;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.Color;
 
+@NullMarked
 public class ParticleAppearance {
   private float particleMinSize = 8f;
   private float particleMaxSize = 8f;

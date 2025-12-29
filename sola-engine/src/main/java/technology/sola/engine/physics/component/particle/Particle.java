@@ -1,11 +1,13 @@
 package technology.sola.engine.physics.component.particle;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.Color;
 import technology.sola.math.linear.Vector2D;
 
 /**
  * Particle contains properties that represent a particle that has been emitted from a {@link ParticleEmitterComponent}.
  */
+@NullMarked
 public class Particle {
   private final Color baseColor;
   private final float size;
