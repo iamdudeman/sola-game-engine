@@ -2,7 +2,6 @@ package technology.sola.engine.physics.component.particle;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.utils.SolaRandom;
 import technology.sola.math.linear.Vector2D;
 
@@ -17,12 +16,10 @@ import java.util.List;
 @NullMarked
 public class ParticleEmitterComponent implements Component {
   private final List<Particle> particleList = new ArrayList<>();
-  private final ParticleMovement movement = new ParticleMovement(this);
-  private Color particleColor = Color.WHITE;
+  private final EmittedParticleMovementConfiguration movement = new EmittedParticleMovementConfiguration(this);
+  private final EmittedParticleAppearanceConfiguration appearance = new EmittedParticleAppearanceConfiguration(this);
   private float particleMinLife = 1f;
   private float particleMaxLife = 2f;
-  private float particleMinSize = 8f;
-  private float particleMaxSize = 8f;
   private int particlesPerEmit = 1;
   private float particleEmissionDelay;
 
@@ -59,11 +56,11 @@ public class ParticleEmitterComponent implements Component {
       for (int i = 0; i < particlesPerEmit; i++) {
         float xVel = SolaRandom.nextFloat(minVel.x(), maxVel.x());
         float yVel = SolaRandom.nextFloat(minVel.y(), maxVel.y());
-        float size = SolaRandom.nextFloat(particleMinSize, particleMaxSize);
+        float size = SolaRandom.nextFloat(appearance.minSize(), appearance.maxSize());
         float life = SolaRandom.nextFloat(particleMinLife, particleMaxLife);
 
         Particle particle = new Particle(
-          particleColor, size, life, new Vector2D(0, 0), new Vector2D(xVel, yVel)
+          appearance.color(), size, life, new Vector2D(0, 0), new Vector2D(xVel, yVel)
         );
 
         particleList.add(particle);
@@ -80,8 +77,18 @@ public class ParticleEmitterComponent implements Component {
     return particleList.iterator();
   }
 
-  public ParticleMovement movement() {
+  /**
+   * @return object containing emitted {@link Particle} configureMovement configuration
+   */
+  public EmittedParticleMovementConfiguration configureMovement() {
     return movement;
+  }
+
+  /**
+   * @return object containing emitted {@link Particle} configureAppearance configuration
+   */
+  public EmittedParticleAppearanceConfiguration configureAppearance() {
+    return appearance;
   }
 
   /**
@@ -109,18 +116,6 @@ public class ParticleEmitterComponent implements Component {
   }
 
   /**
-   * Updates the base {@link Color} of each new {@link Particle}.
-   *
-   * @param particleColor the new color for newly emitted particles
-   * @return this
-   */
-  public ParticleEmitterComponent setParticleColor(Color particleColor) {
-    this.particleColor = particleColor;
-
-    return this;
-  }
-
-  /**
    * Updates the minimum and maximum lifespans for newly emitted {@link Particle}s.
    *
    * @param particleMinLife the minimum lifespan for a new particle
@@ -142,29 +137,5 @@ public class ParticleEmitterComponent implements Component {
    */
   public ParticleEmitterComponent setParticleLife(float life) {
     return setParticleLifeBounds(life, life);
-  }
-
-  /**
-   * Updates the minimum and maximum size values for newly emitted {@link Particle}s.
-   *
-   * @param particleMinSize the minimum size for new particles
-   * @param particleMaxSize the maximum size for new particles
-   * @return this
-   */
-  public ParticleEmitterComponent setParticleSizeBounds(float particleMinSize, float particleMaxSize) {
-    this.particleMinSize = particleMinSize;
-    this.particleMaxSize = particleMaxSize;
-
-    return this;
-  }
-
-  /**
-   * Updates the size for newly emitted {@link Particle}s to be a fixed value.
-   *
-   * @param size the size for new particles
-   * @return this
-   */
-  public ParticleEmitterComponent setParticleSize(float size) {
-    return setParticleSizeBounds(size, size);
   }
 }
