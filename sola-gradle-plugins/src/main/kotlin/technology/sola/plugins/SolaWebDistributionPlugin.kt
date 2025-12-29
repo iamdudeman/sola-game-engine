@@ -3,10 +3,12 @@ package technology.sola.plugins
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.api.tasks.Delete
 import org.gradle.api.tasks.JavaExec
 import org.gradle.api.tasks.bundling.Zip
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.withType
 
 interface SolaWebDistributionPluginExtension {
@@ -26,12 +28,10 @@ class SolaWebDistributionPlugin : Plugin<Project> {
         solaWebDistributionPluginExtension.generateFilesMainClass
       }
 
-      project.tasks.register("cleanDist") {
+      project.tasks.register("cleanDist", Delete::class) {
         group = "sola"
 
-        doFirst {
-          delete("${project.rootDir}/dist")
-        }
+        delete("${project.rootDir}/dist")
       }
 
       project.tasks.getByName("clean").dependsOn("cleanDist")
