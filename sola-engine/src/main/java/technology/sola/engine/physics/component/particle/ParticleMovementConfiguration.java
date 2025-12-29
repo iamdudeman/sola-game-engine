@@ -3,20 +3,19 @@ package technology.sola.engine.physics.component.particle;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.math.linear.Vector2D;
 
+// todo investigate the concept of "noise" in movement
+
 /**
- * ParticleMovement contains configuration for the configureMovement properties of emitted {@link Particle}s.
+ * ParticleMovementConfiguration contains configuration for the movement properties of emitted {@link Particle}s.
  */
 @NullMarked
-public class EmittedParticleMovementConfiguration implements EmittedParticleConfiguration {
-  private final ParticleEmitterComponent owner;
+public class ParticleMovementConfiguration extends ParticleConfiguration {
   private Vector2D minVelocity = new Vector2D(-50, -100);
   private Vector2D maxVelocity = new Vector2D(50, -0.1f);
 
-  EmittedParticleMovementConfiguration(ParticleEmitterComponent owner) {
-    this.owner = owner;
+  ParticleMovementConfiguration(ParticleEmitterComponent owner) {
+    super(owner);
   }
-
-  // todo investigate the concept of "noise" in configureMovement
 
   /**
    * @return the minimum velocity boundary for newly emitted {@link Particle}s
@@ -38,7 +37,7 @@ public class EmittedParticleMovementConfiguration implements EmittedParticleConf
    * @param velocity the velocity for new particles
    * @return this
    */
-  public EmittedParticleMovementConfiguration setVelocity(Vector2D velocity) {
+  public ParticleMovementConfiguration setVelocity(Vector2D velocity) {
     return setVelocityBounds(velocity, velocity);
   }
 
@@ -49,15 +48,10 @@ public class EmittedParticleMovementConfiguration implements EmittedParticleConf
    * @param max the maximum velocity for new particles
    * @return this
    */
-  public EmittedParticleMovementConfiguration setVelocityBounds(Vector2D min, Vector2D max) {
+  public ParticleMovementConfiguration setVelocityBounds(Vector2D min, Vector2D max) {
     this.minVelocity = min;
     this.maxVelocity = max;
 
     return this;
-  }
-
-  @Override
-  public ParticleEmitterComponent done() {
-    return owner;
   }
 }

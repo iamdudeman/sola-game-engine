@@ -16,8 +16,8 @@ import java.util.List;
 @NullMarked
 public class ParticleEmitterComponent implements Component {
   private final List<Particle> particleList = new ArrayList<>();
-  private final EmittedParticleMovementConfiguration movement = new EmittedParticleMovementConfiguration(this);
-  private final EmittedParticleAppearanceConfiguration appearance = new EmittedParticleAppearanceConfiguration(this);
+  private final ParticleMovementConfiguration movement = new ParticleMovementConfiguration(this);
+  private final ParticleAppearanceConfiguration appearance = new ParticleAppearanceConfiguration(this);
   private float particleMinLife = 1f;
   private float particleMaxLife = 2f;
   private int particlesPerEmit = 1;
@@ -78,16 +78,16 @@ public class ParticleEmitterComponent implements Component {
   }
 
   /**
-   * @return object containing emitted {@link Particle} configureMovement configuration
+   * @return object containing emitted {@link Particle} movement configuration
    */
-  public EmittedParticleMovementConfiguration configureMovement() {
+  public ParticleMovementConfiguration configureMovement() {
     return movement;
   }
 
   /**
-   * @return object containing emitted {@link Particle} configureAppearance configuration
+   * @return object containing emitted {@link Particle} appearance configuration
    */
-  public EmittedParticleAppearanceConfiguration configureAppearance() {
+  public ParticleAppearanceConfiguration configureAppearance() {
     return appearance;
   }
 
