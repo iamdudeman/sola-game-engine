@@ -1,6 +1,13 @@
 # sola-game-engine TODO list
 
-*
+* Particle System
+    * consider ability to add fix number of particle spawns (4 at a time in different directions for example)
+    * consider ability to change particle shape (instead of only circle maybe square)
+    * consider researching how other engines do particle systems to maybe create an easier to use api
+    * consider adding acceleration
+    * consider some sort of "swaying" for non-linear particles
+    * consider ability to spawn particles in a radius away from center
+        * probably want the ability to make particles go to and from center for this
 
 ## Known Bugs List
 
@@ -22,14 +29,7 @@
 
 ## TODO List
 
-* Particle System
-    * consider ability to add fix number of particle spawns (4 at a time in different directions for example)
-    * consider ability to change particle shape (instead of only circle maybe square)
-    * consider researching how other engines do particle systems to maybe create an easier to use api
-    * consider adding acceleration
-    * consider some sort of "swaying" for non-linear particles
-    * consider ability to spawn particles in a radius away from center
-        * probably want the ability to make particles go to and from center for this
+*
 
 ### Low priority (not ordered)
 
