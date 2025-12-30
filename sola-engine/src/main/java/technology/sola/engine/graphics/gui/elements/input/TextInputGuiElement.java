@@ -85,13 +85,6 @@ public class TextInputGuiElement extends BaseInputGuiElement<TextInputStyles, Te
       setValue(valueBuilder.toString());
     });
 
-    events().mousePressed().on(mouseEvent -> {
-      if (!isDisabled()) {
-        setVirtualKeyboardVisible(true);
-        mouseEvent.stopPropagation();
-      }
-    });
-
     events().touchEnd().on(touchEvent -> {
       if (!isDisabled()) {
         setVirtualKeyboardVisible(true);
