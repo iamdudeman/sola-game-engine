@@ -82,10 +82,10 @@ public class ParticleExample extends Sola {
 
     sparksParticleEmitterComponent
       .configureAppearance().setColor(new Color(210, 80, 45)).setSizeBounds(6, 12).done()
-      .configureMovement().setVelocityBounds(new Vector2D(-18f, -70f), new Vector2D(18f, 0));
-    sparksParticleEmitterComponent.setParticleLifeBounds(1, 3);
+      .configureMovement().setVelocityBounds(new Vector2D(-18f, -70f), new Vector2D(18f, 0)).done()
+      .configureEmission().setCountPerEmit(1).setLifeBounds(1, 3);
+
     sparksParticleEmitterComponent.setParticleEmissionDelay(0.01f);
-    sparksParticleEmitterComponent.setParticlesPerEmit(1);
 
     return sparksParticleEmitterComponent;
   }
@@ -95,10 +95,10 @@ public class ParticleExample extends Sola {
 
     fireParticleEmitterComponent
       .configureAppearance().setColor(new Color(230, 40, 45)).setSizeBounds(6, 10).done()
-      .configureMovement().setVelocityBounds(new Vector2D(-18f, -70f), new Vector2D(18f, 0));
-    fireParticleEmitterComponent.setParticleLifeBounds(1, 1);
+      .configureMovement().setVelocityBounds(new Vector2D(-18f, -70f), new Vector2D(18f, 0)).done()
+      .configureEmission().setCountPerEmit(10).setLifeBounds(1, 1);
+
     fireParticleEmitterComponent.setParticleEmissionDelay(0.1f);
-    fireParticleEmitterComponent.setParticlesPerEmit(10);
 
     return fireParticleEmitterComponent;
   }

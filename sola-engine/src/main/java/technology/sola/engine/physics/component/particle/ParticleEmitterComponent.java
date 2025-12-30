@@ -18,9 +18,7 @@ public class ParticleEmitterComponent implements Component {
   private final List<Particle> particleList = new ArrayList<>();
   private final ParticleMovementConfiguration movement = new ParticleMovementConfiguration(this);
   private final ParticleAppearanceConfiguration appearance = new ParticleAppearanceConfiguration(this);
-  private float particleMinLife = 1f;
-  private float particleMaxLife = 2f;
-  private int particlesPerEmit = 1;
+  private final ParticleEmissionConfiguration emission = new ParticleEmissionConfiguration(this);
   private float particleEmissionDelay;
 
   private float timeSinceLastEmission;
@@ -52,12 +50,14 @@ public class ParticleEmitterComponent implements Component {
     if (timeSinceLastEmission > particleEmissionDelay) {
       Vector2D minVel = movement.minVelocity();
       Vector2D maxVel = movement.maxVelocity();
+      var appearance = this.appearance;
+      var emission = this.emission;
 
-      for (int i = 0; i < particlesPerEmit; i++) {
+      for (int i = 0; i < emission.countPerEmit(); i++) {
         float xVel = SolaRandom.nextFloat(minVel.x(), maxVel.x());
         float yVel = SolaRandom.nextFloat(minVel.y(), maxVel.y());
         float size = SolaRandom.nextFloat(appearance.minSize(), appearance.maxSize());
-        float life = SolaRandom.nextFloat(particleMinLife, particleMaxLife);
+        float life = SolaRandom.nextFloat(emission.minLife(), emission.maxLife());
 
         Particle particle = new Particle(
           appearance.color(), size, life, new Vector2D(0, 0), new Vector2D(xVel, yVel)
@@ -92,6 +92,13 @@ public class ParticleEmitterComponent implements Component {
   }
 
   /**
+   * @return object containing emitted {@link Particle} emission configuration
+   */
+  public ParticleEmissionConfiguration configureEmission() {
+    return emission;
+  }
+
+  /**
    * Updates the delay between each particle emission.
    *
    * @param particleEmissionDelay the new particle emission delay
@@ -101,41 +108,5 @@ public class ParticleEmitterComponent implements Component {
     this.particleEmissionDelay = particleEmissionDelay;
 
     return this;
-  }
-
-  /**
-   * Updates the number of particles to emit per emission.
-   *
-   * @param particlesPerEmit the new number of particles to emit
-   * @return this
-   */
-  public ParticleEmitterComponent setParticlesPerEmit(int particlesPerEmit) {
-    this.particlesPerEmit = particlesPerEmit;
-
-    return this;
-  }
-
-  /**
-   * Updates the minimum and maximum lifespans for newly emitted {@link Particle}s.
-   *
-   * @param particleMinLife the minimum lifespan for a new particle
-   * @param particleMaxLife the maximum lifespan for a new particle
-   * @return this
-   */
-  public ParticleEmitterComponent setParticleLifeBounds(float particleMinLife, float particleMaxLife) {
-    this.particleMinLife = particleMinLife;
-    this.particleMaxLife = particleMaxLife;
-
-    return this;
-  }
-
-  /**
-   * Updates the lifespan for newly emitted {@link Particle}s to be a fixed value.
-   *
-   * @param life the lifespan for new particles
-   * @return this
-   */
-  public ParticleEmitterComponent setParticleLife(float life) {
-    return setParticleLifeBounds(life, life);
   }
 }
