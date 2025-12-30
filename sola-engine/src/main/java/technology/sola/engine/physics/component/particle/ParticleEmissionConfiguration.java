@@ -60,7 +60,7 @@ public class ParticleEmissionConfiguration extends ParticleConfiguration {
 
 
   /**
-   * @return the interval between each particle emission
+   * @return the interval between each particle emission in seconds
    */
   public float interval() {
     return interval;
@@ -69,7 +69,7 @@ public class ParticleEmissionConfiguration extends ParticleConfiguration {
   /**
    * Updates the interval between each particle emission.
    *
-   * @param interval the new particle emission interval
+   * @param interval the new particle emission interval (in seconds)
    * @return this
    */
   public ParticleEmissionConfiguration setInterval(float interval) {

@@ -45,7 +45,7 @@ public class ParticleEmitterComponent implements Component {
         float life = SolaRandom.nextFloat(emission.minLife(), emission.maxLife());
 
         Particle particle = new Particle(
-          appearance.color(), size, life, new Vector2D(0, 0), new Vector2D(xVel, yVel)
+          appearance.color(), Particle.Shape.CIRCLE, size, life, new Vector2D(0, 0), new Vector2D(xVel, yVel)
         );
 
         particleList.add(particle);

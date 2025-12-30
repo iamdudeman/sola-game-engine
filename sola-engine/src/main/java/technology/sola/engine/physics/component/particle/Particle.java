@@ -10,14 +10,16 @@ import technology.sola.math.linear.Vector2D;
 @NullMarked
 public class Particle {
   private final Color baseColor;
+  private final Shape shape;
   private final float size;
   private final float inverseMaxLifespan;
   private final Vector2D velocity;
   private final Vector2D position;
   private float remainingLifespan;
 
-  Particle(Color baseColor, float size, float maxLifespan, Vector2D position, Vector2D velocity) {
+  Particle(Color baseColor, Shape shape, float size, float maxLifespan, Vector2D position, Vector2D velocity) {
     this.baseColor = baseColor;
+    this.shape = shape;
     this.size = size;
     this.position = position;
     this.velocity = velocity;
@@ -53,6 +55,13 @@ public class Particle {
   }
 
   /**
+   * @return the {@link Shape} of the particle
+   */
+  public Shape getShape() {
+    return shape;
+  }
+
+  /**
    * @return the current position of the particle
    */
   public Vector2D getPosition() {
@@ -64,5 +73,10 @@ public class Particle {
    */
   public float getSize() {
     return size;
+  }
+
+  public enum Shape {
+    CIRCLE,
+    SQUARE
   }
 }
