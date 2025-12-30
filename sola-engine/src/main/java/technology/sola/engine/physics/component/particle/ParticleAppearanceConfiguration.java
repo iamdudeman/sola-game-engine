@@ -6,6 +6,9 @@ import technology.sola.engine.graphics.Color;
 // todo consider size at start of lifetime option
 // todo consider size at end of lifetime option
 
+/**
+ * ParticleAppearanceConfiguration contains configuration for the appearance properties of emitted {@link Particle}s.
+ */
 @NullMarked
 public class ParticleAppearanceConfiguration extends ParticleConfiguration {
   private float minSize = 8f;
@@ -16,14 +19,23 @@ public class ParticleAppearanceConfiguration extends ParticleConfiguration {
     super(owner);
   }
 
+  /**
+   * @return the minimum size for newly emitted {@link Particle}s
+   */
   public float minSize() {
     return minSize;
   }
 
+  /**
+   * @return the maximum size for newly emitted {@link Particle}s
+   */
   public float maxSize() {
     return maxSize;
   }
 
+  /**
+   * @return the base {@link Color} of each new {@link Particle}
+   */
   public Color color() {
     return color;
   }

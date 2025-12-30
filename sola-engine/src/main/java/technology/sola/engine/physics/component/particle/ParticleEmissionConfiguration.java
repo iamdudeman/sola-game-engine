@@ -1,10 +1,12 @@
 package technology.sola.engine.physics.component.particle;
 
 import org.jspecify.annotations.NullMarked;
-import org.jspecify.annotations.Nullable;
 
 // todo consider adding support for "pooling" for potential performance improvement
 
+/**
+ * ParticleEmissionConfiguration contains configuration for the emission properties for emitting {@link Particle}s.
+ */
 @NullMarked
 public class ParticleEmissionConfiguration extends ParticleConfiguration {
   private float minLife = 1f;
@@ -12,25 +14,34 @@ public class ParticleEmissionConfiguration extends ParticleConfiguration {
   private int countPerEmit = 1;
   private float interval = 0.1f;
 
-  @Nullable
-  private Integer cycles; // todo is new so needs to be hooked up
-
   ParticleEmissionConfiguration(ParticleEmitterComponent owner) {
     super(owner);
   }
 
+  /**
+   * @return the minimum lifespan for newly emitted {@link Particle}s
+   */
   public float minLife() {
     return minLife;
   }
 
+  /**
+   * @return the maximum lifespan for newly emitted {@link Particle}s
+   */
   public float maxLife() {
     return maxLife;
   }
 
+  /**
+   * @return the interval between each particle emission
+   */
   public float interval() {
     return interval;
   }
 
+  /**
+   * @return the number of particles to emit per emission
+   */
   public int countPerEmit() {
     return countPerEmit;
   }
