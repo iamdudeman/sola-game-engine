@@ -1,18 +1,22 @@
 # sola-game-engine TODO list
 
 * Particle System
-  * consider researching how other engines do particle systems to maybe create an easier to use api
-  * consider adding support for "pooling" for potential performance improvement
-  * appearance
-    * consider size at start and size at end of lifetime option
-    * consider ability to change particle shape (instead of only circle maybe square)
-  * movement
-    * consider adding acceleration
-    * consider some sort of "swaying" for non-linear particles
-      * concept of "noise" for movement
-  * emission
-    * consider ability to spawn particles in a radius away from center
-      * probably want the ability to make particles go to and from center for this
+    * consider researching how other engines do particle systems to maybe create an easier to use api
+        * unity adds particle functionality via modules (ex. "Color over lifetime module")
+    * appearance
+        * consider ability to change particle shape (instead of only circle maybe square)
+            * have a weighting for the shapes so different shapes can be used for different particles
+        * modify size over lifetime option
+        * modify size by velocity
+    * movement
+        * inherit velocity from Entity
+        * modify velocity over lifetime
+        * consider some sort of "swaying" for non-linear particles
+            * concept of "noise" for movement - https://docs.unity3d.com/Manual/PartSysNoiseModule.html
+    * emission
+        * consider ability to spawn particles in a radius away from center
+            * probably want the ability to make particles go to and from center for this
+    * consider adding support for "pooling" for potential performance improvement
 
 ## Known Bugs List
 
