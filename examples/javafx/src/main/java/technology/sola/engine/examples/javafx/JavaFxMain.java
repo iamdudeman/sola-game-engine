@@ -4,7 +4,6 @@ import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
-import technology.sola.engine.examples.common.features.ParticleExample;
 import technology.sola.engine.platform.javafx.JavaFxSolaPlatform;
 import technology.sola.logging.JavaSolaLoggerFactory;
 import technology.sola.logging.SolaLogLevel;
@@ -26,7 +25,7 @@ public class JavaFxMain {
    */
   public static void main(String[] args) {
     SolaPlatform solaPlatform = new JavaFxSolaPlatform();
-    Sola sola = new ParticleExample();
+    Sola sola = new ExampleLauncherSola();
 
     solaPlatform.play(sola);
   }
