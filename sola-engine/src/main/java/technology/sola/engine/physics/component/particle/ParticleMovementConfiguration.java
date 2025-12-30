@@ -3,8 +3,6 @@ package technology.sola.engine.physics.component.particle;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.math.linear.Vector2D;
 
-// todo investigate the concept of "noise" in movement
-
 /**
  * ParticleMovementConfiguration contains configuration for the movement properties of emitted {@link Particle}s.
  */
@@ -16,6 +14,7 @@ public class ParticleMovementConfiguration extends ParticleConfiguration {
   ParticleMovementConfiguration(ParticleEmitterComponent owner) {
     super(owner);
   }
+
 
   /**
    * @return the minimum velocity boundary for newly emitted {@link Particle}s

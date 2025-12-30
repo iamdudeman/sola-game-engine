@@ -3,8 +3,6 @@ package technology.sola.engine.physics.component.particle;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-// todo consider adding support for "pooling" for potential performance improvement
-
 /**
  * ParticleEmissionConfiguration contains configuration for the emission properties for emitting {@link Particle}s.
  */
@@ -21,6 +19,7 @@ public class ParticleEmissionConfiguration extends ParticleConfiguration {
     super(owner);
   }
 
+
   /**
    * @return the minimum lifespan for newly emitted {@link Particle}s
    */
@@ -33,27 +32,6 @@ public class ParticleEmissionConfiguration extends ParticleConfiguration {
    */
   public float maxLife() {
     return maxLife;
-  }
-
-  /**
-   * @return the interval between each particle emission
-   */
-  public float interval() {
-    return interval;
-  }
-
-  /**
-   * @return the number of particles to emit per emission
-   */
-  public int countPerEmit() {
-    return countPerEmit;
-  }
-
-  /**
-   * @return the number of emission cycles before this emitter turns off.
-   */
-  public @Nullable Integer cycles() {
-    return cycles;
   }
 
   /**
@@ -80,16 +58,12 @@ public class ParticleEmissionConfiguration extends ParticleConfiguration {
     return setLifeBounds(life, life);
   }
 
-  /**
-   * Updates the number of particles to emit per emission.
-   *
-   * @param countPerEmit the new number of particles to emit
-   * @return this
-   */
-  public ParticleEmissionConfiguration setCountPerEmit(int countPerEmit) {
-    this.countPerEmit = countPerEmit;
 
-    return this;
+  /**
+   * @return the interval between each particle emission
+   */
+  public float interval() {
+    return interval;
   }
 
   /**
@@ -102,6 +76,34 @@ public class ParticleEmissionConfiguration extends ParticleConfiguration {
     this.interval = interval;
 
     return this;
+  }
+
+
+  /**
+   * @return the number of particles to emit per emission
+   */
+  public int countPerEmit() {
+    return countPerEmit;
+  }
+
+  /**
+   * Updates the number of particles to emit per emission.
+   *
+   * @param countPerEmit the new number of particles to emit
+   * @return this
+   */
+  public ParticleEmissionConfiguration setCountPerEmit(int countPerEmit) {
+    this.countPerEmit = countPerEmit;
+
+    return this;
+  }
+
+
+  /**
+   * @return the number of emission cycles before this emitter turns off.
+   */
+  public @Nullable Integer cycles() {
+    return cycles;
   }
 
   /**

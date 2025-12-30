@@ -3,9 +3,6 @@ package technology.sola.engine.physics.component.particle;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.Color;
 
-// todo consider size at start of lifetime option
-// todo consider size at end of lifetime option
-
 /**
  * ParticleAppearanceConfiguration contains configuration for the appearance properties of emitted {@link Particle}s.
  */
@@ -19,6 +16,7 @@ public class ParticleAppearanceConfiguration extends ParticleConfiguration {
     super(owner);
   }
 
+
   /**
    * @return the minimum size for newly emitted {@link Particle}s
    */
@@ -31,25 +29,6 @@ public class ParticleAppearanceConfiguration extends ParticleConfiguration {
    */
   public float maxSize() {
     return maxSize;
-  }
-
-  /**
-   * @return the base {@link Color} of each new {@link Particle}
-   */
-  public Color color() {
-    return color;
-  }
-
-  /**
-   * Updates the base {@link Color} of each new {@link Particle}.
-   *
-   * @param color the new color for newly emitted particles
-   * @return this
-   */
-  public ParticleAppearanceConfiguration setColor(Color color) {
-    this.color = color;
-
-    return this;
   }
 
   /**
@@ -74,5 +53,25 @@ public class ParticleAppearanceConfiguration extends ParticleConfiguration {
    */
   public ParticleAppearanceConfiguration setSize(float size) {
     return setSizeBounds(size, size);
+  }
+
+
+  /**
+   * @return the base {@link Color} of each new {@link Particle}
+   */
+  public Color color() {
+    return color;
+  }
+
+  /**
+   * Updates the base {@link Color} of each new {@link Particle}.
+   *
+   * @param color the new color for newly emitted particles
+   * @return this
+   */
+  public ParticleAppearanceConfiguration setColor(Color color) {
+    this.color = color;
+
+    return this;
   }
 }
