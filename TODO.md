@@ -7,12 +7,12 @@
         * modify size over lifetime option
         * modify size by velocity
     * movement
-        * inherit velocity from Entity
+        * _inherit velocity from Entity_
         * modify velocity over lifetime
-        * consider some sort of "swaying" for non-linear particles
+        * _consider some sort of "swaying" for non-linear particles_
             * concept of "noise" for movement - https://docs.unity3d.com/Manual/PartSysNoiseModule.html
     * emission
-        * consider ability to spawn particles in a radius away from center
+        * _consider ability to spawn particles in a radius away from center_
             * probably want the ability to make particles go to and from center for this
     * consider adding support for "pooling" for potential performance improvement
 
