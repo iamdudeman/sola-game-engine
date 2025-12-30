@@ -210,16 +210,12 @@ public class SimplePlatformerGame extends Sola {
       .addComponent(new ColliderComponent(new ColliderShapeAABB()))
       .setName("finalBlock");
 
-    ParticleEmitterComponent particleEmitterComponent = new ParticleEmitterComponent();
-
-    particleEmitterComponent
-      .configureAppearance().setColor(Color.YELLOW).setSizeBounds(4, 8).done()
-      .configureMovement().setVelocityBounds(new Vector2D(-100, -100), new Vector2D(100, 100)).done()
-      .configureEmission().setCountPerEmit(5);
-
     world.createEntity()
       .setName("confetti")
-      .addComponent(particleEmitterComponent)
+      .addComponent(new ParticleEmitterComponent()
+        .configureAppearance().setColor(Color.YELLOW).setSizeBounds(4, 8).done()
+        .configureMovement().setVelocityBounds(new Vector2D(-100, -100), new Vector2D(100, 100)).done()
+        .configureEmission().setCountPerEmit(5).done())
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
       .addComponent(new TransformComponent(25, 0, finalBlock))
       .setDisabled(true);
