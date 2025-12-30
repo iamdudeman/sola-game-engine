@@ -87,8 +87,7 @@
         * https://labs.leaningtech.com/cheerpj3/getting-started/Java-app
     * modularize (requires figuring out how to modularize parts of teavm needed)
         * ensure `SimpleSolaBrowserFileServer` and `SolaBrowserFileBuilder` in `tools` is exposed as well
-    * Improve performance (StressTestExample can't handle a lot of objects)
-        * Possibly finish implementing BrowserCanvasRenderer?
+    * Possibly finish implementing BrowserCanvasRenderer?
     * Consider web worker for game loop
         * main thread creates needed dom events
         * mouse and key events sent to worker
