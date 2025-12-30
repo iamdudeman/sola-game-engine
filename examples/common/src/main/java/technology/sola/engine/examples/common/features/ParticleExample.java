@@ -42,7 +42,7 @@ public class ParticleExample extends Sola {
    * Creates an instance of this {@link technology.sola.engine.core.Sola}.
    */
   public ParticleExample() {
-    super(new SolaConfiguration("Particle Example", 600, 600, 30));
+    super(new SolaConfiguration("Particle Example", 600, 500, 30));
   }
 
   @Override
@@ -70,11 +70,9 @@ public class ParticleExample extends Sola {
   private World buildWorld() {
     World world = new World(5);
 
-    world.createEntity()
-      .setName("emitter")
-      .addComponent(new ParticleEmitterComponent())
-      .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(new TransformComponent(250, 500));
+    setEmitterToDefault(
+      world.createEntity().setName("emitter")
+    );
 
     return world;
   }
@@ -90,6 +88,7 @@ public class ParticleExample extends Sola {
               .setText("Back")
           ),
         buildParticleOptionButton(world, "Default", ParticleExample::setEmitterToDefault),
+        buildParticleOptionButton(world, "Burst", ParticleExample::setEmitterToBurst),
         buildParticleOptionButton(world, "Fire", ParticleExample::setEmitterToFire),
         buildParticleOptionButton(world, "Sparks", ParticleExample::setEmitterToSparks)
       );
@@ -110,7 +109,16 @@ public class ParticleExample extends Sola {
 
     entity.addComponent(defaultEmitter)
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(new TransformComponent(250, 500));
+      .addComponent(new TransformComponent(250, 400));
+  }
+
+  private static void setEmitterToBurst(Entity entity) {
+    var burstEmitter = new ParticleEmitterComponent()
+      .configureEmission().setCycles(6).setInterval(2f).setCountPerEmit(40).done();
+
+    entity.addComponent(burstEmitter)
+      .addComponent(new BlendModeComponent(BlendMode.NORMAL))
+      .addComponent(new TransformComponent(250, 400));
   }
 
   private static void setEmitterToFire(Entity entity) {
@@ -121,7 +129,7 @@ public class ParticleExample extends Sola {
 
     entity.addComponent(fireEmitter)
       .addComponent(new BlendModeComponent(BlendMode.LINEAR_DODGE))
-      .addComponent(new TransformComponent(250, 500));
+      .addComponent(new TransformComponent(250, 400));
   }
 
   private static void setEmitterToSparks(Entity entity) {
@@ -132,6 +140,6 @@ public class ParticleExample extends Sola {
 
     entity.addComponent(sparksEmitter)
       .addComponent(new BlendModeComponent(BlendMode.DISSOLVE))
-      .addComponent(new TransformComponent(250, 500));
+      .addComponent(new TransformComponent(250, 400));
   }
 }

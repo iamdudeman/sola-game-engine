@@ -20,7 +20,8 @@ public class ParticleEmitterComponent implements Component {
   private final ParticleAppearanceConfiguration appearance = new ParticleAppearanceConfiguration(this);
   private final ParticleEmissionConfiguration emission = new ParticleEmissionConfiguration(this);
 
-  private float timeSinceLastEmission;
+  private float timeSinceLastEmission = Float.MAX_VALUE;
+  private int emissionCount = 0;
 
   /**
    * Emits new particles if enough time has elapsed based on the set properties for emission.
@@ -32,7 +33,7 @@ public class ParticleEmitterComponent implements Component {
 
     timeSinceLastEmission += delta;
 
-    if (timeSinceLastEmission > emission.interval()) {
+    if (isAbleToEmit(emission)) {
       Vector2D minVel = movement.minVelocity();
       Vector2D maxVel = movement.maxVelocity();
       var appearance = this.appearance;
@@ -51,6 +52,7 @@ public class ParticleEmitterComponent implements Component {
       }
 
       timeSinceLastEmission = 0;
+      emissionCount++;
     }
   }
 
@@ -80,5 +82,15 @@ public class ParticleEmitterComponent implements Component {
    */
   public ParticleEmissionConfiguration configureEmission() {
     return emission;
+  }
+
+  private boolean isAbleToEmit(ParticleEmissionConfiguration emission) {
+    if (timeSinceLastEmission > emission.interval()) {
+      var cycles = emission.cycles();
+
+      return cycles == null || emissionCount < cycles;
+    }
+
+    return false;
   }
 }
