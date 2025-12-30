@@ -8,8 +8,8 @@ import technology.sola.math.linear.Vector2D;
  */
 @NullMarked
 public class ParticleMovementConfiguration extends ParticleConfiguration {
-  private Vector2D minVelocity = new Vector2D(-50, -100);
-  private Vector2D maxVelocity = new Vector2D(50, -0.1f);
+  private Vector2D minVelocity = new Vector2D(-50, -50);
+  private Vector2D maxVelocity = new Vector2D(50, 50);
 
   ParticleMovementConfiguration(ParticleEmitterComponent owner) {
     super(owner);
