@@ -4,8 +4,6 @@
     * consider researching how other engines do particle systems to maybe create an easier to use api
         * unity adds particle functionality via modules (ex. "Color over lifetime module")
     * appearance
-        * consider ability to change particle shape (instead of only circle maybe square)
-            * have a weighting for the shapes so different shapes can be used for different particles
         * modify size over lifetime option
         * modify size by velocity
     * movement

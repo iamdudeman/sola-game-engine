@@ -89,6 +89,7 @@ public class ParticleExample extends Sola {
               .setText("Back")
           ),
         buildParticleOptionButton(world, "Default", ParticleExample::setEmitterToDefault),
+        buildParticleOptionButton(world, "Mixed", ParticleExample::setEmitterToMixed),
         buildParticleOptionButton(world, "Burst", ParticleExample::setEmitterToBurst),
         buildParticleOptionButton(world, "Fire", ParticleExample::setEmitterToFire),
         buildParticleOptionButton(world, "Sparks", ParticleExample::setEmitterToSparks)
@@ -108,6 +109,16 @@ public class ParticleExample extends Sola {
 
   private static void setEmitterToDefault(Entity entity) {
     var defaultEmitter = new ParticleEmitterComponent();
+
+    entity.addComponent(defaultEmitter)
+      .addComponent(new BlendModeComponent(BlendMode.NORMAL))
+      .addComponent(new TransformComponent(275, 350));
+  }
+
+  private static void setEmitterToMixed(Entity entity) {
+    var defaultEmitter = new ParticleEmitterComponent()
+      .configureEmission().setLifeBounds(2, 4).done()
+      .configureAppearance().setPercentCircle(0.5f).setSizeBounds(5, 15).done();
 
     entity.addComponent(defaultEmitter)
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))

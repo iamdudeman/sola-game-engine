@@ -11,6 +11,7 @@ public class ParticleAppearanceConfiguration extends ParticleConfiguration {
   private float minSize = 8f;
   private float maxSize = 8f;
   private Color color = Color.WHITE;
+  private float percentCircle = 1f;
 
   ParticleAppearanceConfiguration(ParticleEmitterComponent owner) {
     super(owner);
@@ -71,6 +72,26 @@ public class ParticleAppearanceConfiguration extends ParticleConfiguration {
    */
   public ParticleAppearanceConfiguration setColor(Color color) {
     this.color = color;
+
+    return this;
+  }
+
+
+  /**
+   * @return the percentage of particles that will be circles
+   */
+  public float percentCircle() {
+    return percentCircle;
+  }
+
+  /**
+   * Updates the percentage of particles that will be circles.
+   *
+   * @param percentCircle the new percentage of particles that will be circles (value 0-1 where 1 will be all circles)
+   * @return this
+   */
+  public ParticleAppearanceConfiguration setPercentCircle(float percentCircle) {
+    this.percentCircle = percentCircle;
 
     return this;
   }

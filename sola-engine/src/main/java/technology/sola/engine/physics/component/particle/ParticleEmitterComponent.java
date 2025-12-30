@@ -43,9 +43,11 @@ public class ParticleEmitterComponent implements Component {
         float yVel = SolaRandom.nextFloat(minVel.y(), maxVel.y());
         float size = SolaRandom.nextFloat(appearance.minSize(), appearance.maxSize());
         float life = SolaRandom.nextFloat(emission.minLife(), emission.maxLife());
+        boolean isCircle = SolaRandom.nextFloat() < appearance.percentCircle();
+        var shape = isCircle ? Particle.Shape.CIRCLE : Particle.Shape.SQUARE;
 
         Particle particle = new Particle(
-          appearance.color(), Particle.Shape.CIRCLE, size, life, new Vector2D(0, 0), new Vector2D(xVel, yVel)
+          appearance.color(), shape, size, life, new Vector2D(0, 0), new Vector2D(xVel, yVel)
         );
 
         particleList.add(particle);
