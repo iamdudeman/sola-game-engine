@@ -19,25 +19,8 @@ public class ParticleEmitterComponent implements Component {
   private final ParticleMovementConfiguration movement = new ParticleMovementConfiguration(this);
   private final ParticleAppearanceConfiguration appearance = new ParticleAppearanceConfiguration(this);
   private final ParticleEmissionConfiguration emission = new ParticleEmissionConfiguration(this);
-  private float particleEmissionDelay;
 
   private float timeSinceLastEmission;
-
-  /**
-   * Creates a ParticleEmitterComponent instance with default settings.
-   */
-  public ParticleEmitterComponent() {
-    this(0.1f);
-  }
-
-  /**
-   * Creates a ParticleEmitterComponent instance with default settings and a custom particle emission delay.
-   *
-   * @param particleEmissionDelay the desired particle emission delay
-   */
-  public ParticleEmitterComponent(float particleEmissionDelay) {
-    this.particleEmissionDelay = particleEmissionDelay;
-  }
 
   /**
    * Emits new particles if enough time has elapsed based on the set properties for emission.
@@ -45,13 +28,14 @@ public class ParticleEmitterComponent implements Component {
    * @param delta the elapsed delta time
    */
   public void emitIfAble(float delta) {
+    final var emission = this.emission;
+
     timeSinceLastEmission += delta;
 
-    if (timeSinceLastEmission > particleEmissionDelay) {
+    if (timeSinceLastEmission > emission.interval()) {
       Vector2D minVel = movement.minVelocity();
       Vector2D maxVel = movement.maxVelocity();
       var appearance = this.appearance;
-      var emission = this.emission;
 
       for (int i = 0; i < emission.countPerEmit(); i++) {
         float xVel = SolaRandom.nextFloat(minVel.x(), maxVel.x());
@@ -96,17 +80,5 @@ public class ParticleEmitterComponent implements Component {
    */
   public ParticleEmissionConfiguration configureEmission() {
     return emission;
-  }
-
-  /**
-   * Updates the delay between each particle emission.
-   *
-   * @param particleEmissionDelay the new particle emission delay
-   * @return this
-   */
-  public ParticleEmitterComponent setParticleEmissionDelay(float particleEmissionDelay) {
-    this.particleEmissionDelay = particleEmissionDelay;
-
-    return this;
   }
 }

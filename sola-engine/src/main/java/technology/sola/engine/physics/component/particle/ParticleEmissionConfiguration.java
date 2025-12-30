@@ -10,8 +10,7 @@ public class ParticleEmissionConfiguration extends ParticleConfiguration {
   private float minLife = 1f;
   private float maxLife = 2f;
   private int countPerEmit = 1;
-
-  private float interval = 0.1f; // todo is new so needs to be hooked up
+  private float interval = 0.1f;
 
   @Nullable
   private Integer cycles; // todo is new so needs to be hooked up
@@ -26,6 +25,10 @@ public class ParticleEmissionConfiguration extends ParticleConfiguration {
 
   public float maxLife() {
     return maxLife;
+  }
+
+  public float interval() {
+    return interval;
   }
 
   public int countPerEmit() {
@@ -64,6 +67,18 @@ public class ParticleEmissionConfiguration extends ParticleConfiguration {
    */
   public ParticleEmissionConfiguration setCountPerEmit(int countPerEmit) {
     this.countPerEmit = countPerEmit;
+
+    return this;
+  }
+
+  /**
+   * Updates the interval between each particle emission.
+   *
+   * @param interval the new particle emission interval
+   * @return this
+   */
+  public ParticleEmissionConfiguration setInterval(float interval) {
+    this.interval = interval;
 
     return this;
   }
