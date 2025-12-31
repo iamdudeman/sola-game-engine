@@ -12,6 +12,7 @@ import java.util.Arrays;
 public class TrapezoidEmitterShape extends ParticleEmitterShape {
   private boolean isEmitFromBase = true;
   private ConvexPolygon trapezoid;
+  private Vector2D center;
 
   public TrapezoidEmitterShape(Vector2D direction, float baseWidth, float height,  float otherBaseWidth) {
     Vector2D p1 = new Vector2D(0, 0);
@@ -25,6 +26,7 @@ public class TrapezoidEmitterShape extends ParticleEmitterShape {
     Vector2D p4 = pL.subtract(perpPL.scalar(otherBaseWidth));
 
     trapezoid = new ConvexPolygon(new Vector2D[] { p1, p2, p3, p4});
+    center = trapezoid.getCentroid();
 
     System.out.println(Arrays.toString(trapezoid.points()));
   }
@@ -36,7 +38,7 @@ public class TrapezoidEmitterShape extends ParticleEmitterShape {
     }
 
     if (isEmitFromBase) {
-      // random location to move towards on other base
+      // random location to move towards the other base
       var sideLength = trapezoid.points()[2].distance(trapezoid.points()[3]);
       var direction = trapezoid.points()[3].subtract(trapezoid.points()[2]).normalize();
       var velocity = trapezoid.points()[2].add(direction.scalar(SolaRandom.nextFloat() * sideLength));
@@ -63,7 +65,7 @@ public class TrapezoidEmitterShape extends ParticleEmitterShape {
 
   @Override
   protected Vector2D getCenter() {
-    return trapezoid.getCentroid();
+    return center;
   }
 
   @Override

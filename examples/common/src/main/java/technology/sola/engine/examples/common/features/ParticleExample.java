@@ -284,10 +284,6 @@ public class ParticleExample extends Sola {
       .setSpeedBounds(34, 60).done()
       .emissionConfig().setCountPerEmit(4).setLifeBounds(1, 1.5f).setInterval(0.01f).done();
 
-    fireEmitter.emissionConfig().setShape(new TriangleEmitterShape(
-      new Vector2D(0, -1), 50, 80
-    ));
-
     entity.removeComponent(RectangleRendererComponent.class);
     entity.removeComponent(CircleRendererComponent.class);
     entity.removeComponent(TriangleRendererComponent.class);
@@ -302,11 +298,11 @@ public class ParticleExample extends Sola {
     var sparksEmitter = new ParticleEmitterComponent()
       .appearanceConfig().setColorFunction(roll -> new Color(210, 80, 45)).setSizeBounds(6, 12).done()
       .movementConfig()
-      .setSpeedBounds(10, 70).done()
-      .emissionConfig().setCountPerEmit(4).setLifeBounds(1, 2.5f).setInterval(0.05f).done();
+      .setSpeedBounds(20, 48).done()
+      .emissionConfig().setCountPerEmit(3).setLifeBounds(1, 2f).setInterval(0.1f).done();
 
     sparksEmitter.emissionConfig().setShape(new TriangleEmitterShape(
-      new Vector2D(0, -1), 100, 160
+      new Vector2D(0, 1), 40, 20
     ));
 
     entity.removeComponent(RectangleRendererComponent.class);

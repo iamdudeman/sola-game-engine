@@ -9,6 +9,7 @@ import technology.sola.math.linear.Vector2D;
 public class TriangleEmitterShape extends ParticleEmitterShape {
   private boolean isEmitFromBase = true;
   private Triangle triangle;
+  private Vector2D center;
 
   public TriangleEmitterShape(Vector2D direction, float height, float width) {
     Vector2D p1 = new Vector2D(0, 0);
@@ -18,6 +19,7 @@ public class TriangleEmitterShape extends ParticleEmitterShape {
     Vector2D p3 = pL.subtract(perpPL.scalar(width * 0.5f));
 
     triangle = new Triangle(p1, p2, p3);
+    center = triangle.getCentroid();
   }
 
   @Override
@@ -48,7 +50,7 @@ public class TriangleEmitterShape extends ParticleEmitterShape {
 
   @Override
   protected Vector2D getCenter() {
-    return triangle.getCentroid();
+    return center;
   }
 
   @Override
