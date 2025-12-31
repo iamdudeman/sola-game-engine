@@ -53,9 +53,7 @@ public class CircleEmitterShape extends ParticleEmitterShape {
 
   @Override
   protected Vector2D randomPointInShape() {
-    var r = radius * (float) Math.sqrt(SolaRandom.nextFloat());
-
-    return getRandomPoint(r);
+    return getRandomPoint(radius * (float) Math.sqrt(SolaRandom.nextFloat()));
   }
 
   @Override

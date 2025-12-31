@@ -82,12 +82,18 @@ public class RectangleEmitterShape extends ParticleEmitterShape {
       boolean isTop = SolaRandom.nextBoolean();
       float x = SolaRandom.nextFloat() * width;
 
-      return new Vector2D(x, isTop ? 0 : height);
+      return new Vector2D(
+        x,
+        isTop ? 0 : height
+      );
     }
 
     boolean isLeft = SolaRandom.nextBoolean();
     float y = SolaRandom.nextFloat() * height;
 
-    return new Vector2D(isLeft ? 0 : width, y);
+    return new Vector2D(
+      isLeft ? 0 : width,
+      y
+    );
   }
 }
