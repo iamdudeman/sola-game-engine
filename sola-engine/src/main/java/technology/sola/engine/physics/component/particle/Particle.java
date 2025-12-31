@@ -2,6 +2,7 @@ package technology.sola.engine.physics.component.particle;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.physics.component.particle.appearance.ParticleShape;
 import technology.sola.math.linear.Vector2D;
 
 /**
@@ -10,14 +11,14 @@ import technology.sola.math.linear.Vector2D;
 @NullMarked
 public class Particle {
   private final Color baseColor;
-  private final Shape shape;
+  private final ParticleShape shape;
   private final float size;
   private final float inverseMaxLifespan;
   private final Vector2D velocity;
   private final Vector2D position;
   private float remainingLifespan;
 
-  Particle(Color baseColor, Shape shape, float size, float maxLifespan, Vector2D position, Vector2D velocity) {
+  Particle(Color baseColor, ParticleShape shape, float size, float maxLifespan, Vector2D position, Vector2D velocity) {
     this.baseColor = baseColor;
     this.shape = shape;
     this.size = size;
@@ -55,9 +56,9 @@ public class Particle {
   }
 
   /**
-   * @return the {@link Shape} of the particle
+   * @return the {@link ParticleShape} of the particle
    */
-  public Shape getShape() {
+  public ParticleShape getShape() {
     return shape;
   }
 
@@ -73,10 +74,5 @@ public class Particle {
    */
   public float getSize() {
     return size;
-  }
-
-  public enum Shape {
-    CIRCLE,
-    SQUARE
   }
 }

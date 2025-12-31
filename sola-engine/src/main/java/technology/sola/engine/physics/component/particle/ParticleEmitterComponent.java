@@ -48,8 +48,7 @@ public class ParticleEmitterComponent implements Component {
         float yVel = direction.y() * speed + inheritedVelocity.y() * inheritedVelocityPercentage;
         float size = SolaRandom.nextFloat(appearance.minSize(), appearance.maxSize());
         float life = SolaRandom.nextFloat(emission.minLife(), emission.maxLife());
-        boolean isCircle = SolaRandom.nextFloat() < appearance.percentCircle();
-        var shape = isCircle ? Particle.Shape.CIRCLE : Particle.Shape.SQUARE;
+        var shape = appearance.shapeFunction().getShape(SolaRandom.nextFloat());
 
         // adjust position to be centered instead of top-left
         position.mutateSubtract(size * 0.5f, size * 0.5f);

@@ -22,6 +22,7 @@ import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.component.particle.ParticleEmitterComponent;
+import technology.sola.engine.physics.component.particle.appearance.ParticleShape;
 import technology.sola.engine.physics.system.ParticleSystem;
 
 import java.util.function.Consumer;
@@ -143,7 +144,10 @@ public class ParticleExample extends Sola {
   private static void setEmitterToMixed(Entity entity) {
     var mixedEmitter = new ParticleEmitterComponent()
       .emissionConfig().setLifeBounds(2, 4).done()
-      .appearanceConfig().setPercentCircle(0.5f).setSizeBounds(5, 15).done();
+      .appearanceConfig()
+        .setShapeFunction(roll -> roll < 0.5f ? ParticleShape.CIRCLE : ParticleShape.SQUARE)
+        .setSizeBounds(5, 15)
+        .done();
 
     entity.addComponent(mixedEmitter)
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))

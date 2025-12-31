@@ -2,6 +2,7 @@ package technology.sola.engine.physics.component.particle;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.physics.component.particle.appearance.ParticleShapeFunction;
 
 /**
  * ParticleAppearanceConfiguration contains configuration for the appearance properties of emitted {@link Particle}s.
@@ -11,7 +12,7 @@ public class ParticleAppearanceConfiguration extends ParticleConfiguration {
   private float minSize = 8f;
   private float maxSize = 8f;
   private Color color = Color.WHITE;
-  private float percentCircle = 1f;
+  private ParticleShapeFunction shapeFunction = ParticleShapeFunction.CIRCLE;
 
   ParticleAppearanceConfiguration(ParticleEmitterComponent owner) {
     super(owner);
@@ -77,21 +78,12 @@ public class ParticleAppearanceConfiguration extends ParticleConfiguration {
   }
 
 
-  /**
-   * @return the percentage of particles that will be circles
-   */
-  public float percentCircle() {
-    return percentCircle;
+  public ParticleShapeFunction shapeFunction() {
+    return shapeFunction;
   }
 
-  /**
-   * Updates the percentage of particles that will be circles.
-   *
-   * @param percentCircle the new percentage of particles that will be circles (value 0-1 where 1 will be all circles)
-   * @return this
-   */
-  public ParticleAppearanceConfiguration setPercentCircle(float percentCircle) {
-    this.percentCircle = percentCircle;
+  public ParticleAppearanceConfiguration setShapeFunction(ParticleShapeFunction shapeFunction) {
+    this.shapeFunction = shapeFunction;
 
     return this;
   }

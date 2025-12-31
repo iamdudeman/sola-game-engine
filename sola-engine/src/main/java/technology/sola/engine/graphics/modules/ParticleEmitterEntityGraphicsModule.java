@@ -7,8 +7,8 @@ import technology.sola.ecs.view.View;
 import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
-import technology.sola.engine.physics.component.particle.Particle;
 import technology.sola.engine.physics.component.particle.ParticleEmitterComponent;
+import technology.sola.engine.physics.component.particle.appearance.ParticleShape;
 import technology.sola.math.linear.Matrix3D;
 
 /**
@@ -32,14 +32,14 @@ public class ParticleEmitterEntityGraphicsModule extends SolaEntityGraphicsModul
       var positionAfterCameraTransform = cameraTranslationTransform.multiply(particleTranslate);
       var sizeAfterCameraTransform = cameraScaleTransform.multiply(particle.getSize(), particle.getSize());
 
-      if (particle.getShape() == Particle.Shape.CIRCLE) {
+      if (particle.getShape() == ParticleShape.CIRCLE) {
         renderer.fillCircle(
           positionAfterCameraTransform.x(),
           positionAfterCameraTransform.y(),
           sizeAfterCameraTransform.x() * 0.5f,
           particle.getColor()
         );
-      } else if (particle.getShape() == Particle.Shape.SQUARE) {
+      } else if (particle.getShape() == ParticleShape.SQUARE) {
         renderer.fillRect(
           positionAfterCameraTransform.x(),
           positionAfterCameraTransform.y(),
