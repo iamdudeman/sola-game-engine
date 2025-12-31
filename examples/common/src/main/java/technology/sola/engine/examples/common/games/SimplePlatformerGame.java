@@ -213,7 +213,7 @@ public class SimplePlatformerGame extends Sola {
     world.createEntity()
       .setName("confetti")
       .addComponent(new ParticleEmitterComponent()
-        .appearanceConfig().setColor(Color.YELLOW).setSizeBounds(4, 8).done()
+        .appearanceConfig().setColorFunction(roll -> Color.YELLOW).setSizeBounds(4, 8).done()
         .movementConfig().setSpeed(100)
 //        .setVelocityBounds(new Vector2D(-100, -100), new Vector2D(100, 100))
         .done()

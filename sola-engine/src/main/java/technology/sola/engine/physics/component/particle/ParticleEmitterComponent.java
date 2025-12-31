@@ -49,12 +49,13 @@ public class ParticleEmitterComponent implements Component {
         float size = SolaRandom.nextFloat(appearance.minSize(), appearance.maxSize());
         float life = SolaRandom.nextFloat(emission.minLife(), emission.maxLife());
         var shape = appearance.shapeFunction().getShape(SolaRandom.nextFloat());
+        var color = appearance.colorFunction().getColor(SolaRandom.nextFloat());
 
         // adjust position to be centered instead of top-left
         position.mutateSubtract(size * 0.5f, size * 0.5f);
 
         particleList.add(
-          new Particle(appearance.color(), shape, size, life, position, new Vector2D(xVel, yVel))
+          new Particle(color, shape, size, life, position, new Vector2D(xVel, yVel))
         );
       }
 

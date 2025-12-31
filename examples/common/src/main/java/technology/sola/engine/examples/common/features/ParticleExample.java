@@ -165,7 +165,7 @@ public class ParticleExample extends Sola {
 
   private static void setEmitterToFire(Entity entity) {
     var fireEmitter = new ParticleEmitterComponent()
-      .appearanceConfig().setColor(new Color(230, 40, 45)).setSizeBounds(6, 10).done()
+      .appearanceConfig().setColorFunction(roll -> new Color(230, 40, 45)).setSizeBounds(6, 10).done()
       .movementConfig()
       .setSpeed(18)
       // todo make it look like fire again (cone/triangle emitter)
@@ -180,7 +180,7 @@ public class ParticleExample extends Sola {
 
   private static void setEmitterToSparks(Entity entity) {
     var sparksEmitter = new ParticleEmitterComponent()
-      .appearanceConfig().setColor(new Color(210, 80, 45)).setSizeBounds(6, 12).done()
+      .appearanceConfig().setColorFunction(roll -> new Color(210, 80, 45)).setSizeBounds(6, 12).done()
       .movementConfig()
       .setSpeed(18)
       // todo make it look like sparks again (cone/triangle emitter)

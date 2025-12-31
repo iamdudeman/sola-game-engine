@@ -230,7 +230,7 @@ public class LightingExample extends Sola {
 
   private static ParticleEmitterComponent buildFireParticleEmitterComponent() {
     return new ParticleEmitterComponent()
-      .appearanceConfig().setColor(new Color(230, 40, 45)).setSizeBounds(1, 3).done()
+      .appearanceConfig().setColorFunction(roll -> new Color(230, 40, 45)).setSizeBounds(1, 3).done()
       .movementConfig()
       .setSpeed(1.2f) // todo make it look like a torch again (cone/triangle emitter)
 //      .setVelocityBounds(new Vector2D(-1.2f, -3f), new Vector2D(1.2f, 0))

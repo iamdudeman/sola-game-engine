@@ -2,6 +2,7 @@ package technology.sola.engine.physics.component.particle;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.physics.component.particle.appearance.ParticleColorFunction;
 import technology.sola.engine.physics.component.particle.appearance.ParticleShapeFunction;
 
 /**
@@ -11,7 +12,7 @@ import technology.sola.engine.physics.component.particle.appearance.ParticleShap
 public class ParticleAppearanceConfiguration extends ParticleConfiguration {
   private float minSize = 8f;
   private float maxSize = 8f;
-  private Color color = Color.WHITE;
+  private ParticleColorFunction colorFunction = ParticleColorFunction.WHITE;
   private ParticleShapeFunction shapeFunction = ParticleShapeFunction.CIRCLE;
 
   ParticleAppearanceConfiguration(ParticleEmitterComponent owner) {
@@ -58,21 +59,12 @@ public class ParticleAppearanceConfiguration extends ParticleConfiguration {
   }
 
 
-  /**
-   * @return the base {@link Color} of each new {@link Particle}
-   */
-  public Color color() {
-    return color;
+  public ParticleColorFunction colorFunction() {
+    return colorFunction;
   }
 
-  /**
-   * Updates the base {@link Color} of each new {@link Particle}.
-   *
-   * @param color the new color for newly emitted particles
-   * @return this
-   */
-  public ParticleAppearanceConfiguration setColor(Color color) {
-    this.color = color;
+  public ParticleAppearanceConfiguration setColorFunction(ParticleColorFunction colorFunction) {
+    this.colorFunction = colorFunction;
 
     return this;
   }
