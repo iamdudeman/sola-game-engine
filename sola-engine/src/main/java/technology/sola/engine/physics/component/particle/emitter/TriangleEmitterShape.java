@@ -10,12 +10,12 @@ public class TriangleEmitterShape extends ParticleEmitterShape {
   private boolean isEmitFromBase = true;
   private Triangle triangle;
 
-  public TriangleEmitterShape(Vector2D direction, float length, float width) {
+  public TriangleEmitterShape(Vector2D direction, float height, float width) {
     Vector2D p1 = new Vector2D(0, 0);
-    Vector2D pL = p1.add(direction.normalize().scalar(length));
+    Vector2D pL = p1.add(direction.normalize().scalar(height));
     Vector2D perpPL = new Vector2D(pL.y(), -pL.x()).normalize();
-    Vector2D p2 = pL.add(perpPL.scalar(width));
-    Vector2D p3 = pL.subtract(perpPL.scalar(width));
+    Vector2D p2 = pL.add(perpPL.scalar(width * 0.5f));
+    Vector2D p3 = pL.subtract(perpPL.scalar(width * 0.5f));
 
     triangle = new Triangle(p1, p2, p3);
   }

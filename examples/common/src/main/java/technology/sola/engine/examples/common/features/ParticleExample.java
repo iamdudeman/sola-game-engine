@@ -255,7 +255,7 @@ public class ParticleExample extends Sola {
       .emissionConfig().setCountPerEmit(4).setLifeBounds(1, 1.5f).setInterval(0.01f).done();
 
     fireEmitter.emissionConfig().setShape(new TriangleEmitterShape(
-      new Vector2D(0, -1), 50, 40
+      new Vector2D(0, -1), 50, 80
     ));
 
     entity.removeComponent(RectangleRendererComponent.class);
@@ -275,7 +275,7 @@ public class ParticleExample extends Sola {
       .emissionConfig().setCountPerEmit(4).setLifeBounds(1, 2.5f).setInterval(0.05f).done();
 
     sparksEmitter.emissionConfig().setShape(new TriangleEmitterShape(
-      new Vector2D(0, -1), 100, 80
+      new Vector2D(0, -1), 100, 160
     ));
 
     entity.removeComponent(RectangleRendererComponent.class);

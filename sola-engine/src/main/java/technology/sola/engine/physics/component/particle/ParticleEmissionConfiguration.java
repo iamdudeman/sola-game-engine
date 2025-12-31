@@ -13,7 +13,7 @@ import technology.sola.math.linear.Vector2D;
 @NullMarked
 public class ParticleEmissionConfiguration extends ParticleConfiguration {
   private ParticleEmitterShape shape = new TriangleEmitterShape(
-    new Vector2D(0, -1f), 100, 20
+    new Vector2D(0, -1f), 100, 40
   );
   private float minLife = 1f;
   private float maxLife = 2f;
