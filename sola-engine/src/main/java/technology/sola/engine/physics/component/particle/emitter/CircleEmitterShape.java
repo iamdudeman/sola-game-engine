@@ -13,35 +13,32 @@ public class CircleEmitterShape extends ParticleEmitterShape {
     setRadius(radius);
   }
 
-  @Override
-  public EmissionDetails nextEmission() {
-    var position = isEmitFromShell()
-      ? getRandomPointOnCircle()
-      : getRandomPointInCircle();
-    var direction = isRandomDirection()
-      ? randomDirection()
-      : position.subtract(center).normalize();
-
-    return new EmissionDetails(position, direction);
-  }
-
   public float getRadius() {
     return radius;
   }
 
-  public void setRadius(float radius) {
+  public CircleEmitterShape setRadius(float radius) {
     this.radius = radius;
 
     center = new Vector2D(radius, radius);
+
+    return this;
   }
 
-  private Vector2D getRandomPointInCircle() {
+  @Override
+  protected Vector2D getCenter() {
+    return center;
+  }
+
+  @Override
+  protected Vector2D randomPointInShape() {
     var r = radius * (float) Math.sqrt(SolaRandom.nextFloat());
 
     return getRandomPoint(r);
   }
 
-  private Vector2D getRandomPointOnCircle() {
+  @Override
+  protected Vector2D randomPointOnPerimeter() {
     return getRandomPoint(radius);
   }
 

@@ -90,6 +90,7 @@ public class ParticleExample extends Sola {
           ),
         buildParticleOptionButton(world, "Default", ParticleExample::setEmitterToDefault),
         buildParticleOptionButton(world, "Shell", ParticleExample::setEmitterToShell),
+        buildParticleOptionButton(world, "Random", ParticleExample::setEmitterToRandom),
         buildParticleOptionButton(world, "Mixed", ParticleExample::setEmitterToMixed),
         buildParticleOptionButton(world, "Burst", ParticleExample::setEmitterToBurst),
         buildParticleOptionButton(world, "Fire", ParticleExample::setEmitterToFire),
@@ -121,6 +122,17 @@ public class ParticleExample extends Sola {
     var shellEmitter = new ParticleEmitterComponent();
 
     shellEmitter.emissionConfig().shape().setEmitFromShell(true);
+
+    entity.addComponent(shellEmitter)
+      .addComponent(new CircleRendererComponent(Color.YELLOW, false))
+      .addComponent(new BlendModeComponent(BlendMode.NORMAL))
+      .addComponent(new TransformComponent(250, 300, 100));
+  }
+
+  private static void setEmitterToRandom(Entity entity) {
+    var shellEmitter = new ParticleEmitterComponent();
+
+    shellEmitter.emissionConfig().shape().setEmitFromShell(true).setRandomDirection(true);
 
     entity.addComponent(shellEmitter)
       .addComponent(new CircleRendererComponent(Color.YELLOW, false))

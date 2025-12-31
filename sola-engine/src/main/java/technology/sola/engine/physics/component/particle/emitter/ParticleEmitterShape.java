@@ -18,7 +18,16 @@ public abstract class ParticleEmitterShape {
    *
    * @return the {@link EmissionDetails} for the next particle emitted.
    */
-  public abstract EmissionDetails nextEmission();
+  public EmissionDetails nextEmission() {
+    var position = isEmitFromShell()
+      ? randomPointOnPerimeter()
+      : randomPointInShape();
+    var direction = isRandomDirection()
+      ? randomDirection()
+      : position.subtract(getCenter()).normalize();
+
+    return new EmissionDetails(position, direction);
+  }
 
   /**
    * @return true if particles should only be emitted from the shell of the shape
@@ -60,23 +69,23 @@ public abstract class ParticleEmitterShape {
   }
 
   /**
-   * @return a normalized and randomized direction vector
+   * @return the center point of the shape
    */
-  protected Vector2D randomDirection() {
+  protected abstract Vector2D getCenter();
+
+  /**
+   * @return a random point inside the shape
+   */
+  protected abstract Vector2D randomPointInShape();
+
+  /**
+   * @return a random point on the perimeter of the shape
+   */
+  protected abstract Vector2D randomPointOnPerimeter();
+
+  private Vector2D randomDirection() {
     var angle = SolaRandom.nextFloat() * 2 * (float) Math.PI;
 
     return new Vector2D((float) Math.cos(angle), (float) Math.sin(angle));
-  }
-
-  /**
-   * Holds the position and direction details for a particle to be emitted.
-   *
-   * @param position  the position of the particle to be emitted
-   * @param direction the direction of the particle to be emitted
-   */
-  public record EmissionDetails(
-    Vector2D position,
-    Vector2D direction
-  ) {
   }
 }
