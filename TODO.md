@@ -1,7 +1,7 @@
 # sola-game-engine TODO list
 
 * Particle System
-    * emission shape rectangle
+    * ~~emission shape rectangle~~
     * emission shape cone/triangle
     * consider researching how other engines do particle systems to maybe create an easier to use api
         * unity adds particle functionality via modules (ex. "Color over lifetime module")
@@ -9,7 +9,7 @@
         * modify size over lifetime option
         * modify size by velocity
     * movement
-        * modify velocity over lifetime
+        * modify velocity over the lifetime
         * _consider some sort of "swaying" for non-linear particles_
             * concept of "noise" for movement - https://docs.unity3d.com/Manual/PartSysNoiseModule.html
     * consider adding support for "pooling" for potential performance improvement
