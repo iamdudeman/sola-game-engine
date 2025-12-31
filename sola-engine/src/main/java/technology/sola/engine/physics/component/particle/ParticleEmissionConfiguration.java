@@ -4,13 +4,17 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import technology.sola.engine.physics.component.particle.emitter.CircleEmitterShape;
 import technology.sola.engine.physics.component.particle.emitter.ParticleEmitterShape;
+import technology.sola.engine.physics.component.particle.emitter.PseudoConeEmitterShape;
+import technology.sola.math.linear.Vector2D;
 
 /**
  * ParticleEmissionConfiguration contains configuration for the emission properties for emitting {@link Particle}s.
  */
 @NullMarked
 public class ParticleEmissionConfiguration extends ParticleConfiguration {
-  private ParticleEmitterShape shape = new CircleEmitterShape(50);
+  private ParticleEmitterShape shape = new PseudoConeEmitterShape(
+    new Vector2D(0, -1f), 100, 20
+  );
   private float minLife = 1f;
   private float maxLife = 2f;
   private int countPerEmit = 1;

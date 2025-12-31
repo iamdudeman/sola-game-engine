@@ -12,6 +12,7 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.RectangleRendererComponent;
+import technology.sola.engine.graphics.components.TriangleRendererComponent;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
@@ -24,8 +25,12 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.component.particle.ParticleEmitterComponent;
 import technology.sola.engine.physics.component.particle.appearance.ParticleShape;
+import technology.sola.engine.physics.component.particle.emitter.CircleEmitterShape;
+import technology.sola.engine.physics.component.particle.emitter.PseudoConeEmitterShape;
 import technology.sola.engine.physics.component.particle.emitter.RectangleEmitterShape;
 import technology.sola.engine.physics.system.ParticleSystem;
+import technology.sola.math.geometry.Triangle;
+import technology.sola.math.linear.Vector2D;
 
 import java.util.function.Consumer;
 
@@ -133,19 +138,26 @@ public class ParticleExample extends Sola {
     var defaultEmitter = new ParticleEmitterComponent();
 
     entity.removeComponent(RectangleRendererComponent.class);
+    entity.removeComponent(CircleRendererComponent.class);
+    entity.removeComponent(TriangleRendererComponent.class);
 
     entity.addComponent(defaultEmitter)
-      .addComponent(new CircleRendererComponent(Color.YELLOW, false))
+      .addComponent(new TriangleRendererComponent(Color.YELLOW, false, new Triangle(
+        new Vector2D(0, 0), new Vector2D(-20, -100), new Vector2D(20, -100)
+      )))
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(new TransformComponent(250, 300, 100));
+      .addComponent(new TransformComponent(250, 300, 1));
   }
 
   private static void setEmitterToShell(Entity entity) {
     var shellEmitter = new ParticleEmitterComponent();
 
+    shellEmitter.emissionConfig().setShape(new CircleEmitterShape(50));
     shellEmitter.emissionConfig().shape().setEmitFromShell(true);
 
     entity.removeComponent(RectangleRendererComponent.class);
+    entity.removeComponent(CircleRendererComponent.class);
+    entity.removeComponent(TriangleRendererComponent.class);
 
     entity.addComponent(shellEmitter)
       .addComponent(new CircleRendererComponent(Color.YELLOW, false))
@@ -156,9 +168,12 @@ public class ParticleExample extends Sola {
   private static void setEmitterToRandom(Entity entity) {
     var shellEmitter = new ParticleEmitterComponent();
 
+    shellEmitter.emissionConfig().setShape(new CircleEmitterShape(50));
     shellEmitter.emissionConfig().shape().setEmitFromShell(true).setRandomDirection(true);
 
     entity.removeComponent(RectangleRendererComponent.class);
+    entity.removeComponent(CircleRendererComponent.class);
+    entity.removeComponent(TriangleRendererComponent.class);
 
     entity.addComponent(shellEmitter)
       .addComponent(new CircleRendererComponent(Color.YELLOW, false))
@@ -173,7 +188,9 @@ public class ParticleExample extends Sola {
 
     emitter.emissionConfig().shape().setEmitFromShell(true);
 
+    entity.removeComponent(RectangleRendererComponent.class);
     entity.removeComponent(CircleRendererComponent.class);
+    entity.removeComponent(TriangleRendererComponent.class);
 
     entity.addComponent(emitter)
       .addComponent(new RectangleRendererComponent(Color.YELLOW, false))
@@ -189,8 +206,9 @@ public class ParticleExample extends Sola {
         .setSizeBounds(5, 15)
         .done();
 
-    entity.removeComponent(CircleRendererComponent.class);
     entity.removeComponent(RectangleRendererComponent.class);
+    entity.removeComponent(CircleRendererComponent.class);
+    entity.removeComponent(TriangleRendererComponent.class);
 
     entity.addComponent(emitter)
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
@@ -201,8 +219,9 @@ public class ParticleExample extends Sola {
     var burstEmitter = new ParticleEmitterComponent()
       .emissionConfig().setCycles(4).setInterval(2f).setCountPerEmit(35).done();
 
-    entity.removeComponent(CircleRendererComponent.class);
     entity.removeComponent(RectangleRendererComponent.class);
+    entity.removeComponent(CircleRendererComponent.class);
+    entity.removeComponent(TriangleRendererComponent.class);
 
     entity.addComponent(burstEmitter)
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
@@ -219,8 +238,9 @@ public class ParticleExample extends Sola {
       .done()
       .emissionConfig().setCountPerEmit(10).setLifeBounds(1, 1).setInterval(0.1f).done();
 
-    entity.removeComponent(CircleRendererComponent.class);
     entity.removeComponent(RectangleRendererComponent.class);
+    entity.removeComponent(CircleRendererComponent.class);
+    entity.removeComponent(TriangleRendererComponent.class);
 
     entity.addComponent(fireEmitter)
       .addComponent(new BlendModeComponent(BlendMode.LINEAR_DODGE))
@@ -237,8 +257,9 @@ public class ParticleExample extends Sola {
       .done()
       .emissionConfig().setCountPerEmit(1).setLifeBounds(1, 3).setInterval(0.1f).done();
 
-    entity.removeComponent(CircleRendererComponent.class);
     entity.removeComponent(RectangleRendererComponent.class);
+    entity.removeComponent(CircleRendererComponent.class);
+    entity.removeComponent(TriangleRendererComponent.class);
 
     entity.addComponent(sparksEmitter)
       .addComponent(new BlendModeComponent(BlendMode.DISSOLVE))
