@@ -18,6 +18,10 @@ public class CircleEmitterShape extends ParticleEmitterShape {
   }
 
   public CircleEmitterShape setRadius(float radius) {
+    if (radius <= 0) {
+      throw new IllegalArgumentException("radius must be greater than 0");
+    }
+
     this.radius = radius;
 
     center = new Vector2D(radius, radius);
