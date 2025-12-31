@@ -18,11 +18,11 @@ public class CircleEmitterShape extends ParticleEmitterShape {
     var position = isEmitFromShell()
       ? getRandomPointOnCircle()
       : getRandomPointInCircle();
+    var direction = isRandomDirection()
+      ? randomDirection()
+      : position.subtract(center).normalize();
 
-    return new EmissionDetails(
-      position,
-      position.subtract(center).normalize()
-    );
+    return new EmissionDetails(position, direction);
   }
 
   public float getRadius() {

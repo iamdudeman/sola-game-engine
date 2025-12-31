@@ -1,6 +1,7 @@
 package technology.sola.engine.physics.component.particle;
 
 import org.jspecify.annotations.NullMarked;
+import technology.sola.engine.utils.SolaRandom;
 import technology.sola.math.linear.Vector2D;
 
 @NullMarked
@@ -28,6 +29,12 @@ public abstract class ParticleEmitterShape {
     this.randomDirection = randomDirection;
 
     return this;
+  }
+
+  protected Vector2D randomDirection() {
+    var angle = SolaRandom.nextFloat() * 2 * (float) Math.PI;
+
+    return new Vector2D((float) Math.cos(angle), (float) Math.sin(angle));
   }
 
   public record EmissionDetails(

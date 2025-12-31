@@ -23,7 +23,6 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.component.particle.ParticleEmitterComponent;
 import technology.sola.engine.physics.system.ParticleSystem;
-import technology.sola.math.linear.Vector2D;
 
 import java.util.function.Consumer;
 
