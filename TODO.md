@@ -1,6 +1,8 @@
 # sola-game-engine TODO list
 
 * Particle System
+    * emission shape rectangle
+    * emission shape cone/triangle
     * consider researching how other engines do particle systems to maybe create an easier to use api
         * unity adds particle functionality via modules (ex. "Color over lifetime module")
     * appearance
@@ -10,13 +12,6 @@
         * modify velocity over lifetime
         * _consider some sort of "swaying" for non-linear particles_
             * concept of "noise" for movement - https://docs.unity3d.com/Manual/PartSysNoiseModule.html
-    * emission
-        * _consider ability to spawn particles in a radius away from center_
-            * probably want the ability to make particles go to and from center for this
-            * replace current velocity stuff with "emitter shapes" (rectangle, circle, cone or triangle??)
-                * ability to set "emit from shell" -> particles start on outside of emitter shape
-                * ability to set "random direction" -> particles can spawn in random direction
-                * replace movement config velocity to a "speed" instead
     * consider adding support for "pooling" for potential performance improvement
 
 ## Known Bugs List
