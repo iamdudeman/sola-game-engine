@@ -16,14 +16,27 @@ public class ParticleMovementConfiguration extends ParticleConfiguration {
   }
 
 
+  /**
+   * @return the minimum speed for newly emitted {@link Particle}s
+   */
   public float minSpeed() {
     return minSpeed;
   }
 
+  /**
+   * @return the maximum speed for newly emitted {@link Particle}s
+   */
   public float maxSpeed() {
     return maxSpeed;
   }
 
+  /**
+   * Updates the minimum and maximum speed values for newly emitted {@link Particle}s.
+   *
+   * @param minSpeed the minimum speed for new particles
+   * @param maxSpeed the maximum speed for new particles
+   * @return this
+   */
   public ParticleMovementConfiguration setSpeedBounds(float minSpeed, float maxSpeed) {
     this.minSpeed = minSpeed;
     this.maxSpeed = maxSpeed;
@@ -31,6 +44,12 @@ public class ParticleMovementConfiguration extends ParticleConfiguration {
     return this;
   }
 
+  /**
+   * Sets the speed for newly emitted {@link Particle}s.
+   *
+   * @param speed the speed for new particles
+   * @return this
+   */
   public ParticleMovementConfiguration setSpeed(float speed) {
     this.minSpeed = speed;
     this.maxSpeed = speed;

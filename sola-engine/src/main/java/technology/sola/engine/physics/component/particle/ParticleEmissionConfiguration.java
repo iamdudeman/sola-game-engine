@@ -23,10 +23,19 @@ public class ParticleEmissionConfiguration extends ParticleConfiguration {
   }
 
 
+  /**
+   * @return the {@link ParticleEmitterShape} for this emitter. Defaults to {@link CircleEmitterShape}
+   */
   public ParticleEmitterShape shape() {
     return shape;
   }
 
+  /**
+   * Updates the {@link ParticleEmitterShape} for this emitter.
+   *
+   * @param shape the new shape
+   * @return this
+   */
   public ParticleEmissionConfiguration setShape(ParticleEmitterShape shape) {
     this.shape = shape;
 
