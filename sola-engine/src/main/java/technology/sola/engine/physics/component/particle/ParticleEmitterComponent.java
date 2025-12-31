@@ -35,7 +35,7 @@ public class ParticleEmitterComponent implements Component {
     timeSinceLastEmission += delta;
 
     if (isAbleToEmit(emission)) {
-      var speed = SolaRandom.nextFloat(movement.maxSpeed(), movement.maxSpeed());
+      var speed = SolaRandom.nextFloat(movement.minSpeed(), movement.maxSpeed());
       var appearance = this.appearance;
 
       for (int i = 0; i < emission.countPerEmit(); i++) {
