@@ -2,7 +2,7 @@
 
 * Particle System
     * ~~emission shape rectangle~~
-    * emission shape cone/triangle
+    * ~~emission shape cone/triangle~~
     * consider researching how other engines do particle systems to maybe create an easier to use api
         * unity adds particle functionality via modules (ex. "Color over lifetime module")
     * appearance

@@ -6,16 +6,16 @@ import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Vector2D;
 
 @NullMarked
-public class PseudoConeEmitterShape extends ParticleEmitterShape {
+public class TriangleEmitterShape extends ParticleEmitterShape {
   private boolean isEmitFromBase = true;
   private Triangle triangle;
 
-  public PseudoConeEmitterShape(Vector2D direction, float length, float radius) {
+  public TriangleEmitterShape(Vector2D direction, float length, float width) {
     Vector2D p1 = new Vector2D(0, 0);
     Vector2D pL = p1.add(direction.normalize().scalar(length));
     Vector2D perpPL = new Vector2D(pL.y(), -pL.x()).normalize();
-    Vector2D p2 = pL.add(perpPL.scalar(radius));
-    Vector2D p3 = pL.subtract(perpPL.scalar(radius));
+    Vector2D p2 = pL.add(perpPL.scalar(width));
+    Vector2D p3 = pL.subtract(perpPL.scalar(width));
 
     triangle = new Triangle(p1, p2, p3);
   }
@@ -40,7 +40,7 @@ public class PseudoConeEmitterShape extends ParticleEmitterShape {
     return super.nextEmission();
   }
 
-  public PseudoConeEmitterShape setEmitFromBase(boolean emitFromBase) {
+  public TriangleEmitterShape setEmitFromBase(boolean emitFromBase) {
     this.isEmitFromBase = emitFromBase;
 
     return this;

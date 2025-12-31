@@ -26,7 +26,7 @@ import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.component.particle.ParticleEmitterComponent;
 import technology.sola.engine.physics.component.particle.appearance.ParticleShape;
 import technology.sola.engine.physics.component.particle.emitter.CircleEmitterShape;
-import technology.sola.engine.physics.component.particle.emitter.PseudoConeEmitterShape;
+import technology.sola.engine.physics.component.particle.emitter.TriangleEmitterShape;
 import technology.sola.engine.physics.component.particle.emitter.RectangleEmitterShape;
 import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.math.geometry.Triangle;
@@ -254,7 +254,7 @@ public class ParticleExample extends Sola {
       .setSpeedBounds(34, 60).done()
       .emissionConfig().setCountPerEmit(4).setLifeBounds(1, 1.5f).setInterval(0.01f).done();
 
-    fireEmitter.emissionConfig().setShape(new PseudoConeEmitterShape(
+    fireEmitter.emissionConfig().setShape(new TriangleEmitterShape(
       new Vector2D(0, -1), 50, 40
     ));
 
@@ -274,7 +274,7 @@ public class ParticleExample extends Sola {
       .setSpeedBounds(10, 70).done()
       .emissionConfig().setCountPerEmit(4).setLifeBounds(1, 2.5f).setInterval(0.05f).done();
 
-    sparksEmitter.emissionConfig().setShape(new PseudoConeEmitterShape(
+    sparksEmitter.emissionConfig().setShape(new TriangleEmitterShape(
       new Vector2D(0, -1), 100, 80
     ));
 
