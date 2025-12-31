@@ -2,6 +2,8 @@ package technology.sola.engine.physics.component.particle;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
+import technology.sola.engine.physics.component.particle.emitter.CircleEmitterShape;
+import technology.sola.engine.physics.component.particle.emitter.ParticleEmitterShape;
 
 /**
  * ParticleEmissionConfiguration contains configuration for the emission properties for emitting {@link Particle}s.

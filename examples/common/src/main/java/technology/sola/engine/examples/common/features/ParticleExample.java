@@ -120,7 +120,7 @@ public class ParticleExample extends Sola {
   private static void setEmitterToShell(Entity entity) {
     var shellEmitter = new ParticleEmitterComponent();
 
-    shellEmitter.configureEmission().shape().setEmitFromShell(true);
+    shellEmitter.emissionConfig().shape().setEmitFromShell(true);
 
     entity.addComponent(shellEmitter)
       .addComponent(new CircleRendererComponent(Color.YELLOW, false))
@@ -130,8 +130,8 @@ public class ParticleExample extends Sola {
 
   private static void setEmitterToMixed(Entity entity) {
     var mixedEmitter = new ParticleEmitterComponent()
-      .configureEmission().setLifeBounds(2, 4).done()
-      .configureAppearance().setPercentCircle(0.5f).setSizeBounds(5, 15).done();
+      .emissionConfig().setLifeBounds(2, 4).done()
+      .appearanceConfig().setPercentCircle(0.5f).setSizeBounds(5, 15).done();
 
     entity.addComponent(mixedEmitter)
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
@@ -140,7 +140,7 @@ public class ParticleExample extends Sola {
 
   private static void setEmitterToBurst(Entity entity) {
     var burstEmitter = new ParticleEmitterComponent()
-      .configureEmission().setCycles(4).setInterval(2f).setCountPerEmit(35).done();
+      .emissionConfig().setCycles(4).setInterval(2f).setCountPerEmit(35).done();
 
     entity.addComponent(burstEmitter)
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
@@ -149,13 +149,13 @@ public class ParticleExample extends Sola {
 
   private static void setEmitterToFire(Entity entity) {
     var fireEmitter = new ParticleEmitterComponent()
-      .configureAppearance().setColor(new Color(230, 40, 45)).setSizeBounds(6, 10).done()
-      .configureMovement()
+      .appearanceConfig().setColor(new Color(230, 40, 45)).setSizeBounds(6, 10).done()
+      .movementConfig()
       .setSpeed(18)
       // todo make it look like fire again (cone/triangle emitter)
 //      .setVelocityBounds(new Vector2D(-18f, -70f), new Vector2D(18f, 0))
       .done()
-      .configureEmission().setCountPerEmit(10).setLifeBounds(1, 1).setInterval(0.1f).done();
+      .emissionConfig().setCountPerEmit(10).setLifeBounds(1, 1).setInterval(0.1f).done();
 
     entity.addComponent(fireEmitter)
       .addComponent(new BlendModeComponent(BlendMode.LINEAR_DODGE))
@@ -164,13 +164,13 @@ public class ParticleExample extends Sola {
 
   private static void setEmitterToSparks(Entity entity) {
     var sparksEmitter = new ParticleEmitterComponent()
-      .configureAppearance().setColor(new Color(210, 80, 45)).setSizeBounds(6, 12).done()
-      .configureMovement()
+      .appearanceConfig().setColor(new Color(210, 80, 45)).setSizeBounds(6, 12).done()
+      .movementConfig()
       .setSpeed(18)
       // todo make it look like sparks again (cone/triangle emitter)
 //      .setVelocityBounds(new Vector2D(-18f, -70f), new Vector2D(18f, 0))
       .done()
-      .configureEmission().setCountPerEmit(1).setLifeBounds(1, 3).setInterval(0.1f).done();
+      .emissionConfig().setCountPerEmit(1).setLifeBounds(1, 3).setInterval(0.1f).done();
 
     entity.addComponent(sparksEmitter)
       .addComponent(new BlendModeComponent(BlendMode.DISSOLVE))

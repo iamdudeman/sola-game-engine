@@ -1,4 +1,4 @@
-package technology.sola.engine.physics.component.particle;
+package technology.sola.engine.physics.component.particle.emitter;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.utils.SolaRandom;

@@ -75,21 +75,21 @@ public class ParticleEmitterComponent implements Component {
   /**
    * @return object containing emitted {@link Particle} movement configuration
    */
-  public ParticleMovementConfiguration configureMovement() {
+  public ParticleMovementConfiguration movementConfig() {
     return movement;
   }
 
   /**
    * @return object containing emitted {@link Particle} appearance configuration
    */
-  public ParticleAppearanceConfiguration configureAppearance() {
+  public ParticleAppearanceConfiguration appearanceConfig() {
     return appearance;
   }
 
   /**
    * @return object containing emitted {@link Particle} emission configuration
    */
-  public ParticleEmissionConfiguration configureEmission() {
+  public ParticleEmissionConfiguration emissionConfig() {
     return emission;
   }
 
