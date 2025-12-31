@@ -22,6 +22,10 @@ public class PseudoConeEmitterShape extends ParticleEmitterShape {
 
   @Override
   public EmissionDetails nextEmission() {
+    if (isEmitFromShell()) {
+      return super.nextEmission();
+    }
+
     if (isEmitFromBase) {
       var sideLength = triangle.p2().distance(triangle.p3());
       var direction = triangle.p3().subtract(triangle.p2()).normalize();
