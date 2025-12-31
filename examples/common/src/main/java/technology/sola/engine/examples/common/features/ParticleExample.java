@@ -219,6 +219,9 @@ public class ParticleExample extends Sola {
     var burstEmitter = new ParticleEmitterComponent()
       .emissionConfig().setCycles(4).setInterval(2f).setCountPerEmit(35).done();
 
+    burstEmitter.emissionConfig().setShape(new CircleEmitterShape(50));
+    burstEmitter.emissionConfig().shape().setEmitFromShell(true);
+
     entity.removeComponent(RectangleRendererComponent.class);
     entity.removeComponent(CircleRendererComponent.class);
     entity.removeComponent(TriangleRendererComponent.class);
@@ -232,11 +235,12 @@ public class ParticleExample extends Sola {
     var fireEmitter = new ParticleEmitterComponent()
       .appearanceConfig().setColorFunction(roll -> new Color(230, 40, 45)).setSizeBounds(6, 10).done()
       .movementConfig()
-      .setSpeed(18)
-      // todo make it look like fire again (cone/triangle emitter)
-//      .setVelocityBounds(new Vector2D(-18f, -70f), new Vector2D(18f, 0))
-      .done()
-      .emissionConfig().setCountPerEmit(10).setLifeBounds(1, 1).setInterval(0.1f).done();
+      .setSpeedBounds(34, 60).done()
+      .emissionConfig().setCountPerEmit(4).setLifeBounds(1, 1.5f).setInterval(0.01f).done();
+
+    fireEmitter.emissionConfig().setShape(new PseudoConeEmitterShape(
+      new Vector2D(0, -1), 50, 40
+    ));
 
     entity.removeComponent(RectangleRendererComponent.class);
     entity.removeComponent(CircleRendererComponent.class);
@@ -251,11 +255,12 @@ public class ParticleExample extends Sola {
     var sparksEmitter = new ParticleEmitterComponent()
       .appearanceConfig().setColorFunction(roll -> new Color(210, 80, 45)).setSizeBounds(6, 12).done()
       .movementConfig()
-      .setSpeed(18)
-      // todo make it look like sparks again (cone/triangle emitter)
-//      .setVelocityBounds(new Vector2D(-18f, -70f), new Vector2D(18f, 0))
-      .done()
-      .emissionConfig().setCountPerEmit(1).setLifeBounds(1, 3).setInterval(0.1f).done();
+      .setSpeedBounds(10, 70).done()
+      .emissionConfig().setCountPerEmit(4).setLifeBounds(1, 2.5f).setInterval(0.05f).done();
+
+    sparksEmitter.emissionConfig().setShape(new PseudoConeEmitterShape(
+      new Vector2D(0, -1), 100, 80
+    ));
 
     entity.removeComponent(RectangleRendererComponent.class);
     entity.removeComponent(CircleRendererComponent.class);

@@ -18,13 +18,19 @@ public class PseudoConeEmitterShape extends ParticleEmitterShape {
     Vector2D p3 = pL.subtract(perpPL.scalar(radius));
 
     triangle = new Triangle(p1, p2, p3);
-    System.out.println(triangle);
   }
 
   @Override
   public EmissionDetails nextEmission() {
     if (isEmitFromBase) {
-      // todo implement
+      var sideLength = triangle.p2().distance(triangle.p3());
+      var direction = triangle.p3().subtract(triangle.p2()).normalize();
+      var point = triangle.p2().add(direction.scalar(SolaRandom.nextFloat() * sideLength));
+
+      return new EmissionDetails(
+        new Vector2D(0, 0),
+        point.normalize()
+      );
     }
 
     return super.nextEmission();
