@@ -1,7 +1,6 @@
 package technology.sola.engine.physics.component.particle;
 
 import org.jspecify.annotations.NullMarked;
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.physics.component.particle.appearance.ParticleColorFunction;
 import technology.sola.engine.physics.component.particle.appearance.ParticleShapeFunction;
 
@@ -59,10 +58,19 @@ public class ParticleAppearanceConfiguration extends ParticleConfiguration {
   }
 
 
+  /**
+   * @return function to generate a {@link Particle}'s color
+   */
   public ParticleColorFunction colorFunction() {
     return colorFunction;
   }
 
+  /**
+   * Updates the {@link ParticleColorFunction} for newly emitted {@link Particle}s.
+   *
+   * @param colorFunction the new color function for new particles
+   * @return this
+   */
   public ParticleAppearanceConfiguration setColorFunction(ParticleColorFunction colorFunction) {
     this.colorFunction = colorFunction;
 
@@ -70,10 +78,19 @@ public class ParticleAppearanceConfiguration extends ParticleConfiguration {
   }
 
 
+  /**
+   * @return function to generate a {@link Particle}'s {@link technology.sola.engine.physics.component.particle.appearance.ParticleShape}
+   */
   public ParticleShapeFunction shapeFunction() {
     return shapeFunction;
   }
 
+  /**
+   * Updates the {@link ParticleShapeFunction} for newly emitted {@link Particle}s.
+   *
+   * @param shapeFunction the new shape function for new particles
+   * @return this
+   */
   public ParticleAppearanceConfiguration setShapeFunction(ParticleShapeFunction shapeFunction) {
     this.shapeFunction = shapeFunction;
 
