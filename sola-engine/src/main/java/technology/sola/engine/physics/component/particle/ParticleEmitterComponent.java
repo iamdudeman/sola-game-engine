@@ -35,20 +35,26 @@ public class ParticleEmitterComponent implements Component {
     timeSinceLastEmission += delta;
 
     if (isAbleToEmit(emission)) {
-      Vector2D minVel = movement.minVelocity();
-      Vector2D maxVel = movement.maxVelocity();
+      var speed = SolaRandom.nextFloat(movement.maxSpeed(), movement.maxSpeed());
       var appearance = this.appearance;
 
       for (int i = 0; i < emission.countPerEmit(); i++) {
-        float xVel = SolaRandom.nextFloat(minVel.x(), maxVel.x()) + inheritedVelocity.x() * movement.inheritVelocityPercentage();
-        float yVel = SolaRandom.nextFloat(minVel.y(), maxVel.y()) + inheritedVelocity.y() * movement.inheritVelocityPercentage();
+        var emissionDetails = emission.shape().nextEmission();
+        var position = emissionDetails.position();
+        var velocity = emissionDetails.direction();
+
+        float xVel = velocity.x() * speed + inheritedVelocity.x() * movement.inheritVelocityPercentage();
+        float yVel = velocity.y() * speed + inheritedVelocity.y() * movement.inheritVelocityPercentage();
         float size = SolaRandom.nextFloat(appearance.minSize(), appearance.maxSize());
         float life = SolaRandom.nextFloat(emission.minLife(), emission.maxLife());
         boolean isCircle = SolaRandom.nextFloat() < appearance.percentCircle();
         var shape = isCircle ? Particle.Shape.CIRCLE : Particle.Shape.SQUARE;
 
+        // adjust position to be centered instead of top-left
+        position.mutateSubtract(size * 0.5f, size * 0.5f);
+
         Particle particle = new Particle(
-          appearance.color(), shape, size, life, new Vector2D(0, 0), new Vector2D(xVel, yVel)
+          appearance.color(), shape, size, life, position, new Vector2D(xVel, yVel)
         );
 
         particleList.add(particle);

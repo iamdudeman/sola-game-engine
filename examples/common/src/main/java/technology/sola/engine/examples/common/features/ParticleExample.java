@@ -10,6 +10,7 @@ import technology.sola.engine.examples.common.ExampleUtils;
 import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.BlendModeComponent;
+import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.elements.SectionGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
@@ -89,6 +90,7 @@ public class ParticleExample extends Sola {
               .setText("Back")
           ),
         buildParticleOptionButton(world, "Default", ParticleExample::setEmitterToDefault),
+        buildParticleOptionButton(world, "Shell", ParticleExample::setEmitterToShell),
         buildParticleOptionButton(world, "Mixed", ParticleExample::setEmitterToMixed),
         buildParticleOptionButton(world, "Burst", ParticleExample::setEmitterToBurst),
         buildParticleOptionButton(world, "Fire", ParticleExample::setEmitterToFire),
@@ -111,18 +113,30 @@ public class ParticleExample extends Sola {
     var defaultEmitter = new ParticleEmitterComponent();
 
     entity.addComponent(defaultEmitter)
+      .addComponent(new CircleRendererComponent(Color.YELLOW, false))
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(new TransformComponent(275, 350));
+      .addComponent(new TransformComponent(250, 300, 100));
+  }
+
+  private static void setEmitterToShell(Entity entity) {
+    var shellEmitter = new ParticleEmitterComponent();
+
+    shellEmitter.configureEmission().shape().setEmitFromShell(true);
+
+    entity.addComponent(shellEmitter)
+      .addComponent(new CircleRendererComponent(Color.YELLOW, false))
+      .addComponent(new BlendModeComponent(BlendMode.NORMAL))
+      .addComponent(new TransformComponent(250, 300, 100));
   }
 
   private static void setEmitterToMixed(Entity entity) {
-    var defaultEmitter = new ParticleEmitterComponent()
+    var mixedEmitter = new ParticleEmitterComponent()
       .configureEmission().setLifeBounds(2, 4).done()
       .configureAppearance().setPercentCircle(0.5f).setSizeBounds(5, 15).done();
 
-    entity.addComponent(defaultEmitter)
+    entity.addComponent(mixedEmitter)
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(new TransformComponent(275, 350));
+      .addComponent(new TransformComponent(250, 300, 100));
   }
 
   private static void setEmitterToBurst(Entity entity) {
@@ -131,28 +145,36 @@ public class ParticleExample extends Sola {
 
     entity.addComponent(burstEmitter)
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(new TransformComponent(275, 350));
+      .addComponent(new TransformComponent(250, 300, 100));
   }
 
   private static void setEmitterToFire(Entity entity) {
     var fireEmitter = new ParticleEmitterComponent()
       .configureAppearance().setColor(new Color(230, 40, 45)).setSizeBounds(6, 10).done()
-      .configureMovement().setVelocityBounds(new Vector2D(-18f, -70f), new Vector2D(18f, 0)).done()
+      .configureMovement()
+      .setSpeed(18)
+      // todo make it look like fire again (cone/triangle emitter)
+//      .setVelocityBounds(new Vector2D(-18f, -70f), new Vector2D(18f, 0))
+      .done()
       .configureEmission().setCountPerEmit(10).setLifeBounds(1, 1).setInterval(0.1f).done();
 
     entity.addComponent(fireEmitter)
       .addComponent(new BlendModeComponent(BlendMode.LINEAR_DODGE))
-      .addComponent(new TransformComponent(275, 350));
+      .addComponent(new TransformComponent(250, 300, 100));
   }
 
   private static void setEmitterToSparks(Entity entity) {
     var sparksEmitter = new ParticleEmitterComponent()
       .configureAppearance().setColor(new Color(210, 80, 45)).setSizeBounds(6, 12).done()
-      .configureMovement().setVelocityBounds(new Vector2D(-18f, -70f), new Vector2D(18f, 0)).done()
+      .configureMovement()
+      .setSpeed(18)
+      // todo make it look like sparks again (cone/triangle emitter)
+//      .setVelocityBounds(new Vector2D(-18f, -70f), new Vector2D(18f, 0))
+      .done()
       .configureEmission().setCountPerEmit(1).setLifeBounds(1, 3).setInterval(0.1f).done();
 
     entity.addComponent(sparksEmitter)
       .addComponent(new BlendModeComponent(BlendMode.DISSOLVE))
-      .addComponent(new TransformComponent(275, 350));
+      .addComponent(new TransformComponent(250, 300, 100));
   }
 }

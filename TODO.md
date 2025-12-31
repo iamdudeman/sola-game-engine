@@ -13,7 +13,7 @@
     * emission
         * _consider ability to spawn particles in a radius away from center_
             * probably want the ability to make particles go to and from center for this
-            * replace current velocity stuff with "emitter shapes"
+            * replace current velocity stuff with "emitter shapes" (rectangle, circle, cone or triangle??)
                 * ability to set "emit from shell" -> particles start on outside of emitter shape
                 * ability to set "random direction" -> particles can spawn in random direction
                 * replace movement config velocity to a "speed" instead

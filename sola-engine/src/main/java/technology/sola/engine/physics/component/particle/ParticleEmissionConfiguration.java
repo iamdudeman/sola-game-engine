@@ -8,6 +8,7 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public class ParticleEmissionConfiguration extends ParticleConfiguration {
+  private ParticleEmitterShape shape = new CircleEmitterShape(50);
   private float minLife = 1f;
   private float maxLife = 2f;
   private int countPerEmit = 1;
@@ -17,6 +18,17 @@ public class ParticleEmissionConfiguration extends ParticleConfiguration {
 
   ParticleEmissionConfiguration(ParticleEmitterComponent owner) {
     super(owner);
+  }
+
+
+  public ParticleEmitterShape shape() {
+    return shape;
+  }
+
+  public ParticleEmissionConfiguration setShape(ParticleEmitterShape shape) {
+    this.shape = shape;
+
+    return this;
   }
 
 
