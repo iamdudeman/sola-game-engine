@@ -3,16 +3,15 @@ package technology.sola.engine.physics.component.particle.emitter;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.utils.SolaRandom;
 import technology.sola.math.geometry.ConvexPolygon;
-import technology.sola.math.geometry.Triangle;
+import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
-
-import java.util.Arrays;
 
 @NullMarked
 public class TrapezoidEmitterShape extends ParticleEmitterShape {
   private boolean isEmitFromBase = true;
   private ConvexPolygon trapezoid;
   private Vector2D center;
+  private Rectangle boundingBox;
 
   public TrapezoidEmitterShape(Vector2D direction, float baseWidth, float height,  float otherBaseWidth) {
     Vector2D p1 = new Vector2D(0, 0);
@@ -27,8 +26,7 @@ public class TrapezoidEmitterShape extends ParticleEmitterShape {
 
     trapezoid = new ConvexPolygon(new Vector2D[] { p1, p2, p3, p4});
     center = trapezoid.getCentroid();
-
-    System.out.println(Arrays.toString(trapezoid.points()));
+    boundingBox = trapezoid.boundingBox();
   }
 
   @Override
@@ -70,21 +68,14 @@ public class TrapezoidEmitterShape extends ParticleEmitterShape {
 
   @Override
   protected Vector2D randomPointInShape() {
-    float x = SolaRandom.nextFloat();
-    float y = SolaRandom.nextFloat();
+    while (true) {
+      float x = SolaRandom.nextFloat(boundingBox.min().x(), boundingBox.max().x());
+      float y = SolaRandom.nextFloat(boundingBox.min().y(), boundingBox.max().y());
 
-    float q = Math.abs(x - y);
-
-    float s = q;
-    float t = 0.5f * (x + y - q);
-    float u = 1 - (0.5f * (x + y + q));
-
-    // todo implement this
-    return new Vector2D(
-      0, 0
-//      s * triangle.p1().x() + t * triangle.p2().x() + u * triangle.p3().x(),
-//      s * triangle.p1().y() + t * triangle.p2().y() + u * triangle.p3().y()
-    );
+      if (trapezoid.contains(new Vector2D(x, y))) {
+        return new Vector2D(x, y);
+      }
+    }
   }
 
   @Override
