@@ -145,7 +145,7 @@ public class ParticleExample extends Sola {
       .addComponent(new ConvexPolygonRendererComponent(Color.YELLOW, false, new ConvexPolygon(
         new Vector2D[] {
           new Vector2D(0, 0), new Vector2D(-20, 0),
-          new Vector2D(-50, -100), new Vector2D(30, -100)
+          new Vector2D(-50, -100), new Vector2D(30, -100),
         }
       )))
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
@@ -166,7 +166,7 @@ public class ParticleExample extends Sola {
       .addComponent(new ConvexPolygonRendererComponent(Color.YELLOW, false, new ConvexPolygon(
         new Vector2D[] {
           new Vector2D(0, 0), new Vector2D(-20, 0),
-          new Vector2D(-50, -100), new Vector2D(30, -100)
+          new Vector2D(-50, -100), new Vector2D(30, -100),
         }
       )))
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))

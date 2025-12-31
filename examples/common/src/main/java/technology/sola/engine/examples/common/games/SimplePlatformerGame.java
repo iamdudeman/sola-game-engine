@@ -32,6 +32,7 @@ import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
 import technology.sola.engine.physics.component.collider.ColliderShapeTriangle;
 import technology.sola.engine.physics.component.collider.ColliderTag;
 import technology.sola.engine.physics.component.particle.ParticleEmitterComponent;
+import technology.sola.engine.physics.component.particle.emitter.CircleEmitterShape;
 import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.math.geometry.Triangle;
@@ -214,12 +215,10 @@ public class SimplePlatformerGame extends Sola {
       .setName("confetti")
       .addComponent(new ParticleEmitterComponent()
         .appearanceConfig().setColorFunction(roll -> Color.YELLOW).setSizeBounds(4, 8).done()
-        .movementConfig().setSpeed(100)
-//        .setVelocityBounds(new Vector2D(-100, -100), new Vector2D(100, 100))
-        .done()
-        .emissionConfig().setCountPerEmit(5).done())
+        .movementConfig().setSpeed(100).done()
+        .emissionConfig().setCountPerEmit(5).setShape(new CircleEmitterShape(25).setEmitFromShell(true)).done())
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(new TransformComponent(25, 0, finalBlock))
+      .addComponent(new TransformComponent(0, 0, finalBlock))
       .setDisabled(true);
 
     return world;
