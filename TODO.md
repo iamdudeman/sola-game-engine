@@ -7,7 +7,6 @@
         * modify size over lifetime option
         * modify size by velocity
     * movement
-        * _inherit velocity from Entity_
         * modify velocity over lifetime
         * _consider some sort of "swaying" for non-linear particles_
             * concept of "noise" for movement - https://docs.unity3d.com/Manual/PartSysNoiseModule.html

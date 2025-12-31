@@ -1,10 +1,14 @@
 package technology.sola.engine.physics.system;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.EcsSystem;
+import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.particle.ParticleEmitterComponent;
+import technology.sola.math.linear.Vector2D;
 
 /**
  * ParticleSystem is an {@link EcsSystem} that handles updating {@link technology.sola.ecs.Entity} with a
@@ -13,6 +17,8 @@ import technology.sola.engine.physics.component.particle.ParticleEmitterComponen
  */
 @NullMarked
 public class ParticleSystem extends EcsSystem {
+  private static final Vector2D ZERO_VELOCITY = Vector2D.zeroVector();
+
   @Override
   public void update(World world, float delta) {
     for (var entry : world.createView().of(ParticleEmitterComponent.class, TransformComponent.class).getEntries()) {
@@ -31,7 +37,21 @@ public class ParticleSystem extends EcsSystem {
       }
 
       // emit new ones
-      particleEmitterComponent.emitIfAble(delta);
+      var parentVelocity = getParentVelocity(entry.entity());
+      var inheritedVelocity = parentVelocity == null ? ZERO_VELOCITY : parentVelocity;
+
+      particleEmitterComponent.emitIfAble(delta, inheritedVelocity);
     }
+  }
+
+  @Nullable
+  private Vector2D getParentVelocity(Entity entity) {
+    var dynamicBody = entity.getComponent(DynamicBodyComponent.class);
+
+    if (dynamicBody != null) {
+      return dynamicBody.getVelocity();
+    }
+
+    return null;
   }
 }

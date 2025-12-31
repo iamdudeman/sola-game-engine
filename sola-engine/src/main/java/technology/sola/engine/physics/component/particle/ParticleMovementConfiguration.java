@@ -10,6 +10,7 @@ import technology.sola.math.linear.Vector2D;
 public class ParticleMovementConfiguration extends ParticleConfiguration {
   private Vector2D minVelocity = new Vector2D(-50, -50);
   private Vector2D maxVelocity = new Vector2D(50, 50);
+  private float inheritVelocityPercentage = 0f;
 
   ParticleMovementConfiguration(ParticleEmitterComponent owner) {
     super(owner);
@@ -50,6 +51,26 @@ public class ParticleMovementConfiguration extends ParticleConfiguration {
   public ParticleMovementConfiguration setVelocityBounds(Vector2D min, Vector2D max) {
     this.minVelocity = min;
     this.maxVelocity = max;
+
+    return this;
+  }
+
+
+  /**
+   * @return the percentage of the owning {@link technology.sola.ecs.Entity}'s velocity to inherit from
+   */
+  public float inheritVelocityPercentage() {
+    return inheritVelocityPercentage;
+  }
+
+  /**
+   * Updates the percentage of velocity inheritance from the owning {@link technology.sola.ecs.Entity}.
+   *
+   * @param inheritVelocityPercentage new percentage of velocity inheritance from the owning {@link technology.sola.ecs.Entity}
+   * @return this
+   */
+  public ParticleMovementConfiguration setInheritVelocityPercentage(float inheritVelocityPercentage) {
+    this.inheritVelocityPercentage = inheritVelocityPercentage;
 
     return this;
   }

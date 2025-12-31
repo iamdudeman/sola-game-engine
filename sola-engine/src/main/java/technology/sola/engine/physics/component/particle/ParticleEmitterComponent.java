@@ -27,8 +27,9 @@ public class ParticleEmitterComponent implements Component {
    * Emits new particles if enough time has elapsed based on the set properties for emission.
    *
    * @param delta the elapsed delta time
+   * @param inheritedVelocity the inherited velocity for emitted particles from the parent {@link technology.sola.ecs.Entity}
    */
-  public void emitIfAble(float delta) {
+  public void emitIfAble(float delta, Vector2D inheritedVelocity) {
     final var emission = this.emission;
 
     timeSinceLastEmission += delta;
@@ -39,8 +40,8 @@ public class ParticleEmitterComponent implements Component {
       var appearance = this.appearance;
 
       for (int i = 0; i < emission.countPerEmit(); i++) {
-        float xVel = SolaRandom.nextFloat(minVel.x(), maxVel.x());
-        float yVel = SolaRandom.nextFloat(minVel.y(), maxVel.y());
+        float xVel = SolaRandom.nextFloat(minVel.x(), maxVel.x()) + inheritedVelocity.x() * movement.inheritVelocityPercentage();
+        float yVel = SolaRandom.nextFloat(minVel.y(), maxVel.y()) + inheritedVelocity.y() * movement.inheritVelocityPercentage();
         float size = SolaRandom.nextFloat(appearance.minSize(), appearance.maxSize());
         float life = SolaRandom.nextFloat(emission.minLife(), emission.maxLife());
         boolean isCircle = SolaRandom.nextFloat() < appearance.percentCircle();
