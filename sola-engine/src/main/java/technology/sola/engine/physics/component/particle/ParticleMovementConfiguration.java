@@ -9,7 +9,7 @@ import org.jspecify.annotations.NullMarked;
 public class ParticleMovementConfiguration extends ParticleConfiguration {
   private float minSpeed = 50f;
   private float maxSpeed = 50f;
-  private float inheritVelocityPercentage = 0f;
+  private float inheritedVelocityPercentage = 0f;
 
   ParticleMovementConfiguration(ParticleEmitterComponent owner) {
     super(owner);
@@ -61,18 +61,18 @@ public class ParticleMovementConfiguration extends ParticleConfiguration {
   /**
    * @return the percentage of the owning {@link technology.sola.ecs.Entity}'s velocity to inherit from
    */
-  public float inheritVelocityPercentage() {
-    return inheritVelocityPercentage;
+  public float inheritedVelocityPercentage() {
+    return inheritedVelocityPercentage;
   }
 
   /**
    * Updates the percentage of velocity inheritance from the owning {@link technology.sola.ecs.Entity}.
    *
-   * @param inheritVelocityPercentage new percentage of velocity inheritance from the owning {@link technology.sola.ecs.Entity}
+   * @param inheritedVelocityPercentage new percentage of velocity inheritance from the owning {@link technology.sola.ecs.Entity}
    * @return this
    */
-  public ParticleMovementConfiguration setInheritVelocityPercentage(float inheritVelocityPercentage) {
-    this.inheritVelocityPercentage = inheritVelocityPercentage;
+  public ParticleMovementConfiguration setInheritedVelocityPercentage(float inheritedVelocityPercentage) {
+    this.inheritedVelocityPercentage = inheritedVelocityPercentage;
 
     return this;
   }
