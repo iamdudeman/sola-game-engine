@@ -12,6 +12,8 @@ import java.util.Random;
   "checkstyle:parameterAssignment",
 })
 class PerlinNoise {
+  private static final long DEFAULT_OCTAVES = 4;
+  private static final float DEFAULT_FALLOFF = 0.5f;
   private static final int[] p = new int[512];
   private static final int[] permutation = {
     151, 160, 137, 91, 90, 15,
@@ -29,7 +31,6 @@ class PerlinNoise {
     138, 236, 205, 93, 222, 114, 67, 29, 24, 72, 243, 141, 128, 195, 78, 66, 215, 61, 156, 180,
   };
   private static double seed;
-  private static long defaultSize = 35;
 
   static {
     for (int i = 0; i < 256; i++) {
@@ -44,23 +45,35 @@ class PerlinNoise {
   }
 
   /**
-   * Implementation based on <a href="https://gist.github.com/alksily/7a85a1898e65c936f861ee93516e397d#file-noisegenerator-java-L73">alksily's implementation</a>
+   * Uses default values for octaves and falloff.
    *
    * @param x
    * @param y
    * @return
    */
   static double noise(double x, double y) {
-    double value = 0.0;
-    double size = defaultSize;
-    double initialSize = size;
+    return noise(x, y, DEFAULT_OCTAVES, DEFAULT_FALLOFF);
+  }
 
-    while (size >= 1) {
-      value += noise((x / size), (y / size), (0f / size)) * size;
-      size /= 2.0;
+  /**
+   * Implementation based on <a href="https://gist.github.com/alksily/7a85a1898e65c936f861ee93516e397d#file-noisegenerator-java-L73">alksily's implementation</a>
+   *
+   * @param x
+   * @param y
+   * @param octaves smaller values result in larger changes over time
+   * @param falloff how much each higher octave contributes
+   * @return
+   */
+  static double noise(double x, double y, long octaves, float falloff) {
+    double value = 0.0;
+    double octaveCounter = octaves;
+
+    while (octaveCounter >= 1) {
+      value += noise((x / octaveCounter), (y / octaveCounter), 0f) * octaveCounter;
+      octaveCounter *= falloff;
     }
 
-    return value / initialSize;
+    return value / octaves;
   }
 
   private static double noise(double x, double y, double z) {
