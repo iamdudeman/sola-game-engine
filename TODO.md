@@ -39,10 +39,10 @@
 * ability to render ellipse (and collisions for ellipse)
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
-    * Android does not have support yet
+    * Android does not have support yet (https://developer.android.com/build/jdks)
 * research possible benefits of updating to Java 25
     * teavm 0.13 has support now
-    * Android does not have support yet
+    * Android does not have support yet (https://developer.android.com/build/jdks)
 * Consider adding rotation to TransformComponent
     * Would need to update rendering stuff
     * Would need to update physics stuff
