@@ -54,7 +54,7 @@ public class SolaRandom {
   }
 
   /**
-   * @return the next pseudorandom, uniformly distributed float value between 0.0 and 1.
+   * @return a pseudorandom, uniformly distributed float value between 0.0 inclusive and 1 exclusive.
    */
   public static float nextFloat() {
     return RANDOM.nextFloat();
