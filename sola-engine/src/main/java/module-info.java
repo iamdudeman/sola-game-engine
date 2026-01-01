@@ -53,6 +53,7 @@ module technology.sola.engine {
   exports technology.sola.engine.physics.component.particle;
   exports technology.sola.engine.physics.component.particle.appearance;
   exports technology.sola.engine.physics.component.particle.emitter;
+  exports technology.sola.engine.physics.component.particle.movement;
   exports technology.sola.engine.physics.event;
   exports technology.sola.engine.physics.system;
   exports technology.sola.engine.physics.system.collision;

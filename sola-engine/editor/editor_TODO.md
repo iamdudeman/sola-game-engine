@@ -18,6 +18,9 @@ Comes with default configuration for built-in components and systems
     * create and edit GUIs
         * maybe a WYSIWYG editor?
 
+* UI for creating and previewing ParticleEmitterComponent configurations
+    * serialize component and its parts to JSON
+
 * Editor instance configuration (composable) (goes with Scene composition)
     1. Register all EcsSystems
         1. UI for configuring them

@@ -19,6 +19,7 @@ public class SolaRandom {
    */
   public static void setSeed(long seed) {
     RANDOM.setSeed(seed);
+    PerlinNoise.setSeed((int) seed % 255);
   }
 
   /**
@@ -54,7 +55,7 @@ public class SolaRandom {
   }
 
   /**
-   * @return the next pseudorandom, uniformly distributed float value between 0.0 and 1.
+   * @return a pseudorandom, uniformly distributed float value between 0.0 inclusive and 1 exclusive.
    */
   public static float nextFloat() {
     return RANDOM.nextFloat();
@@ -73,6 +74,30 @@ public class SolaRandom {
     }
 
     return min + RANDOM.nextFloat() * (max - min);
+  }
+
+  /**
+   * Generates a Perlin noise value for a 2d time scale.
+   *
+   * @param x the x "time"
+   * @param y the y "time"
+   * @return the noise value
+   */
+  public static float noise(float x, float y) {
+    return (float) PerlinNoise.noise(x, y);
+  }
+
+  /**
+   * Generates a Perlin noise value for a 2d time scale.
+   *
+   * @param x       the x "time"
+   * @param y       the y "time"
+   * @param octaves smaller values result in larger changes over time
+   * @param falloff how much each higher octave contributes
+   * @return the noise value
+   */
+  public static float noise(float x, float y, int octaves, float falloff) {
+    return (float) PerlinNoise.noise(x, y, octaves, falloff);
   }
 
   private SolaRandom() {

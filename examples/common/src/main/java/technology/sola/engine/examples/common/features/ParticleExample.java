@@ -23,8 +23,10 @@ import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.component.particle.ParticleEmitterComponent;
 import technology.sola.engine.physics.component.particle.appearance.ParticleShape;
 import technology.sola.engine.physics.component.particle.emitter.CircleEmitterShape;
+import technology.sola.engine.physics.component.particle.emitter.TrapezoidEmitterShape;
 import technology.sola.engine.physics.component.particle.emitter.TriangleEmitterShape;
 import technology.sola.engine.physics.component.particle.emitter.RectangleEmitterShape;
+import technology.sola.engine.physics.component.particle.movement.ParticleNoise;
 import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.math.geometry.ConvexPolygon;
 import technology.sola.math.geometry.Triangle;
@@ -112,8 +114,9 @@ public class ParticleExample extends Sola {
         buildParticleOptionButton(world, "Triangle", ParticleExample::setEmitterToTriangle),
         buildParticleOptionButton(world, "Circle", ParticleExample::setEmitterToCircle),
         buildParticleOptionButton(world, "Rectangle", ParticleExample::setEmitterToRectangle),
-        buildParticleOptionButton(world, "Random", ParticleExample::setEmitterToRandom)
-        );
+        buildParticleOptionButton(world, "Random", ParticleExample::setEmitterToRandom),
+        buildParticleOptionButton(world, "Noise", ParticleExample::setEmitterToNoise)
+      );
   }
 
   private GuiElement<?, ?> buildSecondRow(World world) {
@@ -123,7 +126,8 @@ public class ParticleExample extends Sola {
         buildParticleOptionButton(world, "Shapes", ParticleExample::setEmitterToShapes),
         buildParticleOptionButton(world, "Burst", ParticleExample::setEmitterToBurst),
         buildParticleOptionButton(world, "Fire", ParticleExample::setEmitterToFire),
-        buildParticleOptionButton(world, "Sparks", ParticleExample::setEmitterToSparks)
+        buildParticleOptionButton(world, "Sparks", ParticleExample::setEmitterToSparks),
+        buildParticleOptionButton(world, "Snow", ParticleExample::setEmitterToSnow)
       );
   }
 
@@ -225,6 +229,20 @@ public class ParticleExample extends Sola {
       .addComponent(new TransformComponent(250, 300, 100));
   }
 
+  private static void setEmitterToNoise(Entity entity) {
+    var emitter = new ParticleEmitterComponent();
+
+    emitter.emissionConfig().setShape(new CircleEmitterShape(50)).setLifeBounds(2, 5);
+    emitter.movementConfig().setNoise(new ParticleNoise(50f, 50f, 0.5f));
+
+    cleanupEntity(entity);
+
+    entity.addComponent(emitter)
+      .addComponent(new CircleRendererComponent(Color.YELLOW, false))
+      .addComponent(new BlendModeComponent(BlendMode.NORMAL))
+      .addComponent(new TransformComponent(250, 300, 100));
+  }
+
   private static void setEmitterToShapes(Entity entity) {
     var emitter = new ParticleEmitterComponent()
       .emissionConfig().setLifeBounds(2, 4).done()
@@ -257,15 +275,18 @@ public class ParticleExample extends Sola {
   private static void setEmitterToFire(Entity entity) {
     var fireEmitter = new ParticleEmitterComponent()
       .appearanceConfig().setColorFunction(roll -> new Color(230, 40, 45)).setSizeBounds(6, 10).done()
-      .movementConfig()
-      .setSpeedBounds(34, 60).done()
+      .movementConfig().setSpeedBounds(34, 60).setNoise(new ParticleNoise(
+        15.55f,
+        0,
+        0.5f
+      )).done()
       .emissionConfig().setCountPerEmit(4).setLifeBounds(1, 1.5f).setInterval(0.01f).done();
 
     cleanupEntity(entity);
 
     entity.addComponent(fireEmitter)
       .addComponent(new BlendModeComponent(BlendMode.LINEAR_DODGE))
-      .addComponent(new TransformComponent(250, 300, 100));
+      .addComponent(new TransformComponent(250, 300, 1));
   }
 
   private static void setEmitterToSparks(Entity entity) {
@@ -283,7 +304,28 @@ public class ParticleExample extends Sola {
 
     entity.addComponent(sparksEmitter)
       .addComponent(new BlendModeComponent(BlendMode.DISSOLVE))
-      .addComponent(new TransformComponent(250, 300, 100));
+      .addComponent(new TransformComponent(250, 300, 1));
+  }
+
+  private static void setEmitterToSnow(Entity entity) {
+    var sparksEmitter = new ParticleEmitterComponent()
+      .appearanceConfig().setSizeBounds(3, 9).done()
+      .movementConfig().setSpeedBounds(40, 88).setNoise(new ParticleNoise(
+        25.55f,
+        0,
+        0.5f
+      )).done()
+      .emissionConfig().setCountPerEmit(3).setLifeBounds(4, 20f).setInterval(0.05f).done();
+
+    sparksEmitter.emissionConfig().setShape(new TrapezoidEmitterShape(
+      new Vector2D(0, 1), 500, 200, 500
+    ));
+
+    cleanupEntity(entity);
+
+    entity.addComponent(sparksEmitter)
+      .addComponent(new BlendModeComponent(BlendMode.NORMAL))
+      .addComponent(new TransformComponent(50, 100, 1));
   }
 
   private static void cleanupEntity(Entity entity) {

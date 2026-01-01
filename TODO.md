@@ -22,12 +22,7 @@
 
 ## TODO List
 
-* Particle System
-    * movement
-        * _implement "noise" for movement_
-            * x strength
-            * y strength
-            * frequency
+*
 
 ### Low priority (not ordered)
 

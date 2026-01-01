@@ -1,8 +1,11 @@
 package technology.sola.engine.physics.component.particle;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.physics.component.particle.appearance.ParticleShape;
+import technology.sola.engine.physics.component.particle.movement.ParticleNoise;
+import technology.sola.engine.utils.SolaRandom;
 import technology.sola.math.linear.Vector2D;
 
 /**
@@ -12,21 +15,27 @@ import technology.sola.math.linear.Vector2D;
 public class Particle {
   private final Color baseColor;
   private final ParticleShape shape;
+  @Nullable
+  private final ParticleNoise noise;
   private final float size;
   private final float inverseMaxLifespan;
   private final Vector2D velocity;
   private final Vector2D position;
   private float remainingLifespan;
+  private final float maxLifespan;
 
-  Particle(Color baseColor, ParticleShape shape, float size, float maxLifespan, Vector2D position, Vector2D velocity) {
+  Particle(Color baseColor, ParticleShape shape, @Nullable ParticleNoise noise, float size, float maxLifespan, Vector2D position, Vector2D velocity) {
     this.baseColor = baseColor;
     this.shape = shape;
+    this.noise = noise;
     this.size = size;
     this.position = position;
     this.velocity = velocity;
 
     remainingLifespan = maxLifespan;
     inverseMaxLifespan = 1 / maxLifespan;
+
+    this.maxLifespan = maxLifespan;
   }
 
   /**
@@ -35,7 +44,23 @@ public class Particle {
    * @param delta the elapsed delta time
    */
   public void update(float delta) {
+    var noise = this.noise;
+
+    if (noise != null) {
+      float xStrength = noise.xStrength();
+      float yStrength = noise.yStrength();
+      float frequency = noise.frequency();
+      float time = (maxLifespan - remainingLifespan) * frequency;
+      float noiseValue = SolaRandom.noise(time, time);
+
+      velocity.mutateAdd(
+        SolaRandom.nextFloat(-xStrength, xStrength) * noiseValue,
+        SolaRandom.nextFloat(-yStrength, yStrength) * noiseValue
+      );
+    }
+
     position.mutateAdd(velocity.scalar(delta));
+
     remainingLifespan -= delta;
   }
 
