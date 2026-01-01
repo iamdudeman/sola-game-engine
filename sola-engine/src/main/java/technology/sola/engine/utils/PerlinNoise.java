@@ -12,7 +12,7 @@ import java.util.Random;
   "checkstyle:parameterAssignment",
 })
 class PerlinNoise {
-  private static final long DEFAULT_OCTAVES = 4;
+  private static final int DEFAULT_OCTAVES = 4;
   private static final float DEFAULT_FALLOFF = 0.5f;
   private static final int[] p = new int[512];
   private static final int[] permutation = {
@@ -64,7 +64,7 @@ class PerlinNoise {
    * @param falloff how much each higher octave contributes
    * @return
    */
-  static double noise(double x, double y, long octaves, float falloff) {
+  static double noise(double x, double y, int octaves, float falloff) {
     double value = 0.0;
     double octaveCounter = octaves;
 

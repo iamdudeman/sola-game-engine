@@ -1,8 +1,11 @@
 package technology.sola.engine.physics.component.particle;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.physics.component.particle.appearance.ParticleShape;
+import technology.sola.engine.physics.component.particle.movement.ParticleNoise;
+import technology.sola.engine.utils.SolaRandom;
 import technology.sola.math.linear.Vector2D;
 
 /**
@@ -12,21 +15,27 @@ import technology.sola.math.linear.Vector2D;
 public class Particle {
   private final Color baseColor;
   private final ParticleShape shape;
+  @Nullable
+  private final ParticleNoise noise;
   private final float size;
   private final float inverseMaxLifespan;
   private final Vector2D velocity;
   private final Vector2D position;
   private float remainingLifespan;
+  private final float maxLifespan;
 
-  Particle(Color baseColor, ParticleShape shape, float size, float maxLifespan, Vector2D position, Vector2D velocity) {
+  Particle(Color baseColor, ParticleShape shape, @Nullable ParticleNoise noise, float size, float maxLifespan, Vector2D position, Vector2D velocity) {
     this.baseColor = baseColor;
     this.shape = shape;
+    this.noise = noise;
     this.size = size;
     this.position = position;
     this.velocity = velocity;
 
     remainingLifespan = maxLifespan;
     inverseMaxLifespan = 1 / maxLifespan;
+
+    this.maxLifespan = maxLifespan;
   }
 
   /**
@@ -35,8 +44,27 @@ public class Particle {
    * @param delta the elapsed delta time
    */
   public void update(float delta) {
-    position.mutateAdd(velocity.scalar(delta));
     remainingLifespan -= delta;
+
+    if (noise != null) {
+      float xStrength = noise.xStrength(); // 25.55f;
+      float yStrength = noise.yStrength(); // 0f;
+      float frequency = noise.frequency(); // 0.5f;
+      float mod = SolaRandom.noise((remainingLifespan) * frequency, ( remainingLifespan) * frequency);
+//    float mod = SolaRandom.noise((maxLifespan - remainingLifespan) * frequency, (maxLifespan - remainingLifespan) * frequency);
+
+      Vector2D noiseMod = new Vector2D(
+        SolaRandom.nextFloat(-xStrength, xStrength) * mod,
+        SolaRandom.nextFloat(-yStrength, yStrength) * mod
+      );
+
+      velocity.mutateAdd(noiseMod);
+    }
+
+
+    position.mutateAdd(velocity.scalar(delta));
+//    position.mutateAdd(velocity.add(noiseMod).scalar(delta));
+//    position.mutateAdd(noiseMod);
   }
 
   /**

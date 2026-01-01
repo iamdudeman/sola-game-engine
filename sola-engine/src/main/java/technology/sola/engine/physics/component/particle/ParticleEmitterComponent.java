@@ -35,9 +35,11 @@ public class ParticleEmitterComponent implements Component {
     timeSinceLastEmission += delta;
 
     if (isAbleToEmit(emission)) {
+      var movement = this.movement;
       var speed = SolaRandom.nextFloat(movement.minSpeed(), movement.maxSpeed());
       var inheritedVelocityPercentage = movement.inheritedVelocityPercentage();
       var appearance = this.appearance;
+      var noise = movement.noise();
 
       for (int i = 0; i < emission.countPerEmit(); i++) {
         var emissionDetails = emission.shape().nextEmission();
@@ -46,6 +48,7 @@ public class ParticleEmitterComponent implements Component {
 
         float xVel = direction.x() * speed + inheritedVelocity.x() * inheritedVelocityPercentage;
         float yVel = direction.y() * speed + inheritedVelocity.y() * inheritedVelocityPercentage;
+        var velocity = new Vector2D(xVel, yVel);
         float size = SolaRandom.nextFloat(appearance.minSize(), appearance.maxSize());
         float life = SolaRandom.nextFloat(emission.minLife(), emission.maxLife());
         var shape = appearance.shapeFunction().getShape(SolaRandom.nextFloat());
@@ -54,9 +57,7 @@ public class ParticleEmitterComponent implements Component {
         // adjust position to be centered instead of top-left
         position.mutateSubtract(size * 0.5f, size * 0.5f);
 
-        particleList.add(
-          new Particle(color, shape, size, life, position, new Vector2D(xVel, yVel))
-        );
+        particleList.add(new Particle(color, shape, noise, size, life, position, velocity));
       }
 
       timeSinceLastEmission = 0;

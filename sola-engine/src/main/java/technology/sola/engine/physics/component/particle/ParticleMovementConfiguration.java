@@ -1,6 +1,8 @@
 package technology.sola.engine.physics.component.particle;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+import technology.sola.engine.physics.component.particle.movement.ParticleNoise;
 
 /**
  * ParticleMovementConfiguration contains configuration for the movement properties of emitted {@link Particle}s.
@@ -10,6 +12,8 @@ public class ParticleMovementConfiguration extends ParticleConfiguration {
   private float minSpeed = 50f;
   private float maxSpeed = 50f;
   private float inheritedVelocityPercentage = 0f;
+  @Nullable
+  private ParticleNoise noise;
 
   ParticleMovementConfiguration(ParticleEmitterComponent owner) {
     super(owner);
@@ -73,6 +77,17 @@ public class ParticleMovementConfiguration extends ParticleConfiguration {
    */
   public ParticleMovementConfiguration setInheritedVelocityPercentage(float inheritedVelocityPercentage) {
     this.inheritedVelocityPercentage = inheritedVelocityPercentage;
+
+    return this;
+  }
+
+
+  public @Nullable ParticleNoise noise() {
+    return noise;
+  }
+
+  public ParticleMovementConfiguration setNoise(@Nullable ParticleNoise noise) {
+    this.noise = noise;
 
     return this;
   }
