@@ -82,10 +82,19 @@ public class ParticleMovementConfiguration extends ParticleConfiguration {
   }
 
 
+  /**
+   * @return the {@link ParticleNoise} configuration for this emitter, or {@code null} if no noise is applied
+   */
   public @Nullable ParticleNoise noise() {
     return noise;
   }
 
+  /**
+   * Sets the {@link ParticleNoise} configuration for this emitter.
+   *
+   * @param noise the new {@link ParticleNoise} configuration, or {@code null} to disable noise
+   * @return this
+   */
   public ParticleMovementConfiguration setNoise(@Nullable ParticleNoise noise) {
     this.noise = noise;
 
