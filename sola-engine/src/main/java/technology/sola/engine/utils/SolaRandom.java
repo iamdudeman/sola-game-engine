@@ -19,6 +19,7 @@ public class SolaRandom {
    */
   public static void setSeed(long seed) {
     RANDOM.setSeed(seed);
+    PerlinNoise.setSeed((int) seed % 255);
   }
 
   /**
@@ -73,6 +74,10 @@ public class SolaRandom {
     }
 
     return min + RANDOM.nextFloat() * (max - min);
+  }
+
+  public static float noise(float x, float y) {
+    return (float) PerlinNoise.noise(x, y);
   }
 
   private SolaRandom() {
