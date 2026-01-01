@@ -6,6 +6,9 @@ import technology.sola.math.geometry.ConvexPolygon;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.linear.Vector2D;
 
+/**
+ * TrapezoidEmitterShape is a {@link ParticleEmitterShape} that emits particles in the shape of a trapezoid.
+ */
 @NullMarked
 public class TrapezoidEmitterShape extends ParticleEmitterShape {
   private boolean isEmitFromBase = true;
@@ -13,7 +16,23 @@ public class TrapezoidEmitterShape extends ParticleEmitterShape {
   private Vector2D center;
   private Rectangle boundingBox;
 
-  public TrapezoidEmitterShape(Vector2D direction, float baseWidth, float height,  float otherBaseWidth) {
+  /**
+   * Creates a TrapezoidEmitterShape. The direction is the vector going from the first base of the trapezoid towards
+   * the other base. The height is the distance between the two bases.
+   * <pre>
+   * Ex: direction (0, -1) + baseWidth 2 + height 5 + otherBaseWidth 8
+   * ________
+   * \      /
+   *  \    /
+   *   \__/
+   * </pre>
+   *
+   * @param direction      the direction of the trapezoid
+   * @param baseWidth      the width of the first base of the trapezoid
+   * @param height         the height of the trapezoid
+   * @param otherBaseWidth the width of the second base of the trapezoid
+   */
+  public TrapezoidEmitterShape(Vector2D direction, float baseWidth, float height, float otherBaseWidth) {
     Vector2D p1 = new Vector2D(0, 0);
     Vector2D pL = p1.add(direction.normalize().scalar(height));
     Vector2D perpPL = new Vector2D(pL.y(), -pL.x()).normalize();
@@ -24,7 +43,7 @@ public class TrapezoidEmitterShape extends ParticleEmitterShape {
     Vector2D p3 = pL.add(perpPL.scalar(otherBaseWidth));
     Vector2D p4 = pL.subtract(perpPL.scalar(otherBaseWidth));
 
-    trapezoid = new ConvexPolygon(new Vector2D[] { p1, p2, p3, p4});
+    trapezoid = new ConvexPolygon(new Vector2D[]{p1, p2, p3, p4});
     center = trapezoid.getCentroid();
     boundingBox = trapezoid.boundingBox();
   }
@@ -55,6 +74,12 @@ public class TrapezoidEmitterShape extends ParticleEmitterShape {
     return super.nextEmission();
   }
 
+  /**
+   * Sets whether particles should be emitted from the first base of the trapezoid.
+   *
+   * @param emitFromBase whether particles should be emitted from the first base of the trapezoid
+   * @return this
+   */
   public TrapezoidEmitterShape setEmitFromBase(boolean emitFromBase) {
     this.isEmitFromBase = emitFromBase;
 

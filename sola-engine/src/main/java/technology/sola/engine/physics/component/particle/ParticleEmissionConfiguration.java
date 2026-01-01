@@ -5,7 +5,6 @@ import org.jspecify.annotations.Nullable;
 import technology.sola.engine.physics.component.particle.emitter.CircleEmitterShape;
 import technology.sola.engine.physics.component.particle.emitter.ParticleEmitterShape;
 import technology.sola.engine.physics.component.particle.emitter.TrapezoidEmitterShape;
-import technology.sola.engine.physics.component.particle.emitter.TriangleEmitterShape;
 import technology.sola.math.linear.Vector2D;
 
 /**

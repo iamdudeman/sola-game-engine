@@ -5,12 +5,31 @@ import technology.sola.engine.utils.SolaRandom;
 import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Vector2D;
 
+/**
+ * TriangleEmitterShape is a {@link ParticleEmitterShape} that emits particles in the shape of an Isoceles triangle.
+ */
 @NullMarked
 public class TriangleEmitterShape extends ParticleEmitterShape {
   private boolean isEmitFromBase = true;
   private Triangle triangle;
   private Vector2D center;
 
+  /**
+   * Creates a TriangleEmitterShape. The direction is the vector going from the isolated point of the triangle towards
+   * the non-equal side. The height is the distance the non-equal side is away from the isolated point, and the width
+   * is the width of the non-equal side.
+   * <pre>
+   * Ex: direction (0, -1) + height 3 + width 5
+   * ______
+   * \    /
+   *  \  /
+   *   \/
+   * </pre>
+   *
+   * @param direction the direction of the triangle
+   * @param height    the height of the triangle
+   * @param width     the width of the triangle
+   */
   public TriangleEmitterShape(Vector2D direction, float height, float width) {
     Vector2D p1 = new Vector2D(0, 0);
     Vector2D pL = p1.add(direction.normalize().scalar(height));
@@ -42,6 +61,12 @@ public class TriangleEmitterShape extends ParticleEmitterShape {
     return super.nextEmission();
   }
 
+  /**
+   * Sets whether particles should be emitted from the base of the triangle (the isolated point).
+   *
+   * @param emitFromBase whether particles should be emitted from the base of the triangle
+   * @return this
+   */
   public TriangleEmitterShape setEmitFromBase(boolean emitFromBase) {
     this.isEmitFromBase = emitFromBase;
 
