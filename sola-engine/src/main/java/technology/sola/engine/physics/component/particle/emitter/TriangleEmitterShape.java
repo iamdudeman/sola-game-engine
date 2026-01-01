@@ -10,9 +10,9 @@ import technology.sola.math.linear.Vector2D;
  */
 @NullMarked
 public class TriangleEmitterShape extends ParticleEmitterShape {
+  private final Triangle triangle;
+  private final Vector2D center;
   private boolean isEmitFromBase = true;
-  private Triangle triangle;
-  private Vector2D center;
 
   /**
    * Creates a TriangleEmitterShape. The direction is the vector going from the isolated point of the triangle towards
@@ -88,6 +88,7 @@ public class TriangleEmitterShape extends ParticleEmitterShape {
     float w1 = difference;
     float w2 = 0.5f * (x + y - difference);
     float w3 = 1 - (0.5f * (x + y + difference));
+    var triangle = this.triangle;
 
     return new Vector2D(
       w1 * triangle.p1().x() + w2 * triangle.p2().x() + w3 * triangle.p3().x(),
@@ -98,6 +99,7 @@ public class TriangleEmitterShape extends ParticleEmitterShape {
   @Override
   protected Vector2D randomPointOnPerimeter() {
     int side = SolaRandom.nextInt(3);
+    var triangle = this.triangle;
 
     if (side == 0) {
       var sideLength = triangle.p1().distance(triangle.p2());

@@ -11,10 +11,10 @@ import technology.sola.math.linear.Vector2D;
  */
 @NullMarked
 public class TrapezoidEmitterShape extends ParticleEmitterShape {
+  private final ConvexPolygon trapezoid;
+  private final Vector2D center;
+  private final Rectangle boundingBox;
   private boolean isEmitFromBase = true;
-  private ConvexPolygon trapezoid;
-  private Vector2D center;
-  private Rectangle boundingBox;
 
   /**
    * Creates a TrapezoidEmitterShape. The direction is the vector going from the first base of the trapezoid towards
@@ -55,15 +55,16 @@ public class TrapezoidEmitterShape extends ParticleEmitterShape {
     }
 
     if (isEmitFromBase) {
+      var points = this.trapezoid.points();
       // random location to move towards the other base
-      var sideLength = trapezoid.points()[2].distance(trapezoid.points()[3]);
-      var direction = trapezoid.points()[3].subtract(trapezoid.points()[2]).normalize();
-      var velocity = trapezoid.points()[2].add(direction.scalar(SolaRandom.nextFloat() * sideLength));
+      var sideLength = points[2].distance(points[3]);
+      var direction = points[3].subtract(points[2]).normalize();
+      var velocity = points[2].add(direction.scalar(SolaRandom.nextFloat() * sideLength));
 
       // random position to start from on base
-      sideLength = trapezoid.points()[0].distance(trapezoid.points()[1]);
-      direction = trapezoid.points()[0].subtract(trapezoid.points()[1]).normalize();
-      var position = trapezoid.points()[1].add(direction.scalar(SolaRandom.nextFloat() * sideLength));
+      sideLength = points[0].distance(points[1]);
+      direction = points[0].subtract(points[1]).normalize();
+      var position = points[1].add(direction.scalar(SolaRandom.nextFloat() * sideLength));
 
       return new EmissionDetails(
         position,
@@ -93,6 +94,9 @@ public class TrapezoidEmitterShape extends ParticleEmitterShape {
 
   @Override
   protected Vector2D randomPointInShape() {
+    var boundingBox = this.boundingBox;
+    var trapezoid = this.trapezoid;
+
     while (true) {
       float x = SolaRandom.nextFloat(boundingBox.min().x(), boundingBox.max().x());
       float y = SolaRandom.nextFloat(boundingBox.min().y(), boundingBox.max().y());
@@ -106,9 +110,10 @@ public class TrapezoidEmitterShape extends ParticleEmitterShape {
   @Override
   protected Vector2D randomPointOnPerimeter() {
     int side = SolaRandom.nextInt(4);
+    var points = trapezoid.points();
 
-    var p1 = trapezoid.points()[side];
-    var p2 = trapezoid.points()[(side + 1) % 4];
+    var p1 = points[side];
+    var p2 = points[(side + 1) % 4];
     var sideLength = p1.distance(p2);
     var direction = p2.subtract(p1).normalize();
 
