@@ -46,19 +46,27 @@ public class Particle {
   public void update(float delta) {
     remainingLifespan -= delta;
 
+    var noise = this.noise;
+
     if (noise != null) {
-      float xStrength = noise.xStrength(); // 25.55f;
-      float yStrength = noise.yStrength(); // 0f;
-      float frequency = noise.frequency(); // 0.5f;
-      float mod = SolaRandom.noise((remainingLifespan) * frequency, ( remainingLifespan) * frequency);
-//    float mod = SolaRandom.noise((maxLifespan - remainingLifespan) * frequency, (maxLifespan - remainingLifespan) * frequency);
+      float xStrength = noise.xStrength();
+      float yStrength = noise.yStrength();
+      float frequency = noise.frequency();
+//      float noiseValue = SolaRandom.noise((remainingLifespan) * frequency, ( remainingLifespan) * frequency);
+    float noiseValue = SolaRandom.noise(
+      (maxLifespan - remainingLifespan) * frequency,
+      (maxLifespan - remainingLifespan) * frequency
+    );
 
-      Vector2D noiseMod = new Vector2D(
-        SolaRandom.nextFloat(-xStrength, xStrength) * mod,
-        SolaRandom.nextFloat(-yStrength, yStrength) * mod
+//      Vector2D noiseMod = new Vector2D(
+//        SolaRandom.nextFloat(-xStrength, xStrength) * mod,
+//        SolaRandom.nextFloat(-yStrength, yStrength) * mod
+//      );
+
+      velocity.mutateAdd(
+        SolaRandom.nextFloat(-xStrength, xStrength) * noiseValue,
+        SolaRandom.nextFloat(-yStrength, yStrength) * noiseValue
       );
-
-      velocity.mutateAdd(noiseMod);
     }
 
 
