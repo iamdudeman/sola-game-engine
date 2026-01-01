@@ -23,16 +23,23 @@
 ## TODO List
 
 * Particle System
-    * consider ability to add fix number of particle spawns (4 at a time in different directions for example)
-    * consider ability to change particle shape (instead of only circle maybe square)
-    * consider researching how other engines do particle systems to maybe create an easier to use api
-    * consider adding acceleration
-    * consider some sort of "swaying" for non-linear particles
-    * consider ability to spawn particles in a radius away from center
-        * probably want the ability to make particles go to and from center for this
+    * movement
+        * _implement "noise" for movement_
+            * x strength
+            * y strength
+            * frequency
 
 ### Low priority (not ordered)
 
+* Particle System
+    * appearance
+        * modify size over lifetime option
+        * modify size by velocity
+        * modify color over the lifetime option (kind of like how opacity currently is handled)
+    * movement
+        * modify velocity over the lifetime
+    * consider adding support for "pooling" for potential performance improvement
+    * consider adding a "max particles" option if performance is a concern
 * support mp3 on `SwingSolaPlatform`
 * ability to render ellipse (and collisions for ellipse)
 * research possible benefits of updating to Java 21
@@ -87,8 +94,7 @@
         * https://labs.leaningtech.com/cheerpj3/getting-started/Java-app
     * modularize (requires figuring out how to modularize parts of teavm needed)
         * ensure `SimpleSolaBrowserFileServer` and `SolaBrowserFileBuilder` in `tools` is exposed as well
-    * Improve performance (StressTestExample can't handle a lot of objects)
-        * Possibly finish implementing BrowserCanvasRenderer?
+    * Possibly finish implementing BrowserCanvasRenderer?
     * Consider web worker for game loop
         * main thread creates needed dom events
         * mouse and key events sent to worker

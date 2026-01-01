@@ -61,8 +61,6 @@ public class GuiExample extends Sola {
   protected void onAsyncInit(Runnable completeAsyncInit) {
     new BulkAssetLoader(assetLoaderProvider)
       .addAsset(GuiJsonDocument.class, "gui", "assets/gui/test.gui.json")
-      .addAsset(GuiJsonDocument.class, "row", "assets/gui/test_row.gui.json")
-      .addAsset(GuiJsonDocument.class, "column", "assets/gui/test_column.gui.json")
       .addAsset(GuiJsonDocument.class, "text", "assets/gui/test_text.gui.json")
       .addAsset(GuiJsonDocument.class, "image", "assets/gui/test_image.gui.json")
       .addAsset(GuiJsonDocument.class, "inputs", "assets/gui/test_input.gui.json")
@@ -73,7 +71,7 @@ public class GuiExample extends Sola {
           guiDocument().setRootElement(buildOptionBarWithContent(guiJsonDocument.rootElement()));
         }
 
-        if (assets[5] instanceof GuiJsonDocument guiJsonDocument) {
+        if (assets[3] instanceof GuiJsonDocument guiJsonDocument) {
           guiJsonDocument.rootElement().findElementById("button", ButtonGuiElement.class).setOnAction(() -> {
             guiJsonDocument.rootElement().findElementById("button", ButtonGuiElement.class).setDisabled(true);
           });
@@ -98,15 +96,8 @@ public class GuiExample extends Sola {
             assetLoaderProvider.get(GuiJsonDocument.class).get("gui").getAsset().rootElement())
           );
         }),
-        buildOptionBarButton("Row", () -> {
-          guiDocument().setRootElement(buildOptionBarWithContent(
-            assetLoaderProvider.get(GuiJsonDocument.class).get("row").getAsset().rootElement())
-          );
-        }),
-        buildOptionBarButton("Column", () -> {
-          guiDocument().setRootElement(buildOptionBarWithContent(
-            assetLoaderProvider.get(GuiJsonDocument.class).get("column").getAsset().rootElement())
-          );
+        buildOptionBarButton("Layout", () -> {
+          guiDocument().setRootElement(buildOptionBarWithContent(buildMainAxisContentExample()));
         }),
         buildOptionBarButton("Text", () -> {
           guiDocument().setRootElement(buildOptionBarWithContent(
@@ -127,9 +118,6 @@ public class GuiExample extends Sola {
           guiDocument().setRootElement(buildOptionBarWithContent(
             assetLoaderProvider.get(GuiJsonDocument.class).get("theme").getAsset().rootElement())
           );
-        }),
-        buildOptionBarButton("Flex", () -> {
-          guiDocument().setRootElement(buildOptionBarWithContent(buildMainAxisContentExample()));
         })
       );
 

@@ -27,11 +27,12 @@ import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
-import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
 import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
 import technology.sola.engine.physics.component.collider.ColliderShapeTriangle;
 import technology.sola.engine.physics.component.collider.ColliderTag;
+import technology.sola.engine.physics.component.particle.ParticleEmitterComponent;
+import technology.sola.engine.physics.component.particle.emitter.CircleEmitterShape;
 import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.math.geometry.Triangle;
@@ -210,18 +211,14 @@ public class SimplePlatformerGame extends Sola {
       .addComponent(new ColliderComponent(new ColliderShapeAABB()))
       .setName("finalBlock");
 
-    ParticleEmitterComponent particleEmitterComponent = new ParticleEmitterComponent();
-
-    particleEmitterComponent.setParticleColor(Color.YELLOW);
-    particleEmitterComponent.setParticleVelocityBounds(new Vector2D(-100, -100), new Vector2D(100, 100));
-    particleEmitterComponent.setParticlesPerEmit(5);
-    particleEmitterComponent.setParticleSizeBounds(4f, 8f);
-
     world.createEntity()
       .setName("confetti")
-      .addComponent(particleEmitterComponent)
+      .addComponent(new ParticleEmitterComponent()
+        .appearanceConfig().setColorFunction(roll -> Color.YELLOW).setSizeBounds(4, 8).done()
+        .movementConfig().setSpeed(100).done()
+        .emissionConfig().setCountPerEmit(5).setShape(new CircleEmitterShape(25).setEmitFromShell(true)).done())
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(new TransformComponent(25, 0, finalBlock))
+      .addComponent(new TransformComponent(0, 0, finalBlock))
       .setDisabled(true);
 
     return world;

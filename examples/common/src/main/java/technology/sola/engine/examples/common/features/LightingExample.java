@@ -34,8 +34,9 @@ import technology.sola.engine.input.TouchPhase;
 import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
-import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
+import technology.sola.engine.physics.component.particle.ParticleEmitterComponent;
+import technology.sola.engine.physics.component.particle.emitter.TrapezoidEmitterShape;
 import technology.sola.engine.physics.utils.ColliderUtils;
 import technology.sola.engine.utils.SolaRandom;
 import technology.sola.math.EasingFunction;
@@ -219,7 +220,7 @@ public class LightingExample extends Sola {
         );
 
         world.createEntity(
-          new TransformComponent(entity),
+          new TransformComponent(2,2, entity),
           buildFireParticleEmitterComponent(),
           new BlendModeComponent(BlendMode.LINEAR_DODGE),
           new LayerComponent("objects", 2)
@@ -229,15 +230,12 @@ public class LightingExample extends Sola {
   }
 
   private static ParticleEmitterComponent buildFireParticleEmitterComponent() {
-    ParticleEmitterComponent fireParticleEmitterComponent = new ParticleEmitterComponent();
-
-    fireParticleEmitterComponent.setParticleColor(new Color(230, 40, 45));
-    fireParticleEmitterComponent.setParticleSizeBounds(1, 3);
-    fireParticleEmitterComponent.setParticleLife(1);
-    fireParticleEmitterComponent.setParticleVelocityBounds(new Vector2D(-1.2f, -3f), new Vector2D(1.2f, 0));
-    fireParticleEmitterComponent.setParticleEmissionDelay(0.1f);
-    fireParticleEmitterComponent.setParticlesPerEmit(2);
-
-    return fireParticleEmitterComponent;
+    return new ParticleEmitterComponent()
+      .appearanceConfig().setColorFunction(roll -> new Color(230, 40, 45)).setSizeBounds(1, 3).done()
+      .movementConfig()
+      .setSpeed(1.2f).done()
+      .emissionConfig().setCountPerEmit(1).setLifeBounds(1, 1.5f).setInterval(0.1f).setShape(new TrapezoidEmitterShape(
+        new Vector2D(0, -1), 2, 12, 10
+      )).done();
   }
 }
