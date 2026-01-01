@@ -44,24 +44,14 @@ public class Particle {
    * @param delta the elapsed delta time
    */
   public void update(float delta) {
-    remainingLifespan -= delta;
-
     var noise = this.noise;
 
     if (noise != null) {
       float xStrength = noise.xStrength();
       float yStrength = noise.yStrength();
       float frequency = noise.frequency();
-//      float noiseValue = SolaRandom.noise((remainingLifespan) * frequency, ( remainingLifespan) * frequency);
-    float noiseValue = SolaRandom.noise(
-      (maxLifespan - remainingLifespan) * frequency,
-      (maxLifespan - remainingLifespan) * frequency
-    );
-
-//      Vector2D noiseMod = new Vector2D(
-//        SolaRandom.nextFloat(-xStrength, xStrength) * mod,
-//        SolaRandom.nextFloat(-yStrength, yStrength) * mod
-//      );
+      float time = (maxLifespan - remainingLifespan) * frequency;
+      float noiseValue = SolaRandom.noise(time, time);
 
       velocity.mutateAdd(
         SolaRandom.nextFloat(-xStrength, xStrength) * noiseValue,
@@ -69,10 +59,9 @@ public class Particle {
       );
     }
 
-
     position.mutateAdd(velocity.scalar(delta));
-//    position.mutateAdd(velocity.add(noiseMod).scalar(delta));
-//    position.mutateAdd(noiseMod);
+
+    remainingLifespan -= delta;
   }
 
   /**
