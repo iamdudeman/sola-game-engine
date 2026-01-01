@@ -69,14 +69,14 @@ class PerlinNoise {
     double octaveCounter = octaves;
 
     while (octaveCounter >= 1) {
-      value += noise((x / octaveCounter), (y / octaveCounter), 0f) * octaveCounter;
+      value += perlinNoise((x / octaveCounter), (y / octaveCounter), 0f) * octaveCounter;
       octaveCounter *= falloff;
     }
 
     return value / octaves;
   }
 
-  private static double noise(double x, double y, double z) {
+  private static double perlinNoise(double x, double y, double z) {
     // Adjust for seed value
     x += seed;
     y += seed;

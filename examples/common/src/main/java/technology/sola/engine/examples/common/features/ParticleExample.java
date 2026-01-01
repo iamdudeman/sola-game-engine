@@ -260,8 +260,11 @@ public class ParticleExample extends Sola {
   private static void setEmitterToFire(Entity entity) {
     var fireEmitter = new ParticleEmitterComponent()
       .appearanceConfig().setColorFunction(roll -> new Color(230, 40, 45)).setSizeBounds(6, 10).done()
-      .movementConfig()
-      .setSpeedBounds(34, 60).done()
+      .movementConfig().setSpeedBounds(34, 60).setNoise(new ParticleNoise(
+        15.55f,
+        0,
+        0.5f
+      )).done()
       .emissionConfig().setCountPerEmit(4).setLifeBounds(1, 1.5f).setInterval(0.01f).done();
 
     cleanupEntity(entity);
