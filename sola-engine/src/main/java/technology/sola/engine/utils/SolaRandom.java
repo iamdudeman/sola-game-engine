@@ -77,7 +77,7 @@ public class SolaRandom {
   }
 
   /**
-   * Generates a Perlin noise value.
+   * Generates a Perlin noise value for a 2d time scale.
    *
    * @param x the x "time"
    * @param y the y "time"
@@ -85,6 +85,19 @@ public class SolaRandom {
    */
   public static float noise(float x, float y) {
     return (float) PerlinNoise.noise(x, y);
+  }
+
+  /**
+   * Generates a Perlin noise value for a 2d time scale.
+   *
+   * @param x       the x "time"
+   * @param y       the y "time"
+   * @param octaves smaller values result in larger changes over time
+   * @param falloff how much each higher octave contributes
+   * @return the noise value
+   */
+  public static float noise(float x, float y, int octaves, float falloff) {
+    return (float) PerlinNoise.noise(x, y, octaves, falloff);
   }
 
   private SolaRandom() {
