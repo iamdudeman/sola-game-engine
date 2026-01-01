@@ -1,6 +1,11 @@
 # sola-game-engine TODO list
 
-*
+* Particle System
+    * movement
+        * _implement "noise" for movement_
+            * x strength
+            * y strength
+            * frequency
 
 ## Known Bugs List
 
@@ -22,12 +27,7 @@
 
 ## TODO List
 
-* Particle System
-    * movement
-        * _implement "noise" for movement_
-            * x strength
-            * y strength
-            * frequency
+*
 
 ### Low priority (not ordered)
 
