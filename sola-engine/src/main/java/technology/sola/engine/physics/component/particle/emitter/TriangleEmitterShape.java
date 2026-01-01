@@ -83,15 +83,15 @@ public class TriangleEmitterShape extends ParticleEmitterShape {
     float x = SolaRandom.nextFloat();
     float y = SolaRandom.nextFloat();
 
-    float q = Math.abs(x - y);
+    float difference = Math.abs(x - y);
 
-    float s = q;
-    float t = 0.5f * (x + y - q);
-    float u = 1 - (0.5f * (x + y + q));
+    float w1 = difference;
+    float w2 = 0.5f * (x + y - difference);
+    float w3 = 1 - (0.5f * (x + y + difference));
 
     return new Vector2D(
-      s * triangle.p1().x() + t * triangle.p2().x() + u * triangle.p3().x(),
-      s * triangle.p1().y() + t * triangle.p2().y() + u * triangle.p3().y()
+      w1 * triangle.p1().x() + w2 * triangle.p2().x() + w3 * triangle.p3().x(),
+      w1 * triangle.p1().y() + w2 * triangle.p2().y() + w3 * triangle.p3().y()
     );
   }
 
