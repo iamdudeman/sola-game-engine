@@ -45,6 +45,7 @@ technology.sola.engine.physics.component.collider
 technology.sola.engine.physics.component.particle
 technology.sola.engine.physics.component.particle.appearance
 technology.sola.engine.physics.component.particle.emitter
+technology.sola.engine.physics.component.particle.movement
 technology.sola.engine.physics.event
 technology.sola.engine.physics.system
 technology.sola.engine.physics.system.collision

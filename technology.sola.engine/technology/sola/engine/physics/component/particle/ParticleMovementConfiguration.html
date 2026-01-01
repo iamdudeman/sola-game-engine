@@ -105,10 +105,18 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#minSpeed()" class="member-name-link">minSpeed</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParticleMovementConfiguration.html" title="class in technology.sola.engine.physics.component.particle">ParticleMovementConfiguration</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setInheritedVelocityPercentage(float)" class="member-name-link">setInheritedVelocityPercentage</a><wbr>(float&nbsp;inheritedVelocityPercentage)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="movement/ParticleNoise.html" title="class in technology.sola.engine.physics.component.particle.movement">ParticleNoise</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#noise()" class="member-name-link">noise</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParticleMovementConfiguration.html" title="class in technology.sola.engine.physics.component.particle">ParticleMovementConfiguration</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setInheritedVelocityPercentage(float)" class="member-name-link">setInheritedVelocityPercentage</a><wbr>(float&nbsp;inheritedVelocityPercentage)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Updates the percentage of velocity inheritance from the owning <code>Entity</code>.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParticleMovementConfiguration.html" title="class in technology.sola.engine.physics.component.particle">ParticleMovementConfiguration</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setNoise(technology.sola.engine.physics.component.particle.movement.ParticleNoise)" class="member-name-link">setNoise</a><wbr>(@Nullable <a href="movement/ParticleNoise.html" title="class in technology.sola.engine.physics.component.particle.movement">ParticleNoise</a>&nbsp;noise)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the <a href="movement/ParticleNoise.html" title="class in technology.sola.engine.physics.component.particle.movement"><code>ParticleNoise</code></a> configuration for this emitter.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ParticleMovementConfiguration.html" title="class in technology.sola.engine.physics.component.particle">ParticleMovementConfiguration</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSpeed(float)" class="member-name-link">setSpeed</a><wbr>(float&nbsp;speed)</code></div>
@@ -207,6 +215,29 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>inheritedVelocityPercentage</code> - new percentage of velocity inheritance from the owning <code>Entity</code></dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="noise()">
+<h3>noise</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="movement/ParticleNoise.html" title="class in technology.sola.engine.physics.component.particle.movement">ParticleNoise</a></span>&nbsp;<span class="element-name">noise</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the <a href="movement/ParticleNoise.html" title="class in technology.sola.engine.physics.component.particle.movement"><code>ParticleNoise</code></a> configuration for this emitter, or <code>null</code> if no noise is applied</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setNoise(technology.sola.engine.physics.component.particle.movement.ParticleNoise)">
+<h3>setNoise</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ParticleMovementConfiguration.html" title="class in technology.sola.engine.physics.component.particle">ParticleMovementConfiguration</a></span>&nbsp;<span class="element-name">setNoise</span><wbr><span class="parameters">(@Nullable <a href="movement/ParticleNoise.html" title="class in technology.sola.engine.physics.component.particle.movement">ParticleNoise</a>&nbsp;noise)</span></div>
+<div class="block">Sets the <a href="movement/ParticleNoise.html" title="class in technology.sola.engine.physics.component.particle.movement"><code>ParticleNoise</code></a> configuration for this emitter.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>noise</code> - the new <a href="movement/ParticleNoise.html" title="class in technology.sola.engine.physics.component.particle.movement"><code>ParticleNoise</code></a> configuration, or <code>null</code> to disable noise</dd>
 <dt>Returns:</dt>
 <dd>this</dd>
 </dl>

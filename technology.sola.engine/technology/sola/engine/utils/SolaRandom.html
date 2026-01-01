@@ -118,6 +118,20 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns a pseudorandom, uniformly distributed int value between min (inclusive) and max value (inclusive)</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#noise(float,float)" class="member-name-link">noise</a><wbr>(float&nbsp;x,
+ float&nbsp;y)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Generates a Perlin noise value for a 2d time scale.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#noise(float,float,int,float)" class="member-name-link">noise</a><wbr>(float&nbsp;x,
+ float&nbsp;y,
+ int&nbsp;octaves,
+ float&nbsp;falloff)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Generates a Perlin noise value for a 2d time scale.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#setSeed(long)" class="member-name-link">setSeed</a><wbr>(long&nbsp;seed)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
@@ -195,7 +209,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">nextFloat</span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the next pseudorandom, uniformly distributed float value between 0.0 and 1.</dd>
+<dd>a pseudorandom, uniformly distributed float value between 0.0 inclusive and 1 exclusive.</dd>
 </dl>
 </section>
 </li>
@@ -211,6 +225,40 @@ loadScripts(document, 'script');</script>
 <dd><code>max</code> - the inclusive max value</dd>
 <dt>Returns:</dt>
 <dd>the random float value</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="noise(float,float)">
+<h3>noise</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">noise</span><wbr><span class="parameters">(float&nbsp;x,
+ float&nbsp;y)</span></div>
+<div class="block">Generates a Perlin noise value for a 2d time scale.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>x</code> - the x "time"</dd>
+<dd><code>y</code> - the y "time"</dd>
+<dt>Returns:</dt>
+<dd>the noise value</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="noise(float,float,int,float)">
+<h3>noise</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">noise</span><wbr><span class="parameters">(float&nbsp;x,
+ float&nbsp;y,
+ int&nbsp;octaves,
+ float&nbsp;falloff)</span></div>
+<div class="block">Generates a Perlin noise value for a 2d time scale.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>x</code> - the x "time"</dd>
+<dd><code>y</code> - the y "time"</dd>
+<dd><code>octaves</code> - smaller values result in larger changes over time</dd>
+<dd><code>falloff</code> - how much each higher octave contributes</dd>
+<dt>Returns:</dt>
+<dd>the noise value</dd>
 </dl>
 </section>
 </li>
