@@ -114,8 +114,9 @@ public class ParticleExample extends Sola {
         buildParticleOptionButton(world, "Triangle", ParticleExample::setEmitterToTriangle),
         buildParticleOptionButton(world, "Circle", ParticleExample::setEmitterToCircle),
         buildParticleOptionButton(world, "Rectangle", ParticleExample::setEmitterToRectangle),
-        buildParticleOptionButton(world, "Random", ParticleExample::setEmitterToRandom)
-        );
+        buildParticleOptionButton(world, "Random", ParticleExample::setEmitterToRandom),
+        buildParticleOptionButton(world, "Noise", ParticleExample::setEmitterToNoise)
+      );
   }
 
   private GuiElement<?, ?> buildSecondRow(World world) {
@@ -223,6 +224,20 @@ public class ParticleExample extends Sola {
     cleanupEntity(entity);
 
     entity.addComponent(shellEmitter)
+      .addComponent(new CircleRendererComponent(Color.YELLOW, false))
+      .addComponent(new BlendModeComponent(BlendMode.NORMAL))
+      .addComponent(new TransformComponent(250, 300, 100));
+  }
+
+  private static void setEmitterToNoise(Entity entity) {
+    var emitter = new ParticleEmitterComponent();
+
+    emitter.emissionConfig().setShape(new CircleEmitterShape(50)).setLifeBounds(2, 5);
+    emitter.movementConfig().setNoise(new ParticleNoise(50f, 50f, 0.5f));
+
+    cleanupEntity(entity);
+
+    entity.addComponent(emitter)
       .addComponent(new CircleRendererComponent(Color.YELLOW, false))
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
       .addComponent(new TransformComponent(250, 300, 100));
