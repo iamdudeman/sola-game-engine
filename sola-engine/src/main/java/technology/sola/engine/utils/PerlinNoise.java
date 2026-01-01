@@ -5,6 +5,12 @@ import java.util.Random;
 /**
  * Implementation credit all goes to <a href="https://cs.nyu.edu/~perlin/noise/">Ken Perlin's implementation</a>.
  */
+@SuppressWarnings({
+  "checkstyle:constantName",
+  "checkstyle:localVariableName",
+  "checkstyle:multipleVariableDeclarations",
+  "checkstyle:parameterAssignment",
+})
 class PerlinNoise {
   private static final int[] p = new int[512];
   private static final int[] permutation = {
@@ -20,7 +26,7 @@ class PerlinNoise {
     129, 22, 39, 253, 19, 98, 108, 110, 79, 113, 224, 232, 178, 185, 112, 104, 218, 246, 97, 228,
     251, 34, 242, 193, 238, 210, 144, 12, 191, 179, 162, 241, 81, 51, 145, 235, 249, 14, 239, 107,
     49, 192, 214, 31, 181, 199, 106, 157, 184, 84, 204, 176, 115, 121, 50, 45, 127, 4, 150, 254,
-    138, 236, 205, 93, 222, 114, 67, 29, 24, 72, 243, 141, 128, 195, 78, 66, 215, 61, 156, 180
+    138, 236, 205, 93, 222, 114, 67, 29, 24, 72, 243, 141, 128, 195, 78, 66, 215, 61, 156, 180,
   };
   private static double seed;
   private static long defaultSize = 35;

@@ -76,6 +76,13 @@ public class SolaRandom {
     return min + RANDOM.nextFloat() * (max - min);
   }
 
+  /**
+   * Generates a Perlin noise value.
+   *
+   * @param x the x "time"
+   * @param y the y "time"
+   * @return the noise value
+   */
   public static float noise(float x, float y) {
     return (float) PerlinNoise.noise(x, y);
   }
