@@ -4,8 +4,8 @@ plugins {
 
 dependencies {
   // can also point to git branch via commit (ex. 8d601c3cca)
-  api("com.github.iamdudeman:sola-ecs:2.3.0")
-  api("com.github.iamdudeman:sola-json:4.0.3")
+  api("com.github.iamdudeman:sola-ecs:2.3.1")
+  api("com.github.iamdudeman:sola-json:4.1.0")
 
   // performance testing dependencies
   testImplementation("org.openjdk.jmh:jmh-core:1.37")

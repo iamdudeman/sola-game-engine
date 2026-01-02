@@ -1,5 +1,8 @@
 # Editor TODO List
 
+* AudioAsset tool -> shows a little media player to preview it
+    * use asset loader and AudioClip to ensure same volumes for preview
+
 ## Known Bugs List
 
 *
@@ -17,8 +20,7 @@
 Comes with default configuration for built-in components and systems
 
 * assets tooling
-    * maybe `audio` shows a little media player to preview it
-        * use asset loader and AudioClip to ensure same volumes for preview
+
     * create and edit materials
     * create and edit GUIs
         * maybe a WYSIWYG editor?
