@@ -63,7 +63,7 @@ public record FontToolConfig(
       return new FontToolConfig(
         openedFileIds,
         jsonObject.getDouble("dividerPosition", 0.2),
-        jsonObject.getString("openId", null)
+        jsonObject.getStringOrNull("openId")
       );
     }
   }
