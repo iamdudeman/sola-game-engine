@@ -6,6 +6,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfoJsonMapper;
+import technology.sola.engine.editor.SolaEditorConstants;
 import technology.sola.engine.editor.core.components.ImagePanel;
 import technology.sola.engine.editor.core.components.TabbedPanel;
 import technology.sola.engine.editor.core.components.assets.AssetActionConfiguration;
@@ -23,7 +24,7 @@ import java.util.List;
 
 @NullMarked
 class SpriteSheetAssetTree extends VBox {
-  private static final SolaLogger LOGGER = SolaLogger.of(SpriteSheetAssetTree.class, "logs/sola-editor.log");
+  private static final SolaLogger LOGGER = SolaLogger.of(SpriteSheetAssetTree.class, SolaEditorConstants.LOG_FILE);
   private final AssetTreeView assetTreeView;
   @Nullable
   private ImagePanel selectedImagePanel;

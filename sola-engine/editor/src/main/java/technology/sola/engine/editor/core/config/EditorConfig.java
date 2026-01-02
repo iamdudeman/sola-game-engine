@@ -2,6 +2,7 @@ package technology.sola.engine.editor.core.config;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
+import technology.sola.engine.editor.SolaEditorConstants;
 import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.engine.editor.core.utils.FileUtils;
 import technology.sola.json.JsonObject;
@@ -24,7 +25,7 @@ public record EditorConfig(
   @Nullable String selectedTool,
   Map<String, JsonObject> toolConfigurations
 ) {
-  private static final SolaLogger LOGGER = SolaLogger.of(EditorConfig.class, "logs/sola-editor.log");
+  private static final SolaLogger LOGGER = SolaLogger.of(EditorConfig.class, SolaEditorConstants.LOG_FILE);
 
   /**
    * Reads an {@link EditorConfig} instance from a configuration file.

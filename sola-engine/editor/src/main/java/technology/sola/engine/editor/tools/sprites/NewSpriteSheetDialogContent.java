@@ -9,6 +9,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfoJsonMapper;
+import technology.sola.engine.editor.SolaEditorConstants;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.utils.DialogService;
 import technology.sola.engine.editor.core.utils.FileUtils;
@@ -27,7 +28,7 @@ import java.util.List;
  */
 @NullMarked
 class NewSpriteSheetDialogContent extends EditorPanel {
-  private static final SolaLogger LOGGER = SolaLogger.of(NewSpriteSheetDialogContent.class, "logs/sola-editor.log");
+  private static final SolaLogger LOGGER = SolaLogger.of(NewSpriteSheetDialogContent.class, SolaEditorConstants.LOG_FILE);
   private final Button chooseFileButton;
   private final TextField spriteSheetNameTextField;
   private final TextField extensionTextField;
