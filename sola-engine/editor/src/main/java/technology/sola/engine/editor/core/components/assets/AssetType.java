@@ -33,6 +33,12 @@ public enum AssetType {
     this.singleAssetLabel = singleAssetLabel;
   }
 
+  /**
+   * Checks if the given filename matches any of the extensions for this asset type.
+   *
+   * @param name the filename to check
+   * @return true if the filename matches an extension for this asset type, false otherwise
+   */
   public boolean matchesFilename(String name) {
     for (var extension : extensions) {
       if (name.endsWith(extension)) {
@@ -43,6 +49,12 @@ public enum AssetType {
     return false;
   }
 
+  /**
+   * Removes the extension from the given filename.
+   *
+   * @param filename the filename to remove the extension from
+   * @return the filename without the extension
+   */
   public String removeExtension(String filename) {
     String result = filename;
 
@@ -56,6 +68,13 @@ public enum AssetType {
     return result;
   }
 
+  /**
+   * Renames a filename while preserving the extension. The new filename must not contain the extension.
+   *
+   * @param fileNameWithExtension   the original filename with extension
+   * @param newNameWithoutExtension the new filename without extension
+   * @return the new filename with extension
+   */
   public String editFilename(String fileNameWithExtension, String newNameWithoutExtension) {
     String extensionMatch = "";
 

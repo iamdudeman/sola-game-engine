@@ -2,7 +2,6 @@ package technology.sola.engine.editor.tools.audio;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
