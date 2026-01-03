@@ -90,7 +90,7 @@ public class NewAudioDialogContent extends EditorPanel {
 
     createButton.setOnAction(event -> {
       try {
-        // copy image
+        // copy audio file
         var newAudioClipName = audioClipNameTextField.getText() + "." + extensionTextField.getText();
 
         Files.copy(audioClipFile.toPath(), new File(parentFolder, newAudioClipName).toPath(), StandardCopyOption.REPLACE_EXISTING);
