@@ -10,7 +10,7 @@ public enum AssetType {
   /**
    * AudioClip assets.
    */
-  AUDIO_CLIP("audio", "Audio", "audio clip", new String[]{".mp3"}),
+  AUDIO_CLIP("audio", "Audio", "audio clip", new String[]{".mp3", ".wav"}),
   /**
    * Font assets.
    */
