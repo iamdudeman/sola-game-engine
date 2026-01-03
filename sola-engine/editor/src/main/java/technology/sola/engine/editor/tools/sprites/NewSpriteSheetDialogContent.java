@@ -23,7 +23,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 /**
- * SpritesFontDialogContent is a form for creating a new sprites asset that can be easily nested in
+ * NewSpriteSheetDialogContent is a form for creating a new sprites asset that can be easily nested in
  * a {@link DialogService#custom(String, Parent)}.
  */
 @NullMarked
@@ -38,11 +38,11 @@ class NewSpriteSheetDialogContent extends EditorPanel {
   private File imageFile;
 
   /**
-   * Creates a new instance. The parentFolder specified is where the new font asset will be created if the create
-   * button is clicked. After a new font is created the onAfterCreate {@link Runnable} will fire.
+   * Creates a new instance. The parentFolder specified is where the new spritesheet asset will be created if the create
+   * button is clicked. After a new spritesheet is created the onAfterCreate {@link Runnable} will fire.
    *
    * @param parentFolder  the parent {@link File} to create the sprites asset in
-   * @param onAfterCreate the callback to run after font creation completes
+   * @param onAfterCreate the callback to run after spritesheet creation completes
    */
   public NewSpriteSheetDialogContent(File parentFolder, Runnable onAfterCreate) {
     setSpacing(8);

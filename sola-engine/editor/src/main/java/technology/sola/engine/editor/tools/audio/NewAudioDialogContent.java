@@ -1,24 +1,23 @@
 package technology.sola.engine.editor.tools.audio;
 
-import javafx.collections.FXCollections;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
 import org.jspecify.annotations.NullMarked;
-import technology.sola.engine.assets.graphics.font.FontStyle;
+import org.jspecify.annotations.Nullable;
+import technology.sola.engine.editor.SolaEditorConstants;
 import technology.sola.engine.editor.core.components.EditorPanel;
-import technology.sola.engine.editor.core.components.input.IntegerSpinner;
 import technology.sola.engine.editor.core.utils.DialogService;
-import technology.sola.engine.tooling.font.FontListTool;
-import technology.sola.engine.tooling.font.FontRasterizerTool;
+import technology.sola.engine.editor.core.utils.ToastService;
+import technology.sola.logging.SolaLogger;
 
 import java.io.File;
-import java.util.Arrays;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 /**
  * NewAudioDialogContent is a form for creating a new audio asset that can be easily nested in
@@ -26,34 +25,28 @@ import java.util.Arrays;
  */
 @NullMarked
 public class NewAudioDialogContent extends EditorPanel {
-  private final ComboBox<String> fontChoice;
-  private final ComboBox<String> styleChoice;
-  private final IntegerSpinner sizeChoice;
-  private final TextArea charactersArea;
+  private static final SolaLogger LOGGER = SolaLogger.of(NewAudioDialogContent.class, SolaEditorConstants.LOG_FILE);
+  private final Button chooseFileButton;
+  private final TextField audioClipNameTextField;
+  private final TextField extensionTextField;
   private final Button cancelButton;
   private final Button createButton;
+  @Nullable
+  private File audioClipFile;
 
   /**
    * Creates a new instance. The parentFolder specified is where the new font asset will be created if the create
    * button is clicked. After a new audio clip is created the onAfterCreate {@link Runnable} will fire.
    *
-   * @param parentFolder  the parent {@link File} to create the font asset in
-   * @param onAfterCreate the callback to run after font creation completes
+   * @param parentFolder  the parent {@link File} to create the sprites asset in
+   * @param onAfterCreate the callback to run after audio clip creation completes
    */
   public NewAudioDialogContent(File parentFolder, Runnable onAfterCreate) {
     setSpacing(8);
 
-    // font options
-    fontChoice = new ComboBox<>(FXCollections.observableArrayList(
-      new FontListTool().execute().split("\n")
-    ));
-    styleChoice = new ComboBox<>(FXCollections.observableArrayList(
-      Arrays.stream(FontStyle.values()).map(FontStyle::toString).toArray(String[]::new)
-    ));
-    sizeChoice = new IntegerSpinner(12, 120);
-
-    // characters
-    charactersArea = new TextArea();
+    chooseFileButton = new Button("Choose a file");
+    audioClipNameTextField = new TextField("new-audio-clip");
+    extensionTextField = new TextField("");
 
     // buttons
     cancelButton = new Button("Cancel");
@@ -61,87 +54,58 @@ public class NewAudioDialogContent extends EditorPanel {
 
     initializeUiStateAndEvents(parentFolder, onAfterCreate);
 
+    HBox hBox = new HBox();
+    hBox.setSpacing(8);
+    hBox.getChildren().addAll(chooseFileButton, audioClipNameTextField, extensionTextField);
+
     getChildren().addAll(
-      buildFontOptionsUi(),
-      charactersArea,
+      hBox,
       buildButtonsUi()
     );
   }
 
   private void initializeUiStateAndEvents(File parentFolder, Runnable onAfterCreate) {
-    fontChoice.getSelectionModel().select(0);
-    styleChoice.getSelectionModel().select(0);
+    createButton.setDisable(true);
+    extensionTextField.setDisable(true);
+    extensionTextField.setPrefWidth(50);
 
-    fontChoice.valueProperty().addListener((observable, oldValue, newValue) -> charactersArea.setFont(getFont()));
-    styleChoice.valueProperty().addListener((observable, oldValue, newValue) -> charactersArea.setFont(getFont()));
-    sizeChoice.valueProperty().addListener((observable, oldValue, newValue) -> charactersArea.setFont(getFont()));
+    chooseFileButton.setOnAction(event -> {
+      var newFile = DialogService.filePicker("Pick a file for the AudioClip", new FileChooser.ExtensionFilter(
+        "Audio", List.of("*.wav", "*.mp3"))
+      );
 
-    charactersArea.textProperty().addListener((observable, oldValue, newValue) -> {
-      createButton.setDisable(newValue.isEmpty());
+      if (newFile == null) {
+        return;
+      }
+
+      audioClipFile = newFile;
+
+      String[] parts = audioClipFile.getName().split("\\.");
+
+      audioClipNameTextField.setText(parts[0]);
+      extensionTextField.setText(parts[1]);
+
+      createButton.setDisable(false);
     });
 
     createButton.setOnAction(event -> {
-      new FontRasterizerTool(parentFolder)
-        .execute(
-          fontChoice.getValue(),
-          sizeChoice.getValue().toString(),
-          styleChoice.getValue(),
-          charactersArea.getText() + " "
-        );
+      try {
+        // copy image
+        var newAudioClipName = audioClipNameTextField.getText() + "." + extensionTextField.getText();
 
-      onAfterCreate.run();
-      closeParentStage();
+        Files.copy(audioClipFile.toPath(), new File(parentFolder, newAudioClipName).toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+        // finish
+        onAfterCreate.run();
+        closeParentStage();
+      } catch (IOException ex) {
+        ToastService.error("Error creating new AudioClip");
+        LOGGER.error(ex.getMessage(), ex);
+      }
     });
     cancelButton.setOnAction((event) -> {
       closeParentStage();
     });
-
-    // remove whitespace and add it back in later
-    charactersArea.setText(FontRasterizerTool.DEFAULT_CHARACTERS.replace(" ", ""));
-    charactersArea.setWrapText(true);
-    charactersArea.setFont(getFont());
-    charactersArea.setPrefWidth(600);
-    charactersArea.setPrefHeight(400);
-  }
-
-  private Font getFont() {
-    FontWeight fontWeight = FontWeight.NORMAL;
-    FontPosture fontPosture = FontPosture.REGULAR;
-    FontStyle fontStyle = FontStyle.valueOf(styleChoice.getValue());
-
-    switch (fontStyle) {
-      case BOLD:
-        fontWeight = FontWeight.BOLD;
-        break;
-      case ITALIC:
-        fontPosture = FontPosture.ITALIC;
-        break;
-      case BOLD_ITALIC:
-        fontWeight = FontWeight.BOLD;
-        fontPosture = FontPosture.ITALIC;
-        break;
-    }
-
-    return Font.font(
-      fontChoice.getValue(),
-      fontWeight,
-      fontPosture,
-      sizeChoice.getValue()
-    );
-  }
-
-  private HBox buildFontOptionsUi() {
-    HBox container = new HBox();
-
-    container.setSpacing(8);
-
-    container.getChildren().addAll(
-      fontChoice,
-      styleChoice,
-      sizeChoice
-    );
-
-    return container;
   }
 
   private HBox buildButtonsUi() {

@@ -7,6 +7,7 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public enum AssetType {
+  AUDIO_CLIP("audio", ".mp3", "Audio", "audio clip"),
   /**
    * Font assets.
    */
