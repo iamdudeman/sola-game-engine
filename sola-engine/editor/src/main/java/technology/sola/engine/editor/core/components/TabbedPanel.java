@@ -7,7 +7,6 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * TabbedPanel is an extension of {@link TabPane} with convenience methods for adding, renaming, and closing tabs.
@@ -16,11 +15,6 @@ import java.util.function.Consumer;
 public class TabbedPanel extends TabPane {
   @Nullable
   private SelectedTabListener selectedTabListener = null;
-
-  @FunctionalInterface
-  public interface SelectedTabListener {
-    void onSelectedTabChanged(@Nullable Tab oldTab, @Nullable Tab newTab);
-  }
 
   /**
    * Creates a new instance.
@@ -134,5 +128,19 @@ public class TabbedPanel extends TabPane {
       .filter(t -> t.getId().equals(id))
       .findFirst()
       .ifPresent(tabs::remove);
+  }
+
+  /**
+   * SelectedTabListener is a callback called whenever the selected tab changes.
+   */
+  @FunctionalInterface
+  public interface SelectedTabListener {
+    /**
+     * Called whenever the selected tab changes.
+     *
+     * @param oldTab the previously selected tab or null if there was no selected tab before
+     * @param newTab the newly selected tab or null if there is no selected tab after
+     */
+    void onSelectedTabChanged(@Nullable Tab oldTab, @Nullable Tab newTab);
   }
 }

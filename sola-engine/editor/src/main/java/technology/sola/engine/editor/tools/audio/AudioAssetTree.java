@@ -1,6 +1,5 @@
 package technology.sola.engine.editor.tools.audio;
 
-import javafx.application.Platform;
 import javafx.scene.layout.VBox;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetLoader;
@@ -15,7 +14,6 @@ import technology.sola.engine.platform.javafx.assets.audio.JavaFxAudioClipAssetL
 
 import java.io.File;
 import java.util.List;
-import java.util.function.Supplier;
 
 @NullMarked
 class AudioAssetTree extends VBox {
