@@ -4,7 +4,6 @@ import javafx.scene.layout.VBox;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.audio.AudioClip;
-import technology.sola.engine.editor.SolaEditorConstants;
 import technology.sola.engine.editor.core.components.TabbedPanel;
 import technology.sola.engine.editor.core.components.assets.AssetActionConfiguration;
 import technology.sola.engine.editor.core.components.assets.AssetTreeItem;
@@ -12,21 +11,18 @@ import technology.sola.engine.editor.core.components.assets.AssetTreeView;
 import technology.sola.engine.editor.core.components.assets.AssetType;
 import technology.sola.engine.editor.core.utils.DialogService;
 import technology.sola.engine.platform.javafx.assets.audio.JavaFxAudioClipAssetLoader;
-import technology.sola.logging.SolaLogger;
 
 import java.io.File;
 import java.util.List;
 
 @NullMarked
 class AudioAssetTree extends VBox {
-  private static final SolaLogger LOGGER = SolaLogger.of(AudioAssetTree.class, SolaEditorConstants.LOG_FILE);
   private final AssetTreeView assetTreeView;
-  private final AssetLoader<AudioClip> audioClipAssetLoader = new JavaFxAudioClipAssetLoader();
 
-  public AudioAssetTree(TabbedPanel centerPanel) {
+  AudioAssetTree(TabbedPanel centerPanel) {
     super();
 
-    var actionConfiguration = new AudioClipAssetActionConfiguration(centerPanel, audioClipAssetLoader);
+    var actionConfiguration = new AudioClipAssetActionConfiguration(centerPanel, new JavaFxAudioClipAssetLoader());
 
     assetTreeView = new AssetTreeView(
       AssetType.AUDIO_CLIP,
@@ -44,7 +40,7 @@ class AudioAssetTree extends VBox {
     });
   }
 
-  public void restoreOpenedFilesAndSelection(List<String> ids, String selectedId) {
+  void restoreOpenedFilesAndSelection(List<String> ids, String selectedId) {
     ids.forEach(assetTreeView::selectAssetItem);
 
     if (selectedId != null) {
@@ -78,6 +74,7 @@ class AudioAssetTree extends VBox {
 
     @Override
     public void rename(AssetTreeItem oldItem, AssetTreeItem newItem) {
+      // todo bug still when renaming where it can't be renamed
       centerPanel.renameTab(oldItem.id(), newItem.label(), newItem.id());
     }
 

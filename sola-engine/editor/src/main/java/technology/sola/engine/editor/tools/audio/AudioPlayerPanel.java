@@ -12,9 +12,7 @@ import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.editor.core.components.EditorPanel;
-import technology.sola.engine.platform.javafx.assets.audio.JavaFxAudioClipAssetLoader;
 
-import java.io.File;
 import java.util.Locale;
 
 @NullMarked
