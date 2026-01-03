@@ -10,41 +10,62 @@ public enum AssetType {
   /**
    * AudioClip assets.
    */
-  AUDIO_CLIP("audio", "Audio", "audio clip", ".mp3"),
+  AUDIO_CLIP("audio", "Audio", "audio clip", new String[]{".mp3"}),
   /**
    * Font assets.
    */
-  FONT("font", "Fonts", "font", ".font.json"),
+  FONT("font", "Fonts", "font", new String[]{".font.json"}),
   /**
    * Sprites assets.
    */
-  SPRITES("sprites", "Sprites", "spritesheet", ".sprites.json"),
+  SPRITES("sprites", "Sprites", "spritesheet", new String[]{".sprites.json"}),
   ;
 
-  /**
-   * The file extension for the asset type.
-   */
-  private final String extension;
   final String path;
   final String title;
   final String singleAssetLabel;
+  private final String[] extensions;
 
-  AssetType(String path, String title, String singleAssetLabel, String extension) {
+  AssetType(String path, String title, String singleAssetLabel, String[] extensions) {
     this.path = path;
-    this.extension = extension;
+    this.extensions = extensions;
     this.title = title;
     this.singleAssetLabel = singleAssetLabel;
   }
 
   public boolean matchesFilename(String name) {
-    return name.endsWith(extension);
+    for (var extension : extensions) {
+      if (name.endsWith(extension)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   public String removeExtension(String filename) {
-    return filename.replace(extension, "");
+    String result = filename;
+
+    for (var extension : extensions) {
+      if (filename.endsWith(extension)) {
+        result = filename.replace(extension, "");
+        break;
+      }
+    }
+
+    return result;
   }
 
   public String editFilename(String fileNameWithExtension, String newNameWithoutExtension) {
-    return newNameWithoutExtension + extension;
+    String extensionMatch = "";
+
+    for (var extension : extensions) {
+      if (fileNameWithExtension.endsWith(extension)) {
+        extensionMatch = extension;
+        break;
+      }
+    }
+
+    return newNameWithoutExtension + extensionMatch;
   }
 }
