@@ -1,7 +1,6 @@
 # Editor TODO List
 
-* AudioAsset tool -> shows a little media player to preview it
-    * use asset loader and AudioClip to ensure same volumes for preview
+*
 
 ## Known Bugs List
 
