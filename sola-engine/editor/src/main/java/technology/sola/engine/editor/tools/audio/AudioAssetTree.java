@@ -2,6 +2,8 @@ package technology.sola.engine.editor.tools.audio;
 
 import javafx.scene.layout.VBox;
 import org.jspecify.annotations.NullMarked;
+import technology.sola.engine.assets.AssetLoader;
+import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.editor.SolaEditorConstants;
 import technology.sola.engine.editor.core.components.TabbedPanel;
 import technology.sola.engine.editor.core.components.assets.AssetActionConfiguration;
@@ -9,6 +11,7 @@ import technology.sola.engine.editor.core.components.assets.AssetTreeItem;
 import technology.sola.engine.editor.core.components.assets.AssetTreeView;
 import technology.sola.engine.editor.core.components.assets.AssetType;
 import technology.sola.engine.editor.core.utils.DialogService;
+import technology.sola.engine.platform.javafx.assets.audio.JavaFxAudioClipAssetLoader;
 import technology.sola.logging.SolaLogger;
 
 import java.io.File;
@@ -18,11 +21,12 @@ import java.util.List;
 class AudioAssetTree extends VBox {
   private static final SolaLogger LOGGER = SolaLogger.of(AudioAssetTree.class, SolaEditorConstants.LOG_FILE);
   private final AssetTreeView assetTreeView;
+  private final AssetLoader<AudioClip> audioClipAssetLoader = new JavaFxAudioClipAssetLoader();
 
   public AudioAssetTree(TabbedPanel centerPanel) {
     super();
 
-    var actionConfiguration = new AudioClipAssetActionConfiguration(centerPanel);
+    var actionConfiguration = new AudioClipAssetActionConfiguration(centerPanel, audioClipAssetLoader);
 
     assetTreeView = new AssetTreeView(
       AssetType.AUDIO_CLIP,
@@ -49,7 +53,8 @@ class AudioAssetTree extends VBox {
   }
 
   private record AudioClipAssetActionConfiguration(
-    TabbedPanel centerPanel
+    TabbedPanel centerPanel,
+    AssetLoader<AudioClip> audioClipAssetLoader
   ) implements AssetActionConfiguration {
     @Override
     public void select(AssetTreeItem item) {
@@ -57,10 +62,12 @@ class AudioAssetTree extends VBox {
       var id = item.id();
       var title = AssetType.AUDIO_CLIP.removeExtension(file.getName());
 
+      audioClipAssetLoader.addAssetMapping(id, file.getAbsolutePath());
+
       centerPanel.addTab(
         id,
         title,
-        new AudioPlayerPanel(file)
+        new AudioPlayerPanel(audioClipAssetLoader, id)
       );
     }
 
@@ -78,6 +85,7 @@ class AudioAssetTree extends VBox {
     public void delete(AssetTreeItem item) {
       var id = item.id();
 
+      audioClipAssetLoader.get(id).executeIfLoaded(AudioClip::dispose);
       centerPanel.closeTab(id);
     }
   }

@@ -9,6 +9,7 @@ import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.platform.javafx.assets.audio.JavaFxAudioClipAssetLoader;
@@ -18,25 +19,27 @@ import java.util.Locale;
 
 @NullMarked
 class AudioPlayerPanel extends EditorPanel {
+  private final AssetLoader<AudioClip> audioClipAssetLoader;
   private final Button playPauseButton;
   private final Slider volumeSlider;
   private final Text volumeText;
   @Nullable
   private AudioClip audioClip;
 
-  AudioPlayerPanel(File audioFile) {
+  AudioPlayerPanel(AssetLoader<AudioClip> audioClipAssetLoader, String fileId) {
+    this.audioClipAssetLoader = audioClipAssetLoader;
     playPauseButton = buildPlayButton();
     volumeSlider = buildVolumeSlider();
     volumeText = new Text("100.0");
 
     getChildren().add(buildButtonsUi());
 
-    loadAudioClip(audioFile);
+    loadAudioClip(fileId);
   }
 
-  private void loadAudioClip(File audioFile) {
-    new JavaFxAudioClipAssetLoader()
-      .getNewAsset(audioFile.getPath(), audioFile.getAbsolutePath())
+  private void loadAudioClip(String fileId) {
+    audioClipAssetLoader
+      .get(fileId)
       .executeWhenLoaded(audioClip -> {
         this.audioClip = audioClip;
 
