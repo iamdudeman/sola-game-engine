@@ -13,7 +13,7 @@ import technology.sola.json.JsonObject;
 @NullMarked
 public class AudioToolPanel extends ToolPanel<AudioToolConfig> {
   private final TabbedPanel tabbedPanel;
-  private final AudioAssetTree fontAssetTree;
+  private final AudioAssetTree audioClipAssetTree;
 
   /**
    * Creates an instance of AudioToolPanel initialized via the {@link EditorConfig}.
@@ -25,14 +25,14 @@ public class AudioToolPanel extends ToolPanel<AudioToolConfig> {
     var items = getItems();
 
     tabbedPanel = new TabbedPanel();
-    fontAssetTree = new AudioAssetTree(tabbedPanel);
+    audioClipAssetTree = new AudioAssetTree(tabbedPanel);
 
-    fontAssetTree.setMinWidth(200);
+    audioClipAssetTree.setMinWidth(200);
 
-    items.addAll(fontAssetTree, tabbedPanel);
+    items.addAll(audioClipAssetTree, tabbedPanel);
 
     Platform.runLater(() -> {
-      fontAssetTree.restoreOpenedFilesAndSelection(toolConfig.openedFileIds(), toolConfig.openId());
+      audioClipAssetTree.restoreOpenedFilesAndSelection(toolConfig.openedFileIds(), toolConfig.openId());
 
       setDividerPositions(toolConfig.dividerPosition());
     });
