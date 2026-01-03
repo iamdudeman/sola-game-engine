@@ -15,7 +15,12 @@ import java.util.function.Consumer;
 @NullMarked
 public class TabbedPanel extends TabPane {
   @Nullable
-  private Consumer<Tab> selectedTabListener = null;
+  private SelectedTabListener selectedTabListener = null;
+
+  @FunctionalInterface
+  public interface SelectedTabListener {
+    void onSelectedTabChanged(@Nullable Tab oldTab, @Nullable Tab newTab);
+  }
 
   /**
    * Creates a new instance.
@@ -28,7 +33,7 @@ public class TabbedPanel extends TabPane {
       .selectedItemProperty()
       .addListener((observable, oldValue, newValue) -> {
         if (selectedTabListener != null) {
-          selectedTabListener.accept(newValue);
+          selectedTabListener.onSelectedTabChanged(oldValue, newValue);
         }
       });
   }
@@ -38,7 +43,7 @@ public class TabbedPanel extends TabPane {
    *
    * @param selectedTabListener the listener for the selected tab.
    */
-  public void setSelectedTabListener(Consumer<Tab> selectedTabListener) {
+  public void setSelectedTabListener(SelectedTabListener selectedTabListener) {
     this.selectedTabListener = selectedTabListener;
   }
 
@@ -67,15 +72,20 @@ public class TabbedPanel extends TabPane {
    * @param id      the id of the tab
    * @param title   the title of the tab in the tab bar
    * @param content the content displayed when the tab is selected
+   * @return the newly created tab
    */
-  public void addTab(String id, String title, Node content) {
+  public Tab addTab(String id, String title, Node content) {
     var tabs = getTabs();
     var existingTab = tabs.stream()
       .filter(t -> t.getId().equals(id))
       .findFirst();
 
     if (existingTab.isPresent()) {
-      getSelectionModel().select(existingTab.get());
+      var tab = existingTab.get();
+
+      getSelectionModel().select(tab);
+
+      return tab;
     } else {
       Tab tab = new Tab(title, content);
 
@@ -83,6 +93,8 @@ public class TabbedPanel extends TabPane {
       tabs.add(tab);
 
       getSelectionModel().selectLast();
+
+      return tab;
     }
   }
 

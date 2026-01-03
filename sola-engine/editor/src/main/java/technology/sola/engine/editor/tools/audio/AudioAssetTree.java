@@ -31,7 +31,11 @@ class AudioAssetTree extends VBox {
 
     getChildren().add(assetTreeView);
 
-    centerPanel.setSelectedTabListener(tab -> {
+    centerPanel.setSelectedTabListener((oldTab, tab) -> {
+      if (oldTab != null) {
+        audioClipAssetLoader.get(oldTab.getId()).executeIfLoaded(AudioClip::pause);
+      }
+
       if (tab == null) {
         assetTreeView.deselectAssetItem();
       } else {

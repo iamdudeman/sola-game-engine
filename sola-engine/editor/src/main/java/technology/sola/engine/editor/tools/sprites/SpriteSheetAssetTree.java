@@ -41,7 +41,7 @@ class SpriteSheetAssetTree extends VBox {
 
     getChildren().add(assetTreeView);
 
-    centerPanel.setSelectedTabListener(tab -> {
+    centerPanel.setSelectedTabListener((oldTab, tab) -> {
       if (tab == null) {
         assetTreeView.deselectAssetItem();
       } else {
