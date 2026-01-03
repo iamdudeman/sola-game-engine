@@ -20,13 +20,14 @@
 Comes with default configuration for built-in components and systems
 
 * assets tooling
-
     * create and edit materials
     * create and edit GUIs
         * maybe a WYSIWYG editor?
 
 * UI for creating and previewing ParticleEmitterComponent configurations
-    * serialize component and its parts to JSON
+    * serialize the component and its parts to JSON
+    * The left panel can select the existing configuration or create new
+    * the right panel shows emitter details
 
 * Editor instance configuration (composable) (goes with Scene composition)
     1. Register all EcsSystems

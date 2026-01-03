@@ -56,6 +56,7 @@ public class EditorWindow {
       editorConfig = EditorConfig.readConfigFile();
 
       editorToolPanels = List.of(
+        new AudioToolPanel(editorConfig),
         new FontToolPanel(editorConfig),
         new SpriteSheetToolPanel(editorConfig)
       );
