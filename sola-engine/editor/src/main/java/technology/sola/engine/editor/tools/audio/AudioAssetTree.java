@@ -79,40 +79,14 @@ class AudioAssetTree extends VBox {
 
     @Override
     public void rename(AssetTreeItem oldItem, AssetTreeItem newItem) {
-      // todo
-//      var newItemFile = newItem.file();
-//      var parentFile = newItemFile.getParentFile();
-//      var imageAsset = new File(parentFile, oldItem.label() + ".png");
-//      var extension = AssetType.FONT.extension;
-//      var newImageAsset = newItemFile.getName().replace(extension, "") + ".png";
-//
-//      try {
-//        var jsonObject = FileUtils.readJson(newItemFile).asObject();
-//
-//        jsonObject.put("fontGlyphFile", newImageAsset);
-//
-//        if (imageAsset.renameTo(new File(parentFile, newImageAsset))) {
-//          FileUtils.writeJson(newItemFile, jsonObject);
-//
-//          centerPanel.renameTab(oldItem.id(), newItem.label(), newItem.id());
-//        }
-//      } catch (IOException ex) {
-//        ToastService.error(ex.getMessage());
-//        LOGGER.error(ex.getMessage(), ex);
-//      }
+      centerPanel.renameTab(oldItem.id(), newItem.label(), newItem.id());
     }
 
     @Override
     public void delete(AssetTreeItem item) {
-      // todo
-//      var id = item.id();
-//      var deletedFile = item.file();
-//      var parentFile = deletedFile.getParentFile();
-//      var extension = AssetType.FONT.extension;
-//      var imageAsset = deletedFile.getName().replace(extension, "") + ".png";
-//
-//      centerPanel.closeTab(id);
-//      new File(parentFile, imageAsset).delete();
+      var id = item.id();
+
+      centerPanel.closeTab(id);
     }
   }
 }
