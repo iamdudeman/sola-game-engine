@@ -5,7 +5,8 @@
 
 ## Known Bugs List
 
-*
+* Deleting a folder that contains files with opened tabs won't clean up the opened tabs
+* If files have the same name within an asset folder, but different extensions, there is no way to tell them apart
 
 -----------------------------------------------------------------------------------------------------------------------
 
