@@ -40,7 +40,10 @@ class AudioPlayerPanel extends EditorPanel {
       .executeWhenLoaded(audioClip -> {
         this.audioClip = audioClip;
 
-        audioClip.addFinishListener(AudioClip::stop);
+        audioClip.addFinishListener(ac -> {
+          ac.stop();
+          playPauseButton.setText("Play");
+        });
 
         playPauseButton.setDisable(false);
         volumeSlider.setDisable(false);
