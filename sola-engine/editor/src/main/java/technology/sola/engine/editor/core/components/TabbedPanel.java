@@ -104,17 +104,22 @@ public class TabbedPanel extends TabPane {
    * @param id      the current id of the tab
    * @param newName the new title of the tab
    * @param newId   the new id of the tab
+   * @return the renamed tab or else null if the tab was not found
    */
-  public void renameTab(String id, String newName, String newId) {
+  @Nullable
+  public Tab renameTab(String id, String newName, String newId) {
     var tabs = getTabs();
 
-    tabs.stream()
+    var tab = tabs.stream()
       .filter(t -> t.getId().equals(id))
-      .findFirst()
-      .ifPresent(tab -> {
-        tab.setId(newId);
-        tab.setText(newName);
-      });
+      .findFirst();
+
+    tab.ifPresent(tab1 -> {
+      tab1.setId(newId);
+      tab1.setText(newName);
+    });
+
+    return tab.orElse(null);
   }
 
   /**

@@ -250,6 +250,10 @@ public class AssetTreeView extends TreeView<AssetTreeItem> {
         : assetType.editFilename(event.getOldValue().file().getName(), event.getNewValue().label());
       var newFile = new File(item.getValue().file().getParent(), newName);
 
+      if (!newFile.isDirectory()) {
+        assetActionConfiguration.beforeRename(event.getOldValue(), event.getNewValue());
+      }
+
       if (event.getOldValue().file().renameTo(newFile)) {
         if (!newFile.isDirectory()) {
           assetActionConfiguration.rename(event.getOldValue(), event.getNewValue());

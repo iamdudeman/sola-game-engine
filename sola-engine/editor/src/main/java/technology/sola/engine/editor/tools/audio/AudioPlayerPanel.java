@@ -28,14 +28,19 @@ class AudioPlayerPanel extends EditorPanel {
     this.audioClipAssetLoader = audioClipAssetLoader;
     playPauseButton = buildPlayButton();
     volumeSlider = buildVolumeSlider();
-    volumeText = new Text("100.0");
+    volumeText = new Text("---.-");
 
     getChildren().add(buildButtonsUi());
 
     loadAudioClip(fileId);
   }
 
-  private void loadAudioClip(String fileId) {
+  void loadAudioClip(String fileId) {
+    playPauseButton.setText("Play");
+    playPauseButton.setDisable(true);
+    volumeSlider.setDisable(true);
+    volumeText.setText("---.-");
+
     audioClipAssetLoader
       .get(fileId)
       .executeWhenLoaded(audioClip -> {

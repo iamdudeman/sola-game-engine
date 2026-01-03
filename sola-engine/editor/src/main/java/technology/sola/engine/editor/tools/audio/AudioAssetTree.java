@@ -1,5 +1,6 @@
 package technology.sola.engine.editor.tools.audio;
 
+import javafx.application.Platform;
 import javafx.scene.layout.VBox;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.AssetLoader;
@@ -14,6 +15,7 @@ import technology.sola.engine.platform.javafx.assets.audio.JavaFxAudioClipAssetL
 
 import java.io.File;
 import java.util.List;
+import java.util.function.Supplier;
 
 @NullMarked
 class AudioAssetTree extends VBox {
@@ -22,7 +24,9 @@ class AudioAssetTree extends VBox {
   AudioAssetTree(TabbedPanel centerPanel) {
     super();
 
-    var actionConfiguration = new AudioClipAssetActionConfiguration(centerPanel, new JavaFxAudioClipAssetLoader());
+    final var audioClipAssetLoader = new JavaFxAudioClipAssetLoader();
+
+    var actionConfiguration = new AudioClipAssetActionConfiguration(centerPanel, audioClipAssetLoader);
 
     assetTreeView = new AssetTreeView(
       AssetType.AUDIO_CLIP,
@@ -64,11 +68,13 @@ class AudioAssetTree extends VBox {
 
       audioClipAssetLoader.addAssetMapping(id, file.getAbsolutePath());
 
-      centerPanel.addTab(
+      var newTab = centerPanel.addTab(
         id,
         title,
         new AudioPlayerPanel(audioClipAssetLoader, id)
       );
+
+      newTab.setOnClosed(event -> audioClipAssetLoader.get(id).executeIfLoaded(AudioClip::stop));
     }
 
     @Override
@@ -77,9 +83,19 @@ class AudioAssetTree extends VBox {
     }
 
     @Override
+    public void beforeRename(AssetTreeItem oldItem, AssetTreeItem newItem) {
+      var id = oldItem.id();
+
+      audioClipAssetLoader.get(id).executeIfLoaded(AudioClip::dispose);
+    }
+
+    @Override
     public void rename(AssetTreeItem oldItem, AssetTreeItem newItem) {
-      // todo bug still when renaming where it can't be renamed
-      centerPanel.renameTab(oldItem.id(), newItem.label(), newItem.id());
+      var renamedTab = centerPanel.renameTab(oldItem.id(), newItem.label(), newItem.id());
+
+      audioClipAssetLoader.addAssetMapping(newItem.id(), newItem.file().getAbsolutePath());
+
+      ((AudioPlayerPanel) renamedTab.getContent()).loadAudioClip(newItem.id());
     }
 
     @Override
