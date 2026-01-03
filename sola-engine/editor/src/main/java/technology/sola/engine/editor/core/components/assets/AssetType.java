@@ -7,15 +7,18 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public enum AssetType {
-  AUDIO_CLIP("audio", ".mp3", "Audio", "audio clip"),
+  /**
+   * AudioClip assets.
+   */
+  AUDIO_CLIP("audio", "Audio", "audio clip", ".mp3"),
   /**
    * Font assets.
    */
-  FONT("font", ".font.json", "Fonts", "font"),
+  FONT("font", "Fonts", "font", ".font.json"),
   /**
    * Sprites assets.
    */
-  SPRITES("sprites", ".sprites.json", "Sprites", "spritesheet"),
+  SPRITES("sprites", "Sprites", "spritesheet", ".sprites.json"),
   ;
 
   /**
@@ -26,10 +29,22 @@ public enum AssetType {
   final String title;
   final String singleAssetLabel;
 
-  AssetType(String path, String extension, String title, String singleAssetLabel) {
+  AssetType(String path, String title, String singleAssetLabel, String extension) {
     this.path = path;
     this.extension = extension;
     this.title = title;
     this.singleAssetLabel = singleAssetLabel;
+  }
+
+  public boolean matchesFilename(String name) {
+    return name.endsWith(extension);
+  }
+
+  public String removeExtension(String filename) {
+    return filename.replace(extension, "");
+  }
+
+  public String editFilename(String fileNameWithExtension, String newNameWithoutExtension) {
+    return newNameWithoutExtension + extension;
   }
 }

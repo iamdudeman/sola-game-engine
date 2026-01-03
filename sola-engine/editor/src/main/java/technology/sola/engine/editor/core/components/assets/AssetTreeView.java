@@ -151,9 +151,9 @@ public class AssetTreeView extends TreeView<AssetTreeItem> {
 
             parent.getChildren().add(nestedParent);
           } else {
-            if (file.getName().endsWith(assetType.extension)) {
+            if (assetType.matchesFilename(file.getName())) {
               var nestedFile = new File(parentFolder, file.getName());
-              var assetFile = new TreeItem<>(new AssetTreeItem(nestedFile.getAbsolutePath(), file.getName().replace(assetType.extension, ""), nestedFile));
+              var assetFile = new TreeItem<>(new AssetTreeItem(nestedFile.getAbsolutePath(), assetType.removeExtension(file.getName()), nestedFile));
 
               parent.getChildren().add(assetFile);
             }
@@ -228,8 +228,8 @@ public class AssetTreeView extends TreeView<AssetTreeItem> {
       public AssetTreeItem fromString(String string) {
         var editingItem = p.getEditingItem().getValue();
         var editingFile = editingItem.file();
-        var extension = editingFile.isDirectory() ? "" : assetType.extension;
-        var newFile = new File(editingFile.getParent(), string + extension);
+        var newFilename = editingFile.isDirectory() ? string : assetType.editFilename(editingFile.getName(), string);
+        var newFile = new File(editingFile.getParent(), newFilename);
 
         if (newFile.exists()) {
           var itemLabel = editingFile.isDirectory() ? "Folder" : "File";
@@ -247,7 +247,7 @@ public class AssetTreeView extends TreeView<AssetTreeItem> {
       var item = event.getTreeItem();
       var newName = item.getValue().file().isDirectory()
         ? event.getNewValue().label()
-        : event.getNewValue().label() + assetType.extension;
+        : assetType.editFilename(event.getOldValue().file().getName(), event.getNewValue().label());
       var newFile = new File(item.getValue().file().getParent(), newName);
 
       if (event.getOldValue().file().renameTo(newFile)) {
