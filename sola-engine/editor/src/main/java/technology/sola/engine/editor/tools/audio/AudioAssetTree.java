@@ -3,19 +3,15 @@ package technology.sola.engine.editor.tools.audio;
 import javafx.scene.layout.VBox;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.editor.SolaEditorConstants;
-import technology.sola.engine.editor.core.components.ImagePanel;
 import technology.sola.engine.editor.core.components.TabbedPanel;
 import technology.sola.engine.editor.core.components.assets.AssetActionConfiguration;
 import technology.sola.engine.editor.core.components.assets.AssetTreeItem;
 import technology.sola.engine.editor.core.components.assets.AssetTreeView;
 import technology.sola.engine.editor.core.components.assets.AssetType;
 import technology.sola.engine.editor.core.utils.DialogService;
-import technology.sola.engine.editor.core.utils.FileUtils;
-import technology.sola.engine.editor.core.utils.ToastService;
 import technology.sola.logging.SolaLogger;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 @NullMarked
@@ -57,19 +53,15 @@ class AudioAssetTree extends VBox {
   ) implements AssetActionConfiguration {
     @Override
     public void select(AssetTreeItem item) {
-      // todo
-//      var file = item.file();
-//      var id = item.id();
-//      var parentFile = file.getParentFile();
-//      var extension = AssetType.FONT.extension;
-//      var imageAsset = file.getName().replace(extension, "") + ".png";
-//      var title = file.getName().replace(extension, "");
+      var file = item.file();
+      var id = item.id();
+      var title = AssetType.AUDIO_CLIP.removeExtension(file.getName());
 
-//      centerPanel.addTab(
-//        id,
-//        title,
-//        new ImagePanel(new File(parentFile, imageAsset))
-//      );
+      centerPanel.addTab(
+        id,
+        title,
+        new AudioPlayerPanel(file)
+      );
     }
 
     @Override
