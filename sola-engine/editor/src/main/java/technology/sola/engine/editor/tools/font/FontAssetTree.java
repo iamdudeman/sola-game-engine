@@ -60,9 +60,9 @@ class FontAssetTree extends VBox {
       var file = item.file();
       var id = item.id();
       var parentFile = file.getParentFile();
-      var extension = AssetType.FONT.extension;
-      var imageAsset = file.getName().replace(extension, "") + ".png";
-      var title = file.getName().replace(extension, "");
+      // Note: font image is always a .png
+      var imageAsset = AssetType.FONT.removeExtension(file.getName()) + ".png";
+      var title = AssetType.FONT.removeExtension(file.getName());
 
       centerPanel.addTab(
         id,
@@ -80,9 +80,9 @@ class FontAssetTree extends VBox {
     public void rename(AssetTreeItem oldItem, AssetTreeItem newItem) {
       var newItemFile = newItem.file();
       var parentFile = newItemFile.getParentFile();
+      // Note: font image is always a .png
       var imageAsset = new File(parentFile, oldItem.label() + ".png");
-      var extension = AssetType.FONT.extension;
-      var newImageAsset = newItemFile.getName().replace(extension, "") + ".png";
+      var newImageAsset = AssetType.FONT.removeExtension(newItemFile.getName()) + ".png";
 
       try {
         var jsonObject = FileUtils.readJson(newItemFile).asObject();
@@ -105,8 +105,8 @@ class FontAssetTree extends VBox {
       var id = item.id();
       var deletedFile = item.file();
       var parentFile = deletedFile.getParentFile();
-      var extension = AssetType.FONT.extension;
-      var imageAsset = deletedFile.getName().replace(extension, "") + ".png";
+      // Note: font image is always a .png
+      var imageAsset = AssetType.FONT.removeExtension(deletedFile.getName()) + ".png";
 
       centerPanel.closeTab(id);
       new File(parentFile, imageAsset).delete();

@@ -82,14 +82,13 @@ class SpriteSheetAssetTree extends VBox {
       var file = item.file();
       var id = item.id();
       var parentFile = file.getParentFile();
-      var extension = AssetType.SPRITES.extension;
 
       spriteSheetState.setCurrentSpriteFile(file);
 
       try {
         var spriteSheetJsonObject = FileUtils.readJson(file).asObject();
         var spriteSheetInfo = new SpriteSheetInfoJsonMapper().toObject(spriteSheetJsonObject);
-        var title = file.getName().replace(extension, "");
+        var title = AssetType.SPRITES.removeExtension(file.getName());
         var spriteSheetImageFile = new File(parentFile, spriteSheetInfo.spriteSheet());
         var imagePanel = new ImagePanel(spriteSheetImageFile);
 
@@ -142,9 +141,8 @@ class SpriteSheetAssetTree extends VBox {
         var spriteSheetInfo = spriteSheetInfoJsonMapper.toObject(spriteSheetJsonObject);
         var imageAsset = spriteSheetInfo.spriteSheet();
 
-        var extension = AssetType.SPRITES.extension;
         var parts = imageAsset.split("\\.");
-        var newImageAsset = newItemFile.getName().replace(extension, "") + "." + parts[1];
+        var newImageAsset = AssetType.SPRITES.removeExtension(newItemFile.getName()) + "." + parts[1];
         var newSpriteSheetInfo = new SpriteSheetInfo(newImageAsset, spriteSheetInfo.sprites());
         var newImageFile = new File(parentFile, newImageAsset);
 

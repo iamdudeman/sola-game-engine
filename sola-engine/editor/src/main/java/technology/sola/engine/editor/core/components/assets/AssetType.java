@@ -24,7 +24,7 @@ public enum AssetType {
   /**
    * The file extension for the asset type.
    */
-  public final String extension;
+  private final String extension;
   final String path;
   final String title;
   final String singleAssetLabel;
