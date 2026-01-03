@@ -72,7 +72,7 @@ public record SpriteSheetToolConfig(
         jsonObject.getDouble("leftDivider", 0.2),
         jsonObject.getDouble("rightDivider", 0.8),
         jsonObject.getDouble("topBottomDivider", 0.9),
-        jsonObject.getString("openId", null)
+        jsonObject.getStringOrNull("openId")
       );
     }
   }

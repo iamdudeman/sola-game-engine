@@ -26,6 +26,16 @@ public interface AssetActionConfiguration {
   void create(File parentFolder, Runnable onAfterCreate);
 
   /**
+   * Called before an asset is renamed.
+   *
+   * @param oldItem the old {@link AssetTreeItem} that to be renamed
+   * @param newItem the new {@link AssetTreeItem} that will be renamed
+   */
+  default void beforeRename(AssetTreeItem oldItem, AssetTreeItem newItem) {
+    // No action by default
+  }
+
+  /**
    * Called when an asset was renamed.
    *
    * @param oldItem the old {@link AssetTreeItem} that was renamed
@@ -34,7 +44,7 @@ public interface AssetActionConfiguration {
   void rename(AssetTreeItem oldItem, AssetTreeItem newItem);
 
   /**
-   * Called when an asset was deleted.
+   * Called after an asset was deleted.
    *
    * @param item the {@link AssetTreeItem} that was deleted
    */

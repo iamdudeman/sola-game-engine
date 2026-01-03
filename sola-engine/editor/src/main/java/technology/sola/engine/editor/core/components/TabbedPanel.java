@@ -7,7 +7,6 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * TabbedPanel is an extension of {@link TabPane} with convenience methods for adding, renaming, and closing tabs.
@@ -15,7 +14,7 @@ import java.util.function.Consumer;
 @NullMarked
 public class TabbedPanel extends TabPane {
   @Nullable
-  private Consumer<Tab> selectedTabListener = null;
+  private SelectedTabListener selectedTabListener = null;
 
   /**
    * Creates a new instance.
@@ -28,7 +27,7 @@ public class TabbedPanel extends TabPane {
       .selectedItemProperty()
       .addListener((observable, oldValue, newValue) -> {
         if (selectedTabListener != null) {
-          selectedTabListener.accept(newValue);
+          selectedTabListener.onSelectedTabChanged(oldValue, newValue);
         }
       });
   }
@@ -38,7 +37,7 @@ public class TabbedPanel extends TabPane {
    *
    * @param selectedTabListener the listener for the selected tab.
    */
-  public void setSelectedTabListener(Consumer<Tab> selectedTabListener) {
+  public void setSelectedTabListener(SelectedTabListener selectedTabListener) {
     this.selectedTabListener = selectedTabListener;
   }
 
@@ -67,15 +66,20 @@ public class TabbedPanel extends TabPane {
    * @param id      the id of the tab
    * @param title   the title of the tab in the tab bar
    * @param content the content displayed when the tab is selected
+   * @return the newly created tab
    */
-  public void addTab(String id, String title, Node content) {
+  public Tab addTab(String id, String title, Node content) {
     var tabs = getTabs();
     var existingTab = tabs.stream()
       .filter(t -> t.getId().equals(id))
       .findFirst();
 
     if (existingTab.isPresent()) {
-      getSelectionModel().select(existingTab.get());
+      var tab = existingTab.get();
+
+      getSelectionModel().select(tab);
+
+      return tab;
     } else {
       Tab tab = new Tab(title, content);
 
@@ -83,6 +87,8 @@ public class TabbedPanel extends TabPane {
       tabs.add(tab);
 
       getSelectionModel().selectLast();
+
+      return tab;
     }
   }
 
@@ -92,17 +98,22 @@ public class TabbedPanel extends TabPane {
    * @param id      the current id of the tab
    * @param newName the new title of the tab
    * @param newId   the new id of the tab
+   * @return the renamed tab or else null if the tab was not found
    */
-  public void renameTab(String id, String newName, String newId) {
+  @Nullable
+  public Tab renameTab(String id, String newName, String newId) {
     var tabs = getTabs();
 
-    tabs.stream()
+    var tab = tabs.stream()
       .filter(t -> t.getId().equals(id))
-      .findFirst()
-      .ifPresent(tab -> {
-        tab.setId(newId);
-        tab.setText(newName);
-      });
+      .findFirst();
+
+    tab.ifPresent(tab1 -> {
+      tab1.setId(newId);
+      tab1.setText(newName);
+    });
+
+    return tab.orElse(null);
   }
 
   /**
@@ -117,5 +128,19 @@ public class TabbedPanel extends TabPane {
       .filter(t -> t.getId().equals(id))
       .findFirst()
       .ifPresent(tabs::remove);
+  }
+
+  /**
+   * SelectedTabListener is a callback called whenever the selected tab changes.
+   */
+  @FunctionalInterface
+  public interface SelectedTabListener {
+    /**
+     * Called whenever the selected tab changes.
+     *
+     * @param oldTab the previously selected tab or null if there was no selected tab before
+     * @param newTab the newly selected tab or null if there is no selected tab after
+     */
+    void onSelectedTabChanged(@Nullable Tab oldTab, @Nullable Tab newTab);
   }
 }

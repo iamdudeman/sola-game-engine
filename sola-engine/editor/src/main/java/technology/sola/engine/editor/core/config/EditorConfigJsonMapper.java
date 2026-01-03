@@ -33,7 +33,7 @@ class EditorConfigJsonMapper implements JsonMapper<EditorConfig> {
   @Override
   public EditorConfig toObject(JsonObject jsonObject) {
     Map<String, JsonObject> toolConfigs = new HashMap<>();
-    JsonObject tools = jsonObject.getObject("tools", null);
+    JsonObject tools = jsonObject.getObjectOrNull("tools");
 
     if (tools != null) {
       tools.forEach((key, value) -> toolConfigs.put(key, value.asObject()));
@@ -41,7 +41,7 @@ class EditorConfigJsonMapper implements JsonMapper<EditorConfig> {
 
     return new EditorConfig(
       windowBoundsJsonMapper.toObject(jsonObject.getObject("window")),
-      jsonObject.getString("selectedTool", null),
+      jsonObject.getStringOrNull("selectedTool"),
       toolConfigs
     );
   }

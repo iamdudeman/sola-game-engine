@@ -6,6 +6,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfoJsonMapper;
+import technology.sola.engine.editor.SolaEditorConstants;
 import technology.sola.engine.editor.core.components.ImagePanel;
 import technology.sola.engine.editor.core.components.TabbedPanel;
 import technology.sola.engine.editor.core.components.assets.AssetActionConfiguration;
@@ -23,7 +24,7 @@ import java.util.List;
 
 @NullMarked
 class SpriteSheetAssetTree extends VBox {
-  private static final SolaLogger LOGGER = SolaLogger.of(SpriteSheetAssetTree.class, "logs/sola-editor.log");
+  private static final SolaLogger LOGGER = SolaLogger.of(SpriteSheetAssetTree.class, SolaEditorConstants.LOG_FILE);
   private final AssetTreeView assetTreeView;
   @Nullable
   private ImagePanel selectedImagePanel;
@@ -40,7 +41,7 @@ class SpriteSheetAssetTree extends VBox {
 
     getChildren().add(assetTreeView);
 
-    centerPanel.setSelectedTabListener(tab -> {
+    centerPanel.setSelectedTabListener((oldTab, tab) -> {
       if (tab == null) {
         assetTreeView.deselectAssetItem();
       } else {
@@ -81,14 +82,13 @@ class SpriteSheetAssetTree extends VBox {
       var file = item.file();
       var id = item.id();
       var parentFile = file.getParentFile();
-      var extension = AssetType.SPRITES.extension;
 
       spriteSheetState.setCurrentSpriteFile(file);
 
       try {
         var spriteSheetJsonObject = FileUtils.readJson(file).asObject();
         var spriteSheetInfo = new SpriteSheetInfoJsonMapper().toObject(spriteSheetJsonObject);
-        var title = file.getName().replace(extension, "");
+        var title = AssetType.SPRITES.removeExtension(file.getName());
         var spriteSheetImageFile = new File(parentFile, spriteSheetInfo.spriteSheet());
         var imagePanel = new ImagePanel(spriteSheetImageFile);
 
@@ -141,9 +141,8 @@ class SpriteSheetAssetTree extends VBox {
         var spriteSheetInfo = spriteSheetInfoJsonMapper.toObject(spriteSheetJsonObject);
         var imageAsset = spriteSheetInfo.spriteSheet();
 
-        var extension = AssetType.SPRITES.extension;
         var parts = imageAsset.split("\\.");
-        var newImageAsset = newItemFile.getName().replace(extension, "") + "." + parts[1];
+        var newImageAsset = AssetType.SPRITES.removeExtension(newItemFile.getName()) + "." + parts[1];
         var newSpriteSheetInfo = new SpriteSheetInfo(newImageAsset, spriteSheetInfo.sprites());
         var newImageFile = new File(parentFile, newImageAsset);
 

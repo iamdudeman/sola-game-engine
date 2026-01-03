@@ -14,11 +14,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
+import technology.sola.engine.editor.SolaEditorConstants;
 import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.engine.editor.core.config.WindowBounds;
 import technology.sola.engine.editor.core.utils.DialogService;
 import technology.sola.engine.editor.core.utils.ToastService;
+import technology.sola.engine.editor.tools.audio.AudioToolPanel;
 import technology.sola.engine.editor.tools.font.FontToolPanel;
 import technology.sola.engine.editor.tools.sprites.SpriteSheetToolPanel;
 import technology.sola.engine.platform.javafx.SolaJavaFx;
@@ -37,7 +39,7 @@ import java.util.Map;
  */
 @NullMarked
 public class EditorWindow {
-  private static final SolaLogger LOGGER = SolaLogger.of(EditorWindow.class, "logs/sola-editor.log");
+  private static final SolaLogger LOGGER = SolaLogger.of(EditorWindow.class, SolaEditorConstants.LOG_FILE);
   @Nullable
   private EditorConfig editorConfig;
   @Nullable
@@ -54,6 +56,7 @@ public class EditorWindow {
       editorConfig = EditorConfig.readConfigFile();
 
       editorToolPanels = List.of(
+        new AudioToolPanel(editorConfig),
         new FontToolPanel(editorConfig),
         new SpriteSheetToolPanel(editorConfig)
       );
