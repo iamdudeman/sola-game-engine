@@ -1,7 +1,10 @@
 package technology.sola.engine.editor.tools.audio;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
+import javafx.util.StringConverter;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import technology.sola.engine.assets.audio.AudioClip;
@@ -9,16 +12,45 @@ import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.platform.javafx.assets.audio.JavaFxAudioClipAssetLoader;
 
 import java.io.File;
+import java.util.Locale;
 
 @NullMarked
 class AudioPlayerPanel extends EditorPanel {
   @Nullable
   private AudioClip audioClip;
   private Button playPauseButton;
+  private Slider volumeSlider;
+  private Text volumeText;
 
   AudioPlayerPanel(File audioFile) {
     playPauseButton = new Button("Play");
     playPauseButton.setDisable(true);
+
+    volumeSlider = new Slider(0, 1, 0.01);
+    volumeSlider.setDisable(true);
+    volumeSlider.setShowTickMarks(true);
+    volumeSlider.setShowTickLabels(true);
+    volumeSlider.setMajorTickUnit(0.25);
+    volumeSlider.setMinorTickCount(4);
+    volumeSlider.setBlockIncrement(0.05);
+    volumeSlider.setSnapToTicks(true);
+    volumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+      audioClip.setVolume(newValue.floatValue());
+      volumeText.setText(String.format(Locale.US, "%.2f", volumeSlider.getValue()));
+    });
+    volumeSlider.setLabelFormatter(new StringConverter<>() {
+      @Override
+      public String toString(Double aDouble) {
+        return "" + (int) (aDouble * 100);
+      }
+
+      @Override
+      public Double fromString(String s) {
+        return Double.parseDouble(s) / 100;
+      }
+    });
+
+    volumeText = new Text("");
 
     playPauseButton.setOnAction(event -> {
       if (audioClip.isPlaying()) {
@@ -40,26 +72,24 @@ class AudioPlayerPanel extends EditorPanel {
         audioClip.addFinishListener(AudioClip::stop);
 
         playPauseButton.setDisable(false);
-      });
-  }
+        volumeSlider.setDisable(false);
 
-  void cleanup() {
-    if (audioClip != null) {
-      audioClip.dispose();
-    }
+        volumeSlider.setValue(audioClip.getVolume());
+        volumeText.setText(String.format(Locale.US, "%.2f", volumeSlider.getValue()));
+      });
   }
 
   private HBox buildButtonsUi() {
     HBox container = new HBox();
 
-    container.getChildren().add(playPauseButton);
+    container.getChildren().addAll(playPauseButton, volumeSlider, volumeText);
+
+    container.setSpacing(8);
+    container.setStyle("-fx-font-size: 20px");
 
     return container;
   }
 
   // todo loop button
   // todo stop button
-  // todo volume up button
-  // todo volume down button
-  // todo volume number field
 }
