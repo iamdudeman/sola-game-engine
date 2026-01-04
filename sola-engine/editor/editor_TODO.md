@@ -25,6 +25,7 @@ Comes with default configuration for built-in components and systems
         * maybe a WYSIWYG editor?
 
 * UI for creating and previewing ParticleEmitterComponent configurations
+    * (might be better to start working on the Scene composition instead since this nests in it)
     * serialize the component and its parts to JSON
     * The left panel can select the existing configuration or create new
     * the right panel shows emitter details
@@ -34,8 +35,10 @@ Comes with default configuration for built-in components and systems
         1. UI for configuring them
     2. Register all Components
         * Has some sort of ui metadata to generate fields for updating the components on an entity
+            * could maybe use annotations that the editor would then read
     3. Register all Graphics modules
         * UI for configuring them
+    * might have a different "runtime" similar to SolaGraphics and SolaPhysics
 
 * Scene composition
     * UI Overview
