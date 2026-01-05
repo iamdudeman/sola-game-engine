@@ -10,9 +10,9 @@ import java.util.function.Function;
 public class SolaEditorModuleBinding<T> {
   public final String name;
   public final String description;
-  public final Class<T> clazz;
-  public final List<Class<?>> dependencies;
   public boolean isActive = true;
+  final List<Class<?>> dependencies;
+  final Class<T> clazz;
   private final Function<SolaEditorModuleInjector, T> newInstance;
 
   public SolaEditorModuleBinding(Class<T> clazz, Function<SolaEditorModuleInjector, T> newInstance) {
@@ -67,7 +67,7 @@ public class SolaEditorModuleBinding<T> {
     this.newInstance = newInstance;
   }
 
-  public T newInstance(SolaEditorModuleInjector injector) {
+  T newInstance(SolaEditorModuleInjector injector) {
     return newInstance.apply(injector);
   }
 }

@@ -2,6 +2,7 @@ package technology.sola.engine.editor.system;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
+import technology.sola.engine.graphics.modules.SolaGraphicsModule;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,28 +17,52 @@ public class SolaEditorModule {
     bindings.put(binding.clazz, binding);
   }
 
-  public List<EcsSystem> buildEcsSystems() {
-    Map<Class<?>, Object> instances = new HashMap<>();
-    List<SolaEditorModuleBinding<? extends EcsSystem>> ecsSystemsToBuild = new ArrayList<>();
-    var injector = buildInjector(instances);
+  public List<SolaEditorModuleBinding<? extends EcsSystem>> getEcsSystemBindings() {
+    return getBindingsForType(EcsSystem.class);
+  }
 
-    // find EcsSystem bindings
+  public List<EcsSystem> buildEcsSystems() {
+    return buildForType(EcsSystem.class);
+  }
+
+  public List<SolaEditorModuleBinding<? extends SolaGraphicsModule>> getGraphicsModuleBindings() {
+    return getBindingsForType(SolaGraphicsModule.class);
+  }
+
+  public List<SolaGraphicsModule> buildGraphicsModules() {
+    return buildForType(SolaGraphicsModule.class);
+  }
+
+  private <T> List<SolaEditorModuleBinding<? extends T>> getBindingsForType(Class<T> typeClass) {
+    List<SolaEditorModuleBinding<? extends T>> instancesOfType = new ArrayList<>();
+
+    // find T bindings
     for (var binding : bindings.values()) {
-      if (binding.isActive && EcsSystem.class.isAssignableFrom(binding.clazz)) {
-        ecsSystemsToBuild.add((SolaEditorModuleBinding<? extends EcsSystem>) binding);
+      if (typeClass.isAssignableFrom(binding.clazz)) {
+        instancesOfType.add((SolaEditorModuleBinding<? extends T>) binding);
       }
     }
 
-    // build EcsSystem instances and required dependencies
-    List<EcsSystem> ecsSystems = new ArrayList<>();
+    return instancesOfType;
+  }
 
-    for (var ecsSystemBinding : ecsSystemsToBuild) {
-      populateDependency(injector, instances, ecsSystemBinding.clazz);
+  private <T> List<T> buildForType(Class<T> typeClass) {
+    Map<Class<?>, Object> instances = new HashMap<>();
+    var injector = buildInjector(instances);
+    var instancesToBuild = getBindingsForType(typeClass);
 
-      ecsSystems.add((EcsSystem) instances.get(ecsSystemBinding.clazz));
+    // build T instances and required dependencies
+    List<T> graphicsModules = new ArrayList<>();
+
+    for (var binding : instancesToBuild) {
+      if (binding.isActive) {
+        populateDependency(injector, instances, binding.clazz);
+
+        graphicsModules.add((T) instances.get(binding.clazz));
+      }
     }
 
-    return ecsSystems;
+    return graphicsModules;
   }
 
   private void populateDependency(
