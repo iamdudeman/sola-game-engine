@@ -13,6 +13,8 @@ import java.util.Map;
 public class SolaEditorModule {
   private final Map<Class<?>, SolaEditorModuleBinding<?>> bindings = new HashMap<>();
 
+  // todo populate JSON object with Class<?> to active state mapping to populate this for a Scene
+
   public void bind(SolaEditorModuleBinding<?> binding) {
     bindings.put(binding.clazz, binding);
   }
