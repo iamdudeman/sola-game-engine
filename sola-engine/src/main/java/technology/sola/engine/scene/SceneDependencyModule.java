@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.system;
+package technology.sola.engine.scene;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.EcsSystem;
@@ -10,16 +10,16 @@ import java.util.List;
 import java.util.Map;
 
 @NullMarked
-public class SolaEditorModule {
-  private final Map<Class<?>, SolaEditorModuleBinding<?>> bindings = new HashMap<>();
+public class SceneDependencyModule {
+  private final Map<Class<?>, SceneDependencyBinding<?>> bindings = new HashMap<>();
 
   // todo populate JSON object with Class<?> to active state mapping to populate this for a Scene
 
-  public void bind(SolaEditorModuleBinding<?> binding) {
+  public void bind(SceneDependencyBinding<?> binding) {
     bindings.put(binding.clazz, binding);
   }
 
-  public List<SolaEditorModuleBinding<? extends EcsSystem>> getEcsSystemBindings() {
+  public List<SceneDependencyBinding<? extends EcsSystem>> getEcsSystemBindings() {
     return getBindingsForType(EcsSystem.class);
   }
 
@@ -27,7 +27,7 @@ public class SolaEditorModule {
     return buildForType(EcsSystem.class);
   }
 
-  public List<SolaEditorModuleBinding<? extends SolaGraphicsModule>> getGraphicsModuleBindings() {
+  public List<SceneDependencyBinding<? extends SolaGraphicsModule>> getGraphicsModuleBindings() {
     return getBindingsForType(SolaGraphicsModule.class);
   }
 
@@ -35,13 +35,13 @@ public class SolaEditorModule {
     return buildForType(SolaGraphicsModule.class);
   }
 
-  private <T> List<SolaEditorModuleBinding<? extends T>> getBindingsForType(Class<T> typeClass) {
-    List<SolaEditorModuleBinding<? extends T>> instancesOfType = new ArrayList<>();
+  private <T> List<SceneDependencyBinding<? extends T>> getBindingsForType(Class<T> typeClass) {
+    List<SceneDependencyBinding<? extends T>> instancesOfType = new ArrayList<>();
 
     // find T bindings
     for (var binding : bindings.values()) {
       if (typeClass.isAssignableFrom(binding.clazz)) {
-        instancesOfType.add((SolaEditorModuleBinding<? extends T>) binding);
+        instancesOfType.add((SceneDependencyBinding<? extends T>) binding);
       }
     }
 
@@ -68,7 +68,7 @@ public class SolaEditorModule {
   }
 
   private void populateDependency(
-    SolaEditorModuleInjector injector,
+    SceneDependencyInjector injector,
     Map<Class<?>, Object> instances,
     Class<?> dependencyClass
   ) {
@@ -99,7 +99,7 @@ public class SolaEditorModule {
     }
   }
 
-  private boolean isMissingDependency(Map<Class<?>, Object> instances, SolaEditorModuleBinding<?> binding) {
+  private boolean isMissingDependency(Map<Class<?>, Object> instances, SceneDependencyBinding<?> binding) {
     var dependencies = binding.dependencies;
 
     if (dependencies.isEmpty()) {
@@ -109,8 +109,8 @@ public class SolaEditorModule {
     return !dependencies.stream().allMatch(instances::containsKey);
   }
 
-  private SolaEditorModuleInjector buildInjector(Map<Class<?>, Object> instances) {
-    return new SolaEditorModuleInjector() {
+  private SceneDependencyInjector buildInjector(Map<Class<?>, Object> instances) {
+    return new SceneDependencyInjector() {
       @Override
       public <S> S inject(Class<S> systemClass) {
         var instance = (S) instances.get(systemClass);

@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.system;
+package technology.sola.engine.scene;
 
 import org.jspecify.annotations.NullMarked;
 
@@ -7,58 +7,58 @@ import java.util.List;
 import java.util.function.Function;
 
 @NullMarked
-public class SolaEditorModuleBinding<T> {
+public class SceneDependencyBinding<T> {
   public final String name;
   public final String description;
   public boolean isActive = true;
   final List<Class<?>> dependencies;
   final Class<T> clazz;
-  private final Function<SolaEditorModuleInjector, T> newInstance;
+  private final Function<SceneDependencyInjector, T> newInstance;
 
-  public SolaEditorModuleBinding(Class<T> clazz, Function<SolaEditorModuleInjector, T> newInstance) {
+  public SceneDependencyBinding(Class<T> clazz, Function<SceneDependencyInjector, T> newInstance) {
     this(clazz, Collections.emptyList(), newInstance);
   }
 
-  public SolaEditorModuleBinding(
+  public SceneDependencyBinding(
     Class<T> clazz,
     List<Class<?>> dependencies,
-    Function<SolaEditorModuleInjector, T> newInstance
+    Function<SceneDependencyInjector, T> newInstance
   ) {
     this(clazz.getName(), "", clazz, dependencies, newInstance);
   }
 
-  public SolaEditorModuleBinding(
+  public SceneDependencyBinding(
     String name,
     Class<T> clazz,
-    Function<SolaEditorModuleInjector, T> newInstance
+    Function<SceneDependencyInjector, T> newInstance
   ) {
     this(name, "", clazz, Collections.emptyList(), newInstance);
   }
 
-  public SolaEditorModuleBinding(
+  public SceneDependencyBinding(
     String name,
     String description,
     Class<T> clazz,
-    Function<SolaEditorModuleInjector, T> newInstance
+    Function<SceneDependencyInjector, T> newInstance
   ) {
     this(name, description, clazz, Collections.emptyList(), newInstance);
   }
 
-  public SolaEditorModuleBinding(
+  public SceneDependencyBinding(
     String name,
     Class<T> clazz,
     List<Class<?>> dependencies,
-    Function<SolaEditorModuleInjector, T> newInstance
+    Function<SceneDependencyInjector, T> newInstance
   ) {
     this(name, "", clazz, dependencies, newInstance);
   }
 
-  public SolaEditorModuleBinding(
+  public SceneDependencyBinding(
     String name,
     String description,
     Class<T> clazz,
     List<Class<?>> dependencies,
-    Function<SolaEditorModuleInjector, T> newInstance
+    Function<SceneDependencyInjector, T> newInstance
   ) {
     this.name = name;
     this.description = description;
@@ -67,7 +67,7 @@ public class SolaEditorModuleBinding<T> {
     this.newInstance = newInstance;
   }
 
-  T newInstance(SolaEditorModuleInjector injector) {
+  T newInstance(SceneDependencyInjector injector) {
     return newInstance.apply(injector);
   }
 }

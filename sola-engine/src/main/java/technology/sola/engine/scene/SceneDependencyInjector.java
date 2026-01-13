@@ -1,9 +1,9 @@
-package technology.sola.engine.editor.system;
+package technology.sola.engine.scene;
 
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 @FunctionalInterface
-public interface SolaEditorModuleInjector {
+public interface SceneDependencyInjector {
   <S> S inject(Class<S> systemClass);
 }

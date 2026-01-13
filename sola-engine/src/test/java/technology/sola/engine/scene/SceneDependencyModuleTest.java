@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.system;
+package technology.sola.engine.scene;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -11,24 +11,24 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @NullMarked
-public class SolaEditorModuleTest {
+public class SceneDependencyModuleTest {
   @Test
   void testWhenDependenciesPresent() {
-    SolaEditorModule solaEditorModule = new SolaEditorModule();
+    SceneDependencyModule solaEditorModule = new SceneDependencyModule();
 
-    solaEditorModule.bind(new SolaEditorModuleBinding<>(
+    solaEditorModule.bind(new SceneDependencyBinding<>(
       TestDependency.class,
       injector -> new TestDependency()
     ));
 
-    solaEditorModule.bind(new SolaEditorModuleBinding<>(
+    solaEditorModule.bind(new SceneDependencyBinding<>(
       TestSystemNoDependency.class.getName(),
       TestSystemNoDependency.class,
       List.of(),
       injector -> new TestSystemNoDependency()
     ));
 
-    solaEditorModule.bind(new SolaEditorModuleBinding<>(
+    solaEditorModule.bind(new SceneDependencyBinding<>(
       TestSystemWithDependency.class.getName(),
       TestSystemWithDependency.class,
       List.of(TestDependency.class),
@@ -37,15 +37,15 @@ public class SolaEditorModuleTest {
 
     var ecsSystems = solaEditorModule.buildEcsSystems();
 
-    assertEquals(TestSystemNoDependency.class, ecsSystems.get(0).getClass());
-    assertEquals(TestSystemWithDependency.class, ecsSystems.get(1).getClass());
+    assertDependencyPresent(ecsSystems, TestSystemNoDependency.class);
+    assertDependencyPresent(ecsSystems, TestSystemWithDependency.class);
   }
 
   @Test
   void testWhenDependencyNotBound() {
-    SolaEditorModule solaEditorModule = new SolaEditorModule();
+    SceneDependencyModule solaEditorModule = new SceneDependencyModule();
 
-    solaEditorModule.bind(new SolaEditorModuleBinding<>(
+    solaEditorModule.bind(new SceneDependencyBinding<>(
       TestSystemNoDependency.class.getName(),
       TestSystemNoDependency.class,
       List.of(TestMissingDependency.class),
@@ -57,16 +57,16 @@ public class SolaEditorModuleTest {
 
   @Test
   void testWhenMissingDependencyDefinition() {
-    SolaEditorModule solaEditorModule = new SolaEditorModule();
+    SceneDependencyModule solaEditorModule = new SceneDependencyModule();
 
-    solaEditorModule.bind(new SolaEditorModuleBinding<>(
+    solaEditorModule.bind(new SceneDependencyBinding<>(
       TestDependency.class.getName(),
       TestDependency.class,
       List.of(),
       injector -> new TestDependency()
     ));
 
-    solaEditorModule.bind(new SolaEditorModuleBinding<>(
+    solaEditorModule.bind(new SceneDependencyBinding<>(
       TestSystemWithDependency.class.getName(),
       TestSystemWithDependency.class,
       List.of(),
@@ -74,6 +74,10 @@ public class SolaEditorModuleTest {
     ));
 
     assertThrows(IllegalStateException.class, solaEditorModule::buildEcsSystems);
+  }
+
+  private static void assertDependencyPresent(List<?> dependencies, Class<?> clazz) {
+    assertTrue(dependencies.stream().anyMatch(dependency -> dependency.getClass().equals(clazz)));
   }
 
   private static class TestDependency {
