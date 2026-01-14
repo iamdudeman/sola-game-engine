@@ -19,6 +19,8 @@
 
 Comes with default configuration for built-in components and systems
 
+* ability to populate config.assets.json
+
 * assets tooling
     * create and edit materials
     * create and edit GUIs
