@@ -1,5 +1,7 @@
-package technology.sola.engine.assets;
+package technology.sola.engine.assets.list;
 
+import org.jspecify.annotations.NullMarked;
+import technology.sola.engine.assets.Asset;
 import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
@@ -8,6 +10,7 @@ import technology.sola.engine.assets.scene.Scene;
 
 import java.util.List;
 
+@NullMarked
 public record AssetList(
   List<AssetDetails<AudioClip>> audioAssets,
   List<AssetDetails<Font>> fontAssets,
@@ -23,16 +26,5 @@ public record AssetList(
     String path,
     boolean isBlocking
   ) {
-  }
-
-  // todo method to apply to AssetLoaderProvider
-  public static void loadAssetList(AssetLoaderProvider assetLoaderProvider, Runnable onComplete) {
-    assetLoaderProvider.get(AssetList.class).getNewAsset(ID, PATH)
-      .executeWhenLoaded(assetList -> {
-
-
-
-        onComplete.run();
-      });
   }
 }

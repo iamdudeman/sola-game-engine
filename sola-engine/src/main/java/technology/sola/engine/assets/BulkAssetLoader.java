@@ -52,6 +52,12 @@ public class BulkAssetLoader {
     AssetCounter assetCounter = new AssetCounter();
     BulkAssetHandle bulkAssetHandle = new BulkAssetHandle();
 
+    if (totalToLoad == 0) {
+      bulkAssetHandle.complete(assets);
+
+      return bulkAssetHandle;
+    }
+
     for (BulkAssetDescription bulkAssetDescription : bulkAssetDescriptionList) {
       final int currentAssetIndex = index;
 

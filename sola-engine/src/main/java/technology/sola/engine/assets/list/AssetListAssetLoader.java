@@ -1,12 +1,14 @@
-package technology.sola.engine.assets;
+package technology.sola.engine.assets.list;
 
 import org.jspecify.annotations.NullMarked;
+import technology.sola.engine.assets.AssetHandle;
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.json.JsonElementAsset;
-
-import java.util.List;
+import technology.sola.json.mapper.JsonMapper;
 
 @NullMarked
 public class AssetListAssetLoader extends AssetLoader<AssetList> {
+  private final JsonMapper<AssetList> assetListJsonMapper = new AssetListJsonMapper();
   private final AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader;
 
   public AssetListAssetLoader(AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader) {
@@ -24,16 +26,9 @@ public class AssetListAssetLoader extends AssetLoader<AssetList> {
 
     jsonElementAssetAssetLoader.getNewAsset(path, path)
       .executeWhenLoaded(jsonElementAsset -> {
-        assetHandle.setAsset(
-          // todo populate
-          new AssetList(
-            List.of(),
-            List.of(),
-            List.of(),
-            List.of(),
-            List.of()
-          )
-        );
+        var assetList = jsonElementAsset.asObject();
+
+        assetHandle.setAsset(assetListJsonMapper.toObject(assetList));
       });
 
     return assetHandle;
