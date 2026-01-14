@@ -23,6 +23,7 @@ public class EditorMain {
    */
   public static void main(String[] args) {
     // todo supply configuration once implemented
+    //  scene stuff will need way to add in component mappers and component ui
     new SolaEditor(EditorGame::new).run();
   }
 }
