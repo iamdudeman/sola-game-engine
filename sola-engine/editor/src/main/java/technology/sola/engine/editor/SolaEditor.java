@@ -14,6 +14,10 @@ public class SolaEditor {
   // todo method to build Sola instance -> ExampleSola::new
   private Supplier<Sola> solaSupplier;
 
+  public SolaEditor(Supplier<Sola> solaSupplier) {
+    this.solaSupplier = solaSupplier;
+  }
+
   /**
    * Starts the editor.
    */

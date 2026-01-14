@@ -5,6 +5,7 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
+import technology.sola.engine.examples.common.games.EditorGame;
 import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.examples.common.features.*;
 import technology.sola.engine.examples.common.games.CirclePopGame;
@@ -120,6 +121,7 @@ public class ExampleLauncherSola extends Sola {
       .appendChildren(
         buildSectionTitle("Games"),
         buildExampleLaunchButton("Circle Pop", CirclePopGame::new),
+        buildExampleLaunchButton("Editor Game", EditorGame::new),
         buildExampleLaunchButton("Minesweeper", MinesweeperGame::new),
         buildExampleLaunchButton("Pong", PongGame::new),
         buildExampleLaunchButton("Simple Platformer", SimplePlatformerGame::new)
