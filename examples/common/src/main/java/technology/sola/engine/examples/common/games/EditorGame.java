@@ -34,9 +34,7 @@ public class EditorGame extends Sola {
 
   @Override
   protected void onAsyncInit(Runnable completeAsyncInit) {
-    // todo hook up asset loading stuff
-
-    super.onAsyncInit(completeAsyncInit);
+    assetLoaderProvider.loadAssetsFromAssetList(completeAsyncInit);
   }
 
   @Override
