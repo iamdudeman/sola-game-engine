@@ -48,6 +48,12 @@ public class AssetLoaderProvider {
     return (AssetLoader<T>) assetLoader;
   }
 
+  /**
+   * Loads assets from the main {@link AssetList} asset (located at {@link AssetList#PATH}). Calls the onComplete
+   * callback when all {@link AssetList.AssetDetails#isBlocking()} assets have been loaded.
+   *
+   * @param onComplete callback that is called when all blocking assets have been loaded
+   */
   public void loadAssetsFromAssetList(Runnable onComplete) {
     this.get(AssetList.class).getNewAsset(AssetList.ID, AssetList.PATH)
       .executeWhenLoaded(assetList -> {

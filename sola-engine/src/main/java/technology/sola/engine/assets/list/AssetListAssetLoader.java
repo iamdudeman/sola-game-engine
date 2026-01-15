@@ -6,11 +6,19 @@ import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.json.JsonElementAsset;
 import technology.sola.json.mapper.JsonMapper;
 
+/**
+ * AssetListAssetLoader is an {@link AssetLoader} implementation for {@link AssetList}s.
+ */
 @NullMarked
 public class AssetListAssetLoader extends AssetLoader<AssetList> {
   private final JsonMapper<AssetList> assetListJsonMapper = new AssetListJsonMapper();
   private final AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader;
 
+  /**
+   * Creates an instance of this asset loader.
+   *
+   * @param jsonElementAssetAssetLoader the {@link AssetLoader} for {@link JsonElementAsset}s used internally
+   */
   public AssetListAssetLoader(AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader) {
     this.jsonElementAssetAssetLoader = jsonElementAssetAssetLoader;
   }

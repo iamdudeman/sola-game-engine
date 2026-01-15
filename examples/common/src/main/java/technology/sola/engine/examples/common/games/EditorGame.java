@@ -8,18 +8,23 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.SolaPhysics;
 
+/**
+ * EditorGame is a {@link Sola} for demoing the editor's scene edit functionality.
+ */
 @NullMarked
 public class EditorGame extends Sola {
   private SolaGraphics solaGraphics;
-  private SolaPhysics solaPhysics;
 
+  /**
+   * Creates an instance of this {@link Sola}.
+   */
   public EditorGame() {
     super(new SolaConfiguration("Editor Game", 800, 600, 30));
   }
 
   @Override
   protected void onInit() {
-    solaPhysics = new SolaPhysics.Builder(solaEcs)
+    new SolaPhysics.Builder(solaEcs)
       .buildAndInitialize(eventHub);
 
     solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
@@ -28,8 +33,6 @@ public class EditorGame extends Sola {
       .buildAndInitialize(assetLoaderProvider);
 
     platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
-
-    // todo hook up asset loading stuff
   }
 
   @Override

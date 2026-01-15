@@ -11,9 +11,13 @@ import java.util.function.Supplier;
  */
 @NullMarked
 public class SolaEditor {
-  // todo method to build Sola instance -> ExampleSola::new
-  private Supplier<Sola> solaSupplier;
+  private final Supplier<Sola> solaSupplier;
 
+  /**
+   * Creates a new SolaEditor instance for desired {@link Sola}.
+   *
+   * @param solaSupplier the method for creating the {@link Sola} instance
+   */
   public SolaEditor(Supplier<Sola> solaSupplier) {
     this.solaSupplier = solaSupplier;
   }

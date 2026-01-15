@@ -8,6 +8,9 @@ import technology.sola.json.mapper.JsonMapper;
 
 import java.util.List;
 
+/**
+ * AssetListJsonMapper is a {@link JsonMapper} implementation for {@link AssetList}.
+ */
 @NullMarked
 public class AssetListJsonMapper implements JsonMapper<AssetList> {
   @Override
