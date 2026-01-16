@@ -272,6 +272,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block"><a href="technology.sola.engine/technology/sola/engine/assets/Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> id for the default <a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a> that is always available for use.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html#%3Cinit%3E(java.lang.String,java.lang.String,boolean)" class="member-name-link">AssetDetails(String, String, boolean)</a> - Constructor for record class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a></dt>
+<dd>
+<div class="block">Creates an instance of a <code>AssetDetails</code> record class.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/AssetExtension.html" class="type-name-link" title="enum class in technology.sola.engine.assets">AssetExtension</a> - Enum Class in <a href="technology.sola.engine/technology/sola/engine/assets/package-summary.html">technology.sola.engine.assets</a></dt>
 <dd>
 <div class="block">Enumeration of support <a href="technology.sola.engine/technology/sola/engine/assets/Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> file extensions.</div>
@@ -288,6 +292,32 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates an AssetHandle instance with a preloaded <a href="technology.sola.engine/technology/sola/engine/assets/Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a>.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html" class="type-name-link" title="class in technology.sola.engine.assets.list">AssetList</a> - Record Class in <a href="technology.sola.engine/technology/sola/engine/assets/list/package-summary.html">technology.sola.engine.assets.list</a></dt>
+<dd>
+<div class="block">AssetList is an <a href="technology.sola.engine/technology/sola/engine/assets/Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> that contains a list of other assets to be loaded.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html#%3Cinit%3E(java.util.List,java.util.List,java.util.List,java.util.List,java.util.List)" class="member-name-link">AssetList(List&lt;AssetList.AssetDetails&lt;AudioClip&gt;&gt;, List&lt;AssetList.AssetDetails&lt;Font&gt;&gt;, List&lt;AssetList.AssetDetails&lt;GuiJsonDocument&gt;&gt;, List&lt;AssetList.AssetDetails&lt;SpriteSheet&gt;&gt;, List&lt;AssetList.AssetDetails&lt;Scene&gt;&gt;)</a> - Constructor for record class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html" title="class in technology.sola.engine.assets.list">AssetList</a></dt>
+<dd>
+<div class="block">Creates an instance of a <code>AssetList</code> record class.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html" class="type-name-link" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html" title="type parameter in AssetList.AssetDetails">T</a> extends <a href="technology.sola.engine/technology/sola/engine/assets/Asset.html" title="interface in technology.sola.engine.assets">Asset</a>&gt; - Record Class in <a href="technology.sola.engine/technology/sola/engine/assets/list/package-summary.html">technology.sola.engine.assets.list</a></dt>
+<dd>
+<div class="block">AssetDetails contains details for loading assets on startup of the <a href="technology.sola.engine/technology/sola/engine/core/Sola.html" title="class in technology.sola.engine.core"><code>Sola</code></a>.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetListAssetLoader.html" class="type-name-link" title="class in technology.sola.engine.assets.list">AssetListAssetLoader</a> - Class in <a href="technology.sola.engine/technology/sola/engine/assets/list/package-summary.html">technology.sola.engine.assets.list</a></dt>
+<dd>
+<div class="block">AssetListAssetLoader is an <a href="technology.sola.engine/technology/sola/engine/assets/AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a> implementation for <a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html" title="class in technology.sola.engine.assets.list"><code>AssetList</code></a>s.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetListAssetLoader.html#%3Cinit%3E(technology.sola.engine.assets.AssetLoader)" class="member-name-link">AssetListAssetLoader(AssetLoader&lt;JsonElementAsset&gt;)</a> - Constructor for class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetListAssetLoader.html" title="class in technology.sola.engine.assets.list">AssetListAssetLoader</a></dt>
+<dd>
+<div class="block">Creates an instance of this asset loader.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetListJsonMapper.html" class="type-name-link" title="class in technology.sola.engine.assets.list">AssetListJsonMapper</a> - Class in <a href="technology.sola.engine/technology/sola/engine/assets/list/package-summary.html">technology.sola.engine.assets.list</a></dt>
+<dd>
+<div class="block">AssetListJsonMapper is a <code>JsonMapper</code> implementation for <a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html" title="class in technology.sola.engine.assets.list"><code>AssetList</code></a>.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetListJsonMapper.html#%3Cinit%3E()" class="member-name-link">AssetListJsonMapper()</a> - Constructor for class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetListJsonMapper.html" title="class in technology.sola.engine.assets.list">AssetListJsonMapper</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/AssetLoader.html" class="type-name-link" title="class in technology.sola.engine.assets">AssetLoader</a>&lt;<a href="technology.sola.engine/technology/sola/engine/assets/AssetLoader.html" title="type parameter in AssetLoader">T</a> extends <a href="technology.sola.engine/technology/sola/engine/assets/Asset.html" title="interface in technology.sola.engine.assets">Asset</a>&gt; - Class in <a href="technology.sola.engine/technology/sola/engine/assets/package-summary.html">technology.sola.engine.assets</a></dt>
 <dd>
 <div class="block">The AssetLoader class contains functionality for loading an <a href="technology.sola.engine/technology/sola/engine/assets/Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> type.</div>
@@ -304,6 +334,10 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/AssetLoaderProvider.html#%3Cinit%3E()" class="member-name-link">AssetLoaderProvider()</a> - Constructor for class technology.sola.engine.assets.<a href="technology.sola.engine/technology/sola/engine/assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html#audioAssets()" class="member-name-link">audioAssets()</a> - Method in record class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html" title="class in technology.sola.engine.assets.list">AssetList</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/assets/list/AssetList.html#param-audioAssets"><code>audioAssets</code></a> record component.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/audio/AudioClip.html" class="type-name-link" title="interface in technology.sola.engine.assets.audio">AudioClip</a> - Interface in <a href="technology.sola.engine/technology/sola/engine/assets/audio/package-summary.html">technology.sola.engine.assets.audio</a></dt>
 <dd>
 <div class="block">AudioClip defines the api for audio <a href="technology.sola.engine/technology/sola/engine/assets/Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a>s.</div>
@@ -943,6 +977,14 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">The configuration for this Sola</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneAssetLoader.html#configure(java.util.List)" class="member-name-link">configure(List&lt;JsonMapper&lt;? extends Component&gt;&gt;)</a> - Method in class technology.sola.engine.assets.scene.<a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneAssetLoader.html" title="class in technology.sola.engine.assets.scene">SceneAssetLoader</a></dt>
+<dd>
+<div class="block">Configures the <a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneAssetLoader.html" title="class in technology.sola.engine.assets.scene"><code>SceneAssetLoader</code></a> with the desired <code>Component</code> <code>JsonMapper</code>s.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneJsonMapper.html#configure(java.util.List)" class="member-name-link">configure(List&lt;JsonMapper&lt;? extends Component&gt;&gt;)</a> - Method in class technology.sola.engine.assets.scene.<a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneJsonMapper.html" title="class in technology.sola.engine.assets.scene">SceneJsonMapper</a></dt>
+<dd>
+<div class="block">Configures the <a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneJsonMapper.html" title="class in technology.sola.engine.assets.scene"><code>SceneJsonMapper</code></a> with the desired <code>Component</code> <code>JsonMapper</code>s.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/logging/SolaLogger.html#configure(technology.sola.logging.SolaLogLevel,technology.sola.logging.SolaLoggerFactory)" class="member-name-link">configure(SolaLogLevel, SolaLoggerFactory)</a> - Static method in class technology.sola.logging.<a href="technology.sola.engine/technology/sola/logging/SolaLogger.html" title="class in technology.sola.logging">SolaLogger</a></dt>
 <dd>
 <div class="block">Configures all resulting SolaLoggers to have desired <a href="technology.sola.engine/technology/sola/logging/SolaLogLevel.html" title="enum class in technology.sola.logging"><code>SolaLogLevel</code></a> and to be created via desired
@@ -1503,6 +1545,18 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a></dt>
+<dd>
+<div class="block">Indicates whether some other object is "equal to" this one.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html" title="class in technology.sola.engine.assets.list">AssetList</a></dt>
+<dd>
+<div class="block">Indicates whether some other object is "equal to" this one.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/Scene.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class technology.sola.engine.assets.scene.<a href="technology.sola.engine/technology/sola/engine/assets/scene/Scene.html" title="class in technology.sola.engine.assets.scene">Scene</a></dt>
+<dd>
+<div class="block">Indicates whether some other object is "equal to" this one.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/event/FpsEvent.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class technology.sola.engine.core.event.<a href="technology.sola.engine/technology/sola/engine/core/event/FpsEvent.html" title="class in technology.sola.engine.core.event">FpsEvent</a></dt>
 <dd>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
@@ -1879,6 +1933,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates an instance of this asset loader.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html#fontAssets()" class="member-name-link">fontAssets()</a> - Method in record class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html" title="class in technology.sola.engine.assets.list">AssetList</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/assets/list/AssetList.html#param-fontAssets"><code>fontAssets</code></a> record component.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/FontInfo.html#fontFamily()" class="member-name-link">fontFamily()</a> - Method in record class technology.sola.engine.assets.graphics.font.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/FontInfo.html" title="class in technology.sola.engine.assets.graphics.font">FontInfo</a></dt>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/assets/graphics/font/FontInfo.html#param-fontFamily"><code>fontFamily</code></a> record component.</div>
@@ -2071,6 +2129,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/gui/GuiJsonDocumentAssetLoader.html#getAssetClass()" class="member-name-link">getAssetClass()</a> - Method in class technology.sola.engine.assets.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/gui/GuiJsonDocumentAssetLoader.html" title="class in technology.sola.engine.assets.graphics.gui">GuiJsonDocumentAssetLoader</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/spritesheet/SpriteSheetAssetLoader.html#getAssetClass()" class="member-name-link">getAssetClass()</a> - Method in class technology.sola.engine.assets.graphics.spritesheet.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/spritesheet/SpriteSheetAssetLoader.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheetAssetLoader</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetListAssetLoader.html#getAssetClass()" class="member-name-link">getAssetClass()</a> - Method in class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetListAssetLoader.html" title="class in technology.sola.engine.assets.list">AssetListAssetLoader</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneAssetLoader.html#getAssetClass()" class="member-name-link">getAssetClass()</a> - Method in class technology.sola.engine.assets.scene.<a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneAssetLoader.html" title="class in technology.sola.engine.assets.scene">SceneAssetLoader</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/ImageGuiElement.html#getAssetId()" class="member-name-link">getAssetId()</a> - Method in class technology.sola.engine.graphics.gui.elements.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/ImageGuiElement.html" title="class in technology.sola.engine.graphics.gui.elements">ImageGuiElement</a></dt>
 <dd>&nbsp;</dd>
@@ -2321,6 +2383,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/mapper/FontInfoJsonMapper.html#getObjectClass()" class="member-name-link">getObjectClass()</a> - Method in class technology.sola.engine.assets.graphics.font.mapper.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/mapper/FontInfoJsonMapper.html" title="class in technology.sola.engine.assets.graphics.font.mapper">FontInfoJsonMapper</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/spritesheet/SpriteSheetInfoJsonMapper.html#getObjectClass()" class="member-name-link">getObjectClass()</a> - Method in class technology.sola.engine.assets.graphics.spritesheet.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/spritesheet/SpriteSheetInfoJsonMapper.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheetInfoJsonMapper</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetListJsonMapper.html#getObjectClass()" class="member-name-link">getObjectClass()</a> - Method in class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetListJsonMapper.html" title="class in technology.sola.engine.assets.list">AssetListJsonMapper</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneJsonMapper.html#getObjectClass()" class="member-name-link">getObjectClass()</a> - Method in class technology.sola.engine.assets.scene.<a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneJsonMapper.html" title="class in technology.sola.engine.assets.scene">SceneJsonMapper</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/LightComponent.html#getOffsetX()" class="member-name-link">getOffsetX()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/LightComponent.html" title="class in technology.sola.engine.graphics.components">LightComponent</a></dt>
 <dd>&nbsp;</dd>
@@ -2586,6 +2652,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">The render order for <a href="technology.sola.engine/technology/sola/engine/graphics/modules/GuiDocumentGraphicsModule.html" title="class in technology.sola.engine.graphics.modules"><code>GuiDocumentGraphicsModule</code></a>.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html#guiAssets()" class="member-name-link">guiAssets()</a> - Method in record class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html" title="class in technology.sola.engine.assets.list">AssetList</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/assets/list/AssetList.html#param-guiAssets"><code>guiAssets</code></a> record component.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/SolaGraphics.html#guiDocument()" class="member-name-link">guiDocument()</a> - Method in class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/SolaGraphics.html" title="class in technology.sola.engine.graphics">SolaGraphics</a></dt>
 <dd>
 <div class="block">The <a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiDocument.html" title="class in technology.sola.engine.graphics.gui"><code>GuiDocument</code></a> instance for this Sola.</div>
@@ -2790,6 +2860,18 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/json/JsonElementAsset.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class technology.sola.engine.assets.json.<a href="technology.sola.engine/technology/sola/engine/assets/json/JsonElementAsset.html" title="class in technology.sola.engine.assets.json">JsonElementAsset</a></dt>
+<dd>
+<div class="block">Returns a hash code value for this object.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a></dt>
+<dd>
+<div class="block">Returns a hash code value for this object.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html" title="class in technology.sola.engine.assets.list">AssetList</a></dt>
+<dd>
+<div class="block">Returns a hash code value for this object.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/Scene.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class technology.sola.engine.assets.scene.<a href="technology.sola.engine/technology/sola/engine/assets/scene/Scene.html" title="class in technology.sola.engine.assets.scene">Scene</a></dt>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
@@ -3050,9 +3132,17 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/assets/graphics/spritesheet/SpriteInfo.html#param-id"><code>id</code></a> record component.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html#id()" class="member-name-link">id()</a> - Method in record class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html#param-id"><code>id</code></a> record component.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/Touch.html#id()" class="member-name-link">id()</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Touch.html" title="class in technology.sola.engine.input">Touch</a></dt>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/input/Touch.html#param-id"><code>id</code></a> record component.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html#ID" class="member-name-link">ID</a> - Static variable in record class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html" title="class in technology.sola.engine.assets.list">AssetList</a></dt>
+<dd>
+<div class="block">The id of the main asset list.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/math/linear/Matrix3D.html#identity()" class="member-name-link">identity()</a> - Static method in class technology.sola.math.linear.<a href="technology.sola.engine/technology/sola/math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a></dt>
 <dd>&nbsp;</dd>
@@ -3162,6 +3252,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html#isAttached()" class="member-name-link">isAttached()</a> - Method in class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui">GuiElement</a></dt>
 <dd>
 <div class="block">Checks to see if this <a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a> is currently attached to the <a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiDocument.html" title="class in technology.sola.engine.graphics.gui"><code>GuiDocument</code></a> and is part of rendering.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html#isBlocking()" class="member-name-link">isBlocking()</a> - Method in record class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html#param-isBlocking"><code>isBlocking</code></a> record component.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/networking/socket/JavaSocketClient.html#isConnected()" class="member-name-link">isConnected()</a> - Method in class technology.sola.engine.networking.socket.<a href="technology.sola.engine/technology/sola/engine/networking/socket/JavaSocketClient.html" title="class in technology.sola.engine.networking.socket">JavaSocketClient</a></dt>
 <dd>&nbsp;</dd>
@@ -3597,6 +3691,14 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/spritesheet/SpriteSheetAssetLoader.html#loadAsset(java.lang.String)" class="member-name-link">loadAsset(String)</a> - Method in class technology.sola.engine.assets.graphics.spritesheet.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/spritesheet/SpriteSheetAssetLoader.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheetAssetLoader</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetListAssetLoader.html#loadAsset(java.lang.String)" class="member-name-link">loadAsset(String)</a> - Method in class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetListAssetLoader.html" title="class in technology.sola.engine.assets.list">AssetListAssetLoader</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneAssetLoader.html#loadAsset(java.lang.String)" class="member-name-link">loadAsset(String)</a> - Method in class technology.sola.engine.assets.scene.<a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneAssetLoader.html" title="class in technology.sola.engine.assets.scene">SceneAssetLoader</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/AssetLoaderProvider.html#loadAssetsFromAssetList(java.lang.Runnable)" class="member-name-link">loadAssetsFromAssetList(Runnable)</a> - Method in class technology.sola.engine.assets.<a href="technology.sola.engine/technology/sola/engine/assets/AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a></dt>
+<dd>
+<div class="block">Loads assets from the main <a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html" title="class in technology.sola.engine.assets.list"><code>AssetList</code></a> asset (located at <a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html#PATH"><code>AssetList.PATH</code></a>).</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/logging/JavaSolaLogger.html#log(technology.sola.logging.SolaLogLevel,java.lang.String,java.lang.Throwable,java.lang.Object...)" class="member-name-link">log(SolaLogLevel, String, Throwable, Object...)</a> - Method in class technology.sola.logging.<a href="technology.sola.engine/technology/sola/logging/JavaSolaLogger.html" title="class in technology.sola.logging">JavaSolaLogger</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/logging/SolaLogger.html#log(technology.sola.logging.SolaLogLevel,java.lang.String,java.lang.Throwable,java.lang.Object...)" class="member-name-link">log(SolaLogLevel, String, Throwable, Object...)</a> - Method in class technology.sola.logging.<a href="technology.sola.engine/technology/sola/logging/SolaLogger.html" title="class in technology.sola.logging">SolaLogger</a></dt>
@@ -4424,6 +4526,14 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/system/ParticleSystem.html#%3Cinit%3E()" class="member-name-link">ParticleSystem()</a> - Constructor for class technology.sola.engine.physics.system.<a href="technology.sola.engine/technology/sola/engine/physics/system/ParticleSystem.html" title="class in technology.sola.engine.physics.system">ParticleSystem</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html#path()" class="member-name-link">path()</a> - Method in record class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html#param-path"><code>path</code></a> record component.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html#PATH" class="member-name-link">PATH</a> - Static variable in record class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html" title="class in technology.sola.engine.assets.list">AssetList</a></dt>
+<dd>
+<div class="block">The path to the main asset list.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/audio/AudioClip.html#pause()" class="member-name-link">pause()</a> - Method in interface technology.sola.engine.assets.audio.<a href="technology.sola.engine/technology/sola/engine/assets/audio/AudioClip.html" title="interface in technology.sola.engine.assets.audio">AudioClip</a></dt>
 <dd>
 <div class="block">Pause playback.</div>
@@ -5031,6 +5141,32 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates a new scale matrix for the desired x-axis and y-axis values.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/Scene.html" class="type-name-link" title="class in technology.sola.engine.assets.scene">Scene</a> - Record Class in <a href="technology.sola.engine/technology/sola/engine/assets/scene/package-summary.html">technology.sola.engine.assets.scene</a></dt>
+<dd>
+<div class="block">Scene is an <a href="technology.sola.engine/technology/sola/engine/assets/Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> that contains a <code>World</code>.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/Scene.html#%3Cinit%3E(technology.sola.ecs.World)" class="member-name-link">Scene(World)</a> - Constructor for record class technology.sola.engine.assets.scene.<a href="technology.sola.engine/technology/sola/engine/assets/scene/Scene.html" title="class in technology.sola.engine.assets.scene">Scene</a></dt>
+<dd>
+<div class="block">Creates an instance of a <code>Scene</code> record class.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneAssetLoader.html" class="type-name-link" title="class in technology.sola.engine.assets.scene">SceneAssetLoader</a> - Class in <a href="technology.sola.engine/technology/sola/engine/assets/scene/package-summary.html">technology.sola.engine.assets.scene</a></dt>
+<dd>
+<div class="block">SceneAssetLoader is an <a href="technology.sola.engine/technology/sola/engine/assets/AssetLoader.html" title="class in technology.sola.engine.assets"><code>AssetLoader</code></a> implementation for <a href="technology.sola.engine/technology/sola/engine/assets/scene/Scene.html" title="class in technology.sola.engine.assets.scene"><code>Scene</code></a>s.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneAssetLoader.html#%3Cinit%3E(technology.sola.engine.assets.AssetLoader)" class="member-name-link">SceneAssetLoader(AssetLoader&lt;JsonElementAsset&gt;)</a> - Constructor for class technology.sola.engine.assets.scene.<a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneAssetLoader.html" title="class in technology.sola.engine.assets.scene">SceneAssetLoader</a></dt>
+<dd>
+<div class="block">Creates an instance of this asset loader.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html#sceneAssets()" class="member-name-link">sceneAssets()</a> - Method in record class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html" title="class in technology.sola.engine.assets.list">AssetList</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/assets/list/AssetList.html#param-sceneAssets"><code>sceneAssets</code></a> record component.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneJsonMapper.html" class="type-name-link" title="class in technology.sola.engine.assets.scene">SceneJsonMapper</a> - Class in <a href="technology.sola.engine/technology/sola/engine/assets/scene/package-summary.html">technology.sola.engine.assets.scene</a></dt>
+<dd>
+<div class="block">SceneJsonMapper is a <code>JsonMapper</code> implementation for <a href="technology.sola.engine/technology/sola/engine/assets/scene/Scene.html" title="class in technology.sola.engine.assets.scene"><code>Scene</code></a>s.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneJsonMapper.html#%3Cinit%3E()" class="member-name-link">SceneJsonMapper()</a> - Constructor for class technology.sola.engine.assets.scene.<a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneJsonMapper.html" title="class in technology.sola.engine.assets.scene">SceneJsonMapper</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/modules/RenderOrders.html#SCREEN_SPACE_LIGHT_MAP" class="member-name-link">SCREEN_SPACE_LIGHT_MAP</a> - Static variable in class technology.sola.engine.graphics.modules.<a href="technology.sola.engine/technology/sola/engine/graphics/modules/RenderOrders.html" title="class in technology.sola.engine.graphics.modules">RenderOrders</a></dt>
 <dd>
 <div class="block">The render order for <a href="technology.sola.engine/technology/sola/engine/graphics/modules/ScreenSpaceLightMapGraphicsModule.html" title="class in technology.sola.engine.graphics.modules"><code>ScreenSpaceLightMapGraphicsModule</code></a>.</div>
@@ -6063,6 +6199,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates an instance of this asset loader.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html#spriteSheetAssets()" class="member-name-link">spriteSheetAssets()</a> - Method in record class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html" title="class in technology.sola.engine.assets.list">AssetList</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/assets/list/AssetList.html#param-spriteSheetAssets"><code>spriteSheetAssets</code></a> record component.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/spritesheet/SpriteSheetInfo.html" class="type-name-link" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheetInfo</a> - Record Class in <a href="technology.sola.engine/technology/sola/engine/assets/graphics/spritesheet/package-summary.html">technology.sola.engine.assets.graphics.spritesheet</a></dt>
 <dd>
 <div class="block">Contains information about a spritesheet.</div>
@@ -6222,7 +6362,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/package-summary.html">technology.sola.engine.assets.graphics</a> - package technology.sola.engine.assets.graphics</dt>
 <dd>
-<div class="block">This package provides various classes related to assets related to graphics.</div>
+<div class="block">This package provides various classes related to graphics assets.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/package-summary.html">technology.sola.engine.assets.graphics.font</a> - package technology.sola.engine.assets.graphics.font</dt>
 <dd>
@@ -6249,7 +6389,15 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/json/package-summary.html">technology.sola.engine.assets.json</a> - package technology.sola.engine.assets.json</dt>
 <dd>
-<div class="block">This package provides various classes related to assets related to JSON files.</div>
+<div class="block">This package provides various classes related to JSON file assets.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/package-summary.html">technology.sola.engine.assets.list</a> - package technology.sola.engine.assets.list</dt>
+<dd>
+<div class="block">This package provides various classes related to loading a list of assets.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/package-summary.html">technology.sola.engine.assets.scene</a> - package technology.sola.engine.assets.scene</dt>
+<dd>
+<div class="block">This package provides various classes related to scene assets.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/package-summary.html">technology.sola.engine.core</a> - package technology.sola.engine.core</dt>
 <dd>
@@ -6580,11 +6728,19 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/spritesheet/SpriteSheetInfoJsonMapper.html#toJson(technology.sola.engine.assets.graphics.spritesheet.SpriteSheetInfo)" class="member-name-link">toJson(SpriteSheetInfo)</a> - Method in class technology.sola.engine.assets.graphics.spritesheet.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/spritesheet/SpriteSheetInfoJsonMapper.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheetInfoJsonMapper</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetListJsonMapper.html#toJson(technology.sola.engine.assets.list.AssetList)" class="member-name-link">toJson(AssetList)</a> - Method in class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetListJsonMapper.html" title="class in technology.sola.engine.assets.list">AssetListJsonMapper</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneJsonMapper.html#toJson(technology.sola.engine.assets.scene.Scene)" class="member-name-link">toJson(Scene)</a> - Method in class technology.sola.engine.assets.scene.<a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneJsonMapper.html" title="class in technology.sola.engine.assets.scene">SceneJsonMapper</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/mapper/FontGlyphJsonMapper.html#toObject(technology.sola.json.JsonObject)" class="member-name-link">toObject(JsonObject)</a> - Method in class technology.sola.engine.assets.graphics.font.mapper.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/mapper/FontGlyphJsonMapper.html" title="class in technology.sola.engine.assets.graphics.font.mapper">FontGlyphJsonMapper</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/mapper/FontInfoJsonMapper.html#toObject(technology.sola.json.JsonObject)" class="member-name-link">toObject(JsonObject)</a> - Method in class technology.sola.engine.assets.graphics.font.mapper.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/font/mapper/FontInfoJsonMapper.html" title="class in technology.sola.engine.assets.graphics.font.mapper">FontInfoJsonMapper</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/spritesheet/SpriteSheetInfoJsonMapper.html#toObject(technology.sola.json.JsonObject)" class="member-name-link">toObject(JsonObject)</a> - Method in class technology.sola.engine.assets.graphics.spritesheet.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/spritesheet/SpriteSheetInfoJsonMapper.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheetInfoJsonMapper</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetListJsonMapper.html#toObject(technology.sola.json.JsonObject)" class="member-name-link">toObject(JsonObject)</a> - Method in class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetListJsonMapper.html" title="class in technology.sola.engine.assets.list">AssetListJsonMapper</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneJsonMapper.html#toObject(technology.sola.json.JsonObject)" class="member-name-link">toObject(JsonObject)</a> - Method in class technology.sola.engine.assets.scene.<a href="technology.sola.engine/technology/sola/engine/assets/scene/SceneJsonMapper.html" title="class in technology.sola.engine.assets.scene">SceneJsonMapper</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/property/Border.html#top()" class="member-name-link">top()</a> - Method in record class technology.sola.engine.graphics.gui.style.property.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/property/Border.html" title="class in technology.sola.engine.graphics.gui.style.property">Border</a></dt>
 <dd>
@@ -6619,6 +6775,18 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a string representation of this record class.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/json/JsonElementAsset.html#toString()" class="member-name-link">toString()</a> - Method in record class technology.sola.engine.assets.json.<a href="technology.sola.engine/technology/sola/engine/assets/json/JsonElementAsset.html" title="class in technology.sola.engine.assets.json">JsonElementAsset</a></dt>
+<dd>
+<div class="block">Returns a string representation of this record class.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html#toString()" class="member-name-link">toString()</a> - Method in record class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a></dt>
+<dd>
+<div class="block">Returns a string representation of this record class.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html#toString()" class="member-name-link">toString()</a> - Method in record class technology.sola.engine.assets.list.<a href="technology.sola.engine/technology/sola/engine/assets/list/AssetList.html" title="class in technology.sola.engine.assets.list">AssetList</a></dt>
+<dd>
+<div class="block">Returns a string representation of this record class.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/Scene.html#toString()" class="member-name-link">toString()</a> - Method in record class technology.sola.engine.assets.scene.<a href="technology.sola.engine/technology/sola/engine/assets/scene/Scene.html" title="class in technology.sola.engine.assets.scene">Scene</a></dt>
 <dd>
 <div class="block">Returns a string representation of this record class.</div>
 </dd>
@@ -7399,6 +7567,10 @@ the order they are declared.</div>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/SolaPhysics.Builder.html#withoutParticles()" class="member-name-link">withoutParticles()</a> - Method in class technology.sola.engine.physics.<a href="technology.sola.engine/technology/sola/engine/physics/SolaPhysics.Builder.html" title="class in technology.sola.engine.physics">SolaPhysics.Builder</a></dt>
 <dd>
 <div class="block">Turns off particle systems.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/Scene.html#world()" class="member-name-link">world()</a> - Method in record class technology.sola.engine.assets.scene.<a href="technology.sola.engine/technology/sola/engine/assets/scene/Scene.html" title="class in technology.sola.engine.assets.scene">Scene</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/assets/scene/Scene.html#param-world"><code>world</code></a> record component.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:X">X</h2>

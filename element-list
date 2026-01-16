@@ -9,6 +9,8 @@ technology.sola.engine.assets.graphics.font.mapper
 technology.sola.engine.assets.graphics.gui
 technology.sola.engine.assets.graphics.spritesheet
 technology.sola.engine.assets.json
+technology.sola.engine.assets.list
+technology.sola.engine.assets.scene
 technology.sola.engine.core
 technology.sola.engine.core.component
 technology.sola.engine.core.event
