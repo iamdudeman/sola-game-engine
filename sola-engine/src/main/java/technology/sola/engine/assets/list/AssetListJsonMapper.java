@@ -25,6 +25,7 @@ public class AssetListJsonMapper implements JsonMapper<AssetList> {
     jsonObject.put("audioClips", toJsonArray(object.audioAssets()));
     jsonObject.put("fonts", toJsonArray(object.fontAssets()));
     jsonObject.put("guiJsonDocuments", toJsonArray(object.guiAssets()));
+    jsonObject.put("images", toJsonArray(object.imageAssets()));
     jsonObject.put("spriteSheets", toJsonArray(object.spriteSheetAssets()));
     jsonObject.put("scenes", toJsonArray(object.sceneAssets()));
 
@@ -37,6 +38,7 @@ public class AssetListJsonMapper implements JsonMapper<AssetList> {
       parseAssetDetails(jsonObject.getArray("audioClips", new JsonArray())),
       parseAssetDetails(jsonObject.getArray("fonts", new JsonArray())),
       parseAssetDetails(jsonObject.getArray("guiJsonDocuments", new JsonArray())),
+      parseAssetDetails(jsonObject.getArray("images", new JsonArray())),
       parseAssetDetails(jsonObject.getArray("spriteSheets", new JsonArray())),
       parseAssetDetails(jsonObject.getArray("scenes", new JsonArray()))
     );

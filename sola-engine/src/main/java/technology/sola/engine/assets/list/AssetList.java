@@ -3,6 +3,7 @@ package technology.sola.engine.assets.list;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.Asset;
 import technology.sola.engine.assets.audio.AudioClip;
+import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
@@ -16,6 +17,7 @@ import java.util.List;
  * @param audioAssets       the list of {@link AudioClip} assets
  * @param fontAssets        the list of {@link Font} assets
  * @param guiAssets         the list of {@link GuiJsonDocument} assets
+ * @param imageAssets       the list of {@link SolaImage} assets
  * @param spriteSheetAssets the list of {@link SpriteSheet} assets
  * @param sceneAssets       the list of {@link Scene} assets
  */
@@ -24,6 +26,7 @@ public record AssetList(
   List<AssetDetails<AudioClip>> audioAssets,
   List<AssetDetails<Font>> fontAssets,
   List<AssetDetails<GuiJsonDocument>> guiAssets,
+  List<AssetDetails<SolaImage>> imageAssets,
   List<AssetDetails<SpriteSheet>> spriteSheetAssets,
   List<AssetDetails<Scene>> sceneAssets
 ) implements Asset {

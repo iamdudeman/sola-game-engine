@@ -45,6 +45,13 @@ public abstract class ToolPanel<T> extends SplitPane {
   public abstract JsonObject buildToolConfigForSaving();
 
   /**
+   * Called when the tool panel is switched to.
+   */
+  public void onSwitch() {
+
+  }
+
+  /**
    * Creates an instance of {@link T} configuration for this tool to be used to initialize the tool. Tool configs are
    * found on {@link EditorConfig#toolConfigurations()} using the tool's {@link ToolPanel#getToolId()}.
    *

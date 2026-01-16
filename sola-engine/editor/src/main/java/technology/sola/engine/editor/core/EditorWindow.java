@@ -143,6 +143,7 @@ public class EditorWindow {
 
     toolContent.getChildren().clear();
     toolContent.getChildren().add(toolPanel);
+    toolPanel.onSwitch();
   }
 
   private void initializeEditorConfigurationEvents(Stage primaryStage) {
