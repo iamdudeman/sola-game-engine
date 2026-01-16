@@ -1,0 +1,60 @@
+package technology.sola.engine.editor.tools.assetlist;
+
+import org.jspecify.annotations.NullMarked;
+import technology.sola.engine.editor.core.config.EditorConfig;
+import technology.sola.engine.editor.tools.ToolPanel;
+import technology.sola.json.JsonObject;
+
+/**
+ * AssetListToolPanel is a {@link ToolPanel} for managing the list of assets loaded via
+ * the main {@link technology.sola.engine.assets.list.AssetList}.
+ */
+@NullMarked
+public class AssetListToolPanel extends ToolPanel<AssetListToolConfig> {
+
+  /**
+   * Creates an instance of AssetListToolPanel initialized via the {@link EditorConfig}.
+   *
+   * @param editorConfig the {@link EditorConfig} instance
+   */
+  public AssetListToolPanel(EditorConfig editorConfig) {
+    super(editorConfig);
+    var items = getItems();
+
+    //    items.addAll(audioClipAssetTree, tabbedPanel);
+
+    //    Platform.runLater(() -> {
+    //      audioClipAssetTree.restoreOpenedFilesAndSelection(toolConfig.openedFileIds(), toolConfig.openId());
+
+    //      setDividerPositions(toolConfig.dividerPosition());
+    //    });
+  }
+
+  @Override
+  public String getToolLabel() {
+    return "Asset List";
+  }
+
+  @Override
+  public String getToolId() {
+    return "assetList";
+  }
+
+  @Override
+  public JsonObject buildToolConfigForSaving() {
+    var config = new AssetListToolConfig();
+
+    return new AssetListToolConfig.ConfigJsonMapper().toJson(config);
+  }
+
+  @Override
+  protected AssetListToolConfig buildToolConfigFromEditorConfig(EditorConfig editorConfig) {
+    var toolConfigJson = editorConfig.toolConfigurations().get(getToolId());
+
+    if (toolConfigJson == null) {
+      return new AssetListToolConfig();
+    }
+
+    return new AssetListToolConfig.ConfigJsonMapper().toObject(toolConfigJson);
+  }
+}
