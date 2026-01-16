@@ -17,6 +17,8 @@ module technology.sola.engine {
   exports technology.sola.engine.assets.graphics.gui;
   exports technology.sola.engine.assets.graphics.spritesheet;
   exports technology.sola.engine.assets.json;
+  exports technology.sola.engine.assets.list;
+  exports technology.sola.engine.assets.scene;
 
   exports technology.sola.engine.core;
   exports technology.sola.engine.core.component;

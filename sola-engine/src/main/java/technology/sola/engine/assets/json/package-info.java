@@ -1,4 +1,4 @@
 /**
- * This package provides various classes related to assets related to JSON files.
+ * This package provides various classes related to JSON file assets.
  */
 package technology.sola.engine.assets.json;

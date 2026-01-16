@@ -7,6 +7,8 @@ import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.graphics.font.FontAssetLoader;
 import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetAssetLoader;
 import technology.sola.engine.assets.json.JsonElementAsset;
+import technology.sola.engine.assets.list.AssetListAssetLoader;
+import technology.sola.engine.assets.scene.SceneAssetLoader;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.SolaPlatformIdentifier;
@@ -236,6 +238,8 @@ public class BrowserSolaPlatform extends SolaPlatform {
     assetLoaderProvider.add(new FontAssetLoader(
       jsonElementAssetAssetLoader, solaImageAssetLoader
     ));
+    assetLoaderProvider.add(new AssetListAssetLoader(jsonElementAssetAssetLoader));
+    assetLoaderProvider.add(new SceneAssetLoader(jsonElementAssetAssetLoader));
   }
 
   @Override

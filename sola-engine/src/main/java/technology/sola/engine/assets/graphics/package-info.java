@@ -1,4 +1,4 @@
 /**
- * This package provides various classes related to assets related to graphics.
+ * This package provides various classes related to graphics assets.
  */
 package technology.sola.engine.assets.graphics;
