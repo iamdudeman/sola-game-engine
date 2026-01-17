@@ -21,8 +21,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AssetListPanel extends EditorPanel {
-  public void update() throws IOException {
+class AssetListPanel extends EditorPanel {
+  void update() throws IOException {
     // clear old stuff
     getChildren().clear();
 
@@ -88,11 +88,11 @@ public class AssetListPanel extends EditorPanel {
     String[] files = assetTypeRoot.list();
 
     if (files == null) {
-      return  assetListRows;
+      return assetListRows;
     }
 
     for (var file : files) {
-      File nestedFile =  new File(assetTypeRoot, file);
+      File nestedFile = new File(assetTypeRoot, file);
 
       if (nestedFile.isDirectory()) {
         populateAssetListRows(nestedFile.getPath(), assetType, assetListRows);
@@ -113,7 +113,7 @@ public class AssetListPanel extends EditorPanel {
         .filter(assetListRow -> assetListRow.path.equals(assetDetail.path()))
         .findFirst()
         .ifPresent(assetListRow -> {
-          assetListRow.id =  assetDetail.id();
+          assetListRow.id = assetDetail.id();
           assetListRow.isBlocking = assetDetail.isBlocking();
         });
     }

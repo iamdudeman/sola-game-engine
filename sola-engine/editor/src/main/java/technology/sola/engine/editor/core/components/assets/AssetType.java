@@ -33,6 +33,9 @@ public enum AssetType {
   SPRITES("sprites", "Sprites", "spritesheet", new String[]{".sprites.json"}),
   ;
 
+  /**
+   * The base path for where this asset type is located.
+   */
   public final String path;
   final String title;
   final String singleAssetLabel;
