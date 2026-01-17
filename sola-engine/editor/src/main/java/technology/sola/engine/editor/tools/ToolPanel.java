@@ -6,7 +6,7 @@ import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.json.JsonObject;
 
 /**
- * ToolPanel is a top level container that tools will extend to provide a common layout and configuration functionality.
+ * ToolPanel is a top-level container that tools will extend to provide a common layout and configuration functionality.
  *
  * @param <T> the tool's configuration object type
  */
@@ -43,6 +43,13 @@ public abstract class ToolPanel<T> extends SplitPane {
    * @return the tool's configuration as JSON
    */
   public abstract JsonObject buildToolConfigForSaving();
+
+  /**
+   * Called when the tool panel is switched to.
+   */
+  public void onSwitch() {
+
+  }
 
   /**
    * Creates an instance of {@link T} configuration for this tool to be used to initialize the tool. Tool configs are

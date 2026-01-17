@@ -1,5 +1,6 @@
 package technology.sola.engine.editor.core.components.input;
 
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -42,6 +43,7 @@ public class LabelWrapper {
 
     labelNode.setLabelFor(node);
 
+    container.setAlignment(Pos.CENTER);
     container.setSpacing(4);
     container.getChildren().addAll(labelNode, node);
 

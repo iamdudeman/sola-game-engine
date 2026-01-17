@@ -16,12 +16,27 @@ public enum AssetType {
    */
   FONT("font", "Fonts", "font", new String[]{".font.json"}),
   /**
+   * Gui assets.
+   */
+  GUI("gui", "Gui", "gui", new String[]{".gui.json"}),
+  /**
+   * Image assets.
+   */
+  IMAGES("images", "Images", "image", new String[]{".png", ".jpg"}),
+  /**
+   * Scene assets.
+   */
+  SCENES("scenes", "Scenes", "scene", new String[]{".scene.json"}),
+  /**
    * Sprites assets.
    */
   SPRITES("sprites", "Sprites", "spritesheet", new String[]{".sprites.json"}),
   ;
 
-  final String path;
+  /**
+   * The base path for where this asset type is located.
+   */
+  public final String path;
   final String title;
   final String singleAssetLabel;
   private final String[] extensions;

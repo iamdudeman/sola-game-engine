@@ -20,6 +20,7 @@ import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.engine.editor.core.config.WindowBounds;
 import technology.sola.engine.editor.core.utils.DialogService;
 import technology.sola.engine.editor.core.utils.ToastService;
+import technology.sola.engine.editor.tools.assetlist.AssetListToolPanel;
 import technology.sola.engine.editor.tools.audio.AudioToolPanel;
 import technology.sola.engine.editor.tools.font.FontToolPanel;
 import technology.sola.engine.editor.tools.sprites.SpriteSheetToolPanel;
@@ -56,6 +57,7 @@ public class EditorWindow {
       editorConfig = EditorConfig.readConfigFile();
 
       editorToolPanels = List.of(
+        new AssetListToolPanel(editorConfig),
         new AudioToolPanel(editorConfig),
         new FontToolPanel(editorConfig),
         new SpriteSheetToolPanel(editorConfig)
@@ -141,6 +143,7 @@ public class EditorWindow {
 
     toolContent.getChildren().clear();
     toolContent.getChildren().add(toolPanel);
+    toolPanel.onSwitch();
   }
 
   private void initializeEditorConfigurationEvents(Stage primaryStage) {
