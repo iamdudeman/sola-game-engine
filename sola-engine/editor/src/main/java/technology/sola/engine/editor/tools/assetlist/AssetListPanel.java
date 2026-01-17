@@ -196,7 +196,7 @@ public class AssetListPanel extends EditorPanel {
 
   private static class AssetListRow<T extends Asset> {
     private String id;
-    private String path;
+    private final String path;
     private boolean isBlocking;
 
     AssetListRow(String path) {

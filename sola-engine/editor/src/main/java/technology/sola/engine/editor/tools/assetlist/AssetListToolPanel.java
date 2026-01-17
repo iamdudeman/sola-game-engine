@@ -1,13 +1,6 @@
 package technology.sola.engine.editor.tools.assetlist;
 
-import javafx.geometry.Pos;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import org.jspecify.annotations.NullMarked;
-import technology.sola.engine.editor.core.components.input.LabelWrapper;
 import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.engine.editor.core.utils.ToastService;
 import technology.sola.engine.editor.tools.ToolPanel;
@@ -32,37 +25,7 @@ public class AssetListToolPanel extends ToolPanel<AssetListToolConfig> {
     super(editorConfig);
     var items = getItems();
 
-    //    items.addAll(audioClipAssetTree, tabbedPanel);
-
-    //    Platform.runLater(() -> {
-    //      audioClipAssetTree.restoreOpenedFilesAndSelection(toolConfig.openedFileIds(), toolConfig.openId());
-
-    //      setDividerPositions(toolConfig.dividerPosition());
-    //    });
-
     items.add(assetListPanel);
-
-//    TitledPane titledPane = new TitledPane();
-//    titledPane.setText("Audio");
-//
-//    VBox vBox = new VBox();
-//
-//    vBox.setAlignment(Pos.TOP_CENTER);
-//
-//    HBox hBox = new HBox();
-//    hBox.setSpacing(10);
-//    hBox.setAlignment(Pos.CENTER_LEFT);
-//    hBox.getChildren().addAll(
-//      new CheckBox("Include?"),
-//      LabelWrapper.vertical(new TextField(), "Id"),
-//      LabelWrapper.vertical(new TextField(), "Path"),
-//      new CheckBox("Blocking?")
-//    );
-//    vBox.getChildren().addAll(hBox);
-//
-//    titledPane.setContent(vBox);
-//
-//    items.add(titledPane);
   }
 
   @Override

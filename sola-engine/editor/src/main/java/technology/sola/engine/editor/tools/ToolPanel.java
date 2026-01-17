@@ -6,7 +6,7 @@ import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.json.JsonObject;
 
 /**
- * ToolPanel is a top level container that tools will extend to provide a common layout and configuration functionality.
+ * ToolPanel is a top-level container that tools will extend to provide a common layout and configuration functionality.
  *
  * @param <T> the tool's configuration object type
  */
