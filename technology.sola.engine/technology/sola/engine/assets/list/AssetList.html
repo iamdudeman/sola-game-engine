@@ -82,8 +82,9 @@ loadScripts(document, 'script');</script>
 <dd><code><span id="param-audioAssets">audioAssets</span></code> - the list of <a href="../audio/AudioClip.html" title="interface in technology.sola.engine.assets.audio"><code>AudioClip</code></a> assets</dd>
 <dd><code><span id="param-fontAssets">fontAssets</span></code> - the list of <a href="../graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a> assets</dd>
 <dd><code><span id="param-guiAssets">guiAssets</span></code> - the list of <a href="../graphics/gui/GuiJsonDocument.html" title="class in technology.sola.engine.assets.graphics.gui"><code>GuiJsonDocument</code></a> assets</dd>
-<dd><code><span id="param-spriteSheetAssets">spriteSheetAssets</span></code> - the list of <a href="../graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet"><code>SpriteSheet</code></a> assets</dd>
+<dd><code><span id="param-imageAssets">imageAssets</span></code> - the list of <a href="../graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> assets</dd>
 <dd><code><span id="param-sceneAssets">sceneAssets</span></code> - the list of <a href="../scene/Scene.html" title="class in technology.sola.engine.assets.scene"><code>Scene</code></a> assets</dd>
+<dd><code><span id="param-spriteSheetAssets">spriteSheetAssets</span></code> - the list of <a href="../graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet"><code>SpriteSheet</code></a> assets</dd>
 </dl>
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
@@ -91,7 +92,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="type-signature"><span class="annotations">@NullMarked
-</span><span class="modifiers">public record </span><span class="element-name type-name-label">AssetList</span>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../audio/AudioClip.html" title="interface in technology.sola.engine.assets.audio">AudioClip</a>&gt;&gt;&nbsp;audioAssets, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a>&gt;&gt;&nbsp;fontAssets, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/gui/GuiJsonDocument.html" title="class in technology.sola.engine.assets.graphics.gui">GuiJsonDocument</a>&gt;&gt;&nbsp;guiAssets, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheet</a>&gt;&gt;&nbsp;spriteSheetAssets, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../scene/Scene.html" title="class in technology.sola.engine.assets.scene">Scene</a>&gt;&gt;&nbsp;sceneAssets)
+</span><span class="modifiers">public record </span><span class="element-name type-name-label">AssetList</span>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../audio/AudioClip.html" title="interface in technology.sola.engine.assets.audio">AudioClip</a>&gt;&gt;&nbsp;audioAssets, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a>&gt;&gt;&nbsp;fontAssets, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/gui/GuiJsonDocument.html" title="class in technology.sola.engine.assets.graphics.gui">GuiJsonDocument</a>&gt;&gt;&nbsp;guiAssets, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&gt;&gt;&nbsp;imageAssets, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../scene/Scene.html" title="class in technology.sola.engine.assets.scene">Scene</a>&gt;&gt;&nbsp;sceneAssets, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheet</a>&gt;&gt;&nbsp;spriteSheetAssets)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a>
 implements <a href="../Asset.html" title="interface in technology.sola.engine.assets">Asset</a></span></div>
 <div class="block">AssetList is an <a href="../Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a> that contains a list of other assets to be loaded.</div>
@@ -145,11 +146,12 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.List,java.util.List,java.util.List,java.util.List,java.util.List)" class="member-name-link">AssetList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../audio/AudioClip.html" title="interface in technology.sola.engine.assets.audio">AudioClip</a>&gt;&gt;&nbsp;audioAssets,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.List,java.util.List,java.util.List,java.util.List,java.util.List,java.util.List)" class="member-name-link">AssetList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../audio/AudioClip.html" title="interface in technology.sola.engine.assets.audio">AudioClip</a>&gt;&gt;&nbsp;audioAssets,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a>&gt;&gt;&nbsp;fontAssets,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/gui/GuiJsonDocument.html" title="class in technology.sola.engine.assets.graphics.gui">GuiJsonDocument</a>&gt;&gt;&nbsp;guiAssets,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheet</a>&gt;&gt;&nbsp;spriteSheetAssets,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../scene/Scene.html" title="class in technology.sola.engine.assets.scene">Scene</a>&gt;&gt;&nbsp;sceneAssets)</code></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&gt;&gt;&nbsp;imageAssets,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../scene/Scene.html" title="class in technology.sola.engine.assets.scene">Scene</a>&gt;&gt;&nbsp;sceneAssets,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheet</a>&gt;&gt;&nbsp;spriteSheetAssets)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates an instance of a <code>AssetList</code> record class.</div>
 </div>
@@ -192,19 +194,24 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a hash code value for this object.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../scene/Scene.html" title="class in technology.sola.engine.assets.scene">Scene</a>&gt;&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sceneAssets()" class="member-name-link">sceneAssets</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&gt;&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#imageAssets()" class="member-name-link">imageAssets</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the value of the <a href="#param-imageAssets"><code>imageAssets</code></a> record component.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../scene/Scene.html" title="class in technology.sola.engine.assets.scene">Scene</a>&gt;&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sceneAssets()" class="member-name-link">sceneAssets</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-sceneAssets"><code>sceneAssets</code></a> record component.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheet</a>&gt;&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#spriteSheetAssets()" class="member-name-link">spriteSheetAssets</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheet</a>&gt;&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#spriteSheetAssets()" class="member-name-link">spriteSheetAssets</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-spriteSheetAssets"><code>spriteSheetAssets</code></a> record component.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a string representation of this record class.</div>
 </div>
 </div>
@@ -263,21 +270,23 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(java.util.List,java.util.List,java.util.List,java.util.List,java.util.List)">
+<section class="detail" id="&lt;init&gt;(java.util.List,java.util.List,java.util.List,java.util.List,java.util.List,java.util.List)">
 <h3>AssetList</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">AssetList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../audio/AudioClip.html" title="interface in technology.sola.engine.assets.audio">AudioClip</a>&gt;&gt;&nbsp;audioAssets,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a>&gt;&gt;&nbsp;fontAssets,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/gui/GuiJsonDocument.html" title="class in technology.sola.engine.assets.graphics.gui">GuiJsonDocument</a>&gt;&gt;&nbsp;guiAssets,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheet</a>&gt;&gt;&nbsp;spriteSheetAssets,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../scene/Scene.html" title="class in technology.sola.engine.assets.scene">Scene</a>&gt;&gt;&nbsp;sceneAssets)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&gt;&gt;&nbsp;imageAssets,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../scene/Scene.html" title="class in technology.sola.engine.assets.scene">Scene</a>&gt;&gt;&nbsp;sceneAssets,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheet</a>&gt;&gt;&nbsp;spriteSheetAssets)</span></div>
 <div class="block">Creates an instance of a <code>AssetList</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>audioAssets</code> - the value for the <a href="#param-audioAssets"><code>audioAssets</code></a> record component</dd>
 <dd><code>fontAssets</code> - the value for the <a href="#param-fontAssets"><code>fontAssets</code></a> record component</dd>
 <dd><code>guiAssets</code> - the value for the <a href="#param-guiAssets"><code>guiAssets</code></a> record component</dd>
-<dd><code>spriteSheetAssets</code> - the value for the <a href="#param-spriteSheetAssets"><code>spriteSheetAssets</code></a> record component</dd>
+<dd><code>imageAssets</code> - the value for the <a href="#param-imageAssets"><code>imageAssets</code></a> record component</dd>
 <dd><code>sceneAssets</code> - the value for the <a href="#param-sceneAssets"><code>sceneAssets</code></a> record component</dd>
+<dd><code>spriteSheetAssets</code> - the value for the <a href="#param-spriteSheetAssets"><code>spriteSheetAssets</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -364,13 +373,13 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
 </section>
 </li>
 <li>
-<section class="detail" id="spriteSheetAssets()">
-<h3>spriteSheetAssets</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheet</a>&gt;&gt;</span>&nbsp;<span class="element-name">spriteSheetAssets</span>()</div>
-<div class="block">Returns the value of the <a href="#param-spriteSheetAssets"><code>spriteSheetAssets</code></a> record component.</div>
+<section class="detail" id="imageAssets()">
+<h3>imageAssets</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&gt;&gt;</span>&nbsp;<span class="element-name">imageAssets</span>()</div>
+<div class="block">Returns the value of the <a href="#param-imageAssets"><code>imageAssets</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <a href="#param-spriteSheetAssets"><code>spriteSheetAssets</code></a> record component</dd>
+<dd>the value of the <a href="#param-imageAssets"><code>imageAssets</code></a> record component</dd>
 </dl>
 </section>
 </li>
@@ -382,6 +391,17 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the value of the <a href="#param-sceneAssets"><code>sceneAssets</code></a> record component</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="spriteSheetAssets()">
+<h3>spriteSheetAssets</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AssetList.AssetDetails.html" title="class in technology.sola.engine.assets.list">AssetList.AssetDetails</a>&lt;<a href="../graphics/spritesheet/SpriteSheet.html" title="class in technology.sola.engine.assets.graphics.spritesheet">SpriteSheet</a>&gt;&gt;</span>&nbsp;<span class="element-name">spriteSheetAssets</span>()</div>
+<div class="block">Returns the value of the <a href="#param-spriteSheetAssets"><code>spriteSheetAssets</code></a> record component.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the value of the <a href="#param-spriteSheetAssets"><code>spriteSheetAssets</code></a> record component</dd>
 </dl>
 </section>
 </li>
