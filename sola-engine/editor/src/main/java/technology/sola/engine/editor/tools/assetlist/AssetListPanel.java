@@ -5,7 +5,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import technology.sola.engine.assets.Asset;
-import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.assets.list.AssetList;
 import technology.sola.engine.assets.list.AssetListJsonMapper;
 import technology.sola.engine.editor.core.components.EditorPanel;
@@ -33,12 +32,12 @@ public class AssetListPanel extends EditorPanel {
     );
 
     // prepare rows
-    var audioStuff = buildRowsAndGroup("Audio", "assets/audio", AssetType.AUDIO_CLIP, assetList.audioAssets());
-    var fontStuff = buildRowsAndGroup("Font", "assets/font", AssetType.FONT, assetList.fontAssets());
-    var guiStuff = buildRowsAndGroup("Gui", "assets/gui", AssetType.GUI, assetList.guiAssets());
-    var imageStuff = buildRowsAndGroup("Images", "assets/images", AssetType.IMAGES, assetList.imageAssets());
-    var sceneSheetStuff = buildRowsAndGroup("Scene", "assets/scenes", AssetType.SCENES, assetList.sceneAssets());
-    var spriteSheetStuff = buildRowsAndGroup("SpriteSheet", "assets/sprites", AssetType.SPRITES, assetList.spriteSheetAssets());
+    var audioStuff = buildRowsAndGroup("Audio", AssetType.AUDIO_CLIP, assetList.audioAssets());
+    var fontStuff = buildRowsAndGroup("Font", AssetType.FONT, assetList.fontAssets());
+    var guiStuff = buildRowsAndGroup("Gui", AssetType.GUI, assetList.guiAssets());
+    var imageStuff = buildRowsAndGroup("Images", AssetType.IMAGES, assetList.imageAssets());
+    var sceneSheetStuff = buildRowsAndGroup("Scene", AssetType.SCENES, assetList.sceneAssets());
+    var spriteSheetStuff = buildRowsAndGroup("SpriteSheet", AssetType.SPRITES, assetList.spriteSheetAssets());
 
     // save button
     Button saveButton = new Button("Save Asset List");
@@ -172,10 +171,10 @@ public class AssetListPanel extends EditorPanel {
 
   private <T extends Asset> RowsAndGroup<T> buildRowsAndGroup(
     String label,
-    String path,
     AssetType assetType,
     List<AssetList.AssetDetails<T>> assetDetails
   ) {
+    var path = "assets/" + assetType.path;
     var assetListRows = this.<T>populateAssetListRows(path, assetType, new ArrayList<>());
 
     this.<T>applyAssetListToRelatedRows(assetDetails, assetListRows);

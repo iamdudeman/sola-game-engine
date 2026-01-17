@@ -33,7 +33,7 @@ public enum AssetType {
   SPRITES("sprites", "Sprites", "spritesheet", new String[]{".sprites.json"}),
   ;
 
-  final String path;
+  public final String path;
   final String title;
   final String singleAssetLabel;
   private final String[] extensions;
