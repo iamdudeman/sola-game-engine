@@ -2,6 +2,12 @@ package technology.sola.engine.assets.list;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.Asset;
+import technology.sola.engine.assets.audio.AudioClip;
+import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.assets.graphics.font.Font;
+import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
+import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
+import technology.sola.engine.assets.scene.Scene;
 import technology.sola.json.JsonArray;
 import technology.sola.json.JsonObject;
 import technology.sola.json.mapper.JsonMapper;
@@ -26,8 +32,8 @@ public class AssetListJsonMapper implements JsonMapper<AssetList> {
     jsonObject.put("fonts", toJsonArray(object.fontAssets()));
     jsonObject.put("guiJsonDocuments", toJsonArray(object.guiAssets()));
     jsonObject.put("images", toJsonArray(object.imageAssets()));
-    jsonObject.put("spriteSheets", toJsonArray(object.spriteSheetAssets()));
     jsonObject.put("scenes", toJsonArray(object.sceneAssets()));
+    jsonObject.put("spriteSheets", toJsonArray(object.spriteSheetAssets()));
 
     return jsonObject;
   }
@@ -35,12 +41,12 @@ public class AssetListJsonMapper implements JsonMapper<AssetList> {
   @Override
   public AssetList toObject(JsonObject jsonObject) {
     return new AssetList(
-      parseAssetDetails(jsonObject.getArray("audioClips", new JsonArray())),
-      parseAssetDetails(jsonObject.getArray("fonts", new JsonArray())),
-      parseAssetDetails(jsonObject.getArray("guiJsonDocuments", new JsonArray())),
-      parseAssetDetails(jsonObject.getArray("images", new JsonArray())),
-      parseAssetDetails(jsonObject.getArray("spriteSheets", new JsonArray())),
-      parseAssetDetails(jsonObject.getArray("scenes", new JsonArray()))
+      parseAssetDetails(jsonObject.<AudioClip>getArray("audioClips", new JsonArray())),
+      parseAssetDetails(jsonObject.<Font>getArray("fonts", new JsonArray())),
+      parseAssetDetails(jsonObject.<GuiJsonDocument>getArray("guiJsonDocuments", new JsonArray())),
+      parseAssetDetails(jsonObject.<SolaImage>getArray("images", new JsonArray())),
+      parseAssetDetails(jsonObject.<Scene>getArray("scenes", new JsonArray())),
+      parseAssetDetails(jsonObject.<SpriteSheet>getArray("spriteSheets", new JsonArray()))
     );
   }
 

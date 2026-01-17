@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 class AssetListPanel extends EditorPanel {
+  private static final double SCROLL_SPEED = 0.005;
+
   void update() throws IOException {
     // clear old stuff
     getChildren().clear();
@@ -48,8 +50,8 @@ class AssetListPanel extends EditorPanel {
         fontStuff.assetListRows.stream().map(AssetListRow::toDetail).toList(),
         guiStuff.assetListRows.stream().map(AssetListRow::toDetail).toList(),
         imageStuff.assetListRows.stream().map(AssetListRow::toDetail).toList(),
-        spriteSheetStuff.assetListRows.stream().map(AssetListRow::toDetail).toList(),
-        sceneSheetStuff.assetListRows.stream().map(AssetListRow::toDetail).toList()
+        sceneSheetStuff.assetListRows.stream().map(AssetListRow::toDetail).toList(),
+        spriteSheetStuff.assetListRows.stream().map(AssetListRow::toDetail).toList()
       );
 
       try {
@@ -67,16 +69,20 @@ class AssetListPanel extends EditorPanel {
     VBox vBox = new VBox();
 
     vBox.getChildren().addAll(
-      saveButton,
       audioStuff.titledPane, fontStuff.titledPane, guiStuff.titledPane,
-      imageStuff.titledPane, spriteSheetStuff.titledPane, sceneSheetStuff.titledPane
+      imageStuff.titledPane, sceneSheetStuff.titledPane, spriteSheetStuff.titledPane
     );
 
     ScrollPane scrollPane = new ScrollPane(vBox);
 
     scrollPane.setFitToWidth(true);
+    scrollPane.getContent().setOnScroll(scrollEvent -> {
+      double deltaY = scrollEvent.getDeltaY() * SCROLL_SPEED;
 
-    getChildren().add(scrollPane);
+      scrollPane.setVvalue(scrollPane.getVvalue() - deltaY);
+    });
+
+    getChildren().addAll(saveButton, scrollPane);
   }
 
   private <T extends Asset> List<AssetListRow<T>> populateAssetListRows(
@@ -132,6 +138,7 @@ class AssetListPanel extends EditorPanel {
         .map(this::buildRowUi)
         .toList()
     );
+    vBox.setMinHeight(100);
 
     titledPane.setContent(vBox);
 

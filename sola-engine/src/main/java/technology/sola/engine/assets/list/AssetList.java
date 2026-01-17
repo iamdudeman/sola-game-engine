@@ -18,8 +18,8 @@ import java.util.List;
  * @param fontAssets        the list of {@link Font} assets
  * @param guiAssets         the list of {@link GuiJsonDocument} assets
  * @param imageAssets       the list of {@link SolaImage} assets
- * @param spriteSheetAssets the list of {@link SpriteSheet} assets
  * @param sceneAssets       the list of {@link Scene} assets
+ * @param spriteSheetAssets the list of {@link SpriteSheet} assets
  */
 @NullMarked
 public record AssetList(
@@ -27,8 +27,8 @@ public record AssetList(
   List<AssetDetails<Font>> fontAssets,
   List<AssetDetails<GuiJsonDocument>> guiAssets,
   List<AssetDetails<SolaImage>> imageAssets,
-  List<AssetDetails<SpriteSheet>> spriteSheetAssets,
-  List<AssetDetails<Scene>> sceneAssets
+  List<AssetDetails<Scene>> sceneAssets,
+  List<AssetDetails<SpriteSheet>> spriteSheetAssets
 ) implements Asset {
   /**
    * The id of the main asset list.
