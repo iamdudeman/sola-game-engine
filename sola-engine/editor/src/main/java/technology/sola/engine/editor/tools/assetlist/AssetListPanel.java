@@ -10,6 +10,7 @@ import technology.sola.engine.assets.list.AssetList;
 import technology.sola.engine.assets.list.AssetListJsonMapper;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.components.ThemedText;
+import technology.sola.engine.editor.core.components.assets.AssetType;
 import technology.sola.engine.editor.core.components.input.LabelWrapper;
 import technology.sola.engine.editor.core.utils.ToastService;
 import technology.sola.json.SolaJson;
@@ -32,12 +33,12 @@ public class AssetListPanel extends EditorPanel {
     );
 
     // prepare rows
-    var audioStuff = buildRowsAndGroup("Audio", "assets/audio", assetList.audioAssets());
-    var fontStuff = buildRowsAndGroup("Font", "assets/font", assetList.fontAssets());
-    var guiStuff = buildRowsAndGroup("Gui", "assets/gui", assetList.guiAssets());
-    var imageStuff = buildRowsAndGroup("Images", "assets/images", assetList.imageAssets());
-    var spriteSheetStuff = buildRowsAndGroup("SpriteSheet", "assets/gui", assetList.spriteSheetAssets());
-    var sceneSheetStuff = buildRowsAndGroup("Scene", "assets/scene", assetList.sceneAssets());
+    var audioStuff = buildRowsAndGroup("Audio", "assets/audio", AssetType.AUDIO_CLIP, assetList.audioAssets());
+    var fontStuff = buildRowsAndGroup("Font", "assets/font", AssetType.FONT, assetList.fontAssets());
+    var guiStuff = buildRowsAndGroup("Gui", "assets/gui", AssetType.GUI, assetList.guiAssets());
+    var imageStuff = buildRowsAndGroup("Images", "assets/images", AssetType.IMAGES, assetList.imageAssets());
+    var sceneSheetStuff = buildRowsAndGroup("Scene", "assets/scenes", AssetType.SCENES, assetList.sceneAssets());
+    var spriteSheetStuff = buildRowsAndGroup("SpriteSheet", "assets/sprites", AssetType.SPRITES, assetList.spriteSheetAssets());
 
     // save button
     Button saveButton = new Button("Save Asset List");
@@ -81,6 +82,7 @@ public class AssetListPanel extends EditorPanel {
 
   private <T extends Asset> List<AssetListRow<T>> populateAssetListRows(
     String assetFolder,
+    AssetType assetType,
     List<AssetListRow<T>> assetListRows
   ) {
     File assetTypeRoot = new File(assetFolder);
@@ -94,9 +96,9 @@ public class AssetListPanel extends EditorPanel {
       File nestedFile =  new File(assetTypeRoot, file);
 
       if (nestedFile.isDirectory()) {
-        populateAssetListRows(nestedFile.getPath(), assetListRows);
-      } else {
-        assetListRows.add(new AssetListRow<>(nestedFile.getPath()));
+        populateAssetListRows(nestedFile.getPath(), assetType, assetListRows);
+      } else if (assetType.matchesFilename(nestedFile.getName())) {
+        assetListRows.add(new AssetListRow<>(nestedFile.getPath().replaceAll("\\\\", "/")));
       }
     }
 
@@ -152,7 +154,7 @@ public class AssetListPanel extends EditorPanel {
       assetListRow.id = newValue;
     });
 
-    CheckBox isBlockingCheckbox = new CheckBox("Blocking?");
+    CheckBox isBlockingCheckbox = new CheckBox("Blocks rendering?");
 
     isBlockingCheckbox.setSelected(assetListRow.isBlocking);
     isBlockingCheckbox.selectedProperty().addListener((observable, oldValue, newValue) -> {
@@ -160,7 +162,7 @@ public class AssetListPanel extends EditorPanel {
     });
 
     hBox.getChildren().addAll(
-      LabelWrapper.horizontal(idField, "Id"),
+      LabelWrapper.horizontal(idField, "Id:"),
       isBlockingCheckbox,
       new ThemedText(ThemedText.Kind.PARAGRAPH, assetListRow.path)
     );
@@ -171,9 +173,10 @@ public class AssetListPanel extends EditorPanel {
   private <T extends Asset> RowsAndGroup<T> buildRowsAndGroup(
     String label,
     String path,
+    AssetType assetType,
     List<AssetList.AssetDetails<T>> assetDetails
   ) {
-    var assetListRows = this.<T>populateAssetListRows(path, new ArrayList<>());
+    var assetListRows = this.<T>populateAssetListRows(path, assetType, new ArrayList<>());
 
     this.<T>applyAssetListToRelatedRows(assetDetails, assetListRows);
 

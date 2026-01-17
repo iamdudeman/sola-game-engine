@@ -1,7 +1,6 @@
 # Editor TODO List
 
-* ability to populate config.assets.json
-    * asset list ui where asset paths can be given ids and toggled "isBlocking"
+*
 
 ## Known Bugs List
 
