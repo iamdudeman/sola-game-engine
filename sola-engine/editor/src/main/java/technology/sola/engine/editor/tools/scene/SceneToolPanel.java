@@ -21,10 +21,14 @@ public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
     super(editorConfig);
     var items = getItems();
 
+    // todo need to figure out how to create a new scene
+    // todo should open last opened scene
+    // todo how to switch to another scene?
+
     items.addAll(
-      new EditorPanel(),
-      new EditorPanel(),
-      new EditorPanel()
+      new EditorPanel(), // todo entity panel
+      new EditorPanel(), // todo World rendering (should have a Play button or something like that)
+      new EditorPanel()  // todo entity info panel
     );
 
     Platform.runLater(() -> {
