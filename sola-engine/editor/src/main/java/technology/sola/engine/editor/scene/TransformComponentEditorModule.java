@@ -3,17 +3,7 @@ package technology.sola.engine.editor.scene;
 import javafx.scene.control.TextField;
 import technology.sola.engine.core.component.TransformComponent;
 
-public class TransformComponentEditorModule extends ComponentEditorModule<TransformComponent> {
-  // todo move some javafx components into a common package technology.sola.engine.editor.components
-
-  private TextField xTextField; // todo create and use FloatField
-  private TextField yTextField; // todo create and use FloatField
-
-  public TransformComponentEditorModule() {
-    super();
-    getChildren().addAll(xTextField, yTextField);
-  }
-
+public class TransformComponentEditorModule implements ComponentEditorModule<TransformComponent> {
   @Override
   public Class<TransformComponent> getComponentType() {
     return TransformComponent.class;
@@ -25,13 +15,22 @@ public class TransformComponentEditorModule extends ComponentEditorModule<Transf
   }
 
   @Override
-  public TransformComponent onAddComponent() {
+  public TransformComponent createNewInstance() {
     return new TransformComponent();
   }
 
   @Override
-  public void onEntitySelect(TransformComponent transformComponent) {
-    xTextField.setText("" + transformComponent.getX());
-    yTextField.setText("" + transformComponent.getX());
+  public ComponentEditorPanel buildUi(TransformComponent component) {
+    // todo move some javafx components into a common package technology.sola.engine.editor.components
+
+    ComponentEditorPanel componentEditorPanel = new ComponentEditorPanel();
+    // todo create and use FloatField
+    TextField xTextField = new TextField();
+    TextField yTextField = new TextField();
+
+    xTextField.setText("" + component.getX());
+    yTextField.setText("" + component.getY());
+
+    return componentEditorPanel;
   }
 }

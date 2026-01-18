@@ -1,18 +1,13 @@
 package technology.sola.engine.editor.scene;
 
 import technology.sola.ecs.Component;
-import technology.sola.engine.editor.core.components.EditorPanel;
 
-public abstract class ComponentEditorModule<C extends Component> extends EditorPanel {
-  public ComponentEditorModule() {
-    setSpacing(8);
-  }
+public interface ComponentEditorModule<C extends Component> {
+  Class<C> getComponentType();
 
-  public abstract Class<C> getComponentType();
+  String getTitle();
 
-  public abstract String getTitle();
+  C createNewInstance();
 
-  public abstract C onAddComponent();
-
-  public abstract void onEntitySelect(C component);
+  ComponentEditorPanel buildUi(C component);
 }
