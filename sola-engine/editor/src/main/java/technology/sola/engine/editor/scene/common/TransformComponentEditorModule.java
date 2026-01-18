@@ -1,7 +1,9 @@
-package technology.sola.engine.editor.scene;
+package technology.sola.engine.editor.scene.common;
 
 import javafx.scene.control.TextField;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.editor.scene.ComponentEditorModule;
+import technology.sola.engine.editor.scene.ComponentEditorPanel;
 
 public class TransformComponentEditorModule implements ComponentEditorModule<TransformComponent> {
   @Override
