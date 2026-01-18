@@ -21,8 +21,6 @@ public class TransformComponentEditorModule implements ComponentEditorModule<Tra
 
   @Override
   public ComponentEditorPanel buildUi(TransformComponent component) {
-    // todo move some javafx components into a common package technology.sola.engine.editor.components
-
     ComponentEditorPanel componentEditorPanel = new ComponentEditorPanel();
     // todo create and use FloatField
     TextField xTextField = new TextField();
