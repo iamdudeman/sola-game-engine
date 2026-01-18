@@ -6,7 +6,6 @@
         * Left pane is list of entities
         * Center is preview of entities
         * Right is info about selected entity
-        * Bottom is assets maybe?
     * editor camera improvements
         * add new entities to center of editor camera
         * better camera controls than WSAD

@@ -23,6 +23,7 @@ import technology.sola.engine.editor.core.utils.ToastService;
 import technology.sola.engine.editor.tools.assetlist.AssetListToolPanel;
 import technology.sola.engine.editor.tools.audio.AudioToolPanel;
 import technology.sola.engine.editor.tools.font.FontToolPanel;
+import technology.sola.engine.editor.tools.scene.SceneToolPanel;
 import technology.sola.engine.editor.tools.sprites.SpriteSheetToolPanel;
 import technology.sola.engine.platform.javafx.SolaJavaFx;
 import technology.sola.engine.platform.javafx.assets.JavaFxPathUtils;
@@ -60,6 +61,7 @@ public class EditorWindow {
         new AssetListToolPanel(editorConfig),
         new AudioToolPanel(editorConfig),
         new FontToolPanel(editorConfig),
+        new SceneToolPanel(editorConfig),
         new SpriteSheetToolPanel(editorConfig)
       );
 
