@@ -52,7 +52,7 @@ public abstract class ToolPanel<T> extends SplitPane {
   }
 
   /**
-   * Creates an instance of {@link T} configuration for this tool to be used to initialize the tool. Tool configs are
+   * Creates an instance of {@link T} configuration for this tool to be used to onEntitySelect the tool. Tool configs are
    * found on {@link EditorConfig#toolConfigurations()} using the tool's {@link ToolPanel#getToolId()}.
    *
    * @param editorConfig the {@link EditorConfig} instance
