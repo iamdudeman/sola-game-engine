@@ -11,4 +11,5 @@ module technology.sola.engine.platform.javafx {
   exports technology.sola.engine.platform.javafx.assets;
   exports technology.sola.engine.platform.javafx.assets.audio;
   exports technology.sola.engine.platform.javafx.assets.graphics;
+  exports technology.sola.engine.platform.javafx.utils;
 }

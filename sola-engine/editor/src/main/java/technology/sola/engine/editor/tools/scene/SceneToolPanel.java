@@ -7,6 +7,7 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
+import technology.sola.engine.editor.scene.common.CircleRendererComponentEditorModule;
 import technology.sola.engine.editor.scene.common.TransformComponentEditorModule;
 import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.json.JsonObject;
@@ -18,6 +19,9 @@ import java.util.List;
  */
 @NullMarked
 public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
+  private final EntityComponentsPanel entityComponentsPanel;
+  private final EntityTreeView entityTreeView;
+
   /**
    * Creates an instance of SceneToolPanel initialized via the {@link EditorConfig}.
    *
@@ -31,26 +35,28 @@ public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
     // todo should open last opened scene
     // todo how to switch to another scene?
 
-    var tempLeftPanel = new EntityTreeView();
 
+    // todo need to load the World from the scene
     World world = new World(2);
 
-    world.createEntity("Test");
+    world.createEntity("Test").addComponent(new TransformComponent(3, 4));
     world.createEntity();
     world.update();
 
-    tempLeftPanel.populate(world);
+    // todo need to get component modules from config!
+    entityComponentsPanel = new EntityComponentsPanel(world, List.of(
+      new TransformComponentEditorModule(),
+      new CircleRendererComponentEditorModule()
+    ));
 
-    var tempRightPanel = new EditorPanel();
+    entityTreeView = new EntityTreeView(entityComponentsPanel);
 
-    tempRightPanel.getChildren().addAll(
-      new TransformComponentEditorModule().buildUi(new TransformComponent(5, 7))
-    );
+    entityTreeView.populate(world);
 
     items.addAll(
-      tempLeftPanel, // todo entity panel
+      entityTreeView,
       new EditorPanel(), // todo World rendering (should have a Play button or something like that)
-      tempRightPanel  // todo entity info panel
+      entityComponentsPanel
     );
 
     Platform.runLater(() -> {

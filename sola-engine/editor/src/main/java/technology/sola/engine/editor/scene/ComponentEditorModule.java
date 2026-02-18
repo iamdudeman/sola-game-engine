@@ -7,7 +7,9 @@ import technology.sola.ecs.Component;
 public interface ComponentEditorModule<C extends Component> {
   Class<C> getComponentType();
 
-  String getTitle();
+  default String getTitle() {
+    return getComponentType().getSimpleName().replace("Component", "");
+  }
 
   C createNewInstance();
 

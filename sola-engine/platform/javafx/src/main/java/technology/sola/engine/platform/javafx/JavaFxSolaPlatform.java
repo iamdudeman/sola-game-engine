@@ -39,6 +39,7 @@ import technology.sola.engine.platform.javafx.assets.JavaFxJsonAssetLoader;
 import technology.sola.engine.platform.javafx.assets.graphics.JavaFxSolaImageAssetLoader;
 import technology.sola.engine.platform.javafx.core.JavaFxGameLoop;
 import technology.sola.engine.platform.javafx.core.JavaFxRenderer;
+import technology.sola.engine.platform.javafx.utils.ColorUtils;
 import technology.sola.engine.storage.FileSaveStorage;
 import technology.sola.logging.SolaLogger;
 
@@ -84,12 +85,7 @@ public class JavaFxSolaPlatform extends SolaPlatform {
     this.initialWindowWidth = platformConfig.initialWindowWidth();
     this.initialWindowHeight = platformConfig.initialWindowHeight();
 
-    backgroundColor = new Color(
-      platformConfig.backgroundColor().getRed() / 255d,
-      platformConfig.backgroundColor().getGreen() / 255d,
-      platformConfig.backgroundColor().getBlue() / 255d,
-      platformConfig.backgroundColor().getAlpha() / 255d
-    );
+    backgroundColor = ColorUtils.toJavaFxColor(platformConfig.backgroundColor());
   }
 
   @Override

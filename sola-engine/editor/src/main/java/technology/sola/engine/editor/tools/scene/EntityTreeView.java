@@ -13,13 +13,18 @@ import technology.sola.ecs.World;
 
 @NullMarked
 class EntityTreeView extends TreeView<EntityAssetTreeItem> {
+  private final EntityComponentsPanel entityComponentsPanel;
   private World currentWorld;
 
-  public EntityTreeView() {
+  public EntityTreeView(EntityComponentsPanel entityComponentsPanel) {
     super(new TreeItem<>(new EntityAssetTreeItem(new World(1).createEntity())));
+
+    this.entityComponentsPanel = entityComponentsPanel;
 
     setShowRoot(false);
     setEditable(false);
+
+    // todo disable/enable action!
 
     var deleteMenuItem = new MenuItem("Delete");
     var renameMenuItem = new MenuItem("Rename");
@@ -67,7 +72,7 @@ class EntityTreeView extends TreeView<EntityAssetTreeItem> {
   private void registerSelectAction() {
     getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue != null) {
-        // todo select entity and populate right side panel
+        entityComponentsPanel.selectEntity(newValue.getValue().entity());
       }
     });
   }

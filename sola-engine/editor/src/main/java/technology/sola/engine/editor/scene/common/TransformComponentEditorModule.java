@@ -15,11 +15,6 @@ public class TransformComponentEditorModule implements ComponentEditorModule<Tra
   }
 
   @Override
-  public String getTitle() {
-    return "Transform";
-  }
-
-  @Override
   public TransformComponent createNewInstance() {
     return new TransformComponent();
   }

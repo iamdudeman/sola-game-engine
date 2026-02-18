@@ -2,6 +2,7 @@
 
 * Scene asset editor
     * Comes with a default configuration for built-in components (JsonMappers and UI for scene editor)
+    * disable/enable action needed
     * UI Overview
         * Left pane is list of entities
         * Center is preview of entities
