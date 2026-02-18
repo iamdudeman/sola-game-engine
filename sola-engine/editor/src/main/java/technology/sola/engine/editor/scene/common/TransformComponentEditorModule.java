@@ -1,11 +1,13 @@
 package technology.sola.engine.editor.scene.common;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.editor.core.components.input.FloatField;
 import technology.sola.engine.editor.core.components.input.LabelWrapper;
 import technology.sola.engine.editor.scene.ComponentEditorModule;
 import technology.sola.engine.editor.scene.ComponentEditorPanel;
 
+@NullMarked
 public class TransformComponentEditorModule implements ComponentEditorModule<TransformComponent> {
   @Override
   public Class<TransformComponent> getComponentType() {

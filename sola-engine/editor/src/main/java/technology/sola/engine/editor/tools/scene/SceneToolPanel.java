@@ -2,12 +2,16 @@ package technology.sola.engine.editor.tools.scene;
 
 import javafx.application.Platform;
 import org.jspecify.annotations.NullMarked;
+import technology.sola.ecs.Entity;
+import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.engine.editor.scene.common.TransformComponentEditorModule;
 import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.json.JsonObject;
+
+import java.util.List;
 
 /**
  * SceneToolPanel is a {@link ToolPanel} for managing {@link technology.sola.engine.assets.scene.Scene} assets.
@@ -27,6 +31,16 @@ public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
     // todo should open last opened scene
     // todo how to switch to another scene?
 
+    var tempLeftPanel = new EntityTreeView();
+
+    World world = new World(2);
+
+    world.createEntity("Test");
+    world.createEntity();
+    world.update();
+
+    tempLeftPanel.populate(world);
+
     var tempRightPanel = new EditorPanel();
 
     tempRightPanel.getChildren().addAll(
@@ -34,7 +48,7 @@ public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
     );
 
     items.addAll(
-      new EditorPanel(), // todo entity panel
+      tempLeftPanel, // todo entity panel
       new EditorPanel(), // todo World rendering (should have a Play button or something like that)
       tempRightPanel  // todo entity info panel
     );

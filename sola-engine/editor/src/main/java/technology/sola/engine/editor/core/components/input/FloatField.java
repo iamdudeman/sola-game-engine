@@ -4,7 +4,9 @@ import javafx.beans.property.ObjectProperty;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.util.converter.FloatStringConverter;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public class FloatField extends TextField {
   private static final String FLOAT_REGEX = "-?\\d*\\.?\\d*";
   private final TextFormatter<Float> floatTextFormatter;
