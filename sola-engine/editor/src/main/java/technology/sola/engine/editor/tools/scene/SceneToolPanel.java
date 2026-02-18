@@ -2,8 +2,10 @@ package technology.sola.engine.editor.tools.scene;
 
 import javafx.application.Platform;
 import org.jspecify.annotations.NullMarked;
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
+import technology.sola.engine.editor.scene.common.TransformComponentEditorModule;
 import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.json.JsonObject;
 
@@ -25,10 +27,16 @@ public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
     // todo should open last opened scene
     // todo how to switch to another scene?
 
+    var tempRightPanel = new EditorPanel();
+
+    tempRightPanel.getChildren().addAll(
+      new TransformComponentEditorModule().buildUi(new TransformComponent())
+    );
+
     items.addAll(
       new EditorPanel(), // todo entity panel
       new EditorPanel(), // todo World rendering (should have a Play button or something like that)
-      new EditorPanel()  // todo entity info panel
+      tempRightPanel  // todo entity info panel
     );
 
     Platform.runLater(() -> {
