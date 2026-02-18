@@ -25,11 +25,15 @@ public class TransformComponentEditorModule implements ComponentEditorModule<Tra
   @Override
   public ComponentEditorPanel buildUi(TransformComponent component) {
     ComponentEditorPanel componentEditorPanel = new ComponentEditorPanel();
-    FloatField xFloatField = new FloatField();
-    FloatField yFloatField = new FloatField();
+    FloatField xFloatField = new FloatField(component.getX());
+    FloatField yFloatField = new FloatField(component.getY());
 
-    xFloatField.setFloatValue(component.getX());
-    yFloatField.setFloatValue(component.getY());
+    xFloatField.floatValueProperty().addListener(
+      (observable, oldValue, newValue) -> component.setX(newValue)
+    );
+    yFloatField.floatValueProperty().addListener(
+      (observable, oldValue, newValue) -> component.setY(newValue)
+    );
 
     componentEditorPanel.getChildren().addAll(
       LabelWrapper.vertical(xFloatField, "x"),

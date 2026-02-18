@@ -1,5 +1,6 @@
 package technology.sola.engine.editor.core.components.input;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.util.converter.FloatStringConverter;
@@ -9,9 +10,13 @@ public class FloatField extends TextField {
   private final TextFormatter<Float> floatTextFormatter;
 
   public FloatField() {
+    this(0f);
+  }
+
+  public FloatField(float initialValue) {
     super();
 
-    floatTextFormatter = new TextFormatter<>(new FloatStringConverter(), 0.0f, change -> {
+    floatTextFormatter = new TextFormatter<>(new FloatStringConverter(), initialValue, change -> {
       String newText = change.getControlNewText();
 
       if (newText.matches(FLOAT_REGEX)) {
@@ -32,5 +37,9 @@ public class FloatField extends TextField {
 
   public void setFloatValue(float value) {
     floatTextFormatter.setValue(value);
+  }
+
+  public ObjectProperty<Float> floatValueProperty() {
+    return floatTextFormatter.valueProperty();
   }
 }

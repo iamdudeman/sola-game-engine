@@ -30,7 +30,7 @@ public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
     var tempRightPanel = new EditorPanel();
 
     tempRightPanel.getChildren().addAll(
-      new TransformComponentEditorModule().buildUi(new TransformComponent())
+      new TransformComponentEditorModule().buildUi(new TransformComponent(5, 7))
     );
 
     items.addAll(
