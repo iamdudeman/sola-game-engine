@@ -9,4 +9,6 @@ module technology.sola.engine.editor {
   requires technology.sola.engine.tooling;
 
   exports technology.sola.engine.editor;
+  exports technology.sola.engine.editor.scene;
+  exports technology.sola.engine.editor.scene.common;
 }

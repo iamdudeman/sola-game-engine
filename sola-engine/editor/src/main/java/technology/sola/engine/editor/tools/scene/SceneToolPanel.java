@@ -2,17 +2,13 @@ package technology.sola.engine.editor.tools.scene;
 
 import javafx.application.Platform;
 import org.jspecify.annotations.NullMarked;
-import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.editor.SolaEditorCustomization;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
-import technology.sola.engine.editor.scene.common.CircleRendererComponentEditorModule;
-import technology.sola.engine.editor.scene.common.TransformComponentEditorModule;
 import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.json.JsonObject;
-
-import java.util.List;
 
 /**
  * SceneToolPanel is a {@link ToolPanel} for managing {@link technology.sola.engine.assets.scene.Scene} assets.
@@ -27,7 +23,7 @@ public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
    *
    * @param editorConfig the {@link EditorConfig} instance
    */
-  public SceneToolPanel(EditorConfig editorConfig) {
+  public SceneToolPanel(EditorConfig editorConfig, SolaEditorCustomization solaEditorCustomization) {
     super(editorConfig);
     var items = getItems();
 
@@ -44,10 +40,7 @@ public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
     world.update();
 
     // todo need to get component modules from config!
-    entityComponentsPanel = new EntityComponentsPanel(world, List.of(
-      new TransformComponentEditorModule(),
-      new CircleRendererComponentEditorModule()
-    ));
+    entityComponentsPanel = new EntityComponentsPanel(world, solaEditorCustomization.componentEditorModules());
 
     entityTreeView = new EntityTreeView(entityComponentsPanel);
 

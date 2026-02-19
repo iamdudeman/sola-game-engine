@@ -2,6 +2,7 @@ package technology.sola.engine.examples.editor;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.editor.SolaEditor;
+import technology.sola.engine.editor.SolaEditorCustomization;
 import technology.sola.engine.examples.common.games.EditorGame;
 import technology.sola.logging.JavaSolaLoggerFactory;
 import technology.sola.logging.SolaLogLevel;
@@ -22,7 +23,7 @@ public class EditorMain {
    * @param args command line args
    */
   public static void main(String[] args) {
-    SolaEditor solaEditor = new SolaEditor(EditorGame::new);
+    SolaEditor solaEditor = new SolaEditor(EditorGame::new, new SolaEditorCustomization.Builder().build());
 
     // todo supply configuration once implemented
     //  scene stuff will need way to add in component mappers and component ui

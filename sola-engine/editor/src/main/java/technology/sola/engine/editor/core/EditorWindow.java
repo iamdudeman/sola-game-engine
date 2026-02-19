@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
+import technology.sola.engine.editor.SolaEditorCustomization;
 import technology.sola.engine.editor.SolaEditorConstants;
 import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
@@ -50,6 +51,12 @@ public class EditorWindow {
   @Nullable
   private List<ToolPanel<?>> editorToolPanels;
 
+  private final SolaEditorCustomization solaEditorCustomization;
+
+  public EditorWindow(SolaEditorCustomization solaEditorCustomization) {
+    this.solaEditorCustomization = solaEditorCustomization;
+  }
+
   /**
    * Configures and shows the main editor window.
    */
@@ -61,7 +68,7 @@ public class EditorWindow {
         new AssetListToolPanel(editorConfig),
         new AudioToolPanel(editorConfig),
         new FontToolPanel(editorConfig),
-        new SceneToolPanel(editorConfig),
+        new SceneToolPanel(editorConfig, solaEditorCustomization),
         new SpriteSheetToolPanel(editorConfig)
       );
 

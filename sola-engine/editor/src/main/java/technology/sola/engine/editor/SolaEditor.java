@@ -12,20 +12,22 @@ import java.util.function.Supplier;
 @NullMarked
 public class SolaEditor {
   private final Supplier<Sola> solaSupplier;
+  private final SolaEditorCustomization solaEditorCustomization;
 
   /**
    * Creates a new SolaEditor instance for desired {@link Sola}.
    *
    * @param solaSupplier the method for creating the {@link Sola} instance
    */
-  public SolaEditor(Supplier<Sola> solaSupplier) {
+  public SolaEditor(Supplier<Sola> solaSupplier, SolaEditorCustomization solaEditorCustomization) {
     this.solaSupplier = solaSupplier;
+    this.solaEditorCustomization = solaEditorCustomization;
   }
 
   /**
    * Starts the editor.
    */
   public void run() {
-    new EditorWindow().show();
+    new EditorWindow(solaEditorCustomization).show();
   }
 }
