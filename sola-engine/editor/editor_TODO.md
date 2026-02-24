@@ -3,20 +3,24 @@
 * Scene asset editor
     * UI Overview
         * Left pane is list of entities
-            * ability to rename entity
+            * ~~ability to rename entity~~
             * current scene toolbar in left panel
                 * create scene
                 * load scene (should load previously opened scene first)
                 * add ability to switch scenes
-        * Center is placeholder for now
-        * Right is info about selected entity components, editable
+                * ability to save scene
+        * ~~Center is placeholder for now~~
+        * ~~Right is info about selected entity components, editable~~
     * Initial components
-        * TransformComponent
-        * CameraComponent
-        * CircleRendererComponent
+        * ~~TransformComponent~~
+        * ~~CameraComponent~~
+        * ~~CircleRendererComponent~~
     * Comes with a default configuration for built-in components
         * JsonMappers for components
         * ~~component editor modules for scene editor~~
+    * Tool config
+        * remember the last opened scene
+        * remember the last selected entity
 
 ## Known Bugs List
 

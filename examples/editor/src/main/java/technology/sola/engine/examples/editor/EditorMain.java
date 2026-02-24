@@ -23,10 +23,10 @@ public class EditorMain {
    * @param args command line args
    */
   public static void main(String[] args) {
-    SolaEditor solaEditor = new SolaEditor(EditorGame::new, new SolaEditorCustomization.Builder().build());
+    SolaEditorCustomization customization = new SolaEditorCustomization.Builder()
+      .build();
+    SolaEditor solaEditor = new SolaEditor(EditorGame::new, customization);
 
-    // todo supply configuration once implemented
-    //  scene stuff will need way to add in component mappers and component ui
     solaEditor.run();
   }
 }

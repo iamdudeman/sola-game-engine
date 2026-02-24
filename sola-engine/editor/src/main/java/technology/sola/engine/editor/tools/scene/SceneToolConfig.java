@@ -14,6 +14,8 @@ import technology.sola.json.mapper.JsonMapper;
 public record SceneToolConfig(
   double leftDivider,
   double rightDivider
+  // todo last scene opened
+  // todo nullable last entity selected
 ) {
   /**
    * Creates an SceneToolConfig with default values (no previously opened files).

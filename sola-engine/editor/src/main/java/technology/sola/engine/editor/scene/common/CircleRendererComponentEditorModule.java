@@ -10,6 +10,9 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.platform.javafx.utils.ColorUtils;
 
+/**
+ * CircleRendererComponentEditorModule is a {@link ComponentEditorModule} for {@link CircleRendererComponent}.
+ */
 @NullMarked
 public class CircleRendererComponentEditorModule implements ComponentEditorModule<CircleRendererComponent> {
   @Override

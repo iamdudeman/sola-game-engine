@@ -7,6 +7,9 @@ import technology.sola.engine.editor.scene.ComponentEditorModule;
 import technology.sola.engine.editor.scene.ComponentEditorPanel;
 import technology.sola.engine.graphics.components.CameraComponent;
 
+/**
+ * CameraComponentEditorModule is a {@link ComponentEditorModule} for {@link CameraComponent}.
+ */
 @NullMarked
 public class CameraComponentEditorModule implements ComponentEditorModule<CameraComponent> {
   @Override
@@ -22,7 +25,7 @@ public class CameraComponentEditorModule implements ComponentEditorModule<Camera
   @Override
   public ComponentEditorPanel buildUi(CameraComponent component) {
     ComponentEditorPanel componentEditorPanel = new ComponentEditorPanel();
-    IntegerSpinner prioritySpinner = new IntegerSpinner(0, 100);
+    IntegerSpinner prioritySpinner = new IntegerSpinner(-100, 100);
 
     prioritySpinner.setValue(component.getPriority());
 

@@ -27,7 +27,7 @@ public class IntegerSpinner extends Spinner<Integer> {
     getEditor().setTextFormatter(new TextFormatter<>(
       new IntegerStringConverter(),
       min,
-      c -> Pattern.matches("\\d*", c.getText()) ? c : null)
+      change -> change.getControlNewText().matches("-?\\d+") ? change : null)
     );
   }
 

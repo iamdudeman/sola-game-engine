@@ -7,6 +7,9 @@ import technology.sola.engine.editor.core.components.input.LabelWrapper;
 import technology.sola.engine.editor.scene.ComponentEditorModule;
 import technology.sola.engine.editor.scene.ComponentEditorPanel;
 
+/**
+ * TransformComponentEditorModule is a {@link ComponentEditorModule} for {@link TransformComponent}.
+ */
 @NullMarked
 public class TransformComponentEditorModule implements ComponentEditorModule<TransformComponent> {
   @Override

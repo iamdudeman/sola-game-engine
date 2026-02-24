@@ -53,6 +53,11 @@ public class EditorWindow {
 
   private final SolaEditorCustomization solaEditorCustomization;
 
+  /**
+   * Creates an instance of EditorWindow.
+   *
+   * @param solaEditorCustomization the customization for the editor
+   */
   public EditorWindow(SolaEditorCustomization solaEditorCustomization) {
     this.solaEditorCustomization = solaEditorCustomization;
   }

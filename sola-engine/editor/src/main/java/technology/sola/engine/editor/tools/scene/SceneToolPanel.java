@@ -5,7 +5,6 @@ import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.editor.SolaEditorCustomization;
-import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.json.JsonObject;
@@ -39,16 +38,17 @@ public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
     world.createEntity();
     world.update();
 
-    // todo need to get component modules from config!
     entityComponentsPanel = new EntityComponentsPanel(world, solaEditorCustomization.componentEditorModules());
+    entityComponentsPanel.setMinWidth(150);
 
     entityTreeView = new EntityTreeView(entityComponentsPanel);
+    entityTreeView.setMinWidth(150);
 
     entityTreeView.populate(world);
 
     items.addAll(
       entityTreeView,
-      new EditorPanel(), // todo World rendering (should have a Play button or something like that)
+      new WorldPreviewPanel(),
       entityComponentsPanel
     );
 
