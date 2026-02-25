@@ -8,21 +8,23 @@ import technology.sola.json.mapper.JsonMapper;
 /**
  * SceneToolConfig contains the configuration for the scene tool.
  *
- * @param leftDivider  the position of the left divider in the window
- * @param rightDivider the position of the right divider in the window
+ * @param leftDivider                the position of the left divider in the window
+ * @param rightDivider               the position of the right divider in the window
+ * @param lastOpenedScene            the last opened scene file
+ * @param lastSelectedEntityUniqueId the last selected entity
  */
 @NullMarked
 public record SceneToolConfig(
   double leftDivider,
   double rightDivider,
-  @Nullable String lastOpenedScene
-  // todo nullable last entity selected
+  @Nullable String lastOpenedScene,
+  @Nullable String lastSelectedEntityUniqueId
 ) {
   /**
    * Creates an SceneToolConfig with default values (no previously opened files).
    */
   public SceneToolConfig() {
-    this(0.2, 0.8, null);
+    this(0.2, 0.8, null, null);
   }
 
   static class ConfigJsonMapper implements JsonMapper<SceneToolConfig> {
@@ -38,6 +40,7 @@ public record SceneToolConfig(
       json.put("leftDivider", config.leftDivider());
       json.put("rightDivider", config.rightDivider());
       json.put("lastOpenedScene", config.lastOpenedScene());
+      json.put("lastSelectedEntityUniqueId", config.lastSelectedEntityUniqueId());
 
       return json;
     }
@@ -47,7 +50,8 @@ public record SceneToolConfig(
       return new SceneToolConfig(
         jsonObject.getDouble("leftDivider", 0.2),
         jsonObject.getDouble("rightDivider", 0.8),
-        jsonObject.getStringOrNull("lastOpenedScene")
+        jsonObject.getStringOrNull("lastOpenedScene"),
+        jsonObject.getStringOrNull("lastSelectedEntityUniqueId")
       );
     }
   }

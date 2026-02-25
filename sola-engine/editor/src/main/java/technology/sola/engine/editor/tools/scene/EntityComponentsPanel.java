@@ -31,6 +31,11 @@ class EntityComponentsPanel extends EditorPanel {
     this.modules = modules;
   }
 
+  @Nullable
+  Entity getCurrentEntity() {
+    return currentEntity;
+  }
+
   void updateWorld(World world) {
     this.world = world;
   }

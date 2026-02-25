@@ -16,7 +16,7 @@ class EntityTreeView extends TreeView<EntityAssetTreeItem> {
   private final EntityComponentsPanel entityComponentsPanel;
   private World currentWorld;
 
-  public EntityTreeView(EntityComponentsPanel entityComponentsPanel) {
+  EntityTreeView(EntityComponentsPanel entityComponentsPanel) {
     super(new TreeItem<>(new EntityAssetTreeItem(new World(1).createEntity())));
 
     this.entityComponentsPanel = entityComponentsPanel;
@@ -58,7 +58,16 @@ class EntityTreeView extends TreeView<EntityAssetTreeItem> {
     ));
   }
 
-  public void populate(World world) {
+  void selectEntity(Entity entity) {
+    for (var child : getRoot().getChildren()) {
+      if (child.getValue().entity().getUniqueId().equals(entity.getUniqueId())) {
+        getSelectionModel().select(child);
+        return;
+      }
+    }
+  }
+
+  void populate(World world) {
     currentWorld = world;
 
     getRoot().getChildren().clear();

@@ -1,5 +1,6 @@
 package technology.sola.engine.editor.tools.scene;
 
+import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -35,17 +36,18 @@ class SceneActions extends EditorPanel {
 
   SceneActions(
     @Nullable String activeSceneFile,
+    @Nullable String activeSelectedEntityUniqueId,
     SolaEditorCustomization customization,
     EntityTreeView entityTreeView,
     EntityComponentsPanel entityComponentsPanel
   ) {
     sceneJsonMapper = new SceneJsonMapper();
     sceneJsonMapper.configure(customization.componentJsonMappers());
-
-    this.activeSceneFile = activeSceneFile;
-    this.activeScene = activeSceneFile == null ? null : loadScene(activeSceneFile);
     this.entityTreeView = entityTreeView;
     this.entityComponentsPanel = entityComponentsPanel;
+
+    this.activeSceneFile = activeSceneFile;
+    this.activeScene = activeSceneFile == null ? null : loadInitialScene(activeSceneFile, activeSelectedEntityUniqueId);
 
     HBox hBox = new HBox();
 
@@ -169,13 +171,26 @@ class SceneActions extends EditorPanel {
     return newSceneButton;
   }
 
-  private Scene loadScene(String sceneFilePath) {
+  @Nullable
+  private Scene loadInitialScene(String sceneFilePath, @Nullable String selectedEntityUniqueId) {
     try {
       var jsonString = Files.readString(Path.of(sceneFilePath));
+      var scene = sceneJsonMapper.toObject(new SolaJson().parse(jsonString).asObject());
 
-      return sceneJsonMapper.toObject(new SolaJson().parse(jsonString).asObject());
+      if (selectedEntityUniqueId != null) {
+        var entity = scene.world().findEntityByUniqueId(selectedEntityUniqueId);
+
+        if (entity != null) {
+          Platform.runLater(() -> {
+            entityTreeView.selectEntity(entity);
+          });
+        }
+      }
+
+      return scene;
     } catch (IOException ex) {
       ToastService.error(ex.getMessage());
+      LOGGER.error("Error loading initial scene.", ex);
       return null; // todo
     }
   }

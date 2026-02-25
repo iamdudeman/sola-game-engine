@@ -13,13 +13,13 @@ import technology.sola.json.JsonObject;
 @NullMarked
 public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
   private final EntityComponentsPanel entityComponentsPanel;
-  private final EntityTreeView entityTreeView;
   private final SceneActions sceneActions;
 
   /**
    * Creates an instance of SceneToolPanel initialized via the {@link EditorConfig}.
    *
-   * @param editorConfig the {@link EditorConfig} instance
+   * @param editorConfig            the {@link EditorConfig} instance
+   * @param solaEditorCustomization the {@link SolaEditorCustomization} instance
    */
   public SceneToolPanel(EditorConfig editorConfig, SolaEditorCustomization solaEditorCustomization) {
     super(editorConfig);
@@ -28,10 +28,16 @@ public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
     entityComponentsPanel = new EntityComponentsPanel(solaEditorCustomization.componentEditorModules());
     entityComponentsPanel.setMinWidth(150);
 
-    entityTreeView = new EntityTreeView(entityComponentsPanel);
+    EntityTreeView entityTreeView = new EntityTreeView(entityComponentsPanel);
     entityTreeView.setMinWidth(150);
 
-    sceneActions = new SceneActions(toolConfig.lastOpenedScene(), solaEditorCustomization, entityTreeView, entityComponentsPanel);
+    sceneActions = new SceneActions(
+      toolConfig.lastOpenedScene(),
+      toolConfig.lastSelectedEntityUniqueId(),
+      solaEditorCustomization,
+      entityTreeView,
+      entityComponentsPanel
+    );
 
     items.addAll(
       sceneActions,
@@ -59,7 +65,8 @@ public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
     var config = new SceneToolConfig(
       getDividers().get(0).getPosition(),
       getDividers().get(1).getPosition(),
-      sceneActions.getActiveSceneFile()
+      sceneActions.getActiveSceneFile(),
+      entityComponentsPanel.getCurrentEntity() == null ? null : entityComponentsPanel.getCurrentEntity().getUniqueId()
     );
 
     return new SceneToolConfig.ConfigJsonMapper().toJson(config);
