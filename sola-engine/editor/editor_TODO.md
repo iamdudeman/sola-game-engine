@@ -35,15 +35,12 @@
             * SpriteAnimatorComponent
             * TransformAnimatorComponent
             * BlendModeComponent
-            * ~~CircleRendererComponent~~
             * ConvexPolygonRendererComponent
             * LayerComponent
             * LightComponent
             * RectRendererComponent
             * SpriteComponent
             * TriangleRendererComponent
-        * ~~TransformComponent~~
-        * ~~CameraComponent~~
     * UI for creating and previewing ParticleEmitterComponent configurations
         * (might be better to start working on the Scene composition instead since this nests in it)
         * serialize the component and its parts to JSON

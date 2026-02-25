@@ -7,6 +7,7 @@ import javafx.scene.layout.Priority;
 import javafx.stage.FileChooser;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
+import technology.sola.ecs.Component;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.scene.Scene;
 import technology.sola.engine.assets.scene.SceneJsonMapper;
@@ -14,12 +15,15 @@ import technology.sola.engine.editor.SolaEditorCustomization;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.utils.ToastService;
 import technology.sola.json.SolaJson;
+import technology.sola.json.mapper.JsonMapper;
 import technology.sola.logging.SolaLogger;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 @NullMarked
 class SceneActions extends EditorPanel {
@@ -41,11 +45,9 @@ class SceneActions extends EditorPanel {
     EntityTreeView entityTreeView,
     EntityComponentsPanel entityComponentsPanel
   ) {
-    sceneJsonMapper = new SceneJsonMapper();
-    sceneJsonMapper.configure(customization.componentJsonMappers());
+    this.sceneJsonMapper = configureSceneJsonMapper(customization);
     this.entityTreeView = entityTreeView;
     this.entityComponentsPanel = entityComponentsPanel;
-
     this.activeSceneFile = activeSceneFile;
     this.activeScene = activeSceneFile == null ? null : loadInitialScene(activeSceneFile, activeSelectedEntityUniqueId);
 
@@ -203,5 +205,18 @@ class SceneActions extends EditorPanel {
     entityComponentsPanel.selectEntity(null);
 
     saveButton.setDisable(false);
+  }
+
+  private SceneJsonMapper configureSceneJsonMapper(SolaEditorCustomization customization) {
+    List<JsonMapper<? extends Component>> componentJsonMappers = new ArrayList<>();
+
+    customization.componentEditorModules()
+      .forEach(module -> componentJsonMappers.add(module.getJsonMapper()));
+
+    SceneJsonMapper sceneJsonMapper = new SceneJsonMapper();
+
+    sceneJsonMapper.configure(componentJsonMappers);
+
+    return sceneJsonMapper;
   }
 }

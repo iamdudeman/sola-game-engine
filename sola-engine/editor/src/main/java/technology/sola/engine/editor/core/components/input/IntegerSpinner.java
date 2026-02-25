@@ -6,8 +6,6 @@ import javafx.scene.control.TextFormatter;
 import javafx.util.converter.IntegerStringConverter;
 import org.jspecify.annotations.NullMarked;
 
-import java.util.regex.Pattern;
-
 /**
  * IntegerSpinner is a {@link Spinner} that is set for integers only.
  */

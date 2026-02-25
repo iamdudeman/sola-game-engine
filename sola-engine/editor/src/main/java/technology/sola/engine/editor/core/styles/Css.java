@@ -33,6 +33,27 @@ public class Css {
     public static final String PADDING_5X = "padding-5x";
 
     /**
+     * Class for 1x spacing.
+     */
+    public static final String SPACING_1X = "spacing-1x";
+    /**
+     * Class for 2x spacing.
+     */
+    public static final String SPACING_2X = "spacing-2x";
+    /**
+     * Class for 3x spacing.
+     */
+    public static final String SPACING_3X = "spacing-3x";
+    /**
+     * Class for 4x spacing.
+     */
+    public static final String SPACING_4X = "spacing-4x";
+    /**
+     * Class for 5x spacing.
+     */
+    public static final String SPACING_5X = "spacing-5x";
+
+    /**
      * Class for paragraph text styling.
      */
     public static final String TEXT_PARAGRAPH = "text-paragraph";

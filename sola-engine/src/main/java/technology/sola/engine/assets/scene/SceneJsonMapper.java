@@ -2,11 +2,14 @@ package technology.sola.engine.assets.scene;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
-import technology.sola.ecs.io.json.JsonWorldIo;
 import technology.sola.ecs.io.json.WorldJsonMapper;
+import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.graphics.components.CameraComponent;
+import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.json.JsonObject;
 import technology.sola.json.mapper.JsonMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,14 +17,27 @@ import java.util.List;
  */
 @NullMarked
 public class SceneJsonMapper implements JsonMapper<Scene> {
-  private WorldJsonMapper worldJsonMapper = new WorldJsonMapper(List.of());
+  private WorldJsonMapper worldJsonMapper;
 
   /**
-   * Configures the {@link SceneJsonMapper} with the desired {@link Component} {@link JsonMapper}s.
-   *
-   * @param jsonMappers the component JSON mappers
+   * Creates an instance of this {@link JsonMapper} with default {@link Component} {@link JsonMapper}s configured.
    */
-  public void configure(List<JsonMapper<? extends Component>> jsonMappers) {
+  public SceneJsonMapper() {
+    worldJsonMapper = new WorldJsonMapper(getDefaultJsonMappers());
+  }
+
+  /**
+   * Configures the {@link SceneJsonMapper} with the desired {@link Component} {@link JsonMapper}s. The default
+   * component JsonMappers are included automatically.
+   *
+   * @param additionalJsonMappers the component JSON mappers to add
+   */
+  public void configure(List<JsonMapper<? extends Component>> additionalJsonMappers) {
+    List<JsonMapper<? extends Component>> jsonMappers = new ArrayList<>();
+
+    jsonMappers.addAll(getDefaultJsonMappers());
+    jsonMappers.addAll(additionalJsonMappers);
+
     worldJsonMapper = new WorldJsonMapper(jsonMappers);
   }
 
@@ -44,5 +60,13 @@ public class SceneJsonMapper implements JsonMapper<Scene> {
     var world = jsonObject.getObject("world");
 
     return new Scene(worldJsonMapper.toObject(world));
+  }
+
+  private List<JsonMapper<? extends Component>> getDefaultJsonMappers() {
+    return List.of(
+      new TransformComponent.Mapper(),
+      new CameraComponent.Mapper(),
+      new CircleRendererComponent.Mapper()
+    );
   }
 }

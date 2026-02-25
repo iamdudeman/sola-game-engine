@@ -14,6 +14,22 @@
   -fx-padding: 10;
 }
 
+.spacing-1x {
+  -fx-spacing: 2;
+}
+.spacing-2x {
+  -fx-spacing: 4;
+}
+.spacing-3x {
+  -fx-spacing: 6;
+}
+.spacing-4x {
+  -fx-spacing: 8;
+}
+.spacing-5x {
+  -fx-spacing: 10;
+}
+
 .text-paragraph {
   -fx-font-size: 12;
 }

@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.scene.common;
+package technology.sola.engine.editor.scene.modules;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.editor.core.components.input.IntegerSpinner;
@@ -6,6 +6,7 @@ import technology.sola.engine.editor.core.components.input.LabelWrapper;
 import technology.sola.engine.editor.scene.ComponentEditorModule;
 import technology.sola.engine.editor.scene.ComponentEditorPanel;
 import technology.sola.engine.graphics.components.CameraComponent;
+import technology.sola.json.mapper.JsonMapper;
 
 /**
  * CameraComponentEditorModule is a {@link ComponentEditorModule} for {@link CameraComponent}.
@@ -15,6 +16,11 @@ public class CameraComponentEditorModule implements ComponentEditorModule<Camera
   @Override
   public Class<CameraComponent> getComponentType() {
     return CameraComponent.class;
+  }
+
+  @Override
+  public JsonMapper<CameraComponent> getJsonMapper() {
+    return new CameraComponent.Mapper();
   }
 
   @Override

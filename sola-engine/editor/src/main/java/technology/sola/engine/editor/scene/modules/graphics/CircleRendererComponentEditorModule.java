@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.scene.common;
+package technology.sola.engine.editor.scene.modules.graphics;
 
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
@@ -9,6 +9,7 @@ import technology.sola.engine.editor.scene.ComponentEditorPanel;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.platform.javafx.utils.ColorUtils;
+import technology.sola.json.mapper.JsonMapper;
 
 /**
  * CircleRendererComponentEditorModule is a {@link ComponentEditorModule} for {@link CircleRendererComponent}.
@@ -18,6 +19,11 @@ public class CircleRendererComponentEditorModule implements ComponentEditorModul
   @Override
   public Class<CircleRendererComponent> getComponentType() {
     return CircleRendererComponent.class;
+  }
+
+  @Override
+  public JsonMapper<CircleRendererComponent> getJsonMapper() {
+    return new CircleRendererComponent.Mapper();
   }
 
   @Override

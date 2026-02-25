@@ -1,4 +1,4 @@
-package technology.sola.engine.editor.scene.common;
+package technology.sola.engine.editor.scene.modules;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.core.component.TransformComponent;
@@ -6,6 +6,7 @@ import technology.sola.engine.editor.core.components.input.FloatField;
 import technology.sola.engine.editor.core.components.input.LabelWrapper;
 import technology.sola.engine.editor.scene.ComponentEditorModule;
 import technology.sola.engine.editor.scene.ComponentEditorPanel;
+import technology.sola.json.mapper.JsonMapper;
 
 /**
  * TransformComponentEditorModule is a {@link ComponentEditorModule} for {@link TransformComponent}.
@@ -15,6 +16,11 @@ public class TransformComponentEditorModule implements ComponentEditorModule<Tra
   @Override
   public Class<TransformComponent> getComponentType() {
     return TransformComponent.class;
+  }
+
+  @Override
+  public JsonMapper<TransformComponent> getJsonMapper() {
+    return new TransformComponent.Mapper();
   }
 
   @Override

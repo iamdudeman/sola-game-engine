@@ -17,7 +17,8 @@ public class SolaEditor {
   /**
    * Creates a new SolaEditor instance for desired {@link Sola}.
    *
-   * @param solaSupplier the method for creating the {@link Sola} instance
+   * @param solaSupplier            the method for creating the {@link Sola} instance
+   * @param solaEditorCustomization the customization for the editor
    */
   public SolaEditor(Supplier<Sola> solaSupplier, SolaEditorCustomization solaEditorCustomization) {
     this.solaSupplier = solaSupplier;

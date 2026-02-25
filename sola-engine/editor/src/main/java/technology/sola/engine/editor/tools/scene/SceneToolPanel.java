@@ -45,9 +45,7 @@ public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
       entityComponentsPanel
     );
 
-    Platform.runLater(() -> {
-      setDividerPositions(toolConfig.leftDivider(), toolConfig.rightDivider());
-    });
+    Platform.runLater(() -> setDividerPositions(toolConfig.leftDivider(), toolConfig.rightDivider()));
   }
 
   @Override

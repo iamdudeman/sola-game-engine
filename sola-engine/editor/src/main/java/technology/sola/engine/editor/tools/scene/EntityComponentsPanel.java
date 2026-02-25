@@ -23,8 +23,9 @@ class EntityComponentsPanel extends EditorPanel {
   @Nullable
   private World world;
   private final List<ComponentEditorModule<?>> modules;
+  @Nullable
   private Entity currentEntity;
-  private ObservableList<ComponentEditorModule<?>> availableComponents;
+  private ObservableList<ComponentEditorModule<?>> availableComponents = FXCollections.observableArrayList();
 
   EntityComponentsPanel(List<ComponentEditorModule<?>> modules) {
     super();
@@ -53,12 +54,16 @@ class EntityComponentsPanel extends EditorPanel {
       createComponentPicker(modules, entity)
     );
 
-    for (ComponentEditorModule module : modules) {
-      var component = entity.getComponent(module.getComponentType());
+    for (ComponentEditorModule<?> module : modules) {
+      addEntityComponentUiIfPresent(module, entity);
+    }
+  }
 
-      if (component != null) {
-        addComponentUi(module, component);
-      }
+  private <T extends Component> void addEntityComponentUiIfPresent(ComponentEditorModule<T> module, Entity entity) {
+    T component = entity.getComponent(module.getComponentType());
+
+    if (component != null) {
+      addComponentUi(module, component);
     }
   }
 
@@ -72,7 +77,7 @@ class EntityComponentsPanel extends EditorPanel {
 
     comboBox.setPromptText("Add component:");
 
-    comboBox.setButtonCell(new ListCell<ComponentEditorModule<?>>() {
+    comboBox.setButtonCell(new ListCell<>() {
       @Override
       protected void updateItem(ComponentEditorModule<?> item, boolean empty) {
         super.updateItem(item, empty);
@@ -89,10 +94,7 @@ class EntityComponentsPanel extends EditorPanel {
       var currentValue = comboBox.getValue();
 
       if (currentValue != null) {
-        Component component = currentValue.createNewInstance();
-        entity.addComponent(component);
-        addComponentUi((ComponentEditorModule) currentValue, component);
-        world.update();
+        initializeModuleForEntity(currentValue, entity);
 
         Platform.runLater(() -> {
           comboBox.setValue(null);
@@ -115,6 +117,14 @@ class EntityComponentsPanel extends EditorPanel {
     });
 
     return comboBox;
+  }
+
+  private <T extends Component> void initializeModuleForEntity(ComponentEditorModule<T> module, Entity entity) {
+    var component = module.createNewInstance();
+
+    entity.addComponent(component);
+    this.addComponentUi(module, component);
+    world.update();
   }
 
   private <T extends Component> void addComponentUi(ComponentEditorModule<T> module, T component) {

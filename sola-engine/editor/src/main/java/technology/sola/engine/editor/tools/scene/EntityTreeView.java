@@ -8,12 +8,14 @@ import javafx.scene.control.cell.TextFieldTreeCell;
 import javafx.scene.input.MouseButton;
 import javafx.util.StringConverter;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 
 @NullMarked
 class EntityTreeView extends TreeView<EntityAssetTreeItem> {
   private final EntityComponentsPanel entityComponentsPanel;
+  @Nullable
   private World currentWorld;
 
   EntityTreeView(EntityComponentsPanel entityComponentsPanel) {
@@ -133,8 +135,6 @@ class EntityTreeView extends TreeView<EntityAssetTreeItem> {
 
   private void registerNewMenuAction(MenuItem menuItem) {
     menuItem.setOnAction(event -> {
-      var selectedItem = getSelectionModel().getSelectedItem();
-
       Entity entity = currentWorld.createEntity();
 
       currentWorld.update();
