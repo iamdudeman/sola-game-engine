@@ -47,7 +47,7 @@ public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
     entityTreeView.populate(world);
 
     items.addAll(
-      entityTreeView,
+      new SceneActions(entityTreeView),
       new WorldPreviewPanel(),
       entityComponentsPanel
     );
