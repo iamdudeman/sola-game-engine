@@ -24,6 +24,8 @@ public class SceneAssetLoader extends AssetLoader<Scene> {
    */
   public SceneAssetLoader(AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader) {
     this.jsonElementAssetAssetLoader = jsonElementAssetAssetLoader;
+
+    configure(SceneAssetLoaderConfigurator.getDefaultJsonMappers());
   }
 
   /**
