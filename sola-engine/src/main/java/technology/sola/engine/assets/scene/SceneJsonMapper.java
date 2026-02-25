@@ -3,6 +3,7 @@ package technology.sola.engine.assets.scene;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
 import technology.sola.ecs.io.json.JsonWorldIo;
+import technology.sola.ecs.io.json.WorldJsonMapper;
 import technology.sola.json.JsonObject;
 import technology.sola.json.mapper.JsonMapper;
 
@@ -13,7 +14,7 @@ import java.util.List;
  */
 @NullMarked
 public class SceneJsonMapper implements JsonMapper<Scene> {
-  private JsonWorldIo jsonWorldIo = new JsonWorldIo(List.of());
+  private WorldJsonMapper worldJsonMapper = new WorldJsonMapper(List.of());
 
   /**
    * Configures the {@link SceneJsonMapper} with the desired {@link Component} {@link JsonMapper}s.
@@ -21,7 +22,7 @@ public class SceneJsonMapper implements JsonMapper<Scene> {
    * @param jsonMappers the component JSON mappers
    */
   public void configure(List<JsonMapper<? extends Component>> jsonMappers) {
-    jsonWorldIo = new JsonWorldIo(jsonMappers);
+    worldJsonMapper = new WorldJsonMapper(jsonMappers);
   }
 
   @Override
@@ -33,7 +34,7 @@ public class SceneJsonMapper implements JsonMapper<Scene> {
   public JsonObject toJson(Scene object) {
     JsonObject jsonObject = new JsonObject();
 
-    jsonObject.put("world", jsonWorldIo.stringify(object.world()));
+    jsonObject.put("world", worldJsonMapper.toJson(object.world()));
 
     return jsonObject;
   }
@@ -42,6 +43,6 @@ public class SceneJsonMapper implements JsonMapper<Scene> {
   public Scene toObject(JsonObject jsonObject) {
     var world = jsonObject.getObject("world");
 
-    return new Scene(jsonWorldIo.parse(world.toString()));
+    return new Scene(worldJsonMapper.toObject(world));
   }
 }

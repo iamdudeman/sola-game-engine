@@ -1,5 +1,6 @@
 package technology.sola.engine.editor;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
 import technology.sola.engine.assets.scene.SceneAssetLoaderConfigurator;
 import technology.sola.engine.editor.scene.ComponentEditorModule;
@@ -12,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@NullMarked
 public record SolaEditorCustomization(
   List<ComponentEditorModule<?>> componentEditorModules,
   List<JsonMapper<? extends Component>> componentJsonMappers

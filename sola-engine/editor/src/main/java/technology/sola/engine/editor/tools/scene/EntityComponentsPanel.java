@@ -20,15 +20,19 @@ import java.util.List;
 
 @NullMarked
 class EntityComponentsPanel extends EditorPanel {
-  private final World world;
+  @Nullable
+  private World world;
   private final List<ComponentEditorModule<?>> modules;
   private Entity currentEntity;
   private ObservableList<ComponentEditorModule<?>> availableComponents;
 
-  EntityComponentsPanel(World world, List<ComponentEditorModule<?>> modules) {
+  EntityComponentsPanel(List<ComponentEditorModule<?>> modules) {
     super();
-    this.world = world;
     this.modules = modules;
+  }
+
+  void updateWorld(World world) {
+    this.world = world;
   }
 
   void selectEntity(@Nullable Entity entity) {

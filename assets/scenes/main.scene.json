@@ -1,1 +1,6 @@
-{"world":"{\"maxEntityCount\":10,\"entities\":[]}"}
+{
+  "world": {
+    "maxEntityCount": 10,
+    "entities": []
+  }
+}

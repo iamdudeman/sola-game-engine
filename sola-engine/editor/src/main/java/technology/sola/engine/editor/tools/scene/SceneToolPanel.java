@@ -2,8 +2,6 @@ package technology.sola.engine.editor.tools.scene;
 
 import javafx.application.Platform;
 import org.jspecify.annotations.NullMarked;
-import technology.sola.ecs.World;
-import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.editor.SolaEditorCustomization;
 import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.engine.editor.tools.ToolPanel;
@@ -16,6 +14,7 @@ import technology.sola.json.JsonObject;
 public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
   private final EntityComponentsPanel entityComponentsPanel;
   private final EntityTreeView entityTreeView;
+  private final SceneActions sceneActions;
 
   /**
    * Creates an instance of SceneToolPanel initialized via the {@link EditorConfig}.
@@ -26,28 +25,16 @@ public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
     super(editorConfig);
     var items = getItems();
 
-    // todo need to figure out how to create a new scene
-    // todo should open last opened scene
-    // todo how to switch to another scene?
-
-
-    // todo need to load the World from the scene
-    World world = new World(2);
-
-    world.createEntity("Test").addComponent(new TransformComponent(3, 4));
-    world.createEntity();
-    world.update();
-
-    entityComponentsPanel = new EntityComponentsPanel(world, solaEditorCustomization.componentEditorModules());
+    entityComponentsPanel = new EntityComponentsPanel(solaEditorCustomization.componentEditorModules());
     entityComponentsPanel.setMinWidth(150);
 
     entityTreeView = new EntityTreeView(entityComponentsPanel);
     entityTreeView.setMinWidth(150);
 
-    entityTreeView.populate(world);
+    sceneActions = new SceneActions(toolConfig.lastOpenedScene(), solaEditorCustomization, entityTreeView, entityComponentsPanel);
 
     items.addAll(
-      new SceneActions(solaEditorCustomization, entityTreeView, entityComponentsPanel),
+      sceneActions,
       new WorldPreviewPanel(),
       entityComponentsPanel
     );
@@ -71,7 +58,8 @@ public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
   public JsonObject buildToolConfigForSaving() {
     var config = new SceneToolConfig(
       getDividers().get(0).getPosition(),
-      getDividers().get(1).getPosition()
+      getDividers().get(1).getPosition(),
+      sceneActions.getActiveSceneFile()
     );
 
     return new SceneToolConfig.ConfigJsonMapper().toJson(config);

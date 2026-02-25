@@ -1,5 +1,6 @@
 package technology.sola.engine.assets.scene;
 
+import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
 import technology.sola.engine.assets.AssetLoaderProvider;
 import technology.sola.engine.core.component.TransformComponent;
@@ -9,6 +10,7 @@ import technology.sola.json.mapper.JsonMapper;
 
 import java.util.List;
 
+@NullMarked
 public class SceneAssetLoaderConfigurator {
   public static void configure(AssetLoaderProvider assetLoaderProvider) {
     configure(assetLoaderProvider, getDefaultJsonMappers());

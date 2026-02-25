@@ -1,6 +1,7 @@
 package technology.sola.engine.editor.tools.scene;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.json.JsonObject;
 import technology.sola.json.mapper.JsonMapper;
 
@@ -13,15 +14,15 @@ import technology.sola.json.mapper.JsonMapper;
 @NullMarked
 public record SceneToolConfig(
   double leftDivider,
-  double rightDivider
-  // todo last scene opened
+  double rightDivider,
+  @Nullable String lastOpenedScene
   // todo nullable last entity selected
 ) {
   /**
    * Creates an SceneToolConfig with default values (no previously opened files).
    */
   public SceneToolConfig() {
-    this(0.2, 0.8);
+    this(0.2, 0.8, null);
   }
 
   static class ConfigJsonMapper implements JsonMapper<SceneToolConfig> {
@@ -36,6 +37,7 @@ public record SceneToolConfig(
 
       json.put("leftDivider", config.leftDivider());
       json.put("rightDivider", config.rightDivider());
+      json.put("lastOpenedScene", config.lastOpenedScene());
 
       return json;
     }
@@ -44,7 +46,8 @@ public record SceneToolConfig(
     public SceneToolConfig toObject(JsonObject jsonObject) {
       return new SceneToolConfig(
         jsonObject.getDouble("leftDivider", 0.2),
-        jsonObject.getDouble("rightDivider", 0.8)
+        jsonObject.getDouble("rightDivider", 0.8),
+        jsonObject.getStringOrNull("lastOpenedScene")
       );
     }
   }
