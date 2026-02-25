@@ -1,6 +1,1 @@
-{
-  "world": {
-    "maxEntityCount": 10,
-    "entities": []
-  }
-}
+{"world":{"maxEntityCount":10,"entities":[{"uniqueId":"f894a9450","name":"test","components":[{"x":32.0,"y":2.0,"scaleX":1.0,"scaleY":1.0,"_class":"technology.sola.engine.core.component.TransformComponent"},{"color":-1,"filled":true,"_class":"technology.sola.engine.graphics.components.CircleRendererComponent"}]},{"uniqueId":"f894a9451","name":null,"components":[{"priority":0,"_class":"technology.sola.engine.graphics.components.CameraComponent"},{"x":0.0,"y":0.0,"scaleX":1.0,"scaleY":1.0,"_class":"technology.sola.engine.core.component.TransformComponent"}]},{"uniqueId":"f894a9452","name":null,"components":[]}]}}

@@ -8,14 +8,12 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.scene.Scene;
-import technology.sola.engine.assets.scene.SceneAssetLoader;
 import technology.sola.engine.assets.scene.SceneJsonMapper;
 import technology.sola.engine.editor.SolaEditorCustomization;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.utils.ToastService;
-import technology.sola.engine.platform.javafx.assets.JavaFxJsonAssetLoader;
-import technology.sola.json.JsonObject;
 import technology.sola.json.SolaJson;
+import technology.sola.logging.SolaLogger;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +22,7 @@ import java.nio.file.Path;
 
 @NullMarked
 class SceneActions extends EditorPanel {
-  private final SceneAssetLoader sceneAssetLoader;
+  private static final SolaLogger LOGGER = SolaLogger.of(SceneActions.class);
   private final SceneJsonMapper sceneJsonMapper;
   private final EntityTreeView entityTreeView;
   private final EntityComponentsPanel entityComponentsPanel;
@@ -41,8 +39,6 @@ class SceneActions extends EditorPanel {
     EntityTreeView entityTreeView,
     EntityComponentsPanel entityComponentsPanel
   ) {
-    sceneAssetLoader = new SceneAssetLoader(new JavaFxJsonAssetLoader());
-    sceneAssetLoader.configure(customization.componentJsonMappers());
     sceneJsonMapper = new SceneJsonMapper();
     sceneJsonMapper.configure(customization.componentJsonMappers());
 
@@ -81,6 +77,16 @@ class SceneActions extends EditorPanel {
       saveButton.setDisable(true);
     }
 
+    saveButton.setOnAction(e -> {
+
+      try {
+        Files.writeString(Path.of(activeSceneFile), sceneJsonMapper.toJson(activeScene).toString());
+      } catch (IOException ex) {
+        ToastService.error("Error saving scene.");
+        LOGGER.error("Error saving scene.", ex);
+      }
+    });
+
     return saveButton;
   }
 
@@ -115,7 +121,8 @@ class SceneActions extends EditorPanel {
 
         setScene(scene, loadSceneFile.getAbsolutePath());
       } catch (IOException ex) {
-        ToastService.error(ex.getMessage());
+        ToastService.error("Error loading scene.");
+        LOGGER.error("Error loading scene.", ex);
       }
     });
 
@@ -154,7 +161,8 @@ class SceneActions extends EditorPanel {
 
         setScene(newScene, newSceneFile.getAbsolutePath());
       } catch (IOException ex) {
-        ToastService.error(ex.getMessage());
+        ToastService.error("Error creating new scene.");
+        LOGGER.error("Error creating new scene.", ex);
       }
     });
 
