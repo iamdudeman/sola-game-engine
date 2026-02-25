@@ -47,7 +47,7 @@ public class SceneToolPanel extends ToolPanel<SceneToolConfig> {
     entityTreeView.populate(world);
 
     items.addAll(
-      new SceneActions(entityTreeView),
+      new SceneActions(solaEditorCustomization, entityTreeView, entityComponentsPanel),
       new WorldPreviewPanel(),
       entityComponentsPanel
     );

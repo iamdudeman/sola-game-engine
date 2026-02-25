@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.Component;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
@@ -30,10 +31,14 @@ class EntityComponentsPanel extends EditorPanel {
     this.modules = modules;
   }
 
-  void selectEntity(Entity entity) {
+  void selectEntity(@Nullable Entity entity) {
     getChildren().clear();
 
     currentEntity = entity;
+
+    if (entity == null) {
+      return;
+    }
 
     getChildren().add(
       createComponentPicker(modules, entity)
