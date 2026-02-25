@@ -263,6 +263,9 @@ public class TransformComponent implements Component {
     return this;
   }
 
+  /**
+   * {@link JsonMapper} implementation for {@link TransformComponent}.
+   */
   public static class Mapper implements JsonMapper<TransformComponent> {
     @Override
     public Class<TransformComponent> getObjectClass() {

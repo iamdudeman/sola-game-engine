@@ -69,6 +69,9 @@ public class CircleRendererComponent implements Component {
     isFilled = filled;
   }
 
+  /**
+   * {@link JsonMapper} implementation for {@link CircleRendererComponent}
+   */
   public static class Mapper implements JsonMapper<CircleRendererComponent> {
     @Override
     public Class<CircleRendererComponent> getObjectClass() {

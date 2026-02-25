@@ -30,6 +30,9 @@ public class CameraComponent implements Component {
     this.priority = priority;
   }
 
+  /**
+   * {@link JsonMapper} implementation for {@link CameraComponent}
+   */
   public static class Mapper implements JsonMapper<CameraComponent> {
     @Override
     public Class<CameraComponent> getObjectClass() {

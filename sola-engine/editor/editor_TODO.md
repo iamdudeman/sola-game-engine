@@ -11,12 +11,12 @@
                 * ability to save scene
         * ~~Center is placeholder for now~~
         * ~~Right is info about selected entity components, editable~~
-    * Initial components
+    * ~~Initial components~~
         * ~~TransformComponent~~
         * ~~CameraComponent~~
         * ~~CircleRendererComponent~~
-    * Comes with a default configuration for built-in components
-        * JsonMappers for components
+    * ~~Comes with a default configuration for built-in components~~
+        * ~~JsonMappers for components~~
         * ~~component editor modules for scene editor~~
     * Tool config
         * remember the last opened scene
