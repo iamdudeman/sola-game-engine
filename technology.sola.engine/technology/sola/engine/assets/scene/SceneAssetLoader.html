@@ -105,23 +105,29 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#configure(java.util.List)" class="member-name-link">configure</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.json.mapper.JsonMapper&lt;? extends technology.sola.ecs.Component&gt;&gt;&nbsp;jsonMappers)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#configure(java.util.List)" class="member-name-link">configure</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.json.mapper.JsonMapper&lt;? extends technology.sola.ecs.Component&gt;&gt;&nbsp;additionalJsonMappers)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Configures the <a href="SceneAssetLoader.html" title="class in technology.sola.engine.assets.scene"><code>SceneAssetLoader</code></a> with the desired <code>Component</code> <code>JsonMapper</code>s.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;<a href="Scene.html" title="class in technology.sola.engine.assets.scene">Scene</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAssetClass()" class="member-name-link">getAssetClass</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../AssetHandle.html" title="class in technology.sola.engine.assets">AssetHandle</a>&lt;<a href="Scene.html" title="class in technology.sola.engine.assets.scene">Scene</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#loadAsset(java.lang.String)" class="member-name-link">loadAsset</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#configureFromAssetLoaderProvider(technology.sola.engine.assets.AssetLoaderProvider,java.util.List)" class="member-name-link">configureFromAssetLoaderProvider</a><wbr>(<a href="../AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.json.mapper.JsonMapper&lt;? extends technology.sola.ecs.Component&gt;&gt;&nbsp;jsonMappers)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Convenience method for configuring a <a href="SceneAssetLoader.html" title="class in technology.sola.engine.assets.scene"><code>SceneAssetLoader</code></a> with the desired <code>Component</code> <code>JsonMapper</code>s.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;<a href="Scene.html" title="class in technology.sola.engine.assets.scene">Scene</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAssetClass()" class="member-name-link">getAssetClass</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../AssetHandle.html" title="class in technology.sola.engine.assets">AssetHandle</a>&lt;<a href="Scene.html" title="class in technology.sola.engine.assets.scene">Scene</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#loadAsset(java.lang.String)" class="member-name-link">loadAsset</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns an <a href="../AssetHandle.html" title="class in technology.sola.engine.assets"><code>AssetHandle</code></a> for the specified path and beings loading the <a href="../Asset.html" title="interface in technology.sola.engine.assets"><code>Asset</code></a>.</div>
 </div>
 </div>
@@ -164,13 +170,28 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="configure(java.util.List)">
-<h3>configure</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">configure</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.json.mapper.JsonMapper&lt;? extends technology.sola.ecs.Component&gt;&gt;&nbsp;jsonMappers)</span></div>
-<div class="block">Configures the <a href="SceneAssetLoader.html" title="class in technology.sola.engine.assets.scene"><code>SceneAssetLoader</code></a> with the desired <code>Component</code> <code>JsonMapper</code>s.</div>
+<section class="detail" id="configureFromAssetLoaderProvider(technology.sola.engine.assets.AssetLoaderProvider,java.util.List)">
+<h3>configureFromAssetLoaderProvider</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">configureFromAssetLoaderProvider</span><wbr><span class="parameters">(<a href="../AssetLoaderProvider.html" title="class in technology.sola.engine.assets">AssetLoaderProvider</a>&nbsp;assetLoaderProvider,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.json.mapper.JsonMapper&lt;? extends technology.sola.ecs.Component&gt;&gt;&nbsp;jsonMappers)</span></div>
+<div class="block">Convenience method for configuring a <a href="SceneAssetLoader.html" title="class in technology.sola.engine.assets.scene"><code>SceneAssetLoader</code></a> with the desired <code>Component</code> <code>JsonMapper</code>s.
+ The default component JsonMappers are included automatically.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>jsonMappers</code> - the component JSON mappers</dd>
+<dd><code>assetLoaderProvider</code> - the <a href="../AssetLoaderProvider.html" title="class in technology.sola.engine.assets"><code>AssetLoaderProvider</code></a></dd>
+<dd><code>jsonMappers</code> - the component JSON mappers to add</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="configure(java.util.List)">
+<h3>configure</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">configure</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;technology.sola.json.mapper.JsonMapper&lt;? extends technology.sola.ecs.Component&gt;&gt;&nbsp;additionalJsonMappers)</span></div>
+<div class="block">Configures the <a href="SceneAssetLoader.html" title="class in technology.sola.engine.assets.scene"><code>SceneAssetLoader</code></a> with the desired <code>Component</code> <code>JsonMapper</code>s. The default
+ component JsonMappers are included automatically.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>additionalJsonMappers</code> - the component JSON mappers to add</dd>
 </dl>
 </section>
 </li>
