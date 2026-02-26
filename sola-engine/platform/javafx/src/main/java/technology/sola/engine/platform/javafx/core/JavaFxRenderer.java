@@ -10,6 +10,7 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Layer;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.renderer.blend.BlendFunction;
+import technology.sola.engine.platform.javafx.utils.ColorUtils;
 import technology.sola.logging.SolaLogger;
 import technology.sola.math.linear.Vector2D;
 
@@ -182,7 +183,7 @@ public class JavaFxRenderer implements Renderer {
     }
 
     currentFillColor = color;
-    graphicsContext.setFill(javafx.scene.paint.Color.rgb(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha() / 255f));
+    graphicsContext.setFill(ColorUtils.toJavaFxColor(color));
   }
 
   private void setStrokeColor(Color color) {
@@ -191,7 +192,7 @@ public class JavaFxRenderer implements Renderer {
     }
 
     currentStrokeColor = color;
-    graphicsContext.setStroke(javafx.scene.paint.Color.rgb(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha() / 255f));
+    graphicsContext.setStroke(ColorUtils.toJavaFxColor(color));
   }
 
   private void logMethodNotImplemented(String method) {

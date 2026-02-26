@@ -350,7 +350,7 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
       return (androidKeyCode + 36);
     }
 
-    return (switch (androidKeyCode) {
+    var solaKey = switch (androidKeyCode) {
       case android.view.KeyEvent.KEYCODE_SHIFT_LEFT, android.view.KeyEvent.KEYCODE_SHIFT_RIGHT -> Key.SHIFT;
       case android.view.KeyEvent.KEYCODE_DEL -> Key.BACKSPACE;
       case android.view.KeyEvent.KEYCODE_COMMA -> Key.COMMA;
@@ -365,7 +365,9 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
         LOGGER.warning("Unsupported Android key code: %s", androidKeyCode);
         yield Key.CONTROL; // todo temporary fallback
       }
-    }).getCode();
+    };
+
+    return solaKey.getCode();
   }
 
   private boolean isKnownUnsupportedKeyCode(int keyCode) {

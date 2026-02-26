@@ -3,6 +3,8 @@ package technology.sola.engine.graphics.components;
 import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
 import technology.sola.engine.graphics.Color;
+import technology.sola.json.JsonObject;
+import technology.sola.json.mapper.JsonMapper;
 
 /**
  * CircleRendererComponent is a {@link Component} containing data for rendering 2d circles.
@@ -65,5 +67,33 @@ public class CircleRendererComponent implements Component {
    */
   public void setFilled(boolean filled) {
     isFilled = filled;
+  }
+
+  /**
+   * {@link JsonMapper} implementation for {@link CircleRendererComponent}
+   */
+  public static class Mapper implements JsonMapper<CircleRendererComponent> {
+    @Override
+    public Class<CircleRendererComponent> getObjectClass() {
+      return CircleRendererComponent.class;
+    }
+
+    @Override
+    public JsonObject toJson(CircleRendererComponent circleRendererComponent) {
+      JsonObject jsonObject = new JsonObject();
+
+      jsonObject.put("color", circleRendererComponent.getColor().hexInt());
+      jsonObject.put("filled", circleRendererComponent.isFilled());
+
+      return jsonObject;
+    }
+
+    @Override
+    public CircleRendererComponent toObject(JsonObject jsonObject) {
+      return new CircleRendererComponent(
+        Color.of(jsonObject.getInt("color")),
+        jsonObject.getBoolean("filled")
+      );
+    }
   }
 }

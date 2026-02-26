@@ -5,6 +5,8 @@ import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.Component;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
+import technology.sola.json.JsonObject;
+import technology.sola.json.mapper.JsonMapper;
 import technology.sola.math.linear.Vector2D;
 
 /**
@@ -259,5 +261,37 @@ public class TransformComponent implements Component {
     }
 
     return this;
+  }
+
+  /**
+   * {@link JsonMapper} implementation for {@link TransformComponent}.
+   */
+  public static class Mapper implements JsonMapper<TransformComponent> {
+    @Override
+    public Class<TransformComponent> getObjectClass() {
+      return TransformComponent.class;
+    }
+
+    @Override
+    public JsonObject toJson(TransformComponent transformComponent) {
+      JsonObject jsonObject = new JsonObject();
+
+      jsonObject.put("x", transformComponent.getX());
+      jsonObject.put("y", transformComponent.getY());
+      jsonObject.put("scaleX", transformComponent.getScaleX());
+      jsonObject.put("scaleY", transformComponent.getScaleY());
+
+      return jsonObject;
+    }
+
+    @Override
+    public TransformComponent toObject(JsonObject jsonObject) {
+      return new TransformComponent(
+        jsonObject.getFloat("x"),
+        jsonObject.getFloat("y"),
+        jsonObject.getFloat("scaleX"),
+        jsonObject.getFloat("scaleY")
+      );
+    }
   }
 }

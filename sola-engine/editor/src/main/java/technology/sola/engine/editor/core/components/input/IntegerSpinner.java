@@ -6,8 +6,6 @@ import javafx.scene.control.TextFormatter;
 import javafx.util.converter.IntegerStringConverter;
 import org.jspecify.annotations.NullMarked;
 
-import java.util.regex.Pattern;
-
 /**
  * IntegerSpinner is a {@link Spinner} that is set for integers only.
  */
@@ -27,7 +25,7 @@ public class IntegerSpinner extends Spinner<Integer> {
     getEditor().setTextFormatter(new TextFormatter<>(
       new IntegerStringConverter(),
       min,
-      c -> Pattern.matches("\\d*", c.getText()) ? c : null)
+      change -> change.getControlNewText().matches("-?\\d+") ? change : null)
     );
   }
 
