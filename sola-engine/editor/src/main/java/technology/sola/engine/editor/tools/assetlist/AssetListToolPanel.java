@@ -5,6 +5,7 @@ import technology.sola.engine.editor.core.config.EditorConfig;
 import technology.sola.engine.editor.core.utils.ToastService;
 import technology.sola.engine.editor.tools.ToolPanel;
 import technology.sola.json.JsonObject;
+import technology.sola.logging.SolaLogger;
 
 import java.io.IOException;
 
@@ -14,6 +15,7 @@ import java.io.IOException;
  */
 @NullMarked
 public class AssetListToolPanel extends ToolPanel<AssetListToolConfig> {
+  private final SolaLogger LOGGER = SolaLogger.of(AssetListToolPanel.class);
   private final AssetListPanel assetListPanel = new AssetListPanel();
 
   /**
@@ -51,6 +53,7 @@ public class AssetListToolPanel extends ToolPanel<AssetListToolConfig> {
       assetListPanel.update();
     } catch (IOException ex) {
       ToastService.error("Error onSwitch to AssetListToolPanel:" + ex.getMessage());
+      LOGGER.error("Error onSwitch to AssetListToolPanel", ex);
     }
   }
 

@@ -28,8 +28,15 @@ class AssetListPanel extends EditorPanel {
     // clear old stuff
     getChildren().clear();
 
+    Path assetListPath = Path.of(AssetList.PATH);
+
+    if (Files.notExists(assetListPath)) {
+      Files.createFile(assetListPath);
+      Files.writeString(assetListPath, "{}");
+    }
+
     AssetList assetList = new SolaJson().parse(
-      Files.readString(Path.of(AssetList.PATH)),
+      Files.readString(assetListPath),
       new AssetListJsonMapper()
     );
 
@@ -56,7 +63,7 @@ class AssetListPanel extends EditorPanel {
 
       try {
         Files.writeString(
-          Path.of(AssetList.PATH),
+          assetListPath,
           new AssetListJsonMapper().toJson(updatedList).toString()
         );
         ToastService.info("Updated Asset List");
