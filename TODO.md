@@ -6,8 +6,7 @@
 
 ### Low-priority bugs
 
-* generate image assets for Android examples!
-    * could also do this in the template project (maybe with a readme doc on how to generate them)
+*
 
 -----------------------------------------------------------------------------------------------------------------------
 
