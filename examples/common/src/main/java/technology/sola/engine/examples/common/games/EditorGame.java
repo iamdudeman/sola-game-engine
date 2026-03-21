@@ -2,8 +2,10 @@ package technology.sola.engine.examples.common.games;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
+import technology.sola.engine.assets.scene.Scene;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.examples.common.ExampleUtils;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -35,15 +37,25 @@ public class EditorGame extends Sola {
 
     solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
       .withGui(mouseInput)
-      .withLighting()
+      //      .withLighting() // todo temporarily disabled
       .buildAndInitialize(assetLoaderProvider);
+
+    solaGraphics.guiDocument().setRootElement(
+      ExampleUtils.createReturnToLauncherButton(platform(), eventHub, "0", "0")
+    );
 
     platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
   }
 
   @Override
   protected void onAsyncInit(Runnable completeAsyncInit) {
-    assetLoaderProvider.loadAssetsFromAssetList(() -> {
+    assetLoaderProvider.loadAssetsFromAssetList((assetList) -> {
+      assetList.sceneAssets().stream().findFirst().ifPresent(asset -> {
+        assetLoaderProvider.get(Scene.class).get(asset.id()).executeWhenLoaded(scene -> {
+          solaEcs.setWorld(scene.world());
+        });
+      });
+
       completeAsyncInit.run();
       loadingScreen = null;
     });
