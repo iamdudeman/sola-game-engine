@@ -31,7 +31,13 @@ public class CameraSystem extends EcsSystem {
 
   @Override
   public void update(World world, float deltaTime) {
-    var cameraTransform = world.findEntityByName("camera").getComponent(TransformComponent.class);
+    var cameraEntity = world.findEntityByName("camera");
+
+    if (cameraEntity == null) {
+      return;
+    }
+
+    var cameraTransform = cameraEntity.getComponent(TransformComponent.class);
 
     // zoom
     boolean isZoomIn = mouseInput.getMouseWheel().isUp() || touchInput.gestures().isPinchOut();
