@@ -33,6 +33,8 @@ public class TransformComponentEditorModule implements ComponentEditorModule<Tra
     ComponentEditorPanel componentEditorPanel = new ComponentEditorPanel();
     FloatField xFloatField = new FloatField(component.getX());
     FloatField yFloatField = new FloatField(component.getY());
+    FloatField scaleXFloatField = new FloatField(component.getScaleX());
+    FloatField scaleYFloatField = new FloatField(component.getScaleY());
 
     xFloatField.floatValueProperty().addListener(
       (observable, oldValue, newValue) -> component.setX(newValue)
@@ -40,10 +42,18 @@ public class TransformComponentEditorModule implements ComponentEditorModule<Tra
     yFloatField.floatValueProperty().addListener(
       (observable, oldValue, newValue) -> component.setY(newValue)
     );
+    scaleXFloatField.floatValueProperty().addListener(
+      (observable, oldValue, newValue) -> component.setScaleX(newValue)
+    );
+    scaleYFloatField.floatValueProperty().addListener(
+      (observable, oldValue, newValue) -> component.setScaleY(newValue)
+    );
 
     componentEditorPanel.getChildren().addAll(
       LabelWrapper.vertical(xFloatField, "x"),
-      LabelWrapper.vertical(yFloatField, "y")
+      LabelWrapper.vertical(yFloatField, "y"),
+      LabelWrapper.vertical(scaleXFloatField, "scaleX"),
+      LabelWrapper.vertical(scaleYFloatField, "scaleY")
     );
 
     return componentEditorPanel;
