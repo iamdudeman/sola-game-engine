@@ -15,6 +15,8 @@
 
 ## Editor TODO Notes
 
+* ability to change initial scene (probably in asset list)
+* how to handle lighting? when enabled the scene is completely dark if there are no lights
 * Scene asset editor
     * disable/enable action needed (in left panel Entity tree)
     * Create child + parent relationships for the entities? (TransformComponent relationships?)

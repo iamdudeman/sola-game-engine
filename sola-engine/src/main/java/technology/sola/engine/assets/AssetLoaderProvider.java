@@ -12,6 +12,7 @@ import technology.sola.engine.assets.scene.Scene;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 /**
  * The AssetLoaderProvider class holds instances of {@link AssetLoader}s for various {@link Asset} types.
@@ -54,7 +55,7 @@ public class AssetLoaderProvider {
    *
    * @param onComplete callback that is called when all blocking assets have been loaded
    */
-  public void loadAssetsFromAssetList(Runnable onComplete) {
+  public void loadAssetsFromAssetList(Consumer<AssetList> onComplete) {
     this.get(AssetList.class).getNewAsset(AssetList.ID, AssetList.PATH)
       .executeWhenLoaded(assetList -> {
         BulkAssetLoader bulkAssetLoader = new BulkAssetLoader(this);
@@ -66,7 +67,7 @@ public class AssetLoaderProvider {
         addAllAssetMapping(Scene.class, assetList.sceneAssets(), bulkAssetLoader);
 
         bulkAssetLoader.loadAll()
-          .onComplete(assets -> onComplete.run());
+          .onComplete(assets -> onComplete.accept(assetList));
       });
   }
 
