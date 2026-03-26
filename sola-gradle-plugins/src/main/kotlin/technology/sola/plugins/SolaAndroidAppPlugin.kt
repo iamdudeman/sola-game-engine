@@ -108,16 +108,20 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       dependsOn(project.tasks.named("assembleDebug"))
 
       val injected = project.objects.newInstance<Injected>()
+      val originalPath = "build/outputs/apk/debug/android-debug.apk"
+      val outputDir = "${project.rootDir}/dist/${project.name}"
+      val newName = "${project.properties["gameName"]}-${project.version}-debug.apk";
 
-      inputs.file("build/outputs/apk/debug/android-debug.apk")
-      outputs.dir("${project.rootDir}/dist/${project.name}")
+      inputs.file(originalPath)
+      outputs.dir(outputDir)
+      outputs.file("$outputDir/$newName")
 
       injected.fs.copy {
-        from("build/outputs/apk/debug/android-debug.apk") {
-          rename { "${project.properties["gameName"]}-${project.version}-debug.apk" }
+        from(originalPath) {
+          rename { newName }
         }
 
-        into("${project.rootDir}/dist/${project.name}")
+        into(outputDir)
       }
     }
 
@@ -127,16 +131,20 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       dependsOn(project.tasks.named("bundleRelease"))
 
       val injected = project.objects.newInstance<Injected>()
+      val originalPath = "build/outputs/bundle/release/android-release.aab"
+      val outputDir = "${project.rootDir}/dist/${project.name}"
+      val newName = "${project.properties["gameName"]}-${project.version}-release.aab";
 
-      inputs.file("build/outputs/bundle/release/android-release.aab")
-      outputs.dir("${project.rootDir}/dist/${project.name}")
+      inputs.file(originalPath)
+      outputs.dir(outputDir)
+      outputs.file("$outputDir/$newName")
 
       injected.fs.copy {
-        from("build/outputs/bundle/release/android-release.aab") {
-          rename { "${project.properties["gameName"]}-${project.version}-release.aab" }
+        from(originalPath) {
+          rename { newName }
         }
 
-        into("${project.rootDir}/dist/${project.name}")
+        into(outputDir)
       }
     }
   }
