@@ -1,6 +1,6 @@
 package technology.sola.plugins
 
-import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
+import com.android.build.api.dsl.ApplicationExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -38,7 +38,7 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       keystoreProperties.load(FileInputStream(keystorePropertiesFile))
     }
 
-    project.extensions.configure<BaseAppModuleExtension> {
+    project.extensions.configure<ApplicationExtension> {
       namespace = "${project.properties["basePackage"]}.${project.name}"
       compileSdk = 35
 
@@ -91,7 +91,7 @@ class SolaAndroidAppPlugin : Plugin<Project> {
 
       sourceSets {
         getByName("main") {
-          assets.srcDir("${project.rootDir}/assets")
+          assets.directories.add("${project.rootDir}/assets")
         }
       }
     }
