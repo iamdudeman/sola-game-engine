@@ -24,6 +24,8 @@
 
 ### Low priority (not ordered)
 
+* Gui animation system
+    * might need a new "AnimatedProperty" concept perhaps?
 * Particle System
     * appearance
         * modify size over lifetime option

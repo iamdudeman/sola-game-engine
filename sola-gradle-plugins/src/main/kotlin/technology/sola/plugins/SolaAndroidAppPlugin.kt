@@ -40,14 +40,14 @@ class SolaAndroidAppPlugin : Plugin<Project> {
 
     project.extensions.configure<ApplicationExtension> {
       namespace = "${project.properties["basePackage"]}.${project.name}"
-      compileSdk = 35
+      compileSdk = 36
 
       defaultConfig {
         applicationId = "${project.properties["basePackage"]}.${project.name}"
         versionCode = project.properties["androidVersionCode"].toString().toInt()
         versionName = "${project.properties["version"]}"
         minSdk = 34
-        targetSdk = 35
+        targetSdk = 36
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
       }
 

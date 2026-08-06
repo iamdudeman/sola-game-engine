@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-  implementation("com.android.tools.build:gradle:9.0.1")
+  implementation("com.android.tools.build:gradle:9.1.1")
 }
 
 gradlePlugin {
