@@ -13,10 +13,10 @@ class SolaJavaFxPlugin : Plugin<Project> {
     val solaJavaFxPluginExtension = project.extensions.create<SolaJavaFxPluginExtension>("solaJavaFx")
     val osClassifier = getOsClassifier()
 
-    project.dependencies.add("runtimeOnly", "org.openjfx:javafx-base:${project.properties["javaFxVersion"]}:${osClassifier}")
-    project.dependencies.add("runtimeOnly", "org.openjfx:javafx-controls:${project.properties["javaFxVersion"]}:${osClassifier}")
-    project.dependencies.add("runtimeOnly", "org.openjfx:javafx-media:${project.properties["javaFxVersion"]}:${osClassifier}")
-    project.dependencies.add("runtimeOnly", "org.openjfx:javafx-graphics:${project.properties["javaFxVersion"]}:${osClassifier}")
+    project.dependencies.add("runtimeOnly", "org.openjfx:javafx-base:${project.property("javaFxVersion")}:${osClassifier}")
+    project.dependencies.add("runtimeOnly", "org.openjfx:javafx-controls:${project.property("javaFxVersion")}:${osClassifier}")
+    project.dependencies.add("runtimeOnly", "org.openjfx:javafx-media:${project.property("javaFxVersion")}:${osClassifier}")
+    project.dependencies.add("runtimeOnly", "org.openjfx:javafx-graphics:${project.property("javaFxVersion")}:${osClassifier}")
   }
 
   fun getOsClassifier(): String {

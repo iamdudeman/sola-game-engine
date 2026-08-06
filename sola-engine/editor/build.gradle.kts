@@ -6,7 +6,7 @@ plugins {
 
 javafx {
   modules("javafx.controls")
-  version = "${project.properties["javaFxVersion"]}"
+  version = "${project.property("javaFxVersion")}"
 }
 
 dependencies {

@@ -49,7 +49,7 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
       project.tasks.register("distFatJar", Jar::class) {
         group = "sola"
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-        archiveBaseName.set("${project.properties["gameName"]}-${project.name}${osClassifierWithDash}")
+        archiveBaseName.set("${project.property("gameName")}-${project.name}${osClassifierWithDash}")
 
         manifest {
           attributes["Main-Class"] = solaJavaDistributionPluginExtension.mainClass
@@ -79,14 +79,14 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
         executable("jpackage")
 
         args(
-          "--name", "${project.properties["gameName"]}-${project.version}",
+          "--name", "${project.property("gameName")}-${project.version}",
           "--app-version", "${project.version}",
-          "--vendor", "${project.properties["vendor"]}",
+          "--vendor", "${project.property("vendor")}",
           "--icon", "${project.rootDir}/assets/icon.ico",
-          "--copyright", "©${Calendar.getInstance().get(Calendar.YEAR)} ${project.properties["vendor"]}. All rights reserved.",
+          "--copyright", "©${Calendar.getInstance().get(Calendar.YEAR)} ${project.property("vendor")}. All rights reserved.",
           "--dest", layout.buildDirectory.dir("jpackage").get().asFile.path,
           "--input", "${project.rootDir}/dist/${project.name}",
-          "--main-jar", "${project.properties["gameName"]}-${project.name}${osClassifierWithDash}-${project.version}.jar",
+          "--main-jar", "${project.property("gameName")}-${project.name}${osClassifierWithDash}-${project.version}.jar",
           "--type", "app-image"
         )
       }
@@ -94,11 +94,11 @@ class SolaJavaDistributionPlugin : Plugin<Project> {
       project.tasks.register("distWinJPackageZip", Zip::class) {
         group = "sola"
         destinationDirectory.set(file("${project.rootDir}/dist/${project.name}"))
-        archiveBaseName.set("${project.properties["gameName"]}-${project.name}-win")
+        archiveBaseName.set("${project.property("gameName")}-${project.name}-win")
 
         dependsOn(tasks.named("distWinJPackage"))
 
-        from(layout.buildDirectory.dir("jpackage/${project.properties["gameName"]}-${project.version}"))
+        from(layout.buildDirectory.dir("jpackage/${project.property("gameName")}-${project.version}"))
       }
     }
   }

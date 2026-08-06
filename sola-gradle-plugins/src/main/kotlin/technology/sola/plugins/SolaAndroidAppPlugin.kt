@@ -39,13 +39,13 @@ class SolaAndroidAppPlugin : Plugin<Project> {
     }
 
     project.extensions.configure<ApplicationExtension> {
-      namespace = "${project.properties["basePackage"]}.${project.name}"
+      namespace = "${project.property("basePackage")}.${project.name}"
       compileSdk = 36
 
       defaultConfig {
-        applicationId = "${project.properties["basePackage"]}.${project.name}"
-        versionCode = project.properties["androidVersionCode"].toString().toInt()
-        versionName = "${project.properties["version"]}"
+        applicationId = "${project.property("basePackage")}.${project.name}"
+        versionCode = project.property("androidVersionCode").toString().toInt()
+        versionName = "${project.property("version")}"
         minSdk = 34
         targetSdk = 36
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -110,7 +110,7 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       val injected = project.objects.newInstance<Injected>()
       val originalPath = "build/outputs/apk/debug/android-debug.apk"
       val outputDir = "${project.rootDir}/dist/${project.name}"
-      val newName = "${project.properties["gameName"]}-${project.version}-debug.apk";
+      val newName = "${project.property("gameName")}-${project.version}-debug.apk";
 
       inputs.file(originalPath)
       outputs.dir(outputDir)
@@ -133,7 +133,7 @@ class SolaAndroidAppPlugin : Plugin<Project> {
       val injected = project.objects.newInstance<Injected>()
       val originalPath = "build/outputs/bundle/release/android-release.aab"
       val outputDir = "${project.rootDir}/dist/${project.name}"
-      val newName = "${project.properties["gameName"]}-${project.version}-release.aab";
+      val newName = "${project.property("gameName")}-${project.version}-release.aab";
 
       inputs.file(originalPath)
       outputs.dir(outputDir)

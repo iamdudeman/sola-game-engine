@@ -10,7 +10,7 @@ dependencies {
 
 javafx {
   modules("javafx.controls", "javafx.media")
-  version = "${project.properties["javaFxVersion"]}"
+  version = "${project.property("javaFxVersion")}"
 }
 
 solaPublishing {

@@ -9,5 +9,5 @@ dependencies {
 }
 
 solaJavaDist {
-  mainClass = "${project.properties["basePackage"]}.${project.name}.SwingMain"
+  mainClass = "${project.property("basePackage")}.${project.name}.SwingMain"
 }

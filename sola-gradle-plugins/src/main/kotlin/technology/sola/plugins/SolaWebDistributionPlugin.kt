@@ -23,7 +23,7 @@ class SolaWebDistributionPlugin : Plugin<Project> {
 
     project.afterEvaluate {
       val generateFilesMainClass = if (solaWebDistributionPluginExtension.generateFilesMainClass == null) {
-        "${project.properties["basePackage"]}.browser.GenerateBrowserFilesMain"
+        "${project.property("basePackage")}.browser.GenerateBrowserFilesMain"
       } else {
         solaWebDistributionPluginExtension.generateFilesMainClass
       }
@@ -65,7 +65,7 @@ class SolaWebDistributionPlugin : Plugin<Project> {
       project.tasks.register("distWebZip", Zip::class.java) {
         group = "sola"
         destinationDirectory.set(project.file("${project.rootDir}/dist/${project.name}"))
-        archiveBaseName.set("${project.properties["gameName"]}-${project.name}")
+        archiveBaseName.set("${project.property("gameName")}-${project.name}")
 
         dependsOn(project.tasks.getByName("buildWebHtmlAndJs"))
 

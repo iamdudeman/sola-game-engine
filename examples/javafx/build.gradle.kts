@@ -10,6 +10,6 @@ dependencies {
 }
 
 solaJavaDist {
-  mainClass = "${project.properties["basePackage"]}.${project.name}.JavaFxMain"
+  mainClass = "${project.property("basePackage")}.${project.name}.JavaFxMain"
   includeOsClassifier = true
 }
