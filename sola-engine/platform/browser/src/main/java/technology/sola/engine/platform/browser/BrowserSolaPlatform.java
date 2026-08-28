@@ -38,6 +38,7 @@ import java.util.function.Consumer;
 public class BrowserSolaPlatform extends SolaPlatform {
   private static final SolaLogger LOGGER = SolaLogger.of(BrowserSolaPlatform.class);
   private final boolean useSoftwareRendering;
+  private final boolean useImageSmoothing;
   private final String backgroundColor;
 
   /**
@@ -56,6 +57,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
     super(new BrowserSocketClient(), new BrowserRestClient(), new LocalStorageSaveStorage());
 
     this.useSoftwareRendering = platformConfig.useSoftwareRendering();
+    this.useImageSmoothing = platformConfig.useImageSmoothing();
 
     backgroundColor = String.format(Locale.US, "rgba(%d, %d, %d, %f",
       platformConfig.backgroundColor().getRed(),
@@ -166,6 +168,11 @@ public class BrowserSolaPlatform extends SolaPlatform {
   protected void initializePlatform(SolaConfiguration solaConfiguration, SolaPlatformInitialization solaPlatformInitialization) {
     JsUtils.setTitle(solaConfiguration.title());
     JsCanvasUtils.canvasInit(JsCanvasUtils.ID_SOLA_ANCHOR, solaConfiguration.rendererWidth(), solaConfiguration.rendererHeight());
+
+    if (!useImageSmoothing) {
+      JsCanvasUtils.disableImageSmoothing();
+    }
+
     JsKeyboardUtils.init();
     JsMouseUtils.init();
     JsTouchUtils.init();
