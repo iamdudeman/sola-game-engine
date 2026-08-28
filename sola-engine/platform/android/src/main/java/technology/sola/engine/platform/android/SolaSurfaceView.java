@@ -24,7 +24,7 @@ class SolaSurfaceView extends SurfaceView {
   @Nullable
   private SoftwareRenderer softwareRenderer;
 
-  SolaSurfaceView(Context context) {
+  SolaSurfaceView(Context context, boolean useImageSmoothing) {
     super(context);
 
     this.setLayoutParams(new ConstraintLayout.LayoutParams(
@@ -32,6 +32,8 @@ class SolaSurfaceView extends SurfaceView {
       ConstraintLayout.LayoutParams.MATCH_PARENT
     ));
 
+    paint.setFilterBitmap(useImageSmoothing);
+    paint.setAntiAlias(useImageSmoothing);
     setFocusable(true);
     setFocusableInTouchMode(true);
 

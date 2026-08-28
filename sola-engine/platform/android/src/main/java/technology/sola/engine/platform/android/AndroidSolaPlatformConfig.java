@@ -10,18 +10,20 @@ import technology.sola.engine.platform.android.config.Orientation;
  *
  * @param useSoftwareRendering whether software rendering should be used instead of native {@link technology.sola.engine.platform.android.core.AndroidRenderer} rendering
  * @param backgroundColor      the background color that will be cleared to every frame
- * @param orientation the {@link Orientation} of the app
+ * @param orientation          the {@link Orientation} of the app
+ * @param useImageSmoothing    whether image smoothing that uses higher quality filtering when scaling images rendered on the internal {@link android.graphics.Canvas}
  */
 @NullMarked
 public record AndroidSolaPlatformConfig(
   boolean useSoftwareRendering,
   Color backgroundColor,
-  Orientation orientation
+  Orientation orientation,
+  boolean useImageSmoothing
 ) implements SolaPlatformCommonConfig {
   /**
    * Creates an instance with default options. Orientation is set to {@link Orientation#PORTRAIT}.
    */
   public AndroidSolaPlatformConfig() {
-    this(true, Color.BLACK, Orientation.PORTRAIT);
+    this(true, Color.BLACK, Orientation.PORTRAIT, true);
   }
 }
