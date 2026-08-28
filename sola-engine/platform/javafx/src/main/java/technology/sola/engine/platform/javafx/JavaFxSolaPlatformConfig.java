@@ -10,7 +10,7 @@ import technology.sola.engine.graphics.Color;
  *
  * @param useSoftwareRendering whether software rendering should be used instead of native {@link technology.sola.engine.platform.javafx.core.JavaFxRenderer} rendering
  * @param backgroundColor      the background color that will be cleared to every frame
- * @param useImageSmoothing    whether image smoothing which uses higher quality filtering when scaling images rendered on the internal {@link javafx.scene.canvas.Canvas}
+ * @param useImageSmoothing    whether image smoothing that uses higher quality filtering when scaling images rendered on the internal {@link javafx.scene.canvas.Canvas}
  * @param initialWindowWidth   the initial window width when the {@link technology.sola.engine.core.Sola} starts
  * @param initialWindowHeight  the initial window height when the {@link technology.sola.engine.core.Sola} starts
  */
