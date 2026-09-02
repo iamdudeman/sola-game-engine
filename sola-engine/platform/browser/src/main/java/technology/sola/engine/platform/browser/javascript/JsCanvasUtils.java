@@ -27,6 +27,12 @@ public class JsCanvasUtils {
   public static native void canvasInit(String anchorId, int width, int height);
 
   /**
+   * Disables image smoothing.
+   */
+  @JSBody(script = "window.solaContext2d.imageSmoothingEnabled = false;")
+  public static native void disableImageSmoothing();
+
+  /**
    * Renders the rendererData array to a canvas. This utilizes ImageData and Canvas#drawImage and is affected by the
    * viewport's {@link technology.sola.engine.graphics.screen.AspectRatioSizing}.
    *

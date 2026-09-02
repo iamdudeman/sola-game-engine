@@ -57,7 +57,7 @@ public abstract class SolaAndroidActivity extends AppCompatActivity {
 
     EdgeToEdge.enable(this);
 
-    this.solaSurfaceView = new SolaSurfaceView(this);
+    this.solaSurfaceView = new SolaSurfaceView(this, androidSolaPlatformConfig.useImageSmoothing());
 
     var rootView = buildRootView();
 
