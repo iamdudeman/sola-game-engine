@@ -381,7 +381,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates an instance of a <code>Background</code> record class.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatformCommonConfig.html#backgroundColor()" class="member-name-link">backgroundColor()</a> - Method in interface technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatformCommonConfig.html" title="interface in technology.sola.engine.core">SolaPlatformCommonConfig</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatformConfig.html#backgroundColor()" class="member-name-link">backgroundColor()</a> - Method in interface technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatformConfig.html" title="interface in technology.sola.engine.core">SolaPlatformConfig</a></dt>
 <dd>
 <div class="block">Sets the color that the SolaPlatform will clear to before rendering.</div>
 </dd>
@@ -539,7 +539,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates an instance of the builder.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/graphics/SolaGraphics.Builder.html#%3Cinit%3E(technology.sola.engine.core.SolaPlatform,technology.sola.ecs.SolaEcs)" class="member-name-link">Builder(SolaPlatform, SolaEcs)</a> - Constructor for class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/SolaGraphics.Builder.html" title="class in technology.sola.engine.graphics">SolaGraphics.Builder</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/SolaGraphics.Builder.html#%3Cinit%3E(technology.sola.engine.core.SolaPlatform,technology.sola.ecs.SolaEcs)" class="member-name-link">Builder(SolaPlatform&lt;?&gt;, SolaEcs)</a> - Constructor for class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/SolaGraphics.Builder.html" title="class in technology.sola.engine.graphics">SolaGraphics.Builder</a></dt>
 <dd>
 <div class="block">Creates a new <a href="technology.sola.engine/technology/sola/engine/graphics/SolaGraphics.Builder.html" title="class in technology.sola.engine.graphics"><code>SolaGraphics.Builder</code></a> instance.</div>
 </dd>
@@ -2683,7 +2683,7 @@ loadScripts(document, 'script');</script>
 <div class="block">GuiDocument is a container for <a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a> that also handles passing various key and mouse events to the
  currently active root element set via <a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiDocument.html#setRootElement(technology.sola.engine.graphics.gui.GuiElement)"><code>GuiDocument.setRootElement(GuiElement)</code></a>.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiDocument.html#%3Cinit%3E(technology.sola.engine.core.SolaPlatform,technology.sola.engine.assets.AssetLoaderProvider,technology.sola.engine.input.MouseInput)" class="member-name-link">GuiDocument(SolaPlatform, AssetLoaderProvider, MouseInput)</a> - Constructor for class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiDocument.html" title="class in technology.sola.engine.graphics.gui">GuiDocument</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiDocument.html#%3Cinit%3E(technology.sola.engine.core.SolaPlatform,technology.sola.engine.assets.AssetLoaderProvider,technology.sola.engine.input.MouseInput)" class="member-name-link">GuiDocument(SolaPlatform&lt;?&gt;, AssetLoaderProvider, MouseInput)</a> - Constructor for class technology.sola.engine.graphics.gui.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiDocument.html" title="class in technology.sola.engine.graphics.gui">GuiDocument</a></dt>
 <dd>
 <div class="block">Creates a new GuiDocument instance, registering listeners for key and mouse-related events.</div>
 </dd>
@@ -4601,6 +4601,10 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/Sola.html#platform()" class="member-name-link">platform()</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/Sola.html" title="class in technology.sola.engine.core">Sola</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#platformConfig" class="member-name-link">platformConfig</a> - Variable in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
+<dd>
+<div class="block">The <a href="technology.sola.engine/technology/sola/engine/core/SolaPlatformConfig.html" title="interface in technology.sola.engine.core"><code>SolaPlatformConfig</code></a> for the platform.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/audio/AudioClip.html#play()" class="member-name-link">play()</a> - Method in interface technology.sola.engine.assets.audio.<a href="technology.sola.engine/technology/sola/engine/assets/audio/AudioClip.html" title="interface in technology.sola.engine.assets.audio">AudioClip</a></dt>
 <dd>
 <div class="block">Begins or resumes playback.</div>
@@ -6024,11 +6028,11 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">A builder for <a href="technology.sola.engine/technology/sola/engine/physics/SolaPhysics.html" title="class in technology.sola.engine.physics"><code>SolaPhysics</code></a>.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" class="type-name-link" title="class in technology.sola.engine.core">SolaPlatform</a> - Class in <a href="technology.sola.engine/technology/sola/engine/core/package-summary.html">technology.sola.engine.core</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" class="type-name-link" title="class in technology.sola.engine.core">SolaPlatform</a>&lt;<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="type parameter in SolaPlatform">Config</a> extends <a href="technology.sola.engine/technology/sola/engine/core/SolaPlatformConfig.html" title="interface in technology.sola.engine.core">SolaPlatformConfig</a>&gt; - Class in <a href="technology.sola.engine/technology/sola/engine/core/package-summary.html">technology.sola.engine.core</a></dt>
 <dd>
 <div class="block">SolaPlatform defines the API for a platform to run <a href="technology.sola.engine/technology/sola/engine/core/Sola.html" title="class in technology.sola.engine.core"><code>Sola</code></a>.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#%3Cinit%3E(technology.sola.engine.networking.socket.SocketClient,technology.sola.engine.networking.rest.RestClient,technology.sola.engine.storage.SaveStorage)" class="member-name-link">SolaPlatform(SocketClient, RestClient, SaveStorage)</a> - Constructor for class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#%3Cinit%3E(technology.sola.engine.networking.socket.SocketClient,technology.sola.engine.networking.rest.RestClient,technology.sola.engine.storage.SaveStorage,Config)" class="member-name-link">SolaPlatform(SocketClient, RestClient, SaveStorage, Config)</a> - Constructor for class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
 <dd>
 <div class="block">Initializes <a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> internals.</div>
 </dd>
@@ -6046,9 +6050,9 @@ loadScripts(document, 'script');</script>
 <div class="block">SolaPlatformInitialization is a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link"><code>FunctionalInterface</code></a> defining the contract for finishing initialization
  of a <a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a>.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatformCommonConfig.html" class="type-name-link" title="interface in technology.sola.engine.core">SolaPlatformCommonConfig</a> - Interface in <a href="technology.sola.engine/technology/sola/engine/core/package-summary.html">technology.sola.engine.core</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatformConfig.html" class="type-name-link" title="interface in technology.sola.engine.core">SolaPlatformConfig</a> - Interface in <a href="technology.sola.engine/technology/sola/engine/core/package-summary.html">technology.sola.engine.core</a></dt>
 <dd>
-<div class="block">SolaPlatformCommonConfig defines common configuration options for all <a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a>s.</div>
+<div class="block"><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatformConfig.html" title="interface in technology.sola.engine.core"><code>SolaPlatformConfig</code></a> defines common configuration options for all <a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a>s.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatformIdentifier.html" class="type-name-link" title="class in technology.sola.engine.core">SolaPlatformIdentifier</a> - Record Class in <a href="technology.sola.engine/technology/sola/engine/core/package-summary.html">technology.sola.engine.core</a></dt>
 <dd>
@@ -7277,7 +7281,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/core/event/FpsEvent.html#param-ups"><code>ups</code></a> record component.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatformCommonConfig.html#useSoftwareRendering()" class="member-name-link">useSoftwareRendering()</a> - Method in interface technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatformCommonConfig.html" title="interface in technology.sola.engine.core">SolaPlatformCommonConfig</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatformConfig.html#useSoftwareRendering()" class="member-name-link">useSoftwareRendering()</a> - Method in interface technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatformConfig.html" title="interface in technology.sola.engine.core">SolaPlatformConfig</a></dt>
 <dd>
 <div class="block">Whether software rendering should be used instead of native rendering for the <a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a>.</div>
 </dd>
