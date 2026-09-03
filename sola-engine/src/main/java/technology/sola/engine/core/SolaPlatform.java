@@ -26,7 +26,7 @@ import java.util.function.Consumer;
  * SolaPlatform defines the API for a platform to run {@link Sola}.
  */
 @NullMarked
-public abstract class SolaPlatform {
+public abstract class SolaPlatform<Config extends SolaPlatformConfig> {
   private static final SolaLogger LOGGER = SolaLogger.of(SolaPlatform.class);
   /**
    * The {@link SocketClient} for the platform.
@@ -40,6 +40,10 @@ public abstract class SolaPlatform {
    * The {@link SaveStorage} for the platform.
    */
   protected final SaveStorage saveStorage;
+  /**
+   * The {@link SolaPlatformConfig} for the platform.
+   */
+  protected final Config platformConfig;
   /**
    * The {@link Renderer} for the platform.
    */
@@ -62,14 +66,16 @@ public abstract class SolaPlatform {
   /**
    * Initializes {@link SolaPlatform} internals.
    *
-   * @param socketClient the {@link SocketClient} for the platform
-   * @param restClient   the {@link RestClient} for the platform
-   * @param saveStorage  the {@link SaveStorage} for the platform
+   * @param socketClient   the {@link SocketClient} for the platform
+   * @param restClient     the {@link RestClient} for the platform
+   * @param saveStorage    the {@link SaveStorage} for the platform
+   * @param platformConfig the {@link SolaPlatformConfig} for the platform
    */
-  protected SolaPlatform(SocketClient socketClient, RestClient restClient, SaveStorage saveStorage) {
+  protected SolaPlatform(SocketClient socketClient, RestClient restClient, SaveStorage saveStorage, Config platformConfig) {
     this.socketClient = socketClient;
     this.restClient = restClient;
     this.saveStorage = saveStorage;
+    this.platformConfig = platformConfig;
   }
 
   /**

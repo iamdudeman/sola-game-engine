@@ -2,7 +2,7 @@ package technology.sola.engine.platform.swing;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-import technology.sola.engine.core.SolaPlatformCommonConfig;
+import technology.sola.engine.core.SolaPlatformConfig;
 import technology.sola.engine.graphics.Color;
 
 import java.awt.*;
@@ -19,7 +19,7 @@ public record SwingSolaPlatformConfig(
   boolean useSoftwareRendering,
   Color backgroundColor,
   @Nullable Dimension initialWindowSize
-) implements SolaPlatformCommonConfig {
+) implements SolaPlatformConfig {
   /**
    * Configuration for the {@link SwingSolaPlatform}.
    *
@@ -36,5 +36,36 @@ public record SwingSolaPlatformConfig(
    */
   public SwingSolaPlatformConfig() {
     this(true, Color.BLACK, null);
+  }
+
+  /**
+   * Sets whether software rendering should be used.
+   *
+   * @param useSoftwareRendering whether software rendering should be used
+   * @return a new instance with the software rendering setting updated
+   */
+  public SwingSolaPlatformConfig setSoftwareRendering(boolean useSoftwareRendering) {
+    return new SwingSolaPlatformConfig(useSoftwareRendering, backgroundColor, initialWindowSize);
+  }
+
+  /**
+   * Sets the background {@link Color}.
+   *
+   * @param backgroundColor the background color
+   * @return a new instance with the background color updated
+   */
+  public SwingSolaPlatformConfig setBackgroundColor(Color backgroundColor) {
+    return new SwingSolaPlatformConfig(useSoftwareRendering, backgroundColor, initialWindowSize);
+  }
+
+  /**
+   * Sets the initial window size.
+   *
+   * @param width  the initial window width
+   * @param height the initial window height
+   * @return a new instance with the initial window size updated
+   */
+  public SwingSolaPlatformConfig setInitialWindowSize(int width, int height) {
+    return new SwingSolaPlatformConfig(useSoftwareRendering, backgroundColor, new Dimension(width, height));
   }
 }

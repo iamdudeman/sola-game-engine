@@ -20,8 +20,7 @@
 
 ## TODO List
 
-* consider making platform config always required so API informs devs it is there
-    * provide more constructors with good defaults
+*
 
 ### Low priority (not ordered)
 

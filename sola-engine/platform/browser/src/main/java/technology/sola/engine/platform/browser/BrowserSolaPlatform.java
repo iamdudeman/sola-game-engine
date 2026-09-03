@@ -35,18 +35,11 @@ import java.util.function.Consumer;
  * a web browser.
  */
 @NullMarked
-public class BrowserSolaPlatform extends SolaPlatform {
+public class BrowserSolaPlatform extends SolaPlatform<BrowserSolaPlatformConfig> {
   private static final SolaLogger LOGGER = SolaLogger.of(BrowserSolaPlatform.class);
   private final boolean useSoftwareRendering;
   private final boolean useImageSmoothing;
   private final String backgroundColor;
-
-  /**
-   * Creates a BrowserSolaPlatform instance using default {@link BrowserSolaPlatformConfig}.
-   */
-  public BrowserSolaPlatform() {
-    this(new BrowserSolaPlatformConfig());
-  }
 
   /**
    * Creates a BrowserSolaPlatform instance with the desired configuration.
@@ -54,7 +47,7 @@ public class BrowserSolaPlatform extends SolaPlatform {
    * @param platformConfig the {@link BrowserSolaPlatformConfig}
    */
   public BrowserSolaPlatform(BrowserSolaPlatformConfig platformConfig) {
-    super(new BrowserSocketClient(), new BrowserRestClient(), new LocalStorageSaveStorage());
+    super(new BrowserSocketClient(), new BrowserRestClient(), new LocalStorageSaveStorage(), platformConfig);
 
     this.useSoftwareRendering = platformConfig.useSoftwareRendering();
     this.useImageSmoothing = platformConfig.useImageSmoothing();

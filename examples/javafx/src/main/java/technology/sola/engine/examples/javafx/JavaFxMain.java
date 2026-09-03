@@ -1,10 +1,9 @@
 package technology.sola.engine.examples.javafx;
 
 import org.jspecify.annotations.NullMarked;
-import technology.sola.engine.core.Sola;
-import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.platform.javafx.JavaFxSolaPlatform;
+import technology.sola.engine.platform.javafx.JavaFxSolaPlatformConfig;
 import technology.sola.logging.JavaSolaLoggerFactory;
 import technology.sola.logging.SolaLogLevel;
 import technology.sola.logging.SolaLogger;
@@ -24,8 +23,8 @@ public class JavaFxMain {
    * @param args command line args
    */
   public static void main(String[] args) {
-    SolaPlatform solaPlatform = new JavaFxSolaPlatform();
-    Sola sola = new ExampleLauncherSola();
+    var solaPlatform = new JavaFxSolaPlatform(new JavaFxSolaPlatformConfig());
+    var sola = new ExampleLauncherSola();
 
     solaPlatform.play(sola);
   }

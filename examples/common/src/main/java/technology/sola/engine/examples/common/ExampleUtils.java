@@ -22,7 +22,7 @@ public class ExampleUtils {
    * @param solaPlatform the current {@link SolaPlatform}
    * @param eventHub     the {@link EventHub} instance for the {@code Sola}
    */
-  public static void returnToLauncher(SolaPlatform solaPlatform, EventHub eventHub) {
+  public static void returnToLauncher(SolaPlatform<?> solaPlatform, EventHub eventHub) {
     eventHub.add(GameLoopEvent.class, event -> {
       if (event.state() == GameLoopState.STOPPED) {
         solaPlatform.play(new ExampleLauncherSola());
@@ -42,7 +42,7 @@ public class ExampleUtils {
    * @return the gui element
    */
   public static GuiElement<?, ?> createReturnToLauncherButton(
-    SolaPlatform solaPlatform, EventHub eventHub, String x, String y
+    SolaPlatform<?> solaPlatform, EventHub eventHub, String x, String y
   ) {
     var element = new ButtonGuiElement()
       .addStyle(ConditionalStyle.always(

@@ -25,7 +25,9 @@ public class MainActivity extends SolaAndroidActivity {
    * Creates an instance of the activity.
    */
   public MainActivity() {
-    super(new AndroidSolaPlatformConfig(true, Color.BLACK, Orientation.LANDSCAPE, false));
+    super(new AndroidSolaPlatformConfig(
+      true, Color.BLACK, Orientation.LANDSCAPE, false)
+    );
   }
 
   @Override
