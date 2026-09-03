@@ -51,7 +51,7 @@ import java.util.function.Consumer;
  * a JavaFX powered window.
  */
 @NullMarked
-public class JavaFxSolaPlatform extends SolaPlatform {
+public class JavaFxSolaPlatform extends SolaPlatform<JavaFxSolaPlatformConfig> {
   private static final SolaLogger LOGGER = SolaLogger.of(JavaFxSolaPlatform.class);
   private final boolean useSoftwareRendering;
   private final boolean useImageSmoothing;
@@ -66,19 +66,12 @@ public class JavaFxSolaPlatform extends SolaPlatform {
   private Affine originalTransform;
 
   /**
-   * Creates a JavaFxSolaPlatform instance with default {@link JavaFxSolaPlatformConfig}.
-   */
-  public JavaFxSolaPlatform() {
-    this(new JavaFxSolaPlatformConfig());
-  }
-
-  /**
    * Creates a SwingSolaPlatform instance with the desired configuration.
    *
    * @param platformConfig the {@link JavaFxSolaPlatformConfig}
    */
   public JavaFxSolaPlatform(JavaFxSolaPlatformConfig platformConfig) {
-    super(new JavaSocketClient(), new JavaRestClient(), new FileSaveStorage());
+    super(new JavaSocketClient(), new JavaRestClient(), new FileSaveStorage(), platformConfig);
 
     this.useSoftwareRendering = platformConfig.useSoftwareRendering();
     this.useImageSmoothing = platformConfig.useImageSmoothing();

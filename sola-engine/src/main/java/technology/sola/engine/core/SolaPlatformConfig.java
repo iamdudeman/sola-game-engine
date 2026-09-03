@@ -4,10 +4,10 @@ import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.graphics.Color;
 
 /**
- * SolaPlatformCommonConfig defines common configuration options for all {@link SolaPlatform}s.
+ * {@link SolaPlatformConfig} defines common configuration options for all {@link SolaPlatform}s.
  */
 @NullMarked
-public interface SolaPlatformCommonConfig {
+public interface SolaPlatformConfig {
   /**
    * Whether software rendering should be used instead of native rendering for the {@link SolaPlatform}.
    *

@@ -1,10 +1,9 @@
 package technology.sola.engine.examples.browser;
 
 import org.jspecify.annotations.NullMarked;
-import technology.sola.engine.core.SolaPlatform;
-import technology.sola.engine.core.Sola;
 import technology.sola.engine.examples.common.ExampleLauncherSola;
 import technology.sola.engine.platform.browser.BrowserSolaPlatform;
+import technology.sola.engine.platform.browser.BrowserSolaPlatformConfig;
 import technology.sola.engine.platform.browser.core.BrowserSolaLoggerFactory;
 import technology.sola.logging.SolaLogLevel;
 import technology.sola.logging.SolaLogger;
@@ -24,8 +23,8 @@ public class BrowserMain {
    * @param args command line args
    */
   public static void main(String[] args) {
-    SolaPlatform solaPlatform = new BrowserSolaPlatform();
-    Sola sola = new ExampleLauncherSola();
+    var solaPlatform = new BrowserSolaPlatform(new BrowserSolaPlatformConfig());
+    var sola = new ExampleLauncherSola();
 
     solaPlatform.play(sola);
   }

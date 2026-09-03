@@ -45,7 +45,7 @@ import java.util.function.Consumer;
  * in an Android app. It requires a host {@link SolaAndroidActivity} to run in.
  */
 @NullMarked
-public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventObserver {
+public class AndroidSolaPlatform extends SolaPlatform<AndroidSolaPlatformConfig> implements LifecycleEventObserver {
   private static final SolaLogger LOGGER = SolaLogger.of(AndroidSolaPlatform.class);
   private final SolaAndroidActivity hostActivity;
   private final boolean useSoftwareRendering;
@@ -62,7 +62,7 @@ public class AndroidSolaPlatform extends SolaPlatform implements LifecycleEventO
    * @param hostActivity              the host {@link SolaAndroidActivity}
    */
   public AndroidSolaPlatform(AndroidSolaPlatformConfig androidSolaPlatformConfig, SolaAndroidActivity hostActivity) {
-    super(new JavaSocketClient(), new JavaRestClient(), new FileSaveStorage());
+    super(new JavaSocketClient(), new JavaRestClient(), new FileSaveStorage(), androidSolaPlatformConfig);
 
     this.hostActivity = hostActivity;
 

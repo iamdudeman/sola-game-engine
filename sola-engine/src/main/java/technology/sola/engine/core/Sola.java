@@ -47,7 +47,7 @@ public abstract class Sola {
    */
   protected AssetLoaderProvider assetLoaderProvider;
   @Nullable
-  private SolaPlatform platform;
+  private SolaPlatform<?> platform;
   @Nullable
   private Runnable onCleanup;
 
@@ -93,7 +93,7 @@ public abstract class Sola {
   /**
    * @return the {@link SolaPlatform} running this Sola.
    */
-  protected SolaPlatform platform() {
+  protected SolaPlatform<?> platform() {
     if (platform == null) {
       throw new IllegalStateException("Platform has not initialized. This is done through SolaPlatform#play(Sola)");
     }
@@ -116,7 +116,7 @@ public abstract class Sola {
     }
   }
 
-  void initializeForPlatform(SolaPlatform platform, Runnable completeAsyncInit) {
+  void initializeForPlatform(SolaPlatform<?> platform, Runnable completeAsyncInit) {
     this.platform = platform;
 
     var subscriptions = List.of(

@@ -17,7 +17,7 @@ import technology.sola.engine.input.*;
 @NullMarked
 public class GuiDocument {
   RootGuiElement root;
-  private final SolaPlatform platform;
+  private final SolaPlatform<?> platform;
   private final AssetLoaderProvider assetLoaderProvider;
   private final MouseInput mouseInput;
   private GuiElement<?, ?> focussedElement;
@@ -30,7 +30,7 @@ public class GuiDocument {
    * @param assetLoaderProvider the {@link AssetLoaderProvider}
    * @param mouseInput          the {@link MouseInput}
    */
-  public GuiDocument(SolaPlatform platform, AssetLoaderProvider assetLoaderProvider, MouseInput mouseInput) {
+  public GuiDocument(SolaPlatform<?> platform, AssetLoaderProvider assetLoaderProvider, MouseInput mouseInput) {
     this.platform = platform;
     this.assetLoaderProvider = assetLoaderProvider;
     this.mouseInput = mouseInput;

@@ -1,7 +1,7 @@
 package technology.sola.engine.platform.android;
 
 import org.jspecify.annotations.NullMarked;
-import technology.sola.engine.core.SolaPlatformCommonConfig;
+import technology.sola.engine.core.SolaPlatformConfig;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.platform.android.config.Orientation;
 
@@ -19,11 +19,51 @@ public record AndroidSolaPlatformConfig(
   Color backgroundColor,
   Orientation orientation,
   boolean useImageSmoothing
-) implements SolaPlatformCommonConfig {
+) implements SolaPlatformConfig {
   /**
    * Creates an instance with default options. Orientation is set to {@link Orientation#PORTRAIT}.
    */
   public AndroidSolaPlatformConfig() {
     this(true, Color.BLACK, Orientation.PORTRAIT, true);
+  }
+
+  /**
+   * Sets whether software rendering should be used.
+   *
+   * @param useSoftwareRendering whether software rendering should be used
+   * @return a new instance with the software rendering setting updated
+   */
+  public AndroidSolaPlatformConfig setSoftwareRendering(boolean useSoftwareRendering) {
+    return new AndroidSolaPlatformConfig(useSoftwareRendering, backgroundColor, orientation, useImageSmoothing);
+  }
+
+  /**
+   * Sets the background {@link Color}.
+   *
+   * @param backgroundColor the background color
+   * @return a new instance with the background color updated
+   */
+  public AndroidSolaPlatformConfig setBackgroundColor(Color backgroundColor) {
+    return new AndroidSolaPlatformConfig(useSoftwareRendering, backgroundColor, orientation, useImageSmoothing);
+  }
+
+  /**
+   * Sets the  {@link Orientation}.
+   *
+   * @param orientation the orientation
+   * @return a new instance with the orientation updated
+   */
+  public AndroidSolaPlatformConfig setOrientation(Orientation orientation) {
+    return new AndroidSolaPlatformConfig(useSoftwareRendering, backgroundColor, orientation, useImageSmoothing);
+  }
+
+  /**
+   * Sets whether image smoothing should be used.
+   *
+   * @param useImageSmoothing whether image smoothing should be used
+   * @return a new instance with the image smoothing setting updated
+   */
+  public AndroidSolaPlatformConfig setImageSmoothing(boolean useImageSmoothing) {
+    return new AndroidSolaPlatformConfig(useSoftwareRendering, backgroundColor, orientation, useImageSmoothing);
   }
 }

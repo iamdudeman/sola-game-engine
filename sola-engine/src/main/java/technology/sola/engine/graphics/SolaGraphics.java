@@ -192,7 +192,7 @@ public class SolaGraphics {
    */
   public static class Builder {
     private final SolaEcs solaEcs;
-    private final SolaPlatform platform;
+    private final SolaPlatform<?> platform;
     private Color backgroundColor = Color.BLACK;
     private boolean withDefaultGraphicsModules = true;
     @Nullable
@@ -211,7 +211,7 @@ public class SolaGraphics {
      * @param platform the {@link SolaPlatform} instance
      * @param solaEcs  the {@link SolaEcs} instance to attach systems to
      */
-    public Builder(SolaPlatform platform, SolaEcs solaEcs) {
+    public Builder(SolaPlatform<?> platform, SolaEcs solaEcs) {
       this.platform = platform;
       this.solaEcs = solaEcs;
     }

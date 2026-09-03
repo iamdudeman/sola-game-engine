@@ -45,7 +45,7 @@ import java.util.function.Consumer;
  * a Swing powered window.
  */
 @NullMarked
-public class SwingSolaPlatform extends SolaPlatform {
+public class SwingSolaPlatform extends SolaPlatform<SwingSolaPlatformConfig> {
   private static final SolaLogger LOGGER = SolaLogger.of(SwingSolaPlatform.class);
   private final boolean useSoftwareRendering;
   @Nullable
@@ -59,19 +59,12 @@ public class SwingSolaPlatform extends SolaPlatform {
   private Graphics2D graphics2D;
 
   /**
-   * Creates a SwingSolaPlatform instance with default {@link SwingSolaPlatformConfig}.
-   */
-  public SwingSolaPlatform() {
-    this(new SwingSolaPlatformConfig());
-  }
-
-  /**
    * Creates a SwingSolaPlatformConfig instance with the desired configuration.
    *
    * @param platformConfig the {@link SwingSolaPlatformConfig}
    */
   public SwingSolaPlatform(SwingSolaPlatformConfig platformConfig) {
-    super(new JavaSocketClient(), new JavaRestClient(), new FileSaveStorage());
+    super(new JavaSocketClient(), new JavaRestClient(), new FileSaveStorage(), platformConfig);
 
     this.useSoftwareRendering = platformConfig.useSoftwareRendering();
     this.initialWindowSize = platformConfig.initialWindowSize();
