@@ -2,7 +2,7 @@
 
 ## Known Bugs List
 
-* visibly hidden inputs can still be interacted with via click
+*
 
 ### Low-priority bugs
 

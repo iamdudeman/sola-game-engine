@@ -637,32 +637,60 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   }
 
   private boolean shouldHandleMouseMoveEvents() {
+    if (!styleContainer.isVisible()) {
+      return false;
+    }
+
     return styleContainer.hasHoverCondition() || events.mouseMoved().hasListeners()
       || events.mouseEntered().hasListeners() || events.mouseExited().hasListeners();
   }
 
   private boolean shouldHandleMousePressedEvents() {
+    if (!styleContainer.isVisible()) {
+      return false;
+    }
+
     return styleContainer.hasActiveCondition() || events().mousePressed().hasListeners();
   }
 
   private boolean shouldHandleMouseReleasedEvents() {
+    if (!styleContainer.isVisible()) {
+      return false;
+    }
+
     return styleContainer.hasActiveCondition() || events().mouseReleased().hasListeners();
   }
 
   private boolean shouldHandleTouchMoveEvents() {
+    if (!styleContainer.isVisible()) {
+      return false;
+    }
+
     return styleContainer.hasHoverCondition() || events.touchMove().hasListeners()
       || events.touchStart().hasListeners() || events.touchEnd().hasListeners();
   }
 
   private boolean shouldHandleTouchStartEvents() {
+    if (!styleContainer.isVisible()) {
+      return false;
+    }
+
     return styleContainer.hasActiveCondition() || events().touchStart().hasListeners();
   }
 
   private boolean shouldHandleTouchEndEvents() {
+    if (!styleContainer.isVisible()) {
+      return false;
+    }
+
     return styleContainer.hasActiveCondition() || events().touchEnd().hasListeners();
   }
 
   private boolean shouldHandleTouchCancelEvents() {
+    if (!styleContainer.isVisible()) {
+      return false;
+    }
+
     return styleContainer.hasActiveCondition() || events().touchCancel().hasListeners();
   }
 }
