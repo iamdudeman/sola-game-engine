@@ -4,7 +4,6 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.style.property.MergeableProperty;
-import technology.sola.engine.graphics.gui.style.property.Visibility;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +24,6 @@ public class StyleContainer<Style extends BaseStyles> {
   private boolean[] conditionsArray;
   private boolean hasHoverCondition = false;
   private boolean hasActiveCondition = false;
-  private boolean isVisible = false;
 
   /**
    * Creates a StyleContainer instance for a {@link GuiElement}.
@@ -216,13 +214,6 @@ public class StyleContainer<Style extends BaseStyles> {
     return hasActiveCondition;
   }
 
-  /**
-   * @return true if any of the styles contain a {@link BaseStyles#visibility()} of {@link Visibility#VISIBLE}.
-   */
-  public boolean isVisible() {
-    return isVisible;
-  }
-
   private void recalculateConditions() {
     for (var conditionalStyle : conditionalStyles) {
       if (conditionalStyle.isHoverStyle()) {
@@ -232,7 +223,5 @@ public class StyleContainer<Style extends BaseStyles> {
         hasActiveCondition = true;
       }
     }
-
-    isVisible = getPropertyValue(BaseStyles::visibility, DefaultStyleValues.VISIBILITY) == Visibility.VISIBLE;
   }
 }
