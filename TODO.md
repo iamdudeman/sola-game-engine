@@ -2,7 +2,8 @@
 
 ## Known Bugs List
 
-*
+* when parent element is hidden, child elements can still be interacted with via click
+* issues with removing gui elements when clicking another gui element (need to stabilize this)
 
 ### Low-priority bugs
 
