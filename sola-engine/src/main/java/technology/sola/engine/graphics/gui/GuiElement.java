@@ -385,6 +385,13 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   }
 
   /**
+   * @return true if this element is visible
+   */
+  public boolean isVisible() {
+    return styleContainer.getPropertyValue(BaseStyles::visibility, DefaultStyleValues.VISIBILITY) == Visibility.VISIBLE;
+  }
+
+  /**
    * Renders all the element's children.
    *
    * @param renderer the {@link Renderer} instance
@@ -457,6 +464,10 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   }
 
   void onMousePressed(GuiMouseEvent event) {
+    if (!isVisible()) {
+      return;
+    }
+
     for (var child : children) {
       child.onMousePressed(event);
     }
@@ -468,6 +479,10 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   }
 
   void onMouseReleased(GuiMouseEvent event) {
+    if (!isVisible()) {
+      return;
+    }
+
     for (var child : children) {
       child.onMouseReleased(event);
     }
@@ -480,6 +495,10 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   }
 
   void onMouseMoved(GuiMouseEvent event) {
+    if (!isVisible()) {
+      return;
+    }
+
     for (var child : children) {
       child.onMouseMoved(event);
     }
@@ -500,6 +519,10 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
   }
 
   void onTouch(GuiTouchEvent event) {
+    if (!isVisible()) {
+      return;
+    }
+
     for (var child : children) {
       child.onTouch(event);
     }

@@ -25,7 +25,6 @@ import technology.sola.engine.graphics.gui.style.ConditionalStyle;
 import technology.sola.engine.graphics.gui.style.property.CrossAxisChildren;
 import technology.sola.engine.graphics.gui.style.property.Direction;
 import technology.sola.engine.graphics.gui.style.property.MainAxisChildren;
-import technology.sola.engine.graphics.gui.style.property.Visibility;
 import technology.sola.engine.graphics.gui.style.theme.DefaultThemeBuilder;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
@@ -76,7 +75,6 @@ public class ExampleLauncherSola extends Sola {
         new BaseStyles.Builder<>()
           .setWidth("100%")
           .setDirection(Direction.ROW)
-          .setVisibility(Visibility.HIDDEN)
           .setMainAxisChildren(MainAxisChildren.CENTER)
           .setGap(10)
           .setPadding(10)
