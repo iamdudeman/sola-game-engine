@@ -205,7 +205,7 @@ public abstract class GuiElement<Style extends BaseStyles, ElementType extends G
    * @return true if the element is currently focusable
    */
   public boolean isFocusable() {
-    return styleContainer.getPropertyValue(BaseStyles::visibility, DefaultStyleValues.VISIBILITY) == Visibility.VISIBLE;
+    return isVisible();
   }
 
   /**
