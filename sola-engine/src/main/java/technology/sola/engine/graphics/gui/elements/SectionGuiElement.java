@@ -95,6 +95,10 @@ public class SectionGuiElement extends GuiElement<BaseStyles, SectionGuiElement>
 
   @Override
   public void requestFocus() {
+    if (!isFocusable()) {
+      return;
+    }
+
     var focussedChildren = getFocusableChildren();
 
     if (focussedChildren.isEmpty()) {

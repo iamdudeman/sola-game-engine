@@ -2,7 +2,7 @@
 
 ## Known Bugs List
 
-* visibly hidden inputs can still be interacted with via click
+* issues with removing gui elements when clicking another gui element (need to stabilize this)
 
 ### Low-priority bugs
 
@@ -20,7 +20,8 @@
 
 ## TODO List
 
-*
+* UnitTestSolaPlatform
+    * ability to render to an image on the file system
 
 ### Low priority (not ordered)
 
