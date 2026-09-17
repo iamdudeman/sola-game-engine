@@ -23,7 +23,8 @@ public class SwingMain {
    * @param args command line args
    */
   public static void main(String[] args) {
-    var solaPlatform = new SwingSolaPlatform(new SwingSolaPlatformConfig());
+    var platformConfig = new SwingSolaPlatformConfig();
+    var solaPlatform = new SwingSolaPlatform(platformConfig);
     var sola = new ExampleLauncherSola();
 
     solaPlatform.play(sola);

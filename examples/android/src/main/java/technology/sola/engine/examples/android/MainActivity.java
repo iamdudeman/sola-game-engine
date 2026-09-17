@@ -23,11 +23,15 @@ public class MainActivity extends SolaAndroidActivity {
    * Creates an instance of the activity.
    */
   public MainActivity() {
-    super(new AndroidSolaPlatformConfig());
+    super(platformConfig());
   }
 
   @Override
   public Sola getInitialSola() {
     return new ExampleLauncherSola();
+  }
+
+  private static AndroidSolaPlatformConfig platformConfig() {
+    return new AndroidSolaPlatformConfig();
   }
 }

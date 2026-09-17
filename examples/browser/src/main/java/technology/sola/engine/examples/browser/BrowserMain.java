@@ -23,7 +23,8 @@ public class BrowserMain {
    * @param args command line args
    */
   public static void main(String[] args) {
-    var solaPlatform = new BrowserSolaPlatform(new BrowserSolaPlatformConfig());
+    var platformConfig = new BrowserSolaPlatformConfig();
+    var solaPlatform = new BrowserSolaPlatform(platformConfig);
     var sola = new ExampleLauncherSola();
 
     solaPlatform.play(sola);

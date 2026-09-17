@@ -23,7 +23,8 @@ public class JavaFxMain {
    * @param args command line args
    */
   public static void main(String[] args) {
-    var solaPlatform = new JavaFxSolaPlatform(new JavaFxSolaPlatformConfig());
+    var platformConfig = new JavaFxSolaPlatformConfig();
+    var solaPlatform = new JavaFxSolaPlatform(platformConfig);
     var sola = new ExampleLauncherSola();
 
     solaPlatform.play(sola);
