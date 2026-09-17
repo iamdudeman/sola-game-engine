@@ -21,10 +21,10 @@ public record AndroidSolaPlatformConfig(
   boolean useImageSmoothing
 ) implements SolaPlatformConfig {
   /**
-   * Creates an instance with default options. Orientation is set to {@link Orientation#PORTRAIT}.
+   * Creates an instance with default options. Orientation is set to {@link Orientation#LANDSCAPE}.
    */
   public AndroidSolaPlatformConfig() {
-    this(true, Color.BLACK, Orientation.PORTRAIT, true);
+    this(true, Color.BLACK, Orientation.LANDSCAPE, true);
   }
 
   /**
