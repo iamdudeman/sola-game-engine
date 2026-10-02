@@ -1,18 +1,6 @@
 subprojects {
   apply(plugin = "maven-publish")
 
-  plugins.withId("java-library") {
-    extensions.configure<PublishingExtension> {
-      publications {
-        if (findByName("mavenJava") == null) {
-          create<MavenPublication>("mavenJava") {
-            from(components["java"])
-          }
-        }
-      }
-    }
-  }
-
   val publishTask = project.tasks.getByName("publishToMavenLocal")
 
   gradle.includedBuilds.forEach { build ->
