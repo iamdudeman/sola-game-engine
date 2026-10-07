@@ -79,16 +79,19 @@ public class GravitySystem extends EcsSystem {
   }
 
   private void handleCollisionManifoldEvent(CollisionEvent event) {
+    var gravityDirectionMod = getGravityConstant() >= 0 ? 1 : -1;
+
     if (isActive()) {
       CollisionManifold payload = event.collisionManifold();
+      var modY = gravityDirectionMod * payload.normal().y();
 
-      if (payload.normal().y() > 0) {
+      if (modY > 0) {
         DynamicBodyComponent dynamicBodyComponent = payload.entityA().getComponent(DynamicBodyComponent.class);
 
         if (dynamicBodyComponent != null) {
           dynamicBodyComponent.setGrounded(true);
         }
-      } else if (payload.normal().y() < 0) {
+      } else if (modY < 0) {
         DynamicBodyComponent dynamicBodyComponent = payload.entityB().getComponent(DynamicBodyComponent.class);
 
         if (dynamicBodyComponent != null) {

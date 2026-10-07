@@ -67,6 +67,16 @@ public class Material {
   }
 
   /**
+   * Creates a new {@link Material} with desired mass and current restitution and friction.
+   *
+   * @param mass the mass of the material must be 0 or positive
+   * @return a new {@link Material} with the desired mass
+   */
+  public Material setMass(float mass) {
+    return new Material(mass, restitution, friction);
+  }
+
+  /**
    * Gets the inverse mass (1 / mass). This value is pre-calculated since it is used often.
    *
    * @return the inverse mass
@@ -85,12 +95,32 @@ public class Material {
   }
 
   /**
+   * Creates a new {@link Material} with desired restitution and current mass and friction.
+   *
+   * @param restitution the restitution of the material
+   * @return a new {@link Material} with the desired restitution
+   */
+  public Material setRestitution(float restitution) {
+    return new Material(mass, restitution, friction);
+  }
+
+  /**
    * Gets the friction of the material.
    *
    * @return the friction of the material
    */
   public float getFriction() {
     return friction;
+  }
+
+  /**
+   * Creates a new {@link Material} with desired friction and current mass and restitution.
+   *
+   * @param friction the friction of the material
+   * @return a new {@link Material} with the desired friction
+   */
+  public Material setFriction(float friction) {
+    return new Material(mass, restitution, friction);
   }
 
   @Override
