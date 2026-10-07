@@ -163,6 +163,21 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Material.html" title="class in technology.sola.engine.physics">Material</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setFriction(float)" class="member-name-link">setFriction</a><wbr>(float&nbsp;friction)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a new <a href="Material.html" title="class in technology.sola.engine.physics"><code>Material</code></a> with desired friction and current mass and restitution.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Material.html" title="class in technology.sola.engine.physics">Material</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMass(float)" class="member-name-link">setMass</a><wbr>(float&nbsp;mass)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a new <a href="Material.html" title="class in technology.sola.engine.physics"><code>Material</code></a> with desired mass and current restitution and friction.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Material.html" title="class in technology.sola.engine.physics">Material</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRestitution(float)" class="member-name-link">setRestitution</a><wbr>(float&nbsp;restitution)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a new <a href="Material.html" title="class in technology.sola.engine.physics"><code>Material</code></a> with desired restitution and current mass and friction.</div>
+</div>
 </div>
 </div>
 </div>
@@ -254,6 +269,19 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="setMass(float)">
+<h3>setMass</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Material.html" title="class in technology.sola.engine.physics">Material</a></span>&nbsp;<span class="element-name">setMass</span><wbr><span class="parameters">(float&nbsp;mass)</span></div>
+<div class="block">Creates a new <a href="Material.html" title="class in technology.sola.engine.physics"><code>Material</code></a> with desired mass and current restitution and friction.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>mass</code> - the mass of the material must be 0 or positive</dd>
+<dt>Returns:</dt>
+<dd>a new <a href="Material.html" title="class in technology.sola.engine.physics"><code>Material</code></a> with the desired mass</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="getInverseMass()">
 <h3>getInverseMass</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getInverseMass</span>()</div>
@@ -276,6 +304,19 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="setRestitution(float)">
+<h3>setRestitution</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Material.html" title="class in technology.sola.engine.physics">Material</a></span>&nbsp;<span class="element-name">setRestitution</span><wbr><span class="parameters">(float&nbsp;restitution)</span></div>
+<div class="block">Creates a new <a href="Material.html" title="class in technology.sola.engine.physics"><code>Material</code></a> with desired restitution and current mass and friction.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>restitution</code> - the restitution of the material</dd>
+<dt>Returns:</dt>
+<dd>a new <a href="Material.html" title="class in technology.sola.engine.physics"><code>Material</code></a> with the desired restitution</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="getFriction()">
 <h3>getFriction</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getFriction</span>()</div>
@@ -283,6 +324,19 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the friction of the material</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setFriction(float)">
+<h3>setFriction</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Material.html" title="class in technology.sola.engine.physics">Material</a></span>&nbsp;<span class="element-name">setFriction</span><wbr><span class="parameters">(float&nbsp;friction)</span></div>
+<div class="block">Creates a new <a href="Material.html" title="class in technology.sola.engine.physics"><code>Material</code></a> with desired friction and current mass and restitution.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>friction</code> - the friction of the material</dd>
+<dt>Returns:</dt>
+<dd>a new <a href="Material.html" title="class in technology.sola.engine.physics"><code>Material</code></a> with the desired friction</dd>
 </dl>
 </section>
 </li>
