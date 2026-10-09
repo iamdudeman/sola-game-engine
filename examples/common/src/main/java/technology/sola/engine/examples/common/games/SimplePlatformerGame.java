@@ -5,6 +5,7 @@ import technology.sola.ecs.Component;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
+import technology.sola.engine.assets.graphics.spritesheet.SpriteSheet;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.component.TransformComponent;
@@ -27,10 +28,7 @@ import technology.sola.engine.physics.CollisionManifold;
 import technology.sola.engine.physics.SolaPhysics;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
-import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
-import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
-import technology.sola.engine.physics.component.collider.ColliderShapeTriangle;
-import technology.sola.engine.physics.component.collider.ColliderTag;
+import technology.sola.engine.physics.component.collider.*;
 import technology.sola.engine.physics.component.particle.ParticleEmitterComponent;
 import technology.sola.engine.physics.component.particle.emitter.CircleEmitterShape;
 import technology.sola.engine.physics.event.CollisionEvent;
@@ -66,15 +64,25 @@ public class SimplePlatformerGame extends Sola {
 
     solaGraphics = new SolaGraphics.Builder(platform(), solaEcs)
       .withGui(mouseInput)
+      .withBackgroundColor(Color.LIGHT_GRAY)
       .buildAndInitialize(assetLoaderProvider);
 
     solaGraphics.guiDocument().setRootElement(buildReturnButton());
 
     solaEcs.addSystems(new MovingPlatformSystem(), new PlayerSystem(), new CameraProgressSystem(), new GlassSystem(eventHub));
-    solaEcs.setWorld(buildWorld());
     eventHub.add(CollisionEvent.class, new GameDoneEventListener());
 
     platform().getViewport().setAspectMode(AspectMode.MAINTAIN);
+  }
+
+  @Override
+  protected void onAsyncInit(Runnable completeAsyncInit) {
+    assetLoaderProvider.get(SpriteSheet.class)
+      .getNewAsset("forest", "assets/sprites/forest.sprites.json")
+      .executeWhenLoaded(spriteSheet -> {
+        solaEcs.setWorld(buildWorld());
+        completeAsyncInit.run();
+      });
   }
 
   @Override
@@ -139,9 +147,9 @@ public class SimplePlatformerGame extends Sola {
 
     world.createEntity()
       .addComponent(new PlayerComponent())
-      .addComponent(new TransformComponent(200, 300, 50, 50))
-      .addComponent(new RectangleRendererComponent(Color.BLUE))
-      .addComponent(new ColliderComponent(new ColliderShapeAABB()).setIgnoreTags(ColliderTags.IGNORE))
+      .addComponent(new TransformComponent(200, 300, 3, 3))
+      .addComponent(new SpriteComponent("forest", "player"))
+      .addComponent(new ColliderComponent(new ColliderShapeSprite(assetLoaderProvider.get(SpriteSheet.class), false)).setIgnoreTags(ColliderTags.IGNORE))
       .addComponent(new DynamicBodyComponent())
       .setName("player");
 
