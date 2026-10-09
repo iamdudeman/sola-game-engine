@@ -1,8 +1,10 @@
 # sola-game-engine TODO list
 
-* CollisionUtil for auto sizing based on sprite sheet id and sprite id. Some way to make it more convenient to use than
-  needing sprite sheet instance.
-    * need example using new ColliderShapeSprite
+* ColliderShapeSprite implementation to replace ColliderUtils (which was meh)
+    * ~~need example using new ColliderShapeSprite~~
+    * ~~implement AABB~~
+    * implement circle
+    * remove ColliderUtils
 
 ## Known Bugs List
 
