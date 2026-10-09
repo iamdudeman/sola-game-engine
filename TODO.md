@@ -1,12 +1,16 @@
 # sola-game-engine TODO list
 
+* CollisionUtil for auto sizing based on sprite sheet id and sprite id. Some way to make it more convenient to use than
+  needing sprite sheet instance.
+    * need example using new ColliderShapeSprite
+
 ## Known Bugs List
 
 * issues with removing gui elements when clicking another gui element (need to stabilize this)
 
 ### Low-priority bugs
 
-*
+* JavaDocs and Sources no longer appear to be available in template project, perhaps issue with jitpack.io?
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -25,6 +29,7 @@
 
 ### Low priority (not ordered)
 
+* consider adding ability to tile sprites instead of always stretching
 * Gui animation system
     * might need a new "AnimatedProperty" concept perhaps?
 * Particle System

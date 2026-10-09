@@ -32,12 +32,9 @@ import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.engine.input.TouchPhase;
 import technology.sola.engine.physics.SolaPhysics;
-import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
-import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
 import technology.sola.engine.physics.component.particle.ParticleEmitterComponent;
 import technology.sola.engine.physics.component.particle.emitter.TrapezoidEmitterShape;
-import technology.sola.engine.physics.utils.ColliderUtils;
 import technology.sola.engine.utils.SolaRandom;
 import technology.sola.math.EasingFunction;
 import technology.sola.math.linear.Vector2D;
@@ -125,11 +122,7 @@ public class LightingExample extends Sola {
   protected void onAsyncInit(Runnable completeAsyncInit) {
     assetLoaderProvider.get(SpriteSheet.class)
       .getNewAsset("forest", "assets/sprites/forest.sprites.json")
-      .executeWhenLoaded(spriteSheet -> {
-        ColliderUtils.autoSizeColliderToSprite(solaEcs.getWorld().findEntityByName("player"), spriteSheet);
-
-        completeAsyncInit.run();
-      });
+      .executeWhenLoaded(spriteSheet -> completeAsyncInit.run());
   }
 
   @Override
@@ -160,7 +153,6 @@ public class LightingExample extends Sola {
         new TransformComponent(x, y),
         new SpriteComponent("forest", "tree"),
         new LayerComponent("objects").setOrderByVerticalPosition(true),
-        new ColliderComponent(new ColliderShapeAABB(2, 3), 3, 4),
         new DynamicBodyComponent(true),
         new BlendModeComponent(BlendMode.MASK)
       );
@@ -171,7 +163,6 @@ public class LightingExample extends Sola {
       new SpriteComponent("forest", "player"),
       new BlendModeComponent(BlendMode.MASK),
       new LayerComponent("objects").setOrderByVerticalPosition(true),
-      new ColliderComponent(new ColliderShapeAABB()),
       new DynamicBodyComponent(),
       new LightComponent(50, new Color(200, 255, 255, 255)).setOffset(2.5f, 4)
     ).setName("player");

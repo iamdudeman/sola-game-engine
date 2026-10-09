@@ -90,7 +90,7 @@ public class SpatialHashMap {
   BucketId[] getBucketIdsForViewEntry(View2Entry<ColliderComponent, TransformComponent> entry) {
     TransformComponent transformComponent = entry.c2();
     ColliderComponent colliderComponent = entry.c1();
-    Rectangle boundingBox = colliderComponent.getBoundingBox(transformComponent);
+    Rectangle boundingBox = colliderComponent.getBoundingBox(entry.entity(), transformComponent);
 
     float x = boundingBox.min().x();
     float y = boundingBox.min().y();
@@ -129,7 +129,7 @@ public class SpatialHashMap {
     for (var viewEntry : viewEntries) {
       ColliderComponent colliderComponent = viewEntry.c1();
       TransformComponent transformComponent = viewEntry.c2();
-      var boundingBox = colliderComponent.getBoundingBox(transformComponent);
+      var boundingBox = colliderComponent.getBoundingBox(viewEntry.entity(), transformComponent);
 
       float newValue = Math.max(
         boundingBox.getWidth(),

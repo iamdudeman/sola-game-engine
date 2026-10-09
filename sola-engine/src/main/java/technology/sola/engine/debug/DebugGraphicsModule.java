@@ -81,9 +81,8 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
     if (layers.isEmpty()) {
       renderDebugInfo(renderer, world, cameraScaleTransform, cameraTranslationTransform);
     } else {
-      layers.get(layers.size() - 1).add(r -> {
-        renderDebugInfo(r, world, cameraScaleTransform, cameraTranslationTransform);
-      }, RenderOrders.DEBUG);
+      layers.get(layers.size() - 1)
+        .add(r -> renderDebugInfo(r, world, cameraScaleTransform, cameraTranslationTransform), RenderOrders.DEBUG);
     }
   }
 
@@ -91,7 +90,7 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
   public void renderEntity(Renderer renderer, View2Entry<ColliderComponent, TransformComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
     if (isRenderingBoundingBoxes) {
       var boundingRect = viewEntry.c1()
-        .getBoundingBox(cameraModifiedEntityTransform);
+        .getBoundingBox(viewEntry.entity(), cameraModifiedEntityTransform);
 
       renderer.drawRect(
         boundingRect.min().x(),
@@ -103,7 +102,7 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
     }
 
     if (isRenderingColliders) {
-      viewEntry.c1().debugRender(renderer, cameraModifiedEntityTransform);
+      viewEntry.c1().debugRender(renderer, viewEntry.entity(), cameraModifiedEntityTransform);
     }
   }
 
@@ -113,7 +112,7 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
   }
 
   /**
-   * Whether {@link ColliderComponent#getShape(TransformComponent)} debug rendering is enabled or not.
+   * Whether {@link ColliderComponent#getShape(Entity, TransformComponent)} debug rendering is enabled or not.
    *
    * @return true if collider debug rendering is enabled
    */
@@ -122,7 +121,7 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
   }
 
   /**
-   * Enabled or disable {@link ColliderComponent#getShape(TransformComponent)} debug rendering.
+   * Enabled or disable {@link ColliderComponent#getShape(Entity, TransformComponent)} debug rendering.
    *
    * @param isEnabled new collider debug rendering enabled state
    */
@@ -133,7 +132,7 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
   }
 
   /**
-   * Whether {@link ColliderComponent#getBoundingBox(TransformComponent)} debug rendering is enabled or not.
+   * Whether {@link ColliderComponent#getBoundingBox(Entity, TransformComponent)} debug rendering is enabled or not.
    *
    * @return true if collider bounding box debug rendering is enabled
    */
@@ -142,7 +141,7 @@ public class DebugGraphicsModule extends SolaEntityGraphicsModule<View2Entry<Col
   }
 
   /**
-   * Enable or disable {@link ColliderComponent#getBoundingBox(TransformComponent)} debug rendering.
+   * Enable or disable {@link ColliderComponent#getBoundingBox(Entity, TransformComponent)} debug rendering.
    *
    * @param isEnabled new collider bounding box debug rendering enabled state
    */
