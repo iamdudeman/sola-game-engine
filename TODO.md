@@ -13,6 +13,7 @@
 ### Low-priority bugs
 
 * JavaDocs and Sources no longer appear to be available in template project, perhaps issue with jitpack.io?
+    * possibly related to: https://github.com/jitpack/jitpack.io/issues/8010
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -32,6 +33,7 @@
 ### Low priority (not ordered)
 
 * consider adding ability to tile sprites instead of always stretching
+    * new setting on SpriteComponent?
 * Gui animation system
     * might need a new "AnimatedProperty" concept perhaps?
 * Particle System
