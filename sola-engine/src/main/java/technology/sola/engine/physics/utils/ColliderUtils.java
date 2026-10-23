@@ -15,6 +15,7 @@ import technology.sola.engine.physics.component.collider.ColliderType;
  */
 @NullMarked
 @Deprecated
+// todo deleteme
 public class ColliderUtils {
   /**
    * Auto sizes an {@link Entity}'s {@link ColliderComponent} using its {@link SpriteComponent}. This replaces the
