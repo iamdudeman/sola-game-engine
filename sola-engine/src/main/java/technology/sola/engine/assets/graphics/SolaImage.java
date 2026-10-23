@@ -1,10 +1,7 @@
 package technology.sola.engine.assets.graphics;
 
 import technology.sola.engine.assets.Asset;
-import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Canvas;
-import technology.sola.math.geometry.Rectangle;
-import technology.sola.math.linear.Vector2D;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -117,17 +114,14 @@ public class SolaImage extends Canvas implements Asset {
     int[] newImagePixels = new int[totalPixelCount];
     float scaleX = (float) newWidth / getWidth();
     float scaleY = (float) newHeight / getHeight();
-    AffineTransform affineTransform = new AffineTransform().scale(scaleX, scaleY);
-    Rectangle transformBoundingBox = affineTransform.getBoundingBoxForTransform(getWidth(), getHeight());
 
-    for (int x = (int) transformBoundingBox.min().x(); x < transformBoundingBox.max().x(); x++) {
-      for (int y = (int) transformBoundingBox.min().y(); y < transformBoundingBox.max().y(); y++) {
-        Vector2D newPosition = affineTransform.multiplyInverse(x, y);
-        int pixel = getPixel(newPosition.x(), newPosition.y());
+    for (int y = 0; y < newHeight; y++) {
+      for (int x = 0; x < newWidth; x++) {
+        float sourceX = (x + 0.5f) / scaleX - 0.5f;
+        float sourceY = (y + 0.5f) / scaleY - 0.5f;
+        int pixel = getPixel(sourceX, sourceY);
 
-        if (x + y * newWidth < totalPixelCount) {
-          newImagePixels[x + y * newWidth] = pixel;
-        }
+        newImagePixels[x + y * newWidth] = pixel;
       }
     }
 
