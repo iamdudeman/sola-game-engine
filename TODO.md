@@ -6,7 +6,7 @@
 
 ### Low-priority bugs
 
-*
+* editor ImagePanel zooming causes blurry images
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -25,6 +25,8 @@
 
 ### Low priority (not ordered)
 
+* ability to render ellipse (and collisions for ellipse)
+    * maybe consider replacing Circle collider, but doing smart stuff so it does circle collision if width/height are equal
 * Gui animation system
     * might need a new "AnimatedProperty" concept perhaps?
 * Particle System
@@ -37,7 +39,6 @@
     * consider adding support for "pooling" for potential performance improvement
     * consider adding a "max particles" option if performance is a concern
 * support mp3 on `SwingSolaPlatform`
-* ability to render ellipse (and collisions for ellipse)
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
     * Android does not have support yet (https://developer.android.com/build/jdks)
