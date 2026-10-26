@@ -14,6 +14,7 @@
 
 * JavaDocs and Sources no longer appear to be available in template project, perhaps issue with jitpack.io?
     * possibly related to: https://github.com/jitpack/jitpack.io/issues/8010
+* editor ImagePanel zooming causes blurry images
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -32,6 +33,8 @@
 
 ### Low priority (not ordered)
 
+* ability to render ellipse (and collisions for ellipse)
+    * maybe consider replacing Circle collider, but doing smart stuff so it does circle collision if width/height are equal
 * consider adding ability to tile sprites instead of always stretching
     * new setting on SpriteComponent?
 * Gui animation system
@@ -46,7 +49,6 @@
     * consider adding support for "pooling" for potential performance improvement
     * consider adding a "max particles" option if performance is a concern
 * support mp3 on `SwingSolaPlatform`
-* ability to render ellipse (and collisions for ellipse)
 * research possible benefits of updating to Java 21
     * teavm 0.9.0 has support now
     * Android does not have support yet (https://developer.android.com/build/jdks)
