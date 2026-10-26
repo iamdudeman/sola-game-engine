@@ -8,19 +8,17 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
-import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.geometry.Shape;
 import technology.sola.math.linear.Vector2D;
 
 @NullMarked
 public record ColliderShapeSprite(
-  AssetLoader<SpriteSheet> spriteSheetLoader,
-  boolean isCircle
+  AssetLoader<SpriteSheet> spriteSheetLoader
 ) implements ColliderShape<Shape> {
   @Override
   public ColliderType type() {
-    return isCircle ? ColliderType.CIRCLE : ColliderType.AABB;
+    return ColliderType.AABB;
   }
 
   @Override
@@ -28,19 +26,6 @@ public record ColliderShapeSprite(
     var dimensions = getSpriteDimensions(entity);
     var width = dimensions.width;
     var height = dimensions.height;
-
-    if (isCircle) {
-      var circleStuff = calculateCircleStuff(transformComponent, width, height);
-      var min = transformComponent.getTranslate()
-        .add(new Vector2D(offsetX - circleStuff.additionalOffsetX, offsetY - circleStuff.additionalOffsetY));
-      float sideLength = circleStuff.radius * 2 * transformComponent.getScaleX();
-
-      return new Rectangle(
-        min,
-        min.add(new Vector2D(sideLength, sideLength))
-      );
-    }
-
     Vector2D min = transformComponent.getTranslate().add(new Vector2D(offsetX, offsetY));
 
     return new Rectangle(
@@ -57,20 +42,6 @@ public record ColliderShapeSprite(
     var dimensions = getSpriteDimensions(entity);
     var width = dimensions.width;
     var height = dimensions.height;
-
-    if (isCircle) {
-      var circleStuff = calculateCircleStuff(transformComponent, width, height);
-      float transformScale = transformComponent.getScaleX();
-      float radiusWithTransform = circleStuff.radius * transformScale;
-
-      Vector2D center = new Vector2D(
-        transformComponent.getX() + radiusWithTransform + offsetX - circleStuff.additionalOffsetX,
-        transformComponent.getY() + radiusWithTransform + offsetY - circleStuff.additionalOffsetY
-      );
-
-      return new Circle(radiusWithTransform, center);
-    }
-
     Vector2D min = new Vector2D(
       transformComponent.getX() + offsetX,
       transformComponent.getY() + offsetY
@@ -85,15 +56,9 @@ public record ColliderShapeSprite(
 
   @Override
   public void debugRender(Renderer renderer, Entity entity, TransformComponent transformComponent, float offsetX, float offsetY) {
-    if (isCircle) {
-      Circle circle = (Circle) getShape(entity, transformComponent, offsetX, offsetY);
+    Rectangle rectangle = (Rectangle) getShape(entity, transformComponent, offsetX, offsetY);
 
-      renderer.drawCircle(circle.center().x() - circle.radius(), circle.center().y() - circle.radius(), circle.radius(), Color.RED);
-    } else {
-      Rectangle rectangle = (Rectangle) getShape(entity, transformComponent, offsetX, offsetY);
-
-      renderer.drawRect(rectangle.min().x(), rectangle.min().y(), rectangle.getWidth(), rectangle.getHeight(), Color.RED);
-    }
+    renderer.drawRect(rectangle.min().x(), rectangle.min().y(), rectangle.getWidth(), rectangle.getHeight(), Color.RED);
   }
 
   private WidthHeight getSpriteDimensions(Entity entity) {
@@ -118,25 +83,7 @@ public record ColliderShapeSprite(
     }
   }
 
-  private CircleStuff calculateCircleStuff(TransformComponent transformComponent, int width, int height) {
-    float additionalOffsetX = 0;
-    float additionalOffsetY = 0;
-    float radius = width * 0.5f;
-
-    if (width > height) {
-      additionalOffsetY = height * 0.5f * Math.max(transformComponent.getScaleX(), transformComponent.getScaleY());
-    } else if (width < height) {
-      additionalOffsetX = width * 0.5f * Math.max(transformComponent.getScaleX(), transformComponent.getScaleY());
-      radius = height * 0.5f;
-    }
-
-    return new CircleStuff(radius, additionalOffsetX, additionalOffsetY);
-  }
-
   private record WidthHeight(int width, int height) {
     private static final WidthHeight NULL = new WidthHeight(1, 1);
-  }
-
-  private record CircleStuff(float radius, float additionalOffsetX, float additionalOffsetY) {
   }
 }

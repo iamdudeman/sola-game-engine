@@ -1,11 +1,5 @@
 # sola-game-engine TODO list
 
-* ColliderShapeSprite implementation to replace ColliderUtils (which was meh)
-    * ~~need example using new ColliderShapeSprite~~
-    * ~~implement AABB~~
-    * implement circle
-    * remove ColliderUtils
-
 ## Known Bugs List
 
 * issues with removing gui elements when clicking another gui element (need to stabilize this)
@@ -35,6 +29,7 @@
 
 * ability to render ellipse (and collisions for ellipse)
     * maybe consider replacing Circle collider, but doing smart stuff so it does circle collision if width/height are equal
+    * enhance `ColliderShapeSprite` to support it as well (isCircle argument)
 * consider adding ability to tile sprites instead of always stretching
     * new setting on SpriteComponent?
 * Gui animation system

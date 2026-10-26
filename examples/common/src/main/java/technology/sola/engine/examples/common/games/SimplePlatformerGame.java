@@ -147,15 +147,15 @@ public class SimplePlatformerGame extends Sola {
 
     world.createEntity()
       .addComponent(new PlayerComponent())
-      .addComponent(new TransformComponent(200, 300, 3, 3))
+      .addComponent(new TransformComponent(200, 300, 5))
       .addComponent(new SpriteComponent("forest", "player"))
-      .addComponent(new ColliderComponent(new ColliderShapeSprite(assetLoaderProvider.get(SpriteSheet.class), false)).setIgnoreTags(ColliderTags.IGNORE))
+      .addComponent(new ColliderComponent(new ColliderShapeSprite(assetLoaderProvider.get(SpriteSheet.class))).setIgnoreTags(ColliderTags.IGNORE))
       .addComponent(new DynamicBodyComponent())
       .setName("player");
 
     world.createEntity()
       .addComponent(new TransformComponent(310, 360, 15, 15f))
-      .addComponent(new RectangleRendererComponent(Color.WHITE))
+      .addComponent(new RectangleRendererComponent(Color.BLUE))
       .addComponent(new ColliderComponent(new ColliderShapeAABB()));
 
     world.createEntity()
