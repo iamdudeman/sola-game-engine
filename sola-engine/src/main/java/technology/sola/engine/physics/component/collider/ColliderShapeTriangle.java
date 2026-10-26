@@ -1,6 +1,7 @@
 package technology.sola.engine.physics.component.collider;
 
 import org.jspecify.annotations.NullMarked;
+import technology.sola.ecs.Entity;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -32,8 +33,8 @@ public record ColliderShapeTriangle(
   }
 
   @Override
-  public Rectangle getBoundingBox(TransformComponent transformComponent, float offsetX, float offsetY) {
-    var shape = getShape(transformComponent, offsetX, offsetY);
+  public Rectangle getBoundingBox(Entity entity, TransformComponent transformComponent, float offsetX, float offsetY) {
+    var shape = getShape(entity, transformComponent, offsetX, offsetY);
 
     // find width and minX
     float minX = shape.p1().x();
@@ -69,7 +70,7 @@ public record ColliderShapeTriangle(
   }
 
   @Override
-  public Triangle getShape(TransformComponent transformComponent, float offsetX, float offsetY) {
+  public Triangle getShape(Entity entity, TransformComponent transformComponent, float offsetX, float offsetY) {
     var matrix = Matrix3D.translate(transformComponent.getX() + offsetX, transformComponent.getY() + offsetY)
       .multiply(Matrix3D.scale(transformComponent.getScaleX(), transformComponent.getScaleY()));
 
@@ -81,8 +82,8 @@ public record ColliderShapeTriangle(
   }
 
   @Override
-  public void debugRender(Renderer renderer, TransformComponent transformComponent, float offsetX, float offsetY) {
-    Triangle triangle = getShape(transformComponent, offsetX, offsetY);
+  public void debugRender(Renderer renderer, Entity entity, TransformComponent transformComponent, float offsetX, float offsetY) {
+    Triangle triangle = getShape(entity, transformComponent, offsetX, offsetY);
 
     renderer.drawTriangle(
       triangle.p1().x(), triangle.p1().y(),

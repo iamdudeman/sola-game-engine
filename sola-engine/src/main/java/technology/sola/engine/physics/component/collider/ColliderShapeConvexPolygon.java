@@ -1,6 +1,7 @@
 package technology.sola.engine.physics.component.collider;
 
 import org.jspecify.annotations.NullMarked;
+import technology.sola.ecs.Entity;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -25,14 +26,14 @@ public record ColliderShapeConvexPolygon(
   }
 
   @Override
-  public Rectangle getBoundingBox(TransformComponent transformComponent, float offsetX, float offsetY) {
-    var shape = getShape(transformComponent, offsetX, offsetY);
+  public Rectangle getBoundingBox(Entity entity, TransformComponent transformComponent, float offsetX, float offsetY) {
+    var shape = getShape(entity, transformComponent, offsetX, offsetY);
 
     return shape.boundingBox();
   }
 
   @Override
-  public ConvexPolygon getShape(TransformComponent transformComponent, float offsetX, float offsetY) {
+  public ConvexPolygon getShape(Entity entity, TransformComponent transformComponent, float offsetX, float offsetY) {
     var matrix = Matrix3D.translate(transformComponent.getX() + offsetX, transformComponent.getY() + offsetY)
       .multiply(Matrix3D.scale(transformComponent.getScaleX(), transformComponent.getScaleY()));
     var transformedPoints = new Vector2D[shape.points().length];
@@ -45,8 +46,8 @@ public record ColliderShapeConvexPolygon(
   }
 
   @Override
-  public void debugRender(Renderer renderer, TransformComponent transformComponent, float offsetX, float offsetY) {
-    ConvexPolygon shape = getShape(transformComponent, offsetX, offsetY);
+  public void debugRender(Renderer renderer, Entity entity, TransformComponent transformComponent, float offsetX, float offsetY) {
+    ConvexPolygon shape = getShape(entity, transformComponent, offsetX, offsetY);
 
     renderer.drawPolygon(shape.points(), Color.RED);
   }

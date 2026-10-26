@@ -66,7 +66,7 @@ public class QuadTreeCollisionDetectionBroadPhase implements CollisionDetectionB
 
       if (!views.isEmpty()) {
         var firstView = views.iterator().next();
-        var boundingRectangle = firstView.c1().getBoundingBox(firstView.c2());
+        var boundingRectangle = firstView.c1().getBoundingBox(firstView.entity(), firstView.c2());
 
         min = boundingRectangle.min();
         max = boundingRectangle.max();
@@ -76,7 +76,7 @@ public class QuadTreeCollisionDetectionBroadPhase implements CollisionDetectionB
       }
 
       for (var view : views) {
-        var boundingRectangle = view.c1().getBoundingBox(view.c2());
+        var boundingRectangle = view.c1().getBoundingBox(view.entity(), view.c2());
 
         if (boundingRectangle.min().x() < min.x()) {
           min = new Vector2D(boundingRectangle.min().x(), min.y());
@@ -104,7 +104,7 @@ public class QuadTreeCollisionDetectionBroadPhase implements CollisionDetectionB
 
   @Override
   public Collection<View2Entry<ColliderComponent, TransformComponent>> query(View2Entry<ColliderComponent, TransformComponent> searchEntry) {
-    Rectangle rectangle = searchEntry.c1().getBoundingBox(searchEntry.c2());
+    Rectangle rectangle = searchEntry.c1().getBoundingBox(searchEntry.entity(), searchEntry.c2());
 
     return quadTreeNode.query(rectangle);
   }

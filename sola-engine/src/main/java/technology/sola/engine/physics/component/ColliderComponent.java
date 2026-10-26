@@ -2,6 +2,7 @@ package technology.sola.engine.physics.component;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.ecs.Component;
+import technology.sola.ecs.Entity;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.component.collider.*;
@@ -64,11 +65,12 @@ public class ColliderComponent implements Component {
   /**
    * Returns the bounding box for this ColliderComponent.
    *
+   * @param entity             the {@link technology.sola.ecs.Entity} that owns this ColliderComponent
    * @param transformComponent the {@link TransformComponent} of the {@link technology.sola.ecs.Entity}
    * @return the bounding box
    */
-  public Rectangle getBoundingBox(TransformComponent transformComponent) {
-    return colliderShape.getBoundingBox(transformComponent, offsetX, offsetY);
+  public Rectangle getBoundingBox(Entity entity, TransformComponent transformComponent) {
+    return colliderShape.getBoundingBox(entity, transformComponent, offsetX, offsetY);
   }
 
   /**
@@ -115,7 +117,7 @@ public class ColliderComponent implements Component {
    * Checks to see if this collider has a {@link ColliderTag}.
    *
    * @param colliderTag the tag to check
-   * @return true if collider has tag
+   * @return true if collider has a tag
    */
   public boolean hasTag(ColliderTag colliderTag) {
     for (ColliderTag tag : tags) {
@@ -166,22 +168,24 @@ public class ColliderComponent implements Component {
    * Gets the geometric {@link Shape} representation of the collider for collision calculations.
    *
    * @param transformComponent the {@link technology.sola.ecs.Entity}'s current {@link TransformComponent}
+   * @param entity             the {@link technology.sola.ecs.Entity}
    * @param <T>                the type of the {@link Shape}
    * @return the {@link Shape} of the collider
    */
   @SuppressWarnings("unchecked")
-  public <T extends Shape> T getShape(TransformComponent transformComponent) {
-    return (T) colliderShape.getShape(transformComponent, offsetX, offsetY);
+  public <T extends Shape> T getShape(Entity entity, TransformComponent transformComponent) {
+    return (T) colliderShape.getShape(entity, transformComponent, offsetX, offsetY);
   }
 
   /**
    * Renders a debug overlay over the collider.
    *
    * @param renderer           the {@link Renderer}
+   * @param entity             the {@link technology.sola.ecs.Entity}
    * @param transformComponent the {@link technology.sola.ecs.Entity}'s {@link TransformComponent}
    */
-  public void debugRender(Renderer renderer, TransformComponent transformComponent) {
-    colliderShape.debugRender(renderer, transformComponent, offsetX, offsetY);
+  public void debugRender(Renderer renderer, Entity entity, TransformComponent transformComponent) {
+    colliderShape.debugRender(renderer, entity, transformComponent, offsetX, offsetY);
   }
 
   /**

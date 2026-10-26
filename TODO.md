@@ -6,6 +6,8 @@
 
 ### Low-priority bugs
 
+* JavaDocs and Sources no longer appear to be available in template project, perhaps issue with jitpack.io?
+    * possibly related to: https://github.com/jitpack/jitpack.io/issues/8010
 * editor ImagePanel zooming causes blurry images
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -27,6 +29,9 @@
 
 * ability to render ellipse (and collisions for ellipse)
     * maybe consider replacing Circle collider, but doing smart stuff so it does circle collision if width/height are equal
+    * enhance `ColliderShapeSprite` to support it as well (isCircle argument)
+* consider adding ability to tile sprites instead of always stretching
+    * new setting on SpriteComponent?
 * Gui animation system
     * might need a new "AnimatedProperty" concept perhaps?
 * Particle System

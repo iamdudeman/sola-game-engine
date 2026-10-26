@@ -1,6 +1,7 @@
 package technology.sola.engine.physics.component.collider;
 
 import org.jspecify.annotations.NullMarked;
+import technology.sola.ecs.Entity;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -12,7 +13,7 @@ import technology.sola.math.linear.Vector2D;
  * ColliderShapeCircle is a {@link ColliderShape} implementation for a circle which utilize a
  * {@link Circle} for its geometric shape representation.
  * <br>
- * Note: only {@link TransformComponent#getScaleX()} is used for size of collider
+ * Note: only {@link TransformComponent#getScaleX()} is used for the size of collider
  *
  * @param radius the radius of the circle
  */
@@ -33,7 +34,7 @@ public record ColliderShapeCircle(
   }
 
   @Override
-  public Rectangle getBoundingBox(TransformComponent transformComponent, float offsetX, float offsetY) {
+  public Rectangle getBoundingBox(Entity entity, TransformComponent transformComponent, float offsetX, float offsetY) {
     var min = transformComponent.getTranslate().add(new Vector2D(offsetX, offsetY));
     float sideLength = radius * 2 * transformComponent.getScaleX();
 
@@ -44,7 +45,7 @@ public record ColliderShapeCircle(
   }
 
   @Override
-  public Circle getShape(TransformComponent transformComponent, float offsetX, float offsetY) {
+  public Circle getShape(Entity entity, TransformComponent transformComponent, float offsetX, float offsetY) {
     float transformScale = transformComponent.getScaleX();
     float radiusWithTransform = radius * transformScale;
 
@@ -57,8 +58,8 @@ public record ColliderShapeCircle(
   }
 
   @Override
-  public void debugRender(Renderer renderer, TransformComponent transformComponent, float offsetX, float offsetY) {
-    Circle circle = getShape(transformComponent, offsetX, offsetY);
+  public void debugRender(Renderer renderer, Entity entity, TransformComponent transformComponent, float offsetX, float offsetY) {
+    Circle circle = getShape(entity, transformComponent, offsetX, offsetY);
 
     renderer.drawCircle(circle.center().x() - circle.radius(), circle.center().y() - circle.radius(), circle.radius(), Color.RED);
   }
