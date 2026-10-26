@@ -91,7 +91,7 @@ loadScripts(document, 'script');</script>
 </span><span class="modifiers">public record </span><span class="element-name type-name-label">ColliderShapeAABB</span>(float&nbsp;width, float&nbsp;height)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a>
 implements <a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a>&gt;</span></div>
-<div class="block">ColliderShapeAABB is a <a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider"><code>ColliderShape</code></a> implementation for Axis-Aligned Bounding Boxes which utilize a
+<div class="block">ColliderShapeAABB is a <a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider"><code>ColliderShape</code></a> implementation for Axis-Aligned Bounding Boxes which use a
  <a href="../../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry"><code>Rectangle</code></a> for its geometric shape representation.</div>
 </section>
 <section class="summary">
@@ -128,7 +128,8 @@ implements <a href="ColliderShape.html" title="interface in technology.sola.engi
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#debugRender(technology.sola.engine.graphics.renderer.Renderer,technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">debugRender</a><wbr>(<a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#debugRender(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">debugRender</a><wbr>(<a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
+ technology.sola.ecs.Entity&nbsp;entity,
  <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent,
  float&nbsp;offsetX,
  float&nbsp;offsetY)</code></div>
@@ -141,14 +142,16 @@ implements <a href="ColliderShape.html" title="interface in technology.sola.engi
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBoundingBox(technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">getBoundingBox</a><wbr>(<a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBoundingBox(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">getBoundingBox</a><wbr>(technology.sola.ecs.Entity&nbsp;entity,
+ <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent,
  float&nbsp;offsetX,
  float&nbsp;offsetY)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the bounding box for this <a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider"><code>ColliderShape</code></a>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getShape(technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">getShape</a><wbr>(<a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getShape(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">getShape</a><wbr>(technology.sola.ecs.Entity&nbsp;entity,
+ <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent,
  float&nbsp;offsetX,
  float&nbsp;offsetY)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -239,17 +242,19 @@ implements <a href="ColliderShape.html" title="interface in technology.sola.engi
 </section>
 </li>
 <li>
-<section class="detail" id="getBoundingBox(technology.sola.engine.core.component.TransformComponent,float,float)">
+<section class="detail" id="getBoundingBox(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)">
 <h3>getBoundingBox</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></span>&nbsp;<span class="element-name">getBoundingBox</span><wbr><span class="parameters">(<a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></span>&nbsp;<span class="element-name">getBoundingBox</span><wbr><span class="parameters">(technology.sola.ecs.Entity&nbsp;entity,
+ <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent,
  float&nbsp;offsetX,
  float&nbsp;offsetY)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="ColliderShape.html#getBoundingBox(technology.sola.engine.core.component.TransformComponent,float,float)">ColliderShape</a></code></span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="ColliderShape.html#getBoundingBox(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)">ColliderShape</a></code></span></div>
 <div class="block">Returns the bounding box for this <a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider"><code>ColliderShape</code></a>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ColliderShape.html#getBoundingBox(technology.sola.engine.core.component.TransformComponent,float,float)">getBoundingBox</a></code>&nbsp;in interface&nbsp;<code><a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a>&gt;</code></dd>
+<dd><code><a href="ColliderShape.html#getBoundingBox(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)">getBoundingBox</a></code>&nbsp;in interface&nbsp;<code><a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a>&gt;</code></dd>
 <dt>Parameters:</dt>
+<dd><code>entity</code> - the <code>Entity</code> owning the collider</dd>
 <dd><code>transformComponent</code> - the <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> of the entity</dd>
 <dd><code>offsetX</code> - the x offset of the collider</dd>
 <dd><code>offsetY</code> - the y offset of the collider</dd>
@@ -259,17 +264,19 @@ implements <a href="ColliderShape.html" title="interface in technology.sola.engi
 </section>
 </li>
 <li>
-<section class="detail" id="getShape(technology.sola.engine.core.component.TransformComponent,float,float)">
+<section class="detail" id="getShape(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)">
 <h3>getShape</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></span>&nbsp;<span class="element-name">getShape</span><wbr><span class="parameters">(<a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></span>&nbsp;<span class="element-name">getShape</span><wbr><span class="parameters">(technology.sola.ecs.Entity&nbsp;entity,
+ <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent,
  float&nbsp;offsetX,
  float&nbsp;offsetY)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="ColliderShape.html#getShape(technology.sola.engine.core.component.TransformComponent,float,float)">ColliderShape</a></code></span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="ColliderShape.html#getShape(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)">ColliderShape</a></code></span></div>
 <div class="block">Gets the geometric <a href="../../../../math/geometry/Shape.html" title="interface in technology.sola.math.geometry"><code>Shape</code></a> for this collider shape.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ColliderShape.html#getShape(technology.sola.engine.core.component.TransformComponent,float,float)">getShape</a></code>&nbsp;in interface&nbsp;<code><a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a>&gt;</code></dd>
+<dd><code><a href="ColliderShape.html#getShape(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)">getShape</a></code>&nbsp;in interface&nbsp;<code><a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a>&gt;</code></dd>
 <dt>Parameters:</dt>
+<dd><code>entity</code> - the <code>Entity</code> owning the collider</dd>
 <dd><code>transformComponent</code> - the <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> for the <code>Entity</code></dd>
 <dd><code>offsetX</code> - the x offset off the collider</dd>
 <dd><code>offsetY</code> - the y offset of the collider</dd>
@@ -279,19 +286,21 @@ implements <a href="ColliderShape.html" title="interface in technology.sola.engi
 </section>
 </li>
 <li>
-<section class="detail" id="debugRender(technology.sola.engine.graphics.renderer.Renderer,technology.sola.engine.core.component.TransformComponent,float,float)">
+<section class="detail" id="debugRender(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)">
 <h3>debugRender</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">debugRender</span><wbr><span class="parameters">(<a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
+ technology.sola.ecs.Entity&nbsp;entity,
  <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent,
  float&nbsp;offsetX,
  float&nbsp;offsetY)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="ColliderShape.html#debugRender(technology.sola.engine.graphics.renderer.Renderer,technology.sola.engine.core.component.TransformComponent,float,float)">ColliderShape</a></code></span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="ColliderShape.html#debugRender(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)">ColliderShape</a></code></span></div>
 <div class="block">Renders debug information for the collider shape.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ColliderShape.html#debugRender(technology.sola.engine.graphics.renderer.Renderer,technology.sola.engine.core.component.TransformComponent,float,float)">debugRender</a></code>&nbsp;in interface&nbsp;<code><a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a>&gt;</code></dd>
+<dd><code><a href="ColliderShape.html#debugRender(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)">debugRender</a></code>&nbsp;in interface&nbsp;<code><a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>renderer</code> - the <a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a></dd>
+<dd><code>entity</code> - the <code>Entity</code> owning the collider</dd>
 <dd><code>transformComponent</code> - the <code>Entity</code>'s <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a></dd>
 <dd><code>offsetX</code> - the collider shape x-axis offset</dd>
 <dd><code>offsetY</code> - the collider shape y-axis offset</dd>

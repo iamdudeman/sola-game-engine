@@ -160,7 +160,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isRenderingBoundingBoxes()" class="member-name-link">isRenderingBoundingBoxes</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Whether <a href="../physics/component/ColliderComponent.html#getBoundingBox(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getBoundingBox(TransformComponent)</code></a> debug rendering is enabled or not.</div>
+<div class="block">Whether <a href="../physics/component/ColliderComponent.html#getBoundingBox(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getBoundingBox(Entity, TransformComponent)</code></a> debug rendering is enabled or not.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isRenderingBroadPhase()" class="member-name-link">isRenderingBroadPhase</a>()</code></div>
@@ -171,7 +171,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isRenderingColliders()" class="member-name-link">isRenderingColliders</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Whether <a href="../physics/component/ColliderComponent.html#getShape(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getShape(TransformComponent)</code></a> debug rendering is enabled or not.</div>
+<div class="block">Whether <a href="../physics/component/ColliderComponent.html#getShape(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getShape(Entity, TransformComponent)</code></a> debug rendering is enabled or not.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.World,technology.sola.math.linear.Matrix3D,technology.sola.math.linear.Matrix3D)" class="member-name-link">render</a><wbr>(<a href="../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a>&nbsp;renderer,
@@ -191,7 +191,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRenderingBoundingBoxes(boolean)" class="member-name-link">setRenderingBoundingBoxes</a><wbr>(boolean&nbsp;isEnabled)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Enable or disable <a href="../physics/component/ColliderComponent.html#getBoundingBox(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getBoundingBox(TransformComponent)</code></a> debug rendering.</div>
+<div class="block">Enable or disable <a href="../physics/component/ColliderComponent.html#getBoundingBox(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getBoundingBox(Entity, TransformComponent)</code></a> debug rendering.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRenderingBroadPhase(boolean)" class="member-name-link">setRenderingBroadPhase</a><wbr>(boolean&nbsp;isEnabled)</code></div>
@@ -202,7 +202,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRenderingColliders(boolean)" class="member-name-link">setRenderingColliders</a><wbr>(boolean&nbsp;isEnabled)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Enabled or disable <a href="../physics/component/ColliderComponent.html#getShape(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getShape(TransformComponent)</code></a> debug rendering.</div>
+<div class="block">Enabled or disable <a href="../physics/component/ColliderComponent.html#getShape(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getShape(Entity, TransformComponent)</code></a> debug rendering.</div>
 </div>
 </div>
 </div>
@@ -352,7 +352,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="isRenderingColliders()">
 <h3>isRenderingColliders</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isRenderingColliders</span>()</div>
-<div class="block">Whether <a href="../physics/component/ColliderComponent.html#getShape(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getShape(TransformComponent)</code></a> debug rendering is enabled or not.</div>
+<div class="block">Whether <a href="../physics/component/ColliderComponent.html#getShape(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getShape(Entity, TransformComponent)</code></a> debug rendering is enabled or not.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>true if collider debug rendering is enabled</dd>
@@ -363,7 +363,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="setRenderingColliders(boolean)">
 <h3>setRenderingColliders</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setRenderingColliders</span><wbr><span class="parameters">(boolean&nbsp;isEnabled)</span></div>
-<div class="block">Enabled or disable <a href="../physics/component/ColliderComponent.html#getShape(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getShape(TransformComponent)</code></a> debug rendering.</div>
+<div class="block">Enabled or disable <a href="../physics/component/ColliderComponent.html#getShape(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getShape(Entity, TransformComponent)</code></a> debug rendering.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>isEnabled</code> - new collider debug rendering enabled state</dd>
@@ -374,7 +374,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="isRenderingBoundingBoxes()">
 <h3>isRenderingBoundingBoxes</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isRenderingBoundingBoxes</span>()</div>
-<div class="block">Whether <a href="../physics/component/ColliderComponent.html#getBoundingBox(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getBoundingBox(TransformComponent)</code></a> debug rendering is enabled or not.</div>
+<div class="block">Whether <a href="../physics/component/ColliderComponent.html#getBoundingBox(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getBoundingBox(Entity, TransformComponent)</code></a> debug rendering is enabled or not.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>true if collider bounding box debug rendering is enabled</dd>
@@ -385,7 +385,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="setRenderingBoundingBoxes(boolean)">
 <h3>setRenderingBoundingBoxes</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setRenderingBoundingBoxes</span><wbr><span class="parameters">(boolean&nbsp;isEnabled)</span></div>
-<div class="block">Enable or disable <a href="../physics/component/ColliderComponent.html#getBoundingBox(technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getBoundingBox(TransformComponent)</code></a> debug rendering.</div>
+<div class="block">Enable or disable <a href="../physics/component/ColliderComponent.html#getBoundingBox(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent)"><code>ColliderComponent.getBoundingBox(Entity, TransformComponent)</code></a> debug rendering.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>isEnabled</code> - new collider bounding box debug rendering enabled state</dd>
