@@ -86,10 +86,10 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
   @Override
   public void setClamp(int x, int y, int width, int height) {
-    this.clampX = x;
-    this.clampY = y;
-    this.clampMaxX = x + width;
-    this.clampMaxY = y + height;
+    this.clampX = Math.max(0, x);
+    this.clampY = Math.max(0, y);
+    this.clampMaxX = Math.min(this.width, x + width);
+    this.clampMaxY = Math.min(this.height, y + height);
   }
 
   @Override
