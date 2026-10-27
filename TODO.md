@@ -1,5 +1,17 @@
 # sola-game-engine TODO list
 
+[2026-10-27 16:45:37] [WARNING] [technology.sola.engine.graphics.renderer.SoftwareRenderer] No font is currently set. Using DefaultFont as a backup.
+Exception in thread "JavaFX Application Thread" java.lang.ArrayIndexOutOfBoundsException: Index 480570 out of bounds for length 480000
+at technology.sola.engine/technology.sola.engine.graphics.renderer.blend.MaskBlendFunction.set(MaskBlendFunction.java:14)
+at technology.sola.engine/technology.sola.engine.graphics.renderer.BlendMode.set(BlendMode.java:64)
+at technology.sola.engine/technology.sola.engine.graphics.renderer.SoftwareRenderer.setPixel(SoftwareRenderer.java:105)
+at technology.sola.engine/technology.sola.engine.graphics.renderer.Renderer.setPixel(Renderer.java:171)
+at technology.sola.engine/technology.sola.engine.graphics.renderer.SoftwareRenderer.drawImage(SoftwareRenderer.java:285)
+at technology.sola.engine/technology.sola.engine.graphics.modules.SpriteEntityGraphicsModule.drawTiledSprite(SpriteEntityGraphicsModule.java:95)
+at technology.sola.engine/technology.sola.engine.graphics.modules.SpriteEntityGraphicsModule.lambda$renderEntity$0(SpriteEntityGraphicsModule.java:57)
+at technology.sola.engine/technology.sola.engine.assets.AssetHandle.executeIfLoaded(AssetHandle.java:95)
+
+
 ## Known Bugs List
 
 * issues with removing gui elements when clicking another gui element (need to stabilize this)

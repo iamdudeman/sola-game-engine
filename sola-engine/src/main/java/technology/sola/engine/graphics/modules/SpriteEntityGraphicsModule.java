@@ -44,23 +44,32 @@ public class SpriteEntityGraphicsModule extends SolaEntityGraphicsModule<View2En
       return;
     }
 
-    spriteComponent.getSprite(spriteSheetAssetLoader).executeIfLoaded(sprite -> {
-      boolean hasBlendMode = viewEntry.entity().hasComponent(BlendModeComponent.class);
+    var spriteAsset = spriteComponent.getSprite(spriteSheetAssetLoader);
 
-      var previousBlendFunction = renderer.getBlendFunction();
+    if (spriteAsset.isLoading()) {
+      return;
+    }
 
-      if (!hasBlendMode) {
-        renderer.setBlendFunction(BlendMode.MASK);
-      }
+    var sprite = spriteAsset.getAsset();
 
-      if (viewEntry.c1().isTiled()) {
-        drawTiledSprite(sprite, cameraModifiedEntityTransform, renderer);
-      } else {
-        drawSingleSprite(sprite, cameraModifiedEntityTransform, renderer);
-      }
+    if (sprite == null) {
+      return;
+    }
 
-      renderer.setBlendFunction(previousBlendFunction);
-    });
+    boolean hasBlendMode = viewEntry.entity().hasComponent(BlendModeComponent.class);
+    var previousBlendFunction = renderer.getBlendFunction();
+
+    if (!hasBlendMode) {
+      renderer.setBlendFunction(BlendMode.MASK);
+    }
+
+    if (viewEntry.c1().isTiled()) {
+      drawTiledSprite(sprite, cameraModifiedEntityTransform, renderer);
+    } else {
+      drawSingleSprite(sprite, cameraModifiedEntityTransform, renderer);
+    }
+
+    renderer.setBlendFunction(previousBlendFunction);
   }
 
   private void drawSingleSprite(SolaImage sprite, TransformComponent cameraModifiedEntityTransform, Renderer renderer) {

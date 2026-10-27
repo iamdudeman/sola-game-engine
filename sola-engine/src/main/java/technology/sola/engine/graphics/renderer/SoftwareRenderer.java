@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * SoftwareRenderer is a {@link Renderer} implementation that draws on an in memory array of pixels using the CPU. This
+ * SoftwareRenderer is a {@link Renderer} implementation that draws on an in-memory array of pixels using the CPU. This
  * is portable across {@link technology.sola.engine.core.SolaPlatform}s but will be less performant than a GPU-based
  * implementation.
  */
