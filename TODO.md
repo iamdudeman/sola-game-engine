@@ -1,8 +1,5 @@
 # sola-game-engine TODO list
 
-* consider adding ability to tile sprites instead of always stretching
-    * new setting on SpriteComponent?
-
 ## Known Bugs List
 
 * issues with removing gui elements when clicking another gui element (need to stabilize this)
@@ -31,6 +28,7 @@
 
 ### Low priority (not ordered)
 
+* Consider refactoring tooling code into the editor project
 * UnitTestSolaPlatform
     * ability to render to an image on the file system
 * Gui animation system

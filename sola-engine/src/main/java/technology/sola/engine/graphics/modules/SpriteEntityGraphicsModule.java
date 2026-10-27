@@ -54,7 +54,7 @@ public class SpriteEntityGraphicsModule extends SolaEntityGraphicsModule<View2En
       }
 
       if (viewEntry.c1().isTiled()) {
-        // todo
+        drawTiledSprite(sprite, cameraModifiedEntityTransform, renderer);
       } else {
         drawSingleSprite(sprite, cameraModifiedEntityTransform, renderer);
       }
@@ -71,5 +71,35 @@ public class SpriteEntityGraphicsModule extends SolaEntityGraphicsModule<View2En
     }
 
     renderer.drawImage(spriteImage, cameraModifiedEntityTransform.getX(), cameraModifiedEntityTransform.getY());
+  }
+
+  private void drawTiledSprite(SolaImage sprite, TransformComponent cameraModifiedEntityTransform, Renderer renderer) {
+    int modX = cameraModifiedEntityTransform.getScaleX() > 0 ? 1 : -1;
+    int modY = cameraModifiedEntityTransform.getScaleY() > 0 ? 1 : -1;
+    float absX = Math.abs(cameraModifiedEntityTransform.getScaleX());
+    float absY = Math.abs(cameraModifiedEntityTransform.getScaleY());
+
+    renderer.setClamp(
+      cameraModifiedEntityTransform.getX(),
+      cameraModifiedEntityTransform.getY(),
+      sprite.getWidth() * absX,
+      sprite.getHeight() * absY
+    );
+
+    SolaImage spriteImage = modX != 1 || modY != 1
+      ? sprite.scale(modX, modY)
+      : sprite;
+
+    for (int j = 0; j < absY; j++) {
+      for (int i = 0; i < absX; i++) {
+        renderer.drawImage(
+          spriteImage,
+          cameraModifiedEntityTransform.getX() + spriteImage.getWidth() * i,
+          cameraModifiedEntityTransform.getY() + spriteImage.getHeight() * j
+        );
+      }
+    }
+
+    renderer.resetClamp();
   }
 }
