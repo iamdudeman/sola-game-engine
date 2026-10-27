@@ -17,6 +17,7 @@ import java.util.function.Consumer;
 @NullMarked
 public class SpriteComponent implements Component {
   private SpriteKeyFrame spriteKeyFrame;
+  private boolean isTiled = false;
 
   /**
    * Creates a SpriteComponent for a sprite sheet and sprite id.
@@ -69,6 +70,24 @@ public class SpriteComponent implements Component {
    */
   public void setSpriteKeyFrame(SpriteKeyFrame spriteKeyFrame) {
     this.spriteKeyFrame = spriteKeyFrame;
+  }
+
+  /**
+   * @return true if this sprite should be tiled when scaled horizontally or vertically
+   */
+  public boolean isTiled() {
+    return isTiled;
+  }
+
+  /**
+   * Sets whether this sprite should be tiled when scaled horizontally or vertically.
+   *
+   * @param isTiled whether this sprite should be tiled when scaled horizontally or vertically
+   * @return this
+   */
+  public SpriteComponent setTiled(boolean isTiled) {
+    this.isTiled = isTiled;
+    return this;
   }
 
   /**
