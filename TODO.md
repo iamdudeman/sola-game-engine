@@ -1,5 +1,8 @@
 # sola-game-engine TODO list
 
+* consider adding ability to tile sprites instead of always stretching
+    * new setting on SpriteComponent?
+
 ## Known Bugs List
 
 * issues with removing gui elements when clicking another gui element (need to stabilize this)
@@ -22,16 +25,14 @@
 
 ## TODO List
 
-* UnitTestSolaPlatform
-    * ability to render to an image on the file system
-
-### Low priority (not ordered)
-
 * ability to render ellipse (and collisions for ellipse)
     * maybe consider replacing Circle collider, but doing smart stuff so it does circle collision if width/height are equal
     * enhance `ColliderShapeSprite` to support it as well (isCircle argument)
-* consider adding ability to tile sprites instead of always stretching
-    * new setting on SpriteComponent?
+
+### Low priority (not ordered)
+
+* UnitTestSolaPlatform
+    * ability to render to an image on the file system
 * Gui animation system
     * might need a new "AnimatedProperty" concept perhaps?
 * Particle System
