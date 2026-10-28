@@ -21,9 +21,16 @@
 
 ## TODO List
 
-* ability to render ellipse (and collisions for ellipse)
-    * maybe consider replacing Circle collider, but doing smart stuff so it does circle collision if width/height are equal
-    * enhance `ColliderShapeSprite` to support it as well (isCircle argument)
+* Implement rendering and collision for ellipse entities
+    * ~~Renderer support for ellipse~~
+    * `CircleEntityGraphicsModule` should use draw/fill ellipse if width+height not equal
+        * `CircleRendererComponentEditorModule` might need updating
+        * `CircleRendererComponent` might need updating
+    * ColliderComponent shape CIRCLE should use ellipse collision if width+height not equal
+        * Might need a new `Shape` implementation `Ellipse`
+        * `ColliderShapeCircle` needs updating (might conditionally return Circle shape or Ellipse shape now instead of always Circle)
+        * `CollisionUtils` needs updating
+    * enhance `ColliderShapeSprite` to support it as well (isCircle argument perhaps or new class like `ColliderShapeSpriteCircle`)
 
 ### Low priority (not ordered)
 
