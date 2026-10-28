@@ -199,11 +199,12 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
     float centerX = x + width / 2;
     float centerY = y + height / 2;
-    float a = width / 2;  // semi-major axis
-    float b = height / 2; // semi-minor axis
+    float semiMajorAxis = width / 2;
+    float semiMinorAxis = height / 2;
 
-    if (a <= 0 || b <= 0) {
-      return; // Degenerate ellipse
+    // Degenerate ellipse check
+    if (semiMajorAxis <= 0 || semiMinorAxis <= 0) {
+      return;
     }
 
     int xStart = SolaMath.fastRound(x);
@@ -211,8 +212,8 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     int xEnd = SolaMath.fastRound(x + width);
     int yEnd = SolaMath.fastRound(y + height);
 
-    float aSquared = a * a;
-    float bSquared = b * b;
+    float aSquared = semiMajorAxis * semiMajorAxis;
+    float bSquared = semiMinorAxis * semiMinorAxis;
 
     // Iterate through the bounding rectangle
     for (int pixelX = xStart; pixelX < xEnd; pixelX++) {
@@ -258,11 +259,12 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
     float centerX = x + width / 2;
     float centerY = y + height / 2;
-    float a = width / 2;  // semi-major axis
-    float b = height / 2; // semi-minor axis
+    float semiMajorAxis = width / 2;
+    float semiMinorAxis = height / 2;
 
-    if (a <= 0 || b <= 0) {
-      return; // Degenerate ellipse
+    // Degenerate ellipse check
+    if (semiMajorAxis <= 0 || semiMinorAxis <= 0) {
+      return;
     }
 
     int xStart = SolaMath.fastRound(x);
@@ -270,8 +272,8 @@ public class SoftwareRenderer extends Canvas implements Renderer {
     int xEnd = SolaMath.fastRound(x + width);
     int yEnd = SolaMath.fastRound(y + height);
 
-    float aSquared = a * a;
-    float bSquared = b * b;
+    float aSquared = semiMajorAxis * semiMajorAxis;
+    float bSquared = semiMinorAxis * semiMinorAxis;
 
     // Iterate through the bounding rectangle
     for (int pixelX = xStart; pixelX < xEnd; pixelX++) {
