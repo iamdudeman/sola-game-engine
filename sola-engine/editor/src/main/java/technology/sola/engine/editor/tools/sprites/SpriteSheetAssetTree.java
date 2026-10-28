@@ -99,10 +99,11 @@ class SpriteSheetAssetTree extends VBox {
         spriteSheetState.setCurrentSpriteSheetWithoutSave(spriteSheetInfo);
         spritesTreeView.rebuildTreeViewForSpriteSheetInfo(spriteSheetInfo, imagePanel.getImageWidth(), imagePanel.getImageHeight());
 
-        imagePanel.setOverlayRenderer(graphicsContext -> {
+        imagePanel.setOverlayRenderer((graphicsContext, zoom) -> {
           var selectedItem = spritesTreeView.getSelectionModel().getSelectedItem();
           var selectedSprite = selectedItem == null ? null : selectedItem.getValue();
 
+          graphicsContext.setLineWidth(2.0);
           spriteSheetState.getCurrentSpriteSheetInfo().sprites().stream()
             .sorted((a, b) -> {
               // ensure that selected sprite border always renders on top of others
@@ -116,7 +117,12 @@ class SpriteSheetAssetTree extends VBox {
             })
             .forEach(spriteInfo -> {
               graphicsContext.setStroke(spriteInfo.id().equals(selectedSprite) ? Color.YELLOW : Color.BLACK);
-              graphicsContext.strokeRect(spriteInfo.x(), spriteInfo.y(), spriteInfo.width(), spriteInfo.height());
+              graphicsContext.strokeRect(
+                spriteInfo.x() * zoom,
+                spriteInfo.y() * zoom,
+                spriteInfo.width() * zoom,
+                spriteInfo.height() * zoom
+              );
             });
         });
       } catch (IOException ex) {

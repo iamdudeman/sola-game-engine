@@ -12,6 +12,11 @@ import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.geometry.Shape;
 import technology.sola.math.linear.Vector2D;
 
+/**
+ * ColliderShapeSprite is a collider shape that sizes the collider based on the dimensions of the sprite.
+ *
+ * @param spriteSheetLoader the loader used to load the sprite sheet
+ */
 @NullMarked
 public record ColliderShapeSprite(
   AssetLoader<SpriteSheet> spriteSheetLoader

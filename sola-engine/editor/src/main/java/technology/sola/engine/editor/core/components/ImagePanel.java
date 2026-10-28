@@ -18,14 +18,18 @@ import org.jspecify.annotations.Nullable;
 import technology.sola.engine.editor.core.styles.Css;
 
 import java.io.File;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 /**
  * ImagePanel is a component for viewing an image with the ability to zoom in and out on it.
  */
 @NullMarked
 public class ImagePanel extends VBox {
+  private static final float MAX_ZOOM = 10.0f;
+  private static final float MIN_ZOOM = 0.1f;
+  private static final float ZOOM_INCREMENT = 0.1f;
   private final Property<Boolean> hasChangedProperty = new SimpleBooleanProperty(false);
+  private double zoom = 1.0;
 
   private final GraphicsContext graphicsContext;
   private final Image image;
@@ -33,7 +37,7 @@ public class ImagePanel extends VBox {
   private final Button resetButton;
   private final ToggleButton toggleOverlayButton;
   @Nullable
-  private Consumer<GraphicsContext> overlayRenderer;
+  private BiConsumer<GraphicsContext, Double> overlayRenderer;
   private Double startTranslateX = 0d;
   private Double startTranslateY = 0d;
 
@@ -54,14 +58,26 @@ public class ImagePanel extends VBox {
 
     setOnScroll(event -> {
       if (event.getDeltaY() > 0) {
-        canvas.setScaleX(canvas.getScaleX() + 0.1f);
-        canvas.setScaleY(canvas.getScaleY() + 0.1f);
+        if (zoom >= MAX_ZOOM) {
+          return;
+        }
+        zoom += ZOOM_INCREMENT;
+        zoom = Math.min(zoom, MAX_ZOOM);
+        canvas.setWidth(image.getWidth() * zoom);
+        canvas.setHeight(image.getHeight() * zoom);
+        update();
         hasChangedProperty.setValue(true);
       }
 
       if (event.getDeltaY() < 0) {
-        canvas.setScaleX(canvas.getScaleX() - 0.1f);
-        canvas.setScaleY(canvas.getScaleY() - 0.1f);
+        if (zoom <= MIN_ZOOM) {
+          return;
+        }
+        zoom -= ZOOM_INCREMENT;
+        zoom = Math.max(zoom, MIN_ZOOM);
+        canvas.setWidth(image.getWidth() * zoom);
+        canvas.setHeight(image.getHeight() * zoom);
+        update();
         hasChangedProperty.setValue(true);
       }
     });
@@ -98,7 +114,7 @@ public class ImagePanel extends VBox {
    *
    * @param overlayRenderer the overlay renderer
    */
-  public void setOverlayRenderer(Consumer<GraphicsContext> overlayRenderer) {
+  public void setOverlayRenderer(BiConsumer<GraphicsContext, Double> overlayRenderer) {
     this.overlayRenderer = overlayRenderer;
     toggleOverlayButton.setVisible(true);
 
@@ -110,10 +126,16 @@ public class ImagePanel extends VBox {
    */
   public void update() {
     renderTransparencyGrid(image, graphicsContext);
-    graphicsContext.drawImage(image, 0, 0);
+    graphicsContext.drawImage(
+      image,
+      0,
+      0,
+      image.getWidth() * zoom,
+      image.getHeight() * zoom
+    );
 
     if (overlayRenderer != null && toggleOverlayButton.isSelected()) {
-      overlayRenderer.accept(graphicsContext);
+      overlayRenderer.accept(graphicsContext, zoom);
     }
   }
 
@@ -125,11 +147,13 @@ public class ImagePanel extends VBox {
 
     resetButton.visibleProperty().bind(hasChangedProperty);
     resetButton.setOnAction(event -> {
-      canvas.setScaleX(1.0);
-      canvas.setScaleY(1.0);
+      zoom = 1.0;
+      canvas.setWidth(image.getWidth());
+      canvas.setHeight(image.getHeight());
       canvas.setTranslateX(0.0f);
       canvas.setTranslateY(0.0f);
       hasChangedProperty.setValue(false);
+      update();
     });
 
     ToolBar toolbar = new ToolBar();
@@ -164,6 +188,7 @@ public class ImagePanel extends VBox {
   private void renderTransparencyGrid(Image image, GraphicsContext graphicsContext) {
     boolean alternate = false;
     int gridSize = ((int) Math.max(image.getWidth(), image.getHeight())) / 100 + 1;
+    double zoomedGridSize = gridSize * zoom;
 
     for (int i = 0; i < canvas.getWidth() / gridSize; i++) {
       boolean started = alternate;
@@ -171,7 +196,7 @@ public class ImagePanel extends VBox {
       for (int j = 0; j < canvas.getHeight() / gridSize; j++) {
         graphicsContext.setFill(alternate ? Color.WHITE : Color.LIGHTGRAY);
         alternate = !alternate;
-        graphicsContext.fillRect(i * gridSize, j * gridSize, gridSize, gridSize);
+        graphicsContext.fillRect(i * zoomedGridSize, j * zoomedGridSize, zoomedGridSize, zoomedGridSize);
       }
 
       alternate = !started;
