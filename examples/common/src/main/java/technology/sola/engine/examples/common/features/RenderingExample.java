@@ -96,6 +96,11 @@ public class RenderingExample extends Sola {
       renderer.drawLine(0, 0, 800, 600, Color.BLUE);
       renderer.drawLine(750, 0, 20, 500, Color.BLUE);
 
+      renderer.drawEllipse(440, 120, 80, 40, Color.RED);
+      renderer.fillEllipse(440, 170, 80, 40, Color.GREEN);
+      renderer.drawEllipse(530, 120, 40, 80, Color.RED);
+      renderer.fillEllipse(580, 120, 40, 80, Color.GREEN);
+
       assetLoaderProvider.get(SolaImage.class).get("test").executeIfLoaded(solaImage -> {
         renderer.fillRect(350, 320, 200, 200, Color.WHITE);
         renderer.setBlendFunction(BlendMode.MASK);
