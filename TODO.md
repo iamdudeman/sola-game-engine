@@ -22,16 +22,15 @@
 
 ## TODO List
 
-* UnitTestSolaPlatform
-    * ability to render to an image on the file system
-
-### Low priority (not ordered)
-
 * ability to render ellipse (and collisions for ellipse)
     * maybe consider replacing Circle collider, but doing smart stuff so it does circle collision if width/height are equal
     * enhance `ColliderShapeSprite` to support it as well (isCircle argument)
-* consider adding ability to tile sprites instead of always stretching
-    * new setting on SpriteComponent?
+
+### Low priority (not ordered)
+
+* Consider refactoring tooling code into the editor project
+* UnitTestSolaPlatform
+    * ability to render to an image on the file system
 * Gui animation system
     * might need a new "AnimatedProperty" concept perhaps?
 * Particle System

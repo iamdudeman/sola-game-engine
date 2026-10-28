@@ -2,6 +2,7 @@ package technology.sola.engine.assets.graphics;
 
 import technology.sola.engine.assets.Asset;
 import technology.sola.engine.graphics.Canvas;
+import technology.sola.math.SolaMath;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class SolaImage extends Canvas implements Asset {
   }
 
   /**
-   * Creates an image from source pixel array.
+   * Creates an image from the source pixel array.
    *
    * @param width  the width of the image
    * @param height the height of the image
@@ -88,8 +89,12 @@ public class SolaImage extends Canvas implements Asset {
    * @return the scaled image
    */
   public SolaImage scale(float scaleX, float scaleY) {
-    int newWidth = (int) (scaleX * width + 0.5f);
-    int newHeight = (int) (scaleY * height + 0.5f);
+    if (scaleX == 1 && scaleY == 1) {
+      return this;
+    }
+
+    int newWidth = SolaMath.fastRound(scaleX * width);
+    int newHeight = SolaMath.fastRound(scaleY * height);
 
     return resize(newWidth, newHeight);
   }
@@ -98,8 +103,8 @@ public class SolaImage extends Canvas implements Asset {
    * Resizes this image to a new width and height. The original image will cache {@link SolaImage#CACHE_SIZE}
    * transformations before clearing the cache.
    *
-   * @param newWidth  the new width
-   * @param newHeight the new height
+   * @param newWidth  the new width. A negative value flips the image horizontally.
+   * @param newHeight the new height. A negative value flips the image vertically.
    * @return the resized image
    */
   public SolaImage resize(int newWidth, int newHeight) {
@@ -110,18 +115,25 @@ public class SolaImage extends Canvas implements Asset {
       return cachedTransform;
     }
 
-    int totalPixelCount = newWidth * newHeight;
-    int[] newImagePixels = new int[totalPixelCount];
-    float scaleX = (float) newWidth / getWidth();
-    float scaleY = (float) newHeight / getHeight();
+    int resizedWidth = Math.abs(newWidth);
+    int resizedHeight = Math.abs(newHeight);
+    boolean flipX = newWidth < 0;
+    boolean flipY = newHeight < 0;
 
-    for (int y = 0; y < newHeight; y++) {
-      for (int x = 0; x < newWidth; x++) {
-        float sourceX = (x + 0.5f) / scaleX - 0.5f;
-        float sourceY = (y + 0.5f) / scaleY - 0.5f;
+    int totalPixelCount = resizedWidth * resizedHeight;
+    int[] newImagePixels = new int[totalPixelCount];
+    float scaleX = (float) resizedWidth / getWidth();
+    float scaleY = (float) resizedHeight / getHeight();
+
+    for (int y = 0; y < resizedHeight; y++) {
+      for (int x = 0; x < resizedWidth; x++) {
+        int sampleX = flipX ? resizedWidth - 1 - x : x;
+        int sampleY = flipY ? resizedHeight - 1 - y : y;
+        float sourceX = (sampleX + 0.5f) / scaleX - 0.5f;
+        float sourceY = (sampleY + 0.5f) / scaleY - 0.5f;
         int pixel = getPixel(sourceX, sourceY);
 
-        newImagePixels[x + y * newWidth] = pixel;
+        newImagePixels[x + y * resizedWidth] = pixel;
       }
     }
 
@@ -129,7 +141,7 @@ public class SolaImage extends Canvas implements Asset {
       cachedTransforms.clear();
     }
 
-    cachedTransform = new SolaImage(newWidth, newHeight, newImagePixels);
+    cachedTransform = new SolaImage(resizedWidth, resizedHeight, newImagePixels);
     cachedTransforms.put(cacheKey, cachedTransform);
 
     return cachedTransform;

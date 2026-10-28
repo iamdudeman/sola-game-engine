@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * SoftwareRenderer is a {@link Renderer} implementation that draws on an in memory array of pixels using the CPU. This
+ * SoftwareRenderer is a {@link Renderer} implementation that draws on an in-memory array of pixels using the CPU. This
  * is portable across {@link technology.sola.engine.core.SolaPlatform}s but will be less performant than a GPU-based
  * implementation.
  */
@@ -86,10 +86,10 @@ public class SoftwareRenderer extends Canvas implements Renderer {
 
   @Override
   public void setClamp(int x, int y, int width, int height) {
-    this.clampX = x;
-    this.clampY = y;
-    this.clampMaxX = x + width;
-    this.clampMaxY = y + height;
+    this.clampX = Math.max(0, x);
+    this.clampY = Math.max(0, y);
+    this.clampMaxX = Math.min(this.width, x + width);
+    this.clampMaxY = Math.min(this.height, y + height);
   }
 
   @Override

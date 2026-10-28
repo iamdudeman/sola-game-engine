@@ -6,12 +6,13 @@ import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.graphics.AffineTransform;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.blend.BlendFunction;
+import technology.sola.math.SolaMath;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.List;
 
 /**
- * Renderer defines the API for a sola game engine renderer. {@link SoftwareRenderer} is the default implementation but
+ * Renderer defines the API for a sola game engine renderer. {@link SoftwareRenderer} is the default implementation, but
  * each {@link technology.sola.engine.core.SolaPlatform} can implement their own as well to take advantage of the GPU.
  */
 @NullMarked
@@ -97,7 +98,7 @@ public interface Renderer {
   }
 
   /**
-   * Adds a {@link DrawItem} to a layer at desired order. Higher order render later.
+   * Adds a {@link DrawItem} to a layer at desired order. Higher orders render later.
    *
    * @param layerName name of the layer to add draw item to
    * @param order     the order of the draw item
@@ -116,6 +117,18 @@ public interface Renderer {
    * @param height height of the rectangle
    */
   void setClamp(int x, int y, int width, int height);
+
+  /**
+   * Restricts rendering of pixels within a rectangle. Any setPixel call outside of this rectangle will be ignored.
+   *
+   * @param x      top left coordinate x
+   * @param y      top left coordinate y
+   * @param width  width of the rectangle
+   * @param height height of the rectangle
+   */
+  default void setClamp(float x, float y, float width, float height) {
+    setClamp(SolaMath.fastRound(x), SolaMath.fastRound(y), SolaMath.fastRound(width), SolaMath.fastRound(height));
+  }
 
   /**
    * Resets the rendering clamp to the full size of the {@link Renderer}.
@@ -331,7 +344,7 @@ public interface Renderer {
   void drawImage(SolaImage solaImage, AffineTransform affineTransform);
 
   /**
-   * Draws a {@link SolaImage} scaled to fit within a rectangle specified by x,y, width and height.
+   * Draws a {@link SolaImage} scaled to fit within a rectangle specified by x,y, width, and height.
    *
    * @param solaImage the {@code SolaImage} to draw
    * @param x         top left coordinate x of the scaling rectangle

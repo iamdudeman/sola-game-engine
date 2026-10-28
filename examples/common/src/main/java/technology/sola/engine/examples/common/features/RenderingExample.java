@@ -201,6 +201,14 @@ public class RenderingExample extends Sola {
       new MovingComponent()
     );
 
+    world.createEntity(
+      new LayerComponent("moving_stuff", 10),
+      new TransformComponent(0, 20, 3, 1),
+      new SpriteComponent("test", "stick_figure").setTiled(true),
+      new BlendModeComponent(BlendMode.MASK),
+      new MovingComponent()
+    );
+
     world.createEntity()
       .addComponent(new TransformComponent(400, 530, 1, 1))
       .addComponent(new SpriteComponent("test", "blue"));

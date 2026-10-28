@@ -27,26 +27,30 @@ public class Canvas {
    * @param height the height of the canvas
    */
   public Canvas(int width, int height) {
-    this.width = width;
-    this.height = height;
-    this.pixels = new int[width * height];
+    this(width, height, new int[width * height]);
   }
 
   /**
-   * Creates a canvas instance with desired array of pixels.
+   * Creates a canvas instance with the desired array of pixels.
    *
    * @param width  the width of the Canvas
    * @param height the height of the canvas
    * @param pixels the array of pixels to use for this canvas
    */
   public Canvas(int width, int height, int[] pixels) {
+    if (width < 0) {
+      throw new IllegalArgumentException("Width must be greater than or equal to 0");
+    } else if (height < 0) {
+      throw new IllegalArgumentException("Height must be greater than or equal to 0");
+    }
+
     this.width = width;
     this.height = height;
     this.pixels = pixels;
   }
 
   /**
-   * Returns the hex value of the pixel at desired coordinate on the canvas.
+   * Returns the hex value of the pixel at the desired coordinate on the canvas.
    *
    * @param x the x coordinate
    * @param y the y coordinate
