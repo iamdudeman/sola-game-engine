@@ -19,7 +19,6 @@ import technology.sola.engine.editor.core.styles.Css;
 
 import java.io.File;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 /**
  * ImagePanel is a component for viewing an image with the ability to zoom in and out on it.
