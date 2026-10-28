@@ -45,10 +45,15 @@ class SpriteSheetSplicerDialogContent extends EditorPanel {
     ChangeListener<Integer> updateOverlayListener = (observable, oldValue, newValue) -> {
       var sprites = spliceSprites(spriteSheetInfo, imageWidth, imageHeight);
 
-      imagePanel.setOverlayRenderer(graphicsContext -> {
+      imagePanel.setOverlayRenderer((graphicsContext, zoom) -> {
         sprites.forEach(spriteInfo -> {
           graphicsContext.setStroke(Color.BLACK);
-          graphicsContext.strokeRect(spriteInfo.x(), spriteInfo.y(), spriteInfo.width(), spriteInfo.height());
+          graphicsContext.strokeRect(
+            spriteInfo.x() * zoom,
+            spriteInfo.y() * zoom,
+            spriteInfo.width() * zoom,
+            spriteInfo.height() * zoom
+          );
         });
       });
     };

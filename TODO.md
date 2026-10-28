@@ -8,7 +8,6 @@
 
 * JavaDocs and Sources no longer appear to be available in template project, perhaps issue with jitpack.io?
     * possibly related to: https://github.com/jitpack/jitpack.io/issues/8010
-* editor ImagePanel zooming causes blurry images
 
 -----------------------------------------------------------------------------------------------------------------------
 
