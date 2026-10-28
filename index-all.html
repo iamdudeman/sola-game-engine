@@ -674,7 +674,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/Canvas.html#%3Cinit%3E(int,int,int%5B%5D)" class="member-name-link">Canvas(int, int, int[])</a> - Constructor for class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/Canvas.html" title="class in technology.sola.engine.graphics">Canvas</a></dt>
 <dd>
-<div class="block">Creates a canvas instance with desired array of pixels.</div>
+<div class="block">Creates a canvas instance with the desired array of pixels.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/Key.html#CAPS_LOCK" class="member-name-link">CAPS_LOCK</a> - Enum constant in enum class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/Key.html" title="enum class in technology.sola.engine.input">Key</a></dt>
 <dd>
@@ -1357,7 +1357,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#drawImage(technology.sola.engine.assets.graphics.SolaImage,float,float,float,float)" class="member-name-link">drawImage(SolaImage, float, float, float, float)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
 <dd>
-<div class="block">Draws a <a href="technology.sola.engine/technology/sola/engine/assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> scaled to fit within a rectangle specified by x,y, width and height.</div>
+<div class="block">Draws a <a href="technology.sola.engine/technology/sola/engine/assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> scaled to fit within a rectangle specified by x,y, width, and height.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html#drawImage(technology.sola.engine.assets.graphics.SolaImage,float,float,float,float)" class="member-name-link">drawImage(SolaImage, float, float, float, float)</a> - Method in class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer">SoftwareRenderer</a></dt>
 <dd>&nbsp;</dd>
@@ -2460,7 +2460,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/Canvas.html#getPixel(int,int)" class="member-name-link">getPixel(int, int)</a> - Method in class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/Canvas.html" title="class in technology.sola.engine.graphics">Canvas</a></dt>
 <dd>
-<div class="block">Returns the hex value of the pixel at desired coordinate on the canvas.</div>
+<div class="block">Returns the hex value of the pixel at the desired coordinate on the canvas.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/Canvas.html#getPixels()" class="member-name-link">getPixels()</a> - Method in class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/Canvas.html" title="class in technology.sola.engine.graphics">Canvas</a></dt>
 <dd>&nbsp;</dd>
@@ -3423,6 +3423,8 @@ loadScripts(document, 'script');</script>
 <div class="block">A collider that is a sensor will not respond to collision resolution but will emit collision events if an
  <code>Entity</code> with a <a href="technology.sola.engine/technology/sola/engine/physics/component/DynamicBodyComponent.html" title="class in technology.sola.engine.physics.component"><code>DynamicBodyComponent</code></a> collides.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteComponent.html#isTiled()" class="member-name-link">isTiled()</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteComponent.html" title="class in technology.sola.engine.graphics.components">SpriteComponent</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/input/MouseWheelEvent.html#isUp()" class="member-name-link">isUp()</a> - Method in record class technology.sola.engine.input.<a href="technology.sola.engine/technology/sola/engine/input/MouseWheelEvent.html" title="class in technology.sola.engine.input">MouseWheelEvent</a></dt>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/input/MouseWheelEvent.html#param-isUp"><code>isUp</code></a> record component.</div>
@@ -5373,6 +5375,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Sets the <a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/BaseStyles.html#border()"><code>BaseStyles.border()</code></a> to be the color provided with a 1px sizing.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#setClamp(float,float,float,float)" class="member-name-link">setClamp(float, float, float, float)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
+<dd>
+<div class="block">Restricts rendering of pixels within a rectangle.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#setClamp(int,int,int,int)" class="member-name-link">setClamp(int, int, int, int)</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
 <dd>
 <div class="block">Restricts rendering of pixels within a rectangle.</div>
@@ -5786,6 +5792,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Sets the <a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/TextStyles.html#textColor()"><code>TextStyles.textColor()</code></a>.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteComponent.html#setTiled(boolean)" class="member-name-link">setTiled(boolean)</a> - Method in class technology.sola.engine.graphics.components.<a href="technology.sola.engine/technology/sola/engine/graphics/components/SpriteComponent.html" title="class in technology.sola.engine.graphics.components">SpriteComponent</a></dt>
+<dd>
+<div class="block">Sets whether this sprite should be tiled when scaled horizontally or vertically.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html#setTranslate(float,float)" class="member-name-link">setTranslate(float, float)</a> - Method in class technology.sola.engine.core.component.<a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a></dt>
 <dd>
 <div class="block">Sets the translation of the transform.</div>
@@ -5953,7 +5963,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html" class="type-name-link" title="class in technology.sola.engine.graphics.renderer">SoftwareRenderer</a> - Class in <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/package-summary.html">technology.sola.engine.graphics.renderer</a></dt>
 <dd>
-<div class="block">SoftwareRenderer is a <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> implementation that draws on an in memory array of pixels using the CPU.</div>
+<div class="block">SoftwareRenderer is a <a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a> implementation that draws on an in-memory array of pixels using the CPU.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html#%3Cinit%3E(int,int)" class="member-name-link">SoftwareRenderer(int, int)</a> - Constructor for class technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer">SoftwareRenderer</a></dt>
 <dd>
@@ -6019,7 +6029,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/graphics/SolaImage.html#%3Cinit%3E(int,int,int%5B%5D)" class="member-name-link">SolaImage(int, int, int[])</a> - Constructor for class technology.sola.engine.assets.graphics.<a href="technology.sola.engine/technology/sola/engine/assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a></dt>
 <dd>
-<div class="block">Creates an image from source pixel array.</div>
+<div class="block">Creates an image from the source pixel array.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/logging/SolaLogger.html" class="type-name-link" title="class in technology.sola.logging">SolaLogger</a> - Class in <a href="technology.sola.engine/technology/sola/logging/package-summary.html">technology.sola.logging</a></dt>
 <dd>

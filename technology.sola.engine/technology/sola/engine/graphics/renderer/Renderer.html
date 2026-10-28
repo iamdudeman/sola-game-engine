@@ -79,7 +79,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="annotations">@NullMarked
 </span><span class="modifiers">public interface </span><span class="element-name type-name-label">Renderer</span></div>
-<div class="block">Renderer defines the API for a sola game engine renderer. <a href="SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer"><code>SoftwareRenderer</code></a> is the default implementation but
+<div class="block">Renderer defines the API for a sola game engine renderer. <a href="SoftwareRenderer.html" title="class in technology.sola.engine.graphics.renderer"><code>SoftwareRenderer</code></a> is the default implementation, but
  each <a href="../../core/SolaPlatform.html" title="class in technology.sola.engine.core"><code>SolaPlatform</code></a> can implement their own as well to take advantage of the GPU.</div>
 </section>
 <section class="summary">
@@ -137,7 +137,7 @@ loadScripts(document, 'script');</script>
  float&nbsp;width,
  float&nbsp;height)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Draws a <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> scaled to fit within a rectangle specified by x,y, width and height.</div>
+<div class="block">Draws a <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> scaled to fit within a rectangle specified by x,y, width, and height.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#drawImage(technology.sola.engine.assets.graphics.SolaImage,technology.sola.engine.graphics.AffineTransform)" class="member-name-link">drawImage</a><wbr>(<a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics">SolaImage</a>&nbsp;solaImage,
@@ -273,31 +273,39 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Sets the <a href="blend/BlendFunction.html" title="interface in technology.sola.engine.graphics.renderer.blend"><code>BlendFunction</code></a> that should be used.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setClamp(int,int,int,int)" class="member-name-link">setClamp</a><wbr>(int&nbsp;x,
- int&nbsp;y,
- int&nbsp;width,
- int&nbsp;height)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#setClamp(float,float,float,float)" class="member-name-link">setClamp</a><wbr>(float&nbsp;x,
+ float&nbsp;y,
+ float&nbsp;width,
+ float&nbsp;height)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Restricts rendering of pixels within a rectangle.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setFont(technology.sola.engine.assets.graphics.font.Font)" class="member-name-link">setFont</a><wbr>(<a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a>&nbsp;font)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setClamp(int,int,int,int)" class="member-name-link">setClamp</a><wbr>(int&nbsp;x,
+ int&nbsp;y,
+ int&nbsp;width,
+ int&nbsp;height)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Restricts rendering of pixels within a rectangle.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setFont(technology.sola.engine.assets.graphics.font.Font)" class="member-name-link">setFont</a><wbr>(<a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font">Font</a>&nbsp;font)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Sets the <a href="../../assets/graphics/font/Font.html" title="class in technology.sola.engine.assets.graphics.font"><code>Font</code></a> to use when drawing text.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#setPixel(int,int,int)" class="member-name-link">setPixel</a><wbr>(int&nbsp;x,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#setPixel(int,int,int)" class="member-name-link">setPixel</a><wbr>(int&nbsp;x,
  int&nbsp;y,
  int&nbsp;color)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Sets the <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of a pixel at coordinate.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setPixel(int,int,technology.sola.engine.graphics.Color)" class="member-name-link">setPixel</a><wbr>(int&nbsp;x,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setPixel(int,int,technology.sola.engine.graphics.Color)" class="member-name-link">setPixel</a><wbr>(int&nbsp;x,
  int&nbsp;y,
  <a href="../Color.html" title="class in technology.sola.engine.graphics">Color</a>&nbsp;color)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Sets the <a href="../Color.html" title="class in technology.sola.engine.graphics"><code>Color</code></a> of a pixel at coordinate.</div>
 </div>
 </div>
@@ -442,7 +450,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">drawToLayer</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;layerName,
  int&nbsp;order,
  <a href="DrawItem.html" title="interface in technology.sola.engine.graphics.renderer">DrawItem</a>&nbsp;drawItem)</span></div>
-<div class="block">Adds a <a href="DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> to a layer at desired order. Higher order render later.</div>
+<div class="block">Adds a <a href="DrawItem.html" title="interface in technology.sola.engine.graphics.renderer"><code>DrawItem</code></a> to a layer at desired order. Higher orders render later.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>layerName</code> - name of the layer to add draw item to</dd>
@@ -458,6 +466,23 @@ loadScripts(document, 'script');</script>
  int&nbsp;y,
  int&nbsp;width,
  int&nbsp;height)</span></div>
+<div class="block">Restricts rendering of pixels within a rectangle. Any setPixel call outside of this rectangle will be ignored.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>x</code> - top left coordinate x</dd>
+<dd><code>y</code> - top left coordinate y</dd>
+<dd><code>width</code> - width of the rectangle</dd>
+<dd><code>height</code> - height of the rectangle</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setClamp(float,float,float,float)">
+<h3>setClamp</h3>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setClamp</span><wbr><span class="parameters">(float&nbsp;x,
+ float&nbsp;y,
+ float&nbsp;width,
+ float&nbsp;height)</span></div>
 <div class="block">Restricts rendering of pixels within a rectangle. Any setPixel call outside of this rectangle will be ignored.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -755,7 +780,7 @@ loadScripts(document, 'script');</script>
  float&nbsp;y,
  float&nbsp;width,
  float&nbsp;height)</span></div>
-<div class="block">Draws a <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> scaled to fit within a rectangle specified by x,y, width and height.</div>
+<div class="block">Draws a <a href="../../assets/graphics/SolaImage.html" title="class in technology.sola.engine.assets.graphics"><code>SolaImage</code></a> scaled to fit within a rectangle specified by x,y, width, and height.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>solaImage</code> - the <code>SolaImage</code> to draw</dd>

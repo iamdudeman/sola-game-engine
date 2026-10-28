@@ -126,7 +126,7 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
  int&nbsp;height,
  int[]&nbsp;pixels)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Creates an image from source pixel array.</div>
+<div class="block">Creates an image from the source pixel array.</div>
 </div>
 </div>
 </section>
@@ -231,7 +231,7 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SolaImage</span><wbr><span class="parameters">(int&nbsp;width,
  int&nbsp;height,
  int[]&nbsp;pixels)</span></div>
-<div class="block">Creates an image from source pixel array.</div>
+<div class="block">Creates an image from the source pixel array.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>width</code> - the width of the image</dd>
@@ -307,8 +307,8 @@ implements <a href="../Asset.html" title="interface in technology.sola.engine.as
  transformations before clearing the cache.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>newWidth</code> - the new width</dd>
-<dd><code>newHeight</code> - the new height</dd>
+<dd><code>newWidth</code> - the new width. A negative value flips the image horizontally.</dd>
+<dd><code>newHeight</code> - the new height. A negative value flips the image vertically.</dd>
 <dt>Returns:</dt>
 <dd>the resized image</dd>
 </dl>

@@ -141,10 +141,18 @@ implements technology.sola.ecs.Component</span></div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSpriteSheetId()" class="member-name-link">getSpriteSheetId</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSpriteKeyFrame(technology.sola.engine.graphics.components.SpriteKeyFrame)" class="member-name-link">setSpriteKeyFrame</a><wbr>(<a href="SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a>&nbsp;spriteKeyFrame)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isTiled()" class="member-name-link">isTiled</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSpriteKeyFrame(technology.sola.engine.graphics.components.SpriteKeyFrame)" class="member-name-link">setSpriteKeyFrame</a><wbr>(<a href="SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components">SpriteKeyFrame</a>&nbsp;spriteKeyFrame)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Updates the <a href="SpriteKeyFrame.html" title="class in technology.sola.engine.graphics.components"><code>SpriteKeyFrame</code></a>.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SpriteComponent.html" title="class in technology.sola.engine.graphics.components">SpriteComponent</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTiled(boolean)" class="member-name-link">setTiled</a><wbr>(boolean&nbsp;isTiled)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets whether this sprite should be tiled when scaled horizontally or vertically.</div>
 </div>
 </div>
 </div>
@@ -237,6 +245,29 @@ implements technology.sola.ecs.Component</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>spriteKeyFrame</code> - the new <code>SpriteKeyFrame</code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isTiled()">
+<h3>isTiled</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isTiled</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if this sprite should be tiled when scaled horizontally or vertically</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setTiled(boolean)">
+<h3>setTiled</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SpriteComponent.html" title="class in technology.sola.engine.graphics.components">SpriteComponent</a></span>&nbsp;<span class="element-name">setTiled</span><wbr><span class="parameters">(boolean&nbsp;isTiled)</span></div>
+<div class="block">Sets whether this sprite should be tiled when scaled horizontally or vertically.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>isTiled</code> - whether this sprite should be tiled when scaled horizontally or vertically</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
 </dl>
 </section>
 </li>
