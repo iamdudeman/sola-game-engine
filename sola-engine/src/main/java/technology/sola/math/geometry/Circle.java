@@ -12,7 +12,7 @@ import technology.sola.math.linear.Vector2D;
 @NullMarked
 public record Circle(float radius, Vector2D center) implements Shape {
   /**
-   * Creates a circle with defined radius and center. If the radius provided is zero then a degenerate circle will be
+   * Creates a circle with a defined radius and center. If the radius provided is zero, then a degenerate circle will be
    * created.
    *
    * @param radius the radius of the circle, positive number

@@ -27,9 +27,11 @@
         * `CircleRendererComponentEditorModule` might need updating
         * `CircleRendererComponent` might need updating
     * ColliderComponent shape CIRCLE should use ellipse collision if width+height not equal
-        * Might need a new `Shape` implementation `Ellipse`
+        * ~~Might need a new `Shape` implementation `Ellipse`~~
         * `ColliderShapeCircle` needs updating (might conditionally return Circle shape or Ellipse shape now instead of always Circle)
-        * `CollisionUtils` needs updating
+        * `CollisionUtils` needs updating (consider a visitor pattern maybe?)
+    * `EllipseEmitterShape` for particles
+        * Update `ParticleExample` with this new shape
     * enhance `ColliderShapeSprite` to support it as well (isCircle argument perhaps or new class like `ColliderShapeSpriteCircle`)
 
 ### Low priority (not ordered)
