@@ -22,10 +22,7 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.component.particle.ParticleEmitterComponent;
 import technology.sola.engine.physics.component.particle.appearance.ParticleShape;
-import technology.sola.engine.physics.component.particle.emitter.CircleEmitterShape;
-import technology.sola.engine.physics.component.particle.emitter.TrapezoidEmitterShape;
-import technology.sola.engine.physics.component.particle.emitter.TriangleEmitterShape;
-import technology.sola.engine.physics.component.particle.emitter.RectangleEmitterShape;
+import technology.sola.engine.physics.component.particle.emitter.*;
 import technology.sola.engine.physics.component.particle.movement.ParticleNoise;
 import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.math.geometry.ConvexPolygon;
@@ -113,9 +110,8 @@ public class ParticleExample extends Sola {
         buildParticleOptionButton(world, "Shell", ParticleExample::setEmitterToShell),
         buildParticleOptionButton(world, "Triangle", ParticleExample::setEmitterToTriangle),
         buildParticleOptionButton(world, "Circle", ParticleExample::setEmitterToCircle),
-        buildParticleOptionButton(world, "Rectangle", ParticleExample::setEmitterToRectangle),
-        buildParticleOptionButton(world, "Random", ParticleExample::setEmitterToRandom),
-        buildParticleOptionButton(world, "Noise", ParticleExample::setEmitterToNoise)
+        buildParticleOptionButton(world, "Ellipse", ParticleExample::setEmitterToEllipse),
+        buildParticleOptionButton(world, "Rectangle", ParticleExample::setEmitterToRectangle)
       );
   }
 
@@ -123,6 +119,8 @@ public class ParticleExample extends Sola {
     return new SectionGuiElement()
       .addStyle(new BaseStyles.Builder<>().setDirection(Direction.ROW).setGap(2).build())
       .appendChildren(
+        buildParticleOptionButton(world, "Random", ParticleExample::setEmitterToRandom),
+        buildParticleOptionButton(world, "Noise", ParticleExample::setEmitterToNoise),
         buildParticleOptionButton(world, "Shapes", ParticleExample::setEmitterToShapes),
         buildParticleOptionButton(world, "Burst", ParticleExample::setEmitterToBurst),
         buildParticleOptionButton(world, "Fire", ParticleExample::setEmitterToFire),
@@ -173,15 +171,15 @@ public class ParticleExample extends Sola {
   }
 
   private static void setEmitterToTriangle(Entity entity) {
-    var shellEmitter = new ParticleEmitterComponent();
+    var emitter = new ParticleEmitterComponent();
 
-    shellEmitter.emissionConfig().setShape(new TriangleEmitterShape(
+    emitter.emissionConfig().setShape(new TriangleEmitterShape(
       new Vector2D(0, -1f), 100, 40
     ));
 
     cleanupEntity(entity);
 
-    entity.addComponent(shellEmitter)
+    entity.addComponent(emitter)
       .addComponent(new TriangleRendererComponent(Color.YELLOW, false, new Triangle(
         new Vector2D(0, 0), new Vector2D(-20, -100), new Vector2D(20, -100)
       )))
@@ -190,16 +188,31 @@ public class ParticleExample extends Sola {
   }
 
   private static void setEmitterToCircle(Entity entity) {
-    var shellEmitter = new ParticleEmitterComponent();
+    var emitter = new ParticleEmitterComponent();
 
-    shellEmitter.emissionConfig().setShape(new CircleEmitterShape(50));
+    emitter.emissionConfig().setShape(new CircleEmitterShape(50));
 
     cleanupEntity(entity);
 
-    entity.addComponent(shellEmitter)
+    entity.addComponent(emitter)
       .addComponent(new CircleRendererComponent(Color.YELLOW, false))
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
       .addComponent(new TransformComponent(250, 300, 100));
+  }
+
+  private static void setEmitterToEllipse(Entity entity) {
+    var emitter = new ParticleEmitterComponent();
+
+    emitter.emissionConfig().setShape(new EllipseEmitterShape(50, 100));
+
+    // emitter.emissionConfig().shape().setEmitFromShell(true); // todo test with shell emitter as well
+
+    cleanupEntity(entity);
+
+    entity.addComponent(emitter)
+      .addComponent(new CircleRendererComponent(Color.YELLOW, false))
+      .addComponent(new BlendModeComponent(BlendMode.NORMAL))
+      .addComponent(new TransformComponent(250, 300, 50, 100));
   }
 
   private static void setEmitterToRectangle(Entity entity) {
@@ -216,14 +229,14 @@ public class ParticleExample extends Sola {
   }
 
   private static void setEmitterToRandom(Entity entity) {
-    var shellEmitter = new ParticleEmitterComponent();
+    var emitter = new ParticleEmitterComponent();
 
-    shellEmitter.emissionConfig().setShape(new CircleEmitterShape(50));
-    shellEmitter.emissionConfig().shape().setRandomDirection(true);
+    emitter.emissionConfig().setShape(new CircleEmitterShape(50));
+    emitter.emissionConfig().shape().setRandomDirection(true);
 
     cleanupEntity(entity);
 
-    entity.addComponent(shellEmitter)
+    entity.addComponent(emitter)
       .addComponent(new CircleRendererComponent(Color.YELLOW, false))
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
       .addComponent(new TransformComponent(250, 300, 100));
