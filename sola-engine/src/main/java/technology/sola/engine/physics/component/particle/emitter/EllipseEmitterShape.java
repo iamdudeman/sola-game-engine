@@ -68,13 +68,22 @@ public class EllipseEmitterShape extends ParticleEmitterShape {
 
   @Override
   protected Vector2D randomPointInShape() {
-    // todo implement
-    throw new UnsupportedOperationException("not yet implemented");
+    return getRandomPoint((float) Math.sqrt(SolaRandom.nextFloat()));
   }
 
   @Override
   protected Vector2D randomPointOnPerimeter() {
-    // todo implement
-    throw new UnsupportedOperationException("not yet implemented");
+    return getRandomPoint(1);
+  }
+
+  private Vector2D getRandomPoint(float radiusScale) {
+    var angle = SolaRandom.nextFloat() * 2 * (float) Math.PI;
+    var radiusX = width * 0.5f * radiusScale;
+    var radiusY = height * 0.5f * radiusScale;
+
+    return new Vector2D(
+      center.x() + radiusX * (float) Math.cos(angle),
+      center.y() + radiusY * (float) Math.sin(angle)
+    );
   }
 }

@@ -205,8 +205,6 @@ public class ParticleExample extends Sola {
 
     emitter.emissionConfig().setShape(new EllipseEmitterShape(50, 100));
 
-    // emitter.emissionConfig().shape().setEmitFromShell(true); // todo test with shell emitter as well
-
     cleanupEntity(entity);
 
     entity.addComponent(emitter)
