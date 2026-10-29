@@ -23,12 +23,38 @@ public class CircleEntityGraphicsModule extends SolaEntityGraphicsModule<View2En
   @Override
   public void renderEntity(Renderer renderer, View2Entry<CircleRendererComponent, TransformComponent> viewEntry, TransformComponent cameraModifiedEntityTransform) {
     var circleRenderer = viewEntry.c1();
-    float radius = cameraModifiedEntityTransform.getScaleX() * 0.5f;
+    var transform = viewEntry.c2();
 
-    if (circleRenderer.isFilled()) {
-      renderer.fillCircle(cameraModifiedEntityTransform.getX(), cameraModifiedEntityTransform.getY(), radius, circleRenderer.getColor());
+    if (transform.getScaleX() == transform.getScaleY()) {
+      float radius = cameraModifiedEntityTransform.getScaleX() * 0.5f;
+
+      if (circleRenderer.isFilled()) {
+        renderer.fillCircle(
+          cameraModifiedEntityTransform.getX(), cameraModifiedEntityTransform.getY(), radius, circleRenderer.getColor()
+        );
+      } else {
+        renderer.drawCircle(
+          cameraModifiedEntityTransform.getX(), cameraModifiedEntityTransform.getY(), radius, circleRenderer.getColor()
+        );
+      }
     } else {
-      renderer.drawCircle(cameraModifiedEntityTransform.getX(), cameraModifiedEntityTransform.getY(), radius, circleRenderer.getColor());
+      if (circleRenderer.isFilled()) {
+        renderer.fillEllipse(
+          cameraModifiedEntityTransform.getX(),
+          cameraModifiedEntityTransform.getY(),
+          cameraModifiedEntityTransform.getScaleX(),
+          cameraModifiedEntityTransform.getScaleY(),
+          circleRenderer.getColor()
+        );
+      } else {
+        renderer.drawEllipse(
+          cameraModifiedEntityTransform.getX(),
+          cameraModifiedEntityTransform.getY(),
+          cameraModifiedEntityTransform.getScaleX(),
+          cameraModifiedEntityTransform.getScaleY(),
+          circleRenderer.getColor()
+        );
+      }
     }
   }
 }
