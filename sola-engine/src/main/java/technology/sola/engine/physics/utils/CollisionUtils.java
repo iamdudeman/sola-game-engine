@@ -11,7 +11,6 @@ import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.math.SolaMath;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
-import technology.sola.math.geometry.Shape;
 import technology.sola.math.linear.Vector2D;
 
 /**
@@ -38,40 +37,10 @@ public final class CollisionUtils {
     ColliderComponent colliderA = viewEntryA.c1();
     ColliderComponent colliderB = viewEntryB.c1();
 
-    var mtv = switch (colliderA.getType()) {
-      case AABB -> switch (colliderB.getType()) {
-        case AABB -> calculateAABBVsAABB(
-          colliderA.getShape(entityA, transformA), colliderB.getShape(entityB, transformB)
-        );
-        case CIRCLE -> calculateAABBVsCircle(
-          colliderA.getShape(entityA, transformA), colliderB.getShape(entityB, transformB)
-        );
-        case TRIANGLE, CONVEX_POLYGON -> SeparatingAxisTheorem.checkCollision(
-          colliderA.getShape(entityA, transformA).points(), colliderB.getShape(entityB, transformB).points()
-        );
-      };
-
-      case CIRCLE -> switch (colliderB.getType()) {
-        case AABB -> reverseMtv(
-          calculateAABBVsCircle(colliderB.getShape(entityB, transformB), colliderA.getShape(entityA, transformA))
-        );
-        case CIRCLE -> calculateCircleVsCircle(
-          colliderA.getShape(entityA, transformA), colliderB.getShape(entityB, transformB)
-        );
-        case TRIANGLE, CONVEX_POLYGON -> reverseMtv(
-          calculateCircleVsShapeSAT(colliderA.getShape(entityA, transformA), colliderB.getShape(entityB, transformB))
-        );
-      };
-
-      case TRIANGLE, CONVEX_POLYGON -> switch (colliderB.getType()) {
-        case AABB, TRIANGLE, CONVEX_POLYGON -> SeparatingAxisTheorem.checkCollision(
-          colliderA.getShape(entityA, transformA).points(), colliderB.getShape(entityB, transformB).points()
-        );
-        case CIRCLE -> calculateCircleVsShapeSAT(
-          colliderB.getShape(entityB, transformB), colliderA.getShape(entityA, transformA)
-        );
-      };
-    };
+    var mtv = MinimumTranslationVectorUtils.calculateMinimumTranslationVector(
+      colliderA.getShape(entityA, transformA),
+      colliderB.getShape(entityB, transformB)
+    );
 
     if (mtv == null) {
       return null;
@@ -207,20 +176,6 @@ public final class CollisionUtils {
     Vector2D normal = posB.subtract(posA).normalize();
 
     return new MinimumTranslationVector(normal, penetration);
-  }
-
-  @Nullable
-  private static MinimumTranslationVector calculateCircleVsShapeSAT(Circle circle, Shape shape) {
-    return SeparatingAxisTheorem.checkCollision(shape.points(), circle.center(), circle.radius());
-  }
-
-  @Nullable
-  private static MinimumTranslationVector reverseMtv(@Nullable MinimumTranslationVector minimumTranslationVector) {
-    if (minimumTranslationVector == null) {
-      return null;
-    }
-
-    return minimumTranslationVector.reverse();
   }
 
   private CollisionUtils() {
