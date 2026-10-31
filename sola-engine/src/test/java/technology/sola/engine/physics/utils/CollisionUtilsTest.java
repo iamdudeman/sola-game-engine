@@ -102,10 +102,10 @@ class CollisionUtilsTest {
       var collisionManifold = CollisionUtils.calculateCollisionManifold(viewEntryA, viewEntryB);
 
       assertNotNull(collisionManifold);
-      assertEquals(new Vector2D(-0.857493f, 0.5144958f), collisionManifold.normal());
+      assertEquals(new Vector2D(0.857493f, -0.5144958f), collisionManifold.normal());
       assertEquals(0.31400573f, collisionManifold.penetration());
-      assertEquals(mockEntityB, collisionManifold.entityA());
-      assertEquals(mockEntityA, collisionManifold.entityB());
+      assertEquals(mockEntityA, collisionManifold.entityA());
+      assertEquals(mockEntityB, collisionManifold.entityB());
 
       collisionManifold = CollisionUtils.calculateCollisionManifold(viewEntryB, viewEntryA);
 
