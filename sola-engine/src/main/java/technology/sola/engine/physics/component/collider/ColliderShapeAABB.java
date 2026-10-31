@@ -28,11 +28,6 @@ public record ColliderShapeAABB(
   }
 
   @Override
-  public ColliderType type() {
-    return ColliderType.AABB;
-  }
-
-  @Override
   public Rectangle getBoundingBox(Entity entity, TransformComponent transformComponent, float offsetX, float offsetY) {
     Vector2D min = transformComponent.getTranslate().add(new Vector2D(offsetX, offsetY));
 

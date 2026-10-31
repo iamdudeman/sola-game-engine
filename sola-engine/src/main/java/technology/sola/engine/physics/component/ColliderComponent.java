@@ -187,13 +187,4 @@ public class ColliderComponent implements Component {
   public void debugRender(Renderer renderer, Entity entity, TransformComponent transformComponent) {
     colliderShape.debugRender(renderer, entity, transformComponent, offsetX, offsetY);
   }
-
-  /**
-   * Gets the {@link ColliderType} of this collider.
-   *
-   * @return the {@code ColliderType} of this collider
-   */
-  public ColliderType getType() {
-    return colliderShape.type();
-  }
 }

@@ -22,11 +22,6 @@ public record ColliderShapeSprite(
   AssetLoader<SpriteSheet> spriteSheetLoader
 ) implements ColliderShape<Shape> {
   @Override
-  public ColliderType type() {
-    return ColliderType.AABB;
-  }
-
-  @Override
   public Rectangle getBoundingBox(Entity entity, TransformComponent transformComponent, float offsetX, float offsetY) {
     var dimensions = getSpriteDimensions(entity);
     var width = dimensions.width;
