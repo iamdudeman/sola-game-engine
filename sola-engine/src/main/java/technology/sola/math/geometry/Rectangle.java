@@ -52,6 +52,11 @@ public record Rectangle(Vector2D min, Vector2D max) implements Shape {
     return points;
   }
 
+  @Override
+  public <R> R accept(ShapeVisitor<R> visitor) {
+    return visitor.visit(this);
+  }
+
   /**
    * Gets the width of the rectangle.
    *

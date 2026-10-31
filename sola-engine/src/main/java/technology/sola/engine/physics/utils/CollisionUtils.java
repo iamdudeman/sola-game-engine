@@ -51,6 +51,7 @@ public final class CollisionUtils {
           colliderA.getShape(entityA, transformA).points(), colliderB.getShape(entityB, transformB).points()
         );
       };
+
       case CIRCLE -> switch (colliderB.getType()) {
         case AABB -> {
           isReversed = true;
@@ -68,6 +69,7 @@ public final class CollisionUtils {
           );
         }
       };
+
       case TRIANGLE, CONVEX_POLYGON -> switch (colliderB.getType()) {
         case AABB, TRIANGLE, CONVEX_POLYGON -> SeparatingAxisTheorem.checkCollision(
           colliderA.getShape(entityA, transformA).points(), colliderB.getShape(entityB, transformB).points()

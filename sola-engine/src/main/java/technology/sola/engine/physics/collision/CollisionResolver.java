@@ -8,7 +8,27 @@ import technology.sola.math.geometry.*;
  *
  * @param <S> the source shape type being tested for collision
  */
-public interface CollisionVisitor<S extends Shape> {
+public interface CollisionResolver<S extends Shape> {
+  default MinimumTranslationVector resolve(S shape, Shape otherShape) {
+    if (otherShape instanceof Rectangle rectangle) {
+      return resolve(shape, rectangle);
+    }
+
+    if (otherShape instanceof Circle circle) {
+      return resolve(shape, circle);
+    }
+
+    if (otherShape instanceof Triangle triangle) {
+      return resolve(shape, triangle);
+    }
+
+    if (otherShape instanceof ConvexPolygon convexPolygon) {
+      return resolve(shape, convexPolygon);
+    }
+
+    throw new IllegalArgumentException("Unsupported shape type: " + otherShape.getClass().getName());
+  }
+
   /**
    * Visits an axis-aligned bounding box collision target.
    *
@@ -16,7 +36,7 @@ public interface CollisionVisitor<S extends Shape> {
    * @param rectangle the rectangle collision target
    * @return the minimum translation vector required to resolve the collision, or {@code null} if there is no collision
    */
-  MinimumTranslationVector visitAABB(S shape, Rectangle rectangle);
+  MinimumTranslationVector resolve(S shape, Rectangle rectangle);
 
   /**
    * Visits a circle collision target.
@@ -25,7 +45,7 @@ public interface CollisionVisitor<S extends Shape> {
    * @param circle the circle collision target
    * @return the minimum translation vector required to resolve the collision, or {@code null} if there is no collision
    */
-  MinimumTranslationVector visitCircle(S shape, Circle circle);
+  MinimumTranslationVector resolve(S shape, Circle circle);
 
   /**
    * Visits a triangle collision target.
@@ -34,7 +54,7 @@ public interface CollisionVisitor<S extends Shape> {
    * @param triangle the triangle collision target
    * @return the minimum translation vector required to resolve the collision, or {@code null} if there is no collision
    */
-  MinimumTranslationVector visitTriangle(S shape, Triangle triangle);
+  MinimumTranslationVector resolve(S shape, Triangle triangle);
 
   /**
    * Visits a convex polygon collision target.
@@ -43,5 +63,5 @@ public interface CollisionVisitor<S extends Shape> {
    * @param convexPolygon the convex polygon collision target
    * @return the minimum translation vector required to resolve the collision, or {@code null} if there is no collision
    */
-  MinimumTranslationVector visitConvexPolygon(S shape, ConvexPolygon convexPolygon);
+  MinimumTranslationVector resolve(S shape, ConvexPolygon convexPolygon);
 }

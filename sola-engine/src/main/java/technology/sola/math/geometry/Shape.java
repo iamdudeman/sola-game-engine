@@ -37,6 +37,8 @@ public interface Shape {
     return calculateCentroid(points());
   }
 
+  <R> R accept(ShapeVisitor<R> visitor);
+
   /**
    * Calculates and returns the centroid of the shape represented by the array of points.
    *

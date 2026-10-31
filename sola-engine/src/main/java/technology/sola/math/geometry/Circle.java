@@ -43,4 +43,9 @@ public record Circle(float radius, Vector2D center) implements Shape {
   public float getArea() {
     return (float) (Math.PI * radius * radius);
   }
+
+  @Override
+  public <R> R accept(ShapeVisitor<R> visitor) {
+    return visitor.visit(this);
+  }
 }

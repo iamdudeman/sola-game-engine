@@ -54,6 +54,11 @@ public record Triangle(Vector2D p1, Vector2D p2, Vector2D p3) implements Shape {
     ) * 0.5f;
   }
 
+  @Override
+  public <R> R accept(ShapeVisitor<R> visitor) {
+    return visitor.visit(this);
+  }
+
   private float sign(Vector2D p1, Vector2D p2, Vector2D p3) {
     return (p1.x() - p3.x()) * (p2.y() - p3.y()) - (p2.x() - p3.x()) * (p1.y() - p3.y());
   }

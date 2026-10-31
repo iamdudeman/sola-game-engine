@@ -12,7 +12,7 @@ import technology.sola.math.linear.Vector2D;
 @NullMarked
 public class SeparatingAxisTheorem {
   /**
-   * Checks for collisions between to shapes. If a collision is detected the {@link MinimumTranslationVector} will be
+   * Checks for collisions between to shapes. If a collision is detected, the {@link MinimumTranslationVector} will be
    * returned. If no collision is found, then null will be returned.
    *
    * @param shapeA the first array of points for a shape to check collisions with
@@ -55,7 +55,7 @@ public class SeparatingAxisTheorem {
   }
 
   /**
-   * Checks for collisions between a shape and a circle. If a collision is detected
+   * Checks for collisions between a shape and a circle. If a collision is detected,
    * the {@link MinimumTranslationVector} will be returned. If no collision is found, then null will be returned.
    *
    * @param shape        the array of points for a shape to check collisions with

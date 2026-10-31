@@ -11,4 +11,7 @@ import technology.sola.math.linear.Vector2D;
  */
 @NullMarked
 public record MinimumTranslationVector(Vector2D normal, float penetration) {
+  public MinimumTranslationVector invert() {
+    return new MinimumTranslationVector(normal.scalar(-1), penetration);
+  }
 }

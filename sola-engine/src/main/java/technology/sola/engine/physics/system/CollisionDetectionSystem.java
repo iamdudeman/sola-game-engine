@@ -1,18 +1,23 @@
 package technology.sola.engine.physics.system;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import technology.sola.ecs.EcsSystem;
+import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
+import technology.sola.ecs.view.View2Entry;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.physics.CollisionManifold;
+import technology.sola.engine.physics.collision.CollisionResolver;
+import technology.sola.engine.physics.collision.CollisionResolverVisitor;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.collider.ColliderTag;
 import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.engine.physics.system.collision.CollisionDetectionBroadPhase;
 import technology.sola.engine.physics.system.collision.QuadTreeCollisionDetectionBroadPhase;
-import technology.sola.engine.physics.utils.CollisionUtils;
+import technology.sola.math.geometry.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,8 +25,8 @@ import java.util.Set;
 /**
  * The CollisionDetectionSystem class is a {@link EcsSystem} implementation that handles checking if a {@link World}
  * has any {@link technology.sola.ecs.Entity} with {@link ColliderComponent}s that are colliding with each other. If a
- * collision is detected either a {@link SensorEvent} or a {@link CollisionEvent} will be emitted depending on if either
- * collider {@link ColliderComponent#isSensor()} or not.
+ * collision is detected, either a {@link SensorEvent} or a {@link CollisionEvent} will be emitted depending on if
+ * either collider {@link ColliderComponent#isSensor()} or not.
  */
 @NullMarked
 public class CollisionDetectionSystem extends EcsSystem {
@@ -31,6 +36,7 @@ public class CollisionDetectionSystem extends EcsSystem {
   public static final int ORDER = PhysicsSystem.ORDER + 1;
   private final EventHub eventHub;
   private CollisionDetectionBroadPhase collisionDetectionBroadPhase;
+  private final CollisionResolverVisitor<Shape> collisionResolverVisitor = new CollisionResolverVisitor<>();
 
   /**
    * Creates a CollisionDetectionSystem that uses an auto sizing {@link QuadTreeCollisionDetectionBroadPhase}.
@@ -76,7 +82,7 @@ public class CollisionDetectionSystem extends EcsSystem {
           continue;
         }
 
-        CollisionManifold collisionManifold = CollisionUtils.calculateCollisionManifold(
+        CollisionManifold collisionManifold = calculateCollisionManifold(
           viewEntryA, viewEntryB
         );
 
@@ -125,5 +131,29 @@ public class CollisionDetectionSystem extends EcsSystem {
     }
 
     return false;
+  }
+
+  @Nullable
+  private <T extends Shape> CollisionManifold calculateCollisionManifold(
+    View2Entry<ColliderComponent, TransformComponent> viewEntryA,
+    View2Entry<ColliderComponent, TransformComponent> viewEntryB
+  ) {
+    Entity entityA = viewEntryA.entity();
+    Entity entityB = viewEntryB.entity();
+    TransformComponent transformA = viewEntryA.c2();
+    TransformComponent transformB = viewEntryB.c2();
+    ColliderComponent colliderA = viewEntryA.c1();
+    ColliderComponent colliderB = viewEntryB.c1();
+    T shapeA = colliderA.getShape(entityA, transformA);
+    var shapeB = colliderB.getShape(entityB, transformB);
+
+    var resolver = (CollisionResolver<T>) shapeA.accept(collisionResolverVisitor);
+    var mtv = resolver.resolve(shapeA, shapeB);
+
+    if (mtv == null) {
+      return null;
+    }
+
+    return new CollisionManifold(entityA, entityB, mtv.normal(), mtv.penetration());
   }
 }

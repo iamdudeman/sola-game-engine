@@ -60,4 +60,9 @@ public record Ellipse(float width, float height) implements Shape {
     // Uses: π * radiusX * radiusY
     return (float) (Math.PI * width * height * 0.25f);
   }
+
+  @Override
+  public <R> R accept(ShapeVisitor<R> visitor) {
+    return visitor.visit(this);
+  }
 }

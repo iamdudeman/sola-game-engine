@@ -139,4 +139,9 @@ public record ConvexPolygon(Vector2D[] points) implements Shape {
       topLeft.add(new Vector2D(width, height))
     );
   }
+
+  @Override
+  public <R> R accept(ShapeVisitor<R> visitor) {
+    return visitor.visit(this);
+  }
 }
