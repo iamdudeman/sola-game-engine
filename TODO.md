@@ -31,6 +31,7 @@
         * ~~`CollisionUtils` needs updating (consider a visitor pattern maybe?)~~
         * implement `Ellipse` collision resolution in `CollisionUtils` and `MinimumTranslationVectorUtils`
         * `ColliderShapeCircle` needs updating to return Ellipse if width+height not equal
+            * Consider if `ColliderShapeEllipse` is also needed (or maybe just width/height for Circle??)
     * enhance `ColliderShapeSprite` to support it as well (isCircle argument perhaps or new class like `ColliderShapeSpriteCircle`)
 * `ParticleEmitterShape` should be affected by scaleX and scaleY
 
