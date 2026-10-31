@@ -29,8 +29,8 @@
     * Support Ellipse collision resolution
         * ~~Might need a new `Shape` implementation `Ellipse`~~
         * ~~`CollisionUtils` needs updating (consider a visitor pattern maybe?)~~
-        * `ColliderShapeCircle` needs updating to return Ellipse if width+height not equal
         * implement `Ellipse` collision resolution in `CollisionUtils` and `MinimumTranslationVectorUtils`
+        * `ColliderShapeCircle` needs updating to return Ellipse if width+height not equal
     * enhance `ColliderShapeSprite` to support it as well (isCircle argument perhaps or new class like `ColliderShapeSpriteCircle`)
 * `ParticleEmitterShape` should be affected by scaleX and scaleY
 
