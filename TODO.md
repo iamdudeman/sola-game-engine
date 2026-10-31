@@ -26,10 +26,11 @@
     * ~~`CircleEntityGraphicsModule` should use draw/fill ellipse if width+height not equal~~
     * ~~`EllipseEmitterShape` for particles~~
         * ~~Update `ParticleExample` with this new shape~~
-    * ColliderComponent shape CIRCLE should use ellipse collision if width+height not equal
+    * Support Ellipse collision resolution
         * ~~Might need a new `Shape` implementation `Ellipse`~~
-        * `ColliderShapeCircle` needs updating (might conditionally return Circle shape or Ellipse shape now instead of always Circle)
-        * `CollisionUtils` needs updating (consider a visitor pattern maybe?)
+        * ~~`CollisionUtils` needs updating (consider a visitor pattern maybe?)~~
+        * implement `Ellipse` collision resolution in `CollisionUtils` and `MinimumTranslationVectorUtils`
+        * `ColliderShapeCircle` needs updating to return Ellipse if width+height not equal
     * enhance `ColliderShapeSprite` to support it as well (isCircle argument perhaps or new class like `ColliderShapeSpriteCircle`)
 * `ParticleEmitterShape` should be affected by scaleX and scaleY
 

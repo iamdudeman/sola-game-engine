@@ -21,11 +21,6 @@ public record ColliderShapeConvexPolygon(
   ConvexPolygon shape
 ) implements ColliderShape<ConvexPolygon> {
   @Override
-  public ColliderType type() {
-    return ColliderType.CONVEX_POLYGON;
-  }
-
-  @Override
   public Rectangle getBoundingBox(Entity entity, TransformComponent transformComponent, float offsetX, float offsetY) {
     var shape = getShape(entity, transformComponent, offsetX, offsetY);
 

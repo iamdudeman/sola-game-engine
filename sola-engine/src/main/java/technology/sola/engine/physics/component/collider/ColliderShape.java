@@ -15,13 +15,6 @@ import technology.sola.math.geometry.Shape;
 @NullMarked
 public interface ColliderShape<T extends Shape> {
   /**
-   * Gets the {@link ColliderType} of this collider.
-   *
-   * @return the {@code ColliderType} of this collider
-   */
-  ColliderType type();
-
-  /**
    * Returns the bounding box for this {@link ColliderShape}.
    *
    * @param entity             the {@link Entity} owning the collider

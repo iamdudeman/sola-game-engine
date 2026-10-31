@@ -28,11 +28,6 @@ public record ColliderShapeTriangle(
   }
 
   @Override
-  public ColliderType type() {
-    return ColliderType.TRIANGLE;
-  }
-
-  @Override
   public Rectangle getBoundingBox(Entity entity, TransformComponent transformComponent, float offsetX, float offsetY) {
     var shape = getShape(entity, transformComponent, offsetX, offsetY);
 

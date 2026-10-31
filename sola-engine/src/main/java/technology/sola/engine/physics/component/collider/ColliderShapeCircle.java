@@ -29,11 +29,6 @@ public record ColliderShapeCircle(
   }
 
   @Override
-  public ColliderType type() {
-    return ColliderType.CIRCLE;
-  }
-
-  @Override
   public Rectangle getBoundingBox(Entity entity, TransformComponent transformComponent, float offsetX, float offsetY) {
     var min = transformComponent.getTranslate().add(new Vector2D(offsetX, offsetY));
     float sideLength = radius * 2 * transformComponent.getScaleX();
