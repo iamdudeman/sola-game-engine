@@ -37,7 +37,6 @@ public final class CollisionUtils {
     TransformComponent transformB = viewEntryB.c2();
     ColliderComponent colliderA = viewEntryA.c1();
     ColliderComponent colliderB = viewEntryB.c1();
-    boolean isReversed = false;
 
     var mtv = switch (colliderA.getType()) {
       case AABB -> switch (colliderB.getType()) {
@@ -51,23 +50,19 @@ public final class CollisionUtils {
           colliderA.getShape(entityA, transformA).points(), colliderB.getShape(entityB, transformB).points()
         );
       };
+
       case CIRCLE -> switch (colliderB.getType()) {
-        case AABB -> {
-          isReversed = true;
-          yield calculateAABBVsCircle(
-            colliderB.getShape(entityB, transformB), colliderA.getShape(entityA, transformA)
-          );
-        }
+        case AABB -> reverseMtv(
+          calculateAABBVsCircle(colliderB.getShape(entityB, transformB), colliderA.getShape(entityA, transformA))
+        );
         case CIRCLE -> calculateCircleVsCircle(
           colliderA.getShape(entityA, transformA), colliderB.getShape(entityB, transformB)
         );
-        case TRIANGLE, CONVEX_POLYGON -> {
-          isReversed = true;
-          yield calculateCircleVsShapeSAT(
-            colliderA.getShape(entityA, transformA), colliderB.getShape(entityB, transformB)
-          );
-        }
+        case TRIANGLE, CONVEX_POLYGON -> reverseMtv(
+          calculateCircleVsShapeSAT(colliderA.getShape(entityA, transformA), colliderB.getShape(entityB, transformB))
+        );
       };
+
       case TRIANGLE, CONVEX_POLYGON -> switch (colliderB.getType()) {
         case AABB, TRIANGLE, CONVEX_POLYGON -> SeparatingAxisTheorem.checkCollision(
           colliderA.getShape(entityA, transformA).points(), colliderB.getShape(entityB, transformB).points()
@@ -80,13 +75,6 @@ public final class CollisionUtils {
 
     if (mtv == null) {
       return null;
-    }
-
-    if (isReversed) {
-      var temp = entityA;
-
-      entityA = entityB;
-      entityB = temp;
     }
 
     return new CollisionManifold(entityA, entityB, mtv.normal(), mtv.penetration());
@@ -224,6 +212,15 @@ public final class CollisionUtils {
   @Nullable
   private static MinimumTranslationVector calculateCircleVsShapeSAT(Circle circle, Shape shape) {
     return SeparatingAxisTheorem.checkCollision(shape.points(), circle.center(), circle.radius());
+  }
+
+  @Nullable
+  private static MinimumTranslationVector reverseMtv(@Nullable MinimumTranslationVector minimumTranslationVector) {
+    if (minimumTranslationVector == null) {
+      return null;
+    }
+
+    return minimumTranslationVector.reverse();
   }
 
   private CollisionUtils() {
