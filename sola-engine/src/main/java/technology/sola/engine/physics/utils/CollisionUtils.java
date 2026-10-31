@@ -11,7 +11,6 @@ import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.math.SolaMath;
 import technology.sola.math.geometry.Circle;
 import technology.sola.math.geometry.Rectangle;
-import technology.sola.math.geometry.Shape;
 import technology.sola.math.linear.Vector2D;
 
 /**
