@@ -21,16 +21,6 @@
 
 ## TODO List
 
-* Implement rendering and collision for ellipse entities
-    * ~~Renderer support for ellipse~~
-    * ~~`CircleEntityGraphicsModule` should use draw/fill ellipse if width+height not equal~~
-    * ~~`EllipseEmitterShape` for particles~~
-        * ~~Update `ParticleExample` with this new shape~~
-    * Support Ellipse collision resolution
-        * ~~Might need a new `Shape` implementation `Ellipse`~~
-        * ~~`CollisionUtils` needs updating (consider a visitor pattern maybe?)~~
-        * ~~`ColliderShapeCircle` needs updating to return Ellipse if width+height not equal~~
-    * enhance `ColliderShapeSprite` to support it as well (isCircle argument perhaps or new class like `ColliderShapeSpriteCircle`)
 * `ParticleEmitterShape` should be affected by scaleX and scaleY
 
 ### Low priority (not ordered)

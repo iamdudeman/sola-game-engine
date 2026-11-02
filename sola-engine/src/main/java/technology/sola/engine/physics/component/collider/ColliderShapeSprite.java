@@ -8,6 +8,7 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.math.geometry.Ellipse;
 import technology.sola.math.geometry.Rectangle;
 import technology.sola.math.geometry.Shape;
 import technology.sola.math.linear.Vector2D;
@@ -16,11 +17,23 @@ import technology.sola.math.linear.Vector2D;
  * ColliderShapeSprite is a collider shape that sizes the collider based on the dimensions of the sprite.
  *
  * @param spriteSheetLoader the loader used to load the sprite sheet
+ * @param isRounded         when true the collider is rounded at the corners
  */
 @NullMarked
 public record ColliderShapeSprite(
-  AssetLoader<SpriteSheet> spriteSheetLoader
+  AssetLoader<SpriteSheet> spriteSheetLoader,
+  boolean isRounded
 ) implements ColliderShape<Shape> {
+  /**
+   * ColliderShapeSprite is a collider shape that sizes the collider based on the dimensions of the sprite. Defaults to
+   * a rectangle collider.
+   *
+   * @param spriteSheetLoader the loader used to load the sprite sheet
+   */
+  public ColliderShapeSprite(AssetLoader<SpriteSheet> spriteSheetLoader) {
+    this(spriteSheetLoader, false);
+  }
+
   @Override
   public Rectangle getBoundingBox(Entity entity, TransformComponent transformComponent, float offsetX, float offsetY) {
     var dimensions = getSpriteDimensions(entity);
@@ -46,6 +59,15 @@ public record ColliderShapeSprite(
       transformComponent.getX() + offsetX,
       transformComponent.getY() + offsetY
     );
+
+    if (isRounded) {
+      var radiusX = width * 0.5f * transformComponent.getScaleX();
+      var radiusY = height * 0.5f * transformComponent.getScaleY();
+      var center = min.add(new Vector2D(radiusX, radiusY));
+
+      return new Ellipse(center, radiusX, radiusY);
+    }
+
     Vector2D max = new Vector2D(
       min.x() + transformComponent.getScaleX() * width,
       min.y() + transformComponent.getScaleY() * height
@@ -56,9 +78,15 @@ public record ColliderShapeSprite(
 
   @Override
   public void debugRender(Renderer renderer, Entity entity, TransformComponent transformComponent, float offsetX, float offsetY) {
-    Rectangle rectangle = (Rectangle) getShape(entity, transformComponent, offsetX, offsetY);
+    if (isRounded) {
+      Ellipse shape = (Ellipse) getShape(entity, transformComponent, offsetX, offsetY);
 
-    renderer.drawRect(rectangle.min().x(), rectangle.min().y(), rectangle.getWidth(), rectangle.getHeight(), Color.RED);
+      renderer.drawPolygon(shape.points(), Color.RED);
+    } else {
+      Rectangle rectangle = (Rectangle) getShape(entity, transformComponent, offsetX, offsetY);
+
+      renderer.drawRect(rectangle.min().x(), rectangle.min().y(), rectangle.getWidth(), rectangle.getHeight(), Color.RED);
+    }
   }
 
   private WidthHeight getSpriteDimensions(Entity entity) {
