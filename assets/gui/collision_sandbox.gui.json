@@ -24,28 +24,35 @@
           "tag": "Text",
           "id": "modeCircle",
           "props": {
-            "text": "(1) Create circle"
+            "text": "(1) Circle"
           }
         },
         {
           "tag": "Text",
           "id": "modeAABB",
           "props": {
-            "text": "(2) Create AABB"
+            "text": "(2) AABB"
           }
         },
         {
           "tag": "Text",
           "id": "modeTriangle",
           "props": {
-            "text": "(3) Create Triangle"
+            "text": "(3) Triangle"
+          }
+        },
+        {
+          "tag": "Text",
+          "id": "modeEllipse",
+          "props": {
+            "text": "(4) Ellipse"
           }
         },
         {
           "tag": "Text",
           "id": "modePolygon",
           "props": {
-            "text": "(4) Create Polygon"
+            "text": "(5) Polygon"
           }
         }
       ]

@@ -155,6 +155,11 @@ public class CollidersExample extends Sola {
         var max = new Vector2D(Math.max(firstPoint.x(), point.x()), Math.max(firstPoint.y(), point.y()));
 
         renderer.drawRect(min.x(), min.y(), max.x() - min.x(), max.y() - min.y(), color);
+      } else if (currentMode == InteractionMode.CREATE_ELLIPSE) {
+        var min = new Vector2D(Math.min(firstPoint.x(), point.x()), Math.min(firstPoint.y(), point.y()));
+        var max = new Vector2D(Math.max(firstPoint.x(), point.x()), Math.max(firstPoint.y(), point.y()));
+
+        renderer.drawEllipse(min.x(), min.y(), max.x() - min.x(), max.y() - min.y(), color);
       } else if (currentMode == InteractionMode.CREATE_POLYGON) {
         var points = createShapeSystem.points;
 
@@ -185,13 +190,15 @@ public class CollidersExample extends Sola {
       var firstTouchPoint = firstTouch != null && (firstTouch.phase() == TouchPhase.BEGAN) ? new Vector2D(firstTouch.x(), firstTouch.y()) : null;
       boolean isTouchInBar = firstTouchPoint != null && firstTouchPoint.y() > platform().getRenderer().getHeight() - 30;
 
-      if (keyboardInput.isKeyPressed(Key.ONE) || (isTouchInBar && firstTouchPoint.x() < platform().getRenderer().getWidth() / 4)) {
+      if (keyboardInput.isKeyPressed(Key.ONE) || (isTouchInBar && firstTouchPoint.x() < platform().getRenderer().getWidth() / 5)) {
         changeMode(InteractionMode.CREATE_CIRCLE, "modeCircle");
-      } else if (keyboardInput.isKeyPressed(Key.TWO) || (isTouchInBar && firstTouchPoint.x() < platform().getRenderer().getWidth() / 2)) {
+      } else if (keyboardInput.isKeyPressed(Key.TWO) || (isTouchInBar && firstTouchPoint.x() < 2 * platform().getRenderer().getWidth() / 5)) {
         changeMode(InteractionMode.CREATE_AABB, "modeAABB");
-      } else if (keyboardInput.isKeyPressed(Key.THREE) || (isTouchInBar && firstTouchPoint.x() < 3 * platform().getRenderer().getWidth() / 4)) {
+      } else if (keyboardInput.isKeyPressed(Key.THREE) || (isTouchInBar && firstTouchPoint.x() < 3 * platform().getRenderer().getWidth() / 5)) {
         changeMode(InteractionMode.CREATE_TRIANGLE, "modeTriangle");
-      } else if (keyboardInput.isKeyPressed(Key.FOUR) || isTouchInBar) {
+      } else if (keyboardInput.isKeyPressed(Key.FOUR) || (isTouchInBar && firstTouchPoint.x() < 4 * platform().getRenderer().getWidth() / 5)) {
+        changeMode(InteractionMode.CREATE_ELLIPSE, "modeEllipse");
+      } else if (keyboardInput.isKeyPressed(Key.FIVE) || isTouchInBar) {
         changeMode(InteractionMode.CREATE_POLYGON, "modePolygon");
       }
 
@@ -268,6 +275,17 @@ public class CollidersExample extends Sola {
             new ColliderComponent(new ColliderShapeAABB())
           );
           reset();
+        } else if (currentMode == InteractionMode.CREATE_ELLIPSE) {
+          var min = new Vector2D(Math.min(firstPoint.x(), point.x()), Math.min(firstPoint.y(), point.y()));
+          var max = new Vector2D(Math.max(firstPoint.x(), point.x()), Math.max(firstPoint.y(), point.y()));
+
+          world.createEntity(
+            new TransformComponent(min.x(), min.y(), max.x() - min.x(), max.y() - min.y()),
+            new CircleRendererComponent(Color.YELLOW, false),
+            new DynamicBodyComponent(),
+            new ColliderComponent(new ColliderShapeCircle())
+          );
+          reset();
         } else if (currentMode == InteractionMode.CREATE_POLYGON) {
           points.add(point);
         }
@@ -292,6 +310,7 @@ public class CollidersExample extends Sola {
   private enum InteractionMode {
     CREATE_CIRCLE,
     CREATE_AABB,
+    CREATE_ELLIPSE,
     CREATE_TRIANGLE,
     CREATE_POLYGON
   }

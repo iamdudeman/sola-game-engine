@@ -7,10 +7,8 @@ import technology.sola.json.JsonObject;
 import technology.sola.json.mapper.JsonMapper;
 
 /**
- * CircleRendererComponent is a {@link Component} containing data for rendering 2d circles.
- *
- * <br>
- * Note: only {@link technology.sola.engine.core.component.TransformComponent#getScaleX()} is used for size of collider
+ * CircleRendererComponent is a {@link Component} containing data for rendering 2d circles. If the scaleX and scaleY
+ * are not equal then an ellipse will be rendered.
  */
 @NullMarked
 public class CircleRendererComponent implements Component {
