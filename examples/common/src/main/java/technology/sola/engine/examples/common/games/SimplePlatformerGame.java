@@ -149,7 +149,10 @@ public class SimplePlatformerGame extends Sola {
       .addComponent(new PlayerComponent())
       .addComponent(new TransformComponent(200, 300, 5))
       .addComponent(new SpriteComponent("forest", "player"))
-      .addComponent(new ColliderComponent(new ColliderShapeSprite(assetLoaderProvider.get(SpriteSheet.class))).setIgnoreTags(ColliderTags.IGNORE))
+      .addComponent(
+        new ColliderComponent(new ColliderShapeSprite(assetLoaderProvider.get(SpriteSheet.class), true))
+        .setIgnoreTags(ColliderTags.IGNORE)
+      )
       .addComponent(new DynamicBodyComponent())
       .setName("player");
 
