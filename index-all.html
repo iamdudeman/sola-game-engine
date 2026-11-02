@@ -235,6 +235,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Applies this theme to a <a href="technology.sola.engine/technology/sola/engine/graphics/gui/GuiElement.html" title="class in technology.sola.engine.graphics.gui"><code>GuiElement</code></a> and all its children.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html#APPROXIMATION_SEGMENTS" class="member-name-link">APPROXIMATION_SEGMENTS</a> - Static variable in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html" title="class in technology.sola.math.geometry">Ellipse</a></dt>
+<dd>
+<div class="block">Number of approximation segments used to approximate the ellipse (useful for collision detection).</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/json/JsonElementAsset.html#asArray()" class="member-name-link">asArray()</a> - Method in record class technology.sola.engine.assets.json.<a href="technology.sola.engine/technology/sola/engine/assets/json/JsonElementAsset.html" title="class in technology.sola.engine.assets.json">JsonElementAsset</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/json/JsonElementAsset.html#asObject()" class="member-name-link">asObject()</a> - Method in record class technology.sola.engine.assets.json.<a href="technology.sola.engine/technology/sola/engine/assets/json/JsonElementAsset.html" title="class in technology.sola.engine.assets.json">JsonElementAsset</a></dt>
@@ -683,6 +687,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/math/geometry/Circle.html#center()" class="member-name-link">center()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a></dt>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/math/geometry/Circle.html#param-center"><code>center</code></a> record component.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html#center()" class="member-name-link">center()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html" title="class in technology.sola.math.geometry">Ellipse</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/math/geometry/Ellipse.html#param-center"><code>center</code></a> record component.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/TextStyles.TextAlignment.html#CENTER" class="member-name-link">CENTER</a> - Enum constant in enum class technology.sola.engine.graphics.gui.elements.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/elements/TextStyles.TextAlignment.html" title="enum class in technology.sola.engine.graphics.gui.elements">TextStyles.TextAlignment</a></dt>
 <dd>
@@ -1459,9 +1467,9 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Ellipse represents a geometric ellipse.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html#%3Cinit%3E(float,float)" class="member-name-link">Ellipse(float, float)</a> - Constructor for record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html" title="class in technology.sola.math.geometry">Ellipse</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html#%3Cinit%3E(technology.sola.math.linear.Vector2D,float,float)" class="member-name-link">Ellipse(Vector2D, float, float)</a> - Constructor for record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html" title="class in technology.sola.math.geometry">Ellipse</a></dt>
 <dd>
-<div class="block">Creates an ellipse with defined width and height.</div>
+<div class="block">Creates an ellipse with defined center point, and horizontal and vertical radius.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/EllipseEmitterShape.html" class="type-name-link" title="class in technology.sola.engine.physics.component.particle.emitter">EllipseEmitterShape</a> - Class in <a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/package-summary.html">technology.sola.engine.physics.component.particle.emitter</a></dt>
 <dd>
@@ -3151,10 +3159,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeAABB.html#param-height"><code>height</code></a> record component.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html#height()" class="member-name-link">height()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html" title="class in technology.sola.math.geometry">Ellipse</a></dt>
-<dd>
-<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/math/geometry/Ellipse.html#param-height"><code>height</code></a> record component.</div>
-</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/DefaultStyleValues.html#HEIGHT" class="member-name-link">HEIGHT</a> - Static variable in class technology.sola.engine.graphics.gui.style.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/DefaultStyleValues.html" title="class in technology.sola.engine.graphics.gui.style">DefaultStyleValues</a></dt>
 <dd>
 <div class="block">Default layout value for <a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/BaseStyles.html#height()"><code>BaseStyles.height()</code></a>.</div>
@@ -4682,13 +4686,19 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/math/geometry/ConvexPolygon.html#param-points"><code>points</code></a> record component.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html#points()" class="member-name-link">points()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html" title="class in technology.sola.math.geometry">Ellipse</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the approximate points of the ellipse using <a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html#APPROXIMATION_SEGMENTS"><code>Ellipse.APPROXIMATION_SEGMENTS</code></a> segments.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/math/geometry/Rectangle.html#points()" class="member-name-link">points()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Rectangle.html" title="class in technology.sola.math.geometry">Rectangle</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/math/geometry/Shape.html#points()" class="member-name-link">points()</a> - Method in interface technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Shape.html" title="interface in technology.sola.math.geometry">Shape</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/math/geometry/Triangle.html#points()" class="member-name-link">points()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Triangle.html" title="class in technology.sola.math.geometry">Triangle</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html#points(int)" class="member-name-link">points(int)</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html" title="class in technology.sola.math.geometry">Ellipse</a></dt>
+<dd>
+<div class="block">Returns the approximate points of the ellipse based on the number of desired segments.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/system/collision/CollisionDetectionBroadPhase.html#populate(java.util.Collection)" class="member-name-link">populate(Collection&lt;View2Entry&lt;ColliderComponent, TransformComponent&gt;&gt;)</a> - Method in interface technology.sola.engine.physics.system.collision.<a href="technology.sola.engine/technology/sola/engine/physics/system/collision/CollisionDetectionBroadPhase.html" title="interface in technology.sola.engine.physics.system.collision">CollisionDetectionBroadPhase</a></dt>
 <dd>
 <div class="block">Populates the underlying data structure from the list of collidable entities.</div>
@@ -4854,6 +4864,14 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/math/geometry/Circle.html#radius()" class="member-name-link">radius()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a></dt>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/math/geometry/Circle.html#param-radius"><code>radius</code></a> record component.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html#radiusX()" class="member-name-link">radiusX()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html" title="class in technology.sola.math.geometry">Ellipse</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/math/geometry/Ellipse.html#param-radiusX"><code>radiusX</code></a> record component.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html#radiusY()" class="member-name-link">radiusY()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html" title="class in technology.sola.math.geometry">Ellipse</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/math/geometry/Ellipse.html#param-radiusY"><code>radiusY</code></a> record component.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/CircleEmitterShape.html#randomPointInShape()" class="member-name-link">randomPointInShape()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/CircleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">CircleEmitterShape</a></dt>
 <dd>&nbsp;</dd>
@@ -7639,10 +7657,6 @@ the order they are declared.</div>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeAABB.html#width()" class="member-name-link">width()</a> - Method in record class technology.sola.engine.physics.component.collider.<a href="technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeAABB.html" title="class in technology.sola.engine.physics.component.collider">ColliderShapeAABB</a></dt>
 <dd>
 <div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/engine/physics/component/collider/ColliderShapeAABB.html#param-width"><code>width</code></a> record component.</div>
-</dd>
-<dt><a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html#width()" class="member-name-link">width()</a> - Method in record class technology.sola.math.geometry.<a href="technology.sola.engine/technology/sola/math/geometry/Ellipse.html" title="class in technology.sola.math.geometry">Ellipse</a></dt>
-<dd>
-<div class="block">Returns the value of the <a href="./technology.sola.engine/technology/sola/math/geometry/Ellipse.html#param-width"><code>width</code></a> record component.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/DefaultStyleValues.html#WIDTH" class="member-name-link">WIDTH</a> - Static variable in class technology.sola.engine.graphics.gui.style.<a href="technology.sola.engine/technology/sola/engine/graphics/gui/style/DefaultStyleValues.html" title="class in technology.sola.engine.graphics.gui.style">DefaultStyleValues</a></dt>
 <dd>

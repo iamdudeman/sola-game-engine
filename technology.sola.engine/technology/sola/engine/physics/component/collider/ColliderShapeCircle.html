@@ -83,17 +83,16 @@ loadScripts(document, 'script');</script>
 </dl>
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a>&gt;</code></dd>
+<dd><code><a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Shape.html" title="interface in technology.sola.math.geometry">Shape</a>&gt;</code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="annotations">@NullMarked
 </span><span class="modifiers">public record </span><span class="element-name type-name-label">ColliderShapeCircle</span>(float&nbsp;radius)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a>
-implements <a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a>&gt;</span></div>
+implements <a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Shape.html" title="interface in technology.sola.math.geometry">Shape</a>&gt;</span></div>
 <div class="block">ColliderShapeCircle is a <a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider"><code>ColliderShape</code></a> implementation for a circle which utilize a
- <a href="../../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry"><code>Circle</code></a> for its geometric shape representation.
- <br>
- Note: only <a href="../../../core/component/TransformComponent.html#getScaleX()"><code>TransformComponent.getScaleX()</code></a> is used for the size of collider</div>
+ <a href="../../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry"><code>Circle</code></a> for its geometric shape representation. If scaleX and scaleY are not equal then an <a href="../../../../math/geometry/Ellipse.html" title="class in technology.sola.math.geometry"><code>Ellipse</code></a>
+ will be used for the shape.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -149,7 +148,7 @@ implements <a href="ColliderShape.html" title="interface in technology.sola.engi
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the bounding box for this <a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider"><code>ColliderShape</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../../math/geometry/Shape.html" title="interface in technology.sola.math.geometry">Shape</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getShape(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)" class="member-name-link">getShape</a><wbr>(technology.sola.ecs.Entity&nbsp;entity,
  <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent,
  float&nbsp;offsetX,
@@ -226,7 +225,7 @@ implements <a href="ColliderShape.html" title="interface in technology.sola.engi
 <div class="block">Returns the bounding box for this <a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider"><code>ColliderShape</code></a>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ColliderShape.html#getBoundingBox(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)">getBoundingBox</a></code>&nbsp;in interface&nbsp;<code><a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a>&gt;</code></dd>
+<dd><code><a href="ColliderShape.html#getBoundingBox(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)">getBoundingBox</a></code>&nbsp;in interface&nbsp;<code><a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Shape.html" title="interface in technology.sola.math.geometry">Shape</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>entity</code> - the <code>Entity</code> owning the collider</dd>
 <dd><code>transformComponent</code> - the <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> of the entity</dd>
@@ -240,7 +239,7 @@ implements <a href="ColliderShape.html" title="interface in technology.sola.engi
 <li>
 <section class="detail" id="getShape(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)">
 <h3>getShape</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a></span>&nbsp;<span class="element-name">getShape</span><wbr><span class="parameters">(technology.sola.ecs.Entity&nbsp;entity,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../../../math/geometry/Shape.html" title="interface in technology.sola.math.geometry">Shape</a></span>&nbsp;<span class="element-name">getShape</span><wbr><span class="parameters">(technology.sola.ecs.Entity&nbsp;entity,
  <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a>&nbsp;transformComponent,
  float&nbsp;offsetX,
  float&nbsp;offsetY)</span></div>
@@ -248,7 +247,7 @@ implements <a href="ColliderShape.html" title="interface in technology.sola.engi
 <div class="block">Gets the geometric <a href="../../../../math/geometry/Shape.html" title="interface in technology.sola.math.geometry"><code>Shape</code></a> for this collider shape.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ColliderShape.html#getShape(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)">getShape</a></code>&nbsp;in interface&nbsp;<code><a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a>&gt;</code></dd>
+<dd><code><a href="ColliderShape.html#getShape(technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)">getShape</a></code>&nbsp;in interface&nbsp;<code><a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Shape.html" title="interface in technology.sola.math.geometry">Shape</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>entity</code> - the <code>Entity</code> owning the collider</dd>
 <dd><code>transformComponent</code> - the <a href="../../../core/component/TransformComponent.html" title="class in technology.sola.engine.core.component"><code>TransformComponent</code></a> for the <code>Entity</code></dd>
@@ -271,7 +270,7 @@ implements <a href="ColliderShape.html" title="interface in technology.sola.engi
 <div class="block">Renders debug information for the collider shape.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ColliderShape.html#debugRender(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)">debugRender</a></code>&nbsp;in interface&nbsp;<code><a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Circle.html" title="class in technology.sola.math.geometry">Circle</a>&gt;</code></dd>
+<dd><code><a href="ColliderShape.html#debugRender(technology.sola.engine.graphics.renderer.Renderer,technology.sola.ecs.Entity,technology.sola.engine.core.component.TransformComponent,float,float)">debugRender</a></code>&nbsp;in interface&nbsp;<code><a href="ColliderShape.html" title="interface in technology.sola.engine.physics.component.collider">ColliderShape</a>&lt;<a href="../../../../math/geometry/Shape.html" title="interface in technology.sola.math.geometry">Shape</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>renderer</code> - the <a href="../../../graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer"><code>Renderer</code></a></dd>
 <dd><code>entity</code> - the <code>Entity</code> owning the collider</dd>
