@@ -1,5 +1,7 @@
 # sola-game-engine TODO list
 
+* `ParticleEmitterShape` should be affected by scaleX and scaleY
+
 ## Known Bugs List
 
 * issues with removing gui elements when clicking another gui element (need to stabilize this)
@@ -20,8 +22,6 @@
 -----------------------------------------------------------------------------------------------------------------------
 
 ## TODO List
-
-* `ParticleEmitterShape` should be affected by scaleX and scaleY
 
 ### Low priority (not ordered)
 
