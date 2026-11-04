@@ -14,6 +14,14 @@ public class RectangleEmitterShape extends ParticleEmitterShape {
   private Vector2D center;
 
   /**
+   * Creates a RectangleEmitterShape with width and height set to 1.
+   */
+  public RectangleEmitterShape() {
+    this(1, 1);
+  }
+
+
+  /**
    * Creates a RectangleEmitterShape with the desired width and height.
    *
    * @param width  the width of the rectangle

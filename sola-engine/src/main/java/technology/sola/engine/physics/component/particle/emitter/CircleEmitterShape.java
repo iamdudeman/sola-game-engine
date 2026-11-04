@@ -13,6 +13,13 @@ public class CircleEmitterShape extends ParticleEmitterShape {
   private Vector2D center;
 
   /**
+   * Creates an instance with radius set to 0.5f.
+   */
+  public CircleEmitterShape() {
+    this(0.5f);
+  }
+
+  /**
    * Creates a CircleEmitterShape with the desired radius.
    *
    * @param radius the radius of the circle
