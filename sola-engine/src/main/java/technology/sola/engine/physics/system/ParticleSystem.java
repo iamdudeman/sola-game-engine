@@ -39,8 +39,9 @@ public class ParticleSystem extends EcsSystem {
       // emit new ones
       var parentVelocity = getParentVelocity(entry.entity());
       var inheritedVelocity = parentVelocity == null ? ZERO_VELOCITY : parentVelocity;
+      TransformComponent transformComponent = entry.c2();
 
-      particleEmitterComponent.emitIfAble(delta, inheritedVelocity);
+      particleEmitterComponent.emitIfAble(delta, inheritedVelocity, transformComponent.getScale());
     }
   }
 

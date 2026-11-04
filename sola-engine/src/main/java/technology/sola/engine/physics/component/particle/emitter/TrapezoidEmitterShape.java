@@ -49,30 +49,34 @@ public class TrapezoidEmitterShape extends ParticleEmitterShape {
   }
 
   @Override
-  public EmissionDetails nextEmission() {
+  public EmissionDetails nextEmission(Vector2D scale) {
     if (isEmitFromShell()) {
-      return super.nextEmission();
+      return super.nextEmission(scale);
     }
 
     if (isEmitFromBase) {
       var points = this.trapezoid.points();
-      // random location to move towards the other base
+
+      // random location to move towards on the other base
       var sideLength = points[2].distance(points[3]);
       var direction = points[3].subtract(points[2]).normalize();
-      var velocity = points[2].add(direction.scalar(SolaRandom.nextFloat() * sideLength));
+      var target = points[2].add(direction.scalar(SolaRandom.nextFloat() * sideLength));
 
       // random position to start from on base
       sideLength = points[0].distance(points[1]);
       direction = points[0].subtract(points[1]).normalize();
       var position = points[1].add(direction.scalar(SolaRandom.nextFloat() * sideLength));
 
+      var scaledPosition = position.scale(scale);
+      var scaledTarget = target.scale(scale);
+
       return new EmissionDetails(
-        position,
-        velocity.normalize()
+        scaledPosition,
+        scaledTarget.subtract(scaledPosition).normalize()
       );
     }
 
-    return super.nextEmission();
+    return super.nextEmission(scale);
   }
 
   /**

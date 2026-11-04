@@ -28,8 +28,9 @@ public class ParticleEmitterComponent implements Component {
    *
    * @param delta the elapsed delta time
    * @param inheritedVelocity the inherited velocity for emitted particles from the parent {@link technology.sola.ecs.Entity}
+   * @param scale the scale of the transform of the parent {@link technology.sola.ecs.Entity}
    */
-  public void emitIfAble(float delta, Vector2D inheritedVelocity) {
+  public void emitIfAble(float delta, Vector2D inheritedVelocity, Vector2D scale) {
     final var emission = this.emission;
 
     timeSinceLastEmission += delta;
@@ -42,7 +43,7 @@ public class ParticleEmitterComponent implements Component {
       var noise = movement.noise();
 
       for (int i = 0; i < emission.countPerEmit(); i++) {
-        var emissionDetails = emission.shape().nextEmission();
+        var emissionDetails = emission.shape().nextEmission(scale);
         var position = emissionDetails.position();
         var direction = emissionDetails.direction();
 

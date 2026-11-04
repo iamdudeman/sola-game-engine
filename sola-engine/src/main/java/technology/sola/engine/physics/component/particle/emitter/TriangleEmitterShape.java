@@ -42,9 +42,9 @@ public class TriangleEmitterShape extends ParticleEmitterShape {
   }
 
   @Override
-  public EmissionDetails nextEmission() {
+  public EmissionDetails nextEmission(Vector2D scale) {
     if (isEmitFromShell()) {
-      return super.nextEmission();
+      return super.nextEmission(scale);
     }
 
     if (isEmitFromBase) {
@@ -52,13 +52,16 @@ public class TriangleEmitterShape extends ParticleEmitterShape {
       var direction = triangle.p3().subtract(triangle.p2()).normalize();
       var point = triangle.p2().add(direction.scalar(SolaRandom.nextFloat() * sideLength));
 
+      var scaledPosition = triangle.p1().scale(scale);
+      var scaledTarget = point.scale(scale);
+
       return new EmissionDetails(
-        new Vector2D(0, 0),
-        point.normalize()
+        scaledPosition,
+        scaledTarget.subtract(scaledPosition).normalize()
       );
     }
 
-    return super.nextEmission();
+    return super.nextEmission(scale);
   }
 
   /**
