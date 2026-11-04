@@ -199,6 +199,13 @@ public class TransformComponent implements Component {
   }
 
   /**
+   * @return the scale of the transform as a {@link Vector2D}
+   */
+  public Vector2D getScale() {
+    return new Vector2D(getScaleX(), getScaleY());
+  }
+
+  /**
    * @return the parent's unique id or null if no parent
    */
   @Nullable
