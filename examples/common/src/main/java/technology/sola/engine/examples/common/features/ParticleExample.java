@@ -144,12 +144,12 @@ public class ParticleExample extends Sola {
     entity.addComponent(defaultEmitter)
       .addComponent(new ConvexPolygonRendererComponent(Color.YELLOW, false, new ConvexPolygon(
         new Vector2D[] {
-          new Vector2D(0, 0), new Vector2D(-20, 0),
-          new Vector2D(-50, -100), new Vector2D(30, -100),
+          new Vector2D(0, 0), new Vector2D(-2, 0),
+          new Vector2D(-4, -4), new Vector2D(2, -4),
         }
       )))
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(new TransformComponent(250, 300, 1));
+      .addComponent(new TransformComponent(250, 300, 10));
   }
 
   private static void setEmitterToShell(Entity entity) {
@@ -162,35 +162,31 @@ public class ParticleExample extends Sola {
     entity.addComponent(shellEmitter)
       .addComponent(new ConvexPolygonRendererComponent(Color.YELLOW, false, new ConvexPolygon(
         new Vector2D[] {
-          new Vector2D(0, 0), new Vector2D(-20, 0),
-          new Vector2D(-50, -100), new Vector2D(30, -100),
+          new Vector2D(0, 0), new Vector2D(-2, 0),
+          new Vector2D(-4, -4), new Vector2D(2, -4),
         }
       )))
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(new TransformComponent(250, 300, 1));
+      .addComponent(new TransformComponent(250, 300, 10));
   }
 
   private static void setEmitterToTriangle(Entity entity) {
     var emitter = new ParticleEmitterComponent();
 
-    emitter.emissionConfig().setShape(new TriangleEmitterShape(
-      new Vector2D(0, -1f), 100, 40
-    ));
+    emitter.emissionConfig().setShape(new TriangleEmitterShape());
 
     cleanupEntity(entity);
 
     entity.addComponent(emitter)
-      .addComponent(new TriangleRendererComponent(Color.YELLOW, false, new Triangle(
-        new Vector2D(0, 0), new Vector2D(-20, -100), new Vector2D(20, -100)
-      )))
+      .addComponent(new TriangleRendererComponent(Color.YELLOW, false, new Triangle()))
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(new TransformComponent(250, 300, 1));
+      .addComponent(new TransformComponent(250, 300, 120, 80));
   }
 
   private static void setEmitterToCircle(Entity entity) {
     var emitter = new ParticleEmitterComponent();
 
-    emitter.emissionConfig().setShape(new CircleEmitterShape(50));
+    emitter.emissionConfig().setShape(new CircleEmitterShape());
 
     cleanupEntity(entity);
 
@@ -203,7 +199,7 @@ public class ParticleExample extends Sola {
   private static void setEmitterToEllipse(Entity entity) {
     var emitter = new ParticleEmitterComponent();
 
-    emitter.emissionConfig().setShape(new EllipseEmitterShape(50, 100));
+    emitter.emissionConfig().setShape(new CircleEmitterShape());
 
     cleanupEntity(entity);
 
@@ -216,7 +212,7 @@ public class ParticleExample extends Sola {
   private static void setEmitterToRectangle(Entity entity) {
     var emitter = new ParticleEmitterComponent();
 
-    emitter.emissionConfig().setShape(new RectangleEmitterShape(50, 100));
+    emitter.emissionConfig().setShape(new RectangleEmitterShape(1, 1));
 
     cleanupEntity(entity);
 
@@ -229,7 +225,7 @@ public class ParticleExample extends Sola {
   private static void setEmitterToRandom(Entity entity) {
     var emitter = new ParticleEmitterComponent();
 
-    emitter.emissionConfig().setShape(new CircleEmitterShape(50));
+    emitter.emissionConfig().setShape(new CircleEmitterShape());
     emitter.emissionConfig().shape().setRandomDirection(true);
 
     cleanupEntity(entity);
@@ -243,7 +239,7 @@ public class ParticleExample extends Sola {
   private static void setEmitterToNoise(Entity entity) {
     var emitter = new ParticleEmitterComponent();
 
-    emitter.emissionConfig().setShape(new CircleEmitterShape(50)).setLifeBounds(2, 5);
+    emitter.emissionConfig().setShape(new CircleEmitterShape()).setLifeBounds(2, 5);
     emitter.movementConfig().setNoise(new ParticleNoise(50f, 50f, 0.5f));
 
     cleanupEntity(entity);
@@ -266,21 +262,21 @@ public class ParticleExample extends Sola {
 
     entity.addComponent(emitter)
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(new TransformComponent(250, 300, 100));
+      .addComponent(new TransformComponent(250, 300, 1));
   }
 
   private static void setEmitterToBurst(Entity entity) {
     var burstEmitter = new ParticleEmitterComponent()
       .emissionConfig().setCycles(4).setInterval(2f).setCountPerEmit(35).done();
 
-    burstEmitter.emissionConfig().setShape(new CircleEmitterShape(50));
+    burstEmitter.emissionConfig().setShape(new CircleEmitterShape());
     burstEmitter.emissionConfig().shape().setEmitFromShell(true);
 
     cleanupEntity(entity);
 
     entity.addComponent(burstEmitter)
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(new TransformComponent(250, 300, 100));
+      .addComponent(new TransformComponent(250, 300, 50));
   }
 
   private static void setEmitterToFire(Entity entity) {
@@ -307,15 +303,13 @@ public class ParticleExample extends Sola {
       .setSpeedBounds(20, 48).done()
       .emissionConfig().setCountPerEmit(3).setLifeBounds(1, 2f).setInterval(0.1f).done();
 
-    sparksEmitter.emissionConfig().setShape(new TriangleEmitterShape(
-      new Vector2D(0, 1), 40, 20
-    ));
+    sparksEmitter.emissionConfig().setShape(new TriangleEmitterShape());
 
     cleanupEntity(entity);
 
     entity.addComponent(sparksEmitter)
       .addComponent(new BlendModeComponent(BlendMode.DISSOLVE))
-      .addComponent(new TransformComponent(250, 300, 1));
+      .addComponent(new TransformComponent(250, 300, 10, 10));
   }
 
   private static void setEmitterToSnow(Entity entity) {
@@ -329,14 +323,14 @@ public class ParticleExample extends Sola {
       .emissionConfig().setCountPerEmit(3).setLifeBounds(4, 20f).setInterval(0.05f).done();
 
     sparksEmitter.emissionConfig().setShape(new TrapezoidEmitterShape(
-      new Vector2D(0, 1), 500, 200, 500
+      new Vector2D(0, 1), 5, 2, 5
     ));
 
     cleanupEntity(entity);
 
     entity.addComponent(sparksEmitter)
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(new TransformComponent(50, 100, 1));
+      .addComponent(new TransformComponent(50, 100, 100));
   }
 
   private static void cleanupEntity(Entity entity) {

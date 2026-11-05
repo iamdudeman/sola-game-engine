@@ -16,9 +16,10 @@ public abstract class ParticleEmitterShape {
   /**
    * Calculates the position and direction details for the next particle emitted.
    *
+   * @param scale the scale of the shape
    * @return the {@link EmissionDetails} for the next particle emitted.
    */
-  public EmissionDetails nextEmission() {
+  public EmissionDetails nextEmission(Vector2D scale) {
     var position = isEmitFromShell()
       ? randomPointOnPerimeter()
       : randomPointInShape();
@@ -26,7 +27,7 @@ public abstract class ParticleEmitterShape {
       ? randomDirection()
       : position.subtract(getCenter()).normalize();
 
-    return new EmissionDetails(position, direction);
+    return new EmissionDetails(position.scale(scale), direction);
   }
 
   /**
@@ -79,6 +80,7 @@ public abstract class ParticleEmitterShape {
   protected abstract Vector2D randomPointInShape();
 
   /**
+   *
    * @return a random point on the perimeter of the shape
    */
   protected abstract Vector2D randomPointOnPerimeter();

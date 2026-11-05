@@ -21,8 +21,6 @@
 
 ## TODO List
 
-* `ParticleEmitterShape` should be affected by scaleX and scaleY
-
 ### Low priority (not ordered)
 
 * Consider refactoring tooling code into the editor project

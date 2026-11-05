@@ -127,6 +127,16 @@ public class Vector2D {
   }
 
   /**
+   * Multiplies this vector by the desired vector component-wise.
+   *
+   * @param scale the vector containing the x and y scale values
+   */
+  public void mutateScale(Vector2D scale) {
+    this.x *= scale.x;
+    this.y *= scale.y;
+  }
+
+  /**
    * Calculates the sum of two vectors and returns the sum as a new vector object.
    *
    * @param vector2D the vector to add to this vector
@@ -154,6 +164,16 @@ public class Vector2D {
    */
   public Vector2D scalar(float scalar) {
     return new Vector2D(this.x * scalar, this.y * scalar);
+  }
+
+  /**
+   * Multiplies this vector by the desired vector component-wise.
+   *
+   * @param scale the vector containing the x and y scale values
+   * @return a new vector with the result of the component-wise scale applied to this
+   */
+  public Vector2D scale(Vector2D scale) {
+    return new Vector2D(this.x * scale.x, this.y * scale.y);
   }
 
   /**
