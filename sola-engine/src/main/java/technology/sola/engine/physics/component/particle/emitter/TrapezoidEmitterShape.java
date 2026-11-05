@@ -17,6 +17,13 @@ public class TrapezoidEmitterShape extends ParticleEmitterShape {
   private boolean isEmitFromBase = true;
 
   /**
+   * Creates a TrapezoidEmitterShape with a default trapezoid of baseWidth 2, height 4 and otherBaseWidth 3.
+   */
+  public TrapezoidEmitterShape() {
+    this(new Vector2D(0, -1), 2, 4, 3);
+  }
+
+  /**
    * Creates a TrapezoidEmitterShape. The direction is the vector going from the first base of the trapezoid towards
    * the other base. The height is the distance between the two bases.
    * <pre>

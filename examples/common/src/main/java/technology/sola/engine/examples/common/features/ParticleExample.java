@@ -144,12 +144,12 @@ public class ParticleExample extends Sola {
     entity.addComponent(defaultEmitter)
       .addComponent(new ConvexPolygonRendererComponent(Color.YELLOW, false, new ConvexPolygon(
         new Vector2D[] {
-          new Vector2D(0, 0), new Vector2D(-20, 0),
-          new Vector2D(-50, -100), new Vector2D(30, -100),
+          new Vector2D(0, 0), new Vector2D(-2, 0),
+          new Vector2D(-4, -4), new Vector2D(2, -4),
         }
       )))
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(new TransformComponent(250, 300, 1));
+      .addComponent(new TransformComponent(250, 300, 10));
   }
 
   private static void setEmitterToShell(Entity entity) {
@@ -162,12 +162,12 @@ public class ParticleExample extends Sola {
     entity.addComponent(shellEmitter)
       .addComponent(new ConvexPolygonRendererComponent(Color.YELLOW, false, new ConvexPolygon(
         new Vector2D[] {
-          new Vector2D(0, 0), new Vector2D(-20, 0),
-          new Vector2D(-50, -100), new Vector2D(30, -100),
+          new Vector2D(0, 0), new Vector2D(-2, 0),
+          new Vector2D(-4, -4), new Vector2D(2, -4),
         }
       )))
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(new TransformComponent(250, 300, 1));
+      .addComponent(new TransformComponent(250, 300, 10));
   }
 
   private static void setEmitterToTriangle(Entity entity) {
@@ -323,14 +323,14 @@ public class ParticleExample extends Sola {
       .emissionConfig().setCountPerEmit(3).setLifeBounds(4, 20f).setInterval(0.05f).done();
 
     sparksEmitter.emissionConfig().setShape(new TrapezoidEmitterShape(
-      new Vector2D(0, 1), 500, 200, 500
+      new Vector2D(0, 1), 5, 2, 5
     ));
 
     cleanupEntity(entity);
 
     entity.addComponent(sparksEmitter)
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(new TransformComponent(50, 100, 1));
+      .addComponent(new TransformComponent(50, 100, 100));
   }
 
   private static void cleanupEntity(Entity entity) {
