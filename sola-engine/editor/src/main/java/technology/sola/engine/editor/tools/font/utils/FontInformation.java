@@ -1,4 +1,4 @@
-package technology.sola.engine.tooling.font;
+package technology.sola.engine.editor.tools.font.utils;
 
 import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.graphics.font.FontGlyph;

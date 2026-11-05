@@ -14,8 +14,7 @@ import technology.sola.engine.assets.graphics.font.FontStyle;
 import technology.sola.engine.editor.core.components.EditorPanel;
 import technology.sola.engine.editor.core.components.input.IntegerSpinner;
 import technology.sola.engine.editor.core.utils.DialogService;
-import technology.sola.engine.tooling.font.FontListTool;
-import technology.sola.engine.tooling.font.FontRasterizerTool;
+import technology.sola.engine.editor.tools.font.utils.FontToolUtils;
 
 import java.io.File;
 import java.util.Arrays;
@@ -44,9 +43,7 @@ public class NewFontDialogContent extends EditorPanel {
     setSpacing(8);
 
     // font options
-    fontChoice = new ComboBox<>(FXCollections.observableArrayList(
-      new FontListTool().execute().split("\n")
-    ));
+    fontChoice = new ComboBox<>(FXCollections.observableArrayList(FontToolUtils.getLocalFontFamilies()));
     styleChoice = new ComboBox<>(FXCollections.observableArrayList(
       Arrays.stream(FontStyle.values()).map(FontStyle::toString).toArray(String[]::new)
     ));
@@ -76,28 +73,25 @@ public class NewFontDialogContent extends EditorPanel {
     styleChoice.valueProperty().addListener((observable, oldValue, newValue) -> charactersArea.setFont(getFont()));
     sizeChoice.valueProperty().addListener((observable, oldValue, newValue) -> charactersArea.setFont(getFont()));
 
-    charactersArea.textProperty().addListener((observable, oldValue, newValue) -> {
-      createButton.setDisable(newValue.isEmpty());
-    });
+    charactersArea.textProperty().addListener((observable, oldValue, newValue) -> createButton.setDisable(newValue.isEmpty()));
 
     createButton.setOnAction(event -> {
-      new FontRasterizerTool(parentFolder)
-        .execute(
+      FontToolUtils
+        .rasterizeFont(
+          parentFolder,
           fontChoice.getValue(),
-          sizeChoice.getValue().toString(),
           styleChoice.getValue(),
+          sizeChoice.getValue(),
           charactersArea.getText() + " "
         );
 
       onAfterCreate.run();
       closeParentStage();
     });
-    cancelButton.setOnAction((event) -> {
-      closeParentStage();
-    });
+    cancelButton.setOnAction((event) -> closeParentStage());
 
     // remove whitespace and add it back in later
-    charactersArea.setText(FontRasterizerTool.DEFAULT_CHARACTERS.replace(" ", ""));
+    charactersArea.setText(FontToolUtils.DEFAULT_CHARACTERS.replace(" ", ""));
     charactersArea.setWrapText(true);
     charactersArea.setFont(getFont());
     charactersArea.setPrefWidth(600);

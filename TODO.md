@@ -25,7 +25,6 @@
 
 ### Low priority (not ordered)
 
-* Consider refactoring tooling code into the editor project
 * UnitTestSolaPlatform
     * ability to render to an image on the file system
 * Gui animation system
