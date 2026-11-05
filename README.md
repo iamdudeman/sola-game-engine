@@ -48,7 +48,6 @@ repositories {
 dependencies {
     implementation("com.github.iamdudeman.sola-game-engine:sola-engine:SOLA_ENGINE_VERSION")
     implementation("com.github.iamdudeman.sola-game-engine:platform-swing:SOLA_ENGINE_VERSION")
-    implementation("com.github.iamdudeman.sola-game-engine:tooling:SOLA_ENGINE_VERSION")
 }
 ```
 
