@@ -15,6 +15,13 @@ public class TriangleEmitterShape extends ParticleEmitterShape {
   private boolean isEmitFromBase = true;
 
   /**
+   * Creates a TriangleEmitterShape for a unit equilateral triangle.
+   */
+  public TriangleEmitterShape() {
+    this(new Vector2D(0, 1f), 0.866f, 1);
+  }
+
+  /**
    * Creates a TriangleEmitterShape. The direction is the vector going from the isolated point of the triangle towards
    * the non-equal side. The height is the distance the non-equal side is away from the isolated point, and the width
    * is the width of the non-equal side.
@@ -31,7 +38,7 @@ public class TriangleEmitterShape extends ParticleEmitterShape {
    * @param width     the width of the triangle
    */
   public TriangleEmitterShape(Vector2D direction, float height, float width) {
-    Vector2D p1 = new Vector2D(0, 0);
+    Vector2D p1 = new Vector2D(0.5f, 0);
     Vector2D pL = p1.add(direction.normalize().scalar(height));
     Vector2D perpPL = new Vector2D(pL.y(), -pL.x()).normalize();
     Vector2D p2 = pL.add(perpPL.scalar(width * 0.5f));

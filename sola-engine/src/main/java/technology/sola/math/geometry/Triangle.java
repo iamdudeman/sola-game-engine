@@ -17,9 +17,9 @@ public record Triangle(Vector2D p1, Vector2D p2, Vector2D p3) implements Shape {
    */
   public Triangle() {
     this(
-      new Vector2D(0, 1),
+      new Vector2D(0, 0.866f),
       new Vector2D(0.5f, 0),
-      new Vector2D(1, 1)
+      new Vector2D(1, 0.866f)
     );
   }
 

@@ -173,18 +173,14 @@ public class ParticleExample extends Sola {
   private static void setEmitterToTriangle(Entity entity) {
     var emitter = new ParticleEmitterComponent();
 
-    emitter.emissionConfig().setShape(new TriangleEmitterShape(
-      new Vector2D(0, -1f), 100, 40
-    ));
+    emitter.emissionConfig().setShape(new TriangleEmitterShape());
 
     cleanupEntity(entity);
 
     entity.addComponent(emitter)
-      .addComponent(new TriangleRendererComponent(Color.YELLOW, false, new Triangle(
-        new Vector2D(0, 0), new Vector2D(-20, -100), new Vector2D(20, -100)
-      )))
+      .addComponent(new TriangleRendererComponent(Color.YELLOW, false, new Triangle()))
       .addComponent(new BlendModeComponent(BlendMode.NORMAL))
-      .addComponent(new TransformComponent(250, 300, 1));
+      .addComponent(new TransformComponent(250, 300, 120, 80));
   }
 
   private static void setEmitterToCircle(Entity entity) {
@@ -307,15 +303,13 @@ public class ParticleExample extends Sola {
       .setSpeedBounds(20, 48).done()
       .emissionConfig().setCountPerEmit(3).setLifeBounds(1, 2f).setInterval(0.1f).done();
 
-    sparksEmitter.emissionConfig().setShape(new TriangleEmitterShape(
-      new Vector2D(0, 1), 40, 20
-    ));
+    sparksEmitter.emissionConfig().setShape(new TriangleEmitterShape());
 
     cleanupEntity(entity);
 
     entity.addComponent(sparksEmitter)
       .addComponent(new BlendModeComponent(BlendMode.DISSOLVE))
-      .addComponent(new TransformComponent(250, 300, 1));
+      .addComponent(new TransformComponent(250, 300, 10, 10));
   }
 
   private static void setEmitterToSnow(Entity entity) {
