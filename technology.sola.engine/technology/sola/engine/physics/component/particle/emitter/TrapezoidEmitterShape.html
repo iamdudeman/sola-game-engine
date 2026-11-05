@@ -93,11 +93,15 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(technology.sola.math.linear.Vector2D,float,float,float)" class="member-name-link">TrapezoidEmitterShape</a><wbr>(<a href="../../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;direction,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">TrapezoidEmitterShape</a>()</code></div>
+<div class="col-last even-row-color">
+<div class="block">Creates a TrapezoidEmitterShape with a default trapezoid of baseWidth 2, height 4 and otherBaseWidth 3.</div>
+</div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(technology.sola.math.linear.Vector2D,float,float,float)" class="member-name-link">TrapezoidEmitterShape</a><wbr>(<a href="../../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;direction,
  float&nbsp;baseWidth,
  float&nbsp;height,
  float&nbsp;otherBaseWidth)</code></div>
-<div class="col-last even-row-color">
+<div class="col-last odd-row-color">
 <div class="block">Creates a TrapezoidEmitterShape.</div>
 </div>
 </div>
@@ -118,7 +122,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCenter()" class="member-name-link">getCenter</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="EmissionDetails.html" title="class in technology.sola.engine.physics.component.particle.emitter">EmissionDetails</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#nextEmission()" class="member-name-link">nextEmission</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#nextEmission(technology.sola.math.linear.Vector2D)" class="member-name-link">nextEmission</a><wbr>(<a href="../../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;scale)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Calculates the position and direction details for the next particle emitted.</div>
 </div>
@@ -154,6 +158,13 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="&lt;init&gt;()">
+<h3>TrapezoidEmitterShape</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">TrapezoidEmitterShape</span>()</div>
+<div class="block">Creates a TrapezoidEmitterShape with a default trapezoid of baseWidth 2, height 4 and otherBaseWidth 3.</div>
+</section>
+</li>
+<li>
 <section class="detail" id="&lt;init&gt;(technology.sola.math.linear.Vector2D,float,float,float)">
 <h3>TrapezoidEmitterShape</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">TrapezoidEmitterShape</span><wbr><span class="parameters">(<a href="../../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;direction,
@@ -187,14 +198,16 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="nextEmission()">
+<section class="detail" id="nextEmission(technology.sola.math.linear.Vector2D)">
 <h3>nextEmission</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="EmissionDetails.html" title="class in technology.sola.engine.physics.component.particle.emitter">EmissionDetails</a></span>&nbsp;<span class="element-name">nextEmission</span>()</div>
-<div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="ParticleEmitterShape.html#nextEmission()">ParticleEmitterShape</a></code></span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="EmissionDetails.html" title="class in technology.sola.engine.physics.component.particle.emitter">EmissionDetails</a></span>&nbsp;<span class="element-name">nextEmission</span><wbr><span class="parameters">(<a href="../../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;scale)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="ParticleEmitterShape.html#nextEmission(technology.sola.math.linear.Vector2D)">ParticleEmitterShape</a></code></span></div>
 <div class="block">Calculates the position and direction details for the next particle emitted.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
-<dd><code><a href="ParticleEmitterShape.html#nextEmission()">nextEmission</a></code>&nbsp;in class&nbsp;<code><a href="ParticleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">ParticleEmitterShape</a></code></dd>
+<dd><code><a href="ParticleEmitterShape.html#nextEmission(technology.sola.math.linear.Vector2D)">nextEmission</a></code>&nbsp;in class&nbsp;<code><a href="ParticleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">ParticleEmitterShape</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>scale</code> - the scale of the shape</dd>
 <dt>Returns:</dt>
 <dd>the <a href="EmissionDetails.html" title="class in technology.sola.engine.physics.component.particle.emitter"><code>EmissionDetails</code></a> for the next particle emitted.</dd>
 </dl>

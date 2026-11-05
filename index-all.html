@@ -742,6 +742,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">CircleEmitterShape is a <a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/ParticleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter"><code>ParticleEmitterShape</code></a> that emits particles in the shape of a circle.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/CircleEmitterShape.html#%3Cinit%3E()" class="member-name-link">CircleEmitterShape()</a> - Constructor for class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/CircleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">CircleEmitterShape</a></dt>
+<dd>
+<div class="block">Creates an instance with radius set to 0.5f.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/CircleEmitterShape.html#%3Cinit%3E(float)" class="member-name-link">CircleEmitterShape(float)</a> - Constructor for class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/CircleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">CircleEmitterShape</a></dt>
 <dd>
 <div class="block">Creates a CircleEmitterShape with the desired radius.</div>
@@ -1475,14 +1479,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates an ellipse with defined center point, and horizontal and vertical radius.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/EllipseEmitterShape.html" class="type-name-link" title="class in technology.sola.engine.physics.component.particle.emitter">EllipseEmitterShape</a> - Class in <a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/package-summary.html">technology.sola.engine.physics.component.particle.emitter</a></dt>
-<dd>
-<div class="block">EllipseEmitterShape is a <a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/ParticleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter"><code>ParticleEmitterShape</code></a> that emits particles in the shape of an ellipse.</div>
-</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/EllipseEmitterShape.html#%3Cinit%3E(int,int)" class="member-name-link">EllipseEmitterShape(int, int)</a> - Constructor for class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/EllipseEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">EllipseEmitterShape</a></dt>
-<dd>
-<div class="block">Creates an EllipseEmitterShape with the desired width and height.</div>
-</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/ParticleEmitterComponent.html#emissionConfig()" class="member-name-link">emissionConfig()</a> - Method in class technology.sola.engine.physics.component.particle.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component.particle">ParticleEmitterComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/EmissionDetails.html" class="type-name-link" title="class in technology.sola.engine.physics.component.particle.emitter">EmissionDetails</a> - Record Class in <a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/package-summary.html">technology.sola.engine.physics.component.particle.emitter</a></dt>
@@ -1501,7 +1497,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Sends an <a href="technology.sola.engine/technology/sola/engine/event/Event.html" title="interface in technology.sola.engine.event"><code>Event</code></a> to all <a href="technology.sola.engine/technology/sola/engine/event/EventListener.html" title="interface in technology.sola.engine.event"><code>EventListener</code></a>s that have been added for that event type.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/ParticleEmitterComponent.html#emitIfAble(float,technology.sola.math.linear.Vector2D)" class="member-name-link">emitIfAble(float, Vector2D)</a> - Method in class technology.sola.engine.physics.component.particle.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component.particle">ParticleEmitterComponent</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/ParticleEmitterComponent.html#emitIfAble(float,technology.sola.math.linear.Vector2D,technology.sola.math.linear.Vector2D)" class="member-name-link">emitIfAble(float, Vector2D, Vector2D)</a> - Method in class technology.sola.engine.physics.component.particle.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/ParticleEmitterComponent.html" title="class in technology.sola.engine.physics.component.particle">ParticleEmitterComponent</a></dt>
 <dd>
 <div class="block">Emits new particles if enough time has elapsed based on the set properties for emission.</div>
 </dd>
@@ -2236,8 +2232,6 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/CircleEmitterShape.html#getCenter()" class="member-name-link">getCenter()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/CircleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">CircleEmitterShape</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/EllipseEmitterShape.html#getCenter()" class="member-name-link">getCenter()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/EllipseEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">EllipseEmitterShape</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/ParticleEmitterShape.html#getCenter()" class="member-name-link">getCenter()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/ParticleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">ParticleEmitterShape</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/RectangleEmitterShape.html#getCenter()" class="member-name-link">getCenter()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/RectangleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">RectangleEmitterShape</a></dt>
@@ -2350,8 +2344,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/Canvas.html#getHeight()" class="member-name-link">getHeight()</a> - Method in class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/Canvas.html" title="class in technology.sola.engine.graphics">Canvas</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#getHeight()" class="member-name-link">getHeight()</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/EllipseEmitterShape.html#getHeight()" class="member-name-link">getHeight()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/EllipseEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">EllipseEmitterShape</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/RectangleEmitterShape.html#getHeight()" class="member-name-link">getHeight()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/RectangleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">RectangleEmitterShape</a></dt>
 <dd>&nbsp;</dd>
@@ -2540,6 +2532,8 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html#getSaveStorage()" class="member-name-link">getSaveStorage()</a> - Method in class technology.sola.engine.core.<a href="technology.sola.engine/technology/sola/engine/core/SolaPlatform.html" title="class in technology.sola.engine.core">SolaPlatform</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html#getScale()" class="member-name-link">getScale()</a> - Method in class technology.sola.engine.core.component.<a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html#getScaleX()" class="member-name-link">getScaleX()</a> - Method in class technology.sola.engine.core.component.<a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html#getScaleY()" class="member-name-link">getScaleY()</a> - Method in class technology.sola.engine.core.component.<a href="technology.sola.engine/technology/sola/engine/core/component/TransformComponent.html" title="class in technology.sola.engine.core.component">TransformComponent</a></dt>
@@ -2668,8 +2662,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/Canvas.html#getWidth()" class="member-name-link">getWidth()</a> - Method in class technology.sola.engine.graphics.<a href="technology.sola.engine/technology/sola/engine/graphics/Canvas.html" title="class in technology.sola.engine.graphics">Canvas</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html#getWidth()" class="member-name-link">getWidth()</a> - Method in interface technology.sola.engine.graphics.renderer.<a href="technology.sola.engine/technology/sola/engine/graphics/renderer/Renderer.html" title="interface in technology.sola.engine.graphics.renderer">Renderer</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/EllipseEmitterShape.html#getWidth()" class="member-name-link">getWidth()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/EllipseEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">EllipseEmitterShape</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/RectangleEmitterShape.html#getWidth()" class="member-name-link">getWidth()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/RectangleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">RectangleEmitterShape</a></dt>
 <dd>&nbsp;</dd>
@@ -4069,6 +4061,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Multiplies this vector by the desired scalar.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/math/linear/Vector2D.html#mutateScale(technology.sola.math.linear.Vector2D)" class="member-name-link">mutateScale(Vector2D)</a> - Method in class technology.sola.math.linear.<a href="technology.sola.engine/technology/sola/math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></dt>
+<dd>
+<div class="block">Multiplies this vector by the desired vector component-wise.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/math/linear/Vector2D.html#mutateSubtract(float,float)" class="member-name-link">mutateSubtract(float, float)</a> - Method in class technology.sola.math.linear.<a href="technology.sola.engine/technology/sola/math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></dt>
 <dd>
 <div class="block">Subtracts the desired x and y values from this vector.</div>
@@ -4112,13 +4108,13 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/utils/SolaRandom.html#nextBoolean()" class="member-name-link">nextBoolean()</a> - Static method in class technology.sola.engine.utils.<a href="technology.sola.engine/technology/sola/engine/utils/SolaRandom.html" title="class in technology.sola.engine.utils">SolaRandom</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/ParticleEmitterShape.html#nextEmission()" class="member-name-link">nextEmission()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/ParticleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">ParticleEmitterShape</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/ParticleEmitterShape.html#nextEmission(technology.sola.math.linear.Vector2D)" class="member-name-link">nextEmission(Vector2D)</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/ParticleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">ParticleEmitterShape</a></dt>
 <dd>
 <div class="block">Calculates the position and direction details for the next particle emitted.</div>
 </dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TrapezoidEmitterShape.html#nextEmission()" class="member-name-link">nextEmission()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TrapezoidEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">TrapezoidEmitterShape</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TrapezoidEmitterShape.html#nextEmission(technology.sola.math.linear.Vector2D)" class="member-name-link">nextEmission(Vector2D)</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TrapezoidEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">TrapezoidEmitterShape</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TriangleEmitterShape.html#nextEmission()" class="member-name-link">nextEmission()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TriangleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">TriangleEmitterShape</a></dt>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TriangleEmitterShape.html#nextEmission(technology.sola.math.linear.Vector2D)" class="member-name-link">nextEmission(Vector2D)</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TriangleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">TriangleEmitterShape</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/utils/SolaRandom.html#nextFloat()" class="member-name-link">nextFloat()</a> - Static method in class technology.sola.engine.utils.<a href="technology.sola.engine/technology/sola/engine/utils/SolaRandom.html" title="class in technology.sola.engine.utils">SolaRandom</a></dt>
 <dd>&nbsp;</dd>
@@ -4883,8 +4879,6 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/CircleEmitterShape.html#randomPointInShape()" class="member-name-link">randomPointInShape()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/CircleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">CircleEmitterShape</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/EllipseEmitterShape.html#randomPointInShape()" class="member-name-link">randomPointInShape()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/EllipseEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">EllipseEmitterShape</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/ParticleEmitterShape.html#randomPointInShape()" class="member-name-link">randomPointInShape()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/ParticleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">ParticleEmitterShape</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/RectangleEmitterShape.html#randomPointInShape()" class="member-name-link">randomPointInShape()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/RectangleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">RectangleEmitterShape</a></dt>
@@ -4894,8 +4888,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TriangleEmitterShape.html#randomPointInShape()" class="member-name-link">randomPointInShape()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TriangleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">TriangleEmitterShape</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/CircleEmitterShape.html#randomPointOnPerimeter()" class="member-name-link">randomPointOnPerimeter()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/CircleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">CircleEmitterShape</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/EllipseEmitterShape.html#randomPointOnPerimeter()" class="member-name-link">randomPointOnPerimeter()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/EllipseEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">EllipseEmitterShape</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/ParticleEmitterShape.html#randomPointOnPerimeter()" class="member-name-link">randomPointOnPerimeter()</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/ParticleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">ParticleEmitterShape</a></dt>
 <dd>&nbsp;</dd>
@@ -4920,6 +4912,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/RectangleEmitterShape.html" class="type-name-link" title="class in technology.sola.engine.physics.component.particle.emitter">RectangleEmitterShape</a> - Class in <a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/package-summary.html">technology.sola.engine.physics.component.particle.emitter</a></dt>
 <dd>
 <div class="block">RectangleEmitterShape is a <a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/ParticleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter"><code>ParticleEmitterShape</code></a> that emits particles in the shape of a rectangle.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/RectangleEmitterShape.html#%3Cinit%3E()" class="member-name-link">RectangleEmitterShape()</a> - Constructor for class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/RectangleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">RectangleEmitterShape</a></dt>
+<dd>
+<div class="block">Creates a RectangleEmitterShape with width and height set to 1.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/RectangleEmitterShape.html#%3Cinit%3E(int,int)" class="member-name-link">RectangleEmitterShape(int, int)</a> - Constructor for class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/RectangleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">RectangleEmitterShape</a></dt>
 <dd>
@@ -5258,6 +5254,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/math/linear/Matrix3D.html#scale(float,float)" class="member-name-link">scale(float, float)</a> - Static method in class technology.sola.math.linear.<a href="technology.sola.engine/technology/sola/math/linear/Matrix3D.html" title="class in technology.sola.math.linear">Matrix3D</a></dt>
 <dd>
 <div class="block">Creates a new scale matrix for the desired x-axis and y-axis values.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/math/linear/Vector2D.html#scale(technology.sola.math.linear.Vector2D)" class="member-name-link">scale(Vector2D)</a> - Method in class technology.sola.math.linear.<a href="technology.sola.engine/technology/sola/math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a></dt>
+<dd>
+<div class="block">Multiplies this vector by the desired vector component-wise.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/assets/scene/Scene.html" class="type-name-link" title="class in technology.sola.engine.assets.scene">Scene</a> - Record Class in <a href="technology.sola.engine/technology/sola/engine/assets/scene/package-summary.html">technology.sola.engine.assets.scene</a></dt>
 <dd>
@@ -5817,10 +5817,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/ParticleAppearanceConfiguration.html#setSize(float)" class="member-name-link">setSize(float)</a> - Method in class technology.sola.engine.physics.component.particle.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/ParticleAppearanceConfiguration.html" title="class in technology.sola.engine.physics.component.particle">ParticleAppearanceConfiguration</a></dt>
 <dd>
 <div class="block">Updates the size for newly emitted <a href="technology.sola.engine/technology/sola/engine/physics/component/particle/Particle.html" title="class in technology.sola.engine.physics.component.particle"><code>Particle</code></a>s to be a fixed value.</div>
-</dd>
-<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/EllipseEmitterShape.html#setSize(int,int)" class="member-name-link">setSize(int, int)</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/EllipseEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">EllipseEmitterShape</a></dt>
-<dd>
-<div class="block">Sets the size of the ellipse.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/RectangleEmitterShape.html#setSize(int,int)" class="member-name-link">setSize(int, int)</a> - Method in class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/RectangleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">RectangleEmitterShape</a></dt>
 <dd>
@@ -7233,6 +7229,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">TrapezoidEmitterShape is a <a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/ParticleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter"><code>ParticleEmitterShape</code></a> that emits particles in the shape of a trapezoid.</div>
 </dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TrapezoidEmitterShape.html#%3Cinit%3E()" class="member-name-link">TrapezoidEmitterShape()</a> - Constructor for class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TrapezoidEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">TrapezoidEmitterShape</a></dt>
+<dd>
+<div class="block">Creates a TrapezoidEmitterShape with a default trapezoid of baseWidth 2, height 4 and otherBaseWidth 3.</div>
+</dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TrapezoidEmitterShape.html#%3Cinit%3E(technology.sola.math.linear.Vector2D,float,float,float)" class="member-name-link">TrapezoidEmitterShape(Vector2D, float, float, float)</a> - Constructor for class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TrapezoidEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">TrapezoidEmitterShape</a></dt>
 <dd>
 <div class="block">Creates a TrapezoidEmitterShape.</div>
@@ -7252,6 +7252,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TriangleEmitterShape.html" class="type-name-link" title="class in technology.sola.engine.physics.component.particle.emitter">TriangleEmitterShape</a> - Class in <a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/package-summary.html">technology.sola.engine.physics.component.particle.emitter</a></dt>
 <dd>
 <div class="block">TriangleEmitterShape is a <a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/ParticleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter"><code>ParticleEmitterShape</code></a> that emits particles in the shape of an Isoceles triangle.</div>
+</dd>
+<dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TriangleEmitterShape.html#%3Cinit%3E()" class="member-name-link">TriangleEmitterShape()</a> - Constructor for class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TriangleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">TriangleEmitterShape</a></dt>
+<dd>
+<div class="block">Creates a TriangleEmitterShape for a unit equilateral triangle.</div>
 </dd>
 <dt><a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TriangleEmitterShape.html#%3Cinit%3E(technology.sola.math.linear.Vector2D,float,float)" class="member-name-link">TriangleEmitterShape(Vector2D, float, float)</a> - Constructor for class technology.sola.engine.physics.component.particle.emitter.<a href="technology.sola.engine/technology/sola/engine/physics/component/particle/emitter/TriangleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">TriangleEmitterShape</a></dt>
 <dd>

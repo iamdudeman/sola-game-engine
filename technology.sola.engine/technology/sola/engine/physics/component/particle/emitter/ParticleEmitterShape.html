@@ -77,7 +77,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="CircleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">CircleEmitterShape</a></code>, <code><a href="EllipseEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">EllipseEmitterShape</a></code>, <code><a href="RectangleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">RectangleEmitterShape</a></code>, <code><a href="TrapezoidEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">TrapezoidEmitterShape</a></code>, <code><a href="TriangleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">TriangleEmitterShape</a></code></dd>
+<dd><code><a href="CircleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">CircleEmitterShape</a></code>, <code><a href="RectangleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">RectangleEmitterShape</a></code>, <code><a href="TrapezoidEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">TrapezoidEmitterShape</a></code>, <code><a href="TriangleEmitterShape.html" title="class in technology.sola.engine.physics.component.particle.emitter">TriangleEmitterShape</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="annotations">@NullMarked
@@ -122,7 +122,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isRandomDirection()" class="member-name-link">isRandomDirection</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="EmissionDetails.html" title="class in technology.sola.engine.physics.component.particle.emitter">EmissionDetails</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#nextEmission()" class="member-name-link">nextEmission</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#nextEmission(technology.sola.math.linear.Vector2D)" class="member-name-link">nextEmission</a><wbr>(<a href="../../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;scale)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Calculates the position and direction details for the next particle emitted.</div>
 </div>
@@ -174,11 +174,13 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="nextEmission()">
+<section class="detail" id="nextEmission(technology.sola.math.linear.Vector2D)">
 <h3>nextEmission</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="EmissionDetails.html" title="class in technology.sola.engine.physics.component.particle.emitter">EmissionDetails</a></span>&nbsp;<span class="element-name">nextEmission</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="EmissionDetails.html" title="class in technology.sola.engine.physics.component.particle.emitter">EmissionDetails</a></span>&nbsp;<span class="element-name">nextEmission</span><wbr><span class="parameters">(<a href="../../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;scale)</span></div>
 <div class="block">Calculates the position and direction details for the next particle emitted.</div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>scale</code> - the scale of the shape</dd>
 <dt>Returns:</dt>
 <dd>the <a href="EmissionDetails.html" title="class in technology.sola.engine.physics.component.particle.emitter"><code>EmissionDetails</code></a> for the next particle emitted.</dd>
 </dl>

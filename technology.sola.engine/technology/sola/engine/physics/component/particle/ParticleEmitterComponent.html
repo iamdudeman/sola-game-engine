@@ -120,8 +120,9 @@ implements technology.sola.ecs.Component</span></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#emissionConfig()" class="member-name-link">emissionConfig</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#emitIfAble(float,technology.sola.math.linear.Vector2D)" class="member-name-link">emitIfAble</a><wbr>(float&nbsp;delta,
- <a href="../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;inheritedVelocity)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#emitIfAble(float,technology.sola.math.linear.Vector2D,technology.sola.math.linear.Vector2D)" class="member-name-link">emitIfAble</a><wbr>(float&nbsp;delta,
+ <a href="../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;inheritedVelocity,
+ <a href="../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;scale)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Emits new particles if enough time has elapsed based on the set properties for emission.</div>
 </div>
@@ -166,15 +167,17 @@ implements technology.sola.ecs.Component</span></div>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="emitIfAble(float,technology.sola.math.linear.Vector2D)">
+<section class="detail" id="emitIfAble(float,technology.sola.math.linear.Vector2D,technology.sola.math.linear.Vector2D)">
 <h3>emitIfAble</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">emitIfAble</span><wbr><span class="parameters">(float&nbsp;delta,
- <a href="../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;inheritedVelocity)</span></div>
+ <a href="../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;inheritedVelocity,
+ <a href="../../../../math/linear/Vector2D.html" title="class in technology.sola.math.linear">Vector2D</a>&nbsp;scale)</span></div>
 <div class="block">Emits new particles if enough time has elapsed based on the set properties for emission.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>delta</code> - the elapsed delta time</dd>
 <dd><code>inheritedVelocity</code> - the inherited velocity for emitted particles from the parent <code>Entity</code></dd>
+<dd><code>scale</code> - the scale of the transform of the parent <code>Entity</code></dd>
 </dl>
 </section>
 </li>
