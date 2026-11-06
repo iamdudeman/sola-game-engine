@@ -21,8 +21,6 @@
 
 ### Low priority (not ordered)
 
-* UnitTestSolaPlatform
-    * ability to render to an image on the file system
 * Gui animation system
     * might need a new "AnimatedProperty" concept perhaps?
 * Particle System
