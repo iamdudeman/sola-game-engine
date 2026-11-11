@@ -23,6 +23,9 @@ public class FractalsGame extends Sola {
   private int depth = 0;
   private SolaGraphics solaGraphics;
 
+  /**
+   * Creates an instance of this {@link Sola}.
+   */
   public FractalsGame() {
     super(new SolaConfiguration("Fractals", 800, 800, 30));
   }
