@@ -1,0 +1,130 @@
+package technology.sola.engine.examples.common.games;
+
+import technology.sola.engine.core.Sola;
+import technology.sola.engine.core.SolaConfiguration;
+import technology.sola.engine.examples.common.ExampleUtils;
+import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.SolaGraphics;
+import technology.sola.engine.graphics.renderer.Renderer;
+import technology.sola.engine.graphics.screen.AspectMode;
+import technology.sola.engine.input.MouseButton;
+import technology.sola.engine.input.TouchPhase;
+import technology.sola.math.geometry.Triangle;
+import technology.sola.math.linear.Vector2D;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Inspired from <a href="https://www.youtube.com/watch?v=hjhMh0R9T1Y&ab_channel=wye">Coding some Fractals</a> video.
+ */
+public class FractalsGame extends Sola {
+  private List<Triangle> triangles = new ArrayList<>();
+  private int depth = 0;
+  private SolaGraphics solaGraphics;
+
+  /**
+   * Creates an instance of this {@link Sola}.
+   */
+  public FractalsGame() {
+    super(new SolaConfiguration("Fractals", 800, 800, 30));
+  }
+
+  @Override
+  protected void onRender(Renderer renderer) {
+    renderer.clear(Color.BLACK);
+
+    solaGraphics.render(renderer);
+
+    renderer.drawString("Depth: " + depth, 2, 24, Color.WHITE);
+
+    for (var triangle : triangles) {
+      renderer.fillTriangle(
+        triangle.p1().x(), triangle.p1().y(),
+        triangle.p2().x(), triangle.p2().y(),
+        triangle.p3().x(), triangle.p3().y(),
+        Color.WHITE
+      );
+    }
+  }
+
+  @Override
+  protected void onInit() {
+    var platform = platform();
+
+    solaGraphics = new SolaGraphics.Builder(platform, solaEcs)
+      .withGui(mouseInput)
+      .buildAndInitialize(assetLoaderProvider);
+
+    solaGraphics.guiDocument().setRootElement(
+      ExampleUtils.createReturnToLauncherButton(platform(), eventHub, "0", "0")
+    );
+
+    platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
+
+    var original = scaleTriangle(unitEquilateralTriangle(), 800);
+
+    triangles.add(original);
+
+    platform.onTouch(event -> {
+      if (event.touch().phase() == TouchPhase.BEGAN && depth < 9) {
+        triangles = sierpinski();
+        depth++;
+      }
+    });
+
+    platform.onMouseReleased(event -> {
+      if (event.button() == MouseButton.PRIMARY && depth < 9) {
+        triangles = sierpinski();
+        depth++;
+      }
+    });
+  }
+
+  private List<Triangle> sierpinski() {
+    List<Triangle> newTriangles = new ArrayList<>();
+
+    for (var triangle : triangles) {
+      var newTriangle = translateTriangle(
+        scaleTriangle(triangle, 0.5f),
+        new Vector2D(triangle.p1().x() * 0.5f, triangle.p1().y() * 0.5f)
+      );
+      var sideLength = newTriangle.p2().y() - newTriangle.p1().y();
+      var halfSideLength = sideLength * 0.5f;
+
+      newTriangles.add(newTriangle);
+      newTriangles.add(
+        translateTriangle(newTriangle, new Vector2D(-halfSideLength, sideLength))
+      );
+      newTriangles.add(
+        translateTriangle(newTriangle, new Vector2D(-halfSideLength + sideLength, sideLength))
+      );
+    }
+
+    return newTriangles;
+  }
+
+  private Triangle unitEquilateralTriangle() {
+    return new Triangle(
+      new Vector2D(0.5f, 0),
+      new Vector2D(0, 1),
+      new Vector2D(1, 1)
+    );
+  }
+
+  private Triangle scaleTriangle(Triangle triangle, float scale) {
+    return new Triangle(
+      triangle.p1().scalar(scale),
+      triangle.p2().scalar(scale),
+      triangle.p3().scalar(scale)
+    );
+  }
+
+  private Triangle translateTriangle(Triangle triangle, Vector2D translation) {
+    return new Triangle(
+      triangle.p1().add(translation),
+      triangle.p2().add(translation),
+      triangle.p3().add(translation)
+    );
+  }
+}
