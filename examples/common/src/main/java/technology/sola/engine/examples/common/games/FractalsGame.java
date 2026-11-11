@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Inspired from: https://www.youtube.com/watch?v=hjhMh0R9T1Y&ab_channel=wye
+ * Inspired from <a href="https://www.youtube.com/watch?v=hjhMh0R9T1Y&ab_channel=wye">Coding some Fractals</a> video.
  */
 public class FractalsGame extends Sola {
   private List<Triangle> triangles = new ArrayList<>();
