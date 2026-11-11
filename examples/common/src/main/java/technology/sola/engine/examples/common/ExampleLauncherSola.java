@@ -5,12 +5,9 @@ import technology.sola.engine.core.Sola;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.core.event.GameLoopEvent;
 import technology.sola.engine.core.event.GameLoopState;
-import technology.sola.engine.examples.common.games.EditorGame;
+import technology.sola.engine.examples.common.games.*;
 import technology.sola.engine.graphics.SolaGraphics;
 import technology.sola.engine.examples.common.features.*;
-import technology.sola.engine.examples.common.games.CirclePopGame;
-import technology.sola.engine.examples.common.games.PongGame;
-import technology.sola.engine.examples.common.games.SimplePlatformerGame;
 import technology.sola.engine.examples.common.games.minesweeper.MinesweeperGame;
 import technology.sola.engine.examples.common.features.networking.NetworkingExample;
 import technology.sola.engine.examples.common.features.CollidersExample;
@@ -122,6 +119,7 @@ public class ExampleLauncherSola extends Sola {
         buildSectionTitle("Games"),
         buildExampleLaunchButton("Circle Pop", CirclePopGame::new),
         buildExampleLaunchButton("Editor Game", EditorGame::new),
+        buildExampleLaunchButton("Fractals", FractalsGame::new),
         buildExampleLaunchButton("Minesweeper", MinesweeperGame::new),
         buildExampleLaunchButton("Pong", PongGame::new),
         buildExampleLaunchButton("Simple Platformer", SimplePlatformerGame::new)
