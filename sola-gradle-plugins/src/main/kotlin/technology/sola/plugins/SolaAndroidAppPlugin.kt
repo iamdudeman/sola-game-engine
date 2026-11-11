@@ -4,12 +4,10 @@ import com.android.build.api.dsl.ApplicationExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.file.FileSystemOperations
 import org.gradle.api.tasks.Copy
 import org.gradle.kotlin.dsl.*
 import java.io.FileInputStream
 import java.util.Properties
-import javax.inject.Inject
 
 
 interface SolaAndroidAppPluginExtension {
@@ -107,22 +105,11 @@ class SolaAndroidAppPlugin : Plugin<Project> {
 
       dependsOn(project.tasks.named("assembleDebug"))
 
-      val injected = project.objects.newInstance<Injected>()
-      val originalPath = "build/outputs/apk/debug/android-debug.apk"
-      val outputDir = "${project.rootDir}/dist/${project.name}"
-      val newName = "${project.property("gameName")}-${project.version}-debug.apk";
+      val newName = "${project.property("gameName")}-${project.version}-debug.apk"
 
-      inputs.file(originalPath)
-      outputs.dir(outputDir)
-      outputs.file("$outputDir/$newName")
-
-      injected.fs.copy {
-        from(originalPath) {
-          rename { newName }
-        }
-
-        into(outputDir)
-      }
+      from(project.layout.buildDirectory.file("outputs/apk/debug/android-debug.apk"))
+      into(project.rootProject.layout.projectDirectory.dir("dist/${project.name}"))
+      rename { newName }
     }
 
     project.tasks.register("distAndroidReleaseBundle", Copy::class) {
@@ -130,27 +117,11 @@ class SolaAndroidAppPlugin : Plugin<Project> {
 
       dependsOn(project.tasks.named("bundleRelease"))
 
-      val injected = project.objects.newInstance<Injected>()
-      val originalPath = "build/outputs/bundle/release/android-release.aab"
-      val outputDir = "${project.rootDir}/dist/${project.name}"
-      val newName = "${project.property("gameName")}-${project.version}-release.aab";
+      val newName = "${project.property("gameName")}-${project.version}-release.aab"
 
-      inputs.file(originalPath)
-      outputs.dir(outputDir)
-      outputs.file("$outputDir/$newName")
-
-      injected.fs.copy {
-        from(originalPath) {
-          rename { newName }
-        }
-
-        into(outputDir)
-      }
+      from(project.layout.buildDirectory.file("outputs/bundle/release/android-release.aab"))
+      into(project.rootProject.layout.projectDirectory.dir("dist/${project.name}"))
+      rename { newName }
     }
   }
-}
-
-interface Injected {
-  @get:Inject
-  val fs: FileSystemOperations
 }
