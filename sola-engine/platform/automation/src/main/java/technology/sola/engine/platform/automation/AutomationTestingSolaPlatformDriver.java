@@ -1,8 +1,11 @@
 package technology.sola.engine.platform.automation;
 
 import org.jspecify.annotations.NullMarked;
+import technology.sola.engine.assets.AssetLoaderProvider;
+import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.graphics.renderer.SoftwareRenderer;
 import technology.sola.engine.input.*;
+import technology.sola.engine.platform.automation.asset.AutomationAudioClip;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -249,6 +252,20 @@ public class AutomationTestingSolaPlatformDriver {
     }
 
     return path;
+  }
+
+  /**
+   * Simulates an audio clip finishing.
+   *
+   * @param assetLoaderProvider the {@link AssetLoaderProvider} to use
+   * @param id                  the id of the audio clip to simulate finishing
+   */
+  public void simulateFinishedAudioClip(AssetLoaderProvider assetLoaderProvider, String id) {
+    AutomationAudioClip automationAudioClip = (AutomationAudioClip) assetLoaderProvider.get(AudioClip.class)
+      .get(id)
+      .getAsset();
+
+    automationAudioClip.forceFinished();
   }
 
   private AutomationTestingGameLoop gameLoop() {

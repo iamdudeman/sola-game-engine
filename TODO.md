@@ -21,7 +21,6 @@
 
 ### Low priority (not ordered)
 
-* AutomationTestingSolaPlatform asset loader support
 * Gui animation system
     * might need a new "AnimatedProperty" concept perhaps?
 * Particle System
