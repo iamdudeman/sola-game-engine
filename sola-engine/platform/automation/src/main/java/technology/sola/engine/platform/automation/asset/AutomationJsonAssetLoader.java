@@ -21,18 +21,14 @@ public class AutomationJsonAssetLoader extends AssetLoader<JsonElementAsset> {
 
   @Override
   protected AssetHandle<JsonElementAsset> loadAsset(String path) {
-    AssetHandle<JsonElementAsset> jsonElementAssetAssetHandle = new AssetHandle<>();
-
     try {
       String jsonString = AutomationPathUtils.readContents(path);
 
       JsonElementAsset jsonElementAsset = new JsonElementAsset(new SolaJson().parse(jsonString));
 
-      jsonElementAssetAssetHandle.setAsset(jsonElementAsset);
+      return new AssetHandle<>(jsonElementAsset);
     } catch (IOException ex) {
       throw new FailedJsonLoadException(path);
     }
-
-    return jsonElementAssetAssetHandle;
   }
 }
