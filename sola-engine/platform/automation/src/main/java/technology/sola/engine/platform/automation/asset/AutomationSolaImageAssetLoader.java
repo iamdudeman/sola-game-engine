@@ -22,19 +22,15 @@ public class AutomationSolaImageAssetLoader extends AssetLoader<SolaImage> {
 
   @Override
   protected AssetHandle<SolaImage> loadAsset(String path) {
-    AssetHandle<SolaImage> solaImageAssetHandle = new AssetHandle<>();
-
     try {
       BufferedImage bufferedImage = ImageIO.read(AutomationPathUtils.asUrl(path));
       SolaImage solaImage = new SolaImage(bufferedImage.getWidth(), bufferedImage.getHeight());
 
       bufferedImage.getRGB(0, 0, solaImage.getWidth(), solaImage.getHeight(), solaImage.getPixels(), 0, solaImage.getWidth());
 
-      solaImageAssetHandle.setAsset(solaImage);
+      return new AssetHandle<>(solaImage);
     } catch (IOException ex) {
       throw new FailedSolaImageLoadException(path);
     }
-
-    return solaImageAssetHandle;
   }
 }
