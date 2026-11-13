@@ -1,7 +1,14 @@
 package technology.sola.engine.platform.automation;
 
 import org.jspecify.annotations.NullMarked;
+import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.AssetLoaderProvider;
+import technology.sola.engine.assets.graphics.SolaImage;
+import technology.sola.engine.assets.graphics.font.FontAssetLoader;
+import technology.sola.engine.assets.graphics.spritesheet.SpriteSheetAssetLoader;
+import technology.sola.engine.assets.json.JsonElementAsset;
+import technology.sola.engine.assets.list.AssetListAssetLoader;
+import technology.sola.engine.assets.scene.SceneAssetLoader;
 import technology.sola.engine.core.*;
 import technology.sola.engine.core.event.Subscription;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -12,6 +19,9 @@ import technology.sola.engine.input.MouseWheelEvent;
 import technology.sola.engine.input.TouchEvent;
 import technology.sola.engine.networking.rest.JavaRestClient;
 import technology.sola.engine.networking.socket.JavaSocketClient;
+import technology.sola.engine.platform.automation.asset.AutomationAudioClipAssetLoader;
+import technology.sola.engine.platform.automation.asset.AutomationJsonAssetLoader;
+import technology.sola.engine.platform.automation.asset.AutomationSolaImageAssetLoader;
 import technology.sola.engine.storage.FileSaveStorage;
 
 import java.util.List;
@@ -121,7 +131,21 @@ public class AutomationTestingSolaPlatform extends SolaPlatform<AutomationTestin
 
   @Override
   protected void populateAssetLoaderProvider(AssetLoaderProvider assetLoaderProvider) {
-    // todo add asset loaders
+    AssetLoader<SolaImage> solaImageAssetLoader = new AutomationSolaImageAssetLoader();
+    AssetLoader<JsonElementAsset> jsonElementAssetAssetLoader = new AutomationJsonAssetLoader();
+
+    assetLoaderProvider.add(solaImageAssetLoader);
+    assetLoaderProvider.add(jsonElementAssetAssetLoader);
+    assetLoaderProvider.add(new AutomationAudioClipAssetLoader());
+
+    assetLoaderProvider.add(new FontAssetLoader(
+      jsonElementAssetAssetLoader, solaImageAssetLoader
+    ));
+    assetLoaderProvider.add(new SpriteSheetAssetLoader(
+      jsonElementAssetAssetLoader, solaImageAssetLoader
+    ));
+    assetLoaderProvider.add(new AssetListAssetLoader(jsonElementAssetAssetLoader));
+    assetLoaderProvider.add(new SceneAssetLoader(jsonElementAssetAssetLoader));
   }
 
   @Override

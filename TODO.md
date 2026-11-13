@@ -22,6 +22,7 @@
 ### Low priority (not ordered)
 
 * AutomationTestingSolaPlatform asset loader support
+    * AutomationAudioClip should be affected by driver "advance" methods
 * Gui animation system
     * might need a new "AnimatedProperty" concept perhaps?
 * Particle System
