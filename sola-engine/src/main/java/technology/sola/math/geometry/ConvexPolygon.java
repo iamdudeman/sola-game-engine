@@ -1,7 +1,10 @@
 package technology.sola.math.geometry;
 
 import org.jspecify.annotations.NullMarked;
+import technology.sola.engine.utils.SolaRandom;
 import technology.sola.math.linear.Vector2D;
+
+import java.util.*;
 
 /**
  * ConvexPolygon represents a convex polygon.
@@ -10,6 +13,116 @@ import technology.sola.math.linear.Vector2D;
  */
 @NullMarked
 public record ConvexPolygon(Vector2D[] points) implements Shape {
+  /**
+   * Creates a random convex polygon using Valtr's Algorithm.
+   *
+   * @param minSides Minimum sides
+   * @param maxSides Maximum sides
+   * @param minSize  Minimum radius
+   * @param maxSize  Maximum radius
+   * @return The polygon
+   */
+  public static ConvexPolygon createRandom(int minSides, int maxSides, int minSize, int maxSize) {
+    var sides = SolaRandom.nextInt(minSides, maxSides);
+
+    // 1. Generate two lists of random X and Y coordinates
+    var xPool = new float[sides];
+    var yPool = new float[sides];
+
+    for (int i = 0; i < sides; i++) {
+      xPool[i] = SolaRandom.nextFloat(minSize, maxSize);
+      yPool[i] = SolaRandom.nextFloat(minSize, maxSize);
+    }
+
+    // 2. Sort the coordinates
+    Arrays.sort(xPool);
+    Arrays.sort(yPool);
+
+    // 3. Isolate the extreme points
+    var minX = xPool[0];
+    var maxX = xPool[sides - 1];
+    var minY = yPool[0];
+    var maxY = yPool[sides - 1];
+
+    // 4. Divide the interior points into two chains and compute differences (vectors)
+    List<Float> xVec = new ArrayList<>(sides);
+    List<Float> yVec = new ArrayList<>(sides);
+
+    var lastTop = minX;
+    var lastBot = minX;
+
+    for (int i = 1; i < sides - 1; i++) {
+      float x = xPool[i];
+
+      if (SolaRandom.nextBoolean()) {
+        xVec.add(x - lastTop);
+        lastTop = x;
+      } else {
+        xVec.add(lastBot - x);
+        lastBot = x;
+      }
+    }
+
+    xVec.add(maxX - lastTop);
+    xVec.add(lastBot - maxX);
+
+    var lastLeft = minY;
+    var lastRight = minY;
+
+    for (int i = 1; i < sides - 1; i++) {
+      float y = yPool[i];
+
+      if (SolaRandom.nextBoolean()) {
+        yVec.add(y - lastLeft);
+        lastLeft = y;
+      } else {
+        yVec.add(lastRight - y);
+        lastRight = y;
+      }
+    }
+
+    yVec.add(maxY - lastLeft);
+    yVec.add(lastRight - maxY);
+
+    // 5. Randomly pair up the X and Y components
+    Collections.shuffle(yVec);
+
+    // 6. Combine the paired components into vectors and sort them by angle
+    List<Vector2D> vectors = new ArrayList<>(sides);
+
+    for (int i = 0; i < sides; i++) {
+      vectors.add(new Vector2D(xVec.get(i), yVec.get(i)));
+    }
+
+    vectors.sort(Comparator.comparingDouble(v -> Math.atan2(v.y(), v.x())));
+
+    // 7. Lay the vectors end-to-end to form the polygon
+    var points = new Vector2D[sides];
+    var x = 0f;
+    var y = 0f;
+    var minPolygonX = 0f;
+    var minPolygonY = 0f;
+
+    for (int i = 0; i < sides; i++) {
+      points[i] = new Vector2D(x, y);
+      x += vectors.get(i).x();
+      y += vectors.get(i).y();
+
+      minPolygonX = Math.min(minPolygonX, x);
+      minPolygonY = Math.min(minPolygonY, y);
+    }
+
+    // 8. Shift the polygon back to the original minSize bounding box
+    var xShift = minX - minPolygonX;
+    var yShift = minY - minPolygonY;
+
+    for (int i = 0; i < sides; i++) {
+      points[i].mutateAdd(xShift, yShift);
+    }
+
+    return new ConvexPolygon(points);
+  }
+
   /**
    * Creates a convex polygon from the provided points.
    *

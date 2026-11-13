@@ -20,6 +20,7 @@ import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.input.MouseButton;
 import technology.sola.engine.input.TouchPhase;
+import technology.sola.math.geometry.ConvexPolygon;
 import technology.sola.math.geometry.Triangle;
 import technology.sola.math.linear.Vector2D;
 
@@ -317,6 +318,12 @@ public class RenderingExample extends Sola {
       .addComponent(new LayerComponent("background"))
       .addComponent(new TransformComponent(580, 120, 40, 80))
       .addComponent(new CircleRendererComponent(Color.GREEN, true));
+
+    // polygon
+    world.createEntity()
+      .addComponent(new LayerComponent("background"))
+      .addComponent(new TransformComponent(580, 380, 20))
+      .addComponent(new ConvexPolygonRendererComponent(Color.YELLOW, true, ConvexPolygon.createRandom(5, 10, 2, 5)));
 
     return world;
   }
