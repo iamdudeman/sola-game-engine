@@ -10,3 +10,9 @@ dependencies {
 solaPublishing {
   artifactId = "platform-automation"
 }
+
+sourceSets {
+  getByName("test") {
+    resources.srcDir("${project.rootDir}/assets")
+  }
+}

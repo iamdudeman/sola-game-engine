@@ -23,9 +23,9 @@ public class AutomationPathUtils {
    */
   @Nullable
   public static URL asUrl(String path) throws MalformedURLException {
-    File file = new File(path);
+    File file = new File(path.replaceFirst("assets/", ""));
 
-    return file.exists() ? file.toURI().toURL() : ClassLoader.getSystemClassLoader().getResource(path);
+    return file.exists() ? file.toURI().toURL() : ClassLoader.getSystemClassLoader().getResource(file.getPath());
   }
 
   /**

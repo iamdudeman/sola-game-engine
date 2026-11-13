@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import technology.sola.engine.assets.BulkAssetLoader;
+import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.assets.graphics.SolaImage;
 import technology.sola.engine.assets.json.JsonElementAsset;
 import technology.sola.engine.core.Sola;
@@ -153,8 +154,8 @@ class AutomationTestingSolaPlatformDriverTest {
     protected void onAsyncInit(Runnable completeAsyncInit) {
       new BulkAssetLoader(assetLoaderProvider)
         .addAsset(SolaImage.class, "testimage", "assets/images/duck.png")
-//        .addAsset(AudioClip.class, "testaudio", "assets/audio/asgaseg.wav")
-        .addAsset(JsonElementAsset.class, "testjson", "assets/config.aseets.json")
+        .addAsset(AudioClip.class, "testaudio", "assets/audio/asgaseg.wav")
+        .addAsset(JsonElementAsset.class, "testjson", "assets/config.assets.json")
         .loadAll()
         .onComplete((assets) -> {
           completeAsyncInit.run();

@@ -4,22 +4,21 @@ import org.jspecify.annotations.NullMarked;
 import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.platform.automation.AutomationPathUtils;
 
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * An {@link AudioClip} implementation for automation testing.
+ */
 @NullMarked
-class AutomationAudioClip implements AudioClip {
+public class AutomationAudioClip implements AudioClip {
+  private final List<Consumer<AudioClip>> finishCallbacks = new ArrayList<>();
   private boolean isPlaying;
   private float volume;
-  private double durationInSeconds;
 
   AutomationAudioClip(String path) {
     try {
@@ -29,9 +28,14 @@ class AutomationAudioClip implements AudioClip {
     } catch (URISyntaxException | IOException ex) {
       throw new IllegalArgumentException("Failed to check if audio clip path exists: " + path, ex);
     }
+  }
 
-    // todo hook up duration to play, pause and stop and increment this by the gameloop driver advance method
-    durationInSeconds = getDuration(path);
+  /**
+   * Forces the audio clip to finish playing and trigger any added finished callback.
+   */
+  public void forceFinished() {
+    finishCallbacks.forEach(callback -> callback.accept(this));
+    isPlaying = false;
   }
 
   @Override
@@ -76,20 +80,6 @@ class AutomationAudioClip implements AudioClip {
 
   @Override
   public void addFinishListener(Consumer<AudioClip> callback) {
-    // todo hook up duration
-  }
-
-  private static double getDuration(String path) {
-    try {
-      AudioFileFormat fileFormat = AudioSystem.getAudioFileFormat(AutomationPathUtils.asUrl(path));
-      Map<?, ?> properties = fileFormat.properties();
-
-      // Duration is stored in microseconds
-      Long microseconds = (Long) properties.get("duration");
-
-      return (microseconds / 1_000_000.0);
-    } catch (IOException | UnsupportedAudioFileException ex) {
-      throw new RuntimeException(ex);
-    }
+    finishCallbacks.add(callback);
   }
 }
